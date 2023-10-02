@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.16",
+    "@orchidui/icons": "^0.0.3",
     "@orchidui/vue": "^0.0.1",
     "autoprefixer": "^10.4.16",
     "postcss": "^8.4.31",

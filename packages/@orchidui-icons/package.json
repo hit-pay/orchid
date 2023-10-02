@@ -1,16 +1,17 @@
 {
   "name": "@orchidui/icons",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "type": "module",
   "scripts": {
     "dev": "vite dev",
-    "build": "vite build"
+    "build": "vite build",
+    "update-version": "npm version patch"
   },
   "dependencies": {
-    "@vitejs/plugin-vue": "^4.4.0",
     "vue": "^3.3.4"
   },
   "devDependencies": {
+    "@vitejs/plugin-vue": "^4.4.0",
     "fast-glob": "^3.3.1",
     "vite": "^4.4.5"
   },

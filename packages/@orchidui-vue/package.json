@@ -1,6 +1,6 @@
 {
   "name": "@orchidui/vue",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "type": "module",
   "scripts": {
     "dev": "storybook dev -p 6006",
