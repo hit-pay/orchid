@@ -43,7 +43,7 @@ export default defineConfig({
       formats: ['es']
     },
     rollupOptions: {
-      external: ['vue','@headlessui/vue'],
+      external: ['vue','@headlessui/vue','@orchidui/icons'],
       output: {
         globals: {
           vue: 'Vue',
