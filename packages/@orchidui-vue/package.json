@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "storybook dev -p 6006",
     "build": "vite build && npm run build-storybook",
-    "build-storybook": "storybook build -o ../orchidui-storybook",
+    "build-storybook": "storybook build -o ../../orchidui-storybook",
     "update-version": "npm version patch",
     "storybook": "storybook dev -p 6006"
   },
@@ -32,6 +32,11 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hit-pay/orchid.git",
+    "directory": "packages/@orchidui-vue"
   },
   "exports": {
     ".": {

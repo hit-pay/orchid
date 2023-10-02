@@ -1,13 +1,11 @@
 {
   "name": "orchid",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "scripts": {
-    "build": "npm run build --prefix orchidui && npm run build-playground",
-    "dev": "npm run dev --prefix orchidui",
+    "build": "npm run build --prefix packages/@orchidui-vue && npm run build-playground",
+    "dev": "npm run dev --prefix packages/@orchidui-vue",
     "playground": "npm run dev --prefix playground",
     "build-playground": "npm run build --prefix playground",
-    "postinstall": "(cd orchidui && npm install) && (cd playground && npm install)"
-  },
-  "author": "",
-  "license": "ISC"
+    "postinstall": "(cd packages/@orchidui-vue && npm install) && (cd playground && npm install)"
+  }
 }
