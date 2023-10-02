@@ -4,8 +4,10 @@
   "scripts": {
     "build": "npm run build --prefix packages/@orchidui-vue && npm run build-playground",
     "dev": "npm run dev --prefix packages/@orchidui-vue",
-    "playground": "npm run dev --prefix playground",
+    "dev-playground": "npm run dev --prefix playground",
     "build-playground": "npm run build --prefix playground",
-    "postinstall": "(cd packages/@orchidui-vue && npm install) && (cd playground && npm install)"
+    "dev-doc": "npm run dev --prefix docs",
+    "build-doc": "npm run build --prefix docs",
+    "postinstall": "(cd packages/@orchidui-vue && npm install) && (cd playground && npm install) && (cd docs && npm install)"
   }
 }
