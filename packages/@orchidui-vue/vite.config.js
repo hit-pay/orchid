@@ -40,7 +40,7 @@ export default defineConfig({
     outDir: 'dist',
     lib: {
       entry: entries,
-      formats: ['cjs']
+      formats: ['es']
     },
     rollupOptions: {
       external: ['vue','@headlessui/vue'],
