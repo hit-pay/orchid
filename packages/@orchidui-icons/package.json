@@ -1,6 +1,6 @@
 {
   "name": "@orchidui/icons",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "type": "module",
   "scripts": {
     "dev": "vite dev",
@@ -8,6 +8,9 @@
     "update-version": "npm version patch"
   },
   "dependencies": {
+    "i": "^0.3.7",
+    "npm": "^10.1.0",
+    "vite-svg-loader": "^4.0.0",
     "vue": "^3.3.4"
   },
   "devDependencies": {

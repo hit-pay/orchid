@@ -14,8 +14,8 @@
   </button>
 </template>
 <script setup>
-import { Icon } from '../../../../@orchidui-icons/dist/index.js'
-import { computed } from "vue";
+import Icon from '../Icon/Icon.vue'
+import { computed, defineProps } from "vue";
 const props = defineProps({
   label: String,
   isSecondary: Boolean,

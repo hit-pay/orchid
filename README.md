@@ -21,3 +21,9 @@ npm run build
 cd packages/@orchidui-vue
 npm version patch
 npm publish
+
+
+
+# TODO
+
+1. npx command for copy all icons to local public folder
