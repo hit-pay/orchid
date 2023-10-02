@@ -6,8 +6,8 @@
     "dev": "npm run dev --prefix packages/@orchidui-vue",
     "dev-playground": "npm run dev --prefix playground",
     "build-playground": "npm run build --prefix playground",
-    "dev-doc": "npm run dev --prefix docs",
-    "build-doc": "npm run build --prefix docs",
+    "dev-docs": "npm run dev --prefix docs",
+    "build-docs": "npm run build --prefix docs",
     "postinstall": "(cd packages/@orchidui-vue && npm install) && (cd playground && npm install) && (cd docs && npm install)"
   }
 }
