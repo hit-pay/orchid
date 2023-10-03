@@ -5,6 +5,15 @@
     <Button label="Button" />
     <Chip label="Chip" />
     <Dropdown />
+
+    <a href="/docs">
+      Documentation
+    </a>
+
+    <a href="/storybook">
+      Storybook
+    </a>
+    
   </div>
 </template>
 
