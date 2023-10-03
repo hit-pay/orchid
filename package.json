@@ -1,18 +1,18 @@
 {
-  "name": "playground",
+  "name": "orchidui",
   "private": true,
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "build": "npm run build --prefix packages/@orchidui-vue && npm run build-docs && npm run build-playground",
     "dev": "npm run dev --prefix packages/@orchidui-vue",
     "dev-playground": "vite",
-    "build-playground": "vite build",
     "dev-docs": "npm run dev --prefix docs",
+    "build-production": "vite build",
     "build-docs": "npm run build --prefix docs",
+    "build": "npm run build --prefix packages/@orchidui-vue && npm run build-docs && npm run build-production",
     "reinstall": "npm remove @orchidui/vue && npm i @orchidui/vue",
     "postinstall": "(cd packages/@orchidui-vue && npm install) && (cd docs && npm install)",
-    "preview": "vite preview"
+    "preview": "npm run build && vite preview"
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.16",
