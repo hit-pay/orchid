@@ -1,13 +1,31 @@
 {
-  "name": "orchid",
+  "name": "playground",
+  "private": true,
   "version": "0.0.1",
+  "type": "module",
   "scripts": {
-    "build": "npm run build --prefix packages/@orchidui-vue && npm run build-playground",
+    "build": "npm run build --prefix packages/@orchidui-vue && npm run build-docs && npm run build-playground",
     "dev": "npm run dev --prefix packages/@orchidui-vue",
-    "dev-playground": "npm run dev --prefix playground",
-    "build-playground": "npm run build --prefix playground",
+    "dev-playground": "vite",
+    "build-playground": "vite build",
     "dev-docs": "npm run dev --prefix docs",
     "build-docs": "npm run build --prefix docs",
-    "postinstall": "(cd packages/@orchidui-vue && npm install) && (cd playground && npm install) && (cd docs && npm install)"
+    "reinstall": "npm remove @orchidui/vue && npm i @orchidui/vue",
+    "postinstall": "(cd packages/@orchidui-vue && npm install) && (cd docs && npm install)",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@headlessui/vue": "^1.7.16",
+    "@orchidui/icons": "^0.0.3",
+    "@orchidui/vue": "^0.0.6",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.31",
+    "tailwind": "^4.0.0",
+    "vue": "^3.3.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.2.3",
+    "tailwindcss": "^3.3.3",
+    "vite": "^4.4.5"
   }
 }

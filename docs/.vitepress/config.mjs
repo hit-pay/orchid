@@ -2,6 +2,8 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  base: '/docs/',
+  outDir: '../public/docs/',
   title: "Orchid UI",
   description: "Orchid UI Component Libraries for Dashboard and Ecommerce Website",
   themeConfig: {

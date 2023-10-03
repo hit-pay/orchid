@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "storybook dev -p 6006",
     "build": "vite build && npm run build-storybook",
-    "build-storybook": "storybook build -o ../../orchidui-storybook",
+    "build-storybook": "storybook build -o ../../public/storybook",
     "update-version": "npm version patch",
     "storybook": "storybook dev -p 6006"
   },
@@ -22,6 +22,7 @@
     "@storybook/addon-interactions": "^7.4.5",
     "@storybook/addon-links": "^7.4.5",
     "@storybook/blocks": "^7.4.5",
+    "@storybook/builder-vite": "^7.4.5",
     "@storybook/testing-library": "^0.2.2",
     "@storybook/vue3": "^7.4.5",
     "@storybook/vue3-vite": "^7.4.5",
