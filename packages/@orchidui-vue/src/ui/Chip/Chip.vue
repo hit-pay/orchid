@@ -1,11 +1,11 @@
 <template>
-    <span >
-        {{label}}
-    </span>
+  <span>
+    {{ label }}
+  </span>
 </template>
 <script setup>
-import { defineProps } from 'vue';
+import { defineProps } from "vue";
 defineProps({
-    label: String
-})
+  label: String,
+});
 </script>

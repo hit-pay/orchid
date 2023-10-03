@@ -1,6 +1,6 @@
 /** @type { import('@storybook/vue3-vite').StorybookConfig } */
 
-import { mergeConfig } from 'vite';
+import { mergeConfig } from "vite";
 
 const config = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
@@ -17,22 +17,19 @@ const config = {
     autodocs: "tag",
   },
   core: {
-    builder: '@storybook/builder-vite', // 👈 The builder enabled here.
+    builder: "@storybook/builder-vite", // 👈 The builder enabled here.
   },
   async viteFinal(baseConfig, { configType }) {
-    
-    let basePath = '/'
-    
-    if (configType === 'PRODUCTION') {
+    let basePath = "/";
+
+    if (configType === "PRODUCTION") {
       // Your production configuration goes here.
-      basePath = '/storybook/'
+      basePath = "/storybook/";
     }
 
-    return mergeConfig(
-      baseConfig,
-        {
-          base: basePath
-        }
-    )}
-}
+    return mergeConfig(baseConfig, {
+      base: basePath,
+    });
+  },
+};
 export default config;

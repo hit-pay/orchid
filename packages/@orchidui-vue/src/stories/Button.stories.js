@@ -9,18 +9,18 @@ export default {
 export const Default = {
   argTypes: {
     icon: {
-      control: 'select',
-      options: ["","circle"]
+      control: "select",
+      options: ["", "circle"],
     },
     iconAfter: {
-      control: 'select',
-      options: ["","plus"]
+      control: "select",
+      options: ["", "plus"],
     },
   },
   args: {
     label: "Button Text",
-    icon: '',
-    iconAfter: '',
+    icon: "",
+    iconAfter: "",
     isSmall: false,
     isLarge: false,
     isSecondary: false,
@@ -28,7 +28,7 @@ export const Default = {
     isDisabled: false,
     isLoading: false,
     isRounded: false,
-    isText: false
+    isText: false,
   },
   render: (args) => ({
     components: { Button, Theme },

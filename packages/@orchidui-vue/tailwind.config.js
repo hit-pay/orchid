@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 const plugin = require("tailwindcss/plugin");
 module.exports = {
-  content: [ "./src/**/*.{vue,js,ts,jsx,tsx}",],
+  content: ["./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
@@ -125,4 +125,3 @@ module.exports = {
     }),
   ],
 };
-

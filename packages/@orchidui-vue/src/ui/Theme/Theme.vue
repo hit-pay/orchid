@@ -4,16 +4,17 @@
   </main>
 </template>
 <script setup>
-import { defineProps } from 'vue';
-const props = defineProps({
+import { defineProps } from "vue";
+
+defineProps({
   colorMode: {
     type: String,
     default: "light",
   },
   group: {
     type: String,
-    enum: ["payment","pos","shop"],
+    enum: ["payment", "pos", "shop"],
     default: "payment",
-  }
-})
+  },
+});
 </script>

@@ -1,5 +1,3 @@
-import Theme from './Theme.vue'
+import Theme from "./Theme.vue";
 
-export {
-    Theme
-}
+export { Theme };
