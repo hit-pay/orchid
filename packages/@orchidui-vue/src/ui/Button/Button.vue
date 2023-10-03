@@ -1,5 +1,5 @@
 <template>
-  <button class="hit-btn" :disabled="isDisabled || isLoading" :class="buttonClassName">
+  <button class="oc-btn" :disabled="isDisabled || isLoading" :class="buttonClassName">
     <Icon class="mr-2" v-if="isLoading" name="loading-2" />
     <template v-if="icon && !isLoading">
       <Icon :class="{
@@ -31,16 +31,16 @@ const props = defineProps({
 });
 
 const buttonClassName = computed(() => {
-  let className = "border-1 border-hit-primary-500 ";
+  let className = "border-1 border-oc-primary-500 ";
 
   let typeClass = "";
 
   if (props.isDestructive) {
-    typeClass = props.isText ? "text-hit-error ": "hit-btn-error text-hit-text-000 ";
+    typeClass = props.isText ? "text-oc-error ": "oc-btn-error text-oc-text-000 ";
   } else if (props.isSecondary) {
-    typeClass = props.isText ? "text-hit-text-400 ": "hit-btn-secondary text-hit-text-400 "
+    typeClass = props.isText ? "text-oc-text-400 ": "oc-btn-secondary text-oc-text-400 "
   } else {
-    typeClass = props.isText ? "text-hit-primary " : "hit-btn-primary  text-hit-text-000 ";
+    typeClass = props.isText ? "text-oc-primary " : "oc-btn-primary  text-oc-text-000 ";
   }
 
   
@@ -73,21 +73,21 @@ const buttonClassName = computed(() => {
 
 </script>
 <style scoped>
-.hit-btn:active{
+.oc-btn:active{
   box-shadow: none;
 }
-.hit-btn-primary {
-  background: linear-gradient(220deg, var(--hit-primary-400) 0%, var(--hit-primary-500) 100%);
-  box-shadow: 0px 2px 0px 0px var(--hit-primary-500);
+.oc-btn-primary {
+  background: linear-gradient(220deg, var(--oc-primary-400) 0%, var(--oc-primary-500) 100%);
+  box-shadow: 0px 2px 0px 0px var(--oc-primary-500);
 }
 
-.hit-btn-secondary {
-  background: linear-gradient(220deg, var(--hit-text-000) 0%, var(--hit-grey-100) 100%);
+.oc-btn-secondary {
+  background: linear-gradient(220deg, var(--oc-text-000) 0%, var(--oc-grey-100) 100%);
   box-shadow: 0px 1.5px 0px 0px rgba(0, 0, 0, 0.1);
 }
 
-.hit-btn-error {
-  background: linear-gradient(220deg, var(--hit-error-400) 0%, var(--hit-error-500) 100%);
-  box-shadow: 0px 2px 0px 0px var(--hit-error-500);
+.oc-btn-error {
+  background: linear-gradient(220deg, var(--oc-error-400) 0%, var(--oc-error-500) 100%);
+  box-shadow: 0px 2px 0px 0px var(--oc-error-500);
 }
 </style>
