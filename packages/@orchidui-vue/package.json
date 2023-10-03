@@ -9,15 +9,8 @@
     "update-version": "npm version patch",
     "storybook": "storybook dev -p 6006"
   },
-  "dependencies": {
-    "@headlessui/vue": "^1.7.16",
-    "@orchidui/icons": "^0.0.6",
-    "i": "^0.3.7",
-    "npm": "^10.1.0",
-    "vite-svg-loader": "^4.0.0",
-    "vue": "^3.3.4"
-  },
   "devDependencies": {
+    "@headlessui/vue": "^1.7.16",
     "@storybook/addon-essentials": "^7.4.5",
     "@storybook/addon-interactions": "^7.4.5",
     "@storybook/addon-links": "^7.4.5",
@@ -34,7 +27,8 @@
     "react-dom": "^18.2.0",
     "storybook": "^7.4.5",
     "tailwindcss": "^3.3.3",
-    "vite": "^4.4.5"
+    "vite": "^4.4.5",
+    "vue": "^3.3.4"
   },
   "publishConfig": {
     "access": "public"

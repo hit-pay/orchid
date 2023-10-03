@@ -12,10 +12,6 @@ dist
 dist-ssr
 *.local
 
-# storybook
-public/docs
-public/storybook
-
 
 # Editor directories and files
 .vscode/*
@@ -27,3 +23,14 @@ public/storybook
 *.njsproj
 *.sln
 *.sw?
+
+
+
+# storybook
+public/docs
+public/storybook
+
+
+# vitepress
+docs/.vitepress/cache
+docs/.vitepress/dist
