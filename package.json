@@ -11,6 +11,7 @@
     "build-docs": "npm run build --prefix docs",
     "build": "npm run build --prefix packages/@orchidui-vue && npm run build-docs && npm run build-production",
     "reinstall": "npm remove @orchidui/vue && npm i @orchidui/vue",
+    "reinstall-icons": "npm remove @orchidui/icons && npm i @orchidui/icons",
     "postinstall": "(cd packages/@orchidui-vue && npm install) && (cd docs && npm install)",
     "preview": "npm run build && vite preview"
   },
