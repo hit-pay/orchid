@@ -90,25 +90,25 @@ export const ButtonVariant = {
     template: `
     <Theme colorMode="light" group="payment">
       <div class="flex gap-3 items-center  mb-3">
-        <Button icon="plus" />
-        <Button icon="plus" isRounded />
-        <Button icon="plus" iconAfter="plus" label="Button Text" />
+        <Button icon="x" />
+        <Button icon="x" isRounded />
+        <Button icon="x" iconAfter="circle" label="Button Text" />
         <Button label="Button Text" isDisabled />
         <Button label="Button Text" isLoading />
         <Button label="Button Text" isText />
       </div>
       <div class="flex gap-3 items-center  mb-3">
-        <Button isSecondary icon="plus" />
-        <Button isSecondary icon="plus" isRounded />
-        <Button isSecondary icon="plus" iconAfter="plus" label="Button Text" />
+        <Button isSecondary icon="x" />
+        <Button isSecondary icon="x" isRounded />
+        <Button isSecondary icon="x" iconAfter="circle" label="Button Text" />
         <Button isSecondary label="Button Text" isDisabled />
         <Button isSecondary label="Button Text" isLoading />
         <Button isSecondary label="Button Text" isText />
       </div>
       <div class="flex gap-3 items-center  mb-3">
-        <Button isDestructive icon="plus" />
-        <Button isDestructive icon="plus" isRounded />
-        <Button isDestructive icon="plus" iconAfter="plus" label="Button Text" />
+        <Button isDestructive icon="x" />
+        <Button isDestructive icon="x" isRounded />
+        <Button isDestructive icon="x" iconAfter="circle" label="Button Text" />
         <Button isDestructive label="Button Text" isDisabled />
         <Button isDestructive label="Button Text" isLoading />
         <Button isDestructive label="Button Text" isText />
