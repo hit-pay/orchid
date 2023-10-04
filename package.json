@@ -13,25 +13,17 @@
     "build-playground": "vite build",
     "build": "npm run build-orchidui && npm run build-docs && npm run build-playground",
     "build-storybook": "storybook build -o dist/storybook",
-    "postinstall": "(cd packages/@orchidui-vue && npm install) && (cd packages/@orchidui-icons && npm install) && (cd packages/@orchidui-form && npm install) && (cd docs && npm install)",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix packages",
     "format": "prettier .  --write",
-    "reinstall": "npm remove @orchidui/vue && npm i @orchidui/vue && npm run reinstall-icons",
-    "reinstall-icons": "npm remove @orchidui/icons && npm i @orchidui/icons"
+    "postinstall": "(cd packages/@orchidui-vue && npm install) && (cd docs && npm install)"
   },
-  "workspaces": [
-    "packages/*"
-  ],
   "dependencies": {
-    "@headlessui/vue": "^1.7.16",
-    "@orchidui/icons": "^0.0.6",
-    "@orchidui/vue": "^0.0.11",
+    "@orchidui/vue": "^0.0.13",
     "@vue/eslint-config-prettier": "^8.0.0",
     "autoprefixer": "^10.4.16",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-vue": "^9.17.0",
     "postcss": "^8.4.31",
-    "tailwind": "^4.0.0",
     "vue": "^3.3.4"
   },
   "devDependencies": {

@@ -9,8 +9,11 @@ export const ColorMode = {
     components: { Theme },
     template: `
           <div class="flex gap-3 items-center light-mode mb-3">
+            <Theme colorMode="light">
+              Light Mode
+            </Theme>
             <Theme colorMode="dark">
-              content
+              Dark Mode
             </Theme>
           </div>
         `,

@@ -1,5 +1,5 @@
 <template>
-  <main :data-theme="colorMode" :data-group="group">
+  <main :data-theme="colorMode">
     <slot />
   </main>
 </template>
@@ -9,10 +9,10 @@ defineProps({
     type: String,
     default: "light",
   },
-  group: {
+  // TODO : customize variable for storefront
+  variables: {
     type: String,
-    enum: ["payment", "pos", "shop"],
-    default: "payment",
-  },
+    default: '',
+  }
 });
 </script>
