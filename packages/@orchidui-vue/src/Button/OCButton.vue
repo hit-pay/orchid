@@ -21,8 +21,11 @@
   </button>
 </template>
 <script setup>
-import Icon from "../Icon/OCIcon.vue";
-import { computed, defineProps } from "vue";
+import { computed, defineProps, defineAsyncComponent } from "vue";
+
+const Icon = defineAsyncComponent(() => {
+  "../Icon/OCIcon.vue"
+})
 
 const props = defineProps({
   label: String,
