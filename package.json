@@ -19,10 +19,13 @@
     "reinstall": "npm remove @orchidui/vue && npm i @orchidui/vue && npm run reinstall-icons",
     "reinstall-icons": "npm remove @orchidui/icons && npm i @orchidui/icons"
   },
+  "workspaces": [
+    "packages/*"
+  ],
   "dependencies": {
     "@headlessui/vue": "^1.7.16",
     "@orchidui/icons": "^0.0.6",
-    "@orchidui/vue": "^0.0.10",
+    "@orchidui/vue": "./packages/@orchidui-vue",
     "@vue/eslint-config-prettier": "^8.0.0",
     "autoprefixer": "^10.4.16",
     "eslint-config-standard": "^17.1.0",
