@@ -21,8 +21,9 @@
   </button>
 </template>
 <script setup>
-import Icon from "../Icon/Icon.vue";
+import Icon from "../Icon/OCIcon.vue";
 import { computed, defineProps } from "vue";
+
 const props = defineProps({
   label: String,
   isSecondary: Boolean,
@@ -86,6 +87,7 @@ const buttonClassName = computed(() => {
 .oc-btn:active {
   box-shadow: none;
 }
+
 .oc-btn-primary {
   background: linear-gradient(
     220deg,
