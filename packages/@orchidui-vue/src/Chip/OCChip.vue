@@ -20,25 +20,25 @@ export default {
       let className = "";
       switch (this.color) {
         case "purple":
-          className = "bg-hit-purple-50 text-hit-purple ";
+          className = "bg-oc-purple-50 text-oc-purple ";
           break;
         case "orange":
-          className = "bg-hit-warning-50 text-hit-warning ";
+          className = "bg-oc-warning-50 text-oc-warning ";
           break;
         case "red":
-          className = "bg-hit-red-50 text-hit-red ";
+          className = "bg-oc-red-50 text-oc-red ";
           break;
         case "dark-blue":
-          className = "bg-hit-primary-50 text-hit-primary ";
+          className = "bg-oc-primary-50 text-oc-primary ";
           break;
         case "grey":
-          className = "bg-hit-grey-100 text-hit-grey-700 ";
+          className = "bg-oc-grey-100 text-oc-grey-700 ";
           break;
         case "green":
-          className = "bg-hit-success-50 text-hit-success ";
+          className = "bg-oc-success-50 text-oc-success ";
           break;
         default:
-          className = "bg-hit-blue-50 text-hit-blue ";
+          className = "bg-oc-blue-50 text-oc-blue ";
           break;
       }
       return className;
