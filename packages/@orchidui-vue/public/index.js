@@ -1,3 +1,3 @@
-export * from "./ui/Button/OCButton.js";
-export * from "./ui/Chip/OCChip.js";
-export * from "./ui/Dropdown/OCDropdown.js";
+export * from "./Button/OCButton.js";
+export * from "./Chip/OCChip.js";
+export * from "./Dropdown/OCDropdown.js";

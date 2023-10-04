@@ -20,8 +20,9 @@ const entities = files.map((file) => {
 
   return [keyWithoutExt, file];
 }).filter((entry) => {
-  return entry
+  return !entry[0].includes('.stories')
 });
+
 
 // Convert the array of key-value pairs to an object using the Object.fromEntries() method.
 // Returns an object where each key is the file name without the extension and the value is the absolute file path.
