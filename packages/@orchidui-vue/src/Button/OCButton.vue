@@ -8,7 +8,7 @@
     <template v-if="icon && !isLoading">
       <Icon
         :class="{
-          'mr-2': icon && label,
+          'mr-2': label,
         }"
         :name="icon"
       />
@@ -43,23 +43,19 @@ const props = defineProps({
 const buttonClassName = computed(() => {
   let className = "border-1 border-oc-primary-500 ";
 
-  let typeClass = "";
-
   if (props.isDestructive) {
-    typeClass = props.isText
+    className += props.isText
       ? "text-oc-error "
       : "oc-btn-error text-oc-text-000 ";
   } else if (props.isSecondary) {
-    typeClass = props.isText
+    className += props.isText
       ? "text-oc-text-400 "
       : "oc-btn-secondary text-oc-text-400 ";
   } else {
-    typeClass = props.isText
+    className += props.isText
       ? "text-oc-primary "
       : "oc-btn-primary  text-oc-text-000 ";
   }
-
-  className += typeClass;
 
   if (props.icon && !props.label) {
     // this only icon
@@ -96,7 +92,7 @@ const buttonClassName = computed(() => {
     var(--oc-primary-400) 0%,
     var(--oc-primary-500) 100%
   );
-  box-shadow: 0px 2px 0px 0px var(--oc-primary-500);
+  box-shadow: 0 2px 0 0 var(--oc-primary-500);
 }
 
 .oc-btn-secondary {
@@ -105,7 +101,7 @@ const buttonClassName = computed(() => {
     var(--oc-text-000) 0%,
     var(--oc-grey-100) 100%
   );
-  box-shadow: 0px 1.5px 0px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1.5px 0 0 rgba(0, 0, 0, 0.1);
 }
 
 .oc-btn-error {
@@ -114,6 +110,6 @@ const buttonClassName = computed(() => {
     var(--oc-error-400) 0%,
     var(--oc-error-500) 100%
   );
-  box-shadow: 0px 2px 0px 0px var(--oc-error-500);
+  box-shadow: 0 2px 0 0 var(--oc-error-500);
 }
 </style>
