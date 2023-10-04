@@ -1,3 +1,2 @@
 import Chip from "./OCChip.vue";
-
-export { Chip };
+export { Chip }

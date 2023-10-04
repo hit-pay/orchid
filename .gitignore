@@ -25,12 +25,10 @@ dist-ssr
 *.sw?
 
 
-
 # storybook
-public/docs
 public/storybook
-
 
 # vitepress
 docs/.vitepress/cache
 docs/.vitepress/dist
+public/docs

@@ -1,3 +1,4 @@
+<!-- TODO : replace dropdown to own dropdown component -->
 <template>
   <Menu as="div" class="relative inline-block text-left">
     <div>

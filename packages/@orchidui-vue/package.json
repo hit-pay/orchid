@@ -1,6 +1,6 @@
 {
   "name": "@orchidui/vue",
-  "version": "0.0.3",
+  "version": "0.0.8",
   "type": "module",
   "scripts": {
     "build": "vite build",
@@ -24,6 +24,10 @@
   "exports": {
     ".": {
       "import": "./dist/index.js"
+    },
+    "./dist/index.css": {
+      "import": "./dist/index.css",
+      "require": "./dist/index.css"
     }
   },
   "module": "./dist/index.js",
