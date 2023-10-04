@@ -1,5 +1,5 @@
-import { Button } from "@/ui/Button/OCButton.js";
-import { Theme } from "@/ui/Theme/OCTheme.js";
+import  Button from "./OCButton.vue";
+import Theme from "../Theme/OCTheme.vue";
 
 export default {
   component: Button,

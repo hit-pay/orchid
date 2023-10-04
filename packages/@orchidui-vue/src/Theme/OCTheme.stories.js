@@ -1,5 +1,4 @@
-import { Theme } from "@/ui/Theme/OCTheme.js";
-
+import Theme from "./OCTheme.vue";
 export default {
   component: Theme,
   tags: ["autodocs"],

@@ -2,14 +2,15 @@
   <div
     class="w-screen h-screen flex items-center content-center justify-center flex-wrap gap-3"
   >
-    <div class="w-full p-2 text-center">Orchid UI Playground</div>
+    <h1 class="w-full p-2 text-center font-bold">Orchid UI Playground</h1>
+
     <Button label="Button" />
     <Chip label="Chip" />
     <Dropdown />
 
-    <a href="/docs"> Documentation </a>
-
-    <a href="/storybook"> Storybook </a>
+    <div class="w-full text-center mt-3">
+      <a href="/docs" class="text-oc-primary"> Documentation </a>
+    </div>
   </div>
 </template>
 

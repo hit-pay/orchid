@@ -3,7 +3,10 @@
 import { mergeConfig } from "vite";
 
 const config = {
-  stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
+  stories: [
+    "../stories/**/*.mdx", 
+    "../packages/@orchidui-vue/**/*.stories.@(js|jsx|mjs|ts|tsx)"
+  ],
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
@@ -22,10 +25,10 @@ const config = {
   async viteFinal(baseConfig, { configType }) {
     let basePath = "/";
 
-    if (configType === "PRODUCTION") {
-      // Your production configuration goes here.
-      basePath = "/storybook/";
-    }
+    // if (configType === "PRODUCTION") {
+    //   // Your production configuration goes here.
+    //   basePath = "/storybook/";
+    // }
 
     return mergeConfig(baseConfig, {
       base: basePath,
