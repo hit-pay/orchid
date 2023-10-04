@@ -1,6 +1,6 @@
 /* Variables  */
 :root {
-    
+
     /* Todo register all variable */
 
     /* default [data-theme="light"] */
@@ -29,7 +29,7 @@
     --oc-contrast-black: #000000ff;
     --oc-contrast-woce: #ffffffff;
     --oc-blue-50-tr: #2465de1a;
-    --oc-blue-50: #e5eeffff;
+    --oc-blue-50: #f5f6f9ff;
     --oc-blue-100: #ccdefeff;
     --oc-blue-200: #b3cdfeff;
     --oc-blue-300: #80acfeff;
@@ -71,7 +71,7 @@
     --oc-error-300: #dc797aff;
     --oc-error-400: #d04d4dff;
     --oc-error-500: #dc3545ff;
-  
+
     --oc-primary-50-tr: var(--oc-blue-50-tr);
     --oc-primary-50: var(--oc-blue-50);
     --oc-primary-100: var(--oc-blue-100);
@@ -79,14 +79,15 @@
     --oc-primary-300: var(--oc-blue-300);
     --oc-primary-400: var(--oc-blue-400);
     --oc-primary-500: var(--oc-blue-500);
-    
-  }
-  body {
-    color: var(--oc-basic-primary-600);
-  }
 
-  
-  @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
+}
+
+body {
+    color: var(--oc-basic-primary-600);
+}
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
   
