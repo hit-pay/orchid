@@ -23,10 +23,9 @@
 <script setup>
 import { computed, defineProps, defineAsyncComponent } from "vue";
 
-const Icon = defineAsyncComponent(() => {
-  "../Icon/OCIcon.vue"
-})
-
+const Icon = defineAsyncComponent(() =>
+  import('../Icon/OCIcon.vue')
+)
 const props = defineProps({
   label: String,
   isSecondary: Boolean,
