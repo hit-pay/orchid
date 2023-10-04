@@ -1,20 +1,18 @@
 <template>
-  <main :data-theme="colorMode" :data-group="group">
+  <main :data-theme="colorMode">
     <slot />
   </main>
 </template>
 <script setup>
-import { defineProps } from "vue";
-
 defineProps({
   colorMode: {
     type: String,
     default: "light",
   },
-  group: {
+  // TODO : customize variable for storefront
+  variables: {
     type: String,
-    enum: ["payment", "pos", "shop"],
-    default: "payment",
-  },
+    default: '',
+  }
 });
 </script>

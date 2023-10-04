@@ -1,3 +1,3 @@
-import OCAccordion from "./OCAccordion.vue";
+import Accordion from "./OCAccordion.vue";
 
-export { OCAccordion };
+export { Accordion };

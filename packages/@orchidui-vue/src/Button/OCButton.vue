@@ -21,7 +21,7 @@
   </button>
 </template>
 <script setup>
-import { computed, defineProps, defineAsyncComponent } from "vue";
+import { computed, defineAsyncComponent } from "vue";
 
 const Icon = defineAsyncComponent(() =>
   import('../Icon/OCIcon.vue')

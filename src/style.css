@@ -1,93 +1,114 @@
 /* Variables  */
 :root {
+    /* mode default */
+    --oc-primary-10: #f8f9fc;
+    --oc-primary-50: #f5f6f9;
+    --oc-primary-50tr: #0027710a;
+    --oc-primary-100: #ccd4e3;
+    --oc-primary-200: #a6b3cd;
+    --oc-primary-300: #8093b8;
+    --oc-primary-400: #4c689c;
+    --oc-primary-500: #002771;
+    --oc-primary-600: #09204a;
 
-    /* Todo register all variable */
-
-    /* default [data-theme="light"] */
-
-    --oc-basic-primary-400: #4c689cff;
-    --oc-basic-primary-500: #002771ff;
-    --oc-basic-primary-600: #09204aff;
-    --oc-basic-warning-600: #eaa00cff;
-
-    --oc-text-000: #ffffffff;
-    --oc-text-200: #cbcdd4ff;
-    --oc-text-300: #9295a5ff;
-    --oc-text-400: #61667cff;
-    --oc-text-500: #03102fff;
-    --oc-grey-50: #fcfcfdff;
-    --oc-grey-100: #f2f2f4ff;
-    --oc-grey-200: #e5e6eaff;
-    --oc-grey-300: #cbcdd4ff;
-    --oc-grey-400: #b2b4bfff;
-    --oc-grey-500: #7e8294ff;
-    --oc-grey-600: #61667cff;
-    --oc-grey-700: #484d61ff;
-    --oc-grey-800: #343848ff;
-    --oc-background-blue: #f8f9fcff;
-    --oc-background-woce: #ffffffff;
-    --oc-contrast-black: #000000ff;
-    --oc-contrast-woce: #ffffffff;
-    --oc-blue-50-tr: #2465de1a;
-    --oc-blue-50: #f5f6f9ff;
-    --oc-blue-100: #ccdefeff;
-    --oc-blue-200: #b3cdfeff;
-    --oc-blue-300: #80acfeff;
-    --oc-blue-400: #4c8afdff;
-    --oc-blue-500: #2465deff;
-    --oc-purple-50-tr: #b14aed1a;
-    --oc-purple-50: #f7edfdff;
-    --oc-purple-100: #efdbfbff;
-    --oc-purple-200: #e8c9faff;
-    --oc-purple-300: #d8a4f6ff;
-    --oc-purple-400: #c880f2ff;
-    --oc-purple-500: #b14aedff;
-    --oc-red-50-tr: #ff6b6c1a;
-    --oc-red-50: #fff0f0ff;
-    --oc-red-100: #ffe1e2ff;
-    --oc-red-200: #ffc4c4ff;
-    --oc-red-300: #ffa6a7ff;
-    --oc-red-400: #ff8989ff;
-    --oc-red-500: #ff6b6cff;
-    --oc-success-50-tr: #4dab801a;
-    --oc-success-50: #e7f8f0ff;
-    --oc-success-100: #d0f1e1ff;
-    --oc-success-200: #b8e9d2ff;
-    --oc-success-300: #89dbb5ff;
-    --oc-success-400: #59cc97ff;
-    --oc-success-500: #4dab80ff;
-    --oc-warning-50-tr: #f4b8401a;
-    --oc-warning-50: #fff9ecff;
-    --oc-warning-100: #fff3daff;
-    --oc-warning-200: #ffecc7ff;
-    --oc-warning-300: #ffe0a2ff;
-    --oc-warning-400: #ffd47dff;
-    --oc-warning-500: #f4b840ff;
-    --oc-warning-600: #eaa00cff;
-    --oc-error-50-tr: #c420211a;
-    --oc-error-50: #f9e9e9ff;
-    --oc-error-100: #f3d2d3ff;
-    --oc-error-200: #e7a6a6ff;
-    --oc-error-300: #dc797aff;
-    --oc-error-400: #d04d4dff;
-    --oc-error-500: #dc3545ff;
-
-    --oc-primary-50-tr: var(--oc-blue-50-tr);
-    --oc-primary-50: var(--oc-blue-50);
-    --oc-primary-100: var(--oc-blue-100);
-    --oc-primary-200: var(--oc-blue-200);
-    --oc-primary-300: var(--oc-blue-300);
-    --oc-primary-400: var(--oc-blue-400);
-    --oc-primary-500: var(--oc-blue-500);
-
-}
-
-body {
-    color: var(--oc-basic-primary-600);
-}
+    --oc-grey-50: #fcfcfd;
+    --oc-grey-100: #f2f2f4;
+    --oc-grey-200: #e5e6ea;
+    --oc-grey-300: #cbcdd4;
+    --oc-grey-400: #b2b4bf;
+    --oc-grey-500: #9295a5;
+    --oc-grey-600: #61667c;
+    --oc-grey-700: #484d61;
+    --oc-grey-800: #343848;
+    --oc-grey-900: #03102f;
 
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+    --oc-text-000: var(--oc-contrast-white);
+    --oc-text-200: var(--oc-grey-300);
+    --oc-text-300: var(--oc-grey-500);
+    --oc-text-400: var(--oc-grey-600);
+    --oc-text-500: var(--oc-grey-900);
+
+
+    --oc-background-light-blue: var(--oc-primary-10);
+    --oc-background-white: var(--oc-contrast-white);
+
+
+    --oc-contrast-black: #000000;
+    --oc-contrast-white: #ffffff;
+
+
+    --oc-blue-50tr: #2465de1a;
+    --oc-blue-50: #e5eeff;
+    --oc-blue-100: #ccdefe;
+    --oc-blue-200: #b3cdfe;
+    --oc-blue-300: #80acfe;
+    --oc-blue-400: #4c8afd;
+    --oc-blue-500: #2465de;
+
+
+    --oc-purple-50: #f7edfd;
+    --oc-purple-100: #efdbfb;
+    --oc-purple-200: #e8c9fa;
+    --oc-purple-300: #d8a4f6;
+    --oc-purple-400: #c880f2;
+    --oc-purple-500: #b14aed;
+
+
+
+    --oc-red-50tr: #ff6b6c1a;
+    --oc-red-50: #fff0f0;
+    --oc-red-100: #ffe1e2;
+    --oc-red-200: #ffc4c4;
+    --oc-red-300: #ffa6a7;
+    --oc-red-400: #ff8989;
+    --oc-red-500: #ff6b6c;
+
+    
+
+    --oc-success-50tr: #4dab801a;
+    --oc-success-50: #e7f8f0;
+    --oc-success-100: #d0f1e1;
+    --oc-success-200: #b8e9d2;
+    --oc-success-300: #89dbb5;
+    --oc-success-400: #59cc97;
+    --oc-success-500: #4dab80;
+
+
+    --oc-warning-50tr: #f4b8401a;
+    --oc-warning-50: #fff9ec;
+    --oc-warning-100: #fff3da;
+    --oc-warning-200: #ffecc7;
+    --oc-warning-300: #ffe0a2;
+    --oc-warning-400: #ffd47d;
+    --oc-warning-500: #f4b840;
+    --oc-warning-600: #eaa00c;
+
+
+
+    --oc-error-50tr: #c420211a;
+    --oc-error-50: #f9e9e9;
+    --oc-error-100: #f3d2d3;
+    --oc-error-200: #e7a6a6;
+    --oc-error-300: #dc797a;
+    --oc-error-400: #d04d4d;
+    --oc-error-500: #dc3545;
+
+  }
+
+  main {
+    color: var(--oc-text-500);
+    background-color: var(--oc-background-white);
+  }
+
+  /* dark mode */
+  main[data-theme=dark]{
+    /*  */
+  }
+
+
+  
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
   

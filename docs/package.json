@@ -15,6 +15,7 @@
     "vitepress": "^1.0.0-rc.20"
   },
   "dependencies": {
+    "@orchidui/vue": "^0.0.11",
     "vue": "^3.3.4"
   }
 }

@@ -20,24 +20,6 @@ module.exports = {
           500: "var(--oc-primary-500)",
           600: "var(--oc-primary-600)",
         },
-        "oc-text": {
-          DEFAULT: "var(--oc-text-500)",
-          "000": "var(--oc-text-000)",
-          200: "var(--oc-text-200)",
-          300: "var(--oc-text-300)",
-          400: "var(--oc-text-400)",
-          500: "var(--oc-text-500)",
-        },
-        "oc-bg": {
-          DEFAULT: "var(--oc-background-blue)",
-          blue: "var(--oc-background-blue)",
-          woce: "var(--oc-background-woce)",
-        },
-        contast: {
-          DEFAULT: "var(--oc-contrast-black)",
-          black: "var(--oc-contrast-black)",
-          woce: "var(--oc-contrast-woce)",
-        },
         "oc-grey": {
           DEFAULT: "var(--oc-grey-100)",
           50: "var(--oc-grey-50)",
@@ -49,6 +31,25 @@ module.exports = {
           600: "var(--oc-grey-600)",
           700: "var(--oc-grey-700)",
           800: "var(--oc-grey-800)",
+          900: "var(--oc-grey-900)",
+        },
+        "oc-text": {
+          DEFAULT: "var(--oc-text-500)",
+          "000": "var(--oc-text-000)",
+          200: "var(--oc-text-200)",
+          300: "var(--oc-text-300)",
+          400: "var(--oc-text-400)",
+          500: "var(--oc-text-500)",
+        },
+        "oc-bg": {
+          DEFAULT: "var(--oc-background-white)",
+          blue: "var(--oc-background-blue)",
+          white: "var(--oc-background-white)",
+        },
+        contast: {
+          DEFAULT: "var(--oc-contrast-black)",
+          black: "var(--oc-contrast-black)",
+          white: "var(--oc-contrast-white)",
         },
 
         "oc-blue": {
