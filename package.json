@@ -22,7 +22,7 @@
   "dependencies": {
     "@headlessui/vue": "^1.7.16",
     "@orchidui/icons": "^0.0.6",
-    "@orchidui/vue": "^0.0.9",
+    "@orchidui/vue": "^0.0.10",
     "@vue/eslint-config-prettier": "^8.0.0",
     "autoprefixer": "^10.4.16",
     "eslint-config-standard": "^17.1.0",
