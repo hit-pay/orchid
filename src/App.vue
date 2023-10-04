@@ -8,7 +8,10 @@
     <div class="flex gap-3 items-center">
       <Button label="Button" />
       <Chip label="Chip" />
+    </div>
+    <div class="w-full flex justify-center gap-3">
       <Dropdown />
+      <Accordion header="Header" body="body"/>
     </div>
 
     <div class="w-full text-center mt-3">
@@ -18,5 +21,5 @@
 </template>
 
 <script setup>
-import { Button, Chip, Dropdown } from "@orchidui/vue";
+import { Button, Chip, Dropdown, Accordion } from "@orchidui/vue";
 </script>

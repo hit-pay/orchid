@@ -18,7 +18,7 @@
     "postinstall": "(cd packages/@orchidui-vue && npm install) && (cd docs && npm install)"
   },
   "dependencies": {
-    "@orchidui/vue": "^0.0.13",
+    "@orchidui/vue": "^0.0.14",
     "@vue/eslint-config-prettier": "^8.0.0",
     "autoprefixer": "^10.4.16",
     "eslint-config-standard": "^17.1.0",
