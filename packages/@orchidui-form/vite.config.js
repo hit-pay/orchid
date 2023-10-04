@@ -4,7 +4,7 @@ import vue from "@vitejs/plugin-vue";
 import { resolve } from "path";
 
 // Defines an array of entry points to be used to search for files.
-const entryPoints = ["src/**/*.js"];
+const entryPoints = ["src/*.js"];
 
 // Searches for files that match the patterns defined in the array of input points.
 // Returns an array of absolute file paths.
@@ -19,10 +19,7 @@ const entities = files.map((file) => {
   const keyWithoutExt = key.replace(/\.[^.]*$/, "");
 
   return [keyWithoutExt, file];
-}).filter((entry) => {
-  return !entry[0].includes('.stories')
 });
-
 
 // Convert the array of key-value pairs to an object using the Object.fromEntries() method.
 // Returns an object where each key is the file name without the extension and the value is the absolute file path.
@@ -42,7 +39,7 @@ export default defineConfig({
       formats: ["es"],
     },
     rollupOptions: {
-      external: ["vue", "@headlessui/vue"],
+      external: ["vue"],
       output: {
         globals: {
           vue: "Vue",
