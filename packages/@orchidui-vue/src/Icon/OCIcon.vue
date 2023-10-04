@@ -13,7 +13,7 @@
 defineProps({
   path: {
     type: String,
-    default: "/icons",
+    default: "/icons/orchidui",
   },
   name: {
     type: String,
