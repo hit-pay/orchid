@@ -113,7 +113,7 @@ const buttonSizeClasses = computed(() => ({
   &-primary {
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
     background: var(--button-primary-default);
-    @apply shadow-[0_1.5px_0_0] shadow-oc-blue;
+    @apply shadow-[0_1.5px_0_0_#2465de];
     &:hover {
       background: var(--button-primary-hover);
     }
@@ -150,7 +150,7 @@ const buttonSizeClasses = computed(() => ({
   &-error {
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
     background: var(--button-destructive-default);
-    @apply shadow-[0_1.5px_0_0] shadow-oc-error;
+    @apply shadow-[0_1.5px_0_0_#dc3545];
     &:hover {
       background: var(--button-destructive-hover);
     }
