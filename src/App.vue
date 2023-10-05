@@ -17,11 +17,9 @@
     <div class="w-full text-center mt-3">
       <a href="/docs" class="text-oc-primary"> Documentation </a>
     </div>
-    <ThemeSettings />
   </main>
 </template>
 
 <script setup>
-import ThemeSettings from "./ThemeSettings.vue";
 import { Button, Chip, Dropdown, Accordion } from "@orchidui/vue";
 </script>
