@@ -2,11 +2,13 @@
 <template>
   <Menu as="div" class="relative inline-block text-left">
     <div>
-      <MenuButton
-        class="inline-flex w-full justify-center rounded-md border px-4 py-2 text-sm font-medium hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-      >
-        Dropdown
-      </MenuButton>
+      <slot name="trigger">
+        <MenuButton
+          class="inline-flex w-full justify-center rounded-md border px-4 py-2 text-sm font-medium hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+        >
+          Dropdown
+        </MenuButton>
+      </slot>
     </div>
 
     <transition

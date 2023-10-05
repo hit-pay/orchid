@@ -11,18 +11,19 @@ const entryPoints = ["src/**/*.js"];
 const files = fg.sync(entryPoints, { absolute: true });
 
 // Maps the file paths in the "files" array to an array of key-value pair.
-const entities = files.map((file) => {
-  // Extract the part of the file path after the "src" folder and before the file extension.
-  const [key] = file.match(/(?<=src\/).*$/) || [];
+const entities = files
+  .map((file) => {
+    // Extract the part of the file path after the "src" folder and before the file extension.
+    const [key] = file.match(/(?<=src\/).*$/) || [];
 
-  // Remove the file extension from the key.
-  const keyWithoutExt = key.replace(/\.[^.]*$/, "");
+    // Remove the file extension from the key.
+    const keyWithoutExt = key.replace(/\.[^.]*$/, "");
 
-  return [keyWithoutExt, file];
-}).filter((entry) => {
-  return !entry[0].includes('.stories')
-});
-
+    return [keyWithoutExt, file];
+  })
+  .filter((entry) => {
+    return !entry[0].includes(".stories");
+  });
 
 // Convert the array of key-value pairs to an object using the Object.fromEntries() method.
 // Returns an object where each key is the file name without the extension and the value is the absolute file path.
