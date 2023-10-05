@@ -1,6 +1,6 @@
 <script setup>
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
-import { nextTick, ref, defineProps, defineAsyncComponent } from "vue";
+import { nextTick, ref,  defineAsyncComponent } from "vue";
 
 const Icon = defineAsyncComponent(() => import("../Icon/OCIcon.vue"));
 

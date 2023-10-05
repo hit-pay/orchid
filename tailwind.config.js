@@ -1,5 +1,4 @@
 /** @type {import('tailwindcss').Config} */
-const plugin = require("tailwindcss/plugin");
 module.exports = {
   content: [
     "./packages/@orchidui-vue/src/**/*.{vue,js,ts,jsx,tsx}",
@@ -7,6 +6,50 @@ module.exports = {
     "./src/**/*.{vue,js,ts,jsx,tsx}"
   ],
   theme: {
+    fontSize: {
+      'xs': ['0.625rem', {
+        lineHeight: '1.5rem',
+        // letterSpacing: '-0.01em',
+      }],
+      'sm': ['0.75rem', {
+        lineHeight: '1.5rem',
+      }],
+      'base': ['0.875rem', {
+        lineHeight: '1.5rem',
+      }],
+      'lg': ['1rem', {
+        lineHeight: '1.4rem',
+      }],
+      'xl': ['1.125rem', {
+        lineHeight: '1.35rem',
+      }],
+    },
+    screens: {
+      sm: '480px',
+      md: '768px',
+      lg: '976px',
+      xl: '1440px',
+    },
+    spacing: {
+      0: '0',
+      1: '0.125rem',
+      2: '0.25rem',
+      3: '0.5rem',
+      4: '.75rem',
+      5: '1rem',
+      6: '1.25rem',
+      7: '1.5rem',
+      8: '1.75rem',
+      9: '2rem',
+      10: '2.5rem',
+    },
+    borderRadius: {
+      'sm': 'var(--oc-border-sm)',
+      DEFAULT: 'var(--oc-border-default)',
+      'md': 'var(--oc-border-default)',
+      'lg': 'var(--oc-border-lg)',
+      'full': 'var(--oc-border-full)',
+    },
     extend: {
       colors: {
         "oc-primary": {
@@ -117,16 +160,7 @@ module.exports = {
           400: "var(--oc-error-400)",
           500: "var(--oc-error-500)",
         },
-      },
+      }
     },
-  },
-  plugins: [
-    plugin(function ({ addBase, theme }) {
-      addBase({
-        h1: { fontSize: theme("fontSize.lg") },
-        p: { fontSize: theme("fontSize.sm") },
-        small: { fontSize: theme("fontSize.xs") },
-      });
-    }),
-  ],
+  }
 };
