@@ -2,7 +2,9 @@
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
 import { defineAsyncComponent, nextTick, ref, watch } from "vue";
 
-const Icon = defineAsyncComponent(() => import("../Icon/OCIcon.vue"));
+const Icon = defineAsyncComponent(() =>
+  import("../../MediaAndIcons/Icon/OCIcon.vue"),
+);
 
 const upcomingAccordion = ref();
 
@@ -13,7 +15,6 @@ const props = defineProps({
   },
   body: {
     type: String,
-
     default: "",
   },
   icon: {
