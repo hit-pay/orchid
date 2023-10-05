@@ -94,21 +94,44 @@
     --oc-error-400: #d04d4d;
     --oc-error-500: #dc3545;
 
+    --oc-border-sm: .125rem;
+    --oc-border-default: .25rem;
+    --oc-border-lg: .5rem;
+    --oc-border-full: 9999px;
+
   }
 
   main {
     color: var(--oc-text-500);
     background-color: var(--oc-background-white);
   }
-
-  /* dark mode */
-  main[data-theme=dark]{
-    /*  */
-  }
-
-
   
   @tailwind base;
+
+  @layer base {
+    h1 {
+      @apply text-xl;
+    }
+    h2 {
+      @apply text-lg;
+    }
+    h3 {
+      @apply text-base;
+    }
+    h4 {
+      @apply text-sm;
+    }
+    h5 {
+      @apply text-xs;
+    }
+    h6 {
+      @apply text-xs;
+    }
+    main {
+      @apply text-base;
+    }
+  }
+  
   @tailwind components;
   @tailwind utilities;
   
