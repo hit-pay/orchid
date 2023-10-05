@@ -1,7 +1,9 @@
 <script setup>
 import { defineAsyncComponent } from "vue";
 
-const Icon = defineAsyncComponent(() => import("../Icon/OCIcon.vue"));
+const Icon = defineAsyncComponent(() =>
+  import("../../MediaAndIcons/Icon/OCIcon.vue"),
+);
 
 defineProps({
   color: {
