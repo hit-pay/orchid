@@ -70,6 +70,7 @@ module.exports = {
     borderRadius: {
       'sm': 'var(--oc-border-sm)',
       DEFAULT: 'var(--oc-border-default)',
+      'md': 'var(--oc-border-default)',
       'lg': 'var(--oc-border-lg)',
       'full': 'var(--oc-border-full)',
     },
