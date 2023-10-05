@@ -1,5 +1,5 @@
 <script setup>
-import { defineAsyncComponent, ref } from "vue";
+import { defineAsyncComponent, ref, defineModel } from "vue";
 import { MenuButton } from "@headlessui/vue";
 
 const Icon = defineAsyncComponent(() =>
@@ -8,7 +8,6 @@ const Icon = defineAsyncComponent(() =>
 const Dropdown = defineAsyncComponent(() =>
   import("../../Overlay/Dropdown/OCDropdown.vue"),
 );
-
 const isFocused = ref(false);
 defineProps({
   disabled: {
@@ -23,13 +22,17 @@ defineProps({
     type: String,
     default: "Label",
   },
+  modelValue: {
+    type: String,
+    default: "",
+  },
   inlineLabel: {
     type: Boolean,
     default: false,
   },
   hint: {
     type: String,
-    default: "This is a hint text to help user.",
+    default: "",
   },
   placeholder: {
     type: String,
@@ -37,59 +40,68 @@ defineProps({
   },
   icon: {
     type: String,
-    default: "circle",
+    default: "",
   },
   type: {
     type: String,
-    default: "leading", // "trailing" | "leading"  | ""
+    default: "",
   },
+});
+defineEmits({
+  "update:modelValue": [],
 });
 </script>
 
 <template>
-  <div class="flex flex-col gap-y-1">
+  <div class="flex flex-col gap-y-2">
     <!--  Label  -->
-    <span v-if="!inlineLabel" class="text-xs text-oc-grey-400">{{
-      label
-    }}</span>
+    <span
+      v-if="!inlineLabel"
+      class="flex items-center h-[18px] font-medium text-oc-text-400"
+      >{{ label }}</span
+    >
 
     <!--  Input wrapper  -->
     <div
-      class="rounded-lg h-9 border flex items-center gap-x-2 px-2"
+      class="rounded-lg h-[36px] border flex items-center gap-x-3 px-3"
       :class="[
         {
-          'shadow-[0_0_0_2px] shadow-oc-grey-200': isFocused,
+          'shadow-[0_0_0_2px]': isFocused,
         },
-        !disabled && isError ? 'border-oc-error' : 'border-oc-grey-200',
-        disabled ? 'bg-oc-bg' : 'bg-white',
+        !disabled && isError
+          ? 'border-oc-error shadow-oc-error'
+          : 'border-oc-grey-200 shadow-oc-grey-200',
+        disabled ? 'bg-oc-bg-dark pointer-events-none' : 'bg-white',
       ]"
     >
       <slot v-if="type === 'trailing'" name="trailing">
         <Dropdown>
           <template #trigger>
             <MenuButton
-              class="py-2 pr-2 border-r border-oc-grey-200 text-xs font-medium flex items-center gap-x-1 text-oc-grey-400"
+              class="py-3 pr-3 border-r border-oc-grey-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
             >
-              USD
-              <Icon class="w-3.5 h-3.5" name="chevron-down" />
+              <span class="flex items-center h-[18px]">USD</span>
+              <Icon class="w-[14px] h-[14px]" name="chevron-down" />
             </MenuButton>
           </template>
         </Dropdown>
       </slot>
 
       <div v-if="icon">
-        <Icon class="w-4 h-4 text-oc-grey-400" :name="icon" />
+        <Icon class="w-4 h-4 text-oc-text-400" :name="icon" />
       </div>
-      <div class="flex flex-1 items-baseline gap-x-1">
-        <label v-if="inlineLabel" class="text-oc-grey-300 text-sm">
+      <div class="flex flex-1 items-baseline gap-x-2">
+        <label v-if="inlineLabel" class="text-oc-text-300">
           {{ label }}:
         </label>
         <input
+          :value="modelValue"
           :placeholder="placeholder"
           :disabled="disabled"
-          class="text-sm h-6 outline-none text-oc-text disabled:bg-transparent placeholder:text-oc-grey-300"
+          class="h-7 outline-none text-oc-text font-medium disabled:bg-transparent placeholder:font-normal placeholder:text-oc-text-300"
           @focus="isFocused = true"
           @blur="isFocused = false"
+          @input="$emit('update:modelValue', $event.target.value)"
         />
       </div>
 
@@ -97,10 +109,10 @@ defineProps({
         <Dropdown>
           <template #trigger>
             <MenuButton
-              class="py-2 pl-2 border-l border-oc-grey-200 text-xs font-medium flex items-center gap-x-1 text-oc-grey-400"
+              class="py-3 pl-3 border-l border-oc-grey-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
             >
-              USD
-              <Icon class="w-3.5 h-3.5" name="chevron-down" />
+              <span class="flex items-center h-[18px]">USD</span>
+              <Icon class="w-[14px] h-[14px]" name="chevron-down" />
             </MenuButton>
           </template>
         </Dropdown>
@@ -109,8 +121,9 @@ defineProps({
 
     <!--  Hint  -->
     <span
-      class="text-xs"
-      :class="[!disabled && isError ? 'text-oc-error' : 'text-oc-grey-400']"
+      v-if="hint"
+      class="h-[18px] flex items-center"
+      :class="[!disabled && isError ? 'text-oc-error' : 'text-oc-text-400']"
     >
       {{ hint }}
     </span>

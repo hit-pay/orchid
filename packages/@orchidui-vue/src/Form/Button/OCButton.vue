@@ -1,22 +1,20 @@
 <template>
   <button
-    class="oc-btn"
+    class="oc-btn overflow-hidden rounded-lg relative font-medium gap-x-3 flex items-center"
     :disabled="isDisabled || isLoading"
-    :class="buttonClassName"
+    :class="[buttonTypeClasses[variant], buttonSizeClasses[size]]"
   >
-    <Icon v-if="isLoading" class="mr-2" name="loading-2" />
-    <template v-if="icon && !isLoading">
-      <Icon
-        :class="{
-          'mr-2': label,
-        }"
-        :name="icon"
-      />
+    <Icon v-if="isLoading" name="loading-2" />
+
+    <template v-if="leftIcon && !isLoading">
+      <Icon :name="leftIcon" />
     </template>
-    <template v-if="label">{{ label }}</template>
+
+    <span v-if="label">{{ label }}</span>
     <slot v-else />
-    <template v-if="iconAfter">
-      <Icon class="ml-2" :name="iconAfter" />
+
+    <template v-if="rightIcon">
+      <Icon :name="rightIcon" />
     </template>
   </button>
 </template>
@@ -28,88 +26,144 @@ const Icon = defineAsyncComponent(() =>
 );
 const props = defineProps({
   label: String,
-  isSecondary: Boolean,
-  isDestructive: Boolean,
-  isSmall: Boolean,
-  isLarge: Boolean,
   isDisabled: Boolean,
   isLoading: Boolean,
-  icon: String,
-  iconAfter: String,
-  isRounded: Boolean,
-  isText: Boolean,
+  leftIcon: String,
+  rightIcon: String,
+  isTransparent: Boolean,
+  isShortcut: Boolean,
+  variant: {
+    type: String,
+    default: "primary",
+  },
+  size: {
+    type: String,
+    default: "default",
+  },
 });
+const isIconOnly = computed(
+  () => (props.leftIcon || props.rightIcon) && !props.label,
+);
 
-const buttonClassName = computed(() => {
-  let className = "border-1 border-oc-primary-500 ";
+const buttonTypeClasses = computed(() => ({
+  primary: !props.isTransparent
+    ? "border border-oc-blue oc-btn-primary text-white"
+    : "text-oc-blue hover:text-oc-blue-400 active:text-oc-blue",
+  secondary: !props.isTransparent
+    ? "border border-oc-grey text-oc-text-400 oc-btn-secondary"
+    : "text-oc-text-400 hover:text-oc-text-500 active:text-oc-text-400",
+  destructive: !props.isTransparent
+    ? "border border-oc-error oc-btn-error text-white"
+    : "text-oc-error hover:text-oc-error-400 active:text-oc-error",
+}));
 
-  if (props.isDestructive) {
-    className += props.isText
-      ? "text-oc-error "
-      : "oc-btn-error text-oc-text-000 ";
-  } else if (props.isSecondary) {
-    className += props.isText
-      ? "text-oc-text-400 "
-      : "oc-btn-secondary text-oc-text-400 ";
-  } else {
-    className += props.isText
-      ? "text-oc-primary "
-      : "oc-btn-primary  text-oc-text-000 ";
-  }
-
-  if (props.icon && !props.label) {
-    // this only icon
-    className += "p-2 text-sm ";
-  } else if (props.isSmall) {
-    className += "px-3 py-1 text-sm ";
-  } else if (props.isLarge) {
-    className += "px-4 py-2 text-lg ";
-  } else {
-    className += "px-4 py-2 ";
-  }
-
-  if (props.isDisabled || props.isLoading) {
-    className += "opacity-50 ";
-  }
-
-  if (props.icon || props.iconAfter || props.isLoading) {
-    className += "flex items-center ";
-  }
-
-  className += props.isRounded ? "rounded-full " : "rounded-lg ";
-
-  return className;
-});
+const buttonSizeClasses = computed(() => ({
+  default: !props.isTransparent ? "px-4 py-3" : "py-3",
+  small: !props.isTransparent
+    ? isIconOnly.value
+      ? "h-8 w-8 py-3 px-4 "
+      : "h-8 p-3 "
+    : "h-8 ",
+  big: !props.isTransparent
+    ? isIconOnly.value
+      ? "h-[44px] py-3 px-4"
+      : "h-[44px] py-3 px-[14px]"
+    : " py-3 h-[44px]",
+}));
 </script>
-<style scoped>
-.oc-btn:active {
-  box-shadow: none;
-}
+<style scoped lang="scss">
+.oc-btn {
+  @apply disabled:pointer-events-none;
 
-.oc-btn-primary {
-  background: linear-gradient(
-    220deg,
-    var(--oc-primary-400) 0%,
-    var(--oc-primary-500) 100%
-  );
-  box-shadow: 0 2px 0 0 var(--oc-primary-500);
-}
+  --button-primary-default: linear-gradient(180deg, #4179e2 0%, #1f5bcc 100%);
+  --button-primary-hover: linear-gradient(180deg, #4179e2 0%, #2f6ddf 100%);
+  --button-primary-pressed: linear-gradient(180deg, #3873e1 0%, #4179e2 100%);
+  --button-primary-disabled: linear-gradient(180deg, #567fcd 0%, #3662b5 100%);
 
-.oc-btn-secondary {
-  background: linear-gradient(
-    220deg,
-    var(--oc-text-000) 0%,
-    var(--oc-grey-100) 100%
+  --button-secondary-default: linear-gradient(180deg, #fff 0%, #f2f2f2 100%);
+  --button-secondary-hover: linear-gradient(180deg, #fff 0%, #fafafa 100%);
+  --button-secondary-pressed: linear-gradient(180deg, #fafafa 0%, #fff 100%);
+  --button-secondary-disabled: linear-gradient(
+    180deg,
+    #fcfcfc 0%,
+    #f7f7f7 100%
   );
-  box-shadow: 0 1.5px 0 0 rgba(0, 0, 0, 0.1);
-}
 
-.oc-btn-error {
-  background: linear-gradient(
-    220deg,
-    var(--oc-error-400) 0%,
-    var(--oc-error-500) 100%
+  --button-destructive-default: linear-gradient(
+    180deg,
+    #e44e5c 0%,
+    #cc2334 100%
   );
-  box-shadow: 0 2px 0 0 var(--oc-error-500);
+  --button-destructive-hover: linear-gradient(180deg, #e44e5c 0%, #dc3747 100%);
+  --button-destructive-pressed: linear-gradient(
+    180deg,
+    #dc3747 0%,
+    #e44e5c 100%
+  );
+  --button-destructive-disabled: linear-gradient(
+    180deg,
+    #c66c75 0%,
+    #a84851 100%
+  );
+
+  &:disabled > * {
+    @apply opacity-50;
+  }
+
+  &-primary {
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
+    background: var(--button-primary-default);
+    @apply shadow-[0_1.5px_0_0] shadow-oc-blue;
+    &:hover {
+      background: var(--button-primary-hover);
+    }
+
+    &:active {
+      background: var(--button-primary-pressed);
+      @apply shadow-none;
+    }
+
+    &:disabled {
+      background: var(--button-primary-disabled);
+      @apply shadow-none;
+    }
+  }
+
+  &-secondary {
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
+    background: var(--button-secondary-default);
+    @apply shadow-[0_1.5px_0_0] shadow-black/10;
+    &:hover {
+      background: var(--button-secondary-hover);
+    }
+
+    &:active {
+      background: var(--button-secondary-pressed);
+      @apply shadow-none;
+    }
+
+    &:disabled {
+      background: var(--button-secondary-disabled);
+    }
+  }
+
+  &-error {
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
+    background: var(--button-destructive-default);
+    @apply shadow-[0_1.5px_0_0] shadow-oc-error;
+    &:hover {
+      background: var(--button-destructive-hover);
+    }
+
+    &:active {
+      background: var(--button-destructive-pressed);
+      @apply shadow-none;
+    }
+
+    &:disabled {
+      background: var(--button-destructive-disabled);
+      @apply shadow-none;
+    }
+  }
 }
 </style>
