@@ -52,6 +52,20 @@ module.exports = {
     },
     extend: {
       colors: {
+        // first to use this 
+        "oc-text": {
+          DEFAULT: "var(--oc-text-500)",
+          "000": "var(--oc-text-000)",
+          200: "var(--oc-text-200)",
+          300: "var(--oc-text-300)",
+          400: "var(--oc-text-400)",
+          500: "var(--oc-text-500)",
+        },
+        "oc-bg": {
+          DEFAULT: "var(--oc-background-light)",
+          dark: "var(--oc-background-dark)",
+          light: "var(--oc-background-light)",
+        },
         "oc-primary": {
           DEFAULT: "var(--oc-primary-500)",
           "50-tr": "var(--oc-primary-50-tr)",
@@ -63,6 +77,7 @@ module.exports = {
           500: "var(--oc-primary-500)",
           600: "var(--oc-primary-600)",
         },
+         // secondary to use this
         "oc-grey": {
           DEFAULT: "var(--oc-grey-100)",
           50: "var(--oc-grey-50)",
@@ -76,25 +91,6 @@ module.exports = {
           800: "var(--oc-grey-800)",
           900: "var(--oc-grey-900)",
         },
-        "oc-text": {
-          DEFAULT: "var(--oc-text-500)",
-          "000": "var(--oc-text-000)",
-          200: "var(--oc-text-200)",
-          300: "var(--oc-text-300)",
-          400: "var(--oc-text-400)",
-          500: "var(--oc-text-500)",
-        },
-        "oc-bg": {
-          DEFAULT: "var(--oc-background-white)",
-          blue: "var(--oc-background-blue)",
-          white: "var(--oc-background-white)",
-        },
-        contast: {
-          DEFAULT: "var(--oc-contrast-black)",
-          black: "var(--oc-contrast-black)",
-          white: "var(--oc-contrast-white)",
-        },
-
         "oc-blue": {
           DEFAULT: "var(--oc-blue-500)",
           "50-tr": "var(--oc-blue-50-tr)",
@@ -105,7 +101,6 @@ module.exports = {
           400: "var(--oc-blue-400)",
           500: "var(--oc-blue-500)",
         },
-
         "oc-purple": {
           DEFAULT: "var(--oc-purple-500)",
           "50-tr": "var(--oc-purple-50-tr)",
@@ -116,7 +111,6 @@ module.exports = {
           400: "var(--oc-purple-400)",
           500: "var(--oc-purple-500)",
         },
-
         "oc-red": {
           DEFAULT: "var(--oc-red-500)",
           "50-tr": "var(--oc-red-50-tr)",
@@ -127,7 +121,6 @@ module.exports = {
           400: "var(--oc-red-400)",
           500: "var(--oc-red-500)",
         },
-
         "oc-success": {
           DEFAULT: "var(--oc-success-500)",
           "50-tr": "var(--oc-success-50-tr)",
@@ -138,7 +131,6 @@ module.exports = {
           400: "var(--oc-success-400)",
           500: "var(--oc-success-500)",
         },
-
         "oc-warning": {
           DEFAULT: "var(--oc-warning-500)",
           "50-tr": "var(--oc-warning-50-tr)",
@@ -149,7 +141,6 @@ module.exports = {
           400: "var(--oc-warning-400)",
           500: "var(--oc-warning-500)",
         },
-
         "oc-error": {
           DEFAULT: "var(--oc-error-500)",
           "50-tr": "var(--oc-error-50-tr)",
