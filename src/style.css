@@ -69,9 +69,82 @@
     --oc-contrast-black: #000000; 
     --oc-contrast-white: #ffffff;
 
+  }
 
+  /* EXPERIMENTAL */
+  .dark-mode{
+    --oc-blue-500: #60a5fa;
+    --oc-blue-400: #3b82f6;
+    --oc-blue-300: #2563eb;
+    --oc-blue-200: #1d4ed8;
+    --oc-blue-100: #1e40af;
+    --oc-blue-50: #1e3a8a;
+    --oc-blue-50-tr: #172554;
+
+    --oc-purple-500: #c084fc;
+    --oc-purple-400: #a855f7;
+    --oc-purple-300: #9333ea;
+    --oc-purple-200: #7e22ce;
+    --oc-purple-100: #6b21a8;
+    --oc-purple-50: #581c87;
+    --oc-purple-50-tr: #3b0764;
+
+    --oc-red-500: #f87171;
+    --oc-red-400: #ef4444;
+    --oc-red-300: #dc2626;
+    --oc-red-200: #b91c1c;
+    --oc-red-100: #991b1b;
+    --oc-red-50: #7f1d1d;
+    --oc-red-50-tr: #450a0a;
+
+    --oc-success-500: #4ade80;
+    --oc-success-400: #22c55e;
+    --oc-success-300: #16a34a;
+    --oc-success-200: #15803d;
+    --oc-success-100: #166534;
+    --oc-success-50: #14532d;
+    --oc-success-50-tr: #052e16;
+
+    --oc-warning-500: #facc15;
+    --oc-warning-400: #eab308;
+    --oc-warning-300: #ca8a04;
+    --oc-warning-200: #a16207;
+    --oc-warning-100: #854d0e;
+    --oc-warning-50: #713f12;
+    --oc-warning-50-tr: #422006;
+
+    --oc-error-500: #f87171;
+    --oc-error-400: #ef4444;
+    --oc-error-300: #dc2626;
+    --oc-error-200: #b91c1c;
+    --oc-error-100: #991b1b;
+    --oc-error-50: #7f1d1d;
+    --oc-error-50-tr: #450a0a;
+  
+    /* Background Color */
+    --oc-grey-900: #f8fafc; 
+    --oc-grey-800: #f1f5f9;
+    --oc-grey-700: #e2e8f0;
+    --oc-grey-600: #cbd5e1;
+    /* Text Color */
+    --oc-grey-500: #94a3b8;
+    --oc-grey-400: #64748b;
+    --oc-grey-300: #475569;
+    --oc-grey-200: #334155;
+    --oc-grey-100: #1e293b;
+    --oc-grey-50: #0f172a;
+    --oc-grey-10: #020617;
+
+
+    --oc-contrast-black: #ffffff; 
+    --oc-contrast-white: #000000;
+
+  }
+
+
+  main{
+    
     /* PLEASE USE THIS VARIABLE FIRST */
-
     --oc-text-000: var(--oc-contrast-white); /* if dark mode use --oc-contrast-black */
     --oc-text-200: var(--oc-grey-300);
     --oc-text-300: var(--oc-grey-500);
@@ -127,30 +200,33 @@
 
     --oc-border-full: 9999px;
 
-  }
-
-  main {
     color: var(--oc-text-500);
     background-color: var(--oc-background-light);
   }
-  
-  .layout-primary {
-    --oc-sidebar-background: var(--oc-primary-50-tr);
+
+
+  .layout-payment {
+    --oc-sidebar-background: var(--oc-primary-50);
     --oc-sidebar-menu-hover: var(--oc-primary-50-tr);
     --oc-sidebar-menu-active: var(--oc-primary-100);
+    --oc-sidebar-menu-active-text: var(--oc-primary-500);
   }
 
-  .layout-accent-1 {
-    --oc-sidebar-background: var(--oc-warning-50-tr);
+  .layout-pos {
+    --oc-sidebar-background: var(--oc-warning-50);
     --oc-sidebar-menu-hover: var(--oc-warning-50-tr);
     --oc-sidebar-menu-active: var(--oc-warning-100);
+    --oc-sidebar-menu-active-text: var(--oc-warning-500);
   }
 
-  .layout-accent-2 {
-    --oc-sidebar-background: var(--oc-success-50-tr);
+  .layout-online-store {
+    --oc-sidebar-background: var(--oc-success-50);
     --oc-sidebar-menu-hover: var(--oc-success-50-tr);
     --oc-sidebar-menu-active: var(--oc-success-100);
+    --oc-sidebar-menu-active-text: var(--oc-success-500);
   }
+
+
 
   @tailwind base;
 
@@ -176,7 +252,7 @@
     h6 {
       @apply text-xs;
     }
-    main {
+    body {
       @apply text-base;
     }
   }
@@ -184,3 +260,5 @@
   @tailwind components;
   @tailwind utilities;
   
+
+
