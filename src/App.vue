@@ -30,16 +30,28 @@
         <Chip label="warning" variant="warning" />
         <Chip label="error" variant="error" />
       </div>
+      <div class="flex justify-end flex-wrap gap-3">
+        <Shackbar v-bind="snackbarArgs"/>
+        <Shackbar v-bind="snackbarArgs" color="primary"/>
+        <Shackbar v-bind="snackbarArgs" color="error"/>
+        <Shackbar v-bind="snackbarArgs" color="warning"/>
+        <Shackbar v-bind="snackbarArgs" color="grey"/>
+      </div>
     </section>
     <section class="w-full md:w-1/3 bg-oc-primary-100 rounded p-4">
       <!-- Theme settings -->
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde necessitatibus sunt deleniti ut provident tenetur, blanditiis totam ducimus id consectetur harum veritatis quaerat assumenda quo at officiis quae! Eveniet, vitae!
+     
     </section>
   </main>
 </template>
 
 <script setup>
-import {  Accordion, Button, Chip } from "@orchid";
+import {  Accordion, Button, Chip, Shackbar } from "@orchid";
 import { ref } from 'vue'
 let isOpen = ref(false);
+let snackbarArgs =  {
+    showIcon: true,
+    icon: "filled-check",
+    content: "Changes have been successfully saved",
+  }
 </script>
