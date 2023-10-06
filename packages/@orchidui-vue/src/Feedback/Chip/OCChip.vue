@@ -1,5 +1,5 @@
 <template>
-  <span class="rounded-full py-1 px-2 text-xs" :class="className">
+  <span class="rounded-full py-2 px-4 text-xs" :class="className">
     <template v-if="label">{{ label }}</template>
     <slot v-else />
   </span>
@@ -8,36 +8,33 @@
 import { computed } from "vue";
 
 const props = defineProps({
-  color: {
+  variant: {
     type: String,
-    default: 'blue'
+    default: ''
   },
   label: String
 });
 
 const className = computed(() => {
   let className = "";
-  switch (props.color) {
-    case "purple":
-      className = "bg-oc-purple-50 text-oc-purple ";
+  switch (props.variant) {
+    case "accent-1":
+      className = "bg-oc-accent-1-50 text-oc-accent-1 ";
       break;
-    case "orange":
-      className = "bg-oc-warning-50 text-oc-warning ";
+    case "accent-2":
+      className = "bg-oc-accent-2-50 text-oc-accent-2 ";
       break;
-    case "red":
-      className = "bg-oc-red-50 text-oc-red ";
-      break;
-    case "dark-blue":
-      className = "bg-oc-primary-50 text-oc-primary ";
-      break;
-    case "grey":
-      className = "bg-oc-grey-100 text-oc-grey-700 ";
-      break;
-    case "green":
+    case "success":
       className = "bg-oc-success-50 text-oc-success ";
       break;
+    case "warning":
+      className = "bg-oc-warning-50 text-oc-warning ";
+      break;
+    case "error":
+      className = "bg-oc-error-50 text-oc-error ";
+      break;
     default:
-      className = "bg-oc-blue-50 text-oc-blue ";
+      className = "bg-oc-primary-50 text-oc-primary ";
       break;
   }
   return className;

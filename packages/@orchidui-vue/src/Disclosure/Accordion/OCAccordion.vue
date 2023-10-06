@@ -62,8 +62,8 @@ watch(() => props.isExpandable, changeAccordionHeight);
         class="bg-oc-primary-50 py-3 text-sm border relative z-10 justify-between px-4 gap-x-3 flex hover:border-oc-grey-200 items-center w-full text-oc-text"
         :class="
           isExpandable
-            ? 'rounded-t-lg border-oc-grey-200'
-            : 'rounded-lg border-transparent'
+            ? 'rounded-t border-oc-grey-200'
+            : 'rounded border-transparent'
         "
         @click="
           !props.isDisabled
@@ -90,7 +90,7 @@ watch(() => props.isExpandable, changeAccordionHeight);
       >
         <DisclosurePanel
           static
-          class="text-oc-text text-sm p-4 rounded-b-lg relative z-0 border-x border-b"
+          class="text-oc-text text-sm p-4 rounded-b relative z-0 border-x border-b"
           :class="isExpandable ? 'border-oc-grey-200' : ' border-transparent'"
         >
           <slot name="body">{{ body }}</slot>
