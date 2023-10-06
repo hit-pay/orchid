@@ -10,26 +10,12 @@ export const VariantColor = {
     components: { Chip },
     template: `
       <div class="flex gap-3 items-center light-mode mb-3">
-       <Chip label="text" />
-       <Chip label="text" color="purple" />
-       <Chip label="text" color="orange" />
-       <Chip label="text" color="red" />
-       <Chip label="text" color="dark-blue" />
-       <Chip label="text" color="grey" />
-       <Chip label="text" color="green" />
-      </div>
-    `,
-  }),
-};
-
-export const Example = {
-  render: () => ({
-    components: { Chip },
-    template: `
-      <div class="flex gap-3 items-center light-mode mb-3">
-       <Chip label="Owner" />
-       <Chip label="Admin" color="purple" />
-       <Chip label="Cashier" color="green" />
+       <Chip label="Primary" />
+       <Chip label="Accent 1" variant="accent-1" />
+       <Chip label="Accent 2" variant="accent-2" />
+       <Chip label="success" variant="success" />
+       <Chip label="warning" variant="warning" />
+       <Chip label="error" variant="error" />
       </div>
     `,
   }),

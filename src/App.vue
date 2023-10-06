@@ -1,25 +1,57 @@
 <template>
-  <main
-    data-theme="light"
-    class="w-screen h-screen flex items-center content-center justify-center flex-wrap gap-3"
-  >
-    <h1 class="w-full p-2 text-center font-bold">Orchid UI Playground</h1>
-
-    <div class="flex gap-3 items-center">
-      <Button label="Button" />
-      <Chip label="Chip" />
-    </div>
-    <div class="w-full flex justify-center gap-3">
-      <Dropdown />
-      <Accordion header="Header" body="body"/>
-    </div>
-
-    <div class="w-full text-center mt-3">
-      <a href="/docs" class="text-oc-primary"> Documentation </a>
-    </div>
+  <main class="flex flex-wrap container mx-auto mt-3">
+    <section class="grid gap-3 p-8 bg-oc-bg-dark rounded w-full md:w-2/3">
+      <h1 class="flex justify-end font-bold mb-3">Orchid UI Playground</h1>
+      <div class="flex justify-end mb-3 gap-3">
+        <a href="/docs" class="text-oc-primary"> Documentation </a> /
+        <a href="https://storybook-orchidui.vercel.app/" class="text-oc-primary"> Storybook </a>
+      </div>
+      <!-- DEMO COMPONENT -->
+      <div class="flex justify-end">
+        <Accordion v-model:isExpandable="isOpen" header="Header Accordion" body="Lorem ipsum dolor sit amet, consectetur "/>
+      </div>
+      <div class="flex justify-end gap-3">
+        <Button left-icon="x"/>
+        <Button left-icon="x" right-icon="circle" label="Button Text"/>
+        <Button label="Button Text" is-disabled/>
+        <Button label="Button Text" is-loading/>
+        <Button label="Button Text" is-transparent/>
+      </div>
+      <div class="flex justify-end gap-3">
+        <Button  left-icon="circle" label="Button Text" />
+        <Button  left-icon="circle" label="Button Text" variant="secondary" />
+        <Button  left-icon="circle" label="Button Text" variant="destructive" />
+      </div>
+      <div class="flex justify-end">
+        <Chip label="Primary" />
+        <Chip label="Accent 1" variant="accent-1" />
+        <Chip label="Accent 2" variant="accent-2" />
+        <Chip label="success" variant="success" />
+        <Chip label="warning" variant="warning" />
+        <Chip label="error" variant="error" />
+      </div>
+      <div class="flex justify-end flex-wrap gap-3">
+        <Shackbar v-bind="snackbarArgs"/>
+        <Shackbar v-bind="snackbarArgs" color="primary"/>
+        <Shackbar v-bind="snackbarArgs" color="error"/>
+        <Shackbar v-bind="snackbarArgs" color="warning"/>
+        <Shackbar v-bind="snackbarArgs" color="grey"/>
+      </div>
+    </section>
+    <section class="w-full md:w-1/3 bg-oc-primary-100 rounded p-4">
+      <!-- Theme settings -->
+     
+    </section>
   </main>
 </template>
 
 <script setup>
-import { Button, Chip, Dropdown, Accordion } from "@orchidui/vue";
+import {  Accordion, Button, Chip, Shackbar } from "@orchid";
+import { ref } from 'vue'
+let isOpen = ref(false);
+let snackbarArgs =  {
+    showIcon: true,
+    icon: "filled-check",
+    content: "Changes have been successfully saved",
+  }
 </script>

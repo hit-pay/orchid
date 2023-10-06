@@ -1,6 +1,6 @@
 <template>
   <button
-    class="oc-btn overflow-hidden rounded-lg relative font-medium gap-x-3 flex items-center"
+    class="oc-btn overflow-hidden rounded relative font-medium gap-x-3 flex items-center"
     :disabled="isDisabled || isLoading"
     :class="[buttonTypeClasses[variant], buttonSizeClasses[size]]"
   >
@@ -47,8 +47,8 @@ const isIconOnly = computed(
 
 const buttonTypeClasses = computed(() => ({
   primary: !props.isTransparent
-    ? "border border-oc-blue oc-btn-primary text-white"
-    : "text-oc-blue hover:text-oc-blue-400 active:text-oc-blue",
+    ? "border border-oc-primary oc-btn-primary text-white"
+    : "text-oc-primary hover:text-oc-primary-400 active:text-oc-primary",
   secondary: !props.isTransparent
     ? "border border-oc-grey text-oc-text-400 oc-btn-secondary"
     : "text-oc-text-400 hover:text-oc-text-500 active:text-oc-text-400",

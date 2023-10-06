@@ -12,6 +12,13 @@ const config = {
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
   ],
+  parameters: {
+    backgrounds: {
+      default: '',
+      values: [
+      ],
+    },
+  },
   framework: {
     name: "@storybook/vue3-vite",
     options: {},
