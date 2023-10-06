@@ -34,7 +34,7 @@ export const Accordion = {
       return { isOpen, args };
     },
     template: `
-          <OCTheme colorMode="light" group="payment">
+          <OCTheme colorMode="light">
             <OCAccordion
                 v-model:isExpandable="isOpen"
                 :header="args.header"

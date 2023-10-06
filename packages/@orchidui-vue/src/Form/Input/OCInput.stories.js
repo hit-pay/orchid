@@ -24,7 +24,7 @@ export const Default = {
       return { args };
     },
     template: `
-          <Theme colorMode="light" group="payment">
+          <Theme colorMode="light">
             <Input v-bind="args"/>
           </Theme>
         `,
@@ -51,7 +51,7 @@ export const Example = {
       return { args };
     },
     template: `
-          <Theme colorMode="light" group="payment">
+          <Theme colorMode="light" >
             <Input v-bind="args"/>
           </Theme>
         `,
@@ -66,7 +66,7 @@ export const MainComponent = {
       return { text };
     },
     template: `
-          <Theme colorMode="light" group="payment">
+          <Theme colorMode="light" >
             <div class="flex flex-col gap-y-4">
               <div class="flex items-end gap-x-4">
                 <Input label="Label"/>
@@ -88,7 +88,7 @@ export const LeadingTrailing = {
   render: () => ({
     components: { Theme, Input },
     template: `
-          <Theme colorMode="light" group="payment">
+          <Theme colorMode="light">
             <div class="flex flex-col gap-y-4">
               <div class="flex items-end gap-x-4">
                 <Input hint="This is a hint text to help user" type="trailing"/>
