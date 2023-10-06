@@ -2,7 +2,11 @@
   <button
     class="oc-btn overflow-hidden relative font-medium gap-x-3 flex items-center"
     :disabled="isDisabled || isLoading"
-    :class="[buttonTypeClasses[variant], buttonSizeClasses[size], roundedClasses]"
+    :class="[
+      buttonTypeClasses[variant],
+      buttonSizeClasses[size],
+      roundedClasses,
+    ]"
   >
     <Icon v-if="isLoading" name="loading-2" />
 
@@ -71,43 +75,11 @@ const buttonSizeClasses = computed(() => ({
       : "h-[44px] py-3 px-[14px]"
     : " py-3 h-[44px]",
 }));
-const roundedClasses = props.isRoundedFull ? 'rounded-full' : 'rounded';
-
+const roundedClasses = props.isRoundedFull ? "rounded-full" : "rounded";
 </script>
 <style scoped lang="scss">
 .oc-btn {
   @apply disabled:pointer-events-none;
-
-  --button-primary-default: linear-gradient(180deg, #4179e2 0%, #1f5bcc 100%);
-  --button-primary-hover: linear-gradient(180deg, #4179e2 0%, #2f6ddf 100%);
-  --button-primary-pressed: linear-gradient(180deg, #3873e1 0%, #4179e2 100%);
-  --button-primary-disabled: linear-gradient(180deg, #567fcd 0%, #3662b5 100%);
-
-  --button-secondary-default: linear-gradient(180deg, #fff 0%, #f2f2f2 100%);
-  --button-secondary-hover: linear-gradient(180deg, #fff 0%, #fafafa 100%);
-  --button-secondary-pressed: linear-gradient(180deg, #fafafa 0%, #fff 100%);
-  --button-secondary-disabled: linear-gradient(
-    180deg,
-    #fcfcfc 0%,
-    #f7f7f7 100%
-  );
-
-  --button-destructive-default: linear-gradient(
-    180deg,
-    #e44e5c 0%,
-    #cc2334 100%
-  );
-  --button-destructive-hover: linear-gradient(180deg, #e44e5c 0%, #dc3747 100%);
-  --button-destructive-pressed: linear-gradient(
-    180deg,
-    #dc3747 0%,
-    #e44e5c 100%
-  );
-  --button-destructive-disabled: linear-gradient(
-    180deg,
-    #c66c75 0%,
-    #a84851 100%
-  );
 
   &:disabled > * {
     @apply opacity-50;
@@ -116,7 +88,8 @@ const roundedClasses = props.isRoundedFull ? 'rounded-full' : 'rounded';
   &-primary {
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
     background: var(--button-primary-default);
-    @apply shadow-[0_1.5px_0_0_#2465de];
+    box-shadow: 0 1.5px 0 0 var(--oc-primary-500);
+
     &:hover {
       background: var(--button-primary-hover);
     }
@@ -153,7 +126,8 @@ const roundedClasses = props.isRoundedFull ? 'rounded-full' : 'rounded';
   &-error {
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
     background: var(--button-destructive-default);
-    @apply shadow-[0_1.5px_0_0_#dc3545];
+    box-shadow: 0 1.5px 0 0 var(--oc-error-500);
+
     &:hover {
       background: var(--button-destructive-hover);
     }

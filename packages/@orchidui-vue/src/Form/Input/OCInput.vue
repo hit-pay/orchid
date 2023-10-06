@@ -1,13 +1,10 @@
 <script setup>
-import { defineAsyncComponent, ref, defineModel } from "vue";
-import { MenuButton } from "@headlessui/vue";
+import { defineAsyncComponent, ref } from "vue";
 
 const Icon = defineAsyncComponent(() =>
   import("../../MediaAndIcons/Icon/OCIcon.vue"),
 );
-const Dropdown = defineAsyncComponent(() =>
-  import("../../Overlay/Dropdown/OCDropdown.vue"),
-);
+
 const isFocused = ref(false);
 defineProps({
   disabled: {
@@ -63,7 +60,7 @@ defineEmits({
 
     <!--  Input wrapper  -->
     <div
-      class="rounded-lg h-[36px] border flex items-center gap-x-3 px-3"
+      class="rounded h-[36px] border flex items-center gap-x-3 px-3"
       :class="[
         {
           'shadow-[0_0_0_2px]': isFocused,
@@ -74,18 +71,7 @@ defineEmits({
         disabled ? 'bg-oc-bg-dark pointer-events-none' : 'bg-white',
       ]"
     >
-      <slot v-if="type === 'trailing'" name="trailing">
-        <Dropdown>
-          <template #trigger>
-            <MenuButton
-              class="py-3 pr-3 border-r border-oc-grey-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
-            >
-              <span class="flex items-center h-[18px]">USD</span>
-              <Icon class="w-[14px] h-[14px]" name="chevron-down" />
-            </MenuButton>
-          </template>
-        </Dropdown>
-      </slot>
+      <slot v-if="type === 'trailing'" name="trailing" />
 
       <div v-if="icon">
         <Icon class="w-4 h-4 text-oc-text-400" :name="icon" />
@@ -105,18 +91,7 @@ defineEmits({
         />
       </div>
 
-      <slot v-if="type === 'leading'" name="leading">
-        <Dropdown>
-          <template #trigger>
-            <MenuButton
-              class="py-3 pl-3 border-l border-oc-grey-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
-            >
-              <span class="flex items-center h-[18px]">USD</span>
-              <Icon class="w-[14px] h-[14px]" name="chevron-down" />
-            </MenuButton>
-          </template>
-        </Dropdown>
-      </slot>
+      <slot v-if="type === 'leading'" name="leading" />
     </div>
 
     <!--  Hint  -->
