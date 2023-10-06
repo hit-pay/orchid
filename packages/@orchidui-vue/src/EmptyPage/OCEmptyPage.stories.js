@@ -10,7 +10,7 @@ export const Default = {
   render: () => ({
     components: { OCEmptyPage, Theme },
     template: `
-          <Theme colorMode="light" group="payment">
+          <Theme colorMode="light">
             <OCEmptyPage/>
           </Theme>
         `,

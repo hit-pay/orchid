@@ -1,8 +1,8 @@
 <template>
   <button
-    class="oc-btn overflow-hidden rounded relative font-medium gap-x-3 flex items-center"
+    class="oc-btn overflow-hidden relative font-medium gap-x-3 flex items-center"
     :disabled="isDisabled || isLoading"
-    :class="[buttonTypeClasses[variant], buttonSizeClasses[size]]"
+    :class="[buttonTypeClasses[variant], buttonSizeClasses[size], roundedClasses]"
   >
     <Icon v-if="isLoading" name="loading-2" />
 
@@ -32,6 +32,7 @@ const props = defineProps({
   rightIcon: String,
   isTransparent: Boolean,
   isShortcut: Boolean,
+  isRoundedFull: Boolean,
   variant: {
     type: String,
     default: "primary",
@@ -70,6 +71,8 @@ const buttonSizeClasses = computed(() => ({
       : "h-[44px] py-3 px-[14px]"
     : " py-3 h-[44px]",
 }));
+const roundedClasses = props.isRoundedFull ? 'rounded-full' : 'rounded';
+
 </script>
 <style scoped lang="scss">
 .oc-btn {

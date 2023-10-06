@@ -10,7 +10,7 @@ export const Default = {
   render: () => ({
     components: { Dropdown, Theme },
     template: `
-          <Theme colorMode="light" group="payment">
+          <Theme colorMode="light">
             <Dropdown/>
           </Theme>
         `,

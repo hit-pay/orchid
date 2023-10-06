@@ -1,3 +1,4 @@
+export * from "./Theme/OcTheme";
 export * from "./Form/Button/OCButton";
 export * from "./Feedback/Chip/OCChip";
 export * from "./Overlay/Dropdown/OCDropdown";

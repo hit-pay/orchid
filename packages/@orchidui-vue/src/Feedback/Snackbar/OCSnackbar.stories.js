@@ -31,7 +31,7 @@ export const Default = {
       return { args };
     },
     template: `
-          <Theme colorMode="light" group="payment">
+          <Theme colorMode="light">
             <div class="flex flex-col gap-y-4">
               <Shackbar v-bind="args"/>
             </div>
@@ -51,7 +51,7 @@ export const Variants = {
       return { args };
     },
     template: `
-          <Theme colorMode="light" group="payment">
+          <Theme colorMode="light">
             <div class="flex flex-col gap-y-4">
               <Shackbar v-bind="args"/>
               <Shackbar v-bind="args" color="primary"/>

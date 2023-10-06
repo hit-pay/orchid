@@ -1,5 +1,5 @@
 <template>
-  <main :data-theme="colorMode">
+  <main :class="(colorMode === 'dark') ? 'dark-mode': ''">
     <slot />
   </main>
 </template>

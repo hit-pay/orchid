@@ -32,6 +32,7 @@ export const Default = {
     isDisabled: false,
     isLoading: false,
     isTransparent: false,
+    isRounded: false,
     variant: "primary",
     size: "default",
   },
@@ -41,7 +42,7 @@ export const Default = {
       return { args };
     },
     template: `
-          <Theme colorMode="light" group="payment">
+          <Theme colorMode="light">
             <div class="flex gap-3 items-center  mb-3">
               <Button
                   :label="args.label"
@@ -63,7 +64,7 @@ export const SizeVariant = {
   render: () => ({
     components: { Button, Theme },
     template: `
-          <Theme colorMode="light" group="payment">
+          <Theme colorMode="light" >
 
             <div class="flex gap-3 items-center  mb-3">
               <Button size="small" label="Button Text"/>
@@ -90,7 +91,7 @@ export const ButtonVariant = {
   render: () => ({
     components: { Button, Theme },
     template: `
-          <Theme colorMode="light" group="payment">
+          <Theme colorMode="light">
             <div class="flex gap-3 items-center  mb-3">
               <Button left-icon="x"/>
               <Button left-icon="x" rightIcon="circle" label="Button Text"/>
