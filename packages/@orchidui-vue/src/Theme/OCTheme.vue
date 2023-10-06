@@ -8,11 +8,6 @@ defineProps({
   colorMode: {
     type: String,
     default: "light",
-  },
-  // TODO : customize variable for storefront
-  variables: {
-    type: String,
-    default: '',
   }
 });
 </script>
