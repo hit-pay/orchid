@@ -8,11 +8,11 @@ export default {
 
 export const Default = {
   argTypes: {
-    icon: {
+    leftIcon: {
       control: "select",
       options: ["", "circle"],
     },
-    iconAfter: {
+    rightIcon: {
       control: "select",
       options: ["", "plus"],
     },
@@ -27,8 +27,8 @@ export const Default = {
   },
   args: {
     label: "Button Text",
-    icon: "",
-    iconAfter: "",
+    leftIcon: "",
+    rightIcon: "",
     isDisabled: false,
     isLoading: false,
     isTransparent: false,
@@ -46,8 +46,8 @@ export const Default = {
             <div class="flex gap-3 items-center  mb-3">
               <Button
                   :label="args.label"
-                  :left-icon="args.icon"
-                  :rightIcon="args.iconAfter"
+                  :left-icon="args.leftIcon"
+                  :rightIcon="args.rightIcon"
                   :isDisabled="args.isDisabled"
                   :isLoading="args.isLoading"
                   :variant="args.variant"

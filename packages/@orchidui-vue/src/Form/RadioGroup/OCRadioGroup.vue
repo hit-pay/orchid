@@ -1,0 +1,45 @@
+<script setup>
+import { computed, defineAsyncComponent } from "vue";
+
+const Radio = defineAsyncComponent(() => import("../Radio/OCRadio.vue"));
+
+defineProps({
+  alignment: {
+    type: String,
+    default: "vertical",
+  },
+  radio: Array,
+  label: String,
+  groupName: String,
+  modelValue: String,
+});
+const emit = defineEmits({
+  "update:modelValue": [],
+});
+const alignmentClasses = computed(() => ({
+  horizontal: "gap-x-5",
+  vertical: "flex-col gap-y-3",
+}));
+const onInput = (value) => {
+  emit("update:modelValue", value);
+};
+</script>
+
+<template>
+  <div class="flex flex-col gap-y-3">
+    <span class="text-sm text-oc-text-400 leading-[18px]">{{ label }}</span>
+    <div class="flex" :class="alignmentClasses[alignment]">
+      <Radio
+        v-for="(r, i) in radio"
+        :id="r.value"
+        :key="i"
+        :model-value="r.value"
+        :label="r.label"
+        :is-error="r.isError"
+        :disabled="r.disabled"
+        :group-name="groupName"
+        @update:model-value="onInput"
+      />
+    </div>
+  </div>
+</template>

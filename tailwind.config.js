@@ -3,58 +3,74 @@ module.exports = {
   content: [
     "./packages/@orchidui-vue/src/**/*.{vue,js,ts,jsx,tsx}",
     "./node_modules/@orchidui/vue/dist/**/*.js",
-    "./src/**/*.{vue,js,ts,jsx,tsx}"
+    "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
   theme: {
     fontSize: {
-      'xs': ['0.625rem', {
-        lineHeight: '1.5rem',
-        // letterSpacing: '-0.01em',
-      }],
-      'sm': ['0.75rem', {
-        lineHeight: '1.5rem',
-      }],
-      'base': ['0.875rem', {
-        lineHeight: '1.5rem',
-      }],
-      'lg': ['1rem', {
-        lineHeight: '1.4rem',
-      }],
-      'xl': ['1.125rem', {
-        lineHeight: '1.35rem',
-      }],
+      xs: [
+        "0.625rem",
+        {
+          lineHeight: "1.5rem",
+          // letterSpacing: '-0.01em',
+        },
+      ],
+      sm: [
+        "0.75rem",
+        {
+          lineHeight: "1.5rem",
+        },
+      ],
+      base: [
+        "0.875rem",
+        {
+          lineHeight: "1.5rem",
+        },
+      ],
+      lg: [
+        "1rem",
+        {
+          lineHeight: "1.4rem",
+        },
+      ],
+      xl: [
+        "1.125rem",
+        {
+          lineHeight: "1.35rem",
+        },
+      ],
     },
     screens: {
-      sm: '480px',
-      md: '768px',
-      lg: '976px',
-      xl: '1440px',
+      sm: "480px",
+      md: "768px",
+      lg: "976px",
+      xl: "1440px",
     },
     spacing: {
-      0: '0',
-      1: '0.125rem',
-      2: '0.25rem',
-      3: '0.5rem',
-      4: '.75rem',
-      5: '1rem',
-      6: '1.25rem',
-      7: '1.5rem',
-      8: '1.75rem',
-      9: '2rem',
-      10: '2.5rem',
+      0: "0",
+      1: "0.125rem",
+      2: "0.25rem",
+      3: "0.5rem",
+      4: ".75rem",
+      5: "1rem",
+      6: "1.25rem",
+      7: "1.5rem",
+      8: "1.75rem",
+      9: "2rem",
+      10: "2.5rem",
     },
     borderRadius: {
-      DEFAULT: 'var(--oc-border-md)',
-      'xs': 'var(--oc-border-xs)',
-      'sm': 'var(--oc-border-sm)',
-      'md': 'var(--oc-border-md)',
-      'lg': 'var(--oc-border-lg)',
-      'xl': 'var(--oc-border-xl)',
-      'full': 'var(--oc-border-full)',
+      DEFAULT: "var(--oc-border-md)",
+      xs: "var(--oc-border-xs)",
+      sm: "var(--oc-border-sm)",
+      md: "var(--oc-border-md)",
+      lg: "var(--oc-border-lg)",
+      xl: "var(--oc-border-xl)",
+      xxl: "var(--oc-border-xxl)",
+      full: "var(--oc-border-full)",
     },
     extend: {
       colors: {
-        // first to use this 
+        // first to use this
         "oc-text": {
           DEFAULT: "var(--oc-text-500)",
           "000": "var(--oc-text-000)",
@@ -68,7 +84,7 @@ module.exports = {
           dark: "var(--oc-background-dark)",
           light: "var(--oc-background-light)",
         },
-         // secondary to use this
+        // secondary to use this
         "oc-grey": {
           DEFAULT: "var(--oc-grey-100)",
           50: "var(--oc-grey-50)",
@@ -90,7 +106,7 @@ module.exports = {
           200: "var(--oc-primary-200)",
           300: "var(--oc-primary-300)",
           400: "var(--oc-primary-400)",
-          500: "var(--oc-primary-500)"
+          500: "var(--oc-primary-500)",
         },
         "oc-accent-1": {
           DEFAULT: "var(--oc-accent-1-500)",
@@ -142,7 +158,7 @@ module.exports = {
           400: "var(--oc-error-400)",
           500: "var(--oc-error-500)",
         },
-      }
+      },
     },
-  }
+  },
 };

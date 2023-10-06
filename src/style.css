@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');/* Variables  */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap'); /* Variables  */
 :root {
     --hitpay-color: #002771;
 
@@ -50,9 +50,9 @@
     --oc-error-300: #dc797a;
     --oc-error-400: #d04d4d;
     --oc-error-500: #dc3545;
-  
+
     /* Background Color */
-    --oc-grey-10: #f8f9fc; 
+    --oc-grey-10: #f8f9fc;
     --oc-grey-50: #fcfcfd;
     --oc-grey-100: #f2f2f4;
     --oc-grey-200: #e5e6ea;
@@ -66,13 +66,13 @@
     --oc-grey-900: #03102f;
 
 
-    --oc-contrast-black: #000000; 
+    --oc-contrast-black: #000000;
     --oc-contrast-white: #ffffff;
 
-  }
+}
 
-  /* EXPERIMENTAL */
-  .dark-mode{
+/* EXPERIMENTAL */
+.dark-mode {
     --oc-blue-500: #60a5fa;
     --oc-blue-400: #3b82f6;
     --oc-blue-300: #2563eb;
@@ -120,9 +120,9 @@
     --oc-error-100: #991b1b;
     --oc-error-50: #7f1d1d;
     --oc-error-50-tr: #450a0a;
-  
+
     /* Background Color */
-    --oc-grey-900: #f8fafc; 
+    --oc-grey-900: #f8fafc;
     --oc-grey-800: #f1f5f9;
     --oc-grey-700: #e2e8f0;
     --oc-grey-600: #cbd5e1;
@@ -136,14 +136,14 @@
     --oc-grey-10: #020617;
 
 
-    --oc-contrast-black: #ffffff; 
+    --oc-contrast-black: #ffffff;
     --oc-contrast-white: #000000;
 
-  }
+}
 
 
-  main{
-    
+main {
+
     /* PLEASE USE THIS VARIABLE FIRST */
     --oc-text-000: var(--oc-contrast-white); /* if dark mode use --oc-contrast-black */
     --oc-text-200: var(--oc-grey-300);
@@ -152,7 +152,7 @@
     --oc-text-500: var(--oc-grey-900);
 
     --oc-background-dark: var(--oc-grey-10);
-    --oc-background-light: var(--oc-contrast-white);  /* if dark mode use --oc-contrast-black */
+    --oc-background-light: var(--oc-contrast-white); /* if dark mode use --oc-contrast-black */
 
     /* RENAME Variables */
     /* background light blue to background dark */
@@ -188,9 +188,10 @@
 
     --oc-border-xs: .125rem;
     --oc-border-sm: .25rem;
-    --oc-border-md: .75rem;
-    --oc-border-lg: 1rem;
-    --oc-border-xl: 1.25rem;
+    --oc-border-md: .5rem;
+    --oc-border-lg: .75rem;
+    --oc-border-xl: 1rem;
+    --oc-border-xxl: 1.25rem;
 
     /* uncommend if used */
     /* --oc-border-2xl: 1.5rem;
@@ -202,63 +203,102 @@
 
     color: var(--oc-text-500);
     background-color: var(--oc-background-light);
-  }
+
+    /*  Buttons gradients  */
+    --button-primary-default: linear-gradient(180deg, #4179e2 0%, #1f5bcc 100%);
+    --button-primary-hover: linear-gradient(180deg, #4179e2 0%, #2f6ddf 100%);
+    --button-primary-pressed: linear-gradient(180deg, #3873e1 0%, #4179e2 100%);
+    --button-primary-disabled: linear-gradient(180deg, #567fcd 0%, #3662b5 100%);
+
+    --button-secondary-default: linear-gradient(180deg, #fff 0%, #f2f2f2 100%);
+    --button-secondary-hover: linear-gradient(180deg, #fff 0%, #fafafa 100%);
+    --button-secondary-pressed: linear-gradient(180deg, #fafafa 0%, #fff 100%);
+    --button-secondary-disabled: linear-gradient(
+            180deg,
+            #fcfcfc 0%,
+            #f7f7f7 100%
+    );
+
+    --button-destructive-default: linear-gradient(
+            180deg,
+            #e44e5c 0%,
+            #cc2334 100%
+    );
+    --button-destructive-hover: linear-gradient(180deg, #e44e5c 0%, #dc3747 100%);
+    --button-destructive-pressed: linear-gradient(
+            180deg,
+            #dc3747 0%,
+            #e44e5c 100%
+    );
+    --button-destructive-disabled: linear-gradient(
+            180deg,
+            #c66c75 0%,
+            #a84851 100%
+    );
+}
 
 
-  .layout-payment {
+.layout-payment {
     --oc-sidebar-background: var(--oc-primary-50);
     --oc-sidebar-menu-hover: var(--oc-primary-50-tr);
     --oc-sidebar-menu-active: var(--oc-primary-100);
     --oc-sidebar-menu-active-text: var(--oc-primary-500);
-  }
+}
 
-  .layout-pos {
+.layout-pos {
     --oc-sidebar-background: var(--oc-warning-50);
     --oc-sidebar-menu-hover: var(--oc-warning-50-tr);
     --oc-sidebar-menu-active: var(--oc-warning-100);
     --oc-sidebar-menu-active-text: var(--oc-warning-500);
-  }
+}
 
-  .layout-online-store {
+.layout-online-store {
     --oc-sidebar-background: var(--oc-success-50);
     --oc-sidebar-menu-hover: var(--oc-success-50-tr);
     --oc-sidebar-menu-active: var(--oc-success-100);
     --oc-sidebar-menu-active-text: var(--oc-success-500);
-  }
+}
 
 
-  /* CHANGE PRIMARY COLOR */
-  @tailwind base;
+/* CHANGE PRIMARY COLOR */
+@tailwind base;
 
-  @layer base {
-    main{
-      font-family: 'Inter', sans-serif;
+@layer base {
+    main {
+        font-family: 'Inter', sans-serif;
     }
+
     h1 {
-      @apply text-xl;
+        @apply text-xl;
     }
+
     h2 {
-      @apply text-lg;
+        @apply text-lg;
     }
+
     h3 {
-      @apply text-base;
+        @apply text-base;
     }
+
     h4 {
-      @apply text-sm;
+        @apply text-sm;
     }
+
     h5 {
-      @apply text-xs;
+        @apply text-xs;
     }
+
     h6 {
-      @apply text-xs;
+        @apply text-xs;
     }
+
     body {
-      @apply text-base;
+        @apply text-base;
     }
-  }
-  
-  @tailwind components;
-  @tailwind utilities;
+}
+
+@tailwind components;
+@tailwind utilities;
   
 
 
