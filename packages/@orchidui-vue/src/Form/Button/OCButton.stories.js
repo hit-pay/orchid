@@ -16,19 +16,24 @@ export const Default = {
       control: "select",
       options: ["", "plus"],
     },
+    variant: {
+      control: "select",
+      options: ["primary", "secondary", "destructive"],
+    },
+    size: {
+      control: "select",
+      options: ["default", "small", "big"],
+    },
   },
   args: {
     label: "Button Text",
     icon: "",
     iconAfter: "",
-    isSmall: false,
-    isLarge: false,
-    isSecondary: false,
-    isDestructive: false,
     isDisabled: false,
     isLoading: false,
-    isRounded: false,
-    isText: false,
+    isTransparent: false,
+    variant: "primary",
+    size: "default",
   },
   render: (args) => ({
     components: { Button, Theme },
@@ -40,16 +45,13 @@ export const Default = {
             <div class="flex gap-3 items-center  mb-3">
               <Button
                   :label="args.label"
-                  :isSmall="args.isSmall"
-                  :isLarge="args.isLarge"
-                  :icon="args.icon"
-                  :iconAfter="args.iconAfter"
-                  :isSecondary="args.isSecondary"
-                  :isDestructive="args.isDestructive"
+                  :left-icon="args.icon"
+                  :rightIcon="args.iconAfter"
                   :isDisabled="args.isDisabled"
                   :isLoading="args.isLoading"
-                  :isRounded="args.isRounded"
-                  :isText="args.isText"
+                  :variant="args.variant"
+                  :size="args.size"
+                  :isTransparent="args.isTransparent"
               />
             </div>
           </Theme>
@@ -64,20 +66,20 @@ export const SizeVariant = {
           <Theme colorMode="light" group="payment">
 
             <div class="flex gap-3 items-center  mb-3">
-              <Button isSmall label="Button Text"/>
+              <Button size="small" label="Button Text"/>
               <Button label="Button Text"/>
-              <Button isLarge label="Button Text"/>
+              <Button size="big" label="Button Text"/>
             </div>
 
             <div class="flex gap-3 items-center  mb-3">
-              <Button isSmall isSecondary label="Button Text"/>
-              <Button isSecondary label="Button Text"/>
-              <Button isLarge isSecondary label="Button Text"/>
+              <Button size="small" variant="secondary" label="Button Text"/>
+              <Button variant="secondary" label="Button Text"/>
+              <Button size="big" variant="secondary" label="Button Text"/>
             </div>
             <div class="flex gap-3 items-center  mb-3">
-              <Button isSmall isDestructive label="Button Text"/>
-              <Button isDestructive label="Button Text"/>
-              <Button isLarge isDestructive label="Button Text"/>
+              <Button size="small" variant="destructive" label="Button Text"/>
+              <Button variant="destructive" label="Button Text"/>
+              <Button size="big" variant="destructive" label="Button Text"/>
             </div>
           </Theme>
         `,
@@ -90,28 +92,25 @@ export const ButtonVariant = {
     template: `
           <Theme colorMode="light" group="payment">
             <div class="flex gap-3 items-center  mb-3">
-              <Button icon="x"/>
-              <Button icon="x" isRounded/>
-              <Button icon="x" iconAfter="circle" label="Button Text"/>
+              <Button left-icon="x"/>
+              <Button left-icon="x" rightIcon="circle" label="Button Text"/>
               <Button label="Button Text" isDisabled/>
               <Button label="Button Text" isLoading/>
-              <Button label="Button Text" isText/>
+              <Button label="Button Text" isTransparent/>
             </div>
             <div class="flex gap-3 items-center  mb-3">
-              <Button isSecondary icon="x"/>
-              <Button isSecondary icon="x" isRounded/>
-              <Button isSecondary icon="x" iconAfter="circle" label="Button Text"/>
-              <Button isSecondary label="Button Text" isDisabled/>
-              <Button isSecondary label="Button Text" isLoading/>
-              <Button isSecondary label="Button Text" isText/>
+              <Button variant="secondary" left-icon="x"/>
+              <Button variant="secondary" left-icon="x" rightIcon="circle" label="Button Text"/>
+              <Button variant="secondary" label="Button Text" isDisabled/>
+              <Button variant="secondary" label="Button Text" isLoading/>
+              <Button variant="secondary" label="Button Text" isTransparent/>
             </div>
             <div class="flex gap-3 items-center  mb-3">
-              <Button isDestructive icon="x"/>
-              <Button isDestructive icon="x" isRounded/>
-              <Button isDestructive icon="x" iconAfter="circle" label="Button Text"/>
-              <Button isDestructive label="Button Text" isDisabled/>
-              <Button isDestructive label="Button Text" isLoading/>
-              <Button isDestructive label="Button Text" isText/>
+              <Button variant="destructive" left-icon="x"/>
+              <Button variant="destructive" left-icon="x" rightIcon="circle" label="Button Text"/>
+              <Button variant="destructive" label="Button Text" isDisabled/>
+              <Button variant="destructive" label="Button Text" isLoading/>
+              <Button variant="destructive" label="Button Text" isTransparent/>
             </div>
           </Theme>
         `,
