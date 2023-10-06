@@ -1,8 +1,8 @@
-/* Variables  */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');/* Variables  */
 :root {
     --hitpay-color: #002771;
 
-    --oc-blue-50tr: #2465de1a;
+    --oc-blue-50-tr: #2465de1a;
     --oc-blue-50: #e5eeff;
     --oc-blue-100: #ccdefe;
     --oc-blue-200: #b3cdfe;
@@ -10,7 +10,7 @@
     --oc-blue-400: #4c8afd;
     --oc-blue-500: #2465de;
 
-    --oc-purple-50-tr: var(--blue-50-tr);
+    --oc-purple-50-tr: var(--oc-blue-50-tr);
     --oc-purple-50: #f7edfd;
     --oc-purple-100: #efdbfb;
     --oc-purple-200: #e8c9fa;
@@ -18,7 +18,7 @@
     --oc-purple-400: #c880f2;
     --oc-purple-500: #b14aed;
 
-    --oc-red-50tr: #ff6b6c1a;
+    --oc-red-50-tr: #ff6b6c1a;
     --oc-red-50: #fff0f0;
     --oc-red-100: #ffe1e2;
     --oc-red-200: #ffc4c4;
@@ -26,7 +26,7 @@
     --oc-red-400: #ff8989;
     --oc-red-500: #ff6b6c;
 
-    --oc-success-50tr: #4dab801a;
+    --oc-success-50-tr: #4dab801a;
     --oc-success-50: #e7f8f0;
     --oc-success-100: #d0f1e1;
     --oc-success-200: #b8e9d2;
@@ -34,7 +34,7 @@
     --oc-success-400: #59cc97;
     --oc-success-500: #4dab80;
 
-    --oc-warning-50tr: #f4b8401a;
+    --oc-warning-50-tr: #f4b8401a;
     --oc-warning-50: #fff9ec;
     --oc-warning-100: #fff3da;
     --oc-warning-200: #ffecc7;
@@ -43,7 +43,7 @@
     --oc-warning-500: #f4b840;
     --oc-warning-600: #eaa00c;
 
-    --oc-error-50tr: #c420211a;
+    --oc-error-50-tr: #c420211a;
     --oc-error-50: #f9e9e9;
     --oc-error-100: #f3d2d3;
     --oc-error-200: #e7a6a6;
@@ -88,7 +88,7 @@
 
     /* ACCENT COLOR */
 
-    --oc-primary-50tr: var(--oc-blue-50tr);
+    --oc-primary-50-tr: var(--oc-blue-50-tr);
     --oc-primary-50: var(--oc-blue-50);
     --oc-primary-100: var(--oc-blue-100);
     --oc-primary-200: var(--oc-blue-200);
@@ -134,9 +134,30 @@
     background-color: var(--oc-background-light);
   }
   
+  .layout-primary {
+    --oc-sidebar-background: var(--oc-primary-50-tr);
+    --oc-sidebar-menu-hover: var(--oc-primary-50-tr);
+    --oc-sidebar-menu-active: var(--oc-primary-100);
+  }
+
+  .layout-accent-1 {
+    --oc-sidebar-background: var(--oc-warning-50-tr);
+    --oc-sidebar-menu-hover: var(--oc-warning-50-tr);
+    --oc-sidebar-menu-active: var(--oc-warning-100);
+  }
+
+  .layout-accent-2 {
+    --oc-sidebar-background: var(--oc-success-50-tr);
+    --oc-sidebar-menu-hover: var(--oc-success-50-tr);
+    --oc-sidebar-menu-active: var(--oc-success-100);
+  }
+
   @tailwind base;
 
   @layer base {
+    main{
+      font-family: 'Inter', sans-serif;
+    }
     h1 {
       @apply text-xl;
     }

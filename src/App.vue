@@ -10,19 +10,17 @@
       <div class="flex justify-end">
         <Accordion v-model:isExpandable="isOpen" header="Header Accordion" body="Lorem ipsum dolor sit amet, consectetur "/>
       </div>
-      <div class="flex justify-end gap-3">
+      <div class="flex flex-wrap justify-end gap-3">
         <Button left-icon="x"/>
+        <Button left-icon="circle" is-rounded-full/>
         <Button left-icon="x" right-icon="circle" label="Button Text"/>
+        <Button  left-icon="circle" label="Button Text" variant="destructive" />
+        <Button  left-icon="circle" label="Button Text" variant="secondary" />
         <Button label="Button Text" is-disabled/>
         <Button label="Button Text" is-loading/>
         <Button label="Button Text" is-transparent/>
       </div>
-      <div class="flex justify-end gap-3">
-        <Button  left-icon="circle" label="Button Text" />
-        <Button  left-icon="circle" label="Button Text" variant="secondary" />
-        <Button  left-icon="circle" label="Button Text" variant="destructive" />
-      </div>
-      <div class="flex justify-end">
+      <div class="flex flex-wrap justify-end">
         <Chip label="Primary" />
         <Chip label="Accent 1" variant="accent-1" />
         <Chip label="Accent 2" variant="accent-2" />
@@ -40,7 +38,7 @@
     </section>
     <section class="w-full md:w-1/3 bg-oc-primary-100 rounded p-4">
       <!-- Theme settings -->
-     
+      Theme Settings
     </section>
   </main>
 </template>
