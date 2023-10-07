@@ -1,4 +1,5 @@
 import Chip from "./OCChip.vue";
+import Theme from "../../Theme/OCTheme.vue";
 
 export default {
   component: Chip,
@@ -7,16 +8,16 @@ export default {
 
 export const VariantColor = {
   render: () => ({
-    components: { Chip },
+    components: { Chip, Theme },
     template: `
-      <div class="flex gap-3 items-center light-mode mb-3">
-       <Chip label="Primary" />
-       <Chip label="Accent 1" variant="accent-1" />
-       <Chip label="Accent 2" variant="accent-2" />
-       <Chip label="success" variant="success" />
-       <Chip label="warning" variant="warning" />
-       <Chip label="error" variant="error" />
-      </div>
+       <Theme>
+        <Chip label="Primary" />
+        <Chip label="Accent 1" variant="accent-1" />
+        <Chip label="Accent 2" variant="accent-2" />
+        <Chip label="success" variant="success" />
+        <Chip label="warning" variant="warning" />
+        <Chip label="error" variant="error" />
+      </Theme>
     `,
   }),
 };
