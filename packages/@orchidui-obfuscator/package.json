@@ -1,16 +1,17 @@
 {
-  "name": "@orchidui/vue",
-  "version": "0.0.17",
+  "name": "@orchidui/css-obfuscator",
+  "version": "0.0.6",
   "type": "module",
   "scripts": {
+    "dev": "vite dev",
     "build": "vite build",
     "update-version": "npm version patch"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^4.2.3",
+    "@vitejs/plugin-vue": "^4.4.0",
     "fast-glob": "^3.3.1",
-    "sass": "^1.68.0",
-    "vite": "^4.4.5"
+    "vite": "^4.4.5",
+    "vue": "^3.3.4"
   },
   "publishConfig": {
     "access": "public"
@@ -18,15 +19,11 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hit-pay/orchid.git",
-    "directory": "packages/@orchidui-vue"
+    "directory": "packages/@orchidui/obfuscator"
   },
   "exports": {
     ".": {
       "import": "./dist/index.js"
-    },
-    "./dist/index.css": {
-      "import": "./dist/index.css",
-      "require": "./dist/index.css"
     }
   },
   "module": "./dist/index.js",

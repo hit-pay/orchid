@@ -1,7 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap'); /* Variables  */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+/* Variables  */
 :root {
     --hitpay-color: #002771;
-
+    
     --oc-blue-50-tr: #2465de1a;
     --oc-blue-50: #e5eeff;
     --oc-blue-100: #ccdefe;
@@ -145,14 +147,16 @@
 main {
 
     /* PLEASE USE THIS VARIABLE FIRST */
-    --oc-text-000: var(--oc-contrast-white); /* if dark mode use --oc-contrast-black */
+    --oc-text-000: var(--oc-contrast-white);
+    /* if dark mode use --oc-contrast-black */
     --oc-text-200: var(--oc-grey-300);
     --oc-text-300: var(--oc-grey-500);
     --oc-text-400: var(--oc-grey-600);
     --oc-text-500: var(--oc-grey-900);
 
     --oc-background-dark: var(--oc-grey-10);
-    --oc-background-light: var(--oc-contrast-white); /* if dark mode use --oc-contrast-black */
+    --oc-background-light: var(--oc-contrast-white);
+    /* if dark mode use --oc-contrast-black */
 
     /* RENAME Variables */
     /* background light blue to background dark */
@@ -204,6 +208,8 @@ main {
     color: var(--oc-text-500);
     background-color: var(--oc-background-light);
 
+    /* TODO : ASK TO UI/UX improve button gradient to use color variable */
+
     /*  Buttons gradients  */
     --button-primary-default: linear-gradient(180deg, #4179e2 0%, #1f5bcc 100%);
     --button-primary-hover: linear-gradient(180deg, #4179e2 0%, #2f6ddf 100%);
@@ -213,28 +219,20 @@ main {
     --button-secondary-default: linear-gradient(180deg, #fff 0%, #f2f2f2 100%);
     --button-secondary-hover: linear-gradient(180deg, #fff 0%, #fafafa 100%);
     --button-secondary-pressed: linear-gradient(180deg, #fafafa 0%, #fff 100%);
-    --button-secondary-disabled: linear-gradient(
-            180deg,
+    --button-secondary-disabled: linear-gradient(180deg,
             #fcfcfc 0%,
-            #f7f7f7 100%
-    );
+            #f7f7f7 100%);
 
-    --button-destructive-default: linear-gradient(
-            180deg,
+    --button-destructive-default: linear-gradient(180deg,
             #e44e5c 0%,
-            #cc2334 100%
-    );
+            #cc2334 100%);
     --button-destructive-hover: linear-gradient(180deg, #e44e5c 0%, #dc3747 100%);
-    --button-destructive-pressed: linear-gradient(
-            180deg,
+    --button-destructive-pressed: linear-gradient(180deg,
             #dc3747 0%,
-            #e44e5c 100%
-    );
-    --button-destructive-disabled: linear-gradient(
-            180deg,
+            #e44e5c 100%);
+    --button-destructive-disabled: linear-gradient(180deg,
             #c66c75 0%,
-            #a84851 100%
-    );
+            #a84851 100%);
 }
 
 
@@ -299,6 +297,3 @@ main {
 
 @tailwind components;
 @tailwind utilities;
-  
-
-
