@@ -5,9 +5,18 @@
 
 import replace from 'replace-in-file'
 
-// import tailwindClassName from './tailwind_class_name.js'
+import tailwindClassName from './tailwind_class_name.js'
 
 const ourColorName = [
+    // text
+    'oc-text-000',
+    'oc-text-200',
+    'oc-text-300',
+    'oc-text-400',
+    'oc-text-500',
+    // bg
+    'oc-bg-light',
+    'oc-bg-dark',
     // orchid colors
     'oc-primary-50-tr',
     'oc-primary-50',
@@ -69,7 +78,14 @@ const ourColorName = [
         'oc-error-500',
 ] 
 
-const ourClassName = []
+const ourClassName = [
+    // TODO use tailwind_class_name.js
+    // filter class name like native css
+    'oc-btn-primary',
+    'oc-btn-secondary',
+    'oc-btn-error',
+    ...tailwindClassName
+]
 
 ourColorName.forEach((color) => {
     ourClassName.push('bg-'+color)
@@ -129,6 +145,7 @@ ourClassName.forEach((className, index) => {
         to: `${uniqClassName[index]}`,
         countMatches: true,
     });
+    
 })
 
 // console.log(ourClassName)

@@ -146,8 +146,8 @@ let tailwindCSS = [
     // "order-10","order-11","order-12","order-first","order-last","order-none",
     
     /* Grid Template Columns */
-    // "grid-cols-1","grid-cols-2","grid-cols-3","grid-cols-4","grid-cols-5","grid-cols-6","grid-cols-7","grid-cols-8","grid-cols-9",
-    // "grid-cols-10","grid-cols-11","grid-cols-12","grid-cols-none",
+    "grid-cols-1","grid-cols-2","grid-cols-3","grid-cols-4","grid-cols-5","grid-cols-6","grid-cols-7","grid-cols-8","grid-cols-9",
+    "grid-cols-10","grid-cols-11","grid-cols-12","grid-cols-none",
     
     /* Grid Column Start / End */
     // "col-auto","col-span-1","col-span-2","col-span-3","col-span-4","col-span-5","col-span-6","col-span-7","col-span-8","col-span-9",
@@ -187,30 +187,30 @@ let tailwindCSS = [
     
     
     // /* Justify Content */
-    // "justify-normal","justify-start","justify-end","justify-center","justify-between","justify-around","justify-evenly","justify-stretch",
+    "justify-normal","justify-start","justify-end","justify-center","justify-between","justify-around","justify-evenly","justify-stretch",
     
-    // /* Justify Items */
-    // "justify-items-start","justify-items-end","justify-items-center","justify-items-stretch",
+    // // /* Justify Items */
+    "justify-items-start","justify-items-end","justify-items-center","justify-items-stretch",
     
-    // /* Justify Self */
-    // "justify-self-auto","justify-self-start","justify-self-end","justify-self-center","justify-self-stretch",
+    // // /* Justify Self */
+    "justify-self-auto","justify-self-start","justify-self-end","justify-self-center","justify-self-stretch",
     
-    // /* Align Content */
-    // "content-normal","content-center","content-start","content-end","content-between","content-around","content-evenly","content-baseline","content-stretch",
+    // // /* Align Content */
+    "content-normal","content-center","content-start","content-end","content-between","content-around","content-evenly","content-baseline","content-stretch",
     
-    // /* Align Items */
-    // "items-start","items-end","items-center","items-baseline","items-stretch",
+    // // /* Align Items */
+    "items-start","items-end","items-center","items-baseline","items-stretch",
     
-    // /* Align Self */
+    // // /* Align Self */
     // "self-auto","self-start","self-end","self-center","self-stretch","self-baseline",
     
-    // /* Place Content */
+    // // /* Place Content */
     // "place-content-center","place-content-start","place-content-end","place-content-between","place-content-around","place-content-evenly","place-content-baseline","place-content-stretch",
     
-    // /* Place Items */
+    // // /* Place Items */
     // "place-items-start","place-items-end","place-items-center","place-items-baseline","place-items-stretch",
     
-    // /* Place Self */
+    // // /* Place Self */
     // "place-self-auto","place-self-start","place-self-end","place-self-center","place-self-stretch",
     
     
