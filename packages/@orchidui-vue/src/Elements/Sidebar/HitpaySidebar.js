@@ -6,6 +6,7 @@ export const HEADER_TABS = {
   
   export const PAYMENT_SIDEBAR_ITEMS = [
     {
+      active: true,
       name: 'overview',
       icon: 'grid', // Sidebar icon
       path: '', // path
@@ -30,6 +31,7 @@ export const HEADER_TABS = {
       label: 'Bank Payouts',
       children: [
         {
+          active: true,
           name: 'reports-hit-pay-balance',
           path: 'balance',
           label: 'HitPay Balance'
@@ -168,6 +170,7 @@ export const HEADER_TABS = {
   
   export const POS_SIDEBAR_ITEMS = [
     {
+      active: true,
       name: 'web-pos',
       icon: 'grid',
       path: '',
@@ -192,6 +195,7 @@ export const HEADER_TABS = {
       label: 'Products',
       children: [
         {
+          active: true,
           name: 'all-products',
           path: 'products',
           label: 'All Products'
@@ -276,6 +280,7 @@ export const HEADER_TABS = {
   
   export const ONLINE_STORE_SIDEBAR_ITEMS = [
     {
+      active: true,
       name: 'overview',
       icon: 'grid', // Sidebar icon
       path: '', // path
@@ -294,6 +299,7 @@ export const HEADER_TABS = {
       label: 'Products',
       children: [
         {
+          active: true,
           name: 'all-products',
           path: 'products',
           label: 'All Products'
