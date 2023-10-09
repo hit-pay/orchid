@@ -197,17 +197,6 @@ export const Default = {
           </template>
         </Sidebar>
       </Theme>
-
-      <Theme colorMode="dark" class="layout-payment mb-8">
-        <Sidebar :title="args.title" :sidebar-menu="args.sidebar_menu" :isExpanded="args.isExpanded" @changeExpanded="args.isExpanded = $event">
-          <template v-slot:label="{menu}">
-            <a href="#" class="ml-3">{{menu.label}}</a>
-          </template>
-          <template v-slot:submenu_label="{submenu}">
-            <a href="#" class="ml-3">{{submenu.label}}</a>
-          </template>
-        </Sidebar>
-      </Theme>
         `,
   }),
 };

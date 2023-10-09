@@ -263,7 +263,7 @@ main {
     --oc-sidebar-menu-title: var(--hit-primary-200);
     --oc-sidebar-menu-active-text: var(--hit-primary-500);
     --oc-sidebar-menu-active-icon: var(--hit-primary-400);
-    --oc-sidebar-menu-active-icon-active: var(--hit-blue-500);
+    --oc-sidebar-menu-active-icon-active: var(--oc-blue-500);
 }
 
 .layout-pos {
