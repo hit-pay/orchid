@@ -1,5 +1,5 @@
 <template>
-    <transition  name="slide-fade">
+    <transition name="slide-fade" :duration="1000">
         <div 
              v-if="!state.loading"
             class="p-8 cursor-pointer relative bg-[var(--oc-sidebar-background)]"
