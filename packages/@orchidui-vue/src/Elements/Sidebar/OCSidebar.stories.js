@@ -48,8 +48,7 @@ export const Default = {
             <template v-slot:after="{isExpanded}">
 
             <div class="mt-4 mb-6 w-full border-b border-[var(--oc-sidebar-menu-title)] opacity-50"></div>
-            
-             <div class="rounded font-medium bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-1">
+             <div class="rounded font-medium bg-gradient-to-r from-[#FCE82E] via-[#9531F9] to-[#F77618] p-1">
               <div class="flex gap-3 py-4 flex-wrap justify-center rounded bg-oc-bg-light">
                 <a href="#">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
