@@ -3,14 +3,14 @@
 /* Variables  */
 :root {
     
-    --hit-primary-50-tr: #0027710a;
-    --hit-primary-50: #f5f6f9;
-    --hit-primary-100: #ccd4e3;
-    --hit-primary-200: #a6b3cd;
-    --hit-primary-300: #8093b8;
-    --hit-primary-400: #4c689c;
-    --hit-primary-500: #002771;
-    --hit-primary-600: #09204a;
+    --oc-dark-blue-50-tr: #0027710a;
+    --oc-dark-blue-50: #f5f6f9;
+    --oc-dark-blue-100: #ccd4e3;
+    --oc-dark-blue-200: #a6b3cd;
+    --oc-dark-blue-300: #8093b8;
+    --oc-dark-blue-400: #4c689c;
+    --oc-dark-blue-500: #002771;
+    --oc-dark-blue-600: #09204a;
 
     
     --oc-blue-50-tr: #2465de1a;
@@ -85,14 +85,14 @@
 /* EXPERIMENTAL */
 .dark-mode {
     
-    --hit-primary-600: #0027710a;
-    --hit-primary-500: #f5f6f9;
-    --hit-primary-400: #ccd4e3;
-    --hit-primary-300: #a6b3cd;
-    --hit-primary-200: #8093b8;
-    --hit-primary-100: #4c689c;
-    --hit-primary-50: #002771;
-    --hit-primary-50-tr: #09204a;
+    --oc-dark-blue-600: #0027710a;
+    --oc-dark-blue-500: #f5f6f9;
+    --oc-dark-blue-400: #ccd4e3;
+    --oc-dark-blue-300: #a6b3cd;
+    --oc-dark-blue-200: #8093b8;
+    --oc-dark-blue-100: #4c689c;
+    --oc-dark-blue-50: #002771;
+    --oc-dark-blue-50-tr: #09204a;
 
 
     --oc-blue-500: #60a5fa;
@@ -258,11 +258,11 @@ main {
 
 .layout-payment {
     --oc-sidebar-background: var(--oc-background-dark);
-    --oc-sidebar-menu-hover: var(--hit-primary-50-tr);
-    --oc-sidebar-menu-active: var(--hit-primary-50-tr);
-    --oc-sidebar-menu-title: var(--hit-primary-200);
-    --oc-sidebar-menu-active-text: var(--hit-primary-500);
-    --oc-sidebar-menu-active-icon: var(--hit-primary-400);
+    --oc-sidebar-menu-hover: var(--oc-dark-blue-50-tr);
+    --oc-sidebar-menu-active: var(--oc-dark-blue-50-tr);
+    --oc-sidebar-menu-title: var(--oc-dark-blue-200);
+    --oc-sidebar-menu-active-text: var(--oc-dark-blue-500);
+    --oc-sidebar-menu-active-icon: var(--oc-dark-blue-400);
     --oc-sidebar-menu-active-icon-active: var(--oc-blue-500);
 }
 
