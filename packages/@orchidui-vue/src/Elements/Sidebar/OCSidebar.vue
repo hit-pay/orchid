@@ -46,7 +46,7 @@
                                         'text-[var(--oc-sidebar-menu-active-icon-active)]': menu.active
                                     }" :name="menu.icon" />
                             </PopoverButton>
-                            <PopoverPanel>
+                            <PopoverPanel v-if="!isExpanded">
                                 <div class="left-[60px] p-4 gap-4 absolute bg-oc-text-000 shadow-sm rounded w-[200px]">
                                     <div 
                                         v-if="!menu.children"
