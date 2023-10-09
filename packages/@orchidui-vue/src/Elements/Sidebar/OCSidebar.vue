@@ -23,7 +23,7 @@
                     class="text-sm uppercase text-[var(--oc-sidebar-menu-title)]" >
                     {{ sidebar.title }}
                 </h2>
-                <div v-else-if="(!sidebar.title || !isExpanded) && index !== 0" class="my-4 w-full border-b border-[var(--oc-sidebar-menu-title)] opacity-50"></div>
+                <div v-else-if="(!sidebar.title || !isExpanded) && index !== 0" class="mt-4 mb-6 w-full border-b border-[var(--oc-sidebar-menu-title)] opacity-50"></div>
                
                 <template v-for="menu, menuIndex in sidebar.menus" :key="menuIndex">
                     <div 

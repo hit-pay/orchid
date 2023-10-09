@@ -185,8 +185,8 @@ export const Default = {
               <a href="#" class="ml-3">{{submenu.label}}</a>
             </template>
             <template v-slot:after="{isExpanded}">
-             <div class=" rounded font-medium gap-3 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-1">
-              <div class="flex flex-wrap justify-center  rounded  p-4 bg-oc-bg-light">
+             <div class="rounded font-medium bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-1">
+              <div class="flex gap-3 py-4 flex-wrap justify-center rounded bg-oc-bg-light">
                 <a href="#">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g clip-path="url(#clip0_1127_54645)">
