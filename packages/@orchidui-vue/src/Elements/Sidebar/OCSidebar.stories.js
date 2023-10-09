@@ -207,6 +207,9 @@ export const Default = {
               <a href="#" class="ml-3">{{submenu.label}}</a>
             </template>
             <template v-slot:after="{isExpanded}">
+
+            <div class="mt-4 mb-6 w-full border-b border-[var(--oc-sidebar-menu-title)] opacity-50"></div>
+            
              <div class="rounded font-medium bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-1">
               <div class="flex gap-3 py-4 flex-wrap justify-center rounded bg-oc-bg-light">
                 <a href="#">
