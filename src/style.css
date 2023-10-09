@@ -13,15 +13,8 @@
     --oc-dark-blue-600: #09204a;
 
     
-    --oc-blue-50-tr: #2465de1a;
-    --oc-blue-50: #e5eeff;
-    --oc-blue-100: #ccdefe;
-    --oc-blue-200: #b3cdfe;
-    --oc-blue-300: #80acfe;
-    --oc-blue-400: #4c8afd;
-    --oc-blue-500: #2465de;
 
-    --oc-purple-50-tr: var(--oc-blue-50-tr);
+    --oc-purple-50-tr: var(--oc-primary-50-tr);
     --oc-purple-50: #f7edfd;
     --oc-purple-100: #efdbfb;
     --oc-purple-200: #e8c9fa;
@@ -95,13 +88,6 @@
     --oc-dark-blue-50-tr: #09204a;
 
 
-    --oc-blue-500: #60a5fa;
-    --oc-blue-400: #3b82f6;
-    --oc-blue-300: #2563eb;
-    --oc-blue-200: #1d4ed8;
-    --oc-blue-100: #1e40af;
-    --oc-blue-50: #1e3a8a;
-    --oc-blue-50-tr: #172554;
 
     --oc-purple-500: #c084fc;
     --oc-purple-400: #a855f7;
@@ -185,13 +171,15 @@ main {
 
     /* ACCENT COLOR */
 
-    --oc-primary-50-tr: var(--oc-blue-50-tr);
-    --oc-primary-50: var(--oc-blue-50);
-    --oc-primary-100: var(--oc-blue-100);
-    --oc-primary-200: var(--oc-blue-200);
-    --oc-primary-300: var(--oc-blue-300);
-    --oc-primary-400: var(--oc-blue-400);
-    --oc-primary-500: var(--oc-blue-500);
+
+    --oc-primary-500: #60a5fa;
+    --oc-primary-400: #3b82f6;
+    --oc-primary-300: #2563eb;
+    --oc-primary-200: #1d4ed8;
+    --oc-primary-100: #1e40af;
+    --oc-primary-50: #1e3a8a;
+    --oc-primary-50-tr: #172554;
+
 
     --oc-accent-1-50-tr: var(--oc-purple-50-tr);
     --oc-accent-1-50: var(--oc-purple-50);
@@ -263,7 +251,7 @@ main {
     --oc-sidebar-menu-title: var(--oc-dark-blue-200);
     --oc-sidebar-menu-active-text: var(--oc-dark-blue-500);
     --oc-sidebar-menu-active-icon: var(--oc-dark-blue-400);
-    --oc-sidebar-menu-active-icon-active: var(--oc-blue-500);
+    --oc-sidebar-menu-active-icon-active: var(--oc-primary-500);
 }
 
 .layout-pos {
