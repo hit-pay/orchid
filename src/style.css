@@ -98,7 +98,7 @@
     --oc-dark-blue-50: #002771;
     --oc-dark-blue-50-tr: #09204a;
 
-    
+
     --oc-blue-500: #2465de1a;
     --oc-blue-400: #e5eeff;
     --oc-blue-300: #ccdefe;
@@ -191,13 +191,13 @@ main {
 
 
 
-    --oc-accent-1-50-tr: var(--oc-blue-50-tr);
-    --oc-accent-1-50: var(--oc-blue-50);
-    --oc-accent-1-100: var(--oc-blue-100);
-    --oc-accent-1-200: var(--oc-blue-200);
-    --oc-accent-1-300: var(--oc-blue-300);
-    --oc-accent-1-400: var(--oc-blue-400);
-    --oc-accent-1-500: var(--oc-blue-500);
+    --oc-primary-50-tr: var(--oc-blue-50-tr);
+    --oc-primary-50: var(--oc-blue-50);
+    --oc-primary-100: var(--oc-blue-100);
+    --oc-primary-200: var(--oc-blue-200);
+    --oc-primary-300: var(--oc-blue-300);
+    --oc-primary-400: var(--oc-blue-400);
+    --oc-primary-500: var(--oc-blue-500);
 
 
     --oc-accent-1-50-tr: var(--oc-purple-50-tr);
