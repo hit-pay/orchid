@@ -12,3 +12,4 @@ export * from "./Form/CheckboxesGroup/OCCheckboxesGroup";
 export * from "./Form/Radio/OCRadio";
 export * from "./Form/RadioGroup/OCRadioGroup";
 export * from "./Form/Toggle/OCToggle";
+export * from "./Elements/Sidebar/OCSidebar";
