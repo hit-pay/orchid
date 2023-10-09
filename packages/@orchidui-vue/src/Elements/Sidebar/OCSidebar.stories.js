@@ -1,6 +1,7 @@
 import Sidebar from "./OCSidebar.vue";
 import Theme from "../../Theme/OCTheme.vue";
 
+import { PAYMENTS_SIDEBAR_GROUP, POS_SIDEBAR_GROUP, ONLINE_STORE_SIDEBAR_GROUP } from './HitpaySidebar.js'
 export default {
   component: Sidebar,
   tags: ["autodocs"],
@@ -15,171 +16,9 @@ export const Default = {
   },
   args: {
     isExpanded: true,
-    sidebar_menu: [
-      {
-        title: "Payment",
-        menus: [
-          {
-            active: true,
-            name: 'overview',
-            icon: 'grid', // Sidebar icon
-            path: '/', // path
-            label: 'Overview', // Sidebar label
-          },
-          {
-            active: false,
-            name: 'transactions',
-            icon: 'transaction',
-            path: '/transactions',
-            label: 'Transactions'
-          },
-          {
-            active: false,
-            name: 'bank-payouts',
-            icon: 'dollar-paper',
-            path: '/bank-payouts',
-            label: 'Bank Payouts',
-            children: [
-              {
-                active: true,
-                name: 'reports-hit-pay-balance',
-                path: '/balance',
-                label: 'HitPay Balance'
-              },
-              {
-                active: false,
-                name: 'payouts',
-                path: '/payouts',
-                label: 'Payouts'
-              },
-            ]
-          },
-          {
-            active: false,
-            name: 'bank-payouts',
-            icon: 'dollar-paper',
-            path: '/',
-            label: 'Menu CHildren',
-            children: [
-              {
-                active: false,
-                name: 'reports-hit-pay-balance',
-                path: '/sub-menu',
-                label: 'Non Active'
-              },
-              {
-                active: false,
-                name: 'payouts',
-                path: '/sub-menu-2',
-                label: 'Sub Menu non Active'
-              },
-            ]
-          },
-          {
-            active: false,
-            name: 'customers',
-            icon: 'users',
-            path: '/customers',
-            label: 'Customers'
-          }
-        ]
-      },
-      {
-        title: "No Code Tools",
-        menus: [
-          {
-            active: true,
-            name: 'overview',
-            icon: 'grid', // Sidebar icon
-            path: '/', // path
-            label: 'Overview', // Sidebar label
-          },
-          {
-            active: false,
-            name: 'transactions',
-            icon: 'transaction',
-            path: '/transactions',
-            label: 'Transactions'
-          },
-          {
-            active: false,
-            name: 'bank-payouts',
-            icon: 'dollar-paper',
-            path: '/bank-payouts',
-            label: 'Bank Payouts',
-            children: [
-              {
-                active: true,
-                name: 'reports-hit-pay-balance',
-                path: 'balance',
-                label: 'HitPay Balance'
-              },
-              {
-                active: false,
-                name: 'payouts',
-                path: '/payouts',
-                label: 'Payouts'
-              },
-            ]
-          },
-          {
-            active: false,
-            name: 'customers',
-            icon: 'users',
-            path: '/customers',
-            label: 'Customers'
-          }
-        ]
-      },
-      {
-        title: "", // null title will use -
-        menus: [
-          {
-            active: true,
-            name: 'overview',
-            icon: 'grid', // Sidebar icon
-            path: '/', // path
-            label: 'Overview', // Sidebar label
-          },
-          {
-            active: false,
-            name: 'transactions',
-            icon: 'transaction',
-            path: '/transactions',
-            label: 'Transactions'
-          },
-          {
-            active: false,
-            name: 'bank-payouts',
-            icon: 'dollar-paper',
-            path: '/bank-payouts',
-            label: 'Bank Payouts',
-            children: [
-              {
-                active: true,
-                name: 'reports-hit-pay-balance',
-                path: '/balance',
-                label: 'HitPay Balance'
-              },
-              {
-                active: false,
-                name: 'payouts',
-                path: '/payouts',
-                label: 'Payouts'
-              },
-            ]
-          },
-          
-          {
-            active: false,
-            name: 'customers',
-            icon: 'users',
-            path: '/customers',
-            label: 'Customers'
-          }
-        ]
-      }
-    ]
+    payment_sidebar_menu: PAYMENTS_SIDEBAR_GROUP,
+    pos_sidebar_menu: POS_SIDEBAR_GROUP,
+    online_store_sidebar_menu: ONLINE_STORE_SIDEBAR_GROUP,
   },
   render: (args) => ({
     components: { Sidebar, Theme },
@@ -188,7 +27,7 @@ export const Default = {
     },
     template: `
           <Theme class="layout-payment mb-8">
-            <Sidebar :title="args.title" :sidebar-menu="args.sidebar_menu" :isExpanded="args.isExpanded" @changeExpanded="args.isExpanded = $event">
+            <Sidebar :title="args.title" :sidebar-menu="args.payment_sidebar_menu" :isExpanded="args.isExpanded" @changeExpanded="args.isExpanded = $event">
               <template v-slot:label="{menu}">
                 <a href="#" class="ml-3">{{menu.label}}</a>
               </template>
@@ -199,7 +38,7 @@ export const Default = {
           </Theme>
 
           <Theme class="layout-pos mb-8">
-          <Sidebar :title="args.title" :sidebar-menu="args.sidebar_menu" :isExpanded="args.isExpanded" @changeExpanded="args.isExpanded = $event">
+          <Sidebar :title="args.title" :sidebar-menu="args.pos_sidebar_menu" :isExpanded="args.isExpanded" @changeExpanded="args.isExpanded = $event">
             <template v-slot:label="{menu}">
               <a href="#" class="ml-3">{{menu.label}}</a>
             </template>
@@ -244,7 +83,7 @@ export const Default = {
         </Theme>
 
         <Theme class="layout-online-store mb-8">
-        <Sidebar :title="args.title" :sidebar-menu="args.sidebar_menu" :isExpanded="args.isExpanded" @changeExpanded="args.isExpanded = $event">
+        <Sidebar :title="args.title" :sidebar-menu="args.online_store_sidebar_menu" :isExpanded="args.isExpanded" @changeExpanded="args.isExpanded = $event">
           <template v-slot:label="{menu}">
             <a href="#" class="ml-3">{{menu.label}}</a>
           </template>

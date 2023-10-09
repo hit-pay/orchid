@@ -21,13 +21,13 @@
                 <slot name="before" :is-expanded="isExpanded" />
                 <template v-for="sidebar, index in sidebarMenu" :key="index">
                     <h2 
-                        v-if="isExpanded && sidebar.title" 
+                        v-if="isExpanded && sidebar.label" 
                         class="text-sm uppercase text-[var(--oc-sidebar-menu-title)]" >
-                        {{ sidebar.title }}
+                        {{ sidebar.label }}
                     </h2>
-                    <div v-else-if="(!sidebar.title || !isExpanded) && index !== 0" class="mt-4 mb-6 w-full border-b border-[var(--oc-sidebar-menu-title)] opacity-50"></div>
+                    <div v-else-if="(!sidebar.label || !isExpanded) && index !== 0" class="mt-4 mb-6 w-full border-b border-[var(--oc-sidebar-menu-title)] opacity-50"></div>
                 
-                    <template v-for="menu, menuIndex in sidebar.menus" :key="menuIndex">
+                    <template v-for="menu, menuIndex in sidebar.items" :key="menuIndex">
                         <div 
                             class="flex items-center rounded hover:bg-[var(--oc-sidebar-menu-hover)]" 
                             :class="{
@@ -151,18 +151,18 @@ const changeExpanded = () => {
 
 onMounted(() => {
     // expand active menu
-    props.sidebarMenu.forEach((sideMenu) => {
-        sideMenu.menus.forEach((menu) => {
-            // check if menu active
-            if(menu.children){
-                menu.children.forEach((submenu) => {
-                    if(submenu.active){
-                        expandMenu(menu.path)
-                    }
-                })
-            }
-        })
-    })
+    // props.sidebarMenu.forEach((sideMenu) => {
+    //     sideMenu.menus.forEach((menu) => {
+    //         // check if menu active
+    //         if(menu.children){
+    //             menu.children.forEach((submenu) => {
+    //                 if(submenu.active){
+    //                     expandMenu(menu.path)
+    //                 }
+    //             })
+    //         }
+    //     })
+    // })
 
     state.loading = false
 })
