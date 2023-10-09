@@ -4,7 +4,7 @@
 :root {
     
     --oc-dark-blue-50-tr: #0027710a;
-    --oc-dark-blue-50: #f5f6f9;
+    --oc-dark-blue-50: #b5bfdc;
     --oc-dark-blue-100: #ccd4e3;
     --oc-dark-blue-200: #a6b3cd;
     --oc-dark-blue-300: #8093b8;
@@ -12,9 +12,8 @@
     --oc-dark-blue-500: #002771;
     --oc-dark-blue-600: #09204a;
 
-    
 
-    --oc-purple-50-tr: var(--oc-primary-50-tr);
+    --oc-purple-50-tr: #0027710a;
     --oc-purple-50: #f7edfd;
     --oc-purple-100: #efdbfb;
     --oc-purple-200: #e8c9fa;
@@ -86,7 +85,6 @@
     --oc-dark-blue-100: #4c689c;
     --oc-dark-blue-50: #002771;
     --oc-dark-blue-50-tr: #09204a;
-
 
     --oc-primary-500: #2465de1a;
     --oc-primary-400: #e5eeff;
