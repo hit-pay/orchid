@@ -16,66 +16,71 @@
                 @click="$emit('changeExpanded', !isExpanded)">
                 <Icon width="20" height="20" name="arrow-left-2" />
             </button>
-            <h2 v-if="isExpanded" class="text-sm uppercase text-hit-primary-200" >
-               {{ title }}
-            </h2>
-            <template v-for="menu, index in menus" :key="index">
-                <div 
-                    class="flex items-center rounded hover:bg-[var(--oc-sidebar-menu-hover)]" 
-                    :class="{
-                        'px-5 py-3': isExpanded,
-                        'font-medium bg-[var(--oc-sidebar-menu-active)] text-[var(--oc-sidebar-menu-active-text)]': menu.active
-                    }">
-                    <Popover v-slot="{ open, }" class="relative flex">
-                        <PopoverButton 
-                            :class="{
-                                'p-4': !isExpanded
-                            }"
-                            @mouseover="(e) => hoverPopover(e, open)"
-                             >
-                            <Icon 
-                                width="22" 
-                                height="22" 
+            <template v-for="sidebar, index in sidebarMenu" :key="index">
+                <h2 
+                    v-if="isExpanded" 
+                    class="text-sm uppercase text-hit-primary-200" >
+                    {{ sidebar.title }}
+                </h2>
+                <template v-for="menu, menuIndex in sidebar.menus" :key="menuIndex">
+                    <div 
+                        class="flex items-center rounded hover:bg-[var(--oc-sidebar-menu-hover)]" 
+                        :class="{
+                            'px-5 py-3': isExpanded,
+                            'font-medium bg-[var(--oc-sidebar-menu-active)] text-[var(--oc-sidebar-menu-active-text)]': menu.active
+                        }">
+                        <Popover v-slot="{ open, }" class="relative flex">
+                            <PopoverButton 
                                 :class="{
-                                    'text-[var(--oc-sidebar-menu-active-icon)]': !menu.active,
-                                    'text-[var(--oc-sidebar-menu-active-icon-active)]': menu.active
-                                }" :name="menu.icon" />
-                        </PopoverButton>
-                        <PopoverPanel>
-                            <div class="left-[60px] p-4 gap-4 absolute bg-oc-text-000 shadow-sm rounded w-[200px]">
-                                <div 
-                                    v-if="!menu.children"
-                                    class="
-                                    px-5 py-3 flex items-center rounded hover:bg-[var(--oc-sidebar-menu-hover)] 
-                                    font-medium bg-[var(--oc-sidebar-menu-active)] text-[var(--oc-sidebar-menu-active-text)]" 
-                                    >
-                                    <slot v-if="!isExpanded" name="label" :menu="menu" />
+                                    'p-4': !isExpanded
+                                }"
+                                @mouseover="(e) => hoverPopover(e, open)"
+                                >
+                                <Icon 
+                                    width="22" 
+                                    height="22" 
+                                    :class="{
+                                        'text-[var(--oc-sidebar-menu-active-icon)]': !menu.active,
+                                        'text-[var(--oc-sidebar-menu-active-icon-active)]': menu.active
+                                    }" :name="menu.icon" />
+                            </PopoverButton>
+                            <PopoverPanel>
+                                <div class="left-[60px] p-4 gap-4 absolute bg-oc-text-000 shadow-sm rounded w-[200px]">
+                                    <div 
+                                        v-if="!menu.children"
+                                        class="
+                                        px-5 py-3 flex items-center rounded hover:bg-[var(--oc-sidebar-menu-hover)] 
+                                        font-medium bg-[var(--oc-sidebar-menu-active)] text-[var(--oc-sidebar-menu-active-text)]" 
+                                        >
+                                        <slot v-if="!isExpanded" name="label" :menu="menu" />
+                                    </div>
+                                    <OcSidebarSubmenu 
+                                        v-if="menu.children && !isExpanded" class="gap-4 mt-4" 
+                                        :menu="menu" :is-expanded="isExpanded">
+                                        <template 
+                                            #label="{submenu}">
+                                            <slot name="submenu_label" :menu="menu" :submenu="submenu"  />    
+                                        </template>
+                                    </OcSidebarSubmenu>
                                 </div>
-                                <OcSidebarSubmenu 
-                                    v-if="menu.children && !isExpanded" class="gap-4 mt-4" 
-                                    :menu="menu" :is-expanded="isExpanded">
-                                    <template 
-                                        #label="{submenu}">
-                                        <slot name="submenu_label" :menu="menu" :submenu="submenu"  />    
-                                    </template>
-                                </OcSidebarSubmenu>
-                            </div>
-                        </PopoverPanel>
-                    </Popover>
-                    <slot v-if="isExpanded" name="label" :menu="menu" />
-                </div>
-               <OcSidebarSubmenu v-if="menu.children && isExpanded" :menu="menu" >
-                <template 
-                    #label="{submenu}">
-                    <slot name="submenu_label" :menu="menu" :submenu="submenu" :is-expanded="isExpanded" />    
+                            </PopoverPanel>
+                        </Popover>
+                        <slot v-if="isExpanded" name="label" :menu="menu" />
+                    </div>
+                <OcSidebarSubmenu v-if="menu.children && isExpanded" :menu="menu" >
+                    <template 
+                        #label="{submenu}">
+                        <slot name="submenu_label" :menu="menu" :submenu="submenu" :is-expanded="isExpanded" />    
+                    </template>
+                    </OcSidebarSubmenu>
                 </template>
-                </OcSidebarSubmenu>
             </template>
         </div>
     </div>
 </template>
 <script setup>
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
+import { NULL } from 'sass';
 import { defineAsyncComponent } from 'vue'
 
 
@@ -94,10 +99,7 @@ defineProps({
         type: Boolean,
         default: true
     },
-    title: {
-        type: String
-    },
-    menus: {
+    sidebarMenu: {
         type: Array
     }
 })

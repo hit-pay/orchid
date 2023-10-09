@@ -15,49 +15,147 @@ export const Default = {
   },
   args: {
     isExpanded: true,
-    title: "Payment",
-    menus: [
+    sidebar_menu: [
       {
-        active: true,
-        name: 'overview',
-        icon: 'grid', // Sidebar icon
-        path: '', // path
-        label: 'Overview', // Sidebar label
-      },
-      {
-        active: false,
-        name: 'transactions',
-        icon: 'transaction',
-        path: 'transactions',
-        label: 'Transactions'
-      },
-      {
-        active: false,
-        name: 'bank-payouts',
-        icon: 'dollar-paper',
-        path: 'bank-payouts',
-        label: 'Bank Payouts',
-        children: [
+        title: "Payment",
+        menus: [
           {
             active: true,
-            name: 'reports-hit-pay-balance',
-            path: 'balance',
-            label: 'HitPay Balance'
+            name: 'overview',
+            icon: 'grid', // Sidebar icon
+            path: '', // path
+            label: 'Overview', // Sidebar label
           },
           {
             active: false,
-            name: 'payouts',
-            path: 'payouts',
-            label: 'Payouts'
+            name: 'transactions',
+            icon: 'transaction',
+            path: 'transactions',
+            label: 'Transactions'
           },
+          {
+            active: false,
+            name: 'bank-payouts',
+            icon: 'dollar-paper',
+            path: 'bank-payouts',
+            label: 'Bank Payouts',
+            children: [
+              {
+                active: true,
+                name: 'reports-hit-pay-balance',
+                path: 'balance',
+                label: 'HitPay Balance'
+              },
+              {
+                active: false,
+                name: 'payouts',
+                path: 'payouts',
+                label: 'Payouts'
+              },
+            ]
+          },
+          {
+            active: false,
+            name: 'customers',
+            icon: 'users',
+            path: 'customers',
+            label: 'Customers'
+          }
         ]
       },
       {
-        active: false,
-        name: 'customers',
-        icon: 'users',
-        path: 'customers',
-        label: 'Customers'
+        title: "No Code Tools",
+        menus: [
+          {
+            active: true,
+            name: 'overview',
+            icon: 'grid', // Sidebar icon
+            path: '', // path
+            label: 'Overview', // Sidebar label
+          },
+          {
+            active: false,
+            name: 'transactions',
+            icon: 'transaction',
+            path: 'transactions',
+            label: 'Transactions'
+          },
+          {
+            active: false,
+            name: 'bank-payouts',
+            icon: 'dollar-paper',
+            path: 'bank-payouts',
+            label: 'Bank Payouts',
+            children: [
+              {
+                active: true,
+                name: 'reports-hit-pay-balance',
+                path: 'balance',
+                label: 'HitPay Balance'
+              },
+              {
+                active: false,
+                name: 'payouts',
+                path: 'payouts',
+                label: 'Payouts'
+              },
+            ]
+          },
+          {
+            active: false,
+            name: 'customers',
+            icon: 'users',
+            path: 'customers',
+            label: 'Customers'
+          }
+        ]
+      },
+      {
+        title: "", // null title will use -
+        menus: [
+          {
+            active: true,
+            name: 'overview',
+            icon: 'grid', // Sidebar icon
+            path: '', // path
+            label: 'Overview', // Sidebar label
+          },
+          {
+            active: false,
+            name: 'transactions',
+            icon: 'transaction',
+            path: 'transactions',
+            label: 'Transactions'
+          },
+          {
+            active: false,
+            name: 'bank-payouts',
+            icon: 'dollar-paper',
+            path: 'bank-payouts',
+            label: 'Bank Payouts',
+            children: [
+              {
+                active: true,
+                name: 'reports-hit-pay-balance',
+                path: 'balance',
+                label: 'HitPay Balance'
+              },
+              {
+                active: false,
+                name: 'payouts',
+                path: 'payouts',
+                label: 'Payouts'
+              },
+            ]
+          },
+          {
+            active: false,
+            name: 'customers',
+            icon: 'users',
+            path: 'customers',
+            label: 'Customers'
+          }
+        ]
       }
     ]
   },
@@ -68,7 +166,7 @@ export const Default = {
     },
     template: `
           <Theme class="layout-payment mb-8">
-            <Sidebar :title="args.title" :menus="args.menus" :isExpanded="args.isExpanded" @changeExpanded="args.isExpanded = $event">
+            <Sidebar :title="args.title" :sidebar-menu="args.sidebar_menu" :isExpanded="args.isExpanded" @changeExpanded="args.isExpanded = $event">
               <template v-slot:label="{menu}">
                 <a href="#" class="ml-3">{{menu.label}}</a>
               </template>
@@ -79,7 +177,7 @@ export const Default = {
           </Theme>
 
           <Theme class="layout-pos mb-8">
-          <Sidebar :title="args.title" :menus="args.menus" :isExpanded="args.isExpanded" @changeExpanded="args.isExpanded = $event">
+          <Sidebar :title="args.title" :sidebar-menu="args.sidebar_menu" :isExpanded="args.isExpanded" @changeExpanded="args.isExpanded = $event">
             <template v-slot:label="{menu}">
               <a href="#" class="ml-3">{{menu.label}}</a>
             </template>
@@ -90,7 +188,7 @@ export const Default = {
         </Theme>
 
         <Theme class="layout-online-store mb-8">
-        <Sidebar :title="args.title" :menus="args.menus" :isExpanded="args.isExpanded" @changeExpanded="args.isExpanded = $event">
+        <Sidebar :title="args.title" :sidebar-menu="args.sidebar_menu" :isExpanded="args.isExpanded" @changeExpanded="args.isExpanded = $event">
           <template v-slot:label="{menu}">
             <a href="#" class="ml-3">{{menu.label}}</a>
           </template>
@@ -101,7 +199,7 @@ export const Default = {
       </Theme>
 
       <Theme colorMode="dark" class="layout-payment mb-8">
-        <Sidebar :title="args.title" :menus="args.menus" :isExpanded="args.isExpanded" @changeExpanded="args.isExpanded = $event">
+        <Sidebar :title="args.title" :sidebar-menu="args.sidebar_menu" :isExpanded="args.isExpanded" @changeExpanded="args.isExpanded = $event">
           <template v-slot:label="{menu}">
             <a href="#" class="ml-3">{{menu.label}}</a>
           </template>
