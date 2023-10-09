@@ -31,7 +31,9 @@
                         :class="{
                             'px-5 py-3': isExpanded,
                             'font-medium bg-[var(--oc-sidebar-menu-active)] text-[var(--oc-sidebar-menu-active-text)]': menu.active
-                        }">
+                        }"
+                        @click="expandMenu(menu.path)"
+                        >
                         <Popover v-slot="{ open, }" class="relative flex">
                             <PopoverButton 
                                 :class="{
@@ -47,6 +49,8 @@
                                         'text-[var(--oc-sidebar-menu-active-icon-active)]': menu.active
                                     }" :name="menu.icon" />
                             </PopoverButton>
+                            <transition
+                            >
                             <PopoverPanel v-if="!isExpanded">
                                 <div class="left-[60px] p-4 gap-4 absolute bg-oc-text-000 shadow-sm rounded w-[200px]">
                                     <div 
@@ -67,10 +71,11 @@
                                     </OcSidebarSubmenu>
                                 </div>
                             </PopoverPanel>
+                            </transition>
                         </Popover>
                         <slot v-if="isExpanded" name="label" :menu="menu" />
                     </div>
-                <OcSidebarSubmenu v-if="menu.children && isExpanded" :menu="menu" >
+                <OcSidebarSubmenu v-if="menu.children && isExpanded && state.expanded.includes(menu.path)" :menu="menu" >
                     <template 
                         #label="{submenu}">
                         <slot name="submenu_label" :menu="menu" :submenu="submenu" :is-expanded="isExpanded" />    
@@ -84,7 +89,7 @@
 </template>
 <script setup>
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
-import { defineAsyncComponent } from 'vue'
+import { defineAsyncComponent, reactive, onMounted } from 'vue'
 
 
 const Icon = defineAsyncComponent(() =>
@@ -97,7 +102,7 @@ const OcSidebarSubmenu = defineAsyncComponent(() =>
 
 defineEmits(['changeExpanded'])
 
-defineProps({
+const props = defineProps({
     isExpanded: {
         type: Boolean,
         default: true
@@ -107,10 +112,38 @@ defineProps({
     }
 })
 
+const state = reactive({
+    expanded: []
+})
+
+const expandMenu = (id) => {
+    if(!state.expanded.includes(id)){
+        state.expanded.push(id)
+    }else{
+        state.expanded = state.expanded.filter(menuId =>  menuId !== id)
+    }
+}
+
 const hoverPopover = (e, open) => {
   if (e.target.parentNode.type === 'button' && !open) {
     e.target.parentNode.click()
   }
 }
+
+onMounted(() => {
+    // expand active menu
+    props.sidebarMenu.forEach((sideMenu) => {
+        sideMenu.menus.forEach((menu) => {
+            // check if menu active
+            if(menu.children){
+                menu.children.forEach((submenu) => {
+                    if(submenu.active){
+                        expandMenu(menu.path)
+                    }
+                })
+            }
+        })
+    })
+})
 
 </script>

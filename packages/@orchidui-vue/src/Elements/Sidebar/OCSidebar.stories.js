@@ -23,34 +23,55 @@ export const Default = {
             active: true,
             name: 'overview',
             icon: 'grid', // Sidebar icon
-            path: '', // path
+            path: '/', // path
             label: 'Overview', // Sidebar label
           },
           {
             active: false,
             name: 'transactions',
             icon: 'transaction',
-            path: 'transactions',
+            path: '/transactions',
             label: 'Transactions'
           },
           {
             active: false,
             name: 'bank-payouts',
             icon: 'dollar-paper',
-            path: 'bank-payouts',
+            path: '/bank-payouts',
             label: 'Bank Payouts',
             children: [
               {
                 active: true,
                 name: 'reports-hit-pay-balance',
-                path: 'balance',
+                path: '/balance',
                 label: 'HitPay Balance'
               },
               {
                 active: false,
                 name: 'payouts',
-                path: 'payouts',
+                path: '/payouts',
                 label: 'Payouts'
+              },
+            ]
+          },
+          {
+            active: false,
+            name: 'bank-payouts',
+            icon: 'dollar-paper',
+            path: '/',
+            label: 'Menu CHildren',
+            children: [
+              {
+                active: false,
+                name: 'reports-hit-pay-balance',
+                path: '/sub-menu',
+                label: 'Non Active'
+              },
+              {
+                active: false,
+                name: 'payouts',
+                path: '/sub-menu-2',
+                label: 'Sub Menu non Active'
               },
             ]
           },
@@ -58,7 +79,7 @@ export const Default = {
             active: false,
             name: 'customers',
             icon: 'users',
-            path: 'customers',
+            path: '/customers',
             label: 'Customers'
           }
         ]
@@ -70,21 +91,21 @@ export const Default = {
             active: true,
             name: 'overview',
             icon: 'grid', // Sidebar icon
-            path: '', // path
+            path: '/', // path
             label: 'Overview', // Sidebar label
           },
           {
             active: false,
             name: 'transactions',
             icon: 'transaction',
-            path: 'transactions',
+            path: '/transactions',
             label: 'Transactions'
           },
           {
             active: false,
             name: 'bank-payouts',
             icon: 'dollar-paper',
-            path: 'bank-payouts',
+            path: '/bank-payouts',
             label: 'Bank Payouts',
             children: [
               {
@@ -96,7 +117,7 @@ export const Default = {
               {
                 active: false,
                 name: 'payouts',
-                path: 'payouts',
+                path: '/payouts',
                 label: 'Payouts'
               },
             ]
@@ -105,7 +126,7 @@ export const Default = {
             active: false,
             name: 'customers',
             icon: 'users',
-            path: 'customers',
+            path: '/customers',
             label: 'Customers'
           }
         ]
@@ -117,42 +138,43 @@ export const Default = {
             active: true,
             name: 'overview',
             icon: 'grid', // Sidebar icon
-            path: '', // path
+            path: '/', // path
             label: 'Overview', // Sidebar label
           },
           {
             active: false,
             name: 'transactions',
             icon: 'transaction',
-            path: 'transactions',
+            path: '/transactions',
             label: 'Transactions'
           },
           {
             active: false,
             name: 'bank-payouts',
             icon: 'dollar-paper',
-            path: 'bank-payouts',
+            path: '/bank-payouts',
             label: 'Bank Payouts',
             children: [
               {
                 active: true,
                 name: 'reports-hit-pay-balance',
-                path: 'balance',
+                path: '/balance',
                 label: 'HitPay Balance'
               },
               {
                 active: false,
                 name: 'payouts',
-                path: 'payouts',
+                path: '/payouts',
                 label: 'Payouts'
               },
             ]
           },
+          
           {
             active: false,
             name: 'customers',
             icon: 'users',
-            path: 'customers',
+            path: '/customers',
             label: 'Customers'
           }
         ]
