@@ -267,13 +267,13 @@ main {
 }
 
 .layout-pos {
-    --oc-sidebar-background: var(--oc-warning-50);
-    --oc-sidebar-menu-hover: var(--oc-warning-50-tr);
-    --oc-sidebar-menu-active: var(--oc-warning-100);
-    --oc-sidebar-menu-title: var(--hit-primary-200);
-    --oc-sidebar-menu-active-text: var(--oc-warning-500);
-    --oc-sidebar-menu-active-icon: var(--oc-warning-500);
-    --oc-sidebar-menu-active-icon-active: var(--oc-warning-500);
+    --oc-sidebar-background: #FBFBF9;
+    --oc-sidebar-menu-hover: #F5F4EF;
+    --oc-sidebar-menu-active: #F5F4EF;
+    --oc-sidebar-menu-title: #A6B3CD;
+    --oc-sidebar-menu-active-text: #03102F;
+    --oc-sidebar-menu-active-icon: #5A514B;
+    --oc-sidebar-menu-active-icon-active: #FDB012;
 }
 
 .layout-online-store {
