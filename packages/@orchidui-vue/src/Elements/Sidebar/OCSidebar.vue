@@ -16,6 +16,7 @@
                 @click="$emit('changeExpanded', !isExpanded)">
                 <Icon width="20" height="20" name="arrow-left-2" />
             </button>
+            <slot name="before" :is-expanded="isExpanded" />
             <template v-for="sidebar, index in sidebarMenu" :key="index">
                 <h2 
                     v-if="isExpanded && sidebar.title" 
@@ -77,6 +78,7 @@
                     </OcSidebarSubmenu>
                 </template>
             </template>
+            <slot name="after" :is-expanded="isExpanded" />
         </div>
     </div>
 </template>
