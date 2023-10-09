@@ -54,7 +54,7 @@ defineEmits({
     <!--  Label  -->
     <span
       v-if="!inlineLabel"
-      class="flex items-center h-[18px] font-medium text-oc-text-400"
+      class="flex text-sm items-center font-medium text-oc-text-400"
       >{{ label }}</span
     >
 
@@ -84,7 +84,7 @@ defineEmits({
           :value="modelValue"
           :placeholder="placeholder"
           :disabled="disabled"
-          class="h-7 outline-none text-oc-text font-medium disabled:bg-transparent placeholder:font-normal placeholder:text-oc-text-300"
+          class="h-7 outline-none w-full text-oc-text disabled:bg-transparent placeholder:font-normal placeholder:text-oc-text-300"
           @focus="isFocused = true"
           @blur="isFocused = false"
           @input="$emit('update:modelValue', $event.target.value)"
@@ -97,7 +97,7 @@ defineEmits({
     <!--  Hint  -->
     <span
       v-if="hint"
-      class="h-[18px] flex items-center"
+      class="text-sm flex items-center"
       :class="[!disabled && isError ? 'text-oc-error' : 'text-oc-text-400']"
     >
       {{ hint }}
