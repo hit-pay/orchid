@@ -319,11 +319,11 @@ main {
 /* default vue transition */
 
 .sidebar-animation-enter-active {
-    transition: all .5s ease-out;
+    transition: all .3s ease-out;
 }
 
 .sidebar-animation-leave-active {
-    transition: all .5s ease-out;
+    transition: all .3s ease-out;
 }
 
 .sidebar-animation-enter-from,
@@ -332,7 +332,6 @@ main {
     width: 102px;
     opacity: 0;
 }
-
 
 .sidebar-submenu-animation-enter-active {
     animation: bounce-in 0.3s;
