@@ -1,5 +1,5 @@
 <template>
-    <transition name="slide-fade" :duration="1000">
+    <transition name="sidebar-animation" :duration="1000">
         <div 
              v-if="!state.loading"
             class="p-8 cursor-pointer relative bg-[var(--oc-sidebar-background)]"
@@ -51,14 +51,15 @@
                                             'text-[var(--oc-sidebar-menu-active-icon-active)]': menu.active
                                         }" :name="menu.icon" />
                                 </PopoverButton>
-                                <transition>
+                                <transition name="sidebar-submenu-popover-animation">
                                     <PopoverPanel v-if="!isExpanded">
                                         <div class="left-[60px] p-4 gap-4 absolute bg-oc-text-000 shadow-sm rounded w-[200px]">
                                             <div 
                                                 v-if="!menu.children"
-                                                class="
-                                                px-5 py-3 flex items-center rounded hover:bg-[var(--oc-sidebar-menu-hover)] 
-                                                font-medium bg-[var(--oc-sidebar-menu-active)] text-[var(--oc-sidebar-menu-active-text)]" 
+                                                    class="px-5 py-3 flex items-center rounded hover:bg-[var(--oc-sidebar-menu-hover)] "
+                                                    :class="{
+                                                        'font-medium bg-[var(--oc-sidebar-menu-active)] text-[var(--oc-sidebar-menu-active-text)]': menu.active
+                                                    }" 
                                                 >
                                                 <slot v-if="!isExpanded" name="label" :menu="menu" />
                                             </div>
@@ -76,14 +77,16 @@
                             </Popover>
                             <slot v-if="isExpanded" name="label" :menu="menu" />
                         </div>
-                        <transition name="bounce">
-                            <OcSidebarSubmenu v-if="menu.children && isExpanded && state.expanded.includes(menu.path)" :menu="menu" >
-                                <template 
-                                        #label="{submenu}">
-                                        <slot name="submenu_label" :menu="menu" :submenu="submenu" :is-expanded="isExpanded" />    
-                                </template>
-                            </OcSidebarSubmenu>
-                        </transition>
+                        <template v-if="isExpanded ">
+                            <transition name="sidebar-submenu-animation">
+                                <OcSidebarSubmenu v-if="menu.children && state.expanded.includes(menu.path)" :menu="menu" >
+                                    <template 
+                                            #label="{submenu}">
+                                            <slot name="submenu_label" :menu="menu" :submenu="submenu" :is-expanded="isExpanded" />    
+                                    </template>
+                                </OcSidebarSubmenu>
+                            </transition>
+                        </template>
                     </template>
                 </template>
                 <slot name="after" :is-expanded="isExpanded" />

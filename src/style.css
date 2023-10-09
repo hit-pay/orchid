@@ -330,21 +330,26 @@ main {
 
 /* default vue transition */
 
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.4s ease-in;
+.sidebar-animation-enter-active {
+    transition: all .5s linear;
 }
 
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
+.sidebar-animation-leave-active {
+    transition: all .5s linear;
 }
 
-/* bounce */
-.bounce-enter-active {
+.sidebar-animation-enter-from,
+.sidebar-animation-leave-to {
+    transform: translateX(20px);
+    width: 102px;
+    opacity: 0;
+}
+
+
+.sidebar-submenu-animation-enter-active {
     animation: bounce-in 0.3s;
   }
-  .bounce-leave-active {
+.sidebar-submenu-animation-leave-active {
     animation: bounce-in 0.3s reverse;
   }
 
@@ -356,18 +361,13 @@ main {
       transform: scale(1);
     }
   }
-  
-/* SLIDE FADE */
-.slide-fade-enter-active {
-transition: all 1s ease-out;
+
+.sidebar-submenu-popover-animation-enter-active,
+.sidebar-submenu-popover-animation-leave-active {
+  transition: opacity 0.4s ease-in;
 }
 
-.slide-fade-leave-active {
-transition: all 1s cubic-bezier(1, 0.5, 0.8, 1);
-}
-
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-transform: translateX(20px);
-opacity: 0;
+.sidebar-submenu-popover-animation-enter-from,
+.sidebar-submenu-popover-animation-leave-to {
+  opacity: 0;
 }
