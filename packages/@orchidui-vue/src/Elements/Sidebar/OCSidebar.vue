@@ -57,7 +57,7 @@
                                         <slot v-if="!isExpanded" name="label" :menu="menu" />
                                     </div>
                                     <OcSidebarSubmenu 
-                                        v-if="menu.children && !isExpanded" class="gap-4" 
+                                        v-if="menu.children && !isExpanded" 
                                         :menu="menu" :is-expanded="isExpanded">
                                         <template 
                                             #label="{submenu}">
