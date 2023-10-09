@@ -2,7 +2,16 @@
 
 /* Variables  */
 :root {
-    --hitpay-color: #002771;
+    
+    --hit-primary-50-tr: #0027710a;
+    --hit-primary-50: #f5f6f9;
+    --hit-primary-100: #ccd4e3;
+    --hit-primary-200: #a6b3cd;
+    --hit-primary-300: #8093b8;
+    --hit-primary-400: #4c689c;
+    --hit-primary-500: #002771;
+    --hit-primary-600: #09204a;
+
     
     --oc-blue-50-tr: #2465de1a;
     --oc-blue-50: #e5eeff;
@@ -75,6 +84,17 @@
 
 /* EXPERIMENTAL */
 .dark-mode {
+    
+    --hit-primary-600: #0027710a;
+    --hit-primary-500: #f5f6f9;
+    --hit-primary-400: #ccd4e3;
+    --hit-primary-300: #a6b3cd;
+    --hit-primary-200: #8093b8;
+    --hit-primary-100: #4c689c;
+    --hit-primary-50: #002771;
+    --hit-primary-50-tr: #09204a;
+
+
     --oc-blue-500: #60a5fa;
     --oc-blue-400: #3b82f6;
     --oc-blue-300: #2563eb;
@@ -237,10 +257,12 @@ main {
 
 
 .layout-payment {
-    --oc-sidebar-background: var(--oc-primary-50);
-    --oc-sidebar-menu-hover: var(--oc-primary-50-tr);
-    --oc-sidebar-menu-active: var(--oc-primary-100);
-    --oc-sidebar-menu-active-text: var(--oc-primary-500);
+    --oc-sidebar-background: var(--oc-background-dark);
+    --oc-sidebar-menu-hover: var(--hit-primary-50-tr);
+    --oc-sidebar-menu-active: var(--hit-primary-50-tr);
+    --oc-sidebar-menu-active-text: var(--hit-primary-500);
+    --oc-sidebar-menu-active-icon: var(--hit-primary-400);
+    --oc-sidebar-menu-active-icon-active: var(--hit-blue-500);
 }
 
 .layout-pos {
@@ -248,6 +270,7 @@ main {
     --oc-sidebar-menu-hover: var(--oc-warning-50-tr);
     --oc-sidebar-menu-active: var(--oc-warning-100);
     --oc-sidebar-menu-active-text: var(--oc-warning-500);
+    --oc-sidebar-menu-active-icon: var(--oc-warning-500);
 }
 
 .layout-online-store {
@@ -255,6 +278,7 @@ main {
     --oc-sidebar-menu-hover: var(--oc-success-50-tr);
     --oc-sidebar-menu-active: var(--oc-success-100);
     --oc-sidebar-menu-active-text: var(--oc-success-500);
+    --oc-sidebar-menu-active-icon: var(--oc-success-500);
 }
 
 

@@ -98,6 +98,17 @@ module.exports = {
           800: "var(--oc-grey-800)",
           900: "var(--oc-grey-900)",
         },
+        "hit-primary": {
+          DEFAULT: "var(--hit-primary-500)",
+          "50-tr": "var(--hit-primary-50-tr)",
+          50: "var(--hit-primary-50)",
+          100: "var(--hit-primary-100)",
+          200: "var(--hit-primary-200)",
+          300: "var(--hit-primary-300)",
+          400: "var(--hit-primary-400)",
+          500: "var(--hit-primary-500)",
+          600: "var(--hit-primary-600)",
+        },
         "oc-primary": {
           DEFAULT: "var(--oc-primary-500)",
           "50-tr": "var(--oc-primary-50-tr)",

@@ -20,12 +20,12 @@ defineProps({
     required: true,
   },
   width: {
-    type: Number,
-    default: 24,
+    type: String,
+    default: '24',
   },
   height: {
-    type: Number,
-    default: 24,
+    type: String,
+    default: '24',
   },
 });
 </script>
