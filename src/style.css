@@ -331,11 +331,11 @@ main {
 /* default vue transition */
 
 .sidebar-animation-enter-active {
-    transition: all .5s linear;
+    transition: all .5s ease-out;
 }
 
 .sidebar-animation-leave-active {
-    transition: all .5s linear;
+    transition: all .5s ease-out;
 }
 
 .sidebar-animation-enter-from,
