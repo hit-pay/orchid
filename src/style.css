@@ -260,6 +260,7 @@ main {
     --oc-sidebar-background: var(--oc-background-dark);
     --oc-sidebar-menu-hover: var(--hit-primary-50-tr);
     --oc-sidebar-menu-active: var(--hit-primary-50-tr);
+    --oc-sidebar-menu-title: var(--hit-primary-200);
     --oc-sidebar-menu-active-text: var(--hit-primary-500);
     --oc-sidebar-menu-active-icon: var(--hit-primary-400);
     --oc-sidebar-menu-active-icon-active: var(--hit-blue-500);
@@ -269,16 +270,20 @@ main {
     --oc-sidebar-background: var(--oc-warning-50);
     --oc-sidebar-menu-hover: var(--oc-warning-50-tr);
     --oc-sidebar-menu-active: var(--oc-warning-100);
+    --oc-sidebar-menu-title: var(--hit-primary-200);
     --oc-sidebar-menu-active-text: var(--oc-warning-500);
     --oc-sidebar-menu-active-icon: var(--oc-warning-500);
+    --oc-sidebar-menu-active-icon-active: var(--oc-warning-500);
 }
 
 .layout-online-store {
     --oc-sidebar-background: var(--oc-success-50);
     --oc-sidebar-menu-hover: var(--oc-success-50-tr);
     --oc-sidebar-menu-active: var(--oc-success-100);
+    --oc-sidebar-menu-title: var(--hit-primary-200);
     --oc-sidebar-menu-active-text: var(--oc-success-500);
     --oc-sidebar-menu-active-icon: var(--oc-success-500);
+    --oc-sidebar-menu-active-icon-active: var(--oc-success-500);
 }
 
 

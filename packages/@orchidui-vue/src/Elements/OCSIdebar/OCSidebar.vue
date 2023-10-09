@@ -18,10 +18,12 @@
             </button>
             <template v-for="sidebar, index in sidebarMenu" :key="index">
                 <h2 
-                    v-if="isExpanded" 
-                    class="text-sm uppercase text-hit-primary-200" >
+                    v-if="isExpanded && sidebar.title" 
+                    class="text-sm uppercase text-[var(--oc-sidebar-menu-title)]" >
                     {{ sidebar.title }}
                 </h2>
+                <div v-else-if="(!sidebar.title || !isExpanded) && index !== 0" class="my-4 w-full border-b border-[var(--oc-sidebar-menu-title)] opacity-50"></div>
+               
                 <template v-for="menu, menuIndex in sidebar.menus" :key="menuIndex">
                     <div 
                         class="flex items-center rounded hover:bg-[var(--oc-sidebar-menu-hover)]" 
@@ -55,7 +57,7 @@
                                         <slot v-if="!isExpanded" name="label" :menu="menu" />
                                     </div>
                                     <OcSidebarSubmenu 
-                                        v-if="menu.children && !isExpanded" class="gap-4 mt-4" 
+                                        v-if="menu.children && !isExpanded" class="gap-4" 
                                         :menu="menu" :is-expanded="isExpanded">
                                         <template 
                                             #label="{submenu}">
@@ -80,7 +82,6 @@
 </template>
 <script setup>
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
-import { NULL } from 'sass';
 import { defineAsyncComponent } from 'vue'
 
 
