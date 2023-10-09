@@ -59,7 +59,7 @@ watch(() => props.isExpandable, changeAccordionHeight);
     <Disclosure ref="disclosureRef">
       <DisclosureButton
         ref="disclosureButtonRef"
-        class="bg-oc-primary-50 py-3 text-sm border relative z-10 justify-between px-4 gap-x-3 flex hover:border-oc-grey-200 items-center w-full text-oc-text"
+        class="bg-oc-dark-blue-50 py-3 text-sm border relative z-10 justify-between px-4 gap-x-3 flex hover:border-oc-grey-200 items-center w-full text-oc-text"
         :class="
           isExpandable
             ? 'rounded-t border-oc-grey-200'

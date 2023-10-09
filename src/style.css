@@ -88,6 +88,14 @@
     --oc-dark-blue-50-tr: #09204a;
 
 
+    --oc-primary-500: #2465de1a;
+    --oc-primary-400: #e5eeff;
+    --oc-primary-300: #ccdefe;
+    --oc-primary-200: #b3cdfe;
+    --oc-primary-100: #80acfe;
+    --oc-primary-50: #4c8afd;
+    --oc-primary-50-tr: #2465de;
+
 
     --oc-purple-500: #c084fc;
     --oc-purple-400: #a855f7;
@@ -172,13 +180,13 @@ main {
     /* ACCENT COLOR */
 
 
-    --oc-primary-500: #60a5fa;
-    --oc-primary-400: #3b82f6;
-    --oc-primary-300: #2563eb;
-    --oc-primary-200: #1d4ed8;
-    --oc-primary-100: #1e40af;
-    --oc-primary-50: #1e3a8a;
-    --oc-primary-50-tr: #172554;
+    --oc-primary-50-tr: #2465de1a;
+    --oc-primary-50: #e5eeff;
+    --oc-primary-100: #ccdefe;
+    --oc-primary-200: #b3cdfe;
+    --oc-primary-300: #80acfe;
+    --oc-primary-400: #4c8afd;
+    --oc-primary-500: #2465de;
 
 
     --oc-accent-1-50-tr: var(--oc-purple-50-tr);
