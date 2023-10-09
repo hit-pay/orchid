@@ -2,7 +2,7 @@
      <div class="grid gap-3">
             <div 
                 v-for="submenu, subIndex in menu.children" :key="subIndex"
-                class="flex items-center px-5 py-3 rounded hover:bg-[var(--oc-sidebar-menu-hover)]" 
+                class="text-oc-text-400 flex items-center px-5 py-3 rounded hover:bg-[var(--oc-sidebar-menu-hover)]" 
                 :class="{
                     'font-medium bg-[var(--oc-sidebar-menu-active)] text-[var(--oc-sidebar-menu-active-text)]': submenu.active
                 }">
