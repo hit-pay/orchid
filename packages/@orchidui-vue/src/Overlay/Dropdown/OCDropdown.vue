@@ -1,79 +1,69 @@
-<!-- TODO : replace dropdown to own dropdown component -->
 <template>
-  <Menu as="div" class="relative inline-block text-left">
-    <div>
-      <slot name="trigger">
-        <MenuButton
-          class="inline-flex w-full justify-center rounded-md border px-4 py-2 text-sm font-medium hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-        >
-          Dropdown
-        </MenuButton>
-      </slot>
+  <div>
+    <div ref="trigger" @click="toggleDropdown">
+      <slot name="trigger">trigger</slot>
     </div>
-
-    <transition
-      enter-active-class="transition duration-100 ease-out"
-      enter-from-class="transform scale-95 opacity-0"
-      enter-to-class="transform scale-100 opacity-100"
-      leave-active-class="transition duration-75 ease-in"
-      leave-from-class="transform scale-100 opacity-100"
-      leave-to-class="transform scale-95 opacity-0"
+    <div
+      v-show="isOpen"
+      ref="dropdownMenu"
+      class="fixed z-[1] min-w-[162px] rounded-[0.5rem] bg-[var(--oc-contrast-white)] shadow border border-oc-blue-100"
     >
-      <MenuItems
-        class="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-      >
-        <div class="px-1 py-1">
-          <MenuItem v-slot="{ active }">
-            <button
-              :class="[
-                active ? 'bg-blue-500 text-white' : 'text-gray-900',
-                'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-              ]"
-            >
-              Duplicate
-            </button>
-          </MenuItem>
-        </div>
-        <div class="px-1 py-1">
-          <MenuItem v-slot="{ active }">
-            <button
-              :class="[
-                active ? 'bg-blue-500 text-white' : 'text-gray-900',
-                'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-              ]"
-            >
-              Archive
-            </button>
-          </MenuItem>
-          <MenuItem v-slot="{ active }">
-            <button
-              :class="[
-                active ? 'bg-blue-500 text-white' : 'text-gray-900',
-                'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-              ]"
-            >
-              Move
-            </button>
-          </MenuItem>
-        </div>
-
-        <div class="px-1 py-1">
-          <MenuItem v-slot="{ active }">
-            <button
-              :class="[
-                active ? 'bg-blue-500 text-white' : 'text-gray-900',
-                'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-              ]"
-            >
-              Delete
-            </button>
-          </MenuItem>
-        </div>
-      </MenuItems>
-    </transition>
-  </Menu>
+      <slot :close="() => (isOpen = false)" />
+    </div>
+  </div>
 </template>
 
 <script setup>
-import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
+import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
+
+const props = defineProps({
+  offset: Number,
+});
+const dropdownMenu = ref(null);
+const trigger = ref(null);
+const isOpen = ref(false);
+const toggleDropdown = () => {
+  document.body.appendChild(dropdownMenu.value);
+  isOpen.value = !isOpen.value;
+  updateMenuPosition();
+};
+const updateMenuPosition = async () => {
+  if (!isOpen.value) return;
+
+  const triggerRect = trigger.value.getBoundingClientRect();
+  dropdownMenu.value.style.top =
+    triggerRect.bottom + (props.offset || 0) + "px";
+  dropdownMenu.value.style.left = triggerRect.left + "px";
+
+  await nextTick();
+  if (
+    triggerRect.left + (props.offset || 0) + dropdownMenu.value.clientWidth >
+    window.innerWidth
+  ) {
+    // If it does, align the right edge of the menu with the right edge of the trigger
+    dropdownMenu.value.style.left =
+      triggerRect.right -
+      (props.offset || 0) -
+      dropdownMenu.value.clientWidth +
+      "px";
+  }
+  if (
+    triggerRect.bottom + (props.offset || 0) + dropdownMenu.value.clientHeight >
+    window.innerHeight
+  ) {
+    dropdownMenu.value.style.top =
+      triggerRect.top -
+      (props.offset || 0) -
+      dropdownMenu.value.clientHeight +
+      "px";
+  }
+};
+onMounted(() => {
+  window.addEventListener("resize", updateMenuPosition);
+  window.addEventListener("scroll", updateMenuPosition);
+});
+onBeforeUnmount(() => {
+  window.removeEventListener("resize", updateMenuPosition);
+  window.removeEventListener("scroll", updateMenuPosition);
+});
 </script>

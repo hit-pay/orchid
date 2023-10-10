@@ -1,5 +1,8 @@
 <template>
-  <span class="rounded-full py-2 px-4 text-xs" :class="className">
+  <span
+    class="rounded-full py-1 px-3 text-sm leading-[20px]"
+    :class="className"
+  >
     <template v-if="label">{{ label }}</template>
     <slot v-else />
   </span>
@@ -10,9 +13,9 @@ import { computed } from "vue";
 const props = defineProps({
   variant: {
     type: String,
-    default: ''
+    default: "",
   },
-  label: String
+  label: String,
 });
 
 const className = computed(() => {

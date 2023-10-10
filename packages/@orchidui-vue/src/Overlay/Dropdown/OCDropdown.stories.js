@@ -1,5 +1,6 @@
 import Dropdown from "./OCDropdown.vue";
 import Theme from "../../Theme/OCTheme.vue";
+import DropdownItem from "../../Overlay/Dropdown/OCDropdownItem.vue";
 
 export default {
   component: Dropdown,
@@ -8,10 +9,23 @@ export default {
 
 export const Default = {
   render: () => ({
-    components: { Dropdown, Theme },
+    components: { Dropdown, Theme, DropdownItem },
     template: `
-          <Theme colorMode="light">
-            <Dropdown/>
+          <Theme>
+            <Dropdown :offset="10">
+              <template #trigger>Dropdown Button</template>
+              <template #default="{ close }">
+                <div class="flex flex-col">
+                  <div class="p-2 border-b border-gray-200">
+                    <DropdownItem text="Menu" icon="pencil" @click="close"/>
+                    <DropdownItem text="Menu" icon="pencil" @click="close"/>
+                  </div>
+                  <div class="p-2">
+                    <DropdownItem text="Menu" icon="pencil" variant="destructive" @click="close"/>
+                  </div>
+                </div>
+              </template>
+            </Dropdown>
           </Theme>
         `,
   }),

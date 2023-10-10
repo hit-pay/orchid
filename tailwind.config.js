@@ -10,20 +10,20 @@ module.exports = {
       xs: [
         "0.625rem",
         {
-          lineHeight: "1.5rem",
+          lineHeight: "1.125rem",
           // letterSpacing: '-0.01em',
         },
       ],
       sm: [
         "0.75rem",
         {
-          lineHeight: "1.5rem",
+          lineHeight: "1.125rem",
         },
       ],
       base: [
         "0.875rem",
         {
-          lineHeight: "1.5rem",
+          lineHeight: "1.125rem",
         },
       ],
       lg: [
