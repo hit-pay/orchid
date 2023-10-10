@@ -118,6 +118,7 @@ module.exports = {
           300: "var(--oc-primary-300)",
           400: "var(--oc-primary-400)",
           500: "var(--oc-primary-500)",
+          600: "var(--oc-primary-600)",
         },
         "oc-accent-1": {
           DEFAULT: "var(--oc-accent-1-500)",
