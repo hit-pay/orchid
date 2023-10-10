@@ -2,17 +2,15 @@
 
 /* Variables  */
 :root {
-    
+
     --oc-dark-blue-50-tr: rgba(0, 39, 113, 0.04);
-    --oc-dark-blue-50: #F5F6F9; 
+    --oc-dark-blue-50: #F5F6F9;
     --oc-dark-blue-100: #CCD4E3;
     --oc-dark-blue-200: #a6b3cd;
     --oc-dark-blue-300: #8093b8;
     --oc-dark-blue-400: #4c689c;
     --oc-dark-blue-500: #002771;
     --oc-dark-blue-600: #09204a;
-
-
 
 
     --oc-blue-50-tr: #2465de1a;
