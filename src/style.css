@@ -1,6 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap'); /* Variables  */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+/* Variables  */
 :root {
-    --hitpay-color: #002771;
+
+    --oc-dark-blue-50-tr: rgba(0, 39, 113, 0.04);
+    --oc-dark-blue-50: #F5F6F9;
+    --oc-dark-blue-100: #CCD4E3;
+    --oc-dark-blue-200: #a6b3cd;
+    --oc-dark-blue-300: #8093b8;
+    --oc-dark-blue-400: #4c689c;
+    --oc-dark-blue-500: #002771;
+    --oc-dark-blue-600: #09204a;
+
 
     --oc-blue-50-tr: #2465de1a;
     --oc-blue-50: #e5eeff;
@@ -10,7 +21,8 @@
     --oc-blue-400: #4c8afd;
     --oc-blue-500: #2465de;
 
-    --oc-purple-50-tr: var(--oc-blue-50-tr);
+
+    --oc-purple-50-tr: #0027710a;
     --oc-purple-50: #f7edfd;
     --oc-purple-100: #efdbfb;
     --oc-purple-200: #e8c9fa;
@@ -73,13 +85,24 @@
 
 /* EXPERIMENTAL */
 .dark-mode {
-    --oc-blue-500: #60a5fa;
-    --oc-blue-400: #3b82f6;
-    --oc-blue-300: #2563eb;
-    --oc-blue-200: #1d4ed8;
-    --oc-blue-100: #1e40af;
-    --oc-blue-50: #1e3a8a;
-    --oc-blue-50-tr: #172554;
+
+    --oc-dark-blue-600: #0027710a;
+    --oc-dark-blue-500: #f5f6f9;
+    --oc-dark-blue-400: #ccd4e3;
+    --oc-dark-blue-300: #a6b3cd;
+    --oc-dark-blue-200: #8093b8;
+    --oc-dark-blue-100: #4c689c;
+    --oc-dark-blue-50: #002771;
+    --oc-dark-blue-50-tr: #09204a;
+
+
+    --oc-blue-500: #2465de1a;
+    --oc-blue-400: #e5eeff;
+    --oc-blue-300: #ccdefe;
+    --oc-blue-200: #b3cdfe;
+    --oc-blue-100: #80acfe;
+    --oc-blue-50: #4c8afd;
+    --oc-blue-50-tr: #2465de;
 
     --oc-purple-500: #c084fc;
     --oc-purple-400: #a855f7;
@@ -145,14 +168,16 @@
 main {
 
     /* PLEASE USE THIS VARIABLE FIRST */
-    --oc-text-000: var(--oc-contrast-white); /* if dark mode use --oc-contrast-black */
+    --oc-text-000: var(--oc-contrast-white);
+    /* if dark mode use --oc-contrast-black */
     --oc-text-200: var(--oc-grey-300);
     --oc-text-300: var(--oc-grey-500);
     --oc-text-400: var(--oc-grey-600);
     --oc-text-500: var(--oc-grey-900);
 
     --oc-background-dark: var(--oc-grey-10);
-    --oc-background-light: var(--oc-contrast-white); /* if dark mode use --oc-contrast-black */
+    --oc-background-light: var(--oc-contrast-white);
+    /* if dark mode use --oc-contrast-black */
 
     /* RENAME Variables */
     /* background light blue to background dark */
@@ -161,13 +186,16 @@ main {
 
     /* ACCENT COLOR */
 
-    --oc-primary-50-tr: var(--oc-blue-50-tr);
-    --oc-primary-50: var(--oc-blue-50);
-    --oc-primary-100: var(--oc-blue-100);
-    --oc-primary-200: var(--oc-blue-200);
-    --oc-primary-300: var(--oc-blue-300);
-    --oc-primary-400: var(--oc-blue-400);
-    --oc-primary-500: var(--oc-blue-500);
+
+    --oc-primary-50-tr: var(--oc-dark-blue-50-tr);
+    --oc-primary-50: var(--oc-dark-blue-50);
+    --oc-primary-100: var(--oc-dark-blue-100);
+    --oc-primary-200: var(--oc-dark-blue-200);
+    --oc-primary-300: var(--oc-dark-blue-300);
+    --oc-primary-400: var(--oc-dark-blue-400);
+    --oc-primary-500: var(--oc-dark-blue-500);
+    --oc-primary-600: var(--oc-dark-blue-600);
+
 
     --oc-accent-1-50-tr: var(--oc-purple-50-tr);
     --oc-accent-1-50: var(--oc-purple-50);
@@ -204,6 +232,8 @@ main {
     color: var(--oc-text-500);
     background-color: var(--oc-background-light);
 
+    /* TODO : ASK TO UI/UX improve button gradient to use color variable */
+
     /*  Buttons gradients  */
     --button-primary-default: linear-gradient(180deg, #4179e2 0%, #1f5bcc 100%);
     --button-primary-hover: linear-gradient(180deg, #4179e2 0%, #2f6ddf 100%);
@@ -213,50 +243,51 @@ main {
     --button-secondary-default: linear-gradient(180deg, #fff 0%, #f2f2f2 100%);
     --button-secondary-hover: linear-gradient(180deg, #fff 0%, #fafafa 100%);
     --button-secondary-pressed: linear-gradient(180deg, #fafafa 0%, #fff 100%);
-    --button-secondary-disabled: linear-gradient(
-            180deg,
-            #fcfcfc 0%,
-            #f7f7f7 100%
-    );
+    --button-secondary-disabled: linear-gradient(180deg,
+    #fcfcfc 0%,
+    #f7f7f7 100%);
 
-    --button-destructive-default: linear-gradient(
-            180deg,
-            #e44e5c 0%,
-            #cc2334 100%
-    );
+    --button-destructive-default: linear-gradient(180deg,
+    #e44e5c 0%,
+    #cc2334 100%);
     --button-destructive-hover: linear-gradient(180deg, #e44e5c 0%, #dc3747 100%);
-    --button-destructive-pressed: linear-gradient(
-            180deg,
-            #dc3747 0%,
-            #e44e5c 100%
-    );
-    --button-destructive-disabled: linear-gradient(
-            180deg,
-            #c66c75 0%,
-            #a84851 100%
-    );
+    --button-destructive-pressed: linear-gradient(180deg,
+    #dc3747 0%,
+    #e44e5c 100%);
+    --button-destructive-disabled: linear-gradient(180deg,
+    #c66c75 0%,
+    #a84851 100%);
 }
 
 
 .layout-payment {
-    --oc-sidebar-background: var(--oc-primary-50);
-    --oc-sidebar-menu-hover: var(--oc-primary-50-tr);
-    --oc-sidebar-menu-active: var(--oc-primary-100);
-    --oc-sidebar-menu-active-text: var(--oc-primary-500);
+    --oc-sidebar-background: var(--oc-background-dark);
+    --oc-sidebar-menu-hover: var(--oc-dark-blue-50-tr);
+    --oc-sidebar-menu-active: var(--oc-dark-blue-50-tr);
+    --oc-sidebar-menu-title: var(--oc-dark-blue-200);
+    --oc-sidebar-menu-active-text: var(--oc-dark-blue-500);
+    --oc-sidebar-menu-active-icon: var(--oc-dark-blue-400);
+    --oc-sidebar-menu-active-icon-active: var(--oc-primary-500);
 }
 
 .layout-pos {
-    --oc-sidebar-background: var(--oc-warning-50);
-    --oc-sidebar-menu-hover: var(--oc-warning-50-tr);
-    --oc-sidebar-menu-active: var(--oc-warning-100);
-    --oc-sidebar-menu-active-text: var(--oc-warning-500);
+    --oc-sidebar-background: #FBFBF9;
+    --oc-sidebar-menu-hover: #F5F4EF;
+    --oc-sidebar-menu-active: #F5F4EF;
+    --oc-sidebar-menu-title: #A6B3CD;
+    --oc-sidebar-menu-active-text: #03102F;
+    --oc-sidebar-menu-active-icon: #5A514B;
+    --oc-sidebar-menu-active-icon-active: #FDB012;
 }
 
 .layout-online-store {
-    --oc-sidebar-background: var(--oc-success-50);
-    --oc-sidebar-menu-hover: var(--oc-success-50-tr);
-    --oc-sidebar-menu-active: var(--oc-success-100);
-    --oc-sidebar-menu-active-text: var(--oc-success-500);
+    --oc-sidebar-background: #F9FBF9;
+    --oc-sidebar-menu-hover: #EFF5F0;
+    --oc-sidebar-menu-active: #EFF5F0;
+    --oc-sidebar-menu-title: #A6B3CD;
+    --oc-sidebar-menu-active-text: #03102F;
+    --oc-sidebar-menu-active-icon: #566650;
+    --oc-sidebar-menu-active-icon-active: #0EA81B;
 }
 
 
@@ -299,6 +330,13 @@ main {
 
 @tailwind components;
 @tailwind utilities;
-  
 
+.sidebar-submenu-popover-animation-enter-active,
+.sidebar-submenu-popover-animation-leave-active {
+    transition: opacity 0.4s ease-in;
+}
 
+.sidebar-submenu-popover-animation-enter-from,
+.sidebar-submenu-popover-animation-leave-to {
+    opacity: 0;
+}

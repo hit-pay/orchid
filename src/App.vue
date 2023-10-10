@@ -1,12 +1,12 @@
 <template>
   <Theme :color-mode="state.darkMode ? 'dark' : ''" :class="primaryColor">
     <section
-      class="flex flex-wrap container mx-auto min-h-screen items-start p-8"
+      class="container flex flex-wrap items-start min-h-screen p-8 mx-auto"
     >
-      <section class="w-full md:w-2/3 px-8">
-        <div class="grid gap-3 p-8 bg-oc-bg-dark rounded">
-          <h1 class="flex justify-end font-bold mb-3">Orchid UI Playground</h1>
-          <div class="flex justify-end mb-3 gap-3">
+      <section class="w-full lg:px-8 md:w-2/3">
+        <div class="grid gap-3 p-8 rounded bg-oc-bg-dark">
+          <h1 class="flex justify-end mb-3 font-bold">Orchid UI Playground</h1>
+          <div class="flex justify-end gap-3 mb-3">
             <a href="/docs" class="text-oc-primary"> Documentation </a> /
             <a
               href="https://storybook-orchidui.vercel.app/"
@@ -49,7 +49,7 @@
             <Chip label="warning" variant="warning" />
             <Chip label="error" variant="error" />
           </div>
-          <div class="flex justify-end flex-wrap gap-3">
+          <div class="flex flex-wrap justify-end gap-3">
             <Shackbar v-bind="snackbarArgs" />
             <Shackbar v-bind="snackbarArgs" color="primary" />
             <Shackbar v-bind="snackbarArgs" color="error" />
@@ -80,11 +80,11 @@
               alignment="horizontal"
             />
           </div>
-          <div class="flex my-6 flex-col w-fit gap-2">
+          <div class="flex flex-col gap-2 my-6 w-fit">
             <Criteria label="Text" :model-value="false" />
             <Criteria label="Text" :model-value="true" />
           </div>
-          <div class="flex flex-col w-fit items-center gap-2 my-6">
+          <div class="flex flex-col items-center gap-2 my-6 w-fit">
             <Radio model-value="1" label="Text" />
             <Radio model-value="2" label="Text" />
             <Radio model-value="3" disabled label="Text" />
@@ -105,7 +105,7 @@
               alignment="horizontal"
             />
           </div>
-          <div class="grid my-6 grid-cols-2 w-fit items-center gap-6">
+          <div class="grid items-center grid-cols-2 gap-6 my-6 w-fit">
             <Toggle :model-value="true" />
             <Toggle :model-value="true" size="small" />
             <Toggle :model-value="false" />
@@ -113,9 +113,9 @@
           </div>
         </div>
       </section>
-      <section class="w-full md:w-1/3 bg-oc-primary-100 rounded p-8">
+      <section class="w-full p-8 mt-8 rounded md:mt-0 md:w-1/3 bg-oc-primary-100">
         <!-- Theme settings -->
-        <h1 class="font-medium mb-3">Theme Settings</h1>
+        <h1 class="mb-3 font-medium">Theme Settings</h1>
         <Button label="Enable Dark Mode" @click="toggleDarkMode" />
         <Button
           class="mt-3"
@@ -227,6 +227,22 @@ const changePrimaryColor = () => {
   --oc-primary-300: #2dd4bf;
   --oc-primary-400: #14b8a6;
   --oc-primary-500: #0d9488;
+
+
+  --button-primary-default: linear-gradient(180deg, var(--oc-primary-400) 0%,  var(--oc-primary-500) 100%);
+  --button-primary-hover: linear-gradient(180deg,  var(--oc-primary-400) 0%,  var(--oc-primary-500) 100%);
+  --button-primary-pressed: linear-gradient(180deg,  var(--oc-primary-400) 0%,  var(--oc-primary-500) 100%);
+  --button-primary-disabled: linear-gradient(180deg,  var(--oc-primary-400) 0%,  var(--oc-primary-500) 100%);
+
+  --button-secondary-default: linear-gradient(180deg, #fff 0%, #f2f2f2 100%);
+  --button-secondary-hover: linear-gradient(180deg, #fff 0%, #fafafa 100%);
+  --button-secondary-pressed: linear-gradient(180deg, #fafafa 0%, #fff 100%);
+  --button-secondary-disabled: linear-gradient(
+          180deg,
+          #fcfcfc 0%,
+          #f7f7f7 100%
+  );
+  
 }
 
 .dark-mode.teal-primary-color {

@@ -98,6 +98,17 @@ module.exports = {
           800: "var(--oc-grey-800)",
           900: "var(--oc-grey-900)",
         },
+        "oc-dark-blue": {
+          DEFAULT: "var(--oc-dark-blue-500)",
+          "50-tr": "var(--oc-dark-blue-50-tr)",
+          50: "var(--oc-dark-blue-50)",
+          100: "var(--oc-dark-blue-100)",
+          200: "var(--oc-dark-blue-200)",
+          300: "var(--oc-dark-blue-300)",
+          400: "var(--oc-dark-blue-400)",
+          500: "var(--oc-dark-blue-500)",
+          600: "var(--oc-dark-blue-600)",
+        },
         "oc-primary": {
           DEFAULT: "var(--oc-primary-500)",
           "50-tr": "var(--oc-primary-50-tr)",
@@ -107,6 +118,7 @@ module.exports = {
           300: "var(--oc-primary-300)",
           400: "var(--oc-primary-400)",
           500: "var(--oc-primary-500)",
+          600: "var(--oc-primary-600)",
         },
         "oc-accent-1": {
           DEFAULT: "var(--oc-accent-1-500)",
