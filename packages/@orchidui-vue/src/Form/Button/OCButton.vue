@@ -16,14 +16,20 @@
     />
 
     <template v-if="leftIcon && !isLoading">
-      <Icon :name="leftIcon" />
+      <Icon
+        :width="iconSize[size]" 
+        :height="iconSize[size]" 
+        :name="leftIcon" />
     </template>
 
     <span v-if="label">{{ label }}</span>
     <slot v-else />
 
     <template v-if="rightIcon">
-      <Icon :name="rightIcon" />
+      <Icon 
+        :width="iconSize[size]" 
+        :height="iconSize[size]"   
+        :name="rightIcon" />
     </template>
   </button>
 </template>
