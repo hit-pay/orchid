@@ -1,12 +1,9 @@
 <template>
     <transition name="sidebar-animation" :duration="1000">
         <div 
-             v-if="!state.loading"
+            v-if="!state.loading"
             class="p-8 cursor-pointer relative bg-[var(--oc-sidebar-background)]"
-            :class="{
-                'w-[300px] ': isExpanded,
-                'w-[102px] ': !isExpanded
-            }">
+            :class="allClassName">
             <div class="grid gap-3">
                 <button 
                     type="button" 
@@ -96,7 +93,7 @@
 </template>
 <script setup>
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
-import { defineAsyncComponent, reactive, onMounted, defineEmits} from 'vue'
+import { defineAsyncComponent, reactive, onMounted, computed} from 'vue'
 
 
 const Icon = defineAsyncComponent(() =>
@@ -110,6 +107,9 @@ const OcSidebarSubmenu = defineAsyncComponent(() =>
 const emit = defineEmits(['changeExpanded'])
 
 const props = defineProps({
+    class:{
+        type: String
+    },
     isExpanded: {
         type: Boolean,
         default: true
@@ -149,21 +149,24 @@ const changeExpanded = () => {
     })
 }
 
-onMounted(() => {
-    // expand active menu
-    // props.sidebarMenu.forEach((sideMenu) => {
-    //     sideMenu.menus.forEach((menu) => {
-    //         // check if menu active
-    //         if(menu.children){
-    //             menu.children.forEach((submenu) => {
-    //                 if(submenu.active){
-    //                     expandMenu(menu.path)
-    //                 }
-    //             })
-    //         }
-    //     })
-    // })
+const allClassName = computed(() => {
+    let classNames = props.isExpanded ? 'w-[300px] ' : 'w-[102px] '
+    return classNames + props.class
+})
 
+onMounted(() => {
+    props.sidebarMenu.forEach((sideMenu) => {
+        sideMenu.items.forEach((menu) => {
+            // check if menu active
+            if(menu.children){
+                menu.children.forEach((submenu) => {
+                    if(submenu.active){
+                        expandMenu(menu.path)
+                    }
+                })
+            }
+        })
+    })
     state.loading = false
 })
 
