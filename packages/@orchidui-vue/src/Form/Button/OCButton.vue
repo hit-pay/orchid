@@ -65,10 +65,9 @@ const buttonTypeClasses = computed(() => ({
 const buttonSizeClasses = computed(() => ({
   default: !props.isTransparent ? "px-4 py-3" : "py-3",
   small: !props.isTransparent
-    ? isIconOnly.value
-      ? "h-8 w-8 py-3 px-4 "
-      : "h-8 p-3 "
-    : "h-8 ",
+    ? isIconOnly.value 
+      ? "h-8 w-8 p-2 "   
+      : "h-8 p-3 " : "h-8 ",
   big: !props.isTransparent
     ? isIconOnly.value
       ? "h-[44px] py-3 px-4"
