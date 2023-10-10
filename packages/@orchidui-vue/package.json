@@ -24,9 +24,9 @@
     ".": {
       "import": "./dist/index.js"
     },
-    "./dist/index.css": {
-      "import": "./dist/index.css",
-      "require": "./dist/index.css"
+    "./dist/style.css": {
+      "import": "./dist/style.css",
+      "require": "./dist/style.css"
     }
   },
   "module": "./dist/index.js",

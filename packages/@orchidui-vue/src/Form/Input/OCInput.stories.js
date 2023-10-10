@@ -103,7 +103,7 @@ export const LeadingTrailing = {
                         <MenuButton
                             class="py-3 pr-3 border-r border-oc-grey-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
                         >
-                          <span class="flex items-center h-[18px]">USD</span>
+                          <span class="flex items-center text-sm">USD</span>
                           <Icon class="w-[14px] h-[14px]" name="chevron-down"/>
                         </MenuButton>
                       </template>
@@ -117,7 +117,7 @@ export const LeadingTrailing = {
                         <MenuButton
                             class="py-3 pr-3 border-r border-oc-grey-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
                         >
-                          <span class="flex items-center h-[18px]">USD</span>
+                          <span class="flex items-center text-sm">USD</span>
                           <Icon class="w-[14px] h-[14px]" name="chevron-down"/>
                         </MenuButton>
                       </template>
@@ -131,7 +131,7 @@ export const LeadingTrailing = {
                         <MenuButton
                             class="py-3 pr-3 border-r border-oc-grey-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
                         >
-                          <span class="flex items-center h-[18px]">USD</span>
+                          <span class="flex items-center text-sm">USD</span>
                           <Icon class="w-[14px] h-[14px]" name="chevron-down"/>
                         </MenuButton>
                       </template>
@@ -149,7 +149,7 @@ export const LeadingTrailing = {
                         <MenuButton
                             class="py-3 pl-3 border-l border-oc-grey-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
                         >
-                          <span class="flex items-center h-[18px]">USD</span>
+                          <span class="flex items-center text-sm">USD</span>
                           <Icon class="w-[14px] h-[14px]" name="chevron-down"/>
                         </MenuButton>
                       </template>
@@ -163,7 +163,7 @@ export const LeadingTrailing = {
                         <MenuButton
                             class="py-3 pl-3 border-l border-oc-grey-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
                         >
-                          <span class="flex items-center h-[18px]">USD</span>
+                          <span class="flex items-center text-sm">USD</span>
                           <Icon class="w-[14px] h-[14px]" name="chevron-down"/>
                         </MenuButton>
                       </template>
@@ -177,7 +177,7 @@ export const LeadingTrailing = {
                         <MenuButton
                             class="py-3 pl-3 border-l border-oc-grey-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
                         >
-                          <span class="flex items-center h-[18px]">USD</span>
+                          <span class="flex items-center text-sm">USD</span>
                           <Icon class="w-[14px] h-[14px]" name="chevron-down"/>
                         </MenuButton>
                       </template>
