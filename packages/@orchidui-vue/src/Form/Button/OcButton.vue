@@ -73,16 +73,15 @@ const buttonTypeClasses = computed(() => ({
 
 const buttonSizeClasses = computed(() => ({
   default: !props.isTransparent ? "px-4 py-3" : "py-3",
-  small: !props.isTransparent
-    ? isIconOnly.value
-      ? "h-8 w-8 p-3 "
-      : "h-8 p-3 "
-    : "h-8 ",
-  big: !props.isTransparent
-    ? isIconOnly.value
-      ? "h-[44px] py-3 px-4"
-      : "h-[44px] py-3 px-[14px]"
-    : " py-3 h-[44px]",
+  small:
+    (!props.isTransparent ? (isIconOnly.value ? "w-8 p-3" : "p-3") : "") +
+    "h-8 text-sm",
+  big:
+    (!props.isTransparent
+      ? isIconOnly.value
+        ? "py-3 px-4"
+        : "py-3 px-[14px]"
+      : " py-3") + "text-lg h-[44px]",
 }));
 const roundedClasses = props.isRoundedFull ? "rounded-full" : "rounded";
 

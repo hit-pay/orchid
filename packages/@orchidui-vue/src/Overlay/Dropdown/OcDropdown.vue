@@ -1,12 +1,12 @@
 <template>
   <div>
     <div ref="trigger" @click="toggleDropdown">
-      <slot name="trigger">trigger</slot>
+      <slot name="trigger" :is-open="isOpen">trigger</slot>
     </div>
     <div
       v-show="isOpen"
       ref="dropdownMenu"
-      class="fixed z-[1] min-w-[162px] rounded-[0.5rem] bg-[var(--oc-contrast-white)] shadow border border-oc-blue-100"
+      class="fixed z-[1] min-w-[162px] rounded-[0.5rem] bg-[var(--oc-contrast-white)] shadow border border-oc-blue-100 oc-dropdown-menu"
     >
       <slot :close="() => (isOpen = false)" />
     </div>

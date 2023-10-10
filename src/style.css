@@ -165,7 +165,7 @@
 }
 
 
-main {
+main, .oc-dropdown-menu {
 
     /* PLEASE USE THIS VARIABLE FIRST */
     --oc-text-000: var(--oc-contrast-white);
