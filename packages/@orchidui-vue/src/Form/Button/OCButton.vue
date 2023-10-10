@@ -8,7 +8,12 @@
       roundedClasses,
     ]"
   >
-    <Icon v-if="isLoading" name="loading-2" />
+    <Icon 
+      v-if="isLoading" 
+      :width="iconSize[size]" 
+      :height="iconSize[size]" 
+       name="loading-2" 
+    />
 
     <template v-if="leftIcon && !isLoading">
       <Icon :name="leftIcon" />
@@ -66,7 +71,7 @@ const buttonSizeClasses = computed(() => ({
   default: !props.isTransparent ? "px-4 py-3" : "py-3",
   small: !props.isTransparent
     ? isIconOnly.value 
-      ? "h-8 w-8 p-2 "   
+      ? "h-8 w-8 p-3 "   
       : "h-8 p-3 " : "h-8 ",
   big: !props.isTransparent
     ? isIconOnly.value
@@ -75,6 +80,13 @@ const buttonSizeClasses = computed(() => ({
     : " py-3 h-[44px]",
 }));
 const roundedClasses = props.isRoundedFull ? "rounded-full" : "rounded";
+
+const iconSize = computed(() => ({
+  default: '18',
+  small: '16',
+  big: '20'
+}))
+
 </script>
 <style scoped lang="scss">
 .oc-btn {
