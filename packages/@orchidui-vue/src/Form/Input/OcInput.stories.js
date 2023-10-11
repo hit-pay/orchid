@@ -33,25 +33,25 @@ export const Default = {
     type: "",
     icon: "",
     disabled: false,
-    inlineLabel: "",
+    isInlineLabel: false,
   },
   render: (args) => ({
-    components: { Theme, OCInput, BaseInput },
+    components: { Theme, OCInput },
     setup() {
       return { args };
     },
     template: `
           <Theme colorMode="light">
-            <BaseInput :label="args.label" :error-message="args.errorMessage" :hint="args.hint">
-              <OCInput
-                  :placeholder="args.placeholder"
-                  :inlineLabel="args.inlineLabel"
-                  :type="args.type"
-                  :icon="args.icon"
-                  :isError="!!args.errorMessage"
-                  :disabled="args.disabled"
-              />
-            </BaseInput>
+            <OCInput
+                :label="args.label"
+                :error-message="args.errorMessage"
+                :hint="args.hint"
+                :placeholder="args.placeholder"
+                :isInlineLabel="args.isInlineLabel"
+                :type="args.type"
+                :icon="args.icon"
+                :disabled="args.disabled"
+            />
           </Theme>
         `,
   }),
@@ -66,10 +66,10 @@ export const MainComponent = {
     type: "",
     icon: "",
     disabled: false,
-    inlineLabel: "",
+    isInlineLabel: false,
   },
   render: (args) => ({
-    components: { Theme, OCInput, BaseInput },
+    components: { Theme, OCInput },
     setup() {
       const text = ref("Text");
       return { text, args };
@@ -78,66 +78,56 @@ export const MainComponent = {
           <Theme colorMode="light">
             <div class="flex flex-col gap-y-4">
               <div class="flex items-end gap-x-4">
-                <BaseInput :label="args.label" :error-message="args.errorMessage" :hint="args.hint">
-                  <OCInput
-                      :placeholder="args.placeholder"
-                      :inlineLabel="args.inlineLabel"
-                      :type="args.type"
-                      :icon="args.icon"
-                      :isError="!!args.errorMessage"
-                      :disabled="args.disabled"
-                  />
-                </BaseInput>
-                <BaseInput :label="args.label" :error-message="args.errorMessage" :hint="args.hint">
-                  <OCInput
-                      :placeholder="args.placeholder"
-                      :inlineLabel="args.inlineLabel"
-                      :type="args.type"
-                      :icon="args.icon"
-                      :isError="!!args.errorMessage"
-                      disabled
-                  />
-                </BaseInput>
-                <BaseInput :error-message="args.errorMessage" :hint="args.hint">
-                  <OCInput
-                      :placeholder="args.placeholder"
-                      :inline-label="args.label"
-                      :type="args.type"
-                      :icon="args.icon"
-                      :isError="!!args.errorMessage"
-                  />
-                </BaseInput>
+                <OCInput
+                    :label="args.label" :error-message="args.errorMessage" :hint="args.hint"
+                    :placeholder="args.placeholder"
+                    :is-inline-label="args.inlineLabel"
+                    :type="args.type"
+                    :icon="args.icon"
+                    :disabled="args.disabled"
+                />
+                <OCInput
+                    :label="args.label" :error-message="args.errorMessage" :hint="args.hint"
+                    :placeholder="args.placeholder"
+                    :is-inline-label="args.inlineLabel"
+                    :type="args.type"
+                    :icon="args.icon"
+                    disabled
+                />
+                <OCInput
+                    :label="args.label" :error-message="args.errorMessage" :hint="args.hint"
+                    :placeholder="args.placeholder"
+                    :is-inline-label="args.label"
+                    :type="args.type"
+                    :icon="args.icon"
+                />
               </div>
               <div class="flex items-end gap-x-4">
-                <BaseInput :label="args.label" error-message="Default Error" :hint="args.hint">
-                  <OCInput
-                      :placeholder="args.placeholder"
-                      :inlineLabel="args.inlineLabel"
-                      :type="args.type"
-                      :icon="args.icon"
-                      is-error
-                      :disabled="args.disabled"
-                  />
-                </BaseInput>
-                <BaseInput :label="args.label" error-message="Disabled Error" :hint="args.hint">
-                  <OCInput
-                      :placeholder="args.placeholder"
-                      :inlineLabel="args.inlineLabel"
-                      :type="args.type"
-                      :icon="args.icon"
-                      is-error
-                      disabled
-                  />
-                </BaseInput>
-                <BaseInput error-message="Inline Error" :hint="args.hint">
-                  <OCInput
-                      :placeholder="args.placeholder"
-                      :inline-label="args.label"
-                      :type="args.type"
-                      :icon="args.icon"
-                      is-error
-                  />
-                </BaseInput>
+                <OCInput
+                    :placeholder="args.placeholder"
+                    :is-inline-label="args.inlineLabel"
+                    :label="args.label" error-message="Default Error" :hint="args.hint"
+                    :type="args.type"
+                    :icon="args.icon"
+                    :disabled="args.disabled"
+                />
+                <OCInput
+                    :label="args.label" error-message="Disabled Error" :hint="args.hint"
+                    :placeholder="args.placeholder"
+                    :is-inline-label="args.inlineLabel"
+                    :type="args.type"
+                    :icon="args.icon"
+                    disabled
+                />
+                <OCInput
+                    :label="args.label"
+                    :placeholder="args.placeholder"
+                    is-inline-label
+                    :type="args.type"
+                    error-message="Inline Error" :hint="args.hint"
+                    :icon="args.icon"
+                    is-error
+                />
               </div>
             </div>
           </Theme>
@@ -147,79 +137,74 @@ export const MainComponent = {
 
 export const Trailing = {
   render: () => ({
-    components: { Theme, OCInput, Dropdown, DropdownItem, Icon, BaseInput },
+    components: { Theme, OCInput, Dropdown, DropdownItem, Icon },
     template: `
           <Theme colorMode="light">
             <div class="flex items-end gap-x-4">
-              <BaseInput label="Label" hint="This is a hint text to help user">
-                <OCInput type="trailing">
-                  <template #trailing>
-                    <Dropdown>
-                      <template #default="{close}">
-                        <div class="flex p-2 flex-col">
-                          <DropdownItem text="Menu" icon="pencil" @click="close"/>
-                          <DropdownItem text="Menu" icon="pencil" @click="close"/>
-                          <DropdownItem text="Menu" icon="pencil" @click="close"/>
-                        </div>
-                      </template>
-                      <template #trigger>
-                        <div
-                            class="py-3 pr-3 border-r border-oc-grey-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
-                        >
-                          <span class="flex items-center text-sm">USD</span>
-                          <Icon class="w-[14px] h-[14px]" name="chevron-down"/>
-                        </div>
-                      </template>
-                    </Dropdown>
-                  </template>
-                </OCInput>
-              </BaseInput>
-              <BaseInput label="Label" hint="This is a hint text to help user">
-                <OCInput type="trailing" disabled>
-                  <template #trailing>
-                    <Dropdown>
-                      <template #default="{close}">
-                        <div class="flex p-2 flex-col">
-                          <DropdownItem text="Menu" icon="pencil" @click="close"/>
-                          <DropdownItem text="Menu" icon="pencil" @click="close"/>
-                          <DropdownItem text="Menu" icon="pencil" @click="close"/>
-                        </div>
-                      </template>
-                      <template #trigger>
-                        <div
-                            class="py-3 pr-3 border-r border-oc-grey-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
-                        >
-                          <span class="flex items-center text-sm">USD</span>
-                          <Icon class="w-[14px] h-[14px]" name="chevron-down"/>
-                        </div>
-                      </template>
-                    </Dropdown>
-                  </template>
-                </OCInput>
-              </BaseInput>
-              <BaseInput label="Label" hint="This is a hint text to help user" error-message="Error message">
-                <OCInput type="trailing" is-error>
-                  <template #trailing>
-                    <Dropdown>
-                      <template #default="{close}">
-                        <div class="flex p-2 flex-col">
-                          <DropdownItem text="Menu" icon="pencil" @click="close"/>
-                          <DropdownItem text="Menu" icon="pencil" @click="close"/>
-                          <DropdownItem text="Menu" icon="pencil" @click="close"/>
-                        </div>
-                      </template>
-                      <template #trigger>
-                        <div
-                            class="py-3 pr-3 border-r border-oc-grey-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
-                        >
-                          <span class="flex items-center text-sm">USD</span>
-                          <Icon class="w-[14px] h-[14px]" name="chevron-down"/>
-                        </div>
-                      </template>
-                    </Dropdown>
-                  </template>
-                </OCInput>
-              </BaseInput>
+              <OCInput type="trailing" label="Label" hint="This is a hint text to help user">
+                <template #trailing>
+                  <Dropdown>
+                    <template #default="{close}">
+                      <div class="flex p-2 flex-col">
+                        <DropdownItem text="Menu" icon="pencil" @click="close"/>
+                        <DropdownItem text="Menu" icon="pencil" @click="close"/>
+                        <DropdownItem text="Menu" icon="pencil" @click="close"/>
+                      </div>
+                    </template>
+                    <template #trigger>
+                      <div
+                          class="py-3 pr-3 border-r border-oc-grey-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
+                      >
+                        <span class="flex items-center text-sm">USD</span>
+                        <Icon class="w-[14px] h-[14px]" name="chevron-down"/>
+                      </div>
+                    </template>
+                  </Dropdown>
+                </template>
+              </OCInput>
+              <OCInput type="trailing" disabled label="Label" hint="This is a hint text to help user">
+                <template #trailing>
+                  <Dropdown>
+                    <template #default="{close}">
+                      <div class="flex p-2 flex-col">
+                        <DropdownItem text="Menu" icon="pencil" @click="close"/>
+                        <DropdownItem text="Menu" icon="pencil" @click="close"/>
+                        <DropdownItem text="Menu" icon="pencil" @click="close"/>
+                      </div>
+                    </template>
+                    <template #trigger>
+                      <div
+                          class="py-3 pr-3 border-r border-oc-grey-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
+                      >
+                        <span class="flex items-center text-sm">USD</span>
+                        <Icon class="w-[14px] h-[14px]" name="chevron-down"/>
+                      </div>
+                    </template>
+                  </Dropdown>
+                </template>
+              </OCInput>
+              <OCInput type="trailing" label="Label" hint="This is a hint text to help user"
+                       error-message="Error message">
+                <template #trailing>
+                  <Dropdown>
+                    <template #default="{close}">
+                      <div class="flex p-2 flex-col">
+                        <DropdownItem text="Menu" icon="pencil" @click="close"/>
+                        <DropdownItem text="Menu" icon="pencil" @click="close"/>
+                        <DropdownItem text="Menu" icon="pencil" @click="close"/>
+                      </div>
+                    </template>
+                    <template #trigger>
+                      <div
+                          class="py-3 pr-3 border-r border-oc-grey-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
+                      >
+                        <span class="flex items-center text-sm">USD</span>
+                        <Icon class="w-[14px] h-[14px]" name="chevron-down"/>
+                      </div>
+                    </template>
+                  </Dropdown>
+                </template>
+              </OCInput>
             </div>
           </Theme>
         `,
@@ -232,75 +217,70 @@ export const Leading = {
     template: `
           <Theme colorMode="light">
             <div class="flex items-end gap-x-4">
-              <BaseInput label="Label" hint="This is a hint text to help user">
-                <OCInput type="leading">
-                  <template #leading>
-                    <Dropdown>
-                      <template #default="{close}">
-                        <div class="flex p-2 flex-col">
-                          <DropdownItem text="Menu" icon="pencil" @click="close"/>
-                          <DropdownItem text="Menu" icon="pencil" @click="close"/>
-                          <DropdownItem text="Menu" icon="pencil" @click="close"/>
-                        </div>
-                      </template>
-                      <template #trigger>
-                        <div
-                            class="py-3 pl-3 border-l border-oc-grey-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
-                        >
-                          <span class="flex items-center text-sm">USD</span>
-                          <Icon class="w-[14px] h-[14px]" name="chevron-down"/>
-                        </div>
-                      </template>
-                    </Dropdown>
-                  </template>
-                </OCInput>
-              </BaseInput>
-              <BaseInput label="Label" hint="This is a hint text to help user">
-                <OCInput type="leading" disabled>
-                  <template #leading>
-                    <Dropdown>
-                      <template #default="{close}">
-                        <div class="flex p-2 flex-col">
-                          <DropdownItem text="Menu" icon="pencil" @click="close"/>
-                          <DropdownItem text="Menu" icon="pencil" @click="close"/>
-                          <DropdownItem text="Menu" icon="pencil" @click="close"/>
-                        </div>
-                      </template>
-                      <template #trigger>
-                        <div
-                            class="py-3 pl-3 border-l border-oc-grey-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
-                        >
-                          <span class="flex items-center text-sm">USD</span>
-                          <Icon class="w-[14px] h-[14px]" name="chevron-down"/>
-                        </div>
-                      </template>
-                    </Dropdown>
-                  </template>
-                </OCInput>
-              </BaseInput>
-              <BaseInput label="Label" hint="This is a hint text to help user" error-message="Error message">
-                <OCInput type="leading" is-error>
-                  <template #leading>
-                    <Dropdown>
-                      <template #default="{close}">
-                        <div class="flex p-2 flex-col">
-                          <DropdownItem text="Menu" icon="pencil" @click="close"/>
-                          <DropdownItem text="Menu" icon="pencil" @click="close"/>
-                          <DropdownItem text="Menu" icon="pencil" @click="close"/>
-                        </div>
-                      </template>
-                      <template #trigger>
-                        <div
-                            class="py-3 pl-3 border-l border-oc-grey-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
-                        >
-                          <span class="flex items-center text-sm">USD</span>
-                          <Icon class="w-[14px] h-[14px]" name="chevron-down"/>
-                        </div>
-                      </template>
-                    </Dropdown>
-                  </template>
-                </OCInput>
-              </BaseInput>
+              <OCInput type="leading" label="Label" hint="This is a hint text to help user">
+                <template #leading>
+                  <Dropdown>
+                    <template #default="{close}">
+                      <div class="flex p-2 flex-col">
+                        <DropdownItem text="Menu" icon="pencil" @click="close"/>
+                        <DropdownItem text="Menu" icon="pencil" @click="close"/>
+                        <DropdownItem text="Menu" icon="pencil" @click="close"/>
+                      </div>
+                    </template>
+                    <template #trigger>
+                      <div
+                          class="py-3 pl-3 border-l border-oc-grey-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
+                      >
+                        <span class="flex items-center text-sm">USD</span>
+                        <Icon class="w-[14px] h-[14px]" name="chevron-down"/>
+                      </div>
+                    </template>
+                  </Dropdown>
+                </template>
+              </OCInput>
+              <OCInput type="leading" disabled label="Label" hint="This is a hint text to help user">
+                <template #leading>
+                  <Dropdown>
+                    <template #default="{close}">
+                      <div class="flex p-2 flex-col">
+                        <DropdownItem text="Menu" icon="pencil" @click="close"/>
+                        <DropdownItem text="Menu" icon="pencil" @click="close"/>
+                        <DropdownItem text="Menu" icon="pencil" @click="close"/>
+                      </div>
+                    </template>
+                    <template #trigger>
+                      <div
+                          class="py-3 pl-3 border-l border-oc-grey-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
+                      >
+                        <span class="flex items-center text-sm">USD</span>
+                        <Icon class="w-[14px] h-[14px]" name="chevron-down"/>
+                      </div>
+                    </template>
+                  </Dropdown>
+                </template>
+              </OCInput>
+              <OCInput type="leading" label="Label" hint="This is a hint text to help user"
+                       error-message="Error message">
+                <template #leading>
+                  <Dropdown>
+                    <template #default="{close}">
+                      <div class="flex p-2 flex-col">
+                        <DropdownItem text="Menu" icon="pencil" @click="close"/>
+                        <DropdownItem text="Menu" icon="pencil" @click="close"/>
+                        <DropdownItem text="Menu" icon="pencil" @click="close"/>
+                      </div>
+                    </template>
+                    <template #trigger>
+                      <div
+                          class="py-3 pl-3 border-l border-oc-grey-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
+                      >
+                        <span class="flex items-center text-sm">USD</span>
+                        <Icon class="w-[14px] h-[14px]" name="chevron-down"/>
+                      </div>
+                    </template>
+                  </Dropdown>
+                </template>
+              </OCInput>
             </div>
           </Theme>
         `,

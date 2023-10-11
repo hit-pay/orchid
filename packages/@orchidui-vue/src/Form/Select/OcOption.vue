@@ -1,7 +1,9 @@
 <script setup>
-import {defineAsyncComponent} from "vue";
+import { defineAsyncComponent } from "vue";
 
-const Icon = defineAsyncComponent(() => import("../../MediaAndIcons/Icon/OcIcon.vue"))
+const Icon = defineAsyncComponent(() =>
+  import("../../MediaAndIcons/Icon/OcIcon.vue"),
+);
 
 defineProps({
   label: String,
