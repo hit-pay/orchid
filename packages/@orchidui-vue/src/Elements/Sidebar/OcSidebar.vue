@@ -41,21 +41,19 @@
               }"
               @click="expandMenu(menu.path)"
             >
-               <Icon 
-                    v-if="isExpanded"
-                    width="22"
-                    height="22"
-                    class="z-[1] relative"
-                    :class="{
-                      'text-[var(--oc-sidebar-menu-active-icon)]': !menu.active,
-                      'text-[var(--oc-sidebar-menu-active-icon-active)]':
-                        menu.active,
-                    }"
-                    :name="menu.icon"
-                  />
-              <Popover 
-                  v-else
-                  v-slot="{ open }" class="relative flex" >
+              <Icon
+                v-if="isExpanded"
+                width="22"
+                height="22"
+                class="z-[1] relative"
+                :class="{
+                  'text-[var(--oc-sidebar-menu-active-icon)]': !menu.active,
+                  'text-[var(--oc-sidebar-menu-active-icon-active)]':
+                    menu.active,
+                }"
+                :name="menu.icon"
+              />
+              <Popover v-else v-slot="{ open }" class="relative flex">
                 <PopoverButton
                   :class="{
                     'p-4': !isExpanded,
@@ -75,7 +73,7 @@
                   />
                 </PopoverButton>
                 <transition name="sidebar-submenu-popover-animation">
-                  <PopoverPanel >
+                  <PopoverPanel>
                     <div
                       class="left-[60px] p-4 gap-4 absolute bg-oc-text-000 shadow-sm rounded w-[200px] z-50"
                     >
@@ -183,13 +181,13 @@ const expandMenu = (id) => {
 };
 
 const hoverPopover = (e, open) => {
-  const parentNode = e?.target?.parentNode
-  if (parentNode && parentNode.type === "button" && !open) {
-    try {
+  try {
+    const parentNode = e?.target?.parentNode;
+    if (parentNode && parentNode.type === "button" && !open) {
       parentNode.click();
-    } catch (error) {
-      console.log(error)
     }
+  } catch (error) {
+    console.error("An error occurred:", error);
   }
 };
 
