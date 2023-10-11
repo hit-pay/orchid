@@ -1,5 +1,6 @@
 <script setup>
 import { computed, defineAsyncComponent, ref } from "vue";
+import BaseInput from "../../Form/BaseInput/OcBaseInput.vue";
 
 const Icon = defineAsyncComponent(() =>
   import("../../MediaAndIcons/Icon/OcIcon.vue"),
@@ -10,17 +11,25 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  isError: {
-    type: Boolean,
-    default: false,
+  errorMessage: {
+    type: String,
+    default: "",
   },
   modelValue: {
     type: String,
     default: "",
   },
-  inlineLabel: {
+  label: {
     type: String,
     default: "",
+  },
+  hint: {
+    type: String,
+    default: "",
+  },
+  isInlineLabel: {
+    type: Boolean,
+    default: false,
   },
   placeholder: {
     type: String,
@@ -52,33 +61,39 @@ const inputClasses = computed(() => [
 </script>
 
 <template>
-  <div
-    class="rounded h-[36px] border flex items-center gap-x-3 px-3 cursor-pointer"
-    :class="inputClasses"
-    @click="$refs.inputRef?.focus()"
+  <BaseInput
+    :label="isInlineLabel ? '' : label"
+    :hint="hint"
+    :error-message="errorMessage"
   >
-    <slot v-if="type === 'trailing'" name="trailing" />
+    <div
+      class="rounded h-[36px] border flex items-center gap-x-3 px-3 cursor-pointer"
+      :class="inputClasses"
+      @click="$refs.inputRef?.focus()"
+    >
+      <slot v-if="type === 'trailing'" name="trailing" />
 
-    <slot name="icon">
-      <Icon v-if="icon" class="w-4 h-4 text-oc-text-400" :name="icon" />
-    </slot>
+      <slot name="icon">
+        <Icon v-if="icon" class="w-4 h-4 text-oc-text-400" :name="icon" />
+      </slot>
 
-    <div class="flex flex-1 items-baseline gap-x-2">
-      <label v-if="inlineLabel" class="text-oc-text-300">
-        {{ inlineLabel }}:
-      </label>
-      <input
-        ref="inputRef"
-        :value="modelValue"
-        :placeholder="placeholder"
-        :disabled="disabled"
-        class="h-7 outline-none w-full text-oc-text disabled:bg-transparent placeholder:font-normal placeholder:text-oc-text-300"
-        @focus="isFocused = true"
-        @blur="isFocused = false"
-        @input="$emit('update:modelValue', $event.target.value)"
-      />
+      <div class="flex flex-1 items-baseline gap-x-2">
+        <label v-if="isInlineLabel" class="text-oc-text-300">
+          {{ label }}:
+        </label>
+        <input
+          ref="inputRef"
+          :value="modelValue"
+          :placeholder="placeholder"
+          :disabled="disabled"
+          class="h-7 outline-none w-full text-oc-text disabled:bg-transparent placeholder:font-normal placeholder:text-oc-text-300"
+          @focus="isFocused = true"
+          @blur="isFocused = false"
+          @input="$emit('update:modelValue', $event.target.value)"
+        />
+      </div>
+
+      <slot v-if="type === 'leading'" name="leading" />
     </div>
-
-    <slot v-if="type === 'leading'" name="leading" />
-  </div>
+  </BaseInput>
 </template>
