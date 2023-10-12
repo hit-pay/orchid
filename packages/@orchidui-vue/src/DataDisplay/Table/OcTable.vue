@@ -14,22 +14,20 @@ const props = defineProps({
 const selectedRows = ref([]);
 const queries = ref([]);
 const selectRow = (element) => {
-  const elementIndex = selectedRows.value.findIndex((e) => e === element);
-  if (elementIndex !== -1) {
-    selectedRows.value.splice(elementIndex, 1);
+  if (selectedRows.value.includes(element)) {
+    selectedRows.value = selectedRows.value.filter((e) => e !== element);
   } else {
-    selectedRows.value.push(element);
+    selectedRows.value = [...selectedRows.value, element];
   }
 };
 const selectAllRows = () => {
-  selectedRows.value =
-    selectedRows.value.length === props.fields.length &&
-    selectedRows.value.length > 0
-      ? []
-      : [...props.fields.map((e, i) => i)];
+  const allRowsSelected = selectedRows.value.length === props.fields.length;
+  selectedRows.value = allRowsSelected
+    ? []
+    : [...props.fields.map((e, i) => i)];
 };
 const addQuery = (query) => {
-  if (!query || queries.value.includes(query)) return;
+  if (!query.trim() || queries.value.includes(query)) return;
   queries.value.push(query);
 };
 const removeQuery = (query) => {

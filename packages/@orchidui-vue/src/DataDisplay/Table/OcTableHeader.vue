@@ -14,6 +14,7 @@ defineProps({
   variant: {
     type: String,
     default: "text",
+    validator: (value) => ["text", "checkbox"].includes(value),
   },
   text: String,
   isPartial: Boolean,
@@ -39,7 +40,7 @@ const variantClass = computed(() => ({
         :model-value="isChecked"
         class="mx-auto"
         :is-partial="isPartial"
-        @update:model-value="$emit('selectAll')"
+        @update:model-value="$emit('selectAll', $event)"
       />
     </slot>
   </th>

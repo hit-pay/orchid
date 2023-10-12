@@ -1,8 +1,5 @@
 import TableHeader from "./OcTableHeader.vue";
-import TableCell from "./OcTableCell.vue";
-import TableActions from "./OcTableActions.vue";
 import Theme from "../../Theme/OcTheme.vue";
-import TableSearchFor from "./OcTableSearchFor.vue";
 import Table from "./OcTable.vue";
 import Chip from "../../Feedback/Chip/OcChip.vue";
 import Icon from "../../MediaAndIcons/Icon/OcIcon.vue";
@@ -136,65 +133,6 @@ export const Default = {
                 <Icon class="w-6 h-6 group-hover/row:block hidden cursor-pointer mx-auto" name="dots-vertical"/>
               </template>
             </Table>
-          </Theme>
-        `,
-  }),
-};
-
-export const Header = {
-  render: () => ({
-    components: { TableHeader, Theme },
-    template: `
-          <Theme>
-            <div class="flex gap-x-6">
-              <TableHeader text="Table Header"/>
-              <TableHeader variant="checkbox"/>
-            </div>
-          </Theme>
-        `,
-  }),
-};
-export const SearchFor = {
-  render: () => ({
-    components: { TableSearchFor, Theme },
-    template: `
-          <Theme>
-            <div class="flex gap-x-6">
-              <TableSearchFor/>
-            </div>
-          </Theme>
-        `,
-  }),
-};
-export const Cell = {
-  render: () => ({
-    components: { TableCell, Theme },
-    template: `
-          <Theme>
-            <div class="flex flex-col gap-y-6">
-              <div class="flex gap-x-6">
-                <TableCell variant="checkbox"/>
-                <TableCell class="max-w-[145px]"/>
-                <TableCell variant="icon" icon="dots-vertical"/>
-                <TableCell variant="empty"/>
-              </div>
-              <div class="flex gap-x-6">
-                <TableCell is-last variant="checkbox"/>
-                <TableCell is-last class="max-w-[145px]"/>
-                <TableCell is-last variant="icon" icon="dots-vertical"/>
-                <TableCell is-last variant="empty"/>
-              </div>
-            </div>
-          </Theme>
-        `,
-  }),
-};
-export const Actions = {
-  render: () => ({
-    components: { TableActions, Theme },
-    template: `
-          <Theme>
-            <TableActions/>
           </Theme>
         `,
   }),
