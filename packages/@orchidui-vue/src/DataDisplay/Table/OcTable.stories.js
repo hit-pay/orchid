@@ -1,4 +1,3 @@
-import TableHeader from "./OcTableHeader.vue";
 import Theme from "../../Theme/OcTheme.vue";
 import Table from "./OcTable.vue";
 import Chip from "../../Feedback/Chip/OcChip.vue";
@@ -7,8 +6,7 @@ import Toggle from "../../Form/Toggle/OcToggle.vue";
 import TableCellContent from "./OcTableCellContent.vue";
 
 export default {
-  component: TableHeader,
-  tags: ["autodocs"],
+  component: Table,
 };
 
 export const Default = {

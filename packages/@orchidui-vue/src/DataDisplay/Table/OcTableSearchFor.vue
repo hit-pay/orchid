@@ -15,7 +15,7 @@ defineEmits({
 
 <template>
   <TableHeader class="!w-full !justify-start !bg-white">
-    <div class="flex gap-x-1 items-center normal-case">
+    <div class="flex gap-1 items-center normal-case flex-wrap">
       <span class="pr-2 text-sm font-medium text-oc-text">Search for:</span>
       <Chip
         v-for="query in queries"

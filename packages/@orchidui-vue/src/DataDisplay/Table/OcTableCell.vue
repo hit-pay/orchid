@@ -16,6 +16,7 @@ const Variants = {
   EMPTY: "empty",
 };
 defineProps({
+  isSimple: Boolean,
   variant: {
     type: String,
     default: "content",
@@ -46,7 +47,9 @@ const variantClass = computed(() => ({
         v-if="variant === Variants.CHECKBOX"
         :model-value="isSelected"
         class="mx-auto"
-        :class="isSelected ? 'block' : 'hidden group-hover/row:block'"
+        :class="
+          isSelected ? 'block' : isSimple ? '' : 'hidden group-hover/row:block'
+        "
         @update:model-value="$emit('selected')"
       />
       <Icon
