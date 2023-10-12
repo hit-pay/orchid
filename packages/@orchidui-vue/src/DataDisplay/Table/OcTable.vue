@@ -22,12 +22,11 @@ const selectRow = (element) => {
   }
 };
 const selectAllRows = () => {
-  if (
+  selectedRows.value =
     selectedRows.value.length === props.fields.length &&
     selectedRows.value.length > 0
-  ) {
-    selectedRows.value = [];
-  } else selectedRows.value = [...props.fields.map((e, i) => i)];
+      ? []
+      : [...props.fields.map((e, i) => i)];
 };
 const addQuery = (query) => {
   if (!query || queries.value.includes(query)) return;
@@ -67,10 +66,11 @@ const removeQuery = (query) => {
           <TableHeader
             v-for="header in headers"
             :key="header.key"
+            :text="header.label"
             :variant="header.variant"
           >
             <template #default>
-              <slot :name="`header-${header.key}`">{{ header.label }}</slot>
+              <slot :name="`header-${header.key}`" />
             </template>
           </TableHeader>
         </tr>

@@ -13,7 +13,10 @@ defineEmits({
   addQuery: [],
 });
 defineProps({
-  tabs: Array,
+  tabs: {
+    type: Array,
+    default: () => [],
+  },
 });
 const activeTab = ref("");
 const isSortDescending = ref(true);

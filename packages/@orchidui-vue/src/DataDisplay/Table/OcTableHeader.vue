@@ -15,6 +15,7 @@ defineProps({
     type: String,
     default: "text",
   },
+  text: String,
   isPartial: Boolean,
   isChecked: Boolean,
 });
@@ -32,7 +33,7 @@ const variantClass = computed(() => ({
     class="border-b border-oc-text-200 whitespace-nowrap w-fit text-start uppercase text-oc-text-400 text-xs font-medium bg-oc-grey-50"
     :class="variantClass[variant]"
   >
-    <slot v-if="variant === Variants.TEXT">Table header</slot>
+    <slot v-if="variant === Variants.TEXT">{{ text }}</slot>
     <slot v-else>
       <Checkbox
         :model-value="isChecked"

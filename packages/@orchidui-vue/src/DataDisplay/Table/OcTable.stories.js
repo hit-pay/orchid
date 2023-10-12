@@ -147,7 +147,7 @@ export const Header = {
     template: `
           <Theme>
             <div class="flex gap-x-6">
-              <TableHeader/>
+              <TableHeader text="Table Header"/>
               <TableHeader variant="checkbox"/>
             </div>
           </Theme>
