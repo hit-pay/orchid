@@ -1,7 +1,7 @@
 <template>
   <div class="flex overflow-hidden" :class="[showShadow, roundedClasses]">
     <button
-      class="oc-btn relative font-medium gap-x-3 flex items-center"
+      class="oc-btn relative w-full text-center justify-center font-medium gap-x-3 flex items-center"
       :disabled="isDisabled || isLoading"
       :class="[
         buttonTypeClasses[variant],
@@ -22,6 +22,7 @@
       <template v-if="leftIcon && !isLoading">
         <Icon
           :width="iconSize[size]"
+          :class="iconClass"
           :height="iconSize[size]"
           :name="leftIcon"
         />
@@ -35,6 +36,7 @@
           :width="iconSize[size]"
           :height="iconSize[size]"
           :name="rightIcon"
+          :class="iconClass"
         />
       </template>
     </button>
@@ -58,6 +60,7 @@ const props = defineProps({
   isDisabled: Boolean,
   isLoading: Boolean,
   leftIcon: String,
+  iconClass: [Array, String],
   additionalAreaIcon: String,
   isAdditionalArea: Boolean,
   rightIcon: String,

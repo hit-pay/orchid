@@ -19,7 +19,7 @@ const onInput = () => emit("update:modelValue", !props.modelValue);
 </script>
 
 <template>
-  <div>
+  <div class="w-fit">
     <label class="flex items-center gap-x-3 cursor-pointer">
       <div
         class="w-5 h-5 shrink-0 border flex items-center justify-center rounded-sm"
@@ -59,7 +59,7 @@ const onInput = () => emit("update:modelValue", !props.modelValue);
         :value="modelValue"
         type="checkbox"
         :checked="modelValue"
-        class="h-0 w-0"
+        class="h-0 w-0 hidden"
         @change="onInput"
       />
     </label>

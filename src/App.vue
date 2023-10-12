@@ -1,9 +1,20 @@
 <template>
   <Theme :color-mode="state.darkMode ? 'dark' : ''" :class="primaryColor">
     <section
-      class="container flex flex-wrap items-start min-h-screen p-8 mx-auto"
+      class="container flex flex-col items-start min-h-screen gap-y-4 p-8 mx-auto"
     >
-      <section class="w-full lg:px-8 md:w-2/3">
+      <section
+        class="w-full p-8 flex justify-between items-center mt-8 rounded md:mt-0 bg-oc-primary-100"
+      >
+        <!-- Theme settings -->
+        <h1 class="mb-3 font-medium">Theme Settings</h1>
+        <div class="flex items-center gap-x-4">
+          <Button label="Enable Dark Mode" @click="toggleDarkMode" />
+          <Button label="Change Primary Colors" @click="changePrimaryColor" />
+        </div>
+      </section>
+
+      <section class="w-full">
         <div class="grid gap-3 p-8 rounded bg-oc-bg-dark">
           <h1 class="flex justify-end mb-3 font-bold">Orchid UI Playground</h1>
           <div class="flex justify-end gap-3 mb-3">
@@ -19,6 +30,7 @@
           <div class="flex justify-end">
             <Accordion
               v-model:isExpandable="isOpen"
+              class="w-full"
               header="Header Accordion"
               body="Lorem ipsum dolor sit amet, consectetur "
             />
@@ -41,7 +53,7 @@
             <Button label="Button Text" is-loading />
             <Button label="Button Text" is-transparent />
           </div>
-          <div class="flex flex-wrap justify-end">
+          <div class="flex flex-wrap gap-x-3 justify-end">
             <Chip label="Primary" />
             <Chip label="Accent 1" variant="accent-1" />
             <Chip label="Accent 2" variant="accent-2" />
@@ -111,17 +123,47 @@
             <Toggle :model-value="false" />
             <Toggle size="small" :model-value="false" />
           </div>
+          <div>
+            <Table
+              is-selectable
+              :headers="headers"
+              :fields="fields"
+              :filter-tabs="tabs"
+            >
+              <template #col1>
+                <TableCellContent
+                  important
+                  title="Table Cell"
+                  description="Table Cell column two"
+                />
+              </template>
+              <template #col3="{ data }">
+                <div class="flex gap-x-2 items-center">
+                  <span class="w-[122px]">{{ data }}</span>
+                  <Icon
+                    class="cursor-pointer w-5 h-5 group-hover/row:opacity-100 opacity-0"
+                    name="copy"
+                  />
+                </div>
+              </template>
+              <template #col4="{ data }">
+                <span class="text-oc-text-400 text-sm">{{ data }}</span>
+              </template>
+              <template #col5="{ data }">
+                <Chip variant="success" class="w-fit" :label="data" />
+              </template>
+              <template #col6="{ data }">
+                <Toggle :model-value="data" size="small" />
+              </template>
+              <template #actions>
+                <Icon
+                  class="w-6 h-6 group-hover/row:block hidden cursor-pointer mx-auto"
+                  name="dots-vertical"
+                />
+              </template>
+            </Table>
+          </div>
         </div>
-      </section>
-      <section class="w-full p-8 mt-8 rounded md:mt-0 md:w-1/3 bg-oc-primary-100">
-        <!-- Theme settings -->
-        <h1 class="mb-3 font-medium">Theme Settings</h1>
-        <Button label="Enable Dark Mode" @click="toggleDarkMode" />
-        <Button
-          class="mt-3"
-          label="Change Primary Colors"
-          @click="changePrimaryColor"
-        />
       </section>
     </section>
   </Theme>
@@ -140,6 +182,9 @@ import {
   CheckboxesGroup,
   RadioGroup,
   Toggle,
+  Table,
+  Icon,
+  TableCellContent,
 } from "@orchid";
 import { ref, reactive, computed } from "vue";
 
@@ -149,6 +194,97 @@ const snackbarArgs = {
   icon: "filled-check",
   content: "Changes have been successfully saved",
 };
+const headers = [
+  {
+    key: "col1",
+    label: "Table Header",
+  },
+  {
+    key: "col2",
+    label: "Table Header",
+  },
+  {
+    key: "col3",
+    label: "Table Header",
+  },
+  {
+    key: "col4",
+    label: "Table Header",
+  },
+  {
+    key: "col5",
+    label: "Table Header",
+  },
+  {
+    key: "col6",
+    label: "Table Header",
+  },
+  {
+    key: "actions",
+    label: "",
+    variant: "icon",
+  },
+];
+const fields = [
+  {
+    col1: "",
+    col2: "Table Cell",
+    col3: "Table Cell",
+    col4: "Table Cell column two",
+    col5: "Label",
+    col6: false,
+  },
+  {
+    col1: "",
+    col2: "Table Cell",
+    col3: "Table Cell",
+    col4: "Table Cell column two",
+    col5: "Label",
+    col6: false,
+  },
+  {
+    col1: "",
+    col2: "Table Cell",
+    col3: "Table Cell",
+    col4: "Table Cell column two",
+    col5: "Label",
+    col6: false,
+  },
+  {
+    col1: "",
+    col2: "Table Cell",
+    col3: "Table Cell",
+    col4: "Table Cell column two",
+    col5: "Label",
+    col6: false,
+  },
+  {
+    col1: "asd",
+    col2: "Table Cell",
+    col3: "Table Cell",
+    col4: "Table Cell column two",
+    col5: "Label",
+    col6: false,
+  },
+];
+const tabs = [
+  {
+    label: "All",
+    value: "",
+  },
+  {
+    label: "Filter 01",
+    value: "1",
+  },
+  {
+    label: "Filter 02",
+    value: "2",
+  },
+  {
+    label: "Filter 03",
+    value: "3",
+  },
+];
 const radios = [
   {
     label: "Text",
@@ -228,21 +364,35 @@ const changePrimaryColor = () => {
   --oc-primary-400: #14b8a6;
   --oc-primary-500: #0d9488;
 
-
-  --button-primary-default: linear-gradient(180deg, var(--oc-primary-400) 0%,  var(--oc-primary-500) 100%);
-  --button-primary-hover: linear-gradient(180deg,  var(--oc-primary-400) 0%,  var(--oc-primary-500) 100%);
-  --button-primary-pressed: linear-gradient(180deg,  var(--oc-primary-400) 0%,  var(--oc-primary-500) 100%);
-  --button-primary-disabled: linear-gradient(180deg,  var(--oc-primary-400) 0%,  var(--oc-primary-500) 100%);
+  --button-primary-default: linear-gradient(
+    180deg,
+    var(--oc-primary-400) 0%,
+    var(--oc-primary-500) 100%
+  );
+  --button-primary-hover: linear-gradient(
+    180deg,
+    var(--oc-primary-400) 0%,
+    var(--oc-primary-500) 100%
+  );
+  --button-primary-pressed: linear-gradient(
+    180deg,
+    var(--oc-primary-400) 0%,
+    var(--oc-primary-500) 100%
+  );
+  --button-primary-disabled: linear-gradient(
+    180deg,
+    var(--oc-primary-400) 0%,
+    var(--oc-primary-500) 100%
+  );
 
   --button-secondary-default: linear-gradient(180deg, #fff 0%, #f2f2f2 100%);
   --button-secondary-hover: linear-gradient(180deg, #fff 0%, #fafafa 100%);
   --button-secondary-pressed: linear-gradient(180deg, #fafafa 0%, #fff 100%);
   --button-secondary-disabled: linear-gradient(
-          180deg,
-          #fcfcfc 0%,
-          #f7f7f7 100%
+    180deg,
+    #fcfcfc 0%,
+    #f7f7f7 100%
   );
-  
 }
 
 .dark-mode.teal-primary-color {
