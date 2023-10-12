@@ -1,38 +1,54 @@
 <template>
-  <button
-    class="oc-btn overflow-hidden relative font-medium gap-x-3 flex items-center"
-    :disabled="isDisabled || isLoading"
-    :class="[
-      buttonTypeClasses[variant],
-      buttonSizeClasses[size],
-      roundedClasses,
-    ]"
-  >
-    <Icon
-      v-if="isLoading"
-      :width="iconSize[size]"
-      :height="iconSize[size]"
-      name="loading-2"
-    />
-
-    <template v-if="leftIcon && !isLoading">
-      <Icon :width="iconSize[size]" :height="iconSize[size]" :name="leftIcon" />
-    </template>
-
-    <span v-if="label">{{ label }}</span>
-    <slot v-else />
-
-    <template v-if="rightIcon">
+  <div class="flex overflow-hidden" :class="[showShadow, roundedClasses]">
+    <button
+      class="oc-btn relative font-medium gap-x-3 flex items-center"
+      :disabled="isDisabled || isLoading"
+      :class="[
+        buttonTypeClasses[variant],
+        buttonSizeClasses[size],
+        isAdditionalArea ? 'rounded-l-[inherit]' : 'rounded-[inherit]',
+      ]"
+      @mousedown="isPressed = true"
+      @mouseup="isPressed = false"
+      @mouseleave="isPressed = false"
+    >
       <Icon
+        v-if="isLoading"
         :width="iconSize[size]"
         :height="iconSize[size]"
-        :name="rightIcon"
+        name="loading-2"
       />
-    </template>
-  </button>
+
+      <template v-if="leftIcon && !isLoading">
+        <Icon
+          :width="iconSize[size]"
+          :height="iconSize[size]"
+          :name="leftIcon"
+        />
+      </template>
+
+      <span v-if="label">{{ label }}</span>
+      <slot v-else />
+
+      <template v-if="rightIcon">
+        <Icon
+          :width="iconSize[size]"
+          :height="iconSize[size]"
+          :name="rightIcon"
+        />
+      </template>
+    </button>
+    <div
+      v-if="isAdditionalArea && !isTransparent"
+      class="border-y border-r flex cursor-pointer items-center justify-center oc-btn-add-area px-[6px] py-3 rounded-r-[inherit]"
+      :class="[additionalAreaSize[size], variant]"
+    >
+      <Icon :name="additionalAreaIcon" :class="additionalAreaIconSize[size]" />
+    </div>
+  </div>
 </template>
 <script setup>
-import { computed, defineAsyncComponent } from "vue";
+import { computed, defineAsyncComponent, ref } from "vue";
 
 const Icon = defineAsyncComponent(() =>
   import("../../MediaAndIcons/Icon/OcIcon.vue"),
@@ -42,9 +58,10 @@ const props = defineProps({
   isDisabled: Boolean,
   isLoading: Boolean,
   leftIcon: String,
+  additionalAreaIcon: String,
+  isAdditionalArea: Boolean,
   rightIcon: String,
   isTransparent: Boolean,
-  isShortcut: Boolean,
   isRoundedFull: Boolean,
   variant: {
     type: String,
@@ -55,8 +72,35 @@ const props = defineProps({
     default: "default",
   },
 });
+const isPressed = ref(false);
 const isIconOnly = computed(
   () => (props.leftIcon || props.rightIcon) && !props.label,
+);
+const additionalAreaSize = computed(() => ({
+  default: "w-10 h-[36px]",
+  small: "w-9 h-8",
+  big: "w-[48px] h-[44px]",
+}));
+
+const shadowContainer = computed(() => ({
+  primary: "shadow-[0_1.5px_0_0_var(--oc-primary-500)]",
+  secondary: " shadow-[0_1.5px_0_0] shadow-black/10",
+  destructive: "shadow-[0_1.5px_0_0_var(--oc-error-500)]",
+}));
+
+const additionalAreaIconSize = computed(() => ({
+  default: "w-[18px] h-[18px]",
+  small: "w-5 h-5",
+  big: "w-6 h-6",
+}));
+
+const showShadow = computed(
+  () =>
+    !isPressed.value &&
+    !props.isTransparent &&
+    !props.isDisabled &&
+    !props.isLoading &&
+    shadowContainer.value[props.variant],
 );
 
 const buttonTypeClasses = computed(() => ({
@@ -87,7 +131,9 @@ const buttonSizeClasses = computed(() => ({
         : "py-3 px-[14px]"
       : "py-3 ") + " text-lg h-[44px]",
 }));
-const roundedClasses = props.isRoundedFull ? "rounded-full" : "rounded";
+const roundedClasses = computed(() =>
+  props.isRoundedFull ? "rounded-full" : "rounded",
+);
 
 const iconSize = computed(() => ({
   default: "18",
@@ -103,10 +149,68 @@ const iconSize = computed(() => ({
     @apply opacity-50;
   }
 
+  &:disabled + &-add-area {
+    & > * {
+      @apply opacity-50;
+    }
+
+    &.primary {
+      background: var(--button-primary-disabled);
+    }
+
+    &.secondary {
+      background: var(--button-secondary-disabled);
+    }
+
+    &.destructive {
+      background: var(--button-destructive-disabled);
+    }
+  }
+
+  &-add-area {
+    &.primary {
+      background: var(--button-primary-default);
+      @apply border-[var(--oc-dark-blue-500)] text-white;
+      &:hover {
+        background: var(--button-primary-hover);
+      }
+
+      &:active {
+        background: var(--button-primary-pressed);
+      }
+    }
+
+    &.secondary {
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
+      background: var(--button-secondary-default);
+      @apply border-[var(--oc-grey-500)] text-[var(--oc-text-400)];
+      &:hover {
+        background: var(--button-secondary-hover);
+      }
+
+      &:active {
+        background: var(--button-secondary-pressed);
+      }
+    }
+
+    &.destructive {
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
+      background: var(--button-destructive-default);
+      @apply border-[var(--oc-error-500)] text-white;
+
+      &:hover {
+        background: var(--button-destructive-hover);
+      }
+
+      &:active {
+        background: var(--button-destructive-pressed);
+      }
+    }
+  }
+
   &-primary {
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
     background: var(--button-primary-default);
-    box-shadow: 0 1.5px 0 0 var(--oc-primary-500);
 
     &:hover {
       background: var(--button-primary-hover);
@@ -114,26 +218,23 @@ const iconSize = computed(() => ({
 
     &:active {
       background: var(--button-primary-pressed);
-      @apply shadow-none;
     }
 
     &:disabled {
       background: var(--button-primary-disabled);
-      @apply shadow-none;
     }
   }
 
   &-secondary {
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
     background: var(--button-secondary-default);
-    @apply shadow-[0_1.5px_0_0] shadow-black/10;
+
     &:hover {
       background: var(--button-secondary-hover);
     }
 
     &:active {
       background: var(--button-secondary-pressed);
-      @apply shadow-none;
     }
 
     &:disabled {
@@ -144,7 +245,6 @@ const iconSize = computed(() => ({
   &-error {
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
     background: var(--button-destructive-default);
-    box-shadow: 0 1.5px 0 0 var(--oc-error-500);
 
     &:hover {
       background: var(--button-destructive-hover);
@@ -152,12 +252,10 @@ const iconSize = computed(() => ({
 
     &:active {
       background: var(--button-destructive-pressed);
-      @apply shadow-none;
     }
 
     &:disabled {
       background: var(--button-destructive-disabled);
-      @apply shadow-none;
     }
   }
 }
