@@ -53,7 +53,7 @@ const inputClasses = computed(() => [
   {
     "shadow-[0_0_0_2px]": isFocused.value,
   },
-  !props.disabled && props.isError
+  !props.disabled && props.errorMessage
     ? "border-oc-error shadow-oc-error"
     : "border-oc-grey-200 shadow-oc-grey-200",
   props.disabled ? "bg-oc-bg-dark pointer-events-none" : "bg-white",

@@ -12,6 +12,10 @@ export const Default = {
       control: "select",
       options: ["", "circle"],
     },
+    additionalAreaIcon: {
+      control: "select",
+      options: ["", "chevron-down", "circle"],
+    },
     rightIcon: {
       control: "select",
       options: ["", "plus"],
@@ -32,7 +36,9 @@ export const Default = {
     isDisabled: false,
     isLoading: false,
     isTransparent: false,
-    isRounded: false,
+    isAdditionalArea: false,
+    additionalAreaIcon: "chevron-down",
+    isRoundedFull: false,
     variant: "primary",
     size: "default",
   },
@@ -50,6 +56,9 @@ export const Default = {
                   :rightIcon="args.rightIcon"
                   :isDisabled="args.isDisabled"
                   :isLoading="args.isLoading"
+                  :isRoundedFull="args.isRoundedFull"
+                  :isAdditionalArea="args.isAdditionalArea"
+                  :additionalAreaIcon="args.additionalAreaIcon"
                   :variant="args.variant"
                   :size="args.size"
                   :isTransparent="args.isTransparent"
@@ -64,7 +73,7 @@ export const SizeVariant = {
   render: () => ({
     components: { Button, Theme },
     template: `
-          <Theme colorMode="light" >
+          <Theme colorMode="light">
 
             <div class="flex gap-3 items-center  mb-3">
               <Button size="small" label="Button Text"/>
@@ -98,6 +107,7 @@ export const ButtonVariant = {
               <Button label="Button Text" isDisabled/>
               <Button label="Button Text" isLoading/>
               <Button label="Button Text" isTransparent/>
+              <Button label="Button Text" is-additional-area additionalAreaIcon="chevron-down"/>
             </div>
             <div class="flex gap-3 items-center  mb-3">
               <Button variant="secondary" left-icon="x"/>
@@ -105,6 +115,7 @@ export const ButtonVariant = {
               <Button variant="secondary" label="Button Text" isDisabled/>
               <Button variant="secondary" label="Button Text" isLoading/>
               <Button variant="secondary" label="Button Text" isTransparent/>
+              <Button variant="secondary" label="Button Text" is-additional-area additionalAreaIcon="chevron-down"/>
             </div>
             <div class="flex gap-3 items-center  mb-3">
               <Button variant="destructive" left-icon="x"/>
@@ -112,6 +123,7 @@ export const ButtonVariant = {
               <Button variant="destructive" label="Button Text" isDisabled/>
               <Button variant="destructive" label="Button Text" isLoading/>
               <Button variant="destructive" label="Button Text" isTransparent/>
+              <Button variant="destructive" label="Button Text" is-additional-area additionalAreaIcon="chevron-down"/>
             </div>
           </Theme>
         `,
