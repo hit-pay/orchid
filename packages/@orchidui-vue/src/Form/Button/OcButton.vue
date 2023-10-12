@@ -170,7 +170,7 @@ const iconSize = computed(() => ({
   &-add-area {
     &.primary {
       background: var(--button-primary-default);
-      @apply border-oc-dark-blue text-white;
+      @apply border-[var(--oc-dark-blue-500)] text-white;
       &:hover {
         background: var(--button-primary-hover);
       }
@@ -183,7 +183,7 @@ const iconSize = computed(() => ({
     &.secondary {
       text-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
       background: var(--button-secondary-default);
-      @apply border-oc-grey text-oc-text-400;
+      @apply border-[var(--oc-grey-500)] text-[var(--oc-text-400)];
       &:hover {
         background: var(--button-secondary-hover);
       }
@@ -196,7 +196,7 @@ const iconSize = computed(() => ({
     &.destructive {
       text-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
       background: var(--button-destructive-default);
-      @apply border-oc-error text-white;
+      @apply border-[var(--oc-error-500)] text-white;
 
       &:hover {
         background: var(--button-destructive-hover);
