@@ -4,111 +4,118 @@ import Chip from "../../Feedback/Chip/OcChip.vue";
 import Icon from "../../MediaAndIcons/Icon/OcIcon.vue";
 import Toggle from "../../Form/Toggle/OcToggle.vue";
 import TableCellContent from "./OcTableCellContent.vue";
+import { ref } from "vue";
 
 export default {
   component: Table,
+  tags: ["autodocs"],
 };
 
 export const Default = {
-  render: () => ({
+  args: {
+    isSelectable: true,
+    headers: [
+      {
+        key: "col1",
+        label: "Table Header",
+      },
+      {
+        key: "col2",
+        label: "Table Header",
+      },
+      {
+        key: "col3",
+        label: "Table Header",
+      },
+      {
+        key: "col4",
+        label: "Table Header",
+      },
+      {
+        key: "col5",
+        label: "Table Header",
+      },
+      {
+        key: "col6",
+        label: "Table Header",
+      },
+      {
+        key: "actions",
+        label: "",
+        headerVariant: "text",
+        variant: "icon",
+      },
+    ],
+    fields: [
+      {
+        col1: "",
+        col2: "Table Cell",
+        col3: "Table Cell",
+        col4: "Table Cell column two",
+        col5: "Label",
+        col6: false,
+      },
+      {
+        col1: "",
+        col2: "Table Cell",
+        col3: "Table Cell",
+        col4: "Table Cell column two",
+        col5: "Label",
+        col6: false,
+      },
+      {
+        col1: "",
+        col2: "Table Cell",
+        col3: "Table Cell",
+        col4: "Table Cell column two",
+        col5: "Label",
+        col6: false,
+      },
+      {
+        col1: "",
+        col2: "Table Cell",
+        col3: "Table Cell",
+        col4: "Table Cell column two",
+        col5: "Label",
+        col6: false,
+      },
+      {
+        col1: "asd",
+        col2: "Table Cell",
+        col3: "Table Cell",
+        col4: "Table Cell column two",
+        col5: "Label",
+        col6: false,
+      },
+    ],
+    filterTabs: [
+      {
+        label: "All",
+        value: "",
+      },
+      {
+        label: "Filter 01",
+        value: "1",
+      },
+      {
+        label: "Filter 02",
+        value: "2",
+      },
+      {
+        label: "Filter 03",
+        value: "3",
+      },
+    ],
+  },
+  render: (args) => ({
     components: { Table, Theme, Icon, TableCellContent, Toggle, Chip },
     setup() {
-      const headers = [
-        {
-          key: "col1",
-          label: "Table Header",
-        },
-        {
-          key: "col2",
-          label: "Table Header",
-        },
-        {
-          key: "col3",
-          label: "Table Header",
-        },
-        {
-          key: "col4",
-          label: "Table Header",
-        },
-        {
-          key: "col5",
-          label: "Table Header",
-        },
-        {
-          key: "col6",
-          label: "Table Header",
-        },
-        {
-          key: "actions",
-          label: "",
-          variant: "icon",
-        },
-      ];
-      const fields = [
-        {
-          col1: "",
-          col2: "Table Cell",
-          col3: "Table Cell",
-          col4: "Table Cell column two",
-          col5: "Label",
-          col6: false,
-        },
-        {
-          col1: "",
-          col2: "Table Cell",
-          col3: "Table Cell",
-          col4: "Table Cell column two",
-          col5: "Label",
-          col6: false,
-        },
-        {
-          col1: "",
-          col2: "Table Cell",
-          col3: "Table Cell",
-          col4: "Table Cell column two",
-          col5: "Label",
-          col6: false,
-        },
-        {
-          col1: "",
-          col2: "Table Cell",
-          col3: "Table Cell",
-          col4: "Table Cell column two",
-          col5: "Label",
-          col6: false,
-        },
-        {
-          col1: "asd",
-          col2: "Table Cell",
-          col3: "Table Cell",
-          col4: "Table Cell column two",
-          col5: "Label",
-          col6: false,
-        },
-      ];
-      const tabs = [
-        {
-          label: "All",
-          value: "",
-        },
-        {
-          label: "Filter 01",
-          value: "1",
-        },
-        {
-          label: "Filter 02",
-          value: "2",
-        },
-        {
-          label: "Filter 03",
-          value: "3",
-        },
-      ];
-      return { headers, fields, tabs };
+      return { args };
     },
     template: `
           <Theme>
-            <Table is-selectable :headers="headers" :fields="fields" :filter-tabs="tabs">
+            <Table :is-selectable="args.isSelectable" :headers="args.headers" :fields="args.fields"
+                   :filter-tabs="args.filterTabs">
               <template #col1>
                 <TableCellContent important title="Table Cell" description="Table Cell column two"/>
               </template>

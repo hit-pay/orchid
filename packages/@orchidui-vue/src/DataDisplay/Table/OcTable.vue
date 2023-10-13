@@ -65,7 +65,7 @@ const removeQuery = (query) => {
             v-for="header in headers"
             :key="header.key"
             :text="header.label"
-            :variant="header.variant"
+            :variant="header.headerVariant"
           >
             <template #default>
               <slot :name="`header-${header.key}`" />
