@@ -24,13 +24,10 @@ defineEmits({
   "update:modelValue": [],
 });
 const pagination = computed(() => {
-  const totalVisible =
-    Number(props.totalVisible) &&
-    !(props.totalVisible <= 3 && props.maxPage > props.totalVisible)
-      ? props.totalVisible
-      : props.totalVisible <= 3 && props.maxPage > props.totalVisible
-      ? 3
-      : 1;
+  let totalVisible = Number(props.totalVisible);
+  if (totalVisible <= 3 && props.maxPage > totalVisible) {
+    totalVisible = 3;
+  }
 
   // Case when totalVisible is bigger than maxPage
   if (props.maxPage <= totalVisible) {
