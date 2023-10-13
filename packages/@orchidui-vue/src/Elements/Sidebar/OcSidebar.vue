@@ -143,7 +143,7 @@
 
 <script setup>
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/vue";
-import { defineAsyncComponent, reactive, onMounted, computed, ref } from "vue";
+import { defineAsyncComponent, reactive, onMounted, computed } from "vue";
 
 const Icon = defineAsyncComponent(() =>
   import("../../MediaAndIcons/Icon/OcIcon.vue"),

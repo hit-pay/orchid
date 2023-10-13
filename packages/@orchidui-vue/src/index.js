@@ -13,3 +13,6 @@ export * from "./Form/Radio/OcRadio.js";
 export * from "./Form/RadioGroup/OcRadioGroup.js";
 export * from "./Form/Toggle/OcToggle.js";
 export * from "./Elements/Sidebar/OcSidebar.js";
+export * from "./DataDisplay/Table/OcTable.js";
+export * from "./DataDisplay/Pagination/OcPagination.js";
+export * from "./Disclosure/Tabs/Tabs.js";

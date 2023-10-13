@@ -74,7 +74,7 @@ const inputClasses = computed(() => [
       <slot v-if="type === 'trailing'" name="trailing" />
 
       <slot name="icon">
-        <Icon v-if="icon" class="w-4 h-4 text-oc-text-400" :name="icon" />
+        <Icon v-if="icon" class="w-5 h-5 text-oc-text-400" :name="icon" />
       </slot>
 
       <div class="flex flex-1 items-baseline gap-x-2">
