@@ -114,7 +114,8 @@ export const Default = {
     },
     template: `
           <Theme>
-            <Table :is-selectable="args.isSelectable" :headers="args.headers" :fields="args.fields"
+            <Table :is-selectable="args.isSelectable" :headers="args.headers"
+                   :fields="args.fields"
                    :filter-tabs="args.filterTabs">
               <template #col1>
                 <TableCellContent important title="Table Cell" description="Table Cell column two"/>

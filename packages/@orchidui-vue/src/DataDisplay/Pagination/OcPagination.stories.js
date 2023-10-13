@@ -7,7 +7,7 @@ export default {
   tags: ["autodocs"],
 };
 
-export const PaginationExample = {
+export const pagination = {
   argTypes: {
     size: {
       control: "select",
