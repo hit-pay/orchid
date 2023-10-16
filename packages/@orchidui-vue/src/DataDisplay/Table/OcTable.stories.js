@@ -4,7 +4,6 @@ import Chip from "../../Feedback/Chip/OcChip.vue";
 import Icon from "../../MediaAndIcons/Icon/OcIcon.vue";
 import Toggle from "../../Form/Toggle/OcToggle.vue";
 import TableCellContent from "./OcTableCellContent.vue";
-import { ref } from "vue";
 
 export default {
   component: Table,
@@ -114,9 +113,12 @@ export const Default = {
     },
     template: `
           <Theme>
-            <Table :is-selectable="args.isSelectable" :headers="args.headers"
-                   :fields="args.fields"
-                   :filter-tabs="args.filterTabs">
+            <Table
+                :is-selectable="args.isSelectable"
+                :headers="args.headers"
+                :fields="args.fields"
+                :filter-tabs="args.filterTabs"
+            >
               <template #col1>
                 <TableCellContent important title="Table Cell" description="Table Cell column two"/>
               </template>

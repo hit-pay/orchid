@@ -28,7 +28,9 @@
         />
       </template>
 
-      <span v-if="label">{{ label }}</span>
+      <span v-if="label" class="overflow-hidden text-ellipsis">
+        {{ label }}
+      </span>
       <slot v-else />
 
       <template v-if="rightIcon">
