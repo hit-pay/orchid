@@ -1,11 +1,25 @@
 <script setup>
 import Icon from "../../MediaAndIcons/Icon/OcIcon.vue";
+import { computed } from "vue";
 
-defineProps({
-  theme: String,
-  badgeText: String,
-  badgeIcon: String,
+const props = defineProps({
+  theme: {
+    type: String,
+    default: "light",
+  },
+  badgeText: {
+    type: String,
+    default: "",
+  },
+  badgeIcon: {
+    type: String,
+    default: "",
+  },
 });
+
+const backgroundClass = computed(() =>
+  props.theme === "light" ? "bg-oc-dark-blue-50" : "bg-transparent",
+);
 </script>
 
 <template>
@@ -19,7 +33,7 @@ defineProps({
 
     <div
       class="flex rounded-full max-w-[150px] overflow-hidden items-center gap-x-2 py-2 px-3"
-      :class="theme === 'light' ? 'bg-oc-dark-blue-50' : 'bg-transparent'"
+      :class="backgroundClass"
     >
       <Icon
         width="16"

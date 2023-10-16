@@ -32,5 +32,8 @@
   "module": "./dist/index.js",
   "files": [
     "./dist"
-  ]
+  ],
+  "dependencies": {
+    "@popperjs/core": "^2.11.8"
+  }
 }
