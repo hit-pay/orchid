@@ -28,9 +28,9 @@ const props = defineProps({
 const trigger = ref();
 const tooltip = ref();
 const popperInstance = ref();
-onMounted(
-  () =>
-    (popperInstance.value = createPopper(trigger.value, tooltip.value, {
+onMounted(() => {
+  try {
+    popperInstance.value = createPopper(trigger.value, tooltip.value, {
       placement: props.position,
       modifiers: [
         {
@@ -41,25 +41,32 @@ onMounted(
         },
       ],
       ...props.popperOptions,
-    })),
-);
+    });
+  } catch (error) {
+    console.error("Failed to create Popper instance:", error);
+  }
+});
 watch(
   () => [props.offset, props.position],
   () => {
-    popperInstance.value.setOptions((options) => ({
-      ...options,
-      placement: props.position,
-      modifiers: [
-        ...options.modifiers,
-        {
-          name: "offset",
-          options: {
-            offset: props.offset,
+    try {
+      popperInstance.value.setOptions((options) => ({
+        ...options,
+        placement: props.position,
+        modifiers: [
+          ...options.modifiers,
+          {
+            name: "offset",
+            options: {
+              offset: props.offset,
+            },
           },
-        },
-      ],
-      ...props.popperOptions,
-    }));
+        ],
+        ...props.popperOptions,
+      }));
+    } catch (error) {
+      console.error("Failed to set Popper options:", error);
+    }
   },
 );
 const show = () => {

@@ -2,10 +2,14 @@
 import { computed } from "vue";
 
 defineProps({
-  size: Number,
+  size: {
+    type: Number,
+    validator: (value) => [64, 48, 40, 32, 24].includes(value),
+  },
   type: {
     type: String,
     default: "default",
+    validator: (value) => ["business", "default", "image"].includes(value),
   },
 });
 const typeClasses = computed(() => ({
@@ -28,6 +32,6 @@ const fontSizes = computed(() => ({
     :style="{ width: `${size}px`, height: `${size}px` }"
     :class="[typeClasses[type], fontSizes[size]]"
   >
-    <slot />
+    <slot>H</slot>
   </div>
 </template>

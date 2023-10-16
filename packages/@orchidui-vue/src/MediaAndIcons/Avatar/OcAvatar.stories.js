@@ -32,7 +32,7 @@ export const Default = {
     template: `
           <Theme>
             <div class="w-full h-[400px] flex items-center justify-center">
-              <Avatar :size="args.size" :type="args.type">H</Avatar>
+              <Avatar :size="args.size" :type="args.type"/>
             </div>
           </Theme>
         `,
@@ -51,13 +51,13 @@ export const Sizes = {
           <Theme>
             <div class="w-full flex gap-x-6">
               <div class="flex flex-col gap-y-4">
-                <Avatar v-for="size in sizes" :key="size" :size="size">H</Avatar>
+                <Avatar v-for="size in sizes" :key="size" :size="size"/>
               </div>
               <div class="flex flex-col gap-y-4">
-                <Avatar v-for="size in sizes" :key="size" :size="size" type="business">H</Avatar>
+                <Avatar v-for="size in sizes" :key="size" :size="size" type="business"/>
               </div>
               <div class="flex flex-col gap-y-4">
-                <Avatar v-for="size in sizes" :key="size" :size="size" type="image">H</Avatar>
+                <Avatar v-for="size in sizes" :key="size" :size="size" type="image"/>
               </div>
             </div>
           </Theme>

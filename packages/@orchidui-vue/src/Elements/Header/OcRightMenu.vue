@@ -19,7 +19,7 @@ import Avatar from "../../MediaAndIcons/Avatar/OcAvatar.vue";
         </div>
         <Icon class="w-7 h-7" name="question-mark" />
       </div>
-      <Avatar size="32" class="font-bold">H</Avatar>
+      <Avatar :size="32" />
     </slot>
   </div>
 </template>
