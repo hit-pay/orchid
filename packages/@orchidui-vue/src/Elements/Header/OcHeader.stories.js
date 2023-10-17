@@ -82,16 +82,38 @@ export const Default = {
                     name="hitPay"
                     class="text-oc-accent-1"
                   />
+                 
+                  <Dropdown :offset="10">
+                      <template #trigger>
+                        <div class="cursor-pointer flex rounded-full max-w-[150px] overflow-hidden items-center gap-x-2 py-2 px-3 bg-oc-accent-1-50">
+                          <Icon width="16" height="16" name="store" class="shrink-0 text-oc-accent-1-400" />
+                          <span class="overflow-hidden text-ellipsis whitespace-nowrap text-oc-text-400">Locally</span>
+                        </div>
+                      </template>
+                      <div class="flex flex-col">
+                        <div class="p-2 border-b border-gray-200">
+                          <DropdownItem text="My Store"/>
+                          <DropdownItem text="My Store"/>
+                        </div>
+                      </div>
+                    </Dropdown>
               </HeaderLeft>
               <HeaderCenter class="hidden md:flex" >
                 <HeaderTabs  v-model="activeMenuValue" :menus="args.menus" />
               </HeaderCenter>
               <HeaderRight>
-                  <div class="flex gap-x-5 ">
+                  <div class="flex gap-x-2 md:gap-x-5 ">
                     <Button is-transparent variant="secondary"  left-icon="chat" />
                     <Button is-transparent variant="secondary"  left-icon="sparkle-2" />
-                    <Button is-transparent variant="secondary"  left-icon="question-mark" />
-                    
+                    <Tooltip key="my-tooltip" trigger="hover" :offset="[0, 10]" position="bottom" 
+                      popperClass="bg-oc-gray-900 text-oc-text-100">
+                      <Button is-transparent variant="secondary"  left-icon="question-mark" />
+                      <template #popper>
+                        <div class="p-4 rounded-full z-50">
+                          Help
+                        </div>
+                      </template>
+                    </Tooltip>
                     <Dropdown :offset="10">
                       <template #trigger>
                       <Avatar class="cursor-pointer" />
@@ -125,7 +147,7 @@ export const Default = {
                   <Icon name="chevron-down" class="rotate-90" />
                   Back
                 </span>
-                <span class="text-oc-text-300" v-else>
+                <span class="text-oc-text-300 text-sm lg:text-base" v-else>
                   Unsaved changes
                 </span>
               </HeaderCenter>
@@ -152,7 +174,7 @@ export const Default = {
                   <Icon name="chevron-down" class="rotate-90" />
                   Back
                 </span>
-                <span class="text-oc-text-300" v-else>
+                <span class="text-oc-text-300  text-sm md:text-base" v-else>
                   Unsaved changes
                 </span>
               </HeaderCenter>

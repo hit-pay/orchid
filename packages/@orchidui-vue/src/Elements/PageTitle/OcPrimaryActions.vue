@@ -16,13 +16,13 @@ const isDropdownOpened = ref(false);
     class="p-1 gap-x-1 rounded-sm border text-oc-text-400 flex"
     :class="
       isDropdownOpened
-        ? 'bg-oc-bg border-oc-dark-blue-100'
+        ? 'bg-oc-bg border-oc-oc-accent-1-100'
         : 'border-transparent'
     "
   >
     <Tooltip position="top" arrow-hidden :offset="[0, 7]">
       <Icon
-        class="p-2 cursor-pointer rounded-sm hover:bg-oc-dark-blue-50-tr active:text-oc-text-400 hover:text-oc-text"
+        class="p-2 cursor-pointer rounded-sm hover:bg-oc-oc-accent-1-50-tr active:text-oc-text-400 hover:text-oc-text"
         name="external-link"
       />
       <template #popper>
