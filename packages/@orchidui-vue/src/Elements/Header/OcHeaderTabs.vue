@@ -16,6 +16,7 @@ const activeMenu = computed(() =>
 
 </script>
 <template>
+  <div class="flex gap-x-9">
   <div
       v-for="item in menus"
       :key="item.value"
@@ -35,4 +36,5 @@ const activeMenu = computed(() =>
     >
       {{ item.label }}
     </div>
+  </div>
 </template>

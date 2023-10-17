@@ -89,7 +89,7 @@ export const Default = {
                     class="text-oc-text-100"
                   />
               </HeaderLeft>
-              <HeaderCenter class="hidden md:flex"  >
+              <HeaderCenter class="hidden md:flex flex-1"  >
                 <span  v-if="args.isSaved" class="text-oc-text-100 flex items-center">
                   <Icon name="chevron-down" class="rotate-90" />
                   Back
