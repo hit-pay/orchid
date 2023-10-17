@@ -9,7 +9,9 @@
         <!-- Theme settings -->
         <div class="flex items-center flex-wrap gap-3">
           <h1 class="w-full mb-3 font-medium">Theme Settings</h1>
+          <Button label="Enable Dark Mode" @click="toggleDarkMode" />
           <Button label="Change Primary Colors" @click="changePrimaryColor" />
+          <span class="dark:text-oc-primary">dark:text-oc-primary</span>
         </div>
       </section>
 
@@ -26,8 +28,6 @@
             </a>
           </div>
           <!-- COLORS -->
-
-
           <h2>
             Color Gray
           </h2>

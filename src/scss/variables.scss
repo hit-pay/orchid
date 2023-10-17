@@ -1,5 +1,5 @@
 /* Variables  */
-.light-mode {
+:root {
     --oc-gray-10: #f8f9fc;
     --oc-gray-50: #fcfcfd;
     --oc-gray-100: #f2f2f4;
@@ -112,5 +112,16 @@
      --button-destructive-disabled: linear-gradient(180deg,
      #c66c75 0%,
      #a84851 100%);
+
+
+
+     /* utility */
+     --oc-border-xs: .125rem;
+     --oc-border-sm: .25rem;
+     --oc-border-md: .5rem;
+     --oc-border-lg: .75rem;
+     --oc-border-xl: 1rem;
+     --oc-border-xxl: 1.25rem;
+     --oc-border-full: 9999px;
 
 }

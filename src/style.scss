@@ -1,17 +1,6 @@
 @import 'https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap';
-@import './scss/lightmode_variables.scss';
-@import './scss/darkmode_variables.scss';
+@import './scss/variables.scss';
 @import './scss/components.scss';
-:root{
-     /* utility */
-     --oc-border-xs: .125rem;
-     --oc-border-sm: .25rem;
-     --oc-border-md: .5rem;
-     --oc-border-lg: .75rem;
-     --oc-border-xl: 1rem;
-     --oc-border-xxl: 1.25rem;
-     --oc-border-full: 9999px;
-}
 body{
     //  default
     color: var(--oc-text-500);
