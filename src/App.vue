@@ -26,27 +26,108 @@
             </a>
           </div>
           <!-- COLORS -->
-          <div class="grid grid-cols-7 gap-3">
-            <div class="h-[50px] bg-oc-gray-10 rounded"></div>
-            <div class="h-[50px] bg-oc-gray-50 rounded"></div>
-            <div class="h-[50px] bg-oc-gray-100 rounded"></div>
-            <div class="h-[50px] bg-oc-gray-200 rounded"></div>
-            <div class="h-[50px] bg-oc-gray-300 rounded"></div>
-            <div class="h-[50px] bg-oc-gray-400 rounded"></div>
-            <div class="h-[50px] bg-oc-gray-500 rounded"></div>
-            <div class="h-[50px] bg-oc-gray-600 rounded"></div>
-            <div class="h-[50px] bg-oc-gray-700 rounded"></div>
-            <div class="h-[50px] bg-oc-gray-800 rounded"></div>
-            <div class="h-[50px] bg-oc-gray-900 rounded"></div>
+
+
+          <h2>
+            Color Gray
+          </h2>
+          <div class="grid grid-cols-11 gap-3">
+            <div class="h-[50px] bg-oc-gray-10 rounded border"></div>
+            <div class="h-[50px] bg-oc-gray-50 rounded border"></div>
+            <div class="h-[50px] bg-oc-gray-100 rounded border"></div>
+            <div class="h-[50px] bg-oc-gray-200 rounded border"></div>
+            <div class="h-[50px] bg-oc-gray-300 rounded border"></div>
+            <div class="h-[50px] bg-oc-gray-400 rounded border"></div>
+            <div class="h-[50px] bg-oc-gray-500 rounded border"></div>
+            <div class="h-[50px] bg-oc-gray-600 rounded border"></div>
+            <div class="h-[50px] bg-oc-gray-700 rounded border"></div>
+            <div class="h-[50px] bg-oc-gray-800 rounded border"></div>
+            <div class="h-[50px] bg-oc-gray-900 rounded border"></div>
           </div>
+          <h2>
+            Color Primary
+          </h2>
            <div class="grid grid-cols-7 gap-3">
-            <div class="h-[50px] bg-oc-primary-50-tr rounded"></div>
-            <div class="h-[50px] bg-oc-primary-50 rounded"></div>
-            <div class="h-[50px] bg-oc-primary-100 rounded"></div>
-            <div class="h-[50px] bg-oc-primary-200 rounded"></div>
-            <div class="h-[50px] bg-oc-primary-300 rounded"></div>
-            <div class="h-[50px] bg-oc-primary-400 rounded"></div>
-            <div class="h-[50px] bg-oc-primary-500 rounded"></div>
+            <div class="h-[50px] bg-oc-primary-50-tr rounded border"></div>
+            <div class="h-[50px] bg-oc-primary-50 rounded border"></div>
+            <div class="h-[50px] bg-oc-primary-100 rounded border"></div>
+            <div class="h-[50px] bg-oc-primary-200 rounded border"></div>
+            <div class="h-[50px] bg-oc-primary-300 rounded border"></div>
+            <div class="h-[50px] bg-oc-primary-400 rounded border"></div>
+            <div class="h-[50px] bg-oc-primary-500 rounded border"></div>
+          </div>
+          <h2>
+            Color Accent 1 (Purple)
+          </h2>
+          <div class="grid grid-cols-7 gap-3">
+            <div class="h-[50px] bg-oc-accent-1-50-tr rounded border"></div>
+            <div class="h-[50px] bg-oc-accent-1-50 rounded border"></div>
+            <div class="h-[50px] bg-oc-accent-1-100 rounded border"></div>
+            <div class="h-[50px] bg-oc-accent-1-200 rounded border"></div>
+            <div class="h-[50px] bg-oc-accent-1-300 rounded border"></div>
+            <div class="h-[50px] bg-oc-accent-1-400 rounded border"></div>
+            <div class="h-[50px] bg-oc-accent-1-500 rounded border"></div>
+          </div>
+          <h2>
+            Color Accent 2 (Red)
+          </h2>
+          <div class="grid grid-cols-7 gap-3">
+            <div class="h-[50px] bg-oc-accent-2-50-tr rounded border"></div>
+            <div class="h-[50px] bg-oc-accent-2-50 rounded border"></div>
+            <div class="h-[50px] bg-oc-accent-2-100 rounded border"></div>
+            <div class="h-[50px] bg-oc-accent-2-200 rounded border"></div>
+            <div class="h-[50px] bg-oc-accent-2-300 rounded border"></div>
+            <div class="h-[50px] bg-oc-accent-2-400 rounded border"></div>
+            <div class="h-[50px] bg-oc-accent-2-500 rounded border"></div>
+          </div>
+          <h2>
+            Color Accent 3 (Dark Blue)
+          </h2>
+          <div class="grid grid-cols-8 gap-3">
+            <div class="h-[50px] bg-oc-accent-3-50-tr rounded border"></div>
+            <div class="h-[50px] bg-oc-accent-3-50 rounded border"></div>
+            <div class="h-[50px] bg-oc-accent-3-100 rounded border"></div>
+            <div class="h-[50px] bg-oc-accent-3-200 rounded border"></div>
+            <div class="h-[50px] bg-oc-accent-3-300 rounded border"></div>
+            <div class="h-[50px] bg-oc-accent-3-400 rounded border"></div>
+            <div class="h-[50px] bg-oc-accent-3-500 rounded border"></div>
+            <div class="h-[50px] bg-oc-accent-3-600 rounded border"></div>
+          </div>
+          <h2>
+            Color Success
+          </h2>
+          <div class="grid grid-cols-7 gap-3">
+            <div class="h-[50px] bg-oc-success-50-tr rounded border"></div>
+            <div class="h-[50px] bg-oc-success-50 rounded border"></div>
+            <div class="h-[50px] bg-oc-success-100 rounded border"></div>
+            <div class="h-[50px] bg-oc-success-200 rounded border"></div>
+            <div class="h-[50px] bg-oc-success-300 rounded border"></div>
+            <div class="h-[50px] bg-oc-success-400 rounded border"></div>
+            <div class="h-[50px] bg-oc-success-500 rounded border"></div>
+          </div>
+          <h2>
+            Color Warning
+          </h2>
+          <div class="grid grid-cols-7 gap-3">
+            <div class="h-[50px] bg-oc-warning-50-tr rounded border"></div>
+            <div class="h-[50px] bg-oc-warning-50 rounded border"></div>
+            <div class="h-[50px] bg-oc-warning-100 rounded border"></div>
+            <div class="h-[50px] bg-oc-warning-200 rounded border"></div>
+            <div class="h-[50px] bg-oc-warning-300 rounded border"></div>
+            <div class="h-[50px] bg-oc-warning-400 rounded border"></div>
+            <div class="h-[50px] bg-oc-warning-500 rounded border"></div>
+          </div>
+          <h2>
+            Color Error
+          </h2>
+          <div class="grid grid-cols-7 gap-3">
+            <div class="h-[50px] bg-oc-error-50-tr rounded border"></div>
+            <div class="h-[50px] bg-oc-error-50 rounded border"></div>
+            <div class="h-[50px] bg-oc-error-100 rounded border"></div>
+            <div class="h-[50px] bg-oc-error-200 rounded border"></div>
+            <div class="h-[50px] bg-oc-error-300 rounded border"></div>
+            <div class="h-[50px] bg-oc-error-400 rounded border"></div>
+            <div class="h-[50px] bg-oc-error-500 rounded border"></div>
           </div>
           <!-- DEMO COMPONENT -->
           <div class="flex ">
