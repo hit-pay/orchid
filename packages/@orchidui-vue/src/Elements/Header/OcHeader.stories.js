@@ -107,7 +107,7 @@ export const Default = {
                   </div>
               </HeaderRight>
             </Header>
-            <Header is-sub-header >
+            <Header is-sub-header class="mb-3" >
               <Button class="md:hidden mr-3" variant="secondary"  left-icon="menu" />
               <HeaderLeft>
                 <Icon
