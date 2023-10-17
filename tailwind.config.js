@@ -5,6 +5,7 @@ module.exports = {
     "./node_modules/@orchidui/vue/dist/**/*.js",
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
   theme: {
     fontSize: {
       xs: [

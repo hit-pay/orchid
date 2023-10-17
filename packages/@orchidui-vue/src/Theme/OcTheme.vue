@@ -12,6 +12,6 @@ const props = defineProps({
   }
 });
 onMounted(() => {
-  document.querySelector('body').setAttribute("class", props.colorMode === 'light' ? 'light-mode': 'dark-mode')
+  document.querySelector('body').setAttribute("class", props.colorMode)
 })
 </script>
