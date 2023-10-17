@@ -83,7 +83,7 @@
                 </button>
                 <template #popper>
                   <div
-                    class="p-4 gap-4 absolute bg-oc-text-000 shadow-sm rounded w-[200px] z-50"
+                    class="p-4 gap-4 bg-oc-bg absolute bg-oc-text-000 shadow-sm rounded w-[200px] z-50"
                   >
                     <div
                       v-if="!menu.children"
