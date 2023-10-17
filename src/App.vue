@@ -45,6 +45,23 @@
             <div class="h-[50px] bg-oc-gray-900 rounded border"></div>
           </div>
           <h2>
+            Color Text
+          </h2>
+          <div class="w-full grid grid-cols-3 md:grid-cols-5 gap-3">
+            <div class="h-[50px] bg-oc-text-100 rounded border"></div>
+            <div class="h-[50px] bg-oc-text-200 rounded border"></div>
+            <div class="h-[50px] bg-oc-text-300 rounded border"></div>
+            <div class="h-[50px] bg-oc-text-400 rounded border"></div>
+            <div class="h-[50px] bg-oc-text-500 rounded border"></div>
+          </div>
+          <h2>
+            Color Background
+          </h2>
+          <div class="w-full grid md:grid-cols-2 gap-3">
+            <div class="h-[50px] bg-oc-bg-light rounded border"></div>
+            <div class="h-[50px] bg-oc-bg-dark rounded border"></div>
+          </div>
+          <h2>
             Color Primary
           </h2>
            <div class="w-full grid grid-cols-3 md:grid-cols-7 gap-3">
