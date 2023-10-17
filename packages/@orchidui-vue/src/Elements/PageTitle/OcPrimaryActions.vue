@@ -36,7 +36,7 @@ const isDropdownOpened = ref(false);
 
     <div
       class="border-l"
-      :class="isDropdownOpened ? 'border-oc-grey-200' : 'border-transparent'"
+      :class="isDropdownOpened ? 'border-oc-gray-200' : 'border-transparent'"
     />
 
     <Dropdown :offset="6">
@@ -55,7 +55,7 @@ const isDropdownOpened = ref(false);
       </div>
       <template #trigger>
         <Icon
-          class="p-2 cursor-pointer rounded-sm hover:bg-oc-grey-100"
+          class="p-2 cursor-pointer rounded-sm hover:bg-oc-gray-100"
           name="dots-vertical"
           @click="isDropdownOpened = !isDropdownOpened"
         />

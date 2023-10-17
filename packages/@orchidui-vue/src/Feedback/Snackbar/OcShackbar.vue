@@ -28,7 +28,7 @@ const colorClasses = Object.freeze({
   primary: "border-oc-primary-200 bg-oc-primary-50 text-oc-primary-500",
   error: "border-oc-error-200 bg-oc-error-50 text-oc-error-500",
   warning: "border-oc-warning-200 bg-oc-warning-50 text-oc-warning-500",
-  grey: "border-oc-grey-300 bg-oc-grey-100 text-oc-grey-700",
+  gray: "border-oc-gray-300 bg-oc-gray-100 text-oc-gray-700",
 });
 </script>
 

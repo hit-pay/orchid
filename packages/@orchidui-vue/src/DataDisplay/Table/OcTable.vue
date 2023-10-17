@@ -37,7 +37,7 @@ const removeQuery = (query) => {
 
 <template>
   <div
-    class="flex text-oc-text flex-col rounded border border-oc-grey-200"
+    class="flex text-oc-text flex-col rounded border border-oc-gray-200"
   >
     <TableActions :tabs="filterTabs" @add-query="addQuery" />
     <TableSearchFor

@@ -15,7 +15,7 @@ defineProps({
 <template>
   <div class="pt-5 px-10">
     <div
-      class="border rounded py-4 px-5 border-oc-grey-200 bg-oc-grey-50 flex flex-col gap-y-2"
+      class="border rounded py-4 px-5 border-oc-gray-200 bg-oc-gray-50 flex flex-col gap-y-2"
     >
       <div class="flex items-center gap-x-3">
         <span class="font-medium">{{ additionalTitle }}</span>

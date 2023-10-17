@@ -22,8 +22,8 @@ const sizeClasses = computed(() => ({
     :class="[
       sizeClasses[size],
       active
-        ? 'bg-oc-grey-100 text-oc-text'
-        : 'text-oc-text-400 hover:text-oc-text hover:bg-oc-grey-50',
+        ? 'bg-oc-gray-100 text-oc-text'
+        : 'text-oc-text-400 hover:text-oc-text hover:bg-oc-gray-50',
       isRounded ? 'rounded-full' : 'rounded-sm',
     ]"
   >

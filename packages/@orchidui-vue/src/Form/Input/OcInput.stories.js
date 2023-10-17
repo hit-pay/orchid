@@ -153,7 +153,7 @@ export const Trailing = {
                     </template>
                     <template #trigger>
                       <div
-                          class="py-3 pr-3 border-r border-oc-grey-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
+                          class="py-3 pr-3 border-r border-oc-gray-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
                       >
                         <span class="flex items-center text-sm">USD</span>
                         <Icon class="w-[14px] h-[14px]" name="chevron-down"/>
@@ -174,7 +174,7 @@ export const Trailing = {
                     </template>
                     <template #trigger>
                       <div
-                          class="py-3 pr-3 border-r border-oc-grey-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
+                          class="py-3 pr-3 border-r border-oc-gray-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
                       >
                         <span class="flex items-center text-sm">USD</span>
                         <Icon class="w-[14px] h-[14px]" name="chevron-down"/>
@@ -196,7 +196,7 @@ export const Trailing = {
                     </template>
                     <template #trigger>
                       <div
-                          class="py-3 pr-3 border-r border-oc-grey-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
+                          class="py-3 pr-3 border-r border-oc-gray-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
                       >
                         <span class="flex items-center text-sm">USD</span>
                         <Icon class="w-[14px] h-[14px]" name="chevron-down"/>
@@ -229,7 +229,7 @@ export const Leading = {
                     </template>
                     <template #trigger>
                       <div
-                          class="py-3 pl-3 border-l border-oc-grey-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
+                          class="py-3 pl-3 border-l border-oc-gray-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
                       >
                         <span class="flex items-center text-sm">USD</span>
                         <Icon class="w-[14px] h-[14px]" name="chevron-down"/>
@@ -250,7 +250,7 @@ export const Leading = {
                     </template>
                     <template #trigger>
                       <div
-                          class="py-3 pl-3 border-l border-oc-grey-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
+                          class="py-3 pl-3 border-l border-oc-gray-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
                       >
                         <span class="flex items-center text-sm">USD</span>
                         <Icon class="w-[14px] h-[14px]" name="chevron-down"/>
@@ -272,7 +272,7 @@ export const Leading = {
                     </template>
                     <template #trigger>
                       <div
-                          class="py-3 pl-3 border-l border-oc-grey-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
+                          class="py-3 pl-3 border-l border-oc-gray-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
                       >
                         <span class="flex items-center text-sm">USD</span>
                         <Icon class="w-[14px] h-[14px]" name="chevron-down"/>

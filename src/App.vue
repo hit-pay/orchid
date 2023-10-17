@@ -9,7 +9,6 @@
         <!-- Theme settings -->
         <div class="flex items-center flex-wrap gap-3">
           <h1 class="w-full mb-3 font-medium">Theme Settings</h1>
-          <Button label="Enable Dark Mode" @click="toggleDarkMode" />
           <Button label="Change Primary Colors" @click="changePrimaryColor" />
         </div>
       </section>
@@ -25,6 +24,29 @@
             >
               Storybook
             </a>
+          </div>
+          <!-- COLORS -->
+          <div class="grid grid-cols-7 gap-3">
+            <div class="h-[50px] bg-oc-gray-10 rounded"></div>
+            <div class="h-[50px] bg-oc-gray-50 rounded"></div>
+            <div class="h-[50px] bg-oc-gray-100 rounded"></div>
+            <div class="h-[50px] bg-oc-gray-200 rounded"></div>
+            <div class="h-[50px] bg-oc-gray-300 rounded"></div>
+            <div class="h-[50px] bg-oc-gray-400 rounded"></div>
+            <div class="h-[50px] bg-oc-gray-500 rounded"></div>
+            <div class="h-[50px] bg-oc-gray-600 rounded"></div>
+            <div class="h-[50px] bg-oc-gray-700 rounded"></div>
+            <div class="h-[50px] bg-oc-gray-800 rounded"></div>
+            <div class="h-[50px] bg-oc-gray-900 rounded"></div>
+          </div>
+           <div class="grid grid-cols-7 gap-3">
+            <div class="h-[50px] bg-oc-primary-50-tr rounded"></div>
+            <div class="h-[50px] bg-oc-primary-50 rounded"></div>
+            <div class="h-[50px] bg-oc-primary-100 rounded"></div>
+            <div class="h-[50px] bg-oc-primary-200 rounded"></div>
+            <div class="h-[50px] bg-oc-primary-300 rounded"></div>
+            <div class="h-[50px] bg-oc-primary-400 rounded"></div>
+            <div class="h-[50px] bg-oc-primary-500 rounded"></div>
           </div>
           <!-- DEMO COMPONENT -->
           <div class="flex ">
@@ -66,7 +88,7 @@
             <Shackbar v-bind="snackbarArgs" color="primary" />
             <Shackbar v-bind="snackbarArgs" color="error" />
             <Shackbar v-bind="snackbarArgs" color="warning" />
-            <Shackbar v-bind="snackbarArgs" color="grey" />
+            <Shackbar v-bind="snackbarArgs" color="gray" />
           </div>
           <div class="grid grid-cols-4 gap-4 my-6 w-fit">
             <Checkbox :model-value="true" />
@@ -125,7 +147,7 @@
           </div>
           <div class="grid justify-start">
             <Tooltip key="my-tooltip" trigger="hover" :offset="[0, 10]" position="bottom">
-                <div class="bg-oc-grey-300 p-3 rounded-sm cursor-pointer">Trigger Tooltip </div>
+                <div class="bg-oc-gray-300 p-3 rounded-sm cursor-pointer">Trigger Tooltip </div>
                 <template #popper>
                   <div class="flex w-[300px] flex-col gap-y-3 p-4">
                     <div class="font-medium">Tooltip title</div>

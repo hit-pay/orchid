@@ -16,7 +16,7 @@ export const Default = {
         "success",
         "warning",
         "error",
-        "grey",
+        "gray",
         "",
       ],
     },
