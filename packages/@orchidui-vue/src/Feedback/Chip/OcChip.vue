@@ -39,10 +39,10 @@ const className = computed(() => {
   let className = "";
   switch (props.variant) {
     case "accent-1":
-      className = "bg-oc-accent-1-50 text-oc-accent-1 ";
+      className = "bg-oc-accent-2-50 text-oc-accent-2 ";
       break;
     case "accent-2":
-      className = "bg-oc-accent-2-50 text-oc-accent-2 ";
+      className = "bg-oc-accent-3-50 text-oc-accent-3 ";
       break;
     case "success":
       className = "bg-oc-success-50 text-oc-success ";
@@ -66,10 +66,10 @@ const iconColor = computed(() => {
   let className = "";
   switch (props.variant) {
     case "accent-1":
-      className = "text-oc-accent-1-300";
+      className = "text-oc-accent-2-300";
       break;
     case "accent-2":
-      className = "text-oc-accent-2-300";
+      className = "text-oc-accent-3-300";
       break;
     case "success":
       className = "text-oc-success-300 ";

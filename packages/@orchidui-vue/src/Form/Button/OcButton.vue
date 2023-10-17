@@ -175,7 +175,7 @@ const iconSize = computed(() => ({
   &-add-area {
     &.primary {
       background: var(--button-primary-default);
-      @apply border-[var(--oc-accent-3-500)] text-[var(--oc-text-100)];
+      @apply border-[var(--oc-accent-1-500)] text-[var(--oc-text-100)];
       &:hover {
         background: var(--button-primary-hover);
       }

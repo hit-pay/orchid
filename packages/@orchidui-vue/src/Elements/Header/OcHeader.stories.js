@@ -14,6 +14,9 @@ import Button from "../../Form/Button/OcButton.vue";
 import Dropdown from "../../Overlay/Dropdown/OcDropdown.vue";
 import DropdownItem from "../../Overlay/Dropdown/OcDropdownItem.vue";
 
+import Tooltip from "../../Overlay/Tooltip/OcTooltip.vue";
+
+
 import { ref, computed } from "vue";
 
 export default {
@@ -51,6 +54,7 @@ export const Default = {
       Theme, 
       Icon,
       Avatar,
+      Tooltip,
       Button,
       Dropdown,
       DropdownItem,
@@ -58,7 +62,6 @@ export const Default = {
       HeaderCenter, 
       HeaderRight,
       HeaderTabs,
-      
     },
     setup() {
       const activeMenuValue = ref("payments");
@@ -77,7 +80,7 @@ export const Default = {
                     width="108"
                     height="27"
                     name="hitPay"
-                    class="text-oc-accent-3"
+                    class="text-oc-accent-1"
                   />
               </HeaderLeft>
               <HeaderCenter class="hidden md:flex" >
@@ -85,7 +88,6 @@ export const Default = {
               </HeaderCenter>
               <HeaderRight>
                   <div class="flex gap-x-5 ">
-
                     <Button is-transparent variant="secondary"  left-icon="chat" />
                     <Button is-transparent variant="secondary"  left-icon="sparkle-2" />
                     <Button is-transparent variant="secondary"  left-icon="question-mark" />
@@ -107,9 +109,10 @@ export const Default = {
                   </div>
               </HeaderRight>
             </Header>
+            
             <Header is-sub-header class="mb-3" >
               <Button class="md:hidden mr-3" variant="secondary"  left-icon="menu" />
-              <HeaderLeft>
+              <HeaderLeft class="hidden md:flex" >
                 <Icon
                     width="108"
                     height="27"
@@ -117,8 +120,8 @@ export const Default = {
                     class="text-oc-text-100"
                   />
               </HeaderLeft>
-              <HeaderCenter class="hidden md:flex flex-1"  >
-                <span  v-if="!args.unsavedChanges" class="text-oc-text-100 flex items-center">
+              <HeaderCenter class="flex-1" >
+                <span v-if="!args.unsavedChanges" class="text-oc-text-100 flex items-center">
                   <Icon name="chevron-down" class="rotate-90" />
                   Back
                 </span>
@@ -136,7 +139,7 @@ export const Default = {
 
             <Header is-sub-header >
               <Button class="md:hidden mr-3" variant="secondary"  left-icon="menu" />
-              <HeaderLeft>
+              <HeaderLeft class="hidden md:flex">
                 <Icon
                     width="108"
                     height="27"
@@ -144,7 +147,7 @@ export const Default = {
                     class="text-oc-text-100"
                   />
               </HeaderLeft>
-              <HeaderCenter class="hidden md:flex flex-1"  >
+              <HeaderCenter class="flex-1">
                 <span  v-if="args.unsavedChanges" class="text-oc-text-100 flex items-center cursor-pointer">
                   <Icon name="chevron-down" class="rotate-90" />
                   Back
