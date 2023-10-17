@@ -16,11 +16,11 @@ const activeMenu = computed(() =>
 
 </script>
 <template>
-  <div class="flex gap-x-9">
+  <div class="flex gap-x-3 md:gap-x-9">
   <div
       v-for="item in menus"
       :key="item.value"
-      class="py-7 font-medium hover:text-oc-accent-1 cursor-pointer"
+      class="py-3 md:py-7 font-medium hover:text-oc-accent-1 cursor-pointer"
       :style="{
         borderColor: activeMenu.color,
       }"

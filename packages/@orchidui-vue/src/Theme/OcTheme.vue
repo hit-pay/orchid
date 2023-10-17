@@ -12,10 +12,9 @@ const props = defineProps({
   }
 })
 watch(() => props.colorMode, () => {
-  console.log('props.colorMode', props.colorMode)
-        if (props.colorMode === 'dark') {
-          document.querySelector('body').setAttribute("class", 'dark')
-        } else {
-          document.querySelector('body').setAttribute("class", 'light')
-        }},{immediate:true});
+    if (props.colorMode === 'dark') {
+      document.querySelector('body').setAttribute("class", 'dark')
+    } else {
+      document.querySelector('body').setAttribute("class", 'light')
+    }},{immediate:true});
 </script>

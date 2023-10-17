@@ -75,7 +75,7 @@ export const Default = {
           <Theme>
             <Header class="mb-3">
               <Button class="md:hidden mr-3" variant="secondary" left-icon="menu" />
-              <HeaderLeft>
+              <HeaderLeft class="md:w-[260px]">
                 <Icon
                     width="108"
                     height="27"
@@ -134,7 +134,7 @@ export const Default = {
             
             <Header is-sub-header class="mb-3" >
               <Button class="md:hidden mr-3" variant="secondary"  left-icon="menu" />
-              <HeaderLeft class="hidden md:flex" >
+              <HeaderLeft class="hidden md:flex  md:w-[260px]" >
                 <Icon
                     width="108"
                     height="27"
@@ -176,7 +176,7 @@ export const Default = {
 
             <Header is-sub-header >
               <Button class="md:hidden mr-3" variant="secondary"  left-icon="menu" />
-              <HeaderLeft class="hidden md:flex">
+              <HeaderLeft class="hidden md:flex  md:w-[260px]">
                 <Icon
                     width="108"
                     height="27"
