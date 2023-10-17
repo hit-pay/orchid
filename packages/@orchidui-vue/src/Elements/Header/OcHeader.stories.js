@@ -87,7 +87,7 @@ export const Default = {
                       <template #trigger>
                         <div class="cursor-pointer flex rounded-full max-w-[150px] overflow-hidden items-center gap-x-2 py-2 px-3 bg-oc-accent-1-50">
                           <Icon width="16" height="16" name="store" class="shrink-0 text-oc-accent-1-400" />
-                          <span class="overflow-hidden text-ellipsis whitespace-nowrap text-oc-text-400">Locally</span>
+                          <span class="overflow-hidden text-ellipsis whitespace-nowrap text-oc-text-400">Shenzhen Huajin test</span>
                         </div>
                       </template>
                       <div class="flex flex-col">
@@ -141,6 +141,21 @@ export const Default = {
                     name="hitPay"
                     class="text-oc-text-100"
                   />
+                  <Dropdown :offset="10">
+                    <template #trigger>
+                        <div
+                            class="cursor-pointer flex rounded-full max-w-[150px] overflow-hidden items-center gap-x-2 py-2 px-3 ">
+                            <Icon width="16" height="16" name="store" class="shrink-0 text-oc-text-200" />
+                            <span class="overflow-hidden text-ellipsis whitespace-nowrap text-oc-text-200">Shenzhen Huajin test</span>
+                        </div>
+                    </template>
+                    <div class="flex flex-col z-[1000]">
+                        <div class="p-2 border-b border-gray-200">
+                            <DropdownItem text="My Store" />
+                            <DropdownItem text="My Store" />
+                        </div>
+                    </div>
+                </Dropdown>
               </HeaderLeft>
               <HeaderCenter class="flex-1" >
                 <span v-if="!args.unsavedChanges" class="text-oc-text-100 flex items-center">
@@ -168,6 +183,21 @@ export const Default = {
                     name="hitPay"
                     class="text-oc-text-100"
                   />
+                  <Dropdown :offset="10">
+                      <template #trigger>
+                          <div
+                              class="cursor-pointer flex rounded-full max-w-[150px] overflow-hidden items-center gap-x-2 py-2 px-3 ">
+                              <Icon width="16" height="16" name="store" class="shrink-0 text-oc-text-200" />
+                              <span class="overflow-hidden text-ellipsis whitespace-nowrap text-oc-text-200">Shenzhen Huajin test</span>
+                          </div>
+                      </template>
+                      <div class="flex flex-col z-[1000]">
+                          <div class="p-2 border-b border-gray-200">
+                              <DropdownItem text="My Store" />
+                              <DropdownItem text="My Store" />
+                          </div>
+                      </div>
+                  </Dropdown>
               </HeaderLeft>
               <HeaderCenter class="flex-1">
                 <span  v-if="args.unsavedChanges" class="text-oc-text-100 flex items-center cursor-pointer">

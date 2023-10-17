@@ -6,7 +6,7 @@
     <div
       v-show="isOpen"
       ref="dropdownMenu"
-      class="fixed z-[1] min-w-[162px] rounded-[0.5rem] bg-oc-bg-light shadow border border-oc-primary-100"
+      class="fixed z-50 min-w-[162px] rounded-[0.5rem] bg-oc-bg-light shadow border border-oc-primary-100"
     >
       <slot :close="() => (isOpen = false)" />
     </div>

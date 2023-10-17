@@ -1,5 +1,5 @@
 <template>
-    <div class="md:ml-[38px] flex items-center ">
+    <div class="flex items-center ">
         <slot />            
      </div>
 </template>

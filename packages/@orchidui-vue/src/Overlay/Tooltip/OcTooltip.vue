@@ -156,7 +156,7 @@ const onClickOutside = () => {
   box-shadow:
     0 3px 22px 0 rgba(38, 42, 50, 0.09),
     0 1px 3px 0 rgba(0, 0, 0, 0.1);
-  @apply hidden rounded-sm z-10;
+  @apply hidden rounded-sm z-50;
 
   &[data-popper-placement^="top"] > .oc-arrow {
     bottom: -4px;
