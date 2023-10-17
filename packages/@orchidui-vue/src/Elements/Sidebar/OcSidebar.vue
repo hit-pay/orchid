@@ -7,7 +7,7 @@
       <button
         type="button"
         aria-label="Expand Collapse"
-        class="bg-oc-text-000 transition-all duration-500 absolute top-[-12px] right-[-12px] z-40 p-3 border rounded-full"
+        class="bg-oc-text-100 transition-all duration-500 absolute top-[-12px] right-[-12px] z-40 p-3 border rounded-full"
         :class="{
           '-rotate-180': !isExpanded,
         }"

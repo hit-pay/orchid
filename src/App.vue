@@ -408,13 +408,13 @@ const changePrimaryColor = () => {
   );
 }
 
-.dark-mode.teal-primary-color {
-  --oc-primary-500: #2dd4bf;
-  --oc-primary-400: #14b8a6;
-  --oc-primary-300: #0d9488;
-  --oc-primary-200: #0f766e;
-  --oc-primary-100: #115e59;
-  --oc-primary-50: #134e4a;
-  --oc-primary-50-tr: #042f2e;
+.dark-mode .teal-primary-color {
+  --oc-primary-500: #f0fdfa;
+  --oc-primary-400: #ccfbf1;
+  --oc-primary-300: #99f6e4;
+  --oc-primary-200: #5eead4;
+  --oc-primary-100: #2dd4bf;
+  --oc-primary-50: #14b8a6;
+  --oc-primary-50-tr: #0d9488;
 }
 </style>
