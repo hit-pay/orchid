@@ -13,7 +13,7 @@ defineProps({
   },
 });
 const typeClasses = computed(() => ({
-  business: "bg-oc-dark-blue text-white",
+  business: "bg-oc-accent-3 text-white",
   default: "bg-oc-grey-800 text-white",
   image: "text-black",
 }));

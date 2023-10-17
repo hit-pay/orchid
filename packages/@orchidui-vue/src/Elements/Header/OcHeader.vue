@@ -30,7 +30,7 @@ const isDefault = computed(
 <template>
   <div
     class="px-[40px] border-b border-oc-grey-200 h-[68px] w-full justify-center flex items-center relative"
-    :class="theme === 'light' ? 'bg-oc-bg' : 'bg-[var(--oc-dark-blue-600)]'"
+    :class="theme === 'light' ? 'bg-oc-bg' : 'bg-[var(--oc-accent-3-600)]'"
   >
     <LogoLocation
       :class="isDefault ? 'flex-1' : ''"
