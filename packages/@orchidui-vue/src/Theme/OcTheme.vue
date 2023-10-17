@@ -1,5 +1,5 @@
 <template>
-  <main :class="(colorMode === 'dark') ? 'dark-mode': 'light-mode'">
+  <main>
     <slot />
   </main>
 </template>

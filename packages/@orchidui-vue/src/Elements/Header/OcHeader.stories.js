@@ -1,5 +1,14 @@
-import Header from "./OcHeader.vue";
 import Theme from "../../Theme/OcTheme.vue";
+import Header from "./OcHeader.vue";
+
+import HeaderLeft from "./OcHeaderLeft.vue";
+import HeaderCenter from "./OcHeaderCenter.vue";
+import HeaderRight from "./OcHeaderRight.vue";
+import HeaderTabs from "./OcHeaderTabs.vue";
+
+import Icon from "../../MediaAndIcons/Icon/OcIcon.vue";
+import Button from "../../Form/Button/OcButton.vue";
+
 import { ref } from "vue";
 
 export default {
@@ -9,7 +18,7 @@ export default {
 
 export const Default = {
   args: {
-    theme: "light",
+    isSaved: false,
     menus: [
       {
         label: "Payments",
@@ -30,24 +39,18 @@ export const Default = {
         path: "online_store",
       },
     ],
-    saveButtonProps: {
-      label: "Save",
-    },
-    cancelButtonProps: {
-      label: "Cancel",
-    },
-    isUnsavedChanges: false,
-    isBackButton: false,
-    badgeText: "Locally",
-  },
-  argTypes: {
-    theme: {
-      control: "select",
-      options: ["light", "dark"],
-    },
   },
   render: (args) => ({
-    components: { Header, Theme },
+    components: { 
+      Header, 
+      Theme, 
+      Icon,
+      Button,
+      HeaderLeft, 
+      HeaderCenter, 
+      HeaderRight,
+      HeaderTabs
+    },
     setup() {
       const activeMenuValue = ref("payments");
 
@@ -55,17 +58,51 @@ export const Default = {
     },
     template: `
           <Theme>
-            <Header
-                v-model="activeMenuValue"
-                :theme="args.theme"
-                :is-back-button="args.isBackButton"
-                :is-unsaved-changes="args.isUnsavedChanges"
-                :save-button-props="args.saveButtonProps"
-                :cancel-button-props="args.cancelButtonProps"
-                :menus="args.menus"
-                badge-icon="store"
-                :badge-text="args.badgeText"
-            />
+            <Header class="mb-3">
+              <Button class="md:hidden" left-icon="menu" />
+              <HeaderLeft>
+                <Icon
+                    width="108"
+                    height="27"
+                    name="hitPay"
+                    class="text-oc-accent-3"
+                  />
+              </HeaderLeft>
+              <HeaderTabs v-model="activeMenuValue" :menus="args.menus" />
+              <HeaderRight>
+                  <div class="flex gap-x-5">
+                    <Button is-transparent variant="secondary"  left-icon="chat" />
+                    <Button is-transparent variant="secondary"  left-icon="sparkle-2" />
+                    <Button is-transparent variant="secondary"  left-icon="question-mark" />
+                  </div>
+              </HeaderRight>
+            </Header>
+            <Header is-sub-header >
+              <Button class="md:hidden" left-icon="menu" />
+              <HeaderLeft>
+                <Icon
+                    width="108"
+                    height="27"
+                    name="hitPay"
+                    class="text-oc-text-100"
+                  />
+              </HeaderLeft>
+              <HeaderCenter  >
+                <span  v-if="args.isSaved" class="text-oc-text-100 flex items-center">
+                  <Icon name="chevron-down" class="rotate-90" />
+                  Back
+                </span>
+                <span class="text-oc-text-300" v-else>
+                  Unsaved changes
+                </span>
+              </HeaderCenter>
+              <HeaderRight>
+                  <div class="flex gap-x-5">
+                    <Button variant="secondary" label="Cancel"  />
+                    <Button :label="args.isSaved ? 'Create' : 'Save'"  />
+                  </div>
+              </HeaderRight>
+            </Header>
           </Theme>
         `,
   }),

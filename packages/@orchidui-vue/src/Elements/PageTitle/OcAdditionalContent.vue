@@ -21,7 +21,7 @@ defineProps({
         <span class="font-medium">{{ additionalTitle }}</span>
         <Chip :variant="chipVariant" :label="chipLabel" />
       </div>
-      <div class="flex items-center gap-x-2">
+      <div class="flex flex-wrap items-center gap-2">
         <span class="text-oc-text-400">
           {{ mainLink }}<span class="text-oc-text">{{ userId }}</span>
         </span>

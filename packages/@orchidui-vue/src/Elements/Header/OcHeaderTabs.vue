@@ -13,8 +13,8 @@ const props = defineProps({
 const activeMenu = computed(() =>
   props.menus.find((menu) => menu.value === props.modelValue),
 );
-</script>
 
+</script>
 <template>
   <div class="flex gap-x-9">
     <div

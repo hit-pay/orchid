@@ -17,7 +17,7 @@ const emit = defineEmits({
   "update:modelValue": [],
 });
 const alignmentClasses = computed(() => ({
-  horizontal: "gap-x-5",
+  horizontal: "gap-x-5 flex-wrap",
   vertical: "flex-col gap-y-3",
 }));
 const onInput = (value) => {
