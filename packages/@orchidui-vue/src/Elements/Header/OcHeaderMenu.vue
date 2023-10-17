@@ -20,13 +20,13 @@ const activeMenu = computed(() =>
     <div
       v-for="item in menus"
       :key="item.value"
-      class="py-7 font-medium hover:text-oc-dark-blue cursor-pointer"
+      class="py-7 font-medium hover:text-oc-accent-3 cursor-pointer"
       :style="{
         borderColor: activeMenu.color,
       }"
       :class="[
         item.value === modelValue
-          ? 'text-oc-dark-blue border-b-[3px]'
+          ? 'text-oc-accent-3 border-b-[3px]'
           : 'text-oc-text-300',
       ]"
       @click="

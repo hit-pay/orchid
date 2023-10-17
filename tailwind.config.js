@@ -73,7 +73,7 @@ module.exports = {
         // first to use this
         "oc-text": {
           DEFAULT: "var(--oc-text-500)",
-          "000": "var(--oc-text-000)",
+          100: "var(--oc-text-100)",
           200: "var(--oc-text-200)",
           300: "var(--oc-text-300)",
           400: "var(--oc-text-400)",
@@ -97,17 +97,6 @@ module.exports = {
           700: "var(--oc-grey-700)",
           800: "var(--oc-grey-800)",
           900: "var(--oc-grey-900)",
-        },
-        "oc-dark-blue": {
-          DEFAULT: "var(--oc-dark-blue-500)",
-          "50-tr": "var(--oc-dark-blue-50-tr)",
-          50: "var(--oc-dark-blue-50)",
-          100: "var(--oc-dark-blue-100)",
-          200: "var(--oc-dark-blue-200)",
-          300: "var(--oc-dark-blue-300)",
-          400: "var(--oc-dark-blue-400)",
-          500: "var(--oc-dark-blue-500)",
-          600: "var(--oc-dark-blue-600)",
         },
         "oc-primary": {
           DEFAULT: "var(--oc-primary-500)",
@@ -139,6 +128,17 @@ module.exports = {
           300: "var(--oc-accent-2-300)",
           400: "var(--oc-accent-2-400)",
           500: "var(--oc-accent-2-500)",
+        },
+        "oc-accent-3": {
+          DEFAULT: "var(--oc-accent-3-500)",
+          "50-tr": "var(--oc-accent-3-50-tr)",
+          50: "var(--oc-accent-3-50)",
+          100: "var(--oc-accent-3-100)",
+          200: "var(--oc-accent-3-200)",
+          300: "var(--oc-accent-3-300)",
+          400: "var(--oc-accent-3-400)",
+          500: "var(--oc-accent-3-500)",
+          600: "var(--oc-accent-3-600)",
         },
         "oc-success": {
           DEFAULT: "var(--oc-success-500)",

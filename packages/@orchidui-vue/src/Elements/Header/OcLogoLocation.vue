@@ -18,7 +18,7 @@ const props = defineProps({
 });
 
 const backgroundClass = computed(() =>
-  props.theme === "light" ? "bg-oc-dark-blue-50" : "bg-transparent",
+  props.theme === "light" ? "bg-oc-accent-3-50" : "bg-transparent",
 );
 </script>
 
@@ -28,7 +28,7 @@ const backgroundClass = computed(() =>
       width="108"
       height="27"
       name="hitPay"
-      :class="theme === 'light' ? 'text-oc-dark-blue' : 'text-white'"
+      :class="theme === 'light' ? 'text-oc-accent-3' : 'text-oc-text-100'"
     />
 
     <div
@@ -41,7 +41,7 @@ const backgroundClass = computed(() =>
         :name="badgeIcon"
         class="shrink-0"
         :class="
-          theme === 'light' ? 'text-oc-dark-blue-400' : 'text-oc-text-200'
+          theme === 'light' ? 'text-oc-accent-3-400' : 'text-oc-text-200'
         "
       />
 

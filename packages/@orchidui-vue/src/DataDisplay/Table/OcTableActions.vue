@@ -25,13 +25,13 @@ const isSortDescending = ref(true);
 <template>
   <div class="flex justify-between">
     <TableHeader
-      class="!bg-white rounded-t-l flex-1 items-center flex !justify-start"
+      class="!bg-oc-bg-light rounded-t-l flex-1 items-center flex !justify-start"
     >
       <Tabs v-model="activeTab" variant="pills" :tabs="tabs" />
     </TableHeader>
 
     <TableHeader
-      class="!bg-white !text-base rounded-t-r flex gap-x-3 items-center"
+      class="!bg-oc-bg-light !text-base rounded-t-r flex gap-x-3 items-center"
     >
       <TableActionSearch @add-query="$emit('addQuery', $event)" />
 

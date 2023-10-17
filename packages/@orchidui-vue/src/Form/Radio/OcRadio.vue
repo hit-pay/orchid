@@ -27,7 +27,7 @@ defineEmits({
     />
     <label
       :for="groupName + id"
-      class="radio-button__label flex gap-x-3 relative items-center text-black cursor-pointer transition-all duration-300"
+      class="radio-button__label flex gap-x-3 relative items-center text-oc-text-500 cursor-pointer transition-all duration-300"
       :class="disabled && 'text-oc-text-300'"
     >
       <span

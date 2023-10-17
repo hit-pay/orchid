@@ -110,13 +110,13 @@ const showShadow = computed(
 
 const buttonTypeClasses = computed(() => ({
   primary: !props.isTransparent
-    ? "border border-oc-primary oc-btn-primary text-white"
+    ? "border border-oc-primary oc-btn-primary text-oc-text-100"
     : "text-oc-primary hover:text-oc-primary-400 active:text-oc-primary",
   secondary: !props.isTransparent
     ? "border border-oc-grey text-oc-text-400 oc-btn-secondary"
     : "text-oc-text-400 hover:text-oc-text-500 active:text-oc-text-400",
   destructive: !props.isTransparent
-    ? "border border-oc-error oc-btn-error text-white"
+    ? "border border-oc-error oc-btn-error text-oc-text-100"
     : "text-oc-error hover:text-oc-error-400 active:text-oc-error",
 }));
 
@@ -175,7 +175,7 @@ const iconSize = computed(() => ({
   &-add-area {
     &.primary {
       background: var(--button-primary-default);
-      @apply border-[var(--oc-dark-blue-500)] text-white;
+      @apply border-[var(--oc-accent-3-500)] text-[var(--oc-text-100)];
       &:hover {
         background: var(--button-primary-hover);
       }
@@ -201,7 +201,7 @@ const iconSize = computed(() => ({
     &.destructive {
       text-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
       background: var(--button-destructive-default);
-      @apply border-[var(--oc-error-500)] text-white;
+      @apply border-[var(--oc-error-500)] text-[var(--oc-text-100)];
 
       &:hover {
         background: var(--button-destructive-hover);

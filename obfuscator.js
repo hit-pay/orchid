@@ -5,7 +5,7 @@ import replace from 'replace-in-file'
 
 const ourColorName = [
     // text
-    'oc-text-000',
+    'oc-text-100',
     'oc-text-200',
     'oc-text-300',
     'oc-text-400',
@@ -38,13 +38,13 @@ const ourColorName = [
     'oc-accent-2-400',
     'oc-accent-2-500',
     // dark blue 
-    'oc-dark-blue-50-tr',
-    'oc-dark-blue-50',
-    'oc-dark-blue-100',
-    'oc-dark-blue-200',
-    'oc-dark-blue-300',
-    'oc-dark-blue-400',
-    'oc-dark-blue-500',
+    'oc-accent-3-50-tr',
+    'oc-accent-3-50',
+    'oc-accent-3-100',
+    'oc-accent-3-200',
+    'oc-accent-3-300',
+    'oc-accent-3-400',
+    'oc-accent-3-500',
     // grey
     'oc-grey-50',
     'oc-grey-100',
