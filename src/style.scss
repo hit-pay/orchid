@@ -1,0 +1,57 @@
+@import 'https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap';
+@import './scss/lightmode_variables.scss';
+@import './scss/darkmode_variables.scss';
+@import './scss/components.scss';
+:root{
+     /* utility */
+     --oc-border-xs: .125rem;
+     --oc-border-sm: .25rem;
+     --oc-border-md: .5rem;
+     --oc-border-lg: .75rem;
+     --oc-border-xl: 1rem;
+     --oc-border-xxl: 1.25rem;
+     --oc-border-full: 9999px;
+}
+body{
+    //  default
+    color: var(--oc-text-500);
+    background-color: var(--oc-background-light);
+}
+@tailwind base;
+@layer base {
+    main {
+        font-family: 'Inter', sans-serif;
+    }
+    h1 {
+        @apply text-xl;
+    }
+
+    h2 {
+        @apply text-lg;
+    }
+
+    h3 {
+        @apply text-base;
+    }
+
+    h4 {
+        @apply text-sm;
+    }
+
+    h5 {
+        @apply text-xs;
+    }
+
+    h6 {
+        @apply text-xs;
+    }
+
+    body {
+        @apply text-base;
+    }
+}
+
+@tailwind components;
+@tailwind utilities;
+
+@import './scss/transition.scss';

@@ -7,7 +7,7 @@
       <button
         type="button"
         aria-label="Expand Collapse"
-        class="bg-oc-text-000 transition-all duration-500 absolute top-[-12px] right-[-12px] z-40 p-3 border rounded-full"
+        class="bg-oc-text-100 transition-all duration-500 absolute top-[-12px] right-[-12px] z-40 p-3 border rounded-full"
         :class="{
           '-rotate-180': !isExpanded,
         }"
@@ -75,7 +75,7 @@
                 <transition name="sidebar-submenu-popover-animation">
                   <PopoverPanel>
                     <div
-                      class="left-[60px] p-4 gap-4 absolute bg-oc-text-000 shadow-sm rounded w-[200px] z-50"
+                      class="left-[60px] p-4 gap-4 absolute bg-oc-text-100 shadow-sm rounded w-[200px] z-50"
                     >
                       <div
                         v-if="!menu.children"

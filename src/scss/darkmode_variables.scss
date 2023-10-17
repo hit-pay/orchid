@@ -1,0 +1,85 @@
+
+/* EXPERIMENTAL */
+.dark-mode {
+    /* Background Color */
+    --oc-grey-900: #f8fafc;
+    --oc-grey-800: #f1f5f9;
+    --oc-grey-700: #e2e8f0;
+    --oc-grey-600: #cbd5e1;
+    --oc-grey-500: #94a3b8;
+    --oc-grey-400: #64748b;
+    --oc-grey-300: #475569;
+    --oc-grey-200: #334155;
+    --oc-grey-100: #1e293b;
+    --oc-grey-50: #0f172a;
+    --oc-grey-10: #020617;
+
+    --oc-contrast-black: #000000;
+    --oc-contrast-white: #ffffff;
+
+    --oc-text-100: #000000;
+    --oc-text-200: #475569;
+    --oc-text-300: #475569;
+    --oc-text-400: #64748b;
+    --oc-text-500: #f8fafc;
+
+    --oc-background-dark: #020617;
+    --oc-background-light: #000000;
+
+    --oc-primary-500: #f5f8feac;
+    --oc-primary-400: #e5eeff;
+    --oc-primary-300: #ccdefe;
+    --oc-primary-200: #b3cdfe;
+    --oc-primary-100: #80acfe;
+    --oc-primary-50: #4c8afd;
+    --oc-primary-50-tr: #2465de;
+
+    --oc-accent-1-500: #c084fc;
+    --oc-accent-1-400: #a855f7;
+    --oc-accent-1-300: #9333ea;
+    --oc-accent-1-200: #7e22ce;
+    --oc-accent-1-100: #6b21a8;
+    --oc-accent-1-50: #581c87;
+    --oc-accent-1-50-tr: #3b0764;
+
+    --oc-accent-2-500: #f87171;
+    --oc-accent-2-400: #ef4444;
+    --oc-accent-2-300: #dc2626;
+    --oc-accent-2-200: #b91c1c;
+    --oc-accent-2-100: #991b1b;
+    --oc-accent-2-50: #7f1d1d;
+    --oc-accent-2-50-tr: #450a0a;
+
+    --oc-accent-3-600: #0027710a;
+    --oc-accent-3-500: #f5f6f9;
+    --oc-accent-3-400: #ccd4e3;
+    --oc-accent-3-300: #a6b3cd;
+    --oc-accent-3-200: #8093b8;
+    --oc-accent-3-100: #4c689c;
+    --oc-accent-3-50: #002771;
+    --oc-accent-3-50-tr: #09204a;
+
+    --oc-success-500: #4ade80;
+    --oc-success-400: #22c55e;
+    --oc-success-300: #16a34a;
+    --oc-success-200: #15803d;
+    --oc-success-100: #166534;
+    --oc-success-50: #14532d;
+    --oc-success-50-tr: #052e16;
+
+    --oc-warning-500: #facc15;
+    --oc-warning-400: #eab308;
+    --oc-warning-300: #ca8a04;
+    --oc-warning-200: #a16207;
+    --oc-warning-100: #854d0e;
+    --oc-warning-50: #713f12;
+    --oc-warning-50-tr: #422006;
+
+    --oc-error-500: #f87171;
+    --oc-error-400: #ef4444;
+    --oc-error-300: #dc2626;
+    --oc-error-200: #b91c1c;
+    --oc-error-100: #991b1b;
+    --oc-error-50: #7f1d1d;
+    --oc-error-50-tr: #450a0a;
+}

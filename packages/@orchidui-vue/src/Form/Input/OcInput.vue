@@ -56,7 +56,7 @@ const inputClasses = computed(() => [
   !props.disabled && props.errorMessage
     ? "border-oc-error shadow-oc-error"
     : "border-oc-grey-200 shadow-oc-grey-200",
-  props.disabled ? "bg-oc-bg-dark pointer-events-none" : "bg-white",
+  props.disabled ? "bg-oc-bg-dark pointer-events-none" : "bg-oc-bg-light",
 ]);
 </script>
 

@@ -30,7 +30,7 @@ const isDefault = computed(
 <template>
   <div
     class="px-[40px] border-b border-oc-grey-200 h-[68px] w-full justify-center flex items-center relative"
-    :class="theme === 'light' ? 'bg-oc-bg' : 'bg-[var(--oc-dark-blue-600)]'"
+    :class="theme === 'light' ? 'bg-oc-bg' : 'bg-[var(--oc-accent-3-600)]'"
   >
     <LogoLocation
       :class="isDefault ? 'flex-1' : ''"
@@ -50,7 +50,7 @@ const isDefault = computed(
 
     <div
       v-else-if="!isDefault"
-      class="flex items-center flex-1 ml-[38px] text-white gap-x-1"
+      class="flex items-center flex-1 ml-[38px] text-oc-text-100 gap-x-1"
     >
       <template v-if="isBackButton">
         <Icon width="18" height="18" name="chevron-down" class="rotate-90" />
