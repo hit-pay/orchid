@@ -1,5 +1,5 @@
 /* Variables  */
-:root {
+.light-mode {
     --oc-grey-10: #f8f9fc;
     --oc-grey-50: #fcfcfd;
     --oc-grey-100: #f2f2f4;
@@ -15,14 +15,14 @@
     --oc-contrast-black: #000000;
     --oc-contrast-white: #ffffff;
 
-     --oc-text-000: var(--oc-contrast-white);
+     --oc-text-000: #ffffff;
      --oc-text-200: var(--oc-grey-300);
      --oc-text-300: var(--oc-grey-500);
      --oc-text-400: var(--oc-grey-600);
      --oc-text-500: var(--oc-grey-900);
 
-     --oc-background-dark: var(--oc-grey-10);
-     --oc-background-light: var(--oc-contrast-white);
+     --oc-background-dark: #f8f9fc;
+     --oc-background-light: #ffffff;
  
      --oc-primary-50-tr: #2465de1a;
      --oc-primary-50: #e5eeff;
@@ -87,15 +87,8 @@
      --oc-error-500: #dc3545;
 
 
- 
-     /* utility */
+    //  default
 
-     --oc-border-xs: .125rem;
-     --oc-border-sm: .25rem;
-     --oc-border-md: .5rem;
-     --oc-border-lg: .75rem;
-     --oc-border-xl: 1rem;
-     --oc-border-xxl: 1.25rem;
-     --oc-border-full: 9999px;
-
+     color: var(--oc-text-500);
+     background-color: var(--oc-background-light);
 }
