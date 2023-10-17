@@ -1,4 +1,7 @@
 import Header from "./OcHeader.vue";
-import HeaderMenu from "./OcHeaderMenu.vue";
+import HeaderLeft from "./OcHeaderLeft.vue";
+import HeaderCenter from "./OcHeaderCenter.vue";
+import HeaderRight from "./OcHeaderRight.vue";
+import HeaderTabs from "./OcHeaderTabs.vue";
 
-export { Header, HeaderMenu };
+export { Header, HeaderLeft, HeaderCenter, HeaderRight, HeaderTabs };

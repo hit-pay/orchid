@@ -7,7 +7,12 @@ import HeaderRight from "./OcHeaderRight.vue";
 import HeaderTabs from "./OcHeaderTabs.vue";
 
 import Icon from "../../MediaAndIcons/Icon/OcIcon.vue";
+import Avatar from "../../MediaAndIcons/Avatar/OcAvatar.vue";
 import Button from "../../Form/Button/OcButton.vue";
+
+
+import Dropdown from "../../Overlay/Dropdown/OcDropdown.vue";
+import DropdownItem from "../../Overlay/Dropdown/OcDropdownItem.vue";
 
 import { ref } from "vue";
 
@@ -45,11 +50,15 @@ export const Default = {
       Header, 
       Theme, 
       Icon,
+      Avatar,
       Button,
+      Dropdown,
+      DropdownItem,
       HeaderLeft, 
       HeaderCenter, 
       HeaderRight,
-      HeaderTabs
+      HeaderTabs,
+      
     },
     setup() {
       const activeMenuValue = ref("payments");
@@ -72,10 +81,26 @@ export const Default = {
                 <HeaderTabs v-model="activeMenuValue" :menus="args.menus" />
               </HeaderCenter>
               <HeaderRight>
-                  <div class="flex gap-x-5">
+                  <div class="flex gap-x-5 cursor-pointer">
+
                     <Button is-transparent variant="secondary"  left-icon="chat" />
                     <Button is-transparent variant="secondary"  left-icon="sparkle-2" />
                     <Button is-transparent variant="secondary"  left-icon="question-mark" />
+                    
+                    <Dropdown :offset="10">
+                      <template #trigger>
+                      <Avatar />
+                      </template>
+                      <div class="flex flex-col">
+                        <div class="p-2 border-b border-gray-200">
+                          <DropdownItem text="Menu" icon="pencil"/>
+                          <DropdownItem text="Menu" icon="pencil"/>
+                        </div>
+                        <div class="p-2">
+                          <DropdownItem text="Logout" icon="pencil" variant="destructive"/>
+                        </div>
+                      </div>
+                    </Dropdown>
                   </div>
               </HeaderRight>
             </Header>
