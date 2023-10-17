@@ -1,5 +1,4 @@
 <script setup>
-import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
 import { defineAsyncComponent, nextTick, ref, watch } from "vue";
 
 const Icon = defineAsyncComponent(() =>
@@ -56,9 +55,8 @@ watch(() => props.isExpandable, changeAccordionHeight);
 
 <template>
   <div class="overflow-hidden" :class="isDisabled && 'opacity-60'">
-    <Disclosure ref="disclosureRef">
-      <DisclosureButton
-        ref="disclosureButtonRef"
+    <div>
+      <div
         class="bg-oc-dark-blue-50 py-3 text-sm border relative z-10 justify-between px-4 gap-x-3 flex hover:border-oc-grey-200 items-center w-full text-oc-text"
         :class="
           isExpandable
@@ -81,21 +79,20 @@ watch(() => props.isExpandable, changeAccordionHeight);
             isAnimated && 'transition-all duration-300',
           ]"
         />
-      </DisclosureButton>
+      </div>
 
       <div
         ref="upcomingAccordion"
         class="overflow-hidden max-h-0"
         :class="isAnimated && 'transition-all duration-300'"
       >
-        <DisclosurePanel
-          static
+        <div
           class="text-oc-text text-sm p-4 rounded-b relative z-0 border-x border-b"
           :class="isExpandable ? 'border-oc-grey-200' : ' border-transparent'"
         >
           <slot name="body">{{ body }}</slot>
-        </DisclosurePanel>
+        </div>
       </div>
-    </Disclosure>
+    </div>
   </div>
 </template>

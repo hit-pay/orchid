@@ -65,5 +65,6 @@ onMounted(() => {
 onBeforeUnmount(() => {
   window.removeEventListener("resize", updateMenuPosition);
   window.removeEventListener("scroll", updateMenuPosition);
+  dropdownMenu.value.remove();
 });
 </script>

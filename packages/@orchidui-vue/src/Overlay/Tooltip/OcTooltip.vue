@@ -23,6 +23,10 @@ const props = defineProps({
         "left-end",
       ].includes(value),
   },
+  arrowHidden: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const trigger = ref();
@@ -120,7 +124,7 @@ onMounted(() => {
     </span>
     <span id="tooltip" ref="tooltip">
       <slot name="popper" />
-      <span id="arrow" data-popper-arrow />
+      <span v-if="!arrowHidden" id="arrow" data-popper-arrow />
     </span>
   </span>
 </template>
@@ -130,7 +134,7 @@ onMounted(() => {
   box-shadow:
     0 3px 22px 0 rgba(38, 42, 50, 0.09),
     0 1px 3px 0 rgba(0, 0, 0, 0.1);
-  @apply hidden rounded-sm z-10 bg-oc-grey-50;
+  @apply hidden rounded-sm z-10 bg-[var(--oc-grey-50)];
 
   &[data-popper-placement^="top"] > #arrow {
     bottom: -4px;
