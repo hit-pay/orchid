@@ -16,8 +16,7 @@ const activeMenu = computed(() =>
 
 </script>
 <template>
-  <div class="flex gap-x-9">
-    <div
+  <div
       v-for="item in menus"
       :key="item.value"
       class="py-7 font-medium hover:text-oc-accent-3 cursor-pointer"
@@ -36,5 +35,4 @@ const activeMenu = computed(() =>
     >
       {{ item.label }}
     </div>
-  </div>
 </template>

@@ -59,7 +59,7 @@ export const Default = {
     template: `
           <Theme>
             <Header class="mb-3">
-              <Button class="md:hidden" left-icon="menu" />
+              <Button class="md:hidden mr-3" variant="secondary" left-icon="menu" />
               <HeaderLeft>
                 <Icon
                     width="108"
@@ -68,7 +68,9 @@ export const Default = {
                     class="text-oc-accent-3"
                   />
               </HeaderLeft>
-              <HeaderTabs v-model="activeMenuValue" :menus="args.menus" />
+              <HeaderCenter class="hidden md:flex"  >
+                <HeaderTabs v-model="activeMenuValue" :menus="args.menus" />
+              </HeaderCenter>
               <HeaderRight>
                   <div class="flex gap-x-5">
                     <Button is-transparent variant="secondary"  left-icon="chat" />
@@ -78,7 +80,7 @@ export const Default = {
               </HeaderRight>
             </Header>
             <Header is-sub-header >
-              <Button class="md:hidden" left-icon="menu" />
+              <Button class="md:hidden mr-3" variant="secondary"  left-icon="menu" />
               <HeaderLeft>
                 <Icon
                     width="108"
@@ -87,7 +89,7 @@ export const Default = {
                     class="text-oc-text-100"
                   />
               </HeaderLeft>
-              <HeaderCenter  >
+              <HeaderCenter class="hidden md:flex"  >
                 <span  v-if="args.isSaved" class="text-oc-text-100 flex items-center">
                   <Icon name="chevron-down" class="rotate-90" />
                   Back
