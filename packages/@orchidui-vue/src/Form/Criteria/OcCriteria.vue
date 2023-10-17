@@ -26,7 +26,7 @@ const Icon = defineAsyncComponent(() =>
       <Icon
         v-if="modelValue"
         name="check-2"
-        class="w-[10px] h-[10px] text-oc-text-000"
+        class="w-[10px] h-[10px] text-oc-text-100"
       />
     </div>
 

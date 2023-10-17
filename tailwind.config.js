@@ -73,7 +73,7 @@ module.exports = {
         // first to use this
         "oc-text": {
           DEFAULT: "var(--oc-text-500)",
-          "000": "var(--oc-text-000)",
+          100: "var(--oc-text-100)",
           200: "var(--oc-text-200)",
           300: "var(--oc-text-300)",
           400: "var(--oc-text-400)",

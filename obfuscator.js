@@ -5,7 +5,7 @@ import replace from 'replace-in-file'
 
 const ourColorName = [
     // text
-    'oc-text-000',
+    'oc-text-100',
     'oc-text-200',
     'oc-text-300',
     'oc-text-400',

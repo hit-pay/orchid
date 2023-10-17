@@ -48,7 +48,7 @@ const onInput = () => emit("update:modelValue", !props.modelValue);
               ? disabled
                 ? 'text-oc-primary-200'
                 : 'text-oc-primary'
-              : 'text-oc-text-000'
+              : 'text-oc-text-100'
           "
           :name="isPartial ? 'minus' : 'check-2'"
         />

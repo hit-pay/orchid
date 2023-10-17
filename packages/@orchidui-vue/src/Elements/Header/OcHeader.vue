@@ -50,7 +50,7 @@ const isDefault = computed(
 
     <div
       v-else-if="!isDefault"
-      class="flex items-center flex-1 ml-[38px] text-oc-text-000 gap-x-1"
+      class="flex items-center flex-1 ml-[38px] text-oc-text-100 gap-x-1"
     >
       <template v-if="isBackButton">
         <Icon width="18" height="18" name="chevron-down" class="rotate-90" />
