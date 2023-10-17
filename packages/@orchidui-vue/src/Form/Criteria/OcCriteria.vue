@@ -13,7 +13,7 @@ const Icon = defineAsyncComponent(() =>
 
 <template>
   <div
-    class="flex gap-x-2 relative items-center text-black cursor-pointer transition-all duration-300"
+    class="flex gap-x-2 relative items-center text-oc-text-500 cursor-pointer transition-all duration-300"
   >
     <div
       class="w-5 h-5 flex items-center justify-center rounded-full border transition-all duration-300"
@@ -26,7 +26,7 @@ const Icon = defineAsyncComponent(() =>
       <Icon
         v-if="modelValue"
         name="check-2"
-        class="w-[10px] h-[10px] text-white"
+        class="w-[10px] h-[10px] text-oc-text-000"
       />
     </div>
 

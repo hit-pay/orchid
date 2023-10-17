@@ -28,7 +28,7 @@ const backgroundClass = computed(() =>
       width="108"
       height="27"
       name="hitPay"
-      :class="theme === 'light' ? 'text-oc-accent-3' : 'text-white'"
+      :class="theme === 'light' ? 'text-oc-accent-3' : 'text-oc-text-000'"
     />
 
     <div

@@ -18,15 +18,15 @@
     --oc-contrast-white: #ffffff;
 
     --oc-text-000: #000000;
-    --oc-text-200: var(--oc-grey-300);
-    --oc-text-300: var(--oc-grey-500);
-    --oc-text-400: var(--oc-grey-600);
-    --oc-text-500: var(--oc-grey-900);
+    --oc-text-200: #475569;
+    --oc-text-300: #475569;
+    --oc-text-400: #64748b;
+    --oc-text-500: #f8fafc;
 
     --oc-background-dark: #020617;
     --oc-background-light: #000000;
 
-    --oc-primary-500: #2465de1a;
+    --oc-primary-500: #f5f8feac;
     --oc-primary-400: #e5eeff;
     --oc-primary-300: #ccdefe;
     --oc-primary-200: #b3cdfe;
@@ -82,8 +82,4 @@
     --oc-error-100: #991b1b;
     --oc-error-50: #7f1d1d;
     --oc-error-50-tr: #450a0a;
-
-    color: var(--oc-text-500);
-    background-color: var(--oc-background-light);
-
 }

@@ -13,9 +13,9 @@ defineProps({
   },
 });
 const typeClasses = computed(() => ({
-  business: "bg-oc-accent-3 text-white",
-  default: "bg-oc-grey-800 text-white",
-  image: "text-black",
+  business: "bg-oc-accent-3 text-oc-text-000",
+  default: "bg-oc-grey-800 text-oc-text-000",
+  image: "text-oc-text-500",
 }));
 const fontSizes = computed(() => ({
   64: "text-[30px]",
