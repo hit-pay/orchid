@@ -22,7 +22,7 @@ const ellipseClasses = computed(() => ({
   small: " before:w-4 before:h-4 before:top-[1.5px] before:left-[1.5px]",
 }));
 const labelClasses = `absolute top-0 left-0 bg-oc-primary-100 rounded-full cursor-pointer transition-all duration-300
- before:transition-all before:duration-300 before:absolute before:rounded-full before:bg-white`;
+ before:transition-all before:duration-300 before:absolute before:rounded-full before:bg-oc-bg-light`;
 </script>
 
 <template>

@@ -40,7 +40,7 @@ const variantClass = computed(() => ({
 <template>
   <td
     :class="[variantClass[variant], isLast ? '' : 'border-b']"
-    class="py-3 border-oc-text-200 bg-white group-hover/row:bg-oc-grey-50 items-center overflow-hidden"
+    class="py-3 border-oc-text-200 bg-oc-bg-light group-hover/row:bg-oc-grey-50 items-center overflow-hidden"
   >
     <slot>
       <Checkbox
