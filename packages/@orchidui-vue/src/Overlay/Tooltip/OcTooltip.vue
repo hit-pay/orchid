@@ -1,12 +1,22 @@
 <script setup>
 import { onMounted, ref, watch } from "vue";
 import { createPopper } from "@popperjs/core";
+import { clickOutside as vClickOutside } from "../../directives/clickOutside.js";
 
 const props = defineProps({
-  offset: Array,
+  offset: {
+    type: Array,
+    default: () => [0, 0],
+  },
   popperOptions: Object,
+  trigger: {
+    type: String,
+    default: "hover",
+    validator: (val) => ["hover", "click"].includes(val),
+  },
   position: {
     type: String,
+    default: "bottom",
     validator: (value) =>
       [
         "top-start",
@@ -29,26 +39,24 @@ const props = defineProps({
   },
 });
 
-const trigger = ref();
+const triggerElement = ref();
 const tooltip = ref();
 const popperInstance = ref();
+const isShow = ref(false);
 onMounted(() => {
-  try {
-    popperInstance.value = createPopper(trigger.value, tooltip.value, {
-      placement: props.position,
-      modifiers: [
-        {
-          name: "offset",
-          options: {
-            offset: props.offset,
-          },
+  popperInstance.value = createPopper(triggerElement.value, tooltip.value, {
+    placement: props.position,
+    modifiers: [
+      { name: "eventListeners", enabled: false },
+      {
+        name: "offset",
+        options: {
+          offset: props.offset,
         },
-      ],
-      ...props.popperOptions,
-    });
-  } catch (error) {
-    console.error("Failed to create Popper instance:", error);
-  }
+      },
+    ],
+    ...props.popperOptions,
+  });
 });
 watch(
   () => [props.offset, props.position],
@@ -74,6 +82,7 @@ watch(
   },
 );
 const show = () => {
+  isShow.value = true;
   // Make the tooltip visible
   tooltip.value.setAttribute("data-show", "");
 
@@ -91,6 +100,7 @@ const show = () => {
 };
 
 const hide = () => {
+  isShow.value = false;
   // Hide the tooltip
   tooltip.value.removeAttribute("data-show");
 
@@ -104,51 +114,60 @@ const hide = () => {
   }));
 };
 onMounted(() => {
-  const showEvents = ["mouseenter", "focus"];
-  const hideEvents = ["mouseleave", "blur"];
+  if (props.trigger === "hover") {
+    const showEvents = ["mouseenter", "focus"];
+    const hideEvents = ["mouseleave", "blur"];
 
-  showEvents.forEach((event) => {
-    trigger.value.addEventListener(event, show);
-  });
+    showEvents.forEach((event) => {
+      triggerElement.value.addEventListener(event, show);
+    });
 
-  hideEvents.forEach((event) => {
-    trigger.value.addEventListener(event, hide);
-  });
+    hideEvents.forEach((event) => {
+      triggerElement.value.addEventListener(event, hide);
+    });
+  } else {
+    triggerElement.value.addEventListener("click", () =>
+      isShow.value ? hide() : show(),
+    );
+  }
 });
+const onClickOutside = () => {
+  if (isShow.value) hide();
+};
 </script>
 
 <template>
-  <span class="relative">
-    <span ref="trigger">
+  <span v-click-outside="onClickOutside" class="relative">
+    <span ref="triggerElement">
       <slot />
     </span>
-    <span id="tooltip" ref="tooltip">
+    <span ref="tooltip" class="oc-tooltip">
       <slot name="popper" />
-      <span v-if="!arrowHidden" id="arrow" data-popper-arrow />
+      <span v-if="!arrowHidden" class="oc-arrow" data-popper-arrow />
     </span>
   </span>
 </template>
 
 <style scoped lang="scss">
-#tooltip {
+.oc-tooltip {
   box-shadow:
     0 3px 22px 0 rgba(38, 42, 50, 0.09),
     0 1px 3px 0 rgba(0, 0, 0, 0.1);
   @apply hidden rounded-sm z-10 bg-[var(--oc-grey-50)];
 
-  &[data-popper-placement^="top"] > #arrow {
+  &[data-popper-placement^="top"] > .oc-arrow {
     bottom: -4px;
   }
 
-  &[data-popper-placement^="bottom"] > #arrow {
+  &[data-popper-placement^="bottom"] > .oc-arrow {
     top: -4px;
   }
 
-  &[data-popper-placement^="left"] > #arrow {
+  &[data-popper-placement^="left"] > .oc-arrow {
     right: -4px;
   }
 
-  &[data-popper-placement^="right"] > #arrow {
+  &[data-popper-placement^="right"] > .oc-arrow {
     left: -4px;
   }
 
@@ -156,7 +175,7 @@ onMounted(() => {
     @apply block;
   }
 
-  #arrow {
+  .oc-arrow {
     @apply z-0;
     visibility: hidden;
 

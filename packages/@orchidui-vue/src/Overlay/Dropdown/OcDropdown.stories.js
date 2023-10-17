@@ -14,17 +14,15 @@ export const Default = {
           <Theme>
             <Dropdown :offset="10">
               <template #trigger>Dropdown Button</template>
-              <template #default="{ close }">
-                <div class="flex flex-col">
-                  <div class="p-2 border-b border-gray-200">
-                    <DropdownItem text="Menu" icon="pencil" @click="close"/>
-                    <DropdownItem text="Menu" icon="pencil" @click="close"/>
-                  </div>
-                  <div class="p-2">
-                    <DropdownItem text="Menu" icon="pencil" variant="destructive" @click="close"/>
-                  </div>
+              <div class="flex flex-col">
+                <div class="p-2 border-b border-gray-200">
+                  <DropdownItem text="Menu" icon="pencil"/>
+                  <DropdownItem text="Menu" icon="pencil"/>
                 </div>
-              </template>
+                <div class="p-2">
+                  <DropdownItem text="Menu" icon="pencil" variant="destructive"/>
+                </div>
+              </div>
             </Dropdown>
           </Theme>
         `,

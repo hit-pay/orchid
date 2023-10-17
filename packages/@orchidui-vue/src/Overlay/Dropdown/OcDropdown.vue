@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-click-outside="onClickOutside">
     <div ref="trigger" @click="toggleDropdown">
       <slot name="trigger" :is-open="isOpen">trigger</slot>
     </div>
@@ -15,6 +15,7 @@
 
 <script setup>
 import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
+import { clickOutside as vClickOutside } from "../../directives/clickOutside.js"; // Import the directive
 
 const props = defineProps({
   offset: Number,
@@ -57,6 +58,10 @@ const updateMenuPosition = async () => {
       dropdownMenu.value.clientHeight +
       "px";
   }
+};
+
+const onClickOutside = () => {
+  if (isOpen.value) isOpen.value = false;
 };
 onMounted(() => {
   window.addEventListener("resize", updateMenuPosition);
