@@ -1,7 +1,7 @@
 <template>
   <Theme :color-mode="state.darkMode ? 'dark' : 'light'" :class="primaryColor">
     <section
-      class="container flex flex-col items-start min-h-screen gap-y-4 p-8 mx-auto"
+      class="container flex flex-col items-start min-h-screen gap-y-4 p-3 md:p-8 mx-auto"
     >
       <section
         class="w-full p-8 flex justify-between items-center mt-8 rounded md:mt-0 bg-oc-primary-100"
@@ -14,7 +14,7 @@
       </section>
 
       <section class="w-full">
-        <div class="grid gap-3 p-8 rounded bg-oc-bg-dark">
+        <div class="grid gap-3 md:p-8 rounded bg-oc-bg-dark">
           <h1 class="flex  mb-3 font-bold">Orchid UI Playground</h1>
           <div class="flex  gap-3 mb-3">
             <a href="/docs" class="text-oc-primary"> Documentation </a> /
@@ -31,7 +31,7 @@
           <h2>
             Color Gray
           </h2>
-          <div class="grid grid-cols-11 gap-3">
+          <div class="w-full grid grid-cols-3 md:grid-cols-11 gap-3">
             <div class="h-[50px] bg-oc-gray-10 rounded border"></div>
             <div class="h-[50px] bg-oc-gray-50 rounded border"></div>
             <div class="h-[50px] bg-oc-gray-100 rounded border"></div>
@@ -47,7 +47,7 @@
           <h2>
             Color Primary
           </h2>
-           <div class="grid grid-cols-7 gap-3">
+           <div class="w-full grid grid-cols-3 md:grid-cols-7 gap-3">
             <div class="h-[50px] bg-oc-primary-50-tr rounded border"></div>
             <div class="h-[50px] bg-oc-primary-50 rounded border"></div>
             <div class="h-[50px] bg-oc-primary-100 rounded border"></div>
@@ -59,7 +59,7 @@
           <h2>
             Color Accent 1 (Purple)
           </h2>
-          <div class="grid grid-cols-7 gap-3">
+          <div class="w-full grid grid-cols-3 md:grid-cols-7 gap-3">
             <div class="h-[50px] bg-oc-accent-1-50-tr rounded border"></div>
             <div class="h-[50px] bg-oc-accent-1-50 rounded border"></div>
             <div class="h-[50px] bg-oc-accent-1-100 rounded border"></div>
@@ -71,7 +71,7 @@
           <h2>
             Color Accent 2 (Red)
           </h2>
-          <div class="grid grid-cols-7 gap-3">
+          <div class="w-full grid grid-cols-3 md:grid-cols-7 gap-3">
             <div class="h-[50px] bg-oc-accent-2-50-tr rounded border"></div>
             <div class="h-[50px] bg-oc-accent-2-50 rounded border"></div>
             <div class="h-[50px] bg-oc-accent-2-100 rounded border"></div>
@@ -83,7 +83,7 @@
           <h2>
             Color Accent 3 (Dark Blue)
           </h2>
-          <div class="grid grid-cols-8 gap-3">
+          <div class="w-full grid grid-cols-3 md:grid-cols-8 gap-3">
             <div class="h-[50px] bg-oc-accent-3-50-tr rounded border"></div>
             <div class="h-[50px] bg-oc-accent-3-50 rounded border"></div>
             <div class="h-[50px] bg-oc-accent-3-100 rounded border"></div>
@@ -96,7 +96,7 @@
           <h2>
             Color Success
           </h2>
-          <div class="grid grid-cols-7 gap-3">
+          <div class="w-full grid grid-cols-3 md:grid-cols-7 gap-3">
             <div class="h-[50px] bg-oc-success-50-tr rounded border"></div>
             <div class="h-[50px] bg-oc-success-50 rounded border"></div>
             <div class="h-[50px] bg-oc-success-100 rounded border"></div>
@@ -108,7 +108,7 @@
           <h2>
             Color Warning
           </h2>
-          <div class="grid grid-cols-7 gap-3">
+          <div class="w-full grid grid-cols-3 md:grid-cols-7 gap-3">
             <div class="h-[50px] bg-oc-warning-50-tr rounded border"></div>
             <div class="h-[50px] bg-oc-warning-50 rounded border"></div>
             <div class="h-[50px] bg-oc-warning-100 rounded border"></div>
@@ -120,7 +120,7 @@
           <h2>
             Color Error
           </h2>
-          <div class="grid grid-cols-7 gap-3">
+          <div class="w-full grid grid-cols-3 md:grid-cols-7 gap-3">
             <div class="h-[50px] bg-oc-error-50-tr rounded border"></div>
             <div class="h-[50px] bg-oc-error-50 rounded border"></div>
             <div class="h-[50px] bg-oc-error-100 rounded border"></div>
@@ -282,7 +282,7 @@
               </template>
             </Table>
           </div>
-          <div class="flex w-full">
+          <div class="flex w-full overflow-auto">
             <PageTitle
               title="Page Title"
               main-link="https://securecheckout.../payment-request/"
