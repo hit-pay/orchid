@@ -53,17 +53,26 @@
                 }"
                 :name="menu.icon"
               />
-              <Popover v-else v-slot="{ open }" class="relative flex">
-                <PopoverButton
+
+              <Tooltip
+                v-else
+                class="relative flex"
+                arrow-hidden
+                position="right-start"
+                :offset="[0, 20]"
+                trigger="click"
+              >
+                <button
+                  type="button"
                   :class="{
                     'p-4': !isExpanded,
                   }"
-                  @mouseover="(e) => hoverPopover(e, open)"
+                  @mouseenter="togglePopover"
                 >
                   <Icon
                     width="22"
                     height="22"
-                    class="z-[1] relative"
+                    class="z-[1]"
                     :class="{
                       'text-[var(--oc-sidebar-menu-active-icon)]': !menu.active,
                       'text-[var(--oc-sidebar-menu-active-icon-active)]':
@@ -71,39 +80,38 @@
                     }"
                     :name="menu.icon"
                   />
-                </PopoverButton>
-                <transition name="sidebar-submenu-popover-animation">
-                  <PopoverPanel>
+                </button>
+                <template #popper>
+                  <div
+                    class="p-4 gap-4 bg-oc-bg absolute shadow-sm rounded w-[200px] z-50"
+                  >
                     <div
-                      class="left-[60px] p-4 gap-4 absolute bg-oc-text-100 shadow-sm rounded w-[200px] z-50"
+                      v-if="!menu.children"
+                      class="px-5 py-3 flex items-center rounded hover:bg-[var(--oc-sidebar-menu-hover)]"
+                      :class="{
+                        'font-medium bg-[var(--oc-sidebar-menu-active)] text-[var(--oc-sidebar-menu-active-text)]':
+                          menu.active,
+                      }"
                     >
-                      <div
-                        v-if="!menu.children"
-                        class="px-5 py-3 flex items-center rounded hover:bg-[var(--oc-sidebar-menu-hover)]"
-                        :class="{
-                          'font-medium bg-[var(--oc-sidebar-menu-active)] text-[var(--oc-sidebar-menu-active-text)]':
-                            menu.active,
-                        }"
-                      >
-                        <slot v-if="!isExpanded" name="label" :menu="menu" />
-                      </div>
-                      <OcSidebarSubmenu
-                        v-if="menu.children"
-                        :menu="menu"
-                        is-expanded
-                      >
-                        <template #label="{ submenu }">
-                          <slot
-                            name="submenu_label"
-                            :menu="menu"
-                            :submenu="submenu"
-                          />
-                        </template>
-                      </OcSidebarSubmenu>
+                      <slot v-if="!isExpanded" name="label" :menu="menu" />
                     </div>
-                  </PopoverPanel>
-                </transition>
-              </Popover>
+                    <OcSidebarSubmenu
+                      v-if="menu.children"
+                      :menu="menu"
+                      is-expanded
+                    >
+                      <template #label="{ submenu }">
+                        <slot
+                          name="submenu_label"
+                          :menu="menu"
+                          :submenu="submenu"
+                        />
+                      </template>
+                    </OcSidebarSubmenu>
+                  </div>
+                </template>
+              </Tooltip>
+
               <transition
                 tag="div"
                 class="transition-all duration-500"
@@ -142,7 +150,6 @@
 </template>
 
 <script setup>
-import { Popover, PopoverButton, PopoverPanel } from "@headlessui/vue";
 import { defineAsyncComponent, reactive, onMounted, computed } from "vue";
 
 const Icon = defineAsyncComponent(() =>
@@ -151,7 +158,9 @@ const Icon = defineAsyncComponent(() =>
 const OcSidebarSubmenu = defineAsyncComponent(() =>
   import("./OcSidebarSubmenu.vue"),
 );
-
+const Tooltip = defineAsyncComponent(() =>
+  import("../../Overlay/Tooltip/OcTooltip.vue"),
+);
 const emit = defineEmits(["changeExpanded"]);
 
 const props = defineProps({
@@ -180,12 +189,10 @@ const expandMenu = (id) => {
   }
 };
 
-const hoverPopover = (e, open) => {
+const togglePopover = (e) => {
   try {
-    const parentNode = e?.target?.parentNode;
-    if (parentNode && parentNode.type === "button" && !open) {
-      parentNode.click();
-    }
+    const target = e?.target;
+    if (target) target.click();
   } catch (error) {
     console.error("An error occurred:", error);
   }

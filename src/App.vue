@@ -163,6 +163,18 @@
               </template>
             </Table>
           </div>
+          <div>
+            <PageTitle
+              title="Page Title"
+              main-link="https://securecheckout.../payment-request/"
+              user-id="@minstore-edit43"
+              description="Page description will be here. For better experience keep 1 line"
+              chip-variant="success"
+              chip-label="Active"
+              additional-title="Need attention"
+              tooltip-content="Tooltip content"
+            />
+          </div>
         </div>
       </section>
     </section>
@@ -185,6 +197,7 @@ import {
   Table,
   Icon,
   TableCellContent,
+  PageTitle,
 } from "@orchid";
 import { ref, reactive, computed } from "vue";
 

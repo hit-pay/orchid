@@ -8,6 +8,10 @@ export default {
 
 export const Default = {
   argTypes: {
+    trigger: {
+      control: "select",
+      options: ["hover", "click"],
+    },
     position: {
       control: "select",
       options: [
@@ -28,6 +32,7 @@ export const Default = {
   },
   args: {
     position: "bottom",
+    trigger: "hover",
     offset: [0, 10],
   },
   render: (args) => ({
@@ -40,7 +45,7 @@ export const Default = {
     template: `
           <Theme>
             <div class="w-full h-[400px] flex items-center justify-center">
-              <Tooltip :offset="args.offset" :position="args.position">
+              <Tooltip :key="args.trigger" :trigger="args.trigger" :offset="args.offset" :position="args.position">
                 <div class="bg-oc-grey-300 p-3 rounded-sm cursor-pointer">Trigger</div>
                 <template #popper>
                   <div class="flex w-[300px] flex-col gap-y-3 p-4">

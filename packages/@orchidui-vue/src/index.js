@@ -16,3 +16,7 @@ export * from "./Elements/Sidebar/OcSidebar.js";
 export * from "./DataDisplay/Table/OcTable.js";
 export * from "./DataDisplay/Pagination/OcPagination.js";
 export * from "./Disclosure/Tabs/Tabs.js";
+export * from "./MediaAndIcons/Avatar/OcAvatar.js";
+export * from "./Overlay/Tooltip/OcTooltip.js";
+export * from "./Elements/Header/OcHeader.js";
+export * from "./Elements/PageTitle/OcPageTitle.js";
