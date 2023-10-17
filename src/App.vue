@@ -244,8 +244,8 @@
             <Toggle size="small" :model-value="false" />
           </div>
           <div class="grid justify-start">
-            <Tooltip key="my-tooltip" trigger="hover" :offset="[0, 10]" position="bottom">
-                <div class="bg-oc-gray-300 p-3 rounded-sm cursor-pointer">Trigger Tooltip </div>
+            <Tooltip key="my-tooltip" trigger="hover" :offset="[0, 10]" position="bottom" popper-class="bg-oc-bg-light">
+                <div class="p-3 rounded-sm cursor-pointer">Trigger Tooltip </div>
                 <template #popper>
                   <div class="flex w-[300px] flex-col gap-y-3 p-4">
                     <div class="font-medium">Tooltip title</div>
