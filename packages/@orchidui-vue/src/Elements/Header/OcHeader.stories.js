@@ -14,7 +14,7 @@ import Button from "../../Form/Button/OcButton.vue";
 import Dropdown from "../../Overlay/Dropdown/OcDropdown.vue";
 import DropdownItem from "../../Overlay/Dropdown/OcDropdownItem.vue";
 
-import { ref } from "vue";
+import { ref, computed } from "vue";
 
 export default {
   component: Header,
@@ -23,7 +23,7 @@ export default {
 
 export const Default = {
   args: {
-    isSaved: false,
+    unsavedChanges: false,
     menus: [
       {
         label: "Payments",
@@ -62,8 +62,11 @@ export const Default = {
     },
     setup() {
       const activeMenuValue = ref("payments");
+      const activeMenuLabel = computed(() => {
+        return args.menus.find((m) => m.value === activeMenuValue.value).label
+      });
 
-      return { args, activeMenuValue };
+      return { args, activeMenuValue, activeMenuLabel };
     },
     template: `
           <Theme>
@@ -77,11 +80,11 @@ export const Default = {
                     class="text-oc-accent-3"
                   />
               </HeaderLeft>
-              <HeaderCenter class="hidden md:flex"  >
-                <HeaderTabs v-model="activeMenuValue" :menus="args.menus" />
+              <HeaderCenter class="hidden md:flex" >
+                <HeaderTabs  v-model="activeMenuValue" :menus="args.menus" />
               </HeaderCenter>
               <HeaderRight>
-                  <div class="flex gap-x-5 cursor-pointer">
+                  <div class="flex gap-x-5 ">
 
                     <Button is-transparent variant="secondary"  left-icon="chat" />
                     <Button is-transparent variant="secondary"  left-icon="sparkle-2" />
@@ -89,7 +92,7 @@ export const Default = {
                     
                     <Dropdown :offset="10">
                       <template #trigger>
-                      <Avatar />
+                      <Avatar class="cursor-pointer" />
                       </template>
                       <div class="flex flex-col">
                         <div class="p-2 border-b border-gray-200">
@@ -115,7 +118,7 @@ export const Default = {
                   />
               </HeaderLeft>
               <HeaderCenter class="hidden md:flex flex-1"  >
-                <span  v-if="args.isSaved" class="text-oc-text-100 flex items-center">
+                <span  v-if="!args.unsavedChanges" class="text-oc-text-100 flex items-center">
                   <Icon name="chevron-down" class="rotate-90" />
                   Back
                 </span>
@@ -124,9 +127,36 @@ export const Default = {
                 </span>
               </HeaderCenter>
               <HeaderRight>
-                  <div class="flex gap-x-5">
-                    <Button variant="secondary" label="Cancel"  />
-                    <Button :label="args.isSaved ? 'Create' : 'Save'"  />
+                  <div class="flex gap-x-3">
+                    <Button class="min-w-[100px]" variant="secondary" label="Cancel"  />
+                    <Button class="min-w-[100px]" :label="!args.unsavedChanges ? 'Create' : 'Save'"  />
+                  </div>
+              </HeaderRight>
+            </Header>
+
+            <Header is-sub-header >
+              <Button class="md:hidden mr-3" variant="secondary"  left-icon="menu" />
+              <HeaderLeft>
+                <Icon
+                    width="108"
+                    height="27"
+                    name="hitPay"
+                    class="text-oc-text-100"
+                  />
+              </HeaderLeft>
+              <HeaderCenter class="hidden md:flex flex-1"  >
+                <span  v-if="args.unsavedChanges" class="text-oc-text-100 flex items-center cursor-pointer">
+                  <Icon name="chevron-down" class="rotate-90" />
+                  Back
+                </span>
+                <span class="text-oc-text-300" v-else>
+                  Unsaved changes
+                </span>
+              </HeaderCenter>
+              <HeaderRight>
+                  <div class="flex gap-x-3">
+                    <Button class="min-w-[100px]" variant="secondary" label="Cancel"  />
+                    <Button class="min-w-[100px]" :label="args.unsavedChanges ? 'Create' : 'Save'"  />
                   </div>
               </HeaderRight>
             </Header>
