@@ -3,12 +3,12 @@ import Chip from "../../Feedback/Chip/OcChip.vue";
 import PrimaryActions from "./OcPrimaryActions.vue";
 
 defineProps({
-  mainLink: String,
-  userId: String,
-  chipVariant: String,
-  chipLabel: String,
-  additionalTitle: String,
-  tooltipContent: String,
+  mainLink: { type: String, default: "" },
+  userId: { type: String, default: "" },
+  chipVariant: { type: String, default: "" },
+  chipLabel: { type: String, default: "" },
+  additionalTitle: { type: String, default: "" },
+  tooltipContent: { type: String, default: "" },
 });
 </script>
 

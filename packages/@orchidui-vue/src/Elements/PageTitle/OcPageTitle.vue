@@ -4,14 +4,14 @@ import Right from "./OcRight.vue";
 import AdditionalContent from "./OcAdditionalContent.vue";
 
 defineProps({
-  title: String,
-  description: String,
-  mainLink: String,
-  userId: String,
-  chipVariant: String,
-  chipLabel: String,
-  additionalTitle: String,
-  tooltipContent: String,
+  title: { type: String, required: true },
+  description: { type: String, required: true },
+  mainLink: { type: String, default: "" },
+  userId: { type: String, default: "" },
+  chipVariant: { type: String, default: "" },
+  chipLabel: { type: String, default: "" },
+  additionalTitle: { type: String, default: "" },
+  tooltipContent: { type: String, default: "" },
 });
 </script>
 
