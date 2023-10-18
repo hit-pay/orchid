@@ -10,7 +10,7 @@ export const Default = {
   argTypes: {
     color: {
       control: "select",
-      options: ["default", "primary", "error", "warning", "grey"],
+      options: ["default", "primary", "error", "warning", "gray"],
       default: "default",
     },
     icon: {
@@ -57,7 +57,7 @@ export const Variants = {
               <Shackbar v-bind="args" color="primary"/>
               <Shackbar v-bind="args" color="error"/>
               <Shackbar v-bind="args" color="warning"/>
-              <Shackbar v-bind="args" color="grey"/>
+              <Shackbar v-bind="args" color="gray"/>
             </div>
           </Theme>
         `,

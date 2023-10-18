@@ -6,9 +6,17 @@
     <div
       v-show="isOpen"
       ref="dropdownMenu"
-      class="fixed z-[1] min-w-[162px] rounded-[0.5rem] bg-oc-bg-light shadow border border-oc-primary-100"
+      class="fixed z-[1] min-w-[162px] rounded bg-oc-bg-light shadow"
+      @click.stop
     >
-      <slot :close="() => (isOpen = false)" />
+      <slot
+        :close="
+          () => {
+            isOpen = false;
+            $emit('close');
+          }
+        "
+      />
     </div>
   </div>
 </template>
@@ -17,6 +25,9 @@
 import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
 import { clickOutside as vClickOutside } from "../../directives/clickOutside.js"; // Import the directive
 
+const emit = defineEmits({
+  close: [],
+});
 const props = defineProps({
   offset: Number,
 });
@@ -26,6 +37,7 @@ const isOpen = ref(false);
 const toggleDropdown = () => {
   document.body.appendChild(dropdownMenu.value);
   isOpen.value = !isOpen.value;
+  if (!isOpen.value) emit("close");
   updateMenuPosition();
 };
 const updateMenuPosition = async () => {
@@ -61,7 +73,10 @@ const updateMenuPosition = async () => {
 };
 
 const onClickOutside = () => {
-  if (isOpen.value) isOpen.value = false;
+  if (isOpen.value) {
+    isOpen.value = false;
+    emit("close");
+  }
 };
 onMounted(() => {
   window.addEventListener("resize", updateMenuPosition);

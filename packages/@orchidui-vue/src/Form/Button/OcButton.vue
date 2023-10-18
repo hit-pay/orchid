@@ -6,6 +6,7 @@
       :class="[
         buttonTypeClasses[variant],
         buttonSizeClasses[size],
+        isActive ? 'active' : '',
         isAdditionalArea ? 'rounded-l-[inherit]' : 'rounded-[inherit]',
       ]"
       @mousedown="isPressed = true"
@@ -66,6 +67,7 @@ const props = defineProps({
   additionalAreaIcon: String,
   isAdditionalArea: Boolean,
   rightIcon: String,
+  isActive: Boolean,
   isTransparent: Boolean,
   isRoundedFull: Boolean,
   variant: {
@@ -105,6 +107,7 @@ const showShadow = computed(
     !props.isTransparent &&
     !props.isDisabled &&
     !props.isLoading &&
+    !props.isActive &&
     shadowContainer.value[props.variant],
 );
 
@@ -113,7 +116,7 @@ const buttonTypeClasses = computed(() => ({
     ? "border border-oc-primary oc-btn-primary text-oc-text-100"
     : "text-oc-primary hover:text-oc-primary-400 active:text-oc-primary",
   secondary: !props.isTransparent
-    ? "border border-oc-grey text-oc-text-400 oc-btn-secondary"
+    ? "border border-oc-gray text-oc-text-400 oc-btn-secondary"
     : "text-oc-text-400 hover:text-oc-text-500 active:text-oc-text-400",
   destructive: !props.isTransparent
     ? "border border-oc-error oc-btn-error text-oc-text-100"
@@ -175,7 +178,7 @@ const iconSize = computed(() => ({
   &-add-area {
     &.primary {
       background: var(--button-primary-default);
-      @apply border-[var(--oc-accent-3-500)] text-[var(--oc-text-100)];
+      @apply border-[var(--oc-primary-500)] text-[var(--oc-text-100)];
       &:hover {
         background: var(--button-primary-hover);
       }
@@ -188,7 +191,7 @@ const iconSize = computed(() => ({
     &.secondary {
       text-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
       background: var(--button-secondary-default);
-      @apply border-[var(--oc-grey-500)] text-[var(--oc-text-400)];
+      @apply border-[var(--oc-gray-100)] text-[var(--oc-text-400)];
       &:hover {
         background: var(--button-secondary-hover);
       }
@@ -221,7 +224,8 @@ const iconSize = computed(() => ({
       background: var(--button-primary-hover);
     }
 
-    &:active {
+    &:active,
+    &.active {
       background: var(--button-primary-pressed);
     }
 
@@ -238,7 +242,8 @@ const iconSize = computed(() => ({
       background: var(--button-secondary-hover);
     }
 
-    &:active {
+    &:active,
+    &.active {
       background: var(--button-secondary-pressed);
     }
 
@@ -255,7 +260,8 @@ const iconSize = computed(() => ({
       background: var(--button-destructive-hover);
     }
 
-    &:active {
+    &:active,
+    &.active {
       background: var(--button-destructive-pressed);
     }
 

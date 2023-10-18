@@ -70,36 +70,43 @@ const pagination = computed(() => {
 </script>
 
 <template>
-  <div class="flex items-center gap-x-6">
-    <PrevNext
-      :disabled="modelValue <= 1"
-      :size="size"
-      @click="
-        $emit('update:modelValue', modelValue > 1 ? modelValue - 1 : modelValue)
-      "
-    />
-    <div class="flex items-center gap-x-3">
-      <PaginationNumber
-        v-for="page in pagination"
-        :key="page"
+  <div class="w-full items-center flex relative justify-center">
+    <div class="flex items-center gap-x-6">
+      <PrevNext
+        :disabled="modelValue <= 1"
         :size="size"
-        :is-rounded="isRounded"
-        :active="page === modelValue"
-        @click="$emit('update:modelValue', page === '...' ? modelValue : page)"
-      >
-        {{ page }}
-      </PaginationNumber>
+        @click="
+          $emit(
+            'update:modelValue',
+            modelValue > 1 ? modelValue - 1 : modelValue,
+          )
+        "
+      />
+      <div class="flex items-center gap-x-3">
+        <PaginationNumber
+          v-for="page in pagination"
+          :key="page"
+          :size="size"
+          :is-rounded="isRounded"
+          :active="page === modelValue"
+          @click="
+            $emit('update:modelValue', page === '...' ? modelValue : page)
+          "
+        >
+          {{ page }}
+        </PaginationNumber>
+      </div>
+      <PrevNext
+        is-next
+        :size="size"
+        :disabled="modelValue >= maxPage"
+        @click="
+          $emit(
+            'update:modelValue',
+            modelValue < Number(maxPage) ? modelValue + 1 : Number(maxPage),
+          )
+        "
+      />
     </div>
-    <PrevNext
-      is-next
-      :size="size"
-      :disabled="modelValue >= maxPage"
-      @click="
-        $emit(
-          'update:modelValue',
-          modelValue < Number(maxPage) ? modelValue + 1 : Number(maxPage),
-        )
-      "
-    />
   </div>
 </template>

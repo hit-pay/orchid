@@ -2,13 +2,12 @@
 import TableHeader from "./OcTableHeader.vue";
 import { defineAsyncComponent, ref } from "vue";
 import TableActionSearch from "./OcTableActionSearch.vue";
+import TableActionFilter from "./OcTableActionFilter.vue";
 
 const Tabs = defineAsyncComponent(() =>
   import("../../Disclosure/Tabs/OcTabs.vue"),
 );
-const Button = defineAsyncComponent(() =>
-  import("../../Form/Button/OcButton.vue"),
-);
+
 defineEmits({
   addQuery: [],
 });
@@ -19,7 +18,6 @@ defineProps({
   },
 });
 const activeTab = ref("");
-const isSortDescending = ref(true);
 </script>
 
 <template>
@@ -35,15 +33,7 @@ const isSortDescending = ref(true);
     >
       <TableActionSearch @add-query="$emit('addQuery', $event)" />
 
-      <Button
-        variant="secondary"
-        left-icon="sort-descending"
-        :icon-class="[
-          !isSortDescending && '-scale-y-100',
-          'transition-all duration',
-        ]"
-        @click="isSortDescending = !isSortDescending"
-      />
+      <TableActionFilter />
     </TableHeader>
   </div>
 </template>

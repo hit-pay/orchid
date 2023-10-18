@@ -22,6 +22,7 @@ const ourColorName = [
     'oc-primary-400',
     'oc-primary-500',
     // accent 1
+
     'oc-accent-1-50-tr',
     'oc-accent-1-50',
     'oc-accent-1-100',
@@ -30,6 +31,7 @@ const ourColorName = [
     'oc-accent-1-400',
     'oc-accent-1-500',
     // accent 2
+
     'oc-accent-2-50-tr',
     'oc-accent-2-50',
     'oc-accent-2-100',
@@ -37,7 +39,7 @@ const ourColorName = [
     'oc-accent-2-300',
     'oc-accent-2-400',
     'oc-accent-2-500',
-    // dark blue 
+    // accent 3
     'oc-accent-3-50-tr',
     'oc-accent-3-50',
     'oc-accent-3-100',
@@ -45,17 +47,17 @@ const ourColorName = [
     'oc-accent-3-300',
     'oc-accent-3-400',
     'oc-accent-3-500',
-    // grey
-    'oc-grey-50',
-    'oc-grey-100',
-    'oc-grey-200',
-    'oc-grey-300',
-    'oc-grey-400',
-    'oc-grey-500',
-    'oc-grey-600',
-    'oc-grey-700',
-    'oc-grey-800',
-    'oc-grey-900',
+    // gray
+    'oc-gray-50',
+    'oc-gray-100',
+    'oc-gray-200',
+    'oc-gray-300',
+    'oc-gray-400',
+    'oc-gray-500',
+    'oc-gray-600',
+    'oc-gray-700',
+    'oc-gray-800',
+    'oc-gray-900',
     // success
     'oc-success-50-tr',
     'oc-success-50',

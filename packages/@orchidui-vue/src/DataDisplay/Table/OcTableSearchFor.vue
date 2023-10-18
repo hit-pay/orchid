@@ -20,7 +20,7 @@ defineEmits({
       <Chip
         v-for="query in queries"
         :key="query"
-        variant="grey"
+        variant="gray"
         closable
         :label="query"
         @remove="$emit('removeQuery', query)"

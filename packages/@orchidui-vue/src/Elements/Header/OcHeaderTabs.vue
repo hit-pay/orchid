@@ -13,20 +13,20 @@ const props = defineProps({
 const activeMenu = computed(() =>
   props.menus.find((menu) => menu.value === props.modelValue),
 );
-</script>
 
+</script>
 <template>
-  <div class="flex gap-x-9">
-    <div
+  <div class="flex gap-x-3 md:gap-x-9">
+  <div
       v-for="item in menus"
       :key="item.value"
-      class="py-7 font-medium hover:text-oc-accent-3 cursor-pointer"
+      class="py-3 md:py-7 font-medium hover:text-oc-accent-1 cursor-pointer"
       :style="{
         borderColor: activeMenu.color,
       }"
       :class="[
         item.value === modelValue
-          ? 'text-oc-accent-3 border-b-[3px]'
+          ? 'text-oc-accent-1 border-b-[3px]'
           : 'text-oc-text-300',
       ]"
       @click="

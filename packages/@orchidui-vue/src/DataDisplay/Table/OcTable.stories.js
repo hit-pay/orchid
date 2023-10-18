@@ -15,6 +15,11 @@ export const Default = {
     isSelectable: true,
     headers: [
       {
+        key: "image",
+        variant: "image",
+        label: "Image",
+      },
+      {
         key: "col1",
         label: "Table Header",
       },
@@ -25,6 +30,7 @@ export const Default = {
       {
         key: "col3",
         label: "Table Header",
+        isCopy: true,
       },
       {
         key: "col4",
@@ -47,6 +53,17 @@ export const Default = {
     ],
     fields: [
       {
+        image:
+          "https://sportano.ua/img/986c30c27a3d26a3ee16c136f92f4ff5/1/9/195239323706_20-jpg/boksers-ki-krosivki-nike-hyperko-2-olympic-colorway-bili-dj4475-121-581894.jpg",
+        col1: "",
+        col2: "Table Cell",
+        col3: "Table Cell ",
+        col4: "Table Cell column two",
+        col5: "Label",
+        col6: false,
+      },
+      {
+        image: "",
         col1: "",
         col2: "Table Cell",
         col3: "Table Cell",
@@ -55,6 +72,7 @@ export const Default = {
         col6: false,
       },
       {
+        image: "",
         col1: "",
         col2: "Table Cell",
         col3: "Table Cell",
@@ -63,6 +81,7 @@ export const Default = {
         col6: false,
       },
       {
+        image: "",
         col1: "",
         col2: "Table Cell",
         col3: "Table Cell",
@@ -71,14 +90,7 @@ export const Default = {
         col6: false,
       },
       {
-        col1: "",
-        col2: "Table Cell",
-        col3: "Table Cell",
-        col4: "Table Cell column two",
-        col5: "Label",
-        col6: false,
-      },
-      {
+        image: "",
         col1: "asd",
         col2: "Table Cell",
         col3: "Table Cell",
@@ -121,12 +133,6 @@ export const Default = {
             >
               <template #col1>
                 <TableCellContent important title="Table Cell" description="Table Cell column two"/>
-              </template>
-              <template #col3="{data}">
-                <div class="flex gap-x-2 items-center">
-                  <span class="w-[122px]">{{ data }}</span>
-                  <Icon class="cursor-pointer w-5 h-5 group-hover/row:opacity-100 opacity-0" name="copy"/>
-                </div>
               </template>
               <template #col4="{ data}">
                 <span class="text-oc-text-400 text-sm">{{ data }}</span>

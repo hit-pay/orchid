@@ -5,6 +5,7 @@ defineProps({
   size: {
     type: Number,
     validator: (value) => [64, 48, 40, 32, 24].includes(value),
+    default: 32
   },
   type: {
     type: String,
@@ -13,8 +14,8 @@ defineProps({
   },
 });
 const typeClasses = computed(() => ({
-  business: "bg-oc-accent-3 text-oc-text-100",
-  default: "bg-oc-grey-800 text-oc-text-100",
+  business: "bg-oc-accent-1 text-oc-text-100",
+  default: "bg-oc-gray-800 text-oc-text-100",
   image: "text-oc-text-500",
 }));
 const fontSizes = computed(() => ({
@@ -28,7 +29,7 @@ const fontSizes = computed(() => ({
 
 <template>
   <div
-    class="rounded-full border border-oc-grey-300 flex items-center font-bold justify-center"
+    class="rounded-full border border-oc-gray-300 flex items-center font-bold justify-center"
     :style="{ width: `${size}px`, height: `${size}px` }"
     :class="[typeClasses[type], fontSizes[size]]"
   >

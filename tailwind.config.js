@@ -5,6 +5,7 @@ module.exports = {
     "./node_modules/@orchidui/vue/dist/**/*.js",
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
   theme: {
     fontSize: {
       xs: [
@@ -85,18 +86,18 @@ module.exports = {
           light: "var(--oc-background-light)",
         },
         // secondary to use this
-        "oc-grey": {
-          DEFAULT: "var(--oc-grey-100)",
-          50: "var(--oc-grey-50)",
-          100: "var(--oc-grey-100)",
-          200: "var(--oc-grey-200)",
-          300: "var(--oc-grey-300)",
-          400: "var(--oc-grey-400)",
-          500: "var(--oc-grey-500)",
-          600: "var(--oc-grey-600)",
-          700: "var(--oc-grey-700)",
-          800: "var(--oc-grey-800)",
-          900: "var(--oc-grey-900)",
+        "oc-gray": {
+          DEFAULT: "var(--oc-gray-100)",
+          50: "var(--oc-gray-50)",
+          100: "var(--oc-gray-100)",
+          200: "var(--oc-gray-200)",
+          300: "var(--oc-gray-300)",
+          400: "var(--oc-gray-400)",
+          500: "var(--oc-gray-500)",
+          600: "var(--oc-gray-600)",
+          700: "var(--oc-gray-700)",
+          800: "var(--oc-gray-800)",
+          900: "var(--oc-gray-900)",
         },
         "oc-primary": {
           DEFAULT: "var(--oc-primary-500)",
@@ -109,6 +110,7 @@ module.exports = {
           500: "var(--oc-primary-500)",
           600: "var(--oc-primary-600)",
         },
+
         "oc-accent-1": {
           DEFAULT: "var(--oc-accent-1-500)",
           "50-tr": "var(--oc-accent-1-50-tr)",
@@ -118,6 +120,7 @@ module.exports = {
           300: "var(--oc-accent-1-300)",
           400: "var(--oc-accent-1-400)",
           500: "var(--oc-accent-1-500)",
+          600: "var(--oc-accent-1-600)",
         },
         "oc-accent-2": {
           DEFAULT: "var(--oc-accent-2-500)",
@@ -138,7 +141,6 @@ module.exports = {
           300: "var(--oc-accent-3-300)",
           400: "var(--oc-accent-3-400)",
           500: "var(--oc-accent-3-500)",
-          600: "var(--oc-accent-3-600)",
         },
         "oc-success": {
           DEFAULT: "var(--oc-success-500)",

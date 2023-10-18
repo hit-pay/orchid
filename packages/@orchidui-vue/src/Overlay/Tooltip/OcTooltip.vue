@@ -4,10 +4,14 @@ import { createPopper } from "@popperjs/core";
 import { clickOutside as vClickOutside } from "../../directives/clickOutside.js";
 
 const props = defineProps({
+  popperClass: {
+    type: String
+  },
   offset: {
     type: Array,
     default: () => [0, 0],
   },
+  hideAfter: Number,
   popperOptions: Object,
   trigger: {
     type: String,
@@ -83,8 +87,6 @@ watch(
 );
 const show = () => {
   isShow.value = true;
-  // Make the tooltip visible
-  tooltip.value.setAttribute("data-show", "");
 
   // Enable the event listeners
   popperInstance.value.setOptions((options) => ({
@@ -97,12 +99,11 @@ const show = () => {
 
   // Update its position
   popperInstance.value.update();
+  if (props.hideAfter) setTimeout(() => hide(), props.hideAfter);
 };
 
 const hide = () => {
   isShow.value = false;
-  // Hide the tooltip
-  tooltip.value.removeAttribute("data-show");
 
   // Disable the event listeners
   popperInstance.value.setOptions((options) => ({
@@ -141,10 +142,12 @@ const onClickOutside = () => {
     <span ref="triggerElement">
       <slot />
     </span>
-    <span ref="tooltip" class="oc-tooltip">
-      <slot name="popper" />
-      <span v-if="!arrowHidden" class="oc-arrow" data-popper-arrow />
-    </span>
+    <Transition name="fade">
+      <span v-show="isShow" ref="tooltip" class="oc-tooltip" :class="popperClass">
+        <slot name="popper" />
+        <span v-if="!arrowHidden" class="oc-arrow" data-popper-arrow />
+      </span>
+    </Transition>
   </span>
 </template>
 
@@ -153,7 +156,7 @@ const onClickOutside = () => {
   box-shadow:
     0 3px 22px 0 rgba(38, 42, 50, 0.09),
     0 1px 3px 0 rgba(0, 0, 0, 0.1);
-  @apply hidden rounded-sm z-10 bg-[var(--oc-grey-50)];
+  @apply rounded-sm z-10;
 
   &[data-popper-placement^="top"] > .oc-arrow {
     bottom: -4px;
@@ -171,10 +174,6 @@ const onClickOutside = () => {
     left: -4px;
   }
 
-  &[data-show] {
-    @apply block;
-  }
-
   .oc-arrow {
     @apply z-0;
     visibility: hidden;
@@ -190,5 +189,15 @@ const onClickOutside = () => {
       transform: rotate(45deg);
     }
   }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
