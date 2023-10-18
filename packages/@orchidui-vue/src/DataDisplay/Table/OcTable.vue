@@ -1,9 +1,16 @@
 <script setup>
 import TableActions from "./OcTableActions.vue";
+import TableBulkActions from "./OcTableBulkActions.vue";
 import TableSearchFor from "./OcTableSearchFor.vue";
 import TableHeader from "./OcTableHeader.vue";
 import TableCell from "./OcTableCell.vue";
 import { ref } from "vue";
+
+defineEmits({
+  publish: [],
+  unPublish: [],
+  delete: [],
+});
 
 const props = defineProps({
   headers: Array,
@@ -39,7 +46,13 @@ const removeQuery = (query) => {
   <div
     class="flex text-oc-text flex-col rounded border border-oc-gray-200"
   >
-    <TableActions :tabs="filterTabs" @add-query="addQuery" />
+    <TableBulkActions
+      v-if="selectedRows.length"
+      @publish="$emit('publish', selectedRows)"
+      @un-publish="$emit('unPublish', selectedRows)"
+      @delete="$emit('delete', selectedRows)"
+    />
+    <TableActions v-else :tabs="filterTabs" @add-query="addQuery" />
     <TableSearchFor
       v-if="queries.length"
       :queries="queries"
@@ -89,11 +102,16 @@ const removeQuery = (query) => {
             :key="`${j}-${i}`"
             :is-last="fields.length === i + 1"
             :variant="header.variant"
+            :is-copy="header.isCopy"
+            :data="field[header.key] || ''"
           >
             <template #default>
-              <slot :name="header.key" :item="field" :data="field[header.key]">
-                {{ field[header.key] }}
-              </slot>
+              <slot
+                v-if="$slots[header.key]"
+                :name="header.key"
+                :item="field"
+                :data="field[header.key]"
+              />
             </template>
           </TableCell>
         </tr>

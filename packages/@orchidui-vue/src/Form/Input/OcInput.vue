@@ -47,6 +47,7 @@ const props = defineProps({
 
 defineEmits({
   "update:modelValue": [],
+  blur: [],
 });
 const isFocused = ref(false);
 const inputClasses = computed(() => [
@@ -88,7 +89,10 @@ const inputClasses = computed(() => [
           :disabled="disabled"
           class="h-7 outline-none w-full text-oc-text disabled:bg-transparent placeholder:font-normal placeholder:text-oc-text-300"
           @focus="isFocused = true"
-          @blur="isFocused = false"
+          @blur="
+            isFocused = false;
+            $emit('blur');
+          "
           @input="$emit('update:modelValue', $event.target.value)"
         />
       </div>

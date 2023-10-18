@@ -6,6 +6,7 @@
       :class="[
         buttonTypeClasses[variant],
         buttonSizeClasses[size],
+        isActive ? 'active' : '',
         isAdditionalArea ? 'rounded-l-[inherit]' : 'rounded-[inherit]',
       ]"
       @mousedown="isPressed = true"
@@ -66,6 +67,7 @@ const props = defineProps({
   additionalAreaIcon: String,
   isAdditionalArea: Boolean,
   rightIcon: String,
+  isActive: Boolean,
   isTransparent: Boolean,
   isRoundedFull: Boolean,
   variant: {
@@ -105,6 +107,7 @@ const showShadow = computed(
     !props.isTransparent &&
     !props.isDisabled &&
     !props.isLoading &&
+    !props.isActive &&
     shadowContainer.value[props.variant],
 );
 
@@ -221,7 +224,8 @@ const iconSize = computed(() => ({
       background: var(--button-primary-hover);
     }
 
-    &:active {
+    &:active,
+    &.active {
       background: var(--button-primary-pressed);
     }
 
@@ -238,7 +242,8 @@ const iconSize = computed(() => ({
       background: var(--button-secondary-hover);
     }
 
-    &:active {
+    &:active,
+    &.active {
       background: var(--button-secondary-pressed);
     }
 
@@ -255,7 +260,8 @@ const iconSize = computed(() => ({
       background: var(--button-destructive-hover);
     }
 
-    &:active {
+    &:active,
+    &.active {
       background: var(--button-destructive-pressed);
     }
 

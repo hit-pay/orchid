@@ -39,9 +39,12 @@ const className = computed(() => {
   let className = "";
   switch (props.variant) {
     case "accent-1":
-      className = "bg-oc-accent-2-50 text-oc-accent-2 ";
+      className = "bg-oc-accent-1-50 text-oc-accent-1 ";
       break;
     case "accent-2":
+      className = "bg-oc-accent-2-50 text-oc-accent-2 ";
+      break;
+    case "accent-3":
       className = "bg-oc-accent-3-50 text-oc-accent-3 ";
       break;
     case "success":

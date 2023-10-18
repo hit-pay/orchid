@@ -22,6 +22,14 @@ const ourColorName = [
     'oc-primary-400',
     'oc-primary-500',
     // accent 1
+    'oc-accent-1-50-tr',
+    'oc-accent-1-50',
+    'oc-accent-1-100',
+    'oc-accent-1-200',
+    'oc-accent-1-300',
+    'oc-accent-1-400',
+    'oc-accent-1-500',
+    // accent 2
     'oc-accent-2-50-tr',
     'oc-accent-2-50',
     'oc-accent-2-100',
@@ -29,7 +37,7 @@ const ourColorName = [
     'oc-accent-2-300',
     'oc-accent-2-400',
     'oc-accent-2-500',
-    // accent 2
+    // accent 3
     'oc-accent-3-50-tr',
     'oc-accent-3-50',
     'oc-accent-3-100',
