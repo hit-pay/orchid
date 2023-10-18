@@ -143,7 +143,7 @@ const onClickOutside = () => {
       <slot />
     </span>
     <Transition name="fade">
-      <span v-show="isShow" ref="tooltip" class="oc-tooltip">
+      <span v-show="isShow" ref="tooltip" class="oc-tooltip" :class="popperClass">
         <slot name="popper" />
         <span v-if="!arrowHidden" class="oc-arrow" data-popper-arrow />
       </span>
@@ -156,7 +156,7 @@ const onClickOutside = () => {
   box-shadow:
     0 3px 22px 0 rgba(38, 42, 50, 0.09),
     0 1px 3px 0 rgba(0, 0, 0, 0.1);
-  @apply rounded-sm z-10 bg-[var(--oc-gray-50)];
+  @apply rounded-sm z-10;
 
   &[data-popper-placement^="top"] > .oc-arrow {
     bottom: -4px;

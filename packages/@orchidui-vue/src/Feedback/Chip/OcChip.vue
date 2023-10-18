@@ -69,9 +69,12 @@ const iconColor = computed(() => {
   let className = "";
   switch (props.variant) {
     case "accent-1":
-      className = "text-oc-accent-2-300";
+      className = "text-oc-accent-1-300";
       break;
     case "accent-2":
+      className = "text-oc-accent-2-300";
+      break;
+    case "accent-3":
       className = "text-oc-accent-3-300";
       break;
     case "success":

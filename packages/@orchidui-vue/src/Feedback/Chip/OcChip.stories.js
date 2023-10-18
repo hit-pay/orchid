@@ -14,6 +14,7 @@ export const VariantColor = {
             <Chip label="Primary"/>
             <Chip label="Accent 1" variant="accent-1"/>
             <Chip label="Accent 2" variant="accent-2"/>
+            <Chip label="Accent 3" variant="accent-3"/>
             <Chip label="success" variant="success"/>
             <Chip label="warning" variant="warning"/>
             <Chip label="error" variant="error"/>
