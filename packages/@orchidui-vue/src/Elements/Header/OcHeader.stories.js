@@ -102,12 +102,12 @@ export const Default = {
                 <HeaderTabs  v-model="activeMenuValue" :menus="args.menus" />
               </HeaderCenter>
               <HeaderRight>
-                  <div class="flex gap-x-2 md:gap-x-5 ">
-                    <Button is-transparent variant="secondary"  left-icon="chat" />
-                    <Button is-transparent variant="secondary"  left-icon="sparkle-2" />
+                  <div class="flex gap-x-2 md:gap-x-5 items-center ">
+                    <Button size="big" is-transparent variant="secondary"  left-icon="chat" />
+                    <Button size="big" is-transparent variant="secondary"  left-icon="sparkle-2" />
                     <Tooltip key="my-tooltip" trigger="hover" :offset="[0, 10]" position="bottom" 
                       popperClass="bg-oc-gray-900 text-oc-text-100">
-                      <Button is-transparent variant="secondary"  left-icon="question-mark" />
+                      <Button size="big" is-transparent variant="secondary"  left-icon="question-mark" />
                       <template #popper>
                         <div class="p-4 rounded-full z-50">
                           Help
