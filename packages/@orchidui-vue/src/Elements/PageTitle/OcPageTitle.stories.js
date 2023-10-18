@@ -23,14 +23,13 @@ export const Default = {
   },
   args: {
     title: "Page Title",
-    description:
-      "Page description will be here. For better experience keep 1 line",
+    description: "",
     mainLink: "https://securecheckout.../payment-request/",
     userId: "@minstore-edit43",
     chipVariant: "success",
     chipLabel: "Active",
     additionalTitle: "Need attention",
-    tooltipContent: "Tooltip content",
+    tooltipContent: "Preview Link",
   },
   render: (args) => ({
     components: { PageTitle, Theme },

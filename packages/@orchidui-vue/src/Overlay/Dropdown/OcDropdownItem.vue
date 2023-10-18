@@ -1,9 +1,14 @@
 <template>
   <div
-    class="flex cursor-pointer rounded-sm gap-x-3 p-3 items-center hover:bg-oc-dark-blue-50"
+    class="flex cursor-pointer rounded-sm gap-x-3 p-3 items-center hover:bg-oc-accent-3-50"
     :class="variantClasses[variant]"
   >
-    <Icon v-if="icon" class="w-5 h-5" :name="icon" />
+    <Icon
+      v-if="icon"
+      class="w-5 h-5 text-oc-text-400"
+      :name="icon"
+      :class="iconClasses"
+    />
 
     <span>{{ text }}</span>
   </div>
@@ -22,6 +27,7 @@ defineProps({
     default: "default",
   },
   icon: String,
+  iconClasses: String,
   text: String,
 });
 const variantClasses = computed(() => ({

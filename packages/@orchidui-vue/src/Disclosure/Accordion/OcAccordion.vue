@@ -57,7 +57,7 @@ watch(() => props.isExpandable, changeAccordionHeight);
   <div class="overflow-hidden" :class="isDisabled && 'opacity-60'">
     <div>
       <div
-        class="bg-oc-dark-blue-50 py-3 text-sm border relative z-10 justify-between px-4 gap-x-3 flex hover:border-oc-grey-200 items-center w-full text-oc-text"
+        class="border-oc-accent-3-50 py-3 text-sm border relative z-10 justify-between px-4 gap-x-3 flex hover:border-oc-grey-200 items-center w-full text-oc-text"
         :class="
           isExpandable
             ? 'rounded-t border-oc-grey-200'

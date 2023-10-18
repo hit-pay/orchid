@@ -2,7 +2,7 @@
 import Chip from "../../Feedback/Chip/OcChip.vue";
 import PrimaryActions from "./OcPrimaryActions.vue";
 
-defineProps({
+const props = defineProps({
   mainLink: { type: String, default: "" },
   userId: { type: String, default: "" },
   chipVariant: { type: String, default: "" },
@@ -10,6 +10,13 @@ defineProps({
   additionalTitle: { type: String, default: "" },
   tooltipContent: { type: String, default: "" },
 });
+const copyLink = async () => {
+  try {
+    await navigator.clipboard.writeText(props.mainLink + props.userId);
+  } catch (err) {
+    console.error("Unable to copy text to clipboard. Error: ", err);
+  }
+};
 </script>
 
 <template>
@@ -25,7 +32,7 @@ defineProps({
         <span class="text-oc-text-400">
           {{ mainLink }}<span class="text-oc-text">{{ userId }}</span>
         </span>
-        <PrimaryActions :tooltip-content="tooltipContent" />
+        <PrimaryActions :tooltip-content="tooltipContent" @copy="copyLink" />
       </div>
     </div>
   </div>
