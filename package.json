@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@orchidui/vue": "^0.0.14",
+    "@popperjs/core": "^2.11.8",
     "@vue/eslint-config-prettier": "^8.0.0",
     "autoprefixer": "^10.4.16",
     "eslint-config-standard": "^17.1.0",
