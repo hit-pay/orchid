@@ -34,7 +34,6 @@
     "./dist"
   ],
   "dependencies": {
-    "@headlessui/vue": "^1.7.16",
     "@popperjs/core": "^2.11.8"
   }
 }
