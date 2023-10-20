@@ -1,5 +1,6 @@
 import Theme from "../../Theme/OcTheme.vue";
 import Tabs from "./OcTabs.vue";
+import { ref } from "vue";
 
 export default {
   component: Tabs,
@@ -7,7 +8,14 @@ export default {
 };
 
 export const Pills = {
+  argTypes: {
+    variant: {
+      control: "select",
+      options: ["default", "pills"],
+    },
+  },
   args: {
+    variant: "pills",
     tabs: [
       {
         label: "All",
@@ -30,11 +38,12 @@ export const Pills = {
   render: (args) => ({
     components: { Theme, Tabs },
     setup() {
-      return { args };
+      const activeTab = ref("1");
+      return { activeTab, args };
     },
     template: `
           <Theme>
-            <Tabs model-value="" :tabs="args.tabs" variant="pills"/>
+            <Tabs v-model="activeTab" :tabs="args.tabs" :variant="args.variant"/>
           </Theme>
         `,
   }),

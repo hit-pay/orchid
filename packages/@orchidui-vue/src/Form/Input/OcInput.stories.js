@@ -13,10 +13,6 @@ export default {
 
 export const Default = {
   argTypes: {
-    type: {
-      control: "select",
-      options: ["", "trailing", "leading"],
-    },
     icon: {
       control: "select",
       options: ["", "circle"],
@@ -30,7 +26,6 @@ export const Default = {
     hint: "Hint",
     errorMessage: "",
     placeholder: "Placeholder",
-    type: "",
     icon: "",
     disabled: false,
     isInlineLabel: false,
@@ -48,7 +43,6 @@ export const Default = {
                 :hint="args.hint"
                 :placeholder="args.placeholder"
                 :isInlineLabel="args.isInlineLabel"
-                :type="args.type"
                 :icon="args.icon"
                 :disabled="args.disabled"
             />
@@ -141,7 +135,7 @@ export const Trailing = {
     template: `
           <Theme colorMode="light">
             <div class="flex items-end gap-x-4">
-              <OCInput type="trailing" label="Label" hint="This is a hint text to help user">
+              <OCInput label="Label" hint="This is a hint text to help user">
                 <template #trailing>
                   <Dropdown>
                     <template #default="{close}">
@@ -153,7 +147,7 @@ export const Trailing = {
                     </template>
                     <template #trigger>
                       <div
-                          class="py-3 pr-3 border-r border-oc-gray-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
+                          class=" text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
                       >
                         <span class="flex items-center text-sm">USD</span>
                         <Icon class="w-[14px] h-[14px]" name="chevron-down"/>
@@ -162,7 +156,7 @@ export const Trailing = {
                   </Dropdown>
                 </template>
               </OCInput>
-              <OCInput type="trailing" disabled label="Label" hint="This is a hint text to help user">
+              <OCInput disabled label="Label" hint="This is a hint text to help user">
                 <template #trailing>
                   <Dropdown>
                     <template #default="{close}">
@@ -174,7 +168,7 @@ export const Trailing = {
                     </template>
                     <template #trigger>
                       <div
-                          class="py-3 pr-3 border-r border-oc-gray-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
+                          class=" text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
                       >
                         <span class="flex items-center text-sm">USD</span>
                         <Icon class="w-[14px] h-[14px]" name="chevron-down"/>
@@ -183,7 +177,7 @@ export const Trailing = {
                   </Dropdown>
                 </template>
               </OCInput>
-              <OCInput type="trailing" label="Label" hint="This is a hint text to help user"
+              <OCInput label="Label" hint="This is a hint text to help user"
                        error-message="Error message">
                 <template #trailing>
                   <Dropdown>
@@ -196,7 +190,7 @@ export const Trailing = {
                     </template>
                     <template #trigger>
                       <div
-                          class="py-3 pr-3 border-r border-oc-gray-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
+                          class=" text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
                       >
                         <span class="flex items-center text-sm">USD</span>
                         <Icon class="w-[14px] h-[14px]" name="chevron-down"/>
@@ -217,7 +211,7 @@ export const Leading = {
     template: `
           <Theme colorMode="light">
             <div class="flex items-end gap-x-4">
-              <OCInput type="leading" label="Label" hint="This is a hint text to help user">
+              <OCInput label="Label" hint="This is a hint text to help user">
                 <template #leading>
                   <Dropdown>
                     <template #default="{close}">
@@ -229,7 +223,7 @@ export const Leading = {
                     </template>
                     <template #trigger>
                       <div
-                          class="py-3 pl-3 border-l border-oc-gray-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
+                          class=" text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
                       >
                         <span class="flex items-center text-sm">USD</span>
                         <Icon class="w-[14px] h-[14px]" name="chevron-down"/>
@@ -238,7 +232,7 @@ export const Leading = {
                   </Dropdown>
                 </template>
               </OCInput>
-              <OCInput type="leading" disabled label="Label" hint="This is a hint text to help user">
+              <OCInput disabled label="Label" hint="This is a hint text to help user">
                 <template #leading>
                   <Dropdown>
                     <template #default="{close}">
@@ -250,7 +244,7 @@ export const Leading = {
                     </template>
                     <template #trigger>
                       <div
-                          class="py-3 pl-3 border-l border-oc-gray-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
+                          class=" text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
                       >
                         <span class="flex items-center text-sm">USD</span>
                         <Icon class="w-[14px] h-[14px]" name="chevron-down"/>
@@ -259,7 +253,7 @@ export const Leading = {
                   </Dropdown>
                 </template>
               </OCInput>
-              <OCInput type="leading" label="Label" hint="This is a hint text to help user"
+              <OCInput label="Label" hint="This is a hint text to help user"
                        error-message="Error message">
                 <template #leading>
                   <Dropdown>
@@ -272,7 +266,7 @@ export const Leading = {
                     </template>
                     <template #trigger>
                       <div
-                          class="py-3 pl-3 border-l border-oc-gray-200 text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
+                          class=" text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
                       >
                         <span class="flex items-center text-sm">USD</span>
                         <Icon class="w-[14px] h-[14px]" name="chevron-down"/>

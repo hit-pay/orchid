@@ -4,8 +4,8 @@ import { mergeConfig } from "vite";
 
 const config = {
   stories: [
-    "../stories/**/*.mdx", 
-    "../packages/@orchidui-vue/**/*.stories.@(js|jsx|mjs|ts|tsx)"
+    "../stories/**/*.mdx",
+    "../packages/@orchidui-vue/src/**/*.stories.@(js|jsx|mjs|ts|tsx)",
   ],
   addons: [
     "@storybook/addon-links",
@@ -14,9 +14,8 @@ const config = {
   ],
   parameters: {
     backgrounds: {
-      default: '',
-      values: [
-      ],
+      default: "",
+      values: [],
     },
   },
   framework: {

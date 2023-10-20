@@ -3,21 +3,23 @@
     <div ref="trigger" @click="toggleDropdown">
       <slot name="trigger" :is-open="isOpen">trigger</slot>
     </div>
-    <div
-      v-show="isOpen"
-      ref="dropdownMenu"
-      class="fixed z-[1] min-w-[162px] rounded bg-oc-bg-light shadow"
-      @click.stop
-    >
-      <slot
-        :close="
-          () => {
-            isOpen = false;
-            $emit('close');
-          }
-        "
-      />
-    </div>
+    <Transition name="fade">
+      <div
+        v-show="isOpen"
+        ref="dropdownMenu"
+        class="fixed z-[1] min-w-[162px] rounded bg-oc-bg-light shadow"
+        @click.stop
+      >
+        <slot
+          :close="
+            () => {
+              isOpen = false;
+              $emit('close');
+            }
+          "
+        />
+      </div>
+    </Transition>
   </div>
 </template>
 
@@ -88,3 +90,15 @@ onBeforeUnmount(() => {
   dropdownMenu.value.remove();
 });
 </script>
+
+<style scoped lang="scss">
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
