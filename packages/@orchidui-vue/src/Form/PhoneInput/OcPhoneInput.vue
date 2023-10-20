@@ -31,8 +31,8 @@ const selectedCountryIso = ref(props.initialCountryCode);
 const getCountryObject = (iso) =>
   countryCodes.find(
     (country) => country.iso.toLowerCase() === iso.toLowerCase(),
-  );
-const getCountryCode = (iso) => getCountryObject(iso).code;
+  ) || null;
+const getCountryCode = (iso) => getCountryObject(iso)?.code || "";
 
 const isPhoneError = ref(false);
 const onInput = (value) => {
@@ -50,7 +50,7 @@ const changeSelectedCountry = (iso, code, close) => {
 };
 const updateEmit = () => {
   emit("update", {
-    country: getCountryObject(selectedCountryIso.value).country,
+    country: getCountryObject(selectedCountryIso.value)?.country || "",
     iso: selectedCountryIso.value,
     code: getCountryCode(selectedCountryIso.value),
     phone: props.phoneNumber,

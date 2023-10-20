@@ -20,7 +20,7 @@ const props = defineProps({
 defineEmits({
   "update:modelValue": [],
 });
-const selectedLink = ref(props.links?.[0].value || "");
+const selectedLink = ref(props.links?.[0]?.value || "");
 const selectedLinkProps = computed(() =>
   props.links.find((link) => link.value === selectedLink.value),
 );

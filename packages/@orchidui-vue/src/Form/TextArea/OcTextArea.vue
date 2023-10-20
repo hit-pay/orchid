@@ -18,10 +18,13 @@ const emit = defineEmits({
 });
 
 const isFocused = ref(false);
+
+const MIN_HEIGHT = "18px";
+
 const onInput = (event) => {
   const input = event.target;
   if (!input || !props.autoResize) return;
-  input.style.height = "18px";
+  input.style.height = MIN_HEIGHT;
   input.style.height = input.scrollHeight + "px";
   emit("update:modelValue", input.value);
 };
