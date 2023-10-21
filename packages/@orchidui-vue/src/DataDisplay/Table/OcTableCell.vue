@@ -1,18 +1,6 @@
 <script setup>
-import { computed, defineAsyncComponent, ref } from "vue";
-
-const Checkbox = defineAsyncComponent(() =>
-  import("../../Form/Checkbox/OcCheckbox.vue"),
-);
-const Icon = defineAsyncComponent(() =>
-  import("../../MediaAndIcons/Icon/OcIcon.vue"),
-);
-const Tooltip = defineAsyncComponent(() =>
-  import("../../Overlay/Tooltip/OcTooltip.vue"),
-);
-const TableCellContent = defineAsyncComponent(() =>
-  import("./OcTableCellContent.vue"),
-);
+import { computed, ref } from "vue";
+import { Checkbox, Icon, Tooltip, TableCellContent } from '@orchid'
 
 const Variants = {
   CHECKBOX: "checkbox",

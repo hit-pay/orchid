@@ -1,10 +1,6 @@
 <script setup>
-import Button from "../../Form/Button/OcButton.vue";
-import Dropdown from "../../Overlay/Dropdown/OcDropdown.vue";
-import DropdownItem from "../../Overlay/Dropdown/OcDropdownItem.vue";
-import Tooltip from "../../Overlay/Tooltip/OcTooltip.vue";
+import { Button, Dropdown, DropdownItem , Tooltip } from "@orchid";
 </script>
-
 <template>
   <div class="flex gap-x-3 items-center">
     <Dropdown :offset="10">

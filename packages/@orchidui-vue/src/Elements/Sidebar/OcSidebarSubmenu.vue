@@ -1,3 +1,16 @@
+<script setup>
+import { Icon } from '@orchid'
+defineProps({
+  isExpanded: {
+    type: Boolean,
+    default: true,
+  },
+  menu: {
+    type: Object,
+  },
+});
+</script>
+
 <template>
   <div
     class="grid gap-3 transition-all duration-500 overflow-hidden"
@@ -26,19 +39,3 @@
     </div>
   </div>
 </template>
-<script setup>
-import { defineAsyncComponent } from "vue";
-
-defineProps({
-  isExpanded: {
-    type: Boolean,
-    default: true,
-  },
-  menu: {
-    type: Object,
-  },
-});
-const Icon = defineAsyncComponent(() =>
-  import("../../MediaAndIcons/Icon/OcIcon.vue"),
-);
-</script>

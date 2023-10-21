@@ -1,3 +1,79 @@
+
+
+<script setup>
+import { reactive, onMounted, computed } from "vue";
+import { Icon, SidebarSubmenu, Tooltip } from '@orchid'
+
+const emit = defineEmits(["changeExpanded"]);
+
+const props = defineProps({
+  class: {
+    type: String,
+  },
+  isExpanded: {
+    type: Boolean,
+    default: true,
+  },
+  sidebarMenu: {
+    type: Array,
+  },
+});
+
+const state = reactive({
+  loading: true,
+  expanded: [],
+});
+
+const expandMenu = (id) => {
+  if (!state.expanded.includes(id)) {
+    state.expanded.push(id);
+  } else {
+    state.expanded = state.expanded.filter((menuId) => menuId !== id);
+  }
+};
+
+const togglePopover = (e) => {
+  try {
+    const target = e?.target;
+    if (target) target.click();
+  } catch (error) {
+    console.error("An error occurred:", error);
+  }
+};
+
+const changeExpanded = () => {
+  state.loading = true;
+
+  emit("changeExpanded", !props.isExpanded);
+
+  let timeOut = setTimeout(() => {
+    state.loading = false;
+    clearTimeout(timeOut);
+  });
+};
+
+const allClassName = computed(() => {
+  let classNames = props.isExpanded ? "w-[300px] " : "w-[102px] ";
+  return classNames + props.class;
+});
+
+onMounted(() => {
+  props.sidebarMenu.forEach((sideMenu) => {
+    sideMenu.items.forEach((menu) => {
+      // check if menu active
+      if (menu.children) {
+        menu.children.forEach((submenu) => {
+          if (submenu.active) {
+            expandMenu(menu.path);
+          }
+        });
+      }
+    });
+  });
+  state.loading = false;
+});
+</script>
+
 <template>
   <div
     class="p-8 cursor-pointer transition-all duration-500 relative bg-[var(--oc-sidebar-background)]"
@@ -95,7 +171,7 @@
                     >
                       <slot v-if="!isExpanded" name="label" :menu="menu" />
                     </div>
-                    <OcSidebarSubmenu
+                    <SidebarSubmenu
                       v-if="menu.children"
                       :menu="menu"
                       is-expanded
@@ -107,7 +183,7 @@
                           :submenu="submenu"
                         />
                       </template>
-                    </OcSidebarSubmenu>
+                    </SidebarSubmenu>
                   </div>
                 </template>
               </Tooltip>
@@ -148,85 +224,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { defineAsyncComponent, reactive, onMounted, computed } from "vue";
-
-const Icon = defineAsyncComponent(() =>
-  import("../../MediaAndIcons/Icon/OcIcon.vue"),
-);
-const OcSidebarSubmenu = defineAsyncComponent(() =>
-  import("./OcSidebarSubmenu.vue"),
-);
-const Tooltip = defineAsyncComponent(() =>
-  import("../../Overlay/Tooltip/OcTooltip.vue"),
-);
-const emit = defineEmits(["changeExpanded"]);
-
-const props = defineProps({
-  class: {
-    type: String,
-  },
-  isExpanded: {
-    type: Boolean,
-    default: true,
-  },
-  sidebarMenu: {
-    type: Array,
-  },
-});
-
-const state = reactive({
-  loading: true,
-  expanded: [],
-});
-
-const expandMenu = (id) => {
-  if (!state.expanded.includes(id)) {
-    state.expanded.push(id);
-  } else {
-    state.expanded = state.expanded.filter((menuId) => menuId !== id);
-  }
-};
-
-const togglePopover = (e) => {
-  try {
-    const target = e?.target;
-    if (target) target.click();
-  } catch (error) {
-    console.error("An error occurred:", error);
-  }
-};
-
-const changeExpanded = () => {
-  state.loading = true;
-
-  emit("changeExpanded", !props.isExpanded);
-
-  let timeOut = setTimeout(() => {
-    state.loading = false;
-    clearTimeout(timeOut);
-  });
-};
-
-const allClassName = computed(() => {
-  let classNames = props.isExpanded ? "w-[300px] " : "w-[102px] ";
-  return classNames + props.class;
-});
-
-onMounted(() => {
-  props.sidebarMenu.forEach((sideMenu) => {
-    sideMenu.items.forEach((menu) => {
-      // check if menu active
-      if (menu.children) {
-        menu.children.forEach((submenu) => {
-          if (submenu.active) {
-            expandMenu(menu.path);
-          }
-        });
-      }
-    });
-  });
-  state.loading = false;
-});
-</script>

@@ -1,5 +1,4 @@
-import Pagination from "./OcPagination.vue";
-import Theme from "../../Theme/OcTheme.vue";
+import { Theme, Pagination } from "@orchid";
 import { ref } from "vue";
 
 export default {

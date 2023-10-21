@@ -1,18 +1,5 @@
 <script setup>
-import { defineAsyncComponent } from "vue";
-
-const Button = defineAsyncComponent(() =>
-  import("../../Form/Button/OcButton.vue"),
-);
-const Input = defineAsyncComponent(() =>
-  import("../../Form/Input/OcInput.vue"),
-);
-const RangeInput = defineAsyncComponent(() =>
-  import("../../Form/RangeInput/OcRangeInput.vue"),
-);
-const Dropdown = defineAsyncComponent(() =>
-  import("../../Overlay/Dropdown/OcDropdown.vue"),
-);
+import { Button, Input, RangeInput, Dropdown} from '@orchid'
 </script>
 
 <template>

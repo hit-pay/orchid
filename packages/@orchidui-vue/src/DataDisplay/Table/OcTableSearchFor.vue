@@ -1,10 +1,5 @@
 <script setup>
-import TableHeader from "./OcTableHeader.vue";
-import { defineAsyncComponent } from "vue";
-
-const Chip = defineAsyncComponent(() =>
-  import("../../Feedback/Chip/OcChip.vue"),
-);
+import { TableHeader, Chip } from  '@orchid'
 defineProps({
   queries: Array,
 });

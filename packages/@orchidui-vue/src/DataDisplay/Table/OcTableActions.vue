@@ -1,12 +1,6 @@
 <script setup>
-import TableHeader from "./OcTableHeader.vue";
-import { defineAsyncComponent, ref } from "vue";
-import TableActionSearch from "./OcTableActionSearch.vue";
-import TableActionFilter from "./OcTableActionFilter.vue";
-
-const Tabs = defineAsyncComponent(() =>
-  import("../../Disclosure/Tabs/OcTabs.vue"),
-);
+import { Tabs, TableHeader, TableActionSearch,TableActionFilter } from "@orchid";
+import { ref } from "vue";
 
 defineEmits({
   addQuery: [],

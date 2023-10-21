@@ -1,9 +1,6 @@
 <script setup>
-import { defineAsyncComponent, nextTick, ref, watch } from "vue";
-
-const Icon = defineAsyncComponent(() =>
-  import("../../MediaAndIcons/Icon/OcIcon.vue"),
-);
+import { nextTick, ref, watch } from "vue";
+import { Icon } from '@orchid'
 
 const upcomingAccordion = ref();
 

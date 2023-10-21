@@ -1,9 +1,10 @@
 <script setup>
-import TableActions from "./OcTableActions.vue";
-import TableBulkActions from "./OcTableBulkActions.vue";
-import TableSearchFor from "./OcTableSearchFor.vue";
-import TableHeader from "./OcTableHeader.vue";
-import TableCell from "./OcTableCell.vue";
+import { 
+  TableActions, 
+  TableBulkActions, 
+  TableSearchFor,
+  TableHeader,
+  TableCell } from '@orchid'
 import { ref } from "vue";
 
 defineEmits({

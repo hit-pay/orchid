@@ -1,13 +1,12 @@
-import OCAccordion from "./OcAccordion.vue";
-import OCTheme from "../../Theme/OcTheme.vue";
+import { Theme, Accordion} from "@orchid";
 import { ref, watch } from "vue";
 
 export default {
-  component: OCAccordion,
+  component: Accordion,
   tags: ["autodocs"],
 };
 
-export const Accordion = {
+export const OcAccordion = {
   argTypes: {
     icon: {
       control: "select",
@@ -24,7 +23,7 @@ export const Accordion = {
     isDisabled: false,
   },
   render: (args) => ({
-    components: { OCAccordion, OCTheme },
+    components: { Accordion, Theme },
     setup() {
       const isOpen = ref(false);
       watch(
@@ -34,8 +33,8 @@ export const Accordion = {
       return { isOpen, args };
     },
     template: `
-          <OCTheme colorMode="light">
-            <OCAccordion
+          <Theme >
+            <Accordion
                 v-model:isExpandable="isOpen"
                 :header="args.header"
                 :body="args.body"
@@ -44,7 +43,7 @@ export const Accordion = {
                 :isAnimated="args.isAnimated"
                 :isDisabled="args.isDisabled"
             />
-          </OCTheme>
+          </Theme>
         `,
   }),
 };

@@ -1,3 +1,8 @@
 import Pagination from "./OcPagination.vue";
-
-export { Pagination };
+import PrevNext from "./OcPrevNext.vue";
+import PaginationNumber from './OcPaginationNumber.vue'
+export { 
+    Pagination, 
+    PrevNext,
+    PaginationNumber
+};

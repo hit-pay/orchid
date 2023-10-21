@@ -1,3 +1,9 @@
+import { defineAsyncComponent } from "vue";
+
 import Sidebar from "./OcSidebar.vue";
 
-export { Sidebar };
+const SidebarSubmenu = defineAsyncComponent(() =>
+  import("./OcSidebarSubmenu.vue"),
+);
+
+export { Sidebar, SidebarSubmenu };

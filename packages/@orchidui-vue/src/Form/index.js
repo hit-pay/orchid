@@ -7,5 +7,6 @@ export * from "./Input/OcInput.js";
 export * from "./PhoneInput/OcPhoneInput.js";
 export * from "./Radio/OcRadio.js";
 export * from "./RadioGroup/OcRadioGroup.js";
+export * from "./RangeInput/OcRangeInput.js";
 export * from "./Select/OcSelect.js";
 export * from "./Toggle/OcToggle.js";
