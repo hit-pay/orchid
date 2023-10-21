@@ -1,10 +1,6 @@
 <script setup>
-import { computed, defineAsyncComponent, ref } from "vue";
-import BaseInput from "../../Form/BaseInput/OcBaseInput.vue";
-
-const Icon = defineAsyncComponent(() =>
-  import("../../MediaAndIcons/Icon/OcIcon.vue"),
-);
+import { computed, ref } from "vue";
+import { BaseInput, Icon} from "@orchid";
 
 const props = defineProps({
   disabled: {

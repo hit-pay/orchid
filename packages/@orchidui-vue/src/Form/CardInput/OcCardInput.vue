@@ -1,7 +1,5 @@
 <script setup>
-import Input from "../Input/OcInput.vue";
-import Icon from "../../MediaAndIcons/Icon/OcIcon.vue";
-
+import {Input, Icon} from "@orchid";
 defineProps({
   placeholder: String,
   hint: String,

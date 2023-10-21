@@ -1,7 +1,5 @@
 <script setup>
-import Input from "../Input/OcInput.vue";
-import Dropdown from "../../Overlay/Dropdown/OcDropdown.vue";
-import Icon from "../../MediaAndIcons/Icon/OcIcon.vue";
+import { Input, Dropdown, Icon } from "@orchid";
 import { computed, ref } from "vue";
 
 const props = defineProps({

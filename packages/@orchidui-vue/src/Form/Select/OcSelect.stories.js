@@ -1,8 +1,5 @@
-import Theme from "../../Theme/OcTheme.vue";
-import Select from "./OcSelect.vue";
+import {Theme,Select,Option,GroupOptions } from "@orchid";
 import { ref } from "vue";
-import Option from "./OcOption.vue";
-import GroupOptions from "./OcGroupOptions.vue";
 
 export default {
   component: Select,

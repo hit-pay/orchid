@@ -1,5 +1,5 @@
-import Checkbox from "./OcCheckbox.vue";
-import Theme from "../../Theme/OcTheme.vue";
+
+import { Theme, Checkbox } from "@orchid";
 import { ref } from "vue";
 
 export default {

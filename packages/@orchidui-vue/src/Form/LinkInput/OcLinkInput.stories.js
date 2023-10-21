@@ -1,5 +1,5 @@
-import Theme from "../../Theme/OcTheme.vue";
-import LinkInput from "./OcLinkInput.vue";
+
+import { Theme, LinkInput} from "@orchid";
 import { ref } from "vue";
 
 export default {

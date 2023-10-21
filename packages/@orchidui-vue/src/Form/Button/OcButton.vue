@@ -1,63 +1,8 @@
-<template>
-  <div class="flex overflow-hidden" :class="[showShadow, roundedClasses]">
-    <button
-      class="oc-btn relative w-full text-center justify-center font-medium gap-x-3 flex items-center"
-      :disabled="isDisabled || isLoading"
-      :class="[
-        buttonTypeClasses[variant],
-        buttonSizeClasses[size],
-        isActive ? 'active' : '',
-        isAdditionalArea ? 'rounded-l-[inherit]' : 'rounded-[inherit]',
-      ]"
-      @mousedown="isPressed = true"
-      @mouseup="isPressed = false"
-      @mouseleave="isPressed = false"
-    >
-      <Icon
-        v-if="isLoading"
-        :width="iconSize[size]"
-        :height="iconSize[size]"
-        name="loading-2"
-      />
 
-      <template v-if="leftIcon && !isLoading">
-        <Icon
-          :width="iconSize[size]"
-          :class="iconClass"
-          :height="iconSize[size]"
-          :name="leftIcon"
-        />
-      </template>
-
-      <span v-if="label" class="overflow-hidden text-ellipsis">
-        {{ label }}
-      </span>
-      <slot v-else />
-
-      <template v-if="rightIcon">
-        <Icon
-          :width="iconSize[size]"
-          :height="iconSize[size]"
-          :name="rightIcon"
-          :class="iconClass"
-        />
-      </template>
-    </button>
-    <div
-      v-if="isAdditionalArea && !isTransparent"
-      class="border-y border-r flex cursor-pointer items-center justify-center oc-btn-add-area px-[6px] py-3 rounded-r-[inherit]"
-      :class="[additionalAreaSize[size], variant]"
-    >
-      <Icon :name="additionalAreaIcon" :class="additionalAreaIconSize[size]" />
-    </div>
-  </div>
-</template>
 <script setup>
-import { computed, defineAsyncComponent, ref } from "vue";
+import { computed, ref } from "vue";
+import { Icon } from '@orchid'
 
-const Icon = defineAsyncComponent(() =>
-  import("../../MediaAndIcons/Icon/OcIcon.vue"),
-);
 const props = defineProps({
   label: String,
   isDisabled: Boolean,
@@ -149,6 +94,60 @@ const iconSize = computed(() => ({
   big: "20",
 }));
 </script>
+<template>
+  <div class="flex overflow-hidden" :class="[showShadow, roundedClasses]">
+    <button
+      class="oc-btn relative w-full text-center justify-center font-medium gap-x-3 flex items-center"
+      :disabled="isDisabled || isLoading"
+      :class="[
+        buttonTypeClasses[variant],
+        buttonSizeClasses[size],
+        isActive ? 'active' : '',
+        isAdditionalArea ? 'rounded-l-[inherit]' : 'rounded-[inherit]',
+      ]"
+      @mousedown="isPressed = true"
+      @mouseup="isPressed = false"
+      @mouseleave="isPressed = false"
+    >
+      <Icon
+        v-if="isLoading"
+        :width="iconSize[size]"
+        :height="iconSize[size]"
+        name="loading-2"
+      />
+
+      <template v-if="leftIcon && !isLoading">
+        <Icon
+          :width="iconSize[size]"
+          :class="iconClass"
+          :height="iconSize[size]"
+          :name="leftIcon"
+        />
+      </template>
+
+      <span v-if="label" class="overflow-hidden text-ellipsis">
+        {{ label }}
+      </span>
+      <slot v-else />
+
+      <template v-if="rightIcon">
+        <Icon
+          :width="iconSize[size]"
+          :height="iconSize[size]"
+          :name="rightIcon"
+          :class="iconClass"
+        />
+      </template>
+    </button>
+    <div
+      v-if="isAdditionalArea && !isTransparent"
+      class="border-y border-r flex cursor-pointer items-center justify-center oc-btn-add-area px-[6px] py-3 rounded-r-[inherit]"
+      :class="[additionalAreaSize[size], variant]"
+    >
+      <Icon :name="additionalAreaIcon" :class="additionalAreaIconSize[size]" />
+    </div>
+  </div>
+</template>
 <style scoped lang="scss">
 .oc-btn {
   @apply disabled:pointer-events-none;

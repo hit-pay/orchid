@@ -1,10 +1,6 @@
 <script setup>
-import { computed, defineAsyncComponent } from "vue";
-
-const Checkbox = defineAsyncComponent(() =>
-  import("../Checkbox/OcCheckbox.vue"),
-);
-
+import { computed} from "vue";
+import { Checkbox } from '@orchid'
 const props = defineProps({
   alignment: {
     type: String,

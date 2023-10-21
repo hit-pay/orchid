@@ -1,9 +1,7 @@
 <script setup>
 import "flag-icons/css/flag-icons.min.css";
 import countryCodes from "./countryCodes.js";
-import Dropdown from "../../Overlay/Dropdown/OcDropdown.vue";
-import Input from "../Input/OcInput.vue";
-import Icon from "../../MediaAndIcons/Icon/OcIcon.vue";
+import  {Dropdown, Input, Icon} from "@orchid";
 import { onMounted, ref } from "vue";
 
 const props = defineProps({

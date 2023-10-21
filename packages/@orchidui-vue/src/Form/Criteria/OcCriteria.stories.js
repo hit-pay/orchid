@@ -1,5 +1,4 @@
-import Criteria from "./OcCriteria.vue";
-import Theme from "../../Theme/OcTheme.vue";
+import { Criteria,  Theme } from "@orchid";
 
 export default {
   component: Criteria,
