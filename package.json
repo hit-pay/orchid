@@ -19,14 +19,14 @@
   },
   "dependencies": {
     "@orchidui/vue": "^0.0.14",
+    "@popperjs/core": "^2.11.8",
     "@vue/eslint-config-prettier": "^8.0.0",
     "autoprefixer": "^10.4.16",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-vue": "^9.17.0",
     "postcss": "^8.4.31",
     "sass": "^1.68.0",
-    "vue": "^3.3.4",
-    "@headlessui/vue": "^1.7.16"
+    "vue": "^3.3.4"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.5.0",
