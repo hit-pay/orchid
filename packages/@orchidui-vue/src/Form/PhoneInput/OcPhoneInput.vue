@@ -1,7 +1,6 @@
 <script setup>
-import "flag-icons/css/flag-icons.min.css";
 import countryCodes from "./countryCodes.js";
-import  {Dropdown, Input, Icon} from "@orchid";
+import { Dropdown, Input, Icon} from "@orchid";
 import { onMounted, ref } from "vue";
 
 const props = defineProps({
@@ -114,3 +113,7 @@ onMounted(() => {
     </template>
   </Input>
 </template>
+
+<style>
+@import url("https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.11.0/css/flag-icons.min.css");
+</style>

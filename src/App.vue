@@ -244,6 +244,22 @@
             <Toggle :model-value="false" />
             <Toggle size="small" :model-value="false" />
           </div>
+          <div>
+            {{ phoneCode }} {{ phone }}
+            <PhoneInput
+                v-model:country-code="phoneCode"
+                v-model:phone-number="phone"
+                :key="args.initialCountryCode"
+                :valid-regex="args.validRegex"
+                :isInlineLabel="args.isInlineLabel"
+                :isDisabled="args.isDisabled"
+                :label="args.label"
+                :hint="args.hint"
+                :placeholder="args.placeholder"
+                :error-message="args.errorMessage"
+                :initial-country-code="args.initialCountryCode"
+            />
+          </div>
           <div class="grid justify-start">
             <Tooltip key="my-tooltip" trigger="hover" :offset="[0, 10]" position="bottom" popper-class="bg-oc-bg-light">
                 <div class="p-3 rounded-sm cursor-pointer">Trigger Tooltip </div>
@@ -336,8 +352,24 @@ import {
   TableCellContent,
   PageTitle,
   Tooltip,
+  PhoneInput
 } from "@orchid";
 import { ref, reactive, computed } from "vue";
+
+const args =  {
+  initialCountryCode: "sg",
+  placeholder: "Placeholder",
+  hint: "This is a hint text to help user.",
+  errorMessage: "Invalid phone number",
+  validRegex: "^[+]?[(]?[0-9]{3}[)]?[-s.]?[0-9]{3}[-s.]?[0-9]{4,6}$",
+  isInlineLabel: false,
+  isDisabled: false,
+  label: ""
+}
+
+const phone = ref("");
+const phoneCode = ref("");
+
 
 const isOpen = ref(false);
 const snackbarArgs = {
