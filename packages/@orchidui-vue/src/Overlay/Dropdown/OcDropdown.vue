@@ -1,27 +1,3 @@
-<template>
-  <div v-click-outside="onClickOutside">
-    <div ref="trigger" @click="toggleDropdown">
-      <slot name="trigger" :is-open="isOpen">trigger</slot>
-    </div>
-    <Transition name="fade">
-      <div
-        v-show="isOpen"
-        ref="dropdownMenu"
-        class="fixed z-[1] min-w-[162px] rounded bg-oc-bg-light shadow"
-        @click.stop
-      >
-        <slot
-          :close="
-            () => {
-              isOpen = false;
-              $emit('close');
-            }
-          "
-        />
-      </div>
-    </Transition>
-  </div>
-</template>
 
 <script setup>
 import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
@@ -90,6 +66,32 @@ onBeforeUnmount(() => {
   dropdownMenu.value.remove();
 });
 </script>
+
+<template>
+  <div v-click-outside="onClickOutside">
+    <div ref="trigger" @click="toggleDropdown">
+      <slot name="trigger" :is-open="isOpen">trigger</slot>
+    </div>
+    <Transition name="fade">
+      <div
+        v-show="isOpen"
+        ref="dropdownMenu"
+        class="fixed z-[1] min-w-[162px] rounded bg-oc-bg-light shadow"
+        @click.stop
+      >
+        <slot
+          :close="
+            () => {
+              isOpen = false;
+              $emit('close');
+            }
+          "
+        />
+      </div>
+    </Transition>
+  </div>
+</template>
+
 
 <style scoped lang="scss">
 .fade-enter-active,

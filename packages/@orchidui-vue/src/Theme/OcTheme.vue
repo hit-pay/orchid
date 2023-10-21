@@ -1,8 +1,4 @@
-<template>
-  <main>
-    <slot />
-  </main>
-</template>
+
 <script setup>
 import { watch } from 'vue';
 const props = defineProps({
@@ -18,3 +14,9 @@ watch(() => props.colorMode, () => {
       document.querySelector('body').setAttribute("class", 'light')
     }},{immediate:true});
 </script>
+
+<template>
+  <main>
+    <slot />
+  </main>
+</template>

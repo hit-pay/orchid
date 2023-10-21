@@ -1,6 +1,4 @@
-import Dropdown from "./OcDropdown.vue";
-import Theme from "../../Theme/OcTheme.vue";
-import DropdownItem from "./OcDropdownItem.vue";
+import {Theme, Dropdown,DropdownItem } from "@orchid";
 
 export default {
   component: Dropdown,
