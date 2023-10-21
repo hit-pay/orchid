@@ -58,13 +58,13 @@ const showShadow = computed(
 
 const buttonTypeClasses = computed(() => ({
   primary: !props.isTransparent
-    ? "border border-oc-primary oc-btn-primary text-oc-text-100"
+    ? "border border-oc-primary oc-btn-primary text-oc-text-100 dark:text-oc-text-500"
     : "text-oc-primary hover:text-oc-primary-400 active:text-oc-primary",
   secondary: !props.isTransparent
-    ? "border border-oc-gray text-oc-text-400 oc-btn-secondary"
+    ? "border border-oc-gray text-oc-text-400 dark:text-oc-text-100 oc-btn-secondary"
     : "text-oc-text-400 hover:text-oc-text-500 active:text-oc-text-400",
   destructive: !props.isTransparent
-    ? "border border-oc-error oc-btn-error text-oc-text-100"
+    ? "border border-oc-error oc-btn-error text-oc-text-100 dark:text-oc-text-500"
     : "text-oc-error hover:text-oc-error-400 active:text-oc-error",
 }));
 

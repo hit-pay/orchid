@@ -37,7 +37,6 @@ const changePrimaryColor = () => {
           <h1 class="w-full mb-3 font-medium">Theme Settings</h1>
           <Button label="Enable Dark Mode" @click="toggleDarkMode" />
           <Button label="Change Primary Colors" @click="changePrimaryColor" />
-          <span class="dark:text-oc-primary">dark:text-oc-primary</span>
         </div>
       </section>
 
@@ -170,6 +169,9 @@ const changePrimaryColor = () => {
             <div class="h-[50px] bg-oc-error-400 rounded border"></div>
             <div class="h-[50px] bg-oc-error-500 rounded border"></div>
           </div>
+          <div class="w-full">
+            
+          </div>
         </div>
       </section>
     </section>
@@ -207,7 +209,7 @@ const changePrimaryColor = () => {
       #f7f7f7 100%);
 }
 
-.dark-mode .teal-primary-color {
+.dark .teal-primary-color {
   --oc-primary-500: #f0fdfa;
   --oc-primary-400: #ccfbf1;
   --oc-primary-300: #99f6e4;

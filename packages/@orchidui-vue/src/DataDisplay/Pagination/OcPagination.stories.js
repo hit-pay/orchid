@@ -38,15 +38,6 @@ export const pagination = {
                 v-model="currentPage"
             />
           </Theme>
-          <Theme class="dark" class="flex gap-3 items-center mb-3">
-            <Pagination
-                :max-page="args.maxPage"
-                :size="args.size"
-                :totalVisible="args.totalVisible"
-                :isRounded="args.isRounded"
-                v-model="currentPage"
-            />
-          </Theme>
         `,
   }),
 };

@@ -37,7 +37,7 @@
 @tailwind utilities;
 
 
-body{
+body, .docs-story{
     color: var(--oc-text-500);
     background-color: var(--oc-background-light);
 }

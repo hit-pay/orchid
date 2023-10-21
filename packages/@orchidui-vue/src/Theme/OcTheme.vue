@@ -8,15 +8,18 @@ const props = defineProps({
   }
 })
 watch(() => props.colorMode, () => {
-    if (props.colorMode === 'dark') {
+    let params = new URL(location.href);  // TODO : improvment for storybook
+    let storybookGlobalsThemes = params.searchParams.get('globals')
+    if (props.colorMode === 'dark' || storybookGlobalsThemes?.includes('theme:dark')) {
       document.querySelector('body').setAttribute("class", 'dark')
     } else {
       document.querySelector('body').setAttribute("class", 'light')
-    }},{immediate:true});
+    }
+  },{immediate:true});
 </script>
 
 <template>
-  <main class="bg-oc-bg-light text-oc-text-500">
+  <main class="orchid-ui bg-oc-bg-light text-oc-text-500">
     <slot />
   </main>
 </template>
