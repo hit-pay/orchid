@@ -7,12 +7,9 @@ import TableActions from "./OcTableActions.vue";
 import TableCellContent from "./OcTableCellContent.vue";
 import TableActionSearch from "./OcTableActionSearch.vue";
 import TableSearchFor from "./OcTableSearchFor.vue";
-
+import TableActionFilter from "./OcTableActionFilter.vue"
 const TableBulkActions = defineAsyncComponent(() =>
   import("./OcTableBulkActions.vue"),
-);
-const TableActionFilter = defineAsyncComponent(() =>
-  import("./OcTableActionFilter.vue"),
 );
 
 export {

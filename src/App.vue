@@ -249,6 +249,7 @@
             <PhoneInput
                 v-model:country-code="phoneCode"
                 v-model:phone-number="phone"
+                :country-codes="args.countryCodes"
                 :key="args.initialCountryCode"
                 :valid-regex="args.validRegex"
                 :isInlineLabel="args.isInlineLabel"
@@ -335,6 +336,7 @@
 </template>
 
 <script setup>
+import countryCodes from "@orchid/countryCodes.js";
 import {
   Accordion,
   Button,
@@ -364,7 +366,8 @@ const args =  {
   validRegex: "^[+]?[(]?[0-9]{3}[)]?[-s.]?[0-9]{3}[-s.]?[0-9]{4,6}$",
   isInlineLabel: false,
   isDisabled: false,
-  label: ""
+  label: "",
+  countryCodes: countryCodes
 }
 
 const phone = ref("");

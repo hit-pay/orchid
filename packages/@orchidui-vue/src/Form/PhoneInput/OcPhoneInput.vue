@@ -1,9 +1,9 @@
 <script setup>
-import countryCodes from "./countryCodes.js";
 import { Dropdown, Input, Icon} from "@orchid";
 import { onMounted, ref } from "vue";
 
 const props = defineProps({
+  countryCodes: Array,
   validRegex: {
     type: String,
     default: "",
@@ -26,7 +26,7 @@ const emit = defineEmits({
 const selectedCountryIso = ref(props.initialCountryCode);
 
 const getCountryObject = (iso) =>
-  countryCodes.find(
+  props.countryCodes.find(
     (country) => country.iso.toLowerCase() === iso.toLowerCase(),
   ) || null;
 const getCountryCode = (iso) => getCountryObject(iso)?.code || "";
