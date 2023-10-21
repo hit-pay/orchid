@@ -73,8 +73,22 @@
             <div class="h-[50px] bg-oc-primary-400 rounded border"></div>
             <div class="h-[50px] bg-oc-primary-500 rounded border"></div>
           </div>
+
           <h2>
-            Color Accent 1 (Purple)
+            Color Accent 1 (Dark Blue)
+          </h2>
+          <div class="w-full grid grid-cols-3 md:grid-cols-8 gap-3">
+            <div class="h-[50px] bg-oc-accent-1-50-tr rounded border"></div>
+            <div class="h-[50px] bg-oc-accent-1-50 rounded border"></div>
+            <div class="h-[50px] bg-oc-accent-1-100 rounded border"></div>
+            <div class="h-[50px] bg-oc-accent-1-200 rounded border"></div>
+            <div class="h-[50px] bg-oc-accent-1-300 rounded border"></div>
+            <div class="h-[50px] bg-oc-accent-1-400 rounded border"></div>
+            <div class="h-[50px] bg-oc-accent-1-500 rounded border"></div>
+            <div class="h-[50px] bg-oc-accent-1-600 rounded border"></div>
+          </div>
+          <h2>
+            Color Accent 2 (Purple)
           </h2>
           <div class="w-full grid grid-cols-3 md:grid-cols-7 gap-3">
             <div class="h-[50px] bg-oc-accent-2-50-tr rounded border"></div>
@@ -86,7 +100,7 @@
             <div class="h-[50px] bg-oc-accent-2-500 rounded border"></div>
           </div>
           <h2>
-            Color Accent 2 (Red)
+            Color Accent 3 (Red)
           </h2>
           <div class="w-full grid grid-cols-3 md:grid-cols-7 gap-3">
             <div class="h-[50px] bg-oc-accent-3-50-tr rounded border"></div>
@@ -96,19 +110,6 @@
             <div class="h-[50px] bg-oc-accent-3-300 rounded border"></div>
             <div class="h-[50px] bg-oc-accent-3-400 rounded border"></div>
             <div class="h-[50px] bg-oc-accent-3-500 rounded border"></div>
-          </div>
-          <h2>
-            Color Accent 3 (Dark Blue)
-          </h2>
-          <div class="w-full grid grid-cols-3 md:grid-cols-8 gap-3">
-            <div class="h-[50px] bg-oc-accent-1-50-tr rounded border"></div>
-            <div class="h-[50px] bg-oc-accent-1-50 rounded border"></div>
-            <div class="h-[50px] bg-oc-accent-1-100 rounded border"></div>
-            <div class="h-[50px] bg-oc-accent-1-200 rounded border"></div>
-            <div class="h-[50px] bg-oc-accent-1-300 rounded border"></div>
-            <div class="h-[50px] bg-oc-accent-1-400 rounded border"></div>
-            <div class="h-[50px] bg-oc-accent-1-500 rounded border"></div>
-            <div class="h-[50px] bg-oc-accent-1-600 rounded border"></div>
           </div>
           <h2>
             Color Success
