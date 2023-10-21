@@ -1,15 +1,12 @@
 @import 'https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap';
 @import './scss/variables.scss';
 @import './scss/components.scss';
-body{
-    //  default
-    color: var(--oc-text-500);
-    background-color: var(--oc-background-light);
-}
+@import './scss/transition.scss';
 @tailwind base;
 @layer base {
-    main {
+    body {
         font-family: 'Inter', sans-serif;
+        @apply text-base;
     }
     h1 {
         @apply text-xl;
@@ -34,13 +31,13 @@ body{
     h6 {
         @apply text-xs;
     }
-
-    body {
-        @apply text-base;
-    }
 }
 
 @tailwind components;
 @tailwind utilities;
 
-@import './scss/transition.scss';
+
+body{
+    color: var(--oc-text-500);
+    background-color: var(--oc-background-light);
+}

@@ -16,7 +16,7 @@ watch(() => props.colorMode, () => {
 </script>
 
 <template>
-  <main>
+  <main class="bg-oc-bg-light text-oc-text-500">
     <slot />
   </main>
 </template>
