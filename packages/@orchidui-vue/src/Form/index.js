@@ -11,3 +11,5 @@ export * from "./RadioGroup/OcRadioGroup.js";
 export * from "./RangeInput/OcRangeInput.js";
 export * from "./Select/OcSelect.js";
 export * from "./Toggle/OcToggle.js";
+export * from "./LinkInput/OcLinkInput.js";
+export * from "./TextArea/OcTextArea.js";
