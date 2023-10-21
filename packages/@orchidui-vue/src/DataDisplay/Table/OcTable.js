@@ -3,16 +3,21 @@ import { defineAsyncComponent } from "vue";
 import Table from "./OcTable.vue";
 import TableCell from "./OcTableCell.vue";
 
-const TableCellContent = defineAsyncComponent(() =>
-  import("./OcTableCellContent.vue"),
-);
+
 
 import TableHeader from "./OcTableHeader.vue";
 import TableActions from "./OcTableActions.vue";
+import TableCellContent from "./OcTableCellContent.vue";
 import TableActionSearch from "./OcTableActionSearch.vue";
 import TableSearchFor from "./OcTableSearchFor.vue";
-import TableBulkActions from './OcTableBulkActions.vue'
-import TableActionFilter from './OcTableActionFilter.vue'
+
+const TableBulkActions = defineAsyncComponent(() =>
+  import("./OcTableBulkActions.vue"),
+);
+const TableActionFilter = defineAsyncComponent(() =>
+  import("./OcTableActionFilter.vue"),
+);
+
 export {
   Table,
   TableActions,
