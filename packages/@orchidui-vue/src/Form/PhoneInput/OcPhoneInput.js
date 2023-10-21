@@ -1,5 +1,2 @@
-import { defineAsyncComponent } from "vue";
-const PhoneInput = defineAsyncComponent(() =>
-  import("./OcPhoneInput.vue"),
-);
+import  PhoneInput from "./OcPhoneInput.vue"
 export { PhoneInput };
