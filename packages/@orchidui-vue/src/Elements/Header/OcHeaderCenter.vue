@@ -9,7 +9,7 @@ defineEmits(['back'])
 <template>
   <div class="flex items-center">
       <slot >
-          <span v-if="isSaved" class="text-oc-text-100 flex items-center cursor-pointer">
+           <span v-if="isSaved" @click="$emit('back')" class="text-oc-text-100 flex items-center cursor-pointer">
               <Icon name="chevron-down" class="rotate-90" />
               Back
             </span>
