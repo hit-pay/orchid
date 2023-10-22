@@ -1,3 +1,3 @@
-Orchid UI
+# ORCHID UI
 
-# RULES
+UI Library by Hitpay
