@@ -1,10 +1,6 @@
 <script setup>
-import { defineAsyncComponent, onMounted, ref } from "vue";
-
-const Input = defineAsyncComponent(() =>
-  import("../../Form/Input/OcInput.vue"),
-);
-
+import { onMounted, ref } from "vue";
+import { Input } from '@orchid'
 const slider = ref();
 
 const inputStart = ref();

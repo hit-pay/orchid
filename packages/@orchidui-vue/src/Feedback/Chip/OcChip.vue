@@ -1,28 +1,8 @@
-<template>
-  <span
-    class="rounded-full flex items-center gap-x-3 py-1 px-3 text-sm leading-[20px]"
-    :class="className"
-  >
-    <template v-if="label">{{ label }}</template>
-    <slot v-else />
-    <Icon
-      v-if="closable"
-      width="18"
-      height="18"
-      :class="iconColor"
-      name="filled-x-circle"
-      class="cursor-pointer"
-      @click.stop="$emit('remove')"
-    />
-  </span>
-</template>
+
 
 <script setup>
-import { computed, defineAsyncComponent } from "vue";
-
-const Icon = defineAsyncComponent(() =>
-  import("../../MediaAndIcons/Icon/OcIcon.vue"),
-);
+import { computed } from "vue";
+import { Icon  } from '@orchid'
 const props = defineProps({
   variant: {
     type: String,
@@ -96,3 +76,22 @@ const iconColor = computed(() => {
   return className;
 });
 </script>
+
+<template>
+  <span
+    class="rounded-full flex items-center gap-x-3 py-1 px-3 text-sm leading-[20px]"
+    :class="className"
+  >
+    <template v-if="label">{{ label }}</template>
+    <slot v-else />
+    <Icon
+      v-if="closable"
+      width="18"
+      height="18"
+      :class="iconColor"
+      name="filled-x-circle"
+      class="cursor-pointer"
+      @click.stop="$emit('remove')"
+    />
+  </span>
+</template>

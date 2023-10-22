@@ -1,4 +1,4 @@
-import Theme from "./OcTheme.vue";
+import {Theme} from "@orchid";
 
 export default {
   component: Theme,

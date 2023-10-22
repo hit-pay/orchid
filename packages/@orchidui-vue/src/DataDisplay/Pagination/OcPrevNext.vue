@@ -1,7 +1,6 @@
 <script setup>
-import Icon from "../../MediaAndIcons/Icon/OcIcon.vue";
+import { Icon } from "@orchid";
 import { computed } from "vue";
-
 defineProps({
   disabled: Boolean,
   isNext: Boolean,

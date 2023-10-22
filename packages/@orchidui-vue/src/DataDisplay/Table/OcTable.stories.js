@@ -1,9 +1,11 @@
-import Theme from "../../Theme/OcTheme.vue";
-import Table from "./OcTable.vue";
-import Chip from "../../Feedback/Chip/OcChip.vue";
-import Icon from "../../MediaAndIcons/Icon/OcIcon.vue";
-import Toggle from "../../Form/Toggle/OcToggle.vue";
-import TableCellContent from "./OcTableCellContent.vue";
+import {
+  Theme, 
+  Table, 
+  Chip, 
+  Icon, 
+  Toggle, 
+  TableCellContent
+} from "@orchid";
 
 export default {
   component: Table,

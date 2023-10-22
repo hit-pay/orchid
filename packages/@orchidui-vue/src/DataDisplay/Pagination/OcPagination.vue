@@ -1,8 +1,6 @@
 <script setup>
-import PrevNext from "./OcPrevNext.vue";
-import PaginationNumber from "./OcPaginationNumber.vue";
+import { PrevNext, PaginationNumber} from "@orchid";
 import { computed } from "vue";
-
 const props = defineProps({
   maxPage: {
     type: [String, Number],

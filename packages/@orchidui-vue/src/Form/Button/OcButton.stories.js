@@ -1,5 +1,4 @@
-import Button from "./OcButton.vue";
-import Theme from "../../Theme/OcTheme.vue";
+import {Theme, Button} from "@orchid";
 
 export default {
   component: Button,

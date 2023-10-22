@@ -1,5 +1,4 @@
-import Tooltip from "./OcTooltip.vue";
-import Theme from "../../Theme/OcTheme.vue";
+import {Theme ,Tooltip} from "@orchid";
 
 export default {
   component: Tooltip,

@@ -1,6 +1,5 @@
 <script setup>
-import Chip from "../../Feedback/Chip/OcChip.vue";
-import PrimaryActions from "./OcPrimaryActions.vue";
+import { Chip, PrimaryActions } from "@orchid";
 
 const props = defineProps({
   mainLink: { type: String, default: "" },

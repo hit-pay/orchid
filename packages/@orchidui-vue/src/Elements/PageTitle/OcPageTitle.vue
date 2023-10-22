@@ -1,7 +1,7 @@
 <script setup>
 import Title from "./OcTitle.vue";
 import Right from "./OcRight.vue";
-import AdditionalContent from "./OcAdditionalContent.vue";
+import { AdditionalContent } from "@orchid";
 
 defineProps({
   title: { type: String, required: true },

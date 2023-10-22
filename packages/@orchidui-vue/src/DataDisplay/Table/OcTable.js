@@ -1,10 +1,12 @@
 import Table from "./OcTable.vue";
 import TableCell from "./OcTableCell.vue";
-import TableCellContent from "./OcTableCellContent.vue";
 import TableHeader from "./OcTableHeader.vue";
 import TableActions from "./OcTableActions.vue";
+import TableCellContent from "./OcTableCellContent.vue";
 import TableActionSearch from "./OcTableActionSearch.vue";
 import TableSearchFor from "./OcTableSearchFor.vue";
+import TableActionFilter from "./OcTableActionFilter.vue";
+import TableBulkActions from "./OcTableBulkActions.vue";
 
 export {
   Table,
@@ -14,4 +16,6 @@ export {
   TableCell,
   TableHeader,
   TableSearchFor,
+  TableBulkActions,
+  TableActionFilter
 };

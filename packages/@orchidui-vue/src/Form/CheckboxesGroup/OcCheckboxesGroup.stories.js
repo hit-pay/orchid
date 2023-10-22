@@ -1,5 +1,5 @@
-import CheckboxesGroup from "./OcCheckboxesGroup.vue";
-import Theme from "../../Theme/OcTheme.vue";
+
+import {Theme, CheckboxesGroup } from "@orchid";
 import { ref, watch } from "vue";
 
 export default {

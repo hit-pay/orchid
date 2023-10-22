@@ -1,5 +1,5 @@
-import Avatar from "./OcAvatar.vue";
-import Theme from "../../Theme/OcTheme.vue";
+
+import { Theme, Avatar } from "@orchid";
 import { ref } from "vue";
 
 export default {

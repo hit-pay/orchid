@@ -1,8 +1,6 @@
 <script setup>
-import { computed, defineAsyncComponent } from "vue";
-
-const Radio = defineAsyncComponent(() => import("../Radio/OcRadio.vue"));
-
+import { computed } from "vue";
+import { Radio  } from '@orchid'
 defineProps({
   alignment: {
     type: String,

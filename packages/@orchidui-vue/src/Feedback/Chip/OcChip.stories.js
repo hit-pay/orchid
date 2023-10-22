@@ -1,6 +1,4 @@
-import Chip from "./OcChip.vue";
-import Theme from "../../Theme/OcTheme.vue";
-
+import { Theme, Chip} from "@orchid";
 export default {
   component: Chip,
   tags: ["autodocs"],

@@ -1,5 +1,5 @@
 <script setup>
-import BaseInput from "../BaseInput/OcBaseInput.vue";
+import { BaseInput } from "@orchid";
 import { ref } from "vue";
 
 const props = defineProps({

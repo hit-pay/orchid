@@ -1,5 +1,4 @@
-import Radio from "./OcRadio.vue";
-import Theme from "../../Theme/OcTheme.vue";
+import { Theme, Radio} from "@orchid";
 
 export default {
   component: Radio,

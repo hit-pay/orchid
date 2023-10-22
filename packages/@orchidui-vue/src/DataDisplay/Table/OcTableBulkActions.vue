@@ -1,7 +1,5 @@
 <script setup>
-import TableHeader from "./OcTableHeader.vue";
-import Button from "../../Form/Button/OcButton.vue";
-
+import { Button, TableHeader } from "@orchid";
 defineEmits({
   publish: [],
   unPublish: [],

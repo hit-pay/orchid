@@ -1,9 +1,6 @@
 <script setup>
-import { computed, defineAsyncComponent } from "vue";
-
-const Checkbox = defineAsyncComponent(() =>
-  import("../../Form/Checkbox/OcCheckbox.vue"),
-);
+import { computed } from "vue";
+import { Checkbox } from '@orchid'
 
 const Variants = {
   TEXT: "text",

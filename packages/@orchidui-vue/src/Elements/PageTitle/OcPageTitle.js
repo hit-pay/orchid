@@ -1,3 +1,5 @@
 import PageTitle from "./OcPageTitle.vue";
+import PrimaryActions from "./OcPrimaryActions.vue";
+import AdditionalContent from "./OcAdditionalContent.vue";
 
-export { PageTitle };
+export { PageTitle, PrimaryActions, AdditionalContent };

@@ -1,8 +1,5 @@
 <script setup>
-import Icon from "../../MediaAndIcons/Icon/OcIcon.vue";
-import Tooltip from "../../Overlay/Tooltip/OcTooltip.vue";
-import Dropdown from "../../Overlay/Dropdown/OcDropdown.vue";
-import DropdownItem from "../../Overlay/Dropdown/OcDropdownItem.vue";
+import { Icon, Tooltip, Dropdown, DropdownItem } from "@orchid";
 import { ref } from "vue";
 
 defineProps({

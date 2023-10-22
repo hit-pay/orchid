@@ -1,5 +1,6 @@
-import Theme from "../../Theme/OcTheme.vue";
-import PhoneInput from "./OcPhoneInput.vue";
+
+import { Theme, PhoneInput} from "@orchid";
+import countryCodes from "@orchid/countryCodes.js";
 import { ref } from "vue";
 
 export default {
@@ -23,6 +24,7 @@ export const Default = {
     isInlineLabel: false,
     isDisabled: false,
     label: "",
+    countryCodes: countryCodes
   },
   render: (args) => ({
     components: { Theme, PhoneInput },
@@ -36,6 +38,7 @@ export const Default = {
             <PhoneInput
                 v-model:country-code="phoneCode"
                 v-model:phone-number="phone"
+                :country-codes="args.countryCodes"
                 :key="args.initialCountryCode"
                 :valid-regex="args.validRegex"
                 :isInlineLabel="args.isInlineLabel"

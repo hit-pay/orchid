@@ -1,12 +1,6 @@
 <script setup>
-import { defineAsyncComponent, ref } from "vue";
-
-const Button = defineAsyncComponent(() =>
-  import("../../Form/Button/OcButton.vue"),
-);
-const Input = defineAsyncComponent(() =>
-  import("../../Form/Input/OcInput.vue"),
-);
+import { ref } from "vue";
+import { Button,  Input } from '@orchid'
 defineEmits({
   addQuery: [],
 });

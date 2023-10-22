@@ -1,5 +1,4 @@
-import Sidebar from "./OcSidebar.vue";
-import Theme from "../../Theme/OcTheme.vue";
+import { Theme, Sidebar }from "@orchid";
 
 import {
   PAYMENTS_SIDEBAR_GROUP,

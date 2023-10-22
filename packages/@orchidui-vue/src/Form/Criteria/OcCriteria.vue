@@ -1,14 +1,10 @@
 <script setup>
-import { defineAsyncComponent } from "vue";
-
+import { Icon } from '@orchid'
 defineProps({
   modelValue: Boolean,
   label: String,
 });
 
-const Icon = defineAsyncComponent(() =>
-  import("../../MediaAndIcons/Icon/OcIcon.vue"),
-);
 </script>
 
 <template>

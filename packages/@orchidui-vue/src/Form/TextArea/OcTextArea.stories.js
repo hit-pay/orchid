@@ -1,5 +1,4 @@
-import Theme from "../../Theme/OcTheme.vue";
-import TextArea from "./OcTextArea.vue";
+import {Theme, TextArea} from "@orchid";
 import { ref } from "vue";
 
 export default {

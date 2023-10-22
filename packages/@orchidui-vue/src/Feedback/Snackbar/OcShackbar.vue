@@ -1,10 +1,5 @@
 <script setup>
-import { defineAsyncComponent } from "vue";
-
-const Icon = defineAsyncComponent(() =>
-  import("../../MediaAndIcons/Icon/OcIcon.vue"),
-);
-
+import { Icon } from '@orchid'
 defineProps({
   color: {
     type: String,

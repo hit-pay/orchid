@@ -1,5 +1,4 @@
-import Toggle from "./OcToggle.vue";
-import Theme from "../../Theme/OcTheme.vue";
+import {Theme, Toggle} from "@orchid";
 import { ref } from "vue";
 
 export default {

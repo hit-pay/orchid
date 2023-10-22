@@ -1,24 +1,6 @@
 <script setup>
-import BaseInput from "../BaseInput/OcBaseInput.vue";
-import { computed, ref, defineAsyncComponent } from "vue";
-
-const Input = defineAsyncComponent(() =>
-  import("../../Form/Input/OcInput.vue"),
-);
-const Option = defineAsyncComponent(() => import("./OcOption.vue"));
-const Icon = defineAsyncComponent(() =>
-  import("../../MediaAndIcons/Icon/OcIcon.vue"),
-);
-const Chip = defineAsyncComponent(() =>
-  import("../../Feedback/Chip/OcChip.vue"),
-);
-const Button = defineAsyncComponent(() =>
-  import("../../Form/Button/OcButton.vue"),
-);
-const Dropdown = defineAsyncComponent(() =>
-  import("../../Overlay/Dropdown/OcDropdown.vue"),
-);
-
+import { BaseInput, Input, Option, Icon, Chip, Button, Dropdown   } from "@orchid";
+import { computed, ref } from "vue";
 const props = defineProps({
   label: String,
   hint: String,

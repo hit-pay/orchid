@@ -1,6 +1,4 @@
-import Shackbar from "./OcShackbar.vue";
-import Theme from "../../Theme/OcTheme.vue";
-
+import { Theme, Shackbar } from "@orchid";
 export default {
   component: Shackbar,
   tags: ["autodocs"],
