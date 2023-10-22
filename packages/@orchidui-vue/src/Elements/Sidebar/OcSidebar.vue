@@ -200,7 +200,7 @@ onMounted(() => {
             </div>
             <div v-if="isExpanded" class="relative flex flex-col">
               <div class="absolute border-l left-[27px] bottom-[17px] h-full" />
-              <OcSidebarSubmenu
+              <SidebarSubmenu
                 v-if="menu.children"
                 :menu="menu"
                 :class="state.expanded.includes(menu.path) && 'mt-3'"
@@ -214,7 +214,7 @@ onMounted(() => {
                     :is-expanded="isExpanded"
                   />
                 </template>
-              </OcSidebarSubmenu>
+              </SidebarSubmenu>
             </div>
           </div>
         </template>
