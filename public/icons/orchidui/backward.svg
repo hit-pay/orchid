@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg"  id="orchid"  fill="currentColor" viewBox="0 0 24 25">
+  <g  clip-path="url(#a)">
+    <g >
+      <path fill="currentColor" d="M6.046 12.32A7.5 7.5 0 0 1 20 16.143a1 1 0 1 0 2 0 9.5 9.5 0 0 0-17.22-5.536L4.243 7.56a1 1 0 1 0-1.97.348l1.042 5.908a1 1 0 0 0 .412.646 1.1 1.1 0 0 0 .975.125l5.68-1.001a1 1 0 1 0-.347-1.97l-3.989.703Z" />
+    </g>
+  </g>
+  <defs>
+    <clipPath id="a" >
+      <path fill="#fff" d="M0 .644h24v24H0z"/>
+    </clipPath>
+  </defs>
+</svg>
