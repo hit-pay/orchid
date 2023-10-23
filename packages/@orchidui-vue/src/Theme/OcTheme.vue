@@ -1,21 +1,27 @@
-
 <script setup>
-import { watch } from 'vue';
+import { watch } from "vue";
 const props = defineProps({
   colorMode: {
-      type: String,
-      default: "light",
-  }
-})
-watch(() => props.colorMode, () => {
-    let params = new URL(location.href);  // TODO : improvment for storybook
-    let storybookGlobalsThemes = params.searchParams.get('globals')
-    if (props.colorMode === 'dark' || storybookGlobalsThemes?.includes('theme:dark')) {
-      document.querySelector('body').setAttribute("class", 'dark')
+    type: String,
+    default: "light",
+  },
+});
+watch(
+  () => props.colorMode,
+  () => {
+    let params = new URL(location.href); // TODO : improvment for storybook
+    let storybookGlobalsThemes = params.searchParams.get("globals");
+    if (
+      props.colorMode === "dark" ||
+      storybookGlobalsThemes?.includes("theme:dark")
+    ) {
+      document.querySelector("body").setAttribute("class", "dark");
     } else {
-      document.querySelector('body').setAttribute("class", 'light')
+      document.querySelector("body").setAttribute("class", "light");
     }
-  },{immediate:true});
+  },
+  { immediate: true },
+);
 </script>
 
 <template>

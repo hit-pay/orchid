@@ -1,11 +1,4 @@
-import {
-  Theme, 
-  Table, 
-  Chip, 
-  Icon, 
-  Toggle, 
-  TableCellContent
-} from "@orchid";
+import { Theme, Table, Chip, Icon, Toggle, TableCellContent } from "@orchid";
 
 export default {
   component: Table,

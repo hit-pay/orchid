@@ -1,4 +1,4 @@
-import {Theme, Dropdown, DropdownItem } from "@orchid";
+import { Theme, Dropdown, DropdownItem } from "@orchid";
 
 export default {
   component: Dropdown,

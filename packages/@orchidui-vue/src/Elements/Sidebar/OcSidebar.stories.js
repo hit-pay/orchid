@@ -1,4 +1,4 @@
-import { Theme, Sidebar }from "@orchid";
+import { Theme, Sidebar } from "@orchid";
 
 import {
   PAYMENTS_SIDEBAR_GROUP,

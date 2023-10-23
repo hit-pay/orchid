@@ -1,8 +1,5 @@
 <script setup>
-import {
-  Button,
-  Theme,
-} from "@orchid";
+import { Button, Theme } from "@orchid";
 import { reactive, computed } from "vue";
 
 let state = reactive({
@@ -30,8 +27,12 @@ const changePrimaryColor = () => {
 </script>
 <template>
   <Theme :color-mode="state.darkMode ? 'dark' : 'light'" :class="primaryColor">
-    <section class="container flex flex-col items-start min-h-screen gap-y-4 p-3 md:p-8 mx-auto">
-      <section class="w-full p-8 flex justify-between items-center mt-8 rounded md:mt-0 bg-oc-primary-100">
+    <section
+      class="container flex flex-col items-start min-h-screen gap-y-4 p-3 md:p-8 mx-auto"
+    >
+      <section
+        class="w-full p-8 flex justify-between items-center mt-8 rounded md:mt-0 bg-oc-primary-100"
+      >
         <!-- Theme settings -->
         <div class="flex items-center flex-wrap gap-3">
           <h1 class="w-full mb-3 font-medium">Theme Settings</h1>
@@ -42,17 +43,18 @@ const changePrimaryColor = () => {
 
       <section class="w-full">
         <div class="grid gap-3 md:p-8 rounded bg-oc-bg-dark">
-          <h1 class="flex  mb-3 font-bold">Orchid UI Playground</h1>
-          <div class="flex  gap-3 mb-3">
+          <h1 class="flex mb-3 font-bold">Orchid UI Playground</h1>
+          <div class="flex gap-3 mb-3">
             <a href="/docs" class="text-oc-primary"> Documentation </a> /
-            <a href="https://storybook-orchidui.vercel.app/" class="text-oc-primary">
+            <a
+              href="https://storybook-orchidui.vercel.app/"
+              class="text-oc-primary"
+            >
               Storybook
             </a>
           </div>
           <!-- COLORS -->
-          <h2>
-            Color Gray
-          </h2>
+          <h2>Color Gray</h2>
           <div class="w-full grid grid-cols-3 md:grid-cols-11 gap-3">
             <div class="h-[50px] bg-oc-gray-10 rounded border"></div>
             <div class="h-[50px] bg-oc-gray-50 rounded border"></div>
@@ -66,9 +68,7 @@ const changePrimaryColor = () => {
             <div class="h-[50px] bg-oc-gray-800 rounded border"></div>
             <div class="h-[50px] bg-oc-gray-900 rounded border"></div>
           </div>
-          <h2>
-            Color Text
-          </h2>
+          <h2>Color Text</h2>
           <div class="w-full grid grid-cols-3 md:grid-cols-5 gap-3">
             <div class="h-[50px] bg-oc-text-100 rounded border"></div>
             <div class="h-[50px] bg-oc-text-200 rounded border"></div>
@@ -76,16 +76,12 @@ const changePrimaryColor = () => {
             <div class="h-[50px] bg-oc-text-400 rounded border"></div>
             <div class="h-[50px] bg-oc-text-500 rounded border"></div>
           </div>
-          <h2>
-            Color Background
-          </h2>
+          <h2>Color Background</h2>
           <div class="w-full grid md:grid-cols-2 gap-3">
             <div class="h-[50px] bg-oc-bg-light rounded border"></div>
             <div class="h-[50px] bg-oc-bg-dark rounded border"></div>
           </div>
-          <h2>
-            Color Primary
-          </h2>
+          <h2>Color Primary</h2>
           <div class="w-full grid grid-cols-3 md:grid-cols-7 gap-3">
             <div class="h-[50px] bg-oc-primary-50-tr rounded border"></div>
             <div class="h-[50px] bg-oc-primary-50 rounded border"></div>
@@ -96,9 +92,7 @@ const changePrimaryColor = () => {
             <div class="h-[50px] bg-oc-primary-500 rounded border"></div>
           </div>
 
-          <h2>
-            Color Accent 1 (Dark Blue)
-          </h2>
+          <h2>Color Accent 1 (Dark Blue)</h2>
           <div class="w-full grid grid-cols-3 md:grid-cols-8 gap-3">
             <div class="h-[50px] bg-oc-accent-1-50-tr rounded border"></div>
             <div class="h-[50px] bg-oc-accent-1-50 rounded border"></div>
@@ -109,9 +103,7 @@ const changePrimaryColor = () => {
             <div class="h-[50px] bg-oc-accent-1-500 rounded border"></div>
             <div class="h-[50px] bg-oc-accent-1-600 rounded border"></div>
           </div>
-          <h2>
-            Color Accent 2 (Purple)
-          </h2>
+          <h2>Color Accent 2 (Purple)</h2>
           <div class="w-full grid grid-cols-3 md:grid-cols-7 gap-3">
             <div class="h-[50px] bg-oc-accent-2-50-tr rounded border"></div>
             <div class="h-[50px] bg-oc-accent-2-50 rounded border"></div>
@@ -121,9 +113,7 @@ const changePrimaryColor = () => {
             <div class="h-[50px] bg-oc-accent-2-400 rounded border"></div>
             <div class="h-[50px] bg-oc-accent-2-500 rounded border"></div>
           </div>
-          <h2>
-            Color Accent 3 (Red)
-          </h2>
+          <h2>Color Accent 3 (Red)</h2>
           <div class="w-full grid grid-cols-3 md:grid-cols-7 gap-3">
             <div class="h-[50px] bg-oc-accent-3-50-tr rounded border"></div>
             <div class="h-[50px] bg-oc-accent-3-50 rounded border"></div>
@@ -133,9 +123,7 @@ const changePrimaryColor = () => {
             <div class="h-[50px] bg-oc-accent-3-400 rounded border"></div>
             <div class="h-[50px] bg-oc-accent-3-500 rounded border"></div>
           </div>
-          <h2>
-            Color Success
-          </h2>
+          <h2>Color Success</h2>
           <div class="w-full grid grid-cols-3 md:grid-cols-7 gap-3">
             <div class="h-[50px] bg-oc-success-50-tr rounded border"></div>
             <div class="h-[50px] bg-oc-success-50 rounded border"></div>
@@ -145,9 +133,7 @@ const changePrimaryColor = () => {
             <div class="h-[50px] bg-oc-success-400 rounded border"></div>
             <div class="h-[50px] bg-oc-success-500 rounded border"></div>
           </div>
-          <h2>
-            Color Warning
-          </h2>
+          <h2>Color Warning</h2>
           <div class="w-full grid grid-cols-3 md:grid-cols-7 gap-3">
             <div class="h-[50px] bg-oc-warning-50-tr rounded border"></div>
             <div class="h-[50px] bg-oc-warning-50 rounded border"></div>
@@ -157,9 +143,7 @@ const changePrimaryColor = () => {
             <div class="h-[50px] bg-oc-warning-400 rounded border"></div>
             <div class="h-[50px] bg-oc-warning-500 rounded border"></div>
           </div>
-          <h2>
-            Color Error
-          </h2>
+          <h2>Color Error</h2>
           <div class="w-full grid grid-cols-3 md:grid-cols-7 gap-3">
             <div class="h-[50px] bg-oc-error-50-tr rounded border"></div>
             <div class="h-[50px] bg-oc-error-50 rounded border"></div>
@@ -169,9 +153,7 @@ const changePrimaryColor = () => {
             <div class="h-[50px] bg-oc-error-400 rounded border"></div>
             <div class="h-[50px] bg-oc-error-500 rounded border"></div>
           </div>
-          <div class="w-full">
-            
-          </div>
+          <div class="w-full"></div>
         </div>
       </section>
     </section>
@@ -188,25 +170,35 @@ const changePrimaryColor = () => {
   --oc-primary-400: #14b8a6;
   --oc-primary-500: #0d9488;
 
-  --button-primary-default: linear-gradient(180deg,
-      var(--oc-primary-400) 0%,
-      var(--oc-primary-500) 100%);
-  --button-primary-hover: linear-gradient(180deg,
-      var(--oc-primary-400) 0%,
-      var(--oc-primary-500) 100%);
-  --button-primary-pressed: linear-gradient(180deg,
-      var(--oc-primary-400) 0%,
-      var(--oc-primary-500) 100%);
-  --button-primary-disabled: linear-gradient(180deg,
-      var(--oc-primary-400) 0%,
-      var(--oc-primary-500) 100%);
+  --button-primary-default: linear-gradient(
+    180deg,
+    var(--oc-primary-400) 0%,
+    var(--oc-primary-500) 100%
+  );
+  --button-primary-hover: linear-gradient(
+    180deg,
+    var(--oc-primary-400) 0%,
+    var(--oc-primary-500) 100%
+  );
+  --button-primary-pressed: linear-gradient(
+    180deg,
+    var(--oc-primary-400) 0%,
+    var(--oc-primary-500) 100%
+  );
+  --button-primary-disabled: linear-gradient(
+    180deg,
+    var(--oc-primary-400) 0%,
+    var(--oc-primary-500) 100%
+  );
 
   --button-secondary-default: linear-gradient(180deg, #fff 0%, #f2f2f2 100%);
   --button-secondary-hover: linear-gradient(180deg, #fff 0%, #fafafa 100%);
   --button-secondary-pressed: linear-gradient(180deg, #fafafa 0%, #fff 100%);
-  --button-secondary-disabled: linear-gradient(180deg,
-      #fcfcfc 0%,
-      #f7f7f7 100%);
+  --button-secondary-disabled: linear-gradient(
+    180deg,
+    #fcfcfc 0%,
+    #f7f7f7 100%
+  );
 }
 
 .dark .teal-primary-color {

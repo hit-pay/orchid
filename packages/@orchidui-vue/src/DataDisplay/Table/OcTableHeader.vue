@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from "vue";
-import { Checkbox } from '@orchid'
+import { Checkbox } from "@orchid";
 
 const Variants = {
   TEXT: "text",

@@ -1,5 +1,10 @@
 <script setup>
-import { Tabs, TableHeader, TableActionSearch,TableActionFilter } from "@orchid";
+import {
+  Tabs,
+  TableHeader,
+  TableActionSearch,
+  TableActionFilter,
+} from "@orchid";
 import { ref } from "vue";
 
 defineEmits({

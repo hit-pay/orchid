@@ -17,5 +17,5 @@ export {
   TableHeader,
   TableSearchFor,
   TableBulkActions,
-  TableActionFilter
+  TableActionFilter,
 };

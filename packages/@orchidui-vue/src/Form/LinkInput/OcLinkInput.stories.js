@@ -1,5 +1,4 @@
-
-import { Theme, LinkInput} from "@orchid";
+import { Theme, LinkInput } from "@orchid";
 import { ref } from "vue";
 
 export default {

@@ -1,4 +1,4 @@
-import {Theme ,Tooltip} from "@orchid";
+import { Theme, Tooltip } from "@orchid";
 
 export default {
   component: Tooltip,

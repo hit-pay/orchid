@@ -1,4 +1,4 @@
-import { Theme, Chip} from "@orchid";
+import { Theme, Chip } from "@orchid";
 export default {
   component: Chip,
   tags: ["autodocs"],

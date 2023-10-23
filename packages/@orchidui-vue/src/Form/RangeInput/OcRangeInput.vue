@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref } from "vue";
-import { Input } from '@orchid'
+import { Input } from "@orchid";
 const slider = ref();
 
 const inputStart = ref();

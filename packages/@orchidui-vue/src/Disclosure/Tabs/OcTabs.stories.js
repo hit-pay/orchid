@@ -1,4 +1,4 @@
-import { Theme ,Tabs } from "@orchid";
+import { Theme, Tabs } from "@orchid";
 import { ref } from "vue";
 
 export default {

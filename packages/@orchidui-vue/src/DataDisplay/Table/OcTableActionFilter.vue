@@ -1,5 +1,5 @@
 <script setup>
-import { Button, Input, RangeInput, Dropdown} from '@orchid'
+import { Button, Input, RangeInput, Dropdown } from "@orchid";
 </script>
 
 <template>

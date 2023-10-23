@@ -1,9 +1,7 @@
 # orchid ui
 
-
 https://orchidui.vercel.app
 https://storybook-orchidui.vercel.app
-
 
 # setup
 
