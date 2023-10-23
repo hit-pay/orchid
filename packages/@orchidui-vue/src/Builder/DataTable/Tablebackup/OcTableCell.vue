@@ -45,8 +45,8 @@ const copyToClipboard = async (text) => {
 
 <template>
   <div
-    :class="[variantClass[variant] || 'px-4', isLast ? '' : '']"
-    class="py-3 bg-oc-bg-light group-hover/row:bg-oc-gray-50 items-center"
+    :class="[variantClass[variant] || 'px-4', isLast ? '' : 'border-b']"
+    class="py-3 border-oc-text-200 bg-oc-bg-light group-hover/row:bg-oc-gray-50 items-center"
   >
     <div class="flex" :class="isCopy ? 'justify-between' : 'justify-start'">
       <slot>
@@ -54,13 +54,13 @@ const copyToClipboard = async (text) => {
         <Checkbox
           v-if="variant === Variants.CHECKBOX"
           :model-value="isSelected"
-          class="m-auto"
+          class="mx-auto"
           :class="
             isSelected
               ? 'block'
               : isSimple
               ? ''
-              : 'md:hidden group-hover/row:block'
+              : 'hidden group-hover/row:block'
           "
           @update:model-value="$emit('selected')"
         />
@@ -106,7 +106,7 @@ const copyToClipboard = async (text) => {
         :offset="[0, 10]"
       >
         <Icon
-          class="cursor-pointer w-5 h-5 group-hover/row:opacity-100 opacity-0 ml-2"
+          class="cursor-pointer w-5 h-5 group-hover/row:opacity-100 opacity-0"
           name="copy"
           @click="copyToClipboard(data)"
         />

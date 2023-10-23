@@ -2,7 +2,7 @@
 import { Theme, Sidebar, Header, HeaderLeft, HeaderRight, Icon } from "@orchid";
 import { reactive, computed } from "vue";
 import ThemeSettings from "./ThemeSettings.vue";
-import ExampleDataTableBuilder from "./example/DataTableBuilder.vue";
+import ExampleDataTable from "./example/DataTable.vue";
 import ExampleFormBuilder from "./example/FormBuilder.vue";
 import { ONLINE_STORE_SIDEBAR_GROUP } from "@orchid/Elements/Sidebar/HitpaySidebar.js";
 
@@ -41,12 +41,13 @@ const changePrimaryColor = () => {
       <Header class="w-full">
         <HeaderLeft class="md:w-[260px]">
           <a
-            class="md:w-[102px] flex items-center gap-3 text-oc-accent-1"
+            class="flex items-center gap-3 text-oc-accent-1"
             href="#"
             aria-label="Home Page"
           >
-            <Icon class="mt-1" name="hitpay/logo" width="26" height="28" />
-            <Icon class="mt-3" name="hitpay/hitpay" width="74" height="24" />
+            <span class="font-bold">Orchid UI </span> <span>by</span>
+            <Icon name="hitpay/logo" width="24" height="24" />
+            <Icon class="mt-2" name="hitpay/hitpay" width="74" height="24" />
           </a>
         </HeaderLeft>
         <HeaderRight>
@@ -72,7 +73,7 @@ const changePrimaryColor = () => {
         </Sidebar>
       </div>
       <div class="flex-1 px-[20px] pt-[20px]">
-        <section class="py-5 grid gap-5">
+        <section class="py-5 grid gap-5 items-start">
           <h1 class="flex mb-3 font-bold">Orchid UI Playground</h1>
           <div class="flex gap-3 mb-3">
             <a href="/docs" class="text-oc-primary"> Documentation </a> /
@@ -83,7 +84,7 @@ const changePrimaryColor = () => {
               Storybook
             </a>
           </div>
-          <ExampleDataTableBuilder />
+          <ExampleDataTable />
           <ExampleFormBuilder />
         </section>
       </div>

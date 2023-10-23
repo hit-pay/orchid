@@ -1,4 +1,4 @@
 <script setup></script>
 <template>
-  <div></div>
+  <div>Form builder</div>
 </template>

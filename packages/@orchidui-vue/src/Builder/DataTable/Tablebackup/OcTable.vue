@@ -1,37 +1,66 @@
 <script setup>
-import { TableHeader, TableCell } from "@orchid";
-import { ref, defineEmits } from "vue";
+import {
+  TableActions,
+  TableBulkActions,
+  TableSearchFor,
+  TableHeader,
+  TableCell,
+} from "@orchid";
+import { ref } from "vue";
 
-const props = defineProps({
-  options: Object,
+defineEmits({
+  publish: [],
+  unPublish: [],
+  delete: [],
 });
 
-const emit = defineEmits(["selectRow"]);
-
-const { isSelectable, fields, headers } = props.options;
-
+const props = defineProps({
+  headers: Array,
+  fields: Array,
+  filterTabs: Array,
+  isSelectable: Boolean,
+});
 const selectedRows = ref([]);
+const queries = ref([]);
 const selectRow = (element) => {
   if (selectedRows.value.includes(element)) {
     selectedRows.value = selectedRows.value.filter((e) => e !== element);
   } else {
     selectedRows.value = [...selectedRows.value, element];
   }
-  emit("selectRow", selectAllRows.value);
 };
-
 const selectAllRows = () => {
-  const allRowsSelected = selectedRows.value.length === fields.length;
-  selectedRows.value = allRowsSelected ? [] : [...fields.map((e, i) => i)];
+  const allRowsSelected = selectedRows.value.length === props.fields.length;
+  selectedRows.value = allRowsSelected
+    ? []
+    : [...props.fields.map((e, i) => i)];
+};
+const addQuery = (query) => {
+  if (!query.trim() || queries.value.includes(query)) return;
+  queries.value.push(query);
+};
+const removeQuery = (query) => {
+  queries.value = queries.value.filter((q) => q !== query);
 };
 </script>
 
 <template>
   <div class="flex text-oc-text flex-col rounded border border-oc-gray-200">
-    <div class="flex flex-wrap border-b border-oc-text-200">
+    <TableBulkActions
+      v-if="selectedRows.length"
+      @publish="$emit('publish', selectedRows)"
+      @un-publish="$emit('unPublish', selectedRows)"
+      @delete="$emit('delete', selectedRows)"
+    />
+    <TableActions v-else :tabs="filterTabs" @add-query="addQuery" />
+    <TableSearchFor
+      v-if="queries.length"
+      :queries="queries"
+      @remove-query="removeQuery"
+    />
+    <div class="w-full flex">
       <TableHeader
         v-if="isSelectable"
-        class="w-[40px] md:w-[5%] ml-[3px] md:ml-0"
         variant="checkbox"
         :is-partial="
           selectedRows.length !== fields.length && selectedRows.length > 0
@@ -47,25 +76,16 @@ const selectAllRows = () => {
         :key="header.key"
         :text="header.label"
         :variant="header.headerVariant"
-        :class="header.class"
-        class="hidden md:flex"
       >
         <template #default>
           <slot :name="`header-${header.key}`" />
         </template>
       </TableHeader>
     </div>
-    <div
-      v-for="(field, i) in fields"
-      :key="i"
-      class="flex flex-wrap group/row border-oc-text-200 pl-[54px] md:pl-0"
-      :class="{
-        'border-b': fields.length !== i + 1,
-      }"
-    >
+    <!--   Fields   -->
+    <div v-for="(field, i) in fields" :key="i" class="w-full flex group/row">
       <TableCell
         v-if="isSelectable"
-        class="w-[40px] md:w-[5%] flex justify-center absolute left-0 md:relative"
         :is-last="fields.length === i + 1"
         :is-selected="selectedRows.includes(i)"
         variant="checkbox"
@@ -79,8 +99,6 @@ const selectAllRows = () => {
         :variant="header.variant"
         :is-copy="header.isCopy"
         :data="field[header.key] || ''"
-        class="flex"
-        :class="header.class"
       >
         <template #default>
           <slot
