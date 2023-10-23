@@ -1,10 +1,11 @@
 <script setup>
-import { 
-  TableActions, 
-  TableBulkActions, 
+import {
+  TableActions,
+  TableBulkActions,
   TableSearchFor,
   TableHeader,
-  TableCell } from '@orchid'
+  TableCell,
+} from "@orchid";
 import { ref } from "vue";
 
 defineEmits({
@@ -44,9 +45,7 @@ const removeQuery = (query) => {
 </script>
 
 <template>
-  <div
-    class="flex text-oc-text flex-col rounded border border-oc-gray-200"
-  >
+  <div class="flex text-oc-text flex-col rounded border border-oc-gray-200">
     <TableBulkActions
       v-if="selectedRows.length"
       @publish="$emit('publish', selectedRows)"

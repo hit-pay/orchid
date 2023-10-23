@@ -5,4 +5,11 @@ import HeaderCenter from "./OcHeaderCenter.vue";
 import HeaderRight from "./OcHeaderRight.vue";
 import TabToSelect from "./OcTabToSelect.vue";
 
-export { Header, SubHeader, HeaderLeft, HeaderCenter, HeaderRight, TabToSelect };
+export {
+  Header,
+  SubHeader,
+  HeaderLeft,
+  HeaderCenter,
+  HeaderRight,
+  TabToSelect,
+};

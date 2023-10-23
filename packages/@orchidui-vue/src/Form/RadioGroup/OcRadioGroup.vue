@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from "vue";
-import { Radio  } from '@orchid'
+import { Radio } from "@orchid";
 defineProps({
   alignment: {
     type: String,

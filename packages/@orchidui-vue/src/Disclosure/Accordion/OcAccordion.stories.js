@@ -1,4 +1,4 @@
-import { Theme, Accordion} from "@orchid";
+import { Theme, Accordion } from "@orchid";
 import { ref, watch } from "vue";
 
 export default {

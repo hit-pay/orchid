@@ -1,5 +1,4 @@
-
-import { Theme, PhoneInput} from "@orchid";
+import { Theme, PhoneInput } from "@orchid";
 import countryCodes from "@orchid/countryCodes.js";
 import { ref } from "vue";
 
@@ -24,7 +23,7 @@ export const Default = {
     isInlineLabel: false,
     isDisabled: false,
     label: "",
-    countryCodes: countryCodes
+    countryCodes: countryCodes,
   },
   render: (args) => ({
     components: { Theme, PhoneInput },

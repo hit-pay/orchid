@@ -1,10 +1,9 @@
 <script setup>
-import { Icon } from '@orchid'
+import { Icon } from "@orchid";
 defineProps({
   modelValue: Boolean,
   label: String,
 });
-
 </script>
 
 <template>

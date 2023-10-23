@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import { Button,  Input } from '@orchid'
+import { Button, Input } from "@orchid";
 defineEmits({
   addQuery: [],
 });

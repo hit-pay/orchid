@@ -1,5 +1,5 @@
 <script setup>
-import { Icon } from '@orchid'
+import { Icon } from "@orchid";
 defineProps({
   color: {
     type: String,

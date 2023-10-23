@@ -1,5 +1,5 @@
 <script setup>
-import { Dropdown, Input, Icon} from "@orchid";
+import { Dropdown, Input, Icon } from "@orchid";
 import { onMounted, ref } from "vue";
 
 const props = defineProps({

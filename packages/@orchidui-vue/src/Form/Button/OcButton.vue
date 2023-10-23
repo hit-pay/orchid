@@ -1,7 +1,6 @@
-
 <script setup>
 import { computed, ref } from "vue";
-import { Icon } from '@orchid'
+import { Icon } from "@orchid";
 
 const props = defineProps({
   label: String,

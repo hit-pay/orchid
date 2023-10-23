@@ -1,43 +1,43 @@
-@import 'https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap';
-@import './scss/variables.scss';
-@import './scss/components.scss';
-@import './scss/transition.scss';
+@import "https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap";
+@import "./scss/variables.scss";
+@import "./scss/components.scss";
+@import "./scss/transition.scss";
 @tailwind base;
 @layer base {
-    body {
-        font-family: 'Inter', sans-serif;
-        @apply text-base;
-    }
-    h1 {
-        @apply text-xl;
-    }
+  body {
+    font-family: "Inter", sans-serif;
+    @apply text-base;
+  }
+  h1 {
+    @apply text-xl;
+  }
 
-    h2 {
-        @apply text-lg;
-    }
+  h2 {
+    @apply text-lg;
+  }
 
-    h3 {
-        @apply text-base;
-    }
+  h3 {
+    @apply text-base;
+  }
 
-    h4 {
-        @apply text-sm;
-    }
+  h4 {
+    @apply text-sm;
+  }
 
-    h5 {
-        @apply text-xs;
-    }
+  h5 {
+    @apply text-xs;
+  }
 
-    h6 {
-        @apply text-xs;
-    }
+  h6 {
+    @apply text-xs;
+  }
 }
 
 @tailwind components;
 @tailwind utilities;
 
-
-body, .docs-story{
-    color: var(--oc-text-500);
-    background-color: var(--oc-background-light);
+body,
+.docs-story {
+  color: var(--oc-text-500);
+  background-color: var(--oc-background-light);
 }

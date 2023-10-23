@@ -1,5 +1,13 @@
 <script setup>
-import { BaseInput, Input, Option, Icon, Chip, Button, Dropdown   } from "@orchid";
+import {
+  BaseInput,
+  Input,
+  Option,
+  Icon,
+  Chip,
+  Button,
+  Dropdown,
+} from "@orchid";
 import { computed, ref } from "vue";
 const props = defineProps({
   label: String,

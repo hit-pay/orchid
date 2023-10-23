@@ -1,6 +1,6 @@
 <script setup>
 import { computed, ref } from "vue";
-import { BaseInput, Icon} from "@orchid";
+import { BaseInput, Icon } from "@orchid";
 
 const props = defineProps({
   disabled: {

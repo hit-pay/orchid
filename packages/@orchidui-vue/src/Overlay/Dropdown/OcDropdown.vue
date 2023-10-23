@@ -1,4 +1,3 @@
-
 <script setup>
 import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
 import { clickOutside as vClickOutside } from "../../directives/clickOutside.js"; // Import the directive
@@ -91,7 +90,6 @@ onBeforeUnmount(() => {
     </Transition>
   </div>
 </template>
-
 
 <style scoped lang="scss">
 .fade-enter-active,

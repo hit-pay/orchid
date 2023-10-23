@@ -1,5 +1,5 @@
 <script setup>
-import { Button, Dropdown, DropdownItem , Tooltip } from "@orchid";
+import { Button, Dropdown, DropdownItem, Tooltip } from "@orchid";
 </script>
 <template>
   <div class="flex gap-x-3 items-center">

@@ -1,4 +1,4 @@
-import {Theme, Toggle} from "@orchid";
+import { Theme, Toggle } from "@orchid";
 import { ref } from "vue";
 
 export default {
