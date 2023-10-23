@@ -22,3 +22,5 @@ export * from "./Overlay/Dropdown/OcDropdown.js";
 export * from "./Overlay/Tooltip/OcTooltip.js";
 
 export * from "./Theme/OcTheme.js";
+
+export * from "./Builder/DataTable/OcDataTable.js";

@@ -1,6 +1,10 @@
 <script setup>
-import { Button, Theme } from "@orchid";
+import { Theme, Sidebar, Header, HeaderLeft, HeaderRight, Icon } from "@orchid";
 import { reactive, computed } from "vue";
+import ThemeSettings from "./ThemeSettings.vue";
+import ExampleDataTableBuilder from "./example/DataTableBuilder.vue";
+import ExampleFormBuilder from "./example/FormBuilder.vue";
+import { ONLINE_STORE_SIDEBAR_GROUP } from "@orchid/Elements/Sidebar/HitpaySidebar.js";
 
 let state = reactive({
   darkMode: false,
@@ -8,6 +12,8 @@ let state = reactive({
     teal: `teal-primary-color`,
   },
   primary_color: "",
+  sidebar_menu: ONLINE_STORE_SIDEBAR_GROUP,
+  isExpanded: true,
 });
 
 const primaryColor = computed(() => {
@@ -26,23 +32,47 @@ const changePrimaryColor = () => {
 };
 </script>
 <template>
-  <Theme :color-mode="state.darkMode ? 'dark' : 'light'" :class="primaryColor">
-    <section
-      class="container flex flex-col items-start min-h-screen gap-y-4 p-3 md:p-8 mx-auto"
-    >
-      <section
-        class="w-full p-8 flex justify-between items-center mt-8 rounded md:mt-0 bg-oc-primary-100"
-      >
-        <!-- Theme settings -->
-        <div class="flex items-center flex-wrap gap-3">
-          <h1 class="w-full mb-3 font-medium">Theme Settings</h1>
-          <Button label="Enable Dark Mode" @click="toggleDarkMode" />
-          <Button label="Change Primary Colors" @click="changePrimaryColor" />
-        </div>
-      </section>
-
-      <section class="w-full">
-        <div class="grid gap-3 md:p-8 rounded bg-oc-bg-dark">
+  <Theme
+    class="layout-payment"
+    :color-mode="state.darkMode ? 'dark' : 'light'"
+    :class="primaryColor"
+  >
+    <section class="flex flex-wrap mx-auto px-4 h-screen">
+      <Header class="w-full">
+        <HeaderLeft class="md:w-[260px]">
+          <a
+            class="md:w-[102px] flex items-center gap-3 text-oc-accent-1"
+            href="#"
+            aria-label="Home Page"
+          >
+            <Icon class="mt-1" name="hitpay/logo" width="26" height="28" />
+            <Icon class="mt-3" name="hitpay/hitpay" width="74" height="24" />
+          </a>
+        </HeaderLeft>
+        <HeaderRight>
+          <a href="https://github.com/hit-pay/orchid" target="_blank">
+            <Icon name="github" />
+          </a>
+        </HeaderRight>
+      </Header>
+      <div class="hidden xl:block">
+        <Sidebar
+          title="Orchid UI"
+          class="min-h-full"
+          :sidebar-menu="state.sidebar_menu"
+          :is-expanded="state.isExpanded"
+          @change-expanded="state.isExpanded = $event"
+        >
+          <template #label="{ menu }">
+            <a href="#" class="ml-3">{{ menu.label }}</a>
+          </template>
+          <template #submenu_label="{ submenu }">
+            <a href="#" class="ml-3">{{ submenu.label }}</a>
+          </template>
+        </Sidebar>
+      </div>
+      <div class="flex-1 px-[20px] pt-[20px]">
+        <section class="py-5 grid gap-5">
           <h1 class="flex mb-3 font-bold">Orchid UI Playground</h1>
           <div class="flex gap-3 mb-3">
             <a href="/docs" class="text-oc-primary"> Documentation </a> /
@@ -53,161 +83,16 @@ const changePrimaryColor = () => {
               Storybook
             </a>
           </div>
-          <!-- COLORS -->
-          <h2>Color Gray</h2>
-          <div class="w-full grid grid-cols-3 md:grid-cols-11 gap-3">
-            <div class="h-[50px] bg-oc-gray-10 rounded border"></div>
-            <div class="h-[50px] bg-oc-gray-50 rounded border"></div>
-            <div class="h-[50px] bg-oc-gray-100 rounded border"></div>
-            <div class="h-[50px] bg-oc-gray-200 rounded border"></div>
-            <div class="h-[50px] bg-oc-gray-300 rounded border"></div>
-            <div class="h-[50px] bg-oc-gray-400 rounded border"></div>
-            <div class="h-[50px] bg-oc-gray-500 rounded border"></div>
-            <div class="h-[50px] bg-oc-gray-600 rounded border"></div>
-            <div class="h-[50px] bg-oc-gray-700 rounded border"></div>
-            <div class="h-[50px] bg-oc-gray-800 rounded border"></div>
-            <div class="h-[50px] bg-oc-gray-900 rounded border"></div>
-          </div>
-          <h2>Color Text</h2>
-          <div class="w-full grid grid-cols-3 md:grid-cols-5 gap-3">
-            <div class="h-[50px] bg-oc-text-100 rounded border"></div>
-            <div class="h-[50px] bg-oc-text-200 rounded border"></div>
-            <div class="h-[50px] bg-oc-text-300 rounded border"></div>
-            <div class="h-[50px] bg-oc-text-400 rounded border"></div>
-            <div class="h-[50px] bg-oc-text-500 rounded border"></div>
-          </div>
-          <h2>Color Background</h2>
-          <div class="w-full grid md:grid-cols-2 gap-3">
-            <div class="h-[50px] bg-oc-bg-light rounded border"></div>
-            <div class="h-[50px] bg-oc-bg-dark rounded border"></div>
-          </div>
-          <h2>Color Primary</h2>
-          <div class="w-full grid grid-cols-3 md:grid-cols-7 gap-3">
-            <div class="h-[50px] bg-oc-primary-50-tr rounded border"></div>
-            <div class="h-[50px] bg-oc-primary-50 rounded border"></div>
-            <div class="h-[50px] bg-oc-primary-100 rounded border"></div>
-            <div class="h-[50px] bg-oc-primary-200 rounded border"></div>
-            <div class="h-[50px] bg-oc-primary-300 rounded border"></div>
-            <div class="h-[50px] bg-oc-primary-400 rounded border"></div>
-            <div class="h-[50px] bg-oc-primary-500 rounded border"></div>
-          </div>
-
-          <h2>Color Accent 1 (Dark Blue)</h2>
-          <div class="w-full grid grid-cols-3 md:grid-cols-8 gap-3">
-            <div class="h-[50px] bg-oc-accent-1-50-tr rounded border"></div>
-            <div class="h-[50px] bg-oc-accent-1-50 rounded border"></div>
-            <div class="h-[50px] bg-oc-accent-1-100 rounded border"></div>
-            <div class="h-[50px] bg-oc-accent-1-200 rounded border"></div>
-            <div class="h-[50px] bg-oc-accent-1-300 rounded border"></div>
-            <div class="h-[50px] bg-oc-accent-1-400 rounded border"></div>
-            <div class="h-[50px] bg-oc-accent-1-500 rounded border"></div>
-            <div class="h-[50px] bg-oc-accent-1-600 rounded border"></div>
-          </div>
-          <h2>Color Accent 2 (Purple)</h2>
-          <div class="w-full grid grid-cols-3 md:grid-cols-7 gap-3">
-            <div class="h-[50px] bg-oc-accent-2-50-tr rounded border"></div>
-            <div class="h-[50px] bg-oc-accent-2-50 rounded border"></div>
-            <div class="h-[50px] bg-oc-accent-2-100 rounded border"></div>
-            <div class="h-[50px] bg-oc-accent-2-200 rounded border"></div>
-            <div class="h-[50px] bg-oc-accent-2-300 rounded border"></div>
-            <div class="h-[50px] bg-oc-accent-2-400 rounded border"></div>
-            <div class="h-[50px] bg-oc-accent-2-500 rounded border"></div>
-          </div>
-          <h2>Color Accent 3 (Red)</h2>
-          <div class="w-full grid grid-cols-3 md:grid-cols-7 gap-3">
-            <div class="h-[50px] bg-oc-accent-3-50-tr rounded border"></div>
-            <div class="h-[50px] bg-oc-accent-3-50 rounded border"></div>
-            <div class="h-[50px] bg-oc-accent-3-100 rounded border"></div>
-            <div class="h-[50px] bg-oc-accent-3-200 rounded border"></div>
-            <div class="h-[50px] bg-oc-accent-3-300 rounded border"></div>
-            <div class="h-[50px] bg-oc-accent-3-400 rounded border"></div>
-            <div class="h-[50px] bg-oc-accent-3-500 rounded border"></div>
-          </div>
-          <h2>Color Success</h2>
-          <div class="w-full grid grid-cols-3 md:grid-cols-7 gap-3">
-            <div class="h-[50px] bg-oc-success-50-tr rounded border"></div>
-            <div class="h-[50px] bg-oc-success-50 rounded border"></div>
-            <div class="h-[50px] bg-oc-success-100 rounded border"></div>
-            <div class="h-[50px] bg-oc-success-200 rounded border"></div>
-            <div class="h-[50px] bg-oc-success-300 rounded border"></div>
-            <div class="h-[50px] bg-oc-success-400 rounded border"></div>
-            <div class="h-[50px] bg-oc-success-500 rounded border"></div>
-          </div>
-          <h2>Color Warning</h2>
-          <div class="w-full grid grid-cols-3 md:grid-cols-7 gap-3">
-            <div class="h-[50px] bg-oc-warning-50-tr rounded border"></div>
-            <div class="h-[50px] bg-oc-warning-50 rounded border"></div>
-            <div class="h-[50px] bg-oc-warning-100 rounded border"></div>
-            <div class="h-[50px] bg-oc-warning-200 rounded border"></div>
-            <div class="h-[50px] bg-oc-warning-300 rounded border"></div>
-            <div class="h-[50px] bg-oc-warning-400 rounded border"></div>
-            <div class="h-[50px] bg-oc-warning-500 rounded border"></div>
-          </div>
-          <h2>Color Error</h2>
-          <div class="w-full grid grid-cols-3 md:grid-cols-7 gap-3">
-            <div class="h-[50px] bg-oc-error-50-tr rounded border"></div>
-            <div class="h-[50px] bg-oc-error-50 rounded border"></div>
-            <div class="h-[50px] bg-oc-error-100 rounded border"></div>
-            <div class="h-[50px] bg-oc-error-200 rounded border"></div>
-            <div class="h-[50px] bg-oc-error-300 rounded border"></div>
-            <div class="h-[50px] bg-oc-error-400 rounded border"></div>
-            <div class="h-[50px] bg-oc-error-500 rounded border"></div>
-          </div>
-          <div class="w-full"></div>
-        </div>
-      </section>
+          <ExampleDataTableBuilder />
+          <ExampleFormBuilder />
+        </section>
+      </div>
+      <div class="hidden max-w-[400px] lg:block mt-[20px]">
+        <ThemeSettings
+          @toggle-dark-mode="toggleDarkMode"
+          @change-primary-color="changePrimaryColor"
+        />
+      </div>
     </section>
   </Theme>
 </template>
-
-<style>
-.teal-primary-color {
-  --oc-primary-50-tr: #f0fdfa;
-  --oc-primary-50: #ccfbf1;
-  --oc-primary-100: #99f6e4;
-  --oc-primary-200: #5eead4;
-  --oc-primary-300: #2dd4bf;
-  --oc-primary-400: #14b8a6;
-  --oc-primary-500: #0d9488;
-
-  --button-primary-default: linear-gradient(
-    180deg,
-    var(--oc-primary-400) 0%,
-    var(--oc-primary-500) 100%
-  );
-  --button-primary-hover: linear-gradient(
-    180deg,
-    var(--oc-primary-400) 0%,
-    var(--oc-primary-500) 100%
-  );
-  --button-primary-pressed: linear-gradient(
-    180deg,
-    var(--oc-primary-400) 0%,
-    var(--oc-primary-500) 100%
-  );
-  --button-primary-disabled: linear-gradient(
-    180deg,
-    var(--oc-primary-400) 0%,
-    var(--oc-primary-500) 100%
-  );
-
-  --button-secondary-default: linear-gradient(180deg, #fff 0%, #f2f2f2 100%);
-  --button-secondary-hover: linear-gradient(180deg, #fff 0%, #fafafa 100%);
-  --button-secondary-pressed: linear-gradient(180deg, #fafafa 0%, #fff 100%);
-  --button-secondary-disabled: linear-gradient(
-    180deg,
-    #fcfcfc 0%,
-    #f7f7f7 100%
-  );
-}
-
-.dark .teal-primary-color {
-  --oc-primary-500: #f0fdfa;
-  --oc-primary-400: #ccfbf1;
-  --oc-primary-300: #99f6e4;
-  --oc-primary-200: #5eead4;
-  --oc-primary-100: #2dd4bf;
-  --oc-primary-50: #14b8a6;
-  --oc-primary-50-tr: #0d9488;
-}
-</style>
