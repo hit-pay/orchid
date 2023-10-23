@@ -1,12 +1,12 @@
 import {
-  Theme, 
-  Header, 
-  SubHeader, 
-  OcTabToSelect,
-  HeaderCenter, 
-  HeaderLeft, 
+  Theme,
+  Header,
+  SubHeader,
+  TabToSelect,
+  HeaderCenter,
+  HeaderLeft,
   HeaderRight,
-  Icon
+  Icon,
 } from "@orchid";
 
 import SampleHeaderLeft from "./SampleHeaderLeft.vue";
@@ -18,8 +18,6 @@ export default {
   component: Header,
   tags: ["autodocs"],
 };
-
-
 
 export const HeaderElement = {
   args: {
@@ -45,39 +43,39 @@ export const HeaderElement = {
     ],
   },
   render: (args) => ({
-    components: { 
-      Theme, 
+    components: {
+      Theme,
       Icon,
-      Header, 
-      HeaderLeft, 
-      HeaderCenter, 
+      Header,
+      HeaderLeft,
+      HeaderCenter,
       HeaderRight,
       SampleHeaderLeft,
-      OcTabToSelect,
-      SampleHeaderRight
+      TabToSelect,
+      SampleHeaderRight,
     },
     setup() {
       const activeMenuValue = ref("payments");
       const activeMenuLabel = computed(() => {
-        return args.menus.find((m) => m.value === activeMenuValue.value).label
+        return args.menus.find((m) => m.value === activeMenuValue.value).label;
       });
 
       return { args, activeMenuValue, activeMenuLabel };
     },
     template: `
           <Theme>
-            <Header class="mb-3" >
-              <button aria-label="Menu Button" class="p-3">
-                <Icon name="menu" width="24" height="24" />
+            <Header class="mb-3">
+              <button aria-label="Menu Button" class="p-3 md:hidden">
+                <Icon name="menu" width="24" height="24"/>
               </button>
-              <HeaderLeft class="md:w-[260px]" >
+              <HeaderLeft class="md:w-[260px]">
                 <SampleHeaderLeft/>
               </HeaderLeft>
               <HeaderCenter class="flex-1 md:flex-none ">
-                <OcTabToSelect v-model="activeMenuValue" :menus="args.menus" />
+                <TabToSelect v-model="activeMenuValue" :menus="args.menus"/>
               </HeaderCenter>
               <HeaderRight>
-                <SampleHeaderRight />
+                <SampleHeaderRight/>
               </HeaderRight>
             </Header>
           </Theme>
@@ -85,33 +83,31 @@ export const HeaderElement = {
   }),
 };
 
-
-
 export const SubHeaderElement = {
   args: {
-    isSaved: true
+    isSaved: true,
   },
   render: (args) => ({
-    components: { 
-      Theme, 
-      SubHeader, 
-      HeaderLeft, 
-      HeaderCenter, 
+    components: {
+      Theme,
+      SubHeader,
+      HeaderLeft,
+      HeaderCenter,
       HeaderRight,
       SampleHeaderLeft,
     },
     setup() {
       const activeMenuValue = ref("payments");
       const activeMenuLabel = computed(() => {
-        return args.menus.find((m) => m.value === activeMenuValue.value).label
+        return args.menus.find((m) => m.value === activeMenuValue.value).label;
       });
 
       return { args, activeMenuValue, activeMenuLabel };
     },
     template: `
           <Theme>
-            <SubHeader class="mb-3" >
-              <HeaderLeft class="hidden md:flex" >
+            <SubHeader class="mb-3">
+              <HeaderLeft class="hidden md:flex">
                 <SampleHeaderLeft is-sub-header/>
               </HeaderLeft>
               <HeaderCenter class="flex-1" :is-saved="args.isSaved"></HeaderCenter>

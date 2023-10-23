@@ -76,7 +76,7 @@ onBeforeUnmount(() => {
       <div
         v-show="isOpen"
         ref="dropdownMenu"
-        class="fixed z-[1] min-w-[162px] rounded bg-oc-bg-light shadow"
+        class="fixed z-[1005] min-w-[162px] rounded bg-oc-bg-light shadow"
         @click.stop
       >
         <slot
