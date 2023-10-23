@@ -5,7 +5,7 @@ import { clickOutside as vClickOutside } from "../../directives/clickOutside.js"
 
 const props = defineProps({
   popperClass: {
-    type: String
+    type: String,
   },
   offset: {
     type: Array,
@@ -140,10 +140,15 @@ const onClickOutside = () => {
 <template>
   <span v-click-outside="onClickOutside" class="relative">
     <span ref="triggerElement">
-      <slot />
+      <slot :is-show="isShow" />
     </span>
     <Transition name="fade">
-      <span v-show="isShow" ref="tooltip" class="oc-tooltip" :class="popperClass">
+      <span
+        v-show="isShow"
+        ref="tooltip"
+        class="oc-tooltip"
+        :class="popperClass"
+      >
         <slot name="popper" />
         <span v-if="!arrowHidden" class="oc-arrow" data-popper-arrow />
       </span>
@@ -156,7 +161,7 @@ const onClickOutside = () => {
   box-shadow:
     0 3px 22px 0 rgba(38, 42, 50, 0.09),
     0 1px 3px 0 rgba(0, 0, 0, 0.1);
-  @apply rounded-sm z-[1006];
+  @apply rounded-sm z-[1006] bg-oc-bg-light;
 
   &[data-popper-placement^="top"] > .oc-arrow {
     bottom: -4px;

@@ -12,6 +12,17 @@ defineProps({
   chipLabel: { type: String, default: "" },
   additionalTitle: { type: String, default: "" },
   tooltipContent: { type: String, default: "" },
+  additionalContentVariant: { type: String, default: "" },
+  boxes: { type: Array, default: () => [] },
+  overviewItems: { type: Array, default: () => [] },
+  overviewTabs: { type: Array, default: () => [] },
+  overviewActiveTab: { type: String, default: "" },
+  customerCardVariant: { type: String, default: "" },
+  isCustomer: { type: Boolean, default: false },
+  customer: { type: Object, default: null },
+});
+defineEmits({
+  changeTab: [],
 });
 </script>
 
@@ -21,7 +32,7 @@ defineProps({
       <Title
         :title="title"
         :description="description"
-        class="w-full overflow-hidden"
+        class="flex-1 overflow-hidden"
       />
 
       <slot name="right">
@@ -36,6 +47,15 @@ defineProps({
       :chip-variant="chipVariant"
       :user-id="userId"
       :tooltip-content="tooltipContent"
+      :variant="additionalContentVariant"
+      :boxes="boxes"
+      :overview-items="overviewItems"
+      :overview-tabs="overviewTabs"
+      :customer-card-variant="customerCardVariant"
+      :is-customer="isCustomer"
+      :customer="customer"
+      :overview-active-tab="overviewActiveTab"
+      @change-tab="$emit('changeTab', $event)"
     />
   </div>
 </template>

@@ -5,7 +5,7 @@ module.exports = {
     "./node_modules/@orchidui/vue/dist/**/*.js",
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
-  darkMode: 'class',
+  darkMode: "class",
   theme: {
     fontSize: {
       xs: [
@@ -161,6 +161,7 @@ module.exports = {
           300: "var(--oc-warning-300)",
           400: "var(--oc-warning-400)",
           500: "var(--oc-warning-500)",
+          600: "var(--oc-warning-600)",
         },
         "oc-error": {
           DEFAULT: "var(--oc-error-500)",

@@ -10,13 +10,18 @@ defineProps({
     <div
       class="text-xl font-medium whitespace-nowrap text-ellipsis overflow-hidden"
     >
-      {{ title }}
+      <slot name="title" :title="title">
+        {{ title }}
+      </slot>
     </div>
     <div
       v-if="description"
-      class="text-oc-text-400 text-sm whitespace-nowrap text-ellipsis overflow-hidden"
+      class="text-oc-text-400 text-sm whitespace-nowrap text-ellipsis"
+      :class="$slots.description ? '' : 'overflow-hidden'"
     >
-      {{ description }}
+      <slot name="description" :description="description">
+        {{ description }}
+      </slot>
     </div>
   </div>
 </template>
