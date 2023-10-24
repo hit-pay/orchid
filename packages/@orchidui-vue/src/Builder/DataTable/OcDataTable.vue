@@ -52,13 +52,13 @@ const perPageOptions = computed(() => {
     </slot>
     <div class="flex gap-3 items-center m-5">
       <Pagination
-        class="justify-start"
+        class="justify-center md:justify-start"
         :model-value="currentPage"
         :max-page="paginationOptions.last_page"
         total-visible="5"
         @update:model-value="currentPage = $event"
       />
-      <div class="flex items-center">
+      <div class="hidden md:flex items-center">
         <div class="min-w-[100px]">Item per page:</div>
         <Select v-model="perPage" :options="perPageOptions" />
       </div>

@@ -23,15 +23,14 @@ export const Default = {
         per_page: 10,
         current_page: 1,
         last_page: 20,
-        first_page_url: "http://laravel.app?page=1",
-        last_page_url: "http://laravel.app?page=4",
-        next_page_url: "http://laravel.app?page=2",
-        prev_page_url: null,
-        path: "http://laravel.app",
-        from: 1,
-        to: 10,
       },
       filterOptions: {
+        page: {
+          key: "page",
+        },
+        per_page: {
+          key: "per_page",
+        },
         tabs: {
           key: "search",
         },
