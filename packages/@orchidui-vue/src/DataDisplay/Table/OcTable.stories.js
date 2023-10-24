@@ -1,13 +1,4 @@
-import {
-  Theme,
-  Table,
-  Chip,
-  Icon,
-  Toggle,
-  TableCellContent,
-  Dropdown,
-  DropdownItem,
-} from "@orchid";
+import { Theme, Table, Chip, Icon, Toggle, TableCellContent } from "@orchid";
 
 import { ref } from "vue";
 
@@ -129,8 +120,6 @@ export const Default = {
       Toggle,
       Chip,
       TableCellContent,
-      Dropdown,
-      DropdownItem,
     },
     setup() {
       const selectedRows = ref([]);

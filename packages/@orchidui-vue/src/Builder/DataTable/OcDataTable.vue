@@ -93,7 +93,7 @@ const applyFilter = () => {
   <div class="flex flex-col gap-3">
     <Table v-model="selectedRows" :options="tableOptions">
       <template #before>
-        <div class="flex items-center m-5 relative ">
+        <div class="flex items-center m-5 relative">
           <div v-if="showBulkAction" class="flex gap-3 items-center">
             <slot name="bulk-actions" :selected-rows="selectedRows" />
           </div>
@@ -106,7 +106,7 @@ const applyFilter = () => {
             />
           </div>
           <div
-            class="flex gap-3 absolute bg-white right-0 "
+            class="flex gap-3 absolute bg-white right-0"
             :class="isSearchExpanded ? 'md:w-fit w-full' : ''"
           >
             <FilterSearch
@@ -116,10 +116,10 @@ const applyFilter = () => {
             <FilterForm />
           </div>
         </div>
-        <FilterSearchFor 
+        <FilterSearchFor
           v-if="queries.length"
           :queries="queries"
-          class="border-t  border-oc-gray-200"
+          class="border-t border-oc-gray-200"
           @remove-query="removeQuery"
         />
       </template>

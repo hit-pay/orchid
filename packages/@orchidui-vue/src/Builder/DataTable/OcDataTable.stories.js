@@ -6,8 +6,6 @@ import {
   Icon,
   Toggle,
   TableCellContent,
-  Dropdown,
-  DropdownItem,
   Button,
 } from "@orchid";
 
@@ -23,8 +21,7 @@ export const Default = {
         current_page: 1,
         per_page: 10,
         tabs: "",
-        keywords: '',
-
+        keywords: "",
       },
       paginationOptions: {
         total: 50,
@@ -43,7 +40,7 @@ export const Default = {
             { label: "All", value: "" },
             { label: "Filter 01", value: "1" },
             { label: "Filter 02", value: "2" },
-            { label: "Filter 03", value: "3" }
+            { label: "Filter 03", value: "3" },
           ],
         },
         search: {
@@ -211,15 +208,13 @@ export const Default = {
       Toggle,
       Chip,
       TableCellContent,
-      Dropdown,
-      DropdownItem,
       Button,
     },
     setup() {
       const updateFilterData = (data) => {
         // get new data
-        args.options.filter = data
-      }
+        args.options.filter = data;
+      };
       return { args, updateFilterData };
     },
     template: `
