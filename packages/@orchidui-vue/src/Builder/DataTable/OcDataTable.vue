@@ -131,7 +131,7 @@ const applyFilter = () => {
         @update:model-value="applyFilter"
       />
       <div class="hidden md:flex items-center">
-        <div class="min-w-[100px]">Item per page:</div>
+        <div class="min-w-[100px] mr-2">Item per page : </div>
         <Select
           v-model="perPage"
           :options="perPageOptions"
