@@ -61,19 +61,22 @@ const applyFilter = () => {
 };
 </script>
 <template>
-  <div class="flex flex-col">
-    <div class="flex gap-3 items-center my-5">
-      <div v-if="showBulkAction" class="flex items-center gap-3" >
+  <div class="flex flex-col gap-3">
+    <div class="flex items-center m-3 md:mx-0">
+      <div v-if="showBulkAction" class="flex gap-3 items-center " >
         <slot name="bulk-actions" :selected-rows="selectedRows" />
       </div>
-      <Tabs 
+      <div  
         v-else
-        v-model="activeTab"
-        :tabs="filterOptions.tabs.options"
-        :variant="'pills'"
-        @update:model-value="applyFilter"
-      />
-      <div class="ml-auto flex gap-3">
+        class="flex gap-3">
+        <Tabs 
+          v-model="activeTab"
+          :tabs="filterOptions.tabs.options"
+          :variant="'pills'"
+          @update:model-value="applyFilter"
+        />
+      </div>
+      <div class="flex gap-3 absolute right-3">
         <FilterSearch />
         <FilterForm />
       </div>
@@ -81,7 +84,7 @@ const applyFilter = () => {
     <slot name="table" :update-selected-rows="updateSelectedRows">
       <Table  v-model="selectedRows" :options="tableOptions"></Table>
     </slot>
-    <div class="flex gap-3 items-center m-5">
+    <div class="flex gap-3 items-center m-3 md:mx-0">
       <Pagination
         v-model="currentPage"
         class="justify-center md:justify-start"

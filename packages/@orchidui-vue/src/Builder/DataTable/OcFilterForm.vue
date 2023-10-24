@@ -1,5 +1,8 @@
 <script setup>
-import { Button, Input, RangeInput, Dropdown } from "@orchid";
+import { Button, 
+Input, 
+RangeInput, 
+Dropdown } from "@orchid";
 </script>
 
 <template>
@@ -19,11 +22,10 @@ import { Button, Input, RangeInput, Dropdown } from "@orchid";
           <Input icon="calendar" placeholder="Select date" label="Date" />
 
           <Input
-            placeholder="Select statuses"
+            placeholder="All payment method"
             model-value="All payment methods"
             label="Payment Method"
           />
-
           <RangeInput />
         </div>
 
