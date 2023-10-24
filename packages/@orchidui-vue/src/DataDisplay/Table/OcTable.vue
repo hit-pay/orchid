@@ -4,25 +4,29 @@ import { ref, defineEmits } from "vue";
 
 const props = defineProps({
   options: Object,
+  modelValue: Array
 });
 
-const emit = defineEmits(["selectRow"]);
+const emit = defineEmits({
+  "update:modelValue": [],
+});
 
 const { isSelectable, fields, headers } = props.options;
 
-const selectedRows = ref([]);
+const selectedRows = ref(props.modelValue ? props.modelValue : []);
 const selectRow = (element) => {
   if (selectedRows.value.includes(element)) {
     selectedRows.value = selectedRows.value.filter((e) => e !== element);
   } else {
     selectedRows.value = [...selectedRows.value, element];
   }
-  emit("selectRow", selectAllRows.value);
+  emit("update:modelValue", selectedRows.value);
 };
 
 const selectAllRows = () => {
   const allRowsSelected = selectedRows.value.length === fields.length;
   selectedRows.value = allRowsSelected ? [] : [...fields.map((e, i) => i)];
+  emit("update:modelValue", selectedRows.value);
 };
 </script>
 

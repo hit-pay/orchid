@@ -8,6 +8,7 @@ import {
   TableCellContent,
   Dropdown,
   DropdownItem,
+  Button,
 } from "@orchid";
 
 export default {
@@ -36,12 +37,12 @@ export const Default = {
         },
         tabs: {
           key: "tabs",
-          options: {
-            0: { label: "All", value: "" },
-            1: { label: "Filter 01", value: "1" },
-            2: { label: "Filter 02", value: "2" },
-            3: { label: "Filter 03", value: "3" },
-          },
+          options: [
+            { label: "All", value: "" },
+            { label: "Filter 01", value: "1" },
+            { label: "Filter 02", value: "2" },
+            { label: "Filter 03", value: "3" }
+          ],
         },
         search: {
           key: "search",
@@ -210,6 +211,7 @@ export const Default = {
       TableCellContent,
       Dropdown,
       DropdownItem,
+      Button,
     },
     setup() {
       return { args };
@@ -217,8 +219,31 @@ export const Default = {
     template: `
           <Theme>
             <DataTable :options="args.options">
-              <template #table>
-                <Table :options="args.options.tableOptions">
+              <template #bulk-actions="{selectedRows}">
+                <Button
+                  label="Publish"
+                  size="small"
+                  is-transparent
+                  left-icon="eye-open"
+                />
+                <Button
+                  label="Unpublish"
+                  is-transparent
+                  size="small"
+                  variant="secondary"
+                  left-icon="eye-close"
+                />
+                <Button
+                  label="Delete"
+                  is-transparent
+                  size="small"
+                  variant="destructive"
+                  left-icon="bin"
+                />
+                {{ selectedRows }}
+              </template>
+              <template #table="{updateSelectedRows}">
+                <Table @update:model-value="updateSelectedRows($event)" :options="args.options.tableOptions">
                   <template #col1="{ item }">
                     <TableCellContent important :title="item.title" :description="item.descriptions"/>
                   </template>

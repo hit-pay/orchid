@@ -11,7 +11,7 @@ const query = ref("");
 <template>
   <div
     class="transition-all duration-300"
-    :class="isSearchOpen ? 'max-w-[400px]' : 'max-w-0 overflow-hidden'"
+    :class="isSearchOpen ? 'max-w-[400px]' : 'absolute max-w-0 overflow-hidden'"
   >
     <div class="flex gap-x-4">
       <Input

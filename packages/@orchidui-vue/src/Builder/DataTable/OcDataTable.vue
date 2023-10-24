@@ -1,5 +1,5 @@
 <script setup>
-import { Table, Pagination, Select, Tabs } from "@orchid";
+import { Table, Pagination, Select, Tabs, FilterSearch, FilterForm } from "@orchid";
 import { ref, computed } from "vue";
 const props = defineProps({
   options: {
@@ -9,6 +9,7 @@ const props = defineProps({
 const { paginationOptions, tableOptions, filter, filterOptions } =
   props.options;
 
+const selectedRows = ref([])
 const activeTab = ref(filter.tabs);
 const currentPage = ref(filter.current_page);
 const perPage = ref({
@@ -43,6 +44,14 @@ const perPageOptions = computed(() => {
   ];
 });
 
+const updateSelectedRows = (value) => {
+  selectedRows.value = value
+}
+
+const showBulkAction = computed(() => {
+  return selectedRows.value.length > 0
+})
+
 const applyFilter = () => {
   // currentPage : filterOptions.current_page.key
   // perPage : filterOptions.per_page.key
@@ -54,15 +63,23 @@ const applyFilter = () => {
 <template>
   <div class="flex flex-col">
     <div class="flex gap-3 items-center my-5">
-      <Tabs
+      <div v-if="showBulkAction" class="flex items-center gap-3" >
+        <slot name="bulk-actions" :selected-rows="selectedRows" />
+      </div>
+      <Tabs 
+        v-else
         v-model="activeTab"
         :tabs="filterOptions.tabs.options"
         :variant="'pills'"
         @update:model-value="applyFilter"
       />
+      <div class="ml-auto flex gap-3">
+        <FilterSearch />
+        <FilterForm />
+      </div>
     </div>
-    <slot name="table">
-      <Table :options="tableOptions"></Table>
+    <slot name="table" :update-selected-rows="updateSelectedRows">
+      <Table  v-model="selectedRows" :options="tableOptions"></Table>
     </slot>
     <div class="flex gap-3 items-center m-5">
       <Pagination

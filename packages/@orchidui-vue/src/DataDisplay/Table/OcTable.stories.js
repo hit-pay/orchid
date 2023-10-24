@@ -9,6 +9,9 @@ import {
   DropdownItem,
 } from "@orchid";
 
+import { ref } from 'vue'
+
+
 export default {
   component: Table,
   tags: ["autodocs"],
@@ -131,11 +134,13 @@ export const Default = {
       DropdownItem,
     },
     setup() {
-      return { args };
+      const selectedRows  = ref([])
+      return { args, selectedRows };
     },
     template: `
           <Theme>
-            <Table :options="args.options">
+            {{ selectedRows }}
+            <Table v-model="selectedRows" :options="args.options">
               <template #col1="{ item }">
                 <TableCellContent important :title="item.title" :description="item.descriptions"/>
               </template>
