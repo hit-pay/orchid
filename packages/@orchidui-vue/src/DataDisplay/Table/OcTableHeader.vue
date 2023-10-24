@@ -22,13 +22,13 @@ defineEmits({
 });
 const variantClass = computed(() => ({
   text: "px-4 py-3",
-  checkbox: "p-3",
+  checkbox: "p-4 md:p-3",
 }));
 </script>
 
 <template>
   <div
-    class="whitespace-nowrap w-fit text-start uppercase text-oc-text-400 text-xs font-medium bg-oc-gray-50 flex gap-3"
+    class="whitespace-nowrap w-fit text-start md:uppercase text-oc-text-400 md:text-xs font-medium bg-oc-gray-50 flex gap-3"
     :class="variantClass[variant]"
   >
     <slot v-if="variant === Variants.TEXT">{{ text }}</slot>

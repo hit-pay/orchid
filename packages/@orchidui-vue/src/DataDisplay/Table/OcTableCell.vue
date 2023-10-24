@@ -25,9 +25,9 @@ defineEmits({
 });
 
 const variantClass = computed(() => ({
-  [Variants.CHECKBOX]: "px-2 min-w-[32px]",
-  [Variants.ICON]: "px-2 min-w-[32px] ",
-  [Variants.IMAGE]: "px-2 min-w-[32px]",
+  [Variants.CHECKBOX]: "md:px-2 px-4 min-w-[32px]",
+  [Variants.ICON]: "md:px-2 px-4 min-w-[32px] ",
+  [Variants.IMAGE]: "md:px-2 px-4 min-w-[32px]",
   [Variants.CONTENT]: "px-4",
   [Variants.EMPTY]: "px-4 min-w-[48px]",
 }));
@@ -46,7 +46,7 @@ const copyToClipboard = async (text) => {
 <template>
   <div
     :class="[variantClass[variant] || 'px-4', isLast ? '' : '']"
-    class="py-3 bg-oc-bg-light group-hover/row:bg-oc-gray-50 items-center"
+    class="md:py-3 bg-oc-bg-light min-h-[58px] md:group-hover/row:bg-oc-gray-50 items-center"
   >
     <div class="flex" :class="isCopy ? 'justify-between' : 'justify-start'">
       <slot>

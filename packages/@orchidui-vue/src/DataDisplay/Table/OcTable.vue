@@ -31,12 +31,14 @@ const selectAllRows = () => {
 </script>
 
 <template>
-  <div class="flex text-oc-text flex-col rounded border border-oc-gray-200">
+  <div
+    class="flex overflow-hidden text-oc-text flex-col rounded border border-oc-gray-200"
+  >
     <slot name="before" />
     <div class="flex flex-wrap border-b border-oc-text-200">
       <TableHeader
         v-if="isSelectable"
-        class="w-[40px] md:w-[5%] ml-[3px] md:ml-0"
+        class="w-[40px] md:w-[5%] md:ml-0"
         variant="checkbox"
         :is-partial="
           selectedRows.length !== fields.length && selectedRows.length > 0
@@ -63,7 +65,7 @@ const selectAllRows = () => {
     <div
       v-for="(field, i) in fields"
       :key="i"
-      class="flex flex-wrap group/row border-oc-text-200 pl-[54px] md:pl-0"
+      class="flex flex-wrap relative group/row border-oc-gray-200 pl-[40px] md:p-0 py-3"
       :class="{
         'border-b': fields.length !== i + 1,
       }"

@@ -23,6 +23,7 @@ const { paginationOptions, tableOptions, filter, filterOptions } =
 
 const selectedRows = ref([]);
 const activeTab = ref(filter.tabs);
+const isSearchExpanded = ref(false);
 const currentPage = ref(filter.current_page);
 const perPage = ref({
   label: filter.per_page,
@@ -56,7 +57,6 @@ const perPageOptions = computed(() => {
     ),
   ];
 });
-
 
 const showBulkAction = computed(() => {
   return selectedRows.value.length > 0;
@@ -105,8 +105,14 @@ const applyFilter = () => {
               @update:model-value="applyFilter"
             />
           </div>
-          <div class="flex gap-3 absolute right-0">
-            <FilterSearch @add-query="addQuery" />
+          <div
+            class="flex gap-3 absolute bg-white right-0"
+            :class="isSearchExpanded ? 'md:w-fit w-full' : ''"
+          >
+            <FilterSearch
+              @add-query="addQuery"
+              @toggle="isSearchExpanded = $event"
+            />
             <FilterForm />
           </div>
         </div>
@@ -116,10 +122,11 @@ const applyFilter = () => {
           @remove-query="removeQuery"
         />
       </template>
-      <template 
-          v-for="header in tableOptions.headers" 
-          #[header.key]="{data, item}">
-          <slot :name="header.key" :data="data" :item="item"> </slot>
+      <template
+        v-for="header in tableOptions.headers"
+        #[header.key]="{ data, item }"
+      >
+        <slot :name="header.key" :data="data" :item="item"></slot>
       </template>
     </Table>
     <div class="flex gap-3 items-center m-3 md:mx-0">
@@ -131,7 +138,7 @@ const applyFilter = () => {
         @update:model-value="applyFilter"
       />
       <div class="hidden md:flex items-center">
-        <div class="min-w-[100px] mr-2">Item per page : </div>
+        <div class="min-w-[100px] mr-2">Item per page :</div>
         <Select
           v-model="perPage"
           :options="perPageOptions"
