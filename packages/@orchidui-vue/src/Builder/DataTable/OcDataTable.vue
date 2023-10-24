@@ -120,6 +120,11 @@ const applyFilter = () => {
             @remove-query="removeQuery"
           />
         </template>
+        <template 
+            v-for="header in tableOptions.headers" 
+            #[header.key]="{data, item}">
+            <slot :name="header.key" :data="data" :item="item"> </slot>
+        </template>
       </Table>
     </slot>
     <div class="flex gap-3 items-center m-3 md:mx-0">

@@ -23,7 +23,8 @@ export const Default = {
         current_page: 1,
         per_page: 10,
         tabs: "",
-        keywords: "",
+        keywords: '',
+
       },
       paginationOptions: {
         total: 50,
@@ -42,7 +43,7 @@ export const Default = {
             { label: "All", value: "" },
             { label: "Filter 01", value: "1" },
             { label: "Filter 02", value: "2" },
-            { label: "Filter 03", value: "3" },
+            { label: "Filter 03", value: "3" }
           ],
         },
         search: {
@@ -217,8 +218,8 @@ export const Default = {
     setup() {
       const updateFilterData = (data) => {
         // get new data
-        args.options.filter = data;
-      };
+        args.options.filter = data
+      }
       return { args, updateFilterData };
     },
     template: `
@@ -251,6 +252,23 @@ export const Default = {
                   left-icon="bin"
                 />
                 {{ selectedRows }}
+              </template>
+              <template #col1="{ item }">
+                  <TableCellContent important :title="item.title" :description="item.descriptions"/>
+              </template>
+              <template #col5="{ data }">
+                <Chip variant="success" class="w-fit" :label="data"/>
+              </template>
+              <template #col6="{ data }">
+                <div class="flex gap-3 items-center">
+                  <span class="md:hidden">
+                  status
+                  </span>
+                  <Toggle size="small" v-model="data"/>
+                </div>
+              </template>
+              <template #actions>
+                <Icon class="w-6 h-6 group-hover/row:block md:hidden cursor-pointer mx-auto" name="dots-vertical"/>
               </template>
             </DataTable>
           </Theme>
