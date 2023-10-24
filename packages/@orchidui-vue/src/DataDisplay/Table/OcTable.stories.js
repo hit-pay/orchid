@@ -9,8 +9,7 @@ import {
   DropdownItem,
 } from "@orchid";
 
-import { ref } from 'vue'
-
+import { ref } from "vue";
 
 export default {
   component: Table,
@@ -52,12 +51,12 @@ export const Default = {
         {
           key: "col5",
           label: "Table Header",
-          class: "w-3/6 md:w-[12%]",
+          class: "w-3/6 md:w-[15%]",
         },
         {
           key: "col6",
           label: "Header",
-          class: "w-2/6 md:w-[8%]",
+          class: "w-2/6 md:w-[10%]",
         },
         {
           key: "actions",
@@ -134,7 +133,7 @@ export const Default = {
       DropdownItem,
     },
     setup() {
-      const selectedRows  = ref([])
+      const selectedRows = ref([]);
       return { args, selectedRows };
     },
     template: `

@@ -4,7 +4,7 @@ import { ref, defineEmits } from "vue";
 
 const props = defineProps({
   options: Object,
-  modelValue: Array
+  modelValue: Array,
 });
 
 const emit = defineEmits({
@@ -32,6 +32,7 @@ const selectAllRows = () => {
 
 <template>
   <div class="flex text-oc-text flex-col rounded border border-oc-gray-200">
+    <slot name="before" />
     <div class="flex flex-wrap border-b border-oc-text-200">
       <TableHeader
         v-if="isSelectable"
@@ -96,5 +97,6 @@ const selectAllRows = () => {
         </template>
       </TableCell>
     </div>
+    <slot name="after" />
   </div>
 </template>

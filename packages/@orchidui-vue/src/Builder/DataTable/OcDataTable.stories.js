@@ -20,9 +20,10 @@ export const Default = {
   args: {
     options: {
       filter: {
-        tabs: "",
-        per_page: 10,
         current_page: 1,
+        per_page: 10,
+        tabs: "",
+        keywords: "",
       },
       paginationOptions: {
         total: 50,
@@ -41,11 +42,11 @@ export const Default = {
             { label: "All", value: "" },
             { label: "Filter 01", value: "1" },
             { label: "Filter 02", value: "2" },
-            { label: "Filter 03", value: "3" }
+            { label: "Filter 03", value: "3" },
           ],
         },
         search: {
-          key: "search",
+          key: "keywords",
         },
         form: [
           // use form builder
@@ -129,12 +130,12 @@ export const Default = {
           {
             key: "col5",
             label: "Table Header",
-            class: "w-3/6 md:w-[12%]",
+            class: "w-3/6 md:w-[15%]",
           },
           {
             key: "col6",
             label: "Header",
-            class: "w-2/6 md:w-[8%]",
+            class: "w-2/6 md:w-[10%]",
           },
           {
             key: "actions",
@@ -214,11 +215,20 @@ export const Default = {
       Button,
     },
     setup() {
-      return { args };
+      const updateFilterData = (data) => {
+        // get new data
+        args.options.filter = data;
+      };
+      return { args, updateFilterData };
     },
     template: `
           <Theme>
-            <DataTable :options="args.options">
+            <div>
+              <ul>
+                <li v-for="item, key in args.options.filter">{{key}} : {{item}}</li>
+              </ul>
+            </div>
+            <DataTable :options="args.options" @update:filter="updateFilterData">
               <template #bulk-actions="{selectedRows}">
                 <Button
                   label="Publish"
@@ -241,30 +251,6 @@ export const Default = {
                   left-icon="bin"
                 />
                 {{ selectedRows }}
-              </template>
-              <template #table="{updateSelectedRows}">
-                <Table @update:model-value="updateSelectedRows($event)" :options="args.options.tableOptions">
-                  <template #col1="{ item }">
-                    <TableCellContent important :title="item.title" :description="item.descriptions"/>
-                  </template>
-                  <template #col4="{ data }">
-                    <span class="text-oc-text-400 text-sm">{{ data }}</span>
-                  </template>
-                  <template #col5="{ data }">
-                    <Chip variant="success" class="w-fit" :label="data"/>
-                  </template>
-                  <template #col6="{ data }">
-                    <div class="flex gap-3 items-center">
-                      <span class="md:hidden">
-                      status
-                      </span>
-                      <Toggle size="small" v-model="data"/>
-                    </div>
-                  </template>
-                  <template #actions>
-                    <Icon class="w-6 h-6 group-hover/row:block md:hidden cursor-pointer mx-auto" name="dots-vertical"/>
-                  </template>
-                </Table>
               </template>
             </DataTable>
           </Theme>
