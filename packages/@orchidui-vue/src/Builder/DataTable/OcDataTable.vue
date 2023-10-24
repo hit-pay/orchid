@@ -109,7 +109,7 @@ const applyFilter = () => {
             />
           </div>
           <div
-            class="flex gap-3 absolute bg-white right-0"
+            class="flex gap-3 absolute bg-oc-bg-light right-0"
             :class="isSearchExpanded ? 'md:w-fit w-full' : ''"
           >
             <FilterSearch

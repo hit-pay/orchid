@@ -94,7 +94,7 @@ const inputClasses = computed(() => [
             :value="modelValue"
             :placeholder="placeholder"
             :disabled="disabled"
-            class="h-7 outline-none w-full text-oc-text disabled:bg-transparent placeholder:font-normal placeholder:text-oc-text-300"
+            class="h-7 outline-none w-full text-oc-text disabled:bg-transparent placeholder:font-normal placeholder:text-oc-text-300 bg-oc-bg-light"
             @focus="isFocused = true"
             @blur="
               isFocused = false;

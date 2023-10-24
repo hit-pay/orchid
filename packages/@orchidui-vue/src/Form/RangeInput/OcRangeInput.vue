@@ -148,7 +148,7 @@ onMounted(() => createSlider(slider.value));
       .thumb {
         width: var(--_thumb-size);
         height: var(--_thumb-size);
-        @apply absolute z-[3] rounded-full shadow bg-white border border-[var(--oc-gray-200)] flex items-center justify-center before:w-1/2 before:h-1/2 before:bg-[var(--oc-primary-500)] before:rounded-full before:pointer-events-none;
+        @apply absolute z-[3] rounded-full shadow bg-oc-bg-light border border-[var(--oc-gray-200)] flex items-center justify-center before:w-1/2 before:h-1/2 before:bg-[var(--oc-primary-500)] before:rounded-full before:pointer-events-none;
       }
     }
 
