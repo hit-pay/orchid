@@ -103,17 +103,17 @@ export const Default = {
             key: "image",
             variant: "image",
             label: "Image",
-            class: "w-full md:w-[5%]",
+            class: "w-1/2 md:w-[5%]",
           },
           {
             key: "col1",
             label: "Table Header",
-            class: "w-full md:w-[20%]",
+            class: "w-1/2 md:w-[20%]",
           },
           {
             key: "col2",
             label: "Table Header",
-            class: "w-full md:w-[10%]",
+            class: "w-1/2 md:w-[10%]",
           },
           {
             key: "col3",

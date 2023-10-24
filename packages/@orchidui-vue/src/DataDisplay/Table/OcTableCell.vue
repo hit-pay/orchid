@@ -106,7 +106,7 @@ const copyToClipboard = async (text) => {
         :offset="[0, 10]"
       >
         <Icon
-          class="cursor-pointer w-5 h-5 group-hover/row:opacity-100 opacity-0 ml-2"
+          class="cursor-pointer w-5 h-5 group-hover/row:opacity-100 md:opacity-0 ml-2"
           name="copy"
           @click="copyToClipboard(data)"
         />
