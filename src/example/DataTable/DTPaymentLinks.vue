@@ -1,10 +1,5 @@
 <script setup>
-import {
-  DataTable,
-  TableCellContent,
-  Icon,
-  Chip,
-} from "@orchid";
+import { DataTable, TableCellContent, Icon, Chip } from "@orchid";
 import { ref, onMounted } from "vue";
 
 let DataTableOptions = {
@@ -30,7 +25,7 @@ let DataTableOptions = {
     },
     search: {
       key: "keywords",
-    }
+    },
   },
   tableOptions: {
     isSelectable: true,
@@ -73,20 +68,20 @@ let DataTableOptions = {
   },
 };
 
-let fieldData = []
+let fieldData = [];
 for (let index = 0; index < 10; index++) {
-    fieldData.push({
-        date: "Nov, 22 2023",
-        time: "11:03AM",
-        url: "https://staging.hitpay.shop/s/age0md",
-        email: "nn@yopmail.com",
-        status: "completed",
-        amount: "SGD 1,870.00",
-        reference: "9a2f500c-545d-4db6-84fa-c40d65146f43"
-      })
+  fieldData.push({
+    date: "Nov, 22 2023",
+    time: "11:03AM",
+    url: "https://staging.hitpay.shop/s/age0md",
+    email: "nn@yopmail.com",
+    status: "completed",
+    amount: "SGD 1,870.00",
+    reference: "9a2f500c-545d-4db6-84fa-c40d65146f43",
+  });
 }
 
-DataTableOptions.tableOptions.fields = fieldData
+DataTableOptions.tableOptions.fields = fieldData;
 
 const Filter = {
   current_page: 1,
@@ -95,17 +90,15 @@ const Filter = {
   keywords: "",
 };
 
-
 const filterData = ref(Filter);
 const loading = ref(true);
 
-
 onMounted(() => {
-  loading.value = false
-})
+  loading.value = false;
+});
 </script>
 <template>
-  <article v-if="!loading" class="grid gap-3" >
+  <article v-if="!loading" class="grid gap-3">
     <h2>Data Table Payment Links</h2>
     <p class="text-oc-text-400">Create data table more simple</p>
     <p>
@@ -116,11 +109,11 @@ onMounted(() => {
       :options="DataTableOptions"
       @update:filter="filterData = $event"
     >
-    <template #bulk-actions="{ selectedRows }">
-       your action {{ selectedRows }}
+      <template #bulk-actions="{ selectedRows }">
+        your action {{ selectedRows }}
       </template>
 
-    <template #col1="{ item }">
+      <template #col1="{ item }">
         <TableCellContent
           important
           :title="item.date"
@@ -128,10 +121,7 @@ onMounted(() => {
         />
       </template>
       <template #url="{ item }">
-        <TableCellContent
-          :title="item.url"
-          :description="item.email"
-        />
+        <TableCellContent :title="item.url" :description="item.email" />
       </template>
 
       <template #col3="{ item }">

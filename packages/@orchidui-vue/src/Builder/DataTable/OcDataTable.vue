@@ -24,28 +24,27 @@ const props = defineProps({
 const emit = defineEmits(["update:filter"]);
 
 const pagination = computed(() => {
-  return props.options.pagination
-})
+  return props.options.pagination;
+});
 
 const tableOptions = computed(() => {
-  return props.options.tableOptions
-})
+  return props.options.tableOptions;
+});
 
 const filterOptions = computed(() => {
-  return props.options.filterOptions
-})
-
-
+  return props.options.filterOptions;
+});
 
 const selectedRows = ref([]);
-const activeTab = ref(props.filter.tabs);
-const isSearchExpanded = ref(false);
+const filterTab = ref(props.filter.tabs);
 const currentPage = ref(props.filter.current_page);
 const perPage = ref({
   label: props.filter.per_page,
   value: props.filter.per_page,
 });
 const queries = ref([]);
+
+const isSearchExpanded = ref(false);
 
 const perPageOptions = computed(() => {
   let page = 10;
@@ -77,6 +76,15 @@ const showBulkAction = computed(() => {
   return selectedRows.value.length > 0;
 });
 
+const filterEnabled = computed(() => {
+  return (
+    selectedRows.value.length > 0 ||
+    filterOptions.value.tabs ||
+    filterOptions.value.search ||
+    filterOptions.value.form
+  );
+});
+
 const addQuery = (query) => {
   if (!query.trim() || queries.value.includes(query)) return;
   queries.value.push(query);
@@ -96,7 +104,7 @@ const applyFilter = () => {
     filterData[filterOptions.value.per_page.key] = perPage.value.value;
   }
   if (filterOptions.value.tabs) {
-    filterData[filterOptions.value.tabs.key] = activeTab.value;
+    filterData[filterOptions.value.tabs.key] = filterTab.value;
   }
   if (filterOptions.value.search) {
     filterData[filterOptions.value.search.key] = queries.value.join();
@@ -108,13 +116,17 @@ const applyFilter = () => {
   <div class="flex flex-col gap-3">
     <Table v-model="selectedRows" :options="tableOptions">
       <template #before>
-        <div class="flex items-center m-5 relative min-h-[30px]">
+        <div
+          v-if="filterEnabled"
+          class="flex items-center m-5 relative min-h-[30px]"
+        >
           <div v-if="showBulkAction" class="flex gap-3 items-center">
             <slot name="bulk-actions" :selected-rows="selectedRows" />
           </div>
           <div v-else class="flex gap-3">
             <Tabs
-              v-model="activeTab"
+              v-if="filterOptions.tabs"
+              v-model="filterTab"
               :tabs="filterOptions.tabs.options"
               :variant="'pills'"
               @update:model-value="applyFilter"
@@ -125,10 +137,11 @@ const applyFilter = () => {
             :class="isSearchExpanded ? 'md:w-fit w-full' : ''"
           >
             <FilterSearch
+              v-if="filterOptions.search"
               @add-query="addQuery"
               @toggle="isSearchExpanded = $event"
             />
-            <FilterForm />
+            <FilterForm v-if="filterOptions.form" />
           </div>
         </div>
         <FilterSearchFor

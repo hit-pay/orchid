@@ -1,5 +1,13 @@
 <script setup>
-import { Theme, Sidebar, Header, HeaderLeft, HeaderRight, Icon , Button} from "@orchid";
+import {
+  Theme,
+  Sidebar,
+  Header,
+  HeaderLeft,
+  HeaderRight,
+  Icon,
+  Button,
+} from "@orchid";
 import { reactive, computed } from "vue";
 // TODO : update to popup playground
 // import ThemeSettings from "@/ThemeSettings.vue";
@@ -135,8 +143,11 @@ const changeActiveSidebar = (name) => {
         </HeaderLeft>
         <HeaderRight>
           <Button
-             variant="secondary" size="small" :left-icon="state.darkMode ? 'sun' : 'moon'"
-             @click="toggleDarkMode" />
+            variant="secondary"
+            size="small"
+            :left-icon="state.darkMode ? 'sun' : 'moon'"
+            @click="toggleDarkMode"
+          />
           <a
             href="https://storybook-orchidui.vercel.app/"
             class="text-oc-primary"
