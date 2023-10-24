@@ -3,8 +3,7 @@ import { Theme, Sidebar, Header, HeaderLeft, HeaderRight, Icon } from "@orchid";
 import { reactive, computed } from "vue";
 import ThemeSettings from "./ThemeSettings.vue";
 import ExampleDataTable from "./example/DataTable.vue";
-import ExampleFormBuilder from "./example/FormBuilder.vue";
-import { ONLINE_STORE_SIDEBAR_GROUP } from "@orchid/Elements/Sidebar/HitpaySidebar.js";
+// import ExampleFormBuilder from "./example/FormBuilder.vue";
 
 let state = reactive({
   darkMode: false,
@@ -12,7 +11,47 @@ let state = reactive({
     teal: `teal-primary-color`,
   },
   primary_color: "",
-  sidebar_menu: ONLINE_STORE_SIDEBAR_GROUP,
+  sidebar_menu: [
+    {
+      name: "builder",
+      label: "Orchid UI Builder",
+      items: [
+        {
+          icon: "circle",
+          name: "datatable",
+          label: "DataTable",
+          children: [
+            {
+              active: true,
+              name: "dt-payment-link",
+              label: "Payment Links",
+            },
+            {
+              name: "dt-products",
+              label: "Products",
+            },
+            {
+              name: "dt-invoices",
+              label: "Invoices",
+            },
+            {
+              name: "dt-customers",
+              label: "Customers",
+            },
+            {
+              name: "dt-product-logs",
+              label: "Product Logs",
+            },
+          ],
+        },
+        {
+          icon: "circle",
+          name: "formbuilder",
+          label: "Form Builder",
+        },
+      ],
+    },
+  ],
   isExpanded: true,
 });
 
@@ -29,6 +68,46 @@ const changePrimaryColor = () => {
   } else {
     state.primary_color = "";
   }
+};
+
+const updateActiveSidebar = (name, menus) => {
+  let newSidebarMenu = [];
+  menus.forEach((menuGroup) => {
+    let newMenuGroup = [];
+    let newMenuGroupItems = [];
+    menuGroup.items.forEach((menu) => {
+      let activeMenu = false;
+      if (menu.name === name) {
+        activeMenu = true;
+      }
+      if (menu.children) {
+        let newSubmenu = [];
+        menu.children.forEach((submenu) => {
+          let activeSubmenu = false;
+          if (submenu.name === name) {
+            activeSubmenu = true;
+          }
+          newSubmenu.push({
+            ...submenu,
+            active: activeSubmenu,
+          });
+        });
+        menu.children = newSubmenu;
+      }
+      newMenuGroupItems.push({
+        ...menu,
+        active: activeMenu,
+      });
+    });
+    newMenuGroup = menuGroup;
+    newMenuGroup.items = newMenuGroupItems;
+    newSidebarMenu.push(newMenuGroup);
+  });
+  return newSidebarMenu;
+};
+
+const changeActiveSidebar = (name) => {
+  state.sidebar_menu = updateActiveSidebar(name, state.sidebar_menu);
 };
 </script>
 <template>
@@ -51,6 +130,12 @@ const changePrimaryColor = () => {
           </a>
         </HeaderLeft>
         <HeaderRight>
+          <a
+            href="https://storybook-orchidui.vercel.app/"
+            class="text-oc-primary"
+          >
+            Storybook
+          </a>
           <a href="https://github.com/hit-pay/orchid" target="_blank">
             <Icon name="github" />
           </a>
@@ -65,27 +150,22 @@ const changePrimaryColor = () => {
           @change-expanded="state.isExpanded = $event"
         >
           <template #label="{ menu }">
-            <a href="#" class="ml-3">{{ menu.label }}</a>
+            <a :href="`#${menu.name}`" class="ml-3 h-full">{{ menu.label }}</a>
           </template>
           <template #submenu_label="{ submenu }">
-            <a href="#" class="ml-3">{{ submenu.label }}</a>
+            <a
+              :href="`#${submenu.name}`"
+              class="ml-3 h-full"
+              @click="changeActiveSidebar(submenu.name)"
+              >{{ submenu.label }}</a
+            >
           </template>
         </Sidebar>
       </div>
-      <div class="flex-1 px-[20px] pt-[20px]">
+      <div class="flex-1 md:px-[20px] pt-[20px]">
         <section class="py-5 grid gap-5 items-start">
-          <h1 class="flex mb-3 font-bold">Orchid UI Playground</h1>
-          <div class="flex gap-3 mb-3">
-            <a href="/docs" class="text-oc-primary"> Documentation </a> /
-            <a
-              href="https://storybook-orchidui.vercel.app/"
-              class="text-oc-primary"
-            >
-              Storybook
-            </a>
-          </div>
           <ExampleDataTable />
-          <ExampleFormBuilder />
+          <!-- <ExampleFormBuilder /> -->
         </section>
       </div>
       <div class="hidden max-w-[400px] lg:block mt-[20px]">
