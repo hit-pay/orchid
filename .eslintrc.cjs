@@ -6,8 +6,7 @@ module.exports = {
   extends: [
     "eslint:recommended",
     "plugin:vue/vue3-recommended",
-    "prettier",
-    "plugin:storybook/recommended"
+    "prettier"
   ],
   rules: {
     "vue/require-default-prop": ["off"],
