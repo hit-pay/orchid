@@ -14,8 +14,7 @@
     "build": "npm run build-playground && node obfuscator.js",
     "build-storybook": "storybook build -o dist/storybook",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix packages",
-    "format": "prettier .  --write",
-    "postinstall": "(cd packages/@orchidui-vue && npm install)"
+    "format": "prettier .  --write"
   },
   "dependencies": {
     "@orchidui/vue": "^0.0.14",
@@ -29,22 +28,22 @@
     "vue": "^3.3.4"
   },
   "devDependencies": {
-    "@storybook/addon-essentials": "^7.5.0",
-    "@storybook/addon-interactions": "^7.5.0",
-    "@storybook/addon-links": "^7.5.0",
-    "@storybook/blocks": "^7.5.0",
-    "@storybook/builder-vite": "^7.5.0",
+    "@storybook/addon-essentials": "^7.5.1",
+    "@storybook/addon-interactions": "^7.5.1",
+    "@storybook/addon-links": "^7.5.1",
+    "@storybook/blocks": "^7.5.1",
     "@storybook/testing-library": "^0.2.2",
-    "@storybook/vue3": "^7.5.0",
-    "@storybook/vue3-vite": "^7.5.0",
+    "@storybook/vue3": "^7.5.1",
+    "@storybook/vue3-vite": "^7.5.1",
     "@vitejs/plugin-vue": "^4.2.3",
     "autoprefixer": "^10.4.16",
     "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-storybook": "^0.6.15",
     "fast-glob": "^3.3.1",
     "postcss": "^8.4.30",
     "postcss-import": "^15.1.0",
     "replace-in-file": "^7.0.1",
-    "storybook": "^7.5.0",
+    "storybook": "^7.5.1",
     "tailwindcss": "^3.3.3",
     "vite": "^4.4.5"
   }
