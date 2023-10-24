@@ -1,20 +1,19 @@
 <script setup>
-import { Table, Pagination, Select } from "@orchid";
+import { Table, Pagination, Select, Tabs } from "@orchid";
 import { ref, computed } from "vue";
 const props = defineProps({
   options: {
     type: Object,
   },
 });
-// 1. Filter Tab
-// 2. Filter Search
-// 2. Filter Form
-const { paginationOptions, tableOptions } = props.options;
+const { paginationOptions, tableOptions, filter, filterOptions } =
+  props.options;
 
-const currentPage = ref(paginationOptions.current_page);
+const activeTab = ref(filter.tabs);
+const currentPage = ref(filter.current_page);
 const perPage = ref({
-  label: paginationOptions.per_page,
-  value: paginationOptions.per_page,
+  label: filter.per_page,
+  value: filter.per_page,
 });
 
 const perPageOptions = computed(() => {
@@ -43,20 +42,35 @@ const perPageOptions = computed(() => {
     ),
   ];
 });
+
+const applyFilter = () => {
+  // currentPage : filterOptions.current_page.key
+  // perPage : filterOptions.per_page.key
+  // activeTab : filterOptions.tabs.key
+  // filterForm : filterOptions.form
+  // emit filter changed
+};
 </script>
 <template>
   <div class="flex flex-col">
-    <div></div>
+    <div class="flex gap-3 items-center my-5">
+      <Tabs
+        v-model="activeTab"
+        :tabs="filterOptions.tabs.options"
+        :variant="'pills'"
+        @update:model-value="applyFilter"
+      />
+    </div>
     <slot name="table">
       <Table :options="tableOptions"></Table>
     </slot>
     <div class="flex gap-3 items-center m-5">
       <Pagination
+        v-model="currentPage"
         class="justify-center md:justify-start"
-        :model-value="currentPage"
         :max-page="paginationOptions.last_page"
         total-visible="5"
-        @update:model-value="currentPage = $event"
+        @update:model-value="applyFilter"
       />
       <div class="hidden md:flex items-center">
         <div class="min-w-[100px]">Item per page:</div>

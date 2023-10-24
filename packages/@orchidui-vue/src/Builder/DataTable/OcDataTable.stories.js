@@ -18,21 +18,30 @@ export default {
 export const Default = {
   args: {
     options: {
-      paginationOptions: {
-        total: 50,
+      filter: {
+        tabs: "",
         per_page: 10,
         current_page: 1,
+      },
+      paginationOptions: {
+        total: 50,
         last_page: 20,
       },
       filterOptions: {
-        page: {
-          key: "page",
+        current_page: {
+          key: "current_page",
         },
         per_page: {
           key: "per_page",
         },
         tabs: {
-          key: "search",
+          key: "tabs",
+          options: {
+            0: { label: "All", value: "" },
+            1: { label: "Filter 01", value: "1" },
+            2: { label: "Filter 02", value: "2" },
+            3: { label: "Filter 03", value: "3" },
+          },
         },
         search: {
           key: "search",
