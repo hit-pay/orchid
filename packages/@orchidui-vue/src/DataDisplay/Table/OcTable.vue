@@ -3,7 +3,10 @@ import { TableHeader, TableCell } from "@orchid";
 import { ref } from "vue";
 
 const props = defineProps({
-  options: Object,
+  options: {
+    type: Object,
+    required: true
+  },
   modelValue: Array,
 });
 

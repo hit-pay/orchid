@@ -13,9 +13,11 @@ import { ref, computed } from "vue";
 const props = defineProps({
   options: {
     type: Object,
+    required: true
   },
   filter: {
     type: Object,
+    required: true
   },
 });
 
