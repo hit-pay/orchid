@@ -57,9 +57,6 @@ const perPageOptions = computed(() => {
   ];
 });
 
-const updateSelectedRows = (value) => {
-  selectedRows.value = value;
-};
 
 const showBulkAction = computed(() => {
   return selectedRows.value.length > 0;
@@ -94,39 +91,37 @@ const applyFilter = () => {
 </script>
 <template>
   <div class="flex flex-col gap-3">
-    <slot name="table" :update-selected-rows="updateSelectedRows">
-      <Table v-model="selectedRows" :options="tableOptions">
-        <template #before>
-          <div class="flex items-center m-5 relative">
-            <div v-if="showBulkAction" class="flex gap-3 items-center">
-              <slot name="bulk-actions" :selected-rows="selectedRows" />
-            </div>
-            <div v-else class="flex gap-3">
-              <Tabs
-                v-model="activeTab"
-                :tabs="filterOptions.tabs.options"
-                :variant="'pills'"
-                @update:model-value="applyFilter"
-              />
-            </div>
-            <div class="flex gap-3 absolute right-0">
-              <FilterSearch @add-query="addQuery" />
-              <FilterForm />
-            </div>
+    <Table v-model="selectedRows" :options="tableOptions">
+      <template #before>
+        <div class="flex items-center m-5 relative">
+          <div v-if="showBulkAction" class="flex gap-3 items-center">
+            <slot name="bulk-actions" :selected-rows="selectedRows" />
           </div>
-          <FilterSearchFor
-            v-if="queries.length"
-            :queries="queries"
-            @remove-query="removeQuery"
-          />
-        </template>
-        <template 
-            v-for="header in tableOptions.headers" 
-            #[header.key]="{data, item}">
-            <slot :name="header.key" :data="data" :item="item"> </slot>
-        </template>
-      </Table>
-    </slot>
+          <div v-else class="flex gap-3">
+            <Tabs
+              v-model="activeTab"
+              :tabs="filterOptions.tabs.options"
+              :variant="'pills'"
+              @update:model-value="applyFilter"
+            />
+          </div>
+          <div class="flex gap-3 absolute right-0">
+            <FilterSearch @add-query="addQuery" />
+            <FilterForm />
+          </div>
+        </div>
+        <FilterSearchFor
+          v-if="queries.length"
+          :queries="queries"
+          @remove-query="removeQuery"
+        />
+      </template>
+      <template 
+          v-for="header in tableOptions.headers" 
+          #[header.key]="{data, item}">
+          <slot :name="header.key" :data="data" :item="item"> </slot>
+      </template>
+    </Table>
     <div class="flex gap-3 items-center m-3 md:mx-0">
       <Pagination
         v-model="currentPage"
