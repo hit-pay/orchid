@@ -23,7 +23,19 @@ const props = defineProps({
 
 const emit = defineEmits(["update:filter"]);
 
-const { pagination, tableOptions, filterOptions } = props.options;
+const pagination = computed(() => {
+  return props.options.pagination
+})
+
+const tableOptions = computed(() => {
+  return props.options.tableOptions
+})
+
+const filterOptions = computed(() => {
+  return props.options.filterOptions
+})
+
+
 
 const selectedRows = ref([]);
 const activeTab = ref(props.filter.tabs);
@@ -39,19 +51,19 @@ const perPageOptions = computed(() => {
   let page = 10;
   let per_page_option = [
     {
-      label: page.toString(),
+      label: page?.toString(),
       value: page,
     },
     {
-      label: (page * 2).toString(),
+      label: (page * 2)?.toString(),
       value: page * 2,
     },
     {
-      label: pagination.total.toString(),
-      value: pagination.total,
+      label: pagination.value.total.toString(),
+      value: pagination.value.total,
     },
   ];
-  const maxLength = pagination.total < 100 ? pagination.total : 100;
+  const maxLength = pagination.value.total < 100 ? pagination.value.total : 100;
   return [
     ...new Set(
       per_page_option.filter((p) => {
@@ -77,17 +89,17 @@ const removeQuery = (query) => {
 
 const applyFilter = () => {
   let filterData = {};
-  if (filterOptions.current_page) {
-    filterData[filterOptions.current_page.key] = currentPage.value;
+  if (filterOptions.value.current_page) {
+    filterData[filterOptions.value.current_page.key] = currentPage.value;
   }
-  if (filterOptions.per_page) {
-    filterData[filterOptions.per_page.key] = perPage.value.value;
+  if (filterOptions.value.per_page) {
+    filterData[filterOptions.value.per_page.key] = perPage.value.value;
   }
-  if (filterOptions.tabs) {
-    filterData[filterOptions.tabs.key] = activeTab.value;
+  if (filterOptions.value.tabs) {
+    filterData[filterOptions.value.tabs.key] = activeTab.value;
   }
-  if (filterOptions.search) {
-    filterData[filterOptions.search.key] = queries.value.join();
+  if (filterOptions.value.search) {
+    filterData[filterOptions.value.search.key] = queries.value.join();
   }
   emit("update:filter", filterData);
 };
@@ -96,7 +108,7 @@ const applyFilter = () => {
   <div class="flex flex-col gap-3">
     <Table v-model="selectedRows" :options="tableOptions">
       <template #before>
-        <div class="flex items-center m-5 relative">
+        <div class="flex items-center m-5 relative min-h-[30px]">
           <div v-if="showBulkAction" class="flex gap-3 items-center">
             <slot name="bulk-actions" :selected-rows="selectedRows" />
           </div>

@@ -61,7 +61,7 @@ const filterData = ref(Filter);
         <span class="text-oc-text-400 text-sm">{{ data }}</span>
       </template>
       <template #col5="{ data }">
-        <Chip variant="success" class="w-fit" :label="data" />
+        <Chip variant="primary" class="w-fit" :label="data" />
       </template>
       <template #col6="{ data }">
         <div class="flex gap-3 items-center">

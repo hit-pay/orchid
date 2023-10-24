@@ -1,10 +1,14 @@
 <script setup>
-import { Theme, Sidebar, Header, HeaderLeft, HeaderRight, Icon } from "@orchid";
+import { Theme, Sidebar, Header, HeaderLeft, HeaderRight, Icon , Button} from "@orchid";
 import { reactive, computed } from "vue";
-import ThemeSettings from "./ThemeSettings.vue";
-import ExampleDataTable from "./example/DataTable.vue";
-// import ExampleFormBuilder from "./example/FormBuilder.vue";
-
+// TODO : update to popup playground
+// import ThemeSettings from "@/ThemeSettings.vue";
+import ExampleDataTable from "@/Example/DataTable.vue";
+import DTPaymentLinks from "@/Example/DataTable/DTPaymentLinks.vue";
+// import DTCustomers from "@/Example/DataTable/DTCustomers.vue";
+// import DTInvoices from "@/Example/DataTable/DTInvoices.vue";
+// import DTProductLogs from "@/Example/DataTable/DTProductLogs.vue";
+// import DTProducts from "@/Example/DataTable/DTProducts.vue";
 let state = reactive({
   darkMode: false,
   primary_colors: {
@@ -23,7 +27,7 @@ let state = reactive({
           children: [
             {
               active: true,
-              name: "dt-payment-link",
+              name: "dt-payment-links",
               label: "Payment Links",
             },
             {
@@ -116,8 +120,8 @@ const changeActiveSidebar = (name) => {
     :color-mode="state.darkMode ? 'dark' : 'light'"
     :class="primaryColor"
   >
-    <section class="flex flex-wrap mx-auto px-4 h-screen">
-      <Header class="w-full">
+    <section class="flex flex-wrap mx-auto px-4">
+      <Header class="w-full sticky top-0 bg-oc-bg-light z-[30]">
         <HeaderLeft class="md:w-[260px]">
           <a
             class="flex items-center gap-3 text-oc-accent-1"
@@ -130,18 +134,21 @@ const changeActiveSidebar = (name) => {
           </a>
         </HeaderLeft>
         <HeaderRight>
+          <Button
+             variant="secondary" size="small" :left-icon="state.darkMode ? 'sun' : 'moon'"
+             @click="toggleDarkMode" />
           <a
             href="https://storybook-orchidui.vercel.app/"
             class="text-oc-primary"
           >
-            Storybook
+            <Icon name="storybook" />
           </a>
           <a href="https://github.com/hit-pay/orchid" target="_blank">
             <Icon name="github" />
           </a>
         </HeaderRight>
       </Header>
-      <div class="hidden xl:block">
+      <div class="hidden xl:block fixed h-screen mt-[60px] z-[40]">
         <Sidebar
           title="Orchid UI"
           class="min-h-full"
@@ -162,18 +169,28 @@ const changeActiveSidebar = (name) => {
           </template>
         </Sidebar>
       </div>
-      <div class="flex-1 md:px-[20px] pt-[20px]">
+      <div
+        class="flex-1 md:px-[20px] pt-[20px]"
+        :class="{
+          'md:ml-[300px]': state.isExpanded,
+          'md:ml-[103px]': !state.isExpanded,
+        }"
+      >
         <section class="py-5 grid gap-5 items-start">
           <ExampleDataTable />
-          <!-- <ExampleFormBuilder /> -->
+          <DTPaymentLinks id="dt-payment-links" />
+          <!-- <DTProducts id="dt-products" />
+          <DTInvoices id="dt-invoices" />
+          <DTCustomers id="dt-customers" />
+          <DTProductLogs id="dt-product-logs" /> -->
         </section>
       </div>
-      <div class="hidden max-w-[400px] lg:block mt-[20px]">
+      <!-- <div class="hidden max-w-[400px] lg:block mt-[20px]">
         <ThemeSettings
           @toggle-dark-mode="toggleDarkMode"
           @change-primary-color="changePrimaryColor"
         />
-      </div>
+      </div> -->
     </section>
   </Theme>
 </template>
