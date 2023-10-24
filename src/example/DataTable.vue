@@ -5,6 +5,6 @@ import { DataTable } from "@orchid";
   <article>
     <h2>Data Table Builder</h2>
     <p>Create data table more simple</p>
-    <DataTable />
+    <!-- <DataTable /> -->
   </article>
 </template>

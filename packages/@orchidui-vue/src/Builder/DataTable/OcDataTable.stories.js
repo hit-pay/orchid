@@ -16,14 +16,14 @@ export default {
 
 export const Default = {
   args: {
+    filter: {
+      current_page: 1,
+      per_page: 10,
+      tabs: "",
+      keywords: "",
+    },
     options: {
-      filter: {
-        current_page: 1,
-        per_page: 10,
-        tabs: "",
-        keywords: "",
-      },
-      paginationOptions: {
+      pagination: {
         total: 50,
         last_page: 20,
       },
@@ -213,7 +213,7 @@ export const Default = {
     setup() {
       const updateFilterData = (data) => {
         // get new data
-        args.options.filter = data;
+        args.filter = data;
       };
       return { args, updateFilterData };
     },
@@ -221,10 +221,10 @@ export const Default = {
           <Theme>
             <div>
               <ul>
-                <li v-for="item, key in args.options.filter">{{key}} : {{item}}</li>
+                <li v-for="item, key in args.filter">{{key}} : {{item}}</li>
               </ul>
             </div>
-            <DataTable :options="args.options" @update:filter="updateFilterData">
+            <DataTable :filter="args.filter" :options="args.options" @update:filter="updateFilterData">
               <template #bulk-actions="{selectedRows}">
                 <Button
                   label="Publish"

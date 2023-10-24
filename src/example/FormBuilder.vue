@@ -6,7 +6,7 @@ import { FormBuilder } from "@orchid";
     <h2>Form Builder</h2>
     <p>Create form more simple</p>
     <div>
-      <FormBuilder />
+      <!-- <FormBuilder /> -->
     </div>
   </article>
 </template>

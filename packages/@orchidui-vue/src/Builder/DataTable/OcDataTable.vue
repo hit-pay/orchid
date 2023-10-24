@@ -8,26 +8,28 @@ import {
   FilterSearchFor,
   FilterForm,
 } from "@orchid";
-import { ref, computed, defineEmits } from "vue";
+import { ref, computed } from "vue";
 
 const props = defineProps({
   options: {
+    type: Object,
+  },
+  filter: {
     type: Object,
   },
 });
 
 const emit = defineEmits(["update:filter"]);
 
-const { paginationOptions, tableOptions, filter, filterOptions } =
-  props.options;
+const { pagination, tableOptions, filterOptions } = props.options;
 
 const selectedRows = ref([]);
-const activeTab = ref(filter.tabs);
+const activeTab = ref(props.filter.tabs);
 const isSearchExpanded = ref(false);
-const currentPage = ref(filter.current_page);
+const currentPage = ref(props.filter.current_page);
 const perPage = ref({
-  label: filter.per_page,
-  value: filter.per_page,
+  label: props.filter.per_page,
+  value: props.filter.per_page,
 });
 const queries = ref([]);
 
@@ -43,12 +45,11 @@ const perPageOptions = computed(() => {
       value: page * 2,
     },
     {
-      label: paginationOptions.total.toString(),
-      value: paginationOptions.total,
+      label: pagination.total.toString(),
+      value: pagination.total,
     },
   ];
-  const maxLength =
-    paginationOptions.total < 100 ? paginationOptions.total : 100;
+  const maxLength = pagination.total < 100 ? pagination.total : 100;
   return [
     ...new Set(
       per_page_option.filter((p) => {
@@ -134,7 +135,7 @@ const applyFilter = () => {
       <Pagination
         v-model="currentPage"
         class="justify-center md:justify-start"
-        :max-page="paginationOptions.last_page"
+        :max-page="pagination.last_page"
         total-visible="5"
         @update:model-value="applyFilter"
       />

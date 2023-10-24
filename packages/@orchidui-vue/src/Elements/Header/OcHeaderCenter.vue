@@ -1,5 +1,4 @@
 <script setup>
-import { defineEmits } from "vue";
 import { Icon } from "@orchid";
 defineProps({
   isSaved: Boolean,

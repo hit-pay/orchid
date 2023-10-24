@@ -1,6 +1,6 @@
 <script setup>
 import { TableHeader, TableCell } from "@orchid";
-import { ref, defineEmits } from "vue";
+import { ref } from "vue";
 
 const props = defineProps({
   options: Object,

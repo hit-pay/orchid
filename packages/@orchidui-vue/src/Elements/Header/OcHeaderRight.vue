@@ -1,6 +1,5 @@
 <script setup>
 import { Button } from "@orchid";
-import { defineEmits } from "vue";
 defineEmits(["save", "cancel"]);
 defineProps({
   saveLabel: {

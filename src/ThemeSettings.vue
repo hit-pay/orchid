@@ -1,5 +1,4 @@
 <script setup>
-import { defineEmits } from "vue";
 import { Button } from "@orchid";
 defineEmits(["toggleDarkMode", "changePrimaryColor"]);
 </script>
