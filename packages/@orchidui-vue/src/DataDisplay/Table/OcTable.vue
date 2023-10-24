@@ -5,7 +5,7 @@ import { ref } from "vue";
 const props = defineProps({
   options: {
     type: Object,
-    required: true
+    required: true,
   },
   modelValue: Array,
 });
