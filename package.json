@@ -11,11 +11,11 @@
     "build-orchidui": "npm run build --prefix packages/@orchidui-vue",
     "build-docs": "npm run build --prefix docs",
     "build-playground": "vite build",
-    "build": "npm run build-orchidui && npm run build-docs && npm run build-playground && node obfuscator.js",
+    "build": "npm run build-orchidui && npm run build-playground && node obfuscator.js",
     "build-storybook": "storybook build -o dist/storybook",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix packages",
     "format": "prettier .  --write",
-    "postinstall": "(cd packages/@orchidui-vue && npm install) && (cd docs && npm install)"
+    "postinstall": "(cd packages/@orchidui-vue && npm install)"
   },
   "dependencies": {
     "@orchidui/vue": "^0.0.14",
