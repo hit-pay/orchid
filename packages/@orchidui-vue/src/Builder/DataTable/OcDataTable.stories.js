@@ -131,19 +131,19 @@ export const Default = {
           {
             key: "col5",
             label: "Table Header",
-            class: "w-3/6 md:w-[15%]",
+            class: "w-1/2 md:w-[15%]",
           },
           {
             key: "col6",
             label: "Header",
-            class: "w-2/6 md:w-[10%]",
+            class: "w-1/2 md:w-[10%]",
           },
           {
             key: "actions",
             label: "",
             headerVariant: "text",
             variant: "icon",
-            class: "w-1/6 md:w-[5%]",
+            class: "w-1/2 md:w-[5%]",
           },
         ],
         fields: [
@@ -261,10 +261,10 @@ export const Default = {
               </template>
               <template #col6="{ data }">
                 <div class="flex gap-3 items-center">
-                  <span class="md:hidden">
-                  status
-                  </span>
                   <Toggle size="small" v-model="data"/>
+                  <span class="md:hidden">
+                    status
+                  </span>
                 </div>
               </template>
               <template #actions>

@@ -46,7 +46,7 @@ const copyToClipboard = async (text) => {
 <template>
   <div
     :class="[variantClass[variant] || 'px-4', isLast ? '' : '']"
-    class="md:py-3 bg-oc-bg-light min-h-[58px] md:group-hover/row:bg-oc-gray-50 items-center"
+    class="py-3 bg-oc-bg-light md:min-h-[58px] md:group-hover/row:bg-oc-gray-50 items-center"
   >
     <div class="flex" :class="isCopy ? 'justify-between' : 'justify-start'">
       <slot>
