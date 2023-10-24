@@ -31,6 +31,7 @@ export const pagination = {
     template: `
           <Theme class="flex gap-3 items-center mb-3">
             <Pagination
+                class="justify-center"
                 :max-page="args.maxPage"
                 :size="args.size"
                 :totalVisible="args.totalVisible"

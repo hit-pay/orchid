@@ -156,14 +156,6 @@ export const Default = {
               <template #actions>
                 <Icon class="w-6 h-6 group-hover/row:block md:hidden cursor-pointer mx-auto" name="dots-vertical"/>
               </template>
-
-              <template #before>
-                lorem
-              </template>
-
-              <template #after>
-              lorem
-            </template>
             </Table>
           </Theme>
         `,

@@ -47,5 +47,3 @@ const query = ref("");
     />
   </div>
 </template>
-
-<style scoped lang="scss"></style>

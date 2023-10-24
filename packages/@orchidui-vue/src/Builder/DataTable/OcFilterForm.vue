@@ -9,7 +9,6 @@ import { Button, Input, RangeInput, Dropdown } from "@orchid";
     </template>
     <template #default="{ close }">
       <div class="p-5 flex w-[326px] flex-col gap-y-7">
-        <!--   Fields   -->
         <div class="flex flex-col gap-y-4">
           <Input
             placeholder="Select statuses"
