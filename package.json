@@ -11,7 +11,7 @@
     "build-orchidui": "npm run build --prefix packages/@orchidui-vue",
     "build-docs": "npm run build --prefix docs",
     "build-playground": "vite build",
-    "build": "npm run build-orchidui && npm run build-playground && node obfuscator.js",
+    "build": "npm run build-orchidui && npm run build-playground",
     "build-storybook": "storybook build -o dist/storybook",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix packages",
     "postinstall": "(cd packages/@orchidui-vue && npm install)",
@@ -23,6 +23,7 @@
     "autoprefixer": "^10.4.16",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-vue": "^9.17.0",
+    "flag-icons": "^6.11.1",
     "postcss": "^8.4.31",
     "sass": "^1.68.0",
     "vue": "^3.3.4"
