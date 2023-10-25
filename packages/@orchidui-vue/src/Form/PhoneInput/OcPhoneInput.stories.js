@@ -1,5 +1,5 @@
 import { Theme, PhoneInput } from "@orchid";
-import countryCodes from "@orchid/countryCodes.js";
+import countryCodes from "@orchid/CountryCodes.js";
 import { ref } from "vue";
 
 export default {
