@@ -34,6 +34,19 @@ export const Default = {
       Icon,
     },
     setup() {
+
+      // get all field name
+      // get field rule
+      // validate all 
+      // get all field values
+
+      // validator
+      // 1. required
+      // 2. required-if:field-name=condition
+      // 3. show-if:field-name=condition
+      // 4. 
+
+
       const onUpdateForm = (name, value = null) => {
         // validate value
         // key / form fields
