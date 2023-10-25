@@ -36,7 +36,7 @@ const filterOptions = computed(() => {
 });
 
 const selectedRows = ref([]);
-const filterTab = ref(props.filter.tabs);
+const filterTab = ref(props.filter[filterOptions.value.tabs.key]);
 const currentPage = ref(props.filter.current_page);
 const perPage = ref({
   label: props.filter.per_page,

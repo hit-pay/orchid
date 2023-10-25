@@ -15,7 +15,7 @@ let DataTableOptions = {
       key: "per_page",
     },
     tabs: {
-      key: "tabs",
+      key: "status",
       options: [
         { label: "All", value: "" },
         { label: "Pending", value: "pending" },
@@ -24,7 +24,7 @@ let DataTableOptions = {
       ],
     },
     search: {
-      key: "keywords",
+      key: "search",
     },
   },
   tableOptions: {
@@ -86,8 +86,8 @@ DataTableOptions.tableOptions.fields = fieldData;
 const Filter = {
   current_page: 1,
   per_page: 10,
-  tabs: "",
-  keywords: "",
+  status: "pending",
+  search: "",
 };
 
 const filterData = ref(Filter);
