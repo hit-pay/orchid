@@ -105,9 +105,8 @@ onMounted(() => {
       {{ filterData }}
     </p>
     <DataTable
-      :filter="filterData"
+      v-model:filter="filterData"
       :options="DataTableOptions"
-      @update:filter="filterData = $event"
     >
       <template #bulk-actions="{ selectedRows }">
         your action {{ selectedRows }}
