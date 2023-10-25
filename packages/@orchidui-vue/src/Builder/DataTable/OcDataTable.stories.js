@@ -11,10 +11,9 @@ import {
 
 export default {
   component: DataTable,
-  tags: ["autodocs"],
 };
 
-import { DataTableOptions, Filter } from "./DataTableOptions";
+import { DataTableOptions, Filter } from "../../data/DataTableOptions";
 export const Default = {
   args: {
     filter: Filter,
@@ -39,7 +38,7 @@ export const Default = {
       return { args, updateFilterData };
     },
     template: `
-          <Theme>
+          <Theme class="p-8">
             <div>
               <ul>
                 <li v-for="item, key in args.filter">{{key}} : {{item}}</li>

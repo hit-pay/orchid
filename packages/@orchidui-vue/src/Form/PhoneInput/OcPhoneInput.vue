@@ -8,7 +8,10 @@ const props = defineProps({
     type: String,
     default: "",
   },
-  initialCountryCode: String,
+  initialCountryCode: {
+    type: String,
+    default: "sg",
+  },
   errorMessage: String,
   phoneNumber: String,
   countryCode: String,

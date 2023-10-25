@@ -8,10 +8,7 @@ import {
   Chip,
 } from "@orchid";
 import { ref } from "vue";
-import {
-  DataTableOptions,
-  Filter,
-} from "@orchid/Builder/DataTable/DataTableOptions";
+import { DataTableOptions, Filter } from "@orchid/data/DataTableOptions";
 
 const filterData = ref(Filter);
 </script>

@@ -11,6 +11,7 @@ import {
 import { reactive, computed } from "vue";
 import ExampleDataTable from "@playground/example/DataTable.vue";
 import DTPaymentLinks from "@playground/example/data-table/DTPaymentLinks.vue";
+import ExampleFormBuilder from "@playground/example/FormBuilder.vue";
 let state = reactive({
   darkMode: false,
   primary_colors: {
@@ -52,8 +53,14 @@ let state = reactive({
         },
         {
           icon: "circle",
-          name: "formbuilder",
+          name: "form-builder",
           label: "Form Builder",
+          children: [
+            {
+              name: "example-form-builder",
+              label: "Example Form Builder",
+            },
+          ],
         },
       ],
     },
@@ -185,6 +192,7 @@ const changeActiveSidebar = (name) => {
         <section class="py-5 grid gap-5 items-start">
           <ExampleDataTable />
           <DTPaymentLinks id="dt-payment-links" />
+          <ExampleFormBuilder id="example-form-builder" />
         </section>
       </div>
     </section>
