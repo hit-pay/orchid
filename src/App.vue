@@ -9,7 +9,7 @@ import {
   Button,
 } from "@orchid";
 import { reactive, computed } from "vue";
-import ExampleDataTable from "@playground/example/data-table.vue";
+import ExampleDataTable from "@playground/example/DataTable.vue";
 import DTPaymentLinks from "@playground/example/data-table/DTPaymentLinks.vue";
 let state = reactive({
   darkMode: false,
