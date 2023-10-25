@@ -11,7 +11,7 @@ import { ref } from "vue";
 import {
   DataTableOptions,
   Filter,
-} from "@orchid/builder/DataTable/DataTableOptions";
+} from "@orchid/Builder/DataTable/DataTableOptions";
 
 const filterData = ref(Filter);
 </script>
