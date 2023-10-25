@@ -3,10 +3,6 @@ import { DataTable, TableCellContent, Icon, Chip } from "@orchid";
 import { ref, onMounted } from "vue";
 
 let DataTableOptions = {
-  pagination: {
-    total: 50,
-    last_page: 20,
-  },
   filterOptions: {
     current_page: {
       key: "current_page",
@@ -26,6 +22,10 @@ let DataTableOptions = {
     search: {
       key: "search",
     },
+  },
+  pagination: {
+    total: 10000,
+    last_page: 20,
   },
   tableOptions: {
     isSelectable: true,
@@ -84,8 +84,8 @@ for (let index = 0; index < 10; index++) {
 DataTableOptions.tableOptions.fields = fieldData;
 
 const Filter = {
-  current_page: 1,
-  per_page: 10,
+  current_page: 3,
+  per_page: 15,
   status: "pending",
   search: "",
 };

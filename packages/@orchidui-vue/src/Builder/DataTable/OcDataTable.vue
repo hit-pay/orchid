@@ -58,18 +58,31 @@ const perPageOptions = computed(() => {
       value: page * 2,
     },
     {
+      label: (page * 3)?.toString(),
+      value: page * 3,
+    },
+    {
+      label: (page * 4)?.toString(),
+      value: page * 4,
+    },
+    {
+      label: (page * 6)?.toString(),
+      value: page * 6,
+    },
+    {
+      label: (page * 8)?.toString(),
+      value: page * 8,
+    },
+    {
       label: pagination.value.total.toString(),
       value: pagination.value.total,
     },
   ];
   const maxLength = pagination.value.total < 100 ? pagination.value.total : 100;
-  return [
-    ...new Set(
-      per_page_option.filter((p) => {
-        return p.value <= maxLength;
-      }),
-    ),
-  ];
+  const opt = per_page_option.filter((p) => {
+    return p.value <= maxLength;
+  });
+  return [...new Set(opt)];
 });
 
 const showBulkAction = computed(() => {
