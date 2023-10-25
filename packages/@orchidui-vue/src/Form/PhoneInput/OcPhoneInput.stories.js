@@ -23,21 +23,20 @@ export const Default = {
     isInlineLabel: false,
     isDisabled: false,
     label: "",
-    countryCodes: countryCodes,
   },
   render: (args) => ({
     components: { Theme, PhoneInput },
     setup() {
       const phone = ref("");
       const phoneCode = ref("");
-      return { phone, phoneCode, args };
+      return { phone, phoneCode, args, countryCodes };
     },
     template: `
           <Theme>
             <PhoneInput
                 v-model:country-code="phoneCode"
                 v-model:phone-number="phone"
-                :country-codes="args.countryCodes"
+                :country-codes="countryCodes"
                 :key="args.initialCountryCode"
                 :valid-regex="args.validRegex"
                 :isInlineLabel="args.isInlineLabel"
