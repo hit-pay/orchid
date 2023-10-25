@@ -9,14 +9,8 @@ import {
   Button,
 } from "@orchid";
 import { reactive, computed } from "vue";
-// TODO : update to popup playground
-// import ThemeSettings from "@/ThemeSettings.vue";
-import ExampleDataTable from "@/Example/DataTable.vue";
-import DTPaymentLinks from "@/Example/DataTable/DTPaymentLinks.vue";
-// import DTCustomers from "@/Example/DataTable/DTCustomers.vue";
-// import DTInvoices from "@/Example/DataTable/DTInvoices.vue";
-// import DTProductLogs from "@/Example/DataTable/DTProductLogs.vue";
-// import DTProducts from "@/Example/DataTable/DTProducts.vue";
+import ExampleDataTable from "@playground/example/data-table.vue";
+import DTPaymentLinks from "@playground/example/data-table/DTPaymentLinks.vue";
 let state = reactive({
   darkMode: false,
   primary_colors: {
@@ -74,13 +68,14 @@ const primaryColor = computed(() => {
 const toggleDarkMode = () => {
   state.darkMode = !state.darkMode;
 };
-const changePrimaryColor = () => {
-  if (!state.primary_color) {
-    state.primary_color = "teal";
-  } else {
-    state.primary_color = "";
-  }
-};
+
+// const changePrimaryColor = () => {
+//   if (!state.primary_color) {
+//     state.primary_color = "teal";
+//   } else {
+//     state.primary_color = "";
+//   }
+// };
 
 const updateActiveSidebar = (name, menus) => {
   let newSidebarMenu = [];
@@ -190,18 +185,8 @@ const changeActiveSidebar = (name) => {
         <section class="py-5 grid gap-5 items-start">
           <ExampleDataTable />
           <DTPaymentLinks id="dt-payment-links" />
-          <!-- <DTProducts id="dt-products" />
-          <DTInvoices id="dt-invoices" />
-          <DTCustomers id="dt-customers" />
-          <DTProductLogs id="dt-product-logs" /> -->
         </section>
       </div>
-      <!-- <div class="hidden max-w-[400px] lg:block mt-[20px]">
-        <ThemeSettings
-          @toggle-dark-mode="toggleDarkMode"
-          @change-primary-color="changePrimaryColor"
-        />
-      </div> -->
     </section>
   </Theme>
 </template>
