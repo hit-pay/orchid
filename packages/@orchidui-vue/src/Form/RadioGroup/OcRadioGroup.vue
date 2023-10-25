@@ -34,7 +34,7 @@ const onInput = (value) => {
         :model-value="r.value"
         :label="r.label"
         :is-error="r.isError"
-        :disabled="r.disabled"
+        :is-disabled="r.isDisabled ? true : false"
         :group-name="groupName"
         @update:model-value="onInput"
       />

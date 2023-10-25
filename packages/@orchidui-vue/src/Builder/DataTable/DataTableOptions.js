@@ -22,54 +22,7 @@ const DataTableOptions = {
     search: {
       key: "keywords",
     },
-    form: [
-      // use form builder
-      {
-        key: "status",
-        label: "Status",
-        type: "select",
-        options: [
-          {
-            value: "status-1",
-            label: "Status 1",
-          },
-          {
-            value: "status-2",
-            label: "Status 2",
-          },
-        ],
-      },
-      {
-        key: "date",
-        label: "Date",
-        type: "date",
-      },
-      {
-        key: ["date_from", "date_to"],
-        label: "Date Range",
-        type: "date_range",
-      },
-      {
-        key: "payment_methods",
-        label: "Payment Methods",
-        type: "select",
-        options: [
-          {
-            value: "method-1",
-            label: "Method 1",
-          },
-          {
-            value: "method-2",
-            label: "Method 2",
-          },
-        ],
-      },
-      {
-        key: ["amount_from", "amount_to"],
-        label: "Amount",
-        type: "range",
-      },
-    ],
+    form: [],
   },
   tableOptions: {
     isSelectable: true,
