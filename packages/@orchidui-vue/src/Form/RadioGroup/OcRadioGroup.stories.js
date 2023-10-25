@@ -36,7 +36,7 @@ export const Default = {
       {
         label: "is Disabled",
         value: "4",
-        isDisabled: true
+        isDisabled: true,
       },
     ],
   },

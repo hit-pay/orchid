@@ -28,7 +28,7 @@ export const Default = {
       {
         label: "Text",
         value: 2,
-        isDisabled: true
+        isDisabled: true,
       },
     ],
   },

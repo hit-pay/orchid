@@ -1,7 +1,4 @@
-import {
-  Theme,
-  FormBuilder
-} from "@orchid";
+import { Theme, FormBuilder } from "@orchid";
 
 export default {
   component: FormBuilder,
@@ -76,18 +73,18 @@ export const Default = {
       //   label: "Amount",
       //   type: "range",
       // }
-    ]
+    ],
   },
   render: (args) => ({
     components: {
       Theme,
-      FormBuilder
+      FormBuilder,
     },
     setup() {
       const validateForm = (value, key = null) => {
         // validate value
         // key / form fields
-        // if key null validate all form 
+        // if key null validate all form
       };
       return { args, validateForm };
     },

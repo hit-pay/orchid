@@ -10,7 +10,8 @@ const props = defineProps({
 const emit = defineEmits({
   "update:modelValue": [],
 });
-const onInput = () => emit("update:modelValue", !props.isDisabled ? !props.modelValue : '');
+const onInput = () =>
+  emit("update:modelValue", !props.isDisabled ? !props.modelValue : "");
 </script>
 
 <template>
