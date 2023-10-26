@@ -56,7 +56,13 @@ export const Default = {
         // check if valid
         if (nameIndex !== undefined) {
           values.value[form.name[nameIndex].key] = value;
-          errors.value[form.name[nameIndex].key] = "invalid input array ";
+          if(form.type === 'PhoneInput'){
+            if(nameIndex === 1){
+              errors.value[form.name[nameIndex].key] = !new RegExp("^[+]?[(]?[0-9]{3}[)]?[-s.]?[0-9]{3}[-s.]?[0-9]{4,6}$").test(value) ? 'Phone Number Invalid' : ''
+            }
+          }else{
+            errors.value[form.name[nameIndex].key] = "invalid input array ";
+          }
         } else {
           values.value[form.name] = value;
           errors.value[form.name] = "invalid input " + form.name;

@@ -15,7 +15,7 @@ import {
   // Radio,
 } from "@orchid";
 
-defineProps({
+const props = defineProps({
   jsonForm: {
     type: Array,
   },
@@ -33,8 +33,14 @@ const onUpdate = (form, value, index = undefined) => {
   emit("onUpdate", form, value, index);
 };
 
-const multipleError = () => {
-  return "";
+const multipleError = (name = []) => {
+  let errorMessage = ''
+  name.forEach(fieldName => {
+    if(props.errors[fieldName.key]){
+      errorMessage = props.errors[fieldName.key]
+    }
+  })
+  return errorMessage;
 };
 </script>
 <template>
@@ -77,7 +83,7 @@ const multipleError = () => {
         v-else-if="form.type === 'PhoneInput'"
         :class="form.className"
         v-bind="form.props"
-        :error-message="multipleError(form)"
+        :error-message="multipleError(form.name)"
         :country-code="values[form.name[0].key]"
         :phone-number="values[form.name[1].key]"
         @update:country-code="onUpdate(form, $event, 0)"
