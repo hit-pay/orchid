@@ -13,7 +13,7 @@ export default {
   component: DataTable,
 };
 
-import { DataTableOptions, Filter } from "../../data/DataTableOptions";
+import { DataTableOptions, Filter } from "../../data/DataTableOptions.sample";
 export const Default = {
   args: {
     filter: Filter,

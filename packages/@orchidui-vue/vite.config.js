@@ -23,7 +23,7 @@ const entities = files
   })
   .filter((entry) => {
     return (
-      !entry[0].includes(".stories") && !entry[0].includes("HitpaySidebar")
+      !entry[0].includes(".sample") && !entry[0].includes(".stories") && !entry[0].includes("HitpaySidebar")
     );
   });
 

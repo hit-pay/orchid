@@ -9,7 +9,7 @@ import {
 } from "@orchid";
 
 import { ref } from "vue";
-import { SampleJsonForm } from "../../data/JsonForm";
+import { SampleJsonForm } from "../../data/JsonForm.sample";
 export default {
   component: FormBuilder,
 };

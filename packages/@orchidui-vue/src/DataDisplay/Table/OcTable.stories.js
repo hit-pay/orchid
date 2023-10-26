@@ -1,7 +1,7 @@
 import { Theme, Table, Chip, Icon, Toggle, TableCellContent } from "@orchid";
 
 import { ref } from "vue";
-import { TableOptions } from "../../data/TableOptions";
+import { TableOptions } from "../../data/TableOptions.sample";
 export default {
   component: Table,
   tags: ["autodocs"],

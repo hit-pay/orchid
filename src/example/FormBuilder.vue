@@ -8,7 +8,7 @@ import {
   Icon,
 } from "@orchid";
 
-import { SampleJsonForm } from "@orchid/data/JsonForm";
+import { SampleJsonForm } from "@orchid/data/JsonForm.sample";
 
 import { ref } from "vue";
 
