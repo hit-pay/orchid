@@ -7,11 +7,13 @@ const emit = defineEmits({
 });
 const props = defineProps({
   offset: Number,
+  isDisabled: Boolean,
 });
 const dropdownMenu = ref(null);
 const trigger = ref(null);
 const isOpen = ref(false);
 const toggleDropdown = () => {
+  if (props.isDisabled) return;
   document.body.appendChild(dropdownMenu.value);
   isOpen.value = !isOpen.value;
   if (!isOpen.value) emit("close");

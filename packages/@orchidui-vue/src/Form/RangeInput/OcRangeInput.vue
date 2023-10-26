@@ -1,6 +1,29 @@
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { Input } from "@orchid";
+
+const props = defineProps({
+  maxLimit: {
+    type: [String, Number],
+    default: 100,
+  },
+  minLimit: {
+    type: [String, Number],
+    default: 0,
+  },
+  minValue: {
+    type: [String, Number],
+    default: 100,
+  },
+  maxValue: {
+    type: [String, Number],
+    default: 0,
+  },
+});
+const emit = defineEmits({
+  "update:minValue": [],
+  "update:maxValue": [],
+});
 const slider = ref();
 
 const inputStart = ref();
@@ -10,38 +33,44 @@ const thumbLeft = ref();
 const thumbRight = ref();
 const rangeBetween = ref();
 
-const minLimit = ref(0);
-const maxLimit = ref(100);
-
 const minPercent = ref(0);
 const maxPercent = ref(0);
 
-const minValue = ref(0);
-const maxValue = ref(100);
 const createSlider = () => {
   setStartValueCustomSlider(inputStart.value);
   setEndValueCustomSlider(inputEnd.value);
 };
 
 const setStartValueCustomSlider = (inputStart) => {
-  if (isNaN(minValue.value)) inputStart.value = minLimit.value;
-  if (Number(inputStart.value) >= Number(maxValue.value))
-    inputStart.value = Number(maxValue.value) - 1;
-  minValue.value = inputStart.value;
+  if (isNaN(props.minValue) || props.minValue < props.minLimit)
+    inputStart.value = props.minLimit;
+  if (Number(inputStart.value) >= Number(props.maxValue))
+    inputStart.value = Number(props.maxValue) - 1;
+  emit("update:minValue", inputStart.value);
 
-  minPercent.value = (inputStart.value / maxLimit.value) * 100;
+  minPercent.value =
+    ((inputStart.value - props.minLimit) / (props.maxLimit - props.minLimit)) *
+    100;
 };
 
 const setEndValueCustomSlider = (inputEnd) => {
-  if (isNaN(maxValue.value)) inputEnd.value = maxLimit.value;
-  if (Number(inputEnd.value) <= Number(minValue.value))
-    inputEnd.value = Number(minValue.value) + 1;
-  maxValue.value = inputEnd.value;
+  if (isNaN(props.maxValue) || props.maxValue > props.maxLimit)
+    inputEnd.value = props.maxLimit;
+  if (Number(inputEnd.value) <= Number(props.minValue))
+    inputEnd.value = Number(props.minValue) + 1;
+  emit("update:maxValue", inputEnd.value);
 
-  maxPercent.value = ((maxLimit.value - inputEnd.value) / maxLimit.value) * 100;
+  maxPercent.value =
+    ((inputEnd.value - props.maxLimit) / (props.minLimit - props.maxLimit)) *
+    100;
 };
 
 onMounted(() => createSlider(slider.value));
+
+watch(
+  () => [props.minLimit, props.maxLimit],
+  () => createSlider(),
+);
 </script>
 
 <template>
@@ -49,18 +78,20 @@ onMounted(() => createSlider(slider.value));
     <span class="font-medium text-sm text-oc-text-400">Amount</span>
     <div class="flex gap-x-3">
       <Input
-        v-model="minValue"
+        :model-value="minValue"
         label="From"
         is-inline-label
         placeholder=""
         @blur="setStartValueCustomSlider(inputStart)"
+        @update:model-value="$emit('update:minValue', $event)"
       />
       <Input
-        v-model="maxValue"
+        :model-value="maxValue"
         label="To"
         is-inline-label
         placeholder=""
         @blur="setEndValueCustomSlider(inputEnd)"
+        @update:model-value="$emit('update:maxValue', $event)"
       />
     </div>
     <div class="flex pt-4">
@@ -68,6 +99,8 @@ onMounted(() => createSlider(slider.value));
         <input
           ref="inputStart"
           type="range"
+          :min="minLimit"
+          :max="maxLimit"
           :value="minValue"
           @input="setStartValueCustomSlider(inputStart)"
         />
@@ -75,6 +108,8 @@ onMounted(() => createSlider(slider.value));
           ref="inputEnd"
           type="range"
           :value="maxValue"
+          :min="minLimit"
+          :max="maxLimit"
           @input="setEndValueCustomSlider(inputEnd)"
         />
 

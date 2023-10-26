@@ -15,7 +15,10 @@ export const Default = {
   },
   args: {
     label: "Label",
+    hint: "Hint",
+    errorMessage: "",
     alignment: "vertical",
+    isDisabled: false,
     checkboxes: [
       {
         label: "Text",
@@ -49,6 +52,9 @@ export const Default = {
                   v-model="selectedCheckboxes"
                   :checkboxes="args.checkboxes"
                   :label="args.label"
+                  :hint="args.hint"
+                  :is-disabled="args.isDisabled"
+                  :error-message="args.errorMessage"
                   :alignment="args.alignment"
               />
               <div class="flex gap-x-2">

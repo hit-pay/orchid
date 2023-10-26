@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from "vue";
-import { Checkbox } from "@orchid";
+import { Checkbox, BaseInput } from "@orchid";
+
 const props = defineProps({
   alignment: {
     type: String,
@@ -9,6 +10,9 @@ const props = defineProps({
   checkboxes: Array,
   modelValue: Array,
   label: String,
+  errorMessage: String,
+  hint: String,
+  isDisabled: Boolean,
 });
 const emit = defineEmits({
   "update:modelValue": [],
@@ -29,18 +33,18 @@ const toggleCheckbox = (value) => {
 </script>
 
 <template>
-  <div class="flex flex-col gap-y-3">
-    <span class="text-sm text-oc-text-400 leading-[18px]">{{ label }}</span>
+  <BaseInput :label="label" :error-message="errorMessage" :hint="hint">
     <div class="flex" :class="alignmentClasses[alignment]">
       <Checkbox
         v-for="(checkbox, i) in checkboxes"
         :key="i"
         :label="checkbox.label"
         :value="checkbox.value"
-        :is-disabled="checkbox.isDisabled"
+        :is-error="!!errorMessage"
+        :disabled="isDisabled"
         :model-value="isSelectedCheckbox(checkbox.value)"
         @update:model-value="toggleCheckbox(checkbox.value)"
       />
     </div>
-  </div>
+  </BaseInput>
 </template>

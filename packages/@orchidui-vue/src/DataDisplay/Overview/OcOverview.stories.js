@@ -1,10 +1,43 @@
-import { Theme, Overview, OverviewIcon } from "@orchid";
+import { Theme, Overview, OverviewIcon, OverviewItem } from "@orchid";
 
 export default {
-  component: Overview,
+  component: OverviewItem,
   tags: ["autodocs"],
 };
-
+export const overviewItem = {
+  args: {
+    icon: "circle",
+    content: "Content",
+    title: "Title",
+    variant: "blue",
+    info: false,
+    isBig: false,
+    isTransparent: false,
+    isCard: false,
+  },
+  render: (args) => ({
+    components: { OverviewItem, Theme },
+    setup() {
+      return {
+        args,
+      };
+    },
+    template: `
+          <Theme class="items-center mb-3">
+            <OverviewItem
+                :icon="args.icon"
+                :info="args.info"
+                :content="args.content"
+                :variant="args.variant"
+                :title="args.title"
+                :is-big="args.isBig"
+                :is-transparent="args.isTransparent"
+                :is-card="args.isCard"
+            />
+          </Theme>
+        `,
+  }),
+};
 export const overview = {
   args: {
     title: "",

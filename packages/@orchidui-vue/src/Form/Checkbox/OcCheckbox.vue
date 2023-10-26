@@ -1,5 +1,6 @@
 <script setup>
 import { Icon } from "@orchid";
+
 const props = defineProps({
   modelValue: Boolean,
   isError: Boolean,
@@ -29,6 +30,8 @@ const onInput = () =>
             : isDisabled
             ? 'bg-oc-primary-50 border-oc-primary-200'
             : 'border-oc-primary-200',
+          isError && modelValue && !isDisabled ? '!bg-oc-error ' : '',
+          isError && !isDisabled ? '!border-oc-error' : '',
           isPartial
             ? isDisabled
               ? '!border-oc-primary-200 !bg-oc-primary-50'
@@ -50,7 +53,7 @@ const onInput = () =>
         />
       </div>
 
-      <span v-if="label">{{ label }}</span>
+      <span v-if="label" class="text-sm">{{ label }}</span>
       <input
         :value="modelValue"
         type="checkbox"
