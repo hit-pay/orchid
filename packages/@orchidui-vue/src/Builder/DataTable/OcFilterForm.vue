@@ -47,15 +47,22 @@ const applyFilter = () => {
     </template>
     <template #default="{ close }">
       <div class="p-5 flex w-[326px] flex-col gap-y-7">
-        <FormBuilder
-          :id="`filter-form-${id}`"
-          class="grid gap-5"
+        <slot
           :errors="errorsData"
           :values="valuesData"
           :json-form="jsonForm"
-          @on-update="onUpdateForm"
+          :update-form="onUpdateForm"
         >
-        </FormBuilder>
+          <FormBuilder
+            :id="`filter-form-${id}`"
+            class="grid gap-5"
+            :errors="errorsData"
+            :values="valuesData"
+            :json-form="jsonForm"
+            @on-update="onUpdateForm"
+          >
+          </FormBuilder>
+        </slot>
         <div class="flex gap-x-5">
           <Button
             class="w-full"
@@ -66,8 +73,8 @@ const applyFilter = () => {
           <Button
             class="w-full"
             :is-disabled="!filterAdded"
-            @click="applyFilter"
             label="Apply"
+            @click="applyFilter"
           />
         </div>
       </div>

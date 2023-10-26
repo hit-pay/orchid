@@ -164,7 +164,17 @@ const applyFilter = (filterForm = null) => {
               :json-form="filterOptions.form ?? []"
               :values="props.filter"
               @apply-filter="applyFilter($event)"
-            />
+            >
+              <template #default="{ errors, values, jsonForm, updateForm }">
+                <slot
+                  name="custom-filter-form"
+                  :errors="errors"
+                  :values="values"
+                  :json-form="jsonForm"
+                  :update-filter="updateForm"
+                ></slot>
+              </template>
+            </FilterForm>
           </div>
         </div>
         <FilterSearchFor
