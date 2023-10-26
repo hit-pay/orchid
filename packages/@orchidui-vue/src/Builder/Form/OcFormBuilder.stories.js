@@ -97,7 +97,7 @@ export const Default = {
                   <div class="flex items-center md:col-span-2 border-2 p-3">
                       <label class="mr-3">This custom form input</label>
                       <Button 
-                        @click="onUpdateForm(form.name, '1')">Set Value to (1)</Button>
+                        @click="onUpdateForm(form, '1')">Set Value to (1)</Button>
                       <span>
                         {{ error }}
                       </span>
