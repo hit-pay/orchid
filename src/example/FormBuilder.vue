@@ -17,7 +17,7 @@ const values = ref({
 });
 const errors = ref({});
 
-const onUpdateForm = (form, value = null, nameIndex = null) => {
+const onUpdateForm = (form, value = null, nameIndex = undefined) => {
   // validate value
   // key / form fields
   // if key null validate all form
@@ -46,13 +46,13 @@ const onUpdateForm = (form, value = null, nameIndex = null) => {
     <h2>Form Builder</h2>
     <p>Create form more simple</p>
     <div>
-      <div class="grid md:grid-cols-2 gap-5 mb-5">
+      <div class="grid gap-5 mb-5 text-center m-8">
         <p>Values : {{ values }}</p>
         <p>Errors : {{ errors }}</p>
       </div>
       <FormBuilder
         id="example-form-builder"
-        class="grid md:grid-cols-2 gap-5"
+        class="grid md:grid-cols-2 gap-5 max-w-[800px] mx-auto"
         :errors="errors"
         :values="values"
         :json-form="SampleJsonForm"
@@ -61,7 +61,7 @@ const onUpdateForm = (form, value = null, nameIndex = null) => {
         <template #CustomFormInput="{ form, value, error }">
           <div class="flex items-center md:col-span-2 border-2 p-3">
             <label class="mr-3">This custom form input</label>
-            <Button @click="onUpdateForm(form.name, '1')"
+            <Button @click="onUpdateForm(form, '1')"
               >Set Value to (1) : value : {{ value }}</Button
             >
             <span>
@@ -75,7 +75,7 @@ const onUpdateForm = (form, value = null, nameIndex = null) => {
             hint="This is a hint text to help user"
             :model-value="value"
             :error-message="error"
-            @update:model-value="onUpdateForm(form.name, $event)"
+            @update:model-value="onUpdateForm(form, $event)"
           >
             <template #trailing>
               <Dropdown>
