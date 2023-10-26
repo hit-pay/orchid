@@ -16,6 +16,10 @@ import {
 } from "@orchid";
 
 const props = defineProps({
+  id: {
+    type: String,
+    required: true,
+  },
   jsonForm: {
     type: Array,
   },
@@ -34,12 +38,12 @@ const onUpdate = (form, value, index = undefined) => {
 };
 
 const multipleError = (name = []) => {
-  let errorMessage = ''
-  name.forEach(fieldName => {
-    if(props.errors[fieldName.key]){
-      errorMessage = props.errors[fieldName.key]
+  let errorMessage = "";
+  name.forEach((fieldName) => {
+    if (props.errors[fieldName.key]) {
+      errorMessage = props.errors[fieldName.key];
     }
-  })
+  });
   return errorMessage;
 };
 </script>
@@ -93,7 +97,7 @@ const multipleError = (name = []) => {
         v-else-if="form.type === 'RadioGroup'"
         :class="form.className"
         v-bind="form.props"
-        :group-name="form.name"
+        :group-name="`${id}-${form.name}`"
         :model-value="values[form.name] ?? ''"
         :error-message="errors[form.name]"
         @update:model-value="onUpdate(form, $event)"
@@ -125,6 +129,7 @@ const multipleError = (name = []) => {
       <slot
         v-else
         :name="form.type"
+        :form-id="id"
         :form="form"
         :value="values[form.name]"
         :error="errors[form.name]"

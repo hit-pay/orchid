@@ -20,6 +20,7 @@ const filterData = ref(Filter);
       {{ filterData }}
     </p>
     <DataTable
+      id="sample-data-table"
       :filter="filterData"
       :options="DataTableOptions"
       @update:filter="filterData = $event"

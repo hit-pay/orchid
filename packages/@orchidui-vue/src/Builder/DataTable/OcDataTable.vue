@@ -11,6 +11,10 @@ import {
 import { ref, computed } from "vue";
 
 const props = defineProps({
+  id: {
+    type: String,
+    required: true,
+  },
   options: {
     type: Object,
     required: true,
@@ -108,21 +112,21 @@ const removeQuery = (query) => {
   applyFilter();
 };
 
-const applyFilter = () => {
-  let filterData = {};
-  if (filterOptions.value.current_page) {
-    filterData[filterOptions.value.current_page.key] = currentPage.value;
-  }
-  if (filterOptions.value.per_page) {
-    filterData[filterOptions.value.per_page.key] = perPage.value.value;
-  }
+const filterData = ref({});
+const applyFilter = (filterForm = null) => {
+  filterData.value.current_page = currentPage.value;
+  filterData.value.per_page = perPage.value.value;
+
   if (filterOptions.value.tabs) {
-    filterData[filterOptions.value.tabs.key] = filterTab.value;
+    filterData.value[filterOptions.value.tabs.key] = filterTab.value;
   }
   if (filterOptions.value.search) {
-    filterData[filterOptions.value.search.key] = queries.value.join();
+    filterData.value[filterOptions.value.search.key] = queries.value.join();
   }
-  emit("update:filter", filterData);
+  if (filterForm) {
+    filterData.value = { ...filterData.value, ...filterForm };
+  }
+  emit("update:filter", filterData.value);
 };
 </script>
 <template>
@@ -142,7 +146,7 @@ const applyFilter = () => {
               v-model="filterTab"
               :tabs="filterOptions.tabs.options"
               :variant="'pills'"
-              @update:model-value="applyFilter"
+              @update:model-value="applyFilter(null)"
             />
           </div>
           <div
@@ -154,7 +158,13 @@ const applyFilter = () => {
               @add-query="addQuery"
               @toggle="isSearchExpanded = $event"
             />
-            <FilterForm v-if="filterOptions.form" />
+            <FilterForm
+              v-if="filterOptions.form"
+              :id="id"
+              :json-form="filterOptions.form ?? []"
+              :values="props.filter"
+              @apply-filter="applyFilter($event)"
+            />
           </div>
         </div>
         <FilterSearchFor
@@ -174,10 +184,10 @@ const applyFilter = () => {
     <div class="flex gap-3 items-center m-3 md:mx-0">
       <Pagination
         v-model="currentPage"
-        class="justify-center md:justify-start"
+        class="justify-center"
         :max-page="pagination.last_page"
         total-visible="5"
-        @update:model-value="applyFilter"
+        @update:model-value="applyFilter(null)"
       />
       <div class="hidden md:flex items-center">
         <Select
@@ -185,7 +195,7 @@ const applyFilter = () => {
           label="Item per page"
           is-inline-label
           :options="perPageOptions"
-          @update:model-value="applyFilter"
+          @update:model-value="applyFilter(null)"
         />
       </div>
     </div>

@@ -1,68 +1,89 @@
 const SampleFilterForm = [
   {
-    name: "status",
-    rule: "status",
-    label: "Status",
-    type: "select",
-    options: [
-      {
-        value: "status-1",
-        label: "Status 1",
-      },
-      {
-        value: "status-2",
-        label: "Status 2",
-      },
-    ],
+    name: "checkboxes_group",
+    type: "CheckboxesGroup",
+    rule: "required",
+    props: {
+      label: "Example Label",
+      hint: "This is a hint text to help user",
+      alignment: "vertical",
+      checkboxes: [
+        {
+          label: "Text",
+          value: 0,
+        },
+        {
+          label: "Text",
+          value: 1,
+        },
+        {
+          label: "Text",
+          value: 2,
+          isDisabled: true,
+        },
+      ],
+    },
   },
   {
-    name: "date",
-    rule: "date",
-    label: "Date",
-    type: "date",
+    name: "radio_group",
+    type: "RadioGroup",
+    props: {
+      label: "Example Label",
+      hint: "This is a hint text to help user",
+      placeholder: "placeholder",
+      radio: [
+        {
+          label: "Text",
+          value: "0",
+        },
+        {
+          label: "Text",
+          value: "1",
+        },
+        {
+          label: "Text",
+          value: "2",
+        },
+        {
+          label: "Text",
+          value: "3",
+        },
+        {
+          label: "is Disabled",
+          value: "4",
+          isDisabled: true,
+        },
+      ],
+    },
   },
   {
-    name: [
-      {
-        name: "from",
-        rule: "date",
-      },
-      {
-        name: "to",
-        rule: "date",
-      },
-    ],
-    label: "Date Range",
-    type: "date_range",
-  },
-  {
-    name: "payment_methods",
-    label: "Payment Methods",
-    type: "select",
-    options: [
-      {
-        value: "method-1",
-        label: "Method 1",
-      },
-      {
-        value: "method-2",
-        label: "Method 2",
-      },
-    ],
-  },
-  {
-    name: [
-      {
-        name: "amount_from",
-        rule: "number",
-      },
-      {
-        name: "amount_to",
-        rule: "number",
-      },
-    ],
-    label: "Amount",
-    type: "range",
+    name: "select",
+    type: "Select",
+    props: {
+      label: "Example Label",
+      hint: "This is a hint text to help user",
+      placeholder: "placeholder",
+      isFilterable: true,
+      isAddNew: true,
+      options: [
+        {
+          label: "Option 1",
+          value: 1,
+        },
+        {
+          label: "Option 2",
+          value: 2,
+        },
+        {
+          label: "Option 3",
+          value: 3,
+        },
+        {
+          label: "Option 4",
+          value: 4,
+        },
+      ],
+    },
   },
 ];
 

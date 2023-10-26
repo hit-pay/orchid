@@ -21,7 +21,6 @@ const onUpdateForm = (name, value = null) => {
   // validate value
   // key / form fields
   // if key null validate all form
-  console.log(name, value);
   values.value[name] = value;
   // check if valid
   errors.value[name] = "invalid input";
@@ -37,6 +36,7 @@ const onUpdateForm = (name, value = null) => {
         <p>Errors : {{ errors }}</p>
       </div>
       <FormBuilder
+        id="example-form-builder"
         class="grid md:grid-cols-2 gap-5"
         :errors="errors"
         :values="values"

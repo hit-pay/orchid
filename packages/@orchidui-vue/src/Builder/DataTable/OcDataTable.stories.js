@@ -44,7 +44,7 @@ export const Default = {
                 <li v-for="item, key in args.filter">{{key}} : {{item}}</li>
               </ul>
             </div>
-            <DataTable :filter="args.filter" :options="args.options" @update:filter="updateFilterData">
+            <DataTable id="sample-data-table" :filter="args.filter" :options="args.options" @update:filter="updateFilterData">
               <template #bulk-actions="{selectedRows}">
                 <Button
                   label="Publish"

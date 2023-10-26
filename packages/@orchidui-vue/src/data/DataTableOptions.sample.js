@@ -1,15 +1,11 @@
+import { SampleFilterForm } from "./FilterForm.sample";
+
 const DataTableOptions = {
   pagination: {
     total: 50,
     last_page: 20,
   },
   filterOptions: {
-    current_page: {
-      key: "current_page",
-    },
-    per_page: {
-      key: "per_page",
-    },
     tabs: {
       key: "tabs",
       options: [
@@ -22,7 +18,7 @@ const DataTableOptions = {
     search: {
       key: "keywords",
     },
-    form: [],
+    form: SampleFilterForm,
   },
   tableOptions: {
     isSelectable: true,

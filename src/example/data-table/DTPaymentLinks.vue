@@ -104,7 +104,11 @@ onMounted(() => {
     <p>
       {{ filterData }}
     </p>
-    <DataTable v-model:filter="filterData" :options="DataTableOptions">
+    <DataTable
+      id="payment-link-table"
+      v-model:filter="filterData"
+      :options="DataTableOptions"
+    >
       <template #bulk-actions="{ selectedRows }">
         your action {{ selectedRows }}
       </template>
