@@ -1,5 +1,6 @@
 <script setup>
 import { Input, Icon } from "@orchid";
+
 defineProps({
   placeholder: String,
   hint: String,
@@ -28,7 +29,7 @@ defineEmits({
   >
     <template #icon>
       <div class="w-[30px] h-[20px] flex items-center justify-center">
-        <Icon :name="cardType" width="20" height="12" />
+        <Icon :name="`payment-methods/${cardType}`" width="20" height="12" />
       </div>
     </template>
   </Input>

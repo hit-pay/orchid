@@ -1,6 +1,5 @@
 <script setup>
-import BoxDetail from "./OcBoxDetail.vue";
-import { CustomerCard } from "@orchid";
+import { CustomerCard, OverviewItem } from "@orchid";
 import BoxDetails from "./OcBoxDetails.vue";
 
 defineProps({
@@ -18,9 +17,10 @@ defineProps({
       :key="i"
       :class="isCustomer ? '!grid grid-cols-2 grid-rows-2 gap-y-4 !py-4' : ''"
     >
-      <BoxDetail
+      <OverviewItem
         v-for="(field, j) in box"
         :key="`${i}-${j}`"
+        is-transparent
         :title="field.title"
         :content="field.content"
       />

@@ -20,6 +20,8 @@ defineProps({
   customerCardVariant: { type: String, default: "" },
   isCustomer: { type: Boolean, default: false },
   customer: { type: Object, default: null },
+  primaryButtonProps: Object,
+  secondaryButtonProps: Object,
 });
 defineEmits({
   changeTab: [],
@@ -36,7 +38,11 @@ defineEmits({
       />
 
       <slot name="right">
-        <Right class="shrink-0" />
+        <Right
+          class="shrink-0"
+          :primary-button-props="primaryButtonProps"
+          :secondary-button-props="secondaryButtonProps"
+        />
       </slot>
     </div>
 

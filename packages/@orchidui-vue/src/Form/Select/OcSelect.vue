@@ -9,12 +9,15 @@ import {
   Dropdown,
 } from "@orchid";
 import { computed, ref } from "vue";
+
 const props = defineProps({
   label: String,
   hint: String,
   errorMessage: String,
   placeholder: String,
+  isInlineLabel: Boolean,
   isFilterable: Boolean,
+  isDisabled: Boolean,
   isAddNew: Boolean,
   options: Array,
   modelValue: [Array, Object],
@@ -65,11 +68,19 @@ const selectOption = (option) => {
 </script>
 
 <template>
-  <BaseInput :label="label" :hint="hint" :error-message="errorMessage">
-    <Dropdown :offset="4">
+  <BaseInput
+    :label="isInlineLabel ? '' : label"
+    :hint="hint"
+    :error-message="errorMessage"
+  >
+    <Dropdown :offset="4" :is-disabled="isDisabled">
       <template #trigger="{ isOpen }">
         <div
-          class="border h-[36px] px-3 flex justify-between items-center gap-x-3 rounded"
+          class="border h-[36px] px-3 flex justify-between items-center cursor-pointer gap-x-3 rounded"
+          :class="{
+            'border-oc-error': errorMessage && !isDisabled,
+            'pointer-events-none bg-oc-bg-dark': isDisabled,
+          }"
         >
           <div v-if="multiple" class="flex flex-wrap gap-2">
             <Chip
@@ -86,8 +97,13 @@ const selectOption = (option) => {
             />
           </div>
           <template v-else>
-            <span v-if="modelValue?.label">{{ modelValue.label }}</span>
-            <span v-else class="text-oc-text-300">{{ placeholder }}</span>
+            <span class="whitespace-nowrap">
+              <span v-if="isInlineLabel && label" class="text-oc-text-300">
+                {{ label }}:
+              </span>
+              <span v-if="modelValue?.label">{{ modelValue.label }}</span>
+              <span v-else class="text-oc-text-300">{{ placeholder }}</span>
+            </span>
           </template>
           <Icon
             class="w-5 h-5 text-oc-text-400 transition-all duration-500"

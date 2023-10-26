@@ -1,5 +1,5 @@
 <script setup>
-import BalanceTab from "./OcBalanceTab.vue";
+import InfoCardButton from "./OcInfoCardButton.vue";
 import TopActions from "./OcTopActions.vue";
 import { Overview } from "@orchid";
 
@@ -26,7 +26,7 @@ defineEmits({
 <template>
   <div class="flex flex-col gap-y-5">
     <div class="flex gap-x-5">
-      <BalanceTab
+      <InfoCardButton
         v-for="tab in overviewTabs"
         :key="tab.value"
         :title="tab.title"

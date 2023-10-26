@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from "vue";
-import { Radio } from "@orchid";
+import { Radio, BaseInput } from "@orchid";
+
 defineProps({
   alignment: {
     type: String,
@@ -9,6 +10,8 @@ defineProps({
   radio: Array,
   label: String,
   groupName: String,
+  errorMessage: String,
+  hint: String,
   modelValue: String,
 });
 const emit = defineEmits({
@@ -24,8 +27,7 @@ const onInput = (value) => {
 </script>
 
 <template>
-  <div class="flex flex-col gap-y-3">
-    <span class="text-sm text-oc-text-400 leading-[18px]">{{ label }}</span>
+  <BaseInput :label="label" :error-message="errorMessage" :hint="hint">
     <div class="flex" :class="alignmentClasses[alignment]">
       <Radio
         v-for="(r, i) in radio"
@@ -33,11 +35,11 @@ const onInput = (value) => {
         :key="i"
         :model-value="r.value"
         :label="r.label"
-        :is-error="r.isError"
+        :is-error="!!errorMessage"
         :is-disabled="r.isDisabled ? true : false"
         :group-name="groupName"
         @update:model-value="onInput"
       />
     </div>
-  </div>
+  </BaseInput>
 </template>

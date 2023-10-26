@@ -1,11 +1,16 @@
 <script setup>
 import { Button, Dropdown, DropdownItem, Tooltip } from "@orchid";
+
+defineProps({
+  primaryButtonProps: Object,
+  secondaryButtonProps: Object,
+});
 </script>
 <template>
   <div class="flex gap-x-3 items-center">
     <Dropdown :offset="10">
       <template #trigger>
-        <Button variant="secondary" label="Bulk Create/Export" />
+        <Button v-bind="secondaryButtonProps" />
       </template>
       <div class="p-2">
         <DropdownItem icon="upload" text="Bulk create" />
@@ -14,7 +19,7 @@ import { Button, Dropdown, DropdownItem, Tooltip } from "@orchid";
     </Dropdown>
 
     <Tooltip position="top" :offset="[0, 4]" arrow-hidden>
-      <Button left-icon="plus" label="New Payment Link" />
+      <Button v-bind="primaryButtonProps" />
       <template #popper>
         <div
           class="px-3 py-[5px] font-medium text-sm text-oc-text-400 flex gap-x-3 items-center"
