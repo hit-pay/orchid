@@ -17,13 +17,28 @@ const values = ref({
 });
 const errors = ref({});
 
-const onUpdateForm = (name, value = null) => {
+const onUpdateForm = (form, value = null, nameIndex = null) => {
   // validate value
   // key / form fields
   // if key null validate all form
-  values.value[name] = value;
   // check if valid
-  errors.value[name] = "invalid input";
+  if (nameIndex !== undefined) {
+    values.value[form.name[nameIndex].key] = value;
+    if (form.type === "PhoneInput") {
+      if (nameIndex === 1) {
+        errors.value[form.name[nameIndex].key] = !new RegExp(
+          "^[+]?[(]?[0-9]{3}[)]?[-s.]?[0-9]{3}[-s.]?[0-9]{4,6}$",
+        ).test(value)
+          ? "Phone Number Invalid"
+          : "";
+      }
+    } else {
+      errors.value[form.name[nameIndex].key] = "invalid input array ";
+    }
+  } else {
+    values.value[form.name] = value;
+    errors.value[form.name] = "invalid input " + form.name;
+  }
 };
 </script>
 <template>

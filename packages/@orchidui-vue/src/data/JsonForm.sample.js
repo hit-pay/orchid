@@ -145,6 +145,38 @@ const SampleJsonForm = [
     },
   },
   {
+    name: "radio_group_2",
+    type: "RadioGroup",
+    props: {
+      label: "Example Label",
+      hint: "This is a hint text to help user",
+      placeholder: "placeholder",
+      radio: [
+        {
+          label: "Text 2",
+          value: "0",
+        },
+        {
+          label: "Text 2",
+          value: "1",
+        },
+        {
+          label: "Text 2",
+          value: "2",
+        },
+        {
+          label: "Text 2",
+          value: "3",
+        },
+        {
+          label: "is Disabled",
+          value: "4",
+          isDisabled: true,
+        },
+      ],
+    },
+  },
+  {
     name: "select",
     type: "Select",
     props: {

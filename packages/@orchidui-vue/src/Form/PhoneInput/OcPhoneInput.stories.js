@@ -19,7 +19,6 @@ export const Default = {
     placeholder: "Placeholder",
     hint: "This is a hint text to help user.",
     errorMessage: "",
-    // validRegex: "^[+]?[(]?[0-9]{3}[)]?[-s.]?[0-9]{3}[-s.]?[0-9]{4,6}$", move to validator js
     isInlineLabel: false,
     isDisabled: false,
     label: "",
