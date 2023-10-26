@@ -141,6 +141,14 @@ export const Default = {
       phone: "+65 8373 3739 18",
       address: "4666 Dickens Islands Pennsylvania",
     },
+    primaryButtonProps: {
+      leftIcon: "plus",
+      label: "New Payment Link",
+    },
+    secondaryButtonProps: {
+      variant: "secondary",
+      label: "Bulk Create/Export",
+    },
   },
   render: (args) => ({
     components: { PageTitle, Theme },

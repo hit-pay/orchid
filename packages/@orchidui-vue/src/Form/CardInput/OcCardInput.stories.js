@@ -10,7 +10,7 @@ export const Default = {
   argTypes: {
     cardType: {
       control: "select",
-      options: ["mastercard"],
+      options: ["mastercard", "visa"],
     },
   },
   args: {

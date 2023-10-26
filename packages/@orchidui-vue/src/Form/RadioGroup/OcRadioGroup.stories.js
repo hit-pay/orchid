@@ -16,6 +16,8 @@ export const Default = {
   args: {
     alignment: "vertical",
     label: "Label",
+    hint: "Hint",
+    errorMessage: "",
     radio: [
       {
         label: "Text",
@@ -53,6 +55,8 @@ export const Default = {
                   v-model="selectedRadio"
                   :radio="args.radio"
                   :label="args.label"
+                  :hint="args.hint"
+                  :error-message="args.errorMessage"
                   group-name="radio1"
                   :alignment="args.alignment"
               />

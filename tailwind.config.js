@@ -68,6 +68,9 @@ module.exports = {
       full: "var(--oc-border-full)",
     },
     extend: {
+      boxShadow: {
+        normal: "var(--oc-shadow-normal)",
+      },
       colors: {
         // first to use this
         "oc-text": {

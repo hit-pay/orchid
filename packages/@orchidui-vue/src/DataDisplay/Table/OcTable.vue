@@ -37,8 +37,10 @@ const selectAllRows = () => {
   <div
     class="flex overflow-hidden text-oc-text flex-col rounded border border-oc-gray-200"
   >
-    <slot name="before" />
-    <div class="flex flex-wrap border-y border-oc-gray-200">
+    <div v-if="$slots.before" class="border-b border-oc-gray-200">
+      <slot name="before" />
+    </div>
+    <div class="flex flex-wrap border-b border-oc-gray-200">
       <TableHeader
         v-if="isSelectable"
         class="w-[40px] md:w-[5%] md:ml-0"

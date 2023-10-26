@@ -7,42 +7,54 @@ export default {
 };
 
 export const Default = {
-  render: () => ({
+  args: {
+    label: "Label",
+    hint: "Hint",
+    placeholder: "Placeholder",
+    isInlineLabel: false,
+    errorMessage: "",
+    options: [
+      {
+        label: "Option 1",
+        value: 1,
+      },
+      {
+        label: "Option 2",
+        value: 2,
+      },
+      {
+        label: "Option 3",
+        value: 3,
+      },
+      {
+        label: "Option 4",
+        value: 4,
+      },
+    ],
+    isFilterable: true,
+    isAddNew: true,
+    isDisabled: false,
+  },
+  render: (args) => ({
     components: { Theme, Select, Option },
     setup() {
-      const options = [
-        {
-          label: "Option 1",
-          value: 1,
-        },
-        {
-          label: "Option 2",
-          value: 2,
-        },
-        {
-          label: "Option 3",
-          value: 3,
-        },
-        {
-          label: "Option 4",
-          value: 4,
-        },
-      ];
-
       const selectedOption = ref();
-      return { selectedOption, options };
+      return { selectedOption, args };
     },
     template: `
           <Theme colorMode="light">
             <div class="mb-4">Selected value: {{ selectedOption }}</div>
             <Select
                 v-model="selectedOption"
-                :options="options"
-                label="Label"
-                hint="Hint"
-                is-filterable
-                is-add-new
-                placeholder="Placeholder"
+                :options="args.options"
+                :label="args.label"
+                :error-message="args.errorMessage"
+                :is-disabled="args.isDisabled"
+                :is-inline-label="args.isInlineLabel"
+                :hint="args.hint"
+                :is-filterable="args.isFilterable"
+                :is-add-new="args.isAddNew"
+                :placeholder="args.placeholder"
             />
           </Theme>
         `,

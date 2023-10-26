@@ -40,7 +40,7 @@ defineProps({
 <style lang="scss" scoped>
 .customer-card {
   &.float {
-    box-shadow: 0 3px 22px 0 rgba(38, 42, 50, 0.09);
+    box-shadow: var(--oc-shadow-normal);
   }
 }
 </style>

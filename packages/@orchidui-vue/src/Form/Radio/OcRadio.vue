@@ -37,11 +37,11 @@ defineEmits({
           isDisabled || !modelValue
             ? 'border-oc-primary-200 bg-oc-primary-50'
             : '',
-          isError ? 'border-oc-error' : 'border-oc-primary-200',
+          isError ? '!border-oc-error' : 'border-oc-primary-200',
         ]"
       />
 
-      <span v-if="label">{{ label }}</span>
+      <span v-if="label" class="text-sm">{{ label }}</span>
     </label>
   </div>
 </template>
