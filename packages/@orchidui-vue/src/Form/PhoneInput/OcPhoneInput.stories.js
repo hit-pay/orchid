@@ -18,8 +18,8 @@ export const Default = {
     initialCountryCode: "sg",
     placeholder: "Placeholder",
     hint: "This is a hint text to help user.",
-    errorMessage: "Invalid phone number",
-    validRegex: "^[+]?[(]?[0-9]{3}[)]?[-s.]?[0-9]{3}[-s.]?[0-9]{4,6}$",
+    errorMessage: "",
+    // validRegex: "^[+]?[(]?[0-9]{3}[)]?[-s.]?[0-9]{3}[-s.]?[0-9]{4,6}$", move to validator js
     isInlineLabel: false,
     isDisabled: false,
     label: "",

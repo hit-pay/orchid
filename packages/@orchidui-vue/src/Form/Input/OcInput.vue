@@ -12,7 +12,7 @@ const props = defineProps({
     default: "",
   },
   modelValue: {
-    type: [String, Number],
+    type: String,
     default: "",
   },
   label: {

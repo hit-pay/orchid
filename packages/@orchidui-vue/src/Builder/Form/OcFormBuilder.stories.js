@@ -8,6 +8,7 @@ import {
   Icon,
 } from "@orchid";
 
+import { ref } from "vue";
 import { SampleJsonForm } from "../../data/JsonForm";
 export default {
   component: FormBuilder,
@@ -34,45 +35,50 @@ export const Default = {
       Icon,
     },
     setup() {
-
       // get all field name
       // get field rule
-      // validate all 
+      // validate all
       // get all field values
 
-      // validator
+      // Rule and validator
       // 1. required
       // 2. required-if:field-name=condition
       // 3. show-if:field-name=condition
-      // 4. 
+      // 4. get:object-key
 
+      const values = ref(args.values);
+      const errors = ref(args.errors);
 
-      const onUpdateForm = (name, value = null) => {
+      const onUpdateForm = (form, value = null, nameIndex = undefined) => {
         // validate value
         // key / form fields
         // if key null validate all form
-        console.log(name, value);
-        args.values[name] = value;
         // check if valid
-        args.errors[name] = "invalid input";
+        if (nameIndex !== undefined) {
+          values.value[form.name[nameIndex].key] = value;
+          errors.value[form.name[nameIndex].key] = "invalid input array ";
+        } else {
+          values.value[form.name] = value;
+          errors.value[form.name] = "invalid input " + form.name;
+        }
       };
 
-      return { args, onUpdateForm, SampleJsonForm };
+      return { values, errors, onUpdateForm, SampleJsonForm };
     },
     template: `
           <Theme class="p-8">
             <div class="grid md:grid-cols-2 gap-5 mb-5">
             <p>
-              Values : {{ args.values }}
+              Values : {{ values }}
               </p>
               <p>
-              Errors : {{ args.errors }}
+              Errors : {{ errors }}
               </p>
             </div>
            <FormBuilder 
               class="grid md:grid-cols-2 gap-5"
-              :errors="args.errors" 
-              :values="args.values" 
+              :errors="errors" 
+              :values="values" 
               :json-form="SampleJsonForm" 
               @onUpdate="onUpdateForm"
             >
@@ -92,7 +98,7 @@ export const Default = {
                     hint="This is a hint text to help user"
                     :model-value="value"
                     :error-message="error"
-                    @update:model-value="onUpdateForm(form.name, $event)"
+                    @update:model-value="onUpdateForm(form, $event)"
                     >
                     <template #trailing>
                       <Dropdown>
