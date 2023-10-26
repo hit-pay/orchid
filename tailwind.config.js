@@ -1,8 +1,6 @@
-/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     "./packages/@orchidui-vue/src/**/*.{vue,js,ts,jsx,tsx}",
-    "./node_modules/@orchidui/vue/dist/**/*.js",
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
   darkMode: "class",

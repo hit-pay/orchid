@@ -7,9 +7,9 @@ export default {
 
 export const Default = {
   args: {
-    disabled: false,
     modelValue: false,
     isError: false,
+    isDisabled: false,
     label: "Text",
   },
   render: (args) => ({
@@ -23,7 +23,7 @@ export const Default = {
                 :model-value="args.modelValue"
                 :isError="args.isError"
                 :label="args.label"
-                :disabled="args.disabled"
+                :is-disabled="args.isDisabled"
             />
           </Theme>
         `,
@@ -38,8 +38,8 @@ export const Variants = {
               <Radio :model-value="true"/>
               <Radio :model-value="false"/>
               <Radio :model-value="false" is-error/>
-              <Radio :model-value="true" disabled/>
-              <Radio :model-value="false" disabled/>
+              <Radio :model-value="true" is-disabled/>
+              <Radio :model-value="false" is-disabled/>
             </div>
           </Theme>
         `,
@@ -54,8 +54,8 @@ export const LabelVariants = {
             <div class="flex flex-col w-fit items-center gap-6">
               <Radio model-value="1" label="Text"/>
               <Radio model-value="2" label="Text"/>
-              <Radio model-value="3" disabled label="Text"/>
-              <Radio model-value="4" disabled label="Text"/>
+              <Radio model-value="3" is-disabled label="Text"/>
+              <Radio model-value="4" is-disabled label="Text"/>
               <Radio model-value="5" is-error label="Text"/>
             </div>
           </Theme>

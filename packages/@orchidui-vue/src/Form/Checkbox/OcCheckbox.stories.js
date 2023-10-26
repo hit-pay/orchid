@@ -10,7 +10,7 @@ export const Default = {
   args: {
     isError: false,
     isPartial: false,
-    disabled: false,
+    isDisabled: false,
     label: "Text",
   },
   render: (args) => ({
@@ -29,7 +29,7 @@ export const Default = {
                   :is-error="args.isError"
                   :is-partial="args.isPartial"
                   :label="args.label"
-                  :disabled="args.disabled"
+                  :is-disabled="args.isDisabled"
                   v-model="value"
               />
             </div>

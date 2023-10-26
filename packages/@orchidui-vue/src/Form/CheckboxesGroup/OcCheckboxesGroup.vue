@@ -37,7 +37,7 @@ const toggleCheckbox = (value) => {
         :key="i"
         :label="checkbox.label"
         :value="checkbox.value"
-        :disabled="checkbox.disabled"
+        :is-disabled="checkbox.isDisabled"
         :model-value="isSelectedCheckbox(checkbox.value)"
         @update:model-value="toggleCheckbox(checkbox.value)"
       />

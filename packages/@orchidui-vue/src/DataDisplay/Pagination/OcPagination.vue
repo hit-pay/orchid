@@ -68,7 +68,7 @@ const pagination = computed(() => {
 </script>
 
 <template>
-  <div class="w-full items-center flex relative justify-center">
+  <div class="w-full items-center flex relative">
     <div class="flex items-center gap-x-6">
       <PrevNext
         :disabled="modelValue <= 1"
@@ -80,7 +80,7 @@ const pagination = computed(() => {
           )
         "
       />
-      <div class="flex items-center gap-x-3">
+      <div class="hidden md:flex items-center gap-x-3">
         <PaginationNumber
           v-for="page in pagination"
           :key="page"
@@ -94,6 +94,7 @@ const pagination = computed(() => {
           {{ page }}
         </PaginationNumber>
       </div>
+      <div class="md:hidden mx-[30px]"></div>
       <PrevNext
         is-next
         :size="size"

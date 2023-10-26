@@ -19,9 +19,7 @@ const config = {
   docs: {
     autodocs: "tag",
   },
-  core: {
-    builder: "@storybook/builder-vite", // 👈 The builder enabled here.
-  },
+  core: {},
   async viteFinal(baseConfig, { configType }) {
     let basePath = "/";
 

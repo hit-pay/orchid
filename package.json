@@ -5,47 +5,46 @@
   "type": "module",
   "scripts": {
     "dev": "storybook dev -p 6006",
-    "dev-docs": "npm run dev --prefix docs",
     "dev-playground": "vite",
     "preview": "npm run build && vite preview",
     "build-orchidui": "npm run build --prefix packages/@orchidui-vue",
-    "build-docs": "npm run build --prefix docs",
     "build-playground": "vite build",
-    "build": "npm run build-orchidui && npm run build-docs && npm run build-playground && node obfuscator.js",
+    "build": "npm run build-orchidui && npm run build-playground",
     "build-storybook": "storybook build -o dist/storybook",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix packages",
-    "format": "prettier .  --write",
-    "postinstall": "(cd packages/@orchidui-vue && npm install) && (cd docs && npm install)"
+    "postinstall": "(cd packages/@orchidui-vue && npm install)",
+    "format": "prettier .  --write"
   },
   "dependencies": {
-    "@orchidui/vue": "^0.0.14",
     "@popperjs/core": "^2.11.8",
-    "@vue/eslint-config-prettier": "^8.0.0",
-    "autoprefixer": "^10.4.16",
-    "eslint-config-standard": "^17.1.0",
-    "eslint-plugin-vue": "^9.17.0",
-    "postcss": "^8.4.31",
-    "sass": "^1.68.0",
-    "vue": "^3.3.4"
+    "flag-icons": "^6.11.1"
   },
   "devDependencies": {
-    "@storybook/addon-essentials": "^7.5.0",
-    "@storybook/addon-interactions": "^7.5.0",
-    "@storybook/addon-links": "^7.5.0",
-    "@storybook/blocks": "^7.5.0",
-    "@storybook/builder-vite": "^7.5.0",
-    "@storybook/testing-library": "^0.2.2",
-    "@storybook/vue3": "^7.5.0",
-    "@storybook/vue3-vite": "^7.5.0",
-    "@vitejs/plugin-vue": "^4.2.3",
-    "autoprefixer": "^10.4.16",
-    "eslint-config-prettier": "^9.0.0",
-    "fast-glob": "^3.3.1",
-    "postcss": "^8.4.30",
-    "postcss-import": "^15.1.0",
-    "replace-in-file": "^7.0.1",
-    "storybook": "^7.5.0",
     "tailwindcss": "^3.3.3",
-    "vite": "^4.4.5"
+    "postcss-import": "^15.1.0",
+    "postcss": "^8.4.31",
+    "autoprefixer": "^10.4.16",
+    "sass": "^1.68.0",
+
+    "vue": "^3.3.4",
+    "vite": "^4.4.5",
+    "@vitejs/plugin-vue": "^4.2.3",
+    "fast-glob": "^3.3.1",
+
+
+    "eslint-plugin-vue": "^9.17.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-config-prettier": "^9.0.0",
+    "@vue/eslint-config-prettier": "^8.0.0",
+    
+
+    "storybook": "^7.5.1",
+    "@storybook/addon-essentials": "^7.5.1",
+    "@storybook/addon-interactions": "^7.5.1",
+    "@storybook/addon-links": "^7.5.1",
+    "@storybook/blocks": "^7.5.1",
+    "@storybook/testing-library": "^0.2.2",
+    "@storybook/vue3": "^7.5.1",
+    "@storybook/vue3-vite": "^7.5.1"
   }
 }

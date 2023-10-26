@@ -25,9 +25,9 @@ defineEmits({
 });
 
 const variantClass = computed(() => ({
-  [Variants.CHECKBOX]: "px-2 min-w-[32px]",
-  [Variants.ICON]: "px-2 min-w-[32px] ",
-  [Variants.IMAGE]: "px-2 min-w-[32px]",
+  [Variants.CHECKBOX]: "md:px-2 px-4 min-w-[32px]",
+  [Variants.ICON]: "md:px-2 px-4 min-w-[32px] ",
+  [Variants.IMAGE]: "md:px-2 px-4 min-w-[32px]",
   [Variants.CONTENT]: "px-4",
   [Variants.EMPTY]: "px-4 min-w-[48px]",
 }));
@@ -44,9 +44,9 @@ const copyToClipboard = async (text) => {
 </script>
 
 <template>
-  <td
-    :class="[variantClass[variant] || 'px-4', isLast ? '' : 'border-b']"
-    class="py-3 border-oc-text-200 bg-oc-bg-light group-hover/row:bg-oc-gray-50 items-center"
+  <div
+    :class="[variantClass[variant] || 'px-4', isLast ? '' : '']"
+    class="py-3 bg-oc-bg-light md:min-h-[58px] md:group-hover/row:bg-oc-gray-50 items-center"
   >
     <div class="flex" :class="isCopy ? 'justify-between' : 'justify-start'">
       <slot>
@@ -54,13 +54,13 @@ const copyToClipboard = async (text) => {
         <Checkbox
           v-if="variant === Variants.CHECKBOX"
           :model-value="isSelected"
-          class="mx-auto"
+          class="m-auto"
           :class="
             isSelected
               ? 'block'
               : isSimple
               ? ''
-              : 'hidden group-hover/row:block'
+              : 'md:hidden group-hover/row:block'
           "
           @update:model-value="$emit('selected')"
         />
@@ -106,7 +106,7 @@ const copyToClipboard = async (text) => {
         :offset="[0, 10]"
       >
         <Icon
-          class="cursor-pointer w-5 h-5 group-hover/row:opacity-100 opacity-0"
+          class="cursor-pointer w-5 h-5 group-hover/row:opacity-100 md:opacity-0 ml-2"
           name="copy"
           @click="copyToClipboard(data)"
         />
@@ -117,5 +117,5 @@ const copyToClipboard = async (text) => {
         </template>
       </Tooltip>
     </div>
-  </td>
+  </div>
 </template>
