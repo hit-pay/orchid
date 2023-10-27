@@ -4,7 +4,7 @@ import { onMounted, ref } from "vue";
 const props = defineProps({
   modelValue: {
     type: [String, Date],
-    default: new Date(),
+    default: () => new Date(),
   },
 });
 

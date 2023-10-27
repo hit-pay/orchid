@@ -67,23 +67,16 @@ const selectedEndDay = ref(
 );
 
 const daysInMonth = computed(() => {
-  if (props.type === "range") {
-    const lastDay = new Date(
-      selectedDate.value?.getFullYear(),
-      selectedDate.value?.getMonth() + 1,
-      0,
-    ).getDate();
-    return Array.from({ length: lastDay }, (_, i) => i + 1);
-  }
-  if (selectedStartDate.value) {
-    const lastDay = new Date(
-      selectedStartDate.value?.getFullYear(),
-      selectedStartDate.value?.getMonth() + 1,
-      0,
-    ).getDate();
-    return Array.from({ length: lastDay }, (_, i) => i + 1);
-  }
-  return Array.from({ length: 31 }, (_, i) => i + 1);
+  const date =
+    props.type === "range" ? selectedDate.value : selectedStartDate.value;
+
+  const lastDay = new Date(
+    date?.getFullYear(),
+    date?.getMonth() + 1,
+    0,
+  ).getDate();
+
+  return Array.from({ length: lastDay }, (_, i) => i + 1);
 });
 
 const selectedMonth = computed(() => {
@@ -103,25 +96,22 @@ const selectedMonth = computed(() => {
 });
 
 const selectDay = (day) => {
-  if (props.type === "range") {
-    const currentMonth = new Date(selectedDate.value);
-    const diffStart = new Date(selectedStartDate.value);
-    const diffEnd = new Date(selectedEndDate.value);
-
-    currentMonth.setDate(day);
-    if (
-      Math.abs(currentMonth.getTime() - diffEnd.getTime()) >
-      Math.abs(currentMonth.getTime() - diffStart.getTime())
-    ) {
-      selectedStartDay.value = day;
-      selectedStartDate.value = currentMonth;
-    } else {
-      selectedEndDay.value = day;
-      selectedEndDate.value = currentMonth;
-    }
-  } else {
+  const currentMonth = new Date(selectedDate.value);
+  currentMonth.setDate(day);
+  if (
+    props.type !== "range" ||
+    Math.abs(
+      currentMonth.getTime() - new Date(selectedEndDate.value).getTime(),
+    ) >
+      Math.abs(
+        currentMonth.getTime() - new Date(selectedStartDate.value).getTime(),
+      )
+  ) {
     selectedStartDay.value = day;
-    selectedStartDate.value.setDate(day);
+    selectedStartDate.value = currentMonth;
+  } else {
+    selectedEndDay.value = day;
+    selectedEndDate.value = currentMonth;
   }
 };
 

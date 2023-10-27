@@ -6,7 +6,7 @@ export default {
   tags: ["autodocs"],
 };
 
-export const emptyPage = {
+export const calendarStory = {
   argTypes: {
     disabledDate: {
       control: "object",

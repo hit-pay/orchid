@@ -14,7 +14,18 @@ defineProps({
     type: String,
     default: "",
   },
-  isUpgrade: Boolean,
+  isUpgrade: {
+    type: Boolean,
+    default: false,
+  },
+  upgradeLabel: {
+    type: String,
+    default: "Upgrade now",
+  },
+  addButtonLabel: {
+    type: String,
+    default: "Add new",
+  },
 });
 </script>
 
@@ -49,7 +60,7 @@ defineProps({
     </div>
     <Button
       v-if="isButton"
-      :label="isUpgrade ? 'Upgrade now' : 'Add new'"
+      :label="isUpgrade ? upgradeLabel : addButtonLabel"
       :left-icon="isUpgrade ? '' : 'plus'"
     />
   </div>

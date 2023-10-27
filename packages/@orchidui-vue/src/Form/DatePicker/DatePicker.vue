@@ -1,11 +1,11 @@
 <script setup>
 import { Dropdown, Calendar, Input } from "@orchid";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import dayjs from "dayjs";
 
 const date = ref();
 
-defineProps({
+const props = defineProps({
   type: {
     type: String,
     default: "default",
@@ -28,6 +28,16 @@ defineProps({
     default: "DD/MM/YYYY",
   },
 });
+const formattedDate = computed(() => {
+  if (props.type === "default") {
+    return dayjs(date.value).format(props.dateFormat);
+  } else {
+    return [
+      dayjs(date.value?.[0]).format(props.dateFormat),
+      dayjs(date.value?.[1]).format(props.dateFormat),
+    ];
+  }
+});
 </script>
 
 <template>
@@ -35,7 +45,7 @@ defineProps({
     <template #trigger>
       <Input
         v-if="type === 'default'"
-        :model-value="dayjs(date).format(dateFormat)"
+        :model-value="formattedDate"
         icon="calendar"
         readonly
       />
@@ -43,14 +53,14 @@ defineProps({
       <div v-else class="flex gap-x-4">
         <Input
           label="From"
-          :model-value="dayjs(date?.[0]).format(dateFormat)"
+          :model-value="formattedDate[0]"
           icon="calendar"
           readonly
         />
 
         <Input
           label="To"
-          :model-value="dayjs(date?.[1]).format(dateFormat)"
+          :model-value="formattedDate[1]"
           icon="calendar"
           readonly
         />

@@ -11,6 +11,8 @@ export const emptyPage = {
     description: "Description",
     isButton: true,
     isUpgrade: true,
+    addButtonLabel: "",
+    upgradeLabel: "",
   },
   render: (args) => ({
     components: {
