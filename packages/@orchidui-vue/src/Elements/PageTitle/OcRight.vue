@@ -12,9 +12,12 @@ defineProps({
       <template #trigger>
         <Button v-bind="secondaryButtonProps" />
       </template>
-      <div class="p-2">
-        <DropdownItem icon="upload" text="Bulk create" />
-        <DropdownItem icon="download" text="Export" />
+      <div v-if="secondaryButtonProps?.dropdownOptions" class="p-2">
+        <DropdownItem
+          v-for="(option, i) in secondaryButtonProps.dropdownOptions"
+          :key="i"
+          v-bind="option"
+        />
       </div>
     </Dropdown>
 

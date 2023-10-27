@@ -4,10 +4,12 @@ import { clickOutside as vClickOutside } from "../../directives/clickOutside.js"
 
 const emit = defineEmits({
   close: [],
+  toggle: [],
 });
 const props = defineProps({
   offset: Number,
   isDisabled: Boolean,
+  menuClasses: String,
 });
 const dropdownMenu = ref(null);
 const trigger = ref(null);
@@ -18,6 +20,7 @@ const toggleDropdown = () => {
   isOpen.value = !isOpen.value;
   if (!isOpen.value) emit("close");
   updateMenuPosition();
+  emit("toggle");
 };
 const updateMenuPosition = async () => {
   if (!isOpen.value) return;
@@ -73,14 +76,17 @@ onBeforeUnmount(() => {
     <div ref="trigger" @click="toggleDropdown">
       <slot name="trigger" :is-open="isOpen">trigger</slot>
     </div>
+
     <Transition name="fade">
       <div
         v-show="isOpen"
         ref="dropdownMenu"
+        :class="menuClasses"
         class="fixed z-[1005] min-w-[162px] rounded bg-oc-bg-light shadow"
         @click.stop
       >
         <slot
+          :is-open="isOpen"
           :close="
             () => {
               isOpen = false;
