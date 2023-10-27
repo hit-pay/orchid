@@ -27,6 +27,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  isReadonly: {
+    type: Boolean,
+    default: false,
+  },
   placeholder: {
     type: String,
     default: "Placeholder",
@@ -85,13 +89,14 @@ const inputClasses = computed(() => [
           {{ label }}:
         </label>
 
-        <div class="flex items-center gap-x-1">
+        <div class="flex items-center gap-x-1 w-full">
           <span v-if="preFill" class="text-oc-text-300">{{ preFill }}</span>
 
           <input
             ref="inputRef"
             :type="inputType"
             :value="modelValue"
+            :readonly="isReadonly"
             :placeholder="placeholder"
             :disabled="disabled"
             class="h-7 outline-none w-full text-oc-text disabled:bg-transparent placeholder:font-normal placeholder:text-oc-text-300 bg-oc-bg-light"
