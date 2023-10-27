@@ -57,6 +57,24 @@ const SampleFilterForm = [
     },
   },
   {
+    name: [
+      {
+        key: "custom_min_field_name",
+        rule: "required",
+      },
+      {
+        key: "custom_max_field_name",
+        rule: "required",
+      },
+    ],
+    type: "RangeInput",
+    props: {
+      label: "Example Label",
+      hint: "This is a hint text to help user",
+      placeholder: "placeholder",
+    },
+  },
+  {
     name: "select",
     type: "Select",
     props: {

@@ -129,6 +129,8 @@ const Filter = {
   per_page: 10,
   tabs: "",
   keywords: "",
+  custom_min_field_name: "1",
+  custom_max_field_name: "100",
 };
 
 export { DataTableOptions, Filter };

@@ -165,7 +165,7 @@ const SampleJsonForm = [
           value: "2",
         },
         {
-          label: "Text 2",
+          label: "Text",
           value: "3",
         },
         {
@@ -208,6 +208,24 @@ const SampleJsonForm = [
   {
     name: "text_area_field",
     type: "Textarea",
+    props: {
+      label: "Example Label",
+      hint: "This is a hint text to help user",
+      placeholder: "placeholder",
+    },
+  },
+  {
+    name: [
+      {
+        key: "custom_min_field_name",
+        rule: "required",
+      },
+      {
+        key: "custom_max_field_name",
+        rule: "required",
+      },
+    ],
+    type: "RangeInput",
     props: {
       label: "Example Label",
       hint: "This is a hint text to help user",
