@@ -25,9 +25,20 @@ const SampleFilterForm = [
     },
   },
   {
+    name: "filter_date_range_picker_test",
+    type: "DatePicker",
+    props: {
+      type: "range",
+      label: "Example Label",
+      hint: "This is a hint text to help user",
+      placeholder: "placeholder",
+    },
+  },
+  {
     name: "radio_group",
     type: "RadioGroup",
     props: {
+      groupName: "unique_group_name",
       label: "Example Label",
       hint: "This is a hint text to help user",
       placeholder: "placeholder",

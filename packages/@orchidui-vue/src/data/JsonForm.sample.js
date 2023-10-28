@@ -116,6 +116,7 @@ const SampleJsonForm = [
     name: "radio_group",
     type: "RadioGroup",
     props: {
+      groupName: "unique_group_name_1",
       label: "Example Label",
       hint: "This is a hint text to help user",
       placeholder: "placeholder",
@@ -148,6 +149,7 @@ const SampleJsonForm = [
     name: "radio_group_2",
     type: "RadioGroup",
     props: {
+      groupName: "unique_group_name_2",
       label: "Example Label",
       hint: "This is a hint text to help user",
       placeholder: "placeholder",
@@ -227,6 +229,34 @@ const SampleJsonForm = [
     ],
     type: "RangeInput",
     props: {
+      label: "Example Label",
+      hint: "This is a hint text to help user",
+      placeholder: "placeholder",
+    },
+  },
+  {
+    name: "time_picker_test",
+    type: "TimePicker",
+    props: {
+      label: "Example Label",
+      hint: "This is a hint text to help user",
+      placeholder: "placeholder",
+    },
+  },
+  {
+    name: "date_picker_test",
+    type: "DatePicker",
+    props: {
+      label: "Example Label",
+      hint: "This is a hint text to help user",
+      placeholder: "placeholder",
+    },
+  },
+  {
+    name: "date_range_picker_test",
+    type: "DatePicker",
+    props: {
+      type: "range",
       label: "Example Label",
       hint: "This is a hint text to help user",
       placeholder: "placeholder",
