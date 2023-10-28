@@ -1,3 +1,1 @@
-Orchid UI
-
-# RULES
+# Orchid UI
