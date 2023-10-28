@@ -7,12 +7,9 @@
     "dev": "storybook dev -p 6006",
     "dev-playground": "vite",
     "preview": "npm run build && vite preview",
-    "build-orchidui": "npm run build --prefix packages/@orchidui-vue",
-    "build-playground": "vite build",
-    "build": "npm run build-orchidui && npm run build-playground",
+    "build": "vite build",
     "build-storybook": "storybook build -o dist/storybook",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix packages",
-    "postinstall": "(cd packages/@orchidui-vue && npm install)",
     "format": "prettier .  --write"
   },
   "dependencies": {
