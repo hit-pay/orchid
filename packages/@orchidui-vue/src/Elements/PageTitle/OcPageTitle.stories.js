@@ -148,6 +148,16 @@ export const Default = {
     secondaryButtonProps: {
       variant: "secondary",
       label: "Bulk Create/Export",
+      dropdownOptions: [
+        {
+          icon: "upload",
+          text: "Bulk create",
+        },
+        {
+          icon: "download",
+          text: "Export",
+        },
+      ],
     },
   },
   render: (args) => ({
