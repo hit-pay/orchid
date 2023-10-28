@@ -70,14 +70,15 @@ const getComponentByType = (type) => {
 <template>
   <div class="form-builder">
     <template v-for="(form, key) in jsonForm" :key="key">
-      <component
-        :is="getComponentByType(form.type)"
-        v-if="getComponentByType(form.type)"
+      <DatePicker
+        v-if="form.type === 'DatePicker' && form.props.type === 'range'"
         :class="form.className"
         v-bind="form.props"
-        :model-value="values[form.name]"
-        :error-message="errors[form.name]"
-        @update:model-value="onUpdate(form, $event)"
+        :error-message="multipleError(form.name)"
+        :from="values[form.name[0].key]"
+        :to="values[form.name[1].key]"
+        @update:from="onUpdate(form, $event, 0)"
+        @update:to="onUpdate(form, $event, 1)"
       />
       <RangeInput
         v-else-if="form.type === 'RangeInput'"
@@ -98,6 +99,15 @@ const getComponentByType = (type) => {
         :phone-number="values[form.name[1].key]"
         @update:country-code="onUpdate(form, $event, 0)"
         @update:phone-number="onUpdate(form, $event, 1)"
+      />
+      <component
+        :is="getComponentByType(form.type)"
+        v-else-if="getComponentByType(form.type)"
+        :class="form.className"
+        v-bind="form.props"
+        :model-value="values[form.name]"
+        :error-message="errors[form.name]"
+        @update:model-value="onUpdate(form, $event)"
       />
       <slot
         v-else

@@ -253,7 +253,16 @@ const SampleJsonForm = [
     },
   },
   {
-    name: "date_range_picker_test",
+    name: [
+      {
+        key: "date_picker_range_from",
+        rule: "required",
+      },
+      {
+        key: "date_picker_range_to",
+        rule: "required",
+      },
+    ],
     type: "DatePicker",
     props: {
       type: "range",

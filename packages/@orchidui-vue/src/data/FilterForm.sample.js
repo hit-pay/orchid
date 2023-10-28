@@ -25,7 +25,16 @@ const SampleFilterForm = [
     },
   },
   {
-    name: "filter_date_range_picker_test",
+    name: [
+      {
+        key: "filter_date_custom_min_field_name",
+        rule: "required",
+      },
+      {
+        key: "filter_date_custom_max_field_name",
+        rule: "required",
+      },
+    ],
     type: "DatePicker",
     props: {
       type: "range",
