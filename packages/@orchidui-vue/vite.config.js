@@ -47,7 +47,7 @@ export default defineConfig({
       formats: ["es"],
     },
     rollupOptions: {
-      external: ["vue", "@popperjs/core"],
+      external: ["vue", "@popperjs/core","dayjs"],
     },
   },
 });
