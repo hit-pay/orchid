@@ -8,7 +8,12 @@ const props = defineProps({
     default: "vertical",
   },
   checkboxes: Array,
-  modelValue: Array,
+  modelValue: {
+    type: Array,
+    default: () => {
+      return []
+    }
+  },
   label: String,
   errorMessage: String,
   hint: String,
