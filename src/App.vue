@@ -11,6 +11,8 @@ import {
 import { reactive, computed } from "vue";
 import ExampleDataTable from "@playground/example/DataTable.vue";
 import DTPaymentLinks from "@playground/example/data-table/DTPaymentLinks.vue";
+import ExampleFormBuilder from "@playground/example/FormBuilder.vue";
+import FBCustomer from "@playground/example/form-builder/FBCustomer.vue";
 let state = reactive({
   darkMode: false,
   primary_colors: {
@@ -52,8 +54,18 @@ let state = reactive({
         },
         {
           icon: "circle",
-          name: "formbuilder",
+          name: "form-builder",
           label: "Form Builder",
+          children: [
+            {
+              name: "example-form-builder",
+              label: "Example Form Builder",
+            },
+            {
+              name: "fb-customer",
+              label: "Customer",
+            },
+          ],
         },
       ],
     },
@@ -154,7 +166,7 @@ const changeActiveSidebar = (name) => {
           </a>
         </HeaderRight>
       </Header>
-      <div class="hidden xl:block fixed h-screen mt-[60px] z-[40]">
+      <div class="hidden md:block fixed h-screen mt-[60px] z-[40]">
         <Sidebar
           title="Orchid UI"
           class="min-h-full"
@@ -185,6 +197,8 @@ const changeActiveSidebar = (name) => {
         <section class="py-5 grid gap-5 items-start">
           <ExampleDataTable />
           <DTPaymentLinks id="dt-payment-links" />
+          <ExampleFormBuilder id="example-form-builder" />
+          <FBCustomer id="fb-customer" />
         </section>
       </div>
     </section>

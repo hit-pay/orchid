@@ -4,11 +4,10 @@ import { onMounted, ref } from "vue";
 
 const props = defineProps({
   countryCodes: Array,
-  validRegex: {
+  initialCountryCode: {
     type: String,
-    default: "",
+    default: "sg",
   },
-  initialCountryCode: String,
   errorMessage: String,
   phoneNumber: String,
   countryCode: String,
@@ -21,7 +20,6 @@ const props = defineProps({
 const emit = defineEmits({
   "update:phoneNumber": [],
   "update:countryCode": [],
-  update: [],
 });
 const selectedCountryIso = ref(props.initialCountryCode);
 
@@ -29,46 +27,32 @@ const getCountryObject = (iso) =>
   props.countryCodes.find(
     (country) => country.iso.toLowerCase() === iso.toLowerCase(),
   ) || null;
+
 const getCountryCode = (iso) => getCountryObject(iso)?.code || "";
 
-const isPhoneError = ref(false);
 const onInput = (value) => {
-  let phoneNumber = value;
-  isPhoneError.value =
-    props.validRegex && !new RegExp(props.validRegex).test(phoneNumber);
-  emit("update:phoneNumber", phoneNumber);
-  updateEmit();
+  emit("update:phoneNumber", value);
 };
 const changeSelectedCountry = (iso, code, close) => {
   selectedCountryIso.value = iso.toLowerCase();
   emit("update:countryCode", code);
   close();
-  updateEmit();
 };
-const updateEmit = () => {
-  emit("update", {
-    country: getCountryObject(selectedCountryIso.value)?.country || "",
-    iso: selectedCountryIso.value,
-    code: getCountryCode(selectedCountryIso.value),
-    phone: props.phoneNumber,
-  });
-};
+
 onMounted(() => {
   emit("update:countryCode", getCountryCode(props.initialCountryCode));
-  updateEmit();
 });
 </script>
 
 <template>
   <Input
-    :error-message="isPhoneError && phoneNumber ? errorMessage : ''"
+    :error-message="errorMessage"
     :model-value="phoneNumber"
     :placeholder="placeholder"
     :label="label"
     :is-inline-label="isInlineLabel"
     :disabled="isDisabled"
     :hint="hint"
-    input-type="tel"
     @update:model-value="onInput"
   >
     <template #trailing>

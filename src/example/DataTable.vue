@@ -8,10 +8,7 @@ import {
   Chip,
 } from "@orchid";
 import { ref } from "vue";
-import {
-  DataTableOptions,
-  Filter,
-} from "@orchid/Builder/DataTable/DataTableOptions";
+import { DataTableOptions, Filter } from "@orchid/data/DataTableOptions.sample";
 
 const filterData = ref(Filter);
 </script>
@@ -23,6 +20,7 @@ const filterData = ref(Filter);
       {{ filterData }}
     </p>
     <DataTable
+      id="sample-data-table"
       :filter="filterData"
       :options="DataTableOptions"
       @update:filter="filterData = $event"

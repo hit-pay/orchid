@@ -105,6 +105,7 @@ onMounted(() => {
       {{ filterData }}
     </p>
     <DataTable
+      id="payment-link-table"
       v-model:filter="filterData"
       :options="DataTableOptions"
     >

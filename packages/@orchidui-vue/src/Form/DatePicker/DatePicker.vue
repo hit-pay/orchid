@@ -3,9 +3,19 @@ import { Dropdown, Calendar, Input } from "@orchid";
 import { computed, ref } from "vue";
 import dayjs from "dayjs";
 
-const date = ref();
 
+
+const emit  = defineEmits(["update:modelValue","update:from","update:to"]) 
 const props = defineProps({
+  from : {
+    type: [String, Date, Number],
+  },
+  to : {
+    type: [String, Date, Number],
+  },
+  modelValue: {
+    type: [String, Date, Number],
+  },
   type: {
     type: String,
     default: "default",
@@ -13,7 +23,7 @@ const props = defineProps({
   },
   disabledDate: {
     type: Function,
-    default: (timestamp) => false,
+    default: () => false,
   },
   minDate: {
     type: [String, Date, Number],
@@ -28,6 +38,13 @@ const props = defineProps({
     default: "DD/MM/YYYY",
   },
 });
+
+let defaultValue = props.modelValue 
+if(props.type === 'range' && props.from && props.to){
+  defaultValue = [props.from, props.to]
+}
+const date = ref(defaultValue);
+
 const formattedDate = computed(() => {
   if (props.type === "default") {
     return dayjs(date.value).format(props.dateFormat);
@@ -38,6 +55,16 @@ const formattedDate = computed(() => {
     ];
   }
 });
+
+const updateCalendar = (close) => {
+  if(props.type === 'range'){
+    emit("update:from", formattedDate.value[0])
+    emit("update:to", formattedDate.value[1])
+  }else{
+    emit("update:modelValue", formattedDate.value)
+  }
+  close()
+}
 </script>
 
 <template>
@@ -75,7 +102,7 @@ const formattedDate = computed(() => {
         :min-date="minDate"
         position="inline"
         :type="type"
-        @update:model-value="close()"
+        @update:model-value="updateCalendar(close)"
       />
     </template>
   </Dropdown>

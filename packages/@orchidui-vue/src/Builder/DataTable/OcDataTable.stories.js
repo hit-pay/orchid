@@ -11,10 +11,9 @@ import {
 
 export default {
   component: DataTable,
-  tags: ["autodocs"],
 };
 
-import { DataTableOptions, Filter } from "./DataTableOptions";
+import { DataTableOptions, Filter } from "../../data/DataTableOptions.sample";
 export const Default = {
   args: {
     filter: Filter,
@@ -39,13 +38,13 @@ export const Default = {
       return { args, updateFilterData };
     },
     template: `
-          <Theme>
+          <Theme class="p-8">
             <div>
               <ul>
                 <li v-for="item, key in args.filter">{{key}} : {{item}}</li>
               </ul>
             </div>
-            <DataTable :filter="args.filter" :options="args.options" @update:filter="updateFilterData">
+            <DataTable id="sample-data-table" :filter="args.filter" :options="args.options" @update:filter="updateFilterData">
               <template #bulk-actions="{selectedRows}">
                 <Button
                   label="Publish"
@@ -94,3 +93,10 @@ export const Default = {
         `,
   }),
 };
+
+{
+  /* custom filter form <template #custom-filter-form="{updateFilter, errors ,values, jsonForm}">
+filter name:  {{jsonForm[0].name}}
+<Toggle size="small" :model-value="false" @update:modelValue="updateFilter(jsonForm[0],$event)"/>
+</template> */
+}

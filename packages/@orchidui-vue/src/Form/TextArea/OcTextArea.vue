@@ -2,7 +2,7 @@
 import { BaseInput } from "@orchid";
 import { ref } from "vue";
 
-const props = defineProps({
+defineProps({
   placeholder: String,
   label: String,
   errorMessage: String,
@@ -23,7 +23,7 @@ const MIN_HEIGHT = "18px";
 
 const onInput = (event) => {
   const input = event.target;
-  if (!input || !props.autoResize) return;
+  if (!input) return;
   input.style.height = MIN_HEIGHT;
   input.style.height = input.scrollHeight + "px";
   emit("update:modelValue", input.value);

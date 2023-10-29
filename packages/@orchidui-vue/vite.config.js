@@ -23,7 +23,9 @@ const entities = files
   })
   .filter((entry) => {
     return (
-      !entry[0].includes(".stories") && !entry[0].includes("HitpaySidebar")
+      !entry[0].includes(".sample") &&
+      !entry[0].includes(".stories") &&
+      !entry[0].includes("HitpaySidebar")
     );
   });
 
@@ -35,7 +37,7 @@ export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: {
-      "@orchid": resolve(__dirname, "./src/")
+      "@orchid": resolve(__dirname, "./src/"),
     },
   },
   build: {
@@ -45,7 +47,7 @@ export default defineConfig({
       formats: ["es"],
     },
     rollupOptions: {
-      external: ["vue", "@popperjs/core"],
+      external: ["vue", "@popperjs/core", "dayjs"],
     },
   },
 });

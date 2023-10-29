@@ -1,5 +1,5 @@
 import { Theme, PhoneInput } from "@orchid";
-import countryCodes from "@orchid/countryCodes.js";
+import countryCodes from "../../data/CountryCodes.js";
 import { ref } from "vue";
 
 export default {
@@ -18,26 +18,24 @@ export const Default = {
     initialCountryCode: "sg",
     placeholder: "Placeholder",
     hint: "This is a hint text to help user.",
-    errorMessage: "Invalid phone number",
-    validRegex: "^[+]?[(]?[0-9]{3}[)]?[-s.]?[0-9]{3}[-s.]?[0-9]{4,6}$",
+    errorMessage: "",
     isInlineLabel: false,
     isDisabled: false,
     label: "",
-    countryCodes: countryCodes,
   },
   render: (args) => ({
     components: { Theme, PhoneInput },
     setup() {
       const phone = ref("");
       const phoneCode = ref("");
-      return { phone, phoneCode, args };
+      return { phone, phoneCode, args, countryCodes };
     },
     template: `
           <Theme>
             <PhoneInput
                 v-model:country-code="phoneCode"
                 v-model:phone-number="phone"
-                :country-codes="args.countryCodes"
+                :country-codes="countryCodes"
                 :key="args.initialCountryCode"
                 :valid-regex="args.validRegex"
                 :isInlineLabel="args.isInlineLabel"
