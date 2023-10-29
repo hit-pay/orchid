@@ -64,6 +64,7 @@ const selectOption = (option) => {
         : [...props.modelValue, option]
       : option,
   );
+  
 };
 </script>
 
