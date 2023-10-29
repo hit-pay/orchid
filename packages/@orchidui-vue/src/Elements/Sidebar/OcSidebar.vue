@@ -161,7 +161,7 @@ onMounted(() => {
                   >
                     <div
                       v-if="!menu.children"
-                      class="px-5 py-3 flex items-center rounded hover:bg-[var(--oc-sidebar-menu-hover)]"
+                      class="flex items-center rounded hover:bg-[var(--oc-sidebar-menu-hover)]"
                       :class="{
                         'font-medium bg-[var(--oc-sidebar-menu-active)] text-[var(--oc-sidebar-menu-active-text)]':
                           menu.active,
