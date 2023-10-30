@@ -4,6 +4,10 @@ import { computed } from "vue";
 
 const props = defineProps({
   isBorderless: Boolean,
+  footerClass: {
+    type:String,
+    default: 'justify-end'
+  },
   modelValue: {
     type: Boolean,
     default: false,
@@ -98,8 +102,13 @@ const sizeClasses = computed(() => ({
       </div>
 
       <div
-        class="px-5 py-6 border-oc-gray-200 flex justify-end gap-x-4"
-        :class="!isBorderless ? 'border-t' : ''"
+        class="px-5 py-6 border-oc-gray-200 flex gap-x-4"
+        :class="[
+          footerClass,
+          {
+            'border-t' : !isBorderless 
+          }
+        ]"
       >
         <slot name="footer">
           <Button

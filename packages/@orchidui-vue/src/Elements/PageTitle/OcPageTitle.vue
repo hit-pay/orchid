@@ -31,7 +31,7 @@ defineEmits({
 
 <template>
   <div class="pb-5 flex flex-col">
-    <div class="flex flex-wrap w-full pt-5 px-10 gap-5">
+    <div class="flex flex-wrap w-full pt-5 px-2 md:px-10 gap-5">
       <Title
         :title="title"
         :description="description"
