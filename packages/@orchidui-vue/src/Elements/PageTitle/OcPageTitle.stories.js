@@ -178,8 +178,8 @@ export const Default = {
             <PageTitle
                 v-bind="args"
                 @changeTab="args.overviewActiveTab = $event"
-                @event:primary="onclickPrimary"
-                @event:secondary="onclickSecondary"
+                @click:primaryButton="onclickPrimary"
+                @click:secondaryButton="onclickSecondary"
             />
           </Theme>
         `,

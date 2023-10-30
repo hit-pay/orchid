@@ -24,8 +24,8 @@ defineProps({
 });
 defineEmits({
   changeTab: [],
-  "event:primary": [],
-  "event:secondary": [],
+  "click:primaryButton": [],
+  "click:secondaryButton": [],
 });
 </script>
 
@@ -43,8 +43,8 @@ defineEmits({
           class="shrink-0"
           :primary-button-props="primaryButtonProps"
           :secondary-button-props="secondaryButtonProps"
-          @event:primary="$emit('event:primary', $event)"
-          @event:secondary="$emit('event:secondary', $event)"
+          @click:primary-button="$emit('click:primaryButton', $event)"
+          @click:secondary-button="$emit('click:secondaryButton', $event)"
         />
       </slot>
     </div>
