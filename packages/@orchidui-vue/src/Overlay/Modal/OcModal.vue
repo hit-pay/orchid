@@ -5,8 +5,8 @@ import { computed } from "vue";
 const props = defineProps({
   isBorderless: Boolean,
   footerClass: {
-    type:String,
-    default: 'justify-end'
+    type: String,
+    default: "justify-end",
   },
   modelValue: {
     type: Boolean,
@@ -31,7 +31,7 @@ const props = defineProps({
       variant: "secondary",
     }),
   },
-  confimButtonProps: {
+  confirmButtonProps: {
     type: Object,
     default: () => ({
       label: "OK",
@@ -44,7 +44,7 @@ const props = defineProps({
     validator: (val) => ["default", "medium", "small"].includes(val),
   },
 });
-const emit = defineEmits(["update:modelValue", "confim"]);
+const emit = defineEmits(["update:modelValue", "confirm"]);
 
 const onClickOutside = async () => {
   if (props.modelValue) {
@@ -106,8 +106,8 @@ const sizeClasses = computed(() => ({
         :class="[
           footerClass,
           {
-            'border-t' : !isBorderless 
-          }
+            'border-t': !isBorderless,
+          },
         ]"
       >
         <slot name="footer">
@@ -121,8 +121,8 @@ const sizeClasses = computed(() => ({
           <Button
             label="OK"
             class="min-w-[112px]"
-            v-bind="confimButtonProps"
-            @click="$emit('confim')"
+            v-bind="confirmButtonProps"
+            @click="$emit('confirm')"
           />
         </slot>
       </div>

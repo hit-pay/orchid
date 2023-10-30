@@ -21,7 +21,7 @@ export const Default = {
       label: "Cancel",
       variant: "secondary",
     },
-    confimButtonProps: {
+    confirmButtonProps: {
       label: "OK",
     },
     size: "medium",
@@ -45,7 +45,7 @@ export const Default = {
                   :size="args.size"
                   :isCloseIcon="args.isCloseIcon"
                   :cancelButtonProps="args.cancelButtonProps"
-                  :confimButtonProps="args.confimButtonProps"
+                  :confirmButtonProps="args.confirmButtonProps"
               />
             </div>
           </Theme>
@@ -66,7 +66,7 @@ export const Clean = {
       label: "Cancel",
       variant: "secondary",
     },
-    confimButtonProps: {
+    confirmButtonProps: {
       label: "OK",
     },
     size: "small",
@@ -89,7 +89,7 @@ export const Clean = {
                   class="!w-full !h-full"
                   :size="args.size"
                   :cancelButtonProps="args.cancelButtonProps"
-                  :confimButtonProps="args.confimButtonProps"
+                  :confirmButtonProps="args.confirmButtonProps"
               ></Modal>
             </div>
           </Theme>
