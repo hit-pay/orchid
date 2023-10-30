@@ -95,11 +95,7 @@ const pagination = computed(() => {
         </PaginationNumber>
       </div>
       <div class="md:hidden mx-[30px]">
-        <PaginationNumber
-          :size="size"
-          :is-rounded="isRounded"
-          :active="true"
-        >
+        <PaginationNumber :size="size" :is-rounded="isRounded" :active="true">
           {{ modelValue }}
         </PaginationNumber>
       </div>

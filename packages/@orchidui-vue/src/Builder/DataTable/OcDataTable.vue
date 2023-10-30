@@ -84,8 +84,8 @@ const perPageOptions = computed(() => {
     },
   ];
   const maxLength = pagination.value.total < 100 ? pagination.value.total : 100;
-  let opt = per_page_option
-  if(maxLength > 10){
+  let opt = per_page_option;
+  if (maxLength > 10) {
     opt = per_page_option.filter((p) => {
       return p.value <= maxLength;
     });
@@ -117,14 +117,14 @@ const removeQuery = (query) => {
 };
 
 const changePage = () => {
-  applyFilter(null, currentPage.value)
-}
+  applyFilter(null, currentPage.value);
+};
 
 const filterData = ref({});
 
 const applyFilter = (filterForm = null, isChangePage = false) => {
-  if(!isChangePage){
-    currentPage.value = 1
+  if (!isChangePage) {
+    currentPage.value = 1;
   }
   filterData.value.page = currentPage.value;
   filterData.value.per_page = perPage.value.value;

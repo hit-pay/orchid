@@ -56,15 +56,13 @@ const filterableOptions = computed(() =>
   filterOptions(props.options, query.value),
 );
 const selectOption = (option) => {
-  emit(
-    "update:modelValue",
-    props.multiple
-      ? props.modelValue.find((o) => o.value === option.value)
-        ? props.modelValue.filter((o) => o.value !== option.value)
-        : [...props.modelValue, option]
-      : option,
-  );
-  
+  const result = props.multiple
+    ? props.modelValue.find((o) => o.value === option.value)
+      ? props.modelValue.filter((o) => o.value !== option.value)
+      : [...props.modelValue, option]
+    : option;
+
+  emit("update:modelValue", result);
 };
 </script>
 
@@ -126,19 +124,21 @@ const selectOption = (option) => {
           </template>
         </Input>
 
-        <slot :f-options="filterableOptions" :select-option="selectOption">
-          <Option
-            v-for="option in filterableOptions"
-            :key="option.value"
-            :label="option.label"
-            :is-selected="
-              multiple
-                ? modelValue.find((o) => o.value === option.value)
-                : modelValue?.value === option.value
-            "
-            @click="selectOption(option)"
-          />
-        </slot>
+        <div class="max-h-[320px] overflow-y-auto">
+          <slot :f-options="filterableOptions" :select-option="selectOption">
+            <Option
+              v-for="option in filterableOptions"
+              :key="option.value"
+              :label="option.label"
+              :is-selected="
+                multiple
+                  ? modelValue.find((o) => o.value === option.value)
+                  : modelValue?.value === option.value
+              "
+              @click="selectOption(option)"
+            />
+          </slot>
+        </div>
 
         <Button
           v-if="isAddNew"
