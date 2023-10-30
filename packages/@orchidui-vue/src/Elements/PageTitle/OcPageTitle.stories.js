@@ -166,11 +166,11 @@ export const Default = {
     components: { PageTitle, Theme },
     setup() {
       const onclickPrimary = () => {
-        console.log('primary clicked')
-      }
+        console.log("primary clicked");
+      };
       const onclickSecondary = (value) => {
-        console.log('sec clicked', value)
-      }
+        console.log("sec clicked", value);
+      };
       return { args, onclickPrimary, onclickSecondary };
     },
     template: `

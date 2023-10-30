@@ -4,7 +4,7 @@ import { PageTitleRight, AdditionalContent } from "@orchid";
 
 defineProps({
   title: { type: String, required: true },
-  description: { type: String, required: true },
+  description: { type: String },
   mainLink: { type: String, default: "" },
   userId: { type: String, default: "" },
   chipVariant: { type: String, default: "" },
@@ -24,8 +24,8 @@ defineProps({
 });
 defineEmits({
   changeTab: [],
-  'event:primary': [],
-  'event:secondary': []
+  "event:primary": [],
+  "event:secondary": [],
 });
 </script>
 

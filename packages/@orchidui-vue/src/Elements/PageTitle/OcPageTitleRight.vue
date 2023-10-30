@@ -1,7 +1,7 @@
 <script setup>
 import { Button, Dropdown, DropdownItem, Tooltip } from "@orchid";
 
-const emit = defineEmits(['event:primary','event:secondary'])
+const emit = defineEmits(["event:primary", "event:secondary"]);
 defineProps({
   primaryButtonProps: Object,
   secondaryButtonProps: Object,
