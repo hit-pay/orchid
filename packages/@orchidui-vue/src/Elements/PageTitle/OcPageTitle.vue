@@ -1,7 +1,6 @@
 <script setup>
 import Title from "./OcTitle.vue";
-import Right from "./OcRight.vue";
-import { AdditionalContent } from "@orchid";
+import { PageTitleRight, AdditionalContent } from "@orchid";
 
 defineProps({
   title: { type: String, required: true },
@@ -25,6 +24,8 @@ defineProps({
 });
 defineEmits({
   changeTab: [],
+  'event:primary': [],
+  'event:secondary': []
 });
 </script>
 
@@ -38,10 +39,12 @@ defineEmits({
       />
 
       <slot name="right">
-        <Right
+        <PageTitleRight
           class="shrink-0"
           :primary-button-props="primaryButtonProps"
           :secondary-button-props="secondaryButtonProps"
+          @event:primary="$emit('event:primary', $event)"
+          @event:secondary="$emit('event:secondary', $event)"
         />
       </slot>
     </div>

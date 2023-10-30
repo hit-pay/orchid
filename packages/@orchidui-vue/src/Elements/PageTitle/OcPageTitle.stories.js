@@ -150,10 +150,12 @@ export const Default = {
       label: "Bulk Create/Export",
       dropdownOptions: [
         {
+          name: "bulk_create",
           icon: "upload",
           text: "Bulk create",
         },
         {
+          name: "download",
           icon: "download",
           text: "Export",
         },
@@ -163,13 +165,21 @@ export const Default = {
   render: (args) => ({
     components: { PageTitle, Theme },
     setup() {
-      return { args };
+      const onclickPrimary = () => {
+        console.log('primary clicked')
+      }
+      const onclickSecondary = (value) => {
+        console.log('sec clicked', value)
+      }
+      return { args, onclickPrimary, onclickSecondary };
     },
     template: `
           <Theme>
             <PageTitle
                 v-bind="args"
                 @changeTab="args.overviewActiveTab = $event"
+                @event:primary="onclickPrimary"
+                @event:secondary="onclickSecondary"
             />
           </Theme>
         `,

@@ -1,6 +1,7 @@
 <script setup>
 import { Button, Dropdown, DropdownItem, Tooltip } from "@orchid";
 
+const emit = defineEmits(['event:primary','event:secondary'])
 defineProps({
   primaryButtonProps: Object,
   secondaryButtonProps: Object,
@@ -17,12 +18,13 @@ defineProps({
           v-for="(option, i) in secondaryButtonProps.dropdownOptions"
           :key="i"
           v-bind="option"
+          @click="emit('event:secondary', option)"
         />
       </div>
     </Dropdown>
 
     <Tooltip position="top" :offset="[0, 4]" arrow-hidden>
-      <Button v-bind="primaryButtonProps" />
+      <Button v-bind="primaryButtonProps" @click="emit('event:primary')" />
       <template #popper>
         <div
           class="px-3 py-[5px] font-medium text-sm text-oc-text-400 flex gap-x-3 items-center"
