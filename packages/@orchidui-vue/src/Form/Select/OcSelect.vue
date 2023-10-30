@@ -32,15 +32,15 @@ const filterOptions = (options, query) => {
   const filteredOptions = [];
 
   for (const option of options) {
-    if (Array.isArray(option.value)) {
-      const filteredGroup = option.value.filter((subOption) =>
+    if (option.values) {
+      const filteredGroup = option.values.filter((subOption) =>
         subOption.label.toLowerCase().includes(query.toLowerCase()),
       );
 
       if (filteredGroup.length > 0) {
         filteredOptions.push({
           label: option.label,
-          value: filteredGroup,
+          values: filteredGroup,
         });
       }
     } else {
@@ -57,13 +57,35 @@ const filterableOptions = computed(() =>
 );
 const selectOption = (option) => {
   const result = props.multiple
-    ? props.modelValue.find((o) => o.value === option.value)
-      ? props.modelValue.filter((o) => o.value !== option.value)
-      : [...props.modelValue, option]
-    : option;
+    ? props.modelValue.find((o) => o === option.value)
+      ? props.modelValue.filter((o) => o !== option.value)
+      : [...props.modelValue, option.value]
+    : option.value;
 
   emit("update:modelValue", result);
 };
+
+const modelValueOption = computed(() => {
+  if (props.multiple) {
+    let selected = [];
+    for (const option of props.options) {
+      if (option.values) {
+        option.values.forEach((o) => {
+          if (props.modelValue.includes(o.value)) {
+            selected.push(o);
+          }
+        });
+      } else {
+        if (props.modelValue.includes(option.value)) {
+          selected.push(option);
+        }
+      }
+    }
+    return selected;
+  } else {
+    return props.options.find((o) => o.value === props.modelValue);
+  }
+});
 </script>
 
 <template>
@@ -83,14 +105,14 @@ const selectOption = (option) => {
         >
           <div v-if="multiple" class="flex flex-wrap gap-2">
             <Chip
-              v-for="option in modelValue"
+              v-for="option in modelValueOption"
               :key="option.value"
               closable
               :label="option.label"
               @remove="
                 $emit(
                   'update:modelValue',
-                  props.modelValue.filter((o) => o.value !== option.value),
+                  props.modelValue.filter((o) => o !== option.value),
                 )
               "
             />
@@ -100,7 +122,7 @@ const selectOption = (option) => {
               <span v-if="isInlineLabel && label" class="text-oc-text-300">
                 {{ label }}:
               </span>
-              <span v-if="modelValue?.label">{{ modelValue.label }}</span>
+              <span v-if="modelValueOption">{{ modelValueOption.label }}</span>
               <span v-else class="text-oc-text-300">{{ placeholder }}</span>
             </span>
           </template>
@@ -132,8 +154,8 @@ const selectOption = (option) => {
               :label="option.label"
               :is-selected="
                 multiple
-                  ? modelValue.find((o) => o.value === option.value)
-                  : modelValue?.value === option.value
+                  ? modelValue.find((o) => o === option.value)
+                  : modelValue === option.value
               "
               @click="selectOption(option)"
             />
