@@ -20,7 +20,7 @@ const props = defineProps({
   isDisabled: Boolean,
   isAddNew: Boolean,
   options: Array,
-  modelValue: [Array, String],
+  modelValue: [Array, String, Number],
   multiple: Boolean,
 });
 const emit = defineEmits({
