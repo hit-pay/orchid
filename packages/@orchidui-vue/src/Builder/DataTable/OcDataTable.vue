@@ -43,10 +43,7 @@ const filterOptions = computed(() => {
 const selectedRows = ref([]);
 const filterTab = ref(props.filter[filterOptions.value?.tabs?.key]);
 const currentPage = ref(props.filter.page);
-const perPage = ref({
-  label: props.filter.per_page,
-  value: props.filter.per_page,
-});
+const perPage = ref(props.filter.per_page);
 const queries = ref([]);
 
 const isSearchExpanded = ref(false);
