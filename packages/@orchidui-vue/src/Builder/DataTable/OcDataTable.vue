@@ -76,8 +76,8 @@ const perPageOptions = computed(() => {
       value: page * 8,
     },
     {
-      label: pagination.value.total.toString(),
-      value: pagination.value.total,
+      label: (page * 10)?.toString(),
+      value: page * 10,
     },
   ];
   const maxLength = pagination.value.total < 100 ? pagination.value.total : 100;

@@ -50,13 +50,14 @@ defineEmits({
     </div>
 
     <AdditionalContent
+      v-if="additionalContentVariant"
       :main-link="mainLink"
       :chip-label="chipLabel"
       :additional-title="additionalTitle"
       :chip-variant="chipVariant"
       :user-id="userId"
       :tooltip-content="tooltipContent"
-      :variant="additionalContentVariant"
+      :variant="additionalContentVariant ?? 'default'"
       :boxes="boxes"
       :overview-items="overviewItems"
       :overview-tabs="overviewTabs"
