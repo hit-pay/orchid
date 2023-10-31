@@ -45,7 +45,7 @@ export const Default = {
     template: `
           <Theme>
             <div class="w-full h-[400px] flex items-center justify-center gap-3">
-              <Tooltip :key="args.trigger" :trigger="args.trigger" :distance="args.distance" :skidding="args.distance"
+              <Tooltip :key="args.trigger" :trigger="args.trigger" :distance="args.distance" :skidding="args.skidding"
                        :position="args.position" popper-class="bg-oc-bg">
                 <div class="bg-oc-gray-300 p-3 rounded-sm cursor-pointer">Trigger</div>
                 <template #popper>
@@ -58,7 +58,7 @@ export const Default = {
                   </div>
                 </template>
               </Tooltip>
-              <Tooltip :key="args.trigger" :trigger="args.trigger" :distance="args.distance" :skidding="args.distance"
+              <Tooltip :key="args.trigger" :trigger="args.trigger" :distance="args.distance" :skidding="args.skidding"
                        :position="args.position"
                        popper-class="bg-oc-gray-900 text-oc-text-100">
                 <div class="p-3 rounded-sm cursor-pointer">Trigger</div>
