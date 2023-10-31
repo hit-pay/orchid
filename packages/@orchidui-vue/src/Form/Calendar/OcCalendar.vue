@@ -243,7 +243,7 @@ const doneSelecting = () => {
 
 <template>
   <div
-    class="p-6 w-fit rounded-lg flex flex-col gap-y-7"
+    class="p-6 w-fit rounded flex flex-col gap-y-7"
     :class="position === 'floating' ? 'shadow-normal bg-white' : ''"
   >
     <div class="flex items-center justify-between">

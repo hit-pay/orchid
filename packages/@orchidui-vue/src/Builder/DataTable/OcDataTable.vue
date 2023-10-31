@@ -11,6 +11,7 @@ import {
 import { ref, computed } from "vue";
 
 const props = defineProps({
+  loading: Boolean,
   id: {
     type: String,
     required: true,
@@ -40,12 +41,9 @@ const filterOptions = computed(() => {
 });
 
 const selectedRows = ref([]);
-const filterTab = ref(props.filter[filterOptions.value.tabs.key]);
-const currentPage = ref(props.filter.current_page);
-const perPage = ref({
-  label: props.filter.per_page,
-  value: props.filter.per_page,
-});
+const filterTab = ref(props.filter[filterOptions.value?.tabs?.key]);
+const currentPage = ref(props.filter.page);
+const perPage = ref(props.filter.per_page);
 const queries = ref([]);
 
 const isSearchExpanded = ref(false);
@@ -78,14 +76,17 @@ const perPageOptions = computed(() => {
       value: page * 8,
     },
     {
-      label: pagination.value.total.toString(),
-      value: pagination.value.total,
+      label: (page * 10)?.toString(),
+      value: page * 10,
     },
   ];
   const maxLength = pagination.value.total < 100 ? pagination.value.total : 100;
-  const opt = per_page_option.filter((p) => {
-    return p.value <= maxLength;
-  });
+  let opt = per_page_option;
+  if (maxLength > 10) {
+    opt = per_page_option.filter((p) => {
+      return p.value <= maxLength;
+    });
+  }
   return [...new Set(opt)];
 });
 
@@ -112,10 +113,18 @@ const removeQuery = (query) => {
   applyFilter();
 };
 
+const changePage = () => {
+  applyFilter(null, currentPage.value);
+};
+
 const filterData = ref({});
-const applyFilter = (filterForm = null) => {
-  filterData.value.current_page = currentPage.value;
-  filterData.value.per_page = perPage.value.value;
+
+const applyFilter = (filterForm = null, isChangePage = false) => {
+  if (!isChangePage) {
+    currentPage.value = 1;
+  }
+  filterData.value.page = currentPage.value;
+  filterData.value.per_page = perPage.value;
 
   if (filterOptions.value.tabs) {
     filterData.value[filterOptions.value.tabs.key] = filterTab.value;
@@ -131,7 +140,7 @@ const applyFilter = (filterForm = null) => {
 </script>
 <template>
   <div class="flex flex-col gap-3">
-    <Table v-model="selectedRows" :options="tableOptions">
+    <Table v-if="!loading" v-model="selectedRows" :options="tableOptions">
       <template #before>
         <div
           v-if="filterEnabled"
@@ -197,7 +206,7 @@ const applyFilter = (filterForm = null) => {
         class="justify-center"
         :max-page="pagination.last_page"
         total-visible="5"
-        @update:model-value="applyFilter(null)"
+        @update:model-value="changePage"
       />
       <div class="hidden md:flex items-center">
         <Select

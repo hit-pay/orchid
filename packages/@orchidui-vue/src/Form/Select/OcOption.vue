@@ -2,7 +2,7 @@
 import { Icon } from "@orchid";
 defineProps({
   label: String,
-  isSelected: Boolean,
+  isSelected: [Boolean, Number],
 });
 </script>
 

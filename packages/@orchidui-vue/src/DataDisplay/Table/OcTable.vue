@@ -1,6 +1,6 @@
 <script setup>
 import { TableHeader, TableCell } from "@orchid";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 
 const props = defineProps({
   options: {
@@ -14,7 +14,9 @@ const emit = defineEmits({
   "update:modelValue": [],
 });
 
-const { isSelectable, fields, headers } = props.options;
+const isSelectable = computed(() => props.options.isSelectable);
+const fields = computed(() => props.options.fields);
+const headers = computed(() => props.options.headers);
 
 const selectedRows = ref(props.modelValue ? props.modelValue : []);
 const selectRow = (element) => {
@@ -27,8 +29,10 @@ const selectRow = (element) => {
 };
 
 const selectAllRows = () => {
-  const allRowsSelected = selectedRows.value.length === fields.length;
-  selectedRows.value = allRowsSelected ? [] : [...fields.map((e, i) => i)];
+  const allRowsSelected = selectedRows.value.length === fields.value.length;
+  selectedRows.value = allRowsSelected
+    ? []
+    : [...fields.value.map((e, i) => i)];
   emit("update:modelValue", selectedRows.value);
 };
 </script>
@@ -70,9 +74,10 @@ const selectAllRows = () => {
     <div
       v-for="(field, i) in fields"
       :key="i"
-      class="flex flex-wrap relative group/row border-oc-gray-200 pl-[40px] md:p-0 py-3"
+      class="flex flex-wrap relative group/row border-oc-gray-200 md:p-0 py-3"
       :class="{
         'border-b': fields.length !== i + 1,
+        'pl-[40px]': isSelectable,
       }"
     >
       <TableCell

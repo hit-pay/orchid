@@ -3,17 +3,22 @@ import { Icon, Button } from "@orchid";
 import { computed } from "vue";
 
 const props = defineProps({
+  isBorderless: Boolean,
+  footerClass: {
+    type: String,
+    default: "justify-end",
+  },
   modelValue: {
     type: Boolean,
     default: false,
   },
   title: {
     type: String,
-    default: "Title",
+    default: "",
   },
   description: {
     type: String,
-    default: "Description",
+    default: "",
   },
   isCloseIcon: {
     type: Boolean,
@@ -26,7 +31,7 @@ const props = defineProps({
       variant: "secondary",
     }),
   },
-  okButtonProps: {
+  confirmButtonProps: {
     type: Object,
     default: () => ({
       label: "OK",
@@ -39,7 +44,7 @@ const props = defineProps({
     validator: (val) => ["default", "medium", "small"].includes(val),
   },
 });
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(["update:modelValue", "confirm"]);
 
 const onClickOutside = async () => {
   if (props.modelValue) {
@@ -65,7 +70,8 @@ const sizeClasses = computed(() => ({
       @click.stop
     >
       <div
-        class="flex border-b border-oc-gray-200 gap-x-9 justify-between p-5 items-start"
+        class="flex border-oc-gray-200 gap-x-9 justify-between p-5 items-start"
+        :class="!isBorderless ? 'border-b' : ''"
       >
         <slot name="header">
           <div class="flex flex-col gap-y-1 overflow-hidden">
@@ -75,6 +81,7 @@ const sizeClasses = computed(() => ({
               {{ title }}
             </span>
             <span
+              v-if="description"
               class="text-sm text-oc-text-300 text-ellipsis overflow-hidden whitespace-nowrap"
             >
               {{ description }}
@@ -91,11 +98,17 @@ const sizeClasses = computed(() => ({
       </div>
 
       <div class="p-7">
-        <slot> Default empty body</slot>
+        <slot></slot>
       </div>
 
       <div
-        class="px-5 py-6 border-t border-oc-gray-200 flex justify-end gap-x-4"
+        class="px-5 py-6 border-oc-gray-200 flex gap-x-4"
+        :class="[
+          footerClass,
+          {
+            'border-t': !isBorderless,
+          },
+        ]"
       >
         <slot name="footer">
           <Button
@@ -103,8 +116,14 @@ const sizeClasses = computed(() => ({
             variant="secondary"
             class="min-w-[112px]"
             v-bind="cancelButtonProps"
+            @click="$emit('update:modelValue', false)"
           />
-          <Button label="OK" class="min-w-[112px]" v-bind="okButtonProps" />
+          <Button
+            label="OK"
+            class="min-w-[112px]"
+            v-bind="confirmButtonProps"
+            @click="$emit('confirm')"
+          />
         </slot>
       </div>
     </div>

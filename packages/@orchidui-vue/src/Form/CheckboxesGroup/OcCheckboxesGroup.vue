@@ -11,8 +11,8 @@ const props = defineProps({
   modelValue: {
     type: Array,
     default: () => {
-      return []
-    }
+      return [];
+    },
   },
   label: String,
   errorMessage: String,
