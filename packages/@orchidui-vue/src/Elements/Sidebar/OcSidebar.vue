@@ -74,34 +74,34 @@ onMounted(() => {
 
 <template>
   <div
-    class="p-8 cursor-pointer transition-all duration-500 relative bg-[var(--oc-sidebar-background)]"
+    class="py-8 cursor-pointer transition-all duration-500 relative bg-[var(--oc-sidebar-background)] border-r"
     :class="allClassName"
   >
-    <div class="grid gap-3">
-      <button
-        type="button"
-        aria-label="Expand Collapse"
-        class="hidden md:flex bg-oc-text-100 transition-all duration-500 absolute top-[-12px] right-[-12px] z-40 p-3 border rounded-full"
-        :class="{
-          '-rotate-180': !isExpanded,
-        }"
-        @click="changeExpanded"
-      >
-        <Icon width="20" height="20" name="arrow-left-2" />
-      </button>
+    <button
+      type="button"
+      aria-label="Expand Collapse"
+      class="hidden md:flex bg-oc-text-100 transition-all duration-500 absolute top-[-12px] right-[-12px] z-40 p-3 border rounded-full"
+      :class="{
+        '-rotate-180': !isExpanded,
+      }"
+      @click="changeExpanded"
+    >
+      <Icon width="20" height="20" name="arrow-left-2" />
+    </button>
+    <div class="grid gap-3 px-8 overflow-y-auto max-h-screen pb-[100px]">
       <slot name="before" :is-expanded="isExpanded" />
 
       <template v-for="(sidebar, index) in sidebarMenu" :key="index">
         <h2
           v-if="isExpanded && sidebar.label"
-          class="text-sm uppercase text-[var(--oc-sidebar-menu-title)]"
+          class="text-sm uppercase text-[var(--oc-sidebar-menu-title)] my-3"
         >
           {{ sidebar.label }}
         </h2>
 
         <div
           v-if="(!sidebar.label || !isExpanded) && index !== 0"
-          class="mt-4 mb-6 w-full border-b border-[var(--oc-sidebar-menu-title)] opacity-50"
+          class="my-3 w-full border-b border-[var(--oc-sidebar-menu-title)] opacity-50"
         />
 
         <template v-for="(menu, menuIndex) in sidebar.items" :key="menuIndex">

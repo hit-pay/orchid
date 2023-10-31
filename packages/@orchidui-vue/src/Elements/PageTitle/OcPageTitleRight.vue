@@ -26,7 +26,10 @@ defineProps({
     </Dropdown>
 
     <Tooltip position="top" :distance="4" arrow-hidden>
-      <Button v-bind="primaryButtonProps" @click="emit('click:primaryButton')" />
+      <Button
+        v-bind="primaryButtonProps"
+        @click="emit('click:primaryButton')"
+      />
       <template #popper>
         <div
           class="px-3 py-[5px] font-medium text-sm text-oc-text-400 flex gap-x-3 items-center"

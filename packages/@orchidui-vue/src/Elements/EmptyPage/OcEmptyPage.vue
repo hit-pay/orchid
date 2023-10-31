@@ -1,6 +1,7 @@
 <script setup>
 import { Button, Icon } from "@orchid";
 
+defineEmits("click:Button");
 defineProps({
   isButton: {
     type: Boolean,
@@ -62,6 +63,7 @@ defineProps({
       v-if="isButton"
       :label="isUpgrade ? upgradeLabel : addButtonLabel"
       :left-icon="isUpgrade ? '' : 'plus'"
+      @click="$emit('click:Button')"
     />
   </div>
 </template>

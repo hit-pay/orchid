@@ -95,43 +95,48 @@ const modelValueOption = computed(() => {
     :hint="hint"
     :error-message="errorMessage"
   >
-    <Dropdown  v-model="isDropdownOpened" class="w-full" :distance="4" :is-disabled="isDisabled">
-        <div
-          class="border h-[36px] w-full px-3 flex justify-between items-center cursor-pointer gap-x-3 rounded"
-          :class="{
-            'border-oc-error': errorMessage && !isDisabled,
-            'pointer-events-none bg-oc-bg-dark': isDisabled,
-          }"
-        >
-          <div v-if="multiple" class="flex flex-wrap gap-2">
-            <Chip
-              v-for="option in modelValueOption"
-              :key="option.value"
-              closable
-              :label="option.label"
-              @remove="
-                $emit(
-                  'update:modelValue',
-                  props.modelValue.filter((o) => o !== option.value),
-                )
-              "
-            />
-          </div>
-          <template v-else>
-            <span class="whitespace-nowrap">
-              <span v-if="isInlineLabel && label" class="text-oc-text-300">
-                {{ label }}:
-              </span>
-              <span v-if="modelValueOption">{{ modelValueOption.label }}</span>
-              <span v-else class="text-oc-text-300">{{ placeholder }}</span>
-            </span>
-          </template>
-          <Icon
-            class="w-5 h-5 text-oc-text-400 transition-all duration-500"
-            :class="isDropdownOpened && '-rotate-180'"
-            name="chevron-down"
+    <Dropdown
+      v-model="isDropdownOpened"
+      class="w-full"
+      :distance="4"
+      :is-disabled="isDisabled"
+    >
+      <div
+        class="border h-[36px] w-full px-3 flex justify-between items-center cursor-pointer gap-x-3 rounded"
+        :class="{
+          'border-oc-error': errorMessage && !isDisabled,
+          'pointer-events-none bg-oc-bg-dark': isDisabled,
+        }"
+      >
+        <div v-if="multiple" class="flex flex-wrap gap-2">
+          <Chip
+            v-for="option in modelValueOption"
+            :key="option.value"
+            closable
+            :label="option.label"
+            @remove="
+              $emit(
+                'update:modelValue',
+                props.modelValue.filter((o) => o !== option.value),
+              )
+            "
           />
         </div>
+        <template v-else>
+          <span class="whitespace-nowrap">
+            <span v-if="isInlineLabel && label" class="text-oc-text-300">
+              {{ label }}:
+            </span>
+            <span v-if="modelValueOption">{{ modelValueOption.label }}</span>
+            <span v-else class="text-oc-text-300">{{ placeholder }}</span>
+          </span>
+        </template>
+        <Icon
+          class="w-5 h-5 text-oc-text-400 transition-all duration-500"
+          :class="isDropdownOpened && '-rotate-180'"
+          name="chevron-down"
+        />
+      </div>
 
       <template #menu>
         <div class="p-3 flex flex-col gap-y-2">
@@ -146,21 +151,21 @@ const modelValueOption = computed(() => {
             </template>
           </Input>
 
-        <div class="max-h-[320px] overflow-y-auto">
-          <slot :f-options="filterableOptions" :select-option="selectOption">
-            <Option
-              v-for="option in filterableOptions"
-              :key="option.value"
-              :label="option.label"
-              :is-selected="
-                multiple
-                  ? modelValue.find((o) => o === option.value)
-                  : modelValue === option.value
-              "
-              @click="selectOption(option)"
-            />
-          </slot>
-        </div>
+          <div class="max-h-[320px] overflow-y-auto">
+            <slot :f-options="filterableOptions" :select-option="selectOption">
+              <Option
+                v-for="option in filterableOptions"
+                :key="option.value"
+                :label="option.label"
+                :is-selected="
+                  multiple
+                    ? modelValue.find((o) => o === option.value)
+                    : modelValue === option.value
+                "
+                @click="selectOption(option)"
+              />
+            </slot>
+          </div>
 
           <Button
             v-if="isAddNew"
