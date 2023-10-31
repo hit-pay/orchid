@@ -103,7 +103,7 @@ const copyToClipboard = async (text) => {
         position="top"
         :hide-after="1500"
         trigger="click"
-        :offset="[0, 10]"
+        :distance="10"
       >
         <Icon
           class="cursor-pointer w-5 h-5 group-hover/row:opacity-100 md:opacity-0 ml-2"

@@ -19,6 +19,7 @@ const emit = defineEmits(["applyFilter"]);
 
 const valuesData = ref({});
 const errorsData = ref({});
+const isDropdownOpened = ref(false);
 
 const onUpdateForm = (form, value = null, nameIndex = undefined) => {
   if (nameIndex !== undefined) {
@@ -31,7 +32,6 @@ const onUpdateForm = (form, value = null, nameIndex = undefined) => {
 const filterAdded = computed(() => {
   return Object.values(valuesData.value).length > 0;
 });
-
 onMounted(() => {
   valuesData.value = { ...props.values };
 });
@@ -41,11 +41,14 @@ const applyFilter = () => {
 };
 </script>
 <template>
-  <Dropdown :offset="9">
-    <template #trigger="{ isOpen }">
-      <Button :is-active="isOpen" variant="secondary" left-icon="filter" />
-    </template>
-    <template #default="{ close }">
+  <Dropdown v-model="isDropdownOpened" :distance="9">
+    <Button
+      :is-active="isDropdownOpened"
+      variant="secondary"
+      left-icon="filter"
+    />
+
+    <template #menu>
       <div class="p-5 flex w-[326px] flex-col gap-y-7">
         <slot
           :errors="errorsData"
@@ -68,7 +71,7 @@ const applyFilter = () => {
             class="w-full"
             variant="secondary"
             label="Cancel"
-            @click="close"
+            @click="isDropdownOpened = false"
           />
           <Button
             class="w-full"

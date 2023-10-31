@@ -20,7 +20,9 @@ export const Default = {
     },
     template: `
           <Theme>
-            <TimePicker v-bind="args"/>
+            <div class="w-full h-[200px]">
+              <TimePicker v-bind="args"/>
+            </div>
           </Theme>
         `,
   }),

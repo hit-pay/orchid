@@ -133,7 +133,7 @@ onMounted(() => {
                 class="relative flex"
                 arrow-hidden
                 position="right-start"
-                :offset="[0, 20]"
+                :distance="20"
                 trigger="click"
               >
                 <button

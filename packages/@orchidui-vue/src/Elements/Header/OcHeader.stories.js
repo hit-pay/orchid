@@ -64,20 +64,22 @@ export const HeaderElement = {
     },
     template: `
           <Theme>
-            <Header class="mb-3">
-              <button aria-label="Menu Button" class="p-3 md:hidden">
-                <Icon name="menu" width="24" height="24"/>
-              </button>
-              <HeaderLeft class="md:w-[260px]">
-                <SampleHeaderLeft/>
-              </HeaderLeft>
-              <HeaderCenter class="flex-1 md:flex-none ">
-                <TabToSelect v-model="activeMenuValue" :menus="args.menus"/>
-              </HeaderCenter>
-              <HeaderRight>
-                <SampleHeaderRight/>
-              </HeaderRight>
-            </Header>
+            <div class="w-full h-[200px]">
+              <Header class="mb-3">
+                <button aria-label="Menu Button" class="p-3 md:hidden">
+                  <Icon name="menu" width="24" height="24"/>
+                </button>
+                <HeaderLeft class="md:w-[260px]">
+                  <SampleHeaderLeft/>
+                </HeaderLeft>
+                <HeaderCenter class="flex-1 md:flex-none ">
+                  <TabToSelect v-model="activeMenuValue" :menus="args.menus"/>
+                </HeaderCenter>
+                <HeaderRight>
+                  <SampleHeaderRight/>
+                </HeaderRight>
+              </Header>
+            </div>
           </Theme>
         `,
   }),

@@ -18,6 +18,7 @@ const props = defineProps({
 defineEmits({
   "update:modelValue": [],
 });
+const isDropdownOpened = ref(false);
 const selectedLink = ref(props.links?.[0]?.value || "");
 const selectedLinkProps = computed(() =>
   props.links.find((link) => link.value === selectedLink.value),
@@ -37,21 +38,19 @@ const selectedLinkProps = computed(() =>
     @update:model-value="$emit('update:modelValue', $event)"
   >
     <template #trailing>
-      <Dropdown :offset="10">
-        <template #trigger="{ isOpen }">
-          <div class="flex text-oc-text-400 items-center gap-x-2">
-            <Icon width="20" height="20" :name="selectedLinkProps.icon" />
-            <Icon
-              width="16"
-              height="16"
-              class="transition duration-300"
-              name="chevron-down"
-              :class="isOpen ? '-rotate-180' : ''"
-            />
-          </div>
-        </template>
+      <Dropdown v-model="isDropdownOpened" :distance="10">
+        <div class="flex text-oc-text-400 items-center gap-x-2">
+          <Icon width="20" height="20" :name="selectedLinkProps.icon" />
+          <Icon
+            width="16"
+            height="16"
+            class="transition duration-300"
+            name="chevron-down"
+            :class="isDropdownOpened ? '-rotate-180' : ''"
+          />
+        </div>
 
-        <template #default="{ close }">
+        <template #menu>
           <div class="flex flex-col p-2">
             <div
               v-for="link in links"
@@ -59,7 +58,7 @@ const selectedLinkProps = computed(() =>
               class="flex rounded-sm items-center px-3 py-2 gap-x-3 cursor-pointer text-oc-text-400 hover:bg-gray-50"
               @click="
                 selectedLink = link.value;
-                close();
+                isDropdownOpened = false;
               "
             >
               <Icon width="20" height="20" :name="link.icon" />

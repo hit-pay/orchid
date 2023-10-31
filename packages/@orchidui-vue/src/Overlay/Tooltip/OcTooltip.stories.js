@@ -32,7 +32,8 @@ export const Default = {
   args: {
     position: "bottom",
     trigger: "hover",
-    offset: [0, 10],
+    distance: 10,
+    skidding: 0,
   },
   render: (args) => ({
     components: { Tooltip, Theme },
@@ -44,7 +45,8 @@ export const Default = {
     template: `
           <Theme>
             <div class="w-full h-[400px] flex items-center justify-center gap-3">
-              <Tooltip :key="args.trigger" :trigger="args.trigger" :offset="args.offset" :position="args.position" popper-class="bg-oc-bg">
+              <Tooltip :key="args.trigger" :trigger="args.trigger" :distance="args.distance" :skidding="args.distance"
+                       :position="args.position" popper-class="bg-oc-bg">
                 <div class="bg-oc-gray-300 p-3 rounded-sm cursor-pointer">Trigger</div>
                 <template #popper>
                   <div class="flex w-[300px] flex-col gap-y-3 p-4">
@@ -56,18 +58,20 @@ export const Default = {
                   </div>
                 </template>
               </Tooltip>
-              <Tooltip :key="args.trigger" :trigger="args.trigger" :offset="args.offset" :position="args.position" popper-class="bg-oc-gray-900 text-oc-text-100">
-              <div class="p-3 rounded-sm cursor-pointer">Trigger</div>
-              <template #popper>
-                <div class="flex w-[300px] flex-col gap-y-3 p-4">
-                  <div class="font-medium">Tooltip title</div>
-                  <div class="text-sm">Tooltips are used to describe or identify an element. In most scenarios,
-                    tooltips help the user
-                    understand the meaning, function or alt-text of an element.
+              <Tooltip :key="args.trigger" :trigger="args.trigger" :distance="args.distance" :skidding="args.distance"
+                       :position="args.position"
+                       popper-class="bg-oc-gray-900 text-oc-text-100">
+                <div class="p-3 rounded-sm cursor-pointer">Trigger</div>
+                <template #popper>
+                  <div class="flex w-[300px] flex-col gap-y-3 p-4">
+                    <div class="font-medium">Tooltip title</div>
+                    <div class="text-sm">Tooltips are used to describe or identify an element. In most scenarios,
+                      tooltips help the user
+                      understand the meaning, function or alt-text of an element.
+                    </div>
                   </div>
-                </div>
-              </template>
-            </Tooltip>
+                </template>
+              </Tooltip>
             </div>
           </Theme>
         `,
