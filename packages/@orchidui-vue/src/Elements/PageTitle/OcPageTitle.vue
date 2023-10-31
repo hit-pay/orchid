@@ -1,11 +1,10 @@
 <script setup>
 import Title from "./OcTitle.vue";
-import Right from "./OcRight.vue";
-import { AdditionalContent } from "@orchid";
+import { PageTitleRight, AdditionalContent } from "@orchid";
 
 defineProps({
   title: { type: String, required: true },
-  description: { type: String, required: true },
+  description: { type: String },
   mainLink: { type: String, default: "" },
   userId: { type: String, default: "" },
   chipVariant: { type: String, default: "" },
@@ -25,12 +24,14 @@ defineProps({
 });
 defineEmits({
   changeTab: [],
+  "click:primaryButton": [],
+  "click:secondaryButton": [],
 });
 </script>
 
 <template>
   <div class="pb-5 flex flex-col">
-    <div class="flex flex-wrap w-full pt-5 px-10 gap-5">
+    <div class="flex flex-wrap w-full pt-5 px-5 md:px-10 gap-5">
       <Title
         :title="title"
         :description="description"
@@ -38,22 +39,25 @@ defineEmits({
       />
 
       <slot name="right">
-        <Right
+        <PageTitleRight
           class="shrink-0"
           :primary-button-props="primaryButtonProps"
           :secondary-button-props="secondaryButtonProps"
+          @click:primary-button="$emit('click:primaryButton', $event)"
+          @click:secondary-button="$emit('click:secondaryButton', $event)"
         />
       </slot>
     </div>
 
     <AdditionalContent
+      v-if="additionalContentVariant"
       :main-link="mainLink"
       :chip-label="chipLabel"
       :additional-title="additionalTitle"
       :chip-variant="chipVariant"
       :user-id="userId"
       :tooltip-content="tooltipContent"
-      :variant="additionalContentVariant"
+      :variant="additionalContentVariant ?? 'default'"
       :boxes="boxes"
       :overview-items="overviewItems"
       :overview-tabs="overviewTabs"

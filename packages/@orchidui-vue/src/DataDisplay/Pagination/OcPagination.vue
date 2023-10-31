@@ -94,7 +94,11 @@ const pagination = computed(() => {
           {{ page }}
         </PaginationNumber>
       </div>
-      <div class="md:hidden mx-[30px]"></div>
+      <div class="md:hidden mx-[30px]">
+        <PaginationNumber :size="size" :is-rounded="isRounded" :active="true">
+          {{ modelValue }}
+        </PaginationNumber>
+      </div>
       <PrevNext
         is-next
         :size="size"

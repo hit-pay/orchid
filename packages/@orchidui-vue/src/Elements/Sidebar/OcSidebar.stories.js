@@ -31,14 +31,17 @@ export const Default = {
     },
     template: `
           <Theme class="layout-payment mb-8">
-            <Sidebar :title="args.title" :sidebar-menu="args.payment_sidebar_menu" :isExpanded="args.isExpanded"
-                     @changeExpanded="args.isExpanded = $event">
-              <template v-slot:label="{menu}">
-                <a href="#" class="whitespace-nowrap ml-3">{{ menu.label }}</a>
-              </template>
-              <template v-slot:submenu_label="{submenu}">
-                <a href="#" class="whitespace-nowrap ml-3">{{ submenu.label }}</a>
-              </template>
+            <Sidebar 
+                  :title="args.title" 
+                  :sidebar-menu="args.payment_sidebar_menu"
+                  :isExpanded="args.isExpanded"
+                  @changeExpanded="args.isExpanded = $event">
+                <template v-slot:label="{menu}">
+                  <a href="#" class="whitespace-nowrap px-5 py-3">{{ menu.label }}</a>
+                </template>
+                <template v-slot:submenu_label="{submenu}">
+                  <a href="#" class="whitespace-nowrap px-5 py-3">{{ submenu.label }}</a>
+                </template>
             </Sidebar>
           </Theme>
 
@@ -46,10 +49,10 @@ export const Default = {
             <Sidebar :title="args.title" :sidebar-menu="args.pos_sidebar_menu" :isExpanded="args.isExpanded"
                      @changeExpanded="args.isExpanded = $event">
               <template v-slot:label="{menu}">
-                <a href="#" class="ml-3">{{ menu.label }}</a>
+                <a href="#" class="ml-3 px-5 py-3">{{ menu.label }}</a>
               </template>
               <template v-slot:submenu_label="{submenu}">
-                <a href="#" class="ml-3">{{ submenu.label }}</a>
+                <a href="#" class="ml-3 px-5 py-3">{{ submenu.label }}</a>
               </template>
               <template v-slot:after="{isExpanded}">
 
@@ -95,10 +98,10 @@ export const Default = {
             <Sidebar :title="args.title" :sidebar-menu="args.online_store_sidebar_menu" :isExpanded="args.isExpanded"
                      @changeExpanded="args.isExpanded = $event">
               <template v-slot:label="{menu}">
-                <a href="#" class="ml-3">{{ menu.label }}</a>
+                <a href="#" class="ml-3 px-5 py-3">{{ menu.label }}</a>
               </template>
               <template v-slot:submenu_label="{submenu}">
-                <a href="#" class="ml-3">{{ submenu.label }}</a>
+                <a href="#" class="ml-3 px-5 py-3">{{ submenu.label }}</a>
               </template>
             </Sidebar>
           </Theme>

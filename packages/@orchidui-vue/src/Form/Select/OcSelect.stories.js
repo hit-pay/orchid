@@ -133,8 +133,8 @@ export const OcGroupOptions = {
                       v-for="option in group.value"
                       :key="option.value"
                       :label="option.label"
-                      :is-selected="selectedOption?.value === option.value"
-                      @click="selectedOption = option"
+                      :is-selected="selectedOption === option.value"
+                      @click="selectedOption = option.value"
                   />
                 </GroupOptions>
               </template>
@@ -169,7 +169,7 @@ export const Multiple = {
       const groups = [
         {
           label: "Group 1",
-          value: [
+          values: [
             {
               label: "Option 1",
               value: 1,
@@ -190,7 +190,7 @@ export const Multiple = {
         },
         {
           label: "Group 2",
-          value: [
+          values: [
             {
               label: "Option 11",
               value: 11,
@@ -242,10 +242,10 @@ export const Multiple = {
               <template #default="{fOptions, selectOption}">
                 <GroupOptions v-for="group in fOptions" :label="group.label">
                   <Option
-                      v-for="option in group.value"
+                      v-for="option in group.values"
                       :key="option.value"
                       :label="option.label"
-                      :is-selected="selectedGroups?.find((o) => o.value === option.value)"
+                      :is-selected="selectedGroups?.find((o) => o === option.value) ? true : false"
                       @click="selectOption(option)"
                   />
                 </GroupOptions>

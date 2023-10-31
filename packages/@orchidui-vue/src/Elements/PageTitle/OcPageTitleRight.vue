@@ -2,6 +2,7 @@
 import { Button, Dropdown, DropdownItem, Tooltip } from "@orchid";
 import { ref } from "vue";
 
+const emit = defineEmits(["click:primaryButton", "click:secondaryButton"]);
 const isDropdownOpened = ref(false);
 defineProps({
   primaryButtonProps: Object,
@@ -18,13 +19,14 @@ defineProps({
             v-for="(option, i) in secondaryButtonProps.dropdownOptions"
             :key="i"
             v-bind="option"
+            @click="emit('click:secondaryButton', option)"
           />
         </div>
       </template>
     </Dropdown>
 
     <Tooltip position="top" :distance="4" arrow-hidden>
-      <Button v-bind="primaryButtonProps" />
+      <Button v-bind="primaryButtonProps" @click="emit('click:primaryButton')" />
       <template #popper>
         <div
           class="px-3 py-[5px] font-medium text-sm text-oc-text-400 flex gap-x-3 items-center"

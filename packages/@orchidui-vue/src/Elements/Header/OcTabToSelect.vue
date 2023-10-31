@@ -16,19 +16,15 @@ const activeMenu = computed(() =>
 );
 </script>
 <template>
-  <div class="gap-x-3 md:gap-x-9 hidden md:flex">
+  <div class="gap-x-7 hidden md:flex">
     <div
       v-for="item in menus"
       :key="item.value"
-      class="py-3 md:py-7 font-medium hover:text-oc-accent-1 cursor-pointer"
+      class="p-7 text-oc-text-500 hover:text-oc-accent-1 cursor-pointer"
       :style="{
         borderColor: activeMenu.color,
       }"
-      :class="[
-        item.value === modelValue
-          ? 'text-oc-accent-1 border-b-[3px]'
-          : 'text-oc-text-300',
-      ]"
+      :class="[item.value === modelValue ? 'font-medium border-b-[3px]' : '']"
       @click="
         $emit('changePath', item.path);
         $emit('update:modelValue', item.value);
