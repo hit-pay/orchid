@@ -44,8 +44,9 @@ const selectedRows = ref([]);
 const filterTab = ref(props.filter[filterOptions.value?.tabs?.key]);
 const currentPage = ref(props.filter.page);
 const perPage = ref(props.filter.per_page);
-const queries = ref([]);
-
+const defaultQuery =
+  props.filter[filterOptions.value?.search?.key].trim() ?? [];
+const queries = ref(defaultQuery ? defaultQuery.split(",") : []);
 const isSearchExpanded = ref(false);
 
 const perPageOptions = computed(() => {
@@ -142,6 +143,7 @@ const applyFilter = (filterForm = null, isChangePage = false) => {
   <div class="flex flex-col gap-3">
     <Table v-if="!loading" v-model="selectedRows" :options="tableOptions">
       <template #before>
+        <slot name="before" />
         <div
           v-if="filterEnabled"
           class="flex items-center m-5 relative min-h-[30px]"
@@ -199,8 +201,14 @@ const applyFilter = (filterForm = null, isChangePage = false) => {
       >
         <slot :name="header.key" :data="data" :item="item"></slot>
       </template>
+      <template #after>
+        <slot name="after" />
+      </template>
     </Table>
-    <div class="flex gap-3 items-center m-3 md:mx-0">
+    <div
+      v-if="pagination.total > 0"
+      class="flex gap-3 items-center m-3 md:mx-0"
+    >
       <Pagination
         v-model="currentPage"
         class="justify-center"

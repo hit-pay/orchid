@@ -25,12 +25,7 @@ const copyToClipboard = async (text) => {
     <div class="flex gap-x-2 items-center w-[80px] shrink-0 text-oc-text-400">
       {{ label }}
 
-      <Tooltip
-        position="top"
-        :hide-after="1500"
-        trigger="click"
-        :offset="[0, 10]"
-      >
+      <Tooltip position="top" :hide-after="1500" trigger="click" :distance="10">
         <template #popper>
           <div class="px-3 py-2 text-oc-text-400 text-sm font-medium">
             Copied!

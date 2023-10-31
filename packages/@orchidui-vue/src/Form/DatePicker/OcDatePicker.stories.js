@@ -24,11 +24,13 @@ export const Default = {
     },
     template: `
           <Theme>
-            <DatePicker
-                :key="args.type"
-                :type="args.type"
-                :date-format="args.dateFormat"
-            />
+            <div class="w-full h-[400px]">
+              <DatePicker
+                  :key="args.type"
+                  :type="args.type"
+                  :date-format="args.dateFormat"
+              />
+            </div>
           </Theme>
         `,
   }),

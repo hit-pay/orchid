@@ -1,102 +1,68 @@
 <script setup>
-import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
-import { clickOutside as vClickOutside } from "../../directives/clickOutside.js"; // Import the directive
+import { Popper } from "@orchid";
+import { clickOutside as vClickOutside } from "../../directives/clickOutside.js";
+import { ref } from "vue"; // Import the directive
 
 const emit = defineEmits({
-  close: [],
-  toggle: [],
+  "update:modelValue": [],
 });
+
 const props = defineProps({
-  offset: Number,
+  distance: {
+    type: Number,
+    default: 4,
+  },
+  skidding: {
+    type: Number,
+    default: 0,
+  },
   isDisabled: Boolean,
   menuClasses: String,
+  placement: {
+    type: String,
+    default: "bottom-start",
+  },
+  popperOptions: Object,
+  modelValue: Boolean,
 });
-const dropdownMenu = ref(null);
-const trigger = ref(null);
-const isOpen = ref(false);
-const toggleDropdown = () => {
+const popper = ref();
+const toggleDropdown = async () => {
   if (props.isDisabled) return;
-  document.body.appendChild(dropdownMenu.value);
-  isOpen.value = !isOpen.value;
-  if (!isOpen.value) emit("close");
-  updateMenuPosition();
-  emit("toggle");
+  // Need to add a timeout because the popup position cannot be determined while the element is display:none (v-show), which is required for the appearance animation
+  setTimeout(() => popper.value.popperInstance.update(), 0);
+  emit("update:modelValue", !props.modelValue);
 };
-const updateMenuPosition = async () => {
-  if (!isOpen.value) return;
-
-  const triggerRect = trigger.value.getBoundingClientRect();
-  dropdownMenu.value.style.top =
-    triggerRect.bottom + (props.offset || 0) + "px";
-  dropdownMenu.value.style.left = triggerRect.left + "px";
-
-  await nextTick();
-  if (
-    triggerRect.left + (props.offset || 0) + dropdownMenu.value.clientWidth >
-    window.innerWidth
-  ) {
-    // If it does, align the right edge of the menu with the right edge of the trigger
-    dropdownMenu.value.style.left =
-      triggerRect.right -
-      (props.offset || 0) -
-      dropdownMenu.value.clientWidth +
-      "px";
-  }
-  if (
-    triggerRect.bottom + (props.offset || 0) + dropdownMenu.value.clientHeight >
-    window.innerHeight
-  ) {
-    dropdownMenu.value.style.top =
-      triggerRect.top -
-      (props.offset || 0) -
-      dropdownMenu.value.clientHeight +
-      "px";
-  }
-};
-
 const onClickOutside = () => {
-  if (isOpen.value) {
-    isOpen.value = false;
-    emit("close");
-  }
+  if (props.modelValue) emit("update:modelValue", false);
 };
-onMounted(() => {
-  window.addEventListener("resize", updateMenuPosition);
-  window.addEventListener("scroll", updateMenuPosition);
-});
-onBeforeUnmount(() => {
-  window.removeEventListener("resize", updateMenuPosition);
-  window.removeEventListener("scroll", updateMenuPosition);
-  dropdownMenu.value.remove();
-});
 </script>
 
 <template>
-  <div v-click-outside="onClickOutside">
-    <div ref="trigger" @click="toggleDropdown">
-      <slot name="trigger" :is-open="isOpen">trigger</slot>
-    </div>
-
-    <Transition name="fade">
-      <div
-        v-show="isOpen"
-        ref="dropdownMenu"
-        :class="menuClasses"
-        class="fixed z-[1005] min-w-[162px] rounded bg-oc-bg-light shadow"
-        @click.stop
-      >
-        <slot
-          :is-open="isOpen"
-          :close="
-            () => {
-              isOpen = false;
-              $emit('close');
-            }
-          "
-        />
+  <span v-click-outside="onClickOutside" @click.stop>
+    <Popper
+      ref="popper"
+      :placement="placement"
+      :distance="distance"
+      :skidding="skidding"
+      :popper-options="popperOptions"
+    >
+      <div class="w-[inherit]" @click="toggleDropdown">
+        <slot />
       </div>
-    </Transition>
-  </div>
+      <template #popper>
+        <Transition name="fade">
+          <div
+            v-show="modelValue"
+            :class="menuClasses"
+            class="rounded bg-oc-bg-light shadow"
+            @click.stop
+          >
+            <slot name="menu" />
+          </div>
+        </Transition>
+      </template>
+    </Popper>
+  </span>
 </template>
 
 <style scoped lang="scss">

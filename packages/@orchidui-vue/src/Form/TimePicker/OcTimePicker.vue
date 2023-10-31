@@ -8,6 +8,7 @@ const TimePopup = defineAsyncComponent(() =>
 );
 const time = ref();
 const popup = ref();
+const isDropdownOpened = ref(false);
 defineProps({
   label: String,
   hint: String,
@@ -19,19 +20,24 @@ const updateActiveTime = () =>
 </script>
 
 <template>
-  <Dropdown menu-classes="min-w-fit" :offset="10" @toggle="updateActiveTime()">
-    <template #trigger>
-      <Input
-        icon="time"
-        :error-message="errorMessage"
-        :label="label"
-        :hint="hint"
-        :placeholder="placeholder"
-        :model-value="dayjs(time).format('hh:mm A')"
-        readonly
-      />
-    </template>
+  <Dropdown
+    v-model="isDropdownOpened"
+    menu-classes="min-w-fit"
+    :distance="10"
+    @update:model-value="updateActiveTime"
+  >
+    <Input
+      icon="time"
+      :error-message="errorMessage"
+      :label="label"
+      :hint="hint"
+      :placeholder="placeholder"
+      :model-value="dayjs(time).format('hh:mm A')"
+      readonly
+    />
 
-    <TimePopup ref="popup" v-model="time" />
+    <template #menu>
+      <TimePopup ref="popup" v-model="time" />
+    </template>
   </Dropdown>
 </template>

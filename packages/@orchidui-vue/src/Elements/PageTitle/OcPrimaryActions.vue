@@ -27,7 +27,7 @@ const copyToClipBoard = () => {
         : 'border-transparent'
     "
   >
-    <Tooltip position="top" arrow-hidden :offset="[0, 7]">
+    <Tooltip position="top" arrow-hidden :distance="7">
       <Icon
         class="p-2 cursor-pointer rounded-sm hover:border-oc-accent-1-50-tr active:text-oc-text-400 hover:text-oc-text hover:bg-oc-accent-1-50-tr"
         name="external-link"
@@ -46,34 +46,34 @@ const copyToClipBoard = () => {
       :class="isDropdownOpened ? 'border-oc-gray-200' : 'border-transparent'"
     />
 
-    <Dropdown :offset="6" @close="isDropdownOpened = false">
-      <div class="flex flex-col">
-        <div class="p-2 border-b border-gray-200">
-          <DropdownItem icon="pencil" text="Customize link" />
-          <DropdownItem
-            :icon="isCopied ? 'check' : 'copy'"
-            :text="isCopied ? 'Link copied!' : 'Copy link'"
-            :icon-classes="isCopied ? '!text-oc-success' : ''"
-            @click="copyToClipBoard"
-          />
-          <DropdownItem icon="eye-open" text="View details" />
+    <Dropdown v-model="isDropdownOpened" :distance="6">
+      <Icon
+        class="p-2 cursor-pointer rounded-sm hover:bg-oc-accent-1-50-tr"
+        name="dots-vertical"
+      />
+
+      <template #menu>
+        <div class="flex flex-col">
+          <div class="p-2 border-b border-gray-200">
+            <DropdownItem icon="pencil" text="Customize link" />
+            <DropdownItem
+              :icon="isCopied ? 'check' : 'copy'"
+              :text="isCopied ? 'Link copied!' : 'Copy link'"
+              :icon-classes="isCopied ? '!text-oc-success' : ''"
+              @click="copyToClipBoard"
+            />
+            <DropdownItem icon="eye-open" text="View details" />
+          </div>
+          <div class="p-2">
+            <DropdownItem
+              :text="isActive ? 'Deactivate' : 'Activate'"
+              icon="toggle-right-fill"
+              :icon-classes="
+                isActive ? 'rotate-180 !text-oc-gray-300' : '!text-oc-success'
+              "
+            />
+          </div>
         </div>
-        <div class="p-2">
-          <DropdownItem
-            :text="isActive ? 'Deactivate' : 'Activate'"
-            icon="toggle-right-fill"
-            :icon-classes="
-              isActive ? 'rotate-180 !text-oc-gray-300' : '!text-oc-success'
-            "
-          />
-        </div>
-      </div>
-      <template #trigger>
-        <Icon
-          class="p-2 cursor-pointer rounded-sm hover:bg-oc-accent-1-50-tr"
-          name="dots-vertical"
-          @click="isDropdownOpened = !isDropdownOpened"
-        />
       </template>
     </Dropdown>
   </div>

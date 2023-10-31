@@ -38,16 +38,18 @@ export const Default = {
     },
     template: `
           <Theme>
-            <LinkInput
-                v-model="link"
-                :isInlineLabel="args.isInlineLabel"
-                :isDisabled="args.isDisabled"
-                :label="args.label"
-                :hint="args.hint"
-                :links="args.links"
-                :placeholder="args.placeholder"
-                :error-message="args.errorMessage"
-            />
+            <div class="w-full h-[200px]">
+              <LinkInput
+                  v-model="link"
+                  :isInlineLabel="args.isInlineLabel"
+                  :isDisabled="args.isDisabled"
+                  :label="args.label"
+                  :hint="args.hint"
+                  :links="args.links"
+                  :placeholder="args.placeholder"
+                  :error-message="args.errorMessage"
+              />
+            </div>
           </Theme>
         `,
   }),

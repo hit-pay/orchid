@@ -43,19 +43,21 @@ export const Default = {
     },
     template: `
           <Theme colorMode="light">
-            <div class="mb-4">Selected value: {{ selectedOption }}</div>
-            <Select
-                v-model="selectedOption"
-                :options="args.options"
-                :label="args.label"
-                :error-message="args.errorMessage"
-                :is-disabled="args.isDisabled"
-                :is-inline-label="args.isInlineLabel"
-                :hint="args.hint"
-                :is-filterable="args.isFilterable"
-                :is-add-new="args.isAddNew"
-                :placeholder="args.placeholder"
-            />
+            <div class="w-full h-[300px]">
+              <div class="mb-4">Selected value: {{ selectedOption }}</div>
+              <Select
+                  v-model="selectedOption"
+                  :options="args.options"
+                  :label="args.label"
+                  :error-message="args.errorMessage"
+                  :is-disabled="args.isDisabled"
+                  :is-inline-label="args.isInlineLabel"
+                  :hint="args.hint"
+                  :is-filterable="args.isFilterable"
+                  :is-add-new="args.isAddNew"
+                  :placeholder="args.placeholder"
+              />
+            </div>
           </Theme>
         `,
   }),

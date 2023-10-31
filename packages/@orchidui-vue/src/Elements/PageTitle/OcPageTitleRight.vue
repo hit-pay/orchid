@@ -1,7 +1,9 @@
 <script setup>
 import { Button, Dropdown, DropdownItem, Tooltip } from "@orchid";
+import { ref } from "vue";
 
 const emit = defineEmits(["click:primaryButton", "click:secondaryButton"]);
+const isDropdownOpened = ref(false);
 defineProps({
   primaryButtonProps: Object,
   secondaryButtonProps: Object,
@@ -9,22 +11,25 @@ defineProps({
 </script>
 <template>
   <div class="flex gap-x-3 items-center">
-    <Dropdown :offset="10">
-      <template #trigger>
-        <Button v-bind="secondaryButtonProps" />
+    <Dropdown v-model="isDropdownOpened" :distance="10">
+      <Button v-bind="secondaryButtonProps" />
+      <template #menu>
+        <div v-if="secondaryButtonProps?.dropdownOptions" class="p-2">
+          <DropdownItem
+            v-for="(option, i) in secondaryButtonProps.dropdownOptions"
+            :key="i"
+            v-bind="option"
+            @click="emit('click:secondaryButton', option)"
+          />
+        </div>
       </template>
-      <div v-if="secondaryButtonProps?.dropdownOptions" class="p-2">
-        <DropdownItem
-          v-for="(option, i) in secondaryButtonProps.dropdownOptions"
-          :key="i"
-          v-bind="option"
-          @click="emit('click:secondaryButton', option)"
-        />
-      </div>
     </Dropdown>
 
-    <Tooltip position="top" :offset="[0, 4]" arrow-hidden>
-      <Button v-bind="primaryButtonProps" @click="emit('click:primaryButton')" />
+    <Tooltip position="top" :distance="4" arrow-hidden>
+      <Button
+        v-bind="primaryButtonProps"
+        @click="emit('click:primaryButton')"
+      />
       <template #popper>
         <div
           class="px-3 py-[5px] font-medium text-sm text-oc-text-400 flex gap-x-3 items-center"

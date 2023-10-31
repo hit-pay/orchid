@@ -16,7 +16,7 @@ const values = ref({
   card_input: "123123123",
 });
 const errors = ref({});
-
+const isDropdownOpened = ref(false);
 const onUpdateForm = (form, value = null, nameIndex = undefined) => {
   // validate value
   // key / form fields
@@ -62,8 +62,8 @@ const onUpdateForm = (form, value = null, nameIndex = undefined) => {
           <div class="flex items-center md:col-span-2 border-2 p-3">
             <label class="mr-3">This custom form input</label>
             <Button @click="onUpdateForm(form, '1')"
-              >Set Value to (1) : value : {{ value }}</Button
-            >
+              >Set Value to (1) : value : {{ value }}
+            </Button>
             <span>
               {{ error }}
             </span>
@@ -78,22 +78,32 @@ const onUpdateForm = (form, value = null, nameIndex = undefined) => {
             @update:model-value="onUpdateForm(form, $event)"
           >
             <template #trailing>
-              <Dropdown>
-                <template #default="{ close }">
+              <Dropdown v-model="isDropdownOpened">
+                <template #menu>
                   <div class="flex p-2 flex-col">
-                    <DropdownItem text="Menu" icon="pencil" @click="close" />
-                    <DropdownItem text="Menu" icon="pencil" @click="close" />
-                    <DropdownItem text="Menu" icon="pencil" @click="close" />
+                    <DropdownItem
+                      text="Menu"
+                      icon="pencil"
+                      @click="isDropdownOpened = false"
+                    />
+                    <DropdownItem
+                      text="Menu"
+                      icon="pencil"
+                      @click="isDropdownOpened = false"
+                    />
+                    <DropdownItem
+                      text="Menu"
+                      icon="pencil"
+                      @click="isDropdownOpened = false"
+                    />
                   </div>
                 </template>
-                <template #trigger>
-                  <div
-                    class="text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
-                  >
-                    <span class="flex items-center text-sm">USD</span>
-                    <Icon class="w-[14px] h-[14px]" name="chevron-down" />
-                  </div>
-                </template>
+                <div
+                  class="text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
+                >
+                  <span class="flex items-center text-sm">USD</span>
+                  <Icon class="w-[14px] h-[14px]" name="chevron-down" />
+                </div>
               </Dropdown>
             </template>
           </Input>
