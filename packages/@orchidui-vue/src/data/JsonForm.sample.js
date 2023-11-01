@@ -28,6 +28,13 @@ const SampleJsonForm = [
     type: "CustomFormInput",
   },
   {
+    name: "simple_checkbox_input",
+    type: "Checkbox",
+    props: {
+      label: "Text",
+    },
+  },
+  {
     name: "checkboxes_group",
     type: "CheckboxesGroup",
     rule: "required",
