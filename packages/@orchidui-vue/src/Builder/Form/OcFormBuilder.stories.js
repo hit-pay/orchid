@@ -20,6 +20,7 @@ export const Default = {
     values: {
       card_input: "",
       custom_form_input: "",
+      custom_range_field_name: [0, 10],
     },
     errors: {
       card_input: "",
