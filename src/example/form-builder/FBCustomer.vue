@@ -26,7 +26,7 @@ const onUpdateForm = (form, value = null, nameIndex = undefined) => {
   }
 };
 
-import countryCodes from "@orchid/data/CountryCodes.js";
+import countryCodes from "@orchid/data/CountryCodes.sample";
 
 const jsonFormCustomer = [
   {
