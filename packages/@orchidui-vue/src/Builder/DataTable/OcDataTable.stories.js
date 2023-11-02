@@ -11,6 +11,7 @@ import {
 
 export default {
   component: DataTable,
+  tags: ["autodocs"],
 };
 
 import { DataTableOptions, Filter } from "../../data/DataTableOptions.sample";
@@ -41,38 +42,38 @@ export const Default = {
           <Theme class="p-8">
             <div>
               <ul>
-                <li v-for="item, key in args.filter">{{key}} : {{item}}</li>
+                <li v-for="(item, key) in args.filter">{{ key }} : {{ item }}</li>
               </ul>
             </div>
             <DataTable id="sample-data-table" :filter="args.filter" :options="args.options" @update:filter="updateFilterData">
-            <template #before>
-              Slot Before
-            </template>  
-             <template #bulk-actions="{selectedRows}">
+              <template #before>
+                Slot Before
+              </template>
+              <template #bulk-actions="{selectedRows}">
                 <Button
-                  label="Publish"
-                  size="small"
-                  is-transparent
-                  left-icon="eye-open"
+                    label="Publish"
+                    size="small"
+                    is-transparent
+                    left-icon="eye-open"
                 />
                 <Button
-                  label="Unpublish"
-                  is-transparent
-                  size="small"
-                  variant="secondary"
-                  left-icon="eye-close"
+                    label="Unpublish"
+                    is-transparent
+                    size="small"
+                    variant="secondary"
+                    left-icon="eye-close"
                 />
                 <Button
-                  label="Delete"
-                  is-transparent
-                  size="small"
-                  variant="destructive"
-                  left-icon="bin"
+                    label="Delete"
+                    is-transparent
+                    size="small"
+                    variant="destructive"
+                    left-icon="bin"
                 />
                 {{ selectedRows }}
               </template>
               <template #col1="{ item }">
-                  <TableCellContent important :title="item.title" :description="item.descriptions"/>
+                <TableCellContent important :title="item.title" :description="item.descriptions"/>
               </template>
               <template #col4="{ data }">
                 <span class="text-oc-text-400 text-sm">{{ data }}</span>
@@ -102,7 +103,7 @@ export const Default = {
 
 {
   /* custom filter form <template #custom-filter-form="{updateFilter, errors ,values, jsonForm}">
-filter name:  {{jsonForm[0].name}}
-<Toggle size="small" :model-value="false" @update:modelValue="updateFilter(jsonForm[0],$event)"/>
-</template> */
+      filter name:  {{jsonForm[0].name}}
+      <Toggle size="small" :model-value="false" @update:modelValue="updateFilter(jsonForm[0],$event)"/>
+      </template> */
 }

@@ -1,6 +1,6 @@
 <script setup>
 import { Dropdown, Input, Icon } from "@orchid";
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 
 const props = defineProps({
   countryCodes: Array,
@@ -24,6 +24,14 @@ const emit = defineEmits({
 
 const selectedCountryIso = ref(props.initialCountryCode);
 const isDropdownOpened = ref(false);
+const query = ref("");
+const filteredCountryCodes = computed(() =>
+  props.countryCodes
+    .filter((country) =>
+      country.country.toLowerCase().includes(query.value.toLowerCase()),
+    )
+    .sort((a, b) => a.country.localeCompare(b.country)),
+);
 const getCountryObject = (iso) =>
   props.countryCodes.find(
     (country) => country.iso.toLowerCase() === iso.toLowerCase(),
@@ -82,9 +90,16 @@ onMounted(() => {
 
         <template #menu>
           <div class="flex flex-col max-h-[300px] py-2 overflow-y-auto">
+            <div class="px-3 py-1">
+              <Input v-model="query" icon="search" placeholder="Search">
+                <template #icon>
+                  <Icon class="w-5 h-5 text-oc-text-400" name="search" />
+                </template>
+              </Input>
+            </div>
             <div
-              v-for="country in countryCodes"
-              :key="country.code"
+              v-for="(country, i) in filteredCountryCodes"
+              :key="i"
               class="py-3 px-4 flex gap-x-4 items-center hover:bg-oc-gray-50 cursor-pointer"
               @click="changeSelectedCountry(country.iso, country.code)"
             >
