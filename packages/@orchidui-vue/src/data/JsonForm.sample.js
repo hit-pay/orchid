@@ -1,4 +1,4 @@
-import countryCodes from "./CountryCodes.js";
+import countryCodes from "./CountryCodes.sample";
 
 const SampleJsonForm = [
   {
