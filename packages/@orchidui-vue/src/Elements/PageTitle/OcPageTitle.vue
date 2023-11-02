@@ -10,7 +10,7 @@ defineProps({
   chipVariant: { type: String, default: "" },
   chipLabel: { type: String, default: "" },
   additionalTitle: { type: String, default: "" },
-  primaryActions: Object,
+  primaryActions: { type: Object, default: null },
   additionalContentVariant: { type: String, default: "" },
   boxes: { type: Array, default: () => [] },
   overviewItems: { type: Array, default: () => [] },

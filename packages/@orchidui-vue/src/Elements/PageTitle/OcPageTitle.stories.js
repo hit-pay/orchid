@@ -96,17 +96,31 @@ export const Default = {
         tooltipContent: "Preview Link",
         url: "https://securecheckout.../payment-request/",
       },
-      dropdownOptions: [
-        {
-          onClick: () => console.log("customize link clicked"),
-        },
-        {
-          onClick: () => console.log("view details clicked"),
-        },
-        {
-          onClick: () => console.log("activate/disactivate clicked"),
-        },
-      ],
+      dropdownOptions: {
+        top: [
+          {
+            icon: "pencil",
+            text: "Customize link",
+            onClick: () => console.log("customize link clicked"),
+          },
+          {
+            isCopyButton: true,
+          },
+          {
+            icon: "eye-open",
+            text: "View details",
+            onClick: () => console.log("view details clicked"),
+          },
+        ],
+        bottom: [
+          {
+            text: "Activate",
+            icon: "toggle-right-fill",
+            iconClasses: "!text-oc-success",
+            onClick: () => console.log("activate/disactivate clicked"),
+          },
+        ],
+      }
     },
     additionalContentVariant: "default",
     boxes: [],
