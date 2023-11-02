@@ -190,13 +190,7 @@ export const Default = {
   render: (args) => ({
     components: { PageTitle, Theme },
     setup() {
-      const onclickPrimary = () => {
-        console.log("primary clicked");
-      };
-      const onclickSecondary = (value) => {
-        console.log("sec clicked", value);
-      };
-      return { args, onclickPrimary, onclickSecondary };
+      return { args };
     },
     template: `
           <Theme>
