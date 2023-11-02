@@ -12,6 +12,7 @@ import {
   PhoneInput,
   RadioGroup,
   RangeInput,
+  Checkbox
 } from "@orchid";
 
 const props = defineProps({
@@ -57,6 +58,7 @@ const FormTypes = {
   RadioGroup: RadioGroup,
   TimePicker: TimePicker,
   DatePicker: DatePicker,
+  Checkbox: Checkbox,
   RangeInput: RangeInput,
 };
 
