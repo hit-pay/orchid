@@ -58,7 +58,8 @@ const FormTypes = {
   RadioGroup: RadioGroup,
   TimePicker: TimePicker,
   DatePicker: DatePicker,
-  Checkbox: Checkbox
+  Checkbox: Checkbox,
+  RangeInput: RangeInput,
 };
 
 const getComponentByType = (type) => {
@@ -81,16 +82,6 @@ const getComponentByType = (type) => {
         :to="values[form.name[1].key]"
         @update:from="onUpdate(form, $event, 0)"
         @update:to="onUpdate(form, $event, 1)"
-      />
-      <RangeInput
-        v-else-if="form.type === 'RangeInput'"
-        :class="form.className"
-        v-bind="form.props"
-        :error-message="multipleError(form.name)"
-        :min-value="values[form.name[0].key]"
-        :max-value="values[form.name[1].key]"
-        @update:min-value="onUpdate(form, $event, 0)"
-        @update:max-value="onUpdate(form, $event, 1)"
       />
       <PhoneInput
         v-else-if="form.type === 'PhoneInput'"

@@ -1,4 +1,4 @@
-import countryCodes from "./CountryCodes.js";
+import countryCodes from "./CountryCodes.sample";
 
 const SampleJsonForm = [
   {
@@ -224,16 +224,7 @@ const SampleJsonForm = [
     },
   },
   {
-    name: [
-      {
-        key: "custom_min_field_name",
-        rule: "required",
-      },
-      {
-        key: "custom_max_field_name",
-        rule: "required",
-      },
-    ],
+    name: "custom_range_field_name",
     type: "RangeInput",
     props: {
       label: "Example Label",
