@@ -44,9 +44,8 @@ const selectedRows = ref([]);
 const filterTab = ref(props.filter[filterOptions.value?.tabs?.key]);
 const currentPage = ref(props.filter.page);
 const perPage = ref(props.filter.per_page);
-const defaultQuery =
-  props.filter[filterOptions.value?.search?.key]?.trim()?.split(",") ?? [];
-const queries = ref(defaultQuery ? defaultQuery : []);
+const defaultQuery = props.filter[filterOptions.value?.search?.key] ?? [];
+const queries = ref(defaultQuery ? defaultQuery.split(",") : []);
 const isSearchExpanded = ref(false);
 
 const searchExpanded = computed(() => {
@@ -167,7 +166,7 @@ const applyFilter = (filterForm = null, isChangePage = false) => {
           <div
             class="flex gap-3 absolute bg-oc-bg-light right-0"
             :class="{
-              'md:w-fit w-full': searchExpanded,
+              'w-fit': searchExpanded,
               'hidden md:flex': selectedRows.length > 0,
             }"
           >
