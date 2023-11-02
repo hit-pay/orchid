@@ -63,8 +63,8 @@ const selectOption = (option) => {
       : [...props.modelValue, option.value]
     : option.value;
 
-  if(!props.multiple){
-    isDropdownOpened.value = false
+  if (!props.multiple) {
+    isDropdownOpened.value = false;
   }
   emit("update:modelValue", result);
 };

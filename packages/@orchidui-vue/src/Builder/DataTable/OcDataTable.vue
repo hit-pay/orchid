@@ -173,7 +173,7 @@ const applyFilter = (filterForm = null, isChangePage = false) => {
             "
           >
             <FilterSearch
-              :is-search-only="!filterOptions"
+              :is-search-only="!filterOptions.tabs"
               @add-query="addQuery"
               @toggle="isSearchExpanded = $event"
             />

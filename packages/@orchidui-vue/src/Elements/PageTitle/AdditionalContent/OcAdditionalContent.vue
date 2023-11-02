@@ -10,7 +10,7 @@ const props = defineProps({
   chipVariant: { type: String, default: "" },
   chipLabel: { type: String, default: "" },
   additionalTitle: { type: String, default: "" },
-  tooltipContent: { type: String, default: "" },
+  primaryActions: { type: Object, default: null },
   overviewActiveTab: { type: String, default: "" },
   customerCardVariant: { type: String, default: "" },
   customer: { type: Object, default: null },
@@ -27,6 +27,7 @@ const props = defineProps({
 
 defineEmits({
   changeTab: [],
+  "click:primaryActionsDropdown": [],
 });
 const copyLink = async () => {
   try {
@@ -56,7 +57,11 @@ const copyLink = async () => {
           <span class="text-oc-text-400">
             {{ description }}<span class="text-oc-text">{{ userId }}</span>
           </span>
-          <PrimaryActions :tooltip-content="tooltipContent" @copy="copyLink" />
+          <PrimaryActions
+            :primary-actions="primaryActions"
+            @copy="copyLink"
+            @click="$emit('click:primaryActionsDropdown', $event)"
+          />
         </div>
       </template>
     </Title>

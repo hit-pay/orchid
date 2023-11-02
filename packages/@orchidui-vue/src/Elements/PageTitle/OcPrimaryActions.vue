@@ -3,10 +3,11 @@ import { Icon, Tooltip, Dropdown, DropdownItem } from "@orchid";
 import { ref } from "vue";
 
 defineProps({
-  tooltipContent: String,
+  primaryActions: Object,
 });
 const emit = defineEmits({
   copy: [],
+  "click:primaryActionsDropdown": [],
 });
 const isDropdownOpened = ref(false);
 const isActive = ref(false);
@@ -28,15 +29,17 @@ const copyToClipBoard = () => {
     "
   >
     <Tooltip position="top" arrow-hidden :distance="7">
-      <Icon
-        class="p-2 cursor-pointer rounded-sm hover:border-oc-accent-1-50-tr active:text-oc-text-400 hover:text-oc-text hover:bg-oc-accent-1-50-tr"
-        name="external-link"
-      />
+      <a :href="primaryActions?.mainLinkAction?.url" target="_blank">
+        <Icon
+          class="p-2 cursor-pointer rounded-sm hover:border-oc-accent-1-50-tr active:text-oc-text-400 hover:text-oc-text hover:bg-oc-accent-1-50-tr"
+          name="external-link"
+        />
+      </a>
       <template #popper>
         <div
           class="py-2 px-3 whitespace-nowrap text-sm font-medium text-oc-text-400"
         >
-          {{ tooltipContent }}
+          {{ primaryActions?.mainLinkAction?.tooltipContent }}
         </div>
       </template>
     </Tooltip>
@@ -55,14 +58,34 @@ const copyToClipBoard = () => {
       <template #menu>
         <div class="flex flex-col">
           <div class="p-2 border-b border-gray-200">
-            <DropdownItem icon="pencil" text="Customize link" />
+            <DropdownItem
+              icon="pencil"
+              text="Customize link"
+              v-bind="primaryActions?.dropdownOptions[0]"
+              @click="
+                emit(
+                  'click:primaryActionsDropdown',
+                  primaryActions?.dropdownOptions[1],
+                )
+              "
+            />
             <DropdownItem
               :icon="isCopied ? 'check' : 'copy'"
               :text="isCopied ? 'Link copied!' : 'Copy link'"
               :icon-classes="isCopied ? '!text-oc-success' : ''"
               @click="copyToClipBoard"
             />
-            <DropdownItem icon="eye-open" text="View details" />
+            <DropdownItem
+              icon="eye-open"
+              text="View details"
+              v-bind="primaryActions?.dropdownOptions[1]"
+              @click="
+                emit(
+                  'click:primaryActionsDropdown',
+                  primaryActions?.dropdownOptions[1],
+                )
+              "
+            />
           </div>
           <div class="p-2">
             <DropdownItem
@@ -70,6 +93,13 @@ const copyToClipBoard = () => {
               icon="toggle-right-fill"
               :icon-classes="
                 isActive ? 'rotate-180 !text-oc-gray-300' : '!text-oc-success'
+              "
+              v-bind="primaryActions?.dropdownOptions[2]"
+              @click="
+                emit(
+                  'click:primaryActionsDropdown',
+                  primaryActions?.dropdownOptions[2],
+                )
               "
             />
           </div>
