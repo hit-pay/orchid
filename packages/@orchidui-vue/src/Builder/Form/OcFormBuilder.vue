@@ -12,7 +12,7 @@ import {
   PhoneInput,
   RadioGroup,
   RangeInput,
-  Checkbox
+  Checkbox,
 } from "@orchid";
 
 const props = defineProps({

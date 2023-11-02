@@ -45,9 +45,7 @@ export const Default = {
               </ul>
             </div>
             <DataTable id="sample-data-table" :filter="args.filter" :options="args.options" @update:filter="updateFilterData">
-            <template #before>
-              Slot Before
-            </template>  
+     
              <template #bulk-actions="{selectedRows}">
                 <Button
                   label="Publish"
@@ -90,9 +88,6 @@ export const Default = {
               </template>
               <template #actions>
                 <Icon class="w-6 h-6 group-hover/row:block md:hidden cursor-pointer mx-auto" name="dots-vertical"/>
-              </template>
-              <template #after>
-                Slot After
               </template>
             </DataTable>
           </Theme>

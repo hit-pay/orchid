@@ -45,9 +45,13 @@ const filterTab = ref(props.filter[filterOptions.value?.tabs?.key]);
 const currentPage = ref(props.filter.page);
 const perPage = ref(props.filter.per_page);
 const defaultQuery =
-  props.filter[filterOptions.value?.search?.key].trim() ?? [];
-const queries = ref(defaultQuery ? defaultQuery.split(",") : []);
+  props.filter[filterOptions.value?.search?.key]?.trim()?.split(",") ?? [];
+const queries = ref(defaultQuery ? defaultQuery : []);
 const isSearchExpanded = ref(false);
+
+const searchExpanded = computed(() => {
+  return filterOptions.value.tabs || isSearchExpanded.value;
+});
 
 const perPageOptions = computed(() => {
   let page = 10;
@@ -162,10 +166,14 @@ const applyFilter = (filterForm = null, isChangePage = false) => {
           </div>
           <div
             class="flex gap-3 absolute bg-oc-bg-light right-0"
-            :class="isSearchExpanded ? 'md:w-fit w-full' : ''"
+            :class="{
+              'md:w-fit w-full': searchExpanded,
+              'hidden md:flex': selectedRows.length > 0,
+            }"
           >
             <FilterSearch
               v-if="filterOptions.search"
+              :is-width-variant="!filterOptions.tabs"
               @add-query="addQuery"
               @toggle="isSearchExpanded = $event"
             />

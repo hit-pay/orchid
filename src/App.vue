@@ -175,7 +175,9 @@ const changeActiveSidebar = (name) => {
           @change-expanded="state.isExpanded = $event"
         >
           <template #label="{ menu }">
-            <a :href="`#${menu.name}`" class="ml-3 py-3 h-full">{{ menu.label }}</a>
+            <a :href="`#${menu.name}`" class="ml-3 py-3 h-full">{{
+              menu.label
+            }}</a>
           </template>
           <template #submenu_label="{ submenu }">
             <a

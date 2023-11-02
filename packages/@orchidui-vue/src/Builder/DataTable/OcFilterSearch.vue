@@ -1,7 +1,9 @@
 <script setup>
 import { ref } from "vue";
 import { Button, Input } from "@orchid";
-
+defineProps({
+  isWidthVariant: Boolean,
+});
 defineEmits({
   addQuery: [],
   toggle: [],
@@ -13,7 +15,11 @@ const query = ref("");
 <template>
   <div
     class="transition-all w-full duration-300"
-    :class="isSearchOpen ? 'max-w-[400px]' : 'absolute max-w-0 overflow-hidden'"
+    :class="
+      isSearchOpen || isWidthVariant
+        ? 'max-w-[400px]'
+        : 'absolute max-w-0 overflow-hidden'
+    "
   >
     <div class="flex gap-x-4">
       <Input
@@ -26,7 +32,18 @@ const query = ref("");
         "
       />
 
+      <Button
+        v-if="isWidthVariant"
+        variant="secondary"
+        label="search"
+        class="hidden md:block w-[100px]"
+        @click="
+          $emit('addQuery', query);
+          query = '';
+        "
+      ></Button>
       <span
+        v-else
         class="py-3 text-base cursor-pointer flex normal-case items-center font-medium text-oc-text-400"
         @click="
           isSearchOpen = false;
@@ -39,6 +56,7 @@ const query = ref("");
     </div>
   </div>
   <div
+    v-if="!isWidthVariant"
     class="transition-all duration-300"
     :class="!isSearchOpen ? 'max-w-[400px]' : 'max-w-0 overflow-hidden'"
   >
