@@ -160,6 +160,9 @@ export const Default = {
     primaryButtonProps: {
       leftIcon: "plus",
       label: "New Payment Link",
+      onClick: () => {
+        console.log('click new payment link')
+      }
     },
     secondaryButtonProps: {
       variant: "secondary",
@@ -169,11 +172,17 @@ export const Default = {
           name: "bulk_create",
           icon: "upload",
           text: "Bulk create",
+          onClick: () => {
+            console.log('click bulk create')
+          }
         },
         {
           name: "download",
           icon: "download",
           text: "Export",
+          onClick: () => {
+            console.log('click download')
+          }
         },
       ],
     },
@@ -194,8 +203,6 @@ export const Default = {
             <PageTitle
                 v-bind="args"
                 @changeTab="args.overviewActiveTab = $event"
-                @click:primaryButton="onclickPrimary"
-                @click:secondaryButton="onclickSecondary"
             />
           </Theme>
         `,

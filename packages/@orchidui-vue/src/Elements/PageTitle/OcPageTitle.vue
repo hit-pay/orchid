@@ -23,10 +23,7 @@ defineProps({
   secondaryButtonProps: Object,
 });
 defineEmits({
-  changeTab: [],
-  "click:primaryButton": [],
-  "click:secondaryButton": [],
-  "click:primaryActionsDropdown": [],
+  changeTab: []
 });
 </script>
 
@@ -44,8 +41,6 @@ defineEmits({
           class="shrink-0"
           :primary-button-props="primaryButtonProps"
           :secondary-button-props="secondaryButtonProps"
-          @click:primary-button="$emit('click:primaryButton', $event)"
-          @click:secondary-button="$emit('click:secondaryButton', $event)"
         />
       </slot>
     </div>
@@ -66,9 +61,6 @@ defineEmits({
       :is-customer="isCustomer"
       :customer="customer"
       :overview-active-tab="overviewActiveTab"
-      @click:primary-actions-dropdown="
-        $emit('click:primaryActionsDropdown', $event)
-      "
       @change-tab="$emit('changeTab', $event)"
     />
   </div>

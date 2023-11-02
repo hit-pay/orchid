@@ -26,8 +26,7 @@ const props = defineProps({
 });
 
 defineEmits({
-  changeTab: [],
-  "click:primaryActionsDropdown": [],
+  changeTab: []
 });
 const copyLink = async () => {
   try {
@@ -60,7 +59,6 @@ const copyLink = async () => {
           <PrimaryActions
             :primary-actions="primaryActions"
             @copy="copyLink"
-            @click="$emit('click:primaryActionsDropdown', $event)"
           />
         </div>
       </template>

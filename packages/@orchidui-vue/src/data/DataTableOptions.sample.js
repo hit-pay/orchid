@@ -6,15 +6,15 @@ const DataTableOptions = {
     last_page: 20,
   },
   filterOptions: {
-    // tabs: {
-    //   key: "tabs",
-    //   options: [
-    //     { label: "All", value: "" },
-    //     { label: "Filter 01", value: "1" },
-    //     { label: "Filter 02", value: "2" },
-    //     { label: "Filter 03", value: "3" },
-    //   ],
-    // },
+    tabs: {
+      key: "tabs",
+      options: [
+        { label: "All", value: "" },
+        { label: "Filter 01", value: "1" },
+        { label: "Filter 02", value: "2" },
+        { label: "Filter 03", value: "3" },
+      ],
+    },
     search: {
       key: "keywords",
     },
