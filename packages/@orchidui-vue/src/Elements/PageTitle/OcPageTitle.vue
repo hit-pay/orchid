@@ -10,7 +10,7 @@ defineProps({
   chipVariant: { type: String, default: "" },
   chipLabel: { type: String, default: "" },
   additionalTitle: { type: String, default: "" },
-  tooltipContent: { type: String, default: "" },
+  primaryActions: Object,
   additionalContentVariant: { type: String, default: "" },
   boxes: { type: Array, default: () => [] },
   overviewItems: { type: Array, default: () => [] },
@@ -24,8 +24,6 @@ defineProps({
 });
 defineEmits({
   changeTab: [],
-  "click:primaryButton": [],
-  "click:secondaryButton": [],
 });
 </script>
 
@@ -43,8 +41,6 @@ defineEmits({
           class="shrink-0"
           :primary-button-props="primaryButtonProps"
           :secondary-button-props="secondaryButtonProps"
-          @click:primary-button="$emit('click:primaryButton', $event)"
-          @click:secondary-button="$emit('click:secondaryButton', $event)"
         />
       </slot>
     </div>
@@ -56,7 +52,7 @@ defineEmits({
       :additional-title="additionalTitle"
       :chip-variant="chipVariant"
       :user-id="userId"
-      :tooltip-content="tooltipContent"
+      :primary-actions="primaryActions"
       :variant="additionalContentVariant ?? 'default'"
       :boxes="boxes"
       :overview-items="overviewItems"

@@ -100,10 +100,3 @@ export const Default = {
         `,
   }),
 };
-
-{
-  /* custom filter form <template #custom-filter-form="{updateFilter, errors ,values, jsonForm}">
-      filter name:  {{jsonForm[0].name}}
-      <Toggle size="small" :model-value="false" @update:modelValue="updateFilter(jsonForm[0],$event)"/>
-      </template> */
-}

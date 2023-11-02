@@ -91,7 +91,23 @@ export const Default = {
     chipVariant: "success",
     chipLabel: "Active",
     additionalTitle: "Need attention",
-    tooltipContent: "Preview Link",
+    primaryActions: {
+      mainLinkAction: {
+        tooltipContent: "Preview Link",
+        url: "https://securecheckout.../payment-request/",
+      },
+      dropdownOptions: [
+        {
+          onClick: () => console.log("customize link clicked"),
+        },
+        {
+          onClick: () => console.log("view details clicked"),
+        },
+        {
+          onClick: () => console.log("activate/disactivate clicked"),
+        },
+      ],
+    },
     additionalContentVariant: "default",
     boxes: [],
     isCustomer: false,
@@ -144,6 +160,9 @@ export const Default = {
     primaryButtonProps: {
       leftIcon: "plus",
       label: "New Payment Link",
+      onClick: () => {
+        console.log("click new payment link");
+      },
     },
     secondaryButtonProps: {
       variant: "secondary",
@@ -153,11 +172,17 @@ export const Default = {
           name: "bulk_create",
           icon: "upload",
           text: "Bulk create",
+          onClick: () => {
+            console.log("click bulk create");
+          },
         },
         {
           name: "download",
           icon: "download",
           text: "Export",
+          onClick: () => {
+            console.log("click download");
+          },
         },
       ],
     },
@@ -165,21 +190,13 @@ export const Default = {
   render: (args) => ({
     components: { PageTitle, Theme },
     setup() {
-      const onclickPrimary = () => {
-        console.log("primary clicked");
-      };
-      const onclickSecondary = (value) => {
-        console.log("sec clicked", value);
-      };
-      return { args, onclickPrimary, onclickSecondary };
+      return { args };
     },
     template: `
           <Theme>
             <PageTitle
                 v-bind="args"
                 @changeTab="args.overviewActiveTab = $event"
-                @click:primaryButton="onclickPrimary"
-                @click:secondaryButton="onclickSecondary"
             />
           </Theme>
         `,
