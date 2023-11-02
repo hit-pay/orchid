@@ -91,7 +91,23 @@ export const Default = {
     chipVariant: "success",
     chipLabel: "Active",
     additionalTitle: "Need attention",
-    tooltipContent: "Preview Link",
+    primaryActions: {
+      mainLinkAction: {
+        tooltipContent: "Preview Link",
+        url: "https://securecheckout.../payment-request/"
+      },
+      dropdownOptions: [
+        {
+          onClick: () => console.log('customize link clicked')
+        },
+        {
+          onClick: () => console.log('view details clicked')
+        },
+        {
+          onClick: () => console.log('activate/disactivate clicked')
+        }
+      ]
+    },
     additionalContentVariant: "default",
     boxes: [],
     isCustomer: false,

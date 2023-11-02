@@ -10,7 +10,7 @@ defineProps({
   chipVariant: { type: String, default: "" },
   chipLabel: { type: String, default: "" },
   additionalTitle: { type: String, default: "" },
-  tooltipContent: { type: String, default: "" },
+  primaryActions: Object,
   additionalContentVariant: { type: String, default: "" },
   boxes: { type: Array, default: () => [] },
   overviewItems: { type: Array, default: () => [] },
@@ -26,6 +26,7 @@ defineEmits({
   changeTab: [],
   "click:primaryButton": [],
   "click:secondaryButton": [],
+  "click:primaryActionsDropdown": []
 });
 </script>
 
@@ -56,7 +57,7 @@ defineEmits({
       :additional-title="additionalTitle"
       :chip-variant="chipVariant"
       :user-id="userId"
-      :tooltip-content="tooltipContent"
+      :primary-actions="primaryActions"
       :variant="additionalContentVariant ?? 'default'"
       :boxes="boxes"
       :overview-items="overviewItems"
@@ -65,6 +66,7 @@ defineEmits({
       :is-customer="isCustomer"
       :customer="customer"
       :overview-active-tab="overviewActiveTab"
+      @click:primary-actions-dropdown="$emit('click:primaryActionsDropdown', $event)"
       @change-tab="$emit('changeTab', $event)"
     />
   </div>
