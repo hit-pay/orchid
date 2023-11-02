@@ -245,7 +245,7 @@ export const Multiple = {
                       v-for="option in group.values"
                       :key="option.value"
                       :label="option.label"
-                      :is-selected="selectedGroups?.find((o) => o === option.value) ? true : false"
+                      :is-selected="selectedGroups.find((o) => o === option.value) ? true : false"
                       @click="selectOption(option)"
                   />
                 </GroupOptions>
