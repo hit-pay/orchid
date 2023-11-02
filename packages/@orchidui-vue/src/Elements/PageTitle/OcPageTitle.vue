@@ -23,7 +23,7 @@ defineProps({
   secondaryButtonProps: Object,
 });
 defineEmits({
-  changeTab: []
+  changeTab: [],
 });
 </script>
 

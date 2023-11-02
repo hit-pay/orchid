@@ -26,7 +26,7 @@ const props = defineProps({
 });
 
 defineEmits({
-  changeTab: []
+  changeTab: [],
 });
 const copyLink = async () => {
   try {
@@ -56,10 +56,7 @@ const copyLink = async () => {
           <span class="text-oc-text-400">
             {{ description }}<span class="text-oc-text">{{ userId }}</span>
           </span>
-          <PrimaryActions
-            :primary-actions="primaryActions"
-            @copy="copyLink"
-          />
+          <PrimaryActions :primary-actions="primaryActions" @copy="copyLink" />
         </div>
       </template>
     </Title>

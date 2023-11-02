@@ -161,8 +161,8 @@ export const Default = {
       leftIcon: "plus",
       label: "New Payment Link",
       onClick: () => {
-        console.log('click new payment link')
-      }
+        console.log("click new payment link");
+      },
     },
     secondaryButtonProps: {
       variant: "secondary",
@@ -173,16 +173,16 @@ export const Default = {
           icon: "upload",
           text: "Bulk create",
           onClick: () => {
-            console.log('click bulk create')
-          }
+            console.log("click bulk create");
+          },
         },
         {
           name: "download",
           icon: "download",
           text: "Export",
           onClick: () => {
-            console.log('click download')
-          }
+            console.log("click download");
+          },
         },
       ],
     },
