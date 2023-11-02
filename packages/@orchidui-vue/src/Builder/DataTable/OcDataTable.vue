@@ -167,6 +167,7 @@ const applyFilter = (filterForm = null, isChangePage = false) => {
             class="flex gap-3 absolute bg-oc-bg-light right-0"
             :class="{
               'w-fit': searchExpanded,
+              'w-full': isSearchExpanded,
               'hidden md:flex': selectedRows.length > 0,
             }"
           >
