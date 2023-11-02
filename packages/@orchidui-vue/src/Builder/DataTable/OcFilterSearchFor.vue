@@ -5,6 +5,7 @@ defineProps({
 });
 defineEmits({
   removeQuery: [],
+  removeAll: [],
 });
 </script>
 
@@ -15,10 +16,16 @@ defineEmits({
       <Chip
         v-for="query in queries"
         :key="query"
-        variant="gray"
+        variant="accent-1"
         closable
         :label="query"
         @remove="$emit('removeQuery', query)"
+      />
+      <Chip
+        variant="gray"
+        class="cursor-pointer"
+        label="Clear all"
+        @click="$emit('removeAll')"
       />
     </div>
   </TableHeader>

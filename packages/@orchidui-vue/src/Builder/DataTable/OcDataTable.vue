@@ -29,15 +29,15 @@ const props = defineProps({
 const emit = defineEmits(["update:filter"]);
 
 const pagination = computed(() => {
-  return props.options.pagination;
+  return props.options?.pagination;
 });
 
 const tableOptions = computed(() => {
-  return props.options.tableOptions;
+  return props.options?.tableOptions;
 });
 
 const filterOptions = computed(() => {
-  return props.options.filterOptions;
+  return props.options?.filterOptions;
 });
 
 const selectedRows = ref([]);
@@ -95,22 +95,21 @@ const showBulkAction = computed(() => {
   return selectedRows.value.length > 0;
 });
 
-const filterEnabled = computed(() => {
-  return (
-    selectedRows.value.length > 0 ||
-    filterOptions.value.tabs ||
-    filterOptions.value.search ||
-    filterOptions.value.form
-  );
-});
-
 const addQuery = (query) => {
   if (!query.trim() || queries.value.includes(query)) return;
-  queries.value.push(query);
+  if (!filterOptions.value) {
+    queries.value = [query];
+  } else {
+    queries.value.push(query);
+  }
   applyFilter();
 };
 const removeQuery = (query) => {
   queries.value = queries.value.filter((q) => q !== query);
+  applyFilter();
+};
+const removeAllQuery = () => {
+  queries.value = [];
   applyFilter();
 };
 
@@ -127,10 +126,10 @@ const applyFilter = (filterForm = null, isChangePage = false) => {
   filterData.value.page = currentPage.value;
   filterData.value.per_page = perPage.value;
 
-  if (filterOptions.value.tabs) {
+  if (filterOptions.value?.tabs) {
     filterData.value[filterOptions.value.tabs.key] = filterTab.value;
   }
-  if (filterOptions.value.search) {
+  if (filterOptions.value?.search) {
     filterData.value[filterOptions.value.search.key] = queries.value.join();
   }
   if (filterForm) {
@@ -141,36 +140,45 @@ const applyFilter = (filterForm = null, isChangePage = false) => {
 </script>
 <template>
   <div class="flex flex-col gap-3">
-    <Table v-if="!loading" v-model="selectedRows" :options="tableOptions">
+    <Table
+      v-if="!loading && tableOptions"
+      v-model="selectedRows"
+      :options="tableOptions"
+    >
       <template #before>
         <slot name="before" />
-        <div
-          v-if="filterEnabled"
-          class="flex items-center m-5 relative min-h-[30px]"
-        >
-          <div v-if="showBulkAction" class="flex gap-3 items-center">
-            <slot name="bulk-actions" :selected-rows="selectedRows" />
-          </div>
-          <div v-else class="flex gap-3">
-            <Tabs
-              v-if="filterOptions.tabs"
-              v-model="filterTab"
-              :tabs="filterOptions.tabs.options"
-              :variant="'pills'"
-              @update:model-value="applyFilter(null)"
-            />
-          </div>
+        <div class="flex items-center m-5 relative min-h-[30px]">
+          <template v-if="filterOptions">
+            <div v-if="showBulkAction" class="flex gap-3 items-center">
+              <slot name="bulk-actions" :selected-rows="selectedRows" />
+            </div>
+            <div v-else class="flex gap-3">
+              <Tabs
+                v-if="filterOptions?.tabs"
+                v-model="filterTab"
+                :tabs="filterOptions.tabs.options"
+                :variant="'pills'"
+                @update:model-value="applyFilter(null)"
+              />
+            </div>
+          </template>
           <div
             class="flex gap-3 absolute bg-oc-bg-light right-0"
-            :class="isSearchExpanded ? 'md:w-fit w-full' : ''"
+            :class="
+              !filterOptions
+                ? 'w-full justify-end'
+                : isSearchExpanded
+                ? 'md:w-fit w-full'
+                : ''
+            "
           >
             <FilterSearch
-              v-if="filterOptions.search"
+              :is-search-only="!filterOptions"
               @add-query="addQuery"
               @toggle="isSearchExpanded = $event"
             />
             <FilterForm
-              v-if="filterOptions.form"
+              v-if="filterOptions?.form"
               :id="id"
               :json-form="filterOptions.form ?? []"
               :values="props.filter"
@@ -193,10 +201,11 @@ const applyFilter = (filterForm = null, isChangePage = false) => {
           :queries="queries"
           class="border-t border-oc-gray-200"
           @remove-query="removeQuery"
+          @remove-all="removeAllQuery"
         />
       </template>
       <template
-        v-for="header in tableOptions.headers"
+        v-for="header in tableOptions?.headers"
         #[header.key]="{ data, item }"
       >
         <slot :name="header.key" :data="data" :item="item"></slot>
@@ -206,7 +215,7 @@ const applyFilter = (filterForm = null, isChangePage = false) => {
       </template>
     </Table>
     <div
-      v-if="pagination.total > 0"
+      v-if="pagination?.total > 0"
       class="flex gap-3 items-center m-3 md:mx-0"
     >
       <Pagination

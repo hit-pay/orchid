@@ -35,7 +35,7 @@ const additionalAreaSize = computed(() => ({
 
 const shadowContainer = computed(() => ({
   primary: "shadow-[0_1.5px_0_0_var(--oc-primary-500)]",
-  secondary: " shadow-[0_1.5px_0_0] shadow-black/10",
+  secondary: " shadow-[0_1.5px_0_0] shadow-[#E5E5E5]",
   destructive: "shadow-[0_1.5px_0_0_var(--oc-error-500)]",
 }));
 
