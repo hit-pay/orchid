@@ -1,8 +1,8 @@
 <script setup>
 import { Icon, Tooltip, Dropdown, DropdownItem } from "@orchid";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 
-defineProps({
+const props = defineProps({
   primaryActions: Object,
 });
 const emit = defineEmits({
@@ -10,8 +10,8 @@ const emit = defineEmits({
   "click:primaryActionsDropdown": [],
 });
 const isDropdownOpened = ref(false);
-const isActive = ref(false);
 const isCopied = ref(false);
+const hasDropdownOptions = computed(() => props.primaryActions?.dropdownOptions);
 const copyToClipBoard = () => {
   isCopied.value = true;
   emit("copy");
@@ -45,12 +45,12 @@ const copyToClipBoard = () => {
     </Tooltip>
 
     <div
-      v-if="primaryActions?.dropdownOptions"
+      v-if="hasDropdownOptions"
       class="border-l group-hover:border-oc-accent-1-100"
       :class="isDropdownOpened ? 'border-oc-gray-200' : 'border-transparent'"
     />
 
-    <Dropdown v-if="primaryActions?.dropdownOptions" v-model="isDropdownOpened" :distance="6">
+    <Dropdown v-if="hasDropdownOptions" v-model="isDropdownOpened" :distance="6">
       <Icon
         class="p-2 cursor-pointer rounded-sm hover:bg-oc-accent-1-50-tr"
         name="dots-vertical"
@@ -73,7 +73,10 @@ const copyToClipBoard = () => {
               <DropdownItem v-else v-bind="item" />
             </template>
           </div>
-          <div class="p-2">
+          <div
+              v-if="primaryActions.dropdownOptions?.bottom"
+              class="p-2"
+          >
             <DropdownItem
                 v-for="(item, i) in primaryActions.dropdownOptions?.bottom"
                 :key="i"
