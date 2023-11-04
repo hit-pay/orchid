@@ -1,5 +1,5 @@
 <script setup>
-import { DataTable, TableCellContent, Icon, Chip } from "@orchid";
+import { DataTable, TableCellContent, Icon, Chip } from "@orchidui/vue";
 import { ref, onMounted } from "vue";
 
 let DataTableOptions = {

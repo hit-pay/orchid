@@ -32,5 +32,16 @@ const config = {
       base: basePath,
     });
   },
+  previewHead: (head) => `
+   <script>
+    let params = new URL(location.href);
+    let storybookGlobalsThemes = params.searchParams.get("globals");
+    if (storybookGlobalsThemes?.includes("theme:dark")) {
+      document.querySelector("body").setAttribute("class", "dark");
+    } else {
+      document.querySelector("body").setAttribute("class", "light");
+    }
+    </script>
+  `,
 };
 export default config;

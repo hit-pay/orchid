@@ -7,12 +7,13 @@ import {
   HeaderRight,
   Icon,
   Button,
-} from "@orchid";
+} from "@orchidui/vue";
+
 import { reactive, computed } from "vue";
-import ExampleDataTable from "@playground/example/DataTable.vue";
-import DTPaymentLinks from "@playground/example/data-table/DTPaymentLinks.vue";
-import ExampleFormBuilder from "@playground/example/FormBuilder.vue";
-import FBCustomer from "@playground/example/form-builder/FBCustomer.vue";
+import ExampleDataTable from "./example/DataTable.vue";
+import DTPaymentLinks from "./example/data-table/DTPaymentLinks.vue";
+import ExampleFormBuilder from "./example/FormBuilder.vue";
+import FBCustomer from "./example/form-builder/FBCustomer.vue";
 let state = reactive({
   darkMode: false,
   primary_colors: {

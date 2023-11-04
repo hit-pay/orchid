@@ -1,6 +1,6 @@
 <script setup>
 import { computed, ref } from "vue";
-import { Checkbox, Icon, Tooltip, TableCellContent } from "@orchid";
+import { Checkbox, Icon, Tooltip, TableCellContent } from "@/orchidui";
 
 const Variants = {
   CHECKBOX: "checkbox",

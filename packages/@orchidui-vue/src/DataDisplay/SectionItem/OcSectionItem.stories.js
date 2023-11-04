@@ -1,4 +1,4 @@
-import { Theme, SectionItem } from "@orchid";
+import { Theme, SectionItem } from "@/orchidui";
 
 export default {
   component: SectionItem,

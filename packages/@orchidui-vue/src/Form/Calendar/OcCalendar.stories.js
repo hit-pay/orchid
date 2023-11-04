@@ -1,4 +1,4 @@
-import { Theme, Calendar } from "@orchid";
+import { Theme, Calendar } from "@/orchidui";
 import { ref } from "vue";
 
 export default {

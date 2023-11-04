@@ -1,4 +1,4 @@
-import { Theme, Radio } from "@orchid";
+import { Theme, Radio } from "@/orchidui";
 
 export default {
   component: Radio,

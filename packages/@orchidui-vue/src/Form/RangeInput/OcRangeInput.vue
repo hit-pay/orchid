@@ -1,5 +1,5 @@
 <script setup>
-import { Input, Slider } from "@orchid";
+import { Input, Slider } from "@/orchidui";
 import { nextTick, onMounted, ref } from "vue";
 
 const props = defineProps({

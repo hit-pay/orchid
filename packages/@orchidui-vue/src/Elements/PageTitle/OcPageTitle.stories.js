@@ -1,4 +1,4 @@
-import { Theme, PageTitle } from "@orchid";
+import { Theme, PageTitle } from "@/orchidui";
 
 export default {
   component: PageTitle,

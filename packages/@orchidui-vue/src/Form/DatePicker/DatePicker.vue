@@ -1,5 +1,5 @@
 <script setup>
-import { Dropdown, Calendar, Input } from "@orchid";
+import { Dropdown, Calendar, Input } from "@/orchidui";
 import { computed, ref } from "vue";
 import dayjs from "dayjs";
 

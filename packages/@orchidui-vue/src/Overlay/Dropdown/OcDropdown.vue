@@ -1,5 +1,5 @@
 <script setup>
-import { Popper } from "@orchid";
+import { Popper } from "@/orchidui";
 import { clickOutside as vClickOutside } from "../../directives/clickOutside.js";
 import { ref } from "vue"; // Import the directive
 

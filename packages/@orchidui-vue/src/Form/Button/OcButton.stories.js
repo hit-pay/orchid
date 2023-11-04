@@ -1,4 +1,4 @@
-import { Theme, Button } from "@orchid";
+import { Theme, Button } from "@/orchidui";
 
 export default {
   component: Button,

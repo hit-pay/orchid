@@ -1,6 +1,6 @@
 <script setup>
 import { nextTick, ref, watch } from "vue";
-import { Icon } from "@orchid";
+import { Icon } from "@/orchidui";
 
 const upcomingAccordion = ref();
 

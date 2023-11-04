@@ -1,4 +1,4 @@
-import { Criteria, Theme } from "@orchid";
+import { Criteria, Theme } from "@/orchidui";
 
 export default {
   component: Criteria,

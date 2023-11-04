@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref } from "vue";
-import { Popper } from "@orchid";
+import { Popper } from "@/orchidui";
 import { clickOutside as vClickOutside } from "../../directives/clickOutside.js";
 
 const props = defineProps({

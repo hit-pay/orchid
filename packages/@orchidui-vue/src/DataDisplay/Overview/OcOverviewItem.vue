@@ -1,5 +1,5 @@
 <script setup>
-import { OverviewIcon, Icon } from "@orchid";
+import { OverviewIcon, Icon } from "@/orchidui";
 
 defineProps({
   icon: String,

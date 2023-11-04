@@ -1,5 +1,5 @@
 <script setup>
-import { Button, Dropdown, FormBuilder } from "@orchid";
+import { Button, Dropdown, FormBuilder } from "@/orchidui";
 import { ref, computed, onMounted } from "vue";
 
 const props = defineProps({

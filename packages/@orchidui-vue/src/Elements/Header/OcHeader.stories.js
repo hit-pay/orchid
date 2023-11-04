@@ -7,7 +7,7 @@ import {
   HeaderLeft,
   HeaderRight,
   Icon,
-} from "@orchid";
+} from "@/orchidui";
 
 import SampleHeaderLeft from "./SampleHeaderLeft.vue";
 import SampleHeaderRight from "./SampleHeaderRight.vue";

@@ -1,4 +1,3 @@
-<!-- TODO : replace to @orchidui-icons -->
 <template>
   <svg
     :width="`${width}px`"

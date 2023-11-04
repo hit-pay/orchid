@@ -1,4 +1,6 @@
 <script setup>
+import { DataTableOptions, Filter } from "../../../packages/@orchidui-vue/src/data/DataTableOptions.sample";
+
 import {
   DataTable,
   Button,
@@ -6,9 +8,8 @@ import {
   Toggle,
   Icon,
   Chip,
-} from "@orchid";
+} from "@orchidui/vue";
 import { ref } from "vue";
-import { DataTableOptions, Filter } from "@orchid/data/DataTableOptions.sample";
 
 const filterData = ref(Filter);
 </script>

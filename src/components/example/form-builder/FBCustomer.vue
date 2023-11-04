@@ -1,6 +1,6 @@
 <script setup>
-import { FormBuilder } from "@orchid";
-
+import countryCodes from "../../../../packages/@orchidui-vue/src/data/CountryCodes.sample";
+import { FormBuilder } from "@orchidui/vue";
 import { ref } from "vue";
 
 const values = ref({});
@@ -26,7 +26,6 @@ const onUpdateForm = (form, value = null, nameIndex = undefined) => {
   }
 };
 
-import countryCodes from "@orchid/data/CountryCodes.sample";
 
 const jsonFormCustomer = [
   {

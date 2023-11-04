@@ -1,4 +1,5 @@
 <script setup>
+import { SampleJsonForm } from "../../../packages/@orchidui-vue/src/data/JsonForm.sample";
 import {
   FormBuilder,
   Button,
@@ -6,9 +7,8 @@ import {
   Dropdown,
   DropdownItem,
   Icon,
-} from "@orchid";
+} from "@orchidui/vue";
 
-import { SampleJsonForm } from "@orchid/data/JsonForm.sample";
 
 import { ref } from "vue";
 

@@ -6,7 +6,7 @@ import {
   Dropdown,
   DropdownItem,
   Icon,
-} from "@orchid";
+} from "@/orchidui";
 
 import { ref } from "vue";
 import { SampleJsonForm } from "../../data/JsonForm.sample";

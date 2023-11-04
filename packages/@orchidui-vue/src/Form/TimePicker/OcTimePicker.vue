@@ -1,10 +1,10 @@
 <script setup>
-import { Input, Dropdown } from "@orchid";
+import { Input, Dropdown } from "@/orchidui";
 import { defineAsyncComponent, ref } from "vue";
 import dayjs from "dayjs";
 
 const TimePopup = defineAsyncComponent(() =>
-  import("@orchid/Form/TimePicker/OcTimePopup.vue"),
+  import("@/orchidui/Form/TimePicker/OcTimePopup.vue"),
 );
 const time = ref();
 const popup = ref();

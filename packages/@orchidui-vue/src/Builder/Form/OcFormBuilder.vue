@@ -13,7 +13,7 @@ import {
   RadioGroup,
   RangeInput,
   Checkbox,
-} from "@orchid";
+} from "@/orchidui";
 
 const props = defineProps({
   id: {
@@ -28,6 +28,8 @@ const props = defineProps({
   },
   values: {
     type: Object,
+    required: true,
+
   },
 });
 

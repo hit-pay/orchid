@@ -1,5 +1,5 @@
 <script setup>
-import { Icon } from "@orchid";
+import { Icon } from "@/orchidui";
 defineProps({
   label: String,
   isSelected: [Boolean, Number],

@@ -1,5 +1,5 @@
 <script setup>
-import { Button, Icon } from "@orchid";
+import { Button, Icon } from "@/orchidui";
 import { computed, ref } from "vue";
 
 const props = defineProps({
