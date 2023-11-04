@@ -1,4 +1,4 @@
-import { Theme, ShareIcon } from "@orchid";
+import { Theme, ShareIcon } from "@/orchidui";
 
 export default {
   component: ShareIcon,
