@@ -9,8 +9,10 @@ const props = defineProps({
     default: "sg",
   },
   errorMessage: String,
-  phoneNumber: String,
-  countryCode: String,
+  modelValue: {
+    type: Array,
+    default: () => [],
+  },
   placeholder: String,
   hint: String,
   label: String,
@@ -18,8 +20,7 @@ const props = defineProps({
   isDisabled: Boolean,
 });
 const emit = defineEmits({
-  "update:phoneNumber": [],
-  "update:countryCode": [],
+  "update:modelValue": [],
 });
 
 const selectedCountryIso = ref(props.initialCountryCode);
@@ -40,23 +41,26 @@ const getCountryObject = (iso) =>
 const getCountryCode = (iso) => getCountryObject(iso)?.code || "";
 
 const onInput = (value) => {
-  emit("update:phoneNumber", value);
+  emit("update:modelValue", [props.modelValue?.[0] || "", value]);
 };
 const changeSelectedCountry = (iso, code) => {
   selectedCountryIso.value = iso.toLowerCase();
-  emit("update:countryCode", code);
+  emit("update:modelValue", [code, props.modelValue?.[1] || ""]);
   isDropdownOpened.value = false;
 };
 
 onMounted(() => {
-  emit("update:countryCode", getCountryCode(props.initialCountryCode));
+  emit("update:modelValue", [
+    getCountryCode(props.initialCountryCode),
+    props.modelValue?.[1] || "",
+  ]);
 });
 </script>
 
 <template>
   <Input
     :error-message="errorMessage"
-    :model-value="phoneNumber"
+    :model-value="modelValue?.[1] || ''"
     :placeholder="placeholder"
     :label="label"
     :is-inline-label="isInlineLabel"
