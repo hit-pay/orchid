@@ -26,16 +26,15 @@ export const Default = {
   render: (args) => ({
     components: { Theme, PhoneInput },
     setup() {
-      const phone = ref("");
-      const phoneCode = ref("");
-      return { phone, phoneCode, args, countryCodes };
+      const modelValue = ref();
+      return { modelValue, args, countryCodes };
     },
     template: `
           <Theme>
             <div class="w-full h-[400px]">
+              <div class="mb-3"> Model Value: {{ modelValue }}</div>
               <PhoneInput
-                  v-model:country-code="phoneCode"
-                  v-model:phone-number="phone"
+                  v-model="modelValue"
                   :country-codes="countryCodes"
                   :key="args.initialCountryCode"
                   :valid-regex="args.validRegex"
