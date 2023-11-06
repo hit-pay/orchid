@@ -120,7 +120,7 @@ export const Default = {
             onClick: () => console.log("activate/disactivate clicked"),
           },
         ],
-      }
+      },
     },
     additionalContentVariant: "default",
     boxes: [],

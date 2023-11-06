@@ -156,10 +156,7 @@ const changeActiveSidebar = (name) => {
             :left-icon="state.darkMode ? 'sun' : 'moon'"
             @click="toggleDarkMode"
           />
-          <a
-            href="/storybook/"
-            class="text-oc-primary"
-          >
+          <a href="/storybook/" class="text-oc-primary">
             <Icon name="storybook" />
           </a>
           <a href="https://github.com/hit-pay/orchid" target="_blank">

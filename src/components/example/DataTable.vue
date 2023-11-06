@@ -1,5 +1,8 @@
 <script setup>
-import { DataTableOptions, Filter } from "../../../packages/@orchidui-vue/src/data/DataTableOptions.sample";
+import {
+  DataTableOptions,
+  Filter,
+} from "../../../packages/@orchidui-vue/src/data/DataTableOptions.sample";
 
 import {
   DataTable,

@@ -9,9 +9,7 @@ const props = defineProps({
 watch(
   () => props.colorMode,
   () => {
-    if (
-      props.colorMode === "dark"
-    ) {
+    if (props.colorMode === "dark") {
       document.querySelector("body").setAttribute("class", "dark");
     } else {
       document.querySelector("body").setAttribute("class", "light");
@@ -21,10 +19,8 @@ watch(
 );
 </script>
 
-
 <template>
   <main class="orchid-ui bg-oc-bg-light text-oc-text-500">
     <slot />
   </main>
 </template>
-
