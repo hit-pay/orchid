@@ -224,7 +224,14 @@ const SampleJsonForm = [
     },
   },
   {
-    name: "custom_range_field_name",
+    name: [
+      {
+        key: "range_input_from_1",
+      },
+      {
+        key: "range_input_to_1",
+      },
+    ],
     type: "RangeInput",
     props: {
       label: "Example Label",

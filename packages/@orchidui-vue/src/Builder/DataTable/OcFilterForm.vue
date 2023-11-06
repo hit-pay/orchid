@@ -21,9 +21,11 @@ const valuesData = ref({});
 const errorsData = ref({});
 const isDropdownOpened = ref(false);
 
-const onUpdateForm = (form, value = null, nameIndex = undefined) => {
-  if (nameIndex !== undefined) {
-    valuesData.value[form.name[nameIndex].key] = value;
+const onUpdateForm = (form, value = null) => {
+  if (typeof form.name === "object") {
+    form.name.forEach((formName, index) => {
+      valuesData.value[formName.key] = value[index];
+    });
   } else {
     valuesData.value[form.name] = value;
   }

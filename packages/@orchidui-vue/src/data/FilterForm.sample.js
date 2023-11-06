@@ -77,7 +77,14 @@ const SampleFilterForm = [
     },
   },
   {
-    name: "custom_range_field_name",
+    name: [
+      {
+        key: "range_input_from_2",
+      },
+      {
+        key: "range_input_to_2",
+      },
+    ],
     type: "RangeInput",
     props: {
       label: "Example Label",

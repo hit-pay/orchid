@@ -18,9 +18,8 @@ export default {
 export const Default = {
   args: {
     values: {
-      card_input: "",
-      custom_form_input: "",
-      custom_range_field_name: [0, 10],
+      range_input_from_1: 1,
+      range_input_to_1: 100,
     },
     errors: {
       card_input: "",
@@ -37,13 +36,11 @@ export const Default = {
       Icon,
     },
     setup() {
-
       const values = ref(args.values);
       const errors = ref(args.errors);
 
       const onUpdateForm = (form, value = null) => {
-        values.value[form.name] = value;
-        errors.value[form.name] = "sample error message " + form.name;
+        console.log(form, value);
       };
 
       const isOpenedDropdown = ref(false);

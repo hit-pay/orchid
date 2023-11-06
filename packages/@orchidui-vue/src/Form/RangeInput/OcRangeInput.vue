@@ -41,6 +41,13 @@ onMounted(async () => {
   localMaxValue.value = props.modelValue[1];
   slider.value.updateSlider();
 });
+
+const updateRangeSlider = ($event) => {
+  localMinValue.value = $event[0];
+  localMaxValue.value = $event[1];
+  emit("update:modelValue", $event);
+  console.log($event);
+};
 </script>
 
 <template>
@@ -73,12 +80,8 @@ onMounted(async () => {
         :max-limit="maxLimit"
         :min-limit="minLimit"
         :min-gap="minGap"
-        :model-value="modelValue"
-        @update:model-value="
-          $emit('update:modelValue', $event);
-          localMinValue = $event[0];
-          localMaxValue = $event[1];
-        "
+        :model-value="[localMinValue, localMaxValue]"
+        @update:model-value="updateRangeSlider"
       />
     </div>
   </div>

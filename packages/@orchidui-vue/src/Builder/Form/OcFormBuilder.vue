@@ -15,7 +15,7 @@ import {
   Checkbox,
 } from "@/orchidui";
 
-defineProps({
+const props = defineProps({
   id: {
     type: String,
     required: true,
@@ -29,7 +29,6 @@ defineProps({
   values: {
     type: Object,
     required: true,
-
   },
 });
 
@@ -52,7 +51,7 @@ const FormTypes = {
   DatePicker: DatePicker,
   Checkbox: Checkbox,
   RangeInput: RangeInput,
-  PhoneInput: PhoneInput
+  PhoneInput: PhoneInput,
 };
 
 const getComponentByType = (type) => {
@@ -60,6 +59,30 @@ const getComponentByType = (type) => {
     return FormTypes[type];
   } else {
     return null;
+  }
+};
+
+const { values, errors } = props;
+const modelValues = (name) => {
+  if (typeof name === "object") {
+    let modelValueData = [];
+    name.forEach((formName) => {
+      modelValueData.push(values[formName.key]);
+    });
+    return modelValueData;
+  } else {
+    return values[name];
+  }
+};
+const errorValues = (name) => {
+  if (typeof name === "object") {
+    let errorMessage = [];
+    name.forEach((formName) => {
+      errorMessage.push(errors[formName.key]);
+    });
+    return errorMessage.join(",");
+  } else {
+    return errors[name];
   }
 };
 </script>
@@ -71,8 +94,8 @@ const getComponentByType = (type) => {
         v-if="getComponentByType(form.type)"
         :class="form.className"
         v-bind="form.props"
-        :model-value="values[form.name]"
-        :error-message="errors[form.name]"
+        :model-value="modelValues(form.name)"
+        :error-message="errorValues(form.name)"
         @update:model-value="onUpdate(form, $event)"
       />
       <slot

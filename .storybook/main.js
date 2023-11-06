@@ -31,6 +31,6 @@ const config = {
     return mergeConfig(baseConfig, {
       base: basePath,
     });
-  }
+  },
 };
 export default config;

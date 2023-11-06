@@ -8,37 +8,12 @@ import {
   DropdownItem,
   Icon,
 } from "@orchidui/vue";
-
-
 import { ref } from "vue";
-
-const values = ref({
-  card_input: "123123123",
-});
+const values = ref();
 const errors = ref({});
 const isDropdownOpened = ref(false);
-const onUpdateForm = (form, value = null, nameIndex = undefined) => {
-  // validate value
-  // key / form fields
-  // if key null validate all form
-  // check if valid
-  if (nameIndex !== undefined) {
-    values.value[form.name[nameIndex].key] = value;
-    if (form.type === "PhoneInput") {
-      if (nameIndex === 1) {
-        errors.value[form.name[nameIndex].key] = !new RegExp(
-          "^[+]?[(]?[0-9]{3}[)]?[-s.]?[0-9]{3}[-s.]?[0-9]{4,6}$",
-        ).test(value)
-          ? "Phone Number Invalid"
-          : "";
-      }
-    } else {
-      errors.value[form.name[nameIndex].key] = "invalid input array ";
-    }
-  } else {
-    values.value[form.name] = value;
-    errors.value[form.name] = "invalid input " + form.name;
-  }
+const onUpdateForm = (form, value = null) => {
+  console.log(form, value);
 };
 </script>
 <template>
@@ -46,10 +21,6 @@ const onUpdateForm = (form, value = null, nameIndex = undefined) => {
     <h2>Form Builder</h2>
     <p>Create form more simple</p>
     <div>
-      <div class="grid gap-5 mb-5 text-center m-8">
-        <p>Values : {{ values }}</p>
-        <p>Errors : {{ errors }}</p>
-      </div>
       <FormBuilder
         id="example-form-builder"
         class="grid md:grid-cols-2 gap-5 max-w-[800px] mx-auto"

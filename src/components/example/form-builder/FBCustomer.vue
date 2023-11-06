@@ -6,26 +6,9 @@ import { ref } from "vue";
 const values = ref({});
 const errors = ref({});
 
-const onUpdateForm = (form, value = null, nameIndex = undefined) => {
-  // use composables validator
-  if (nameIndex !== undefined) {
-    values.value[form.name[nameIndex].key] = value;
-    if (form.type === "PhoneInput") {
-      if (nameIndex === 1) {
-        errors.value[form.name[nameIndex].key] = !new RegExp(
-          "^[+]?[(]?[0-9]{3}[)]?[-s.]?[0-9]{3}[-s.]?[0-9]{4,6}$",
-        ).test(value)
-          ? "Phone Number Invalid"
-          : "";
-      }
-    } else {
-      errors.value[form.name[nameIndex].key] = "invalid input array ";
-    }
-  } else {
-    values.value[form.name] = value;
-  }
+const onUpdateForm = (form, value = null) => {
+  console.log(value, value);
 };
-
 
 const jsonFormCustomer = [
   {
