@@ -157,7 +157,7 @@ const changeActiveSidebar = (name) => {
             @click="toggleDarkMode"
           />
           <a
-            href="https://storybook-orchidui.vercel.app/"
+            href="/storybook/"
             class="text-oc-primary"
           >
             <Icon name="storybook" />
