@@ -37,43 +37,15 @@ export const Default = {
       Icon,
     },
     setup() {
-      // get all field name
-      // get field rule
-      // validate all
-      // get all field values
-
-      // Rule and validator
-      // 1. required
-      // 2. required-if:field-name=condition
-      // 3. show-if:field-name=condition
-      // 4. get:object-key
 
       const values = ref(args.values);
       const errors = ref(args.errors);
 
-      const onUpdateForm = (form, value = null, nameIndex = undefined) => {
-        // validate value
-        // key / form fields
-        // if key null validate all form
-        // check if valid
-        if (nameIndex !== undefined) {
-          values.value[form.name[nameIndex].key] = value;
-          if (form.type === "PhoneInput") {
-            if (nameIndex === 1) {
-              errors.value[form.name[nameIndex].key] = !new RegExp(
-                "^[+]?[(]?[0-9]{3}[)]?[-s.]?[0-9]{3}[-s.]?[0-9]{4,6}$",
-              ).test(value)
-                ? "Phone Number Invalid"
-                : "";
-            }
-          } else {
-            errors.value[form.name[nameIndex].key] = "invalid input array ";
-          }
-        } else {
-          values.value[form.name] = value;
-          errors.value[form.name] = "invalid input " + form.name;
-        }
+      const onUpdateForm = (form, value = null) => {
+        values.value[form.name] = value;
+        errors.value[form.name] = "sample error message " + form.name;
       };
+
       const isOpenedDropdown = ref(false);
       return { values, errors, onUpdateForm, isOpenedDropdown, SampleJsonForm };
     },
