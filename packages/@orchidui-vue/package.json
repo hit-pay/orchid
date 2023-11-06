@@ -35,6 +35,7 @@
   ],
   "dependencies": {
     "@popperjs/core": "^2.11.8",
-    "flag-icons": "^6.11.1"
+    "flag-icons": "^6.11.1",
+    "v-calendar": "^3.1.2"
   }
 }
