@@ -9,7 +9,10 @@ import {
   Icon,
 } from "@orchidui/vue";
 import { ref } from "vue";
-const values = ref();
+
+const values = ref({
+  range_input: [0, 100],
+});
 const errors = ref({});
 const isDropdownOpened = ref(false);
 const onUpdateForm = (form, value = null) => {

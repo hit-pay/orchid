@@ -18,8 +18,7 @@ export default {
 export const Default = {
   args: {
     values: {
-      range_input_from_1: 1,
-      range_input_to_1: 100,
+      range_input: [0, 100],
     },
     errors: {
       card_input: "",

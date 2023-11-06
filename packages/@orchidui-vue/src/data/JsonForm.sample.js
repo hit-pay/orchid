@@ -224,14 +224,7 @@ const SampleJsonForm = [
     },
   },
   {
-    name: [
-      {
-        key: "range_input_from_1",
-      },
-      {
-        key: "range_input_to_1",
-      },
-    ],
+    name: "range_input",
     type: "RangeInput",
     props: {
       label: "Example Label",
