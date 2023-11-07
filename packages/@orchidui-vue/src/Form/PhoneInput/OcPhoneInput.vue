@@ -1,6 +1,6 @@
 <script setup>
 import { Dropdown, Input, Icon } from "@/orchidui";
-import { computed, onMounted, ref } from "vue";
+import { computed, ref } from "vue";
 
 const props = defineProps({
   countryCodes: Array,
@@ -49,12 +49,6 @@ const changeSelectedCountry = (iso, code) => {
   isDropdownOpened.value = false;
 };
 
-onMounted(() => {
-  emit("update:modelValue", [
-    getCountryCode(props.initialCountryCode),
-    props.modelValue?.[1] || "",
-  ]);
-});
 </script>
 
 <template>
