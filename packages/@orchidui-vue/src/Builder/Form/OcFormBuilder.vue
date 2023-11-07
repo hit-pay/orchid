@@ -78,7 +78,9 @@ const errorValues = (name) => {
   if (typeof name === "object") {
     let errorMessage = [];
     name.forEach((formName) => {
-      errorMessage.push(errors[formName.key]);
+      if(errors[formName.key]){
+        errorMessage.push(errors[formName.key]);
+      }
     });
     return errorMessage.join(",");
   } else {
