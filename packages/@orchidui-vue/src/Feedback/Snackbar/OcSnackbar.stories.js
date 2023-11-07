@@ -1,5 +1,5 @@
 import { Theme, Snackbar } from "@/orchidui";
-import {ref} from "vue";
+import { ref } from "vue";
 export default {
   component: Snackbar,
   tags: ["autodocs"],
@@ -24,7 +24,7 @@ export const Default = {
     icon: "filled-check",
     color: "default",
     content: "Changes have been successfully saved",
-    isCloseIcon: true
+    isCloseIcon: true,
   },
   render: (args) => ({
     components: { Snackbar, Theme },

@@ -46,12 +46,12 @@ const colorClasses = Object.freeze({
     <slot>
       <div class="w-full flex items-center justify-between">
         <span class="text-oc-text text-sm">
-        {{ content }}
+          {{ content }}
         </span>
         <div
-            v-if="isCloseIcon"
-            class="rounded cursor-pointer text-oc-gray-500 hover:bg-transparent hover:text-oc-text"
-            @click="$emit('update:modelValue', false)"
+          v-if="isCloseIcon"
+          class="rounded cursor-pointer text-oc-gray-500 hover:bg-transparent hover:text-oc-text"
+          @click="$emit('update:modelValue', false)"
         >
           <Icon name="x" width="20" height="20" />
         </div>

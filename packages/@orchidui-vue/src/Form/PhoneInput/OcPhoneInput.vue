@@ -48,7 +48,6 @@ const changeSelectedCountry = (iso, code) => {
   emit("update:modelValue", [code, props.modelValue?.[1] || ""]);
   isDropdownOpened.value = false;
 };
-
 </script>
 
 <template>
