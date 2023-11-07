@@ -8,6 +8,7 @@ const props = defineProps({
     required: true,
   },
   modelValue: Array,
+  isLoading: Boolean,
 });
 
 const emit = defineEmits({
@@ -92,6 +93,7 @@ const selectAllRows = () => {
       <TableCell
         v-for="(header, j) in headers"
         :key="`${j}-${i}`"
+        :is-loading="isLoading"
         :is-last="fields.length === i + 1"
         :variant="header.variant"
         :is-copy="header.isCopy"

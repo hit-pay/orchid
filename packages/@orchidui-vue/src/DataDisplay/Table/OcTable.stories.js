@@ -2,6 +2,7 @@ import { Theme, Table, Chip, Icon, Toggle, TableCellContent } from "@/orchidui";
 
 import { ref } from "vue";
 import { TableOptions } from "../../data/TableOptions.sample";
+
 export default {
   component: Table,
   tags: ["autodocs"],
@@ -10,6 +11,7 @@ export default {
 export const Default = {
   args: {
     options: TableOptions,
+    isLoading: true,
   },
   render: (args) => ({
     components: {
@@ -27,7 +29,7 @@ export const Default = {
     template: `
           <Theme>
             {{ selectedRows }}
-            <Table v-model="selectedRows" :options="args.options">
+            <Table v-model="selectedRows" :options="args.options" :is-loading="args.isLoading">
               <template #col1="{ item }">
                 <TableCellContent important :title="item.title" :description="item.descriptions"/>
               </template>

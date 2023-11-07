@@ -19,6 +19,7 @@ defineProps({
   isCopy: Boolean,
   isSelected: Boolean,
   data: String,
+  isLoading: Boolean,
 });
 defineEmits({
   selected: [],
@@ -48,7 +49,20 @@ const copyToClipboard = async (text) => {
     :class="[variantClass[variant] || 'px-4', isLast ? '' : '']"
     class="py-3 bg-oc-bg-light md:min-h-[58px] md:group-hover/row:bg-oc-gray-50 items-center"
   >
-    <div class="flex" :class="isCopy ? 'justify-between' : 'justify-start'">
+    <div
+      v-if="isLoading"
+      class="rounded-full bg-gray-100 w-full overflow-hidden h-6"
+    >
+      <div
+        class="slide relative rounded-full h-6 w-[40px] bg-[linear-gradient(-90deg,_#E5E6EA_0%,_rgba(229,_230,_234,_0)_100%)]"
+      />
+    </div>
+
+    <div
+      v-else
+      class="flex"
+      :class="isCopy ? 'justify-between' : 'justify-start'"
+    >
       <slot>
         <!--  CHECKBOX    -->
         <Checkbox
@@ -119,3 +133,19 @@ const copyToClipboard = async (text) => {
     </div>
   </div>
 </template>
+<style lang="scss">
+.slide {
+  animation: slide 1.5s infinite;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(-100%);
+    left: 0;
+  }
+  100% {
+    transform: translateX(100%);
+    left: 100%;
+  }
+}
+</style>
