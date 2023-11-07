@@ -12,6 +12,8 @@ dist
 dist-ssr
 *.local
 
+# generated types
+.astro/
 
 # Editor directories and files
 .vscode/*

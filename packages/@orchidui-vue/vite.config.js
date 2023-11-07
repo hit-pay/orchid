@@ -37,7 +37,7 @@ export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: {
-      "@orchid": resolve(__dirname, "./src/"),
+      "@/orchidui": resolve(__dirname, "./src/"),
     },
   },
   build: {
@@ -47,7 +47,7 @@ export default defineConfig({
       formats: ["es"],
     },
     rollupOptions: {
-      external: ["vue", "@popperjs/core", "dayjs"],
+      external: ["vue", "@popperjs/core", "dayjs","v-calendar"],
     },
   },
 });

@@ -1,4 +1,4 @@
-import { Theme, CustomerCard } from "@orchid";
+import { Theme, CustomerCard } from "@/orchidui";
 
 export default {
   component: CustomerCard,

@@ -1,5 +1,5 @@
 <script setup>
-import { Avatar, ListDetail } from "@orchid";
+import { Avatar, ListDetail } from "@/orchidui";
 
 defineProps({
   variant: {

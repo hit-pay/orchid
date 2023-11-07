@@ -1,4 +1,4 @@
-import { Theme, EmptyPage } from "@orchid";
+import { Theme, EmptyPage } from "@/orchidui";
 
 export default {
   component: EmptyPage,

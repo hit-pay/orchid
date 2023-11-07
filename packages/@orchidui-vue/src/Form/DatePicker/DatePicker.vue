@@ -1,18 +1,12 @@
 <script setup>
-import { Dropdown, Calendar, Input } from "@orchid";
+import { Dropdown, Calendar, Input } from "@/orchidui";
 import { computed, ref } from "vue";
 import dayjs from "dayjs";
 
 const emit = defineEmits(["update:modelValue", "update:from", "update:to"]);
 const props = defineProps({
-  from: {
-    type: [String, Date, Number],
-  },
-  to: {
-    type: [String, Date, Number],
-  },
   modelValue: {
-    type: [String, Date, Number],
+    type: [String, Date, Number, Array],
   },
   type: {
     type: String,

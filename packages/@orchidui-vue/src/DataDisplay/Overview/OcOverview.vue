@@ -1,5 +1,5 @@
 <script setup>
-import { OverviewItem } from "@orchid";
+import { OverviewItem } from "@/orchidui";
 
 defineProps({
   title: String,

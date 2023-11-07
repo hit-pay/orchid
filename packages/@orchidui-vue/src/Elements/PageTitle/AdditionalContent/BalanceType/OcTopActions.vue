@@ -1,5 +1,5 @@
 <script setup>
-import { Button } from "@orchid";
+import { Button } from "@/orchidui";
 import PaymentMethods from "./OcPaymentMethods.vue";
 </script>
 

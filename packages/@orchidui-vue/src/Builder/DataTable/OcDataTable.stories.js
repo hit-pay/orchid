@@ -7,7 +7,7 @@ import {
   Toggle,
   TableCellContent,
   Button,
-} from "@orchid";
+} from "@/orchidui";
 
 export default {
   component: DataTable,

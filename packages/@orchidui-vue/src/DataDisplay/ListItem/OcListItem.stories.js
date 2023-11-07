@@ -1,4 +1,4 @@
-import { Theme, ListItem } from "@orchid";
+import { Theme, ListItem } from "@/orchidui";
 
 export default {
   component: ListItem,

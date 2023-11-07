@@ -1,5 +1,5 @@
 <script setup>
-import { Button, Dropdown, DropdownItem, Tooltip } from "@orchid";
+import { Button, Dropdown, DropdownItem, Tooltip } from "@/orchidui";
 import { ref } from "vue";
 
 const emit = defineEmits(["click:primaryButton", "click:secondaryButton"]);

@@ -1,4 +1,4 @@
-import { Theme, TimePicker } from "@orchid";
+import { Theme, TimePicker } from "@/orchidui";
 
 export default {
   component: TimePicker,

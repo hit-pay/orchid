@@ -7,7 +7,7 @@ import {
   FilterSearch,
   FilterSearchFor,
   FilterForm,
-} from "@orchid";
+} from "@/orchidui";
 import { ref, computed } from "vue";
 
 const props = defineProps({

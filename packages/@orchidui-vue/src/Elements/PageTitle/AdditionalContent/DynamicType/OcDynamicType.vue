@@ -1,5 +1,5 @@
 <script setup>
-import { CustomerCard, OverviewItem } from "@orchid";
+import { CustomerCard, OverviewItem } from "@/orchidui";
 import BoxDetails from "./OcBoxDetails.vue";
 
 defineProps({

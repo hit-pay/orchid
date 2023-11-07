@@ -1,5 +1,5 @@
 <script setup>
-import { Input, Slider } from "@orchid";
+import { Input, Slider } from "@/orchidui";
 import { nextTick, onMounted, ref } from "vue";
 
 const props = defineProps({
@@ -24,7 +24,6 @@ const props = defineProps({
 const emit = defineEmits({
   "update:modelValue": [],
 });
-
 const localMinValue = ref();
 const localMaxValue = ref();
 const slider = ref();
@@ -37,10 +36,17 @@ const updateRange = async (value) => {
 };
 onMounted(async () => {
   await nextTick();
-  localMinValue.value = props.modelValue[0];
-  localMaxValue.value = props.modelValue[1];
+  localMinValue.value = props.modelValue?.[0] || 0;
+  localMaxValue.value = props.modelValue?.[1] || 100;
   slider.value.updateSlider();
 });
+
+const updateRangeSlider = ($event) => {
+  localMinValue.value = $event?.[0];
+  localMaxValue.value = $event?.[1];
+  emit("update:modelValue", $event);
+  console.log($event);
+};
 </script>
 
 <template>
@@ -53,7 +59,7 @@ onMounted(async () => {
         is-inline-label
         placeholder=""
         @update:model-value="
-          updateRange([Number(localMinValue), modelValue[1]])
+          updateRange([Number(localMinValue), modelValue?.[1]])
         "
       />
       <Input
@@ -62,7 +68,7 @@ onMounted(async () => {
         is-inline-label
         placeholder=""
         @update:model-value="
-          updateRange([modelValue[0], Number(localMaxValue)])
+          updateRange([modelValue?.[0], Number(localMaxValue)])
         "
       />
     </div>
@@ -73,12 +79,8 @@ onMounted(async () => {
         :max-limit="maxLimit"
         :min-limit="minLimit"
         :min-gap="minGap"
-        :model-value="modelValue"
-        @update:model-value="
-          $emit('update:modelValue', $event);
-          localMinValue = $event[0];
-          localMaxValue = $event[1];
-        "
+        :model-value="[localMinValue, localMaxValue]"
+        @update:model-value="updateRangeSlider"
       />
     </div>
   </div>

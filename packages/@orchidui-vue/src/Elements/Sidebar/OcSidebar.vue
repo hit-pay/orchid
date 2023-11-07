@@ -1,6 +1,6 @@
 <script setup>
 import { reactive, onMounted, computed } from "vue";
-import { Icon, SidebarSubmenu, Tooltip } from "@orchid";
+import { Icon, SidebarSubmenu, Tooltip } from "@/orchidui";
 
 const emit = defineEmits(["changeExpanded"]);
 

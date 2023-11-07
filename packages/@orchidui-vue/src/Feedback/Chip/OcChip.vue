@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from "vue";
-import { Icon } from "@orchid";
+import { Icon } from "@/orchidui";
 const props = defineProps({
   variant: {
     type: String,

@@ -1,5 +1,5 @@
 import ComplexCalendar from "./OcComplexCalendar.vue";
-import { Theme } from "@orchid";
+import { Theme } from "@/orchidui";
 import dayjs from "dayjs";
 
 export default {

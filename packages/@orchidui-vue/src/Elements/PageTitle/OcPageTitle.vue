@@ -1,6 +1,6 @@
 <script setup>
 import Title from "./OcTitle.vue";
-import { PageTitleRight, AdditionalContent } from "@orchid";
+import { PageTitleRight, AdditionalContent } from "@/orchidui";
 
 defineProps({
   title: { type: String, required: true },

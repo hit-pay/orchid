@@ -1,5 +1,5 @@
 <script setup>
-import { Icon, Tooltip, Dropdown, DropdownItem } from "@orchid";
+import { Icon, Tooltip, Dropdown, DropdownItem } from "@/orchidui";
 import { computed, ref } from "vue";
 
 const props = defineProps({
@@ -11,7 +11,9 @@ const emit = defineEmits({
 });
 const isDropdownOpened = ref(false);
 const isCopied = ref(false);
-const hasDropdownOptions = computed(() => props.primaryActions?.dropdownOptions);
+const hasDropdownOptions = computed(
+  () => props.primaryActions?.dropdownOptions,
+);
 const copyToClipBoard = () => {
   isCopied.value = true;
   emit("copy");
@@ -50,7 +52,11 @@ const copyToClipBoard = () => {
       :class="isDropdownOpened ? 'border-oc-gray-200' : 'border-transparent'"
     />
 
-    <Dropdown v-if="hasDropdownOptions" v-model="isDropdownOpened" :distance="6">
+    <Dropdown
+      v-if="hasDropdownOptions"
+      v-model="isDropdownOpened"
+      :distance="6"
+    >
       <Icon
         class="p-2 cursor-pointer rounded-sm hover:bg-oc-accent-1-50-tr"
         name="dots-vertical"
@@ -60,27 +66,24 @@ const copyToClipBoard = () => {
         <div class="flex flex-col">
           <div class="p-2 border-b border-gray-200">
             <template
-                v-for="(item, i) in primaryActions.dropdownOptions?.top"
-                :key="i"
+              v-for="(item, i) in primaryActions.dropdownOptions?.top"
+              :key="i"
             >
               <DropdownItem
-                  v-if="item?.isCopyButton"
-                  :icon="isCopied ? 'check' : 'copy'"
-                  :text="isCopied ? 'Link copied!' : 'Copy link'"
-                  :icon-classes="isCopied ? '!text-oc-success' : ''"
-                  @click="copyToClipBoard"
+                v-if="item?.isCopyButton"
+                :icon="isCopied ? 'check' : 'copy'"
+                :text="isCopied ? 'Link copied!' : 'Copy link'"
+                :icon-classes="isCopied ? '!text-oc-success' : ''"
+                @click="copyToClipBoard"
               />
               <DropdownItem v-else v-bind="item" />
             </template>
           </div>
-          <div
-              v-if="primaryActions.dropdownOptions?.bottom"
-              class="p-2"
-          >
+          <div v-if="primaryActions.dropdownOptions?.bottom" class="p-2">
             <DropdownItem
-                v-for="(item, i) in primaryActions.dropdownOptions?.bottom"
-                :key="i"
-                v-bind="item"
+              v-for="(item, i) in primaryActions.dropdownOptions?.bottom"
+              :key="i"
+              v-bind="item"
             />
           </div>
         </div>

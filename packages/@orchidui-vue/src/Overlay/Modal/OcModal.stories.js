@@ -1,4 +1,4 @@
-import { Theme, Modal, Button } from "@orchid";
+import { Theme, Modal, Button } from "@/orchidui";
 import { ref } from "vue";
 
 export default {

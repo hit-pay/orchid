@@ -1,5 +1,5 @@
 <script setup>
-import { Icon } from "@orchid";
+import { Icon } from "@/orchidui";
 
 const props = defineProps({
   modelValue: Boolean,

@@ -7,8 +7,7 @@ export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: {
-      "@playground": resolve(__dirname, "./src/"),
-      "@orchid": resolve(__dirname, "./packages/@orchidui-vue/src/"),
+      "@/orchidui": resolve(__dirname, "./packages/@orchidui-vue/src/"),
     },
   },
 });

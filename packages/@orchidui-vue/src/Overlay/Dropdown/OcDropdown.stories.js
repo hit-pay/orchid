@@ -1,4 +1,4 @@
-import { Theme, Dropdown, DropdownItem } from "@orchid";
+import { Theme, Dropdown, DropdownItem } from "@/orchidui";
 import { ref } from "vue";
 
 export default {

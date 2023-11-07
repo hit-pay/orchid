@@ -1,4 +1,4 @@
-import { Theme, CheckboxesGroup } from "@orchid";
+import { Theme, CheckboxesGroup } from "@/orchidui";
 import { ref, watch } from "vue";
 
 export default {

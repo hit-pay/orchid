@@ -1,5 +1,5 @@
 <script setup>
-import { BaseInput } from "@orchid";
+import { BaseInput } from "@/orchidui";
 import { ref } from "vue";
 
 defineProps({

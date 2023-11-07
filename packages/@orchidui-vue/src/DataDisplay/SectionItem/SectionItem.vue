@@ -1,5 +1,5 @@
 <script setup>
-import { Input, Toggle, Button, Icon, Tooltip } from "@orchid";
+import { Input, Toggle, Button, Icon, Tooltip } from "@/orchidui";
 
 defineProps({
   title: String,
