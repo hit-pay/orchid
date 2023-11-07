@@ -20,7 +20,7 @@ export const Default = {
   args: {
     filter: Filter,
     options: DataTableOptions,
-    loading: false,
+    isLoading: false,
   },
   render: (args) => ({
     components: {
@@ -48,7 +48,7 @@ export const Default = {
               </ul>
             </div>
             <DataTable id="sample-data-table" :filter="args.filter" :options="args.options"
-                       @update:filter="updateFilterData" :loading="args.loading">
+                       @update:filter="updateFilterData" :is-loading="args.isLoading">
               <template #before>
                 Slot Before
               </template>
