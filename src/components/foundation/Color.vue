@@ -1,25 +1,8 @@
-<script setup>
-import { Button } from "@orchidui/vue";
-defineEmits(["toggleDarkMode", "changePrimaryColor"]);
-</script>
 <template>
-  <section
-    class="w-full md:p-8 flex mb-8 justify-between items-center mt-8 rounded md:mt-0 bg-oc-bg-dark"
-  >
-    <div class="flex items-center flex-wrap gap-3">
-      <h1 class="w-full mb-3 font-medium">Orchid UI Playground</h1>
-      <Button label="Enable Dark Mode" @click="$emit('toggleDarkMode')" />
-      <Button
-        label="Change Primary Colors"
-        @click="$emit('changePrimaryColor')"
-      />
-    </div>
-  </section>
-
   <section class="w-full">
-    <div class="grid gap-3 md:p-8 rounded bg-oc-bg-dark h-[60vh] overflow-auto">
+    <div class="grid gap-3 md:p-8 rounded bg-oc-bg-dark">
       <h2>Color Primary</h2>
-      <div class="w-full grid grid-cols-3 md:grid-cols-5 gap-3">
+      <div class="w-full grid grid-cols-3 md:grid-cols-8 gap-3">
         <div class="h-[50px] bg-oc-primary-50-tr rounded border"></div>
         <div class="h-[50px] bg-oc-primary-50 rounded border"></div>
         <div class="h-[50px] bg-oc-primary-100 rounded border"></div>
@@ -30,13 +13,13 @@ defineEmits(["toggleDarkMode", "changePrimaryColor"]);
       </div>
 
       <h2>Color Background</h2>
-      <div class="w-full grid md:grid-cols-2 gap-3">
+      <div class="w-full grid md:grid-cols-8 gap-3">
         <div class="h-[50px] bg-oc-bg-light rounded border"></div>
         <div class="h-[50px] bg-oc-bg-dark rounded border"></div>
       </div>
 
       <h2>Color Text</h2>
-      <div class="w-full grid grid-cols-3 md:grid-cols-5 gap-3">
+      <div class="w-full grid grid-cols-3 md:grid-cols-8 gap-3">
         <div class="h-[50px] bg-oc-text-100 rounded border"></div>
         <div class="h-[50px] bg-oc-text-200 rounded border"></div>
         <div class="h-[50px] bg-oc-text-300 rounded border"></div>
@@ -45,7 +28,7 @@ defineEmits(["toggleDarkMode", "changePrimaryColor"]);
       </div>
 
       <h2>Color Gray</h2>
-      <div class="w-full grid grid-cols-3 md:grid-cols-5 gap-3">
+      <div class="w-full grid grid-cols-3 md:grid-cols-8 gap-3">
         <div class="h-[50px] bg-oc-gray-10 rounded border"></div>
         <div class="h-[50px] bg-oc-gray-50 rounded border"></div>
         <div class="h-[50px] bg-oc-gray-100 rounded border"></div>
@@ -60,7 +43,7 @@ defineEmits(["toggleDarkMode", "changePrimaryColor"]);
       </div>
 
       <h2>Color Accent 1 (Dark Blue)</h2>
-      <div class="w-full grid grid-cols-3 md:grid-cols-5 gap-3">
+      <div class="w-full grid grid-cols-3 md:grid-cols-8 gap-3">
         <div class="h-[50px] bg-oc-accent-1-50-tr rounded border"></div>
         <div class="h-[50px] bg-oc-accent-1-50 rounded border"></div>
         <div class="h-[50px] bg-oc-accent-1-100 rounded border"></div>
@@ -71,7 +54,7 @@ defineEmits(["toggleDarkMode", "changePrimaryColor"]);
         <div class="h-[50px] bg-oc-accent-1-600 rounded border"></div>
       </div>
       <h2>Color Accent 2 (Purple)</h2>
-      <div class="w-full grid grid-cols-3 md:grid-cols-5 gap-3">
+      <div class="w-full grid grid-cols-3 md:grid-cols-8 gap-3">
         <div class="h-[50px] bg-oc-accent-2-50-tr rounded border"></div>
         <div class="h-[50px] bg-oc-accent-2-50 rounded border"></div>
         <div class="h-[50px] bg-oc-accent-2-100 rounded border"></div>
@@ -81,7 +64,7 @@ defineEmits(["toggleDarkMode", "changePrimaryColor"]);
         <div class="h-[50px] bg-oc-accent-2-500 rounded border"></div>
       </div>
       <h2>Color Accent 3 (Red)</h2>
-      <div class="w-full grid grid-cols-3 md:grid-cols-5 gap-3">
+      <div class="w-full grid grid-cols-3 md:grid-cols-8 gap-3">
         <div class="h-[50px] bg-oc-accent-3-50-tr rounded border"></div>
         <div class="h-[50px] bg-oc-accent-3-50 rounded border"></div>
         <div class="h-[50px] bg-oc-accent-3-100 rounded border"></div>
@@ -91,7 +74,7 @@ defineEmits(["toggleDarkMode", "changePrimaryColor"]);
         <div class="h-[50px] bg-oc-accent-3-500 rounded border"></div>
       </div>
       <h2>Color Success</h2>
-      <div class="w-full grid grid-cols-3 md:grid-cols-5 gap-3">
+      <div class="w-full grid grid-cols-3 md:grid-cols-8 gap-3">
         <div class="h-[50px] bg-oc-success-50-tr rounded border"></div>
         <div class="h-[50px] bg-oc-success-50 rounded border"></div>
         <div class="h-[50px] bg-oc-success-100 rounded border"></div>
@@ -101,7 +84,7 @@ defineEmits(["toggleDarkMode", "changePrimaryColor"]);
         <div class="h-[50px] bg-oc-success-500 rounded border"></div>
       </div>
       <h2>Color Warning</h2>
-      <div class="w-full grid grid-cols-3 md:grid-cols-5 gap-3">
+      <div class="w-full grid grid-cols-3 md:grid-cols-8 gap-3">
         <div class="h-[50px] bg-oc-warning-50-tr rounded border"></div>
         <div class="h-[50px] bg-oc-warning-50 rounded border"></div>
         <div class="h-[50px] bg-oc-warning-100 rounded border"></div>
@@ -111,7 +94,7 @@ defineEmits(["toggleDarkMode", "changePrimaryColor"]);
         <div class="h-[50px] bg-oc-warning-500 rounded border"></div>
       </div>
       <h2>Color Error</h2>
-      <div class="w-full grid grid-cols-3 md:grid-cols-5 gap-3">
+      <div class="w-full grid grid-cols-3 md:grid-cols-8 gap-3">
         <div class="h-[50px] bg-oc-error-50-tr rounded border"></div>
         <div class="h-[50px] bg-oc-error-50 rounded border"></div>
         <div class="h-[50px] bg-oc-error-100 rounded border"></div>
