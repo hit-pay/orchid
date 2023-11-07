@@ -215,7 +215,7 @@ const isLandingPage = computed(() => {
           }"
         >
           <div v-if="isLandingPage">
-            <a href="/foundation" class="font-medium">Documentations</a>
+            <a href="/foundation" class="font-medium ml-3">Documentations</a>
           </div>
           <TabToSelect
             v-else

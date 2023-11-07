@@ -3,13 +3,34 @@
     <div class="grid gap-3 md:p-8 rounded bg-oc-bg-dark">
       <h2>Color Primary</h2>
       <div class="w-full grid grid-cols-3 md:grid-cols-8 gap-3">
-        <div class="h-[50px] bg-oc-primary-50-tr rounded border"></div>
-        <div class="h-[50px] bg-oc-primary-50 rounded border"></div>
-        <div class="h-[50px] bg-oc-primary-100 rounded border"></div>
-        <div class="h-[50px] bg-oc-primary-200 rounded border"></div>
-        <div class="h-[50px] bg-oc-primary-300 rounded border"></div>
-        <div class="h-[50px] bg-oc-primary-400 rounded border"></div>
-        <div class="h-[50px] bg-oc-primary-500 rounded border"></div>
+        <div>
+          <div class="h-[50px] bg-oc-primary-50-tr rounded border"></div>
+          oc-primary-50-tr
+        </div>
+        <div>
+          <div class="h-[50px] bg-oc-primary-50 rounded border"></div>
+          oc-primary-50
+        </div>
+        <div>
+          <div class="h-[50px] bg-oc-primary-100 rounded border"></div>
+          primary-100
+        </div>
+        <div>
+          <div class="h-[50px] bg-oc-primary-200 rounded border"></div>
+          primary-200
+        </div>
+        <div>
+          <div class="h-[50px] bg-oc-primary-300 rounded border"></div>
+          primary-300
+        </div>
+        <div>
+          <div class="h-[50px] bg-oc-primary-400 rounded border"></div>
+          primary-400
+        </div>
+        <div>
+          <div class="h-[50px] bg-oc-primary-500 rounded border"></div>
+          primary-500
+        </div>
       </div>
 
       <h2>Color Background</h2>
