@@ -1,6 +1,6 @@
-import { Theme, Shackbar } from "@/orchidui";
+import { Theme, Snackbar } from "@/orchidui";
 export default {
-  component: Shackbar,
+  component: Snackbar,
   tags: ["autodocs"],
 };
 
@@ -24,14 +24,14 @@ export const Default = {
     content: "Changes have been successfully saved",
   },
   render: (args) => ({
-    components: { Shackbar, Theme },
+    components: { Snackbar, Theme },
     setup() {
       return { args };
     },
     template: `
           <Theme colorMode="light">
             <div class="flex flex-col gap-y-4">
-              <Shackbar v-bind="args"/>
+              <Snackbar v-bind="args"/>
             </div>
           </Theme>
         `,
@@ -44,18 +44,18 @@ export const Variants = {
     content: "Changes have been successfully saved",
   },
   render: (args) => ({
-    components: { Shackbar, Theme },
+    components: { Snackbar, Theme },
     setup() {
       return { args };
     },
     template: `
           <Theme colorMode="light">
             <div class="flex flex-col gap-y-4">
-              <Shackbar v-bind="args"/>
-              <Shackbar v-bind="args" color="primary"/>
-              <Shackbar v-bind="args" color="error"/>
-              <Shackbar v-bind="args" color="warning"/>
-              <Shackbar v-bind="args" color="gray"/>
+              <Snackbar v-bind="args"/>
+              <Snackbar v-bind="args" color="primary"/>
+              <Snackbar v-bind="args" color="error"/>
+              <Snackbar v-bind="args" color="warning"/>
+              <Snackbar v-bind="args" color="gray"/>
             </div>
           </Theme>
         `,

@@ -14,7 +14,7 @@ export * from "./Elements/Sidebar/OcSidebar.js";
 export * from "./Elements/EmptyPage/OcEmptyPage.js";
 
 export * from "./Feedback/Chip/OcChip.js";
-export * from "./Feedback/Snackbar/OcShackbar.js";
+export * from "./Feedback/Snackbar/OcSnackbar.js";
 export * from "./Feedback/ShareIcon/OcShareIcon.js";
 
 export * from "./Form";
