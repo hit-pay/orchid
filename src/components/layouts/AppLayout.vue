@@ -91,7 +91,7 @@ if (currentActiveMenu === "case-studies") {
 
 let state = reactive({
   darkMode: localStorage.getItem("dark_mode") ?? false,
-  activeMenu: currentActiveMenu ?? "foundation",
+  activeMenu: currentActiveMenu ? currentActiveMenu : "foundation",
   menus: [
     {
       label: "Foundation",
@@ -167,7 +167,7 @@ const changeActiveMenu = () => {
   location.href = "/" + state.activeMenu;
 };
 const isLandingPage = computed(() => {
-  return props.page === "/";
+  return !props.page;
 });
 </script>
 <template>
