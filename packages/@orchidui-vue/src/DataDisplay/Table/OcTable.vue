@@ -1,5 +1,5 @@
 <script setup>
-import { TableHeader, TableCell } from "@orchid";
+import { TableHeader, TableCell } from "@/orchidui";
 import { ref, computed } from "vue";
 
 const props = defineProps({

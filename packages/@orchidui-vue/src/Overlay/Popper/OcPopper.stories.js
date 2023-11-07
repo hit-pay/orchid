@@ -1,4 +1,4 @@
-import { Theme, Popper } from "@orchid";
+import { Theme, Popper } from "@/orchidui";
 
 export default {
   component: Popper,

@@ -37,7 +37,7 @@ export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: {
-      "@orchid": resolve(__dirname, "./src/"),
+      "@/orchidui": resolve(__dirname, "./src/"),
     },
   },
   build: {

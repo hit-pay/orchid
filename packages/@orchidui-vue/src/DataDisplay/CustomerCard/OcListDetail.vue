@@ -1,5 +1,5 @@
 <script setup>
-import { Icon, Tooltip } from "@orchid";
+import { Icon, Tooltip } from "@/orchidui";
 
 defineProps({
   label: {

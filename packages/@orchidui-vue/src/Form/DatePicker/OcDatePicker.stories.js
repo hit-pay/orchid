@@ -1,4 +1,4 @@
-import { Theme, DatePicker, Calendar } from "@orchid";
+import { Theme, DatePicker, Calendar } from "@/orchidui";
 
 export default {
   components: { Calendar },

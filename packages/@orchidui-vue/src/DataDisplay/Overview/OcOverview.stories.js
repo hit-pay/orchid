@@ -1,4 +1,4 @@
-import { Theme, Overview, OverviewIcon, OverviewItem } from "@orchid";
+import { Theme, Overview, OverviewIcon, OverviewItem } from "@/orchidui";
 
 export default {
   component: OverviewItem,

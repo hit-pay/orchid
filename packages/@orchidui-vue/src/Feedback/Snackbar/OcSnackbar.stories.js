@@ -1,4 +1,4 @@
-import { Theme, Shackbar } from "@orchid";
+import { Theme, Shackbar } from "@/orchidui";
 export default {
   component: Shackbar,
   tags: ["autodocs"],

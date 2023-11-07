@@ -1,5 +1,5 @@
 <script setup>
-import { TableHeader, Chip } from "@orchid";
+import { TableHeader, Chip } from "@/orchidui";
 defineProps({
   queries: Array,
 });

@@ -1,6 +1,6 @@
 <script setup>
-import { Chip, PrimaryActions } from "@orchid";
-import Title from "@orchid/Elements/PageTitle/OcTitle.vue";
+import { Chip, PrimaryActions } from "@/orchidui";
+import Title from "@/orchidui/Elements/PageTitle/OcTitle.vue";
 import BalanceOverview from "./BalanceType/OcBalanceOverview.vue";
 import DynamicType from "./DynamicType/OcDynamicType.vue";
 

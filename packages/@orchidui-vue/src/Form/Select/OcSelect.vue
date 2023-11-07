@@ -7,7 +7,7 @@ import {
   Chip,
   Button,
   Dropdown,
-} from "@orchid";
+} from "@/orchidui";
 import { computed, ref } from "vue";
 
 const props = defineProps({

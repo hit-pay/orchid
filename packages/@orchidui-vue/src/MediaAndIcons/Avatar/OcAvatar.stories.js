@@ -1,4 +1,4 @@
-import { Theme, Avatar } from "@orchid";
+import { Theme, Avatar } from "@/orchidui";
 import { ref } from "vue";
 
 export default {

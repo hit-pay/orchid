@@ -1,5 +1,5 @@
 <script setup>
-import { Input, Icon } from "@orchid";
+import { Input, Icon } from "@/orchidui";
 
 defineProps({
   placeholder: String,

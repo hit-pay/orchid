@@ -13,7 +13,7 @@ import {
   RadioGroup,
   RangeInput,
   Checkbox,
-} from "@orchid";
+} from "@/orchidui";
 
 const props = defineProps({
   id: {
@@ -28,6 +28,7 @@ const props = defineProps({
   },
   values: {
     type: Object,
+    required: true,
   },
 });
 
@@ -35,16 +36,6 @@ const emit = defineEmits(["onUpdate"]);
 
 const onUpdate = (form, value, index = undefined) => {
   emit("onUpdate", form, value, index);
-};
-
-const multipleError = (name = []) => {
-  let errorMessage = "";
-  name.forEach((fieldName) => {
-    if (props.errors[fieldName.key]) {
-      errorMessage = props.errors[fieldName.key];
-    }
-  });
-  return errorMessage;
 };
 
 const FormTypes = {
@@ -60,6 +51,7 @@ const FormTypes = {
   DatePicker: DatePicker,
   Checkbox: Checkbox,
   RangeInput: RangeInput,
+  PhoneInput: PhoneInput,
 };
 
 const getComponentByType = (type) => {
@@ -69,37 +61,41 @@ const getComponentByType = (type) => {
     return null;
   }
 };
+
+const { values, errors } = props;
+const modelValues = (name) => {
+  if (typeof name === "object") {
+    let modelValueData = [];
+    name.forEach((formName) => {
+      modelValueData.push(values[formName.key]);
+    });
+    return modelValueData;
+  } else {
+    return values[name];
+  }
+};
+const errorValues = (name) => {
+  if (typeof name === "object") {
+    let errorMessage = [];
+    name.forEach((formName) => {
+      errorMessage.push(errors[formName.key]);
+    });
+    return errorMessage.join(",");
+  } else {
+    return errors[name];
+  }
+};
 </script>
 <template>
   <div class="form-builder">
     <template v-for="(form, key) in jsonForm" :key="key">
-      <DatePicker
-        v-if="form.type === 'DatePicker' && form.props.type === 'range'"
-        :class="form.className"
-        v-bind="form.props"
-        :error-message="multipleError(form.name)"
-        :from="values[form.name[0].key]"
-        :to="values[form.name[1].key]"
-        @update:from="onUpdate(form, $event, 0)"
-        @update:to="onUpdate(form, $event, 1)"
-      />
-      <PhoneInput
-        v-else-if="form.type === 'PhoneInput'"
-        :class="form.className"
-        v-bind="form.props"
-        :error-message="multipleError(form.name)"
-        :country-code="values[form.name[0].key]"
-        :phone-number="values[form.name[1].key]"
-        @update:country-code="onUpdate(form, $event, 0)"
-        @update:phone-number="onUpdate(form, $event, 1)"
-      />
       <component
         :is="getComponentByType(form.type)"
-        v-else-if="getComponentByType(form.type)"
+        v-if="getComponentByType(form.type)"
         :class="form.className"
         v-bind="form.props"
-        :model-value="values[form.name]"
-        :error-message="errors[form.name]"
+        :model-value="modelValues(form.name)"
+        :error-message="errorValues(form.name)"
         @update:model-value="onUpdate(form, $event)"
       />
       <slot

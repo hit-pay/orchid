@@ -1,7 +1,7 @@
 /** @type { import('@storybook/vue3').Preview } */
 
 import "../src/style.scss";
-
+import { watch } from "vue";
 const preview = {
   parameters: {
     backgrounds: {
@@ -17,13 +17,27 @@ const preview = {
       },
     },
   },
+  decorators: [
+    (story) => ({
+      mounted() {
+        let params = new URL(location.href);
+        let storybookGlobalsThemes = params.searchParams.get("globals");
+        if (storybookGlobalsThemes?.includes("theme:dark")) {
+          document.querySelector("body").setAttribute("class", "dark");
+        } else {
+          document.querySelector("body").setAttribute("class", "light");
+        }
+      },
+      components: { story },
+      template: "<story />",
+    }),
+  ],
 };
 
 export default preview;
 
 export const globalTypes = {
   theme: {
-    description: "Global theme for components",
     defaultValue: "light",
     toolbar: {
       // The label to show for this toolbar item

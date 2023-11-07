@@ -1,6 +1,6 @@
 <script setup>
 import { computed, ref } from "vue";
-import { Icon, Dropdown, DropdownItem } from "@orchid";
+import { Icon, Dropdown, DropdownItem } from "@/orchidui";
 
 defineEmits({
   changePath: [],

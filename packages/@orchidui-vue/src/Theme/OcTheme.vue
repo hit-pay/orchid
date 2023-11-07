@@ -9,12 +9,7 @@ const props = defineProps({
 watch(
   () => props.colorMode,
   () => {
-    let params = new URL(location.href); // TODO : improvment for storybook
-    let storybookGlobalsThemes = params.searchParams.get("globals");
-    if (
-      props.colorMode === "dark" ||
-      storybookGlobalsThemes?.includes("theme:dark")
-    ) {
+    if (props.colorMode === "dark") {
       document.querySelector("body").setAttribute("class", "dark");
     } else {
       document.querySelector("body").setAttribute("class", "light");

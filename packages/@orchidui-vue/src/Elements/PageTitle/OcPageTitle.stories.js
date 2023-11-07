@@ -1,4 +1,4 @@
-import { Theme, PageTitle } from "@orchid";
+import { Theme, PageTitle } from "@/orchidui";
 
 export default {
   component: PageTitle,
@@ -120,7 +120,7 @@ export const Default = {
             onClick: () => console.log("activate/disactivate clicked"),
           },
         ],
-      }
+      },
     },
     additionalContentVariant: "default",
     boxes: [],

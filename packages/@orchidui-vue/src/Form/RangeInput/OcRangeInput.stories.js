@@ -1,4 +1,4 @@
-import { Theme, RangeInput } from "@orchid";
+import { Theme, RangeInput } from "@/orchidui";
 import { ref } from "vue";
 
 export default {

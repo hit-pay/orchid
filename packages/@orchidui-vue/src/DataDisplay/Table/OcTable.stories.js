@@ -1,4 +1,4 @@
-import { Theme, Table, Chip, Icon, Toggle, TableCellContent } from "@orchid";
+import { Theme, Table, Chip, Icon, Toggle, TableCellContent } from "@/orchidui";
 
 import { ref } from "vue";
 import { TableOptions } from "../../data/TableOptions.sample";
