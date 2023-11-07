@@ -11,7 +11,7 @@ export default {
 export const Default = {
   args: {
     options: TableOptions,
-    isLoading: true,
+    isLoading: false,
   },
   render: (args) => ({
     components: {
