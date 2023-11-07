@@ -3,6 +3,7 @@ import { TableHeader, TableCell } from "@/orchidui";
 import { ref, computed } from "vue";
 
 const props = defineProps({
+  isLoading: Boolean,
   options: {
     type: Object,
     required: true,
@@ -71,44 +72,69 @@ const selectAllRows = () => {
         </template>
       </TableHeader>
     </div>
-    <div
-      v-for="(field, i) in fields"
-      :key="i"
-      class="flex flex-wrap relative group/row border-oc-gray-200 md:p-0 py-3"
-      :class="{
-        'border-b': fields.length !== i + 1,
-        'pl-[40px]': isSelectable,
-      }"
-    >
-      <TableCell
-        v-if="isSelectable"
-        class="w-[40px] md:w-[5%] flex justify-center absolute left-0 md:relative"
-        :is-last="fields.length === i + 1"
-        :is-selected="selectedRows.includes(i)"
-        variant="checkbox"
-        @selected="selectRow(i)"
-      />
-
-      <TableCell
-        v-for="(header, j) in headers"
-        :key="`${j}-${i}`"
-        :is-last="fields.length === i + 1"
-        :variant="header.variant"
-        :is-copy="header.isCopy"
-        :data="field[header.key] || ''"
-        class="flex"
-        :class="header.class"
+    <template v-if="!isLoading">
+      <div
+        v-for="(field, i) in fields"
+        :key="i"
+        class="flex flex-wrap relative group/row border-oc-gray-200 md:p-0 py-3"
+        :class="{
+          'border-b': fields.length !== i + 1,
+          'pl-[40px]': isSelectable,
+        }"
       >
-        <template #default>
-          <slot
-            v-if="$slots[header.key]"
-            :name="header.key"
-            :item="field"
-            :data="field[header.key]"
-          />
-        </template>
-      </TableCell>
-    </div>
+        <TableCell
+          v-if="isSelectable"
+          class="w-[40px] md:w-[5%] flex justify-center absolute left-0 md:relative"
+          :is-last="fields.length === i + 1"
+          :is-selected="selectedRows.includes(i)"
+          variant="checkbox"
+          @selected="selectRow(i)"
+        />
+
+        <TableCell
+          v-for="(header, j) in headers"
+          :key="`${j}-${i}`"
+          :is-last="fields.length === i + 1"
+          :variant="header.variant"
+          :is-copy="header.isCopy"
+          :data="field[header.key] || ''"
+          :class="header.class"
+          class="flex"
+        >
+          <template #default>
+            <slot
+              v-if="$slots[header.key]"
+              :name="header.key"
+              :item="field"
+              :data="field[header.key]"
+            />
+          </template>
+        </TableCell>
+      </div>
+    </template>
+    <template v-if="isLoading">
+      <div
+        v-for="(field, i) in fields"
+        :key="i"
+        class="flex flex-wrap relative group/row border-oc-gray-200 md:p-0 py-3"
+        :class="{
+          'border-b': fields.length !== i + 1,
+          'pl-[40px]': isSelectable,
+        }"
+      >
+        <div class="flex p-3 w-[40px] md:w-[5%]">
+          <div class="bg-oc-gray-100 w-full h-6 rounded-sm"></div>
+        </div>
+        <div
+          v-for="(header, j) in headers"
+          :key="`${j}-${i}`"
+          :class="header.class"
+          class="flex p-3"
+        >
+          <div class="bg-oc-gray-100 w-full h-6 rounded-sm"></div>
+        </div>
+      </div>
+    </template>
     <slot name="after" />
   </div>
 </template>

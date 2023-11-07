@@ -45,7 +45,7 @@ export const Default = {
                 <li v-for="(item, key) in args.filter">{{ key }} : {{ item }}</li>
               </ul>
             </div>
-            <DataTable id="sample-data-table" :filter="args.filter" :options="args.options" @update:filter="updateFilterData">
+            <DataTable id="sample-data-table" :filter="args.filter" :options="args.options" @update:filter="updateFilterData" is-loading>
               <template #before>
                 Slot Before
               </template>
