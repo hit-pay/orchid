@@ -16,7 +16,9 @@ const props = defineProps({
   page: String,
 });
 
-const currentActiveMenu = props.page;
+const currentActiveMenu = props.page.replaceAll("/", "")
+  ? props.page.replaceAll("/", "")
+  : "foundation";
 
 let sidebarMenus = [
   {
@@ -91,7 +93,7 @@ if (currentActiveMenu === "case-studies") {
 
 let state = reactive({
   darkMode: localStorage.getItem("dark_mode") ?? false,
-  activeMenu: currentActiveMenu ? currentActiveMenu : "foundation",
+  activeMenu: currentActiveMenu,
   menus: [
     {
       label: "Foundation",
@@ -167,7 +169,7 @@ const changeActiveMenu = () => {
   location.href = "/" + state.activeMenu;
 };
 const isLandingPage = computed(() => {
-  return !props.page;
+  return props.page === "/";
 });
 </script>
 <template>

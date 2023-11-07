@@ -21,7 +21,7 @@ import AppLayout from '../components/layouts/AppLayout.vue';
 		<title>{title}</title>
 	</head>
 	<body>
-		<AppLayout page={pathname.replace('/','')} client:only> 
+		<AppLayout page={pathname} client:only> 
 			<slot />
 		</AppLayout>
 	</body>
