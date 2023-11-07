@@ -46,7 +46,10 @@ const copyToClipboard = async (text) => {
 
 <template>
   <div
-    :class="[variantClass[variant] || 'px-4', isLast ? '' : '']"
+    :class="[
+      variantClass[variant] || 'px-4',
+      isLoading ? 'flex items-center' : '',
+    ]"
     class="py-3 bg-oc-bg-light md:min-h-[58px] md:group-hover/row:bg-oc-gray-50 items-center"
   >
     <div
@@ -54,7 +57,7 @@ const copyToClipboard = async (text) => {
       class="rounded-full bg-gray-100 w-full overflow-hidden h-6"
     >
       <div
-        class="slide relative rounded-full h-6 w-[40px] bg-[linear-gradient(-90deg,_#E5E6EA_0%,_rgba(229,_230,_234,_0)_100%)]"
+        class="slide relative rounded-full h-6 w-[40px] bg-[linear-gradient(-90deg,_var(--oc-gray-200)_0%,_rgba(229,_230,_234,_0)_100%)]"
       />
     </div>
 
