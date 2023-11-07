@@ -11,7 +11,7 @@ import {
 import { ref, computed } from "vue";
 
 const props = defineProps({
-  loading: Boolean,
+  isLoading: Boolean,
   id: {
     type: String,
     required: true,
@@ -141,9 +141,11 @@ const applyFilter = (filterForm = null, isChangePage = false) => {
 <template>
   <div class="flex flex-col gap-3">
     <Table
-      v-if="!loading && tableOptions"
+      v-if="tableOptions"
       v-model="selectedRows"
       :options="tableOptions"
+      :is-loading="isLoading"
+      :loading-rows="perPage"
     >
       <template #before>
         <slot name="before" />

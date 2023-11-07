@@ -15,10 +15,12 @@ export default {
 };
 
 import { DataTableOptions, Filter } from "../../data/DataTableOptions.sample";
+
 export const Default = {
   args: {
     filter: Filter,
     options: DataTableOptions,
+    isLoading: false,
   },
   render: (args) => ({
     components: {
@@ -45,7 +47,8 @@ export const Default = {
                 <li v-for="(item, key) in args.filter">{{ key }} : {{ item }}</li>
               </ul>
             </div>
-            <DataTable id="sample-data-table" :filter="args.filter" :options="args.options" @update:filter="updateFilterData">
+            <DataTable id="sample-data-table" :filter="args.filter" :options="args.options"
+                       @update:filter="updateFilterData" :is-loading="args.isLoading">
               <template #before>
                 Slot Before
               </template>
