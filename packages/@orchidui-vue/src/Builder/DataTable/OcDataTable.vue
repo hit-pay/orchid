@@ -141,9 +141,10 @@ const applyFilter = (filterForm = null, isChangePage = false) => {
 <template>
   <div class="flex flex-col gap-3">
     <Table
-      v-if="!loading && tableOptions"
+      v-if="tableOptions"
       v-model="selectedRows"
       :options="tableOptions"
+      :is-loading="loading"
     >
       <template #before>
         <slot name="before" />
