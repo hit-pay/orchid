@@ -1,4 +1,5 @@
 import { Theme, Snackbar } from "@/orchidui";
+import { ref } from "vue";
 export default {
   component: Snackbar,
   tags: ["autodocs"],
@@ -18,10 +19,12 @@ export const Default = {
     },
   },
   args: {
+    modelValue: true,
     showIcon: true,
     icon: "filled-check",
     color: "default",
     content: "Changes have been successfully saved",
+    isCloseIcon: true,
   },
   render: (args) => ({
     components: { Snackbar, Theme },
@@ -31,7 +34,7 @@ export const Default = {
     template: `
           <Theme colorMode="light">
             <div class="flex flex-col gap-y-4">
-              <Snackbar v-bind="args"/>
+              <Snackbar v-bind="args" v-model="args.modelValue"/>
             </div>
           </Theme>
         `,
