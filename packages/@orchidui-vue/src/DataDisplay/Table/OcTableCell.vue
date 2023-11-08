@@ -1,10 +1,12 @@
 <script setup>
 import { computed, ref } from "vue";
 import { Checkbox, Icon, Tooltip, TableCellContent } from "@/orchidui";
+import dayjs from "dayjs";
 
 const Variants = {
   CHECKBOX: "checkbox",
   CONTENT: "content",
+  DATETIME: "datetime",
   ICON: "icon",
   IMAGE: "image",
   EMPTY: "empty",
@@ -20,7 +22,7 @@ defineProps({
   isSelected: Boolean,
   data: String,
   isLoading: Boolean,
-  display: {
+  content: {
     type: Object,
     default() {
       return {
@@ -29,6 +31,7 @@ defineProps({
       };
     },
   },
+  datetime: String,
 });
 defineEmits({
   selected: [],
@@ -39,6 +42,7 @@ const variantClass = computed(() => ({
   [Variants.ICON]: "md:px-2 px-4 min-w-[32px] ",
   [Variants.IMAGE]: "md:px-2 px-4 min-w-[32px]",
   [Variants.CONTENT]: "px-4",
+  [Variants.DATETIME]: "px-4",
   [Variants.EMPTY]: "px-4 min-w-[48px]",
 }));
 const isCopied = ref(false);
@@ -117,13 +121,16 @@ const copyToClipboard = async (text) => {
         <!--  EMPTY    -->
         <div v-else-if="variant === Variants.EMPTY">-</div>
 
-        <!--   DISPLAY CONTENT   -->
         <TableCellContent
-          v-else-if="
-            (display.title || display.description) &&
-            variant === Variants.CONTENT
-          "
-          v-bind="display"
+          v-else-if="variant === Variants.DATETIME"
+          :title="dayjs(datetime).format('D MMM, YYYY')"
+          :description="dayjs(datetime).format('h:mm A')"
+        />
+
+        <!--   CONTENT   -->
+        <TableCellContent
+          v-else-if="variant === Variants.CONTENT"
+          v-bind="content"
         />
 
         <!--  DEFAULT    -->

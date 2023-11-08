@@ -125,7 +125,7 @@ const selectAllRows = () => {
           :variant="header.variant"
           :is-copy="header.isCopy"
           :data="field[header.key] || ''"
-          :display="{
+          :content="{
             important: header.important ?? false,
             title: field[header.title],
             description: field[header.description],
