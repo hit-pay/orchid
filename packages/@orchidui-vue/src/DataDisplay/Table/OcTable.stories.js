@@ -36,7 +36,7 @@ export const Default = {
               :options="args.options" 
               :is-loading="args.isLoading"
               :loadingRows="args.loadingRows"
-              @click:row="onClickRow"
+              @click-row="onClickRow"
               >
               <template #col4="{ data }">
                 <span class="text-oc-text-400 text-sm">{{ data }}</span>
