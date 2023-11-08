@@ -11,7 +11,7 @@ const Variants = {
   IMAGE: "image",
   EMPTY: "empty",
 };
-defineProps({
+const props = defineProps({
   isSimple: Boolean,
   variant: {
     type: String,
@@ -36,6 +36,10 @@ defineProps({
 const emit = defineEmits({
   selected: [],
   copied: [],
+});
+
+const hasContentData = computed(() => {
+  return props.data || props.content.title || props.content.description;
 });
 
 const variantClass = computed(() => ({
@@ -99,7 +103,7 @@ const copyToClipboard = async (text) => {
           "
           @update:model-value="$emit('selected')"
         />
-
+        <div v-if="!hasContentData">-</div>
         <!--  ICON    -->
         <Icon
           v-else-if="variant === Variants.ICON"
@@ -143,7 +147,7 @@ const copyToClipboard = async (text) => {
       </slot>
 
       <Tooltip
-        v-if="isCopy"
+        v-if="isCopy && hasContentData"
         position="top"
         :hide-after="1500"
         trigger="click"

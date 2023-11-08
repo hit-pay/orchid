@@ -95,7 +95,7 @@ const DataTableOptions = {
         title: "Table Cell",
         descriptions: "Table Cell column two",
         col2: "Table Cell",
-        col3: "Table Cell",
+        col3: "",
         col4: "Table Cell column two",
         col5: "Label",
         col6: false,
