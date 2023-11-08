@@ -45,7 +45,7 @@ const filterTab = ref(props.filter[filterOptions.value?.tabs?.key]);
 const currentPage = ref(props.filter.page);
 const perPage = ref(props.filter.per_page);
 const defaultQuery =
-  props.filter[filterOptions.value?.search?.key].trim() ?? [];
+  props.filter[filterOptions.value?.search?.key]?.trim() ?? "";
 const queries = ref(defaultQuery ? defaultQuery.split(",") : []);
 const isSearchExpanded = ref(false);
 
@@ -175,6 +175,7 @@ const applyFilter = (filterForm = null, isChangePage = false) => {
             "
           >
             <FilterSearch
+              v-if="filterOptions?.search"
               :is-search-only="!filterOptions.tabs"
               @add-query="addQuery"
               @toggle="isSearchExpanded = $event"

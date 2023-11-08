@@ -15,9 +15,9 @@ const DataTableOptions = {
         { label: "Filter 03", value: "3" },
       ],
     },
-    search: {
-      key: "keywords",
-    },
+    // search: {
+    //   key: "keywords",
+    // },
     form: SampleFilterForm,
   },
   tableOptions: {
