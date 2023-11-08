@@ -13,6 +13,7 @@ export * from "./Select/OcSelect.js";
 export * from "./Toggle/OcToggle.js";
 export * from "./LinkInput/OcLinkInput.js";
 export * from "./TextArea/OcTextArea.js";
+export * from "./TextEditor/OcTextEditor.js";
 
 export * from "./Calendar/OcCalendar.js";
 export * from "./ComplexCalendar/OcComplexCalendar.js";
