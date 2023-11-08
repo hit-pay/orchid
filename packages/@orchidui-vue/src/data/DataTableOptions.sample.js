@@ -83,7 +83,7 @@ const DataTableOptions = {
       {
         image: "",
         title: "Table Cell",
-        descriptions: "Table Cell column two",
+        descriptions: "",
         col2: "Table Cell",
         col3: "Table Cell",
         col4: "Table Cell column two",
@@ -102,7 +102,7 @@ const DataTableOptions = {
       },
       {
         image: "",
-        title: "Table Cell",
+        title: "",
         descriptions: "Table Cell column two",
         col2: "Table Cell",
         col3: "Table Cell",

@@ -103,7 +103,6 @@ const copyToClipboard = async (text) => {
           "
           @update:model-value="$emit('selected')"
         />
-        <div v-if="!hasContentData">-</div>
         <!--  ICON    -->
         <Icon
           v-else-if="variant === Variants.ICON"
@@ -143,7 +142,8 @@ const copyToClipboard = async (text) => {
         />
 
         <!--  DEFAULT    -->
-        <div v-else class="flex items-center w-full">{{ data }}</div>
+        <div v-else-if="data" class="flex items-center w-full">{{ data }}</div>
+        <div v-else>-</div>
       </slot>
 
       <Tooltip
