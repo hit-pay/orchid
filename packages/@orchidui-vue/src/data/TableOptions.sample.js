@@ -9,6 +9,10 @@ const TableOptions = {
     },
     {
       key: "col1",
+      variant: "content",
+      important: true,
+      title: "title_field",
+      description: "description_field",
       label: "Table Header",
       class: "w-1/2 md:w-[20%]",
     },
@@ -50,8 +54,8 @@ const TableOptions = {
     {
       image:
         "https://sportano.ua/img/986c30c27a3d26a3ee16c136f92f4ff5/1/9/195239323706_20-jpg/boksers-ki-krosivki-nike-hyperko-2-olympic-colorway-bili-dj4475-121-581894.jpg",
-      title: "Table Cell",
-      descriptions: "Table Cell column two",
+      title_field: "Table Cell",
+      description_field: "Table Cell column two",
       col2: "Table Cell",
       col3: "Table Cell ",
       col4: "Table Cell column two",
@@ -60,8 +64,8 @@ const TableOptions = {
     },
     {
       image: "",
-      title: "Table Cell",
-      descriptions: "Table Cell column two",
+      title_field: "Table Cell",
+      description_field: "Table Cell column two",
       col2: "Table Cell",
       col3: "Table Cell",
       col4: "Table Cell column two",
@@ -70,8 +74,8 @@ const TableOptions = {
     },
     {
       image: "",
-      title: "Table Cell",
-      descriptions: "Table Cell column two",
+      title_field: "Table Cell",
+      description_field: "Table Cell column two",
       col2: "Table Cell",
       col3: "Table Cell",
       col4: "Table Cell column two",
@@ -80,8 +84,8 @@ const TableOptions = {
     },
     {
       image: "",
-      title: "Table Cell",
-      descriptions: "Table Cell column two",
+      title_field: "Table Cell",
+      description_field: "Table Cell column two",
       col2: "Table Cell",
       col3: "Table Cell",
       col4: "Table Cell column two",
@@ -90,8 +94,8 @@ const TableOptions = {
     },
     {
       image: "",
-      title: "Table Cell",
-      descriptions: "Table Cell column two",
+      title_field: "Table Cell",
+      description_field: "Table Cell column two",
       col2: "Table Cell",
       col3: "Table Cell",
       col4: "Table Cell column two",

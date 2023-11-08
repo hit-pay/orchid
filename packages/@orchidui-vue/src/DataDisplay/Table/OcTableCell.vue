@@ -20,6 +20,15 @@ defineProps({
   isSelected: Boolean,
   data: String,
   isLoading: Boolean,
+  display: {
+    type: Object,
+    default() {
+      return {
+        title: null,
+        description: null,
+      };
+    },
+  },
 });
 defineEmits({
   selected: [],
@@ -107,6 +116,15 @@ const copyToClipboard = async (text) => {
 
         <!--  EMPTY    -->
         <div v-else-if="variant === Variants.EMPTY">-</div>
+
+        <!--   DISPLAY CONTENT   -->
+        <TableCellContent
+          v-else-if="
+            (display.title || display.description) &&
+            variant === Variants.CONTENT
+          "
+          v-bind="display"
+        />
 
         <!--   CONTENT   -->
         <TableCellContent v-else-if="variant === Variants.CONTENT" important />

@@ -32,9 +32,6 @@ export const Default = {
             {{ selectedRows }}
             <Table v-model="selectedRows" :options="args.options" :is-loading="args.isLoading"
                    :loadingRows="args.loadingRows">
-              <template #col1="{ item }">
-                <TableCellContent important :title="item.title" :description="item.descriptions"/>
-              </template>
               <template #col4="{ data }">
                 <span class="text-oc-text-400 text-sm">{{ data }}</span>
               </template>
