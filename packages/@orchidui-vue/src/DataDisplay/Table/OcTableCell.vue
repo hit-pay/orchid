@@ -126,9 +126,6 @@ const copyToClipboard = async (text) => {
           v-bind="display"
         />
 
-        <!--   CONTENT   -->
-        <TableCellContent v-else-if="variant === Variants.CONTENT" important />
-
         <!--  DEFAULT    -->
         <div v-else class="flex items-center w-full">{{ data }}</div>
       </slot>
