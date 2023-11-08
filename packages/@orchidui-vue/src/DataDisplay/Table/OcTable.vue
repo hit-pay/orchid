@@ -148,7 +148,7 @@ const onClickRow = (field, header) => {
           }"
           class="flex"
           :class="header.class"
-          @click="onClickRow(field, header)"
+          @click="!$slots[header.key] ? onClickRow(field, header) : ''"
           @copied="onCopied"
         >
           <template #default>
