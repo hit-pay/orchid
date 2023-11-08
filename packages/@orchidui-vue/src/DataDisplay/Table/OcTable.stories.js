@@ -25,13 +25,19 @@ export const Default = {
     },
     setup() {
       const selectedRows = ref([]);
-      return { args, selectedRows };
+      const onClickRow = (item) => {
+        console.log(item);
+      };
+      return { args, selectedRows, onClickRow };
     },
     template: `
           <Theme>
-            {{ selectedRows }}
-            <Table v-model="selectedRows" :options="args.options" :is-loading="args.isLoading"
-                   :loadingRows="args.loadingRows">
+            <Table v-model="selectedRows" 
+              :options="args.options" 
+              :is-loading="args.isLoading"
+              :loadingRows="args.loadingRows"
+              @click:row="onClickRow"
+              >
               <template #col4="{ data }">
                 <span class="text-oc-text-400 text-sm">{{ data }}</span>
               </template>

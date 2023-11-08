@@ -33,8 +33,9 @@ defineProps({
   },
   datetime: String,
 });
-defineEmits({
+const emit = defineEmits({
   selected: [],
+  copied: [],
 });
 
 const variantClass = computed(() => ({
@@ -47,13 +48,17 @@ const variantClass = computed(() => ({
 }));
 const isCopied = ref(false);
 const copyToClipboard = async (text) => {
+  emit("copied", true);
   isCopied.value = true;
   try {
     await navigator.clipboard.writeText(text);
   } catch (err) {
     console.error("Unable to copy text to clipboard. Error: ", err);
   }
-  setTimeout(() => (isCopied.value = false), 500);
+  setTimeout(() => {
+    isCopied.value = false;
+    emit("copied", false);
+  }, 500);
 };
 </script>
 

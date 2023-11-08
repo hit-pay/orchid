@@ -17,6 +17,7 @@ const props = defineProps({
 
 const emit = defineEmits({
   "update:modelValue": [],
+  "click:row": [],
 });
 
 const isSelectable = computed(() => props.options.isSelectable);
@@ -39,6 +40,21 @@ const selectAllRows = () => {
     ? []
     : [...fields.value.map((e, i) => i)];
   emit("update:modelValue", selectedRows.value);
+};
+
+const isCopied = ref(false);
+
+const onCopied = (to) => {
+  isCopied.value = to;
+};
+
+const onClickRow = (field, header) => {
+  if (!isCopied.value) {
+    emit("click:row", {
+      field: field,
+      header: header,
+    });
+  }
 };
 </script>
 
@@ -103,7 +119,7 @@ const selectAllRows = () => {
       <div
         v-for="(field, i) in fields"
         :key="i"
-        class="flex flex-wrap relative group/row border-oc-gray-200 md:p-0 py-3"
+        class="flex flex-wrap relative group/row border-oc-gray-200 md:p-0 py-3 cursor-pointer"
         :class="{
           'border-b': fields.length !== i + 1,
           'pl-[40px]': isSelectable,
@@ -132,6 +148,8 @@ const selectAllRows = () => {
           }"
           class="flex"
           :class="header.class"
+          @click="onClickRow(field, header)"
+          @copied="onCopied"
         >
           <template #default>
             <slot
