@@ -22,6 +22,14 @@ defineProps({
     type: String,
     default: "DD/MM/YYYY",
   },
+  countCalendars: {
+    type: Number,
+    default: 2,
+  },
+  withFooter: {
+    type: Boolean,
+    default: true,
+  },
 });
 defineEmits({
   "update:modelValue": [],
@@ -46,6 +54,8 @@ const isOpen = ref(false);
         :cancel-button-props="cancelButtonProps"
         :submit-button-props="submitButtonProps"
         :calendar-props="calendarProps"
+        :count-calendars="countCalendars"
+        :with-footer="withFooter"
         @update:model-value="$emit('update:modelValue', $event)"
       />
     </template>

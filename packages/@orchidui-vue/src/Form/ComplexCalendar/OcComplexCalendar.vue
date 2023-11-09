@@ -20,6 +20,14 @@ defineProps({
       end: new Date(),
     }),
   },
+  countCalendars: {
+    type: Number,
+    default: 2,
+  },
+  withFooter: {
+    type: Boolean,
+    default: true,
+  },
 });
 const emit = defineEmits({
   "update:modelValue": [],
@@ -60,13 +68,13 @@ const changeModelValue = (value) => {
         }"
         color="primary"
         borderless
-        :columns="2"
+        :columns="countCalendars"
         :calendar-props="calendarProps"
         @update:range="$emit('update:modelValue', $event)"
       />
     </div>
 
-    <div class="flex justify-end gap-x-3">
+    <div v-if="withFooter" class="flex justify-end gap-x-3">
       <Button
         class="min-w-[72px]"
         label="Clear"
