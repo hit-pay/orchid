@@ -26,7 +26,7 @@ export const Default = {
     setup() {
       const selectedRows = ref([]);
       const onClickRow = (item) => {
-        console.log(item);
+        console.log("on click row", item);
       };
       return { args, selectedRows, onClickRow };
     },

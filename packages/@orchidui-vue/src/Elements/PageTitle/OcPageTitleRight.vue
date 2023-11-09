@@ -11,7 +11,11 @@ defineProps({
 </script>
 <template>
   <div class="flex gap-x-3 items-center">
-    <Dropdown v-model="isDropdownOpened" :distance="10">
+    <Dropdown
+      v-if="secondaryButtonProps"
+      v-model="isDropdownOpened"
+      :distance="10"
+    >
       <Button v-bind="secondaryButtonProps" />
       <template #menu>
         <div v-if="secondaryButtonProps?.dropdownOptions" class="p-2">
@@ -25,7 +29,12 @@ defineProps({
       </template>
     </Dropdown>
 
-    <Tooltip position="top" :distance="4" arrow-hidden>
+    <Tooltip
+      v-if="primaryButtonProps"
+      position="top"
+      :distance="4"
+      arrow-hidden
+    >
       <Button
         v-bind="primaryButtonProps"
         @click="emit('click:primaryButton')"

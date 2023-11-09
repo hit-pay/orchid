@@ -39,7 +39,13 @@ export const Default = {
       const errors = ref(args.errors);
 
       const onUpdateForm = (form, value = null) => {
-        console.log(form, value);
+        if (typeof form.name === "object") {
+          form.name.forEach((formName, index) => {
+            values.value[formName.key] = value[index];
+          });
+        } else {
+          values.value[form.name] = value;
+        }
       };
 
       const isOpenedDropdown = ref(false);
