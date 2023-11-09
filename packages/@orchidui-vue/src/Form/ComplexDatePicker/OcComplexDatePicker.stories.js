@@ -54,6 +54,8 @@ export const Calendar = {
     },
     calendarProps: null,
     formatDate: "DD/MM/YYYY",
+    countCalendars: 2,
+    withFooter: true,
   },
   argTypes: {
     formatDate: {
@@ -76,6 +78,8 @@ export const Calendar = {
                 :cancel-button-props="args.cancelButtonProps"
                 :format-date="args.formatDate"
                 :submit-button-props="args.submitButtonProps"
+                :count-calendars="args.countCalendars"
+                :with-footer="args.withFooter"
             />
           </Theme>
         `,

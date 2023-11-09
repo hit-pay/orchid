@@ -114,6 +114,36 @@ const SampleFilterForm = [
       ],
     },
   },
+  {
+    name: "select_multiple",
+    default: [],
+    type: "Select",
+    props: {
+      label: "Example Label",
+      hint: "This is a hint text to help user",
+      placeholder: "placeholder",
+      isFilterable: true,
+      multiple: true,
+      options: [
+        {
+          label: "Option 1",
+          value: 1,
+        },
+        {
+          label: "Option 2",
+          value: 2,
+        },
+        {
+          label: "Option 3",
+          value: 3,
+        },
+        {
+          label: "Option 4",
+          value: 4,
+        },
+      ],
+    },
+  },
 ];
 
 export { SampleFilterForm };

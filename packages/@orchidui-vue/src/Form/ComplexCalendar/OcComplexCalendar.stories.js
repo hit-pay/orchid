@@ -52,6 +52,8 @@ export const Calendar = {
       label: "Done",
     },
     calendarProps: null,
+    countCalendars: 2,
+    withFooter: true,
   },
   render: (args) => ({
     components: { ComplexCalendar, Theme },
@@ -65,6 +67,8 @@ export const Calendar = {
                 :calendarProps="args.calendarProps"
                 :cancel-button-props="args.cancelButtonProps"
                 :submit-button-props="args.submitButtonProps"
+                :count-calendars="args.countCalendars"
+                :with-footer="args.withFooter"
             />
           </Theme>
         `,
