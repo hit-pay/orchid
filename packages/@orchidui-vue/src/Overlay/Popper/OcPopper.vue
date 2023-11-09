@@ -73,7 +73,7 @@ watch(
 
 <template>
   <div class="flex w-[inherit]">
-    <div ref="reference" class="w-[inherit]">
+    <div ref="reference" class="w-[inherit] flex">
       <slot />
     </div>
     <div ref="popper" class="z-[1005]">

@@ -34,7 +34,7 @@ defineProps({
         <div
           class="px-3 py-[5px] font-medium text-sm text-oc-text-400 flex gap-x-3 items-center"
         >
-          Add new
+          {{ primaryButtonProps.tooltip ?? primaryButtonProps.label }}
           <div class="flex gap-x-2">
             <div
               class="w-6 h-6 rounded-[6px] flex items-center justify-center border border-oc-gray-200 keyboard-cap"

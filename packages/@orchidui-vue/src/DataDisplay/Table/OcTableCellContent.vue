@@ -13,9 +13,11 @@ defineProps({
       :class="important ? 'font-medium' : 'font-regular'"
     >
       {{ title }}
+      <span v-if="!title">-</span>
     </span>
     <span class="overflow-hidden text-ellipsis text-oc-text-400 text-sm">
       {{ description }}
+      <span v-if="!description">-</span>
     </span>
   </div>
 </template>

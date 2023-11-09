@@ -26,7 +26,10 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(["update:filter"]);
+const emit = defineEmits({
+  "update:filter": [],
+  "click:row": [],
+});
 
 const pagination = computed(() => {
   return props.options?.pagination;
@@ -45,7 +48,7 @@ const filterTab = ref(props.filter[filterOptions.value?.tabs?.key]);
 const currentPage = ref(props.filter.page);
 const perPage = ref(props.filter.per_page);
 const defaultQuery =
-  props.filter[filterOptions.value?.search?.key].trim() ?? [];
+  props.filter[filterOptions.value?.search?.key]?.trim() ?? "";
 const queries = ref(defaultQuery ? defaultQuery.split(",") : []);
 const isSearchExpanded = ref(false);
 
@@ -146,6 +149,7 @@ const applyFilter = (filterForm = null, isChangePage = false) => {
       :options="tableOptions"
       :is-loading="isLoading"
       :loading-rows="perPage"
+      @click:row="$emit('click:row', $event)"
     >
       <template #before>
         <slot name="before" />
@@ -175,6 +179,7 @@ const applyFilter = (filterForm = null, isChangePage = false) => {
             "
           >
             <FilterSearch
+              v-if="filterOptions?.search"
               :is-search-only="!filterOptions.tabs"
               @add-query="addQuery"
               @toggle="isSearchExpanded = $event"
@@ -207,8 +212,9 @@ const applyFilter = (filterForm = null, isChangePage = false) => {
         />
       </template>
       <template
-        v-for="header in tableOptions?.headers"
+        v-for="(header, key) in tableOptions?.headers"
         #[header.key]="{ data, item }"
+        :key="key"
       >
         <slot :name="header.key" :data="data" :item="item"></slot>
       </template>
