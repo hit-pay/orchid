@@ -62,7 +62,7 @@ onMounted(() => {
       if (menu.children) {
         menu.children.forEach((submenu) => {
           if (submenu.active) {
-            expandMenu(menu.path);
+            expandMenu(menu.name);
           }
         });
       }
@@ -113,7 +113,7 @@ onMounted(() => {
                 'font-medium bg-[var(--oc-sidebar-menu-active)] text-[var(--oc-sidebar-menu-active-text)]':
                   menu.active,
               }"
-              @click="expandMenu(menu.path)"
+              @click="expandMenu(menu.name)"
             >
               <Icon
                 v-if="isExpanded"
@@ -201,8 +201,8 @@ onMounted(() => {
               <SidebarSubmenu
                 v-if="menu.children"
                 :menu="menu"
-                :class="state.expanded.includes(menu.path) && 'mt-3'"
-                :is-expanded="state.expanded.includes(menu.path)"
+                :class="state.expanded.includes(menu.name) && 'mt-3'"
+                :is-expanded="state.expanded.includes(menu.name)"
               >
                 <template #label="{ submenu }">
                   <slot
