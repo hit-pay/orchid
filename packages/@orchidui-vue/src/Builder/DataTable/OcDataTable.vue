@@ -54,40 +54,40 @@ const isSearchExpanded = ref(false);
 
 const perPageOptions = computed(() => {
   let per_page_option = [
-  {
-      label: '5',
+    {
+      label: "5",
       value: 5,
     },
     {
-      label: '10',
+      label: "10",
       value: 10,
     },
     {
-      label: '15',
+      label: "15",
       value: 15,
     },
     {
-      label: '20',
+      label: "20",
       value: 20,
     },
     {
-      label: '25',
+      label: "25",
       value: 25,
     },
     {
-      label: '40',
+      label: "40",
       value: 40,
     },
     {
-      label: '50',
+      label: "50",
       value: 50,
     },
     {
-      label: '75',
+      label: "75",
       value: 75,
     },
     {
-      label: '99',
+      label: "99",
       value: 99,
     },
   ];

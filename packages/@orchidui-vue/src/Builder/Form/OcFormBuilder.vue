@@ -34,8 +34,8 @@ const props = defineProps({
 
 const emit = defineEmits(["onUpdate"]);
 
-const onUpdate = (form, value, index = undefined) => {
-  emit("onUpdate", form, value, index);
+const onUpdate = (form, value) => {
+  emit("onUpdate", form, value);
 };
 
 const FormTypes = {
@@ -62,29 +62,30 @@ const getComponentByType = (type) => {
   }
 };
 
-const { values, errors } = props;
-const modelValues = (name) => {
+const modelValues = (name, defaultValue = "") => {
   if (typeof name === "object") {
     let modelValueData = [];
     name.forEach((formName) => {
-      modelValueData.push(values[formName.key]);
+      if (props.values[formName.key]) {
+        modelValueData.push(props.values[formName.key]);
+      }
     });
     return modelValueData;
   } else {
-    return values[name];
+    return props.values[name] ?? defaultValue;
   }
 };
 const errorValues = (name) => {
   if (typeof name === "object") {
     let errorMessage = [];
     name.forEach((formName) => {
-      if (errors[formName.key]) {
-        errorMessage.push(errors[formName.key]);
+      if (props.errors[formName.key]) {
+        errorMessage.push(props.errors[formName.key]);
       }
     });
     return errorMessage.join(",");
   } else {
-    return errors[name];
+    return props.errors[name] ?? "";
   }
 };
 </script>
@@ -96,7 +97,7 @@ const errorValues = (name) => {
         v-if="getComponentByType(form.type)"
         :class="form.className"
         v-bind="form.props"
-        :model-value="modelValues(form.name)"
+        :model-value="modelValues(form.name, form.default)"
         :error-message="errorValues(form.name)"
         @update:model-value="onUpdate(form, $event)"
       />

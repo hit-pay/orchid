@@ -45,7 +45,6 @@ const updateRangeSlider = ($event) => {
   localMinValue.value = $event?.[0];
   localMaxValue.value = $event?.[1];
   emit("update:modelValue", $event);
-  console.log($event);
 };
 </script>
 

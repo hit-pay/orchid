@@ -105,10 +105,11 @@ const modelValueOption = computed(() => {
       :is-disabled="isDisabled"
     >
       <div
-        class="border h-[36px] w-full px-3 flex justify-between items-center cursor-pointer gap-x-3 rounded"
+        class="border min-h-[36px] w-full px-3 flex justify-between items-center cursor-pointer gap-x-3 rounded"
         :class="{
           'border-oc-error': errorMessage && !isDisabled,
           'pointer-events-none bg-oc-bg-dark': isDisabled,
+          'py-3': multiple,
         }"
       >
         <div v-if="multiple" class="flex flex-wrap gap-2">

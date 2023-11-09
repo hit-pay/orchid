@@ -150,8 +150,6 @@ ourColorName.forEach((color) => {
   replacedClassName.push("shadow-" + color);
 });
 
-console.log("obsucator unique string length :", replacedClassName.length);
-
 const uniqChar = "0123456789abcdefghijklmnopqrstuvwxyz".split("");
 
 let uniqClassName = []; // up to 10656

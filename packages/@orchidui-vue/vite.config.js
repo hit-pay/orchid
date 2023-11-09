@@ -47,7 +47,13 @@ export default defineConfig({
       formats: ["es"],
     },
     rollupOptions: {
-      external: ["vue", "@popperjs/core", "dayjs", "v-calendar","@vueup/vue-quill"],
+      external: [
+        "vue",
+        "@popperjs/core",
+        "dayjs",
+        "v-calendar",
+        "@vueup/vue-quill",
+      ],
     },
   },
 });
