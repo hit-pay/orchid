@@ -15,10 +15,12 @@ export default {
 };
 
 import { DataTableOptions, Filter } from "../../data/DataTableOptions.sample";
+
 export const Default = {
   args: {
     filter: Filter,
     options: DataTableOptions,
+    isLoading: false,
   },
   render: (args) => ({
     components: {
@@ -36,7 +38,10 @@ export const Default = {
         // get new data
         args.filter = data;
       };
-      return { args, updateFilterData };
+      const onClickRow = (val) => {
+        console.log("onClickRow  ", val);
+      };
+      return { args, updateFilterData, onClickRow };
     },
     template: `
           <Theme class="p-8">
@@ -45,7 +50,14 @@ export const Default = {
                 <li v-for="(item, key) in args.filter">{{ key }} : {{ item }}</li>
               </ul>
             </div>
-            <DataTable id="sample-data-table" :filter="args.filter" :options="args.options" @update:filter="updateFilterData">
+            <DataTable 
+                id="sample-data-table" 
+                :filter="args.filter" 
+                :options="args.options"
+                :is-loading="args.isLoading"
+                @update:filter="updateFilterData"
+                @click:row="onClickRow"
+                 >
               <template #before>
                 Slot Before
               </template>

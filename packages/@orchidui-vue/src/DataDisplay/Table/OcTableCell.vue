@@ -1,15 +1,17 @@
 <script setup>
 import { computed, ref } from "vue";
 import { Checkbox, Icon, Tooltip, TableCellContent } from "@/orchidui";
+import dayjs from "dayjs";
 
 const Variants = {
   CHECKBOX: "checkbox",
   CONTENT: "content",
+  DATETIME: "datetime",
   ICON: "icon",
   IMAGE: "image",
   EMPTY: "empty",
 };
-defineProps({
+const props = defineProps({
   isSimple: Boolean,
   variant: {
     type: String,
@@ -19,9 +21,25 @@ defineProps({
   isCopy: Boolean,
   isSelected: Boolean,
   data: String,
+  isLoading: Boolean,
+  content: {
+    type: Object,
+    default() {
+      return {
+        title: null,
+        description: null,
+      };
+    },
+  },
+  datetime: String,
 });
-defineEmits({
+const emit = defineEmits({
   selected: [],
+  copied: [],
+});
+
+const hasContentData = computed(() => {
+  return props.data || props.content.title || props.content.description;
 });
 
 const variantClass = computed(() => ({
@@ -29,26 +47,47 @@ const variantClass = computed(() => ({
   [Variants.ICON]: "md:px-2 px-4 min-w-[32px] ",
   [Variants.IMAGE]: "md:px-2 px-4 min-w-[32px]",
   [Variants.CONTENT]: "px-4",
+  [Variants.DATETIME]: "px-4",
   [Variants.EMPTY]: "px-4 min-w-[48px]",
 }));
 const isCopied = ref(false);
 const copyToClipboard = async (text) => {
+  emit("copied", true);
   isCopied.value = true;
   try {
     await navigator.clipboard.writeText(text);
   } catch (err) {
     console.error("Unable to copy text to clipboard. Error: ", err);
   }
-  setTimeout(() => (isCopied.value = false), 500);
+  setTimeout(() => {
+    isCopied.value = false;
+    emit("copied", false);
+  }, 500);
 };
 </script>
 
 <template>
   <div
-    :class="[variantClass[variant] || 'px-4', isLast ? '' : '']"
+    :class="[
+      variantClass[variant] || 'px-4',
+      isLoading ? 'flex items-center' : '',
+    ]"
     class="py-3 bg-oc-bg-light md:min-h-[58px] md:group-hover/row:bg-oc-gray-50 items-center"
   >
-    <div class="flex" :class="isCopy ? 'justify-between' : 'justify-start'">
+    <div
+      v-if="isLoading"
+      class="rounded-full bg-gray-100 w-full overflow-hidden h-6"
+    >
+      <div
+        class="slide relative rounded-full h-6 w-[40px] bg-[linear-gradient(-90deg,_var(--oc-gray-200)_0%,_rgba(229,_230,_234,_0)_100%)]"
+      />
+    </div>
+
+    <div
+      v-else
+      class="flex"
+      :class="isCopy ? 'justify-between' : 'justify-start'"
+    >
       <slot>
         <!--  CHECKBOX    -->
         <Checkbox
@@ -64,7 +103,6 @@ const copyToClipboard = async (text) => {
           "
           @update:model-value="$emit('selected')"
         />
-
         <!--  ICON    -->
         <Icon
           v-else-if="variant === Variants.ICON"
@@ -91,15 +129,25 @@ const copyToClipboard = async (text) => {
         <!--  EMPTY    -->
         <div v-else-if="variant === Variants.EMPTY">-</div>
 
+        <TableCellContent
+          v-else-if="variant === Variants.DATETIME"
+          :title="dayjs(datetime).format('D MMM, YYYY')"
+          :description="dayjs(datetime).format('h:mm A')"
+        />
+
         <!--   CONTENT   -->
-        <TableCellContent v-else-if="variant === Variants.CONTENT" important />
+        <TableCellContent
+          v-else-if="variant === Variants.CONTENT"
+          v-bind="content"
+        />
 
         <!--  DEFAULT    -->
-        <div v-else class="flex items-center w-full">{{ data }}</div>
+        <div v-else-if="data" class="flex items-center w-full">{{ data }}</div>
+        <div v-else>-</div>
       </slot>
 
       <Tooltip
-        v-if="isCopy"
+        v-if="isCopy && hasContentData"
         position="top"
         :hide-after="1500"
         trigger="click"
@@ -119,3 +167,19 @@ const copyToClipboard = async (text) => {
     </div>
   </div>
 </template>
+<style lang="scss">
+.slide {
+  animation: slide 1.5s infinite;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(-100%);
+    left: 0;
+  }
+  100% {
+    transform: translateX(100%);
+    left: 100%;
+  }
+}
+</style>
