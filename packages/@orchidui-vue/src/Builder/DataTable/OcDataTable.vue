@@ -53,35 +53,42 @@ const queries = ref(defaultQuery ? defaultQuery.split(",") : []);
 const isSearchExpanded = ref(false);
 
 const perPageOptions = computed(() => {
-  let page = 10;
   let per_page_option = [
-    {
-      label: page?.toString(),
-      value: page,
+  {
+      label: '5',
+      value: 5,
     },
     {
-      label: (page * 2)?.toString(),
-      value: page * 2,
+      label: '10',
+      value: 10,
     },
     {
-      label: (page * 3)?.toString(),
-      value: page * 3,
+      label: '15',
+      value: 15,
     },
     {
-      label: (page * 4)?.toString(),
-      value: page * 4,
+      label: '20',
+      value: 20,
     },
     {
-      label: (page * 6)?.toString(),
-      value: page * 6,
+      label: '25',
+      value: 25,
     },
     {
-      label: (page * 8)?.toString(),
-      value: page * 8,
+      label: '40',
+      value: 40,
     },
     {
-      label: (page * 10)?.toString(),
-      value: page * 10,
+      label: '50',
+      value: 50,
+    },
+    {
+      label: '75',
+      value: 75,
+    },
+    {
+      label: '99',
+      value: 99,
     },
   ];
   const maxLength = pagination.value.total < 100 ? pagination.value.total : 100;
