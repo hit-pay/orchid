@@ -16,14 +16,14 @@ const props = defineProps({
     default: 0,
   },
   modelValue: {
-    type: Array,
-    required: true,
+    type: [Array, String],
   },
 });
 
 const emit = defineEmits({
   "update:modelValue": [],
 });
+const localValue = ref(props.modelValue ?? []);
 const localMinValue = ref();
 const localMaxValue = ref();
 const slider = ref();
@@ -36,8 +36,8 @@ const updateRange = async (value) => {
 };
 onMounted(async () => {
   await nextTick();
-  localMinValue.value = props.modelValue?.[0] || 0;
-  localMaxValue.value = props.modelValue?.[1] || 100;
+  localMinValue.value = localValue.value?.[0] || 0;
+  localMaxValue.value = localValue.value?.[1] || 100;
   slider.value.updateSlider();
 });
 
@@ -58,7 +58,7 @@ const updateRangeSlider = ($event) => {
         is-inline-label
         placeholder=""
         @update:model-value="
-          updateRange([Number(localMinValue), modelValue?.[1]])
+          updateRange([Number(localMinValue), localValue?.[1]])
         "
       />
       <Input
@@ -67,7 +67,7 @@ const updateRangeSlider = ($event) => {
         is-inline-label
         placeholder=""
         @update:model-value="
-          updateRange([modelValue?.[0], Number(localMaxValue)])
+          updateRange([localValue?.[0], Number(localMaxValue)])
         "
       />
     </div>

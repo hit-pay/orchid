@@ -64,7 +64,7 @@ const getComponentByType = (type) => {
 
 const modelValues = (name, defaultValue = "") => {
   if (typeof name === "object") {
-    let modelValueData = [];
+    let modelValueData = "";
     name.forEach((formName) => {
       if (props.values[formName.key]) {
         modelValueData.push(props.values[formName.key]);

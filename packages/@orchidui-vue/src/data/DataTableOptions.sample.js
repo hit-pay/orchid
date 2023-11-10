@@ -127,9 +127,6 @@ const DataTableOptions = {
 const Filter = {
   page: 1,
   per_page: 10,
-  tabs: "",
-  keywords: "",
-  range_input: [1, 100],
 };
 
 export { DataTableOptions, Filter };

@@ -1,5 +1,5 @@
 <script setup>
-import { Button, Dropdown, FormBuilder } from "@/orchidui";
+import { Button, FormBuilder } from "@/orchidui";
 import { ref, computed, onMounted } from "vue";
 
 const props = defineProps({
@@ -15,11 +15,10 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(["applyFilter"]);
+const emit = defineEmits(["applyFilter", "cancel"]);
 
 const valuesData = ref({});
 const errorsData = ref({});
-const isDropdownOpened = ref(false);
 
 const onUpdateForm = (form, value = null) => {
   if (typeof form.name === "object") {
@@ -43,46 +42,36 @@ const applyFilter = () => {
 };
 </script>
 <template>
-  <Dropdown v-model="isDropdownOpened" :distance="9">
-    <Button
-      :is-active="isDropdownOpened"
-      variant="secondary"
-      left-icon="filter"
-    />
-
-    <template #menu>
-      <div class="p-5 flex w-[326px] flex-col gap-y-7">
-        <slot
-          :errors="errorsData"
-          :values="valuesData"
-          :json-form="jsonForm"
-          :update-form="onUpdateForm"
-        >
-          <FormBuilder
-            :id="`filter-form-${id}`"
-            class="grid gap-5"
-            :errors="errorsData"
-            :values="valuesData"
-            :json-form="jsonForm"
-            @on-update="onUpdateForm"
-          >
-          </FormBuilder>
-        </slot>
-        <div class="flex gap-x-5">
-          <Button
-            class="w-full"
-            variant="secondary"
-            label="Cancel"
-            @click="isDropdownOpened = false"
-          />
-          <Button
-            class="w-full"
-            :is-disabled="!filterAdded"
-            label="Apply"
-            @click="applyFilter"
-          />
-        </div>
-      </div>
-    </template>
-  </Dropdown>
+  <div class="p-5 flex w-[326px] flex-col gap-y-7">
+    <slot
+      :errors="errorsData"
+      :values="valuesData"
+      :json-form="jsonForm"
+      :update-form="onUpdateForm"
+    >
+      <FormBuilder
+        :id="`filter-form-${id}`"
+        class="grid gap-5"
+        :errors="errorsData"
+        :values="valuesData"
+        :json-form="jsonForm"
+        @on-update="onUpdateForm"
+      >
+      </FormBuilder>
+    </slot>
+    <div class="flex gap-x-5">
+      <Button
+        class="w-full"
+        variant="secondary"
+        label="Cancel"
+        @click="$emit('cancel')"
+      />
+      <Button
+        class="w-full"
+        :is-disabled="!filterAdded"
+        label="Apply"
+        @click="applyFilter"
+      />
+    </div>
+  </div>
 </template>

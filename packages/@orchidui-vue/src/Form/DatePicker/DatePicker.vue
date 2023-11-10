@@ -47,12 +47,13 @@ const props = defineProps({
   },
   placeholder: String,
 });
+console.log(props.type, props.from, props.to, props.modelValue);
 
 let defaultValue = props.modelValue;
 if (props.type === "range" && props.from && props.to) {
   defaultValue = [props.from, props.to];
 }
-const date = ref(defaultValue);
+const date = ref(defaultValue ?? "");
 const isDropdownOpened = ref(false);
 
 const formattedDate = computed(() => {

@@ -7,6 +7,8 @@ import {
   FilterSearch,
   FilterSearchFor,
   FilterForm,
+  Button,
+  Dropdown,
 } from "@/orchidui";
 import { ref, computed } from "vue";
 
@@ -43,6 +45,7 @@ const filterOptions = computed(() => {
   return props.options?.filterOptions;
 });
 
+const isDropdownOpened = ref(false);
 const selectedRows = ref([]);
 const filterTab = ref(props.filter[filterOptions.value?.tabs?.key]);
 const currentPage = ref(props.filter.page);
@@ -220,23 +223,38 @@ const displayFilterData = computed(() => {
               @add-query="addQuery"
               @toggle="isSearchExpanded = $event"
             />
-            <FilterForm
+            <Dropdown
               v-if="filterOptions?.form"
-              :id="id"
-              :json-form="filterOptions.form ?? []"
-              :values="props.filter"
-              @apply-filter="applyFilter($event)"
+              v-model="isDropdownOpened"
+              :distance="9"
             >
-              <template #default="{ errors, values, jsonForm, updateForm }">
-                <slot
-                  name="custom-filter-form"
-                  :errors="errors"
-                  :values="values"
-                  :json-form="jsonForm"
-                  :update-filter="updateForm"
-                ></slot>
+              <Button
+                :is-active="isDropdownOpened"
+                variant="secondary"
+                left-icon="filter"
+              />
+
+              <template #menu>
+                <FilterForm
+                  v-if="isDropdownOpened"
+                  :id="id"
+                  :json-form="filterOptions.form ?? []"
+                  :values="props.filter"
+                  @apply-filter="applyFilter($event)"
+                  @cancel="isDropdownOpened = false"
+                >
+                  <template #default="{ errors, values, jsonForm, updateForm }">
+                    <slot
+                      name="custom-filter-form"
+                      :errors="errors"
+                      :values="values"
+                      :json-form="jsonForm"
+                      :update-filter="updateForm"
+                    ></slot>
+                  </template>
+                </FilterForm>
               </template>
-            </FilterForm>
+            </Dropdown>
           </div>
         </div>
         <FilterSearchFor

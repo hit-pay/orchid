@@ -4,7 +4,7 @@ const SampleFilterForm = [
     type: "CheckboxesGroup",
     rule: "required",
     props: {
-      label: "Example Label",
+      label: "CheckboxesGroup",
       hint: "This is a hint text to help user",
       alignment: "vertical",
       checkboxes: [
@@ -38,7 +38,7 @@ const SampleFilterForm = [
     type: "DatePicker",
     props: {
       type: "range",
-      label: "Example Label",
+      label: "DatePicker Range",
       hint: "This is a hint text to help user",
       placeholder: "placeholder",
     },
@@ -47,7 +47,7 @@ const SampleFilterForm = [
     name: "only_date",
     type: "DatePicker",
     props: {
-      label: "Example Label",
+      label: "DatePicker",
       hint: "This is a hint text to help user",
       placeholder: "placeholder",
     },
@@ -57,7 +57,7 @@ const SampleFilterForm = [
     type: "RadioGroup",
     props: {
       groupName: "unique_group_name",
-      label: "Example Label",
+      label: "RadioGroup",
       hint: "This is a hint text to help user",
       placeholder: "placeholder",
       radio: [
@@ -89,7 +89,7 @@ const SampleFilterForm = [
     name: "range_input",
     type: "RangeInput",
     props: {
-      label: "Example Label",
+      label: "RangeInput",
       hint: "This is a hint text to help user",
       placeholder: "placeholder",
     },
@@ -98,7 +98,7 @@ const SampleFilterForm = [
     name: "select",
     type: "Select",
     props: {
-      label: "Example Label",
+      label: "Select",
       hint: "This is a hint text to help user",
       placeholder: "placeholder",
       isFilterable: true,
@@ -125,10 +125,9 @@ const SampleFilterForm = [
   },
   {
     name: "select_multiple",
-    default: [],
     type: "Select",
     props: {
-      label: "Example Label",
+      label: "Select Multiple",
       hint: "This is a hint text to help user",
       placeholder: "placeholder",
       isFilterable: true,
