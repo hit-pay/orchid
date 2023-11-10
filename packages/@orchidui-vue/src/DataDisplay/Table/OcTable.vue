@@ -146,6 +146,7 @@ const onClickRow = (field, header) => {
             title: field[header.title],
             description: field[header.description],
           }"
+          :chip-options="header.chipOptions"
           class="flex"
           :class="header.class"
           @click="onClickRow(field, header)"

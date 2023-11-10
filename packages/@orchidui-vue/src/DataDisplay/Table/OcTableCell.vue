@@ -1,6 +1,6 @@
 <script setup>
 import { computed, ref } from "vue";
-import { Checkbox, Icon, Tooltip, TableCellContent } from "@/orchidui";
+import { Checkbox, Icon, Tooltip, TableCellContent, Chip } from "@/orchidui";
 import dayjs from "dayjs";
 
 const Variants = {
@@ -22,6 +22,7 @@ const props = defineProps({
   isSelected: Boolean,
   data: String,
   isLoading: Boolean,
+  chipOptions: Object,
   content: {
     type: Object,
     default() {
@@ -46,6 +47,7 @@ const variantClass = computed(() => ({
   [Variants.ICON]: "md:px-2 px-4 min-w-[32px] ",
   [Variants.IMAGE]: "md:px-2 px-4 min-w-[32px]",
   [Variants.CONTENT]: "px-4",
+  [Variants.CHIP]: "px-4",
   [Variants.DATETIME]: "px-4",
   [Variants.EMPTY]: "px-4 min-w-[48px]",
 }));
@@ -139,7 +141,9 @@ const copyToClipboard = async (text) => {
           v-else-if="variant === Variants.CONTENT"
           v-bind="content"
         />
-
+        <!--   CHIP   -->
+        <Chip v-else-if="variant === Variants.CHIP" :label="data" :variant="chipOptions[data]"/>
+        
         <!--  DEFAULT    -->
         <div v-else-if="data" class="flex items-center w-full">{{ data }}</div>
         <div v-else>-</div>
