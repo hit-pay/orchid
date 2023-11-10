@@ -118,16 +118,21 @@ const removeQuery = (query) => {
   queries.value = queries.value.filter((q) => q !== query);
   applyFilter();
 };
-const removeAllQuery = () => {
+
+const filterData = ref(props.filter ?? {});
+
+const removeAllQueryFilter = () => {
   queries.value = [];
+  filterData.value = {
+    page: 1,
+    per_page: perPage.value,
+  };
   applyFilter();
 };
 
 const changePage = () => {
   applyFilter(null, currentPage.value);
 };
-
-const filterData = ref(props.filter ?? {});
 
 const applyFilter = (filterForm = null, isChangePage = false) => {
   if (!isChangePage) {
@@ -159,10 +164,12 @@ const displayFilterData = computed(() => {
         name !== filterOptions.value.search.key
       ) {
         const option = filterOptions.value.form.find((f) => f.name === name);
-        display.push({
-          label: `${option.props.label} : ${filterData.value[name]}`,
-          name: filterData.value[name],
-        });
+        if (filterData.value[name]) {
+          display.push({
+            label: `${option.props.label} : ${filterData.value[name]}`,
+            name: name,
+          });
+        }
       }
     });
     return display;
@@ -237,7 +244,8 @@ const displayFilterData = computed(() => {
           :queries="queries"
           class="border-t border-oc-gray-200"
           @remove-query="removeQuery"
-          @remove-all="removeAllQuery"
+          @remove-all="removeAllQueryFilter"
+          @remove-filter="applyFilter($event)"
         />
       </template>
       <template
