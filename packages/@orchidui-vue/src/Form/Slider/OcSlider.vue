@@ -89,7 +89,7 @@ defineExpose({
   updateSlider,
 });
 
-onMounted(() => updateSlider())
+onMounted(() => updateSlider());
 </script>
 
 <template>

@@ -152,6 +152,7 @@ const applyFilter = (filterForm = null, isChangePage = false) => {
   }
 
   if (filterForm) {
+    isDropdownOpened.value = false;
     filterData.value = { ...filterData.value, ...filterForm };
   }
   emit("update:filter", filterData.value);

@@ -1,6 +1,6 @@
 {
   "name": "@orchidui/vue",
-  "version": "0.1.102",
+  "version": "0.1.104",
   "type": "module",
   "scripts": {
     "build": "vite build",
