@@ -25,8 +25,11 @@ const emit = defineEmits({
 });
 
 const localValue = ref(props.modelValue ?? []);
-const localMinValue = ref(localValue.value?.[0] ?? 0);
-const localMaxValue = ref(localValue.value?.[1] ?? 100);
+const defaultLocalMinValue = localValue.value?.[0] ?? props.minLimit
+const defaultLocalMaxValue = localValue.value?.[1] ?? props.maxLimit
+
+const localMinValue = ref(defaultLocalMinValue);
+const localMaxValue = ref(defaultLocalMaxValue);
 const slider = ref();
 
 const updateRange = async (value) => {
