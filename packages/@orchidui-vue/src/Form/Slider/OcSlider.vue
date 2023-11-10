@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 
 const props = defineProps({
   maxLimit: {
@@ -88,13 +88,15 @@ const updateSlider = (value) => {
 defineExpose({
   updateSlider,
 });
+
+onMounted(() => updateSlider())
 </script>
 
 <template>
   <div class="relative w-full h-[33px]">
     <div
       ref="sliderTrack"
-      class="rounded-full h-3 absolute m-auto top-0 w-full"
+      class="rounded-full h-3 absolute m-auto top-0 w-full group"
     />
 
     <input
@@ -117,7 +119,7 @@ defineExpose({
     />
 
     <div
-      class="absolute top-[1rem] z-[1] -translate-x-1/2 rounded-sm py-[3px] px-[6px] min-w-[28px] bg-oc-text-500 text-center text-white text-sm font-medium leading-[20px]"
+      class="group-hover:block absolute top-[1rem] z-[1] -translate-x-1/2 rounded-sm py-[3px] px-[6px] min-w-[28px] bg-oc-text-500 text-center text-white text-sm font-medium leading-[20px]"
       :style="`left: ${percent1}%`"
     >
       {{ type === "range" ? modelValue?.[0] : modelValue }}
@@ -125,7 +127,7 @@ defineExpose({
 
     <div
       v-if="type === 'range'"
-      class="absolute top-[1rem] z-[1] translate-x-1/2 rounded-sm py-[3px] px-[6px] min-w-[28px] bg-oc-text-500 text-center text-white text-sm font-medium leading-[20px]"
+      class="group-hover:block absolute top-[1rem] z-[1] translate-x-1/2 rounded-sm py-[3px] px-[6px] min-w-[28px] bg-oc-text-500 text-center text-white text-sm font-medium leading-[20px]"
       :style="`right: ${100 - percent2}%`"
     >
       {{ modelValue?.[1] }}
