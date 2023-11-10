@@ -163,11 +163,13 @@ const displayFilterData = computed(() => {
     let display = [];
 
     Object.keys(filterData.value).forEach((name) => {
+      const filterTabKey = filterOptions.value?.tabs?.key;
+      const filterSearchKey = filterOptions.value?.search?.key;
       if (
         name !== "page" &&
         name !== "per_page" &&
-        name !== filterOptions.value.tabs.key &&
-        name !== filterOptions.value.search.key
+        name !== filterTabKey &&
+        name !== filterSearchKey
       ) {
         let option = filterOptions.value.form.find((f) => {
           if (typeof f.name === "object") {
