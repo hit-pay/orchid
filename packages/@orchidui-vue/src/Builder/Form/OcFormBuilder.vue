@@ -67,7 +67,11 @@ const modelValues = (name, defaultValue = "") => {
     let modelValueData = "";
     name.forEach((formName) => {
       if (props.values[formName.key]) {
-        modelValueData.push(props.values[formName.key]);
+        if (modelValueData) {
+          modelValueData.push(props.values[formName.key]);
+        } else {
+          modelValueData = [props.values[formName.key]];
+        }
       }
     });
     return modelValueData;

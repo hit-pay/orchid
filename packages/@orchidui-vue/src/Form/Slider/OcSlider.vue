@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 
 const props = defineProps({
   maxLimit: {
@@ -83,7 +83,6 @@ const updateSlider = () => {
 defineExpose({
   updateSlider,
 });
-onMounted(() => updateSlider());
 </script>
 
 <template>

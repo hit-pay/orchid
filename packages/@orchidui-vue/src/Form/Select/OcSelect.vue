@@ -72,6 +72,7 @@ const selectOption = (option) => {
   if (!props.multiple) {
     isDropdownOpened.value = false;
   }
+  localValue.value = result;
   emit("update:modelValue", result);
 };
 
@@ -96,6 +97,11 @@ const localValueOption = computed(() => {
     return props.options.find((o) => o.value === localValue.value);
   }
 });
+
+const removeOption = (value) => {
+  localValue.value = localValue.value.filter((o) => o !== value);
+  emit("update:modelValue", localValue.value);
+};
 </script>
 
 <template>
@@ -124,12 +130,7 @@ const localValueOption = computed(() => {
             :key="option.value"
             closable
             :label="option.label"
-            @remove="
-              $emit(
-                'update:modelValue',
-                localValue.filter((o) => o !== option.value),
-              )
-            "
+            @remove="removeOption(option.value)"
           />
           <span v-if="localValueOption.length === 0" class="text-oc-text-300">{{
             placeholder

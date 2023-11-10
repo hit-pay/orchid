@@ -1,6 +1,6 @@
 <script setup>
 import { Input, Slider } from "@/orchidui";
-import { nextTick,  ref } from "vue";
+import { nextTick, ref } from "vue";
 
 const props = defineProps({
   maxLimit: {
@@ -23,7 +23,6 @@ const props = defineProps({
 const emit = defineEmits({
   "update:modelValue": [],
 });
-
 
 const localValue = ref(props.modelValue ?? []);
 const localMinValue = ref(localValue.value?.[0] ?? 0);

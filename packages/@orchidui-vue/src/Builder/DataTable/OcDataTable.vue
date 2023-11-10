@@ -150,6 +150,7 @@ const applyFilter = (filterForm = null, isChangePage = false) => {
   if (filterOptions.value?.search) {
     filterData.value[filterOptions.value.search.key] = queries.value.join();
   }
+
   if (filterForm) {
     filterData.value = { ...filterData.value, ...filterForm };
   }
@@ -159,6 +160,7 @@ const applyFilter = (filterForm = null, isChangePage = false) => {
 const displayFilterData = computed(() => {
   if (filterData.value) {
     let display = [];
+
     Object.keys(filterData.value).forEach((name) => {
       if (
         name !== "page" &&
@@ -166,7 +168,19 @@ const displayFilterData = computed(() => {
         name !== filterOptions.value.tabs.key &&
         name !== filterOptions.value.search.key
       ) {
-        const option = filterOptions.value.form.find((f) => f.name === name);
+        let option = filterOptions.value.form.find((f) => {
+          if (typeof f.name === "object") {
+            let isSelectedOption = false;
+            f.name.forEach((formName) => {
+              if (formName.key === name) {
+                isSelectedOption = true;
+              }
+            });
+            return isSelectedOption;
+          } else {
+            return f.name === name;
+          }
+        });
         if (filterData.value[name]) {
           display.push({
             label: `${option.props.label} : ${filterData.value[name]}`,
