@@ -47,7 +47,6 @@ const props = defineProps({
   },
   placeholder: String,
 });
-console.log(props.type, props.from, props.to, props.modelValue);
 
 let defaultValue = props.modelValue;
 if (props.type === "range" && props.from && props.to) {

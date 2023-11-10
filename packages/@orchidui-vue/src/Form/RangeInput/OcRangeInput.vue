@@ -1,6 +1,6 @@
 <script setup>
 import { Input, Slider } from "@/orchidui";
-import { nextTick, onMounted, ref } from "vue";
+import { nextTick,  ref } from "vue";
 
 const props = defineProps({
   maxLimit: {
@@ -23,9 +23,11 @@ const props = defineProps({
 const emit = defineEmits({
   "update:modelValue": [],
 });
+
+
 const localValue = ref(props.modelValue ?? []);
-const localMinValue = ref();
-const localMaxValue = ref();
+const localMinValue = ref(localValue.value?.[0] ?? 0);
+const localMaxValue = ref(localValue.value?.[1] ?? 100);
 const slider = ref();
 
 const updateRange = async (value) => {
@@ -34,12 +36,6 @@ const updateRange = async (value) => {
   await nextTick();
   slider.value.updateSlider();
 };
-onMounted(async () => {
-  await nextTick();
-  localMinValue.value = localValue.value?.[0] || 0;
-  localMaxValue.value = localValue.value?.[1] || 100;
-  slider.value.updateSlider();
-});
 
 const updateRangeSlider = ($event) => {
   localMinValue.value = $event?.[0];
