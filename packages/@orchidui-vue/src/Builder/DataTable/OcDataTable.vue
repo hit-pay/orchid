@@ -127,7 +127,7 @@ const changePage = () => {
   applyFilter(null, currentPage.value);
 };
 
-const filterData = ref({});
+const filterData = ref(props.filter ?? {});
 
 const applyFilter = (filterForm = null, isChangePage = false) => {
   if (!isChangePage) {
@@ -147,6 +147,28 @@ const applyFilter = (filterForm = null, isChangePage = false) => {
   }
   emit("update:filter", filterData.value);
 };
+
+const displayFilterData = computed(() => {
+  if (filterData.value) {
+    let display = [];
+    Object.keys(filterData.value).forEach((name) => {
+      if (
+        name !== "page" &&
+        name !== "per_page" &&
+        name !== filterOptions.value.tabs.key &&
+        name !== filterOptions.value.search.key
+      ) {
+        const option = filterOptions.value.form.find((f) => f.name === name);
+        display.push({
+          label: `${option.props.label} : ${filterData.value[name]}`,
+          name: filterData.value[name],
+        });
+      }
+    });
+    return display;
+  }
+  return [];
+});
 </script>
 <template>
   <div class="flex flex-col gap-3">
@@ -211,7 +233,7 @@ const applyFilter = (filterForm = null, isChangePage = false) => {
           </div>
         </div>
         <FilterSearchFor
-          v-if="queries.length"
+          :filters="displayFilterData"
           :queries="queries"
           class="border-t border-oc-gray-200"
           @remove-query="removeQuery"

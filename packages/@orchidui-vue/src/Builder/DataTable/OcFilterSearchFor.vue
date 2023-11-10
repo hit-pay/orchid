@@ -1,11 +1,19 @@
 <script setup>
+import { computed } from "vue";
 import { TableHeader, Chip } from "@/orchidui";
-defineProps({
-  queries: Array,
+const props = defineProps({
+  filters: Object,
+  queries: Object,
 });
 defineEmits({
   removeQuery: [],
+  removeFilter: [],
   removeAll: [],
+});
+
+const filterData = computed(() => {
+  console.log(props.filters);
+  return props.filters;
 });
 </script>
 
@@ -20,6 +28,14 @@ defineEmits({
         closable
         :label="query"
         @remove="$emit('removeQuery', query)"
+      />
+      <Chip
+        v-for="item in filterData"
+        :key="item.name"
+        variant="accent-1"
+        closable
+        :label="item.label"
+        @remove="$emit('removeFilter', item.name)"
       />
       <Chip
         variant="gray"

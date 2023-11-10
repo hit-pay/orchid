@@ -125,6 +125,9 @@ const modelValueOption = computed(() => {
               )
             "
           />
+          <span v-if="modelValueOption.length === 0" class="text-oc-text-300">{{
+            placeholder
+          }}</span>
         </div>
         <template v-else>
           <span class="whitespace-nowrap">
@@ -163,7 +166,7 @@ const modelValueOption = computed(() => {
                 :label="option.label"
                 :is-selected="
                   multiple
-                    ? modelValue.find((o) => o === option.value)
+                    ? modelValue.find((o) => o === option.value) !== undefined
                     : modelValue === option.value
                 "
                 @click="selectOption(option)"

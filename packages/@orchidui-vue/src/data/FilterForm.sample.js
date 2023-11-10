@@ -44,6 +44,15 @@ const SampleFilterForm = [
     },
   },
   {
+    name: "only_date",
+    type: "DatePicker",
+    props: {
+      label: "Example Label",
+      hint: "This is a hint text to help user",
+      placeholder: "placeholder",
+    },
+  },
+  {
     name: "radio_group",
     type: "RadioGroup",
     props: {

@@ -29,6 +29,23 @@ const props = defineProps({
     type: String,
     default: "DD/MM/YYYY",
   },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  errorMessage: {
+    type: String,
+    default: "",
+  },
+  label: {
+    type: String,
+    default: "",
+  },
+  hint: {
+    type: String,
+    default: "",
+  },
+  placeholder: String,
 });
 
 let defaultValue = props.modelValue;
@@ -40,11 +57,11 @@ const isDropdownOpened = ref(false);
 
 const formattedDate = computed(() => {
   if (props.type === "default") {
-    return dayjs(date.value).format(props.dateFormat);
+    return date.value ? dayjs(date.value).format(props.dateFormat) : "";
   } else {
     return [
-      dayjs(date.value?.[0]).format(props.dateFormat),
-      dayjs(date.value?.[1]).format(props.dateFormat),
+      date.value?.[0] ? dayjs(date.value?.[0]).format(props.dateFormat) : "",
+      date.value?.[1] ? dayjs(date.value?.[1]).format(props.dateFormat) : "",
     ];
   }
 });
@@ -61,19 +78,31 @@ const updateCalendar = () => {
 </script>
 
 <template>
-  <Dropdown v-model="isDropdownOpened" placement="bottom-start" :distance="10">
-    <Input
-      v-if="type === 'default'"
-      :model-value="formattedDate"
-      icon="calendar"
-      readonly
-    />
+  <Dropdown
+    v-model="isDropdownOpened"
+    placement="bottom-start"
+    :distance="10"
+    class="w-full"
+  >
+    <div v-if="type === 'default'" class="flex w-full">
+      <Input
+        :model-value="formattedDate"
+        icon="calendar"
+        :label="label"
+        :hint="hint"
+        :placeholder="placeholder"
+        :disabled="disabled"
+        readonly
+      />
+    </div>
 
     <div v-else class="flex gap-x-4">
       <Input
         label="From"
         :model-value="formattedDate[0]"
         icon="calendar"
+        :placeholder="placeholder"
+        :disabled="disabled"
         readonly
       />
 
@@ -81,12 +110,15 @@ const updateCalendar = () => {
         label="To"
         :model-value="formattedDate[1]"
         icon="calendar"
+        :placeholder="placeholder"
+        :disabled="disabled"
         readonly
       />
     </div>
 
     <template #menu>
       <Calendar
+        v-if="!disabled"
         v-model="date"
         :disabled-date="disabledDate"
         :max-date="maxDate"
