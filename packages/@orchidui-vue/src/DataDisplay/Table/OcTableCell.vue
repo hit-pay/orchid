@@ -30,8 +30,7 @@ const props = defineProps({
         description: null,
       };
     },
-  },
-  datetime: String,
+  }
 });
 const emit = defineEmits({
   selected: [],
@@ -131,8 +130,8 @@ const copyToClipboard = async (text) => {
 
         <TableCellContent
           v-else-if="variant === Variants.DATETIME"
-          :title="dayjs(datetime).format('D MMM, YYYY')"
-          :description="dayjs(datetime).format('h:mm A')"
+          :title="dayjs(data).format('D MMM, YYYY')"
+          :description="dayjs(data).format('h:mm A')"
         />
 
         <!--   CONTENT   -->
