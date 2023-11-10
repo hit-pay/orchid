@@ -3,6 +3,7 @@ defineProps({
   modelValue: [String, Boolean],
   isDisabled: Boolean,
   isError: Boolean,
+  checked: Boolean,
   label: String,
   id: [String, Number],
   groupName: String,
@@ -20,6 +21,7 @@ defineEmits({
     <input
       :id="groupName + id"
       :value="modelValue"
+      :checked="checked"
       :name="groupName"
       :disabled="isDisabled"
       class="radio-button__input absolute opacity-0 w-0 h-0"

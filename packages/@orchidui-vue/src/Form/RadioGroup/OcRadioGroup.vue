@@ -9,6 +9,7 @@ defineProps({
   },
   radio: Array,
   label: String,
+  wrapperClass: String,
   groupName: String,
   errorMessage: String,
   hint: String,
@@ -28,7 +29,7 @@ const onInput = (value) => {
 
 <template>
   <BaseInput :label="label" :error-message="errorMessage" :hint="hint">
-    <div class="flex" :class="alignmentClasses[alignment]">
+    <div class="flex" :class="[alignmentClasses[alignment], wrapperClass]">
       <Radio
         v-for="(r, i) in radio"
         :id="r.value"
@@ -36,7 +37,8 @@ const onInput = (value) => {
         :model-value="r.value"
         :label="r.label"
         :is-error="!!errorMessage"
-        :is-disabled="r.isDisabled ? true : false"
+        :checked="r.value === modelValue"
+        :is-disabled="!!r.isDisabled"
         :group-name="groupName"
         @update:model-value="onInput"
       />
