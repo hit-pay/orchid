@@ -42,24 +42,26 @@ const applyFilter = () => {
 };
 </script>
 <template>
-  <div class="p-5 flex w-[326px] flex-col gap-y-7">
+  <div class="flex w-[326px] flex-col gap-y-5">
     <slot
       :errors="errorsData"
       :values="valuesData"
       :json-form="jsonForm"
       :update-form="onUpdateForm"
     >
-      <FormBuilder
-        :id="`filter-form-${id}`"
-        class="grid gap-5"
-        :errors="errorsData"
-        :values="valuesData"
-        :json-form="jsonForm"
-        @on-update="onUpdateForm"
-      >
-      </FormBuilder>
+      <div class="max-h-[70vh] overflow-y-auto p-5">
+        <FormBuilder
+          :id="`filter-form-${id}`"
+          class="grid gap-5"
+          :errors="errorsData"
+          :values="valuesData"
+          :json-form="jsonForm"
+          @on-update="onUpdateForm"
+        >
+        </FormBuilder>
+      </div>
     </slot>
-    <div class="flex gap-x-5">
+    <div class="flex gap-x-5 p-5">
       <Button
         class="w-full"
         variant="secondary"

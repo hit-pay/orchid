@@ -227,6 +227,7 @@ const displayFilterData = computed(() => {
               v-if="filterOptions?.form"
               v-model="isDropdownOpened"
               :distance="9"
+              placement="bottom-end"
             >
               <Button
                 :is-active="isDropdownOpened"
