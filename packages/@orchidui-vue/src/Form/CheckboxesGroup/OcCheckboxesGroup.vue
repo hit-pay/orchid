@@ -9,10 +9,7 @@ const props = defineProps({
   },
   checkboxes: Array,
   modelValue: {
-    type: Array,
-    default: () => {
-      return [];
-    },
+    type: [Array, String],
   },
   label: String,
   errorMessage: String,
@@ -22,6 +19,7 @@ const props = defineProps({
 const emit = defineEmits({
   "update:modelValue": [],
 });
+
 const alignmentClasses = computed(() => ({
   horizontal: "gap-x-5 flex-wrap",
   vertical: "flex-col gap-y-3",

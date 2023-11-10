@@ -1,16 +1,32 @@
 <script setup>
+import { computed } from "vue";
 import { TableHeader, Chip } from "@/orchidui";
-defineProps({
-  queries: Array,
+const props = defineProps({
+  filters: Object,
+  queries: Object,
 });
-defineEmits({
+const emit = defineEmits({
   removeQuery: [],
+  removeFilter: [],
   removeAll: [],
 });
+
+const filterData = computed(() => {
+  return props.filters;
+});
+
+const removeFilter = (name) => {
+  let filter = {};
+  filter[name] = "";
+  emit("removeFilter", filter);
+};
 </script>
 
 <template>
-  <TableHeader class="!w-full !justify-start !bg-oc-bg-light">
+  <TableHeader
+    v-if="filterData.length > 0 || queries.length > 0"
+    class="!w-full !justify-start !bg-oc-bg-light"
+  >
     <div class="flex gap-1 items-center normal-case flex-wrap">
       <span class="pr-2 text-sm font-medium text-oc-text">Search for:</span>
       <Chip
@@ -20,6 +36,14 @@ defineEmits({
         closable
         :label="query"
         @remove="$emit('removeQuery', query)"
+      />
+      <Chip
+        v-for="item in filterData"
+        :key="item.name"
+        variant="accent-1"
+        closable
+        :label="item.label"
+        @remove="removeFilter(item.name)"
       />
       <Chip
         variant="gray"

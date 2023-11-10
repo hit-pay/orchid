@@ -1,0 +1,7 @@
+<svg id="orchid" width="16" height="9" viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M9.25 1V4C9.25 4.19891 9.32902 4.38968 9.46967 4.53033C9.61032 4.67098 9.80109 4.75 10 4.75H13"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M2.5 7.75V2.5C2.5 2.10218 2.65804 1.72064 2.93934 1.43934C3.22064 1.15804 3.60218 1 4 1H9.25L13 4.75V7.75"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M1 7.75H14.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
