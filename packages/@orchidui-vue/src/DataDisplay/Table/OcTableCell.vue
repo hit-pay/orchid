@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 const Variants = {
   CHECKBOX: "checkbox",
   CONTENT: "content",
-  CHIP: "content",
+  CHIP: "chip",
   DATETIME: "datetime",
   ICON: "icon",
   IMAGE: "image",
