@@ -29,7 +29,7 @@ const props = defineProps({
   },
   disabledDate: {
     type: Function,
-    default: (timestamp) => false,
+    default: () => false,
   },
 });
 const emit = defineEmits(["update:modelValue"]);

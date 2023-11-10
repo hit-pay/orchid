@@ -23,10 +23,16 @@ const props = defineProps({
   modelValue: [Array, String, Number],
   multiple: Boolean,
 });
+
 const emit = defineEmits({
   addNew: [],
   "update:modelValue": [],
 });
+
+const localValue = ref(
+  props.modelValue ? props.modelValue : props.multiple ? [] : "",
+);
+
 const query = ref("");
 const isDropdownOpened = ref(false);
 const filterOptions = (options, query) => {
@@ -58,38 +64,44 @@ const filterableOptions = computed(() =>
 );
 const selectOption = (option) => {
   const result = props.multiple
-    ? props.modelValue.find((o) => o === option.value)
-      ? props.modelValue.filter((o) => o !== option.value)
-      : [...props.modelValue, option.value]
+    ? localValue.value.find((o) => o === option.value)
+      ? localValue.value.filter((o) => o !== option.value)
+      : [...localValue.value, option.value]
     : option.value;
 
   if (!props.multiple) {
     isDropdownOpened.value = false;
   }
+  localValue.value = result;
   emit("update:modelValue", result);
 };
 
-const modelValueOption = computed(() => {
+const localValueOption = computed(() => {
   if (props.multiple) {
     let selected = [];
     for (const option of props.options) {
       if (option.values) {
         option.values.forEach((o) => {
-          if (props.modelValue.includes(o.value)) {
+          if (localValue.value.includes(o.value)) {
             selected.push(o);
           }
         });
       } else {
-        if (props.modelValue.includes(option.value)) {
+        if (localValue.value.includes(option.value)) {
           selected.push(option);
         }
       }
     }
     return selected;
   } else {
-    return props.options.find((o) => o.value === props.modelValue);
+    return props.options.find((o) => o.value === localValue.value);
   }
 });
+
+const removeOption = (value) => {
+  localValue.value = localValue.value.filter((o) => o !== value);
+  emit("update:modelValue", localValue.value);
+};
 </script>
 
 <template>
@@ -114,24 +126,22 @@ const modelValueOption = computed(() => {
       >
         <div v-if="multiple" class="flex flex-wrap gap-2">
           <Chip
-            v-for="option in modelValueOption"
+            v-for="option in localValueOption"
             :key="option.value"
             closable
             :label="option.label"
-            @remove="
-              $emit(
-                'update:modelValue',
-                props.modelValue.filter((o) => o !== option.value),
-              )
-            "
+            @remove="removeOption(option.value)"
           />
+          <span v-if="localValueOption.length === 0" class="text-oc-text-300">{{
+            placeholder
+          }}</span>
         </div>
         <template v-else>
           <span class="whitespace-nowrap">
             <span v-if="isInlineLabel && label" class="text-oc-text-300">
               {{ label }}:
             </span>
-            <span v-if="modelValueOption">{{ modelValueOption.label }}</span>
+            <span v-if="localValueOption">{{ localValueOption.label }}</span>
             <span v-else class="text-oc-text-300">{{ placeholder }}</span>
           </span>
         </template>
@@ -163,8 +173,8 @@ const modelValueOption = computed(() => {
                 :label="option.label"
                 :is-selected="
                   multiple
-                    ? modelValue.find((o) => o === option.value)
-                    : modelValue === option.value
+                    ? localValue.find((o) => o === option.value) !== undefined
+                    : localValue === option.value
                 "
                 @click="selectOption(option)"
               />

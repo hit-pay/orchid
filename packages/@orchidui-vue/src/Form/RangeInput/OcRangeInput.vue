@@ -1,6 +1,6 @@
 <script setup>
 import { Input, Slider } from "@/orchidui";
-import { nextTick, onMounted, ref } from "vue";
+import { ref, onMounted } from "vue";
 
 const props = defineProps({
   maxLimit: {
@@ -16,36 +16,41 @@ const props = defineProps({
     default: 0,
   },
   modelValue: {
-    type: Array,
-    required: true,
+    type: [Array, String],
   },
 });
 
 const emit = defineEmits({
   "update:modelValue": [],
 });
-const localMinValue = ref();
-const localMaxValue = ref();
+
+const localMinValue = ref(props.modelValue?.[0] ?? props.minLimit);
+const localMaxValue = ref(props.modelValue?.[1] ?? props.maxLimit);
 const slider = ref();
 
-const updateRange = async (value) => {
-  if (value.some(isNaN)) return;
-  emit("update:modelValue", value);
-  await nextTick();
-  slider.value.updateSlider();
+const updateRange = (value, index) => {
+  if (!isNaN(value)) {
+    if (index === 1) {
+      localMaxValue.value = Number(value);
+    } else {
+      localMinValue.value = Number(value);
+    }
+    slider.value.updateSlider([localMinValue.value, localMaxValue.value]);
+  }
 };
-onMounted(async () => {
-  await nextTick();
-  localMinValue.value = props.modelValue?.[0] || 0;
-  localMaxValue.value = props.modelValue?.[1] || 100;
-  slider.value.updateSlider();
-});
 
 const updateRangeSlider = ($event) => {
-  localMinValue.value = $event?.[0];
-  localMaxValue.value = $event?.[1];
-  emit("update:modelValue", $event);
+  if (isNaN($event[0]) || isNaN($event[1])) return;
+  localMinValue.value = Number($event[0]);
+  localMaxValue.value = Number($event[1]);
+  emit("update:modelValue", [
+    Number(localMinValue.value),
+    Number(localMaxValue.value),
+  ]);
 };
+onMounted(() => {
+  slider.value.updateSlider();
+});
 </script>
 
 <template>
@@ -53,22 +58,18 @@ const updateRangeSlider = ($event) => {
     <span class="font-medium text-sm text-oc-text-400">Amount</span>
     <div class="flex gap-x-3">
       <Input
-        v-model="localMinValue"
+        :model-value="localMinValue"
         label="From"
         is-inline-label
         placeholder=""
-        @update:model-value="
-          updateRange([Number(localMinValue), modelValue?.[1]])
-        "
+        @update:model-value="updateRange($event, 0)"
       />
       <Input
-        v-model="localMaxValue"
+        :model-value="localMaxValue"
         label="To"
         is-inline-label
         placeholder=""
-        @update:model-value="
-          updateRange([modelValue?.[0], Number(localMaxValue)])
-        "
+        @update:model-value="updateRange($event, 1)"
       />
     </div>
     <div class="flex pt-4">
@@ -78,7 +79,7 @@ const updateRangeSlider = ($event) => {
         :max-limit="maxLimit"
         :min-limit="minLimit"
         :min-gap="minGap"
-        :model-value="[localMinValue, localMaxValue]"
+        :model-value="[Number(localMinValue), Number(localMaxValue)]"
         @update:model-value="updateRangeSlider"
       />
     </div>

@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from "vue";
+import { ref, onMounted } from "vue";
 
 const props = defineProps({
   maxLimit: {
@@ -23,6 +23,7 @@ const props = defineProps({
     default: 0,
   },
 });
+
 const emit = defineEmits({
   "update:modelValue": [],
 });
@@ -76,13 +77,18 @@ const fillColor = () => {
       : sliderOne.value.value,
   );
 };
-const updateSlider = () => {
+const updateSlider = (value) => {
+  if (value && value[0] && value[1] && props.type === "range") {
+    sliderOne.value.value = Number(value[0]);
+    sliderTwo.value.value = Number(value[1]);
+  }
   slideOne();
   if (props.type === "range") slideTwo();
 };
 defineExpose({
   updateSlider,
 });
+
 onMounted(() => updateSlider());
 </script>
 
@@ -90,7 +96,7 @@ onMounted(() => updateSlider());
   <div class="relative w-full h-[33px]">
     <div
       ref="sliderTrack"
-      class="rounded-full h-3 absolute m-auto top-0 w-full"
+      class="rounded-full h-3 absolute m-auto top-0 w-full group"
     />
 
     <input
@@ -113,7 +119,7 @@ onMounted(() => updateSlider());
     />
 
     <div
-      class="absolute top-[1rem] z-[1] -translate-x-1/2 rounded-sm py-[3px] px-[6px] min-w-[28px] bg-oc-text-500 text-center text-white text-sm font-medium leading-[20px]"
+      class="group-hover:block absolute top-[1rem] z-[1] -translate-x-1/2 rounded-sm py-[3px] px-[6px] min-w-[28px] bg-oc-text-500 text-center text-white text-sm font-medium leading-[20px]"
       :style="`left: ${percent1}%`"
     >
       {{ type === "range" ? modelValue?.[0] : modelValue }}
@@ -121,7 +127,7 @@ onMounted(() => updateSlider());
 
     <div
       v-if="type === 'range'"
-      class="absolute top-[1rem] z-[1] translate-x-1/2 rounded-sm py-[3px] px-[6px] min-w-[28px] bg-oc-text-500 text-center text-white text-sm font-medium leading-[20px]"
+      class="group-hover:block absolute top-[1rem] z-[1] translate-x-1/2 rounded-sm py-[3px] px-[6px] min-w-[28px] bg-oc-text-500 text-center text-white text-sm font-medium leading-[20px]"
       :style="`right: ${100 - percent2}%`"
     >
       {{ modelValue?.[1] }}

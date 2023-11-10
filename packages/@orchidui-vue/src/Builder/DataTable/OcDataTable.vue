@@ -7,6 +7,8 @@ import {
   FilterSearch,
   FilterSearchFor,
   FilterForm,
+  Button,
+  Dropdown,
 } from "@/orchidui";
 import { ref, computed } from "vue";
 
@@ -43,6 +45,7 @@ const filterOptions = computed(() => {
   return props.options?.filterOptions;
 });
 
+const isDropdownOpened = ref(false);
 const selectedRows = ref([]);
 const filterTab = ref(props.filter[filterOptions.value?.tabs?.key]);
 const currentPage = ref(props.filter.page);
@@ -118,16 +121,21 @@ const removeQuery = (query) => {
   queries.value = queries.value.filter((q) => q !== query);
   applyFilter();
 };
-const removeAllQuery = () => {
+
+const filterData = ref(props.filter ?? {});
+
+const removeAllQueryFilter = () => {
   queries.value = [];
+  filterData.value = {
+    page: 1,
+    per_page: perPage.value,
+  };
   applyFilter();
 };
 
 const changePage = () => {
   applyFilter(null, currentPage.value);
 };
-
-const filterData = ref({});
 
 const applyFilter = (filterForm = null, isChangePage = false) => {
   if (!isChangePage) {
@@ -142,11 +150,52 @@ const applyFilter = (filterForm = null, isChangePage = false) => {
   if (filterOptions.value?.search) {
     filterData.value[filterOptions.value.search.key] = queries.value.join();
   }
+
   if (filterForm) {
+    isDropdownOpened.value = false;
     filterData.value = { ...filterData.value, ...filterForm };
   }
   emit("update:filter", filterData.value);
 };
+
+const displayFilterData = computed(() => {
+  if (filterData.value) {
+    let display = [];
+
+    Object.keys(filterData.value).forEach((name) => {
+      const filterTabKey = filterOptions.value?.tabs?.key;
+      const filterSearchKey = filterOptions.value?.search?.key;
+      if (
+        name !== "page" &&
+        name !== "per_page" &&
+        name !== filterTabKey &&
+        name !== filterSearchKey
+      ) {
+        let option = filterOptions.value.form.find((f) => {
+          if (typeof f.name === "object") {
+            let isSelectedOption = false;
+            f.name.forEach((formName) => {
+              if (formName.key === name) {
+                isSelectedOption = true;
+              }
+            });
+            return isSelectedOption;
+          } else {
+            return f.name === name;
+          }
+        });
+        if (filterData.value[name]) {
+          display.push({
+            label: `${option.props.label} : ${filterData.value[name]}`,
+            name: name,
+          });
+        }
+      }
+    });
+    return display;
+  }
+  return [];
+});
 </script>
 <template>
   <div class="flex flex-col gap-3">
@@ -191,31 +240,48 @@ const applyFilter = (filterForm = null, isChangePage = false) => {
               @add-query="addQuery"
               @toggle="isSearchExpanded = $event"
             />
-            <FilterForm
+            <Dropdown
               v-if="filterOptions?.form"
-              :id="id"
-              :json-form="filterOptions.form ?? []"
-              :values="props.filter"
-              @apply-filter="applyFilter($event)"
+              v-model="isDropdownOpened"
+              :distance="9"
+              placement="bottom-end"
             >
-              <template #default="{ errors, values, jsonForm, updateForm }">
-                <slot
-                  name="custom-filter-form"
-                  :errors="errors"
-                  :values="values"
-                  :json-form="jsonForm"
-                  :update-filter="updateForm"
-                ></slot>
+              <Button
+                :is-active="isDropdownOpened"
+                variant="secondary"
+                left-icon="filter"
+              />
+
+              <template #menu>
+                <FilterForm
+                  v-if="isDropdownOpened"
+                  :id="id"
+                  :json-form="filterOptions.form ?? []"
+                  :values="props.filter"
+                  @apply-filter="applyFilter($event)"
+                  @cancel="isDropdownOpened = false"
+                >
+                  <template #default="{ errors, values, jsonForm, updateForm }">
+                    <slot
+                      name="custom-filter-form"
+                      :errors="errors"
+                      :values="values"
+                      :json-form="jsonForm"
+                      :update-filter="updateForm"
+                    ></slot>
+                  </template>
+                </FilterForm>
               </template>
-            </FilterForm>
+            </Dropdown>
           </div>
         </div>
         <FilterSearchFor
-          v-if="queries.length"
+          :filters="displayFilterData"
           :queries="queries"
           class="border-t border-oc-gray-200"
           @remove-query="removeQuery"
-          @remove-all="removeAllQuery"
+          @remove-all="removeAllQueryFilter"
+          @remove-filter="applyFilter($event)"
         />
       </template>
       <template
