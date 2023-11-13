@@ -148,6 +148,7 @@ const onClickRow = (field, header) => {
           }"
           class="flex"
           :class="header.class"
+          :image-class="header.imageClass"
           @click="onClickRow(field, header)"
           @copied="onCopied"
         >
