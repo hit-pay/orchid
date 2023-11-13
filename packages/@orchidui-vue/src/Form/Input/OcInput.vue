@@ -47,6 +47,10 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  hasError: {
+    type: Boolean,
+    default: false
+  }
 });
 
 defineEmits({
@@ -58,7 +62,7 @@ const inputClasses = computed(() => [
   {
     "shadow-[0_0_0_2px]": isFocused.value,
   },
-  !props.disabled && props.errorMessage
+  !props.disabled && (props.errorMessage || props.hasError)
     ? "border-oc-error shadow-oc-error"
     : "border-oc-gray-200 shadow-oc-gray-200",
   props.disabled ? "bg-oc-bg-dark pointer-events-none" : "bg-oc-bg-light",

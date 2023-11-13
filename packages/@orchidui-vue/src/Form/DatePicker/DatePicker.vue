@@ -83,37 +83,47 @@ const updateCalendar = () => {
     :distance="10"
     class="w-full"
   >
-    <div v-if="type === 'default'" class="flex w-full">
-      <Input
-        :model-value="formattedDate"
-        icon="calendar"
-        :label="label"
-        :hint="hint"
-        :placeholder="placeholder"
-        :disabled="disabled"
-        readonly
-      />
+    <div class="flex flex-col gap-y-2">
+      <div v-if="type === 'default'" class="flex w-full">
+        <Input
+            :model-value="formattedDate"
+            icon="calendar"
+            :label="label"
+            :hint="hint"
+            :placeholder="placeholder"
+            :disabled="disabled"
+            readonly
+            :has-error="errorMessage.length > 0"
+        />
+      </div>
+      <div v-else class="flex gap-x-4">
+        <Input
+            label="From"
+            :model-value="formattedDate[0]"
+            icon="calendar"
+            :placeholder="placeholder"
+            :disabled="disabled"
+            readonly
+            :has-error="errorMessage.length > 0"
+        />
+
+        <Input
+            label="To"
+            :model-value="formattedDate[1]"
+            icon="calendar"
+            :placeholder="placeholder"
+            :disabled="disabled"
+            readonly
+            :has-error="errorMessage.length > 0"
+        />
+      </div>
+      <div v-if="errorMessage" class="text-sm text-oc-error flex items-center">
+        {{ errorMessage }}
+      </div>
     </div>
 
-    <div v-else class="flex gap-x-4">
-      <Input
-        label="From"
-        :model-value="formattedDate[0]"
-        icon="calendar"
-        :placeholder="placeholder"
-        :disabled="disabled"
-        readonly
-      />
 
-      <Input
-        label="To"
-        :model-value="formattedDate[1]"
-        icon="calendar"
-        :placeholder="placeholder"
-        :disabled="disabled"
-        readonly
-      />
-    </div>
+
 
     <template #menu>
       <Calendar
