@@ -137,6 +137,7 @@ const onClickRow = (field, header) => {
         <TableCell
           v-for="(header, j) in headers"
           :key="`${j}-${i}`"
+          class="flex"
           :is-last="fields.length === i + 1"
           :variant="header.variant"
           :is-copy="header.isCopy"
@@ -146,7 +147,7 @@ const onClickRow = (field, header) => {
             title: field[header.title],
             description: field[header.description],
           }"
-          class="flex"
+          :chip-options="header.chipOptions"
           :class="header.class"
           :image-class="header.imageClass"
           @click="onClickRow(field, header)"
