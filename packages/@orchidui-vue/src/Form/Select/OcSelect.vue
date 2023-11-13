@@ -21,6 +21,10 @@ const props = defineProps({
   isAddNew: Boolean,
   options: Array,
   modelValue: [Array, String, Number],
+  maxVisibleOptions: {
+    type: Number,
+    default: 2,
+  },
   multiple: Boolean,
 });
 
@@ -126,11 +130,15 @@ const removeOption = (value) => {
       >
         <div v-if="multiple" class="flex flex-wrap gap-2">
           <Chip
-            v-for="option in localValueOption"
+            v-for="option in localValueOption.slice(0, maxVisibleOptions)"
             :key="option.value"
             closable
             :label="option.label"
             @remove="removeOption(option.value)"
+          />
+          <Chip
+            v-if="localValueOption.length > maxVisibleOptions"
+            :label="`+${localValueOption.length - maxVisibleOptions}`"
           />
           <span v-if="localValueOption.length === 0" class="text-oc-text-300">{{
             placeholder
