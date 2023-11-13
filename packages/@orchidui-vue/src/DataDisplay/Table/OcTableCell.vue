@@ -114,7 +114,7 @@ const copyToClipboard = async (text) => {
         <template v-else-if="variant === Variants.IMAGE">
           <img
             v-if="data"
-            class="h-[42px] w-[42px] rounded mx-auto"
+            class="h-[42px] w-auto rounded mx-auto"
             alt="table-img"
             :src="data"
           />
