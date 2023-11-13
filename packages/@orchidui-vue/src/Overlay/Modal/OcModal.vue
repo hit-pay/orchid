@@ -61,7 +61,7 @@ const sizeClasses = computed(() => ({
 <template>
   <div
     v-if="modelValue"
-    class="fixed w-screen z-[1007] top-0 left-0 h-screen bg-black/[.45] flex items-center justify-center"
+    class="fixed w-screen z-[1007] top-0 left-0 h-full min-h-screen bg-black/[.45] flex items-center justify-center"
     @click="onClickOutside"
   >
     <div

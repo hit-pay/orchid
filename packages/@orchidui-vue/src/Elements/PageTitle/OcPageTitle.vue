@@ -1,6 +1,6 @@
 <script setup>
 import Title from "./OcTitle.vue";
-import { PageTitleRight, AdditionalContent } from "@/orchidui";
+import { PageTitleRight, AdditionalContent, Button } from "@/orchidui";
 
 defineProps({
   title: { type: String, required: true },
@@ -21,28 +21,43 @@ defineProps({
   customer: { type: Object, default: null },
   primaryButtonProps: Object,
   secondaryButtonProps: Object,
+  isBack: { type: Boolean, default: false },
 });
 defineEmits({
   changeTab: [],
+  back: [],
 });
 </script>
 
 <template>
   <div class="pb-5 flex flex-col">
-    <div class="flex flex-wrap w-full pt-5 px-5 md:px-10 gap-5">
-      <Title
-        :title="title"
-        :description="description"
-        class="flex-1 overflow-hidden"
+    <div class="flex flex-col gap-y-3 pt-5 px-5 md:px-10">
+      <Button
+        v-if="isBack"
+        size="small"
+        icon-class="rotate-90"
+        variant="secondary"
+        is-transparent
+        label="Back"
+        left-icon="chevron-down"
+        class="self-start"
+        @click="$emit('back')"
       />
-
-      <slot name="right">
-        <PageTitleRight
-          class="shrink-0"
-          :primary-button-props="primaryButtonProps"
-          :secondary-button-props="secondaryButtonProps"
+      <div class="flex flex-wrap w-full gap-5">
+        <Title
+          :title="title"
+          :description="description"
+          class="flex-1 overflow-hidden"
         />
-      </slot>
+
+        <slot name="right">
+          <PageTitleRight
+            class="shrink-0"
+            :primary-button-props="primaryButtonProps"
+            :secondary-button-props="secondaryButtonProps"
+          />
+        </slot>
+      </div>
     </div>
 
     <AdditionalContent
