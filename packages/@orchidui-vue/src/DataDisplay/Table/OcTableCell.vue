@@ -1,11 +1,12 @@
 <script setup>
 import { computed, ref } from "vue";
-import { Checkbox, Icon, Tooltip, TableCellContent } from "@/orchidui";
+import { Checkbox, Icon, Tooltip, TableCellContent, Chip } from "@/orchidui";
 import dayjs from "dayjs";
 
 const Variants = {
   CHECKBOX: "checkbox",
   CONTENT: "content",
+  CHIP: "chip",
   DATETIME: "datetime",
   ICON: "icon",
   IMAGE: "image",
@@ -22,6 +23,7 @@ const props = defineProps({
   isSelected: Boolean,
   data: String,
   isLoading: Boolean,
+  chipOptions: Object,
   content: {
     type: Object,
     default() {
@@ -32,6 +34,7 @@ const props = defineProps({
     },
   },
   datetime: String,
+  imageClass: String
 });
 const emit = defineEmits({
   selected: [],
@@ -47,6 +50,7 @@ const variantClass = computed(() => ({
   [Variants.ICON]: "md:px-2 px-4 min-w-[32px] ",
   [Variants.IMAGE]: "md:px-2 px-4 min-w-[32px]",
   [Variants.CONTENT]: "px-4",
+  [Variants.CHIP]: "px-4",
   [Variants.DATETIME]: "px-4",
   [Variants.EMPTY]: "px-4 min-w-[48px]",
 }));
@@ -112,12 +116,15 @@ const copyToClipboard = async (text) => {
 
         <!--  IMAGE    -->
         <template v-else-if="variant === Variants.IMAGE">
-          <img
-            v-if="data"
-            class="h-[42px] w-[42px] rounded mx-auto"
-            alt="table-img"
-            :src="data"
-          />
+          <div
+           v-if="data"
+            class="h-[42px] min-w-[42px] rounded mx-auto">
+            <img
+              :class="imageClass"
+              alt="table-img"
+              :src="data"
+            />
+          </div>
           <div
             v-else
             class="h-[42px] mx-auto w-[42px] bg-oc-bg-dark flex items-center justify-center rounded"
@@ -131,8 +138,8 @@ const copyToClipboard = async (text) => {
 
         <TableCellContent
           v-else-if="variant === Variants.DATETIME"
-          :title="dayjs(datetime).format('D MMM, YYYY')"
-          :description="dayjs(datetime).format('h:mm A')"
+          :title="dayjs(data).format('D MMM, YYYY')"
+          :description="dayjs(data).format('h:mm A')"
         />
 
         <!--   CONTENT   -->
@@ -140,7 +147,9 @@ const copyToClipboard = async (text) => {
           v-else-if="variant === Variants.CONTENT"
           v-bind="content"
         />
-
+        <!--   CHIP   -->
+        <Chip v-else-if="variant === Variants.CHIP" :label="data" :variant="chipOptions[data]"/>
+        
         <!--  DEFAULT    -->
         <div v-else-if="data" class="flex items-center w-full">{{ data }}</div>
         <div v-else>-</div>
