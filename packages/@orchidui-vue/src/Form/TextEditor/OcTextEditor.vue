@@ -24,7 +24,6 @@ Size.whitelist = props.fontSizes.map((f) => f.value);
 Quill.register(Size, true);
 
 const id = ref(crypto.randomUUID().replace(/[^a-zA-Z]+/g, ""));
-const localValue = ref(props.modelValue ?? "");
 const isUndoActive = ref(false);
 const isRedoActive = ref(false);
 const isBoldActive = ref(false);
@@ -54,11 +53,11 @@ const checkStates = (value) => {
 };
 const undo = () => {
   quill.value.getQuill().history.undo();
-  checkStates(localValue.value);
+  checkStates(props.modelValue);
 };
 const redo = () => {
   quill.value.getQuill().history.redo();
-  checkStates(localValue.value);
+  checkStates(props.modelValue);
 };
 const setBold = () => {
   quill.value.getQuill().format("bold", !isBoldActive.value);
@@ -156,7 +155,7 @@ onMounted(() => {
   <QuillEditor
     v-if="id"
     ref="quill"
-    :content="localValue"
+    :content="modelValue"
     theme="snow"
     content-type="html"
     class="min-h-[200px]"
