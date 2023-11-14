@@ -48,7 +48,6 @@ export default defineConfig({
         "@popperjs/core",
         "dayjs",
         "v-calendar",
-        "@vueup/vue-quill",
         "vue-advanced-cropper",
       ],
     },

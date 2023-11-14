@@ -1,6 +1,6 @@
 {
   "name": "@orchidui/vue",
-  "version": "0.1.125",
+  "version": "0.1.126",
   "type": "module",
   "scripts": {
     "build": "vite build",
@@ -44,10 +44,5 @@
   "module": "./dist/index.js",
   "files": [
     "./dist"
-  ],
-  "dependencies": {
-    "@popperjs/core": "^2.11.8",
-    "flag-icons": "^6.11.1",
-    "v-calendar": "^3.1.2"
-  }
+  ]
 }
