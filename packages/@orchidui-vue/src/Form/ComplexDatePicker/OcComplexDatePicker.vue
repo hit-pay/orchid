@@ -1,6 +1,6 @@
 <script setup>
 import { Dropdown, Input } from "@/orchidui";
-import { ComplexCalendar } from "@/orchidui/ComplexCalendar";
+import { ComplexCalendar } from "../../ComplexCalendar";
 import { ref } from "vue";
 import dayjs from "dayjs";
 
