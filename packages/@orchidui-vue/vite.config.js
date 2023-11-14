@@ -53,6 +53,7 @@ export default defineConfig({
         "dayjs",
         "v-calendar",
         "@vueup/vue-quill",
+        "vue-advanced-cropper"
       ],
     },
   },
