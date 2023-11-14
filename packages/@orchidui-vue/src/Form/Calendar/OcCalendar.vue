@@ -37,7 +37,7 @@ const emit = defineEmits(["update:modelValue"]);
 const selectedDate = ref(
   props.type === "range"
     ? props.modelValue?.[0] || new Date()
-    : props.modelValue || new Date()
+    : props.modelValue || new Date(),
 );
 
 const selectedStartDate = ref(selectedDate.value);
@@ -47,23 +47,23 @@ const selectedEndDate = ref(
     ? props.modelValue?.[1] ||
         new Date(
           new Date(selectedStartDate.value).setDate(
-            selectedStartDate.value.getDate() + 2
-          )
+            selectedStartDate.value.getDate() + 2,
+          ),
         )
-    : null
+    : null,
 );
 
 const selectedStartDay = ref(
   selectedStartDate.value?.getMonth() === selectedDate.value?.getMonth()
     ? selectedStartDate.value?.getDate()
-    : null
+    : null,
 );
 const selectedEndDay = ref(
   props.type === "range"
     ? selectedEndDate.value?.getMonth() === selectedDate.value?.getMonth()
       ? selectedEndDate.value?.getDate()
       : null
-    : null
+    : null,
 );
 
 const daysInMonth = computed(() => {
@@ -73,7 +73,7 @@ const daysInMonth = computed(() => {
   const lastDay = new Date(
     date?.getFullYear(),
     date?.getMonth() + 1,
-    0
+    0,
   ).getDate();
 
   return Array.from({ length: lastDay }, (_, i) => i + 1);
@@ -101,10 +101,10 @@ const selectDay = (day) => {
   if (
     props.type !== "range" ||
     Math.abs(
-      currentMonth.getTime() - new Date(selectedEndDate.value).getTime()
+      currentMonth.getTime() - new Date(selectedEndDate.value).getTime(),
     ) >
       Math.abs(
-        currentMonth.getTime() - new Date(selectedStartDate.value).getTime()
+        currentMonth.getTime() - new Date(selectedStartDate.value).getTime(),
       )
   ) {
     selectedStartDay.value = day;
@@ -141,7 +141,7 @@ const prevMonth = () => {
     selectedDate.value = new Date(
       selectedDate.value?.getFullYear(),
       selectedDate.value?.getMonth() - 1,
-      1
+      1,
     );
 
     selectedStartDay.value =
@@ -157,7 +157,7 @@ const prevMonth = () => {
       selectedStartDate.value = new Date(
         selectedStartDate.value?.getFullYear(),
         selectedStartDate.value?.getMonth() - 1,
-        1
+        1,
       );
       selectedStartDay.value = null;
     }
@@ -169,7 +169,7 @@ const nextMonth = () => {
     selectedDate.value = new Date(
       selectedDate.value?.getFullYear(),
       selectedDate.value?.getMonth() + 1,
-      1
+      1,
     );
     selectedStartDay.value =
       selectedDate.value?.getMonth() === selectedStartDate.value?.getMonth()
@@ -184,7 +184,7 @@ const nextMonth = () => {
       selectedStartDate.value = new Date(
         selectedStartDate.value?.getFullYear(),
         selectedStartDate.value?.getMonth() + 1,
-        1
+        1,
       );
       selectedStartDay.value = null;
     }
@@ -236,7 +236,7 @@ const doneSelecting = () => {
     "update:modelValue",
     props.type === "range"
       ? [selectedStartDate.value, selectedEndDate.value]
-      : new Date(selectedStartDate.value)
+      : new Date(selectedStartDate.value),
   );
 };
 </script>

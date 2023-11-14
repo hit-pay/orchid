@@ -230,8 +230,8 @@ const displayFilterData = computed(() => {
               !filterOptions
                 ? 'w-full justify-end'
                 : isSearchExpanded
-                ? 'md:w-fit w-full'
-                : ''
+                  ? 'md:w-fit w-full'
+                  : ''
             "
           >
             <FilterSearch

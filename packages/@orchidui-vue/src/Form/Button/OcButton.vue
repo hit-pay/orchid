@@ -25,7 +25,7 @@ const props = defineProps({
 });
 const isPressed = ref(false);
 const isIconOnly = computed(
-  () => (props.leftIcon || props.rightIcon) && !props.label
+  () => (props.leftIcon || props.rightIcon) && !props.label,
 );
 const additionalAreaSize = computed(() => ({
   default: "w-10 h-[36px]",
@@ -54,7 +54,7 @@ const showShadow = computed(
     !props.isDisabled &&
     !props.isLoading &&
     !props.isActive &&
-    shadowContainer.value[props.variant]
+    shadowContainer.value[props.variant],
 );
 
 const buttonTypeClasses = computed(() => ({
@@ -86,7 +86,7 @@ const buttonSizeClasses = computed(() => ({
       : "py-3 ") + " text-lg h-[44px]",
 }));
 const roundedClasses = computed(() =>
-  props.isRoundedFull ? "rounded-full" : "rounded"
+  props.isRoundedFull ? "rounded-full" : "rounded",
 );
 
 const iconSize = computed(() => ({

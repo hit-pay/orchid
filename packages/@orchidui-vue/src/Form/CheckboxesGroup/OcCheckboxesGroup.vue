@@ -30,7 +30,7 @@ const toggleCheckbox = (value) => {
     "update:modelValue",
     isSelectedCheckbox(value)
       ? props.modelValue.filter((v) => v !== value)
-      : [...props.modelValue, value]
+      : [...props.modelValue, value],
   );
 };
 </script>

@@ -34,7 +34,7 @@ const { currentFiles, onChangeFile, onDeleteFile } =
   useUploadFileProgress(emit);
 
 const videoUrl = computed(() =>
-  URL.createObjectURL(currentFiles.value?.[0].file)
+  URL.createObjectURL(currentFiles.value?.[0].file),
 );
 const currentFile = computed(() => currentFiles.value?.[0]);
 onMounted(() => {

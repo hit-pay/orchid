@@ -15,7 +15,7 @@ watch(
       document.querySelector("body").setAttribute("class", "light");
     }
   },
-  { immediate: true }
+  { immediate: true },
 );
 </script>
 

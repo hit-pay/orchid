@@ -54,7 +54,7 @@ onMounted(() => {
   popperInstance.value = createPopper(
     reference.value,
     popper.value,
-    getPopperOptions()
+    getPopperOptions(),
   );
 
   // Need add setTimeout because placement is not updated immediately from props when component is mounted
@@ -67,7 +67,7 @@ watch(
     popperInstance.value.setOptions(getPopperOptions());
     popperInstance.value.update();
   },
-  { deep: true }
+  { deep: true },
 );
 </script>
 

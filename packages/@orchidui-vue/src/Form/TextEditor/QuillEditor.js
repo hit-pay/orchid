@@ -48,7 +48,7 @@ export const QuillEditor = defineComponent({
       required: false,
       validator: (value) => {
         if (typeof value === "string" && value !== "") {
-          return value.charAt(0) === "#"
+          return value.charAt(0) === "#";
         }
         return true;
       },
@@ -139,7 +139,7 @@ export const QuillEditor = defineComponent({
       if (props.id && props.id !== "") {
         clientOptions.modules = {
           toolbar: (() => {
-            return props.id
+            return props.id;
           })(),
         };
       }

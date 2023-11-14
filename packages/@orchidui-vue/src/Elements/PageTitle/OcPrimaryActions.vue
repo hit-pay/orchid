@@ -12,7 +12,7 @@ const emit = defineEmits({
 const isDropdownOpened = ref(false);
 const isCopied = ref(false);
 const hasDropdownOptions = computed(
-  () => props.primaryActions?.dropdownOptions
+  () => props.primaryActions?.dropdownOptions,
 );
 const copyToClipBoard = () => {
   isCopied.value = true;

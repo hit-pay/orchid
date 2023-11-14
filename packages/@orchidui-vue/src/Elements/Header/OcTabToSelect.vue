@@ -12,7 +12,7 @@ const props = defineProps({
 });
 const isDropdownOpened = ref(false);
 const activeMenu = computed(() =>
-  props.menus.find((menu) => menu.value === props.modelValue)
+  props.menus.find((menu) => menu.value === props.modelValue),
 );
 </script>
 <template>

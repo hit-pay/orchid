@@ -37,7 +37,7 @@ const pagination = computed(() => {
     return [
       ...Array.from(
         { length: Math.min(totalVisible - 1, props.maxPage) },
-        (_, index) => index + 1
+        (_, index) => index + 1,
       ),
       "...",
       props.maxPage,
@@ -51,7 +51,7 @@ const pagination = computed(() => {
       "...",
       ...Array.from(
         { length: totalVisible - 1 },
-        (_, index) => props.maxPage - (totalVisible - 2) + index
+        (_, index) => props.maxPage - (totalVisible - 2) + index,
       ),
     ];
   }
@@ -76,7 +76,7 @@ const pagination = computed(() => {
         @click="
           $emit(
             'update:modelValue',
-            modelValue > 1 ? modelValue - 1 : modelValue
+            modelValue > 1 ? modelValue - 1 : modelValue,
           )
         "
       />
@@ -106,7 +106,7 @@ const pagination = computed(() => {
         @click="
           $emit(
             'update:modelValue',
-            modelValue < Number(maxPage) ? modelValue + 1 : Number(maxPage)
+            modelValue < Number(maxPage) ? modelValue + 1 : Number(maxPage),
           )
         "
       />

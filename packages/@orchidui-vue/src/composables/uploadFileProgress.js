@@ -41,7 +41,7 @@ export const useUploadFileProgress = (emit) => {
     const progressFile = () => {
       currentFiles.value[index].progress =
         Number(
-          (event.loaded / currentFiles.value[index].totalSize).toFixed(2)
+          (event.loaded / currentFiles.value[index].totalSize).toFixed(2),
         ) * 100;
     };
 
@@ -56,14 +56,14 @@ export const useUploadFileProgress = (emit) => {
 
   const addListeners = (reader, index) => {
     reader.addEventListener("loadstart", (e) =>
-      handleEventFile(e, reader, index)
+      handleEventFile(e, reader, index),
     );
     reader.addEventListener("load", (e) => handleEventFile(e, reader, index));
     reader.addEventListener("loadend", (e) =>
-      handleEventFile(e, reader, index)
+      handleEventFile(e, reader, index),
     );
     reader.addEventListener("progress", (e) =>
-      handleEventFile(e, reader, index)
+      handleEventFile(e, reader, index),
     );
     reader.addEventListener("error", (e) => handleEventFile(e, reader, index));
     reader.addEventListener("abort", (e) => handleEventFile(e, reader, index));

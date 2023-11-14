@@ -70,7 +70,9 @@ const zoom = (zoom) => cropper.value.zoom(zoom);
 
 <style lang="scss">
 .test {
-  background: url("./assets/empty-space.png"), lightgray 0 0% / 50px 50px repeat;
+  background:
+    url("./assets/empty-space.png"),
+    lightgray 0 0% / 50px 50px repeat;
 }
 
 .vue-simple-handler {
