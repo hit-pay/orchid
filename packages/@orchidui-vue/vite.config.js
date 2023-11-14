@@ -13,7 +13,8 @@ const files = fg.sync(entryPoints, { absolute: true });
 const externalComponents = [
   "ComplexCalendar",
   "ComplexDatePicker",
-  "TextEditor"
+  "TextEditor",
+  "SingleFileUpload"
 ]
 // Maps the file paths in the "files" array to an array of key-value pair.
 const entities = files

@@ -1,2 +1,3 @@
+import ComplexDatePicker from "./OcComplexDatePicker.vue";
 
-export * from "./form/ComplexDatePicker/OcComplexDatePicker.js"
+export { ComplexDatePicker };
