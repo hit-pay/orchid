@@ -16,7 +16,7 @@ export const Default = {
   args: {
     type: "range",
     dateFormat: "DD/MM/YYYY",
-    errorMessage: ''
+    errorMessage: "",
   },
   render: (args) => ({
     components: { Theme, DatePicker },
