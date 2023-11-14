@@ -17,7 +17,7 @@ const props = defineProps({
   modelValue: String,
   image: String
 });
-const emit = defineEmits(["update:modelValue","upload:image"]);
+const emit = defineEmits(["update:modelValue","update:image"]);
 
 const Size = Quill.import("attributors/style/size");
 Size.whitelist = props.fontSizes.map((f) => f.value);
@@ -98,7 +98,7 @@ const readImage = (base64) => {
     .getQuill()
     .clipboard.dangerouslyPasteHTML(range.index, `<img src="${base64}" />`);
     base64Images.value = base64
-    emit('upload:image',base64Images.value)
+    emit('update:image',base64Images.value)
 };
 const uploadImage = () => {
   if (!quill.value.getQuill().getSelection())
