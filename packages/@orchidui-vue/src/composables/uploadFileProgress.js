@@ -4,19 +4,17 @@ export const useUploadFileProgress = (emit) => {
   const currentFiles = ref([]);
 
   const onChangeFile = (event) => {
-    const uploadFiles = event.target?.files;
+    const uploadFiles = [...event.target?.files].filter(
+      (f) => !currentFiles.value.some((file) => file.fileName === f.name),
+    );
     for (let i = 0; i < uploadFiles.length; i++) {
-      const reader = new FileReader();
       const file = uploadFiles[i];
+      const reader = new FileReader();
       const formData = new FormData();
       formData.append("file", file);
-      const fileName =
-        file.name.length >= 12
-          ? `${file.name.slice(0, 10)}...${file.name.split(".").at(-1)}`
-          : file.name;
       currentFiles.value.unshift({
         file: file,
-        fileName: fileName,
+        fileName: file.name,
         progress: 0,
         fileUrl: "",
         totalSize: 0,

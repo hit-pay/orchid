@@ -15,9 +15,9 @@ const props = defineProps({
    */
   initialFontSize: { type: String },
   modelValue: String,
-  image: String
+  image: String,
 });
-const emit = defineEmits(["update:modelValue","update:image"]);
+const emit = defineEmits(["update:modelValue", "update:image"]);
 
 const Size = Quill.import("attributors/style/size");
 Size.whitelist = props.fontSizes.map((f) => f.value);
@@ -38,7 +38,7 @@ const activeAlign = ref("");
 const quill = ref();
 
 // need for upload to server
-const base64Images = ref(props.image)
+const base64Images = ref(props.image);
 
 const checkStates = (value) => {
   isUndoActive.value = quill.value.getQuill().history.stack.undo.length > 0;
@@ -96,8 +96,8 @@ const readImage = (base64) => {
   quill.value
     .getQuill()
     .clipboard.dangerouslyPasteHTML(range.index, `<img src="${base64}" />`);
-    base64Images.value = base64
-    emit('update:image',base64Images.value)
+  base64Images.value = base64;
+  emit("update:image", base64Images.value);
 };
 const uploadImage = () => {
   if (!quill.value.getQuill().getSelection())
@@ -159,12 +159,15 @@ onMounted(() => {
     theme="snow"
     content-type="html"
     class="min-h-[200px]"
-    :toolbar="`#${id}`"
+    :id="`#${id}`"
     @update:content="checkStates"
     @paste="isValidPasedText"
   >
     <template #toolbar>
-      <div :id="id" class="flex h-[36px] !py-2 !px-3 gap-x-5 rounded-t">
+      <div
+        :id="id"
+        class="flex min-h-[36px] flex-wrap !py-2 !px-3 gap-x-5 gap-y-2 rounded-t"
+      >
         <div class="flex items-center gap-x-3">
           <Icon
             :class="

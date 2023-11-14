@@ -9,8 +9,7 @@ import {
   h,
 } from "vue";
 
-const Delta = Quill.import('delta')
-import { toolbarOptions } from "./options";
+const Delta = Quill.import("delta");
 export const QuillEditor = defineComponent({
   name: "QuillEditor",
   inheritAttrs: false,
@@ -44,14 +43,12 @@ export const QuillEditor = defineComponent({
         return ["snow", "bubble", ""].includes(value);
       },
     },
-    toolbar: {
+    id: {
       type: [String, Array, Object],
       required: false,
       validator: (value) => {
         if (typeof value === "string" && value !== "") {
           return value.charAt(0) === "#"
-            ? true
-            : Object.keys(toolbarOptions).indexOf(value) !== -1;
         }
         return true;
       },
@@ -139,18 +136,10 @@ export const QuillEditor = defineComponent({
       if (props.theme !== "") clientOptions.theme = props.theme;
       if (props.readOnly) clientOptions.readOnly = props.readOnly;
       if (props.placeholder) clientOptions.placeholder = props.placeholder;
-      if (props.toolbar && props.toolbar !== "") {
+      if (props.id && props.id !== "") {
         clientOptions.modules = {
           toolbar: (() => {
-            if (typeof props.toolbar === "object") {
-              return props.toolbar;
-            } else if (typeof props.toolbar === "string") {
-              const str = props.toolbar;
-              return str.charAt(0) === "#"
-                ? props.toolbar
-                : toolbarOptions[props.toolbar];
-            }
-            return;
+            return props.id
           })(),
         };
       }
@@ -172,14 +161,14 @@ export const QuillEditor = defineComponent({
         clientOptions.modules = Object.assign(
           {},
           clientOptions.modules,
-          modules
+          modules,
         );
       }
       return Object.assign(
         {},
         props.globalOptions,
         props.options,
-        clientOptions
+        clientOptions,
       );
     };
     const maybeClone = (delta) => {
@@ -187,7 +176,7 @@ export const QuillEditor = defineComponent({
     };
     const deltaHasValuesOtherThanRetain = (delta) => {
       return Object.values(delta.ops).some(
-        (v) => !v.retain || Object.keys(v).length !== 1
+        (v) => !v.retain || Object.keys(v).length !== 1,
       );
     };
     // Doesn't need reactivity, but does need to be cloned to avoid deep mutations always registering as equal
@@ -347,18 +336,18 @@ export const QuillEditor = defineComponent({
           nextTick(() =>
             quill === null || quill === void 0
               ? void 0
-              : quill.setSelection(selection)
+              : quill.setSelection(selection),
           );
         }
         setContents(newContent);
       },
-      { deep: true }
+      { deep: true },
     );
     watch(
       () => props.enable,
       (newValue) => {
         if (quill) quill.enable(newValue);
-      }
+      },
     );
     return {
       editor,
