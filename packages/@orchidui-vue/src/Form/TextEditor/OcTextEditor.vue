@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import "@vueup/vue-quill/dist/vue-quill.snow.css";
 import { onMounted, ref } from "vue";
 import { Quill, QuillEditor } from "@vueup/vue-quill";

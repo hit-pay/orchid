@@ -1,4 +1,5 @@
-import { TextEditor, Theme } from "@/orchidui";
+import { Theme } from "@/orchidui";
+import { TextEditor } from '@/orchidui/TextEditor'
 import { ref } from "vue";
 
 export default {

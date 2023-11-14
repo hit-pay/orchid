@@ -10,6 +10,11 @@ const entryPoints = ["src/**/*.js"];
 // Returns an array of absolute file paths.
 const files = fg.sync(entryPoints, { absolute: true });
 
+const externalComponents = [
+  "ComplexCalendar",
+  "ComplexDatePicker",
+  "TextEditor"
+]
 // Maps the file paths in the "files" array to an array of key-value pair.
 const entities = files
   .map((file) => {
@@ -25,7 +30,7 @@ const entities = files
     return (
       !entry[0].includes(".sample") &&
       !entry[0].includes(".stories") &&
-      !entry[0].includes("HitpaySidebar")
+      !externalComponents.includes(entry[0])
     );
   });
 
