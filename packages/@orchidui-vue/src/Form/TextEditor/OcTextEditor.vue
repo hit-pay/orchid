@@ -15,8 +15,9 @@ const props = defineProps({
    */
   initialFontSize: { type: String },
   modelValue: String,
+  image: String
 });
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(["update:modelValue","upload:image"]);
 
 const Size = Quill.import("attributors/style/size");
 Size.whitelist = props.fontSizes.map((f) => f.value);
@@ -36,6 +37,9 @@ const activeSize = ref("");
 const activeListFormat = ref("");
 const activeAlign = ref("");
 const quill = ref();
+
+// need for upload to server
+const base64Images = ref(props.image)
 
 const checkStates = (value) => {
   isUndoActive.value = quill.value.getQuill().history.stack.undo.length > 0;
@@ -93,6 +97,8 @@ const readImage = (base64) => {
   quill.value
     .getQuill()
     .clipboard.dangerouslyPasteHTML(range.index, `<img src="${base64}" />`);
+    base64Images.value = base64
+    emit('upload:image',base64Images.value)
 };
 const uploadImage = () => {
   if (!quill.value.getQuill().getSelection())
