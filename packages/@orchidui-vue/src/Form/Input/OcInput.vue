@@ -49,8 +49,8 @@ const props = defineProps({
   },
   hasError: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 });
 
 defineEmits({

@@ -5,7 +5,11 @@
 @tailwind base;
 @layer base {
   body {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
     font-family: "Inter", sans-serif;
+    color: var(--oc-text-500);
+    background-color: var(--oc-background-light);
     @apply text-base;
   }
   h1 {
@@ -35,9 +39,3 @@
 
 @tailwind components;
 @tailwind utilities;
-
-body,
-.docs-story {
-  color: var(--oc-text-500);
-  background-color: var(--oc-background-light);
-}

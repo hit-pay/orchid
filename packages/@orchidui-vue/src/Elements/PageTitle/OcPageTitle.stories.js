@@ -125,6 +125,7 @@ export const Default = {
     additionalContentVariant: "default",
     boxes: [],
     isCustomer: false,
+    isBack: false,
     overviewItems: [
       {
         title: "Total revenue",
