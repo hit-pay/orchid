@@ -1,5 +1,5 @@
 import { Theme } from "@/orchidui";
-import { TextEditor } from '@/orchidui/TextEditor'
+import TextEditor from './OcTextEditor.vue'
 import { ref } from "vue";
 
 export default {
@@ -31,7 +31,7 @@ export const Default = {
   render: (args) => ({
     components: { TextEditor, Theme },
     setup() {
-      const modelValue = ref();
+      const modelValue = ref("default model value");
       return { args, modelValue };
     },
     template: `

@@ -18,9 +18,10 @@
     "@astrojs/vue": "^3.0.3",
     "@orchidui/vue": "^0.1.72",
     "@popperjs/core": "^2.11.8",
-    "@vueup/vue-quill": "^1.2.0",
     "dayjs": "^1.11.10",
     "flag-icons": "^6.11.1",
+    "quill": "^2.0.0-dev.4",
+    "quill-delta": "^5.1.0",
     "replace-in-file": "^7.0.2",
     "v-calendar": "^3.1.2",
     "vue-advanced-cropper": "^2.8.8"

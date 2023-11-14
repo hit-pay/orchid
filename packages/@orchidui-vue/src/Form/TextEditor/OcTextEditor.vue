@@ -1,7 +1,8 @@
 <script setup>
-import "@vueup/vue-quill/dist/vue-quill.snow.css";
+import Quill from 'quill'
+import { QuillEditor } from "./QuillEditor";
+
 import { onMounted, ref } from "vue";
-import { Quill, QuillEditor } from "@vueup/vue-quill";
 import { Icon, Dropdown } from "@/orchidui";
 
 const props = defineProps({
@@ -22,6 +23,7 @@ Size.whitelist = props.fontSizes.map((f) => f.value);
 Quill.register(Size, true);
 
 const id = ref(crypto.randomUUID().replace(/[^a-zA-Z]+/g, ""));
+const localValue = ref(props.modelValue ?? '');
 const isUndoActive = ref(false);
 const isRedoActive = ref(false);
 const isBoldActive = ref(false);
@@ -48,11 +50,11 @@ const checkStates = (value) => {
 };
 const undo = () => {
   quill.value.getQuill().history.undo();
-  checkStates(props.modelValue);
+  checkStates(localValue.value);
 };
 const redo = () => {
   quill.value.getQuill().history.redo();
-  checkStates(props.modelValue);
+  checkStates(localValue.value);
 };
 const setBold = () => {
   quill.value.getQuill().format("bold", !isBoldActive.value);
@@ -148,7 +150,7 @@ onMounted(() => {
   <QuillEditor
     v-if="id"
     ref="quill"
-    :model-value="modelValue"
+    :content="localValue"
     theme="snow"
     content-type="html"
     class="min-h-[200px]"
@@ -347,6 +349,7 @@ onMounted(() => {
 </template>
 
 <style lang="scss">
+@import url('./snow.css');
 .ql-container {
   @apply rounded-b text-base;
 }
