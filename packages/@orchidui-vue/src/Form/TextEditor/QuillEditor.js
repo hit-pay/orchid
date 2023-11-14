@@ -1,5 +1,4 @@
 import Quill from "quill";
-import Delta from "quill-delta";
 import {
   defineComponent,
   onBeforeUnmount,
@@ -9,6 +8,8 @@ import {
   ref,
   h,
 } from "vue";
+
+const Delta = Quill.import('delta')
 import { toolbarOptions } from "./options";
 export const QuillEditor = defineComponent({
   name: "QuillEditor",
