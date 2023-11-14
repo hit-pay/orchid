@@ -13,7 +13,7 @@ const emit = defineEmits(["update:modelValue"]);
 const hour = ref(
   props.modelValue.getHours() <= 12
     ? props.modelValue.getHours()
-    : props.modelValue.getHours() - 12,
+    : props.modelValue.getHours() - 12
 );
 const minutes = ref(props.modelValue.getMinutes());
 const period = ref(props.modelValue.getHours() >= 12 ? "PM" : "AM");
@@ -36,13 +36,13 @@ const scrollIntoActiveDate = () => {
   };
 
   const activeHourElement = hourList.value.querySelector(
-    `.w-7:nth-child(${hour.value})`,
+    `.w-7:nth-child(${hour.value})`
   );
   const activeMinuteElement = minutesList.value.querySelector(
-    `.w-7:nth-child(${minutes.value})`,
+    `.w-7:nth-child(${minutes.value})`
   );
   const activePeriodElement = periodList.value.querySelector(
-    `.w-7:nth-child(${period.value === "AM" ? 1 : 2})`,
+    `.w-7:nth-child(${period.value === "AM" ? 1 : 2})`
   );
 
   scrollToCenter(hourList.value, activeHourElement);
@@ -64,8 +64,8 @@ const scrollIntoActiveDate = () => {
         : hour.value + 12,
       minutes.value - 1,
       59,
-      0,
-    ),
+      0
+    )
   );
 };
 
@@ -94,7 +94,7 @@ const scrollToNearestHour = () => {
   hours.forEach((h, i) => {
     if (
       Math.abs(
-        h.getBoundingClientRect().top - box.getBoundingClientRect().top,
+        h.getBoundingClientRect().top - box.getBoundingClientRect().top
       ) < 12
     ) {
       hour.value = i + 1;
@@ -108,7 +108,7 @@ const scrollToNearestMinute = () => {
   minutesArray.forEach((m, i) => {
     if (
       Math.abs(
-        m.getBoundingClientRect().top - box.getBoundingClientRect().top,
+        m.getBoundingClientRect().top - box.getBoundingClientRect().top
       ) < 12
     ) {
       minutes.value = i + 1;
@@ -122,7 +122,7 @@ const scrollToNearestPeriod = () => {
   periods.forEach((p, i) => {
     if (
       Math.abs(
-        p.getBoundingClientRect().top - box.getBoundingClientRect().top,
+        p.getBoundingClientRect().top - box.getBoundingClientRect().top
       ) < 12
     ) {
       period.value = i === 0 ? "AM" : "PM";

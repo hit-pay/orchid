@@ -41,7 +41,7 @@ export const Default = {
       const selectedCheckboxes = ref([]);
       watch(
         () => args.modelValue,
-        (val) => (selectedCheckboxes.value = val),
+        (val) => (selectedCheckboxes.value = val)
       );
       return { args, selectedCheckboxes };
     },

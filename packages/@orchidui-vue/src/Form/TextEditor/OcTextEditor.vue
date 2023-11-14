@@ -1,5 +1,5 @@
 <script setup>
-import Quill from 'quill'
+import Quill from "quill";
 import { QuillEditor } from "./QuillEditor";
 
 import { onMounted, ref } from "vue";
@@ -23,7 +23,7 @@ Size.whitelist = props.fontSizes.map((f) => f.value);
 Quill.register(Size, true);
 
 const id = ref(crypto.randomUUID().replace(/[^a-zA-Z]+/g, ""));
-const localValue = ref(props.modelValue ?? '');
+const localValue = ref(props.modelValue ?? "");
 const isUndoActive = ref(false);
 const isRedoActive = ref(false);
 const isBoldActive = ref(false);
@@ -349,7 +349,7 @@ onMounted(() => {
 </template>
 
 <style lang="scss">
-@import url('./snow.css');
+@import url("./snow.css");
 .ql-container {
   @apply rounded-b text-base;
 }

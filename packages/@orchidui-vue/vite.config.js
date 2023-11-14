@@ -22,10 +22,7 @@ const entities = files
     return [keyWithoutExt, file];
   })
   .filter((entry) => {
-    return (
-      !entry[0].includes(".sample") &&
-      !entry[0].includes(".stories")
-    );
+    return !entry[0].includes(".sample") && !entry[0].includes(".stories");
   });
 
 // Convert the array of key-value pairs to an object using the Object.fromEntries() method.

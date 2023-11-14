@@ -29,13 +29,13 @@ const query = ref("");
 const filteredCountryCodes = computed(() =>
   props.countryCodes
     .filter((country) =>
-      country.country.toLowerCase().includes(query.value.toLowerCase()),
+      country.country.toLowerCase().includes(query.value.toLowerCase())
     )
-    .sort((a, b) => a.country.localeCompare(b.country)),
+    .sort((a, b) => a.country.localeCompare(b.country))
 );
 const getCountryObject = (iso) =>
   props.countryCodes.find(
-    (country) => country.iso.toLowerCase() === iso.toLowerCase(),
+    (country) => country.iso.toLowerCase() === iso.toLowerCase()
   ) || null;
 
 const getCountryCode = (iso) => getCountryObject(iso)?.code || "";

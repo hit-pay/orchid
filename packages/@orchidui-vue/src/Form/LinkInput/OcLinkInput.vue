@@ -21,7 +21,7 @@ defineEmits({
 const isDropdownOpened = ref(false);
 const selectedLink = ref(props.links?.[0]?.value || "");
 const selectedLinkProps = computed(() =>
-  props.links.find((link) => link.value === selectedLink.value),
+  props.links.find((link) => link.value === selectedLink.value)
 );
 </script>
 

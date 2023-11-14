@@ -34,7 +34,7 @@ const emit = defineEmits({
 });
 
 const localValue = ref(
-  props.modelValue ? props.modelValue : props.multiple ? [] : "",
+  props.modelValue ? props.modelValue : props.multiple ? [] : ""
 );
 
 const query = ref("");
@@ -45,7 +45,7 @@ const filterOptions = (options, query) => {
   for (const option of options) {
     if (option.values) {
       const filteredGroup = option.values.filter((subOption) =>
-        subOption.label.toLowerCase().includes(query.toLowerCase()),
+        subOption.label.toLowerCase().includes(query.toLowerCase())
       );
 
       if (filteredGroup.length > 0) {
@@ -64,7 +64,7 @@ const filterOptions = (options, query) => {
   return filteredOptions;
 };
 const filterableOptions = computed(() =>
-  filterOptions(props.options, query.value),
+  filterOptions(props.options, query.value)
 );
 const selectOption = (option) => {
   const result = props.multiple

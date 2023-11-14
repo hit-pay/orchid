@@ -74,7 +74,7 @@ onMounted(() => {
     });
   } else {
     triggerEl.value.addEventListener("click", () =>
-      isShow.value ? hide() : show(),
+      isShow.value ? hide() : show()
     );
   }
 });
@@ -109,8 +109,7 @@ const onClickOutside = () => {
 
 <style scoped lang="scss">
 .oc-tooltip {
-  box-shadow:
-    0 3px 22px 0 rgba(38, 42, 50, 0.09),
+  box-shadow: 0 3px 22px 0 rgba(38, 42, 50, 0.09),
     0 1px 3px 0 rgba(0, 0, 0, 0.1);
   @apply rounded-sm z-[1006];
 

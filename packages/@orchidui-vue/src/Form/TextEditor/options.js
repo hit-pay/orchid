@@ -4,12 +4,12 @@ export const toolbarOptions = {
     ["bold", "italic", "underline"],
     [{ list: "ordered" }, { list: "bullet" }, { align: [] }],
     ["blockquote", "code-block", "link"],
-    [{ color: [] }, "clean"]
+    [{ color: [] }, "clean"],
   ],
   minimal: [
     [{ header: 1 }, { header: 2 }],
     ["bold", "italic", "underline"],
-    [{ list: "ordered" }, { list: "bullet" }, { align: [] }]
+    [{ list: "ordered" }, { list: "bullet" }, { align: [] }],
   ],
   full: [
     ["bold", "italic", "underline", "strike"], // toggled buttons
@@ -30,6 +30,6 @@ export const toolbarOptions = {
 
     ["link", "video", "image"],
 
-    ["clean"] // remove formatting button
-  ]
-}
+    ["clean"], // remove formatting button
+  ],
+};

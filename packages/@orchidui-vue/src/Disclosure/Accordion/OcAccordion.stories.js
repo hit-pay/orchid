@@ -28,7 +28,7 @@ export const OcAccordion = {
       const isOpen = ref(false);
       watch(
         () => args.isExpandable,
-        (val) => (isOpen.value = args.isDisabled ? false : val),
+        (val) => (isOpen.value = args.isDisabled ? false : val)
       );
       return { isOpen, args };
     },

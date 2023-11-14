@@ -1,5 +1,5 @@
 import { Theme } from "@/orchidui";
-import TextEditor from './OcTextEditor.vue'
+import TextEditor from "./OcTextEditor.vue";
 import { ref } from "vue";
 
 export default {

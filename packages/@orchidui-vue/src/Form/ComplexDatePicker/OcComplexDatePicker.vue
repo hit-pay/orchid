@@ -1,6 +1,6 @@
 <script setup>
 import { Dropdown, Input } from "@/orchidui";
-import { ComplexCalendar } from '@/orchidui/ComplexCalendar'
+import { ComplexCalendar } from "@/orchidui/ComplexCalendar";
 import { ref } from "vue";
 import dayjs from "dayjs";
 
@@ -42,7 +42,7 @@ const isOpen = ref(false);
   <Dropdown v-model="isOpen" position="bottom" class="w-full">
     <Input
       :model-value="`${dayjs(modelValue.start).format(formatDate)} - ${dayjs(
-        modelValue.end,
+        modelValue.end
       ).format(formatDate)}`"
       icon="calendar"
       readonly
