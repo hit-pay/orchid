@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-[225px] relative border border-oc-gray-200 rounded p-3 min-w-[30rem] flex flex-col"
+    class="min-w-[225px] relative border border-oc-gray-200 rounded p-3 min-w-[30rem] flex flex-col"
   >
     <div class="input-file-uploaded flex flex-col gap-y-3">
       <div

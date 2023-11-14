@@ -157,7 +157,10 @@ onMounted(() => {
     @paste="isValidPasedText"
   >
     <template #toolbar>
-      <div :id="id" class="flex h-[36px] !py-2 !px-3 gap-x-5 rounded-t">
+      <div
+        :id="id"
+        class="flex min-h-[36px] flex-wrap !py-2 !px-3 gap-x-5 gap-y-2 rounded-t"
+      >
         <div class="flex items-center gap-x-3">
           <Icon
             :class="
