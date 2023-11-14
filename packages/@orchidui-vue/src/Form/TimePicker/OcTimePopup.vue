@@ -60,8 +60,8 @@ const scrollIntoActiveDate = () => {
           ? 0
           : hour.value
         : hour.value === 12
-        ? 12
-        : hour.value + 12,
+          ? 12
+          : hour.value + 12,
       minutes.value - 1,
       59,
       0,

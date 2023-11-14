@@ -1,6 +1,6 @@
 {
   "name": "@orchidui/vue",
-  "version": "0.1.115",
+  "version": "0.1.135",
   "type": "module",
   "scripts": {
     "build": "vite build",
@@ -24,6 +24,18 @@
     ".": {
       "import": "./dist/index.js"
     },
+    "./TextEditor": {
+      "import": "./dist/TextEditor.js"
+    },
+    "./ComplexCalendar": {
+      "import": "./dist/ComplexCalendar.js"
+    },
+    "./ComplexDatePicker": {
+      "import": "./dist/ComplexDatePicker.js"
+    },
+    "./SingleFileUpload": {
+      "import": "./dist/SingleFileUpload.js"
+    },
     "./dist/style.css": {
       "import": "./dist/style.css",
       "require": "./dist/style.css"
@@ -32,10 +44,5 @@
   "module": "./dist/index.js",
   "files": [
     "./dist"
-  ],
-  "dependencies": {
-    "@popperjs/core": "^2.11.8",
-    "flag-icons": "^6.11.1",
-    "v-calendar": "^3.1.2"
-  }
+  ]
 }

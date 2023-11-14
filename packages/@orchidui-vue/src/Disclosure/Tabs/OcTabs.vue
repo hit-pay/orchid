@@ -32,8 +32,8 @@ const isPillVariant = computed(() => props.variant === "pills");
             ? 'bg-oc-gray-200 text-oc-text-500'
             : 'border-oc-primary-500 text-oc-text-500'
           : isPillVariant
-          ? 'text-oc-text-400'
-          : 'border-transparent text-oc-text-400',
+            ? 'text-oc-text-400'
+            : 'border-transparent text-oc-text-400',
       ]"
       @click="$emit('update:modelValue', tab.value)"
     >

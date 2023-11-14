@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { Modal, Button } from "@/orchidui";
 import { Cropper } from "vue-advanced-cropper";
 import "vue-advanced-cropper/dist/style.css";

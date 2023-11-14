@@ -1,4 +1,4 @@
-import { SingleFileUpload } from "@/orchidui";
+import SingleFileUpload from "./SingleFileUpload.vue";
 import { ref } from "vue";
 
 export default {

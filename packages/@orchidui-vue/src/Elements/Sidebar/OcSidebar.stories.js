@@ -4,7 +4,7 @@ import {
   PAYMENTS_SIDEBAR_GROUP,
   POS_SIDEBAR_GROUP,
   ONLINE_STORE_SIDEBAR_GROUP,
-} from "./HitpaySidebar.js";
+} from "./HitpaySidebar.sample.js";
 
 export default {
   component: Sidebar,

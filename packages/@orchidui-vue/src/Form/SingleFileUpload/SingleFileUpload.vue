@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { computed, onMounted, ref } from "vue";
 import { Input, Button, RadioGroup, Icon, Dropdown } from "@/orchidui";
 import { useUploadFileProgress } from "@/orchidui/composables/uploadFileProgress.js";

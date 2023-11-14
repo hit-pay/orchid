@@ -1,7 +1,8 @@
-<script setup lang="ts">
-import "@vueup/vue-quill/dist/vue-quill.snow.css";
+<script setup>
+import Quill from "quill";
+import { QuillEditor } from "./QuillEditor";
+
 import { onMounted, ref } from "vue";
-import { Quill, QuillEditor } from "@vueup/vue-quill";
 import { Icon, Dropdown } from "@/orchidui";
 
 const props = defineProps({
@@ -14,8 +15,9 @@ const props = defineProps({
    */
   initialFontSize: { type: String },
   modelValue: String,
+  image: String,
 });
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(["update:modelValue", "update:image"]);
 
 const Size = Quill.import("attributors/style/size");
 Size.whitelist = props.fontSizes.map((f) => f.value);
@@ -34,6 +36,9 @@ const activeSize = ref("");
 const activeListFormat = ref("");
 const activeAlign = ref("");
 const quill = ref();
+
+// need for upload to server
+const base64Images = ref(props.image);
 
 const checkStates = (value) => {
   isUndoActive.value = quill.value.getQuill().history.stack.undo.length > 0;
@@ -91,6 +96,8 @@ const readImage = (base64) => {
   quill.value
     .getQuill()
     .clipboard.dangerouslyPasteHTML(range.index, `<img src="${base64}" />`);
+  base64Images.value = base64;
+  emit("update:image", base64Images.value);
 };
 const uploadImage = () => {
   if (!quill.value.getQuill().getSelection())
@@ -148,11 +155,11 @@ onMounted(() => {
   <QuillEditor
     v-if="id"
     ref="quill"
-    :model-value="modelValue"
+    :content="modelValue"
     theme="snow"
     content-type="html"
     class="min-h-[200px]"
-    :toolbar="`#${id}`"
+    :id="`#${id}`"
     @update:content="checkStates"
     @paste="isValidPasedText"
   >
@@ -350,6 +357,7 @@ onMounted(() => {
 </template>
 
 <style lang="scss">
+@import url("./snow.css");
 .ql-container {
   @apply rounded-b text-base;
 }
