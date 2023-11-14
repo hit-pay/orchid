@@ -1,3 +1,3 @@
-import ComplexCalendar from "./OcComplexCalendar.vue";
+import ComplexCalendar from "./form/ComplexCalendar/OcComplexCalendar.vue";
 
 export { ComplexCalendar };
