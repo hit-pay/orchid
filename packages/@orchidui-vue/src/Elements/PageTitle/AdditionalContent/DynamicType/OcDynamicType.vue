@@ -11,7 +11,7 @@ defineProps({
 </script>
 
 <template>
-  <div class="flex gap-x-5">
+  <div class="flex md:gap-5 gap-3 md:flex-row flex-col">
     <BoxDetails
       v-for="(box, i) in boxes"
       :key="i"

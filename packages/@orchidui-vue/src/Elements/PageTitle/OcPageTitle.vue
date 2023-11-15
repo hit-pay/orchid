@@ -30,8 +30,8 @@ defineEmits({
 </script>
 
 <template>
-  <div class="pb-5 flex flex-col">
-    <div class="flex flex-col gap-y-3 pt-5 px-5 md:px-10">
+  <div class="md:pb-5 pb-4 flex flex-col">
+    <div class="flex flex-col gap-y-3 pt-4 md:pt-5 px-5 md:px-10">
       <Button
         v-if="isBack"
         size="small"
@@ -43,7 +43,7 @@ defineEmits({
         class="self-start"
         @click="$emit('back')"
       />
-      <div class="flex flex-wrap w-full gap-5">
+      <div class="flex w-full gap-5">
         <Title
           :title="title"
           :description="description"

@@ -13,7 +13,7 @@ defineProps({
 
 <template>
   <div
-    class="rounded w-[250px] shrink-0 border border-oc-gray-200 bg-oc-bg-light flex flex-col gap-y-3 p-4 customer-card"
+    class="rounded md:w-[250px] shrink-0 border border-oc-gray-200 bg-oc-bg-light flex flex-col gap-y-3 p-4 customer-card"
     :class="variant"
   >
     <!--  Main  -->

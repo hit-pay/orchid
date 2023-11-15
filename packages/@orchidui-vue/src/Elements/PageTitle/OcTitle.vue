@@ -8,7 +8,7 @@ defineProps({
 <template>
   <div class="flex text-oc-text justify-center flex-col gap-y-3">
     <div
-      class="text-xl font-medium whitespace-nowrap text-ellipsis overflow-hidden"
+      class="md:text-xl font-medium whitespace-nowrap text-ellipsis overflow-hidden"
     >
       <slot name="title" :title="title">
         {{ title }}

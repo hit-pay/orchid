@@ -52,9 +52,9 @@ const onClickOutside = async () => {
   }
 };
 const sizeClasses = computed(() => ({
-  default: "w-[640px]",
-  medium: "w-[480px]",
-  small: "w-[320px]",
+  default: "max-w-[640px]",
+  medium: "max-w-[480px]",
+  small: "max-w-[320px]",
 }));
 </script>
 
@@ -65,7 +65,7 @@ const sizeClasses = computed(() => ({
     @click="onClickOutside"
   >
     <div
-      class="shadow-normal bg-oc-bg-light rounded-xl flex flex-col"
+      class="shadow-normal w-[calc(100%-40px)] bg-oc-bg-light rounded-xl flex flex-col"
       :class="sizeClasses[size]"
       @click.stop
     >

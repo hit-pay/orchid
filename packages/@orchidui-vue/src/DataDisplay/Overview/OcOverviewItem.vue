@@ -15,7 +15,7 @@ defineProps({
 
 <template>
   <div
-    class="flex flex-1 items-center rounded overflow-hidden"
+    class="flex flex-1 items-center rounded md:overflow-hidden w-full md:w-auto"
     :class="[
       isBig ? 'gap-x-[.75rem]' : 'gap-x-3',
       isTransparent ? 'p-3' : 'border p-4 bg-oc-bg-light border-oc-gray-200',
@@ -37,11 +37,9 @@ defineProps({
       </div>
       <div class="flex items-center gap-x-2 overflow-hidden">
         <Icon v-if="isCard" width="35" name="payment-methods/visa" />
-        <span
-          :class="isBig ? 'text-xl' : ''"
-          class="text-ellipsis overflow-hidden whitespace-nowrap"
-          >{{ content }}</span
-        >
+        <span :class="isBig ? 'text-xl' : ''" class="truncate">{{
+          content
+        }}</span>
       </div>
     </div>
   </div>
