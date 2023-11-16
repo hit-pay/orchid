@@ -14,6 +14,22 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+  isRequired: {
+    type: Boolean,
+    default: false,
+  },
+  labelIcon: {
+    type: String,
+    default: "",
+  },
+  tooltipText: {
+    type: String,
+    default: "",
+  },
+  tooltipOptions: {
+    type: Object,
+    default: () => ({}),
+  },
 });
 defineEmits({
   "update:modelValue": [],
@@ -35,6 +51,10 @@ const selectedLinkProps = computed(() =>
     :hint="hint"
     :pre-fill="selectedLinkProps.preFill"
     :model-value="modelValue"
+    :is-required="isRequired"
+    :label-icon="labelIcon"
+    :tooltip-text="tooltipText"
+    :tooltip-options="tooltipOptions"
     @update:model-value="$emit('update:modelValue', $event)"
   >
     <template #trailing>
