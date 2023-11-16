@@ -71,7 +71,7 @@
           <span>Select {{ isMultiple ? 'documents' : 'a document' }} or drag here</span>
           <span>File max {{ maxSize }}MB</span>
         </div>
-        <div v-else class="mt-3 flex items-center justify-center">
+        <div v-else-if="isMultiple" class="mt-3 flex items-center justify-center">
           <span class="text-oc-accent-1 text-sm">+ Add more</span>
         </div>
       </label>
