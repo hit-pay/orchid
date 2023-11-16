@@ -63,7 +63,7 @@ export const Default = {
             </div>
             <FormBuilder
                 id="form-builder"
-                class="grid md:grid-cols-2 gap-5"
+                class="grid md:grid-cols-3 gap-5"
                 :errors="errors"
                 :values="values"
                 :json-form="SampleJsonForm"
