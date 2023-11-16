@@ -26,7 +26,7 @@ export const Default = {
   render: (args) => ({
     components: { Theme, PhoneInput },
     setup() {
-      const modelValue = ref();
+      const modelValue = ref([213, 10000000]);
       return { modelValue, args, countryCodes };
     },
     template: `

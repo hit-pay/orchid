@@ -31,8 +31,10 @@ export const Pills = {
       {
         label: "Filter 03",
         value: "3",
+        count: 10,
       },
     ],
+    maxCount: 9,
   },
   render: (args) => ({
     components: { Theme, Tabs },
@@ -42,7 +44,7 @@ export const Pills = {
     },
     template: `
           <Theme>
-            <Tabs v-model="activeTab" :tabs="args.tabs" :variant="args.variant"/>
+            <Tabs v-model="activeTab" :tabs="args.tabs" :variant="args.variant" :max-count="args.maxCount"/>
           </Theme>
         `,
   }),

@@ -1,12 +1,16 @@
 import { ref } from "vue";
 
-export const useUploadFileProgress = (emit) => {
+export const useUploadFileProgress = (maxSize, emit) => {
   const currentFiles = ref([]);
-
+  const isErrorMaxSize = ref(false);
   const onChangeFile = (event) => {
     const uploadFiles = [...event.target?.files].filter(
       (f) => !currentFiles.value.some((file) => file.fileName === f.name),
     );
+    isErrorMaxSize.value =
+      uploadFiles.reduce((acc, file) => acc + file.size, 0) >
+      maxSize * 1024 * 1024;
+    if (isErrorMaxSize.value) return;
     for (let i = 0; i < uploadFiles.length; i++) {
       const file = uploadFiles[i];
       const reader = new FileReader();
@@ -74,6 +78,7 @@ export const useUploadFileProgress = (emit) => {
     emit("update:modelValue", currentFiles.value);
   };
   return {
+    isErrorMaxSize,
     currentFiles,
     onChangeFile,
     onDeleteFile,
