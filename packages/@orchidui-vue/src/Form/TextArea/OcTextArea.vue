@@ -11,6 +11,22 @@ defineProps({
   rows: Number,
   autoResize: Boolean,
   isDisabled: Boolean,
+  isRequired: {
+    type: Boolean,
+    default: false,
+  },
+  labelIcon: {
+    type: String,
+    default: "",
+  },
+  tooltipText: {
+    type: String,
+    default: "",
+  },
+  tooltipOptions: {
+    type: Object,
+    default: () => ({}),
+  },
 });
 
 const emit = defineEmits({
@@ -31,7 +47,15 @@ const onInput = (event) => {
 </script>
 
 <template>
-  <BaseInput :label="label" :error-message="errorMessage" :hint="hint">
+  <BaseInput
+    :label="label"
+    :error-message="errorMessage"
+    :hint="hint"
+    :is-required="isRequired"
+    :label-icon="labelIcon"
+    :tooltip-text="tooltipText"
+    :tooltip-options="tooltipOptions"
+  >
     <textarea
       class="outline-none p-3 min-h-[120px] rounded border resize-none disabled:bg-oc-bg-dark"
       :class="[

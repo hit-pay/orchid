@@ -7,6 +7,12 @@ export default {
 };
 
 export const Default = {
+  argTypes: {
+    labelIcon: {
+      control: "select",
+      options: ["", "question-mark"],
+    },
+  },
   args: {
     label: "Label",
     hint: "Hint",
@@ -34,6 +40,13 @@ export const Default = {
     isFilterable: true,
     isAddNew: true,
     isDisabled: false,
+    isRequired: false,
+    labelIcon: "",
+    tooltipText: "Tooltip text",
+    tooltipOptions: {
+      position: "top",
+      distance: 10,
+    },
   },
   render: (args) => ({
     components: { Theme, Select, Option },
@@ -56,6 +69,10 @@ export const Default = {
                   :is-filterable="args.isFilterable"
                   :is-add-new="args.isAddNew"
                   :placeholder="args.placeholder"
+                  :isRequired="args.isRequired"
+                  :tooltip-options="args.tooltipOptions"
+                  :label-icon="args.labelIcon"
+                  :tooltip-text="args.tooltipText"
               />
             </div>
           </Theme>

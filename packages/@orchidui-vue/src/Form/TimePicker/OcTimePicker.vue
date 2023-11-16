@@ -1,10 +1,10 @@
 <script setup>
-import { Input, Dropdown } from "@/orchidui";
+import { Input, Dropdown, BaseInput } from "@/orchidui";
 import { defineAsyncComponent, ref } from "vue";
 import dayjs from "dayjs";
 
-const TimePopup = defineAsyncComponent(
-  () => import("@/orchidui/Form/TimePicker/OcTimePopup.vue"),
+const TimePopup = defineAsyncComponent(() =>
+  import("@/orchidui/Form/TimePicker/OcTimePopup.vue"),
 );
 const time = ref();
 const popup = ref();
@@ -14,6 +14,22 @@ defineProps({
   hint: String,
   placeholder: String,
   errorMessage: String,
+  isRequired: {
+    type: Boolean,
+    default: false,
+  },
+  labelIcon: {
+    type: String,
+    default: "",
+  },
+  tooltipText: {
+    type: String,
+    default: "",
+  },
+  tooltipOptions: {
+    type: Object,
+    default: () => ({}),
+  },
 });
 const updateActiveTime = () =>
   setTimeout(() => popup.value.updateActiveTime(), 300);
@@ -33,6 +49,10 @@ const updateActiveTime = () =>
       :hint="hint"
       :placeholder="placeholder"
       :model-value="dayjs(time).format('hh:mm A')"
+      :is-required="isRequired"
+      :label-icon="labelIcon"
+      :tooltip-text="tooltipText"
+      :tooltip-options="tooltipOptions"
       readonly
     />
 
