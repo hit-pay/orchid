@@ -125,7 +125,6 @@ const isFieldDisabled = computed(() => {
 });
 
 onMounted(() => {
-  console.log(props.field.type, fieldElement.value);
   const inputElement = fieldElement.value?.$el?.querySelector("input");
   inputElement?.setAttribute("tabindex", "0");
   if (props.index === 0) setTimeout(() => inputElement?.focus(), 0);
