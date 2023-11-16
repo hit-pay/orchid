@@ -11,7 +11,7 @@ const props = defineProps({
   errorMessage: String,
   modelValue: {
     type: Array,
-    default: () => [],
+    default: () => ["sg", ""],
   },
   placeholder: String,
   hint: String,
@@ -23,7 +23,16 @@ const emit = defineEmits({
   "update:modelValue": [],
 });
 
-const selectedCountryIso = ref(props.initialCountryCode);
+let defaultCountryCode = props.initialCountryCode;
+
+if (props.modelValue && props.modelValue[0]) {
+  const country = props.countryCodes.find(
+    (c) => c.code === props.modelValue[0].toString(),
+  );
+  country ? (defaultCountryCode = country.iso.toLowerCase()) : "";
+}
+
+const selectedCountryIso = ref(defaultCountryCode);
 const isDropdownOpened = ref(false);
 const query = ref("");
 const filteredCountryCodes = computed(() =>
