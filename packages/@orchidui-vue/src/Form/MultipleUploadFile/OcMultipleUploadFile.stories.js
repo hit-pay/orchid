@@ -11,6 +11,7 @@ export const Default = {
     accept: "",
     maxSize: 5,
     hint: "",
+    isMultiple: true,
   },
   render: (args) => ({
     components: { MultipleUploadFile, Theme },
@@ -20,7 +21,7 @@ export const Default = {
     },
     template: `
           <Theme>
-            <MultipleUploadFile v-model="modelValue" :accept="args.accept" :max-size="args.maxSize" :hint="args.hint"/>
+            <MultipleUploadFile v-model="modelValue" :accept="args.accept" :max-size="args.maxSize" :hint="args.hint" :is-multiple="args.isMultiple"/>
           </Theme>
         `,
   }),

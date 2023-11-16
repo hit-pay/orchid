@@ -56,7 +56,7 @@
           ref="inputRef"
           class="w-full h-full absolute opacity-0 cursor-pointer"
           type="file"
-          multiple
+          :multiple="isMultiple"
           :accept="accept"
           @dragover="isDragover = true"
           @dragleave="isDragover = false"
@@ -68,7 +68,7 @@
           class="w-full text-oc-text-300 text-sm h -full flex-1 flex flex-col justify-center items-center my-auto min-h-[7rem] transition-all duration-300"
         >
           <Icon name="upload" class="text-oc-accent-1" />
-          <span>Select documents or drag here</span>
+          <span>Select {{ isMultiple ? 'documents' : 'a document' }} or drag here</span>
           <span>File max {{ maxSize }}MB</span>
         </div>
         <div v-else class="mt-3 flex items-center justify-center">
@@ -103,6 +103,10 @@ const props = defineProps({
    */
   maxSize: Number,
   hint: String,
+  isMultiple: {
+    type: Boolean,
+    default: true
+  }
 });
 const inputRef = ref();
 const isDragover = ref(false);
