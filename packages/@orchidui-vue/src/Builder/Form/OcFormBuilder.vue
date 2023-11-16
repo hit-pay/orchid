@@ -64,7 +64,7 @@ const getComponentByType = (type) => {
 
 const modelValues = (name, defaultValue = "") => {
   if (typeof name === "object") {
-    let modelValueData = "";
+    let modelValueData = null;
     name.forEach((formName) => {
       if (props.values[formName.key]) {
         if (modelValueData) {
