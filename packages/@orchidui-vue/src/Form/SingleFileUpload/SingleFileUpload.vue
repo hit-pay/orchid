@@ -7,6 +7,10 @@ import ModalCropper from "./ModalCropper.vue";
 const props = defineProps({
   modelValue: Object,
   isPreview: Boolean,
+  /**
+   * Maximum file size in MB
+   */
+  maxSize: Number,
 });
 const emit = defineEmits(["update:modelValue"]);
 
@@ -30,8 +34,10 @@ const radios = [
   },
 ];
 
-const { currentFiles, onChangeFile, onDeleteFile } =
-  useUploadFileProgress(emit);
+const { currentFiles, onChangeFile, onDeleteFile } = useUploadFileProgress(
+  props.maxSize,
+  emit,
+);
 
 const videoUrl = computed(() =>
   URL.createObjectURL(currentFiles.value?.[0].file),

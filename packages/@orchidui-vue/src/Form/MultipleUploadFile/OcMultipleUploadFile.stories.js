@@ -9,6 +9,8 @@ export default {
 export const Default = {
   args: {
     accept: "",
+    maxSize: 5,
+    hint: "",
   },
   render: (args) => ({
     components: { MultipleUploadFile, Theme },
@@ -18,7 +20,7 @@ export const Default = {
     },
     template: `
           <Theme>
-            <MultipleUploadFile v-model="modelValue" :accept="args.accept"/>
+            <MultipleUploadFile v-model="modelValue" :accept="args.accept" :max-size="args.maxSize" :hint="args.hint"/>
           </Theme>
         `,
   }),

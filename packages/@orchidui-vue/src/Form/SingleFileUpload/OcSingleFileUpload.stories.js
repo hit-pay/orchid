@@ -10,6 +10,7 @@ export const Default = {
   args: {
     accept: "",
     isPreview: false,
+    maxSize: 5,
   },
   render: (args) => ({
     components: { SingleFileUpload },
@@ -18,7 +19,8 @@ export const Default = {
       return { modelValue, args };
     },
     template: `
-          <SingleFileUpload v-model="modelValue" :is-preview="args.isPreview" :accept="args.accept"/>
+          <SingleFileUpload v-model="modelValue" :is-preview="args.isPreview" :accept="args.accept"
+                            :max-size="args.maxSize"/>
         `,
   }),
 };

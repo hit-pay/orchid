@@ -1,78 +1,86 @@
 <template>
-  <div
-    class="min-w-[225px] relative border border-oc-gray-200 rounded p-3 min-w-[30rem] flex flex-col"
-  >
-    <div class="input-file-uploaded flex flex-col gap-y-3">
-      <div
-        v-for="(file, index) in currentFiles"
-        :key="file.fileName"
-        class="flex justify-between relative items-center w-full last:mb-2"
-      >
-        <div class="flex items-center gap-x-3">
-          <div
-            class="flex flex-col items-center justify-center text-oc-text-300"
-          >
-            <Icon name="file-extension" width="14" height="10" />
-            <span class="uppercase text-[8px] font-bold leading-none block">
-              {{ file.extension }}
-            </span>
-          </div>
-          <span class="text-oc-text-400 text-sm">{{ file?.fileName }}</span>
-        </div>
+  <div class="flex flex-col gap-y-2">
+    <div
+      class="relative border rounded p-3 min-w-[30rem] flex flex-col"
+      :class="isErrorMaxSize ? 'border-oc-error' : 'border-oc-gray-200'"
+    >
+      <div class="input-file-uploaded flex flex-col gap-y-3">
         <div
-          class="w-[100px] h-[6px] bg-oc-accent-1-50 rounded-full overflow-hidden transition-all duration-1000 absolute right-0"
-          :class="{ 'on-end-loading': file.progress === 100 }"
+          v-for="(file, index) in currentFiles"
+          :key="file.fileName"
+          class="flex justify-between relative items-center w-full last:mb-2"
         >
+          <div class="flex items-center gap-x-3">
+            <div
+              class="flex flex-col items-center justify-center text-oc-text-300"
+            >
+              <Icon name="file-extension" width="14" height="10" />
+              <span class="uppercase text-[8px] font-bold leading-none block">
+                {{ file.extension }}
+              </span>
+            </div>
+            <span class="text-oc-text-400 text-sm">{{ file?.fileName }}</span>
+          </div>
           <div
-            :style="{ width: `${file.progress}%` }"
-            class="block transition-all duration-1000 h-[6px] rounded-full bg-oc-primary"
+            class="w-[100px] h-[6px] bg-oc-accent-1-50 rounded-full overflow-hidden transition-all duration-1000 absolute right-0"
+            :class="{ 'on-end-loading': file.progress === 100 }"
+          >
+            <div
+              :style="{ width: `${file.progress}%` }"
+              class="block transition-all duration-1000 h-[6px] rounded-full bg-oc-primary"
+            />
+          </div>
+          <Icon
+            width="12"
+            height="12"
+            name="bin"
+            class="opacity-0 text-oc-error cursor-pointer absolute right-0"
+            :class="{
+              'on-enable-delete': file.progress === 100,
+            }"
+            @click="onDeleteFile(index)"
           />
         </div>
-        <Icon
-          width="12"
-          height="12"
-          name="bin"
-          class="opacity-0 text-oc-error cursor-pointer absolute right-0"
-          :class="{
-            'on-enable-delete': file.progress === 100,
-          }"
-          @click="onDeleteFile(index)"
-        />
       </div>
-    </div>
-    <label
-      tabindex="0"
-      for="my-file"
-      class="relative overflow-hidden rounded-sm flex-1 flex flex-col transition-all border-transparent border-dashed hover:border-oc-primary cursor-pointer"
-      :class="{
-        '!border-oc-primary': isDragover,
-        border: !currentFiles.length,
-      }"
-    >
-      <input
-        id="my-file"
-        ref="inputRef"
-        class="w-full h-full absolute opacity-0 cursor-pointer"
-        type="file"
-        multiple
-        :accept="accept"
-        @dragover="isDragover = true"
-        @dragleave="isDragover = false"
-        @drop="isDragover = false"
-        @change="onChangeFile"
-      />
-      <div
-        v-if="!currentFiles.length"
-        class="w-full text-oc-text-300 text-sm h -full flex-1 flex flex-col justify-center items-center my-auto min-h-[7rem] transition-all duration-300"
+      <label
+        tabindex="0"
+        for="my-file"
+        class="relative overflow-hidden rounded-sm flex-1 flex flex-col transition-all border-transparent border-dashed hover:border-oc-primary cursor-pointer"
+        :class="{
+          '!border-oc-primary': isDragover,
+          border: !currentFiles.length,
+        }"
       >
-        <Icon name="upload" class="text-oc-accent-1" />
-        <span>Select documents or drag here</span>
-        <span>File max 5MB</span>
-      </div>
-      <div v-else class="mt-3 flex items-center justify-center">
-        <span class="text-oc-accent-1 text-sm">+ Add more</span>
-      </div>
-    </label>
+        <input
+          id="my-file"
+          ref="inputRef"
+          class="w-full h-full absolute opacity-0 cursor-pointer"
+          type="file"
+          multiple
+          :accept="accept"
+          @dragover="isDragover = true"
+          @dragleave="isDragover = false"
+          @drop="isDragover = false"
+          @change="onChangeFile"
+        />
+        <div
+          v-if="!currentFiles.length"
+          class="w-full text-oc-text-300 text-sm h -full flex-1 flex flex-col justify-center items-center my-auto min-h-[7rem] transition-all duration-300"
+        >
+          <Icon name="upload" class="text-oc-accent-1" />
+          <span>Select documents or drag here</span>
+          <span>File max 5MB</span>
+        </div>
+        <div v-else class="mt-3 flex items-center justify-center">
+          <span class="text-oc-accent-1 text-sm">+ Add more</span>
+        </div>
+      </label>
+    </div>
+    <span
+      class="text-sm"
+      :class="isErrorMaxSize ? 'text-oc-error' : 'text-oc-text-400'"
+      >{{ hint }}</span
+    >
   </div>
 </template>
 <script setup lang="ts">
@@ -90,11 +98,17 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  /**
+   * Maximum file size in MB
+   */
+  maxSize: Number,
+  hint: String,
 });
 const inputRef = ref();
 const isDragover = ref(false);
-const { currentFiles, onChangeFile, onDeleteFile } =
-  useUploadFileProgress(emit);
+const { isErrorMaxSize, currentFiles, onChangeFile, onDeleteFile } =
+  useUploadFileProgress(props.maxSize, emit);
+
 onMounted(() => {
   currentFiles.value = [...props.modelValue];
 });
