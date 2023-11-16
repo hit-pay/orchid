@@ -20,6 +20,10 @@ export const Default = {
     errorMessage: {
       control: "text",
     },
+    labelIcon: {
+      control: "select",
+      options: ["", "question-mark"],
+    },
   },
   args: {
     label: "Label",
@@ -29,6 +33,13 @@ export const Default = {
     icon: "",
     disabled: false,
     isInlineLabel: false,
+    isRequired: false,
+    labelIcon: "",
+    tooltipText: "Tooltip text",
+    tooltipOptions: {
+      position: "top",
+      distance: 10,
+    },
   },
   render: (args) => ({
     components: { Theme, OCInput },
@@ -36,7 +47,7 @@ export const Default = {
       return { args };
     },
     template: `
-          <Theme colorMode="light">
+          <Theme colorMode="light" class="py-4">
             <OCInput
                 :label="args.label"
                 :error-message="args.errorMessage"
@@ -45,6 +56,10 @@ export const Default = {
                 :isInlineLabel="args.isInlineLabel"
                 :icon="args.icon"
                 :disabled="args.disabled"
+                :isRequired="args.isRequired"
+                :tooltip-options="args.tooltipOptions"
+                :label-icon="args.labelIcon"
+                :tooltip-text="args.tooltipText"
             />
           </Theme>
         `,

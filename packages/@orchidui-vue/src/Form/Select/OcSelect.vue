@@ -26,6 +26,22 @@ const props = defineProps({
     default: 2,
   },
   multiple: Boolean,
+  isRequired: {
+    type: Boolean,
+    default: false,
+  },
+  labelIcon: {
+    type: String,
+    default: "",
+  },
+  tooltipText: {
+    type: String,
+    default: "",
+  },
+  tooltipOptions: {
+    type: Object,
+    default: () => ({}),
+  },
 });
 
 const emit = defineEmits({
@@ -113,6 +129,10 @@ const removeOption = (value) => {
     :label="isInlineLabel ? '' : label"
     :hint="hint"
     :error-message="errorMessage"
+    :is-required="isRequired"
+    :label-icon="labelIcon"
+    :tooltip-text="tooltipText"
+    :tooltip-options="tooltipOptions"
   >
     <Dropdown
       v-model="isDropdownOpened"

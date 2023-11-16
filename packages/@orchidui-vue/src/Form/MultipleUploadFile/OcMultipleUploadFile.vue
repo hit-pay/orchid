@@ -69,7 +69,7 @@
         >
           <Icon name="upload" class="text-oc-accent-1" />
           <span>Select documents or drag here</span>
-          <span>File max 5MB</span>
+          <span>File max {{ maxSize }}MB</span>
         </div>
         <div v-else class="mt-3 flex items-center justify-center">
           <span class="text-oc-accent-1 text-sm">+ Add more</span>
