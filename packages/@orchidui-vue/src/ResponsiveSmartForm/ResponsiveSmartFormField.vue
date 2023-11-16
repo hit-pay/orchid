@@ -35,8 +35,8 @@ import {
 import { SingleFileUpload } from "@/orchidui/SingleFileUpload.js";
 import { TextEditor } from "@/orchidui/TextEditor.js";
 
-const ComplexDatePicker = defineAsyncComponent(() =>
-  import("@/orchidui/Form/ComplexDatePicker/OcComplexDatePicker.vue"),
+const ComplexDatePicker = defineAsyncComponent(
+  () => import("@/orchidui/Form/ComplexDatePicker/OcComplexDatePicker.vue"),
 );
 
 const props = defineProps({
