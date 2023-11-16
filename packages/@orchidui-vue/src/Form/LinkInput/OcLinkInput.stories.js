@@ -7,7 +7,12 @@ export default {
 };
 
 export const Default = {
-  argTypes: {},
+  argTypes: {
+    labelIcon: {
+      control: "select",
+      options: ["", "question-mark"],
+    },
+  },
   args: {
     hint: "This is a hint text to help user.",
     placeholder: "Placeholder",
@@ -15,6 +20,13 @@ export const Default = {
     isDisabled: false,
     label: "",
     errorMessage: "",
+    isRequired: false,
+    labelIcon: "",
+    tooltipText: "Tooltip text",
+    tooltipOptions: {
+      position: "top",
+      distance: 10,
+    },
     links: [
       {
         value: "instagram",
@@ -48,6 +60,10 @@ export const Default = {
                   :links="args.links"
                   :placeholder="args.placeholder"
                   :error-message="args.errorMessage"
+                  :isRequired="args.isRequired"
+                  :tooltip-options="args.tooltipOptions"
+                  :label-icon="args.labelIcon"
+                  :tooltip-text="args.tooltipText"
               />
             </div>
           </Theme>

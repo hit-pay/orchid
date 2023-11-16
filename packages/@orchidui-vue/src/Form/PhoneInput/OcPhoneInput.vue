@@ -18,6 +18,22 @@ const props = defineProps({
   label: String,
   isInlineLabel: Boolean,
   isDisabled: Boolean,
+  isRequired: {
+    type: Boolean,
+    default: false,
+  },
+  labelIcon: {
+    type: String,
+    default: "",
+  },
+  tooltipText: {
+    type: String,
+    default: "",
+  },
+  tooltipOptions: {
+    type: Object,
+    default: () => ({}),
+  },
 });
 const emit = defineEmits({
   "update:modelValue": [],
@@ -68,6 +84,10 @@ const changeSelectedCountry = (iso, code) => {
     :is-inline-label="isInlineLabel"
     :disabled="isDisabled"
     :hint="hint"
+    :is-required="isRequired"
+    :label-icon="labelIcon"
+    :tooltip-text="tooltipText"
+    :tooltip-options="tooltipOptions"
     @update:model-value="onInput"
   >
     <template #trailing>
