@@ -13,6 +13,7 @@ import { SampleJsonForm } from "../../data/JsonForm.sample";
 
 export default {
   component: FormBuilder,
+  tags: ["autodocs"],
 };
 
 export const Default = {
