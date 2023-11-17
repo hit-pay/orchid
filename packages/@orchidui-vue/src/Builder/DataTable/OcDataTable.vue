@@ -94,7 +94,8 @@ const perPageOptions = computed(() => {
       value: 99,
     },
   ];
-  const maxLength = paginationOption.value.total < 100 ? paginationOption.value.total : 100;
+  const maxLength =
+    paginationOption.value.total < 100 ? paginationOption.value.total : 100;
   let opt = per_page_option;
   if (maxLength > 10) {
     opt = per_page_option.filter((p) => {
@@ -188,11 +189,18 @@ const displayFilterData = computed(() => {
           let optionLabel = filterData.value[name];
 
           if (option.props.options) {
-            const selectedValuesInArray = option.props.multiple ? filterData.value[name] : [filterData.value[name]]
+            const selectedValuesInArray = option.props.multiple
+              ? filterData.value[name]
+              : [filterData.value[name]];
 
             optionLabel = selectedValuesInArray
-              .map((selectedValue) => option.props.options.find(({ value }) => value === selectedValue).label)
-              .join(', ');
+              .map(
+                (selectedValue) =>
+                  option.props.options.find(
+                    ({ value }) => value === selectedValue,
+                  ).label,
+              )
+              .join(", ");
           }
 
           display.push({
