@@ -11,6 +11,7 @@ const props = defineProps({
    * Maximum file size in MB
    */
   maxSize: Number,
+  accept: String,
 });
 const emit = defineEmits(["update:modelValue"]);
 
@@ -134,6 +135,7 @@ const checkFileLink = async (link) => {
           ref="inputRef"
           class="hidden"
           type="file"
+          :accept="accept"
           @change="onChangeFile"
         />
       </div>
