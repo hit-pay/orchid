@@ -1,6 +1,7 @@
 const SampleFilterForm = [
   {
     name: "checkboxes_group",
+    key: "checkboxes_group",
     type: "CheckboxesGroup",
     rule: "required",
     props: {
@@ -26,6 +27,7 @@ const SampleFilterForm = [
   },
   {
     name: "date_picker_range",
+    key: "date_picker_range",
     type: "DatePicker",
     props: {
       type: "range",
@@ -36,6 +38,7 @@ const SampleFilterForm = [
   },
   {
     name: "only_date",
+    key: "only_date",
     type: "DatePicker",
     props: {
       label: "DatePicker",
@@ -45,6 +48,7 @@ const SampleFilterForm = [
   },
   {
     name: "radio_group",
+    key: "radio_group",
     type: "RadioGroup",
     props: {
       groupName: "unique_group_name",
@@ -78,6 +82,7 @@ const SampleFilterForm = [
   },
   {
     name: "range_input",
+    key: "range_input",
     type: "RangeInput",
     props: {
       label: "RangeInput",
@@ -87,6 +92,7 @@ const SampleFilterForm = [
   },
   {
     name: "select",
+    key: "select",
     type: "Select",
     props: {
       label: "Select",
@@ -116,6 +122,7 @@ const SampleFilterForm = [
   },
   {
     name: "select_multiple",
+    key: "select_multiple",
     type: "Select",
     props: {
       label: "Select Multiple",

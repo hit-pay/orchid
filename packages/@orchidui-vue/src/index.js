@@ -18,7 +18,6 @@ export * from "./Feedback/Snackbar/OcSnackbar.js";
 export * from "./Feedback/ShareIcon/OcShareIcon.js";
 
 export * from "./Form";
-export * from "./ResponsiveSmartForm/OcResponsiveSmartForm.js";
 
 export * from "./MediaAndIcons/Avatar/OcAvatar.js";
 export * from "./MediaAndIcons/Icon/OcIcon.js";
