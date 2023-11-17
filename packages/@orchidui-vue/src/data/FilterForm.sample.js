@@ -126,15 +126,15 @@ const SampleFilterForm = [
       options: [
         {
           label: "Option 1",
-          value: 1,
+          value: crypto.randomUUID(),
         },
         {
           label: "Option 2",
-          value: 2,
+          value: crypto.randomUUID(),
         },
         {
           label: "Option 3",
-          value: 3,
+          value: crypto.randomUUID(),
         },
         {
           label: "Option 4",

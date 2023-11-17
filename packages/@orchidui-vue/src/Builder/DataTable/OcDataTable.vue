@@ -185,10 +185,18 @@ const displayFilterData = computed(() => {
           }
         });
         if (filterData.value[name]) {
-          const optionLabel = option.props.options?.find(({ value }) => value === filterData.value[name])?.label;
+          let optionLabel = filterData.value[name];
+
+          if (option.props.options) {
+            const selectedValuesInArray = option.props.multiple ? filterData.value[name] : [filterData.value[name]]
+
+            optionLabel = selectedValuesInArray
+              .map((selectedValue) => option.props.options.find(({ value }) => value === selectedValue).label)
+              .join(', ');
+          }
 
           display.push({
-            label: `${option.props.label} : ${ optionLabel || filterData.value[name]}`,
+            label: `${option.props.label} : ${optionLabel}`,
             name: name,
           });
         }
