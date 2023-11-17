@@ -33,7 +33,7 @@ const emit = defineEmits({
   "click:row": [],
 });
 
-const pagination = computed(() => {
+const paginationOption = computed(() => {
   return props.options?.pagination;
 });
 
@@ -94,7 +94,8 @@ const perPageOptions = computed(() => {
       value: 99,
     },
   ];
-  const maxLength = pagination.value.total < 100 ? pagination.value.total : 100;
+  const maxLength =
+    paginationOption.value.total < 100 ? paginationOption.value.total : 100;
   let opt = per_page_option;
   if (maxLength > 10) {
     opt = per_page_option.filter((p) => {
@@ -185,8 +186,25 @@ const displayFilterData = computed(() => {
           }
         });
         if (filterData.value[name]) {
+          let optionLabel = filterData.value[name];
+
+          if (option.props.options) {
+            const selectedValuesInArray = option.props.multiple
+              ? filterData.value[name]
+              : [filterData.value[name]];
+
+            optionLabel = selectedValuesInArray
+              .map(
+                (selectedValue) =>
+                  option.props.options.find(
+                    ({ value }) => value === selectedValue,
+                  ).label,
+              )
+              .join(", ");
+          }
+
           display.push({
-            label: `${option.props.label} : ${filterData.value[name]}`,
+            label: `${option.props.label} : ${optionLabel}`,
             name: name,
           });
         }
@@ -297,13 +315,13 @@ const displayFilterData = computed(() => {
       </template>
     </Table>
     <div
-      v-if="pagination?.total > 0"
+      v-if="paginationOption?.total > 0"
       class="flex gap-3 items-center m-3 md:mx-0"
     >
       <Pagination
         v-model="currentPage"
         class="justify-center"
-        :max-page="pagination.last_page"
+        :max-page="paginationOption.last_page"
         total-visible="5"
         @update:model-value="changePage"
       />

@@ -10,16 +10,16 @@ const SampleFilterForm = [
       alignment: "vertical",
       checkboxes: [
         {
-          label: "Text",
-          value: 0,
-        },
-        {
-          label: "Text",
+          label: "Checkbox 1",
           value: 1,
         },
         {
-          label: "Text",
+          label: "Checkbox 2",
           value: 2,
+        },
+        {
+          label: "Checkbox 3",
+          value: 3,
           isDisabled: true,
         },
       ],
@@ -133,15 +133,15 @@ const SampleFilterForm = [
       options: [
         {
           label: "Option 1",
-          value: 1,
+          value: crypto.randomUUID(),
         },
         {
           label: "Option 2",
-          value: 2,
+          value: crypto.randomUUID(),
         },
         {
           label: "Option 3",
-          value: 3,
+          value: crypto.randomUUID(),
         },
         {
           label: "Option 4",

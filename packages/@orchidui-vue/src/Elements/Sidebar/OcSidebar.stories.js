@@ -5,6 +5,7 @@ import {
   POS_SIDEBAR_GROUP,
   ONLINE_STORE_SIDEBAR_GROUP,
 } from "./HitpaySidebar.sample.js";
+import OcAccountSetup from "./OcAccountSetup.vue";
 
 export default {
   component: Sidebar,
@@ -23,25 +24,29 @@ export const Default = {
     payment_sidebar_menu: PAYMENTS_SIDEBAR_GROUP,
     pos_sidebar_menu: POS_SIDEBAR_GROUP,
     online_store_sidebar_menu: ONLINE_STORE_SIDEBAR_GROUP,
+    progress: 80,
   },
   render: (args) => ({
-    components: { Sidebar, Theme },
+    components: { Sidebar, Theme, OcAccountSetup },
     setup() {
       return { args };
     },
     template: `
           <Theme class="layout-payment mb-8">
-            <Sidebar 
-                  :title="args.title" 
-                  :sidebar-menu="args.payment_sidebar_menu"
-                  :isExpanded="args.isExpanded"
-                  @changeExpanded="args.isExpanded = $event">
-                <template v-slot:label="{menu}">
-                  <a href="#" class="whitespace-nowrap px-5 py-3">{{ menu.label }}</a>
-                </template>
-                <template v-slot:submenu_label="{submenu}">
-                  <a href="#" class="whitespace-nowrap px-5 py-3">{{ submenu.label }}</a>
-                </template>
+            <Sidebar
+                :title="args.title"
+                :sidebar-menu="args.payment_sidebar_menu"
+                :isExpanded="args.isExpanded"
+                @changeExpanded="args.isExpanded = $event">
+              <template #before>
+                <OcAccountSetup :isExpanded="args.isExpanded" :progress="args.progress"/>
+              </template>
+              <template v-slot:label="{menu}">
+                <a href="#" class="whitespace-nowrap px-5 py-3">{{ menu.label }}</a>
+              </template>
+              <template v-slot:submenu_label="{submenu}">
+                <a href="#" class="whitespace-nowrap px-5 py-3">{{ submenu.label }}</a>
+              </template>
             </Sidebar>
           </Theme>
 

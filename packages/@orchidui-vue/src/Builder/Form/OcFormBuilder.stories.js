@@ -135,7 +135,7 @@ export const Default = {
             </div>
             <FormBuilder
                 id="form-builder"
-                class="grid md:grid-cols-3 gap-5"
+                class="gap-5"
                 :errors="errors"
                 :grid="args.grid"
                 :values="values"

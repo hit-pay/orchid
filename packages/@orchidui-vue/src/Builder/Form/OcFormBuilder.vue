@@ -13,6 +13,7 @@ import {
   RadioGroup,
   RangeInput,
   Checkbox,
+  // TODO : add all form here , best load as async component
 } from "@/orchidui";
 import { computed } from "vue";
 
@@ -114,10 +115,7 @@ const gridDefinitionVariables = computed(() => {
 });
 </script>
 <template>
-  <div
-    class="form-builder responsive-smart-form-grid"
-    :style="gridDefinitionVariables"
-  >
+  <div class="responsive-smart-form-grid" :style="gridDefinitionVariables">
     <div
       v-for="form in jsonForm"
       :key="form.key"
@@ -126,7 +124,6 @@ const gridDefinitionVariables = computed(() => {
       <component
         :is="getComponentByType(form.type)"
         v-if="getComponentByType(form.type)"
-        :class="form.className"
         v-bind="form.props"
         :model-value="modelValues(form.name, form.default)"
         :error-message="errorValues(form.name)"

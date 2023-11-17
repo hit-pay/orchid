@@ -9,7 +9,6 @@ const SampleJsonForm = [
       label: "Example Label",
       hint: "This is a hint text to help user",
       placeholder: "placeholder",
-      class: "md:col-span-1",
     },
   },
   {
@@ -24,7 +23,6 @@ const SampleJsonForm = [
       isInlineLabel: false,
       isDisabled: false,
       cardType: "mastercard",
-      class: "md:col-span-2",
     },
   },
   {
@@ -75,7 +73,6 @@ const SampleJsonForm = [
       hint: "This is a hint text to help user",
       placeholder: "placeholder",
       icon: "circle",
-      class: "md:col-span-2",
     },
   },
   {
@@ -232,7 +229,6 @@ const SampleJsonForm = [
       label: "Example Label",
       hint: "This is a hint text to help user",
       placeholder: "placeholder",
-      class: "md:col-span-3",
     },
   },
   {
@@ -263,7 +259,6 @@ const SampleJsonForm = [
       label: "Example Label",
       hint: "This is a hint text to help user",
       placeholder: "placeholder",
-      class: "md:col-span-2",
     },
   },
   {
@@ -290,9 +285,6 @@ const SampleJsonForm = [
     name: "toggle_field",
     key: "toggle_field",
     type: "Toggle",
-    props: {
-      class: "md:col-span-2",
-    },
   },
 ];
 
