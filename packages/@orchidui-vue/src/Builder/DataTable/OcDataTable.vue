@@ -1,7 +1,6 @@
 <script setup>
 import {
   Table,
-  Pagination,
   Select,
   Tabs,
   FilterSearch,
@@ -185,8 +184,10 @@ const displayFilterData = computed(() => {
           }
         });
         if (filterData.value[name]) {
+          const optionLabel = option.props.options?.find(({ value }) => value === filterData.value[name])?.label;
+
           display.push({
-            label: `${option.props.label} : ${filterData.value[name]}`,
+            label: `${option.props.label} : ${ optionLabel || filterData.value[name]}`,
             name: name,
           });
         }
