@@ -90,6 +90,7 @@ const changeModelValue = (value) => {
 .vc-pane-layout {
   gap: 0 24px;
   --vc-text-lg: 14px;
+  @apply grid-cols-1 md:grid-cols-2 #{!important};
 }
 
 .vc-primary {

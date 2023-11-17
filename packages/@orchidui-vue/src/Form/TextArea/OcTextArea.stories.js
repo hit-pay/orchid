@@ -7,7 +7,12 @@ export default {
 };
 
 export const Default = {
-  argTypes: {},
+  argTypes: {
+    labelIcon: {
+      control: "select",
+      options: ["", "question-mark"],
+    },
+  },
   args: {
     hint: "This is a hint text to help user.",
     placeholder: "Placeholder",
@@ -16,6 +21,13 @@ export const Default = {
     rows: 5,
     autoResize: false,
     isDisabled: false,
+    isRequired: false,
+    labelIcon: "",
+    tooltipText: "Tooltip text",
+    tooltipOptions: {
+      position: "top",
+      distance: 10,
+    },
   },
   render: (args) => ({
     components: { Theme, TextArea },
@@ -34,6 +46,10 @@ export const Default = {
                 :is-disabled="args.isDisabled"
                 :placeholder="args.placeholder"
                 :error-message="args.errorMessage"
+                :isRequired="args.isRequired"
+                :tooltip-options="args.tooltipOptions"
+                :label-icon="args.labelIcon"
+                :tooltip-text="args.tooltipText"
             />
           </Theme>
         `,

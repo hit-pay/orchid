@@ -22,11 +22,7 @@ const entities = files
     return [keyWithoutExt, file];
   })
   .filter((entry) => {
-    return (
-      !entry[0].includes(".sample") &&
-      !entry[0].includes(".stories") &&
-      !entry[0].includes("HitpaySidebar")
-    );
+    return !entry[0].includes(".sample") && !entry[0].includes(".stories");
   });
 
 // Convert the array of key-value pairs to an object using the Object.fromEntries() method.
@@ -52,8 +48,8 @@ export default defineConfig({
         "@popperjs/core",
         "dayjs",
         "v-calendar",
-        "@vueup/vue-quill",
         "vue-advanced-cropper",
+        "quill"
       ],
     },
   },

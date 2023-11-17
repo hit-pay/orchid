@@ -1,8 +1,14 @@
 <script setup>
+import { Tooltip, Icon } from "@/orchidui";
+
 defineProps({
   label: String,
   hint: String,
   errorMessage: String,
+  isRequired: Boolean,
+  labelIcon: String,
+  tooltipText: String,
+  tooltipOptions: Object,
 });
 </script>
 
@@ -10,9 +16,21 @@ defineProps({
   <div class="flex flex-col gap-y-2 w-full">
     <label
       v-if="label"
-      class="flex text-sm items-center font-medium text-oc-text-400"
-      >{{ label }}</label
+      class="text-sm flex items-center gap-x-3 font-medium text-oc-text-400"
     >
+      <span class="flex gap-x-1 items-center">
+        {{ label }}
+        <span v-if="isRequired" class="text-oc-error">*</span>
+      </span>
+      <Tooltip v-if="labelIcon" v-bind="tooltipOptions">
+        <Icon width="16" height="16" :name="labelIcon" />
+        <template v-if="tooltipText" #popper>
+          <div class="px-3 py-2">
+            {{ tooltipText }}
+          </div>
+        </template>
+      </Tooltip>
+    </label>
     <slot />
     <div
       v-if="hint && !errorMessage"

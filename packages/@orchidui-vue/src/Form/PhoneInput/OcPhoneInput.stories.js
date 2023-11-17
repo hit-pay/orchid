@@ -13,6 +13,10 @@ export const Default = {
       control: "select",
       options: ["sg", "be", "ua", "sa"],
     },
+    labelIcon: {
+      control: "select",
+      options: ["", "question-mark"],
+    },
   },
   args: {
     initialCountryCode: "sg",
@@ -22,11 +26,18 @@ export const Default = {
     isInlineLabel: false,
     isDisabled: false,
     label: "",
+    isRequired: false,
+    labelIcon: "",
+    tooltipText: "Tooltip text",
+    tooltipOptions: {
+      position: "top",
+      distance: 10,
+    },
   },
   render: (args) => ({
     components: { Theme, PhoneInput },
     setup() {
-      const modelValue = ref();
+      const modelValue = ref([213, 10000000]);
       return { modelValue, args, countryCodes };
     },
     template: `
@@ -45,6 +56,10 @@ export const Default = {
                   :placeholder="args.placeholder"
                   :error-message="args.errorMessage"
                   :initial-country-code="args.initialCountryCode"
+                  :isRequired="args.isRequired"
+                  :tooltip-options="args.tooltipOptions"
+                  :label-icon="args.labelIcon"
+                  :tooltip-text="args.tooltipText"
               />
             </div>
           </Theme>

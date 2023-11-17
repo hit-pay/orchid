@@ -6,12 +6,24 @@ export default {
 };
 
 export const Default = {
-  argTypes: {},
+  argTypes: {
+    labelIcon: {
+      control: "select",
+      options: ["", "question-mark"],
+    },
+  },
   args: {
     label: "",
     hint: "",
     placeholder: "",
     errorMessage: "",
+    isRequired: false,
+    labelIcon: "",
+    tooltipText: "Tooltip text",
+    tooltipOptions: {
+      position: "top",
+      distance: 10,
+    },
   },
   render: (args) => ({
     components: { Theme, TimePicker },

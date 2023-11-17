@@ -174,7 +174,7 @@ export const Default = {
     },
     primaryButtonProps: {
       leftIcon: "plus",
-      label: "New Payment Link",
+      label: "Primary",
       tooltip: "Add New",
       onClick: () => {
         console.log("click new payment link");
@@ -182,7 +182,7 @@ export const Default = {
     },
     secondaryButtonProps: {
       variant: "secondary",
-      label: "Bulk Create/Export",
+      label: "Secondary",
       dropdownOptions: [
         {
           name: "bulk_create",

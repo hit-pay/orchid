@@ -26,10 +26,10 @@ const onInput = () =>
               ? 'border-oc-primary-100 bg-oc-primary-100'
               : 'border-oc-primary bg-oc-primary'
             : isError
-            ? 'border-oc-error'
-            : isDisabled
-            ? 'bg-oc-primary-50 border-oc-primary-200'
-            : 'border-oc-primary-200',
+              ? 'border-oc-error'
+              : isDisabled
+                ? 'bg-oc-primary-50 border-oc-primary-200'
+                : 'border-oc-primary-200',
           isError && modelValue && !isDisabled ? '!bg-oc-error ' : '',
           isError && !isDisabled ? '!border-oc-error' : '',
           isPartial
