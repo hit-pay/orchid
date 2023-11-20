@@ -1,7 +1,7 @@
 /** @type { import('@storybook/vue3').Preview } */
 
 import "../src/style.scss";
-import { watch } from "vue";
+
 const preview = {
   parameters: {
     backgrounds: {
