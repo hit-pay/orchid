@@ -7,7 +7,6 @@ import ModalCropper from "./ModalCropper.vue";
 const props = defineProps({
   modelValue: Object,
   isPreview: Boolean,
-  showUploadOptions: Boolean,
   /**
    * Maximum file size in MB
    */
