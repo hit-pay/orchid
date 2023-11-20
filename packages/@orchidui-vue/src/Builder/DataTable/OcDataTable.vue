@@ -31,6 +31,9 @@ const props = defineProps({
 const emit = defineEmits({
   "update:filter": [],
   "click:row": [],
+  "filter-fields-changed": [],
+  "filter-removed": [],
+  "search-query-changed": [],
 });
 
 const pagination = computed(() => {
@@ -116,6 +119,7 @@ const addQuery = (query) => {
     queries.value.push(query);
   }
   applyFilter();
+  emit('search-query-changed', query);
 };
 const removeQuery = (query) => {
   queries.value = queries.value.filter((q) => q !== query);
@@ -157,6 +161,11 @@ const applyFilter = (filterForm = null, isChangePage = false) => {
   }
   emit("update:filter", filterData.value);
 };
+
+const removeFilter = (filter, field) => {
+  applyFilter(filter);
+  emit('filter-removed', field);
+}
 
 const displayFilterData = computed(() => {
   if (filterData.value) {
@@ -259,6 +268,7 @@ const displayFilterData = computed(() => {
                   :json-form="filterOptions.form ?? []"
                   :values="props.filter"
                   @apply-filter="applyFilter($event)"
+                  @filter-fields-changed="emit('filter-fields-changed', $event)"
                   @cancel="isDropdownOpened = false"
                 >
                   <template #default="{ errors, values, jsonForm, updateForm }">
@@ -281,7 +291,7 @@ const displayFilterData = computed(() => {
           class="border-t border-oc-gray-200"
           @remove-query="removeQuery"
           @remove-all="removeAllQueryFilter"
-          @remove-filter="applyFilter($event)"
+          @remove-filter="removeFilter"
         />
       </template>
       <template

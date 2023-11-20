@@ -7,6 +7,7 @@ import ModalCropper from "./ModalCropper.vue";
 const props = defineProps({
   modelValue: Object,
   isPreview: Boolean,
+  showUploadOptions: Boolean,
 });
 const emit = defineEmits(["update:modelValue"]);
 
@@ -63,6 +64,7 @@ const changeImage = (url) => {
       class="py-2 flex flex-col items-center gap-y-4"
     >
       <RadioGroup
+        v-if="showUploadOptions"
         v-model="selectedRadio"
         :radio="radios"
         group-name="uploads"

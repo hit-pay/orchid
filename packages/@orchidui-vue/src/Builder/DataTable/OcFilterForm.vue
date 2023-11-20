@@ -15,12 +15,23 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(["applyFilter", "cancel"]);
+const emit = defineEmits(["applyFilter", "cancel", 'filter-fields-changed']);
 
 const valuesData = ref({});
 const errorsData = ref({});
+const changedFields = ref([]);
 
-const onUpdateForm = (form, value = null) => {
+const updateChangedFields = (changedField) => {
+  const index = changedFields.value.findIndex((field) => field === changedField)
+
+  if (index >= 0) {
+    return;
+  }
+
+  changedFields.value.push(changedField);
+}
+
+const onUpdateForm = (form, value = null, fieldName) => {
   if (typeof form.name === "object") {
     form.name.forEach((formName, index) => {
       valuesData.value[formName.key] = value[index];
@@ -28,6 +39,8 @@ const onUpdateForm = (form, value = null) => {
   } else {
     valuesData.value[form.name] = value;
   }
+
+  updateChangedFields(fieldName);
 };
 
 const filterAdded = computed(() => {
@@ -39,6 +52,10 @@ onMounted(() => {
 
 const applyFilter = () => {
   emit("applyFilter", valuesData.value);
+  emit("filter-fields-changed", changedFields.value);
+
+  // reset after emit
+  changedFields.value = [];
 };
 </script>
 <template>

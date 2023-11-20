@@ -9,6 +9,8 @@ import {
   Button,
 } from "@/orchidui";
 
+import { ref } from "vue";
+
 export default {
   component: DataTable,
   tags: ["autodocs"],
@@ -34,6 +36,7 @@ export const Default = {
       Button,
     },
     setup() {
+      const changedFields = ref([]);
       const updateFilterData = (data) => {
         // get new data
         args.filter = data;
@@ -41,13 +44,18 @@ export const Default = {
       const onClickRow = (val) => {
         console.log("onClickRow  ", val);
       };
-      return { args, updateFilterData, onClickRow };
+      
+      return { args, updateFilterData, onClickRow, changedFields };
     },
     template: `
           <Theme class="p-8">
             <div>
               <ul>
                 <li v-for="(item, key) in args.filter">{{ key }} : {{ item }}</li>
+              </ul>
+              <ul>
+                Fields changed:
+                <li v-for="field in changedFields">{{ field }}</li>
               </ul>
             </div>
             <DataTable 
@@ -56,8 +64,9 @@ export const Default = {
                 :options="args.options"
                 :is-loading="args.isLoading"
                 @update:filter="updateFilterData"
-                @click:row="onClickRow"
-                 >
+                @click:row="changedFields"
+                @fields-changed="changedFields = $event"
+             >
               <template #before>
                 Slot Before
               </template>
