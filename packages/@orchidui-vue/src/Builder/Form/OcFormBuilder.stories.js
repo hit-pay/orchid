@@ -13,6 +13,7 @@ import { SampleJsonForm } from "../../data/JsonForm.sample";
 
 export default {
   component: FormBuilder,
+  tags: ["autodocs"],
 };
 
 export const Default = {
@@ -22,6 +23,71 @@ export const Default = {
     },
     errors: {
       card_input: "",
+    },
+    grid: {
+      xs: {
+        area: `
+              input
+              card_input
+              custom_form_input
+              simple_checkbox_input
+              checkboxes_group
+              input_2
+              custom_form_input_2
+              link_input
+              phone_number_field
+              radio_group
+              radio_group_2
+              select
+              text_area_field
+              range_input
+              time_picker_test
+              date_picker_test
+              date_picker_range_from
+              toggle_field
+          `,
+        rows: "auto",
+        columns: "100%",
+      },
+      sm: {
+        area: `
+               input
+              card_input
+              custom_form_input
+              simple_checkbox_input
+              checkboxes_group
+              input_2
+              custom_form_input_2
+              link_input
+              phone_number_field
+              radio_group
+              radio_group_2
+              select
+              text_area_field
+              range_input
+              time_picker_test
+              date_picker_test
+              date_picker_range_from
+              toggle_field
+          `,
+        rows: "auto",
+        columns: "100%",
+      },
+      lg: {
+        area: `
+            input card_input
+            custom_form_input simple_checkbox_input
+            checkboxes_group input_2
+            custom_form_input_2 link_input
+            phone_number_field radio_group
+            radio_group_2 select
+            text_area_field range_input
+            time_picker_test date_picker_test
+            date_picker_range_from toggle_field
+          `,
+        rows: "auto",
+        columns: "50% 50%",
+      },
     },
   },
   render: (args) => ({
@@ -49,7 +115,14 @@ export const Default = {
       };
 
       const isOpenedDropdown = ref(false);
-      return { values, errors, onUpdateForm, isOpenedDropdown, SampleJsonForm };
+      return {
+        args,
+        values,
+        errors,
+        onUpdateForm,
+        isOpenedDropdown,
+        SampleJsonForm,
+      };
     },
     template: `
           <Theme class="p-8">
@@ -63,8 +136,9 @@ export const Default = {
             </div>
             <FormBuilder
                 id="form-builder"
-                class="grid md:grid-cols-2 gap-5"
+                class="gap-5"
                 :errors="errors"
+                :grid="args.grid"
                 :values="values"
                 :json-form="SampleJsonForm"
                 @onUpdate="onUpdateForm"

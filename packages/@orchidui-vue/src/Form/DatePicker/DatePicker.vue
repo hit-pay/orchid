@@ -83,7 +83,7 @@ const updateCalendar = () => {
     :distance="10"
     class="w-full"
   >
-    <div class="flex flex-col gap-y-2">
+    <div class="flex flex-col gap-y-2 w-full">
       <div v-if="type === 'default'" class="flex w-full">
         <Input
           :model-value="formattedDate"
