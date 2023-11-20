@@ -3,6 +3,7 @@ import countryCodes from "./CountryCodes.sample";
 const SampleJsonForm = [
   {
     name: "input",
+    key: "input",
     type: "Input",
     props: {
       label: "Example Label",
@@ -12,6 +13,7 @@ const SampleJsonForm = [
   },
   {
     name: "card_input",
+    key: "card_input",
     type: "CardInput",
     rule: "required",
     props: {
@@ -24,11 +26,13 @@ const SampleJsonForm = [
     },
   },
   {
+    key: "custom_form_input",
     name: "custom_form_input",
     type: "CustomFormInput",
   },
   {
     name: "simple_checkbox_input",
+    key: "simple_checkbox_input",
     type: "Checkbox",
     props: {
       label: "Text",
@@ -36,6 +40,7 @@ const SampleJsonForm = [
   },
   {
     name: "checkboxes_group",
+    key: "checkboxes_group",
     type: "CheckboxesGroup",
     rule: "required",
     props: {
@@ -62,6 +67,7 @@ const SampleJsonForm = [
   {
     name: "input_2",
     type: "Input",
+    key: "input_2",
     props: {
       label: "Example Label",
       hint: "This is a hint text to help user",
@@ -71,11 +77,13 @@ const SampleJsonForm = [
   },
   {
     name: "custom_form_input_2",
+    key: "custom_form_input_2",
     type: "CustomFormInput2",
   },
   {
     name: "link_input",
     type: "LinkInput",
+    key: "link_input",
     props: {
       hint: "This is a hint text to help user.",
       label: "Social",
@@ -106,6 +114,7 @@ const SampleJsonForm = [
         rule: "required",
       },
     ],
+    key: "phone_number_field",
     type: "PhoneInput",
     props: {
       countryCodes: countryCodes,
@@ -115,12 +124,8 @@ const SampleJsonForm = [
     },
   },
   {
-    name: "toggle_field",
-    type: "Toggle",
-    className: "md:col-span-2",
-  },
-  {
     name: "radio_group",
+    key: "radio_group",
     type: "RadioGroup",
     props: {
       groupName: "unique_group_name_1",
@@ -154,6 +159,7 @@ const SampleJsonForm = [
   },
   {
     name: "radio_group_2",
+    key: "radio_group_2",
     type: "RadioGroup",
     props: {
       groupName: "unique_group_name_2",
@@ -187,6 +193,7 @@ const SampleJsonForm = [
   },
   {
     name: "select",
+    key: "select",
     type: "Select",
     props: {
       label: "Example Label",
@@ -216,6 +223,7 @@ const SampleJsonForm = [
   },
   {
     name: "text_area_field",
+    key: "text_area_field",
     type: "Textarea",
     props: {
       label: "Example Label",
@@ -225,6 +233,7 @@ const SampleJsonForm = [
   },
   {
     name: "range_input",
+    key: "range_input",
     type: "RangeInput",
     props: {
       label: "Example Label",
@@ -234,6 +243,7 @@ const SampleJsonForm = [
   },
   {
     name: "time_picker_test",
+    key: "time_picker_test",
     type: "TimePicker",
     props: {
       label: "Example Label",
@@ -243,6 +253,7 @@ const SampleJsonForm = [
   },
   {
     name: "date_picker_test",
+    key: "date_picker_test",
     type: "DatePicker",
     props: {
       label: "Example Label",
@@ -261,6 +272,7 @@ const SampleJsonForm = [
         rule: "required",
       },
     ],
+    key: "date_picker_range_from",
     type: "DatePicker",
     props: {
       type: "range",
@@ -268,6 +280,11 @@ const SampleJsonForm = [
       hint: "This is a hint text to help user",
       placeholder: "placeholder",
     },
+  },
+  {
+    name: "toggle_field",
+    key: "toggle_field",
+    type: "Toggle",
   },
 ];
 

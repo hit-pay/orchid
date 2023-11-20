@@ -1,6 +1,7 @@
 const SampleFilterForm = [
   {
     name: "checkboxes_group",
+    key: "checkboxes_group",
     type: "CheckboxesGroup",
     rule: "required",
     props: {
@@ -9,16 +10,16 @@ const SampleFilterForm = [
       alignment: "vertical",
       checkboxes: [
         {
-          label: "Text",
-          value: 0,
-        },
-        {
-          label: "Text",
+          label: "Checkbox 1",
           value: 1,
         },
         {
-          label: "Text",
+          label: "Checkbox 2",
           value: 2,
+        },
+        {
+          label: "Checkbox 3",
+          value: 3,
           isDisabled: true,
         },
       ],
@@ -26,6 +27,7 @@ const SampleFilterForm = [
   },
   {
     name: "date_picker_range",
+    key: "date_picker_range",
     type: "DatePicker",
     props: {
       type: "range",
@@ -36,6 +38,7 @@ const SampleFilterForm = [
   },
   {
     name: "only_date",
+    key: "only_date",
     type: "DatePicker",
     props: {
       label: "DatePicker",
@@ -45,6 +48,7 @@ const SampleFilterForm = [
   },
   {
     name: "radio_group",
+    key: "radio_group",
     type: "RadioGroup",
     props: {
       groupName: "unique_group_name",
@@ -78,6 +82,7 @@ const SampleFilterForm = [
   },
   {
     name: "range_input",
+    key: "range_input",
     type: "RangeInput",
     props: {
       label: "RangeInput",
@@ -87,6 +92,7 @@ const SampleFilterForm = [
   },
   {
     name: "select",
+    key: "select",
     type: "Select",
     props: {
       label: "Select",
@@ -116,6 +122,7 @@ const SampleFilterForm = [
   },
   {
     name: "select_multiple",
+    key: "select_multiple",
     type: "Select",
     props: {
       label: "Select Multiple",
@@ -126,15 +133,15 @@ const SampleFilterForm = [
       options: [
         {
           label: "Option 1",
-          value: 1,
+          value: crypto.randomUUID(),
         },
         {
           label: "Option 2",
-          value: 2,
+          value: crypto.randomUUID(),
         },
         {
           label: "Option 3",
-          value: 3,
+          value: crypto.randomUUID(),
         },
         {
           label: "Option 4",

@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { computed, onMounted, ref } from "vue";
 import { Input, Button, RadioGroup, Icon, Dropdown } from "@/orchidui";
 import { useUploadFileProgress } from "@/orchidui/composables/uploadFileProgress.js";
@@ -8,12 +8,18 @@ const props = defineProps({
   modelValue: Object,
   isPreview: Boolean,
   showUploadOptions: Boolean,
+  /**
+   * Maximum file size in MB
+   */
+  maxSize: Number,
+  accept: String,
 });
 const emit = defineEmits(["update:modelValue"]);
 
 const inputRef = ref();
 const fileLink = ref("");
 const fileName = ref("");
+const isLinkValid = ref(true);
 const isDragover = ref(false);
 const isDropdownOpen = ref(false);
 const isEditOpen = ref(false);
@@ -30,8 +36,10 @@ const radios = [
   },
 ];
 
-const { currentFiles, onChangeFile, onDeleteFile } =
-  useUploadFileProgress(emit);
+const { currentFiles, onChangeFile, onDeleteFile } = useUploadFileProgress(
+  props.maxSize,
+  emit,
+);
 
 const videoUrl = computed(() =>
   URL.createObjectURL(currentFiles.value?.[0].file),
@@ -55,6 +63,16 @@ const changeImage = (url) => {
   editImg.value = "";
   emit("update:modelValue", currentFile.value);
 };
+
+const checkFileLink = async (link) => {
+  if (!link) return;
+  try {
+    const response = await fetch(link, { method: "HEAD" });
+    isLinkValid.value = response.ok;
+  } catch (error) {
+    console.log("Error checking file link:", error);
+  }
+};
 </script>
 
 <template>
@@ -72,9 +90,14 @@ const changeImage = (url) => {
         wrapper-class="gap-x-5 justify-center"
       />
 
-      <div class="flex bg-white gap-x-3">
+      <div class="flex items-baseline gap-x-3">
         <template v-if="selectedRadio === 'url'">
-          <Input v-model="fileLink" placeholder="https://website.com" />
+          <Input
+            v-model="fileLink"
+            :error-message="fileLink && !isLinkValid ? 'Invalid link' : ''"
+            placeholder="https://website.com"
+            @blur="checkFileLink(fileLink)"
+          />
           <Input v-model="fileName" placeholder="Enter file name" />
 
           <Button
@@ -87,7 +110,7 @@ const changeImage = (url) => {
 
         <div
           v-else
-          class="p-3 flex items-center gap-x-5 rounded border"
+          class="p-3 flex bg-white items-center gap-x-5 rounded border"
           :class="
             isDragover
               ? 'border-oc-primary border-dashed'
@@ -114,6 +137,7 @@ const changeImage = (url) => {
           ref="inputRef"
           class="hidden"
           type="file"
+          :accept="accept"
           @change="onChangeFile"
         />
       </div>
@@ -185,7 +209,7 @@ const changeImage = (url) => {
           >
             <Icon name="file-extension" width="14" height="10" />
             <span class="uppercase text-[8px] font-bold leading-none block">
-              svg
+              {{ currentFile?.extension }}
             </span>
           </div>
           {{ currentFile?.fileName }}

@@ -51,6 +51,22 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  isRequired: {
+    type: Boolean,
+    default: false,
+  },
+  labelIcon: {
+    type: String,
+    default: "",
+  },
+  tooltipText: {
+    type: String,
+    default: "",
+  },
+  tooltipOptions: {
+    type: Object,
+    default: () => ({}),
+  },
 });
 
 defineEmits({
@@ -74,6 +90,10 @@ const inputClasses = computed(() => [
     :label="isInlineLabel ? '' : label"
     :hint="hint"
     :error-message="errorMessage"
+    :is-required="isRequired"
+    :label-icon="labelIcon"
+    :tooltip-text="tooltipText"
+    :tooltip-options="tooltipOptions"
   >
     <div
       class="rounded h-[36px] border flex items-center gap-x-3 px-3 cursor-pointer"

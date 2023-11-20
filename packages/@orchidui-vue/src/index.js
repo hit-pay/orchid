@@ -11,6 +11,7 @@ export * from "./Disclosure/Tabs/Tabs.js";
 export * from "./Elements/Header/OcHeader.js";
 export * from "./Elements/PageTitle/OcPageTitle.js";
 export * from "./Elements/Sidebar/OcSidebar.js";
+export * from "./Elements/SubSidebar/OcSubSidebar.js";
 export * from "./Elements/EmptyPage/OcEmptyPage.js";
 
 export * from "./Feedback/Chip/OcChip.js";

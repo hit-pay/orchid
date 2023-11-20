@@ -38,12 +38,12 @@ const copyLink = async () => {
 </script>
 
 <template>
-  <div class="pt-5 px-10">
+  <div class="md:pt-5 pt-3 md:px-10 px-5">
     <Title
       v-if="variant === 'default'"
       :description="mainLink"
       :title="additionalTitle"
-      class="border rounded py-4 px-5 border-oc-gray-200 bg-oc-gray-50 flex flex-col gap-y-2"
+      class="border rounded md:py-4 py-3 md:px-5 px-4 border-oc-gray-200 bg-oc-gray-50 flex flex-col gap-y-2"
     >
       <template #title="{ title }">
         <div class="flex items-center gap-x-3">
@@ -52,10 +52,11 @@ const copyLink = async () => {
         </div>
       </template>
       <template #description="{ description }">
-        <div class="flex flex-wrap items-center gap-2">
-          <span class="text-oc-text-400">
-            {{ description }}<span class="text-oc-text">{{ userId }}</span>
-          </span>
+        <div class="flex items-center gap-x-2">
+          <div class="text-oc-text-400 flex items-center overflow-hidden">
+            <div class="truncate">{{ description }}</div>
+            <div class="text-oc-text">{{ userId }}</div>
+          </div>
           <PrimaryActions :primary-actions="primaryActions" @copy="copyLink" />
         </div>
       </template>

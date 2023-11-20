@@ -1,5 +1,6 @@
 <script setup>
-import { ComplexCalendar, Dropdown, Input } from "@/orchidui";
+import { Dropdown, Input, BaseInput } from "@/orchidui";
+import ComplexCalendar from "../ComplexCalendar/OcComplexCalendar.vue";
 import { ref } from "vue";
 import dayjs from "dayjs";
 
@@ -30,6 +31,13 @@ defineProps({
     type: Boolean,
     default: true,
   },
+  label: String,
+  hint: String,
+  isRequired: Boolean,
+  errorMessage: String,
+  labelIcon: String,
+  tooltipText: String,
+  tooltipOptions: Object,
 });
 defineEmits({
   "update:modelValue": [],
@@ -38,26 +46,36 @@ const isOpen = ref(false);
 </script>
 
 <template>
-  <Dropdown v-model="isOpen" position="bottom" class="w-full">
-    <Input
-      :model-value="`${dayjs(modelValue.start).format(formatDate)} - ${dayjs(
-        modelValue.end,
-      ).format(formatDate)}`"
-      icon="calendar"
-      readonly
-    />
-
-    <template #menu>
-      <ComplexCalendar
-        :model-value="modelValue"
-        :shortcuts="shortcuts"
-        :cancel-button-props="cancelButtonProps"
-        :submit-button-props="submitButtonProps"
-        :calendar-props="calendarProps"
-        :count-calendars="countCalendars"
-        :with-footer="withFooter"
-        @update:model-value="$emit('update:modelValue', $event)"
+  <BaseInput
+    :label="label"
+    :hint="hint"
+    :error-message="errorMessage"
+    :is-required="isRequired"
+    :tooltip-options="tooltipOptions"
+    :label-icon="labelIcon"
+    :tooltip-text="tooltipText"
+  >
+    <Dropdown v-model="isOpen" position="bottom" class="w-full">
+      <Input
+        :model-value="`${dayjs(modelValue.start).format(formatDate)} - ${dayjs(
+          modelValue.end,
+        ).format(formatDate)}`"
+        icon="calendar"
+        readonly
       />
-    </template>
-  </Dropdown>
+
+      <template #menu>
+        <ComplexCalendar
+          :model-value="modelValue"
+          :shortcuts="shortcuts"
+          :cancel-button-props="cancelButtonProps"
+          :submit-button-props="submitButtonProps"
+          :calendar-props="calendarProps"
+          :count-calendars="countCalendars"
+          :with-footer="withFooter"
+          @update:model-value="$emit('update:modelValue', $event)"
+        />
+      </template>
+    </Dropdown>
+  </BaseInput>
 </template>

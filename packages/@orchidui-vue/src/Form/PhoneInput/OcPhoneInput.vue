@@ -1,9 +1,10 @@
 <script setup>
 import { Dropdown, Input, Icon } from "@/orchidui";
 import { computed, ref } from "vue";
+import codes from "../../data/CountryCodes.sample";
 
 const props = defineProps({
-  countryCodes: Array,
+  countryCodes: { type: Array, default: () => codes },
   initialCountryCode: {
     type: String,
     default: "sg",
@@ -11,19 +12,44 @@ const props = defineProps({
   errorMessage: String,
   modelValue: {
     type: Array,
-    default: () => [],
+    default: () => ["sg", ""],
   },
   placeholder: String,
   hint: String,
   label: String,
   isInlineLabel: Boolean,
   isDisabled: Boolean,
+  isRequired: {
+    type: Boolean,
+    default: false,
+  },
+  labelIcon: {
+    type: String,
+    default: "",
+  },
+  tooltipText: {
+    type: String,
+    default: "",
+  },
+  tooltipOptions: {
+    type: Object,
+    default: () => ({}),
+  },
 });
 const emit = defineEmits({
   "update:modelValue": [],
 });
 
-const selectedCountryIso = ref(props.initialCountryCode);
+let defaultCountryCode = props.initialCountryCode;
+
+if (props.modelValue && props.modelValue[0]) {
+  const country = props.countryCodes.find(
+    (c) => c.code === props.modelValue[0].toString(),
+  );
+  country ? (defaultCountryCode = country.iso.toLowerCase()) : "";
+}
+
+const selectedCountryIso = ref(defaultCountryCode);
 const isDropdownOpened = ref(false);
 const query = ref("");
 const filteredCountryCodes = computed(() =>
@@ -59,6 +85,10 @@ const changeSelectedCountry = (iso, code) => {
     :is-inline-label="isInlineLabel"
     :disabled="isDisabled"
     :hint="hint"
+    :is-required="isRequired"
+    :label-icon="labelIcon"
+    :tooltip-text="tooltipText"
+    :tooltip-options="tooltipOptions"
     @update:model-value="onInput"
   >
     <template #trailing>

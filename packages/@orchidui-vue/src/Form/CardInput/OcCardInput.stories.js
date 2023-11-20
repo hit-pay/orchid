@@ -12,6 +12,10 @@ export const Default = {
       control: "select",
       options: ["mastercard", "visa"],
     },
+    labelIcon: {
+      control: "select",
+      options: ["", "question-mark"],
+    },
   },
   args: {
     hint: "This is a hint text to help user.",
@@ -21,6 +25,13 @@ export const Default = {
     label: "",
     errorMessage: "",
     cardType: "mastercard",
+    isRequired: false,
+    labelIcon: "",
+    tooltipText: "Tooltip text",
+    tooltipOptions: {
+      position: "top",
+      distance: 10,
+    },
   },
   render: (args) => ({
     components: { Theme, CardInput },
@@ -39,6 +50,10 @@ export const Default = {
                 :hint="args.hint"
                 :placeholder="args.placeholder"
                 :error-message="args.errorMessage"
+                :isRequired="args.isRequired"
+                :tooltip-options="args.tooltipOptions"
+                :label-icon="args.labelIcon"
+                :tooltip-text="args.tooltipText"
             />
           </Theme>
         `,

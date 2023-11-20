@@ -10,7 +10,7 @@ defineProps({
 <template>
   <div class="flex gap-y-3 flex-col text-lg font-medium">
     <span v-if="title">{{ title }}</span>
-    <div class="flex gap-x-5">
+    <div class="flex gap-x-5 md:flex-row flex-col gap-y-3 md:gap-y-0">
       <OverviewItem
         v-for="(item, i) in items"
         :key="i"

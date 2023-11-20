@@ -1,9 +1,12 @@
 <script setup>
 import { Button, Dropdown, DropdownItem, Tooltip } from "@/orchidui";
 import { ref } from "vue";
+import { useWindowWidth } from "@/orchidui/composables/useWindowWidth.js";
 
 const emit = defineEmits(["click:primaryButton", "click:secondaryButton"]);
 const isDropdownOpened = ref(false);
+const { isMobile } = useWindowWidth();
+
 defineProps({
   primaryButtonProps: Object,
   secondaryButtonProps: Object,
@@ -16,7 +19,10 @@ defineProps({
       v-model="isDropdownOpened"
       :distance="10"
     >
-      <Button v-bind="secondaryButtonProps" />
+      <Button
+        :size="isMobile ? 'small' : 'default'"
+        v-bind="secondaryButtonProps"
+      />
       <template #menu>
         <div v-if="secondaryButtonProps?.dropdownOptions" class="p-2">
           <DropdownItem
@@ -36,6 +42,7 @@ defineProps({
       arrow-hidden
     >
       <Button
+        :size="isMobile ? 'small' : 'default'"
         v-bind="primaryButtonProps"
         @click="emit('click:primaryButton')"
       />

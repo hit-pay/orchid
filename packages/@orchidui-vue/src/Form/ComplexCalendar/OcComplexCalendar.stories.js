@@ -1,6 +1,7 @@
 import ComplexCalendar from "./OcComplexCalendar.vue";
 import { Theme } from "@/orchidui";
 import dayjs from "dayjs";
+import { ref } from "vue";
 
 export default {
   component: ComplexCalendar,
@@ -58,11 +59,13 @@ export const Calendar = {
   render: (args) => ({
     components: { ComplexCalendar, Theme },
     setup() {
-      return { args };
+      const modelValue = ref([]);
+      return { modelValue, args };
     },
     template: `
           <Theme class="h-[400px]">
             <ComplexCalendar
+                v-model="modelValue"
                 :shortcuts="args.shortcuts"
                 :calendarProps="args.calendarProps"
                 :cancel-button-props="args.cancelButtonProps"

@@ -4,7 +4,7 @@ import PaymentMethods from "./OcPaymentMethods.vue";
 </script>
 
 <template>
-  <div class="flex justify-between">
+  <div class="flex justify-between md:flex-row flex-col gap-y-3 md:gap-y-0">
     <PaymentMethods />
 
     <div class="flex gap-x-3">

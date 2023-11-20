@@ -102,8 +102,8 @@ const copyToClipboard = async (text) => {
             isSelected
               ? 'block'
               : isSimple
-              ? ''
-              : 'md:hidden group-hover/row:block'
+                ? ''
+                : 'md:hidden group-hover/row:block'
           "
           @update:model-value="$emit('selected')"
         />

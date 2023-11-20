@@ -8,7 +8,7 @@ defineProps({
 
 <template>
   <div
-    class="px-5 py-4 cursor-pointer rounded group font-medium justify-center border gap-y-2 h-[76px] w-fit flex flex-col hover:shadow-normal"
+    class="px-5 py-4 cursor-pointer rounded group font-medium justify-center border gap-y-2 h-[76px] md:w-fit w-full flex flex-col hover:shadow-normal"
     :class="
       isActive ? 'border-b-[3px] border-oc-primary' : 'border-oc-accent-1-100'
     "
