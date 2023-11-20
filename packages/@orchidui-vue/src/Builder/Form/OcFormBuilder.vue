@@ -123,6 +123,15 @@ const gridDefinitionVariables = computed(() => {
   });
   return variables;
 });
+
+const getFormKey = (name) => {
+  if (typeof name === "object") {
+    return name[0].key
+  } else {
+    return name;
+  }
+}
+
 </script>
 <template>
   <div
@@ -131,8 +140,8 @@ const gridDefinitionVariables = computed(() => {
   >
     <div
       v-for="form in jsonForm"
-      :key="form.key"
-      :style="{ 'grid-area': form.key }"
+      :key="getFormKey(form.name)"
+      :style="{ 'grid-area': getFormKey(form.name) }"
     >
       <component
         :is="getComponentByType(form.type)"
