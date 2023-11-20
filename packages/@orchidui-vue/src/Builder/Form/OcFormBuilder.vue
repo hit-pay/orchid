@@ -157,6 +157,7 @@ const getFormKey = (name) => {
         :form="form"
         :value="values[form.name]"
         :error="errors[form.name]"
+        :on-update="onUpdate"
       />
     </div>
   </div>

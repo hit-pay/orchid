@@ -18,7 +18,7 @@ const filterData = computed(() => {
 const removeFilter = (name) => {
   let filter = {};
   filter[name] = "";
-  emit("removeFilter", filter);
+  emit("removeFilter", filter, name);
 };
 </script>
 
