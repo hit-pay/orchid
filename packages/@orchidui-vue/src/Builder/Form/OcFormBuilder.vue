@@ -47,8 +47,8 @@ const props = defineProps({
 
 const emit = defineEmits(["onUpdate"]);
 
-const onUpdate = (form, value, fieldName) => {
-  emit("onUpdate", form, value, fieldName);
+const onUpdate = (form, value) => {
+  emit("onUpdate", form, value);
 };
 
 const FormTypes = {
@@ -148,7 +148,7 @@ const getFormKey = (name) => {
         v-bind="form.props"
         :model-value="modelValues(form.name, form.default)"
         :error-message="errorValues(form.name)"
-        @update:model-value="onUpdate(form, $event, form.name)"
+        @update:model-value="onUpdate(form, $event)"
       />
       <slot
         v-else
@@ -157,6 +157,7 @@ const getFormKey = (name) => {
         :form="form"
         :value="values[form.name]"
         :error="errors[form.name]"
+        :on-update="onUpdate"
       />
     </div>
   </div>

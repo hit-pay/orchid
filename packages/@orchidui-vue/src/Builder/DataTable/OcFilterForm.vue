@@ -34,7 +34,7 @@ const updateChangedFields = (changedField) => {
   changedFields.value.push(changedField);
 };
 
-const onUpdateForm = (form, value = null, fieldName) => {
+const onUpdateForm = (form, value = null) => {
   if (typeof form.name === "object") {
     form.name.forEach((formName, index) => {
       valuesData.value[formName.key] = value[index];
@@ -43,7 +43,7 @@ const onUpdateForm = (form, value = null, fieldName) => {
     valuesData.value[form.name] = value;
   }
 
-  updateChangedFields(fieldName);
+  updateChangedFields(form.name);
 };
 
 const filterAdded = computed(() => {
