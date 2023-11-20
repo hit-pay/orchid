@@ -25,6 +25,16 @@ const props = defineProps({
   jsonForm: {
     type: Array,
   },
+  /**
+   * Grid needs to be defined in the following format:
+   * `{`
+   *   `[Responsive size (xs, sm, md, lg, xl, xxl)]: {`
+   *     `area: [Grid area definition (names of areas in order)],`
+   *     `rows: [Count and size of rows i.e: 'auto' | '100%' | ...],`
+   *     `columns: [Count and size of columns i.e: '33% 33% 33%'],`
+   *   `}`
+   * `}`
+   */
   grid: Object,
   errors: {
     type: Object,
@@ -115,7 +125,10 @@ const gridDefinitionVariables = computed(() => {
 });
 </script>
 <template>
-  <div class="responsive-smart-form-grid" :style="gridDefinitionVariables">
+  <div
+    :class="grid ? 'responsive-smart-form-grid' : ''"
+    :style="grid ? gridDefinitionVariables : ''"
+  >
     <div
       v-for="form in jsonForm"
       :key="form.key"
