@@ -12,6 +12,9 @@ export const Default = {
     maxLimit: 100,
     minLimit: 0,
     minGap: 0,
+    label: "",
+    hint: "",
+    errorMessage: "",
   },
   render: (args) => ({
     components: { Theme, RangeInput },
@@ -27,6 +30,9 @@ export const Default = {
                 :max-limit="args.maxLimit"
                 :min-limit="args.minLimit"
                 :minGap="args.minGap"
+                :label="args.label"
+                :hint="args.hint"
+                :errorMessage="args.errorMessage"
             />
           </Theme>
         `,

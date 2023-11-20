@@ -44,7 +44,7 @@ export const Default = {
       const onClickRow = (val) => {
         console.log("onClickRow  ", val);
       };
-      
+
       return { args, updateFilterData, onClickRow, changedFields };
     },
     template: `

@@ -8,10 +8,11 @@ export default {
 
 export const Default = {
   args: {
-    isError: false,
+    errorMessage: false,
     isPartial: false,
     isDisabled: false,
     label: "Text",
+    hint: "Text",
   },
   render: (args) => ({
     components: { Checkbox, Theme },
@@ -26,9 +27,10 @@ export const Default = {
           <Theme>
             <div class="grid grid-cols-4 gap-4">
               <Checkbox
-                  :is-error="args.isError"
+                  :errorMessage="args.errorMessage"
                   :is-partial="args.isPartial"
                   :label="args.label"
+                  :hint="args.hint"
                   :is-disabled="args.isDisabled"
                   v-model="value"
               />
@@ -45,7 +47,7 @@ export const Variants = {
             <div class="grid grid-cols-4 gap-4 w-fit">
               <Checkbox :model-value="true"/>
               <Checkbox/>
-              <Checkbox is-error/>
+              <Checkbox errorMessage="Error"/>
               <Checkbox is-partial/>
 
               <Checkbox :model-value="true" disabled/>

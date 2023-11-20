@@ -17,6 +17,9 @@ export const Default = {
     type: "range",
     dateFormat: "DD/MM/YYYY",
     errorMessage: "",
+    hint: "",
+    minLabel: "From",
+    maxLabel: "To",
   },
   render: (args) => ({
     components: { Theme, DatePicker },
@@ -31,6 +34,9 @@ export const Default = {
                   :type="args.type"
                   :date-format="args.dateFormat"
                   :error-message="args.errorMessage"
+                  :hint="args.hint"
+                  :min-label="args.minLabel"
+                  :max-label="args.maxLabel"
               />
             </div>
           </Theme>

@@ -16,21 +16,23 @@ const props = defineProps({
   grid: Object,
 });
 
-const emit = defineEmits(["applyFilter", "cancel", 'filter-fields-changed']);
+const emit = defineEmits(["applyFilter", "cancel", "filter-fields-changed"]);
 
 const valuesData = ref({});
 const errorsData = ref({});
 const changedFields = ref([]);
 
 const updateChangedFields = (changedField) => {
-  const index = changedFields.value.findIndex((field) => field === changedField)
+  const index = changedFields.value.findIndex(
+    (field) => field === changedField,
+  );
 
   if (index >= 0) {
     return;
   }
 
   changedFields.value.push(changedField);
-}
+};
 
 const onUpdateForm = (form, value = null, fieldName) => {
   if (typeof form.name === "object") {

@@ -1,6 +1,6 @@
 <script setup>
 import { computed, onMounted, ref } from "vue";
-import { Input, Button, RadioGroup, Icon, Dropdown } from "@/orchidui";
+import { Input, Button, BaseInput, Icon, Dropdown } from "@/orchidui";
 import { useUploadFileProgress } from "@/orchidui/composables/uploadFileProgress.js";
 import ModalCropper from "./ModalCropper.vue";
 
@@ -13,6 +13,17 @@ const props = defineProps({
    */
   maxSize: Number,
   accept: String,
+  errorMessage: String,
+  label: String,
+  hint: String,
+  /**
+   * Variant of input (upload or url)
+   */
+  variant: {
+    type: String,
+    default: "upload",
+    validator: (val) => ["upload", "url"].includes(val),
+  },
 });
 const emit = defineEmits(["update:modelValue"]);
 
@@ -24,17 +35,6 @@ const isDragover = ref(false);
 const isDropdownOpen = ref(false);
 const isEditOpen = ref(false);
 const editImg = ref("");
-const selectedRadio = ref("upload");
-const radios = [
-  {
-    label: "Upload file",
-    value: "upload",
-  },
-  {
-    label: "Insert from URL",
-    value: "url",
-  },
-];
 
 const { currentFiles, onChangeFile, onDeleteFile } = useUploadFileProgress(
   props.maxSize,
@@ -76,22 +76,13 @@ const checkFileLink = async (link) => {
 </script>
 
 <template>
-  <div class="p-5 rounded bg-oc-bg-dark">
+  <BaseInput :label="label" :hint="hint" :error-message="errorMessage">
     <div
       v-if="!currentFiles.length"
       class="py-2 flex flex-col items-center gap-y-4"
     >
-      <RadioGroup
-        v-if="showUploadOptions"
-        v-model="selectedRadio"
-        :radio="radios"
-        group-name="uploads"
-        alignment="horizontal"
-        wrapper-class="gap-x-5 justify-center"
-      />
-
-      <div class="flex items-baseline gap-x-3">
-        <template v-if="selectedRadio === 'url'">
+      <div class="flex items-baseline gap-x-3 w-full">
+        <template v-if="variant === 'url'">
           <Input
             v-model="fileLink"
             :error-message="fileLink && !isLinkValid ? 'Invalid link' : ''"
@@ -110,7 +101,7 @@ const checkFileLink = async (link) => {
 
         <div
           v-else
-          class="p-3 flex bg-white items-center gap-x-5 rounded border"
+          class="p-3 flex bg-white items-center gap-x-5 rounded border w-full"
           :class="
             isDragover
               ? 'border-oc-primary border-dashed'
@@ -121,7 +112,7 @@ const checkFileLink = async (link) => {
           @drop="onDrop"
           @dragover.prevent
         >
-          <span class="text-sm text-oc-text-400 pointer-events-none">
+          <span class="text-sm flex-1 text-oc-text-400 pointer-events-none">
             Choose file from your computer or drag here
           </span>
           <Button
@@ -244,5 +235,5 @@ const checkFileLink = async (link) => {
         </div>
       </template>
     </div>
-  </div>
+  </BaseInput>
 </template>

@@ -120,7 +120,7 @@ const addQuery = (query) => {
     queries.value.push(query);
   }
   applyFilter();
-  emit('search-query-changed', query);
+  emit("search-query-changed", query);
 };
 const removeQuery = (query) => {
   queries.value = queries.value.filter((q) => q !== query);
@@ -165,8 +165,8 @@ const applyFilter = (filterForm = null, isChangePage = false) => {
 
 const removeFilter = (filter, field) => {
   applyFilter(filter);
-  emit('filter-removed', field);
-}
+  emit("filter-removed", field);
+};
 
 const displayFilterData = computed(() => {
   if (filterData.value) {

@@ -1,12 +1,13 @@
 <script setup>
-import { Icon } from "@/orchidui";
+import { Icon, BaseInput } from "@/orchidui";
 
 const props = defineProps({
   modelValue: Boolean,
-  isError: Boolean,
   isPartial: Boolean,
   isDisabled: Boolean,
   label: String,
+  hint: String,
+  errorMessage: String,
 });
 const emit = defineEmits({
   "update:modelValue": [],
@@ -16,7 +17,7 @@ const onInput = () =>
 </script>
 
 <template>
-  <div class="w-fit">
+  <BaseInput class="w-fit" label="" :hint="hint" :error-message="errorMessage">
     <label class="flex items-center gap-x-3 cursor-pointer">
       <div
         class="w-5 h-5 shrink-0 border flex items-center justify-center rounded-sm"
@@ -25,13 +26,13 @@ const onInput = () =>
             ? isDisabled
               ? 'border-oc-primary-100 bg-oc-primary-100'
               : 'border-oc-primary bg-oc-primary'
-            : isError
+            : errorMessage
               ? 'border-oc-error'
               : isDisabled
                 ? 'bg-oc-primary-50 border-oc-primary-200'
                 : 'border-oc-primary-200',
-          isError && modelValue && !isDisabled ? '!bg-oc-error ' : '',
-          isError && !isDisabled ? '!border-oc-error' : '',
+          errorMessage && modelValue && !isDisabled ? '!bg-oc-error ' : '',
+          errorMessage && !isDisabled ? '!border-oc-error' : '',
           isPartial
             ? isDisabled
               ? '!border-oc-primary-200 !bg-oc-primary-50'
@@ -63,5 +64,5 @@ const onInput = () =>
         @change="onInput"
       />
     </label>
-  </div>
+  </BaseInput>
 </template>
