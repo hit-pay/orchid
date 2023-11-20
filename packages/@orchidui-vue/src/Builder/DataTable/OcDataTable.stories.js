@@ -53,10 +53,9 @@ export const Default = {
               <ul>
                 <li v-for="(item, key) in args.filter">{{ key }} : {{ item }}</li>
               </ul>
-              <ul>
-                Filter fields changed:
-                <li v-for="field in changedFields">{{ field }}</li>
-              </ul>
+              <div>
+                Filter fields changed: {{ changedFields }}
+              </div>
             </div>
             <DataTable 
                 id="sample-data-table" 
@@ -64,8 +63,8 @@ export const Default = {
                 :options="args.options"
                 :is-loading="args.isLoading"
                 @update:filter="updateFilterData"
-                @click:row="changedFields"
-                @fields-changed="changedFields = $event"
+                @click:row="onClickRow"
+                @filter-fields-changed="changedFields = $event"
              >
               <template #before>
                 Slot Before
