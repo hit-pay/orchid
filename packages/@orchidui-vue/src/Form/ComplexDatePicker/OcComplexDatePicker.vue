@@ -31,6 +31,9 @@ defineProps({
     type: Boolean,
     default: true,
   },
+  label: String,
+  hint: String,
+  errorMessage: String,
 });
 defineEmits({
   "update:modelValue": [],
@@ -44,6 +47,9 @@ const isOpen = ref(false);
       :model-value="`${dayjs(modelValue.start).format(formatDate)} - ${dayjs(
         modelValue.end,
       ).format(formatDate)}`"
+      :label="label"
+      :hint="hint"
+      :error-message="errorMessage"
       icon="calendar"
       readonly
     />

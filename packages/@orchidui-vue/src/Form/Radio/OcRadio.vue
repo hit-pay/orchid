@@ -1,12 +1,15 @@
 <script setup>
+import { BaseInput } from "@/orchidui";
+
 defineProps({
   modelValue: [String, Boolean],
   isDisabled: Boolean,
-  isError: Boolean,
   checked: Boolean,
   label: String,
   id: [String, Number],
   groupName: String,
+  errorMessage: String,
+  hint: String,
 });
 defineEmits({
   "update:modelValue": [],
@@ -14,9 +17,12 @@ defineEmits({
 </script>
 
 <template>
-  <div
+  <BaseInput
     class="radio-button inline-block relative cursor-pointer"
     :class="isDisabled ? 'disabled' : ''"
+    label=""
+    :error-message="errorMessage"
+    :hint="hint"
   >
     <input
       :id="groupName + id"
@@ -39,13 +45,13 @@ defineEmits({
           isDisabled || !modelValue
             ? 'border-oc-primary-200 bg-oc-primary-50'
             : '',
-          isError ? '!border-oc-error' : 'border-oc-primary-200',
+          errorMessage ? '!border-oc-error' : 'border-oc-primary-200',
         ]"
       />
 
       <span v-if="label" class="text-sm">{{ label }}</span>
     </label>
-  </div>
+  </BaseInput>
 </template>
 
 <style lang="scss">
