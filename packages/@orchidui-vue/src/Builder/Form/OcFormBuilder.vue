@@ -126,12 +126,11 @@ const gridDefinitionVariables = computed(() => {
 
 const getFormKey = (name) => {
   if (typeof name === "object") {
-    return name[0].key
+    return name[0].key;
   } else {
     return name;
   }
-}
-
+};
 </script>
 <template>
   <div

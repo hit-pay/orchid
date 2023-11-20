@@ -46,6 +46,14 @@ const props = defineProps({
     default: "",
   },
   placeholder: String,
+  minLabel: {
+    type: String,
+    default: "From",
+  },
+  maxLabel: {
+    type: String,
+    default: "To",
+  },
 });
 
 let defaultValue = props.modelValue;
@@ -98,7 +106,7 @@ const updateCalendar = () => {
       </div>
       <div v-else class="flex gap-x-4">
         <Input
-          label="From"
+          :label="minLabel"
           :model-value="formattedDate[0]"
           icon="calendar"
           :placeholder="placeholder"
@@ -108,7 +116,7 @@ const updateCalendar = () => {
         />
 
         <Input
-          label="To"
+          :label="maxLabel"
           :model-value="formattedDate[1]"
           icon="calendar"
           :placeholder="placeholder"

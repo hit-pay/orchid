@@ -1,5 +1,5 @@
 <script setup>
-import { Input, Slider } from "@/orchidui";
+import { Input, Slider, BaseInput } from "@/orchidui";
 import { ref, onMounted } from "vue";
 
 const props = defineProps({
@@ -17,6 +17,18 @@ const props = defineProps({
   },
   modelValue: {
     type: [Array, String],
+  },
+  label: {
+    type: String,
+    default: "Amount",
+  },
+  hint: {
+    type: String,
+    default: "",
+  },
+  errorMessage: {
+    type: String,
+    default: "",
   },
 });
 
@@ -55,33 +67,34 @@ onMounted(() => {
 
 <template>
   <div class="flex flex-col gap-y-2 oc-range-input">
-    <span class="font-medium text-sm text-oc-text-400">Amount</span>
-    <div class="flex gap-x-3">
-      <Input
-        :model-value="localMinValue"
-        label="From"
-        is-inline-label
-        placeholder=""
-        @update:model-value="updateRange($event, 0)"
-      />
-      <Input
-        :model-value="localMaxValue"
-        label="To"
-        is-inline-label
-        placeholder=""
-        @update:model-value="updateRange($event, 1)"
-      />
-    </div>
-    <div class="flex pt-4">
-      <Slider
-        ref="slider"
-        type="range"
-        :max-limit="maxLimit"
-        :min-limit="minLimit"
-        :min-gap="minGap"
-        :model-value="[Number(localMinValue), Number(localMaxValue)]"
-        @update:model-value="updateRangeSlider"
-      />
-    </div>
+    <BaseInput :label="label" :hint="hint" :error-message="errorMessage">
+      <div class="flex gap-x-3">
+        <Input
+          :model-value="localMinValue"
+          label="From"
+          is-inline-label
+          placeholder=""
+          @update:model-value="updateRange($event, 0)"
+        />
+        <Input
+          :model-value="localMaxValue"
+          label="To"
+          is-inline-label
+          placeholder=""
+          @update:model-value="updateRange($event, 1)"
+        />
+      </div>
+      <div class="flex pt-4">
+        <Slider
+          ref="slider"
+          type="range"
+          :max-limit="maxLimit"
+          :min-limit="minLimit"
+          :min-gap="minGap"
+          :model-value="[Number(localMinValue), Number(localMaxValue)]"
+          @update:model-value="updateRangeSlider"
+        />
+      </div>
+    </BaseInput>
   </div>
 </template>
