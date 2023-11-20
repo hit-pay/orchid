@@ -57,7 +57,7 @@ const updateActiveTime = () =>
     />
 
     <template #menu>
-      <TimePopup ref="popup" v-model="time" />
+      <TimePopup v-if="isDropdownOpened" ref="popup" v-model="time" />
     </template>
   </Dropdown>
 </template>

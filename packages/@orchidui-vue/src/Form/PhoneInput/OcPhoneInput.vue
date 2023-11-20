@@ -1,9 +1,10 @@
 <script setup>
 import { Dropdown, Input, Icon } from "@/orchidui";
 import { computed, ref } from "vue";
+import codes from "../../data/CountryCodes.sample";
 
 const props = defineProps({
-  countryCodes: Array,
+  countryCodes: { type: Array, default: () => codes },
   initialCountryCode: {
     type: String,
     default: "sg",

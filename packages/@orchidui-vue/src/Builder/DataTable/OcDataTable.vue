@@ -275,6 +275,7 @@ const displayFilterData = computed(() => {
                   v-if="isDropdownOpened"
                   :id="id"
                   :json-form="filterOptions.form ?? []"
+                  :grid="filterOptions.grid ?? {}"
                   :values="props.filter"
                   @apply-filter="applyFilter($event)"
                   @cancel="isDropdownOpened = false"
