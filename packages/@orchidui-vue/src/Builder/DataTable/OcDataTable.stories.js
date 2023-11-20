@@ -54,7 +54,7 @@ export const Default = {
                 <li v-for="(item, key) in args.filter">{{ key }} : {{ item }}</li>
               </ul>
               <ul>
-                Fields changed:
+                Filter fields changed:
                 <li v-for="field in changedFields">{{ field }}</li>
               </ul>
             </div>
