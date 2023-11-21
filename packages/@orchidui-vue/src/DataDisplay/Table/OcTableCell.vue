@@ -34,7 +34,10 @@ const props = defineProps({
     },
   },
   datetime: String,
-  imageClass: String,
+  imageClass: {
+    type: String,
+    default: 'h-full'
+  },
 });
 const emit = defineEmits({
   selected: [],
