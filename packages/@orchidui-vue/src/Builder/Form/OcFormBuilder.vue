@@ -36,6 +36,7 @@ const props = defineProps({
    * `}`
    */
   grid: Object,
+  class: String,
   errors: {
     type: Object,
   },
@@ -131,16 +132,24 @@ const getFormKey = (name) => {
     return name;
   }
 };
+
+const gridArea = (name) => {
+  return `grid-area: ${getFormKey(name)}`
+}
+
+const className = computed(() => props.class)
+
 </script>
 <template>
   <div
-    :class="grid ? 'responsive-smart-form-grid' : ''"
+    :class="grid ? `responsive-smart-form-grid ${className}` : className"
     :style="grid ? gridDefinitionVariables : ''"
   >
     <div
       v-for="form in jsonForm"
       :key="getFormKey(form.name)"
-      :style="{ 'grid-area': getFormKey(form.name) }"
+      :class="form.class"
+      :style="grid ? gridArea : ''"
     >
       <component
         :is="getComponentByType(form.type)"
