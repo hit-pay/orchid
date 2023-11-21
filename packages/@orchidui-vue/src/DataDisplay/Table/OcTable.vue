@@ -7,39 +7,61 @@ const props = defineProps({
     type: Object,
     required: true,
   },
-  modelValue: Array,
   isLoading: Boolean,
   loadingRows: {
     type: Number,
     default: 10,
   },
+  selected: {
+    type: Array,
+    required: false,
+  },
+  rowKey: {
+    type: String, Function,
+    default: 'id',
+  }
 });
 
 const emit = defineEmits({
-  "update:modelValue": [],
   "click:row": [],
+  "update:selected": [],
 });
 
 const isSelectable = computed(() => props.options.isSelectable);
 const fields = computed(() => props.options.fields);
 const headers = computed(() => props.options.headers);
 
-const selectedRows = ref(props.modelValue ? props.modelValue : []);
-const selectRow = (element) => {
-  if (selectedRows.value.includes(element)) {
-    selectedRows.value = selectedRows.value.filter((e) => e !== element);
+const getRowKey = computed(() => (
+  typeof props.rowKey === 'function'
+    ? props.rowKey
+    : (row) => row[props.rowKey]
+));
+
+const selectedRows = computed({
+  get() {
+    return props.selected || [];
+  },
+  set(rows) {
+    emit('update:selected', rows);
+  },
+})
+
+const selectRow = (row) => {
+  const selectingRow = selectedRows.value.find((r) => getRowKey.value(r) === getRowKey.value(row));
+
+  if (selectingRow) {
+    selectedRows.value = selectedRows.value.filter((r) => getRowKey.value(r) !== getRowKey.value(row));
   } else {
-    selectedRows.value = [...selectedRows.value, element];
+    selectedRows.value = [...selectedRows.value, row];
   }
-  emit("update:modelValue", selectedRows.value);
 };
 
 const selectAllRows = () => {
   const allRowsSelected = selectedRows.value.length === fields.value.length;
+
   selectedRows.value = allRowsSelected
     ? []
-    : [...fields.value.map((e, i) => i)];
-  emit("update:modelValue", selectedRows.value);
+    : [...fields.value];
 };
 
 const isCopied = ref(false);
@@ -129,9 +151,9 @@ const onClickRow = (field, header) => {
           v-if="isSelectable"
           class="w-[40px] md:w-[5%] flex justify-center absolute left-0 md:relative"
           :is-last="fields.length === i + 1"
-          :is-selected="selectedRows.includes(i)"
+          :is-selected="selectedRows.some((r) => getRowKey(r) === getRowKey(field))"
           variant="checkbox"
-          @selected="selectRow(i)"
+          @selected="selectRow(field)"
         />
 
         <TableCell

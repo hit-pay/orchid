@@ -37,6 +37,7 @@ export const Default = {
     },
     setup() {
       const changedFields = ref([]);
+      const selectedRows = ref([]);
       const updateFilterData = (data) => {
         // get new data
         args.filter = data;
@@ -45,7 +46,13 @@ export const Default = {
         console.log("onClickRow  ", val);
       };
 
-      return { args, updateFilterData, onClickRow, changedFields };
+      return {
+        args,
+        changedFields,
+        selectedRows,
+        updateFilterData,
+        onClickRow,
+      };
     },
     template: `
           <Theme class="p-8">
@@ -56,9 +63,14 @@ export const Default = {
               <div>
                 Filter fields changed: {{ changedFields }}
               </div>
+              <div>
+                Selected item: {{ selectedRows.map(({ id }) => id).join(', ') }}
+              </div>
             </div>
             <DataTable 
-                id="sample-data-table" 
+                id="sample-data-table"
+                v-model:selected="selectedRows"
+                row-key="id"
                 :filter="args.filter" 
                 :options="args.options"
                 :is-loading="args.isLoading"
@@ -90,7 +102,6 @@ export const Default = {
                     variant="destructive"
                     left-icon="bin"
                 />
-                {{ selectedRows }}
               </template>
               <template #col1="{ item }">
                 <TableCellContent important :title="item.title" :description="item.descriptions"/>
