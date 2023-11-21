@@ -1,7 +1,10 @@
 import { Theme, Table, Chip, Icon, Toggle, TableCellContent } from "@/orchidui";
 
 import { ref } from "vue";
-import { TableOptions } from "../../data/TableOptions.sample";
+import {
+  TableOptions,
+  StickyTableOptions,
+} from "../../data/TableOptions.sample";
 
 export default {
   component: Table,
@@ -12,6 +15,7 @@ export const Default = {
   args: {
     options: TableOptions,
     isLoading: false,
+    isSticky: false,
     loadingRows: 10,
   },
   render: (args) => ({
@@ -28,16 +32,17 @@ export const Default = {
       const onClickRow = (item) => {
         console.log("on click row", item);
       };
-      return { args, selectedRows, onClickRow };
+      return { StickyTableOptions, args, selectedRows, onClickRow };
     },
     template: `
           <Theme>
-            <Table v-model="selectedRows" 
-              :options="args.options" 
-              :is-loading="args.isLoading"
-              :loadingRows="args.loadingRows"
-              @click-row="onClickRow"
-              >
+            <Table v-model="selectedRows"
+                   :options="args.isSticky ? StickyTableOptions : args.options"
+                   :is-loading="args.isLoading"
+                   :is-sticky="args.isSticky"
+                   :loadingRows="args.loadingRows"
+                   @click-row="onClickRow"
+            >
               <template #col4="{ data }">
                 <span class="text-oc-text-400 text-sm">{{ data }}</span>
               </template>

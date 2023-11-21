@@ -92,26 +92,26 @@
   --button-secondary-hover: linear-gradient(180deg, #fff 0%, #fafafa 100%);
   --button-secondary-pressed: linear-gradient(180deg, #fafafa 0%, #fff 100%);
   --button-secondary-disabled: linear-gradient(
-    180deg,
-    #fcfcfc 0%,
-    #f7f7f7 100%
+                  180deg,
+                  #fcfcfc 0%,
+                  #f7f7f7 100%
   );
 
   --button-destructive-default: linear-gradient(
-    180deg,
-    #e44e5c 0%,
-    #cc2334 100%
+                  180deg,
+                  #e44e5c 0%,
+                  #cc2334 100%
   );
   --button-destructive-hover: linear-gradient(180deg, #e44e5c 0%, #dc3747 100%);
   --button-destructive-pressed: linear-gradient(
-    180deg,
-    #dc3747 0%,
-    #e44e5c 100%
+                  180deg,
+                  #dc3747 0%,
+                  #e44e5c 100%
   );
   --button-destructive-disabled: linear-gradient(
-    180deg,
-    #c66c75 0%,
-    #a84851 100%
+                  180deg,
+                  #c66c75 0%,
+                  #a84851 100%
   );
 
   /* utility */
@@ -124,6 +124,8 @@
   --oc-border-full: 9999px;
 
   --oc-shadow-normal: 0px 3px 22px 0px rgba(38, 42, 50, 0.09);
+  --oc-shadow-right-sticky: 2px 0px 2px 0px rgba(0, 0, 0, 0.08);
+  --oc-shadow-left-sticky: -2px 0px 2px 0px rgba(0, 0, 0, 0.08);
 }
 
 /* EXPERIMENTAL : reverse of light mode  */
@@ -218,25 +220,25 @@
   --button-secondary-hover: linear-gradient(180deg, #fff 0%, #fafafa 100%);
   --button-secondary-pressed: linear-gradient(180deg, #f1f1f1 0%, #fff 100%);
   --button-secondary-disabled: linear-gradient(
-    180deg,
-    #fcfcfc 0%,
-    #f7f7f7 100%
+                  180deg,
+                  #fcfcfc 0%,
+                  #f7f7f7 100%
   );
 
   --button-destructive-default: linear-gradient(
-    180deg,
-    #e44e5c 0%,
-    #cc2334 100%
+                  180deg,
+                  #e44e5c 0%,
+                  #cc2334 100%
   );
   --button-destructive-hover: linear-gradient(180deg, #e44e5c 0%, #dc3747 100%);
   --button-destructive-pressed: linear-gradient(
-    180deg,
-    #dc3747 0%,
-    #e44e5c 100%
+                  180deg,
+                  #dc3747 0%,
+                  #e44e5c 100%
   );
   --button-destructive-disabled: linear-gradient(
-    180deg,
-    #c66c75 0%,
-    #a84851 100%
+                  180deg,
+                  #c66c75 0%,
+                  #a84851 100%
   );
 }
