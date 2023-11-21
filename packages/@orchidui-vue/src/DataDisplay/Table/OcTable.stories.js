@@ -15,7 +15,7 @@ export const Default = {
   args: {
     options: TableOptions,
     isLoading: false,
-    isSticky: false,
+    isSticky: true,
     loadingRows: 10,
   },
   render: (args) => ({

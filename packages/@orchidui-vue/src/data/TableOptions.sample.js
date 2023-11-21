@@ -127,7 +127,6 @@ const StickyTableOptions = {
       label: "Table Header",
       isCopy: true,
       class: "w-[200px]",
-      stickyLeft: true,
     },
     {
       key: "col3",
@@ -148,15 +147,13 @@ const StickyTableOptions = {
     {
       key: "col6",
       label: "Header",
-      class: "w-[200px]",
-      stickyRight: true,
+      class: "w-[100px]",
     },
     {
-      key: "actions",
-      label: "",
-      headerVariant: "text",
-      variant: "icon",
+      key: "col5",
+      label: "Table Header",
       class: "w-[200px]",
+      stickyRight: true,
     },
   ],
   fields: [

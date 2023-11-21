@@ -1,6 +1,6 @@
 <script setup>
 import { TableHeader, TableCell } from "@/orchidui";
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 
 const props = defineProps({
   options: {
@@ -87,17 +87,20 @@ const onClickRow = (field, header) => {
 };
 const isScrollOnStart = ref(true);
 const isScrollOnEnd = ref(true);
-const onScroll = (scrollEvent) => {
+const scrollTable = ref();
+const onScroll = () => {
   if (!props.isSticky) return;
-  isScrollOnStart.value = scrollEvent.target.scrollLeft === 0;
+  isScrollOnStart.value = scrollTable.value.scrollLeft === 0;
   isScrollOnEnd.value =
-    scrollEvent.target.scrollLeft + scrollEvent.target.clientWidth ===
-    scrollEvent.target.scrollWidth;
+    scrollTable.value.scrollLeft + scrollTable.value.clientWidth ===
+    scrollTable.value.scrollWidth;
 };
+onMounted(() => onScroll());
 </script>
 
 <template>
   <div
+    ref="scrollTable"
     class="flex text-oc-text flex-col rounded border border-oc-gray-200"
     :class="isSticky ? 'overflow-x-auto' : 'overflow-hidden'"
     @scroll="onScroll"
