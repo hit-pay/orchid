@@ -26,9 +26,18 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+  selected: {
+    type: Array,
+    required: false,
+  },
+  rowKey: {
+    type: String, Function,
+    default: 'id',
+  }
 });
 
 const emit = defineEmits({
+  "update:selected": [],
   "update:filter": [],
   "click:row": [],
   "filter-fields-changed": [],
@@ -49,7 +58,6 @@ const filterOptions = computed(() => {
 });
 
 const isDropdownOpened = ref(false);
-const selectedRows = ref([]);
 const filterTab = ref(props.filter[filterOptions.value?.tabs?.key]);
 const currentPage = ref(props.filter.page);
 const perPage = ref(props.filter.per_page);
@@ -109,7 +117,7 @@ const perPageOptions = computed(() => {
 });
 
 const showBulkAction = computed(() => {
-  return selectedRows.value.length > 0;
+  return props.selected?.length > 0;
 });
 
 const addQuery = (query) => {
@@ -228,10 +236,12 @@ const displayFilterData = computed(() => {
   <div class="flex flex-col gap-3">
     <Table
       v-if="tableOptions"
-      v-model="selectedRows"
+      :selected="selected"
+      :row-key="rowKey"
       :options="tableOptions"
       :is-loading="isLoading"
       :loading-rows="perPage"
+      @update:selected="$emit('update:selected', $event)"
       @click:row="$emit('click:row', $event)"
     >
       <template #before>
@@ -239,7 +249,7 @@ const displayFilterData = computed(() => {
         <div class="flex items-center m-5 relative min-h-[30px]">
           <template v-if="filterOptions">
             <div v-if="showBulkAction" class="flex gap-3 items-center">
-              <slot name="bulk-actions" :selected-rows="selectedRows" />
+              <slot name="bulk-actions" :selected-rows="selected" />
             </div>
             <div v-else class="flex gap-3">
               <Tabs

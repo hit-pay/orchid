@@ -120,6 +120,7 @@ const DataTableOptions = {
         col4: "Table Cell column two",
         col5: "Label",
         col6: false,
+        id: crypto.randomUUID(),
       },
       {
         image: "",
@@ -130,6 +131,7 @@ const DataTableOptions = {
         col4: "Table Cell column two",
         col5: "Label",
         col6: false,
+        id: crypto.randomUUID(),
       },
       {
         image: "",
@@ -140,6 +142,7 @@ const DataTableOptions = {
         col4: "Table Cell column two",
         col5: "Label",
         col6: false,
+        id: crypto.randomUUID(),
       },
       {
         image: "",
@@ -150,6 +153,7 @@ const DataTableOptions = {
         col4: "Table Cell column two",
         col5: "Label",
         col6: false,
+        id: crypto.randomUUID(),
       },
       {
         image: "",
@@ -160,6 +164,7 @@ const DataTableOptions = {
         col4: "Table Cell column two",
         col5: "Label",
         col6: false,
+        id: crypto.randomUUID(),
       },
     ],
   },
