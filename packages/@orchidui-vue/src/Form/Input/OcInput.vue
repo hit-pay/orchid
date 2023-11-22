@@ -73,6 +73,10 @@ defineEmits({
   "update:modelValue": [],
   blur: [],
 });
+const inputRef = ref();
+defineExpose({
+  focus: () => inputRef.value.focus(),
+});
 const isFocused = ref(false);
 const inputClasses = computed(() => [
   {

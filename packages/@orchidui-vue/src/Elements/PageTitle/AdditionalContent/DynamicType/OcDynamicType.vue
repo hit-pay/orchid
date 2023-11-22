@@ -1,5 +1,5 @@
 <script setup>
-import { CustomerCard, OverviewItem } from "@/orchidui";
+import { CustomerCard, OverviewItem, Icon, Tooltip } from "@/orchidui";
 import BoxDetails from "./OcBoxDetails.vue";
 
 defineProps({
@@ -18,12 +18,25 @@ defineProps({
       :class="isCustomer ? '!grid grid-cols-2 grid-rows-2 gap-y-4 !py-4' : ''"
     >
       <OverviewItem
-        v-for="(field, j) in box"
+        v-for="(field, j) in box.items"
         :key="`${i}-${j}`"
         is-transparent
         :title="field.title"
         :content="field.content"
       />
+      <div v-if="box.showInfo" class="p-2">
+        <Tooltip>
+          <Icon
+            width="16"
+            height="16"
+            class="!w-[20px] !h-[20px] text-oc-text-300"
+            name="information"
+          />
+          <template #popper>
+            <div class="py-2 px-3">{{ box.infoTooltip }}</div>
+          </template>
+        </Tooltip>
+      </div>
     </BoxDetails>
     <CustomerCard
       v-if="isCustomer"

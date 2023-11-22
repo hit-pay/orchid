@@ -1,8 +1,8 @@
 <script setup>
-import { ref } from "vue";
+import { nextTick, ref } from "vue";
 import { Button, Input } from "@/orchidui";
 
-defineEmits({
+const emit = defineEmits({
   addQuery: [],
   toggle: [],
 });
@@ -11,21 +11,28 @@ defineProps({
 });
 const isSearchOpen = ref(false);
 const query = ref("");
+const searchInput = ref();
+const onSearchOpen = async () => {
+  isSearchOpen.value = true;
+  emit("toggle", isSearchOpen);
+  await nextTick();
+  searchInput.value.focus();
+};
 </script>
 
 <template>
   <div
-    class="transition-all w-full duration-300"
+    class="w-full"
     :class="
-      isSearchOpen || isSearchOnly
-        ? 'max-w-[400px]'
-        : 'absolute max-w-0 overflow-hidden'
+      isSearchOpen || isSearchOnly ? '' : 'absolute max-w-0 overflow-hidden'
     "
   >
     <div class="flex gap-x-4">
       <Input
+        ref="searchInput"
         v-model="query"
         placeholder="Search something here"
+        class="min-w-[310px]"
         icon="search"
         @keyup.enter="
           $emit('addQuery', query);
@@ -58,17 +65,13 @@ const query = ref("");
   </div>
   <div
     v-if="!isSearchOnly"
-    class="transition-all duration-300"
-    :class="!isSearchOpen ? 'max-w-[400px]' : 'max-w-0 overflow-hidden'"
+    :class="!isSearchOpen ? '' : 'max-w-0 overflow-hidden'"
   >
     <Button
       v-if="!isSearchOpen"
       variant="secondary"
       left-icon="search"
-      @click="
-        isSearchOpen = true;
-        $emit('toggle', isSearchOpen);
-      "
+      @click="onSearchOpen"
     />
   </div>
 </template>

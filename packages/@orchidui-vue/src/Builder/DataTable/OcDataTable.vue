@@ -31,9 +31,10 @@ const props = defineProps({
     required: false,
   },
   rowKey: {
-    type: String, Function,
-    default: 'id',
-  }
+    type: String,
+    Function,
+    default: "id",
+  },
 });
 
 const emit = defineEmits({
@@ -233,7 +234,7 @@ const displayFilterData = computed(() => {
 });
 </script>
 <template>
-  <div class="flex flex-col gap-3">
+  <div class="flex flex-col gap-9">
     <Table
       v-if="tableOptions"
       :selected="selected"
@@ -246,9 +247,9 @@ const displayFilterData = computed(() => {
     >
       <template #before>
         <slot name="before" />
-        <div class="flex items-center m-5 relative min-h-[30px]">
+        <div class="flex items-center px-4 relative min-h-[52px]">
           <template v-if="filterOptions">
-            <div v-if="showBulkAction" class="flex gap-3 items-center">
+            <div v-if="showBulkAction" class="flex gap-5 items-center">
               <slot name="bulk-actions" :selected-rows="selected" />
             </div>
             <div v-else class="flex gap-3">
@@ -262,7 +263,7 @@ const displayFilterData = computed(() => {
             </div>
           </template>
           <div
-            class="flex gap-3 absolute bg-oc-bg-light right-0"
+            class="flex gap-3 absolute bg-oc-bg-light right-4"
             :class="
               !filterOptions
                 ? 'w-full justify-end'
@@ -334,10 +335,7 @@ const displayFilterData = computed(() => {
         <slot name="after" />
       </template>
     </Table>
-    <div
-      v-if="paginationOption?.total > 0"
-      class="flex gap-3 items-center m-3 md:mx-0"
-    >
+    <div v-if="paginationOption?.total > 0" class="flex gap-3 items-center">
       <Pagination
         v-model="currentPage"
         class="justify-center"
