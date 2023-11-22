@@ -23,50 +23,62 @@ export const Default = {
       control: "select",
       options: {
         "5 Fields in 2 boxes": [
-          [
-            {
-              title: "Purpose",
-              content: "Premium GYM membership",
-            },
-            {
-              title: "ID",
-              content: "9a2f500c-545d-4db6-84fa-c40d65146f43",
-            },
-            {
-              title: "reference",
-              content: "9a2f500c-545d-4db6-84fa-c40d65146f43",
-            },
-          ],
-          [
-            {
-              title: "Created at",
-              content: "20/11/2023",
-            },
-            {
-              title: "Expired at",
-              content: "20/12/2023",
-            },
-          ],
+          {
+            showInfo: false,
+            infoTooltip: "Tooltip",
+            items: [
+              {
+                title: "Purpose",
+                content: "Premium GYM membership",
+              },
+              {
+                title: "ID",
+                content: "9a2f500c-545d-4db6-84fa-c40d65146f43",
+              },
+              {
+                title: "reference",
+                content: "9a2f500c-545d-4db6-84fa-c40d65146f43",
+              },
+            ],
+          },
+          {
+            showInfo: false,
+            infoTooltip: "Tooltip",
+            items: [
+              {
+                title: "Created at",
+                content: "20/11/2023",
+              },
+              {
+                title: "Expired at",
+                content: "20/12/2023",
+              },
+            ],
+          },
         ],
         "4 Fields": [
-          [
-            {
-              title: "Purpose",
-              content: "Premium GYM membership",
-            },
-            {
-              title: "ID",
-              content: "9a2f500c-545d-4db6-84fa-c40d65146f43",
-            },
-            {
-              title: "reference",
-              content: "9a2f500c-545d-4db6-84fa-c40d65146f43",
-            },
-            {
-              title: "reference",
-              content: "9a2f500c-545d-4db6-84fa-c40d65146f43",
-            },
-          ],
+          {
+            showInfo: true,
+            infoTooltip: "Tooltip",
+            items: [
+              {
+                title: "Purpose",
+                content: "Premium GYM membership",
+              },
+              {
+                title: "ID",
+                content: "9a2f500c-545d-4db6-84fa-c40d65146f43",
+              },
+              {
+                title: "reference",
+                content: "9a2f500c-545d-4db6-84fa-c40d65146f43",
+              },
+              {
+                title: "reference",
+                content: "9a2f500c-545d-4db6-84fa-c40d65146f43",
+              },
+            ],
+          },
         ],
       },
     },
@@ -93,7 +105,7 @@ export const Default = {
     additionalTitle: "Need attention",
     primaryActions: {
       mainLinkAction: {
-        tooltipContent: "Preview Link",
+        infoTooltip: "Preview Link",
         url: "https://securecheckout.../payment-request/",
       },
       dropdownOptions: {
