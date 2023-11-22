@@ -32,6 +32,7 @@ const onSearchOpen = async () => {
         ref="searchInput"
         v-model="query"
         placeholder="Search something here"
+        class="min-w-[310px]"
         icon="search"
         @keyup.enter="
           $emit('addQuery', query);

@@ -247,7 +247,7 @@ const displayFilterData = computed(() => {
     >
       <template #before>
         <slot name="before" />
-        <div class="flex items-center m-5 relative min-h-[30px]">
+        <div class="flex items-center px-4 relative min-h-[52px]">
           <template v-if="filterOptions">
             <div v-if="showBulkAction" class="flex gap-5 items-center">
               <slot name="bulk-actions" :selected-rows="selected" />
@@ -263,7 +263,7 @@ const displayFilterData = computed(() => {
             </div>
           </template>
           <div
-            class="flex gap-3 absolute bg-oc-bg-light right-0"
+            class="flex gap-3 absolute bg-oc-bg-light right-4"
             :class="
               !filterOptions
                 ? 'w-full justify-end'
