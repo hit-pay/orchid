@@ -234,7 +234,7 @@ const displayFilterData = computed(() => {
 });
 </script>
 <template>
-  <div class="flex flex-col gap-3">
+  <div class="flex flex-col gap-9">
     <Table
       v-if="tableOptions"
       :selected="selected"
@@ -335,10 +335,7 @@ const displayFilterData = computed(() => {
         <slot name="after" />
       </template>
     </Table>
-    <div
-      v-if="paginationOption?.total > 0"
-      class="flex gap-3 items-center m-3 md:mx-0"
-    >
+    <div v-if="paginationOption?.total > 0" class="flex gap-3 items-center">
       <Pagination
         v-model="currentPage"
         class="justify-center"
