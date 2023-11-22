@@ -31,9 +31,10 @@ const props = defineProps({
     required: false,
   },
   rowKey: {
-    type: String, Function,
-    default: 'id',
-  }
+    type: String,
+    Function,
+    default: "id",
+  },
 });
 
 const emit = defineEmits({
@@ -248,7 +249,7 @@ const displayFilterData = computed(() => {
         <slot name="before" />
         <div class="flex items-center m-5 relative min-h-[30px]">
           <template v-if="filterOptions">
-            <div v-if="showBulkAction" class="flex gap-3 items-center">
+            <div v-if="showBulkAction" class="flex gap-5 items-center">
               <slot name="bulk-actions" :selected-rows="selected" />
             </div>
             <div v-else class="flex gap-3">
