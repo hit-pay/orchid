@@ -16,6 +16,7 @@ defineProps({
   text: String,
   isPartial: Boolean,
   isChecked: Boolean,
+  isSticky: Boolean,
 });
 defineEmits({
   selectAll: [],
@@ -28,7 +29,7 @@ const variantClass = computed(() => ({
 
 <template>
   <div
-    class="whitespace-nowrap w-fit text-start md:uppercase text-oc-text-400 md:text-xs font-medium bg-oc-gray-50 flex gap-3"
+    class="whitespace-nowrap text-start md:uppercase text-oc-text-400 md:text-xs font-medium bg-oc-gray-50 flex gap-3"
     :class="variantClass[variant]"
   >
     <slot v-if="variant === Variants.TEXT">{{ text }}</slot>
@@ -39,7 +40,9 @@ const variantClass = computed(() => ({
         :is-partial="isPartial"
         @update:model-value="$emit('selectAll', $event)"
       />
-      <span class="text-oc-text-500 md:hidden">Select all</span>
+      <span class="text-oc-text-500" :class="isSticky ? 'hidden' : 'md:hidden'"
+        >Select all</span
+      >
     </slot>
   </div>
 </template>
