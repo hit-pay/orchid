@@ -101,7 +101,7 @@ onMounted(() => onScroll());
 <template>
   <div
     ref="scrollTable"
-    class="flex text-oc-text flex-col rounded border border-oc-gray-200"
+    class="flex text-oc-text flex-col rounded border border-oc-gray-200 isolate"
     :class="isSticky ? 'overflow-x-auto' : 'overflow-hidden'"
     @scroll="onScroll"
   >
