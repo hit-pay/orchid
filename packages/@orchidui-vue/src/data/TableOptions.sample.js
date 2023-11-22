@@ -111,7 +111,7 @@ const StickyTableOptions = {
       key: "image",
       variant: "image",
       label: "Image",
-      class: "w-[50px]",
+      class: "w-[80px]",
       stickyLeft: true,
     },
     {
@@ -152,7 +152,7 @@ const StickyTableOptions = {
     {
       key: "col5",
       label: "Table Header",
-      class: "w-[200px]",
+      class: "w-[100px]",
       stickyRight: true,
     },
   ],

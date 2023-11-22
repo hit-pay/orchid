@@ -16,6 +16,7 @@ defineProps({
   text: String,
   isPartial: Boolean,
   isChecked: Boolean,
+  isSticky: Boolean,
 });
 defineEmits({
   selectAll: [],
@@ -39,7 +40,9 @@ const variantClass = computed(() => ({
         :is-partial="isPartial"
         @update:model-value="$emit('selectAll', $event)"
       />
-      <span class="text-oc-text-500 md:hidden">Select all</span>
+      <span class="text-oc-text-500" :class="isSticky ? 'hidden' : 'md:hidden'"
+        >Select all</span
+      >
     </slot>
   </div>
 </template>

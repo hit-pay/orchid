@@ -114,6 +114,7 @@ onMounted(() => onScroll());
     >
       <TableHeader
         v-if="isSelectable"
+        :is-sticky="isSticky"
         class="md:ml-0 md:border-b border-oc-gray-200"
         :class="[isSticky ? 'shrink-0 sticky left-0 z-10' : '']"
         variant="checkbox"
@@ -131,17 +132,19 @@ onMounted(() => onScroll());
         :key="header.key"
         :text="header.label"
         :variant="header.headerVariant"
+        :is-sticky="isSticky"
         :class="[
-          header.stickyLeft && isSelectable ? 'left-[32px]' : 'left-0',
+          isSticky ? 'flex' : 'hidden md:flex',
+          header.stickyLeft && isSelectable
+            ? 'left-[40px] md:left-[32px]'
+            : 'left-0',
           header.stickyRight ? 'right-0' : '',
           header.class,
-          header.stickyLeft || header.stickyRight
-            ? 'sticky shrink-0 z-10s'
-            : '',
-          header.stickyLeft && !isScrollOnStart ? 'md:shadow-right-sticky' : '',
-          header.stickyRight && !isScrollOnEnd ? 'md:shadow-left-sticky' : '',
+          header.stickyLeft || header.stickyRight ? 'sticky shrink-0 z-10' : '',
+          header.stickyLeft && !isScrollOnStart ? 'shadow-right-sticky' : '',
+          header.stickyRight && !isScrollOnEnd ? 'shadow-left-sticky' : '',
         ]"
-        class="hidden md:flex md:border-b border-oc-gray-200"
+        class="md:border-b border-oc-gray-200"
       >
         <template #default>
           <slot :name="`header-${header.key}`" />
@@ -180,18 +183,18 @@ onMounted(() => onScroll());
           'border-b md:border-b-0': fields.length !== i + 1,
           'pl-[40px]': isSelectable,
           'flex-wrap': !isSticky,
-          'w-max': isSticky,
+          'w-max !p-0': isSticky,
         }"
       >
         <TableCell
           v-if="isSelectable"
-          class="flex border-oc-gray-200 justify-center absolute left-0 md:relative"
+          class="flex border-oc-gray-200 justify-center left-0"
           :is-last="fields.length === i + 1"
           :is-selected="
             selectedRows.some((r) => getRowKey(r) === getRowKey(field))
           "
           :class="[
-            isSticky ? 'shrink-0 z-10 md:!sticky' : '',
+            isSticky ? 'shrink-0 z-10 left-0 sticky' : 'md:relative absolute',
             fields.length !== i + 1 ? 'md:border-b' : '',
           ]"
           variant="checkbox"
@@ -214,16 +217,16 @@ onMounted(() => onScroll());
           :chip-options="header.chipOptions"
           :class="[
             header.class,
-            header.stickyLeft && isSelectable ? 'left-[32px]' : 'left-0',
+            header.stickyLeft && isSelectable
+              ? 'left-[40px] md:left-[32px]'
+              : 'left-0',
             header.stickyRight ? 'right-0' : '',
             header.stickyLeft || header.stickyRight
               ? 'shrink-0 sticky z-10'
               : '',
             fields.length !== i + 1 ? 'md:border-b' : '',
-            header.stickyLeft && !isScrollOnStart
-              ? 'md:shadow-right-sticky'
-              : '',
-            header.stickyRight && !isScrollOnEnd ? 'md:shadow-left-sticky' : '',
+            header.stickyLeft && !isScrollOnStart ? 'shadow-right-sticky' : '',
+            header.stickyRight && !isScrollOnEnd ? 'shadow-left-sticky' : '',
           ]"
           :image-class="header.imageClass"
           @click="onClickRow(field, header)"
