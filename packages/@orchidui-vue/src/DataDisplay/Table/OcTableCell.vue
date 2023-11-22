@@ -156,7 +156,9 @@ const copyToClipboard = async (text) => {
       <Tooltip
         v-if="isCopy && hasContentData"
         position="top"
-        :hide-after="1500"
+        arrow-hidden
+        transition-name="copy"
+        :hide-after="800"
         trigger="click"
         :distance="10"
       >
@@ -177,6 +179,32 @@ const copyToClipboard = async (text) => {
 <style lang="scss">
 .slide {
   animation: slide 1.5s infinite;
+}
+
+.copy-enter-active,
+.copy-leave-active {
+  transition-timing-function: cubic-bezier(0, 1, 1, 1);
+  transition: all 0.3s;
+}
+
+.copy-enter-from {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.copy-enter-to {
+  opacity: 1;
+  transform: translateY(0px);
+}
+
+.copy-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.copy-leave-to {
+  opacity: 0;
+  transform: translateY(-16px);
 }
 
 @keyframes slide {

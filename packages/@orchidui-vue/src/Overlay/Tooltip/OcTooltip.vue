@@ -16,6 +16,10 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
+  transitionName: {
+    type: String,
+    default: "fade",
+  },
   hideAfter: Number,
   popperOptions: Object,
   trigger: {
@@ -96,7 +100,7 @@ const onClickOutside = () => {
         <slot />
       </div>
       <template #popper>
-        <Transition name="fade">
+        <Transition :name="transitionName">
           <div v-show="isShow" class="oc-tooltip" :class="popperClass">
             <slot name="popper" />
             <div v-if="!arrowHidden" class="oc-arrow" data-popper-arrow />
