@@ -1,6 +1,6 @@
 <script setup>
 import { TableHeader, TableCell } from "@/orchidui";
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 
 const props = defineProps({
   options: {
@@ -17,9 +17,14 @@ const props = defineProps({
     required: false,
   },
   rowKey: {
-    type: String, Function,
-    default: 'id',
-  }
+    type: String,
+    Function,
+    default: "id",
+  },
+  isSticky: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits({
@@ -31,26 +36,30 @@ const isSelectable = computed(() => props.options.isSelectable);
 const fields = computed(() => props.options.fields);
 const headers = computed(() => props.options.headers);
 
-const getRowKey = computed(() => (
-  typeof props.rowKey === 'function'
+const getRowKey = computed(() =>
+  typeof props.rowKey === "function"
     ? props.rowKey
-    : (row) => row[props.rowKey]
-));
+    : (row) => row[props.rowKey],
+);
 
 const selectedRows = computed({
   get() {
     return props.selected || [];
   },
   set(rows) {
-    emit('update:selected', rows);
+    emit("update:selected", rows);
   },
-})
+});
 
 const selectRow = (row) => {
-  const selectingRow = selectedRows.value.find((r) => getRowKey.value(r) === getRowKey.value(row));
+  const selectingRow = selectedRows.value.find(
+    (r) => getRowKey.value(r) === getRowKey.value(row),
+  );
 
   if (selectingRow) {
-    selectedRows.value = selectedRows.value.filter((r) => getRowKey.value(r) !== getRowKey.value(row));
+    selectedRows.value = selectedRows.value.filter(
+      (r) => getRowKey.value(r) !== getRowKey.value(row),
+    );
   } else {
     selectedRows.value = [...selectedRows.value, row];
   }
@@ -59,9 +68,7 @@ const selectRow = (row) => {
 const selectAllRows = () => {
   const allRowsSelected = selectedRows.value.length === fields.value.length;
 
-  selectedRows.value = allRowsSelected
-    ? []
-    : [...fields.value];
+  selectedRows.value = allRowsSelected ? [] : [...fields.value];
 };
 
 const isCopied = ref(false);
@@ -78,19 +85,38 @@ const onClickRow = (field, header) => {
     });
   }
 };
+const isScrollOnStart = ref(true);
+const isScrollOnEnd = ref(true);
+const scrollTable = ref();
+const onScroll = () => {
+  if (!props.isSticky) return;
+  isScrollOnStart.value = scrollTable.value.scrollLeft === 0;
+  isScrollOnEnd.value =
+    scrollTable.value.scrollLeft + scrollTable.value.clientWidth ===
+    scrollTable.value.scrollWidth;
+};
+onMounted(() => onScroll());
 </script>
 
 <template>
   <div
-    class="flex overflow-hidden text-oc-text flex-col rounded border border-oc-gray-200"
+    ref="scrollTable"
+    class="flex text-oc-text flex-col rounded border border-oc-gray-200 isolate"
+    :class="isSticky ? 'overflow-x-auto' : 'overflow-hidden'"
+    @scroll="onScroll"
   >
     <div v-if="$slots.before" class="border-b border-oc-gray-200">
       <slot name="before" />
     </div>
-    <div class="flex flex-wrap border-b border-oc-gray-200">
+    <div
+      class="flex md:border-b-0 border-b border-oc-gray-200"
+      :class="isSticky ? 'w-max' : 'flex-wrap'"
+    >
       <TableHeader
         v-if="isSelectable"
-        class="w-[40px] md:w-[5%] md:ml-0"
+        :is-sticky="isSticky"
+        class="md:ml-0 md:border-b border-oc-gray-200"
+        :class="[isSticky ? 'shrink-0 sticky left-0 z-10' : '']"
         variant="checkbox"
         :is-partial="
           selectedRows.length !== fields.length && selectedRows.length > 0
@@ -106,8 +132,19 @@ const onClickRow = (field, header) => {
         :key="header.key"
         :text="header.label"
         :variant="header.headerVariant"
-        :class="header.class"
-        class="hidden md:flex"
+        :is-sticky="isSticky"
+        :class="[
+          isSticky ? 'flex' : 'hidden md:flex',
+          header.stickyLeft && isSelectable
+            ? 'left-[40px] md:left-[32px]'
+            : 'left-0',
+          header.stickyRight ? 'right-0' : '',
+          header.class,
+          header.stickyLeft || header.stickyRight ? 'sticky shrink-0 z-10' : '',
+          header.stickyLeft && !isScrollOnStart ? 'shadow-right-sticky' : '',
+          header.stickyRight && !isScrollOnEnd ? 'shadow-left-sticky' : '',
+        ]"
+        class="md:border-b border-oc-gray-200"
       >
         <template #default>
           <slot :name="`header-${header.key}`" />
@@ -125,7 +162,7 @@ const onClickRow = (field, header) => {
       >
         <TableCell
           v-if="isSelectable"
-          class="w-[40px] opacity-0 md:w-[5%] flex justify-center absolute left-0 md:relative"
+          class="opacity-0 flex justify-center absolute left-0 md:relative"
         />
 
         <TableCell
@@ -141,17 +178,25 @@ const onClickRow = (field, header) => {
       <div
         v-for="(field, i) in fields"
         :key="i"
-        class="flex flex-wrap relative group/row border-oc-gray-200 md:p-0 py-3 cursor-pointer"
+        class="flex relative group/row md:p-0 py-3 cursor-pointer"
         :class="{
-          'border-b': fields.length !== i + 1,
+          'border-b md:border-b-0': fields.length !== i + 1,
           'pl-[40px]': isSelectable,
+          'flex-wrap': !isSticky,
+          'w-max !p-0': isSticky,
         }"
       >
         <TableCell
           v-if="isSelectable"
-          class="w-[40px] md:w-[5%] flex justify-center absolute left-0 md:relative"
+          class="flex border-oc-gray-200 justify-center left-0"
           :is-last="fields.length === i + 1"
-          :is-selected="selectedRows.some((r) => getRowKey(r) === getRowKey(field))"
+          :is-selected="
+            selectedRows.some((r) => getRowKey(r) === getRowKey(field))
+          "
+          :class="[
+            isSticky ? 'shrink-0 z-10 left-0 sticky' : 'md:relative absolute',
+            fields.length !== i + 1 ? 'md:border-b' : '',
+          ]"
           variant="checkbox"
           @selected="selectRow(field)"
         />
@@ -159,7 +204,7 @@ const onClickRow = (field, header) => {
         <TableCell
           v-for="(header, j) in headers"
           :key="`${j}-${i}`"
-          class="flex"
+          class="flex border-oc-gray-200"
           :is-last="fields.length === i + 1"
           :variant="header.variant"
           :is-copy="header.isCopy"
@@ -170,7 +215,19 @@ const onClickRow = (field, header) => {
             description: field[header.description],
           }"
           :chip-options="header.chipOptions"
-          :class="header.class"
+          :class="[
+            header.class,
+            header.stickyLeft && isSelectable
+              ? 'left-[40px] md:left-[32px]'
+              : 'left-0',
+            header.stickyRight ? 'right-0' : '',
+            header.stickyLeft || header.stickyRight
+              ? 'shrink-0 sticky z-10'
+              : '',
+            fields.length !== i + 1 ? 'md:border-b' : '',
+            header.stickyLeft && !isScrollOnStart ? 'shadow-right-sticky' : '',
+            header.stickyRight && !isScrollOnEnd ? 'shadow-left-sticky' : '',
+          ]"
           :image-class="header.imageClass"
           @click="onClickRow(field, header)"
           @copied="onCopied"

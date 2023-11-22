@@ -34,7 +34,10 @@ const props = defineProps({
     },
   },
   datetime: String,
-  imageClass: String,
+  imageClass: {
+    type: String,
+    default: "h-full",
+  },
 });
 const emit = defineEmits({
   selected: [],
@@ -117,7 +120,12 @@ const copyToClipboard = async (text) => {
         <!--  IMAGE    -->
         <template v-else-if="variant === Variants.IMAGE">
           <div v-if="data" class="h-[42px] min-w-[42px] rounded mx-auto">
-            <img :class="imageClass" alt="table-img" :src="data" />
+            <img
+              :class="imageClass"
+              alt="table-img"
+              class="h-full"
+              :src="data"
+            />
           </div>
           <div
             v-else

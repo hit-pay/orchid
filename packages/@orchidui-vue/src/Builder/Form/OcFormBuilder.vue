@@ -134,11 +134,10 @@ const getFormKey = (name) => {
 };
 
 const gridArea = (name) => {
-  return `grid-area: ${getFormKey(name)}`
-}
+  return `grid-area: ${getFormKey(name)}`;
+};
 
-const className = computed(() => props.class)
-
+const className = computed(() => props.class);
 </script>
 <template>
   <div

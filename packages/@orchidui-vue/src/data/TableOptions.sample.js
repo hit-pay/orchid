@@ -104,5 +104,111 @@ const TableOptions = {
     },
   ],
 };
+const StickyTableOptions = {
+  isSelectable: true,
+  headers: [
+    {
+      key: "image",
+      variant: "image",
+      label: "Image",
+      class: "w-[80px]",
+      stickyLeft: true,
+    },
+    {
+      key: "col1",
+      variant: "content",
+      title: "title_field",
+      description: "description_field",
+      label: "Table Header",
+      class: "w-[200px]",
+    },
+    {
+      key: "col2",
+      label: "Table Header",
+      isCopy: true,
+      class: "w-[200px]",
+    },
+    {
+      key: "col3",
+      label: "Table Header",
+      variant: "datetime",
+      class: "w-[200px]",
+    },
+    {
+      key: "col4",
+      label: "Table Header",
+      class: "w-[200px]",
+    },
+    {
+      key: "col5",
+      label: "Table Header",
+      class: "w-[200px]",
+    },
+    {
+      key: "col6",
+      label: "Header",
+      class: "w-[100px]",
+    },
+    {
+      key: "col5",
+      label: "Table Header",
+      class: "w-[100px]",
+      stickyRight: true,
+    },
+  ],
+  fields: [
+    {
+      image:
+        "https://sportano.ua/img/986c30c27a3d26a3ee16c136f92f4ff5/1/9/195239323706_20-jpg/boksers-ki-krosivki-nike-hyperko-2-olympic-colorway-bili-dj4475-121-581894.jpg",
+      title_field: "Table Cell",
+      description_field: "Table Cell column two",
+      col2: "Table Cell",
+      col3: "2023-11-08T03:40:52.000000Z",
+      col4: "Table Cell column two",
+      col5: "Label",
+      col6: false,
+    },
+    {
+      image: "",
+      title_field: "Table Cell",
+      description_field: "Table Cell column two",
+      col2: "Table Cell",
+      col3: "2023-11-08T03:40:52.000000Z",
+      col4: "Table Cell column two",
+      col5: "Label",
+      col6: false,
+    },
+    {
+      image: "",
+      title_field: "Table Cell",
+      description_field: "Table Cell column two",
+      col2: "Table Cell",
+      col3: "2023-11-08T03:40:52.000000Z",
+      col4: "Table Cell column two",
+      col5: "Label",
+      col6: false,
+    },
+    {
+      image: "",
+      title_field: "Table Cell",
+      description_field: "Table Cell column two",
+      col2: "Table Cell",
+      col3: "2023-11-08T03:40:52.000000Z",
+      col4: "Table Cell column two",
+      col5: "Label",
+      col6: false,
+    },
+    {
+      image: "",
+      title_field: "Table Cell",
+      description_field: "Table Cell column two",
+      col2: "Table Cell",
+      col3: "2023-11-08T03:40:52.000000Z",
+      col4: "Table Cell column two",
+      col5: "Label",
+      col6: false,
+    },
+  ],
+};
 
-export { TableOptions };
+export { TableOptions, StickyTableOptions };
