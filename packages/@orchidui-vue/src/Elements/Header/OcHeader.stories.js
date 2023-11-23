@@ -115,7 +115,7 @@ export const SubHeaderElement = {
               <HeaderCenter class="flex-1" :is-saved="args.isSaved">
               <template #after> <span class="text-oc-text-100 ml-3">---Slot After</span></template>
               </HeaderCenter>
-              <HeaderRight :is-saved="args.isSaved">
+              <HeaderRight :is-saved="args.isSaved" :primary-props="{label: 'Update'}">
               <template #before> <span class="text-oc-text-100 ml-3">Slot Before---</span></template>
               </HeaderRight>
             </SubHeader>
