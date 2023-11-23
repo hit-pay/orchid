@@ -112,8 +112,12 @@ export const SubHeaderElement = {
               <HeaderLeft class="hidden md:flex">
                 <SampleHeaderLeft is-sub-header/>
               </HeaderLeft>
-              <HeaderCenter class="flex-1" :is-saved="args.isSaved"></HeaderCenter>
-              <HeaderRight :is-saved="args.isSaved"></HeaderRight>
+              <HeaderCenter class="flex-1" :is-saved="args.isSaved">
+              <template #after> <span class="text-oc-text-100 ml-3">---Slot After</span></template>
+              </HeaderCenter>
+              <HeaderRight :is-saved="args.isSaved">
+              <template #before> <span class="text-oc-text-100 ml-3">Slot Before---</span></template>
+              </HeaderRight>
             </SubHeader>
           </Theme>
         `,

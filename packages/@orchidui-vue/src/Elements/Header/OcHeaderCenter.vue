@@ -8,6 +8,7 @@ defineEmits(["back"]);
 <template>
   <div class="flex items-center">
     <slot>
+      <slot name="before" />
       <span
         v-if="isSaved"
         class="text-oc-text-100 flex items-center cursor-pointer"
@@ -19,6 +20,7 @@ defineEmits(["back"]);
       <span v-else class="text-oc-text-300 text-sm md:text-base">
         Unsaved changes
       </span>
+      <slot name="after" />
     </slot>
   </div>
 </template>
