@@ -27,6 +27,7 @@ export * from "./Overlay/Dropdown/OcDropdown.js";
 export * from "./Overlay/Tooltip/OcTooltip.js";
 export * from "./Overlay/Modal/OcModal.js";
 export * from "./Overlay/Popper/OcPopper.js";
+export * from "./Overlay/SupportMenu/OcSupportMenu.js";
 
 export * from "./Theme/OcTheme.js";
 
