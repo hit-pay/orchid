@@ -10,6 +10,7 @@ defineProps({
   icon: String,
   iconClasses: String,
   text: String,
+  subText: String,
 });
 const variantClasses = computed(() => ({
   default: "text-oc-text",
@@ -19,16 +20,16 @@ const variantClasses = computed(() => ({
 
 <template>
   <div
-    class="flex cursor-pointer rounded-sm gap-x-3 p-3 items-center hover:bg-oc-accent-1-50"
+    class="flex flex-col cursor-pointer rounded-sm hover:bg-oc-accent-1-50"
     :class="variantClasses[variant]"
   >
-    <Icon
-      v-if="icon"
-      class="w-5 h-5 text-oc-text-400"
-      :name="icon"
-      :class="iconClasses"
-    />
+    <div class="flex items-center gap-x-3 p-3">
+      <Icon v-if="icon" class="w-5 h-5" :name="icon" :class="iconClasses" />
 
-    <span>{{ text }}</span>
+      <span>{{ text }}</span>
+    </div>
+    <div v-if="subText" class="p-3 text-sm text-oc-text-300">
+      <span>{{ subText }}</span>
+    </div>
   </div>
 </template>
