@@ -11,6 +11,7 @@ defineProps({
   iconClasses: String,
   text: String,
   subText: String,
+  pointed: Boolean,
 });
 const variantClasses = computed(() => ({
   default: "text-oc-text",
@@ -31,5 +32,22 @@ const variantClasses = computed(() => ({
     <div v-if="subText" class="p-3 text-sm text-oc-text-300">
       <span>{{ subText }}</span>
     </div>
+    <Icon
+      v-if="icon"
+      class="text-oc-text-400"
+      :name="icon"
+      width="16"
+      height="16"
+      :class="iconClasses"
+    />
+
+    <slot>
+      <span>{{ text }}</span>
+    </slot>
+
+    <div
+      v-if="pointed"
+      class="w-[6px] aspect-square rounded-full bg-oc-error"
+    />
   </div>
 </template>

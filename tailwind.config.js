@@ -72,6 +72,7 @@ module.exports = {
         normal: "var(--oc-shadow-normal)",
         "right-sticky": "var(--oc-shadow-right-sticky)",
         "left-sticky": "var(--oc-shadow-left-sticky)",
+        tooltip: "var(--oc-shadow-tooltip)",
       },
       colors: {
         // first to use this

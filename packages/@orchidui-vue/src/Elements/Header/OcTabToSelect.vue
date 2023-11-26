@@ -20,11 +20,13 @@ const activeMenu = computed(() =>
     <div
       v-for="item in menus"
       :key="item.value"
-      class="p-7 text-oc-text-500 hover:text-oc-accent-1 cursor-pointer"
-      :style="{
-        borderColor: activeMenu.color,
-      }"
-      :class="[item.value === modelValue ? 'font-medium border-b-[3px]' : '']"
+      class="h-[36px] px-7 flex items-center justify-center rounded-full text-oc-text-500 hover:text-oc-accent-1 cursor-pointer"
+      :class="[
+        item.sidebarClass,
+        item.value === modelValue
+          ? 'font-medium text-white bg-[var(--oc-sidebar-menu-active-icon-active)]'
+          : '',
+      ]"
       @click="
         $emit('changePath', item.path);
         $emit('update:modelValue', item.value);
