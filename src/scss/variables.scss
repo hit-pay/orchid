@@ -124,6 +124,8 @@
   --oc-border-full: 9999px;
 
   --oc-shadow-normal: 0px 3px 22px 0px rgba(38, 42, 50, 0.09);
+  --oc-shadow-tooltip: 0px 3px 22px 0px rgba(38, 42, 50, 0.09),
+    0px 1px 3px 0px rgba(0, 0, 0, 0.1);
   --oc-shadow-right-sticky: 2px 0px 2px 0px rgba(0, 0, 0, 0.08);
   --oc-shadow-left-sticky: -2px 0px 2px 0px rgba(0, 0, 0, 0.08);
 }
