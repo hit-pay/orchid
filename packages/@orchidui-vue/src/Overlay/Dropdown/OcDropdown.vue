@@ -24,6 +24,7 @@ const props = defineProps({
   },
   popperOptions: Object,
   modelValue: Boolean,
+  preventClickOutside: Boolean,
 });
 const popper = ref();
 const toggleDropdown = async () => {
@@ -33,7 +34,8 @@ const toggleDropdown = async () => {
   emit("update:modelValue", !props.modelValue);
 };
 const onClickOutside = () => {
-  if (props.modelValue) emit("update:modelValue", false);
+  if (props.modelValue && !props.preventClickOutside)
+    emit("update:modelValue", false);
 };
 </script>
 

@@ -55,6 +55,7 @@ const onFirstClose = (isOpen) => {
       :model-value="modelValue"
       :popper-options="popperOptions"
       :distance="8"
+      :prevent-click-outside="isFirstAppear"
       @update:model-value="
         $emit('update:modelValue', $event);
         onFirstClose($event);
@@ -75,7 +76,7 @@ const onFirstClose = (isOpen) => {
             <span class="font-medium">{{ title }}</span>
             <div
               class="p-1 absolute -top-2 -right-2 cursor-pointer"
-              @click="$emit('update:modelValue', false)"
+              @click="isFirstAppear = false"
             >
               <Icon width="14" height="14" class="text-oc-text-400" name="x" />
             </div>
