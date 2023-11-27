@@ -37,6 +37,7 @@ export const OcAccordion = {
             <Accordion
                 v-model:isExpandable="isOpen"
                 :header="args.header"
+                :header-style="'bg-oc-gray-50'"
                 :body="args.body"
                 :icon="args.icon"
                 :showIcon="args.showIcon"
