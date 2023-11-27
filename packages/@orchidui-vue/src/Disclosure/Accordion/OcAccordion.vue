@@ -9,7 +9,15 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  headerStyle: {
+    type: String,
+    default: "",
+  },
   body: {
+    type: String,
+    default: "",
+  },
+  bodyStyle: {
     type: String,
     default: "",
   },
@@ -55,11 +63,12 @@ watch(() => props.isExpandable, changeAccordionHeight);
     <div>
       <div
         class="border-oc-accent-1-50 py-3 text-sm border relative z-10 justify-between px-4 gap-x-3 flex hover:border-oc-gray-200 items-center w-full text-oc-text"
-        :class="
+        :class="[
           isExpandable
             ? 'rounded-t border-oc-gray-200'
-            : 'rounded border-transparent'
-        "
+            : 'rounded border-transparent',
+          headerStyle,
+        ]"
         @click="
           !props.isDisabled
             ? $emit('update:isExpandable', !props.isExpandable)
@@ -85,7 +94,10 @@ watch(() => props.isExpandable, changeAccordionHeight);
       >
         <div
           class="text-oc-text text-sm p-4 rounded-b relative z-0 border-x border-b"
-          :class="isExpandable ? 'border-oc-gray-200' : ' border-transparent'"
+          :class="[
+            isExpandable ? 'border-oc-gray-200' : ' border-transparent',
+            bodyStyle,
+          ]"
         >
           <slot name="body">{{ body }}</slot>
         </div>
