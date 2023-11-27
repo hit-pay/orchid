@@ -25,19 +25,19 @@ export const HeaderElement = {
       {
         label: "Payments",
         value: "payments",
-        color: "#002771",
+        sidebarClass: "layout-payment",
         path: "payments",
       },
       {
         label: "Point of Sale",
         value: "point_of_sale",
-        color: "#FDB012",
+        sidebarClass: "layout-pos",
         path: "point_of_sale",
       },
       {
         label: "Online Store",
         value: "online_store",
-        color: "#0EA81B",
+        sidebarClass: "layout-online-store",
         path: "online_store",
       },
     ],
@@ -113,10 +113,10 @@ export const SubHeaderElement = {
                 <SampleHeaderLeft is-sub-header/>
               </HeaderLeft>
               <HeaderCenter class="flex-1" :is-saved="args.isSaved">
-              <template #after> <span class="text-oc-text-100 ml-3">---Slot After</span></template>
+                <template #after><span class="text-oc-text-100 ml-3">---Slot After</span></template>
               </HeaderCenter>
               <HeaderRight :is-saved="args.isSaved" :primary-props="{label: 'Update'}">
-              <template #before> <span class="text-oc-text-100 ml-3">Slot Before---</span></template>
+                <template #before><span class="text-oc-text-100 ml-3">Slot Before---</span></template>
               </HeaderRight>
             </SubHeader>
           </Theme>
