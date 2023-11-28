@@ -30,7 +30,7 @@ const onChange = () => {
         <div
           v-for="element in list"
           :key="element.id"
-          class="bg-oc-accent-1-50 hover:bg-oc-gray-50 text-oc-text-500 p-4 flex rounded"
+          class="bg-oc-accent-1-50 hover:bg-oc-gray-50 text-oc-text-500 p-4 flex rounded hover:border border-gray-200"
         >
           <span class="cursor-move drag-el">
             <Icon name="draggable" />
