@@ -61,7 +61,7 @@ const removeOption = (value) => {
 };
 
 const setNewValue = (value) => {
-  if (!value) {
+  if (!value?.trim()) {
     return;
   }
 
