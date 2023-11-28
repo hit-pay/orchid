@@ -73,27 +73,27 @@ export const OcDraggableCard = {
       const model = ref([
         {
           id: "123",
-          image: "/images/cover.png",
+          url: "/images/cover.png",
         },
         {
           id: "234",
-          image: "/images/cover.png",
+          url: "/images/cover.png",
         },
         {
           id: "456",
-          image: "/images/cover.png",
+          url: "/images/cover.png",
         },
         {
           id: "272",
-          image: "/images/cover.png",
+          url: "/images/cover.png",
         },
         {
           id: "667",
-          image: "/images/cover.png",
+          url: "/images/cover.png",
         },
         {
           id: "781",
-          image: "/images/cover.png",
+          url: "/images/cover.png",
         },
       ]);
       return { args, model };

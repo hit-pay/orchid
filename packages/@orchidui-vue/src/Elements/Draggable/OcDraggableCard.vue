@@ -8,6 +8,10 @@ defineProps({
     type: String,
     default: "h-[110px] w-[110px]",
   },
+  imageField: {
+    type: String,
+    default: "url",
+  },
 });
 defineEmits({
   "update:modelValue": [],
@@ -29,7 +33,7 @@ const isDropdownOpen = ref(false);
     >
       <div
         class="absolute w-full h-full top-0 left-0 rounded"
-        :style="`background-image: url(${element.image})`"
+        :style="`background-image: url(${element[imageField]})`"
       >
         <Dropdown
           v-model="isDropdownOpen"
