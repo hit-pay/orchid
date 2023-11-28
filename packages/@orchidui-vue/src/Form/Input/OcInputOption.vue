@@ -69,7 +69,7 @@ const setNewValue = (value) => {
   query.value = "";
 
   emit("update:modelValue", localValue.value);
-  emit('option-added', value);
+  emit("option-added", value);
 };
 </script>
 
