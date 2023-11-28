@@ -84,7 +84,7 @@ const iconColor = computed(() => {
   >
     <slot>
       <div class="flex gap-3 items-center">
-        <Tooltip v-if="icon" position="top" :distance="10">
+        <Tooltip v-if="iconTooltip && icon" position="top" :distance="10">
           <Icon width="18" height="18" :name="icon" />
           <template #popper>
             <div class="px-3 py-2 text-oc-text-400 text-sm font-medium">
@@ -92,6 +92,7 @@ const iconColor = computed(() => {
             </div>
           </template>
         </Tooltip>
+        <Icon v-else-if="icon" width="18" height="18" :name="icon" />
         {{ label }}
       </div>
     </slot>
