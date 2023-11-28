@@ -1,4 +1,5 @@
 import Select from "./OcSelect.vue";
 import Option from "./OcOption.vue";
 import GroupOptions from "./OcGroupOptions.vue";
-export { Select, Option, GroupOptions };
+import InputSelect from "./OcInputSelect.vue";
+export { Select, Option, GroupOptions, InputSelect };

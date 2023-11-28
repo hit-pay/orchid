@@ -82,13 +82,12 @@ const iconColor = computed(() => {
     :class="className"
   >
     <slot>
-      <div class="flex items-center">
+      <div class="flex gap-3 items-center">
         <Icon
           v-if="icon"
           width="18"
           height="18"
           :name="icon"
-          class="mr-3"
         />
 
         {{ label }}

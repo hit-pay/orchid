@@ -1,4 +1,4 @@
-import { Theme, Select, Option, GroupOptions } from "@/orchidui";
+import { Theme, Select, Option, InputSelect, GroupOptions } from "@/orchidui";
 import { ref } from "vue";
 
 export default {
@@ -270,6 +270,28 @@ export const Multiple = {
             </Select>
             <div class="mt-4">Selected value: {{ selectedGroups }}</div>
           </Theme>
+        `,
+  }),
+};
+
+export const InputMultipleSelect = {
+  render: () => ({
+    components: { Theme, InputSelect },
+    setup() {
+      const selectedOption = ref(['Option 1', 'options 2']);
+      return { selectedOption };
+    },
+    template: `
+      <Theme colorMode="light">
+        <InputSelect
+            v-model="selectedOption"
+            label="Label"
+            hint="Hint"
+            placeholder="Placeholder"
+        />
+
+        <div class="mt-4">Selected value: {{ selectedOption }}</div>
+      </Theme>
         `,
   }),
 };
