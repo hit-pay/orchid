@@ -27,6 +27,7 @@ export const HasIcon = {
     template: `
       <Theme class="flex gap-3 items-center mb-3">
         <Chip label="Gray" variant="gray" icon="plus" />
+        <Chip label="Success" variant="success" icon="check" icon-tooltip="Icon Tooltip" />
       </Theme>
     `,
   }),

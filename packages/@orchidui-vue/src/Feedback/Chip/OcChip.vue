@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from "vue";
-import { Icon } from "@/orchidui";
+import { Icon, Tooltip } from "@/orchidui";
 const props = defineProps({
   variant: {
     type: String,
@@ -8,6 +8,7 @@ const props = defineProps({
   },
   label: String,
   icon: String,
+  iconTooltip: String,
   closable: Boolean,
 });
 defineEmits({
@@ -83,8 +84,14 @@ const iconColor = computed(() => {
   >
     <slot>
       <div class="flex gap-3 items-center">
-        <Icon v-if="icon" width="18" height="18" :name="icon" />
-
+        <Tooltip v-if="icon" position="top" :distance="10">
+          <Icon width="18" height="18" :name="icon" />
+          <template #popper>
+            <div class="px-3 py-2 text-oc-text-400 text-sm font-medium">
+              {{ iconTooltip }}
+            </div>
+          </template>
+        </Tooltip>
         {{ label }}
       </div>
     </slot>
