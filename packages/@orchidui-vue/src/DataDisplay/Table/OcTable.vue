@@ -33,6 +33,7 @@ const emit = defineEmits({
 });
 
 const isSelectable = computed(() => props.options.isSelectable);
+const isCursorPointer = computed(() => props.options.isCursorPointer ?? true);
 const fields = computed(() => props.options.fields);
 const headers = computed(() => props.options.headers);
 
@@ -178,12 +179,13 @@ onMounted(() => onScroll());
       <div
         v-for="(field, i) in fields"
         :key="i"
-        class="flex relative group/row md:p-0 py-3 cursor-pointer"
+        class="flex relative group/row md:p-0 py-3"
         :class="{
           'border-b md:border-b-0': fields.length !== i + 1,
           'pl-[40px]': isSelectable,
           'flex-wrap': !isSticky,
           'w-max !p-0': isSticky,
+          'cursor-pointer': isCursorPointer,
         }"
       >
         <TableCell
