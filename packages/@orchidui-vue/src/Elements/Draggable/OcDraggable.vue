@@ -3,13 +3,18 @@ import { VueDraggableNext } from "vue-draggable-next";
 import { Icon } from "@/orchidui";
 import { ref } from "vue";
 
-const props = defineProps("modelValue");
-const emit = defineEmits("update:modelValue");
+const props = defineProps({
+  modelValue: Array
+});
+
+const emit = defineEmits({
+  "update:modelValue": []
+});
 
 const list = ref(props.modelValue);
 
 const onChange = () => {
-  emit("update:modelValue", this.list);
+  emit("update:modelValue", list.value);
 };
 </script>
 <template>
@@ -31,8 +36,8 @@ const onChange = () => {
             <Icon name="draggable" />
           </span>
           <span class="ml-2">{{ element.label }}</span>
-          <span>
-            <Icon name="dot-vertical" />
+          <span class="ml-auto">
+            <Icon name="dots-vertical" />
           </span>
         </div>
       </template>

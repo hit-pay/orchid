@@ -44,8 +44,9 @@ export const OcDraggable = {
     },
     template: `
           <Theme>
-            <div class="w-full h-[200px]">
-                {{ model}}
+            <div class="p-4">{{ model}}</div>
+            <div class="w-full min-h-[200px]">
+               
               <Draggable v-model="model"></Draggable>
             </div>
           </Theme>
