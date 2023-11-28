@@ -5,7 +5,7 @@ import DropdownItem from "../../Overlay/Dropdown/OcDropdownItem.vue";
 import Icon from "../../MediaAndIcons/Icon/OcIcon.vue";
 import { ref } from "vue";
 import BaseInput from "../BaseInput/OcBaseInput.vue";
-import { InputOption } from '@/orchidui';
+import { InputOption } from "@/orchidui";
 
 export default {
   component: OCInput,
@@ -297,12 +297,11 @@ export const Leading = {
   }),
 };
 
-
 export const InputOptions = {
   render: () => ({
     components: { Theme, InputOption },
     setup() {
-      const selectedOption = ref(['Option 1', 'options 2']);
+      const selectedOption = ref(["Option 1", "options 2"]);
       return { selectedOption };
     },
     template: `

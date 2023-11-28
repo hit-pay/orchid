@@ -1,10 +1,5 @@
 <script setup>
-import {
-  BaseInput,
-  Input,
-  Chip,
-  Icon,
-} from "@/orchidui";
+import { BaseInput, Input, Chip, Icon } from "@/orchidui";
 import { computed, ref } from "vue";
 
 const props = defineProps({
@@ -42,9 +37,7 @@ const emit = defineEmits({
   "update:modelValue": [],
 });
 
-const localValue = ref(
-  props.modelValue || []
-);
+const localValue = ref(props.modelValue || []);
 
 const inputRef = ref();
 
@@ -54,11 +47,11 @@ const areAllOptionsVisible = ref(false);
 const isFocused = ref(false);
 
 const optionsVisible = computed(() => {
-  if (areAllOptionsVisible.value){
+  if (areAllOptionsVisible.value) {
     return localValue.value;
   }
 
-  return localValue.value.slice(0, props.maxVisibleOptions)
+  return localValue.value.slice(0, props.maxVisibleOptions);
 });
 
 const removeOption = (value) => {
@@ -68,10 +61,10 @@ const removeOption = (value) => {
 
 const setNewValue = (value) => {
   localValue.value.push(value);
-  query.value = '';
+  query.value = "";
 
   emit("update:modelValue", localValue.value);
-}
+};
 </script>
 
 <template>
@@ -89,16 +82,13 @@ const setNewValue = (value) => {
         {{ label }}:
       </label>
 
-      <div
-        class="flex items-center gap-x-1 w-full"
-        @click="inputRef.focus()"
-      >
+      <div class="flex items-center gap-x-1 w-full" @click="inputRef.focus()">
         <div
           class="border min-h-[36px] py-3 w-full px-3 flex justify-between items-center cursor-pointer gap-x-3 rounded"
           :class="{
-          'border-oc-error': errorMessage && !isDisabled,
-          'pointer-events-none bg-oc-bg-dark': isDisabled,
-        }"
+            'border-oc-error': errorMessage && !isDisabled,
+            'pointer-events-none bg-oc-bg-dark': isDisabled,
+          }"
         >
           <div class="flex flex-wrap gap-2">
             <Chip

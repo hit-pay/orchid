@@ -83,12 +83,7 @@ const iconColor = computed(() => {
   >
     <slot>
       <div class="flex gap-3 items-center">
-        <Icon
-          v-if="icon"
-          width="18"
-          height="18"
-          :name="icon"
-        />
+        <Icon v-if="icon" width="18" height="18" :name="icon" />
 
         {{ label }}
       </div>
