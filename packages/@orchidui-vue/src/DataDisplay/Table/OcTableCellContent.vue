@@ -14,7 +14,7 @@ defineProps({
       :class="important ? 'font-medium' : 'font-regular'"
     >
       <a v-if="href" :href="href" target="_blank">{{ title }}</a>
-      <template v-else>{{title}}</template>
+      <template v-else>{{ title }}</template>
       <span v-if="!title">-</span>
     </span>
     <span class="overflow-hidden text-ellipsis text-oc-text-400 text-sm">

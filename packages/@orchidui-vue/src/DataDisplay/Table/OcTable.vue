@@ -213,7 +213,7 @@ onMounted(() => onScroll());
             important: header.important ?? false,
             title: field[header.title],
             description: field[header.description],
-            href: field[header.href]
+            href: field[header.href],
           }"
           :chip-options="header.chipOptions"
           :class="[
