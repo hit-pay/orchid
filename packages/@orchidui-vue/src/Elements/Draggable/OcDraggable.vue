@@ -1,14 +1,13 @@
 <script setup>
 import { VueDraggableNext } from "vue-draggable-next";
-import { Icon } from "@/orchidui";
 import { ref } from "vue";
 
 const props = defineProps({
-  modelValue: Array
+  modelValue: Array,
 });
 
 const emit = defineEmits({
-  "update:modelValue": []
+  "update:modelValue": [],
 });
 
 const list = ref(props.modelValue);
@@ -18,29 +17,9 @@ const onChange = () => {
 };
 </script>
 <template>
-  <VueDraggableNext
-    class="grid gap-3"
-    handle=".drag-el"
-    :list="list"
-    @change="onChange"
-  >
+  <VueDraggableNext handle=".drag-el" :list="list" @change="onChange">
     <transition-group name="list">
-      <slot v-if="$slots.list" name="list" :list="list" />
-      <template v-else>
-        <div
-          v-for="element in list"
-          :key="element.id"
-          class="bg-oc-accent-1-50 hover:bg-oc-gray-50 text-oc-text-500 p-4 flex rounded hover:border border-gray-200"
-        >
-          <span class="cursor-move drag-el">
-            <Icon name="draggable" />
-          </span>
-          <span class="ml-2">{{ element.label }}</span>
-          <span class="ml-auto">
-            <Icon name="dots-vertical" />
-          </span>
-        </div>
-      </template>
+      <slot :list="list"></slot>
     </transition-group>
   </VueDraggableNext>
 </template>
@@ -48,5 +27,8 @@ const onChange = () => {
 <style>
 .grabbing * {
   cursor: grabbing;
+}
+.list-move {
+  transition: transform 0.5s;
 }
 </style>
