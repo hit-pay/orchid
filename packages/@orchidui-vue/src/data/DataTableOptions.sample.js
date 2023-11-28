@@ -63,6 +63,7 @@ const DataTableOptions = {
   },
   tableOptions: {
     isSelectable: true,
+    // isCursorPointer: false,
     headers: [
       {
         key: "image",
@@ -85,9 +86,9 @@ const DataTableOptions = {
         variant: "content",
         label: "Table Header",
         title: "col3Title",
+        href: "col3Url",
         description: "col3Description",
         isCopy: true,
-        href: "col3Url",
         class: "w-1/2 md:w-[12%]",
       },
       {
