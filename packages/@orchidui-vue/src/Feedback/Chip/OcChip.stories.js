@@ -25,9 +25,9 @@ export const HasIcon = {
   render: () => ({
     components: { Chip, Theme },
     template: `
-          <Theme class="flex gap-3 items-center mb-3">
-            <Chip label="Gray" icon="plus" />
-          </Theme>
-        `,
+      <Theme class="flex gap-3 items-center mb-3">
+        <Chip label="Gray" variant="gray" icon="plus" />
+      </Theme>
+    `,
   }),
 };
