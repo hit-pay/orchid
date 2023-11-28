@@ -1,5 +1,6 @@
+<!-- TODO : add v-model for toggle -->
 <script setup>
-import { Input, Toggle, Button, Icon, Tooltip } from "@/orchidui";
+import { Toggle, Icon, Tooltip } from "@/orchidui";
 
 defineProps({
   title: String,
@@ -12,7 +13,6 @@ defineProps({
 </script>
 
 <template>
-  <div class="flex flex-col gap-y-3">
     <div class="flex">
       <div class="flex flex-col gap-y-1 flex-1">
         <div class="font-medium gap-x-3 flex items-center">
@@ -38,14 +38,4 @@ defineProps({
       </div>
       <Toggle v-if="isToggle" />
     </div>
-
-    <div class="flex gap-x-3">
-      <Input
-        placeholder="Placeholder"
-        class="w-auto flex-1"
-        v-bind="inputProps"
-      />
-      <Button v-if="buttonProps" v-bind="buttonProps" />
-    </div>
-  </div>
 </template>
