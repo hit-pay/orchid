@@ -35,6 +35,7 @@ const props = defineProps({
 
 const emit = defineEmits({
   "update:modelValue": [],
+  "option-added": [],
 });
 
 const localValue = ref(props.modelValue || []);
@@ -60,10 +61,15 @@ const removeOption = (value) => {
 };
 
 const setNewValue = (value) => {
+  if (!value?.trim()) {
+    return;
+  }
+
   localValue.value.push(value);
   query.value = "";
 
   emit("update:modelValue", localValue.value);
+  emit("option-added", value);
 };
 </script>
 
