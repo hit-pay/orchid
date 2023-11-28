@@ -5,6 +5,7 @@ import DropdownItem from "../../Overlay/Dropdown/OcDropdownItem.vue";
 import Icon from "../../MediaAndIcons/Icon/OcIcon.vue";
 import { ref } from "vue";
 import BaseInput from "../BaseInput/OcBaseInput.vue";
+import { InputOption } from '@/orchidui';
 
 export default {
   component: OCInput,
@@ -292,6 +293,29 @@ export const Leading = {
               </OCInput>
             </div>
           </Theme>
+        `,
+  }),
+};
+
+
+export const InputOptions = {
+  render: () => ({
+    components: { Theme, InputOption },
+    setup() {
+      const selectedOption = ref(['Option 1', 'options 2']);
+      return { selectedOption };
+    },
+    template: `
+      <Theme colorMode="light">
+        <InputOption
+            v-model="selectedOption"
+            label="Label"
+            hint="Hint"
+            placeholder="Placeholder"
+        />
+
+        <div class="mt-4">Selected value: {{ selectedOption }}</div>
+      </Theme>
         `,
   }),
 };
