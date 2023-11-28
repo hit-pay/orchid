@@ -20,3 +20,14 @@ export const VariantColor = {
         `,
   }),
 };
+
+export const HasIcon = {
+  render: () => ({
+    components: { Chip, Theme },
+    template: `
+          <Theme class="flex gap-3 items-center mb-3">
+            <Chip label="Primary" icon="plus" />
+          </Theme>
+        `,
+  }),
+};

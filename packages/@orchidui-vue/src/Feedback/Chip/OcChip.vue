@@ -7,6 +7,7 @@ const props = defineProps({
     default: "",
   },
   label: String,
+  icon: String,
   closable: Boolean,
 });
 defineEmits({
@@ -80,8 +81,19 @@ const iconColor = computed(() => {
     class="rounded-full flex items-center gap-x-3 py-1 px-3 text-sm leading-[20px]"
     :class="className"
   >
-    <template v-if="label">{{ label }}</template>
-    <slot v-else />
+    <slot>
+      <div class="flex items-center">
+        <Icon
+          v-if="icon"
+          width="18"
+          height="18"
+          :name="icon"
+          class="mr-3"
+        />
+
+        {{ label }}
+      </div>
+    </slot>
     <Icon
       v-if="closable"
       width="18"
