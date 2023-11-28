@@ -33,7 +33,7 @@ const emit = defineEmits({
 });
 
 const isSelectable = computed(() => props.options.isSelectable);
-const isCursorPointer = computed(() => props.options.isCursorPointer);
+const isCursorPointer = computed(() => props.options.isCursorPointer ?? true);
 const fields = computed(() => props.options.fields);
 const headers = computed(() => props.options.headers);
 
