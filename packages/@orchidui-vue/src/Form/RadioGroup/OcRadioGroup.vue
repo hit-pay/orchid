@@ -34,6 +34,7 @@ const onInput = (value) => {
         v-for="(r, i) in radio"
         :id="r.value"
         :key="i"
+        class="!w-fit"
         :model-value="r.value"
         :label="r.label"
         :is-error="!!errorMessage"

@@ -24,7 +24,7 @@ export const Default = {
                 <template #menu>
                   <div class="flex flex-col">
                     <div class="p-2 border-b border-gray-200">
-                      <DropdownItem text="Menu" icon="pencil"/>
+                      <DropdownItem text="Menu" sub-text="description" />
                       <DropdownItem text="Menu" icon="pencil"/>
                     </div>
                     <div class="p-2">
