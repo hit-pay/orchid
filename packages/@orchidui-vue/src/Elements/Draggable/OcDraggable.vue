@@ -1,15 +1,18 @@
 <template>
-  <VueDraggableNext :list="list" handle=".drag-el" @change="updated">
+  <VueDraggableNext class="grid gap-3" :list="list" handle=".drag-el" @change="updated">
     <transition-group name="list">
       <slot v-if="$slots.list" name="list" :list="list" />
       <template v-else>
-        <div v-for="element in list" :key="element" text class="mb-3">
-          <div class="flex w-full">
+        <div 
+          v-for="element in list" :key="element.id"
+           class="bg-oc-accent-1-50 hover:bg-oc-gray-50 text-oc-text-500 p-4 flex rounded" >
             <span class="cursor-move drag-el">
-              <Icon name="dragable" />
+              <Icon name="draggable" />
             </span>
             <span class="ml-2">{{ element.label }}</span>
-          </div>
+            <span>
+              <Icon name="dot-vertical" />
+            </span>
         </div>
       </template>
     </transition-group>
