@@ -104,7 +104,7 @@ export const Default = {
                 />
               </template>
               <template #col1="{ item }">
-                <TableCellContent important :title="item.title" :description="item.descriptions"/>
+                <TableCellContent important :title="item.imageTitle" :description="item.imageDescription"/>
               </template>
               <template #col4="{ data }">
                 <span class="text-oc-text-400 text-sm">{{ data }}</span>

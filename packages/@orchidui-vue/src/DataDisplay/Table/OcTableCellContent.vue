@@ -3,6 +3,7 @@ defineProps({
   important: Boolean,
   title: String,
   description: String,
+  href: String,
 });
 </script>
 
@@ -12,7 +13,8 @@ defineProps({
       class="overflow-hidden text-ellipsis text-oc-text"
       :class="important ? 'font-medium' : 'font-regular'"
     >
-      {{ title }}
+      <a v-if="href" :href="href" target="_blank">{{ title }}</a>
+      <template v-else>{{title}}</template>
       <span v-if="!title">-</span>
     </span>
     <span class="overflow-hidden text-ellipsis text-oc-text-400 text-sm">
