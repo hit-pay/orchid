@@ -49,7 +49,14 @@ export const OcDraggableList = {
           <Theme>
             <div class="p-4">{{ model}}</div>
             <div class="w-full min-h-[200px]">
-              <DraggableList v-model="model"></DraggableList>
+              <DraggableList v-model="model">
+                <template #before-action="{item}">
+                    slot before action { {{item.id}} }
+                </template>
+                <template #action="{item}">
+                    Action for {{item.id}}
+                </template>
+              </DraggableList>
             </div>
           </Theme>
         `,
@@ -66,27 +73,27 @@ export const OcDraggableCard = {
       const model = ref([
         {
           id: "123",
-          label: "123 Label ",
+          image: "/images/cover.png",
         },
         {
           id: "234",
-          label: "234 Label ",
+          image: "/images/cover.png",
         },
         {
           id: "456",
-          label: "456 Label ",
+          image: "/images/cover.png",
         },
         {
           id: "272",
-          label: "272 Label ",
+          image: "/images/cover.png",
         },
         {
           id: "667",
-          label: "667 Label ",
+          image: "/images/cover.png",
         },
         {
           id: "781",
-          label: "781 Label ",
+          image: "/images/cover.png",
         },
       ]);
       return { args, model };
@@ -99,6 +106,9 @@ export const OcDraggableCard = {
               v-model="model" 
               class="grid-cols-4"
               >
+                <template #action="{item}">
+                   Action for {{item.id}}
+                </template>
               </DraggableCard>
             </div>
           </Theme>
