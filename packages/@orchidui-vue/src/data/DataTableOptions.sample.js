@@ -63,7 +63,7 @@ const DataTableOptions = {
   },
   tableOptions: {
     isSelectable: true,
-    // isCursorPointer: false,
+    isCursorPointer: true,
     headers: [
       {
         key: "image",
