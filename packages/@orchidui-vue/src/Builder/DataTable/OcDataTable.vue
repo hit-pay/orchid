@@ -61,7 +61,11 @@ const filterOptions = computed(() => {
 const isDropdownOpened = ref(false);
 const filterTab = ref(props.filter[filterOptions.value?.tabs?.key]);
 const currentPage = ref(props.filter.page);
-const perPage = ref(props.filter.per_page);
+const perPage = ref(
+  filterOptions.value?.per_page?.key
+    ? props.filter[filterOptions.value?.per_page?.key]
+    : props.filter.per_page,
+);
 const defaultQuery =
   props.filter[filterOptions.value?.search?.key]?.trim() ?? "";
 const queries = ref(defaultQuery ? defaultQuery.split(",") : []);
@@ -136,14 +140,17 @@ const removeQuery = (query) => {
   applyFilter();
 };
 
-const filterData = ref(props.filter ?? {});
+const filterData = ref(
+  props.filter ?? {
+    page: 1,
+  },
+);
 
 const removeAllQueryFilter = () => {
   queries.value = [];
-  filterData.value = {
-    page: 1,
-    per_page: perPage.value,
-  };
+  filterData.value.page = 1;
+  filterData.value[filterOptions.value?.per_page?.key] = perPage.value;
+  //
   applyFilter();
 };
 
@@ -156,7 +163,12 @@ const applyFilter = (filterForm = null, isChangePage = false) => {
     currentPage.value = 1;
   }
   filterData.value.page = currentPage.value;
-  filterData.value.per_page = perPage.value;
+
+  if (filterOptions.value?.per_page) {
+    filterData.value[filterOptions.value.per_page.key] = filterTab.value;
+  } else {
+    filterData.value.per_page = perPage.value;
+  }
 
   if (filterOptions.value?.tabs) {
     filterData.value[filterOptions.value.tabs.key] = filterTab.value;
@@ -184,9 +196,10 @@ const displayFilterData = computed(() => {
     Object.keys(filterData.value).forEach((name) => {
       const filterTabKey = filterOptions.value?.tabs?.key;
       const filterSearchKey = filterOptions.value?.search?.key;
+      const filterPerPageKey = filterOptions.value?.per_page?.key ?? "per_page";
       if (
         name !== "page" &&
-        name !== "per_page" &&
+        name !== filterPerPageKey &&
         name !== filterTabKey &&
         name !== filterSearchKey
       ) {
@@ -206,7 +219,7 @@ const displayFilterData = computed(() => {
         if (filterData.value[name]) {
           let optionLabel = filterData.value[name];
 
-          if (option.props.options) {
+          if (option?.props.options) {
             const selectedValuesInArray = option.props.multiple
               ? filterData.value[name]
               : [filterData.value[name]];
@@ -222,7 +235,7 @@ const displayFilterData = computed(() => {
           }
 
           display.push({
-            label: `${option.props.label} : ${optionLabel}`,
+            label: `${option?.props.label} : ${optionLabel}`,
             name: name,
           });
         }
