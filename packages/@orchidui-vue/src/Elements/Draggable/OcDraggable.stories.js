@@ -37,6 +37,18 @@ export const OcDraggableList = {
           icon: "top-banner",
           label: "456 Label ",
           isToggle: true,
+          children: [
+            {
+              id: "123",
+              icon: "banner",
+              label: "123 Label ",
+            },
+            {
+              id: "234",
+              icon: "banner",
+              label: "234 Label ",
+            },
+          ]
         },
         {
           id: "272",

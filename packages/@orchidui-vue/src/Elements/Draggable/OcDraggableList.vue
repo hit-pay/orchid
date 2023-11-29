@@ -1,3 +1,4 @@
+<!-- TODO : group not support nested dynamic -->
 <script setup>
 import Draggable from "./OcDraggable.vue";
 import { Icon, Dropdown } from "@/orchidui";
