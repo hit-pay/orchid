@@ -146,7 +146,7 @@ const DataTableOptions = {
 
 const Filter = {
   page: 1,
-  per_page: 10,
+  perPage: 10,
 };
 
 export { DataTableOptions, Filter };
