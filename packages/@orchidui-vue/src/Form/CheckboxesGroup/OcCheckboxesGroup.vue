@@ -45,6 +45,7 @@ const toggleCheckbox = (value) => {
         :value="checkbox.value"
         :is-error="!!errorMessage"
         :disabled="isDisabled"
+        class="!w-fit"
         :model-value="isSelectedCheckbox(checkbox.value)"
         @update:model-value="toggleCheckbox(checkbox.value)"
       />
