@@ -297,6 +297,7 @@ const displayFilterData = computed(() => {
                   :json-form="filterOptions.form ?? []"
                   :grid="filterOptions.grid ?? {}"
                   :values="props.filter"
+                  :actions="filterOptions.actions"
                   @apply-filter="applyFilter($event)"
                   @filter-fields-changed="emit('filter-fields-changed', $event)"
                   @cancel="isDropdownOpened = false"

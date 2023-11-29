@@ -13,6 +13,9 @@ const props = defineProps({
   values: {
     type: Object,
   },
+  actions: {
+    type: Object,
+  },
   grid: Object,
 });
 
@@ -49,6 +52,14 @@ const onUpdateForm = (form, value = null) => {
 const filterAdded = computed(() => {
   return Object.values(valuesData.value).length > 0;
 });
+
+const applyButtonLabel = computed(
+  () => props.actions?.applyButton?.label || "Apply",
+);
+const cancelButtonLabel = computed(
+  () => props.actions?.cancelButton?.label || "Cancel",
+);
+
 onMounted(() => {
   valuesData.value = { ...props.values };
 });
@@ -86,13 +97,13 @@ const applyFilter = () => {
       <Button
         class="w-full"
         variant="secondary"
-        label="Cancel"
+        :label="cancelButtonLabel"
         @click="$emit('cancel')"
       />
       <Button
         class="w-full"
         :is-disabled="!filterAdded"
-        label="Apply"
+        :label="applyButtonLabel"
         @click="applyFilter"
       />
     </div>
