@@ -17,7 +17,7 @@ const DataTableOptions = {
     },
     actions: {
       applyButton: {
-        label: '100 results',
+        label: "100 results",
       },
     },
     search: {

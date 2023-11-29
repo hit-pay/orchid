@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref, useAttrs } from "vue";
 import { BaseInput, Icon } from "@/orchidui";
-import { pickEventListeners } from '@/orchidui/Form/Input/inputHelper.js';
+import { pickEventListeners } from "@/orchidui/Form/Input/inputHelper.js";
 
 const props = defineProps({
   disabled: {
@@ -138,7 +138,10 @@ const inputClasses = computed(() => [
             :disabled="disabled"
             class="h-7 outline-none w-full text-oc-text disabled:bg-transparent placeholder:font-normal placeholder:text-oc-text-300 bg-oc-bg-light"
             v-bind="eventListeners"
-            @focus="isFocused = true; $emit('focus')"
+            @focus="
+              isFocused = true;
+              $emit('focus');
+            "
             @blur="
               isFocused = false;
               $emit('blur');

@@ -53,8 +53,12 @@ const filterAdded = computed(() => {
   return Object.values(valuesData.value).length > 0;
 });
 
-const applyButtonLabel = computed(() => props.actions?.applyButton?.label || 'Apply')
-const cancelButtonLabel = computed(() => props.actions?.cancelButton?.label || 'Cancel')
+const applyButtonLabel = computed(
+  () => props.actions?.applyButton?.label || "Apply",
+);
+const cancelButtonLabel = computed(
+  () => props.actions?.cancelButton?.label || "Cancel",
+);
 
 onMounted(() => {
   valuesData.value = { ...props.values };
