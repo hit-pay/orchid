@@ -2,6 +2,7 @@ import { Theme } from "@/orchidui";
 
 import DraggableList from "./OcDraggableList.vue";
 import DraggableCard from "./OcDraggableCard.vue";
+import { Toggle, DropdownItem } from "@/orchidui";
 
 import { ref } from "vue";
 
@@ -15,20 +16,27 @@ export const OcDraggableList = {
     components: {
       Theme,
       DraggableList,
+      Toggle,
+      DropdownItem,
     },
     setup() {
       const model = ref([
         {
           id: "123",
+          icon: "banner",
           label: "123 Label ",
+          isToggle: true,
         },
         {
           id: "234",
           label: "234 Label ",
+          beforeAction: true,
         },
         {
           id: "456",
+          icon: "top-banner",
           label: "456 Label ",
+          isToggle: true,
         },
         {
           id: "272",
@@ -51,11 +59,14 @@ export const OcDraggableList = {
             <div class="w-full min-h-[200px]">
               <DraggableList v-model="model">
                 <template #before-action="{item}">
-                    slot before action { {{item.id}} }
+                    <span v-if="item.beforeAction">Use For {{item.id}}</span>
                 </template>
-                <template #action="{item}">
-                    Action for {{item.id}}
+                <template #action-item="{item}">
+                    <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
+                    <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
+                    <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
                 </template>
+                <template #action="{item}"><span v-if="item.isToggle"><Toggle size="small" /></span></template>
               </DraggableList>
             </div>
           </Theme>
@@ -106,7 +117,7 @@ export const OcDraggableCard = {
               v-model="model" 
               class="grid-cols-4"
               >
-                <template #action="{item}">
+                <template #action-item="{item}">
                    Action for {{item.id}}
                 </template>
               </DraggableCard>

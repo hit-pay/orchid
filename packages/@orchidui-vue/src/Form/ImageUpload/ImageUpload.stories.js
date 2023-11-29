@@ -1,15 +1,14 @@
 import { Theme } from "@/orchidui";
 export default {
-  component: '',
+  component: "",
 };
 
 export const Default = {
-  args: {
-  },
+  args: {},
   render: (args) => ({
     components: { Theme },
     setup() {
-        return { args}
+      return { args };
     },
     template: `
           <Theme>

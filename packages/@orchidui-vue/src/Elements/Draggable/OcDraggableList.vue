@@ -10,7 +10,7 @@ defineProps({
 defineEmits({
   "update:modelValue": [],
 });
-const isDropdownOpen = ref(false);
+const isDropdownOpen = ref([]);
 </script>
 <template>
   <Draggable
@@ -22,24 +22,39 @@ const isDropdownOpen = ref(false);
     <div
       v-for="element in list"
       :key="element.id"
-      class="group bg-oc-accent-1-50 hover:bg-oc-gray-50 text-oc-text-500 p-4 flex rounded hover:border border-gray-200 hover:shadow"
+      class="group bg-oc-accent-1-50 hover:bg-oc-gray-50 text-oc-text-500 p-4 flex items-center rounded hover:border border-gray-200 hover:shadow"
+      @mouseleave="isDropdownOpen[element.id] = false"
     >
-      <span class="opacity-0 group-hover:opacity-100 cursor-move drag-el">
-        <Icon name="draggable" />
+      <span class="cursor-move drag-el">
+        <Icon
+          name="draggable"
+          :class="
+            element.icon
+              ? 'hidden group-hover:block'
+              : 'opacity-0 group-hover:opacity-100 '
+          "
+        />
+        <Icon
+          v-if="element.icon"
+          :name="element.icon"
+          class="group-hover:hidden"
+        />
       </span>
       <span class="ml-2">{{ element.label }}</span>
       <div class="flex ml-auto">
         <slot name="before-action" :item="element"></slot>
-        <Dropdown
-          v-model="isDropdownOpen"
-          placement="bottom-end"
-          class="opacity-0 group-hover:opacity-100 cursor-pointer"
-        >
-          <Icon name="dots-vertical" />
-          <template #menu>
-            <slot name="action" :item="element"></slot>
-          </template>
-        </Dropdown>
+        <slot name="action" :item="element">
+          <Dropdown
+            v-model="isDropdownOpen[element.id]"
+            placement="bottom-end"
+            class="opacity-0 group-hover:opacity-100 cursor-pointer"
+          >
+            <Icon name="dots-vertical" />
+            <template #menu>
+              <slot name="action-item" :item="element"></slot>
+            </template>
+          </Dropdown>
+        </slot>
       </div>
     </div>
   </Draggable>
