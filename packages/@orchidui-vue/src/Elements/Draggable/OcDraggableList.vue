@@ -1,4 +1,3 @@
-<!-- TODO: witout action, v-model:toggle, custom icon -> multiple draggable list -->
 <script setup>
 import Draggable from "./OcDraggable.vue";
 import { Icon, Dropdown } from "@/orchidui";
@@ -6,6 +5,10 @@ import { ref } from "vue";
 
 defineProps({
   modelValue: Array,
+  iconKey: {
+    type: String,
+    default: "icon",
+  },
 });
 defineEmits({
   "update:modelValue": [],
@@ -25,19 +28,20 @@ const isDropdownOpen = ref([]);
       class="group bg-oc-accent-1-50 hover:bg-oc-gray-50 text-oc-text-500 p-4 flex items-center rounded hover:border border-gray-200 hover:shadow"
       @mouseleave="isDropdownOpen[element.id] = false"
     >
-      <span class="cursor-move drag-el">
+      <span :class="!element.isDisable ? 'drag-el cursor-move' : ''">
         <Icon
+          v-if="!element.isDisable"
           name="draggable"
           :class="
-            element.icon
+            element[iconKey]
               ? 'hidden group-hover:block'
               : 'opacity-0 group-hover:opacity-100 '
           "
         />
         <Icon
-          v-if="element.icon"
-          :name="element.icon"
-          class="group-hover:hidden"
+          v-if="element[iconKey]"
+          :name="element[iconKey]"
+          :class="!element.isDisable ? 'group-hover:hidden' : ''"
         />
       </span>
       <span class="ml-2">{{ element.label }}</span>

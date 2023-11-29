@@ -1,7 +1,6 @@
 import { Theme } from "@/orchidui";
 
 import DraggableList from "./OcDraggableList.vue";
-import DraggableCard from "./OcDraggableCard.vue";
 import { Toggle, DropdownItem } from "@/orchidui";
 
 import { ref } from "vue";
@@ -26,6 +25,7 @@ export const OcDraggableList = {
           icon: "banner",
           label: "123 Label ",
           isToggle: true,
+          isDisable: true,
         },
         {
           id: "234",
@@ -68,59 +68,6 @@ export const OcDraggableList = {
                 </template>
                 <template #action="{item}"><span v-if="item.isToggle"><Toggle size="small" /></span></template>
               </DraggableList>
-            </div>
-          </Theme>
-        `,
-  }),
-};
-
-export const OcDraggableCard = {
-  render: (args) => ({
-    components: {
-      Theme,
-      DraggableCard,
-    },
-    setup() {
-      const model = ref([
-        {
-          id: "123",
-          url: "/images/cover.png",
-        },
-        {
-          id: "234",
-          url: "/images/cover.png",
-        },
-        {
-          id: "456",
-          url: "/images/cover.png",
-        },
-        {
-          id: "272",
-          url: "/images/cover.png",
-        },
-        {
-          id: "667",
-          url: "/images/cover.png",
-        },
-        {
-          id: "781",
-          url: "/images/cover.png",
-        },
-      ]);
-      return { args, model };
-    },
-    template: `
-          <Theme>
-            <div class="p-4">{{ model}}</div>
-            <div class="w-full min-h-[200px]">
-              <DraggableCard 
-              v-model="model" 
-              class="grid-cols-4"
-              >
-                <template #action-item="{item}">
-                   Action for {{item.id}}
-                </template>
-              </DraggableCard>
             </div>
           </Theme>
         `,
