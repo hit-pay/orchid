@@ -3,7 +3,7 @@ export * from "./DataDisplay/Pagination/OcPagination.js";
 export * from "./DataDisplay/Overview/OcOverview.js";
 export * from "./DataDisplay/CustomerCard/OcCustomerCard.js";
 export * from "./DataDisplay/ListItem/OcListItem.js";
-export * from "./DataDisplay/SectionItem/OcSectionItem.js";
+// export * from "./DataDisplay/SectionItem/OcSectionItem.js";
 
 export * from "./Disclosure/Accordion/OcAccordion.js";
 export * from "./Disclosure/Tabs/Tabs.js";
@@ -13,6 +13,7 @@ export * from "./Elements/PageTitle/OcPageTitle.js";
 export * from "./Elements/Sidebar/OcSidebar.js";
 export * from "./Elements/SubSidebar/OcSubSidebar.js";
 export * from "./Elements/EmptyPage/OcEmptyPage.js";
+export * from "./Elements/AdditionalContent/OcAdditionalContent.js";
 
 export * from "./Feedback/Chip/OcChip.js";
 export * from "./Feedback/Snackbar/OcSnackbar.js";
