@@ -36,6 +36,7 @@ const props = defineProps({
 const emit = defineEmits({
   "update:modelValue": [],
   "option-added": [],
+  "option-removed": [],
 });
 
 const localValue = ref(props.modelValue || []);
@@ -57,6 +58,7 @@ const optionsVisible = computed(() => {
 
 const removeOption = (value) => {
   localValue.value = localValue.value.filter((o) => o !== value);
+  emit('option-removed', value);
   emit("update:modelValue", localValue.value);
 };
 

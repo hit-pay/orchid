@@ -1,6 +1,7 @@
 <script setup>
-import { computed, ref } from "vue";
+import { computed, ref, useAttrs } from "vue";
 import { BaseInput, Icon } from "@/orchidui";
+import { pickEventListeners } from '@/orchidui/Form/Input/inputHelper.js';
 
 const props = defineProps({
   disabled: {
@@ -72,11 +73,19 @@ const props = defineProps({
 defineEmits({
   "update:modelValue": [],
   blur: [],
+  focus: [],
 });
+
+const attrs = useAttrs();
+
+const eventListeners = pickEventListeners(attrs);
+
 const inputRef = ref();
+
 defineExpose({
   focus: () => inputRef.value.focus(),
 });
+
 const isFocused = ref(false);
 const inputClasses = computed(() => [
   {
@@ -128,7 +137,8 @@ const inputClasses = computed(() => [
             :placeholder="placeholder"
             :disabled="disabled"
             class="h-7 outline-none w-full text-oc-text disabled:bg-transparent placeholder:font-normal placeholder:text-oc-text-300 bg-oc-bg-light"
-            @focus="isFocused = true"
+            v-bind="eventListeners"
+            @focus="isFocused = true; $emit('focus')"
             @blur="
               isFocused = false;
               $emit('blur');
