@@ -34,12 +34,13 @@ const variantClass = computed(() => ({
   >
     <slot v-if="variant === Variants.TEXT">{{ text }}</slot>
     <slot v-else>
-      <Checkbox
-        :model-value="isChecked"
-        class="mx-auto"
-        :is-partial="isPartial"
-        @update:model-value="$emit('selectAll', $event)"
-      />
+      <div class="mx-auto">
+        <Checkbox
+          :model-value="isChecked"
+          :is-partial="isPartial"
+          @update:model-value="$emit('selectAll', $event)"
+        />
+      </div>
       <span class="text-oc-text-500" :class="isSticky ? 'hidden' : 'md:hidden'"
         >Select all</span
       >
