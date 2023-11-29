@@ -54,7 +54,7 @@ const filterAdded = computed(() => {
 });
 
 const applyButtonLabel = computed(() => props.actions?.applyButton?.label || 'Apply')
-const cancelButtonLabel = computed(() => props.actions?.applyButton?.label || 'Cancel')
+const cancelButtonLabel = computed(() => props.actions?.cancelButton?.label || 'Cancel')
 
 onMounted(() => {
   valuesData.value = { ...props.values };
