@@ -9,6 +9,10 @@ defineProps({
     type: String,
     default: "icon",
   },
+  childrenKey: {
+    type: String,
+    default: "children",
+  },
 });
 defineEmits({
   "update:modelValue": [],
@@ -25,10 +29,15 @@ const isDropdownOpen = ref([]);
     <div
       v-for="element in list"
       :key="element.id"
-      class="group bg-oc-accent-1-50 hover:bg-oc-gray-50 text-oc-text-500 p-4 flex items-center rounded hover:border border-gray-200 hover:shadow"
+      class="group text-oc-text-500 p-4 flex flex-wrap items-center rounded border-gray-200"
+      :class="
+        element[childrenKey]
+          ? 'shadow border bg-oc-gray-50'
+          : 'hover:shadow hover:border bg-oc-accent-1-50 hover:bg-oc-gray-50'
+      "
       @mouseleave="isDropdownOpen[element.id] = false"
     >
-      <span :class="!element.isDisable ? 'drag-el cursor-move' : ''">
+      <div :class="!element.isDisable ? 'drag-el cursor-move' : ''">
         <Icon
           v-if="!element.isDisable"
           name="draggable"
@@ -43,8 +52,8 @@ const isDropdownOpen = ref([]);
           :name="element[iconKey]"
           :class="!element.isDisable ? 'group-hover:hidden' : ''"
         />
-      </span>
-      <span class="ml-2">{{ element.label }}</span>
+      </div>
+      <div class="ml-2">{{ element.label }}</div>
       <div class="flex ml-auto">
         <slot name="before-action" :item="element"></slot>
         <slot name="action" :item="element">
@@ -60,6 +69,7 @@ const isDropdownOpen = ref([]);
           </Dropdown>
         </slot>
       </div>
+      <slot name="content" :item="element" />
     </div>
   </Draggable>
 </template>

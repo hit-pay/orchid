@@ -41,6 +41,38 @@ export const OcDraggableList = {
         {
           id: "272",
           label: "272 Label ",
+          children: [
+            {
+              id: "123",
+              icon: "banner",
+              label: "123 Label ",
+              isToggle: true,
+              isDisable: true,
+            },
+            {
+              id: "234",
+              label: "234 Label ",
+              beforeAction: true,
+            },
+            {
+              id: "456",
+              icon: "top-banner",
+              label: "456 Label ",
+              isToggle: true,
+            },
+            {
+              id: "272",
+              label: "272 Label ",
+            },
+            {
+              id: "667",
+              label: "667 Label ",
+            },
+            {
+              id: "781",
+              label: "781 Label ",
+            },
+          ],
         },
         {
           id: "667",
@@ -64,9 +96,22 @@ export const OcDraggableList = {
                 <template #action-item="{item}">
                     <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
                     <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
-                    <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
                 </template>
                 <template #action="{item}"><span v-if="item.isToggle"><Toggle size="small" /></span></template>
+                <template #content="{item}">
+                    <div v-if="item.children" class="flex w-full my-5">
+                        <DraggableList class="w-full" v-model="item.children">
+                            <template #before-action="{item}">
+                                <span v-if="item.beforeAction">Use For {{item.id}}</span>
+                            </template>
+                            <template #action-item="{item}">
+                                <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
+                                <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
+                            </template>
+                            <template #action="{item}"><span v-if="item.isToggle"><Toggle size="small" /></span></template>
+                        </DraggableList>
+                    </div>
+                </template>
               </DraggableList>
             </div>
           </Theme>
