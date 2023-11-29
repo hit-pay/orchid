@@ -15,6 +15,11 @@ const DataTableOptions = {
         { label: "Filter 03", value: "3" },
       ],
     },
+    actions: {
+      applyButton: {
+        label: '100 results',
+      },
+    },
     search: {
       key: "keywords",
     },

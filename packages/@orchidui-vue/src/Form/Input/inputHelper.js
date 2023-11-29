@@ -8,7 +8,7 @@ export const pickEventListeners = (attrs, whiteList) => {
       return;
     }
     
-    if (whiteList.length > 0 && !whiteList.includes(key)) {
+    if (whiteList?.length > 0 && !whiteList.includes(key)) {
       return;
     }
     
