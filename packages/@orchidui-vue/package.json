@@ -36,6 +36,15 @@
     "./SingleFileUpload": {
       "import": "./dist/SingleFileUpload.js"
     },
+    "./Draggable": {
+      "import": "./dist/Draggable.js"
+    },
+    "./DraggableList": {
+      "import": "./dist/DraggableList.js"
+    },
+    "./StoreDesign": {
+      "import": "./dist/StoreDesign.js"
+    },
     "./dist/style.css": {
       "import": "./dist/style.css",
       "require": "./dist/style.css"
