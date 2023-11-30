@@ -10,11 +10,16 @@ defineProps({
     type: String,
     default: "icon",
   },
+  isChildren: Boolean,
   childrenKey: {
     type: String,
     default: "children",
   },
-  isChildren: Boolean,
+  isLink: Boolean,
+  linkKey: {
+    type: String,
+    default: "link",
+  },
 });
 defineEmits({
   "update:modelValue": [],
@@ -70,7 +75,14 @@ const isDropdownOpen = ref([]);
           "
         />
       </div>
-      <div class="ml-2">{{ element.label }}</div>
+      <div class="ml-2 flex items-center">
+        {{ element.label }}
+        <Icon
+          v-if="isLink && element[linkKey]"
+          class="ml-2 text-oc-text-300"
+          name="external-link"
+        />
+      </div>
       <div class="flex ml-auto">
         <slot name="before-action" :item="element"></slot>
         <slot name="action" :item="element">

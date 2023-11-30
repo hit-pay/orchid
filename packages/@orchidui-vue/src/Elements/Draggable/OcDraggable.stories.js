@@ -75,6 +75,18 @@ export const OcDraggableList = {
             {
               id: "272",
               label: "272 Label ",
+              children: [
+                {
+                  id: "123",
+                  icon: "banner",
+                  label: "123 Label ",
+                },
+                {
+                  id: "234",
+                  icon: "banner",
+                  label: "234 Label ",
+                },
+              ],
             },
             {
               id: "667",
@@ -93,6 +105,7 @@ export const OcDraggableList = {
         {
           id: "781",
           label: "781 Label ",
+          link: "https://orchid.vercel.app",
         },
       ]);
       return { args, model };
@@ -101,7 +114,7 @@ export const OcDraggableList = {
           <Theme>
             <div class="p-4">{{ model}}</div>
             <div class="w-full min-h-[200px]">
-              <DraggableList v-model="model">
+              <DraggableList v-model="model" is-link>
                 <template #before-action="{item}">
                     <span v-if="item.beforeAction">Use For {{item.id}}</span>
                 </template>
@@ -112,7 +125,7 @@ export const OcDraggableList = {
                 <template #action="{item}"><span v-if="item.isToggle"><Toggle size="small" /></span></template>
                 <template #content="{item}">
                     <div v-if="item.children" class="flex w-full my-5">
-                        <DraggableList class="w-full" v-model="item.children" is-children>
+                        <DraggableList class="w-full" v-model="item.children" is-children is-link>
                             <template #before-action="{item}">
                                 <span v-if="item.beforeAction">Use For {{item.id}}</span>
                             </template>
@@ -121,6 +134,20 @@ export const OcDraggableList = {
                                 <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
                             </template>
                             <template #action="{item}"><span v-if="item.isToggle"><Toggle size="small" /></span></template>
+                            <template #content="{item}">
+                              <div v-if="item.children" class="flex w-full my-5">
+                                  <DraggableList class="w-full" v-model="item.children" is-children is-link>
+                                      <template #before-action="{item}">
+                                          <span v-if="item.beforeAction">Use For {{item.id}}</span>
+                                      </template>
+                                      <template #action-item="{item}">
+                                          <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
+                                          <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
+                                      </template>
+                                      <template #action="{item}"><span v-if="item.isToggle"><Toggle size="small" /></span></template>
+                                  </DraggableList>
+                              </div>
+                          </template>
                         </DraggableList>
                     </div>
                 </template>
