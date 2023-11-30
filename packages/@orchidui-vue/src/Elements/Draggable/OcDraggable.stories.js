@@ -23,88 +23,88 @@ export const OcDraggableList = {
         {
           id: "123",
           icon: "banner",
-          label: "123 Label ",
+          title: "123 Label ",
           isToggle: true,
           isDisable: true,
         },
         {
           id: "234",
-          label: "234 Label ",
+          title: "234 Label ",
           beforeAction: true,
         },
         {
           id: "456",
           icon: "top-banner",
-          label: "456 Label ",
+          title: "456 Label ",
           isToggle: true,
           children: [
             {
               id: "123",
               icon: "banner",
-              label: "123 Label ",
+              title: "123 Label ",
             },
             {
               id: "234",
               icon: "banner",
-              label: "234 Label ",
+              title: "234 Label ",
             },
           ],
         },
         {
           id: "272",
-          label: "272 Label ",
+          title: "272 Label ",
           children: [
             {
               id: "123",
               icon: "banner",
-              label: "123 Label ",
+              title: "123 Label ",
               isToggle: true,
               isDisable: true,
             },
             {
               id: "234",
-              label: "234 Label ",
+              title: "234 Label ",
               beforeAction: true,
             },
             {
               id: "456",
               icon: "top-banner",
-              label: "456 Label ",
+              title: "456 Label ",
               isToggle: true,
             },
             {
               id: "272",
-              label: "272 Label ",
+              title: "272 Label ",
               children: [
                 {
                   id: "123",
                   icon: "banner",
-                  label: "123 Label ",
+                  title: "123 Label ",
                 },
                 {
                   id: "234",
                   icon: "banner",
-                  label: "234 Label ",
+                  title: "234 Label ",
                 },
               ],
             },
             {
               id: "667",
-              label: "667 Label ",
+              title: "667 Label ",
             },
             {
               id: "781",
-              label: "781 Label ",
+              title: "781 Label ",
             },
           ],
         },
         {
           id: "667",
-          label: "667 Label ",
+          title: "667 Label ",
         },
         {
           id: "781",
-          label: "781 Label ",
+          title: "781 Label ",
           link: "https://orchidui.vercel.app",
         },
       ]);

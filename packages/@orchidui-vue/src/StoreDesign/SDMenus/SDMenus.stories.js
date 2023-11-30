@@ -22,81 +22,81 @@ export const SDMenusDefault = {
         {
           id: "123",
           icon: "banner",
-          label: "Menu",
+          title: "Menu",
           link: "https://orchidui.vercel.app",
         },
         {
           id: "234",
-          label: "Menu ",
+          title: "Menu ",
           link: "https://orchidui.vercel.app",
         },
         {
           id: "456",
           icon: "top-banner",
-          label: "Menu",
+          title: "Menu",
           children: [
             {
               id: "123",
               icon: "banner",
-              label: "SubMenu ",
+              title: "SubMenu ",
               link: "https://orchidui.vercel.app",
             },
             {
               id: "234",
               icon: "banner",
-              label: "SubMenu",
+              title: "SubMenu",
               link: "https://orchidui.vercel.app",
             },
           ],
         },
         {
           id: "272",
-          label: "Menu ",
+          title: "Menu ",
           children: [
             {
               id: "123",
               icon: "banner",
-              label: "Submenu ",
+              title: "Submenu ",
               link: "https://orchidui.vercel.app",
             },
             {
               id: "272",
-              label: "Submenu  ",
+              title: "Submenu  ",
               children: [
                 {
                   id: "123",
                   icon: "banner",
-                  label: "Submenu 2",
+                  title: "Submenu 2",
                   link: "https://orchidui.vercel.app",
                 },
                 {
                   id: "234",
                   icon: "banner",
-                  label: "Submenu 2",
+                  title: "Submenu 2",
                   link: "https://orchidui.vercel.app",
                 },
               ],
             },
             {
               id: "667",
-              label: "SubMenu ",
+              title: "SubMenu ",
               link: "https://orchidui.vercel.app",
             },
             {
               id: "781",
-              label: "Submenu ",
+              title: "Submenu ",
               link: "https://orchidui.vercel.app",
             },
           ],
         },
         {
           id: "667",
-          label: "Menu ",
+          title: "Menu ",
           link: "https://orchidui.vercel.app",
         },
         {
           id: "781",
-          label: "Menu ",
+          title: "Menu ",
           link: "https://orchidui.vercel.app",
         },
       ]);

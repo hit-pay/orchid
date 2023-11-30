@@ -81,7 +81,7 @@ const isDropdownOpen = ref([]);
       <div class="ml-2 flex items-center max-w-[70%]">
         <div class="flex items-center flex-wrap">
           <div class="truncate">
-            {{ element.label }}
+            {{ element.title }}
           </div>
           <a
             v-if="isLink && element[linkKey]"
