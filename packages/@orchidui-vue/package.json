@@ -36,6 +36,9 @@
     "./SingleFileUpload": {
       "import": "./dist/SingleFileUpload.js"
     },
+    "./Draggable": {
+      "import": "./dist/Draggable.js"
+    },
     "./DraggableList": {
       "import": "./dist/DraggableList.js"
     },
