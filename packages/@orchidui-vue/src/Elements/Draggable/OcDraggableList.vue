@@ -1,6 +1,6 @@
 <!-- TODO : group not support nested dynamic -->
 <script setup>
-import { OcDraggable } from "@/orchidui/OcDraggable";
+import { Draggable } from "@/orchidui/Draggable";
 import { Icon, Dropdown , Tooltip} from "@/orchidui";
 import { ref } from "vue";
 
@@ -28,7 +28,7 @@ const isHovered = ref([]);
 const isDropdownOpen = ref([]);
 </script>
 <template>
-  <OcDraggable
+  <Draggable
     v-slot="{ list }"
     :model-value="modelValue"
     class="grid gap-3"
@@ -130,5 +130,5 @@ const isDropdownOpen = ref([]);
       </div>
       <slot name="content" :item="element" />
     </div>
-  </OcDraggable>
+  </Draggable>
 </template>

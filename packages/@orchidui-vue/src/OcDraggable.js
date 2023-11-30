@@ -1,2 +1,2 @@
-import OcDraggable from "./Elements/Draggable/OcDraggable.vue";
-export { OcDraggable };
+import Draggable from "./Elements/Draggable/OcDraggable.vue";
+export { Draggable };
