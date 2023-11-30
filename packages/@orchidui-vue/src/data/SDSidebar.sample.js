@@ -1,37 +1,101 @@
+// const activeSDSidebar = ["home", "sections", "sections_name"]; to show section settings
+// exp : ["home", "header", ""]; to show header section settings
+// exp : ["home", "footer", ""]; to show footer section settings
+// exp : ["styles", "custom", ""]; to show custom styles
+// exp : ["page", "", ""]; to show header page
+
 const SDSidebar = [
     {
+        type: "list",
         name: "home",
         label: "Home Settings",
         children: [
             {
+                type: "section",
                 name: "header",
                 label: "Header"
             },
             {
+                type: "section_list",
                 name: "sections",
                 label: "Sections",
             },
             {
+                type: "section",
                 name: "footer",
                 label: "Footer"
             }
         ]
     },
     {
-        name: "home",
-        label: "Styles",
+        type: "styles",
+        name: "styles",
+        label: "Styles",  
         children: [
             {
-                name: "header"
+                type: "section",
+                name: "custom",
+                label: "Custom"
             },
-            {
-                name: "sections"
-            },
-            {
-                name: "footer"
-            }
         ]
+    },
+    {
+        type: "list",
+        name: "link_in_bio",
+        label: "Link In Bio",
+        children: [
+          {
+            type: "section",
+            name: "icon_links",
+            label: "Icon Links",
+          },
+          {
+            type: "section",
+            name: "button_links",
+            label: "Button Links",
+          },
+          {
+            type: "copy_link_in_bio",
+            label: "Copy URL",
+            onClick: () => console.log('do somthing')
+          },
+        ]
+    },
+    {
+        type: "page",
+        name: "page",
+        label: "Pages",
+        onClick: () => console.log('do somthing')
     }
+]
+
+const RequestFormStyles = [
+    {
+        type: "title",
+        label: "Choose Font"
+    },
+    {
+        type: "font",
+        name: "font_heading",
+        label: "Heading"
+    },
+    {
+        type: "colors",
+        name: "colors",
+        label: "Choose Colors"
+    },
+    {
+        type: "range",
+        name: "rounded",
+        range: [0,100],
+        label: "Card appearance",
+        hint: "Rounded corner"
+    },
+    {
+        type: "shadow",
+        name: "shadow",
+        label: "Shadow Styles"
+    },
 ]
 
 const Sections = [
@@ -64,7 +128,8 @@ const AvailableSections = [
     }
 ]
 
-const formRequestTypes = [
+const FormRequestTypes = [
+    "title",
     "text",
     "longText",
     "options",
@@ -72,6 +137,7 @@ const formRequestTypes = [
     "select",
     "select_category",
     "select_products",
+    "font"
 ]
 const RequestFormSection = [
     {
@@ -140,6 +206,7 @@ export {
     SDSidebar,
     Sections,
     AvailableSections,
-    formRequestTypes,
-    RequestFormSection
+    FormRequestTypes,
+    RequestFormSection,
+    RequestFormStyles
 }
