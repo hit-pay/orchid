@@ -1,7 +1,7 @@
 <!-- TODO : group not support nested dynamic -->
 <script setup>
 import { OcDraggable } from "@/orchidui/OcDraggable";
-import { Icon, Dropdown } from "@/orchidui";
+import { Icon, Dropdown , Tooltip} from "@/orchidui";
 import { ref } from "vue";
 
 defineProps({
@@ -90,7 +90,15 @@ const isDropdownOpen = ref([]);
             rel="noopener noreferrer"
             class="w-full flex items-center text-oc-text-300 mt-2"
           >
-            <Icon width="12" height="12" class="mr-2" name="link" />
+            <Tooltip 
+                distance="2" 
+                position="bottom-start"
+                popper-class="bg-oc-bg-light text-oc-text-500 p-4 rounded">
+                <Icon width="12" height="12" class="mr-2" name="link" />
+              <template #popper>
+                {{ element[linkKey] }}
+              </template>
+            </Tooltip>
             <span class="truncate max-w-[80%]"> {{ element[linkKey] }}</span>
           </a>
         </div>
