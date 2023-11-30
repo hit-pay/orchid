@@ -12,7 +12,6 @@ const props = defineProps({
     type: [String, Number],
     default: 1,
   },
-  isTextLink: Boolean,
   linkKey: {
     type: String,
     default: "link",
@@ -45,7 +44,6 @@ const addSubMenu = (item, subitem) => {
       v-model="model"
       is-link
       :link-key="linkKey"
-      :is-text-link="isTextLink"
       @update:model-value="update"
     >
       <template #action-item="{ item }">
@@ -77,7 +75,6 @@ const addSubMenu = (item, subitem) => {
             is-children
             is-link
             :link-key="linkKey"
-            :is-text-link="isTextLink"
           >
             <template #action-item="slot">
               <div class="flex flex-col">
@@ -115,7 +112,6 @@ const addSubMenu = (item, subitem) => {
                   is-children
                   is-link
                   :link-key="linkKey"
-                  :is-text-link="isTextLink"
                 >
                   <template #action-item="slot2">
                     <div class="flex flex-col">

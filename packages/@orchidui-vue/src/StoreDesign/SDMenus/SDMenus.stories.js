@@ -9,7 +9,6 @@ export default {
 
 export const SDMenusDefault = {
   args: {
-    isTextLink: false,
     hasSubmenu: true,
     submenuLevel: 2,
   },
@@ -24,10 +23,12 @@ export const SDMenusDefault = {
           id: "123",
           icon: "banner",
           label: "Menu",
+          link: "https://orchidui.vercel.app",
         },
         {
           id: "234",
           label: "Menu ",
+          link: "https://orchidui.vercel.app",
         },
         {
           id: "456",
@@ -38,11 +39,13 @@ export const SDMenusDefault = {
               id: "123",
               icon: "banner",
               label: "SubMenu ",
+              link: "https://orchidui.vercel.app",
             },
             {
               id: "234",
               icon: "banner",
               label: "SubMenu",
+              link: "https://orchidui.vercel.app",
             },
           ],
         },
@@ -54,6 +57,7 @@ export const SDMenusDefault = {
               id: "123",
               icon: "banner",
               label: "Submenu ",
+              link: "https://orchidui.vercel.app",
             },
             {
               id: "272",
@@ -63,27 +67,32 @@ export const SDMenusDefault = {
                   id: "123",
                   icon: "banner",
                   label: "Submenu 2",
+                  link: "https://orchidui.vercel.app",
                 },
                 {
                   id: "234",
                   icon: "banner",
                   label: "Submenu 2",
+                  link: "https://orchidui.vercel.app",
                 },
               ],
             },
             {
               id: "667",
               label: "SubMenu ",
+              link: "https://orchidui.vercel.app",
             },
             {
               id: "781",
               label: "Submenu ",
+              link: "https://orchidui.vercel.app",
             },
           ],
         },
         {
           id: "667",
           label: "Menu ",
+          link: "https://orchidui.vercel.app",
         },
         {
           id: "781",
@@ -97,7 +106,7 @@ export const SDMenusDefault = {
           <Theme>
             <div class="p-4">{{ model }}</div>
             <div class="w-full">
-              <SDMenus :is-text-link="args.isTextLink" :has-submenu="args.hasSubmenu" :submenuLevel="args.submenuLevel" v-model="model" />
+              <SDMenus  :has-submenu="args.hasSubmenu" :submenuLevel="args.submenuLevel" v-model="model" />
             </div>
           </Theme>
         `,
