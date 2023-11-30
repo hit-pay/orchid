@@ -115,9 +115,6 @@ export const OcDraggableList = {
             <div class="p-4">{{ model}}</div>
             <div class="w-full min-h-[200px]">
               <DraggableList v-model="model" is-link>
-                <template #before-action="{item}">
-                    <span v-if="item.beforeAction">Use For {{item.id}}</span>
-                </template>
                 <template #action-item="{item}">
                     <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
                     <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
@@ -126,9 +123,6 @@ export const OcDraggableList = {
                 <template #content="{item}">
                     <div v-if="item.children" class="flex w-full my-5">
                         <DraggableList class="w-full" v-model="item.children" is-children is-link>
-                            <template #before-action="{item}">
-                                <span v-if="item.beforeAction">Use For {{item.id}}</span>
-                            </template>
                             <template #action-item="{item}">
                                 <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
                                 <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
@@ -137,9 +131,6 @@ export const OcDraggableList = {
                             <template #content="{item}">
                               <div v-if="item.children" class="flex w-full my-5">
                                   <DraggableList class="w-full" v-model="item.children" is-children is-link>
-                                      <template #before-action="{item}">
-                                          <span v-if="item.beforeAction">Use For {{item.id}}</span>
-                                      </template>
                                       <template #action-item="{item}">
                                           <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
                                           <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
