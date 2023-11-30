@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import { DropdownItem } from "@/orchidui";
-import DraggableList from "./OcDraggableList.vue";
+import { DraggableList } from "@/orchidui/DraggableList";
 const props = defineProps({
   modelValue: {
     type: Array,
