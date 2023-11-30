@@ -1,29 +1,27 @@
 <script setup>
 import { Button } from "@/orchidui";
 defineProps({
-  thumbnail: String,
-  title: String,
-  description: String,
-  active: String,
+  name: String,
+  label: String,
+  preview: String,
+  pro: String,
 });
 </script>
 <template>
-  <div class="bg-oc-bg-dark rounded flex flex-col">
-    <div class="w-full relative">
-      <div class="bg-black/25 absolute top-0 left-0">
-        <div v-if="active" class="m-auto">
-          <Button variant="secondary" label="Customize" />
-        </div>
-        <div class="m-auto">
-          <Button variant="secondary" label="Preview" />
-          <Button label="Active" />
+  <div class="flex flex-col">
+    <div class="w-full relative group">
+      <div
+        class="w-full h-full bg-black/25 absolute top-0 left-0 hidden group-hover:flex rounded-lg"
+      >
+        <div class="w-full p-8 gap-3 m-auto flex">
+          <Button class="w-1/2" variant="secondary" label="Customize" />
+          <Button class="w-1/2" label="Add" />
         </div>
       </div>
-      <img class="w-full" :src="thumbnail" :alt="title" />
+      <img class="w-full" :src="preview" :alt="label" />
     </div>
-    <div class="p-4">
-      <div class="text-md">{{ title }}</div>
-      <div class="text-md">{{ description }}</div>
+    <div class="mt-4 text-md text-center">
+      {{ label }}
     </div>
   </div>
 </template>

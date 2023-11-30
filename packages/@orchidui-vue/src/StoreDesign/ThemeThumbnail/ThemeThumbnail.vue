@@ -10,7 +10,10 @@ defineProps({
 defineEmits(["activate", "customize", "preview", "upgrade"]);
 </script>
 <template>
-  <div class="bg-oc-bg-dark rounded-lg flex flex-col">
+  <div
+    class="bg-oc-bg-dark border-[3px] rounded-lg flex flex-col"
+    :class="active ? 'border-oc-primary' : 'border-oc-bg-dark'"
+  >
     <div class="w-full relative group">
       <div
         class="w-full h-full bg-black/25 absolute top-0 left-0 hidden group-hover:flex rounded-t-lg"
@@ -23,7 +26,7 @@ defineEmits(["activate", "customize", "preview", "upgrade"]);
           <Button label="Activate" />
         </div>
       </div>
-      <img class="w-full rounded-t-lg" :src="thumbnail" :alt="title" />
+      <img class="w-full rounded-t-md" :src="thumbnail" :alt="title" />
     </div>
     <div class="p-4 flex items-center">
       <div>
