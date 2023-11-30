@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { Icon, Dropdown, DropdownItem } from "@/orchidui";
 
 defineEmits({
@@ -14,26 +14,36 @@ const isDropdownOpened = ref(false);
 const activeMenu = computed(() =>
   props.menus.find((menu) => menu.value === props.modelValue),
 );
+const currentRef = ref();
+const menuRefs = ref([]);
+const changeCurrentPosition = (clickEvent) => {
+  const selectedMenu = clickEvent?.target || menuRefs.value[0];
+  currentRef.value.style.width = `${selectedMenu.offsetWidth}px`;
+  currentRef.value.style.left = `${selectedMenu.offsetLeft}px`;
+};
+onMounted(() => changeCurrentPosition());
 </script>
 <template>
-  <div class="gap-x-7 hidden md:flex">
+  <div class="gap-x-7 hidden md:flex relative">
     <div
       v-for="item in menus"
       :key="item.value"
-      class="h-[36px] px-7 flex items-center justify-center rounded-full text-oc-text-500 hover:text-oc-accent-1 cursor-pointer"
-      :class="[
-        item.sidebarClass,
-        item.value === modelValue
-          ? 'font-medium text-white bg-[var(--oc-sidebar-menu-active-icon-active)]'
-          : '',
-      ]"
+      ref="menuRefs"
+      class="h-[36px] z-10 px-7 transition-all flex items-center justify-center rounded-full text-oc-text-500 hover:text-oc-accent-1 cursor-pointer"
+      :class="[item.value === modelValue ? 'font-medium !text-white' : '']"
       @click="
+        changeCurrentPosition($event);
         $emit('changePath', item.path);
         $emit('update:modelValue', item.value);
       "
     >
       {{ item.label }}
     </div>
+    <div
+      ref="currentRef"
+      :class="activeMenu.sidebarClass"
+      class="absolute transition-all duration-300 h-[36px] rounded-full min-w-[100px] bg-[var(--oc-sidebar-menu-active-icon-active)]"
+    />
   </div>
   <Dropdown v-model="isDropdownOpened" class="flex md:hidden">
     <div class="p-3 font-medium text-oc-accent-1-500 flex items-center gap-2">

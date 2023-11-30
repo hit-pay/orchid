@@ -23,48 +23,10 @@ const DataTableOptions = {
     search: {
       key: "keywords",
     },
-    form: SampleFilterForm,
-    grid: {
-      xs: {
-        area: `
-              checkboxes_group
-              date_picker_range
-              only_date
-              radio_group
-              range_input
-              select
-              select_multiple
-          `,
-        rows: "auto",
-        columns: "100%",
-      },
-      sm: {
-        area: `
-                 checkboxes_group
-              date_picker_range
-              only_date
-              radio_group
-              range_input
-              select
-              select_multiple
-          `,
-        rows: "auto",
-        columns: "100%",
-      },
-      lg: {
-        area: `
-             checkboxes_group
-              date_picker_range
-              only_date
-              radio_group
-              range_input
-              select
-              select_multiple
-          `,
-        rows: "auto",
-        columns: "100%",
-      },
+    per_page: {
+      key: "perPage",
     },
+    form: SampleFilterForm,
   },
   tableOptions: {
     isSelectable: true,
@@ -184,7 +146,7 @@ const DataTableOptions = {
 
 const Filter = {
   page: 1,
-  per_page: 10,
+  perPage: 10,
 };
 
 export { DataTableOptions, Filter };
