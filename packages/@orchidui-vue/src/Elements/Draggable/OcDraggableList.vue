@@ -78,9 +78,9 @@ const isDropdownOpen = ref([]);
           "
         />
       </div>
-      <div class="ml-2 flex items-center">
+      <div class="ml-2 flex items-center max-w-[70%]">
         <div class="flex items-center flex-wrap">
-          <div>
+          <div class="truncate">
             {{ element.label }}
           </div>
           <a
@@ -91,7 +91,7 @@ const isDropdownOpen = ref([]);
             class="w-full flex items-center text-oc-text-300 mt-2"
           >
             <Icon width="12" height="12" class="mr-2" name="link" />
-            {{ element[linkKey] }}
+            <span class="truncate max-w-[80%]"> {{ element[linkKey] }}</span>
           </a>
         </div>
       </div>
