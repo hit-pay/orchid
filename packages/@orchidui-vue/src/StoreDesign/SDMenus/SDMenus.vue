@@ -7,21 +7,31 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+  hasSubmenu: Boolean,
+  submenuLevel: {
+    type: [String, Number],
+    default: 1,
+  },
 });
 
-const emit = defineEmits("update:modelValue");
+const emit = defineEmits(
+  "update:modelValue",
+  "edit:menu",
+  "delete:menu",
+  "add:submenu",
+);
 const model = ref(props.modelValue);
 
 const update = (value) => emit("update:modelValue", value);
 
 const editMenu = (item, subitem, subitem2) => {
-  console.log(item, subitem, subitem2);
+  emit("edit:menu", item, subitem, subitem2);
 };
 const deleteMenu = (item, subitem, subitem2) => {
-  console.log(item, subitem, subitem2);
+  emit("delete:menu", item, subitem, subitem2);
 };
 const addSubMenu = (item, subitem) => {
-  console.log(item, subitem);
+  emit("add:submenu", item, subitem);
 };
 </script>
 <template>
@@ -32,6 +42,7 @@ const addSubMenu = (item, subitem) => {
           <div class="p-2 border-b border-gray-200">
             <DropdownItem text="Edit" icon="pencil" @click="editMenu(item)" />
             <DropdownItem
+              v-if="hasSubmenu"
               text="Add submenu"
               icon="submenu"
               @click="addSubMenu(item)"
@@ -48,7 +59,7 @@ const addSubMenu = (item, subitem) => {
         </div>
       </template>
       <template #content="{ item }">
-        <div v-if="item.children" class="flex w-full my-5">
+        <div v-if="item.children && hasSubmenu" class="flex w-full my-5">
           <DraggableList
             v-model="item.children"
             class="w-full"
@@ -64,6 +75,7 @@ const addSubMenu = (item, subitem) => {
                     @click="editMenu(item, slot.item)"
                   />
                   <DropdownItem
+                    v-if="submenuLevel == 2"
                     text="Add submenu"
                     icon="submenu"
                     @click="addSubMenu(item, slot.item)"
@@ -80,7 +92,10 @@ const addSubMenu = (item, subitem) => {
               </div>
             </template>
             <template #content="slot">
-              <div v-if="slot.item.children" class="flex w-full my-5">
+              <div
+                v-if="slot.item.children && submenuLevel == 2"
+                class="flex w-full my-5"
+              >
                 <DraggableList
                   v-model="slot.item.children"
                   class="w-full"

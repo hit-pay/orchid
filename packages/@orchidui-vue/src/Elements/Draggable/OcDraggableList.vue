@@ -37,10 +37,10 @@ const isDropdownOpen = ref([]);
     <div
       v-for="element in list"
       :key="element.id"
-      class="group text-oc-text-500 p-4 flex flex-wrap items-center rounded border-gray-200"
+      class="group text-oc-text-500 p-4 flex flex-wrap items-center rounded border border-gray-200"
       :class="
         element[childrenKey]
-          ? 'hover:shadow border bg-oc-gray-50'
+          ? 'hover:shadow bg-oc-gray-50'
           : isChildren && !isHovered[element.id]
             ? 'bg-oc-accent-1-50'
             : 'hover:shadow hover:border bg-oc-accent-1-50 hover:bg-oc-gray-50'

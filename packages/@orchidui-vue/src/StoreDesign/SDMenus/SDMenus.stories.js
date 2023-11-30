@@ -1,19 +1,21 @@
 import { Theme } from "@/orchidui";
 
-import NavigationMenu from "./NavigationMenu.vue";
-
+import SDMenus from "./SDMenus.vue";
 import { ref } from "vue";
-
 export default {
-  component: NavigationMenu,
+  component: SDMenus,
   tags: ["autodocs"],
 };
 
-export const OcNavigationMenu = {
+export const SDMenusDefault = {
+  args: {
+    hasSubmenu: true,
+    submenuLevel: 2,
+  },
   render: (args) => ({
     components: {
       Theme,
-      NavigationMenu,
+      SDMenus,
     },
     setup() {
       const model = ref([
@@ -92,9 +94,9 @@ export const OcNavigationMenu = {
     },
     template: `
           <Theme>
-            <div class="p-4">{{ model}}</div>
+            <div class="p-4">{{ model }}</div>
             <div class="w-full">
-              <NavigationMenu v-model="model" />
+              <SDMenus :has-submenu="args.hasSubmenu" :submenuLevel="args.submenuLevel" v-model="model" />
             </div>
           </Theme>
         `,

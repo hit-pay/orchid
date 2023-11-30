@@ -1,4 +1,4 @@
-import NavigationMenu from "./StoreDesign/SDNavigationMenu/NavigationMenu.vue";
+import SDMenus from "./StoreDesign/SDMenus/SDMenus.vue";
 import ThemeThumbnail from "./ThemeThumbnail.vue";
 
-export { ThemeThumbnail, NavigationMenu };
+export { SDMenus, ThemeThumbnail };
