@@ -13,17 +13,29 @@ export const Default = {
     hint: "",
     label: "",
     errorMessage: "",
+    isImageOnly: false,
+    columnsCount: 3,
   },
   render: (args) => ({
     components: { MultipleUploadFile, Theme },
     setup() {
       const modelValue = ref();
-      return { modelValue, args };
+      const selectedImage = ref();
+      return { modelValue, args, selectedImage };
     },
     template: `
-          <Theme>
-            <MultipleUploadFile v-model="modelValue" :accept="args.accept" :max-size="args.maxSize" :hint="args.hint"
-                                :label="args.label" :error-message="args.errorMessage"/>
+          <Theme class="min-h-[500px]">
+            <MultipleUploadFile
+                v-model="modelValue"
+                v-model:selectedImage="selectedImage"
+                :accept="args.accept"
+                :max-size="args.maxSize"
+                :hint="args.hint"
+                :label="args.label"
+                :error-message="args.errorMessage"
+                :isImageOnly="args.isImageOnly"
+                :columnsCount="args.columnsCount"
+            />
           </Theme>
         `,
   }),
