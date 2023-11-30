@@ -48,7 +48,7 @@ export const OcDraggableList = {
               icon: "banner",
               label: "234 Label ",
             },
-          ]
+          ],
         },
         {
           id: "272",
@@ -112,7 +112,7 @@ export const OcDraggableList = {
                 <template #action="{item}"><span v-if="item.isToggle"><Toggle size="small" /></span></template>
                 <template #content="{item}">
                     <div v-if="item.children" class="flex w-full my-5">
-                        <DraggableList class="w-full" v-model="item.children">
+                        <DraggableList class="w-full" v-model="item.children" is-children>
                             <template #before-action="{item}">
                                 <span v-if="item.beforeAction">Use For {{item.id}}</span>
                             </template>

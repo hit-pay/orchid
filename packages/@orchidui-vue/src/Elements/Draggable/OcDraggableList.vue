@@ -14,10 +14,12 @@ defineProps({
     type: String,
     default: "children",
   },
+  isChildren: Boolean,
 });
 defineEmits({
   "update:modelValue": [],
 });
+const isHovered = ref([]);
 const isDropdownOpen = ref([]);
 </script>
 <template>
@@ -33,10 +35,16 @@ const isDropdownOpen = ref([]);
       class="group text-oc-text-500 p-4 flex flex-wrap items-center rounded border-gray-200"
       :class="
         element[childrenKey]
-          ? 'shadow border bg-oc-gray-50'
-          : 'hover:shadow hover:border bg-oc-accent-1-50 hover:bg-oc-gray-50'
+          ? 'hover:shadow border bg-oc-gray-50'
+          : isChildren && !isHovered[element.id]
+            ? 'bg-oc-accent-1-50'
+            : 'hover:shadow hover:border bg-oc-accent-1-50 hover:bg-oc-gray-50'
       "
-      @mouseleave="isDropdownOpen[element.id] = false"
+      @mouseleave="
+        isDropdownOpen[element.id] = false;
+        isHovered[element.id] = false;
+      "
+      @mouseover="isHovered[element.id] = true"
     >
       <div :class="!element.isDisable ? 'drag-el cursor-move' : ''">
         <Icon
@@ -44,14 +52,22 @@ const isDropdownOpen = ref([]);
           name="draggable"
           :class="
             element[iconKey]
-              ? 'hidden group-hover:block'
-              : 'opacity-0 group-hover:opacity-100 '
+              ? isChildren && !isHovered[element.id]
+                ? 'hidden'
+                : 'hidden group-hover:block'
+              : isChildren && !isHovered[element.id]
+                ? 'opacity-0'
+                : 'opacity-0 group-hover:opacity-100 '
           "
         />
         <Icon
           v-if="element[iconKey]"
           :name="element[iconKey]"
-          :class="!element.isDisable ? 'group-hover:hidden' : ''"
+          :class="
+            !element.isDisable && isHovered[element.id]
+              ? 'group-hover:hidden'
+              : ''
+          "
         />
       </div>
       <div class="ml-2">{{ element.label }}</div>
@@ -61,7 +77,12 @@ const isDropdownOpen = ref([]);
           <Dropdown
             v-model="isDropdownOpen[element.id]"
             placement="bottom-end"
-            class="opacity-0 group-hover:opacity-100 cursor-pointer"
+            class="cursor-pointer"
+            :class="
+              isChildren && !isHovered[element.id]
+                ? 'opacity-0'
+                : 'opacity-0 group-hover:opacity-100'
+            "
           >
             <Icon name="dots-vertical" />
             <template #menu>
