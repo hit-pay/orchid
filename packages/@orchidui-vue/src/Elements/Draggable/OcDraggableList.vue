@@ -99,7 +99,12 @@ const isDropdownOpen = ref([]);
                 : 'opacity-0 group-hover:opacity-100'
             "
           >
-            <Icon name="dots-vertical" />
+            <div
+              class="hover:bg-oc-gray-100 p-1 rounded"
+              :class="isDropdownOpen[element.id] ? 'bg-oc-gray-100' : ''"
+            >
+              <Icon name="dots-vertical" />
+            </div>
             <template #menu>
               <slot name="action-item" :item="element"></slot>
             </template>
