@@ -12,6 +12,11 @@ const props = defineProps({
     type: [String, Number],
     default: 1,
   },
+  isTextLink: Boolean,
+  linkKey: {
+    type: String,
+    default: "link",
+  },
 });
 
 const emit = defineEmits(
@@ -36,7 +41,13 @@ const addSubMenu = (item, subitem) => {
 </script>
 <template>
   <div>
-    <DraggableList v-model="model" is-link @update:model-value="update">
+    <DraggableList
+      v-model="model"
+      is-link
+      :link-key="linkKey"
+      :is-text-link="isTextLink"
+      @update:model-value="update"
+    >
       <template #action-item="{ item }">
         <div class="flex flex-col">
           <div class="p-2 border-b border-gray-200">
@@ -65,6 +76,8 @@ const addSubMenu = (item, subitem) => {
             class="w-full"
             is-children
             is-link
+            :link-key="linkKey"
+            :is-text-link="isTextLink"
           >
             <template #action-item="slot">
               <div class="flex flex-col">
@@ -101,6 +114,8 @@ const addSubMenu = (item, subitem) => {
                   class="w-full"
                   is-children
                   is-link
+                  :link-key="linkKey"
+                  :is-text-link="isTextLink"
                 >
                   <template #action-item="slot2">
                     <div class="flex flex-col">

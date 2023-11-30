@@ -9,6 +9,7 @@ export default {
 
 export const SDMenusDefault = {
   args: {
+    isTextLink: false,
     hasSubmenu: true,
     submenuLevel: 2,
   },
@@ -96,7 +97,7 @@ export const SDMenusDefault = {
           <Theme>
             <div class="p-4">{{ model }}</div>
             <div class="w-full">
-              <SDMenus :has-submenu="args.hasSubmenu" :submenuLevel="args.submenuLevel" v-model="model" />
+              <SDMenus :is-text-link="args.isTextLink" :has-submenu="args.hasSubmenu" :submenuLevel="args.submenuLevel" v-model="model" />
             </div>
           </Theme>
         `,

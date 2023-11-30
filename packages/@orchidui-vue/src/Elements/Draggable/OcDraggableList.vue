@@ -20,6 +20,7 @@ defineProps({
     type: String,
     default: "link",
   },
+  isTextLink: Boolean,
 });
 defineEmits({
   "update:modelValue": [],
@@ -51,7 +52,10 @@ const isDropdownOpen = ref([]);
       "
       @mouseover="isHovered[element.id] = true"
     >
-      <div :class="!element.isDisable ? 'drag-el cursor-move' : ''">
+      <div
+        class="px-2"
+        :class="!element.isDisable ? 'drag-el cursor-move' : ''"
+      >
         <Icon
           v-if="!element.isDisable"
           name="draggable"
@@ -76,15 +80,29 @@ const isDropdownOpen = ref([]);
         />
       </div>
       <div class="ml-2 flex items-center">
-        {{ element.label }}
-        <a
-          v-if="isLink && element[linkKey]"
-          :href="element[linkKey]"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Icon class="ml-2 text-oc-text-300" name="external-link" />
-        </a>
+        <div class="flex items-center" :class="isTextLink ? 'flex-wrap' : ''">
+          <div>
+            {{ element.label }}
+          </div>
+          <a
+            v-if="isLink && element[linkKey] && isTextLink"
+            :href="element[linkKey]"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-full flex items-center text-oc-text-300 mt-2"
+          >
+            <Icon width="12" height="12" class="mr-2" name="link" />
+            {{ element[linkKey] }}
+          </a>
+          <a
+            v-if="isLink && element[linkKey] && !isTextLink"
+            :href="element[linkKey]"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon class="ml-2 text-oc-text-300" name="external-link" />
+          </a>
+        </div>
       </div>
       <div class="flex ml-auto">
         <slot name="before-action" :item="element"></slot>
