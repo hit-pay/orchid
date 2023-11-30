@@ -1,5 +1,5 @@
 import { Theme } from "@/orchidui";
-import { SDPreview } from '@/orchidui/StoreDesign'
+import { SDPreview } from "@/orchidui/StoreDesign";
 export default {
   component: SDPreview,
   tags: ["autodocs"],

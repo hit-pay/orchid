@@ -1,11 +1,9 @@
 <script setup>
 import { Button } from "@/orchidui";
 defineProps({
-  name: String,
-  label: String,
-  preview: String,
-  pro: String,
+  section: Object,
 });
+defineEmits(["add", "customize"]);
 </script>
 <template>
   <div class="flex flex-col">
@@ -14,14 +12,19 @@ defineProps({
         class="w-full h-full bg-black/25 absolute top-0 left-0 hidden group-hover:flex rounded-lg"
       >
         <div class="w-full p-8 gap-3 m-auto flex">
-          <Button class="w-1/2" variant="secondary" label="Customize" />
-          <Button class="w-1/2" label="Add" />
+          <Button
+            class="w-1/2"
+            variant="secondary"
+            label="Customize"
+            @click="$emit('customize', section)"
+          />
+          <Button class="w-1/2" label="Add" @click="$emit('add', section)" />
         </div>
       </div>
-      <img class="w-full" :src="preview" :alt="label" />
+      <img class="w-full" :src="section.preview" :alt="section.label" />
     </div>
     <div class="mt-4 text-md text-center">
-      {{ label }}
+      {{ section.label }}
     </div>
   </div>
 </template>

@@ -34,12 +34,7 @@ export const Default = {
     template: `
           <Theme>
               <div class="grid grid-cols-2 gap-5 w-[535px]">
-                <ThumbnailSection
-                  v-for="item in args.sections"
-                  :name="item.name"
-                  :label="item.label"
-                  :preview="item.preview"
-                />
+                <ThumbnailSection v-for="section in args.sections" :section="section"  />
                </div>
           </Theme>
         `,

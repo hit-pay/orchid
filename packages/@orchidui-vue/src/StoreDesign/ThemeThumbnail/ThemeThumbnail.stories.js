@@ -39,15 +39,7 @@ export const Default = {
     template: `
           <Theme>
               <div class="grid grid-cols-2 md:grid-cols-3 gap-5">
-                <ThemeThumbnail
-                  v-for="theme in args.templates"
-                  :id="theme.id"
-                  :thumbnail="theme.thumbnail"
-                  :title="theme.title"
-                  :description="theme.description"
-                  :active="theme.active"
-                  :pro="theme.pro"
-                />
+                <ThemeThumbnail  v-for="theme in args.templates" :theme="theme" />
                </div>
           </Theme>
         `,
