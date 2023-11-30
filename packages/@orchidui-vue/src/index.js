@@ -3,7 +3,6 @@ export * from "./DataDisplay/Pagination/OcPagination.js";
 export * from "./DataDisplay/Overview/OcOverview.js";
 export * from "./DataDisplay/CustomerCard/OcCustomerCard.js";
 export * from "./DataDisplay/ListItem/OcListItem.js";
-export * from "./DataDisplay/SectionItem/OcSectionItem.js";
 
 export * from "./Disclosure/Accordion/OcAccordion.js";
 export * from "./Disclosure/Tabs/Tabs.js";
@@ -13,6 +12,7 @@ export * from "./Elements/PageTitle/OcPageTitle.js";
 export * from "./Elements/Sidebar/OcSidebar.js";
 export * from "./Elements/SubSidebar/OcSubSidebar.js";
 export * from "./Elements/EmptyPage/OcEmptyPage.js";
+export * from "./Elements/AdditionalContent/OcAdditionalContent.js";
 
 export * from "./Feedback/Chip/OcChip.js";
 export * from "./Feedback/Snackbar/OcSnackbar.js";
@@ -26,6 +26,7 @@ export * from "./MediaAndIcons/Icon/OcIcon.js";
 export * from "./Overlay/Dropdown/OcDropdown.js";
 export * from "./Overlay/Tooltip/OcTooltip.js";
 export * from "./Overlay/Modal/OcModal.js";
+export * from "./Overlay/ConfirmationModal/OcConfirmationModal.js";
 export * from "./Overlay/Popper/OcPopper.js";
 export * from "./Overlay/SupportMenu/OcSupportMenu.js";
 

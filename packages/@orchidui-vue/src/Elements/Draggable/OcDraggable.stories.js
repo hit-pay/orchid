@@ -1,7 +1,7 @@
 import { Theme } from "@/orchidui";
 
-import DraggableList from "./OcDraggableList.vue";
-import DraggableCard from "./OcDraggableCard.vue";
+import { Toggle, DropdownItem } from "@/orchidui";
+import { DraggableList } from "@/orchidui/DraggableList";
 
 import { ref } from "vue";
 
@@ -15,32 +15,97 @@ export const OcDraggableList = {
     components: {
       Theme,
       DraggableList,
+      Toggle,
+      DropdownItem,
     },
     setup() {
       const model = ref([
         {
           id: "123",
-          label: "123 Label ",
+          icon: "banner",
+          title: "123 Label ",
+          isToggle: true,
+          isDisable: true,
         },
         {
           id: "234",
-          label: "234 Label ",
+          title: "234 Label ",
+          beforeAction: true,
         },
         {
           id: "456",
-          label: "456 Label ",
+          icon: "top-banner",
+          title: "456 Label ",
+          isToggle: true,
+          children: [
+            {
+              id: "123",
+              icon: "banner",
+              title: "123 Label ",
+            },
+            {
+              id: "234",
+              icon: "banner",
+              title: "234 Label ",
+            },
+          ],
         },
         {
           id: "272",
-          label: "272 Label ",
+          title: "272 Label ",
+          children: [
+            {
+              id: "123",
+              icon: "banner",
+              title: "123 Label ",
+              isToggle: true,
+              isDisable: true,
+            },
+            {
+              id: "234",
+              title: "234 Label ",
+              beforeAction: true,
+            },
+            {
+              id: "456",
+              icon: "top-banner",
+              title: "456 Label ",
+              isToggle: true,
+            },
+            {
+              id: "272",
+              title: "272 Label ",
+              children: [
+                {
+                  id: "123",
+                  icon: "banner",
+                  title: "123 Label ",
+                },
+                {
+                  id: "234",
+                  icon: "banner",
+                  title: "234 Label ",
+                },
+              ],
+            },
+            {
+              id: "667",
+              title: "667 Label ",
+            },
+            {
+              id: "781",
+              title: "781 Label ",
+            },
+          ],
         },
         {
           id: "667",
-          label: "667 Label ",
+          title: "667 Label ",
         },
         {
           id: "781",
-          label: "781 Label ",
+          title: "781 Label ",
+          link: "https://orchidui.vercel.app",
         },
       ]);
       return { args, model };
@@ -49,67 +114,35 @@ export const OcDraggableList = {
           <Theme>
             <div class="p-4">{{ model}}</div>
             <div class="w-full min-h-[200px]">
-              <DraggableList v-model="model">
-                <template #before-action="{item}">
-                    slot before action { {{item.id}} }
+              <DraggableList v-model="model" is-link>
+                <template #action-item="{item}">
+                    <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
+                    <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
                 </template>
-                <template #action="{item}">
-                    Action for {{item.id}}
+                <template #action="{item}"><span v-if="item.isToggle"><Toggle size="small" /></span></template>
+                <template #content="{item}">
+                    <div v-if="item.children" class="flex w-full my-5">
+                        <DraggableList class="w-full" v-model="item.children" is-children is-link>
+                            <template #action-item="{item}">
+                                <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
+                                <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
+                            </template>
+                            <template #action="{item}"><span v-if="item.isToggle"><Toggle size="small" /></span></template>
+                            <template #content="{item}">
+                              <div v-if="item.children" class="flex w-full my-5">
+                                  <DraggableList class="w-full" v-model="item.children" is-children is-link>
+                                      <template #action-item="{item}">
+                                          <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
+                                          <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
+                                      </template>
+                                      <template #action="{item}"><span v-if="item.isToggle"><Toggle size="small" /></span></template>
+                                  </DraggableList>
+                              </div>
+                          </template>
+                        </DraggableList>
+                    </div>
                 </template>
               </DraggableList>
-            </div>
-          </Theme>
-        `,
-  }),
-};
-
-export const OcDraggableCard = {
-  render: (args) => ({
-    components: {
-      Theme,
-      DraggableCard,
-    },
-    setup() {
-      const model = ref([
-        {
-          id: "123",
-          url: "/images/cover.png",
-        },
-        {
-          id: "234",
-          url: "/images/cover.png",
-        },
-        {
-          id: "456",
-          url: "/images/cover.png",
-        },
-        {
-          id: "272",
-          url: "/images/cover.png",
-        },
-        {
-          id: "667",
-          url: "/images/cover.png",
-        },
-        {
-          id: "781",
-          url: "/images/cover.png",
-        },
-      ]);
-      return { args, model };
-    },
-    template: `
-          <Theme>
-            <div class="p-4">{{ model}}</div>
-            <div class="w-full min-h-[200px]">
-              <DraggableCard 
-              v-model="model" 
-              class="grid-cols-4"
-              >
-                <template #action="{item}">
-                   Action for {{item.id}}
-                </template>
-              </DraggableCard>
             </div>
           </Theme>
         `,

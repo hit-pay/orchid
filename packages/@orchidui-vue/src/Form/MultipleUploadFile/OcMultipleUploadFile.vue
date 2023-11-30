@@ -4,10 +4,26 @@
       :label="label"
       :hint="hint"
       :error-message="
-        errorMessage || (isErrorMaxSize && `File(s) is more than ${maxSize}MB`)
+        errorMessage
+          ? isErrorMaxSize && `File(s) is more than ${maxSize}MB`
+          : ''
       "
     >
+      <OcSimpleMultipleUpload
+        v-if="isImageOnly"
+        :uploaded-images="currentFiles"
+        :selected-image="selectedImage"
+        :columns-count="columnsCount"
+        :accept="accept"
+        @change="onChangeFile"
+        @update:selected-image="$emit('update:selectedImage', $event)"
+        @update:uploaded-images="
+          $emit('update:modelValue', $event);
+          currentFiles = $event;
+        "
+      />
       <div
+        v-else
         class="relative border rounded p-3 min-w-[30rem] flex flex-col"
         :class="isErrorMaxSize ? 'border-oc-error' : 'border-oc-gray-200'"
       >
@@ -90,8 +106,9 @@
 import { onMounted, ref } from "vue";
 import { Icon, BaseInput } from "@/orchidui";
 import { useUploadFileProgress } from "@/orchidui/composables/uploadFileProgress.js";
+import OcSimpleMultipleUpload from "./OcSimpleMultipleUpload.vue";
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(["update:modelValue", "update:selectedImage"]);
 const props = defineProps({
   modelValue: {
     type: Array,
@@ -108,6 +125,12 @@ const props = defineProps({
   hint: String,
   label: String,
   errorMessage: String,
+  isImageOnly: Boolean,
+  columnsCount: Number,
+  selectedImage: {
+    type: Object,
+    default: () => ({}),
+  },
 });
 const inputRef = ref();
 const isDragover = ref(false);
@@ -119,7 +142,7 @@ onMounted(() => {
 });
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .on-end-loading {
   animation: finish-loading 1s ease-out 1s forwards;
   @keyframes finish-loading {

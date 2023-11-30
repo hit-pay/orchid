@@ -117,7 +117,9 @@ onMounted(() => onScroll());
         v-if="isSelectable"
         :is-sticky="isSticky"
         class="md:ml-0 md:border-b border-oc-gray-200"
-        :class="[isSticky ? 'shrink-0 sticky left-0 z-10' : '']"
+        :class="[
+          isSticky ? 'shrink-0 sticky left-0 z-10' : 'w-[40px] md:w-[5%]',
+        ]"
         variant="checkbox"
         :is-partial="
           selectedRows.length !== fields.length && selectedRows.length > 0
@@ -163,7 +165,7 @@ onMounted(() => onScroll());
       >
         <TableCell
           v-if="isSelectable"
-          class="opacity-0 flex justify-center absolute left-0 md:relative"
+          class="opacity-0 flex justify-center absolute left-0 md:relative w-[5%]"
         />
 
         <TableCell
@@ -196,7 +198,9 @@ onMounted(() => onScroll());
             selectedRows.some((r) => getRowKey(r) === getRowKey(field))
           "
           :class="[
-            isSticky ? 'shrink-0 z-10 left-0 sticky' : 'md:relative absolute',
+            isSticky
+              ? 'shrink-0 z-10 left-0 sticky'
+              : 'md:relative absolute w-[40px] md:w-[5%]',
             fields.length !== i + 1 ? 'md:border-b' : '',
           ]"
           variant="checkbox"

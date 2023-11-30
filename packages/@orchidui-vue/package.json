@@ -1,6 +1,6 @@
 {
   "name": "@orchidui/vue",
-  "version": "0.2.38",
+  "version": "0.2.41",
   "type": "module",
   "scripts": {
     "build": "vite build",
@@ -35,6 +35,15 @@
     },
     "./SingleFileUpload": {
       "import": "./dist/SingleFileUpload.js"
+    },
+    "./Draggable": {
+      "import": "./dist/Draggable.js"
+    },
+    "./DraggableList": {
+      "import": "./dist/DraggableList.js"
+    },
+    "./StoreDesign": {
+      "import": "./dist/StoreDesign.js"
     },
     "./dist/style.css": {
       "import": "./dist/style.css",

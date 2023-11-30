@@ -34,8 +34,6 @@ export const sectionItem = {
               <SectionItem
                   :title="args.title"
                   :description="args.description"
-                  :button-props="args.buttonProps"
-                  :input-props="args.inputProps"
                   :is-toggle="args.isToggle"
                   :icon="args.icon"
               />
