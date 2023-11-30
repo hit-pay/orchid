@@ -80,7 +80,7 @@ const isDropdownOpen = ref([]);
       </div>
       <div class="ml-2 flex items-center max-w-[70%]">
         <div class="flex items-center flex-wrap">
-          <div class="truncate max-w-[80%]">
+          <div class="truncate">
             {{ element.label }}
           </div>
           <a
