@@ -1,18 +1,20 @@
 import { Theme } from "@/orchidui";
+import { RequestForm } from "@/orchidui/StoreDesign";
 export default {
-  component: "",
+  tags: ["autodocs"],
+  component: RequestForm,
 };
 
 export const Default = {
   args: {},
   render: (args) => ({
-    components: { Theme },
+    components: { Theme, RequestForm },
     setup() {
       return { args };
     },
     template: `
           <Theme>
-           
+            <RequestForm></RequestForm>
           </Theme>
         `,
   }),
