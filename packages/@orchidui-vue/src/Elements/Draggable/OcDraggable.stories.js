@@ -1,7 +1,7 @@
 import { Theme } from "@/orchidui";
 
-import DraggableList from "./OcDraggableList.vue";
 import { Toggle, DropdownItem } from "@/orchidui";
+import { DraggableList } from "@/orchidui/DraggableList";
 
 import { ref } from "vue";
 
@@ -105,7 +105,7 @@ export const OcDraggableList = {
         {
           id: "781",
           label: "781 Label ",
-          link: "https://orchid.vercel.app",
+          link: "https://orchidui.vercel.app",
         },
       ]);
       return { args, model };

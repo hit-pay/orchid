@@ -1,6 +1,6 @@
 <!-- TODO : group not support nested dynamic -->
 <script setup>
-import { OcDraggable } from "@/orchidui/Draggable";
+import { OcDraggable } from "@/orchidui/OcDraggable";
 import { Icon, Dropdown } from "@/orchidui";
 import { ref } from "vue";
 
@@ -77,11 +77,14 @@ const isDropdownOpen = ref([]);
       </div>
       <div class="ml-2 flex items-center">
         {{ element.label }}
-        <Icon
+        <a
           v-if="isLink && element[linkKey]"
-          class="ml-2 text-oc-text-300"
-          name="external-link"
-        />
+          :href="element[linkKey]"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Icon class="ml-2 text-oc-text-300" name="external-link" />
+        </a>
       </div>
       <div class="flex ml-auto">
         <slot name="before-action" :item="element"></slot>

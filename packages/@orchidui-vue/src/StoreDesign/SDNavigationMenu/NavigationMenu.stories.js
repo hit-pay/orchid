@@ -85,7 +85,7 @@ export const OcNavigationMenu = {
         {
           id: "781",
           label: "Menu ",
-          link: "https://orchid.vercel.app",
+          link: "https://orchidui.vercel.app",
         },
       ]);
       return { args, model };
