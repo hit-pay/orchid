@@ -32,7 +32,7 @@ const props = defineProps({
     default: () => false,
   },
 });
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(["update:modelValue", "resetCalendar"]);
 
 const selectedDate = ref(
   props.type === "range"
@@ -135,6 +135,7 @@ const clearDate = () => {
         ? selectedEndDate.value.getDate()
         : null
       : null;
+  emit("resetCalendar");
 };
 const prevMonth = () => {
   if (props.type === "range") {
