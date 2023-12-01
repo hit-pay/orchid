@@ -1,3 +1,5 @@
+import * as echarts from "echarts/core";
+
 export const PieChartOptions = {
   legend: {
     show: false,
@@ -63,6 +65,85 @@ export const PieChartOptions = {
           shadowOffsetX: 0,
           shadowColor: "rgba(0, 0, 0, 0.5)",
         },
+      },
+    },
+  ],
+};
+export const LineChartOptions = {
+  xAxis: {
+    type: "category",
+    data: [
+      "NOV'22",
+      "DEC'22",
+      "JAN'23",
+      "FEB'23",
+      "MAR'23",
+      "MAY'23",
+      "JUN'23",
+      "JUL'23",
+      "AUG'23",
+      "SEP'23",
+      "OCT'23",
+      "NOV'23",
+    ],
+    axisTick: {
+      show: false,
+    },
+    axisLabel: {
+      color: "#9295A5",
+    },
+    axisLine: {
+      lineStyle: {
+        color: "#2465DE",
+      },
+    },
+    axisPointer: {
+      show: true,
+    },
+  },
+  yAxis: {
+    type: "value",
+    splitLine: {
+      show: false,
+    },
+    axisLabel: {
+      formatter: (value) => {
+        return (value / 1000).toFixed(1) + "K";
+      },
+    },
+  },
+  grid: {
+    show: false,
+  },
+  tooltip: {
+    show: true,
+    trigger: "axis",
+    axisPointer: "y",
+  },
+  series: [
+    {
+      data: [
+        500, 730, 824, 1218, 2135, 1147, 760, 1150, 2130, 2324, 1218, 2135,
+        1147,
+      ],
+      type: "line",
+      smooth: true,
+      showSymbol: false,
+      symbol: "circle",
+      areaStyle: {
+        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          {
+            offset: 0,
+            color: "rgba(36, 101, 222, 0.05)", // Start color
+          },
+          {
+            offset: 1,
+            color: "rgba(36, 101, 222, 0)", // End color
+          },
+        ]),
+      },
+      lineStyle: {
+        color: "#2465DE",
       },
     },
   ],

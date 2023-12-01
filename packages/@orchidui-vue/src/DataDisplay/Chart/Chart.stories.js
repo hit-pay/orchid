@@ -1,5 +1,5 @@
-import Chart from "./OcPieChart.vue";
-import { PieChartOptions } from "../../data/ChartData.js";
+import Chart from "./OcChart.vue";
+import { PieChartOptions, LineChartOptions } from "../../data/ChartData.js";
 import { ref } from "vue";
 import { Select } from "@/orchidui";
 
@@ -43,6 +43,22 @@ export const Default = {
                 <span v-else>Other</span>
               </div>
             </div>
+          </div>
+        `,
+  }),
+};
+export const Line = {
+  args: {
+    options: LineChartOptions,
+  },
+  render: (args) => ({
+    components: { Chart },
+    setup() {
+      return { args };
+    },
+    template: `
+          <div>
+            <Chart class="h-[300px]" :options="args.options"/>
           </div>
         `,
   }),
