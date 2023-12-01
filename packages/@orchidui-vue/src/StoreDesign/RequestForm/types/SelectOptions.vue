@@ -1,6 +1,6 @@
 <template>
   <div>
-    This option type
+    Select Options with preview image
     <!-- grid -->
     <!-- col -->
   </div>
