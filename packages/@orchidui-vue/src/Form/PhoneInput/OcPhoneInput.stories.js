@@ -37,7 +37,7 @@ export const Default = {
   render: (args) => ({
     components: { Theme, PhoneInput },
     setup() {
-      const modelValue = ref([213, 10000000]);
+      const modelValue = ref(null);
       return { modelValue, args, countryCodes };
     },
     template: `
