@@ -17,7 +17,8 @@ const activeMenu = computed(() =>
 const currentRef = ref();
 const menuRefs = ref([]);
 const changeCurrentPosition = (clickEvent) => {
-  const selectedMenu = clickEvent?.target || menuRefs.value[0];
+  const selectedMenu =
+    clickEvent?.target || menuRefs.value[props.menus.indexOf(activeMenu.value)];
   currentRef.value.style.width = `${selectedMenu.offsetWidth}px`;
   currentRef.value.style.left = `${selectedMenu.offsetLeft}px`;
 };
