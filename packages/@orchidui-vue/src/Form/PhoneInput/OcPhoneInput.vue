@@ -67,7 +67,7 @@ const getCountryObject = (iso) =>
 const getCountryCode = (iso) => getCountryObject(iso)?.code || "";
 
 const onInput = (value) => {
-  emit("update:modelValue", [props.modelValue?.[0] || "", value]);
+  emit("update:modelValue", [getCountryCode(selectedCountryIso.value), value]);
 };
 const changeSelectedCountry = (iso, code) => {
   selectedCountryIso.value = iso.toLowerCase();
