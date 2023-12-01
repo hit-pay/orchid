@@ -19,6 +19,7 @@
     "@orchidui/vue": "^0.1.125",
     "@popperjs/core": "^2.11.8",
     "dayjs": "^1.11.10",
+    "echarts": "^5.4.3",
     "flag-icons": "^6.11.1",
     "quill": "^2.0.0-dev.4",
     "replace-in-file": "^7.0.2",
