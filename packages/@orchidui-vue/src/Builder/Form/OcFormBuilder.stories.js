@@ -134,6 +134,13 @@ export const Default = {
                 Errors : {{ errors }}
               </p>
             </div>
+            <Button
+              label="Trigger errors"
+              @click="errors = {
+                phone_number_field: 'Field is invalid format',
+                input: 'Field is required',
+              }"
+            />
             <FormBuilder
                 id="form-builder"
                 class="gap-5"
@@ -179,7 +186,6 @@ export const Default = {
                     </div>
                   </Dropdown>
                 </template>
-                </Input>
               </template>
             </FormBuilder>
           </Theme>
