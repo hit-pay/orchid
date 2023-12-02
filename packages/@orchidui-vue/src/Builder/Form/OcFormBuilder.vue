@@ -93,7 +93,7 @@ const modelValues = (name, defaultValue = "") => {
     return props.values[name] ?? defaultValue;
   }
 };
-const errorValues = (name) => {
+const errorValues = computed(() => (name) => {
   if (typeof name === "object") {
     let errorMessage = [];
     name.forEach((formName) => {
@@ -105,7 +105,8 @@ const errorValues = (name) => {
   } else {
     return props.errors[name] ?? "";
   }
-};
+});
+
 const gridDefinitionVariables = computed(() => {
   const parseGridArea = (gridArea) =>
     gridArea
