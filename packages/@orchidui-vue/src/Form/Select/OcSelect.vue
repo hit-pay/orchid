@@ -49,9 +49,7 @@ const emit = defineEmits({
   "update:modelValue": [],
 });
 
-const localValue = ref(
-  props.modelValue ? props.modelValue : props.multiple ? [] : "",
-);
+const localValue = ref();
 
 const query = ref("");
 const isDropdownOpened = ref(false);
@@ -122,6 +120,18 @@ const removeOption = (value) => {
   localValue.value = localValue.value.filter((o) => o !== value);
   emit("update:modelValue", localValue.value);
 };
+
+const initLocalValue = () => {
+  if (props.modelValue === null || props.modelValue === undefined) {
+    localValue.value = props.multiple ? [] : "";
+
+    return;
+  }
+
+  localValue.value = props.modelValue;
+}
+
+initLocalValue()
 </script>
 
 <template>
