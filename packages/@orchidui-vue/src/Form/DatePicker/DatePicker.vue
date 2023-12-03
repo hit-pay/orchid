@@ -82,6 +82,16 @@ const updateCalendar = () => {
   }
   isDropdownOpened.value = false;
 };
+
+const resetCalendar = () => {
+  if (props.type === "range") {
+    date.value[0] = "";
+    date.value[1] = "";
+  } else {
+    date.value = "";
+  }
+  isDropdownOpened.value = false;
+};
 </script>
 
 <template>
@@ -140,6 +150,7 @@ const updateCalendar = () => {
         position="inline"
         :type="type"
         @update:model-value="updateCalendar"
+        @reset-calendar="resetCalendar"
       />
     </template>
   </Dropdown>

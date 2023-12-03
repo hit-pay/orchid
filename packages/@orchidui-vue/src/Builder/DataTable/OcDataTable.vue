@@ -165,7 +165,7 @@ const applyFilter = (filterForm = null, isChangePage = false) => {
   filterData.value.page = currentPage.value;
 
   if (filterOptions.value?.per_page) {
-    filterData.value[filterOptions.value.per_page.key] = filterTab.value;
+    filterData.value[filterOptions.value.per_page.key] = perPage.value;
   } else {
     filterData.value.per_page = perPage.value;
   }

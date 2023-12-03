@@ -67,12 +67,25 @@ const getCountryObject = (iso) =>
 const getCountryCode = (iso) => getCountryObject(iso)?.code || "";
 
 const onInput = (value) => {
-  emit("update:modelValue", [props.modelValue?.[0] || "", value]);
+  emit("update:modelValue", [getCountryCode(selectedCountryIso.value), value]);
 };
 const changeSelectedCountry = (iso, code) => {
   selectedCountryIso.value = iso.toLowerCase();
   emit("update:modelValue", [code, props.modelValue?.[1] || ""]);
   isDropdownOpened.value = false;
+};
+
+const countryListRef = ref(null);
+const countryListItemRef = ref([]);
+const scrollToSelectedCountry = () => {
+  setTimeout(() => {
+    const indexSelectedCountry = filteredCountryCodes.value.indexOf(
+      getCountryObject(selectedCountryIso.value),
+    );
+    const countryEl = countryListItemRef.value[indexSelectedCountry];
+    const top = countryEl.offsetTop;
+    countryListRef.value.scrollTo(0, top - 60, { behavior: "smooth" });
+  }, 10);
 };
 </script>
 
@@ -96,6 +109,7 @@ const changeSelectedCountry = (iso, code) => {
         v-model="isDropdownOpened"
         :distance="10"
         placement="bottom-start"
+        @update:model-value="scrollToSelectedCountry"
       >
         <div class="flex gap-x-2 items-center">
           <div
@@ -116,8 +130,11 @@ const changeSelectedCountry = (iso, code) => {
         </div>
 
         <template #menu>
-          <div class="flex flex-col max-h-[300px] py-2 overflow-y-auto">
-            <div class="px-3 py-1">
+          <div
+            ref="countryListRef"
+            class="flex flex-col max-h-[300px] py-2 overflow-y-scroll"
+          >
+            <div class="px-3 py-1 sticky top-0 bg-oc-bg-light z-[1000]">
               <Input v-model="query" icon="search" placeholder="Search">
                 <template #icon>
                   <Icon class="w-5 h-5 text-oc-text-400" name="search" />
@@ -126,8 +143,14 @@ const changeSelectedCountry = (iso, code) => {
             </div>
             <div
               v-for="(country, i) in filteredCountryCodes"
+              ref="countryListItemRef"
               :key="i"
               class="py-3 px-4 flex gap-x-4 items-center hover:bg-oc-gray-50 cursor-pointer"
+              :class="
+                selectedCountryIso === country.iso.toLowerCase()
+                  ? 'bg-oc-gray-50 font-medium'
+                  : ''
+              "
               @click="changeSelectedCountry(country.iso, country.code)"
             >
               <div

@@ -55,7 +55,7 @@ export const HeaderElement = {
       SampleHeaderRight,
     },
     setup() {
-      const activeMenuValue = ref("payments");
+      const activeMenuValue = ref("online_store");
       const activeMenuLabel = computed(() => {
         return args.menus.find((m) => m.value === activeMenuValue.value).label;
       });
@@ -64,7 +64,7 @@ export const HeaderElement = {
     },
     template: `
           <Theme>
-            <div class="w-full h-[200px]">
+            <div class="w-full h-[400px]">
               <Header class="mb-3">
                 <button aria-label="Menu Button" class="p-3 md:hidden">
                   <Icon name="menu" width="24" height="24"/>

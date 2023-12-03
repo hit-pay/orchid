@@ -17,7 +17,8 @@ const activeMenu = computed(() =>
 const currentRef = ref();
 const menuRefs = ref([]);
 const changeCurrentPosition = (clickEvent) => {
-  const selectedMenu = clickEvent?.target || menuRefs.value[0];
+  const selectedMenu =
+    clickEvent?.target || menuRefs.value[props.menus.indexOf(activeMenu.value)];
   currentRef.value.style.width = `${selectedMenu.offsetWidth}px`;
   currentRef.value.style.left = `${selectedMenu.offsetLeft}px`;
 };
@@ -51,18 +52,21 @@ onMounted(() => changeCurrentPosition());
       <Icon name="chevron-down" width="20" height="20" />
     </div>
     <template #menu>
-      <div class="p-2 border-b border-gray-200">
+      <div
+        class="p-4 min-w-[220px] flex flex-col gap-y-3 border-b border-gray-200"
+      >
         <DropdownItem
           v-for="item in menus"
           :key="item.value"
+          class="px-5 py-3"
           :text="item.label"
           :style="{
             borderColor: activeMenu.color,
           }"
           :class="[
             item.value === modelValue
-              ? 'text-oc-accent-1 border-b-[3px]'
-              : 'text-oc-text-300',
+              ? '!text-oc-accent-1 font-medium bg-oc-accent-1-50-tr'
+              : '!text-oc-text-400',
           ]"
           @click="
             $emit('changePath', item.path);
