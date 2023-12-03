@@ -211,7 +211,7 @@ initLocalValue();
                 :label="option.label"
                 :is-selected="
                   multiple
-                    ? localValue.find((o) => o === option.value) !== undefined
+                    ? localValue?.find((o) => o === option.value) !== undefined
                     : localValue === option.value
                 "
                 @click="selectOption(option)"
