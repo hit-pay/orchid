@@ -1,5 +1,5 @@
 import { Theme } from "@/orchidui";
-import { RequestForm } from "@/orchidui/StoreDesign";
+import { RequestForm, SDMenus } from "@/orchidui/StoreDesign";
 
 import { ref } from "vue";
 export default {
@@ -95,15 +95,7 @@ export const Default = {
           ],
         },
       },
-      {
-        name: "input",
-        type: "Input",
-        props: {
-          label: "Example Label",
-          hint: "This is a hint text to help user",
-          placeholder: "placeholder",
-        },
-      },
+
       {
         name: "select",
         type: "Select",
@@ -128,6 +120,15 @@ export const Default = {
         },
       },
       {
+        name: "input",
+        type: "Input",
+        props: {
+          label: "Example Label",
+          hint: "This is a hint text to help user",
+          placeholder: "placeholder",
+        },
+      },
+      {
         name: "textarea",
         key: "textarea",
         type: "Textarea",
@@ -137,15 +138,28 @@ export const Default = {
           placeholder: "placeholder",
         },
       },
+      {
+        name: "menus",
+        type: "NavigationMenu",
+      },
+      {
+        name: "select_product",
+        type: "SelectProduct",
+      },
+      {
+        name: "select_category",
+        type: "SelectCategory",
+      },
     ],
   },
   render: (args) => ({
-    components: { Theme, RequestForm },
+    components: { Theme, RequestForm, SDMenus },
     setup() {
       const values = ref({
         select_options: "",
         select_options_1: "",
         select_options_2: "",
+        select_options_3: "",
         input: "",
         select: "",
         textarea: "",
@@ -162,7 +176,39 @@ export const Default = {
         }
       };
 
-      return { values, errors, onUpdateForm, args };
+      const menusData = ref([
+        {
+          id: "234",
+          title: "Menu ",
+          link: "https://orchidui.vercel.app",
+        },
+        {
+          id: "456",
+          icon: "top-banner",
+          title: "Menu",
+          children: [
+            {
+              id: "123",
+              icon: "banner",
+              title: "SubMenu ",
+              link: "https://orchidui.vercel.app",
+            },
+            {
+              id: "234",
+              icon: "banner",
+              title: "SubMenu",
+              link: "https://orchidui.vercel.app",
+            },
+          ],
+        },
+        {
+          id: "667",
+          title: "Menu ",
+          link: "https://orchidui.vercel.app",
+        },
+      ]);
+
+      return { values, errors, onUpdateForm, args, menusData };
     },
     template: `
           <Theme>
@@ -170,7 +216,20 @@ export const Default = {
               {{ values}}
             </div>
             <div class="max-w-[550px] border p-4 rounded">
-              <RequestForm class="grid gap-5"  id="section_name" :values="values" :errors="errors" :json-form="args.jsonForm"  @onUpdate="onUpdateForm" />
+              <RequestForm class="grid gap-5"  id="section_name" :values="values" :errors="errors" :json-form="args.jsonForm"  @onUpdate="onUpdateForm" >
+                <template #NavigationMenu>
+                  <div class="text-sm flex items-center gap-x-3 font-medium text-oc-text-400 mb-2">
+                    Navigation Menu
+                  </div>
+                  <SDMenus :has-submenu v-model="menusData" />
+                </template>
+                <template #SelectProduct>
+                    Custom Select Product Form
+                </template>
+                <template #SelectCategory>
+                    Custom Select Category Form 
+                </template>
+              </RequestForm>
             </div>
           </Theme>
         `,

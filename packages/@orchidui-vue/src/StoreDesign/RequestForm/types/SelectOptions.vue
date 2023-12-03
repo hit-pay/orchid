@@ -48,7 +48,7 @@ const isVariantGrid = computed(() => {
 
 <template>
   <BaseInput
-    :label="isInlineLabel ? '' : label"
+    :label="label"
     :hint="hint"
     :error-message="errorMessage"
     :is-required="isRequired"
