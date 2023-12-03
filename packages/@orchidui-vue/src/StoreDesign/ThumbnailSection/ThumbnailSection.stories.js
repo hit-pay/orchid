@@ -8,26 +8,21 @@ export default {
 
 export const Default = {
   args: {
-    templates: [
+    sections: [
       {
-        id: 1,
-        thumbnail: "/images/theme1.png",
-        title: "Theme Title 1",
-        description: "Description of theme will be here",
+        name: "section_1",
+        preview: "/images/section.png",
+        label: "Section 1",
       },
       {
-        id: 2,
-        thumbnail: "/images/theme1.png",
-        title: "Theme Title 2",
-        description: "Description of theme will be here",
-        active: true,
+        name: "section_2",
+        preview: "/images/section.png",
+        label: "Section 2",
       },
       {
-        id: 3,
-        thumbnail: "/images/theme1.png",
-        title: "Theme Title 3",
-        description: "Description of theme will be here",
-        pro: true,
+        name: "section_2",
+        preview: "/images/section.png",
+        label: "Section 2",
       },
     ],
   },
@@ -38,16 +33,8 @@ export const Default = {
     },
     template: `
           <Theme>
-              <div class="grid grid-cols-2 md:grid-cols-3 gap-5">
-                <ThumbnailSection
-                  v-for="theme in args.templates"
-                  :id="theme.id"
-                  :thumbnail="theme.thumbnail"
-                  :title="theme.title"
-                  :description="theme.description"
-                  :active="theme.active"
-                  :pro="theme.pro"
-                />
+              <div class="grid grid-cols-2 gap-5 w-[535px]">
+                <ThumbnailSection v-for="section in args.sections" :section="section"  />
                </div>
           </Theme>
         `,

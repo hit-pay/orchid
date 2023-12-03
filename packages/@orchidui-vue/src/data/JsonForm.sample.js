@@ -201,6 +201,7 @@ const SampleJsonForm = [
       placeholder: "placeholder",
       isFilterable: true,
       isAddNew: true,
+      multiple: true,
       options: [
         {
           label: "Option 1",
