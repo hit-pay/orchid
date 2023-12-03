@@ -107,14 +107,12 @@ export const Default = {
             {
               label: "Option 1",
               value: 1,
-              description:
-                "Smaller height, fit to screen width",
+              description: "Smaller height, fit to screen width",
             },
             {
               label: "Option 2",
               value: 2,
-              description:
-                "Smaller height, fit to screen width",
+              description: "Smaller height, fit to screen width",
             },
           ],
         },
