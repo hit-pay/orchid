@@ -50,7 +50,7 @@ export default defineConfig({
         "v-calendar",
         "vue-advanced-cropper",
         "quill",
-        "vue-draggable-next"
+        "vue-draggable-next",
       ],
     },
   },

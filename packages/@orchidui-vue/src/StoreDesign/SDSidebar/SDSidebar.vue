@@ -2,7 +2,7 @@
 import { Icon } from "@/orchidui";
 import { computed } from "vue";
 const props = defineProps({
-  modelValue: {
+  settings: {
     type: Object,
   },
   active: {
@@ -13,7 +13,7 @@ const props = defineProps({
   },
 });
 const emit = defineEmits({
-  "update:modelValue": [],
+  "update:settings": [],
   "update:active": [],
 });
 
