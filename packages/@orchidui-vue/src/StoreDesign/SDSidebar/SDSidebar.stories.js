@@ -1,5 +1,6 @@
 import { Theme } from "@/orchidui";
 import { SDSidebar } from "@/orchidui/StoreDesign";
+import HeaderSettings from "./HeaderSettings.vue";
 import { SDSidebarSample } from "@/orchidui/data/SDSidebar.sample";
 import { ref } from "vue";
 export default {
@@ -10,39 +11,58 @@ export default {
 export const Default = {
   args: {},
   render: (args) => ({
-    components: { Theme, SDSidebar },
+    components: { Theme, SDSidebar, HeaderSettings },
     setup() {
       const SDSidebarData = ref(SDSidebarSample);
       const sidebarActive = ref({
         sidebarMenu: "home",
-        submenu: "",
+        submenu: "header",
         section: "",
       });
-      return { sidebarActive, SDSidebarData, args };
+      const storeDesign = ref({});
+      return { sidebarActive, storeDesign, SDSidebarData, args };
     },
     template: `
           <Theme>
           <div class="h-[800px] max-w-[500px]">
             <SDSidebar 
-              v-model="sidebarActive"
+              v-model="storeDesign"
+              v-model:active="sidebarActive"
               :sidebar="SDSidebarData"
               >
-              <template #styles="{changeSection}">
+              <template #styles>
               Select Preset Style
               ->  <div @click="sidebarActive.submenu = 'custom'">Go to Custom Style</div> 
               </template>
-              <template #home>
-                Header Section
+              
+              <template #header>
+                <HeaderSettings @changeSection="sidebarActive.section = $event" />
               </template>
               <template #sections>
-                Orderen List Section
+                Section Settings
               </template>
               <template #footer>
-                Footer Section
+              Footer Settings
               </template>
               <template #custom>
-              Footer Section
+              Custom Style Settings
               </template>
+
+              </template>
+              <template #section-top_banner>
+                <div @click="sidebarActive.section = ''">[Back, Save] / CLose</div>
+               Top Banner Section
+              </template>
+              <template #section-header>
+              <div @click="sidebarActive.section = ''">[Back, Save] / CLose</div>
+              Header Section
+             </template>
+             <template #section-banner>
+             <div @click="sidebarActive.section = ''">[Back, Save] / CLose</div>
+             Banner Section
+            </template>
+              
+
             </SDSidebar>
           </div>
           </Theme>

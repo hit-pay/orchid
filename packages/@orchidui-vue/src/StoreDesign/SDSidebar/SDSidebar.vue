@@ -5,36 +5,47 @@ const props = defineProps({
   modelValue: {
     type: Object,
   },
+  active: {
+    type: Object,
+  },
   sidebar: {
     type: Array,
   },
 });
 const emit = defineEmits({
   "update:modelValue": [],
+  "update:active": [],
 });
 
 const sidebarActive = computed(() => {
-  return props.modelValue;
+  return props.active;
 });
 
 const changeSidebarMenu = (value) => {
-  emit("update:modelValue", {
+  emit("update:active", {
     ...sidebarActive.value,
     sidebarMenu: value,
   });
 };
 const changeSubmenu = (value) => {
-  emit("update:modelValue", {
+  emit("update:active", {
     ...sidebarActive.value,
     submenu: value,
   });
 };
-const changeSection = (value) => {
-  emit("update:modelValue", {
-    ...sidebarActive.value,
-    section: value,
-  });
-};
+
+const sidebarMenuActive = computed(() => {
+  return props.sidebar.find((s) => s.name === sidebarActive.value.sidebarMenu);
+});
+const sidebarMenuLabel = computed(() => {
+  return sidebarMenuActive.value.label;
+});
+const submenuLabel = computed(() => {
+  const submenu = sidebarMenuActive.value.children.find(
+    (s) => s.name === sidebarActive.value.submenu,
+  );
+  return submenu?.label;
+});
 </script>
 <template>
   <div class="h-full relative border border-gray-200">
@@ -84,15 +95,17 @@ const changeSection = (value) => {
       </div>
     </div>
     <div v-else-if="!sidebarActive.section">
-      <div class="flex cursor-pointer">
-        <div @click="changeSubmenu('')">{{ sidebarActive.sidebarMenu }}</div>
-        / {{ sidebarActive.submenu }}
+      <div class="px-5 py-4 flex cursor-pointer">
+        <div class="text-oc-text-300" @click="changeSubmenu('')">
+          {{ sidebarMenuLabel }}
+        </div>
+        <div class="mx-2">/</div>
+        <div class="font-medium">{{ submenuLabel }}</div>
       </div>
-      <slot :name="sidebarActive.submenu" @changeSection="changeSection" />
+      <slot :name="sidebarActive.submenu" />
     </div>
     <div v-else-if="sidebarActive.section">
-      back -> Save edit close
-      <slot :name="sidebarActive.section" />
+      <slot :name="`section-${sidebarActive.section}`" />
     </div>
     <div class="absolute bottom-0">Change Theme</div>
   </div>

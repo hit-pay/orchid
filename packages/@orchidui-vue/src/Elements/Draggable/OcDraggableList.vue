@@ -23,6 +23,7 @@ defineProps({
 });
 defineEmits({
   "update:modelValue": [],
+  "click:element": [],
 });
 const isHovered = ref([]);
 const isDropdownOpen = ref([]);
@@ -80,7 +81,7 @@ const isDropdownOpen = ref([]);
       </div>
       <div class="ml-2 flex items-center max-w-[70%]">
         <div class="flex items-center flex-wrap">
-          <div class="truncate">
+          <div class="truncate" @click="$emit('click:element', element)">
             {{ element.title }}
           </div>
           <a
