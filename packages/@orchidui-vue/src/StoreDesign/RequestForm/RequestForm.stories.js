@@ -95,6 +95,30 @@ export const Default = {
           ],
         },
       },
+      {
+        name: "select_options_4",
+        type: "SelectOptions",
+        props: {
+          variant: "list2",
+          label: "Example Label",
+          hint: "This is a hint text to help user",
+          placeholder: "placeholder",
+          options: [
+            {
+              label: "Option 1",
+              value: 1,
+              description:
+                "Smaller height, fit to screen width",
+            },
+            {
+              label: "Option 2",
+              value: 2,
+              description:
+                "Smaller height, fit to screen width",
+            },
+          ],
+        },
+      },
 
       {
         name: "select",
@@ -160,6 +184,7 @@ export const Default = {
         select_options_1: "",
         select_options_2: "",
         select_options_3: "",
+        select_options_4: "",
         input: "",
         select: "",
         textarea: "",

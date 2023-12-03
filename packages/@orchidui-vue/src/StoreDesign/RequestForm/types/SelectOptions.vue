@@ -41,7 +41,7 @@ const update = (value) => {
   emit("update:modelValue", value);
 };
 
-const isVariantGrid = computed(() => {
+const isGridVariant = computed(() => {
   return props.variant === "grid";
 });
 </script>
@@ -58,7 +58,7 @@ const isVariantGrid = computed(() => {
   >
     <div
       class="w-full grid gap-5"
-      :class="variant === 'grid' ? 'grid-cols-3' : ''"
+      :class="isGridVariant ? 'grid-cols-3' : variant === 'list2' ? 'grid-cols-2': ''"
     >
       <div
         v-for="opt in options"
@@ -66,26 +66,27 @@ const isVariantGrid = computed(() => {
         class="cursor-pointer"
         :class="{
           'flex border border-oc-gray-200 p-4 rounded hover:shadow':
-            !isVariantGrid,
+            !isGridVariant,
           'border-2 border-oc-primary':
-            !isVariantGrid && opt.value === modelValue,
+            !isGridVariant && opt.value === modelValue,
         }"
         @click="update(opt.value)"
       >
         <img
+          v-if="opt.preview"
           class="hover:shadow rounded"
           :class="{
             'border-2 border-oc-primary':
-              isVariantGrid && opt.value === modelValue,
+              isGridVariant && opt.value === modelValue,
             'border border-oc-gray-200':
-              (isVariantGrid && opt.value !== modelValue) || !isVariantGrid,
-            'w-full': isVariantGrid,
-            'w-1/8': !isVariantGrid,
+              (isGridVariant && opt.value !== modelValue) || !isGridVariant,
+            'w-full': isGridVariant,
+            'w-1/8': !isGridVariant,
           }"
           :src="opt.preview"
         />
-        <div class="mt-2" :class="isVariantGrid ? 'text-center' : 'px-3'">
-          <span class="font-medium" :class="isVariantGrid ? 'text-sm ' : ''">{{
+        <div class="mt-2" :class="isGridVariant ? 'text-center' : 'px-3'">
+          <span class="font-medium" :class="isGridVariant ? 'text-sm ' : ''">{{
             opt.label
           }}</span>
           <div
