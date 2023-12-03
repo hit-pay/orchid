@@ -4,7 +4,7 @@
 // exp : ["styles", "custom", ""]; to show custom styles
 // exp : ["page", "", ""]; to show header page
 
-const SDSidebar = [
+const SDSidebarSample = [
   {
     type: "list",
     name: "home",
@@ -204,7 +204,7 @@ const RequestFormSection = [
 ];
 
 export {
-  SDSidebar,
+  SDSidebarSample,
   Sections,
   AvailableSections,
   FormRequestTypes,
