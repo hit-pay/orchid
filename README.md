@@ -1,7 +1,10 @@
 # orchid ui
 
-https://orchidui.vercel.app
-https://storybook-orchidui.vercel.app
+DOC : https://orchidui.vercel.app 
+
+Storybook : https://orchidui.vercel.app/storybook/
+
+
 
 # setup
 
@@ -11,17 +14,6 @@ npm install
 
 npm run dev
 
-# run docs
-
-npm run dev-docs
-
-# run playground
-
-npm run dev-playground
-
-# landing pages
-
-coming soon
 
 # publish
 
