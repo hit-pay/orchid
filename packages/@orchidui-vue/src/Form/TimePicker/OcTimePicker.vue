@@ -32,7 +32,7 @@ defineProps({
   },
 });
 const updateActiveTime = () =>
-  setTimeout(() => popup.value.updateActiveTime(), 300);
+  setTimeout(() => popup.value?.updateActiveTime(), 300);
 </script>
 
 <template>
