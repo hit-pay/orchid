@@ -48,15 +48,16 @@ export const Default = {
               Custom Style Settings
               </template>
 
-              </template>
               <template #section-top_banner>
                 <div @click="sidebarActive.section = ''">[Back, Save] / CLose</div>
                Top Banner Section
               </template>
+
               <template #section-header>
               <div @click="sidebarActive.section = ''">[Back, Save] / CLose</div>
               Header Section
              </template>
+             
              <template #section-banner>
              <div @click="sidebarActive.section = ''">[Back, Save] / CLose</div>
              Banner Section
