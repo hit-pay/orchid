@@ -49,7 +49,7 @@ const submenuLabel = computed(() => {
 </script>
 <template>
   <div class="h-full relative border border-gray-200">
-    <div v-if="!sidebarActive.submenu" class="flex flex-col">
+    <div v-if="!sidebarActive.submenu" class="flex flex-col  pt-8">
       <div
         v-for="(sidebarMenu, index) in sidebar"
         :key="index"
@@ -95,7 +95,7 @@ const submenuLabel = computed(() => {
       </div>
     </div>
     <div v-else-if="!sidebarActive.section">
-      <div class="px-5 py-4 flex cursor-pointer">
+      <div class="px-5 py-4 flex cursor-pointer mt-8">
         <div class="text-oc-text-300" @click="changeSubmenu('')">
           {{ sidebarMenuLabel }}
         </div>
