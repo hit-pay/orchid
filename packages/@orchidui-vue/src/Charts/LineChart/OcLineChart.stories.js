@@ -1,7 +1,7 @@
-import PieChart from "./PieChart.vue";
+import LineChart from "./OcLineChart.vue";
 
 export default {
-  component: PieChart,
+  component: LineChart,
   tags: ["autodocs"],
 };
 
@@ -9,16 +9,16 @@ export const Line = {
   args: {
     showGrid: false,
     showTooltip: true,
-    showLegend: true,
+    showLegend: false,
   },
   render: (args) => ({
-    components: { PieChart },
+    components: { LineChart },
     setup() {
       return { args };
     },
     template: `
           <div>
-            <PieChart
+            <LineChart
                 class="h-[300px]"
                 :show-grid="args.showGrid"
                 :show-tooltip="args.showTooltip"

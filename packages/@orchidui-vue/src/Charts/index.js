@@ -1,2 +1,2 @@
-export * from "./LineChart/LineChart.js";
-export * from "./PieChart/PieChart.js";
+export * from "./LineChart/OcLineChart.js";
+export * from "./PieChart/OcPieChart.js";
