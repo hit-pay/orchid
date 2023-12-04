@@ -122,7 +122,7 @@ const removeOption = (value) => {
 };
 
 const initLocalValue = () => {
-  if (props.modelValue === null || props.modelValue === undefined) {
+  if (props.modelValue === null || props.modelValue === undefined || props.modelValue === '') {
     localValue.value = props.multiple ? [] : "";
 
     return;
