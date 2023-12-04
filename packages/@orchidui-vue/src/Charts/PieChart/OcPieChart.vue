@@ -98,7 +98,7 @@ const options = computed(() => ({
     {
       name: "Payment by",
       type: "pie",
-      radius: "50%",
+      radius: "80%",
       data: [
         {
           value: 39.64,
@@ -140,6 +140,11 @@ const options = computed(() => ({
   ],
   grid: {
     show: props.showGrid,
+    right: 0,
+    left: 0,
+    top: "10px",
+    bottom: 0,
+    containLabel: true,
   },
 }));
 const myChart = ref();

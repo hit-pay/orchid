@@ -11,6 +11,10 @@ const props = defineProps({
   showLegend: Boolean,
   showGrid: Boolean,
 });
+const markLineData = ref({
+  index: 0,
+  value: 0,
+});
 const options = computed(() => ({
   xAxis: {
     type: "category",
@@ -43,9 +47,14 @@ const options = computed(() => ({
       show: true,
       label: {
         show: false,
+        formatter: (params) => {
+          const labelIndex = options.value.xAxis.data.indexOf(params.value);
+          markLineData.value.index = params.value;
+          markLineData.value.value = options.value.series[0].data[labelIndex];
+        },
       },
       lineStyle: {
-        color: "#2465de",
+        color: "rgba(0,0,0,0)",
         type: "dashed",
       },
     },
@@ -63,6 +72,11 @@ const options = computed(() => ({
   },
   grid: {
     show: props.showGrid,
+    right: 0,
+    left: 0,
+    top: "10px",
+    bottom: 0,
+    containLabel: true,
   },
   legend: {
     show: props.showLegend,
@@ -106,7 +120,7 @@ const options = computed(() => ({
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
           {
             offset: 0,
-            color: "rgba(36, 101, 222, 0.05)", // Start color
+            color: "rgba(36, 101, 222, 0.15)", // Start color
           },
           {
             offset: 1,
@@ -116,6 +130,21 @@ const options = computed(() => ({
       },
       lineStyle: {
         color: "#2465DE",
+      },
+      markLine: {
+        symbol: "none",
+        animation: false,
+        data: [
+          [
+            {
+              coord: [markLineData.value.index, 0],
+            },
+            {
+              coord: [markLineData.value.index, markLineData.value.value],
+            },
+          ],
+        ],
+        silent: true,
       },
     },
   ],
@@ -137,6 +166,10 @@ defineExpose({
 onMounted(() => {
   myChart.value = echarts.init(lineChart.value);
   myChart.value.setOption(options.value);
+  myChart.value.getZr().on("globalout", () => {
+    markLineData.value.index = 0;
+    markLineData.value.value = 0;
+  });
 });
 watch(
   () => options.value,
