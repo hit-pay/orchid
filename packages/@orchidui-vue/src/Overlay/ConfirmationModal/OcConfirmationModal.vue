@@ -17,7 +17,7 @@ defineProps({
     default: "delete",
   },
 });
-defineEmits(["confirm","cancel"]);
+defineEmits(["confirm", "cancel"]);
 const cancelButton = computed(() => ({
   delete: {},
   warning: {},

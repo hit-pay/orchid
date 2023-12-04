@@ -20,7 +20,7 @@ defineProps({
     type: String,
     default: "link",
   },
-  isDisabled: Boolean
+  isDisabled: Boolean,
 });
 defineEmits({
   "update:modelValue": [],
@@ -74,7 +74,7 @@ const isDropdownOpen = ref([]);
           v-if="element[iconKey]"
           :name="element[iconKey]"
           :class="
-            (!isDisabled && !element.isDisable) && isHovered[element.id]
+            !isDisabled && !element.isDisable && isHovered[element.id]
               ? 'group-hover:hidden'
               : ''
           "
