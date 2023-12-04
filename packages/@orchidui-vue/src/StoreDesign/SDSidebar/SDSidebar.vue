@@ -59,8 +59,8 @@ const submenuLabel = computed(() => {
         <div
           class="p-4 w-full flex items-center cursor-pointer hover:bg-oc-accent-1-50-tr"
         >
-          <Icon name="circle" class="mx-1" />
-          <div class="ml-2">
+          <Icon :name="sidebarMenu.icon" class="mx-1" />
+          <div class="ml-2" :class="sidebarActive.sidebarMenu === sidebarMenu.name ? 'font-medium': ''">
             {{ sidebarMenu.label }}
           </div>
           <Icon
@@ -104,9 +104,9 @@ const submenuLabel = computed(() => {
       </div>
       <slot :name="sidebarActive.submenu" />
     </div>
-    <div v-else-if="sidebarActive.section">
-      <slot :name="`section-${sidebarActive.section}`" />
+    <slot v-else name="section-settings" />
+    <div class="absolute bottom-0">
+      <slot name="sidebar-bottom" />
     </div>
-    <div class="absolute bottom-0">Change Theme</div>
   </div>
 </template>

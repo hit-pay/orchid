@@ -20,6 +20,7 @@ defineProps({
     type: String,
     default: "link",
   },
+  isDisabled: Boolean
 });
 defineEmits({
   "update:modelValue": [],
@@ -44,7 +45,7 @@ const isDropdownOpen = ref([]);
           ? 'hover:shadow bg-oc-gray-50'
           : isChildren && !isHovered[element.id]
             ? 'bg-oc-accent-1-50'
-            : 'hover:shadow hover:border bg-oc-accent-1-50 hover:bg-oc-gray-50'
+            : 'hover:shadow bg-oc-accent-1-50 hover:bg-oc-gray-50'
       "
       @mouseleave="
         isDropdownOpen[element.id] = false;
@@ -53,11 +54,11 @@ const isDropdownOpen = ref([]);
       @mouseover="isHovered[element.id] = true"
     >
       <div
-        class="px-2"
-        :class="!element.isDisable ? 'drag-el cursor-move' : ''"
+        class="px-2 flex"
+        :class="!isDisabled && !element.isDisable ? 'drag-el cursor-move' : ''"
       >
         <Icon
-          v-if="!element.isDisable"
+          v-if="!isDisabled && !element.isDisable"
           name="draggable"
           :class="
             element[iconKey]
@@ -73,7 +74,7 @@ const isDropdownOpen = ref([]);
           v-if="element[iconKey]"
           :name="element[iconKey]"
           :class="
-            !element.isDisable && isHovered[element.id]
+            (!isDisabled && !element.isDisable) && isHovered[element.id]
               ? 'group-hover:hidden'
               : ''
           "

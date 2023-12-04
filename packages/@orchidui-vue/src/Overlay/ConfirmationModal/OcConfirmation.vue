@@ -1,6 +1,5 @@
-<script setup lang="ts">
+<script setup>
 import { Icon } from "@/orchidui";
-
 defineProps({
   description: String,
   variant: {
