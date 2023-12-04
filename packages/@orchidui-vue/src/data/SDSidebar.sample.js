@@ -1,9 +1,3 @@
-// const activeSDSidebar = ["home", "sections", "sections_name"]; to show section settings
-// exp : ["home", "header", ""]; to show header section settings
-// exp : ["home", "footer", ""]; to show footer section settings
-// exp : ["styles", "custom", ""]; to show custom styles
-// exp : ["page", "", ""]; to show header page
-
 const SDSidebarSample = [
   {
     type: "list",

@@ -19,48 +19,61 @@ export const Default = {
         submenu: "header",
         section: "",
       });
-      const storeDesign = ref({});
-      return { sidebarActive, storeDesign, SDSidebarData, args };
+      const storeDesignSettings = ref({});
+      return { sidebarActive, storeDesignSettings, SDSidebarData, args };
     },
     template: `
           <Theme>
+
+           {{sidebarActive }}
           <div class="h-[800px] max-w-[500px]">
             <SDSidebar 
-              v-model="storeDesign"
-              v-model:active="sidebarActive"
               :sidebar="SDSidebarData"
-              >
+              v-model:settings="storeDesignSettings"
+              v-model:active="sidebarActive">
               <template #styles>
-              Select Preset Style
-              ->  <div @click="sidebarActive.submenu = 'custom'">Go to Custom Style</div> 
+                <div>
+                  Select Preset Style
+                ->  <div @click="sidebarActive.submenu = 'custom'">Go to Custom Style</div> 
+                </div>
               </template>
               
               <template #header>
                 <HeaderSettings @changeSection="sidebarActive.section = $event" />
               </template>
+
               <template #sections>
                 Section Settings
               </template>
+
               <template #footer>
               Footer Settings
               </template>
+
               <template #custom>
               Custom Style Settings
               </template>
 
-              </template>
               <template #section-top_banner>
-                <div @click="sidebarActive.section = ''">[Back, Save] / CLose</div>
-               Top Banner Section
+                <div>
+                  <div @click="sidebarActive.section = ''">[Back, Save] / CLose</div>
+                Top Banner Section
+                </div>
               </template>
+
               <template #section-header>
-              <div @click="sidebarActive.section = ''">[Back, Save] / CLose</div>
-              Header Section
+              <div>
+                <div @click="sidebarActive.section = ''">[Back, Save] / CLose</div>
+                Header Section
+              </div>
              </template>
+             
              <template #section-banner>
-             <div @click="sidebarActive.section = ''">[Back, Save] / CLose</div>
-             Banner Section
-            </template>
+              <div>
+                <div @click="sidebarActive.section = ''">[Back, Save] / CLose</div>
+                Banner Section
+              </div>
+              </template>
               
 
             </SDSidebar>
