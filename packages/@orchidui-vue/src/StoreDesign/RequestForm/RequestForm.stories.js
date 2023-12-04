@@ -244,7 +244,7 @@ export const Default = {
                   <div class="text-sm flex items-center gap-x-3 font-medium text-oc-text-400 mb-2">
                     Navigation Menu
                   </div>
-                  <SDMenus :has-submenu v-model="menusData" />
+                  <SDMenus has-submenu v-model="menusData" />
                 </template>
                 <template #SelectProduct>
                     Custom Select Product Form
