@@ -46,6 +46,7 @@ const props = defineProps({
   showTooltip: Boolean,
   showLegend: Boolean,
   showGrid: Boolean,
+  chartData: Array,
 });
 const legendSelected = ref({
   stack_cards: true,
@@ -99,33 +100,7 @@ const options = computed(() => ({
       name: "Payment by",
       type: "pie",
       radius: "80%",
-      data: [
-        {
-          value: 39.64,
-          name: "stack_cards",
-          itemStyle: { color: "#2465DE" },
-        },
-        {
-          value: 22.21,
-          name: "paynow",
-          itemStyle: { color: "#B14AED" },
-        },
-        {
-          value: 17.44,
-          name: "atome",
-          itemStyle: { color: "#F4B840" },
-        },
-        {
-          value: 15.78,
-          name: "fave",
-          itemStyle: { color: "#FF6B6C" },
-        },
-        {
-          value: 4.93,
-          name: "",
-          itemStyle: { color: "#E5E6EA" },
-        },
-      ],
+      data: props.chartData,
       label: {
         show: false,
       },

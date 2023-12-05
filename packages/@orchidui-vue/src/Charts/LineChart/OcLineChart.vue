@@ -10,6 +10,8 @@ const props = defineProps({
   showTooltip: Boolean,
   showLegend: Boolean,
   showGrid: Boolean,
+  chartData: Array,
+  labelData: Array,
 });
 const markLineData = ref({
   index: 0,
@@ -18,20 +20,7 @@ const markLineData = ref({
 const options = computed(() => ({
   xAxis: {
     type: "category",
-    data: [
-      "NOV'22",
-      "DEC'22",
-      "JAN'23",
-      "FEB'23",
-      "MAR'23",
-      "MAY'23",
-      "JUN'23",
-      "JUL'23",
-      "AUG'23",
-      "SEP'23",
-      "OCT'23",
-      "NOV'23",
-    ],
+    data: props.labelData,
     axisTick: {
       show: false,
     },
@@ -108,10 +97,7 @@ const options = computed(() => ({
   },
   series: [
     {
-      data: [
-        500, 730, 824, 1218, 2135, 1147, 760, 1150, 2130, 2324, 1218, 2135,
-        1147,
-      ],
+      data: props.chartData,
       type: "line",
       smooth: true,
       showSymbol: false,
