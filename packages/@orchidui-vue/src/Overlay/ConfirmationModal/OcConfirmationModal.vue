@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { Modal } from "@/orchidui";
 import { computed } from "vue";
 import Confirmation from "./OcConfirmation.vue";
@@ -17,7 +17,7 @@ defineProps({
     default: "delete",
   },
 });
-defineEmits(["confirm"]);
+defineEmits(["confirm", "cancel"]);
 const cancelButton = computed(() => ({
   delete: {},
   warning: {},
@@ -53,7 +53,9 @@ const confirmButton = computed(() => ({
     :cancel-button-props="cancelButton[variant]"
     :confirm-button-props="confirmButton[variant]"
     footer-class="justify-center"
+    @update:model-value="!$event ? $emit('cancel') : ''"
     @confirm="$emit('confirm')"
+    @cancel="$emit('cancel')"
   >
     <Confirmation :variant="variant" :description="description" />
   </Modal>

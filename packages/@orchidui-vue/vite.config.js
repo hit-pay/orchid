@@ -51,6 +51,7 @@ export default defineConfig({
         "vue-advanced-cropper",
         "quill",
         "vue-draggable-next",
+        "echarts",
       ],
     },
   },
