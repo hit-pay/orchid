@@ -26,12 +26,14 @@ export const sectionItem = {
   render: (args) => ({
     components: { Theme, SectionItem },
     setup() {
-      return { args };
+      const modelValue = ref(false);
+      return { args, modelValue };
     },
     template: `
           <Theme colorMode="light">
             <div class="p-1">
               <SectionItem
+                  v-model="modelValue"
                   :title="args.title"
                   :description="args.description"
                   :is-toggle="args.isToggle"

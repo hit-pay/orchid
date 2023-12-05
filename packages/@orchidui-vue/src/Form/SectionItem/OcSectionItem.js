@@ -1,3 +1,3 @@
-import SectionItem from "./SectionItem.vue";
+import SectionItem from "./OcSectionItem.vue";
 
 export { SectionItem };
