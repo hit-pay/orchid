@@ -3,7 +3,7 @@ import { Dropdown, Calendar, Input } from "@/orchidui";
 import { computed, ref } from "vue";
 import dayjs from "dayjs";
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(["update:modelValue", "resetCalendar"]);
 const props = defineProps({
   modelValue: {
     type: [String, Date, Number, Array],
@@ -90,6 +90,7 @@ const resetCalendar = () => {
   } else {
     date.value = "";
   }
+  emit("resetCalendar");
   isDropdownOpened.value = false;
 };
 </script>
