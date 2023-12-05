@@ -1,4 +1,5 @@
 import { Theme, SectionItem } from "@/orchidui";
+import { ref } from "vue";
 
 export default {
   component: SectionItem,
