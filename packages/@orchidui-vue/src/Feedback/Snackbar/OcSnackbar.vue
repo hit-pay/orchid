@@ -1,5 +1,7 @@
 <script setup>
 import { Icon } from "@/orchidui";
+import { onMounted, ref } from "vue";
+
 defineProps({
   modelValue: {
     type: Boolean,
@@ -25,6 +27,18 @@ defineProps({
     type: Boolean,
     default: false,
   },
+  isFloating: {
+    type: Boolean,
+    default: false,
+  },
+  position: {
+    type: String,
+    default: "top-center",
+  },
+  transitionName: {
+    type: String,
+    default: "slide-from-top",
+  },
 });
 defineEmits(["update:modelValue"]);
 const colorClasses = Object.freeze({
@@ -34,28 +48,77 @@ const colorClasses = Object.freeze({
   warning: "border-oc-warning-200 bg-oc-warning-50 text-oc-warning-500",
   gray: "border-oc-gray-300 bg-oc-gray-100 text-oc-gray-700",
 });
+const positionClasses = {
+  "top-center": "top-4 left-1/2",
+  "top-left": "top-4 left-4",
+  "top-right": "top-4 right-4",
+  "bottom-center": "bottom-4 left-1/2",
+  "bottom-left": "bottom-4 left-4",
+  "bottom-right": "bottom-4 right-4",
+};
+const snackBar = ref();
+const halfWindowWidth = ref();
+onMounted(() => {
+  halfWindowWidth.value =
+    (document.body.clientWidth - snackBar.value.clientWidth) / 2;
+});
 </script>
 
 <template>
-  <div
-    v-show="modelValue"
-    :class="colorClasses[color]"
-    class="border rounded-lg p-4 flex items-center gap-x-3 shadow-sm"
-  >
-    <Icon v-if="showIcon" :name="icon" class="shrink-0" />
-    <slot>
-      <div class="w-full flex items-center justify-between">
-        <span class="text-oc-text text-sm">
-          {{ content }}
-        </span>
-        <div
-          v-if="isCloseIcon"
-          class="rounded cursor-pointer text-oc-gray-500 hover:bg-transparent hover:text-oc-text"
-          @click="$emit('update:modelValue', false)"
-        >
-          <Icon name="x" width="20" height="20" />
+  <Transition :name="transitionName">
+    <div
+      v-show="modelValue"
+      ref="snackBar"
+      :class="[
+        colorClasses[color],
+        isFloating && positionClasses[position],
+        {
+          'fixed z-[1004]': isFloating,
+        },
+      ]"
+      class="border rounded-lg p-4 flex items-center gap-x-3 shadow-sm snackbar"
+      :style="
+        position.includes('center') ? { left: halfWindowWidth + 'px' } : ''
+      "
+    >
+      <Icon v-if="showIcon" :name="icon" class="shrink-0" />
+      <slot>
+        <div class="w-full flex items-center justify-between">
+          <span class="text-oc-text text-sm">
+            {{ content }}
+          </span>
+          <div
+            v-if="isCloseIcon"
+            class="rounded cursor-pointer text-oc-gray-500 hover:bg-transparent hover:text-oc-text"
+            @click="$emit('update:modelValue', false)"
+          >
+            <Icon name="x" width="20" height="20" />
+          </div>
         </div>
-      </div>
-    </slot>
-  </div>
+      </slot>
+    </div>
+  </Transition>
 </template>
+<style lang="scss">
+.snackbar {
+  transition:
+    transform 0.5s,
+    opacity 0.5s;
+}
+
+.slide-from-top-enter-from {
+  transform: translateY(-200%);
+}
+
+.slide-from-top-enter-to {
+  transform: translateY(0%);
+}
+
+.slide-from-top-leave-from {
+  opacity: 1;
+}
+
+.slide-from-top-leave-to {
+  opacity: 0;
+}
+</style>

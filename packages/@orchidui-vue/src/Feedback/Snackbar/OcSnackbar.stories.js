@@ -1,8 +1,7 @@
 import { Theme, Snackbar } from "@/orchidui";
-import { ref } from "vue";
+
 export default {
   component: Snackbar,
-  tags: ["autodocs"],
 };
 
 export const Default = {
@@ -21,6 +20,9 @@ export const Default = {
   args: {
     modelValue: true,
     showIcon: true,
+    isFloating: true,
+    position: "top-center",
+    transitionName: "slide-from-top",
     icon: "filled-check",
     color: "default",
     content: "Changes have been successfully saved",
@@ -32,7 +34,7 @@ export const Default = {
       return { args };
     },
     template: `
-          <Theme colorMode="light">
+          <Theme colorMode="light" class="h-[300px]">
             <div class="flex flex-col gap-y-4">
               <Snackbar v-bind="args" v-model="args.modelValue"/>
             </div>
