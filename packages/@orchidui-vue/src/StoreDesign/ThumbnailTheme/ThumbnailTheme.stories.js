@@ -1,9 +1,9 @@
 import { Theme } from "@/orchidui";
-import ThemeThumbnail from "./ThemeThumbnail.vue";
+import ThumbnailTheme from "./ThumbnailTheme.vue";
 
 export default {
   tags: ["autodocs"],
-  component: ThemeThumbnail,
+  component: ThumbnailTheme,
 };
 
 export const Default = {
@@ -32,22 +32,14 @@ export const Default = {
     ],
   },
   render: (args) => ({
-    components: { Theme, ThemeThumbnail },
+    components: { Theme, ThumbnailTheme },
     setup() {
       return { args };
     },
     template: `
           <Theme>
               <div class="grid grid-cols-2 md:grid-cols-3 gap-5">
-                <ThemeThumbnail
-                  v-for="theme in args.templates"
-                  :id="theme.id"
-                  :thumbnail="theme.thumbnail"
-                  :title="theme.title"
-                  :description="theme.description"
-                  :active="theme.active"
-                  :pro="theme.pro"
-                />
+                <ThumbnailTheme  v-for="theme in args.templates" :theme="theme" />
                </div>
           </Theme>
         `,

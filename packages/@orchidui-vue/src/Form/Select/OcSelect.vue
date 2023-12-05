@@ -49,9 +49,7 @@ const emit = defineEmits({
   "update:modelValue": [],
 });
 
-const localValue = ref(
-  props.modelValue ? props.modelValue : props.multiple ? [] : "",
-);
+const localValue = ref();
 
 const query = ref("");
 const isDropdownOpened = ref(false);
@@ -122,6 +120,22 @@ const removeOption = (value) => {
   localValue.value = localValue.value.filter((o) => o !== value);
   emit("update:modelValue", localValue.value);
 };
+
+const initLocalValue = () => {
+  if (
+    props.modelValue === null ||
+    props.modelValue === undefined ||
+    props.modelValue === ""
+  ) {
+    localValue.value = props.multiple ? [] : "";
+
+    return;
+  }
+
+  localValue.value = props.modelValue;
+};
+
+initLocalValue();
 </script>
 
 <template>
@@ -201,7 +215,7 @@ const removeOption = (value) => {
                 :label="option.label"
                 :is-selected="
                   multiple
-                    ? localValue.find((o) => o === option.value) !== undefined
+                    ? localValue?.find((o) => o === option.value) !== undefined
                     : localValue === option.value
                 "
                 @click="selectOption(option)"

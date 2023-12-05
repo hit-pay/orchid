@@ -55,7 +55,7 @@ export const HeaderElement = {
       SampleHeaderRight,
     },
     setup() {
-      const activeMenuValue = ref("payments");
+      const activeMenuValue = ref("online_store");
       const activeMenuLabel = computed(() => {
         return args.menus.find((m) => m.value === activeMenuValue.value).label;
       });

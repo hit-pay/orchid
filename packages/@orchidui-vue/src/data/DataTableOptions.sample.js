@@ -6,6 +6,9 @@ const DataTableOptions = {
     last_page: 20,
   },
   filterOptions: {
+    per_page: {
+      key: "per_page",
+    },
     tabs: {
       key: "tabs",
       options: [
@@ -22,9 +25,6 @@ const DataTableOptions = {
     },
     search: {
       key: "keywords",
-    },
-    per_page: {
-      key: "perPage",
     },
     form: SampleFilterForm,
   },
@@ -146,7 +146,7 @@ const DataTableOptions = {
 
 const Filter = {
   page: 1,
-  perPage: 10,
+  per_page: 10,
 };
 
 export { DataTableOptions, Filter };

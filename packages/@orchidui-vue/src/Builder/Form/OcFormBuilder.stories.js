@@ -134,6 +134,13 @@ export const Default = {
                 Errors : {{ errors }}
               </p>
             </div>
+            <Button
+              label="Trigger errors"
+              @click="errors = {
+                phone_number_field: 'Field is invalid format',
+                input: 'Field is required',
+              }"
+            />
             <FormBuilder
                 id="form-builder"
                 class="gap-5"
@@ -162,23 +169,23 @@ export const Default = {
                     :error-message="error"
                     @update:model-value="onUpdateForm(form, $event)"
                 >
-                <template #trailing>
-                  <Dropdown v-model="isOpenedDropdown">
-                    <template #menu>
-                      <div class="flex p-2 flex-col">
-                        <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
-                        <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
-                        <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
+                  <template #trailing>
+                    <Dropdown v-model="isOpenedDropdown">
+                      <template #menu>
+                        <div class="flex p-2 flex-col">
+                          <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
+                          <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
+                          <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
+                        </div>
+                      </template>
+                      <div
+                          class=" text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
+                      >
+                        <span class="flex items-center text-sm">USD</span>
+                        <Icon class="w-[14px] h-[14px]" name="chevron-down"/>
                       </div>
-                    </template>
-                    <div
-                        class=" text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
-                    >
-                      <span class="flex items-center text-sm">USD</span>
-                      <Icon class="w-[14px] h-[14px]" name="chevron-down"/>
-                    </div>
-                  </Dropdown>
-                </template>
+                    </Dropdown>
+                  </template>
                 </Input>
               </template>
             </FormBuilder>
