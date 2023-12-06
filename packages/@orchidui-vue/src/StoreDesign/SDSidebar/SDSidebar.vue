@@ -54,7 +54,6 @@ const submenuLabel = computed(() => {
         v-for="(sidebarMenu, index) in sidebar"
         :key="index"
         class="border-b flex flex-wrap items-center"
-        v-bind="sidebarMenu.props"
       >
         <div
           class="p-4 w-full flex items-center cursor-pointer hover:bg-oc-accent-1-50-tr"
@@ -90,13 +89,27 @@ const submenuLabel = computed(() => {
               v-for="(children, childIndex) in sidebarMenu.children"
               :key="childIndex"
               class="pl-9 p-4 w-full flex items-center cursor-pointer hover:bg-oc-accent-1-50-tr"
-              @click="changeSubmenu(children.name)"
+              @click="
+                children.onClick
+                  ? children.onClick()
+                  : changeSubmenu(children.name)
+              "
             >
               <div class="ml-2">
                 {{ children.label }}
               </div>
-              <Icon v-if="children.icon" :name="sidebarMenu.icon" class="ml-auto" />
-              <Icon v-else name="chevron-right" class="ml-auto text-oc-text-400" />
+              <Icon
+                v-if="children.icon"
+                :name="children.icon"
+                class="ml-auto text-oc-text-primary"
+                width="20"
+                height="20"
+              />
+              <Icon
+                v-else
+                name="chevron-right"
+                class="ml-auto text-oc-text-400"
+              />
             </div>
           </template>
           <slot v-else :name="sidebarMenu.type" />
