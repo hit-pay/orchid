@@ -1,10 +1,10 @@
 import { Theme } from "@/orchidui";
-import { RequestForm, SDMenus } from "@/orchidui/StoreDesign";
+import { FormBuilder, SelectOptions } from "@/orchidui";
 
 import { ref } from "vue";
 export default {
   tags: ["autodocs"],
-  component: RequestForm,
+  component: SelectOptions,
 };
 
 export const Default = {
@@ -117,65 +117,10 @@ export const Default = {
           ],
         },
       },
-
-      {
-        name: "select",
-        type: "Select",
-        props: {
-          label: "Example Label",
-          hint: "This is a hint text to help user",
-          placeholder: "placeholder",
-          options: [
-            {
-              label: "Option 1",
-              value: 1,
-            },
-            {
-              label: "Option 2",
-              value: 2,
-            },
-            {
-              label: "Option 3",
-              value: 3,
-            },
-          ],
-        },
-      },
-      {
-        name: "input",
-        type: "Input",
-        props: {
-          label: "Example Label",
-          hint: "This is a hint text to help user",
-          placeholder: "placeholder",
-        },
-      },
-      {
-        name: "textarea",
-        key: "textarea",
-        type: "Textarea",
-        props: {
-          label: "Example Label",
-          hint: "This is a hint text to help user",
-          placeholder: "placeholder",
-        },
-      },
-      {
-        name: "menus",
-        type: "NavigationMenu",
-      },
-      {
-        name: "select_product",
-        type: "SelectProduct",
-      },
-      {
-        name: "select_category",
-        type: "SelectCategory",
-      },
     ],
   },
   render: (args) => ({
-    components: { Theme, RequestForm, SDMenus },
+    components: { Theme, FormBuilder, SelectOptions },
     setup() {
       const values = ref({
         select_options: "",
@@ -183,9 +128,6 @@ export const Default = {
         select_options_2: "",
         select_options_3: "",
         select_options_4: "",
-        input: "",
-        select: "",
-        textarea: "",
       });
       const errors = ref({});
 
@@ -199,39 +141,7 @@ export const Default = {
         }
       };
 
-      const menusData = ref([
-        {
-          id: "234",
-          title: "Menu ",
-          link: "https://orchidui.vercel.app",
-        },
-        {
-          id: "456",
-          icon: "top-banner",
-          title: "Menu",
-          children: [
-            {
-              id: "123",
-              icon: "banner",
-              title: "SubMenu ",
-              link: "https://orchidui.vercel.app",
-            },
-            {
-              id: "234",
-              icon: "banner",
-              title: "SubMenu",
-              link: "https://orchidui.vercel.app",
-            },
-          ],
-        },
-        {
-          id: "667",
-          title: "Menu ",
-          link: "https://orchidui.vercel.app",
-        },
-      ]);
-
-      return { values, errors, onUpdateForm, args, menusData };
+      return { values, errors, onUpdateForm, args };
     },
     template: `
           <Theme>
@@ -239,20 +149,11 @@ export const Default = {
               {{ values}}
             </div>
             <div class="max-w-[550px] border p-4 rounded">
-              <RequestForm class="grid gap-5"  id="section_name" :values="values" :errors="errors" :json-form="args.jsonForm"  @onUpdate="onUpdateForm" >
-                <template #NavigationMenu>
-                  <div class="text-sm flex items-center gap-x-3 font-medium text-oc-text-400 mb-2">
-                    Navigation Menu
-                  </div>
-                  <SDMenus has-submenu v-model="menusData" />
+              <FormBuilder class="grid gap-5"  id="section_name" :values="values" :errors="errors" :json-form="args.jsonForm"  >
+                <template #SelectOptions="{form, value, error}">
+                  <SelectOptions v-bind="form.props" :model-value="value" :error-messages="error" @onUpdate="onUpdateForm(form, $event)" />
                 </template>
-                <template #SelectProduct>
-                    Custom Select Product Form
-                </template>
-                <template #SelectCategory>
-                    Custom Select Category Form 
-                </template>
-              </RequestForm>
+              </FormBuilder>
             </div>
           </Theme>
         `,
