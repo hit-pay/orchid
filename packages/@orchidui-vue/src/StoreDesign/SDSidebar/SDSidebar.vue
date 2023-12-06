@@ -59,7 +59,13 @@ const submenuLabel = computed(() => {
           class="p-4 w-full flex items-center cursor-pointer hover:bg-oc-accent-1-50-tr"
           @click="changeSidebarMenu(sidebarMenu.name)"
         >
-          <Icon v-if="sidebarMenu.icon" :name="sidebarMenu.icon" class="mx-1" />
+          <Icon
+            v-if="sidebarMenu.icon"
+            :name="sidebarMenu.icon"
+            class="mx-1"
+            width="20"
+            height="20"
+          />
           <div
             class="ml-2"
             :class="
@@ -74,8 +80,16 @@ const submenuLabel = computed(() => {
             v-if="sidebarMenu.children"
             name="chevron-down"
             class="ml-auto text-oc-text-400"
+            width="18"
+            height="18"
           />
-          <Icon v-else name="chevron-right" class="ml-auto text-oc-text-400" />
+          <Icon
+            v-else
+            name="chevron-right"
+            class="ml-auto text-oc-text-400"
+            width="18"
+            height="18"
+          />
         </div>
         <div
           v-if="
@@ -102,11 +116,13 @@ const submenuLabel = computed(() => {
                 v-if="children.icon"
                 :name="children.icon"
                 class="ml-auto text-oc-text-primary"
-                width="20"
-                height="20"
+                width="18"
+                height="18"
               />
               <Icon
                 v-else
+                width="18"
+                height="18"
                 name="chevron-right"
                 class="ml-auto text-oc-text-400"
               />
