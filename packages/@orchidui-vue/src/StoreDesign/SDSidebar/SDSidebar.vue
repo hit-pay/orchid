@@ -54,10 +54,10 @@ const submenuLabel = computed(() => {
         v-for="(sidebarMenu, index) in sidebar"
         :key="index"
         class="border-b flex flex-wrap items-center"
-        @click="changeSidebarMenu(sidebarMenu.name)"
       >
         <div
           class="p-4 w-full flex items-center cursor-pointer hover:bg-oc-accent-1-50-tr"
+          @click="changeSidebarMenu(sidebarMenu.name)"
         >
           <Icon :name="sidebarMenu.icon" class="mx-1" />
           <div
