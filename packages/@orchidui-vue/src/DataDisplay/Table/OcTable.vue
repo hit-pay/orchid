@@ -249,6 +249,7 @@ onMounted(() => onScroll());
           </template>
         </TableCell>
       </div>
+      <slot v-if="!fields.length" name="empty" />
     </template>
     <slot name="after" />
   </div>

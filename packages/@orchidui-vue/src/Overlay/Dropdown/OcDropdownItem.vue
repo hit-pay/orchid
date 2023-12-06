@@ -12,6 +12,7 @@ defineProps({
   text: String,
   subText: String,
   pointed: Boolean,
+  iconProps: Object,
 });
 const variantClasses = computed(() => ({
   default: "text-oc-text",
@@ -25,7 +26,13 @@ const variantClasses = computed(() => ({
     :class="variantClasses[variant]"
   >
     <div class="flex items-center gap-x-3 p-3">
-      <Icon v-if="icon" class="w-5 h-5" :name="icon" :class="iconClasses" />
+      <Icon
+        v-if="icon"
+        class="w-5 h-5"
+        :name="icon"
+        v-bind="iconProps"
+        :class="iconClasses"
+      />
 
       <span>{{ text }}</span>
 

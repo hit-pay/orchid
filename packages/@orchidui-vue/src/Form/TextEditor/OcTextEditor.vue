@@ -23,7 +23,11 @@ const Size = Quill.import("attributors/style/size");
 Size.whitelist = props.fontSizes.map((f) => f.value);
 Quill.register(Size, true);
 
-const id = ref(crypto.randomUUID().replace(/[^a-zA-Z]+/g, ""));
+const id = ref(
+  Math.random()
+    .toString(36)
+    .replace(/[^a-zA-Z]+/g, ""),
+);
 const isUndoActive = ref(false);
 const isRedoActive = ref(false);
 const isBoldActive = ref(false);
@@ -154,12 +158,12 @@ onMounted(() => {
 <template>
   <QuillEditor
     v-if="id"
+    :id="`#${id}`"
     ref="quill"
     :content="modelValue"
     theme="snow"
     content-type="html"
     class="min-h-[200px]"
-    :id="`#${id}`"
     @update:content="checkStates"
     @paste="isValidPasedText"
   >
@@ -358,6 +362,7 @@ onMounted(() => {
 
 <style lang="scss">
 @import url("./snow.css");
+
 .ql-container {
   @apply rounded-b text-base;
 }
