@@ -1,4 +1,3 @@
-<!-- TODO : add v-model for toggle -->
 <script setup>
 import { Toggle, Icon, Tooltip } from "@/orchidui";
 
@@ -9,7 +8,9 @@ defineProps({
   buttonProps: Object,
   inputProps: Object,
   isToggle: Boolean,
+  modelValue: Boolean,
 });
+defineEmits(["update:modelValue"]);
 </script>
 
 <template>
@@ -36,6 +37,10 @@ defineProps({
         {{ description }}
       </span>
     </div>
-    <Toggle v-if="isToggle" />
+    <Toggle
+      v-if="isToggle"
+      :model-value="modelValue"
+      @update:model-value="$emit('update:modelValue')"
+    />
   </div>
 </template>
