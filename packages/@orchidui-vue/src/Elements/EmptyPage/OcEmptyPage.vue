@@ -27,6 +27,10 @@ defineProps({
     type: String,
     default: "Add new",
   },
+  icon: {
+    type: String,
+    default: "document",
+  },
 });
 </script>
 
@@ -41,11 +45,7 @@ defineProps({
             : 'text-oc-text-400 border-oc-gray-200 bg-oc-gray-50'
         "
       >
-        <Icon
-          :name="isUpgrade ? 'warning' : 'document'"
-          width="32"
-          height="32"
-        />
+        <Icon :name="icon" width="32" height="32" />
       </div>
       <Icon
         v-if="!isUpgrade"

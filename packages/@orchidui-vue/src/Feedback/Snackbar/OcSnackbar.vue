@@ -1,6 +1,6 @@
 <script setup>
 import { Icon } from "@/orchidui";
-import { onMounted, ref } from "vue";
+import { nextTick, onMounted, ref } from "vue";
 
 defineProps({
   modelValue: {
@@ -49,16 +49,17 @@ const colorClasses = Object.freeze({
   gray: "border-oc-gray-300 bg-oc-gray-100 text-oc-gray-700",
 });
 const positionClasses = {
-  "top-center": "top-4 left-1/2",
+  "top-center": "top-4",
   "top-left": "top-4 left-4",
   "top-right": "top-4 right-4",
-  "bottom-center": "bottom-4 left-1/2",
+  "bottom-center": "bottom-4",
   "bottom-left": "bottom-4 left-4",
   "bottom-right": "bottom-4 right-4",
 };
 const snackBar = ref();
 const halfWindowWidth = ref();
-onMounted(() => {
+onMounted(async () => {
+  await nextTick();
   halfWindowWidth.value =
     (document.body.clientWidth - snackBar.value.clientWidth) / 2;
 });
