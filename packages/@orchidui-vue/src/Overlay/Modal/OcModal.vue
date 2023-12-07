@@ -20,6 +20,10 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  persistent: {
+    type: Boolean,
+    default: false,
+  },
   isCloseIcon: {
     type: Boolean,
     default: true,
@@ -47,6 +51,10 @@ const props = defineProps({
 const emit = defineEmits(["update:modelValue", "confirm"]);
 
 const onClickOutside = async () => {
+  if (props.persistent) {
+    return;
+  }
+
   if (props.modelValue) {
     emit("update:modelValue", !props.modelValue);
   }

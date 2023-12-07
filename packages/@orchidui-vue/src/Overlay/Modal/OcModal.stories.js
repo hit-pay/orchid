@@ -43,6 +43,7 @@ export const Default = {
                   :title="args.title"
                   :description="args.description"
                   :size="args.size"
+                  persistent
                   :isCloseIcon="args.isCloseIcon"
                   :cancelButtonProps="args.cancelButtonProps"
                   :confirmButtonProps="args.confirmButtonProps"

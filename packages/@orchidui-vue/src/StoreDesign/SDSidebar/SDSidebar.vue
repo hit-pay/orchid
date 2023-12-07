@@ -54,12 +54,22 @@ const submenuLabel = computed(() => {
         v-for="(sidebarMenu, index) in sidebar"
         :key="index"
         class="border-b flex flex-wrap items-center"
-        @click="changeSidebarMenu(sidebarMenu.name)"
       >
         <div
           class="p-4 w-full flex items-center cursor-pointer hover:bg-oc-accent-1-50-tr"
+          @click="
+            sidebarMenu.onClick
+              ? sidebarMenu.onClick()
+              : changeSidebarMenu(sidebarMenu.name)
+          "
         >
-          <Icon :name="sidebarMenu.icon" class="mx-1" />
+          <Icon
+            v-if="sidebarMenu.icon"
+            :name="sidebarMenu.icon"
+            class="mx-1"
+            width="20"
+            height="20"
+          />
           <div
             class="ml-2"
             :class="
@@ -74,8 +84,16 @@ const submenuLabel = computed(() => {
             v-if="sidebarMenu.children"
             name="chevron-down"
             class="ml-auto text-oc-text-400"
+            width="18"
+            height="18"
           />
-          <Icon v-else name="chevron-right" class="ml-auto text-oc-text-400" />
+          <Icon
+            v-else
+            name="chevron-right"
+            class="ml-auto text-oc-text-400"
+            width="18"
+            height="18"
+          />
         </div>
         <div
           v-if="
@@ -89,12 +107,29 @@ const submenuLabel = computed(() => {
               v-for="(children, childIndex) in sidebarMenu.children"
               :key="childIndex"
               class="pl-9 p-4 w-full flex items-center cursor-pointer hover:bg-oc-accent-1-50-tr"
-              @click="changeSubmenu(children.name)"
+              @click="
+                children.onClick
+                  ? children.onClick()
+                  : changeSubmenu(children.name)
+              "
             >
               <div class="ml-2">
                 {{ children.label }}
               </div>
-              <Icon name="chevron-right" class="ml-auto text-oc-text-400" />
+              <Icon
+                v-if="children.icon"
+                :name="children.icon"
+                class="ml-auto text-oc-text-primary"
+                width="18"
+                height="18"
+              />
+              <Icon
+                v-else
+                width="18"
+                height="18"
+                name="chevron-right"
+                class="ml-auto text-oc-text-400"
+              />
             </div>
           </template>
           <slot v-else :name="sidebarMenu.type" />

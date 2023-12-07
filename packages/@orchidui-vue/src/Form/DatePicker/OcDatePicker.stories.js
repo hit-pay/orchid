@@ -1,4 +1,8 @@
 import { Theme, DatePicker, Calendar } from "@/orchidui";
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+
+dayjs.extend(customParseFormat);
 
 export default {
   components: { Calendar },
@@ -24,7 +28,12 @@ export const Default = {
   render: (args) => ({
     components: { Theme, DatePicker },
     setup() {
-      return { args };
+      // Disable date after next week
+      const checkDisableDate = (value) => {
+        return dayjs().add(7, "day").isBefore(new Date(value));
+      };
+
+      return { args, checkDisableDate };
     },
     template: `
           <Theme>
@@ -34,6 +43,7 @@ export const Default = {
                   :type="args.type"
                   :date-format="args.dateFormat"
                   :error-message="args.errorMessage"
+                  :disabled-date="checkDisableDate"
                   :hint="args.hint"
                   :min-label="args.minLabel"
                   :max-label="args.maxLabel"

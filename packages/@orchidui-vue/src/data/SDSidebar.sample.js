@@ -51,6 +51,7 @@ const SDSidebarSample = [
       {
         type: "copy_link_in_bio",
         label: "Copy URL",
+        icon: "link",
         onClick: () => console.log("do somthing"),
       },
     ],
