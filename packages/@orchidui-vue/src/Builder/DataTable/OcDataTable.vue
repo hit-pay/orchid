@@ -148,9 +148,14 @@ const filterData = ref(
 
 const removeAllQueryFilter = () => {
   queries.value = [];
-  filterData.value.page = 1;
-  filterData.value[filterOptions.value?.per_page?.key] = perPage.value;
-  //
+  const newFilter = {
+    page: filterData.value.page,
+    [filterOptions.value?.per_page?.key || 'per_page']: perPage.value,
+    ...(filterOptions.value.tabs && { tabs: filterOptions.value.tabs })
+  }
+
+  filterData.value = newFilter;
+
   applyFilter();
 };
 
