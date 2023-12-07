@@ -1,4 +1,5 @@
-import { MultipleUploadFile, Theme } from "@/orchidui";
+import { Theme } from "@/orchidui";
+import MultipleUploadFile from "./OcMultipleUploadFile.vue";
 import { ref } from "vue";
 
 export default {
@@ -24,6 +25,8 @@ export const Default = {
     },
     template: `
           <Theme class="min-h-[500px]">
+
+            {{ modelValue }}
             <MultipleUploadFile
                 v-model="modelValue"
                 v-model:selectedImage="selectedImage"

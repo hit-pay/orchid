@@ -5,7 +5,7 @@ export const useUploadFileProgress = (maxSize, emit) => {
   const isErrorMaxSize = ref(false);
   const onChangeFile = (event) => {
     const uploadFiles = [...event.target?.files].filter(
-      (f) => !currentFiles.value.some((file) => file.fileName === f.name),
+      (f) => !currentFiles.value.some((file) => file?.fileName === f.name),
     );
     isErrorMaxSize.value =
       uploadFiles.reduce((acc, file) => acc + file.size, 0) >

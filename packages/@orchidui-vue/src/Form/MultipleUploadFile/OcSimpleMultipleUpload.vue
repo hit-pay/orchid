@@ -49,6 +49,20 @@ const changeImage = (url) => {
 
 <template>
   <div>
+    <label class="absolute">
+      <div
+        class="w-[90px] hover:bg-oc-primary-50 cursor-pointer bg-oc-accent-1-50 text-oc-accent-1 rounded aspect-square flex items-center justify-center"
+      >
+        <Icon name="plus" />
+      </div>
+      <input
+        class="hidden"
+        type="file"
+        :accept="accept || 'image/png, image/jpeg'"
+        multiple
+        @change="$emit('change', $event)"
+      />
+    </label>
     <Draggable
       :key="uploadedImages.length"
       :model-value="uploadedImages"
@@ -58,28 +72,14 @@ const changeImage = (url) => {
       @update:model-value="$emit('update:uploadedImages', $event)"
     >
       <template #default="{ list }">
-        <label>
-          <div
-            class="w-[90px] hover:bg-oc-primary-50 cursor-pointer bg-oc-accent-1-50 text-oc-accent-1 rounded aspect-square flex items-center justify-center"
-          >
-            <Icon name="plus" />
-          </div>
-          <input
-            class="hidden"
-            type="file"
-            :accept="accept || 'image/png, image/jpeg'"
-            multiple
-            @change="$emit('change', $event)"
-          />
-        </label>
-
         <div
           v-for="(img, i) in list"
           :key="img.fileName"
           class="w-[90px] group relative cursor-pointer overflow-hidden aspect-square border rounded border-oc-accent-1-100"
-          :class="
-            selectedImage.fileName === img.fileName ? 'border-oc-primary' : ''
-          "
+          :class="{
+            'border-oc-primary': selectedImage.fileName === img.fileName,
+            'col-start-2': i === 0,
+          }"
           @click="$emit('update:selectedImage', img)"
         >
           <Dropdown
