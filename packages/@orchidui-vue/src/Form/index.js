@@ -21,3 +21,4 @@ export * from "./TimePicker/OcTimePicker.js";
 export * from "./Slider/OcSlider.js";
 
 export * from "./SectionItem/OcSectionItem.js";
+export * from "./SelectOptions/OcSelectOptions.js";
