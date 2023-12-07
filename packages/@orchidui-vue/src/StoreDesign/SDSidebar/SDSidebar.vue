@@ -57,7 +57,11 @@ const submenuLabel = computed(() => {
       >
         <div
           class="p-4 w-full flex items-center cursor-pointer hover:bg-oc-accent-1-50-tr"
-          @click="sidebarMenu.onClick ? sidebarMenu.onClick() :changeSidebarMenu(sidebarMenu.name)"
+          @click="
+            sidebarMenu.onClick
+              ? sidebarMenu.onClick()
+              : changeSidebarMenu(sidebarMenu.name)
+          "
         >
           <Icon
             v-if="sidebarMenu.icon"

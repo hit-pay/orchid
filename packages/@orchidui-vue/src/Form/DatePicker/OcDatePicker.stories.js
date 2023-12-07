@@ -1,6 +1,6 @@
 import { Theme, DatePicker, Calendar } from "@/orchidui";
-import dayjs from 'dayjs'
-import customParseFormat from 'dayjs/plugin/customParseFormat';
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
 
 dayjs.extend(customParseFormat);
 
@@ -30,9 +30,9 @@ export const Default = {
     setup() {
       // Disable date after next week
       const checkDisableDate = (value) => {
-        return dayjs().add(7, 'day').isBefore(new Date(value))
-      }
-      
+        return dayjs().add(7, "day").isBefore(new Date(value));
+      };
+
       return { args, checkDisableDate };
     },
     template: `
