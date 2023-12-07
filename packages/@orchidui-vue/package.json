@@ -1,6 +1,6 @@
 {
   "name": "@orchidui/vue",
-  "version": "0.2.73",
+  "version": "0.2.74",
   "type": "module",
   "scripts": {
     "build": "vite build",
@@ -44,6 +44,9 @@
     },
     "./StoreDesign": {
       "import": "./dist/StoreDesign.js"
+    },
+    "./Chart": {
+      "import": "./dist/Chart.js"
     },
     "./dist/style.css": {
       "import": "./dist/style.css",

@@ -34,5 +34,3 @@ export * from "./Theme/OcTheme.js";
 
 export * from "./Builder/DataTable/OcDataTable.js";
 export * from "./Builder/Form/OcFormBuilder.js";
-
-export * from "./Charts";
