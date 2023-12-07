@@ -45,6 +45,9 @@
     "./StoreDesign": {
       "import": "./dist/StoreDesign.js"
     },
+    "./Chart": {
+      "import": "./dist/Chart.js"
+    },
     "./dist/style.css": {
       "import": "./dist/style.css",
       "require": "./dist/style.css"
