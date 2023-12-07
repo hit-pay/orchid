@@ -148,13 +148,14 @@ const filterData = ref(
 
 const removeAllQueryFilter = () => {
   queries.value = [];
-  const newFilter = {
+
+  const defaultFilters = {
     page: 1,
     [filterOptions.value?.per_page?.key || 'per_page']: perPage.value,
     ...(filterOptions.value.tabs ? { tabs: filterOptions.value.tabs } : {})
   }
 
-  filterData.value = newFilter;
+  filterData.value = defaultFilters;
 
   applyFilter();
 };
