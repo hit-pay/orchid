@@ -149,7 +149,7 @@ const className = computed(() => props.class);
       v-for="form in jsonForm"
       :key="getFormKey(form.name)"
       :class="form.class"
-      :style="grid ? gridArea : ''"
+      :style="grid ? gridArea(form.name) : ''"
     >
       <component
         :is="getComponentByType(form.type)"

@@ -21,7 +21,7 @@ const props = defineProps({
   isLast: Boolean,
   isCopy: Boolean,
   isSelected: Boolean,
-  data: String,
+  data: [String, Number, Object, Array, Boolean],
   isLoading: Boolean,
   chipOptions: Object,
   content: {
