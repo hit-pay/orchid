@@ -75,11 +75,12 @@ const changeImage = (url) => {
         <div
           v-for="(img, i) in list"
           :key="img.fileName"
-          class="w-[90px] group relative cursor-pointer overflow-hidden aspect-square border rounded border-oc-accent-1-100"
+          class="w-[90px] group relative cursor-pointer overflow-hidden aspect-square border rounded border-oc-accent-1-100 bg-cover bg-center "
           :class="{
             'border-oc-primary': selectedImage.fileName === img.fileName,
             'col-start-2': i === 0,
           }"
+          :style="`background-image: url(${img.fileUrl})`"
           @click="$emit('update:selectedImage', img)"
         >
           <Dropdown
@@ -117,11 +118,6 @@ const changeImage = (url) => {
               </div>
             </template>
           </Dropdown>
-          <img
-            class="w-full h-full"
-            :src="img.fileUrl"
-            :alt="`uploaded-img-${i}`"
-          />
           <div
             class="absolute transition-all duration-500 top-0 left-0 flex items-center justify-center w-full h-full"
             :class="img.progress !== 100 ? 'bg-black/[.35]' : 'bg-black/0'"
