@@ -48,22 +48,7 @@ const changeImage = (url) => {
 </script>
 
 <template>
-  <div class="flex gap-x-3">
-    <label>
-      <div
-        class="w-[90px] hover:bg-oc-primary-50 cursor-pointer bg-oc-accent-1-50 text-oc-accent-1 rounded aspect-square flex items-center justify-center"
-      >
-        <Icon name="plus" />
-      </div>
-      <input
-        class="hidden"
-        type="file"
-        :accept="accept || 'image/png, image/jpeg'"
-        multiple
-        @change="$emit('change', $event)"
-      />
-    </label>
-
+  <div>
     <Draggable
       :key="uploadedImages.length"
       :model-value="uploadedImages"
@@ -73,6 +58,21 @@ const changeImage = (url) => {
       @update:model-value="$emit('update:uploadedImages', $event)"
     >
       <template #default="{ list }">
+        <label>
+          <div
+            class="w-[90px] hover:bg-oc-primary-50 cursor-pointer bg-oc-accent-1-50 text-oc-accent-1 rounded aspect-square flex items-center justify-center"
+          >
+            <Icon name="plus" />
+          </div>
+          <input
+            class="hidden"
+            type="file"
+            :accept="accept || 'image/png, image/jpeg'"
+            multiple
+            @change="$emit('change', $event)"
+          />
+        </label>
+
         <div
           v-for="(img, i) in list"
           :key="img.fileName"
