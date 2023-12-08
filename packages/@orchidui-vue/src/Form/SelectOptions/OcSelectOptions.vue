@@ -114,7 +114,7 @@ const isGridVariant = computed(() => {
           </div>
         </div>
         <Icon
-          v-if="borderless && true"
+          v-if="borderless && opt.value === modelValue"
           width="16"
           height="16"
           name="check-2"
