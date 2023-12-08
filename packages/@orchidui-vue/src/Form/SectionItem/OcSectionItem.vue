@@ -40,7 +40,7 @@ defineEmits(["update:modelValue"]);
     <Toggle
       v-if="isToggle"
       :model-value="modelValue"
-      @update:model-value="$emit('update:modelValue')"
+      @update:model-value="$emit('update:modelValue', $event)"
     />
   </div>
 </template>
