@@ -19,7 +19,7 @@ export const Default = {
   render: (args) => ({
     components: { MultipleUploadFile, Theme },
     setup() {
-      const modelValue = ref();
+      const modelValue = ref([]);
       const selectedImage = ref();
       return { modelValue, args, selectedImage };
     },
@@ -27,6 +27,7 @@ export const Default = {
           <Theme class="min-h-[500px]">
 
             {{ modelValue }}
+
             <MultipleUploadFile
                 v-model="modelValue"
                 v-model:selectedImage="selectedImage"
@@ -55,9 +56,30 @@ export const MultipleImages = {
   render: (args) => ({
     components: { MultipleUploadFile, Theme },
     setup() {
-      const modelValue = ref();
+      const modelValue = ref([
+        {
+          current: {
+            id: "image_1",
+            path: "https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/covers/small/99d696e564ba45fbaa0fb2e3b43d0e27.jpg",
+            caption: "Image 1",
+          },
+        },
+        {
+          current: {
+            id: "image_2",
+            path: "https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/products/small/99a6b905ea094d48bde25dc0c0eaa840.jpg",
+            caption: "Image 2",
+          },
+        },
+      ]);
       const selectedImage = ref();
-      return { modelValue, args, selectedImage };
+      const onRemoveFile = (currentFile) => {
+        console.log(currentFile);
+      };
+      const onEditFile = (currentFile) => {
+        console.log(currentFile);
+      };
+      return { modelValue, args, selectedImage, onRemoveFile, onEditFile };
     },
     template: `
       <Theme class="min-h-[500px]">
@@ -71,6 +93,8 @@ export const MultipleImages = {
             :error-message="args.errorMessage"
             is-image-only
             :columnsCount="args.columnsCount"
+            @onEditFile="onRemoveFile"
+            @onRemoveFile="onRemoveFile"
         />
       </Theme>
     `,

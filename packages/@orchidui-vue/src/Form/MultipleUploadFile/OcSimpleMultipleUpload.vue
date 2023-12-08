@@ -26,11 +26,17 @@ const emit = defineEmits([
   "change",
   "update:selectedImage",
   "update:uploadedImages",
+  "onRemoveImage",
+  "onEditImage",
 ]);
 const isDropdownOpen = ref(false);
 const isEditOpen = ref(false);
 const editImg = ref("");
 const onDeleteFile = (index) => {
+  emit(
+    "onRemoveImage",
+    props.uploadedImages.find((_, i) => i === index),
+  );
   emit(
     "update:uploadedImages",
     props.uploadedImages.filter((_, i) => i !== index),
@@ -43,6 +49,9 @@ const changeImage = (url) => {
   changedFile.fileUrl = url;
   isEditOpen.value = false;
   editImg.value = "";
+
+  emit("onEditImage", changedFile);
+
   emit("update:uploadedImages", props.uploadedImages);
 };
 </script>
@@ -75,7 +84,7 @@ const changeImage = (url) => {
         <div
           v-for="(img, i) in list"
           :key="img.fileName"
-          class="w-[90px] group relative cursor-pointer overflow-hidden aspect-square border rounded border-oc-accent-1-100 bg-cover bg-center "
+          class="w-[90px] group relative cursor-pointer overflow-hidden aspect-square border rounded border-oc-accent-1-100 bg-cover bg-center"
           :class="{
             'border-oc-primary': selectedImage.fileName === img.fileName,
             'col-start-2': i === 0,
@@ -97,7 +106,7 @@ const changeImage = (url) => {
                 <div
                   class="flex p-3 cursor-pointer items-center gap-x-3"
                   @click="
-                    editImg = img?.fileUrl;
+                    editImg = img.fileUrl;
                     isDropdownOpen = false;
                     isEditOpen = true;
                   "

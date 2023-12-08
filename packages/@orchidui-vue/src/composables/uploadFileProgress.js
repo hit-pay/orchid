@@ -4,7 +4,7 @@ export const useUploadFileProgress = (maxSize, emit) => {
   const currentFiles = ref([]);
   const isErrorMaxSize = ref(false);
   const onChangeFile = (event) => {
-    const uploadFiles = [...event.target?.files].filter(
+    const uploadFiles = [...event.target.files].filter(
       (f) => !currentFiles.value.some((file) => file.fileName === f.name),
     );
     isErrorMaxSize.value =
@@ -74,6 +74,11 @@ export const useUploadFileProgress = (maxSize, emit) => {
   };
 
   const onDeleteFile = (index) => {
+    emit(
+      "onRemoveFile",
+      currentFiles.value.find((_, i) => i === index),
+    );
+
     currentFiles.value.splice(index, 1);
     emit("update:modelValue", currentFiles.value);
   };
