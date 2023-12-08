@@ -209,7 +209,7 @@ const displayFilterData = computed(() => {
         name !== filterTabKey &&
         name !== filterSearchKey
       ) {
-        let option = filterOptions.value.form.find((f) => {
+        let option = filterOptions.value.form?.find((f) => {
           if (typeof f.name === "object") {
             let isSelectedOption = false;
             f.name.forEach((formName) => {
