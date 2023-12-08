@@ -63,6 +63,8 @@ const onInput = () =>
         :disabled="isDisabled"
         @change="onInput"
       />
+
+      <slot name="after" />
     </label>
   </BaseInput>
 </template>
