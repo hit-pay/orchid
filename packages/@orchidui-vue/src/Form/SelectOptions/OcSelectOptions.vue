@@ -1,5 +1,5 @@
 <script setup>
-import { BaseInput } from "@/orchidui";
+import { BaseInput, Icon } from "@/orchidui";
 
 import { computed } from "vue";
 
@@ -13,6 +13,7 @@ const props = defineProps({
   errorMessage: String,
   placeholder: String,
   isDisabled: Boolean,
+  borderless: Boolean,
   options: Array,
   modelValue: [Array, String, Number],
   isRequired: {
@@ -65,12 +66,13 @@ const isGridVariant = computed(() => {
       <div
         v-for="opt in options"
         :key="opt.value"
-        class="cursor-pointer group"
+        class="cursor-pointer group flex"
         :class="{
-          'flex border border-oc-gray-200 p-4 rounded hover:shadow':
+          'flex border border-oc-gray-200 p-3 rounded hover:shadow':
             !isGridVariant,
           'border-2 border-oc-primary':
             !isGridVariant && opt.value === modelValue,
+          '!border-0 hover:bg-oc-accent-1-50': borderless,
         }"
         @click="update(opt.value)"
       >
@@ -105,6 +107,13 @@ const isGridVariant = computed(() => {
             {{ opt.description }}
           </div>
         </div>
+        <Icon
+          v-if="borderless && opt.value === modelValue"
+          width="16"
+          height="16"
+          name="check_2"
+          class="text-oc-primary"
+        />
       </div>
     </div>
   </BaseInput>

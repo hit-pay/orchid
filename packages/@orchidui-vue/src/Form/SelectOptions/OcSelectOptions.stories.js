@@ -2,6 +2,7 @@ import { Theme } from "@/orchidui";
 import { FormBuilder, SelectOptions } from "@/orchidui";
 
 import { ref } from "vue";
+
 export default {
   tags: ["autodocs"],
   component: SelectOptions,
@@ -103,6 +104,7 @@ export const Default = {
           label: "Example Label",
           hint: "This is a hint text to help user",
           placeholder: "placeholder",
+          borderless: true,
           options: [
             {
               label: "Option 1",
@@ -146,12 +148,14 @@ export const Default = {
     template: `
           <Theme>
             <div class="mb-5">
-              {{ values}}
+              {{ values }}
             </div>
             <div class="max-w-[550px] border p-4 rounded">
-              <FormBuilder class="grid gap-5"  id="section_name" :values="values" :errors="errors" :json-form="args.jsonForm"  >
+              <FormBuilder class="grid gap-5" id="section_name" :values="values" :errors="errors"
+                           :json-form="args.jsonForm">
                 <template #SelectOptions="{form, value, error}">
-                  <SelectOptions v-bind="form.props" :model-value="value" :error-messages="error" @onUpdate="onUpdateForm(form, $event)" />
+                  <SelectOptions v-bind="form.props" :model-value="value" :error-messages="error"
+                                 @onUpdate="onUpdateForm(form, $event)"/>
                 </template>
               </FormBuilder>
             </div>
