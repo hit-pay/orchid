@@ -151,9 +151,9 @@ const removeAllQueryFilter = () => {
 
   const defaultFilters = {
     page: 1,
-    [filterOptions.value?.per_page?.key || 'per_page']: perPage.value,
-    ...(filterOptions.value.tabs ? { tabs: filterOptions.value.tabs } : {})
-  }
+    [filterOptions.value?.per_page?.key || "per_page"]: perPage.value,
+    ...(filterOptions.value.tabs ? { tabs: filterOptions.value.tabs } : {}),
+  };
 
   filterData.value = defaultFilters;
 
@@ -209,7 +209,7 @@ const displayFilterData = computed(() => {
         name !== filterTabKey &&
         name !== filterSearchKey
       ) {
-        let option = filterOptions.value.form.find((f) => {
+        let option = filterOptions.value.form?.find((f) => {
           if (typeof f.name === "object") {
             let isSelectedOption = false;
             f.name.forEach((formName) => {
