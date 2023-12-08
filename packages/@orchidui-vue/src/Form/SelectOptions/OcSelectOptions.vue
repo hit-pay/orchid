@@ -66,13 +66,13 @@ const isGridVariant = computed(() => {
       <div
         v-for="opt in options"
         :key="opt.value"
-        class="cursor-pointer group flex"
+        class="cursor-pointer group"
         :class="{
           'flex border border-oc-gray-200 p-3 rounded hover:shadow':
             !isGridVariant,
           'border-2 border-oc-primary':
             !isGridVariant && opt.value === modelValue,
-          '!border-0 hover:bg-oc-accent-1-50': borderless,
+          '!border-0 hover:bg-oc-accent-1-50 flex': borderless,
         }"
         @click="update(opt.value)"
       >
@@ -89,7 +89,13 @@ const isGridVariant = computed(() => {
           }"
           :src="opt.preview"
         />
-        <div class="mt-2" :class="isGridVariant ? 'text-center' : 'px-3'">
+        <div
+          class="mt-2"
+          :class="[
+            isGridVariant ? 'text-center' : 'px-3',
+            borderless ? 'flex-1' : '',
+          ]"
+        >
           <span
             class="font-medium"
             :class="{
@@ -108,10 +114,10 @@ const isGridVariant = computed(() => {
           </div>
         </div>
         <Icon
-          v-if="borderless && opt.value === modelValue"
+          v-if="borderless && true"
           width="16"
           height="16"
-          name="check_2"
+          name="check-2"
           class="text-oc-primary"
         />
       </div>

@@ -104,6 +104,28 @@ export const Default = {
           label: "Example Label",
           hint: "This is a hint text to help user",
           placeholder: "placeholder",
+          options: [
+            {
+              label: "Option 1",
+              value: 1,
+              description: "Smaller height, fit to screen width",
+            },
+            {
+              label: "Option 2",
+              value: 2,
+              description: "Smaller height, fit to screen width",
+            },
+          ],
+        },
+      },
+      {
+        name: "select_options_5",
+        type: "SelectOptions",
+        props: {
+          variant: "list",
+          label: "Example Label",
+          hint: "This is a hint text to help user",
+          placeholder: "placeholder",
           borderless: true,
           options: [
             {
@@ -130,6 +152,7 @@ export const Default = {
         select_options_2: "",
         select_options_3: "",
         select_options_4: "",
+        select_options_5: "",
       });
       const errors = ref({});
 
