@@ -13,7 +13,6 @@ const emit = defineEmits({
 const list = ref(props.modelValue);
 
 const onChange = () => {
-  console.log("list.value:", list.value);
   emit("update:modelValue", list.value);
 };
 </script>
