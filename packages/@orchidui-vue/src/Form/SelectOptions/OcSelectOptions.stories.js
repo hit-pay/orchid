@@ -126,6 +126,28 @@ export const Default = {
           label: "Example Label",
           hint: "This is a hint text to help user",
           placeholder: "placeholder",
+          options: [
+            {
+              label: "Option 1",
+              value: 1,
+              description: "Smaller height, fit to screen width",
+            },
+            {
+              label: "Option 2",
+              value: 2,
+              description: "Smaller height, fit to screen width",
+            },
+          ],
+        },
+      },
+      {
+        name: "select_options_6",
+        type: "SelectOptions",
+        props: {
+          variant: "list",
+          label: "Borderless",
+          hint: "This is a hint text to help user",
+          placeholder: "placeholder",
           borderless: true,
           options: [
             {
@@ -153,6 +175,7 @@ export const Default = {
         select_options_3: "",
         select_options_4: "",
         select_options_5: "",
+        select_options_6: "",
       });
       const errors = ref({});
 
@@ -178,7 +201,7 @@ export const Default = {
                            :json-form="args.jsonForm">
                 <template #SelectOptions="{form, value, error}">
                   <SelectOptions v-bind="form.props" :model-value="value" :error-messages="error"
-                                 @onUpdate="onUpdateForm(form, $event)"/>
+                                 @update:model-value="onUpdateForm(form, $event)"/>
                 </template>
               </FormBuilder>
             </div>
