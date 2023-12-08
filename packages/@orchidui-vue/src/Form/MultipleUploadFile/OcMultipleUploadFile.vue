@@ -30,7 +30,7 @@
         <div class="input-file-uploaded flex flex-col gap-y-3">
           <div
             v-for="(file, index) in currentFiles"
-            :key="`${file?.fileName}-${file.fileName}`"
+            :key="`${index}-${file.fileName}`"
             class="flex justify-between relative items-center w-full last:mb-2"
           >
             <div class="flex items-center gap-x-3">
