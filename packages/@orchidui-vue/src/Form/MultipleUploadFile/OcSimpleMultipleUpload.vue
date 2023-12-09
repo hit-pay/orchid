@@ -33,10 +33,10 @@ const isDropdownOpen = ref(false);
 const isEditOpen = ref(false);
 const editImg = ref("");
 const onDeleteFile = (index) => {
-  emit(
-    "onRemoveImage",
-    props.uploadedImages.find((_, i) => i === index),
-  );
+  const deletedImage = props.uploadedImages.find((_, i) => i === index);
+  if (deletedImage.current) {
+    emit("onRemoveImage", deletedImage);
+  }
   emit(
     "update:uploadedImages",
     props.uploadedImages.filter((_, i) => i !== index),
@@ -50,7 +50,9 @@ const changeImage = (url) => {
   isEditOpen.value = false;
   editImg.value = "";
 
-  emit("onEditImage", changedFile);
+  if (changedFile.current) {
+    emit("onEditImage", changedFile);
+  }
 
   emit("update:uploadedImages", props.uploadedImages);
 };

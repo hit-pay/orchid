@@ -2,7 +2,7 @@
 import { Modal, Button } from "@/orchidui";
 import { Cropper } from "vue-advanced-cropper";
 import "vue-advanced-cropper/dist/style.css";
-import { ref, computed } from "vue";
+import { ref, watch } from "vue";
 
 const props = defineProps({
   img: String,
@@ -13,22 +13,42 @@ const file_upload = ref();
 const cancelButtonProps = {
   onClick: () => emit("close"),
 };
+
+const localImage = ref("");
+const isAwsImage = ref(false);
+
+watch(
+  () => props.img,
+  (img) => {
+    if (img) {
+      if (img.includes(".amazonaws.com")) {
+        isAwsImage.value = true;
+        localImage.value = "";
+      } else {
+        isAwsImage.value = false;
+        localImage.value = img;
+      }
+
+      console.log("tess ", img, localImage.value, isAwsImage.value);
+    }
+  },
+  { immediate: true },
+);
+
 const confirmButtonProps = ref({
   label: "Save",
   onClick: () => {
-    const { canvas } = cropper.value.getResult();
-    emit("changeImage", canvas.toDataURL());
+    if (localImage.value) {
+      localImage.value = null;
+      const { canvas } = cropper.value.getResult();
+      emit("changeImage", canvas.toDataURL());
+    } else {
+      emit("close");
+    }
   },
 });
 const rotate = (angle) => cropper.value.rotate(angle);
 const zoom = (zoom) => cropper.value.zoom(zoom);
-
-const localImage = ref("");
-const isAwsImage = computed(() => {
-  return props.img.includes(".amazonaws.com");
-});
-
-localImage.value = isAwsImage.value ? (localImage.value = props.img) : "";
 
 const replaceImage = () => {
   file_upload.value.click();

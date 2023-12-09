@@ -84,9 +84,9 @@ export const MultipleImages = {
     template: `
       <Theme class="min-h-[500px]">
 
-       <div>
-       {{ modelValue }}
-       </div>
+      <div class="mt-5">
+      {{ modelValue }}
+      </div>
        <div class="mt-5">
        {{ selectedImage}}
        </div>
