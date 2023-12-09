@@ -2,6 +2,7 @@ import { Theme } from "@/orchidui";
 import { FormBuilder, SelectOptions } from "@/orchidui";
 
 import { ref } from "vue";
+
 export default {
   tags: ["autodocs"],
   component: SelectOptions,
@@ -117,6 +118,51 @@ export const Default = {
           ],
         },
       },
+      {
+        name: "select_options_5",
+        type: "SelectOptions",
+        props: {
+          variant: "list",
+          label: "Example Label",
+          hint: "This is a hint text to help user",
+          placeholder: "placeholder",
+          options: [
+            {
+              label: "Option 1",
+              value: 1,
+              description: "Smaller height, fit to screen width",
+            },
+            {
+              label: "Option 2",
+              value: 2,
+              description: "Smaller height, fit to screen width",
+            },
+          ],
+        },
+      },
+      {
+        name: "select_options_6",
+        type: "SelectOptions",
+        props: {
+          variant: "list",
+          label: "Borderless",
+          hint: "This is a hint text to help user",
+          placeholder: "placeholder",
+          borderless: true,
+          options: [
+            {
+              label: "Option 1",
+              value: 1,
+              description: "Smaller height, fit to screen width",
+            },
+            {
+              label: "Option 2",
+              value: 2,
+              description: "Smaller height, fit to screen width",
+            },
+          ],
+        },
+      },
     ],
   },
   render: (args) => ({
@@ -128,6 +174,8 @@ export const Default = {
         select_options_2: "",
         select_options_3: "",
         select_options_4: "",
+        select_options_5: "",
+        select_options_6: "",
       });
       const errors = ref({});
 
@@ -146,12 +194,14 @@ export const Default = {
     template: `
           <Theme>
             <div class="mb-5">
-              {{ values}}
+              {{ values }}
             </div>
             <div class="max-w-[550px] border p-4 rounded">
-              <FormBuilder class="grid gap-5"  id="section_name" :values="values" :errors="errors" :json-form="args.jsonForm"  >
+              <FormBuilder class="grid gap-5" id="section_name" :values="values" :errors="errors"
+                           :json-form="args.jsonForm">
                 <template #SelectOptions="{form, value, error}">
-                  <SelectOptions v-bind="form.props" :model-value="value" :error-messages="error" @onUpdate="onUpdateForm(form, $event)" />
+                  <SelectOptions v-bind="form.props" :model-value="value" :error-messages="error"
+                                 @update:model-value="onUpdateForm(form, $event)"/>
                 </template>
               </FormBuilder>
             </div>
