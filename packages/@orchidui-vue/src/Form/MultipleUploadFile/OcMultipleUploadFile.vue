@@ -21,6 +21,8 @@
           $emit('update:modelValue', $event);
           currentFiles = $event;
         "
+        @on-edit-image="$emit('onEditFile', $event)"
+        @on-remove-image="$emit('onRemoveFile', $event)"
       />
       <div
         v-else
@@ -30,7 +32,7 @@
         <div class="input-file-uploaded flex flex-col gap-y-3">
           <div
             v-for="(file, index) in currentFiles"
-            :key="file.fileName"
+            :key="`${index}-${file.fileName}`"
             class="flex justify-between relative items-center w-full last:mb-2"
           >
             <div class="flex items-center gap-x-3">
@@ -102,13 +104,18 @@
     </BaseInput>
   </div>
 </template>
-<script setup lang="ts">
+<script setup>
 import { onMounted, ref } from "vue";
 import { Icon, BaseInput } from "@/orchidui";
 import { useUploadFileProgress } from "@/orchidui/composables/uploadFileProgress.js";
 import OcSimpleMultipleUpload from "./OcSimpleMultipleUpload.vue";
 
-const emit = defineEmits(["update:modelValue", "update:selectedImage"]);
+const emit = defineEmits([
+  "update:modelValue",
+  "update:selectedImage",
+  "onEditFile",
+  "onRemoveFile",
+]);
 const props = defineProps({
   modelValue: {
     type: Array,
@@ -138,7 +145,24 @@ const { isErrorMaxSize, currentFiles, onChangeFile, onDeleteFile } =
   useUploadFileProgress(props.maxSize, emit);
 
 onMounted(() => {
-  currentFiles.value = [...props.modelValue];
+  const formatedModelValue = [];
+
+  if (props.modelValue.length > 0) {
+    props.modelValue.forEach((item) => {
+      formatedModelValue.push({
+        current: item.current,
+        file: null,
+        fileName: item.current.caption ?? "",
+        progress: 100,
+        fileUrl: item.current.path,
+        totalSize: item.current.file_size ?? 0,
+        isLoaded: true,
+        extension: item.current.extention ?? "png",
+      });
+    });
+
+    currentFiles.value = formatedModelValue;
+  }
 });
 </script>
 

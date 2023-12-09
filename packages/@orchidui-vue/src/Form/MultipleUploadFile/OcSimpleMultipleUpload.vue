@@ -26,11 +26,17 @@ const emit = defineEmits([
   "change",
   "update:selectedImage",
   "update:uploadedImages",
+  "onRemoveImage",
+  "onEditImage",
 ]);
 const isDropdownOpen = ref(false);
 const isEditOpen = ref(false);
 const editImg = ref("");
 const onDeleteFile = (index) => {
+  const deletedImage = props.uploadedImages.find((_, i) => i === index);
+  if (deletedImage.current) {
+    emit("onRemoveImage", deletedImage);
+  }
   emit(
     "update:uploadedImages",
     props.uploadedImages.filter((_, i) => i !== index),
@@ -43,12 +49,31 @@ const changeImage = (url) => {
   changedFile.fileUrl = url;
   isEditOpen.value = false;
   editImg.value = "";
+
+  if (changedFile.current) {
+    emit("onEditImage", changedFile);
+  }
+
   emit("update:uploadedImages", props.uploadedImages);
 };
 </script>
 
 <template>
   <div>
+    <label class="absolute">
+      <div
+        class="w-[90px] hover:bg-oc-primary-50 cursor-pointer bg-oc-accent-1-50 text-oc-accent-1 rounded aspect-square flex items-center justify-center"
+      >
+        <Icon name="plus" />
+      </div>
+      <input
+        class="hidden"
+        type="file"
+        :accept="accept || 'image/png, image/jpeg'"
+        multiple
+        @change="$emit('change', $event)"
+      />
+    </label>
     <Draggable
       :key="uploadedImages.length"
       :model-value="uploadedImages"
@@ -58,28 +83,15 @@ const changeImage = (url) => {
       @update:model-value="$emit('update:uploadedImages', $event)"
     >
       <template #default="{ list }">
-        <label>
-          <div
-            class="w-[90px] hover:bg-oc-primary-50 cursor-pointer bg-oc-accent-1-50 text-oc-accent-1 rounded aspect-square flex items-center justify-center"
-          >
-            <Icon name="plus" />
-          </div>
-          <input
-            class="hidden"
-            type="file"
-            :accept="accept || 'image/png, image/jpeg'"
-            multiple
-            @change="$emit('change', $event)"
-          />
-        </label>
-
         <div
           v-for="(img, i) in list"
           :key="img.fileName"
-          class="w-[90px] group relative cursor-pointer overflow-hidden aspect-square border rounded border-oc-accent-1-100"
-          :class="
-            selectedImage.fileName === img.fileName ? 'border-oc-primary' : ''
-          "
+          class="w-[90px] group relative cursor-pointer overflow-hidden aspect-square border rounded border-oc-accent-1-100 bg-cover bg-center"
+          :class="{
+            'border-oc-primary': selectedImage.fileName === img.fileName,
+            'col-start-2': i === 0,
+          }"
+          :style="`background-image: url(${img.fileUrl})`"
           @click="$emit('update:selectedImage', img)"
         >
           <Dropdown
@@ -96,7 +108,7 @@ const changeImage = (url) => {
                 <div
                   class="flex p-3 cursor-pointer items-center gap-x-3"
                   @click="
-                    editImg = img?.fileUrl;
+                    editImg = img.fileUrl;
                     isDropdownOpen = false;
                     isEditOpen = true;
                   "
@@ -117,11 +129,6 @@ const changeImage = (url) => {
               </div>
             </template>
           </Dropdown>
-          <img
-            class="w-full h-full"
-            :src="img.fileUrl"
-            :alt="`uploaded-img-${i}`"
-          />
           <div
             class="absolute transition-all duration-500 top-0 left-0 flex items-center justify-center w-full h-full"
             :class="img.progress !== 100 ? 'bg-black/[.35]' : 'bg-black/0'"

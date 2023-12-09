@@ -2,25 +2,66 @@
 import { Modal, Button } from "@/orchidui";
 import { Cropper } from "vue-advanced-cropper";
 import "vue-advanced-cropper/dist/style.css";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 
-defineProps({
+const props = defineProps({
   img: String,
 });
 const emit = defineEmits(["changeImage", "close"]);
 const cropper = ref();
+const file_upload = ref();
 const cancelButtonProps = {
   onClick: () => emit("close"),
 };
+
+const localImage = ref("");
+const isAwsImage = ref(false);
+
+watch(
+  () => props.img,
+  (img) => {
+    if (img) {
+      if (img.includes(".amazonaws.com")) {
+        isAwsImage.value = true;
+        localImage.value = "";
+      } else {
+        isAwsImage.value = false;
+        localImage.value = img;
+      }
+
+      console.log("tess ", img, localImage.value, isAwsImage.value);
+    }
+  },
+  { immediate: true },
+);
+
 const confirmButtonProps = ref({
   label: "Save",
   onClick: () => {
-    const { canvas } = cropper.value.getResult();
-    emit("changeImage", canvas.toDataURL());
+    if (localImage.value) {
+      localImage.value = null;
+      const { canvas } = cropper.value.getResult();
+      emit("changeImage", canvas.toDataURL());
+    } else {
+      emit("close");
+    }
   },
 });
 const rotate = (angle) => cropper.value.rotate(angle);
 const zoom = (zoom) => cropper.value.zoom(zoom);
+
+const replaceImage = () => {
+  file_upload.value.click();
+};
+
+const fileUpload = (e) => {
+  if (e.target.files[0] / (1024 * 1024) > 5) {
+    e.preventDefault();
+    return false;
+  } else {
+    localImage.value = URL.createObjectURL(e.target.files[0]);
+  }
+};
 </script>
 
 <template>
@@ -31,14 +72,25 @@ const zoom = (zoom) => cropper.value.zoom(zoom);
     :confirm-button-props="confirmButtonProps"
   >
     <div class="flex flex-col gap-y-5">
+      <input
+        ref="file_upload"
+        accept="image/*"
+        type="file"
+        class="hidden"
+        @change="fileUpload"
+      />
+
       <Cropper
+        v-if="localImage"
         ref="cropper"
         class="w-[592px] h-[300px]"
-        :src="img"
+        :src="localImage"
         :resize-image="{ wheel: false }"
         background-class="test"
       />
-      <div class="flex gap-x-1 justify-center">
+      <img v-else class="w-full" :src="img" />
+
+      <div class="flex gap-x-1 justify-center relative">
         <Button
           variant="secondary"
           size="small"
@@ -62,6 +114,14 @@ const zoom = (zoom) => cropper.value.zoom(zoom);
           size="small"
           left-icon="forward"
           @click="rotate(90)"
+        />
+        <Button
+          class="absolute right-0"
+          variant="secondary"
+          size="small"
+          label="Replace image"
+          left-icon="refresh"
+          @click="replaceImage"
         />
       </div>
     </div>
