@@ -19,6 +19,7 @@ const props = defineProps({
   grid: Object,
 });
 
+
 const emit = defineEmits(["applyFilter", "cancel", "filter-fields-changed"]);
 
 const valuesData = ref({});
@@ -87,7 +88,7 @@ const applyFilter = () => {
           :errors="errorsData"
           :values="valuesData"
           :json-form="jsonForm"
-          :grid="grid"
+          :grid="grid ?? null"
           @on-update="onUpdateForm"
         >
         </FormBuilder>
