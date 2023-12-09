@@ -74,10 +74,10 @@ export const MultipleImages = {
       ]);
       const selectedImage = ref();
       const onRemoveFile = (currentFile) => {
-        console.log(currentFile);
+        console.log("removed ",currentFile.current);
       };
       const onEditFile = (currentFile) => {
-        console.log(currentFile);
+        console.log("edited",currentFile.current);
       };
       return { modelValue, args, selectedImage, onRemoveFile, onEditFile };
     },
@@ -100,7 +100,7 @@ export const MultipleImages = {
             :error-message="args.errorMessage"
             is-image-only
             :columnsCount="args.columnsCount"
-            @onEditFile="onRemoveFile"
+            @onEditFile="onEditFile"
             @onRemoveFile="onRemoveFile"
         />
       </Theme>
