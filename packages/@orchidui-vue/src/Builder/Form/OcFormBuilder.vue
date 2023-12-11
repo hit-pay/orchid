@@ -13,6 +13,7 @@ import {
   RadioGroup,
   RangeInput,
   Checkbox,
+  SectionItem,
   // TODO : add all form here , best load as async component
 } from "@/orchidui";
 import { computed } from "vue";
@@ -35,7 +36,10 @@ const props = defineProps({
    *   `}`
    * `}`
    */
-  grid: Object,
+  grid: {
+    type: Object,
+    default: null
+  },
   class: String,
   errors: {
     type: Object,
@@ -66,6 +70,7 @@ const FormTypes = {
   Checkbox: Checkbox,
   RangeInput: RangeInput,
   PhoneInput: PhoneInput,
+  SectionItem: SectionItem
 };
 
 const getComponentByType = (type) => {
