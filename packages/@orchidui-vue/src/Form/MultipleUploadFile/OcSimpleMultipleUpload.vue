@@ -59,7 +59,7 @@ const changeImage = (url) => {
 </script>
 
 <template>
-  <div>
+  <div class="realtive min-h-[90px]">
     <label class="absolute">
       <div
         class="w-[90px] hover:bg-oc-primary-50 cursor-pointer bg-oc-accent-1-50 text-oc-accent-1 rounded aspect-square flex items-center justify-center"
