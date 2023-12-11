@@ -15,6 +15,7 @@ const props = defineProps({
   errorMessage: String,
   hint: String,
   isDisabled: Boolean,
+  isSelectAll: Boolean,
 });
 const emit = defineEmits({
   "update:modelValue": [],
@@ -33,11 +34,31 @@ const toggleCheckbox = (value) => {
       : [...props.modelValue, value],
   );
 };
+const isAllSelected = computed(() =>
+  props.checkboxes?.every((checkbox) => isSelectedCheckbox(checkbox?.value)),
+);
+const allCheckboxValues = computed(() =>
+  props.checkboxes?.map((checkbox) => checkbox?.value),
+);
+const selectAll = () => {
+  if (isAllSelected.value) {
+    emit("update:modelValue", []);
+  } else {
+    emit("update:modelValue", allCheckboxValues.value);
+  }
+};
 </script>
 
 <template>
   <BaseInput :label="label" :error-message="errorMessage" :hint="hint">
     <div class="flex" :class="alignmentClasses[alignment]">
+      <Checkbox
+        v-if="isSelectAll"
+        label="Select all"
+        :value="allCheckboxValues"
+        :model-value="isAllSelected"
+        @update:model-value="selectAll"
+      />
       <Checkbox
         v-for="(checkbox, i) in checkboxes"
         :key="i"
