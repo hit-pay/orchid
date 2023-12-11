@@ -47,8 +47,8 @@ export const MultipleImages = {
   args: {
     accept: "",
     maxSize: 5,
-    hint: "",
-    label: "",
+    hint: "The optimal product image size is at least 800x800 px. PNG and JPG format is supported.",
+    label: "label example",
     errorMessage: "",
     isImageOnly: false,
     columnsCount: 3,
@@ -97,6 +97,7 @@ export const MultipleImages = {
             :hint="args.hint"
             :max-size="5"
             :label="args.label"
+            :important="true"
             :error-message="args.errorMessage"
             is-image-only
             :columnsCount="args.columnsCount"
