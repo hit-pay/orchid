@@ -31,10 +31,13 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  popperClass: {
+    type: [String, Array, Object],
+    default: "",
+  },
 });
 const getPopperOptions = () => ({
   placement: props.placement,
-  strategy: "fixed",
   modifiers: [
     {
       name: "flip",
@@ -76,7 +79,7 @@ watch(
     <div ref="reference" class="w-[inherit] flex">
       <slot />
     </div>
-    <div ref="popper" class="z-[1005]">
+    <div ref="popper" :class="popperClass" class="z-[1005]">
       <slot name="popper" />
     </div>
   </div>
