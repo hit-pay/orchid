@@ -16,13 +16,11 @@ export const sectionItem = {
   args: {
     title: "Title",
     description: "Description",
-    buttonProps: {
-      label: "Copy",
-      variant: "secondary",
-    },
-    inputProps: null,
+    toggleProps: {},
     isToggle: true,
-    icon: "",
+    icon: "check",
+    popperMessage: "Information",
+    errorMessage: "",
   },
   render: (args) => ({
     components: { Theme, SectionItem },
@@ -38,7 +36,10 @@ export const sectionItem = {
                   :title="args.title"
                   :description="args.description"
                   :is-toggle="args.isToggle"
+                  :toggle-props="args.toggleProps"
                   :icon="args.icon"
+                  :popper-message="args.popperMessage"
+                  :error-message="args.errorMessage"
               />
             </div>
           </Theme>
