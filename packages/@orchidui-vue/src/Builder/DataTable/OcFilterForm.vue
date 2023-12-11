@@ -16,7 +16,10 @@ const props = defineProps({
   actions: {
     type: Object,
   },
-  grid: Object,
+  grid: {
+    type: Object,
+    default: null
+  },
 });
 
 
