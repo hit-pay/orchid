@@ -36,7 +36,7 @@ defineEmits(["titleClick", "update:modelValue"]);
         :class="
           modelValue === item.value
             ? 'bg-oc-accent-2-50-tr text-oc-accent-1'
-            : ''
+            : 'text-oc-text-400'
         "
         @click="$emit('update:modelValue', item.value)"
       >
