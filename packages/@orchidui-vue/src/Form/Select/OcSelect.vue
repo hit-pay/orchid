@@ -142,6 +142,7 @@ initLocalValue();
   <BaseInput
     :label="isInlineLabel ? '' : label"
     :hint="hint"
+    class="relative"
     :error-message="errorMessage"
     :is-required="isRequired"
     :label-icon="labelIcon"
@@ -152,6 +153,7 @@ initLocalValue();
       v-model="isDropdownOpened"
       class="w-full"
       :distance="4"
+      popper-class="w-full"
       :is-disabled="isDisabled"
     >
       <div

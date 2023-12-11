@@ -23,6 +23,7 @@ const props = defineProps({
     default: "bottom-start",
   },
   popperOptions: Object,
+  popperClass: [String, Array, Object],
   modelValue: Boolean,
   preventClickOutside: Boolean,
 });
@@ -45,6 +46,7 @@ const onClickOutside = () => {
       ref="popper"
       :placement="placement"
       :distance="distance"
+      :popper-class="popperClass"
       :skidding="skidding"
       :popper-options="popperOptions"
     >

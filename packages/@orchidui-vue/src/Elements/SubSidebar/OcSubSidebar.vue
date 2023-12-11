@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { Icon } from "@/orchidui";
-import { ref } from "vue";
 
-const props = defineProps({
+defineProps({
   title: {
     type: String,
     default: "",
@@ -11,9 +10,12 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+  modelValue: {
+    type: String,
+    default: "",
+  },
 });
-const selected = ref(props.menu[0].value);
-defineEmits(["titleClick"]);
+defineEmits(["titleClick", "update:modelValue"]);
 </script>
 
 <template>
@@ -32,9 +34,11 @@ defineEmits(["titleClick"]);
         :key="i"
         class="py-3 rounded cursor-pointer font-medium hover:bg-oc-accent-2-50-tr px-5"
         :class="
-          selected === item.value ? 'bg-oc-accent-2-50-tr text-oc-accent-1' : ''
+          modelValue === item.value
+            ? 'bg-oc-accent-2-50-tr text-oc-accent-1'
+            : 'text-oc-text-400'
         "
-        @click="selected = item.value"
+        @click="$emit('update:modelValue', item.value)"
       >
         {{ item.label }}
       </div>
