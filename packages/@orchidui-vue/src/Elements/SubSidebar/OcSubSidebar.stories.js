@@ -1,4 +1,5 @@
 import { Theme, SubSidebar } from "@/orchidui";
+import { ref } from "vue";
 
 export default {
   component: SubSidebar,
@@ -43,11 +44,13 @@ export const Default = {
   render: (args) => ({
     components: { SubSidebar, Theme },
     setup() {
-      return { args };
+      const modelValue = ref();
+      return { modelValue, args };
     },
     template: `
           <Theme>
-            <SubSidebar class="w-fit" :menu="args.menu" :title="args.title" @titleClick="args.onTitleClick"/>
+            <SubSidebar v-model="modelValue" class="w-fit" :menu="args.menu" :title="args.title"
+                        @titleClick="args.onTitleClick"/>
           </Theme>
         `,
   }),
