@@ -253,7 +253,7 @@ const displayFilterData = computed(() => {
 });
 </script>
 <template>
-  <div class="flex flex-col gap-9 relative ">
+  <div class="flex flex-col gap-9 relative">
     <Table
       v-if="tableOptions"
       :selected="selected"
@@ -311,7 +311,7 @@ const displayFilterData = computed(() => {
               />
 
               <template #menu>
-                  <FilterForm
+                <FilterForm
                   v-if="isDropdownOpened"
                   :id="id"
                   :json-form="filterOptions.form ?? []"
@@ -356,7 +356,10 @@ const displayFilterData = computed(() => {
         <slot name="after" />
       </template>
     </Table>
-    <div v-if="paginationOption?.total > 0" class="flex gap-3 items-center z-[1]">
+    <div
+      v-if="paginationOption?.total > 0"
+      class="flex gap-3 items-center z-[1]"
+    >
       <Pagination
         v-model="currentPage"
         class="justify-center"

@@ -194,12 +194,11 @@ export const Default = {
   }),
 };
 
-
-
-export const ShowIfProps = {
+export const ShowIfLogic = {
   args: {
     values: {
-      select_product_from: 'all_product'
+      select_product_from: "all_product",
+      limit_feature_product: false,
     },
     errors: {},
   },
@@ -213,6 +212,7 @@ export const ShowIfProps = {
       const errors = ref(args.errors);
 
       const onUpdateForm = (form, value = null) => {
+        console.log("onUpdateForm", form, value);
         if (typeof form.name === "object") {
           form.name.forEach((formName, index) => {
             values.value[formName.key] = value[index];
@@ -224,55 +224,58 @@ export const ShowIfProps = {
 
       const isOpenedDropdown = ref(false);
 
-      const  JsonForm = [
+      const JsonForm = [
         {
-          name: 'select_product_from_section',
-          type: 'SectionItem',
+          name: "select_product_from_section",
+          type: "SectionItem",
           props: {
             title: "Select product from",
-          }
+          },
         },
         {
-          name: 'select_product_from',
-          type: 'Select',
+          name: "select_product_from",
+          type: "Select",
           props: {
             options: [
               {
-                value: 'feature',
-                label: 'Feature product'
+                value: "feature",
+                label: "Feature product",
               },
               {
-                value: 'all_product',
-                label: 'All product'
+                value: "all_product",
+                label: "All product",
               },
               {
-                value: 'product_category',
-                label: 'Product Category'
+                value: "product_category",
+                label: "Product Category",
               },
               {
-                value: 'pick_products',
-                label: 'Pick Products'
-              }
+                value: "pick_products",
+                label: "Pick Products",
+              },
             ],
             hint: "Learn how to make featured products here.",
-          }
+          },
         },
         {
-          name: 'limit_feature_product',
-          type: 'SectionItem',
+          name: "limit_feature_product",
+          type: "SectionItem",
           props: {
             title: "Limit featured products",
-          }
+            isToggle: true,
+          },
         },
         {
           name: "input",
           type: "Input",
+          show_if: "limit_feature_product",
+          show_if_value: true,
           props: {
             label: "How many featured products do you want to show?",
             placeholder: "placeholder",
-          }
-        }
-      ]
+          },
+        },
+      ];
       return {
         JsonForm,
         args,
@@ -284,9 +287,14 @@ export const ShowIfProps = {
     },
     template: `
           <Theme class="p-8">
+
+            <div class="mb-10 pb-10 border-b">
+            {{ values }}
+            </div>
+
             <FormBuilder
                 id="form-builder"
-                class="gap-4"
+                class="grid gap-4"
                 :errors="errors"
                 :values="values"
                 :json-form="JsonForm"

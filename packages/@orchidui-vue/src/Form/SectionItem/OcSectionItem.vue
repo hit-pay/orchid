@@ -5,7 +5,10 @@ defineProps({
   title: String,
   description: String,
   icon: String,
-  modelValue: Boolean,
+  modelValue: {
+    type: Boolean,
+    default: false,
+  },
   isToggle: Boolean,
   toggleProps: Object,
   popperMessage: String,
