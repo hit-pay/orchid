@@ -134,7 +134,7 @@ const initLocalValue = () => {
 
   localValue.value = props.modelValue;
 };
-initLocalValue()
+initLocalValue();
 </script>
 
 <template>

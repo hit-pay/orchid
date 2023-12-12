@@ -283,7 +283,7 @@ const displayFilterData = computed(() => {
             </div>
           </template>
           <div
-            class="flex gap-3 absolute bg-oc-bg-light right-4"
+            class="flex gap-3 absolute md:relative ml-auto bg-oc-bg-light right-4"
             :class="
               !filterOptions
                 ? 'w-full justify-end'
