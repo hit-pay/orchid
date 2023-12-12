@@ -3,7 +3,10 @@ import { Toggle, Icon, Tooltip } from "@/orchidui";
 
 defineProps({
   title: String,
-  description: String,
+  description: {
+    type: String,
+    default: "",
+  },
   icon: String,
   modelValue: {
     type: Boolean,

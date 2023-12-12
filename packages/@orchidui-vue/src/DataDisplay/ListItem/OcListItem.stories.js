@@ -48,3 +48,25 @@ export const listItem = {
         `,
   }),
 };
+export const ListURL = {
+  render: (args) => ({
+    components: { Theme, ListItem },
+    setup() {
+      return { args };
+    },
+    template: `
+          <Theme colorMode="light">
+            <ListUrl
+                v-for="i in 5"
+                :is-active="args.active >= i"
+                :key="i"
+                :title="args.title"
+                :icon="args.icon"
+                :icon-class="args.iconClass"
+                :icon-text="args.iconText"
+                :description="args.description"
+            />
+          </Theme>
+        `,
+  }),
+};
