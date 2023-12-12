@@ -261,7 +261,6 @@ const displayFilterData = computed(() => {
       :options="tableOptions"
       :is-loading="isLoading"
       :loading-rows="perPage"
-      class="z-[2]"
       @update:selected="$emit('update:selected', $event)"
       @click:row="$emit('click:row', $event)"
     >
@@ -359,10 +358,7 @@ const displayFilterData = computed(() => {
         <slot name="empty" />
       </template>
     </Table>
-    <div
-      v-if="paginationOption?.total > 0"
-      class="flex gap-3 items-center z-[1]"
-    >
+    <div v-if="paginationOption?.total > 0" class="flex gap-3 items-center">
       <Pagination
         v-model="currentPage"
         class="justify-center"
