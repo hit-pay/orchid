@@ -14,6 +14,7 @@ import {
   RangeInput,
   Checkbox,
   SectionItem,
+  SelectOptions,
   // TODO : add all form here , best load as async component
 } from "@/orchidui";
 import { ref, computed, watch, onMounted } from "vue";
@@ -71,6 +72,7 @@ const FormTypes = {
   RangeInput: RangeInput,
   PhoneInput: PhoneInput,
   SectionItem: SectionItem,
+  SelectOptions: SelectOptions
 };
 
 const getComponentByType = (type) => {

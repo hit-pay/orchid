@@ -53,7 +53,7 @@ defineEmits(["activate", "customize", "preview", "upgrade"]);
     <div class="p-4 flex items-center">
       <div>
         <div class="text-md font-medium">{{ theme.title }}</div>
-        <div class="text-oc-text-400 text-sm">{{ theme.description }}</div>
+        <div class="text-oc-text-400 text-sm mt-1">{{ theme.description }}</div>
       </div>
       <Chip v-if="theme.active" class="ml-auto">Active</Chip>
       <Chip

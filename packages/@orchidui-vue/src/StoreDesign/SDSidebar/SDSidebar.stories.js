@@ -18,6 +18,7 @@ export const Default = {
         sidebarMenu: "home",
         submenu: "header",
         section: "",
+        id: ""
       });
       const storeDesignSettings = ref({});
       return { sidebarActive, storeDesignSettings, SDSidebarData, args };
