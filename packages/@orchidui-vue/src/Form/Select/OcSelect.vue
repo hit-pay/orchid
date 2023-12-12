@@ -8,7 +8,7 @@ import {
   Button,
   Dropdown,
 } from "@/orchidui";
-import { computed, onMounted, ref } from "vue";
+import { computed, ref } from "vue";
 
 const props = defineProps({
   label: String,
@@ -134,7 +134,7 @@ const initLocalValue = () => {
 
   localValue.value = props.modelValue;
 };
-onMounted(() => initLocalValue());
+initLocalValue()
 </script>
 
 <template>
