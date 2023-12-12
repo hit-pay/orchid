@@ -105,7 +105,7 @@ const sizeClasses = computed(() => ({
         </slot>
       </div>
 
-      <div class="p-7">
+      <div :class="isBorderless ? 'px-7' : 'p-7'">
         <slot></slot>
       </div>
 

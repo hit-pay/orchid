@@ -1,7 +1,8 @@
 <script setup>
-import { Button, Chip } from "@/orchidui";
+import { Button, Chip, Icon } from "@/orchidui";
 defineProps({
   theme: Object,
+  activating: Boolean,
 });
 defineEmits(["activate", "customize", "preview", "upgrade"]);
 </script>
@@ -12,23 +13,36 @@ defineEmits(["activate", "customize", "preview", "upgrade"]);
   >
     <div class="w-full relative group">
       <div
-        class="w-full h-full bg-black/25 absolute top-0 left-0 hidden group-hover:flex rounded-t-lg"
+        class="w-full h-full bg-black/25 absolute top-0 left-0 group-hover:flex rounded-t-lg"
+        :class="!activating ? 'hidden' : 'flex'"
       >
-        <div v-if="theme.active" class="m-auto">
-          <Button
-            variant="secondary"
-            label="Customize"
-            @click="$emit('customize', theme)"
-          />
-        </div>
-        <div v-else class="m-auto flex gap-3">
-          <Button
-            variant="secondary"
-            label="Preview"
-            @click="$emit('preview', theme)"
-          />
-          <Button label="Activate" @click="$emit('activate', theme)" />
-        </div>
+        <template v-if="!activating">
+          <div v-if="theme.active" class="m-auto">
+            <Button
+              variant="secondary"
+              label="Customize"
+              @click="$emit('customize', theme)"
+            />
+          </div>
+          <div v-else class="m-auto flex gap-3">
+            <Button
+              variant="secondary"
+              label="Preview"
+              @click="$emit('preview', theme)"
+            />
+            <Button label="Activate" @click="$emit('activate', theme)" />
+          </div>
+        </template>
+        <template v-else>
+          <div
+            class="m-auto bg-white/75 rounded p-5 flex text-center flex-col justify-center"
+          >
+            <div class="mx-auto mb-3">
+              <Icon name="loading-2" />
+            </div>
+            Activating themes
+          </div>
+        </template>
       </div>
       <img
         class="w-full rounded-t-md"
