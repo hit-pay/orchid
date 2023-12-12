@@ -1,4 +1,4 @@
-import { Theme, ListItem } from "@/orchidui";
+import { Theme, ListItem, DropdownItem } from "@/orchidui";
 
 export default {
   component: ListItem,
@@ -63,7 +63,7 @@ export const ListWebhook = {
     ],
   },
   render: (args) => ({
-    components: { Theme, ListItem },
+    components: { Theme, ListItem, DropdownItem },
     setup() {
       return { args };
     },
@@ -74,7 +74,16 @@ export const ListWebhook = {
                 :urls="args.urls"
                 title="Zapier Flow"
                 date="Oct, 20 2023"
-            />
+            >
+              <template #menu>
+                <div class="p-2 border-b border-gray-200">
+                  <DropdownItem text="Edit" icon="pencil"/>
+                </div>
+                <div class="p-2">
+                  <DropdownItem text="Delete" variant="destructive" icon="bin"/>
+                </div>
+              </template>
+            </ListItem>
           </Theme>
         `,
   }),

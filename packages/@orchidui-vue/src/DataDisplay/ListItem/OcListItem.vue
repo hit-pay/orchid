@@ -35,5 +35,9 @@ const getTypeComponent = computed(() => {
 </script>
 
 <template>
-  <component :is="getTypeComponent" v-bind="props" @more="$emit('more')" />
+  <component :is="getTypeComponent" v-bind="props" @more="$emit('more')">
+    <template v-if="$slots.menu" #menu>
+      <slot name="menu" />
+    </template>
+  </component>
 </template>

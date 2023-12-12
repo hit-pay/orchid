@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ListUrl, Icon } from "@/orchidui";
+import { ListUrl, Icon, Dropdown } from "@/orchidui";
+import { ref } from "vue";
 
 defineProps({
   urls: {
@@ -10,6 +11,7 @@ defineProps({
   date: String,
 });
 defineEmits(["more"]);
+const isOpen = ref(false);
 </script>
 
 <template>
@@ -24,11 +26,16 @@ defineEmits(["more"]);
         -
         <span v-if="date">{{ date }}</span>
       </div>
-      <Icon
-        name="dots-vertical"
-        class="opacity-0 group-hover:opacity-100 cursor-pointer"
-        @click="$emit('more')"
-      />
+      <Dropdown v-model="isOpen">
+        <Icon
+          name="dots-vertical"
+          class="opacity-0 p-2 group-hover:opacity-100 cursor-pointer active:bg-oc-gray-100 rounded"
+          @click="$emit('more')"
+        />
+        <template #menu>
+          <slot name="menu" />
+        </template>
+      </Dropdown>
     </div>
     <div v-if="urls?.length" class="flex flex-col gap-y-3">
       <ListUrl
