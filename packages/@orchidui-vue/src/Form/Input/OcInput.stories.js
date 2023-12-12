@@ -45,11 +45,14 @@ export const Default = {
   render: (args) => ({
     components: { Theme, OCInput },
     setup() {
-      return { args };
+      const modelValue = ref();
+
+      return { modelValue, args };
     },
     template: `
           <Theme colorMode="light" class="py-4">
             <OCInput
+                v-model="modelValue"
                 :label="args.label"
                 :error-message="args.errorMessage"
                 :hint="args.hint"
@@ -305,16 +308,16 @@ export const InputOptions = {
       return { selectedOption };
     },
     template: `
-      <Theme colorMode="light">
-        <InputOption
-            v-model="selectedOption"
-            label="Label"
-            hint="Hint"
-            placeholder="Placeholder"
-        />
+          <Theme colorMode="light">
+            <InputOption
+                v-model="selectedOption"
+                label="Label"
+                hint="Hint"
+                placeholder="Placeholder"
+            />
 
-        <div class="mt-4">Selected value: {{ selectedOption }}</div>
-      </Theme>
+            <div class="mt-4">Selected value: {{ selectedOption }}</div>
+          </Theme>
         `,
   }),
 };

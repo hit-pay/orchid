@@ -59,7 +59,7 @@ watch(() => props.isExpandable, changeAccordionHeight);
 </script>
 
 <template>
-  <div class="overflow-hidden" :class="isDisabled && 'opacity-60'">
+  <div :class="isDisabled && 'opacity-60'">
     <div>
       <div
         class="border-oc-accent-1-50 py-3 text-sm border relative z-10 justify-between px-4 gap-x-3 flex hover:border-oc-gray-200 items-center w-full text-oc-text"
@@ -89,8 +89,11 @@ watch(() => props.isExpandable, changeAccordionHeight);
 
       <div
         ref="upcomingAccordion"
-        class="overflow-hidden max-h-0"
-        :class="isAnimated && 'transition-all duration-300'"
+        class="max-h-0"
+        :class="[
+          isAnimated && 'transition-all duration-300',
+          !isExpandable && 'overflow-hidden',
+        ]"
       >
         <div
           class="text-oc-text text-sm p-4 rounded-b relative z-0 border-x border-b"

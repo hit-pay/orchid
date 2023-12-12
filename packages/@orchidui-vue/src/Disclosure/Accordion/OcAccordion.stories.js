@@ -1,4 +1,4 @@
-import { Theme, Accordion } from "@/orchidui";
+import { Theme, Accordion, DatePicker } from "@/orchidui";
 import { ref, watch } from "vue";
 
 export default {
@@ -23,7 +23,7 @@ export const OcAccordion = {
     isDisabled: false,
   },
   render: (args) => ({
-    components: { Accordion, Theme },
+    components: { Accordion, Theme, DatePicker },
     setup() {
       const isOpen = ref(false);
       watch(
@@ -33,7 +33,7 @@ export const OcAccordion = {
       return { isOpen, args };
     },
     template: `
-          <Theme >
+          <Theme class="h-[500px]">
             <Accordion
                 v-model:isExpandable="isOpen"
                 :header="args.header"
@@ -43,7 +43,11 @@ export const OcAccordion = {
                 :showIcon="args.showIcon"
                 :isAnimated="args.isAnimated"
                 :isDisabled="args.isDisabled"
-            />
+            >
+              <template #body>
+                <DatePicker/>
+              </template>
+            </Accordion>
           </Theme>
         `,
   }),

@@ -55,6 +55,7 @@ const selectAll = () => {
       <Checkbox
         v-if="isSelectAll"
         label="Select all"
+        :is-disabled="isDisabled"
         :value="allCheckboxValues"
         :model-value="isAllSelected"
         @update:model-value="selectAll"
