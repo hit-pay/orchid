@@ -1,6 +1,7 @@
 <script setup>
 import { Button, Icon } from "@/orchidui";
 import { computed, ref } from "vue";
+import dayjs from "dayjs";
 
 const props = defineProps({
   type: {
@@ -34,23 +35,28 @@ const props = defineProps({
 });
 const emit = defineEmits(["update:modelValue", "resetCalendar"]);
 
-const selectedDate = ref(
-  props.type === "range"
-    ? props.modelValue?.[0] || new Date()
-    : props.modelValue || new Date(),
-);
+const selectedDate = ref(null);
+
+if (props.type === "default") {
+  selectedDate.value = props.modelValue
+    ? new Date(dayjs([props.modelValue]).format(props.dateFormat))
+    : new Date();
+} else {
+  selectedDate.value = props.modelValue?.[0]
+    ? new Date(dayjs(props.modelValue?.[0]).format(props.dateFormat))
+    : new Date();
+}
 
 const selectedStartDate = ref(selectedDate.value);
 
 const selectedEndDate = ref(
-  props.type === "range"
-    ? props.modelValue?.[1] ||
-        new Date(
-          new Date(selectedStartDate.value).setDate(
-            selectedStartDate.value.getDate() + 2,
-          ),
-        )
-    : null,
+  props.type === "range" && props.modelValue?.[1]
+    ? new Date(dayjs(props.modelValue?.[1]).format(props.dateFormat))
+    : new Date(
+        new Date(selectedStartDate.value).setDate(
+          selectedStartDate.value.getDate() + 2,
+        ),
+      ),
 );
 
 const selectedStartDay = ref(

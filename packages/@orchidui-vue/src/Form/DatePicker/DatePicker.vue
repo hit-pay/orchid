@@ -60,6 +60,7 @@ let defaultValue = props.modelValue;
 if (props.type === "range" && props.from && props.to) {
   defaultValue = [props.from, props.to];
 }
+
 const date = ref(defaultValue ?? "");
 const isDropdownOpened = ref(false);
 
@@ -67,10 +68,13 @@ const formattedDate = computed(() => {
   if (props.type === "default") {
     return date.value ? dayjs(date.value).format(props.dateFormat) : "";
   } else {
-    return [
-      date.value?.[0] ? dayjs(date.value?.[0]).format(props.dateFormat) : "",
-      date.value?.[1] ? dayjs(date.value?.[1]).format(props.dateFormat) : "",
-    ];
+    const dateFrom = date.value?.[0]
+      ? dayjs(date.value[0]).format(props.dateFormat)
+      : "";
+    const dateTo = date.value?.[1]
+      ? dayjs(date.value[1]).format(props.dateFormat)
+      : "";
+    return [dateFrom, dateTo];
   }
 });
 
@@ -125,7 +129,6 @@ const resetCalendar = () => {
           readonly
           :has-error="errorMessage.length > 0"
         />
-
         <Input
           :label="maxLabel"
           :model-value="formattedDate[1]"
@@ -150,6 +153,7 @@ const resetCalendar = () => {
         :min-date="minDate"
         position="inline"
         :type="type"
+        :date-format="dateFormat"
         @update:model-value="updateCalendar"
         @reset-calendar="resetCalendar"
       />
