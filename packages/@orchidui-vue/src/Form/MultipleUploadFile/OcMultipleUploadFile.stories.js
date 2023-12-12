@@ -103,7 +103,11 @@ export const MultipleImages = {
             :columnsCount="args.columnsCount"
             @onEditFile="onEditFile"
             @onRemoveFile="onRemoveFile"
-        />
+        >
+          <template #action="{item}">
+          {{item}}
+          </template>
+        </MultipleUploadFile>
       </Theme>
     `,
   }),

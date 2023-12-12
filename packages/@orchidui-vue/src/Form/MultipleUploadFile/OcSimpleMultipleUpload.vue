@@ -59,7 +59,7 @@ const changeImage = (url) => {
 </script>
 
 <template>
-  <div class="realtive min-h-[90px]">
+  <div class="relative min-h-[90px]">
     <label class="absolute">
       <div
         class="w-[90px] hover:bg-oc-primary-50 cursor-pointer bg-oc-accent-1-50 text-oc-accent-1 rounded aspect-square flex items-center justify-center"
@@ -86,7 +86,7 @@ const changeImage = (url) => {
         <div
           v-for="(img, i) in list"
           :key="img.fileName"
-          class="w-[90px] group relative cursor-pointer overflow-hidden aspect-square border rounded border-oc-accent-1-100 bg-cover bg-center"
+          class="w-[90px] group relative cursor-pointer aspect-square border rounded border-oc-accent-1-100 bg-cover bg-center"
           :class="{
             'border-oc-primary': selectedImage.fileName === img.fileName,
             'col-start-2': i === 0,
@@ -104,7 +104,8 @@ const changeImage = (url) => {
               class="draggable-card-action cursor-pointer w-[32px] flex h-[32px] items-center justify-center text-oc-bg-light"
             />
             <template #menu>
-              <div class="py-2 flex flex-col">
+              <slot name="action" :item="img" :remove-item="onDeleteFile" :file-index="i" />
+              <!-- <div class="py-2 flex flex-col">
                 <div
                   class="flex p-3 cursor-pointer items-center gap-x-3"
                   @click="
@@ -126,7 +127,7 @@ const changeImage = (url) => {
                   <Icon width="16" height="16" name="bin" />
                   <span>Delete</span>
                 </div>
-              </div>
+              </div> -->
             </template>
           </Dropdown>
           <div
@@ -147,12 +148,7 @@ const changeImage = (url) => {
             class="z-[1009] hidden group-hover:flex absolute bg-black/30 w-full h-full top-0 left-0 rounded"
           >
             <span class="cursor-pointer m-auto drag-el">
-              <Icon
-                name="arrows"
-                class="text-oc-accent-1-50"
-                width="32"
-                height="32"
-              />
+              <Icon name="arrows" class="text-oc-accent-1-50" />
             </span>
           </div>
         </div>
