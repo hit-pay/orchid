@@ -13,9 +13,10 @@ import {
   RadioGroup,
   RangeInput,
   Checkbox,
+  SectionItem,
   // TODO : add all form here , best load as async component
 } from "@/orchidui";
-import { computed } from "vue";
+import { ref, computed, watch, onMounted } from "vue";
 
 const props = defineProps({
   id: {
@@ -35,7 +36,10 @@ const props = defineProps({
    *   `}`
    * `}`
    */
-  grid: Object,
+  grid: {
+    type: Object,
+    default: null,
+  },
   class: String,
   errors: {
     type: Object,
@@ -66,6 +70,7 @@ const FormTypes = {
   Checkbox: Checkbox,
   RangeInput: RangeInput,
   PhoneInput: PhoneInput,
+  SectionItem: SectionItem,
 };
 
 const getComponentByType = (type) => {
@@ -76,37 +81,7 @@ const getComponentByType = (type) => {
   }
 };
 
-const modelValues = (name, defaultValue = "") => {
-  if (typeof name === "object") {
-    let modelValueData = null;
-    name.forEach((formName) => {
-      if (props.values[formName.key]) {
-        if (modelValueData) {
-          modelValueData.push(props.values[formName.key]);
-        } else {
-          modelValueData = [props.values[formName.key]];
-        }
-      }
-    });
-    return modelValueData;
-  } else {
-    return props.values[name] ?? defaultValue;
-  }
-};
-const errorValues = computed(() => (name) => {
-  if (typeof name === "object") {
-    let errorMessage = [];
-    name.forEach((formName) => {
-      if (props.errors[formName.key]) {
-        errorMessage.push(props.errors[formName.key]);
-      }
-    });
-    return errorMessage.join(",");
-  } else {
-    return props.errors[name] ?? "";
-  }
-});
-
+// grid
 const gridDefinitionVariables = computed(() => {
   const parseGridArea = (gridArea) =>
     gridArea
@@ -138,25 +113,126 @@ const gridArea = (name) => {
   return `grid-area: ${getFormKey(name)}`;
 };
 
+// class
 const className = computed(() => props.class);
+// from data
+const modelValue = ref({});
+const errorMessage = ref({});
+const formClass = ref({});
+
+const getFirstName = (name) => {
+  if (typeof name === "object") {
+    return name[0].key;
+  } else {
+    return name;
+  }
+};
+
+const setModelValues = (newValues) => {
+  props.jsonForm.forEach((form) => {
+    if (typeof form.name === "object") {
+      let modelValueData = null;
+      form.name.forEach((formName) => {
+        if (newValues[formName.key]) {
+          if (modelValueData) {
+            modelValueData.push(newValues[formName.key]);
+          } else {
+            modelValueData = [newValues[formName.key]];
+          }
+        }
+      });
+      modelValue.value[getFirstName(form.name)] = modelValueData;
+      setFormClass(form);
+    } else {
+      modelValue.value[form.name] = newValues[form.name] ?? "";
+      setFormClass(form);
+    }
+  });
+};
+
+const setErrorMessage = () => {
+  props.jsonForm.forEach((form) => {
+    if (typeof form.name === "object") {
+      let message = [];
+      form.name.forEach((formName) => {
+        if (props.errors[formName.key]) {
+          message.push(props.errors[formName.key]);
+        }
+      });
+      errorMessage.value[getFirstName(form.name)] = message.join(",");
+    } else {
+      errorMessage.value[form.name] = props.errors[form.name] ?? "";
+    }
+  });
+};
+
+const setFormClass = (form) => {
+  if (form.show_if && form.show_if_value) {
+    let formClassName = form.class ? form.class : "";
+    if (form.show_if_value !== modelValue.value[form.show_if]) {
+      formClassName = formClassName + " hidden";
+    }
+    formClass.value[form.name] = formClassName;
+  } else {
+    formClass.value[form.name] = form.class ? form.class : "";
+  }
+};
+
+watch(
+  () => props.values,
+  (newValues) => {
+    setModelValues(newValues);
+  },
+  {
+    deep: true,
+  },
+);
+
+watch(
+  () => props.errors,
+  (newValues) => {
+    setErrorMessage(newValues);
+  },
+  {
+    deep: true,
+  },
+);
+
+onMounted(() => {
+  setModelValues(props.values);
+  setErrorMessage(props.errors);
+});
 </script>
 <template>
   <div
+    v-if="Object.values(modelValue).length > 0"
     :class="grid ? `responsive-smart-form-grid ${className}` : className"
     :style="grid ? gridDefinitionVariables : ''"
   >
     <div
       v-for="form in jsonForm"
       :key="getFormKey(form.name)"
-      :class="form.class"
       :style="grid ? gridArea(form.name) : ''"
+      :class="
+        formClass[
+          typeof form.name === 'object' ? getFirstName(form.name) : form.name
+        ]
+      "
     >
       <component
         :is="getComponentByType(form.type)"
         v-if="getComponentByType(form.type)"
         v-bind="form.props"
-        :model-value="modelValues(form.name, form.default)"
-        :error-message="errorValues(form.name)"
+        :model-value="
+          modelValue[
+            typeof form.name === 'object' ? getFirstName(form.name) : form.name
+          ]
+        "
+        :error-message="
+          errorMessage[
+            typeof form.name === 'object' ? getFirstName(form.name) : form.name
+          ]
+        "
         @update:model-value="onUpdate(form, $event)"
       />
       <slot

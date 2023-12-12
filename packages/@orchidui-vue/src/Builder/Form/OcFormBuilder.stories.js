@@ -193,3 +193,115 @@ export const Default = {
         `,
   }),
 };
+
+export const ShowIfLogic = {
+  args: {
+    values: {
+      select_product_from: "all_product",
+      limit_feature_product: false,
+    },
+    errors: {},
+  },
+  render: (args) => ({
+    components: {
+      Theme,
+      FormBuilder,
+    },
+    setup() {
+      const values = ref(args.values);
+      const errors = ref(args.errors);
+
+      const onUpdateForm = (form, value = null) => {
+        console.log("onUpdateForm", form, value);
+        if (typeof form.name === "object") {
+          form.name.forEach((formName, index) => {
+            values.value[formName.key] = value[index];
+          });
+        } else {
+          values.value[form.name] = value;
+        }
+      };
+
+      const isOpenedDropdown = ref(false);
+
+      const JsonForm = [
+        {
+          name: "select_product_from_section",
+          type: "SectionItem",
+          props: {
+            title: "Select product from",
+          },
+        },
+        {
+          name: "select_product_from",
+          type: "Select",
+          props: {
+            options: [
+              {
+                value: "feature",
+                label: "Feature product",
+              },
+              {
+                value: "all_product",
+                label: "All product",
+              },
+              {
+                value: "product_category",
+                label: "Product Category",
+              },
+              {
+                value: "pick_products",
+                label: "Pick Products",
+              },
+            ],
+            hint: "Learn how to make featured products here.",
+          },
+        },
+        {
+          name: "limit_feature_product",
+          type: "SectionItem",
+          props: {
+            title: "Limit featured products",
+            isToggle: true,
+          },
+        },
+        {
+          name: "input",
+          type: "Input",
+          show_if: "limit_feature_product",
+          show_if_value: true,
+          props: {
+            label: "How many featured products do you want to show?",
+            placeholder: "placeholder",
+          },
+        },
+      ];
+      return {
+        JsonForm,
+        args,
+        values,
+        errors,
+        onUpdateForm,
+        isOpenedDropdown,
+      };
+    },
+    template: `
+          <Theme class="p-8">
+
+            <div class="mb-10 pb-10 border-b">
+            {{ values }}
+            </div>
+
+            <FormBuilder
+                id="form-builder"
+                class="grid gap-4"
+                :errors="errors"
+                :values="values"
+                :json-form="JsonForm"
+                @onUpdate="onUpdateForm"
+            >
+            </FormBuilder>
+          </Theme>
+        `,
+  }),
+};

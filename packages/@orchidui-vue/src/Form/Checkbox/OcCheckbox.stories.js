@@ -33,7 +33,12 @@ export const Default = {
                   :hint="args.hint"
                   :is-disabled="args.isDisabled"
                   v-model="value"
-              />
+              >
+              
+              <template #after>
+                After
+              </template>
+              </Checkbox>
             </div>
           </Theme>
         `,

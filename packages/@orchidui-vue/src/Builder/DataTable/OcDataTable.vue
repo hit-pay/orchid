@@ -253,7 +253,7 @@ const displayFilterData = computed(() => {
 });
 </script>
 <template>
-  <div class="flex flex-col gap-9">
+  <div class="flex flex-col gap-9 relative">
     <Table
       v-if="tableOptions"
       :selected="selected"
@@ -261,12 +261,13 @@ const displayFilterData = computed(() => {
       :options="tableOptions"
       :is-loading="isLoading"
       :loading-rows="perPage"
+      class="z-[2]"
       @update:selected="$emit('update:selected', $event)"
       @click:row="$emit('click:row', $event)"
     >
       <template #before>
         <slot name="before" />
-        <div class="flex items-center px-4 relative min-h-[52px]">
+        <div class="flex items-center px-4 min-h-[52px]">
           <template v-if="filterOptions">
             <div v-if="showBulkAction" class="flex gap-5 items-center">
               <slot name="bulk-actions" :selected-rows="selected" />
@@ -354,8 +355,14 @@ const displayFilterData = computed(() => {
       <template #after>
         <slot name="after" />
       </template>
+      <template #empty>
+        <slot name="empty" />
+      </template>
     </Table>
-    <div v-if="paginationOption?.total > 0" class="flex gap-3 items-center">
+    <div
+      v-if="paginationOption?.total > 0"
+      class="flex gap-3 items-center z-[1]"
+    >
       <Pagination
         v-model="currentPage"
         class="justify-center"

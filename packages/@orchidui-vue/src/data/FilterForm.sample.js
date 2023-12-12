@@ -32,6 +32,7 @@ const SampleFilterForm = [
       label: "DatePicker Range",
       hint: "This is a hint text to help user",
       placeholder: "placeholder",
+      maxDate: new Date().setDate(new Date().getDate() + 1),
     },
   },
   {
@@ -41,6 +42,7 @@ const SampleFilterForm = [
       label: "DatePicker",
       hint: "This is a hint text to help user",
       placeholder: "placeholder",
+      maxDate: new Date().setDate(new Date().getDate() + 1),
     },
   },
   {

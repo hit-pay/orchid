@@ -5,10 +5,14 @@ defineProps({
   title: String,
   description: String,
   icon: String,
-  buttonProps: Object,
-  inputProps: Object,
+  modelValue: {
+    type: Boolean,
+    default: false,
+  },
   isToggle: Boolean,
-  modelValue: Boolean,
+  toggleProps: Object,
+  popperMessage: String,
+  errorMessage: String,
 });
 defineEmits(["update:modelValue"]);
 </script>
@@ -28,7 +32,7 @@ defineEmits(["update:modelValue"]);
           />
           <template #popper>
             <div class="px-2 py-1 text-sm text-oc-text-400">
-              Text information
+              {{ popperMessage }}
             </div>
           </template>
         </Tooltip>
@@ -36,10 +40,14 @@ defineEmits(["update:modelValue"]);
       <span v-if="description" class="text-oc-text-400 text-sm">
         {{ description }}
       </span>
+      <div v-if="errorMessage" class="text-sm text-oc-error flex items-center">
+        {{ errorMessage }}
+      </div>
     </div>
     <Toggle
       v-if="isToggle"
       :model-value="modelValue"
+      v-bind="toggleProps"
       @update:model-value="$emit('update:modelValue', $event)"
     />
   </div>
