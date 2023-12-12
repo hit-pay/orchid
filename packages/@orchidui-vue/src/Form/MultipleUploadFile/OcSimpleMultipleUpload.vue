@@ -104,7 +104,8 @@ const changeImage = (url) => {
               class="draggable-card-action cursor-pointer w-[32px] flex h-[32px] items-center justify-center text-oc-bg-light"
             />
             <template #menu>
-              <div class="py-2 flex flex-col">
+              <slot name="action" :item="img" />
+              <!-- <div class="py-2 flex flex-col">
                 <div
                   class="flex p-3 cursor-pointer items-center gap-x-3"
                   @click="
@@ -126,7 +127,7 @@ const changeImage = (url) => {
                   <Icon width="16" height="16" name="bin" />
                   <span>Delete</span>
                 </div>
-              </div>
+              </div> -->
             </template>
           </Dropdown>
           <div

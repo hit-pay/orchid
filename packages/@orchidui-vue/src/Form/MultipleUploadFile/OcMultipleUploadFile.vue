@@ -23,7 +23,11 @@
         "
         @on-edit-image="$emit('onEditFile', $event)"
         @on-remove-image="$emit('onRemoveFile', $event)"
-      />
+      >
+        <template #action="{ item }">
+          <slot name="action" :item="item" />
+        </template>
+      </OcSimpleMultipleUpload>
       <div
         v-else
         class="relative border rounded p-3 min-w-[30rem] flex flex-col"
