@@ -6,7 +6,10 @@ defineProps({
 </script>
 
 <template>
-  <div class="flex gap-x-3">{{ title }}: {{ url }}</div>
+  <div class="flex gap-x-3 text-sm">
+    <span class="text-oc-text-400 font-medium">{{ title }}:</span>
+    {{ url }}
+  </div>
 </template>
 
 <style scoped lang="scss"></style>

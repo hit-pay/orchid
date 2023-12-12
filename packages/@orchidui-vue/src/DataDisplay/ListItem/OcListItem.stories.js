@@ -1,4 +1,4 @@
-import { Theme, ListItem, ListUrl } from "@/orchidui";
+import { Theme, ListItem } from "@/orchidui";
 
 export default {
   component: ListItem,
@@ -10,6 +10,10 @@ export const listItem = {
     icon: {
       control: "select",
       options: ["backward", "circle", "x", ""],
+    },
+    type: {
+      control: "select",
+      options: ["timeline", "webhook"],
     },
     active: {
       control: {
@@ -26,6 +30,7 @@ export const listItem = {
     iconClass: "text-oc-error",
     iconText: "SGD 130,11",
     description: "#9a2804fc-74df-4304-a7d7-79d11f9e1db8dsdss",
+    type: "timeline",
   },
   render: (args) => ({
     components: { Theme, ListItem },
@@ -48,17 +53,27 @@ export const listItem = {
         `,
   }),
 };
-export const ListURL = {
+export const ListWebhook = {
+  args: {
+    urls: [
+      {
+        url: "https://orchid.software",
+        title: "URL",
+      },
+    ],
+  },
   render: (args) => ({
-    components: { Theme, ListUrl },
+    components: { Theme, ListItem },
     setup() {
       return { args };
     },
     template: `
-          <Theme colorMode="light">
-            <ListUrl
-                url="https://orchid.software"
-                title="URL"
+          <Theme colorMode="light" class="p-10">
+            <ListItem
+                type="webhook"
+                :urls="args.urls"
+                title="Zapier Flow"
+                date="Oct, 20 2023"
             />
           </Theme>
         `,
