@@ -19,6 +19,7 @@ export const Default = {
     errorMessage: "",
     alignment: "vertical",
     isDisabled: false,
+    isSelectAll: false,
     checkboxes: [
       {
         label: "Text",
@@ -55,6 +56,7 @@ export const Default = {
                   :hint="args.hint"
                   :is-disabled="args.isDisabled"
                   :error-message="args.errorMessage"
+                  :isSelectAll="args.isSelectAll"
                   :alignment="args.alignment"
               />
               <div class="flex gap-x-2">

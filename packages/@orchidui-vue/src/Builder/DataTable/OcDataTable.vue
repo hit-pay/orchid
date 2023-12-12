@@ -355,6 +355,9 @@ const displayFilterData = computed(() => {
       <template #after>
         <slot name="after" />
       </template>
+      <template #empty>
+        <slot name="empty" />
+      </template>
     </Table>
     <div
       v-if="paginationOption?.total > 0"

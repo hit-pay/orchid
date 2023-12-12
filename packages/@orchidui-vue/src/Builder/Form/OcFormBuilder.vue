@@ -120,7 +120,7 @@ const modelValue = ref({});
 const errorMessage = ref({});
 const formClass = ref({});
 
-const getFisrtName = (name) => {
+const getFirstName = (name) => {
   if (typeof name === "object") {
     return name[0].key;
   } else {
@@ -141,7 +141,7 @@ const setModelValues = (newValues) => {
           }
         }
       });
-      modelValue.value[getFisrtName(form.name)] = modelValueData;
+      modelValue.value[getFirstName(form.name)] = modelValueData;
       setFormClass(form);
     } else {
       modelValue.value[form.name] = newValues[form.name] ?? "";
@@ -159,7 +159,7 @@ const setErrorMessage = () => {
           message.push(props.errors[formName.key]);
         }
       });
-      errorMessage.value[getFisrtName(form.name)] = message.join(",");
+      errorMessage.value[getFirstName(form.name)] = message.join(",");
     } else {
       errorMessage.value[form.name] = props.errors[form.name] ?? "";
     }
@@ -215,7 +215,7 @@ onMounted(() => {
       :style="grid ? gridArea(form.name) : ''"
       :class="
         formClass[
-          typeof form.name === 'object' ? getFisrtName(form.name) : form.name
+          typeof form.name === 'object' ? getFirstName(form.name) : form.name
         ]
       "
     >
@@ -225,12 +225,12 @@ onMounted(() => {
         v-bind="form.props"
         :model-value="
           modelValue[
-            typeof form.name === 'object' ? getFisrtName(form.name) : form.name
+            typeof form.name === 'object' ? getFirstName(form.name) : form.name
           ]
         "
         :error-message="
           errorMessage[
-            typeof form.name === 'object' ? getFisrtName(form.name) : form.name
+            typeof form.name === 'object' ? getFirstName(form.name) : form.name
           ]
         "
         @update:model-value="onUpdate(form, $event)"
