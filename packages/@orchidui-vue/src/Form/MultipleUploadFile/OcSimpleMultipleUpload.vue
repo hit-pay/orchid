@@ -86,7 +86,7 @@ const changeImage = (url) => {
         <div
           v-for="(img, i) in list"
           :key="img.fileName"
-          class="w-[90px] group relative cursor-pointer overflow-hidden aspect-square border rounded border-oc-accent-1-100 bg-cover bg-center"
+          class="w-[90px] group relative cursor-pointer aspect-square border rounded border-oc-accent-1-100 bg-cover bg-center"
           :class="{
             'border-oc-primary': selectedImage.fileName === img.fileName,
             'col-start-2': i === 0,
@@ -147,12 +147,7 @@ const changeImage = (url) => {
             class="z-[1009] hidden group-hover:flex absolute bg-black/30 w-full h-full top-0 left-0 rounded"
           >
             <span class="cursor-pointer m-auto drag-el">
-              <Icon
-                name="arrows"
-                class="text-oc-accent-1-50"
-                width="32"
-                height="32"
-              />
+              <Icon name="arrows" class="text-oc-accent-1-50" />
             </span>
           </div>
         </div>
