@@ -1,5 +1,6 @@
 <script setup>
 import { Icon } from "@/orchidui";
+
 defineProps({
   description: String,
   variant: {
@@ -29,8 +30,8 @@ const classIcon = {
     >
       <Icon :name="variantIcon[variant]" />
     </div>
-    <div class="text-center">{{ description }}</div>
+    <div class="text-center">
+      <slot name="description">{{ description }}</slot>
+    </div>
   </div>
 </template>
-
-<style scoped lang="scss"></style>
