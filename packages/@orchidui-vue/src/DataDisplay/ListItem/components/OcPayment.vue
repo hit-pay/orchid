@@ -2,45 +2,17 @@
 import { Icon } from "@/orchidui";
 import { computed } from "vue";
 
-const props = defineProps({
+defineProps({
   title: {
     type: String,
     default: "Title",
   },
   paymentMethods: {
     type: Array,
-    default: () => [
-      "apple_pay",
-      "atome",
-      "grab_pay",
-      "instapay",
-      "jcb",
-      "kakao_pay",
-      "master_card",
-      "pay_now",
-      "visa",
-      "wechat",
-      "wechat-1",
-    ],
+    default: () => [],
   },
 });
 
-const paymentMethodsIcons = computed(() => {
-  const icons = {
-    apple_pay: "applepay",
-    atome: "atome",
-    grab_pay: "grabpay",
-    instapay: "instapay",
-    jcb: "jcb",
-    kakao_pay: "kakaopay",
-    master_card: "mastercard",
-    pay_now: "paynow",
-    visa: "visa",
-    wechat: "wechat",
-    "wechat-1": "wechat-1",
-  };
-  return props.paymentMethods.map((method) => icons[method]);
-});
 defineEmits(["edit", "delete"]);
 </script>
 
@@ -69,10 +41,10 @@ defineEmits(["edit", "delete"]);
 
     <div class="flex items-center gap-x-2">
       <img
-        v-for="icon in paymentMethodsIcons"
-        :key="icon"
-        :src="`./icons/orchidui/payment-method/${icon}.png`"
-        :alt="icon"
+        v-for="method in paymentMethods"
+        :key="method.method"
+        :alt="method.method"
+        :src="method.sm"
       />
     </div>
   </div>

@@ -90,7 +90,21 @@ export const ListWebhook = {
 };
 
 export const ListPayment = {
-  args: {},
+  args: {
+    title: "shopify",
+    paymentMethods: [
+      {
+        method: "paynow_online",
+        sm: "https://dashboard.src.test/icons/methods/sm/paynow.png",
+        md: "https://dashboard.src.test/icons/methods/md/paynow.png",
+      },
+      {
+        method: "card",
+        sm: "https://dashboard.src.test/icons/methods/sm/card.png",
+        md: "https://dashboard.src.test/icons/methods/md/card.png",
+      },
+    ],
+  },
   render: (args) => ({
     components: { Theme, ListItem },
     setup() {
@@ -99,6 +113,8 @@ export const ListPayment = {
     template: `
           <Theme colorMode="light" class="p-10">
             <ListItem
+                :title="args.title"
+                :payment-methods="args.paymentMethods"
                 type="payment"
             />
           </Theme>
