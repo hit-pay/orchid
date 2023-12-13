@@ -25,7 +25,12 @@
         @on-remove-image="$emit('onRemoveFile', $event)"
       >
         <template #action="{ item, removeItem, i }">
-          <slot name="action" :item="item" :remove-item="removeItem" :file-index="i" />
+          <slot
+            name="action"
+            :item="item"
+            :remove-item="removeItem"
+            :file-index="i"
+          />
         </template>
       </OcSimpleMultipleUpload>
       <div
