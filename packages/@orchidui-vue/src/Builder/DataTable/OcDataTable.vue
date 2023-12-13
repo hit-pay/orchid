@@ -151,9 +151,18 @@ const removeAllQueryFilter = () => {
 
   const defaultFilters = {
     page: 1,
-    [filterOptions.value?.per_page?.key || "per_page"]: perPage.value,
-    ...(filterOptions.value.tabs ? { tabs: filterOptions.value.tabs } : {}),
   };
+
+  if (filterOptions.value?.per_page?.key) {
+    defaultFilters[filterOptions.value?.per_page?.key] = perPage.value;
+  } else {
+    defaultFilters.per_page = perPage.value;
+  }
+  if (filterOptions.value?.tabs?.key) {
+    defaultFilters[filterOptions.value?.tabs?.key] = filterTab.value;
+  } else {
+    defaultFilters.tabs = filterTab.value;
+  }
 
   filterData.value = defaultFilters;
 

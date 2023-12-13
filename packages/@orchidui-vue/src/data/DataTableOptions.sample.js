@@ -202,6 +202,7 @@ const DataTableOptions = {
 const Filter = {
   page: 1,
   per_page: 10,
+  tabs: "",
 };
 
 export { DataTableOptions, Filter };

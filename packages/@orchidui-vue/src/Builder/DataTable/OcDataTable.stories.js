@@ -20,7 +20,6 @@ import { DataTableOptions, Filter } from "../../data/DataTableOptions.sample";
 
 export const Default = {
   args: {
-    filter: Filter,
     options: DataTableOptions,
     isLoading: false,
   },
@@ -36,11 +35,11 @@ export const Default = {
       Button,
     },
     setup() {
+      const filter = ref(Filter);
       const changedFields = ref([]);
       const selectedRows = ref([]);
       const updateFilterData = (data) => {
-        // get new data
-        args.filter = data;
+        filter.value = data;
       };
       const onClickRow = (val) => {
         console.log("onClickRow  ", val);
@@ -48,6 +47,7 @@ export const Default = {
 
       return {
         args,
+        filter,
         changedFields,
         selectedRows,
         updateFilterData,
@@ -57,9 +57,7 @@ export const Default = {
     template: `
           <Theme class="p-8">
             <div>
-              <ul>
-                <li v-for="(item, key) in args.filter">{{ key }} : {{ item }}</li>
-              </ul>
+               <pre class="bg-black text-white p-4 rounded mb-5">{{filter}}</pre>
               <div>
                 Filter fields changed: {{ changedFields }}
               </div>
@@ -71,7 +69,7 @@ export const Default = {
                 id="sample-data-table"
                 v-model:selected="selectedRows"
                 row-key="id"
-                :filter="args.filter" 
+                :filter="filter" 
                 :options="args.options"
                 :is-loading="args.isLoading"
                 @update:filter="updateFilterData"

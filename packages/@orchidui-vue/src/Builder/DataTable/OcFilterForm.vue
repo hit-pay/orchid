@@ -83,7 +83,7 @@ const applyFilter = () => {
       :json-form="jsonForm"
       :update-form="onUpdateForm"
     >
-      <div class="max-h-[50vh] overflow-y-auto p-5">
+      <div class="max-h-[55vh] overflow-y-auto p-5">
         <FormBuilder
           :id="`filter-form-${id}`"
           class="grid gap-5"
