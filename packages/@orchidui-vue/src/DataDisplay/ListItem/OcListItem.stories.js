@@ -88,3 +88,20 @@ export const ListWebhook = {
         `,
   }),
 };
+
+export const ListPayment = {
+  args: {},
+  render: (args) => ({
+    components: { Theme, ListItem },
+    setup() {
+      return { args };
+    },
+    template: `
+          <Theme colorMode="light" class="p-10">
+            <ListItem
+                type="payment"
+            />
+          </Theme>
+        `,
+  }),
+};
