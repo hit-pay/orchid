@@ -104,35 +104,36 @@ const changeImage = (url) => {
               class="draggable-card-action cursor-pointer w-[32px] flex h-[32px] items-center justify-center text-oc-bg-light"
             />
             <template #menu>
-              <slot
-                name="action"
-                :item="img"
-                :remove-item="onDeleteFile"
-                :file-index="i"
-              />
-              <!-- <div class="py-2 flex flex-col">
-                <div
-                  class="flex p-3 cursor-pointer items-center gap-x-3"
-                  @click="
-                    editImg = img.fileUrl;
-                    isDropdownOpen = false;
-                    isEditOpen = true;
-                  "
+                <slot
+                  name="action"
+                  :item="img"
+                  :remove-item="onDeleteFile"
+                  :file-index="i"
                 >
-                  <Icon width="16" height="16" name="pencil" />
-                  <span>Edit</span>
+                <div class="py-2 flex flex-col">
+                  <div
+                    class="flex p-3 cursor-pointer items-center gap-x-3"
+                    @click="
+                      editImg = img.fileUrl;
+                      isDropdownOpen = false;
+                      isEditOpen = true;
+                    "
+                  >
+                    <Icon width="16" height="16" name="pencil" />
+                    <span>Edit</span>
+                  </div>
+                  <div
+                    class="flex p-3 cursor-pointer items-center text-oc-error gap-x-3"
+                    @click="
+                      onDeleteFile(i);
+                      isDropdownOpen = false;
+                    "
+                  >
+                    <Icon width="16" height="16" name="bin" />
+                    <span>Delete</span>
+                  </div>
                 </div>
-                <div
-                  class="flex p-3 cursor-pointer items-center text-oc-error gap-x-3"
-                  @click="
-                    onDeleteFile(i);
-                    isDropdownOpen = false;
-                  "
-                >
-                  <Icon width="16" height="16" name="bin" />
-                  <span>Delete</span>
-                </div>
-              </div> -->
+              </slot>
             </template>
           </Dropdown>
           <div
