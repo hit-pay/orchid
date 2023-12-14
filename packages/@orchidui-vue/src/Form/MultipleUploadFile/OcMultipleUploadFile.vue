@@ -24,12 +24,12 @@
         @on-edit-image="$emit('onEditFile', $event)"
         @on-remove-image="$emit('onRemoveFile', $event)"
       >
-        <template #action="{ item, removeItem, i }">
+        <template #action="slotData">
           <slot
             name="action"
-            :item="item"
-            :remove-item="removeItem"
-            :file-index="i"
+            :item="slotData.item"
+            :remove-item="slotData.removeItem"
+            :file-index="slotData.i"
           />
         </template>
       </OcSimpleMultipleUpload>
