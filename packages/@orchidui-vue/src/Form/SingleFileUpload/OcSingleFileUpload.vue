@@ -15,6 +15,7 @@ const props = defineProps({
   maxSize: Number,
   accept: String,
   errorMessage: String,
+  imageClasses: String,
   label: String,
   hint: String,
   /**
@@ -101,6 +102,7 @@ const onEditFile = () => {
       v-if="isImageOnly"
       :accept="accept"
       :uploaded-image="currentFile"
+      :image-classes="imageClasses"
       @update:uploaded-image="$emit('update:modelValue', $event)"
       @change="onChangeFile"
       @delete="onDeleteFile(0)"
