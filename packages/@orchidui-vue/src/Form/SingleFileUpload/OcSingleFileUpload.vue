@@ -26,7 +26,7 @@ const props = defineProps({
     validator: (val) => ["upload", "url"].includes(val),
   },
 });
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(["update:modelValue", "onRemoveFile"]);
 
 const inputRef = ref();
 const fileLink = ref("");
@@ -47,7 +47,20 @@ const videoUrl = computed(() =>
 );
 const currentFile = computed(() => currentFiles.value?.[0]);
 onMounted(() => {
-  if (props.modelValue) currentFiles.value = [props.modelValue];
+  const formatedModelValue = [
+    {
+      current: props.modelValue.current,
+      file: null,
+      fileName: props.modelValue.current.caption ?? "",
+      progress: 100,
+      fileUrl: props.modelValue.current.path,
+      totalSize: props.modelValue.current.file_size ?? 0,
+      isLoaded: true,
+      extension: props.modelValue.current.extention ?? "png",
+    },
+  ];
+
+  if (props.modelValue) currentFiles.value = formatedModelValue;
 });
 const onDrop = (ev) => {
   ev.preventDefault();
@@ -73,6 +86,12 @@ const checkFileLink = async (link) => {
   } catch (error) {
     console.log("Error checking file link:", error);
   }
+};
+
+const onEditFile = () => {
+  editImg.value = currentFile.value.fileUrl;
+  isDropdownOpen.value = false;
+  isEditOpen.value = true;
 };
 </script>
 
@@ -170,11 +189,7 @@ const checkFileLink = async (link) => {
                 <div
                   v-if="!currentFile?.file.type.includes('video')"
                   class="flex p-3 cursor-pointer items-center gap-x-3"
-                  @click="
-                    editImg = currentFile?.fileUrl;
-                    isDropdownOpen = false;
-                    isEditOpen = true;
-                  "
+                  @click="onEditFile"
                 >
                   <Icon width="16" height="16" name="pencil" />
                   <span>Edit</span>
