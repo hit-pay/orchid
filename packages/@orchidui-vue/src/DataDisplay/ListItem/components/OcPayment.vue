@@ -1,6 +1,5 @@
 <script setup>
 import { Icon } from "@/orchidui";
-import { computed } from "vue";
 
 defineProps({
   title: {
@@ -21,7 +20,7 @@ defineEmits(["edit", "delete"]);
     class="px-5 py-4 flex flex-col gap-y-4 rounded border border-gray-200 group hover:shadow-normal"
   >
     <div class="flex items-center gap-x-5">
-      <div class="flex-1 font-medium">{{ title }}</div>
+      <div class="flex-1 font-medium capitalize">{{ title }}</div>
       <div
         class="border opacity-0 group-hover:opacity-100 border-oc-accent-1-100 rounded-sm p-1 flex gap-x-1"
       >
