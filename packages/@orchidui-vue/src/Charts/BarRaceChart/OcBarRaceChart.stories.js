@@ -1,42 +1,35 @@
-import BarChart from "./OcBarChart.vue";
+import OcBarRaceChart from "./OcBarRaceChart.vue";
 
 export default {
-  component: BarChart,
+  component: OcBarRaceChart,
   tags: ["autodocs"],
 };
 
 export const Line = {
   args: {
-    color: '#B14AED',
+    color: '#2465DE',
     showGrid: false,
     showTooltip: true,
     showLegend: true,
     chartData: [
-      500, 730, 824, 1218.88, 2135, 1147, 760, 1150, 2130, 2324, 1218, 2135, 1147,
+      62, 11, 8, 6, 5, 2
     ],
     labelData: [
-      "NOV'22",
-      "DEC'22",
-      "JAN'23",
-      "FEB'23",
-      "MAR'23",
-      "MAY'23",
-      "JUN'23",
-      "JUL'23",
-      "AUG'23",
-      "SEP'23",
-      "OCT'23",
-      "NOV'23",
+      .5,
+      .23,
+      .12,
+      .10,
+      .08
     ],
   },
   render: (args) => ({
-    components: { BarChart },
+    components: { OcBarRaceChart },
     setup() {
       return { args };
     },
     template: `
           <div>
-            <BarChart
+            <OcBarRaceChart
                 class="h-[300px]"
                 :color="args.color"
                 :show-grid="args.showGrid"
