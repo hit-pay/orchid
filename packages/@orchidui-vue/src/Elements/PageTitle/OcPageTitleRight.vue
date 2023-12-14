@@ -48,7 +48,7 @@ defineProps({
       />
       <template #popper>
         <div
-          class="px-3 py-[5px] font-medium text-sm text-oc-text-400 flex gap-x-3 items-center"
+          class="px-3 py-[5px] whitespace-nowrap font-medium text-sm text-oc-text-400 flex gap-x-3 items-center"
         >
           {{ primaryButtonProps.tooltip ?? primaryButtonProps.label }}
           <div class="flex gap-x-2">

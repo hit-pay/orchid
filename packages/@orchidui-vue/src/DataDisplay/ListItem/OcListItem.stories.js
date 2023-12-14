@@ -13,7 +13,7 @@ export const listItem = {
     },
     type: {
       control: "select",
-      options: ["timeline", "webhook"],
+      options: ["timeline", "webhook", "payment"],
     },
     active: {
       control: {
