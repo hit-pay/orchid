@@ -57,6 +57,10 @@ const confirmButton = computed(() => ({
     @confirm="$emit('confirm')"
     @cancel="$emit('cancel')"
   >
-    <Confirmation :variant="variant" :description="description" />
+    <Confirmation :variant="variant" :description="description">
+      <template v-if="$slots.description" #description>
+        <slot name="description" />
+      </template>
+    </Confirmation>
   </Modal>
 </template>
