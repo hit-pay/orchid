@@ -1,11 +1,11 @@
-import BarChart from "./OcBarChart.vue";
+import OcBarChart from "./OcBarChart.vue";
 
 export default {
-  component: BarChart,
+  component: OcBarChart,
   tags: ["autodocs"],
 };
 
-export const Bar = {
+export const barChart = {
   args: {
     color: "#B14AED",
     showGrid: false,
@@ -35,13 +35,13 @@ export const Bar = {
     tooltipCurrency: "SGD",
   },
   render: (args) => ({
-    components: { BarChart },
+    components: { OcBarChart },
     setup() {
       return { args };
     },
     template: `
           <div>
-            <BarChart
+            <OcBarChart
                 class="h-[300px]"
                 :color="args.color"
                 :show-grid="args.showGrid"

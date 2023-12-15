@@ -5,7 +5,7 @@ export default {
   tags: ["autodocs"],
 };
 
-export const BarRace = {
+export const barRace = {
   args: {
     color: "#2465DE",
     showGrid: false,
