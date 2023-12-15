@@ -104,12 +104,12 @@ const changeImage = (url) => {
               class="draggable-card-action cursor-pointer w-[32px] flex h-[32px] items-center justify-center text-oc-bg-light"
             />
             <template #menu>
-                <slot
-                  name="action"
-                  :item="img"
-                  :remove-item="onDeleteFile"
-                  :file-index="i"
-                >
+              <slot
+                name="action"
+                :item="img"
+                :remove-item="onDeleteFile"
+                :file-index="i"
+              >
                 <div class="py-2 flex flex-col">
                   <div
                     class="flex p-3 cursor-pointer items-center gap-x-3"

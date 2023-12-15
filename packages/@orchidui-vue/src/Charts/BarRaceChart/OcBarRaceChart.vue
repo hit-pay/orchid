@@ -28,14 +28,14 @@ const options = computed(() => ({
       show: false,
     },
     axisTick: {
-      show: false
+      show: false,
     },
     splitLine: {
       show: false,
     },
     axisLabel: {
       color: "#03102F",
-      fontWeight: 500
+      fontWeight: 500,
     },
   },
   grid: {
@@ -54,9 +54,9 @@ const options = computed(() => ({
     padding: 0,
     borderWidth: 0,
     formatter: (params) => {
-      const currency = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'SGD',
+      const currency = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "SGD",
       });
 
       return `
@@ -80,42 +80,44 @@ const options = computed(() => ({
       showSymbol: false,
       label: {
         show: true,
-        position: 'insideLeft',
-        color: '#03102F',
+        position: "insideLeft",
+        color: "#03102F",
         opacity: 1,
-        align: 'left',
+        align: "left",
         padding: [0, 8],
-        fontWeight: 300
+        fontWeight: 300,
       },
       // barMaxWidth: 22,
       barGap: 0,
       itemStyle: {
         color: props.color,
-        opacity: .2,
+        opacity: 0.2,
         borderRadius: [0, 4, 4, 0],
       },
       emphasis: {
         itemStyle: {
           color: props.color,
-        }
+        },
       },
     },
     {
-      data: props.chartData.map(i => Math.max(...props.chartData as number[]) * 0.002),
+      data: props.chartData.map(
+        (i) => Math.max(...(props.chartData as number[])) * 0.002,
+      ),
       type: "bar",
       smooth: true,
       showSymbol: false,
       label: {
         show: false,
       },
-      barGap: '-100%',
+      barGap: "-100%",
       itemStyle: {
         color: props.color,
       },
       emphasis: {
         itemStyle: {
           color: props.color,
-        }
+        },
       },
     },
   ],

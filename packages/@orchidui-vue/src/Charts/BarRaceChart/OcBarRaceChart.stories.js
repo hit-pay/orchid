@@ -7,20 +7,12 @@ export default {
 
 export const Line = {
   args: {
-    color: '#2465DE',
+    color: "#2465DE",
     showGrid: false,
     showTooltip: true,
     showLegend: true,
-    chartData: [
-      62, 11, 8, 6, 5, 2
-    ],
-    labelData: [
-      '50%',
-      '23%',
-      '12%',
-      '10%',
-      '8%'
-    ],
+    chartData: [62, 11, 8, 6, 5, 2],
+    labelData: ["50%", "23%", "12%", "10%", "8%"],
   },
   render: (args) => ({
     components: { OcBarRaceChart },

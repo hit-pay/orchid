@@ -7,12 +7,13 @@ export default {
 
 export const Line = {
   args: {
-    color: '#B14AED',
+    color: "#B14AED",
     showGrid: false,
     showTooltip: true,
     showLegend: true,
     chartData: [
-      500, 730, 824, 1218.88, 2135, 1147, 760, 1150, 2130, 2324, 1218, 2135, 1147,
+      500, 730, 824, 1218.88, 2135, 1147, 760, 1150, 2130, 2324, 1218, 2135,
+      1147,
     ],
     labelData: [
       "NOV'22",

@@ -1,12 +1,11 @@
 <template>
   <div ref="barChart" class="w-full" />
-
 </template>
 
 <script setup lang="ts">
 import * as echarts from "echarts";
 import { computed, onMounted, ref, watch } from "vue";
-import {Tooltip} from "@/orchidui";
+import { Tooltip } from "@/orchidui";
 
 const props = defineProps({
   color: String,
@@ -64,9 +63,9 @@ const options = computed(() => ({
     padding: 0,
     borderWidth: 0,
     formatter: (params) => {
-      const currency = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'SGD',
+      const currency = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "SGD",
       });
 
       return `
@@ -76,7 +75,9 @@ const options = computed(() => ({
                     ${params.name}
                 </span>
             </div>
-            <div class="text-oc-text font-medium text-[12px]">${currency.format(params.value)}</div>
+            <div class="text-oc-text font-medium text-[12px]">${currency.format(
+              params.value,
+            )}</div>
         </div>
 
       `;
@@ -90,13 +91,13 @@ const options = computed(() => ({
       showSymbol: false,
       itemStyle: {
         color: props.color,
-        opacity: .5
+        opacity: 0.5,
       },
       emphasis: {
         itemStyle: {
           color: props.color,
-          opacity: 1
-        }
+          opacity: 1,
+        },
       },
     },
   ],
