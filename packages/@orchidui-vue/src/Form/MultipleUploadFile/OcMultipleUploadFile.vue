@@ -154,12 +154,12 @@ const { isErrorMaxSize, currentFiles, onChangeFile, onDeleteFile } =
   useUploadFileProgress(props.maxSize, emit);
 
 onMounted(() => {
-  const formatedModelValue = [];
+  const formattedModelValue = [];
 
   if (props.modelValue.length > 0) {
     props.modelValue.forEach((item) => {
       if (item.current) {
-        formatedModelValue.push({
+        formattedModelValue.push({
           current: item.current,
           file: null,
           fileName: item.current.caption ?? "",
@@ -172,7 +172,7 @@ onMounted(() => {
       }
     });
 
-    currentFiles.value = formatedModelValue;
+    currentFiles.value = formattedModelValue;
   }
 });
 </script>

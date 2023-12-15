@@ -49,7 +49,7 @@ const videoUrl = computed(() =>
 const currentFile = computed(() => currentFiles.value?.[0]);
 onMounted(() => {
   if (props.modelValue && props.modelValue.current) {
-    const formatedModelValue = [
+    const formattedModelValue = [
       {
         current: props.modelValue.current,
         file: null,
@@ -61,7 +61,7 @@ onMounted(() => {
         extension: props.modelValue.current.extention ?? "png",
       },
     ];
-    currentFiles.value = formatedModelValue;
+    currentFiles.value = formattedModelValue;
   }
 });
 const onDrop = (ev) => {
