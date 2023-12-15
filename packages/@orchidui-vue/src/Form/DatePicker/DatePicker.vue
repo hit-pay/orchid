@@ -120,29 +120,31 @@ const resetCalendar = () => {
           :has-error="errorMessage.length > 0"
         />
       </div>
-      <div v-else class="flex flex-wrap gap-x-4">
+      <div v-else class="flex flex-wrap">
         <span class="flex gap-x-1 items-center">
           {{ label }}
           <span v-if="isRequired" class="text-oc-error">*</span>
         </span>
-        <Input
-          :label="minLabel"
-          :model-value="formattedDate[0]"
-          icon="calendar"
-          :placeholder="placeholder"
-          :disabled="disabled"
-          readonly
-          :has-error="errorMessage.length > 0"
-        />
-        <Input
-          :label="maxLabel"
-          :model-value="formattedDate[1]"
-          icon="calendar"
-          :placeholder="placeholder"
-          :disabled="disabled"
-          readonly
-          :has-error="errorMessage.length > 0"
-        />
+        <div class="flex gap-x-4">
+          <Input
+            :label="minLabel"
+            :model-value="formattedDate[0]"
+            icon="calendar"
+            :placeholder="placeholder"
+            :disabled="disabled"
+            readonly
+            :has-error="errorMessage.length > 0"
+          />
+          <Input
+            :label="maxLabel"
+            :model-value="formattedDate[1]"
+            icon="calendar"
+            :placeholder="placeholder"
+            :disabled="disabled"
+            readonly
+            :has-error="errorMessage.length > 0"
+          />
+        </div>
       </div>
       <div v-if="errorMessage" class="text-sm text-oc-error flex items-center">
         {{ errorMessage }}
