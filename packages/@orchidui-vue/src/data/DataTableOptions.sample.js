@@ -1,10 +1,10 @@
 import { SampleFilterForm } from "./FilterForm.sample";
 
 const DataTableOptions = {
-  pagination: {
-    total: 50,
-    last_page: 20,
-  },
+  // pagination: {
+  //   total: 50,
+  //   last_page: 20,
+  // },
   filterOptions: {
     per_page: {
       key: "per_page",
@@ -200,7 +200,7 @@ const DataTableOptions = {
 };
 
 const Filter = {
-  page: 1,
+  // page: 1,
   per_page: 10,
   tabs: "",
 };

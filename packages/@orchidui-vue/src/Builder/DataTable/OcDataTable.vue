@@ -74,10 +74,6 @@ const isSearchExpanded = ref(false);
 const perPageOptions = computed(() => {
   let per_page_option = [
     {
-      label: "5",
-      value: 5,
-    },
-    {
       label: "10",
       value: 10,
     },
@@ -110,13 +106,14 @@ const perPageOptions = computed(() => {
       value: 99,
     },
   ];
-  const maxLength =
-    paginationOption.value.total < 100 ? paginationOption.value.total : 100;
   let opt = per_page_option;
-  if (maxLength > 10) {
-    opt = per_page_option.filter((p) => {
-      return p.value <= maxLength;
-    });
+  if(paginationOption.value){
+    const maxLength = paginationOption.value.total < 100 ? paginationOption.value.total : 100;
+    if (maxLength > 10) {
+      opt = per_page_option.filter((p) => {
+        return p.value <= maxLength;
+      });
+    }
   }
   return [...new Set(opt)];
 });
@@ -367,14 +364,14 @@ const displayFilterData = computed(() => {
         <slot name="empty" />
       </template>
     </Table>
-    <div v-if="paginationOption?.total > 0" class="flex gap-3 items-center">
-      <Pagination
+    <div class="flex gap-3 items-center">
+      <!-- <Pagination
         v-model="currentPage"
         class="justify-center"
         :max-page="paginationOption.last_page"
         total-visible="5"
         @update:model-value="changePage"
-      />
+      /> -->
       <div class="hidden md:flex items-center">
         <Select
           v-model="perPage"
