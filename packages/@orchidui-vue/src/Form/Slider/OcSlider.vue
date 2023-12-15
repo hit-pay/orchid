@@ -81,9 +81,10 @@ const updateSlider = (value) => {
   if (value && value[0] && value[1] && props.type === "range") {
     sliderOne.value.value = Number(value[0]);
     sliderTwo.value.value = Number(value[1]);
+
+    slideOne();
+    if (props.type === "range") slideTwo();
   }
-  slideOne();
-  if (props.type === "range") slideTwo();
 };
 defineExpose({
   updateSlider,

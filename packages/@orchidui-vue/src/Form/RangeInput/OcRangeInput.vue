@@ -55,6 +55,8 @@ const updateRangeSlider = ($event) => {
   if (isNaN($event[0]) || isNaN($event[1])) return;
   localMinValue.value = Number($event[0]);
   localMaxValue.value = Number($event[1]);
+
+  console.log("updateRangeSlider");
   emit("update:modelValue", [
     Number(localMinValue.value),
     Number(localMaxValue.value),
