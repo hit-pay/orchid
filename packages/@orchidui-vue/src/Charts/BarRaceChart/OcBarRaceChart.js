@@ -1,3 +1,3 @@
-import OcBarRaceChart from "./OcBarRaceChart.vue";
+import BarRaceChart from "./OcBarRaceChart.vue";
 
-export { OcBarRaceChart };
+export { BarRaceChart };
