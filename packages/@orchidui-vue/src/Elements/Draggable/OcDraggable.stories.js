@@ -1,7 +1,7 @@
 import { Theme } from "@/orchidui";
 
 import { Toggle, DropdownItem } from "@/orchidui";
-import { DraggableList } from "@/orchidui/DraggableList";
+import { DraggableList } from "@/orchidui/Draggable.js";
 
 import { ref } from "vue";
 

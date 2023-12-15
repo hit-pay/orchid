@@ -2,7 +2,7 @@
 import { computed, onMounted, ref } from "vue";
 import { Input, Button, BaseInput, Icon, Dropdown } from "@/orchidui";
 import { useUploadFileProgress } from "@/orchidui/composables/uploadFileProgress.js";
-import ModalCropper from "./ModalCropper.vue";
+import { ModalCropper } from "@/orchidui/Cropper.js";
 import SingleOnlyImageUpload from "./OcSingleOnlyImageUpload.vue";
 
 const props = defineProps({
@@ -48,20 +48,21 @@ const videoUrl = computed(() =>
 );
 const currentFile = computed(() => currentFiles.value?.[0]);
 onMounted(() => {
-  const formatedModelValue = [
-    {
-      current: props.modelValue.current,
-      file: null,
-      fileName: props.modelValue.current.caption ?? "",
-      progress: 100,
-      fileUrl: props.modelValue.current.path,
-      totalSize: props.modelValue.current.file_size ?? 0,
-      isLoaded: true,
-      extension: props.modelValue.current.extention ?? "png",
-    },
-  ];
-
-  if (props.modelValue) currentFiles.value = formatedModelValue;
+  if (props.modelValue && props.modelValue.current) {
+    const formattedModelValue = [
+      {
+        current: props.modelValue.current,
+        file: null,
+        fileName: props.modelValue.current.caption ?? "",
+        progress: 100,
+        fileUrl: props.modelValue.current.path,
+        totalSize: props.modelValue.current.file_size ?? 0,
+        isLoaded: true,
+        extension: props.modelValue.current.extention ?? "png",
+      },
+    ];
+    currentFiles.value = formattedModelValue;
+  }
 });
 const onDrop = (ev) => {
   ev.preventDefault();
@@ -210,7 +211,7 @@ const onEditFile = () => {
             </template>
           </Dropdown>
           <ModalCropper
-            v-if="!currentFile?.file.type.includes('video')"
+            v-if="!currentFile?.file.type.includes('video') && isEditOpen"
             v-model="isEditOpen"
             :img="editImg"
             @close="
