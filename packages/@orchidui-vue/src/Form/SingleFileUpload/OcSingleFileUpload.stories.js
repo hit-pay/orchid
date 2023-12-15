@@ -80,8 +80,28 @@ export const Url = {
 export const ImageOnly = {
   render: () => ({
     components: { SingleFileUpload },
+    setup() {
+      const imageRef = ref({
+        current: {
+          id: "image_1",
+          path: "https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/covers/small/99d696e564ba45fbaa0fb2e3b43d0e27.jpg",
+          caption: "Image 1",
+        },
+        //
+      });
+      const onRemoveFile = (data) => {
+        console.log(data);
+      };
+      return { imageRef, onRemoveFile };
+    },
     template: `
-          <SingleFileUpload is-image-only/>
+
+          <pre> {{imageRef}}</pre>
+          <SingleFileUpload 
+            v-model="imageRef"
+            is-image-only    
+            @onRemoveFile="onRemoveFile"
+          />
         `,
   }),
 };

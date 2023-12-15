@@ -55,7 +55,7 @@ const slideTwo = () => {
   fillColor();
 };
 
-const fillColor = () => {
+const fillColor = (onlyFillColor = false) => {
   percent1.value =
     ((sliderOne.value?.value - props.minLimit) /
       (props.maxLimit - props.minLimit)) *
@@ -70,20 +70,26 @@ const fillColor = () => {
     props.type === "range"
       ? `linear-gradient(to right, var(--oc-gray-100) ${percent1.value}% , var(--oc-primary-500) ${percent1.value}% , var(--oc-primary-500) ${percent2.value}%, var(--oc-gray-100) ${percent2.value}%)`
       : `linear-gradient(to right, var(--oc-primary-500) ${percent1.value}%, var(--oc-gray-100) ${percent1.value}%)`;
-  emit(
-    "update:modelValue",
-    props.type === "range"
-      ? [sliderOne.value?.value, sliderTwo.value?.value]
-      : sliderOne.value.value,
-  );
+  
+  if(!onlyFillColor){
+    emit(
+      "update:modelValue",
+      props.type === "range"
+        ? [sliderOne.value?.value, sliderTwo.value?.value]
+        : sliderOne.value.value,
+    );
+  }
 };
 const updateSlider = (value) => {
   if (value && value[0] && value[1] && props.type === "range") {
     sliderOne.value.value = Number(value[0]);
     sliderTwo.value.value = Number(value[1]);
+
+    slideOne();
+    if (props.type === "range") slideTwo();
+  }else{
+    fillColor(true)
   }
-  slideOne();
-  if (props.type === "range") slideTwo();
 };
 defineExpose({
   updateSlider,

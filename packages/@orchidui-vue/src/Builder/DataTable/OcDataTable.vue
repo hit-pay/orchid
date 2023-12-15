@@ -2,6 +2,7 @@
 import {
   Table,
   Pagination,
+  PrevNext,
   Select,
   Tabs,
   FilterSearch,
@@ -50,6 +51,10 @@ const paginationOption = computed(() => {
   return props.options?.pagination;
 });
 
+const cursorOption = computed(() => {
+  return props.options?.cursor;
+});
+
 const tableOptions = computed(() => {
   return props.options?.tableOptions;
 });
@@ -73,10 +78,6 @@ const isSearchExpanded = ref(false);
 
 const perPageOptions = computed(() => {
   let per_page_option = [
-    {
-      label: "5",
-      value: 5,
-    },
     {
       label: "10",
       value: 10,
@@ -110,13 +111,15 @@ const perPageOptions = computed(() => {
       value: 99,
     },
   ];
-  const maxLength =
-    paginationOption.value.total < 100 ? paginationOption.value.total : 100;
   let opt = per_page_option;
-  if (maxLength > 10) {
-    opt = per_page_option.filter((p) => {
-      return p.value <= maxLength;
-    });
+  if (paginationOption.value) {
+    const maxLength =
+      paginationOption.value.total < 100 ? paginationOption.value.total : 100;
+    if (maxLength > 10) {
+      opt = per_page_option.filter((p) => {
+        return p.value <= maxLength;
+      });
+    }
   }
   return [...new Set(opt)];
 });
@@ -139,19 +142,24 @@ const removeQuery = (query) => {
   queries.value = queries.value.filter((q) => q !== query);
   applyFilter();
 };
-
-const filterData = ref(
-  props.filter ?? {
-    page: 1,
-  },
-);
+const defaultFilterData = props.filter;
+if (!defaultFilterData && paginationOption) {
+  defaultFilterData.page = 1;
+} else if (!defaultFilterData && cursorOption) {
+  defaultFilterData.cursor = "";
+}
+const filterData = ref(defaultFilterData);
 
 const removeAllQueryFilter = () => {
   queries.value = [];
 
-  const defaultFilters = {
-    page: 1,
-  };
+  const defaultFilters = {};
+
+  if (filterOptions.value) {
+    defaultFilterData.page = 1;
+  } else {
+    defaultFilterData.cursor = "";
+  }
 
   if (filterOptions.value?.per_page?.key) {
     defaultFilters[filterOptions.value?.per_page?.key] = perPage.value;
@@ -173,11 +181,19 @@ const changePage = () => {
   applyFilter(null, currentPage.value);
 };
 
-const applyFilter = (filterForm = null, isChangePage = false) => {
-  if (!isChangePage) {
+const applyFilter = (
+  filterForm = null,
+  isChangePage = false,
+  changeCursor = "",
+) => {
+  if (paginationOption.value && !isChangePage) {
     currentPage.value = 1;
   }
-  filterData.value.page = currentPage.value;
+  if (paginationOption.value) {
+    filterData.value.page = currentPage.value;
+  } else {
+    filterData.value.cursor = changeCursor;
+  }
 
   if (filterOptions.value?.per_page) {
     filterData.value[filterOptions.value.per_page.key] = perPage.value;
@@ -214,6 +230,7 @@ const displayFilterData = computed(() => {
       const filterPerPageKey = filterOptions.value?.per_page?.key ?? "per_page";
       if (
         name !== "page" &&
+        name !== "cursor" &&
         name !== filterPerPageKey &&
         name !== filterTabKey &&
         name !== filterSearchKey
@@ -367,14 +384,26 @@ const displayFilterData = computed(() => {
         <slot name="empty" />
       </template>
     </Table>
-    <div v-if="paginationOption?.total > 0" class="flex gap-3 items-center">
+    <div class="flex gap-3 items-center">
       <Pagination
+        v-if="paginationOption"
         v-model="currentPage"
         class="justify-center"
         :max-page="paginationOption.last_page"
         total-visible="5"
         @update:model-value="changePage"
       />
+      <div class="flex w-full gap-5">
+        <PrevNext
+          :disabled="!cursorOption.prev"
+          @click="applyFilter(null, false, cursorOption.prev)"
+        />
+        <PrevNext
+          :disabled="!cursorOption.next"
+          is-next
+          @click="applyFilter(null, false, cursorOption.next)"
+        />
+      </div>
       <div class="hidden md:flex items-center">
         <Select
           v-model="perPage"

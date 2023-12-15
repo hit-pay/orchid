@@ -87,64 +87,64 @@ const SampleFilterForm = [
       placeholder: "placeholder",
     },
   },
-  {
-    name: "select",
-    type: "Select",
-    props: {
-      label: "Select",
-      hint: "This is a hint text to help user",
-      placeholder: "placeholder",
-      isFilterable: true,
-      isAddNew: true,
-      options: [
-        {
-          label: "Option 1",
-          value: 1,
-        },
-        {
-          label: "Option 2",
-          value: 2,
-        },
-        {
-          label: "Option 3",
-          value: 3,
-        },
-        {
-          label: "Option 4",
-          value: 4,
-        },
-      ],
-    },
-  },
-  {
-    name: "select_multiple",
-    type: "Select",
-    props: {
-      label: "Select Multiple",
-      hint: "This is a hint text to help user",
-      placeholder: "placeholder",
-      isFilterable: true,
-      multiple: true,
-      options: [
-        {
-          label: "Option 1",
-          value: crypto.randomUUID(),
-        },
-        {
-          label: "Option 2",
-          value: crypto.randomUUID(),
-        },
-        {
-          label: "Option 3",
-          value: crypto.randomUUID(),
-        },
-        {
-          label: "Option 4",
-          value: 4,
-        },
-      ],
-    },
-  },
+  // {
+  //   name: "select",
+  //   type: "Select",
+  //   props: {
+  //     label: "Select",
+  //     hint: "This is a hint text to help user",
+  //     placeholder: "placeholder",
+  //     isFilterable: true,
+  //     isAddNew: true,
+  //     options: [
+  //       {
+  //         label: "Option 1",
+  //         value: 1,
+  //       },
+  //       {
+  //         label: "Option 2",
+  //         value: 2,
+  //       },
+  //       {
+  //         label: "Option 3",
+  //         value: 3,
+  //       },
+  //       {
+  //         label: "Option 4",
+  //         value: 4,
+  //       },
+  //     ],
+  //   },
+  // },
+  // {
+  //   name: "select_multiple",
+  //   type: "Select",
+  //   props: {
+  //     label: "Select Multiple",
+  //     hint: "This is a hint text to help user",
+  //     placeholder: "placeholder",
+  //     isFilterable: true,
+  //     multiple: true,
+  //     options: [
+  //       {
+  //         label: "Option 1",
+  //         value: crypto.randomUUID(),
+  //       },
+  //       {
+  //         label: "Option 2",
+  //         value: crypto.randomUUID(),
+  //       },
+  //       {
+  //         label: "Option 3",
+  //         value: crypto.randomUUID(),
+  //       },
+  //       {
+  //         label: "Option 4",
+  //         value: 4,
+  //       },
+  //     ],
+  //   },
+  // },
 ];
 
 export { SampleFilterForm };

@@ -201,7 +201,7 @@ const removeOption = (value) => {
                 :label="option.label"
                 :is-selected="
                   multiple
-                    ? modelValue?.find((o) => o === option.value) !== undefined
+                    ? modelValue ? modelValue.find((o) => o === option.value) !== undefined : false
                     : modelValue === option.value
                 "
                 @click="selectOption(option)"

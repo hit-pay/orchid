@@ -12,6 +12,10 @@ const props = defineProps({
     type: Object,
     default: () => ({}),
   },
+  imageClasses: {
+    type: String,
+    default: "",
+  },
 });
 const emit = defineEmits(["change", "update:uploadedImage", "delete"]);
 const isDropdownOpen = ref(false);
@@ -29,9 +33,10 @@ const changeImage = (url) => {
 
 <template>
   <div class="flex gap-x-3">
-    <label>
+    <label v-if="!uploadedImage?.fileUrl">
       <div
         class="w-[90px] hover:bg-oc-primary-50 cursor-pointer bg-oc-accent-1-50 text-oc-accent-1 rounded aspect-square flex items-center justify-center"
+        :class="imageClasses"
       >
         <Icon name="plus" />
       </div>
@@ -39,13 +44,13 @@ const changeImage = (url) => {
         class="hidden"
         type="file"
         :accept="accept || 'image/png, image/jpeg'"
-        multiple
         @change="$emit('change', $event)"
       />
     </label>
     <div
       v-if="uploadedImage?.fileUrl"
-      class="w-[90px] group relative cursor-pointer overflow-hidden aspect-square border rounded border-oc-accent-1-100"
+      class="w-[90px] group relative cursor-pointer aspect-square border rounded border-oc-accent-1-100"
+      :class="imageClasses"
     >
       <Dropdown
         v-model="isDropdownOpen"
