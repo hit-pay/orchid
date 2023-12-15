@@ -120,7 +120,7 @@ const resetCalendar = () => {
           :has-error="errorMessage.length > 0"
         />
       </div>
-      <div v-else class="flex gap-x-4">
+      <div v-else class="flex flex-wrap gap-x-4">
         <span class="flex gap-x-1 items-center">
           {{ label }}
           <span v-if="isRequired" class="text-oc-error">*</span>
