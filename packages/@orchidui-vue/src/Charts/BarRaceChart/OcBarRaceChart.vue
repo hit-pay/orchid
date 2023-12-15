@@ -35,10 +35,7 @@ const options = computed(() => ({
     },
     axisLabel: {
       color: "#03102F",
-      fontWeight: 500,
-      formatter: (value) => {
-        return value * 100 + '%';
-      },
+      fontWeight: 500
     },
   },
   grid: {
@@ -66,7 +63,7 @@ const options = computed(() => ({
         <div class="py-3 px-4 leading-normal">
             <div class="flex w-full justify-between items-center">
                 <span class="uppercase text-[10px] font-medium">
-                    ${params.name * 100 + '%'}
+                    ${params.name}
                 </span>
             </div>
             <div class="text-oc-text font-medium text-[12px]">${params.value}</div>
