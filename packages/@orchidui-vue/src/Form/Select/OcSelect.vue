@@ -75,14 +75,14 @@ const filterOptions = (options, query) => {
 
   return filteredOptions;
 };
-const filterableOptions = computed(() =>
-  filterOptions(props.options, query.value),
+const filterableOptions = computed(
+  () => filterOptions(props.options, query.value) || [],
 );
 const selectOption = (option) => {
   const result = props.multiple
-    ? props.modelValue.find((o) => o === option.value)
-      ? props.modelValue.filter((o) => o !== option.value)
-      : [...props.modelValue, option.value]
+    ? (props.modelValue || []).find((o) => o === option.value)
+      ? (props.modelValue || []).filter((o) => o !== option.value)
+      : [...(props.modelValue || []), option.value]
     : option.value;
 
   if (!props.multiple) {
@@ -98,12 +98,12 @@ const localValueOption = computed(() => {
     for (const option of props.options) {
       if (option.values) {
         option.values.forEach((o) => {
-          if (props.modelValue.includes(o.value)) {
+          if ((props.modelValue || []).includes(o.value)) {
             selected.push(o);
           }
         });
       } else {
-        if (props.modelValue.includes(option.value)) {
+        if ((props.modelValue || []).includes(option.value)) {
           selected.push(option);
         }
       }
@@ -117,7 +117,7 @@ const localValueOption = computed(() => {
 const removeOption = (value) => {
   emit(
     "update:modelValue",
-    props.modelValue.filter((o) => o !== value),
+    (props.modelValue || []).filter((o) => o !== value),
   );
 };
 </script>
