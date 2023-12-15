@@ -1,7 +1,6 @@
 import { Card, Button, OverviewItem, Icon } from "@/orchidui";
 
 export default {
-  components: { Button, OverviewItem, Icon },
   component: Card,
   tags: ["autodocs"],
 };
