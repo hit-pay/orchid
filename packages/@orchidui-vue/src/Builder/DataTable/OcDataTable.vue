@@ -2,6 +2,7 @@
 import {
   Table,
   Pagination,
+  PrevNext,
   Select,
   Tabs,
   FilterSearch,
@@ -48,6 +49,10 @@ const emit = defineEmits({
 
 const paginationOption = computed(() => {
   return props.options?.pagination;
+});
+
+const cursorOption = computed(() => {
+  return props.options?.cursor;
 });
 
 const tableOptions = computed(() => {
@@ -365,13 +370,18 @@ const displayFilterData = computed(() => {
       </template>
     </Table>
     <div class="flex gap-3 items-center">
-      <!-- <Pagination
+      <Pagination
+        v-if="paginationOption"
         v-model="currentPage"
         class="justify-center"
         :max-page="paginationOption.last_page"
         total-visible="5"
         @update:model-value="changePage"
-      /> -->
+      />
+      <div class="flex w-full gap-5">
+        <PrevNext :disabled="cursorOption.prev" />
+        <PrevNext :disabled="cursorOption.next" is-next />
+      </div>
       <div class="hidden md:flex items-center">
         <Select
           v-model="perPage"

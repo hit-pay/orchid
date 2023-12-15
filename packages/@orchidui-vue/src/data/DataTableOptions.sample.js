@@ -5,6 +5,10 @@ const DataTableOptions = {
   //   total: 50,
   //   last_page: 20,
   // },
+  cursor: {
+    prev: '',
+    next: ''
+  },
   filterOptions: {
     per_page: {
       key: "per_page",
