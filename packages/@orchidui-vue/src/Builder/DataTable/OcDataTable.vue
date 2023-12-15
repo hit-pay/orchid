@@ -69,7 +69,7 @@ const currentPage = ref(props.filter.page);
 const perPage = ref(
   filterOptions.value?.per_page?.key
     ? props.filter[filterOptions.value?.per_page?.key]
-    : props.filter.per_page,
+    : props.filter.per_page
 );
 const defaultQuery =
   props.filter[filterOptions.value?.search?.key]?.trim() ?? "";
@@ -184,7 +184,7 @@ const changePage = () => {
 const applyFilter = (
   filterForm = null,
   isChangePage = false,
-  changeCursor = "",
+  changeCursor = ""
 ) => {
   if (paginationOption.value && !isChangePage) {
     currentPage.value = 1;
@@ -260,8 +260,8 @@ const displayFilterData = computed(() => {
               .map(
                 (selectedValue) =>
                   option.props.options.find(
-                    ({ value }) => value === selectedValue,
-                  ).label,
+                    ({ value }) => value === selectedValue
+                  ).label
               )
               .join(", ");
           }
@@ -287,6 +287,8 @@ const displayFilterData = computed(() => {
       :options="tableOptions"
       :is-loading="isLoading"
       :loading-rows="perPage"
+      :is-sticky="tableOptions.isSticky"
+      class="min-h-[70vh]"
       @update:selected="$emit('update:selected', $event)"
       @click:row="$emit('click:row', $event)"
     >
@@ -393,7 +395,7 @@ const displayFilterData = computed(() => {
         total-visible="5"
         @update:model-value="changePage"
       />
-      <div v-if="cursorOption" class="flex w-full gap-5" >
+      <div v-if="cursorOption" class="flex w-full gap-5">
         <PrevNext
           :disabled="!cursorOption.prev"
           @click="applyFilter(null, false, cursorOption.prev)"
