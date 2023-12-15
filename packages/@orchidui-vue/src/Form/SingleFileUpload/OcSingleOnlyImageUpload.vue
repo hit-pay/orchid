@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Icon, Dropdown } from "@/orchidui";
-import ModalCropper from "./ModalCropper.vue";
+import { ModalCropper } from "@/orchidui/Cropper.js";
 import { ref } from "vue";
 
 const props = defineProps({

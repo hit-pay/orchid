@@ -2,7 +2,7 @@
 import { Dropdown, Icon } from "@/orchidui";
 import { ref } from "vue";
 import { Draggable } from "@/orchidui/Draggable.js";
-import ModalCropper from "../SingleFileUpload/ModalCropper.vue";
+import { ModalCropper } from "@/orchidui/Cropper.js";
 
 const props = defineProps({
   accept: {

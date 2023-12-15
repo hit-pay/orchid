@@ -28,8 +28,6 @@ watch(
         isAwsImage.value = false;
         localImage.value = img;
       }
-
-      console.log("tess ", img, localImage.value, isAwsImage.value);
     }
   },
   { immediate: true },

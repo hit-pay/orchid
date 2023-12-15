@@ -158,16 +158,18 @@ onMounted(() => {
 
   if (props.modelValue.length > 0) {
     props.modelValue.forEach((item) => {
-      formatedModelValue.push({
-        current: item.current,
-        file: null,
-        fileName: item.current.caption ?? "",
-        progress: 100,
-        fileUrl: item.current.path,
-        totalSize: item.current.file_size ?? 0,
-        isLoaded: true,
-        extension: item.current.extention ?? "png",
-      });
+      if (item.current) {
+        formatedModelValue.push({
+          current: item.current,
+          file: null,
+          fileName: item.current.caption ?? "",
+          progress: 100,
+          fileUrl: item.current.path,
+          totalSize: item.current.file_size ?? 0,
+          isLoaded: true,
+          extension: item.current.extention ?? "png",
+        });
+      }
     });
 
     currentFiles.value = formatedModelValue;

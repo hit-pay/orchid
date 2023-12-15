@@ -70,8 +70,8 @@ const fillColor = (onlyFillColor = false) => {
     props.type === "range"
       ? `linear-gradient(to right, var(--oc-gray-100) ${percent1.value}% , var(--oc-primary-500) ${percent1.value}% , var(--oc-primary-500) ${percent2.value}%, var(--oc-gray-100) ${percent2.value}%)`
       : `linear-gradient(to right, var(--oc-primary-500) ${percent1.value}%, var(--oc-gray-100) ${percent1.value}%)`;
-  
-  if(!onlyFillColor){
+
+  if (!onlyFillColor) {
     emit(
       "update:modelValue",
       props.type === "range"
@@ -87,8 +87,8 @@ const updateSlider = (value) => {
 
     slideOne();
     if (props.type === "range") slideTwo();
-  }else{
-    fillColor(true)
+  } else {
+    fillColor(true);
   }
 };
 defineExpose({
