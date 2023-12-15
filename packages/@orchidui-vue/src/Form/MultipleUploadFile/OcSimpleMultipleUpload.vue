@@ -162,6 +162,7 @@ const changeImage = (url) => {
     </Draggable>
 
     <ModalCropper
+      v-if="isEditOpen"
       v-model="isEditOpen"
       :img="editImg"
       @close="

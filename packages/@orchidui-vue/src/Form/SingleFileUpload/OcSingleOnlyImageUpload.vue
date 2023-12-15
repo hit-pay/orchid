@@ -95,6 +95,7 @@ const changeImage = (url) => {
     </div>
 
     <ModalCropper
+      v-if="isEditOpen"
       v-model="isEditOpen"
       :img="editImg"
       @close="

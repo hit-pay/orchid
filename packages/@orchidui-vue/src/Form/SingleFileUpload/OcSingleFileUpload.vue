@@ -211,7 +211,7 @@ const onEditFile = () => {
             </template>
           </Dropdown>
           <ModalCropper
-            v-if="!currentFile?.file.type.includes('video')"
+            v-if="!currentFile?.file.type.includes('video') && isEditOpen"
             v-model="isEditOpen"
             :img="editImg"
             @close="

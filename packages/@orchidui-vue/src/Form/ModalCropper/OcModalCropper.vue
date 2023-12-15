@@ -6,7 +6,7 @@ import { ref, watch } from "vue";
 
 const props = defineProps({
   img: String,
-  maxSize: String
+  maxSize: String,
 });
 const emit = defineEmits(["changeImage", "close"]);
 const cropper = ref();
