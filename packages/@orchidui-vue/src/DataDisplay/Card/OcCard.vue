@@ -42,7 +42,7 @@ const hasSlot = (name) => !!slots[name];
         position="top-start"
         v-if="titleIconTooltip"
       >
-        <oc-icon class="ml-[3px]" :name="titleIcon" width="16" />
+        <oc-icon class="ml-[3px]" :name="titleIcon" width="16" height="16" />
         <template #popper>
           <div
             class="flex flex-col px-3 py-2 text-[12px] text-oc-text-400 font-medium text-sm"
