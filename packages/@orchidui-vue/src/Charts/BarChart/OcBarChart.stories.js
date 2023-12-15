@@ -5,7 +5,7 @@ export default {
   tags: ["autodocs"],
 };
 
-export const Line = {
+export const Bar = {
   args: {
     color: "#B14AED",
     showGrid: false,
@@ -29,6 +29,10 @@ export const Line = {
       "OCT'23",
       "NOV'23",
     ],
+    yAxisFormatter: (value) => {
+      return (value / 1000).toFixed(1) + "K";
+    },
+    tooltipCurrency: "SGD",
   },
   render: (args) => ({
     components: { BarChart },
@@ -45,6 +49,8 @@ export const Line = {
                 :show-legend="args.showLegend"
                 :chart-data="args.chartData"
                 :label-data="args.labelData"
+                :tooltip-currency="args.tooltipCurrency"
+                :y-axis-formatter="args.yAxisFormatter"
             />
           </div>
         `,

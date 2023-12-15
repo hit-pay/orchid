@@ -1,5 +1,5 @@
 import { ref } from "vue";
-import SingleFileUpload from "./OcSingleFileUpload.vue";
+import { SingleFileUpload } from "@/orchidui";
 import { RadioGroup } from "@/orchidui";
 
 export default {
