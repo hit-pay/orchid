@@ -112,8 +112,9 @@ const perPageOptions = computed(() => {
     },
   ];
   let opt = per_page_option;
-  if(paginationOption.value){
-    const maxLength = paginationOption.value.total < 100 ? paginationOption.value.total : 100;
+  if (paginationOption.value) {
+    const maxLength =
+      paginationOption.value.total < 100 ? paginationOption.value.total : 100;
     if (maxLength > 10) {
       opt = per_page_option.filter((p) => {
         return p.value <= maxLength;
@@ -141,19 +142,24 @@ const removeQuery = (query) => {
   queries.value = queries.value.filter((q) => q !== query);
   applyFilter();
 };
-
-const filterData = ref(
-  props.filter ?? {
-    page: 1,
-  },
-);
+const defaultFilterData = props.filter;
+if (!defaultFilterData && paginationOption) {
+  defaultFilterData.page = 1;
+} else if (!defaultFilterData && cursorOption) {
+  defaultFilterData.cursor = "";
+}
+const filterData = ref(defaultFilterData);
 
 const removeAllQueryFilter = () => {
   queries.value = [];
 
-  const defaultFilters = {
-    page: 1,
-  };
+  const defaultFilters = {};
+
+  if (filterOptions.value) {
+    defaultFilterData.page = 1;
+  } else {
+    defaultFilterData.cursor = "";
+  }
 
   if (filterOptions.value?.per_page?.key) {
     defaultFilters[filterOptions.value?.per_page?.key] = perPage.value;
@@ -175,11 +181,19 @@ const changePage = () => {
   applyFilter(null, currentPage.value);
 };
 
-const applyFilter = (filterForm = null, isChangePage = false) => {
-  if (!isChangePage) {
+const applyFilter = (
+  filterForm = null,
+  isChangePage = false,
+  changeCursor = "",
+) => {
+  if (paginationOption.value && !isChangePage) {
     currentPage.value = 1;
   }
-  filterData.value.page = currentPage.value;
+  if (paginationOption.value) {
+    filterData.value.page = currentPage.value;
+  } else {
+    filterData.value.cursor = changeCursor;
+  }
 
   if (filterOptions.value?.per_page) {
     filterData.value[filterOptions.value.per_page.key] = perPage.value;
@@ -216,6 +230,7 @@ const displayFilterData = computed(() => {
       const filterPerPageKey = filterOptions.value?.per_page?.key ?? "per_page";
       if (
         name !== "page" &&
+        name !== "cursor" &&
         name !== filterPerPageKey &&
         name !== filterTabKey &&
         name !== filterSearchKey
@@ -379,8 +394,15 @@ const displayFilterData = computed(() => {
         @update:model-value="changePage"
       />
       <div class="flex w-full gap-5">
-        <PrevNext :disabled="cursorOption.prev" />
-        <PrevNext :disabled="cursorOption.next" is-next />
+        <PrevNext
+          :disabled="!cursorOption.prev"
+          @click="applyFilter(null, false, cursorOption.prev)"
+        />
+        <PrevNext
+          :disabled="!cursorOption.next"
+          is-next
+          @click="applyFilter(null, false, cursorOption.next)"
+        />
       </div>
       <div class="hidden md:flex items-center">
         <Select

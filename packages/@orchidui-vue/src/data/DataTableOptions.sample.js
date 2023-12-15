@@ -6,8 +6,8 @@ const DataTableOptions = {
   //   last_page: 20,
   // },
   cursor: {
-    prev: '',
-    next: ''
+    prev: "prev_cursor_key",
+    next: "next_cursor_key",
   },
   filterOptions: {
     per_page: {

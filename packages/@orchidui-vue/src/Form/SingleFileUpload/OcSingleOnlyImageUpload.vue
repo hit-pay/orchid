@@ -14,8 +14,8 @@ const props = defineProps({
   },
   imageClasses: {
     type: String,
-    default: '',
-  }
+    default: "",
+  },
 });
 const emit = defineEmits(["change", "update:uploadedImage", "delete"]);
 const isDropdownOpen = ref(false);
