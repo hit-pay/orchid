@@ -22,6 +22,5 @@ export * from "./Slider/OcSlider.js";
 export * from "./SectionItem/OcSectionItem.js";
 export * from "./SelectOptions/OcSelectOptions.js";
 
-
 export * from "./SingleFileUpload/OcSingleFileUpload.js";
 export * from "./MultipleUploadFile/OcMultipleUploadFile.js";
