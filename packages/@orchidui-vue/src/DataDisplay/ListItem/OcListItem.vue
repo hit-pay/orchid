@@ -20,6 +20,10 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+  paymentMethods: {
+    type: Array,
+    default: () => [],
+  },
 });
 defineEmits(["more", "edit", "delete"]);
 

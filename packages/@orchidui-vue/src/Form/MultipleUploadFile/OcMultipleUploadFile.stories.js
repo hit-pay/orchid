@@ -104,9 +104,6 @@ export const MultipleImages = {
             @onEditFile="onEditFile"
             @onRemoveFile="onRemoveFile"
         >
-          <template #action="{item}">
-          {{item}}
-          </template>
         </MultipleUploadFile>
       </Theme>
     `,

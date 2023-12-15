@@ -24,32 +24,23 @@
     ".": {
       "import": "./dist/index.js"
     },
+    "./Chart": {
+      "import": "./dist/Chart.js"
+    },
+    "./Cropper": {
+      "import": "./dist/Cropper.js"
+    },
     "./TextEditor": {
       "import": "./dist/TextEditor.js"
     },
-    "./ComplexCalendar": {
-      "import": "./dist/ComplexCalendar.js"
-    },
-    "./ComplexDatePicker": {
-      "import": "./dist/ComplexDatePicker.js"
-    },
-    "./SingleFileUpload": {
-      "import": "./dist/SingleFileUpload.js"
-    },
-    "./MultipleUploadFile": {
-      "import": "./dist/MultipleUploadFile.js"
+    "./Calendar": {
+      "import": "./dist/Calendar.js"
     },
     "./Draggable": {
       "import": "./dist/Draggable.js"
     },
-    "./DraggableList": {
-      "import": "./dist/DraggableList.js"
-    },
     "./StoreDesign": {
       "import": "./dist/StoreDesign.js"
-    },
-    "./Chart": {
-      "import": "./dist/Chart.js"
     },
     "./dist/style.css": {
       "import": "./dist/style.css",

@@ -6,6 +6,7 @@ import { ref, watch } from "vue";
 
 const props = defineProps({
   img: String,
+  maxSize: String,
 });
 const emit = defineEmits(["changeImage", "close"]);
 const cropper = ref();
@@ -28,8 +29,6 @@ watch(
         isAwsImage.value = false;
         localImage.value = img;
       }
-
-      console.log("tess ", img, localImage.value, isAwsImage.value);
     }
   },
   { immediate: true },

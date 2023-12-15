@@ -2,7 +2,7 @@
 import { computed, onMounted, ref } from "vue";
 import { Input, Button, BaseInput, Icon, Dropdown } from "@/orchidui";
 import { useUploadFileProgress } from "@/orchidui/composables/uploadFileProgress.js";
-import ModalCropper from "./ModalCropper.vue";
+import { ModalCropper } from "@/orchidui/Cropper.js";
 import SingleOnlyImageUpload from "./OcSingleOnlyImageUpload.vue";
 
 const props = defineProps({
@@ -15,6 +15,7 @@ const props = defineProps({
   maxSize: Number,
   accept: String,
   errorMessage: String,
+  imageClasses: String,
   label: String,
   hint: String,
   /**
@@ -26,7 +27,7 @@ const props = defineProps({
     validator: (val) => ["upload", "url"].includes(val),
   },
 });
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(["update:modelValue", "onRemoveFile"]);
 
 const inputRef = ref();
 const fileLink = ref("");
@@ -47,7 +48,21 @@ const videoUrl = computed(() =>
 );
 const currentFile = computed(() => currentFiles.value?.[0]);
 onMounted(() => {
-  if (props.modelValue) currentFiles.value = [props.modelValue];
+  if (props.modelValue && props.modelValue.current) {
+    const formattedModelValue = [
+      {
+        current: props.modelValue.current,
+        file: null,
+        fileName: props.modelValue.current.caption ?? "",
+        progress: 100,
+        fileUrl: props.modelValue.current.path,
+        totalSize: props.modelValue.current.file_size ?? 0,
+        isLoaded: true,
+        extension: props.modelValue.current.extention ?? "png",
+      },
+    ];
+    currentFiles.value = formattedModelValue;
+  }
 });
 const onDrop = (ev) => {
   ev.preventDefault();
@@ -74,6 +89,12 @@ const checkFileLink = async (link) => {
     console.log("Error checking file link:", error);
   }
 };
+
+const onEditFile = () => {
+  editImg.value = currentFile.value.fileUrl;
+  isDropdownOpen.value = false;
+  isEditOpen.value = true;
+};
 </script>
 
 <template>
@@ -82,6 +103,7 @@ const checkFileLink = async (link) => {
       v-if="isImageOnly"
       :accept="accept"
       :uploaded-image="currentFile"
+      :image-classes="imageClasses"
       @update:uploaded-image="$emit('update:modelValue', $event)"
       @change="onChangeFile"
       @delete="onDeleteFile(0)"
@@ -170,11 +192,7 @@ const checkFileLink = async (link) => {
                 <div
                   v-if="!currentFile?.file.type.includes('video')"
                   class="flex p-3 cursor-pointer items-center gap-x-3"
-                  @click="
-                    editImg = currentFile?.fileUrl;
-                    isDropdownOpen = false;
-                    isEditOpen = true;
-                  "
+                  @click="onEditFile"
                 >
                   <Icon width="16" height="16" name="pencil" />
                   <span>Edit</span>
@@ -193,7 +211,7 @@ const checkFileLink = async (link) => {
             </template>
           </Dropdown>
           <ModalCropper
-            v-if="!currentFile?.file.type.includes('video')"
+            v-if="!currentFile?.file.type.includes('video') && isEditOpen"
             v-model="isEditOpen"
             :img="editImg"
             @close="

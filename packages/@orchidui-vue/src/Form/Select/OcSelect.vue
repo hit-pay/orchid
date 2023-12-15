@@ -49,8 +49,6 @@ const emit = defineEmits({
   "update:modelValue": [],
 });
 
-const localValue = ref();
-
 const query = ref("");
 const isDropdownOpened = ref(false);
 const filterOptions = (options, query) => {
@@ -82,15 +80,15 @@ const filterableOptions = computed(() =>
 );
 const selectOption = (option) => {
   const result = props.multiple
-    ? localValue.value.find((o) => o === option.value)
-      ? localValue.value.filter((o) => o !== option.value)
-      : [...localValue.value, option.value]
+    ? props.modelValue.find((o) => o === option.value)
+      ? props.modelValue.filter((o) => o !== option.value)
+      : [...props.modelValue, option.value]
     : option.value;
 
   if (!props.multiple) {
     isDropdownOpened.value = false;
   }
-  localValue.value = result;
+
   emit("update:modelValue", result);
 };
 
@@ -100,41 +98,28 @@ const localValueOption = computed(() => {
     for (const option of props.options) {
       if (option.values) {
         option.values.forEach((o) => {
-          if (localValue.value.includes(o.value)) {
+          if (props.modelValue.includes(o.value)) {
             selected.push(o);
           }
         });
       } else {
-        if (localValue.value.includes(option.value)) {
+        if (props.modelValue.includes(option.value)) {
           selected.push(option);
         }
       }
     }
     return selected;
   } else {
-    return props.options.find((o) => o.value === localValue.value);
+    return props.options.find((o) => o.value === props.modelValue);
   }
 });
 
 const removeOption = (value) => {
-  localValue.value = localValue.value.filter((o) => o !== value);
-  emit("update:modelValue", localValue.value);
+  emit(
+    "update:modelValue",
+    props.modelValue.filter((o) => o !== value),
+  );
 };
-
-const initLocalValue = () => {
-  if (
-    props.modelValue === null ||
-    props.modelValue === undefined ||
-    props.modelValue === ""
-  ) {
-    localValue.value = props.multiple ? [] : "";
-
-    return;
-  }
-
-  localValue.value = props.modelValue;
-};
-initLocalValue();
 </script>
 
 <template>
@@ -216,8 +201,10 @@ initLocalValue();
                 :label="option.label"
                 :is-selected="
                   multiple
-                    ? localValue?.find((o) => o === option.value) !== undefined
-                    : localValue === option.value
+                    ? modelValue
+                      ? modelValue.find((o) => o === option.value) !== undefined
+                      : false
+                    : modelValue === option.value
                 "
                 @click="selectOption(option)"
               />
