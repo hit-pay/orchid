@@ -121,10 +121,14 @@ const resetCalendar = () => {
         />
       </div>
       <div v-else class="flex flex-wrap">
-        <span class="flex gap-x-1 items-center">
-          {{ label }}
-          <span v-if="isRequired" class="text-oc-error">*</span>
-        </span>
+        <label
+          class="text-sm flex items-center gap-x-3 font-medium text-oc-text-400"
+        >
+          <span class="flex gap-x-1 items-center">
+            {{ label }}
+            <span v-if="isRequired" class="text-oc-error">*</span>
+          </span>
+        </label>
         <div class="flex gap-x-4">
           <Input
             :label="minLabel"
