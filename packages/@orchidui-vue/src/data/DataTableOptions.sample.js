@@ -1,14 +1,14 @@
 import { SampleFilterForm } from "./FilterForm.sample";
 
 const DataTableOptions = {
-  // pagination: {
-  //   total: 50,
-  //   last_page: 20,
-  // },
-  cursor: {
-    prev: "prev_cursor_key",
-    next: "next_cursor_key",
+  pagination: {
+    total: 50,
+    last_page: 20,
   },
+  // cursor: {
+  //   prev: "prev_cursor_key",
+  //   next: "next_cursor_key",
+  // },
   filterOptions: {
     per_page: {
       key: "per_page",
@@ -204,7 +204,7 @@ const DataTableOptions = {
 };
 
 const Filter = {
-  // page: 1,
+  page: 1,
   per_page: 10,
   tabs: "",
 };

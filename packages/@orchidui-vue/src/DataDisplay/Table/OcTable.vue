@@ -111,7 +111,7 @@ onMounted(() => onScroll());
     </div>
     <div
       class="flex md:border-b-0 border-b border-oc-gray-200"
-      :class="isSticky ? 'w-max' : 'flex-wrap'"
+      :class="isSticky ? 'w-max' : 'flex-wrap md:flex-nowrap'"
     >
       <TableHeader
         v-if="isSelectable"
@@ -158,7 +158,7 @@ onMounted(() => onScroll());
       <div
         v-for="i in loadingRows"
         :key="i"
-        class="flex flex-wrap relative group/row border-oc-gray-200 md:p-0 py-3"
+        class="flex flex-wrap md:flex-nowrap relative group/row border-oc-gray-200 md:p-0 py-3"
         :class="{
           'pl-[40px]': isSelectable,
         }"
@@ -185,7 +185,7 @@ onMounted(() => onScroll());
         :class="{
           'border-b md:border-b-0': fields.length !== i + 1,
           'pl-[40px]': isSelectable,
-          'flex-wrap': !isSticky,
+          'flex-wrap md:flex-nowrap': !isSticky,
           'w-max !p-0': isSticky,
           'cursor-pointer': isCursorPointer,
         }"

@@ -4,7 +4,7 @@
 
 <script setup lang="ts">
 import * as echarts from "echarts";
-import { computed, onMounted, ref, watch } from "vue";
+import { computed, onMounted, ref, watch, onUnmounted } from "vue";
 
 const props = defineProps({
   color: String,
@@ -13,6 +13,8 @@ const props = defineProps({
   showGrid: Boolean,
   chartData: Array,
   labelData: Array,
+  yAxisFormatter: Function,
+  tooltipFormatter: Function,
 });
 
 const options = computed(() => ({
@@ -36,6 +38,7 @@ const options = computed(() => ({
     axisLabel: {
       color: "#03102F",
       fontWeight: 500,
+      formatter: props.yAxisFormatter,
     },
   },
   grid: {
@@ -54,10 +57,9 @@ const options = computed(() => ({
     padding: 0,
     borderWidth: 0,
     formatter: (params) => {
-      const currency = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "SGD",
-      });
+      if (props.tooltipFormatter) {
+        return props.tooltipFormatter(params);
+      }
 
       return `
         <div class="py-3 px-4 leading-normal">
@@ -139,6 +141,11 @@ defineExpose({
 onMounted(() => {
   myChart.value = echarts.init(barChart.value);
   myChart.value.setOption(options.value);
+});
+onUnmounted(() => {
+  if (myChart.value) {
+    myChart.value.dispose();
+  }
 });
 watch(
   () => options.value,

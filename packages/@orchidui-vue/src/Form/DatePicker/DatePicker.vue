@@ -54,6 +54,7 @@ const props = defineProps({
     type: String,
     default: "To",
   },
+  isRequired: Boolean,
 });
 
 let defaultValue = props.modelValue;
@@ -120,6 +121,10 @@ const resetCalendar = () => {
         />
       </div>
       <div v-else class="flex gap-x-4">
+        <span class="flex gap-x-1 items-center">
+          {{ label }}
+          <span v-if="isRequired" class="text-oc-error">*</span>
+        </span>
         <Input
           :label="minLabel"
           :model-value="formattedDate[0]"

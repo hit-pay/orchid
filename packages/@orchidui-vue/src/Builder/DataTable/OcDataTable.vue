@@ -287,6 +287,8 @@ const displayFilterData = computed(() => {
       :options="tableOptions"
       :is-loading="isLoading"
       :loading-rows="perPage"
+      :is-sticky="tableOptions.isSticky"
+      class="min-h-[70vh]"
       @update:selected="$emit('update:selected', $event)"
       @click:row="$emit('click:row', $event)"
     >
@@ -294,10 +296,13 @@ const displayFilterData = computed(() => {
         <slot name="before" />
         <div class="flex items-center px-4 min-h-[52px]">
           <template v-if="filterOptions">
-            <div v-if="showBulkAction" class="flex gap-5 items-center">
+            <div
+              v-if="showBulkAction"
+              class="flex gap-5 items-center absolute left-5"
+            >
               <slot name="bulk-actions" :selected-rows="selected" />
             </div>
-            <div v-else class="flex gap-3">
+            <div v-else class="flex gap-3 absolute left-5">
               <Tabs
                 v-if="filterOptions?.tabs"
                 v-model="filterTab"
@@ -308,7 +313,7 @@ const displayFilterData = computed(() => {
             </div>
           </template>
           <div
-            class="flex gap-3 absolute md:relative ml-auto bg-oc-bg-light right-4"
+            class="flex gap-3 absolute ml-auto bg-oc-bg-light right-5"
             :class="
               !filterOptions
                 ? 'w-full justify-end'
@@ -393,7 +398,7 @@ const displayFilterData = computed(() => {
         total-visible="5"
         @update:model-value="changePage"
       />
-      <div class="flex w-full gap-5">
+      <div v-if="cursorOption" class="flex w-full gap-5">
         <PrevNext
           :disabled="!cursorOption.prev"
           @click="applyFilter(null, false, cursorOption.prev)"

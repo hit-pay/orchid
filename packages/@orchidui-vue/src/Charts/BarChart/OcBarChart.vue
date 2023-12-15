@@ -4,8 +4,7 @@
 
 <script setup lang="ts">
 import * as echarts from "echarts";
-import { computed, onMounted, ref, watch } from "vue";
-import { Tooltip } from "@/orchidui";
+import { computed, onMounted, onUnmounted, ref, watch } from "vue";
 
 const props = defineProps({
   color: String,
@@ -14,11 +13,12 @@ const props = defineProps({
   showGrid: Boolean,
   chartData: Array,
   labelData: Array,
+  yAxisFormatter: Function,
+  xAxisFormatter: Function,
+  tooltipFormatter: Function,
+  tooltipCurrency: String,
 });
-const markLineData = ref({
-  index: 0,
-  value: 0,
-});
+
 const options = computed(() => ({
   xAxis: {
     type: "category",
@@ -28,6 +28,7 @@ const options = computed(() => ({
     },
     axisLabel: {
       color: "#9295A5",
+      formatter: props.xAxisFormatter,
     },
     axisLine: {
       lineStyle: {
@@ -42,9 +43,7 @@ const options = computed(() => ({
     },
     axisLabel: {
       color: "#9295A5",
-      formatter: (value) => {
-        return (value / 1000).toFixed(1) + "K";
-      },
+      formatter: props.yAxisFormatter,
     },
   },
   grid: {
@@ -63,10 +62,20 @@ const options = computed(() => ({
     padding: 0,
     borderWidth: 0,
     formatter: (params) => {
-      const currency = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "SGD",
-      });
+      if (props.tooltipFormatter) {
+        return props.tooltipFormatter(params);
+      }
+
+      let value = params.value;
+
+      if (props.tooltipCurrency) {
+        const currency = new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: props.tooltipCurrency,
+        });
+
+        value = currency.format(params.value);
+      }
 
       return `
         <div class="py-3 px-4 leading-normal">
@@ -75,9 +84,7 @@ const options = computed(() => ({
                     ${params.name}
                 </span>
             </div>
-            <div class="text-oc-text font-medium text-[12px]">${currency.format(
-              params.value,
-            )}</div>
+            <div class="text-oc-text font-medium text-[12px]">${value}</div>
         </div>
 
       `;
@@ -119,6 +126,11 @@ defineExpose({
 onMounted(() => {
   myChart.value = echarts.init(barChart.value);
   myChart.value.setOption(options.value);
+});
+onUnmounted(() => {
+  if (myChart.value) {
+    myChart.value.dispose();
+  }
 });
 watch(
   () => options.value,
