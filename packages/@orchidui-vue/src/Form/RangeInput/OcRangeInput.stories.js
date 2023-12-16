@@ -15,6 +15,7 @@ export const Default = {
     label: "",
     hint: "",
     errorMessage: "",
+    onlyInput: true,
   },
   render: (args) => ({
     components: { Theme, RangeInput },
@@ -32,6 +33,7 @@ export const Default = {
                 :minGap="args.minGap"
                 :label="args.label"
                 :hint="args.hint"
+                :onlyInput="args.onlyInput"
                 :errorMessage="args.errorMessage"
             />
           </Theme>
