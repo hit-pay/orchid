@@ -57,12 +57,7 @@ const props = defineProps({
   isRequired: Boolean,
 });
 
-let defaultValue = props.modelValue;
-if (props.type === "range" && props.from && props.to) {
-  defaultValue = [props.from, props.to];
-}
-
-const date = ref(defaultValue ?? "");
+const date = ref(props.modelValue ?? "");
 const isDropdownOpened = ref(false);
 
 const formattedDate = computed(() => {
@@ -79,7 +74,9 @@ const formattedDate = computed(() => {
   }
 });
 
-const updateCalendar = () => {
+const updateCalendar = ($value) => {
+  date.value = $value;
+  console.log("$value", $value);
   if (props.type === "range") {
     emit("update:modelValue", [formattedDate.value[0], formattedDate.value[1]]);
   } else {
@@ -158,7 +155,7 @@ const resetCalendar = () => {
     <template #menu>
       <Calendar
         v-if="!disabled"
-        v-model="date"
+        :model-value="date"
         :disabled-date="disabledDate"
         :max-date="maxDate"
         :min-date="minDate"

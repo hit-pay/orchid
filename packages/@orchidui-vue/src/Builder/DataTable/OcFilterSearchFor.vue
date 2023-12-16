@@ -21,6 +21,8 @@ const filterData = computed(() => {
       } else {
         exist.label = exist.label + filter.label;
       }
+    } else {
+      filterData.push(filter);
     }
   });
   return filterData;

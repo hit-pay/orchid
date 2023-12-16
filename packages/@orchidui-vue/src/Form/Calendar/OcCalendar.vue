@@ -32,11 +32,14 @@ const props = defineProps({
     type: Function,
     default: () => false,
   },
+  dateFormat: {
+    type: String,
+    default: "DD/MM/YYYY",
+  },
 });
 const emit = defineEmits(["update:modelValue", "resetCalendar"]);
 
 const selectedDate = ref(null);
-
 if (props.type === "default") {
   selectedDate.value = props.modelValue
     ? new Date(dayjs([props.modelValue]).format(props.dateFormat))
@@ -53,38 +56,38 @@ const getSelectedEndDate = () => {
   if (
     dayjs(props.maxDate).format("Y-M-D") === dayjs(new Date()).format("Y-M-D")
   ) {
-    selectedStartDate.value = new Date(
-      new Date(selectedStartDate.value).setDate(
-        selectedStartDate.value.getDate() - 3
-      )
-    );
+    if (!props.modelValue?.[1] && props.type === "range") {
+      selectedStartDate.value = new Date(
+        new Date(selectedDate.value).setDate(selectedDate.value.getDate() - 3),
+      );
+    }
     return new Date(
-      new Date(selectedDate.value).setDate(selectedDate.value.getDate() - 1)
+      new Date(selectedDate.value).setDate(selectedDate.value.getDate() - 1),
     );
   }
   return new Date(
     new Date(selectedStartDate.value).setDate(
-      selectedStartDate.value.getDate() + 2
-    )
+      selectedStartDate.value.getDate() + 2,
+    ),
   );
 };
 const selectedEndDate = ref(
   props.type === "range" && props.modelValue?.[1]
     ? new Date(dayjs(props.modelValue?.[1]).format(props.dateFormat))
-    : getSelectedEndDate()
+    : getSelectedEndDate(),
 );
 
 const selectedStartDay = ref(
   selectedStartDate.value?.getMonth() === selectedDate.value?.getMonth()
     ? selectedStartDate.value?.getDate()
-    : null
+    : null,
 );
 const selectedEndDay = ref(
   props.type === "range"
     ? selectedEndDate.value?.getMonth() === selectedDate.value?.getMonth()
       ? selectedEndDate.value?.getDate()
       : null
-    : null
+    : null,
 );
 
 const daysInMonth = computed(() => {
@@ -94,7 +97,7 @@ const daysInMonth = computed(() => {
   const lastDay = new Date(
     date?.getFullYear(),
     date?.getMonth() + 1,
-    0
+    0,
   ).getDate();
 
   return Array.from({ length: lastDay }, (_, i) => i + 1);
@@ -122,10 +125,10 @@ const selectDay = (day) => {
   if (
     props.type !== "range" ||
     Math.abs(
-      currentMonth.getTime() - new Date(selectedEndDate.value).getTime()
+      currentMonth.getTime() - new Date(selectedEndDate.value).getTime(),
     ) >
       Math.abs(
-        currentMonth.getTime() - new Date(selectedStartDate.value).getTime()
+        currentMonth.getTime() - new Date(selectedStartDate.value).getTime(),
       )
   ) {
     selectedStartDay.value = day;
@@ -163,7 +166,7 @@ const prevMonth = () => {
     selectedDate.value = new Date(
       selectedDate.value?.getFullYear(),
       selectedDate.value?.getMonth() - 1,
-      1
+      1,
     );
 
     selectedStartDay.value =
@@ -179,7 +182,7 @@ const prevMonth = () => {
       selectedStartDate.value = new Date(
         selectedStartDate.value?.getFullYear(),
         selectedStartDate.value?.getMonth() - 1,
-        1
+        1,
       );
       selectedStartDay.value = null;
     }
@@ -191,7 +194,7 @@ const nextMonth = () => {
     selectedDate.value = new Date(
       selectedDate.value?.getFullYear(),
       selectedDate.value?.getMonth() + 1,
-      1
+      1,
     );
     selectedStartDay.value =
       selectedDate.value?.getMonth() === selectedStartDate.value?.getMonth()
@@ -206,7 +209,7 @@ const nextMonth = () => {
       selectedStartDate.value = new Date(
         selectedStartDate.value?.getFullYear(),
         selectedStartDate.value?.getMonth() + 1,
-        1
+        1,
       );
       selectedStartDay.value = null;
     }
@@ -254,12 +257,15 @@ const isDayDisabled = (day) => {
   }
 };
 const doneSelecting = () => {
-  emit(
-    "update:modelValue",
+  const dateFormated =
     props.type === "range"
-      ? [selectedStartDate.value, selectedEndDate.value]
-      : new Date(selectedStartDate.value)
-  );
+      ? [
+          dayjs(selectedStartDate.value).format(props.dateFormat),
+          dayjs(selectedEndDate.value).format(props.dateFormat),
+        ]
+      : dayjs(selectedStartDate.value).format(props.dateFormat);
+  console.log("dateFormated", dateFormated);
+  emit("update:modelValue", dateFormated);
 };
 </script>
 
