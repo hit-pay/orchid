@@ -27,7 +27,7 @@ const props = defineProps({
   },
   dateFormat: {
     type: String,
-    default: "DD/MM/YYYY",
+    default: "YYYY-MM-DD",
   },
   disabled: {
     type: Boolean,
@@ -57,41 +57,38 @@ const props = defineProps({
   isRequired: Boolean,
 });
 
-const date = ref(props.modelValue ?? "");
 const isDropdownOpened = ref(false);
 
 const formattedDate = computed(() => {
   if (props.type === "default") {
-    return date.value ? dayjs(date.value).format(props.dateFormat) : "";
+    return props.modelValue
+      ? dayjs(props.modelValue, props.dateFormat).format("DD/MM/YYYY")
+      : "";
   } else {
-    const dateFrom = date.value?.[0]
-      ? dayjs(date.value[0]).format(props.dateFormat)
-      : "";
-    const dateTo = date.value?.[1]
-      ? dayjs(date.value[1]).format(props.dateFormat)
-      : "";
-    return [dateFrom, dateTo];
+    if (props.modelValue && props.modelValue[0]) {
+      return [
+        dayjs(props.modelValue[0], props.dateFormat).format("DD/MM/YYYY"),
+        dayjs(props.modelValue[1], props.dateFormat).format("DD/MM/YYYY"),
+      ];
+    } else {
+      return ["", ""];
+    }
   }
 });
 
-const updateCalendar = ($value) => {
-  date.value = $value;
-  console.log("$value", $value);
+const updateCalendar = (newValue) => {
   if (props.type === "range") {
-    emit("update:modelValue", [formattedDate.value[0], formattedDate.value[1]]);
+    emit("update:modelValue", [
+      dayjs(newValue[0]).format(props.dateFormat),
+      dayjs(newValue[1]).format(props.dateFormat),
+    ]);
   } else {
-    emit("update:modelValue", formattedDate.value);
+    emit("update:modelValue", dayjs(newValue).format(props.dateFormat));
   }
   isDropdownOpened.value = false;
 };
 
 const resetCalendar = () => {
-  if (props.type === "range") {
-    date.value[0] = "";
-    date.value[1] = "";
-  } else {
-    date.value = "";
-  }
   emit("resetCalendar");
   isDropdownOpened.value = false;
 };
@@ -155,13 +152,23 @@ const resetCalendar = () => {
     <template #menu>
       <Calendar
         v-if="!disabled"
-        :model-value="date"
+        :model-value="
+          type === 'range'
+            ? modelValue && modelValue[0]
+              ? [
+                  dayjs(modelValue[0], dateFormat).toDate(),
+                  dayjs(modelValue[1], dateFormat).toDate(),
+                ]
+              : [dayjs().toDate(), dayjs().add(2, 'day').toDate()]
+            : modelValue
+              ? dayjs(modelValue, dateFormat).toDate()
+              : new Date()
+        "
         :disabled-date="disabledDate"
         :max-date="maxDate"
         :min-date="minDate"
         position="inline"
         :type="type"
-        :date-format="dateFormat"
         @update:model-value="updateCalendar"
         @reset-calendar="resetCalendar"
       />

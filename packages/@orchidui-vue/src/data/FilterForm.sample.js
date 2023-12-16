@@ -50,6 +50,7 @@ const SampleFilterForm = [
       hint: "This is a hint text to help user",
       placeholder: "placeholder",
       maxDate: new Date(),
+      dateFormat: "YYYY-MM-DD",
     },
   },
   {

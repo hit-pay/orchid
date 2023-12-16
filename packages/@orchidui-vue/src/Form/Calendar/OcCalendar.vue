@@ -1,8 +1,6 @@
 <script setup>
 import { Button, Icon } from "@/orchidui";
 import { computed, ref } from "vue";
-import dayjs from "dayjs";
-
 const props = defineProps({
   type: {
     type: String,
@@ -32,60 +30,37 @@ const props = defineProps({
     type: Function,
     default: () => false,
   },
-  dateFormat: {
-    type: String,
-    default: "DD/MM/YYYY",
-  },
 });
 const emit = defineEmits(["update:modelValue", "resetCalendar"]);
 
-const selectedDate = ref(null);
-if (props.type === "default") {
-  selectedDate.value = props.modelValue
-    ? new Date(dayjs([props.modelValue]).format(props.dateFormat))
-    : new Date();
-} else {
-  selectedDate.value = props.modelValue?.[0]
-    ? new Date(dayjs(props.modelValue?.[0]).format(props.dateFormat))
-    : new Date();
-}
+const selectedDate = ref(
+  props.type === "range"
+    ? props.modelValue[0] || new Date()
+    : props.modelValue || new Date(),
+);
 
 const selectedStartDate = ref(selectedDate.value);
 
-const getSelectedEndDate = () => {
-  if (
-    dayjs(props.maxDate).format("Y-M-D") === dayjs(new Date()).format("Y-M-D")
-  ) {
-    if (!props.modelValue?.[1] && props.type === "range") {
-      selectedStartDate.value = new Date(
-        new Date(selectedDate.value).setDate(selectedDate.value.getDate() - 3),
-      );
-    }
-    return new Date(
-      new Date(selectedDate.value).setDate(selectedDate.value.getDate() - 1),
-    );
-  }
-  return new Date(
-    new Date(selectedStartDate.value).setDate(
-      selectedStartDate.value.getDate() + 2,
-    ),
-  );
-};
 const selectedEndDate = ref(
-  props.type === "range" && props.modelValue?.[1]
-    ? new Date(dayjs(props.modelValue?.[1]).format(props.dateFormat))
-    : getSelectedEndDate(),
+  props.type === "range"
+    ? props.modelValue[1] ||
+        new Date(
+          new Date(selectedStartDate.value).setDate(
+            selectedStartDate.value.getDate() + 2,
+          ),
+        )
+    : null,
 );
 
 const selectedStartDay = ref(
-  selectedStartDate.value?.getMonth() === selectedDate.value?.getMonth()
-    ? selectedStartDate.value?.getDate()
+  selectedStartDate.value.getMonth() === selectedDate.value?.getMonth()
+    ? selectedStartDate.value.getDate()
     : null,
 );
 const selectedEndDay = ref(
   props.type === "range"
-    ? selectedEndDate.value?.getMonth() === selectedDate.value?.getMonth()
-      ? selectedEndDate.value?.getDate()
+    ? selectedEndDate.value.getMonth() === selectedDate.value?.getMonth()
+      ? selectedEndDate.value.getDate()
       : null
     : null,
 );
@@ -105,7 +80,7 @@ const daysInMonth = computed(() => {
 
 const selectedMonth = computed(() => {
   if (props.type === "range") {
-    return selectedDate.value?.toLocaleDateString("en-US", {
+    return selectedDate.value.toLocaleDateString("en-US", {
       month: "long",
       year: "numeric",
     });
@@ -141,9 +116,9 @@ const selectDay = (day) => {
 
 const clearDate = () => {
   if (props.type === "range") {
-    selectedStartDate.value = props.modelValue?.[0] || new Date();
+    selectedStartDate.value = props.modelValue[0] || new Date();
     selectedEndDate.value =
-      props.modelValue?.[1] ||
+      props.modelValue[1] ||
       new Date(new Date().setDate(new Date().getDate() + 2));
   } else {
     selectedStartDate.value = props.modelValue || new Date();
@@ -257,15 +232,15 @@ const isDayDisabled = (day) => {
   }
 };
 const doneSelecting = () => {
-  const dateFormated =
+  emit(
+    "update:modelValue",
     props.type === "range"
       ? [
-          dayjs(selectedStartDate.value).format(props.dateFormat),
-          dayjs(selectedEndDate.value).format(props.dateFormat),
+          new Date(selectedStartDate.value).toString(),
+          new Date(selectedEndDate.value).toString(),
         ]
-      : dayjs(selectedStartDate.value).format(props.dateFormat);
-  console.log("dateFormated", dateFormated);
-  emit("update:modelValue", dateFormated);
+      : new Date(selectedStartDate.value).toString(),
+  );
 };
 </script>
 
