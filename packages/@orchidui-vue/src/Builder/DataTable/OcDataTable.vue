@@ -220,6 +220,14 @@ const removeFilter = (filter, field) => {
   emit("filter-removed", field);
 };
 
+const getFilterNames = (filterNames) => {
+  let names = [];
+  filterNames.forEach((name) => {
+    names.push(name.key);
+  });
+  return names;
+};
+
 const displayFilterData = computed(() => {
   if (filterData.value) {
     let display = [];
@@ -235,12 +243,14 @@ const displayFilterData = computed(() => {
         name !== filterTabKey &&
         name !== filterSearchKey
       ) {
+        let isMultiNames = null;
         let option = filterOptions.value.form?.find((f) => {
           if (typeof f.name === "object") {
             let isSelectedOption = false;
             f.name.forEach((formName) => {
               if (formName.key === name) {
                 isSelectedOption = true;
+                isMultiNames = getFilterNames(f.name);
               }
             });
             return isSelectedOption;
@@ -266,9 +276,18 @@ const displayFilterData = computed(() => {
               .join(", ");
           }
 
+          let label = `${option?.props.label} : ${optionLabel}`;
+          if (typeof option.name === "object") {
+            const exist = display.find((f) => f.name === isMultiNames[0]);
+            if (exist) {
+              label = ` - ${optionLabel}`;
+            }
+          }
+
           display.push({
-            label: `${option?.props.label} : ${optionLabel}`,
+            label: label,
             name: name,
+            multiNames: isMultiNames,
           });
         }
       }

@@ -12,13 +12,32 @@ const emit = defineEmits({
 });
 
 const filterData = computed(() => {
-  return props.filters;
+  let filterData = [];
+  props.filters.forEach((filter) => {
+    if (filter.multiNames) {
+      const exist = filterData.find((f) => f.name === filter.multiNames[0]);
+      if (!exist) {
+        filterData.push(filter);
+      } else {
+        exist.label = exist.label + filter.label;
+      }
+    }
+  });
+  return filterData;
 });
 
-const removeFilter = (name) => {
+const removeFilter = (name, multiNames) => {
   let filter = {};
   filter[name] = "";
-  emit("removeFilter", filter, name);
+  if (multiNames) {
+    multiNames.forEach((filterName) => {
+      let multifilter = {};
+      multifilter[filterName] = "";
+      emit("removeFilter", multifilter, filterName);
+    });
+  } else {
+    emit("removeFilter", filter, name);
+  }
 };
 </script>
 
@@ -43,7 +62,7 @@ const removeFilter = (name) => {
         variant="accent-1"
         closable
         :label="item.label"
-        @remove="removeFilter(item.name)"
+        @remove="removeFilter(item.name, item.multiNames)"
       />
       <Chip
         variant="gray"

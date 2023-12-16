@@ -25,7 +25,14 @@ const SampleFilterForm = [
     },
   },
   {
-    name: "date_picker_range",
+    name: [
+      {
+        key: "date_range_from",
+      },
+      {
+        key: "date_range_to",
+      },
+    ],
     type: "DatePicker",
     props: {
       type: "range",
@@ -79,7 +86,14 @@ const SampleFilterForm = [
     },
   },
   {
-    name: "range_input",
+    name: [
+      {
+        key: "total_range_from",
+      },
+      {
+        key: "total_range_to",
+      },
+    ],
     type: "RangeInput",
     props: {
       label: "RangeInput",
