@@ -92,6 +92,16 @@ const resetCalendar = () => {
   emit("resetCalendar");
   isDropdownOpened.value = false;
 };
+
+const defaultDateRange = () => {
+  if (props.maxDate === dayjs().format(props.dateFormat)) {
+    return [
+      dayjs().subtract(3, "day").toDate(),
+      dayjs().subtract(1, "day").toDate(),
+    ];
+  }
+  return [dayjs().toDate(), dayjs().add(2, "day").toDate()];
+};
 </script>
 
 <template>
@@ -159,13 +169,13 @@ const resetCalendar = () => {
                   dayjs(modelValue[0], dateFormat).toDate(),
                   dayjs(modelValue[1], dateFormat).toDate(),
                 ]
-              : [dayjs().toDate(), dayjs().add(2, 'day').toDate()]
+              : defaultDateRange()
             : modelValue
               ? dayjs(modelValue, dateFormat).toDate()
               : new Date()
         "
         :disabled-date="disabledDate"
-        :max-date="maxDate"
+        :max-date="dayjs(maxDate, dateFormat).toDate()"
         :min-date="minDate"
         position="inline"
         :type="type"

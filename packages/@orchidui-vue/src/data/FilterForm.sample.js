@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 const SampleFilterForm = [
   {
     name: "checkboxes_group",
@@ -39,7 +40,7 @@ const SampleFilterForm = [
       label: "DatePicker Range",
       hint: "This is a hint text to help user",
       placeholder: "placeholder",
-      maxDate: new Date(),
+      maxDate: dayjs().format("YYYY-MM-DD"),
     },
   },
   {
@@ -49,7 +50,6 @@ const SampleFilterForm = [
       label: "DatePicker",
       hint: "This is a hint text to help user",
       placeholder: "placeholder",
-      maxDate: new Date(),
       dateFormat: "YYYY-MM-DD",
     },
   },
