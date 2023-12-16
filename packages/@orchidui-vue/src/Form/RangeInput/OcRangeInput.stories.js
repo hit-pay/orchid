@@ -20,12 +20,13 @@ export const Default = {
   render: (args) => ({
     components: { Theme, RangeInput },
     setup() {
-      const modelValue = ref([0, 50]);
+      const modelValue = ref('');
 
       return { args, modelValue };
     },
     template: `
           <Theme>
+           {{ modelValue}}
             <RangeInput
                 v-model="modelValue"
                 :max-limit="args.maxLimit"

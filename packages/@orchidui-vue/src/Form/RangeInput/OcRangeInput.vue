@@ -5,7 +5,7 @@ import { ref, onMounted } from "vue";
 const props = defineProps({
   maxLimit: {
     type: [String, Number],
-    default: 1000,
+    default: 10000,
   },
   minLimit: {
     type: [String, Number],
