@@ -51,10 +51,7 @@ const updateRange = (value, index) => {
     if (!props.onlyInput) {
       slider.value.updateSlider([localMinValue.value, localMaxValue.value]);
     } else {
-      emit("update:modelValue", [
-        Number(localMinValue.value),
-        Number(localMaxValue.value),
-      ]);
+      emit("update:modelValue", [localMinValue.value, localMaxValue.value]);
     }
   }
 };
