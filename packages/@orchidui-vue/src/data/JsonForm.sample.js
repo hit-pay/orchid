@@ -254,7 +254,6 @@ const SampleJsonForm = [
   },
   {
     name: "date_picker_test",
-    key: "date_picker_test",
     type: "DatePicker",
     props: {
       label: "Example Label",
@@ -273,7 +272,6 @@ const SampleJsonForm = [
         rule: "required",
       },
     ],
-    key: "date_picker_range_from",
     type: "DatePicker",
     props: {
       type: "range",

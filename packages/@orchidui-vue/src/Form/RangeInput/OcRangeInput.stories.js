@@ -15,16 +15,18 @@ export const Default = {
     label: "",
     hint: "",
     errorMessage: "",
+    onlyInput: true,
   },
   render: (args) => ({
     components: { Theme, RangeInput },
     setup() {
-      const modelValue = ref([0, 50]);
+      const modelValue = ref('');
 
       return { args, modelValue };
     },
     template: `
           <Theme>
+           {{ modelValue}}
             <RangeInput
                 v-model="modelValue"
                 :max-limit="args.maxLimit"
@@ -32,6 +34,7 @@ export const Default = {
                 :minGap="args.minGap"
                 :label="args.label"
                 :hint="args.hint"
+                :onlyInput="args.onlyInput"
                 :errorMessage="args.errorMessage"
             />
           </Theme>

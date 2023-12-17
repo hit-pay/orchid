@@ -16,6 +16,7 @@ defineProps({
     type: String,
     default: "delete",
   },
+  icon: String,
 });
 defineEmits(["confirm", "cancel"]);
 const cancelButton = computed(() => ({
@@ -57,7 +58,7 @@ const confirmButton = computed(() => ({
     @confirm="$emit('confirm')"
     @cancel="$emit('cancel')"
   >
-    <Confirmation :variant="variant" :description="description">
+    <Confirmation :variant="variant" :description="description" :icon="icon">
       <template v-if="$slots.description" #description>
         <slot name="description" />
       </template>

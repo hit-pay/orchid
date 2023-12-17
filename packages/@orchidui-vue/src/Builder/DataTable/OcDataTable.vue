@@ -12,7 +12,7 @@ import {
   Dropdown,
 } from "@/orchidui";
 import { ref, computed } from "vue";
-
+import dayjs from "dayjs";
 const props = defineProps({
   isLoading: Boolean,
   id: {
@@ -69,7 +69,7 @@ const currentPage = ref(props.filter.page);
 const perPage = ref(
   filterOptions.value?.per_page?.key
     ? props.filter[filterOptions.value?.per_page?.key]
-    : props.filter.per_page,
+    : props.filter.per_page
 );
 const defaultQuery =
   props.filter[filterOptions.value?.search?.key]?.trim() ?? "";
@@ -184,7 +184,7 @@ const changePage = () => {
 const applyFilter = (
   filterForm = null,
   isChangePage = false,
-  changeCursor = "",
+  changeCursor = ""
 ) => {
   if (paginationOption.value && !isChangePage) {
     currentPage.value = 1;
@@ -220,6 +220,14 @@ const removeFilter = (filter, field) => {
   emit("filter-removed", field);
 };
 
+const getFilterNames = (filterNames) => {
+  let names = [];
+  filterNames.forEach((name) => {
+    names.push(name.key);
+  });
+  return names;
+};
+
 const displayFilterData = computed(() => {
   if (filterData.value) {
     let display = [];
@@ -235,12 +243,14 @@ const displayFilterData = computed(() => {
         name !== filterTabKey &&
         name !== filterSearchKey
       ) {
+        let isMultiNames = null;
         let option = filterOptions.value.form?.find((f) => {
           if (typeof f.name === "object") {
             let isSelectedOption = false;
             f.name.forEach((formName) => {
               if (formName.key === name) {
                 isSelectedOption = true;
+                isMultiNames = getFilterNames(f.name);
               }
             });
             return isSelectedOption;
@@ -260,15 +270,28 @@ const displayFilterData = computed(() => {
               .map(
                 (selectedValue) =>
                   option.props.options.find(
-                    ({ value }) => value === selectedValue,
-                  ).label,
+                    ({ value }) => value === selectedValue
+                  ).label
               )
               .join(", ");
           }
 
+          if (option.type === "DatePicker") {
+            optionLabel = dayjs(optionLabel).format("MMM DD, YYYY");
+          }
+
+          let label = `${option?.props.label} : ${optionLabel}`;
+          if (typeof option.name === "object") {
+            const exist = display.find((f) => f.name === isMultiNames[0]);
+            if (exist) {
+              label = ` - ${optionLabel}`;
+            }
+          }
+
           display.push({
-            label: `${option?.props.label} : ${optionLabel}`,
+            label: label,
             name: name,
+            multiNames: isMultiNames,
           });
         }
       }
@@ -288,7 +311,7 @@ const displayFilterData = computed(() => {
       :is-loading="isLoading"
       :loading-rows="perPage"
       :is-sticky="tableOptions.isSticky"
-      class="min-h-[70vh]"
+      class="min-h-[600px]"
       @update:selected="$emit('update:selected', $event)"
       @click:row="$emit('click:row', $event)"
     >
