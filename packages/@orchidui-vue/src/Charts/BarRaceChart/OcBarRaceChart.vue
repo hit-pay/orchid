@@ -8,7 +8,7 @@
         {{ item }}
       </div>
     </div>
-    <div ref="barChart" class="w-full h-[100%]" />
+    <div ref="barChart" class="h-[100%]" />
   </div>
 </template>
 

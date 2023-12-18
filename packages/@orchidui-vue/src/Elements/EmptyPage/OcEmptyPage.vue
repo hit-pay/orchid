@@ -43,11 +43,11 @@ const sizes = computed(() => ({
   default: {
     icon: {
       container: "w-[64px]",
-      size: 32,
+      size: "32",
     },
     badge: {
       class: "right-0 top-[2px]",
-      size: 20,
+      size: "20",
     },
     containerInfo: "gap-y-3",
     box: "gap-y-7",
@@ -57,11 +57,11 @@ const sizes = computed(() => ({
   large: {
     icon: {
       container: "w-[128px]",
-      size: 64,
+      size: "64",
     },
     badge: {
       class: "right-0 top-[2px]",
-      size: 32,
+      size: "32",
     },
     containerInfo: "gap-y-3",
     box: "gap-y-7",
@@ -71,11 +71,11 @@ const sizes = computed(() => ({
   small: {
     icon: {
       container: "w-[48px]",
-      size: 24,
+      size: "24",
     },
     badge: {
       class: "right-[-2px] top-[-2px]",
-      size: 20,
+      size: "20",
     },
     containerInfo: "gap-y-1",
     box: "gap-y-5",
