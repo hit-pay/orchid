@@ -1,5 +1,12 @@
 <template>
-  <div ref="barChart" class="w-full" />
+  <div class="grid grid-cols-2">
+    <div class="pt-5 pb-8 flex flex-col justify-around h-[100%]">
+      <div v-for="item in legendData" class="text-[14px]">
+        {{ item }}
+      </div>
+    </div>
+    <div ref="barChart" class="w-full h-[100%]" />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -13,6 +20,7 @@ const props = defineProps({
   showGrid: Boolean,
   chartData: Array,
   labelData: Array,
+  legendData: Array,
   yAxisFormatter: Function,
   tooltipFormatter: Function,
 });
