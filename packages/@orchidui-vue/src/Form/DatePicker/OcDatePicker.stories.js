@@ -1,7 +1,7 @@
 import { Theme, DatePicker, Calendar } from "@/orchidui";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-
+import { ref } from 'vue'
 dayjs.extend(customParseFormat);
 
 export default {
@@ -19,7 +19,7 @@ export const Default = {
   },
   args: {
     type: "range",
-    dateFormat: "DD/MM/YYYY",
+    dateFormat: "",
     errorMessage: "",
     hint: "",
     minLabel: "From",
@@ -32,13 +32,16 @@ export const Default = {
       const checkDisableDate = (value) => {
         return dayjs().add(7, "day").isBefore(new Date(value));
       };
+      const model = ref('')
 
-      return { args, checkDisableDate };
+      return { args, checkDisableDate, model };
     },
     template: `
           <Theme>
             <div class="w-full h-[400px]">
+            {{model}}
               <DatePicker
+                  v-model="model"
                   :key="args.type"
                   :type="args.type"
                   :date-format="args.dateFormat"
