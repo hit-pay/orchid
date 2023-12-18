@@ -18,12 +18,14 @@ const props = defineProps({
   isInlineLabel: Boolean,
   isFilterable: Boolean,
   isDisabled: Boolean,
+  isCheckboxes: Boolean,
+  isSelectAll: Boolean,
   isAddNew: Boolean,
   options: Array,
   modelValue: [Array, String, Number],
   maxVisibleOptions: {
     type: Number,
-    default: 2,
+    default: 0,
   },
   multiple: Boolean,
   isRequired: {
@@ -51,6 +53,43 @@ const emit = defineEmits({
 
 const query = ref("");
 const isDropdownOpened = ref(false);
+
+const isSelectedAll = computed(() => {
+  if (props.multiple) {
+    return (
+      props.modelValue &&
+      props.modelValue.length === filterableOptions.value.length
+    );
+  }
+  return false;
+});
+
+const filterableOptions = computed(
+  () => filterOptions(props.options, query.value) || [],
+);
+
+const localValueOption = computed(() => {
+  if (props.multiple) {
+    let selected = [];
+    for (const option of props.options) {
+      if (option.values) {
+        option.values.forEach((o) => {
+          if ((props.modelValue || []).includes(o.value)) {
+            selected.push(o);
+          }
+        });
+      } else {
+        if ((props.modelValue || []).includes(option.value)) {
+          selected.push(option);
+        }
+      }
+    }
+    return selected;
+  } else {
+    return props.options.find((o) => o.value === props.modelValue);
+  }
+});
+
 const filterOptions = (options, query) => {
   const filteredOptions = [];
 
@@ -75,9 +114,6 @@ const filterOptions = (options, query) => {
 
   return filteredOptions;
 };
-const filterableOptions = computed(
-  () => filterOptions(props.options, query.value) || [],
-);
 const selectOption = (option) => {
   const result = props.multiple
     ? (props.modelValue || []).find((o) => o === option.value)
@@ -91,34 +127,21 @@ const selectOption = (option) => {
 
   emit("update:modelValue", result);
 };
-
-const localValueOption = computed(() => {
-  if (props.multiple) {
-    let selected = [];
-    for (const option of props.options) {
-      if (option.values) {
-        option.values.forEach((o) => {
-          if ((props.modelValue || []).includes(o.value)) {
-            selected.push(o);
-          }
-        });
-      } else {
-        if ((props.modelValue || []).includes(option.value)) {
-          selected.push(option);
-        }
-      }
-    }
-    return selected;
-  } else {
-    return props.options.find((o) => o.value === props.modelValue);
-  }
-});
-
 const removeOption = (value) => {
   emit(
     "update:modelValue",
     (props.modelValue || []).filter((o) => o !== value),
   );
+};
+const selectAll = () => {
+  if (isSelectedAll.value) {
+    emit("update:modelValue", []);
+  } else {
+    emit(
+      "update:modelValue",
+      filterableOptions.value.map((o) => o.value),
+    );
+  }
 };
 </script>
 
@@ -150,14 +173,18 @@ const removeOption = (value) => {
       >
         <div v-if="multiple" class="flex flex-wrap gap-2">
           <Chip
-            v-for="option in localValueOption.slice(0, maxVisibleOptions)"
+            v-for="option in maxVisibleOptions
+              ? localValueOption.slice(0, maxVisibleOptions)
+              : localValueOption"
             :key="option.value"
             closable
             :label="option.label"
             @remove="removeOption(option.value)"
           />
           <Chip
-            v-if="localValueOption.length > maxVisibleOptions"
+            v-if="
+              maxVisibleOptions && localValueOption.length > maxVisibleOptions
+            "
             :label="`+${localValueOption.length - maxVisibleOptions}`"
           />
           <span v-if="localValueOption.length === 0" class="text-oc-text-300">{{
@@ -193,12 +220,20 @@ const removeOption = (value) => {
             </template>
           </Input>
 
-          <div class="max-h-[320px] overflow-y-auto">
+          <div class="max-h-[320px] overflow-y-auto flex flex-col gap-y-2">
+            <Option
+              v-if="isCheckboxes && isSelectAll && filterableOptions.length"
+              :is-selected="isSelectedAll"
+              is-checkboxes
+              label="Select All"
+              @click="selectAll"
+            />
             <slot :f-options="filterableOptions" :select-option="selectOption">
               <Option
                 v-for="option in filterableOptions"
                 :key="option.value"
                 :label="option.label"
+                :is-checkboxes="isCheckboxes"
                 :is-selected="
                   multiple
                     ? modelValue
