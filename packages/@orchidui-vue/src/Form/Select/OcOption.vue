@@ -15,7 +15,7 @@ defineProps({
   >
     <Checkbox
       v-if="isCheckboxes"
-      :model-value="isSelected"
+      :model-value="!!isSelected"
       class="!w-fit pointer-events-none"
     />
     <span :class="isCheckboxes ? 'flex-1' : ''">{{ label }}</span>

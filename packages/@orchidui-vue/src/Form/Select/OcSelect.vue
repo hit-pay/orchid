@@ -57,7 +57,7 @@ const isDropdownOpened = ref(false);
 const isSelectedAll = computed(() => {
   if (props.multiple) {
     return (
-      props.modelValue &&
+      props.modelValue.length &&
       props.modelValue.length === filterableOptions.value.length
     );
   }
@@ -178,6 +178,7 @@ const selectAll = () => {
               : localValueOption"
             :key="option.value"
             closable
+            :variant="option.variant"
             :label="option.label"
             @remove="removeOption(option.value)"
           />
