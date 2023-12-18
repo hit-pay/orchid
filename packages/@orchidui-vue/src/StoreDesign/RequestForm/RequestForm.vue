@@ -1,46 +1,80 @@
 <script setup>
+import { FormBuilder } from "@/orchidui";
 import { ref } from "vue";
 const props = defineProps({
-  jsonForm: Array,
-  modelValue: Object,
-  errors: Object,
+  requestForm: Object,
+  generalData: Object,
+  sectionData: Object,
 });
 
-const emit = defineEmits(["update:modelValue"]);
-const formValues = ref(props.modelValue);
-const formErrors = ref(props.errors);
+const generalFormData = ref(props.generalData);
+const sectionFormData = ref(props.sectionData);
+
+const formErrors = ref({});
+const formValues = ref({});
+
+Object.values(props.requestForm).forEach((form) => {
+  if (typeof form.name === "object") {
+    form.name.forEach((formName) => {
+      if (form.general) {
+        formValues.value[formName.key] = generalFormData.value[formName.key];
+      } else {
+        formValues.value[formName.key] = sectionFormData.value[formName.key];
+      }
+    });
+  } else {
+    if (form.general) {
+      formValues.value[form.name] = generalFormData.value[form.name];
+    } else {
+      formValues.value[form.name] = sectionFormData.value[form.name];
+    }
+  }
+});
+
+const emit = defineEmits(["update:generalData", "update:sectionData"]);
+
+const updateData = (general = false) => {
+  if (general) {
+    emit("update:generalData", generalFormData.value);
+  } else {
+    emit("update:sectionData", sectionFormData.value);
+  }
+};
 
 const onUpdateForm = (form, value = null) => {
   if (typeof form.name === "object") {
     form.name.forEach((formName, index) => {
       formValues.value[formName.key] = value[index];
-      emit("update:modelValue", formValues.value);
+      if (form.general) {
+        generalFormData.value[formName.key] = value[index];
+        updateData(true);
+      } else {
+        sectionFormData.value[formName.key] = value[index];
+        updateData();
+      }
     });
   } else {
     formValues.value[form.name] = value;
-    emit("update:modelValue", formValues.value);
+    if (form.general) {
+      generalFormData.value[form.name] = value;
+      updateData(true);
+    } else {
+      sectionFormData.value[form.name] = value;
+      updateData();
+    }
   }
 };
 </script>
 <template>
-  <FormBuilder
-    id="form-builder"
-    class="grid gap-4"
-    :errors="formErrors"
-    :values="formValues"
-    :json-form="jsonForm"
-    @on-update="onUpdateForm"
-  >
-    <template #Colors="{ form }">
-      <div class="grid grid-cols-2 gap-4">
-        <div v-for="name in form.name" :key="name">
-          <Input
-            v-model="formValues[name.key]"
-            v-bind="name.props"
-            form-type="color"
-          />
-        </div>
-      </div>
-    </template>
-  </FormBuilder>
+  <div>
+    <FormBuilder
+      id="form-builder"
+      class="grid gap-4"
+      :errors="formErrors"
+      :values="formValues"
+      :json-form="requestForm"
+      @on-update="onUpdateForm"
+    >
+    </FormBuilder>
+  </div>
 </template>

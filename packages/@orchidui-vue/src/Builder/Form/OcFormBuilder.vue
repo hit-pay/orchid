@@ -72,7 +72,7 @@ const FormTypes = {
   RangeInput: RangeInput,
   PhoneInput: PhoneInput,
   SectionItem: SectionItem,
-  SelectOptions: SelectOptions
+  SelectOptions: SelectOptions,
 };
 
 const getComponentByType = (type) => {
