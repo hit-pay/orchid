@@ -1,11 +1,11 @@
-import { Card, Button, OverviewItem } from "@/orchidui";
+import { InfoCard, Button, OverviewItem } from "@/orchidui";
 
 export default {
-  component: Card,
+  component: InfoCard,
   tags: ["autodocs"],
 };
 
-export const cardNoData = {
+export const infoCard = {
   args: {
     title: "Card Title",
     titleIcon: "information",
@@ -14,18 +14,18 @@ export const cardNoData = {
     transparent: false,
     hover: true,
     shadow: false,
-    noData: true,
+    noData: false,
     noDataDescription: "No items on the site yet",
   },
   render: (args) => ({
-    components: { Card, Button, OverviewItem },
+    components: { InfoCard, Button, OverviewItem },
     setup() {
       return {
         args,
       };
     },
     template: `
-          <Card :title="args.title"
+          <InfoCard :title="args.title"
                 :title-icon="args.titleIcon"
                 :title-icon-tooltip="args.titleIconTooltip"
                 :loading="args.loading"
@@ -43,7 +43,7 @@ export const cardNoData = {
             <template #footer>
               <Button>Button</Button>
             </template>
-          </Card>
+          </InfoCard>
         `,
   }),
 };

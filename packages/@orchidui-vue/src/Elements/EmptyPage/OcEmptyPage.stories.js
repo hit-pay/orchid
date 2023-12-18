@@ -6,6 +6,12 @@ export default {
 };
 
 export const emptyPage = {
+  argTypes: {
+    size: {
+      control: "select",
+      options: ["small", "default", "large"],
+    },
+  },
   args: {
     title: "Title",
     description: "Description",
@@ -13,6 +19,7 @@ export const emptyPage = {
     isUpgrade: true,
     addButtonLabel: "Add new",
     upgradeLabel: "Upgrade now",
+    size: undefined,
   },
   render: (args) => ({
     components: {

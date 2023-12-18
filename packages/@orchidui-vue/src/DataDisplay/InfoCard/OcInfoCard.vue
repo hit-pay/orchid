@@ -2,7 +2,6 @@
 import OcIcon from "@/orchidui/MediaAndIcons/Icon/OcIcon.vue";
 import OcTooltip from "@/orchidui/Overlay/Tooltip/OcTooltip.vue";
 import { useSlots } from "vue";
-import OcNoData from "@/orchidui/DataDisplay/NoData/OcNoData.vue";
 
 defineProps({
   loading: {
@@ -56,20 +55,12 @@ const hasSlot = (name) => !!slots[name];
       </oc-tooltip>
     </div>
 
-    <div v-if="!noData">
-      <slot name="header"></slot>
+    <slot name="header"></slot>
 
-      <div class="mb-auto">
-        <slot name="default"></slot>
-      </div>
-
-      <slot name="footer"></slot>
+    <div class="mb-auto">
+      <slot name="default"></slot>
     </div>
 
-    <oc-no-data
-      v-else-if="noData && !loading"
-      class="mt-5 mb-9"
-      :description="noDataDescription"
-    ></oc-no-data>
+    <slot name="footer"></slot>
   </div>
 </template>
