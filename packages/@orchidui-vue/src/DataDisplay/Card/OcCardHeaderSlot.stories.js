@@ -5,7 +5,7 @@ export default {
   tags: ["autodocs"],
 };
 
-export const card = {
+export const cardHeaderSlot = {
   args: {
     title: "Card Title",
     titleIcon: "information",
@@ -15,7 +15,7 @@ export const card = {
     hover: false,
     shadow: false,
     noData: false,
-    noDataDescription: "No items on the site yet ",
+    noDataDescription: "No items on the site yet",
   },
   render: (args) => ({
     components: { Card, Button, OverviewItem, Icon },
