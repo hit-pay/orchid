@@ -2,7 +2,7 @@
 import { Dropdown, Icon } from "@/orchidui";
 import { ref } from "vue";
 import { Draggable } from "@/orchidui/Draggable.js";
-import ModalCropper from "../SingleFileUpload/ModalCropper.vue";
+import { ModalCropper } from "@/orchidui/Cropper.js";
 
 const props = defineProps({
   accept: {
@@ -109,30 +109,31 @@ const changeImage = (url) => {
                 :item="img"
                 :remove-item="onDeleteFile"
                 :file-index="i"
-              />
-              <!-- <div class="py-2 flex flex-col">
-                <div
-                  class="flex p-3 cursor-pointer items-center gap-x-3"
-                  @click="
-                    editImg = img.fileUrl;
-                    isDropdownOpen = false;
-                    isEditOpen = true;
-                  "
-                >
-                  <Icon width="16" height="16" name="pencil" />
-                  <span>Edit</span>
+              >
+                <div class="py-2 flex flex-col">
+                  <div
+                    class="flex p-3 cursor-pointer items-center gap-x-3"
+                    @click="
+                      editImg = img.fileUrl;
+                      isDropdownOpen = false;
+                      isEditOpen = true;
+                    "
+                  >
+                    <Icon width="16" height="16" name="pencil" />
+                    <span>Edit</span>
+                  </div>
+                  <div
+                    class="flex p-3 cursor-pointer items-center text-oc-error gap-x-3"
+                    @click="
+                      onDeleteFile(i);
+                      isDropdownOpen = false;
+                    "
+                  >
+                    <Icon width="16" height="16" name="bin" />
+                    <span>Delete</span>
+                  </div>
                 </div>
-                <div
-                  class="flex p-3 cursor-pointer items-center text-oc-error gap-x-3"
-                  @click="
-                    onDeleteFile(i);
-                    isDropdownOpen = false;
-                  "
-                >
-                  <Icon width="16" height="16" name="bin" />
-                  <span>Delete</span>
-                </div>
-              </div> -->
+              </slot>
             </template>
           </Dropdown>
           <div
@@ -161,6 +162,7 @@ const changeImage = (url) => {
     </Draggable>
 
     <ModalCropper
+      v-if="isEditOpen"
       v-model="isEditOpen"
       :img="editImg"
       @close="

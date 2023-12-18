@@ -2,6 +2,7 @@
 import { computed } from "vue";
 import OcTimeLine from "./components/OcTimeLine.vue";
 import OcWebhook from "./components/OcWebhook.vue";
+import OcPayment from "./components/OcPayment.vue";
 
 const props = defineProps({
   isActive: Boolean,
@@ -19,8 +20,12 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+  paymentMethods: {
+    type: Array,
+    default: () => [],
+  },
 });
-defineEmits(["more"]);
+defineEmits(["more", "edit", "delete"]);
 
 const getTypeComponent = computed(() => {
   switch (props.type) {
@@ -28,6 +33,8 @@ const getTypeComponent = computed(() => {
       return OcTimeLine;
     case "webhook":
       return OcWebhook;
+    case "payment":
+      return OcPayment;
     default:
       return OcTimeLine;
   }
@@ -35,7 +42,13 @@ const getTypeComponent = computed(() => {
 </script>
 
 <template>
-  <component :is="getTypeComponent" v-bind="props" @more="$emit('more')">
+  <component
+    :is="getTypeComponent"
+    v-bind="props"
+    @more="$emit('more')"
+    @edit="$emit('edit')"
+    @delete="$emit('delete')"
+  >
     <template v-if="$slots.menu" #menu>
       <slot name="menu" />
     </template>

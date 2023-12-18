@@ -2,6 +2,7 @@
 import {
   Table,
   Pagination,
+  PrevNext,
   Select,
   Tabs,
   FilterSearch,
@@ -11,7 +12,7 @@ import {
   Dropdown,
 } from "@/orchidui";
 import { ref, computed } from "vue";
-
+import dayjs from "dayjs";
 const props = defineProps({
   isLoading: Boolean,
   id: {
@@ -50,6 +51,10 @@ const paginationOption = computed(() => {
   return props.options?.pagination;
 });
 
+const cursorOption = computed(() => {
+  return props.options?.cursor;
+});
+
 const tableOptions = computed(() => {
   return props.options?.tableOptions;
 });
@@ -64,7 +69,7 @@ const currentPage = ref(props.filter.page);
 const perPage = ref(
   filterOptions.value?.per_page?.key
     ? props.filter[filterOptions.value?.per_page?.key]
-    : props.filter.per_page,
+    : props.filter.per_page
 );
 const defaultQuery =
   props.filter[filterOptions.value?.search?.key]?.trim() ?? "";
@@ -73,10 +78,6 @@ const isSearchExpanded = ref(false);
 
 const perPageOptions = computed(() => {
   let per_page_option = [
-    {
-      label: "5",
-      value: 5,
-    },
     {
       label: "10",
       value: 10,
@@ -110,13 +111,15 @@ const perPageOptions = computed(() => {
       value: 99,
     },
   ];
-  const maxLength =
-    paginationOption.value.total < 100 ? paginationOption.value.total : 100;
   let opt = per_page_option;
-  if (maxLength > 10) {
-    opt = per_page_option.filter((p) => {
-      return p.value <= maxLength;
-    });
+  if (paginationOption.value) {
+    const maxLength =
+      paginationOption.value.total < 100 ? paginationOption.value.total : 100;
+    if (maxLength > 10) {
+      opt = per_page_option.filter((p) => {
+        return p.value <= maxLength;
+      });
+    }
   }
   return [...new Set(opt)];
 });
@@ -139,19 +142,24 @@ const removeQuery = (query) => {
   queries.value = queries.value.filter((q) => q !== query);
   applyFilter();
 };
-
-const filterData = ref(
-  props.filter ?? {
-    page: 1,
-  },
-);
+const defaultFilterData = props.filter;
+if (!defaultFilterData && paginationOption) {
+  defaultFilterData.page = 1;
+} else if (!defaultFilterData && cursorOption) {
+  defaultFilterData.cursor = "";
+}
+const filterData = ref(defaultFilterData);
 
 const removeAllQueryFilter = () => {
   queries.value = [];
 
-  const defaultFilters = {
-    page: 1,
-  };
+  const defaultFilters = {};
+
+  if (filterOptions.value) {
+    defaultFilterData.page = 1;
+  } else {
+    defaultFilterData.cursor = "";
+  }
 
   if (filterOptions.value?.per_page?.key) {
     defaultFilters[filterOptions.value?.per_page?.key] = perPage.value;
@@ -173,11 +181,19 @@ const changePage = () => {
   applyFilter(null, currentPage.value);
 };
 
-const applyFilter = (filterForm = null, isChangePage = false) => {
-  if (!isChangePage) {
+const applyFilter = (
+  filterForm = null,
+  isChangePage = false,
+  changeCursor = ""
+) => {
+  if (paginationOption.value && !isChangePage) {
     currentPage.value = 1;
   }
-  filterData.value.page = currentPage.value;
+  if (paginationOption.value) {
+    filterData.value.page = currentPage.value;
+  } else {
+    filterData.value.cursor = changeCursor;
+  }
 
   if (filterOptions.value?.per_page) {
     filterData.value[filterOptions.value.per_page.key] = perPage.value;
@@ -204,6 +220,14 @@ const removeFilter = (filter, field) => {
   emit("filter-removed", field);
 };
 
+const getFilterNames = (filterNames) => {
+  let names = [];
+  filterNames.forEach((name) => {
+    names.push(name.key);
+  });
+  return names;
+};
+
 const displayFilterData = computed(() => {
   if (filterData.value) {
     let display = [];
@@ -214,16 +238,19 @@ const displayFilterData = computed(() => {
       const filterPerPageKey = filterOptions.value?.per_page?.key ?? "per_page";
       if (
         name !== "page" &&
+        name !== "cursor" &&
         name !== filterPerPageKey &&
         name !== filterTabKey &&
         name !== filterSearchKey
       ) {
+        let isMultiNames = null;
         let option = filterOptions.value.form?.find((f) => {
           if (typeof f.name === "object") {
             let isSelectedOption = false;
             f.name.forEach((formName) => {
               if (formName.key === name) {
                 isSelectedOption = true;
+                isMultiNames = getFilterNames(f.name);
               }
             });
             return isSelectedOption;
@@ -243,15 +270,28 @@ const displayFilterData = computed(() => {
               .map(
                 (selectedValue) =>
                   option.props.options.find(
-                    ({ value }) => value === selectedValue,
-                  ).label,
+                    ({ value }) => value === selectedValue
+                  ).label
               )
               .join(", ");
           }
 
+          if (option.type === "DatePicker") {
+            optionLabel = dayjs(optionLabel).format("MMM DD, YYYY");
+          }
+
+          let label = `${option?.props.label} : ${optionLabel}`;
+          if (typeof option.name === "object") {
+            const exist = display.find((f) => f.name === isMultiNames[0]);
+            if (exist) {
+              label = ` - ${optionLabel}`;
+            }
+          }
+
           display.push({
-            label: `${option?.props.label} : ${optionLabel}`,
+            label: label,
             name: name,
+            multiNames: isMultiNames,
           });
         }
       }
@@ -270,6 +310,8 @@ const displayFilterData = computed(() => {
       :options="tableOptions"
       :is-loading="isLoading"
       :loading-rows="perPage"
+      :is-sticky="tableOptions.isSticky"
+      class="min-h-[600px]"
       @update:selected="$emit('update:selected', $event)"
       @click:row="$emit('click:row', $event)"
     >
@@ -277,10 +319,13 @@ const displayFilterData = computed(() => {
         <slot name="before" />
         <div class="flex items-center px-4 min-h-[52px]">
           <template v-if="filterOptions">
-            <div v-if="showBulkAction" class="flex gap-5 items-center">
+            <div
+              v-if="showBulkAction"
+              class="flex gap-5 items-center absolute left-5"
+            >
               <slot name="bulk-actions" :selected-rows="selected" />
             </div>
-            <div v-else class="flex gap-3">
+            <div v-else class="flex gap-3 absolute left-5">
               <Tabs
                 v-if="filterOptions?.tabs"
                 v-model="filterTab"
@@ -291,7 +336,7 @@ const displayFilterData = computed(() => {
             </div>
           </template>
           <div
-            class="flex gap-3 absolute md:relative ml-auto bg-oc-bg-light right-4"
+            class="flex gap-3 absolute ml-auto bg-oc-bg-light right-5"
             :class="
               !filterOptions
                 ? 'w-full justify-end'
@@ -367,14 +412,26 @@ const displayFilterData = computed(() => {
         <slot name="empty" />
       </template>
     </Table>
-    <div v-if="paginationOption?.total > 0" class="flex gap-3 items-center">
+    <div class="flex gap-3 items-center">
       <Pagination
+        v-if="paginationOption"
         v-model="currentPage"
         class="justify-center"
         :max-page="paginationOption.last_page"
         total-visible="5"
         @update:model-value="changePage"
       />
+      <div v-if="cursorOption" class="flex w-full gap-5">
+        <PrevNext
+          :disabled="!cursorOption.prev"
+          @click="applyFilter(null, false, cursorOption.prev)"
+        />
+        <PrevNext
+          :disabled="!cursorOption.next"
+          is-next
+          @click="applyFilter(null, false, cursorOption.next)"
+        />
+      </div>
       <div class="hidden md:flex items-center">
         <Select
           v-model="perPage"

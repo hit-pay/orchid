@@ -5,7 +5,7 @@ import { ref, onMounted } from "vue";
 const props = defineProps({
   maxLimit: {
     type: [String, Number],
-    default: 100,
+    default: 10000,
   },
   minLimit: {
     type: [String, Number],
@@ -30,14 +30,15 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  onlyInput: Boolean,
 });
 
 const emit = defineEmits({
   "update:modelValue": [],
 });
 
-const localMinValue = ref(props.modelValue?.[0] ?? props.minLimit);
-const localMaxValue = ref(props.modelValue?.[1] ?? props.maxLimit);
+const localMinValue = ref(props.modelValue?.[0] ?? "");
+const localMaxValue = ref(props.modelValue?.[1] ?? "");
 const slider = ref();
 
 const updateRange = (value, index) => {
@@ -47,7 +48,11 @@ const updateRange = (value, index) => {
     } else {
       localMinValue.value = Number(value);
     }
-    slider.value.updateSlider([localMinValue.value, localMaxValue.value]);
+    if (!props.onlyInput) {
+      slider.value.updateSlider([localMinValue.value, localMaxValue.value]);
+    } else {
+      emit("update:modelValue", [localMinValue.value, localMaxValue.value]);
+    }
   }
 };
 
@@ -55,13 +60,16 @@ const updateRangeSlider = ($event) => {
   if (isNaN($event[0]) || isNaN($event[1])) return;
   localMinValue.value = Number($event[0]);
   localMaxValue.value = Number($event[1]);
+
   emit("update:modelValue", [
     Number(localMinValue.value),
     Number(localMaxValue.value),
   ]);
 };
 onMounted(() => {
-  slider.value.updateSlider();
+  if (!props.onlyInput) {
+    slider.value.updateSlider();
+  }
 });
 </script>
 
@@ -84,7 +92,7 @@ onMounted(() => {
           @update:model-value="updateRange($event, 1)"
         />
       </div>
-      <div class="flex pt-4">
+      <div v-if="!onlyInput" class="flex pt-4">
         <Slider
           ref="slider"
           type="range"

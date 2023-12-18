@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import { DraggableList } from "@/orchidui/DraggableList";
+import { DraggableList } from "@/orchidui/Draggable.js";
 import { Toggle } from "@/orchidui";
 const HeaderSections = ref([
   {

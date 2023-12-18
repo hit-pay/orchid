@@ -24,12 +24,12 @@
         @on-edit-image="$emit('onEditFile', $event)"
         @on-remove-image="$emit('onRemoveFile', $event)"
       >
-        <template #action="{ item, removeItem, i }">
+        <template #action="slotData">
           <slot
             name="action"
-            :item="item"
-            :remove-item="removeItem"
-            :file-index="i"
+            :item="slotData.item"
+            :remove-item="slotData.removeItem"
+            :file-index="slotData.i"
           />
         </template>
       </OcSimpleMultipleUpload>
@@ -154,23 +154,25 @@ const { isErrorMaxSize, currentFiles, onChangeFile, onDeleteFile } =
   useUploadFileProgress(props.maxSize, emit);
 
 onMounted(() => {
-  const formatedModelValue = [];
+  const formattedModelValue = [];
 
   if (props.modelValue.length > 0) {
     props.modelValue.forEach((item) => {
-      formatedModelValue.push({
-        current: item.current,
-        file: null,
-        fileName: item.current.caption ?? "",
-        progress: 100,
-        fileUrl: item.current.path,
-        totalSize: item.current.file_size ?? 0,
-        isLoaded: true,
-        extension: item.current.extention ?? "png",
-      });
+      if (item.current) {
+        formattedModelValue.push({
+          current: item.current,
+          file: null,
+          fileName: item.current.caption ?? "",
+          progress: 100,
+          fileUrl: item.current.path,
+          totalSize: item.current.file_size ?? 0,
+          isLoaded: true,
+          extension: item.current.extention ?? "png",
+        });
+      }
     });
 
-    currentFiles.value = formatedModelValue;
+    currentFiles.value = formattedModelValue;
   }
 });
 </script>

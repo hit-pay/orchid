@@ -13,7 +13,7 @@ export const listItem = {
     },
     type: {
       control: "select",
-      options: ["timeline", "webhook"],
+      options: ["timeline", "webhook", "payment"],
     },
     active: {
       control: {
@@ -84,6 +84,39 @@ export const ListWebhook = {
                 </div>
               </template>
             </ListItem>
+          </Theme>
+        `,
+  }),
+};
+
+export const ListPayment = {
+  args: {
+    title: "shopify",
+    paymentMethods: [
+      {
+        method: "paynow_online",
+        sm: "https://dashboard.src.test/icons/methods/sm/paynow.png",
+        md: "https://dashboard.src.test/icons/methods/md/paynow.png",
+      },
+      {
+        method: "card",
+        sm: "https://dashboard.src.test/icons/methods/sm/card.png",
+        md: "https://dashboard.src.test/icons/methods/md/card.png",
+      },
+    ],
+  },
+  render: (args) => ({
+    components: { Theme, ListItem },
+    setup() {
+      return { args };
+    },
+    template: `
+          <Theme colorMode="light" class="p-10">
+            <ListItem
+                :title="args.title"
+                :payment-methods="args.paymentMethods"
+                type="payment"
+            />
           </Theme>
         `,
   }),

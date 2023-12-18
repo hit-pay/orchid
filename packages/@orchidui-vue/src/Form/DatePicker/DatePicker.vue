@@ -27,7 +27,7 @@ const props = defineProps({
   },
   dateFormat: {
     type: String,
-    default: "DD/MM/YYYY",
+    default: "YYYY-MM-DD",
   },
   disabled: {
     type: Boolean,
@@ -56,46 +56,50 @@ const props = defineProps({
   },
 });
 
-let defaultValue = props.modelValue;
-if (props.type === "range" && props.from && props.to) {
-  defaultValue = [props.from, props.to];
-}
-
-const date = ref(defaultValue ?? "");
 const isDropdownOpened = ref(false);
 
 const formattedDate = computed(() => {
   if (props.type === "default") {
-    return date.value ? dayjs(date.value).format(props.dateFormat) : "";
+    return props.modelValue
+      ? dayjs(props.modelValue, props.dateFormat).format("DD/MM/YYYY")
+      : "";
   } else {
-    const dateFrom = date.value?.[0]
-      ? dayjs(date.value[0]).format(props.dateFormat)
-      : "";
-    const dateTo = date.value?.[1]
-      ? dayjs(date.value[1]).format(props.dateFormat)
-      : "";
-    return [dateFrom, dateTo];
+    if (props.modelValue && props.modelValue[0]) {
+      return [
+        dayjs(props.modelValue[0], props.dateFormat).format("DD/MM/YYYY"),
+        dayjs(props.modelValue[1], props.dateFormat).format("DD/MM/YYYY"),
+      ];
+    } else {
+      return ["", ""];
+    }
   }
 });
 
-const updateCalendar = () => {
+const updateCalendar = (newValue) => {
   if (props.type === "range") {
-    emit("update:modelValue", [formattedDate.value[0], formattedDate.value[1]]);
+    emit("update:modelValue", [
+      dayjs(newValue[0]).format(props.dateFormat),
+      dayjs(newValue[1]).format(props.dateFormat),
+    ]);
   } else {
-    emit("update:modelValue", formattedDate.value);
+    emit("update:modelValue", dayjs(newValue).format(props.dateFormat));
   }
   isDropdownOpened.value = false;
 };
 
 const resetCalendar = () => {
-  if (props.type === "range") {
-    date.value[0] = "";
-    date.value[1] = "";
-  } else {
-    date.value = "";
-  }
   emit("resetCalendar");
   isDropdownOpened.value = false;
+};
+
+const defaultDateRange = () => {
+  if (props.maxDate === dayjs().format(props.dateFormat)) {
+    return [
+      dayjs().subtract(3, "day").toDate(),
+      dayjs().subtract(1, "day").toDate(),
+    ];
+  }
+  return [dayjs().toDate(), dayjs().add(2, "day").toDate()];
 };
 </script>
 
@@ -119,25 +123,27 @@ const resetCalendar = () => {
           :has-error="errorMessage.length > 0"
         />
       </div>
-      <div v-else class="flex gap-x-4">
-        <Input
-          :label="minLabel"
-          :model-value="formattedDate[0]"
-          icon="calendar"
-          :placeholder="placeholder"
-          :disabled="disabled"
-          readonly
-          :has-error="errorMessage.length > 0"
-        />
-        <Input
-          :label="maxLabel"
-          :model-value="formattedDate[1]"
-          icon="calendar"
-          :placeholder="placeholder"
-          :disabled="disabled"
-          readonly
-          :has-error="errorMessage.length > 0"
-        />
+      <div v-else class="flex flex-wrap">
+        <div class="flex gap-x-4">
+          <Input
+            :label="`${label} ${minLabel}`"
+            :model-value="formattedDate[0]"
+            icon="calendar"
+            :placeholder="placeholder"
+            :disabled="disabled"
+            readonly
+            :has-error="errorMessage.length > 0"
+          />
+          <Input
+            :label="`${label} ${maxLabel}`"
+            :model-value="formattedDate[1]"
+            icon="calendar"
+            :placeholder="placeholder"
+            :disabled="disabled"
+            readonly
+            :has-error="errorMessage.length > 0"
+          />
+        </div>
       </div>
       <div v-if="errorMessage" class="text-sm text-oc-error flex items-center">
         {{ errorMessage }}
@@ -147,13 +153,23 @@ const resetCalendar = () => {
     <template #menu>
       <Calendar
         v-if="!disabled"
-        v-model="date"
+        :model-value="
+          type === 'range'
+            ? modelValue && modelValue[0]
+              ? [
+                  dayjs(modelValue[0], dateFormat).toDate(),
+                  dayjs(modelValue[1], dateFormat).toDate(),
+                ]
+              : defaultDateRange()
+            : modelValue
+              ? dayjs(modelValue, dateFormat).toDate()
+              : new Date()
+        "
         :disabled-date="disabledDate"
-        :max-date="maxDate"
+        :max-date="dayjs(maxDate, dateFormat).toDate()"
         :min-date="minDate"
         position="inline"
         :type="type"
-        :date-format="dateFormat"
         @update:model-value="updateCalendar"
         @reset-calendar="resetCalendar"
       />

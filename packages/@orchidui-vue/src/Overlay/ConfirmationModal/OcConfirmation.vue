@@ -7,6 +7,7 @@ defineProps({
     type: String,
     default: "delete",
   },
+  icon: String,
 });
 const variantIcon = {
   delete: "bin",
@@ -28,7 +29,7 @@ const classIcon = {
       class="w-[48px] aspect-square rounded-full flex items-center justify-center"
       :class="classIcon[variant]"
     >
-      <Icon :name="variantIcon[variant]" />
+      <Icon :name="icon ?? variantIcon[variant]" />
     </div>
     <div class="text-center">
       <slot name="description">{{ description }}</slot>

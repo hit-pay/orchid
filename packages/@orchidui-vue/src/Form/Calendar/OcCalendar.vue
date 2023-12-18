@@ -1,8 +1,6 @@
 <script setup>
 import { Button, Icon } from "@/orchidui";
 import { computed, ref } from "vue";
-import dayjs from "dayjs";
-
 const props = defineProps({
   type: {
     type: String,
@@ -35,39 +33,34 @@ const props = defineProps({
 });
 const emit = defineEmits(["update:modelValue", "resetCalendar"]);
 
-const selectedDate = ref(null);
-
-if (props.type === "default") {
-  selectedDate.value = props.modelValue
-    ? new Date(dayjs([props.modelValue]).format(props.dateFormat))
-    : new Date();
-} else {
-  selectedDate.value = props.modelValue?.[0]
-    ? new Date(dayjs(props.modelValue?.[0]).format(props.dateFormat))
-    : new Date();
-}
+const selectedDate = ref(
+  props.type === "range"
+    ? props.modelValue[0] || new Date()
+    : props.modelValue || new Date(),
+);
 
 const selectedStartDate = ref(selectedDate.value);
 
 const selectedEndDate = ref(
-  props.type === "range" && props.modelValue?.[1]
-    ? new Date(dayjs(props.modelValue?.[1]).format(props.dateFormat))
-    : new Date(
-        new Date(selectedStartDate.value).setDate(
-          selectedStartDate.value.getDate() + 2,
-        ),
-      ),
+  props.type === "range"
+    ? props.modelValue[1] ||
+        new Date(
+          new Date(selectedStartDate.value).setDate(
+            selectedStartDate.value.getDate() + 2,
+          ),
+        )
+    : null,
 );
 
 const selectedStartDay = ref(
-  selectedStartDate.value?.getMonth() === selectedDate.value?.getMonth()
-    ? selectedStartDate.value?.getDate()
+  selectedStartDate.value.getMonth() === selectedDate.value?.getMonth()
+    ? selectedStartDate.value.getDate()
     : null,
 );
 const selectedEndDay = ref(
   props.type === "range"
-    ? selectedEndDate.value?.getMonth() === selectedDate.value?.getMonth()
-      ? selectedEndDate.value?.getDate()
+    ? selectedEndDate.value.getMonth() === selectedDate.value?.getMonth()
+      ? selectedEndDate.value.getDate()
       : null
     : null,
 );
@@ -87,7 +80,7 @@ const daysInMonth = computed(() => {
 
 const selectedMonth = computed(() => {
   if (props.type === "range") {
-    return selectedDate.value?.toLocaleDateString("en-US", {
+    return selectedDate.value.toLocaleDateString("en-US", {
       month: "long",
       year: "numeric",
     });
@@ -123,9 +116,9 @@ const selectDay = (day) => {
 
 const clearDate = () => {
   if (props.type === "range") {
-    selectedStartDate.value = props.modelValue?.[0] || new Date();
+    selectedStartDate.value = props.modelValue[0] || new Date();
     selectedEndDate.value =
-      props.modelValue?.[1] ||
+      props.modelValue[1] ||
       new Date(new Date().setDate(new Date().getDate() + 2));
   } else {
     selectedStartDate.value = props.modelValue || new Date();
@@ -242,8 +235,11 @@ const doneSelecting = () => {
   emit(
     "update:modelValue",
     props.type === "range"
-      ? [selectedStartDate.value, selectedEndDate.value]
-      : new Date(selectedStartDate.value),
+      ? [
+          new Date(selectedStartDate.value).toString(),
+          new Date(selectedEndDate.value).toString(),
+        ]
+      : new Date(selectedStartDate.value).toString(),
   );
 };
 </script>
