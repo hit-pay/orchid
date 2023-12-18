@@ -14,7 +14,7 @@ export const card = {
     transparent: false,
     hover: true,
     shadow: false,
-    noData: false,
+    noData: true,
   },
   render: (args) => ({
     components: { Card, Button, OverviewItem },

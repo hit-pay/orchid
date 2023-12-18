@@ -14,6 +14,7 @@ export const card = {
     transparent: false,
     hover: false,
     shadow: false,
+    noData: false,
   },
   render: (args) => ({
     components: { Card, Button, OverviewItem, Icon },
@@ -30,6 +31,7 @@ export const card = {
                 :transparent="args.transparent"
                 :hover="args.hover"
                 :shadow="args.shadow"
+                :no-data="args.noData"
           >
             <template #header>
               <div class="flex items-center text-oc-warning">
