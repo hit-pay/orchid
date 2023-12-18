@@ -16,7 +16,7 @@ export const Default = {
       const SDSidebarData = ref(SDSidebarSample);
       const sidebarActive = ref({
         sidebarMenu: "home",
-        submenu: "header",
+        submenu: "",
         section: "",
         id: ""
       });
@@ -25,9 +25,8 @@ export const Default = {
     },
     template: `
           <Theme>
-
-           {{sidebarActive }}
           <div class="h-[800px] max-w-[500px]">
+            <pre>{{storeDesignSettings}}</pre>
             <SDSidebar 
               :sidebar="SDSidebarData"
               v-model:settings="storeDesignSettings"
