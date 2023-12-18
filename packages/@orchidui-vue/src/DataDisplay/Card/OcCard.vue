@@ -16,6 +16,7 @@ defineProps({
   hover: Boolean,
   shadow: Boolean,
   noData: Boolean,
+  noDataDescription: String,
 });
 
 const slots = useSlots();
@@ -65,6 +66,10 @@ const hasSlot = (name) => !!slots[name];
       <slot name="footer"></slot>
     </div>
 
-    <oc-no-data v-else-if="noData && !loading" class="mt-5 mb-9"></oc-no-data>
+    <oc-no-data
+      v-else-if="noData && !loading"
+      class="mt-5 mb-9"
+      :description="noDataDescription"
+    ></oc-no-data>
   </div>
 </template>

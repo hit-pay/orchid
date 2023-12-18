@@ -15,6 +15,7 @@ export const card = {
     hover: true,
     shadow: false,
     noData: false,
+    noDataDescription: "No items on the site yet ",
   },
   render: (args) => ({
     components: { Card, Button, OverviewItem },
@@ -32,6 +33,7 @@ export const card = {
                 :hover="args.hover"
                 :shadow="args.shadow"
                 :no-data="args.noData"
+                :no-data-description="args.noDataDescription"
           >
 
             <div class="my-7">

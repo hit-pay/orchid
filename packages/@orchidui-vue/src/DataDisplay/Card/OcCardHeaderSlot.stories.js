@@ -15,6 +15,7 @@ export const card = {
     hover: false,
     shadow: false,
     noData: false,
+    noDataDescription: "No items on the site yet ",
   },
   render: (args) => ({
     components: { Card, Button, OverviewItem, Icon },
@@ -32,6 +33,7 @@ export const card = {
                 :hover="args.hover"
                 :shadow="args.shadow"
                 :no-data="args.noData"
+                :no-data-description="args.noDataDescription"
           >
             <template #header>
               <div class="flex items-center text-oc-warning">
