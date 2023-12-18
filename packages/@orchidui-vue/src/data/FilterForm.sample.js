@@ -110,8 +110,6 @@ const SampleFilterForm = [
       label: "Select",
       hint: "This is a hint text to help user",
       placeholder: "placeholder",
-      isFilterable: true,
-      isAddNew: true,
       options: [
         {
           label: "Option 1",
@@ -139,7 +137,8 @@ const SampleFilterForm = [
       label: "Select Multiple",
       hint: "This is a hint text to help user",
       placeholder: "placeholder",
-      isFilterable: true,
+      isCheckboxes: true,
+      isSelectAll: true,
       multiple: true,
       options: [
         {
