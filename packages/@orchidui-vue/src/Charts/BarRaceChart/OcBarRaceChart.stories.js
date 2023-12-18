@@ -30,7 +30,7 @@ export const barRace = {
     template: `
           <div>
             <OcBarRaceChart
-                class="h-[400px]"
+                class="h-[300px]"
                 :color="args.color"
                 :show-grid="args.showGrid"
                 :show-tooltip="args.showTooltip"

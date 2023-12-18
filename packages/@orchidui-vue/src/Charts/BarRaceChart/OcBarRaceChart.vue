@@ -1,7 +1,10 @@
 <template>
   <div class="grid grid-cols-2">
-    <div class="pt-5 pb-8 flex flex-col justify-around h-[100%]">
-      <div v-for="item in legendData" class="text-[14px]">
+    <div class="pt-4 pb-7 flex flex-col h-[100%]">
+      <div
+        v-for="item in legendData"
+        class="text-[14px] flex flex-1 items-center justify-start"
+      >
         {{ item }}
       </div>
     </div>
@@ -47,6 +50,7 @@ const options = computed(() => ({
       color: "#03102F",
       fontWeight: 500,
       formatter: props.yAxisFormatter,
+      fontSize: 14,
     },
   },
   grid: {
@@ -94,10 +98,10 @@ const options = computed(() => ({
         color: "#03102F",
         opacity: 1,
         align: "left",
-        padding: [0, 8],
+        padding: [0, 0],
         fontWeight: 300,
+        fontSize: 12,
       },
-      // barMaxWidth: 22,
       barGap: 0,
       itemStyle: {
         color: props.color,
