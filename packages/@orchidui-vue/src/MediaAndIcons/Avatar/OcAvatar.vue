@@ -17,6 +17,7 @@ const typeClasses = computed(() => ({
   business: "bg-oc-accent-1 text-oc-text-100",
   default: "bg-oc-gray-800 text-oc-text-100",
   image: "text-oc-text-500",
+  icon: "border-oc-gray-100",
 }));
 const fontSizes = computed(() => ({
   64: "text-[30px]",
