@@ -1,6 +1,5 @@
-import { Theme } from "@/orchidui";
+import { Theme, Button } from "@/orchidui";
 import { SDSidebar } from "@/orchidui/StoreDesign";
-import HeaderSettings from "./HeaderSettings.vue";
 import { SDSidebarSample } from "./SDSidebar.sample";
 import { ref } from "vue";
 export default {
@@ -11,16 +10,16 @@ export default {
 export const Default = {
   args: {},
   render: (args) => ({
-    components: { Theme, SDSidebar, HeaderSettings },
+    components: { Theme, Button, SDSidebar},
     setup() {
-      const SDSidebarData = ref(SDSidebarSample);
+      const SidebarConfig = ref(SDSidebarSample);
       const sidebarActive = ref({
         sidebarMenu: "home",
         submenu: "",
         section: "",
         id: "",
       });
-      const storeDesignSettings = ref({
+      const storeDesignData = ref({
         general: {
           top_banner_closable: true,
           navigation_menus: [],
@@ -77,20 +76,38 @@ export const Default = {
           }
         ]
       });
-      return { sidebarActive, storeDesignSettings, SDSidebarData, args };
+
+      const content = ref('data')
+      return { sidebarActive, storeDesignData, SidebarConfig, args, content };
     },
     template: `
           <Theme>
-          <div class="flex gap-5">
+          <div class="flex gap-5 m-5">
               <div class="h-[800px] w-[500px]">
                   <SDSidebar 
-                    :sidebar="SDSidebarData"
-                    v-model:settings="storeDesignSettings"
+                    :sidebar="SidebarConfig"
+                    v-model:settings="storeDesignData"
                     v-model:active="sidebarActive">
                   </SDSidebar>
                 </div>
-                <pre  class="bg-black text-white p-3 rounded">{{storeDesignSettings}}</pre>
-
+                <div class="w-[400px]">
+                    <div class="flex gap-5 mb-5 flex-wrap">
+                        <div class="w-full flex gap-5">
+                          <Button label="Undo" />
+                          <Button label="Redo" />
+                        </div>
+                        <Button @click="content = 'data'" label="Store Design Data" variant="secondary"  />
+                        <Button @click="content = 'config'" label="Config" variant="secondary"  />
+                        <Button @click="content = 'preview'" label="PREVIEW" variant="secondary"  />
+                    </div>
+                    <div class="h-[700px] overflow-auto rounded">
+                      <pre v-if="content === 'data'" class="bg-black text-white p-3 rounded">{{storeDesignData}}</pre>
+                      <pre v-if="content === 'config'" class="bg-black text-white p-3 rounded">{{SidebarConfig}}</pre>
+                      <div v-if="content === 'preview'">
+                        Preview Section Focus to Settings
+                      </div>
+                    </div>
+                </div>
             </div>
           </Theme>
         `,

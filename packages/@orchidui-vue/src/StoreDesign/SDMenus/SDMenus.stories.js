@@ -104,9 +104,13 @@ export const SDMenusDefault = {
     },
     template: `
           <Theme>
-            <div class="p-4">{{ model }}</div>
-            <div class="w-full">
-              <SDMenus  :has-submenu="args.hasSubmenu" :submenuLevel="args.submenuLevel" v-model="model" />
+            <div class="grid grid-cols-2">
+              <div class="w-full">
+                <SDMenus  :has-submenu="args.hasSubmenu" :submenuLevel="args.submenuLevel" v-model="model" />
+              </div>
+              <div>
+              <pre class="p-4">{{ model }}</pre>
+              </div>
             </div>
           </Theme>
         `,

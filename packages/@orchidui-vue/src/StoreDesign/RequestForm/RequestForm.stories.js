@@ -1,7 +1,6 @@
 import { Theme } from "@/orchidui";
 
 import RequestForm from "./RequestForm.vue";
-import { HEADER_SETTINGS } from "./SDHeaders.sample";
 import { ref } from "vue";
 export default {
   component: RequestForm,
@@ -35,7 +34,26 @@ export const SDTopBanner = {
       const sectionData = ref(
         SECTION_SETTINGS.find((s) => s.section === "TopBanner"),
       );
-      const JSON_FORM = HEADER_SETTINGS["TopBanner"];
+      const JSON_FORM = [{
+        name: "closable",
+        type: "SectionItem",
+        props: {
+          title: "Closable",
+          isToggle: true,
+        },
+      },
+      {
+        type: "SectionItem",
+        props: {
+          title: "Content",
+        },
+      },
+      {
+        general: true,
+        name: "top_banner_content",
+        type: "TextArea",
+      }]
+
       return { JSON_FORM, generalData, sectionData };
     },
     template: `
