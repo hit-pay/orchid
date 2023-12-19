@@ -134,7 +134,7 @@ const options = computed(() => ({
       },
       barGap: "-100%",
       itemStyle: {
-        color: colors[props.color] || props.color,
+        color: colors[props.color],
       },
     },
   ],
