@@ -42,7 +42,7 @@ const sidebarMenuLabel = computed(() => {
 });
 const submenuLabel = computed(() => {
   const submenu = sidebarMenuActive.value.children.find(
-    (s) => s.name === sidebarActive.value.submenu,
+    (s) => s.name === sidebarActive.value.submenu
   );
   return submenu?.label;
 });
@@ -146,7 +146,7 @@ const submenuLabel = computed(() => {
       </div>
       <slot :name="sidebarActive.submenu" />
     </div>
-    <slot v-else name="section-settings" />
+    <slot :name="`section-${sidebarActive.section}`" />
     <div class="absolute bottom-0">
       <slot name="sidebar-bottom" />
     </div>
