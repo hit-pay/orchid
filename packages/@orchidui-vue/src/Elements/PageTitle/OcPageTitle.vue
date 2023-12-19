@@ -7,6 +7,7 @@ defineProps({
   description: { type: String },
   primaryButtonProps: Object,
   secondaryButtonProps: Object,
+  tooltipOptions: Object,
   chipProps: Object,
   isCopy: Boolean,
   isBack: { type: Boolean, default: false },
@@ -36,6 +37,7 @@ defineEmits({
           :title="title"
           :description="description"
           :chip-props="chipProps"
+          :tooltip-options="tooltipOptions"
           :is-copy="isCopy"
           class="flex-1"
         />
