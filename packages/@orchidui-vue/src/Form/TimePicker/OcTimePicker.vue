@@ -38,10 +38,6 @@ defineProps({
     type: Object,
     default: () => ({}),
   },
-  startTime: {
-    type: String,
-    default: "",
-  },
 });
 const updateActiveTime = () => {
   emit("update:modelValue", time.value);
