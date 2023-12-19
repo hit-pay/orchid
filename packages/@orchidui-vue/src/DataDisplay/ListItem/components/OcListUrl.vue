@@ -1,17 +1,10 @@
 <script setup lang="ts">
-import { Icon, Tooltip } from "@/orchidui";
+import { Icon, CopyTooltip } from "@/orchidui";
 
-const props = defineProps({
+defineProps({
   title: String,
   url: String,
 });
-const copyToClipboard = async () => {
-  try {
-    await navigator.clipboard.writeText(props.url);
-  } catch (err) {
-    console.error("Unable to copy text to clipboard. Error: ", err);
-  }
-};
 </script>
 
 <template>
@@ -19,18 +12,7 @@ const copyToClipboard = async () => {
     <span class="text-oc-text-400 font-medium">{{ title }}:</span>
     {{ url }}
 
-    <Tooltip
-      position="top"
-      :hide-after="1500"
-      arrow-hidden
-      trigger="click"
-      :distance="10"
-    >
-      <template #popper>
-        <div class="px-3 py-2 text-oc-text-400 text-sm font-medium">
-          Copied!
-        </div>
-      </template>
+    <CopyTooltip :value="url">
       <template #default="{ isShow }">
         <Icon
           width="14"
@@ -38,10 +20,9 @@ const copyToClipboard = async () => {
           class="cursor-pointer transition-all duration-500 group-hover/url:opacity-100"
           :class="isShow ? 'opacity-100' : 'opacity-0'"
           name="copy"
-          @click="copyToClipboard"
         />
       </template>
-    </Tooltip>
+    </CopyTooltip>
   </div>
 </template>
 

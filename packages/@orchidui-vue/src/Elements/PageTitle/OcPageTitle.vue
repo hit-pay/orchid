@@ -7,6 +7,9 @@ defineProps({
   description: { type: String },
   primaryButtonProps: Object,
   secondaryButtonProps: Object,
+  tooltipOptions: Object,
+  chipProps: Object,
+  isCopy: Boolean,
   isBack: { type: Boolean, default: false },
 });
 defineEmits({
@@ -33,7 +36,10 @@ defineEmits({
         <Title
           :title="title"
           :description="description"
-          class="flex-1 overflow-hidden"
+          :chip-props="chipProps"
+          :tooltip-options="tooltipOptions"
+          :is-copy="isCopy"
+          class="flex-1"
         />
 
         <slot name="right">

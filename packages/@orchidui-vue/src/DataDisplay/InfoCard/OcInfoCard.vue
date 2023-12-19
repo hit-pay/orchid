@@ -14,6 +14,8 @@ defineProps({
   transparent: Boolean,
   hover: Boolean,
   shadow: Boolean,
+  noData: Boolean,
+  noDataDescription: String,
 });
 
 const slots = useSlots();

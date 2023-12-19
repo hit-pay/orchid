@@ -1,6 +1,12 @@
 <script setup>
-import { computed, ref } from "vue";
-import { Checkbox, Icon, Tooltip, TableCellContent, Chip } from "@/orchidui";
+import { computed } from "vue";
+import {
+  Checkbox,
+  Icon,
+  CopyTooltip,
+  TableCellContent,
+  Chip,
+} from "@/orchidui";
 import dayjs from "dayjs";
 
 const Variants = {
@@ -57,20 +63,6 @@ const variantClass = computed(() => ({
   [Variants.DATETIME]: "px-4",
   [Variants.EMPTY]: "px-4 min-w-[48px]",
 }));
-const isCopied = ref(false);
-const copyToClipboard = async (text) => {
-  emit("copied", true);
-  isCopied.value = true;
-  try {
-    await navigator.clipboard.writeText(text);
-  } catch (err) {
-    console.error("Unable to copy text to clipboard. Error: ", err);
-  }
-  setTimeout(() => {
-    isCopied.value = false;
-    emit("copied", false);
-  }, 500);
-};
 </script>
 
 <template>
@@ -92,7 +84,7 @@ const copyToClipboard = async (text) => {
 
     <div
       v-else
-      class="flex"
+      class="w-full flex"
       :class="isCopy ? 'justify-between' : 'justify-start'"
     >
       <slot>
@@ -161,26 +153,18 @@ const copyToClipboard = async (text) => {
         <div v-else>-</div>
       </slot>
 
-      <Tooltip
+      <CopyTooltip
         v-if="isCopy && hasContentData"
-        position="top"
-        arrow-hidden
-        transition-name="copy"
-        :hide-after="800"
-        trigger="click"
-        :distance="10"
+        :value="data"
+        :tooltip-options="{
+          transitionName: 'copy',
+        }"
       >
         <Icon
           class="cursor-pointer w-5 h-5 group-hover/row:opacity-100 md:opacity-0 ml-2"
           name="copy"
-          @click="copyToClipboard(data)"
         />
-        <template #popper>
-          <div class="px-3 py-2 text-oc-text-400 text-sm font-medium">
-            Copied!
-          </div>
-        </template>
-      </Tooltip>
+      </CopyTooltip>
     </div>
   </div>
 </template>

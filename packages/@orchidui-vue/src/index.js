@@ -3,7 +3,7 @@ export * from "./DataDisplay/Pagination/OcPagination.js";
 export * from "./DataDisplay/Overview/OcOverview.js";
 export * from "./DataDisplay/CustomerCard/OcCustomerCard.js";
 export * from "./DataDisplay/ListItem/OcListItem.js";
-export * from "./DataDisplay/Card/OcCard.js";
+export * from "./DataDisplay/InfoCard/OcInfoCard.js";
 
 export * from "./Disclosure/Accordion/OcAccordion.js";
 export * from "./Disclosure/Tabs/Tabs.js";
@@ -30,6 +30,7 @@ export * from "./Overlay/Modal/OcModal.js";
 export * from "./Overlay/ConfirmationModal/OcConfirmationModal.js";
 export * from "./Overlay/Popper/OcPopper.js";
 export * from "./Overlay/SupportMenu/OcSupportMenu.js";
+export * from "./Overlay/CopyTooltip/OcCopyTooltip.js";
 
 export * from "./Theme/OcTheme.js";
 

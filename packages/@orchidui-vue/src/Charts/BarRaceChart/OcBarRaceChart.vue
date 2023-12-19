@@ -1,5 +1,15 @@
 <template>
-  <div ref="barChart" class="w-full" />
+  <div class="grid grid-cols-2">
+    <div class="pt-4 pb-7 flex flex-col h-[100%]">
+      <div
+        v-for="item in legendData"
+        class="text-[14px] flex flex-1 items-center justify-start"
+      >
+        {{ item }}
+      </div>
+    </div>
+    <div ref="barChart" class="h-[100%]" />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -7,15 +17,24 @@ import * as echarts from "echarts";
 import { computed, onMounted, ref, watch, onUnmounted } from "vue";
 
 const props = defineProps({
-  color: String,
+  variant: {
+    type: String,
+    validator: (value) => ["primary", "purple"].includes(value),
+  },
   showTooltip: Boolean,
   showLegend: Boolean,
   showGrid: Boolean,
   chartData: Array,
   labelData: Array,
+  legendData: Array,
   yAxisFormatter: Function,
   tooltipFormatter: Function,
 });
+
+const variants = {
+  primary: "#2465DE",
+  purple: "#B14AED",
+};
 
 const options = computed(() => ({
   xAxis: {
@@ -39,6 +58,7 @@ const options = computed(() => ({
       color: "#03102F",
       fontWeight: 500,
       formatter: props.yAxisFormatter,
+      fontSize: 14,
     },
   },
   grid: {
@@ -86,19 +106,19 @@ const options = computed(() => ({
         color: "#03102F",
         opacity: 1,
         align: "left",
-        padding: [0, 8],
+        padding: [0, 0],
         fontWeight: 300,
+        fontSize: 12,
       },
-      // barMaxWidth: 22,
       barGap: 0,
       itemStyle: {
-        color: props.color,
+        color: variants[props.variant],
         opacity: 0.2,
         borderRadius: [0, 4, 4, 0],
       },
       emphasis: {
         itemStyle: {
-          color: props.color,
+          color: variants[props.variant],
         },
       },
     },
@@ -114,12 +134,7 @@ const options = computed(() => ({
       },
       barGap: "-100%",
       itemStyle: {
-        color: props.color,
-      },
-      emphasis: {
-        itemStyle: {
-          color: props.color,
-        },
+        color: variants[props.variant],
       },
     },
   ],

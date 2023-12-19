@@ -233,7 +233,19 @@ export const Multiple = {
       return { selectedOption, selectedGroups, groups, options };
     },
     template: `
-          <Theme colorMode="light">
+          <Theme colorMode="light" class="p-10 flex flex-col gap-y-8">
+            <Select
+                v-model="selectedOption"
+                :options="options"
+                label="Label"
+                hint="Hint"
+                is-filterable
+                is-checkboxes
+                is-select-all
+                multiple
+                placeholder="Placeholder"
+            />
+
             <Select
                 v-model="selectedOption"
                 :options="options"
@@ -244,7 +256,7 @@ export const Multiple = {
                 is-add-new
                 placeholder="Placeholder"
             />
-            <div class="mt-4 mb-8">Selected value: {{ selectedOption }}</div>
+            <div class="">Selected value: {{ selectedOption }}</div>
 
             <Select
                 v-model="selectedGroups"
