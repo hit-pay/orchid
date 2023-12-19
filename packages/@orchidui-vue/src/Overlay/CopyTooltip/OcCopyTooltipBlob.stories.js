@@ -25,7 +25,6 @@ export const Default = {
     template: `
           <div class="w-full pt-8">
             <OcCopyTooltip
-                v-if="args.value"
                 :value="args.value"
                 :tooltip-text="args.tooltipText"
                 :tooltip-options="args.tooltipOptions"

@@ -9,16 +9,16 @@ const props = defineProps({
   },
   tooltipOptions: Object,
 });
-const copyToClipboard = async (text) => {
+const copyToClipboard = async (data) => {
   try {
     if (props.value instanceof Blob) {
       await navigator.clipboard.write([
         new ClipboardItem({
-          [props.value.type]: props.value,
+          [data.type]: data,
         }),
       ]);
     } else {
-      await navigator.clipboard.writeText(text);
+      await navigator.clipboard.writeText(data);
     }
   } catch (err) {
     console.error("Unable to copy text to clipboard. Error: ", err);
