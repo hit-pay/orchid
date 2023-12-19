@@ -1,3 +1,6 @@
+
+import { TOP_BANNER_FORM, HEADER_FORM, BANNER_FORM  } from './settings/SDHeaders.sample'
+
 const SDSidebarSample = [
   {
     type: "list",
@@ -5,19 +8,42 @@ const SDSidebarSample = [
     label: "Home Settings",
     children: [
       {
-        type: "section",
         name: "header",
         label: "Header",
+        sections: [
+          {
+            key: "TopBanner",
+            title: "Top Banner",
+            icon: "circle",
+            active: true,
+            isDisable: true,
+            form: TOP_BANNER_FORM
+          },
+          {
+            key: "Header",
+            title: "Header",
+            icon: "circle",
+            active: true,
+            isDisable: true,
+            form: HEADER_FORM
+          },
+          {
+            key: "Banner",
+            title: "Banner",
+            icon: "circle",
+            active: true,
+            isDisable: true,
+            form: BANNER_FORM
+          }
+        ] 
       },
       {
-        type: "section_list",
         name: "sections",
-        label: "Sections",
+        label: "Sections"
       },
       {
-        type: "section",
         name: "footer",
-        label: "Footer",
+        label: "Footer"
       },
     ],
   },
@@ -27,7 +53,6 @@ const SDSidebarSample = [
     label: "Styles",
     children: [
       {
-        type: "section",
         name: "custom",
         label: "Custom",
       },
@@ -39,17 +64,14 @@ const SDSidebarSample = [
     label: "Link In Bio",
     children: [
       {
-        type: "section",
         name: "icon_links",
         label: "Icon Links",
       },
       {
-        type: "section",
         name: "button_links",
         label: "Button Links",
       },
       {
-        type: "copy_link_in_bio",
         label: "Copy URL",
         icon: "link",
         onClick: () => console.log("do somthing"),

@@ -1,5 +1,8 @@
 <script setup>
-import { Icon } from "@/orchidui";
+import { ref } from "vue";
+import { Icon, Toggle } from "@/orchidui";
+import { DraggableList } from "@/orchidui/Draggable";
+import { RequestForm } from "@/orchidui/StoreDesign";
 import { computed } from "vue";
 const props = defineProps({
   settings: {
@@ -17,6 +20,8 @@ const emit = defineEmits({
   "update:active": [],
 });
 
+const generalData = computed(() => props.settings.general);
+
 const sidebarActive = computed(() => {
   return props.active;
 });
@@ -27,10 +32,16 @@ const changeSidebarMenu = (value) => {
     sidebarMenu: value,
   });
 };
-const changeSubmenu = (value) => {
+const sectionList = ref(null);
+const sectionActive = ref(null);
+const sectionActiveSettings = ref(null);
+
+const changeSubmenu = (value, children = "") => {
+  sectionList.value = children;
   emit("update:active", {
     ...sidebarActive.value,
     submenu: value,
+    section: "",
   });
 };
 
@@ -46,6 +57,20 @@ const submenuLabel = computed(() => {
   );
   return submenu?.label;
 });
+
+const changeSection = (to = "") => {
+  emit("update:active", {
+    ...sidebarActive.value,
+    section: to,
+  });
+};
+const onClickSection = (section) => {
+  sectionActive.value = section;
+  sectionActiveSettings.value = props.settings.sections.find(
+    (s) => s.key === section.key
+  );
+  changeSection(section.key);
+};
 </script>
 <template>
   <div class="h-full relative border border-gray-200">
@@ -110,7 +135,7 @@ const submenuLabel = computed(() => {
               @click="
                 children.onClick
                   ? children.onClick()
-                  : changeSubmenu(children.name)
+                  : changeSubmenu(children.name, children.sections)
               "
             >
               <div class="ml-2">
@@ -132,7 +157,9 @@ const submenuLabel = computed(() => {
               />
             </div>
           </template>
-          <slot v-else :name="sidebarMenu.type" />
+          <template v-else-if="sidebarMenu.type === 'styles'">
+            Styles Settings
+          </template>
         </div>
       </div>
     </div>
@@ -144,9 +171,38 @@ const submenuLabel = computed(() => {
         <div class="mx-2">/</div>
         <div class="font-medium">{{ submenuLabel }}</div>
       </div>
-      <slot :name="sidebarActive.submenu" />
+      <div v-if="sectionList" class="px-5">
+        <DraggableList
+          :model-value="sectionList"
+          class="w-full cursor-pointer"
+          @click:element="onClickSection"
+        >
+          <template #action="{ item }">
+            <Toggle :model-value="item.active" size="small"></Toggle>
+          </template>
+        </DraggableList>
+      </div>
     </div>
-    <slot :name="`section-${sidebarActive.section}`" />
+    <template v-if="sidebarActive.section">
+      <div class="px-5 py-4 flex cursor-pointer mt-8">
+        <div class="text-oc-text-300" @click="changeSubmenu('')">
+          {{ sidebarMenuLabel }}
+        </div>
+        <div class="text-oc-text-300 mx-2">/</div>
+        <div class="text-oc-text-300" @click="changeSection('')">
+          {{ submenuLabel }}
+        </div>
+        <div class="mx-2">/</div>
+        <div class="font-medium">{{ sectionActive.title }}</div>
+      </div>
+      <div class="p-5">
+        <RequestForm
+          :general-data="generalData"
+          :section-data="sectionActiveSettings"
+          :request-form="sectionActive.form"
+        />
+      </div>
+    </template>
     <div class="absolute bottom-0">
       <slot name="sidebar-bottom" />
     </div>

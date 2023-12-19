@@ -2,7 +2,8 @@ const ASSETS_URL = "/store-design/";
 
 const TOP_BANNER_FORM = [
   {
-    name: "closable",
+    general: true,
+    name: "top_banner_closable",
     type: "SectionItem",
     props: {
       title: "Closable",
@@ -92,10 +93,4 @@ const HEADER_FORM = [
 
 const BANNER_FORM = [];
 
-const HEADER_SETTINGS = {
-  TopBanner: TOP_BANNER_FORM,
-  Header: HEADER_FORM,
-  Banner: BANNER_FORM,
-};
-
-export { HEADER_SETTINGS };
+export { TOP_BANNER_FORM, HEADER_FORM, BANNER_FORM };

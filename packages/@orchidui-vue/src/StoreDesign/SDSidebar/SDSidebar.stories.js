@@ -22,6 +22,7 @@ export const Default = {
       const storeDesignData = ref({
         general: {
           top_banner_closable: true,
+          top_banner_content: "",
           navigation_menus: [],
           banners: [],
           footer_company_logo: "",
@@ -38,7 +39,7 @@ export const Default = {
         },
         sections: [
           {
-            key: "styles",
+            key: "Styles",
             section: "Styles",
             primary_color: "#002771",
             primary_text_color: "#03102F",
@@ -50,20 +51,20 @@ export const Default = {
             box_shadow: "0px 0px 12px 0px rgba(0, 0, 0, 0.12)"
           },
           {
-            key: "top_banner",
+            key: "TopBanner",
             section: "TopBanner",
             background_color: "#FFFFFF",
             text_color: "#03102F"
           },
           {
-            key: "header",
+            key: "Header",
             section: "Header",
             aligment: "right",
             background_color: "#002771",
             text_color: "#03102F"
           },
           {
-            key: "banner",
+            key: "Banner",
             section: "Banner",
             variant: "MediaOnly",
             width: "full",
@@ -78,7 +79,25 @@ export const Default = {
       });
 
       const content = ref('data')
-      return { sidebarActive, storeDesignData, SidebarConfig, args, content };
+
+      const updateSidebarActive = (section) => {
+        if(section === 'TopBanner'){
+          sidebarActive.value = {
+            sidebarMenu: "home",
+            submenu: "header",
+            section: "TopBanner",
+            id: "",
+          }
+        }else{
+          sidebarActive.value = {
+            sidebarMenu: "home",
+            submenu: "sections",
+            section: "Banner",
+            id: "section_key",
+          }
+        }
+      }
+      return { sidebarActive, storeDesignData, SidebarConfig, args, content, updateSidebarActive };
     },
     template: `
           <Theme>
@@ -103,8 +122,9 @@ export const Default = {
                     <div class="h-[700px] overflow-auto rounded">
                       <pre v-if="content === 'data'" class="bg-black text-white p-3 rounded">{{storeDesignData}}</pre>
                       <pre v-if="content === 'config'" class="bg-black text-white p-3 rounded">{{SidebarConfig}}</pre>
-                      <div v-if="content === 'preview'">
-                        Preview Section Focus to Settings
+                      <div class="flex flex-wrap gap-5" v-if="content === 'preview'">
+                        <Button label="Top Banner Section" @click="updateSidebarActive('TopBanner')" />
+                        <Button label="Banner Section" @click="updateSidebarActive()" />
                       </div>
                     </div>
                 </div>
