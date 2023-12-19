@@ -41,7 +41,7 @@ const onClickOutside = () => {
 </script>
 
 <template>
-  <span v-click-outside="onClickOutside" class="flex" @click.stop>
+  <span v-click-outside="onClickOutside" class="flex w-[inherit]" @click.stop>
     <Popper
       ref="popper"
       :placement="placement"
