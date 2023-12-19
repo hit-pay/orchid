@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watch } from "vue";
-import { Icon, Toggle } from "@/orchidui";
+import { Icon, Toggle, Button } from "@/orchidui";
 import { DraggableList } from "@/orchidui/Draggable";
 import { RequestForm } from "@/orchidui/StoreDesign";
 import { computed } from "vue";
@@ -17,6 +17,17 @@ const props = defineProps({
   settings: {
     type: Array,
   },
+  options: {
+    type: Object,
+    default: () => {
+      return {
+        categories: [],
+        products: [],
+        pages: [],
+      };
+    },
+    // pages, products, categories [used by input menu & select product from category / pick product]
+  },
 });
 
 const requiredSection = ["Header", "FooterContent"];
@@ -24,6 +35,9 @@ const requiredSection = ["Header", "FooterContent"];
 const emit = defineEmits({
   "update:values": [],
   "update:active": [],
+  "get:products": [],
+  "get:categories": [],
+  "get:pages": [],
 });
 
 const sectionList = ref(null);
@@ -252,7 +266,7 @@ const updateOrderedSection = (newOrdered) => {
         <div class="mx-2">/</div>
         <div class="font-medium">{{ submenuLabel }}</div>
       </div>
-      <div v-if="sectionList" class="px-5">
+      <div v-if="sectionList" class="px-5 mt-4">
         <DraggableList
           :model-value="sectionList"
           class="w-full cursor-pointer"
@@ -269,23 +283,34 @@ const updateOrderedSection = (newOrdered) => {
             <span v-else></span>
           </template>
         </DraggableList>
+        <div class="flex justify-center w-full mt-5">
+          <Button
+            label="New Section"
+            left-icon="plus"
+            variant="secondary"
+            @click="changeSection('add-new-section')"
+          />
+        </div>
       </div>
     </div>
-    <template v-if="sidebarActive.section">
-      <div class="px-5 py-4 flex cursor-pointer mt-8">
-        <div class="text-oc-text-300" @click="changeSubmenu('')">
-          {{ sidebarMenuLabel }}
-        </div>
-        <div class="text-oc-text-300 mx-2">/</div>
-        <div class="text-oc-text-300" @click="changeSection('')">
-          {{ submenuLabel }}
-        </div>
-        <div class="mx-2">/</div>
-        <div v-if="sectionActive" class="font-medium">
+    <template
+      v-if="
+        sidebarActive.section && sidebarActive.section !== 'add-new-section'
+      "
+    >
+      <div class="flex flex-col border-b">
+        <Icon
+          class="ml-auto text-oc-text-300 mx-5 mt-5 cursor-pointer"
+          name="x"
+          width="24"
+          height="24"
+          @click="changeSection('')"
+        />
+        <div v-if="sectionActive" class="font-medium pb-4 px-7">
           {{ sectionActive.title }}
         </div>
       </div>
-      <div v-if="sectionActive?.form" class="p-5">
+      <div v-if="sectionActive?.form" class="px-7 py-4 mt-4">
         <RequestForm
           :general-data="generalData"
           :section-data="sectionActiveSettings"
@@ -293,6 +318,19 @@ const updateOrderedSection = (newOrdered) => {
         >
         </RequestForm>
       </div>
+    </template>
+    <template v-else-if="sidebarActive.section === 'add-new-section'">
+      <div class="flex flex-col border-b">
+        <Icon
+          class="ml-auto text-oc-text-300 mx-5 mt-5 cursor-pointer"
+          name="x"
+          width="24"
+          height="24"
+          @click="changeSection('')"
+        />
+        <div class="font-medium pb-4 px-7">Add Sections</div>
+      </div>
+      <div class="px-7 py-4 mt-4">List Available Sections</div>
     </template>
     <div class="absolute bottom-0">
       <slot name="sidebar-bottom" />

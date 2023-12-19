@@ -14,7 +14,7 @@ export const Default = {
   render: (args) => ({
     components: { Theme, Button, SDSidebar},
     setup() {
-      const SidebarConfig = ref(SDSidebarSample);
+      const sidebarConfig = ref(SDSidebarSample);
       const sidebarActive = ref({
         sidebarMenu: "home",
         submenu: "",
@@ -202,7 +202,7 @@ export const Default = {
       }
     ]
 
-      return { sidebarActive, storeDesignData, SidebarConfig, args, content, updateSidebarActive, sectionSettings };
+      return { sidebarActive, storeDesignData, sidebarConfig, args, content, updateSidebarActive, sectionSettings };
     },
     template: `
           <Theme>
@@ -210,7 +210,7 @@ export const Default = {
               <div class="h-[800px] w-[500px]">
                   <SDSidebar 
                     v-model:values="storeDesignData"
-                    :sidebar="SidebarConfig"
+                    :sidebar="sidebarConfig"
                     :settings="sectionSettings"
                     v-model:active="sidebarActive">
                   </SDSidebar>
@@ -222,12 +222,14 @@ export const Default = {
                           <Button label="Redo" />
                         </div>
                         <Button @click="content = 'data'" label="Store Design Data" variant="secondary"  />
-                        <Button @click="content = 'config'" label="Config" variant="secondary"  />
+                        <Button @click="content = 'sidebar'" label="Sidebar" variant="secondary"  />
+                        <Button @click="content = 'section'" label="Section" variant="secondary"  />
                         <Button @click="content = 'preview'" label="PREVIEW" variant="secondary"  />
                     </div>
                     <div class="h-[700px] overflow-auto rounded bg-black">
                       <pre v-if="content === 'data'" class="bg-black text-white p-3 rounded">{{storeDesignData}}</pre>
-                      <pre v-if="content === 'config'" class="bg-black text-white p-3 rounded">{{SidebarConfig}}</pre>
+                      <pre v-if="content === 'sidebar'" class="bg-black text-white p-3 rounded">{{sidebarConfig}}</pre>
+                      <pre v-if="content === 'section'" class="bg-black text-white p-3 rounded">{{sectionSettings}}</pre>
                       <div class="flex flex-wrap gap-5 p-5" v-if="content === 'preview'">
                         <Button label="Top Banner Section" @click="updateSidebarActive('TopBanner')" />
                         <Button label="Header Section" @click="updateSidebarActive('Header')" />
