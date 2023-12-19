@@ -1,4 +1,3 @@
-
 const PRODUCT_FORM = [
   {
     type: "SectionItem",
@@ -22,7 +21,7 @@ const PRODUCT_FORM = [
           label: "Grid",
         },
       ],
-    }
+    },
   },
   {
     type: "SectionItem",
@@ -53,10 +52,8 @@ const PRODUCT_FORM = [
           label: "Pick Products",
         },
       ],
-    }
+    },
   },
 ];
 
-export {
-  PRODUCT_FORM 
-}
+export { PRODUCT_FORM };

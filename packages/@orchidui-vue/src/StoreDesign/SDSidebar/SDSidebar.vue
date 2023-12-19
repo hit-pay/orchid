@@ -64,7 +64,7 @@ watch(
       props.values.sections.forEach((item) => {
         if (item.group === "sections") {
           const sectionItem = props.settings.find(
-            (s) => s.section === item.section
+            (s) => s.section === item.section,
           );
           sectionListCustom.push({
             group: item.group,
@@ -81,16 +81,16 @@ watch(
     }
 
     sectionActive.value = sectionList.value.find(
-      (s) => s.key === props.active.section
+      (s) => s.key === props.active.section,
     );
 
     sectionActiveSettings.value = props.values.sections.find(
-      (s) => s.key === props.active.section
+      (s) => s.key === props.active.section,
     );
   },
   {
     deep: true,
-  }
+  },
 );
 
 const changeSidebarMenu = (value) => {
@@ -116,7 +116,7 @@ const sidebarMenuLabel = computed(() => {
 });
 const submenuLabel = computed(() => {
   const submenu = sidebarMenuActive.value.children.find(
-    (s) => s.name === sidebarActive.value.submenu
+    (s) => s.name === sidebarActive.value.submenu,
   );
   return submenu?.label;
 });

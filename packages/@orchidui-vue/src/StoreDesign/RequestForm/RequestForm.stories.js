@@ -34,25 +34,27 @@ export const SDTopBanner = {
       const sectionData = ref(
         SECTION_SETTINGS.find((s) => s.section === "TopBanner"),
       );
-      const JSON_FORM = [{
-        name: "closable",
-        type: "SectionItem",
-        props: {
-          title: "Closable",
-          isToggle: true,
+      const JSON_FORM = [
+        {
+          name: "closable",
+          type: "SectionItem",
+          props: {
+            title: "Closable",
+            isToggle: true,
+          },
         },
-      },
-      {
-        type: "SectionItem",
-        props: {
-          title: "Content",
+        {
+          type: "SectionItem",
+          props: {
+            title: "Content",
+          },
         },
-      },
-      {
-        general: true,
-        name: "top_banner_content",
-        type: "TextArea",
-      }]
+        {
+          general: true,
+          name: "top_banner_content",
+          type: "TextArea",
+        },
+      ];
 
       return { JSON_FORM, generalData, sectionData };
     },
