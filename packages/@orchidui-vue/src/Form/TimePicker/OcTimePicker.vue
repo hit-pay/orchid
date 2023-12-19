@@ -14,10 +14,7 @@ const time = ref();
 const popup = ref();
 const isDropdownOpened = ref(false);
 defineProps({
-  modelValue: {
-    type: [String, Date],
-    default: () => new Date(),
-  },
+  modelValue: [String, Date],
   label: String,
   hint: String,
   placeholder: String,

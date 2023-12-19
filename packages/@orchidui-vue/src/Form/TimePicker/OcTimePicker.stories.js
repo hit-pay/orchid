@@ -29,7 +29,7 @@ export const Default = {
   render: (args) => ({
     components: { Theme, TimePicker },
     setup() {
-      const modelValue = ref();
+      const modelValue = ref(new Date());
       return { modelValue, args };
     },
     template: `
