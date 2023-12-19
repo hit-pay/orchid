@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { Icon, Tooltip } from "@/orchidui";
 
-defineProps({
-  value: String,
+const props = defineProps({
+  value: [String, Blob],
   tooltipText: {
     type: String,
     default: "Copied!",
@@ -11,7 +11,15 @@ defineProps({
 });
 const copyToClipboard = async (text) => {
   try {
-    await navigator.clipboard.writeText(text);
+    if (props.value instanceof Blob) {
+      await navigator.clipboard.write([
+        new ClipboardItem({
+          [props.value.type]: props.value,
+        }),
+      ]);
+    } else {
+      await navigator.clipboard.writeText(text);
+    }
   } catch (err) {
     console.error("Unable to copy text to clipboard. Error: ", err);
   }
@@ -24,7 +32,7 @@ const copyToClipboard = async (text) => {
     :hide-after="1500"
     arrow-hidden
     trigger="click"
-    :distance="10"
+    :distance="20"
     v-bind="tooltipOptions"
   >
     <template #popper>
