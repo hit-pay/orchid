@@ -10,7 +10,7 @@ defineProps({
 <template>
   <div class="flex flex-col gap-y-1 whitespace-nowrap overflow-hidden">
     <span
-      class="overflow-hidden text-ellipsis text-oc-text"
+      class="overflow-hidden text-ellipsis text-oc-text truncate"
       :class="important ? 'font-medium' : 'font-regular'"
     >
       <a v-if="href" :href="href" target="_blank" rel="noopener noreferrer">{{
@@ -19,7 +19,9 @@ defineProps({
       <template v-else>{{ title }}</template>
       <span v-if="!title">-</span>
     </span>
-    <span class="overflow-hidden text-ellipsis text-oc-text-400 text-sm">
+    <span
+      class="overflow-hidden text-ellipsis text-oc-text-400 text-sm truncate"
+    >
       {{ description }}
       <span v-if="!description">-</span>
     </span>
