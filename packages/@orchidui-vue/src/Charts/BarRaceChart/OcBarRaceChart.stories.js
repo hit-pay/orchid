@@ -6,8 +6,14 @@ export default {
 };
 
 export const barRace = {
+  argTypes: {
+    variant: {
+      control: "select",
+      options: ["primary", "purple"],
+    },
+  },
   args: {
-    color: "#2465DE",
+    variant: "primary",
     showGrid: false,
     showTooltip: true,
     showLegend: true,
@@ -31,7 +37,7 @@ export const barRace = {
           <div>
             <OcBarRaceChart
                 class="h-[300px]"
-                :color="args.color"
+                :variant="args.variant"
                 :show-grid="args.showGrid"
                 :show-tooltip="args.showTooltip"
                 :show-legend="args.showLegend"
