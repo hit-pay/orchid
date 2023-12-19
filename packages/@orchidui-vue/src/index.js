@@ -30,6 +30,7 @@ export * from "./Overlay/Modal/OcModal.js";
 export * from "./Overlay/ConfirmationModal/OcConfirmationModal.js";
 export * from "./Overlay/Popper/OcPopper.js";
 export * from "./Overlay/SupportMenu/OcSupportMenu.js";
+export * from "./Overlay/CopyTooltip/OcCopyTooltip.js";
 
 export * from "./Theme/OcTheme.js";
 
