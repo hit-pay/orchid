@@ -166,7 +166,7 @@ const defaultDateRange = () => {
               : new Date()
         "
         :disabled-date="disabledDate"
-        :max-date="dayjs(maxDate, dateFormat).toDate()"
+        :max-date="maxDate"
         :min-date="minDate"
         position="inline"
         :type="type"
