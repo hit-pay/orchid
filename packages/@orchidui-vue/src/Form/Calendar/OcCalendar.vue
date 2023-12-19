@@ -93,24 +93,28 @@ const selectedMonth = computed(() => {
   }
   return "";
 });
+const isStartDateSet = ref(false);
 
 const selectDay = (day) => {
   const currentMonth = new Date(selectedDate.value);
   currentMonth.setDate(day);
-  if (
-    props.type !== "range" ||
-    Math.abs(
-      currentMonth.getTime() - new Date(selectedEndDate.value).getTime(),
-    ) >
-      Math.abs(
-        currentMonth.getTime() - new Date(selectedStartDate.value).getTime(),
-      )
-  ) {
+  if (!isStartDateSet.value) {
+    isStartDateSet.value = true;
+
     selectedStartDay.value = day;
     selectedStartDate.value = currentMonth;
   } else {
-    selectedEndDay.value = day;
-    selectedEndDate.value = currentMonth;
+    isStartDateSet.value = false;
+    if (selectedStartDate.value.getTime() >= currentMonth.getTime()) {
+      const nextDay = new Date(selectedStartDate.value);
+      nextDay.setDate(nextDay.getDate() + 1);
+
+      selectedEndDate.value = nextDay;
+      selectedEndDay.value = nextDay.getDate();
+    } else {
+      selectedEndDay.value = day;
+      selectedEndDate.value = currentMonth;
+    }
   }
 };
 
