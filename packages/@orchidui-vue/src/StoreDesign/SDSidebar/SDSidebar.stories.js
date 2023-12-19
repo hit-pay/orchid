@@ -3,7 +3,7 @@ import { SDSidebar } from "@/orchidui/StoreDesign";
 import { SDSidebarSample } from "./SDSidebar.sample";
 import { ref } from "vue";
 import { TOP_BANNER_FORM, HEADER_FORM, BANNER_FORM  } from './settings/SDHeaders.sample'
-
+import { PRODUCT_FORM } from './settings/SDSections.sample'
 export default {
   component: SDSidebar,
   tags: ["autodocs"],
@@ -191,7 +191,14 @@ export const Default = {
         title: "Powered By",
         icon: "circle",
         isDisable: true,
-        form: []
+      },
+      {
+        group: "sections",
+        key: "Products",
+        section: "Products",
+        title: "Products",
+        icon: "circle",
+        form: PRODUCT_FORM
       }
     ]
 

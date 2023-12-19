@@ -91,6 +91,20 @@ const HEADER_FORM = [
   },
 ];
 
-const BANNER_FORM = [];
+const BANNER_FORM = [
+  {
+    type: "SectionItem",
+    props: {
+      title: "Type",
+    },
+  }, 
+  {
+    type: "SectionItem",
+    props: {
+      title: "Upload Images",
+      descriptions: "Recommended size 1440x400 pixels"
+    },
+  }
+];
 
 export { TOP_BANNER_FORM, HEADER_FORM, BANNER_FORM };

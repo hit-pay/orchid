@@ -49,21 +49,24 @@ watch(
       let sectionListCustom = [];
       props.values.sections.forEach((item) => {
         if (item.group === "sections") {
+          const sectionItem = props.settings.find(
+            (s) => s.section === item.section
+          );
           sectionListCustom.push({
             group: item.group,
             key: item.key,
             section: item.section,
             title: item.title,
-            icon: item.icon,
             active: item.active,
-            form: [],
+            icon: sectionItem.icon,
+            form: sectionItem.form,
           });
         }
       });
       sectionList.value = sectionListCustom;
     }
 
-    sectionActive.value = props.settings.find(
+    sectionActive.value = sectionList.value.find(
       (s) => s.key === props.active.section
     );
 
@@ -111,7 +114,9 @@ const changeSection = (to = "") => {
   });
 };
 const onClickSection = (section) => {
-  changeSection(section.key);
+  if (section.form) {
+    changeSection(section.key);
+  }
 };
 
 const updateSectionActive = (value, item) => {
@@ -252,7 +257,7 @@ const updateOrderedSection = (newOrdered) => {
           :model-value="sectionList"
           class="w-full cursor-pointer"
           @click:element="onClickSection"
-          @update:modelValue="updateOrderedSection"
+          @update:model-value="updateOrderedSection"
         >
           <template #action="{ item }">
             <Toggle
@@ -276,11 +281,11 @@ const updateOrderedSection = (newOrdered) => {
           {{ submenuLabel }}
         </div>
         <div class="mx-2">/</div>
-        <div class="font-medium">
+        <div v-if="sectionActive" class="font-medium">
           {{ sectionActive.title }}
         </div>
       </div>
-      <div class="p-5">
+      <div v-if="sectionActive?.form" class="p-5">
         <RequestForm
           :general-data="generalData"
           :section-data="sectionActiveSettings"
