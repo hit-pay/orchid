@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Icon, Tooltip } from "@/orchidui";
 
-const props = defineProps({
+defineProps({
   value: [String, Blob],
   tooltipText: {
     type: String,
@@ -11,7 +11,7 @@ const props = defineProps({
 });
 const copyToClipboard = async (data) => {
   try {
-    if (props.value instanceof Blob) {
+    if (data instanceof Blob) {
       await navigator.clipboard.write([
         new ClipboardItem({
           [data.type]: data,
