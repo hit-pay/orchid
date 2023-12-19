@@ -98,7 +98,7 @@ const copyToClipboard = async (text) => {
 
     <div
       v-else
-      class="flex"
+      class="w-full flex"
       :class="isCopy ? 'justify-between' : 'justify-start'"
     >
       <slot>
