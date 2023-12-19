@@ -56,6 +56,16 @@ const SDSectionSample = [
     section: "Products",
     title: "Products",
     icon: "circle",
+    preview: "/images/section.png",
+    form: PRODUCT_FORM,
+  },
+  {
+    group: "sections",
+    key: "MediaAndText",
+    section: "MediaAndText",
+    title: "Media and Text",
+    icon: "circle",
+    preview: "/images/section.png",
     form: PRODUCT_FORM,
   },
 ];

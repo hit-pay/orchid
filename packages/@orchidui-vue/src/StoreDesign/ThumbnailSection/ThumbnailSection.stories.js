@@ -12,17 +12,17 @@ export const Default = {
       {
         name: "section_1",
         preview: "/images/section.png",
-        label: "Section 1",
+        title: "Section 1",
       },
       {
         name: "section_2",
         preview: "/images/section.png",
-        label: "Section 2",
+        title: "Section 2",
       },
       {
         name: "section_2",
         preview: "/images/section.png",
-        label: "Section 2",
+        title: "Section 2",
       },
     ],
   },
