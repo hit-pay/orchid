@@ -3,6 +3,7 @@ import { Icon, Checkbox } from "@/orchidui";
 
 defineProps({
   label: String,
+  subLabel: String,
   isSelected: [Boolean, Number],
   isCheckboxes: Boolean,
 });
@@ -18,7 +19,12 @@ defineProps({
       :model-value="!!isSelected"
       class="!w-fit pointer-events-none"
     />
-    <span :class="isCheckboxes ? 'flex-1' : ''">{{ label }}</span>
+    <div class="flex flex-col gap-3 w-[inherit]">
+      <span :class="isCheckboxes ? 'flex-1' : ''">{{ label }}</span>
+      <span v-if="subLabel" class="text-sm text-oc-text-300">{{
+        subLabel
+      }}</span>
+    </div>
     <Icon
       v-if="isSelected && !isCheckboxes"
       class="w-5 h-5 text-oc-primary"
