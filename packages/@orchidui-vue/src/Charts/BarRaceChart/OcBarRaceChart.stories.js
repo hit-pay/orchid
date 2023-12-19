@@ -45,7 +45,7 @@ export const barRace = {
                 :chart-data="args.chartData"
                 :label-data="args.labelData"
                 :legend-data="args.legendData"
-                :dummy-Data="args.dummyData"
+                :dummy-data="args.dummyData"
             />
           </div>
         `,

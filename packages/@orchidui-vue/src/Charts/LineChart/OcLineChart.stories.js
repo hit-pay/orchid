@@ -27,7 +27,7 @@ export const Line = {
       "OCT'23",
       "NOV'23",
     ],
-    dummyData: true,
+    dummyData: false,
   },
   render: (args) => ({
     components: { LineChart },
