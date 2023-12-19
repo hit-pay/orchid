@@ -5,7 +5,7 @@ export default {
   tags: ["autodocs"],
 };
 const argTypes = {
-  additionalContentVariant: {
+  variant: {
     control: "select",
     options: ["default", "dynamic", "balance"],
   },
@@ -130,7 +130,7 @@ const args = {
       ],
     },
   },
-  additionalContentVariant: "default",
+  variant: "default",
   boxes: [],
   isCustomer: false,
   overviewItems: [
@@ -197,7 +197,7 @@ export const Default = {
                 :chip-variant="args.chipVariant"
                 :user-id="args.userId"
                 :primary-actions="args.primaryActions"
-                :variant="args.additionalContentVariant ?? 'default'"
+                :variant="args.variant ?? 'default'"
                 :boxes="args.boxes"
                 :overview-items="args.overviewItems"
                 :overview-tabs="args.overviewTabs"

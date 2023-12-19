@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from "vue";
+import { computed } from "vue";
 import {
   Checkbox,
   Icon,
@@ -63,20 +63,6 @@ const variantClass = computed(() => ({
   [Variants.DATETIME]: "px-4",
   [Variants.EMPTY]: "px-4 min-w-[48px]",
 }));
-const isCopied = ref(false);
-const copyToClipboard = async (text) => {
-  emit("copied", true);
-  isCopied.value = true;
-  try {
-    await navigator.clipboard.writeText(text);
-  } catch (err) {
-    console.error("Unable to copy text to clipboard. Error: ", err);
-  }
-  setTimeout(() => {
-    isCopied.value = false;
-    emit("copied", false);
-  }, 500);
-};
 </script>
 
 <template>
