@@ -1,6 +1,19 @@
 <script setup>
 import { FormBuilder } from "@/orchidui";
 import { ref } from "vue";
+
+// const FormRequestTypes = [
+//   "title",
+//   "text",
+//   "longText",
+//   "options",
+//   "toggle",
+//   "select",
+//   "select_category",
+//   "select_products",
+//   "font",
+// ];
+
 const props = defineProps({
   requestForm: Object,
   generalData: Object,
@@ -75,6 +88,8 @@ const onUpdateForm = (form, value = null) => {
       :json-form="requestForm"
       @on-update="onUpdateForm"
     >
+      <template #Colors> Form Colors </template>
+      <template #SubForm> Sub Form </template>
     </FormBuilder>
   </div>
 </template>

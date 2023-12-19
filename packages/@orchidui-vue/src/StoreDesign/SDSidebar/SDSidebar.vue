@@ -1,11 +1,11 @@
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { Icon, Toggle } from "@/orchidui";
 import { DraggableList } from "@/orchidui/Draggable";
 import { RequestForm } from "@/orchidui/StoreDesign";
 import { computed } from "vue";
 const props = defineProps({
-  settings: {
+  values: {
     type: Object,
   },
   active: {
@@ -14,17 +14,51 @@ const props = defineProps({
   sidebar: {
     type: Array,
   },
+  settings: {
+    type: Array,
+  },
 });
 const emit = defineEmits({
-  "update:settings": [],
+  "update:values": [],
   "update:active": [],
 });
 
-const generalData = computed(() => props.settings.general);
+const sectionList = ref(null);
+const sectionActive = ref(null);
+const sectionActiveSettings = ref(null);
+
+const generalData = computed(() => props.values.general);
 
 const sidebarActive = computed(() => {
   return props.active;
 });
+
+watch(
+  () => props.active,
+  () => {
+    sectionActive.value = props.settings.find(
+      (s) => s.key === props.active.section
+    );
+
+    sectionActiveSettings.value = props.values.sections.find(
+      (s) => s.key === props.active.section
+    );
+
+    if (props.active.submenu && props.active.submenu !== "sections") {
+      sectionList.value = props.settings.filter((s) => {
+        const sectionData = props.values.sections.find((i) => i.key === s.key);
+        s.active = sectionData?.active;
+        return s.group === props.active.submenu;
+      });
+    } else {
+      // set by store design section data
+      sectionList.value = null;
+    }
+  },
+  {
+    deep: true,
+  }
+);
 
 const changeSidebarMenu = (value) => {
   emit("update:active", {
@@ -32,12 +66,8 @@ const changeSidebarMenu = (value) => {
     sidebarMenu: value,
   });
 };
-const sectionList = ref(null);
-const sectionActive = ref(null);
-const sectionActiveSettings = ref(null);
 
-const changeSubmenu = (value, children = "") => {
-  sectionList.value = children;
+const changeSubmenu = (value) => {
   emit("update:active", {
     ...sidebarActive.value,
     submenu: value,
@@ -65,11 +95,27 @@ const changeSection = (to = "") => {
   });
 };
 const onClickSection = (section) => {
-  sectionActive.value = section;
-  sectionActiveSettings.value = props.settings.sections.find(
-    (s) => s.key === section.key
-  );
   changeSection(section.key);
+};
+
+const updateSectionActive = (value, item) => {
+  const newValuesSections = [];
+
+  props.values.sections.map((vs) => {
+    if (item.key === vs.key) {
+      newValuesSections.push({
+        ...vs,
+        active: value,
+      });
+    } else {
+      newValuesSections.push(vs);
+    }
+  });
+
+  emit("update:values", {
+    general: generalData.value,
+    sections: newValuesSections,
+  });
 };
 </script>
 <template>
@@ -135,7 +181,7 @@ const onClickSection = (section) => {
               @click="
                 children.onClick
                   ? children.onClick()
-                  : changeSubmenu(children.name, children.sections)
+                  : changeSubmenu(children.name)
               "
             >
               <div class="ml-2">
@@ -178,7 +224,11 @@ const onClickSection = (section) => {
           @click:element="onClickSection"
         >
           <template #action="{ item }">
-            <Toggle :model-value="item.active" size="small"></Toggle>
+            <Toggle
+              v-model="item.active"
+              size="small"
+              @update:model-value="updateSectionActive($event, item)"
+            ></Toggle>
           </template>
         </DraggableList>
       </div>
@@ -193,14 +243,17 @@ const onClickSection = (section) => {
           {{ submenuLabel }}
         </div>
         <div class="mx-2">/</div>
-        <div class="font-medium">{{ sectionActive.title }}</div>
+        <div class="font-medium">
+          {{ sectionActive.title }}
+        </div>
       </div>
       <div class="p-5">
         <RequestForm
           :general-data="generalData"
           :section-data="sectionActiveSettings"
           :request-form="sectionActive.form"
-        />
+        >
+        </RequestForm>
       </div>
     </template>
     <div class="absolute bottom-0">
