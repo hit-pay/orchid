@@ -6,8 +6,14 @@ export default {
 };
 
 export const barRace = {
+  argTypes: {
+    color: {
+      control: "select",
+      options: ["primary", "purple"],
+    },
+  },
   args: {
-    color: "#2465DE",
+    color: "primary",
     showGrid: false,
     showTooltip: true,
     showLegend: true,

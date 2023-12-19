@@ -6,8 +6,14 @@ export default {
 };
 
 export const barChart = {
+  argTypes: {
+    color: {
+      control: "select",
+      options: ["primary", "purple"],
+    },
+  },
   args: {
-    color: "#B14AED",
+    color: "primary",
     showGrid: false,
     showTooltip: true,
     showLegend: true,
