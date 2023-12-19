@@ -40,6 +40,8 @@ export const Default = {
       ],
     },
     isBack: false,
+    isCopy: false,
+    chipOptions: null,
   },
   render: (args) => ({
     components: { PageTitle, Theme },

@@ -1,6 +1,12 @@
 <script setup>
 import { computed, ref } from "vue";
-import { Checkbox, Icon, Tooltip, TableCellContent, Chip } from "@/orchidui";
+import {
+  Checkbox,
+  Icon,
+  CopyTooltip,
+  TableCellContent,
+  Chip,
+} from "@/orchidui";
 import dayjs from "dayjs";
 
 const Variants = {
@@ -161,26 +167,18 @@ const copyToClipboard = async (text) => {
         <div v-else>-</div>
       </slot>
 
-      <Tooltip
+      <CopyTooltip
         v-if="isCopy && hasContentData"
-        position="top"
-        arrow-hidden
-        transition-name="copy"
-        :hide-after="800"
-        trigger="click"
-        :distance="10"
+        :value="data"
+        :tooltip-options="{
+          transitionName: 'copy',
+        }"
       >
         <Icon
           class="cursor-pointer w-5 h-5 group-hover/row:opacity-100 md:opacity-0 ml-2"
           name="copy"
-          @click="copyToClipboard(data)"
         />
-        <template #popper>
-          <div class="px-3 py-2 text-oc-text-400 text-sm font-medium">
-            Copied!
-          </div>
-        </template>
-      </Tooltip>
+      </CopyTooltip>
     </div>
   </div>
 </template>
