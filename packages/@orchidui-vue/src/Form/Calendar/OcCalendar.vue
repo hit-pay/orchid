@@ -1,6 +1,7 @@
 <script setup>
 import { Button, Icon } from "@/orchidui";
 import { computed, ref } from "vue";
+
 const props = defineProps({
   type: {
     type: String,
@@ -98,22 +99,29 @@ const isStartDateSet = ref(false);
 const selectDay = (day) => {
   const currentMonth = new Date(selectedDate.value);
   currentMonth.setDate(day);
-  if (!isStartDateSet.value) {
-    isStartDateSet.value = true;
-
+  if (props.type !== "range") {
     selectedStartDay.value = day;
     selectedStartDate.value = currentMonth;
+    selectedEndDay.value = null;
+    selectedEndDate.value = null;
   } else {
-    isStartDateSet.value = false;
-    if (selectedStartDate.value.getTime() >= currentMonth.getTime()) {
-      const nextDay = new Date(selectedStartDate.value);
-      nextDay.setDate(nextDay.getDate() + 1);
+    if (!isStartDateSet.value) {
+      isStartDateSet.value = true;
 
-      selectedEndDate.value = nextDay;
-      selectedEndDay.value = nextDay.getDate();
+      selectedStartDay.value = day;
+      selectedStartDate.value = currentMonth;
     } else {
-      selectedEndDay.value = day;
-      selectedEndDate.value = currentMonth;
+      isStartDateSet.value = false;
+      if (selectedStartDate.value.getTime() >= currentMonth.getTime()) {
+        const nextDay = new Date(selectedStartDate.value);
+        nextDay.setDate(nextDay.getDate() + 1);
+
+        selectedEndDate.value = nextDay;
+        selectedEndDay.value = nextDay.getDate();
+      } else {
+        selectedEndDay.value = day;
+        selectedEndDate.value = currentMonth;
+      }
     }
   }
 };
