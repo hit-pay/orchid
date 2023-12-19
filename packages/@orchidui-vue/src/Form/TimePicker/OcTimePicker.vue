@@ -1,6 +1,6 @@
 <script setup>
-import { Input, Dropdown, BaseInput } from "@/orchidui";
-import { defineAsyncComponent, onMounted, ref } from "vue";
+import { Input, Dropdown } from "@/orchidui";
+import { defineAsyncComponent, ref } from "vue";
 import dayjs from "dayjs";
 
 const emit = defineEmits({
