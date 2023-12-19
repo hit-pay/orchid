@@ -79,10 +79,43 @@ export const Default = {
             width: "full",
             image_width: "half",
             aligment: "text_right",
-            title: "",
+            banner_title: "",
             description: "",
             button_text: "",
             button_link: "",
+            active: true
+          },
+          {
+            group: "footer",
+            key: "FooterContent",
+            section: "FooterContent",
+            active: true
+          },
+          {
+            group: "footer",
+            key: "PoweredBy",
+            section: "PoweredBy",
+            active: true
+          },
+          {
+            group: "sections",
+            key: "product_list_1",
+            section: "Products",
+            title: "Feature Product",
+            active: true
+          },
+          {
+            group: "sections",
+            key: "product_list_2",
+            section: "Products",
+            title: "All Products",
+            active: true
+          },
+          {
+            group: "sections",
+            key: "product_list_4",
+            section: "Products",
+            title: "Pick Products",
             active: true
           }
         ]
@@ -118,6 +151,7 @@ export const Default = {
      const sectionSettings = [{
         group: "header",
         key: "TopBanner",
+        section: "TopBanner",
         title: "Top Banner",
         icon: "circle",
         isDisable: true,
@@ -126,6 +160,7 @@ export const Default = {
       {
         group: "header",
         key: "Header",
+        section: "Header",
         title: "Header",
         icon: "circle",
         isDisable: true,
@@ -134,6 +169,7 @@ export const Default = {
       {
         group: "header",
         key: "Banner",
+        section: "Banner",
         title: "Banner",
         icon: "circle",
         isDisable: true,
@@ -142,6 +178,7 @@ export const Default = {
       {
         group: "footer",
         key: "FooterContent",
+        section: "FooterContent",
         title: "Footer Content",
         icon: "circle",
         isDisable: true,
@@ -150,6 +187,7 @@ export const Default = {
       {
         group: "footer",
         key: "PoweredBy",
+        section: "PoweredBy",
         title: "Powered By",
         icon: "circle",
         isDisable: true,

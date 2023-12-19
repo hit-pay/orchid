@@ -18,6 +18,9 @@ const props = defineProps({
     type: Array,
   },
 });
+
+const requiredSection = ["Header", "FooterContent"];
+
 const emit = defineEmits({
   "update:values": [],
   "update:active": [],
@@ -36,14 +39,6 @@ const sidebarActive = computed(() => {
 watch(
   () => props.active,
   () => {
-    sectionActive.value = props.settings.find(
-      (s) => s.key === props.active.section
-    );
-
-    sectionActiveSettings.value = props.values.sections.find(
-      (s) => s.key === props.active.section
-    );
-
     if (props.active.submenu && props.active.submenu !== "sections") {
       sectionList.value = props.settings.filter((s) => {
         const sectionData = props.values.sections.find((i) => i.key === s.key);
@@ -51,9 +46,30 @@ watch(
         return s.group === props.active.submenu;
       });
     } else {
-      // set by store design section data
-      sectionList.value = null;
+      let sectionListCustom = [];
+      props.values.sections.forEach((item) => {
+        if (item.group === "sections") {
+          sectionListCustom.push({
+            group: item.group,
+            key: item.key,
+            section: item.section,
+            title: item.title,
+            icon: item.icon,
+            active: item.active,
+            form: [],
+          });
+        }
+      });
+      sectionList.value = sectionListCustom;
     }
+
+    sectionActive.value = props.settings.find(
+      (s) => s.key === props.active.section
+    );
+
+    sectionActiveSettings.value = props.values.sections.find(
+      (s) => s.key === props.active.section
+    );
   },
   {
     deep: true,
@@ -115,6 +131,20 @@ const updateSectionActive = (value, item) => {
   emit("update:values", {
     general: generalData.value,
     sections: newValuesSections,
+  });
+};
+
+const updateOrderedSection = (newOrdered) => {
+  let newSectionsList = [];
+  newOrdered.forEach((item) => {
+    newSectionsList.push(props.values.sections.find((i) => i.key === item.key));
+  });
+  emit("update:values", {
+    general: generalData.value,
+    sections: [
+      ...props.values.sections.filter((vs) => vs.group !== "sections"),
+      ...newSectionsList,
+    ],
   });
 };
 </script>
@@ -222,13 +252,16 @@ const updateSectionActive = (value, item) => {
           :model-value="sectionList"
           class="w-full cursor-pointer"
           @click:element="onClickSection"
+          @update:modelValue="updateOrderedSection"
         >
           <template #action="{ item }">
             <Toggle
+              v-if="!requiredSection.includes(item.section)"
               v-model="item.active"
               size="small"
               @update:model-value="updateSectionActive($event, item)"
             ></Toggle>
+            <span v-else></span>
           </template>
         </DraggableList>
       </div>
