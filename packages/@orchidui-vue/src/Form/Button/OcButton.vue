@@ -96,7 +96,14 @@ const iconSize = computed(() => ({
 }));
 </script>
 <template>
-  <div class="flex overflow-hidden" :class="[showShadow, roundedClasses]">
+  <div
+    class="flex overflow-hidden"
+    :class="[
+      showShadow,
+      roundedClasses,
+      isDisabled || isLoading ? 'pointer-events-none' : '',
+    ]"
+  >
     <button
       class="oc-btn relative w-full text-center justify-center font-medium gap-x-3 flex items-center"
       :disabled="isDisabled || isLoading"
