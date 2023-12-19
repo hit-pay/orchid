@@ -17,7 +17,7 @@ import * as echarts from "echarts";
 import { computed, onMounted, ref, watch, onUnmounted } from "vue";
 
 const props = defineProps({
-  color: {
+  variant: {
     type: String,
     validator: (value) => ["primary", "purple"].includes(value),
   },
@@ -31,7 +31,7 @@ const props = defineProps({
   tooltipFormatter: Function,
 });
 
-const colors = {
+const variants = {
   primary: "#2465DE",
   purple: "#B14AED",
 };
@@ -112,13 +112,13 @@ const options = computed(() => ({
       },
       barGap: 0,
       itemStyle: {
-        color: colors[props.color],
+        color: variants[props.variant],
         opacity: 0.2,
         borderRadius: [0, 4, 4, 0],
       },
       emphasis: {
         itemStyle: {
-          color: colors[props.color],
+          color: variants[props.variant],
         },
       },
     },
@@ -134,7 +134,7 @@ const options = computed(() => ({
       },
       barGap: "-100%",
       itemStyle: {
-        color: colors[props.color],
+        color: variants[props.variant],
       },
     },
   ],
