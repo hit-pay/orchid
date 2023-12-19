@@ -19,8 +19,8 @@ defineProps({
       :model-value="!!isSelected"
       class="!w-fit pointer-events-none"
     />
-    <div class="flex flex-col gap-3 w-[inherit]">
-      <span :class="isCheckboxes ? 'flex-1' : ''">{{ label }}</span>
+    <div class="flex flex-col gap-3" :class="{ 'flex-1': isCheckboxes }">
+      <span>{{ label }}</span>
       <span v-if="subLabel" class="text-sm text-oc-text-300">{{
         subLabel
       }}</span>
