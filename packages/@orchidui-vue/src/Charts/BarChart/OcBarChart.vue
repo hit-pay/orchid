@@ -1,10 +1,19 @@
 <template>
-  <div ref="barChart" class="w-full" />
+  <div class="w-full relative">
+    <div ref="barChart" class="h-full" />
+    <dummy-data v-if="dummyData" absolute>
+      <slot name="dummy-data-description">
+        Demo reports will be replaced once <br />
+        you made transactions
+      </slot>
+    </dummy-data>
+  </div>
 </template>
 
 <script setup lang="ts">
 import * as echarts from "echarts";
 import { computed, onMounted, onUnmounted, ref, watch } from "vue";
+import { DummyData } from "@/orchidui";
 
 const props = defineProps({
   variant: {
@@ -20,6 +29,7 @@ const props = defineProps({
   xAxisFormatter: Function,
   tooltipFormatter: Function,
   tooltipCurrency: String,
+  dummyData: Boolean,
 });
 
 const variants = {

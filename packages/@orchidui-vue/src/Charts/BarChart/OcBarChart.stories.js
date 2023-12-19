@@ -39,6 +39,7 @@ export const barChart = {
       return (value / 1000).toFixed(1) + "K";
     },
     tooltipCurrency: "SGD",
+    dummyData: false,
   },
   render: (args) => ({
     components: { OcBarChart },
@@ -57,6 +58,7 @@ export const barChart = {
                 :label-data="args.labelData"
                 :tooltip-currency="args.tooltipCurrency"
                 :y-axis-formatter="args.yAxisFormatter"
+                :dummy-data="args.dummyData"
             />
           </div>
         `,

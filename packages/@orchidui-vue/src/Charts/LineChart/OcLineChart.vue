@@ -1,10 +1,19 @@
 <template>
-  <div ref="lineChart" class="w-full" />
+  <div class="w-full relative">
+    <div ref="lineChart" class="h-full" />
+    <dummy-data v-if="dummyData" absolute>
+      <slot name="dummy-data-description">
+        Demo reports will be replaced once <br />
+        you made transactions
+      </slot>
+    </dummy-data>
+  </div>
 </template>
 
 <script setup lang="ts">
 import * as echarts from "echarts";
 import { computed, onMounted, ref, watch } from "vue";
+import { DummyData } from "@/orchidui";
 
 const props = defineProps({
   showTooltip: Boolean,
@@ -12,6 +21,7 @@ const props = defineProps({
   showGrid: Boolean,
   chartData: Array,
   labelData: Array,
+  dummyData: Boolean,
 });
 const markLineData = ref({
   index: 0,

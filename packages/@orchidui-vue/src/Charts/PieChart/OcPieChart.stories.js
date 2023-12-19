@@ -5,7 +5,7 @@ export default {
   tags: ["autodocs"],
 };
 
-export const Line = {
+export const pieChart = {
   args: {
     showGrid: false,
     showTooltip: true,
@@ -37,6 +37,7 @@ export const Line = {
         itemStyle: { color: "#E5E6EA" },
       },
     ],
+    dummyData: false,
   },
   render: (args) => ({
     components: { PieChart },
@@ -51,6 +52,7 @@ export const Line = {
                 :show-tooltip="args.showTooltip"
                 :show-legend="args.showLegend"
                 :chart-data="args.chartData"
+                :dummy-data="args.dummyData"
             />
           </div>
         `,

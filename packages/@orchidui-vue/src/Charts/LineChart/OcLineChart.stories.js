@@ -27,6 +27,7 @@ export const Line = {
       "OCT'23",
       "NOV'23",
     ],
+    dummyData: true,
   },
   render: (args) => ({
     components: { LineChart },
@@ -42,6 +43,7 @@ export const Line = {
                 :show-legend="args.showLegend"
                 :chart-data="args.chartData"
                 :label-data="args.labelData"
+                :dummy-data="args.dummyData"
             />
           </div>
         `,

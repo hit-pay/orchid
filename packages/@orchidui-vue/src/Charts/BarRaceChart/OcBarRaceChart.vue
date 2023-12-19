@@ -1,6 +1,6 @@
 <template>
-  <div class="grid grid-cols-2">
-    <div class="pt-4 pb-7 flex flex-col h-[100%]">
+  <div class="grid grid-cols-2 relative">
+    <div class="pt-4 pb-7 flex flex-col h-full">
       <div
         v-for="item in legendData"
         class="text-[14px] flex flex-1 items-center justify-start"
@@ -9,12 +9,19 @@
       </div>
     </div>
     <div ref="barChart" class="h-[100%]" />
+    <dummy-data v-if="dummyData" absolute>
+      <slot name="dummy-data-description">
+        Demo reports will be replaced once <br />
+        you made transactions
+      </slot>
+    </dummy-data>
   </div>
 </template>
 
 <script setup lang="ts">
 import * as echarts from "echarts";
 import { computed, onMounted, ref, watch, onUnmounted } from "vue";
+import { DummyData } from "@/orchidui";
 
 const props = defineProps({
   variant: {
@@ -29,6 +36,7 @@ const props = defineProps({
   legendData: Array,
   yAxisFormatter: Function,
   tooltipFormatter: Function,
+  dummyData: Boolean,
 });
 
 const variants = {
