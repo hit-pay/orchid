@@ -93,7 +93,7 @@ const resetCalendar = () => {
 };
 
 const defaultDateRange = () => {
-  if (props.maxDate === dayjs().format(props.dateFormat)) {
+  if (props.maxDate === dayjs().add(1, "day").format(props.dateFormat)) {
     return [
       dayjs().subtract(3, "day").toDate(),
       dayjs().subtract(1, "day").toDate(),
