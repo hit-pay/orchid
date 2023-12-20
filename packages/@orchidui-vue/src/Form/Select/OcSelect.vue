@@ -44,6 +44,10 @@ const props = defineProps({
     type: Object,
     default: () => ({}),
   },
+  chipProps: {
+    type: Object,
+    default: () => ({}),
+  },
 });
 
 const emit = defineEmits({
@@ -171,7 +175,7 @@ const selectAll = () => {
           'py-3': multiple,
         }"
       >
-        <div v-if="multiple" class="flex flex-wrap gap-2">
+        <div v-if="multiple" class="flex flex-wrap gap-2 overflow-hidden">
           <Chip
             v-for="option in maxVisibleOptions
               ? localValueOption.slice(0, maxVisibleOptions)
@@ -180,6 +184,7 @@ const selectAll = () => {
             closable
             :variant="option.variant"
             :label="option.label"
+            v-bind="chipProps"
             @remove="removeOption(option.value)"
           />
           <Chip
@@ -202,7 +207,7 @@ const selectAll = () => {
           </span>
         </template>
         <Icon
-          class="w-5 h-5 text-oc-text-400 transition-all duration-500"
+          class="w-5 h-5 text-oc-text-400 transition-all shrink-0 duration-500"
           :class="isDropdownOpened && '-rotate-180'"
           name="chevron-down"
         />

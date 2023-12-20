@@ -12,6 +12,7 @@ const props = defineProps({
   iconClass: String,
   iconText: String,
   date: String,
+  maxPaymentsMethods: Number,
   type: {
     type: String,
     default: "timeLine",

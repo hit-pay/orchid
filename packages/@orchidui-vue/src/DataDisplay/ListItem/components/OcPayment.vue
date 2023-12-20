@@ -1,7 +1,8 @@
 <script setup>
-import { Icon } from "@/orchidui";
+import { Icon, Tooltip } from "@/orchidui";
+import { computed } from "vue";
 
-defineProps({
+const props = defineProps({
   title: {
     type: String,
     default: "Title",
@@ -10,14 +11,28 @@ defineProps({
     type: Array,
     default: () => [],
   },
+  maxPaymentsMethods: {
+    type: Number,
+    default: 4,
+  },
 });
 
 defineEmits(["edit", "delete"]);
+
+const isSliced = computed(
+  () => props.paymentMethods.length > props.maxPaymentsMethods,
+);
+const restPaymentMethods = computed(() =>
+  props.paymentMethods.slice(
+    props.maxPaymentsMethods,
+    props.paymentMethods.length,
+  ),
+);
 </script>
 
 <template>
   <div
-    class="px-5 py-4 flex flex-col gap-y-4 rounded border border-gray-200 group hover:shadow-normal"
+    class="md:px-5 px-3 md:py-4 py-3 flex flex-col gap-y-4 rounded border border-gray-200 group hover:shadow-normal"
   >
     <div class="flex items-center gap-x-5">
       <div class="flex-1 flex items-center gap-x-3 font-medium capitalize">
@@ -42,15 +57,45 @@ defineEmits(["edit", "delete"]);
     </div>
 
     <div class="flex items-center gap-x-2">
-      <span class="text-sm font-medium text-oc-text-300">Payment methods</span>
+      <span class="text-sm font-medium text-oc-text-300 whitespace-nowrap"
+        >Payment methods</span
+      >
       <img
-        v-for="method in paymentMethods"
+        v-for="method in paymentMethods.slice(0, maxPaymentsMethods)"
         :key="method.method"
         width="35"
         height="24"
         :alt="method.method"
         :src="method.svg"
       />
+      <Tooltip
+        v-if="isSliced"
+        position="top-end"
+        :popper-options="{ strategy: 'fixed' }"
+      >
+        <template #default="{ isShow }">
+          <div
+            class="text-sm w-[35px] h-[24px] flex items-center justify-center border rounded-sm font-medium whitespace-nowrap"
+            :class="isShow ? ' bg-white' : 'bg-oc-bg-dark'"
+          >
+            +
+            {{ paymentMethods.length - maxPaymentsMethods }}
+          </div>
+        </template>
+
+        <template #popper>
+          <div class="py-2 px-3 flex gap-x-2 w-full z-10 relative">
+            <img
+              v-for="method in restPaymentMethods"
+              :key="method.method"
+              width="35"
+              height="24"
+              :alt="method.method"
+              :src="method.svg"
+            />
+          </div>
+        </template>
+      </Tooltip>
     </div>
   </div>
 </template>
