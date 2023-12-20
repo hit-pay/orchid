@@ -20,7 +20,10 @@ defineEmits(["edit", "delete"]);
     class="px-5 py-4 flex flex-col gap-y-4 rounded border border-gray-200 group hover:shadow-normal"
   >
     <div class="flex items-center gap-x-5">
-      <div class="flex-1 font-medium capitalize">{{ title }}</div>
+      <div class="flex-1 flex items-center gap-x-3 font-medium capitalize">
+        <slot name="logo" />
+        {{ title }}
+      </div>
       <div
         class="border opacity-0 group-hover:opacity-100 border-oc-accent-1-100 rounded-sm p-1 flex gap-x-1"
       >
@@ -39,11 +42,14 @@ defineEmits(["edit", "delete"]);
     </div>
 
     <div class="flex items-center gap-x-2">
+      <span class="text-sm font-medium text-oc-text-300">Payment methods</span>
       <img
         v-for="method in paymentMethods"
         :key="method.method"
+        width="35"
+        height="24"
         :alt="method.method"
-        :src="method.sm"
+        :src="method.svg"
       />
     </div>
   </div>

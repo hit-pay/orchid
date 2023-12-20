@@ -52,5 +52,8 @@ const getTypeComponent = computed(() => {
     <template v-if="$slots.menu" #menu>
       <slot name="menu" />
     </template>
+    <template v-if="$slots.logo" #logo>
+      <slot name="logo" />
+    </template>
   </component>
 </template>
