@@ -12,23 +12,7 @@ defineProps({
   isCard: Boolean,
   isPercent: Boolean,
   percentValue: Number,
-  percentType: {
-    type: String,
-    validator: (value) => ["up", "down"].includes(value),
-  },
 });
-
-const types = {
-  up: {
-    icon: "triangle-up",
-    color: "text-oc-success-500",
-  },
-  down: {
-    icon: "triangle-down",
-    color: "text-oc-error-500",
-  },
-  none: null,
-};
 </script>
 
 <template>
@@ -48,9 +32,10 @@ const types = {
           }}</span>
           <div class="flex items-center gap-x-1" v-if="percentValue">
             <Icon
-              v-if="types[percentType]"
-              :name="types[percentType].icon"
-              :class="types[percentType].color"
+              :name="percentValue > 0 ? 'triangle-up' : 'triangle-down'"
+              :class="
+                percentValue > 0 ? 'text-oc-success-500' : 'text-oc-error-500'
+              "
               width="10"
               height="9"
             />
