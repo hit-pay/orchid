@@ -1,6 +1,6 @@
 <script setup>
 import { Button, Dropdown, DropdownItem, Tooltip } from "@/orchidui";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useWindowWidth } from "@/orchidui/composables/useWindowWidth.js";
 
 const props = defineProps({
@@ -9,8 +9,8 @@ const props = defineProps({
 });
 
 const emit = defineEmits(["click:primaryButton", "click:secondaryButton"]);
-const isDropdownOpened = ref(
-  props.secondaryButtonProps?.isDropdownOpened ?? false,
+const isDropdownOpened = computed(
+  () => props.secondaryButtonProps?.isDropdownOpened ?? false,
 );
 const { isMobile } = useWindowWidth();
 </script>
