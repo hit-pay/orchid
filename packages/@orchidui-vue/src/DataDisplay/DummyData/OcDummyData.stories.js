@@ -15,6 +15,7 @@ export const emptyPage = {
   args: {
     title: undefined,
     description: "Description",
+    absolute: false,
   },
   render: (args) => ({
     components: {
@@ -25,7 +26,7 @@ export const emptyPage = {
     },
     template: `
           <div class="h-[300px]">
-            <DummyData v-bind="args"/>
+            <DummyData v-bind="args" />
           </div>
         `,
   }),
