@@ -10,7 +10,25 @@ defineProps({
   isBig: Boolean,
   isTransparent: Boolean,
   isCard: Boolean,
+  isPercent: Boolean,
+  percentValue: Number,
+  percentType: {
+    type: String,
+    validator: (value) => ["up", "down"].includes(value),
+  },
 });
+
+const types = {
+  up: {
+    icon: "triangle-up",
+    color: "text-oc-success-500",
+  },
+  down: {
+    icon: "triangle-down",
+    color: "text-oc-error-500",
+  },
+  none: null,
+};
 </script>
 
 <template>
@@ -23,24 +41,50 @@ defineProps({
   >
     <OverviewIcon v-if="icon" :icon="icon" :variant="variant" />
     <div class="flex flex-col gap-y-px font-medium overflow-hidden">
-      <div
-        class="uppercase flex whitespace-nowrap items-start gap-x-3 text-xs text-oc-text-300"
-      >
-        {{ title }}
-        <Icon
-          v-if="info"
-          width="16"
-          height="16"
-          class="text-oc-text-400"
-          name="information"
-        />
-      </div>
-      <div class="flex items-center gap-x-2 overflow-hidden">
-        <Icon v-if="isCard" width="35" name="payment-methods/visa" />
-        <span :class="isBig ? 'text-xl' : ''" class="truncate">{{
-          content
-        }}</span>
-      </div>
+      <template v-if="isPercent">
+        <div class="flex items-center gap-x-3 overflow-hidden">
+          <span :class="isBig ? 'text-xl' : ''" class="truncate">{{
+            title
+          }}</span>
+          <div class="flex items-center gap-x-1" v-if="percentValue">
+            <Icon
+              v-if="types[percentType]"
+              :name="types[percentType].icon"
+              :class="types[percentType].color"
+              width="10"
+              height="9"
+            />
+            <span class="text-oc-text-400 text-sm font-medium">
+              {{ percentValue }}%
+            </span>
+          </div>
+        </div>
+        <div
+          class="uppercase flex whitespace-nowrap items-start gap-x-3 text-xs text-oc-text-300"
+        >
+          {{ content }}
+        </div>
+      </template>
+      <template v-else>
+        <div
+          class="uppercase flex whitespace-nowrap items-start gap-x-3 text-xs text-oc-text-300"
+        >
+          {{ title }}
+          <Icon
+            v-if="info"
+            width="16"
+            height="16"
+            class="text-oc-text-400"
+            name="information"
+          />
+        </div>
+        <div class="flex items-center gap-x-2 overflow-hidden">
+          <Icon v-if="isCard" width="35" name="payment-methods/visa" />
+          <span :class="isBig ? 'text-xl' : ''" class="truncate">{{
+            content
+          }}</span>
+        </div>
+      </template>
     </div>
   </div>
 </template>

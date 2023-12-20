@@ -5,6 +5,12 @@ export default {
   tags: ["autodocs"],
 };
 export const overviewItem = {
+  argTypes: {
+    percentType: {
+      control: "select",
+      options: ["up", "down"],
+    },
+  },
   args: {
     icon: "circle",
     content: "Content",
@@ -14,6 +20,9 @@ export const overviewItem = {
     isBig: false,
     isTransparent: false,
     isCard: false,
+    isPercent: false,
+    percentValue: 20,
+    percentType: "up",
   },
   render: (args) => ({
     components: { OverviewItem, Theme },
@@ -33,6 +42,9 @@ export const overviewItem = {
                 :is-big="args.isBig"
                 :is-transparent="args.isTransparent"
                 :is-card="args.isCard"
+                :is-percent="args.isPercent"
+                :percent-value="args.percentValue"
+                :percent-type="args.percentType"
             />
           </Theme>
         `,
