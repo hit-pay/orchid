@@ -38,6 +38,7 @@ export const pieChart = {
       },
     ],
     dummyData: false,
+    dummyDataDescription: undefined,
   },
   render: (args) => ({
     components: { PieChart },
@@ -53,6 +54,7 @@ export const pieChart = {
                 :show-legend="args.showLegend"
                 :chart-data="args.chartData"
                 :dummy-data="args.dummyData"
+                :dummy-data-description="args.dummyDataDescription"
             />
           </div>
         `,

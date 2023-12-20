@@ -28,6 +28,7 @@ export const barRace = {
       "Joggers",
     ],
     dummyData: false,
+    dummyDataDescription: undefined,
   },
   render: (args) => ({
     components: { OcBarRaceChart },
@@ -46,6 +47,7 @@ export const barRace = {
                 :label-data="args.labelData"
                 :legend-data="args.legendData"
                 :dummy-data="args.dummyData"
+                :dummy-data-description="args.dummyDataDescription"
             />
           </div>
         `,

@@ -1,12 +1,7 @@
 <template>
   <div class="w-full relative">
     <div ref="lineChart" class="h-full" />
-    <dummy-data v-if="dummyData" absolute>
-      <slot name="dummy-data-description">
-        Demo reports will be replaced once <br />
-        you made transactions
-      </slot>
-    </dummy-data>
+    <dummy-data v-if="dummyData" :description="dummyDataDescription" absolute />
   </div>
 </template>
 
@@ -22,6 +17,7 @@ const props = defineProps({
   chartData: Array,
   labelData: Array,
   dummyData: Boolean,
+  dummyDataDescription: String,
 });
 const markLineData = ref({
   index: 0,

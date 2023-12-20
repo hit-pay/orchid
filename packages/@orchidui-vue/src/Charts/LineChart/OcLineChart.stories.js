@@ -28,6 +28,7 @@ export const Line = {
       "NOV'23",
     ],
     dummyData: false,
+    dummyDataDescription: undefined,
   },
   render: (args) => ({
     components: { LineChart },
@@ -44,6 +45,7 @@ export const Line = {
                 :chart-data="args.chartData"
                 :label-data="args.labelData"
                 :dummy-data="args.dummyData"
+                :dummy-data-description="args.dummyDataDescription"
             />
           </div>
         `,

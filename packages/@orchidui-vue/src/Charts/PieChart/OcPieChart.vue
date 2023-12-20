@@ -36,12 +36,7 @@
         </Tooltip>
       </div>
     </div>
-    <dummy-data v-if="dummyData" absolute>
-      <slot name="dummy-data-description">
-        Demo reports will be replaced once <br />
-        you made transactions
-      </slot>
-    </dummy-data>
+    <dummy-data v-if="dummyData" :description="dummyDataDescription" absolute />
   </div>
 </template>
 
@@ -56,6 +51,7 @@ const props = defineProps({
   showGrid: Boolean,
   chartData: Array,
   dummyData: Boolean,
+  dummyDataDescription: String,
 });
 const legendSelected = ref({
   stack_cards: true,
