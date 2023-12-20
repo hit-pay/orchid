@@ -42,7 +42,6 @@ const emit = defineEmits({
 
 const sectionList = ref(null);
 const sectionActive = ref(null);
-const sectionActiveSettings = ref(null);
 
 const generalData = computed(() => props.values.general);
 
@@ -70,10 +69,10 @@ watch(
             (s) => s.section === item.section
           );
           sectionListCustom.push({
-            group: item.group,
             key: item.key,
+            group: item.group,
             section: item.section,
-            title: item.title,
+            title: item.title ?? item.section,
             active: item.active,
             icon: sectionItem.icon,
             form: sectionItem.form,
@@ -84,17 +83,20 @@ watch(
     }
 
     sectionActive.value = sectionList.value.find(
-      (s) => s.key === props.active.section
-    );
-
-    sectionActiveSettings.value = props.values.sections.find(
-      (s) => s.key === props.active.section
+      (s) => s.key === props.active.id
     );
   },
   {
     deep: true,
   }
 );
+
+const sectionActiveValues = computed(() => {
+  let sectionValues = props.values.sections.find(
+    (s) => s.key === props.active.id
+  );
+  return sectionValues;
+});
 
 const changeSidebarMenu = (value) => {
   emit("update:active", {
@@ -115,20 +117,25 @@ const sidebarMenuActive = computed(() => {
   return props.sidebar.find((s) => s.name === sidebarActive.value.sidebarMenu);
 });
 const sidebarMenuLabel = computed(() => {
-  return sidebarMenuActive.value.label;
+  return sidebarMenuActive.value?.label ?? "";
 });
 const submenuLabel = computed(() => {
-  const submenu = sidebarMenuActive.value.children.find(
+  const submenu = sidebarMenuActive.value?.children.find(
     (s) => s.name === sidebarActive.value.submenu
   );
   return submenu?.label;
 });
 
 const changeSection = (to = "") => {
-  emit("update:active", {
+  let newActiveSidebar = {
     ...sidebarActive.value,
     section: to,
-  });
+  };
+  console.log(sidebarActive.value);
+  if (to === "" && sidebarActive.value.submenu === "styles") {
+    newActiveSidebar.submenu = "";
+  }
+  emit("update:active", newActiveSidebar);
 };
 const onClickSection = (section) => {
   if (section.form) {
@@ -177,7 +184,7 @@ const addSection = (newSection, customize = false) => {
       group: newSection.group,
       key: newKey,
       section: newSection.section,
-      title: newSection.title,
+      title: newSection.title ?? newSection.section,
       active: true,
       ...newSection.default,
     },
@@ -334,13 +341,16 @@ const addSection = (newSection, customize = false) => {
           @click="changeSection('')"
         />
         <div v-if="sectionActive" class="font-medium pb-4 px-7">
-          {{ sectionActive.title }}
+          {{ sectionActive.title ?? sectionActive.section }}
         </div>
       </div>
-      <div v-if="sectionActive?.form" class="px-7 py-4 mt-4">
+      <div
+        v-if="sectionActive?.form && sectionActiveValues"
+        class="px-7 py-4 mt-4"
+      >
         <RequestForm
           :general-data="generalData"
-          :section-data="sectionActiveSettings"
+          :section-data="sectionActiveValues"
           :request-form="sectionActive.form"
         >
         </RequestForm>

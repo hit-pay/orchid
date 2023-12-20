@@ -27,29 +27,28 @@ export const Default = {
 
       const content = ref("data");
 
-      const updateSidebarActive = (section) => {
-        if (section === "TopBanner") {
-          sidebarActive.value = {
-            sidebarMenu: "home",
-            submenu: "header",
-            section: "TopBanner",
-            id: "TopBanner",
-          };
-        } else if (section === "Header") {
-          sidebarActive.value = {
-            sidebarMenu: "home",
-            submenu: "header",
-            section: "Header",
-            id: "Header",
-          };
-        } else {
-          sidebarActive.value = {
-            sidebarMenu: "home",
-            submenu: "header",
-            section: "Banner",
-            id: "Banner",
-          };
+      const getSidebarMenu = (section) => {
+        // Sidebar not stored to user store design
+
+        if(section === 'Styles'){
+          return "styles"
         }
+        else if(["FooterContent","PoweredBy"].includes(section)){
+            return "footer"
+        }else if(["IconLink","ButtonLink"].includes(section)){
+          return "link_in_bio"
+        }
+        else{
+          return "home"
+        }
+      }
+      const updateSidebarActive = (item) => {
+        sidebarActive.value = {
+          sidebarMenu: getSidebarMenu(item.section),
+          submenu: item.group,
+          section: item.section,
+          id: item.key,
+        };
       };
 
       return {
@@ -89,9 +88,7 @@ export const Default = {
                       <pre v-if="content === 'sidebar'" class="bg-black text-white p-3 rounded">{{sidebarConfig}}</pre>
                       <pre v-if="content === 'section'" class="bg-black text-white p-3 rounded">{{sectionSettings}}</pre>
                       <div class="flex flex-wrap gap-5 p-5" v-if="content === 'preview'">
-                        <Button label="Top Banner Section" @click="updateSidebarActive('TopBanner')" />
-                        <Button label="Header Section" @click="updateSidebarActive('Header')" />
-                        <Button label="Banner Section" @click="updateSidebarActive()" />
+                        <Button v-for="section in storeDesignData.sections" :label="section.title ?? section.section" @click="updateSidebarActive(section)" />
                       </div>
                     </div>
                 </div>

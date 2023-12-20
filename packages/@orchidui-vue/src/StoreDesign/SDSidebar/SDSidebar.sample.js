@@ -1,4 +1,5 @@
 const SDSidebarSample = [
+  // 3 -> 4 level level
   {
     type: "list",
     name: "home",
@@ -18,17 +19,13 @@ const SDSidebarSample = [
       },
     ],
   },
+  // 2 level
   {
     type: "styles",
     name: "styles",
-    label: "Styles",
-    children: [
-      {
-        name: "custom",
-        label: "Custom",
-      },
-    ],
+    label: "Styles"
   },
+  // 3 -> 4 level level
   {
     type: "list",
     name: "link_in_bio",
@@ -49,6 +46,7 @@ const SDSidebarSample = [
       },
     ],
   },
+  // 1 level
   {
     type: "page",
     name: "page",
