@@ -58,6 +58,10 @@ const SDSectionSample = [
     icon: "circle",
     preview: "/images/section.png",
     form: PRODUCT_FORM,
+    default: {
+        product_form: "all_product",
+        variant: "grid",
+    }
   },
   {
     group: "sections",
@@ -67,6 +71,9 @@ const SDSectionSample = [
     icon: "circle",
     preview: "/images/section.png",
     form: PRODUCT_FORM,
+    default: {
+        variant: "full",
+    }
   },
 ];
 

@@ -80,8 +80,8 @@ export const Default = {
                           <Button label="Redo" />
                         </div>
                         <Button @click="content = 'data'" label="Store Design Data" variant="secondary"  />
-                        <Button @click="content = 'sidebar'" label="Sidebar" variant="secondary"  />
-                        <Button @click="content = 'section'" label="Section" variant="secondary"  />
+                        <Button @click="content = 'sidebar'" label="Sidebar Settings" variant="secondary"  />
+                        <Button @click="content = 'section'" label="Section Settings" variant="secondary"  />
                         <Button @click="content = 'preview'" label="PREVIEW" variant="secondary"  />
                     </div>
                     <div class="h-[700px] overflow-auto rounded bg-black">

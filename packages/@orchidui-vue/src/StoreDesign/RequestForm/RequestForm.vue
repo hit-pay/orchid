@@ -82,7 +82,7 @@ const onUpdateForm = (form, value = null) => {
   <div>
     <FormBuilder
       id="form-builder"
-      class="grid gap-4"
+      class="grid gap-5"
       :errors="formErrors"
       :values="formValues"
       :json-form="requestForm"

@@ -169,6 +169,30 @@ const updateOrderedSection = (newOrdered) => {
     ],
   });
 };
+
+const addSection = (newSection, customize = false) => {
+  let newKey = Date.now();
+  const newSectionData = [
+    {
+      group: newSection.group,
+      key: newKey,
+      section: newSection.section,
+      title: newSection.title,
+      active: true,
+      ...newSection.default,
+    },
+  ];
+  emit("update:values", {
+    general: generalData.value,
+    sections: [...props.values.sections, ...newSectionData],
+  });
+
+  if (customize) {
+    changeSection(newKey);
+  } else {
+    changeSubmenu(newSection.group);
+  }
+};
 </script>
 <template>
   <div class="h-full relative border border-gray-200">
@@ -339,6 +363,8 @@ const updateOrderedSection = (newOrdered) => {
             v-for="item in availableSections"
             :key="item.section"
             :section="item"
+            @add="addSection"
+            @customize="addSection($event, true)"
           />
         </div>
       </div>

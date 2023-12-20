@@ -1,5 +1,9 @@
 const PRODUCT_FORM = [
   {
+    name: "title",
+    type: "Input"
+  },
+  {
     type: "SectionItem",
     props: {
       title: "Select Product From",
