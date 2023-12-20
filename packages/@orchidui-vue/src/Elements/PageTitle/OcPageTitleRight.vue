@@ -20,6 +20,11 @@ const { isMobile } = useWindowWidth();
       v-if="secondaryButtonProps"
       v-model="isDropdownOpened"
       :distance="10"
+      @click="
+        () =>
+          (props.secondaryButtonProps.isDropdownOpened =
+            !props.secondaryButtonProps.isDropdownOpened)
+      "
     >
       <Button
         :size="isMobile ? 'small' : 'default'"
