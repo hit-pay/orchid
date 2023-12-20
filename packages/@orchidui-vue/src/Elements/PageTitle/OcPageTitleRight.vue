@@ -3,14 +3,16 @@ import { Button, Dropdown, DropdownItem, Tooltip } from "@/orchidui";
 import { ref } from "vue";
 import { useWindowWidth } from "@/orchidui/composables/useWindowWidth.js";
 
-const emit = defineEmits(["click:primaryButton", "click:secondaryButton"]);
-const isDropdownOpened = ref(false);
-const { isMobile } = useWindowWidth();
-
-defineProps({
+const props = defineProps({
   primaryButtonProps: Object,
   secondaryButtonProps: Object,
 });
+
+const emit = defineEmits(["click:primaryButton", "click:secondaryButton"]);
+const isDropdownOpened = ref(
+  props.secondaryButtonProps?.isDropdownOpened ?? false,
+);
+const { isMobile } = useWindowWidth();
 </script>
 <template>
   <div class="flex gap-x-3 items-center">
