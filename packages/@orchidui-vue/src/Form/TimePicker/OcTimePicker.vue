@@ -1,7 +1,11 @@
 <script setup>
-import { Input, Dropdown, BaseInput } from "@/orchidui";
+import { Input, Dropdown } from "@/orchidui";
 import { defineAsyncComponent, ref } from "vue";
 import dayjs from "dayjs";
+
+const emit = defineEmits({
+  "update:modelValue": [],
+});
 
 const TimePopup = defineAsyncComponent(
   () => import("@/orchidui/Form/TimePicker/OcTimePopup.vue"),
@@ -10,6 +14,7 @@ const time = ref();
 const popup = ref();
 const isDropdownOpened = ref(false);
 defineProps({
+  modelValue: [String, Date],
   label: String,
   hint: String,
   placeholder: String,
@@ -31,8 +36,10 @@ defineProps({
     default: () => ({}),
   },
 });
-const updateActiveTime = () =>
+const updateActiveTime = () => {
+  emit("update:modelValue", time.value);
   setTimeout(() => popup.value?.updateActiveTime(), 300);
+};
 </script>
 
 <template>
