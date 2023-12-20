@@ -9,7 +9,9 @@ const emit = defineEmits({
   copy: [],
   "click:primaryActionsDropdown": [],
 });
-const isDropdownOpened = ref(false);
+const isDropdownOpened = ref(
+  props.primaryActions?.dropdownOptions?.isDropdownOpened ?? false,
+);
 const isCopied = ref(false);
 const hasDropdownOptions = computed(
   () => props.primaryActions?.dropdownOptions,
