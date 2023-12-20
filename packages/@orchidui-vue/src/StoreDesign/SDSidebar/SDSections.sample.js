@@ -6,6 +6,15 @@ import {
 import { PRODUCT_FORM } from "./settings/SDSections.sample";
 
 const SDSectionSample = [
+   {
+        group: "styles",
+        key: "Styles",
+        section: "Styles",
+        title: "Styles",
+        icon: "circle",
+        isDisable: true,
+        form: TOP_BANNER_FORM,
+    },
   {
     group: "header",
     key: "TopBanner",

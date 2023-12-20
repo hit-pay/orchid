@@ -40,8 +40,8 @@ const SDSample = {
       active: false,
     },
     {
-      key: "Header",
       group: "header",
+      key: "Header",
       section: "Header",
       aligment: "right",
       background_color: "#002771",

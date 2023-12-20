@@ -52,9 +52,12 @@ const sidebarActive = computed(() => {
 const availableSections = computed(() =>
   props.settings.filter((s) => s.group === "sections")
 );
+
+const renderForm = ref(null);
 watch(
   () => props.active,
   () => {
+    renderForm.value = null;
     if (props.active.submenu && props.active.submenu !== "sections") {
       sectionList.value = props.settings.filter((s) => {
         const sectionData = props.values.sections.find((i) => i.key === s.key);
@@ -85,6 +88,10 @@ watch(
     sectionActive.value = sectionList.value.find(
       (s) => s.key === props.active.id
     );
+
+    setTimeout(() => {
+      renderForm.value = Date.now();
+    }, 100);
   },
   {
     deep: true,
@@ -344,16 +351,15 @@ const addSection = (newSection, customize = false) => {
           {{ sectionActive.title ?? sectionActive.section }}
         </div>
       </div>
-      <div
-        v-if="sectionActive?.form && sectionActiveValues"
-        class="px-7 py-4 mt-4"
-      >
+      <div v-if="sectionActiveValues" class="px-7 py-4 mt-4">
         <RequestForm
+          v-if="renderForm && sectionActive?.form"
           :general-data="generalData"
           :section-data="sectionActiveValues"
           :request-form="sectionActive.form"
         >
         </RequestForm>
+        <span v-else> loading... </span>
       </div>
     </template>
     <template v-else-if="sidebarActive.section === 'add-new-section'">
