@@ -234,6 +234,7 @@ const selectAll = () => {
                 v-for="option in filterableOptions"
                 :key="option.value"
                 :label="option.label"
+                :sub-label="option.subLabel"
                 :is-checkboxes="isCheckboxes"
                 :is-selected="
                   multiple

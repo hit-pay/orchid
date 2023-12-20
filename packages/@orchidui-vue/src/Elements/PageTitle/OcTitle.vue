@@ -5,6 +5,7 @@ defineProps({
   title: { type: String, required: true },
   description: { type: String, required: true },
   chipProps: Object,
+  tooltipOptions: Object,
   isCopy: Boolean,
 });
 </script>
@@ -29,7 +30,11 @@ defineProps({
         </span>
       </slot>
 
-      <CopyTooltip v-if="isCopy" :value="description">
+      <CopyTooltip
+        v-if="isCopy"
+        :value="description"
+        :tooltip-options="tooltipOptions"
+      >
         <template #default="{ isShow }">
           <Icon
             width="16"

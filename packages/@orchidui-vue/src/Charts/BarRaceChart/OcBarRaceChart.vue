@@ -17,7 +17,10 @@ import * as echarts from "echarts";
 import { computed, onMounted, ref, watch, onUnmounted } from "vue";
 
 const props = defineProps({
-  color: String,
+  variant: {
+    type: String,
+    validator: (value) => ["primary", "purple"].includes(value),
+  },
   showTooltip: Boolean,
   showLegend: Boolean,
   showGrid: Boolean,
@@ -27,6 +30,11 @@ const props = defineProps({
   yAxisFormatter: Function,
   tooltipFormatter: Function,
 });
+
+const variants = {
+  primary: "#2465DE",
+  purple: "#B14AED",
+};
 
 const options = computed(() => ({
   xAxis: {
@@ -104,13 +112,13 @@ const options = computed(() => ({
       },
       barGap: 0,
       itemStyle: {
-        color: props.color,
+        color: variants[props.variant],
         opacity: 0.2,
         borderRadius: [0, 4, 4, 0],
       },
       emphasis: {
         itemStyle: {
-          color: props.color,
+          color: variants[props.variant],
         },
       },
     },
@@ -126,12 +134,7 @@ const options = computed(() => ({
       },
       barGap: "-100%",
       itemStyle: {
-        color: props.color,
-      },
-      emphasis: {
-        itemStyle: {
-          color: props.color,
-        },
+        color: variants[props.variant],
       },
     },
   ],

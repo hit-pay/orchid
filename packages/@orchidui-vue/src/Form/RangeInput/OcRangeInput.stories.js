@@ -20,7 +20,7 @@ export const Default = {
   render: (args) => ({
     components: { Theme, RangeInput },
     setup() {
-      const modelValue = ref('');
+      const modelValue = ref("");
 
       return { args, modelValue };
     },
