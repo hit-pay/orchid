@@ -13,6 +13,7 @@ import {
 } from "@/orchidui";
 import { ref, computed } from "vue";
 import dayjs from "dayjs";
+
 const props = defineProps({
   isLoading: Boolean,
   id: {
@@ -277,7 +278,12 @@ const displayFilterData = computed(() => {
           }
 
           if (option.type === "DatePicker") {
-            optionLabel = dayjs(optionLabel).format("MMM DD, YYYY");
+            if (option?.props?.type === "range") {
+              optionLabel =
+                dayjs(optionLabel[0]).format("MMM DD, YYYY") +
+                " - " +
+                dayjs(optionLabel[1]).format("MMM DD, YYYY");
+            } else optionLabel = dayjs(optionLabel).format("MMM DD, YYYY");
           }
 
           let label = `${option?.props.label} : ${optionLabel}`;

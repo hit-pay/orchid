@@ -45,7 +45,7 @@ const props = defineProps({
     default: "h-full",
   },
 });
-const emit = defineEmits({
+defineEmits({
   selected: [],
   copied: [],
 });
@@ -92,13 +92,13 @@ const variantClass = computed(() => ({
         <Checkbox
           v-if="variant === Variants.CHECKBOX"
           :model-value="isSelected"
-          class="m-auto"
+          class="m-auto justify-center items-center"
           :class="
             isSelected
-              ? 'block'
+              ? 'flex'
               : isSimple
                 ? ''
-                : 'md:hidden group-hover/row:block'
+                : 'md:hidden group-hover/row:flex'
           "
           @update:model-value="$emit('selected')"
         />
