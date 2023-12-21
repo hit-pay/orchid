@@ -17,6 +17,9 @@ const props = defineProps({
   settings: {
     type: Array,
   },
+  preset: {
+    type: Array,
+  },
   options: {
     type: Object,
     default: () => {
