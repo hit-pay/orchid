@@ -1,4 +1,4 @@
-const ASSETS_URL = "/store-design/";
+const ASSETS_URL = "/templates/default/images/";
 
 const TOP_BANNER_FORM = [
   {

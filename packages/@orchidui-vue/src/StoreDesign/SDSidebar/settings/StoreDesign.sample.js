@@ -21,6 +21,7 @@ const StoreDesign = {
       group: "styles",
       key: "Styles",
       section: "Styles",
+      preset: "default",
       primary_color: "#002771",
       primary_text_color: "#03102F",
       background_color: "#FFFFFF",
