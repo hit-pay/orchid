@@ -179,7 +179,7 @@ export const Multiple = {
           value: 3,
         },
         {
-          label: "Option 4",
+          label: "Option 4 with very long text, it should be truncated",
           value: 4,
         },
       ];

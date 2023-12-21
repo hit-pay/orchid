@@ -180,6 +180,7 @@ const selectAll = () => {
             closable
             :variant="option.variant"
             :label="option.label"
+            should-truncate-chip
             @remove="removeOption(option.value)"
           />
           <Chip
