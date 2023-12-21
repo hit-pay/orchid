@@ -13,6 +13,7 @@ import {
 } from "@/orchidui";
 import { ref, computed } from "vue";
 import dayjs from "dayjs";
+
 const props = defineProps({
   isLoading: Boolean,
   id: {
@@ -69,7 +70,7 @@ const currentPage = ref(props.filter.page);
 const perPage = ref(
   filterOptions.value?.per_page?.key
     ? props.filter[filterOptions.value?.per_page?.key]
-    : props.filter.per_page
+    : props.filter.per_page,
 );
 const defaultQuery =
   props.filter[filterOptions.value?.search?.key]?.trim() ?? "";
@@ -184,7 +185,7 @@ const changePage = () => {
 const applyFilter = (
   filterForm = null,
   isChangePage = false,
-  changeCursor = ""
+  changeCursor = "",
 ) => {
   if (paginationOption.value && !isChangePage) {
     currentPage.value = 1;
@@ -270,14 +271,19 @@ const displayFilterData = computed(() => {
               .map(
                 (selectedValue) =>
                   option.props.options.find(
-                    ({ value }) => value === selectedValue
-                  ).label
+                    ({ value }) => value === selectedValue,
+                  ).label,
               )
               .join(", ");
           }
 
           if (option.type === "DatePicker") {
-            optionLabel = dayjs(optionLabel).format("MMM DD, YYYY");
+            if (option?.props?.type === "range") {
+              optionLabel =
+                dayjs(optionLabel[0]).format("MMM DD, YYYY") +
+                " - " +
+                dayjs(optionLabel[1]).format("MMM DD, YYYY");
+            } else optionLabel = dayjs(optionLabel).format("MMM DD, YYYY");
           }
 
           let label = `${option?.props.label} : ${optionLabel}`;

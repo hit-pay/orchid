@@ -22,10 +22,12 @@ export const Default = {
     options: [
       {
         label: "Option 1",
+        subLabel: "sub label of Option 1",
         value: 1,
       },
       {
         label: "Option 2",
+        subLabel: "sub label of Option 2",
         value: 2,
       },
       {
@@ -179,7 +181,7 @@ export const Multiple = {
           value: 3,
         },
         {
-          label: "Option 4",
+          label: "Option 4 with very long text, it should be truncated",
           value: 4,
         },
       ];

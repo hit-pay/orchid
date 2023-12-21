@@ -1,4 +1,5 @@
 import { Theme, TimePicker } from "@/orchidui";
+import { ref } from "vue";
 
 export default {
   component: TimePicker,
@@ -28,12 +29,14 @@ export const Default = {
   render: (args) => ({
     components: { Theme, TimePicker },
     setup() {
-      return { args };
+      const modelValue = ref(new Date());
+      return { modelValue, args };
     },
     template: `
           <Theme>
+            <p>{{ modelValue }}</p>
             <div class="w-full h-[200px]">
-              <TimePicker v-bind="args"/>
+              <TimePicker v-model="modelValue" v-bind="args"/>
             </div>
           </Theme>
         `,
