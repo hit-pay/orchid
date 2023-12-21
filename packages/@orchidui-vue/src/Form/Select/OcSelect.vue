@@ -185,6 +185,7 @@ const selectAll = () => {
             :variant="option.variant"
             :label="option.label"
             v-bind="chipProps"
+            should-truncate-chip
             @remove="removeOption(option.value)"
           />
           <Chip
