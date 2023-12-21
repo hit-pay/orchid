@@ -1,6 +1,6 @@
 
 import { SidebarConfig } from "./SidebarConfig.sample";
-import { SectionConfig } from "./SectionConfig.sample";
+import { SectionConfig } from "./SectionsConfig.sample";
 const ASSETS_URL = "/templates/default/images/";
 
 const Config = {
