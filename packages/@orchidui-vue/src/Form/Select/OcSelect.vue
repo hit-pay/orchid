@@ -28,6 +28,7 @@ const props = defineProps({
     default: 0,
   },
   multiple: Boolean,
+  maxOptionAllowed: Number,
   isRequired: {
     type: Boolean,
     default: false,
@@ -52,7 +53,8 @@ const props = defineProps({
 
 const emit = defineEmits({
   addNew: [],
-  "update:modelValue": [],
+  'update:modelValue': [],
+  'max-option-allowed-set': [],
 });
 
 const query = ref("");
@@ -119,14 +121,25 @@ const filterOptions = (options, query) => {
   return filteredOptions;
 };
 const selectOption = (option) => {
-  const result = props.multiple
-    ? (props.modelValue || []).find((o) => o === option.value)
+  let result;
+
+  if (props.multiple) {
+    const isOptionHasBeenSelected = (props.modelValue || []).find((o) => o === option.value);
+
+    if (!isOptionHasBeenSelected
+      && (props.maxOptionAllowed && localValueOption.value?.length >= Number(props.maxOptionAllowed))) {
+      emit('max-option-allowed-set');
+
+      return;
+    }
+
+    result = isOptionHasBeenSelected
       ? (props.modelValue || []).filter((o) => o !== option.value)
       : [...(props.modelValue || []), option.value]
-    : option.value;
+  } else {
+    result = option.value
 
-  if (!props.multiple) {
-    isDropdownOpened.value = false;
+    isDropdownOpened.value = false
   }
 
   emit("update:modelValue", result);
