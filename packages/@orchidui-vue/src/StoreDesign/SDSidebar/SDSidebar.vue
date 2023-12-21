@@ -109,6 +109,9 @@ const changeSidebarMenu = (value) => {
   emit("update:active", {
     ...sidebarActive.value,
     sidebarMenu: value,
+    submenu: "",
+    section: "",
+    id: "",
   });
 };
 
@@ -117,6 +120,7 @@ const changeSubmenu = (value) => {
     ...sidebarActive.value,
     submenu: value,
     section: "",
+    id: "",
   });
 };
 
@@ -133,12 +137,12 @@ const submenuLabel = computed(() => {
   return submenu?.label;
 });
 
-const changeSection = (to = "") => {
+const changeSection = (to = "", key = "") => {
   let newActiveSidebar = {
     ...sidebarActive.value,
     section: to,
+    id: key,
   };
-  console.log(sidebarActive.value);
   if (to === "" && sidebarActive.value.submenu === "styles") {
     newActiveSidebar.submenu = "";
   }
@@ -146,7 +150,7 @@ const changeSection = (to = "") => {
 };
 const onClickSection = (section) => {
   if (section.form) {
-    changeSection(section.key);
+    changeSection(section.section, section.key);
   }
 };
 
@@ -202,7 +206,7 @@ const addSection = (newSection, customize = false) => {
   });
 
   if (customize) {
-    changeSection(newKey);
+    changeSection(newSection.section, newKey);
   } else {
     changeSubmenu(newSection.group);
   }
@@ -257,13 +261,10 @@ const addSection = (newSection, customize = false) => {
           />
         </div>
         <div
-          v-if="
-            sidebarMenu.children &&
-            sidebarActive.sidebarMenu === sidebarMenu.name
-          "
+          v-if="sidebarActive.sidebarMenu === sidebarMenu.name"
           class="w-full flex flex-col"
         >
-          <template v-if="sidebarMenu.type === 'list'">
+          <template v-if="sidebarMenu.type === 'list' && sidebarMenu.children">
             <div
               v-for="(children, childIndex) in sidebarMenu.children"
               :key="childIndex"
@@ -324,12 +325,15 @@ const addSection = (newSection, customize = false) => {
             <span v-else></span>
           </template>
         </DraggableList>
-        <div class="flex justify-center w-full mt-5">
+        <div
+          v-if="sidebarActive.submenu === 'sections'"
+          class="flex justify-center w-full mt-5"
+        >
           <Button
             label="New Section"
             left-icon="plus"
             variant="secondary"
-            @click="changeSection('add-new-section')"
+            @click="changeSection('add-new-section', '')"
           />
         </div>
       </div>
@@ -345,7 +349,7 @@ const addSection = (newSection, customize = false) => {
           name="x"
           width="24"
           height="24"
-          @click="changeSection('')"
+          @click="changeSection('', '')"
         />
         <div v-if="sectionActive" class="font-medium pb-4 px-7">
           {{ sectionActive.title ?? sectionActive.section }}
@@ -369,7 +373,7 @@ const addSection = (newSection, customize = false) => {
           name="x"
           width="24"
           height="24"
-          @click="changeSection('')"
+          @click="changeSection('', '')"
         />
         <div class="font-medium pb-4 px-7">Add Sections</div>
       </div>

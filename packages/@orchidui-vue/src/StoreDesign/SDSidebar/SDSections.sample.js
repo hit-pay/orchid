@@ -6,15 +6,15 @@ import {
 import { PRODUCT_FORM } from "./settings/SDSections.sample";
 
 const SDSectionSample = [
-   {
-        group: "styles",
-        key: "Styles",
-        section: "Styles",
-        title: "Styles",
-        icon: "circle",
-        isDisable: true,
-        form: TOP_BANNER_FORM,
-    },
+  {
+    group: "styles",
+    key: "Styles",
+    section: "Styles",
+    title: "Styles",
+    icon: "circle",
+    isDisable: true,
+    form: TOP_BANNER_FORM,
+  },
   {
     group: "header",
     key: "TopBanner",
@@ -68,9 +68,9 @@ const SDSectionSample = [
     preview: "/images/section.png",
     form: PRODUCT_FORM,
     default: {
-        product_form: "all_product",
-        variant: "grid",
-    }
+      product_form: "all_product",
+      variant: "grid",
+    },
   },
   {
     group: "sections",
@@ -81,8 +81,8 @@ const SDSectionSample = [
     preview: "/images/section.png",
     form: PRODUCT_FORM,
     default: {
-        variant: "full",
-    }
+      variant: "full",
+    },
   },
 ];
 

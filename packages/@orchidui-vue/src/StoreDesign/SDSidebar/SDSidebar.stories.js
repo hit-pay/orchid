@@ -29,19 +29,16 @@ export const Default = {
 
       const getSidebarMenu = (section) => {
         // Sidebar not stored to user store design
-
-        if(section === 'Styles'){
-          return "styles"
+        if (section === "Styles") {
+          return "styles";
+        } else if (["FooterContent", "PoweredBy"].includes(section)) {
+          return "footer";
+        } else if (["IconLink", "ButtonLink"].includes(section)) {
+          return "link_in_bio";
+        } else {
+          return "home";
         }
-        else if(["FooterContent","PoweredBy"].includes(section)){
-            return "footer"
-        }else if(["IconLink","ButtonLink"].includes(section)){
-          return "link_in_bio"
-        }
-        else{
-          return "home"
-        }
-      }
+      };
       const updateSidebarActive = (item) => {
         sidebarActive.value = {
           sidebarMenu: getSidebarMenu(item.section),
@@ -49,6 +46,12 @@ export const Default = {
           section: item.section,
           id: item.key,
         };
+
+        console.log("sidebar :", sidebarActive.value);
+      };
+
+      const onUpdateSidebarActive = () => {
+        console.log("sidebar :", sidebarActive.value);
       };
 
       return {
@@ -58,6 +61,7 @@ export const Default = {
         args,
         content,
         updateSidebarActive,
+        onUpdateSidebarActive,
         sectionSettings,
       };
     },
@@ -69,7 +73,8 @@ export const Default = {
                     v-model:values="storeDesignData"
                     :sidebar="sidebarConfig"
                     :settings="sectionSettings"
-                    v-model:active="sidebarActive">
+                    v-model:active="sidebarActive"
+                    @update:active="onUpdateSidebarActive">
                   </SDSidebar>
                 </div>
                 <div class="w-[700px]">

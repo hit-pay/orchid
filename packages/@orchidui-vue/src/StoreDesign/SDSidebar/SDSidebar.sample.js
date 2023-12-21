@@ -23,7 +23,7 @@ const SDSidebarSample = [
   {
     type: "styles",
     name: "styles",
-    label: "Styles"
+    label: "Styles",
   },
   // 3 -> 4 level level
   {

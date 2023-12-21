@@ -1,7 +1,7 @@
 const PRODUCT_FORM = [
   {
     name: "title",
-    type: "Input"
+    type: "Input",
   },
   {
     type: "SectionItem",
