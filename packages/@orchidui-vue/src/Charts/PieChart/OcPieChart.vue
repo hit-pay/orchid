@@ -36,7 +36,11 @@
         </Tooltip>
       </div>
     </div>
-    <dummy-data v-if="dummyData" :description="dummyDataDescription" absolute />
+    <dummy-data
+      v-if="dummyData"
+      :description="dummyDataDescription"
+      isAbsolute
+    />
   </div>
 </template>
 

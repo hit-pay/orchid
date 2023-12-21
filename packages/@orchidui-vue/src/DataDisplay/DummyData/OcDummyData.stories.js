@@ -15,7 +15,7 @@ export const emptyPage = {
   args: {
     title: undefined,
     description: "Description",
-    absolute: false,
+    isAbsolute: false,
   },
   render: (args) => ({
     components: {

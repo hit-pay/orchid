@@ -1,7 +1,11 @@
 <template>
   <div class="w-full relative">
     <div ref="lineChart" class="h-full" />
-    <dummy-data v-if="dummyData" :description="dummyDataDescription" absolute />
+    <dummy-data
+      v-if="dummyData"
+      :description="dummyDataDescription"
+      isAbsolute
+    />
   </div>
 </template>
 

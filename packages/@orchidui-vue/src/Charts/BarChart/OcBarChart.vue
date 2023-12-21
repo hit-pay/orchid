@@ -1,7 +1,11 @@
 <template>
   <div class="w-full relative">
     <div ref="barChart" class="h-full" />
-    <dummy-data v-if="dummyData" :description="dummyDataDescription" absolute />
+    <dummy-data
+      v-if="dummyData"
+      :description="dummyDataDescription"
+      isAbsolute
+    />
   </div>
 </template>
 

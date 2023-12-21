@@ -11,7 +11,7 @@ const props = defineProps({
     type: String,
     default: "Demo reports will be replaced once you made transactions",
   },
-  absolute: {
+  isAbsolute: {
     type: Boolean,
     default: false,
   },
@@ -26,7 +26,7 @@ const hide = ref(true);
     @mouseleave="hide = true"
     class="flex flex-col justify-center items-center h-full w-full transition duration-300"
     :class="{
-      'absolute top-0 left-0': absolute,
+      'absolute top-0 left-0': isAbsolute,
       'opacity-100': !hide,
       'opacity-0': hide,
     }"
