@@ -9,8 +9,8 @@ defineProps({
 
 <template>
   <div class="flex gap-x-3 text-sm items-center group/url">
-    <span class="text-oc-text-400 font-medium">{{ title }}:</span>
-    {{ url }}
+    <span class="text-oc-text-400 font-medium shrink-0">{{ title }}:</span>
+    <span class="break-all">{{ url }}</span>
 
     <CopyTooltip :value="url">
       <template #default="{ isShow }">
