@@ -48,7 +48,7 @@ const props = defineProps({
   placeholder: String,
   isSplitInput: {
     type: Boolean,
-    default: false,
+    default: true,
   },
   minLabel: {
     type: String,
