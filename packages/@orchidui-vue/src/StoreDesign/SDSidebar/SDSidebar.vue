@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watch } from "vue";
-import { Icon, Toggle, Button } from "@/orchidui";
+import { Icon, Toggle, Button, SelectOptions } from "@/orchidui";
 import { DraggableList } from "@/orchidui/Draggable";
 import { RequestForm, ThumbnailSection } from "@/orchidui/StoreDesign";
 import { computed } from "vue";
@@ -295,7 +295,27 @@ const addSection = (newSection, customize = false) => {
             </div>
           </template>
           <template v-else-if="sidebarMenu.type === 'styles'">
-            Styles Settings
+            <SelectOptions model="" />
+            <!-- label: "Example Label",
+          hint: "This is a hint text to help user",
+          placeholder: "placeholder",
+          options: [
+            {
+              preview: "/images/request-form.svg",
+              label: "Option 1",
+              value: 1,
+            },
+            {
+              preview: "/images/request-form.svg",
+              label: "Option 2",
+              value: 2,
+            },
+            {
+              preview: "/images/request-form.svg",
+              label: "Option 3",
+              value: 3,
+            },
+          ], -->
           </template>
         </div>
       </div>
