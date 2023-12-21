@@ -34,8 +34,6 @@ export const Default = {
         // Sidebar not stored to user store design
         if (section === "Styles") {
           return "styles";
-        } else if (["FooterContent", "PoweredBy"].includes(section)) {
-          return "footer";
         } else if (["IconLink", "ButtonLink"].includes(section)) {
           return "link_in_bio";
         } else {
