@@ -54,6 +54,14 @@ const props = defineProps({
     type: String,
     default: "To",
   },
+  fullWidth: {
+    type: Boolean,
+    default: false,
+  },
+  isRequired: {
+    type: Boolean,
+    default: false
+  }
 });
 
 const isDropdownOpened = ref(false);
@@ -121,10 +129,11 @@ const defaultDateRange = () => {
           :disabled="disabled"
           readonly
           :has-error="errorMessage.length > 0"
+          :is-required="isRequired"
         />
       </div>
       <div v-else class="flex flex-wrap">
-        <div class="flex gap-x-4">
+        <div class="flex gap-x-4" :class="{ 'w-full': props.fullWidth }">
           <Input
             :label="`${label} ${minLabel}`"
             :model-value="formattedDate[0]"
@@ -133,6 +142,7 @@ const defaultDateRange = () => {
             :disabled="disabled"
             readonly
             :has-error="errorMessage.length > 0"
+            :is-required="isRequired"
           />
           <Input
             :label="`${label} ${maxLabel}`"
@@ -142,6 +152,7 @@ const defaultDateRange = () => {
             :disabled="disabled"
             readonly
             :has-error="errorMessage.length > 0"
+            :is-required="isRequired"
           />
         </div>
       </div>
