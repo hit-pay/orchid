@@ -1,4 +1,4 @@
-const SDSample = {
+const StoreDesign = {
   general: {
     top_banner_closable: true,
     top_banner_content: "",
@@ -98,4 +98,4 @@ const SDSample = {
   ],
 };
 
-export { SDSample };
+export { StoreDesign };

@@ -1,8 +1,11 @@
 import { Theme, Button } from "@/orchidui";
 import { SDSidebar } from "@/orchidui/StoreDesign";
-import { SDSidebarSample } from "./SDSidebar.sample";
-import { SDSectionSample } from "./SDSections.sample";
-import { SDSample } from "./SDSample.sample";
+// config
+import { SidebarConfig } from "./settings/SidebarConfig.sample";
+import { SectionsConfig } from "./settings/SectionsConfig.sample";
+// data
+import { StoreDesign } from "./settings/StoreDesign.sample";
+
 import { ref } from "vue";
 export default {
   component: SDSidebar,
@@ -14,10 +17,10 @@ export const Default = {
   render: (args) => ({
     components: { Theme, Button, SDSidebar },
     setup() {
-      const storeDesignData = ref(SDSample);
-      const sectionSettings = ref(SDSectionSample);
+      const storeDesignData = ref(StoreDesign);
+      const sectionSettings = ref(SectionsConfig);
 
-      const sidebarConfig = ref(SDSidebarSample);
+      const sidebarConfig = ref(SidebarConfig);
       const sidebarActive = ref({
         sidebarMenu: "home",
         submenu: "",

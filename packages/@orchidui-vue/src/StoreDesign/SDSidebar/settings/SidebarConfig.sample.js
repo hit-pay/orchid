@@ -1,4 +1,4 @@
-const SDSidebarSample = [
+const SidebarConfig = [
   // 3 -> 4 level level
   {
     type: "list",
@@ -55,4 +55,4 @@ const SDSidebarSample = [
   },
 ];
 
-export { SDSidebarSample };
+export { SidebarConfig };

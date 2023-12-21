@@ -2,10 +2,10 @@ import {
   TOP_BANNER_FORM,
   HEADER_FORM,
   BANNER_FORM,
-} from "./settings/SDHeaders.sample";
-import { PRODUCT_FORM } from "./settings/SDSections.sample";
+} from "./sections/Headers.sample";
+import { PRODUCT_FORM } from "./sections/Sections.sample";
 
-const SDSectionSample = [
+const SectionsConfig = [
   {
     group: "styles",
     key: "Styles",
@@ -86,4 +86,4 @@ const SDSectionSample = [
   },
 ];
 
-export { SDSectionSample };
+export { SectionsConfig };
