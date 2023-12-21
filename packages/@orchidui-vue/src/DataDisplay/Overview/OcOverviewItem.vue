@@ -10,7 +10,6 @@ defineProps({
   isBig: Boolean,
   isTransparent: Boolean,
   isCard: Boolean,
-  isPercent: Boolean,
   percentValue: Number,
 });
 </script>
@@ -25,7 +24,7 @@ defineProps({
   >
     <OverviewIcon v-if="icon" :icon="icon" :variant="variant" />
     <div class="flex flex-col gap-y-px font-medium overflow-hidden">
-      <template v-if="isPercent">
+      <template v-if="percentValue !== undefined">
         <div class="flex items-center gap-x-3 overflow-hidden">
           <span :class="isBig ? 'text-xl' : ''" class="truncate">{{
             title
