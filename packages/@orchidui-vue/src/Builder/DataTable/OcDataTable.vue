@@ -32,6 +32,7 @@ const props = defineProps({
     type: Array,
     required: false,
   },
+  rowClass: String,
   rowKey: {
     type: String,
     Function,
@@ -316,6 +317,7 @@ const displayFilterData = computed(() => {
       :options="tableOptions"
       :is-loading="isLoading"
       :loading-rows="perPage"
+      :row-class="rowClass"
       :is-sticky="tableOptions.isSticky"
       class="min-h-[600px]"
       @update:selected="$emit('update:selected', $event)"
@@ -342,7 +344,7 @@ const displayFilterData = computed(() => {
             </div>
           </template>
           <div
-            class="flex gap-3 absolute ml-auto bg-oc-bg-light right-5"
+            class="flex gap-3 absolute ml-auto bg-oc-bg-light right-4 max-w-[calc(100%-24px)]"
             :class="
               !filterOptions
                 ? 'w-full justify-end'
