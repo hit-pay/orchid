@@ -79,7 +79,8 @@ const isGridVariant = computed(() => {
         }"
         @click="update(opt.value)"
       >
-        <img
+        <slot name="option" :option="opt" :selected="opt.value === modelValue">
+          <img
           v-if="opt.preview"
           class="group-hover:shadow rounded"
           :class="{
@@ -124,6 +125,7 @@ const isGridVariant = computed(() => {
           class="text-oc-primary"
           :class="opt.value === modelValue ? 'opacity-100' : 'opacity-0'"
         />
+        </slot>
       </div>
     </div>
   </BaseInput>

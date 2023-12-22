@@ -312,7 +312,20 @@ const addSection = (newSection, customize = false) => {
           </template>
           <template v-else-if="sidebarMenu.type === 'styles'">
             <div class="p-5">
-              <SelectOptions class="!grid-cols-2" :model-value="presetValue" :options="presetOptions" @update:model-value="updatePreset" />
+              <SelectOptions class="!grid-cols-2" variant="list2" :model-value="presetValue" :options="presetOptions" @update:model-value="updatePreset" >
+                <template #option="{option, selected}">
+                <div class="p-1 flex flex-col justify-center">
+                  <img :src="option.preview" alt="">
+                  <div  
+                    :class="{
+                      'text-oc-primary': selected
+                    }" 
+                    class="text-center mt-2">
+                    {{ option.label }}
+                  </div>
+                </div>
+                </template>
+              </SelectOptions>
             </div>
           </template>
         </div>
