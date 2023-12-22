@@ -14,7 +14,10 @@ const props = defineProps({
   label: String,
   hint: String,
   errorMessage: String,
-  placeholder: String,
+  placeholder: {
+    type: String,
+    default: "Placeholder",
+  },
   isInlineLabel: Boolean,
   isFilterable: Boolean,
   isDisabled: Boolean,
@@ -53,8 +56,8 @@ const props = defineProps({
 
 const emit = defineEmits({
   addNew: [],
-  'update:modelValue': [],
-  'max-option-allowed-set': [],
+  "update:modelValue": [],
+  "max-option-allowed-set": [],
 });
 
 const query = ref("");
@@ -124,22 +127,27 @@ const selectOption = (option) => {
   let result;
 
   if (props.multiple) {
-    const isOptionHasBeenSelected = (props.modelValue || []).find((o) => o === option.value);
+    const isOptionHasBeenSelected = (props.modelValue || []).find(
+      (o) => o === option.value,
+    );
 
-    if (!isOptionHasBeenSelected
-      && (props.maxOptionAllowed && localValueOption.value?.length >= Number(props.maxOptionAllowed))) {
-      emit('max-option-allowed-set');
+    if (
+      !isOptionHasBeenSelected &&
+      props.maxOptionAllowed &&
+      localValueOption.value?.length >= Number(props.maxOptionAllowed)
+    ) {
+      emit("max-option-allowed-set");
 
       return;
     }
 
     result = isOptionHasBeenSelected
       ? (props.modelValue || []).filter((o) => o !== option.value)
-      : [...(props.modelValue || []), option.value]
+      : [...(props.modelValue || []), option.value];
   } else {
-    result = option.value
+    result = option.value;
 
-    isDropdownOpened.value = false
+    isDropdownOpened.value = false;
   }
 
   emit("update:modelValue", result);

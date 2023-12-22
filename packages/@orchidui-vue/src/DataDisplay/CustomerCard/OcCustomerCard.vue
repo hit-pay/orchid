@@ -9,6 +9,7 @@ defineProps({
   },
   customer: Object,
 });
+defineEmits(["addCustomer"]);
 </script>
 
 <template>
@@ -18,8 +19,8 @@ defineProps({
   >
     <template v-if="customer">
       <!--  Main  -->
-      <div class="w-[166px] flex gap-x-3 items-center">
-        <Avatar class="shrink-0" :size="32">
+      <div class="w-full flex gap-x-3 items-center">
+        <Avatar class="shrink-0 uppercase" :size="32">
           {{ customer?.name?.[0] || "J" }}
         </Avatar>
         <div class="flex flex-col font-medium">
@@ -31,9 +32,14 @@ defineProps({
       </div>
 
       <!--  Detail  -->
-      <div v-if="variant !== 'small'" class="flex flex-col gap-y-4 pt-4">
-        <ListDetail label="Phone" :content="customer.phone" />
-        <ListDetail label="Address" :content="customer.address" />
+      <div v-if="variant !== 'small'" class="flex flex-col gap-y-4 pt-4 w-full">
+        <ListDetail label="Phone" :content="`+${customer?.phone_number}`" />
+        <ListDetail
+          label="Address"
+          :content="`${customer?.address?.postal_code || ''} ${
+            customer?.address.country || ''
+          } ${customer?.address?.city || ''}`"
+        />
       </div>
     </template>
 
@@ -54,6 +60,7 @@ defineProps({
         size="small"
         class="w-full"
         label="Add customer"
+        @click="$emit('addCustomer')"
       />
     </template>
   </div>
