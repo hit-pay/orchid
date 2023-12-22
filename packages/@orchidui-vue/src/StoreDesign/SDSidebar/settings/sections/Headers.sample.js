@@ -1,4 +1,4 @@
-const ASSETS_URL = "/templates/default/images/";
+// const ASSETS_URL = "/templates/default/images/";
 
 const TOP_BANNER_FORM = [
   {
@@ -24,35 +24,36 @@ const TOP_BANNER_FORM = [
 ];
 
 const HEADER_FORM = [
-  {
-    type: "SectionItem",
-    props: {
-      title: "Alignment",
-    },
-  },
-  {
-    name: "alignment",
-    type: "SelectOptions",
-    props: {
-      options: [
-        {
-          preview: `${ASSETS_URL}header-alignment-right.png`,
-          label: "Right",
-          value: "right",
-        },
-        {
-          preview: `${ASSETS_URL}header-alignment-left.png`,
-          label: "Left",
-          value: "left",
-        },
-        {
-          preview: `${ASSETS_URL}header-alignment-center.png`,
-          label: "Center",
-          value: "center",
-        },
-      ],
-    },
-  },
+  //  only for juizzy
+  // {
+  //   type: "SectionItem",
+  //   props: {
+  //     title: "Alignment",
+  //   },
+  // },
+  // {
+  //   name: "alignment",
+  //   type: "SelectOptions",
+  //   props: {
+  //     options: [
+  //       {
+  //         preview: `${ASSETS_URL}header-alignment-right.png`,
+  //         label: "Right",
+  //         value: "right",
+  //       },
+  //       {
+  //         preview: `${ASSETS_URL}header-alignment-left.png`,
+  //         label: "Left",
+  //         value: "left",
+  //       },
+  //       {
+  //         preview: `${ASSETS_URL}header-alignment-center.png`,
+  //         label: "Center",
+  //         value: "center",
+  //       },
+  //     ],
+  //   },
+  // },
   {
     name: "menu_enabled",
     type: "SectionItem",
@@ -63,8 +64,10 @@ const HEADER_FORM = [
   },
   {
     general: true,
-    name: "menus",
+    name: "navigation_menus",
     type: "NavigationMenu",
+    noMenuIcon: '/images/no-menu-header.png',
+
   },
   {
     type: "SectionItem",

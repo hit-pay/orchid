@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import { DropdownItem } from "@/orchidui";
+import { DropdownItem, Button } from "@/orchidui";
 import { DraggableList } from "@/orchidui/Draggable.js";
 const props = defineProps({
   modelValue: {
@@ -16,6 +16,7 @@ const props = defineProps({
     type: String,
     default: "link",
   },
+  noMenuIcon: String
 });
 
 const emit = defineEmits(
@@ -139,5 +140,9 @@ const addSubMenu = (item, subitem) => {
         </div>
       </template>
     </DraggableList>
+    <div class="flex flex-col justify-center">
+      <img class="w-full mb-5" :src="noMenuIcon" alt="you don't have menus">
+      <Button class="mx-auto" variant="secondary" size="small" left-icon="plus" label="New Menu" /> 
+    </div>
   </div>
 </template>

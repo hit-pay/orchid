@@ -9,7 +9,7 @@ const props = defineProps({
     default: "bg-oc-bg-light",
   },
   distance: {
-    type: Number,
+    type: [String, Number],
     default: 5,
   },
   skidding: {

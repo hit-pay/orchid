@@ -1,7 +1,7 @@
 <script setup>
 import { FormBuilder } from "@/orchidui";
 import { ref } from "vue";
-
+import { SDMenus } from "@/orchidui/StoreDesign";
 // const FormRequestTypes = [
 //   "title",
 //   "text",
@@ -77,6 +77,9 @@ const onUpdateForm = (form, value = null) => {
     }
   }
 };
+
+
+// const NavigationMenu = ref([]);
 </script>
 <template>
   <div>
@@ -88,6 +91,13 @@ const onUpdateForm = (form, value = null) => {
       :json-form="requestForm"
       @on-update="onUpdateForm"
     >
+      <template #NavigationMenu="{form, value}">
+        <SDMenus  
+          :model-value="value"
+          has-submenu
+          :no-menu-icon="form.noMenuIcon"
+          :submenu-level="2" />
+      </template>
       <template #Colors> Form Colors </template>
       <template #SubForm> Sub Form </template>
     </FormBuilder>
