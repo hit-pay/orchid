@@ -8,6 +8,8 @@ export default {
 };
 export const Default = {
   args: {
+    label: "Label",
+    isRequired: true,
     fontSizes: [
       {
         label: "Default",

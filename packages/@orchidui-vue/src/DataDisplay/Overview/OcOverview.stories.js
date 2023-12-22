@@ -14,6 +14,7 @@ export const overviewItem = {
     isBig: false,
     isTransparent: false,
     isCard: false,
+    percentValue: undefined,
   },
   render: (args) => ({
     components: { OverviewItem, Theme },
@@ -33,6 +34,7 @@ export const overviewItem = {
                 :is-big="args.isBig"
                 :is-transparent="args.isTransparent"
                 :is-card="args.isCard"
+                :percent-value="args.percentValue"
             />
           </Theme>
         `,
