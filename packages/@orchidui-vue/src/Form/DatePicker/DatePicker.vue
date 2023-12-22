@@ -46,6 +46,10 @@ const props = defineProps({
     default: "",
   },
   placeholder: String,
+  isSplitInput: {
+    type: Boolean,
+    default: false,
+  },
   minLabel: {
     type: String,
     default: "From",
@@ -111,9 +115,11 @@ const defaultDateRange = () => {
     class="w-full"
   >
     <div class="flex flex-col gap-y-2 w-full">
-      <div v-if="type === 'default'" class="flex w-full">
+      <div v-if="!isSplitInput" class="flex w-full">
         <Input
-          :model-value="formattedDate"
+          :model-value="
+            formattedDate.every(Boolean) ? formattedDate.join(' - ') : ''
+          "
           icon="calendar"
           :label="label"
           :hint="hint"

@@ -12,6 +12,7 @@ const props = defineProps({
   iconClass: String,
   iconText: String,
   date: String,
+  maxPaymentsMethods: Number,
   type: {
     type: String,
     default: "timeLine",
@@ -51,6 +52,9 @@ const getTypeComponent = computed(() => {
   >
     <template v-if="$slots.menu" #menu>
       <slot name="menu" />
+    </template>
+    <template v-if="$slots.logo" #logo>
+      <slot name="logo" />
     </template>
   </component>
 </template>
