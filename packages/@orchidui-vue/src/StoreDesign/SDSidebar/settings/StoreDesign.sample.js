@@ -3,86 +3,86 @@ const StoreDesign = {
     top_banner_closable: true,
     top_banner_content: "",
     navigation_menus: [
-      // {
-      //   id: "123",
-      //   icon: "banner",
-      //   title: "Menu",
-      //   link: "https://orchidui.vercel.app",
-      // },
-      // {
-      //   id: "234",
-      //   title: "Menu ",
-      //   link: "https://orchidui.vercel.app",
-      // },
-      // {
-      //   id: "456",
-      //   icon: "top-banner",
-      //   title: "Menu",
-      //   children: [
-      //     {
-      //       id: "123",
-      //       icon: "banner",
-      //       title: "SubMenu ",
-      //       link: "https://orchidui.vercel.app",
-      //     },
-      //     {
-      //       id: "234",
-      //       icon: "banner",
-      //       title: "SubMenu",
-      //       link: "https://orchidui.vercel.app",
-      //     },
-      //   ],
-      // },
-      // {
-      //   id: "272",
-      //   title: "Menu ",
-      //   children: [
-      //     {
-      //       id: "123",
-      //       icon: "banner",
-      //       title: "Submenu ",
-      //       link: "https://orchidui.vercel.app",
-      //     },
-      //     {
-      //       id: "272",
-      //       title: "Submenu  ",
-      //       children: [
-      //         {
-      //           id: "123",
-      //           icon: "banner",
-      //           title: "Submenu 2",
-      //           link: "https://orchidui.vercel.app",
-      //         },
-      //         {
-      //           id: "234",
-      //           icon: "banner",
-      //           title: "Submenu 2",
-      //           link: "https://orchidui.vercel.app",
-      //         },
-      //       ],
-      //     },
-      //     {
-      //       id: "667",
-      //       title: "SubMenu ",
-      //       link: "https://orchidui.vercel.app",
-      //     },
-      //     {
-      //       id: "781",
-      //       title: "Submenu ",
-      //       link: "https://orchidui.vercel.app",
-      //     },
-      //   ],
-      // },
-      // {
-      //   id: "667",
-      //   title: "Menu ",
-      //   link: "https://orchidui.vercel.app",
-      // },
-      // {
-      //   id: "781",
-      //   title: "Menu ",
-      //   link: "https://orchidui.vercel.app",
-      // },
+      {
+        id: "123",
+        icon: "banner",
+        title: "Menu",
+        link: "https://orchidui.vercel.app",
+      },
+      {
+        id: "234",
+        title: "Menu ",
+        link: "https://orchidui.vercel.app",
+      },
+      {
+        id: "456",
+        icon: "top-banner",
+        title: "Menu",
+        children: [
+          {
+            id: "123",
+            icon: "banner",
+            title: "SubMenu ",
+            link: "https://orchidui.vercel.app",
+          },
+          {
+            id: "234",
+            icon: "banner",
+            title: "SubMenu",
+            link: "https://orchidui.vercel.app",
+          },
+        ],
+      },
+      {
+        id: "272",
+        title: "Menu ",
+        children: [
+          {
+            id: "123",
+            icon: "banner",
+            title: "Submenu ",
+            link: "https://orchidui.vercel.app",
+          },
+          {
+            id: "272",
+            title: "Submenu",
+            children: [
+              {
+                id: "123",
+                icon: "banner",
+                title: "Submenu 2",
+                link: "https://orchidui.vercel.app",
+              },
+              {
+                id: "234",
+                icon: "banner",
+                title: "Submenu 2",
+                link: "https://orchidui.vercel.app",
+              },
+            ],
+          },
+          {
+            id: "667",
+            title: "SubMenu ",
+            link: "https://orchidui.vercel.app",
+          },
+          {
+            id: "781",
+            title: "Submenu ",
+            link: "https://orchidui.vercel.app",
+          },
+        ],
+      },
+      {
+        id: "667",
+        title: "Menu ",
+        link: "https://orchidui.vercel.app",
+      },
+      {
+        id: "781",
+        title: "Menu ",
+        link: "https://orchidui.vercel.app",
+      },
     ],
     banners: [],
     footer_company_logo: "",

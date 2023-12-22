@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import { DropdownItem, Button } from "@/orchidui";
+import { DropdownItem, Button, Modal, Radio } from "@/orchidui";
 import { DraggableList } from "@/orchidui/Draggable.js";
 const props = defineProps({
   modelValue: {
@@ -16,14 +16,14 @@ const props = defineProps({
     type: String,
     default: "link",
   },
-  noMenuIcon: String
+  noMenuIcon: String,
 });
 
 const emit = defineEmits(
   "update:modelValue",
   "edit:menu",
   "delete:menu",
-  "add:submenu",
+  "add:submenu"
 );
 const model = ref(props.modelValue);
 
@@ -37,6 +37,22 @@ const deleteMenu = (item, subitem, subitem2) => {
 };
 const addSubMenu = (item, subitem) => {
   emit("add:submenu", item, subitem);
+};
+
+const addMenuType = ref("page");
+const addMenuForm = ref({
+  type: "",
+  title: "",
+  link: "",
+});
+const addMenuModal = ref(false);
+const addMenu = () => {
+  addMenuModal.value = true;
+  addMenuForm.value = {
+    type: "",
+    title: "",
+    link: "",
+  };
 };
 </script>
 <template>
@@ -141,8 +157,63 @@ const addSubMenu = (item, subitem) => {
       </template>
     </DraggableList>
     <div class="flex flex-col justify-center">
-      <img v-if="model.length === 0" class="w-full mb-5" :src="noMenuIcon" alt="you don't have menus">
-      <Button class="mx-auto" variant="secondary" size="small" left-icon="plus" label="New Menu" /> 
+      <img
+        v-if="model.length === 0"
+        class="w-full"
+        :src="noMenuIcon"
+        alt="you don't have menus"
+      />
+      <Button
+        class="mx-auto mt-3"
+        variant="secondary"
+        size="small"
+        left-icon="plus"
+        label="New Menu"
+        @click="addMenu"
+      />
+
+      <Modal
+        v-model="addMenuModal"
+        class="!w-full !h-full"
+        title="Add Menu"
+        :confirm-button-props="{
+          label: 'Save',
+        }"
+      >
+        <div class="flex flex-col gap-5">
+          {{ addMenuType }}
+          <div class="flex">
+            <Radio
+              id="menu-type-page"
+              group-name="menu-type"
+              :checked="addMenuType === 'page'"
+              label="From pages"
+              @update:model-value="addMenuType = 'page'"
+
+            />
+          </div>
+          <div class="flex">
+            <Radio
+              id="menu-type-category"
+              group-name="menu-type"
+              :checked="addMenuType === 'category'"
+              label="Product category "
+              @update:model-value="addMenuType = 'category'"
+
+            />
+          </div>
+          <div class="flex">
+            <Radio
+              id="menu-type-link"
+              group-name="menu-type"
+              :checked="addMenuType === 'link'"
+              label="External link"
+              @update:model-value="addMenuType = 'link'"
+
+            />
+          </div>
+        </div>
+      </Modal>
     </div>
   </div>
 </template>
