@@ -8,7 +8,6 @@ const props = defineProps({
   secondaryButtonProps: Object,
 });
 
-const emit = defineEmits(["click:primaryButton", "click:secondaryButton"]);
 const isDropdownOpened = ref(props.secondaryButtonProps?.isDropdownOpened ?? false)
 const { isMobile } = useWindowWidth();
 </script>
@@ -29,7 +28,6 @@ const { isMobile } = useWindowWidth();
             v-for="(option, i) in secondaryButtonProps.dropdownOptions"
             :key="i"
             v-bind="option"
-            @click="emit('click:secondaryButton', option)"
           />
         </div>
       </template>
@@ -44,7 +42,6 @@ const { isMobile } = useWindowWidth();
       <Button
         :size="isMobile ? 'small' : 'default'"
         v-bind="primaryButtonProps"
-        @click="emit('click:primaryButton')"
       />
       <template #popper>
         <div
