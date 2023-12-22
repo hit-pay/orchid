@@ -21,6 +21,7 @@ const props = defineProps({
     Function,
     default: "id",
   },
+  rowClass: String,
   isSticky: {
     type: Boolean,
     default: false,
@@ -102,7 +103,7 @@ onMounted(() => onScroll());
 <template>
   <div
     ref="scrollTable"
-    class="flex text-oc-text flex-col rounded border border-oc-gray-200 isolate"
+    class="flex text-oc-text flex-col md:rounded border border-oc-gray-200 isolate"
     :class="isSticky ? 'overflow-x-auto' : 'overflow-hidden'"
     @scroll="onScroll"
   >
@@ -182,13 +183,16 @@ onMounted(() => onScroll());
         v-for="(field, i) in fields"
         :key="i"
         class="flex relative group/row md:p-0 py-3"
-        :class="{
-          'border-b md:border-b-0': fields.length !== i + 1,
-          'pl-[40px]': isSelectable,
-          'flex-wrap md:flex-nowrap': !isSticky,
-          'w-max !p-0': isSticky,
-          'cursor-pointer': isCursorPointer,
-        }"
+        :class="[
+          {
+            'border-b md:border-b-0': fields.length !== i + 1,
+            'pl-[40px]': isSelectable,
+            'flex-wrap md:flex-nowrap': !isSticky,
+            'w-max !p-0': isSticky,
+            'cursor-pointer': isCursorPointer,
+          },
+          rowClass,
+        ]"
       >
         <TableCell
           v-if="isSelectable"

@@ -45,7 +45,7 @@ const props = defineProps({
     default: "h-full",
   },
 });
-const emit = defineEmits({
+defineEmits({
   selected: [],
   copied: [],
 });
@@ -71,7 +71,7 @@ const variantClass = computed(() => ({
       variantClass[variant] || 'px-4',
       isLoading ? 'flex items-center' : '',
     ]"
-    class="py-3 bg-oc-bg-light md:min-h-[58px] md:group-hover/row:bg-oc-gray-50 items-center"
+    class="md:py-3 py-1 bg-oc-bg-light md:min-h-[58px] md:group-hover/row:bg-oc-gray-50 items-center"
   >
     <div
       v-if="isLoading"
@@ -92,13 +92,13 @@ const variantClass = computed(() => ({
         <Checkbox
           v-if="variant === Variants.CHECKBOX"
           :model-value="isSelected"
-          class="m-auto"
+          class="m-auto justify-center items-center"
           :class="
             isSelected
-              ? 'block'
+              ? 'flex'
               : isSimple
                 ? ''
-                : 'md:hidden group-hover/row:block'
+                : 'md:hidden group-hover/row:flex'
           "
           @update:model-value="$emit('selected')"
         />
