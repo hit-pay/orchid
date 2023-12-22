@@ -52,6 +52,7 @@ export default defineConfig({
         "quill",
         "vue-draggable-next",
         "echarts",
+        "shikiji",
       ],
     },
   },
