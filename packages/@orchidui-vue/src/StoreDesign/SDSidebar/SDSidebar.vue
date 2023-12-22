@@ -23,6 +23,7 @@ const props = defineProps({
   options: {
     type: Object,
     default: () => {
+      // TODO : juizzy theme
       return {
         categories: [],
         products: [],
@@ -38,6 +39,9 @@ const requiredSection = ["Header", "FooterContent"];
 const emit = defineEmits({
   "update:values": [],
   "update:active": [],
+  "add:menu": [], // navigation menu, footer menu, link in bio
+  "add:banner": [],
+  // TODO : juizzy theme
   "get:products": [],
   "get:categories": [],
   "get:pages": [],
@@ -286,9 +290,10 @@ const addSection = (newSection, customize = false) => {
             {{ sidebarMenu.label }}
           </div>
           <Icon
-            v-if="sidebarMenu.children"
+            v-if="sidebarMenu.children || sidebarMenu.name ==='styles'"
             name="chevron-down"
             class="ml-auto text-oc-text-400"
+            :class="sidebarActive.sidebarMenu === sidebarMenu.name ? 'rotate-180':''"
             width="18"
             height="18"
           />
