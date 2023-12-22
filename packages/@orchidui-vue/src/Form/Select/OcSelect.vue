@@ -28,6 +28,7 @@ const props = defineProps({
     default: 0,
   },
   multiple: Boolean,
+  maxOptionAllowed: Number,
   isRequired: {
     type: Boolean,
     default: false,
@@ -44,11 +45,16 @@ const props = defineProps({
     type: Object,
     default: () => ({}),
   },
+  chipProps: {
+    type: Object,
+    default: () => ({}),
+  },
 });
 
 const emit = defineEmits({
   addNew: [],
-  "update:modelValue": [],
+  'update:modelValue': [],
+  'max-option-allowed-set': [],
 });
 
 const query = ref("");
@@ -115,14 +121,25 @@ const filterOptions = (options, query) => {
   return filteredOptions;
 };
 const selectOption = (option) => {
-  const result = props.multiple
-    ? (props.modelValue || []).find((o) => o === option.value)
+  let result;
+
+  if (props.multiple) {
+    const isOptionHasBeenSelected = (props.modelValue || []).find((o) => o === option.value);
+
+    if (!isOptionHasBeenSelected
+      && (props.maxOptionAllowed && localValueOption.value?.length >= Number(props.maxOptionAllowed))) {
+      emit('max-option-allowed-set');
+
+      return;
+    }
+
+    result = isOptionHasBeenSelected
       ? (props.modelValue || []).filter((o) => o !== option.value)
       : [...(props.modelValue || []), option.value]
-    : option.value;
+  } else {
+    result = option.value
 
-  if (!props.multiple) {
-    isDropdownOpened.value = false;
+    isDropdownOpened.value = false
   }
 
   emit("update:modelValue", result);
@@ -171,7 +188,7 @@ const selectAll = () => {
           'py-3': multiple,
         }"
       >
-        <div v-if="multiple" class="flex flex-wrap gap-2">
+        <div v-if="multiple" class="flex flex-wrap gap-2 overflow-hidden">
           <Chip
             v-for="option in maxVisibleOptions
               ? localValueOption.slice(0, maxVisibleOptions)
@@ -180,6 +197,8 @@ const selectAll = () => {
             closable
             :variant="option.variant"
             :label="option.label"
+            v-bind="chipProps"
+            should-truncate-chip
             @remove="removeOption(option.value)"
           />
           <Chip
@@ -202,7 +221,7 @@ const selectAll = () => {
           </span>
         </template>
         <Icon
-          class="w-5 h-5 text-oc-text-400 transition-all duration-500"
+          class="w-5 h-5 text-oc-text-400 transition-all shrink-0 duration-500"
           :class="isDropdownOpened && '-rotate-180'"
           name="chevron-down"
         />
@@ -234,6 +253,7 @@ const selectAll = () => {
                 v-for="option in filterableOptions"
                 :key="option.value"
                 :label="option.label"
+                :sub-label="option.subLabel"
                 :is-checkboxes="isCheckboxes"
                 :is-selected="
                   multiple

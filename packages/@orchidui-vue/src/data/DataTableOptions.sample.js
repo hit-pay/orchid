@@ -9,6 +9,7 @@ const DataTableOptions = {
   //   prev: "prev_cursor_key",
   //   next: "next_cursor_key",
   // },
+  // perPageOptions: [10,25,50,100],
   filterOptions: {
     per_page: {
       key: "per_page",

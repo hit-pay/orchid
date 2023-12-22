@@ -13,6 +13,7 @@ import {
 } from "@/orchidui";
 import { ref, computed } from "vue";
 import dayjs from "dayjs";
+
 const props = defineProps({
   isLoading: Boolean,
   id: {
@@ -31,6 +32,7 @@ const props = defineProps({
     type: Array,
     required: false,
   },
+  rowClass: String,
   rowKey: {
     type: String,
     Function,
@@ -76,8 +78,15 @@ const defaultQuery =
 const queries = ref(defaultQuery ? defaultQuery.split(",") : []);
 const isSearchExpanded = ref(false);
 
+const customPerPageOptions = computed(() => {
+  return props.options?.perPageOptions?.map(perPage => ({
+    label: `${perPage}`,
+    value: perPage,
+  })) ?? null;
+})
+
 const perPageOptions = computed(() => {
-  let per_page_option = [
+  let default_per_page_option = [
     {
       label: "10",
       value: 10,
@@ -111,12 +120,12 @@ const perPageOptions = computed(() => {
       value: 99,
     },
   ];
-  let opt = per_page_option;
+  let opt = customPerPageOptions.value ?? default_per_page_option;
   if (paginationOption.value) {
     const maxLength =
       paginationOption.value.total < 100 ? paginationOption.value.total : 100;
     if (maxLength > 10) {
-      opt = per_page_option.filter((p) => {
+      opt = opt.filter((p) => {
         return p.value <= maxLength;
       });
     }
@@ -277,7 +286,12 @@ const displayFilterData = computed(() => {
           }
 
           if (option.type === "DatePicker") {
-            optionLabel = dayjs(optionLabel).format("MMM DD, YYYY");
+            if (option?.props?.type === "range") {
+              optionLabel =
+                dayjs(optionLabel[0]).format("MMM DD, YYYY") +
+                " - " +
+                dayjs(optionLabel[1]).format("MMM DD, YYYY");
+            } else optionLabel = dayjs(optionLabel).format("MMM DD, YYYY");
           }
 
           let label = `${option?.props.label} : ${optionLabel}`;
@@ -310,6 +324,7 @@ const displayFilterData = computed(() => {
       :options="tableOptions"
       :is-loading="isLoading"
       :loading-rows="perPage"
+      :row-class="rowClass"
       :is-sticky="tableOptions.isSticky"
       class="min-h-[600px]"
       @update:selected="$emit('update:selected', $event)"
@@ -336,7 +351,7 @@ const displayFilterData = computed(() => {
             </div>
           </template>
           <div
-            class="flex gap-3 absolute ml-auto bg-oc-bg-light right-5"
+            class="flex gap-3 absolute ml-auto bg-oc-bg-light right-4 max-w-[calc(100%-24px)]"
             :class="
               !filterOptions
                 ? 'w-full justify-end'

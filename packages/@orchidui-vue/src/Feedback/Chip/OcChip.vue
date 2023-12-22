@@ -11,6 +11,7 @@ const props = defineProps({
   icon: String,
   iconTooltip: String,
   closable: Boolean,
+  shouldTruncateChip: Boolean,
   iconProps: Object,
 });
 defineEmits({
@@ -95,7 +96,13 @@ const iconColor = computed(() => {
           </template>
         </Tooltip>
         <Icon v-else-if="icon" width="18" height="18" :name="icon" />
-        {{ label }}
+        <div
+          :class="{
+            'truncate max-w-[180px]': shouldTruncateChip,
+          }"
+        >
+          {{ label }}
+        </div>
       </div>
     </slot>
     <Icon

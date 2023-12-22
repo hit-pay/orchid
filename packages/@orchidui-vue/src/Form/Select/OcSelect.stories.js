@@ -22,10 +22,12 @@ export const Default = {
     options: [
       {
         label: "Option 1",
+        subLabel: "sub label of Option 1",
         value: 1,
       },
       {
         label: "Option 2",
+        subLabel: "sub label of Option 2",
         value: 2,
       },
       {
@@ -179,7 +181,7 @@ export const Multiple = {
           value: 3,
         },
         {
-          label: "Option 4",
+          label: "Option 4 with very long text, it should be truncated",
           value: 4,
         },
       ];
@@ -230,7 +232,12 @@ export const Multiple = {
 
       const selectedOption = ref([]);
       const selectedGroups = ref([]);
-      return { selectedOption, selectedGroups, groups, options };
+      
+      const setExceedMaxOption = () => {
+        console.log('Exceed max options allowed');
+      }
+
+      return { selectedOption, selectedGroups, groups, options, setExceedMaxOption };
     },
     template: `
           <Theme colorMode="light" class="p-10 flex flex-col gap-y-8">
@@ -244,6 +251,20 @@ export const Multiple = {
                 is-select-all
                 multiple
                 placeholder="Placeholder"
+            />
+            
+            <Select
+                v-model="selectedOption"
+                :options="options"
+                label="Max options allowed: 2"
+                hint="Hint"
+                is-filterable
+                is-checkboxes
+                :max-option-allowed="2"
+                is-select-all
+                multiple
+                placeholder="Placeholder"
+                @max-option-allowed-set="setExceedMaxOption"
             />
 
             <Select
