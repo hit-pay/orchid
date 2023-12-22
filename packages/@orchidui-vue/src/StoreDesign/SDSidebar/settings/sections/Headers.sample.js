@@ -1,4 +1,5 @@
-import { ASSETS_URL } from '../Config.sample'
+const ASSETS_URL = "/templates/default/images/";
+
 const TOP_BANNER_FORM = [
   {
     general: true,

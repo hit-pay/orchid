@@ -32,6 +32,7 @@ const props = defineProps({
     type: Object,
     default: () => ({}),
   },
+  class: String
 });
 
 const emit = defineEmits({
@@ -59,8 +60,10 @@ const isGridVariant = computed(() => {
   >
     <div
       class="w-full grid gap-5"
-      :class="
+      :class="[
+        props.class,
         isGridVariant ? 'grid-cols-3' : variant === 'list2' ? 'grid-cols-2' : ''
+      ]
       "
     >
       <div

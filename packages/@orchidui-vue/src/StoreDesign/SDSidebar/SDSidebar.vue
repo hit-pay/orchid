@@ -43,6 +43,19 @@ const emit = defineEmits({
   "get:pages": [],
 });
 
+
+const presetOptions = computed(() => {
+  return props.preset
+})
+const presetValue = computed(() => {
+  return props.values.sections.find(s => s.key === 'Styles')['preset']
+})
+
+const updatePreset = (to) => {
+  const selectedPreset = presetOptions.value.find((p) => p.value === to)
+  // apply default value preset selectedPreset
+  console.log(selectedPreset)
+}
 const sectionList = ref(null);
 const sectionActive = ref(null);
 
@@ -293,32 +306,14 @@ const addSection = (newSection, customize = false) => {
                 width="18"
                 height="18"
                 name="chevron-right"
-                class="ml-auto text-oc-text-400"
+                class="ml-auto text-oc-text-400 "
               />
             </div>
           </template>
           <template v-else-if="sidebarMenu.type === 'styles'">
-            <SelectOptions model="" />
-            <!-- label: "Example Label",
-          hint: "This is a hint text to help user",
-          placeholder: "placeholder",
-          options: [
-            {
-              preview: "/images/request-form.svg",
-              label: "Option 1",
-              value: 1,
-            },
-            {
-              preview: "/images/request-form.svg",
-              label: "Option 2",
-              value: 2,
-            },
-            {
-              preview: "/images/request-form.svg",
-              label: "Option 3",
-              value: 3,
-            },
-          ], -->
+            <div class="p-5">
+              <SelectOptions class="!grid-cols-2" :model-value="presetValue" :options="presetOptions" @update:model-value="updatePreset" />
+            </div>
           </template>
         </div>
       </div>

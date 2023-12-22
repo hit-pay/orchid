@@ -1,4 +1,4 @@
-const SidebarConfig = [
+const sidebar = [
   // 3 -> 4 level level
   {
     type: "list",
@@ -55,4 +55,4 @@ const SidebarConfig = [
   },
 ];
 
-export { SidebarConfig };
+export { sidebar };

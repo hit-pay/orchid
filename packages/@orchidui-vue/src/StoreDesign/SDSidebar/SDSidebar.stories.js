@@ -1,8 +1,7 @@
 import { Theme, Button } from "@/orchidui";
 import { SDSidebar } from "@/orchidui/StoreDesign";
 // config
-import { SidebarConfig } from "./settings/SidebarConfig.sample";
-import { SectionsConfig } from "./settings/SectionsConfig.sample";
+import { Config } from "./settings/Config.sample"
 // data
 import { StoreDesign } from "./settings/StoreDesign.sample";
 
@@ -17,10 +16,8 @@ export const Default = {
   render: (args) => ({
     components: { Theme, Button, SDSidebar },
     setup() {
+      const sidebarConfig = ref(Config)
       const storeDesignData = ref(StoreDesign);
-      const sectionSettings = ref(SectionsConfig);
-
-      const sidebarConfig = ref(SidebarConfig);
       const sidebarActive = ref({
         sidebarMenu: "home",
         submenu: "",
@@ -56,14 +53,14 @@ export const Default = {
       };
 
       return {
+        sidebarConfig,
         sidebarActive,
         storeDesignData,
-        sidebarConfig,
-        args,
-        content,
         updateSidebarActive,
         onUpdateSidebarActive,
-        sectionSettings,
+        // stories
+        args,
+        content,
       };
     },
     template: `
@@ -72,8 +69,9 @@ export const Default = {
               <div class="h-[800px] w-[500px]">
                   <SDSidebar 
                     v-model:values="storeDesignData"
-                    :sidebar="sidebarConfig"
-                    :settings="sectionSettings"
+                    :sidebar="sidebarConfig.sidebar"
+                    :preset="sidebarConfig.preset"
+                    :settings="sidebarConfig.settings"
                     v-model:active="sidebarActive"
                     @update:active="onUpdateSidebarActive">
                   </SDSidebar>

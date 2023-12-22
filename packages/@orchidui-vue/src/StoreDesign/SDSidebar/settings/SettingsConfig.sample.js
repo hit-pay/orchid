@@ -5,7 +5,7 @@ import {
 } from "./sections/Headers.sample";
 import { PRODUCT_FORM } from "./sections/Sections.sample";
 
-const SectionsConfig = [
+const settings = [
   {
     group: "styles",
     key: "Styles",
@@ -86,4 +86,4 @@ const SectionsConfig = [
   },
 ];
 
-export { SectionsConfig };
+export { settings };

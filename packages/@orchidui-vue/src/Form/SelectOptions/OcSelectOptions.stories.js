@@ -180,6 +180,7 @@ export const Default = {
       const errors = ref({});
 
       const onUpdateForm = (form, value = null) => {
+        console.log(form, value)
         if (typeof form.name === "object") {
           form.name.forEach((formName, index) => {
             values.value[formName.key] = value[index];
@@ -197,12 +198,11 @@ export const Default = {
               {{ values }}
             </div>
             <div class="max-w-[550px] border p-4 rounded">
-              <FormBuilder class="grid gap-5" id="section_name" :values="values" :errors="errors"
-                           :json-form="args.jsonForm">
-                <template #SelectOptions="{form, value, error}">
-                  <SelectOptions v-bind="form.props" :model-value="value" :error-messages="error"
-                                 @update:model-value="onUpdateForm(form, $event)"/>
-                </template>
+              <FormBuilder 
+                  class="grid gap-5" 
+                  id="section_name" 
+                  :values="values" 
+                  :errors="errors" :json-form="args.jsonForm" @onUpdate="onUpdateForm">
               </FormBuilder>
             </div>
           </Theme>
