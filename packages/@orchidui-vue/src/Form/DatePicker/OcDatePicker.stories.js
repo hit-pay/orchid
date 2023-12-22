@@ -33,7 +33,6 @@ export const Default = {
     maxLabel: "To",
     minDate: null,
     maxDate: null,
-    fullWidth: false,
     isRequired: true,
     label: ""
   },
@@ -65,7 +64,6 @@ export const Default = {
                   :label="args.label"
                   :min-label="args.minLabel"
                   :max-label="args.maxLabel"
-                  :full-width="args.fullWidth"
                   :is-required="args.isRequired"
               />
             </div>

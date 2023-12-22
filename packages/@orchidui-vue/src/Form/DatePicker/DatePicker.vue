@@ -54,10 +54,6 @@ const props = defineProps({
     type: String,
     default: "To",
   },
-  fullWidth: {
-    type: Boolean,
-    default: false,
-  },
   isRequired: {
     type: Boolean,
     default: false
@@ -133,7 +129,7 @@ const defaultDateRange = () => {
         />
       </div>
       <div v-else class="flex flex-wrap">
-        <div class="flex gap-x-4" :class="{ 'w-full': props.fullWidth }">
+        <div class="w-full flex gap-x-4">
           <Input
             :label="`${label} ${minLabel}`"
             :model-value="formattedDate[0]"
