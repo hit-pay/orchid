@@ -13,11 +13,11 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - name: Install dependencies  build and publish orchid ui vue🔧
         run: npm ci 
-        run: git config --global user.name 'Automated publish'
-        run: git config --global user.email 'orchidui@hitpayapp.com'
         run: npm install --prefix packages/@orchidui-vue
         run: npm run build --prefix packages/@orchidui-vue
         run: npm version patch --prefix packages/@orchidui-vue
       - run: npm publish --prefix packages/@orchidui-vue
         env:
           NODE_AUTH_TOKEN: ${{ env.NPM_TOKEN }}
+      - name: Authenticate with GitHub package registry
+        run: echo "//npm.pkg.github.com/:_authToken=${{ env.NPM_TOKEN }}" > ~/.npmrc
