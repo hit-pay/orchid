@@ -1,16 +1,15 @@
 <script setup>
 import { Button, Dropdown, DropdownItem, Tooltip } from "@/orchidui";
-import { ref } from "vue";
+import {  ref } from "vue";
 import { useWindowWidth } from "@/orchidui/composables/useWindowWidth.js";
 
-const emit = defineEmits(["click:primaryButton", "click:secondaryButton"]);
-const isDropdownOpened = ref(false);
-const { isMobile } = useWindowWidth();
-
-defineProps({
+const props = defineProps({
   primaryButtonProps: Object,
   secondaryButtonProps: Object,
 });
+
+const isDropdownOpened = ref(props.secondaryButtonProps?.isDropdownOpened ?? false)
+const { isMobile } = useWindowWidth();
 </script>
 <template>
   <div class="flex gap-x-3 items-center">
@@ -29,7 +28,6 @@ defineProps({
             v-for="(option, i) in secondaryButtonProps.dropdownOptions"
             :key="i"
             v-bind="option"
-            @click="emit('click:secondaryButton', option)"
           />
         </div>
       </template>
@@ -44,7 +42,6 @@ defineProps({
       <Button
         :size="isMobile ? 'small' : 'default'"
         v-bind="primaryButtonProps"
-        @click="emit('click:primaryButton')"
       />
       <template #popper>
         <div

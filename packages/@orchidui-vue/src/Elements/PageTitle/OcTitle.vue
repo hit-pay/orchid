@@ -14,7 +14,9 @@ defineProps({
   <div class="flex text-oc-text justify-center flex-col gap-y-3 max-w-full">
     <div class="md:text-xl font-medium flex items-center gap-x-3">
       <slot name="title" :title="title">
-        <span class="whitespace-nowrap text-ellipsis overflow-hidden">
+        <span
+          class="whitespace-nowrap text-ellipsis overflow-hidden md:text-base text-xl"
+        >
           {{ title }}
         </span>
       </slot>

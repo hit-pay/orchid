@@ -1,0 +1,20 @@
+---
+on:
+  push:
+    branches: main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+          registry-url: https://registry.npmjs.org
+      - name: Install dependencies  build and publish orchid ui vue🔧
+        run: npm ci && cd packages/@orchidui-vue && npm install && npm run build && npm
+          version patch && npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secret.NPM_TOKEN }}
+      - name: Authenticate with GitHub package registry
+        run: echo "//npm.pkg.github.com/:_authToken=${{ secret.NPM_TOKEN }}" > ~/.npmrc
