@@ -18,6 +18,7 @@ export const Default = {
       },
     },
     secondaryButtonProps: {
+      isDropdownOpened: false,
       variant: "secondary",
       label: "Secondary",
       dropdownOptions: [

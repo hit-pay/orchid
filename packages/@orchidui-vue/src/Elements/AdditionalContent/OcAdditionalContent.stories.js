@@ -105,6 +105,7 @@ const args = {
       url: "https://securecheckout.../payment-request/",
     },
     dropdownOptions: {
+      isDropdownOpened: false,
       top: [
         {
           icon: "pencil",

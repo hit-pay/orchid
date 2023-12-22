@@ -48,7 +48,7 @@ const props = defineProps({
   placeholder: String,
   isSplitInput: {
     type: Boolean,
-    default: false,
+    default: true,
   },
   minLabel: {
     type: String,
@@ -58,6 +58,10 @@ const props = defineProps({
     type: String,
     default: "To",
   },
+  isRequired: {
+    type: Boolean,
+    default: false
+  }
 });
 
 const isDropdownOpened = ref(false);
@@ -127,10 +131,11 @@ const defaultDateRange = () => {
           :disabled="disabled"
           readonly
           :has-error="errorMessage.length > 0"
+          :is-required="isRequired"
         />
       </div>
       <div v-else class="flex flex-wrap">
-        <div class="flex gap-x-4">
+        <div class="w-full flex gap-x-4">
           <Input
             :label="`${label} ${minLabel}`"
             :model-value="formattedDate[0]"
@@ -139,6 +144,7 @@ const defaultDateRange = () => {
             :disabled="disabled"
             readonly
             :has-error="errorMessage.length > 0"
+            :is-required="isRequired"
           />
           <Input
             :label="`${label} ${maxLabel}`"
@@ -148,6 +154,7 @@ const defaultDateRange = () => {
             :disabled="disabled"
             readonly
             :has-error="errorMessage.length > 0"
+            :is-required="isRequired"
           />
         </div>
       </div>

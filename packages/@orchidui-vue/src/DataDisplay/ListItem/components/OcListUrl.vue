@@ -18,7 +18,7 @@ defineProps({
           width="14"
           height="14"
           class="cursor-pointer transition-all duration-500 group-hover/url:opacity-100"
-          :class="isShow ? 'opacity-100' : 'opacity-0'"
+          :class="isShow ? 'opacity-100' : 'md:opacity-0'"
           name="copy"
         />
       </template>
