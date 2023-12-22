@@ -141,7 +141,7 @@ const addSubMenu = (item, subitem) => {
       </template>
     </DraggableList>
     <div class="flex flex-col justify-center">
-      <img class="w-full mb-5" :src="noMenuIcon" alt="you don't have menus">
+      <img v-if="model.length === 0" class="w-full mb-5" :src="noMenuIcon" alt="you don't have menus">
       <Button class="mx-auto" variant="secondary" size="small" left-icon="plus" label="New Menu" /> 
     </div>
   </div>
