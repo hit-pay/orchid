@@ -1,22 +1,19 @@
+---
 on:
   push:
     branches: main
-
 jobs:
-  publish:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
         with:
-          node-version: '20.x'
-          registry-url: 'https://registry.npmjs.org'
+          node-version: 20.x
+          registry-url: https://registry.npmjs.org
       - name: Install dependencies  build and publish orchid ui vue🔧
-        run: npm ci 
-        run: npm install --prefix packages/@orchidui-vue
-        run: npm run build --prefix packages/@orchidui-vue
-        run: npm version patch --prefix packages/@orchidui-vue
-      - run: npm publish --prefix packages/@orchidui-vue
+        run: npm ci && cd packages/@orchidui-vue && npm install && npm run build && npm
+          version patch && npm publish
         env:
           NODE_AUTH_TOKEN: ${{ env.NPM_TOKEN }}
       - name: Authenticate with GitHub package registry
