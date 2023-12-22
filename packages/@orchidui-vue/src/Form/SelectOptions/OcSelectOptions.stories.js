@@ -180,7 +180,7 @@ export const Default = {
       const errors = ref({});
 
       const onUpdateForm = (form, value = null) => {
-        console.log(form, value)
+        console.log(form, value);
         if (typeof form.name === "object") {
           form.name.forEach((formName, index) => {
             values.value[formName.key] = value[index];

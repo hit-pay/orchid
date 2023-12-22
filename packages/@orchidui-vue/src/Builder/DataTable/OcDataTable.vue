@@ -79,11 +79,13 @@ const queries = ref(defaultQuery ? defaultQuery.split(",") : []);
 const isSearchExpanded = ref(false);
 
 const customPerPageOptions = computed(() => {
-  return props.options?.perPageOptions?.map(perPage => ({
-    label: `${perPage}`,
-    value: perPage,
-  })) ?? null;
-})
+  return (
+    props.options?.perPageOptions?.map((perPage) => ({
+      label: `${perPage}`,
+      value: perPage,
+    })) ?? null
+  );
+});
 
 const perPageOptions = computed(() => {
   let default_per_page_option = [

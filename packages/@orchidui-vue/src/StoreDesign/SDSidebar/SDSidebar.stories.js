@@ -1,7 +1,7 @@
 import { Theme, Button } from "@/orchidui";
 import { SDSidebar } from "@/orchidui/StoreDesign";
 // config
-import { Config } from "./settings/Config.sample"
+import { Config } from "./settings/Config.sample";
 // data
 import { StoreDesign } from "./settings/StoreDesign.sample";
 
@@ -16,7 +16,7 @@ export const Default = {
   render: (args) => ({
     components: { Theme, Button, SDSidebar },
     setup() {
-      const sidebarConfig = ref(Config)
+      const sidebarConfig = ref(Config);
       const storeDesignData = ref(StoreDesign);
       const sidebarActive = ref({
         sidebarMenu: "home",
@@ -73,7 +73,8 @@ export const Default = {
                     :preset="sidebarConfig.preset"
                     :settings="sidebarConfig.settings"
                     v-model:active="sidebarActive"
-                    @update:active="onUpdateSidebarActive">
+                    @update:active="onUpdateSidebarActive"
+                    >
                   </SDSidebar>
                 </div>
                 <div class="w-[700px]">

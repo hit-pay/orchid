@@ -12,7 +12,8 @@ jobs:
           node-version: 20.x
           registry-url: https://registry.npmjs.org
       - name: Install dependencies  build and publish orchid ui vue🔧
-        run: npm ci && cd packages/@orchidui-vue && npm install && npm run build && npm
+        run:
+          npm ci && cd packages/@orchidui-vue && npm install && npm run build && npm
           version patch && npm publish
         env:
           NODE_AUTH_TOKEN: ${{ env.NPM_TOKEN }}

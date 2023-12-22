@@ -43,19 +43,43 @@ const emit = defineEmits({
   "get:pages": [],
 });
 
-
 const presetOptions = computed(() => {
-  return props.preset
-})
+  return props.preset;
+});
 const presetValue = computed(() => {
-  return props.values.sections.find(s => s.key === 'Styles')['preset']
-})
+  return props.values.sections.find((s) => s.key === "Styles")["preset"];
+});
 
 const updatePreset = (to) => {
-  const selectedPreset = presetOptions.value.find((p) => p.value === to)
-  // apply default value preset selectedPreset
-  console.log(selectedPreset)
-}
+  const selectedPreset = presetOptions.value.find((p) => p.value === to);
+  if (to !== "custom") {
+    let newSectionsList = [];
+    props.values.sections.forEach((item) => {
+      const defaultSettings = selectedPreset.sections.find(
+        (s) => s.section === item.section,
+      );
+      if (defaultSettings) {
+        let sectionItem = {
+          ...item,
+        };
+        Object.keys(defaultSettings.changes).forEach((key) => {
+          const val = defaultSettings.changes[key];
+          sectionItem[key] = val;
+        });
+        newSectionsList.push(sectionItem);
+      } else {
+        newSectionsList.push(item);
+      }
+    });
+
+    const newStoreDesignData = {
+      general: generalData.value,
+      sections: [...newSectionsList],
+    };
+
+    emit("update:values", newStoreDesignData);
+  }
+};
 const sectionList = ref(null);
 const sectionActive = ref(null);
 
@@ -66,7 +90,7 @@ const sidebarActive = computed(() => {
 });
 
 const availableSections = computed(() =>
-  props.settings.filter((s) => s.group === "sections")
+  props.settings.filter((s) => s.group === "sections"),
 );
 
 const renderForm = ref(null);
@@ -85,7 +109,7 @@ watch(
       props.values.sections.forEach((item) => {
         if (item.group === "sections") {
           const sectionItem = props.settings.find(
-            (s) => s.section === item.section
+            (s) => s.section === item.section,
           );
           sectionListCustom.push({
             key: item.key,
@@ -102,7 +126,7 @@ watch(
     }
 
     sectionActive.value = sectionList.value.find(
-      (s) => s.key === props.active.id
+      (s) => s.key === props.active.id,
     );
 
     setTimeout(() => {
@@ -111,12 +135,12 @@ watch(
   },
   {
     deep: true,
-  }
+  },
 );
 
 const sectionActiveValues = computed(() => {
   let sectionValues = props.values.sections.find(
-    (s) => s.key === props.active.id
+    (s) => s.key === props.active.id,
   );
   return sectionValues;
 });
@@ -148,7 +172,7 @@ const sidebarMenuLabel = computed(() => {
 });
 const submenuLabel = computed(() => {
   const submenu = sidebarMenuActive.value?.children.find(
-    (s) => s.name === sidebarActive.value.submenu
+    (s) => s.name === sidebarActive.value.submenu,
   );
   return submenu?.label;
 });
@@ -306,24 +330,31 @@ const addSection = (newSection, customize = false) => {
                 width="18"
                 height="18"
                 name="chevron-right"
-                class="ml-auto text-oc-text-400 "
+                class="ml-auto text-oc-text-400"
               />
             </div>
           </template>
           <template v-else-if="sidebarMenu.type === 'styles'">
-            <div class="p-5">
-              <SelectOptions class="!grid-cols-2" variant="list2" :model-value="presetValue" :options="presetOptions" @update:model-value="updatePreset" >
-                <template #option="{option, selected}">
-                <div class="p-1 flex flex-col justify-center">
-                  <img :src="option.preview" alt="">
-                  <div  
-                    :class="{
-                      'text-oc-primary': selected
-                    }" 
-                    class="text-center mt-2">
-                    {{ option.label }}
+            <div class="px-5 pb-7">
+              <SelectOptions
+                class="!grid-cols-2"
+                variant="list2"
+                :model-value="presetValue"
+                :options="presetOptions"
+                @update:model-value="updatePreset"
+              >
+                <template #option="{ option, selected }">
+                  <div class="p-1 flex flex-col justify-center">
+                    <img :src="option.preview" alt="" />
+                    <div
+                      :class="{
+                        'text-oc-primary': selected,
+                      }"
+                      class="text-center mt-2"
+                    >
+                      {{ option.label }}
+                    </div>
                   </div>
-                </div>
                 </template>
               </SelectOptions>
             </div>

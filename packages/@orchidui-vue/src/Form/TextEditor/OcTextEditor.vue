@@ -44,7 +44,6 @@ const props = defineProps({
     type: Object,
     default: () => ({}),
   },
-
 });
 const emit = defineEmits(["update:modelValue", "update:image"]);
 
@@ -213,7 +212,9 @@ onMounted(() => {
           <div class="flex items-center gap-x-3">
             <Icon
               :class="
-                isUndoActive ? 'text-oc-text cursor-pointer' : 'text-oc-text-300'
+                isUndoActive
+                  ? 'text-oc-text cursor-pointer'
+                  : 'text-oc-text-300'
               "
               width="20"
               height="20"
@@ -222,7 +223,9 @@ onMounted(() => {
             />
             <Icon
               :class="
-                isRedoActive ? 'text-oc-text cursor-pointer' : 'text-oc-text-300'
+                isRedoActive
+                  ? 'text-oc-text cursor-pointer'
+                  : 'text-oc-text-300'
               "
               width="20"
               height="20"
