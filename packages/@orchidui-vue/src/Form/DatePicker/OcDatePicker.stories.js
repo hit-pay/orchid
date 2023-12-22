@@ -33,6 +33,8 @@ export const Default = {
     maxLabel: "To",
     minDate: null,
     maxDate: null,
+    isRequired: true,
+    label: ""
   },
   render: (args) => ({
     components: { Theme, DatePicker },
@@ -59,8 +61,10 @@ export const Default = {
                   :hint="args.hint"
                   :min-date="args.minDate"
                   :max-date="args.maxDate"
+                  :label="args.label"
                   :min-label="args.minLabel"
                   :max-label="args.maxLabel"
+                  :is-required="args.isRequired"
               />
             </div>
           </Theme>
