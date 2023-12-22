@@ -78,8 +78,15 @@ const defaultQuery =
 const queries = ref(defaultQuery ? defaultQuery.split(",") : []);
 const isSearchExpanded = ref(false);
 
+const customPerPageOptions = computed(() => {
+  return props.options?.perPageOptions?.map(perPage => ({
+    label: `${perPage}`,
+    value: perPage,
+  })) ?? null;
+})
+
 const perPageOptions = computed(() => {
-  let per_page_option = [
+  let default_per_page_option = [
     {
       label: "10",
       value: 10,
@@ -113,12 +120,12 @@ const perPageOptions = computed(() => {
       value: 99,
     },
   ];
-  let opt = per_page_option;
+  let opt = customPerPageOptions.value ?? default_per_page_option;
   if (paginationOption.value) {
     const maxLength =
       paginationOption.value.total < 100 ? paginationOption.value.total : 100;
     if (maxLength > 10) {
-      opt = per_page_option.filter((p) => {
+      opt = opt.filter((p) => {
         return p.value <= maxLength;
       });
     }
