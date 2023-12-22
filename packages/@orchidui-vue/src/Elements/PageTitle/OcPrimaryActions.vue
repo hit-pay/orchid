@@ -13,9 +13,7 @@ const isCopied = ref(false);
 const hasDropdownOptions = computed(
   () => props.primaryActions?.dropdownOptions,
 );
-const isDropdownOpened = computed(
-  () => hasDropdownOptions.value?.isDropdownOpened ?? false,
-);
+const isDropdownOpened = ref(hasDropdownOptions.value?.isDropdownOpened ?? false);
 const copyToClipBoard = () => {
   isCopied.value = true;
   emit("copy");
@@ -58,10 +56,6 @@ const copyToClipBoard = () => {
       v-if="hasDropdownOptions"
       v-model="isDropdownOpened"
       :distance="6"
-      @click="
-        hasDropdownOptions.isDropdownOpened =
-          !hasDropdownOptions.isDropdownOpened
-      "
     >
       <Icon
         class="p-2 cursor-pointer rounded-sm hover:bg-oc-accent-1-50-tr"
