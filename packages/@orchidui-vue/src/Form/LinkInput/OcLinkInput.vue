@@ -39,12 +39,14 @@ const emit = defineEmits({
   "update:type": [],
   "update:title": []
 });
+
 const isDropdownOpened = ref(false);
 const selectedLinkType = ref(props.type ?? props.links?.[0]?.value);
 const linkTitle = ref(props.title ?? '');
 const selectedLinkTypeProps = computed(() =>
   props.links.find((link) => link.value === selectedLinkType.value),
 );
+const localValue = ref(props.modelValue ? props.modelValue.replace(selectedLinkTypeProps.value.preFill, '') : '')
 
 const updateLinkType = (value)=>{
   selectedLinkType.value = value
@@ -53,7 +55,7 @@ const updateLinkType = (value)=>{
 }
 
 const update = (value) => {
-  emit('update:modelValue', value)
+  emit('update:modelValue', selectedLinkTypeProps.value.preFill+value)
   if(!props.isEdit && selectedLinkType.value !== 'link'){
     emit('update:title', value)
   }
@@ -62,16 +64,16 @@ const update = (value) => {
 
 <template>
   <div >
-    <Input v-if="selectedLinkType === 'link' || isEdit"  v-model="linkTitle"   class="mb-3" label="Title" placeholder="Title" @update:title="$emit('update:title', value)" />
+    <Input v-if="selectedLinkType === 'link' || isEdit"  v-model="linkTitle"   class="mb-3" label="Title" placeholder="Title" @update:model-value="$emit('update:title',$event)" />
     <Input
-    :placeholder="selectedLinkType === 'link' ?  'website.com' : placeholder"
+    :placeholder="selectedLinkTypeProps.placeholder"
     :label="selectedLinkType === 'link' ? 'Link' : label"
     :error-message="errorMessage"
     :is-inline-label="isInlineLabel"
     :disabled="isDisabled"
     :hint="hint"
     :pre-fill="selectedLinkTypeProps.preFill"
-    :model-value="modelValue"
+    :model-value="localValue"
     :is-required="isRequired"
     :label-icon="labelIcon"
     :tooltip-text="tooltipText"

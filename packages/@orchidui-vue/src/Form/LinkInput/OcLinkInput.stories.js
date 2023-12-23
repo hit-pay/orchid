@@ -30,6 +30,7 @@ export const Default = {
     links: [
       {
         value: "facebook",
+        placeholder: "@username",
         label: "Facebook",
         icon: "facebook",
         preFill: "https://facebook.com/",
@@ -55,6 +56,7 @@ export const Default = {
       {
         value: "other",
         label: "Other website",
+        placeholder: "website.com",
         icon: "earth",
         preFill: "https://",
       },

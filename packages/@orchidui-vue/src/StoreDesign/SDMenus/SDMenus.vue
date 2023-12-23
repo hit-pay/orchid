@@ -69,54 +69,64 @@ const socialOptions = [
         label: "Facebook",
         icon: "facebook",
         preFill: "https://facebook.com/",
+        placeholder: "@username",
       },
       {
         value: "instagram",
         label: "Instagram",
         icon: "instagram",
         preFill: "https://instagram.com/",
+        placeholder: "@username",
       },
       {
         value: "twitter",
         label: "(X) Twitter",
         icon: "twitter",
         preFill: "https://twitter.com/",
+        placeholder: "@username",
       },
       {
         value: "tiktok",
         label: "Tiktok",
         icon: "tiktok",
         preFill: "https://tiktok.com/",
+        placeholder: "@username",
       },
       {
         value: "email",
         label: "Email",
         icon: "email",
         preFill: "mailto:",
+        placeholder: "example@mail.com",
       },
       {
         value: "phone",
         label: "Phone Number",
         icon: "phone",
         preFill: "tel:",
+        placeholder: "628xxx",
       },
       {
         value: "whatsapp",
         label: "Whatsapp",
         icon: "whatsapp",
         preFill: "https://wa.me/",
+        placeholder: "628xxx",
       },
       {
         value: "telegram",
         label: "Telegram",
         icon: "telegram",
         preFill: "https://t.me/",
+        placeholder: "628xxx",
+
       },
       {
         value: "link",
         label: "Other website",
         icon: "link",
         preFill: "https://",
+        placeholder: "website.com",
       },
     ]
 
@@ -286,20 +296,9 @@ const saveMenu = () => {
           onClick: () => saveMenu()
         }"
       >
-         <!-- if social  -->
-         <div v-if="variant === 'social'" class="flex flex-col gap-5">
-           <LinkInput 
-                  v-model="addMenuForm.link"
-                  v-model:type="addMenuForm.type"
-                  v-model:title="addMenuForm.title"
-                  label="Enter username"
-                  placeholder="@username"
-                  :links="socialOptions"
-          />
-        </div>
-         <!-- else  -->
-        <div v-else class="flex flex-col gap-5">
-          <div class="flex flex-col">
+        <div class="flex flex-col gap-5">
+          <template v-if="!isSocial">
+            <div class="flex flex-col">
             <Radio
               id="menu-type-page"
               group-name="menu-type"
@@ -325,8 +324,10 @@ const saveMenu = () => {
               <Select v-if="options.categories.length > 0" v-model="addMenuForm.ids" multiple :options="options.categories" placeholder="Choose Categories"   />
             </div>
           </div>
+          </template>
           <div class="flex flex-col">
             <Radio
+              v-if="!isSocial"
               id="menu-type-link"
               group-name="menu-type"
               :checked="!['page','category'].includes(addMenuForm.type)"
@@ -335,6 +336,7 @@ const saveMenu = () => {
 
             />
             <div v-if="!['page','category'].includes(addMenuForm.type)" class="w-full pl-4 mt-4" >
+             
               <LinkInput 
                   v-model="addMenuForm.link"
                   v-model:type="addMenuForm.type"
