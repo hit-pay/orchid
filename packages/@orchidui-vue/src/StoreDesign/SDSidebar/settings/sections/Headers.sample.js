@@ -67,7 +67,32 @@ const HEADER_FORM = [
     name: "navigation_menus",
     type: "NavigationMenu",
     noMenuIcon: '/images/no-menu-header.png',
-
+    options: {
+      pages: [
+        {
+        value: "page_id",
+        link: "/page-1",
+        label: "page title"
+      }, 
+      {
+        value: "page_id_2",
+        link: "/page-2",
+        label: "page title 2"
+      }
+    ],
+      catgeories: [
+        {
+          value: "category_id",
+          link: "/search?category=category_id",
+          label: "Category title 1"
+        }, 
+        {
+          value: "category_id",
+          link: "/search?category=category_id",
+          label: "category title 2"
+        }
+      ]
+    },
   },
   {
     type: "SectionItem",

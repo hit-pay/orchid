@@ -99,7 +99,9 @@ const isDropdownOpen = ref([]);
             >
               <Icon width="12" height="12" class="mr-2" name="link" />
               <template #popper>
-                {{ element[linkKey] }}
+                <div class="min-w-[120px]">
+                  {{ element[linkKey] }}
+                </div>
               </template>
             </Tooltip>
             <span class="truncate max-w-[80%]"> {{ element[linkKey] }}</span>

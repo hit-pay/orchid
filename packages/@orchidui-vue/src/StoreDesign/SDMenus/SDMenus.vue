@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import { DropdownItem, Button, Modal, Radio } from "@/orchidui";
+import { DropdownItem, Button, Modal, Radio, Select, Input } from "@/orchidui";
 import { DraggableList } from "@/orchidui/Draggable.js";
 const props = defineProps({
   modelValue: {
@@ -17,31 +17,37 @@ const props = defineProps({
     default: "link",
   },
   noMenuIcon: String,
+  options: {
+    type: Object,
+    default: () => {
+      return {
+        categories: [],
+        pages: [],
+      };
+    },
+  },
 });
 
-const emit = defineEmits(
-  "update:modelValue",
-  "edit:menu",
-  "delete:menu",
-  "add:submenu"
-);
-const model = ref(props.modelValue);
+const isLoading = ref(false)
+const emit = defineEmits({
+  "update:modelValue": [],
+})
 
 const update = (value) => emit("update:modelValue", value);
 
 const editMenu = (item, subitem, subitem2) => {
-  emit("edit:menu", item, subitem, subitem2);
+  console.log("edit:menu", item, subitem, subitem2);
 };
 const deleteMenu = (item, subitem, subitem2) => {
-  emit("delete:menu", item, subitem, subitem2);
+  console.log("delete:menu", item, subitem, subitem2);
 };
 const addSubMenu = (item, subitem) => {
-  emit("add:submenu", item, subitem);
+  console.log("add:submenu", item, subitem);
 };
 
-const addMenuType = ref("page");
 const addMenuForm = ref({
-  type: "",
+  id: "new_"+ Date.now(),
+  type: "page",
   title: "",
   link: "",
 });
@@ -49,18 +55,37 @@ const addMenuModal = ref(false);
 const addMenu = () => {
   addMenuModal.value = true;
   addMenuForm.value = {
-    type: "",
+    id: "new_"+ Date.now(),
+    type: "page",
     title: "",
     link: "",
   };
 };
+
+const onUpdatePage = () => {
+  const selected = props.options.pages.find(o =>  o.value === addMenuForm.value.id)
+  addMenuForm.value.title = selected.label
+  addMenuForm.value.link = selected.link
+}
+const saveMenu = () => {
+  if(addMenuForm.value.link && addMenuForm.value.title){
+    isLoading.value = true
+    let newModelValue = [...props.modelValue, addMenuForm.value]
+    emit('update:modelValue',newModelValue)
+    setTimeout(() => {
+      addMenuModal.value = false
+      isLoading.value = false
+    }, 100)
+  }
+}
 </script>
 <template>
   <div>
     <DraggableList
-      v-model="model"
+      v-if="!isLoading"
       is-link
       :link-key="linkKey"
+      :model-value="modelValue"
       @update:model-value="update"
     >
       <template #action-item="{ item }">
@@ -158,7 +183,7 @@ const addMenu = () => {
     </DraggableList>
     <div class="flex flex-col justify-center">
       <img
-        v-if="model.length === 0"
+        v-if="modelValue.length === 0"
         class="w-full"
         :src="noMenuIcon"
         alt="you don't have menus"
@@ -178,37 +203,40 @@ const addMenu = () => {
         title="Add Menu"
         :confirm-button-props="{
           label: 'Save',
+          onClick: () => saveMenu()
         }"
       >
         <div class="flex flex-col gap-5">
-          {{ addMenuType }}
-          <div class="flex">
+          <div class="flex flex-col">
             <Radio
               id="menu-type-page"
               group-name="menu-type"
-              :checked="addMenuType === 'page'"
+              :checked="addMenuForm.type === 'page'"
               label="From pages"
-              @update:model-value="addMenuType = 'page'"
+              @update:model-value="addMenuForm.type = 'page'"
 
             />
+            <div class="w-full pl-4 mt-4">
+              <Input v-model="addMenuForm.title" class="mb-3" placeholder="Menu title"  />
+              <Select v-model="addMenuForm.id" :options="options.pages" placeholder="Select Page" @update:model-value="onUpdatePage"  />
+            </div>
           </div>
           <div class="flex">
             <Radio
               id="menu-type-category"
               group-name="menu-type"
-              :checked="addMenuType === 'category'"
+              :checked="addMenuForm.type === 'category'"
               label="Product category "
-              @update:model-value="addMenuType = 'category'"
-
+              @update:model-value="addMenuForm.type = 'category'"
             />
           </div>
           <div class="flex">
             <Radio
               id="menu-type-link"
               group-name="menu-type"
-              :checked="addMenuType === 'link'"
+              :checked="addMenuForm.type === 'link'"
               label="External link"
-              @update:model-value="addMenuType = 'link'"
+              @update:model-value="aaddMenuForm.type= 'link'"
 
             />
           </div>

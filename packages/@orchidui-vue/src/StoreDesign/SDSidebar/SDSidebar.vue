@@ -20,18 +20,6 @@ const props = defineProps({
   preset: {
     type: Array,
   },
-  options: {
-    type: Object,
-    default: () => {
-      // TODO : juizzy theme
-      return {
-        categories: [],
-        products: [],
-        pages: [],
-      };
-    },
-    // pages, products, categories [used by input menu & select product from category / pick product]
-  },
 });
 
 const requiredSection = ["Header", "FooterContent"];

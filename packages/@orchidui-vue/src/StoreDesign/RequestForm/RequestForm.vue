@@ -2,24 +2,13 @@
 import { FormBuilder } from "@/orchidui";
 import { ref } from "vue";
 import { SDMenus } from "@/orchidui/StoreDesign";
-// const FormRequestTypes = [
-//   "title",
-//   "text",
-//   "longText",
-//   "options",
-//   "toggle",
-//   "select",
-//   "select_category",
-//   "select_products",
-//   "font",
-// ];
-
 const props = defineProps({
   requestForm: Object,
   generalData: Object,
   sectionData: Object,
 });
 
+console.log(props.requestForm)
 const generalFormData = ref(props.generalData);
 const sectionFormData = ref(props.sectionData);
 
@@ -47,6 +36,7 @@ Object.values(props.requestForm).forEach((form) => {
 const emit = defineEmits(["update:generalData", "update:sectionData"]);
 
 const updateData = (general = false) => {
+  console.log('generalFormData.value', generalFormData.value)
   if (general) {
     emit("update:generalData", generalFormData.value);
   } else {
@@ -78,8 +68,6 @@ const onUpdateForm = (form, value = null) => {
   }
 };
 
-
-// const NavigationMenu = ref([]);
 </script>
 <template>
   <div>
@@ -96,7 +84,9 @@ const onUpdateForm = (form, value = null) => {
           :model-value="value"
           has-submenu
           :no-menu-icon="form.noMenuIcon"
-          :submenu-level="2" />
+          :options="form.options"
+          :submenu-level="2"
+          @update:model-value="onUpdateForm(form, $event)" />
       </template>
       <template #Colors> Form Colors </template>
       <template #SubForm> Sub Form </template>
