@@ -48,20 +48,20 @@ const selectedLinkTypeProps = computed(() =>
 const updateLinkType = (value)=>{
   selectedLinkType.value = value
   emit('update:type', value)
+  if(selectedLinkType.value !== 'other'){
+    emit('update:title', selectedLinkTypeProps.value.label)
+  }
   isDropdownOpened.value = false;
 }
 
 const update = (value) => {
   emit('update:modelValue', value)
-  if(selectedLinkType.value !== 'other'){
-    emit('update:title', value)
-  }
 }
 </script>
 
 <template>
   <div >
-    <Input v-if="selectedLinkType === 'other'"  v-model="linkTitle"   class="mb-3" label="Title" @update:title="$emit('update:title', value)" />
+    <Input v-if="selectedLinkType === 'other'"  v-model="linkTitle"   class="mb-3" label="Title" placeholder="Title" @update:title="$emit('update:title', value)" />
     <Input
     :placeholder="selectedLinkType === 'other' ?  'website.com' :placeholder"
     :label="selectedLinkType === 'other' ? 'Link' : label"
