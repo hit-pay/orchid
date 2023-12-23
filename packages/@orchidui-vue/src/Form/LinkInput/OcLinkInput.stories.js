@@ -18,7 +18,7 @@ export const Default = {
     placeholder: "@username",
     isInlineLabel: false,
     isDisabled: false,
-    label: "",
+    label: "Enter Username",
     errorMessage: "",
     isRequired: false,
     labelIcon: "",
@@ -29,6 +29,12 @@ export const Default = {
     },
     links: [
       {
+        value: "facebook",
+        label: "Facebook",
+        icon: "facebook",
+        preFill: "https://facebook.com/",
+      },
+      {
         value: "instagram",
         label: "Instagram",
         icon: "instagram",
@@ -36,9 +42,21 @@ export const Default = {
       },
       {
         value: "twitter",
-        label: "Twitter",
+        label: "(X) Twitter",
         icon: "twitter",
         preFill: "https://twitter.com/",
+      },
+      {
+        value: "tiktok",
+        label: "Tiktok",
+        icon: "tiktok",
+        preFill: "https://tiktok.com/",
+      },
+      {
+        value: "other",
+        label: "Other website",
+        icon: "earth",
+        preFill: "https://",
       },
     ],
   },
@@ -47,7 +65,8 @@ export const Default = {
     setup() {
       const linkType = ref("twitter");
       const linkValue = ref("");
-      return { linkType, linkValue, args };
+      const linkTitle = ref("");
+      return { linkType, linkValue, linkTitle, args };
     },
     template: `
           <Theme>
@@ -61,6 +80,7 @@ export const Default = {
               <LinkInput
                   v-model="linkValue"
                   v-model:type="linkType"
+                  v-model:title="linkTitle"
                   :isInlineLabel="args.isInlineLabel"
                   :isDisabled="args.isDisabled"
                   :label="args.label"

@@ -36,40 +36,51 @@ const props = defineProps({
 const emit = defineEmits({
   "update:modelValue": [],
   "update:type": [],
+  "update:title": []
 });
 const isDropdownOpened = ref(false);
-const selectedLink = ref(props.type ?? props.links?.[0]?.value);
-const selectedLinkProps = computed(() =>
-  props.links.find((link) => link.value === selectedLink.value),
+const selectedLinkType = ref(props.type ?? props.links?.[0]?.value);
+const linkTitle = ref(props.title ?? '');
+const selectedLinkTypeProps = computed(() =>
+  props.links.find((link) => link.value === selectedLinkType.value),
 );
 
 const updateLinkType = (value)=>{
-  selectedLink.value = value
+  selectedLinkType.value = value
   emit('update:type', value)
   isDropdownOpened.value = false;
+}
+
+const update = (value) => {
+  emit('update:modelValue', value)
+  if(selectedLinkType.value !== 'other'){
+    emit('update:title', value)
+  }
 }
 </script>
 
 <template>
-  <Input
-    :placeholder="placeholder"
-    :label="label"
+  <div >
+    <Input v-if="selectedLinkType === 'other'"  v-model="linkTitle"   class="mb-3" label="Title" @update:title="$emit('update:title', value)" />
+    <Input
+    :placeholder="selectedLinkType === 'other' ?  'website.com' :placeholder"
+    :label="selectedLinkType === 'other' ? 'Link' : label"
     :error-message="errorMessage"
     :is-inline-label="isInlineLabel"
     :disabled="isDisabled"
     :hint="hint"
-    :pre-fill="selectedLinkProps.preFill"
+    :pre-fill="selectedLinkTypeProps.preFill"
     :model-value="modelValue"
     :is-required="isRequired"
     :label-icon="labelIcon"
     :tooltip-text="tooltipText"
     :tooltip-options="tooltipOptions"
-    @update:model-value="$emit('update:modelValue', $event)"
+    @update:model-value="update"
   >
     <template #trailing>
       <Dropdown v-model="isDropdownOpened" :distance="10">
         <div class="flex text-oc-text-400 items-center gap-x-2">
-          <Icon width="20" height="20" :name="selectedLinkProps.icon" />
+          <Icon width="20" height="20" :name="selectedLinkTypeProps.icon" />
           <Icon
             width="16"
             height="16"
@@ -80,7 +91,7 @@ const updateLinkType = (value)=>{
         </div>
 
         <template #menu>
-          <div class="flex flex-col p-2">
+          <div class="flex flex-col p-2 py-3 gap-2">
             <div
               v-for="link in links"
               :key="link.value"
@@ -95,4 +106,6 @@ const updateLinkType = (value)=>{
       </Dropdown>
     </template>
   </Input>
+  </div>
+  
 </template>
