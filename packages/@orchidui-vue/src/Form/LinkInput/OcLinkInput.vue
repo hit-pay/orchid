@@ -14,6 +14,7 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+  type: String,
   isRequired: {
     type: Boolean,
     default: false,
@@ -31,14 +32,22 @@ const props = defineProps({
     default: () => ({}),
   },
 });
-defineEmits({
+
+const emit = defineEmits({
   "update:modelValue": [],
+  "update:type": [],
 });
 const isDropdownOpened = ref(false);
-const selectedLink = ref(props.links?.[0]?.value || "");
+const selectedLink = ref(props.type ?? props.links?.[0]?.value);
 const selectedLinkProps = computed(() =>
   props.links.find((link) => link.value === selectedLink.value),
 );
+
+const updateLinkType = (value)=>{
+  selectedLink.value = value
+  emit('update:type', value)
+  isDropdownOpened.value = false;
+}
 </script>
 
 <template>
@@ -76,10 +85,7 @@ const selectedLinkProps = computed(() =>
               v-for="link in links"
               :key="link.value"
               class="flex rounded-sm items-center px-3 py-2 gap-x-3 cursor-pointer text-oc-text-400 hover:bg-gray-50"
-              @click="
-                selectedLink = link.value;
-                isDropdownOpened = false;
-              "
+              @click="updateLinkType(link.value)"
             >
               <Icon width="20" height="20" :name="link.icon" />
               {{ link.label }}

@@ -14,8 +14,8 @@ export const Default = {
     },
   },
   args: {
-    hint: "This is a hint text to help user.",
-    placeholder: "Placeholder",
+    hint: "",
+    placeholder: "@username",
     isInlineLabel: false,
     isDisabled: false,
     label: "",
@@ -45,14 +45,22 @@ export const Default = {
   render: (args) => ({
     components: { Theme, LinkInput },
     setup() {
-      const link = ref("");
-      return { link, args };
+      const linkType = ref("twitter");
+      const linkValue = ref("");
+      return { linkType, linkValue, args };
     },
     template: `
           <Theme>
             <div class="w-full h-[200px]">
+              <div>
+                type:  {{linkType}}
+              </div>
+              <div>
+                value : {{linkValue}}
+              </div>
               <LinkInput
-                  v-model="link"
+                  v-model="linkValue"
+                  v-model:type="linkType"
                   :isInlineLabel="args.isInlineLabel"
                   :isDisabled="args.isDisabled"
                   :label="args.label"
