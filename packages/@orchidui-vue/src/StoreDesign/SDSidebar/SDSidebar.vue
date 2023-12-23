@@ -20,6 +20,7 @@ const props = defineProps({
   preset: {
     type: Array,
   },
+  options: Object
 });
 
 const requiredSection = ["Header", "FooterContent"];
@@ -416,6 +417,7 @@ const addSection = (newSection, customize = false) => {
           :general-data="generalData"
           :section-data="sectionActiveValues"
           :request-form="sectionActive.form"
+          :options="options"
         >
         </RequestForm>
         <span v-else> loading... </span>

@@ -6,6 +6,16 @@ const props = defineProps({
   requestForm: Object,
   generalData: Object,
   sectionData: Object,
+  options: {
+    type: Object,
+    default: () => {
+      return {
+        categories: [],
+        pages: [],
+        products: [],
+      };
+    },
+  }
 });
 
 console.log(props.requestForm)
@@ -84,8 +94,7 @@ const onUpdateForm = (form, value = null) => {
           :model-value="value"
           has-submenu
           :no-menu-icon="form.noMenuIcon"
-          :options="form.options"
-          :submenu-level="2"
+          :options="options"
           @update:model-value="onUpdateForm(form, $event)" />
       </template>
       <template #Colors> Form Colors </template>

@@ -52,6 +52,33 @@ export const Default = {
         console.log("sidebar :", sidebarActive.value);
       };
 
+      const options = {
+        pages: [
+            {
+            value: "page_id",
+            link: "/page-1",
+            label: "page title"
+          }, 
+          {
+            value: "page_id_2",
+            link: "/page-2",
+            label: "page title 2"
+          }
+        ],
+        categories: [
+          {
+            value: "category_id",
+            link: "/search?category=category_id",
+            label: "Category title 1"
+          }, 
+          {
+            value: "category_id_2",
+            link: "/search?category=category_id",
+            label: "category title 2"
+          }
+        ]
+      }
+
       return {
         sidebarConfig,
         sidebarActive,
@@ -61,6 +88,7 @@ export const Default = {
         // stories
         args,
         content,
+        options
       };
     },
     template: `
@@ -72,6 +100,7 @@ export const Default = {
                     :sidebar="sidebarConfig.sidebar"
                     :preset="sidebarConfig.preset"
                     :settings="sidebarConfig.settings"
+                    :options="options"
                     v-model:active="sidebarActive"
                     @update:active="onUpdateSidebarActive"
                     >
