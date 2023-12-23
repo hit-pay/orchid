@@ -31,6 +31,7 @@ const props = defineProps({
     type: Object,
     default: () => ({}),
   },
+  isEdit: Boolean
 });
 
 const emit = defineEmits({
@@ -48,23 +49,23 @@ const selectedLinkTypeProps = computed(() =>
 const updateLinkType = (value)=>{
   selectedLinkType.value = value
   emit('update:type', value)
-  if(selectedLinkType.value !== 'other'){
-    emit('update:title', selectedLinkTypeProps.value.label)
-  }
   isDropdownOpened.value = false;
 }
 
 const update = (value) => {
   emit('update:modelValue', value)
+  if(!props.isEdit && selectedLinkType.value !== 'link'){
+    emit('update:title', value)
+  }
 }
 </script>
 
 <template>
   <div >
-    <Input v-if="selectedLinkType === 'other'"  v-model="linkTitle"   class="mb-3" label="Title" placeholder="Title" @update:title="$emit('update:title', value)" />
+    <Input v-if="selectedLinkType === 'link' || isEdit"  v-model="linkTitle"   class="mb-3" label="Title" placeholder="Title" @update:title="$emit('update:title', value)" />
     <Input
-    :placeholder="selectedLinkType === 'other' ?  'website.com' :placeholder"
-    :label="selectedLinkType === 'other' ? 'Link' : label"
+    :placeholder="selectedLinkType === 'link' ?  'website.com' : placeholder"
+    :label="selectedLinkType === 'link' ? 'Link' : label"
     :error-message="errorMessage"
     :is-inline-label="isInlineLabel"
     :disabled="isDisabled"

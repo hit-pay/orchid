@@ -1,6 +1,6 @@
 <script setup>
-import { ref } from "vue";
-import { DropdownItem, Button, Modal, Radio, Select, Input} from "@/orchidui";
+import { ref, computed } from "vue";
+import { DropdownItem, Button, Modal, Radio, Select, LinkInput } from "@/orchidui";
 import { DraggableList } from "@/orchidui/Draggable.js";
 const props = defineProps({
   modelValue: {
@@ -49,33 +49,81 @@ const addSubMenu = (item, subitem) => {
   console.log("add:submenu", item, subitem);
 };
 
-const addMenuForm = ref({
-  ids: [],
-  type: "page",
-  title: "",
-  link: "",
-});
+const isSocial = computed(() => props.variant === 'social')
+
+const addMenuForm = ref(null);
 const addMenuModal = ref(false);
 const addMenu = () => {
   addMenuModal.value = true;
   addMenuForm.value = {
     ids: [],
-    type: "page",
+    type: isSocial.value ? "facebook" : "page",
     title: "",
     link: "",
   };
 };
 
+const socialOptions = [
+      {
+        value: "facebook",
+        label: "Facebook",
+        icon: "facebook",
+        preFill: "https://facebook.com/",
+      },
+      {
+        value: "instagram",
+        label: "Instagram",
+        icon: "instagram",
+        preFill: "https://instagram.com/",
+      },
+      {
+        value: "twitter",
+        label: "(X) Twitter",
+        icon: "twitter",
+        preFill: "https://twitter.com/",
+      },
+      {
+        value: "tiktok",
+        label: "Tiktok",
+        icon: "tiktok",
+        preFill: "https://tiktok.com/",
+      },
+      {
+        value: "email",
+        label: "Email",
+        icon: "email",
+        preFill: "mailto:",
+      },
+      {
+        value: "phone",
+        label: "Phone Number",
+        icon: "phone",
+        preFill: "tel:",
+      },
+      {
+        value: "whatsapp",
+        label: "Whatsapp",
+        icon: "whatsapp",
+        preFill: "https://wa.me/",
+      },
+      {
+        value: "telegram",
+        label: "Telegram",
+        icon: "telegram",
+        preFill: "https://t.me/",
+      },
+      {
+        value: "link",
+        label: "Other website",
+        icon: "link",
+        preFill: "https://",
+      },
+    ]
+
 const saveMenu = () => {
   isLoading.value = true
-  if(addMenuForm.value.type === 'link' && addMenuForm.value.link && addMenuForm.value.title){
-    let newMenus = [...props.modelValue, {
-      id: "new_"+ Date.now(),
-      title: addMenuForm.value.title,
-      link: addMenuForm.value.link
-    }]
-    emit('update:modelValue',newMenus)
-  }else if(addMenuForm.value.ids.length > 0){
+  console.log(addMenuForm.value)
+  if(addMenuForm.value.ids.length > 0){
     let newMenus = []
     addMenuForm.value.ids.forEach((value) => {
       let selected = null
@@ -86,11 +134,23 @@ const saveMenu = () => {
       }
       newMenus.push({
           id: selected.value,
+          type: addMenuForm.value.type,
           title: selected.label,
           link: selected.link,
         })
     })
     emit('update:modelValue',[...props.modelValue, ...newMenus])
+  }else if(addMenuForm.value.title && addMenuForm.value.link){
+
+    let newMenu = {
+      id: "new_"+ Date.now(),
+      icon: addMenuForm.value.type,
+      type: addMenuForm.value.type,
+      title: addMenuForm.value.title,
+      link: addMenuForm.value.link
+    }
+    let newMenus = [...props.modelValue, newMenu]
+    emit('update:modelValue',newMenus)
   }
 
   setTimeout(() => {
@@ -227,8 +287,18 @@ const saveMenu = () => {
         }"
       >
          <!-- if social  -->
+         <div v-if="variant === 'social'" class="flex flex-col gap-5">
+           <LinkInput 
+                  v-model="addMenuForm.link"
+                  v-model:type="addMenuForm.type"
+                  v-model:title="addMenuForm.title"
+                  label="Enter username"
+                  placeholder="@username"
+                  :links="socialOptions"
+          />
+        </div>
          <!-- else  -->
-        <div class="flex flex-col gap-5">
+        <div v-else class="flex flex-col gap-5">
           <div class="flex flex-col">
             <Radio
               id="menu-type-page"
@@ -259,14 +329,20 @@ const saveMenu = () => {
             <Radio
               id="menu-type-link"
               group-name="menu-type"
-              :checked="addMenuForm.type === 'link'"
+              :checked="!['page','category'].includes(addMenuForm.type)"
               label="External link"
-              @update:model-value="addMenuForm.type= 'link'"
+              @update:model-value="addMenuForm.type = 'link'"
 
             />
-            <div v-if="addMenuForm.type === 'link'" class="w-full pl-4 mt-4" >
-              <Input v-model="addMenuForm.title" label="Title" placeholder="Title" class="mb-3" />
-              <Input v-model="addMenuForm.link" label="Link" placeholder="https://website.com" />
+            <div v-if="!['page','category'].includes(addMenuForm.type)" class="w-full pl-4 mt-4" >
+              <LinkInput 
+                  v-model="addMenuForm.link"
+                  v-model:type="addMenuForm.type"
+                  v-model:title="addMenuForm.title"
+                  label="Enter username"
+                  placeholder="@username"
+                  :links="socialOptions"
+              />
             </div>
           </div>
         </div>

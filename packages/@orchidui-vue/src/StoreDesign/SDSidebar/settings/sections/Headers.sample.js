@@ -65,7 +65,8 @@ const HEADER_FORM = [
   {
     general: true,
     name: "navigation_menus",
-    type: "NavigationMenu",
+    type: "Menus",
+    variant: "default",
     noMenuIcon: '/images/no-menu-header.png',
   },
   {

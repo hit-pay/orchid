@@ -4,6 +4,7 @@ import {
   BANNER_FORM,
 } from "./sections/Headers.sample";
 import { PRODUCT_FORM } from "./sections/Sections.sample";
+import { FOOTER_CONTENT_FORM } from "./sections/Footers.sample";
 
 const settings = [
   {
@@ -61,7 +62,7 @@ const settings = [
     title: "Footer Content",
     icon: "footer",
     isDisable: true,
-    form: [],
+    form: FOOTER_CONTENT_FORM
   },
   {
     group: "footer",

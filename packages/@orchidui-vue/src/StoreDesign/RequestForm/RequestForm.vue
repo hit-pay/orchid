@@ -89,12 +89,13 @@ const onUpdateForm = (form, value = null) => {
       :json-form="requestForm"
       @on-update="onUpdateForm"
     >
-      <template #NavigationMenu="{form, value}">
+      <template #Menus="{form, value}">
         <SDMenus  
           :model-value="value"
           has-submenu
           :no-menu-icon="form.noMenuIcon"
           :options="options"
+          :variant="form.variant"
           @update:model-value="onUpdateForm(form, $event)" />
       </template>
       <template #Colors> Form Colors </template>
