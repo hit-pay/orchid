@@ -2,7 +2,14 @@ const StoreDesign = {
   general: {
     top_banner_closable: true,
     top_banner_content: "",
-    navigation_menus: [],
+    navigation_menus: [
+      {
+        id: "123",
+        title: "Menu",
+        type: 'page',
+        link: "https://orchidui.vercel.app",
+      },
+    ],
     banners: [],
     footer_company_logo: "",
     footer_content: "",
@@ -67,12 +74,7 @@ const StoreDesign = {
       group: "footer",
       key: "FooterContent",
       section: "FooterContent",
-      active: true,
-    },
-    {
-      group: "footer",
-      key: "PoweredBy",
-      section: "PoweredBy",
+      payment_method_logos: [],
       active: true,
     },
     {

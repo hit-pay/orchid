@@ -1,5 +1,5 @@
 <script setup>
-import { FormBuilder } from "@/orchidui";
+import { FormBuilder, Icon } from "@/orchidui";
 import { ref } from "vue";
 import { SDMenus } from "@/orchidui/StoreDesign";
 const props = defineProps({
@@ -78,6 +78,7 @@ const onUpdateForm = (form, value = null) => {
   }
 };
 
+const showSubForm = ref('')
 </script>
 <template>
   <div>
@@ -92,11 +93,53 @@ const onUpdateForm = (form, value = null) => {
       <template #Menus="{form, value}">
         <SDMenus  
           :model-value="value"
-          has-submenu
           :no-menu-icon="form.noMenuIcon"
           :options="options"
           :variant="form.variant"
+          :has-submenu="form.hasSubmenu"
+          :submenu-level="form.submenuLevel"
           @update:model-value="onUpdateForm(form, $event)" />
+      </template>
+      <template #Children="{form}">
+        <div 
+        class="flex items-center bg-oc-accent-1-50 rounded p-4 -mt-1 cursor-pointer"
+        @click="showSubForm = form.name">
+         <div class="w-[30px]">
+          <Icon v-if="form.icon" class="text-oc-text-400"  :name="form.icon" />
+         </div>
+         <div>{{ form.label }}</div>
+        </div>
+        <div v-if="showSubForm === form.name" class="bg-oc-bg-light absolute top-0 left-0 min-h-full w-full">
+          <div 
+          class="flex items-center border-b mt-5 p-4 cursor-pointer" 
+          @click="showSubForm = ''">
+              <Icon class="text-oc-text-400"  name="chevron-left" />
+              <div class="font-medium ">{{ form.label }}</div>
+          </div>
+          <div class="px-7 py-4 mt-4">
+            <FormBuilder
+              id="form-builder-children"
+              class="grid gap-5"
+              :errors="formErrors"
+              :values="formValues"
+              :json-form="form.children"
+              @on-update="onUpdateForm"
+            >
+              <template #Menus="slot">
+                <SDMenus  
+                  :model-value="slot.value"
+                  :no-menu-icon="slot.form.noMenuIcon"
+                  :options="options"
+                  :variant="slot.form.variant"
+                  :has-submenu="slot.form.hasSubmenu"
+                  :submenu-level="slot.form.submenuLevel"
+                  @update:model-value="onUpdateForm(slot.form, $event)" />
+              </template>
+              <template #Colors> Form Colors </template>
+              <template #SubForm> Sub Form </template>
+            </FormBuilder>
+          </div>
+        </div>
       </template>
       <template #Colors> Form Colors </template>
       <template #SubForm> Sub Form </template>

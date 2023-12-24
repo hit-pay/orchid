@@ -2,25 +2,70 @@
 
 const FOOTER_CONTENT_FORM = [
   {
-    name: "menu_enabled",
-    type: "SectionItem",
-    props: {
-      title: "Footer Menu",
-      isToggle: true,
-    },
+    name: 'PaymentLogo',
+    type: "Children",
+    icon: 'back-card',
+    label: 'Payment Method Logo',
+    children: [
+      {
+        type: "SectionItem",
+        props: {
+          title: "Choose payment method",
+        },
+      },
+      {
+        general: true,
+        name: "payment_method_logos",
+        type: "Select",
+        props: {
+          placeholder: 'Select payment method',
+          options: [
+            {
+              label: 'Atome',
+              value: 'atome'
+            },
+            {
+              label: 'Shopeback',
+              value: 'shopeback'
+            }
+          ]
+        }
+      },
+    ]
   },
   {
-    general: true,
-    name: "footer_social_menus",
-    type: "Menus",
-    variant: "social",
-    noMenuIcon: '/images/no-menu-header.png',
-  },
-  {
-    type: "SectionItem",
-    props: {
-      title: "Choose colors",
-    },
+    name: 'SocialMedia',
+    type: "Children",
+    icon: 'facebook',
+    label: 'Social Media',
+    children: [
+      {
+        type: "SectionItem",
+        props: {
+          title: "Title"
+        },
+      },
+      {
+        type: 'Input',
+        name: 'footer_social_title',
+        props: {
+          placeholder: 'Follow Us'
+        }
+      },
+      {
+        type: "SectionItem",
+        props: {
+          title: "Menus",
+        },
+      },
+      {
+        general: true,
+        name: "footer_social_menus",
+        type: "Menus",
+        variant: "social",
+        noMenuIcon: '/images/no-menu-header.png',
+      },
+    ]
   },
   {
     name: [

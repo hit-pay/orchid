@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from "vue";
-import { DropdownItem, Button, Modal, Radio, Select, LinkInput } from "@/orchidui";
+import { DropdownItem, Button, Modal, Radio, Select, LinkInput, Input } from "@/orchidui";
 import { DraggableList } from "@/orchidui/Draggable.js";
 const props = defineProps({
   modelValue: {
@@ -39,9 +39,6 @@ const emit = defineEmits({
 
 const update = (value) => emit("update:modelValue", value);
 
-const editMenu = (item, subitem, subitem2) => {
-  console.log("edit:menu", item, subitem, subitem2);
-};
 const deleteMenu = (item, subitem, subitem2) => {
   console.log("delete:menu", item, subitem, subitem2);
 };
@@ -53,6 +50,12 @@ const isSocial = computed(() => props.variant === 'social')
 
 const addMenuForm = ref(null);
 const addMenuModal = ref(false);
+
+
+const editMenuModal = ref(false);
+const editMenuForm = ref(null);
+
+
 const addMenu = () => {
   addMenuModal.value = true;
   addMenuForm.value = {
@@ -62,6 +65,11 @@ const addMenu = () => {
     link: "",
   };
 };
+
+const editMenu = (item) => {
+  editMenuModal.value = true
+  editMenuForm.value = item
+}
 
 const socialOptions = [
       {
@@ -168,6 +176,12 @@ const saveMenu = () => {
     isLoading.value = false
   }, 200)
 }
+
+
+const getLinkFromOption = (value, opt) => {
+  return opt.find(o => o.value === value).link
+}
+
 </script>
 <template>
   <div>
@@ -350,7 +364,56 @@ const saveMenu = () => {
         </div>
       </Modal>
 
-      <!-- edit modal -->
+      <Modal
+        v-model="editMenuModal"
+        class="!w-full !h-full"
+        title="Edit Menu"
+        :confirm-button-props="{
+          class: 'hidden'
+        }"
+        :cancel-button-props="{
+          label: 'Close'
+        }"
+      >
+        <div class="flex flex-col gap-5">
+          <div class="flex flex-col">
+            <template v-if="['page','category'].includes(editMenuForm.type)">
+              <div class="flex flex-col">
+                <Input  v-model="editMenuForm.title"   class="mb-3" label="Title" placeholder="Title"  />
+              <div v-if="editMenuForm.type === 'page'" class="w-full">
+                <Select  
+                  v-if="options.pages.length > 0" 
+                  v-model="editMenuForm.id" 
+                  :options="options.pages"
+                  label="Choose Page" 
+                  placeholder="Choose Page"
+                  @update:model-value="editMenuForm.link = getLinkFromOption($event,options.pages)" 
+                    />
+              </div>
+              <div v-if="editMenuForm.type === 'category'" class="w-full pl-4 mt-4" >
+                <Select 
+                v-if="options.categories.length > 0" 
+                v-model="editMenuForm.id" 
+                :options="options.categories" 
+                label="Choose Category" placeholder="Choose Category"
+                @update:model-value="editMenuForm.link = getLinkFromOption($event,options.categories)"    />
+              </div>
+            </div>
+          </template>
+            <div v-else class="w-full pl-4 mt-4" >
+              <LinkInput 
+                  v-model="editMenuForm.link"
+                  v-model:type="editMenuForm.type"
+                  v-model:title="editMenuForm.title"
+                  label="Enter username"
+                  placeholder="@username"
+                  is-edit
+                  :links="socialOptions"
+              />
+            </div>
+          </div>
+        </div>
+      </Modal>
     </div>
   </div>
 </template>

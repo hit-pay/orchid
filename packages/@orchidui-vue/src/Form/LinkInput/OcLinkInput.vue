@@ -10,11 +10,12 @@ const props = defineProps({
   isInlineLabel: Boolean,
   isDisabled: Boolean,
   modelValue: String,
+  type: String,
+  title: String,
   links: {
     type: Array,
     default: () => [],
   },
-  type: String,
   isRequired: {
     type: Boolean,
     default: false,
