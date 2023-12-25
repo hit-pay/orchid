@@ -79,6 +79,28 @@ const onUpdateForm = (form, value = null) => {
   }
 };
 
+const formatBanner = (value) => {
+  let newFormatImages = []
+    value.forEach((image) => {
+      if(!image.file){
+        newFormatImages.push(image.current)
+      }else{
+        newFormatImages.push({
+          id: 'new_'+Date.now(),
+          path: image.fileUrl,
+          device: image.current?.device ?? ''
+        })
+      }
+    })
+    return newFormatImages
+}
+const onUpdateBanner = (form, newValue) => {
+  images[form.name] = newValue
+  setTimeout(() => {
+    onUpdateForm(form, formatBanner(images[form.name]))
+  }, 100)
+}
+
 const onDeleteBanner = () => {
 
 }
@@ -95,11 +117,7 @@ const formatImagesValue = (value, name) => {
     let newFormatImages = []
     value.forEach((image) => {
       newFormatImages.push({
-        current: {
-          path: image.url,
-          id: image.id,
-          caption: image.caption
-        }
+        current: image
       })
     })
     images.value[name] = newFormatImages
@@ -208,6 +226,7 @@ const showSubForm = ref("");
             :important="true"
             is-image-only
             :columns-count="form.props?.columnsCount ?? 4"
+            @update:model-value="onUpdateBanner(form, $event)"
             @on-edit-file="onEditBanner "
             @on-remove-file="onDeleteBanner "
         >

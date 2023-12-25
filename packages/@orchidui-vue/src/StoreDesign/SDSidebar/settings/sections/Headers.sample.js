@@ -102,6 +102,22 @@ const BANNER_FORM = [
     type: "Banners",
     name: "banners"
   },
+  {
+    general: true,
+    type: "SectionItem",
+    name: 'responsive_cover_size',
+    props: {
+      isToggle: true,
+      title: "Responsive Cover Size",
+    },
+  },
+  {
+    general: true,
+    type: "SectionItem",
+    props: {
+      title: "Cover Size",
+    },
+  },
 ];
 
 export { TOP_BANNER_FORM, HEADER_FORM, BANNER_FORM };

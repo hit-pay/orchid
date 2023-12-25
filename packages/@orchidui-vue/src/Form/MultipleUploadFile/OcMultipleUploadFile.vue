@@ -18,8 +18,8 @@
         @change="onChangeFile"
         @update:selected-image="$emit('update:selectedImage', $event)"
         @update:uploaded-images="
-          $emit('update:modelValue', $event);
           currentFiles = $event;
+          $emit('update:modelValue', $event);
         "
         @on-edit-image="$emit('onEditFile', $event)"
         @on-remove-image="$emit('onRemoveFile', $event)"
