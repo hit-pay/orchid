@@ -21,39 +21,33 @@ const TOP_BANNER_FORM = [
     name: "top_banner_content",
     type: "TextArea",
   },
+
+  {
+    type: "SectionItem",
+    props: {
+      title: "Colors",
+    },
+  },
+  {
+    name: [
+      {
+        props: {
+          label: "Background Color",
+        },
+        key: "background_color",
+      },
+      {
+        props: {
+          label: "Text Color",
+        },
+        key: "text_color",
+      },
+    ],
+    type: "Colors",
+  },
 ];
 
 const HEADER_FORM = [
-  //  only for juizzy
-  // {
-  //   type: "SectionItem",
-  //   props: {
-  //     title: "Alignment",
-  //   },
-  // },
-  // {
-  //   name: "alignment",
-  //   type: "SelectOptions",
-  //   props: {
-  //     options: [
-  //       {
-  //         preview: `${ASSETS_URL}header-alignment-right.png`,
-  //         label: "Right",
-  //         value: "right",
-  //       },
-  //       {
-  //         preview: `${ASSETS_URL}header-alignment-left.png`,
-  //         label: "Left",
-  //         value: "left",
-  //       },
-  //       {
-  //         preview: `${ASSETS_URL}header-alignment-center.png`,
-  //         label: "Center",
-  //         value: "center",
-  //       },
-  //     ],
-  //   },
-  // },
   {
     name: "menu_enabled",
     type: "SectionItem",

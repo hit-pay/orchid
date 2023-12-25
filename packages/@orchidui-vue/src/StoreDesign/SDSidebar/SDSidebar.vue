@@ -87,6 +87,7 @@ const availableSections = computed(() =>
 );
 
 const renderForm = ref(null);
+
 watch(
   () => props.active,
   () => {
@@ -128,8 +129,10 @@ watch(
   },
   {
     deep: true,
+    immediate: true
   },
 );
+
 
 const sectionActiveValues = computed(() => {
   let sectionValues = props.values.sections.find(
@@ -137,6 +140,7 @@ const sectionActiveValues = computed(() => {
   );
   return sectionValues;
 });
+
 
 const changeSidebarMenu = (value) => {
   emit("update:active", {

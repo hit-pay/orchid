@@ -2,6 +2,7 @@
 import { FormBuilder, Icon } from "@/orchidui";
 import { ref } from "vue";
 import { SDMenus } from "@/orchidui/StoreDesign";
+import ColorsInput from './Form/ColorsInput.vue'
 const props = defineProps({
   requestForm: Object,
   generalData: Object,
@@ -18,7 +19,6 @@ const props = defineProps({
   }
 });
 
-console.log(props.requestForm)
 const generalFormData = ref(props.generalData);
 const sectionFormData = ref(props.sectionData);
 
@@ -34,7 +34,7 @@ Object.values(props.requestForm).forEach((form) => {
         formValues.value[formName.key] = sectionFormData.value[formName.key];
       }
     });
-  } else {
+  } else if(form.name) {
     if (form.general) {
       formValues.value[form.name] = generalFormData.value[form.name];
     } else {
@@ -67,22 +67,24 @@ const onUpdateForm = (form, value = null) => {
       }
     });
   } else {
-    formValues.value[form.name] = value;
-    if (form.general) {
-      generalFormData.value[form.name] = value;
-      updateData(true);
-    } else {
-      sectionFormData.value[form.name] = value;
-      updateData();
-    }
+      formValues.value[form.name] = value;
+      if (form.general) {
+        generalFormData.value[form.name] = value;
+        updateData(true);
+      } else {
+        sectionFormData.value[form.name] = value;
+        updateData();
+      }
   }
 };
 
 const showSubForm = ref('')
+
 </script>
 <template>
-  <div>
+  <div >
     <FormBuilder
+      v-if="Object.values(formValues).length > 0"
       id="form-builder"
       class="grid gap-5"
       :errors="formErrors"
@@ -141,7 +143,9 @@ const showSubForm = ref('')
           </div>
         </div>
       </template>
-      <template #Colors> Form Colors </template>
+      <template #Colors="{form, value}"> 
+        <ColorsInput :form="form" :model-value="value" @update:model-value="onUpdateForm(form, $event)" />  
+      </template>
       <template #SubForm> Sub Form </template>
     </FormBuilder>
   </div>

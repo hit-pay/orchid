@@ -4,7 +4,7 @@ const FOOTER_CONTENT_FORM = [
   {
     name: 'PaymentLogo',
     type: "Children",
-    icon: 'back-card',
+    icon: 'bank-card',
     label: 'Payment Method Logo',
     children: [
       {
