@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from "vue";
-import { DropdownItem, Button, Modal, Radio, Select, LinkInput, Input } from "@/orchidui";
+import { DropdownItem, Button, Modal, Radio, Select, LinkInput, Input, ConfirmationModal } from "@/orchidui";
 import { DraggableList } from "@/orchidui/Draggable.js";
 const props = defineProps({
   modelValue: {
@@ -39,16 +39,10 @@ const emit = defineEmits({
 
 const update = (value) => emit("update:modelValue", value);
 
-const deleteMenu = (item, subitem, subitem2) => {
-  console.log("delete:menu", item, subitem, subitem2);
-};
-const addSubMenu = (item, subitem) => {
-  console.log("add:submenu", item, subitem);
-};
-
 const isSocial = computed(() => props.variant === 'social')
 
 const addMenuForm = ref(null);
+const addSubmenuItem = ref(null);
 const addMenuModal = ref(false);
 
 
@@ -56,7 +50,10 @@ const editMenuModal = ref(false);
 const editMenuForm = ref(null);
 
 
-const addMenu = () => {
+const addMenu = (submenu = false) => {
+  if(!submenu){
+    addSubmenuItem.value = null
+  }
   addMenuModal.value = true;
   addMenuForm.value = {
     ids: [],
@@ -65,6 +62,16 @@ const addMenu = () => {
     link: "",
   };
 };
+
+
+const addSubMenu = (item, subitem) => {
+  addSubmenuItem.value = {
+    item: item,
+    subitem: subitem
+  }
+  addMenu(true)
+};
+
 
 const editMenu = (item) => {
   editMenuModal.value = true
@@ -138,9 +145,30 @@ const socialOptions = [
       },
     ]
 
+const saveMenuItems = (items) => {
+    let newModelValue = [...props.modelValue]
+    if(addSubmenuItem.value && addSubmenuItem.value.subitem){
+      let parentChildren = addSubmenuItem.value.item.children
+      let children = parentChildren[parentChildren.indexOf(addSubmenuItem.value.subitem)].children
+      let newChildren = [...items]
+      if(children){
+        newChildren = [...children, ...items]
+      }
+      newModelValue[newModelValue.indexOf(addSubmenuItem.value.item)].children[parentChildren.indexOf(addSubmenuItem.value.subitem)].children =  newChildren
+    }else if(addSubmenuItem.value && addSubmenuItem.value.item){
+      let children = newModelValue[newModelValue.indexOf(addSubmenuItem.value.item)].children
+      let newChildren = [...items]
+      if(children){
+        newChildren = [...children, ...items]
+      }
+      newModelValue[newModelValue.indexOf(addSubmenuItem.value.item)].children = newChildren
+    }else{
+      newModelValue  = [...newModelValue, ...items]
+    }
+    emit('update:modelValue', newModelValue)
+}
 const saveMenu = () => {
   isLoading.value = true
-  console.log(addMenuForm.value)
   if(addMenuForm.value.ids.length > 0){
     let newMenus = []
     addMenuForm.value.ids.forEach((value) => {
@@ -157,7 +185,7 @@ const saveMenu = () => {
           link: selected.link,
         })
     })
-    emit('update:modelValue',[...props.modelValue, ...newMenus])
+    saveMenuItems(newMenus)
   }else if(addMenuForm.value.title && addMenuForm.value.link){
 
     let newMenu = {
@@ -167,19 +195,58 @@ const saveMenu = () => {
       title: addMenuForm.value.title,
       link: addMenuForm.value.link
     }
-    let newMenus = [...props.modelValue, newMenu]
-    emit('update:modelValue',newMenus)
+
+    saveMenuItems([newMenu])
   }
 
   setTimeout(() => {
     addMenuModal.value = false
     isLoading.value = false
-  }, 200)
+  }, 50)
 }
 
 
 const getLinkFromOption = (value, opt) => {
   return opt.find(o => o.value === value).link
+}
+
+
+
+const deleteMenuItems = ref(null)
+const deleteMenu = (item, subitem, subitem2) => {
+  deleteMenuItems.value = {
+    item: item,
+    subitem: subitem,
+    subitem2: subitem2
+  }
+};
+const displayDeleteMessage = computed(() => {
+  let itemTitle = deleteMenuItems.value.item.title
+  if(deleteMenuItems.value.subitem2){
+    itemTitle = deleteMenuItems.value.subitem2.title
+  }else if(deleteMenuItems.value.subitem){
+    itemTitle = deleteMenuItems.value.subitem.title
+  }
+  return `Do you want to delete ${itemTitle}`
+})
+const confirmDeleteMenu = () => {
+  isLoading.value = true
+  let newModelValue = [...props.modelValue]
+  if(deleteMenuItems.value && deleteMenuItems.value.subitem2){
+    let parentChildren = deleteMenuItems.value.item.children
+    let newChildren = deleteMenuItems.value.subitem.children.filter(i => i.id !== deleteMenuItems.value.subitem2.id)
+    newModelValue[newModelValue.indexOf(deleteMenuItems.value.item)].children[parentChildren.indexOf(deleteMenuItems.value.subitem)].children =  newChildren
+  }else if(deleteMenuItems.value && deleteMenuItems.value.subitem){
+    let children = newModelValue[newModelValue.indexOf(deleteMenuItems.value.item)].children
+    newModelValue[newModelValue.indexOf(deleteMenuItems.value.item)].children = children.filter(i => i.id !== deleteMenuItems.value.subitem.id)
+  }else{
+    newModelValue  = newModelValue.filter(s => s.id !== deleteMenuItems.value.item.id)
+  }
+  emit('update:modelValue', newModelValue)
+  setTimeout(() => {
+    isLoading.value = false
+    deleteMenuItems.value = null
+  }, 50)
 }
 
 </script>
@@ -414,6 +481,13 @@ const getLinkFromOption = (value, opt) => {
           </div>
         </div>
       </Modal>
+      <ConfirmationModal 
+        v-if="deleteMenuItems"
+        class="!w-full" 
+        title="Are you sure?"
+        :description="displayDeleteMessage"
+        @cancel="deleteMenuItems = null"
+        @confirm="confirmDeleteMenu"/>
     </div>
   </div>
 </template>

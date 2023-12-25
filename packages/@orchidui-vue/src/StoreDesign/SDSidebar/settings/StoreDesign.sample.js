@@ -8,6 +8,22 @@ const StoreDesign = {
         title: "Menu",
         type: 'page',
         link: "https://orchidui.vercel.app",
+        children: [
+          {
+            id: "123",
+            title: "Menu",
+            type: 'page',
+            link: "https://orchidui.vercel.app",
+            children: [
+              {
+                id: "123",
+                title: "Menu",
+                type: 'page',
+                link: "https://orchidui.vercel.app",
+              },
+            ]
+          },
+        ]
       },
     ],
     banners: [],

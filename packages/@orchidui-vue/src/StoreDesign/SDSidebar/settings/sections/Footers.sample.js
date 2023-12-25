@@ -18,6 +18,7 @@ const FOOTER_CONTENT_FORM = [
         name: "payment_method_logos",
         type: "Select",
         props: {
+          multiple: true,
           placeholder: 'Select payment method',
           options: [
             {

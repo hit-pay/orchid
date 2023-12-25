@@ -95,7 +95,7 @@ const update = (value) => {
         </div>
 
         <template #menu>
-          <div class="flex flex-col p-2 py-3 gap-2">
+          <div v-if="!isEdit" class="flex flex-col p-2 py-3 gap-2">
             <div
               v-for="link in links"
               :key="link.value"
