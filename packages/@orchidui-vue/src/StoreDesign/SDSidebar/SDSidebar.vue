@@ -20,7 +20,7 @@ const props = defineProps({
   preset: {
     type: Array,
   },
-  options: Object
+  options: Object,
 });
 
 const requiredSection = ["Header", "FooterContent"];
@@ -129,10 +129,9 @@ watch(
   },
   {
     deep: true,
-    immediate: true
+    immediate: true,
   },
 );
-
 
 const sectionActiveValues = computed(() => {
   let sectionValues = props.values.sections.find(
@@ -140,7 +139,6 @@ const sectionActiveValues = computed(() => {
   );
   return sectionValues;
 });
-
 
 const changeSidebarMenu = (value) => {
   emit("update:active", {
@@ -283,10 +281,12 @@ const addSection = (newSection, customize = false) => {
             {{ sidebarMenu.label }}
           </div>
           <Icon
-            v-if="sidebarMenu.children || sidebarMenu.name ==='styles'"
+            v-if="sidebarMenu.children || sidebarMenu.name === 'styles'"
             name="chevron-down"
             class="ml-auto text-oc-text-400"
-            :class="sidebarActive.sidebarMenu === sidebarMenu.name ? 'rotate-180':''"
+            :class="
+              sidebarActive.sidebarMenu === sidebarMenu.name ? 'rotate-180' : ''
+            "
             width="18"
             height="18"
           />

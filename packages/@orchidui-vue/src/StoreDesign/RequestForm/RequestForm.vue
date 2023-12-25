@@ -2,7 +2,7 @@
 import { FormBuilder, Icon } from "@/orchidui";
 import { ref } from "vue";
 import { SDMenus } from "@/orchidui/StoreDesign";
-import ColorsInput from './Form/ColorsInput.vue'
+import ColorsInput from "./Form/ColorsInput.vue";
 const props = defineProps({
   requestForm: Object,
   generalData: Object,
@@ -16,7 +16,7 @@ const props = defineProps({
         products: [],
       };
     },
-  }
+  },
 });
 
 const generalFormData = ref(props.generalData);
@@ -34,7 +34,7 @@ Object.values(props.requestForm).forEach((form) => {
         formValues.value[formName.key] = sectionFormData.value[formName.key];
       }
     });
-  } else if(form.name) {
+  } else if (form.name) {
     if (form.general) {
       formValues.value[form.name] = generalFormData.value[form.name];
     } else {
@@ -46,7 +46,7 @@ Object.values(props.requestForm).forEach((form) => {
 const emit = defineEmits(["update:generalData", "update:sectionData"]);
 
 const updateData = (general = false) => {
-  console.log('generalFormData.value', generalFormData.value)
+  console.log("generalFormData.value", generalFormData.value);
   if (general) {
     emit("update:generalData", generalFormData.value);
   } else {
@@ -67,22 +67,21 @@ const onUpdateForm = (form, value = null) => {
       }
     });
   } else {
-      formValues.value[form.name] = value;
-      if (form.general) {
-        generalFormData.value[form.name] = value;
-        updateData(true);
-      } else {
-        sectionFormData.value[form.name] = value;
-        updateData();
-      }
+    formValues.value[form.name] = value;
+    if (form.general) {
+      generalFormData.value[form.name] = value;
+      updateData(true);
+    } else {
+      sectionFormData.value[form.name] = value;
+      updateData();
+    }
   }
 };
 
-const showSubForm = ref('')
-
+const showSubForm = ref("");
 </script>
 <template>
-  <div >
+  <div>
     <FormBuilder
       v-if="Object.values(formValues).length > 0"
       id="form-builder"
@@ -92,31 +91,37 @@ const showSubForm = ref('')
       :json-form="requestForm"
       @on-update="onUpdateForm"
     >
-      <template #Menus="{form, value}">
-        <SDMenus  
+      <template #Menus="{ form, value }">
+        <SDMenus
           :model-value="value"
           :no-menu-icon="form.noMenuIcon"
           :options="options"
           :variant="form.variant"
           :has-submenu="form.hasSubmenu"
           :submenu-level="form.submenuLevel"
-          @update:model-value="onUpdateForm(form, $event)" />
+          @update:model-value="onUpdateForm(form, $event)"
+        />
       </template>
-      <template #Children="{form}">
-        <div 
-        class="flex items-center bg-oc-accent-1-50 rounded p-4 -mt-1 cursor-pointer"
-        @click="showSubForm = form.name">
-         <div class="w-[30px]">
-          <Icon v-if="form.icon" class="text-oc-text-400"  :name="form.icon" />
-         </div>
-         <div>{{ form.label }}</div>
+      <template #Children="{ form }">
+        <div
+          class="flex items-center bg-oc-accent-1-50 rounded p-4 -mt-1 cursor-pointer"
+          @click="showSubForm = form.name"
+        >
+          <div class="w-[30px]">
+            <Icon v-if="form.icon" class="text-oc-text-400" :name="form.icon" />
+          </div>
+          <div>{{ form.label }}</div>
         </div>
-        <div v-if="showSubForm === form.name" class="bg-oc-bg-light absolute top-0 left-0 min-h-full w-full">
-          <div 
-          class="flex items-center border-b mt-5 p-4 cursor-pointer" 
-          @click="showSubForm = ''">
-              <Icon class="text-oc-text-400"  name="chevron-left" />
-              <div class="font-medium ">{{ form.label }}</div>
+        <div
+          v-if="showSubForm === form.name"
+          class="bg-oc-bg-light absolute top-0 left-0 min-h-full w-full"
+        >
+          <div
+            class="flex items-center border-b mt-5 p-4 cursor-pointer"
+            @click="showSubForm = ''"
+          >
+            <Icon class="text-oc-text-400" name="chevron-left" />
+            <div class="font-medium">{{ form.label }}</div>
           </div>
           <div class="px-7 py-4 mt-4">
             <FormBuilder
@@ -128,24 +133,33 @@ const showSubForm = ref('')
               @on-update="onUpdateForm"
             >
               <template #Menus="slot">
-                <SDMenus  
+                <SDMenus
                   :model-value="slot.value"
                   :no-menu-icon="slot.form.noMenuIcon"
                   :options="options"
                   :variant="slot.form.variant"
                   :has-submenu="slot.form.hasSubmenu"
                   :submenu-level="slot.form.submenuLevel"
-                  @update:model-value="onUpdateForm(slot.form, $event)" />
+                  @update:model-value="onUpdateForm(slot.form, $event)"
+                />
               </template>
-              <template #Colors="slot"> 
-              <ColorsInput :form="slot.form" :model-value="slot.value" @update:model-value="onUpdateForm(slot.form, $event)" />  
-            </template>
+              <template #Colors="slot">
+                <ColorsInput
+                  :form="slot.form"
+                  :model-value="slot.value"
+                  @update:model-value="onUpdateForm(slot.form, $event)"
+                />
+              </template>
             </FormBuilder>
           </div>
         </div>
       </template>
-      <template #Colors="{form, value}"> 
-        <ColorsInput :form="form" :model-value="value" @update:model-value="onUpdateForm(form, $event)" />  
+      <template #Colors="{ form, value }">
+        <ColorsInput
+          :form="form"
+          :model-value="value"
+          @update:model-value="onUpdateForm(form, $event)"
+        />
       </template>
     </FormBuilder>
   </div>

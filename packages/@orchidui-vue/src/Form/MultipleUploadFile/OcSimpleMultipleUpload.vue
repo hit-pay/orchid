@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Dropdown, Icon } from "@/orchidui";
+import { Dropdown, Icon, ConfirmationModal } from "@/orchidui";
 import { ref } from "vue";
 import { Draggable } from "@/orchidui/Draggable.js";
 import { ModalCropper } from "@/orchidui/Cropper.js";
@@ -32,7 +32,14 @@ const emit = defineEmits([
 const isDropdownOpen = ref([]);
 const isEditOpen = ref(false);
 const editImg = ref("");
+
+const deleteConfirmationModal = ref(false);
+const deleteIndex = ref("");
 const onDeleteFile = (index) => {
+  deleteConfirmationModal.value = true;
+  deleteIndex.value = index;
+};
+const confirmDeleteFile = () => {
   const deletedImage = props.uploadedImages.find((_, i) => i === index);
   if (deletedImage.current) {
     emit("onRemoveImage", deletedImage);
@@ -170,6 +177,12 @@ const changeImage = (url) => {
         editImg = '';
       "
       @change-image="changeImage"
+    />
+
+    <ConfirmationModal
+      v-model="deleteConfirmationModal"
+      description="Do you want to delete this image ?"
+      @confirm="confirmDeleteFile"
     />
   </div>
 </template>

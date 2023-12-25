@@ -1,6 +1,15 @@
 <script setup>
 import { ref, computed } from "vue";
-import { DropdownItem, Button, Modal, Radio, Select, LinkInput, Input, ConfirmationModal } from "@/orchidui";
+import {
+  DropdownItem,
+  Button,
+  Modal,
+  Radio,
+  Select,
+  LinkInput,
+  Input,
+  ConfirmationModal,
+} from "@/orchidui";
 import { DraggableList } from "@/orchidui/Draggable.js";
 const props = defineProps({
   modelValue: {
@@ -9,7 +18,7 @@ const props = defineProps({
   },
   variant: {
     type: String,
-    default: 'default' // social
+    default: "default", // social
   },
   hasSubmenu: Boolean,
   submenuLevel: {
@@ -32,27 +41,25 @@ const props = defineProps({
   },
 });
 
-const isLoading = ref(false)
+const isLoading = ref(false);
 const emit = defineEmits({
   "update:modelValue": [],
-})
+});
 
 const update = (value) => emit("update:modelValue", value);
 
-const isSocial = computed(() => props.variant === 'social')
+const isSocial = computed(() => props.variant === "social");
 
 const addMenuForm = ref(null);
 const addSubmenuItem = ref(null);
 const addMenuModal = ref(false);
 
-
 const editMenuModal = ref(false);
 const editMenuForm = ref(null);
 
-
 const addMenu = (submenu = false) => {
-  if(!submenu){
-    addSubmenuItem.value = null
+  if (!submenu) {
+    addSubmenuItem.value = null;
   }
   addMenuModal.value = true;
   addMenuForm.value = {
@@ -63,192 +70,198 @@ const addMenu = (submenu = false) => {
   };
 };
 
-
 const addSubMenu = (item, subitem) => {
   addSubmenuItem.value = {
     item: item,
-    subitem: subitem
-  }
-  addMenu(true)
+    subitem: subitem,
+  };
+  addMenu(true);
 };
 
-
 const editMenu = (item) => {
-  editMenuModal.value = true
-  editMenuForm.value = item
-}
+  editMenuModal.value = true;
+  editMenuForm.value = item;
+};
 
 const socialOptions = [
-      {
-        value: "facebook",
-        label: "Facebook",
-        icon: "facebook",
-        preFill: "https://facebook.com/",
-        placeholder: "@username",
-      },
-      {
-        value: "instagram",
-        label: "Instagram",
-        icon: "instagram",
-        preFill: "https://instagram.com/",
-        placeholder: "@username",
-      },
-      {
-        value: "twitter",
-        label: "(X) Twitter",
-        icon: "twitter",
-        preFill: "https://twitter.com/",
-        placeholder: "@username",
-      },
-      {
-        value: "tiktok",
-        label: "Tiktok",
-        icon: "tiktok",
-        preFill: "https://tiktok.com/",
-        placeholder: "@username",
-      },
-      {
-        value: "email",
-        label: "Email",
-        icon: "email",
-        preFill: "mailto:",
-        placeholder: "example@mail.com",
-      },
-      {
-        value: "phone",
-        label: "Phone Number",
-        icon: "phone",
-        preFill: "tel:",
-        placeholder: "628xxx",
-      },
-      {
-        value: "whatsapp",
-        label: "Whatsapp",
-        icon: "whatsapp",
-        preFill: "https://wa.me/",
-        placeholder: "628xxx",
-      },
-      {
-        value: "telegram",
-        label: "Telegram",
-        icon: "telegram",
-        preFill: "https://t.me/",
-        placeholder: "628xxx",
-
-      },
-      {
-        value: "link",
-        label: "Other website",
-        icon: "link",
-        preFill: "https://",
-        placeholder: "website.com",
-      },
-    ]
+  {
+    value: "facebook",
+    label: "Facebook",
+    icon: "facebook",
+    preFill: "https://facebook.com/",
+    placeholder: "@username",
+  },
+  {
+    value: "instagram",
+    label: "Instagram",
+    icon: "instagram",
+    preFill: "https://instagram.com/",
+    placeholder: "@username",
+  },
+  {
+    value: "twitter",
+    label: "(X) Twitter",
+    icon: "twitter",
+    preFill: "https://twitter.com/",
+    placeholder: "@username",
+  },
+  {
+    value: "tiktok",
+    label: "Tiktok",
+    icon: "tiktok",
+    preFill: "https://tiktok.com/",
+    placeholder: "@username",
+  },
+  {
+    value: "email",
+    label: "Email",
+    icon: "email",
+    preFill: "mailto:",
+    placeholder: "example@mail.com",
+  },
+  {
+    value: "phone",
+    label: "Phone Number",
+    icon: "phone",
+    preFill: "tel:",
+    placeholder: "628xxx",
+  },
+  {
+    value: "whatsapp",
+    label: "Whatsapp",
+    icon: "whatsapp",
+    preFill: "https://wa.me/",
+    placeholder: "628xxx",
+  },
+  {
+    value: "telegram",
+    label: "Telegram",
+    icon: "telegram",
+    preFill: "https://t.me/",
+    placeholder: "628xxx",
+  },
+  {
+    value: "link",
+    label: "Other website",
+    icon: "link",
+    preFill: "https://",
+    placeholder: "website.com",
+  },
+];
 
 const saveMenuItems = (items) => {
-    let newModelValue = [...props.modelValue]
-    if(addSubmenuItem.value && addSubmenuItem.value.subitem){
-      let parentChildren = addSubmenuItem.value.item.children
-      let children = parentChildren[parentChildren.indexOf(addSubmenuItem.value.subitem)].children
-      let newChildren = [...items]
-      if(children){
-        newChildren = [...children, ...items]
-      }
-      newModelValue[newModelValue.indexOf(addSubmenuItem.value.item)].children[parentChildren.indexOf(addSubmenuItem.value.subitem)].children =  newChildren
-    }else if(addSubmenuItem.value && addSubmenuItem.value.item){
-      let children = newModelValue[newModelValue.indexOf(addSubmenuItem.value.item)].children
-      let newChildren = [...items]
-      if(children){
-        newChildren = [...children, ...items]
-      }
-      newModelValue[newModelValue.indexOf(addSubmenuItem.value.item)].children = newChildren
-    }else{
-      newModelValue  = [...newModelValue, ...items]
+  let newModelValue = [...props.modelValue];
+  if (addSubmenuItem.value && addSubmenuItem.value.subitem) {
+    let parentChildren = addSubmenuItem.value.item.children;
+    let children =
+      parentChildren[parentChildren.indexOf(addSubmenuItem.value.subitem)]
+        .children;
+    let newChildren = [...items];
+    if (children) {
+      newChildren = [...children, ...items];
     }
-    emit('update:modelValue', newModelValue)
-}
+    newModelValue[newModelValue.indexOf(addSubmenuItem.value.item)].children[
+      parentChildren.indexOf(addSubmenuItem.value.subitem)
+    ].children = newChildren;
+  } else if (addSubmenuItem.value && addSubmenuItem.value.item) {
+    let children =
+      newModelValue[newModelValue.indexOf(addSubmenuItem.value.item)].children;
+    let newChildren = [...items];
+    if (children) {
+      newChildren = [...children, ...items];
+    }
+    newModelValue[newModelValue.indexOf(addSubmenuItem.value.item)].children =
+      newChildren;
+  } else {
+    newModelValue = [...newModelValue, ...items];
+  }
+  emit("update:modelValue", newModelValue);
+};
 const saveMenu = () => {
-  isLoading.value = true
-  if(addMenuForm.value.ids.length > 0){
-    let newMenus = []
+  isLoading.value = true;
+  if (addMenuForm.value.ids.length > 0) {
+    let newMenus = [];
     addMenuForm.value.ids.forEach((value) => {
-      let selected = null
-      if(addMenuForm.value.type === 'page'){
-        selected = props.options.pages.find(p => p.value === value)
-      }else if(addMenuForm.value.type === 'category'){
-        selected = props.options.categories.find(p => p.value === value)
+      let selected = null;
+      if (addMenuForm.value.type === "page") {
+        selected = props.options.pages.find((p) => p.value === value);
+      } else if (addMenuForm.value.type === "category") {
+        selected = props.options.categories.find((p) => p.value === value);
       }
       newMenus.push({
-          id: selected.value,
-          type: addMenuForm.value.type,
-          title: selected.label,
-          link: selected.link,
-        })
-    })
-    saveMenuItems(newMenus)
-  }else if(addMenuForm.value.title && addMenuForm.value.link){
-
+        id: selected.value,
+        type: addMenuForm.value.type,
+        title: selected.label,
+        link: selected.link,
+      });
+    });
+    saveMenuItems(newMenus);
+  } else if (addMenuForm.value.title && addMenuForm.value.link) {
     let newMenu = {
-      id: "new_"+ Date.now(),
+      id: "new_" + Date.now(),
       icon: addMenuForm.value.type,
       type: addMenuForm.value.type,
       title: addMenuForm.value.title,
-      link: addMenuForm.value.link
-    }
+      link: addMenuForm.value.link,
+    };
 
-    saveMenuItems([newMenu])
+    saveMenuItems([newMenu]);
   }
 
   setTimeout(() => {
-    addMenuModal.value = false
-    isLoading.value = false
-  }, 50)
-}
-
+    addMenuModal.value = false;
+    isLoading.value = false;
+  }, 50);
+};
 
 const getLinkFromOption = (value, opt) => {
-  return opt.find(o => o.value === value).link
-}
+  return opt.find((o) => o.value === value).link;
+};
 
-
-
-const deleteMenuItems = ref(null)
+const deleteMenuItems = ref(null);
 const deleteMenu = (item, subitem, subitem2) => {
   deleteMenuItems.value = {
     item: item,
     subitem: subitem,
-    subitem2: subitem2
-  }
+    subitem2: subitem2,
+  };
 };
 const displayDeleteMessage = computed(() => {
-  let itemTitle = deleteMenuItems.value.item.title
-  if(deleteMenuItems.value.subitem2){
-    itemTitle = deleteMenuItems.value.subitem2.title
-  }else if(deleteMenuItems.value.subitem){
-    itemTitle = deleteMenuItems.value.subitem.title
+  let itemTitle = deleteMenuItems.value.item.title;
+  if (deleteMenuItems.value.subitem2) {
+    itemTitle = deleteMenuItems.value.subitem2.title;
+  } else if (deleteMenuItems.value.subitem) {
+    itemTitle = deleteMenuItems.value.subitem.title;
   }
-  return `Do you want to delete ${itemTitle}`
-})
+  return `Do you want to delete ${itemTitle}`;
+});
 const confirmDeleteMenu = () => {
-  isLoading.value = true
-  let newModelValue = [...props.modelValue]
-  if(deleteMenuItems.value && deleteMenuItems.value.subitem2){
-    let parentChildren = deleteMenuItems.value.item.children
-    let newChildren = deleteMenuItems.value.subitem.children.filter(i => i.id !== deleteMenuItems.value.subitem2.id)
-    newModelValue[newModelValue.indexOf(deleteMenuItems.value.item)].children[parentChildren.indexOf(deleteMenuItems.value.subitem)].children =  newChildren
-  }else if(deleteMenuItems.value && deleteMenuItems.value.subitem){
-    let children = newModelValue[newModelValue.indexOf(deleteMenuItems.value.item)].children
-    newModelValue[newModelValue.indexOf(deleteMenuItems.value.item)].children = children.filter(i => i.id !== deleteMenuItems.value.subitem.id)
-  }else{
-    newModelValue  = newModelValue.filter(s => s.id !== deleteMenuItems.value.item.id)
+  isLoading.value = true;
+  let newModelValue = [...props.modelValue];
+  if (deleteMenuItems.value && deleteMenuItems.value.subitem2) {
+    let parentChildren = deleteMenuItems.value.item.children;
+    let newChildren = deleteMenuItems.value.subitem.children.filter(
+      (i) => i.id !== deleteMenuItems.value.subitem2.id,
+    );
+    newModelValue[newModelValue.indexOf(deleteMenuItems.value.item)].children[
+      parentChildren.indexOf(deleteMenuItems.value.subitem)
+    ].children = newChildren;
+  } else if (deleteMenuItems.value && deleteMenuItems.value.subitem) {
+    let children =
+      newModelValue[newModelValue.indexOf(deleteMenuItems.value.item)].children;
+    newModelValue[newModelValue.indexOf(deleteMenuItems.value.item)].children =
+      children.filter((i) => i.id !== deleteMenuItems.value.subitem.id);
+  } else {
+    newModelValue = newModelValue.filter(
+      (s) => s.id !== deleteMenuItems.value.item.id,
+    );
   }
-  emit('update:modelValue', newModelValue)
+  emit("update:modelValue", newModelValue);
   setTimeout(() => {
-    isLoading.value = false
-    deleteMenuItems.value = null
-  }, 50)
-}
-
+    isLoading.value = false;
+    deleteMenuItems.value = null;
+  }, 50);
+};
 </script>
 <template>
   <div>
@@ -374,57 +387,72 @@ const confirmDeleteMenu = () => {
         title="Add Menu"
         :confirm-button-props="{
           label: 'Save',
-          onClick: () => saveMenu()
+          onClick: () => saveMenu(),
         }"
       >
         <div class="flex flex-col gap-5">
           <template v-if="!isSocial">
             <div class="flex flex-col">
-            <Radio
-              id="menu-type-page"
-              group-name="menu-type"
-              :checked="addMenuForm.type === 'page'"
-              label="From pages"
-              @update:model-value="addMenuForm.type = 'page'"
-
-            />
-            <div v-if="addMenuForm.type === 'page'" class="w-full pl-4 mt-4">
-              <Select v-if="options.pages.length > 0" v-model="addMenuForm.ids" multiple :options="options.pages" placeholder="Choose Pages"   />
+              <Radio
+                id="menu-type-page"
+                group-name="menu-type"
+                :checked="addMenuForm.type === 'page'"
+                label="From pages"
+                @update:model-value="addMenuForm.type = 'page'"
+              />
+              <div v-if="addMenuForm.type === 'page'" class="w-full pl-4 mt-4">
+                <Select
+                  v-if="options.pages.length > 0"
+                  v-model="addMenuForm.ids"
+                  multiple
+                  :options="options.pages"
+                  placeholder="Choose Pages"
+                />
+              </div>
             </div>
-          </div>
-          <div class="flex flex-col">
-            <Radio
-              id="menu-type-category"
-              group-name="menu-type"
-              :checked="addMenuForm.type === 'category'"
-              label="Product category "
-              @update:model-value="addMenuForm.type = 'category'"
-            />
+            <div class="flex flex-col">
+              <Radio
+                id="menu-type-category"
+                group-name="menu-type"
+                :checked="addMenuForm.type === 'category'"
+                label="Product category "
+                @update:model-value="addMenuForm.type = 'category'"
+              />
 
-            <div v-if="addMenuForm.type === 'category'" class="w-full pl-4 mt-4" >
-              <Select v-if="options.categories.length > 0" v-model="addMenuForm.ids" multiple :options="options.categories" placeholder="Choose Categories"   />
+              <div
+                v-if="addMenuForm.type === 'category'"
+                class="w-full pl-4 mt-4"
+              >
+                <Select
+                  v-if="options.categories.length > 0"
+                  v-model="addMenuForm.ids"
+                  multiple
+                  :options="options.categories"
+                  placeholder="Choose Categories"
+                />
+              </div>
             </div>
-          </div>
           </template>
           <div class="flex flex-col">
             <Radio
               v-if="!isSocial"
               id="menu-type-link"
               group-name="menu-type"
-              :checked="!['page','category'].includes(addMenuForm.type)"
+              :checked="!['page', 'category'].includes(addMenuForm.type)"
               label="External link"
               @update:model-value="addMenuForm.type = 'link'"
-
             />
-            <div v-if="!['page','category'].includes(addMenuForm.type)" class="w-full pl-4 mt-4" >
-             
-              <LinkInput 
-                  v-model="addMenuForm.link"
-                  v-model:type="addMenuForm.type"
-                  v-model:title="addMenuForm.title"
-                  label="Enter username"
-                  placeholder="@username"
-                  :links="socialOptions"
+            <div
+              v-if="!['page', 'category'].includes(addMenuForm.type)"
+              class="w-full pl-4 mt-4"
+            >
+              <LinkInput
+                v-model="addMenuForm.link"
+                v-model:type="addMenuForm.type"
+                v-model:title="addMenuForm.title"
+                label="Enter username"
+                placeholder="@username"
+                :links="socialOptions"
               />
             </div>
           </div>
@@ -436,58 +464,79 @@ const confirmDeleteMenu = () => {
         class="!w-full !h-full"
         title="Edit Menu"
         :confirm-button-props="{
-          class: 'hidden'
+          class: 'hidden',
         }"
         :cancel-button-props="{
-          label: 'Close'
+          label: 'Close',
         }"
       >
         <div class="flex flex-col gap-5">
           <div class="flex flex-col">
-            <template v-if="['page','category'].includes(editMenuForm.type)">
+            <template v-if="['page', 'category'].includes(editMenuForm.type)">
               <div class="flex flex-col">
-                <Input  v-model="editMenuForm.title"   class="mb-3" label="Title" placeholder="Title"  />
-              <div v-if="editMenuForm.type === 'page'" class="w-full">
-                <Select  
-                  v-if="options.pages.length > 0" 
-                  v-model="editMenuForm.id" 
-                  :options="options.pages"
-                  label="Choose Page" 
-                  placeholder="Choose Page"
-                  @update:model-value="editMenuForm.link = getLinkFromOption($event,options.pages)" 
-                    />
+                <Input
+                  v-model="editMenuForm.title"
+                  class="mb-3"
+                  label="Title"
+                  placeholder="Title"
+                />
+                <div v-if="editMenuForm.type === 'page'" class="w-full">
+                  <Select
+                    v-if="options.pages.length > 0"
+                    v-model="editMenuForm.id"
+                    :options="options.pages"
+                    label="Choose Page"
+                    placeholder="Choose Page"
+                    @update:model-value="
+                      editMenuForm.link = getLinkFromOption(
+                        $event,
+                        options.pages,
+                      )
+                    "
+                  />
+                </div>
+                <div
+                  v-if="editMenuForm.type === 'category'"
+                  class="w-full pl-4 mt-4"
+                >
+                  <Select
+                    v-if="options.categories.length > 0"
+                    v-model="editMenuForm.id"
+                    :options="options.categories"
+                    label="Choose Category"
+                    placeholder="Choose Category"
+                    @update:model-value="
+                      editMenuForm.link = getLinkFromOption(
+                        $event,
+                        options.categories,
+                      )
+                    "
+                  />
+                </div>
               </div>
-              <div v-if="editMenuForm.type === 'category'" class="w-full pl-4 mt-4" >
-                <Select 
-                v-if="options.categories.length > 0" 
-                v-model="editMenuForm.id" 
-                :options="options.categories" 
-                label="Choose Category" placeholder="Choose Category"
-                @update:model-value="editMenuForm.link = getLinkFromOption($event,options.categories)"    />
-              </div>
-            </div>
-          </template>
-            <div v-else class="w-full pl-4 mt-4" >
-              <LinkInput 
-                  v-model="editMenuForm.link"
-                  v-model:type="editMenuForm.type"
-                  v-model:title="editMenuForm.title"
-                  label="Enter username"
-                  placeholder="@username"
-                  is-edit
-                  :links="socialOptions"
+            </template>
+            <div v-else class="w-full pl-4 mt-4">
+              <LinkInput
+                v-model="editMenuForm.link"
+                v-model:type="editMenuForm.type"
+                v-model:title="editMenuForm.title"
+                label="Enter username"
+                placeholder="@username"
+                is-edit
+                :links="socialOptions"
               />
             </div>
           </div>
         </div>
       </Modal>
-      <ConfirmationModal 
+      <ConfirmationModal
         v-if="deleteMenuItems"
-        class="!w-full" 
+        class="!w-full"
         title="Are you sure?"
         :description="displayDeleteMessage"
         @cancel="deleteMenuItems = null"
-        @confirm="confirmDeleteMenu"/>
+        @confirm="confirmDeleteMenu"
+      />
     </div>
   </div>
 </template>

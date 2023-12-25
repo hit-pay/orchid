@@ -1,11 +1,9 @@
-
-
 const FOOTER_CONTENT_FORM = [
   {
-    name: 'PaymentLogo',
+    name: "PaymentLogo",
     type: "Children",
-    icon: 'bank-card',
-    label: 'Payment Method Logo',
+    icon: "bank-card",
+    label: "Payment Method Logo",
     children: [
       {
         type: "SectionItem",
@@ -19,39 +17,39 @@ const FOOTER_CONTENT_FORM = [
         type: "Select",
         props: {
           multiple: true,
-          placeholder: 'Select payment method',
+          placeholder: "Select payment method",
           options: [
             {
-              label: 'Atome',
-              value: 'atome'
+              label: "Atome",
+              value: "atome",
             },
             {
-              label: 'Shopeback',
-              value: 'shopeback'
-            }
-          ]
-        }
+              label: "Shopeback",
+              value: "shopeback",
+            },
+          ],
+        },
       },
-    ]
+    ],
   },
   {
-    name: 'SocialMedia',
+    name: "SocialMedia",
     type: "Children",
-    icon: 'facebook',
-    label: 'Social Media',
+    icon: "facebook",
+    label: "Social Media",
     children: [
       {
         type: "SectionItem",
         props: {
-          title: "Title"
+          title: "Title",
         },
       },
       {
-        type: 'Input',
-        name: 'footer_social_title',
+        type: "Input",
+        name: "footer_social_title",
         props: {
-          placeholder: 'Follow Us'
-        }
+          placeholder: "Follow Us",
+        },
       },
       {
         type: "SectionItem",
@@ -64,9 +62,9 @@ const FOOTER_CONTENT_FORM = [
         name: "footer_social_menus",
         type: "Menus",
         variant: "social",
-        noMenuIcon: '/images/no-menu-header.png',
+        noMenuIcon: "/images/no-menu-header.png",
       },
-    ]
+    ],
   },
   {
     name: [
@@ -86,6 +84,5 @@ const FOOTER_CONTENT_FORM = [
     type: "Colors",
   },
 ];
-
 
 export { FOOTER_CONTENT_FORM };

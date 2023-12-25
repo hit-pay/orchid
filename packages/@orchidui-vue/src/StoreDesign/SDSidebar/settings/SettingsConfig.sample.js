@@ -62,7 +62,7 @@ const settings = [
     title: "Footer Content",
     icon: "footer",
     isDisable: true,
-    form: FOOTER_CONTENT_FORM
+    form: FOOTER_CONTENT_FORM,
   },
   {
     group: "footer",

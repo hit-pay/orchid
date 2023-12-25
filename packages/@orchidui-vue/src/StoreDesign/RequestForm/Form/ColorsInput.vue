@@ -1,13 +1,13 @@
 <script setup>
-import { computed  } from "vue";
-import {  Icon } from "@/orchidui";
+import { computed } from "vue";
+import { Icon } from "@/orchidui";
 
 const props = defineProps({
   modelValue: {
     type: Array,
-    default:() => [],
+    default: () => [],
   },
-  form: Object
+  form: Object,
 });
 
 defineEmits({
@@ -15,7 +15,6 @@ defineEmits({
   blur: [],
   focus: [],
 });
-
 
 const inputClasses = computed(() => [
   !props.disabled && (props.errorMessage || props.hasError)
@@ -25,30 +24,38 @@ const inputClasses = computed(() => [
 ]);
 
 const getNewValues = (index, newVal) => {
-    let newValues = props.modelValue
-    newValues[index] = newVal
-    return newValues
-}
+  let newValues = props.modelValue;
+  newValues[index] = newVal;
+  return newValues;
+};
 </script>
 
 <template>
   <div class="w-full grid grid-cols-2 gap-3">
-    <div  
-        v-for="name, index in form.name" :key="index">
-        <label class="text-sm flex items-center gap-x-3 font-medium text-oc-text-400 mb-2">{{name.props.label}}</label>
-        <div 
-            class="rounded h-[36px] border flex items-center gap-x-3 px-3 relative"
-            :class="inputClasses">
-            <Icon name="drop" :style="`color:${modelValue[index]};border-style:solid`" />
-            {{ modelValue[index] }}
-            <input
-                type="color"
-                :value="modelValue[index]"
-                class="opacity-0 w-full absolute h-full cursor-pointer "
-                @input="$emit('update:modelValue', getNewValues(index, $event.target.value))"
-            />
-            <Icon class="ml-auto" name="paint" />
-        </div>
+    <div v-for="(name, index) in form.name" :key="index">
+      <label
+        class="text-sm flex items-center gap-x-3 font-medium text-oc-text-400 mb-2"
+        >{{ name.props.label }}</label
+      >
+      <div
+        class="rounded h-[36px] border flex items-center gap-x-3 px-3 relative"
+        :class="inputClasses"
+      >
+        <Icon
+          name="drop"
+          :style="`color:${modelValue[index]};border-style:solid`"
+        />
+        {{ modelValue[index] }}
+        <input
+          type="color"
+          :value="modelValue[index]"
+          class="opacity-0 w-full absolute h-full cursor-pointer"
+          @input="
+            $emit('update:modelValue', getNewValues(index, $event.target.value))
+          "
+        />
+        <Icon class="ml-auto" name="paint" />
+      </div>
     </div>
-</div>
+  </div>
 </template>

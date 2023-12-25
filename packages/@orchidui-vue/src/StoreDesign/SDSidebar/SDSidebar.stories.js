@@ -54,30 +54,30 @@ export const Default = {
 
       const options = {
         pages: [
-            {
+          {
             value: "page_id",
             link: "/page-1",
-            label: "page title"
-          }, 
+            label: "page title",
+          },
           {
             value: "page_id_2",
             link: "/page-2",
-            label: "page title 2"
-          }
+            label: "page title 2",
+          },
         ],
         categories: [
           {
             value: "category_id",
             link: "/search?category=category_id",
-            label: "Category title 1"
-          }, 
+            label: "Category title 1",
+          },
           {
             value: "category_id_2",
             link: "/search?category=category_id",
-            label: "category title 2"
-          }
-        ]
-      }
+            label: "category title 2",
+          },
+        ],
+      };
 
       return {
         sidebarConfig,
@@ -88,7 +88,7 @@ export const Default = {
         // stories
         args,
         content,
-        options
+        options,
       };
     },
     template: `
