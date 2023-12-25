@@ -137,8 +137,9 @@ const showSubForm = ref('')
                   :submenu-level="slot.form.submenuLevel"
                   @update:model-value="onUpdateForm(slot.form, $event)" />
               </template>
-              <template #Colors> Form Colors </template>
-              <template #SubForm> Sub Form </template>
+              <template #Colors="slot"> 
+              <ColorsInput :form="slot.form" :model-value="slot.value" @update:model-value="onUpdateForm(slot.form, $event)" />  
+            </template>
             </FormBuilder>
           </div>
         </div>
@@ -146,7 +147,6 @@ const showSubForm = ref('')
       <template #Colors="{form, value}"> 
         <ColorsInput :form="form" :model-value="value" @update:model-value="onUpdateForm(form, $event)" />  
       </template>
-      <template #SubForm> Sub Form </template>
     </FormBuilder>
   </div>
 </template>
