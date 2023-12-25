@@ -93,15 +93,14 @@ const BANNER_FORM = [
   {
     type: "SectionItem",
     props: {
-      title: "Type",
+      title: "Upload Images",
+      description: "Recommended size 1440x400 pixels",
     },
   },
   {
-    type: "SectionItem",
-    props: {
-      title: "Upload Images",
-      descriptions: "Recommended size 1440x400 pixels",
-    },
+    general: true,
+    type: "Banners",
+    name: "banners"
   },
 ];
 

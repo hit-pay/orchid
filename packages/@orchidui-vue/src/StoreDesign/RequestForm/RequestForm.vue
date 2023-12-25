@@ -1,8 +1,9 @@
 <script setup>
-import { FormBuilder, Icon } from "@/orchidui";
+import { FormBuilder, Icon, MultipleUploadFile } from "@/orchidui";
 import { ref } from "vue";
 import { SDMenus } from "@/orchidui/StoreDesign";
 import ColorsInput from "./Form/ColorsInput.vue";
+
 const props = defineProps({
   requestForm: Object,
   generalData: Object,
@@ -77,6 +78,43 @@ const onUpdateForm = (form, value = null) => {
     }
   }
 };
+
+const onDeleteBanner = () => {
+
+}
+
+const onEditBanner = () => {
+
+}
+
+const imageLoaded = ref(false)
+const images = ref([])
+
+const formatImagesValue = (value, name) => {
+  if (Array.isArray(value)) {
+    let newFormatImages = []
+    value.forEach((image) => {
+      newFormatImages.push({
+        current: {
+          path: image.url,
+          id: image.id,
+          caption: image.caption
+        }
+      })
+    })
+    images.value[name] = newFormatImages
+    imageLoaded.value = true
+  }else {
+    images.value[name] = []
+    imageLoaded.value = true
+  }
+}
+
+props.requestForm.forEach((f) => {
+  if(f.type === 'Banners'){
+    formatImagesValue(formValues.value[f.name], f.name)
+  }
+})
 
 const showSubForm = ref("");
 </script>
@@ -160,6 +198,20 @@ const showSubForm = ref("");
           :model-value="value"
           @update:model-value="onUpdateForm(form, $event)"
         />
+      </template>
+      <template #Banners="{form}">
+        <MultipleUploadFile
+            v-if="imageLoaded && images[form.name]"
+            :model-value="images[form.name]"
+            :hint="form.props?.hint ?? ''"
+            :max-size="5"
+            :important="true"
+            is-image-only
+            :columns-count="form.props?.columnsCount ?? 4"
+            @on-edit-file="onEditBanner "
+            @on-remove-file="onDeleteBanner "
+        >
+        </MultipleUploadFile>
       </template>
     </FormBuilder>
   </div>

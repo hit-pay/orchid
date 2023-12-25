@@ -40,14 +40,15 @@ const onDeleteFile = (index) => {
   deleteIndex.value = index;
 };
 const confirmDeleteFile = () => {
-  const deletedImage = props.uploadedImages.find((_, i) => i === index);
+  const deletedImage = props.uploadedImages.find((_, i) => i === deleteIndex.value);
   if (deletedImage.current) {
     emit("onRemoveImage", deletedImage);
   }
   emit(
     "update:uploadedImages",
-    props.uploadedImages.filter((_, i) => i !== index),
+    props.uploadedImages.filter((_, i) => i !== deleteIndex.value),
   );
+  deleteConfirmationModal.value = false
 };
 const changeImage = (url) => {
   const changedFile = props.uploadedImages.find(
@@ -66,10 +67,10 @@ const changeImage = (url) => {
 </script>
 
 <template>
-  <div class="relative min-h-[90px]">
+  <div class="relative min-h-[110px]">
     <label class="absolute">
       <div
-        class="w-[90px] hover:bg-oc-primary-50 cursor-pointer bg-oc-accent-1-50 text-oc-accent-1 rounded aspect-square flex items-center justify-center"
+        class="w-[110px] hover:bg-oc-primary-50 cursor-pointer bg-oc-accent-1-50 text-oc-accent-1 rounded aspect-square flex items-center justify-center"
       >
         <Icon name="plus" />
       </div>
@@ -93,7 +94,7 @@ const changeImage = (url) => {
         <div
           v-for="(img, i) in list"
           :key="img.fileName"
-          class="w-[90px] group relative cursor-pointer aspect-square border rounded border-oc-accent-1-100 bg-cover bg-center"
+          class="w-[110px] group relative cursor-pointer aspect-square border rounded border-oc-accent-1-100 bg-cover bg-center"
           :class="{
             'border-oc-primary': selectedImage.fileName === img.fileName,
             'col-start-2': i === 0,
