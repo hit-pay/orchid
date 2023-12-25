@@ -91,6 +91,7 @@ const HEADER_FORM = [
 
 const BANNER_FORM = [
   {
+    name: "BannerTitle",
     type: "SectionItem",
     props: {
       title: "Upload Images",
@@ -108,8 +109,8 @@ const BANNER_FORM = [
     name: 'responsive_banner_size',
     props: {
       isToggle: true,
-      title: "Responsive Banner Size",
-      description: "Banner for mobile device, Recommended size 400x400 pixels"
+      title: "Responsive Banners",
+      description: "Banner images for mobile device, Recommended size 400x400 pixels"
     },
   },
   {
@@ -121,6 +122,7 @@ const BANNER_FORM = [
   },
   {
     general: true,
+    name: "BannerSizeTitle",
     type: "SectionItem",
     props: {
       title: "Banner Size",
@@ -129,6 +131,9 @@ const BANNER_FORM = [
   {
     general: true,
     type: "SectionItem",
+    name: "BannerSizeTitle",
+    show_if: 'responsive_banner_size',
+    show_if_value: true,
     props: {
       title: "Banner Size Mobile",
     },
