@@ -35,6 +35,10 @@ const props = defineProps({
       variant: "secondary",
     }),
   },
+  preventClose: {
+    type: Boolean,
+    default: false,
+  },
   confirmButtonProps: {
     type: Object,
     default: () => ({
@@ -50,13 +54,21 @@ const props = defineProps({
 });
 const emit = defineEmits(["update:modelValue", "confirm"]);
 
+const closeModal = () => {
+  if (props.preventClose) {
+    return;
+  }
+
+  emit("update:modelValue", false);
+}
+
 const onClickOutside = async () => {
   if (props.persistent) {
     return;
   }
 
   if (props.modelValue) {
-    emit("update:modelValue", !props.modelValue);
+    closeModal();
   }
 };
 const sizeClasses = computed(() => ({
@@ -124,7 +136,7 @@ const sizeClasses = computed(() => ({
             variant="secondary"
             class="min-w-[112px]"
             v-bind="cancelButtonProps"
-            @click="$emit('update:modelValue', false)"
+            @click="closeModal"
           />
           <Button
             label="OK"
