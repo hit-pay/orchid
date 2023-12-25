@@ -22,6 +22,11 @@ const props = defineProps({
     type: [Array, Number, String],
     default: 0,
   },
+  label: String,
+  variant: {
+    type: String,
+    default: "default",
+  },
 });
 
 const emit = defineEmits({
@@ -99,48 +104,71 @@ onMounted(() => updateSlider());
 </script>
 
 <template>
-  <div class="relative w-full h-[33px]">
+  <div class="flex flex-wrap">
+    <label
+      v-if="label"
+      class="w-full text-sm flex items-center gap-x-3 font-medium text-oc-text-400 mb-2"
+    >
+      <span class="flex gap-x-1 items-center">
+        {{ label }}
+      </span>
+    </label>
     <div
-      ref="sliderTrack"
-      class="rounded-full h-3 absolute m-auto top-0 w-full group"
-    />
+      class="relative h-[33px]"
+      :class="{
+        'w-full': variant === 'default',
+        'w-[85%]': variant === 'right',
+      }"
+    >
+      <div
+        ref="sliderTrack"
+        class="rounded-full h-3 absolute m-auto top-0 w-full group"
+      />
 
-    <input
-      ref="sliderOne"
-      type="range"
-      :min="minLimit"
-      :max="maxLimit"
-      :value="type === 'range' ? modelValue?.[0] : modelValue"
-      @input="slideOne"
-    />
+      <input
+        ref="sliderOne"
+        type="range"
+        :min="minLimit"
+        :max="maxLimit"
+        :value="type === 'range' ? modelValue?.[0] : modelValue"
+        @input="slideOne"
+      />
 
-    <input
-      v-if="type === 'range'"
-      ref="sliderTwo"
-      type="range"
-      :min="minLimit"
-      :max="maxLimit"
-      :value="modelValue?.[1]"
-      @input="slideTwo"
-    />
+      <input
+        v-if="type === 'range'"
+        ref="sliderTwo"
+        type="range"
+        :min="minLimit"
+        :max="maxLimit"
+        :value="modelValue?.[1]"
+        @input="slideTwo"
+      />
 
+      <div
+        v-if="variant === 'default'"
+        class="group-hover:block absolute top-[1rem] z-[1] -translate-x-1/2 rounded-sm py-[3px] px-[6px] min-w-[28px] bg-oc-text-500 text-center text-white text-sm font-medium leading-[20px]"
+        :style="`left: ${percent1}%`"
+      >
+        {{ type === "range" ? modelValue?.[0] : modelValue }}
+      </div>
+
+      <div
+        v-if="type === 'range'"
+        class="group-hover:block absolute top-[1rem] z-[1] translate-x-1/2 rounded-sm py-[3px] px-[6px] min-w-[28px] bg-oc-text-500 text-center text-white text-sm font-medium leading-[20px]"
+        :style="`right: ${100 - percent2}%`"
+      >
+        {{ modelValue?.[1] }}
+      </div>
+
+      <span class="absolute bottom-0 left-0">{{ minLimit }}</span>
+      <span class="absolute bottom-0 right-0">{{ maxLimit }}</span>
+    </div>
     <div
-      class="group-hover:block absolute top-[1rem] z-[1] -translate-x-1/2 rounded-sm py-[3px] px-[6px] min-w-[28px] bg-oc-text-500 text-center text-white text-sm font-medium leading-[20px]"
-      :style="`left: ${percent1}%`"
+      v-if="variant === 'right'"
+      class="border border-oc-gray-200 rounded-lg ml-auto w-[11%] flex items-center -mt-4 justify-center"
     >
       {{ type === "range" ? modelValue?.[0] : modelValue }}
     </div>
-
-    <div
-      v-if="type === 'range'"
-      class="group-hover:block absolute top-[1rem] z-[1] translate-x-1/2 rounded-sm py-[3px] px-[6px] min-w-[28px] bg-oc-text-500 text-center text-white text-sm font-medium leading-[20px]"
-      :style="`right: ${100 - percent2}%`"
-    >
-      {{ modelValue?.[1] }}
-    </div>
-
-    <span class="absolute bottom-0 left-0">{{ minLimit }}</span>
-    <span class="absolute bottom-0 right-0">{{ maxLimit }}</span>
   </div>
 </template>
 

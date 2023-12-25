@@ -32,7 +32,7 @@ const props = defineProps({
     type: Object,
     default: () => ({}),
   },
-  withLink: Boolean
+  withLink: Boolean,
 });
 const inputRef = ref();
 const isDragover = ref(false);
@@ -64,7 +64,6 @@ onMounted(() => {
 });
 </script>
 
-
 <template>
   <div class="flex flex-col gap-y-2">
     <BaseInput
@@ -89,7 +88,6 @@ onMounted(() => {
           currentFiles = $event;
           $emit('update:modelValue', $event);
         "
-
         @on-edit-image="$emit('onEditFile', $event)"
         @on-remove-image="$emit('onRemoveFile', $event)"
       >

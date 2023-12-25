@@ -495,10 +495,7 @@ const confirmDeleteMenu = () => {
                     "
                   />
                 </div>
-                <div
-                  v-if="editMenuForm.type === 'category'"
-                  class="w-full"
-                >
+                <div v-if="editMenuForm.type === 'category'" class="w-full">
                   <Select
                     v-if="options.categories.length > 0"
                     v-model="editMenuForm.id"

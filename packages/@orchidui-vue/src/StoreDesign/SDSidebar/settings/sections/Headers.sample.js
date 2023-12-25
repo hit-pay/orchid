@@ -100,24 +100,25 @@ const BANNER_FORM = [
   {
     general: true,
     type: "Banners",
-    name: "banners"
+    name: "banners",
   },
   {
     general: true,
     type: "SectionItem",
-    name: 'responsive_banner_size',
+    name: "responsive_banner_size",
     props: {
       isToggle: true,
       title: "Responsive Banners",
-      description: "Banner images for mobile device, Recommended size 400x400 pixels"
+      description:
+        "Banner images for mobile device, Recommended size 400x400 pixels",
     },
   },
   {
     general: true,
     type: "Banners",
     name: "banners_mobile",
-    show_if: 'responsive_banner_size',
-    show_if_value: true
+    show_if: "responsive_banner_size",
+    show_if_value: true,
   },
   {
     general: true,
@@ -135,25 +136,25 @@ const BANNER_FORM = [
       variant: "list2",
       options: [
         {
-          preview: ASSETS_URL +'banner-size-small.png',
+          preview: ASSETS_URL + "banner-size-small.png",
           label: "Small",
           value: "4,1",
           description: "Smallest height, fit to screen width",
         },
         {
-          preview: ASSETS_URL +'banner-size-medium.png',
+          preview: ASSETS_URL + "banner-size-medium.png",
           label: "Medium",
           value: "3,1",
           description: "Smallest height, fit to screen width",
         },
         {
-          preview: ASSETS_URL +'banner-size-large.png',
+          preview: ASSETS_URL + "banner-size-large.png",
           label: "Large",
           value: "2,1",
           description: "Bigger height, fit to screen width",
         },
         {
-          preview: ASSETS_URL +'banner-size-auto.png',
+          preview: ASSETS_URL + "banner-size-auto.png",
           label: "Adapt",
           value: "auto",
           description: "Following original image size",
@@ -165,7 +166,7 @@ const BANNER_FORM = [
     general: true,
     type: "SectionItem",
     name: "BannerSizeTitle",
-    show_if: 'responsive_banner_size',
+    show_if: "responsive_banner_size",
     show_if_value: true,
     props: {
       title: "Banner Size Mobile",
@@ -175,31 +176,31 @@ const BANNER_FORM = [
     general: true,
     name: "banner_size_mobile",
     type: "SelectOptions",
-    show_if: 'responsive_banner_size',
+    show_if: "responsive_banner_size",
     show_if_value: true,
     props: {
       variant: "list2",
       options: [
         {
-          preview: ASSETS_URL +'banner-size-small.png',
+          preview: ASSETS_URL + "banner-size-small.png",
           label: "Small",
           value: "3,1",
           description: "Smallest height, fit to screen width",
         },
         {
-          preview: ASSETS_URL +'banner-size-medium.png',
+          preview: ASSETS_URL + "banner-size-medium.png",
           label: "Medium",
           value: "2,1",
           description: "Smallest height, fit to screen width",
         },
         {
-          preview: ASSETS_URL +'banner-size-large.png',
+          preview: ASSETS_URL + "banner-size-large.png",
           label: "Large",
           value: "1,1",
           description: "Bigger height, fit to screen width",
         },
         {
-          preview: ASSETS_URL +'banner-size-auto.png',
+          preview: ASSETS_URL + "banner-size-auto.png",
           label: "Adapt",
           value: "auto",
           description: "Following original image size",

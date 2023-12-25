@@ -126,7 +126,13 @@ const fileUpload = (e) => {
         />
       </div>
       <div>
-        <Input v-if="withLink" :model-value="link"  label="Link" placeholder="https://website.com" @update:model-value="$emit('update:link', $event)" />
+        <Input
+          v-if="withLink"
+          :model-value="link"
+          label="Link"
+          placeholder="https://website.com"
+          @update:model-value="$emit('update:link', $event)"
+        />
       </div>
     </div>
   </Modal>

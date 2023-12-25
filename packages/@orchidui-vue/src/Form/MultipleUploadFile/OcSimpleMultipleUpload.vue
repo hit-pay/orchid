@@ -21,7 +21,7 @@ const props = defineProps({
     type: Number,
     default: 3,
   },
-  withLink: Boolean
+  withLink: Boolean,
 });
 const emit = defineEmits([
   "change",
@@ -33,11 +33,11 @@ const emit = defineEmits([
 const isDropdownOpen = ref([]);
 const isEditOpen = ref(false);
 const editImgIndex = ref("");
-const editLink = ref("")
+const editLink = ref("");
 
 const editImgIndexFileUrl = computed(() => {
-  return  props.uploadedImages[editImgIndex.value].fileUrl
-})
+  return props.uploadedImages[editImgIndex.value].fileUrl;
+});
 const deleteConfirmationModal = ref(false);
 const deleteIndex = ref("");
 const onDeleteFile = (index) => {
@@ -45,7 +45,9 @@ const onDeleteFile = (index) => {
   deleteIndex.value = index;
 };
 const confirmDeleteFile = () => {
-  const deletedImage = props.uploadedImages.find((_, i) => i === deleteIndex.value);
+  const deletedImage = props.uploadedImages.find(
+    (_, i) => i === deleteIndex.value,
+  );
   if (deletedImage.current) {
     emit("onRemoveImage", deletedImage);
   }
@@ -53,7 +55,7 @@ const confirmDeleteFile = () => {
     "update:uploadedImages",
     props.uploadedImages.filter((_, i) => i !== deleteIndex.value),
   );
-  deleteConfirmationModal.value = false
+  deleteConfirmationModal.value = false;
 };
 const changeImage = (url) => {
   const changedFile = props.uploadedImages[editImgIndex.value];
@@ -68,11 +70,11 @@ const changeImage = (url) => {
 
   emit("update:uploadedImages", props.uploadedImages);
 };
-const updateLink =(link) => {
-  const changedFile = props.uploadedImages[editImgIndex.value]
-  changedFile.link = link
+const updateLink = (link) => {
+  const changedFile = props.uploadedImages[editImgIndex.value];
+  changedFile.link = link;
   emit("update:uploadedImages", props.uploadedImages);
-}
+};
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup>
-import { FormBuilder, Icon, MultipleUploadFile } from "@/orchidui";
+import { FormBuilder, Icon, MultipleUploadFile, Slider } from "@/orchidui";
 import { ref } from "vue";
 import { SDMenus } from "@/orchidui/StoreDesign";
 import ColorsInput from "./Form/ColorsInput.vue";
@@ -42,19 +42,23 @@ const setDefaultData = (form) => {
       formValues.value[form.name] = sectionFormData.value[form.name];
     }
   }
-}
+};
 Object.values(props.requestForm).forEach((form) => {
-  if(form.type === 'Children'){
+  if (form.type === "Children") {
     form.children.forEach((childForm) => {
-      setDefaultData(childForm)
-    })
-  }else{
-    setDefaultData(form)
+      setDefaultData(childForm);
+    });
+  } else {
+    setDefaultData(form);
   }
-
 });
 
-const emit = defineEmits(["update:generalData", "update:sectionData","edit:banner", "delete:banner"]);
+const emit = defineEmits([
+  "update:generalData",
+  "update:sectionData",
+  "edit:banner",
+  "delete:banner",
+]);
 
 const updateData = (general = false) => {
   if (general) {
@@ -89,65 +93,65 @@ const onUpdateForm = (form, value = null) => {
 };
 
 const formatBanner = (value) => {
-  let newFormatImages = []
-    value.forEach((image) => {
-      if(!image.fileUrl){
-        newFormatImages.push(image.current)
-      }else{
-        newFormatImages.push({
-          id: 'new_'+Date.now(),
-          path: image.fileUrl,
-          link: image.link ?? (image.current?.link ?? '')
-        })
-      }
-    })
-    return newFormatImages
-}
+  let newFormatImages = [];
+  value.forEach((image) => {
+    if (!image.fileUrl) {
+      newFormatImages.push(image.current);
+    } else {
+      newFormatImages.push({
+        id: "new_" + Date.now(),
+        path: image.fileUrl,
+        link: image.link ?? image.current?.link ?? "",
+      });
+    }
+  });
+  return newFormatImages;
+};
 const onUpdateBanner = (form, newValue) => {
-  images[form.name] = newValue
+  images[form.name] = newValue;
   setTimeout(() => {
-    onUpdateForm(form, formatBanner(images[form.name]))
-  }, 100)
-}
+    onUpdateForm(form, formatBanner(images[form.name]));
+  }, 100);
+};
 
 const onDeleteBanner = (form, value) => {
   emit("delete:banner", {
     form: form,
-    value: value
-  })
-}
+    value: value,
+  });
+};
 
 const onEditBanner = (form, value) => {
   emit("edit:banner", {
     form: form,
-    value: value
-  })
-}
+    value: value,
+  });
+};
 
-const imageLoaded = ref(false)
-const images = ref([])
+const imageLoaded = ref(false);
+const images = ref([]);
 
 const formatImagesValue = (value, name) => {
   if (Array.isArray(value)) {
-    let newFormatImages = []
+    let newFormatImages = [];
     value.forEach((image) => {
       newFormatImages.push({
-        current: image
-      })
-    })
-    images.value[name] = newFormatImages
-    imageLoaded.value = true
-  }else {
-    images.value[name] = []
-    imageLoaded.value = true
+        current: image,
+      });
+    });
+    images.value[name] = newFormatImages;
+    imageLoaded.value = true;
+  } else {
+    images.value[name] = [];
+    imageLoaded.value = true;
   }
-}
+};
 
 props.requestForm.forEach((f) => {
-  if(f.type === 'Banners'){
-    formatImagesValue(formValues.value[f.name], f.name)
+  if (f.type === "Banners") {
+    formatImagesValue(formValues.value[f.name], f.name);
   }
-})
+});
 
 const showSubForm = ref("");
 </script>
@@ -221,6 +225,16 @@ const showSubForm = ref("");
                   @update:model-value="onUpdateForm(slot.form, $event)"
                 />
               </template>
+              <template #Slider="slot">
+                <Slider
+                  :key="slot.form.name"
+                  :model-value="slot.value"
+                  :min-limit="slot.form.props?.min ?? 0"
+                  :max-limit="slot.form.props?.max ?? 50"
+                  v-bind="slot.form.props"
+                  @update:model-value="onUpdateForm(slot.form, $event)"
+                />
+              </template>
             </FormBuilder>
           </div>
         </div>
@@ -232,19 +246,19 @@ const showSubForm = ref("");
           @update:model-value="onUpdateForm(form, $event)"
         />
       </template>
-      <template #Banners="{form}">
+      <template #Banners="{ form }">
         <MultipleUploadFile
-            v-if="imageLoaded && images[form.name]"
-            :model-value="images[form.name]"
-            :hint="form.props?.hint ?? ''"
-            :max-size="5"
-            :important="true"
-            is-image-only
-            :columns-count="form.props?.columnsCount ?? 4"
-            with-link
-            @update:model-value="onUpdateBanner(form, $event)"
-            @on-edit-file="onEditBanner(form, $event)"
-            @on-remove-file="onDeleteBanner(form, $event)"
+          v-if="imageLoaded && images[form.name]"
+          :model-value="images[form.name]"
+          :hint="form.props?.hint ?? ''"
+          :max-size="5"
+          :important="true"
+          is-image-only
+          :columns-count="form.props?.columnsCount ?? 4"
+          with-link
+          @update:model-value="onUpdateBanner(form, $event)"
+          @on-edit-file="onEditBanner(form, $event)"
+          @on-remove-file="onDeleteBanner(form, $event)"
         >
         </MultipleUploadFile>
       </template>

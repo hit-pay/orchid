@@ -26,15 +26,17 @@ const StoreDesign = {
         ],
       },
     ],
-    banners: [{
-      id: Date.now(),
-      path: 'https://hitpay-production.s3.ap-southeast-1.amazonaws.com/products/medium/9a67ae1267ec4d768cde76fbc8fcef29.jpg',
-      link: 'https://hitpay.shop/hitpayterminal'
-    }],
+    banners: [
+      {
+        id: Date.now(),
+        path: "https://hitpay-production.s3.ap-southeast-1.amazonaws.com/products/medium/9a67ae1267ec4d768cde76fbc8fcef29.jpg",
+        link: "https://hitpay.shop/hitpayterminal",
+      },
+    ],
     banners_mobile: [],
     responsive_banner_size: true,
-    banner_size: '3,1',
-    banner_size_mobile: '1,1',
+    banner_size: "3,1",
+    banner_size_mobile: "1,1",
     footer_company_logo: "",
     footer_content: "",
     footer_link_1_title: "",
@@ -56,16 +58,18 @@ const StoreDesign = {
       // colors
       background_color: "#FFFFFF",
       text_color: "#03102F",
-      primary_color: "#002771",
-      primary_text_color: "#03102F",
-      card_background_color: '#FFFFFF',
-      card_text_color: '#03102F',
-
       folor_heading: "Inter",
       font_body: "Inter",
-
+      // button
+      primary_color: "#002771",
+      primary_text_color: "#03102F",
+      button_rounded: "4",
+      // card
       card_rounded: "4",
       card_shadow: "0px 0px 12px 0px rgba(0, 0, 0, 0.12)",
+      card_shadow_color: "#03102F",
+      card_background_color: "#FFFFFF",
+      card_text_color: "#03102F",
       active: true,
     },
     {

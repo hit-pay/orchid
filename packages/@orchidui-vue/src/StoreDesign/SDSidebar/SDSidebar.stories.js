@@ -80,11 +80,11 @@ export const Default = {
       };
 
       const onEditBanner = (data) => {
-        console.log(data)
-      }
+        console.log(data);
+      };
       const onDeleteBanner = (data) => {
-        console.log(data)
-      }
+        console.log(data);
+      };
 
       return {
         sidebarConfig,
