@@ -61,7 +61,7 @@ const StoreDesign = {
       section: "TopBanner",
       background_color: "#FFFFFF",
       text_color: "#03102F",
-      active: false,
+      active: true,
     },
     {
       group: "header",
@@ -106,14 +106,7 @@ const StoreDesign = {
       section: "Products",
       title: "All Products",
       active: true,
-    },
-    {
-      group: "sections",
-      key: "product_list_4",
-      section: "Products",
-      title: "Pick Products",
-      active: true,
-    },
+    }
   ],
 };
 

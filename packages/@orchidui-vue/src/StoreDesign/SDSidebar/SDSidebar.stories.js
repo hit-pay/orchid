@@ -21,8 +21,8 @@ export const Default = {
       const sidebarActive = ref({
         sidebarMenu: "home",
         submenu: "header",
-        section: "TopBanner",
-        id: "TopBanner",
+        section: "Banner",
+        id: "Banner",
       });
 
       const content = ref("data");
@@ -119,8 +119,8 @@ export const Default = {
                     </div>
                     <div class="h-[700px] overflow-auto rounded bg-black">
                       <pre v-if="content === 'data'" class="bg-black text-white p-3 rounded">{{storeDesignData}}</pre>
-                      <pre v-if="content === 'sidebar'" class="bg-black text-white p-3 rounded">{{sidebarConfig}}</pre>
-                      <pre v-if="content === 'section'" class="bg-black text-white p-3 rounded">{{sectionSettings}}</pre>
+                      <pre v-if="content === 'sidebar'" class="bg-black text-white p-3 rounded">{{sidebarConfig.sidebar}}</pre>
+                      <pre v-if="content === 'section'" class="bg-black text-white p-3 rounded">{{sidebarConfig.settings}}</pre>
                       <div class="flex flex-wrap gap-5 p-5" v-if="content === 'preview'">
                         <Button v-for="section in storeDesignData.sections" :label="section.title ?? section.section" @click="updateSidebarActive(section)" />
                       </div>

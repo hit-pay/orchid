@@ -35,7 +35,7 @@ const getNewValues = (index, newVal) => {
   <div class="w-full grid grid-cols-2 gap-3">
     <div  
         v-for="name, index in form.name" :key="index">
-        <label class="text-sm flex items-center gap-x-3 font-medium text-oc-text-400">{{name.props.label}}</label>
+        <label class="text-sm flex items-center gap-x-3 font-medium text-oc-text-400 mb-2">{{name.props.label}}</label>
         <div 
             class="rounded h-[36px] border flex items-center gap-x-3 px-3 relative"
             :class="inputClasses">

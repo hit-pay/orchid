@@ -29,7 +29,7 @@ const emit = defineEmits([
   "onRemoveImage",
   "onEditImage",
 ]);
-const isDropdownOpen = ref(false);
+const isDropdownOpen = ref([]);
 const isEditOpen = ref(false);
 const editImg = ref("");
 const onDeleteFile = (index) => {
@@ -95,13 +95,13 @@ const changeImage = (url) => {
           @click="$emit('update:selectedImage', img)"
         >
           <Dropdown
-            v-model="isDropdownOpen"
+            v-model="isDropdownOpen[i]"
             placement="bottom-end"
             class="absolute top-2 right-2 z-[1010] hidden group-hover:flex"
           >
             <Icon
               name="dots-vertical"
-              class="draggable-card-action cursor-pointer w-[32px] flex h-[32px] items-center justify-center text-oc-bg-light"
+              class="absolute right-0 cursor-pointer w-[32px] flex h-[32px] items-center justify-center text-oc-bg-light"
             />
             <template #menu>
               <slot
@@ -115,7 +115,7 @@ const changeImage = (url) => {
                     class="flex p-3 cursor-pointer items-center gap-x-3"
                     @click="
                       editImg = img.fileUrl;
-                      isDropdownOpen = false;
+                      isDropdownOpen[i] = false;
                       isEditOpen = true;
                     "
                   >
@@ -126,7 +126,7 @@ const changeImage = (url) => {
                     class="flex p-3 cursor-pointer items-center text-oc-error gap-x-3"
                     @click="
                       onDeleteFile(i);
-                      isDropdownOpen = false;
+                      isDropdownOpen[i] = false;
                     "
                   >
                     <Icon width="16" height="16" name="bin" />
