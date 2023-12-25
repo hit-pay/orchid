@@ -28,12 +28,10 @@ const requiredSection = ["Header", "FooterContent"];
 const emit = defineEmits({
   "update:values": [],
   "update:active": [],
-  "add:menu": [], // navigation menu, footer menu, link in bio
-  "add:banner": [],
-  // TODO : juizzy theme
-  "get:products": [],
-  "get:categories": [],
-  "get:pages": [],
+  "get:products": [], // pick product sections
+  // Event
+  "edit:banner": [],
+  "delete:banner": [],
 });
 
 const presetOptions = computed(() => {
@@ -422,6 +420,8 @@ const addSection = (newSection, customize = false) => {
           :section-data="sectionActiveValues"
           :request-form="sectionActive.form"
           :options="options"
+          @edit:banner="$emit('edit:banner', $event)"
+          @delete:banner="$emit('delete:banner', $event)"
         >
         </RequestForm>
         <span v-else> loading... </span>

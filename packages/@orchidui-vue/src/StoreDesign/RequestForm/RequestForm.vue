@@ -54,7 +54,7 @@ Object.values(props.requestForm).forEach((form) => {
 
 });
 
-const emit = defineEmits(["update:generalData", "update:sectionData"]);
+const emit = defineEmits(["update:generalData", "update:sectionData","edit:banner", "delete:banner"]);
 
 const updateData = (general = false) => {
   if (general) {
@@ -91,7 +91,7 @@ const onUpdateForm = (form, value = null) => {
 const formatBanner = (value) => {
   let newFormatImages = []
     value.forEach((image) => {
-      if(!image.file){
+      if(!image.fileUrl){
         newFormatImages.push(image.current)
       }else{
         newFormatImages.push({
@@ -110,12 +110,18 @@ const onUpdateBanner = (form, newValue) => {
   }, 100)
 }
 
-const onDeleteBanner = () => {
-
+const onDeleteBanner = (form, value) => {
+  emit("delete:banner", {
+    form: form,
+    value: value
+  })
 }
 
-const onEditBanner = () => {
-
+const onEditBanner = (form, value) => {
+  emit("edit:banner", {
+    form: form,
+    value: value
+  })
 }
 
 const imageLoaded = ref(false)
@@ -237,8 +243,8 @@ const showSubForm = ref("");
             :columns-count="form.props?.columnsCount ?? 4"
             with-link
             @update:model-value="onUpdateBanner(form, $event)"
-            @on-edit-file="onEditBanner "
-            @on-remove-file="onDeleteBanner "
+            @on-edit-file="onEditBanner(form, $event)"
+            @on-remove-file="onDeleteBanner(form, $event)"
         >
         </MultipleUploadFile>
       </template>

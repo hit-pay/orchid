@@ -83,6 +83,8 @@ export const MultipleImages = {
     },
     template: `
       <Theme class="min-h-[500px]">
+      <pre>
+      {{ modelValue }}</pre>
         <MultipleUploadFile
             v-model="modelValue"
             v-model:selectedImage="selectedImage"

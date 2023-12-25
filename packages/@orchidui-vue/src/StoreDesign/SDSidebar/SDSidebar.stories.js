@@ -79,12 +79,22 @@ export const Default = {
         ],
       };
 
+      const onEditBanner = (data) => {
+        console.log(data)
+      }
+      const onDeleteBanner = (data) => {
+        console.log(data)
+      }
+
       return {
         sidebarConfig,
         sidebarActive,
         storeDesignData,
         updateSidebarActive,
         onUpdateSidebarActive,
+
+        onEditBanner,
+        onDeleteBanner,
         // stories
         args,
         content,
@@ -103,6 +113,8 @@ export const Default = {
                     :options="options"
                     v-model:active="sidebarActive"
                     @update:active="onUpdateSidebarActive"
+                    @edit:banner="onEditBanner"
+                    @delete:banner="onDeleteBanner"
                     >
                   </SDSidebar>
                 </div>

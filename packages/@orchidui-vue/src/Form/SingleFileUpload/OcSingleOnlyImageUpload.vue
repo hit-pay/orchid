@@ -35,7 +35,7 @@ const changeImage = (url) => {
   <div class="flex gap-x-3">
     <label v-if="!uploadedImage?.fileUrl">
       <div
-        class="w-[90px] hover:bg-oc-primary-50 cursor-pointer bg-oc-accent-1-50 text-oc-accent-1 rounded aspect-square flex items-center justify-center"
+        class="w-[100px] hover:bg-oc-primary-50 cursor-pointer bg-oc-accent-1-50 text-oc-accent-1 rounded aspect-square flex items-center justify-center"
         :class="imageClasses"
       >
         <Icon name="plus" />
@@ -49,7 +49,7 @@ const changeImage = (url) => {
     </label>
     <div
       v-if="uploadedImage?.fileUrl"
-      class="w-[90px] group relative cursor-pointer aspect-square border rounded border-oc-accent-1-100"
+      class="w-[100px] group relative cursor-pointer aspect-square border rounded border-oc-accent-1-100"
       :class="imageClasses"
     >
       <Dropdown
@@ -59,7 +59,7 @@ const changeImage = (url) => {
       >
         <Icon
           name="dots-vertical"
-          class="cursor-pointer bg-black/[.45] rounded-full w-[32px] h-[32px] flex items-center justify-center text-oc-bg-light"
+          class="absolute right-0 cursor-pointer bg-black/[.45] rounded-full w-[32px] h-[32px] flex items-center justify-center text-oc-bg-light"
         />
         <template #menu>
           <div class="py-2 flex flex-col">

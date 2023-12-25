@@ -26,7 +26,11 @@ const StoreDesign = {
         ],
       },
     ],
-    banners: [],
+    banners: [{
+      id: Date.now(),
+      path: 'https://hitpay-production.s3.ap-southeast-1.amazonaws.com/products/medium/9a67ae1267ec4d768cde76fbc8fcef29.jpg',
+      link: 'https://hitpay.shop/hitpayterminal'
+    }],
     banners_mobile: [],
     responsive_banner_size: true,
     banner_size: '3,1',
