@@ -94,7 +94,7 @@ export const Default = {
     template: `
           <Theme>
           <div class="flex gap-5 m-5 w-[1200px] overflow-y-auto ">
-              <div class="h-[800px] w-[535px]">
+              <div class="h-[800px] w-[535px] overflow-y-scroll">
                   <SDSidebar 
                     v-model:values="storeDesignData"
                     :sidebar="sidebarConfig.sidebar"

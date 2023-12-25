@@ -96,6 +96,8 @@ const StoreDesign = {
       section: "FooterContent",
       payment_method_logos: [],
       active: true,
+      background_color: "#FFFFFF",
+      text_color: "#03102F",
     },
     {
       group: "sections",

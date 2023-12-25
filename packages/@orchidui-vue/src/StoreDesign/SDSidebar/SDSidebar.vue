@@ -248,7 +248,7 @@ const addSection = (newSection, customize = false) => {
 };
 </script>
 <template>
-  <div class="h-full relative border border-gray-200">
+  <div class="h-full overflow-auto relative border border-gray-200">
     <div v-if="!sidebarActive.submenu" class="flex flex-col pt-8">
       <div
         v-for="(sidebarMenu, index) in sidebar"

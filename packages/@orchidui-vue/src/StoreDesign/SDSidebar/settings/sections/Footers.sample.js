@@ -67,6 +67,12 @@ const FOOTER_CONTENT_FORM = [
     ],
   },
   {
+    type: "SectionItem",
+    props: {
+      title: "Colors",
+    },
+  },
+  {
     name: [
       {
         props: {
