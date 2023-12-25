@@ -1,3 +1,70 @@
+<script setup>
+import { onMounted, ref } from "vue";
+import { Icon, BaseInput } from "@/orchidui";
+import { useUploadFileProgress } from "@/orchidui/composables/uploadFileProgress.js";
+import OcSimpleMultipleUpload from "./OcSimpleMultipleUpload.vue";
+
+const emit = defineEmits([
+  "update:modelValue",
+  "update:selectedImage",
+  "onEditFile",
+  "onRemoveFile",
+]);
+const props = defineProps({
+  modelValue: {
+    type: Array,
+    default: () => [],
+  },
+  accept: {
+    type: String,
+    default: "",
+  },
+  /**
+   * Maximum file size in MB
+   */
+  maxSize: Number,
+  hint: String,
+  label: String,
+  errorMessage: String,
+  isImageOnly: Boolean,
+  columnsCount: Number,
+  selectedImage: {
+    type: Object,
+    default: () => ({}),
+  },
+  withLink: Boolean
+});
+const inputRef = ref();
+const isDragover = ref(false);
+const { isErrorMaxSize, currentFiles, onChangeFile, onDeleteFile } =
+  useUploadFileProgress(props.maxSize, emit);
+
+onMounted(() => {
+  const formattedModelValue = [];
+
+  if (props.modelValue.length > 0) {
+    props.modelValue.forEach((item) => {
+      if (item.current) {
+        formattedModelValue.push({
+          current: item.current,
+          file: null,
+          fileName: item.current.caption ?? "",
+          progress: 100,
+          fileUrl: item.current.path,
+          totalSize: item.current.file_size ?? 0,
+          isLoaded: true,
+          extension: item.current.extention ?? "png",
+          link: item.current.link,
+        });
+      }
+    });
+
+    currentFiles.value = formattedModelValue;
+  }
+});
+</script>
+
+
 <template>
   <div class="flex flex-col gap-y-2">
     <BaseInput
@@ -15,12 +82,14 @@
         :selected-image="selectedImage"
         :columns-count="columnsCount"
         :accept="accept"
+        :with-link="withLink"
         @change="onChangeFile"
         @update:selected-image="$emit('update:selectedImage', $event)"
         @update:uploaded-images="
           currentFiles = $event;
           $emit('update:modelValue', $event);
         "
+
         @on-edit-image="$emit('onEditFile', $event)"
         @on-remove-image="$emit('onRemoveFile', $event)"
       >
@@ -113,69 +182,6 @@
     </BaseInput>
   </div>
 </template>
-<script setup>
-import { onMounted, ref } from "vue";
-import { Icon, BaseInput } from "@/orchidui";
-import { useUploadFileProgress } from "@/orchidui/composables/uploadFileProgress.js";
-import OcSimpleMultipleUpload from "./OcSimpleMultipleUpload.vue";
-
-const emit = defineEmits([
-  "update:modelValue",
-  "update:selectedImage",
-  "onEditFile",
-  "onRemoveFile",
-]);
-const props = defineProps({
-  modelValue: {
-    type: Array,
-    default: () => [],
-  },
-  accept: {
-    type: String,
-    default: "",
-  },
-  /**
-   * Maximum file size in MB
-   */
-  maxSize: Number,
-  hint: String,
-  label: String,
-  errorMessage: String,
-  isImageOnly: Boolean,
-  columnsCount: Number,
-  selectedImage: {
-    type: Object,
-    default: () => ({}),
-  },
-});
-const inputRef = ref();
-const isDragover = ref(false);
-const { isErrorMaxSize, currentFiles, onChangeFile, onDeleteFile } =
-  useUploadFileProgress(props.maxSize, emit);
-
-onMounted(() => {
-  const formattedModelValue = [];
-
-  if (props.modelValue.length > 0) {
-    props.modelValue.forEach((item) => {
-      if (item.current) {
-        formattedModelValue.push({
-          current: item.current,
-          file: null,
-          fileName: item.current.caption ?? "",
-          progress: 100,
-          fileUrl: item.current.path,
-          totalSize: item.current.file_size ?? 0,
-          isLoaded: true,
-          extension: item.current.extention ?? "png",
-        });
-      }
-    });
-
-    currentFiles.value = formattedModelValue;
-  }
-});
-</script>
 
 <style lang="scss">
 .on-end-loading {

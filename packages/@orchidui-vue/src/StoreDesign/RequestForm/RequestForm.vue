@@ -88,7 +88,7 @@ const formatBanner = (value) => {
         newFormatImages.push({
           id: 'new_'+Date.now(),
           path: image.fileUrl,
-          device: image.current?.device ?? ''
+          link: image.link ?? (image.current?.link ?? '')
         })
       }
     })
@@ -226,6 +226,7 @@ const showSubForm = ref("");
             :important="true"
             is-image-only
             :columns-count="form.props?.columnsCount ?? 4"
+            with-link
             @update:model-value="onUpdateBanner(form, $event)"
             @on-edit-file="onEditBanner "
             @on-remove-file="onDeleteBanner "

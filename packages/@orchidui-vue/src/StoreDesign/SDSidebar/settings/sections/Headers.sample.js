@@ -105,17 +105,32 @@ const BANNER_FORM = [
   {
     general: true,
     type: "SectionItem",
-    name: 'responsive_cover_size',
+    name: 'responsive_banner_size',
     props: {
       isToggle: true,
-      title: "Responsive Cover Size",
+      title: "Responsive Banner Size",
+      description: "Banner for mobile device, Recommended size 400x400 pixels"
+    },
+  },
+  {
+    general: true,
+    type: "Banners",
+    name: "banners_mobile",
+    show_if: 'responsive_banner_size',
+    show_if_value: true
+  },
+  {
+    general: true,
+    type: "SectionItem",
+    props: {
+      title: "Banner Size",
     },
   },
   {
     general: true,
     type: "SectionItem",
     props: {
-      title: "Cover Size",
+      title: "Banner Size Mobile",
     },
   },
 ];

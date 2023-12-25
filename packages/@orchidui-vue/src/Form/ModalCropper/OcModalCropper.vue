@@ -1,14 +1,16 @@
 <script setup>
-import { Modal, Button } from "@/orchidui";
+import { Modal, Button, Input } from "@/orchidui";
 import { Cropper } from "vue-advanced-cropper";
 import "vue-advanced-cropper/dist/style.css";
 import { ref, watch } from "vue";
 
 const props = defineProps({
+  withLink: Boolean,
+  link: String,
   img: String,
   maxSize: String,
 });
-const emit = defineEmits(["changeImage", "close"]);
+const emit = defineEmits(["changeImage", "close", "update:link"]);
 const cropper = ref();
 const file_upload = ref();
 const cancelButtonProps = {
@@ -122,6 +124,9 @@ const fileUpload = (e) => {
           left-icon="refresh"
           @click="replaceImage"
         />
+      </div>
+      <div>
+        <Input v-if="withLink" :model-value="link"  label="Link" placeholder="https://website.com" @update:model-value="$emit('update:link', $event)" />
       </div>
     </div>
   </Modal>
