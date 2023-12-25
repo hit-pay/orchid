@@ -20,9 +20,9 @@ export const Default = {
       const storeDesignData = ref(StoreDesign);
       const sidebarActive = ref({
         sidebarMenu: "home",
-        submenu: "header",
-        section: "Banner",
-        id: "Banner",
+        submenu: "styles",
+        section: "Styles",
+        id: "Styles",
       });
 
       const content = ref("data");

@@ -5,7 +5,7 @@ import {
 } from "./sections/Headers.sample";
 import { PRODUCT_FORM } from "./sections/Sections.sample";
 import { FOOTER_CONTENT_FORM } from "./sections/Footers.sample";
-
+import { STYLES_FORM } from "./sections/Styles.sample";
 const settings = [
   {
     group: "styles",
@@ -13,7 +13,7 @@ const settings = [
     section: "Styles",
     title: "Styles",
     isDisable: true,
-    form: TOP_BANNER_FORM,
+    form: STYLES_FORM,
   },
   {
     group: "header",

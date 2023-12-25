@@ -26,7 +26,7 @@ const sectionFormData = ref(props.sectionData);
 const formErrors = ref({});
 const formValues = ref({});
 
-Object.values(props.requestForm).forEach((form) => {
+const setDefaultData = (form) => {
   if (typeof form.name === "object") {
     form.name.forEach((formName) => {
       if (form.general) {
@@ -42,12 +42,21 @@ Object.values(props.requestForm).forEach((form) => {
       formValues.value[form.name] = sectionFormData.value[form.name];
     }
   }
+}
+Object.values(props.requestForm).forEach((form) => {
+  if(form.type === 'Children'){
+    form.children.forEach((childForm) => {
+      setDefaultData(childForm)
+    })
+  }else{
+    setDefaultData(form)
+  }
+
 });
 
 const emit = defineEmits(["update:generalData", "update:sectionData"]);
 
 const updateData = (general = false) => {
-  console.log("generalFormData.value", generalFormData.value);
   if (general) {
     emit("update:generalData", generalFormData.value);
   } else {

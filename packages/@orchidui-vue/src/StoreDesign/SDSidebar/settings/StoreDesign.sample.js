@@ -49,14 +49,19 @@ const StoreDesign = {
       key: "Styles",
       section: "Styles",
       preset: "default",
-      primary_color: "#002771",
-      primary_text_color: "#03102F",
+      // colors
       background_color: "#FFFFFF",
       text_color: "#03102F",
+      primary_color: "#002771",
+      primary_text_color: "#03102F",
+      card_background_color: '#FFFFFF',
+      card_text_color: '#03102F',
+
+      folor_heading: "Inter",
       font_body: "Inter",
-      folor_title: "Inter",
-      box_rounded: "4",
-      box_shadow: "0px 0px 12px 0px rgba(0, 0, 0, 0.12)",
+
+      card_rounded: "4",
+      card_shadow: "0px 0px 12px 0px rgba(0, 0, 0, 0.12)",
       active: true,
     },
     {
