@@ -54,7 +54,7 @@ export const Default = {
         preFill: "https://tiktok.com/",
       },
       {
-        value: "other",
+        value: "link",
         label: "Other website",
         placeholder: "website.com",
         icon: "earth",

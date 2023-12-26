@@ -44,13 +44,12 @@ const emit = defineEmits({
 const isDropdownOpened = ref(false);
 const selectedLinkType = ref(props.type ?? props.links?.[0]?.value);
 const linkTitle = ref(props.title ?? "");
-const selectedLinkTypeProps = computed(() =>
-  props.links.find((link) => link.value === selectedLinkType.value)
+const selectedLinkTypeProps = computed(
+  () => props.links.find((link) => link.value === selectedLinkType.value) ?? {}
 );
+const preFill = computed(() => selectedLinkTypeProps.value.preFill ?? "");
 const localValue = ref(
-  props.modelValue
-    ? props.modelValue.replace(selectedLinkTypeProps.value.preFill, "")
-    : ""
+  props.modelValue ? props.modelValue.replace(preFill.value, "") : ""
 );
 
 const updateLinkType = (value) => {
@@ -61,17 +60,22 @@ const updateLinkType = (value) => {
 
 const update = (value) => {
   localValue.value = value;
-  emit("update:modelValue", selectedLinkTypeProps.value.preFill + value);
+  emit("update:modelValue", preFill.value + value);
   if (!props.isEdit && selectedLinkType.value !== "link") {
     emit("update:title", value);
   }
 };
+
+const placeholderInput = computed(
+  () => selectedLinkTypeProps.value.placeholder ?? ""
+);
+const isOtherLink = computed(() => selectedLinkType.value === "link");
 </script>
 
 <template>
   <div>
     <Input
-      v-if="selectedLinkType === 'link' || isEdit"
+      v-if="isOtherLink || isEdit"
       v-model="linkTitle"
       class="mb-3"
       label="Title"
@@ -79,13 +83,13 @@ const update = (value) => {
       @update:model-value="$emit('update:title', $event)"
     />
     <Input
-      :placeholder="selectedLinkTypeProps.placeholder"
+      :placeholder="placeholderInput"
       :label="selectedLinkType === 'link' ? 'Link' : label"
       :error-message="errorMessage"
       :is-inline-label="isInlineLabel"
       :disabled="isDisabled"
       :hint="hint"
-      :pre-fill="selectedLinkTypeProps.preFill"
+      :pre-fill="preFill"
       :model-value="localValue"
       :is-required="isRequired"
       :label-icon="labelIcon"
@@ -96,7 +100,12 @@ const update = (value) => {
       <template #trailing>
         <Dropdown v-model="isDropdownOpened" :distance="10">
           <div class="flex text-oc-text-400 items-center gap-x-2">
-            <Icon width="20" height="20" :name="selectedLinkTypeProps.icon" />
+            <Icon
+              v-if="selectedLinkTypeProps.icon"
+              width="20"
+              height="20"
+              :name="selectedLinkTypeProps.icon"
+            />
             <Icon
               width="16"
               height="16"
