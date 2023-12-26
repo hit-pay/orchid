@@ -60,8 +60,8 @@ const props = defineProps({
   },
   isRequired: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 });
 
 const isDropdownOpened = ref(false);

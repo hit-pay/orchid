@@ -15,6 +15,7 @@ export const Default = {
     errorMessage: "",
     isImageOnly: false,
     columnsCount: 3,
+    withLink: false
   },
   render: (args) => ({
     components: { MultipleUploadFile, Theme },
@@ -38,6 +39,7 @@ export const Default = {
                 :error-message="args.errorMessage"
                 :isImageOnly="args.isImageOnly"
                 :columnsCount="args.columnsCount"
+                :with-link="args.withLink"
             />
           </Theme>
         `,
@@ -83,13 +85,8 @@ export const MultipleImages = {
     },
     template: `
       <Theme class="min-h-[500px]">
-
-      <div class="mt-5">
-      {{ modelValue }}
-      </div>
-       <div class="mt-5">
-       {{ selectedImage}}
-       </div>
+      <pre>
+      {{ modelValue }}</pre>
         <MultipleUploadFile
             v-model="modelValue"
             v-model:selectedImage="selectedImage"

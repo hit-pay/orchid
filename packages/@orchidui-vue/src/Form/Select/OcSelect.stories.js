@@ -232,12 +232,18 @@ export const Multiple = {
 
       const selectedOption = ref([]);
       const selectedGroups = ref([]);
-      
-      const setExceedMaxOption = () => {
-        console.log('Exceed max options allowed');
-      }
 
-      return { selectedOption, selectedGroups, groups, options, setExceedMaxOption };
+      const setExceedMaxOption = () => {
+        console.log("Exceed max options allowed");
+      };
+
+      return {
+        selectedOption,
+        selectedGroups,
+        groups,
+        options,
+        setExceedMaxOption,
+      };
     },
     template: `
           <Theme colorMode="light" class="p-10 flex flex-col gap-y-8">

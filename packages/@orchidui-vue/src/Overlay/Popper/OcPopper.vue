@@ -24,7 +24,7 @@ const props = defineProps({
     default: 0,
   },
   distance: {
-    type: Number,
+    type: [String, Number],
     default: 5,
   },
   isFlipEnabled: {

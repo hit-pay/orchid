@@ -14,11 +14,11 @@ export const Default = {
     },
   },
   args: {
-    hint: "This is a hint text to help user.",
-    placeholder: "Placeholder",
+    hint: "",
+    placeholder: "@username",
     isInlineLabel: false,
     isDisabled: false,
-    label: "",
+    label: "Enter Username",
     errorMessage: "",
     isRequired: false,
     labelIcon: "",
@@ -29,6 +29,13 @@ export const Default = {
     },
     links: [
       {
+        value: "facebook",
+        placeholder: "@username",
+        label: "Facebook",
+        icon: "facebook",
+        preFill: "https://facebook.com/",
+      },
+      {
         value: "instagram",
         label: "Instagram",
         icon: "instagram",
@@ -36,23 +43,46 @@ export const Default = {
       },
       {
         value: "twitter",
-        label: "Twitter",
+        label: "(X) Twitter",
         icon: "twitter",
         preFill: "https://twitter.com/",
+      },
+      {
+        value: "tiktok",
+        label: "Tiktok",
+        icon: "tiktok",
+        preFill: "https://tiktok.com/",
+      },
+      {
+        value: "link",
+        label: "Other website",
+        placeholder: "website.com",
+        icon: "earth",
+        preFill: "https://",
       },
     ],
   },
   render: (args) => ({
     components: { Theme, LinkInput },
     setup() {
-      const link = ref("");
-      return { link, args };
+      const linkType = ref("twitter");
+      const linkValue = ref("");
+      const linkTitle = ref("");
+      return { linkType, linkValue, linkTitle, args };
     },
     template: `
           <Theme>
             <div class="w-full h-[200px]">
+              <div>
+                type:  {{linkType}}
+              </div>
+              <div>
+                value : {{linkValue}}
+              </div>
               <LinkInput
-                  v-model="link"
+                  v-model="linkValue"
+                  v-model:type="linkType"
+                  v-model:title="linkTitle"
                   :isInlineLabel="args.isInlineLabel"
                   :isDisabled="args.isDisabled"
                   :label="args.label"

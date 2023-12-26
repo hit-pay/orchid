@@ -34,7 +34,7 @@ export const Default = {
     minDate: null,
     maxDate: null,
     isRequired: true,
-    label: ""
+    label: "",
   },
   render: (args) => ({
     components: { Theme, DatePicker },

@@ -32,6 +32,7 @@ const props = defineProps({
     type: Object,
     default: () => ({}),
   },
+  class: String,
 });
 
 const emit = defineEmits({
@@ -59,9 +60,14 @@ const isGridVariant = computed(() => {
   >
     <div
       class="w-full grid gap-5"
-      :class="
-        isGridVariant ? 'grid-cols-3' : variant === 'list2' ? 'grid-cols-2' : ''
-      "
+      :class="[
+        props.class,
+        isGridVariant
+          ? 'grid-cols-3'
+          : variant === 'list2'
+            ? 'grid-cols-2'
+            : '',
+      ]"
     >
       <div
         v-for="opt in options"
@@ -76,51 +82,53 @@ const isGridVariant = computed(() => {
         }"
         @click="update(opt.value)"
       >
-        <img
-          v-if="opt.preview"
-          class="group-hover:shadow rounded"
-          :class="{
-            'border-2 border-oc-primary':
-              isGridVariant && opt.value === modelValue,
-            'border border-oc-gray-200':
-              (isGridVariant && opt.value !== modelValue) || !isGridVariant,
-            'w-full': isGridVariant,
-            'w-1/8': !isGridVariant,
-          }"
-          :src="opt.preview"
-        />
-        <div
-          class="mt-2"
-          :class="[
-            isGridVariant ? 'text-center' : 'px-3',
-            borderless ? 'flex-1' : '',
-          ]"
-        >
-          <span
-            class="font-medium"
+        <slot name="option" :option="opt" :selected="opt.value === modelValue">
+          <img
+            v-if="opt.preview"
+            class="group-hover:shadow rounded"
             :class="{
-              'text-sm ': isGridVariant,
-              'text-oc-text-400 group-hover:text-oc-text-500':
-                isGridVariant && opt.value !== modelValue,
-              'text-oc-text-500': isGridVariant && opt.value === modelValue,
+              'border-2 border-oc-primary':
+                isGridVariant && opt.value === modelValue,
+              'border border-oc-gray-200':
+                (isGridVariant && opt.value !== modelValue) || !isGridVariant,
+              'w-full': isGridVariant,
+              'w-1/8': !isGridVariant,
             }"
-            >{{ opt.label }}</span
-          >
+            :src="opt.preview"
+          />
           <div
-            v-if="opt.description"
-            class="flex text-sm text-oc-text-400 mt-2"
+            class="mt-2"
+            :class="[
+              isGridVariant ? 'text-center' : 'px-3',
+              borderless ? 'flex-1' : '',
+            ]"
           >
-            {{ opt.description }}
+            <span
+              class="font-medium"
+              :class="{
+                'text-sm ': isGridVariant,
+                'text-oc-text-400 group-hover:text-oc-text-500':
+                  isGridVariant && opt.value !== modelValue,
+                'text-oc-text-500': isGridVariant && opt.value === modelValue,
+              }"
+              >{{ opt.label }}</span
+            >
+            <div
+              v-if="opt.description"
+              class="flex text-sm text-oc-text-400 mt-2"
+            >
+              {{ opt.description }}
+            </div>
           </div>
-        </div>
-        <Icon
-          v-if="borderless"
-          width="16"
-          height="16"
-          name="check-2"
-          class="text-oc-primary"
-          :class="opt.value === modelValue ? 'opacity-100' : 'opacity-0'"
-        />
+          <Icon
+            v-if="borderless"
+            width="16"
+            height="16"
+            name="check-2"
+            class="text-oc-primary"
+            :class="opt.value === modelValue ? 'opacity-100' : 'opacity-0'"
+          />
+        </slot>
       </div>
     </div>
   </BaseInput>

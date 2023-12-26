@@ -1,6 +1,6 @@
-<script setup lang="ts">
-import { Dropdown, Icon } from "@/orchidui";
-import { ref } from "vue";
+<script setup>
+import { Dropdown, Icon, ConfirmationModal } from "@/orchidui";
+import { ref, computed } from "vue";
 import { Draggable } from "@/orchidui/Draggable.js";
 import { ModalCropper } from "@/orchidui/Cropper.js";
 
@@ -21,6 +21,7 @@ const props = defineProps({
     type: Number,
     default: 3,
   },
+  withLink: Boolean,
 });
 const emit = defineEmits([
   "change",
@@ -29,26 +30,39 @@ const emit = defineEmits([
   "onRemoveImage",
   "onEditImage",
 ]);
-const isDropdownOpen = ref(false);
+const isDropdownOpen = ref([]);
 const isEditOpen = ref(false);
-const editImg = ref("");
+const editImgIndex = ref("");
+const editLink = ref("");
+
+const editImgIndexFileUrl = computed(() => {
+  return props.uploadedImages[editImgIndex.value].fileUrl;
+});
+const deleteConfirmationModal = ref(false);
+const deleteIndex = ref("");
 const onDeleteFile = (index) => {
-  const deletedImage = props.uploadedImages.find((_, i) => i === index);
+  deleteConfirmationModal.value = true;
+  deleteIndex.value = index;
+};
+const confirmDeleteFile = () => {
+  const deletedImage = props.uploadedImages.find(
+    (_, i) => i === deleteIndex.value,
+  );
   if (deletedImage.current) {
     emit("onRemoveImage", deletedImage);
   }
   emit(
     "update:uploadedImages",
-    props.uploadedImages.filter((_, i) => i !== index),
+    props.uploadedImages.filter((_, i) => i !== deleteIndex.value),
   );
+  deleteConfirmationModal.value = false;
 };
 const changeImage = (url) => {
-  const changedFile = props.uploadedImages.find(
-    (img) => img.fileUrl === editImg.value,
-  );
+  const changedFile = props.uploadedImages[editImgIndex.value];
   changedFile.fileUrl = url;
   isEditOpen.value = false;
-  editImg.value = "";
+  editImgIndex.value = "";
+  editLink.value = "";
 
   if (changedFile.current) {
     emit("onEditImage", changedFile);
@@ -56,13 +70,18 @@ const changeImage = (url) => {
 
   emit("update:uploadedImages", props.uploadedImages);
 };
+const updateLink = (link) => {
+  const changedFile = props.uploadedImages[editImgIndex.value];
+  changedFile.link = link;
+  emit("update:uploadedImages", props.uploadedImages);
+};
 </script>
 
 <template>
-  <div class="relative min-h-[90px]">
+  <div class="relative min-h-[100px]">
     <label class="absolute">
       <div
-        class="w-[90px] hover:bg-oc-primary-50 cursor-pointer bg-oc-accent-1-50 text-oc-accent-1 rounded aspect-square flex items-center justify-center"
+        class="w-[100px] hover:bg-oc-primary-50 cursor-pointer bg-oc-accent-1-50 text-oc-accent-1 rounded aspect-square flex items-center justify-center"
       >
         <Icon name="plus" />
       </div>
@@ -78,7 +97,7 @@ const changeImage = (url) => {
       :key="uploadedImages.length"
       :model-value="uploadedImages"
       filter="filtered-el"
-      class="gap-3 grid w-fit grid-cols-3"
+      class="grid w-fit grid-cols-3 gap-3"
       :style="`grid-template-columns: repeat(${columnsCount}, 1fr)`"
       @update:model-value="$emit('update:uploadedImages', $event)"
     >
@@ -86,7 +105,7 @@ const changeImage = (url) => {
         <div
           v-for="(img, i) in list"
           :key="img.fileName"
-          class="w-[90px] group relative cursor-pointer aspect-square border rounded border-oc-accent-1-100 bg-cover bg-center"
+          class="w-[100px] group relative cursor-pointer aspect-square border rounded border-oc-accent-1-100 bg-cover bg-center"
           :class="{
             'border-oc-primary': selectedImage.fileName === img.fileName,
             'col-start-2': i === 0,
@@ -95,13 +114,13 @@ const changeImage = (url) => {
           @click="$emit('update:selectedImage', img)"
         >
           <Dropdown
-            v-model="isDropdownOpen"
+            v-model="isDropdownOpen[i]"
             placement="bottom-end"
             class="absolute top-2 right-2 z-[1010] hidden group-hover:flex"
           >
             <Icon
               name="dots-vertical"
-              class="draggable-card-action cursor-pointer w-[32px] flex h-[32px] items-center justify-center text-oc-bg-light"
+              class="absolute right-0 cursor-pointer w-[32px] flex h-[32px] items-center justify-center text-oc-bg-light"
             />
             <template #menu>
               <slot
@@ -114,8 +133,9 @@ const changeImage = (url) => {
                   <div
                     class="flex p-3 cursor-pointer items-center gap-x-3"
                     @click="
-                      editImg = img.fileUrl;
-                      isDropdownOpen = false;
+                      editImgIndex = i;
+                      editLink = img.link;
+                      isDropdownOpen[i] = false;
                       isEditOpen = true;
                     "
                   >
@@ -126,7 +146,7 @@ const changeImage = (url) => {
                     class="flex p-3 cursor-pointer items-center text-oc-error gap-x-3"
                     @click="
                       onDeleteFile(i);
-                      isDropdownOpen = false;
+                      isDropdownOpen[i] = false;
                     "
                   >
                     <Icon width="16" height="16" name="bin" />
@@ -164,12 +184,21 @@ const changeImage = (url) => {
     <ModalCropper
       v-if="isEditOpen"
       v-model="isEditOpen"
-      :img="editImg"
+      :img="editImgIndexFileUrl"
+      :with-link="withLink"
+      :link="editLink"
       @close="
         isEditOpen = false;
-        editImg = '';
+        editImgIndex = '';
       "
       @change-image="changeImage"
+      @update:link="updateLink"
+    />
+
+    <ConfirmationModal
+      v-model="deleteConfirmationModal"
+      description="Do you want to delete this image ?"
+      @confirm="confirmDeleteFile"
     />
   </div>
 </template>

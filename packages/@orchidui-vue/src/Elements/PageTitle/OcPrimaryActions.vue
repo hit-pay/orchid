@@ -13,7 +13,9 @@ const isCopied = ref(false);
 const hasDropdownOptions = computed(
   () => props.primaryActions?.dropdownOptions,
 );
-const isDropdownOpened = ref(hasDropdownOptions.value?.isDropdownOpened ?? false);
+const isDropdownOpened = ref(
+  hasDropdownOptions.value?.isDropdownOpened ?? false,
+);
 const copyToClipBoard = () => {
   isCopied.value = true;
   emit("copy");
