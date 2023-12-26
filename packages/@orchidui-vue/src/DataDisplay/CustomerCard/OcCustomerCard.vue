@@ -33,12 +33,21 @@ defineEmits(["addCustomer"]);
 
       <!--  Detail  -->
       <div v-if="variant !== 'small'" class="flex flex-col gap-y-4 pt-4 w-full">
-        <ListDetail label="Phone" :content="`+${customer?.phone_number}`" />
+        <ListDetail
+          label="Phone"
+          :content="customer?.phone_number ? `+${customer.phone_number}` : '-'"
+        />
         <ListDetail
           label="Address"
-          :content="`${customer?.address?.postal_code || ''} ${
-            customer?.address.country || ''
-          } ${customer?.address?.city || ''}`"
+          :content="
+            [
+              customer?.address?.postal_code || '',
+              customer?.address.country || '',
+              customer?.address?.city || '',
+            ]
+              .join(' ')
+              .trim() || '-'
+          "
         />
       </div>
     </template>
