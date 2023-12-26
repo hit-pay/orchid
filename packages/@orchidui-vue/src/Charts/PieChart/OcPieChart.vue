@@ -21,7 +21,7 @@
               class="w-3 h-3 rounded-full"
               :style="{ background: item.itemStyle.color }"
             />
-            <img v-if="item.name" :src="legendImages[item.name]" />
+            <img v-if="item.name" :src="legendImages[item.name]" height="7" />
             <span v-else>Other</span>
           </div>
         </template>
