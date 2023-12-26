@@ -1,7 +1,7 @@
 <script setup>
 import { ref, watch } from "vue";
 import { Icon, Toggle, Button, SelectOptions } from "@/orchidui";
-import { DraggableList } from "@/orchidui/Draggable";
+import { DraggableList } from "@/orchidui/Draggable.js";
 import { RequestForm, ThumbnailSection } from "@/orchidui/StoreDesign";
 import { computed } from "vue";
 const props = defineProps({
@@ -47,7 +47,7 @@ const updatePreset = (to) => {
     let newSectionsList = [];
     props.values.sections.forEach((item) => {
       const defaultSettings = selectedPreset.sections.find(
-        (s) => s.section === item.section,
+        (s) => s.section === item.section
       );
       if (defaultSettings) {
         let sectionItem = {
@@ -81,7 +81,7 @@ const sidebarActive = computed(() => {
 });
 
 const availableSections = computed(() =>
-  props.settings.filter((s) => s.group === "sections"),
+  props.settings.filter((s) => s.group === "sections")
 );
 
 const renderForm = ref(null);
@@ -101,7 +101,7 @@ watch(
       props.values.sections.forEach((item) => {
         if (item.group === "sections") {
           const sectionItem = props.settings.find(
-            (s) => s.section === item.section,
+            (s) => s.section === item.section
           );
           sectionListCustom.push({
             key: item.key,
@@ -118,7 +118,7 @@ watch(
     }
 
     sectionActive.value = sectionList.value.find(
-      (s) => s.key === props.active.id,
+      (s) => s.key === props.active.id
     );
 
     setTimeout(() => {
@@ -128,12 +128,12 @@ watch(
   {
     deep: true,
     immediate: true,
-  },
+  }
 );
 
 const sectionActiveValues = computed(() => {
   let sectionValues = props.values.sections.find(
-    (s) => s.key === props.active.id,
+    (s) => s.key === props.active.id
   );
   return sectionValues;
 });
@@ -165,7 +165,7 @@ const sidebarMenuLabel = computed(() => {
 });
 const submenuLabel = computed(() => {
   const submenu = sidebarMenuActive.value?.children.find(
-    (s) => s.name === sidebarActive.value.submenu,
+    (s) => s.name === sidebarActive.value.submenu
   );
   return submenu?.label;
 });
