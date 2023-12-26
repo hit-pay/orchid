@@ -34,7 +34,8 @@ export const Default = {
     minDate: null,
     maxDate: null,
     isRequired: true,
-    label: "",
+    label: "Date",
+    isSplitInput: true,
   },
   render: (args) => ({
     components: { Theme, DatePicker },
@@ -65,6 +66,7 @@ export const Default = {
                   :min-label="args.minLabel"
                   :max-label="args.maxLabel"
                   :is-required="args.isRequired"
+                  :is-split-input="args.isSplitInput"
               />
             </div>
           </Theme>
