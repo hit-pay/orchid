@@ -71,21 +71,22 @@ const currentPage = ref(props.filter.page);
 const perPage = ref(
   filterOptions.value?.per_page?.key
     ? props.filter[filterOptions.value?.per_page?.key]
-    : props.filter.per_page,
+    : props.filter.per_page
 );
 const defaultQuery =
   props.filter[filterOptions.value?.search?.key]?.trim() ?? "";
 const queries = ref(defaultQuery ? defaultQuery.split(",") : []);
 const isSearchExpanded = ref(false);
 
-const customPerPageOptions = computed(() => {
-  return (
-    props.options?.perPageOptions?.map((perPage) => ({
-      label: `${perPage}`,
-      value: perPage,
-    })) ?? null
-  );
-});
+const customPerPageOptions = computed(() =>
+  props.options?.perPageOptions?.map(
+    (perPage) =>
+      ({
+        label: `${perPage}`,
+        value: perPage,
+      }) ?? null
+  )
+);
 
 const perPageOptions = computed(() => {
   let default_per_page_option = [
@@ -195,7 +196,7 @@ const changePage = () => {
 const applyFilter = (
   filterForm = null,
   isChangePage = false,
-  changeCursor = "",
+  changeCursor = ""
 ) => {
   if (paginationOption.value && !isChangePage) {
     currentPage.value = 1;
@@ -281,8 +282,8 @@ const displayFilterData = computed(() => {
               .map(
                 (selectedValue) =>
                   option.props.options.find(
-                    ({ value }) => value === selectedValue,
-                  ).label,
+                    ({ value }) => value === selectedValue
+                  ).label
               )
               .join(", ");
           }
