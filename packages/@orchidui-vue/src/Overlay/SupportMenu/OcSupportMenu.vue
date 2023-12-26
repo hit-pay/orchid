@@ -125,7 +125,11 @@ onMounted(() => {
             :key="i"
             class="text-sm"
             v-bind="item"
-          />
+          >
+            <template #badge>
+              <slot name="badge" />
+            </template>
+          </DropdownItem>
         </div>
       </template>
     </Dropdown>
