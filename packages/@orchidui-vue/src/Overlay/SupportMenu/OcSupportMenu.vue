@@ -1,16 +1,13 @@
 <script setup lang="ts">
 import { Dropdown, Icon, Button, DropdownItem } from "@/orchidui";
 import HitPaySupportIcon from "./HitPaySupportIcon.vue";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
+import { getCookie, setCookie } from "@/orchidui/composables/helpers.js";
 
 defineProps({
   modelValue: {
     type: Boolean,
     default: false,
-  },
-  type: {
-    type: String,
-    default: "default",
   },
   title: {
     type: String,
@@ -43,10 +40,18 @@ const popperOptions = {
 const isFirstAppear = ref(true);
 const onFirstClose = (isOpen) => {
   if (isOpen) return;
-  setTimeout(() => {
-    isFirstAppear.value = false;
-  }, 300);
+  setTimeout(() => offFirstAppear(), 300);
 };
+const offFirstAppear = () => {
+  isFirstAppear.value = false;
+  setCookie("off-support-menu", true, 30);
+};
+
+onMounted(() => {
+  if (getCookie("off-support-menu")) {
+    isFirstAppear.value = false;
+  }
+});
 </script>
 
 <template>
@@ -62,7 +67,7 @@ const onFirstClose = (isOpen) => {
       "
     >
       <div
-        class="w-[40px] flex items-center bg-oc-text active:bg-oc-gray-800 justify-center aspect-square rounded-full cursor-pointer"
+        class="w-[40px] flex text-white items-center bg-oc-text active:bg-oc-gray-800 justify-center aspect-square rounded-full cursor-pointer"
       >
         <Icon name="question" width="33" height="33" />
       </div>
@@ -76,7 +81,7 @@ const onFirstClose = (isOpen) => {
             <span class="font-medium">{{ title }}</span>
             <div
               class="p-1 absolute -top-2 -right-2 cursor-pointer"
-              @click="isFirstAppear = false"
+              @click="offFirstAppear"
             >
               <Icon width="14" height="14" class="text-oc-text-400" name="x" />
             </div>
@@ -89,7 +94,7 @@ const onFirstClose = (isOpen) => {
               label="Try Quick Assistant"
               size="small"
               v-bind="confirmButtonProps"
-              @click="isFirstAppear = false"
+              @click="offFirstAppear"
             />
           </div>
         </div>
