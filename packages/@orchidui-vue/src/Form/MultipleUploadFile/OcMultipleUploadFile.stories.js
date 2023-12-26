@@ -15,7 +15,7 @@ export const Default = {
     errorMessage: "",
     isImageOnly: false,
     columnsCount: 3,
-    withLink: false
+    withLink: false,
   },
   render: (args) => ({
     components: { MultipleUploadFile, Theme },

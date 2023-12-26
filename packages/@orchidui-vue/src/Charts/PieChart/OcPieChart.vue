@@ -21,7 +21,11 @@
               class="w-3 h-3 rounded-full"
               :style="{ background: item.itemStyle.color }"
             />
-            <img v-if="item.name" :src="legendImages[item.name]" />
+            <img
+              v-if="item.name"
+              :src="legendImages[item.name]"
+              class="max-h-7"
+            />
             <span v-else>Other</span>
           </div>
         </template>
@@ -83,7 +87,9 @@ const options = computed(() => ({
                 </span>
                 ${
                   params.name
-                    ? '<img src="' + legendImages[params.name] + '" />'
+                    ? '<img src="' +
+                      legendImages[params.name] +
+                      '" class="max-h-7" />'
                     : "Other"
                 }
             </div>

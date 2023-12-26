@@ -60,7 +60,7 @@ const closeModal = () => {
   }
 
   emit("update:modelValue", false);
-}
+};
 
 const onClickOutside = async () => {
   if (props.persistent) {
