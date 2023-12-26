@@ -14,7 +14,10 @@ const props = defineProps({
   label: String,
   hint: String,
   errorMessage: String,
-  placeholder: String,
+  placeholder: {
+    type: String,
+    default: "Placeholder",
+  },
   isInlineLabel: Boolean,
   isFilterable: Boolean,
   isDisabled: Boolean,

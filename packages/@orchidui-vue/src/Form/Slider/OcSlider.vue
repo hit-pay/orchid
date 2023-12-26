@@ -81,7 +81,7 @@ const fillColor = (onlyFillColor = false) => {
       "update:modelValue",
       props.type === "range"
         ? [sliderOne.value?.value, sliderTwo.value?.value]
-        : sliderOne.value.value,
+        : sliderOne.value.value
     );
   }
 };

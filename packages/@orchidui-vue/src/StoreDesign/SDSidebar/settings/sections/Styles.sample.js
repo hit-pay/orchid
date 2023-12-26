@@ -128,7 +128,7 @@ const STYLES_FORM = [
         name: "card_shadow",
         type: "RadioGroup",
         props: {
-          label: "Shadow styles",
+          label: "Shadow size",
           alignment: "horizontal",
           radio: [
             {
