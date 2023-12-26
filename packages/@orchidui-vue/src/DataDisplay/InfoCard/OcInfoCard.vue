@@ -4,9 +4,7 @@ import OcTooltip from "@/orchidui/Overlay/Tooltip/OcTooltip.vue";
 import { useSlots } from "vue";
 
 defineProps({
-  loading: {
-    type: Boolean,
-  },
+  isLoading: Boolean,
   title: String,
   titleIcon: String,
   titleIconTooltip: String,
@@ -64,7 +62,7 @@ const hasSlot = (name) => !!slots[name];
 
     <div
       class="absolute top-0 right-0 left-0 bottom-0 bg-white flex items-center justify-center"
-      v-if="loading"
+      v-if="isLoading"
     >
       <oc-icon
         name="loading-2"
