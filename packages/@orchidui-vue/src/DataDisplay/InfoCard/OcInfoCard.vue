@@ -1,6 +1,5 @@
 <script setup>
-import OcIcon from "@/orchidui/MediaAndIcons/Icon/OcIcon.vue";
-import OcTooltip from "@/orchidui/Overlay/Tooltip/OcTooltip.vue";
+import { Icon, Tooltip } from "@/orchidui";
 import { useSlots } from "vue";
 
 defineProps({
@@ -36,12 +35,12 @@ const hasSlot = (name) => !!slots[name];
       :class="titleClass"
     >
       <div class="uppercase">{{ title }}</div>
-      <oc-tooltip
+      <Tooltip
         popper-class="w-max bg-oc-bg"
         position="top-start"
         v-if="titleIconTooltip"
       >
-        <oc-icon class="ml-[3px]" :name="titleIcon" width="16" height="16" />
+        <Icon class="ml-[3px]" :name="titleIcon" width="16" height="16" />
         <template #popper>
           <div
             class="flex flex-col px-3 py-2 text-[12px] text-oc-text-400 font-medium text-sm"
@@ -49,7 +48,7 @@ const hasSlot = (name) => !!slots[name];
             {{ titleIconTooltip }}
           </div>
         </template>
-      </oc-tooltip>
+      </Tooltip>
     </div>
 
     <slot name="header"></slot>
@@ -64,12 +63,12 @@ const hasSlot = (name) => !!slots[name];
       class="absolute top-0 right-0 left-0 bottom-0 bg-white flex items-center justify-center"
       v-if="isLoading"
     >
-      <oc-icon
+      <Icon
         name="loading-2"
         width="32"
         height="32"
         class="text-oc-text-400 motion-safe:animate-spin"
-      ></oc-icon>
+      ></Icon>
     </div>
   </div>
 </template>
