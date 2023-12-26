@@ -27,6 +27,7 @@ const props = defineProps({
 
 defineEmits({
   changeTab: [],
+  addCustomer: [],
 });
 const copyLink = async () => {
   try {
@@ -68,6 +69,7 @@ const copyLink = async () => {
       :customer-card-variant="customerCardVariant"
       :customer="customer"
       :is-customer="isCustomer"
+      @add-customer="$emit('addCustomer')"
     />
 
     <BalanceOverview

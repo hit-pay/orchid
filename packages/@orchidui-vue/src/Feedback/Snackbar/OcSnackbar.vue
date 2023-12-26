@@ -1,8 +1,8 @@
 <script setup>
 import { Icon } from "@/orchidui";
-import { nextTick, onMounted, ref } from "vue";
+import { nextTick, ref, watch } from "vue";
 
-defineProps({
+const props = defineProps({
   modelValue: {
     type: Boolean,
     default: true,
@@ -58,11 +58,15 @@ const positionClasses = {
 };
 const snackBar = ref();
 const halfWindowWidth = ref();
-onMounted(async () => {
-  await nextTick();
-  halfWindowWidth.value =
-    (document.body.clientWidth - snackBar.value.clientWidth) / 2;
-});
+
+watch(
+  () => props.modelValue,
+  async () => {
+    await nextTick();
+    halfWindowWidth.value =
+      (document.body.clientWidth - snackBar.value.clientWidth) / 2;
+  },
+);
 </script>
 
 <template>

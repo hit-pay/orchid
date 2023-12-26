@@ -8,6 +8,7 @@ defineProps({
   customerCardVariant: { type: String, default: "big" },
   customer: { type: Object, default: null },
 });
+defineEmits(["addCustomer"]);
 </script>
 
 <template>
@@ -44,6 +45,7 @@ defineProps({
       v-if="isCustomer"
       :variant="customerCardVariant"
       :customer="customer"
+      @add-customer="$emit('addCustomer')"
     />
   </div>
 </template>
