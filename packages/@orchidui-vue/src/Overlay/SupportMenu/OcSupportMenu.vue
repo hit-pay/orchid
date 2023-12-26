@@ -69,7 +69,7 @@ const onFirstClose = (isOpen) => {
       <template #menu>
         <div
           v-if="isFirstAppear"
-          class="shadow-tooltip rounded p-4 flex flex-col gap-y-3 max-w-[250px]"
+          class="shadow-tooltip rounded p-4 flex flex-col gap-y-3 min-w-[250px]"
         >
           <div class="flex gap-x-3 items-center relative">
             <HitPaySupportIcon />
@@ -93,7 +93,7 @@ const onFirstClose = (isOpen) => {
             />
           </div>
         </div>
-        <div v-else>
+        <div v-else class="min-w-[180px]">
           <template v-for="(group, j) in topMenu" :key="j">
             <div class="p-3">
               <span class="uppercase text-oc-text-400 text-xs font-medium">
