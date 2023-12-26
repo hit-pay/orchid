@@ -39,9 +39,7 @@ const fields = computed(() => props.options.fields);
 const headers = computed(() => props.options.headers);
 
 const getRowKey = computed(() =>
-  typeof props.rowKey === "function"
-    ? props.rowKey
-    : (row) => row[props.rowKey],
+  typeof props.rowKey === "function" ? props.rowKey : (row) => row[props.rowKey]
 );
 
 const selectedRows = computed({
@@ -55,12 +53,12 @@ const selectedRows = computed({
 
 const selectRow = (row) => {
   const selectingRow = selectedRows.value.find(
-    (r) => getRowKey.value(r) === getRowKey.value(row),
+    (r) => getRowKey.value(r) === getRowKey.value(row)
   );
 
   if (selectingRow) {
     selectedRows.value = selectedRows.value.filter(
-      (r) => getRowKey.value(r) !== getRowKey.value(row),
+      (r) => getRowKey.value(r) !== getRowKey.value(row)
     );
   } else {
     selectedRows.value = [...selectedRows.value, row];
@@ -80,7 +78,7 @@ const onCopied = (to) => {
 };
 
 const onClickRow = (field, header) => {
-  if (!isCopied.value) {
+  if (!isCopied.value && header.key !== "actions") {
     emit("click:row", {
       field: field,
       header: header,
