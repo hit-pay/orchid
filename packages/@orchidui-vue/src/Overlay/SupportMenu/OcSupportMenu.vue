@@ -44,11 +44,11 @@ const onFirstClose = (isOpen) => {
 };
 const offFirstAppear = () => {
   isFirstAppear.value = false;
-  setCookie("off-support-menu", true, 30);
+  setCookie("hitpay_off-support-menu", true, 30);
 };
 
 onMounted(() => {
-  if (getCookie("off-support-menu")) {
+  if (getCookie("hitpay_off-support-menu")) {
     isFirstAppear.value = false;
   }
 });
