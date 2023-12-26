@@ -69,13 +69,13 @@ const isDropdownOpened = ref(false);
 const formattedDate = computed(() => {
   if (props.type === "default") {
     return props.modelValue
-      ? dayjs(props.modelValue, props.dateFormat).format("DD/MM/YYYY")
+      ? dayjs(props.modelValue).format(props.dateFormat)
       : "";
   } else {
     if (props.modelValue && props.modelValue[0]) {
       return [
-        dayjs(props.modelValue[0], props.dateFormat).format("DD/MM/YYYY"),
-        dayjs(props.modelValue[1], props.dateFormat).format("DD/MM/YYYY"),
+        dayjs(props.modelValue[0]).format(props.dateFormat),
+        dayjs(props.modelValue[1]).format(props.dateFormat),
       ];
     } else {
       return ["", ""];

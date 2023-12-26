@@ -26,7 +26,7 @@ export const Default = {
   },
   args: {
     type: "range",
-    dateFormat: "",
+    dateFormat: "YYYY-MM-DD",
     errorMessage: "",
     hint: "",
     minLabel: "From",
