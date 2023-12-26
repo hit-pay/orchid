@@ -83,7 +83,6 @@ const onClickRow = (field, header) => {
       field: field,
       header: header,
     });
-    console.log("click row");
   }
 };
 const isScrollOnStart = ref(true);
