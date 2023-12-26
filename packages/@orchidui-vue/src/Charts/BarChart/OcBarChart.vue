@@ -56,7 +56,7 @@ const options = computed(() => ({
   },
   grid: {
     show: props.showGrid,
-    right: 0,
+    right: "10px",
     left: 0,
     top: "10px",
     bottom: 0,
