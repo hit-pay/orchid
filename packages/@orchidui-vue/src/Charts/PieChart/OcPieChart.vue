@@ -55,10 +55,10 @@ const legendSelected = ref({
   fave: true,
 });
 const legendImages = {
-  stack_cards: "./images/chart/stack_cards.png",
-  paynow: "./images/chart/paynow.png",
-  atome: "./images/chart/atome.png",
-  fave: "./images/chart/fave.png",
+  stack_cards: "/images/chart/stack_cards.png",
+  paynow: "/images/chart/paynow.png",
+  atome: "/images/chart/atome.png",
+  fave: "/images/chart/fave.png",
 };
 const legendTooltipText = {
   stack_cards:
