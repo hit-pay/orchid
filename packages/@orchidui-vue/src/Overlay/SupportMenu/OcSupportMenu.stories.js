@@ -8,7 +8,6 @@ export default {
 export const Default = {
   args: {
     modelValue: true,
-    type: "default",
     title: undefined,
     info: undefined,
     confirmButtonProps: undefined,
@@ -60,12 +59,7 @@ export const Default = {
       },
     ],
   },
-  argTypes: {
-    type: {
-      control: "select",
-      options: ["default", "nudge"],
-    },
-  },
+  argTypes: {},
   render: (args) => ({
     components: { SupportMenu, Theme },
     setup() {
@@ -73,7 +67,7 @@ export const Default = {
     },
     template: `
           <Theme class="h-[450px] w-full">
-            <SupportMenu v-model="args.modelValue" :type="args.type" :confirmButtonProps="args.confirmButtonProps"
+            <SupportMenu v-model="args.modelValue" :confirmButtonProps="args.confirmButtonProps"
                          :title="args.title" :info="args.info" :topMenu="args.topMenu" :bottomMenu="args.bottomMenu"/>
           </Theme>
         `,
