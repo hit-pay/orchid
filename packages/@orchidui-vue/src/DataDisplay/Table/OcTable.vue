@@ -80,7 +80,7 @@ const onCopied = (to) => {
 };
 
 const onClickRow = (field, header) => {
-  if (!isCopied.value) {
+  if (!header.disableClickRow && header.key !== "actions") {
     emit("click:row", {
       field: field,
       header: header,
@@ -240,7 +240,7 @@ onMounted(() => onScroll());
             header.stickyRight && !isScrollOnEnd ? 'shadow-left-sticky' : '',
           ]"
           :image-class="header.imageClass"
-          @click="onClickRow(field, header)"
+          @click:field="onClickRow(field, header)"
           @copied="onCopied"
         >
           <template #default>

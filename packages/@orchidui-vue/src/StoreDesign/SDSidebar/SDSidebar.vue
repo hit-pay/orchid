@@ -1,7 +1,7 @@
 <script setup>
 import { ref, watch } from "vue";
 import { Icon, Toggle, Button, SelectOptions } from "@/orchidui";
-import { DraggableList } from "@/orchidui/Draggable";
+import { DraggableList } from "@/orchidui/Draggable.js";
 import { RequestForm, ThumbnailSection } from "@/orchidui/StoreDesign";
 import { computed } from "vue";
 const props = defineProps({

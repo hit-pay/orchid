@@ -1,6 +1,6 @@
 {
   "name": "@orchidui/vue",
-  "version": "0.3.9",
+  "version": "0.3.19",
   "type": "module",
   "scripts": {
     "build": "vite build",
@@ -11,7 +11,7 @@
     "fast-glob": "^3.3.1",
     "sass": "^1.68.0",
     "shikiji": "^0.9.10",
-    "vite": "5.0.5"
+    "vite": "4.4.9"
   },
   "publishConfig": {
     "access": "public"

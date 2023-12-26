@@ -48,6 +48,7 @@ const props = defineProps({
 defineEmits({
   selected: [],
   copied: [],
+  "click:field": [],
 });
 
 const hasContentData = computed(() => {
@@ -107,11 +108,16 @@ const variantClass = computed(() => ({
           v-else-if="variant === Variants.ICON"
           class="w-6 h-6 mx-auto"
           :name="data"
+          @click="$emit('click:field')"
         />
 
         <!--  IMAGE    -->
         <template v-else-if="variant === Variants.IMAGE">
-          <div v-if="data" class="h-[42px] min-w-[42px] rounded mx-auto">
+          <div
+            v-if="data"
+            class="h-[42px] min-w-[42px] rounded mx-auto"
+            @click="$emit('click:field')"
+          >
             <img
               :class="imageClass"
               alt="table-img"
@@ -122,35 +128,50 @@ const variantClass = computed(() => ({
           <div
             v-else
             class="h-[42px] mx-auto w-[42px] bg-oc-bg-dark flex items-center justify-center rounded"
+            @click="$emit('click:field')"
           >
             <Icon width="20" height="20" name="image" />
           </div>
         </template>
 
         <!--  EMPTY    -->
-        <div v-else-if="variant === Variants.EMPTY">-</div>
+        <div
+          v-else-if="variant === Variants.EMPTY"
+          @click="$emit('click:field')"
+        >
+          -
+        </div>
 
         <TableCellContent
           v-else-if="variant === Variants.DATETIME"
           :title="dayjs(data).format('D MMM, YYYY')"
           :description="dayjs(data).format('h:mm A')"
+          @click="$emit('click:field')"
         />
 
         <!--   CONTENT   -->
         <TableCellContent
           v-else-if="variant === Variants.CONTENT"
           v-bind="content"
+          @click="$emit('click:field')"
         />
         <!--   CHIP   -->
         <Chip
           v-else-if="variant === Variants.CHIP"
           :label="data"
           :variant="chipOptions[data]"
+          @click="$emit('click:field')"
         />
 
         <!--  DEFAULT    -->
-        <div v-else-if="data" class="flex items-center w-full">{{ data }}</div>
-        <div v-else>-</div>
+        <div
+          v-else-if="data"
+          class="flex items-center w-full"
+          @click="$emit('click:field')"
+        >
+          {{ data }}
+        </div>
+        <div v-else @click="$emit('click:field')">-</div>
       </slot>
 
       <CopyTooltip
