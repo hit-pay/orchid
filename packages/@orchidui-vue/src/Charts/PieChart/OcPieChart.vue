@@ -87,7 +87,9 @@ const options = computed(() => ({
                 </span>
                 ${
                   params.name
-                    ? '<img src="' + legendImages[params.name] + '" />'
+                    ? '<img src="' +
+                      legendImages[params.name] +
+                      '" class="max-h-7" />'
                     : "Other"
                 }
             </div>
