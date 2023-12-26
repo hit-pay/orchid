@@ -104,7 +104,7 @@ onMounted(() => updateSlider());
 </script>
 
 <template>
-  <div class="flex flex-wrap">
+  <div class="w-full flex flex-wrap">
     <label
       v-if="label"
       class="w-full text-sm flex items-center gap-x-3 font-medium text-oc-text-400 mb-2"
