@@ -25,9 +25,8 @@ const hasSlot = (name) => !!slots[name];
 
 <template>
   <div
-    class="border border-gray-200 rounded p-5 flex flex-col grow transition"
+    class="border border-gray-200 rounded p-5 flex flex-col grow transition relative overflow-hidden"
     :class="{
-      'animate-pulse opacity-90': loading,
       'border-transparent': transparent,
       'hover:shadow': hover,
       shadow: shadow,
@@ -62,5 +61,17 @@ const hasSlot = (name) => !!slots[name];
     </div>
 
     <slot name="footer"></slot>
+
+    <div
+      class="absolute top-0 right-0 left-0 bottom-0 bg-white flex items-center justify-center"
+      v-if="loading"
+    >
+      <oc-icon
+        name="loading-2"
+        width="32"
+        height="32"
+        class="text-oc-text-400 motion-safe:animate-spin"
+      ></oc-icon>
+    </div>
   </div>
 </template>
