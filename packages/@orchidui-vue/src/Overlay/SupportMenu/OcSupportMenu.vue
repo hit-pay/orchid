@@ -109,9 +109,8 @@ onMounted(() => {
             <DropdownItem
               v-for="(item, i) in group.items"
               :key="i"
-              :text="item.text"
               class="text-sm"
-              :icon="item.icon"
+              v-bind="item"
             />
           </template>
 
@@ -120,10 +119,8 @@ onMounted(() => {
           <DropdownItem
             v-for="(item, i) in bottomMenu"
             :key="i"
-            :text="item.text"
             class="text-sm"
-            :icon="item.icon"
-            :pointed="item.pointed"
+            v-bind="item"
           />
         </div>
       </template>
