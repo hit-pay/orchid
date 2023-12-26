@@ -10,7 +10,7 @@ export const infoCardHeaderSlot = {
     title: "Card Title",
     titleIcon: "information",
     titleIconTooltip: "Hello I am tooltip!",
-    loading: false,
+    isLoading: false,
     transparent: false,
     hover: false,
     shadow: false,
@@ -28,7 +28,7 @@ export const infoCardHeaderSlot = {
           <InfoCard :title="args.title"
                 :title-icon="args.titleIcon"
                 :title-icon-tooltip="args.titleIconTooltip"
-                :loading="args.loading"
+                :is-loading="args.isLoading"
                 :transparent="args.transparent"
                 :hover="args.hover"
                 :shadow="args.shadow"
