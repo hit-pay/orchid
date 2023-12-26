@@ -36,10 +36,9 @@ const variantClasses = computed(() => ({
 
       <span>{{ text }}</span>
 
-      <div
-        v-if="pointed"
-        class="w-[6px] aspect-square rounded-full bg-oc-error"
-      />
+      <slot v-if="pointed" name="badge">
+        <div class="w-[6px] aspect-square rounded-full bg-oc-error" />
+      </slot>
     </div>
 
     <div v-if="subText" class="p-3 text-sm text-oc-text-300">
