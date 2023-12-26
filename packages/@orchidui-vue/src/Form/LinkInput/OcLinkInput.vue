@@ -45,12 +45,12 @@ const isDropdownOpened = ref(false);
 const selectedLinkType = ref(props.type ?? props.links?.[0]?.value);
 const linkTitle = ref(props.title ?? "");
 const selectedLinkTypeProps = computed(() =>
-  props.links.find((link) => link.value === selectedLinkType.value),
+  props.links.find((link) => link.value === selectedLinkType.value)
 );
 const localValue = ref(
   props.modelValue
     ? props.modelValue.replace(selectedLinkTypeProps.value.preFill, "")
-    : "",
+    : ""
 );
 
 const updateLinkType = (value) => {
@@ -60,6 +60,7 @@ const updateLinkType = (value) => {
 };
 
 const update = (value) => {
+  localValue.value = value;
   emit("update:modelValue", selectedLinkTypeProps.value.preFill + value);
   if (!props.isEdit && selectedLinkType.value !== "link") {
     emit("update:title", value);
