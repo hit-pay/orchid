@@ -22,7 +22,7 @@ const hasSlot = (name) => !!slots[name];
 
 <template>
   <div
-    class="border border-gray-200 rounded p-5 flex flex-col grow transition relative overflow-hidden"
+    class="border border-gray-200 rounded p-5 flex flex-col grow transition relative"
     :class="{
       'border-transparent': transparent,
       'hover:shadow': hover,
@@ -60,7 +60,7 @@ const hasSlot = (name) => !!slots[name];
     <slot name="footer"></slot>
 
     <div
-      class="absolute top-0 right-0 left-0 bottom-0 bg-white flex items-center justify-center"
+      class="absolute top-2 right-2 left-2 bottom-2 bg-white flex items-center justify-center"
       v-if="isLoading"
     >
       <Icon
