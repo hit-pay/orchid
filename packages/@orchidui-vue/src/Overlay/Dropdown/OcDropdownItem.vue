@@ -36,9 +36,9 @@ const variantClasses = computed(() => ({
 
       <span>{{ text }}</span>
 
-      <div v-if="pointed" class="Canny_BadgeContainer">
-        <div class="Canny_Badge" />
-      </div>
+      <slot v-if="pointed" name="badge">
+        <div class="w-[6px] aspect-square rounded-full bg-oc-error" />
+      </slot>
     </div>
 
     <div v-if="subText" class="p-3 text-sm text-oc-text-300">
@@ -46,11 +46,3 @@ const variantClasses = computed(() => ({
     </div>
   </div>
 </template>
-<style scoped lang="scss">
-.Canny_BadgeContainer {
-  @apply static flex items-center justify-center;
-  .Canny_Badge {
-    @apply p-[3px] aspect-square static rounded-full bg-[var(--oc-error-500)];
-  }
-}
-</style>
