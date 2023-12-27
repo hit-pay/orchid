@@ -61,7 +61,7 @@ const HEADER_FORM = [
     type: "Menus",
     hasSubmenu: true,
     submenuLevel: "2",
-    noMenuIcon: "/images/no-menu-header.png",
+    noMenuIcon: ASSETS_URL+"no-menu-header.png",
   },
   {
     type: "SectionItem",

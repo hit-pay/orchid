@@ -69,12 +69,12 @@ const PRODUCT_FORM = [
     props: {
       options: [
         {
-          preview: "/images/request-form.svg",
+          preview: ASSETS_URL+"product-type-carousel.png",
           value: "carousel",
           label: "Carousel",
         },
         {
-          preview: "/images/request-form.svg",
+          preview: ASSETS_URL+"product-type-grid.png",
           value: "grid",
           label: "Grid",
         },
