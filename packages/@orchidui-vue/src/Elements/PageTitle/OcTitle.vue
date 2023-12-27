@@ -15,7 +15,7 @@ defineProps({
     <div class="md:text-xl font-medium flex items-center gap-x-3">
       <slot name="title" :title="title">
         <span
-          class="whitespace-nowrap text-ellipsis overflow-hidden md:text-base text-xl"
+          class="whitespace-nowrap text-ellipsis overflow-hidden md:text-base lg:text-xl"
         >
           {{ title }}
         </span>
