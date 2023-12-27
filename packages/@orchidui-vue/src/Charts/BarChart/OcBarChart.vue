@@ -4,7 +4,7 @@
 
 <script setup lang="ts">
 import * as echarts from "echarts";
-import { computed, onMounted, onUnmounted, ref, watch } from "vue";
+import { computed, nextTick, onMounted, onUnmounted, ref, watch } from "vue";
 
 const props = defineProps({
   variant: {
@@ -127,18 +127,28 @@ const toggleLegendName = (name) => {
   });
 };
 
+const renderChart = () => {
+  myChart.value = echarts.init(barChart.value);
+  myChart.value.setOption(options.value);
+};
+
 defineExpose({
   toggleLegendName,
 });
 
 onMounted(() => {
-  myChart.value = echarts.init(barChart.value);
-  myChart.value.setOption(options.value);
+  renderChart();
+
+  window.onresize = () => {
+    myChart.value.dispose();
+    renderChart();
+  };
 });
 onUnmounted(() => {
   if (myChart.value) {
     myChart.value.dispose();
   }
+  window.onresize = null;
 });
 watch(
   () => options.value,
