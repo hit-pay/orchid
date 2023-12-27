@@ -6,6 +6,7 @@ import { settings } from "./SettingsConfig.sample";
 const Config = {
   sidebar: sidebar, // sidebar menus
   settings: settings, // form
+  presetCustomPreview: ASSETS_URL + "preset-1.png",
   preset: [
     {
       value: "default",

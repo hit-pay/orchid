@@ -26,6 +26,7 @@ const sidebar = [
     type: "styles",
     name: "styles",
     label: "Styles",
+    children: []
   },
   // 3 -> 4 level level
   {
@@ -33,21 +34,6 @@ const sidebar = [
     type: "list",
     name: "link_in_bio",
     label: "Link In Bio",
-    children: [
-      {
-        name: "icon_links",
-        label: "Icon Links",
-      },
-      {
-        name: "button_links",
-        label: "Button Links",
-      },
-      {
-        label: "Copy URL",
-        icon: "link",
-        onClick: () => console.log("do somthing"),
-      },
-    ],
   },
   // 1 level
   {

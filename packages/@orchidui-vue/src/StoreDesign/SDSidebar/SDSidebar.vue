@@ -20,10 +20,11 @@ const props = defineProps({
   preset: {
     type: Array,
   },
+  presetCustomPreview: String,
   options: Object,
 });
 
-const requiredSection = ["Header", "FooterContent"];
+const requiredSection = ["Header", "FooterContent", "IconLinks", "ButtonLinks"];
 
 const emit = defineEmits({
   "update:values": [],
@@ -35,7 +36,14 @@ const emit = defineEmits({
 });
 
 const presetOptions = computed(() => {
-  return props.preset;
+  return [
+    ...props.preset,
+    {
+      value: "custom",
+      label: "Custom",
+      preview: props.presetCustomPreview,
+    },
+  ];
 });
 const presetValue = computed(() => {
   return props.values.sections.find((s) => s.key === "Styles")["preset"];
@@ -47,7 +55,7 @@ const updatePreset = (to) => {
     let newSectionsList = [];
     props.values.sections.forEach((item) => {
       const defaultSettings = selectedPreset.sections.find(
-        (s) => s.section === item.section,
+        (s) => s.section === item.section
       );
       if (defaultSettings) {
         let sectionItem = {
@@ -69,6 +77,12 @@ const updatePreset = (to) => {
     };
 
     emit("update:values", newStoreDesignData);
+  } else {
+    emit("update:active", {
+      submenu: "styles",
+      section: "Styles",
+      id: "Styles",
+    });
   }
 };
 const sectionList = ref(null);
@@ -81,7 +95,7 @@ const sidebarActive = computed(() => {
 });
 
 const availableSections = computed(() =>
-  props.settings.filter((s) => s.group === "sections"),
+  props.settings.filter((s) => s.group === "sections")
 );
 
 const renderForm = ref(null);
@@ -101,7 +115,7 @@ watch(
       props.values.sections.forEach((item) => {
         if (item.group === "sections") {
           const sectionItem = props.settings.find(
-            (s) => s.section === item.section,
+            (s) => s.section === item.section
           );
           sectionListCustom.push({
             key: item.key,
@@ -118,7 +132,7 @@ watch(
     }
 
     sectionActive.value = sectionList.value.find(
-      (s) => s.key === props.active.id,
+      (s) => s.key === props.active.id
     );
 
     setTimeout(() => {
@@ -128,21 +142,21 @@ watch(
   {
     deep: true,
     immediate: true,
-  },
+  }
 );
 
 const sectionActiveValues = computed(() => {
   let sectionValues = props.values.sections.find(
-    (s) => s.key === props.active.id,
+    (s) => s.key === props.active.id
   );
   return sectionValues;
 });
 
-const changeSidebarMenu = (value) => {
+const changeSidebarMenu = (value, hasChildren) => {
   emit("update:active", {
     ...sidebarActive.value,
     sidebarMenu: value,
-    submenu: "",
+    submenu: hasChildren ? "" : value,
     section: "",
     id: "",
   });
@@ -164,10 +178,14 @@ const sidebarMenuLabel = computed(() => {
   return sidebarMenuActive.value?.label ?? "";
 });
 const submenuLabel = computed(() => {
-  const submenu = sidebarMenuActive.value?.children.find(
-    (s) => s.name === sidebarActive.value.submenu,
-  );
-  return submenu?.label;
+  if (sidebarMenuActive.value.children) {
+    const submenu = sidebarMenuActive.value.children.find(
+      (s) => s.name === sidebarActive.value.submenu
+    );
+    return submenu?.label;
+  } else {
+    return sidebarMenuActive.value.label;
+  }
 });
 
 const changeSection = (to = "", key = "") => {
@@ -258,7 +276,7 @@ const addSection = (newSection, customize = false) => {
           @click="
             sidebarMenu.onClick
               ? sidebarMenu.onClick()
-              : changeSidebarMenu(sidebarMenu.name)
+              : changeSidebarMenu(sidebarMenu.name, sidebarMenu.children)
           "
         >
           <Icon

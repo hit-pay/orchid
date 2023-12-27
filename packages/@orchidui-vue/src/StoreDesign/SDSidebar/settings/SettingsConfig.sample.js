@@ -6,6 +6,7 @@ import {
 import { PRODUCT_FORM } from "./sections/Sections.sample";
 import { FOOTER_CONTENT_FORM } from "./sections/Footers.sample";
 import { STYLES_FORM } from "./sections/Styles.sample";
+import { BUTTON_LINK_FORM, ICON_LINK_FORM } from "./sections/LinkInBio.sample";
 const settings = [
   {
     group: "styles",
@@ -70,6 +71,22 @@ const settings = [
     section: "PoweredBy",
     title: "Powered By",
     icon: "powered",
+    isDisable: true,
+  },
+  {
+    group: "link_in_bio",
+    key: "IconLinks",
+    section: "IconLinks",
+    title: "Icon Links",
+    form: ICON_LINK_FORM,
+    isDisable: true,
+  },
+  {
+    group: "link_in_bio",
+    key: "ButtonLinks",
+    section: "ButtonLinks",
+    title: "Button Links",
+    form: BUTTON_LINK_FORM,
     isDisable: true,
   },
 ];

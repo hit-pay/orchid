@@ -20,9 +20,9 @@ export const Default = {
       const storeDesignData = ref(StoreDesign);
       const sidebarActive = ref({
         sidebarMenu: "home",
-        submenu: "styles",
-        section: "Styles",
-        id: "Styles",
+        submenu: "",
+        section: "",
+        id: "",
       });
 
       const content = ref("data");
@@ -109,6 +109,7 @@ export const Default = {
                     v-model:values="storeDesignData"
                     :sidebar="sidebarConfig.sidebar"
                     :preset="sidebarConfig.preset"
+                    :preset-custom-preview="sidebarConfig.presetCustomPreview"
                     :settings="sidebarConfig.settings"
                     :options="options"
                     v-model:active="sidebarActive"

@@ -45,9 +45,9 @@ const StoreDesign = {
     footer_link_2_menus: [],
     footer_social_title: "",
     footer_social_menus: [],
-    link_in_bio_enabled: false,
-    link_in_bio_icon_links: [],
-    link_in_bio_button_links: [],
+    bio_enabled: false,
+    bio_icon_links: [],
+    bio_button_links: [],
     // section global
     product_ratio: '1,1'
   },
@@ -139,6 +139,18 @@ const StoreDesign = {
       is_limit_products: false,
       limit_priducts: 6,
       active: true,
+    },
+    {
+      group: "link_in_bio",
+      key: "IconLinks",
+      section: "IconLinks",
+      title: "Icon Links",
+    },
+    {
+      group: "link_in_bio",
+      key: "ButtonLinks",
+      section: "ButtonLinks",
+      title: "Button Links",
     },
   ],
 };
