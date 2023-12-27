@@ -42,6 +42,14 @@ const presetOptions = computed(() => {
       value: "custom",
       label: "Custom",
       preview: props.presetCustomPreview,
+      sections: [
+        {
+          section: "Styles",
+          changes: {
+            preset: "custom",
+          },
+        },
+      ],
     },
   ];
 });
@@ -51,33 +59,34 @@ const presetValue = computed(() => {
 
 const updatePreset = (to) => {
   const selectedPreset = presetOptions.value.find((p) => p.value === to);
-  if (to !== "custom") {
-    let newSectionsList = [];
-    props.values.sections.forEach((item) => {
-      const defaultSettings = selectedPreset.sections.find(
-        (s) => s.section === item.section
-      );
-      if (defaultSettings) {
-        let sectionItem = {
-          ...item,
-        };
-        Object.keys(defaultSettings.changes).forEach((key) => {
-          const val = defaultSettings.changes[key];
-          sectionItem[key] = val;
-        });
-        newSectionsList.push(sectionItem);
-      } else {
-        newSectionsList.push(item);
-      }
-    });
 
-    const newStoreDesignData = {
-      general: generalData.value,
-      sections: [...newSectionsList],
-    };
+  let newSectionsList = [];
+  props.values.sections.forEach((item) => {
+    const defaultSettings = selectedPreset.sections.find(
+      (s) => s.section === item.section
+    );
+    if (defaultSettings) {
+      let sectionItem = {
+        ...item,
+      };
+      Object.keys(defaultSettings.changes).forEach((key) => {
+        const val = defaultSettings.changes[key];
+        sectionItem[key] = val;
+      });
+      newSectionsList.push(sectionItem);
+    } else {
+      newSectionsList.push(item);
+    }
+  });
 
-    emit("update:values", newStoreDesignData);
-  } else {
+  const newStoreDesignData = {
+    general: generalData.value,
+    sections: [...newSectionsList],
+  };
+
+  emit("update:values", newStoreDesignData);
+
+  if (to === "custom") {
     emit("update:active", {
       submenu: "styles",
       section: "Styles",
