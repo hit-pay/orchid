@@ -121,56 +121,26 @@ const defaultDateRange = () => {
     :distance="10"
     class="w-full"
   >
-    <div class="flex flex-col gap-y-2 w-full">
-      <div v-if="!isSplitInput || type === 'default'" class="flex w-full">
-        <Input
-          :model-value="
-            type === 'range'
-              ? modelValue && modelValue[0]
-                ? `${dayjs(formattedDate[0], dateFormat).format(
-                    'DD/MM/YYYY'
-                  )} - ${dayjs(formattedDate[1], dateFormat).format(
-                    'DD/MM/YYYY'
-                  )}`
-                : ''
-              : modelValue
-                ? dayjs(formattedDate, dateFormat).format('DD/MM/YYYY')
-                : ''
-          "
-          icon="calendar"
-          :label="label"
-          :hint="hint"
-          :placeholder="placeholder"
-          :disabled="disabled"
-          is-readonly
-          :has-error="errorMessage.length > 0"
-          :is-required="isRequired"
-        />
-      </div>
-      <div v-else class="flex flex-wrap">
-        <div class="w-full flex gap-x-4">
+    <slot>
+      <div class="flex flex-col gap-y-2 w-full">
+        <div v-if="!isSplitInput || type === 'default'" class="flex w-full">
           <Input
-            :label="`${label} ${minLabel}`"
             :model-value="
-              formattedDate[0]
-                ? dayjs(formattedDate[0], dateFormat).format('DD/MM/YYYY')
-                : ''
+              type === 'range'
+                ? modelValue && modelValue[0]
+                  ? `${dayjs(formattedDate[0], dateFormat).format(
+                      'DD/MM/YYYY',
+                    )} - ${dayjs(formattedDate[1], dateFormat).format(
+                      'DD/MM/YYYY',
+                    )}`
+                  : ''
+                : modelValue
+                  ? dayjs(formattedDate, dateFormat).format('DD/MM/YYYY')
+                  : ''
             "
             icon="calendar"
-            :placeholder="placeholder"
-            :disabled="disabled"
-            is-readonly
-            :has-error="errorMessage.length > 0"
-            :is-required="isRequired"
-          />
-          <Input
-            :label="`${label} ${maxLabel}`"
-            :model-value="
-              formattedDate[1]
-                ? dayjs(formattedDate[1], dateFormat).format('DD/MM/YYYY')
-                : ''
-            "
-            icon="calendar"
+            :label="label"
+            :hint="hint"
             :placeholder="placeholder"
             :disabled="disabled"
             is-readonly
@@ -178,11 +148,46 @@ const defaultDateRange = () => {
             :is-required="isRequired"
           />
         </div>
+        <div v-else class="flex flex-wrap">
+          <div class="w-full flex gap-x-4">
+            <Input
+              :label="`${label} ${minLabel}`"
+              :model-value="
+                formattedDate[0]
+                  ? dayjs(formattedDate[0], dateFormat).format('DD/MM/YYYY')
+                  : ''
+              "
+              icon="calendar"
+              :placeholder="placeholder"
+              :disabled="disabled"
+              is-readonly
+              :has-error="errorMessage.length > 0"
+              :is-required="isRequired"
+            />
+            <Input
+              :label="`${label} ${maxLabel}`"
+              :model-value="
+                formattedDate[1]
+                  ? dayjs(formattedDate[1], dateFormat).format('DD/MM/YYYY')
+                  : ''
+              "
+              icon="calendar"
+              :placeholder="placeholder"
+              :disabled="disabled"
+              is-readonly
+              :has-error="errorMessage.length > 0"
+              :is-required="isRequired"
+            />
+          </div>
+        </div>
+        <div
+          v-if="errorMessage"
+          class="text-sm text-oc-error flex items-center"
+        >
+          {{ errorMessage }}
+        </div>
       </div>
-      <div v-if="errorMessage" class="text-sm text-oc-error flex items-center">
-        {{ errorMessage }}
-      </div>
-    </div>
+    </slot>
 
     <template #menu>
       <Calendar
