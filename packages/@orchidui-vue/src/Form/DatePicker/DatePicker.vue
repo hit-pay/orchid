@@ -45,7 +45,10 @@ const props = defineProps({
     type: String,
     default: "",
   },
-  placeholder: String,
+  placeholder: {
+    type: String,
+    default: "DD/MM/YYYY",
+  },
   isSplitInput: {
     type: Boolean,
     default: true,
@@ -124,10 +127,11 @@ const defaultDateRange = () => {
           :model-value="
             type === 'range'
               ? modelValue && modelValue[0]
-                ? [
-                    dayjs(formattedDate[0], dateFormat).format('DD/MM/YYYY'),
-                    dayjs(formattedDate[1], dateFormat).format('DD/MM/YYYY'),
-                  ]
+                ? `${dayjs(formattedDate[0], dateFormat).format(
+                    'DD/MM/YYYY'
+                  )} - ${dayjs(formattedDate[1], dateFormat).format(
+                    'DD/MM/YYYY'
+                  )}`
                 : ''
               : modelValue
                 ? dayjs(formattedDate, dateFormat).format('DD/MM/YYYY')
@@ -138,7 +142,7 @@ const defaultDateRange = () => {
           :hint="hint"
           :placeholder="placeholder"
           :disabled="disabled"
-          readonly
+          is-readonly
           :has-error="errorMessage.length > 0"
           :is-required="isRequired"
         />
@@ -155,7 +159,7 @@ const defaultDateRange = () => {
             icon="calendar"
             :placeholder="placeholder"
             :disabled="disabled"
-            readonly
+            is-readonly
             :has-error="errorMessage.length > 0"
             :is-required="isRequired"
           />
@@ -169,7 +173,7 @@ const defaultDateRange = () => {
             icon="calendar"
             :placeholder="placeholder"
             :disabled="disabled"
-            readonly
+            is-readonly
             :has-error="errorMessage.length > 0"
             :is-required="isRequired"
           />
