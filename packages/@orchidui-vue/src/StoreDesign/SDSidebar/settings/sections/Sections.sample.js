@@ -1,30 +1,7 @@
 const ASSETS_URL = "/templates/default/images/";
 
 const PRODUCT_FORM = [
-  // {
-  //   type: "SectionItem",
-  //   props: {
-  //     title: "Select Variant",
-  //   },
-  // },
-  // {
-  //   name: "variant",
-  //   type: "SelectOptions",
-  //   props: {
-  //     options: [
-  //       {
-  //         preview: "/images/request-form.svg",
-  //         value: "carousel",
-  //         label: "Carousel",
-  //       },
-  //       {
-  //         preview: "/images/request-form.svg",
-  //         value: "grid",
-  //         label: "Grid",
-  //       },
-  //     ],
-  //   },
-  // },
+
   {
     type: "SectionItem",
     props: {
@@ -45,14 +22,38 @@ const PRODUCT_FORM = [
           value: "feature",
           label: "Feature Product",
         },
-        // {
-        //   value: "category",
-        //   label: "Product Category",
-        // },
+        {
+          value: "category",
+          label: "Product Category",
+        },
         // {
         //   value: "pick_products",
         //   label: "Pick Products",
         // },
+      ],
+    },
+  },
+  {
+    type: "SectionItem",
+    props: {
+      title: "Type",
+    },
+  },
+  {
+    name: "variant",
+    type: "SelectOptions",
+    props: {
+      options: [
+        {
+          preview: "/images/request-form.svg",
+          value: "carousel",
+          label: "Carousel",
+        },
+        {
+          preview: "/images/request-form.svg",
+          value: "grid",
+          label: "Grid",
+        },
       ],
     },
   },
@@ -85,7 +86,6 @@ const PRODUCT_FORM = [
       ],
     },
   },
-
   {
     type: "SectionItem",
     props: {
@@ -127,6 +127,18 @@ const PRODUCT_FORM = [
       isToggle: true,
       title: "Show category filter",
     },
+  },
+  {
+    name:"is_limit_products",
+    type: "SectionItem",
+    props: {
+      isToggle: true,
+      title: "How many products do you want to show?",
+    },
+  },
+  {
+    name: "limit_products",
+    type: "Input",
   },
   {
     type: "SectionItem",

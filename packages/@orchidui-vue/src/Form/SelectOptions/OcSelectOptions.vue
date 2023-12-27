@@ -72,7 +72,7 @@ const isGridVariant = computed(() => {
       <div
         v-for="opt in options"
         :key="opt.value"
-        class="cursor-pointer group"
+        class="cursor-pointer group items-start"
         :class="{
           'flex border border-oc-gray-200 p-3 rounded hover:shadow':
             !isGridVariant,
@@ -92,7 +92,7 @@ const isGridVariant = computed(() => {
               'border border-oc-gray-200':
                 (isGridVariant && opt.value !== modelValue) || !isGridVariant,
               'w-full': isGridVariant,
-              'w-1/8': !isGridVariant,
+              'w-[50px]': !isGridVariant,
             }"
             :src="opt.preview"
           />
