@@ -71,7 +71,7 @@ const currentPage = ref(props.filter.page);
 const perPage = ref(
   filterOptions.value?.per_page?.key
     ? props.filter[filterOptions.value?.per_page?.key]
-    : props.filter.per_page,
+    : props.filter.per_page
 );
 const defaultQuery =
   props.filter[filterOptions.value?.search?.key]?.trim() ?? "";
@@ -84,8 +84,8 @@ const customPerPageOptions = computed(() =>
       ({
         label: `${perPage}`,
         value: perPage,
-      }) ?? null,
-  ),
+      }) ?? null
+  )
 );
 
 const perPageOptions = computed(() => {
@@ -196,7 +196,7 @@ const changePage = () => {
 const applyFilter = (
   filterForm = null,
   isChangePage = false,
-  changeCursor = "",
+  changeCursor = ""
 ) => {
   if (paginationOption.value && !isChangePage) {
     currentPage.value = 1;
@@ -282,26 +282,37 @@ const displayFilterData = computed(() => {
               .map(
                 (selectedValue) =>
                   option.props.options.find(
-                    ({ value }) => value === selectedValue,
-                  ).label,
+                    ({ value }) => value === selectedValue
+                  ).label
               )
               .join(", ");
           }
 
           if (option.type === "DatePicker") {
-            if (option?.props?.type === "range") {
+            if (
+              option?.props?.type === "range" &&
+              option.name &&
+              option.name[1]
+            ) {
               optionLabel =
-                dayjs(optionLabel[0]).format("MMM DD, YYYY") +
+                dayjs(filterData.value[option.name[0].key]).format(
+                  "MMM DD, YYYY"
+                ) +
                 " - " +
-                dayjs(optionLabel[1]).format("MMM DD, YYYY");
-            } else optionLabel = dayjs(optionLabel).format("MMM DD, YYYY");
+                dayjs(filterData.value[option.name[1].key]).format(
+                  "MMM DD, YYYY"
+                );
+            } else
+              optionLabel = dayjs(filterData.value[option.name]).format(
+                "MMM DD, YYYY"
+              );
           }
 
           let label = `${option?.props.label} : ${optionLabel}`;
           if (typeof option.name === "object") {
             const exist = display.find((f) => f.name === isMultiNames[0]);
             if (exist) {
-              label = ` - ${optionLabel}`;
+              label = ``;
             }
           }
 
