@@ -151,7 +151,9 @@ const renderChart = () => {
 };
 
 const resizeChart = () => {
-  myChart.value.dispose();
+  if (myChart.value) {
+    myChart.value.dispose();
+  }
   renderChart();
 };
 
