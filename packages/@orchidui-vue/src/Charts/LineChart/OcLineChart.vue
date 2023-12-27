@@ -4,7 +4,8 @@
 
 <script setup lang="ts">
 import * as echarts from "echarts";
-import { computed, onMounted, ref, watch } from "vue";
+import { computed, onMounted, ref } from "vue";
+import { useChart } from "@/orchidui/composables/useChart.js";
 
 const props = defineProps({
   showTooltip: Boolean,
@@ -135,33 +136,14 @@ const options = computed(() => ({
     },
   ],
 }));
-const myChart = ref();
 const lineChart = ref();
 
-const toggleLegendName = (name) => {
-  myChart.value.dispatchAction({
-    type: "legendToggleSelect",
-    name,
-  });
-};
-
-defineExpose({
-  toggleLegendName,
-});
+const { chart } = useChart(lineChart, options);
 
 onMounted(() => {
-  myChart.value = echarts.init(lineChart.value);
-  myChart.value.setOption(options.value);
-  myChart.value.getZr().on("globalout", () => {
+  chart.value.getZr().on("globalout", () => {
     markLineData.value.index = 0;
     markLineData.value.value = 0;
   });
 });
-watch(
-  () => options.value,
-  (val) => {
-    myChart.value.setOption(val);
-  },
-  { deep: true },
-);
 </script>

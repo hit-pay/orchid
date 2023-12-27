@@ -8,13 +8,13 @@
         {{ item }}
       </div>
     </div>
-    <div ref="barChart" class="h-[100%]" />
+    <div ref="barRaceChart" class="h-[100%]" />
   </div>
 </template>
 
 <script setup lang="ts">
-import * as echarts from "echarts";
-import { computed, onMounted, ref, watch, onUnmounted } from "vue";
+import { computed, ref } from "vue";
+import { useChart } from "@/orchidui/composables/useChart.js";
 
 const props = defineProps({
   variant: {
@@ -139,34 +139,7 @@ const options = computed(() => ({
     },
   ],
 }));
-const myChart = ref();
-const barChart = ref();
+const barRaceChart = ref();
 
-const toggleLegendName = (name) => {
-  myChart.value.dispatchAction({
-    type: "legendToggleSelect",
-    name,
-  });
-};
-
-defineExpose({
-  toggleLegendName,
-});
-
-onMounted(() => {
-  myChart.value = echarts.init(barChart.value);
-  myChart.value.setOption(options.value);
-});
-onUnmounted(() => {
-  if (myChart.value) {
-    myChart.value.dispose();
-  }
-});
-watch(
-  () => options.value,
-  (val) => {
-    myChart.value.setOption(val);
-  },
-  { deep: true },
-);
+useChart(barRaceChart, options);
 </script>
