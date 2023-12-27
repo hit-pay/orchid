@@ -132,6 +132,11 @@ const renderChart = () => {
   myChart.value.setOption(options.value);
 };
 
+const resizeChart = () => {
+  myChart.value.dispose();
+  renderChart();
+};
+
 defineExpose({
   toggleLegendName,
 });
@@ -139,16 +144,14 @@ defineExpose({
 onMounted(() => {
   renderChart();
 
-  window.onresize = () => {
-    myChart.value.dispose();
-    renderChart();
-  };
+  window.addEventListener("resize", resizeChart);
 });
 onUnmounted(() => {
   if (myChart.value) {
     myChart.value.dispose();
   }
-  window.onresize = null;
+
+  window.removeEventListener("resize", resizeChart);
 });
 watch(
   () => options.value,

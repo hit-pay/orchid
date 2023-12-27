@@ -44,7 +44,7 @@
 <script setup lang="ts">
 import * as echarts from "echarts";
 import { Tooltip } from "@/orchidui";
-import { computed, onMounted, ref, watch } from "vue";
+import { computed, onMounted, onUnmounted, ref, watch } from "vue";
 
 const props = defineProps({
   showTooltip: Boolean,
@@ -138,19 +138,36 @@ const toggleLegendName = (name) => {
   });
 };
 
+const renderChart = () => {
+  myChart.value = echarts.init(pieChart.value);
+  myChart.value.setOption(options.value);
+};
+
+const resizeChart = () => {
+  myChart.value.dispose();
+  renderChart();
+};
+
 defineExpose({
   toggleLegendName,
 });
 
 onMounted(() => {
-  myChart.value = echarts.init(pieChart.value);
-  myChart.value.setOption(options.value);
+  renderChart();
   myChart.value.on(
     "legendselectchanged",
     (params) => (legendSelected.value = params.selected),
   );
-});
 
+  window.addEventListener("resize", resizeChart);
+});
+onUnmounted(() => {
+  if (myChart.value) {
+    myChart.value.dispose();
+  }
+
+  window.removeEventListener("resize", resizeChart);
+});
 watch(
   () => options.value,
   (val) => {

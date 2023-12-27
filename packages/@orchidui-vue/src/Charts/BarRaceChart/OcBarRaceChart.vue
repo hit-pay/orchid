@@ -149,18 +149,31 @@ const toggleLegendName = (name) => {
   });
 };
 
+const renderChart = () => {
+  myChart.value = echarts.init(barChart.value);
+  myChart.value.setOption(options.value);
+};
+
+const resizeChart = () => {
+  myChart.value.dispose();
+  renderChart();
+};
+
 defineExpose({
   toggleLegendName,
 });
 
 onMounted(() => {
-  myChart.value = echarts.init(barChart.value);
-  myChart.value.setOption(options.value);
+  renderChart();
+
+  window.addEventListener("resize", resizeChart);
 });
 onUnmounted(() => {
   if (myChart.value) {
     myChart.value.dispose();
   }
+
+  window.removeEventListener("resize", resizeChart);
 });
 watch(
   () => options.value,
