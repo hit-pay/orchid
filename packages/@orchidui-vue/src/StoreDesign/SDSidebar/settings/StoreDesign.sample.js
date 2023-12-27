@@ -145,12 +145,14 @@ const StoreDesign = {
       key: "IconLinks",
       section: "IconLinks",
       title: "Icon Links",
+      active: true,
     },
     {
       group: "link_in_bio",
       key: "ButtonLinks",
       section: "ButtonLinks",
       title: "Button Links",
+      active: true,
     },
   ],
 };

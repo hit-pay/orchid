@@ -6,7 +6,7 @@ import { settings } from "./SettingsConfig.sample";
 const Config = {
   sidebar: sidebar, // sidebar menus
   settings: settings, // form
-  presetCustomPreview: ASSETS_URL + "preset-1.png",
+  presetCustomPreview: ASSETS_URL + "preset-custom.png",
   preset: [
     {
       value: "default",
@@ -37,14 +37,14 @@ const Config = {
       ],
     },
     {
-      value: "a",
-      label: "Default",
-      preview: ASSETS_URL + "preset-1.png",
+      value: "wood",
+      label: "Wood",
+      preview: ASSETS_URL + "preset-2.png",
       sections: [
         {
           section: "Styles",
           changes: {
-            preset: "a",
+            preset: "wood",
             background_color: "#FFFFFF",
             text_color: "#03102F",
             primary_color: "#002771",
@@ -65,14 +65,14 @@ const Config = {
       ],
     },
     {
-      value: "b",
-      label: "Default",
-      preview: ASSETS_URL + "preset-1.png",
+      value: "flower",
+      label: "Flower",
+      preview: ASSETS_URL + "preset-3.png",
       sections: [
         {
           section: "Styles",
           changes: {
-            preset: "b",
+            preset: "flower",
             background_color: "#FFFFFF",
             text_color: "#03102F",
             primary_color: "#002771",

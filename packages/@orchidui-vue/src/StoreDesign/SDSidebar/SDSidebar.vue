@@ -24,6 +24,17 @@ const props = defineProps({
   options: Object,
 });
 
+const getSidebarMenu = (section) => {
+  // Sidebar not stored to DB
+  if (section === "Styles") {
+    return "styles";
+  } else if (["IconLinks", "ButtonLinks"].includes(section)) {
+    return "link_in_bio";
+  } else {
+    return "home";
+  }
+};
+
 const requiredSection = ["Header", "FooterContent", "IconLinks", "ButtonLinks"];
 
 const emit = defineEmits({
@@ -88,6 +99,7 @@ const updatePreset = (to) => {
 
   if (to === "custom") {
     emit("update:active", {
+      sidebarMenu: "styles",
       submenu: "styles",
       section: "Styles",
       id: "Styles",
@@ -163,7 +175,6 @@ const sectionActiveValues = computed(() => {
 
 const changeSidebarMenu = (value) => {
   emit("update:active", {
-    ...sidebarActive.value,
     sidebarMenu: value,
     submenu: "",
     section: "",
@@ -174,14 +185,14 @@ const changeSidebarMenu = (value) => {
 const changeSubmenu = (value) => {
   if (sidebarMenuActive.value.type === "sections") {
     emit("update:active", {
-      ...sidebarActive.value,
+      sidebarMenu: getSidebarMenu(value),
       submenu: sidebarMenuActive.value.name,
       section: value,
       id: value,
     });
   } else {
     emit("update:active", {
-      ...sidebarActive.value,
+      sidebarMenu: getSidebarMenu(value),
       submenu: value,
       section: "",
       id: "",

@@ -1,3 +1,4 @@
+const ASSETS_URL = "/templates/default/images/";
 import {
   TOP_BANNER_FORM,
   HEADER_FORM,
@@ -49,7 +50,7 @@ const settings = [
     section: "Products",
     title: "Products",
     icon: "tag",
-    preview: "/images/section.png",
+    preview: ASSETS_URL+"products-sections.png",
     form: PRODUCT_FORM,
     default: {
       product_form: "all_product",

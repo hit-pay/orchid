@@ -37,6 +37,7 @@ export const Default = {
           return "home";
         }
       };
+      
       const updateSidebarActive = (item) => {
         sidebarActive.value = {
           sidebarMenu: getSidebarMenu(item.section),
