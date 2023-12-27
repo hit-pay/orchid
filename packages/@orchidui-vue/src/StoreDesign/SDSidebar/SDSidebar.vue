@@ -152,23 +152,32 @@ const sectionActiveValues = computed(() => {
   return sectionValues;
 });
 
-const changeSidebarMenu = (value, hasChildren) => {
+const changeSidebarMenu = (value) => {
   emit("update:active", {
     ...sidebarActive.value,
     sidebarMenu: value,
-    submenu: hasChildren ? "" : value,
+    submenu: "",
     section: "",
     id: "",
   });
 };
 
 const changeSubmenu = (value) => {
-  emit("update:active", {
-    ...sidebarActive.value,
-    submenu: value,
-    section: "",
-    id: "",
-  });
+  if (sidebarMenuActive.value.type === "sections") {
+    emit("update:active", {
+      ...sidebarActive.value,
+      submenu: sidebarMenuActive.value.name,
+      section: value,
+      id: value,
+    });
+  } else {
+    emit("update:active", {
+      ...sidebarActive.value,
+      submenu: value,
+      section: "",
+      id: "",
+    });
+  }
 };
 
 const sidebarMenuActive = computed(() => {
@@ -194,7 +203,10 @@ const changeSection = (to = "", key = "") => {
     section: to,
     id: key,
   };
-  if (to === "" && sidebarActive.value.submenu === "styles") {
+  if (
+    to === "" &&
+    ["styles", "link_in_bio"].includes(sidebarActive.value.submenu)
+  ) {
     newActiveSidebar.submenu = "";
   }
   emit("update:active", newActiveSidebar);
@@ -276,7 +288,7 @@ const addSection = (newSection, customize = false) => {
           @click="
             sidebarMenu.onClick
               ? sidebarMenu.onClick()
-              : changeSidebarMenu(sidebarMenu.name, sidebarMenu.children)
+              : changeSidebarMenu(sidebarMenu.name)
           "
         >
           <Icon
@@ -318,7 +330,12 @@ const addSection = (newSection, customize = false) => {
           v-if="sidebarActive.sidebarMenu === sidebarMenu.name"
           class="w-full flex flex-col"
         >
-          <template v-if="sidebarMenu.type === 'list' && sidebarMenu.children">
+          <template
+            v-if="
+              ['list', 'sections'].includes(sidebarMenu.type) &&
+              sidebarMenu.children
+            "
+          >
             <div
               v-for="(children, childIndex) in sidebarMenu.children"
               :key="childIndex"
@@ -326,7 +343,7 @@ const addSection = (newSection, customize = false) => {
               @click="
                 children.onClick
                   ? children.onClick()
-                  : changeSubmenu(children.name)
+                  : changeSubmenu(children.name, children.section)
               "
             >
               <div class="ml-2">
@@ -442,7 +459,6 @@ const addSection = (newSection, customize = false) => {
           @delete:banner="$emit('delete:banner', $event)"
         >
         </RequestForm>
-        <span v-else> loading... </span>
       </div>
     </template>
     <template v-else-if="sidebarActive.section === 'add-new-section'">

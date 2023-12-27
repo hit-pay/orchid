@@ -31,7 +31,7 @@ export const Default = {
         // Sidebar not stored to user store design
         if (section === "Styles") {
           return "styles";
-        } else if (["IconLink", "ButtonLink"].includes(section)) {
+        } else if (["IconLinks", "ButtonLinks"].includes(section)) {
           return "link_in_bio";
         } else {
           return "home";
@@ -45,7 +45,7 @@ export const Default = {
           id: item.key,
         };
 
-        console.log("sidebar :", sidebarActive.value);
+        console.log("sidebar :", item.section);
       };
 
       const onUpdateSidebarActive = () => {
