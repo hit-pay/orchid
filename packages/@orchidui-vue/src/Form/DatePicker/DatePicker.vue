@@ -121,7 +121,7 @@ const defaultDateRange = () => {
     :distance="10"
     class="w-full"
   >
-    <slot>
+    <slot :value="modelValue" :date-format="dateFormat">
       <div class="flex flex-col gap-y-2 w-full">
         <div v-if="!isSplitInput || type === 'default'" class="flex w-full">
           <Input
@@ -129,9 +129,9 @@ const defaultDateRange = () => {
               type === 'range'
                 ? modelValue && modelValue[0]
                   ? `${dayjs(formattedDate[0], dateFormat).format(
-                      'DD/MM/YYYY',
+                      'DD/MM/YYYY'
                     )} - ${dayjs(formattedDate[1], dateFormat).format(
-                      'DD/MM/YYYY',
+                      'DD/MM/YYYY'
                     )}`
                   : ''
                 : modelValue
