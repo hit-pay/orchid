@@ -48,6 +48,8 @@ const StoreDesign = {
     link_in_bio_enabled: false,
     link_in_bio_icon_links: [],
     link_in_bio_button_links: [],
+    // section global
+    product_ratio: '1,1'
   },
   sections: [
     {
@@ -117,6 +119,8 @@ const StoreDesign = {
       key: "product_list_1",
       section: "Products",
       title: "Feature Product",
+      product_from: "feature",
+      product_column: '4,3,2',
       active: true,
     },
     {
@@ -124,6 +128,8 @@ const StoreDesign = {
       key: "product_list_2",
       section: "Products",
       title: "All Products",
+      product_from: "all",
+      product_column: '4,3,2',
       active: true,
     },
   ],

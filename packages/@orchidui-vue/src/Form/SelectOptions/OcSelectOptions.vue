@@ -59,7 +59,7 @@ const isGridVariant = computed(() => {
     :tooltip-options="tooltipOptions"
   >
     <div
-      class="w-full grid gap-5"
+      class="w-full grid gap-3"
       :class="[
         props.class,
         isGridVariant
