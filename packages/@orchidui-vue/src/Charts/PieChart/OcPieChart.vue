@@ -42,9 +42,9 @@
 </template>
 
 <script setup lang="ts">
-import * as echarts from "echarts";
 import { Tooltip } from "@/orchidui";
-import { computed, onMounted, onUnmounted, ref, watch } from "vue";
+import { computed, onMounted, ref } from "vue";
+import { useChart } from "@/orchidui/composables/useChart.js";
 
 const props = defineProps({
   showTooltip: Boolean,
@@ -128,26 +128,15 @@ const options = computed(() => ({
     containLabel: true,
   },
 }));
-const myChart = ref();
 const pieChart = ref();
 
+const { chart } = useChart(pieChart, options);
+
 const toggleLegendName = (name) => {
-  myChart.value.dispatchAction({
+  chart.value.dispatchAction({
     type: "legendToggleSelect",
     name,
   });
-};
-
-const renderChart = () => {
-  myChart.value = echarts.init(pieChart.value);
-  myChart.value.setOption(options.value);
-};
-
-const resizeChart = () => {
-  if (myChart.value) {
-    myChart.value.dispose();
-  }
-  renderChart();
 };
 
 defineExpose({
@@ -155,26 +144,9 @@ defineExpose({
 });
 
 onMounted(() => {
-  renderChart();
-  myChart.value.on(
+  chart.value.on(
     "legendselectchanged",
     (params) => (legendSelected.value = params.selected),
   );
-
-  window.addEventListener("resize", resizeChart);
 });
-onUnmounted(() => {
-  if (myChart.value) {
-    myChart.value.dispose();
-  }
-
-  window.removeEventListener("resize", resizeChart);
-});
-watch(
-  () => options.value,
-  (val) => {
-    myChart.value.setOption(val);
-  },
-  { deep: true },
-);
 </script>

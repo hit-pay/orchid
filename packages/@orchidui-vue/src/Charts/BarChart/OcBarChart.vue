@@ -3,8 +3,8 @@
 </template>
 
 <script setup lang="ts">
-import * as echarts from "echarts";
-import { computed, nextTick, onMounted, onUnmounted, ref, watch } from "vue";
+import { computed, ref } from "vue";
+import { useChart } from "@/orchidui/composables/useChart.js";
 
 const props = defineProps({
   variant: {
@@ -117,49 +117,7 @@ const options = computed(() => ({
     },
   ],
 }));
-const myChart = ref();
 const barChart = ref();
 
-const toggleLegendName = (name) => {
-  myChart.value.dispatchAction({
-    type: "legendToggleSelect",
-    name,
-  });
-};
-
-const renderChart = () => {
-  myChart.value = echarts.init(barChart.value);
-  myChart.value.setOption(options.value);
-};
-
-const resizeChart = () => {
-  if (myChart.value) {
-    myChart.value.dispose();
-  }
-  renderChart();
-};
-
-defineExpose({
-  toggleLegendName,
-});
-
-onMounted(() => {
-  renderChart();
-
-  window.addEventListener("resize", resizeChart);
-});
-onUnmounted(() => {
-  if (myChart.value) {
-    myChart.value.dispose();
-  }
-
-  window.removeEventListener("resize", resizeChart);
-});
-watch(
-  () => options.value,
-  (val) => {
-    myChart.value.setOption(val);
-  },
-  { deep: true },
-);
+useChart(barChart, options);
 </script>
