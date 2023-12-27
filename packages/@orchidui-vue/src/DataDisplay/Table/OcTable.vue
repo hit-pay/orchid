@@ -249,6 +249,7 @@ onMounted(() => onScroll());
               :name="header.key"
               :item="field"
               :data="field[header.key]"
+              :index="i"
             />
           </template>
         </TableCell>
