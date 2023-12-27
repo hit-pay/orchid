@@ -50,7 +50,6 @@ const SampleFilterForm = [
       label: "DatePicker",
       hint: "This is a hint text to help user",
       placeholder: "placeholder",
-      dateFormat: "YYYY-MM-DD",
     },
   },
   {

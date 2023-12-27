@@ -45,7 +45,10 @@ const props = defineProps({
     type: String,
     default: "",
   },
-  placeholder: String,
+  placeholder: {
+    type: String,
+    default: "DD/MM/YYYY",
+  },
   isSplitInput: {
     type: Boolean,
     default: true,
@@ -101,7 +104,7 @@ const resetCalendar = () => {
 };
 
 const defaultDateRange = () => {
-  if (props.maxDate === dayjs().add(1, "day").format(props.dateFormat)) {
+  if (props.maxDate) {
     return [
       dayjs().subtract(3, "day").toDate(),
       dayjs().subtract(1, "day").toDate(),
@@ -119,17 +122,27 @@ const defaultDateRange = () => {
     class="w-full"
   >
     <div class="flex flex-col gap-y-2 w-full">
-      <div v-if="!isSplitInput" class="flex w-full">
+      <div v-if="!isSplitInput || type === 'default'" class="flex w-full">
         <Input
           :model-value="
-            formattedDate.every(Boolean) ? formattedDate.join(' - ') : ''
+            type === 'range'
+              ? modelValue && modelValue[0]
+                ? `${dayjs(formattedDate[0], dateFormat).format(
+                    'DD/MM/YYYY'
+                  )} - ${dayjs(formattedDate[1], dateFormat).format(
+                    'DD/MM/YYYY'
+                  )}`
+                : ''
+              : modelValue
+                ? dayjs(formattedDate, dateFormat).format('DD/MM/YYYY')
+                : ''
           "
           icon="calendar"
           :label="label"
           :hint="hint"
           :placeholder="placeholder"
           :disabled="disabled"
-          readonly
+          is-readonly
           :has-error="errorMessage.length > 0"
           :is-required="isRequired"
         />
@@ -138,21 +151,29 @@ const defaultDateRange = () => {
         <div class="w-full flex gap-x-4">
           <Input
             :label="`${label} ${minLabel}`"
-            :model-value="formattedDate[0]"
+            :model-value="
+              formattedDate[0]
+                ? dayjs(formattedDate[0], dateFormat).format('DD/MM/YYYY')
+                : ''
+            "
             icon="calendar"
             :placeholder="placeholder"
             :disabled="disabled"
-            readonly
+            is-readonly
             :has-error="errorMessage.length > 0"
             :is-required="isRequired"
           />
           <Input
             :label="`${label} ${maxLabel}`"
-            :model-value="formattedDate[1]"
+            :model-value="
+              formattedDate[1]
+                ? dayjs(formattedDate[1], dateFormat).format('DD/MM/YYYY')
+                : ''
+            "
             icon="calendar"
             :placeholder="placeholder"
             :disabled="disabled"
-            readonly
+            is-readonly
             :has-error="errorMessage.length > 0"
             :is-required="isRequired"
           />
