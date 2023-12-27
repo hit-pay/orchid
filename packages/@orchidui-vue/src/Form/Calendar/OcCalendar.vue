@@ -243,14 +243,25 @@ const isDayDisabled = (day) => {
     );
   }
 };
+
+const getRangeDates = () => {
+  return [selectedStartDate.value, selectedEndDate.value].sort((a, b) => a - b);
+};
+
 const doneSelecting = () => {
+  if (props.type === "range") {
+    if (
+      isDayDisabled(selectedStartDate.value.getDate()) ||
+      isDayDisabled(selectedEndDate.value.getDate())
+    ) {
+      return;
+    }
+  }
+
   emit(
     "update:modelValue",
     props.type === "range"
-      ? [
-          new Date(selectedStartDate.value).toString(),
-          new Date(selectedEndDate.value).toString(),
-        ]
+      ? getRangeDates()
       : new Date(selectedStartDate.value).toString(),
   );
 };

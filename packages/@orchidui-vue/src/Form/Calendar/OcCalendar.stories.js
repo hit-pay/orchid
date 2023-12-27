@@ -1,5 +1,6 @@
 import { Theme, Calendar } from "@/orchidui";
 import { ref } from "vue";
+import dayjs from "dayjs";
 
 export default {
   component: Calendar,
@@ -25,7 +26,7 @@ export const calendarStory = {
   args: {
     type: "default",
     minDate: "",
-    maxDate: "",
+    maxDate: dayjs().toDate(),
     position: "floating",
   },
   render: (args) => ({
@@ -35,7 +36,8 @@ export const calendarStory = {
     },
     setup() {
       const modelValue = ref();
-      const rangeModelValue = ref();
+      const rangeModelValue = ref([]);
+
       return { modelValue, rangeModelValue, args };
     },
     template: `
