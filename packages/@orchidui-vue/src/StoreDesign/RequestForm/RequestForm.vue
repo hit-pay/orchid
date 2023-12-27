@@ -160,7 +160,7 @@ const showSubForm = ref("");
     <FormBuilder
       v-if="Object.values(formValues).length > 0"
       id="form-builder"
-      class="grid gap-4"
+      class="grid gap-x-4 gap-y-5"
       :errors="formErrors"
       :values="formValues"
       :json-form="requestForm"

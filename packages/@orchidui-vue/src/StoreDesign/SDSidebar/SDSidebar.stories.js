@@ -104,7 +104,7 @@ export const Default = {
     template: `
           <Theme>
           <div class="flex gap-5 m-5 w-[1200px] overflow-y-auto ">
-              <div class="h-[800px] w-[535px] overflow-y-scroll">
+              <div class="h-[90vh] w-[535px] overflow-y-scroll">
                   <SDSidebar 
                     v-model:values="storeDesignData"
                     :sidebar="sidebarConfig.sidebar"
@@ -129,7 +129,7 @@ export const Default = {
                         <Button @click="content = 'section'" label="Section Settings" variant="secondary"  />
                         <Button @click="content = 'preview'" label="PREVIEW" variant="secondary"  />
                     </div>
-                    <div class="h-[700px] overflow-auto rounded bg-black">
+                    <div class="h-[80vh] overflow-auto rounded bg-black">
                       <pre v-if="content === 'data'" class="bg-black text-white p-3 rounded">{{storeDesignData}}</pre>
                       <pre v-if="content === 'sidebar'" class="bg-black text-white p-3 rounded">{{sidebarConfig.sidebar}}</pre>
                       <pre v-if="content === 'section'" class="bg-black text-white p-3 rounded">{{sidebarConfig.settings}}</pre>

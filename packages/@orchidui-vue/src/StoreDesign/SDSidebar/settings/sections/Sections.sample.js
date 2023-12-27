@@ -36,9 +36,33 @@ const PRODUCT_FORM = [
   {
     type: "SectionItem",
     props: {
+      title: "Select Product Category",
+    },
+  },
+  {
+    show_if: "product_from",
+    show_if_value: "category",
+    name: "product_category",
+    type: "Select",
+    options: "categories", 
+    props: {
+      placeholder: "Select Product Category",
+      options: [
+        {
+          value: "",
+          label: "Loading...",
+        }
+      ],
+    },
+  },
+
+  {
+    type: "SectionItem",
+    props: {
       title: "Type",
     },
   },
+  
   {
     name: "variant",
     type: "SelectOptions",
@@ -57,6 +81,7 @@ const PRODUCT_FORM = [
       ],
     },
   },
+
   {
     type: "SectionItem",
     props: {
@@ -137,8 +162,13 @@ const PRODUCT_FORM = [
     },
   },
   {
-    name: "limit_products",
+    show_if: "is_limit_products",
+    show_if_value: true,
+    name: "limit_priducts",
     type: "Input",
+    props: {
+      placeholder: "6"
+    }
   },
   {
     type: "SectionItem",
@@ -149,6 +179,9 @@ const PRODUCT_FORM = [
   {
     name: "title",
     type: "Input",
+    props: {
+      label: "Title"
+    }
   },
 ];
 
