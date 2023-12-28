@@ -46,7 +46,7 @@ export const Default = {
           id: item.key,
         };
 
-        console.log("sidebar :", item.section);
+        console.log("sidebar :", sidebarActive.value);
       };
 
       const onUpdateSidebarActive = () => {
