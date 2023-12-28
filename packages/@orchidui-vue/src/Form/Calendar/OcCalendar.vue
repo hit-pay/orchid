@@ -110,6 +110,11 @@ const selectDay = (day) => {
 
       selectedStartDay.value = day;
       selectedStartDate.value = currentMonth;
+
+      if (selectedStartDay.value > selectedEndDay.value) {
+        selectedStartDay.value = selectedEndDay.value;
+        selectedEndDay.value = day;
+      }
     } else {
       isStartDateSet.value = false;
       if (selectedStartDate.value.getTime() >= currentMonth.getTime()) {
@@ -211,8 +216,7 @@ const isDayInRange = (day) => {
     currentDate.setDate(day);
     return (
       isDaySelected(day) ||
-      (selectedStartDate.value.getTime() <= currentDate.getTime() &&
-        selectedEndDate.value.getTime() >= currentDate.getTime())
+      (selectedStartDay.value <= day && selectedEndDay.value >= day)
     );
   }
   if (selectedStartDay.value && selectedEndDay.value)
