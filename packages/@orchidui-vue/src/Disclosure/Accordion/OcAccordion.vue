@@ -1,5 +1,5 @@
 <script setup>
-import { nextTick, ref, watch } from "vue";
+import { nextTick, onUpdated, ref, watch } from "vue";
 import { Icon } from "@/orchidui";
 
 const upcomingAccordion = ref();
@@ -56,6 +56,10 @@ const changeAccordionHeight = async (open) => {
   }
 };
 watch(() => props.isExpandable, changeAccordionHeight);
+
+onUpdated(() => {
+  changeAccordionHeight(props.isExpandable);
+});
 </script>
 
 <template>

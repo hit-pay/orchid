@@ -1,4 +1,4 @@
-import { Theme, Accordion, DatePicker } from "@/orchidui";
+import { Theme, Accordion, DatePicker, Button } from "@/orchidui";
 import { ref, watch } from "vue";
 
 export default {
@@ -23,14 +23,16 @@ export const OcAccordion = {
     isDisabled: false,
   },
   render: (args) => ({
-    components: { Accordion, Theme, DatePicker },
+    components: { Accordion, Theme, DatePicker, Button },
     setup() {
       const isOpen = ref(false);
+      const dynamicContent = ref([]);
+
       watch(
         () => args.isExpandable,
         (val) => (isOpen.value = args.isDisabled ? false : val),
       );
-      return { isOpen, args };
+      return { isOpen, dynamicContent, args };
     },
     template: `
           <Theme class="h-[500px]">
@@ -45,7 +47,11 @@ export const OcAccordion = {
                 :isDisabled="args.isDisabled"
             >
               <template #body>
-                <DatePicker/>
+                <DatePicker />
+                <div class="flex flex-col gap-3 mt-3">
+                  <div v-for="item in dynamicContent">Dynamic Content {{item}}</div>
+                  <Button size="small" label="Add Content" @click="dynamicContent.push(dynamicContent.length)"/>
+                </div>
               </template>
             </Accordion>
           </Theme>
