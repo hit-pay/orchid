@@ -105,11 +105,16 @@ const selectDay = (day) => {
     selectedEndDay.value = null;
     selectedEndDate.value = null;
   } else {
+    isStartDateSet.value = selectedStartDay.value === selectedEndDay.value;
+
     if (!isStartDateSet.value) {
       isStartDateSet.value = true;
 
       selectedStartDay.value = day;
       selectedStartDate.value = currentMonth;
+
+      selectedEndDay.value = day;
+      selectedEndDate.value = currentMonth;
 
       if (selectedStartDay.value > selectedEndDay.value) {
         selectedStartDay.value = selectedEndDay.value;
@@ -118,11 +123,8 @@ const selectDay = (day) => {
     } else {
       isStartDateSet.value = false;
       if (selectedStartDate.value.getTime() >= currentMonth.getTime()) {
-        const nextDay = new Date(selectedStartDate.value);
-        nextDay.setDate(nextDay.getDate() + 1);
-
-        selectedEndDate.value = nextDay;
-        selectedEndDay.value = nextDay.getDate();
+        selectedStartDay.value = day;
+        selectedEndDate.value = currentMonth;
       } else {
         selectedEndDay.value = day;
         selectedEndDate.value = currentMonth;
@@ -310,6 +312,7 @@ const doneSelecting = () => {
                   isDayInRange(day) && day === selectedStartDay,
                 'before:rounded-r-full before:right-0 before:!w-[calc(100%+0.25rem)]':
                   isDayInRange(day) && day === selectedEndDay,
+                'before:bg-transparent': selectedStartDay === selectedEndDay,
               }
             : '',
         ]"

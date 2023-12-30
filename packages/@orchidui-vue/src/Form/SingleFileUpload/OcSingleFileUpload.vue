@@ -18,6 +18,7 @@ const props = defineProps({
   imageClasses: String,
   label: String,
   hint: String,
+  uploadButtonOptions: Object,
   /**
    * Variant of input (upload or url)
    */
@@ -149,9 +150,9 @@ const onEditFile = () => {
             </span>
             <Button
               size="small"
-              variant="secondary"
-              left-icon="upload"
-              label="Upload"
+              :variant="uploadButtonOptions?.variant ?? 'secondary'"
+              :left-icon="uploadButtonOptions?.leftIcon ?? 'upload'"
+              :label="uploadButtonOptions?.label ?? 'Upload'"
               @click="inputRef.click()"
             />
           </div>

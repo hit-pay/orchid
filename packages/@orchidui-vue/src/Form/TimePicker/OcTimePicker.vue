@@ -17,6 +17,11 @@ defineProps({
   modelValue: [String, Date],
   label: String,
   hint: String,
+  icon: {
+    type: String,
+    default: "time",
+  },
+  preFill: String,
   placeholder: String,
   errorMessage: String,
   isRequired: {
@@ -50,10 +55,11 @@ const updateActiveTime = () => {
     @update:model-value="updateActiveTime"
   >
     <Input
-      icon="time"
+      :icon="icon"
       :error-message="errorMessage"
       :label="label"
       :hint="hint"
+      :pre-fill="preFill"
       :placeholder="placeholder"
       :model-value="dayjs(time).format('hh:mm A')"
       :is-required="isRequired"

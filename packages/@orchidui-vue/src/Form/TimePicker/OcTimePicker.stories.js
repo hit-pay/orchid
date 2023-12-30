@@ -16,6 +16,8 @@ export const Default = {
   args: {
     label: "",
     hint: "",
+    preFill: "",
+    icon: undefined,
     placeholder: "",
     errorMessage: "",
     isRequired: false,
