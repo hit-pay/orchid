@@ -194,9 +194,45 @@ const TEXT_AND_IMAGE_FORM = [
     },
   },
   {
+    name: "width",
+    type: "SelectOptions",
+    props: {
+      options: [
+        {
+          preview: ASSETS_URL+"s-image-width-half.png",
+          value: "half",
+          label: "Half Width",
+        },
+        {
+          preview: ASSETS_URL+"s-image-width-full.png",
+          value: "full",
+          label: "Full Width",
+        },
+      ],
+    },
+  },
+  {
     type: "SectionItem",
     props: {
       title: "Aligment",
+    },
+  },
+  {
+    name: "aligment",
+    type: "SelectOptions",
+    props: {
+      options: [
+        {
+          preview: ASSETS_URL+"s-image-text-left.png",
+          value: "left",
+          label: "Text Left",
+        },
+        {
+          preview: ASSETS_URL+"s-image-text-right.png",
+          value: "right",
+          label: "Text right",
+        },
+      ],
     },
   },
   {
