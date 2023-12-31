@@ -48,6 +48,35 @@ const TOP_BANNER_FORM = [
 
 const HEADER_FORM = [
   {
+    type: "SectionItem",
+    props: {
+      title: "Aligment",
+    },
+  },
+  {
+    name: "aligment",
+    type: "SelectOptions",
+    props: {
+      options: [
+        {
+          preview: ASSETS_URL+"header-alignment-left.png",
+          value: "left",
+          label: "Left",
+        },
+        {
+          preview: ASSETS_URL+"header-alignment-center.png",
+          value: "center",
+          label: "Center",
+        },
+        {
+          preview: ASSETS_URL+"header-alignment-right.png",
+          value: "right",
+          label: "Right",
+        },
+      ],
+    },
+  },
+  {
     name: "menu_enabled",
     type: "SectionItem",
     props: {
