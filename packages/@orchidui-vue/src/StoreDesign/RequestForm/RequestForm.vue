@@ -56,8 +56,8 @@ Object.values(props.requestForm).forEach((form) => {
 const emit = defineEmits([
   "update:generalData",
   "update:sectionData",
-  "edit:banner",
-  "delete:banner",
+  "edit:images",
+  "delete:images",
 ]);
 
 const updateData = (general = false) => {
@@ -92,7 +92,7 @@ const onUpdateForm = (form, value = null) => {
   }
 };
 
-const formatBanner = (value) => {
+const formatimages = (value) => {
   let newFormatImages = [];
   value.forEach((image) => {
     if (!image.fileUrl) {
@@ -107,22 +107,22 @@ const formatBanner = (value) => {
   });
   return newFormatImages;
 };
-const onUpdateBanner = (form, newValue) => {
+const onUpdateimages = (form, newValue) => {
   images[form.name] = newValue;
   setTimeout(() => {
-    onUpdateForm(form, formatBanner(images[form.name]));
+    onUpdateForm(form, formatimages(images[form.name]));
   }, 100);
 };
 
-const onDeleteBanner = (form, value) => {
-  emit("delete:banner", {
+const onDeleteimages = (form, value) => {
+  emit("delete:images", {
     form: form,
     value: value,
   });
 };
 
-const onEditBanner = (form, value) => {
-  emit("edit:banner", {
+const onEditimages = (form, value) => {
+  emit("edit:images", {
     form: form,
     value: value,
   });
@@ -148,7 +148,7 @@ const formatImagesValue = (value, name) => {
 };
 
 props.requestForm.forEach((f) => {
-  if (f.type === "Banners") {
+  if (f.type === "Images") {
     formatImagesValue(formValues.value[f.name], f.name);
   }
 });
@@ -246,19 +246,20 @@ const showSubForm = ref("");
           @update:model-value="onUpdateForm(form, $event)"
         />
       </template>
-      <template #Banners="{ form }">
+      <template #Images="{ form }">
         <MultipleUploadFile
           v-if="imageLoaded && images[form.name]"
           :model-value="images[form.name]"
           :hint="form.props?.hint ?? ''"
           :max-size="5"
+          :max-images="form.props?.maxImages ?? 8"
           :important="true"
           is-image-only
           :columns-count="form.props?.columnsCount ?? 4"
           with-link
-          @update:model-value="onUpdateBanner(form, $event)"
-          @on-edit-file="onEditBanner(form, $event)"
-          @on-remove-file="onDeleteBanner(form, $event)"
+          @update:model-value="onUpdateimages(form, $event)"
+          @on-edit-file="onEditimages(form, $event)"
+          @on-remove-file="onDeleteimages(form, $event)"
         >
         </MultipleUploadFile>
       </template>

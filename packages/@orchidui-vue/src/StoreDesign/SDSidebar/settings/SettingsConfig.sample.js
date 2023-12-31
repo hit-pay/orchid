@@ -52,6 +52,7 @@ const settings = [
     icon: "tag",
     preview: ASSETS_URL+"products-sections.png",
     form: PRODUCT_FORM,
+    canDelete: true,
     default: {
       product_form: "all_product",
       variant: "grid",

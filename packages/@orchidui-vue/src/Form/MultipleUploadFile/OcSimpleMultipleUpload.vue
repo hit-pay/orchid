@@ -22,6 +22,7 @@ const props = defineProps({
     default: 3,
   },
   withLink: Boolean,
+  maxImages: Number
 });
 const emit = defineEmits([
   "change",
@@ -75,6 +76,13 @@ const updateLink = (link) => {
   changedFile.link = link;
   emit("update:uploadedImages", props.uploadedImages);
 };
+
+const onChange = ($event) => {
+  let limit = (props.uploadedImages.length + $event.target.files.length) > props.maxImages
+  if(!props.maxImages || (props.maxImages && !limit)){
+    emit('change', $event)
+  }
+}
 </script>
 
 <template>
@@ -90,7 +98,7 @@ const updateLink = (link) => {
         type="file"
         :accept="accept || 'image/png, image/jpeg'"
         multiple
-        @change="$emit('change', $event)"
+        @change="onChange"
       />
     </label>
     <Draggable

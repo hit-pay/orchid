@@ -99,8 +99,11 @@ const BANNER_FORM = [
   },
   {
     general: true,
-    type: "Banners",
+    type: "Images",
     name: "banners",
+    props: {
+      maxImages: 8
+    }
   },
   {
     general: true,
@@ -115,10 +118,13 @@ const BANNER_FORM = [
   },
   {
     general: true,
-    type: "Banners",
+    type: "Images",
     name: "banners_mobile",
     show_if: "responsive_banner_size",
     show_if_value: true,
+    props: {
+      maxImages: 8
+    }
   },
   {
     general: true,

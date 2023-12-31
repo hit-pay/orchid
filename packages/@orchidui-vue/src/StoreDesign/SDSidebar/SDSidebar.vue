@@ -42,8 +42,8 @@ const emit = defineEmits({
   "update:active": [],
   "get:products": [], // pick product sections
   // Event
-  "edit:banner": [],
-  "delete:banner": [],
+  "edit:images": [],
+  "delete:images": [],
 });
 
 const presetOptions = computed(() => {
@@ -475,8 +475,8 @@ const addSection = (newSection, customize = false) => {
           :section-data="sectionActiveValues"
           :request-form="sectionActive.form"
           :options="options"
-          @edit:banner="$emit('edit:banner', $event)"
-          @delete:banner="$emit('delete:banner', $event)"
+          @edit:images="$emit('edit:images', $event)"
+          @delete:images="$emit('delete:images', $event)"
         >
         </RequestForm>
       </div>
