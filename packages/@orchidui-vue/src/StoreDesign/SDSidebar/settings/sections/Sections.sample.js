@@ -185,4 +185,67 @@ const PRODUCT_FORM = [
   },
 ];
 
-export { PRODUCT_FORM };
+
+const TEXT_AND_IMAGE_FORM = [
+  {
+    type: "SectionItem",
+    props: {
+      title: "Image Width",
+    },
+  },
+  {
+    type: "SectionItem",
+    props: {
+      title: "Aligment",
+    },
+  },
+  {
+    type: "SectionItem",
+    props: {
+      title: "Upload Images",
+      description: "Recommended size 1440x400 pixels"
+    },
+  },
+  {
+    type: "Images",
+    name: "images",
+    props: {
+      maxImages: 1
+    }
+  },
+  {
+    type: "SectionItem",
+    props: {
+      title: "Content",
+    },
+  },
+  {
+    name: "title",
+    type: "Input",
+    props: {
+      label: "Title",
+    },
+  },
+  {
+    name: "description",
+    type: "TextArea",
+    props: {
+      label: "Description",
+    },
+  },
+  {
+    name: "button_text",
+    type: "Input",
+    props: {
+      label: "Button text",
+    },
+  },
+  {
+    name: "button_link",
+    type: "Input",
+    props: {
+      label: "",
+    },
+  },
+]
+export { PRODUCT_FORM, TEXT_AND_IMAGE_FORM };

@@ -4,7 +4,7 @@ import {
   HEADER_FORM,
   BANNER_FORM,
 } from "./sections/Headers.sample";
-import { PRODUCT_FORM } from "./sections/Sections.sample";
+import { PRODUCT_FORM, TEXT_AND_IMAGE_FORM } from "./sections/Sections.sample";
 import { FOOTER_CONTENT_FORM } from "./sections/Footers.sample";
 import { STYLES_FORM } from "./sections/Styles.sample";
 import { BUTTON_LINK_FORM, ICON_LINK_FORM } from "./sections/LinkInBio.sample";
@@ -56,6 +56,25 @@ const settings = [
     default: {
       product_form: "all_product",
       variant: "grid",
+    },
+  },
+  {
+    group: "sections",
+    key: "TextAndImage",
+    section: "TextAndImage",
+    title: "Text and Image",
+    icon: "tag",
+    preview: ASSETS_URL+"products-sections.png",
+    form: TEXT_AND_IMAGE_FORM,
+    canDelete: true,
+    default: {
+      width: "full",
+      aligment: "left",
+      images: [],
+      title: "Our Story",
+      description: "",
+      button_text: "Read more",
+      button_link: "https://hitpayapp.com"
     },
   },
   {
