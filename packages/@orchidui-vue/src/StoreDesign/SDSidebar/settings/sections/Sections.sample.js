@@ -172,6 +172,7 @@ const PRODUCT_FORM = [
       ],
     },
   },
+  // only for default theme
   {
     name: "show_category_filter",
     type: "SectionItem",
@@ -181,6 +182,8 @@ const PRODUCT_FORM = [
     },
   },
   {
+    show_if: "variant",
+    show_if_value: "carousel",
     name:"is_limit_products",
     type: "SectionItem",
     props: {
@@ -198,9 +201,20 @@ const PRODUCT_FORM = [
     }
   },
   {
-    type: "SectionItem",
+    name: "title",
+    type: "Input",
     props: {
-      title: "Content",
+      label: "Title"
+    }
+  },
+  {
+    show_if: "variant",
+    show_if_value: "grid",
+    type: "SectionItem",
+    name: "view_all_button",
+    props: {
+      isToggle: true,
+      title: "View all Button",
     },
   },
   {
@@ -209,6 +223,13 @@ const PRODUCT_FORM = [
     props: {
       label: "Title"
     }
+  },
+  {
+    name: "description",
+    type: "TextArea",
+    props: {
+      label: "Description",
+    },
   },
 ];
 
