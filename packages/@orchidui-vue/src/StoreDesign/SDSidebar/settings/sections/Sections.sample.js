@@ -89,7 +89,9 @@ const PRODUCT_FORM = [
     },
   },
   {
-    name: "product_column",
+    show_if: "variant",
+    show_if_value: "grid",
+    name: "column_grid",
     type: "SelectOptions",
     props: {
       options: [
@@ -105,6 +107,31 @@ const PRODUCT_FORM = [
         },
         {
           preview: ASSETS_URL + "product-column-2-grid.png",
+          label: "2 columns",
+          value: "2,2,1",
+        },
+      ],
+    },
+  },
+  {
+    show_if: "variant",
+    show_if_value: "carousel",
+    name: "column_carousel",
+    type: "SelectOptions",
+    props: {
+      options: [
+        {
+          preview: ASSETS_URL + "product-column-4-carousel.png",
+          label: "4 columns",
+          value: "4,3,2",
+        },
+        {
+          preview: ASSETS_URL + "product-column-3-carousel.png",
+          label: "3 columns",
+          value: "3,2,1",
+        },
+        {
+          preview: ASSETS_URL + "product-column-2-carousel.png",
           label: "2 columns",
           value: "2,2,1",
         },
