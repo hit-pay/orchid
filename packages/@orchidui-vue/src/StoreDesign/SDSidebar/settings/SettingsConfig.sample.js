@@ -68,8 +68,9 @@ const settings = [
     form: TEXT_AND_IMAGE_FORM,
     canDelete: true,
     default: {
-      width: "full",
-      aligment: "left",
+      variant: "full",
+      aligment_half: "left",
+      aligment_full: "left",
       images: [],
       title: "Our Story",
       description: "",

@@ -194,7 +194,7 @@ const TEXT_AND_IMAGE_FORM = [
     },
   },
   {
-    name: "width",
+    name: "variant",
     type: "SelectOptions",
     props: {
       options: [
@@ -218,17 +218,44 @@ const TEXT_AND_IMAGE_FORM = [
     },
   },
   {
-    name: "aligment",
+    show_if: "variant",
+    show_if_value: "half",
+    name: "aligment_half",
     type: "SelectOptions",
     props: {
       options: [
         {
-          preview: ASSETS_URL+"s-image-text-left.png",
+          preview: ASSETS_URL+"s-image-text-left-half.png",
           value: "left",
           label: "Text Left",
         },
         {
-          preview: ASSETS_URL+"s-image-text-right.png",
+          preview: ASSETS_URL+"s-image-text-right-half.png",
+          value: "right",
+          label: "Text right",
+        },
+      ],
+    },
+  },
+  {
+    show_if: "variant",
+    show_if_value: "full",
+    name: "aligment_full",
+    type: "SelectOptions",
+    props: {
+      options: [
+        {
+          preview: ASSETS_URL+"s-image-text-left-full.png",
+          value: "left",
+          label: "Text Left",
+        },
+        {
+          preview: ASSETS_URL+"s-image-text-center-full.png",
+          value: "center",
+          label: "Text center",
+        },
+        {
+          preview: ASSETS_URL+"s-image-text-right-full.png",
           value: "right",
           label: "Text right",
         },
