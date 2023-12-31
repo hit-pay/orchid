@@ -22,7 +22,7 @@ const props = defineProps({
     default: 3,
   },
   withLink: Boolean,
-  maxImages: Number
+  maxImages: Number,
 });
 const emit = defineEmits([
   "change",
@@ -78,11 +78,12 @@ const updateLink = (link) => {
 };
 
 const onChange = ($event) => {
-  let limit = (props.uploadedImages.length + $event.target.files.length) > props.maxImages
-  if(!props.maxImages || (props.maxImages && !limit)){
-    emit('change', $event)
+  let limit =
+    props.uploadedImages.length + $event.target.files.length > props.maxImages;
+  if (!props.maxImages || (props.maxImages && !limit)) {
+    emit("change", $event);
   }
-}
+};
 </script>
 
 <template>

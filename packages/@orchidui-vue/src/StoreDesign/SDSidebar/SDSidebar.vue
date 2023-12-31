@@ -35,7 +35,7 @@ const getSidebarMenu = (section) => {
   }
 };
 
-const isDropdownOpen = ref([])
+const isDropdownOpen = ref([]);
 const requiredSection = ["Header", "FooterContent", "IconLinks", "ButtonLinks"];
 
 const emit = defineEmits({
@@ -75,7 +75,7 @@ const updatePreset = (to) => {
   let newSectionsList = [];
   props.values.sections.forEach((item) => {
     const defaultSettings = selectedPreset.sections.find(
-      (s) => s.section === item.section
+      (s) => s.section === item.section,
     );
     if (defaultSettings) {
       let sectionItem = {
@@ -117,70 +117,68 @@ const sidebarActive = computed(() => {
 });
 
 const availableSections = computed(() =>
-  props.settings.filter((s) => s.group === "sections")
+  props.settings.filter((s) => s.group === "sections"),
 );
 
 const renderForm = ref(null);
 const renderSectionList = ref(null);
 
 const renderSectionAndForm = () => {
-    renderForm.value = null;
-    renderSectionList.value = null;
-    
-    if (props.active.submenu && props.active.submenu !== "sections") {
-      sectionList.value = props.settings.filter((s) => {
-        const sectionData = props.values.sections.find((i) => i.key === s.key);
-        s.active = sectionData?.active;
-        return s.group === props.active.submenu;
-      });
-    } else {
-      let sectionListCustom = [];
-      props.values.sections.forEach((item) => {
-        if (item.group === "sections") {
-          const sectionItem = props.settings.find(
-            (s) => s.section === item.section
-          );
-          sectionListCustom.push({
-            key: item.key,
-            group: item.group,
-            section: item.section,
-            title: item.title ?? item.section,
-            active: item.active,
-            icon: sectionItem.icon,
-            canDelete: sectionItem.canDelete ?? false,
-            form: sectionItem.form,
-          });
-        }
-      });
-      sectionList.value = sectionListCustom;
-    }
+  renderForm.value = null;
+  renderSectionList.value = null;
 
-    sectionActive.value = sectionList.value.find(
-      (s) => s.key === props.active.id
-    );
+  if (props.active.submenu && props.active.submenu !== "sections") {
+    sectionList.value = props.settings.filter((s) => {
+      const sectionData = props.values.sections.find((i) => i.key === s.key);
+      s.active = sectionData?.active;
+      return s.group === props.active.submenu;
+    });
+  } else {
+    let sectionListCustom = [];
+    props.values.sections.forEach((item) => {
+      if (item.group === "sections") {
+        const sectionItem = props.settings.find(
+          (s) => s.section === item.section,
+        );
+        sectionListCustom.push({
+          key: item.key,
+          group: item.group,
+          section: item.section,
+          title: item.title ?? item.section,
+          active: item.active,
+          icon: sectionItem.icon,
+          canDelete: sectionItem.canDelete ?? false,
+          form: sectionItem.form,
+        });
+      }
+    });
+    sectionList.value = sectionListCustom;
+  }
 
-    setTimeout(() => {
-      renderForm.value = Date.now();
-      renderSectionList.value = Date.now();
-    }, 100);
-}
+  sectionActive.value = sectionList.value.find(
+    (s) => s.key === props.active.id,
+  );
+
+  setTimeout(() => {
+    renderForm.value = Date.now();
+    renderSectionList.value = Date.now();
+  }, 100);
+};
 
 watch(
   () => props.active,
   () => {
-    renderSectionAndForm()
+    renderSectionAndForm();
   },
   {
     deep: true,
     immediate: true,
-  }
+  },
 );
-
-
 
 const sectionActiveValues = computed(() => {
   let sectionValues = props.values.sections.find(
-    (s) => s.key === props.active.id
+    (s) => s.key === props.active.id,
   );
   return sectionValues;
 });
@@ -221,7 +219,7 @@ const sidebarMenuLabel = computed(() => {
 const submenuLabel = computed(() => {
   if (sidebarMenuActive.value.children) {
     const submenu = sidebarMenuActive.value.children.find(
-      (s) => s.name === sidebarActive.value.submenu
+      (s) => s.name === sidebarActive.value.submenu,
     );
     return submenu?.label;
   } else {
@@ -283,15 +281,15 @@ const updateOrderedSection = (newOrdered) => {
   });
 };
 
-const deleteSectionItem = (item) =>{
+const deleteSectionItem = (item) => {
   emit("update:values", {
     general: generalData.value,
-    sections: props.values.sections.filter(i => i.key !== item.key)
+    sections: props.values.sections.filter((i) => i.key !== item.key),
   });
   setTimeout(() => {
-    renderSectionAndForm()
-  }, 100)
-}
+    renderSectionAndForm();
+  }, 100);
+};
 
 const addSection = (newSection, customize = false) => {
   let newKey = Date.now();
@@ -457,21 +455,19 @@ const addSection = (newSection, customize = false) => {
               v-model="isDropdownOpen[item.key]"
               placement="bottom-end"
             >
-              <Icon
-                name="dots-vertical"
-              />
+              <Icon name="dots-vertical" />
               <template #menu>
                 <div class="py-2 flex flex-col">
-                    <div
-                      class="flex p-3 cursor-pointer items-center text-oc-error gap-x-3"
-                      @click="deleteSectionItem(item)"
-                    >
-                      <Icon width="16" height="16" name="bin" />
-                      <span>Delete</span>
-                    </div>
+                  <div
+                    class="flex p-3 cursor-pointer items-center text-oc-error gap-x-3"
+                    @click="deleteSectionItem(item)"
+                  >
+                    <Icon width="16" height="16" name="bin" />
+                    <span>Delete</span>
                   </div>
-            </template>
-          </Dropdown>
+                </div>
+              </template>
+            </Dropdown>
             <Toggle
               v-else-if="!requiredSection.includes(item.section)"
               v-model="item.active"

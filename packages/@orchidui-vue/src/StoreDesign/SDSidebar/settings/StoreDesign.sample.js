@@ -49,7 +49,7 @@ const StoreDesign = {
     bio_icon_links: [],
     bio_button_links: [],
     // section global
-    product_ratio: '1,1'
+    product_ratio: "1,1",
   },
   sections: [
     {
@@ -122,7 +122,7 @@ const StoreDesign = {
       variant: "carousel",
       product_from: "feature",
       category_id: "",
-      product_column: '4,3,2',
+      product_column: "4,3,2",
       is_limit_products: false,
       limit_priducts: 6,
       active: true,
@@ -135,7 +135,7 @@ const StoreDesign = {
       variant: "grid",
       product_from: "all",
       category_id: "",
-      product_column: '4,3,2',
+      product_column: "4,3,2",
       is_limit_products: false,
       limit_priducts: 6,
       active: true,

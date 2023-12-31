@@ -1,6 +1,5 @@
 const ASSETS_URL = "/templates/default/images/";
 
-
 const FOOTER_CONTENT_FORM = [
   {
     name: "PaymentLogo",
@@ -65,7 +64,7 @@ const FOOTER_CONTENT_FORM = [
         name: "footer_social_menus",
         type: "Menus",
         variant: "social",
-        noMenuIcon:  ASSETS_URL+"no-menu-footer.png",
+        noMenuIcon: ASSETS_URL + "no-menu-footer.png",
       },
     ],
   },

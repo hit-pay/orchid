@@ -59,17 +59,17 @@ const HEADER_FORM = [
     props: {
       options: [
         {
-          preview: ASSETS_URL+"header-alignment-left.png",
+          preview: ASSETS_URL + "header-alignment-left.png",
           value: "left",
           label: "Left",
         },
         {
-          preview: ASSETS_URL+"header-alignment-center.png",
+          preview: ASSETS_URL + "header-alignment-center.png",
           value: "center",
           label: "Center",
         },
         {
-          preview: ASSETS_URL+"header-alignment-right.png",
+          preview: ASSETS_URL + "header-alignment-right.png",
           value: "right",
           label: "Right",
         },
@@ -90,7 +90,7 @@ const HEADER_FORM = [
     type: "Menus",
     hasSubmenu: true,
     submenuLevel: "2",
-    noMenuIcon: ASSETS_URL+"no-menu-header.png",
+    noMenuIcon: ASSETS_URL + "no-menu-header.png",
   },
   {
     type: "SectionItem",
@@ -117,132 +117,4 @@ const HEADER_FORM = [
   },
 ];
 
-const BANNER_FORM = [
-  {
-    name: "BannerTitle",
-    type: "SectionItem",
-    props: {
-      title: "Upload Images",
-      description: "Recommended size 1440x400 pixels",
-    },
-  },
-  {
-    general: true,
-    type: "Images",
-    name: "banners",
-    props: {
-      maxImages: 8
-    }
-  },
-  {
-    general: true,
-    type: "SectionItem",
-    name: "responsive_banner_size",
-    props: {
-      isToggle: true,
-      title: "Responsive Banners",
-      description:
-        "Banner images for mobile device, Recommended size 400x400 pixels",
-    },
-  },
-  {
-    general: true,
-    type: "Images",
-    name: "banners_mobile",
-    show_if: "responsive_banner_size",
-    show_if_value: true,
-    props: {
-      maxImages: 8
-    }
-  },
-  {
-    general: true,
-    name: "BannerSizeTitle",
-    type: "SectionItem",
-    props: {
-      title: "Banner Size",
-    },
-  },
-  {
-    general: true,
-    name: "banner_size",
-    type: "SelectOptions",
-    props: {
-      variant: "list2",
-      options: [
-        {
-          preview: ASSETS_URL + "banner-size-small.png",
-          label: "Small",
-          value: "4,1",
-          description: "Smallest height, fit to screen width",
-        },
-        {
-          preview: ASSETS_URL + "banner-size-medium.png",
-          label: "Medium",
-          value: "3,1",
-          description: "Smallest height, fit to screen width",
-        },
-        {
-          preview: ASSETS_URL + "banner-size-large.png",
-          label: "Large",
-          value: "2,1",
-          description: "Bigger height, fit to screen width",
-        },
-        {
-          preview: ASSETS_URL + "banner-size-auto.png",
-          label: "Adapt",
-          value: "auto",
-          description: "Following original image size",
-        },
-      ],
-    },
-  },
-  {
-    general: true,
-    type: "SectionItem",
-    name: "BannerSizeTitle",
-    show_if: "responsive_banner_size",
-    show_if_value: true,
-    props: {
-      title: "Banner Size Mobile",
-    },
-  },
-  {
-    general: true,
-    name: "banner_size_mobile",
-    type: "SelectOptions",
-    show_if: "responsive_banner_size",
-    show_if_value: true,
-    props: {
-      variant: "list2",
-      options: [
-        {
-          preview: ASSETS_URL + "banner-size-small.png",
-          label: "Small",
-          value: "3,1",
-          description: "Smallest height, fit to screen width",
-        },
-        {
-          preview: ASSETS_URL + "banner-size-medium.png",
-          label: "Medium",
-          value: "2,1",
-          description: "Smallest height, fit to screen width",
-        },
-        {
-          preview: ASSETS_URL + "banner-size-large.png",
-          label: "Large",
-          value: "1,1",
-          description: "Bigger height, fit to screen width",
-        },
-        {
-          preview: ASSETS_URL + "banner-size-auto.png",
-          label: "Adapt",
-          value: "auto",
-          description: "Following original image size",
-        },
-      ],
-    },
-  },
-];
-
-export { TOP_BANNER_FORM, HEADER_FORM, BANNER_FORM };
+export { TOP_BANNER_FORM, HEADER_FORM };

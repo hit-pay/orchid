@@ -6,8 +6,8 @@ const ICON_LINK_FORM = [
     name: "bio_icon_links",
     type: "Menus",
     hasSubmenu: false,
-    noMenuIcon: ASSETS_URL+"no-menu-icon-links.png",
-  }
+    noMenuIcon: ASSETS_URL + "no-menu-icon-links.png",
+  },
 ];
 
 const BUTTON_LINK_FORM = [
@@ -16,9 +16,8 @@ const BUTTON_LINK_FORM = [
     name: "bio_button_links",
     type: "Menus",
     hasSubmenu: false,
-    noMenuIcon: ASSETS_URL+"no-menu-button-links.png",
-  }
+    noMenuIcon: ASSETS_URL + "no-menu-button-links.png",
+  },
 ];
-
 
 export { ICON_LINK_FORM, BUTTON_LINK_FORM };

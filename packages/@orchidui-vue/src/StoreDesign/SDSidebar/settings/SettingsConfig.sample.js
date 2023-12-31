@@ -1,9 +1,6 @@
 const ASSETS_URL = "/templates/default/images/";
-import {
-  TOP_BANNER_FORM,
-  HEADER_FORM,
-  BANNER_FORM,
-} from "./sections/Headers.sample";
+import { TOP_BANNER_FORM, HEADER_FORM } from "./sections/Headers.sample";
+import { BANNER_FORM } from "./sections/Banner.sample";
 import { PRODUCT_FORM, TEXT_AND_IMAGE_FORM } from "./sections/Sections.sample";
 import { FOOTER_CONTENT_FORM } from "./sections/Footers.sample";
 import { STYLES_FORM } from "./sections/Styles.sample";
@@ -50,7 +47,7 @@ const settings = [
     section: "Products",
     title: "Products",
     icon: "tag",
-    preview: ASSETS_URL+"section-products.png",
+    preview: ASSETS_URL + "section-products.png",
     form: PRODUCT_FORM,
     canDelete: true,
     default: {
@@ -64,7 +61,7 @@ const settings = [
     section: "TextAndImage",
     title: "Text and Image",
     icon: "tag",
-    preview: ASSETS_URL+"section-text-and-image.png",
+    preview: ASSETS_URL + "section-text-and-image.png",
     form: TEXT_AND_IMAGE_FORM,
     canDelete: true,
     default: {
@@ -75,7 +72,7 @@ const settings = [
       title: "Our Story",
       description: "",
       button_text: "Read more",
-      button_link: "https://hitpayapp.com"
+      button_link: "https://hitpayapp.com",
     },
   },
   {

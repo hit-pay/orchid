@@ -1,7 +1,7 @@
 const sidebar = [
   // 3 -> 4 level level
   {
-    icon:'layout',
+    icon: "layout",
     type: "list",
     name: "home",
     label: "Home Settings",
@@ -22,14 +22,14 @@ const sidebar = [
   },
   // 2 level
   {
-    icon: 'pallete',
+    icon: "pallete",
     type: "styles",
     name: "styles",
     label: "Styles",
   },
   // 3 -> 4 level level
   {
-    icon: 'link-in-bio',
+    icon: "link-in-bio",
     type: "sections",
     name: "link_in_bio",
     label: "Link In Bio",
@@ -51,7 +51,7 @@ const sidebar = [
   },
   // 1 level
   {
-    icon: 'document',
+    icon: "document",
     type: "page",
     name: "page",
     label: "Pages",
