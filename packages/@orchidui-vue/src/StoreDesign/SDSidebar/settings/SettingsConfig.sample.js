@@ -50,7 +50,7 @@ const settings = [
     section: "Products",
     title: "Products",
     icon: "tag",
-    preview: ASSETS_URL+"products-sections.png",
+    preview: ASSETS_URL+"section-products.png",
     form: PRODUCT_FORM,
     canDelete: true,
     default: {
@@ -64,7 +64,7 @@ const settings = [
     section: "TextAndImage",
     title: "Text and Image",
     icon: "tag",
-    preview: ASSETS_URL+"products-sections.png",
+    preview: ASSETS_URL+"section-text-and-image.png",
     form: TEXT_AND_IMAGE_FORM,
     canDelete: true,
     default: {
