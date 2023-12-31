@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watch } from "vue";
-import { Icon, Toggle, Button, SelectOptions } from "@/orchidui";
+import { Icon, Toggle, Button, SelectOptions, Dropdown } from "@/orchidui";
 import { DraggableList } from "@/orchidui/Draggable.js";
 import { RequestForm, ThumbnailSection } from "@/orchidui/StoreDesign";
 import { computed } from "vue";
@@ -35,6 +35,7 @@ const getSidebarMenu = (section) => {
   }
 };
 
+const isDropdownOpen = ref([])
 const requiredSection = ["Header", "FooterContent", "IconLinks", "ButtonLinks"];
 
 const emit = defineEmits({
@@ -106,7 +107,7 @@ const updatePreset = (to) => {
     });
   }
 };
-const sectionList = ref(null);
+const sectionList = ref([]);
 const sectionActive = ref(null);
 
 const generalData = computed(() => props.values.general);
@@ -120,11 +121,12 @@ const availableSections = computed(() =>
 );
 
 const renderForm = ref(null);
+const renderSectionList = ref(null);
 
-watch(
-  () => props.active,
-  () => {
+const renderSectionAndForm = () => {
     renderForm.value = null;
+    renderSectionList.value = null;
+    
     if (props.active.submenu && props.active.submenu !== "sections") {
       sectionList.value = props.settings.filter((s) => {
         const sectionData = props.values.sections.find((i) => i.key === s.key);
@@ -145,6 +147,7 @@ watch(
             title: item.title ?? item.section,
             active: item.active,
             icon: sectionItem.icon,
+            canDelete: sectionItem.canDelete ?? false,
             form: sectionItem.form,
           });
         }
@@ -158,13 +161,22 @@ watch(
 
     setTimeout(() => {
       renderForm.value = Date.now();
+      renderSectionList.value = Date.now();
     }, 100);
+}
+
+watch(
+  () => props.active,
+  () => {
+    renderSectionAndForm()
   },
   {
     deep: true,
     immediate: true,
   }
 );
+
+
 
 const sectionActiveValues = computed(() => {
   let sectionValues = props.values.sections.find(
@@ -271,6 +283,16 @@ const updateOrderedSection = (newOrdered) => {
   });
 };
 
+const deleteSectionItem = (item) =>{
+  emit("update:values", {
+    general: generalData.value,
+    sections: props.values.sections.filter(i => i.key !== item.key)
+  });
+  setTimeout(() => {
+    renderSectionAndForm()
+  }, 100)
+}
+
 const addSection = (newSection, customize = false) => {
   let newKey = Date.now();
   const newSectionData = [
@@ -280,6 +302,7 @@ const addSection = (newSection, customize = false) => {
       section: newSection.section,
       title: newSection.title ?? newSection.section,
       active: true,
+      canDelete: newSection.canDelete ?? false,
       ...newSection.default,
     },
   ];
@@ -421,7 +444,7 @@ const addSection = (newSection, customize = false) => {
         <div class="mx-2">/</div>
         <div class="font-medium">{{ submenuLabel }}</div>
       </div>
-      <div v-if="sectionList" class="px-5 mt-4">
+      <div v-if="renderSectionList" class="px-5 mt-4">
         <DraggableList
           :model-value="sectionList"
           class="w-full cursor-pointer"
@@ -429,8 +452,28 @@ const addSection = (newSection, customize = false) => {
           @update:model-value="updateOrderedSection"
         >
           <template #action="{ item }">
+            <Dropdown
+              v-if="item.canDelete"
+              v-model="isDropdownOpen[item.key]"
+              placement="bottom-end"
+            >
+              <Icon
+                name="dots-vertical"
+              />
+              <template #menu>
+                <div class="py-2 flex flex-col">
+                    <div
+                      class="flex p-3 cursor-pointer items-center text-oc-error gap-x-3"
+                      @click="deleteSectionItem(item)"
+                    >
+                      <Icon width="16" height="16" name="bin" />
+                      <span>Delete</span>
+                    </div>
+                  </div>
+            </template>
+          </Dropdown>
             <Toggle
-              v-if="!requiredSection.includes(item.section)"
+              v-else-if="!requiredSection.includes(item.section)"
               v-model="item.active"
               size="small"
               @update:model-value="updateSectionActive($event, item)"
