@@ -1,0 +1,747 @@
+[
+    {
+      "group": "styles",
+      "key": "Styles",
+      "section": "Styles",
+      "title": "Styles",
+      "isDisable": true,
+      "form": [
+        {
+          "name": "Font",
+          "type": "Children",
+          "icon": "font",
+          "label": "Fonts",
+          "children": [
+            {
+              "name": "font_heading",
+              "type": "Select",
+              "props": {
+                "label": "Heading",
+                "placeholder": "Choose Font",
+                "options": [
+                  {
+                    "label": "Inter",
+                    "value": "inter"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "font_body",
+              "type": "Select",
+              "props": {
+                "label": "Body",
+                "placeholder": "Choose Font",
+                "options": [
+                  {
+                    "label": "Inter",
+                    "value": "inter"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GlobalColor",
+          "type": "Children",
+          "icon": "color-circle",
+          "label": "Global Colors",
+          "children": [
+            {
+              "type": "Colors",
+              "name": [
+                {
+                  "props": {
+                    "label": "Background Color"
+                  },
+                  "key": "background_color"
+                },
+                {
+                  "props": {
+                    "label": "Text Color"
+                  },
+                  "key": "text_color"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Button",
+          "type": "Children",
+          "icon": "button",
+          "label": "Button",
+          "children": [
+            {
+              "name": [
+                {
+                  "props": {
+                    "label": "Background Color"
+                  },
+                  "key": "primary_color"
+                },
+                {
+                  "props": {
+                    "label": "Text Color"
+                  },
+                  "key": "primary_text_color"
+                }
+              ],
+              "type": "Colors"
+            },
+            {
+              "name": "button_rounded",
+              "type": "Slider",
+              "props": {
+                "label": "Rounded Corner",
+                "variant": "right"
+              }
+            }
+          ]
+        },
+        {
+          "name": "ProductCard",
+          "type": "Children",
+          "icon": "product-card",
+          "label": "Product Card",
+          "children": [
+            {
+              "name": [
+                {
+                  "props": {
+                    "label": "Background Color"
+                  },
+                  "key": "card_background_color"
+                },
+                {
+                  "props": {
+                    "label": "Text Color"
+                  },
+                  "key": "card_text_color"
+                }
+              ],
+              "type": "Colors"
+            },
+            {
+              "name": "card_rounded",
+              "type": "Slider",
+              "props": {
+                "label": "Rounded Corner",
+                "variant": "right"
+              }
+            },
+            {
+              "name": "card_shadow",
+              "type": "RadioGroup",
+              "props": {
+                "label": "Shadow size",
+                "alignment": "horizontal",
+                "radio": [
+                  {
+                    "value": "none",
+                    "label": "None"
+                  },
+                  {
+                    "value": "0px 4px 30px -12px var(--color-shadow)",
+                    "label": "Small"
+                  },
+                  {
+                    "value": "0px 4px 30px -4px var(--color-shadow)",
+                    "label": "Medium"
+                  },
+                  {
+                    "value": "0px 4px 30px 0px var(--color-shadow)",
+                    "label": "Large"
+                  }
+                ]
+              }
+            },
+            {
+              "name": [
+                {
+                  "props": {
+                    "label": "Shadow Color"
+                  },
+                  "key": "card_shadow_color"
+                }
+              ],
+              "type": "Colors"
+            }
+          ]
+        }
+      ],
+      "active": true
+    },
+    {
+      "group": "header",
+      "key": "TopBanner",
+      "section": "TopBanner",
+      "title": "Top Banner",
+      "icon": "top-banner",
+      "isDisable": true,
+      "form": [
+        {
+          "general": true,
+          "name": "top_banner_closable",
+          "type": "SectionItem",
+          "props": {
+            "title": "Closable",
+            "isToggle": true
+          }
+        },
+        {
+          "type": "SectionItem",
+          "props": {
+            "title": "Content"
+          }
+        },
+        {
+          "general": true,
+          "name": "top_banner_content",
+          "type": "TextArea"
+        },
+        {
+          "type": "SectionItem",
+          "props": {
+            "title": "Colors"
+          }
+        },
+        {
+          "name": [
+            {
+              "props": {
+                "label": "Background Color"
+              },
+              "key": "background_color"
+            },
+            {
+              "props": {
+                "label": "Text Color"
+              },
+              "key": "text_color"
+            }
+          ],
+          "type": "Colors"
+        }
+      ],
+      "active": true
+    },
+    {
+      "group": "header",
+      "key": "Header",
+      "section": "Header",
+      "title": "Header",
+      "icon": "header",
+      "isDisable": true,
+      "form": [
+        {
+          "name": "menu_enabled",
+          "type": "SectionItem",
+          "props": {
+            "title": "Navigation Menu",
+            "isToggle": true
+          }
+        },
+        {
+          "general": true,
+          "name": "navigation_menus",
+          "type": "Menus",
+          "hasSubmenu": true,
+          "submenuLevel": "2",
+          "noMenuIcon": "/templates/default/images/no-menu-header.png"
+        },
+        {
+          "type": "SectionItem",
+          "props": {
+            "title": "Choose colors"
+          }
+        },
+        {
+          "name": [
+            {
+              "props": {
+                "label": "Background Color"
+              },
+              "key": "background_color"
+            },
+            {
+              "props": {
+                "label": "Text Color"
+              },
+              "key": "text_color"
+            }
+          ],
+          "type": "Colors"
+        }
+      ],
+      "active": true
+    },
+    {
+      "group": "header",
+      "key": "Banner",
+      "section": "Banner",
+      "title": "Banner",
+      "icon": "banner",
+      "isDisable": true,
+      "form": [
+        {
+          "name": "BannerTitle",
+          "type": "SectionItem",
+          "props": {
+            "title": "Upload Images",
+            "description": "Recommended size 1440x400 pixels"
+          }
+        },
+        {
+          "general": true,
+          "type": "Images",
+          "name": "banners",
+          "props": {
+            "maxImages": 8
+          }
+        },
+        {
+          "general": true,
+          "type": "SectionItem",
+          "name": "responsive_banner_size",
+          "props": {
+            "isToggle": true,
+            "title": "Responsive Banners",
+            "description": "Banner images for mobile device, Recommended size 400x400 pixels"
+          }
+        },
+        {
+          "general": true,
+          "type": "Images",
+          "name": "banners_mobile",
+          "show_if": "responsive_banner_size",
+          "show_if_value": true,
+          "props": {
+            "maxImages": 8
+          }
+        },
+        {
+          "general": true,
+          "name": "BannerSizeTitle",
+          "type": "SectionItem",
+          "props": {
+            "title": "Banner Size"
+          }
+        },
+        {
+          "general": true,
+          "name": "banner_size",
+          "type": "SelectOptions",
+          "props": {
+            "variant": "list2",
+            "options": [
+              {
+                "preview": "/templates/default/images/banner-size-small.png",
+                "label": "Small",
+                "value": "4,1",
+                "description": "Smallest height, fit to screen width"
+              },
+              {
+                "preview": "/templates/default/images/banner-size-medium.png",
+                "label": "Medium",
+                "value": "3,1",
+                "description": "Smallest height, fit to screen width"
+              },
+              {
+                "preview": "/templates/default/images/banner-size-large.png",
+                "label": "Large",
+                "value": "2,1",
+                "description": "Bigger height, fit to screen width"
+              },
+              {
+                "preview": "/templates/default/images/banner-size-auto.png",
+                "label": "Adapt",
+                "value": "auto",
+                "description": "Following original image size"
+              }
+            ]
+          }
+        },
+        {
+          "general": true,
+          "type": "SectionItem",
+          "name": "BannerSizeTitle",
+          "show_if": "responsive_banner_size",
+          "show_if_value": true,
+          "props": {
+            "title": "Banner Size Mobile"
+          }
+        },
+        {
+          "general": true,
+          "name": "banner_size_mobile",
+          "type": "SelectOptions",
+          "show_if": "responsive_banner_size",
+          "show_if_value": true,
+          "props": {
+            "variant": "list2",
+            "options": [
+              {
+                "preview": "/templates/default/images/banner-size-small.png",
+                "label": "Small",
+                "value": "3,1",
+                "description": "Smallest height, fit to screen width"
+              },
+              {
+                "preview": "/templates/default/images/banner-size-medium.png",
+                "label": "Medium",
+                "value": "2,1",
+                "description": "Smallest height, fit to screen width"
+              },
+              {
+                "preview": "/templates/default/images/banner-size-large.png",
+                "label": "Large",
+                "value": "1,1",
+                "description": "Bigger height, fit to screen width"
+              },
+              {
+                "preview": "/templates/default/images/banner-size-auto.png",
+                "label": "Adapt",
+                "value": "auto",
+                "description": "Following original image size"
+              }
+            ]
+          }
+        }
+      ],
+      "active": true
+    },
+    {
+      "group": "sections",
+      "key": "Products",
+      "section": "Products",
+      "title": "Products",
+      "icon": "tag",
+      "preview": "/templates/default/images/products-sections.png",
+      "form": [
+        {
+          "type": "SectionItem",
+          "props": {
+            "title": "Select Product From"
+          }
+        },
+        {
+          "name": "product_from",
+          "type": "Select",
+          "props": {
+            "placeholder": "Select Product from",
+            "options": [
+              {
+                "value": "all",
+                "label": "All Products"
+              },
+              {
+                "value": "feature",
+                "label": "Feature Product"
+              },
+              {
+                "value": "category",
+                "label": "Product Category"
+              }
+            ]
+          }
+        },
+        {
+          "type": "SectionItem",
+          "props": {
+            "title": "Select Product Category"
+          }
+        },
+        {
+          "show_if": "product_from",
+          "show_if_value": "category",
+          "name": "product_category",
+          "type": "Select",
+          "options": "categories",
+          "props": {
+            "placeholder": "Select Product Category",
+            "options": [
+              {
+                "value": "",
+                "label": "Loading..."
+              }
+            ]
+          }
+        },
+        {
+          "type": "SectionItem",
+          "props": {
+            "title": "Type"
+          }
+        },
+        {
+          "name": "variant",
+          "type": "SelectOptions",
+          "props": {
+            "options": [
+              {
+                "preview": "/templates/default/images/product-type-carousel.png",
+                "value": "carousel",
+                "label": "Carousel"
+              },
+              {
+                "preview": "/templates/default/images/product-type-grid.png",
+                "value": "grid",
+                "label": "Grid"
+              }
+            ]
+          }
+        },
+        {
+          "type": "SectionItem",
+          "props": {
+            "title": "Columns"
+          }
+        },
+        {
+          "name": "product_column",
+          "type": "SelectOptions",
+          "props": {
+            "options": [
+              {
+                "preview": "/templates/default/images/product-column-4-grid.png",
+                "label": "4 columns",
+                "value": "4,3,2"
+              },
+              {
+                "preview": "/templates/default/images/product-column-3-grid.png",
+                "label": "3 columns",
+                "value": "3,2,1"
+              },
+              {
+                "preview": "/templates/default/images/product-column-2-grid.png",
+                "label": "2 columns",
+                "value": "2,2,1"
+              }
+            ]
+          }
+        },
+        {
+          "type": "SectionItem",
+          "props": {
+            "title": "Product image shape"
+          }
+        },
+        {
+          "general": true,
+          "name": "product_ratio",
+          "type": "SelectOptions",
+          "props": {
+            "variant": "list2",
+            "options": [
+              {
+                "preview": "/templates/default/images/product-ratio-square.png",
+                "label": "Square",
+                "value": "1,1",
+                "description": "Useful if most of your product visuals are equally tall and wide"
+              },
+              {
+                "preview": "/templates/default/images/product-ratio-landscape.png",
+                "label": "Landscape",
+                "value": "6,4",
+                "description": "Useful if most of your product visuals are wider than taller"
+              },
+              {
+                "preview": "/templates/default/images/product-ratio-portrait.png",
+                "label": "Portrait",
+                "value": "4,6",
+                "description": "Useful if most of your product visuals are wider than taller"
+              }
+            ]
+          }
+        },
+        {
+          "name": "show_category_filter",
+          "type": "SectionItem",
+          "props": {
+            "isToggle": true,
+            "title": "Show category filter"
+          }
+        },
+        {
+          "name": "is_limit_products",
+          "type": "SectionItem",
+          "props": {
+            "isToggle": true,
+            "title": "How many products do you want to show?"
+          }
+        },
+        {
+          "show_if": "is_limit_products",
+          "show_if_value": true,
+          "name": "limit_priducts",
+          "type": "Input",
+          "props": {
+            "placeholder": "6"
+          }
+        },
+        {
+          "type": "SectionItem",
+          "props": {
+            "title": "Content"
+          }
+        },
+        {
+          "name": "title",
+          "type": "Input",
+          "props": {
+            "label": "Title"
+          }
+        }
+      ],
+      "canDelete": true,
+      "default": {
+        "product_form": "all_product",
+        "variant": "grid"
+      }
+    },
+    {
+      "group": "footer",
+      "key": "FooterContent",
+      "section": "FooterContent",
+      "title": "Footer Content",
+      "icon": "footer",
+      "isDisable": true,
+      "form": [
+        {
+          "name": "PaymentLogo",
+          "type": "Children",
+          "icon": "bank-card",
+          "label": "Payment Method Logo",
+          "children": [
+            {
+              "type": "SectionItem",
+              "props": {
+                "title": "Choose payment method"
+              }
+            },
+            {
+              "general": true,
+              "name": "payment_method_logos",
+              "type": "Select",
+              "props": {
+                "multiple": true,
+                "placeholder": "Select payment method",
+                "options": [
+                  {
+                    "label": "Atome",
+                    "value": "atome"
+                  },
+                  {
+                    "label": "Shopeback",
+                    "value": "shopeback"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "SocialMedia",
+          "type": "Children",
+          "icon": "facebook",
+          "label": "Social Media",
+          "children": [
+            {
+              "type": "SectionItem",
+              "props": {
+                "title": "Title"
+              }
+            },
+            {
+              "type": "Input",
+              "name": "footer_social_title",
+              "props": {
+                "placeholder": "Follow Us"
+              }
+            },
+            {
+              "type": "SectionItem",
+              "props": {
+                "title": "Menus"
+              }
+            },
+            {
+              "general": true,
+              "name": "footer_social_menus",
+              "type": "Menus",
+              "variant": "social",
+              "noMenuIcon": "/templates/default/images/no-menu-footer.png"
+            }
+          ]
+        },
+        {
+          "type": "SectionItem",
+          "props": {
+            "title": "Colors"
+          }
+        },
+        {
+          "name": [
+            {
+              "props": {
+                "label": "Background Color"
+              },
+              "key": "background_color"
+            },
+            {
+              "props": {
+                "label": "Text Color"
+              },
+              "key": "text_color"
+            }
+          ],
+          "type": "Colors"
+        }
+      ],
+      "active": true
+    },
+    {
+      "group": "footer",
+      "key": "PoweredBy",
+      "section": "PoweredBy",
+      "title": "Powered By",
+      "icon": "powered",
+      "isDisable": true
+    },
+    {
+      "group": "link_in_bio",
+      "key": "IconLinks",
+      "section": "IconLinks",
+      "title": "Icon Links",
+      "form": [
+        {
+          "general": true,
+          "name": "bio_icon_links",
+          "type": "Menus",
+          "hasSubmenu": false,
+          "noMenuIcon": "/templates/default/images/no-menu-icon-links.png"
+        }
+      ],
+      "isDisable": true,
+      "active": true
+    },
+    {
+      "group": "link_in_bio",
+      "key": "ButtonLinks",
+      "section": "ButtonLinks",
+      "title": "Button Links",
+      "form": [
+        {
+          "general": true,
+          "name": "bio_button_links",
+          "type": "Menus",
+          "hasSubmenu": false,
+          "noMenuIcon": "/templates/default/images/no-menu-button-links.png"
+        }
+      ],
+      "isDisable": true,
+      "active": true
+    }
+  ]
