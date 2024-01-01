@@ -356,7 +356,7 @@ const TEXT_AND_IMAGE_FORM = [
     name: "button_link",
     type: "Input",
     props: {
-      label: "",
+      label: "Button Link",
     },
   },
 ];
