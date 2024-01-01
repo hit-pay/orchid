@@ -110,6 +110,7 @@ const StoreDesign = {
       key: "FooterContent",
       section: "FooterContent",
       payment_method_logos: [],
+      footer_logo: [],
       active: true,
       background_color: "#FFFFFF",
       text_color: "#03102F",

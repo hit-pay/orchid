@@ -2,35 +2,148 @@ const ASSETS_URL = "/templates/default/images/";
 
 const FOOTER_CONTENT_FORM = [
   {
-    name: "PaymentLogo",
+    type: "SectionItem",
+    props: {
+      title: "Colors",
+    },
+  },
+  {
+    name: [
+      {
+        props: {
+          label: "Background Color",
+        },
+        key: "background_color",
+      },
+      {
+        props: {
+          label: "Text Color",
+        },
+        key: "text_color",
+      },
+    ],
+    type: "Colors",
+  },
+  {
+    type: "SectionItem",
+    props: {
+      title: "Footer Logo",
+      description: "Recommended size 640x640 pixels"
+    },
+  },
+  {
+    type: "Images",
+    name: "footer_logo",
+    props: {
+      maxImages: 1,
+    },
+  },
+  {
+    type: "SectionItem",
+    props: {
+      title: "Content"
+    },
+  },
+  {
+    type: "TextArea",
+    name: "content"
+  },
+  // {
+  //   name: "PaymentLogo",
+  //   type: "Children",
+  //   icon: "bank-card",
+  //   label: "Payment Method Logo",
+  //   children: [
+  //     {
+  //       type: "SectionItem",
+  //       props: {
+  //         title: "Choose payment method",
+  //       },
+  //     },
+  //     {
+  //       general: true,
+  //       name: "payment_method_logos",
+  //       type: "Select",
+  //       props: {
+  //         multiple: true,
+  //         placeholder: "Select payment method",
+  //         options: [
+  //           {
+  //             label: "Atome",
+  //             value: "atome",
+  //           },
+  //           {
+  //             label: "Shopeback",
+  //             value: "shopeback",
+  //           },
+  //         ],
+  //       },
+  //     },
+  //   ],
+  // },
+  {
+    name: "FooterLink1",
     type: "Children",
-    icon: "bank-card",
-    label: "Payment Method Logo",
+    icon: "align-top",
+    label: "Footer Link 1",
     children: [
       {
         type: "SectionItem",
         props: {
-          title: "Choose payment method",
+          title: "Title",
+        },
+      },
+      {
+        type: "Input",
+        name: "footer_link_1_title",
+        props: {
+          placeholder: "Company",
+        },
+      },
+      {
+        type: "SectionItem",
+        props: {
+          title: "Menus",
         },
       },
       {
         general: true,
-        name: "payment_method_logos",
-        type: "Select",
+        name: "footer_link_1_menus",
+        type: "Menus",
+        noMenuIcon: ASSETS_URL + "no-menu-footer.png",
+      },
+    ],
+  },
+  {
+    name: "FooterLink2",
+    type: "Children",
+    icon: "align-top",
+    label: "Footer Link 2",
+    children: [
+      {
+        type: "SectionItem",
         props: {
-          multiple: true,
-          placeholder: "Select payment method",
-          options: [
-            {
-              label: "Atome",
-              value: "atome",
-            },
-            {
-              label: "Shopeback",
-              value: "shopeback",
-            },
-          ],
+          title: "Title",
         },
+      },
+      {
+        type: "Input",
+        name: "footer_link_2_title",
+        props: {
+          placeholder: "Company",
+        },
+      },
+      {
+        type: "SectionItem",
+        props: {
+          title: "Menus",
+        },
+      },
+      {
+        general: true,
+        name: "footer_link_2_menus",
+        type: "Menus",
+        noMenuIcon: ASSETS_URL + "no-menu-footer.png",
       },
     ],
   },
@@ -67,30 +180,7 @@ const FOOTER_CONTENT_FORM = [
         noMenuIcon: ASSETS_URL + "no-menu-footer.png",
       },
     ],
-  },
-  {
-    type: "SectionItem",
-    props: {
-      title: "Colors",
-    },
-  },
-  {
-    name: [
-      {
-        props: {
-          label: "Background Color",
-        },
-        key: "background_color",
-      },
-      {
-        props: {
-          label: "Text Color",
-        },
-        key: "text_color",
-      },
-    ],
-    type: "Colors",
-  },
+  }
 ];
 
 export { FOOTER_CONTENT_FORM };
