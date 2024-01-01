@@ -97,7 +97,7 @@ const STYLES_FORM = [
     name: "ProductCard",
     type: "Children",
     icon: "product-card",
-    label: "Product Card",
+    label: "Card",
     children: [
       {
         name: [
