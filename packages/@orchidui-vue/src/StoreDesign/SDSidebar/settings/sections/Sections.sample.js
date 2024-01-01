@@ -196,7 +196,7 @@ const PRODUCT_FORM = [
   {
     show_if: "is_limit_products",
     show_if_value: true,
-    name: "limit_priducts",
+    name: "limit_products",
     type: "Input",
     props: {
       placeholder: "6",

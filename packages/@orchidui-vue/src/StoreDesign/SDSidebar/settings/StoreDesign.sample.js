@@ -125,7 +125,7 @@ const StoreDesign = {
       category_id: "",
       product_column: "4,3,2",
       is_limit_products: false,
-      limit_priducts: 6,
+      limit_products: 6,
       active: true,
     },
     {
@@ -138,7 +138,7 @@ const StoreDesign = {
       category_id: "",
       product_column: "4,3,2",
       is_limit_products: false,
-      limit_priducts: 6,
+      limit_products: 6,
       active: true,
     },
     {
