@@ -1,6 +1,10 @@
 <script setup>
 import { Button, Icon } from "@/orchidui";
 import { computed, ref } from "vue";
+import dayjs from "dayjs";
+import isBetween from "dayjs/plugin/isBetween";
+
+dayjs.extend(isBetween);
 
 const props = defineProps({
   type: {
@@ -105,8 +109,6 @@ const selectDay = (day) => {
     selectedEndDay.value = null;
     selectedEndDate.value = null;
   } else {
-    isStartDateSet.value = selectedStartDay.value === selectedEndDay.value;
-
     if (!isStartDateSet.value) {
       isStartDateSet.value = true;
 
@@ -115,19 +117,19 @@ const selectDay = (day) => {
 
       selectedEndDay.value = day;
       selectedEndDate.value = currentMonth;
-
-      if (selectedStartDay.value > selectedEndDay.value) {
-        selectedStartDay.value = selectedEndDay.value;
-        selectedEndDay.value = day;
-      }
     } else {
       isStartDateSet.value = false;
-      if (selectedStartDate.value.getTime() >= currentMonth.getTime()) {
-        selectedStartDay.value = day;
-        selectedEndDate.value = currentMonth;
-      } else {
-        selectedEndDay.value = day;
-        selectedEndDate.value = currentMonth;
+
+      selectedEndDay.value = day;
+      selectedEndDate.value = currentMonth;
+
+      if (dayjs(selectedEndDate.value).diff(selectedStartDate.value) < 0) {
+        const temp = selectedEndDate.value;
+        selectedEndDate.value = selectedStartDate.value;
+        selectedStartDate.value = temp;
+
+        selectedEndDay.value = selectedEndDate.value.getDate();
+        selectedStartDay.value = selectedStartDate.value.getDate();
       }
     }
   }
@@ -155,22 +157,25 @@ const clearDate = () => {
       : null;
   emit("resetCalendar");
 };
+const getMonthDiff = (date) =>
+  dayjs(selectedDate.value).month() - dayjs(date).month();
+const resetDays = () => {
+  selectedStartDay.value =
+    getMonthDiff(selectedStartDate.value) === 0
+      ? selectedStartDate.value.getDate()
+      : null;
+  selectedEndDay.value =
+    getMonthDiff(selectedEndDate.value) === 0
+      ? selectedEndDate.value.getDate()
+      : null;
+};
 const prevMonth = () => {
   if (props.type === "range") {
-    selectedDate.value = new Date(
-      selectedDate.value?.getFullYear(),
-      selectedDate.value?.getMonth() - 1,
-      1,
-    );
+    selectedDate.value = dayjs(selectedDate.value)
+      .subtract(1, "month")
+      .toDate();
 
-    selectedStartDay.value =
-      selectedDate.value?.getMonth() === selectedStartDate.value?.getMonth()
-        ? selectedStartDate.value.getDate()
-        : null;
-    selectedEndDay.value =
-      selectedDate.value?.getMonth() === selectedEndDate.value?.getMonth()
-        ? selectedEndDate.value.getDate()
-        : null;
+    resetDays();
   } else {
     if (selectedStartDate.value) {
       selectedStartDate.value = new Date(
@@ -185,19 +190,9 @@ const prevMonth = () => {
 
 const nextMonth = () => {
   if (props.type === "range") {
-    selectedDate.value = new Date(
-      selectedDate.value?.getFullYear(),
-      selectedDate.value?.getMonth() + 1,
-      1,
-    );
-    selectedStartDay.value =
-      selectedDate.value?.getMonth() === selectedStartDate.value?.getMonth()
-        ? selectedStartDate.value.getDate()
-        : null;
-    selectedEndDay.value =
-      selectedDate.value?.getMonth() === selectedEndDate.value?.getMonth()
-        ? selectedEndDate.value.getDate()
-        : null;
+    selectedDate.value = dayjs(selectedDate.value).add(1, "month").toDate();
+
+    resetDays();
   } else {
     if (selectedStartDate.value) {
       selectedStartDate.value = new Date(
@@ -216,9 +211,11 @@ const isDayInRange = (day) => {
   if (props.type === "range") {
     const currentDate = new Date(selectedDate.value);
     currentDate.setDate(day);
-    return (
-      isDaySelected(day) ||
-      (selectedStartDay.value <= day && selectedEndDay.value >= day)
+    return dayjs(currentDate).isBetween(
+      dayjs(selectedStartDate.value),
+      dayjs(selectedEndDate.value),
+      "milliseconds",
+      "[]",
     );
   }
   if (selectedStartDay.value && selectedEndDay.value)
@@ -300,7 +297,7 @@ const doneSelecting = () => {
         :key="day"
         class="w-9 rounded-full flex cursor-pointer items-center relative justify-center h-9"
         :class="[
-          isDaySelected(day)
+          isDaySelected(day) && isDayInRange(day)
             ? 'bg-oc-primary text-white'
             : 'hover:bg-oc-primary-50-tr',
           isDayDisabled(day) ? 'pointer-events-none opacity-[.35]' : '',
@@ -312,7 +309,10 @@ const doneSelecting = () => {
                   isDayInRange(day) && day === selectedStartDay,
                 'before:rounded-r-full before:right-0 before:!w-[calc(100%+0.25rem)]':
                   isDayInRange(day) && day === selectedEndDay,
-                'before:bg-transparent': selectedStartDay === selectedEndDay,
+                'before:bg-transparent':
+                  selectedStartDay &&
+                  selectedEndDay &&
+                  selectedStartDay === selectedEndDay,
               }
             : '',
         ]"
