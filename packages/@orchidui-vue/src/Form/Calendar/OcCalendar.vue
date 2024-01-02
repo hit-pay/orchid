@@ -178,11 +178,9 @@ const prevMonth = () => {
     resetDays();
   } else {
     if (selectedStartDate.value) {
-      selectedStartDate.value = new Date(
-        selectedStartDate.value?.getFullYear(),
-        selectedStartDate.value?.getMonth() - 1,
-        1,
-      );
+      selectedStartDate.value = dayjs(selectedStartDate.value)
+        .subtract(1, "month")
+        .toDate();
       selectedStartDay.value = null;
     }
   }
@@ -195,11 +193,9 @@ const nextMonth = () => {
     resetDays();
   } else {
     if (selectedStartDate.value) {
-      selectedStartDate.value = new Date(
-        selectedStartDate.value?.getFullYear(),
-        selectedStartDate.value?.getMonth() + 1,
-        1,
-      );
+      selectedStartDate.value = dayjs(selectedStartDate.value)
+        .add(1, "month")
+        .toDate();
       selectedStartDay.value = null;
     }
   }
@@ -297,7 +293,7 @@ const doneSelecting = () => {
         :key="day"
         class="w-9 rounded-full flex cursor-pointer items-center relative justify-center h-9"
         :class="[
-          isDaySelected(day) && isDayInRange(day)
+          isDaySelected(day) && (type === 'range' ? isDayInRange(day) : true)
             ? 'bg-oc-primary text-white'
             : 'hover:bg-oc-primary-50-tr',
           isDayDisabled(day) ? 'pointer-events-none opacity-[.35]' : '',
