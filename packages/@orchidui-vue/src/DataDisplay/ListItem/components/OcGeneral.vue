@@ -13,6 +13,7 @@ defineProps({
     type: Array,
     default: () => [],
   },
+  isDisabled: Boolean,
 });
 defineEmits(["more"]);
 const isOpen = ref(false);
@@ -20,7 +21,8 @@ const isOpen = ref(false);
 
 <template>
   <div
-    class="px-5 py-4 flex flex-col gap-y-2 rounded border border-gray-200 group hover:shadow-normal"
+    class="px-5 py-4 flex flex-col gap-y-2 rounded border border-gray-200 group"
+    :class="{ 'hover:shadow-normal': !isDisabled }"
   >
     <div class="flex items-center justify-between">
       <div class="flex text-sm text-oc-text-400 items-center gap-x-3">
@@ -38,16 +40,18 @@ const isOpen = ref(false);
           ></Chip>
         </div>
       </div>
-      <Dropdown v-model="isOpen">
-        <Icon
-          name="dots-vertical"
-          class="opacity-0 p-2 group-hover:opacity-100 cursor-pointer active:bg-oc-gray-100 rounded"
-          @click="$emit('more')"
-        />
-        <template #menu>
-          <slot name="menu" />
-        </template>
-      </Dropdown>
+      <template v-if="!isDisabled">
+        <Dropdown v-model="isOpen">
+          <Icon
+            name="dots-vertical"
+            class="opacity-0 p-2 group-hover:opacity-100 cursor-pointer active:bg-oc-gray-100 rounded"
+            @click="$emit('more')"
+          />
+          <template #menu>
+            <slot name="menu" />
+          </template>
+        </Dropdown>
+      </template>
     </div>
     <div class="flex flex-col gap-4">
       <div class="text-oc-text-500 text-sm">{{ description }}</div>

@@ -26,6 +26,15 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+  chips: {
+    type: Array,
+    default: () => [],
+  },
+  details: {
+    type: Array,
+    default: () => [],
+  },
+  isDisabled: Boolean,
 });
 defineEmits(["more", "edit", "delete"]);
 
@@ -52,6 +61,7 @@ const getTypeComponent = computed(() => {
     @more="$emit('more')"
     @edit="$emit('edit')"
     @delete="$emit('delete')"
+    :class="{ 'opacity-50': isDisabled }"
   >
     <template v-if="$slots.menu" #menu>
       <slot name="menu" />

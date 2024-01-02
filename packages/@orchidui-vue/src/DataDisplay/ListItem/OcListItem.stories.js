@@ -126,6 +126,7 @@ export const ListGeneral = {
   args: {
     title: "Standard shipping",
     description: "Calculation Method : Flat",
+    isDisabled: false,
     chips: [
       {
         label: "Default",
