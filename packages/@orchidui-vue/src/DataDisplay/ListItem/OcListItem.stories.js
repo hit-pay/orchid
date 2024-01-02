@@ -121,3 +121,53 @@ export const ListPayment = {
         `,
   }),
 };
+
+export const ListGeneral = {
+  args: {
+    title: "Standard shipping",
+    description: "Calculation Method : Flat",
+    isDisabled: false,
+    chips: [
+      {
+        label: "Default",
+      },
+      {
+        label: "HitPay",
+        variant: "accent-1",
+      },
+    ],
+    details: [
+      {
+        label: "SGD 28.00",
+        icon: "dollar-coin",
+      },
+      {
+        label: "Singapore",
+        icon: "location",
+      },
+    ],
+  },
+  render: (args) => ({
+    components: { Theme, ListItem, DropdownItem },
+    setup() {
+      return { args };
+    },
+    template: `
+          <Theme colorMode="light" class="p-10">
+            <ListItem
+                type="general"
+                v-bind="args"
+            >
+              <template #menu>
+                <div class="p-2 border-b border-gray-200">
+                  <DropdownItem text="Edit" icon="pencil"/>
+                </div>
+                <div class="p-2">
+                  <DropdownItem text="Delete" variant="destructive" icon="bin"/>
+                </div>
+              </template>
+            </ListItem>
+          </Theme>
+        `,
+  }),
+};
