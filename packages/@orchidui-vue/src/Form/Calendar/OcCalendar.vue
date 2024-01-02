@@ -1,6 +1,10 @@
 <script setup>
 import { Button, Icon } from "@/orchidui";
 import { computed, ref } from "vue";
+import dayjs from "dayjs";
+import isBetween from "dayjs/plugin/isBetween";
+
+dayjs.extend(isBetween);
 
 const props = defineProps({
   type: {
@@ -99,7 +103,11 @@ const isStartDateSet = ref(false);
 const selectDay = (day) => {
   const currentMonth = new Date(selectedDate.value);
   currentMonth.setDate(day);
+
   if (props.type !== "range") {
+    currentMonth.setFullYear(selectedStartDate.value.getFullYear());
+    currentMonth.setMonth(selectedStartDate.value.getMonth());
+
     selectedStartDay.value = day;
     selectedStartDate.value = currentMonth;
     selectedEndDay.value = null;
@@ -115,16 +123,10 @@ const selectDay = (day) => {
 
       selectedEndDay.value = day;
       selectedEndDate.value = currentMonth;
-
-      if (selectedStartDay.value > selectedEndDay.value) {
-        selectedStartDay.value = selectedEndDay.value;
-        selectedEndDay.value = day;
-      }
     } else {
-      isStartDateSet.value = false;
       if (selectedStartDate.value.getTime() >= currentMonth.getTime()) {
         selectedStartDay.value = day;
-        selectedEndDate.value = currentMonth;
+        selectedStartDate.value = currentMonth;
       } else {
         selectedEndDay.value = day;
         selectedEndDate.value = currentMonth;
@@ -216,9 +218,13 @@ const isDayInRange = (day) => {
   if (props.type === "range") {
     const currentDate = new Date(selectedDate.value);
     currentDate.setDate(day);
+
     return (
       isDaySelected(day) ||
-      (selectedStartDay.value <= day && selectedEndDay.value >= day)
+      dayjs(currentDate).isBetween(
+        selectedStartDate.value,
+        selectedEndDate.value,
+      )
     );
   }
   if (selectedStartDay.value && selectedEndDay.value)
@@ -312,7 +318,9 @@ const doneSelecting = () => {
                   isDayInRange(day) && day === selectedStartDay,
                 'before:rounded-r-full before:right-0 before:!w-[calc(100%+0.25rem)]':
                   isDayInRange(day) && day === selectedEndDay,
-                'before:bg-transparent': selectedStartDay === selectedEndDay,
+                'before:bg-transparent':
+                  selectedStartDay !== null &&
+                  selectedStartDay === selectedEndDay,
               }
             : '',
         ]"
