@@ -3,6 +3,7 @@ import { computed } from "vue";
 import OcTimeLine from "./components/OcTimeLine.vue";
 import OcWebhook from "./components/OcWebhook.vue";
 import OcPayment from "./components/OcPayment.vue";
+import OcGeneral from "./components/OcGeneral.vue";
 
 const props = defineProps({
   isActive: Boolean,
@@ -36,6 +37,8 @@ const getTypeComponent = computed(() => {
       return OcWebhook;
     case "payment":
       return OcPayment;
+    case "general":
+      return OcGeneral;
     default:
       return OcTimeLine;
   }
