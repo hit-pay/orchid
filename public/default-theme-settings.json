@@ -55,13 +55,13 @@
                 "props": {
                   "label": "Background Color"
                 },
-                "key": "background_color"
+                "key": "color_bg"
               },
               {
                 "props": {
                   "label": "Text Color"
                 },
-                "key": "text_color"
+                "key": "color_text"
               }
             ]
           }
@@ -79,13 +79,13 @@
                 "props": {
                   "label": "Background Color"
                 },
-                "key": "primary_color"
+                "key": "color_primary"
               },
               {
                 "props": {
                   "label": "Text Color"
                 },
-                "key": "primary_text_color"
+                "key": "color_primary_text"
               }
             ],
             "type": "Colors"
@@ -112,13 +112,13 @@
                 "props": {
                   "label": "Background Color"
                 },
-                "key": "card_background_color"
+                "key": "card_color_bg"
               },
               {
                 "props": {
                   "label": "Text Color"
                 },
-                "key": "card_text_color"
+                "key": "card_color_text"
               }
             ],
             "type": "Colors"
@@ -158,20 +158,45 @@
             }
           },
           {
+            "name": "card_shadow_effect",
+            "type": "RadioGroup",
+            "props": {
+              "label": "Shadow size effect",
+              "alignment": "horizontal",
+              "radio": [
+                {
+                  "value": "none",
+                  "label": "None"
+                },
+                {
+                  "value": "0px 4px 30px -12px var(--color-shadow)",
+                  "label": "Small"
+                },
+                {
+                  "value": "0px 4px 30px -4px var(--color-shadow)",
+                  "label": "Medium"
+                },
+                {
+                  "value": "0px 4px 30px 0px var(--color-shadow)",
+                  "label": "Large"
+                }
+              ]
+            }
+          },
+          {
             "name": [
               {
                 "props": {
                   "label": "Shadow Color"
                 },
-                "key": "card_shadow_color"
+                "key": "color_shadow"
               }
             ],
             "type": "Colors"
           }
         ]
       }
-    ],
-    "active": true
+    ]
   },
   {
     "group": "header",
@@ -213,19 +238,18 @@
             "props": {
               "label": "Background Color"
             },
-            "key": "background_color"
+            "key": "color_bg"
           },
           {
             "props": {
               "label": "Text Color"
             },
-            "key": "text_color"
+            "key": "color_text"
           }
         ],
         "type": "Colors"
       }
-    ],
-    "active": true
+    ]
   },
   {
     "group": "header",
@@ -235,6 +259,35 @@
     "icon": "header",
     "isDisable": true,
     "form": [
+      {
+        "type": "SectionItem",
+        "props": {
+          "title": "Alignment"
+        }
+      },
+      {
+        "name": "alignment",
+        "type": "SelectOptions",
+        "props": {
+          "options": [
+            {
+              "preview": "/templates/default/images/header-alignment-left.png",
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "preview": "/templates/default/images/header-alignment-center.png",
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "preview": "/templates/default/images/header-alignment-right.png",
+              "value": "right",
+              "label": "Right"
+            }
+          ]
+        }
+      },
       {
         "name": "menu_enabled",
         "type": "SectionItem",
@@ -263,19 +316,18 @@
             "props": {
               "label": "Background Color"
             },
-            "key": "background_color"
+            "key": "color_bg"
           },
           {
             "props": {
               "label": "Text Color"
             },
-            "key": "text_color"
+            "key": "color_text"
           }
         ],
         "type": "Colors"
       }
-    ],
-    "active": true
+    ]
   },
   {
     "group": "header",
@@ -286,10 +338,33 @@
     "isDisable": true,
     "form": [
       {
-        "name": "BannerTitle",
         "type": "SectionItem",
         "props": {
-          "title": "Upload Images",
+          "title": "Type"
+        }
+      },
+      {
+        "name": "variant",
+        "type": "SelectOptions",
+        "props": {
+          "options": [
+            {
+              "preview": "/templates/default/images/banner-type-media-only.png",
+              "value": "MediaOnly",
+              "label": "Media Only"
+            },
+            {
+              "preview": "/templates/default/images/banner-type-media-and-text.png",
+              "value": "MediaAndText",
+              "label": "Media & Text"
+            }
+          ]
+        }
+      },
+      {
+        "type": "SectionItem",
+        "props": {
+          "title": "Banner Images",
           "description": "Recommended size 1440x400 pixels"
         }
       },
@@ -307,7 +382,7 @@
         "name": "responsive_banner_size",
         "props": {
           "isToggle": true,
-          "title": "Responsive Banners",
+          "title": "Responsive Banner",
           "description": "Banner images for mobile device, Recommended size 400x400 pixels"
         }
       },
@@ -322,95 +397,256 @@
         }
       },
       {
-        "general": true,
-        "name": "BannerSizeTitle",
-        "type": "SectionItem",
-        "props": {
-          "title": "Banner Size"
-        }
-      },
-      {
-        "general": true,
-        "name": "banner_size",
-        "type": "SelectOptions",
-        "props": {
-          "variant": "list2",
-          "options": [
-            {
-              "preview": "/templates/default/images/banner-size-small.png",
-              "label": "Small",
-              "value": "4,1",
-              "description": "Smallest height, fit to screen width"
-            },
-            {
-              "preview": "/templates/default/images/banner-size-medium.png",
-              "label": "Medium",
-              "value": "3,1",
-              "description": "Smallest height, fit to screen width"
-            },
-            {
-              "preview": "/templates/default/images/banner-size-large.png",
-              "label": "Large",
-              "value": "2,1",
-              "description": "Bigger height, fit to screen width"
-            },
-            {
-              "preview": "/templates/default/images/banner-size-auto.png",
-              "label": "Adapt",
-              "value": "auto",
-              "description": "Following original image size"
+        "name": "BannerSizeSettings",
+        "type": "Children",
+        "label": "Banner Settings",
+        "children": [
+          {
+            "general": true,
+            "type": "SectionItem",
+            "name": "responsive_banner_size",
+            "props": {
+              "isToggle": true,
+              "title": "Responsive Banner Images"
             }
-          ]
-        }
-      },
-      {
-        "general": true,
-        "type": "SectionItem",
-        "name": "BannerSizeTitle",
-        "show_if": "responsive_banner_size",
-        "show_if_value": true,
-        "props": {
-          "title": "Banner Size Mobile"
-        }
-      },
-      {
-        "general": true,
-        "name": "banner_size_mobile",
-        "type": "SelectOptions",
-        "show_if": "responsive_banner_size",
-        "show_if_value": true,
-        "props": {
-          "variant": "list2",
-          "options": [
-            {
-              "preview": "/templates/default/images/banner-size-small.png",
-              "label": "Small",
-              "value": "3,1",
-              "description": "Smallest height, fit to screen width"
-            },
-            {
-              "preview": "/templates/default/images/banner-size-medium.png",
-              "label": "Medium",
-              "value": "2,1",
-              "description": "Smallest height, fit to screen width"
-            },
-            {
-              "preview": "/templates/default/images/banner-size-large.png",
-              "label": "Large",
-              "value": "1,1",
-              "description": "Bigger height, fit to screen width"
-            },
-            {
-              "preview": "/templates/default/images/banner-size-auto.png",
-              "label": "Adapt",
-              "value": "auto",
-              "description": "Following original image size"
+          },
+          {
+            "general": true,
+            "name": "BannerSizeTitle",
+            "type": "SectionItem",
+            "props": {
+              "title": "Banner Size"
             }
-          ]
-        }
+          },
+          {
+            "general": true,
+            "name": "banner_size",
+            "type": "SelectOptions",
+            "props": {
+              "variant": "list2",
+              "options": [
+                {
+                  "preview": "/templates/default/images/banner-size-small.png",
+                  "label": "Small",
+                  "value": "4,1",
+                  "description": "Smallest height, fit to screen width , ratio (4:1)"
+                },
+                {
+                  "preview": "/templates/default/images/banner-size-medium.png",
+                  "label": "Medium",
+                  "value": "3,1",
+                  "description": "Smallest height, fit to screen width , ratio (3:1)"
+                },
+                {
+                  "preview": "/templates/default/images/banner-size-large.png",
+                  "label": "Large",
+                  "value": "2,1",
+                  "description": "Bigger height, fit to screen width , ratio (2:1)"
+                },
+                {
+                  "preview": "/templates/default/images/banner-size-auto.png",
+                  "label": "Adapt",
+                  "value": "auto",
+                  "description": "Following original image size"
+                }
+              ]
+            }
+          },
+          {
+            "general": true,
+            "type": "SectionItem",
+            "show_if": "responsive_banner_size",
+            "show_if_value": true,
+            "props": {
+              "title": "Banner Size Mobile"
+            }
+          },
+          {
+            "general": true,
+            "name": "banner_size_mobile",
+            "type": "SelectOptions",
+            "show_if": "responsive_banner_size",
+            "show_if_value": true,
+            "props": {
+              "variant": "list2",
+              "options": [
+                {
+                  "preview": "/templates/default/images/banner-size-small.png",
+                  "label": "Small",
+                  "value": "3,1",
+                  "description": "Smallest height, fit to screen width , ratio (3:1)"
+                },
+                {
+                  "preview": "/templates/default/images/banner-size-medium.png",
+                  "label": "Medium",
+                  "value": "2,1",
+                  "description": "Smallest height, fit to screen width , ratio (2:1)"
+                },
+                {
+                  "preview": "/templates/default/images/banner-size-large.png",
+                  "label": "Large",
+                  "value": "1,1",
+                  "description": "Bigger height, fit to screen width , ratio (1:1)"
+                },
+                {
+                  "preview": "/templates/default/images/banner-size-auto.png",
+                  "label": "Adapt",
+                  "value": "auto",
+                  "description": "Following original image size"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "MediaAndTextSettings",
+        "type": "Children",
+        "label": "Text Settings",
+        "show_if": "variant",
+        "show_if_value": "MediaAndText",
+        "children": [
+          {
+            "type": "SectionItem",
+            "props": {
+              "title": "Image Width"
+            }
+          },
+          {
+            "name": "variant_width",
+            "type": "SelectOptions",
+            "props": {
+              "options": [
+                {
+                  "preview": "/templates/default/images/s-image-width-half.png",
+                  "value": "half",
+                  "label": "Half Width"
+                },
+                {
+                  "preview": "/templates/default/images/s-image-width-full.png",
+                  "value": "full",
+                  "label": "Full Width"
+                }
+              ]
+            }
+          },
+          {
+            "type": "SectionItem",
+            "props": {
+              "title": "alignment"
+            }
+          },
+          {
+            "show_if": "variant_width",
+            "show_if_value": "half",
+            "name": "alignment_half",
+            "type": "SelectOptions",
+            "props": {
+              "options": [
+                {
+                  "preview": "/templates/default/images/s-image-text-left-half.png",
+                  "value": "left",
+                  "label": "Text Left"
+                },
+                {
+                  "preview": "/templates/default/images/s-image-text-right-half.png",
+                  "value": "right",
+                  "label": "Text right"
+                }
+              ]
+            }
+          },
+          {
+            "show_if": "variant_width",
+            "show_if_value": "full",
+            "name": "alignment_full",
+            "type": "SelectOptions",
+            "props": {
+              "options": [
+                {
+                  "preview": "/templates/default/images/s-image-text-left-full.png",
+                  "value": "left",
+                  "label": "Text Left"
+                },
+                {
+                  "preview": "/templates/default/images/s-image-text-center-full.png",
+                  "value": "center",
+                  "label": "Text center"
+                },
+                {
+                  "preview": "/templates/default/images/s-image-text-right-full.png",
+                  "value": "right",
+                  "label": "Text right"
+                }
+              ]
+            }
+          },
+          {
+            "type": "SectionItem",
+            "props": {
+              "title": "Content"
+            }
+          },
+          {
+            "name": "title",
+            "type": "Input",
+            "props": {
+              "label": "Title"
+            }
+          },
+          {
+            "name": "description",
+            "type": "TextArea",
+            "props": {
+              "label": "Description"
+            }
+          },
+          {
+            "name": "button_text",
+            "type": "Input",
+            "props": {
+              "label": "Button text"
+            }
+          },
+          {
+            "name": "button_link",
+            "type": "Input",
+            "props": {
+              "label": "Button Link"
+            }
+          },
+          {
+            "type": "SectionItem",
+            "props": {
+              "title": "Colors"
+            }
+          },
+          {
+            "name": [
+              {
+                "props": {
+                  "label": "Background"
+                },
+                "key": "color_bg"
+              },
+              {
+                "props": {
+                  "label": "Heading "
+                },
+                "key": "color_text"
+              },
+              {
+                "props": {
+                  "label": "Text"
+                },
+                "key": "color_text"
+              }
+            ],
+            "type": "Colors"
+          }
+        ]
       }
-    ],
-    "active": true
+    ]
   },
   {
     "group": "sections",
@@ -418,7 +654,7 @@
     "section": "Products",
     "title": "Products",
     "icon": "tag",
-    "preview": "/templates/default/images/products-sections.png",
+    "preview": "/templates/default/images/section-products.png",
     "form": [
       {
         "type": "SectionItem",
@@ -500,7 +736,9 @@
         }
       },
       {
-        "name": "product_column",
+        "show_if": "variant",
+        "show_if_value": "grid",
+        "name": "column_grid",
         "type": "SelectOptions",
         "props": {
           "options": [
@@ -516,6 +754,31 @@
             },
             {
               "preview": "/templates/default/images/product-column-2-grid.png",
+              "label": "2 columns",
+              "value": "2,2,1"
+            }
+          ]
+        }
+      },
+      {
+        "show_if": "variant",
+        "show_if_value": "carousel",
+        "name": "column_carousel",
+        "type": "SelectOptions",
+        "props": {
+          "options": [
+            {
+              "preview": "/templates/default/images/product-column-4-carousel.png",
+              "label": "4 columns",
+              "value": "4,3,2"
+            },
+            {
+              "preview": "/templates/default/images/product-column-3-carousel.png",
+              "label": "3 columns",
+              "value": "3,2,1"
+            },
+            {
+              "preview": "/templates/default/images/product-column-2-carousel.png",
               "label": "2 columns",
               "value": "2,2,1"
             }
@@ -565,6 +828,8 @@
         }
       },
       {
+        "show_if": "variant",
+        "show_if_value": "carousel",
         "name": "is_limit_products",
         "type": "SectionItem",
         "props": {
@@ -582,6 +847,141 @@
         }
       },
       {
+        "name": "title",
+        "type": "Input",
+        "props": {
+          "label": "Title"
+        }
+      },
+      {
+        "show_if": "variant",
+        "show_if_value": "grid",
+        "type": "SectionItem",
+        "name": "view_all_button",
+        "props": {
+          "isToggle": true,
+          "title": "View all Button"
+        }
+      },
+      {
+        "name": "title",
+        "type": "Input",
+        "props": {
+          "label": "Title"
+        }
+      },
+      {
+        "name": "description",
+        "type": "TextArea",
+        "props": {
+          "label": "Description"
+        }
+      }
+    ],
+    "canDelete": true,
+    "default": {
+      "product_form": "all_product",
+      "variant": "grid"
+    }
+  },
+  {
+    "group": "sections",
+    "key": "TextAndImage",
+    "section": "TextAndImage",
+    "title": "Text and Image",
+    "icon": "tag",
+    "preview": "/templates/default/images/section-text-and-image.png",
+    "form": [
+      {
+        "type": "SectionItem",
+        "props": {
+          "title": "Image Width"
+        }
+      },
+      {
+        "name": "variant",
+        "type": "SelectOptions",
+        "props": {
+          "options": [
+            {
+              "preview": "/templates/default/images/s-image-width-half.png",
+              "value": "half",
+              "label": "Half Width"
+            },
+            {
+              "preview": "/templates/default/images/s-image-width-full.png",
+              "value": "full",
+              "label": "Full Width"
+            }
+          ]
+        }
+      },
+      {
+        "type": "SectionItem",
+        "props": {
+          "title": "alignment"
+        }
+      },
+      {
+        "show_if": "variant",
+        "show_if_value": "half",
+        "name": "alignment_half",
+        "type": "SelectOptions",
+        "props": {
+          "options": [
+            {
+              "preview": "/templates/default/images/s-image-text-left-half.png",
+              "value": "left",
+              "label": "Text Left"
+            },
+            {
+              "preview": "/templates/default/images/s-image-text-right-half.png",
+              "value": "right",
+              "label": "Text right"
+            }
+          ]
+        }
+      },
+      {
+        "show_if": "variant",
+        "show_if_value": "full",
+        "name": "alignment_full",
+        "type": "SelectOptions",
+        "props": {
+          "options": [
+            {
+              "preview": "/templates/default/images/s-image-text-left-full.png",
+              "value": "left",
+              "label": "Text Left"
+            },
+            {
+              "preview": "/templates/default/images/s-image-text-center-full.png",
+              "value": "center",
+              "label": "Text center"
+            },
+            {
+              "preview": "/templates/default/images/s-image-text-right-full.png",
+              "value": "right",
+              "label": "Text right"
+            }
+          ]
+        }
+      },
+      {
+        "type": "SectionItem",
+        "props": {
+          "title": "Upload Images",
+          "description": "Recommended size 1440x400 pixels"
+        }
+      },
+      {
+        "type": "Images",
+        "name": "images",
+        "props": {
+          "maxImages": 1
+        }
+      },
+      {
         "type": "SectionItem",
         "props": {
           "title": "Content"
@@ -593,12 +993,39 @@
         "props": {
           "label": "Title"
         }
+      },
+      {
+        "name": "description",
+        "type": "TextArea",
+        "props": {
+          "label": "Description"
+        }
+      },
+      {
+        "name": "button_text",
+        "type": "Input",
+        "props": {
+          "label": "Button text"
+        }
+      },
+      {
+        "name": "button_link",
+        "type": "Input",
+        "props": {
+          "label": "Button Link"
+        }
       }
     ],
     "canDelete": true,
     "default": {
-      "product_form": "all_product",
-      "variant": "grid"
+      "variant": "full",
+      "alignment_half": "left",
+      "alignment_full": "left",
+      "images": [],
+      "title": "Our Story",
+      "description": "",
+      "button_text": "Read more",
+      "button_link": "https://hitpayapp.com"
     }
   },
   {
@@ -609,6 +1036,53 @@
     "icon": "footer",
     "isDisable": true,
     "form": [
+      {
+        "type": "SectionItem",
+        "props": {
+          "title": "Colors"
+        }
+      },
+      {
+        "name": [
+          {
+            "props": {
+              "label": "Background Color"
+            },
+            "key": "color_bg"
+          },
+          {
+            "props": {
+              "label": "Text Color"
+            },
+            "key": "color_text"
+          }
+        ],
+        "type": "Colors"
+      },
+      {
+        "type": "SectionItem",
+        "props": {
+          "title": "Footer Logo",
+          "description": "Recommended size 640x640 pixels"
+        }
+      },
+      {
+        "type": "Images",
+        "name": "footer_logo",
+        "props": {
+          "maxImages": 1
+        }
+      },
+      {
+        "type": "SectionItem",
+        "props": {
+          "title": "Content"
+        }
+      },
+      {
+        "type": "TextArea",
+        "name": "footer_content"
+      },
       {
         "name": "PaymentLogo",
         "type": "Children",
@@ -623,7 +1097,7 @@
           },
           {
             "general": true,
-            "name": "payment_method_logos",
+            "name": "payment_methods",
             "type": "Select",
             "props": {
               "multiple": true,
@@ -643,6 +1117,74 @@
         ]
       },
       {
+        "name": "FooterLink1",
+        "type": "Children",
+        "icon": "align-top",
+        "label": "Footer Link 1",
+        "children": [
+          {
+            "type": "SectionItem",
+            "props": {
+              "title": "Title"
+            }
+          },
+          {
+            "general": true,
+            "type": "Input",
+            "name": "footer_link_1_title",
+            "props": {
+              "placeholder": "Company"
+            }
+          },
+          {
+            "type": "SectionItem",
+            "props": {
+              "title": "Menus"
+            }
+          },
+          {
+            "general": true,
+            "name": "footer_link_1_menus",
+            "type": "Menus",
+            "noMenuIcon": "/templates/default/images/no-menu-footer.png"
+          }
+        ]
+      },
+      {
+        "name": "FooterLink2",
+        "type": "Children",
+        "icon": "align-top",
+        "label": "Footer Link 2",
+        "children": [
+          {
+            "type": "SectionItem",
+            "props": {
+              "title": "Title"
+            }
+          },
+          {
+            "general": true,
+            "type": "Input",
+            "name": "footer_link_2_title",
+            "props": {
+              "placeholder": "Company"
+            }
+          },
+          {
+            "type": "SectionItem",
+            "props": {
+              "title": "Menus"
+            }
+          },
+          {
+            "general": true,
+            "name": "footer_link_2_menus",
+            "type": "Menus",
+            "noMenuIcon": "/templates/default/images/no-menu-footer.png"
+          }
+        ]
+      },
+      {
         "name": "SocialMedia",
         "type": "Children",
         "icon": "facebook",
@@ -655,6 +1197,7 @@
             }
           },
           {
+            "general": true,
             "type": "Input",
             "name": "footer_social_title",
             "props": {
@@ -675,32 +1218,8 @@
             "noMenuIcon": "/templates/default/images/no-menu-footer.png"
           }
         ]
-      },
-      {
-        "type": "SectionItem",
-        "props": {
-          "title": "Colors"
-        }
-      },
-      {
-        "name": [
-          {
-            "props": {
-              "label": "Background Color"
-            },
-            "key": "background_color"
-          },
-          {
-            "props": {
-              "label": "Text Color"
-            },
-            "key": "text_color"
-          }
-        ],
-        "type": "Colors"
       }
-    ],
-    "active": true
+    ]
   },
   {
     "group": "footer",
@@ -724,8 +1243,7 @@
         "noMenuIcon": "/templates/default/images/no-menu-icon-links.png"
       }
     ],
-    "isDisable": true,
-    "active": true
+    "isDisable": true
   },
   {
     "group": "link_in_bio",
@@ -741,7 +1259,6 @@
         "noMenuIcon": "/templates/default/images/no-menu-button-links.png"
       }
     ],
-    "isDisable": true,
-    "active": true
+    "isDisable": true
   }
 ]

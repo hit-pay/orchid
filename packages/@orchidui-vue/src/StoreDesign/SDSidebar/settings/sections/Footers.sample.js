@@ -13,13 +13,13 @@ const FOOTER_CONTENT_FORM = [
         props: {
           label: "Background Color",
         },
-        key: "background_color",
+        key: "color_bg",
       },
       {
         props: {
           label: "Text Color",
         },
-        key: "text_color",
+        key: "color_text",
       },
     ],
     type: "Colors",
@@ -46,41 +46,41 @@ const FOOTER_CONTENT_FORM = [
   },
   {
     type: "TextArea",
-    name: "content"
+    name: "footer_content"
   },
-  // {
-  //   name: "PaymentLogo",
-  //   type: "Children",
-  //   icon: "bank-card",
-  //   label: "Payment Method Logo",
-  //   children: [
-  //     {
-  //       type: "SectionItem",
-  //       props: {
-  //         title: "Choose payment method",
-  //       },
-  //     },
-  //     {
-  //       general: true,
-  //       name: "payment_method_logos",
-  //       type: "Select",
-  //       props: {
-  //         multiple: true,
-  //         placeholder: "Select payment method",
-  //         options: [
-  //           {
-  //             label: "Atome",
-  //             value: "atome",
-  //           },
-  //           {
-  //             label: "Shopeback",
-  //             value: "shopeback",
-  //           },
-  //         ],
-  //       },
-  //     },
-  //   ],
-  // },
+  {
+    name: "PaymentLogo",
+    type: "Children",
+    icon: "bank-card",
+    label: "Payment Method Logo",
+    children: [
+      {
+        type: "SectionItem",
+        props: {
+          title: "Choose payment method",
+        },
+      },
+      {
+        general: true,
+        name: "payment_methods",
+        type: "Select",
+        props: {
+          multiple: true,
+          placeholder: "Select payment method",
+          options: [
+            {
+              label: "Atome",
+              value: "atome",
+            },
+            {
+              label: "Shopeback",
+              value: "shopeback",
+            },
+          ],
+        },
+      },
+    ],
+  },
   {
     name: "FooterLink1",
     type: "Children",
@@ -94,6 +94,7 @@ const FOOTER_CONTENT_FORM = [
         },
       },
       {
+        general: true,
         type: "Input",
         name: "footer_link_1_title",
         props: {
@@ -127,6 +128,7 @@ const FOOTER_CONTENT_FORM = [
         },
       },
       {
+        general: true,
         type: "Input",
         name: "footer_link_2_title",
         props: {
@@ -160,6 +162,7 @@ const FOOTER_CONTENT_FORM = [
         },
       },
       {
+        general: true,
         type: "Input",
         name: "footer_social_title",
         props: {

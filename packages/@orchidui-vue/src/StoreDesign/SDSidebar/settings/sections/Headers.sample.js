@@ -33,13 +33,13 @@ const TOP_BANNER_FORM = [
         props: {
           label: "Background Color",
         },
-        key: "background_color",
+        key: "color_bg",
       },
       {
         props: {
           label: "Text Color",
         },
-        key: "text_color",
+        key: "color_text",
       },
     ],
     type: "Colors",
@@ -50,11 +50,11 @@ const HEADER_FORM = [
   {
     type: "SectionItem",
     props: {
-      title: "Aligment",
+      title: "Alignment",
     },
   },
   {
-    name: "aligment",
+    name: "alignment",
     type: "SelectOptions",
     props: {
       options: [
@@ -104,13 +104,13 @@ const HEADER_FORM = [
         props: {
           label: "Background Color",
         },
-        key: "background_color",
+        key: "color_bg",
       },
       {
         props: {
           label: "Text Color",
         },
-        key: "text_color",
+        key: "color_text",
       },
     ],
     type: "Colors",

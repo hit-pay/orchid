@@ -263,13 +263,13 @@ const TEXT_AND_IMAGE_FORM = [
   {
     type: "SectionItem",
     props: {
-      title: "Aligment",
+      title: "alignment",
     },
   },
   {
     show_if: "variant",
     show_if_value: "half",
-    name: "aligment_half",
+    name: "alignment_half",
     type: "SelectOptions",
     props: {
       options: [
@@ -289,7 +289,7 @@ const TEXT_AND_IMAGE_FORM = [
   {
     show_if: "variant",
     show_if_value: "full",
-    name: "aligment_full",
+    name: "alignment_full",
     type: "SelectOptions",
     props: {
       options: [

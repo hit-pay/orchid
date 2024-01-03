@@ -105,13 +105,13 @@ const STYLES_FORM = [
             props: {
               label: "Background Color",
             },
-            key: "card_background_color",
+            key: "card_color_bg",
           },
           {
             props: {
               label: "Text Color",
             },
-            key: "card_text_color",
+            key: "card_color_text",
           },
         ],
         type: "Colors",
@@ -151,12 +151,38 @@ const STYLES_FORM = [
         },
       },
       {
+        name: "card_shadow_effect",
+        type: "RadioGroup",
+        props: {
+          label: "Shadow size effect",
+          alignment: "horizontal",
+          radio: [
+            {
+              value: "none",
+              label: "None",
+            },
+            {
+              value: "0px 4px 30px -12px var(--color-shadow)",
+              label: "Small",
+            },
+            {
+              value: "0px 4px 30px -4px var(--color-shadow)",
+              label: "Medium",
+            },
+            {
+              value: "0px 4px 30px 0px var(--color-shadow)",
+              label: "Large",
+            },
+          ],
+        },
+      },
+      {
         name: [
           {
             props: {
               label: "Shadow Color",
             },
-            key: "card_shadow_color",
+            key: "color_shadow",
           },
         ],
         type: "Colors",

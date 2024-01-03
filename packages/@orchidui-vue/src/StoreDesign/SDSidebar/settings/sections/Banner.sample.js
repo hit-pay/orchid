@@ -198,13 +198,13 @@ const BANNER_FORM = [
       {
         type: "SectionItem",
         props: {
-          title: "Aligment",
+          title: "alignment",
         },
       },
       {
         show_if: "variant_width",
         show_if_value: "half",
-        name: "aligment_half",
+        name: "alignment_half",
         type: "SelectOptions",
         props: {
           options: [
@@ -224,7 +224,7 @@ const BANNER_FORM = [
       {
         show_if: "variant_width",
         show_if_value: "full",
-        name: "aligment_full",
+        name: "alignment_full",
         type: "SelectOptions",
         props: {
           options: [
@@ -279,6 +279,35 @@ const BANNER_FORM = [
         props: {
           label: "Button Link",
         },
+      },
+      {
+        type: "SectionItem",
+        props: {
+          title: "Colors",
+        },
+      },
+      {
+        name: [
+          {
+            props: {
+              label: "Background",
+            },
+            key: "color_bg",
+          },
+          {
+            props: {
+              label: "Heading ",
+            },
+            key: "color_text",
+          },
+          {
+            props: {
+              label: "Text",
+            },
+            key: "color_text",
+          },
+        ],
+        type: "Colors",
       },
     ]
   }

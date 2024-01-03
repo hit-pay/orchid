@@ -66,8 +66,8 @@ const settings = [
     canDelete: true,
     default: {
       variant: "full",
-      aligment_half: "left",
-      aligment_full: "left",
+      alignment_half: "left",
+      alignment_full: "left",
       images: [],
       title: "Our Story",
       description: "",
