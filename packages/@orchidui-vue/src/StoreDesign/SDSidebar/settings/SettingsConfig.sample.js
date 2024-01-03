@@ -54,7 +54,7 @@ const settings = [
       variant: "grid",
       product_from: "all",
       category_id: "",
-      product_column: [4,3,2],
+      product_column: [2,3,4],
       is_limit_products: false,
       limit_products: 6,
       description: "",
