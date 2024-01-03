@@ -8,29 +8,22 @@ const STYLES_FORM = [
       {
         name: "font_heading",
         type: "Select",
+        options: "font",
         props: {
           label: "Heading",
           placeholder: "Choose Font",
           options: [
-            {
-              label: "Inter",
-              value: "inter",
-            },
           ],
         },
       },
       {
         name: "font_body",
         type: "Select",
+        options: "font",
         props: {
           label: "Body",
           placeholder: "Choose Font",
-          options: [
-            {
-              label: "Inter",
-              value: "inter",
-            },
-          ],
+          options: [],
         },
       },
     ],
