@@ -16,6 +16,10 @@ const props = defineProps({
   accept: String,
   errorMessage: String,
   imageClasses: String,
+  allowToEdit: {
+    type: Boolean,
+    default: true,
+  },
   label: String,
   hint: String,
   uploadButtonOptions: Object,
@@ -191,7 +195,7 @@ const onEditFile = () => {
             <template #menu>
               <div class="py-2 flex flex-col">
                 <div
-                  v-if="!currentFile?.file.type.includes('video')"
+                  v-if="!currentFile?.file.type.includes('video') && allowToEdit"
                   class="flex p-3 cursor-pointer items-center gap-x-3"
                   @click="onEditFile"
                 >
