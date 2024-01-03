@@ -203,13 +203,6 @@ const PRODUCT_FORM = [
     },
   },
   {
-    name: "title",
-    type: "Input",
-    props: {
-      label: "Title",
-    },
-  },
-  {
     show_if: "variant",
     show_if_value: "grid",
     type: "SectionItem",

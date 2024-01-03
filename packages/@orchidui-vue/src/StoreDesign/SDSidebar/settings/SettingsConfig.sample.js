@@ -51,8 +51,16 @@ const settings = [
     form: PRODUCT_FORM,
     canDelete: true,
     default: {
-      product_form: "all_product",
       variant: "grid",
+      product_from: "all",
+      category_id: "",
+      product_column: [4,3,2],
+      is_limit_products: false,
+      limit_products: 6,
+      description: "",
+      color_bg:"",
+      color_heading:"",
+      color_text:"",
     },
   },
   {
