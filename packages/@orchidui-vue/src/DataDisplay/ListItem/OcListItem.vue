@@ -13,7 +13,6 @@ const props = defineProps({
   iconClass: String,
   iconText: String,
   date: String,
-  maxPaymentsMethods: Number,
   type: {
     type: String,
     default: "timeLine",
@@ -58,10 +57,10 @@ const getTypeComponent = computed(() => {
   <component
     :is="getTypeComponent"
     v-bind="props"
+    :class="{ 'opacity-50': isDisabled }"
     @more="$emit('more')"
     @edit="$emit('edit')"
     @delete="$emit('delete')"
-    :class="{ 'opacity-50': isDisabled }"
   >
     <template v-if="$slots.menu" #menu>
       <slot name="menu" />
