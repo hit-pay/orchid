@@ -126,15 +126,15 @@ export const Default = {
                           <Button label="Undo" />
                           <Button label="Redo" />
                         </div>
-                        <Button @click="content = 'data'" label="Store Design Data" variant="secondary"  />
-                        <Button @click="content = 'sidebar'" label="Sidebar Settings" variant="secondary"  />
-                        <Button @click="content = 'section'" label="Section Settings" variant="secondary"  />
+                        <Button @click="content = 'data'" label="Store Design" variant="secondary"  />
+                        <Button @click="content = 'preset'" label="Preset" variant="secondary"  />
+                        <Button @click="content = 'section'" label="Settings" variant="secondary"  />
                         <Button @click="content = 'preview'" label="PREVIEW" variant="secondary"  />
                     </div>
                     <div class="h-[80vh] overflow-auto rounded bg-black">
                       <pre v-if="content === 'data'" class="bg-black text-white p-3 rounded">{{storeDesignData}}</pre>
-                      <pre v-if="content === 'sidebar'" class="bg-black text-white p-3 rounded">{{sidebarConfig.sidebar}}</pre>
                       <pre v-if="content === 'section'" class="bg-black text-white p-3 rounded">{{sidebarConfig.settings}}</pre>
+                      <pre v-if="content === 'preset'" class="bg-black text-white p-3 rounded">{{sidebarConfig.preset}}</pre>
                       <div class="flex flex-wrap gap-5 p-5" v-if="content === 'preview'">
                         <Button v-for="section in storeDesignData.sections" :label="section.title ?? section.section" @click="updateSidebarActive(section)" />
                       </div>
