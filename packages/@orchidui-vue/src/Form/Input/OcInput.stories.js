@@ -41,6 +41,7 @@ export const Default = {
       position: "top",
       distance: 10,
     },
+    variant: "",
   },
   render: (args) => ({
     components: { Theme, OCInput },
@@ -64,6 +65,7 @@ export const Default = {
                 :tooltip-options="args.tooltipOptions"
                 :label-icon="args.labelIcon"
                 :tooltip-text="args.tooltipText"
+                :variant="args.variant"
             />
           </Theme>
         `,

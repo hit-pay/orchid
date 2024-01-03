@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, useAttrs } from "vue";
+import { computed, onMounted, ref, useAttrs, watch } from "vue";
 import { BaseInput, Icon } from "@/orchidui";
 import { pickEventListeners } from "@/orchidui/Form/Input/inputHelper.js";
 
@@ -68,23 +68,49 @@ const props = defineProps({
     type: Object,
     default: () => ({}),
   },
+  variant: {
+    type: String,
+  },
 });
 
-defineEmits({
-  "update:modelValue": [],
-  blur: [],
-  focus: [],
-});
+const emit = defineEmits(["update:modelValue", "blur", "focus"]);
 
 const attrs = useAttrs();
 
 const eventListeners = pickEventListeners(attrs);
 
 const inputRef = ref();
+const formattedValue = ref();
 
 defineExpose({
   focus: () => inputRef.value.focus(),
 });
+
+watch(formattedValue, (data) => {
+  if(props.variant === 'currency') {
+    const formatted = formatCurrencyValue(data);
+  
+    formattedValue.value = formatted;
+    emit('update:modelValue', formatted);
+  }
+})
+
+const formatCurrencyValue = (value = 0) => {
+  let output = value;
+
+  // removing non-digit characters
+  output = +(`${output}`.replace(/\D/g, ''));
+  output = (output / 100).toFixed(2);
+
+  return output;
+}
+
+onMounted(() => {
+  if(props.variant === 'currency') {
+    formattedValue.value = formatCurrencyValue(props.modelValue);
+    emit('update:modelValue', formattedValue.value);
+  }
+})
 
 const isFocused = ref(false);
 const inputClasses = computed(() => [
@@ -131,8 +157,8 @@ const inputClasses = computed(() => [
 
           <input
             ref="inputRef"
+            v-model="formattedValue"
             :type="inputType"
-            :value="modelValue"
             :readonly="isReadonly"
             :placeholder="placeholder"
             :disabled="disabled"
