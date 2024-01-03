@@ -117,7 +117,7 @@ onMounted(() => onScroll());
       <TableHeader
         v-if="isSelectable"
         :is-sticky="isSticky"
-        class="md:ml-0 md:border-b border-oc-gray-200"
+        class="md:ml-0 md:border-b border-oc-gray-200 min-w-[32px]"
         :class="[
           isSticky ? 'shrink-0 sticky left-0 z-10' : 'w-[40px] md:w-[5%]',
         ]"
@@ -196,7 +196,7 @@ onMounted(() => onScroll());
       >
         <TableCell
           v-if="isSelectable"
-          class="flex border-oc-gray-200 justify-center left-0"
+          class="flex border-oc-gray-200 justify-center left-0 min-w-[32px]"
           :is-last="fields.length === i + 1"
           :is-selected="
             selectedRows.some((r) => getRowKey(r) === getRowKey(field))
