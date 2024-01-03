@@ -48,13 +48,13 @@ const STYLES_FORM = [
             props: {
               label: "Background Color",
             },
-            key: "background_color",
+            key: "color_bg",
           },
           {
             props: {
               label: "Text Color",
             },
-            key: "text_color",
+            key: "color_text",
           },
         ],
       },
@@ -72,13 +72,13 @@ const STYLES_FORM = [
             props: {
               label: "Background Color",
             },
-            key: "primary_color",
+            key: "color_primary",
           },
           {
             props: {
               label: "Text Color",
             },
-            key: "primary_text_color",
+            key: "color_primary_text",
           },
         ],
         type: "Colors",
