@@ -68,9 +68,9 @@ const props = defineProps({
     type: Object,
     default: () => ({}),
   },
-  variant: {
-    type: String,
-  },
+  formatValue: {
+    type: Function,
+  }
 });
 
 defineEmits(["update:modelValue", "blur", "focus"]);
@@ -80,33 +80,20 @@ const attrs = useAttrs();
 const eventListeners = pickEventListeners(attrs);
 
 const inputRef = ref();
-const formattedValue = ref();
 
 defineExpose({
   focus: () => inputRef.value.focus(),
 });
 
-watch(formattedValue, (data) => {
-  formattedValue.value = formatValue(data);
-})
+const formattedValue = computed(() => updateValue(props.modelValue));
 
-const formatValue = (value) => {
-  let output = value;
-
-  if(props.variant === 'currency') {
-    // removing non-digit characters
-    output = +(`${output}`.replace(/\D/g, ''));
-    output = (output / 100).toFixed(2);
+const updateValue = (value) => {
+  if (typeof props.formatValue === 'function') {
+    return props.formatValue(value);
   }
 
-  return output;
+  return value;
 }
-
-onMounted(() => {
-  if(props.variant === 'currency') {
-    formattedValue.value = formatValue(props.modelValue);
-  }
-})
 
 const isFocused = ref(false);
 const inputClasses = computed(() => [
@@ -168,7 +155,7 @@ const inputClasses = computed(() => [
               isFocused = false;
               $emit('blur');
             "
-            @input="$emit('update:modelValue', formatValue($event.target.value))"
+            @input="$emit('update:modelValue', updateValue($event.target.value))"
           />
         </div>
       </div>
