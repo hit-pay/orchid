@@ -163,7 +163,7 @@
                   "props": {
                     "label": "Shadow Color"
                   },
-                  "key": "card_shadow_color"
+                  "key": "color_shadow"
                 }
               ],
               "type": "Colors"
