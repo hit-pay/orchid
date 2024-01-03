@@ -15,7 +15,7 @@ defineProps({
   },
   isDisabled: Boolean,
 });
-const emit = defineEmits(["more", "click"]);
+const emit = defineEmits(["more", "click:item"]);
 const isOpen = ref(false);
 </script>
 
@@ -27,7 +27,7 @@ const isOpen = ref(false);
     <div class="flex items-center justify-between">
       <div
         class="flex text-sm text-oc-text-400 items-center gap-x-3"
-        @click="emit('click', $event)"
+        @click="emit('click:item', $event)"
       >
         <span v-if="title" class="text-base text-oc-text font-medium">
           {{ title }}
@@ -56,7 +56,7 @@ const isOpen = ref(false);
         </Dropdown>
       </template>
     </div>
-    <div class="flex flex-col gap-4" @click="emit('click', $event)">
+    <div class="flex flex-col gap-4" @click="emit('click:item', $event)">
       <div class="text-oc-text-500 text-sm">{{ description }}</div>
       <div class="flex gap-5" v-if="details.length">
         <div
