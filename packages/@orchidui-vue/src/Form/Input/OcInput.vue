@@ -91,7 +91,6 @@ watch(formattedValue, (data) => {
     const formatted = formatCurrencyValue(data);
   
     formattedValue.value = formatted;
-    emit('update:modelValue', formatted);
   }
 })
 
@@ -172,7 +171,7 @@ const inputClasses = computed(() => [
               isFocused = false;
               $emit('blur');
             "
-            @input="$emit('update:modelValue', $event.target.value)"
+            @input="$emit('update:modelValue', +formatCurrencyValue($event.target.value))"
           />
         </div>
       </div>
