@@ -37,9 +37,9 @@ const StoreDesign = {
       // colors
       color_bg: "#FFFFFF",
       color_text: "#03102F",
-      color_shadow: "#03102F",
       color_primary: "#002771",
       color_primary_text: "#FFFFFF",
+      color_shadow: "#03102F",
       card_color_bg: "#FFFFFF",
       card_color_text: "#03102F",
       // Button
@@ -81,9 +81,9 @@ const StoreDesign = {
       description: "",
       button_text: "",
       button_link: "",
-      color_bg: "",
-      color_heading: "",
-      color_text: "",
+      color_bg: "#FFFFFF",
+      color_heading: "#03102F",
+      color_text: "#03102F",
       active: true,
     },
     {
@@ -96,7 +96,6 @@ const StoreDesign = {
       color_bg: "#FFFFFF",
       color_text: "#03102F",
       active: true,
-
     },
     {
       group: "sections",
@@ -110,9 +109,9 @@ const StoreDesign = {
       is_limit_products: false,
       limit_products: 6,
       description: "",
-      color_bg:"",
-      color_heading:"",
-      color_text:"",
+      color_bg: "#FFFFFF",
+      color_heading: "#03102F",
+      color_text: "#03102F",
       active: true,
     },
     {
@@ -127,9 +126,9 @@ const StoreDesign = {
       is_limit_products: false,
       limit_products: 6,
       description: "",
-      color_bg:"",
-      color_heading:"",
-      color_text:"",
+      color_bg: "#FFFFFF",
+      color_heading: "#03102F",
+      color_text: "#03102F",
       active: true,
     },
     {
