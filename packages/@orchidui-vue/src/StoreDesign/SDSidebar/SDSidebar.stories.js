@@ -1,9 +1,11 @@
 import { Theme, Button } from "@/orchidui";
 import { SDSidebar } from "@/orchidui/StoreDesign";
-// config
-import { Config } from "./settings/Config.sample";
-// data
-import { StoreDesign } from "./settings/StoreDesign.sample";
+// config default
+// import { Config } from "./settings/Config.sample";
+// import { StoreDesign } from "./settings/StoreDesign.sample";
+// config Juizzy
+import { Config } from "./settings/Config-Juizzy.sample";
+import { StoreDesign } from "./settings/StoreDesign-Juizzy.sample";
 
 import { ref } from "vue";
 export default {
