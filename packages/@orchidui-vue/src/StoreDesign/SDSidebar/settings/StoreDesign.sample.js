@@ -39,7 +39,7 @@ const StoreDesign = {
       color_text: "#03102F",
       color_primary: "#002771",
       color_primary_text: "#FFFFFF",
-      color_shadow: "#03102F",
+      color_shadow: "rgba(0, 0, 0, 0.12)",
       card_color_bg: "#FFFFFF",
       card_color_text: "#03102F",
       // Button
@@ -64,7 +64,7 @@ const StoreDesign = {
       key: "Header",
       section: "Header",
       alignment: "right",
-      color_bg: "#002771",
+      color_bg: "#FFFFFF",
       color_text: "#03102F",
       active: true,
     },

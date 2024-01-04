@@ -93,19 +93,19 @@ const BANNER_FORM = [
             {
               preview: ASSETS_URL + "banner-size-small.png",
               label: "Small",
-              value: "4,1",
+              value: [4,1],
               description: "Smallest height, fit to screen width , ratio (4:1)",
             },
             {
               preview: ASSETS_URL + "banner-size-medium.png",
               label: "Medium",
-              value: "3,1",
+              value: [3,1],
               description: "Smallest height, fit to screen width , ratio (3:1)",
             },
             {
               preview: ASSETS_URL + "banner-size-large.png",
               label: "Large",
-              value: "2,1",
+              value: [2,1],
               description: "Bigger height, fit to screen width , ratio (2:1)",
             },
             {
@@ -138,19 +138,19 @@ const BANNER_FORM = [
             {
               preview: ASSETS_URL + "banner-size-small.png",
               label: "Small",
-              value: "3,1",
+              value: [3,1],
               description: "Smallest height, fit to screen width , ratio (3:1)",
             },
             {
               preview: ASSETS_URL + "banner-size-medium.png",
               label: "Medium",
-              value: "2,1",
+              value: [2,1],
               description: "Smallest height, fit to screen width , ratio (2:1)",
             },
             {
               preview: ASSETS_URL + "banner-size-large.png",
               label: "Large",
-              value: "1,1",
+              value: [1,1],
               description: "Bigger height, fit to screen width , ratio (1:1)",
             },
             {

@@ -77,7 +77,7 @@ const HEADER_FORM = [
     },
   },
   {
-    name: "menu_enabled",
+    name: "active",
     type: "SectionItem",
     props: {
       title: "Navigation Menu",
