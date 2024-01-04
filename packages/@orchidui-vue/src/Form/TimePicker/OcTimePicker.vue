@@ -10,10 +10,10 @@ const emit = defineEmits({
 const TimePopup = defineAsyncComponent(
   () => import("@/orchidui/Form/TimePicker/OcTimePopup.vue"),
 );
-const time = ref();
+
 const popup = ref();
 const isDropdownOpened = ref(false);
-defineProps({
+const props = defineProps({
   modelValue: [String, Date],
   label: String,
   hint: String,
@@ -41,6 +41,7 @@ defineProps({
     default: () => ({}),
   },
 });
+const time = ref(props.modelValue);
 const updateActiveTime = () => {
   emit("update:modelValue", time.value);
   setTimeout(() => popup.value?.updateActiveTime(), 300);

@@ -71,7 +71,7 @@ const currentPage = ref(props.filter.page);
 const perPage = ref(
   filterOptions.value?.per_page?.key
     ? props.filter[filterOptions.value?.per_page?.key]
-    : props.filter.per_page
+    : props.filter.per_page,
 );
 const defaultQuery =
   props.filter[filterOptions.value?.search?.key]?.trim() ?? "";
@@ -84,8 +84,8 @@ const customPerPageOptions = computed(() =>
       ({
         label: `${perPage}`,
         value: perPage,
-      }) ?? null
-  )
+      }) ?? null,
+  ),
 );
 
 const perPageOptions = computed(() => {
@@ -196,7 +196,7 @@ const changePage = () => {
 const applyFilter = (
   filterForm = null,
   isChangePage = false,
-  changeCursor = ""
+  changeCursor = "",
 ) => {
   if (paginationOption.value && !isChangePage) {
     currentPage.value = 1;
@@ -282,8 +282,8 @@ const displayFilterData = computed(() => {
               .map(
                 (selectedValue) =>
                   option.props.options.find(
-                    ({ value }) => value === selectedValue
-                  ).label
+                    ({ value }) => value === selectedValue,
+                  ).label,
               )
               .join(", ");
           }
@@ -296,15 +296,15 @@ const displayFilterData = computed(() => {
             ) {
               optionLabel =
                 dayjs(filterData.value[option.name[0].key]).format(
-                  "MMM DD, YYYY"
+                  "MMM DD, YYYY",
                 ) +
                 " - " +
                 dayjs(filterData.value[option.name[1].key]).format(
-                  "MMM DD, YYYY"
+                  "MMM DD, YYYY",
                 );
             } else
               optionLabel = dayjs(filterData.value[option.name]).format(
-                "MMM DD, YYYY"
+                "MMM DD, YYYY",
               );
           }
 
@@ -344,27 +344,39 @@ const displayFilterData = computed(() => {
       @update:selected="$emit('update:selected', $event)"
       @click:row="$emit('click:row', $event)"
     >
-      <template #before>
+      <template
+        v-if="
+          $slots.before ||
+          filterOptions?.search ||
+          filterOptions?.form ||
+          filterOptions?.tabs
+        "
+        #before
+      >
         <slot name="before" />
-        <div class="flex items-center px-4 min-h-[52px]">
-          <template v-if="filterOptions">
-            <div
-              v-if="showBulkAction"
-              class="flex gap-5 items-center absolute left-5"
-            >
-              <slot name="bulk-actions" :selected-rows="selected" />
-            </div>
-            <div v-else class="flex gap-3 absolute left-5">
-              <Tabs
-                v-if="filterOptions?.tabs"
-                v-model="filterTab"
-                :tabs="filterOptions.tabs.options"
-                :variant="'pills'"
-                @update:model-value="applyFilter(null)"
-              />
-            </div>
-          </template>
+        <div
+          v-if="
+            filterOptions?.search || filterOptions?.form || filterOptions?.tabs
+          "
+          class="flex items-center px-4 min-h-[52px]"
+        >
           <div
+            v-if="showBulkAction"
+            class="flex gap-5 items-center absolute left-5"
+          >
+            <slot name="bulk-actions" :selected-rows="selected" />
+          </div>
+          <div v-else class="flex gap-3 absolute left-5">
+            <Tabs
+              v-if="filterOptions?.tabs"
+              v-model="filterTab"
+              :tabs="filterOptions.tabs.options"
+              :variant="'pills'"
+              @update:model-value="applyFilter(null)"
+            />
+          </div>
+          <div
+            v-if="filterOptions?.search || filterOptions?.form"
             class="flex gap-3 absolute ml-auto bg-oc-bg-light right-4 max-w-[calc(100%-24px)]"
             :class="
               !filterOptions

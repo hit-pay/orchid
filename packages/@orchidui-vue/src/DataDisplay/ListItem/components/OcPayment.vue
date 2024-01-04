@@ -1,6 +1,6 @@
 <script setup>
 import { Icon, Tooltip } from "@/orchidui";
-import { computed } from "vue";
+import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 
 const props = defineProps({
   title: {
@@ -11,27 +11,43 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
-  maxPaymentsMethods: {
-    type: Number,
-    default: 4,
-  },
 });
 
 defineEmits(["edit", "delete"]);
 
 const isSliced = computed(
-  () => props.paymentMethods.length > props.maxPaymentsMethods,
+  () => props.paymentMethods.length > blocksPerLine.value,
 );
 const restPaymentMethods = computed(() =>
-  props.paymentMethods.slice(
-    props.maxPaymentsMethods,
-    props.paymentMethods.length,
-  ),
+  props.paymentMethods.slice(blocksPerLine.value, props.paymentMethods.length),
 );
+const cardContainer = ref();
+const blocksPerLine = ref(props.paymentMethods.length);
+const calculateBlocksPerLine = () => {
+  const containerWidth =
+    cardContainer.value.clientWidth -
+    105 /* front span */ -
+    32 /* padding */ -
+    4 * props.paymentMethods.length /* gap */ -
+    35; /* tooltip block */
+  const blockWidth = 35; /* image width */
+
+  blocksPerLine.value = Math.floor(containerWidth / blockWidth);
+};
+
+onMounted(() => {
+  calculateBlocksPerLine();
+  window.addEventListener("resize", calculateBlocksPerLine);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("resize", calculateBlocksPerLine);
+});
 </script>
 
 <template>
   <div
+    ref="cardContainer"
     class="md:px-5 px-3 md:py-4 py-3 flex flex-col gap-y-4 rounded border border-gray-200 group hover:shadow-normal"
   >
     <div class="flex items-center gap-x-5">
@@ -61,7 +77,7 @@ const restPaymentMethods = computed(() =>
         >Payment methods</span
       >
       <img
-        v-for="method in paymentMethods.slice(0, maxPaymentsMethods)"
+        v-for="method in paymentMethods.slice(0, blocksPerLine)"
         :key="method.method"
         width="35"
         height="24"
@@ -79,7 +95,7 @@ const restPaymentMethods = computed(() =>
             :class="isShow ? ' bg-white' : 'bg-oc-bg-dark'"
           >
             +
-            {{ paymentMethods.length - maxPaymentsMethods }}
+            {{ paymentMethods.length - blocksPerLine }}
           </div>
         </template>
 
