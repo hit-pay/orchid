@@ -50,7 +50,7 @@ const onClickOutside = () => {
       :skidding="skidding"
       :popper-options="popperOptions"
     >
-      <div class="w-[inherit] flex" @click="toggleDropdown">
+      <div class="w-[inherit] flex" @click.stop="toggleDropdown">
         <slot />
       </div>
       <template #popper>
