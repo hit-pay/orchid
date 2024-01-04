@@ -184,6 +184,25 @@ const PRODUCT_FORM = [
     },
   },
   {
+    show_if: "show_category_filter",
+    show_if_value: true,
+    name: [
+      {
+        props: {
+          label: "Category Background Color",
+        },
+        key: "category_color_bg",
+      },
+      {
+        props: {
+          label: "Category Text Color",
+        },
+        key: "category_color_text",
+      },
+    ],
+    type: "Colors",
+  },
+  {
     show_if: "variant",
     show_if_value: "carousel",
     name: "is_limit_products",
