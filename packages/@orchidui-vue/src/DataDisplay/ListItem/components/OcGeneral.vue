@@ -15,7 +15,7 @@ defineProps({
   },
   isDisabled: Boolean,
 });
-const emit = defineEmits(["more", "click:item"]);
+const emit = defineEmits(["more"]);
 const isOpen = ref(false);
 </script>
 
@@ -25,10 +25,7 @@ const isOpen = ref(false);
     :class="{ 'hover:shadow-normal': !isDisabled }"
   >
     <div class="flex items-center justify-between">
-      <div
-        class="flex text-sm text-oc-text-400 items-center gap-x-3"
-        @click="emit('click:item', $event)"
-      >
+      <div class="flex text-sm text-oc-text-400 items-center gap-x-3">
         <span v-if="title" class="text-base text-oc-text font-medium">
           {{ title }}
         </span>
@@ -48,7 +45,7 @@ const isOpen = ref(false);
           <Icon
             name="dots-vertical"
             class="opacity-0 p-2 group-hover:opacity-100 cursor-pointer active:bg-oc-gray-100 rounded"
-            @click="$emit('more')"
+            @click.prevent="$emit('more')"
           />
           <template #menu>
             <slot name="menu" />
@@ -56,7 +53,7 @@ const isOpen = ref(false);
         </Dropdown>
       </template>
     </div>
-    <div class="flex flex-col gap-4" @click="emit('click:item', $event)">
+    <div class="flex flex-col gap-4">
       <div class="text-oc-text-500 text-sm">{{ description }}</div>
       <div class="flex gap-5" v-if="details.length">
         <div
