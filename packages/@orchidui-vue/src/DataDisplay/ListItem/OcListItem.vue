@@ -35,7 +35,7 @@ const props = defineProps({
   },
   isDisabled: Boolean,
 });
-defineEmits(["more", "edit", "delete"]);
+defineEmits(["more", "edit", "delete", "click:item"]);
 
 const getTypeComponent = computed(() => {
   switch (props.type) {
@@ -61,6 +61,7 @@ const getTypeComponent = computed(() => {
     @more="$emit('more')"
     @edit="$emit('edit')"
     @delete="$emit('delete')"
+    @click="$emit('click:item')"
   >
     <template v-if="$slots.menu" #menu>
       <slot name="menu" />
