@@ -140,7 +140,7 @@ const inputClasses = computed(() => [
 
           <input
             ref="inputRef"
-            v-model="formattedValue"
+            :value="formattedValue"
             :type="inputType"
             :readonly="isReadonly"
             :placeholder="placeholder"
