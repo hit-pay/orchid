@@ -1,6 +1,17 @@
 <script setup>
-import { Button } from "@/orchidui";
+import { Button, Dropdown, Tooltip, DropdownItem } from "@/orchidui";
 import PaymentMethods from "./OcPaymentMethods.vue";
+import { ref } from "vue";
+
+defineProps({
+  moreButtonProps: Object,
+  secondaryButtonProps: Object,
+  dropdownItems: {
+    type: Array,
+    default: () => [],
+  },
+});
+const isOpen = ref(false);
 </script>
 
 <template>
@@ -8,8 +19,35 @@ import PaymentMethods from "./OcPaymentMethods.vue";
     <PaymentMethods />
 
     <div class="flex gap-x-3">
-      <Button left-icon="dots-vertical" variant="secondary" />
-      <Button variant="secondary" label="Top up balance" />
+      <Dropdown
+        v-model="isOpen"
+        :popper-options="{ strategy: 'fixed' }"
+        placement="bottom"
+        class="text-sm"
+      >
+        <Button
+          left-icon="dots-vertical"
+          variant="secondary"
+          v-bind="moreButtonProps"
+        />
+        <template #menu>
+          <DropdownItem
+            v-for="(item, i) in dropdownItems"
+            :key="i"
+            v-bind="item"
+          />
+        </template>
+      </Dropdown>
+      <Tooltip :popper-options="{ strategy: 'fixed' }" position="top">
+        <Button
+          variant="secondary"
+          label="Top up balance"
+          v-bind="secondaryButtonProps"
+        />
+        <template v-if="secondaryButtonProps?.tooltip" #popper>
+          {{ secondaryButtonProps.tooltip }}
+        </template>
+      </Tooltip>
     </div>
   </div>
 </template>
