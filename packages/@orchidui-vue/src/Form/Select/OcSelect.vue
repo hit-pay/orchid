@@ -174,7 +174,6 @@ const selectAll = () => {
   <BaseInput
     :label="isInlineLabel ? '' : label"
     :hint="hint"
-    class="relative"
     :error-message="errorMessage"
     :is-required="isRequired"
     :label-icon="labelIcon"

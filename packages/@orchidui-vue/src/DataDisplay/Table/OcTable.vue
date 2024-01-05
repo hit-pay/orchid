@@ -159,7 +159,7 @@ onMounted(() => onScroll());
       <div
         v-for="i in loadingRows"
         :key="i"
-        class="flex flex-wrap md:flex-nowrap relative group/row border-oc-gray-200 md:p-0 py-3"
+        class="flex flex-wrap md:flex-nowrap group/row border-oc-gray-200 md:p-0 py-3"
         :class="{
           'pl-[40px]': isSelectable,
         }"
@@ -182,7 +182,7 @@ onMounted(() => onScroll());
       <div
         v-for="(field, i) in fields"
         :key="i"
-        class="flex relative group/row md:p-0 py-3"
+        class="flex group/row md:p-0 py-3"
         :class="[
           {
             'border-b md:border-b-0': fields.length !== i + 1,
