@@ -4,7 +4,7 @@ import { PageTitleRight, Button } from "@/orchidui";
 
 defineProps({
   title: { type: String, required: true },
-  description: { type: String },
+  description: { type: String, default: "" },
   primaryButtonProps: Object,
   secondaryButtonProps: Object,
   tooltipOptions: Object,

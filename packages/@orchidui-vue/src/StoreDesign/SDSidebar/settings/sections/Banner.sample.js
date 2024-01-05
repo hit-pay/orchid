@@ -253,7 +253,7 @@ const BANNER_FORM = [
         },
       },
       {
-        name: "title",
+        name: "banner_title",
         type: "Input",
         props: {
           label: "Title",
