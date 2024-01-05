@@ -319,3 +319,65 @@ export const InputOptions = {
         `,
   }),
 };
+
+export const Currency = {
+  argTypes: {
+    icon: {
+      control: "select",
+      options: ["", "circle"],
+    },
+    errorMessage: {
+      control: "text",
+    },
+    labelIcon: {
+      control: "select",
+      options: ["", "question-mark"],
+    },
+  },
+  args: {
+    label: "Label",
+    hint: "Hint",
+    errorMessage: "",
+    placeholder: "Placeholder",
+    icon: "",
+    disabled: false,
+    isInlineLabel: false,
+    isRequired: false,
+    labelIcon: "",
+    tooltipText: "Tooltip text",
+    tooltipOptions: {
+      position: "top",
+      distance: 10,
+    },
+    currency: "USD",
+  },
+  render: (args) => ({
+    components: { Theme, OCInput },
+    setup() {
+      const modelValue = ref();
+
+      return { modelValue, args };
+    },
+    template: `
+          <Theme colorMode="light" class="py-4">
+            <OCInput
+                v-model.lazy="modelValue"
+                :label="args.label"
+                :error-message="args.errorMessage"
+                :hint="args.hint"
+                :placeholder="args.placeholder"
+                :isInlineLabel="args.isInlineLabel"
+                :icon="args.icon"
+                :disabled="args.disabled"
+                :isRequired="args.isRequired"
+                :tooltip-options="args.tooltipOptions"
+                :label-icon="args.labelIcon"
+                :tooltip-text="args.tooltipText"
+                :currency="args.currency"
+            />
+
+            <pre class="mt-4">Value: {{modelValue}}</pre>
+          </Theme>
+        `,
+  }),
+};
