@@ -66,7 +66,7 @@ onUpdated(() => {
   <div :class="isDisabled && 'opacity-60'">
     <div>
       <div
-        class="border-oc-accent-1-50 py-3 text-sm border relative z-10 justify-between px-4 gap-x-3 flex hover:border-oc-gray-200 items-center w-full text-oc-text"
+        class="border-oc-accent-1-50 py-3 text-sm border z-10 justify-between px-4 gap-x-3 flex hover:border-oc-gray-200 items-center w-full text-oc-text"
         :class="[
           isExpandable
             ? 'rounded-t border-oc-gray-200'
@@ -100,7 +100,7 @@ onUpdated(() => {
         ]"
       >
         <div
-          class="text-oc-text text-sm p-4 rounded-b relative z-0 border-x border-b"
+          class="text-oc-text text-sm p-4 rounded-b z-0 border-x border-b"
           :class="[
             isExpandable ? 'border-oc-gray-200' : ' border-transparent',
             bodyStyle,
