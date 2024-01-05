@@ -96,7 +96,7 @@ const onClickOutside = () => {
       :distance="distance"
       :popper-options="popperOptions"
     >
-      <div ref="triggerEl">
+      <div ref="triggerEl" class="w-[inherit]">
         <slot />
       </div>
       <template #popper>
