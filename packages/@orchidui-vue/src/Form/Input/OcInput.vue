@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, useAttrs } from "vue";
+import { computed, onMounted, ref, useAttrs, watch } from "vue";
 import { BaseInput, Icon } from "@/orchidui";
 import { pickEventListeners } from "@/orchidui/Form/Input/inputHelper.js";
 
@@ -68,13 +68,12 @@ const props = defineProps({
     type: Object,
     default: () => ({}),
   },
+  formatValue: {
+    type: Function,
+  }
 });
 
-defineEmits({
-  "update:modelValue": [],
-  blur: [],
-  focus: [],
-});
+defineEmits(["update:modelValue", "blur", "focus"]);
 
 const attrs = useAttrs();
 
@@ -85,6 +84,16 @@ const inputRef = ref();
 defineExpose({
   focus: () => inputRef.value.focus(),
 });
+
+const formattedValue = computed(() => updateValue(props.modelValue));
+
+const updateValue = (value) => {
+  if (typeof props.formatValue === 'function') {
+    return props.formatValue(value);
+  }
+
+  return value;
+}
 
 const isFocused = ref(false);
 const inputClasses = computed(() => [
@@ -131,8 +140,8 @@ const inputClasses = computed(() => [
 
           <input
             ref="inputRef"
+            :value="formattedValue"
             :type="inputType"
-            :value="modelValue"
             :readonly="isReadonly"
             :placeholder="placeholder"
             :disabled="disabled"
@@ -146,7 +155,7 @@ const inputClasses = computed(() => [
               isFocused = false;
               $emit('blur');
             "
-            @input="$emit('update:modelValue', $event.target.value)"
+            @input="$emit('update:modelValue', updateValue($event.target.value))"
           />
         </div>
       </div>
