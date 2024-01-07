@@ -2,6 +2,7 @@
 import { computed, ref, useAttrs } from "vue";
 import { BaseInput, Icon } from "@/orchidui";
 import { pickEventListeners } from "@/orchidui/Form/Input/inputHelper.js";
+import { VMoney } from "v-money";
 
 const props = defineProps({
   disabled: {
@@ -68,6 +69,10 @@ const props = defineProps({
     type: Object,
     default: () => ({}),
   },
+  currency: {
+    type: String,
+    default: "",
+  },
 });
 
 defineEmits({
@@ -113,8 +118,14 @@ const inputClasses = computed(() => [
       :class="inputClasses"
       @click="$refs.inputRef?.focus()"
     >
-      <div v-if="$slots.trailing" class="border-r border-gray-200 pr-3 py-3">
-        <slot name="trailing" />
+      <div
+        v-if="$slots.trailing || currency"
+        class="border-r border-gray-200 pr-3 py-3"
+      >
+        <slot v-if="$slots.trailing" name="trailing" />
+        <span v-else-if="currency" class="flex items-center text-sm uppercase">
+          {{ currency }}
+        </span>
       </div>
 
       <slot name="icon">
@@ -138,6 +149,15 @@ const inputClasses = computed(() => [
             :disabled="disabled"
             class="h-7 outline-none w-full text-oc-text disabled:bg-transparent disabled:text-oc-text-300 text-ellipsis placeholder:font-normal placeholder:text-oc-text-300 bg-oc-bg-light"
             v-bind="eventListeners"
+            v-money="
+              currency
+                ? {
+                    decimal: '.',
+                    thousands: ',',
+                    precision: 2,
+                  }
+                : false
+            "
             @focus="
               isFocused = true;
               $emit('focus');
@@ -146,7 +166,14 @@ const inputClasses = computed(() => [
               isFocused = false;
               $emit('blur');
             "
-            @input="$emit('update:modelValue', $event.target.value)"
+            @input="
+              $emit(
+                'update:modelValue',
+                !currency
+                  ? $event.target.value
+                  : parseFloat($event.target.value.replaceAll(',', '')),
+              )
+            "
           />
         </div>
       </div>
