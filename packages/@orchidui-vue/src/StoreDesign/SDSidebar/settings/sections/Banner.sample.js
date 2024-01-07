@@ -26,6 +26,24 @@ const BANNER_FORM = [
     },
   },
   {
+    name: "width",
+    type: "SelectOptions",
+    props: {
+      options: [
+        {
+          preview: ASSETS_URL + "banner-full-width.png",
+          value: "full",
+          label: "Full Width",
+        },
+        {
+          preview: ASSETS_URL + "banner-boxed.png",
+          value: "boxed",
+          label: "Boxed",
+        },
+      ],
+    },
+  },
+  {
     type: "SectionItem",
     props: {
       title: "Banner Images",
@@ -64,7 +82,7 @@ const BANNER_FORM = [
   {
     name: "BannerSizeSettings",
     type: "Children",
-    label: "Banner Settings",
+    label: "Banner Size",
     children: [
       {
         general: true,
@@ -72,7 +90,7 @@ const BANNER_FORM = [
         name: "responsive_banner_size",
         props: {
           isToggle: true,
-          title: "Responsive Banner Images",
+          title: "Responsive Banner Size",
         },
       },
       {
