@@ -1,9 +1,11 @@
 import { Theme, Button } from "@/orchidui";
 import { SDSidebar } from "@/orchidui/StoreDesign";
-// config
-import { Config } from "./settings/Config.sample";
-// data
-import { StoreDesign } from "./settings/StoreDesign.sample";
+// config default
+// import { Config } from "./settings/Config.sample";
+// import { StoreDesign } from "./settings/StoreDesign.sample";
+// config Juizzy
+import { Config } from "./settings/Config-Juizzy.sample";
+import { StoreDesign } from "./settings/StoreDesign-Juizzy.sample";
 
 import { ref } from "vue";
 export default {
@@ -20,9 +22,9 @@ export const Default = {
       const storeDesignData = ref(StoreDesign);
       const sidebarActive = ref({
         sidebarMenu: "home",
-        submenu: "styles",
-        section: "Styles",
-        id: "Styles",
+        submenu: "",
+        section: "",
+        id: "",
       });
 
       const content = ref("data");
@@ -31,12 +33,13 @@ export const Default = {
         // Sidebar not stored to user store design
         if (section === "Styles") {
           return "styles";
-        } else if (["IconLink", "ButtonLink"].includes(section)) {
+        } else if (["IconLinks", "ButtonLinks"].includes(section)) {
           return "link_in_bio";
         } else {
           return "home";
         }
       };
+
       const updateSidebarActive = (item) => {
         sidebarActive.value = {
           sidebarMenu: getSidebarMenu(item.section),
@@ -104,11 +107,12 @@ export const Default = {
     template: `
           <Theme>
           <div class="flex gap-5 m-5 w-[1200px] overflow-y-auto ">
-              <div class="h-[800px] w-[535px] overflow-y-scroll">
+              <div class="h-[90vh] w-[535px] overflow-y-scroll">
                   <SDSidebar 
                     v-model:values="storeDesignData"
                     :sidebar="sidebarConfig.sidebar"
                     :preset="sidebarConfig.preset"
+                    :preset-custom-preview="sidebarConfig.presetCustomPreview"
                     :settings="sidebarConfig.settings"
                     :options="options"
                     v-model:active="sidebarActive"
@@ -124,15 +128,15 @@ export const Default = {
                           <Button label="Undo" />
                           <Button label="Redo" />
                         </div>
-                        <Button @click="content = 'data'" label="Store Design Data" variant="secondary"  />
-                        <Button @click="content = 'sidebar'" label="Sidebar Settings" variant="secondary"  />
-                        <Button @click="content = 'section'" label="Section Settings" variant="secondary"  />
+                        <Button @click="content = 'data'" label="Store Design" variant="secondary"  />
+                        <Button @click="content = 'preset'" label="Preset" variant="secondary"  />
+                        <Button @click="content = 'section'" label="Settings" variant="secondary"  />
                         <Button @click="content = 'preview'" label="PREVIEW" variant="secondary"  />
                     </div>
-                    <div class="h-[700px] overflow-auto rounded bg-black">
+                    <div class="h-[80vh] overflow-auto rounded bg-black">
                       <pre v-if="content === 'data'" class="bg-black text-white p-3 rounded">{{storeDesignData}}</pre>
-                      <pre v-if="content === 'sidebar'" class="bg-black text-white p-3 rounded">{{sidebarConfig.sidebar}}</pre>
                       <pre v-if="content === 'section'" class="bg-black text-white p-3 rounded">{{sidebarConfig.settings}}</pre>
+                      <pre v-if="content === 'preset'" class="bg-black text-white p-3 rounded">{{sidebarConfig.preset}}</pre>
                       <div class="flex flex-wrap gap-5 p-5" v-if="content === 'preview'">
                         <Button v-for="section in storeDesignData.sections" :label="section.title ?? section.section" @click="updateSidebarActive(section)" />
                       </div>

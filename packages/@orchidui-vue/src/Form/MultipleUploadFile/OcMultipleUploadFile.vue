@@ -23,6 +23,7 @@ const props = defineProps({
    * Maximum file size in MB
    */
   maxSize: Number,
+  maxImages: Number,
   hint: String,
   label: String,
   errorMessage: String,
@@ -82,6 +83,7 @@ onMounted(() => {
         :columns-count="columnsCount"
         :accept="accept"
         :with-link="withLink"
+        :max-images="maxImages"
         @change="onChangeFile"
         @update:selected-image="$emit('update:selectedImage', $event)"
         @update:uploaded-images="

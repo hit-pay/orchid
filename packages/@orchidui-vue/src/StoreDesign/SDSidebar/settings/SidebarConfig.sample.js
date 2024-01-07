@@ -30,16 +30,16 @@ const sidebar = [
   // 3 -> 4 level level
   {
     icon: "link-in-bio",
-    type: "list",
+    type: "sections",
     name: "link_in_bio",
     label: "Link In Bio",
     children: [
       {
-        name: "icon_links",
+        name: "IconLinks",
         label: "Icon Links",
       },
       {
-        name: "button_links",
+        name: "ButtonLinks",
         label: "Button Links",
       },
       {

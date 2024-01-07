@@ -128,9 +128,9 @@ const defaultDateRange = () => {
             type === 'range'
               ? modelValue && modelValue[0]
                 ? `${dayjs(formattedDate[0], dateFormat).format(
-                    'DD/MM/YYYY'
+                    'DD/MM/YYYY',
                   )} - ${dayjs(formattedDate[1], dateFormat).format(
-                    'DD/MM/YYYY'
+                    'DD/MM/YYYY',
                   )}`
                 : ''
               : modelValue

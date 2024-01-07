@@ -1,7 +1,7 @@
 const ASSETS_URL = "/templates/default/images/";
 
 import { sidebar } from "./SidebarConfig.sample";
-import { settings } from "./SettingsConfig.sample";
+import { settings } from "./SettingsConfig-Juizzy.sample";
 
 const Config = {
   sidebar: sidebar, // sidebar menus

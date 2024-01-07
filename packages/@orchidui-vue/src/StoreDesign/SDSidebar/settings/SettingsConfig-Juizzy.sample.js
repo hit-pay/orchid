@@ -1,7 +1,7 @@
 const ASSETS_URL = "/templates/default/images/";
 import { TOP_BANNER_FORM, HEADER_FORM } from "./sections/Headers.sample";
 import { BANNER_FORM } from "./sections/Banner.sample";
-import { PRODUCT_FORM } from "./sections/Sections.sample";
+import { PRODUCT_FORM, TEXT_AND_IMAGE_FORM } from "./sections/Sections.sample";
 import { FOOTER_CONTENT_FORM } from "./sections/Footers.sample";
 import { STYLES_FORM } from "./sections/Styles.sample";
 import { BUTTON_LINK_FORM, ICON_LINK_FORM } from "./sections/LinkInBio.sample";
@@ -61,6 +61,26 @@ const settings = [
       color_bg:"",
       color_heading:"",
       color_text:"",
+    },
+  },
+  {
+    group: "sections",
+    key: "TextAndImage",
+    section: "TextAndImage",
+    title: "Text and Image",
+    icon: "tag",
+    preview: ASSETS_URL + "section-text-and-image.png",
+    form: TEXT_AND_IMAGE_FORM,
+    canDelete: true,
+    default: {
+      variant: "full",
+      alignment_half: "left",
+      alignment_full: "left",
+      images: [],
+      title: "Our Story",
+      description: "",
+      button_text: "Read more",
+      button_link: "https://hitpayapp.com",
     },
   },
   {

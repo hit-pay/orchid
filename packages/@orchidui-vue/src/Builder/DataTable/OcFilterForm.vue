@@ -30,7 +30,7 @@ const changedFields = ref([]);
 
 const updateChangedFields = (changedField) => {
   const index = changedFields.value.findIndex(
-    (field) => field === changedField
+    (field) => field === changedField,
   );
 
   if (index >= 0) {
@@ -57,10 +57,10 @@ const filterAdded = computed(() => {
 });
 
 const applyButtonLabel = computed(
-  () => props.actions?.applyButton?.label || "Apply"
+  () => props.actions?.applyButton?.label || "Apply",
 );
 const cancelButtonLabel = computed(
-  () => props.actions?.cancelButton?.label || "Cancel"
+  () => props.actions?.cancelButton?.label || "Cancel",
 );
 
 onMounted(() => {
