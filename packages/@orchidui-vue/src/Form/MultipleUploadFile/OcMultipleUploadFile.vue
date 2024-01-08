@@ -53,7 +53,7 @@ onMounted(() => {
           fileUrl: item.current.path,
           totalSize: item.current.file_size ?? 0,
           isLoaded: true,
-          extension: item.current.extention ?? "png",
+          extension: item.current.extension ?? "png",
           link: item.current.link,
         });
       }
