@@ -246,7 +246,10 @@ const isDayDisabled = (day) => {
       (props.minDate &&
         currentDate.getTime() < new Date(props.minDate).getTime()) ||
       (props.maxDate &&
-        currentDate.getTime() > new Date(props.maxDate).getTime())
+        // TODO: improve this piece of logic
+        // props.maxDate is always lower than currentDate by few seconds. Depending on browser's speed (CPU). Why? maxDate is defined before currentDate, so it has lower "Time" than currentDate
+        // Added 60 seconds. To not disable maxDate (on page load).
+        currentDate.getTime() > new Date(props.maxDate).getTime() + 60000)
     );
   }
   if (selectedStartDate.value) {
@@ -258,7 +261,10 @@ const isDayDisabled = (day) => {
       (props.minDate &&
         currentDate.getTime() < new Date(props.minDate).getTime()) ||
       (props.maxDate &&
-        currentDate.getTime() > new Date(props.maxDate).getTime())
+        // TODO: improve this piece of logic
+        // props.maxDate is always lower than currentDate by few seconds. Depending on browser's speed (CPU). Why? maxDate is defined before currentDate, so it has lower "Time" than currentDate
+        // Added 60 seconds. To not disable maxDate (on page load).
+        currentDate.getTime() > new Date(props.maxDate).getTime() + 60000)
     );
   }
 };
