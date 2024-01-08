@@ -85,14 +85,17 @@ defineExpose({
   focus: () => inputRef.value.focus(),
 });
 
-const formattedValue = computed(() => updateValue(props.modelValue));
+const formattedValue = ref('');
 
 const updateValue = (value) => {
-  if (typeof props.formatValue === 'function') {
-    return props.formatValue(value);
+  let output = value;
+
+  if(typeof props.formatValue === 'function') {
+    output = props.formatValue(output);
   }
 
-  return value;
+  formattedValue.value = output;
+  return output;
 }
 
 const isFocused = ref(false);
