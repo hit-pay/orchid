@@ -45,6 +45,7 @@ const emit = defineEmits({
   // Event
   "edit:images": [],
   "delete:images": [],
+  "add:images": [],
 });
 
 const presetOptions = computed(() => {
@@ -519,6 +520,9 @@ const addSection = (newSection, customize = false) => {
           "
           @delete:images="
             $emit('delete:images', { ...$event, section: sectionActive.key })
+          "
+          @add:images="
+            $emit('add:images', { ...$event, section: sectionActive.key })
           "
         >
         </RequestForm>

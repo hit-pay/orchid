@@ -110,7 +110,14 @@ const formatimages = (value) => {
 const onUpdateimages = (form, newValue) => {
   images[form.name] = newValue;
   setTimeout(() => {
-    onUpdateForm(form, formatimages(images[form.name]));
+    const formatValue = formatimages(images[form.name]);
+    onUpdateForm(form, formatValue);
+    if (formatValue.id.includes("_new")) {
+      emit("delete:images", {
+        form: form,
+        value: formatValue,
+      });
+    }
   }, 100);
 };
 
