@@ -75,7 +75,7 @@ const updatePreset = (to) => {
   let newSectionsList = [];
   props.values.sections.forEach((item) => {
     const defaultSettings = selectedPreset.sections.find(
-      (s) => s.section === item.section,
+      (s) => s.section === item.section
     );
     if (defaultSettings) {
       let sectionItem = {
@@ -117,7 +117,7 @@ const sidebarActive = computed(() => {
 });
 
 const availableSections = computed(() =>
-  props.settings.filter((s) => s.group === "sections"),
+  props.settings.filter((s) => s.group === "sections")
 );
 
 const renderForm = ref(null);
@@ -138,7 +138,7 @@ const renderSectionAndForm = () => {
     props.values.sections.forEach((item) => {
       if (item.group === "sections") {
         const sectionItem = props.settings.find(
-          (s) => s.section === item.section,
+          (s) => s.section === item.section
         );
         sectionListCustom.push({
           key: item.key,
@@ -156,7 +156,7 @@ const renderSectionAndForm = () => {
   }
 
   sectionActive.value = sectionList.value.find(
-    (s) => s.key === props.active.id,
+    (s) => s.key === props.active.id
   );
 
   setTimeout(() => {
@@ -173,12 +173,12 @@ watch(
   {
     deep: true,
     immediate: true,
-  },
+  }
 );
 
 const sectionActiveValues = computed(() => {
   let sectionValues = props.values.sections.find(
-    (s) => s.key === props.active.id,
+    (s) => s.key === props.active.id
   );
   return sectionValues;
 });
@@ -219,7 +219,7 @@ const sidebarMenuLabel = computed(() => {
 const submenuLabel = computed(() => {
   if (sidebarMenuActive.value.children) {
     const submenu = sidebarMenuActive.value.children.find(
-      (s) => s.name === sidebarActive.value.submenu,
+      (s) => s.name === sidebarActive.value.submenu
     );
     return submenu?.label;
   } else {
@@ -514,8 +514,12 @@ const addSection = (newSection, customize = false) => {
           :section-data="sectionActiveValues"
           :request-form="sectionActive.form"
           :options="options"
-          @edit:images="$emit('edit:images', $event)"
-          @delete:images="$emit('delete:images', $event)"
+          @edit:images="
+            $emit('edit:images', { ...$event, section: sectionActive.key })
+          "
+          @delete:images="
+            $emit('delete:images', { ...$event, section: sectionActive.key })
+          "
         >
         </RequestForm>
       </div>
