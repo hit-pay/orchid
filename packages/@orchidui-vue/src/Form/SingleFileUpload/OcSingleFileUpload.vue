@@ -63,7 +63,7 @@ onMounted(() => {
         fileUrl: props.modelValue.current.path,
         totalSize: props.modelValue.current.file_size ?? 0,
         isLoaded: true,
-        extension: props.modelValue.current.extention ?? "png",
+        extension: props.modelValue.current.extension ?? "png",
       },
     ];
     currentFiles.value = formattedModelValue;
