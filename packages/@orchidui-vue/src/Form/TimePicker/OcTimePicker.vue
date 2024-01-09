@@ -1,6 +1,6 @@
 <script setup>
 import { Input, Dropdown } from "@/orchidui";
-import { defineAsyncComponent, ref } from "vue";
+import { defineAsyncComponent, ref, watch } from "vue";
 import dayjs from "dayjs";
 
 const emit = defineEmits({
@@ -46,6 +46,13 @@ const updateActiveTime = () => {
   emit("update:modelValue", time.value);
   setTimeout(() => popup.value?.updateActiveTime(), 300);
 };
+watch(
+  () => props.modelValue,
+  (value) => {
+    time.value = value;
+  },
+  { immediate: true },
+);
 </script>
 
 <template>
@@ -71,7 +78,12 @@ const updateActiveTime = () => {
     />
 
     <template #menu>
-      <TimePopup v-if="isDropdownOpened" ref="popup" v-model="time" />
+      <TimePopup
+        v-if="isDropdownOpened"
+        ref="popup"
+        v-model="time"
+        @update:model-value="$emit('update:modelValue', $event)"
+      />
     </template>
   </Dropdown>
 </template>
