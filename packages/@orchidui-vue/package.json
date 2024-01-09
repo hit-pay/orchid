@@ -46,6 +46,9 @@
     "./StoreDesign": {
       "import": "./dist/StoreDesign.js"
     },
+    "./ColorPicker": {
+      "import": "./dist/ColorPicker.js"
+    },
     "./dist/style.css": {
       "import": "./dist/style.css",
       "require": "./dist/style.css"

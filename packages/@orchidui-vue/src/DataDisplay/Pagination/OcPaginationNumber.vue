@@ -30,5 +30,3 @@ const sizeClasses = computed(() => ({
     <slot />
   </div>
 </template>
-
-<style scoped lang="scss"></style>
