@@ -39,7 +39,7 @@ const scrollIntoActiveDate = () => {
     `.w-7:nth-child(${hour.value})`,
   );
   const activeMinuteElement = minutesList.value.querySelector(
-    `.w-7:nth-child(${minutes.value})`,
+    `.w-7:nth-child(${minutes.value + 1})`,
   );
   const activePeriodElement = periodList.value.querySelector(
     `.w-7:nth-child(${period.value === "AM" ? 1 : 2})`,
@@ -62,8 +62,8 @@ const scrollIntoActiveDate = () => {
         : hour.value === 12
           ? 12
           : hour.value + 12,
-      minutes.value - 1,
-      59,
+      minutes.value,
+      0,
       0,
     ),
   );
@@ -111,7 +111,7 @@ const scrollToNearestMinute = () => {
         m.getBoundingClientRect().top - box.getBoundingClientRect().top,
       ) < 12
     ) {
-      minutes.value = i + 1;
+      minutes.value = i;
       scrollIntoActiveDate();
     }
   });
@@ -179,8 +179,8 @@ defineExpose({
           :key="i"
           ref="targetMinute"
           class="w-7 cursor-pointer aspect-square leading-[24px] text-center"
-          :class="minutes === i ? 'opacity-100' : 'opacity-50'"
-          @click="updateMinute(i)"
+          :class="minutes === i - 1 ? 'opacity-100' : 'opacity-50'"
+          @click="updateMinute(i - 1)"
         >
           {{ (i - 1).toString().padStart(2, "0") }}
         </li>
