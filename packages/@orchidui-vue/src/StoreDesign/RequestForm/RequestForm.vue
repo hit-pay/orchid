@@ -58,6 +58,7 @@ const emit = defineEmits([
   "update:sectionData",
   "edit:images",
   "delete:images",
+  "add:images",
 ]);
 
 const updateData = (general = false) => {
@@ -92,16 +93,21 @@ const onUpdateForm = (form, value = null) => {
   }
 };
 
-const formatimages = (value) => {
+const formatimages = (value, form) => {
   let newFormatImages = [];
   value.forEach((image) => {
     if (!image.fileUrl) {
       newFormatImages.push(image.current);
     } else {
-      newFormatImages.push({
+      const newFormat = {
         id: "new_" + Date.now(),
         path: image.fileUrl,
         link: image.link ?? image.current?.link ?? "",
+      };
+      newFormatImages.push(newFormat);
+      emit("add:images", {
+        form: form,
+        value: newFormat,
       });
     }
   });
@@ -110,7 +116,8 @@ const formatimages = (value) => {
 const onUpdateimages = (form, newValue) => {
   images[form.name] = newValue;
   setTimeout(() => {
-    onUpdateForm(form, formatimages(images[form.name]));
+    const formatValue = formatimages(images[form.name], form);
+    onUpdateForm(form, formatValue);
   }, 100);
 };
 
