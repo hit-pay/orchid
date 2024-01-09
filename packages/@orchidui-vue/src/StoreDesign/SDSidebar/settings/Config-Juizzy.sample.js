@@ -28,12 +28,12 @@ const Config = {
                 "https://fonts.googleapis.com/css2?family=Inter&display=swap"
             ],
             color_bg: "#FFFFFF",
-            color_text: "#03102F",
-            color_primary: "#002771",
+            color_text: "#111111",
+            color_primary: "#FE7E21",
             color_primary_text: "#FFFFFF",
             color_shadow: "rgba(0, 0, 0, 0.12)",
             card_color_bg: "#FFFFFF",
-            card_color_text: "#03102F",
+            card_color_text: "#111111",
             button_rounded: "4",
             card_rounded: "4",
           },
@@ -49,43 +49,43 @@ const Config = {
           section: "Header",
           changes: {
             color_bg: "#FFFFFF",
-            color_text: "#03102F",
+            color_text: "#111111",
           },
         },
         {
           section: "Banner",
           changes: {
             color_bg: "#FFFFFF",
-            color_heading: "#03102F",
-            color_text: "#03102F",
+            color_heading: "#111111",
+            color_text: "#111111",
           },
         },
         {
           section: "Products",
           changes: {
             color_bg: "#FFFFFF",
-            color_heading: "#03102F",
-            color_text: "#03102F",
+            color_heading: "#111111",
+            color_text: "#111111",
           },
         },
         {
           section: "FooterContent",
           changes: {
             color_bg: "#FFFFFF",
-            color_text: "#03102F",
+            color_text: "#111111",
           },
         },
       ],
     },
     {
-      value: "wood",
-      label: "Wood",
+      value: "dark",
+      label: "Dark",
       preview: ASSETS_URL + "preset-2.png",
       sections: [
          {
           section: "Styles",
           changes: {
-            preset: "wood",
+            preset: "dark",
             section: "Styles",
             font_heading: [
               "'Inter', sans-serif",
@@ -95,13 +95,13 @@ const Config = {
                 "'Inter', sans-serif",
                 "https://fonts.googleapis.com/css2?family=Inter&display=swap"
             ],
-            color_bg: "#221F1C",
-            color_text: "#B4ABA4",
+            color_bg: "#252525",
+            color_text: "#F9F9F9",
             color_primary: "#C38934",
-            color_primary_text: "#DCCCBB",
+            color_primary_text: "#F9F9F9",
             color_shadow: "rgba(0, 0, 0, 0.12)",
-            card_color_bg: "#302D29",
-            card_color_text: "#B4ABA4",
+            card_color_bg: "#252525",
+            card_color_text: "#F9F9F9",
             button_rounded: "4",
             card_rounded: "4",
           },
@@ -110,50 +110,50 @@ const Config = {
           section: "TopBanner",
           changes: {
             color_bg: "#39322B",
-            color_text: "#B4ABA4",
+            color_text: "#F9F9F9",
           },
         },
         {
           section: "Header",
           changes: {
-            color_bg: "#221F1C",
-            color_text: "#B4ABA4",
+            color_bg: "#252525",
+            color_text: "#F9F9F9",
           },
         },
         {
           section: "Banner",
           changes: {
-            color_bg: "#221F1C",
-            color_heading: "#B4ABA4",
-            color_text: "#B4ABA4",
+            color_bg: "#252525",
+            color_heading: "#F9F9F9",
+            color_text: "#F9F9F9",
           },
         },
         {
           section: "Products",
           changes: {
-            color_bg: "#221F1C",
-            color_heading: "#B4ABA4",
-            color_text: "#B4ABA4",
+            color_bg: "#252525",
+            color_heading: "#F9F9F9",
+            color_text: "#F9F9F9",
           },
         },
         {
           section: "FooterContent",
           changes: {
-            color_bg: "#221F1C",
-            color_text: "#B4ABA4",
+            color_bg: "#252525",
+            color_text: "#F9F9F9",
           },
         },
       ],
     },
     {
-      value: "flower",
-      label: "Flower",
+      value: "grape",
+      label: "Grape",
       preview: ASSETS_URL + "preset-3.png",
       sections: [
         {
           section: "Styles",
           changes: {
-            preset: "flower",
+            preset: "grape",
             section: "Styles",
             font_heading: [
               "'Inter', sans-serif",
@@ -163,10 +163,10 @@ const Config = {
                 "'Inter', sans-serif",
                 "https://fonts.googleapis.com/css2?family=Inter&display=swap"
             ],
-            color_bg: "#F0E9F1",
-            color_text: "#3C0848",
-            color_primary: "#D51F5C",
-            color_primary_text: "#F0E9F1",
+            color_bg: "#F1F6F5",
+            color_text: "#130832",
+            color_primary: "#5219F2",
+            color_primary_text: "#FFFFFF",
             color_shadow: "rgba(0, 0, 0, 0.12)",
             card_color_bg: "#FFFFFF",
             card_color_text: "#3C0848",
@@ -177,38 +177,36 @@ const Config = {
         {
           section: "TopBanner",
           changes: {
-            color_bg: "#3C0848",
-            color_text: "#FFFFFF",
+            color_bg: "#F1F6F5",
+            color_text: "#130832",
           },
         },
         {
           section: "Header",
           changes: {
-            color_bg: "#F0E9F1",
-            color_text: "#3C0848",
+            color_bg: "#F1F6F5",
+            color_text: "#130832",
           },
         },
         {
           section: "Banner",
           changes: {
-            color_bg: "#F0E9F1",
-            color_heading: "#3C0848",
-            color_text: "#3C0848",
+            color_bg: "#F1F6F5",
+            color_text: "#130832",
           },
         },
         {
           section: "Products",
           changes: {
-            color_bg: "#F0E9F1",
-            color_heading: "#3C0848",
-            color_text: "#3C0848",
+            color_bg: "#F1F6F5",
+            color_text: "#130832",
           },
         },
         {
           section: "FooterContent",
           changes: {
-            color_bg: "#F0E9F1",
-            color_text: "#3C0848",
+            color_bg: "#F1F6F5",
+            color_text: "#130832",
           },
         },
       ],
