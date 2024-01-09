@@ -9,6 +9,7 @@ const emit = defineEmits([
   "update:selectedImage",
   "onEditFile",
   "onRemoveFile",
+  "onExceedMaxFileSize",
 ]);
 const props = defineProps({
   modelValue: {

@@ -32,7 +32,7 @@ const props = defineProps({
     validator: (val) => ["upload", "url"].includes(val),
   },
 });
-const emit = defineEmits(["update:modelValue", "onRemoveFile"]);
+const emit = defineEmits(["update:modelValue", "onRemoveFile", 'onExceedMaxFileSize']);
 
 const inputRef = ref();
 const fileLink = ref("");
