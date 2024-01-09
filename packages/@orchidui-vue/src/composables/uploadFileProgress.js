@@ -10,7 +10,11 @@ export const useUploadFileProgress = (maxSize, emit) => {
     isErrorMaxSize.value =
       uploadFiles.reduce((acc, file) => acc + file.size, 0) >
       maxSize * 1024 * 1024;
-    if (isErrorMaxSize.value) return;
+    if (isErrorMaxSize.value) {
+      emit('onExceedMaxFileSize', )
+
+      return;
+    }
     for (let i = 0; i < uploadFiles.length; i++) {
       const file = uploadFiles[i];
       const reader = new FileReader();
