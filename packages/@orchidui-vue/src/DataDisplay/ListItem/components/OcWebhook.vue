@@ -47,5 +47,3 @@ const isOpen = ref(false);
     </div>
   </div>
 </template>
-
-<style scoped lang="scss"></style>

@@ -50,5 +50,3 @@ defineEmits(["titleClick", "update:modelValue"]);
     </div>
   </div>
 </template>
-
-<style scoped lang="scss"></style>

@@ -106,5 +106,3 @@ const changeImage = (url) => {
     />
   </div>
 </template>
-
-<style scoped lang="scss"></style>
