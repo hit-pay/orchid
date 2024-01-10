@@ -22,6 +22,10 @@ defineProps({
     type: Array,
     default: () => [],
   },
+  paymentMethods: {
+    type: Array,
+    default: () => [],
+  },
 });
 
 defineEmits({
@@ -47,6 +51,7 @@ defineEmits({
     <TopActions
       :more-button-props="moreButtonProps"
       :secondary-button-props="secondaryButtonProps"
+      :payment-methods="paymentMethods"
       :dropdown-items="dropdownItems"
     />
 

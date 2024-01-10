@@ -25,7 +25,9 @@ onMounted(() => {
       icon="drop"
       :icon-props="{ style: { color: modelValue } }"
       is-readonly
-    />
+    >
+    <template v-if="$slots.leading" #leading><slot name="leading"></slot></template>
+    </Input>
     <template #menu>
       <ColorPickerPopup
         :model-value="modelValue"

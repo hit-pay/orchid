@@ -5,6 +5,10 @@ import { ref } from "vue";
 
 defineProps({
   moreButtonProps: Object,
+  paymentMethods: {
+    type: Array,
+    default: () => [],
+  },
   secondaryButtonProps: Object,
   dropdownItems: {
     type: Array,
@@ -16,7 +20,7 @@ const isOpen = ref(false);
 
 <template>
   <div class="flex justify-between md:flex-row flex-col gap-y-3 md:gap-y-0">
-    <PaymentMethods />
+    <PaymentMethods v-if="paymentMethods.length" :methods="paymentMethods" />
 
     <div class="flex gap-x-3">
       <Dropdown
