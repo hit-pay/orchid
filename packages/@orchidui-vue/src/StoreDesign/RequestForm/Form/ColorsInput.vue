@@ -1,7 +1,9 @@
 <script setup>
+import { defineAsyncComponent } from "vue";
+const ColorPicker = defineAsyncComponent(
+  () => import("../../../Form/ColorPicker/ColorPicker.vue"),
+);
 import { Icon } from "@/orchidui";
-import { ColorPicker } from "@/orchidui/ColorPicker";
-
 const props = defineProps({
   modelValue: {
     type: Array,
