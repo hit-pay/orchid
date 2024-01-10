@@ -26,6 +26,7 @@ const props = defineProps({
   secondaryButtonProps: { type: Object, default: null },
   moreButtonProps: { type: Object, default: null },
   dropdownItems: { type: Array, default: () => [] },
+  paymentMethods: { type: Array, default: () => [] },
 });
 
 defineEmits({
@@ -82,6 +83,7 @@ const copyLink = async () => {
       :secondary-button-props="secondaryButtonProps"
       :more-button-props="moreButtonProps"
       :overview-active-tab="overviewActiveTab"
+      :payment-methods="paymentMethods"
       :dropdown-items="dropdownItems"
       @change-tab="$emit('changeTab', $event)"
     >
