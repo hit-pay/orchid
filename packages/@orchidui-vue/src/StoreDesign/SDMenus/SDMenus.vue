@@ -528,6 +528,7 @@ const confirmDeleteMenu = () => {
       </Modal>
       <ConfirmationModal
         v-if="deleteMenuItems"
+        :model-value="true"
         class="!w-full"
         title="Are you sure?"
         :description="displayDeleteMessage"
