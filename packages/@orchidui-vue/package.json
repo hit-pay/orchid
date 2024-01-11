@@ -1,6 +1,7 @@
 {
   "name": "@orchidui/vue",
-  "version": "0.3.79",
+  "description": "Orchid UI , Dashboard Ui Library Vue 3 tailwind css",
+  "version": "0.3.84",
   "type": "module",
   "scripts": {
     "build": "vite build",
@@ -21,6 +22,7 @@
     "url": "git+https://github.com/hit-pay/orchid.git",
     "directory": "packages/@orchidui-vue"
   },
+  "homepage": "https://orchidui.vercel.app/",
   "exports": {
     ".": {
       "import": "./dist/index.js"
@@ -56,6 +58,7 @@
   },
   "module": "./dist/index.js",
   "files": [
-    "./dist"
-  ]
+    "dist"
+  ],
+  "license": "MIT"
 }
