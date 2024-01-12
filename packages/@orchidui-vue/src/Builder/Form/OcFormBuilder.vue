@@ -169,7 +169,7 @@ const setErrorMessage = () => {
 };
 
 const setFormClass = (form) => {
-  if (form.show_if && form.show_if_value) {
+  if (form.show_if) {
     let formClassName = form.class ? form.class : "";
     if (typeof form.name === "object") {
       if (form.show_if_value !== modelValue.value[form.show_if]) {
