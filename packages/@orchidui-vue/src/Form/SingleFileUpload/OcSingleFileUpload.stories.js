@@ -20,7 +20,16 @@ export const Default = {
   render: (args) => ({
     components: { SingleFileUpload, RadioGroup },
     setup() {
-      const modelValue = ref();
+      const modelValue = ref({
+        current: {
+          type: 'file',
+          path: 'aaaaaa',
+          id: 'content.id',
+          caption: 'content.nameaslkdfjadslisalkdjflkadsjasdfkadnsjfadslfsadfflkads;jf;lasdjf',
+          extension: 'png',
+          fileName: 'content.nameaslkdfjadslisalkdjflkadsjflkads;jf;lasdjf'
+        }
+      });
       const variant = ref("upload");
       const radios = [
         {
@@ -48,13 +57,10 @@ export const Default = {
             <SingleFileUpload
                 class="max-w-[400px] self-center"
                 v-model="modelValue"
-                :variant="variant"
-                :is-preview="args.isPreview"
-                :accept="args.accept"
-                :is-image-only="args.isImageOnly"
-                :max-size="args.maxSize"
+                :is-preview="false"
                 :label="args.label"
                 :hint="args.hint"
+                should-truncate-file-name
                 :error-message="args.errorMessage"/>
           </div>
 
