@@ -86,7 +86,7 @@ const isDropdownOpen = ref([]);
             {{ element.title }}
           </div>
           <a
-            v-if="isLink && element[linkKey]"
+            v-if="isLink && element[linkKey] && element.type === 'link'"
             :href="element[linkKey]"
             target="_blank"
             rel="noopener noreferrer"
