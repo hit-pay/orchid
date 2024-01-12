@@ -31,6 +31,7 @@ const props = defineProps({
     default: "upload",
     validator: (val) => ["upload", "url"].includes(val),
   },
+  shouldTruncateFileName: Boolean,
 });
 const emit = defineEmits(["update:modelValue", "onRemoveFile", 'onExceedMaxFileSize']);
 
@@ -238,7 +239,14 @@ const onEditFile = () => {
                 {{ currentFile?.extension }}
               </span>
             </div>
-            {{ currentFile?.fileName }}
+
+            <div
+              :class="[
+                shouldTruncateFileName ? 'truncate max-w-[250px]' : '',
+              ]"
+            >
+              {{ currentFile?.fileName }}
+            </div>
           </div>
           <div class="flex">
             <div
