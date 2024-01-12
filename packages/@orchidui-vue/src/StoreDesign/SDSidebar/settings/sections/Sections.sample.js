@@ -97,17 +97,17 @@ const PRODUCT_FORM = [
         {
           preview: ASSETS_URL + "product-column-4-grid.png",
           label: "4 columns",
-          value: "4,3,2",
+          value: [2,3,4],
         },
         {
           preview: ASSETS_URL + "product-column-3-grid.png",
           label: "3 columns",
-          value: "3,2,1",
+          value: [1,2,3],
         },
         {
           preview: ASSETS_URL + "product-column-2-grid.png",
           label: "2 columns",
-          value: "2,2,1",
+          value: [1,2,2],
         },
       ],
     },
@@ -122,17 +122,17 @@ const PRODUCT_FORM = [
         {
           preview: ASSETS_URL + "product-column-4-carousel.png",
           label: "4 columns",
-          value: "4,3,2",
+          value: [2,3,4],
         },
         {
           preview: ASSETS_URL + "product-column-3-carousel.png",
           label: "3 columns",
-          value: "3,2,1",
+          value: [1,2,3],
         },
         {
           preview: ASSETS_URL + "product-column-2-carousel.png",
           label: "2 columns",
-          value: "2,2,1",
+          value: [1,2,2],
         },
       ],
     },
