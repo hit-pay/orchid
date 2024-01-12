@@ -104,7 +104,7 @@ const isDropdownOpen = ref([]);
                 </div>
               </template>
             </Tooltip>
-            <span class="truncate max-w-[80%]"> {{ element[linkKey] }}</span>
+            <span class="truncate w-[200px]"> {{ element[linkKey] }}</span>
           </a>
         </div>
       </div>
