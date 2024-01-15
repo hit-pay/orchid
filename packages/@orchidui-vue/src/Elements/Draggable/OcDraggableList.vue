@@ -86,7 +86,7 @@ const isDropdownOpen = ref([]);
             {{ element.title }}
           </div>
           <a
-            v-if="isLink && element[linkKey]"
+            v-if="isLink && element[linkKey] && element.type === 'link'"
             :href="element[linkKey]"
             target="_blank"
             rel="noopener noreferrer"
@@ -104,7 +104,7 @@ const isDropdownOpen = ref([]);
                 </div>
               </template>
             </Tooltip>
-            <span class="truncate max-w-[80%]"> {{ element[linkKey] }}</span>
+            <span class="truncate w-[200px]"> {{ element[linkKey] }}</span>
           </a>
         </div>
       </div>

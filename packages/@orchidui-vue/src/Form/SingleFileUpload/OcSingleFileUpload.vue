@@ -31,8 +31,9 @@ const props = defineProps({
     default: "upload",
     validator: (val) => ["upload", "url"].includes(val),
   },
+  shouldTruncateFileName: Boolean,
 });
-const emit = defineEmits(["update:modelValue", "onRemoveFile"]);
+const emit = defineEmits(["update:modelValue", "onRemoveFile", 'onExceedMaxFileSize']);
 
 const inputRef = ref();
 const fileLink = ref("");
@@ -63,7 +64,7 @@ onMounted(() => {
         fileUrl: props.modelValue.current.path,
         totalSize: props.modelValue.current.file_size ?? 0,
         isLoaded: true,
-        extension: props.modelValue.current.extention ?? "png",
+        extension: props.modelValue.current.extension ?? "png",
       },
     ];
     currentFiles.value = formattedModelValue;
@@ -238,7 +239,14 @@ const onEditFile = () => {
                 {{ currentFile?.extension }}
               </span>
             </div>
-            {{ currentFile?.fileName }}
+
+            <div
+              :class="[
+                shouldTruncateFileName ? 'truncate max-w-[250px]' : '',
+              ]"
+            >
+              {{ currentFile?.fileName }}
+            </div>
           </div>
           <div class="flex">
             <div

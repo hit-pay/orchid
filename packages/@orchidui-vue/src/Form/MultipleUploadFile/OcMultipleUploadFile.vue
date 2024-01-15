@@ -9,6 +9,7 @@ const emit = defineEmits([
   "update:selectedImage",
   "onEditFile",
   "onRemoveFile",
+  "onExceedMaxFileSize",
 ]);
 const props = defineProps({
   modelValue: {
@@ -23,6 +24,7 @@ const props = defineProps({
    * Maximum file size in MB
    */
   maxSize: Number,
+  maxImages: Number,
   hint: String,
   label: String,
   errorMessage: String,
@@ -53,7 +55,7 @@ onMounted(() => {
           fileUrl: item.current.path,
           totalSize: item.current.file_size ?? 0,
           isLoaded: true,
-          extension: item.current.extention ?? "png",
+          extension: item.current.extension ?? "png",
           link: item.current.link,
         });
       }
@@ -82,6 +84,7 @@ onMounted(() => {
         :columns-count="columnsCount"
         :accept="accept"
         :with-link="withLink"
+        :max-images="maxImages"
         @change="onChangeFile"
         @update:selected-image="$emit('update:selectedImage', $event)"
         @update:uploaded-images="

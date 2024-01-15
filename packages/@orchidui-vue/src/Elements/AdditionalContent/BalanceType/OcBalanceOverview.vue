@@ -16,6 +16,16 @@ defineProps({
     type: String,
     default: "",
   },
+  secondaryButtonProps: Object,
+  moreButtonProps: Object,
+  dropdownItems: {
+    type: Array,
+    default: () => [],
+  },
+  paymentMethods: {
+    type: Array,
+    default: () => [],
+  },
 });
 
 defineEmits({
@@ -38,8 +48,17 @@ defineEmits({
 
     <div class="border-t border-oc-gray-200" />
 
-    <TopActions />
+    <TopActions
+      :more-button-props="moreButtonProps"
+      :secondary-button-props="secondaryButtonProps"
+      :payment-methods="paymentMethods"
+      :dropdown-items="dropdownItems"
+    />
 
-    <Overview title="" :items="overviewItems" />
+    <Overview title="" :items="overviewItems">
+      <template #warning>
+        <slot name="warning" />
+      </template>
+    </Overview>
   </div>
 </template>

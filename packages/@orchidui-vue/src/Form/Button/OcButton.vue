@@ -121,6 +121,7 @@ const iconSize = computed(() => ({
         v-if="isLoading"
         :width="iconSize[size]"
         :height="iconSize[size]"
+        class="animate-spin"
         name="loading-2"
       />
 

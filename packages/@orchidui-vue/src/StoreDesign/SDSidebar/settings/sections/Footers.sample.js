@@ -1,4 +1,53 @@
+const ASSETS_URL = "/templates/default/images/";
+
 const FOOTER_CONTENT_FORM = [
+  {
+    type: "SectionItem",
+    props: {
+      title: "Colors",
+    },
+  },
+  {
+    name: [
+      {
+        props: {
+          label: "Background Color",
+        },
+        key: "color_bg",
+      },
+      {
+        props: {
+          label: "Text Color",
+        },
+        key: "color_text",
+      },
+    ],
+    type: "Colors",
+  },
+  {
+    type: "SectionItem",
+    props: {
+      title: "Footer Logo",
+      description: "Recommended size 640x640 pixels"
+    },
+  },
+  {
+    type: "Images",
+    name: "footer_logo",
+    props: {
+      maxImages: 1,
+    },
+  },
+  {
+    type: "SectionItem",
+    props: {
+      title: "Content"
+    },
+  },
+  {
+    type: "TextArea",
+    name: "footer_content"
+  },
   {
     name: "PaymentLogo",
     type: "Children",
@@ -13,7 +62,7 @@ const FOOTER_CONTENT_FORM = [
       },
       {
         general: true,
-        name: "payment_method_logos",
+        name: "payment_methods",
         type: "Select",
         props: {
           multiple: true,
@@ -33,6 +82,74 @@ const FOOTER_CONTENT_FORM = [
     ],
   },
   {
+    name: "FooterLink1",
+    type: "Children",
+    icon: "align-top",
+    label: "Footer Link 1",
+    children: [
+      {
+        type: "SectionItem",
+        props: {
+          title: "Title",
+        },
+      },
+      {
+        general: true,
+        type: "Input",
+        name: "footer_link_1_title",
+        props: {
+          placeholder: "Company",
+        },
+      },
+      {
+        type: "SectionItem",
+        props: {
+          title: "Menus",
+        },
+      },
+      {
+        general: true,
+        name: "footer_link_1_menus",
+        type: "Menus",
+        noMenuIcon: ASSETS_URL + "no-menu-footer.png",
+      },
+    ],
+  },
+  {
+    name: "FooterLink2",
+    type: "Children",
+    icon: "align-top",
+    label: "Footer Link 2",
+    children: [
+      {
+        type: "SectionItem",
+        props: {
+          title: "Title",
+        },
+      },
+      {
+        general: true,
+        type: "Input",
+        name: "footer_link_2_title",
+        props: {
+          placeholder: "Company",
+        },
+      },
+      {
+        type: "SectionItem",
+        props: {
+          title: "Menus",
+        },
+      },
+      {
+        general: true,
+        name: "footer_link_2_menus",
+        type: "Menus",
+        noMenuIcon: ASSETS_URL + "no-menu-footer.png",
+      },
+    ],
+  },
+  {
     name: "SocialMedia",
     type: "Children",
     icon: "facebook",
@@ -45,6 +162,7 @@ const FOOTER_CONTENT_FORM = [
         },
       },
       {
+        general: true,
         type: "Input",
         name: "footer_social_title",
         props: {
@@ -62,33 +180,10 @@ const FOOTER_CONTENT_FORM = [
         name: "footer_social_menus",
         type: "Menus",
         variant: "social",
-        noMenuIcon: "/images/no-menu-header.png",
+        noMenuIcon: ASSETS_URL + "no-menu-footer.png",
       },
     ],
-  },
-  {
-    type: "SectionItem",
-    props: {
-      title: "Colors",
-    },
-  },
-  {
-    name: [
-      {
-        props: {
-          label: "Background Color",
-        },
-        key: "background_color",
-      },
-      {
-        props: {
-          label: "Text Color",
-        },
-        key: "text_color",
-      },
-    ],
-    type: "Colors",
-  },
+  }
 ];
 
 export { FOOTER_CONTENT_FORM };

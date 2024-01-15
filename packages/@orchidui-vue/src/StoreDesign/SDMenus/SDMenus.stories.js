@@ -23,7 +23,8 @@ export const SDMenusDefault = {
           id: "123",
           icon: "banner",
           title: "Menu",
-          link: "https://orchidui.vercel.app",
+          type: "link",
+          link: "https://orchidui.vercel.app/?m=http://localhost:6006/?path=/docs/storedesign-sdmenus--docs",
         },
         {
           id: "234",

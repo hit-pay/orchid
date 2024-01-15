@@ -12,6 +12,10 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  iconProps: {
+    type: Object,
+    default: () => ({}),
+  },
   modelValue: {
     type: [String, Number],
     default: "",
@@ -130,7 +134,12 @@ const inputClasses = computed(() => [
       </div>
 
       <slot name="icon">
-        <Icon v-if="icon" class="w-5 h-5 text-oc-text-400" :name="icon" />
+        <Icon
+          v-if="icon"
+          class="w-5 h-5 text-oc-text-400"
+          :name="icon"
+          v-bind="iconProps"
+        />
       </slot>
 
       <div class="flex flex-1 items-baseline gap-x-2">

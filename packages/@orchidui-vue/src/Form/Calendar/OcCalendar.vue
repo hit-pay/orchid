@@ -232,10 +232,17 @@ const isDayInRange = (day) => {
 };
 const isDayDisabled = (day) => {
   if (props.type === "range") {
-    const currentDate = new Date(selectedDate.value);
-    currentDate.setDate(day);
+    let currentDate;
+
+    if (day instanceof Date) {
+      currentDate = new Date(day);
+    } else {
+      currentDate = new Date(selectedDate.value);
+      currentDate.setDate(day);
+    }
+
     return (
-      props.disabledDate(currentDate.setDate(day)) ||
+      props.disabledDate(currentDate) ||
       (props.minDate &&
         currentDate.getTime() < new Date(props.minDate).getTime()) ||
       (props.maxDate &&
@@ -263,8 +270,8 @@ const getRangeDates = () => {
 const doneSelecting = () => {
   if (props.type === "range") {
     if (
-      isDayDisabled(selectedStartDate.value.getDate()) ||
-      isDayDisabled(selectedEndDate.value.getDate())
+      isDayDisabled(selectedStartDate.value) ||
+      isDayDisabled(selectedEndDate.value)
     ) {
       return;
     }

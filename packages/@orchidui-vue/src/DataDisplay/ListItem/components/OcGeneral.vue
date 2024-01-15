@@ -15,7 +15,7 @@ defineProps({
   },
   isDisabled: Boolean,
 });
-defineEmits(["more"]);
+const emit = defineEmits(["more"]);
 const isOpen = ref(false);
 </script>
 
@@ -30,7 +30,7 @@ const isOpen = ref(false);
           {{ title }}
         </span>
 
-        <div class="flex gap-3" v-if="chips.length">
+        <div v-if="chips.length" class="flex gap-3">
           <Chip
             v-for="(item, i) in chips"
             :key="i"
@@ -45,7 +45,7 @@ const isOpen = ref(false);
           <Icon
             name="dots-vertical"
             class="opacity-0 p-2 group-hover:opacity-100 cursor-pointer active:bg-oc-gray-100 rounded"
-            @click="$emit('more')"
+            @click.prevent="$emit('more')"
           />
           <template #menu>
             <slot name="menu" />
@@ -55,13 +55,19 @@ const isOpen = ref(false);
     </div>
     <div class="flex flex-col gap-4">
       <div class="text-oc-text-500 text-sm">{{ description }}</div>
-      <div class="flex gap-5" v-if="details.length">
+      <div v-if="details.length" class="flex gap-5">
         <div
-          class="flex items-center gap-2"
           v-for="(item, i) in details"
           :key="i"
+          class="flex items-center gap-2"
         >
+          <div
+            v-if="item.country"
+            class="fi w-[15px] h-[15px] shadow"
+            :class="'fi-' + item.country"
+          ></div>
           <Icon
+            v-else
             :name="item.icon"
             width="16"
             height="16"
@@ -75,5 +81,3 @@ const isOpen = ref(false);
     </div>
   </div>
 </template>
-
-<style scoped lang="scss"></style>

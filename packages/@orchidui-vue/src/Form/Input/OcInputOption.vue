@@ -19,6 +19,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  allowDuplicated: {
+    type: Boolean,
+    default: false,
+  },
   labelIcon: {
     type: String,
     default: "",
@@ -67,12 +71,20 @@ const setNewValue = (value) => {
     return;
   }
 
+  if (!props.allowDuplicated && props.modelValue?.includes(value)) {
+    return;
+  }
+
   localValue.value.push(value);
   query.value = "";
 
   emit("update:modelValue", localValue.value);
   emit("option-added", value);
 };
+
+defineExpose({
+  focus: () => inputRef.value.focus(),
+});
 </script>
 
 <template>

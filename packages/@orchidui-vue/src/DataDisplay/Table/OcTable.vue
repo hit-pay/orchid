@@ -117,7 +117,7 @@ onMounted(() => onScroll());
       <TableHeader
         v-if="isSelectable"
         :is-sticky="isSticky"
-        class="md:ml-0 md:border-b border-oc-gray-200"
+        class="md:ml-0 md:border-b border-oc-gray-200 min-w-[32px]"
         :class="[
           isSticky ? 'shrink-0 sticky left-0 z-10' : 'w-[40px] md:w-[5%]',
         ]"
@@ -159,7 +159,7 @@ onMounted(() => onScroll());
       <div
         v-for="i in loadingRows"
         :key="i"
-        class="flex flex-wrap md:flex-nowrap relative group/row border-oc-gray-200 md:p-0 py-3"
+        class="flex flex-wrap md:flex-nowrap group/row border-oc-gray-200 md:p-0 py-3"
         :class="{
           'pl-[40px]': isSelectable,
         }"
@@ -182,7 +182,7 @@ onMounted(() => onScroll());
       <div
         v-for="(field, i) in fields"
         :key="i"
-        class="flex relative group/row md:p-0 py-3"
+        class="flex group/row md:p-0 py-3"
         :class="[
           {
             'border-b md:border-b-0': fields.length !== i + 1,
@@ -196,7 +196,7 @@ onMounted(() => onScroll());
       >
         <TableCell
           v-if="isSelectable"
-          class="flex border-oc-gray-200 justify-center left-0"
+          class="flex border-oc-gray-200 justify-center left-0 min-w-[32px]"
           :is-last="fields.length === i + 1"
           :is-selected="
             selectedRows.some((r) => getRowKey(r) === getRowKey(field))

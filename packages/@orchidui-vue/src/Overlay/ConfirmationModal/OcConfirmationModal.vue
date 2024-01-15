@@ -4,6 +4,10 @@ import { computed } from "vue";
 import Confirmation from "./OcConfirmation.vue";
 
 defineProps({
+  modelValue: {
+    type: Boolean,
+    default: false,
+  },
   title: {
     type: String,
     default: "Are you sure?",
@@ -17,8 +21,10 @@ defineProps({
     default: "delete",
   },
   icon: String,
+  labelConfirm: String,
+  labelCancel: String,
 });
-defineEmits(["confirm", "cancel"]);
+const emit = defineEmits(["confirm", "cancel", "update:model-value"]);
 const cancelButton = computed(() => ({
   delete: {},
   warning: {},
@@ -43,18 +49,37 @@ const confirmButton = computed(() => ({
     label: "Yes",
   },
 }));
+
+const emitModelValue = (e) => {
+  emit("update:model-value", e);
+  emit("cancel");
+};
 </script>
 
 <template>
   <Modal
     size="small"
-    :model-value="true"
+    :model-value="modelValue"
     :title="title"
     is-borderless
-    :cancel-button-props="cancelButton[variant]"
-    :confirm-button-props="confirmButton[variant]"
+    :cancel-button-props="
+      labelCancel
+        ? {
+            ...cancelButton[variant],
+            label: labelCancel,
+          }
+        : cancelButton[variant]
+    "
+    :confirm-button-props="
+      labelConfirm
+        ? {
+            ...confirmButton[variant],
+            label: labelConfirm,
+          }
+        : confirmButton[variant]
+    "
     footer-class="justify-center"
-    @update:model-value="!$event ? $emit('cancel') : ''"
+    @update:model-value="emitModelValue"
     @confirm="$emit('confirm')"
     @cancel="$emit('cancel')"
   >

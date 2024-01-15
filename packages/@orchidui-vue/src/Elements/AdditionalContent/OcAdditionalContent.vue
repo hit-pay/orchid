@@ -23,6 +23,10 @@ const props = defineProps({
   isCustomer: { type: Boolean, default: false },
   overviewItems: { type: Array, default: () => [] },
   overviewTabs: { type: Array, default: () => [] },
+  secondaryButtonProps: { type: Object, default: null },
+  moreButtonProps: { type: Object, default: null },
+  dropdownItems: { type: Array, default: () => [] },
+  paymentMethods: { type: Array, default: () => [] },
 });
 
 defineEmits({
@@ -76,8 +80,16 @@ const copyLink = async () => {
       v-else-if="variant === 'balance'"
       :overview-items="overviewItems"
       :overview-tabs="overviewTabs"
+      :secondary-button-props="secondaryButtonProps"
+      :more-button-props="moreButtonProps"
       :overview-active-tab="overviewActiveTab"
+      :payment-methods="paymentMethods"
+      :dropdown-items="dropdownItems"
       @change-tab="$emit('changeTab', $event)"
-    />
+    >
+      <template v-if="$slots.warning" #warning>
+        <slot name="warning" />
+      </template>
+    </BalanceOverview>
   </div>
 </template>

@@ -53,6 +53,7 @@ export default defineConfig({
         "vue-draggable-next",
         "echarts",
         "shikiji",
+        "vue3-colorpicker",
       ],
     },
   },

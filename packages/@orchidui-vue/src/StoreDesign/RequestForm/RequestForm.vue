@@ -1,5 +1,5 @@
 <script setup>
-import { FormBuilder, Icon, MultipleUploadFile, Slider } from "@/orchidui";
+import { FormBuilder, Icon, MultipleUploadFile, Slider, Tabs } from "@/orchidui";
 import { ref } from "vue";
 import { SDMenus } from "@/orchidui/StoreDesign";
 import ColorsInput from "./Form/ColorsInput.vue";
@@ -56,8 +56,9 @@ Object.values(props.requestForm).forEach((form) => {
 const emit = defineEmits([
   "update:generalData",
   "update:sectionData",
-  "edit:banner",
-  "delete:banner",
+  "edit:images",
+  "delete:images",
+  "add:images",
 ]);
 
 const updateData = (general = false) => {
@@ -92,37 +93,43 @@ const onUpdateForm = (form, value = null) => {
   }
 };
 
-const formatBanner = (value) => {
+const formatimages = (value, form) => {
   let newFormatImages = [];
   value.forEach((image) => {
     if (!image.fileUrl) {
       newFormatImages.push(image.current);
     } else {
-      newFormatImages.push({
+      const newFormat = {
         id: "new_" + Date.now(),
         path: image.fileUrl,
         link: image.link ?? image.current?.link ?? "",
+      };
+      newFormatImages.push(newFormat);
+      emit("add:images", {
+        form: form,
+        value: newFormat,
       });
     }
   });
   return newFormatImages;
 };
-const onUpdateBanner = (form, newValue) => {
+const onUpdateimages = (form, newValue) => {
   images[form.name] = newValue;
   setTimeout(() => {
-    onUpdateForm(form, formatBanner(images[form.name]));
+    const formatValue = formatimages(images[form.name], form);
+    onUpdateForm(form, formatValue);
   }, 100);
 };
 
-const onDeleteBanner = (form, value) => {
-  emit("delete:banner", {
+const onDeleteimages = (form, value) => {
+  emit("delete:images", {
     form: form,
     value: value,
   });
 };
 
-const onEditBanner = (form, value) => {
-  emit("edit:banner", {
+const onEditimages = (form, value) => {
+  emit("edit:images", {
     form: form,
     value: value,
   });
@@ -148,7 +155,7 @@ const formatImagesValue = (value, name) => {
 };
 
 props.requestForm.forEach((f) => {
-  if (f.type === "Banners") {
+  if (f.type === "Images") {
     formatImagesValue(formValues.value[f.name], f.name);
   }
 });
@@ -160,12 +167,15 @@ const showSubForm = ref("");
     <FormBuilder
       v-if="Object.values(formValues).length > 0"
       id="form-builder"
-      class="grid gap-4"
+      class="grid gap-x-4 gap-y-5"
       :errors="formErrors"
       :values="formValues"
       :json-form="requestForm"
       @on-update="onUpdateForm"
     >
+    <template #Tabs="{ form, value }">
+      <Tabs :model-value="value" v-bind="form.props" @update:model-value="onUpdateForm(form, $event)"/>
+    </template>
       <template #Menus="{ form, value }">
         <SDMenus
           :model-value="value"
@@ -246,19 +256,20 @@ const showSubForm = ref("");
           @update:model-value="onUpdateForm(form, $event)"
         />
       </template>
-      <template #Banners="{ form }">
+      <template #Images="{ form }">
         <MultipleUploadFile
           v-if="imageLoaded && images[form.name]"
           :model-value="images[form.name]"
           :hint="form.props?.hint ?? ''"
           :max-size="5"
+          :max-images="form.props?.maxImages ?? 8"
           :important="true"
           is-image-only
           :columns-count="form.props?.columnsCount ?? 4"
           with-link
-          @update:model-value="onUpdateBanner(form, $event)"
-          @on-edit-file="onEditBanner(form, $event)"
-          @on-remove-file="onDeleteBanner(form, $event)"
+          @update:model-value="onUpdateimages(form, $event)"
+          @on-edit-file="onEditimages(form, $event)"
+          @on-remove-file="onDeleteimages(form, $event)"
         >
         </MultipleUploadFile>
       </template>

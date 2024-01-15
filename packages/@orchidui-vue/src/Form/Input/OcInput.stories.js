@@ -152,7 +152,7 @@ export const Trailing = {
   render: () => ({
     components: { Theme, OCInput, Dropdown, DropdownItem, Icon },
     setup() {
-      const isDropdownOpen = ref(false);
+      const isDropdownOpen = ref([]);
       return {
         isDropdownOpen,
       };
@@ -162,12 +162,12 @@ export const Trailing = {
             <div class="flex items-end gap-x-4">
               <OCInput label="Label" hint="This is a hint text to help user">
                 <template #trailing>
-                  <Dropdown v-model="isDropdownOpen">
+                  <Dropdown v-model="isDropdownOpen[1]">
                     <template #menu>
                       <div class="flex p-2 flex-col">
-                        <DropdownItem text="Menu" icon="pencil" @click="isDropdownOpen=false"/>
-                        <DropdownItem text="Menu" icon="pencil" @click="isDropdownOpen=false"/>
-                        <DropdownItem text="Menu" icon="pencil" @click="isDropdownOpen=false"/>
+                        <DropdownItem text="Menu" icon="pencil" @click="isDropdownOpen[1]=false"/>
+                        <DropdownItem text="Menu" icon="pencil" @click="isDropdownOpen[1]=false"/>
+                        <DropdownItem text="Menu" icon="pencil" @click="isDropdownOpen[1]=false"/>
                       </div>
                     </template>
                     <div
@@ -181,12 +181,12 @@ export const Trailing = {
               </OCInput>
               <OCInput disabled label="Label" hint="This is a hint text to help user">
                 <template #trailing>
-                  <Dropdown v-model="isDropdownOpen">
+                  <Dropdown v-model="isDropdownOpen[2]">
                     <template #menu>
                       <div class="flex p-2 flex-col">
-                        <DropdownItem text="Menu" icon="pencil" @click="isDropdownOpen=false"/>
-                        <DropdownItem text="Menu" icon="pencil" @click="isDropdownOpen=false"/>
-                        <DropdownItem text="Menu" icon="pencil" @click="isDropdownOpen=false"/>
+                        <DropdownItem text="Menu" icon="pencil" @click="isDropdownOpen[2]=false"/>
+                        <DropdownItem text="Menu" icon="pencil" @click="isDropdownOpen[2]=false"/>
+                        <DropdownItem text="Menu" icon="pencil" @click="isDropdownOpen[2]=false"/>
                       </div>
                     </template>
                     <div
@@ -201,12 +201,12 @@ export const Trailing = {
               <OCInput label="Label" hint="This is a hint text to help user"
                        error-message="Error message">
                 <template #trailing>
-                  <Dropdown v-model="isDropdownOpen">
+                  <Dropdown v-model="isDropdownOpen[3]">
                     <template #menu>
                       <div class="flex p-2 flex-col">
-                        <DropdownItem text="Menu" icon="pencil" @click="isDropdownOpen=false"/>
-                        <DropdownItem text="Menu" icon="pencil" @click="isDropdownOpen=false"/>
-                        <DropdownItem text="Menu" icon="pencil" @click="isDropdownOpen=false"/>
+                        <DropdownItem text="Menu" icon="pencil" @click="isDropdownOpen[3]=false"/>
+                        <DropdownItem text="Menu" icon="pencil" @click="isDropdownOpen[3]=false"/>
+                        <DropdownItem text="Menu" icon="pencil" @click="isDropdownOpen[3]=false"/>
                       </div>
                     </template>
                     <div
@@ -228,7 +228,7 @@ export const Leading = {
   render: () => ({
     components: { Theme, OCInput, Dropdown, DropdownItem, Icon, BaseInput },
     setup() {
-      const isDropdownOpen = ref(false);
+      const isDropdownOpen = ref([]);
       return {
         isDropdownOpen,
       };
@@ -238,17 +238,15 @@ export const Leading = {
             <div class="flex items-end gap-x-4">
               <OCInput label="Label" hint="This is a hint text to help user">
                 <template #leading>
-                  <Dropdown v-model="isDropdownOpen">
+                  <Dropdown v-model="isDropdownOpen[1]" :distance="10">
                     <template #menu>
                       <div class="flex p-2 flex-col">
-                        <DropdownItem text="Menu" icon="pencil" @click="isDropdownOpen=false"/>
-                        <DropdownItem text="Menu" icon="pencil" @click="isDropdownOpen=false"/>
-                        <DropdownItem text="Menu" icon="pencil" @click="isDropdownOpen=false"/>
+                        <DropdownItem text="Menu" icon="pencil" @click="isDropdownOpen[1]=false"/>
+                        <DropdownItem text="Menu" icon="pencil" @click="isDropdownOpen[1]=false"/>
+                        <DropdownItem text="Menu" icon="pencil" @click="isDropdownOpen[1]=false"/>
                       </div>
                     </template>
-                    <div
-                        class=" text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
-                    >
+                    <div class=" text-sm font-medium flex items-center gap-x-2 text-oc-text-400"  >
                       <span class="flex items-center text-sm">USD</span>
                       <Icon class="w-[14px] h-[14px]" name="chevron-down"/>
                     </div>
@@ -257,12 +255,12 @@ export const Leading = {
               </OCInput>
               <OCInput disabled label="Label" hint="This is a hint text to help user">
                 <template #leading>
-                  <Dropdown v-model="isDropdownOpen">
+                  <Dropdown v-model="isDropdownOpen[2]">
                     <template #menu>
                       <div class="flex p-2 flex-col">
-                        <DropdownItem text="Menu" icon="pencil" @click="isDropdownOpen=false"/>
-                        <DropdownItem text="Menu" icon="pencil" @click="isDropdownOpen=false"/>
-                        <DropdownItem text="Menu" icon="pencil" @click="isDropdownOpen=false"/>
+                        <DropdownItem text="Menu" icon="pencil" @click="isDropdownOpen[2]=false"/>
+                        <DropdownItem text="Menu" icon="pencil" @click="isDropdownOpen[2]=false"/>
+                        <DropdownItem text="Menu" icon="pencil" @click="isDropdownOpen[2]=false"/>
                       </div>
                     </template>
                     <div
@@ -277,12 +275,12 @@ export const Leading = {
               <OCInput label="Label" hint="This is a hint text to help user"
                        error-message="Error message">
                 <template #leading>
-                  <Dropdown v-model="isDropdownOpen">
+                  <Dropdown v-model="isDropdownOpen[3]" >
                     <template #menu>
                       <div class="flex p-2 flex-col">
-                        <DropdownItem text="Menu" icon="pencil" @click="isDropdownOpen=false"/>
-                        <DropdownItem text="Menu" icon="pencil" @click="isDropdownOpen=false"/>
-                        <DropdownItem text="Menu" icon="pencil" @click="isDropdownOpen=false"/>
+                        <DropdownItem text="Menu" icon="pencil" @click="isDropdownOpen[3]=false"/>
+                        <DropdownItem text="Menu" icon="pencil" @click="isDropdownOpen[3]=false"/>
+                        <DropdownItem text="Menu" icon="pencil" @click="isDropdownOpen[3]=false"/>
                       </div>
                     </template>
                     <div

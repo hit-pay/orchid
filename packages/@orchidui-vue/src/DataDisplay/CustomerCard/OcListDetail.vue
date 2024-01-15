@@ -34,5 +34,3 @@ defineProps({
     <span>{{ content }}</span>
   </div>
 </template>
-
-<style scoped lang="scss"></style>

@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watch } from "vue";
-import { Icon, Toggle, Button, SelectOptions } from "@/orchidui";
+import { Icon, Toggle, Button, SelectOptions, Dropdown } from "@/orchidui";
 import { DraggableList } from "@/orchidui/Draggable.js";
 import { RequestForm, ThumbnailSection } from "@/orchidui/StoreDesign";
 import { computed } from "vue";
@@ -20,22 +20,51 @@ const props = defineProps({
   preset: {
     type: Array,
   },
+  presetCustomPreview: String,
   options: Object,
 });
 
-const requiredSection = ["Header", "FooterContent"];
+const getSidebarMenu = (section) => {
+  // Sidebar not stored to DB
+  if (section === "Styles") {
+    return "styles";
+  } else if (["IconLinks", "ButtonLinks"].includes(section)) {
+    return "link_in_bio";
+  } else {
+    return "home";
+  }
+};
+
+const isDropdownOpen = ref([]);
+const requiredSection = ["Header", "FooterContent", "IconLinks", "ButtonLinks"];
 
 const emit = defineEmits({
   "update:values": [],
   "update:active": [],
   "get:products": [], // pick product sections
   // Event
-  "edit:banner": [],
-  "delete:banner": [],
+  "edit:images": [],
+  "delete:images": [],
+  "add:images": [],
 });
 
 const presetOptions = computed(() => {
-  return props.preset;
+  return [
+    ...props.preset,
+    {
+      value: "custom",
+      label: "Custom",
+      preview: props.presetCustomPreview,
+      sections: [
+        {
+          section: "Styles",
+          changes: {
+            preset: "custom",
+          },
+        },
+      ],
+    },
+  ];
 });
 const presetValue = computed(() => {
   return props.values.sections.find((s) => s.key === "Styles")["preset"];
@@ -43,35 +72,43 @@ const presetValue = computed(() => {
 
 const updatePreset = (to) => {
   const selectedPreset = presetOptions.value.find((p) => p.value === to);
-  if (to !== "custom") {
-    let newSectionsList = [];
-    props.values.sections.forEach((item) => {
-      const defaultSettings = selectedPreset.sections.find(
-        (s) => s.section === item.section,
-      );
-      if (defaultSettings) {
-        let sectionItem = {
-          ...item,
-        };
-        Object.keys(defaultSettings.changes).forEach((key) => {
-          const val = defaultSettings.changes[key];
-          sectionItem[key] = val;
-        });
-        newSectionsList.push(sectionItem);
-      } else {
-        newSectionsList.push(item);
-      }
+
+  let newSectionsList = [];
+  props.values.sections.forEach((item) => {
+    const defaultSettings = selectedPreset.sections.find(
+      (s) => s.section === item.section
+    );
+    if (defaultSettings) {
+      let sectionItem = {
+        ...item,
+      };
+      Object.keys(defaultSettings.changes).forEach((key) => {
+        const val = defaultSettings.changes[key];
+        sectionItem[key] = val;
+      });
+      newSectionsList.push(sectionItem);
+    } else {
+      newSectionsList.push(item);
+    }
+  });
+
+  const newStoreDesignData = {
+    general: generalData.value,
+    sections: [...newSectionsList],
+  };
+
+  emit("update:values", newStoreDesignData);
+
+  if (to === "custom") {
+    emit("update:active", {
+      sidebarMenu: "styles",
+      submenu: "styles",
+      section: "Styles",
+      id: "Styles",
     });
-
-    const newStoreDesignData = {
-      general: generalData.value,
-      sections: [...newSectionsList],
-    };
-
-    emit("update:values", newStoreDesignData);
   }
 };
-const sectionList = ref(null);
+const sectionList = ref([]);
 const sectionActive = ref(null);
 
 const generalData = computed(() => props.values.general);
@@ -81,66 +118,74 @@ const sidebarActive = computed(() => {
 });
 
 const availableSections = computed(() =>
-  props.settings.filter((s) => s.group === "sections"),
+  props.settings.filter((s) => s.group === "sections")
 );
 
 const renderForm = ref(null);
+const renderSectionList = ref(null);
+
+const renderSectionAndForm = () => {
+  renderForm.value = null;
+  renderSectionList.value = null;
+
+  if (props.active.submenu && props.active.submenu !== "sections") {
+    sectionList.value = props.settings.filter((s) => {
+      const sectionData = props.values.sections.find((i) => i.key === s.key);
+      s.active = sectionData?.active;
+      return s.group === props.active.submenu;
+    });
+  } else {
+    let sectionListCustom = [];
+    props.values.sections.forEach((item) => {
+      if (item.group === "sections") {
+        const sectionItem = props.settings.find(
+          (s) => s.section === item.section
+        );
+        sectionListCustom.push({
+          key: item.key,
+          group: item.group,
+          section: item.section,
+          title: item.title ?? item.section,
+          active: item.active,
+          icon: sectionItem.icon,
+          canDelete: sectionItem.canDelete ?? false,
+          form: sectionItem.form,
+        });
+      }
+    });
+    sectionList.value = sectionListCustom;
+  }
+
+  sectionActive.value = sectionList.value.find(
+    (s) => s.key === props.active.id
+  );
+
+  setTimeout(() => {
+    renderForm.value = Date.now();
+    renderSectionList.value = Date.now();
+  }, 100);
+};
 
 watch(
   () => props.active,
   () => {
-    renderForm.value = null;
-    if (props.active.submenu && props.active.submenu !== "sections") {
-      sectionList.value = props.settings.filter((s) => {
-        const sectionData = props.values.sections.find((i) => i.key === s.key);
-        s.active = sectionData?.active;
-        return s.group === props.active.submenu;
-      });
-    } else {
-      let sectionListCustom = [];
-      props.values.sections.forEach((item) => {
-        if (item.group === "sections") {
-          const sectionItem = props.settings.find(
-            (s) => s.section === item.section,
-          );
-          sectionListCustom.push({
-            key: item.key,
-            group: item.group,
-            section: item.section,
-            title: item.title ?? item.section,
-            active: item.active,
-            icon: sectionItem.icon,
-            form: sectionItem.form,
-          });
-        }
-      });
-      sectionList.value = sectionListCustom;
-    }
-
-    sectionActive.value = sectionList.value.find(
-      (s) => s.key === props.active.id,
-    );
-
-    setTimeout(() => {
-      renderForm.value = Date.now();
-    }, 100);
+    renderSectionAndForm();
   },
   {
     deep: true,
     immediate: true,
-  },
+  }
 );
 
 const sectionActiveValues = computed(() => {
   let sectionValues = props.values.sections.find(
-    (s) => s.key === props.active.id,
+    (s) => s.key === props.active.id
   );
   return sectionValues;
 });
 
 const changeSidebarMenu = (value) => {
   emit("update:active", {
-    ...sidebarActive.value,
     sidebarMenu: value,
     submenu: "",
     section: "",
@@ -149,12 +194,21 @@ const changeSidebarMenu = (value) => {
 };
 
 const changeSubmenu = (value) => {
-  emit("update:active", {
-    ...sidebarActive.value,
-    submenu: value,
-    section: "",
-    id: "",
-  });
+  if (sidebarMenuActive.value.type === "sections") {
+    emit("update:active", {
+      sidebarMenu: getSidebarMenu(value),
+      submenu: sidebarMenuActive.value.name,
+      section: value,
+      id: value,
+    });
+  } else {
+    emit("update:active", {
+      sidebarMenu: getSidebarMenu(value),
+      submenu: value,
+      section: "",
+      id: "",
+    });
+  }
 };
 
 const sidebarMenuActive = computed(() => {
@@ -164,10 +218,14 @@ const sidebarMenuLabel = computed(() => {
   return sidebarMenuActive.value?.label ?? "";
 });
 const submenuLabel = computed(() => {
-  const submenu = sidebarMenuActive.value?.children.find(
-    (s) => s.name === sidebarActive.value.submenu,
-  );
-  return submenu?.label;
+  if (sidebarMenuActive.value.children) {
+    const submenu = sidebarMenuActive.value.children.find(
+      (s) => s.name === sidebarActive.value.submenu
+    );
+    return submenu?.label;
+  } else {
+    return sidebarMenuActive.value.label;
+  }
 });
 
 const changeSection = (to = "", key = "") => {
@@ -176,7 +234,10 @@ const changeSection = (to = "", key = "") => {
     section: to,
     id: key,
   };
-  if (to === "" && sidebarActive.value.submenu === "styles") {
+  if (
+    to === "" &&
+    ["styles", "link_in_bio"].includes(sidebarActive.value.submenu)
+  ) {
     newActiveSidebar.submenu = "";
   }
   emit("update:active", newActiveSidebar);
@@ -221,6 +282,16 @@ const updateOrderedSection = (newOrdered) => {
   });
 };
 
+const deleteSectionItem = (item) => {
+  emit("update:values", {
+    general: generalData.value,
+    sections: props.values.sections.filter((i) => i.key !== item.key),
+  });
+  setTimeout(() => {
+    renderSectionAndForm();
+  }, 100);
+};
+
 const addSection = (newSection, customize = false) => {
   let newKey = Date.now();
   const newSectionData = [
@@ -230,6 +301,7 @@ const addSection = (newSection, customize = false) => {
       section: newSection.section,
       title: newSection.title ?? newSection.section,
       active: true,
+      canDelete: newSection.canDelete ?? false,
       ...newSection.default,
     },
   ];
@@ -300,7 +372,12 @@ const addSection = (newSection, customize = false) => {
           v-if="sidebarActive.sidebarMenu === sidebarMenu.name"
           class="w-full flex flex-col"
         >
-          <template v-if="sidebarMenu.type === 'list' && sidebarMenu.children">
+          <template
+            v-if="
+              ['list', 'sections'].includes(sidebarMenu.type) &&
+              sidebarMenu.children
+            "
+          >
             <div
               v-for="(children, childIndex) in sidebarMenu.children"
               :key="childIndex"
@@ -308,7 +385,7 @@ const addSection = (newSection, customize = false) => {
               @click="
                 children.onClick
                   ? children.onClick()
-                  : changeSubmenu(children.name)
+                  : changeSubmenu(children.name, children.section)
               "
             >
               <div class="ml-2">
@@ -366,7 +443,7 @@ const addSection = (newSection, customize = false) => {
         <div class="mx-2">/</div>
         <div class="font-medium">{{ submenuLabel }}</div>
       </div>
-      <div v-if="sectionList" class="px-5 mt-4">
+      <div v-if="renderSectionList" class="px-5 mt-4">
         <DraggableList
           :model-value="sectionList"
           class="w-full cursor-pointer"
@@ -374,8 +451,26 @@ const addSection = (newSection, customize = false) => {
           @update:model-value="updateOrderedSection"
         >
           <template #action="{ item }">
+            <Dropdown
+              v-if="item.canDelete"
+              v-model="isDropdownOpen[item.key]"
+              placement="bottom-end"
+            >
+              <Icon name="dots-vertical" />
+              <template #menu>
+                <div class="py-2 flex flex-col">
+                  <div
+                    class="flex p-3 cursor-pointer items-center text-oc-error gap-x-3"
+                    @click="deleteSectionItem(item)"
+                  >
+                    <Icon width="16" height="16" name="bin" />
+                    <span>Delete</span>
+                  </div>
+                </div>
+              </template>
+            </Dropdown>
             <Toggle
-              v-if="!requiredSection.includes(item.section)"
+              v-else-if="!requiredSection.includes(item.section)"
               v-model="item.active"
               size="small"
               @update:model-value="updateSectionActive($event, item)"
@@ -420,11 +515,17 @@ const addSection = (newSection, customize = false) => {
           :section-data="sectionActiveValues"
           :request-form="sectionActive.form"
           :options="options"
-          @edit:banner="$emit('edit:banner', $event)"
-          @delete:banner="$emit('delete:banner', $event)"
+          @edit:images="
+            $emit('edit:images', { ...$event, section: sectionActive.key })
+          "
+          @delete:images="
+            $emit('delete:images', { ...$event, section: sectionActive.key })
+          "
+          @add:images="
+            $emit('add:images', { ...$event, section: sectionActive.key })
+          "
         >
         </RequestForm>
-        <span v-else> loading... </span>
       </div>
     </template>
     <template v-else-if="sidebarActive.section === 'add-new-section'">
