@@ -87,6 +87,7 @@ const variantClass = computed(() => ({
       v-else
       class="w-full flex"
       :class="isCopy ? 'justify-between' : 'justify-start'"
+      @click="$emit('click:field')"
     >
       <slot>
         <!--  CHECKBOX    -->

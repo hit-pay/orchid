@@ -288,6 +288,10 @@ const displayFilterData = computed(() => {
               .join(", ");
           }
 
+          if (option.type === "RangeInput") {
+            optionLabel = filterData.value[option.name].join(" - ");
+          }
+
           if (option.type === "DatePicker") {
             if (
               option?.props?.type === "range" &&
@@ -304,7 +308,7 @@ const displayFilterData = computed(() => {
                 );
             } else
               optionLabel = dayjs(filterData.value[option.name]).format(
-                "MMM DD, YYYY",
+                "MM/DD/YYYY",
               );
           }
 

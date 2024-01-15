@@ -29,7 +29,7 @@ defineEmits(["addCustomer"]);
           <div class="flex flex-col font-medium">
             <span>{{ customer?.name || "John" }}</span>
             <span class="text-sm text-oc-text-400">
-              {{ customer?.email || "Doe" }}
+              {{ customer?.email || "johndoe@gmail.com" }}
             </span>
           </div>
         </div>

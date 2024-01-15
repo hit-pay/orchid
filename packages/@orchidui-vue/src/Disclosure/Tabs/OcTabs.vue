@@ -8,7 +8,7 @@ const props = defineProps({
     validator: (val) => ["default", "pills"].includes(val),
   },
   tabs: Array,
-  modelValue: String,
+  modelValue: [String, Array],
   maxCount: Number,
 });
 defineEmits({

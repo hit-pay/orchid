@@ -41,7 +41,7 @@ const copyToClipboard = async (data) => {
       </div>
     </template>
     <template #default="{ isShow }">
-      <div @click="copyToClipboard(value)">
+      <div @click.stop="copyToClipboard(value)">
         <slot :is-show="isShow">
           <Icon
             width="14"
