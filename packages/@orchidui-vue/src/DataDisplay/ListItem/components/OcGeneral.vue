@@ -61,7 +61,13 @@ const isOpen = ref(false);
           :key="i"
           class="flex items-center gap-2"
         >
+          <div
+            v-if="item.country"
+            class="fi w-[15px] h-[15px] shadow"
+            :class="'fi-' + item.country"
+          ></div>
           <Icon
+            v-else
             :name="item.icon"
             width="16"
             height="16"

@@ -143,7 +143,7 @@ export const ListGeneral = {
       },
       {
         label: "Singapore",
-        icon: "location",
+        country: "sg",
       },
     ],
   },
