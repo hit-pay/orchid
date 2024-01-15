@@ -31,6 +31,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  isRawHtml: {
+    type: Boolean,
+    default: false,
+  },
   position: {
     type: String,
     default: "top-center",
@@ -89,9 +93,10 @@ watch(
       <Icon v-if="showIcon" :name="icon" class="shrink-0" />
       <slot>
         <div class="w-full flex items-center justify-between">
-          <span class="text-oc-text text-sm">
+          <span v-if="!isRawHtml" class="text-oc-text text-sm">
             {{ content }}
           </span>
+          <span v-else class="text-oc-text text-sm" v-html="content" />
           <div
             v-if="isCloseIcon"
             class="rounded cursor-pointer text-oc-gray-500 hover:bg-transparent hover:text-oc-text"
