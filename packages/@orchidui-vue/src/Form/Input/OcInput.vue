@@ -166,3 +166,10 @@ const inputClasses = computed(() => [
     </div>
   </BaseInput>
 </template>
+
+<style lang="scss">
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  display: none;
+}
+</style>

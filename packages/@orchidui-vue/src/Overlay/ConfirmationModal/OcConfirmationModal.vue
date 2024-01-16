@@ -12,6 +12,10 @@ defineProps({
     type: String,
     default: "Are you sure?",
   },
+  iconClass: {
+    type: String,
+    default: "",
+  },
   description: {
     type: String,
     default: "",
@@ -83,7 +87,12 @@ const emitModelValue = (e) => {
     @confirm="$emit('confirm')"
     @cancel="$emit('cancel')"
   >
-    <Confirmation :variant="variant" :description="description" :icon="icon">
+    <Confirmation
+      :icon-class="iconClass"
+      :variant="variant"
+      :description="description"
+      :icon="icon"
+    >
       <template v-if="$slots.description" #description>
         <slot name="description" />
       </template>

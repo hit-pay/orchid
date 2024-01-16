@@ -298,14 +298,15 @@ const displayFilterData = computed(() => {
               option.name &&
               option.name[1]
             ) {
+              const startDate = dayjs(
+                filterData.value[option.name[0].key],
+              ).format("MM/DD/YYYY");
+              const endDate = dayjs(
+                filterData.value[option.name[1].key],
+              ).format("MM/DD/YYYY");
+
               optionLabel =
-                dayjs(filterData.value[option.name[0].key]).format(
-                  "MMM DD, YYYY",
-                ) +
-                " - " +
-                dayjs(filterData.value[option.name[1].key]).format(
-                  "MMM DD, YYYY",
-                );
+                startDate === endDate ? startDate : startDate + " - " + endDate;
             } else
               optionLabel = dayjs(filterData.value[option.name]).format(
                 "MM/DD/YYYY",
