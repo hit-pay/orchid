@@ -126,7 +126,6 @@ onMounted(() => {
                 v-else
                 v-model="dropdownOpen[menu.name+'-'+menuIndex]"
                 placement="right-start"
-                @mouseleave="dropdownOpen[menu.name+'-'+menuIndex] = false"
                 @update:model-value="$emit('click:sidebar-icon', menu)"
               >
                 <button
