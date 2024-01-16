@@ -1,5 +1,6 @@
 <script setup>
 import Title from "./OcTitle.vue";
+import MobilePageTitle from "./OcMobilePageTitle.vue";
 import { PageTitleRight, Button } from "@/orchidui";
 
 defineProps({
@@ -32,7 +33,7 @@ defineEmits({
         class="self-start"
         @click="$emit('back')"
       />
-      <div class="flex w-full gap-5">
+      <div class="hidden md:flex w-full gap-5">
         <Title
           :title="title"
           :description="description"
@@ -50,6 +51,19 @@ defineEmits({
           />
         </slot>
       </div>
+
+      <MobilePageTitle
+        :secondary-button-props="secondaryButtonProps"
+        :primary-button-props="primaryButtonProps"
+        :description="description"
+        :chip-props="chipProps"
+        :title="title"
+        class="md:hidden"
+      >
+        <template #mobile-amount>
+          <slot name="mobile-amount" />
+        </template>
+      </MobilePageTitle>
     </div>
   </div>
 </template>

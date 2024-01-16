@@ -153,7 +153,12 @@ const iconSize = computed(() => ({
       class="border-y border-r flex cursor-pointer items-center justify-center oc-btn-add-area px-[6px] py-3 rounded-r-[inherit]"
       :class="[additionalAreaSize[size], variant]"
     >
-      <Icon :name="additionalAreaIcon" :class="additionalAreaIconSize[size]" />
+      <slot name="additional-content">
+        <Icon
+          :name="additionalAreaIcon"
+          :class="additionalAreaIconSize[size]"
+        />
+      </slot>
     </div>
   </div>
 </template>
