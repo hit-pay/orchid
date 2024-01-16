@@ -2,7 +2,7 @@
 import { ref, reactive, onMounted, computed } from "vue";
 import { Icon, SidebarSubmenu, Dropdown } from "@/orchidui";
 
-const emit = defineEmits(["changeExpanded"]);
+const emit = defineEmits(["changeExpanded","click:sidebar-icon"]);
 
 const props = defineProps({
   class: {
@@ -124,8 +124,11 @@ onMounted(() => {
 
               <Dropdown
                 v-else
-                v-model="dropdownOpen[menu.name+'-'+menuIndex]"
+                :model-value="dropdownOpen[menu.name+'-'+menuIndex]"
                 placement="right-start"
+                @mouseover="dropdownOpen[menu.name+'-'+menuIndex] = true"
+                @mouseleave="dropdownOpen[menu.name+'-'+menuIndex] = false"
+                @update:model-value="$emit('click:sidebar-icon', menu)"
               >
                 <button
                   type="button"
@@ -136,7 +139,6 @@ onMounted(() => {
                   <Icon
                     width="22"
                     height="22"
-                    class="z-[1]"
                     :class="{
                       'text-[var(--oc-sidebar-menu-active-icon)]': !menu.active,
                       'text-[var(--oc-sidebar-menu-active-icon-active)]':
@@ -148,7 +150,7 @@ onMounted(() => {
                 </button>
                 <template #menu>
                   <div
-                    class="p-4 gap-4 bg-oc-bg shadow-sm rounded w-[200px]"
+                    class="p-3 gap-4 bg-oc-bg shadow-sm rounded w-[200px]"
                   >
                     <div
                       v-if="!menu.children"
@@ -193,6 +195,7 @@ onMounted(() => {
                 v-if="menu.children"
                 :menu="menu"
                 :class="state.expanded.includes(menu.name) && 'mt-3'"
+                :is-expanded-sidebar="isExpanded"
                 :is-expanded="state.expanded.includes(menu.name)"
               >
                 <template #label="{ submenu }">
