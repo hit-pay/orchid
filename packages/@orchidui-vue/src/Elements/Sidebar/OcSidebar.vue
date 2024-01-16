@@ -2,7 +2,7 @@
 import { reactive, onMounted, computed } from "vue";
 import { Icon, SidebarSubmenu, Tooltip } from "@/orchidui";
 
-const emit = defineEmits(["changeExpanded"]);
+const emit = defineEmits(["changeExpanded","click:sidebar-icon"]);
 
 const props = defineProps({
   class: {
@@ -86,7 +86,7 @@ onMounted(() => {
       }"
       @click="changeExpanded"
     >
-      <Icon width="20" height="20" name="arrow-left-2" />
+      <Icon width="20" height="20" name="arrow-left-2"  />
     </button>
     <div class="grid gap-3 px-8 overflow-y-auto max-h-screen pb-[100px]">
       <slot name="before" :is-expanded="isExpanded" />
@@ -166,6 +166,7 @@ onMounted(() => {
                         'font-medium bg-[var(--oc-sidebar-menu-active)] text-[var(--oc-sidebar-menu-active-text)]':
                           menu.active,
                       }"
+                      @click="$emit('click:sidebar-icon', menu)"
                     >
                       <slot v-if="!isExpanded" name="label" :menu="menu" />
                     </div>
