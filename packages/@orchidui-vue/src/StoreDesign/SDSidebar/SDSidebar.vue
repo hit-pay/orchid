@@ -36,7 +36,7 @@ const getSidebarMenu = (section) => {
 };
 
 const isDropdownOpen = ref([]);
-const requiredSection = ["Header", "FooterContent", "IconLinks", "ButtonLinks"];
+const requiredSection = ["Header", "FooterContent", "IconLinks", "ButtonLinks","PoweredBy"];
 
 const emit = defineEmits({
   "update:values": [],
