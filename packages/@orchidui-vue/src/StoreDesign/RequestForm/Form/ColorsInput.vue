@@ -13,13 +13,11 @@ const props = defineProps({
 });
 
 defineEmits({
-  "update:modelValue": [],
-  blur: [],
-  focus: [],
+  "update:modelValue": []
 });
 
 const getNewValues = (index, newVal) => {
-  let newValues = props.modelValue;
+  let newValues = (props.modelValue && props.modelValue.length > 0) ? props.modelValue :  [];
   newValues[index] = newVal;
   return newValues;
 };
@@ -33,7 +31,7 @@ const getNewValues = (index, newVal) => {
         >{{ name.props.label }}</label
       >
       <ColorPicker 
-          :model-value="modelValue[index]" 
+          :model-value="(modelValue && modelValue.length > 0) ? modelValue[index] : '#FFFFFF'" 
           @update:model-value="
             $emit('update:modelValue', getNewValues(index, $event))
           ">

@@ -1,6 +1,6 @@
 <script setup>
-import { reactive, onMounted, computed } from "vue";
-import { Icon, SidebarSubmenu, Tooltip } from "@/orchidui";
+import { ref, reactive, onMounted, computed } from "vue";
+import { Icon, SidebarSubmenu, Dropdown } from "@/orchidui";
 
 const emit = defineEmits(["changeExpanded"]);
 
@@ -17,6 +17,8 @@ const props = defineProps({
   },
 });
 
+const dropdownOpen = ref([])
+
 const state = reactive({
   loading: true,
   expanded: [],
@@ -30,14 +32,6 @@ const expandMenu = (id) => {
   }
 };
 
-const togglePopover = (e) => {
-  try {
-    const target = e?.target;
-    if (target) target.click();
-  } catch (error) {
-    console.error("An error occurred:", error);
-  }
-};
 
 const changeExpanded = () => {
   state.loading = true;
@@ -86,9 +80,9 @@ onMounted(() => {
       }"
       @click="changeExpanded"
     >
-      <Icon width="20" height="20" name="arrow-left-2" />
+      <Icon width="20" height="20" name="arrow-left-2"  />
     </button>
-    <div class="grid gap-3 px-8 overflow-y-auto max-h-screen pb-[100px]">
+    <div class="grid gap-3 px-8 max-h-screen pb-[100px]">
       <slot name="before" :is-expanded="isExpanded" />
 
       <template v-for="(sidebar, index) in sidebarMenu" :key="index">
@@ -128,20 +122,16 @@ onMounted(() => {
                 :name="menu.icon"
               />
 
-              <Tooltip
+              <Dropdown
                 v-else
-                class="relative flex"
-                arrow-hidden
-                position="right-start"
-                :distance="20"
-                trigger="click"
+                v-model="dropdownOpen[menu.name+'-'+menuIndex]"
+                placement="right-start"
               >
                 <button
                   type="button"
                   :class="{
                     'p-4': !isExpanded,
                   }"
-                  @mouseenter="togglePopover"
                 >
                   <Icon
                     width="22"
@@ -153,11 +143,12 @@ onMounted(() => {
                         menu.active,
                     }"
                     :name="menu.icon"
+                    
                   />
                 </button>
-                <template #popper>
+                <template #menu>
                   <div
-                    class="p-4 gap-4 bg-oc-bg absolute shadow-sm rounded w-[200px] z-50"
+                    class="p-4 gap-4 bg-oc-bg shadow-sm rounded w-[200px]"
                   >
                     <div
                       v-if="!menu.children"
@@ -184,7 +175,7 @@ onMounted(() => {
                     </SidebarSubmenu>
                   </div>
                 </template>
-              </Tooltip>
+              </Dropdown>
 
               <transition
                 tag="div"
