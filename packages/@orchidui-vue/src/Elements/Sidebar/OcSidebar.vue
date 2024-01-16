@@ -120,7 +120,6 @@ onMounted(() => {
                     menu.active,
                 }"
                 :name="menu.icon"
-                @click="$emit('click:sidebar-icon', menu)"
               />
 
               <Dropdown
@@ -133,6 +132,7 @@ onMounted(() => {
                   :class="{
                     'p-4': !isExpanded,
                   }"
+                 @click="$emit('click:sidebar-icon', menu)"
                 >
                   <Icon
                     width="22"
