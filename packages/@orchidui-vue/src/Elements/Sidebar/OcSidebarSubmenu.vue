@@ -5,6 +5,10 @@ defineProps({
     type: Boolean,
     default: true,
   },
+  isExpandedSidebar: {
+    type: Boolean,
+    default: false,
+  },
   menu: {
     type: Object,
   },
@@ -26,6 +30,7 @@ defineProps({
       }"
     >
       <Icon
+        v-if="isExpandedSidebar"
         width="22"
         height="22"
         class="flex z-[1] ml-5"
