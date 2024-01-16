@@ -88,9 +88,9 @@ const isGridVariant = computed(() => {
             class="group-hover:shadow rounded"
             :class="{
               'border-2 border-oc-primary':
-                isGridVariant && opt.value.toStriong() === modelValue.toStriong(),
+                isGridVariant && opt.value.toString() === modelValue.toString(),
               'border border-oc-gray-200':
-                (isGridVariant && opt.value.toStriong() !== modelValue.toStriong()) || !isGridVariant,
+                (isGridVariant && opt.value.toString() !== modelValue.toString()) || !isGridVariant,
               'w-full': isGridVariant,
               'w-[50px]': !isGridVariant,
             }"
