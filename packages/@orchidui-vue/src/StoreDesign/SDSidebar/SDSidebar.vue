@@ -455,6 +455,7 @@ const addSection = (newSection, customize = false) => {
               v-if="!requiredSection.includes(item.section)"
               v-model="item.active"
               size="small"
+              class="mt-2 mr-2"
               @update:model-value="updateSectionActive($event, item)"
             ></Toggle>
             <span v-else></span>

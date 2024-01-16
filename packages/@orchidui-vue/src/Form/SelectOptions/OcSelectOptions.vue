@@ -77,20 +77,20 @@ const isGridVariant = computed(() => {
           'flex border border-oc-gray-200 p-3 rounded hover:shadow':
             !isGridVariant,
           'border-2 border-oc-primary':
-            !isGridVariant && opt.value === modelValue,
+            !isGridVariant && opt.value.toString() === modelValue.toString(),
           '!border-0 hover:bg-oc-accent-1-50 flex': borderless,
         }"
         @click="update(opt.value)"
       >
-        <slot name="option" :option="opt" :selected="opt.value === modelValue">
+        <slot name="option" :option="opt" :selected="opt.value.toString() === modelValue.toString()">
           <img
             v-if="opt.preview"
             class="group-hover:shadow rounded"
             :class="{
               'border-2 border-oc-primary':
-                isGridVariant && opt.value === modelValue,
+                isGridVariant && opt.value.toStriong() === modelValue.toStriong(),
               'border border-oc-gray-200':
-                (isGridVariant && opt.value !== modelValue) || !isGridVariant,
+                (isGridVariant && opt.value.toStriong() !== modelValue.toStriong()) || !isGridVariant,
               'w-full': isGridVariant,
               'w-[50px]': !isGridVariant,
             }"
@@ -108,8 +108,8 @@ const isGridVariant = computed(() => {
               :class="{
                 'text-sm ': isGridVariant,
                 'text-oc-text-400 group-hover:text-oc-text-500':
-                  isGridVariant && opt.value !== modelValue,
-                'text-oc-text-500': isGridVariant && opt.value === modelValue,
+                  isGridVariant && opt.value.toString() !== modelValue.toString(),
+                'text-oc-text-500': isGridVariant && opt.value.toString() === modelValue.toString(),
               }"
               >{{ opt.label }}</span
             >
@@ -126,7 +126,7 @@ const isGridVariant = computed(() => {
             height="16"
             name="check-2"
             class="text-oc-primary"
-            :class="opt.value === modelValue ? 'opacity-100' : 'opacity-0'"
+            :class="opt.value.toString() === modelValue.toString() ? 'opacity-100' : 'opacity-0'"
           />
         </slot>
       </div>
