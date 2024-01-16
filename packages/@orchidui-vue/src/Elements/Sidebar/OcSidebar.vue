@@ -2,7 +2,7 @@
 import { ref, reactive, onMounted, computed } from "vue";
 import { Icon, SidebarSubmenu, Dropdown } from "@/orchidui";
 
-const emit = defineEmits(["changeExpanded","click:sidebar-icon"]);
+const emit = defineEmits(["changeExpanded"]);
 
 const props = defineProps({
   class: {
@@ -132,7 +132,6 @@ onMounted(() => {
                   :class="{
                     'p-4': !isExpanded,
                   }"
-                 @click="$emit('click:sidebar-icon', menu)"
                 >
                   <Icon
                     width="22"
