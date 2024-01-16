@@ -451,6 +451,13 @@ const addSection = (newSection, customize = false) => {
           @update:model-value="updateOrderedSection"
         >
           <template #action="{ item }">
+            <Toggle
+              v-if="!requiredSection.includes(item.section)"
+              v-model="item.active"
+              size="small"
+              @update:model-value="updateSectionActive($event, item)"
+            ></Toggle>
+            <span v-else></span>
             <Dropdown
               v-if="item.canDelete"
               v-model="isDropdownOpen[item.key]"
@@ -469,13 +476,6 @@ const addSection = (newSection, customize = false) => {
                 </div>
               </template>
             </Dropdown>
-            <Toggle
-              v-else-if="!requiredSection.includes(item.section)"
-              v-model="item.active"
-              size="small"
-              @update:model-value="updateSectionActive($event, item)"
-            ></Toggle>
-            <span v-else></span>
           </template>
         </DraggableList>
         <div
