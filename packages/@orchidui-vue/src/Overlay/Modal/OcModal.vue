@@ -52,9 +52,11 @@ const props = defineProps({
     validator: (val) => ["default", "medium", "small"].includes(val),
   },
 });
-const emit = defineEmits(["update:modelValue", "confirm"]);
+const emit = defineEmits(["update:modelValue", "confirm", "cancel"]);
 
 const closeModal = () => {
+  emit("cancel");
+
   if (props.preventClose) {
     return;
   }
