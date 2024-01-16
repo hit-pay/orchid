@@ -22,15 +22,15 @@ export const Pills = {
       },
       {
         label: "Filter 01",
-        value: "1",
+        value: 1,
       },
       {
         label: "Filter 02",
-        value: "2",
+        value: 2,
       },
       {
         label: "Filter 03",
-        value: "3",
+        value: 3,
         count: 10,
       },
     ],

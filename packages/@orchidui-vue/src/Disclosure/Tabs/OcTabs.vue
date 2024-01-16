@@ -28,7 +28,7 @@ const isPillVariant = computed(() => props.variant === "pills");
       class="cursor-pointer min-w-[48px] gap-x-3 items-center flex justify-center text-sm hover:text-oc-text-500"
       :class="[
         isPillVariant ? 'py-2 px-3 rounded' : 'px-4 pb-3 border-b-2 -mb-[1px]',
-        modelValue === tab.value
+        modelValue.toString() === tab.value.toString()
           ? isPillVariant
             ? 'bg-oc-gray-200 text-oc-text-500'
             : 'border-oc-primary-500 text-oc-text-500'

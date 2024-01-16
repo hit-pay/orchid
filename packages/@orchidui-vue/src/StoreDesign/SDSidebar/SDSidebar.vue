@@ -36,7 +36,7 @@ const getSidebarMenu = (section) => {
 };
 
 const isDropdownOpen = ref([]);
-const requiredSection = ["Header", "FooterContent", "IconLinks", "ButtonLinks"];
+const requiredSection = ["Header", "FooterContent", "IconLinks", "ButtonLinks","PoweredBy"];
 
 const emit = defineEmits({
   "update:values": [],
@@ -451,6 +451,14 @@ const addSection = (newSection, customize = false) => {
           @update:model-value="updateOrderedSection"
         >
           <template #action="{ item }">
+            <Toggle
+              v-if="!requiredSection.includes(item.section)"
+              v-model="item.active"
+              size="small"
+              class="mt-2 mr-2"
+              @update:model-value="updateSectionActive($event, item)"
+            ></Toggle>
+            <span v-else></span>
             <Dropdown
               v-if="item.canDelete"
               v-model="isDropdownOpen[item.key]"
@@ -469,13 +477,6 @@ const addSection = (newSection, customize = false) => {
                 </div>
               </template>
             </Dropdown>
-            <Toggle
-              v-else-if="!requiredSection.includes(item.section)"
-              v-model="item.active"
-              size="small"
-              @update:model-value="updateSectionActive($event, item)"
-            ></Toggle>
-            <span v-else></span>
           </template>
         </DraggableList>
         <div
