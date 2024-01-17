@@ -92,30 +92,32 @@ const fileUpload = (e) => {
       <img v-else class="w-full" :src="img" />
 
       <div class="flex gap-x-1 justify-center relative">
-        <Button
-          variant="secondary"
-          size="small"
-          left-icon="backward"
-          @click="rotate(-90)"
-        />
-        <Button
-          variant="secondary"
-          size="small"
-          left-icon="zoom-out"
-          @click="zoom(0.8)"
-        />
-        <Button
-          variant="secondary"
-          size="small"
-          left-icon="zoom-in"
-          @click="zoom(1.2)"
-        />
-        <Button
-          variant="secondary"
-          size="small"
-          left-icon="forward"
-          @click="rotate(90)"
-        />
+        <template v-if="localImage" >
+          <Button
+            variant="secondary"
+            size="small"
+            left-icon="backward"
+            @click="rotate(-90)"
+          />
+          <Button
+            variant="secondary"
+            size="small"
+            left-icon="zoom-out"
+            @click="zoom(0.8)"
+          />
+          <Button
+            variant="secondary"
+            size="small"
+            left-icon="zoom-in"
+            @click="zoom(1.2)"
+          />
+          <Button
+            variant="secondary"
+            size="small"
+            left-icon="forward"
+            @click="rotate(90)"
+          />
+        </template>
         <Button
           class="absolute right-0"
           variant="secondary"
