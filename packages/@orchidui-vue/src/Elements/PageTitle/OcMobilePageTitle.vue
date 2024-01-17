@@ -35,15 +35,21 @@ const isOpen = ref(false);
             <Icon width="16" height="16" class="mx-auto" name="chevron-down" />
             <template #menu>
               <DropdownItem
+                v-if="secondaryButtonProps"
                 :text="secondaryButtonProps?.label"
                 :icon="secondaryButtonProps?.leftIcon"
-                @click="
-                  () => {
-                    isOpen = false;
-                    secondaryButtonProps.onClick();
-                  }
-                "
               />
+              <template
+                v-if="
+                  secondaryButtonProps && secondaryButtonProps.dropdownOptions
+                "
+              >
+                <DropdownItem
+                  v-for="option in secondaryButtonProps.dropdownOptions"
+                  :key="option.text"
+                  v-bind="option"
+                />
+              </template>
             </template>
           </Dropdown>
         </template>
