@@ -1,7 +1,7 @@
-<script setup lang="ts">
+<script setup>
 import { Dropdown, Input } from "@/orchidui";
 import ColorPickerPopup from "./ColorPickerPopup.vue";
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 
 const props = defineProps({
   modelValue: {
@@ -9,29 +9,35 @@ const props = defineProps({
     default: "#ff0000",
   },
 });
-defineEmits(["update:model-value"]);
-const isOpen = ref(false);
-const inputValue = ref("");
 
-onMounted(() => {
-  inputValue.value = props.modelValue;
-});
+const emit = defineEmits(["update:model-value"]);
+
+const isOpen = ref(false);
+const inputValue = ref(props.modelValue);
+
+const onUpdate = (value) => {
+  if(!value){
+    return 
+  }
+  inputValue.value = value
+  emit('update:model-value', value)
+}
 </script>
 
 <template>
   <Dropdown v-model="isOpen">
     <Input
-      :model-value="modelValue.toUpperCase()"
+      :model-value="inputValue"
       icon="drop"
-      :icon-props="{ style: { color: modelValue } }"
-      is-readonly
+      :icon-props="{ style: { color: inputValue } }"
+      @update:model-value="onUpdate"
     >
     <template v-if="$slots.leading" #leading><slot name="leading"></slot></template>
     </Input>
     <template #menu>
       <ColorPickerPopup
         :model-value="modelValue"
-        @update:model-value="$emit('update:model-value', $event)"
+        @update:model-value="onUpdate"
       />
     </template>
   </Dropdown>
