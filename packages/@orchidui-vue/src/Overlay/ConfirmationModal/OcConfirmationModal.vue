@@ -3,7 +3,7 @@ import { Modal } from "@/orchidui";
 import { computed } from "vue";
 import Confirmation from "./OcConfirmation.vue";
 
-defineProps({
+const props = defineProps({
   modelValue: {
     type: Boolean,
     default: false,
@@ -27,6 +27,10 @@ defineProps({
   icon: String,
   labelConfirm: String,
   labelCancel: String,
+  isLoading: {
+    type: Boolean,
+    default: false,
+  }
 });
 const emit = defineEmits(["confirm", "cancel", "update:model-value"]);
 const cancelButton = computed(() => ({
@@ -43,14 +47,19 @@ const confirmButton = computed(() => ({
   delete: {
     label: "Delete",
     variant: "destructive",
+    isLoading: props.isLoading ?? false
   },
   warning: {
     label: "Delete",
     variant: "destructive",
+    isLoading: props.isLoading ?? false
   },
-  success: {},
+  success: {
+    isLoading: props.isLoading ?? false
+  },
   question: {
     label: "Yes",
+    isLoading: props.isLoading ?? false
   },
 }));
 
