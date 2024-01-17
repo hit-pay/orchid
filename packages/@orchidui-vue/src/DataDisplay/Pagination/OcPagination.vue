@@ -17,9 +17,20 @@ const props = defineProps({
   },
   isRounded: Boolean,
   size: String,
+  strategy: {
+    type: String,
+    default: "default",
+    validator: (value) => ["default", "cursor"].includes(value),
+  },
 });
+const PAGINATION_STRATEGY = {
+  DEFAULT: "default",
+  CURSOR: "cursor",
+};
 defineEmits({
   "update:modelValue": [],
+  prev: [],
+  next: [],
 });
 const pagination = computed(() => {
   let totalVisible = Number(props.totalVisible);
@@ -65,6 +76,9 @@ const pagination = computed(() => {
     props.maxPage,
   ];
 });
+const isDefaultStrategy = computed(
+  () => props.strategy === PAGINATION_STRATEGY.DEFAULT,
+);
 </script>
 
 <template>
@@ -74,40 +88,46 @@ const pagination = computed(() => {
         :disabled="modelValue <= 1"
         :size="size"
         @click="
-          $emit(
-            'update:modelValue',
-            modelValue > 1 ? modelValue - 1 : modelValue,
-          )
+          isDefaultStrategy
+            ? $emit(
+                'update:modelValue',
+                modelValue > 1 ? modelValue - 1 : modelValue,
+              )
+            : $emit('prev')
         "
       />
-      <div class="hidden md:flex items-center gap-x-3">
-        <PaginationNumber
-          v-for="page in pagination"
-          :key="page"
-          :size="size"
-          :is-rounded="isRounded"
-          :active="page === modelValue"
-          @click="
-            $emit('update:modelValue', page === '...' ? modelValue : page)
-          "
-        >
-          {{ page }}
-        </PaginationNumber>
-      </div>
-      <div class="md:hidden mx-[30px]">
-        <PaginationNumber :size="size" :is-rounded="isRounded" :active="true">
-          {{ modelValue }}
-        </PaginationNumber>
-      </div>
+      <template v-if="isDefaultStrategy">
+        <div class="hidden md:flex items-center gap-x-3">
+          <PaginationNumber
+            v-for="page in pagination"
+            :key="page"
+            :size="size"
+            :is-rounded="isRounded"
+            :active="page === modelValue"
+            @click="
+              $emit('update:modelValue', page === '...' ? modelValue : page)
+            "
+          >
+            {{ page }}
+          </PaginationNumber>
+        </div>
+        <div class="md:hidden mx-[30px]">
+          <PaginationNumber :size="size" :is-rounded="isRounded" :active="true">
+            {{ modelValue }}
+          </PaginationNumber>
+        </div>
+      </template>
       <PrevNext
         is-next
         :size="size"
         :disabled="modelValue >= maxPage"
         @click="
-          $emit(
-            'update:modelValue',
-            modelValue < Number(maxPage) ? modelValue + 1 : Number(maxPage),
-          )
+          isDefaultStrategy
+            ? $emit(
+                'update:modelValue',
+                modelValue < Number(maxPage) ? modelValue + 1 : Number(maxPage),
+              )
+            : $emit('next')
         "
       />
     </div>
