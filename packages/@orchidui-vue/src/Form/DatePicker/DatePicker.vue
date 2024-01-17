@@ -100,6 +100,8 @@ const updateCalendar = (newValue) => {
 
 const resetCalendar = () => {
   emit("resetCalendar");
+  emit("update:modelValue", props.type === "range" ? [] : null);
+
   isDropdownOpened.value = false;
 };
 

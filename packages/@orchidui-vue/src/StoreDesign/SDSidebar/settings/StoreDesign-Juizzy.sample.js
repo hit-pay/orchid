@@ -55,8 +55,8 @@ const StoreDesign = {
       group: "header",
       key: "TopBanner",
       section: "TopBanner",
-      color_bg: "#111111",
-      color_text: "#FFFFFF",
+      color_bg: "",
+      color_text: "",
       active: true,
     },
     {

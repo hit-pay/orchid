@@ -464,6 +464,7 @@ const displayFilterData = computed(() => {
         v-model="currentPage"
         class="justify-center"
         :max-page="paginationOption.last_page"
+        :strategy="paginationOption.strategy"
         total-visible="5"
         @update:model-value="changePage"
       />
