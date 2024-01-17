@@ -2,7 +2,7 @@
 import { ref, reactive, onMounted, computed } from "vue";
 import { Icon, SidebarSubmenu, Dropdown } from "@/orchidui";
 
-const emit = defineEmits(["changeExpanded","click:sidebar-icon"]);
+const emit = defineEmits(["changeExpanded", "click:sidebar-icon"]);
 
 const props = defineProps({
   class: {
@@ -17,7 +17,7 @@ const props = defineProps({
   },
 });
 
-const dropdownOpen = ref([])
+const dropdownOpen = ref([]);
 
 const state = reactive({
   loading: true,
@@ -31,7 +31,6 @@ const expandMenu = (id) => {
     state.expanded = state.expanded.filter((menuId) => menuId !== id);
   }
 };
-
 
 const changeExpanded = () => {
   state.loading = true;
@@ -80,9 +79,9 @@ onMounted(() => {
       }"
       @click="changeExpanded"
     >
-      <Icon width="20" height="20" name="arrow-left-2"  />
+      <Icon width="20" height="20" name="arrow-left-2" />
     </button>
-    <div class="grid gap-3 px-8 max-h-screen pb-[100px]">
+    <div class="grid gap-3 px-8 max-h-screen">
       <slot name="before" :is-expanded="isExpanded" />
 
       <template v-for="(sidebar, index) in sidebarMenu" :key="index">
@@ -124,7 +123,7 @@ onMounted(() => {
 
               <Dropdown
                 v-else
-                v-model="dropdownOpen[menu.name+'-'+menuIndex]"
+                v-model="dropdownOpen[menu.name + '-' + menuIndex]"
                 placement="right-start"
                 @update:model-value="$emit('click:sidebar-icon', menu)"
               >
@@ -143,12 +142,11 @@ onMounted(() => {
                         menu.active,
                     }"
                     :name="menu.icon"
-                    
                   />
                 </button>
                 <template #menu>
                   <div
-                    v-if="dropdownOpen[menu.name+'-'+menuIndex]"
+                    v-if="dropdownOpen[menu.name + '-' + menuIndex]"
                     class="p-3 gap-4 bg-oc-bg shadow-sm rounded w-[200px]"
                   >
                     <div
