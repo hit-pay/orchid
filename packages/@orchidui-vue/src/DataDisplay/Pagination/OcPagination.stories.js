@@ -12,12 +12,17 @@ export const pagination = {
       control: "select",
       options: ["default", "small", "big"],
     },
+    strategy: {
+      control: "select",
+      options: ["default", "cursor"],
+    },
   },
   args: {
     totalVisible: 5,
     size: "default",
     maxPage: 15,
     isRounded: false,
+    strategy: "default",
   },
   render: (args) => ({
     components: { Pagination, Theme },
@@ -36,6 +41,7 @@ export const pagination = {
                 :size="args.size"
                 :totalVisible="args.totalVisible"
                 :isRounded="args.isRounded"
+                :strategy="args.strategy"
                 v-model="currentPage"
             />
           </Theme>
