@@ -48,8 +48,8 @@ const confirmButtonProps = ref({
     }
   },
 });
-const rotate = (angle) => cropper.value.rotate(angle);
-const zoom = (zoom) => cropper.value.zoom(zoom);
+const rotate = (angle) => cropper.value?.rotate(angle);
+const zoom = (zoom) => cropper.value?.zoom(zoom);
 
 const replaceImage = () => {
   file_upload.value.click();
