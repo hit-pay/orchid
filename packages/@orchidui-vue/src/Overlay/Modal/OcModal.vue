@@ -52,11 +52,14 @@ const props = defineProps({
     validator: (val) => ["default", "medium", "small"].includes(val),
   },
 });
-const emit = defineEmits(["update:modelValue", "confirm", "cancel"]);
+const emit = defineEmits([
+  "update:modelValue",
+  "confirm",
+  "cancel",
+  "click:outside",
+]);
 
 const closeModal = () => {
-  emit("cancel");
-
   if (props.preventClose) {
     return;
   }
@@ -65,6 +68,8 @@ const closeModal = () => {
 };
 
 const onClickOutside = async () => {
+  emit("click:outside");
+
   if (props.persistent) {
     return;
   }
@@ -73,6 +78,12 @@ const onClickOutside = async () => {
     closeModal();
   }
 };
+
+const cancel = () => {
+  emit("cancel");
+  closeModal();
+};
+
 const sizeClasses = computed(() => ({
   default: "max-w-[640px]",
   medium: "max-w-[480px]",
@@ -138,7 +149,7 @@ const sizeClasses = computed(() => ({
             variant="secondary"
             class="min-w-[112px]"
             v-bind="cancelButtonProps"
-            @click="closeModal"
+            @click="cancel"
           />
           <Button
             label="OK"
