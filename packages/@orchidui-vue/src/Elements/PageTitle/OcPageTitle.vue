@@ -12,6 +12,7 @@ defineProps({
   chipProps: Object,
   isCopy: Boolean,
   isBack: { type: Boolean, default: false },
+  isMobileCombineButtons: { type: Boolean, default: false },
 });
 defineEmits({
   changeTab: [],
@@ -33,7 +34,10 @@ defineEmits({
         class="self-start"
         @click="$emit('back')"
       />
-      <div class="hidden md:flex w-full gap-5">
+      <div
+        class="w-full gap-5"
+        :class="isMobileCombineButtons ? 'hidden md:flex' : 'flex'"
+      >
         <Title
           :title="title"
           :description="description"
@@ -53,6 +57,7 @@ defineEmits({
       </div>
 
       <MobilePageTitle
+        v-if="isMobileCombineButtons"
         :secondary-button-props="secondaryButtonProps"
         :primary-button-props="primaryButtonProps"
         :description="description"
