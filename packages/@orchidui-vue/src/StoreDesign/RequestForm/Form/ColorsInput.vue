@@ -40,7 +40,7 @@ const getNewValues = (index, newVal) => {
         </template>  
         </ColorPicker>
     </div>
-    <div  v-if="form.props.description" class="text-sm flex items-center text-oc-text-400">
+    <div  v-if="form.props && form.props.description" class="text-sm flex items-center text-oc-text-400">
       {{ form.props.description }}
     </div>
   </div>
