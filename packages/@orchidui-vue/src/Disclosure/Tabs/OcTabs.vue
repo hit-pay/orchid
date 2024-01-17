@@ -38,13 +38,15 @@ const isPillVariant = computed(() => props.variant === "pills");
       ]"
       @click="$emit('update:modelValue', tab.value)"
     >
-      {{ tab.label }}
-      <div
-        v-if="tab.count"
-        class="bg-oc-error rounded-full h-6 w-6 flex items-center justify-center text-xs font-bold text-white"
-      >
-        {{ tab.count > maxCount ? `${maxCount}+` : tab.count }}
-      </div>
+      <slot :name="tab.value">
+        {{ tab.label }}
+        <div
+          v-if="tab.count"
+          class="bg-oc-error rounded-full h-6 w-6 flex items-center justify-center text-xs font-bold text-white"
+        >
+          {{ tab.count > maxCount ? `${maxCount}+` : tab.count }}
+        </div>
+      </slot>
     </div>
   </div>
 </template>
