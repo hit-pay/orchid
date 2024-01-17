@@ -24,7 +24,12 @@ const isOpen = ref(false);
   <div class="flex flex-col gap-y-3">
     <div class="flex items-center justify-between gap-x-3">
       <span class="text-xl leading-[24px] font-medium">{{ title }}</span>
-      <Button size="small" v-bind="primaryButtonProps" is-additional-area>
+      <Button
+        v-if="primaryButtonProps || secondaryButtonProps"
+        size="small"
+        v-bind="primaryButtonProps"
+        is-additional-area
+      >
         <template #additional-content>
           <Dropdown v-model="isOpen" @click.stop>
             <Icon width="16" height="16" class="mx-auto" name="chevron-down" />
@@ -46,6 +51,7 @@ const isOpen = ref(false);
     </div>
 
     <div
+      v-if="description"
       class="flex gap-x-6 text-sm text-oc-text-400 py-4 whitespace-nowrap items-center"
     >
       <span class="overflow-hidden text-ellipsis">
