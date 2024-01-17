@@ -1,6 +1,7 @@
 <script setup>
 import { CustomerCard, OverviewItem, Icon, Tooltip } from "@/orchidui";
 import BoxDetails from "./OcBoxDetails.vue";
+import MobileDynamicType from "./MobileDynamicType.vue";
 
 defineProps({
   boxes: { type: Array, default: () => [] },
@@ -12,7 +13,7 @@ defineEmits(["addCustomer"]);
 </script>
 
 <template>
-  <div class="flex md:gap-5 gap-3 md:flex-row flex-col">
+  <div class="hidden md:flex md:gap-5 gap-3 md:flex-row flex-col">
     <BoxDetails
       v-for="(box, i) in boxes"
       :key="i"
@@ -48,4 +49,13 @@ defineEmits(["addCustomer"]);
       @add-customer="$emit('addCustomer')"
     />
   </div>
+
+  <MobileDynamicType
+    class="flex md:hidden"
+    :boxes="boxes"
+    :is-customer="isCustomer"
+    :customer-card-variant="customerCardVariant"
+    :customer="customer"
+    @add-customer="$emit('addCustomer')"
+  />
 </template>
