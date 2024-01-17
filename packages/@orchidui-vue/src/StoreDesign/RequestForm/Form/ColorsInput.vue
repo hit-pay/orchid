@@ -31,7 +31,7 @@ const getNewValues = (index, newVal) => {
         >{{ name.props.label }}</label
       >
       <ColorPicker 
-          :model-value="(modelValue && modelValue.length > 0) ? modelValue[index] : '#FFFFFF'" 
+          :model-value="(modelValue && modelValue.length > 0) ? (modelValue[index] ? modelValue[index] : '#FFFFFF') : '#FFFFFF'" 
           @update:model-value="
             $emit('update:modelValue', getNewValues(index, $event))
           ">
@@ -40,7 +40,7 @@ const getNewValues = (index, newVal) => {
         </template>  
         </ColorPicker>
     </div>
-    <div  v-if="form.props.description" class="text-sm flex items-center text-oc-text-400">
+    <div  v-if="form.props && form.props.description" class="text-sm flex items-center text-oc-text-400">
       {{ form.props.description }}
     </div>
   </div>

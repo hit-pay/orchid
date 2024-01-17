@@ -79,6 +79,16 @@ const onCopied = (to) => {
   isCopied.value = to;
 };
 
+const calculateRowClass = (row, i) => {
+  if (typeof props.rowClass === 'function') {
+    // insert class by parent component to resolve layout issue.
+    // https://linear.app/hitpay/issue/HIT-5244/variant-products-issue#comment-db6e06ed
+    return props.rowClass(row, i);
+  }
+
+  return props.rowClass;
+}
+
 const onClickRow = (field, header) => {
   if (!header.disableClickRow && header.key !== "actions") {
     emit("click:row", {
@@ -191,7 +201,7 @@ onMounted(() => onScroll());
             'w-max !p-0': isSticky,
             'cursor-pointer': isCursorPointer,
           },
-          rowClass,
+          calculateRowClass,
         ]"
       >
         <TableCell
