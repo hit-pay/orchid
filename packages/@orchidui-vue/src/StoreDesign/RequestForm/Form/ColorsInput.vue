@@ -31,7 +31,7 @@ const getNewValues = (index, newVal) => {
         >{{ name.props.label }}</label
       >
       <ColorPicker 
-          :model-value="(modelValue && modelValue.length > 0) ? modelValue[index] : '#FFFFFF'" 
+          :model-value="(modelValue && modelValue.length > 0) ? (modelValue[index] ? modelValue[index] : '#FFFFFF') : '#FFFFFF'" 
           @update:model-value="
             $emit('update:modelValue', getNewValues(index, $event))
           ">
