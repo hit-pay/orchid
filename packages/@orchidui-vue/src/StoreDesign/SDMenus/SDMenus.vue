@@ -378,7 +378,7 @@ const confirmDeleteMenu = () => {
         size="small"
         left-icon="plus"
         label="New Menu"
-        @click="addMenu"
+        @click="addMenu(false)"
       />
 
       <Modal
