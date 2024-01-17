@@ -21,7 +21,7 @@ const props = defineProps({
     Function,
     default: "id",
   },
-  rowClass: String,
+  rowClass: [String, Function],
   isSticky: {
     type: Boolean,
     default: false,
