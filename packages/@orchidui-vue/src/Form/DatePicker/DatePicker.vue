@@ -105,15 +105,7 @@ const resetCalendar = () => {
   isDropdownOpened.value = false;
 };
 
-const defaultDateRange = () => {
-  if (props.maxDate) {
-    return [
-      dayjs().subtract(3, "day").toDate(),
-      dayjs().subtract(1, "day").toDate(),
-    ];
-  }
-  return [dayjs().toDate(), dayjs().add(2, "day").toDate()];
-};
+const defaultDateRange = () => [dayjs().toDate(), dayjs().toDate()];
 </script>
 
 <template>
