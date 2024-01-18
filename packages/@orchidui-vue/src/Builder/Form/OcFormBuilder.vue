@@ -172,21 +172,20 @@ const setFormClass = (form) => {
   if (form.show_if) {
     let formClassName = form.class ? form.class : "";
 
-    if(form.show_if_value){
-        if (form.show_if_value !== modelValue.value[form.show_if]) {
+    if (form.show_if_value !== undefined) {
+      if (form.show_if_value !== modelValue.value[form.show_if]) {
         formClassName = formClassName + " hidden";
-        }
-      }else if(form.show_if_not){
-        if (form.show_if_not === modelValue.value[form.show_if]) {
-            formClassName = formClassName + " hidden";
-          }
+      }
+    } else if (form.show_if_not !== undefined) {
+      if (form.show_if_not === modelValue.value[form.show_if]) {
+        formClassName = formClassName + " hidden";
+      }
     }
     if (typeof form.name === "object") {
       formClass.value[getFirstName(form.name)] = formClassName;
     } else {
       formClass.value[form.name] = formClassName;
     }
-
   } else {
     formClass.value[form.name] = form.class ? form.class : "";
   }
