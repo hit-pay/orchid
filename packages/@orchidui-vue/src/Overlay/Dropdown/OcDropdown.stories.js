@@ -25,7 +25,7 @@ export const Default = {
                   <div class="flex flex-col">
                     <div class="p-2 border-b border-gray-200">
                       <DropdownItem text="Menu" sub-text="description" />
-                      <DropdownItem text="Menu" icon="pencil"/>
+                      <DropdownItem text="Menu" icon="pencil" v-for="i in 50" />
                     </div>
                     <div class="p-2">
                       <DropdownItem text="Menu" icon="pencil" variant="destructive"/>
