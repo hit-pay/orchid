@@ -17,7 +17,7 @@ const onClickRow = (e) => {
   >
     <slot></slot>
   </div>
-  <a v-else :href="link" @click="onClickRow">
+  <a v-else :href="link" class="cursor-pointer" @click="onClickRow">
     <slot></slot>
   </a>
 </template>
