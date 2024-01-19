@@ -41,6 +41,7 @@ const TableOptions = {
       key: "col6",
       label: "Header",
       class: "w-2/6 md:w-[10%]",
+      disableClickRow: true
     },
     {
       key: "actions",
@@ -61,7 +62,7 @@ const TableOptions = {
       col4: "Table Cell column two",
       col5: "Label",
       col6: false,
-      link: "https://orchid.vercel/storybook/?id=1"
+      link: "https://orchidui.vercel.app/storybook/"
     },
     {
       image: "",

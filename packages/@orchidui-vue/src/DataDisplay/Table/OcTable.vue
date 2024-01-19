@@ -1,5 +1,5 @@
 <script setup>
-import { TableHeader, TableCell, TableRow } from "@/orchidui";
+import { TableHeader, TableCell } from "@/orchidui";
 import { ref, computed, onMounted } from "vue";
 
 const props = defineProps({
@@ -184,12 +184,9 @@ onMounted(() => onScroll());
       </div>
     </template>
     <template v-else>
-      <component
-        :is="TableRow"
+      <div
         v-for="(field, i) in fields"
         :key="i"
-        :row-link="rowLink"
-        :link="rowLink && field[rowLink] ? field[rowLink] : ''"
         class="flex group/row md:p-0 py-3"
         :class="[
           {
@@ -248,7 +245,8 @@ onMounted(() => onScroll());
             header.stickyRight && !isScrollOnEnd ? 'shadow-left-sticky' : '',
           ]"
           :image-class="header.imageClass"
-          @click:field="onClickRow(field, header)"
+          :link="rowLink && field[rowLink] ? field[rowLink] : ''"
+          @click="onClickRow(field, header)"
         >
           <template #default>
             <slot
@@ -257,10 +255,11 @@ onMounted(() => onScroll());
               :item="field"
               :data="field[header.key]"
               :index="i"
+              :link="rowLink && field[rowLink] ? field[rowLink] : ''"
             />
           </template>
         </TableCell>
-      </component>
+      </div>
       <slot v-if="!fields.length" name="empty" />
     </template>
     <slot name="after" />

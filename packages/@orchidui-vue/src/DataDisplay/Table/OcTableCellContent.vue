@@ -4,11 +4,17 @@ defineProps({
   title: String,
   description: String,
   href: String,
+  link: String,
 });
+
+import { TableLink } from "@/orchidui";
 </script>
 
 <template>
-  <div class="flex flex-col gap-y-1 whitespace-nowrap overflow-hidden">
+  <TableLink
+    link="link"
+    class="flex flex-col gap-y-1 whitespace-nowrap overflow-hidden"
+  >
     <span
       class="overflow-hidden text-ellipsis text-oc-text truncate"
       :class="important ? 'font-medium' : 'font-regular'"
@@ -27,5 +33,5 @@ defineProps({
       </slot>
       <span v-if="!description">-</span>
     </span>
-  </div>
+  </TableLink>
 </template>
