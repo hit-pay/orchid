@@ -68,8 +68,6 @@ const changeImage = (url) => {
   if (changedFile.current) {
     emit("onEditImage", changedFile);
   }
-
-  emit("update:uploadedImages", props.uploadedImages);
 };
 const updateLink = (link) => {
   const changedFile = props.uploadedImages[editImgIndex.value];
