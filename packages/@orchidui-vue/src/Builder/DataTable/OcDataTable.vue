@@ -38,6 +38,7 @@ const props = defineProps({
     Function,
     default: "id",
   },
+  rowLink: String,
 });
 
 const emit = defineEmits({
@@ -344,6 +345,7 @@ const displayFilterData = computed(() => {
       :is-loading="isLoading"
       :loading-rows="perPage"
       :row-class="rowClass"
+      :row-link="rowLink"
       :is-sticky="tableOptions.isSticky"
       class="min-h-[600px]"
       @update:selected="$emit('update:selected', $event)"
