@@ -98,7 +98,7 @@ const sizeClasses = computed(() => ({
     @click="onClickOutside"
   >
     <div
-      class="shadow-normal w-[calc(100%-40px)] bg-oc-bg-light rounded-xl flex flex-col"
+      class="shadow-normal w-[calc(100%-40px)] bg-oc-bg-light rounded-xl flex flex-col max-h-screen overflow-y-auto"
       :class="sizeClasses[size]"
       @click.stop
     >
@@ -131,7 +131,9 @@ const sizeClasses = computed(() => ({
       </div>
 
       <div :class="isBorderless ? 'px-7' : 'p-7'">
-        <slot></slot>
+        <div class="overflow-y-auto max-h-[70vh]">
+          <slot></slot>
+        </div>
       </div>
 
       <div

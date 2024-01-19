@@ -58,7 +58,7 @@ const onClickOutside = () => {
           <div
             v-show="modelValue"
             :class="menuClasses"
-            class="rounded bg-oc-bg-light shadow min-w-[162px]"
+            class="rounded bg-oc-bg-light shadow min-w-[162px] max-h-[80vh] overflow-y-auto"
           >
             <slot name="menu" />
           </div>
