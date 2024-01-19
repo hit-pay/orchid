@@ -44,6 +44,7 @@ export const Default = {
                    :is-sticky="args.isSticky"
                    :loadingRows="args.loadingRows"
                    :row-class="rowClass"
+                   row-link="link"
                    @click-row="onClickRow"
             >
               <template #col4="{ data }">

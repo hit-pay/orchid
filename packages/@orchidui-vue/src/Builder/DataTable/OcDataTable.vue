@@ -71,7 +71,7 @@ const currentPage = ref(props.filter.page);
 const perPage = ref(
   filterOptions.value?.per_page?.key
     ? props.filter[filterOptions.value?.per_page?.key]
-    : props.filter.per_page,
+    : props.filter.per_page
 );
 const defaultQuery =
   props.filter[filterOptions.value?.search?.key]?.trim() ?? "";
@@ -84,8 +84,8 @@ const customPerPageOptions = computed(() =>
       ({
         label: `${perPage}`,
         value: perPage,
-      }) ?? null,
-  ),
+      }) ?? null
+  )
 );
 
 const perPageOptions = computed(() => {
@@ -196,7 +196,7 @@ const changePage = () => {
 const applyFilter = (
   filterForm = null,
   isChangePage = false,
-  changeCursor = "",
+  changeCursor = ""
 ) => {
   if (paginationOption.value && !isChangePage) {
     currentPage.value = 1;
@@ -282,8 +282,8 @@ const displayFilterData = computed(() => {
               .map(
                 (selectedValue) =>
                   option.props.options.find(
-                    ({ value }) => value === selectedValue,
-                  ).label,
+                    ({ value }) => value === selectedValue
+                  ).label
               )
               .join(", ");
           }
@@ -299,17 +299,17 @@ const displayFilterData = computed(() => {
               option.name[1]
             ) {
               const startDate = dayjs(
-                filterData.value[option.name[0].key],
+                filterData.value[option.name[0].key]
               ).format("MM/DD/YYYY");
               const endDate = dayjs(
-                filterData.value[option.name[1].key],
+                filterData.value[option.name[1].key]
               ).format("MM/DD/YYYY");
 
               optionLabel =
                 startDate === endDate ? startDate : startDate + " - " + endDate;
             } else
               optionLabel = dayjs(filterData.value[option.name]).format(
-                "MM/DD/YYYY",
+                "MM/DD/YYYY"
               );
           }
 

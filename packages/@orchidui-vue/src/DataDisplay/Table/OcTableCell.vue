@@ -177,7 +177,9 @@ const variantClass = computed(() => ({
 
       <CopyTooltip
         v-if="isCopy && hasContentData"
-        :value="data"
+        :value="
+          content?.title ? `${content.title},${content.description}` : data
+        "
         :tooltip-options="{
           transitionName: 'copy',
         }"

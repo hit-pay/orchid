@@ -61,6 +61,7 @@ const TableOptions = {
       col4: "Table Cell column two",
       col5: "Label",
       col6: false,
+      link: "https://orchid.vercel/storybook/?id=1"
     },
     {
       image: "",
