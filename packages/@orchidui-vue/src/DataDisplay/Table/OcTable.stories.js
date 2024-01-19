@@ -33,7 +33,9 @@ export const Default = {
       const onClickRow = (item) => {
         console.log("on click row", item);
       };
-      return { StickyTableOptions, args, selectedRows, onClickRow };
+      
+      const rowClass = (r, i) => `z-[${100-i}]`;
+      return { StickyTableOptions, args, selectedRows, onClickRow, rowClass };
     },
     template: `
           <Theme>
@@ -42,6 +44,7 @@ export const Default = {
                    :is-loading="args.isLoading"
                    :is-sticky="args.isSticky"
                    :loadingRows="args.loadingRows"
+                   :row-class="rowClass"
                    @click-row="onClickRow"
             >
               <template #col4="{ data }">

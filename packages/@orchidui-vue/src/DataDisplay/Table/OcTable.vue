@@ -21,7 +21,7 @@ const props = defineProps({
     Function,
     default: "id",
   },
-  rowClass: String,
+  rowClass: [String, Function],
   isSticky: {
     type: Boolean,
     default: false,
@@ -78,6 +78,18 @@ const isCopied = ref(false);
 const onCopied = (to) => {
   isCopied.value = to;
 };
+
+const calculateRowClass = computed(() => {
+  if (typeof props.rowClass === 'function') {
+    // insert class by parent component to resolve layout issue.
+    // https://linear.app/hitpay/issue/HIT-5244/variant-products-issue#comment-db6e06ed
+    return (row, i) => {
+      return props.rowClass(row, i);
+    };
+  }
+
+  return () => props.rowClass;
+})
 
 const onClickRow = (field, header) => {
   if (!header.disableClickRow && header.key !== "actions") {
@@ -195,7 +207,7 @@ onMounted(() => onScroll());
               'w-max !p-0': isSticky,
               'cursor-pointer': isCursorPointer,
             },
-            rowClass,
+            calculateRowClass(field, i),
           ]"
         >
           <TableCell

@@ -464,18 +464,27 @@ const displayFilterData = computed(() => {
         v-model="currentPage"
         class="justify-center"
         :max-page="paginationOption.last_page"
+        :strategy="paginationOption.strategy"
         total-visible="5"
         @update:model-value="changePage"
       />
       <div v-if="cursorOption" class="flex w-full gap-5">
         <PrevNext
           :disabled="!cursorOption.prev"
-          @click="applyFilter(null, false, cursorOption.prev)"
+          @click="
+            cursorOption.prev
+              ? applyFilter(null, false, cursorOption.prev)
+              : null
+          "
         />
         <PrevNext
           :disabled="!cursorOption.next"
           is-next
-          @click="applyFilter(null, false, cursorOption.next)"
+          @click="
+            cursorOption.next
+              ? applyFilter(null, false, cursorOption.next)
+              : null
+          "
         />
       </div>
       <div class="hidden md:flex items-center">

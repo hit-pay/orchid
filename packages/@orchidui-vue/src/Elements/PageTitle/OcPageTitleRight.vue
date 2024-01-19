@@ -9,7 +9,7 @@ const props = defineProps({
 });
 
 const isDropdownOpened = ref(
-  props.secondaryButtonProps?.isDropdownOpened ?? false,
+  props.secondaryButtonProps?.isDropdownOpened ?? false
 );
 const { isMobile } = useWindowWidth();
 </script>
@@ -34,9 +34,8 @@ const { isMobile } = useWindowWidth();
         </div>
       </template>
     </Dropdown>
-
     <Tooltip
-      v-if="primaryButtonProps"
+      v-if="primaryButtonProps && primaryButtonProps.tooltip"
       position="top"
       :distance="4"
       arrow-hidden
@@ -49,22 +48,15 @@ const { isMobile } = useWindowWidth();
         <div
           class="px-3 py-[5px] whitespace-nowrap font-medium text-sm text-oc-text-400 flex gap-x-3 items-center"
         >
-          {{ primaryButtonProps.tooltip ?? primaryButtonProps.label }}
-          <div class="flex gap-x-2">
-            <div
-              class="w-6 h-6 rounded-[6px] flex items-center justify-center border border-oc-gray-200 keyboard-cap"
-            >
-              ⌘
-            </div>
-            <div
-              class="w-6 h-6 rounded-[6px] flex items-center justify-center border border-oc-gray-200 keyboard-cap"
-            >
-              W
-            </div>
-          </div>
+          {{ primaryButtonProps.tooltip }}
         </div>
       </template>
     </Tooltip>
+    <Button
+      v-else-if="primaryButtonProps"
+      :size="isMobile ? 'small' : 'default'"
+      v-bind="primaryButtonProps"
+    />
   </div>
 </template>
 <style scoped lang="scss">
