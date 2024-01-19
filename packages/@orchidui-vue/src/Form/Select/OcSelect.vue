@@ -236,7 +236,7 @@ const selectAll = () => {
       </div>
 
       <template #menu>
-        <div class="p-3 flex flex-col gap-y-2 max-h-full overflow-y-auto">
+        <div class="p-3 flex flex-col gap-y-2">
           <Input
             v-if="isFilterable"
             v-model="query"
