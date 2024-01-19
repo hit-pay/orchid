@@ -248,7 +248,7 @@ const selectAll = () => {
             </template>
           </Input>
 
-          <div class="max-h-[320px] overflow-y-auto flex flex-col gap-y-2">
+          <div class="flex flex-col gap-y-2">
             <Option
               v-if="isCheckboxes && isSelectAll && filterableOptions.length"
               :is-selected="isSelectedAll"
