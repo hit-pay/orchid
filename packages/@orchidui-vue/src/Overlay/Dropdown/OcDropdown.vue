@@ -23,6 +23,7 @@ const props = defineProps({
     default: "bottom-start",
   },
   popperOptions: Object,
+  popperStyle: Object,
   popperClass: [String, Array, Object],
   modelValue: Boolean,
   preventClickOutside: Boolean,
@@ -48,9 +49,10 @@ const onClickOutside = () => {
       :distance="distance"
       :popper-class="popperClass"
       :skidding="skidding"
+      :popper-style="popperStyle"
       :popper-options="popperOptions"
     >
-      <div class="w-[inherit] flex" @click.stop="toggleDropdown">
+      <div class="w-[inherit] flex" @click="toggleDropdown">
         <slot />
       </div>
       <template #popper>

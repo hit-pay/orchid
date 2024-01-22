@@ -19,6 +19,9 @@ const props = defineProps({
   popperOptions: {
     type: Object,
   },
+  popperStyle: {
+    type: Object,
+  },
   skidding: {
     type: Number,
     default: 0,
@@ -79,7 +82,12 @@ watch(
     <div ref="reference" class="w-[inherit] flex">
       <slot />
     </div>
-    <div ref="popper" :class="popperClass" class="z-[1005]">
+    <div
+      ref="popper"
+      :class="popperClass"
+      :style="popperStyle"
+      class="z-[1005]"
+    >
       <slot name="popper" />
     </div>
   </div>
