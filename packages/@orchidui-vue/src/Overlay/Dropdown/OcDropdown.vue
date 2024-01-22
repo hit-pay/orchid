@@ -1,7 +1,7 @@
 <script setup>
 import { Popper } from "@/orchidui";
 import { clickOutside as vClickOutside } from "../../directives/clickOutside.js";
-import { ref } from "vue"; // Import the directive
+import { nextTick, onMounted, ref, watch } from "vue"; // Import the directive
 
 const emit = defineEmits({
   "update:modelValue": [],
@@ -39,10 +39,31 @@ const onClickOutside = () => {
   if (props.modelValue && !props.preventClickOutside)
     emit("update:modelValue", false);
 };
+const parentElement = ref();
+const maxPopperHeight = ref(0);
+
+const getMaxHeightWithoutOverflow = async () => {
+  const viewportHeight =
+    window.innerHeight || document.documentElement.clientHeight;
+
+  const parentElementTop = parentElement.value.getBoundingClientRect().top;
+
+  const parentElementBottom =
+    viewportHeight - parentElement.value.getBoundingClientRect().bottom;
+
+  const maxHeight = Math.max(parentElementTop, parentElementBottom) - 2 * 16; // offset 2rem;
+  maxPopperHeight.value = maxHeight > 0 ? maxHeight : 0;
+};
+
+watch(() => props.modelValue, getMaxHeightWithoutOverflow);
 </script>
 
 <template>
-  <span v-click-outside="onClickOutside" class="flex w-[inherit]">
+  <span
+    ref="parentElement"
+    v-click-outside="onClickOutside"
+    class="flex w-[inherit]"
+  >
     <Popper
       ref="popper"
       :placement="placement"
@@ -60,7 +81,10 @@ const onClickOutside = () => {
           <div
             v-show="modelValue"
             :class="menuClasses"
-            class="rounded bg-oc-bg-light shadow min-w-[162px] max-h-[80vh] overflow-y-auto"
+            class="rounded bg-oc-bg-light shadow min-w-[162px] overflow-y-auto"
+            :style="{
+              maxHeight: maxPopperHeight + 'px',
+            }"
           >
             <slot name="menu" />
           </div>
