@@ -41,6 +41,7 @@ const TableOptions = {
       key: "col6",
       label: "Header",
       class: "w-2/6 md:w-[10%]",
+      disableClickRow: true
     },
     {
       key: "actions",
@@ -61,6 +62,7 @@ const TableOptions = {
       col4: "Table Cell column two",
       col5: "Label",
       col6: false,
+      link: "https://orchidui.vercel.app/storybook/"
     },
     {
       image: "",
@@ -81,6 +83,9 @@ const TableOptions = {
       col4: "Table Cell column two",
       col5: "Label",
       col6: false,
+      col7: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dictum ultricies justo, sed suscipit erat. Pellentesque vel volutpat nisi. Sed ultrices pharetra ligula, nec tincidunt purus auctor at. Maecenas a neque id arcu iaculis euismod. Morbi ut varius sapien, id ultricies purus. Integer egestas vitae sem feugiat euismod. Morbi bibendum vel ipsum ac viverra. Quisque luctus eros in urna dictum, facilisis condimentum risus suscipit. Cras sed sapien dapibus, eleifend dui eu, faucibus nunc. Fusce ac diam non ex mollis commodo.
+
+Donec pretium a felis id mattis. Nam malesuada lacus et erat pellentesque, eget pharetra erat scelerisque. Nullam eget aliquet lacus, ac rhoncus libero. Cras vel tempus odio, nec consectetur ligula. Nulla eleifend lacus sed erat tincidunt, id convallis urna gravida. Suspendisse potenti. Maecenas sed eleifend justo. Nam in ipsum euismod, ornare mi a, pulvinar sem. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean varius turpis ac nunc ullamcorper, id volutpat enim finibus. Vivamus tempus mi nec arcu faucibus, sit amet sagittis enim fringilla. Maecenas quis libero tempor, sodales augue ac, rhoncus nulla.`,
     },
     {
       image: "",

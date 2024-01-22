@@ -26,6 +26,7 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  rowLink: String,
 });
 
 const emit = defineEmits({
@@ -39,9 +40,7 @@ const fields = computed(() => props.options.fields);
 const headers = computed(() => props.options.headers);
 
 const getRowKey = computed(() =>
-  typeof props.rowKey === "function"
-    ? props.rowKey
-    : (row) => row[props.rowKey],
+  typeof props.rowKey === "function" ? props.rowKey : (row) => row[props.rowKey]
 );
 
 const selectedRows = computed({
@@ -55,12 +54,12 @@ const selectedRows = computed({
 
 const selectRow = (row) => {
   const selectingRow = selectedRows.value.find(
-    (r) => getRowKey.value(r) === getRowKey.value(row),
+    (r) => getRowKey.value(r) === getRowKey.value(row)
   );
 
   if (selectingRow) {
     selectedRows.value = selectedRows.value.filter(
-      (r) => getRowKey.value(r) !== getRowKey.value(row),
+      (r) => getRowKey.value(r) !== getRowKey.value(row)
     );
   } else {
     selectedRows.value = [...selectedRows.value, row];
@@ -73,14 +72,8 @@ const selectAllRows = () => {
   selectedRows.value = allRowsSelected ? [] : [...fields.value];
 };
 
-const isCopied = ref(false);
-
-const onCopied = (to) => {
-  isCopied.value = to;
-};
-
 const calculateRowClass = computed(() => {
-  if (typeof props.rowClass === 'function') {
+  if (typeof props.rowClass === "function") {
     // insert class by parent component to resolve layout issue.
     // https://linear.app/hitpay/issue/HIT-5244/variant-products-issue#comment-db6e06ed
     return (row, i) => {
@@ -89,7 +82,7 @@ const calculateRowClass = computed(() => {
   }
 
   return () => props.rowClass;
-})
+});
 
 const onClickRow = (field, header) => {
   if (!header.disableClickRow && header.key !== "actions") {
@@ -194,77 +187,88 @@ onMounted(() => onScroll());
       <div
         v-for="(field, i) in fields"
         :key="i"
-        class="flex group/row md:p-0 py-3"
-        :class="[
-          {
-            'border-b md:border-b-0': fields.length !== i + 1,
-            'pl-[40px]': isSelectable,
-            'flex-wrap md:flex-nowrap': !isSticky,
-            'w-max !p-0': isSticky,
-            'cursor-pointer': isCursorPointer,
-          },
-          calculateRowClass(field, i),
-        ]"
+        :class="{
+          'border-b': fields.length !== i + 1,
+        }"
       >
-        <TableCell
-          v-if="isSelectable"
-          class="flex border-oc-gray-200 justify-center left-0 min-w-[32px]"
-          :is-last="fields.length === i + 1"
-          :is-selected="
-            selectedRows.some((r) => getRowKey(r) === getRowKey(field))
-          "
+        <div
+          class="flex relative group/row md:p-0 py-3"
           :class="[
-            isSticky
-              ? 'shrink-0 z-10 left-0 sticky'
-              : 'md:relative absolute w-[40px] md:w-[5%]',
-            fields.length !== i + 1 ? 'md:border-b' : '',
+            {
+              'pl-[40px]': isSelectable,
+              'flex-wrap md:flex-nowrap': !isSticky,
+              'w-max !p-0': isSticky,
+              'cursor-pointer': isCursorPointer,
+            },
+            calculateRowClass(field, i),
           ]"
-          variant="checkbox"
-          @selected="selectRow(field)"
-        />
-
-        <TableCell
-          v-for="(header, j) in headers"
-          :key="`${j}-${i}`"
-          class="flex border-oc-gray-200"
-          :is-last="fields.length === i + 1"
-          :variant="header.variant"
-          :is-copy="header.isCopy"
-          :data="field[header.key] || ''"
-          :content="{
-            important: header.important ?? false,
-            title: field[header.title],
-            description: field[header.description],
-            href: field[header.href],
-          }"
-          :chip-options="header.chipOptions"
-          :class="[
-            header.class,
-            header.stickyLeft && isSelectable
-              ? 'left-[40px] md:left-[32px]'
-              : 'left-0',
-            header.stickyRight ? 'right-0' : '',
-            header.stickyLeft || header.stickyRight
-              ? 'shrink-0 sticky z-10'
-              : '',
-            fields.length !== i + 1 ? 'md:border-b' : '',
-            header.stickyLeft && !isScrollOnStart ? 'shadow-right-sticky' : '',
-            header.stickyRight && !isScrollOnEnd ? 'shadow-left-sticky' : '',
-          ]"
-          :image-class="header.imageClass"
-          @click:field="onClickRow(field, header)"
-          @copied="onCopied"
         >
-          <template #default>
-            <slot
-              v-if="$slots[header.key]"
-              :name="header.key"
-              :item="field"
-              :data="field[header.key]"
-              :index="i"
-            />
-          </template>
-        </TableCell>
+          <TableCell
+            v-if="isSelectable"
+            class="flex border-oc-gray-200 justify-center left-0 min-w-[32px]"
+            :is-last="fields.length === i + 1"
+            :is-selected="
+              selectedRows.some((r) => getRowKey(r) === getRowKey(field))
+            "
+            :class="[
+              isSticky
+                ? 'shrink-0 z-10 left-0 sticky'
+                : 'md:relative absolute w-[40px] md:w-[5%]',
+            ]"
+            variant="checkbox"
+            @selected="selectRow(field)"
+          />
+
+          <TableCell
+            v-for="(header, j) in headers"
+            :key="`${j}-${i}`"
+            class="flex border-oc-gray-200"
+            :is-last="fields.length === i + 1"
+            :variant="header.variant"
+            :is-copy="header.isCopy"
+            :data="field[`${header.key}`] ?? ''"
+            :content="{
+              important: header.important ?? false,
+              title: field[`${header.title}`],
+              description: field[`${header.description}`],
+              href: field[`${header.href}`],
+            }"
+            :chip-options="header.chipOptions"
+            :class="[
+              header.class,
+              header.stickyLeft && isSelectable
+                ? 'left-[40px] md:left-[32px]'
+                : 'left-0',
+              header.stickyRight ? 'right-0' : '',
+              header.stickyLeft || header.stickyRight
+                ? 'shrink-0 sticky z-10'
+                : '',
+              header.stickyLeft && !isScrollOnStart
+                ? 'shadow-right-sticky'
+                : '',
+              header.stickyRight && !isScrollOnEnd ? 'shadow-left-sticky' : '',
+            ]"
+            :image-class="header.imageClass"
+            :link="rowLink && field[rowLink] ? field[rowLink] : ''"
+            @click="onClickRow(field, header)"
+          >
+            <template #default>
+              <slot
+                v-if="$slots[header.key]"
+                :name="header.key"
+                :item="field"
+                :data="field[header.key]"
+                :index="i"
+              />
+            </template>
+          </TableCell>
+        </div>
+        <div
+          v-if="$slots['extra']"
+          class="flex relative group/row md:p-0 py-3 w-full"
+        >
+          <slot name="extra" :item="field" :index="i" />
+        </div>
       </div>
       <slot v-if="!fields.length" name="empty" />
     </template>
