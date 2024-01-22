@@ -93,7 +93,8 @@ export const Default = {
         value: 4,
       },
     ],
-    isFilterable: false,
+    isFilterable: true,
+    isAsynchronousSearch: true,
     isAddNew: false,
     isDisabled: false,
     isRequired: false,
@@ -123,6 +124,7 @@ export const Default = {
                   :is-inline-label="args.isInlineLabel"
                   :hint="args.hint"
                   :is-filterable="args.isFilterable"
+                  :is-asynchronous-search="args.isAsynchronousSearch"
                   :is-add-new="args.isAddNew"
                   :placeholder="args.placeholder"
                   :isRequired="args.isRequired"
