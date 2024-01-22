@@ -131,7 +131,7 @@ export const Default = {
                   :tooltip-options="args.tooltipOptions"
                   :label-icon="args.labelIcon"
                   :tooltip-text="args.tooltipText"
-                  @on-search-keywords="console.log($event)"
+                  @on-search-keywords="(query) => console.log(query)"
               />
             </div>
           </Theme>
