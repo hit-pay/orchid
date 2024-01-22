@@ -26,6 +26,7 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  rowLink: String,
 });
 
 const emit = defineEmits({
@@ -39,9 +40,7 @@ const fields = computed(() => props.options.fields);
 const headers = computed(() => props.options.headers);
 
 const getRowKey = computed(() =>
-  typeof props.rowKey === "function"
-    ? props.rowKey
-    : (row) => row[props.rowKey],
+  typeof props.rowKey === "function" ? props.rowKey : (row) => row[props.rowKey]
 );
 
 const selectedRows = computed({
@@ -55,12 +54,12 @@ const selectedRows = computed({
 
 const selectRow = (row) => {
   const selectingRow = selectedRows.value.find(
-    (r) => getRowKey.value(r) === getRowKey.value(row),
+    (r) => getRowKey.value(r) === getRowKey.value(row)
   );
 
   if (selectingRow) {
     selectedRows.value = selectedRows.value.filter(
-      (r) => getRowKey.value(r) !== getRowKey.value(row),
+      (r) => getRowKey.value(r) !== getRowKey.value(row)
     );
   } else {
     selectedRows.value = [...selectedRows.value, row];
@@ -73,14 +72,8 @@ const selectAllRows = () => {
   selectedRows.value = allRowsSelected ? [] : [...fields.value];
 };
 
-const isCopied = ref(false);
-
-const onCopied = (to) => {
-  isCopied.value = to;
-};
-
 const calculateRowClass = computed(() => {
-  if (typeof props.rowClass === 'function') {
+  if (typeof props.rowClass === "function") {
     // insert class by parent component to resolve layout issue.
     // https://linear.app/hitpay/issue/HIT-5244/variant-products-issue#comment-db6e06ed
     return (row, i) => {
@@ -89,7 +82,7 @@ const calculateRowClass = computed(() => {
   }
 
   return () => props.rowClass;
-})
+});
 
 const onClickRow = (field, header) => {
   if (!header.disableClickRow && header.key !== "actions") {
@@ -250,12 +243,14 @@ onMounted(() => onScroll());
               header.stickyLeft || header.stickyRight
                 ? 'shrink-0 sticky z-10'
                 : '',
-              header.stickyLeft && !isScrollOnStart ? 'shadow-right-sticky' : '',
+              header.stickyLeft && !isScrollOnStart
+                ? 'shadow-right-sticky'
+                : '',
               header.stickyRight && !isScrollOnEnd ? 'shadow-left-sticky' : '',
             ]"
             :image-class="header.imageClass"
-            @click:field="onClickRow(field, header)"
-            @copied="onCopied"
+            :link="rowLink && field[rowLink] ? field[rowLink] : ''"
+            @click="onClickRow(field, header)"
           >
             <template #default>
               <slot

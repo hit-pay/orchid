@@ -236,7 +236,7 @@ const selectAll = () => {
       </div>
 
       <template #menu>
-        <div class="p-3 flex flex-col gap-y-2 max-h-full overflow-y-auto">
+        <div class="p-3 flex flex-col gap-y-2">
           <Input
             v-if="isFilterable"
             v-model="query"
@@ -248,7 +248,7 @@ const selectAll = () => {
             </template>
           </Input>
 
-          <div class="max-h-[320px] overflow-y-auto flex flex-col gap-y-2">
+          <div class="flex flex-col gap-y-2">
             <Option
               v-if="isCheckboxes && isSelectAll && filterableOptions.length"
               :is-selected="isSelectedAll"

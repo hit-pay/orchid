@@ -45,14 +45,9 @@ export const Default = {
                    :is-sticky="args.isSticky"
                    :loadingRows="args.loadingRows"
                    :row-class="rowClass"
-                   @click-row="onClickRow"
+                   row-link="link"
+                   @click:row="onClickRow"
             >
-              <template #col4="{ data }">
-                <span class="text-oc-text-400 text-sm">{{ data }}</span>
-              </template>
-              <template #col5="{ data }">
-                <Chip variant="success" class="w-fit" :label="data"/>
-              </template>
               <template #col6="{ data }">
                 <div class="flex gap-3 items-center">
                   <span class="md:hidden">
