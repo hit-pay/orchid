@@ -62,6 +62,7 @@ const emit = defineEmits({
   addNew: [],
   "update:modelValue": [],
   "max-option-allowed-set": [],
+  onSearchKeywords: "",
 });
 
 const query = ref("");
@@ -255,6 +256,7 @@ onMounted(() => {
             v-model="query"
             icon="search"
             placeholder="Search"
+            @update:model-value="$emit('onSearchKeywords', $event)"
           >
             <template #icon>
               <Icon class="w-5 h-5 text-oc-text-400" name="search" />
