@@ -67,7 +67,7 @@ onMounted(() => {
 
 <template>
   <div
-    class="py-8 cursor-pointer transition-all duration-500 relative bg-[var(--oc-sidebar-background)] border-r"
+    class="py-8 cursor-pointer transition-all duration-500 relative bg-[var(--oc-sidebar-background)]"
     :class="allClassName"
   >
     <button
@@ -81,7 +81,7 @@ onMounted(() => {
     >
       <Icon width="20" height="20" name="arrow-left-2" />
     </button>
-    <div class="grid gap-3 px-8 max-h-screen">
+    <div class="grid gap-3 px-8">
       <slot name="before" :is-expanded="isExpanded" />
 
       <template v-for="(sidebar, index) in sidebarMenu" :key="index">
