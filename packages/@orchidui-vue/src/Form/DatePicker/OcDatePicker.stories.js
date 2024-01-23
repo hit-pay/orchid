@@ -31,7 +31,7 @@ export const Default = {
     hint: "",
     minLabel: "From",
     maxLabel: "To",
-    minDate: null,
+    minDate: dayjs(),
     maxDate: null,
     isRequired: true,
     label: "Date",
