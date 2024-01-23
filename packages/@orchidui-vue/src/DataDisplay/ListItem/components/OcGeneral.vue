@@ -17,6 +17,11 @@ defineProps({
 });
 const emit = defineEmits(["more"]);
 const isOpen = ref(false);
+
+const toggleDashboard = () => {
+  isOpen.value = !isOpen.value;
+  emit("more");
+};
 </script>
 
 <template>
@@ -41,11 +46,11 @@ const isOpen = ref(false);
         </div>
       </div>
       <template v-if="!isDisabled">
-        <Dropdown v-model="isOpen">
+        <Dropdown v-model="isOpen" placement="bottom-end">
           <Icon
             name="dots-vertical"
             class="opacity-0 p-2 group-hover:opacity-100 cursor-pointer active:bg-oc-gray-100 rounded"
-            @click.prevent="$emit('more')"
+            @click.stop="toggleDashboard"
           />
           <template #menu>
             <slot name="menu" />
