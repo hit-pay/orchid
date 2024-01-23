@@ -319,3 +319,47 @@ export const InputOptions = {
         `,
   }),
 };
+
+export const FormatValue = {
+  args: {
+    label: "Currency value",
+    placeholder: "Currency format",
+  },
+  render: (args) => ({
+    components: { Theme, OCInput },
+    setup() {
+      const modelValue = ref(0);
+
+      const formatValue = (value) => {
+        let output = value;
+
+        if (Number(value) === 0) return '0.00'
+
+        // removing non-digit characters
+        output = +(`${output}`.replace(/\D/g, ''))
+
+        // 
+        return (output / 100).toLocaleString('en-US', {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        })
+      }
+
+      const handleUpdateModelValue = (value) => {
+        modelValue.value = value.replaceAll(',', '')
+      }
+
+      return { modelValue, args, formatValue, handleUpdateModelValue };
+    },
+    template: `
+          <Theme colorMode="light" class="py-4">
+            <OCInput
+                v-model="modelValue"
+                :label="args.label"
+                :placeholder="args.placeholder"
+                :formatValue="formatValue"
+            />
+          </Theme>
+        `,
+  }),
+};

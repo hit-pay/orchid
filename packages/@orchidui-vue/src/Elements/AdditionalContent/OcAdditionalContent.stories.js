@@ -56,8 +56,9 @@ const argTypes = {
       ],
       "4 Fields": [
         {
-          showInfo: true,
+          showInfo: false,
           infoTooltip: "Tooltip",
+          style: "!grid-cols-2",
           items: [
             {
               title: "Purpose",
@@ -251,7 +252,7 @@ export const Dynamic = {
                 :overview-items="args.overviewItems"
                 :overview-tabs="args.overviewTabs"
                 :customer-card-variant="args.customerCardVariant"
-                :is-customer="args.isCustomer"
+                is-customer
                 :customer="args.customer"
                 :overview-active-tab="args.overviewActiveTab"
                 @change-tab="args.overviewActiveTab = $event"
