@@ -20,6 +20,7 @@ const props = defineProps({
   },
   isInlineLabel: Boolean,
   isFilterable: Boolean,
+  isAsynchronousSearch: Boolean,
   isDisabled: Boolean,
   isCheckboxes: Boolean,
   isSelectAll: Boolean,
@@ -79,7 +80,10 @@ const isSelectedAll = computed(() => {
 });
 
 const filterableOptions = computed(
-  () => filterOptions(props.options, query.value) || [],
+  () =>
+    (props.isAsynchronousSearch
+      ? props.options
+      : filterOptions(props.options, query.value)) || [],
 );
 
 const localValueOption = computed(() => {
@@ -164,13 +168,15 @@ const removeOption = (value) => {
   );
 };
 const selectAll = () => {
-  if (isSelectedAll.value) {
-    emit("update:modelValue", []);
-  } else {
-    emit(
-      "update:modelValue",
-      filterableOptions.value.map((o) => o.value),
-    );
+  if (!props.isAsynchronousSearch) {
+    if (isSelectedAll.value) {
+      emit("update:modelValue", []);
+    } else {
+      emit(
+        "update:modelValue",
+        filterableOptions.value.map((o) => o.value),
+      );
+    }
   }
 };
 const baseInput = ref();
@@ -256,7 +262,7 @@ onMounted(() => {
             v-model="query"
             icon="search"
             placeholder="Search"
-            @update:model-value="$emit('onSearchKeywords', $event)"
+            @update:model-value="$emit('onSearchKeywords', query)"
           >
             <template #icon>
               <Icon class="w-5 h-5 text-oc-text-400" name="search" />
@@ -288,6 +294,7 @@ onMounted(() => {
                 @click="selectOption(option)"
               />
             </slot>
+            <slot name="infinite-scrolling"></slot>
           </div>
 
           <Button
