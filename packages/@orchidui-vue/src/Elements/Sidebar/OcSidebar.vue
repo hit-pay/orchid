@@ -67,7 +67,7 @@ onMounted(() => {
 
 <template>
   <div
-    class="py-8 cursor-pointer max-h-[inherit] transition-all duration-500 relative bg-[var(--oc-sidebar-background)]"
+    class="cursor-pointer max-h-[inherit] transition-all duration-500 relative bg-[var(--oc-sidebar-background)]"
     :class="allClassName"
   >
     <button
