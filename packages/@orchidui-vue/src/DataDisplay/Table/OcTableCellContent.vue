@@ -12,7 +12,7 @@ import { TableLink } from "@/orchidui";
 
 <template>
   <TableLink
-    :link="!href && link"
+    :link="!href ? link : ''"
     class="flex flex-col gap-y-1 whitespace-nowrap overflow-hidden w-full"
   >
     <span

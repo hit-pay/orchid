@@ -131,9 +131,7 @@ const sizeClasses = computed(() => ({
       </div>
 
       <div :class="isBorderless ? 'px-7' : 'p-7'">
-        <div class="overflow-y-auto max-h-[70vh]">
-          <slot></slot>
-        </div>
+        <slot></slot>
       </div>
 
       <div

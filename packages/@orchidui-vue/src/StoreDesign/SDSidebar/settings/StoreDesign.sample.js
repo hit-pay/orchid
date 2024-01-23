@@ -101,7 +101,7 @@ const StoreDesign = {
       group: "sections",
       key: "product_list_1",
       section: "Products",
-      title: "Feature Product",
+      title: "Featured Product",
       variant: "carousel",
       product_from: "feature",
       category_id: "",

@@ -19,7 +19,7 @@ const PRODUCT_FORM = [
         },
         {
           value: "feature",
-          label: "Feature Product",
+          label: "Featured Product",
         },
         {
           value: "category",
