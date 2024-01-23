@@ -18,7 +18,10 @@ defineEmits(["addCustomer"]);
       v-for="(box, i) in boxes"
       :key="i"
       :class="
-        isCustomer ? '!grid grid-cols-4 grid-rows-2 gap-y-4 w-full !py-4' : ''
+        isCustomer
+          ? '!grid grid-cols-4 grid-rows-2 gap-y-4 w-full !py-4 ' +
+            (box?.style || '')
+          : ''
       "
     >
       <OverviewItem
