@@ -89,16 +89,18 @@ const filterableOptions = computed(
 const localValueOption = computed(() => {
   if (props.multiple) {
     let selected = [];
-    for (const option of props.options) {
-      if (option.values) {
-        option.values.forEach((o) => {
-          if ((props.modelValue || []).includes(o.value)) {
-            selected.push(o);
+    for (const value of props.modelValue) {
+      for (const option of props.options) {
+        if (option.values) {
+          option.values.forEach((o) => {
+            if (o.value === value) {
+              selected.push(o);
+            }
+          });
+        } else {
+          if (option.value === value) {
+            selected.push(option);
           }
-        });
-      } else {
-        if ((props.modelValue || []).includes(option.value)) {
-          selected.push(option);
         }
       }
     }
