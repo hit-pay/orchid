@@ -271,9 +271,20 @@ const displayFilterData = computed(() => {
             return f.name === name;
           }
         });
-        if (filterData.value[name]) {
-          let optionLabel = filterData.value[name];
 
+        let optionLabel = "";
+        if (typeof option.name === "object") {
+          option.name.forEach((formName) => {
+            if (optionLabel) {
+              optionLabel += " - ";
+            }
+            optionLabel += filterData.value[formName.key];
+          });
+        } else {
+          optionLabel = filterData.value[name];
+        }
+
+        if (filterData.value[name]) {
           if (option?.props.options) {
             const selectedValuesInArray = option.props.multiple
               ? filterData.value[name]
@@ -287,10 +298,6 @@ const displayFilterData = computed(() => {
                   ).label
               )
               .join(", ");
-          }
-
-          if (option.type === "RangeInput") {
-            optionLabel = filterData.value[option.name].join(" - ");
           }
 
           if (option.type === "DatePicker") {
