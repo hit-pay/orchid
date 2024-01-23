@@ -26,7 +26,7 @@ export const calendarStory = {
   args: {
     type: "default",
     minDate: "",
-    maxDate: dayjs().toDate(),
+    maxDate: "",
     position: "floating",
   },
   render: (args) => ({
