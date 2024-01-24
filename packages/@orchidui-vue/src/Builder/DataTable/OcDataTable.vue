@@ -273,19 +273,20 @@ const displayFilterData = computed(() => {
         });
 
         let optionLabel = "";
-        if (option && typeof option.name === "object") {
-          option.name?.forEach((formName) => {
-            if (optionLabel) {
-              optionLabel += " - ";
-            }
-            optionLabel += filterData.value[formName.key];
-          });
-        } else {
-          optionLabel = filterData.value[name];
-        }
 
         if (option && filterData.value[name]) {
-          if (option?.props.options) {
+          if (typeof option.name === "object") {
+            option.name?.forEach((formName) => {
+              if (optionLabel) {
+                optionLabel += " - ";
+              }
+              optionLabel += filterData.value[formName.key];
+            });
+          } else {
+            optionLabel = filterData.value[name];
+          }
+
+          if (option.props.options) {
             const selectedValuesInArray = option.props.multiple
               ? filterData.value[name]
               : [filterData.value[name]];
@@ -300,7 +301,7 @@ const displayFilterData = computed(() => {
               .join(", ");
           }
 
-          if (option && option.type === "DatePicker") {
+          if (option.type === "DatePicker") {
             if (
               option?.props?.type === "range" &&
               option.name &&
