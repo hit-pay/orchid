@@ -72,9 +72,6 @@ const props = defineProps({
     type: Object,
     default: () => ({}),
   },
-  formatValue: {
-    type: Function,
-  }
 });
 
 const emit = defineEmits(["update:modelValue", "blur", "focus"]);
@@ -88,22 +85,6 @@ const inputRef = ref();
 defineExpose({
   focus: () => inputRef.value.focus(),
 });
-
-const formattedValue = ref('');
-
-const updateValue = (event) => {
-  let output = event.target.value;
-
-  if(typeof props.formatValue === 'function') {
-    output = props.formatValue(output);
-  }
-
-  // updating displayed value
-  formattedValue.value = output;
-
-  // emitting formatted value
-  emit('update:modelValue', output);
-}
 
 const isFocused = ref(false);
 const inputClasses = computed(() => [
@@ -155,8 +136,8 @@ const inputClasses = computed(() => [
 
           <input
             ref="inputRef"
-            v-model="formattedValue"
             :type="inputType"
+            :value="modelValue"
             :readonly="isReadonly"
             :placeholder="placeholder"
             :disabled="disabled"
@@ -170,7 +151,7 @@ const inputClasses = computed(() => [
               isFocused = false;
               $emit('blur');
             "
-            @input="updateValue"
+            @input="$emit('update:modelValue', $event.target.value)"
           />
         </div>
       </div>
