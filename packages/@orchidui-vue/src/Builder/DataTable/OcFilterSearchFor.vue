@@ -13,7 +13,7 @@ const emit = defineEmits({
 
 const filterData = computed(() => {
   let filterData = [];
-  props.filters.forEach((filter) => {
+  props.filters?.forEach((filter) => {
     if (filter.multiNames) {
       const exist = filterData.find((f) => f.name === filter.multiNames[0]);
       if (!exist) {

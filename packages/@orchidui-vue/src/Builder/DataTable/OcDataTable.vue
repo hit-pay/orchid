@@ -273,8 +273,8 @@ const displayFilterData = computed(() => {
         });
 
         let optionLabel = "";
-        if (typeof option.name === "object") {
-          option.name.forEach((formName) => {
+        if (option && typeof option.name === "object") {
+          option.name?.forEach((formName) => {
             if (optionLabel) {
               optionLabel += " - ";
             }
@@ -294,13 +294,13 @@ const displayFilterData = computed(() => {
               .map(
                 (selectedValue) =>
                   option.props.options.find(
-                    ({ value }) => value === selectedValue,
-                  )?.label,
+                    ({ value }) => value === selectedValue
+                  )?.label
               )
               .join(", ");
           }
 
-          if (option.type === "DatePicker") {
+          if (option && option.type === "DatePicker") {
             if (
               option?.props?.type === "range" &&
               option.name &&
@@ -322,7 +322,7 @@ const displayFilterData = computed(() => {
           }
 
           let label = `${option?.props?.label} : ${optionLabel}`;
-          if (typeof option.name === "object") {
+          if (option && option.name && typeof option.name === "object") {
             const exist = display.find((f) => f.name === isMultiNames[0]);
             if (exist) {
               label = ``;
