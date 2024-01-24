@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, useAttrs, watch } from "vue";
+import { computed, ref, useAttrs } from "vue";
 import { BaseInput, Icon } from "@/orchidui";
 import { pickEventListeners } from "@/orchidui/Form/Input/inputHelper.js";
 
@@ -125,17 +125,6 @@ const inputClasses = computed(() => [
     : "border-oc-gray-200 shadow-oc-gray-200",
   props.disabled ? "bg-oc-bg-dark pointer-events-none" : "bg-oc-bg-light",
 ]);
-
-watch(
-  () => props.modelValue,
-  () => {
-    if (props.formatValue) {
-      updateValue({ target: { value: props.modelValue } });
-    } else {
-      formattedValue.value = props.modelValue;
-    }
-  },
-);
 </script>
 
 <template>
