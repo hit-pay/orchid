@@ -284,7 +284,7 @@ const displayFilterData = computed(() => {
           optionLabel = filterData.value[name];
         }
 
-        if (filterData.value[name]) {
+        if (option && filterData.value[name]) {
           if (option?.props.options) {
             const selectedValuesInArray = option.props.multiple
               ? filterData.value[name]
