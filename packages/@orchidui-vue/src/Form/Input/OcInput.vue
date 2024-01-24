@@ -74,10 +74,7 @@ const props = defineProps({
   },
   formatValue: {
     type: Function,
-  },
-  formatOutput: {
-    type: Function,
-  },
+  }
 });
 
 const emit = defineEmits(["update:modelValue", "blur", "focus"]);
@@ -92,12 +89,12 @@ defineExpose({
   focus: () => inputRef.value.focus(),
 });
 
-const formattedValue = ref(props.modelValue);
+const formattedValue = ref('');
 
 const updateValue = (event) => {
   let output = event.target.value;
 
-  if (typeof props.formatValue === "function") {
+  if(typeof props.formatValue === 'function') {
     output = props.formatValue(output);
   }
 
@@ -105,14 +102,7 @@ const updateValue = (event) => {
   formattedValue.value = output;
 
   // emitting formatted value
-  emit(
-    "update:modelValue",
-    props.formatOutput ? props.formatOutput(output) : output,
-  );
-};
-
-if (props.formatValue) {
-  updateValue({ target: { value: props.modelValue } });
+  emit('update:modelValue', output);
 }
 
 const isFocused = ref(false);
