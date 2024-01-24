@@ -294,8 +294,8 @@ const displayFilterData = computed(() => {
               .map(
                 (selectedValue) =>
                   option.props.options.find(
-                    ({ value }) => value === selectedValue
-                  ).label
+                    ({ value }) => value === selectedValue,
+                  )?.label,
               )
               .join(", ");
           }
@@ -321,7 +321,7 @@ const displayFilterData = computed(() => {
               );
           }
 
-          let label = `${option?.props.label} : ${optionLabel}`;
+          let label = `${option?.props?.label} : ${optionLabel}`;
           if (typeof option.name === "object") {
             const exist = display.find((f) => f.name === isMultiNames[0]);
             if (exist) {
