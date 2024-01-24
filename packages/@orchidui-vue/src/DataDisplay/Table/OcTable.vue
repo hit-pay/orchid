@@ -26,6 +26,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  isResponsive: {
+    type: Boolean,
+    default: false,
+  },
   rowLink: String,
 });
 
@@ -40,7 +44,9 @@ const fields = computed(() => props.options.fields);
 const headers = computed(() => props.options.headers);
 
 const getRowKey = computed(() =>
-  typeof props.rowKey === "function" ? props.rowKey : (row) => row[props.rowKey]
+  typeof props.rowKey === "function"
+    ? props.rowKey
+    : (row) => row[props.rowKey],
 );
 
 const selectedRows = computed({
@@ -54,12 +60,12 @@ const selectedRows = computed({
 
 const selectRow = (row) => {
   const selectingRow = selectedRows.value.find(
-    (r) => getRowKey.value(r) === getRowKey.value(row)
+    (r) => getRowKey.value(r) === getRowKey.value(row),
   );
 
   if (selectingRow) {
     selectedRows.value = selectedRows.value.filter(
-      (r) => getRowKey.value(r) !== getRowKey.value(row)
+      (r) => getRowKey.value(r) !== getRowKey.value(row),
     );
   } else {
     selectedRows.value = [...selectedRows.value, row];
@@ -108,8 +114,11 @@ onMounted(() => onScroll());
 <template>
   <div
     ref="scrollTable"
-    class="flex text-oc-text flex-col md:rounded border border-oc-gray-200 isolate"
-    :class="isSticky ? 'overflow-x-auto' : 'overflow-hidden'"
+    class="flex text-oc-text flex-col border border-oc-gray-200 isolate"
+    :class="[
+      isSticky ? 'overflow-x-auto' : 'overflow-hidden',
+      isResponsive ? 'rounded' : 'md:rounded',
+    ]"
     @scroll="onScroll"
   >
     <div v-if="$slots.before" class="border-b border-oc-gray-200">
@@ -117,7 +126,13 @@ onMounted(() => onScroll());
     </div>
     <div
       class="flex md:border-b-0 border-b border-oc-gray-200"
-      :class="isSticky ? 'w-max' : 'flex-wrap md:flex-nowrap'"
+      :class="
+        isResponsive
+          ? 'w-full'
+          : isSticky
+            ? 'w-max'
+            : 'flex-wrap md:flex-nowrap'
+      "
     >
       <TableHeader
         v-if="isSelectable"
@@ -143,7 +158,7 @@ onMounted(() => onScroll());
         :variant="header.headerVariant"
         :is-sticky="isSticky"
         :class="[
-          isSticky ? 'flex' : 'hidden md:flex',
+          isSticky || isResponsive ? 'flex md:min-h-auto' : 'hidden md:flex',
           header.stickyLeft && isSelectable
             ? 'left-[40px] md:left-[32px]'
             : 'left-0',
@@ -192,14 +207,17 @@ onMounted(() => onScroll());
         }"
       >
         <div
-          class="flex relative group/row md:p-0 py-3"
+          class="flex relative group/row md:p-0 py-3 min-h-[58px]"
           :class="[
             {
               'pl-[40px]': isSelectable,
-              'flex-wrap md:flex-nowrap': !isSticky,
-              'w-max !p-0': isSticky,
               'cursor-pointer': isCursorPointer,
             },
+            isResponsive
+              ? 'w-full'
+              : isSticky
+                ? 'w-max !p-0'
+                : 'flex-wrap md:flex-nowrap',
             calculateRowClass(field, i),
           ]"
         >
