@@ -91,7 +91,6 @@ const selectedMonth = computed(() => {
 const isStartDateSet = ref(false);
 const selectDay = (day) => {
   let currentMonth = dayjs(selectedDate.value).date(day);
-
   if (props.type !== "range") {
     currentMonth = currentMonth.year(dayjs(selectedStartDate.value).year())
         .month(dayjs(selectedStartDate.value).month());
@@ -143,7 +142,9 @@ const clearDate = () => {
         : null
       : null;
   emit("resetCalendar");
-};const prevMonth = () => {
+};
+
+const prevMonth = () => {
   selectedDate.value = dayjs(selectedDate.value).subtract(1, 'month');
   selectedStartDay.value = dayjs(selectedDate.value).month() === dayjs(selectedStartDate.value).month()
       ? dayjs(selectedStartDate.value).date()
