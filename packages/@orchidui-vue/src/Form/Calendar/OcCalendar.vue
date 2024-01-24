@@ -1,14 +1,16 @@
 <script setup>
 import { Button, Icon } from "@/orchidui";
-import { computed, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import dayjs from "dayjs";
 import isBetween from "dayjs/plugin/isBetween";
-import isSameOrBefore from "dayjs/plugin/isSameOrBefore"
-import isSameOrAfter from "dayjs/plugin/isSameOrAfter"
+import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
+import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
+import customParseFormat from "dayjs/plugin/customParseFormat";
 
 dayjs.extend(isBetween);
 dayjs.extend(isSameOrBefore);
 dayjs.extend(isSameOrAfter);
+dayjs.extend(customParseFormat);
 
 const props = defineProps({
   type: {
@@ -31,9 +33,7 @@ const props = defineProps({
     type: [String, Date, Number, Array],
     default: null,
     validator: (val) =>
-      Array.isArray(val)
-        ? dayjs(val[0]).isSameOrBefore(dayjs(val[1]))
-          : true,
+      Array.isArray(val) ? dayjs(val[0]).isSameOrBefore(dayjs(val[1])) : true,
   },
   disabledDate: {
     type: Function,
@@ -52,54 +52,47 @@ const selectedStartDate = ref(selectedDate.value);
 
 const selectedEndDate = ref(
   props.type === "range"
-    ? dayjs(props.modelValue[1]) ||
-      dayjs(selectedStartDate.value).add(2, 'day')
-      : null,
-);
-
-const selectedStartDay = ref(
-selectedStartDate.value.isSame(selectedDate.value, 'month')
-        ? dayjs(selectedStartDate.value).date()
-        : null
-);
-const selectedEndDay = ref(
-  props.type === "range"
-    ? selectedEndDate.value?.month() === selectedDate.value?.month()
-      ? selectedEndDate.value.toDate()
-      : null
+    ? dayjs(props.modelValue[1] ?? selectedStartDate.value.add(2, "day"))
     : null,
 );
 
+const selectedStartDay = ref(
+  selectedStartDate.value.isSame(selectedDate.value, "month")
+    ? dayjs(selectedStartDate.value).date()
+    : null,
+);
+const selectedEndDay = ref(
+  props.type === "range"
+    ? selectedEndDate.value.month() === selectedDate.value.month()
+      ? selectedEndDate.value.date()
+      : null
+    : null,
+);
+onMounted(() => {
+  console.log(props.modelValue);
+});
 const daysInMonth = computed(() => {
-  const date =
-    props.type === "range" ? selectedDate.value : selectedStartDate.value;
+  const date = selectedDate.value;
 
-  const lastDay = dayjs(date).endOf('month').date()
+  const lastDay = date.endOf("month").date();
 
   return Array.from({ length: lastDay }, (_, i) => i + 1);
 });
 
 const selectedMonth = computed(() => {
-  if (props.type === "range") {
-    return selectedDate.value.format("MMMM YYYY");
-  }
-  if (selectedStartDate.value) {
-    return selectedStartDate.value.format("MMMM YYYY");
-  }
-  return "";
+  return selectedDate.value.format("MMMM YYYY");
 });
 const isStartDateSet = ref(false);
 const selectDay = (day) => {
-  let currentMonth = dayjs(selectedDate.value).date(day);
   if (props.type !== "range") {
-    currentMonth = currentMonth.year(dayjs(selectedStartDate.value).year())
-        .month(dayjs(selectedStartDate.value).month());
+    let currentMonth = dayjs(selectedMonth.value, "MMMM YYYY").date(day);
 
     selectedStartDay.value = day;
     selectedStartDate.value = currentMonth;
     selectedEndDay.value = null;
     selectedEndDate.value = null;
   } else {
+    let currentMonth = selectedDate.value.date(day);
     isStartDateSet.value = selectedStartDay.value === selectedEndDay.value;
 
     if (!isStartDateSet.value) {
@@ -124,11 +117,10 @@ const selectDay = (day) => {
 
 const clearDate = () => {
   if (props.type === "range") {
-    selectedStartDate.value = dayjs(props.modelValue[0]) || dayjs();
-    selectedEndDate.value =
-        dayjs(props.modelValue[1]) || dayjs().add(2, 'day');
+    selectedStartDate.value = dayjs(props.modelValue[0] ?? undefined);
+    selectedEndDate.value = dayjs(props.modelValue[1]) || dayjs().add(2, "day");
   } else {
-    selectedStartDate.value = dayjs(props.modelValue) || dayjs();
+    selectedStartDate.value = dayjs(props.modelValue ?? undefined);
   }
 
   selectedStartDay.value =
@@ -145,68 +137,98 @@ const clearDate = () => {
 };
 
 const prevMonth = () => {
-  selectedDate.value = dayjs(selectedDate.value).subtract(1, 'month');
-  selectedStartDay.value = dayjs(selectedDate.value).month() === dayjs(selectedStartDate.value).month()
-      ? dayjs(selectedStartDate.value).date()
+  selectedDate.value = selectedDate.value.subtract(1, "month");
+  selectedStartDay.value =
+    selectedDate.value.month() === selectedStartDate.value.month()
+      ? selectedStartDate.value.date()
       : null;
-  selectedEndDay.value = dayjs(selectedDate.value).month() === dayjs(selectedEndDate.value).month()
+  selectedEndDay.value =
+    dayjs(selectedDate.value).month() === dayjs(selectedEndDate.value).month()
       ? dayjs(selectedEndDate.value).date()
       : null;
 };
 
 const nextMonth = () => {
-  selectedDate.value = dayjs(selectedDate.value).add(1, 'month');
-  selectedStartDay.value = dayjs(selectedDate.value).month() === dayjs(selectedStartDate.value).month()
+  selectedDate.value = selectedDate.value.add(1, "month");
+  selectedStartDay.value =
+    dayjs(selectedDate.value).month() === dayjs(selectedStartDate.value).month()
       ? dayjs(selectedStartDate.value).date()
       : null;
-  selectedEndDay.value = dayjs(selectedDate.value).month() === dayjs(selectedEndDate.value).month()
+  selectedEndDay.value =
+    dayjs(selectedDate.value).month() === dayjs(selectedEndDate.value).month()
       ? dayjs(selectedEndDate.value).date()
       : null;
 };
 
 const isDaySelected = (day) => {
-  return selectedStartDay.value === day || selectedEndDay.value === day;
+  return (
+    (selectedStartDay.value === day &&
+      dayjs(selectedMonth.value, "MMMM YYYY").isSame(
+        selectedStartDate.value,
+        "month",
+      )) ||
+    (selectedEndDay.value === day &&
+      dayjs(selectedMonth.value, "MMMM YYYY").isSame(
+        selectedEndDate.value,
+        "month",
+      ))
+  );
 };
 
 const isDayInRange = (day) => {
   if (props.type === "range") {
-    const currentDate = dayjs(selectedDate.value).date(day);
+    const currentDate = selectedDate.value.date(day);
     return (
-        isDaySelected(day) ||
-        currentDate.isBetween(selectedStartDate.value, selectedEndDate.value, null, '[]')
+      isDaySelected(day) ||
+      currentDate.isBetween(
+        selectedStartDate.value,
+        selectedEndDate.value,
+        null,
+        "[]",
+      )
     );
   }
-  return selectedStartDay.value && selectedEndDay.value && selectedStartDay.value <= day && selectedEndDay.value >= day;
+  return (
+    selectedStartDay.value &&
+    selectedEndDay.value &&
+    selectedStartDay.value <= day &&
+    selectedEndDay.value >= day
+  );
 };
 
 const isDayDisabled = (day) => {
   const currentDate = dayjs(selectedDate.value).date(day);
   return (
-      props.disabledDate(currentDate.toDate()) ||
-      (props.minDate && currentDate.isBefore(dayjs(props.minDate))) ||
-      (props.maxDate && currentDate.isAfter(dayjs(props.maxDate).add(60, 'second')))
+    props.disabledDate(currentDate.toDate()) ||
+    (props.minDate && currentDate.isBefore(dayjs(props.minDate))) ||
+    (props.maxDate &&
+      currentDate.isAfter(dayjs(props.maxDate).add(60, "second")))
   );
 };
 
 const getRangeDates = () => {
-  return [selectedStartDate.value, selectedEndDate.value].sort((a, b) => a.isBefore(b) ? -1 : 1);
+  return [selectedStartDate.value, selectedEndDate.value].sort((a, b) =>
+    a.isBefore(b) ? -1 : 1,
+  );
 };
 
 const doneSelecting = () => {
   if (props.type === "range") {
-    if (isDayDisabled(selectedStartDate.value.toDate()) || isDayDisabled(selectedEndDate.value.toDate())) {
+    if (
+      isDayDisabled(selectedStartDate.value.toDate()) ||
+      isDayDisabled(selectedEndDate.value.toDate())
+    ) {
       return;
     }
   }
 
   emit(
-      "update:modelValue",
-      props.type === "range"
-          ? getRangeDates().map(date => date.toDate())
-          : selectedStartDate.value.toDate()
+    "update:modelValue",
+    props.type === "range"
+      ? getRangeDates().map((date) => date.toDate())
+      : selectedStartDate.value.toDate(),
   );
 };
-
 </script>
 
 <template>
