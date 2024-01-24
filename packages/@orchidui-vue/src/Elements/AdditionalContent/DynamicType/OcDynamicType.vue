@@ -24,13 +24,20 @@ defineEmits(["addCustomer"]);
           : ''
       "
     >
-      <OverviewItem
-        v-for="(field, j) in box.items"
-        :key="`${i}-${j}`"
-        is-transparent
-        :title="field.title"
-        :content="field.content"
+      <slot
+        v-if="$slots[box.slot]"
+        :name="box.slot"
+        :data="{ ...box, key: i }"
       />
+      <template v-else>
+        <OverviewItem
+          v-for="(field, j) in box.items"
+          :key="`${i}-${j}`"
+          is-transparent
+          :title="field.title"
+          :content="field.content"
+        />
+      </template>
       <div v-if="box.showInfo" class="p-2">
         <Tooltip>
           <Icon

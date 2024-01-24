@@ -5,7 +5,9 @@ const TableOptions = {
       key: "image",
       variant: "image",
       label: "Image",
-      class: "w-1/2 md:w-[5%]",
+      class: (field) => {
+        return "w-1/2 md:w-[5%]";
+      },
     },
     {
       key: "col1",
@@ -41,7 +43,7 @@ const TableOptions = {
       key: "col6",
       label: "Header",
       class: "w-2/6 md:w-[10%]",
-      disableClickRow: true
+      disableClickRow: true,
     },
     {
       key: "actions",
@@ -62,7 +64,7 @@ const TableOptions = {
       col4: "Table Cell column two",
       col5: "Label",
       col6: false,
-      link: "https://orchidui.vercel.app/storybook/"
+      link: "https://orchidui.vercel.app/storybook/",
     },
     {
       image: "",

@@ -41,7 +41,7 @@ defineProps({
       </div>
 
       <div class="flex items-end gap-x-2">
-        <Icon :name="icon" :class="iconClass" />
+        <Icon v-if="icon" :name="icon" :class="iconClass" />
         <span class="text-lg font-medium">{{ iconText }}</span>
       </div>
     </div>

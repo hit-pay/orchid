@@ -74,7 +74,11 @@ const copyLink = async () => {
       :customer="customer"
       :is-customer="isCustomer"
       @add-customer="$emit('addCustomer')"
-    />
+    >
+      <template v-for="box in boxes" v-slot:[box.slot]="{ data }">
+        <slot :name="box.slot" :data="data"></slot>
+      </template>
+    </DynamicType>
 
     <BalanceOverview
       v-else-if="variant === 'balance'"
