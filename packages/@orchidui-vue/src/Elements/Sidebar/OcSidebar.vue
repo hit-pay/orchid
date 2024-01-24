@@ -67,7 +67,7 @@ onMounted(() => {
 
 <template>
   <div
-    class="cursor-pointer max-h-[inherit] transition-all duration-500 relative bg-[var(--oc-sidebar-background)]"
+    class="cursor-pointer max-h-[inherit] transition-all duration-300 ease-in-out relative bg-[var(--oc-sidebar-background)]"
     :class="allClassName"
   >
     <button
@@ -81,7 +81,7 @@ onMounted(() => {
     >
       <Icon width="20" height="20" name="arrow-left-2" />
     </button>
-    <div class="grid py-8 max-h-[inherit] overflow-auto gap-3 px-8">
+    <div class="grid py-8 w-full max-h-[inherit] overflow-auto gap-3 px-8">
       <slot name="before" :is-expanded="isExpanded" />
 
       <template v-for="(sidebar, index) in sidebarMenu" :key="index">
@@ -176,15 +176,15 @@ onMounted(() => {
                 </template>
               </Dropdown>
 
-              <transition
-                tag="div"
-                class="transition-all duration-500"
-                leave-active-class="opacity-0"
-                enter-from-class="opacity-0"
-                enter-to-class="opacity-100"
-              >
-                <slot v-if="isExpanded" name="label" :menu="menu" />
-              </transition>
+              <!--              <transition-->
+              <!--                tag="div"-->
+              <!--                class="transition-all duration-500"-->
+              <!--                leave-active-class="opacity-0"-->
+              <!--                enter-from-class="opacity-0"-->
+              <!--                enter-to-class="opacity-100"-->
+              <!--              >-->
+              <slot v-if="isExpanded" name="label" :menu="menu" />
+              <!--              </transition>-->
             </div>
             <div v-if="isExpanded" class="relative flex flex-col">
               <div class="absolute border-l left-[27px] bottom-[17px] h-full" />
