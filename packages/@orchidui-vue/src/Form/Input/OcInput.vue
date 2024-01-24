@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, useAttrs, watch } from "vue";
+import { computed, ref, useAttrs } from "vue";
 import { BaseInput, Icon } from "@/orchidui";
 import { pickEventListeners } from "@/orchidui/Form/Input/inputHelper.js";
 
@@ -72,12 +72,6 @@ const props = defineProps({
     type: Object,
     default: () => ({}),
   },
-  formatValue: {
-    type: Function,
-  },
-  formatOutput: {
-    type: Function,
-  },
 });
 
 const emit = defineEmits(["update:modelValue", "blur", "focus"]);
@@ -92,29 +86,6 @@ defineExpose({
   focus: () => inputRef.value.focus(),
 });
 
-const formattedValue = ref(props.modelValue);
-
-const updateValue = (event) => {
-  let output = event.target.value;
-
-  if (typeof props.formatValue === "function") {
-    output = props.formatValue(output);
-  }
-
-  // updating displayed value
-  formattedValue.value = output;
-
-  // emitting formatted value
-  emit(
-    "update:modelValue",
-    props.formatOutput ? props.formatOutput(output) : output,
-  );
-};
-
-if (props.formatValue) {
-  updateValue({ target: { value: props.modelValue } });
-}
-
 const isFocused = ref(false);
 const inputClasses = computed(() => [
   {
@@ -125,17 +96,6 @@ const inputClasses = computed(() => [
     : "border-oc-gray-200 shadow-oc-gray-200",
   props.disabled ? "bg-oc-bg-dark pointer-events-none" : "bg-oc-bg-light",
 ]);
-
-watch(
-  () => props.modelValue,
-  () => {
-    if (props.formatValue) {
-      updateValue({ target: { value: props.modelValue } });
-    } else {
-      formattedValue.value = props.modelValue;
-    }
-  },
-);
 </script>
 
 <template>
@@ -176,8 +136,8 @@ watch(
 
           <input
             ref="inputRef"
-            v-model="formattedValue"
             :type="inputType"
+            :value="modelValue"
             :readonly="isReadonly"
             :placeholder="placeholder"
             :disabled="disabled"
@@ -191,7 +151,7 @@ watch(
               isFocused = false;
               $emit('blur');
             "
-            @input="updateValue"
+            @input="$emit('update:modelValue', $event.target.value)"
           />
         </div>
       </div>
