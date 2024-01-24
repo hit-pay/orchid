@@ -412,4 +412,27 @@ onMounted(() => {
 .ql-editor {
   @apply min-h-[200px];
 }
+
+ol li {
+  counter-reset: list-1 list-2 list-3 list-4 list-5 list-6 list-7 list-8 list-9;
+  counter-increment: list-0;
+  padding-left: 1.5rem;
+
+  &:before {
+    display: inline-block;
+    white-space: nowrap;
+    width: 1.2em;
+    margin-left: -1.5em;
+    margin-right: 0.3em;
+    text-align: right;
+  }
+
+  &[data-list="bullet"]:before {
+    content: "•";
+  }
+
+  &[data-list="ordered"]:before {
+    content: counter(list-0, decimal) ". ";
+  }
+}
 </style>
