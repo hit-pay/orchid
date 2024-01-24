@@ -273,19 +273,20 @@ const displayFilterData = computed(() => {
         });
 
         let optionLabel = "";
-        if (typeof option.name === "object") {
-          option.name.forEach((formName) => {
-            if (optionLabel) {
-              optionLabel += " - ";
-            }
-            optionLabel += filterData.value[formName.key];
-          });
-        } else {
-          optionLabel = filterData.value[name];
-        }
 
-        if (filterData.value[name]) {
-          if (option?.props.options) {
+        if (option && filterData.value[name]) {
+          if (typeof option.name === "object") {
+            option.name?.forEach((formName) => {
+              if (optionLabel) {
+                optionLabel += " - ";
+              }
+              optionLabel += filterData.value[formName.key];
+            });
+          } else {
+            optionLabel = filterData.value[name];
+          }
+
+          if (option.props.options) {
             const selectedValuesInArray = option.props.multiple
               ? filterData.value[name]
               : [filterData.value[name]];
@@ -294,8 +295,8 @@ const displayFilterData = computed(() => {
               .map(
                 (selectedValue) =>
                   option.props.options.find(
-                    ({ value }) => value === selectedValue,
-                  )?.label,
+                    ({ value }) => value === selectedValue
+                  )?.label
               )
               .join(", ");
           }
@@ -322,7 +323,7 @@ const displayFilterData = computed(() => {
           }
 
           let label = `${option?.props?.label} : ${optionLabel}`;
-          if (typeof option.name === "object") {
+          if (option && option.name && typeof option.name === "object") {
             const exist = display.find((f) => f.name === isMultiNames[0]);
             if (exist) {
               label = ``;
