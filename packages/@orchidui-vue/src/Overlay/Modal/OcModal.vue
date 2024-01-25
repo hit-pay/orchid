@@ -100,7 +100,6 @@ const sizeClasses = computed(() => ({
     <div
       class="shadow-normal w-[calc(100%-40px)] bg-oc-bg-light rounded-xl flex flex-col max-h-screen overflow-y-auto"
       :class="sizeClasses[size]"
-      @click.stop
     >
       <div
         class="flex border-oc-gray-200 gap-x-9 justify-between p-5 items-start"
