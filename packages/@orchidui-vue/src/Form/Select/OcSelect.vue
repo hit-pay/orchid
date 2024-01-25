@@ -55,7 +55,9 @@ const props = defineProps({
   },
   popperOptions: {
     type: Object,
-    default: () => ({}),
+    default: () => ({
+      strategy: "fixed",
+    }),
   },
 });
 
@@ -83,7 +85,7 @@ const filterableOptions = computed(
   () =>
     (props.isAsynchronousSearch
       ? props.options
-      : filterOptions(props.options, query.value)) || [],
+      : filterOptions(props.options, query.value)) || []
 );
 
 const localValueOption = computed(() => {
@@ -116,7 +118,7 @@ const filterOptions = (options, query) => {
   for (const option of options) {
     if (option.values) {
       const filteredGroup = option.values.filter((subOption) =>
-        subOption.label.toLowerCase().includes(query.toLowerCase()),
+        subOption.label.toLowerCase().includes(query.toLowerCase())
       );
 
       if (filteredGroup.length > 0) {
@@ -139,7 +141,7 @@ const selectOption = (option) => {
 
   if (props.multiple) {
     const isOptionHasBeenSelected = (props.modelValue || []).find(
-      (o) => o === option.value,
+      (o) => o === option.value
     );
 
     if (
@@ -166,7 +168,7 @@ const selectOption = (option) => {
 const removeOption = (value) => {
   emit(
     "update:modelValue",
-    (props.modelValue || []).filter((o) => o !== value),
+    (props.modelValue || []).filter((o) => o !== value)
   );
 };
 const selectAll = () => {
@@ -176,7 +178,7 @@ const selectAll = () => {
     } else {
       emit(
         "update:modelValue",
-        filterableOptions.value.map((o) => o.value),
+        filterableOptions.value.map((o) => o.value)
       );
     }
   }
