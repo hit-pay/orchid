@@ -57,9 +57,10 @@ const argTypes = {
       ],
       "4 Fields": [
         {
-          showInfo: false,
+          showInfo: true,
           infoTooltip: "Tooltip",
-          style: "!grid-cols-2",
+          infoTooltipStyle: "absolute right-3",
+          style: "!grid-cols-2 relative pr-10",
           slot: "Box",
           items: [
             {
