@@ -38,7 +38,7 @@ defineEmits(["addCustomer"]);
           :content="field.content"
         />
       </template>
-      <div v-if="box.showInfo" class="p-2">
+      <div v-if="box.showInfo" class="p-2" :class="box.infoTooltipStyle">
         <Tooltip>
           <Icon
             width="16"
