@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, useAttrs } from "vue";
+import { computed, ref, useAttrs, watch } from "vue";
 import { BaseInput, Icon } from "@/orchidui";
 import { pickEventListeners } from "@/orchidui/Form/Input/inputHelper.js";
 
@@ -91,8 +91,8 @@ defineExpose({
 
 const formattedValue = ref('');
 
-const updateValue = (event) => {
-  let output = event.target.value;
+const updateValue = (value) => {
+  let output = value;
 
   if(typeof props.formatValue === 'function') {
     output = props.formatValue(output);
@@ -104,6 +104,12 @@ const updateValue = (event) => {
   // emitting formatted value
   emit('update:modelValue', output);
 }
+
+watch(
+  () => props.modelValue,
+  (value) => updateValue(value),
+  { immediate: true }
+)
 
 const isFocused = ref(false);
 const inputClasses = computed(() => [
@@ -170,7 +176,7 @@ const inputClasses = computed(() => [
               isFocused = false;
               $emit('blur');
             "
-            @input="updateValue"
+            @input="updateValue($event.target.value)"
           />
         </div>
       </div>
