@@ -1,16 +1,6 @@
 import { Theme, DatePicker, Calendar } from "@/orchidui";
 import dayjs from "dayjs";
-import customParseFormat from "dayjs/plugin/customParseFormat";
 import { ref } from "vue";
-import isBetween from "dayjs/plugin/isBetween";
-import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
-import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
-
-dayjs.extend(isBetween);
-dayjs.extend(isSameOrBefore);
-dayjs.extend(isSameOrAfter);
-
-dayjs.extend(customParseFormat);
 
 export default {
   components: { Calendar },
