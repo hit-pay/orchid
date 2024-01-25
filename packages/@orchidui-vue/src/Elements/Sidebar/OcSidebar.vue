@@ -81,7 +81,9 @@ onMounted(() => {
     >
       <Icon width="20" height="20" name="arrow-left-2" />
     </button>
-    <div class="grid py-8 w-full max-h-[inherit] overflow-auto gap-3 px-8">
+    <div
+      class="grid py-8 w-full max-h-[inherit] overflow-y-auto overflow-x-hidden gap-3 px-8"
+    >
       <slot name="before" :is-expanded="isExpanded" />
 
       <template v-for="(sidebar, index) in sidebarMenu" :key="index">
