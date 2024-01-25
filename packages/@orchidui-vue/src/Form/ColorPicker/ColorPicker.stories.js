@@ -18,7 +18,6 @@ export const Default = {
     template: `
           <div class="h-[400px]">
             <ColorPicker v-model="modelValue"/>
-            <ColorPicker v-model="modelValue"/>
           </div>`,
   }),
 };
