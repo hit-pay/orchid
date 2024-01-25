@@ -74,10 +74,12 @@ const props = defineProps({
   },
   formatValue: {
     type: Function,
+    validator: (value) => typeof value === "function",
     default: null,
   },
   formatOutput: {
     type: Function,
+    validator: (value) => typeof value === "function",
     default: null,
   },
 });
@@ -116,15 +118,19 @@ const inputValue = computed(() => {
 const updateValue = ($event) => {
   let value = $event.target.value;
 
-  if (props.formatValue) {
-    value = props.formatValue(value);
-  }
+  try {
+    if (props.formatValue) {
+      value = props.formatValue(value);
+    }
 
-  if (props.formatOutput) {
-    value = props.formatOutput(value);
-  }
+    if (props.formatOutput) {
+      value = props.formatOutput(value);
+    }
 
-  emit("update:modelValue", value);
+    emit("update:modelValue", value);
+  } catch {
+    emit("update:modelValue", null);
+  }
 };
 </script>
 
