@@ -22,7 +22,12 @@ const props = defineProps({
     type: String,
     default: "bottom-start",
   },
-  popperOptions: Object,
+  popperOptions: {
+    type: Object,
+    default: () => ({
+      strategy: "fixed",
+    }),
+  },
   popperStyle: Object,
   popperClass: [String, Array, Object],
   modelValue: Boolean,
