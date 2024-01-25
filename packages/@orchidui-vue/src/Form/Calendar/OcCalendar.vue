@@ -68,9 +68,6 @@ const selectedEndDay = ref(
       : null
     : null,
 );
-onMounted(() => {
-  console.log(props.modelValue);
-});
 const daysInMonth = computed(() => {
   const date = selectedDate.value;
 
