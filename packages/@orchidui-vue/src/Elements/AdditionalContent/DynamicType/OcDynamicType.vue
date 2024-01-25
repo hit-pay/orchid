@@ -25,7 +25,7 @@ defineEmits(["addCustomer"]);
       "
     >
       <slot
-        v-if="$slots[box.slot]"
+        v-if="box.slot && $slots[box.slot]"
         :name="box.slot"
         :data="{ ...box, key: i }"
       />
