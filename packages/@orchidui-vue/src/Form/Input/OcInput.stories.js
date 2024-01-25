@@ -333,31 +333,33 @@ export const FormatValue = {
       const formatValue = (value) => {
         let output = value;
 
-        if (Number(value) === 0) return '0.00'
+        if (Number(value) === 0) return "";
 
         // removing non-digit characters
-        output = +(`${output}`.replace(/\D/g, ''))
+        output = +`${output}`.replace(/\D/g, "");
 
-        // 
-        return (output / 100).toLocaleString('en-US', {
+        //
+        return (output / 100).toLocaleString("en-US", {
           minimumFractionDigits: 2,
-          maximumFractionDigits: 2
-        })
-      }
+          maximumFractionDigits: 2,
+        });
+      };
 
-      const handleUpdateModelValue = (value) => {
-        modelValue.value = value.replaceAll(',', '')
-      }
+      const formatOutput = (value) => {
+        return +value.replaceAll(",", "");
+      };
 
-      return { modelValue, args, formatValue, handleUpdateModelValue };
+      return { modelValue, args, formatValue, formatOutput };
     },
     template: `
           <Theme colorMode="light" class="py-4">
+            <pre @click="modelValue = 999999">{{modelValue}}</pre>
             <OCInput
                 v-model="modelValue"
                 :label="args.label"
                 :placeholder="args.placeholder"
                 :formatValue="formatValue"
+                :formatOutput="formatOutput"
             />
           </Theme>
         `,

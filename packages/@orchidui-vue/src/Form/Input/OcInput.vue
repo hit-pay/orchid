@@ -72,6 +72,14 @@ const props = defineProps({
     type: Object,
     default: () => ({}),
   },
+  formatValue: {
+    type: Function,
+    default: null,
+  },
+  formatOutput: {
+    type: Function,
+    default: null,
+  },
 });
 
 const emit = defineEmits(["update:modelValue", "blur", "focus"]);
@@ -96,6 +104,28 @@ const inputClasses = computed(() => [
     : "border-oc-gray-200 shadow-oc-gray-200",
   props.disabled ? "bg-oc-bg-dark pointer-events-none" : "bg-oc-bg-light",
 ]);
+
+const inputValue = computed(() => {
+  if (props.formatValue) {
+    return props.formatValue(props.modelValue);
+  }
+
+  return props.modelValue;
+});
+
+const updateValue = ($event) => {
+  let value = $event.target.value;
+
+  if (props.formatValue) {
+    value = props.formatValue(value);
+  }
+
+  if (props.formatOutput) {
+    value = props.formatOutput(value);
+  }
+
+  emit("update:modelValue", value);
+};
 </script>
 
 <template>
@@ -137,7 +167,7 @@ const inputClasses = computed(() => [
           <input
             ref="inputRef"
             :type="inputType"
-            :value="modelValue"
+            :value="inputValue"
             :readonly="isReadonly"
             :placeholder="placeholder"
             :disabled="disabled"
@@ -151,7 +181,7 @@ const inputClasses = computed(() => [
               isFocused = false;
               $emit('blur');
             "
-            @input="$emit('update:modelValue', $event.target.value)"
+            @input="updateValue"
           />
         </div>
       </div>
