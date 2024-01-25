@@ -43,15 +43,15 @@ export const calendarStory = {
     template: `
           <Theme>
             <div class="flex gap-x-6 justify-around">
-              <div class="gap-y-4 flex flex-col">
+              <div class="gap-y-4 flex flex-col basis-1/2">
                 <span class="text-xl font-bold">Default Calendar</span>
                 <Calendar v-model="modelValue" v-bind="args" type="default"/>
-                <span v-if="modelValue">({{ [modelValue] }})</span>
+                <span v-if="modelValue">{{ modelValue }}</span>
               </div>
-              <div class="gap-y-4 flex flex-col">
+              <div class="gap-y-4 flex flex-col basis-1/2">
                 <span class="text-xl font-bold">Range Calendar</span>
                 <Calendar v-model="rangeModelValue" v-bind="args" type="range"/>
-                <span v-if="rangeModelValue">({{ rangeModelValue }})</span>
+                <span v-if="rangeModelValue">{{ rangeModelValue.toString() }}</span>
               </div>
             </div>
           </Theme>
