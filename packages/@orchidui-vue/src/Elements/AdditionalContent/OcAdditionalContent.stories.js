@@ -1,6 +1,7 @@
-import { AdditionalContent, Theme } from "@/orchidui";
+import { AdditionalContent, OverviewItem, Theme } from "@/orchidui";
 
 export default {
+  components: { OverviewItem },
   component: AdditionalContent,
   tags: ["autodocs"],
 };
@@ -59,6 +60,7 @@ const argTypes = {
           showInfo: false,
           infoTooltip: "Tooltip",
           style: "!grid-cols-2",
+          slot: "Box",
           items: [
             {
               title: "Purpose",
@@ -217,7 +219,7 @@ export const Dynamic = {
   args,
   argTypes,
   render: (args) => ({
-    components: { AdditionalContent, Theme },
+    components: { AdditionalContent, Theme, OverviewItem },
     setup() {
       return { args, argTypes };
     },
@@ -256,7 +258,21 @@ export const Dynamic = {
                 :customer="args.customer"
                 :overview-active-tab="args.overviewActiveTab"
                 @change-tab="args.overviewActiveTab = $event"
-            />
+            >
+              <template #Box="{ data, key }">
+                <OverviewItem
+                    v-for="(field, index) in data.items"
+                    :key="data.key + '-' + index"
+                    is-transparent
+                    :title="field.title"
+                    :content="field.content"
+                >
+                  <template #content>
+                    <div class="text-oc-success-500">{{field.content}}</div>
+                  </template>
+                </OverviewItem>
+              </template>
+            </AdditionalContent>
           </Theme>
         `,
   }),

@@ -50,7 +50,9 @@ defineProps({
           <div
             class="uppercase flex whitespace-nowrap items-start gap-x-3 text-xs text-oc-text-300"
           >
-            {{ content }}
+            <slot name="content">
+              {{ content }}
+            </slot>
           </div>
         </template>
         <template v-else>
@@ -82,9 +84,11 @@ defineProps({
 
           <div class="flex items-center gap-x-2 overflow-hidden">
             <Icon v-if="isCard" width="35" name="payment-methods/visa" />
-            <span :class="isBig ? 'text-xl' : ''" class="truncate">{{
-              content
-            }}</span>
+            <span :class="isBig ? 'text-xl' : ''" class="truncate">
+              <slot name="content">
+                {{ content }}
+              </slot>
+            </span>
           </div>
 
           <slot v-if="$slots.transfer" name="transfer" />

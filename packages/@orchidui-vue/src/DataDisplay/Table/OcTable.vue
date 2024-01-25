@@ -163,7 +163,7 @@ onMounted(() => onScroll());
             ? 'left-[40px] md:left-[32px]'
             : 'left-0',
           header.stickyRight ? 'right-0' : '',
-          header.class,
+          typeof header.class === 'function' ? header.class() : header.class,
           header.stickyLeft || header.stickyRight ? 'sticky shrink-0 z-10' : '',
           header.stickyLeft && !isScrollOnStart ? 'shadow-right-sticky' : '',
           header.stickyRight && !isScrollOnEnd ? 'shadow-left-sticky' : '',
@@ -253,7 +253,9 @@ onMounted(() => onScroll());
             }"
             :chip-options="header.chipOptions"
             :class="[
-              header.class,
+              typeof header.class === 'function'
+                ? header.class(field)
+                : header.class,
               header.stickyLeft && isSelectable
                 ? 'left-[40px] md:left-[32px]'
                 : 'left-0',
