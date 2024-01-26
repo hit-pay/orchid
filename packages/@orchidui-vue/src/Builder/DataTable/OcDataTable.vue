@@ -38,6 +38,7 @@ const props = defineProps({
     Function,
     default: "id",
   },
+  rowLink: String,
 });
 
 const emit = defineEmits({
@@ -71,7 +72,7 @@ const currentPage = ref(props.filter.page);
 const perPage = ref(
   filterOptions.value?.per_page?.key
     ? props.filter[filterOptions.value?.per_page?.key]
-    : props.filter.per_page,
+    : props.filter.per_page
 );
 const defaultQuery =
   props.filter[filterOptions.value?.search?.key]?.trim() ?? "";
@@ -84,8 +85,8 @@ const customPerPageOptions = computed(() =>
       ({
         label: `${perPage}`,
         value: perPage,
-      }) ?? null,
-  ),
+      }) ?? null
+  )
 );
 
 const perPageOptions = computed(() => {
@@ -196,7 +197,7 @@ const changePage = () => {
 const applyFilter = (
   filterForm = null,
   isChangePage = false,
-  changeCursor = "",
+  changeCursor = ""
 ) => {
   if (paginationOption.value && !isChangePage) {
     currentPage.value = 1;
@@ -270,10 +271,22 @@ const displayFilterData = computed(() => {
             return f.name === name;
           }
         });
-        if (filterData.value[name]) {
-          let optionLabel = filterData.value[name];
 
-          if (option?.props.options) {
+        let optionLabel = "";
+
+        if (option && filterData.value[name]) {
+          if (typeof option.name === "object") {
+            option.name?.forEach((formName) => {
+              if (optionLabel) {
+                optionLabel += " - ";
+              }
+              optionLabel += filterData.value[formName.key];
+            });
+          } else {
+            optionLabel = filterData.value[name];
+          }
+
+          if (option.props.options) {
             const selectedValuesInArray = option.props.multiple
               ? filterData.value[name]
               : [filterData.value[name]];
@@ -282,14 +295,10 @@ const displayFilterData = computed(() => {
               .map(
                 (selectedValue) =>
                   option.props.options.find(
-                    ({ value }) => value === selectedValue,
-                  ).label,
+                    ({ value }) => value === selectedValue
+                  )?.label
               )
               .join(", ");
-          }
-
-          if (option.type === "RangeInput") {
-            optionLabel = filterData.value[option.name].join(" - ");
           }
 
           if (option.type === "DatePicker") {
@@ -298,22 +307,23 @@ const displayFilterData = computed(() => {
               option.name &&
               option.name[1]
             ) {
+              const startDate = dayjs(
+                filterData.value[option.name[0].key]
+              ).format("MM/DD/YYYY");
+              const endDate = dayjs(
+                filterData.value[option.name[1].key]
+              ).format("MM/DD/YYYY");
+
               optionLabel =
-                dayjs(filterData.value[option.name[0].key]).format(
-                  "MMM DD, YYYY",
-                ) +
-                " - " +
-                dayjs(filterData.value[option.name[1].key]).format(
-                  "MMM DD, YYYY",
-                );
+                startDate === endDate ? startDate : startDate + " - " + endDate;
             } else
               optionLabel = dayjs(filterData.value[option.name]).format(
-                "MM/DD/YYYY",
+                "MM/DD/YYYY"
               );
           }
 
-          let label = `${option?.props.label} : ${optionLabel}`;
-          if (typeof option.name === "object") {
+          let label = `${option?.props?.label} : ${optionLabel}`;
+          if (option && option.name && typeof option.name === "object") {
             const exist = display.find((f) => f.name === isMultiNames[0]);
             if (exist) {
               label = ``;
@@ -343,6 +353,7 @@ const displayFilterData = computed(() => {
       :is-loading="isLoading"
       :loading-rows="perPage"
       :row-class="rowClass"
+      :row-link="rowLink"
       :is-sticky="tableOptions.isSticky"
       class="min-h-[600px]"
       @update:selected="$emit('update:selected', $event)"
@@ -463,18 +474,27 @@ const displayFilterData = computed(() => {
         v-model="currentPage"
         class="justify-center"
         :max-page="paginationOption.last_page"
+        :strategy="paginationOption.strategy"
         total-visible="5"
         @update:model-value="changePage"
       />
       <div v-if="cursorOption" class="flex w-full gap-5">
         <PrevNext
           :disabled="!cursorOption.prev"
-          @click="applyFilter(null, false, cursorOption.prev)"
+          @click="
+            cursorOption.prev
+              ? applyFilter(null, false, cursorOption.prev)
+              : null
+          "
         />
         <PrevNext
           :disabled="!cursorOption.next"
           is-next
-          @click="applyFilter(null, false, cursorOption.next)"
+          @click="
+            cursorOption.next
+              ? applyFilter(null, false, cursorOption.next)
+              : null
+          "
         />
       </div>
       <div class="hidden md:flex items-center">

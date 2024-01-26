@@ -1,9 +1,6 @@
 import { Theme, DatePicker, Calendar } from "@/orchidui";
 import dayjs from "dayjs";
-import customParseFormat from "dayjs/plugin/customParseFormat";
 import { ref } from "vue";
-
-dayjs.extend(customParseFormat);
 
 export default {
   components: { Calendar },
@@ -42,7 +39,7 @@ export const Default = {
     setup() {
       // Disable date after next week
       const checkDisableDate = (value) => {
-        return dayjs().add(7, "day").isBefore(new Date(value));
+        return dayjs().add(7, "day").isBefore(dayjs(value));
       };
       const model = ref("");
 

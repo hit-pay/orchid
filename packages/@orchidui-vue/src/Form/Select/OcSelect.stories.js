@@ -38,9 +38,64 @@ export const Default = {
         label: "Option 4",
         value: 4,
       },
+      {
+        label: "Option 1",
+        subLabel: "sub label of Option 1",
+        value: 1,
+      },
+      {
+        label: "Option 2",
+        subLabel: "sub label of Option 2",
+        value: 2,
+      },
+      {
+        label: "Option 3",
+        value: 3,
+      },
+      {
+        label: "Option 4",
+        value: 4,
+      },
+      {
+        label: "Option 1",
+        subLabel: "sub label of Option 1",
+        value: 1,
+      },
+      {
+        label: "Option 2",
+        subLabel: "sub label of Option 2",
+        value: 2,
+      },
+      {
+        label: "Option 3",
+        value: 3,
+      },
+      {
+        label: "Option 4",
+        value: 4,
+      },
+      {
+        label: "Option 1",
+        subLabel: "sub label of Option 1",
+        value: 1,
+      },
+      {
+        label: "Option 2",
+        subLabel: "sub label of Option 2",
+        value: 2,
+      },
+      {
+        label: "Option 3",
+        value: 3,
+      },
+      {
+        label: "Option 4",
+        value: 4,
+      },
     ],
     isFilterable: true,
-    isAddNew: true,
+    isAsynchronousSearch: true,
+    isAddNew: false,
     isDisabled: false,
     isRequired: false,
     labelIcon: "",
@@ -69,12 +124,14 @@ export const Default = {
                   :is-inline-label="args.isInlineLabel"
                   :hint="args.hint"
                   :is-filterable="args.isFilterable"
+                  :is-asynchronous-search="args.isAsynchronousSearch"
                   :is-add-new="args.isAddNew"
                   :placeholder="args.placeholder"
                   :isRequired="args.isRequired"
                   :tooltip-options="args.tooltipOptions"
                   :label-icon="args.labelIcon"
                   :tooltip-text="args.tooltipText"
+                  @on-search-keywords="(query) => console.log(query)"
               />
             </div>
           </Theme>

@@ -1,8 +1,8 @@
 <script setup>
-import { reactive, onMounted, computed } from "vue";
-import { Icon, SidebarSubmenu, Tooltip } from "@/orchidui";
+import { ref, reactive, onMounted, computed } from "vue";
+import { Icon, SidebarSubmenu, Dropdown } from "@/orchidui";
 
-const emit = defineEmits(["changeExpanded"]);
+const emit = defineEmits(["changeExpanded", "click:sidebar-icon"]);
 
 const props = defineProps({
   class: {
@@ -17,6 +17,8 @@ const props = defineProps({
   },
 });
 
+const dropdownOpen = ref([]);
+
 const state = reactive({
   loading: true,
   expanded: [],
@@ -27,15 +29,6 @@ const expandMenu = (id) => {
     state.expanded.push(id);
   } else {
     state.expanded = state.expanded.filter((menuId) => menuId !== id);
-  }
-};
-
-const togglePopover = (e) => {
-  try {
-    const target = e?.target;
-    if (target) target.click();
-  } catch (error) {
-    console.error("An error occurred:", error);
   }
 };
 
@@ -74,7 +67,7 @@ onMounted(() => {
 
 <template>
   <div
-    class="py-8 cursor-pointer transition-all duration-500 relative bg-[var(--oc-sidebar-background)] border-r"
+    class="cursor-pointer max-h-[inherit] transition-all duration-300 ease-in-out relative bg-[var(--oc-sidebar-background)]"
     :class="allClassName"
   >
     <button
@@ -88,7 +81,9 @@ onMounted(() => {
     >
       <Icon width="20" height="20" name="arrow-left-2" />
     </button>
-    <div class="grid gap-3 px-8 overflow-y-auto max-h-screen pb-[100px]">
+    <div
+      class="grid py-8 w-full max-h-[inherit] overflow-y-auto overflow-x-hidden gap-3 px-8"
+    >
       <slot name="before" :is-expanded="isExpanded" />
 
       <template v-for="(sidebar, index) in sidebarMenu" :key="index">
@@ -128,25 +123,21 @@ onMounted(() => {
                 :name="menu.icon"
               />
 
-              <Tooltip
+              <Dropdown
                 v-else
-                class="relative flex"
-                arrow-hidden
-                position="right-start"
-                :distance="20"
-                trigger="click"
+                v-model="dropdownOpen[menu.name + '-' + menuIndex]"
+                placement="right-start"
+                @update:model-value="$emit('click:sidebar-icon', menu)"
               >
                 <button
                   type="button"
                   :class="{
                     'p-4': !isExpanded,
                   }"
-                  @mouseenter="togglePopover"
                 >
                   <Icon
                     width="22"
                     height="22"
-                    class="z-[1]"
                     :class="{
                       'text-[var(--oc-sidebar-menu-active-icon)]': !menu.active,
                       'text-[var(--oc-sidebar-menu-active-icon-active)]':
@@ -155,9 +146,10 @@ onMounted(() => {
                     :name="menu.icon"
                   />
                 </button>
-                <template #popper>
+                <template #menu>
                   <div
-                    class="p-4 gap-4 bg-oc-bg absolute shadow-sm rounded w-[200px] z-50"
+                    v-if="dropdownOpen[menu.name + '-' + menuIndex]"
+                    class="p-3 gap-4 bg-oc-bg shadow-sm rounded w-[200px]"
                   >
                     <div
                       v-if="!menu.children"
@@ -184,17 +176,17 @@ onMounted(() => {
                     </SidebarSubmenu>
                   </div>
                 </template>
-              </Tooltip>
+              </Dropdown>
 
-              <transition
-                tag="div"
-                class="transition-all duration-500"
-                leave-active-class="opacity-0"
-                enter-from-class="opacity-0"
-                enter-to-class="opacity-100"
-              >
-                <slot v-if="isExpanded" name="label" :menu="menu" />
-              </transition>
+              <!--              <transition-->
+              <!--                tag="div"-->
+              <!--                class="transition-all duration-500"-->
+              <!--                leave-active-class="opacity-0"-->
+              <!--                enter-from-class="opacity-0"-->
+              <!--                enter-to-class="opacity-100"-->
+              <!--              >-->
+              <slot v-if="isExpanded" name="label" :menu="menu" />
+              <!--              </transition>-->
             </div>
             <div v-if="isExpanded" class="relative flex flex-col">
               <div class="absolute border-l left-[27px] bottom-[17px] h-full" />
@@ -202,6 +194,7 @@ onMounted(() => {
                 v-if="menu.children"
                 :menu="menu"
                 :class="state.expanded.includes(menu.name) && 'mt-3'"
+                :is-expanded-sidebar="isExpanded"
                 :is-expanded="state.expanded.includes(menu.name)"
               >
                 <template #label="{ submenu }">

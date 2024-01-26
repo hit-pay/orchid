@@ -49,7 +49,7 @@ const updateActiveTime = () => {
 watch(
   () => props.modelValue,
   (value) => {
-    time.value = value;
+    time.value = value != "" ? value : dayjs().toDate();
   },
   { immediate: true },
 );

@@ -8,7 +8,7 @@ import {
   Button,
   Dropdown,
 } from "@/orchidui";
-import { computed, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 
 const props = defineProps({
   label: String,
@@ -20,6 +20,7 @@ const props = defineProps({
   },
   isInlineLabel: Boolean,
   isFilterable: Boolean,
+  isAsynchronousSearch: Boolean,
   isDisabled: Boolean,
   isCheckboxes: Boolean,
   isSelectAll: Boolean,
@@ -52,12 +53,19 @@ const props = defineProps({
     type: Object,
     default: () => ({}),
   },
+  popperOptions: {
+    type: Object,
+    default: () => ({
+      strategy: "fixed",
+    }),
+  },
 });
 
 const emit = defineEmits({
   addNew: [],
   "update:modelValue": [],
   "max-option-allowed-set": [],
+  onSearchKeywords: "",
 });
 
 const query = ref("");
@@ -74,22 +82,27 @@ const isSelectedAll = computed(() => {
 });
 
 const filterableOptions = computed(
-  () => filterOptions(props.options, query.value) || []
+  () =>
+    (props.isAsynchronousSearch
+      ? props.options
+      : filterOptions(props.options, query.value)) || []
 );
 
 const localValueOption = computed(() => {
   if (props.multiple) {
     let selected = [];
-    for (const option of props.options) {
-      if (option.values) {
-        option.values.forEach((o) => {
-          if ((props.modelValue || []).includes(o.value)) {
-            selected.push(o);
+    for (const value of props.modelValue) {
+      for (const option of props.options) {
+        if (option.values) {
+          option.values.forEach((o) => {
+            if (o.value === value) {
+              selected.push(o);
+            }
+          });
+        } else {
+          if (option.value === value) {
+            selected.push(option);
           }
-        });
-      } else {
-        if ((props.modelValue || []).includes(option.value)) {
-          selected.push(option);
         }
       }
     }
@@ -159,19 +172,27 @@ const removeOption = (value) => {
   );
 };
 const selectAll = () => {
-  if (isSelectedAll.value) {
-    emit("update:modelValue", []);
-  } else {
-    emit(
-      "update:modelValue",
-      filterableOptions.value.map((o) => o.value)
-    );
+  if (!props.isAsynchronousSearch) {
+    if (isSelectedAll.value) {
+      emit("update:modelValue", []);
+    } else {
+      emit(
+        "update:modelValue",
+        filterableOptions.value.map((o) => o.value)
+      );
+    }
   }
 };
+const baseInput = ref();
+const maxPopperWidth = ref(0);
+onMounted(() => {
+  maxPopperWidth.value = baseInput.value.$el.offsetWidth;
+});
 </script>
 
 <template>
   <BaseInput
+    ref="baseInput"
     class="relative"
     :label="isInlineLabel ? '' : label"
     :hint="hint"
@@ -186,6 +207,9 @@ const selectAll = () => {
       class="w-full"
       :distance="4"
       popper-class="w-full"
+      placement="bottom-end"
+      :popper-style="{ maxWidth: `${maxPopperWidth}px` }"
+      :popper-options="popperOptions"
       :is-disabled="isDisabled"
     >
       <div
@@ -242,13 +266,14 @@ const selectAll = () => {
             v-model="query"
             icon="search"
             placeholder="Search"
+            @update:model-value="$emit('onSearchKeywords', query)"
           >
             <template #icon>
               <Icon class="w-5 h-5 text-oc-text-400" name="search" />
             </template>
           </Input>
 
-          <div class="max-h-[320px] overflow-y-auto flex flex-col gap-y-2">
+          <div class="flex flex-col gap-y-2">
             <Option
               v-if="isCheckboxes && isSelectAll && filterableOptions.length"
               :is-selected="isSelectedAll"
@@ -273,6 +298,7 @@ const selectAll = () => {
                 @click="selectOption(option)"
               />
             </slot>
+            <slot name="infinite-scrolling"></slot>
           </div>
 
           <Button

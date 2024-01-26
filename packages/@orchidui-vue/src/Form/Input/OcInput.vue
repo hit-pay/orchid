@@ -74,11 +74,7 @@ const props = defineProps({
   },
 });
 
-defineEmits({
-  "update:modelValue": [],
-  blur: [],
-  focus: [],
-});
+const emit = defineEmits(["update:modelValue", "blur", "focus"]);
 
 const attrs = useAttrs();
 
@@ -166,3 +162,10 @@ const inputClasses = computed(() => [
     </div>
   </BaseInput>
 </template>
+
+<style lang="scss">
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  display: none;
+}
+</style>

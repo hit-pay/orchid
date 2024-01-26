@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ColorPicker } from "vue3-colorpicker";
 import "vue3-colorpicker/style.css";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import ColorInputs from "./ColorInputs.vue";
 
 defineProps({
@@ -64,6 +64,12 @@ const hslToHex = (value) => {
 
   activeRailColor.value = `#${hexRed}${hexGreen}${hexBlue}`;
 };
+const target = ref();
+onMounted(() => {
+  target.value = colorPickerRef.value.$el.parentNode.querySelector(
+    ".vc-chrome-colorPicker-body",
+  );
+});
 </script>
 
 <template>
@@ -83,7 +89,7 @@ const hslToHex = (value) => {
       picker-type="chrome"
       @update:pure-color="hslToHex"
     />
-    <teleport v-if="colorPickerRef" to=".vc-chrome-colorPicker-body">
+    <teleport v-if="colorPickerRef && target" :to="target">
       <ColorInputs
         :active-color="modelValue"
         @update:active-color="$emit('update:modelValue', $event)"

@@ -6,6 +6,7 @@ import {
   CopyTooltip,
   TableCellContent,
   Chip,
+  TableLink,
 } from "@/orchidui";
 import dayjs from "dayjs";
 
@@ -44,6 +45,7 @@ const props = defineProps({
     type: String,
     default: "h-full",
   },
+  link: String,
 });
 defineEmits({
   selected: [],
@@ -68,11 +70,8 @@ const variantClass = computed(() => ({
 
 <template>
   <div
-    :class="[
-      variantClass[variant] || 'px-4',
-      isLoading ? 'flex items-center' : '',
-    ]"
-    class="md:py-3 py-1 bg-oc-bg-light md:min-h-[58px] md:group-hover/row:bg-oc-gray-50 items-center"
+    :class="[variantClass[variant], isLoading ? 'flex items-center' : '']"
+    class="md:py-3 md:px-4 px-3 py-1 bg-oc-bg-light md:min-h-[58px] md:group-hover/row:bg-oc-gray-50 items-center"
   >
     <div
       v-if="isLoading"
@@ -87,7 +86,6 @@ const variantClass = computed(() => ({
       v-else
       class="w-full flex"
       :class="isCopy ? 'justify-between' : 'justify-start'"
-      @click="$emit('click:field')"
     >
       <slot>
         <!--  CHECKBOX    -->
@@ -109,16 +107,11 @@ const variantClass = computed(() => ({
           v-else-if="variant === Variants.ICON"
           class="w-6 h-6 mx-auto"
           :name="data"
-          @click="$emit('click:field')"
         />
 
         <!--  IMAGE    -->
         <template v-else-if="variant === Variants.IMAGE">
-          <div
-            v-if="data"
-            class="h-[42px] min-w-[42px] rounded mx-auto"
-            @click="$emit('click:field')"
-          >
+          <div v-if="data" class="h-[42px] min-w-[42px] rounded mx-auto">
             <img
               :class="imageClass"
               alt="table-img"
@@ -129,55 +122,54 @@ const variantClass = computed(() => ({
           <div
             v-else
             class="h-[42px] mx-auto w-[42px] bg-oc-bg-dark flex items-center justify-center rounded"
-            @click="$emit('click:field')"
           >
             <Icon width="20" height="20" name="image" />
           </div>
         </template>
 
         <!--  EMPTY    -->
-        <div
-          v-else-if="variant === Variants.EMPTY"
-          @click="$emit('click:field')"
-        >
-          -
-        </div>
+        <div v-else-if="variant === Variants.EMPTY">-</div>
 
         <TableCellContent
           v-else-if="variant === Variants.DATETIME"
           :title="dayjs(data).format('D MMM, YYYY')"
           :description="dayjs(data).format('h:mm A')"
-          @click="$emit('click:field')"
+          :link="link"
         />
 
         <!--   CONTENT   -->
         <TableCellContent
           v-else-if="variant === Variants.CONTENT"
           v-bind="content"
-          @click="$emit('click:field')"
+          :link="link"
         />
         <!--   CHIP   -->
         <Chip
           v-else-if="variant === Variants.CHIP"
           :label="data"
           :variant="chipOptions[data]"
-          @click="$emit('click:field')"
         />
 
         <!--  DEFAULT    -->
-        <div
+        <TableLink
           v-else-if="data"
+          :link="link"
           class="flex items-center w-full"
-          @click="$emit('click:field')"
         >
           {{ data }}
-        </div>
-        <div v-else @click="$emit('click:field')">-</div>
+        </TableLink>
+        <div v-else>-</div>
       </slot>
 
       <CopyTooltip
         v-if="isCopy && hasContentData"
-        :value="data"
+        :value="
+          content?.title
+            ? `${content.title}${
+                content.description ? `,${content.description}` : ''
+              }`
+            : data
+        "
         :tooltip-options="{
           transitionName: 'copy',
         }"

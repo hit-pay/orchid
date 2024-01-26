@@ -3,6 +3,7 @@ import { Icon } from "@/orchidui";
 
 defineProps({
   description: String,
+  iconClass: String,
   variant: {
     type: String,
     default: "delete",
@@ -27,7 +28,7 @@ const classIcon = {
   <div class="flex flex-col gap-y-4 items-center">
     <div
       class="w-[48px] aspect-square rounded-full flex items-center justify-center"
-      :class="classIcon[variant]"
+      :class="[classIcon[variant], iconClass]"
     >
       <Icon :name="icon ?? variantIcon[variant]" />
     </div>

@@ -3,7 +3,7 @@ import { Modal } from "@/orchidui";
 import { computed } from "vue";
 import Confirmation from "./OcConfirmation.vue";
 
-defineProps({
+const props = defineProps({
   modelValue: {
     type: Boolean,
     default: false,
@@ -11,6 +11,10 @@ defineProps({
   title: {
     type: String,
     default: "Are you sure?",
+  },
+  iconClass: {
+    type: String,
+    default: "",
   },
   description: {
     type: String,
@@ -23,6 +27,10 @@ defineProps({
   icon: String,
   labelConfirm: String,
   labelCancel: String,
+  isLoading: {
+    type: Boolean,
+    default: false,
+  }
 });
 const emit = defineEmits(["confirm", "cancel", "update:model-value"]);
 const cancelButton = computed(() => ({
@@ -39,14 +47,19 @@ const confirmButton = computed(() => ({
   delete: {
     label: "Delete",
     variant: "destructive",
+    isLoading: props.isLoading ?? false
   },
   warning: {
     label: "Delete",
     variant: "destructive",
+    isLoading: props.isLoading ?? false
   },
-  success: {},
+  success: {
+    isLoading: props.isLoading ?? false
+  },
   question: {
     label: "Yes",
+    isLoading: props.isLoading ?? false
   },
 }));
 
@@ -83,7 +96,12 @@ const emitModelValue = (e) => {
     @confirm="$emit('confirm')"
     @cancel="$emit('cancel')"
   >
-    <Confirmation :variant="variant" :description="description" :icon="icon">
+    <Confirmation
+      :icon-class="iconClass"
+      :variant="variant"
+      :description="description"
+      :icon="icon"
+    >
       <template v-if="$slots.description" #description>
         <slot name="description" />
       </template>

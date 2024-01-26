@@ -13,13 +13,11 @@ const props = defineProps({
 });
 
 defineEmits({
-  "update:modelValue": [],
-  blur: [],
-  focus: [],
+  "update:modelValue": []
 });
 
 const getNewValues = (index, newVal) => {
-  let newValues = props.modelValue;
+  let newValues = (props.modelValue && props.modelValue.length > 0) ? props.modelValue :  [];
   newValues[index] = newVal;
   return newValues;
 };
@@ -33,7 +31,7 @@ const getNewValues = (index, newVal) => {
         >{{ name.props.label }}</label
       >
       <ColorPicker 
-          :model-value="modelValue[index]" 
+          :model-value="(modelValue && modelValue.length > 0) ? (modelValue[index] ? modelValue[index] : '#FFFFFF') : '#FFFFFF'" 
           @update:model-value="
             $emit('update:modelValue', getNewValues(index, $event))
           ">
@@ -41,6 +39,9 @@ const getNewValues = (index, newVal) => {
           <Icon class="ml-auto" name="paint" />
         </template>  
         </ColorPicker>
+    </div>
+    <div  v-if="form.props && form.props.description" class="text-sm flex items-center text-oc-text-400">
+      {{ form.props.description }}
     </div>
   </div>
 </template>

@@ -12,7 +12,6 @@ export const Default = {
     primaryButtonProps: {
       leftIcon: "plus",
       label: "Primary",
-      tooltip: "Add New",
       onClick: () => {
         console.log("click new payment link");
       },

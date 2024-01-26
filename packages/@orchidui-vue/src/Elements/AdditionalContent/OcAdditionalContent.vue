@@ -43,7 +43,7 @@ const copyLink = async () => {
 </script>
 
 <template>
-  <div class="md:pt-5 pt-3 md:px-10 px-5">
+  <div class="md:pt-5 pt-0 md:px-10 px-5">
     <Title
       v-if="variant === 'default'"
       :description="mainLink"
@@ -74,7 +74,15 @@ const copyLink = async () => {
       :customer="customer"
       :is-customer="isCustomer"
       @add-customer="$emit('addCustomer')"
-    />
+    >
+      <template v-for="box in boxes" v-slot:[box.slot]="{ data }">
+        <slot :name="box.slot" :data="data"></slot>
+      </template>
+
+      <template v-for="box in boxes" v-slot:[box.infoTooltipSlot]="{ data }">
+        <slot :name="box.infoTooltipSlot" :data="data"></slot>
+      </template>
+    </DynamicType>
 
     <BalanceOverview
       v-else-if="variant === 'balance'"

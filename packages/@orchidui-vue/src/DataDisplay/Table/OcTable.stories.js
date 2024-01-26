@@ -1,4 +1,5 @@
-import { Theme, Table, Chip, Icon, Toggle, TableCellContent } from "@/orchidui";
+import { Theme, Table, Chip, Icon, Toggle, TableCellContent, TableCell } from "@/orchidui";
+import TextEditor from "../../Form/TextEditor/OcTextEditor.vue";
 
 import { ref } from "vue";
 import {
@@ -32,7 +33,9 @@ export const Default = {
       const onClickRow = (item) => {
         console.log("on click row", item);
       };
-      return { StickyTableOptions, args, selectedRows, onClickRow };
+      
+      const rowClass = (r, i) => `z-[${100-i}]`;
+      return { StickyTableOptions, args, selectedRows, onClickRow, rowClass };
     },
     template: `
           <Theme>
@@ -41,7 +44,58 @@ export const Default = {
                    :is-loading="args.isLoading"
                    :is-sticky="args.isSticky"
                    :loadingRows="args.loadingRows"
-                   @click-row="onClickRow"
+                   :row-class="rowClass"
+                   row-link="link"
+                   @click:row="onClickRow"
+            >
+              <template #col6="{ data }">
+                <div class="flex gap-3 items-center">
+                  <span class="md:hidden">
+                  status
+                  </span>
+                  <Toggle size="small" v-model="data"/>
+                </div>
+              </template>
+              <template #actions>
+                <Icon class="w-6 h-6 group-hover/row:block md:hidden cursor-pointer mx-auto" name="dots-vertical"/>
+              </template>
+            </Table>
+          </Theme>
+        `,
+  }),
+};
+
+export const ExtraContent = {
+  args: {
+    options: TableOptions,
+    isLoading: false,
+    loadingRows: 10,
+  },
+  render: (args) => ({
+    components: {
+      Table,
+      Theme,
+      Icon,
+      Toggle,
+      Chip,
+      TableCellContent,
+      TableCell,
+      TextEditor,
+    },
+    setup() {
+      const selectedRows = ref([]);
+      const onClickRow = (item) => {
+        console.log("on click row", item);
+      };
+      return { args, selectedRows, onClickRow };
+    },
+    template: `
+          <Theme>
+            <Table v-model="selectedRows"
+              :options="args.options"
+              :is-loading="args.isLoading"
+              :loadingRows="args.loadingRows"
+              @click-row="onClickRow"
             >
               <template #col4="{ data }">
                 <span class="text-oc-text-400 text-sm">{{ data }}</span>
@@ -56,6 +110,18 @@ export const Default = {
                   </span>
                   <Toggle size="small" v-model="data"/>
                 </div>
+              </template>
+              <template #extra="{ item, index }">
+                <TableCell
+                  v-if="item.col7"
+                  class="flex border-oc-gray-200 w-full"
+                  :is-last="args.options.fields.length === index + 1"
+                >
+                  <TextEditor
+                    v-model="item.col7"
+                    v-bind="{fontSizes:[{label:'Default',value:'14px'},{label:'Medium',value:'16px'},{label:'Large',value:'18px'},{label:'Extra Large',value:'20px'}],initialFontSize:'14px'}"
+                  />
+                </TableCell>
               </template>
               <template #actions>
                 <Icon class="w-6 h-6 group-hover/row:block md:hidden cursor-pointer mx-auto" name="dots-vertical"/>

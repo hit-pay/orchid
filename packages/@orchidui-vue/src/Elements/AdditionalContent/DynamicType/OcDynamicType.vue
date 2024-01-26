@@ -1,6 +1,7 @@
 <script setup>
 import { CustomerCard, OverviewItem, Icon, Tooltip } from "@/orchidui";
 import BoxDetails from "./OcBoxDetails.vue";
+import MobileDynamicType from "./MobileDynamicType.vue";
 
 defineProps({
   boxes: { type: Array, default: () => [] },
@@ -12,22 +13,32 @@ defineEmits(["addCustomer"]);
 </script>
 
 <template>
-  <div class="flex md:gap-5 gap-3 md:flex-row flex-col">
+  <div class="hidden md:flex md:gap-5 gap-3 md:flex-row flex-col">
     <BoxDetails
       v-for="(box, i) in boxes"
       :key="i"
       :class="
-        isCustomer ? '!grid grid-cols-4 grid-rows-2 gap-y-4 w-full !py-4' : ''
+        isCustomer
+          ? '!grid grid-cols-4 grid-rows-2 gap-y-4 w-full !py-4 ' +
+            (box?.style || '')
+          : ''
       "
     >
-      <OverviewItem
-        v-for="(field, j) in box.items"
-        :key="`${i}-${j}`"
-        is-transparent
-        :title="field.title"
-        :content="field.content"
+      <slot
+        v-if="box.slot && $slots[box.slot]"
+        :name="box.slot"
+        :data="{ ...box, key: i }"
       />
-      <div v-if="box.showInfo" class="p-2">
+      <template v-else>
+        <OverviewItem
+          v-for="(field, j) in box.items"
+          :key="`${i}-${j}`"
+          is-transparent
+          :title="field.title"
+          :content="field.content"
+        />
+      </template>
+      <div v-if="box.showInfo" class="p-2" :class="box.infoTooltipStyle">
         <Tooltip>
           <Icon
             width="16"
@@ -36,7 +47,9 @@ defineEmits(["addCustomer"]);
             name="information"
           />
           <template #popper>
-            <div class="py-2 px-3">{{ box.infoTooltip }}</div>
+            <slot :name="box.infoTooltipSlot">
+              <div class="py-2 px-3">{{ box.infoTooltip }}</div>
+            </slot>
           </template>
         </Tooltip>
       </div>
@@ -48,4 +61,13 @@ defineEmits(["addCustomer"]);
       @add-customer="$emit('addCustomer')"
     />
   </div>
+
+  <MobileDynamicType
+    class="flex md:hidden"
+    :boxes="boxes"
+    :is-customer="isCustomer"
+    :customer-card-variant="customerCardVariant"
+    :customer="customer"
+    @add-customer="$emit('addCustomer')"
+  />
 </template>

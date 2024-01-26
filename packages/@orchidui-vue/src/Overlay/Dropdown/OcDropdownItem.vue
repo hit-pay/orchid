@@ -34,7 +34,7 @@ const variantClasses = computed(() => ({
         :class="iconClasses"
       />
 
-      <span>{{ text }}</span>
+      <span class="md:text-base text-sm">{{ text }}</span>
 
       <slot v-if="pointed" name="badge">
         <div class="w-[6px] aspect-square rounded-full bg-oc-error" />

@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import { Icon } from "@/orchidui";
+import { useSlots } from "vue";
+
+const slots = useSlots();
+
+const hasSlot = (name) => !!slots[name];
 
 defineProps({
   isActive: Boolean,
@@ -31,12 +36,12 @@ defineProps({
       <div class="flex flex-1 flex-col gap-y-2">
         <span>{{ title }}</span>
         <span class="text-sm text-oc-text-400">
-          {{ description }}
+          <slot name="description">{{ description }}</slot>
         </span>
       </div>
 
       <div class="flex items-end gap-x-2">
-        <Icon :name="icon" :class="iconClass" />
+        <Icon v-if="icon" :name="icon" :class="iconClass" />
         <span class="text-lg font-medium">{{ iconText }}</span>
       </div>
     </div>
