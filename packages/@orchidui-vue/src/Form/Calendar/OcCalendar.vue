@@ -198,8 +198,7 @@ const isDayDisabled = (day) => {
   return (
     props.disabledDate(currentDate.toDate()) ||
     (props.minDate && currentDate.isBefore(dayjs(props.minDate))) ||
-    (props.maxDate &&
-      currentDate.isAfter(dayjs(props.maxDate).add(60, "second")))
+    (props.maxDate && currentDate.isAfter(dayjs(props.maxDate), "day"))
   );
 };
 
