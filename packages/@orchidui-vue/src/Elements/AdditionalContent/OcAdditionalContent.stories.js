@@ -60,6 +60,7 @@ const argTypes = {
           showInfo: true,
           infoTooltip: "Tooltip",
           infoTooltipStyle: "absolute right-3",
+          infoTooltipSlot: "BoxInfoTooltip",
           style: "!grid-cols-2 relative pr-10",
           slot: "Box",
           items: [
@@ -272,6 +273,11 @@ export const Dynamic = {
                     <div class="text-oc-success-500">{{field.content}}</div>
                   </template>
                 </OverviewItem>
+              </template>
+              <template #BoxInfoTooltip>
+                <div class="p-4">
+                  <div class="text-oc-error">Tooltip</div>
+                </div>
               </template>
             </AdditionalContent>
           </Theme>

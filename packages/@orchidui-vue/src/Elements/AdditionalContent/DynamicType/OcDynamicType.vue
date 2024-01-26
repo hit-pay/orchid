@@ -47,7 +47,9 @@ defineEmits(["addCustomer"]);
             name="information"
           />
           <template #popper>
-            <div class="py-2 px-3">{{ box.infoTooltip }}</div>
+            <slot :name="box.infoTooltipSlot">
+              <div class="py-2 px-3">{{ box.infoTooltip }}</div>
+            </slot>
           </template>
         </Tooltip>
       </div>
