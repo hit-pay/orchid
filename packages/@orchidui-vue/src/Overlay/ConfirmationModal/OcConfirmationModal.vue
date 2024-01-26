@@ -30,7 +30,12 @@ const props = defineProps({
   isLoading: {
     type: Boolean,
     default: false,
-  }
+  },
+  hideIcon: {
+    type: Boolean,
+    default: false,
+  },
+  descriptionStyle: String,
 });
 const emit = defineEmits(["confirm", "cancel", "update:model-value"]);
 const cancelButton = computed(() => ({
@@ -47,19 +52,19 @@ const confirmButton = computed(() => ({
   delete: {
     label: "Delete",
     variant: "destructive",
-    isLoading: props.isLoading ?? false
+    isLoading: props.isLoading ?? false,
   },
   warning: {
     label: "Delete",
     variant: "destructive",
-    isLoading: props.isLoading ?? false
+    isLoading: props.isLoading ?? false,
   },
   success: {
-    isLoading: props.isLoading ?? false
+    isLoading: props.isLoading ?? false,
   },
   question: {
     label: "Yes",
-    isLoading: props.isLoading ?? false
+    isLoading: props.isLoading ?? false,
   },
 }));
 
@@ -100,7 +105,9 @@ const emitModelValue = (e) => {
       :icon-class="iconClass"
       :variant="variant"
       :description="description"
+      :description-style="descriptionStyle"
       :icon="icon"
+      :show-icon="hideIcon"
     >
       <template v-if="$slots.description" #description>
         <slot name="description" />
