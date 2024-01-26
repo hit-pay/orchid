@@ -78,6 +78,10 @@ const copyLink = async () => {
       <template v-for="box in boxes" v-slot:[box.slot]="{ data }">
         <slot :name="box.slot" :data="data"></slot>
       </template>
+
+      <template v-for="box in boxes" v-slot:[box.infoTooltipSlot]="{ data }">
+        <slot :name="box.infoTooltipSlot" :data="data"></slot>
+      </template>
     </DynamicType>
 
     <BalanceOverview
