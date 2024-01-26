@@ -61,6 +61,7 @@ const DataTableOptions = {
         href: "col3Url",
         description: "col3Description",
         isCopy: true,
+        addDescriptionToCopyClipboard: true,
         class: "w-1/2 md:w-[12%]",
       },
       {
