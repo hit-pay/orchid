@@ -224,6 +224,35 @@ export const Trailing = {
   }),
 };
 
+export const After = {
+  render: () => ({
+    components: { Theme, OCInput, Icon },
+    setup() {
+      const modelValue = ref('');
+
+      return {
+        modelValue,
+      };
+    },
+    template: `
+      <Theme colorMode="light" class="py-4">
+        <OCInput
+          v-model="modelValue"
+          label="Password"
+          input-type="password"
+          :has-leading-separator="false"
+        >
+          <template #leading>
+            <span class="text-oc-text-200">
+              <Icon name="eye-open" width="16" height="16" />
+            </span>
+          </template>
+        </OCInput>
+      </Theme>
+    `,
+  }),
+}
+
 export const Leading = {
   render: () => ({
     components: { Theme, OCInput, Dropdown, DropdownItem, Icon, BaseInput },

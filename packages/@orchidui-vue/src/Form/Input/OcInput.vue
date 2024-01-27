@@ -72,6 +72,10 @@ const props = defineProps({
     type: Object,
     default: () => ({}),
   },
+  hasLeadingSeparator: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 const emit = defineEmits(["update:modelValue", "blur", "focus"]);
@@ -156,7 +160,12 @@ const inputClasses = computed(() => [
         </div>
       </div>
 
-      <div v-if="$slots.leading" class="border-l border-gray-200 pl-3 py-3">
+      <div
+        v-if="$slots.leading"
+        :class="{
+          'border-l border-gray-200 pl-3 py-3': hasLeadingSeparator
+        }"
+      >
         <slot name="leading" />
       </div>
     </div>
