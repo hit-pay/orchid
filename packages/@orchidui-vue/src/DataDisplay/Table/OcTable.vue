@@ -244,6 +244,9 @@ onMounted(() => onScroll());
             :is-last="fields.length === i + 1"
             :variant="header.variant"
             :is-copy="header.isCopy"
+            :add-description-to-copy-clipboard="
+              header.addDescriptionToCopyClipboard ?? true
+            "
             :data="field[`${header.key}`] ?? ''"
             :content="{
               important: header.important ?? false,
