@@ -8,8 +8,8 @@ import {
 } from "@/orchidui";
 import { ref } from "vue";
 import { SDMenus } from "@/orchidui/StoreDesign";
-import ColorsInput from "./Form/ColorsInput.vue";
-
+import InputColors from "./Form/InputColors.vue";
+import SelectFont from "./Form/SelectFont.vue";
 const props = defineProps({
   requestForm: Object,
   generalData: Object,
@@ -245,7 +245,7 @@ const showSubForm = ref("");
                 />
               </template>
               <template #Colors="slot">
-                <ColorsInput
+                <InputColors
                   :form="slot.form"
                   :model-value="slot.value"
                   @update:model-value="onUpdateForm(slot.form, $event)"
@@ -261,12 +261,20 @@ const showSubForm = ref("");
                   @update:model-value="onUpdateForm(slot.form, $event)"
                 />
               </template>
+              <template #Font="slot">
+                <SelectFont
+                  :key="slot.form.name"
+                  :model-value="slot.value"
+                  v-bind="slot.form.props"
+                  @update:model-value="onUpdateForm(slot.form, $event)"
+                />
+              </template>
             </FormBuilder>
           </div>
         </div>
       </template>
       <template #Colors="{ form, value }">
-        <ColorsInput
+        <InputColors
           :form="form"
           :model-value="value"
           @update:model-value="onUpdateForm(form, $event)"
