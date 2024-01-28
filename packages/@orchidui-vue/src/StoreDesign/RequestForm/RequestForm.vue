@@ -106,7 +106,7 @@ const formatimages = (value, form) => {
       newFormatImages.push(image.current);
     } else {
       const newFormat = {
-        id: "new_" + Date.now(),
+        id: "is_new_" + Date.now(),
         path: image.fileUrl,
         link: image.link ?? image.current?.link ?? "",
       };

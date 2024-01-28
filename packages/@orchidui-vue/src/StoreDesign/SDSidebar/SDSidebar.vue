@@ -52,6 +52,8 @@ const emit = defineEmits({
   "edit:images": [],
   "delete:images": [],
   "add:images": [],
+  "update:section": [],
+  "update:general": [],
 });
 
 const presetOptions = computed(() => {
@@ -330,7 +332,9 @@ const updateModelValues = (data, general = false) => {
   };
   if (general) {
     newStoreDesignData.general = data;
+    emit("update:general", data); // for undo redo
   } else {
+    emit("update:section", data); // for undo redo
     newStoreDesignData.sections = newStoreDesignData.sections.map((s) => {
       if (s.key === data.key) {
         return data;
