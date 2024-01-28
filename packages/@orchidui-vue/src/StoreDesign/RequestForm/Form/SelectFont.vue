@@ -19,13 +19,16 @@ console.log("options", props.options);
     is-filterable
     placeholder="Placeholder"
   >
-    <template #default="{ fOptions }">
+    <template #default="{ fOptions, selectOption }">
       <div
         v-for="option in fOptions"
         :key="option"
         class="p-3 flex items-center text-oc-text-400 justify-between cursor-pointer hover:bg-oc-accent-1-50 gap-x-3 rounded-sm"
         :class="modelValue === option.value ? 'bg-oc-accent-1-50' : ''"
-        @click="$emit('update:model-value', option.value)"
+        @click="
+          selectOption(option.value);
+          $emit('update:model-value', option.value);
+        "
       >
         <div
           class="flex flex-col gap-3"
