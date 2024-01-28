@@ -1,5 +1,11 @@
 <script setup>
-import { FormBuilder, Icon, MultipleUploadFile, Slider, Tabs } from "@/orchidui";
+import {
+  FormBuilder,
+  Icon,
+  MultipleUploadFile,
+  Slider,
+  Tabs,
+} from "@/orchidui";
 import { ref } from "vue";
 import { SDMenus } from "@/orchidui/StoreDesign";
 import ColorsInput from "./Form/ColorsInput.vue";
@@ -173,9 +179,13 @@ const showSubForm = ref("");
       :json-form="requestForm"
       @on-update="onUpdateForm"
     >
-    <template #Tabs="{ form, value }">
-      <Tabs :model-value="value" v-bind="form.props" @update:model-value="onUpdateForm(form, $event)"/>
-    </template>
+      <template #Tabs="{ form, value }">
+        <Tabs
+          :model-value="value"
+          v-bind="form.props"
+          @update:model-value="onUpdateForm(form, $event)"
+        />
+      </template>
       <template #Menus="{ form, value }">
         <SDMenus
           :model-value="value"
@@ -193,7 +203,13 @@ const showSubForm = ref("");
           @click="showSubForm = form.name"
         >
           <div class="w-[30px]">
-            <Icon v-if="form.icon" class="text-oc-text-400" :name="form.icon" />
+            <Icon
+              v-if="form.icon"
+              class="text-oc-text-400"
+              width="20"
+              height="20"
+              :name="form.icon"
+            />
           </div>
           <div>{{ form.label }}</div>
         </div>

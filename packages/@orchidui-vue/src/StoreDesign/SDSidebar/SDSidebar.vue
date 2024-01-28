@@ -36,7 +36,13 @@ const getSidebarMenu = (section) => {
 };
 
 const isDropdownOpen = ref([]);
-const requiredSection = ["Header", "FooterContent", "IconLinks", "ButtonLinks","PoweredBy"];
+const requiredSection = [
+  "Header",
+  "FooterContent",
+  "IconLinks",
+  "ButtonLinks",
+  "PoweredBy",
+];
 
 const emit = defineEmits({
   "update:values": [],
@@ -457,12 +463,14 @@ const addSection = (newSection, customize = false) => {
               size="small"
               class="mt-2 mr-2"
               @update:model-value="updateSectionActive($event, item)"
+              @click.stop
             ></Toggle>
             <span v-else></span>
             <Dropdown
               v-if="item.canDelete"
               v-model="isDropdownOpen[item.key]"
               placement="bottom-end"
+              @click.stop
             >
               <Icon name="dots-vertical" />
               <template #menu>
