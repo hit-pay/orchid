@@ -322,6 +322,24 @@ const addSection = (newSection, customize = false) => {
     changeSubmenu(newSection.group);
   }
 };
+
+const updateModelValues = (data, general = false) => {
+  let newStoreDesignData = {
+    general: props.values.general,
+    sections: props.values.sections,
+  };
+  if (general) {
+    newStoreDesignData.general = data;
+  } else {
+    newStoreDesignData.sections = newStoreDesignData.sections.map((s) => {
+      if (s.key === data.key) {
+        return data;
+      }
+      return s;
+    });
+  }
+  emit("update:values", newStoreDesignData);
+};
 </script>
 <template>
   <div class="h-full overflow-auto relative border border-gray-200">
@@ -533,6 +551,8 @@ const addSection = (newSection, customize = false) => {
           @add:images="
             $emit('add:images', { ...$event, section: sectionActive.key })
           "
+          @update:general-data="updateModelValues($event, true)"
+          @update:section-data="updateModelValues($event, false)"
         >
         </RequestForm>
       </div>

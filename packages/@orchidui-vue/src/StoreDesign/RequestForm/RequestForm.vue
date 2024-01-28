@@ -215,7 +215,7 @@ const showSubForm = ref("");
         </div>
         <div
           v-if="showSubForm === form.name"
-          class="bg-oc-bg-light absolute top-0 left-0 min-h-full w-full z-10"
+          class="bg-oc-bg-light absolute top-0 left-0 min-h-full w-full z-10 pb-[100px]"
         >
           <div
             class="flex items-center border-b mt-5 p-4 cursor-pointer"
