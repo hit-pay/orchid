@@ -36,7 +36,13 @@ const getSidebarMenu = (section) => {
 };
 
 const isDropdownOpen = ref([]);
-const requiredSection = ["Header", "FooterContent", "IconLinks", "ButtonLinks","PoweredBy"];
+const requiredSection = [
+  "Header",
+  "FooterContent",
+  "IconLinks",
+  "ButtonLinks",
+  "PoweredBy",
+];
 
 const emit = defineEmits({
   "update:values": [],
@@ -46,6 +52,8 @@ const emit = defineEmits({
   "edit:images": [],
   "delete:images": [],
   "add:images": [],
+  "update:section": [],
+  "update:general": [],
 });
 
 const presetOptions = computed(() => {
@@ -316,6 +324,26 @@ const addSection = (newSection, customize = false) => {
     changeSubmenu(newSection.group);
   }
 };
+
+const updateModelValues = (data, general = false) => {
+  let newStoreDesignData = {
+    general: props.values.general,
+    sections: props.values.sections,
+  };
+  if (general) {
+    newStoreDesignData.general = data;
+    emit("update:general", data); // for undo redo
+  } else {
+    emit("update:section", data); // for undo redo
+    newStoreDesignData.sections = newStoreDesignData.sections.map((s) => {
+      if (s.key === data.key) {
+        return data;
+      }
+      return s;
+    });
+  }
+  emit("update:values", newStoreDesignData);
+};
 </script>
 <template>
   <div class="h-full overflow-auto relative border border-gray-200">
@@ -457,12 +485,14 @@ const addSection = (newSection, customize = false) => {
               size="small"
               class="mt-2 mr-2"
               @update:model-value="updateSectionActive($event, item)"
+              @click.stop
             ></Toggle>
             <span v-else></span>
             <Dropdown
               v-if="item.canDelete"
               v-model="isDropdownOpen[item.key]"
               placement="bottom-end"
+              @click.stop
             >
               <Icon name="dots-vertical" />
               <template #menu>
@@ -525,6 +555,8 @@ const addSection = (newSection, customize = false) => {
           @add:images="
             $emit('add:images', { ...$event, section: sectionActive.key })
           "
+          @update:general-data="updateModelValues($event, true)"
+          @update:section-data="updateModelValues($event, false)"
         >
         </RequestForm>
       </div>

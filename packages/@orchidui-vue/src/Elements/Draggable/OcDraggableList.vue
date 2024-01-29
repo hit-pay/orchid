@@ -52,6 +52,7 @@ const isDropdownOpen = ref([]);
         isHovered[element.id] = false;
       "
       @mouseover="isHovered[element.id] = true"
+      @click="$emit('click:element', element)"
     >
       <div
         class="px-2 flex"
@@ -82,7 +83,7 @@ const isDropdownOpen = ref([]);
       </div>
       <div class="ml-2 flex items-center max-w-[70%]">
         <div class="flex items-center flex-wrap">
-          <div class="truncate" @click="$emit('click:element', element)">
+          <div class="truncate">
             {{ element.title }}
           </div>
           <a
