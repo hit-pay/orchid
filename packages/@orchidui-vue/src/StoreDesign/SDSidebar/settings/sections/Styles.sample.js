@@ -1,3 +1,5 @@
+
+import { FONT_HEADING_OPTIONS, FONT_BODY_OPTIONS } from '../Font.sample'
 const STYLES_FORM = [
   {
     name: "Font",
@@ -7,23 +9,22 @@ const STYLES_FORM = [
     children: [
       {
         name: "font_heading",
-        type: "Select",
-        options: "font",
+        type: "Font",
+        options: "font_heading",
         props: {
           label: "Heading",
           placeholder: "Choose Font",
-          options: [
-          ],
+          options: FONT_HEADING_OPTIONS,
         },
       },
       {
         name: "font_body",
-        type: "Select",
-        options: "font",
+        type: "Font",
+        options: "font_body",
         props: {
           label: "Body",
           placeholder: "Choose Font",
-          options: [],
+          options: FONT_BODY_OPTIONS,
         },
       },
     ],

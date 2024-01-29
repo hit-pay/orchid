@@ -27,6 +27,7 @@ const props = defineProps({
   },
   isLast: Boolean,
   isCopy: Boolean,
+  addDescriptionToCopyClipboard: Boolean,
   isSelected: Boolean,
   data: [String, Number, Object, Array, Boolean],
   isLoading: Boolean,
@@ -166,7 +167,9 @@ const variantClass = computed(() => ({
         :value="
           content?.title
             ? `${content.title}${
-                content.description ? `,${content.description}` : ''
+                content.description && props.addDescriptionToCopyClipboard
+                  ? `,${content.description}`
+                  : ''
               }`
             : data
         "

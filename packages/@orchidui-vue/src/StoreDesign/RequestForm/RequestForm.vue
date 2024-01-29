@@ -1,9 +1,15 @@
 <script setup>
-import { FormBuilder, Icon, MultipleUploadFile, Slider, Tabs } from "@/orchidui";
+import {
+  FormBuilder,
+  Icon,
+  MultipleUploadFile,
+  Slider,
+  Tabs,
+} from "@/orchidui";
 import { ref } from "vue";
 import { SDMenus } from "@/orchidui/StoreDesign";
-import ColorsInput from "./Form/ColorsInput.vue";
-
+import InputColors from "./Form/InputColors.vue";
+import SelectFont from "./Form/SelectFont.vue";
 const props = defineProps({
   requestForm: Object,
   generalData: Object,
@@ -96,11 +102,11 @@ const onUpdateForm = (form, value = null) => {
 const formatimages = (value, form) => {
   let newFormatImages = [];
   value.forEach((image) => {
-    if (!image.fileUrl) {
+    if (image.current) {
       newFormatImages.push(image.current);
     } else {
       const newFormat = {
-        id: "new_" + Date.now(),
+        id: "is_new_" + Date.now(),
         path: image.fileUrl,
         link: image.link ?? image.current?.link ?? "",
       };
@@ -173,9 +179,13 @@ const showSubForm = ref("");
       :json-form="requestForm"
       @on-update="onUpdateForm"
     >
-    <template #Tabs="{ form, value }">
-      <Tabs :model-value="value" v-bind="form.props" @update:model-value="onUpdateForm(form, $event)"/>
-    </template>
+      <template #Tabs="{ form, value }">
+        <Tabs
+          :model-value="value"
+          v-bind="form.props"
+          @update:model-value="onUpdateForm(form, $event)"
+        />
+      </template>
       <template #Menus="{ form, value }">
         <SDMenus
           :model-value="value"
@@ -193,13 +203,19 @@ const showSubForm = ref("");
           @click="showSubForm = form.name"
         >
           <div class="w-[30px]">
-            <Icon v-if="form.icon" class="text-oc-text-400" :name="form.icon" />
+            <Icon
+              v-if="form.icon"
+              class="text-oc-text-400"
+              width="20"
+              height="20"
+              :name="form.icon"
+            />
           </div>
           <div>{{ form.label }}</div>
         </div>
         <div
           v-if="showSubForm === form.name"
-          class="bg-oc-bg-light absolute top-0 left-0 min-h-full w-full z-10"
+          class="bg-oc-bg-light absolute top-0 left-0 min-h-full w-full z-10 pb-[100px]"
         >
           <div
             class="flex items-center border-b mt-5 p-4 cursor-pointer"
@@ -229,7 +245,7 @@ const showSubForm = ref("");
                 />
               </template>
               <template #Colors="slot">
-                <ColorsInput
+                <InputColors
                   :form="slot.form"
                   :model-value="slot.value"
                   @update:model-value="onUpdateForm(slot.form, $event)"
@@ -245,12 +261,20 @@ const showSubForm = ref("");
                   @update:model-value="onUpdateForm(slot.form, $event)"
                 />
               </template>
+              <template #Font="slot">
+                <SelectFont
+                  :key="slot.form.name"
+                  :model-value="slot.value"
+                  v-bind="slot.form.props"
+                  @update:model-value="onUpdateForm(slot.form, $event)"
+                />
+              </template>
             </FormBuilder>
           </div>
         </div>
       </template>
       <template #Colors="{ form, value }">
-        <ColorsInput
+        <InputColors
           :form="form"
           :model-value="value"
           @update:model-value="onUpdateForm(form, $event)"
