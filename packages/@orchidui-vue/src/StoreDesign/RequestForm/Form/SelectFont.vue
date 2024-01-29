@@ -30,7 +30,7 @@ defineProps({
       >
         <div
           class="flex flex-col gap-3"
-          :style="`font-family: ${option.value[0]};@import url('${option.value[1]}');font-weight:${option.weight}`"
+          :style="`font-family: ${option.value[0]};font-weight:${option.weight}`"
         >
           {{ option.label }}
         </div>
