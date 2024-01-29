@@ -102,7 +102,7 @@ const onUpdateForm = (form, value = null) => {
 const formatimages = (value, form) => {
   let newFormatImages = [];
   value.forEach((image) => {
-    if (!image.fileUrl) {
+    if (image.current) {
       newFormatImages.push(image.current);
     } else {
       const newFormat = {

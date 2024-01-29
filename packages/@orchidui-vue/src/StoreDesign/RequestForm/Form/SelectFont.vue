@@ -1,15 +1,13 @@
 <script setup>
 import { Select, Icon } from "@/orchidui";
 defineEmits("update:model-value");
-const props = defineProps({
+defineProps({
   modelValue: Array,
   label: String,
   options: {
     type: Array,
   },
 });
-
-console.log("options", props.options);
 </script>
 <template>
   <Select
