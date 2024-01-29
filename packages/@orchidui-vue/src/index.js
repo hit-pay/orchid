@@ -8,6 +8,7 @@ export * from "./DataDisplay/InfoCard/OcInfoCard.js";
 export * from "./Disclosure/Accordion/OcAccordion.js";
 export * from "./Disclosure/OnboardingAccordion/OnboardingAccordion.js";
 export * from "./Disclosure/Tabs/Tabs.js";
+export * from "./Disclosure/Steps/OcSteps.js";
 
 export * from "./Elements/Header/OcHeader.js";
 export * from "./Elements/PageTitle/OcPageTitle.js";
