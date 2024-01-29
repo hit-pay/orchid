@@ -21,17 +21,16 @@ export const Default = {
     open: false,
     labelConfirm: "Confirm",
     labelCancel: "Close",
-    isLoading: false
+    isLoading: false,
   },
   render: (args) => ({
     components: { ConfirmationModal, Button },
     setup() {
-
       const handleConfirm = () => {
-        args.isLoading = true
+        args.isLoading = true;
 
-        setTimeout(() => args.isLoading = false, 1000)
-      }
+        setTimeout(() => (args.isLoading = false), 1000);
+      };
       return { args, handleConfirm };
     },
     template: `

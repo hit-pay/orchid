@@ -8,7 +8,12 @@ defineProps({
     type: String,
     default: "delete",
   },
+  hideIcon: {
+    type: Boolean,
+    default: false,
+  },
   icon: String,
+  contentClass: String,
 });
 const variantIcon = {
   delete: "bin",
@@ -25,8 +30,9 @@ const classIcon = {
 </script>
 
 <template>
-  <div class="flex flex-col gap-y-4 items-center">
+  <div class="flex flex-col gap-y-4 items-center" :class="contentClass">
     <div
+      v-if="!hideIcon"
       class="w-[48px] aspect-square rounded-full flex items-center justify-center"
       :class="[classIcon[variant], iconClass]"
     >
