@@ -35,7 +35,7 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  descriptionStyle: String,
+  contentClass: String,
 });
 const emit = defineEmits(["confirm", "cancel", "update:model-value"]);
 const cancelButton = computed(() => ({
@@ -105,9 +105,9 @@ const emitModelValue = (e) => {
       :icon-class="iconClass"
       :variant="variant"
       :description="description"
-      :description-style="descriptionStyle"
+      :content-class="contentClass"
       :icon="icon"
-      :show-icon="hideIcon"
+      :hide-icon="hideIcon"
     >
       <template v-if="$slots.description" #description>
         <slot name="description" />
