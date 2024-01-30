@@ -14,6 +14,8 @@ const props = defineProps({
   overviewActiveTab: { type: String, default: "" },
   customerCardVariant: { type: String, default: "" },
   customer: { type: Object, default: null },
+  customerIsHover: { type: Boolean, default: false },
+  customerIsEdit: { type: Boolean, default: false },
   variant: {
     type: String,
     default: "default",
@@ -32,6 +34,7 @@ const props = defineProps({
 defineEmits({
   changeTab: [],
   addCustomer: [],
+  editCustomer: [],
 });
 const copyLink = async () => {
   try {
@@ -73,7 +76,10 @@ const copyLink = async () => {
       :customer-card-variant="customerCardVariant"
       :customer="customer"
       :is-customer="isCustomer"
+      :customer-is-hover="customerIsHover"
+      :customer-is-edit="customerIsEdit"
       @add-customer="$emit('addCustomer')"
+      @edit-customer="$emit('editCustomer', $event)"
     >
       <template v-for="box in boxes" v-slot:[box.slot]="{ data }">
         <slot :name="box.slot" :data="data"></slot>
@@ -81,6 +87,14 @@ const copyLink = async () => {
 
       <template v-for="box in boxes" v-slot:[box.infoTooltipSlot]="{ data }">
         <slot :name="box.infoTooltipSlot" :data="data"></slot>
+      </template>
+
+      <template v-if="$slots['customer-leading']" #customer-leading>
+        <slot name="customer-leading"></slot>
+      </template>
+
+      <template v-if="$slots['customer-bottom']" #customer-bottom>
+        <slot name="customer-bottom"></slot>
       </template>
     </DynamicType>
 

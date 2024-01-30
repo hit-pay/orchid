@@ -8,18 +8,38 @@ defineProps({
     validator: (val) => ["small", "big", "float"].includes(val),
   },
   customer: Object,
+  isHover: {
+    type: Boolean,
+    default: false,
+  },
+  isEdit: {
+    type: Boolean,
+    default: false,
+  },
 });
-defineEmits(["addCustomer"]);
+defineEmits(["addCustomer", "editCustomer"]);
 </script>
 
 <template>
   <div
-    class="rounded shrink-0 border border-oc-gray-200 bg-oc-bg-light flex items-center justify-between gap-4 px-4 py-5 customer-card"
-    :class="variant"
+    class="rounded shrink-0 border border-oc-gray-200 bg-oc-bg-light flex items-center justify-between gap-4 px-4 py-5 customer-card relative group"
+    :class="{ [variant]: true, 'hover:shadow-normal transition': isHover }"
   >
-    <div
-      class="flex flex-col items-center justify-center gap-y-3"
-    >
+    <div class="flex flex-col items-center justify-center gap-y-3">
+      <div
+        v-if="isEdit"
+        class="absolute right-3 top-3 transition"
+        :class="{ 'opacity-0 group-hover:opacity-100': isHover }"
+      >
+        <Button
+          @click="$emit('editCustomer', customer)"
+          right-icon="pencil"
+          variant="secondary"
+          size="small"
+          class="*:!px-[6px]"
+        />
+      </div>
+
       <template v-if="customer">
         <!--  Main  -->
         <div class="w-full flex gap-x-3 items-center">
@@ -35,10 +55,15 @@ defineEmits(["addCustomer"]);
         </div>
 
         <!--  Detail  -->
-        <div v-if="variant !== 'small'" class="flex flex-col gap-y-4 pt-4 w-full">
+        <div
+          v-if="variant !== 'small'"
+          class="flex flex-col gap-y-4 pt-4 w-full"
+        >
           <ListDetail
             label="Phone"
-            :content="customer?.phone_number ? `+${customer.phone_number}` : '-'"
+            :content="
+              customer?.phone_number ? `+${customer.phone_number}` : '-'
+            "
           />
           <ListDetail
             label="Address"
@@ -75,6 +100,13 @@ defineEmits(["addCustomer"]);
           @click="$emit('addCustomer')"
         />
       </template>
+
+      <div
+        v-if="$slots.bottom"
+        :class="{ 'opacity-0 group-hover:opacity-100': isHover }"
+      >
+        <slot name="bottom" />
+      </div>
     </div>
     <div v-if="$slots.leading">
       <slot name="leading" />
