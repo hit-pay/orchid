@@ -65,14 +65,21 @@ const emit = defineEmits([
   "edit:images",
   "delete:images",
   "add:images",
+  "update:field"
 ]);
 
-const updateData = (general = false) => {
+const updateData = (form, value, general = false) => {
   if (general) {
     emit("update:generalData", generalFormData.value);
   } else {
     emit("update:sectionData", sectionFormData.value);
   }
+  emit("update:field", {
+    general: form.general ? true : false,
+    field: form.name,
+    value: value
+  });
+
 };
 
 const onUpdateForm = (form, value = null) => {
@@ -81,20 +88,20 @@ const onUpdateForm = (form, value = null) => {
       formValues.value[formName.key] = value[index];
       if (form.general) {
         generalFormData.value[formName.key] = value[index];
-        updateData(true);
+        updateData(form, value, true);
       } else {
         sectionFormData.value[formName.key] = value[index];
-        updateData();
+        updateData(form, value);
       }
     });
   } else {
     formValues.value[form.name] = value;
     if (form.general) {
       generalFormData.value[form.name] = value;
-      updateData(true);
+      updateData(form, value, true);
     } else {
       sectionFormData.value[form.name] = value;
-      updateData();
+      updateData(form, value);
     }
   }
 };
@@ -195,6 +202,12 @@ const showSubForm = ref("");
           :has-submenu="form.hasSubmenu"
           :submenu-level="form.submenuLevel"
           @update:model-value="onUpdateForm(form, $event)"
+          @add:menu="$emit('update:field', {
+            general: form.general ? true : false,
+            field: form.name,
+            value: value,
+            child: $event
+          })"
         />
       </template>
       <template #Children="{ form }">
@@ -242,6 +255,12 @@ const showSubForm = ref("");
                   :has-submenu="slot.form.hasSubmenu"
                   :submenu-level="slot.form.submenuLevel"
                   @update:model-value="onUpdateForm(slot.form, $event)"
+                  @add:menu="$emit('update:field', {
+                    general: form.general ? true : false,
+                    field: form.name,
+                    value: value,
+                    child: $event
+                  })"
                 />
               </template>
               <template #Colors="slot">
