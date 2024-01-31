@@ -65,7 +65,7 @@ const emit = defineEmits([
   "edit:images",
   "delete:images",
   "add:images",
-  "update:field"
+  "update:field",
 ]);
 
 const updateData = (form, value, general = false) => {
@@ -77,9 +77,8 @@ const updateData = (form, value, general = false) => {
   emit("update:field", {
     general: form.general ? true : false,
     field: form.name,
-    value: value
+    value: value,
   });
-
 };
 
 const onUpdateForm = (form, value = null) => {
@@ -202,12 +201,14 @@ const showSubForm = ref("");
           :has-submenu="form.hasSubmenu"
           :submenu-level="form.submenuLevel"
           @update:model-value="onUpdateForm(form, $event)"
-          @add:menu="$emit('update:field', {
-            general: form.general ? true : false,
-            field: form.name,
-            value: value,
-            child: $event
-          })"
+          @add:menu="
+            $emit('update:field', {
+              general: form.general ? true : false,
+              field: form.name,
+              value: value,
+              child: $event,
+            })
+          "
         />
       </template>
       <template #Children="{ form }">
@@ -255,12 +256,14 @@ const showSubForm = ref("");
                   :has-submenu="slot.form.hasSubmenu"
                   :submenu-level="slot.form.submenuLevel"
                   @update:model-value="onUpdateForm(slot.form, $event)"
-                  @add:menu="$emit('update:field', {
-                    general: form.general ? true : false,
-                    field: form.name,
-                    value: value,
-                    child: $event
-                  })"
+                  @add:menu="
+                    $emit('update:field', {
+                      general: form.general ? true : false,
+                      field: form.name,
+                      value: value,
+                      child: $event,
+                    })
+                  "
                 />
               </template>
               <template #Colors="slot">

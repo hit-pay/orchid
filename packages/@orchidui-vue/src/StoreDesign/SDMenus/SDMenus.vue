@@ -44,7 +44,7 @@ const props = defineProps({
 const isLoading = ref(false);
 const emit = defineEmits({
   "update:modelValue": [],
-  "add:menu": []
+  "add:menu": [],
 });
 
 const update = (value) => emit("update:modelValue", value);
@@ -178,8 +178,8 @@ const saveMenuItems = (items) => {
   }
   emit("update:modelValue", newModelValue);
   items?.forEach((i) => {
-    emit("add:menu", i)
-  })
+    emit("add:menu", i);
+  });
 };
 const saveMenu = () => {
   isLoading.value = true;

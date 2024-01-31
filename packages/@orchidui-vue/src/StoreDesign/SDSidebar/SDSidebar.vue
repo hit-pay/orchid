@@ -558,10 +558,12 @@ const updateModelValues = (data, general = false) => {
           "
           @update:general-data="updateModelValues($event, true)"
           @update:section-data="updateModelValues($event, false)"
-          @update:field="$emit('update:field', {
-            section: sectionActive.key,
-            ...$event
-          })"
+          @update:field="
+            $emit('update:field', {
+              section: sectionActive.key,
+              ...$event,
+            })
+          "
         >
         </RequestForm>
       </div>

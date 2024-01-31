@@ -90,8 +90,8 @@ export const Default = {
       };
 
       const onUpdateField = (data) => {
-        console.log("field updated :", data)
-      }
+        console.log("field updated :", data);
+      };
 
       return {
         sidebarConfig,
