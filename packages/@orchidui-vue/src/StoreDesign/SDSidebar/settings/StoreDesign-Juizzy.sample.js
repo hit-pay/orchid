@@ -6,8 +6,8 @@ const StoreDesign = {
     banners: [],
     banners_mobile: [],
     responsive_banner_size: true,
-    banner_size: [3,1],
-    banner_size_mobile: [1,1],
+    banner_size: [3, 1],
+    banner_size_mobile: [1, 1],
     footer_link_1_title: "",
     footer_link_1_menus: [],
     footer_link_2_title: "",
@@ -17,7 +17,7 @@ const StoreDesign = {
     bio_enabled: false,
     bio_icon_links: [],
     bio_button_links: [],
-    product_ratio: [1,1],
+    product_ratio: [1, 1],
   },
   sections: [
     {
@@ -28,11 +28,11 @@ const StoreDesign = {
       // Font
       font_heading: [
         "'Inter', sans-serif",
-        "https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap"
+        "https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap",
       ],
       font_body: [
-          "'Inter', sans-serif",
-          "https://fonts.googleapis.com/css2?family=Inter&display=swap"
+        "'Inter', sans-serif",
+        "https://fonts.googleapis.com/css2?family=Inter&display=swap",
       ],
       // colors
       color_bg: "#FFFFFF",
@@ -78,7 +78,8 @@ const StoreDesign = {
       alignment_half: "right",
       alignment_full: "center",
       banner_title: "Daily doze freshness",
-      description: "Imagine sinking your teeth into a perfectly grilled patty, topped with the freshest ingredients and our secret signature sauce. Every bite is a symphony of flavors that will have your taste buds dancing.",
+      description:
+        "Imagine sinking your teeth into a perfectly grilled patty, topped with the freshest ingredients and our secret signature sauce. Every bite is a symphony of flavors that will have your taste buds dancing.",
       button_text: "Show more",
       button_link: "https://hitpayapp.com",
       color_bg: "#FFFFFF",
@@ -102,12 +103,13 @@ const StoreDesign = {
       key: "product_list_1",
       section: "Products",
       title: "Don’t missed themt",
-      description: "The drinks that started it all. Our juices are made from the freshest fruits and natural ingredients using a cold-pressed method that keeps nutrients and enzymes intact.",
+      description:
+        "The drinks that started it all. Our juices are made from the freshest fruits and natural ingredients using a cold-pressed method that keeps nutrients and enzymes intact.",
       variant: "grid",
       product_from: "all",
       category_id: "",
-      column_grid: [2,3,4],
-      column_carousel: [2,3,4],
+      column_grid: [2, 3, 4],
+      column_carousel: [2, 3, 4],
       show_category_filter: true,
       // category_color_bg: "#111111",
       // category_color_text: "#FFFFFF",
@@ -123,7 +125,8 @@ const StoreDesign = {
       key: "our_story",
       section: "TextAndImage",
       title: "Our Story",
-      description: "The drinks that started it all. Our juices are made from the freshest fruits and natural ingredients using a cold-pressed method that keeps nutrients and enzymes intact.",
+      description:
+        "The drinks that started it all. Our juices are made from the freshest fruits and natural ingredients using a cold-pressed method that keeps nutrients and enzymes intact.",
       variant: "full",
       alignment_half: "left",
       alignment_full: "left",

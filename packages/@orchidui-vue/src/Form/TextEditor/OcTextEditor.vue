@@ -54,7 +54,7 @@ Quill.register(Size, true);
 const id = ref(
   Math.random()
     .toString(36)
-    .replace(/[^a-zA-Z]+/g, "")
+    .replace(/[^a-zA-Z]+/g, ""),
 );
 const isUndoActive = ref(false);
 const isRedoActive = ref(false);

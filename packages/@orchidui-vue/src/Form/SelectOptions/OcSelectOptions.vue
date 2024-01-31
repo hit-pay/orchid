@@ -82,7 +82,11 @@ const isGridVariant = computed(() => {
         }"
         @click="update(opt.value)"
       >
-        <slot name="option" :option="opt" :selected="opt.value.toString() === modelValue.toString()">
+        <slot
+          name="option"
+          :option="opt"
+          :selected="opt.value.toString() === modelValue.toString()"
+        >
           <img
             v-if="opt.preview"
             class="group-hover:shadow rounded"
@@ -90,7 +94,9 @@ const isGridVariant = computed(() => {
               'border-2 border-oc-primary':
                 isGridVariant && opt.value.toString() === modelValue.toString(),
               'border border-oc-gray-200':
-                (isGridVariant && opt.value.toString() !== modelValue.toString()) || !isGridVariant,
+                (isGridVariant &&
+                  opt.value.toString() !== modelValue.toString()) ||
+                !isGridVariant,
               'w-full': isGridVariant,
               'w-[50px]': !isGridVariant,
             }"
@@ -108,8 +114,11 @@ const isGridVariant = computed(() => {
               :class="{
                 'text-sm ': isGridVariant,
                 'text-oc-text-400 group-hover:text-oc-text-500':
-                  isGridVariant && opt.value.toString() !== modelValue.toString(),
-                'text-oc-text-500': isGridVariant && opt.value.toString() === modelValue.toString(),
+                  isGridVariant &&
+                  opt.value.toString() !== modelValue.toString(),
+                'text-oc-text-500':
+                  isGridVariant &&
+                  opt.value.toString() === modelValue.toString(),
               }"
               >{{ opt.label }}</span
             >
@@ -126,7 +135,11 @@ const isGridVariant = computed(() => {
             height="16"
             name="check-2"
             class="text-oc-primary"
-            :class="opt.value.toString() === modelValue.toString() ? 'opacity-100' : 'opacity-0'"
+            :class="
+              opt.value.toString() === modelValue.toString()
+                ? 'opacity-100'
+                : 'opacity-0'
+            "
           />
         </slot>
       </div>

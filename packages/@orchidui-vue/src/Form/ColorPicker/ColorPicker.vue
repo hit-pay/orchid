@@ -16,12 +16,12 @@ const isOpen = ref(false);
 const inputValue = ref(props.modelValue);
 
 const onUpdate = (value) => {
-  if(!value){
-    return 
+  if (!value) {
+    return;
   }
-  inputValue.value = value
-  emit('update:model-value', value)
-}
+  inputValue.value = value;
+  emit("update:model-value", value);
+};
 </script>
 
 <template>
@@ -32,7 +32,9 @@ const onUpdate = (value) => {
       :icon-props="{ style: { color: inputValue } }"
       @update:model-value="onUpdate"
     >
-    <template v-if="$slots.leading" #leading><slot name="leading"></slot></template>
+      <template v-if="$slots.leading" #leading
+        ><slot name="leading"></slot
+      ></template>
     </Input>
     <template #menu>
       <ColorPickerPopup

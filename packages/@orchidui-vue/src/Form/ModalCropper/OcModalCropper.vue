@@ -92,7 +92,7 @@ const fileUpload = (e) => {
       <img v-else class="w-full" :src="img" />
 
       <div class="flex gap-x-1 justify-center relative">
-        <template v-if="localImage" >
+        <template v-if="localImage">
           <Button
             variant="secondary"
             size="small"
