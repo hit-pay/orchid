@@ -23,7 +23,7 @@ defineProps({
       <Chip v-if="chipProps" v-bind="chipProps" />
     </div>
     <div
-      v-if="description"
+      v-if="description || $slots.description"
       class="text-oc-text-400 text-sm group flex items-center gap-x-4"
     >
       <slot name="description" :description="description">
