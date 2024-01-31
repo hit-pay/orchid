@@ -246,9 +246,16 @@ const displayFilterData = computed(() => {
     let display = [];
 
     Object.keys(filterData.value).forEach((name) => {
-      const filterTabKey = filterOptions.value?.tabs?.key;
+      let filterTabKey = filterOptions.value?.tabs?.key;
       const filterSearchKey = filterOptions.value?.search?.key;
       const filterPerPageKey = filterOptions.value?.per_page?.key ?? "per_page";
+
+      filterOptions.value.form?.find((f) => {
+       if(f.name === filterTabKey){
+        filterTabKey = ''
+       }
+      });
+      
       if (
         name !== "page" &&
         name !== "cursor" &&
