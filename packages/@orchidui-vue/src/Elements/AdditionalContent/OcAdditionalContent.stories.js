@@ -257,6 +257,8 @@ export const Dynamic = {
                 :overview-tabs="args.overviewTabs"
                 :customer-card-variant="args.customerCardVariant"
                 is-customer
+                customer-is-hover
+                customer-is-edit
                 :customer="args.customer"
                 :overview-active-tab="args.overviewActiveTab"
                 @change-tab="args.overviewActiveTab = $event"
@@ -278,6 +280,9 @@ export const Dynamic = {
                 <div class="p-4">
                   <div class="text-oc-error">Tooltip</div>
                 </div>
+              </template>
+              <template #customer-bottom>
+                <div>Customer Bottom</div>
               </template>
             </AdditionalContent>
           </Theme>
