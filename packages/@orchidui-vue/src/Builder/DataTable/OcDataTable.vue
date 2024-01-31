@@ -355,7 +355,6 @@ const displayFilterData = computed(() => {
       :row-class="rowClass"
       :row-link="rowLink"
       :is-sticky="tableOptions.isSticky"
-      class="min-h-[600px]"
       @update:selected="$emit('update:selected', $event)"
       @click:row="$emit('click:row', $event)"
     >
