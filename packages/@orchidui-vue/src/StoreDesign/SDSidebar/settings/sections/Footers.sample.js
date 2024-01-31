@@ -28,7 +28,7 @@ const FOOTER_CONTENT_FORM = [
     type: "SectionItem",
     props: {
       title: "Footer Logo",
-      description: "Recommended size 640x640 pixels"
+      description: "Recommended size 640x640 pixels",
     },
   },
   {
@@ -41,12 +41,12 @@ const FOOTER_CONTENT_FORM = [
   {
     type: "SectionItem",
     props: {
-      title: "Content"
+      title: "Content",
     },
   },
   {
     type: "TextArea",
-    name: "footer_content"
+    name: "footer_content",
   },
   {
     name: "PaymentLogo",
@@ -183,7 +183,7 @@ const FOOTER_CONTENT_FORM = [
         noMenuIcon: ASSETS_URL + "no-menu-footer.png",
       },
     ],
-  }
+  },
 ];
 
 export { FOOTER_CONTENT_FORM };

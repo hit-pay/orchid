@@ -21,11 +21,11 @@ const Config = {
             section: "Styles",
             font_heading: [
               "'Inter', sans-serif",
-              "https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap"
+              "https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap",
             ],
             font_body: [
-                "'Inter', sans-serif",
-                "https://fonts.googleapis.com/css2?family=Inter&display=swap"
+              "'Inter', sans-serif",
+              "https://fonts.googleapis.com/css2?family=Inter&display=swap",
             ],
             color_bg: "#FFFFFF",
             color_text: "#03102F",
@@ -82,18 +82,18 @@ const Config = {
       label: "Wood",
       preview: ASSETS_URL + "preset-2.png",
       sections: [
-         {
+        {
           section: "Styles",
           changes: {
             preset: "wood",
             section: "Styles",
             font_heading: [
               "'Inter', sans-serif",
-              "https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap"
+              "https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap",
             ],
             font_body: [
-                "'Inter', sans-serif",
-                "https://fonts.googleapis.com/css2?family=Inter&display=swap"
+              "'Inter', sans-serif",
+              "https://fonts.googleapis.com/css2?family=Inter&display=swap",
             ],
             color_bg: "#221F1C",
             color_text: "#B4ABA4",
@@ -157,11 +157,11 @@ const Config = {
             section: "Styles",
             font_heading: [
               "'Inter', sans-serif",
-              "https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap"
+              "https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap",
             ],
             font_body: [
-                "'Inter', sans-serif",
-                "https://fonts.googleapis.com/css2?family=Inter&display=swap"
+              "'Inter', sans-serif",
+              "https://fonts.googleapis.com/css2?family=Inter&display=swap",
             ],
             color_bg: "#F0E9F1",
             color_text: "#3C0848",

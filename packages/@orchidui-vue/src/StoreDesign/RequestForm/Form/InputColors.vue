@@ -13,11 +13,12 @@ const props = defineProps({
 });
 
 defineEmits({
-  "update:modelValue": []
+  "update:modelValue": [],
 });
 
 const getNewValues = (index, newVal) => {
-  let newValues = (props.modelValue && props.modelValue.length > 0) ? props.modelValue :  [];
+  let newValues =
+    props.modelValue && props.modelValue.length > 0 ? props.modelValue : [];
   newValues[index] = newVal;
   return newValues;
 };
@@ -30,17 +31,27 @@ const getNewValues = (index, newVal) => {
         class="text-sm flex items-center gap-x-3 font-medium text-oc-text-400 mb-2"
         >{{ name.props.label }}</label
       >
-      <ColorPicker 
-          :model-value="(modelValue && modelValue.length > 0) ? (modelValue[index] ? modelValue[index] : '#FFFFFF') : '#FFFFFF'" 
-          @update:model-value="
-            $emit('update:modelValue', getNewValues(index, $event))
-          ">
+      <ColorPicker
+        :model-value="
+          modelValue && modelValue.length > 0
+            ? modelValue[index]
+              ? modelValue[index]
+              : '#FFFFFF'
+            : '#FFFFFF'
+        "
+        @update:model-value="
+          $emit('update:modelValue', getNewValues(index, $event))
+        "
+      >
         <template #leading>
           <Icon class="ml-auto" name="paint" />
-        </template>  
-        </ColorPicker>
+        </template>
+      </ColorPicker>
     </div>
-    <div  v-if="form.props && form.props.description" class="text-sm flex items-center text-oc-text-400">
+    <div
+      v-if="form.props && form.props.description"
+      class="text-sm flex items-center text-oc-text-400"
+    >
       {{ form.props.description }}
     </div>
   </div>

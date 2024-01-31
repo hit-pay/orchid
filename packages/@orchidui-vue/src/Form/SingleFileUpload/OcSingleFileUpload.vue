@@ -33,7 +33,11 @@ const props = defineProps({
   },
   shouldTruncateFileName: Boolean,
 });
-const emit = defineEmits(["update:modelValue", "onRemoveFile", 'onExceedMaxFileSize']);
+const emit = defineEmits([
+  "update:modelValue",
+  "onRemoveFile",
+  "onExceedMaxFileSize",
+]);
 
 const inputRef = ref();
 const fileLink = ref("");
@@ -196,7 +200,9 @@ const onEditFile = () => {
             <template #menu>
               <div class="py-2 flex flex-col">
                 <div
-                  v-if="!currentFile?.file.type.includes('video') && allowToEdit"
+                  v-if="
+                    !currentFile?.file.type.includes('video') && allowToEdit
+                  "
                   class="flex p-3 cursor-pointer items-center gap-x-3"
                   @click="onEditFile"
                 >
@@ -241,9 +247,7 @@ const onEditFile = () => {
             </div>
 
             <div
-              :class="[
-                shouldTruncateFileName ? 'truncate max-w-[250px]' : '',
-              ]"
+              :class="[shouldTruncateFileName ? 'truncate max-w-[250px]' : '']"
             >
               {{ currentFile?.fileName }}
             </div>

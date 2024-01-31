@@ -8,8 +8,10 @@ defineProps({
   isCustomer: { type: Boolean, default: false },
   customerCardVariant: { type: String, default: "big" },
   customer: { type: Object, default: null },
+  customerIsHover: { type: Boolean, default: false },
+  customerIsEdit: { type: Boolean, default: false },
 });
-defineEmits(["addCustomer"]);
+defineEmits(["addCustomer", "editCustomer"]);
 </script>
 
 <template>
@@ -58,8 +60,19 @@ defineEmits(["addCustomer"]);
       v-if="isCustomer"
       :variant="customerCardVariant"
       :customer="customer"
+      :is-hover="customerIsHover"
+      :is-edit="customerIsEdit"
       @add-customer="$emit('addCustomer')"
-    />
+      @edit-customer="$emit('editCustomer', $event)"
+    >
+      <template v-if="$slots['customer-leading']" #leading>
+        <slot name="customer-leading"></slot>
+      </template>
+
+      <template v-if="$slots['customer-bottom']" #bottom>
+        <slot name="customer-bottom"></slot>
+      </template>
+    </CustomerCard>
   </div>
 
   <MobileDynamicType

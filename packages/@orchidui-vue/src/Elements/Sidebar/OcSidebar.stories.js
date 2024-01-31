@@ -12,7 +12,6 @@ export default {
   tags: ["autodocs"],
 };
 
-
 export const Default = {
   argTypes: {
     icon: {

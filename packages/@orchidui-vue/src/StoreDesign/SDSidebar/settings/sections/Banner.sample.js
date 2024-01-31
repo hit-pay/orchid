@@ -89,7 +89,7 @@ const BANNER_FORM = [
   },
   {
     name: "tab_banner",
-    type: 'Tabs',
+    type: "Tabs",
     show_if: "responsive_banner_size",
     show_if_value: true,
     props: {
@@ -103,33 +103,33 @@ const BANNER_FORM = [
           value: "mobile",
         },
       ],
-    }
+    },
   },
   {
     general: true,
     name: "banner_size",
     type: "SelectOptions",
     show_if: "tab_banner",
-    show_if_value: '',
+    show_if_value: "",
     props: {
       variant: "list2",
       options: [
         {
           preview: ASSETS_URL + "banner-size-small.png",
           label: "Small",
-          value: [4,1],
+          value: [4, 1],
           description: "Smallest height, fit to screen width , ratio (4:1)",
         },
         {
           preview: ASSETS_URL + "banner-size-medium.png",
           label: "Medium",
-          value: [3,1],
+          value: [3, 1],
           description: "Smallest height, fit to screen width , ratio (3:1)",
         },
         {
           preview: ASSETS_URL + "banner-size-large.png",
           label: "Large",
-          value: [2,1],
+          value: [2, 1],
           description: "Bigger height, fit to screen width , ratio (2:1)",
         },
         {
@@ -146,26 +146,26 @@ const BANNER_FORM = [
     name: "banner_size_mobile",
     type: "SelectOptions",
     show_if: "tab_banner",
-    show_if_value: 'mobile',
+    show_if_value: "mobile",
     props: {
       variant: "list2",
       options: [
         {
           preview: ASSETS_URL + "banner-size-small.png",
           label: "Small",
-          value: [3,1],
+          value: [3, 1],
           description: "Smallest height, fit to screen width , ratio (3:1)",
         },
         {
           preview: ASSETS_URL + "banner-size-medium.png",
           label: "Medium",
-          value: [2,1],
+          value: [2, 1],
           description: "Smallest height, fit to screen width , ratio (2:1)",
         },
         {
           preview: ASSETS_URL + "banner-size-large.png",
           label: "Large",
-          value: [1,1],
+          value: [1, 1],
           description: "Bigger height, fit to screen width , ratio (1:1)",
         },
         {
@@ -322,8 +322,8 @@ const BANNER_FORM = [
         ],
         type: "Colors",
       },
-    ]
-  }
+    ],
+  },
 ];
 
 export { BANNER_FORM };

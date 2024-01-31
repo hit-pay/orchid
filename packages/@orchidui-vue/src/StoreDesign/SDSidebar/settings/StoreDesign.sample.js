@@ -6,8 +6,8 @@ const StoreDesign = {
     banners: [],
     banners_mobile: [],
     responsive_banner_size: true,
-    banner_size: [3,1],
-    banner_size_mobile: [1,1],
+    banner_size: [3, 1],
+    banner_size_mobile: [1, 1],
     footer_link_1_title: "",
     footer_link_1_menus: [],
     footer_link_2_title: "",
@@ -17,7 +17,7 @@ const StoreDesign = {
     bio_enabled: false,
     bio_icon_links: [],
     bio_button_links: [],
-    product_ratio: [1,1],
+    product_ratio: [1, 1],
   },
   sections: [
     {
@@ -28,11 +28,11 @@ const StoreDesign = {
       // Font
       font_heading: [
         "'Inter', sans-serif",
-        "https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap"
+        "https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap",
       ],
       font_body: [
-          "'Inter', sans-serif",
-          "https://fonts.googleapis.com/css2?family=Inter&display=swap"
+        "'Inter', sans-serif",
+        "https://fonts.googleapis.com/css2?family=Inter&display=swap",
       ],
       // colors
       color_bg: "#FFFFFF",
@@ -105,8 +105,8 @@ const StoreDesign = {
       variant: "carousel",
       product_from: "feature",
       category_id: "",
-      column_grid: [2,3,4],
-      column_carousel: [2,3,4],
+      column_grid: [2, 3, 4],
+      column_carousel: [2, 3, 4],
       show_category_filter: true,
       category_color_bg: "#002771",
       category_color_text: "#FFFFFF",
@@ -126,8 +126,8 @@ const StoreDesign = {
       variant: "grid",
       product_from: "all",
       category_id: "",
-      column_grid: [2,3,4],
-      column_carousel: [2,3,4],
+      column_grid: [2, 3, 4],
+      column_carousel: [2, 3, 4],
       show_category_filter: false,
       is_limit_products: false,
       limit_products: 6,

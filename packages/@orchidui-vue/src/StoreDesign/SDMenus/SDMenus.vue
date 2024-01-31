@@ -294,7 +294,10 @@ const confirmDeleteMenu = () => {
         </div>
       </template>
       <template #content="{ item }">
-        <div v-if="item.children && item.children.length > 0 && hasSubmenu" class="flex w-full my-5">
+        <div
+          v-if="item.children && item.children.length > 0 && hasSubmenu"
+          class="flex w-full my-5"
+        >
           <DraggableList
             v-model="item.children"
             class="w-full"
@@ -329,7 +332,11 @@ const confirmDeleteMenu = () => {
             </template>
             <template #content="slot">
               <div
-                v-if="slot.item.children && slot.item.children.length > 0&& submenuLevel == 2"
+                v-if="
+                  slot.item.children &&
+                  slot.item.children.length > 0 &&
+                  submenuLevel == 2
+                "
                 class="flex w-full my-5"
               >
                 <DraggableList

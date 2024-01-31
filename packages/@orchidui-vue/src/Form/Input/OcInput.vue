@@ -163,7 +163,7 @@ const inputClasses = computed(() => [
       <div
         v-if="$slots.leading"
         :class="{
-          'border-l border-gray-200 pl-3 py-3': hasLeadingSeparator
+          'border-l border-gray-200 pl-3 py-3': hasLeadingSeparator,
         }"
       >
         <slot name="leading" />

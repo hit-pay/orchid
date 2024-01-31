@@ -1,4 +1,12 @@
-import { Theme, Table, Chip, Icon, Toggle, TableCellContent, TableCell } from "@/orchidui";
+import {
+  Theme,
+  Table,
+  Chip,
+  Icon,
+  Toggle,
+  TableCellContent,
+  TableCell,
+} from "@/orchidui";
 import TextEditor from "../../Form/TextEditor/OcTextEditor.vue";
 
 import { ref } from "vue";
@@ -33,8 +41,8 @@ export const Default = {
       const onClickRow = (item) => {
         console.log("on click row", item);
       };
-      
-      const rowClass = (r, i) => `z-[${100-i}]`;
+
+      const rowClass = (r, i) => `z-[${100 - i}]`;
       return { StickyTableOptions, args, selectedRows, onClickRow, rowClass };
     },
     template: `

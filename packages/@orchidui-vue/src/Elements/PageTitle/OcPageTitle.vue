@@ -45,7 +45,14 @@ defineEmits({
           :tooltip-options="tooltipOptions"
           :is-copy="isCopy"
           class="flex-1"
-        />
+        >
+          <template v-if="$slots.title" #title>
+            <slot name="title" />
+          </template>
+          <template v-if="$slots.description" #description>
+            <slot name="description" />
+          </template>
+        </Title>
 
         <slot name="right">
           <PageTitleRight

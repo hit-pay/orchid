@@ -9,7 +9,7 @@ const props = defineProps({
 });
 
 const isDropdownOpened = ref(
-  props.secondaryButtonProps?.isDropdownOpened ?? false
+  props.secondaryButtonProps?.isDropdownOpened ?? false,
 );
 const { isMobile } = useWindowWidth();
 </script>

@@ -1,5 +1,4 @@
-
-import { FONT_HEADING_OPTIONS, FONT_BODY_OPTIONS } from '../Font.sample'
+import { FONT_HEADING_OPTIONS, FONT_BODY_OPTIONS } from "../Font.sample";
 const STYLES_FORM = [
   {
     name: "Font",

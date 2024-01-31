@@ -228,7 +228,7 @@ export const After = {
   render: () => ({
     components: { Theme, OCInput, Icon },
     setup() {
-      const modelValue = ref('');
+      const modelValue = ref("");
 
       return {
         modelValue,
@@ -251,7 +251,7 @@ export const After = {
       </Theme>
     `,
   }),
-}
+};
 
 export const Leading = {
   render: () => ({
@@ -362,21 +362,21 @@ export const FormatValue = {
       const formatValue = (value) => {
         let output = value;
 
-        if (Number(value) === 0) return '0.00'
+        if (Number(value) === 0) return "0.00";
 
         // removing non-digit characters
-        output = +(`${output}`.replace(/\D/g, ''))
+        output = +`${output}`.replace(/\D/g, "");
 
-        // 
-        return (output / 100).toLocaleString('en-US', {
+        //
+        return (output / 100).toLocaleString("en-US", {
           minimumFractionDigits: 2,
-          maximumFractionDigits: 2
-        })
-      }
+          maximumFractionDigits: 2,
+        });
+      };
 
       const handleUpdateModelValue = (value) => {
-        modelValue.value = value.replaceAll(',', '')
-      }
+        modelValue.value = value.replaceAll(",", "");
+      };
 
       return { modelValue, args, formatValue, handleUpdateModelValue };
     },
