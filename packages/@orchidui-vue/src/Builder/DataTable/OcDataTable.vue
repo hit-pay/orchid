@@ -308,6 +308,11 @@ const displayFilterData = computed(() => {
               .join(", ");
           }
 
+          if (option.type === "RangeInput") {
+            optionLabel =
+              filterData.value[name][0] + " - " + filterData.value[name][1];
+          }
+
           if (option.type === "DatePicker") {
             if (
               option?.props?.type === "range" &&
