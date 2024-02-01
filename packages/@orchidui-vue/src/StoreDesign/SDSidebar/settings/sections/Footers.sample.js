@@ -25,28 +25,36 @@ const FOOTER_CONTENT_FORM = [
     type: "Colors",
   },
   {
-    type: "SectionItem",
-    props: {
-      title: "Footer Logo",
-      description: "Recommended size 640x640 pixels",
-    },
-  },
-  {
-    type: "Images",
-    name: "footer_logo",
-    props: {
-      maxImages: 1,
-    },
-  },
-  {
-    type: "SectionItem",
-    props: {
-      title: "Content",
-    },
-  },
-  {
-    type: "TextArea",
-    name: "footer_content",
+    name: "CopmanyDetail",
+    type: "Children",
+    icon: "pin-map",
+    label: "Company Detail",
+    children:[
+      {
+        type: "SectionItem",
+        props: {
+          title: "Footer Logo",
+          description: "Recommended size 640x640 pixels",
+        },
+      },
+      {
+        type: "Images",
+        name: "footer_logo",
+        props: {
+          maxImages: 1,
+        },
+      },
+      {
+        type: "SectionItem",
+        props: {
+          title: "Content",
+        },
+      },
+      {
+        type: "TextArea",
+        name: "footer_content",
+      },
+    ]
   },
   {
     name: "PaymentLogo",
