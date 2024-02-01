@@ -51,6 +51,7 @@ export const preventEventIfNotNumberInput = (event, options = {}) => {
     (event.key.startsWith("F") &&
       event.key.length > 1 &&
       !isNaN(event.key.substring(1))) ||
+    event.metaKey ||
     acceptedCharacters.includes(event.key)
   ) {
     return;
