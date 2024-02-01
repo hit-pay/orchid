@@ -3,9 +3,7 @@ import { Dropdown, Input, Icon } from "@/orchidui";
 import { computed, ref } from "vue";
 import codes from "../../data/CountryCodes.sample";
 import { preventEventIfNotNumberInput } from "@/orchidui/composables/helpers.js";
-import {
-  parsePhoneNumber,
-} from "libphonenumber-js";
+import { parsePhoneNumber } from "libphonenumber-js";
 
 const props = defineProps({
   countryCodes: { type: Array, default: () => codes },
