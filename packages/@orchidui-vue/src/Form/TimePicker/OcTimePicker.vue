@@ -74,7 +74,7 @@ watch(
       :label-icon="labelIcon"
       :tooltip-text="tooltipText"
       :tooltip-options="tooltipOptions"
-      readonly
+      :is-readonly="true"
     />
 
     <template #menu>
