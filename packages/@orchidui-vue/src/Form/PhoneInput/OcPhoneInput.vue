@@ -2,6 +2,7 @@
 import { Dropdown, Input, Icon } from "@/orchidui";
 import { computed, ref } from "vue";
 import codes from "../../data/CountryCodes.sample";
+import { preventEventIfNotNumberInput } from "@/orchidui/composables/helpers.js";
 
 const props = defineProps({
   countryCodes: { type: Array, default: () => codes },
@@ -102,6 +103,7 @@ const scrollToSelectedCountry = () => {
     :label-icon="labelIcon"
     :tooltip-text="tooltipText"
     :tooltip-options="tooltipOptions"
+    @keydown="preventEventIfNotNumberInput"
     @update:model-value="onInput"
   >
     <template #trailing>
@@ -135,7 +137,13 @@ const scrollToSelectedCountry = () => {
             class="flex flex-col max-h-[300px] py-2 overflow-y-scroll"
           >
             <div class="px-3 py-1 sticky top-0 bg-oc-bg-light z-[1000]">
-              <Input v-model="query" icon="search" placeholder="Search">
+              <Input
+                v-model="query"
+                icon="search"
+                placeholder="Search"
+                @keydown.stop
+                @click.stop
+              >
                 <template #icon>
                   <Icon class="w-5 h-5 text-oc-text-400" name="search" />
                 </template>
