@@ -1,4 +1,4 @@
-import { Theme, Modal, Button } from "@/orchidui";
+import { Theme, Modal, Button, FormBuilder } from "@/orchidui";
 import { ref } from "vue";
 
 export default {
@@ -43,7 +43,6 @@ export const Default = {
                   :title="args.title"
                   :description="args.description"
                   :size="args.size"
-                  persistent
                   :isCloseIcon="args.isCloseIcon"
                   :cancelButtonProps="args.cancelButtonProps"
                   :confirmButtonProps="args.confirmButtonProps"
@@ -57,6 +56,137 @@ export const Default = {
   }),
 };
 
+
+
+export const FormInModal = {
+  argTypes: {
+    size: {
+      control: "select",
+      options: ["small", "medium", "default"],
+    },
+  },
+  args: {
+    title: "Modal Title",
+    description: "Modal Description",
+    isCloseIcon: true,
+    cancelButtonProps: {
+      label: "Cancel",
+      variant: "secondary",
+    },
+    confirmButtonProps: {
+      label: "OK",
+    },
+    size: "medium",
+  },
+  render: (args) => ({
+    components: { Theme, Modal, Button, FormBuilder },
+    setup() {
+      const modalValue = ref(false);
+      const values = ref({
+        select_multiple:[],
+        select: ""
+      });
+      const errors = ref({});
+
+      const onUpdateForm = (form, value = null) => {
+        if (typeof form.name === "object") {
+          form.name.forEach((formName, index) => {
+            values.value[formName.key] = value[index];
+          });
+        } else {
+          values.value[form.name] = value;
+        }
+      };
+
+      const JSON_FORM = [
+        {
+          name: "select",
+          type: "Select",
+          props: {
+            label: "Select",
+            hint: "This is a hint text to help user",
+            placeholder: "placeholder",
+            options: [
+              {
+                label: "Option 1",
+                value: 1,
+              },
+              {
+                label: "Option 2",
+                value: 2,
+              },
+              {
+                label: "Option 3",
+                value: 3,
+              },
+              {
+                label: "Option 4",
+                value: 4,
+              },
+            ],
+          },
+        },
+        {
+          name: "select_multiple",
+          type: "Select",
+          props: {
+            label: "Select Multiple",
+            hint: "This is a hint text to help user",
+            placeholder: "placeholder",
+            isCheckboxes: true,
+            isSelectAll: true,
+            multiple: true,
+            options: [
+              {
+                label: "Option 1",
+                value: "1",
+              },
+              {
+                label: "Option 2",
+                value: "2",
+              },
+              {
+                label: "Option 3",
+                value: "3",
+              },
+              {
+                label: "Option 4",
+                value: "4",
+              },
+            ],
+          },
+        },
+      ]
+      return { modalValue, args, values, errors, onUpdateForm, JSON_FORM };
+    },
+    template: `
+          <Theme>
+            <div class="h-[500px]">
+              <Button label="Toggle Modal Here" @click="modalValue = !modalValue"/>
+
+              <Modal
+                  v-model="modalValue"
+                  class="!w-full !h-full"
+                  :title="args.title"
+                  :description="args.description"
+                  :size="args.size"
+                  :isCloseIcon="args.isCloseIcon"
+                  :cancelButtonProps="args.cancelButtonProps"
+                  :confirmButtonProps="args.confirmButtonProps"
+              >
+              <FormBuilder
+                id="form-builder"
+                class="gap-5"
+                :errors="errors"
+                :values="values"
+                :json-form="JSON_FORM"
+                @onUpdate="onUpdateForm" />
+              </Modal>
+            </div>
+          </Theme>
+        `,
+  }),
+};
 export const Clean = {
   argTypes: {
     size: {

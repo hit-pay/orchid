@@ -19,7 +19,6 @@ for (let index = 0; index < props.options.length; index++) {
     font-family: ${props.options[index].value[0]};
     font-weight: ${props.options[index].weight};
   }`;
-  console.log(`.oc-font-${getClassName(props.options[index].value[0])}`);
 }
 let head = document.head || document.getElementsByTagName("head")[0];
 let style = document.createElement("style");

@@ -8,7 +8,7 @@ import {
   Button,
   Dropdown,
 } from "@/orchidui";
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 
 const props = defineProps({
   label: String,
@@ -71,6 +71,8 @@ const emit = defineEmits({
 const query = ref("");
 const isDropdownOpened = ref(false);
 
+const optionsKey = ref(new Date().toISOString());
+
 const isSelectedAll = computed(() => {
   if (props.multiple) {
     return (
@@ -81,12 +83,30 @@ const isSelectedAll = computed(() => {
   return false;
 });
 
-const filterableOptions = computed(
-  () =>
-    (props.isAsynchronousSearch
-      ? props.options
-      : filterOptions(props.options, query.value)) || [],
-);
+const filterableOptions = computed(() => {
+  const filteredOptions = [];
+
+  for (const option of props.options) {
+    if (option.values) {
+      const filteredGroup = option.values.filter((subOption) =>
+        subOption.label.toLowerCase().includes(query.value.toLowerCase()),
+      );
+
+      if (filteredGroup.length > 0) {
+        filteredOptions.push({
+          label: option.label,
+          values: filteredGroup,
+        });
+      }
+    } else {
+      if (option.label.toLowerCase().includes(query.value.toLowerCase())) {
+        filteredOptions.push(option);
+      }
+    }
+  }
+
+  return filteredOptions;
+});
 
 const localValueOption = computed(() => {
   if (props.multiple) {
@@ -112,30 +132,6 @@ const localValueOption = computed(() => {
   }
 });
 
-const filterOptions = (options, query) => {
-  const filteredOptions = [];
-
-  for (const option of options) {
-    if (option.values) {
-      const filteredGroup = option.values.filter((subOption) =>
-        subOption.label.toLowerCase().includes(query.toLowerCase()),
-      );
-
-      if (filteredGroup.length > 0) {
-        filteredOptions.push({
-          label: option.label,
-          values: filteredGroup,
-        });
-      }
-    } else {
-      if (option.label.toLowerCase().includes(query.toLowerCase())) {
-        filteredOptions.push(option);
-      }
-    }
-  }
-
-  return filteredOptions;
-};
 const selectOption = (option) => {
   let result;
 
@@ -185,6 +181,11 @@ const selectAll = () => {
 };
 const baseInput = ref();
 const maxPopperWidth = ref(0);
+
+watch(filterableOptions, () => {
+  optionsKey.value = new Date().toISOString();
+});
+
 onMounted(() => {
   maxPopperWidth.value = baseInput.value.$el.offsetWidth;
 });
@@ -275,13 +276,20 @@ onMounted(() => {
 
           <div class="flex flex-col gap-y-2">
             <Option
-              v-if="isCheckboxes && isSelectAll && filterableOptions.length"
+              v-if="
+                isCheckboxes &&
+                isSelectAll &&
+                filterableOptions.length &&
+                multiple
+              "
               :is-selected="isSelectedAll"
               is-checkboxes
+              :is-partial="!isSelectedAll && !!modelValue?.length"
+              class="border-b border-oc-gray-200"
               label="Select All"
               @click="selectAll"
             />
-            <slot :f-options="filterableOptions" :select-option="selectOption">
+            <slot :key="optionsKey" :f-options="filterableOptions" :select-option="selectOption">
               <Option
                 v-for="option in filterableOptions"
                 :key="option.value"
