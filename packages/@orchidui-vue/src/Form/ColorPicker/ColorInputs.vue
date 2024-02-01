@@ -43,7 +43,6 @@ const isHexColorValid = computed(() => {
 
 const changeHexColor = () => {
   if (localValue.value.startsWith("#") && isHexColorValid.value) {
-    console.log(localValue.value);
     emit("update:activeColor", localValue.value);
   } else {
     emit("update:activeColor", "#000000");

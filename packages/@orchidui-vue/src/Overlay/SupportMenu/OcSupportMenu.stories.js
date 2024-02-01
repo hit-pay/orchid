@@ -1,4 +1,5 @@
 import { Theme, SupportMenu } from "@/orchidui";
+import { ref } from "vue";
 
 export default {
   component: SupportMenu,
@@ -7,7 +8,6 @@ export default {
 
 export const Default = {
   args: {
-    modelValue: true,
     title: undefined,
     info: undefined,
     confirmButtonProps: undefined,
@@ -63,11 +63,12 @@ export const Default = {
   render: (args) => ({
     components: { SupportMenu, Theme },
     setup() {
-      return { args };
+      const modelValue = ref(false);
+      return { args, modelValue };
     },
     template: `
           <Theme class="h-[450px] w-full">
-            <SupportMenu v-model="args.modelValue" :confirmButtonProps="args.confirmButtonProps"
+            <SupportMenu v-model="modelValue" :confirmButtonProps="args.confirmButtonProps"
                          :title="args.title" :info="args.info" :topMenu="args.topMenu" :bottomMenu="args.bottomMenu"/>
           </Theme>
         `,
