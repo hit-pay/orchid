@@ -65,14 +65,20 @@ const emit = defineEmits([
   "edit:images",
   "delete:images",
   "add:images",
+  "update:field",
 ]);
 
-const updateData = (general = false) => {
+const updateData = (form, value, general = false) => {
   if (general) {
     emit("update:generalData", generalFormData.value);
   } else {
     emit("update:sectionData", sectionFormData.value);
   }
+  emit("update:field", {
+    general: form.general ? true : false,
+    field: form.name,
+    value: value,
+  });
 };
 
 const onUpdateForm = (form, value = null) => {
@@ -81,20 +87,20 @@ const onUpdateForm = (form, value = null) => {
       formValues.value[formName.key] = value[index];
       if (form.general) {
         generalFormData.value[formName.key] = value[index];
-        updateData(true);
+        updateData(form, value, true);
       } else {
         sectionFormData.value[formName.key] = value[index];
-        updateData();
+        updateData(form, value);
       }
     });
   } else {
     formValues.value[form.name] = value;
     if (form.general) {
       generalFormData.value[form.name] = value;
-      updateData(true);
+      updateData(form, value, true);
     } else {
       sectionFormData.value[form.name] = value;
-      updateData();
+      updateData(form, value);
     }
   }
 };
@@ -163,6 +169,12 @@ const formatImagesValue = (value, name) => {
 props.requestForm.forEach((f) => {
   if (f.type === "Images") {
     formatImagesValue(formValues.value[f.name], f.name);
+  }else if(f.type === "Children"){
+    f.children.forEach((childForm) => {
+      if (childForm.type === "Images") {
+        formatImagesValue(formValues.value[childForm.name], childForm.name);
+      }
+    });
   }
 });
 
@@ -195,6 +207,14 @@ const showSubForm = ref("");
           :has-submenu="form.hasSubmenu"
           :submenu-level="form.submenuLevel"
           @update:model-value="onUpdateForm(form, $event)"
+          @add:menu="
+            $emit('update:field', {
+              general: form.general ? true : false,
+              field: form.name,
+              value: value,
+              child: $event,
+            })
+          "
         />
       </template>
       <template #Children="{ form }">
@@ -242,6 +262,14 @@ const showSubForm = ref("");
                   :has-submenu="slot.form.hasSubmenu"
                   :submenu-level="slot.form.submenuLevel"
                   @update:model-value="onUpdateForm(slot.form, $event)"
+                  @add:menu="
+                    $emit('update:field', {
+                      general: form.general ? true : false,
+                      field: form.name,
+                      value: value,
+                      child: $event,
+                    })
+                  "
                 />
               </template>
               <template #Colors="slot">
@@ -269,6 +297,23 @@ const showSubForm = ref("");
                   @update:model-value="onUpdateForm(slot.form, $event)"
                 />
               </template>
+              <template #Images="slot">
+                <MultipleUploadFile
+                  v-if="imageLoaded && images[slot.form.name]"
+                  :model-value="images[slot.form.name]"
+                  :hint="slot.form.props?.hint ?? ''"
+                  :max-size="5"
+                  :max-images="slot.form.props?.maxImages ?? 8"
+                  :important="true"
+                  is-image-only
+                  :columns-count="slot.form.props?.columnsCount ?? 4"
+                  with-link
+                  @update:model-value="onUpdateimages(slot.form, $event)"
+                  @on-edit-file="onEditimages(slot.form, $event)"
+                  @on-remove-file="onDeleteimages(slot.form, $event)"
+                >
+                </MultipleUploadFile>
+                </template>
             </FormBuilder>
           </div>
         </div>

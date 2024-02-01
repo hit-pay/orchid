@@ -98,6 +98,8 @@ export const Default = {
     isAddNew: false,
     isDisabled: false,
     isRequired: false,
+    isCheckboxes: false,
+    isSelectAll: false,
     labelIcon: "",
     tooltipText: "Tooltip text",
     tooltipOptions: {
@@ -124,6 +126,8 @@ export const Default = {
                   :is-inline-label="args.isInlineLabel"
                   :hint="args.hint"
                   :is-filterable="args.isFilterable"
+                  :is-checkboxes="args.isCheckboxes"
+                  :is-select-all="args.isSelectAll"
                   :is-asynchronous-search="args.isAsynchronousSearch"
                   :is-add-new="args.isAddNew"
                   :placeholder="args.placeholder"
@@ -315,7 +319,7 @@ export const Multiple = {
                 multiple
                 placeholder="Placeholder"
             />
-            
+
             <Select
                 v-model="selectedOption"
                 :options="options"

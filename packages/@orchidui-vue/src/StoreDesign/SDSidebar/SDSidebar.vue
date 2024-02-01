@@ -54,6 +54,8 @@ const emit = defineEmits({
   "add:images": [],
   "update:section": [],
   "update:general": [],
+  "update:field": [],
+  "close:settings": []
 });
 
 const presetOptions = computed(() => {
@@ -344,6 +346,11 @@ const updateModelValues = (data, general = false) => {
   }
   emit("update:values", newStoreDesignData);
 };
+
+const closeSettings = () => {
+  emit("close:settings", sectionActive.value.key)
+  changeSection('', '')
+}
 </script>
 <template>
   <div class="h-full overflow-auto relative border border-gray-200">
@@ -533,7 +540,7 @@ const updateModelValues = (data, general = false) => {
           name="x"
           width="24"
           height="24"
-          @click="changeSection('', '')"
+          @click="closeSettings"
         />
         <div v-if="sectionActive" class="font-medium pb-4 px-7">
           {{ sectionActive.title ?? sectionActive.section }}
@@ -557,6 +564,12 @@ const updateModelValues = (data, general = false) => {
           "
           @update:general-data="updateModelValues($event, true)"
           @update:section-data="updateModelValues($event, false)"
+          @update:field="
+            $emit('update:field', {
+              section: sectionActive.key,
+              ...$event,
+            })
+          "
         >
         </RequestForm>
       </div>
