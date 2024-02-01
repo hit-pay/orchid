@@ -76,6 +76,14 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  inputMode: {
+    type: String,
+    default: "text",
+  },
+  pattern: {
+    type: String,
+    default: "",
+  },
 });
 
 const emit = defineEmits(["update:modelValue", "blur", "focus"]);
@@ -145,6 +153,8 @@ const inputClasses = computed(() => [
             :readonly="isReadonly"
             :placeholder="placeholder"
             :disabled="disabled"
+            :inputmode="inputMode"
+            :pattern="pattern"
             class="h-7 outline-none w-full text-oc-text disabled:bg-transparent disabled:text-oc-text-300 text-ellipsis placeholder:font-normal placeholder:text-oc-text-300 bg-oc-bg-light"
             v-bind="eventListeners"
             @focus="
