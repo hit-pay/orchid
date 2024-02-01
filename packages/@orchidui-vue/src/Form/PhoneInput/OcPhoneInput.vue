@@ -93,28 +93,34 @@ const scrollToSelectedCountry = () => {
 const onPaste = (e) => {
   let text = e.clipboardData.getData("Text");
 
-  if (text.replace(/[^0-9]/g, "")) {
-    text = text.slice(0, 19);
+  try {
+    if (text.search(/[^0-9]/g)) {
+      text = text.slice(0, 19);
 
-    if (text.length > 5) {
-      const { nationalNumber, countryCallingCode, country } = parsePhoneNumber(
-        "+" + text.replace("+", ""),
-      );
+      if (text.length > 5) {
+        const { nationalNumber, countryCallingCode, country } =
+          parsePhoneNumber("+" + text.replace("+", ""));
 
-      if (countryCallingCode && country) {
-        changeSelectedCountry(country, countryCallingCode, nationalNumber);
+        if (countryCallingCode && country) {
+          changeSelectedCountry(country, countryCallingCode, nationalNumber);
+        } else {
+          emit("update:modelValue", [
+            getCountryCode(selectedCountryIso.value),
+            nationalNumber,
+          ]);
+        }
       } else {
         emit("update:modelValue", [
           getCountryCode(selectedCountryIso.value),
-          nationalNumber,
+          text,
         ]);
       }
     }
+  } catch {
+    emit("update:modelValue", [getCountryCode(selectedCountryIso.value), text]);
   }
 
-  if (text.length > 5) {
-    e.preventDefault();
-  }
+  e.preventDefault();
 };
 </script>
 
