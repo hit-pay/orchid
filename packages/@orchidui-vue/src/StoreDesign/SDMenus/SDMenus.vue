@@ -44,6 +44,7 @@ const props = defineProps({
 const isLoading = ref(false);
 const emit = defineEmits({
   "update:modelValue": [],
+  "add:menu": [],
 });
 
 const update = (value) => emit("update:modelValue", value);
@@ -176,6 +177,9 @@ const saveMenuItems = (items) => {
     newModelValue = [...newModelValue, ...items];
   }
   emit("update:modelValue", newModelValue);
+  items?.forEach((i) => {
+    emit("add:menu", i);
+  });
 };
 const saveMenu = () => {
   isLoading.value = true;
@@ -204,7 +208,6 @@ const saveMenu = () => {
       title: addMenuForm.value.title,
       link: addMenuForm.value.link,
     };
-
     saveMenuItems([newMenu]);
   }
 

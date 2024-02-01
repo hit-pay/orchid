@@ -89,6 +89,10 @@ export const Default = {
         console.log(data);
       };
 
+      const onUpdateField = (data) => {
+        console.log("field updated :", data);
+      };
+
       return {
         sidebarConfig,
         sidebarActive,
@@ -102,6 +106,7 @@ export const Default = {
         args,
         content,
         options,
+        onUpdateField,
       };
     },
     template: `
@@ -119,6 +124,7 @@ export const Default = {
                     @update:active="onUpdateSidebarActive"
                     @edit:banner="onEditBanner"
                     @delete:banner="onDeleteBanner"
+                    @update:field="onUpdateField"
                     >
                   </SDSidebar>
                 </div>
