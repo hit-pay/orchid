@@ -1,7 +1,7 @@
 {
   "name": "@orchidui/vue",
   "description": "Orchid UI , Dashboard Ui Library Vue 3 tailwind css",
-  "version": "0.4.93",
+  "version": "0.4.96",
   "type": "module",
   "scripts": {
     "build": "vite build",
@@ -12,8 +12,7 @@
     "fast-glob": "^3.3.1",
     "sass": "^1.68.0",
     "shikiji": "^0.9.10",
-    "vite": "4.4.9",
-    "libphonenumber-js": "^1.10.51"
+    "vite": "4.4.9"
   },
   "publishConfig": {
     "access": "public"
