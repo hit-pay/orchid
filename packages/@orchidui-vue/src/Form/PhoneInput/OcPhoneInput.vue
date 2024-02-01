@@ -3,6 +3,9 @@ import { Dropdown, Input, Icon } from "@/orchidui";
 import { computed, ref } from "vue";
 import codes from "../../data/CountryCodes.sample";
 import { preventEventIfNotNumberInput } from "@/orchidui/composables/helpers.js";
+import {
+  parsePhoneNumber,
+} from "libphonenumber-js";
 
 const props = defineProps({
   countryCodes: { type: Array, default: () => codes },
@@ -70,9 +73,9 @@ const getCountryCode = (iso) => getCountryObject(iso)?.code || "";
 const onInput = (value) => {
   emit("update:modelValue", [getCountryCode(selectedCountryIso.value), value]);
 };
-const changeSelectedCountry = (iso, code) => {
+const changeSelectedCountry = (iso, code, value = null) => {
   selectedCountryIso.value = iso.toLowerCase();
-  emit("update:modelValue", [code, props.modelValue?.[1] || ""]);
+  emit("update:modelValue", [code, value || props.modelValue?.[1] || ""]);
   isDropdownOpened.value = false;
 };
 
@@ -87,6 +90,33 @@ const scrollToSelectedCountry = () => {
     const top = countryEl.offsetTop;
     countryListRef.value.scrollTo(0, top - 60, { behavior: "smooth" });
   }, 10);
+};
+
+const onPaste = (e) => {
+  let text = e.clipboardData.getData("Text");
+
+  if (text.replace(/[^0-9]/g, "")) {
+    text = text.slice(0, 19);
+
+    if (text.length > 5) {
+      const { nationalNumber, countryCallingCode, country } = parsePhoneNumber(
+        "+" + text.replace("+", ""),
+      );
+
+      if (countryCallingCode && country) {
+        changeSelectedCountry(country, countryCallingCode, nationalNumber);
+      } else {
+        emit("update:modelValue", [
+          getCountryCode(selectedCountryIso.value),
+          nationalNumber,
+        ]);
+      }
+    }
+  }
+
+  if (text.length > 5) {
+    e.preventDefault();
+  }
 };
 </script>
 
@@ -103,6 +133,7 @@ const scrollToSelectedCountry = () => {
     :label-icon="labelIcon"
     :tooltip-text="tooltipText"
     :tooltip-options="tooltipOptions"
+    @paste="onPaste"
     @keydown="preventEventIfNotNumberInput"
     @update:model-value="onInput"
   >
