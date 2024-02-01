@@ -169,6 +169,12 @@ const formatImagesValue = (value, name) => {
 props.requestForm.forEach((f) => {
   if (f.type === "Images") {
     formatImagesValue(formValues.value[f.name], f.name);
+  }else if(f.type === "Children"){
+    f.children.forEach((childForm) => {
+      if (childForm.type === "Images") {
+        formatImagesValue(formValues.value[childForm.name], childForm.name);
+      }
+    });
   }
 });
 
@@ -291,6 +297,23 @@ const showSubForm = ref("");
                   @update:model-value="onUpdateForm(slot.form, $event)"
                 />
               </template>
+              <template #Images="slot">
+                <MultipleUploadFile
+                  v-if="imageLoaded && images[slot.form.name]"
+                  :model-value="images[slot.form.name]"
+                  :hint="slot.form.props?.hint ?? ''"
+                  :max-size="5"
+                  :max-images="slot.form.props?.maxImages ?? 8"
+                  :important="true"
+                  is-image-only
+                  :columns-count="slot.form.props?.columnsCount ?? 4"
+                  with-link
+                  @update:model-value="onUpdateimages(slot.form, $event)"
+                  @on-edit-file="onEditimages(slot.form, $event)"
+                  @on-remove-file="onDeleteimages(slot.form, $event)"
+                >
+                </MultipleUploadFile>
+                </template>
             </FormBuilder>
           </div>
         </div>

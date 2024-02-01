@@ -275,9 +275,16 @@ onMounted(() => {
 
           <div class="flex flex-col gap-y-2">
             <Option
-              v-if="isCheckboxes && isSelectAll && filterableOptions.length"
+              v-if="
+                isCheckboxes &&
+                isSelectAll &&
+                filterableOptions.length &&
+                multiple
+              "
               :is-selected="isSelectedAll"
               is-checkboxes
+              :is-partial="!isSelectedAll && !!modelValue?.length"
+              class="border-b border-oc-gray-200"
               label="Select All"
               @click="selectAll"
             />

@@ -6,6 +6,7 @@ defineProps({
   subLabel: String,
   isSelected: [Boolean, Number],
   isCheckboxes: Boolean,
+  isPartial: Boolean,
 });
 </script>
 
@@ -17,6 +18,7 @@ defineProps({
     <Checkbox
       v-if="isCheckboxes"
       :model-value="!!isSelected"
+      :is-partial="isPartial"
       class="!w-fit pointer-events-none"
     />
     <div class="flex flex-col gap-3" :class="{ 'flex-1': isCheckboxes }">
