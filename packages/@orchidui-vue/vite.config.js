@@ -54,6 +54,7 @@ export default defineConfig({
         "echarts",
         "shikiji",
         "vue3-colorpicker",
+        "libphonenumber-js"
       ],
     },
   },
