@@ -78,6 +78,10 @@ const props = defineProps({
   },
   inputMode: {
     type: String,
+    validator: (value) =>
+      ["text", "decimal", "numeric", "tel", "search", "email", "url"].includes(
+        value,
+      ),
     default: "text",
   },
   pattern: {
