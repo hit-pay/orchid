@@ -1,11 +1,11 @@
 <script setup>
-import { computed } from "vue";
-import { Radio, BaseInput } from "@/orchidui";
+import { computed } from 'vue';
+import { Radio, BaseInput } from '@/orchidui';
 
 defineProps({
   alignment: {
     type: String,
-    default: "vertical",
+    default: 'vertical',
   },
   radio: Array,
   label: String,
@@ -14,16 +14,17 @@ defineProps({
   errorMessage: String,
   hint: String,
   modelValue: String,
+  isButtonVariant: Boolean,
 });
 const emit = defineEmits({
-  "update:modelValue": [],
+  'update:modelValue': [],
 });
 const alignmentClasses = computed(() => ({
-  horizontal: "gap-x-5 flex-wrap",
-  vertical: "flex-col gap-y-3",
+  horizontal: 'gap-x-5 flex-wrap',
+  vertical: 'flex-col gap-y-3',
 }));
 const onInput = (value) => {
-  emit("update:modelValue", value);
+  emit('update:modelValue', value);
 };
 </script>
 
@@ -31,16 +32,18 @@ const onInput = (value) => {
   <BaseInput :label="label" :error-message="errorMessage" :hint="hint">
     <div class="flex" :class="[alignmentClasses[alignment], wrapperClass]">
       <Radio
-        v-for="(r, i) in radio"
-        :id="r.value"
+        v-for="(item, i) in radio"
+        :id="item.value"
         :key="i"
         class="!w-fit"
-        :model-value="r.value"
-        :label="r.label"
+        :model-value="item.value"
+        :label="item.label"
+        :icon="item.icon"
         :is-error="!!errorMessage"
-        :checked="r.value === modelValue"
-        :is-disabled="!!r.isDisabled"
+        :checked="item.value === modelValue"
+        :is-disabled="!!item.isDisabled"
         :group-name="groupName"
+        :is-button-variant="isButtonVariant"
         @update:model-value="onInput"
       />
     </div>
