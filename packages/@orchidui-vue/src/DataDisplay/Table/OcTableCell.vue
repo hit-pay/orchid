@@ -130,7 +130,7 @@ const variantClass = computed(() => ({
         </template>
 
         <!--  EMPTY    -->
-        <TableLink  v-else-if="variant === Variants.EMPTY" :link="link">-</TableLink>
+        <TableLink  v-else-if="variant === Variants.EMPTY" :link="link" class="w-full h-full">-</TableLink>
 
         <TableCellContent
           v-else-if="variant === Variants.DATETIME"
@@ -160,7 +160,7 @@ const variantClass = computed(() => ({
         >
           {{ data }}
         </TableLink>
-        <TableLink v-else :link="link" >-</TableLink>
+        <TableLink v-else :link="link" class="w-full h-full">-</TableLink>
       </slot>
 
       <CopyTooltip
