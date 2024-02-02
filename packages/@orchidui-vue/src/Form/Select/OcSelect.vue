@@ -1,14 +1,6 @@
 <script setup>
-import {
-  BaseInput,
-  Input,
-  Option,
-  Icon,
-  Chip,
-  Button,
-  Dropdown,
-} from "@/orchidui";
-import { computed, onMounted, ref, watch } from "vue";
+import { BaseInput, Input, Option, Icon, Chip, Button, Dropdown } from '@/orchidui';
+import { computed, onMounted, ref, watch } from 'vue';
 
 const props = defineProps({
   label: String,
@@ -16,7 +8,7 @@ const props = defineProps({
   errorMessage: String,
   placeholder: {
     type: String,
-    default: "Placeholder",
+    default: 'Placeholder',
   },
   isInlineLabel: Boolean,
   isFilterable: Boolean,
@@ -39,11 +31,11 @@ const props = defineProps({
   },
   labelIcon: {
     type: String,
-    default: "",
+    default: '',
   },
   tooltipText: {
     type: String,
-    default: "",
+    default: '',
   },
   tooltipOptions: {
     type: Object,
@@ -56,29 +48,30 @@ const props = defineProps({
   popperOptions: {
     type: Object,
     default: () => ({
-      strategy: "fixed",
+      strategy: 'fixed',
     }),
+  },
+  selectIcon: {
+    type: String,
+    default: '',
   },
 });
 
 const emit = defineEmits({
   addNew: [],
-  "update:modelValue": [],
-  "max-option-allowed-set": [],
-  onSearchKeywords: "",
+  'update:modelValue': [],
+  'max-option-allowed-set': [],
+  onSearchKeywords: '',
 });
 
-const query = ref("");
+const query = ref('');
 const isDropdownOpened = ref(false);
 
 const optionsKey = ref(new Date().toISOString());
 
 const isSelectedAll = computed(() => {
   if (props.multiple) {
-    return (
-      props.modelValue.length &&
-      props.modelValue.length === filterableOptions.value.length
-    );
+    return props.modelValue.length && props.modelValue.length === filterableOptions.value.length;
   }
   return false;
 });
@@ -89,7 +82,7 @@ const filterableOptions = computed(() => {
   for (const option of props.options) {
     if (option.values) {
       const filteredGroup = option.values.filter((subOption) =>
-        subOption.label.toLowerCase().includes(query.value.toLowerCase()),
+        subOption.label.toLowerCase().includes(query.value.toLowerCase())
       );
 
       if (filteredGroup.length > 0) {
@@ -136,16 +129,14 @@ const selectOption = (option) => {
   let result;
 
   if (props.multiple) {
-    const isOptionHasBeenSelected = (props.modelValue || []).find(
-      (o) => o === option.value,
-    );
+    const isOptionHasBeenSelected = (props.modelValue || []).find((o) => o === option.value);
 
     if (
       !isOptionHasBeenSelected &&
       props.maxOptionAllowed &&
       localValueOption.value?.length >= Number(props.maxOptionAllowed)
     ) {
-      emit("max-option-allowed-set");
+      emit('max-option-allowed-set');
 
       return;
     }
@@ -159,22 +150,22 @@ const selectOption = (option) => {
     isDropdownOpened.value = false;
   }
 
-  emit("update:modelValue", result);
+  emit('update:modelValue', result);
 };
 const removeOption = (value) => {
   emit(
-    "update:modelValue",
-    (props.modelValue || []).filter((o) => o !== value),
+    'update:modelValue',
+    (props.modelValue || []).filter((o) => o !== value)
   );
 };
 const selectAll = () => {
   if (!props.isAsynchronousSearch) {
     if (isSelectedAll.value) {
-      emit("update:modelValue", []);
+      emit('update:modelValue', []);
     } else {
       emit(
-        "update:modelValue",
-        filterableOptions.value.map((o) => o.value),
+        'update:modelValue',
+        filterableOptions.value.map((o) => o.value)
       );
     }
   }
@@ -223,9 +214,7 @@ onMounted(() => {
       >
         <div v-if="multiple" class="flex flex-wrap gap-2 overflow-hidden">
           <Chip
-            v-for="option in maxVisibleOptions
-              ? localValueOption.slice(0, maxVisibleOptions)
-              : localValueOption"
+            v-for="option in maxVisibleOptions ? localValueOption.slice(0, maxVisibleOptions) : localValueOption"
             :key="option.value"
             closable
             :variant="option.variant"
@@ -235,20 +224,15 @@ onMounted(() => {
             @remove="removeOption(option.value)"
           />
           <Chip
-            v-if="
-              maxVisibleOptions && localValueOption.length > maxVisibleOptions
-            "
+            v-if="maxVisibleOptions && localValueOption.length > maxVisibleOptions"
             :label="`+${localValueOption.length - maxVisibleOptions}`"
           />
-          <span v-if="localValueOption.length === 0" class="text-oc-text-300">{{
-            placeholder
-          }}</span>
+          <span v-if="localValueOption.length === 0" class="text-oc-text-300">{{ placeholder }}</span>
         </div>
         <template v-else>
-          <span class="whitespace-nowrap">
-            <span v-if="isInlineLabel && label" class="text-oc-text-300">
-              {{ label }}:
-            </span>
+          <span class="flex flex-nowrap gap-2 items-center">
+            <Icon v-if="selectIcon" class="w-5 h-5 text-oc-text-400" :name="selectIcon" />
+            <span v-if="isInlineLabel && label" class="text-oc-text-300">{{ label }}:</span>
             <span v-if="localValueOption">{{ localValueOption.label }}</span>
             <span v-else class="text-oc-text-300">{{ placeholder }}</span>
           </span>
@@ -276,12 +260,7 @@ onMounted(() => {
 
           <div class="flex flex-col gap-y-2">
             <Option
-              v-if="
-                isCheckboxes &&
-                isSelectAll &&
-                filterableOptions.length &&
-                multiple
-              "
+              v-if="isCheckboxes && isSelectAll && filterableOptions.length && multiple"
               :is-selected="isSelectedAll"
               is-checkboxes
               :is-partial="!isSelectedAll && !!modelValue?.length"
