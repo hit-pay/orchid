@@ -55,7 +55,7 @@ const emit = defineEmits({
   "update:section": [],
   "update:general": [],
   "update:field": [],
-  "close:settings": []
+  "close:settings": [],
 });
 
 const presetOptions = computed(() => {
@@ -348,9 +348,9 @@ const updateModelValues = (data, general = false) => {
 };
 
 const closeSettings = () => {
-  emit("close:settings", sectionActive.value.key)
-  changeSection('', '')
-}
+  emit("close:settings", sectionActive.value.key);
+  changeSection("", "");
+};
 </script>
 <template>
   <div class="h-full overflow-auto relative border border-gray-200">
@@ -453,8 +453,16 @@ const closeSettings = () => {
               >
                 <template #option="{ option, selected }">
                   <div class="p-1 flex flex-col justify-center relative">
-                    <div v-if="option.value === 'custom' && selected" class="absolute top-0 right-0">
-                     <Button label="Edit" left-icon="pencil" size="small" variant="secondary" />
+                    <div
+                      v-if="option.value === 'custom' && selected"
+                      class="absolute top-0 right-0"
+                    >
+                      <Button
+                        label="Edit"
+                        left-icon="pencil"
+                        size="small"
+                        variant="secondary"
+                      />
                     </div>
                     <img :src="option.preview" alt="" />
                     <div
@@ -545,17 +553,17 @@ const closeSettings = () => {
           height="24"
           @click="closeSettings"
         />
-       <div class="flex items-center pb-4 px-7">
-       <template v-if="sidebarActive.section === 'Styles'">
-        <div class="text-oc-text-300">
-          {{ sidebarMenuLabel }}
+        <div class="flex items-center pb-4 px-7">
+          <template v-if="sidebarActive.section === 'Styles'">
+            <div class="text-oc-text-300">
+              {{ sidebarMenuLabel }}
+            </div>
+            <div class="mx-2">/</div>
+          </template>
+          <div v-if="sectionActive" class="font-medium">
+            {{ sectionActive.title ?? sectionActive.section }}
+          </div>
         </div>
-        <div class="mx-2">/</div>
-       </template>
-        <div v-if="sectionActive" class="font-medium ">
-          {{ sectionActive.title ?? sectionActive.section }}
-        </div>
-       </div>
       </div>
       <div v-if="sectionActiveValues" class="px-7 py-4 mt-4">
         <RequestForm

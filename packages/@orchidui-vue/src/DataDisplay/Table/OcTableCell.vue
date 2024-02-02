@@ -112,7 +112,11 @@ const variantClass = computed(() => ({
 
         <!--  IMAGE    -->
         <template v-else-if="variant === Variants.IMAGE">
-          <TableLink v-if="data"  :link="link" class="h-[42px] min-w-[42px] rounded mx-auto">
+          <TableLink
+            v-if="data"
+            :link="link"
+            class="h-[42px] min-w-[42px] rounded mx-auto"
+          >
             <img
               :class="imageClass"
               alt="table-img"
@@ -120,8 +124,8 @@ const variantClass = computed(() => ({
               :src="data"
             />
           </TableLink>
-          <TableLink  
-            v-else 
+          <TableLink
+            v-else
             :link="link"
             class="h-[42px] mx-auto w-[42px] bg-oc-bg-dark flex items-center justify-center rounded"
           >
@@ -130,7 +134,12 @@ const variantClass = computed(() => ({
         </template>
 
         <!--  EMPTY    -->
-        <TableLink  v-else-if="variant === Variants.EMPTY" :link="link" class="w-full h-full">-</TableLink>
+        <TableLink
+          v-else-if="variant === Variants.EMPTY"
+          :link="link"
+          class="w-full h-full"
+          >-</TableLink
+        >
 
         <TableCellContent
           v-else-if="variant === Variants.DATETIME"
@@ -145,12 +154,10 @@ const variantClass = computed(() => ({
           v-bind="content"
           :link="link"
         />
-        <!--   CHIP   -->
-        <Chip
-          v-else-if="variant === Variants.CHIP"
-          :label="data"
-          :variant="chipOptions[data]"
-        />
+        <TableLink v-else-if="variant === Variants.CHIP" :link="link">
+          <!--   CHIP   -->
+          <Chip :label="data" :variant="chipOptions[data]" />
+        </TableLink>
 
         <!--  DEFAULT    -->
         <TableLink

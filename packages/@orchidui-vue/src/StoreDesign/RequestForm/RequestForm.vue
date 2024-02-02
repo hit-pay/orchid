@@ -169,7 +169,7 @@ const formatImagesValue = (value, name) => {
 props.requestForm.forEach((f) => {
   if (f.type === "Images") {
     formatImagesValue(formValues.value[f.name], f.name);
-  }else if(f.type === "Children"){
+  } else if (f.type === "Children") {
     f.children.forEach((childForm) => {
       if (childForm.type === "Images") {
         formatImagesValue(formValues.value[childForm.name], childForm.name);
@@ -313,7 +313,7 @@ const showSubForm = ref("");
                   @on-remove-file="onDeleteimages(slot.form, $event)"
                 >
                 </MultipleUploadFile>
-                </template>
+              </template>
             </FormBuilder>
           </div>
         </div>

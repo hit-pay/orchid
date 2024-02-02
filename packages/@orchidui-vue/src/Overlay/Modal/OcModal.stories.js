@@ -56,8 +56,6 @@ export const Default = {
   }),
 };
 
-
-
 export const FormInModal = {
   argTypes: {
     size: {
@@ -83,8 +81,8 @@ export const FormInModal = {
     setup() {
       const modalValue = ref(false);
       const values = ref({
-        select_multiple:[],
-        select: ""
+        select_multiple: [],
+        select: "",
       });
       const errors = ref({});
 
@@ -156,7 +154,7 @@ export const FormInModal = {
             ],
           },
         },
-      ]
+      ];
       return { modalValue, args, values, errors, onUpdateForm, JSON_FORM };
     },
     template: `
