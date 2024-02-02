@@ -112,24 +112,25 @@ const variantClass = computed(() => ({
 
         <!--  IMAGE    -->
         <template v-else-if="variant === Variants.IMAGE">
-          <div v-if="data" class="h-[42px] min-w-[42px] rounded mx-auto">
+          <TableLink v-if="data"  :link="link" class="h-[42px] min-w-[42px] rounded mx-auto">
             <img
               :class="imageClass"
               alt="table-img"
               class="h-full"
               :src="data"
             />
-          </div>
-          <div
-            v-else
+          </TableLink>
+          <TableLink  
+            v-else 
+            :link="link"
             class="h-[42px] mx-auto w-[42px] bg-oc-bg-dark flex items-center justify-center rounded"
           >
             <Icon width="20" height="20" name="image" />
-          </div>
+          </TableLink>
         </template>
 
         <!--  EMPTY    -->
-        <div v-else-if="variant === Variants.EMPTY">-</div>
+        <TableLink  v-else-if="variant === Variants.EMPTY" :link="link">-</TableLink>
 
         <TableCellContent
           v-else-if="variant === Variants.DATETIME"
@@ -159,7 +160,7 @@ const variantClass = computed(() => ({
         >
           {{ data }}
         </TableLink>
-        <div v-else>-</div>
+        <TableLink v-else :link="link" >-</TableLink>
       </slot>
 
       <CopyTooltip
