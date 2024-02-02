@@ -35,7 +35,12 @@ const emit = defineEmits(['removeBeneficiary']);
           {{ beneficiary.name?.[0] }}
         </Avatar>
         <div class="flex flex-col font-medium">
-          <span>{{ beneficiary.name }}</span>
+          <div class="flex items-center gap-2">
+            <span>{{ beneficiary.name }}</span>
+            <span class="rounded-md py-1 px-3 text-sm text-oc-accent-1-500 bg-oc-accent-1-50">{{
+              beneficiary.currency
+            }}</span>
+          </div>
 
           <span class="text-sm text-oc-text-400">
             {{ beneficiary.bank_name }} / {{ beneficiary.bank_account_number }}

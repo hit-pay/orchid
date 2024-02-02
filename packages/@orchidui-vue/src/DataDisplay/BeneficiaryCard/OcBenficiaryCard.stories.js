@@ -16,6 +16,7 @@ export const overview = {
     variant: 'small',
     beneficiary: {
       name: 'Alex Turner',
+      currency: 'SGD',
       email: 'alex@arcticmonkey.io',
       phone_number: '+65 8373 3739 18',
       bank_name: 'DBS Bank',
@@ -48,6 +49,7 @@ export const closable = {
     variant: 'small',
     beneficiary: {
       name: 'Alex Turner',
+      currency: 'SGD',
       email: 'alex@arcticmonkey.io',
       phone_number: '+65 8373 3739 18',
       bank_name: 'DBS Bank',
