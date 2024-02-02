@@ -1,11 +1,11 @@
 <script setup>
-import { Avatar, ListDetail, Button, Icon } from "@/orchidui";
+import { Avatar, ListDetail, Button, Icon } from '@/orchidui';
 
 defineProps({
   variant: {
     type: String,
-    default: "small",
-    validator: (val) => ["small", "big", "float"].includes(val),
+    default: 'small',
+    validator: (val) => ['small', 'big', 'float'].includes(val),
   },
   customer: Object,
   isHover: {
@@ -17,7 +17,7 @@ defineProps({
     default: false,
   },
 });
-defineEmits(["addCustomer", "editCustomer"]);
+defineEmits(['addCustomer', 'editCustomer']);
 </script>
 
 <template>
@@ -32,11 +32,11 @@ defineEmits(["addCustomer", "editCustomer"]);
         :class="{ 'opacity-0 group-hover:opacity-100': isHover }"
       >
         <Button
-          @click="$emit('editCustomer', customer)"
           right-icon="pencil"
           variant="secondary"
           size="small"
           class="*:!px-[6px]"
+          @click="$emit('editCustomer', customer)"
         />
       </div>
 
@@ -44,35 +44,23 @@ defineEmits(["addCustomer", "editCustomer"]);
         <!--  Main  -->
         <div class="w-full flex gap-x-3 items-center">
           <Avatar class="shrink-0 uppercase" :size="32">
-            {{ customer?.name?.[0] || "J" }}
+            {{ customer?.name?.[0] || 'J' }}
           </Avatar>
           <div class="flex flex-col font-medium">
-            <span>{{ customer?.name || "John" }}</span>
+            <span>{{ customer?.name || 'John' }}</span>
             <span class="text-sm text-oc-text-400">
-              {{ customer?.email || "johndoe@gmail.com" }}
+              {{ customer?.email || 'johndoe@gmail.com' }}
             </span>
           </div>
         </div>
 
         <!--  Detail  -->
-        <div
-          v-if="variant !== 'small'"
-          class="flex flex-col gap-y-4 pt-4 w-full"
-        >
-          <ListDetail
-            label="Phone"
-            :content="
-              customer?.phone_number ? `+${customer.phone_number}` : '-'
-            "
-          />
+        <div v-if="variant !== 'small'" class="flex flex-col gap-y-4 pt-4 w-full">
+          <ListDetail label="Phone" :content="customer?.phone_number ? `+${customer.phone_number}` : '-'" />
           <ListDetail
             label="Address"
             :content="
-              [
-                customer?.address?.postal_code || '',
-                customer?.address.country || '',
-                customer?.address?.city || '',
-              ]
+              [customer?.address?.postal_code || '', customer?.address.country || '', customer?.address?.city || '']
                 .join(' ')
                 .trim() || '-'
             "
@@ -87,24 +75,13 @@ defineEmits(["addCustomer", "editCustomer"]);
           </Avatar>
           <div class="flex flex-col font-medium text-center">
             <span>No customer attached</span>
-            <span class="text-sm text-oc-text-400">
-              Add customer detail to this transaction
-            </span>
+            <span class="text-sm text-oc-text-400"> Add customer detail to this transaction </span>
           </div>
         </div>
-        <Button
-          variant="secondary"
-          size="small"
-          class="w-full"
-          label="Add customer"
-          @click="$emit('addCustomer')"
-        />
+        <Button variant="secondary" size="small" class="w-full" label="Add customer" @click="$emit('addCustomer')" />
       </template>
 
-      <div
-        v-if="$slots.bottom"
-        :class="{ 'opacity-0 group-hover:opacity-100': isHover }"
-      >
+      <div v-if="$slots.bottom" :class="{ 'opacity-0 group-hover:opacity-100': isHover }">
         <slot name="bottom" />
       </div>
     </div>

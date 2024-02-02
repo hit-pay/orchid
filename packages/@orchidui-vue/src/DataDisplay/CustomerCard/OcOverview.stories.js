@@ -1,24 +1,28 @@
-import { Theme, CustomerCard } from "@/orchidui";
+import { Theme, CustomerCard } from '@/orchidui';
 
 export default {
   component: CustomerCard,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 };
 
 export const overview = {
   argTypes: {
     variant: {
-      control: "select",
-      options: ["small", "big", "float"],
+      control: 'select',
+      options: ['small', 'big', 'float'],
     },
   },
   args: {
-    variant: "small",
+    variant: 'small',
     customer: {
-      name: "Alex Turner",
-      email: "alex@arcticmonkey.io",
-      phone: "+65 8373 3739 18",
-      address: "4666 Dickens Islands Pennsylvania",
+      name: 'Alex Turner',
+      email: 'alex@arcticmonkey.io',
+      phone_number: '+65 8373 3739 18',
+      address: {
+        postal_code: '12345 ',
+        country: 'USA',
+        city: 'Pennsylvania',
+      },
     },
   },
   render: (args) => ({
