@@ -452,7 +452,10 @@ const closeSettings = () => {
                 @update:model-value="updatePreset"
               >
                 <template #option="{ option, selected }">
-                  <div class="p-1 flex flex-col justify-center">
+                  <div class="p-1 flex flex-col justify-center relative">
+                    <div v-if="option.value === 'custom' && selected" class="absolute top-0 right-0">
+                     <Button label="Edit" left-icon="pencil" size="small" variant="secondary" />
+                    </div>
                     <img :src="option.preview" alt="" />
                     <div
                       :class="{
@@ -542,9 +545,17 @@ const closeSettings = () => {
           height="24"
           @click="closeSettings"
         />
-        <div v-if="sectionActive" class="font-medium pb-4 px-7">
+       <div class="flex items-center pb-4 px-7">
+       <template v-if="sidebarActive.section === 'Styles'">
+        <div class="text-oc-text-300">
+          {{ sidebarMenuLabel }}
+        </div>
+        <div class="mx-2">/</div>
+       </template>
+        <div v-if="sectionActive" class="font-medium ">
           {{ sectionActive.title ?? sectionActive.section }}
         </div>
+       </div>
       </div>
       <div v-if="sectionActiveValues" class="px-7 py-4 mt-4">
         <RequestForm

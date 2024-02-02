@@ -10,7 +10,7 @@ const settings = [
     group: "styles",
     key: "Styles",
     section: "Styles",
-    title: "Styles",
+    title: "Custom",
     isDisable: true,
     form: STYLES_FORM,
   },
