@@ -159,7 +159,7 @@ const inputClasses = computed(() => [
             :disabled="disabled"
             :inputmode="inputMode"
             :pattern="pattern"
-            class="h-7 outline-none w-full text-oc-text disabled:bg-transparent disabled:text-oc-text-300 text-ellipsis placeholder:font-normal placeholder:text-oc-text-300 bg-oc-bg-light"
+            class="h-7 outline-none md:text-base text-lg w-full text-oc-text disabled:bg-transparent disabled:text-oc-text-300 text-ellipsis placeholder:font-normal placeholder:text-oc-text-300 bg-oc-bg-light"
             v-bind="eventListeners"
             @focus="
               isFocused = true;
