@@ -149,6 +149,7 @@ defineExpose({
       ref="hourList"
       class="w-7 inline-block max-h-[157px] overflow-y-auto hidden-scrollbar"
       @scrollend="scrollToNearestHour"
+      @touchend="scrollToNearestHour"
     >
       <ul
         class="before:block after:block before:w-full before:h-[67px] after:w-full after:h-[67px]"
@@ -170,6 +171,7 @@ defineExpose({
       ref="minutesList"
       class="w-7 inline-block max-h-[157px] overflow-y-auto hidden-scrollbar"
       @scrollend="scrollToNearestMinute"
+      @touchend="scrollToNearestMinute"
     >
       <ul
         class="before:block after:block before:w-full before:h-[67px] after:w-full after:h-[67px]"
@@ -190,6 +192,7 @@ defineExpose({
       ref="periodList"
       class="w-7 inline-block max-h-[157px] overflow-y-auto hidden-scrollbar"
       @scrollend="scrollToNearestPeriod"
+      @touchend="scrollToNearestPeriod"
     >
       <ul
         class="before:block after:block before:w-full before:h-[67px] after:w-full after:h-[67px]"
