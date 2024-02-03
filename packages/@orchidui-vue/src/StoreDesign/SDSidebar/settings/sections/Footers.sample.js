@@ -29,7 +29,7 @@ const FOOTER_CONTENT_FORM = [
     type: "Children",
     icon: "pin-map",
     label: "Company Detail",
-    children:[
+    children: [
       {
         type: "SectionItem",
         props: {
@@ -54,7 +54,7 @@ const FOOTER_CONTENT_FORM = [
         type: "TextArea",
         name: "footer_content",
       },
-    ]
+    ],
   },
   {
     name: "PaymentLogo",

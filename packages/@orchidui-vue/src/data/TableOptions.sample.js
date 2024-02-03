@@ -5,7 +5,7 @@ const TableOptions = {
       key: "image",
       variant: "image",
       label: "Image",
-      class: (field) => {
+      class: () => {
         return "w-1/2 md:w-[5%]";
       },
     },
@@ -80,9 +80,9 @@ const TableOptions = {
       image: "",
       title_field: "Table Cell",
       description_field: "Table Cell column two",
-      col2: "Table Cell",
+      col2: "",
       col3: "2023-11-08T03:40:52.000000Z",
-      col4: "Table Cell column two",
+      col4: "",
       col5: "Label",
       col6: false,
       col7: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dictum ultricies justo, sed suscipit erat. Pellentesque vel volutpat nisi. Sed ultrices pharetra ligula, nec tincidunt purus auctor at. Maecenas a neque id arcu iaculis euismod. Morbi ut varius sapien, id ultricies purus. Integer egestas vitae sem feugiat euismod. Morbi bibendum vel ipsum ac viverra. Quisque luctus eros in urna dictum, facilisis condimentum risus suscipit. Cras sed sapien dapibus, eleifend dui eu, faucibus nunc. Fusce ac diam non ex mollis commodo.

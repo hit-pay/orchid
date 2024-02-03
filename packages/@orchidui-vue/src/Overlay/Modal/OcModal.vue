@@ -96,7 +96,10 @@ const sizeClasses = computed(() => ({
     v-if="modelValue"
     class="fixed w-screen z-[1007] top-0 left-0 h-full min-h-screen bg-black/[.45] flex items-center justify-center"
   >
-    <div class="w-full h-full  absolute top-0 left-0 z-[1007]" @click="onClickOutside"></div>
+    <div
+      class="w-full h-full absolute top-0 left-0 z-[1007]"
+      @click="onClickOutside"
+    ></div>
     <div
       class="z-[1008] shadow-normal w-[calc(100%-40px)] bg-oc-bg-light rounded-xl flex flex-col max-h-screen overflow-y-auto"
       :class="sizeClasses[size]"
