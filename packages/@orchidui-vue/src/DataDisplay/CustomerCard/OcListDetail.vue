@@ -1,21 +1,26 @@
 <script setup>
-import { Icon, CopyTooltip } from "@/orchidui";
+import { Icon, CopyTooltip } from '@/orchidui';
 
 defineProps({
   label: {
     type: String,
-    default: "",
+    default: '',
   },
   content: {
     type: String,
-    default: "",
+    default: '',
+  },
+  variant: {
+    type: String,
+    default: 'small',
+    validator: (val) => ['small', 'big'].includes(val),
   },
 });
 </script>
 
 <template>
   <div class="flex gap-x-5 text-sm group">
-    <div class="flex gap-x-2 items-center w-[80px] shrink-0 text-oc-text-400">
+    <div class="flex gap-x-2 items-center shrink-0 text-oc-text-400" :class="{ 'w-[80px]': variant === 'small' }">
       {{ label }}
 
       <CopyTooltip :value="content">

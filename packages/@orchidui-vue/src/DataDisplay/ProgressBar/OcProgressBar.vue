@@ -19,13 +19,15 @@ const isStepCompleted = (index) => {
 </script>
 
 <template>
-  <p v-if="label" class="mb-3 text-center">{{ label }}</p>
-  <div class="w-full flex align-center justify-center gap-2">
-    <span
-      v-for="index in steps"
-      :key="index"
-      class="bg-oc-primary h-2 w-14 rounded-full"
-      :class="{ 'bg-oc-primary-50-tr': !isStepCompleted(index) }"
-    ></span>
+  <div>
+    <p v-if="label" class="mb-3 text-center">{{ label }}</p>
+    <div class="w-full flex align-center justify-center gap-2">
+      <span
+        v-for="index in steps"
+        :key="index"
+        class="bg-oc-primary h-2 w-14 rounded-full"
+        :class="{ 'bg-oc-primary-50-tr': !isStepCompleted(index) }"
+      />
+    </div>
   </div>
 </template>

@@ -5,7 +5,7 @@ defineProps({
   variant: {
     type: String,
     default: 'small',
-    validator: (val) => ['small', 'large'].includes(val),
+    validator: (val) => ['small', 'big'].includes(val),
   },
 
   beneficiary: {
@@ -49,7 +49,7 @@ const emit = defineEmits(['removeBeneficiary']);
       </div>
 
       <!--  Detail  -->
-      <div v-if="variant === 'large'" class="flex flex-col gap-y-4 pt-4 w-full">
+      <div v-if="variant === 'big'" class="flex flex-col gap-y-4 pt-4 w-full">
         <ListDetail label="Phone" :content="`+${beneficiary.phone_number}`" />
         <ListDetail label="Email" :content="beneficiary.email" />
       </div>

@@ -9,7 +9,7 @@ export const overview = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['small', 'large'],
+      options: ['small', 'big'],
     },
   },
   args: {
@@ -38,9 +38,9 @@ export const overview = {
   }),
 };
 
-export const largeVariant = {
+export const bigVariant = {
   args: {
-    variant: 'large',
+    variant: 'big',
     beneficiary: {
       name: 'Alex Turner',
       currency: 'SGD',
@@ -69,7 +69,7 @@ export const closable = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['small', 'large'],
+      options: ['small', 'big'],
     },
   },
   args: {
