@@ -268,7 +268,11 @@ onMounted(() => {
               label="Select All"
               @click="selectAll"
             />
-            <slot :key="optionsKey" :f-options="filterableOptions" :select-option="selectOption">
+            <slot
+              :key="optionsKey"
+              :f-options="filterableOptions"
+              :select-option="selectOption"
+            >
               <Option
                 v-for="option in filterableOptions"
                 :key="option.value"
