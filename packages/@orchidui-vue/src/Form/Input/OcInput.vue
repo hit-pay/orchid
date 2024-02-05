@@ -112,6 +112,16 @@ const inputClasses = computed(() => [
     : "border-oc-gray-200 shadow-oc-gray-200",
   props.disabled ? "bg-oc-bg-dark pointer-events-none" : "bg-oc-bg-light",
 ]);
+
+const inputAttrs = computed(() => {
+  const inputAttributes = { ...eventListeners };
+
+  if (props.pattern) {
+    inputAttributes.pattern = props.pattern;
+  }
+
+  return inputAttributes;
+})
 </script>
 
 <template>
@@ -160,7 +170,7 @@ const inputClasses = computed(() => [
             :inputmode="inputMode"
             :pattern="pattern"
             class="h-7 outline-none md:text-base text-lg w-full text-oc-text disabled:bg-transparent disabled:text-oc-text-300 text-ellipsis placeholder:font-normal placeholder:text-oc-text-300 bg-oc-bg-light"
-            v-bind="eventListeners"
+            v-bind="inputAttrs"
             @focus="
               isFocused = true;
               $emit('focus');
