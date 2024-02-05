@@ -10,13 +10,23 @@ export const Default = {
     components: { Theme, ProgressBar },
     setup() {},
     template: `
-      <Theme colorMode="light">
-        <ProgressBar
-          label="2 step progress bar"
-          :steps="2"
-          :currentStep="1"
-        />
-      </Theme>
+      <div class="flex flex-col gap-10">
+        <Theme colorMode="light">
+          <ProgressBar
+            label="2 step progress bar"
+            :steps="2"
+            :currentStep="1"
+          />
+        </Theme>
+        
+        <Theme colorMode="light">
+          <ProgressBar
+            label="5 step progress bar"
+            :steps="5"
+            :currentStep="3"
+          />
+        </Theme>
+      </div>
     `,
   }),
 };

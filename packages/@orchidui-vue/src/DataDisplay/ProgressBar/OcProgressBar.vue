@@ -9,15 +9,17 @@ const props = defineProps({
     type: Number,
     default: 1,
   },
+
+  label: String,
 });
 
 const isStepCompleted = (index) => {
-  console.log('index, props.currentStep: ', index, props.currentStep);
   return index <= props.currentStep;
 };
 </script>
 
 <template>
+  <p v-if="label" class="mb-3 text-center">{{ label }}</p>
   <div class="w-full flex align-center justify-center gap-2">
     <span
       v-for="index in steps"
