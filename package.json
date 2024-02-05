@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@astrojs/vue": "^3.0.3",
-    "@orchidui/vue": "^0.1.125",
+    "@orchidui/vue": "^0.4.109",
     "@popperjs/core": "^2.11.8",
     "dayjs": "^1.11.10",
     "debug": "^4.3.4",
