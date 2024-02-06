@@ -9,7 +9,26 @@ const props = defineProps({
   /**
    * The font sizes of the editor.
    */
-  fontSizes: { type: Array, required: true },
+  fontSizes: { 
+    type: Array, 
+    default : () => [
+      {
+        label: "Default",
+        value: "14px",
+      },
+      {
+        label: "Medium",
+        value: "16px",
+      },
+      {
+        label: "Large",
+        value: "18px",
+      },
+      {
+        label: "Extra Large",
+        value: "20px",
+      },
+    ]},
   /**
    * The initial font size of the editor. (if empty the first item of `fontSizes` will be used, needs to be a value of `fontSizes`)
    */
@@ -48,7 +67,7 @@ const props = defineProps({
 const emit = defineEmits(["update:modelValue", "update:image"]);
 
 const Size = Quill.import("attributors/style/size");
-Size.whitelist = props.fontSizes.map((f) => f.value);
+Size.whitelist = props.fontSizes?.map((f) => f.value);
 Quill.register(Size, true);
 
 const id = ref(
@@ -197,7 +216,7 @@ const setAlign = (align = undefined) => {
   activeAlign.value = align;
 };
 onMounted(() => {
-  setSize(props.initialFontSize || props.fontSizes[0].value);
+  setSize(props.initialFontSize || (props.fontSizes && props.fontSizes[0]?.value));
 });
 </script>
 
