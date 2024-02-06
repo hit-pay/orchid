@@ -73,7 +73,7 @@ defineEmits({
   }
 
   &__input:checked + &__label--button {
-    @apply border-oc-primary-500;
+    @apply border-[var(--oc-primary-500)];
   }
 
   &.disabled &__input:checked + &__label &__custom {
