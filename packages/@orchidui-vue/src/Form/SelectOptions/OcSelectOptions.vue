@@ -110,7 +110,7 @@ const isGridVariant = computed(() => {
             ]"
           >
             <span
-              class="font-medium"
+              class="font-medium text-oc-text-400 group-hover:text-oc-text-500"
               :class="{
                 'text-sm ': isGridVariant,
                 'text-oc-text-400 group-hover:text-oc-text-500':
