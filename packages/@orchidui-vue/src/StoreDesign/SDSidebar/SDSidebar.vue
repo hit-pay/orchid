@@ -534,60 +534,64 @@ const closeSettings = () => {
         </div>
       </div>
     </div>
-    <template
-      v-if="
-        sidebarActive.section && sidebarActive.section !== 'add-new-section'
-      "
-    >
-      <div class="flex flex-col border-b">
-        <Icon
-          class="ml-auto text-oc-text-300 mx-5 mt-5 cursor-pointer"
-          name="x"
-          width="24"
-          height="24"
-          @click="closeSettings"
-        />
-        <div class="flex items-center pb-4 px-7">
-          <template v-if="sidebarActive.section === 'Styles'">
-            <div class="text-oc-text-300">
-              {{ sidebarMenuLabel }}
-            </div>
-            <div class="mx-2">/</div>
-          </template>
-          <div v-if="sectionActive" class="font-medium">
-            {{ sectionActive.title ?? sectionActive.section }}
-          </div>
-        </div>
-      </div>
-      <div v-if="sectionActiveValues" class="px-7 py-4 mt-4">
-        <RequestForm
-          v-if="renderForm && sectionActive?.form"
-          :general-data="generalData"
-          :section-data="sectionActiveValues"
-          :request-form="sectionActive.form"
-          :options="options"
-          @edit:images="
-            $emit('edit:images', { ...$event, section: sectionActive.key })
-          "
-          @delete:images="
-            $emit('delete:images', { ...$event, section: sectionActive.key })
-          "
-          @add:images="
-            $emit('add:images', { ...$event, section: sectionActive.key })
-          "
-          @update:general-data="updateModelValues($event, true)"
-          @update:section-data="updateModelValues($event, false)"
-          @update:field="
-            $emit('update:field', {
-              section: sectionActive.key,
-              ...$event,
-            })
+    <Transition  
+        enter-active-class="duration-[250ms] ease-out"
+        enter-from-class="transform opacity-0 mt-[100px]"
+        enter-to-class="opacity-100 mt-0">
+        <div
+          v-if="
+            sidebarActive.section && sidebarActive.section !== 'add-new-section'
           "
         >
-        </RequestForm>
-      </div>
-    </template>
-    <template v-else-if="sidebarActive.section === 'add-new-section'">
+        <div class="flex flex-col border-b">
+          <Icon
+            class="ml-auto text-oc-text-300 mx-5 mt-5 cursor-pointer"
+            name="x"
+            width="24"
+            height="24"
+            @click="closeSettings"
+          />
+          <div class="flex items-center pb-4 px-7">
+            <template v-if="sidebarActive.section === 'Styles'">
+              <div class="text-oc-text-300">
+                {{ sidebarMenuLabel }}
+              </div>
+              <div class="mx-2">/</div>
+            </template>
+            <div v-if="sectionActive" class="font-medium">
+              {{ sectionActive.title ?? sectionActive.section }}
+            </div>
+          </div>
+        </div>
+        <div v-if="sectionActiveValues" class="px-7 py-4 mt-4">
+          <RequestForm
+            v-if="renderForm && sectionActive?.form"
+            :general-data="generalData"
+            :section-data="sectionActiveValues"
+            :request-form="sectionActive.form"
+            :options="options"
+            @edit:images="
+              $emit('edit:images', { ...$event, section: sectionActive.key })
+            "
+            @delete:images="
+              $emit('delete:images', { ...$event, section: sectionActive.key })
+            "
+            @add:images="
+              $emit('add:images', { ...$event, section: sectionActive.key })
+            "
+            @update:general-data="updateModelValues($event, true)"
+            @update:section-data="updateModelValues($event, false)"
+            @update:field="
+              $emit('update:field', {
+                section: sectionActive.key,
+                ...$event,
+              })
+            "
+          >
+          </RequestForm>
+        </div>
+    </div>
+    <div v-else-if="sidebarActive.section === 'add-new-section'">
       <div class="flex flex-col border-b">
         <Icon
           class="ml-auto text-oc-text-300 mx-5 mt-5 cursor-pointer"
@@ -609,7 +613,8 @@ const closeSettings = () => {
           />
         </div>
       </div>
-    </template>
+    </div>
+    </Transition>
     <div class="absolute bottom-0">
       <slot name="sidebar-bottom" />
     </div>
