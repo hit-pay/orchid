@@ -1,5 +1,5 @@
 <script setup>
-import Title from "./OcTitle.vue";
+import OcTitle from "./OcTitle.vue";
 import MobilePageTitle from "./OcMobilePageTitle.vue";
 import { PageTitleRight, Button } from "@/orchidui";
 
@@ -38,7 +38,7 @@ defineEmits({
         class="w-full gap-5"
         :class="isMobileCombineButtons ? 'hidden md:flex' : 'flex'"
       >
-        <Title
+        <OcTitle
           :title="title"
           :description="description"
           :chip-props="chipProps"
@@ -52,7 +52,7 @@ defineEmits({
           <template v-if="$slots.description" #description>
             <slot name="description" />
           </template>
-        </Title>
+        </OcTitle>
 
         <slot name="right">
           <PageTitleRight
