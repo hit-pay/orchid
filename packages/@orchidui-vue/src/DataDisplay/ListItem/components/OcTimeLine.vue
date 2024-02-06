@@ -13,6 +13,7 @@ defineProps({
   icon: String,
   iconClass: String,
   iconText: String,
+  iconTextClass: String,
 });
 </script>
 
@@ -42,7 +43,9 @@ defineProps({
 
       <div class="flex items-end gap-x-2">
         <Icon v-if="icon" :name="icon" :class="iconClass" />
-        <span class="text-lg font-medium">{{ iconText }}</span>
+        <span class="text-lg font-medium" :class="iconTextClass">{{
+          iconText
+        }}</span>
       </div>
     </div>
   </div>
