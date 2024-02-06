@@ -24,7 +24,6 @@
     "flag-icons": "^6.11.1",
     "libphonenumber-js": "^1.10.51",
     "quill": "^2.0.0-rc.0",
-    "quill-delta": "^5.1.0",
     "replace-in-file": "^7.0.2",
     "shikiji": "^0.9.18",
     "v-calendar": "^3.1.2",
