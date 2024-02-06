@@ -233,6 +233,10 @@ const showSubForm = ref("");
           </div>
           <div>{{ form.label }}</div>
         </div>
+        <Transition  
+        enter-active-class="duration-[250ms] ease-out"
+        enter-from-class="transform opacity-0 mt-[100px]"
+        enter-to-class="opacity-100 mt-0">
         <div
           v-if="showSubForm === form.name"
           class="bg-oc-bg-light absolute top-0 left-0 min-h-full w-full z-10 pb-[100px]"
@@ -317,6 +321,7 @@ const showSubForm = ref("");
             </FormBuilder>
           </div>
         </div>
+        </Transition>
       </template>
       <template #Colors="{ form, value }">
         <InputColors

@@ -36,13 +36,7 @@ const getSidebarMenu = (section) => {
 };
 
 const isDropdownOpen = ref([]);
-const requiredSection = [
-  "Header",
-  "FooterContent",
-  "IconLinks",
-  "ButtonLinks",
-  "PoweredBy",
-];
+const requiredSection = ["Header", "FooterContent", "IconLinks", "ButtonLinks"];
 
 const emit = defineEmits({
   "update:values": [],
@@ -86,7 +80,7 @@ const updatePreset = (to) => {
   let newSectionsList = [];
   props.values.sections.forEach((item) => {
     const defaultSettings = selectedPreset.sections.find(
-      (s) => s.section === item.section,
+      (s) => s.section === item.section
     );
     if (defaultSettings) {
       let sectionItem = {
@@ -128,7 +122,7 @@ const sidebarActive = computed(() => {
 });
 
 const availableSections = computed(() =>
-  props.settings.filter((s) => s.group === "sections"),
+  props.settings.filter((s) => s.group === "sections")
 );
 
 const renderForm = ref(null);
@@ -149,7 +143,7 @@ const renderSectionAndForm = () => {
     props.values.sections.forEach((item) => {
       if (item.group === "sections") {
         const sectionItem = props.settings.find(
-          (s) => s.section === item.section,
+          (s) => s.section === item.section
         );
         sectionListCustom.push({
           key: item.key,
@@ -167,7 +161,7 @@ const renderSectionAndForm = () => {
   }
 
   sectionActive.value = sectionList.value.find(
-    (s) => s.key === props.active.id,
+    (s) => s.key === props.active.id
   );
 
   setTimeout(() => {
@@ -184,12 +178,12 @@ watch(
   {
     deep: true,
     immediate: true,
-  },
+  }
 );
 
 const sectionActiveValues = computed(() => {
   let sectionValues = props.values.sections.find(
-    (s) => s.key === props.active.id,
+    (s) => s.key === props.active.id
   );
   return sectionValues;
 });
@@ -230,7 +224,7 @@ const sidebarMenuLabel = computed(() => {
 const submenuLabel = computed(() => {
   if (sidebarMenuActive.value.children) {
     const submenu = sidebarMenuActive.value.children.find(
-      (s) => s.name === sidebarActive.value.submenu,
+      (s) => s.name === sidebarActive.value.submenu
     );
     return submenu?.label;
   } else {
@@ -540,60 +534,64 @@ const closeSettings = () => {
         </div>
       </div>
     </div>
-    <template
-      v-if="
-        sidebarActive.section && sidebarActive.section !== 'add-new-section'
-      "
-    >
-      <div class="flex flex-col border-b">
-        <Icon
-          class="ml-auto text-oc-text-300 mx-5 mt-5 cursor-pointer"
-          name="x"
-          width="24"
-          height="24"
-          @click="closeSettings"
-        />
-        <div class="flex items-center pb-4 px-7">
-          <template v-if="sidebarActive.section === 'Styles'">
-            <div class="text-oc-text-300">
-              {{ sidebarMenuLabel }}
-            </div>
-            <div class="mx-2">/</div>
-          </template>
-          <div v-if="sectionActive" class="font-medium">
-            {{ sectionActive.title ?? sectionActive.section }}
-          </div>
-        </div>
-      </div>
-      <div v-if="sectionActiveValues" class="px-7 py-4 mt-4">
-        <RequestForm
-          v-if="renderForm && sectionActive?.form"
-          :general-data="generalData"
-          :section-data="sectionActiveValues"
-          :request-form="sectionActive.form"
-          :options="options"
-          @edit:images="
-            $emit('edit:images', { ...$event, section: sectionActive.key })
-          "
-          @delete:images="
-            $emit('delete:images', { ...$event, section: sectionActive.key })
-          "
-          @add:images="
-            $emit('add:images', { ...$event, section: sectionActive.key })
-          "
-          @update:general-data="updateModelValues($event, true)"
-          @update:section-data="updateModelValues($event, false)"
-          @update:field="
-            $emit('update:field', {
-              section: sectionActive.key,
-              ...$event,
-            })
+    <Transition  
+        enter-active-class="duration-[250ms] ease-out"
+        enter-from-class="transform opacity-0 mt-[100px]"
+        enter-to-class="opacity-100 mt-0">
+        <div
+          v-if="
+            sidebarActive.section && sidebarActive.section !== 'add-new-section'
           "
         >
-        </RequestForm>
-      </div>
-    </template>
-    <template v-else-if="sidebarActive.section === 'add-new-section'">
+        <div class="flex flex-col border-b">
+          <Icon
+            class="ml-auto text-oc-text-300 mx-5 mt-5 cursor-pointer"
+            name="x"
+            width="24"
+            height="24"
+            @click="closeSettings"
+          />
+          <div class="flex items-center pb-4 px-7">
+            <template v-if="sidebarActive.section === 'Styles'">
+              <div class="text-oc-text-300">
+                {{ sidebarMenuLabel }}
+              </div>
+              <div class="mx-2">/</div>
+            </template>
+            <div v-if="sectionActive" class="font-medium">
+              {{ sectionActive.title ?? sectionActive.section }}
+            </div>
+          </div>
+        </div>
+        <div v-if="sectionActiveValues" class="px-7 py-4 mt-4">
+          <RequestForm
+            v-if="renderForm && sectionActive?.form"
+            :general-data="generalData"
+            :section-data="sectionActiveValues"
+            :request-form="sectionActive.form"
+            :options="options"
+            @edit:images="
+              $emit('edit:images', { ...$event, section: sectionActive.key })
+            "
+            @delete:images="
+              $emit('delete:images', { ...$event, section: sectionActive.key })
+            "
+            @add:images="
+              $emit('add:images', { ...$event, section: sectionActive.key })
+            "
+            @update:general-data="updateModelValues($event, true)"
+            @update:section-data="updateModelValues($event, false)"
+            @update:field="
+              $emit('update:field', {
+                section: sectionActive.key,
+                ...$event,
+              })
+            "
+          >
+          </RequestForm>
+        </div>
+    </div>
+    <div v-else-if="sidebarActive.section === 'add-new-section'">
       <div class="flex flex-col border-b">
         <Icon
           class="ml-auto text-oc-text-300 mx-5 mt-5 cursor-pointer"
@@ -615,7 +613,8 @@ const closeSettings = () => {
           />
         </div>
       </div>
-    </template>
+    </div>
+    </Transition>
     <div class="absolute bottom-0">
       <slot name="sidebar-bottom" />
     </div>
