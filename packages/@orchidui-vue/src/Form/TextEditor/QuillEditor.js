@@ -1,3 +1,4 @@
+import Quill from "quill";
 import {
   defineComponent,
   onBeforeUnmount,
@@ -7,9 +8,6 @@ import {
   ref,
   h,
 } from "vue";
-
-import * as QuillNamespace from 'quill';
-let Quill = QuillNamespace;
 
 const Delta = Quill.import("delta");
 export const QuillEditor = defineComponent({
