@@ -34,11 +34,14 @@ export const Default = {
     components: { TextEditor, Theme },
     setup() {
       const modelValue = ref("default model value");
-      return { args, modelValue };
+      const onUpdateImage = (base64) => {
+          console.log(base64)
+      }
+      return { args, modelValue, onUpdateImage  };
     },
     template: `
           <Theme>
-            <TextEditor v-model="modelValue" v-bind="args"/>
+            <TextEditor v-model="modelValue" v-bind="args" @update:image="onUpdateImage"/>
 
             <div class="flex gap-y-6 flex-col mt-8">Preview
               <div v-html="modelValue"/>
