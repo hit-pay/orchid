@@ -1,26 +1,26 @@
-import { Theme, BeneficiaryCard } from '@/orchidui';
+import { Theme, BeneficiaryCard } from "@/orchidui";
 
 export default {
   component: BeneficiaryCard,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
 };
 
 export const overview = {
   argTypes: {
     variant: {
-      control: 'select',
-      options: ['small', 'big'],
+      control: "select",
+      options: ["small", "big"],
     },
   },
   args: {
-    variant: 'small',
+    variant: "small",
     beneficiary: {
-      name: 'Alex Turner',
-      currency: 'SGD',
-      email: 'alex@arcticmonkey.io',
-      phone_number: '+65 8373 3739 18',
-      bank_name: 'DBS Bank',
-      bank_account_number: '**** 1234',
+      name: "Alex Turner",
+      currency: "SGD",
+      email: "alex@arcticmonkey.io",
+      phone_number: "+65 8373 3739 18",
+      bank_name: "DBS Bank",
+      bank_account_number: "**** 1234",
     },
   },
   render: (args) => ({
@@ -40,14 +40,14 @@ export const overview = {
 
 export const bigVariant = {
   args: {
-    variant: 'big',
+    variant: "big",
     beneficiary: {
-      name: 'Alex Turner',
-      currency: 'SGD',
-      email: 'alex@arcticmonkey.io',
-      phone_number: '+65 8373 3739 18',
-      bank_name: 'DBS Bank',
-      bank_account_number: '**** 1234',
+      name: "Alex Turner",
+      currency: "SGD",
+      email: "alex@arcticmonkey.io",
+      phone_number: "+65 8373 3739 18",
+      bank_name: "DBS Bank",
+      bank_account_number: "**** 1234",
     },
   },
   render: (args) => ({
@@ -68,19 +68,19 @@ export const bigVariant = {
 export const closable = {
   argTypes: {
     variant: {
-      control: 'select',
-      options: ['small', 'big'],
+      control: "select",
+      options: ["small", "big"],
     },
   },
   args: {
-    variant: 'small',
+    variant: "small",
     beneficiary: {
-      name: 'Alex Turner',
-      currency: 'SGD',
-      email: 'alex@arcticmonkey.io',
-      phone_number: '+65 8373 3739 18',
-      bank_name: 'DBS Bank',
-      bank_account_number: '**** 1234',
+      name: "Alex Turner",
+      currency: "SGD",
+      email: "alex@arcticmonkey.io",
+      phone_number: "+65 8373 3739 18",
+      bank_name: "DBS Bank",
+      bank_account_number: "**** 1234",
     },
   },
   render: (args) => ({

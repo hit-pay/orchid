@@ -1,3 +1,3 @@
-import TransferSummary from './OcTransferSummary.vue';
+import TransferSummary from "./OcTransferSummary.vue";
 
 export { TransferSummary };

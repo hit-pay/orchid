@@ -1,17 +1,17 @@
-import { Theme, Radio } from '@/orchidui';
+import { Theme, Radio } from "@/orchidui";
 
 export default {
   component: Radio,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
 };
 
 export const Default = {
   args: {
     modelValue: false,
-    errorMessage: '',
+    errorMessage: "",
     isDisabled: false,
-    label: 'Text',
-    hint: 'Text',
+    label: "Text",
+    hint: "Text",
   },
   render: (args) => ({
     setup() {

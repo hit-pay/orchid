@@ -1,11 +1,11 @@
 <script setup>
-import { computed } from 'vue';
-import { Radio, BaseInput } from '@/orchidui';
+import { computed } from "vue";
+import { Radio, BaseInput } from "@/orchidui";
 
 defineProps({
   alignment: {
     type: String,
-    default: 'vertical',
+    default: "vertical",
   },
   radio: Array,
   label: String,
@@ -17,14 +17,14 @@ defineProps({
   isButtonVariant: Boolean,
 });
 const emit = defineEmits({
-  'update:modelValue': [],
+  "update:modelValue": [],
 });
 const alignmentClasses = computed(() => ({
-  horizontal: 'gap-x-5 flex-wrap',
-  vertical: 'flex-col gap-y-3',
+  horizontal: "gap-x-5 flex-wrap",
+  vertical: "flex-col gap-y-3",
 }));
 const onInput = (value) => {
-  emit('update:modelValue', value);
+  emit("update:modelValue", value);
 };
 </script>
 

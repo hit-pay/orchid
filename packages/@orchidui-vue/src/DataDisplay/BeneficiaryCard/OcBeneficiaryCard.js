@@ -1,3 +1,3 @@
-import BeneficiaryCard from './OcBeneficiaryCard.vue';
+import BeneficiaryCard from "./OcBeneficiaryCard.vue";
 
 export { BeneficiaryCard };

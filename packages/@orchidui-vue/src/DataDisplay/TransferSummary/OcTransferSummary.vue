@@ -1,5 +1,5 @@
 <script setup>
-import { ListDetail } from '@/orchidui';
+import { ListDetail } from "@/orchidui";
 
 defineProps({
   transfer: {

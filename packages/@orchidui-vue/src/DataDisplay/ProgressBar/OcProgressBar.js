@@ -1,3 +1,3 @@
-import ProgressBar from './OcProgressBar.vue';
+import ProgressBar from "./OcProgressBar.vue";
 
 export { ProgressBar };

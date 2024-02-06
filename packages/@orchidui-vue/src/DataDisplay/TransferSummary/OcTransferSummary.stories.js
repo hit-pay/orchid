@@ -1,25 +1,25 @@
-import { Theme, TransferSummary } from '@/orchidui';
+import { Theme, TransferSummary } from "@/orchidui";
 
 export default {
   component: TransferSummary,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
 };
 
 export const overview = {
   argTypes: {
     hasFxData: {
-      control: 'boolean',
+      control: "boolean",
     },
   },
   args: {
     hasFxData: false,
     transfer: {
-      fx_rate: '1.34',
-      base_currency_amount: '134.20',
-      base_currency: 'SGD',
-      transfer_currency: 'USD',
-      fee: '3.50',
-      type: 'Local',
+      fx_rate: "1.34",
+      base_currency_amount: "134.20",
+      base_currency: "SGD",
+      transfer_currency: "USD",
+      fee: "3.50",
+      type: "Local",
     },
   },
   render: (args) => ({
@@ -41,12 +41,12 @@ export const withFxData = {
   args: {
     hasFxData: true,
     transfer: {
-      fx_rate: '1.34',
-      base_currency_amount: '134.20',
-      base_currency: 'SGD',
-      transfer_currency: 'USD',
-      fee: '3.50',
-      type: 'Local',
+      fx_rate: "1.34",
+      base_currency_amount: "134.20",
+      base_currency: "SGD",
+      transfer_currency: "USD",
+      fee: "3.50",
+      type: "Local",
     },
   },
   render: (args) => ({

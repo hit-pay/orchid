@@ -1,11 +1,11 @@
 <script setup>
-import { Avatar, ListDetail, Icon } from '@/orchidui';
+import { Avatar, ListDetail, Icon } from "@/orchidui";
 
 defineProps({
   variant: {
     type: String,
-    default: 'small',
-    validator: (val) => ['small', 'big'].includes(val),
+    default: "small",
+    validator: (val) => ["small", "big"].includes(val),
   },
 
   beneficiary: {
@@ -16,11 +16,13 @@ defineProps({
   closable: Boolean,
 });
 
-const emit = defineEmits(['removeBeneficiary']);
+const emit = defineEmits(["removeBeneficiary"]);
 </script>
 
 <template>
-  <div class="rounded shrink-0 border border-oc-gray-200 bg-oc-bg-light px-4 py-5 relative">
+  <div
+    class="rounded shrink-0 border border-oc-gray-200 bg-oc-bg-light px-4 py-5 relative"
+  >
     <Icon
       v-if="closable"
       class="absolute -right-1.5 -top-1.5 border-1 bg-white border-white overflow-hidden rounded-full text-gray-500 cursor-pointer transition-all duration-300 hover:text-oc-error"
@@ -37,9 +39,10 @@ const emit = defineEmits(['removeBeneficiary']);
         <div class="flex flex-col font-medium">
           <div class="flex items-center gap-2">
             <span>{{ beneficiary.name }}</span>
-            <span class="rounded-md py-1 px-3 text-sm text-oc-accent-1-500 bg-oc-accent-1-50">{{
-              beneficiary.currency
-            }}</span>
+            <span
+              class="rounded-md py-1 px-3 text-sm text-oc-accent-1-500 bg-oc-accent-1-50"
+              >{{ beneficiary.currency }}</span
+            >
           </div>
 
           <span class="text-sm text-oc-text-400">
