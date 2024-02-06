@@ -24,6 +24,7 @@
     "flag-icons": "^6.11.1",
     "libphonenumber-js": "^1.10.51",
     "quill": "^2.0.0-dev.0",
+    "quill-delta": "^5.1.0",
     "replace-in-file": "^7.0.2",
     "shikiji": "^0.9.18",
     "v-calendar": "^3.1.2",
@@ -32,8 +33,6 @@
     "vue3-colorpicker": "^2.2.3"
   },
   "devDependencies": {
-    "storybook": "^7.6.12",
-    "storybook-addon-root-attribute": "^1.0.2",
     "@storybook/addon-essentials": "^7.6.12",
     "@storybook/addon-interactions": "^7.6.12",
     "@storybook/addon-links": "^7.6.12",
@@ -52,6 +51,8 @@
     "postcss": "^8.4.31",
     "postcss-import": "^15.1.0",
     "sass": "^1.68.0",
+    "storybook": "^7.6.12",
+    "storybook-addon-root-attribute": "^1.0.2",
     "tailwindcss": "^3.3.3",
     "vite": "^4.4.5",
     "vue": "^3.3.4"
