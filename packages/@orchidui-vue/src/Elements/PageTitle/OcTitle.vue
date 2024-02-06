@@ -13,7 +13,7 @@ defineProps({
 <template>
   <div class="flex text-oc-text justify-center flex-col gap-y-3 max-w-full">
     <div class="md:text-xl font-medium flex items-center gap-x-3">
-      <slot name="title" :title="title">
+      <slot name="title">
         <span
           class="whitespace-nowrap text-ellipsis overflow-hidden md:text-base lg:text-xl"
         >
@@ -26,7 +26,7 @@ defineProps({
       v-if="description || $slots.description"
       class="text-oc-text-400 text-sm group flex items-center gap-x-4"
     >
-      <slot name="description" :description="description">
+      <slot name="description">
         <span class="overflow-hidden whitespace-nowrap text-ellipsis">
           {{ description }}
         </span>
