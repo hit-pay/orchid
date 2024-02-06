@@ -107,6 +107,7 @@ const options = computed(() => ({
       itemStyle: {
         color: variants[props.variant],
         opacity: 0.5,
+        borderRadius: [4, 4, 0, 0], // Adds a 4pt radius to the top-left and top-right corners of the bars
       },
       emphasis: {
         itemStyle: {
