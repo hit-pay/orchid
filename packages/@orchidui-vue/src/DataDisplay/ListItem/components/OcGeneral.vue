@@ -5,6 +5,7 @@ import { ref } from "vue";
 defineProps({
   title: String,
   description: String,
+  descriptionIcon: String,
   chips: {
     type: Array,
     default: () => [],
@@ -42,11 +43,11 @@ const toggleDashboard = () => {
             :label="item.label"
             :variant="item.variant"
             class="font-medium"
-          ></Chip>
+          />
         </div>
       </div>
-      <template v-if="!isDisabled">
-        <Dropdown v-model="isOpen" placement="bottom-end">
+      <slot name="actions">
+        <Dropdown v-if="!isDisabled" v-model="isOpen" placement="bottom-end">
           <Icon
             name="dots-vertical"
             class="opacity-0 p-2 group-hover:opacity-100 cursor-pointer active:bg-oc-gray-100 rounded"
@@ -56,10 +57,19 @@ const toggleDashboard = () => {
             <slot name="menu" />
           </template>
         </Dropdown>
-      </template>
+      </slot>
     </div>
     <div class="flex flex-col gap-4">
-      <div class="text-oc-text-500 text-sm">{{ description }}</div>
+      <div class="text-oc-text-500 flex gap-x-2 items-center text-sm">
+        <Icon
+          v-if="descriptionIcon"
+          :name="descriptionIcon"
+          width="16"
+          height="16"
+          class="text-oc-text-400"
+        />
+        {{ description }}
+      </div>
       <div v-if="details.length" class="flex gap-5">
         <div
           v-for="(item, i) in details"
