@@ -106,7 +106,6 @@ export const Default = {
       position: 'top',
       distance: 10,
     },
-    selectIconPrefix: '',
   },
   render: (args) => ({
     components: { Theme, Select, Option },
