@@ -154,6 +154,7 @@ const checkBase64Validation = (base64) => {
 };
 const isValidPasedText = (clipBoardEvent) => {
   const { items } = clipBoardEvent.clipboardData;
+  console.log('copy item :', items)
   if (!items.length) return;
   items[0].getAsString((data) => {
     if (checkBase64Validation(data)) {
@@ -162,6 +163,7 @@ const isValidPasedText = (clipBoardEvent) => {
           .getQuill()
           .setSelection(quill.value.getQuill().getLength() - 1);
       }
+      // this read image not working
       readImage(data);
     }
   });
