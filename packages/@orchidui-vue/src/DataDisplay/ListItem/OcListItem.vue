@@ -4,11 +4,13 @@ import OcTimeLine from "./components/OcTimeLine.vue";
 import OcWebhook from "./components/OcWebhook.vue";
 import OcPayment from "./components/OcPayment.vue";
 import OcGeneral from "./components/OcGeneral.vue";
+import OcTerminal from "./components/OcTerminal.vue";
 
 const props = defineProps({
   isActive: Boolean,
   title: String,
   description: String,
+  descriptionIcon: String,
   icon: String,
   iconClass: String,
   iconText: String,
@@ -47,6 +49,8 @@ const getTypeComponent = computed(() => {
       return OcPayment;
     case "general":
       return OcGeneral;
+    case "terminal":
+      return OcTerminal;
     default:
       return OcTimeLine;
   }
@@ -63,14 +67,8 @@ const getTypeComponent = computed(() => {
     @delete="$emit('delete')"
     @click="$emit('click:item')"
   >
-    <template v-if="$slots.menu" #menu>
-      <slot name="menu" />
-    </template>
-    <template v-if="$slots.logo" #logo>
-      <slot name="logo" />
-    </template>
-    <template v-if="$slots.description" #description>
-      <slot name="description" />
+    <template v-for="(_, name) in $slots" #[name]="slotData">
+      <slot :name="name" v-bind="slotData" />
     </template>
   </component>
 </template>

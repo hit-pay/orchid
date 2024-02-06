@@ -13,6 +13,7 @@ import { computed, onMounted, ref, watch } from "vue";
 const props = defineProps({
   label: String,
   hint: String,
+  icon: String,
   errorMessage: String,
   placeholder: {
     type: String,
@@ -194,7 +195,7 @@ onMounted(() => {
 <template>
   <BaseInput
     ref="baseInput"
-    class="relative"
+    class="relative rounded"
     :label="isInlineLabel ? '' : label"
     :hint="hint"
     :error-message="errorMessage"
@@ -245,7 +246,9 @@ onMounted(() => {
           }}</span>
         </div>
         <template v-else>
-          <span class="whitespace-nowrap">
+          <span class="whitespace-nowrap flex gap-x-3 items-center">
+            <Icon v-if="icon" :name="icon" width="16" height="16" />
+
             <span v-if="isInlineLabel && label" class="text-oc-text-300">
               {{ label }}:
             </span>

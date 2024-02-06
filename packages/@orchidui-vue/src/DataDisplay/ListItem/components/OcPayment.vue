@@ -11,24 +11,31 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+  chipProps: {
+    type: Object,
+    default: () => ({}),
+  },
 });
 
 defineEmits(["edit", "delete"]);
 
 const isSliced = computed(
-  () => props.paymentMethods.length > blocksPerLine.value,
+  () => props.paymentMethods?.length > blocksPerLine.value,
 );
 const restPaymentMethods = computed(() =>
-  props.paymentMethods.slice(blocksPerLine.value, props.paymentMethods.length),
+  props.paymentMethods?.slice(
+    blocksPerLine.value,
+    props.paymentMethods?.length,
+  ),
 );
 const cardContainer = ref();
-const blocksPerLine = ref(props.paymentMethods.length);
+const blocksPerLine = ref(props.paymentMethods?.length);
 const calculateBlocksPerLine = () => {
   const containerWidth =
     cardContainer.value.clientWidth -
     105 /* front span */ -
     32 /* padding */ -
-    4 * props.paymentMethods.length /* gap */ -
+    4 * props.paymentMethods?.length /* gap */ -
     35; /* tooltip block */
   const blockWidth = 35; /* image width */
 
@@ -55,24 +62,26 @@ onBeforeUnmount(() => {
         <slot name="logo" />
         {{ title }}
       </div>
-      <div
-        class="border opacity-0 group-hover:opacity-100 border-oc-accent-1-100 rounded-sm p-1 flex gap-x-1"
-      >
-        <Icon
-          name="pencil"
-          class="cursor-pointer text-oc-text-400 p-2"
-          @click="$emit('edit')"
-        />
-        <div class="border-r border-gray-200" />
-        <Icon
-          name="bin"
-          class="cursor-pointer text-oc-error p-2"
-          @click="$emit('delete')"
-        />
-      </div>
+      <slot name="right">
+        <div
+          class="border opacity-0 group-hover:opacity-100 border-oc-accent-1-100 rounded-sm p-1 flex gap-x-1"
+        >
+          <Icon
+            name="pencil"
+            class="cursor-pointer text-oc-text-400 p-2"
+            @click="$emit('edit')"
+          />
+          <div class="border-r border-gray-200" />
+          <Icon
+            name="bin"
+            class="cursor-pointer text-oc-error p-2"
+            @click="$emit('delete')"
+          />
+        </div>
+      </slot>
     </div>
 
-    <div class="flex items-center gap-x-2">
+    <div v-if="paymentMethods?.length" class="flex items-center gap-x-2">
       <span class="text-sm font-medium text-oc-text-300 whitespace-nowrap"
         >Payment methods</span
       >
