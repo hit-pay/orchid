@@ -50,7 +50,11 @@ export const Default = {
     },
     template: `
           <Theme>
-            <PageTitle v-bind="args"/>
+            <PageTitle v-bind="args">
+              <template #description>
+                123
+              </template>
+            </PageTitle>
           </Theme>
         `,
   }),
