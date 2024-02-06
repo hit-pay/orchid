@@ -5,6 +5,7 @@ import { computed, onMounted, ref, watch } from 'vue';
 const props = defineProps({
   label: String,
   hint: String,
+  icon: String,
   errorMessage: String,
   placeholder: {
     type: String,
@@ -50,10 +51,6 @@ const props = defineProps({
     default: () => ({
       strategy: 'fixed',
     }),
-  },
-  selectIcon: {
-    type: String,
-    default: '',
   },
 });
 
@@ -185,7 +182,7 @@ onMounted(() => {
 <template>
   <BaseInput
     ref="baseInput"
-    class="relative"
+    class="relative rounded"
     :label="isInlineLabel ? '' : label"
     :hint="hint"
     :error-message="errorMessage"
@@ -230,9 +227,10 @@ onMounted(() => {
           <span v-if="localValueOption.length === 0" class="text-oc-text-300">{{ placeholder }}</span>
         </div>
         <template v-else>
-          <span class="flex flex-nowrap gap-2 items-center">
-            <Icon v-if="selectIcon" class="w-5 h-5 text-oc-text-400" :name="selectIcon" />
-            <span v-if="isInlineLabel && label" class="text-oc-text-300">{{ label }}:</span>
+          <span class="whitespace-nowrap flex gap-x-3 items-center">
+            <Icon v-if="icon" :name="icon" width="16" height="16" />
+
+            <span v-if="isInlineLabel && label" class="text-oc-text-300"> {{ label }}: </span>
             <span v-if="localValueOption">{{ localValueOption.label }}</span>
             <span v-else class="text-oc-text-300">{{ placeholder }}</span>
           </span>
@@ -268,11 +266,7 @@ onMounted(() => {
               label="Select All"
               @click="selectAll"
             />
-            <slot
-              :key="optionsKey"
-              :f-options="filterableOptions"
-              :select-option="selectOption"
-            >
+            <slot :key="optionsKey" :f-options="filterableOptions" :select-option="selectOption">
               <Option
                 v-for="option in filterableOptions"
                 :key="option.value"

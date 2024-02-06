@@ -107,11 +107,13 @@ const options = computed(() => ({
       itemStyle: {
         color: variants[props.variant],
         opacity: 0.5,
+        borderRadius: [4, 4, 0, 0], // Sets a 4pt radius for the top-left and top-right corners
       },
       emphasis: {
         itemStyle: {
           color: variants[props.variant],
           opacity: 1,
+          borderRadius: [4, 4, 0, 0], // Reapply the 4pt radius for emphasis states
         },
       },
     },
