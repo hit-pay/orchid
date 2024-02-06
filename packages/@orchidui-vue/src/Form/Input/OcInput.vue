@@ -121,7 +121,7 @@ const inputAttrs = computed(() => {
   }
 
   return inputAttributes;
-})
+});
 </script>
 
 <template>

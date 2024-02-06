@@ -1,5 +1,5 @@
 <script setup>
-import { BaseInput } from "@/orchidui";
+import { BaseInput, Icon } from "@/orchidui";
 
 defineProps({
   modelValue: [String, Boolean],
@@ -10,6 +10,8 @@ defineProps({
   groupName: String,
   errorMessage: String,
   hint: String,
+  isButtonVariant: Boolean,
+  icon: String,
 });
 defineEmits({
   "update:modelValue": [],
@@ -36,10 +38,17 @@ defineEmits({
     />
     <label
       :for="groupName + id"
-      class="radio-button__label flex gap-x-3 relative items-center cursor-pointer transition-all duration-300"
-      :class="isDisabled ? 'text-oc-text-300' : 'text-oc-text-500'"
+      class="radio-button__label flex gap-x-3 relative items-center cursor-pointer transition-all duration-300 text-oc-text-500"
+      :class="{
+        '!text-oc-text-300': isDisabled,
+        'bg-gray-200': isDisabled && isButtonVariant,
+        '!border-oc-error': errorMessage && isButtonVariant,
+        'radio-button__label--button border-gray-200 border py-3 px-5 rounded-sm':
+          isButtonVariant,
+      }"
     >
       <span
+        v-if="!isButtonVariant"
         class="radio-button__custom w-5 h-5 rounded-full border transition-all duration-300"
         :class="[
           isDisabled || !modelValue
@@ -47,6 +56,13 @@ defineEmits({
             : '',
           errorMessage ? '!border-oc-error' : 'border-oc-primary-200',
         ]"
+      />
+
+      <Icon
+        v-if="icon"
+        class="w-5 h-5 text-oc-text-500"
+        :class="{ '!text-oc-text-300': isDisabled }"
+        :name="icon"
       />
 
       <span v-if="label" class="text-sm">{{ label }}</span>
@@ -62,6 +78,10 @@ defineEmits({
     &:not(.disabled) {
       @apply border-[var(--oc-primary-500)];
     }
+  }
+
+  &__input:checked + &__label--button {
+    @apply border-[var(--oc-primary-500)];
   }
 
   &.disabled &__input:checked + &__label &__custom {

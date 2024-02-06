@@ -80,7 +80,7 @@ const updatePreset = (to) => {
   let newSectionsList = [];
   props.values.sections.forEach((item) => {
     const defaultSettings = selectedPreset.sections.find(
-      (s) => s.section === item.section
+      (s) => s.section === item.section,
     );
     if (defaultSettings) {
       let sectionItem = {
@@ -122,7 +122,7 @@ const sidebarActive = computed(() => {
 });
 
 const availableSections = computed(() =>
-  props.settings.filter((s) => s.group === "sections")
+  props.settings.filter((s) => s.group === "sections"),
 );
 
 const renderForm = ref(null);
@@ -143,7 +143,7 @@ const renderSectionAndForm = () => {
     props.values.sections.forEach((item) => {
       if (item.group === "sections") {
         const sectionItem = props.settings.find(
-          (s) => s.section === item.section
+          (s) => s.section === item.section,
         );
         sectionListCustom.push({
           key: item.key,
@@ -161,7 +161,7 @@ const renderSectionAndForm = () => {
   }
 
   sectionActive.value = sectionList.value.find(
-    (s) => s.key === props.active.id
+    (s) => s.key === props.active.id,
   );
 
   setTimeout(() => {
@@ -178,12 +178,12 @@ watch(
   {
     deep: true,
     immediate: true,
-  }
+  },
 );
 
 const sectionActiveValues = computed(() => {
   let sectionValues = props.values.sections.find(
-    (s) => s.key === props.active.id
+    (s) => s.key === props.active.id,
   );
   return sectionValues;
 });
@@ -224,7 +224,7 @@ const sidebarMenuLabel = computed(() => {
 const submenuLabel = computed(() => {
   if (sidebarMenuActive.value.children) {
     const submenu = sidebarMenuActive.value.children.find(
-      (s) => s.name === sidebarActive.value.submenu
+      (s) => s.name === sidebarActive.value.submenu,
     );
     return submenu?.label;
   } else {
@@ -534,15 +534,16 @@ const closeSettings = () => {
         </div>
       </div>
     </div>
-    <Transition  
-        enter-active-class="duration-[250ms] ease-out"
-        enter-from-class="transform opacity-0 mt-[100px]"
-        enter-to-class="opacity-100 mt-0">
-        <div
-          v-if="
-            sidebarActive.section && sidebarActive.section !== 'add-new-section'
-          "
-        >
+    <Transition
+      enter-active-class="duration-[250ms] ease-out"
+      enter-from-class="transform opacity-0 mt-[100px]"
+      enter-to-class="opacity-100 mt-0"
+    >
+      <div
+        v-if="
+          sidebarActive.section && sidebarActive.section !== 'add-new-section'
+        "
+      >
         <div class="flex flex-col border-b">
           <Icon
             class="ml-auto text-oc-text-300 mx-5 mt-5 cursor-pointer"
@@ -590,30 +591,30 @@ const closeSettings = () => {
           >
           </RequestForm>
         </div>
-    </div>
-    <div v-else-if="sidebarActive.section === 'add-new-section'">
-      <div class="flex flex-col border-b">
-        <Icon
-          class="ml-auto text-oc-text-300 mx-5 mt-5 cursor-pointer"
-          name="x"
-          width="24"
-          height="24"
-          @click="changeSection('', '')"
-        />
-        <div class="font-medium pb-4 px-7">Add Sections</div>
       </div>
-      <div class="px-7 py-4 mt-4">
-        <div class="grid grid-cols-2 gap-5">
-          <ThumbnailSection
-            v-for="item in availableSections"
-            :key="item.section"
-            :section="item"
-            @add="addSection"
-            @customize="addSection($event, true)"
+      <div v-else-if="sidebarActive.section === 'add-new-section'">
+        <div class="flex flex-col border-b">
+          <Icon
+            class="ml-auto text-oc-text-300 mx-5 mt-5 cursor-pointer"
+            name="x"
+            width="24"
+            height="24"
+            @click="changeSection('', '')"
           />
+          <div class="font-medium pb-4 px-7">Add Sections</div>
+        </div>
+        <div class="px-7 py-4 mt-4">
+          <div class="grid grid-cols-2 gap-5">
+            <ThumbnailSection
+              v-for="item in availableSections"
+              :key="item.section"
+              :section="item"
+              @add="addSection"
+              @customize="addSection($event, true)"
+            />
+          </div>
         </div>
       </div>
-    </div>
     </Transition>
     <div class="absolute bottom-0">
       <slot name="sidebar-bottom" />

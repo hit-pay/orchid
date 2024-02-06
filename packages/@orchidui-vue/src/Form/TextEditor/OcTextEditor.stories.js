@@ -35,9 +35,9 @@ export const Default = {
     setup() {
       const modelValue = ref("default model value");
       const onUpdateImage = (base64) => {
-          console.log(base64)
-      }
-      return { args, modelValue, onUpdateImage  };
+        console.log(base64);
+      };
+      return { args, modelValue, onUpdateImage };
     },
     template: `
           <Theme>

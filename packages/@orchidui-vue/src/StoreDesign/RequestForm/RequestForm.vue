@@ -233,94 +233,95 @@ const showSubForm = ref("");
           </div>
           <div>{{ form.label }}</div>
         </div>
-        <Transition  
-        enter-active-class="duration-[250ms] ease-out"
-        enter-from-class="transform opacity-0 mt-[100px]"
-        enter-to-class="opacity-100 mt-0">
-        <div
-          v-if="showSubForm === form.name"
-          class="bg-oc-bg-light absolute top-0 left-0 min-h-full w-full z-10 pb-[100px]"
+        <Transition
+          enter-active-class="duration-[250ms] ease-out"
+          enter-from-class="transform opacity-0 mt-[100px]"
+          enter-to-class="opacity-100 mt-0"
         >
           <div
-            class="flex items-center border-b mt-5 p-4 cursor-pointer"
-            @click="showSubForm = ''"
+            v-if="showSubForm === form.name"
+            class="bg-oc-bg-light absolute top-0 left-0 min-h-full w-full z-10 pb-[100px]"
           >
-            <Icon class="text-oc-text-400" name="chevron-left" />
-            <div class="font-medium">{{ form.label }}</div>
-          </div>
-          <div class="px-7 py-4 mt-4">
-            <FormBuilder
-              id="form-builder-children"
-              class="grid gap-5"
-              :errors="formErrors"
-              :values="formValues"
-              :json-form="form.children"
-              @on-update="onUpdateForm"
+            <div
+              class="flex items-center border-b mt-5 p-4 cursor-pointer"
+              @click="showSubForm = ''"
             >
-              <template #Menus="slot">
-                <SDMenus
-                  :model-value="slot.value"
-                  :no-menu-icon="slot.form.noMenuIcon"
-                  :options="options"
-                  :variant="slot.form.variant"
-                  :has-submenu="slot.form.hasSubmenu"
-                  :submenu-level="slot.form.submenuLevel"
-                  @update:model-value="onUpdateForm(slot.form, $event)"
-                  @add:menu="
-                    $emit('update:field', {
-                      general: form.general ? true : false,
-                      field: form.name,
-                      value: value,
-                      child: $event,
-                    })
-                  "
-                />
-              </template>
-              <template #Colors="slot">
-                <InputColors
-                  :form="slot.form"
-                  :model-value="slot.value"
-                  @update:model-value="onUpdateForm(slot.form, $event)"
-                />
-              </template>
-              <template #Slider="slot">
-                <Slider
-                  :key="slot.form.name"
-                  :model-value="slot.value"
-                  :min-limit="slot.form.props?.min ?? 0"
-                  :max-limit="slot.form.props?.max ?? 50"
-                  v-bind="slot.form.props"
-                  @update:model-value="onUpdateForm(slot.form, $event)"
-                />
-              </template>
-              <template #Font="slot">
-                <SelectFont
-                  :key="slot.form.name"
-                  :model-value="slot.value"
-                  v-bind="slot.form.props"
-                  @update:model-value="onUpdateForm(slot.form, $event)"
-                />
-              </template>
-              <template #Images="slot">
-                <MultipleUploadFile
-                  v-if="imageLoaded && images[slot.form.name]"
-                  :model-value="images[slot.form.name]"
-                  :hint="slot.form.props?.hint ?? ''"
-                  :max-size="5"
-                  :max-images="slot.form.props?.maxImages ?? 8"
-                  :important="true"
-                  is-image-only
-                  :columns-count="slot.form.props?.columnsCount ?? 4"
-                  with-link
-                  @update:model-value="onUpdateimages(slot.form, $event)"
-                  @on-edit-file="onEditimages(slot.form, $event)"
-                  @on-remove-file="onDeleteimages(slot.form, $event)"
-                >
-                </MultipleUploadFile>
-              </template>
-            </FormBuilder>
+              <Icon class="text-oc-text-400" name="chevron-left" />
+              <div class="font-medium">{{ form.label }}</div>
+            </div>
+            <div class="px-7 py-4 mt-4">
+              <FormBuilder
+                id="form-builder-children"
+                class="grid gap-5"
+                :errors="formErrors"
+                :values="formValues"
+                :json-form="form.children"
+                @on-update="onUpdateForm"
+              >
+                <template #Menus="slot">
+                  <SDMenus
+                    :model-value="slot.value"
+                    :no-menu-icon="slot.form.noMenuIcon"
+                    :options="options"
+                    :variant="slot.form.variant"
+                    :has-submenu="slot.form.hasSubmenu"
+                    :submenu-level="slot.form.submenuLevel"
+                    @update:model-value="onUpdateForm(slot.form, $event)"
+                    @add:menu="
+                      $emit('update:field', {
+                        general: form.general ? true : false,
+                        field: form.name,
+                        value: value,
+                        child: $event,
+                      })
+                    "
+                  />
+                </template>
+                <template #Colors="slot">
+                  <InputColors
+                    :form="slot.form"
+                    :model-value="slot.value"
+                    @update:model-value="onUpdateForm(slot.form, $event)"
+                  />
+                </template>
+                <template #Slider="slot">
+                  <Slider
+                    :key="slot.form.name"
+                    :model-value="slot.value"
+                    :min-limit="slot.form.props?.min ?? 0"
+                    :max-limit="slot.form.props?.max ?? 50"
+                    v-bind="slot.form.props"
+                    @update:model-value="onUpdateForm(slot.form, $event)"
+                  />
+                </template>
+                <template #Font="slot">
+                  <SelectFont
+                    :key="slot.form.name"
+                    :model-value="slot.value"
+                    v-bind="slot.form.props"
+                    @update:model-value="onUpdateForm(slot.form, $event)"
+                  />
+                </template>
+                <template #Images="slot">
+                  <MultipleUploadFile
+                    v-if="imageLoaded && images[slot.form.name]"
+                    :model-value="images[slot.form.name]"
+                    :hint="slot.form.props?.hint ?? ''"
+                    :max-size="5"
+                    :max-images="slot.form.props?.maxImages ?? 8"
+                    :important="true"
+                    is-image-only
+                    :columns-count="slot.form.props?.columnsCount ?? 4"
+                    with-link
+                    @update:model-value="onUpdateimages(slot.form, $event)"
+                    @on-edit-file="onEditimages(slot.form, $event)"
+                    @on-remove-file="onDeleteimages(slot.form, $event)"
+                  >
+                  </MultipleUploadFile>
+                </template>
+              </FormBuilder>
+            </div>
           </div>
-        </div>
         </Transition>
       </template>
       <template #Colors="{ form, value }">

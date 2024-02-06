@@ -16,8 +16,11 @@ defineProps({
     type: Boolean,
     default: false,
   },
+  isClosable: Boolean,
+  isBeneficiary: Boolean,
 });
-defineEmits(["addCustomer", "editCustomer"]);
+
+const emit = defineEmits(["addCustomer", "editCustomer", "closeCustomer"]);
 </script>
 
 <template>
@@ -32,13 +35,20 @@ defineEmits(["addCustomer", "editCustomer"]);
         :class="{ 'opacity-0 group-hover:opacity-100': isHover }"
       >
         <Button
-          @click="$emit('editCustomer', customer)"
           right-icon="pencil"
           variant="secondary"
           size="small"
           class="*:!px-[6px]"
+          @click="$emit('editCustomer', customer)"
         />
       </div>
+
+      <Icon
+        v-if="isClosable"
+        class="absolute -right-1.5 -top-1.5 border-1 bg-white border-white overflow-hidden rounded-full text-gray-500 cursor-pointer transition-all duration-300 hover:text-oc-error"
+        name="filled-x-circle"
+        @click="emit('closeCustomer')"
+      />
 
       <template v-if="customer">
         <!--  Main  -->
@@ -47,8 +57,19 @@ defineEmits(["addCustomer", "editCustomer"]);
             {{ customer?.name?.[0] || "J" }}
           </Avatar>
           <div class="flex flex-col font-medium">
-            <span>{{ customer?.name || "John" }}</span>
-            <span class="text-sm text-oc-text-400">
+            <div class="flex items-center gap-2">
+              <span>{{ customer?.name || "John" }}</span>
+              <span
+                v-if="isBeneficiary"
+                class="rounded-md py-1 px-3 text-sm text-oc-accent-1-500 bg-oc-accent-1-50"
+              >
+                {{ customer.currency }}
+              </span>
+            </div>
+            <span v-if="isBeneficiary" class="text-sm text-oc-text-400">
+              {{ customer.bank_name }} / {{ customer.bank_account_number }}
+            </span>
+            <span v-else class="text-sm text-oc-text-400">
               {{ customer?.email || "johndoe@gmail.com" }}
             </span>
           </div>
@@ -66,6 +87,12 @@ defineEmits(["addCustomer", "editCustomer"]);
             "
           />
           <ListDetail
+            v-if="isBeneficiary"
+            label="Email"
+            :content="customer.email"
+          />
+          <ListDetail
+            v-else
             label="Address"
             :content="
               [
@@ -80,7 +107,7 @@ defineEmits(["addCustomer", "editCustomer"]);
         </div>
       </template>
 
-      <template v-else>
+      <template v-else-if="!isBeneficiary">
         <div class="flex flex-col gap-y-2 w-full items-center">
           <Avatar :size="32">
             <Icon name="user-add" width="16" height="16" />

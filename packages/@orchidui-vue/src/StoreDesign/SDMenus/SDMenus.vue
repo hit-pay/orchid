@@ -246,7 +246,7 @@ const confirmDeleteMenu = () => {
   if (deleteMenuItems.value && deleteMenuItems.value.subitem2) {
     let parentChildren = deleteMenuItems.value.item.children;
     let newChildren = deleteMenuItems.value.subitem.children.filter(
-      (i) => i.id !== deleteMenuItems.value.subitem2.id
+      (i) => i.id !== deleteMenuItems.value.subitem2.id,
     );
     newModelValue[newModelValue.indexOf(deleteMenuItems.value.item)].children[
       parentChildren.indexOf(deleteMenuItems.value.subitem)
@@ -258,7 +258,7 @@ const confirmDeleteMenu = () => {
       children.filter((i) => i.id !== deleteMenuItems.value.subitem.id);
   } else {
     newModelValue = newModelValue.filter(
-      (s) => s.id !== deleteMenuItems.value.item.id
+      (s) => s.id !== deleteMenuItems.value.item.id,
     );
   }
   emit("update:modelValue", newModelValue);
@@ -502,7 +502,7 @@ const confirmDeleteMenu = () => {
                     @update:model-value="
                       editMenuForm.link = getLinkFromOption(
                         $event,
-                        options.pages
+                        options.pages,
                       )
                     "
                   />
@@ -517,7 +517,7 @@ const confirmDeleteMenu = () => {
                     @update:model-value="
                       editMenuForm.link = getLinkFromOption(
                         $event,
-                        options.categories
+                        options.categories,
                       )
                     "
                   />

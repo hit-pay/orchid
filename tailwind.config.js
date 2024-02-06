@@ -44,19 +44,6 @@ module.exports = {
       lg: "976px",
       xl: "1440px",
     },
-    spacing: {
-      0: "0",
-      1: "0.125rem",
-      2: "0.25rem",
-      3: "0.5rem",
-      4: ".75rem",
-      5: "1rem",
-      6: "1.25rem",
-      7: "1.5rem",
-      8: "1.75rem",
-      9: "2rem",
-      10: "2.5rem",
-    },
     borderRadius: {
       DEFAULT: "var(--oc-border-md)",
       xs: "var(--oc-border-xs)",
@@ -68,6 +55,18 @@ module.exports = {
       full: "var(--oc-border-full)",
     },
     extend: {
+      spacing: {
+        0: "0",
+        1: "0.125rem",
+        2: "0.25rem",
+        3: "0.5rem",
+        4: ".75rem",
+        5: "1rem",
+        6: "1.25rem",
+        7: "1.5rem",
+        8: "1.75rem",
+        9: "2rem",
+      },
       boxShadow: {
         normal: "var(--oc-shadow-normal)",
         "right-sticky": "var(--oc-shadow-right-sticky)",
