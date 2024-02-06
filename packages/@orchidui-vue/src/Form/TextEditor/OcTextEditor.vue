@@ -152,9 +152,28 @@ const checkBase64Validation = (base64) => {
   const regex = /^data:image\/(png|jpg|jpeg|gif);base64,/;
   return regex.test(base64);
 };
+
 const isValidPasedText = (clipBoardEvent) => {
+
+  setTimeout(() => {
+    // emit base 64 image
+    const htmlData = clipBoardEvent?.target?.innerHTML
+    if(htmlData ){
+      const domData = document.createElement('div')
+      domData.innerHTML = htmlData
+      let allImages = domData.getElementsByTagName('img')
+      if (allImages && allImages.length > 0) {
+        for (let index = 0; index < allImages.length; index++) {
+          const img = allImages[index]?.getAttribute('src')
+          if(checkBase64Validation(img)){
+            emit("update:image", img);
+          }
+        }
+      }
+    }
+  }, 100)
+
   const { items } = clipBoardEvent.clipboardData;
-  console.log('copy item :', items)
   if (!items.length) return;
   items[0].getAsString((data) => {
     if (checkBase64Validation(data)) {
@@ -163,8 +182,6 @@ const isValidPasedText = (clipBoardEvent) => {
           .getQuill()
           .setSelection(quill.value.getQuill().getLength() - 1);
       }
-      // this read image not working
-      readImage(data);
     }
   });
 };
