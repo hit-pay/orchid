@@ -1,5 +1,5 @@
 <script setup>
-import Quill from "quill";
+import * as Quill from "quill"
 import { QuillEditor } from "./QuillEditor";
 
 import { onMounted, ref } from "vue";

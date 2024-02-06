@@ -1,5 +1,4 @@
-import Quill from "quill";
-import Delta from "quill-delta";
+import * as Quill from "quill"
 import {
   defineComponent,
   onBeforeUnmount,
