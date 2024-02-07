@@ -310,7 +310,13 @@ const displayFilterData = computed(() => {
 
           if (option.type === "RangeInput") {
             optionLabel =
-              filterData.value[name][0] + " - " + filterData.value[name][1];
+              filterData.value[name][0]
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",") +
+              " - " +
+              filterData.value[name][1]
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
           }
 
           if (option.type === "DatePicker") {
