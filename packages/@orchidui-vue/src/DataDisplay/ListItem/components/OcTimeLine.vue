@@ -19,7 +19,7 @@ defineProps({
 
 <template>
   <div
-    class="flex w-full relative gap-x-5 py-4 before:top-[20px] last:before:top-0 before:h-full before:left-[10px] before:absolute before:border-l"
+    class="flex flex-col md:flex-row w-full relative gap-x-5 py-4 before:top-[20px] last:before:top-0 before:h-full before:left-[10px] before:absolute before:border-l"
   >
     <div>
       <div
@@ -35,15 +35,15 @@ defineProps({
 
     <div class="flex gap-x-7 w-full items-center">
       <div class="flex flex-1 flex-col gap-y-2">
-        <span>{{ title }}</span>
-        <span class="text-sm text-oc-text-400">
+        <span class="truncate">{{ title }}</span>
+        <span class="text-sm text-oc-text-400 truncate">
           <slot name="description">{{ description }}</slot>
         </span>
       </div>
 
       <div class="flex items-end gap-x-2">
         <Icon v-if="icon" :name="icon" :class="iconClass" />
-        <span class="text-lg font-medium" :class="iconTextClass">{{
+        <span class="text-lg font-medium truncate" :class="iconTextClass">{{
           iconText
         }}</span>
       </div>

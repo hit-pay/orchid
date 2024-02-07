@@ -27,12 +27,12 @@ const toggleDashboard = () => {
 
 <template>
   <div
-    class="px-5 py-4 flex flex-col gap-y-2 rounded border border-gray-200 group"
+    class="px-5 py-4 flex flex-col md:flex-row gap-y-2 rounded border border-gray-200 group"
     :class="{ 'hover:shadow-normal': !isDisabled }"
   >
     <div class="flex items-center justify-between">
       <div class="flex text-sm text-oc-text-400 items-center gap-x-3">
-        <span v-if="title" class="text-base text-oc-text font-medium">
+        <span v-if="title" class="text-base text-oc-text font-medium truncate">
           {{ title }}
         </span>
 
@@ -60,7 +60,7 @@ const toggleDashboard = () => {
       </slot>
     </div>
     <div class="flex flex-col gap-4">
-      <div class="text-oc-text-500 flex gap-x-2 items-center text-sm">
+      <div class="text-oc-text-500 flex gap-x-2 items-center text-sm truncate">
         <Icon
           v-if="descriptionIcon"
           :name="descriptionIcon"
@@ -96,17 +96,3 @@ const toggleDashboard = () => {
     </div>
   </div>
 </template>
-
-<style scoped>
-@media (max-width: 768px) {
-  .flex.flex-col {
-    flex-direction: column;
-  }
-}
-
-.title, .description {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-</style>

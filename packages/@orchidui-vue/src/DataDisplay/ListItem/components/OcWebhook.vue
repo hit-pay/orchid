@@ -16,15 +16,15 @@ const isOpen = ref(false);
 
 <template>
   <div
-    class="px-5 py-4 flex flex-col gap-y-5 rounded border border-gray-200 group hover:shadow-normal"
+    class="px-5 py-4 flex flex-col md:flex-row gap-y-5 rounded border border-gray-200 group hover:shadow-normal"
   >
     <div class="flex items-center justify-between">
       <div class="flex text-sm text-oc-text-400 items-center gap-x-2">
-        <span v-if="title" class="text-base text-oc-text font-medium">
+        <span v-if="title" class="text-base text-oc-text font-medium truncate">
           {{ title }}
         </span>
         -
-        <span v-if="date">{{ date }}</span>
+        <span v-if="date" class="truncate">{{ date }}</span>
       </div>
       <Dropdown v-model="isOpen">
         <Icon
@@ -37,7 +37,7 @@ const isOpen = ref(false);
         </template>
       </Dropdown>
     </div>
-    <div v-if="urls?.length" class="flex flex-col gap-y-3">
+    <div v-if="urls?.length" class="flex flex-col md:flex-row gap-y-3">
       <ListUrl
         v-for="(url, i) in urls"
         :key="i"
@@ -49,15 +49,4 @@ const isOpen = ref(false);
 </template>
 
 <style scoped>
-@media (max-width: 768px) {
-  .flex.flex-col {
-    flex-direction: column;
-  }
-}
-
-.text-container span {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-}
 </style>

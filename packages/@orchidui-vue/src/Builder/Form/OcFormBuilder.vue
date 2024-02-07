@@ -27,19 +27,15 @@ const props = defineProps({
   jsonForm: {
     type: Array,
   },
-  /**
-   * Grid needs to be defined in the following format:
-   * `{`
-   *   `[Responsive size (xs, sm, md, lg, xl, xxl)]: {`
-   *     `area: [Grid area definition (names of areas in order)],`
-   *     `rows: [Count and size of rows i.e: 'auto' | '100%' | ...],`
-   *     `columns: [Count and size of columns i.e: '33% 33% 33%'],`
-   *   `}`
-   * `}`
-   */
   grid: {
     type: Object,
-    default: null,
+    default: () => ({
+      'default': 'grid grid-cols-1 gap-4',
+      'sm': 'grid grid-cols-2 gap-4',
+      'md': 'grid grid-cols-3 gap-4',
+      'lg': 'grid grid-cols-4 gap-4',
+      // Include additional breakpoints as needed.
+    }),
   },
   class: String,
   errors: {
@@ -83,24 +79,11 @@ const getComponentByType = (type) => {
   }
 };
 
-// grid
-const gridDefinitionVariables = computed(() => {
-  const parseGridArea = (gridArea) =>
-    gridArea
-      .split("\n")
-      .map((line) => line.trim())
-      .filter(Boolean)
-      .map((line) => `"${line}"`)
-      .join(" ");
+const currentBreakpoint = ref('default'); // Placeholder for dynamic breakpoint calculation logic
 
-  const variables = {};
-  Object.entries(props.grid).forEach(([breakpoint, grid]) => {
-    Object.entries(grid).forEach(([key, value]) => {
-      variables[`--grid-${breakpoint}-${key}`] =
-        key === "area" ? parseGridArea(value) : value;
-    });
-  });
-  return variables;
+// Dynamically apply grid layout classes based on current breakpoint
+const gridLayoutClass = computed(() => {
+  return props.grid[currentBreakpoint.value] || props.grid.default;
 });
 
 const getFormKey = (name) => {
@@ -219,18 +202,14 @@ onMounted(() => {
 <template>
   <div
     v-if="Object.values(modelValue).length > 0"
-    :class="grid ? `responsive-smart-form-grid ${className}` : className"
-    :style="grid ? gridDefinitionVariables : ''"
+    :class="gridLayoutClass"
   >
     <div
       v-for="form in jsonForm"
       :key="getFormKey(form.name)"
-      :style="grid ? gridArea(form.name) : ''"
-      :class="
-        formClass[
-          typeof form.name === 'object' ? getFirstName(form.name) : form.name
-        ]
-      "
+      :class="formClass[
+        typeof form.name === 'object' ? getFirstName(form.name) : form.name
+      ]"
     >
       <component
         :is="getComponentByType(form.type)"

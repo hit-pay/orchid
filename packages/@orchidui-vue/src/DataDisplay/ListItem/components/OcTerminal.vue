@@ -19,7 +19,7 @@ defineProps({
 
 <template>
   <div
-    class="p-4 flex gap-x-4 rounded items-center border border-gray-200 group"
+    class="p-4 flex flex-col md:flex-row gap-x-4 rounded items-center border border-gray-200 group"
     :class="{ 'hover:shadow-normal': !isDisabled }"
   >
     <div class="w-[56px] shrink-0 aspect-square bg-oc-bg-dark rounded">
@@ -29,7 +29,7 @@ defineProps({
     <div class="flex flex-col gap-y-1 overflow-hidden">
       <div class="flex items-center justify-between">
         <div class="flex text-sm text-oc-text-400 items-center gap-x-3">
-          <span v-if="title" class="text-base text-oc-text font-medium">
+          <span v-if="title" class="text-base text-oc-text font-medium truncate">
             {{ title }}
           </span>
 

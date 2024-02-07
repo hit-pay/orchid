@@ -1,9 +1,6 @@
 <script setup>
 import { Icon, Tooltip } from "@/orchidui";
 import { computed, onBeforeUnmount, onMounted, ref } from "vue";
-import { useWindowWidth } from '@orchidui-vue/src/composables/useWindowWidth.js';
-
-const { width } = useWindowWidth();
 
 const props = defineProps({
   title: {
@@ -43,7 +40,7 @@ const calculateBlocksPerLine = () => {
     35; /* tooltip block */
   const blockWidth = 35; /* image width */
 
-  blocksPerLine.value = width < 768 ? 3 : Math.floor(containerWidth / blockWidth);
+  blocksPerLine.value = Math.floor(containerWidth / blockWidth);
 };
 
 onMounted(() => {
@@ -64,7 +61,9 @@ onBeforeUnmount(() => {
     <div class="flex items-center gap-x-5">
       <div class="flex-1 flex items-center gap-x-3 font-medium capitalize">
         <slot name="logo" />
-        {{ title }}
+        <span class="truncate">
+          {{ title }}
+        </span>
       </div>
       <slot name="right">
         <div
@@ -85,7 +84,7 @@ onBeforeUnmount(() => {
       </slot>
     </div>
 
-    <div v-if="paymentMethods?.length" class="flex items-center gap-x-2">
+    <div v-if="paymentMethods?.length" class="flex flex-col md:flex-row items-center gap-x-2">
       <span class="text-sm font-medium text-oc-text-300 whitespace-nowrap"
         >Payment methods</span
       >
