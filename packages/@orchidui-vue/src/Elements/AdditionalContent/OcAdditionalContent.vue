@@ -53,16 +53,16 @@ const copyLink = async () => {
       :title="additionalTitle"
       class="border rounded md:py-4 py-3 md:px-5 px-4 border-oc-gray-200 bg-oc-gray-50 flex flex-col gap-y-2"
     >
-      <template #title="{ title }">
+      <template #title>
         <div class="flex items-center gap-x-3">
-          <span class="font-medium">{{ title }}</span>
+          <span class="font-medium">{{ additionalTitle }}</span>
           <Chip :variant="chipVariant" :label="chipLabel" />
         </div>
       </template>
-      <template #description="{ description }">
+      <template #description>
         <div class="flex items-center gap-x-2">
           <div class="text-oc-text-400 flex items-center overflow-hidden">
-            <div class="truncate">{{ description }}</div>
+            <div class="truncate">{{ mainLink }}</div>
             <div class="text-oc-text">{{ userId }}</div>
           </div>
           <PrimaryActions :primary-actions="primaryActions" @copy="copyLink" />
