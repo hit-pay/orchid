@@ -1,6 +1,6 @@
 <script setup>
 import { Chip, PrimaryActions } from "@/orchidui";
-import Title from "@/orchidui/Elements/PageTitle/OcTitle.vue";
+import OcTitle from "@/orchidui/Elements/PageTitle/OcTitle.vue";
 import BalanceOverview from "./BalanceType/OcBalanceOverview.vue";
 import DynamicType from "./DynamicType/OcDynamicType.vue";
 
@@ -47,7 +47,7 @@ const copyLink = async () => {
 
 <template>
   <div class="md:pt-5 pt-0 md:px-10 px-5">
-    <Title
+    <OcTitle
       v-if="variant === 'default'"
       :description="mainLink"
       :title="additionalTitle"
@@ -68,7 +68,7 @@ const copyLink = async () => {
           <PrimaryActions :primary-actions="primaryActions" @copy="copyLink" />
         </div>
       </template>
-    </Title>
+    </OcTitle>
 
     <DynamicType
       v-else-if="variant === 'dynamic'"
@@ -81,11 +81,11 @@ const copyLink = async () => {
       @add-customer="$emit('addCustomer')"
       @edit-customer="$emit('editCustomer', $event)"
     >
-      <template v-for="box in boxes" v-slot:[box.slot]="{ data }">
+      <template v-for="box in boxes" #[box.slot]="{ data }">
         <slot :name="box.slot" :data="data"></slot>
       </template>
 
-      <template v-for="box in boxes" v-slot:[box.infoTooltipSlot]="{ data }">
+      <template v-for="box in boxes" #[box.infoTooltipSlot]="{ data }">
         <slot :name="box.infoTooltipSlot" :data="data"></slot>
       </template>
 
