@@ -5,6 +5,9 @@ import OcWebhook from "./components/OcWebhook.vue";
 import OcPayment from "./components/OcPayment.vue";
 import OcGeneral from "./components/OcGeneral.vue";
 import OcTerminal from "./components/OcTerminal.vue";
+import { useWindowWidth } from '@orchidui-vue/src/composables/useWindowWidth.js';
+
+const { width } = useWindowWidth();
 
 const props = defineProps({
   isActive: Boolean,
@@ -61,6 +64,7 @@ const getTypeComponent = computed(() => {
   <component
     :is="getTypeComponent"
     v-bind="props"
+    :mobile-view="width < 768"
     :class="{ 'opacity-50': isDisabled }"
     @more="$emit('more')"
     @edit="$emit('edit')"

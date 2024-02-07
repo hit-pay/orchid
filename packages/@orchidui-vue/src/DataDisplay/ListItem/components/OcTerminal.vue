@@ -61,3 +61,18 @@ defineProps({
     />
   </div>
 </template>
+
+<style scoped>
+@media (max-width: 768px) {
+  .flex {
+    flex-direction: column;
+  }
+}
+
+span, .overflow-hidden {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+</style>
+

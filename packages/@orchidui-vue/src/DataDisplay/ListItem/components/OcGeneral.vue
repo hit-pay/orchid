@@ -96,3 +96,17 @@ const toggleDashboard = () => {
     </div>
   </div>
 </template>
+
+<style scoped>
+@media (max-width: 768px) {
+  .flex.flex-col {
+    flex-direction: column;
+  }
+}
+
+.title, .description {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+</style>

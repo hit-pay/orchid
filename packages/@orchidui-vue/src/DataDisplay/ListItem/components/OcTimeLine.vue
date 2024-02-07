@@ -50,3 +50,17 @@ defineProps({
     </div>
   </div>
 </template>
+
+<style scoped>
+@media (max-width: 768px) {
+  .flex {
+    flex-direction: column;
+  }
+}
+
+.title, .description {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+</style>

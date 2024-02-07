@@ -47,3 +47,17 @@ const isOpen = ref(false);
     </div>
   </div>
 </template>
+
+<style scoped>
+@media (max-width: 768px) {
+  .flex.flex-col {
+    flex-direction: column;
+  }
+}
+
+.text-container span {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+</style>

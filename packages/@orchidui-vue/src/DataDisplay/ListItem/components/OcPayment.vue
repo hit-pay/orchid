@@ -1,6 +1,9 @@
 <script setup>
 import { Icon, Tooltip } from "@/orchidui";
 import { computed, onBeforeUnmount, onMounted, ref } from "vue";
+import { useWindowWidth } from '@orchidui-vue/src/composables/useWindowWidth.js';
+
+const { width } = useWindowWidth();
 
 const props = defineProps({
   title: {
@@ -30,6 +33,7 @@ const restPaymentMethods = computed(() =>
 );
 const cardContainer = ref();
 const blocksPerLine = ref(props.paymentMethods?.length);
+
 const calculateBlocksPerLine = () => {
   const containerWidth =
     cardContainer.value.clientWidth -
@@ -39,7 +43,7 @@ const calculateBlocksPerLine = () => {
     35; /* tooltip block */
   const blockWidth = 35; /* image width */
 
-  blocksPerLine.value = Math.floor(containerWidth / blockWidth);
+  blocksPerLine.value = width < 768 ? 3 : Math.floor(containerWidth / blockWidth);
 };
 
 onMounted(() => {
@@ -124,3 +128,17 @@ onBeforeUnmount(() => {
     </div>
   </div>
 </template>
+
+<style scoped>
+@media (max-width: 768px) {
+  .cardContainer {
+    flex-direction: column;
+  }
+}
+
+.title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+</style>
