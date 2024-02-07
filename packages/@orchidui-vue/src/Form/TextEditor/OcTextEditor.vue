@@ -157,7 +157,7 @@ const isValidPasedText = (clipBoardEvent) => {
   setTimeout(() => {
     // emit base 64 image
     if (clipBoardEvent) {
-      const htmlData = quill.value.getHTML()
+      const htmlData = quill.value.getHTML();
       const domData = document.createElement("div");
       domData.innerHTML = htmlData;
       let allImages = domData.getElementsByTagName("img");
