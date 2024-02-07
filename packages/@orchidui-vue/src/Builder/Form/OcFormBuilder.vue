@@ -215,6 +215,12 @@ onMounted(() => {
   setModelValues(props.values);
   setErrorMessage(props.errors);
 });
+
+props.jsonForm.forEach((formField) => {
+  if (formField.type === 'input' && formField.autofocus) {
+    formField.props.autofocus = true;
+  }
+});
 </script>
 <template>
   <div
@@ -247,6 +253,7 @@ onMounted(() => {
           ]
         "
         @update:model-value="onUpdate(form, $event)"
+        :autofocus="form.props.autofocus"
       />
       <slot
         v-else
@@ -264,6 +271,7 @@ onMounted(() => {
           ]
         "
         :on-update="onUpdate"
+        :autofocus="form.props.autofocus"
       />
     </div>
   </div>

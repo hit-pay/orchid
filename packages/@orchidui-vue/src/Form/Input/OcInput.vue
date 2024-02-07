@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, useAttrs } from "vue";
+import { computed, ref, useAttrs, onMounted } from "vue";
 import { BaseInput, Icon } from "@/orchidui";
 import { pickEventListeners } from "@/orchidui/Form/Input/inputHelper.js";
 
@@ -88,6 +88,10 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  autofocus: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits(["update:modelValue", "blur", "focus"]);
@@ -121,6 +125,12 @@ const inputAttrs = computed(() => {
   }
 
   return inputAttributes;
+});
+
+onMounted(() => {
+  if (props.autofocus) {
+    inputRef.value.focus();
+  }
 });
 </script>
 
