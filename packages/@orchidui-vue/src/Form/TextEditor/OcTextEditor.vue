@@ -156,8 +156,8 @@ const checkBase64Validation = (base64) => {
 const isValidPasedText = (clipBoardEvent) => {
   setTimeout(() => {
     // emit base 64 image
-    const htmlData = clipBoardEvent?.target?.innerHTML;
-    if (htmlData) {
+    if (clipBoardEvent) {
+      const htmlData = quill.value.getHTML();
       const domData = document.createElement("div");
       domData.innerHTML = htmlData;
       let allImages = domData.getElementsByTagName("img");
