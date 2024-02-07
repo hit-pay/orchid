@@ -35,6 +35,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  persistent: {
+    type: Boolean,
+    default: false,
+  },
   contentClass: String,
 });
 const emit = defineEmits(["confirm", "cancel", "update:model-value"]);
@@ -80,6 +84,7 @@ const emitModelValue = (e) => {
     :model-value="modelValue"
     :title="title"
     is-borderless
+    :persistent="persistent"
     :cancel-button-props="
       labelCancel
         ? {
