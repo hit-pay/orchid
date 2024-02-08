@@ -272,9 +272,9 @@ const showSubForm = ref("");
                     @update:model-value="onUpdateForm(slot.form, $event)"
                     @add:menu="
                       $emit('update:field', {
-                        general: form.general ? true : false,
-                        field: form.name,
-                        value: value,
+                        general: slot.form.general ? true : false,
+                        field: slot.form.name,
+                        value: slot.value,
                         child: $event,
                       })
                     "
