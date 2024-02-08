@@ -18,6 +18,7 @@ const props = defineProps({
   labelIcon: String,
   isRequired: Boolean,
   tooltipText: String,
+  inputClass: [String, Array, Object],
 });
 const emit = defineEmits(["update:modelValue"]);
 
@@ -42,6 +43,7 @@ const decrement = () => {
     <div
       class="flex w-fit justify-between gap-x-3 h-[36px] items-center min-w-[100px] border rounded px-1"
       :class="[
+        inputClass,
         isDisabled ? 'bg-oc-bg-dark' : '',
         errorMessage ? 'border-oc-error' : 'border-oc-gray-200',
       ]"

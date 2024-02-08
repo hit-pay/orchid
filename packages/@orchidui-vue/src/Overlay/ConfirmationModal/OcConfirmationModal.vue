@@ -40,6 +40,7 @@ const props = defineProps({
     default: false,
   },
   contentClass: String,
+  confirmButtonProps: Object,
 });
 const emit = defineEmits(["confirm", "cancel", "update:model-value"]);
 const cancelButton = computed(() => ({
@@ -93,14 +94,15 @@ const emitModelValue = (e) => {
           }
         : cancelButton[variant]
     "
-    :confirm-button-props="
-      labelConfirm
+    :confirm-button-props="{
+      ...(labelConfirm
         ? {
             ...confirmButton[variant],
             label: labelConfirm,
           }
-        : confirmButton[variant]
-    "
+        : confirmButton[variant]),
+      ...confirmButtonProps,
+    }"
     footer-class="justify-center"
     @update:model-value="emitModelValue"
     @confirm="$emit('confirm')"

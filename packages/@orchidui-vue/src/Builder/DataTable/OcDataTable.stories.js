@@ -7,6 +7,8 @@ import {
   Toggle,
   TableCellContent,
   Button,
+  Dropdown,
+  DropdownItem,
 } from "@/orchidui";
 
 import { ref } from "vue";
@@ -33,11 +35,14 @@ export const Default = {
       Chip,
       TableCellContent,
       Button,
+      Dropdown,
+      DropdownItem,
     },
     setup() {
       const filter = ref(Filter);
       const changedFields = ref([]);
       const selectedRows = ref([]);
+      const showDropdown = ref({})
       const updateFilterData = (data) => {
         filter.value = data;
       };
@@ -45,11 +50,21 @@ export const Default = {
         console.log("onClickRow  ", val);
       };
 
+      const handleOpenDropdown = (itemId) => {
+        Object.keys(showDropdown.value).forEach((id) => {
+          if (id !== itemId) {
+            showDropdown.value[id] = false
+          }
+        })
+      }
+
       return {
         args,
         filter,
         changedFields,
         selectedRows,
+        showDropdown,
+        handleOpenDropdown,
         updateFilterData,
         onClickRow,
       };
@@ -118,8 +133,41 @@ export const Default = {
                   </span>
                 </div>
               </template>
-              <template #actions>
-                <Icon class="w-6 h-6 group-hover/row:block md:hidden cursor-pointer mx-auto" name="dots-vertical"/>
+              <template #actions="{ item }">
+                <Dropdown
+                  v-model="showDropdown[item.id]"
+                  :distance="10"
+                  @update:modelValue="handleOpenDropdown(item.id)"
+                >
+                  <Icon class="w-6 h-6 group-hover/row:block md:hidden cursor-pointer mx-auto" name="dots-vertical"/>
+
+
+                  <template #menu>
+                    <div class="flex flex-col">
+                      <div class="p-2 border-b border-gray-200">
+                        <DropdownItem
+                          text="Copy Link"
+                          icon="copy"
+                        />
+                        <DropdownItem
+                        text="Resend e-mail"
+                          icon="telegram"
+                        />
+                        <DropdownItem
+                          text="Download PDF"
+                          icon="download"
+                        />
+                      </div>
+                      <div class="p-2">
+                        <DropdownItem
+                          text="Delete"
+                          icon="bin"
+                          variant="destructive"
+                        />
+                      </div>
+                    </div>
+                  </template>
+                </Dropdown>
               </template>
               <template #after>
                 Slot After
