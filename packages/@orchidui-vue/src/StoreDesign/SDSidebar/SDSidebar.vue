@@ -262,18 +262,20 @@ const updateSectionActive = (value, item) => {
       section: item.section,
       active: value,
     });
-  }else{
-    props.values.sections.map((vs) => {
-      if (item.key === vs.key) {
-        newValuesSections.push({
-          ...vs,
-          active: value,
-        });
-      } else {
-        newValuesSections.push(vs);
-      }
-    });
   }
+
+  console.log(exist, newValuesSections)
+  props.values.sections.map((vs) => {
+    if (item.key === vs.key) {
+      newValuesSections.push({
+        ...vs,
+        active: value,
+      });
+    } else {
+      newValuesSections.push(vs);
+    }
+  });
+  
 
   emit("update:values", {
     general: generalData.value,
