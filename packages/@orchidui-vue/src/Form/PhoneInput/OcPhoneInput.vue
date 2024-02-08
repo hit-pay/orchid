@@ -211,5 +211,6 @@ const onPaste = (e) => {
 </template>
 
 <style>
-@import url("https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.11.0/css/flag-icons.min.css");
+@import url("https://cdn.jsdelivr.net/gh/lipis/flag-icons@latest/css/flag-icons.min.css");
 </style>
+
