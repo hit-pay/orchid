@@ -264,7 +264,6 @@ const updateSectionActive = (value, item) => {
     });
   }
 
-  console.log(exist, newValuesSections)
   props.values.sections.map((vs) => {
     if (item.key === vs.key) {
       newValuesSections.push({
