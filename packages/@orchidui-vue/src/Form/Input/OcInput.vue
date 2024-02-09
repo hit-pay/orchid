@@ -97,6 +97,7 @@ const attrs = useAttrs();
 const eventListeners = pickEventListeners(attrs);
 
 const inputRef = ref();
+const isPasswordVisible = ref(false);
 
 defineExpose({
   focus: () => inputRef.value.focus(),
@@ -122,6 +123,8 @@ const inputAttrs = computed(() => {
 
   return inputAttributes;
 });
+
+const isPasswordInput = computed(() => props.inputType === "password");
 </script>
 
 <template>
@@ -162,7 +165,7 @@ const inputAttrs = computed(() => {
 
           <input
             ref="inputRef"
-            :type="inputType"
+            :type="isPasswordInput && isPasswordVisible ? 'text' : inputType"
             :value="modelValue"
             :readonly="isReadonly"
             :placeholder="placeholder"
@@ -184,11 +187,22 @@ const inputAttrs = computed(() => {
       </div>
 
       <div
-        v-if="$slots.leading"
+        v-if="$slots.leading || isPasswordInput"
         :class="{
           'border-l border-gray-200 pl-3 py-3': hasLeadingSeparator,
         }"
       >
+        <span
+          v-if="!$slots.leading"
+          class="text-oc-text-200"
+          @click="isPasswordVisible = !isPasswordVisible"
+        >
+          <Icon
+            :name="isPasswordVisible ? 'eye-open' : 'eye-close'"
+            width="16"
+            height="16"
+          />
+        </span>
         <slot name="leading" />
       </div>
     </div>

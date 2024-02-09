@@ -42,7 +42,7 @@ export const Default = {
       const filter = ref(Filter);
       const changedFields = ref([]);
       const selectedRows = ref([]);
-      const showDropdown = ref({})
+      const showDropdown = ref({});
       const updateFilterData = (data) => {
         filter.value = data;
       };
@@ -53,10 +53,10 @@ export const Default = {
       const handleOpenDropdown = (itemId) => {
         Object.keys(showDropdown.value).forEach((id) => {
           if (id !== itemId) {
-            showDropdown.value[id] = false
+            showDropdown.value[id] = false;
           }
-        })
-      }
+        });
+      };
 
       return {
         args,
