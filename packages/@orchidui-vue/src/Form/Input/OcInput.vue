@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, useAttrs } from "vue";
+import { computed, ref, useAttrs, onMounted } from "vue";
 import { BaseInput, Icon } from "@/orchidui";
 import { pickEventListeners } from "@/orchidui/Form/Input/inputHelper.js";
 
@@ -11,6 +11,10 @@ const props = defineProps({
   errorMessage: {
     type: String,
     default: "",
+  },
+  autofocus: {
+    type: Boolean,
+    default: false,
   },
   iconProps: {
     type: Object,
@@ -98,6 +102,12 @@ const eventListeners = pickEventListeners(attrs);
 
 const inputRef = ref();
 
+onMounted(() => {
+  if (props.autofocus) {
+    inputRef.value.focus();
+  }
+});
+
 defineExpose({
   focus: () => inputRef.value.focus(),
 });
@@ -167,6 +177,7 @@ const inputAttrs = computed(() => {
             :readonly="isReadonly"
             :placeholder="placeholder"
             :disabled="disabled"
+            :autofocus="autofocus"
             :inputmode="inputMode"
             class="h-7 outline-none md:text-base text-lg w-full text-oc-text disabled:bg-transparent disabled:text-oc-text-300 text-ellipsis placeholder:font-normal placeholder:text-oc-text-300 bg-oc-bg-light"
             v-bind="inputAttrs"

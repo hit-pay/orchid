@@ -233,6 +233,24 @@ const SampleJsonForm = [
     },
   },
   {
+    name: "first_name",
+    type: "Input",
+    props: {
+      label: "First Name",
+      placeholder: "First name",
+      autofocus: true,
+    },
+  },
+  {
+    name: "new_password",
+    type: "Input",
+    props: {
+      label: "New Password",
+      placeholder: "New password",
+      autofocus: true,
+    },
+  },
+  {
     name: "range_input",
     key: "range_input",
     type: "RangeInput",
