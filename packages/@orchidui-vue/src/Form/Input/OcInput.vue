@@ -195,7 +195,7 @@ const isPasswordInput = computed(() => props.inputType === "password");
         <span
           v-if="!$slots.leading"
           class="text-oc-text-200"
-          @click="isPasswordVisible = !isPasswordVisible"
+          @click.prevent="isPasswordVisible = !isPasswordVisible"
         >
           <Icon
             :name="isPasswordVisible ? 'eye-open' : 'eye-close'"
