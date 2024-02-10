@@ -71,7 +71,10 @@ const variantClass = computed(() => ({
 
 <template>
   <div
-    :class="[variantClass[variant], isLoading ? 'flex items-center' : '']"
+    :class="[
+      variantClass[variant] ?? 'px-4',
+      isLoading ? 'flex items-center' : '',
+    ]"
     class="md:py-3 md:px-4 px-3 py-1 bg-oc-bg-light md:min-h-[58px] md:group-hover/row:bg-oc-gray-50 items-center"
   >
     <div
