@@ -18,12 +18,13 @@ const Variants = {
   ICON: "icon",
   IMAGE: "image",
   EMPTY: "empty",
+  DEFAULT: "default",
 };
 const props = defineProps({
   isSimple: Boolean,
   variant: {
     type: String,
-    default: "",
+    default: "default",
   },
   isLast: Boolean,
   isCopy: Boolean,
@@ -66,15 +67,13 @@ const variantClass = computed(() => ({
   [Variants.CHIP]: "px-4",
   [Variants.DATETIME]: "px-4",
   [Variants.EMPTY]: "px-4 min-w-[48px]",
+  [Variants.DEFAULT]: "px-4",
 }));
 </script>
 
 <template>
   <div
-    :class="[
-      variantClass[variant] ?? 'px-4',
-      isLoading ? 'flex items-center' : '',
-    ]"
+    :class="[variantClass[variant], isLoading ? 'flex items-center' : '']"
     class="md:py-3 md:px-4 px-3 py-1 bg-oc-bg-light md:min-h-[58px] md:group-hover/row:bg-oc-gray-50 items-center"
   >
     <div
@@ -164,7 +163,7 @@ const variantClass = computed(() => ({
 
         <!--  DEFAULT    -->
         <TableLink
-          v-else-if="data"
+          v-else-if="variant === Variants.DEFAULT"
           :link="link"
           class="flex items-center w-full"
         >
