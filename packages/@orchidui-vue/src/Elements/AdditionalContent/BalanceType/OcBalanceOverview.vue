@@ -18,6 +18,7 @@ defineProps({
   },
   secondaryButtonProps: Object,
   moreButtonProps: Object,
+  containerClass: String,
   dropdownItems: {
     type: Array,
     default: () => [],
@@ -55,7 +56,7 @@ defineEmits({
       :dropdown-items="dropdownItems"
     />
 
-    <Overview title="" :items="overviewItems">
+    <Overview title="" :items="overviewItems" :container-class="containerClass">
       <template #warning>
         <slot name="warning" />
       </template>
