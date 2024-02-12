@@ -392,3 +392,35 @@ export const FormatValue = {
         `,
   }),
 };
+
+export const passwordInput = {
+  name: "Password Input",
+  argTypes: {},
+  args: {
+    label: "Password",
+    hint: "Enter your HitPay password",
+    placeholder: "Password",
+    isRequired: true,
+    inputType: "password",
+  },
+  render: (args) => ({
+    components: { Theme, OCInput },
+    setup() {
+      const modelValue = ref();
+
+      return { modelValue, args };
+    },
+    template: `
+          <Theme colorMode="light" class="py-4">
+            <OCInput
+                v-model="modelValue"
+                :label="args.label"
+                :hint="args.hint"
+                :placeholder="args.placeholder"
+                :isRequired="args.isRequired"
+                :input-type="args.inputType"
+            />
+          </Theme>
+        `,
+  }),
+};
