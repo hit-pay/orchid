@@ -18,12 +18,13 @@ const Variants = {
   ICON: "icon",
   IMAGE: "image",
   EMPTY: "empty",
+  DEFAULT: "default",
 };
 const props = defineProps({
   isSimple: Boolean,
   variant: {
     type: String,
-    default: "",
+    default: "default",
   },
   isLast: Boolean,
   isCopy: Boolean,
@@ -66,6 +67,7 @@ const variantClass = computed(() => ({
   [Variants.CHIP]: "px-4",
   [Variants.DATETIME]: "px-4",
   [Variants.EMPTY]: "px-4 min-w-[48px]",
+  [Variants.DEFAULT]: "px-4",
 }));
 </script>
 
@@ -161,7 +163,7 @@ const variantClass = computed(() => ({
 
         <!--  DEFAULT    -->
         <TableLink
-          v-else-if="data"
+          v-else-if="variant === Variants.DEFAULT"
           :link="link"
           class="flex items-center w-full"
         >
