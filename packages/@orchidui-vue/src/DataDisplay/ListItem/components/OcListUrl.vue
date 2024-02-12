@@ -4,6 +4,10 @@ import { Icon, CopyTooltip } from "@/orchidui";
 defineProps({
   title: String,
   url: String,
+  isCopy: {
+    type: Boolean,
+    default: true,
+  },
 });
 </script>
 
@@ -12,7 +16,7 @@ defineProps({
     <span class="text-oc-text-400 font-medium shrink-0">{{ title }}:</span>
     <span class="break-all">{{ url }}</span>
 
-    <CopyTooltip :value="url">
+    <CopyTooltip v-if="isCopy" :value="url">
       <template #default="{ isShow }">
         <Icon
           width="14"
