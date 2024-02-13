@@ -26,7 +26,6 @@ export const Default = {
     isLoading: false,
     isSticky: false,
     loadingRows: 10,
-    isDraggable: true,
   },
   render: (args) => ({
     components: {
@@ -54,7 +53,6 @@ export const Default = {
                    :is-sticky="args.isSticky"
                    :loadingRows="args.loadingRows"
                    :row-class="rowClass"
-                   :is-draggable="args.isDraggable"
                    row-link="link"
                    @click:row="onClickRow"
             >
