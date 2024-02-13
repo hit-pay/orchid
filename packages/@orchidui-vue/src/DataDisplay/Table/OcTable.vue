@@ -1,6 +1,5 @@
 <script setup>
-import { Icon, TableHeader, TableCell } from "@/orchidui";
-import { Draggable } from "@/orchidui/Draggable";
+import { TableHeader, TableCell } from "@/orchidui";
 import { ref, computed, onMounted } from "vue";
 
 const props = defineProps({
@@ -31,20 +30,13 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  isDraggable: {
-    type: Boolean,
-    default: false,
-  },
   rowLink: String,
 });
 
 const emit = defineEmits({
   "click:row": [],
   "update:selected": [],
-  "update:modelValue": [],
 });
-
-const isHovered = ref([]);
 
 const isSelectable = computed(() => props.options.isSelectable);
 const isCursorPointer = computed(() => props.options.isCursorPointer ?? true);
@@ -132,65 +124,66 @@ onMounted(() => onScroll());
     <div v-if="$slots.before" class="border-b border-oc-gray-200">
       <slot name="before" />
     </div>
-    <div
-      class="flex md:border-b-0 border-b border-oc-gray-200"
-      :class="
-        isResponsive
-          ? 'w-full'
-          : isSticky
-            ? 'w-max'
-            : 'flex-wrap md:flex-nowrap'
-      "
+    <slot
+      name="table-header"
+      :fields="fields"
+      :headers="headers"
+      :is-selectable="isSelectable"
+      :is-responsive="isResponsive"
+      :select-all-rows="selectAllRows"
     >
-      <TableHeader
-        v-if="isDraggable"
-        :is-sticky="isSticky"
-        class="md:ml-0 md:border-b border-oc-gray-200 min-w-[44px]"
-        :class="[
-          isSticky ? 'shrink-0 sticky left-0 z-10' : 'w-[40px] md:w-[5%]',
-        ]"
-      />
-      <TableHeader
-        v-if="isSelectable"
-        :is-sticky="isSticky"
-        class="md:ml-0 md:border-b border-oc-gray-200 min-w-[32px]"
-        :class="[
-          isSticky ? 'shrink-0 sticky left-0 z-10' : 'w-[40px] md:w-[5%]',
-        ]"
-        variant="checkbox"
-        :is-partial="
-          selectedRows.length !== fields.length && selectedRows.length > 0
+      <div
+        class="flex md:border-b-0 border-b border-oc-gray-200"
+        :class="
+          isResponsive
+            ? 'w-full'
+            : isSticky
+              ? 'w-max'
+              : 'flex-wrap md:flex-nowrap'
         "
-        :is-checked="
-          selectedRows.length === fields.length && selectedRows.length > 0
-        "
-        @select-all="selectAllRows"
-      />
-
-      <TableHeader
-        v-for="header in headers"
-        :key="header.key"
-        :text="header.label"
-        :variant="header.headerVariant"
-        :is-sticky="isSticky"
-        :class="[
-          isSticky || isResponsive ? 'flex md:min-h-auto' : 'hidden md:flex',
-          header.stickyLeft && isSelectable
-            ? 'left-[40px] md:left-[32px]'
-            : 'left-0',
-          header.stickyRight ? 'right-0' : '',
-          typeof header.class === 'function' ? header.class() : header.class,
-          header.stickyLeft || header.stickyRight ? 'sticky shrink-0 z-10' : '',
-          header.stickyLeft && !isScrollOnStart ? 'shadow-right-sticky' : '',
-          header.stickyRight && !isScrollOnEnd ? 'shadow-left-sticky' : '',
-        ]"
-        class="md:border-b border-oc-gray-200"
       >
-        <template #default>
-          <slot :name="`header-${header.key}`" />
-        </template>
-      </TableHeader>
-    </div>
+        <TableHeader
+          v-if="isSelectable"
+          :is-sticky="isSticky"
+          class="md:ml-0 md:border-b border-oc-gray-200 min-w-[32px]"
+          :class="[
+            isSticky ? 'shrink-0 sticky left-0 z-10' : 'w-[40px] md:w-[5%]',
+          ]"
+          variant="checkbox"
+          :is-partial="
+            selectedRows.length !== fields.length && selectedRows.length > 0
+          "
+          :is-checked="
+            selectedRows.length === fields.length && selectedRows.length > 0
+          "
+          @select-all="selectAllRows"
+        />
+  
+        <TableHeader
+          v-for="header in headers"
+          :key="header.key"
+          :text="header.label"
+          :variant="header.headerVariant"
+          :is-sticky="isSticky"
+          :class="[
+            isSticky || isResponsive ? 'flex md:min-h-auto' : 'hidden md:flex',
+            header.stickyLeft && isSelectable
+              ? 'left-[40px] md:left-[32px]'
+              : 'left-0',
+            header.stickyRight ? 'right-0' : '',
+            typeof header.class === 'function' ? header.class() : header.class,
+            header.stickyLeft || header.stickyRight ? 'sticky shrink-0 z-10' : '',
+            header.stickyLeft && !isScrollOnStart ? 'shadow-right-sticky' : '',
+            header.stickyRight && !isScrollOnEnd ? 'shadow-left-sticky' : '',
+          ]"
+          class="md:border-b border-oc-gray-200"
+        >
+          <template #default>
+            <slot :name="`header-${header.key}`" />
+          </template>
+        </TableHeader>
+      </div>
+    </slot>
     <template v-if="isLoading">
       <div
         v-for="i in loadingRows"
@@ -215,20 +208,25 @@ onMounted(() => onScroll());
       </div>
     </template>
     <template v-else>
-      <Draggable
-        v-slot="{ list }"
-        :model-value="fields"
-        class="grid gap-3"
-        @update:model-value="$emit('update:modelValue', $event)"
+      <slot
+        name="table-body"
+        :fields="fields"
+        :headers="headers"
+        :is-scroll-on-end="isScrollOnEnd"
+        :on-click-row="onClickRow"
+        :is-selectable="isSelectable"
+        :is-cursor-pointer="isCursorPointer"
+        :is-responsive="isResponsive"
+        :is-sticky="isSticky"
+        :row-link="rowLink"
+        :calculate-row-class="calculateRowClass"
       >
         <div
-          v-for="(field, i) in list"
+          v-for="(field, i) in fields"
           :key="i"
           :class="{
-            'border-b': list.length !== i + 1,
+            'border-b': fields.length !== i + 1,
           }"
-          @mouseleave="isHovered[i] = false"
-          @mouseover="isHovered[i] = true"
         >
           <div
             class="flex relative group/row md:p-0 py-3 min-h-[58px]"
@@ -246,20 +244,9 @@ onMounted(() => onScroll());
             ]"
           >
             <TableCell
-              v-if="isDraggable"
-              class="flex border-oc-gray-200 justify-center left-0"
-            >
-              <div :class="isDraggable ? 'drag-el cursor-move' : ''">
-                <Icon
-                  name="draggable"
-                  class="opacity-0 group-hover/row:opacity-100 w-[20px]"
-                />
-              </div>
-            </TableCell>
-            <TableCell
               v-if="isSelectable"
               class="flex border-oc-gray-200 justify-center left-0 min-w-[32px]"
-              :is-last="list.length === i + 1"
+              :is-last="fields.length === i + 1"
               :is-selected="
                 selectedRows.some((r) => getRowKey(r) === getRowKey(field))
               "
@@ -276,7 +263,7 @@ onMounted(() => onScroll());
               v-for="(header, j) in headers"
               :key="`${j}-${i}`"
               class="flex border-oc-gray-200"
-              :is-last="list.length === i + 1"
+              :is-last="fields.length === i + 1"
               :variant="header.variant"
               :is-copy="header.isCopy"
               :add-description-to-copy-clipboard="
@@ -328,7 +315,7 @@ onMounted(() => onScroll());
             <slot name="extra" :item="field" :index="i" />
           </div>
         </div>
-      </Draggable>
+      </slot>
       <slot v-if="!fields.length" name="empty" />
     </template>
     <slot name="after" />
