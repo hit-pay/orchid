@@ -51,12 +51,10 @@ const getMaxHeightWithoutOverflow = async () => {
   const viewportHeight =
     window.innerHeight || document.documentElement.clientHeight;
 
-  const parentElementTop = parentElement.value.getBoundingClientRect().top;
-
   const parentElementBottom =
     viewportHeight - parentElement.value.getBoundingClientRect().bottom;
 
-  const maxHeight = Math.max(parentElementTop, parentElementBottom) - 2 * 16; // offset 2rem;
+  const maxHeight = parentElementBottom - 2 * 16; // offset 2rem;
   maxPopperHeight.value = maxHeight > 0 ? maxHeight : 0;
 };
 
