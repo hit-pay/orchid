@@ -1,7 +1,7 @@
 <script setup>
 import { Popper } from "@/orchidui";
 import { clickOutside as vClickOutside } from "../../directives/clickOutside.js";
-import { nextTick, onMounted, ref, watch } from "vue"; // Import the directive
+import { ref, watch } from "vue"; // Import the directive
 
 const emit = defineEmits({
   "update:modelValue": [],
