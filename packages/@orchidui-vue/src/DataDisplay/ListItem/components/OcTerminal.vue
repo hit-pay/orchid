@@ -4,6 +4,10 @@ import { Chip, Button } from "@/orchidui";
 defineProps({
   title: String,
   image: String,
+  imageSize: {
+    type: Number,
+    default: 56,
+  },
   description: String,
   chips: {
     type: Array,
@@ -22,8 +26,11 @@ defineProps({
     class="p-4 flex gap-x-4 rounded items-center border border-gray-200 group"
     :class="{ 'hover:shadow-normal': !isDisabled }"
   >
-    <div class="w-[56px] shrink-0 aspect-square bg-oc-bg-dark rounded">
-      <img :src="image" alt="terminal" />
+    <div
+      class="shrink-0 aspect-square bg-oc-bg-dark rounded overflow-hidden"
+      :class="`w-[${imageSize}px]`"
+    >
+      <img :src="image" alt="terminal" class="object-contain h-full w-full" />
     </div>
 
     <div class="flex flex-col gap-y-1 overflow-hidden">

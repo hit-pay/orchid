@@ -13,7 +13,7 @@ export const listItem = {
     },
     type: {
       control: "select",
-      options: ["timeline", "webhook", "payment"],
+      options: ["timeline", "webhook", "payment", "terminal"],
     },
     active: {
       control: {
@@ -43,7 +43,9 @@ export const listItem = {
                 v-for="i in 5"
                 :is-active="args.active >= i"
                 :key="i"
+                :type="args.type"
                 :title="args.title"
+                image="https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/covers/small/99d696e564ba45fbaa0fb2e3b43d0e27.jpg"
                 :icon="args.icon"
                 :icon-class="args.iconClass"
                 :icon-text="args.iconText"
