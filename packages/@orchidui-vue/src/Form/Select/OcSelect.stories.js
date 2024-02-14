@@ -23,6 +23,8 @@ export const Default = {
       {
         label: "Option 1",
         subLabel: "sub label of Option 1",
+        image:
+          "https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/covers/small/99d696e564ba45fbaa0fb2e3b43d0e27.jpg",
         value: 1,
       },
       {
@@ -153,6 +155,8 @@ export const OcGroupOptions = {
           value: [
             {
               label: "Option 1",
+              image:
+                "https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/covers/small/99d696e564ba45fbaa0fb2e3b43d0e27.jpg",
               value: 1,
             },
             {
@@ -213,6 +217,7 @@ export const OcGroupOptions = {
                       v-for="option in group.value"
                       :key="option.value"
                       :label="option.label"
+                      :image="option.image"
                       :is-selected="selectedOption === option.value"
                       @click="selectedOption = option.value"
                   />
@@ -231,10 +236,14 @@ export const Multiple = {
       const options = [
         {
           label: "Option 1",
+          image:
+            "https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/covers/small/99d696e564ba45fbaa0fb2e3b43d0e27.jpg",
           value: 1,
         },
         {
           label: "Option 2",
+          image:
+            "https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/covers/small/99d696e564ba45fbaa0fb2e3b43d0e27.jpg",
           value: 2,
         },
         {

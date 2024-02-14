@@ -4,6 +4,7 @@ import { Icon, Checkbox } from "@/orchidui";
 defineProps({
   label: String,
   subLabel: String,
+  image: String,
   isSelected: [Boolean, Number],
   isCheckboxes: Boolean,
   isPartial: Boolean,
@@ -21,11 +22,19 @@ defineProps({
       :is-partial="isPartial"
       class="!w-fit pointer-events-none"
     />
-    <div class="flex flex-col gap-3" :class="{ 'flex-1': isCheckboxes }">
-      <span>{{ label }}</span>
-      <span v-if="subLabel" class="text-sm text-oc-text-300">{{
-        subLabel
-      }}</span>
+    <div class="flex items-center gap-x-3">
+      <div
+        v-if="image"
+        class="aspect-square rounded w-10 border border-oc-accent-1-100"
+      >
+        <img :src="image" :alt="label" class="object-contain h-full w-full" />
+      </div>
+      <div class="flex flex-col gap-3" :class="{ 'flex-1': isCheckboxes }">
+        <span>{{ label }}</span>
+        <span v-if="subLabel" class="text-sm text-oc-text-300">{{
+          subLabel
+        }}</span>
+      </div>
     </div>
     <Icon
       v-if="isSelected && !isCheckboxes"

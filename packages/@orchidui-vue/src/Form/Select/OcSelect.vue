@@ -87,6 +87,8 @@ const isSelectedAll = computed(() => {
 const filterableOptions = computed(() => {
   const filteredOptions = [];
 
+  console.log(props.options);
+
   for (const option of props.options) {
     if (option.values) {
       const filteredGroup = option.values.filter((subOption) =>
@@ -302,6 +304,7 @@ onMounted(() => {
                 :key="option.value"
                 :label="option.label"
                 :sub-label="option.subLabel"
+                :image="option.image"
                 :is-checkboxes="isCheckboxes"
                 :is-selected="
                   multiple
