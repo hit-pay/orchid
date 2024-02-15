@@ -36,7 +36,7 @@ if (style.styleSheet) {
     :label="label"
     :options="options"
     is-filterable
-    placeholder="Placeholder"
+    placeholder="Choose Font"
   >
     <template #default="{ fOptions, selectOption }">
       <div

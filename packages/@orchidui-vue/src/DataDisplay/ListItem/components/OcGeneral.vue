@@ -30,9 +30,9 @@ const toggleDashboard = () => {
     class="px-5 py-4 rounded border border-gray-200 group"
     :class="{ 'hover:shadow-normal': !isDisabled }"
   >
-    <div class="flex items-center gap-x-4">
+    <div class="flex items-center gap-x-4 w-full">
       <slot name="logo" />
-      <div class="flex flex-col gap-y-2">
+      <div class="flex flex-col w-full">
         <div class="flex items-center justify-between">
           <div class="flex text-sm text-oc-text-400 items-center gap-x-3">
             <span v-if="title" class="text-base text-oc-text font-medium">
@@ -66,7 +66,7 @@ const toggleDashboard = () => {
             </Dropdown>
           </slot>
         </div>
-        <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-3">
           <div class="text-oc-text-400 flex gap-x-2 items-center text-sm">
             <Icon
               v-if="descriptionIcon"

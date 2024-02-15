@@ -254,6 +254,15 @@ const onClickSection = (section) => {
 
 const updateSectionActive = (value, item) => {
   const newValuesSections = [];
+  const exist = props.values.sections.find((vs) => vs.key === item.key);
+  if(!exist) {
+    newValuesSections.push({
+      key: item.key,
+      group: item.group,
+      section: item.section,
+      active: value,
+    });
+  }
 
   props.values.sections.map((vs) => {
     if (item.key === vs.key) {
@@ -265,6 +274,7 @@ const updateSectionActive = (value, item) => {
       newValuesSections.push(vs);
     }
   });
+  
 
   emit("update:values", {
     general: generalData.value,
