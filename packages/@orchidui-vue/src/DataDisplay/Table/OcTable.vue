@@ -17,8 +17,7 @@ const props = defineProps({
     required: false,
   },
   rowKey: {
-    type: String,
-    Function,
+    type: [String, Function],
     default: "id",
   },
   rowClass: [String, Function],
