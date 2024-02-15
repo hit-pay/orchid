@@ -302,7 +302,6 @@ onMounted(() => {
                 :key="option.value"
                 :label="option.label"
                 :sub-label="option.subLabel"
-                :image="option.image"
                 :is-checkboxes="isCheckboxes"
                 :is-selected="
                   multiple
