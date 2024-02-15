@@ -5,8 +5,8 @@ defineProps({
   title: String,
   image: String,
   imageSize: {
-    type: Number,
-    default: 56,
+    type: String,
+    default: "default",
   },
   description: String,
   chips: {
@@ -19,6 +19,12 @@ defineProps({
   },
   isDisabled: Boolean,
 });
+
+const imageSizes = {
+  small: "w-10",
+  default: "w-[56px]",
+  big: "w-16",
+};
 </script>
 
 <template>
@@ -28,7 +34,7 @@ defineProps({
   >
     <div
       class="shrink-0 aspect-square bg-oc-bg-dark rounded overflow-hidden"
-      :class="`w-[${imageSize}px]`"
+      :class="imageSizes[imageSize]"
     >
       <img :src="image" alt="terminal" class="object-contain h-full w-full" />
     </div>

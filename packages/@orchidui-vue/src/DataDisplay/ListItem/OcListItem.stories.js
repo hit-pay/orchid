@@ -22,6 +22,10 @@ export const listItem = {
         max: 5,
       },
     },
+    imageSize: {
+      control: "select",
+      options: ["small", "default", "big"],
+    },
   },
   args: {
     active: 1,
@@ -31,6 +35,9 @@ export const listItem = {
     iconText: "SGD 130,11",
     description: "#9a2804fc-74df-4304-a7d7-79d11f9e1db8dsdss",
     type: "timeline",
+    image:
+      "https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/covers/small/99d696e564ba45fbaa0fb2e3b43d0e27.jpg",
+    imageSize: "small",
   },
   render: (args) => ({
     components: { Theme, ListItem },
@@ -45,7 +52,8 @@ export const listItem = {
                 :key="i"
                 :type="args.type"
                 :title="args.title"
-                image="https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/covers/small/99d696e564ba45fbaa0fb2e3b43d0e27.jpg"
+                :image="args.image"
+                :image-size="args.imageSize"
                 :icon="args.icon"
                 :icon-class="args.iconClass"
                 :icon-text="args.iconText"
