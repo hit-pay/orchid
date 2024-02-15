@@ -503,7 +503,7 @@ const closeSettings = () => {
           <template #action="{ item }">
             <Toggle
               v-if="!requiredSection.includes(item.section)"
-              v-model="item.active"
+              :model-value="item.active ?? true"
               size="small"
               class="mt-2 mr-2"
               @update:model-value="updateSectionActive($event, item)"
