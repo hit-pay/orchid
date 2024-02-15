@@ -3,6 +3,7 @@ import { OverviewItem } from "@/orchidui";
 
 defineProps({
   title: String,
+  containerClass: String,
   items: Array,
 });
 </script>
@@ -12,6 +13,7 @@ defineProps({
     <span v-if="title">{{ title }}</span>
     <div
       class="flex gap-x-5 items-start md:flex-row flex-col gap-y-3 md:gap-y-0"
+      :class="containerClass"
     >
       <OverviewItem
         v-for="(item, i) in items"

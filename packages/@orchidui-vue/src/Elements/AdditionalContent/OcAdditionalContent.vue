@@ -6,6 +6,7 @@ import DynamicType from "./DynamicType/OcDynamicType.vue";
 
 const props = defineProps({
   mainLink: { type: String, default: "" },
+  balanceContainerClass: { type: String, default: "" },
   userId: { type: String, default: "" },
   chipVariant: { type: String, default: "" },
   chipLabel: { type: String, default: "" },
@@ -105,6 +106,7 @@ const copyLink = async () => {
       :secondary-button-props="secondaryButtonProps"
       :more-button-props="moreButtonProps"
       :overview-active-tab="overviewActiveTab"
+      :container-class="balanceContainerClass"
       :payment-methods="paymentMethods"
       :dropdown-items="dropdownItems"
       @change-tab="$emit('changeTab', $event)"
