@@ -6,7 +6,7 @@ defineProps({
   image: String,
   imageSize: {
     type: String,
-    default: "default",
+    default: "medium",
   },
   description: String,
   chips: {
@@ -22,8 +22,8 @@ defineProps({
 
 const imageSizes = {
   small: "w-10",
-  default: "w-[56px]",
-  big: "w-16",
+  medium: "w-[56px]",
+  large: "w-16",
 };
 </script>
 
