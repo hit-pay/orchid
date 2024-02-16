@@ -280,7 +280,6 @@ const selectOption = (option) => {
   }else{
     addMenuForm.value.ids = [...addMenuForm.value.ids, option.value]
   }
-  console.log('new val ' ,addMenuForm.value.ids)
 }
 </script>
 <template>
