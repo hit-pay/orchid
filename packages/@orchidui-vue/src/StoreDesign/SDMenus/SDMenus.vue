@@ -9,6 +9,7 @@ import {
   LinkInput,
   Input,
   ConfirmationModal,
+  Option as OcOption
 } from "@/orchidui";
 import { DraggableList } from "@/orchidui/Draggable.js";
 const props = defineProps({
@@ -271,6 +272,16 @@ const confirmDeleteMenu = () => {
     deleteMenuItems.value = null;
   }, 50);
 };
+
+const selectOption = (option) => {
+  let hasSelected = addMenuForm.value.ids.find((o) => o === option.value)
+  if(hasSelected){
+    addMenuForm.value.ids = addMenuForm.value.ids.filter((o) => o !== option.value)
+  }else{
+    addMenuForm.value.ids = [...addMenuForm.value.ids, option.value]
+  }
+  console.log('new val ' ,addMenuForm.value.ids)
+}
 </script>
 <template>
   <div>
@@ -433,7 +444,7 @@ const confirmDeleteMenu = () => {
                 id="menu-type-category"
                 group-name="menu-type"
                 :checked="addMenuForm.type === 'category'"
-                label="Product category "
+                label="Product categories "
                 @update:model-value="addMenuForm.type = 'category'"
               />
 
@@ -450,7 +461,47 @@ const confirmDeleteMenu = () => {
                   is-filterable
                   :options="options.categories"
                   placeholder="Choose Categories"
-                />
+                >
+                <template #default="{fOptions}">
+                  <OcOption
+                      v-for="option in fOptions.filter((o) => !o.parent)"
+                      :key="option.value"
+                      :label="option.label"
+                      is-checkboxes
+                      :is-selected="addMenuForm.ids.find((o) => o === option.value) ? true : false"
+                      :is-children="fOptions.find((o) => o.parent === option.value) ? true : false"
+                      @select="selectOption(option)"
+                  >
+                    <template  #after>
+                      <div  v-if="fOptions.find((o) => o.parent === option.value)" class="w-full flex flex-col ml-5" >
+                        <OcOption
+                            v-for="option1 in fOptions.filter((o) => o.parent === option.value)"
+                            :key="option1.value"
+                            :label="option1.label"
+                            is-checkboxes
+                            :is-selected="addMenuForm.ids.find((o) => o === option1.value) ? true : false"
+                            :is-children="fOptions.find((o) => o.parent === option1.value) ? true : false"
+                            @select="selectOption(option1)"
+                        >
+                        <template  #after>
+                          <div  v-if="fOptions.find((o) => o.parent === option1.value)" class="w-full flex flex-col ml-5" >
+                            <OcOption
+                                v-for="option2 in fOptions.filter((o) => o.parent === option1.value)"
+                                :key="option2.value"
+                                :label="option2.label"
+                                is-checkboxes
+                                :is-selected="addMenuForm.ids.find((o) => o === option2.value) ? true : false"
+                                @select="selectOption(option2)"
+                            >
+                            </OcOption>
+                          </div>
+                        </template>
+                        </OcOption>
+                      </div>
+                    </template>
+                  </OcOption>
+                </template>
+              </Select>
               </div>
             </div>
           </template>
