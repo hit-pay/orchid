@@ -1,7 +1,7 @@
 <script setup>
 import { Popper } from "@/orchidui";
 import { clickOutside as vClickOutside } from "../../directives/clickOutside.js";
-import { nextTick, onMounted, ref, watch } from "vue"; // Import the directive
+import { ref, watch } from "vue"; // Import the directive
 
 const emit = defineEmits({
   "update:modelValue": [],
@@ -51,12 +51,10 @@ const getMaxHeightWithoutOverflow = async () => {
   const viewportHeight =
     window.innerHeight || document.documentElement.clientHeight;
 
-  const parentElementTop = parentElement.value.getBoundingClientRect().top;
-
   const parentElementBottom =
     viewportHeight - parentElement.value.getBoundingClientRect().bottom;
 
-  const maxHeight = Math.max(parentElementTop, parentElementBottom) - 2 * 16; // offset 2rem;
+  const maxHeight = parentElementBottom - 2 * 16; // offset 2rem;
   maxPopperHeight.value = maxHeight > 0 ? maxHeight : 0;
 };
 

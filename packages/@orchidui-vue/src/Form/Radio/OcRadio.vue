@@ -65,7 +65,9 @@ defineEmits({
         :name="icon"
       />
 
-      <span v-if="label" class="text-sm">{{ label }}</span>
+      <slot>
+        <span v-if="label" class="text-sm">{{ label }}</span>
+      </slot>
     </label>
   </BaseInput>
 </template>

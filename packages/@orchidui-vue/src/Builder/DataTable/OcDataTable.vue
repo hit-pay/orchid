@@ -495,7 +495,10 @@ const displayFilterData = computed(() => {
         total-visible="5"
         @update:model-value="changePage"
       />
-      <div v-if="cursorOption" class="flex w-full gap-5">
+      <div
+        v-if="cursorOption"
+        class="flex w-full gap-5 md:justify-start justify-center"
+      >
         <PrevNext
           :disabled="!cursorOption.prev"
           @click="
