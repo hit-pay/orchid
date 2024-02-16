@@ -417,6 +417,8 @@ const confirmDeleteMenu = () => {
                   v-if="options.pages.length > 0"
                   v-model="addMenuForm.ids"
                   multiple
+                  is-filterable
+                  is-checkboxes
                   :options="options.pages"
                   placeholder="Choose Pages"
                 />
@@ -500,6 +502,7 @@ const confirmDeleteMenu = () => {
                     v-if="options.pages.length > 0"
                     v-model="editMenuForm.id"
                     :options="options.pages"
+                    is-filterable
                     label="Choose Page"
                     placeholder="Choose Page"
                     @update:model-value="
