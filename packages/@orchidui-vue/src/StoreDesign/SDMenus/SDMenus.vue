@@ -182,7 +182,11 @@ const saveMenuItems = (items) => {
   });
 
   addMenuModal.value = false;
-  isLoading.value = false;
+  
+  setTimeout(() => {
+    isLoading.value = false;
+  }, 50);
+  
 };
 const saveMenu = () => {
   isLoading.value = true;
