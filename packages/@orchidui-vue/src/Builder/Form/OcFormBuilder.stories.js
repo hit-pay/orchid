@@ -20,6 +20,7 @@ export const Default = {
   args: {
     values: {
       range_input: [0, 100],
+      color_input: "#000000",
     },
     errors: {
       card_input: "",
@@ -28,6 +29,8 @@ export const Default = {
       xs: {
         area: `
               input
+              color_input 
+              text_editor
               card_input
               custom_form_input
               simple_checkbox_input
@@ -52,6 +55,8 @@ export const Default = {
       sm: {
         area: `
                input
+               color_input 
+               text_editor
               card_input
               custom_form_input
               simple_checkbox_input
@@ -76,6 +81,7 @@ export const Default = {
       lg: {
         area: `
             input card_input
+            color_input text_editor
             custom_form_input simple_checkbox_input
             checkboxes_group input_2
             custom_form_input_2 link_input

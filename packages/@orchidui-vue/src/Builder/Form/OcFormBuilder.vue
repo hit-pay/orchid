@@ -17,6 +17,10 @@ import {
   SelectOptions,
   // TODO : add all form here , best load as async component
 } from "@/orchidui";
+
+import { TextEditor } from "@/orchidui/TextEditor";
+import { ColorPicker } from "@/orchidui/ColorPicker";
+
 import { ref, computed, watch, onMounted } from "vue";
 
 const props = defineProps({
@@ -73,6 +77,8 @@ const FormTypes = {
   PhoneInput: PhoneInput,
   SectionItem: SectionItem,
   SelectOptions: SelectOptions,
+  TextEditor: TextEditor,
+  ColorPicker: ColorPicker,
 };
 
 const getComponentByType = (type) => {

@@ -12,6 +12,45 @@ const SampleJsonForm = [
     },
   },
   {
+    name: "color_input",
+    key: "color_input",
+    type: "ColorPicker",
+    props: {
+      label: "Color Picker",
+      hint: "This is a hint text to help user",
+      placeholder: "placeholder",
+    },
+  },
+  {
+    name: "text_editor",
+    key: "text_editor",
+    type: "TextEditor",
+    props: {
+      label: "Text Editor",
+      hint: "This is a hint text to help user",
+      placeholder: "placeholder",
+      fontSizes: [
+        {
+          label: "Default",
+          value: "14px",
+        },
+        {
+          label: "Medium",
+          value: "16px",
+        },
+        {
+          label: "Large",
+          value: "18px",
+        },
+        {
+          label: "Extra Large",
+          value: "20px",
+        },
+      ],
+      initialFontSize: "14px",
+    },
+  },
+  {
     name: "card_input",
     key: "card_input",
     type: "CardInput",
