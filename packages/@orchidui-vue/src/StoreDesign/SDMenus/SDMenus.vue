@@ -439,6 +439,9 @@ const confirmDeleteMenu = () => {
                   v-if="options.categories.length > 0"
                   v-model="addMenuForm.ids"
                   multiple
+                  is-select-all
+                  is-checkboxes
+                  is-filterable
                   :options="options.categories"
                   placeholder="Choose Categories"
                 />
@@ -514,6 +517,7 @@ const confirmDeleteMenu = () => {
                     :options="options.categories"
                     label="Choose Category"
                     placeholder="Choose Category"
+                    is-filterable
                     @update:model-value="
                       editMenuForm.link = getLinkFromOption(
                         $event,
