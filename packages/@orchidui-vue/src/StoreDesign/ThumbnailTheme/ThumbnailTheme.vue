@@ -38,7 +38,12 @@ defineEmits(["activate", "customize", "preview", "upgrade"]);
             class="m-auto bg-white/75 rounded p-5 flex text-center flex-col justify-center"
           >
             <div class="mx-auto mb-3">
-              <Icon name="loading-2" />
+              <Icon
+                name="loading-2"
+                width="32"
+                height="32"
+                class="text-oc-text-400 motion-safe:animate-spin"
+              ></Icon>
             </div>
             Activating themes
           </div>
