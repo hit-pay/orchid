@@ -469,7 +469,7 @@ const selectOption = (option) => {
                       :label="option.label"
                       is-checkboxes
                       :is-selected="addMenuForm.ids.find((o) => o === option.value) ? true : false"
-                      :is-children="fOptions.find((o) => o.parent === option.value) ? true : false"
+                      :has-children="fOptions.find((o) => o.parent === option.value) ? true : false"
                       @select="selectOption(option)"
                   >
                     <template  #after>
@@ -480,7 +480,7 @@ const selectOption = (option) => {
                             :label="option1.label"
                             is-checkboxes
                             :is-selected="addMenuForm.ids.find((o) => o === option1.value) ? true : false"
-                            :is-children="fOptions.find((o) => o.parent === option1.value) ? true : false"
+                            :has-children="fOptions.find((o) => o.parent === option1.value) ? true : false"
                             @select="selectOption(option1)"
                         >
                         <template  #after>

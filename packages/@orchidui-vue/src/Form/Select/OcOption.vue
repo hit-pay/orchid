@@ -1,22 +1,21 @@
 <script setup>
 import { Icon, Checkbox } from "@/orchidui";
 
-defineEmits(['select']);
-
+defineEmits("select");
 defineProps({
   label: String,
   subLabel: String,
   isSelected: [Boolean, Number],
   isCheckboxes: Boolean,
   isPartial: Boolean,
-  isChildren: Boolean
+  hasChildren: Boolean
 });
 </script>
 
 <template>
   <div class="w-full flex flex-wrap">
     <div
-      class="w-full p-3 flex flex-wrap items-center text-oc-text-400 justify-between cursor-pointer hover:bg-oc-accent-1-50 gap-x-3 rounded-sm"
+      class="w-full p-3 flex items-center text-oc-text-400 justify-between cursor-pointer hover:bg-oc-accent-1-50 gap-x-3 rounded-sm"
       :class="isSelected && !isCheckboxes && 'bg-oc-accent-1-50'"
       @click="$emit('select')"
     >
@@ -26,11 +25,17 @@ defineProps({
         :is-partial="isPartial"
         class="!w-fit pointer-events-none"
       />
-      <div class="flex flex-col gap-3" :class="{ 'flex-1': isCheckboxes }">
-        <span>{{ label }}</span>
-        <span v-if="subLabel" class="text-sm text-oc-text-300">{{
-          subLabel
-        }}</span>
+      <div class="w-full flex items-center gap-x-3">
+        <slot name="trailing"></slot>
+
+        <div class="flex flex-col gap-3" :class="{ 'flex-1': isCheckboxes }">
+          <span>{{ label }}</span>
+          <span v-if="subLabel" class="text-sm text-oc-text-300">{{
+            subLabel
+          }}</span>
+        </div>
+
+        <slot name="leading"></slot>
       </div>
       <Icon
         v-if="isSelected && !isCheckboxes"
@@ -38,11 +43,11 @@ defineProps({
         name="check-2"
       />
       <Icon
-        v-if="isChildren"
-        class="w-6 h-6 rotate-180"
-        name="chevron-down"
+          v-if="hasChildren"
+          class="w-6 h-6 rotate-180"
+          name="chevron-down"
       />
     </div>
-    <slot name="after" />
+    <slot name="after"></slot>
   </div>
 </template>
