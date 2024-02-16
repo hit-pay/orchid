@@ -32,7 +32,6 @@ defineEmits(["update:modelValue"]);
 
 const popperOptions = {
   arrowHidden: true,
-  placement: "top-end",
 };
 </script>
 
@@ -41,6 +40,7 @@ const popperOptions = {
     <Dropdown
       :model-value="modelValue"
       :popper-options="popperOptions"
+      placement="top-end"
       :distance="8"
       @update:model-value="$emit('update:modelValue', $event)"
     >
