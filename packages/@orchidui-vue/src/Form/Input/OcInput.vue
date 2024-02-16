@@ -1,7 +1,6 @@
 <script setup>
 import { computed, ref, useAttrs } from "vue";
 import { BaseInput, Icon } from "@/orchidui";
-import { pickEventListeners } from "@/orchidui/Form/Input/inputHelper.js";
 
 const props = defineProps({
   disabled: {
@@ -94,8 +93,6 @@ const emit = defineEmits(["update:modelValue", "blur", "focus"]);
 
 const attrs = useAttrs();
 
-const eventListeners = pickEventListeners(attrs);
-
 const inputRef = ref();
 const isPasswordVisible = ref(false);
 
@@ -115,13 +112,14 @@ const inputClasses = computed(() => [
 ]);
 
 const inputAttrs = computed(() => {
-  const inputAttributes = { ...eventListeners };
+  const { class: classes, ...rest } = attrs;
+  const inputAttributes =  {};
 
   if (props.pattern) {
     inputAttributes.pattern = props.pattern;
   }
 
-  return inputAttributes;
+  return { inputAttributes, ...rest };
 });
 
 const isPasswordInput = computed(() => props.inputType === "password");
