@@ -28,6 +28,10 @@ defineProps({
     type: String,
     default: "Add new",
   },
+  addButtonIcon: {
+    type: String,
+    default: "plus",
+  },
   icon: {
     type: String,
     default: "document",
@@ -121,7 +125,7 @@ const sizes = computed(() => ({
     <Button
       v-if="isButton"
       :label="isUpgrade ? upgradeLabel : addButtonLabel"
-      :left-icon="isUpgrade ? '' : 'plus'"
+      :left-icon="isUpgrade ? '' : addButtonIcon"
       @click="$emit('click:Button')"
     />
   </div>
