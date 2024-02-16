@@ -1,7 +1,7 @@
 <script setup>
 import { Icon, Checkbox } from "@/orchidui";
 
-defineEmits("select");
+defineEmits(["select"]);
 defineProps({
   label: String,
   subLabel: String,
