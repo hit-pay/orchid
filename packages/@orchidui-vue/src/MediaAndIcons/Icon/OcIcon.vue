@@ -29,8 +29,10 @@ const props = defineProps({
 });
 const iconRef = ref(null);
 fetch(`${props.path}/${props.name}.svg`)
-  .then((r) => r.text())
+  .then((r) => (r.status === 200) ?r.text() : '')
   .then((text) => {
-    iconRef.value.innerHTML = text;
+    if(text){
+      iconRef.value.innerHTML = text;
+    }
   });
 </script>
