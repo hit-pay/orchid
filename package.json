@@ -12,7 +12,9 @@
     "preview": "astro build && npm run build:storybook && astro preview",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix packages",
     "format": "prettier .  --write",
-    "publish": "cd packages/@orchidui-vue &&  npm install &&  npm run build && npm version patch && npm publish"
+    "build:package": "cd packages/@orchidui-vue &&  npm install && npm run build",
+    "publish:package": "cd packages/@orchidui-vue && npm version patch && npm publish",
+    "publish": "npm run build:package && npm run publish:package"
   },
   "dependencies": {
     "@astrojs/vue": "^3.0.3",
@@ -50,7 +52,7 @@
     "postcss": "^8.4.31",
     "postcss-import": "^15.1.0",
     "sass": "^1.68.0",
-    "storybook": "^7.6.12",
+    "storybook": "^7.6.15",
     "storybook-addon-root-attribute": "^1.0.2",
     "tailwindcss": "^3.3.3",
     "vite": "^4.4.5",
