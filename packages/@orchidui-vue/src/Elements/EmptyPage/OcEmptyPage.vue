@@ -117,7 +117,7 @@ const sizes = computed(() => ({
       />
     </div>
     <div class="flex flex-col items-center" :class="sizes[size].containerInfo">
-      <span :class="sizes[size].title">{{ title }}</span>
+      <span :class="sizes[size].title" class="font-medium">{{ title }}</span>
       <span :class="sizes[size].description" class="text-oc-text-400">{{
         description
       }}</span>
