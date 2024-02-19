@@ -25,3 +25,6 @@ export * from "./SelectOptions/OcSelectOptions.js";
 export * from "./SingleFileUpload/OcSingleFileUpload.js";
 export * from "./MultipleUploadFile/OcMultipleUploadFile.js";
 export * from "./NumberInput/OcNumberInput.js";
+
+export * from "./ColorPicker/OcColorPicker.js";
+export * from "./TextEditor/OcTextEditor.js";
