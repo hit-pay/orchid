@@ -46,8 +46,9 @@ export const Default = {
     components: { Theme, OCInput },
     setup() {
       const modelValue = ref();
+      const logEvent = (name) => console.info(`Event: ${name}`);
 
-      return { modelValue, args };
+      return { modelValue, args, logEvent };
     },
     template: `
           <Theme colorMode="light" class="py-4">
@@ -64,6 +65,9 @@ export const Default = {
                 :tooltip-options="args.tooltipOptions"
                 :label-icon="args.labelIcon"
                 :tooltip-text="args.tooltipText"
+                autofocus
+                @focus="logEvent('focus')"
+                @blur="logEvent('blur')"
             />
           </Theme>
         `,

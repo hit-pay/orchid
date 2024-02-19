@@ -8,7 +8,7 @@ import {
   Button,
   Dropdown,
 } from "@/orchidui";
-import { computed, onMounted, ref, watch } from "vue";
+import { computed, nextTick, onMounted, ref, watch } from "vue";
 
 const props = defineProps({
   label: String,
@@ -71,6 +71,7 @@ const emit = defineEmits({
 
 const query = ref("");
 const isDropdownOpened = ref(false);
+const searchInputRef = ref();
 
 const optionsKey = ref(new Date().toISOString());
 
@@ -187,6 +188,16 @@ watch(filterableOptions, () => {
   optionsKey.value = new Date().toISOString();
 });
 
+watch(isDropdownOpened, (value) => {
+  if (!value) {
+    return
+  }
+
+  nextTick(() => {
+    searchInputRef.value?.focus();
+  })
+});
+
 onMounted(() => {
   maxPopperWidth.value = baseInput.value.$el.offsetWidth;
 });
@@ -267,6 +278,7 @@ onMounted(() => {
         <div class="p-3 flex flex-col gap-y-2">
           <Input
             v-if="isFilterable"
+            ref="searchInputRef"
             v-model="query"
             icon="search"
             placeholder="Search"
