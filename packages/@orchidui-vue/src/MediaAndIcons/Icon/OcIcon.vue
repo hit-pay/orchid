@@ -1,15 +1,15 @@
 <template>
   <svg
-    :width="`${width}px`"
-    :height="`${height}px`"
-    :viewBox="`0 0 ${width} ${height}`"
-  >
-    <use :xlink:href="`${path}/${name}.svg#orchid`"></use>
-  </svg>
+    ref="iconRef"
+    :width="`${props.width}px`"
+    :height="`${props.height}px`"
+    :viewBox="`0 0 ${props.width} ${props.height}`"
+  ></svg>
 </template>
 
 <script setup>
-defineProps({
+import { ref } from "vue";
+const props = defineProps({
   path: {
     type: String,
     default: "/icons/orchidui",
@@ -27,4 +27,10 @@ defineProps({
     default: "24",
   },
 });
+const iconRef = ref(null);
+fetch(`${props.path}/${props.name}.svg`)
+  .then((r) => r.text())
+  .then((text) => {
+    iconRef.value.innerHTML = text;
+  });
 </script>
