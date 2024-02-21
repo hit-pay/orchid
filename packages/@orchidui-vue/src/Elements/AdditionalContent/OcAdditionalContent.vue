@@ -30,6 +30,7 @@ const props = defineProps({
   moreButtonProps: { type: Object, default: null },
   dropdownItems: { type: Array, default: () => [] },
   paymentMethods: { type: Array, default: () => [] },
+  additionalStyling: { type: String, default: "" },
 });
 
 defineEmits({
@@ -53,6 +54,7 @@ const copyLink = async () => {
       :description="mainLink"
       :title="additionalTitle"
       class="border rounded md:py-4 py-3 md:px-5 px-4 border-oc-gray-200 bg-oc-gray-50 flex flex-col gap-y-2"
+      :class="additionalStyling"
     >
       <template #title>
         <div class="flex items-center gap-x-3">
@@ -81,6 +83,7 @@ const copyLink = async () => {
       :customer-is-edit="customerIsEdit"
       @add-customer="$emit('addCustomer')"
       @edit-customer="$emit('editCustomer', $event)"
+      :class="additionalStyling"
     >
       <template v-for="box in boxes" #[box.slot]="{ data }">
         <slot :name="box.slot" :data="data"></slot>
@@ -110,6 +113,7 @@ const copyLink = async () => {
       :payment-methods="paymentMethods"
       :dropdown-items="dropdownItems"
       @change-tab="$emit('changeTab', $event)"
+      :class="additionalStyling"
     >
       <template v-if="$slots.warning" #warning>
         <slot name="warning" />
