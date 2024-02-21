@@ -28,6 +28,7 @@ const props = defineProps({
       strategy: "fixed",
     }),
   },
+  maxMenuHeight: Number,
   popperStyle: Object,
   popperClass: [String, Array, Object],
   modelValue: Boolean,
@@ -51,15 +52,12 @@ const getMaxHeightWithoutOverflow = async () => {
   const viewportHeight =
     window.innerHeight || document.documentElement.clientHeight;
 
+  const parentElementTop = parentElement.value.getBoundingClientRect().top;
+
   const parentElementBottom =
     viewportHeight - parentElement.value.getBoundingClientRect().bottom;
 
-  const parentElementTop = parentElement.value.getBoundingClientRect().top;
-
-  const maxHeight = (props.placement === 'top-end'
-    ? Math.max(parentElementTop, parentElementBottom)
-    : parentElementBottom) - (2 * 16); // offset 2rem;
-
+  const maxHeight = Math.max(parentElementTop, parentElementBottom) - 2 * 16; // offset 2rem;
   maxPopperHeight.value = maxHeight > 0 ? maxHeight : 0;
 };
 
@@ -91,7 +89,7 @@ watch(() => props.modelValue, getMaxHeightWithoutOverflow);
             :class="menuClasses"
             class="rounded bg-oc-bg-light shadow min-w-[162px] overflow-y-auto"
             :style="{
-              maxHeight: maxPopperHeight + 'px',
+              maxHeight: (maxMenuHeight || maxPopperHeight) + 'px',
             }"
           >
             <slot name="menu" />
