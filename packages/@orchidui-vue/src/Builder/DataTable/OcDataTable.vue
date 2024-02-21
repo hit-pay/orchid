@@ -522,6 +522,7 @@ const displayFilterData = computed(() => {
           v-model="perPage"
           label="Item per page"
           is-inline-label
+          :popper-options="{ placement: 'auto' }"
           :options="perPageOptions"
           @update:model-value="applyFilter(null)"
         />
