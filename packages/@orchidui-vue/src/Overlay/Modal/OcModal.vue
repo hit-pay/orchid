@@ -115,12 +115,14 @@ const sizeClasses = computed(() => ({
             >
               {{ title }}
             </span>
-            <span
-              v-if="description"
-              class="text-sm text-oc-text-300 text-ellipsis overflow-hidden whitespace-nowrap"
-            >
-              {{ description }}
-            </span>
+            <slot name="description">
+              <span
+                v-if="description"
+                class="text-sm text-oc-text-300 text-ellipsis overflow-hidden whitespace-nowrap"
+              >
+                {{ description }}
+              </span>
+            </slot>
           </div>
           <div
             v-if="isCloseIcon"
