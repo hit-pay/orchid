@@ -309,14 +309,16 @@ const displayFilterData = computed(() => {
           }
 
           if (option.type === "RangeInput") {
-            optionLabel =
-              filterData.value[name][0]
-                .toString()
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ",") +
-              " - " +
-              filterData.value[name][1]
-                .toString()
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            if (Array.isArray(filterData.value[name])) {
+              optionLabel =
+                filterData.value[name][0]
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",") +
+                " - " +
+                filterData.value[name][1]
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
           }
 
           if (option.type === "DatePicker") {
