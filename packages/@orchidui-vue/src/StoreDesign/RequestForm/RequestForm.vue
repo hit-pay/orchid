@@ -322,6 +322,9 @@ const showSubForm = ref("");
                   >
                   </MultipleUploadFile>
                 </template>
+                <template #PaymentMethod>
+                  <slot name="PaymentMethod" />
+                </template>
               </FormBuilder>
             </div>
           </div>

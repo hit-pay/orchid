@@ -601,6 +601,9 @@ const closeSettings = () => {
               })
             "
           >
+          <template #PaymentMethod>
+            <slot name="PaymentMethod" />
+          </template>
           </RequestForm>
         </div>
       </div>
