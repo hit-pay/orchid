@@ -34,8 +34,13 @@ const toggleDashboard = () => {
       <slot name="logo" />
       <div class="flex flex-col w-full">
         <div class="flex items-center justify-between">
-          <div class="flex text-sm text-oc-text-400 items-center gap-x-3">
-            <span v-if="title" class="text-base text-oc-text font-medium">
+          <div
+            class="flex text-sm text-oc-text-400 items-center gap-x-3 overflow-hidden"
+          >
+            <span
+              v-if="title"
+              class="text-base text-oc-text font-medium truncate"
+            >
               {{ title }}
             </span>
 
