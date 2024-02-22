@@ -102,7 +102,7 @@ defineExpose({
         {{ label }}:
       </label>
 
-      <div class="flex items-center gap-x-1 w-full" @click="inputRef.focus()">
+      <div class="bg-oc-bg-light flex items-center gap-x-1 w-full" @click="inputRef.focus()">
         <div
           class="border min-h-[36px] py-3 w-full px-3 flex justify-between items-center cursor-pointer gap-x-3 rounded"
           :class="{
