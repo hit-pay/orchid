@@ -102,7 +102,10 @@ defineExpose({
         {{ label }}:
       </label>
 
-      <div class="bg-oc-bg-light flex items-center gap-x-1 w-full" @click="inputRef.focus()">
+      <div
+        class="bg-oc-bg-light flex items-center gap-x-1 w-full"
+        @click="inputRef.focus()"
+      >
         <div
           class="border min-h-[36px] py-3 w-full px-3 flex justify-between items-center cursor-pointer gap-x-3 rounded"
           :class="{
@@ -110,7 +113,7 @@ defineExpose({
             'pointer-events-none bg-oc-bg-dark': isDisabled,
           }"
         >
-          <div class="flex flex-wrap gap-2">
+          <div class="w-full flex flex-wrap gap-2">
             <Chip
               v-for="(option, index) in optionsVisible"
               :key="`${option}-${index}`"
@@ -139,9 +142,12 @@ defineExpose({
               type="text"
               :value="query"
               :readonly="isReadonly"
-              :placeholder="placeholder"
+              :placeholder="optionsVisible?.length === 0 ? placeholder : ''"
               :disabled="isDisabled"
-              class="h-7 flex-1 min-w-[80px] outline-none text-oc-text disabled:bg-transparent placeholder:font-normal placeholder:text-oc-text-300 bg-oc-bg-light"
+              class="h-7 flex-1 outline-none text-oc-text disabled:bg-transparent placeholder:font-normal placeholder:text-oc-text-300 bg-oc-bg-light"
+              :class="
+                optionsVisible?.length === 0 ? 'min-w-full' : 'min-w-[80px]'
+              "
               @focus="isFocused = true"
               @blur="
                 isFocused = false;
