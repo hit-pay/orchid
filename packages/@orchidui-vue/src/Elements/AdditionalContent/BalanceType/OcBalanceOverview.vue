@@ -27,6 +27,7 @@ defineProps({
     type: Array,
     default: () => [],
   },
+  isLoading: Boolean,
 });
 
 defineEmits({
@@ -38,9 +39,10 @@ defineEmits({
   <div class="flex flex-col gap-y-5">
     <div class="flex gap-x-5">
       <InfoCardButton
-        v-for="tab in overviewTabs"
+        v-for="tab in isLoading ? 2 : overviewTabs"
         :key="tab.value"
         :title="tab.title"
+        :is-loading="isLoading"
         :content="tab.content"
         :is-active="tab.value === overviewActiveTab"
         @click="$emit('changeTab', tab.value)"
@@ -50,13 +52,19 @@ defineEmits({
     <div class="border-t border-oc-gray-200" />
 
     <TopActions
+      :is-loading="isLoading"
       :more-button-props="moreButtonProps"
       :secondary-button-props="secondaryButtonProps"
       :payment-methods="paymentMethods"
       :dropdown-items="dropdownItems"
     />
 
-    <Overview title="" :items="overviewItems" :container-class="containerClass">
+    <Overview
+      :is-loading="isLoading"
+      title=""
+      :items="overviewItems"
+      :container-class="containerClass"
+    >
       <template #warning>
         <slot name="warning" />
       </template>
