@@ -7,6 +7,7 @@ import {
   TableCellContent,
   Chip,
   TableLink,
+  Skeleton,
 } from "@/orchidui";
 import dayjs from "dayjs";
 
@@ -82,14 +83,10 @@ const variantClass = computed(() => ({
     ]"
     class="md:py-3 bg-oc-bg-light md:min-h-[58px] md:group-hover/row:bg-oc-gray-50 items-center"
   >
-    <div
+    <Skeleton
       v-if="isLoading"
-      class="rounded-full bg-gray-100 w-full overflow-hidden h-6"
-    >
-      <div
-        class="slide relative rounded-full h-6 w-[40px] bg-[linear-gradient(-90deg,_var(--oc-gray-200)_0%,_rgba(229,_230,_234,_0)_100%)]"
-      />
-    </div>
+      class="rounded-full w-full overflow-hidden h-6"
+    />
 
     <div
       v-else
@@ -146,8 +143,8 @@ const variantClass = computed(() => ({
           v-else-if="variant === Variants.EMPTY"
           :link="link"
           class="w-full h-full"
-          >-</TableLink
-        >
+          >-
+        </TableLink>
 
         <TableCellContent
           v-else-if="variant === Variants.DATETIME"
@@ -202,10 +199,6 @@ const variantClass = computed(() => ({
   </div>
 </template>
 <style lang="scss">
-.slide {
-  animation: slide 1.5s infinite;
-}
-
 .copy-enter-active,
 .copy-leave-active {
   transition-timing-function: cubic-bezier(0, 1, 1, 1);
@@ -230,16 +223,5 @@ const variantClass = computed(() => ({
 .copy-leave-to {
   opacity: 0;
   transform: translateY(-16px);
-}
-
-@keyframes slide {
-  0% {
-    transform: translateX(-100%);
-    left: 0;
-  }
-  100% {
-    transform: translateX(100%);
-    left: 100%;
-  }
 }
 </style>
