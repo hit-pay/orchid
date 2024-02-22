@@ -113,7 +113,7 @@ const inputClasses = computed(() => [
 
 const inputAttrs = computed(() => {
   const { class: classes, ...rest } = attrs;
-  const inputAttributes =  {};
+  const inputAttributes = {};
 
   if (props.pattern) {
     inputAttributes.pattern = props.pattern;

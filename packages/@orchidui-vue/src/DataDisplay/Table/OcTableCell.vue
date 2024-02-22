@@ -74,8 +74,14 @@ const variantClass = computed(() => ({
 
 <template>
   <div
-    :class="[variantClass[variant], isLoading ? 'flex items-center' : '']"
-    class="md:py-3 md:px-4 px-3 py-1 bg-oc-bg-light md:min-h-[58px] md:group-hover/row:bg-oc-gray-50 items-center"
+    :class="[
+      variantClass[variant],
+      {
+        'flex items-center': isLoading,
+        'md:px-4 px-3 py-1': variant !== Variants.CHECKBOX,
+      },
+    ]"
+    class="md:py-3 bg-oc-bg-light md:min-h-[58px] md:group-hover/row:bg-oc-gray-50 items-center"
   >
     <Skeleton
       v-if="isLoading"

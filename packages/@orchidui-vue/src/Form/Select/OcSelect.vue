@@ -190,12 +190,12 @@ watch(filterableOptions, () => {
 
 watch(isDropdownOpened, (value) => {
   if (!value) {
-    return
+    return;
   }
 
   nextTick(() => {
     searchInputRef.value?.focus();
-  })
+  });
 });
 
 onMounted(() => {
