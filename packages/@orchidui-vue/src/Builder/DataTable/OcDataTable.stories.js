@@ -90,6 +90,7 @@ export const Default = {
                 @update:filter="updateFilterData"
                 @click:row="onClickRow"
                 @filter-fields-changed="changedFields = $event"
+                @hover:cell="console.log('hover:cell: ', $event)"
              >
               <template #before>
                 Slot Before

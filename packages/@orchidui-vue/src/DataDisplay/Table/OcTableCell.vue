@@ -53,6 +53,7 @@ defineEmits({
   selected: [],
   copied: [],
   "click:field": [],
+  "hover:field": [],
 });
 
 const hasContentData = computed(() => {
@@ -89,6 +90,7 @@ const variantClass = computed(() => ({
       v-else
       class="w-full flex"
       :class="isCopy ? 'justify-between' : 'justify-start'"
+      @mouseover="$emit('hover:field', props)"
     >
       <slot>
         <!--  CHECKBOX    -->

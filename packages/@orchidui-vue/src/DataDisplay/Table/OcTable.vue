@@ -35,6 +35,7 @@ const props = defineProps({
 const emit = defineEmits({
   "click:row": [],
   "update:selected": [],
+  "hover:cell": [],
 });
 
 const isSelectable = computed(() => props.options.isSelectable);
@@ -157,7 +158,7 @@ onMounted(() => onScroll());
           "
           @select-all="selectAllRows"
         />
-  
+
         <TableHeader
           v-for="header in headers"
           :key="header.key"
@@ -171,7 +172,9 @@ onMounted(() => onScroll());
               : 'left-0',
             header.stickyRight ? 'right-0' : '',
             typeof header.class === 'function' ? header.class() : header.class,
-            header.stickyLeft || header.stickyRight ? 'sticky shrink-0 z-10' : '',
+            header.stickyLeft || header.stickyRight
+              ? 'sticky shrink-0 z-10'
+              : '',
             header.stickyLeft && !isScrollOnStart ? 'shadow-right-sticky' : '',
             header.stickyRight && !isScrollOnEnd ? 'shadow-left-sticky' : '',
           ]"
@@ -256,6 +259,7 @@ onMounted(() => onScroll());
               ]"
               variant="checkbox"
               @selected="selectRow(field)"
+              @hover:field="$emit('hover:cell', $event)"
             />
 
             <TableCell
@@ -290,11 +294,14 @@ onMounted(() => onScroll());
                 header.stickyLeft && !isScrollOnStart
                   ? 'shadow-right-sticky'
                   : '',
-                header.stickyRight && !isScrollOnEnd ? 'shadow-left-sticky' : '',
+                header.stickyRight && !isScrollOnEnd
+                  ? 'shadow-left-sticky'
+                  : '',
               ]"
               :image-class="header.imageClass"
               :link="rowLink && field[rowLink] ? field[rowLink] : ''"
               @click="onClickRow(field, header)"
+              @hover:field="$emit('hover:cell', $event)"
             >
               <template #default>
                 <slot
