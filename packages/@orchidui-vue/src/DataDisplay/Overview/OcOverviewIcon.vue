@@ -11,6 +11,14 @@ defineProps({
     type: String,
     default: "blue",
   },
+  width: {
+    type: String,
+    default: "22",
+  },
+  height: {
+    type: String,
+    default: "22",
+  },
 });
 const variantClasses = computed(() => ({
   gray: "bg-oc-gray-100 text-oc-gray-700",
@@ -27,6 +35,6 @@ const variantClasses = computed(() => ({
     class="rounded-full p-3 flex items-center justify-center aspect-square"
     :class="variantClasses[variant]"
   >
-    <Icon :name="icon" width="22" height="22" />
+    <Icon :name="icon" :width="width" :height="height" />
   </div>
 </template>
