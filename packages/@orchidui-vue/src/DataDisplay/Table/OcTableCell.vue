@@ -75,11 +75,12 @@ const variantClass = computed(() => ({
   <div
     :class="[
       variantClass[variant],
-        {
+      {
         'flex items-center': isLoading,
-        'md:px-4 px-3 py-1': variant !== Variants.CHECKBOX
-      }]"
-    class="md:py-3  bg-oc-bg-light md:min-h-[58px] md:group-hover/row:bg-oc-gray-50 items-center"
+        'md:px-4 px-3 py-1': variant !== Variants.CHECKBOX,
+      },
+    ]"
+    class="md:py-3 bg-oc-bg-light md:min-h-[58px] md:group-hover/row:bg-oc-gray-50 items-center"
   >
     <div
       v-if="isLoading"
@@ -105,9 +106,8 @@ const variantClass = computed(() => ({
             isSelected
               ? 'flex'
               : isSimple
-                ? '' 
-              : 'md:hidden group-hover/row:flex'
-
+                ? ''
+                : 'md:hidden group-hover/row:flex'
           "
           @update:model-value="$emit('selected')"
         />
