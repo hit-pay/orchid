@@ -28,8 +28,8 @@ defineProps({
         :is-loading="isLoading"
         :content="item.content"
         :info="item.info"
-        :icon-height="icon.iconHeight"
-        :icon-width="icon.iconWidth"
+        :icon-height="item.iconHeight"
+        :icon-width="item.iconWidth"
       >
         <template v-if="item.isWarning" #warning>
           <slot name="warning" />
