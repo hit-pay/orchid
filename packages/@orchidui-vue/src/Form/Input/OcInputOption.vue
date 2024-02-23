@@ -1,6 +1,6 @@
 <script setup>
 import { BaseInput, Input, Chip, Icon } from "@/orchidui";
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 
 const props = defineProps({
   label: String,
@@ -44,6 +44,10 @@ const emit = defineEmits({
 });
 
 const localValue = ref(props.modelValue || []);
+
+watch(()=> props.modelValue , (value) => {
+  localValue.value = value;
+});
 
 const inputRef = ref();
 
