@@ -35,6 +35,7 @@ const props = defineProps({
 const emit = defineEmits({
   "click:row": [],
   "update:selected": [],
+  "hover:cell": [],
 });
 
 const isSelectable = computed(() => props.options.isSelectable);
@@ -258,6 +259,7 @@ onMounted(() => onScroll());
               ]"
               variant="checkbox"
               @selected="selectRow(field)"
+              @hover:field="$emit('hover:cell', $event)"
             />
 
             <TableCell
@@ -299,6 +301,7 @@ onMounted(() => onScroll());
               :image-class="header.imageClass"
               :link="rowLink && field[rowLink] ? field[rowLink] : ''"
               @click="onClickRow(field, header)"
+              @hover:field="$emit('hover:cell', $event)"
             >
               <template #default>
                 <slot

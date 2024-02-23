@@ -48,6 +48,7 @@ const emit = defineEmits({
   "filter-fields-changed": [],
   "filter-removed": [],
   "search-query-changed": [],
+  "hover:cell": [],
 });
 
 const paginationOption = computed(() => {
@@ -377,6 +378,7 @@ const displayFilterData = computed(() => {
       :is-sticky="tableOptions.isSticky"
       @update:selected="$emit('update:selected', $event)"
       @click:row="$emit('click:row', $event)"
+      @hover:cell="$emit('hover:cell', $event)"
     >
       <template
         v-if="
