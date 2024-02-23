@@ -87,6 +87,10 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  labelClass: {
+    type: String,
+    default: "",
+  },
 });
 
 const emit = defineEmits(["update:modelValue", "blur", "focus"]);
@@ -128,6 +132,7 @@ const isPasswordInput = computed(() => props.inputType === "password");
 <template>
   <BaseInput
     :label="isInlineLabel ? '' : label"
+    :labelClass="labelClass"
     :hint="hint"
     :error-message="errorMessage"
     :is-required="isRequired"
