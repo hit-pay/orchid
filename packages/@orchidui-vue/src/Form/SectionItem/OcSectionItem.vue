@@ -40,7 +40,7 @@ defineEmits(["update:modelValue"]);
           </template>
         </Tooltip>
       </div>
-      <span v-if="description" class="text-oc-text-400 text-sm">
+      <span v-if="description" class="text-oc-text-400 text-sm break-all">
         {{ description }}
       </span>
       <div v-if="errorMessage" class="text-sm text-oc-error flex items-center">
