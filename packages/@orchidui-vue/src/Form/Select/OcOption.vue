@@ -1,7 +1,7 @@
 <script setup>
 import { Icon, Checkbox } from "@/orchidui";
 
-defineEmits(["select"]);
+defineEmits(["select", "show:children", "hide:children"]);
 defineProps({
   label: String,
   subLabel: String,
@@ -9,6 +9,7 @@ defineProps({
   isCheckboxes: Boolean,
   isPartial: Boolean,
   hasChildren: Boolean,
+  showChildren: Boolean,
 });
 </script>
 
@@ -42,7 +43,7 @@ defineProps({
         class="w-5 h-5 text-oc-primary"
         name="check-2"
       />
-      <Icon v-if="hasChildren" class="w-6 h-6 rotate-180" name="chevron-down" />
+      <Icon v-if="hasChildren" class="w-6 h-6 " :class="showChildren ? 'rotate-180': ''" name="chevron-down" />
     </div>
     <slot name="after"></slot>
   </div>
