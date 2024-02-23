@@ -258,14 +258,16 @@ onMounted(() => {
         </div>
         <template v-else>
           <span
-            class="overflow-hidden whitespace-nowrap flex gap-x-3 items-center"
+            class="whitespace-nowrap flex gap-x-3 items-center overflow-hidden"
           >
             <Icon v-if="icon" :name="icon" width="16" height="16" />
 
             <span v-if="isInlineLabel && label" class="text-oc-text-300">
               {{ label }}:
             </span>
-            <span v-if="localValueOption">{{ localValueOption.label }}</span>
+            <span v-if="localValueOption" class="truncate">
+              {{ localValueOption.label }}
+            </span>
             <span v-else class="text-oc-text-300">{{ placeholder }}</span>
           </span>
         </template>

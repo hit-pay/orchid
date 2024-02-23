@@ -1,5 +1,5 @@
 <script setup>
-import { Dropdown, Input } from "@/orchidui";
+import { Dropdown, Input, BaseInput } from "@/orchidui";
 import ColorPickerPopup from "./ColorPickerPopup.vue";
 import { ref } from "vue";
 
@@ -25,22 +25,24 @@ const onUpdate = (value) => {
 </script>
 
 <template>
-  <Dropdown v-model="isOpen">
-    <Input
-      :model-value="inputValue"
-      icon="drop"
-      :icon-props="{ style: { color: inputValue } }"
-      @update:model-value="onUpdate"
-    >
-      <template v-if="$slots.leading" #leading
-        ><slot name="leading"></slot
-      ></template>
-    </Input>
-    <template #menu>
-      <ColorPickerPopup
-        :model-value="modelValue"
+  <BaseInput>
+    <Dropdown v-model="isOpen">
+      <Input
+        :model-value="inputValue"
+        icon="drop"
+        :icon-props="{ style: { color: inputValue } }"
         @update:model-value="onUpdate"
-      />
-    </template>
-  </Dropdown>
+      >
+        <template v-if="$slots.leading" #leading>
+          <slot name="leading"></slot>
+        </template>
+      </Input>
+      <template #menu>
+        <ColorPickerPopup
+          :model-value="modelValue"
+          @update:model-value="onUpdate"
+        />
+      </template>
+    </Dropdown>
+  </BaseInput>
 </template>

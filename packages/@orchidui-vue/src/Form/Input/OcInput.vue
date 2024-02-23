@@ -160,10 +160,8 @@ const isPasswordInput = computed(() => props.inputType === "password");
 
         <div class="flex items-center gap-x-1 w-full">
           <span v-if="preFill" class="text-oc-text-300">{{ preFill }}</span>
-
           <input
             ref="inputRef"
-            :type="isPasswordInput && isPasswordVisible ? 'text' : inputType"
             :value="modelValue"
             :readonly="isReadonly"
             :placeholder="placeholder"
@@ -171,6 +169,7 @@ const isPasswordInput = computed(() => props.inputType === "password");
             :inputmode="inputMode"
             class="h-7 outline-none md:text-base text-lg w-full text-oc-text disabled:bg-transparent disabled:text-oc-text-300 text-ellipsis placeholder:font-normal placeholder:text-oc-text-300 bg-oc-bg-light"
             v-bind="inputAttrs"
+            :type="isPasswordInput && isPasswordVisible ? 'text' : inputType"
             @focus="
               isFocused = true;
               $emit('focus');
@@ -196,6 +195,7 @@ const isPasswordInput = computed(() => props.inputType === "password");
           @click.prevent="isPasswordVisible = !isPasswordVisible"
         >
           <Icon
+            :key="isPasswordVisible"
             :name="isPasswordVisible ? 'eye-open' : 'eye-close'"
             width="16"
             height="16"
