@@ -45,8 +45,14 @@ const emit = defineEmits({
 
 const localValue = ref(props.modelValue || []);
 
-watch(()=> props.modelValue , (value) => {
-  localValue.value = value;
+watch(()=> props.modelValue , (newValue) => {
+  localValue.value.forEach((value) => {
+    emit("option-removed", value);
+  });  
+  newValue.forEach((value) => {
+    emit("option-added", value);
+  });
+  localValue.value = newValue;
 });
 
 const inputRef = ref();

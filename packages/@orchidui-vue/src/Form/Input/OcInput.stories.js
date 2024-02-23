@@ -336,7 +336,16 @@ export const InputOptions = {
     components: { Theme, InputOption },
     setup() {
       const selectedOption = ref(["Option 1", "options 2"]);
-      return { selectedOption };
+
+      const onRemoveOption = (option) => {  
+        console.log(option)
+      }
+
+      setTimeout(() => {
+        selectedOption.value = []
+
+      }, 1000);
+      return { selectedOption, onRemoveOption };
     },
     template: `
           <Theme colorMode="light">
@@ -345,6 +354,7 @@ export const InputOptions = {
                 label="Label"
                 hint="Hint"
                 placeholder="Placeholder"
+                @option-removed="onRemoveOption"
             />
 
             <div class="mt-4">Selected value: {{ selectedOption }}</div>
