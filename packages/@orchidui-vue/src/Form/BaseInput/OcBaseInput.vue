@@ -9,7 +9,7 @@ defineProps({
   labelIcon: String,
   tooltipText: String,
   tooltipOptions: Object,
-  labelStyle: String,
+  labelClass: String,
 });
 </script>
 

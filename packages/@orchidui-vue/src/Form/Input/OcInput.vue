@@ -87,7 +87,7 @@ const props = defineProps({
     type: String,
     default: "",
   },
-  labelStyle: {
+  labelClass: {
     type: String,
     default: "",
   },
@@ -132,7 +132,7 @@ const isPasswordInput = computed(() => props.inputType === "password");
 <template>
   <BaseInput
     :label="isInlineLabel ? '' : label"
-    :labelStyle="labelStyle"
+    :labelClass="labelClass"
     :hint="hint"
     :error-message="errorMessage"
     :is-required="isRequired"
