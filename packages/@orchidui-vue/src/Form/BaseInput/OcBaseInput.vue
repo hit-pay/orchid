@@ -18,7 +18,7 @@ defineProps({
     <label
       v-if="label"
       class="text-sm flex items-center gap-x-3 font-medium text-oc-text-400"
-      :class="labelStyle"
+      :class="labelClass"
     >
       <span class="flex gap-x-1 items-center">
         {{ label }}
