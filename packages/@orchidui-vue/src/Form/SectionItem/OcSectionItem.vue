@@ -47,11 +47,14 @@ defineEmits(["update:modelValue"]);
         {{ errorMessage }}
       </div>
     </div>
-    <Toggle
-      v-if="isToggle"
-      :model-value="modelValue"
-      v-bind="toggleProps"
-      @update:model-value="$emit('update:modelValue', $event)"
-    />
+
+    <slot name="actions">
+      <Toggle
+        v-if="isToggle"
+        :model-value="modelValue"
+        v-bind="toggleProps"
+        @update:model-value="$emit('update:modelValue', $event)"
+      />
+    </slot>
   </div>
 </template>
