@@ -4,6 +4,7 @@
     :width="`${props.width}px`"
     :height="`${props.height}px`"
     :viewBox="`0 0 ${props.width} ${props.height}`"
+    xmlns="http://www.w3.org/2000/svg"
   ></svg>
 </template>
 
@@ -32,7 +33,12 @@ fetch(`${props.path}/${props.name}.svg`)
   .then((r) => (r.status === 200 ? r.text() : ""))
   .then((text) => {
     if (text && iconRef.value) {
-      iconRef.value.innerHTML = text;
+      const dom = document.createElement("div");
+      dom.innerHTML = text;
+      dom.querySelector("svg").removeAttribute("width");
+      dom.querySelector("svg").removeAttribute("height");
+      iconRef.value.innerHTML = dom.innerHTML;
+      dom.remove();
     }
   });
 </script>
