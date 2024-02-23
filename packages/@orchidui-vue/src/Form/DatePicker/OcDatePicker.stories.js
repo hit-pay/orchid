@@ -1,11 +1,11 @@
 import { Theme, DatePicker, Calendar } from "@/orchidui";
-import dayjs from "dayjs";
-import { ref } from "vue";
+import dayjs from 'dayjs';
+import { ref } from 'vue';
 
 export default {
   components: { Calendar },
   component: DatePicker,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 };
 
 export const Default = {
@@ -42,31 +42,52 @@ export const Default = {
         return dayjs().add(7, "day").isBefore(dayjs(value));
       };
       const model = ref("");
-
-      return { args, checkDisableDate, model };
+      const model1 = ref([]);
+      
+      return { args, checkDisableDate, model, model1 };
     },
     template: `
-          <Theme>
-            <div class="w-full h-[400px]">
-              {{ model }}
-              <DatePicker
-                  v-model="model"
-                  :key="args.type"
-                  :type="args.type"
-                  :date-format="args.dateFormat"
-                  :error-message="args.errorMessage"
-                  :disabled-date="checkDisableDate"
-                  :hint="args.hint"
-                  :min-date="args.minDate"
-                  :max-date="args.maxDate"
-                  :label="args.label"
-                  :min-label="args.minLabel"
-                  :max-label="args.maxLabel"
-                  :is-required="args.isRequired"
-                  :is-split-input="args.isSplitInput"
-              />
-            </div>
-          </Theme>
-        `,
+      <Theme>
+        <div class="w-full h-[400px]">
+          {{ model }}
+          <DatePicker
+            v-model="model"
+            :key="args.type"
+            type="range"
+            :date-format="args.dateFormat"
+            :error-message="args.errorMessage"
+            :disabled-date="checkDisableDate"
+            :hint="args.hint"
+            :min-date="args.minDate"
+            :max-date="args.maxDate"
+            :label="args.label"
+            :min-label="args.minLabel"
+            :max-label="args.maxLabel"
+            :is-required="args.isRequired"
+            :is-split-input="args.isSplitInput"
+          />
+          
+          <div class="mt-8">
+            DD/MM/YYYY:  {{ model1 }}
+            <DatePicker
+              v-model="model1"
+              :key="args.type"
+              :type="args.type"
+              date-format="DD/MM/YYYY"
+              :error-message="args.errorMessage"
+              :disabled-date="checkDisableDate"
+              :hint="args.hint"
+              :min-date="args.minDate"
+              :max-date="args.maxDate"
+              :label="args.label"
+              :min-label="args.minLabel"
+              :max-label="args.maxLabel"
+              :is-required="args.isRequired"
+              :is-split-input="args.isSplitInput"
+            />
+          </div>
+        </div>
+      </Theme>
+    `,
   }),
 };

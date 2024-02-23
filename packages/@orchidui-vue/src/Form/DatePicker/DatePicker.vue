@@ -1,7 +1,12 @@
 <script setup>
-import { Dropdown, Calendar, Input } from "@/orchidui";
-import { computed, ref } from "vue";
-import dayjs from "dayjs";
+import { Dropdown, Calendar, Input } from '@/orchidui';
+import { computed, ref } from 'vue';
+import customParseFormat from 'dayjs/plugin/customParseFormat'
+import dayjs from 'dayjs';
+
+// Getting invalid date while using 'DD/MM/YYYY' format
+// https://github.com/iamkun/dayjs/issues/1786
+dayjs.extend(customParseFormat)
 
 const emit = defineEmits(["update:modelValue", "resetCalendar"]);
 const props = defineProps({
@@ -69,21 +74,23 @@ const props = defineProps({
 
 const isDropdownOpened = ref(false);
 
+const isRangeInput = computed(() => props.type === 'range');
+
 const formattedDate = computed(() => {
-  if (props.type === "default") {
+  if (!isRangeInput.value) {
     return props.modelValue
-      ? dayjs(props.modelValue).format(props.dateFormat)
+      ? dayjs(props.modelValue, props.dateFormat)
       : "";
-  } else {
-    if (props.modelValue && props.modelValue[0]) {
-      return [
-        dayjs(props.modelValue[0]).format(props.dateFormat),
-        dayjs(props.modelValue[1]).format(props.dateFormat),
-      ];
-    } else {
-      return ["", ""];
-    }
   }
+
+  if (props.modelValue && props.modelValue[0]) {
+    return [
+      dayjs(props.modelValue[0], props.dateFormat),
+      dayjs(props.modelValue[1], props.dateFormat),
+    ];
+  }
+
+  return ["", ""];
 });
 
 const updateCalendar = (newValue) => {
@@ -100,7 +107,7 @@ const updateCalendar = (newValue) => {
 
 const resetCalendar = () => {
   emit("resetCalendar");
-  emit("update:modelValue", props.type === "range" ? [] : null);
+  emit("update:modelValue", isRangeInput.value ? [] : null);
 
   isDropdownOpened.value = false;
 };
@@ -116,19 +123,15 @@ const defaultDateRange = () => [dayjs().toDate(), dayjs().toDate()];
     class="w-full"
   >
     <div class="flex flex-col gap-y-2 w-full">
-      <div v-if="!isSplitInput || type === 'default'" class="flex w-full">
+      <div v-if="!isSplitInput || !isRangeInput" class="flex w-full">
         <Input
           :model-value="
-            type === 'range'
+            isRangeInput
               ? modelValue && modelValue[0]
-                ? `${dayjs(formattedDate[0], dateFormat).format(
-                    'DD/MM/YYYY',
-                  )} - ${dayjs(formattedDate[1], dateFormat).format(
-                    'DD/MM/YYYY',
-                  )}`
+                ? `${formattedDate[0].format(dateFormat)} - ${formattedDate[1].format(dateFormat)}`
                 : ''
               : modelValue
-                ? dayjs(formattedDate, dateFormat).format('DD/MM/YYYY')
+                ? formattedDate.format(dateFormat)
                 : ''
           "
           icon="calendar"
@@ -147,7 +150,7 @@ const defaultDateRange = () => [dayjs().toDate(), dayjs().toDate()];
             :label="`${label} ${minLabel}`"
             :model-value="
               formattedDate[0]
-                ? dayjs(formattedDate[0], dateFormat).format('DD/MM/YYYY')
+                ? formattedDate[0].format(dateFormat)
                 : ''
             "
             icon="calendar"
@@ -161,7 +164,7 @@ const defaultDateRange = () => [dayjs().toDate(), dayjs().toDate()];
             :label="`${label} ${maxLabel}`"
             :model-value="
               formattedDate[1]
-                ? dayjs(formattedDate[1], dateFormat).format('DD/MM/YYYY')
+                ? formattedDate[1].format(dateFormat)
                 : ''
             "
             icon="calendar"
@@ -182,15 +185,15 @@ const defaultDateRange = () => [dayjs().toDate(), dayjs().toDate()];
       <Calendar
         v-if="!disabled"
         :model-value="
-          type === 'range'
+          isRangeInput
             ? modelValue && modelValue[0]
               ? [
-                  dayjs(modelValue[0], dateFormat).toDate(),
-                  dayjs(modelValue[1], dateFormat).toDate(),
+                  formattedDate[0].toDate(),
+                  formattedDate[1].toDate(),
                 ]
               : defaultDateRange()
-            : modelValue
-              ? dayjs(modelValue, dateFormat).toDate()
+            : formattedDate
+              ? formattedDate.toDate()
               : new Date()
         "
         :disabled-date="disabledDate"
