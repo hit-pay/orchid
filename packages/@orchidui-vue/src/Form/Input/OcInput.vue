@@ -123,11 +123,6 @@ const inputAttrs = computed(() => {
 });
 
 const isPasswordInput = computed(() => props.inputType === "password");
-
-const test = () => {
-  isPasswordVisible.value = !isPasswordVisible.value;
-  console.log(isPasswordInput.value, isPasswordVisible.value);
-};
 </script>
 
 <template>
@@ -194,7 +189,11 @@ const test = () => {
           'border-l border-gray-200 pl-3 py-3': hasLeadingSeparator,
         }"
       >
-        <span v-if="!$slots.leading" class="text-oc-text-200" @click="test">
+        <span
+          v-if="!$slots.leading"
+          class="text-oc-text-200"
+          @click.prevent="isPasswordVisible = !isPasswordVisible"
+        >
           <Icon
             :key="isPasswordVisible"
             :name="isPasswordVisible ? 'eye-open' : 'eye-close'"
