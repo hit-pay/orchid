@@ -9,6 +9,7 @@ defineProps({
   labelIcon: String,
   tooltipText: String,
   tooltipOptions: Object,
+  labelStyle: String,
 });
 </script>
 
@@ -17,6 +18,7 @@ defineProps({
     <label
       v-if="label"
       class="text-sm flex items-center gap-x-3 font-medium text-oc-text-400"
+      :class="labelStyle"
     >
       <span class="flex gap-x-1 items-center">
         {{ label }}
