@@ -283,7 +283,7 @@ const selectOption = (option) => {
   }
 };
 
-const categoryDropdown = ref([])
+const categoryDropdown = ref([]);
 </script>
 <template>
   <div>
@@ -480,15 +480,24 @@ const categoryDropdown = ref([])
                           ? true
                           : false
                       "
+                      :show-children="categoryDropdown.includes(option.value)"
                       @show:children="categoryDropdown.push(option.value)"
-                      @hide:children="categoryDropdown = categoryDropdown.filter((c) => c !== option.value)"
+                      @hide:children="
+                        categoryDropdown = categoryDropdown.filter(
+                          (c) => c !== option.value,
+                        )
+                      "
                       @select="selectOption(option)"
                     >
                       <template #after>
                         <div
                           v-if="fOptions.find((o) => o.parent === option.value)"
                           class="w-full flex-col ml-5"
-                          :class="categoryDropdown.includes(option.value) ? 'flex': 'hidden'"
+                          :class="
+                            categoryDropdown.includes(option.value)
+                              ? 'flex'
+                              : 'hidden'
+                          "
                         >
                           <OcOption
                             v-for="option1 in fOptions.filter(
@@ -507,8 +516,17 @@ const categoryDropdown = ref([])
                                 ? true
                                 : false
                             "
-                            @show:children="categoryDropdown.push(option1.value)"
-                            @hide:children="categoryDropdown = categoryDropdown.filter((c) => c !== option1.value)"
+                            :show-children="
+                              categoryDropdown.includes(option1.value)
+                            "
+                            @show:children="
+                              categoryDropdown.push(option1.value)
+                            "
+                            @hide:children="
+                              categoryDropdown = categoryDropdown.filter(
+                                (c) => c !== option1.value,
+                              )
+                            "
                             @select="selectOption(option1)"
                           >
                             <template #after>
@@ -519,7 +537,11 @@ const categoryDropdown = ref([])
                                   )
                                 "
                                 class="w-full flex-col ml-5"
-                                :class="categoryDropdown.includes(option1.value) ? 'flex': 'hidden'"
+                                :class="
+                                  categoryDropdown.includes(option1.value)
+                                    ? 'flex'
+                                    : 'hidden'
+                                "
                               >
                                 <OcOption
                                   v-for="option2 in fOptions.filter(
