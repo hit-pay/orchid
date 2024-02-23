@@ -13,6 +13,14 @@ defineProps({
   isCard: Boolean,
   isLoading: Boolean,
   percentValue: Number,
+  iconWidth: {
+    type: String,
+    default: "22",
+  },
+  iconHeight: {
+    type: String,
+    default: "22",
+  },
 });
 </script>
 
@@ -33,7 +41,13 @@ defineProps({
         class="flex items-center"
         :class="isBig ? 'gap-x-[.75rem]' : 'gap-x-3'"
       >
-        <OverviewIcon v-if="icon" :icon="icon" :variant="variant" />
+        <OverviewIcon
+          v-if="icon"
+          :icon="icon"
+          :variant="variant"
+          :height="iconHeight"
+          :width="iconWidth"
+        />
         <div class="flex flex-col gap-y-px font-medium overflow-hidden">
           <template v-if="percentValue !== undefined">
             <div class="flex items-center gap-x-3 overflow-hidden">

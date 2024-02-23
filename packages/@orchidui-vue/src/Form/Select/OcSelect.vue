@@ -257,7 +257,7 @@ onMounted(() => {
           }}</span>
         </div>
         <template v-else>
-          <span class="whitespace-nowrap flex gap-x-3 items-center">
+          <span class="overflow-hidden whitespace-nowrap flex gap-x-3 items-center">
             <Icon v-if="icon" :name="icon" width="16" height="16" />
 
             <span v-if="isInlineLabel && label" class="text-oc-text-300">
