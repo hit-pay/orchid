@@ -38,6 +38,7 @@ fetch(`${props.path}/${props.name}.svg`)
       dom.querySelector("svg").removeAttribute("width");
       dom.querySelector("svg").removeAttribute("height");
       iconRef.value.innerHTML = dom.innerHTML;
+      dom.remove();
     }
   });
 </script>
