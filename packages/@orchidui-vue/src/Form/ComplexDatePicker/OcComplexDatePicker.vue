@@ -1,8 +1,11 @@
 <script setup>
-import { Dropdown, Input, BaseInput } from "@/orchidui";
-import { ComplexCalendar } from "@/orchidui/Calendar";
-import { ref } from "vue";
-import dayjs from "dayjs";
+import { Dropdown, Input, BaseInput } from '@/orchidui';
+import { ComplexCalendar } from '@/orchidui/Calendar';
+import { ref } from 'vue';
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+
+dayjs.extend(customParseFormat)
 
 defineProps({
   shortcuts: Array,
