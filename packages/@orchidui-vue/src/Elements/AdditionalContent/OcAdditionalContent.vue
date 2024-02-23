@@ -24,6 +24,7 @@ const props = defineProps({
   },
   boxes: { type: Array, default: () => [] },
   isCustomer: { type: Boolean, default: false },
+  isLoading: { type: Boolean, default: false },
   overviewItems: { type: Array, default: () => [] },
   overviewTabs: { type: Array, default: () => [] },
   secondaryButtonProps: { type: Object, default: null },
@@ -81,9 +82,9 @@ const copyLink = async () => {
       :is-customer="isCustomer"
       :customer-is-hover="customerIsHover"
       :customer-is-edit="customerIsEdit"
+      :class="additionalStyling"
       @add-customer="$emit('addCustomer')"
       @edit-customer="$emit('editCustomer', $event)"
-      :class="additionalStyling"
     >
       <template v-for="box in boxes" #[box.slot]="{ data }">
         <slot :name="box.slot" :data="data"></slot>
@@ -112,8 +113,9 @@ const copyLink = async () => {
       :container-class="balanceContainerClass"
       :payment-methods="paymentMethods"
       :dropdown-items="dropdownItems"
-      @change-tab="$emit('changeTab', $event)"
       :class="additionalStyling"
+      :is-loading="isLoading"
+      @change-tab="$emit('changeTab', $event)"
     >
       <template v-if="$slots.warning" #warning>
         <slot name="warning" />

@@ -1,5 +1,5 @@
 <script setup>
-import { Button, Dropdown, Tooltip, DropdownItem } from "@/orchidui";
+import { Button, Skeleton, Dropdown, Tooltip, DropdownItem } from "@/orchidui";
 import PaymentMethods from "./OcPaymentMethods.vue";
 import { ref } from "vue";
 
@@ -10,6 +10,7 @@ defineProps({
     default: () => [],
   },
   secondaryButtonProps: Object,
+  isLoading: Boolean,
   dropdownItems: {
     type: Array,
     default: () => [],
@@ -20,9 +21,14 @@ const isOpen = ref(false);
 
 <template>
   <div class="flex justify-between md:flex-row flex-col gap-y-3 md:gap-y-0">
-    <PaymentMethods v-if="paymentMethods.length" :methods="paymentMethods" />
+    <Skeleton v-if="isLoading" class="h-[20px] w-[322px] rounded-sm" />
+    <PaymentMethods
+      v-if="!isLoading && paymentMethods.length"
+      :methods="paymentMethods"
+    />
 
-    <div class="flex gap-x-3">
+    <Skeleton v-if="isLoading" class="h-[20px] w-[168px] rounded-sm" />
+    <div v-else class="flex gap-x-3">
       <Dropdown
         v-model="isOpen"
         :popper-options="{ strategy: 'fixed' }"

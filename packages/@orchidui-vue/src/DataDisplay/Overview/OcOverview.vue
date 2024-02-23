@@ -5,6 +5,7 @@ defineProps({
   title: String,
   containerClass: String,
   items: Array,
+  isLoading: Boolean,
 });
 </script>
 
@@ -24,8 +25,11 @@ defineProps({
         :variant="item.variant"
         :tooltip="item.tooltip"
         :icon="item.icon"
+        :is-loading="isLoading"
         :content="item.content"
         :info="item.info"
+        :icon-height="item.iconHeight"
+        :icon-width="item.iconWidth"
       >
         <template v-if="item.isWarning" #warning>
           <slot name="warning" />

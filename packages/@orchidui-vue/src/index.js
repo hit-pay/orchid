@@ -18,6 +18,7 @@ export * from "./Elements/Sidebar/OcSidebar.js";
 export * from "./Elements/SubSidebar/OcSubSidebar.js";
 export * from "./Elements/EmptyPage/OcEmptyPage.js";
 export * from "./Elements/AdditionalContent/OcAdditionalContent.js";
+export * from "./Elements/Skeleton/OcSkeleton.js";
 
 export * from "./Feedback/Chip/OcChip.js";
 export * from "./Feedback/Snackbar/OcSnackbar.js";
