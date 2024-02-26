@@ -146,13 +146,13 @@ const renderSectionAndForm = () => {
           (s) => s.section === item.section,
         );
         sectionListCustom.push({
-          key: item.key,
-          group: item.group,
-          section: item.section,
-          title: item.title ?? item.section,
-          active: item.active,
-          icon: sectionItem.icon,
-          canDelete: sectionItem.canDelete ?? false,
+          key: item.key, // required
+          group: item.group, // required
+          section: item.section, // required
+          title: item?.title ? item.title : item.section,
+          active: item?.active ?? true,
+          icon: sectionItem?.icon ?? "",
+          canDelete: sectionItem?.canDelete ?? false,
           form: sectionItem.form,
         });
       }
