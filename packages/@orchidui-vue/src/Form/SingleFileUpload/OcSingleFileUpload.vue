@@ -21,6 +21,7 @@ const props = defineProps({
     default: true,
   },
   label: String,
+  labelClass: String,
   hint: String,
   uploadButtonOptions: Object,
   /**
@@ -108,7 +109,12 @@ const onEditFile = () => {
 </script>
 
 <template>
-  <BaseInput :label="label" :hint="hint" :error-message="errorMessage">
+  <BaseInput
+    :label="label"
+    :labelClass="labelClass"
+    :hint="hint"
+    :error-message="errorMessage"
+  >
     <SingleOnlyImageUpload
       v-if="isImageOnly"
       :accept="accept"
