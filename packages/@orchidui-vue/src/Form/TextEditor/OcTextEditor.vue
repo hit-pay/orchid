@@ -2,7 +2,7 @@
 import Quill from "quill";
 import { QuillEditor } from "./QuillEditor";
 
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { BaseInput, Icon, Dropdown } from "@/orchidui";
 
 const props = defineProps({
@@ -44,12 +44,30 @@ const props = defineProps({
     type: Object,
     default: () => ({}),
   },
-  toolbar: {
-    type: Array,
-    default: () => ["changes", "font-size", "font-style", "link"],
+  variant: {
+    type: String,
+    validator: (value) => ["default", "text-only"].includes(value),
+    default: "default",
   },
 });
 const emit = defineEmits(["update:modelValue", "update:image"]);
+
+const variants = {
+  default: [
+    "changes",
+    "font-size",
+    "font-style",
+    "link",
+    "image",
+    "quote",
+    "media",
+    "list",
+    "alignment",
+  ],
+  "text-only": ["changes", "font-size", "font-style", "link"],
+};
+
+const toolbar = computed(() => variants[props.variant]);
 
 const Size = Quill.import("attributors/style/size");
 Size.whitelist = props.fontSizes.map((f) => f.value);

@@ -7,6 +7,12 @@ export default {
   tags: ["autodocs"],
 };
 export const Default = {
+  argTypes: {
+    variant: {
+      control: "select",
+      options: ["default", "text-only"],
+    },
+  },
   args: {
     label: "Label",
     isRequired: true,
@@ -29,6 +35,7 @@ export const Default = {
       },
     ],
     initialFontSize: "14px",
+    variant: "default",
   },
   render: (args) => ({
     components: { TextEditor, Theme },
