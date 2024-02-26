@@ -44,10 +44,6 @@ const props = defineProps({
     type: Object,
     default: () => ({}),
   },
-  toolbar: {
-    type: Array,
-    default: () => ["changes", "font-size", "font-style", "link"],
-  },
 });
 const emit = defineEmits(["update:modelValue", "update:image"]);
 
@@ -231,99 +227,92 @@ onMounted(() => {
           :id="id"
           class="flex min-h-[36px] flex-wrap !py-2 !px-3 gap-x-5 gap-y-2 rounded-t"
         >
-          <template v-if="toolbar.includes('changes')">
-            <div class="flex items-center gap-x-3">
+          <div class="flex items-center gap-x-3">
+            <Icon
+              :class="
+                isUndoActive
+                  ? 'text-oc-text cursor-pointer'
+                  : 'text-oc-text-300'
+              "
+              width="20"
+              height="20"
+              name="text-editor/undo"
+              @click="undo"
+            />
+            <Icon
+              :class="
+                isRedoActive
+                  ? 'text-oc-text cursor-pointer'
+                  : 'text-oc-text-300'
+              "
+              width="20"
+              height="20"
+              name="text-editor/redo"
+              @click="redo"
+            />
+          </div>
+
+          <div class="border-l border-oc-gray-200" />
+
+          <Dropdown v-model="isSizeActive">
+            <div class="flex items-center gap-x-5 cursor-pointer">
+              {{ fontSizes.find((font) => font.value === activeSize)?.label }}
               <Icon
-                :class="
-                  isUndoActive
-                    ? 'text-oc-text cursor-pointer'
-                    : 'text-oc-text-300'
-                "
                 width="20"
                 height="20"
-                name="text-editor/undo"
-                @click="undo"
-              />
-              <Icon
-                :class="
-                  isRedoActive
-                    ? 'text-oc-text cursor-pointer'
-                    : 'text-oc-text-300'
-                "
-                width="20"
-                height="20"
-                name="text-editor/redo"
-                @click="redo"
+                name="chevron-down"
+                class="transition-all"
+                :class="isSizeActive ? 'rotate-180' : ''"
               />
             </div>
-
-            <div class="border-l border-oc-gray-200" />
-          </template>
-
-          <template v-if="toolbar.includes('font-size')">
-            <Dropdown v-model="isSizeActive">
-              <div class="flex items-center gap-x-5 cursor-pointer">
-                {{ fontSizes.find((font) => font.value === activeSize)?.label }}
-                <Icon
-                  width="20"
-                  height="20"
-                  name="chevron-down"
-                  class="transition-all"
-                  :class="isSizeActive ? 'rotate-180' : ''"
-                />
-              </div>
-              <template #menu>
-                <div class="flex flex-col py-2 overflow-hidden">
-                  <div
-                    v-for="fontSize in fontSizes"
-                    :key="fontSize.value"
-                    class="min-w-[120px] cursor-pointer py-2 px-3 hover:bg-oc-gray-50"
-                    :class="activeSize === fontSize.value ? 'font-medium' : ''"
-                    @click="setSize(fontSize.value)"
-                  >
-                    {{ fontSize.label }}
-                  </div>
+            <template #menu>
+              <div class="flex flex-col py-2 overflow-hidden">
+                <div
+                  v-for="fontSize in fontSizes"
+                  :key="fontSize.value"
+                  class="min-w-[120px] cursor-pointer py-2 px-3 hover:bg-oc-gray-50"
+                  :class="activeSize === fontSize.value ? 'font-medium' : ''"
+                  @click="setSize(fontSize.value)"
+                >
+                  {{ fontSize.label }}
                 </div>
-              </template>
-            </Dropdown>
+              </div>
+            </template>
+          </Dropdown>
 
-            <div class="border-l border-oc-gray-200" />
-          </template>
+          <div class="border-l border-oc-gray-200" />
 
-          <template v-if="toolbar.includes('font-style')">
-            <div class="flex gap-x-3 items-center">
-              <Icon
-                class="cursor-pointer"
-                :class="isBoldActive ? 'text-oc-text' : 'text-oc-text-300'"
-                width="20"
-                height="20"
-                name="text-editor/bold"
-                @click="setBold"
-              />
-              <Icon
-                class="cursor-pointer"
-                :class="isItalicActive ? 'text-oc-text' : 'text-oc-text-300'"
-                width="20"
-                height="20"
-                name="text-editor/italic"
-                @click="setItalic"
-              />
-              <Icon
-                class="cursor-pointer"
-                :class="isUnderlineActive ? 'text-oc-text' : 'text-oc-text-300'"
-                width="20"
-                height="20"
-                name="text-editor/underline"
-                @click="setUnderline"
-              />
-            </div>
+          <div class="flex gap-x-3 items-center">
+            <Icon
+              class="cursor-pointer"
+              :class="isBoldActive ? 'text-oc-text' : 'text-oc-text-300'"
+              width="20"
+              height="20"
+              name="text-editor/bold"
+              @click="setBold"
+            />
+            <Icon
+              class="cursor-pointer"
+              :class="isItalicActive ? 'text-oc-text' : 'text-oc-text-300'"
+              width="20"
+              height="20"
+              name="text-editor/italic"
+              @click="setItalic"
+            />
+            <Icon
+              class="cursor-pointer"
+              :class="isUnderlineActive ? 'text-oc-text' : 'text-oc-text-300'"
+              width="20"
+              height="20"
+              name="text-editor/underline"
+              @click="setUnderline"
+            />
+          </div>
 
-            <div class="border-l border-oc-gray-200" />
-          </template>
+          <div class="border-l border-oc-gray-200" />
 
           <div class="flex items-center gap-x-3">
             <Icon
-              v-if="toolbar.includes('link')"
               class="cursor-pointer"
               width="20"
               height="20"
@@ -331,7 +320,6 @@ onMounted(() => {
               @click="setLink"
             />
             <Icon
-              v-if="toolbar.includes('image')"
               class="cursor-pointer"
               width="20"
               height="20"
@@ -339,7 +327,6 @@ onMounted(() => {
               @click="uploadImage"
             />
             <Icon
-              v-if="toolbar.includes('quote')"
               class="cursor-pointer"
               :class="isBlockquoteActive ? 'text-oc-text' : 'text-oc-text-300'"
               width="20"
@@ -348,7 +335,6 @@ onMounted(() => {
               @click="setBlockquote"
             />
             <Icon
-              v-if="toolbar.includes('media')"
               class="cursor-pointer"
               width="20"
               height="20"
@@ -357,83 +343,77 @@ onMounted(() => {
             />
           </div>
 
-          <template v-if="toolbar.includes('list')">
-            <div class="border-l border-oc-gray-200" />
+          <div class="border-l border-oc-gray-200" />
 
-            <div class="flex gap-x-3 items-center">
-              <Icon
-                class="cursor-pointer"
-                :class="
-                  activeListFormat === 'bullet'
-                    ? 'text-oc-text'
-                    : 'text-oc-text-300'
-                "
-                width="20"
-                height="20"
-                name="text-editor/bullet"
-                @click="setListFormat('bullet')"
-              />
-              <Icon
-                class="cursor-pointer"
-                :class="
-                  activeListFormat === 'ordered'
-                    ? 'text-oc-text'
-                    : 'text-oc-text-300'
-                "
-                width="20"
-                height="20"
-                name="text-editor/number"
-                @click="setListFormat('ordered')"
-              />
-            </div>
-          </template>
+          <div class="flex gap-x-3 items-center">
+            <Icon
+              class="cursor-pointer"
+              :class="
+                activeListFormat === 'bullet'
+                  ? 'text-oc-text'
+                  : 'text-oc-text-300'
+              "
+              width="20"
+              height="20"
+              name="text-editor/bullet"
+              @click="setListFormat('bullet')"
+            />
+            <Icon
+              class="cursor-pointer"
+              :class="
+                activeListFormat === 'ordered'
+                  ? 'text-oc-text'
+                  : 'text-oc-text-300'
+              "
+              width="20"
+              height="20"
+              name="text-editor/number"
+              @click="setListFormat('ordered')"
+            />
+          </div>
 
-          <template v-if="toolbar.includes('alignment')">
-            <div class="border-l border-oc-gray-200" />
+          <div class="border-l border-oc-gray-200" />
 
-            <div class="flex gap-x-3 items-center">
-              <Icon
-                class="cursor-pointer"
-                :class="!activeAlign ? 'text-oc-text' : 'text-oc-text-300'"
-                width="20"
-                height="20"
-                name="text-editor/left"
-                @click="setAlign()"
-              />
-              <Icon
-                class="cursor-pointer"
-                :class="
-                  activeAlign === 'center' ? 'text-oc-text' : 'text-oc-text-300'
-                "
-                width="20"
-                height="20"
-                name="text-editor/center"
-                @click="setAlign('center')"
-              />
-              <Icon
-                class="cursor-pointer"
-                :class="
-                  activeAlign === 'right' ? 'text-oc-text' : 'text-oc-text-300'
-                "
-                width="20"
-                height="20"
-                name="text-editor/right"
-                @click="setAlign('right')"
-              />
-              <Icon
-                class="cursor-pointer"
-                :class="
-                  activeAlign === 'justify'
-                    ? 'text-oc-text'
-                    : 'text-oc-text-300'
-                "
-                width="20"
-                height="20"
-                name="text-editor/justify"
-                @click="setAlign('justify')"
-              />
-            </div>
-          </template>
+          <div class="flex gap-x-3 items-center">
+            <Icon
+              class="cursor-pointer"
+              :class="!activeAlign ? 'text-oc-text' : 'text-oc-text-300'"
+              width="20"
+              height="20"
+              name="text-editor/left"
+              @click="setAlign()"
+            />
+            <Icon
+              class="cursor-pointer"
+              :class="
+                activeAlign === 'center' ? 'text-oc-text' : 'text-oc-text-300'
+              "
+              width="20"
+              height="20"
+              name="text-editor/center"
+              @click="setAlign('center')"
+            />
+            <Icon
+              class="cursor-pointer"
+              :class="
+                activeAlign === 'right' ? 'text-oc-text' : 'text-oc-text-300'
+              "
+              width="20"
+              height="20"
+              name="text-editor/right"
+              @click="setAlign('right')"
+            />
+            <Icon
+              class="cursor-pointer"
+              :class="
+                activeAlign === 'justify' ? 'text-oc-text' : 'text-oc-text-300'
+              "
+              width="20"
+              height="20"
+              name="text-editor/justify"
+              @click="setAlign('justify')"
+            />
+          </div>
         </div>
       </template>
     </QuillEditor>
