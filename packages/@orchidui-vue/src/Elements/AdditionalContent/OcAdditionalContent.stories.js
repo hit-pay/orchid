@@ -99,15 +99,15 @@ const argTypes = {
   },
 };
 const args = {
-  mainLink: "https://securecheckout.../payment-request/",
-  userId: "@minstore-edit43",
+  mainLink: "https://securecheckout.staging.hit-pay.com/payment-request",
+  userId: "/@minstore-edit43",
   chipVariant: "success",
   chipLabel: "Active",
   additionalTitle: "Need attention",
   primaryActions: {
     mainLinkAction: {
       tooltipContent: "Preview Link",
-      url: "https://securecheckout.../payment-request/",
+      url: "https://securecheckout.staging.hit-pay.com/payment-request/@minstore-edit43",
     },
     dropdownOptions: {
       isDropdownOpened: false,

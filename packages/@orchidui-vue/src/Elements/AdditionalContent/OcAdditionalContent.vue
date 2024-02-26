@@ -64,10 +64,10 @@ const copyLink = async () => {
         </div>
       </template>
       <template #description>
-        <div class="flex items-center gap-x-2">
+        <div class="flex items-center gap-x-2 max-w-full">
           <div class="text-oc-text-400 flex items-center overflow-hidden">
             <div class="truncate">{{ mainLink }}</div>
-            <div class="text-oc-text">{{ userId }}</div>
+            <div class="text-oc-text whitespace-nowrap">{{ userId }}</div>
           </div>
           <PrimaryActions :primary-actions="primaryActions" @copy="copyLink" />
         </div>
