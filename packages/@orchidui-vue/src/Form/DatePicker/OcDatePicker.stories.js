@@ -1,11 +1,11 @@
 import { Theme, DatePicker, Calendar } from "@/orchidui";
-import dayjs from 'dayjs';
-import { ref } from 'vue';
+import dayjs from "dayjs";
+import { ref } from "vue";
 
 export default {
   components: { Calendar },
   component: DatePicker,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
 };
 
 export const Default = {
@@ -43,7 +43,7 @@ export const Default = {
       };
       const model = ref("");
       const model1 = ref([]);
-      
+
       return { args, checkDisableDate, model, model1 };
     },
     template: `
