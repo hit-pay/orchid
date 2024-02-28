@@ -91,7 +91,7 @@ const filterableOptions = computed(() => {
   for (const option of props.options) {
     if (option.values) {
       const filteredGroup = option.values.filter((subOption) =>
-        subOption.label.toLowerCase().includes(query.value.toLowerCase()),
+        subOption.label?.toLowerCase().includes(query.value.toLowerCase()) || subOption.subLabel?.toLowerCase().includes(query.value.toLowerCase()),
       );
 
       if (filteredGroup.length > 0) {
@@ -101,7 +101,7 @@ const filterableOptions = computed(() => {
         });
       }
     } else {
-      if (option.label.toLowerCase().includes(query.value.toLowerCase())) {
+      if (option.label?.toLowerCase().includes(query.value.toLowerCase()) || option.subLabel?.toLowerCase().includes(query.value.toLowerCase())) {
         filteredOptions.push(option);
       }
     }
