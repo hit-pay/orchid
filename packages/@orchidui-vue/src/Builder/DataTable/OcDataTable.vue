@@ -51,21 +51,15 @@ const emit = defineEmits({
   "hover:cell": [],
 });
 
-const paginationOption = computed(() => {
-  return props.options?.pagination;
-});
+const paginationOption = computed(() => props.options?.pagination);
 
-const cursorOption = computed(() => {
-  return props.options?.cursor;
-});
+const cursorOption = computed(() => props.options?.cursor);
 
-const tableOptions = computed(() => {
-  return props.options?.tableOptions;
-});
+const tableOptions = computed(() => props.options?.tableOptions);
 
-const filterOptions = computed(() => {
-  return props.options?.filterOptions;
-});
+const filterOptions = computed(() => props.options?.filterOptions);
+
+const hidePerPageDropdown = computed(() => props.options?.hidePerPageDropdown);
 
 const isDropdownOpened = ref(false);
 const filterTab = ref(props.filter[filterOptions.value?.tabs?.key]);
@@ -521,7 +515,7 @@ const displayFilterData = computed(() => {
           "
         />
       </div>
-      <div class="hidden md:flex items-center">
+      <div v-if="!hidePerPageDropdown" class="hidden md:flex items-center">
         <Select
           v-model="perPage"
           label="Item per page"

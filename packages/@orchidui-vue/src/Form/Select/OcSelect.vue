@@ -234,24 +234,26 @@ onMounted(() => {
         }"
       >
         <div v-if="multiple" class="flex flex-wrap gap-2 overflow-hidden">
-          <Chip
-            v-for="option in maxVisibleOptions
-              ? localValueOption.slice(0, maxVisibleOptions)
-              : localValueOption"
-            :key="option.value"
-            closable
-            :variant="option.variant"
-            :label="option.label"
-            v-bind="chipProps"
-            should-truncate-chip
-            @remove="removeOption(option.value)"
-          />
-          <Chip
-            v-if="
-              maxVisibleOptions && localValueOption.length > maxVisibleOptions
-            "
-            :label="`+${localValueOption.length - maxVisibleOptions}`"
-          />
+          <slot name="selection">
+            <Chip
+              v-for="option in maxVisibleOptions
+                ? localValueOption.slice(0, maxVisibleOptions)
+                : localValueOption"
+              :key="option.value"
+              closable
+              :variant="option.variant"
+              :label="option.label"
+              v-bind="chipProps"
+              should-truncate-chip
+              @remove="removeOption(option.value)"
+            />
+            <Chip
+              v-if="
+                maxVisibleOptions && localValueOption.length > maxVisibleOptions
+              "
+              :label="`+${localValueOption.length - maxVisibleOptions}`"
+            />
+          </slot>
           <span v-if="localValueOption.length === 0" class="text-oc-text-300">{{
             placeholder
           }}</span>
