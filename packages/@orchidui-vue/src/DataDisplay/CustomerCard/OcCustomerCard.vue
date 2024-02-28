@@ -45,7 +45,7 @@ const emit = defineEmits(["addCustomer", "editCustomer", "closeCustomer"]);
 
       <Icon
         v-if="isClosable"
-        class="absolute -right-1.5 -top-1.5 border-1 bg-white border-white overflow-hidden rounded-full text-gray-500 cursor-pointer transition-all duration-300 hover:text-oc-error"
+        class="absolute -right-1.5 -top-1.5 border-1 border-white overflow-hidden rounded-full text-gray-500 cursor-pointer transition-all duration-300 hover:text-oc-error"
         name="filled-x-circle"
         @click="emit('closeCustomer')"
       />
@@ -63,7 +63,7 @@ const emit = defineEmits(["addCustomer", "editCustomer", "closeCustomer"]);
                 v-if="isBeneficiary"
                 class="rounded-md py-1 px-3 text-sm text-oc-accent-1-500 bg-oc-accent-1-50"
               >
-                {{ customer.currency }}
+                {{ customer.currency?.toUpperCase() }}
               </span>
             </div>
             <span v-if="isBeneficiary" class="text-sm text-oc-text-400">
