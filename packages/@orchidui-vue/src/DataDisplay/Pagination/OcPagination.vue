@@ -22,6 +22,9 @@ const props = defineProps({
 defineEmits({
   "update:modelValue": [],
 });
+
+const showPaginationControls = computed(() => props.maxPage > 1);
+
 const pagination = computed(() => {
   let totalVisible = Number(props.totalVisible);
   if (totalVisible <= 3 && props.maxPage > totalVisible) {
@@ -69,7 +72,7 @@ const pagination = computed(() => {
 </script>
 
 <template>
-  <div class="w-full items-center flex relative">
+  <div v-if="showPaginationControls" class="w-full items-center flex relative mb-4">
     <div class="flex items-center gap-x-6">
       <PrevNext
         :disabled="modelValue <= 1"
