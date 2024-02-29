@@ -2,7 +2,11 @@
 import { ref, reactive, onMounted, computed } from "vue";
 import { Icon, SidebarSubmenu, Dropdown } from "@/orchidui";
 
-const emit = defineEmits(["changeExpanded", "click:sidebar-icon"]);
+const emit = defineEmits([
+  "changeExpanded",
+  "click:sidebar-icon",
+  "changeExpandedMenus",
+]);
 
 const props = defineProps({
   class: {
@@ -30,6 +34,8 @@ const expandMenu = (id) => {
   } else {
     state.expanded = state.expanded.filter((menuId) => menuId !== id);
   }
+
+  emit("changeExpandedMenus", state.expanded);
 };
 
 const changeExpanded = () => {
