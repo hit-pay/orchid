@@ -31,7 +31,7 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  isReadonly: {
+  isReadOnly: {
     type: Boolean,
     default: false,
   },
@@ -132,7 +132,7 @@ const isPasswordInput = computed(() => props.inputType === "password");
 <template>
   <BaseInput
     :label="isInlineLabel ? '' : label"
-    :labelClass="labelClass"
+    :label-class="labelClass"
     :hint="hint"
     :error-message="errorMessage"
     :is-required="isRequired"
