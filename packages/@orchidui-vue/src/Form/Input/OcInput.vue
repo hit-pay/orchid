@@ -132,7 +132,7 @@ const isPasswordInput = computed(() => props.inputType === "password");
 <template>
   <BaseInput
     :label="isInlineLabel ? '' : label"
-    :labelClass="labelClass"
+    :label-class="labelClass"
     :hint="hint"
     :error-message="errorMessage"
     :is-required="isRequired"
