@@ -31,7 +31,7 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  isReadOnly: {
+  isReadonly: {
     type: Boolean,
     default: false,
   },
