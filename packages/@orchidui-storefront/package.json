@@ -1,6 +1,6 @@
 {
   "name": "@orchidui/storefront",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "type": "module",
   "scripts": {
     "dev": "vite dev",
@@ -26,7 +26,7 @@
     ".": {
       "import": "./dist/index.js"
     },
-    "ui": {
+    "./ui": {
       "import": "./dist/ui.js"
     }
   },
