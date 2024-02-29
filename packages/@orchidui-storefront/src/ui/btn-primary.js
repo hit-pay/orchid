@@ -1,5 +1,5 @@
-const Template = `<button>
+const template = /*html*/`<button>
     {label}
     </button>`
-    export default Template
+export default template
     
