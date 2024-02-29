@@ -12,7 +12,7 @@ const Template = /*html*/ `
         <div class="font-bold">
             {product.price}
         </div>
-        <s-btn-primary class="w-full" label="Add to cart" />
+        <s-btn-primary class="w-full" label="Add to cart" @click="addToCart(product.id)" />
     </div>
 </div>`;
 export default Template;

@@ -44,6 +44,9 @@ customElements.define(
       });
       return {
         product,
+        addToCart: () => {
+          console.log("add to cart");
+        },
       };
     },
     template: ProductCardTemplate,
