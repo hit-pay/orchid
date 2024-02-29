@@ -23,6 +23,7 @@ const props = defineProps({
     default: "default",
   },
 });
+defineEmits(["addition-click"]);
 const isPressed = ref(false);
 const isIconOnly = computed(
   () => (props.leftIcon || props.rightIcon) && !props.label,
@@ -152,6 +153,7 @@ const iconSize = computed(() => ({
       v-if="isAdditionalArea && !isTransparent"
       class="border-y border-r flex cursor-pointer items-center justify-center oc-btn-add-area px-[6px] py-3 rounded-r-[inherit]"
       :class="[additionalAreaSize[size], variant]"
+      @click.stop="$emit('addition-click')"
     >
       <slot name="additional-content">
         <Icon

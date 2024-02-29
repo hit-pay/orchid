@@ -23,6 +23,7 @@ const props = defineProps({
   isFilterable: Boolean,
   isAsynchronousSearch: Boolean,
   isDisabled: Boolean,
+  isReadOnly: Boolean,
   isCheckboxes: Boolean,
   isSelectAll: Boolean,
   isAddNew: Boolean,
@@ -217,13 +218,13 @@ onMounted(() => {
   >
     <Dropdown
       v-model="isDropdownOpened"
-      class="w-full"
+      class="w-full bg-white"
       :distance="4"
       popper-class="w-full"
       placement="bottom-end"
       :popper-style="{ maxWidth: `${maxPopperWidth}px` }"
       :popper-options="popperOptions"
-      :is-disabled="isDisabled"
+      :is-disabled="isDisabled || isReadOnly"
     >
       <div
         class="border min-h-[36px] w-full px-3 flex justify-between items-center cursor-pointer gap-x-3 rounded"
