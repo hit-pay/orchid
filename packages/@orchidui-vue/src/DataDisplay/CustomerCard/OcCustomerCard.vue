@@ -82,7 +82,9 @@ const emit = defineEmits(["addCustomer", "editCustomer", "closeCustomer"]);
         >
           <ListDetail
             label="Phone"
-            :content="customer?.phone_number ? `${customer.phone_number}` : '-'"
+            :content="
+              customer?.phone_number ? `+${customer.phone_number}` : '-'
+            "
           />
           <ListDetail
             v-if="isBeneficiary"
