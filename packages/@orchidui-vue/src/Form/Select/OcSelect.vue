@@ -141,6 +141,10 @@ const localValueOption = computed(() => {
 });
 
 const selectOption = (option) => {
+  if (option.isDisabled) {
+    return;
+  }
+
   let result;
 
   if (props.multiple) {
@@ -326,6 +330,7 @@ onMounted(() => {
                 :key="option.value"
                 :label="option.label"
                 :sub-label="option.subLabel"
+                :is-disabled="option.isDisabled"
                 :is-checkboxes="isCheckboxes"
                 :is-selected="
                   multiple
