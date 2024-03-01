@@ -3,7 +3,6 @@ import { Chip, PrimaryActions } from "@/orchidui";
 import OcTitle from "@/orchidui/Elements/PageTitle/OcTitle.vue";
 import BalanceOverview from "./BalanceType/OcBalanceOverview.vue";
 import DynamicType from "./DynamicType/OcDynamicType.vue";
-import { onMounted, useSlots } from "vue";
 
 const props = defineProps({
   mainLink: { type: String, default: "" },
