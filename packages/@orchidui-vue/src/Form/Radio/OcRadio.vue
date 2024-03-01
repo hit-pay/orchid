@@ -43,7 +43,7 @@ defineEmits({
         '!text-oc-text-300': isDisabled,
         'bg-gray-200': isDisabled && isButtonVariant,
         '!border-oc-error': errorMessage && isButtonVariant,
-        'radio-button__label--button border-gray-200 border py-3 px-5 rounded-sm':
+        'radio-button__label--button border-gray-200 border py-3 px-5 rounded':
           isButtonVariant,
       }"
     >
