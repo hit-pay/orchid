@@ -26,13 +26,15 @@ const entities = files.map((file) => {
 const entries = Object.fromEntries(entities);
 
 export default defineConfig({
-  plugins: [vue({
-    template: {
-      compilerOptions: {
-        isCustomElement: tag => tag.startsWith('s-')
-      }
-    }
-  })],
+  plugins: [vue(
+  //   {
+  //   template: {
+  //     compilerOptions: {
+  //       isCustomElement: tag => tag.startsWith('s-')
+  //     }
+  //   }
+  // }
+  )],
   resolve: {
     alias: {
       'vue': 'vue/dist/vue.esm-bundler.js',

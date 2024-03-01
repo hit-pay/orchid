@@ -13,6 +13,8 @@ const Template = /*html*/ `
             {product.price}
         </div>
         <s-btn-primary class="w-full" label="Add to cart" @click="addToCart(product.id)" />
+        <span>{state?.cart}</span>
+
     </div>
 </div>`;
 export default Template;
