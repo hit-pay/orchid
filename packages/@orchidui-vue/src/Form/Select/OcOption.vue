@@ -10,6 +10,7 @@ defineProps({
   isPartial: Boolean,
   hasChildren: Boolean,
   showChildren: Boolean,
+  isDisabled: Boolean,
 });
 </script>
 
@@ -17,7 +18,12 @@ defineProps({
   <div class="w-full flex flex-wrap relative">
     <div
       class="w-full p-3 flex items-center text-oc-text-400 justify-between cursor-pointer hover:bg-oc-accent-1-50 gap-x-3 rounded-sm"
-      :class="isSelected && !isCheckboxes && 'bg-oc-accent-1-50'"
+      :class="{
+        'bg-oc-accent-1-50': isSelected && !isCheckboxes,
+        'opacity-50': isDisabled,
+        'hover:bg-white': isDisabled,
+        'cursor-default': isDisabled,
+      }"
       @click="$emit('select')"
     >
       <Checkbox
