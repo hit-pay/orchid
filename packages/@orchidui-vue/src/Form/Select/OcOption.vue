@@ -20,9 +20,7 @@ defineProps({
       class="w-full p-3 flex items-center text-oc-text-400 justify-between cursor-pointer hover:bg-oc-accent-1-50 gap-x-3 rounded-sm"
       :class="{
         'bg-oc-accent-1-50': isSelected && !isCheckboxes,
-        'opacity-50': isDisabled,
-        'hover:bg-white': isDisabled,
-        'cursor-default': isDisabled,
+        'opacity-50 hover:bg-white !cursor-default': isDisabled,
       }"
       @click="$emit('select')"
     >
