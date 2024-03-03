@@ -1,0 +1,37 @@
+{
+  "name": "@orchidui/storefront",
+  "version": "0.0.16",
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "publish:storefront": "npm run build && npm version patch && npm publish --access public",
+    "update-version": "npm version patch"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.2.3",
+    "fast-glob": "^3.3.1",
+    "vite": "^4.4.5",
+    "vue": "^3.3.4"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hit-pay/orchid.git",
+    "directory": "packages/storefront"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    },
+    "./ui": {
+      "import": "./dist/ui.js"
+    }
+  },
+  "module": "./dist/index.js",
+  "files": [
+    "./dist"
+  ]
+}

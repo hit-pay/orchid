@@ -3,7 +3,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/orchidui": ["packages/@orchidui-vue/src/*"]
+      "@/orchidui": ["packages/vue/src/*"]
     }
   }
 }
