@@ -1,15 +1,22 @@
 <template>
-  <div>
+  <div class="flex">
     <textarea 
-    class="m-8 border-3 border-purple-100"
-    @input="onUpdateTemplate" 
+    class="w-full m-8 border-2 border-purple-800"
+    rows="20"
+    @keyup="onUpdateTemplate('SProductCard', $event)" 
+    
+    >{{ Templates['SProductCard'] }}</textarea>
+    <textarea 
+    class="w-full m-8 border-2 border-purple-800"
+    rows="5"
+    @keyup="onUpdateTemplate('SBtnPrimary',$event)" 
     
     >{{ Templates['SBtnPrimary'] }}</textarea>
   </div>
 </template>
 <script setup>
 import { Templates, updateTemplate } from '@/app'
-const onUpdateTemplate = ($e) => {
-  updateTemplate('SBtnPrimary', $e.target.value)
+const onUpdateTemplate = (name, $e) => {
+  updateTemplate(name,$e.target.value)
 }
 </script>
