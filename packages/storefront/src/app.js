@@ -1,7 +1,7 @@
 import { createApp } from "vue";
 import App from "@/App.vue";
 import "@/scss/tailwind.scss";
-import { defineAsyncComponent } from "vue";
+import { defineAsyncComponent, ref } from "vue";
 import { components  } from './components'
 
 
@@ -11,11 +11,22 @@ const convertToVueTemplate = (string) => {
 };
 
 const path = "/components/"
-const action = {
+
+
+const state = ref({
+  styles: {
+    bg: '#FFFFFF'
+  },
+  general: {}
+})
+
+const action = ref({
   addToCart: () => {
     console.log('add to cart')
   }
-}
+})
+
+
 
 const createVueApp = () => {
   const app = createApp(App);
@@ -29,7 +40,8 @@ const createVueApp = () => {
               props: comp.props,
               setup() {
                 return {
-                  action
+                  state: state.value,
+                  action: action.value
                 };
               },
               template: convertToVueTemplate(template),

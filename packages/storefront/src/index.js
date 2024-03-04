@@ -1,6 +1,5 @@
 // Storefront
 class Storefront {
-    
     constructor(id) {
         this.businessId = id
     }
@@ -13,5 +12,4 @@ class Storefront {
         console.log(`redirect ${page}`)
     }
 }
-
 export default Storefront

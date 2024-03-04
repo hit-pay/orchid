@@ -1,6 +1,6 @@
-const components = [
+const common = [
     {
-      "name": "s-btn-primary",
+      "name": "s-btn",
       "props": {
         label: String,
       },
@@ -8,20 +8,19 @@ const components = [
     {
       "name": "s-product-card",
       "props": {
-        state: Object,
-        product: {
-          type: Object,
-          default: () => ({
-            id: 1,
-            name: "item 1",
-            price: 100,
-            image: "https://via.placeholder.com/150",
-            has_variations: true,
-            variations_count: 4,
-          })
-        }
+        product: Object
       }
     }
   ]
+  const sections = [
+    {
+      "name": "s-banner-promotion",
+      "props": {
+        text: String,
+        isClosable: Boolean
+      },
+    }
+  ]
 
+  const components = [...common, ...sections]
   export { components }
