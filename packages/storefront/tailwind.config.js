@@ -4,8 +4,7 @@ export default {
   content: [
     "./src/**/*.{js,vue}",
     "./index.html",
-    "./theme/btn-primary.html",
-    "./theme/product-card.html",
+    "./components/*.{html}",
   ],
   theme: {
     extend: {},

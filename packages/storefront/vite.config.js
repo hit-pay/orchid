@@ -16,8 +16,8 @@ export default defineConfig({
       input: {
         'theme': resolve(__dirname, 'theme.css'), 
         'index': resolve(__dirname, 'index.html'), 
-        'btn-primary': resolve(__dirname, 'theme/btn-primary.html'), 
-        'product-card': resolve(__dirname, 'theme/product-card.html'), 
+        'btn-primary': resolve(__dirname, 'components/btn-primary.html'), 
+        'product-card': resolve(__dirname, 'components/product-card.html'), 
       },
       output: {
         entryFileNames: `[name].js`,
