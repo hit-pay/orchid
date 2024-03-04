@@ -25,9 +25,6 @@
   "exports": {
     ".": {
       "import": "./dist/index.js"
-    },
-    "./ui": {
-      "import": "./dist/ui.js"
     }
   },
   "module": "./dist/index.js",

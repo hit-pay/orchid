@@ -2,33 +2,29 @@ import { createApp , ref} from "vue";
 import App from "@/App.vue";
 import "@/scss/tailwind.scss";
 
-// Dynamic UI Templates
-// html only in orchid theme builder : will get html data from props laravel blade
-import { BtnPrimary, ProductCard } from "./ui.js";
-// s-btn-primary
-const BtnPrimaryTemplate = BtnPrimary.replaceAll("{", "{{").replaceAll(
-  "}",
-  "}}"
-);
-// s-product-card
-const ProductCardTemplate = ProductCard.replaceAll("{", "{{").replaceAll(
-  "}",
-  "}}"
-);
-
-
-
+const mountEl = document.querySelector("#app");
+const props = { ...mountEl.dataset };
+const components = JSON.parse(props.components)
+const convertToVueTemplate = (string) => {
+  return string.replaceAll("{", "{{").replaceAll(
+    "}",
+    "}}"
+  );
+}
+const BtnPrimaryTemplate = convertToVueTemplate(components['SBtnPrimary'])
+const ProductCardTemplate = convertToVueTemplate(components['SProductCard'])
 const app = createApp(App);
 
+// DEMO rendering components
+
+
+// setup all props, methods. emit
 const SBtnPrimary = {
     props: {
       label: String,
     },
     template: BtnPrimaryTemplate,
 }
-
-app.component("SBtnPrimary", SBtnPrimary);
-
 const SProductCard =  {
     props: {
       state: Object,
@@ -51,5 +47,9 @@ const SProductCard =  {
     },
     template: ProductCardTemplate,
 }
+
+
+// register components
 app.component("SProductCard",SProductCard);
+app.component("SBtnPrimary", SBtnPrimary);
 app.mount("#app");
