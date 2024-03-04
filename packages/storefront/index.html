@@ -7,14 +7,6 @@
   </head>
   <body>
     <div id="app"></div>
-    <script>
-    // this component render from laravel blade : ssr
-     const allCustomizeTemplate ={
-          "SBtnPrimary": '<button>{label}<button>',
-          'SProductCard': '<div>product card</div>'
-      }
-      document.querySelector('#app').setAttribute('data-components',  JSON.stringify(allCustomizeTemplate))
-    </script>
     <script type="module" src="/src/app.js"></script>
   </body>
 </html>
