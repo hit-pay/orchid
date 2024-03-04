@@ -13,6 +13,7 @@ defineProps({
   features: {
     type: Array,
     default: () => [],
+    validator: (features) => features.every((feature) => 'title' in feature && 'icon' in feature),
   },
 });
 </script>
