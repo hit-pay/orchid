@@ -29,6 +29,10 @@ const props = defineProps({
   overviewTabs: { type: Array, default: () => [] },
   secondaryButtonProps: { type: Object, default: null },
   moreButtonProps: { type: Object, default: null },
+  dropdownProps: {
+    type: Object,
+    default: () => ({}),
+  },
   dropdownItems: { type: Array, default: () => [] },
   paymentMethods: { type: Array, default: () => [] },
   additionalStyling: { type: String, default: "" },
@@ -113,6 +117,7 @@ const copyLink = async () => {
       :container-class="balanceContainerClass"
       :payment-methods="paymentMethods"
       :dropdown-items="dropdownItems"
+      :dropdown-props="dropdownProps"
       :class="additionalStyling"
       :is-loading="isLoading"
       @change-tab="$emit('changeTab', $event)"

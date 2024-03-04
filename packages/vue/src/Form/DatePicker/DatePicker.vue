@@ -1,12 +1,12 @@
 <script setup>
-import { Dropdown, Calendar, Input } from '@/orchidui';
-import { computed, ref } from 'vue';
-import customParseFormat from 'dayjs/plugin/customParseFormat'
-import dayjs from 'dayjs';
+import { Dropdown, Calendar, Input } from "@/orchidui";
+import { computed, ref } from "vue";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+import dayjs from "dayjs";
 
 // Getting invalid date while using 'DD/MM/YYYY' format
 // https://github.com/iamkun/dayjs/issues/1786
-dayjs.extend(customParseFormat)
+dayjs.extend(customParseFormat);
 
 const emit = defineEmits(["update:modelValue", "resetCalendar"]);
 const props = defineProps({
@@ -74,13 +74,11 @@ const props = defineProps({
 
 const isDropdownOpened = ref(false);
 
-const isRangeInput = computed(() => props.type === 'range');
+const isRangeInput = computed(() => props.type === "range");
 
 const formattedDate = computed(() => {
   if (!isRangeInput.value) {
-    return props.modelValue
-      ? dayjs(props.modelValue, props.dateFormat)
-      : "";
+    return props.modelValue ? dayjs(props.modelValue, props.dateFormat) : "";
   }
 
   if (props.modelValue && props.modelValue[0]) {
@@ -149,9 +147,7 @@ const defaultDateRange = () => [dayjs().toDate(), dayjs().toDate()];
           <Input
             :label="`${label} ${minLabel}`"
             :model-value="
-              formattedDate[0]
-                ? formattedDate[0].format(dateFormat)
-                : ''
+              formattedDate[0] ? formattedDate[0].format(dateFormat) : ''
             "
             icon="calendar"
             :placeholder="placeholder"
@@ -163,9 +159,7 @@ const defaultDateRange = () => [dayjs().toDate(), dayjs().toDate()];
           <Input
             :label="`${label} ${maxLabel}`"
             :model-value="
-              formattedDate[1]
-                ? formattedDate[1].format(dateFormat)
-                : ''
+              formattedDate[1] ? formattedDate[1].format(dateFormat) : ''
             "
             icon="calendar"
             :placeholder="placeholder"
@@ -187,10 +181,7 @@ const defaultDateRange = () => [dayjs().toDate(), dayjs().toDate()];
         :model-value="
           isRangeInput
             ? modelValue && modelValue[0]
-              ? [
-                  formattedDate[0].toDate(),
-                  formattedDate[1].toDate(),
-                ]
+              ? [formattedDate[0].toDate(), formattedDate[1].toDate()]
               : defaultDateRange()
             : formattedDate
               ? formattedDate.toDate()

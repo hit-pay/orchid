@@ -23,6 +23,7 @@ const props = defineProps({
   isFilterable: Boolean,
   isAsynchronousSearch: Boolean,
   isDisabled: Boolean,
+  isReadonly: Boolean,
   isCheckboxes: Boolean,
   isSelectAll: Boolean,
   isAddNew: Boolean,
@@ -90,8 +91,10 @@ const filterableOptions = computed(() => {
 
   for (const option of props.options) {
     if (option.values) {
-      const filteredGroup = option.values.filter((subOption) =>
-        subOption.label.toLowerCase().includes(query.value.toLowerCase()),
+      const filteredGroup = option.values.filter(
+        (subOption) =>
+          subOption.label?.toLowerCase().includes(query.value.toLowerCase()) ||
+          subOption.subLabel?.toLowerCase().includes(query.value.toLowerCase()),
       );
 
       if (filteredGroup.length > 0) {
@@ -101,7 +104,10 @@ const filterableOptions = computed(() => {
         });
       }
     } else {
-      if (option.label.toLowerCase().includes(query.value.toLowerCase())) {
+      if (
+        option.label?.toLowerCase().includes(query.value.toLowerCase()) ||
+        option.subLabel?.toLowerCase().includes(query.value.toLowerCase())
+      ) {
         filteredOptions.push(option);
       }
     }
@@ -135,6 +141,10 @@ const localValueOption = computed(() => {
 });
 
 const selectOption = (option) => {
+  if (option.isDisabled) {
+    return;
+  }
+
   let result;
 
   if (props.multiple) {
@@ -217,13 +227,13 @@ onMounted(() => {
   >
     <Dropdown
       v-model="isDropdownOpened"
-      class="w-full"
+      class="w-full bg-white"
       :distance="4"
       popper-class="w-full"
       placement="bottom-end"
       :popper-style="{ maxWidth: `${maxPopperWidth}px` }"
       :popper-options="popperOptions"
-      :is-disabled="isDisabled"
+      :is-disabled="isDisabled || isReadonly"
     >
       <div
         class="border min-h-[36px] w-full px-3 flex justify-between items-center cursor-pointer gap-x-3 rounded"
@@ -234,24 +244,26 @@ onMounted(() => {
         }"
       >
         <div v-if="multiple" class="flex flex-wrap gap-2 overflow-hidden">
-          <Chip
-            v-for="option in maxVisibleOptions
-              ? localValueOption.slice(0, maxVisibleOptions)
-              : localValueOption"
-            :key="option.value"
-            closable
-            :variant="option.variant"
-            :label="option.label"
-            v-bind="chipProps"
-            should-truncate-chip
-            @remove="removeOption(option.value)"
-          />
-          <Chip
-            v-if="
-              maxVisibleOptions && localValueOption.length > maxVisibleOptions
-            "
-            :label="`+${localValueOption.length - maxVisibleOptions}`"
-          />
+          <slot name="selection">
+            <Chip
+              v-for="option in maxVisibleOptions
+                ? localValueOption.slice(0, maxVisibleOptions)
+                : localValueOption"
+              :key="option.value"
+              closable
+              :variant="option.variant"
+              :label="option.label"
+              v-bind="chipProps"
+              should-truncate-chip
+              @remove="removeOption(option.value)"
+            />
+            <Chip
+              v-if="
+                maxVisibleOptions && localValueOption.length > maxVisibleOptions
+              "
+              :label="`+${localValueOption.length - maxVisibleOptions}`"
+            />
+          </slot>
           <span v-if="localValueOption.length === 0" class="text-oc-text-300">{{
             placeholder
           }}</span>
@@ -318,6 +330,7 @@ onMounted(() => {
                 :key="option.value"
                 :label="option.label"
                 :sub-label="option.subLabel"
+                :is-disabled="option.isDisabled"
                 :is-checkboxes="isCheckboxes"
                 :is-selected="
                   multiple

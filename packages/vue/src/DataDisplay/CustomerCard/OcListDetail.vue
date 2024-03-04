@@ -1,7 +1,8 @@
 <script setup>
 import { Icon, CopyTooltip } from "@/orchidui";
+import { computed } from "vue";
 
-defineProps({
+const props = defineProps({
   label: {
     type: String,
     default: "",
@@ -15,14 +16,21 @@ defineProps({
     default: "small",
     validator: (val) => ["small", "big"].includes(val),
   },
+  alignment: {
+    type: String,
+    default: "horizontal",
+    validator: (val) => ["horizontal", "vertical"].includes(val),
+  },
 });
+
+const isVertical = computed(() => props.alignment === "vertical");
 </script>
 
 <template>
-  <div class="flex gap-x-5 text-sm group">
+  <div class="flex gap-x-5 text-sm group" :class="{ 'flex-col': isVertical }">
     <div
       class="flex gap-x-2 items-center shrink-0 text-oc-text-400"
-      :class="{ 'w-[80px]': variant === 'small' }"
+      :class="{ 'w-[80px]': variant === 'small' && !isVertical }"
     >
       {{ label }}
 
@@ -39,6 +47,6 @@ defineProps({
       </CopyTooltip>
     </div>
 
-    <span>{{ content }}</span>
+    <span :class="{ 'text-base font-medium': isVertical }">{{ content }}</span>
   </div>
 </template>

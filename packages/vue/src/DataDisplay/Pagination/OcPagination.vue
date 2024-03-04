@@ -75,10 +75,12 @@ const pagination = computed(() => {
         :disabled="modelValue <= 1"
         :size="size"
         @click="
-          $emit(
-            'update:modelValue',
-            modelValue > 1 ? modelValue - 1 : modelValue,
-          )
+          modelValue > 1
+            ? $emit(
+                'update:modelValue',
+                modelValue > 1 ? modelValue - 1 : modelValue,
+              )
+            : ''
         "
       />
       <div class="hidden md:flex items-center gap-x-3">
@@ -105,10 +107,12 @@ const pagination = computed(() => {
         :size="size"
         :disabled="modelValue >= maxPage"
         @click="
-          $emit(
-            'update:modelValue',
-            modelValue < Number(maxPage) ? modelValue + 1 : Number(maxPage),
-          )
+          modelValue < maxPage
+            ? $emit(
+                'update:modelValue',
+                modelValue < Number(maxPage) ? modelValue + 1 : Number(maxPage),
+              )
+            : ''
         "
       />
     </div>

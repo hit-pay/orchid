@@ -28,6 +28,10 @@ defineProps({
     default: () => [],
   },
   isLoading: Boolean,
+  dropdownProps: {
+    type: Object,
+    default: () => ({}),
+  },
 });
 
 defineEmits({
@@ -57,6 +61,7 @@ defineEmits({
       :secondary-button-props="secondaryButtonProps"
       :payment-methods="paymentMethods"
       :dropdown-items="dropdownItems"
+      :dropdown-props="dropdownProps"
     />
 
     <Overview

@@ -31,10 +31,12 @@ export const Default = {
         label: "Option 2",
         subLabel: "sub label of Option 2",
         value: 2,
+        isDisabled: true,
       },
       {
         label: "Option 3",
         value: 3,
+        isDisabled: true,
       },
       {
         label: "Option 4",
@@ -43,56 +45,56 @@ export const Default = {
       {
         label: "Option 1",
         subLabel: "sub label of Option 1",
-        value: 1,
+        value: 5,
       },
       {
         label: "Option 2",
         subLabel: "sub label of Option 2",
-        value: 2,
+        value: 6,
       },
       {
         label: "Option 3",
-        value: 3,
+        value: 7,
       },
       {
         label: "Option 4",
-        value: 4,
+        value: 8,
       },
       {
         label: "Option 1",
         subLabel: "sub label of Option 1",
-        value: 1,
+        value: 9,
       },
       {
         label: "Option 2",
         subLabel: "sub label of Option 2",
-        value: 2,
+        value: 10,
       },
       {
         label: "Option 3",
-        value: 3,
+        value: 11,
       },
       {
         label: "Option 4",
-        value: 4,
+        value: 12,
       },
       {
         label: "Option 1",
         subLabel: "sub label of Option 1",
-        value: 1,
+        value: 13,
       },
       {
         label: "Option 2",
         subLabel: "sub label of Option 2",
-        value: 2,
+        value: 14,
       },
       {
         label: "Option 3",
-        value: 3,
+        value: 15,
       },
       {
         label: "Option 4",
-        value: 4,
+        value: 16,
       },
     ],
     isFilterable: true,

@@ -15,12 +15,18 @@ defineProps({
     type: Array,
     default: () => [],
   },
+  dropdownProps: {
+    type: Object,
+    default: () => ({}),
+  },
 });
 const isOpen = ref(false);
 </script>
 
 <template>
-  <div class="flex justify-between md:flex-row flex-col gap-y-3 md:gap-y-0">
+  <div
+    class="flex justify-between md:flex-row flex-col gap-y-3 gap-x-4 md:gap-y-0"
+  >
     <Skeleton v-if="isLoading" class="h-[20px] w-[322px] rounded-sm" />
     <PaymentMethods
       v-if="!isLoading && paymentMethods.length"
@@ -28,12 +34,13 @@ const isOpen = ref(false);
     />
 
     <Skeleton v-if="isLoading" class="h-[20px] w-[168px] rounded-sm" />
-    <div v-else class="flex gap-x-3">
+    <div v-else class="flex shrink-0 gap-x-3">
       <Dropdown
         v-model="isOpen"
         :popper-options="{ strategy: 'fixed' }"
         placement="bottom"
         class="text-sm"
+        v-bind="dropdownProps"
       >
         <Button
           left-icon="dots-vertical"
