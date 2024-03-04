@@ -483,9 +483,16 @@ const displayFilterData = computed(() => {
         <slot name="empty" />
       </template>
     </Table>
-    <div class="flex gap-3 items-center">
+    <div
+      class="flex gap-3 items-center"
+      :class="
+        paginationOption && paginationOption.last_page === 1
+          ? 'justify-end'
+          : ''
+      "
+    >
       <Pagination
-        v-if="paginationOption"
+        v-if="paginationOption && paginationOption.last_page !== 1"
         v-model="currentPage"
         class="justify-center"
         :max-page="paginationOption.last_page"
