@@ -4,7 +4,12 @@
   </div>
 </template>
 <script setup>
-defineProps({
-  state: Object,
-});
+import { ref } from "vue"
+
+const state = ref({
+  styles: {
+    bg: '#FFFFFF'
+  },
+  general: {}
+})
 </script>

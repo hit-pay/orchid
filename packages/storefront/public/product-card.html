@@ -1,17 +1,18 @@
-<div class="border border-black">
-    <div >
+<div 
+    class="border border-black" :style="`background-color: ${state.styles.bg}`">
+    <div>
         <img :src="product.image" :alt="product.name" /></div>
              <div>
         <div class="font-bold">
-            {product.name}
+            {#product.name#}
         </div>
         <div v-if="product.has_variations" class="h-[19px]">
-            {product.variations_count} variants
+            {#product.variations_count#} variants
         </div>
         <div class="font-bold">
-            {product.price}
+            {#product.price#}
         </div>
         <s-btn-primary class="w-full" label="Add to cart" @click="addToCart(product.id)" />
-        <span>{state?.cart}</span>
+        <span>{#state?.cart#}</span>
     </div>
 </div>

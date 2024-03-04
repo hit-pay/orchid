@@ -5,8 +5,8 @@ import "@/scss/tailwind.scss";
 import { defineAsyncComponent } from 'vue'
 const Templates = ref([])
 const convertToVueTemplate = (string) => {
-  return string.replaceAll("{", "{{").replaceAll(
-    "}",
+  return string.replaceAll("{#", "{{").replaceAll(
+    "#}",
     "}}"
   );
 }
