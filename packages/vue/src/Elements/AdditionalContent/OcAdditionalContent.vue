@@ -90,20 +90,8 @@ const copyLink = async () => {
       @add-customer="$emit('addCustomer')"
       @edit-customer="$emit('editCustomer', $event)"
     >
-      <template v-for="box in boxes" #[box.slot]="{ data }">
-        <slot :name="box.slot" :data="data"></slot>
-      </template>
-
-      <template v-for="box in boxes" #[box.infoTooltipSlot]="{ data }">
-        <slot :name="box.infoTooltipSlot" :data="data"></slot>
-      </template>
-
-      <template v-if="$slots['customer-leading']" #customer-leading>
-        <slot name="customer-leading"></slot>
-      </template>
-
-      <template v-if="$slots['customer-bottom']" #customer-bottom>
-        <slot name="customer-bottom"></slot>
+      <template v-for="(_, name) in $slots" #[name]="slotData">
+        <slot :name="name" v-bind="slotData" />
       </template>
     </DynamicType>
 
