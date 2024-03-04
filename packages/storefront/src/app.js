@@ -3,27 +3,29 @@ import VueApp from "@/App.vue";
 import "@/scss/tailwind.scss";
 import { defineAsyncComponent, ref } from "vue";
 import { components } from "./components";
-
+import storefront from "./storefront.json"
+import products from "./products-home.json"
 const convertToVueTemplate = (string) => {
   const result = string.replaceAll("{#", "{{").replaceAll("#}", "}}").replace('<script type="module" src="/@vite/client"></script>','');
   return result;
 };
-
 const path = "/components/";
+let homeState = {}
+
+storefront.store_design.sections.forEach((s) => {
+  if(s.group === 'sections'){
+    homeState[s.key] = {
+      products: [],
+      meta: {}
+    }
+  }
+})
 
 const state = ref({
-  styles: {
-    // store design styles settings
-  },
-  general: {
-    // store design general settings
-  },
-  home: {
-    // ['section'] : { stateName: value }
-  },
-  product: {
-    // product object
-  },
+  business: storefront.business,
+  design: storefront.store_design,
+  home: homeState,
+  product: {},
   search: {
     meta: {
       keyword: '',
@@ -31,7 +33,7 @@ const state = ref({
       page: 1,
       per_page: 10
     },
-    products: {}
+    products: products
   }
 });
 
@@ -42,7 +44,8 @@ const action = ref({
   viewPage: (path) => {
     console.log("View page path :", path)
   },
-  getProducts: (from, category, ids) => {
+  getProducts: (section, from, category, ids) => {
+    console.log(section, from, category, ids)
     // 1. featured
     // 2. all products
     // 3. category
