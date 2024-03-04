@@ -4,6 +4,7 @@ export * from "./DataDisplay/Overview/OcOverview.js";
 export * from "./DataDisplay/CustomerCard/OcCustomerCard.js";
 export * from "./DataDisplay/TransferSummary/OcTransferSummary.js";
 export * from "./DataDisplay/ListItem/OcListItem.js";
+export * from "./DataDisplay/ListDetail/OcListDetail.js";
 export * from "./DataDisplay/InfoCard/OcInfoCard.js";
 export * from "./DataDisplay/ProgressBar/OcProgressBar.js";
 
