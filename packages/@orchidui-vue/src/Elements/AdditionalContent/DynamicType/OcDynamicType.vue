@@ -38,7 +38,11 @@ defineEmits(["addCustomer", "editCustomer"]);
           is-transparent
           :title="field.title"
           :content="field.content"
-        />
+        >
+          <template v-if="field.slot && $slots[field.slot]" #content>
+            <slot :name="field.slot" :data="field.content" />
+          </template>
+        </OverviewItem>
       </template>
       <div v-if="box.showInfo" class="p-2" :class="box.infoTooltipStyle">
         <Tooltip>
