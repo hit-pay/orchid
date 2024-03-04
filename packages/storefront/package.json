@@ -33,5 +33,9 @@
   "module": "./dist/index.js",
   "files": [
     "./dist"
-  ]
+  ],
+  "dependencies": {
+    "@vueuse/motion": "^2.1.0",
+    "vue3-carousel": "^0.3.1"
+  }
 }

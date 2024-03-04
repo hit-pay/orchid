@@ -22,9 +22,6 @@ const common = [
   },
   {
     name: "s-category-filter",
-    emits: {
-      changeCategoryId: []
-    }
   },
   {
     name: "s-product-card",
@@ -44,6 +41,9 @@ const sections = [
   },
   {
     name: "s-headers",
+  },
+  {
+    name: "s-products",
   },
 ];
 
