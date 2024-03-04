@@ -5,10 +5,11 @@ import "@/scss/tailwind.scss";
 import { defineAsyncComponent } from 'vue'
 const Templates = ref([])
 const convertToVueTemplate = (string) => {
-  return string.replaceAll("{#", "{{").replaceAll(
+  const result = string.replaceAll("{#", "{{").replaceAll(
     "#}",
     "}}"
   );
+  return result
 }
 
 let myVueApp = null;
@@ -43,8 +44,8 @@ const createVueApp = () => {
         })
       })
     }
-    
 })
+
   const ProductCardComponent = defineAsyncComponent(() => {
     if(Templates.value['SProductCard']){
       return new Promise((resolve) => {
@@ -107,24 +108,35 @@ const createVueApp = () => {
     }
   })
 
-
   app.component("SBtnPrimary", BtnPrimaryComponents);
   app.component("SProductCard", ProductCardComponent);
+
   app.mount("#app");
   myVueApp = app
+
+  app.config.errorHandler = (err, instance, info) => {
+    console.log(err, instance, info)
+    myVueApp.unmount()
+  }
 }
 
 const updateTemplate = (name, value) => {
   Templates.value[name] =  value
-  myVueApp.unmount()
+  reRenderVueApp()
+}
+
+const reRenderVueApp = () => {
+  if(myVueApp){
+    myVueApp.unmount()
+  }
+  document.getElementById('app').innerHTML = ""
   myVueApp = null
   createVueApp()
 }
 
 createVueApp()
+
 const editor = createApp(AppEditor)
 editor.mount("#editor")
 
-// export func
-
-export { Templates, updateTemplate }
+export { Templates, updateTemplate, reRenderVueApp }
