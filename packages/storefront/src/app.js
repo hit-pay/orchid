@@ -13,15 +13,46 @@ const path = "/components/";
 
 const state = ref({
   styles: {
-    bg: "#FFFFFF",
+    // store design styles settings
   },
-  general: {},
+  general: {
+    // store design general settings
+  },
+  home: {
+    // ['section'] : { stateName: value }
+  },
+  product: {
+    // product object
+  },
+  search: {
+    meta: {
+      keyword: '',
+      categories: [],
+      page: 1,
+      per_page: 10
+    },
+    products: {}
+  }
 });
 
 const action = ref({
   addToCart: () => {
     console.log("add to cart");
   },
+  viewPage: (path) => {
+    console.log("View page path :", path)
+  },
+  getProducts: (from, category, ids) => {
+    // 1. featured
+    // 2. all products
+    // 3. category
+    // 5. pick products ids
+    // api set state.home['seactionName'].products
+    // api set state.home['seactionName'].meta
+  },
+  searchProducts: () => {
+      // api set state.search.products
+  }
 });
 
 const app = createApp(VueApp);

@@ -11,11 +11,13 @@ export default defineConfig({
     },
   },
   build: {
+    minify: false,
     outDir: "dist",
     rollupOptions: {
       input: {
         theme: resolve(__dirname, "theme.css"),
         index: resolve(__dirname, "index.html"),
+        components: resolve(__dirname, "src/components.js"),
         // TODO : read all html in folder /components
         // common component
         "s-btn": resolve(__dirname, "/components/s-btn.html"),
