@@ -1,11 +1,11 @@
 import { createApp } from "vue";
-import App from "@/App.vue";
+import VueApp from "@/App.vue";
 import "@/scss/tailwind.scss";
 import { defineAsyncComponent, ref } from "vue";
 import { components } from "./components";
 
 const convertToVueTemplate = (string) => {
-  const result = string.replaceAll("{#", "{{").replaceAll("#}", "}}");
+  const result = string.replaceAll("{#", "{{").replaceAll("#}", "}}").replace('<script type="module" src="/@vite/client"></script>','');
   return result;
 };
 
@@ -24,34 +24,32 @@ const action = ref({
   },
 });
 
-const createVueApp = () => {
-  const app = createApp(App);
-  components.forEach((comp) => {
-    const newComponent = defineAsyncComponent(() => {
-      return new Promise((resolve, reject) => {
-        fetch(path + comp.name + ".html")
-          .then((r) => r.text())
-          .then((template) => {
-            const SProductCard = {
-              props: comp.props,
-              setup() {
-                return {
-                  state: state.value,
-                  action: action.value,
-                };
-              },
-              template: convertToVueTemplate(template),
-            };
-            resolve(SProductCard);
-          })
-          .catch(() => {
-            reject("component not found");
-          });
-      });
+const app = createApp(VueApp);
+components.forEach((comp, index) => {
+  const newComponent = defineAsyncComponent(() => {
+    return new Promise((resolve, reject) => {
+      fetch(path + comp.name + ".html")
+        .then((r) => r.text())
+        .then((template) => {
+          const SProductCard = {
+            props: comp.props,
+            setup() {
+              return {
+                state: state.value,
+                action: action.value,
+              };
+            },
+            template: convertToVueTemplate(template),
+          };
+          resolve(SProductCard);
+        })
+        .catch(() => {
+          reject("component not found");
+        });
     });
-    app.component(comp.name, newComponent);
   });
-  app.mount("#app");
-};
-
-createVueApp();
+  app.component(comp.name, newComponent);
+  if(index+1 === components.length){
+    app.mount("#app");
+  }
+});
