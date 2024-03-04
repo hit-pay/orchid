@@ -31,7 +31,7 @@ defineProps({
         <div
           v-for="feature in features"
           :key="feature.title"
-          class="rounded bg-white flex flex-col gap-2 p-4 items-center justify-center"
+          class="rounded bg-white flex flex-col gap-2 p-6 items-center justify-center"
         >
           <Icon :name="feature.icon" height="56" width="56" />
           <span class="text-sm font-medium">{{ feature.title }}</span>
