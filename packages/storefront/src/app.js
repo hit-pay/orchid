@@ -10,7 +10,7 @@ const createVueApp = () => {
   const app = createApp(App);
   const BtnPrimaryComponents = defineAsyncComponent(() => {
     return new Promise((resolve, reject) => {
-      fetch("/btn-primary.html")
+      fetch("/theme/btn-primary.html")
         .then((r) => r.text())
         .then((template) => {
           const SBtnPrimary = {
@@ -29,7 +29,7 @@ const createVueApp = () => {
 
   const ProductCardComponent = defineAsyncComponent(() => {
     return new Promise((resolve, reject) => {
-      fetch("/product-card.html")
+      fetch("/theme/product-card.html")
         .then((r) => r.text())
         .then((template) => {
           const SProductCard = {
