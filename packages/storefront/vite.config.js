@@ -14,8 +14,16 @@ export default defineConfig({
     outDir: "dist",
     rollupOptions: {
       input: {
+        'theme': resolve(__dirname, 'theme.css'), 
         'index': resolve(__dirname, 'index.html'), 
+        'btn-primary': resolve(__dirname, 'btn-primary.html'), 
+        'product-card': resolve(__dirname, 'product-card.html'), 
       },
+      output: {
+        entryFileNames: `[name].js`,
+        chunkFileNames: `[name].js`,
+        assetFileNames: `[name].[ext]`
+      }
     },
   },
 });
