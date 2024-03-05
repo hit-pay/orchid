@@ -18,6 +18,8 @@ defineProps({
 const isDropdownOpen = ref(false);
 
 const onDropdownItemClick = (action) => {
+  if (!action) return
+
   emit('dropdown-action', action)
   isDropdownOpen.value = false
 }
