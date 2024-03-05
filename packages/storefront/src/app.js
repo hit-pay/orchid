@@ -5,7 +5,9 @@ import { useStorefront } from "./storefront.js"
 import VueApp from "@/App.vue";
 import storefront from "./storefront.json"
 import products from "./products-home.json"
-
+import 'vue3-carousel/dist/carousel.css'
+import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
+import { MotionPlugin } from '@vueuse/motion'
 
 const convertToVueTemplate = (string) => {
   const result = string
@@ -52,7 +54,15 @@ components.forEach((comp, index) => {
     });
   });
   app.component(comp.name, newComponent);
+  
   if(index+1 === components.length){
+    app.component("SCarousel", Carousel)
+    app.component("SSlide", Slide)
+    app.component("SSlidePagination", Pagination)
+    app.component("SSlideNavigation", Navigation)
+
+    app.use(MotionPlugin)
+    
     app.mount("#app");
   }
 });

@@ -1,8 +1,9 @@
 {
   "name": "@orchidui/storefront",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "type": "module",
   "scripts": {
+    "preview": "vite preview --port 8080",
     "dev": "vite dev",
     "build": "vite build",
     "publish:storefront": "npm run build && npm version patch && npm publish --access public",

@@ -16,6 +16,18 @@
         </div>
     </nav>
     <div class="ml-auto">
-        <span>ASS ass</span>
+        <span>Arii</span>
     </div>
 </header>
+
+<div v-motion-pop-visible >
+    <s-carousel>
+        <s-slide v-for="slide in 10" :key="slide" >
+          <div class="bg-slate-400 min-h-[200px] w-full">{{ slide }}</div>
+        </s-slide>
+        <div slot="addons">
+            <s-slide-navigation />
+            <s-slide-pagination />
+        </div>
+    </s-carousel>
+</div>
