@@ -62,5 +62,8 @@
   "license": "MIT",
   "resolutions": {
     "rollup": "npm:@rollup/wasm-node"
+  },
+  "dependencies": {
+    "esbuild": "^0.20.1"
   }
 }
