@@ -1,1 +1,1 @@
-<!-- Vue rendering : Hitpay Themes Creator -->
+# Preview Online Store : Dummy Data

@@ -1,38 +1,41 @@
-import { defineAsyncComponent, createApp, ref } from "vue";
-import { components } from "./components.js";
+import { defineAsyncComponent, createApp, ref, computed } from "vue";
 import { useStorefront } from "./storefront.js"
 
-import VueApp from "@/App.vue";
-import storefront from "./storefront.json"
-import products from "./products-home.json"
-import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
 import { MotionPlugin } from '@vueuse/motion'
 
-const convertToVueTemplate = (string) => {
-  const result = string
-  // .replace('<script type="module" src="/@vite/client"></script>','');
-  return result;
-};
+import VueApp from "@/App.vue";
+import storefront from "./storefront-default-settings.json"
+import products from "./products-home.json"
 
-const path = ref("/default/")
+import 'vue3-carousel/dist/carousel.css'
+
+const mountEl = document.querySelector("#app");
+const props = { ...mountEl.dataset };
+const components = computed(() => JSON.parse(props.components))
+const pathDefault = ref("/default/")
+const path = ref(props.theme)
 
 const { business, sections, general, state, action, initialState, setSectionState } = useStorefront()
 
 initialState(storefront)
 
 setTimeout(() => {
+  // TODO :  create trigger from template
   setSectionState("product_list_1", "product", products)
 }, 1000)
 
 const app = createApp(VueApp);
-components.forEach((comp, index) => {
+components.value.forEach((comp, index) => {
   const newComponent = defineAsyncComponent(() => {
     return new Promise((resolve, reject) => {
-      fetch(path.value + comp.name + ".html")
+      let pathName = path.value
+      if(comp.theme === 'default'){
+          pathName = pathDefault.value
+      }
+      fetch(pathName + comp.name + ".html")
         .then((r) => r.text())
         .then((template) => {
-          console.log(general.value)
           const SComponent = {
             props: comp.props,
             setup() {
@@ -44,7 +47,7 @@ components.forEach((comp, index) => {
                 action: action.value,
               };
             },
-            template: convertToVueTemplate(template),
+            template: template,
           };
           resolve(SComponent);
         })
@@ -55,7 +58,7 @@ components.forEach((comp, index) => {
   });
   app.component(comp.name, newComponent);
   
-  if(index+1 === components.length){
+  if(index+1 === components.value.length){
     app.component("SCarousel", Carousel)
     app.component("SSlide", Slide)
     app.component("SSlidePagination", Pagination)
