@@ -1,7 +1,8 @@
 <script setup>
 import { ListDetail } from "@/orchidui";
+import { computed } from "vue";
 
-defineProps({
+const props = defineProps({
   transfer: {
     type: Object,
     required: true,
@@ -9,32 +10,44 @@ defineProps({
 
   hasFxData: Boolean,
 });
+
+const formattedSourceCurrency = computed(() =>
+  props.transfer.source_currency?.toUpperCase(),
+);
+const formattedPaymentCurrency = computed(() =>
+  props.transfer.payment_currency?.toUpperCase(),
+);
+const formattedTransferMethod = computed(() =>
+  props.transfer.transfer_method?.toUpperCase(),
+);
 </script>
 
 <template>
   <div class="bg-oc-bg-dark flex flex-col gap-3 p-4 rounded">
     <div v-if="hasFxData">
       <ListDetail
-        class="justify-between"
+        class="justify-between font-medium [&>span]:text-base"
         label="FX Rate"
-        :content="`+${transfer.base_currency_amount}`"
+        :content="`${formattedSourceCurrency} ${transfer.source_amount}`"
         variant="big"
       />
-      <span class="block text-right text-sm text-oc-text-400">{{
-        `${transfer.transfer_currency} 1 = ${transfer.base_currency} ${transfer.fx_rate}`
-      }}</span>
+      <span class="block text-right text-sm text-oc-text-400">
+        {{
+          `${formattedPaymentCurrency} 1 = ${formattedSourceCurrency} ${transfer.exchange_rate}`
+        }}
+      </span>
     </div>
     <ListDetail
-      class="justify-between"
+      class="justify-between font-medium [&>span]:text-base"
       label="Fee"
-      :content="`${transfer.base_currency} ${transfer.fee}`"
+      :content="`${formattedSourceCurrency} ${transfer.fee}`"
       variant="big"
     />
     <div v-if="hasFxData">
       <ListDetail
-        class="justify-between"
+        class="justify-between font-medium [&>span]:text-base"
         label="Transfer type"
-        :content="`${transfer.type?.toUpperCase()}`"
+        :content="`${formattedTransferMethod}`"
         variant="big"
       />
     </div>
