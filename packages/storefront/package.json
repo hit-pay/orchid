@@ -1,0 +1,40 @@
+{
+  "name": "@orchidui/storefront",
+  "version": "0.0.18",
+  "type": "module",
+  "scripts": {
+    "preview": "vite preview --port 8080",
+    "dev": "vite dev",
+    "build": "vite build",
+    "publish:storefront": "npm run build && npm version patch && npm publish --access public",
+    "update-version": "npm version patch"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.2.3",
+    "fast-glob": "^3.3.1",
+    "vite": "^4.4.5",
+    "vue": "^3.3.4"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hit-pay/orchid.git",
+    "directory": "packages/storefront"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    }
+  },
+  "module": "./dist/index.js",
+  "files": [
+    "./dist"
+  ],
+  "dependencies": {
+    "@vueuse/motion": "^2.1.0",
+    "chokidar": "^3.6.0",
+    "vue3-carousel": "^0.3.1"
+  }
+}

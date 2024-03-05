@@ -1,6 +1,6 @@
 module.exports = {
   content: [
-    "./packages/@orchidui-vue/src/**/*.{vue,js,ts,jsx,tsx}",
+    "./packages/vue/src/**/*.{vue,js,ts,jsx,tsx}",
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
   darkMode: "class",
