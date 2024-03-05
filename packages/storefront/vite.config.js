@@ -3,6 +3,7 @@ import vue from "@vitejs/plugin-vue";
 import { resolve } from "path";
 
 export default defineConfig({
+  publicDir: false, // remove on development : TODO : use env 
   plugins: [vue()],
   server: {
     hmr: false

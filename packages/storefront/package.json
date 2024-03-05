@@ -1,6 +1,6 @@
 {
   "name": "@orchidui/storefront",
-  "version": "0.0.20",
+  "version": "0.0.23",
   "type": "module",
   "scripts": {
     "preview": "vite preview --port 8080",
