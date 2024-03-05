@@ -18,11 +18,13 @@ export const overview = {
     customer: {
       name: "Alex Turner",
       email: "alex@arcticmonkey.io",
-      phone_number: "+65 8373 3739 18",
+      phone_number: "65 8373 3739 18",
       address: {
+        street: "123 Main Street",
+        city: "Pennsylvania",
+        state: "Pennsylvania",
         postal_code: "12345 ",
         country: "USA",
-        city: "Pennsylvania",
       },
     },
   },
@@ -38,6 +40,38 @@ export const overview = {
             <CustomerCard :customer="args.customer" :variant="args.variant"/>
           </Theme>
         `,
+  }),
+};
+
+export const bigVariant = {
+  name: "Big variant customer style card",
+  args: {
+    variant: "big",
+    customer: {
+      name: "Alex Turner",
+      email: "alex@arcticmonkey.io",
+      phone_number: "65 8373 3739 18",
+      address: {
+        street: "123 Main Street",
+        city: "Pennsylvania",
+        state: "Pennsylvania",
+        postal_code: "12345 ",
+        country: "USA",
+      },
+    }
+  },
+  render: (args) => ({
+    components: { CustomerCard, Theme },
+    setup() {
+      return {
+        args,
+      };
+    },
+    template: `
+      <Theme class="items-center mb-3">
+        <CustomerCard :customer="args.customer" :variant="args.variant" />
+      </Theme>
+    `,
   }),
 };
 
@@ -76,8 +110,8 @@ export const isBeneficiary = {
   }),
 };
 
-export const bigVariant = {
-  name: "Big variant customer style card",
+export const bigVariantBeneficiary = {
+  name: "Big variant beneficiary card",
   args: {
     variant: "big",
     customer: {

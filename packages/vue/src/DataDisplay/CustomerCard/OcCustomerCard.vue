@@ -96,11 +96,13 @@ const emit = defineEmits(["addCustomer", "editCustomer", "closeCustomer"]);
             label="Address"
             :content="
               [
+                customer?.address?.street || '',
+                customer?.address?.city || '',
+                customer?.address?.state || '',
                 customer?.address?.postal_code || '',
                 customer?.address.country || '',
-                customer?.address?.city || '',
               ]
-                .join(' ')
+                .join(', ')
                 .trim() || '-'
             "
           />
