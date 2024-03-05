@@ -17,17 +17,13 @@
     "publish": "npm run build:package && npm run publish:package"
   },
   "dependencies": {
-    "@astrojs/vue": "^3.0.3",
     "@orchidui/vue": "^0.5.9",
     "@popperjs/core": "^2.11.8",
-    "astro": "^4.4.11",
     "dayjs": "^1.11.10",
-    "debug": "^4.3.4",
     "echarts": "^5.4.3",
     "flag-icons": "^6.11.1",
     "libphonenumber-js": "^1.10.51",
     "quill": "^2.0.0-rc.0",
-    "replace-in-file": "^7.0.2",
     "shikiji": "^0.9.18",
     "v-calendar": "^3.1.2",
     "vue-advanced-cropper": "^2.8.8",
@@ -35,6 +31,7 @@
     "vue3-colorpicker": "^2.2.3"
   },
   "devDependencies": {
+    "@astrojs/vue": "^4.0.8",
     "@storybook/addon-essentials": "^7.6.12",
     "@storybook/addon-interactions": "^7.6.12",
     "@storybook/addon-links": "^7.6.12",
@@ -44,6 +41,7 @@
     "@storybook/vue3-vite": "^7.6.12",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vue/eslint-config-prettier": "^8.0.0",
+    "astro": "^4.4.11",
     "autoprefixer": "^10.4.16",
     "eslint-config-prettier": "^9.0.0",
     "eslint-config-standard": "^17.1.0",
