@@ -5,9 +5,6 @@ import { resolve } from "path";
 export default defineConfig({
   // publicDir: false, // remove on development : TODO : use env
   plugins: [vue()],
-  server: {
-    hmr: false,
-  },
   resolve: {
     alias: {
       vue: "vue/dist/vue.esm-bundler.js",

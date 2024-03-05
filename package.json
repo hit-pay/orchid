@@ -21,6 +21,7 @@
     "@popperjs/core": "^2.11.8",
     "dayjs": "^1.11.10",
     "echarts": "^5.4.3",
+    "esbuild": "^0.20.1",
     "flag-icons": "^6.11.1",
     "libphonenumber-js": "^1.10.51",
     "quill": "^2.0.0-rc.0",
