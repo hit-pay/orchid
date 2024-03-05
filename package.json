@@ -17,7 +17,7 @@
     "publish": "npm run build:package && npm run publish:package"
   },
   "dependencies": {
-    "@astrojs/vue": "^3.0.3",
+    "@astrojs/vue": "^4.0.8",
     "@orchidui/vue": "^0.5.9",
     "@popperjs/core": "^2.11.8",
     "astro": "^4.4.11",
