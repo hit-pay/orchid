@@ -1,0 +1,43 @@
+/* @tailwind base; */
+
+.ml-auto {
+  margin-left: auto
+}
+
+.flex {
+  display: flex
+}
+
+.h-\[19px\] {
+  height: 19px
+}
+
+.min-h-\[200px\] {
+  min-height: 200px
+}
+
+.w-full {
+  width: 100%
+}
+
+.justify-between {
+  justify-content: space-between
+}
+
+.border {
+  border-width: 1px
+}
+
+.border-black {
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity))
+}
+
+.bg-slate-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(148 163 184 / var(--tw-bg-opacity))
+}
+
+.font-bold {
+  font-weight: 700
+}
