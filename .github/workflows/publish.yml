@@ -5,26 +5,25 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+    matrix:
+      node-version: ['14.x', '16.x', '18.x','20.x']
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+      - uses: actions/setup-node@v4
         with:
           node-version: 20.x
           registry-url: https://registry.npmjs.org
+        run: npm ci
       - name: Install dependencies
-        run: npm ci && cd packages/vue && npm install
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: cd packages/vue && npm install
       - name: build orchid package
-        run: npm ci && cd packages/vue && npm run build
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: cd packages/vue && npm run build
       - name: Update version package
-        run: npm ci && cd packages/vue && npm version patch
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: cd packages/vue && npm version patch
       - name: Publish package
-        run: npm ci && cd packages/vue && npm publish
+        run: cd packages/vue && npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Authenticate with GitHub package registry
