@@ -123,3 +123,48 @@ export const SubHeaderElement = {
         `,
   }),
 };
+
+export const SubHeaderDropdownElement = {
+  args: {
+    isSaved: true,
+    primaryProps: {
+      label: 'Create',
+    },
+    dropdownOptions: [
+      {
+        label: 'Save as Draft',
+        icon: 'floppy',
+        action: 'save-as-draft'
+      }
+    ]
+  },
+  render: (args) => ({
+    components: {
+      Theme,
+      SubHeader,
+      HeaderLeft,
+      HeaderCenter,
+      HeaderRight,
+      SampleHeaderLeft,
+    },
+    setup() {
+      const activeMenuValue = ref("payments");
+      const activeMenuLabel = computed(() => {
+        return args.menus.find((m) => m.value === activeMenuValue.value).label;
+      });
+
+      return { args, activeMenuValue, activeMenuLabel };
+    },
+    template: `
+          <Theme>
+            <SubHeader class="mb-3">
+              <HeaderLeft class="hidden md:flex">
+                <SampleHeaderLeft is-sub-header/>
+              </HeaderLeft>
+              <HeaderCenter class="flex-1" :is-saved="args.isSaved" />
+              <HeaderRight :is-saved="args.isSaved" :primary-props="args.primaryProps" :dropdown-options="args.dropdownOptions" />
+            </SubHeader>
+          </Theme>
+        `,
+  }),
+};
