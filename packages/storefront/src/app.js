@@ -1,19 +1,21 @@
-import { createApp } from "vue";
+import { defineAsyncComponent, createApp, ref } from "vue";
+import { components } from "./components.js";
+import { useStorefront } from "./storefront.js"
+
 import VueApp from "@/App.vue";
-import "@/scss/tailwind.scss";
-import { defineAsyncComponent } from "vue";
-import { components } from "./components";
 import storefront from "./storefront.json"
 import products from "./products-home.json"
-import { useStorefront } from "./storefront"
+
+import "@/scss/tailwind.scss";
+
 const convertToVueTemplate = (string) => {
   const result = string
   // .replaceAll("{#", "{{").replaceAll("#}", "}}")
   .replace('<script type="module" src="/@vite/client"></script>','');
   return result;
 };
-const path = "/components/";
 
+const path = ref("/components/")
 
 const { business, sections, general, state, action, initialState, setSectionState } = useStorefront()
 
@@ -27,7 +29,7 @@ const app = createApp(VueApp);
 components.forEach((comp, index) => {
   const newComponent = defineAsyncComponent(() => {
     return new Promise((resolve, reject) => {
-      fetch(path + comp.name + ".html")
+      fetch(path.value + comp.name + ".html")
         .then((r) => r.text())
         .then((template) => {
           console.log(general.value)

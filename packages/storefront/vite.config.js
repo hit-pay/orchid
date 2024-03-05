@@ -19,7 +19,7 @@ export default defineConfig({
     }
   },
   build: {
-    minify: false,
+    // minify: false,
     outDir: "dist",
     rollupOptions: {
       input: {
@@ -46,9 +46,6 @@ export default defineConfig({
         chunkFileNames: `[name].js`,
         assetFileNames: `[name].[ext]`,
       },
-      external: [
-        "vue",
-      ]
     },
   },
 });
