@@ -6,7 +6,6 @@ import VueApp from "@/App.vue";
 import storefront from "./storefront.json"
 import products from "./products-home.json"
 
-import "@/scss/tailwind.scss";
 
 const convertToVueTemplate = (string) => {
   const result = string
@@ -15,7 +14,7 @@ const convertToVueTemplate = (string) => {
   return result;
 };
 
-const path = ref("/components/")
+const path = ref("/default/")
 
 const { business, sections, general, state, action, initialState, setSectionState } = useStorefront()
 

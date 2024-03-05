@@ -1,8 +1,5 @@
 <template>
-  <main>
-    <!-- home page -->
-    <s-headers />
-  </main>
+ <s-headers  />
 </template>
 <script setup>
 // import { ref } from "vue";

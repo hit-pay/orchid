@@ -10,14 +10,6 @@ export default defineConfig({
       "@": resolve(__dirname, "./src/"),
     },
   },
-  server: {
-    watch: {
-      // Add custom paths to watch for full page refreshes
-      additionalPaths: (watcher) => {
-        watcher.add('components/**');
-      }
-    }
-  },
   build: {
     // minify: false,
     outDir: "dist",
@@ -29,17 +21,17 @@ export default defineConfig({
         storefront: resolve(__dirname, "src/storefront.js"),
         // TODO : read all html in folder /components
         // common component
-        "s-btn": resolve(__dirname, "/components/s-btn.html"),
-        "s-logo": resolve(__dirname, "/components/s-logo.html"),
-        "s-navigation-menus": resolve(__dirname, "/components/s-navigation-menus.html"),
-        "s-search-icon":resolve(__dirname, "/components/s-search-icon.html"),
-        "s-search-popup":resolve(__dirname, "/components/s-search-popup.html"),
-        "s-cart-icon":resolve(__dirname, "/components/s-cart-icon.html"),
-        "s-category-filter":resolve(__dirname, "/components/s-category-filter.html"),
-        "s-product-card":resolve(__dirname, "/components/s-product-card.html"),
+        "s-btn": resolve(__dirname, "/default/s-btn.html"),
+        "s-logo": resolve(__dirname, "/default/s-logo.html"),
+        "s-navigation-menus": resolve(__dirname, "/default/s-navigation-menus.html"),
+        "s-search-icon":resolve(__dirname, "/default/s-search-icon.html"),
+        "s-search-popup":resolve(__dirname, "/default/s-search-popup.html"),
+        "s-cart-icon":resolve(__dirname, "/default/s-cart-icon.html"),
+        "s-category-filter":resolve(__dirname, "/default/s-category-filter.html"),
+        "s-product-card":resolve(__dirname, "/default/s-product-card.html"),
         // section component
-        "s-banner-promotion": resolve(__dirname, "/components/s-banner-promotion.html"),
-        "s-headers": resolve(__dirname, "/components/s-headers.html"),
+        "s-banner-promotion": resolve(__dirname, "/default/s-banner-promotion.html"),
+        "s-headers": resolve(__dirname, "/default/s-headers.html"),
       },
       output: {
         entryFileNames: `[name].js`,

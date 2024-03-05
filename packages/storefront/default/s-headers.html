@@ -1,4 +1,4 @@
-<header class="w-full flex">
+<header class="w-full flex justify-between">
     <img :src="business.logo" :alt="business.name">
     <nav>
         <div v-for="menu in general.navigation_menus">
@@ -15,4 +15,7 @@
             </template>
         </div>
     </nav>
+    <div class="ml-auto">
+        <span>Icon name</span>
+    </div>
 </header>
