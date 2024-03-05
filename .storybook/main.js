@@ -5,7 +5,7 @@ import { mergeConfig } from "vite";
 const config = {
   stories: [
     "../stories/**/*.mdx",
-    "../packages/@orchidui-vue/src/**/*.stories.@(js|jsx|mjs|ts|tsx)",
+    "../packages/vue/src/**/*.stories.@(js|jsx|mjs|ts|tsx)",
   ],
   addons: [
     "@storybook/addon-links",
