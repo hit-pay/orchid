@@ -60,5 +60,8 @@
   "files": [
     "dist"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "resolutions": {
+    "rollup": "npm:@rollup/wasm-node"
+  }
 }
