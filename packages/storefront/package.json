@@ -34,6 +34,7 @@
   ],
   "dependencies": {
     "@vueuse/motion": "^2.1.0",
+    "esbuild": "^0.20.1",
     "vue3-carousel": "^0.3.1"
   }
 }
