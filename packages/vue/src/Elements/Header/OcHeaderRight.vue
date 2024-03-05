@@ -1,6 +1,6 @@
 <script setup>
 import { Button } from "@/orchidui";
-defineEmits(["save", "cancel"]);
+const emit = defineEmits(["save", "cancel", "addition-click", "dropdown-action"]);
 defineProps({
   primaryProps: {
     type: Object,
@@ -9,6 +9,7 @@ defineProps({
     type: Object,
   },
 });
+
 </script>
 <template>
   <div class="flex items-center gap-x-7 ml-auto">
@@ -22,12 +23,14 @@ defineProps({
           v-bind="secondaryProps"
           @click="$emit('cancel')"
         />
-        <Button
-          class="min-w-[100px]"
-          label="Save"
-          v-bind="primaryProps"
-          @click="$emit('save')"
-        />
+        <slot name="primary-button">
+          <Button
+            class="min-w-[100px]"
+            label="Save"
+            v-bind="primaryProps"
+            @click="$emit('save')"
+          />
+        </slot>
       </div>
       <slot name="after" />
     </slot>
