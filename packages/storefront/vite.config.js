@@ -14,7 +14,7 @@ export default defineConfig({
     },
   },
   build: {
-    minify: false,
+    // minify: false,
     outDir: "dist",
     rollupOptions: {
       input: {
