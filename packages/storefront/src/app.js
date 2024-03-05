@@ -3,7 +3,7 @@ import { components } from "./components.js";
 import { useStorefront } from "./storefront.js"
 
 import VueApp from "@/App.vue";
-import storefront from "./storefront.json"
+import storefront from "./storefront-default-settings.json"
 import products from "./products-home.json"
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
