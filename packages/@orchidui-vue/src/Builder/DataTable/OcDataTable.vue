@@ -61,6 +61,8 @@ const filterOptions = computed(() => props.options?.filterOptions);
 
 const hidePerPageDropdown = computed(() => props.options?.hidePerPageDropdown);
 
+const isLastPage = computed(() => paginationOption.value?.last_page === 1);
+
 const isDropdownOpened = ref(false);
 const filterTab = ref(props.filter[filterOptions.value?.tabs?.key]);
 const currentPage = ref(props.filter.page);
@@ -492,7 +494,7 @@ const displayFilterData = computed(() => {
       "
     >
       <Pagination
-        v-if="paginationOption && paginationOption.last_page !== 1"
+        v-if="paginationOption && !isLastPage"
         v-model="currentPage"
         class="justify-center"
         :max-page="paginationOption.last_page"
