@@ -4,6 +4,9 @@ import { resolve } from "path";
 
 export default defineConfig({
   plugins: [vue()],
+  server: {
+    hmr: false
+  },
   resolve: {
     alias: {
       vue: "vue/dist/vue.esm-bundler.js",
@@ -15,7 +18,6 @@ export default defineConfig({
     outDir: "dist",
     rollupOptions: {
       input: {
-        theme: resolve(__dirname, "theme.css"),
         index: resolve(__dirname, "index.html"),
         components: resolve(__dirname, "src/components.js"),
         storefront: resolve(__dirname, "src/storefront.js"),

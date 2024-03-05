@@ -9,8 +9,7 @@ import products from "./products-home.json"
 
 const convertToVueTemplate = (string) => {
   const result = string
-  // .replaceAll("{#", "{{").replaceAll("#}", "}}")
-  .replace('<script type="module" src="/@vite/client"></script>','');
+  // .replace('<script type="module" src="/@vite/client"></script>','');
   return result;
 };
 
