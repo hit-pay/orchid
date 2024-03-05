@@ -1,33 +1,31 @@
 <header class="w-full flex justify-between">
-    <img :src="business.logo" :alt="business.name">
-    <nav>
-        <div v-for="menu in general.navigation_menus">
-            {{menu.title}}
-            <template v-if="menu.children">
-                <div v-for="child in menu.children">
-                    {{ child.title }}
-                    <template v-if="child.children">
-                        <div v-for="child2 in child.children">
-                            {{ child2.title }}
-                        </div>
-                    </template>
-                </div>
-            </template>
+  <img :src="business.logo" :alt="business.name" />
+  <nav>
+    <div v-for="menu in general.navigation_menus">
+      {{menu.title}}
+      <template v-if="menu.children">
+        <div v-for="child in menu.children">
+          {{ child.title }}
+          <template v-if="child.children">
+            <div v-for="child2 in child.children">{{ child2.title }}</div>
+          </template>
         </div>
-    </nav>
-    <div class="ml-auto">
-        <span>Arii</span>
+      </template>
     </div>
+  </nav>
+  <div class="ml-auto">
+    <span>Arii</span>
+  </div>
 </header>
 
-<div v-motion-pop-visible >
-    <s-carousel>
-        <s-slide v-for="slide in 10" :key="slide" >
-          <div class="bg-slate-400 min-h-[200px] w-full">{{ slide }}</div>
-        </s-slide>
-        <div slot="addons">
-            <s-slide-navigation />
-            <s-slide-pagination />
-        </div>
-    </s-carousel>
+<div v-motion-pop-visible>
+  <s-carousel>
+    <s-slide v-for="slide in 10" :key="slide">
+      <div class="bg-slate-400 min-h-[200px] w-full">{{ slide }}</div>
+    </s-slide>
+    <div slot="addons">
+      <s-slide-navigation />
+      <s-slide-pagination />
+    </div>
+  </s-carousel>
 </div>
