@@ -21,19 +21,6 @@ export default defineConfig({
         index: resolve(__dirname, "index.html"),
         components: resolve(__dirname, "src/components.js"),
         storefront: resolve(__dirname, "src/storefront.js"),
-        // TODO : read all html in folder /components
-        // common component
-        "s-btn": resolve(__dirname, "/default/s-btn.html"),
-        "s-logo": resolve(__dirname, "/default/s-logo.html"),
-        "s-navigation-menus": resolve(__dirname, "/default/s-navigation-menus.html"),
-        "s-search-icon":resolve(__dirname, "/default/s-search-icon.html"),
-        "s-search-popup":resolve(__dirname, "/default/s-search-popup.html"),
-        "s-cart-icon":resolve(__dirname, "/default/s-cart-icon.html"),
-        "s-category-filter":resolve(__dirname, "/default/s-category-filter.html"),
-        "s-product-card":resolve(__dirname, "/default/s-product-card.html"),
-        // section component
-        "s-banner-promotion": resolve(__dirname, "/default/s-banner-promotion.html"),
-        "s-headers": resolve(__dirname, "/default/s-headers.html"),
       },
       output: {
         entryFileNames: `[name].js`,
