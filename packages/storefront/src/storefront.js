@@ -19,6 +19,8 @@ export function useStorefront() {
         },
         cart: {}
     });
+
+    const general = computed(() => store_design.value.general)
     const sections = computed(() => store_design.value.sections)
 
     const initialState = (storefront) => {
@@ -68,6 +70,7 @@ export function useStorefront() {
     state,
     action,
     business,
+    general,
     sections,
     setState,
     setSectionState,

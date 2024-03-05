@@ -10,6 +10,14 @@ export default defineConfig({
       "@": resolve(__dirname, "./src/"),
     },
   },
+  server: {
+    watch: {
+      // Add custom paths to watch for full page refreshes
+      additionalPaths: (watcher) => {
+        watcher.add('components/**');
+      }
+    }
+  },
   build: {
     minify: false,
     outDir: "dist",
@@ -18,6 +26,7 @@ export default defineConfig({
         theme: resolve(__dirname, "theme.css"),
         index: resolve(__dirname, "index.html"),
         components: resolve(__dirname, "src/components.js"),
+        storefront: resolve(__dirname, "src/storefront.js"),
         // TODO : read all html in folder /components
         // common component
         "s-btn": resolve(__dirname, "/components/s-btn.html"),
@@ -37,6 +46,9 @@ export default defineConfig({
         chunkFileNames: `[name].js`,
         assetFileNames: `[name].[ext]`,
       },
+      external: [
+        "vue",
+      ]
     },
   },
 });

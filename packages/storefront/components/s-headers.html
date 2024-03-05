@@ -1,5 +1,18 @@
-<header>
+<header class="w-full flex">
+    <img :src="business.logo" :alt="business.name">
     <nav>
-        <a href="">Logo </a>
+        <div v-for="menu in general.navigation_menus">
+            {{menu.title}}
+            <template v-if="menu.children">
+                <div v-for="child in menu.children">
+                    {{ child.title }}
+                    <template v-if="child.children">
+                        <div v-for="child2 in child.children">
+                            {{ child2.title }}
+                        </div>
+                    </template>
+                </div>
+            </template>
+        </div>
     </nav>
 </header>
