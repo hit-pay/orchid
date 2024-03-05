@@ -61,6 +61,8 @@ const filterOptions = computed(() => props.options?.filterOptions);
 
 const hidePerPageDropdown = computed(() => props.options?.hidePerPageDropdown);
 
+const isLastPage = computed(() => paginationOption.value?.last_page === 1);
+
 const isDropdownOpened = ref(false);
 const filterTab = ref(props.filter[filterOptions.value?.tabs?.key]);
 const currentPage = ref(props.filter.page);
@@ -483,9 +485,16 @@ const displayFilterData = computed(() => {
         <slot name="empty" />
       </template>
     </Table>
-    <div class="flex gap-3 items-center">
+    <div
+      class="flex gap-3 items-center"
+      :class="
+        paginationOption && paginationOption.last_page === 1
+          ? 'justify-end'
+          : ''
+      "
+    >
       <Pagination
-        v-if="paginationOption"
+        v-if="paginationOption && !isLastPage"
         v-model="currentPage"
         class="justify-center"
         :max-page="paginationOption.last_page"
