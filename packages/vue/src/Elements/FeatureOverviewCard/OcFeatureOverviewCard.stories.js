@@ -1,31 +1,31 @@
-import { Theme, FeatureOverviewCard } from '@/orchidui';
+import { Theme, FeatureOverviewCard } from "@/orchidui";
 
 export default {
   component: FeatureOverviewCard,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
 };
 
 export const featureOverviewCard = {
   argTypes: {},
   args: {
-    title: 'Title',
-    description: 'Description',
+    title: "Title",
+    description: "Description",
     features: [
       {
-        title: 'Send Money Locally',
-        icon: 'send',
+        title: "Send Money Locally",
+        icon: "send",
       },
       {
-        title: 'International Payments',
-        icon: 'world-money',
+        title: "International Payments",
+        icon: "world-money",
       },
       {
-        title: 'Add Approvers',
-        icon: 'stamp',
+        title: "Add Approvers",
+        icon: "stamp",
       },
       {
-        title: 'Try Now',
-        icon: 'bitcoin-growth',
+        title: "Try Now",
+        icon: "bitcoin-growth",
       },
     ],
   },

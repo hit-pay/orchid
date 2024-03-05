@@ -1,5 +1,5 @@
 <script setup>
-import { Icon } from '@/orchidui';
+import { Icon } from "@/orchidui";
 
 defineProps({
   title: {
@@ -8,12 +8,13 @@ defineProps({
   },
   description: {
     type: String,
-    default: '',
+    default: "",
   },
   features: {
     type: Array,
     default: () => [],
-    validator: (features) => features.every((feature) => 'title' in feature && 'icon' in feature),
+    validator: (features) =>
+      features.every((feature) => "title" in feature && "icon" in feature),
   },
 });
 </script>
@@ -49,9 +50,13 @@ defineProps({
     right: 0;
     bottom: 0;
     left: 0;
-    content: '';
+    content: "";
     border-radius: 8px;
-    background: linear-gradient(90deg, rgba(232, 201, 250, 0.5) 0%, rgba(255, 224, 162, 0.5) 100%);
+    background: linear-gradient(
+      90deg,
+      rgba(232, 201, 250, 0.5) 0%,
+      rgba(255, 224, 162, 0.5) 100%
+    );
     box-shadow: 0 20px 50px 30px #ffffff inset;
   }
 }

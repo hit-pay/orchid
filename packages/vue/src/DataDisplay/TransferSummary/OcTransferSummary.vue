@@ -1,6 +1,6 @@
 <script setup>
-import { ListDetail } from '@/orchidui';
-import { computed } from 'vue';
+import { ListDetail } from "@/orchidui";
+import { computed } from "vue";
 
 const props = defineProps({
   transfer: {
@@ -11,9 +11,15 @@ const props = defineProps({
   hasFxData: Boolean,
 });
 
-const formattedSourceCurrency = computed(() => props.transfer.source_currency?.toUpperCase());
-const formattedPaymentCurrency = computed(() => props.transfer.payment_currency?.toUpperCase());
-const formattedTransferMethod = computed(() => props.transfer.transfer_method?.toUpperCase());
+const formattedSourceCurrency = computed(() =>
+  props.transfer.source_currency?.toUpperCase(),
+);
+const formattedPaymentCurrency = computed(() =>
+  props.transfer.payment_currency?.toUpperCase(),
+);
+const formattedTransferMethod = computed(() =>
+  props.transfer.transfer_method?.toUpperCase(),
+);
 </script>
 
 <template>
@@ -26,7 +32,9 @@ const formattedTransferMethod = computed(() => props.transfer.transfer_method?.t
         variant="big"
       />
       <span class="block text-right text-sm text-oc-text-400">
-        {{ `${formattedPaymentCurrency} 1 = ${formattedSourceCurrency} ${transfer.exchange_rate}` }}
+        {{
+          `${formattedPaymentCurrency} 1 = ${formattedSourceCurrency} ${transfer.exchange_rate}`
+        }}
       </span>
     </div>
     <ListDetail
