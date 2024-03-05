@@ -35,10 +35,10 @@ defineProps({
     </label>
     <slot />
     <div
-      v-if="hint && !errorMessage"
+      v-if="(hint || $slots.hint) && !errorMessage"
       class="text-sm flex items-center text-oc-text-400"
     >
-      {{ hint }}
+      <slot name="hint">{{ hint }}</slot>
     </div>
     <div v-if="errorMessage" class="text-sm text-oc-error flex items-center">
       {{ errorMessage }}
