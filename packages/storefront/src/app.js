@@ -56,10 +56,10 @@ const app = createApp({
     </select>
     {{state.page }}
   </div>
-  <s-top-banner v-if="topBanner.active" :data-sid="topBanner.key" :data-stitle="topBanner.title" />
-  <s-headers :data-sid="header.key" :data-stitle="header.title" />
+  <s-top-banner v-if="topBanner.active" :data-sid="topBanner.key" data-stitle="Top Banner" />
+  <s-headers :data-sid="header.key" data-stitle="Header" />
   <template v-if="state.page === 'home'">
-    <s-banner v-if="banner.active" :data-sid="banner.key" :data-stitle="banner.title"/>
+    <s-banner v-if="banner.active" :data-sid="banner.key" data-stitle="Banner"/>
     <template v-for="item in sections" >
         <s-products v-if="item.section === 'Products'" :data-sid="item.key" :data-stitle="item.title"/>
     </template>
@@ -68,7 +68,7 @@ const app = createApp({
       <s-search-filter />
       <s-search-products />
   </template>
-  <s-footer :data-sid="footer.key" :data-stitle="footer.title" />`,
+  <s-footer :data-sid="footer.key" data-stitle="Footer" />`,
 });
 
 components.value.forEach((comp, index) => {
