@@ -40,20 +40,27 @@ const common = [
 
 const sections = [
   {
-    name: "s-banner-promotion",
+    name: "s-top-banner",
+    path: "sections",
     theme: "default",
-    props: {
-      text: String,
-      isClosable: Boolean,
-    },
   },
   {
     name: "s-headers",
+    path: "sections",
     theme: "default",
   },
   {
+    name: "s-banner",
+    path: "sections",
+  },
+  {
     name: "s-products",
-    theme: "default",
+    path: "sections",
+    action: "getProducts"
+  },
+  {
+    name: "s-footer",
+    path: "sections",
   },
 ];
 

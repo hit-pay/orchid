@@ -5,8 +5,6 @@ import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
 import { MotionPlugin } from "@vueuse/motion";
 
 import VueApp from "@/App.vue";
-import storefront from "./storefront-default-settings.json";
-import products from "./products-home.json";
 
 import "vue3-carousel/dist/carousel.css";
 
@@ -14,7 +12,7 @@ const mountEl = document.querySelector("#app");
 const props = { ...mountEl.dataset };
 const components = computed(() => JSON.parse(props.components));
 const pathDefault = ref("/default/");
-const path = ref(props.theme);
+const path = ref("/"+props.theme+"/");
 
 const {
   state,
@@ -30,23 +28,19 @@ const {
   setSectionState,
   setProductState,
   cartProducts,
-  initialState,
 } = useTheme();
 
-initialState(storefront);
-
-setTimeout(() => {
-  // TODO :  create trigger from template
-  setSectionState("product_list_1", "product", products);
-}, 1000);
-
 const app = createApp(VueApp);
+
 components.value.forEach((comp, index) => {
   const newComponent = defineAsyncComponent(() => {
     return new Promise((resolve, reject) => {
       let pathName = path.value;
       if (comp.theme === "default") {
         pathName = pathDefault.value;
+      }
+      if(comp.path){
+        pathName = pathName + "/"+comp.path+"/"
       }
       fetch(pathName + comp.name + ".html")
         .then((r) => r.text())
@@ -90,5 +84,6 @@ components.value.forEach((comp, index) => {
     app.use(MotionPlugin);
 
     app.mount("#app");
+
   }
 });

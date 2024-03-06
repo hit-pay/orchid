@@ -1,7 +1,10 @@
 import { ref, computed } from "vue";
 export function useTheme() {
   const business = ref({});
-  const store_design = ref({});
+  const store_design = ref({
+    general: {},
+    sections: [],
+  });
 
   const state = ref({ 
     sections: {},
@@ -18,11 +21,11 @@ export function useTheme() {
   });
 
   const general = computed(() => store_design.value.general);
-  const styles = computed(() => store_design.value.sections.find((s) => s.section === 'Styles'));
-  const topBanner = computed(() => store_design.value.sections.find((s) => s.section === 'TopBanner'));
-  const banner = computed(() => store_design.value.sections.find((s) => s.section === 'Banner'));
-  const footer = computed(() => store_design.value.sections.find((s) => s.section === 'Footer'));
-  const sections = computed(() => store_design.value.sections);
+  const styles = computed(() => store_design.value.sections.find(s => s.section === 'Styles'));
+  const topBanner = computed(() => store_design.value.sections.find(s => s.section === 'TopBanner'));
+  const banner = computed(() => store_design.value.sections.find(s => s.section === 'Banner'));
+  const footer = computed(() => store_design.value.sections.find(s => s.section === 'FooterContent'));
+  const sections = computed(() => store_design.value.sections.filter(s => s.group === 'sections'));
 
   const initialState = (storefront) => {
     let defaultState = {};
@@ -36,7 +39,8 @@ export function useTheme() {
     });
     state.value.sections = defaultState;
     business.value = storefront.business;
-    store_design.value = storefront.store_design;
+    store_design.value.general = storefront.store_design.general;
+    store_design.value.sections = storefront.store_design.sections;
   };
 
   const setState = (key, value) => {
