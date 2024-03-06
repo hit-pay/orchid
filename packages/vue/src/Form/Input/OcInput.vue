@@ -209,6 +209,10 @@ const isPasswordInput = computed(() => props.inputType === "password");
         <slot name="leading" />
       </div>
     </div>
+
+    <template #hint>
+      <slot name="hint" />
+    </template>
   </BaseInput>
 </template>
 

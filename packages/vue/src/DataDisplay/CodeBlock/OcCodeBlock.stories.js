@@ -6,7 +6,14 @@ export default {
 };
 
 export const Default = {
+  argTypes: {
+    lang: {
+      control: "select",
+      options: ["json", "text"],
+    },
+  },
   args: {
+    lang: "json",
     jsonObject: `{
   "widget": {
     "debug": "on",
@@ -44,7 +51,7 @@ export const Default = {
       return { args };
     },
     template: `
-          <CodeBlock :json-object="args.jsonObject"/>
+          <CodeBlock :json-object="args.jsonObject" :lang="args.lang" :key="args.lang"/>
         `,
   }),
 };
