@@ -7,6 +7,7 @@ export function useTheme() {
   });
 
   const state = ref({
+    page: 'home',
     sections: {},
     product: {},
     search: {

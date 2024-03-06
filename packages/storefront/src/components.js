@@ -56,10 +56,19 @@ const sections = [
   {
     name: "s-products",
     path: "sections",
-    action: "getProducts",
+    action: "getProducts"
   },
   {
     name: "s-footer",
+    path: "sections",
+  },
+  // search page sections
+  {
+    name: "s-search-filter",
+    path: "sections",
+  },
+  {
+    name: "s-search-products",
     path: "sections",
   },
 ];

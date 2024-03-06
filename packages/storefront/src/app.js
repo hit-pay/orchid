@@ -36,6 +36,7 @@ init(storefront);
 const app = createApp({
   setup() {
     return {
+      state,
       topBanner,
       banner,
       sections,
@@ -44,9 +45,15 @@ const app = createApp({
   template: `
   <s-top-banner v-if="topBanner.active" />
   <s-headers/>
-  <s-banner v-if="banner.active"/>
-  <template v-for="item in sections">
-      <s-products v-if="item.section === 'Products'" :section-key="item.key"/>
+  <template v-if="state.page === 'home'">
+    <s-banner v-if="banner.active"/>
+    <template v-for="item in sections">
+        <s-products v-if="item.section === 'Products'" :section-key="item.key"/>
+    </template>
+  </template>
+  <template v-if="state.page === 'search'">
+      <s-search-filter />
+      <s-search-products />
   </template>
   <s-footer/>`,
 });
