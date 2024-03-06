@@ -22,6 +22,7 @@ const {
   general,
   styles,
   topBanner,
+  header,
   banner,
   footer,
   sections,
@@ -39,7 +40,9 @@ const app = createApp({
     return {
       state,
       topBanner,
+      header,
       banner,
+      footer,
       sections,
     };
   },
@@ -53,19 +56,19 @@ const app = createApp({
     </select>
     {{state.page }}
   </div>
-  <s-top-banner v-if="topBanner.active" :data-section-id="item.topBanner.key" />
-  <s-headers :data-section-id="item.header.key" />
+  <s-top-banner v-if="topBanner.active" :data-sid="topBanner.key" />
+  <s-headers :data-sid="header.key" />
   <template v-if="state.page === 'home'">
-    <s-banner v-if="banner.active" :data-section-id="item.banner.key"/>
+    <s-banner v-if="banner.active" :data-sid="banner.key"/>
     <template v-for="item in sections" >
-        <s-products v-if="item.section === 'Products'" :data-section-id="item.key"/>
+        <s-products v-if="item.section === 'Products'" :data-sid="item.key"/>
     </template>
   </template>
   <template v-if="state.page === 'search'">
       <s-search-filter />
       <s-search-products />
   </template>
-  <s-footer :data-section-id="item.footer.key" />`,
+  <s-footer :data-sid="footer.key" />`,
 });
 
 components.value.forEach((comp, index) => {

@@ -28,6 +28,9 @@ export function useTheme() {
   const topBanner = computed(() =>
     store_design.value.sections.find((s) => s.section === "TopBanner"),
   );
+  const header = computed(() =>
+  store_design.value.sections.find((s) => s.section === "Header"),
+);
   const banner = computed(() =>
     store_design.value.sections.find((s) => s.section === "Banner"),
   );
@@ -98,6 +101,7 @@ export function useTheme() {
     general,
     styles,
     topBanner,
+    header,
     banner,
     footer,
     sections,
