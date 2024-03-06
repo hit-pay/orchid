@@ -4,15 +4,15 @@ import { useTheme } from "./storefront.js";
 import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
 import { MotionPlugin } from "@vueuse/motion";
 
-import VueApp from "@/App.vue";
-
 import "vue3-carousel/dist/carousel.css";
+
+import storefront from "./storefront-default-settings.json";
 
 const mountEl = document.querySelector("#app");
 const props = { ...mountEl.dataset };
 const components = computed(() => JSON.parse(props.components));
 const pathDefault = ref("/default/");
-const path = ref("/"+props.theme+"/");
+const path = ref("/" + props.theme + "/");
 
 const {
   state,
@@ -28,9 +28,28 @@ const {
   setSectionState,
   setProductState,
   cartProducts,
+  init,
 } = useTheme();
 
-const app = createApp(VueApp);
+init(storefront);
+
+const app = createApp({
+  setup() {
+    return {
+      topBanner,
+      banner,
+      sections,
+    };
+  },
+  template: `
+  <s-top-banner v-if="topBanner.active" />
+  <s-headers/>
+  <s-banner v-if="banner.active"/>
+  <template v-for="item in sections">
+      <s-products v-if="item.section === 'Products'" :section-key="item.key"/>
+  </template>
+  <s-footer/>`,
+});
 
 components.value.forEach((comp, index) => {
   const newComponent = defineAsyncComponent(() => {
@@ -39,8 +58,8 @@ components.value.forEach((comp, index) => {
       if (comp.theme === "default") {
         pathName = pathDefault.value;
       }
-      if(comp.path){
-        pathName = pathName+comp.path+"/"
+      if (comp.path) {
+        pathName = pathName + comp.path + "/";
       }
       fetch(pathName + comp.name + ".html")
         .then((r) => r.text())
@@ -61,7 +80,7 @@ components.value.forEach((comp, index) => {
                 setState,
                 setSectionState,
                 setProductState,
-                cartProducts
+                cartProducts,
               };
             },
             template: template,
@@ -84,6 +103,5 @@ components.value.forEach((comp, index) => {
     app.use(MotionPlugin);
 
     app.mount("#app");
-
   }
 });

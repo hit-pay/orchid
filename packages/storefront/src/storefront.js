@@ -6,7 +6,7 @@ export function useTheme() {
     sections: [],
   });
 
-  const state = ref({ 
+  const state = ref({
     sections: {},
     product: {},
     search: {
@@ -21,13 +21,23 @@ export function useTheme() {
   });
 
   const general = computed(() => store_design.value.general);
-  const styles = computed(() => store_design.value.sections.find(s => s.section === 'Styles'));
-  const topBanner = computed(() => store_design.value.sections.find(s => s.section === 'TopBanner'));
-  const banner = computed(() => store_design.value.sections.find(s => s.section === 'Banner'));
-  const footer = computed(() => store_design.value.sections.find(s => s.section === 'FooterContent'));
-  const sections = computed(() => store_design.value.sections.filter(s => s.group === 'sections'));
+  const styles = computed(() =>
+    store_design.value.sections.find((s) => s.section === "Styles"),
+  );
+  const topBanner = computed(() =>
+    store_design.value.sections.find((s) => s.section === "TopBanner"),
+  );
+  const banner = computed(() =>
+    store_design.value.sections.find((s) => s.section === "Banner"),
+  );
+  const footer = computed(() =>
+    store_design.value.sections.find((s) => s.section === "FooterContent"),
+  );
+  const sections = computed(() =>
+    store_design.value.sections.filter((s) => s.group === "sections"),
+  );
 
-  const initialState = (storefront) => {
+  const init = (storefront) => {
     let defaultState = {};
     storefront.store_design.sections.forEach((s) => {
       if (s.group === "sections") {
@@ -39,8 +49,7 @@ export function useTheme() {
     });
     state.value.sections = defaultState;
     business.value = storefront.business;
-    store_design.value.general = storefront.store_design.general;
-    store_design.value.sections = storefront.store_design.sections;
+    store_design.value = storefront.store_design;
   };
 
   const setState = (key, value) => {
@@ -73,12 +82,12 @@ export function useTheme() {
   const cartProducts = computed(() => {
     return {
       total: 0,
-      last_added: 0
-    }
-  })
+      last_added: 0,
+    };
+  });
 
   return {
-    initialState,
+    init,
     state,
     action,
     business,
@@ -91,6 +100,6 @@ export function useTheme() {
     setState,
     setSectionState,
     setProductState,
-    cartProducts
+    cartProducts,
   };
 }

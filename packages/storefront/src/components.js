@@ -56,7 +56,7 @@ const sections = [
   {
     name: "s-products",
     path: "sections",
-    action: "getProducts"
+    action: "getProducts",
   },
   {
     name: "s-footer",

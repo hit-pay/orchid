@@ -58,7 +58,7 @@ export const bigVariant = {
         postal_code: "12345 ",
         country: "USA",
       },
-    }
+    },
   },
   render: (args) => ({
     components: { CustomerCard, Theme },

@@ -131,15 +131,15 @@ export const SubHeaderDropdownElement = {
   args: {
     isSaved: true,
     primaryProps: {
-      label: 'Create',
+      label: "Create",
     },
     dropdownOptions: [
       {
-        label: 'Save as Draft',
-        icon: 'floppy',
-        action: 'save-as-draft'
-      }
-    ]
+        label: "Save as Draft",
+        icon: "floppy",
+        action: "save-as-draft",
+      },
+    ],
   },
   render: (args) => ({
     components: {
@@ -162,14 +162,19 @@ export const SubHeaderDropdownElement = {
       const isDropdownOpen = ref(false);
 
       const onDropdownItemClick = (action) => {
-        if (!action) return
+        if (!action) return;
 
-        console.log('dropdown-action', action)
-        isDropdownOpen.value = false
-      }
+        console.log("dropdown-action", action);
+        isDropdownOpen.value = false;
+      };
 
-
-      return { args, activeMenuValue, activeMenuLabel, isDropdownOpen, onDropdownItemClick };
+      return {
+        args,
+        activeMenuValue,
+        activeMenuLabel,
+        isDropdownOpen,
+        onDropdownItemClick,
+      };
     },
     template: `
           <Theme>
