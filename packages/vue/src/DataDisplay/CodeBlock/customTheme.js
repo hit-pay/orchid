@@ -98,7 +98,7 @@ export default {
     "breadcrumb.background": "#f7f7f7",
     "breadcrumb.activeSelectionForeground": "#22222215",
     "breadcrumbPicker.background": "transparent",
-    "editor.foreground": "#393a34",
+    "editor.foreground": "#ab5e3f",
     "editor.background": "transparent",
     "editorWidget.background": "transparent",
     "editor.foldBackground": "#22222210",

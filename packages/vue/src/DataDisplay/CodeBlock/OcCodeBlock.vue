@@ -9,6 +9,10 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  lang: {
+    type: String,
+    default: "json",
+  },
 });
 
 const json = ref();
@@ -21,7 +25,7 @@ onMounted(async () => {
 
   json.value = highlighter.codeToHtml(props.jsonObject, {
     theme: "Custom Theme",
-    lang: "json",
+    lang: props.lang,
   });
 });
 </script>
