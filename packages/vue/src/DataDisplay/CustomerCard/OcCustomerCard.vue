@@ -102,7 +102,7 @@ const emit = defineEmits(["addCustomer", "editCustomer", "closeCustomer"]);
                 customer?.address?.postal_code || '',
                 customer?.address.country || '',
               ]
-                .join(', ')
+                .join(' ')
                 .trim() || '-'
             "
           />
