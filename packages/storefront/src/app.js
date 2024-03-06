@@ -6,6 +6,7 @@ import { MotionPlugin } from "@vueuse/motion";
 
 import "vue3-carousel/dist/carousel.css";
 
+// storefront will get from props like theme [laravel blade]
 import storefront from "./storefront-default-settings.json";
 
 const mountEl = document.querySelector("#app");
@@ -31,7 +32,7 @@ const {
   init,
 } = useTheme();
 
-init(storefront);
+init(storefront, props.theme, props.page);
 
 const app = createApp({
   setup() {
@@ -43,6 +44,15 @@ const app = createApp({
     };
   },
   template: `
+  <div class="p-6 border-b">
+    Preview Dummy Data
+    <select v-model="state.page">
+      <option value="home">Home</option>
+      <option value="search">Search</option>
+      <option value="product">Product</option>
+    </select>
+    {{state.page }}
+  </div>
   <s-top-banner v-if="topBanner.active" />
   <s-headers/>
   <template v-if="state.page === 'home'">

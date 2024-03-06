@@ -38,7 +38,7 @@ export function useTheme() {
     store_design.value.sections.filter((s) => s.group === "sections"),
   );
 
-  const init = (storefront) => {
+  const init = (storefront, theme, page) => {
     let defaultState = {};
     storefront.store_design.sections.forEach((s) => {
       if (s.group === "sections") {
@@ -51,6 +51,9 @@ export function useTheme() {
     state.value.sections = defaultState;
     business.value = storefront.business;
     store_design.value = storefront.store_design;
+
+    state.value.theme = theme
+    state.value.page = page
   };
 
   const setState = (key, value) => {

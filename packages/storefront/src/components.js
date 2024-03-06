@@ -66,10 +66,12 @@ const sections = [
   {
     name: "s-search-filter",
     path: "sections",
+    theme: "default",
   },
   {
     name: "s-search-products",
     path: "sections",
+    theme: "default",
   },
 ];
 
