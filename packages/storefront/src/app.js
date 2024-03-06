@@ -1,5 +1,5 @@
 import { defineAsyncComponent, createApp, ref, computed } from "vue";
-import { useStorefront } from "./storefront.js";
+import { useTheme } from "./storefront.js";
 
 import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
 import { MotionPlugin } from "@vueuse/motion";
@@ -24,7 +24,7 @@ const {
   action,
   initialState,
   setSectionState,
-} = useStorefront();
+} = useTheme();
 
 initialState(storefront);
 

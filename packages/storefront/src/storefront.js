@@ -1,5 +1,5 @@
 import { ref, computed } from "vue";
-export function useStorefront() {
+export function useTheme() {
   const business = ref({});
   const store_design = ref({});
 
@@ -19,6 +19,10 @@ export function useStorefront() {
   });
 
   const general = computed(() => store_design.value.general);
+  const styles = computed(() => store_design.value.sections.find((s) => s.section === 'Styles'));
+  const topBanner = computed(() => store_design.value.sections.find((s) => s.section === 'TopBanner'));
+  const banner = computed(() => store_design.value.sections.find((s) => s.section === 'Banner'));
+  const footer = computed(() => store_design.value.sections.find((s) => s.section === 'Footer'));
   const sections = computed(() => store_design.value.sections);
 
   const initialState = (storefront) => {
@@ -69,6 +73,10 @@ export function useStorefront() {
     action,
     business,
     general,
+    styles,
+    topBanner,
+    banner,
+    footer,
     sections,
     setState,
     setSectionState,
