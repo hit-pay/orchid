@@ -1,10 +1,6 @@
-const common = [
-  
-];
+const common = [];
 
-const sections = [
-  
-];
+const sections = [];
 
 const components = [...common, ...sections];
 export { components as c };

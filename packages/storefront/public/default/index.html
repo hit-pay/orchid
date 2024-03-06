@@ -6,17 +6,41 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       rel="stylesheet"
-      href="https://unpkg.com/@orchidui/storefront@0.0.36/dist/index.css"
+      href="https://unpkg.com/@orchidui/storefront@0.0.37/dist/index.css"
     />
     <style>
-      [data-section-id]:hover{
-        border: #2465DE;
+      [data-sid]:hover {
+        outline: solid 1.5px #2465de;
+        position: relative;
+      }
+      [data-sid]:hover:after {
+        content: attr(data-sid);
+        position: absolute;
+        left: 0;
+        bottom: -16px;
+        background: #2465de;
+        color: white;
+        font-size: 8px;
+        line-height: 16px;
+        height: 16px;
+        padding: 0 4px;
       }
     </style>
   </head>
   <body>
-    <div id="app" data-theme="default" data-page="home" data-mode="development"></div>
-    <script type="module" src="https://unpkg.com/@orchidui/storefront@0.0.36/dist/storefront.js"></script>
-    <script type="module" src="https://unpkg.com/@orchidui/storefront@0.0.36/dist/index.js"></script>
+    <div
+      id="app"
+      data-theme="default"
+      data-page="home"
+      data-mode="development"
+    ></div>
+    <script
+      type="module"
+      src="https://unpkg.com/@orchidui/storefront@0.0.37/dist/storefront.js"
+    ></script>
+    <script
+      type="module"
+      src="https://unpkg.com/@orchidui/storefront@0.0.37/dist/index.js"
+    ></script>
   </body>
 </html>

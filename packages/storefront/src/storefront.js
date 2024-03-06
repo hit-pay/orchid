@@ -7,7 +7,7 @@ export function useTheme() {
   });
 
   const state = ref({
-    page: 'home',
+    page: "home",
     sections: {},
     product: {},
     search: {
@@ -29,8 +29,8 @@ export function useTheme() {
     store_design.value.sections.find((s) => s.section === "TopBanner"),
   );
   const header = computed(() =>
-  store_design.value.sections.find((s) => s.section === "Header"),
-);
+    store_design.value.sections.find((s) => s.section === "Header"),
+  );
   const banner = computed(() =>
     store_design.value.sections.find((s) => s.section === "Banner"),
   );
@@ -55,8 +55,8 @@ export function useTheme() {
     business.value = storefront.business;
     store_design.value = storefront.store_design;
 
-    state.value.theme = theme
-    state.value.page = page
+    state.value.theme = theme;
+    state.value.page = page;
   };
 
   const setState = (key, value) => {

@@ -56,19 +56,19 @@ const app = createApp({
     </select>
     {{state.page }}
   </div>
-  <s-top-banner v-if="topBanner.active" :data-sid="topBanner.key" />
-  <s-headers :data-sid="header.key" />
+  <s-top-banner v-if="topBanner.active" :data-sid="topBanner.key" :data-stitle="topBanner.title" />
+  <s-headers :data-sid="header.key" :data-stitle="header.title" />
   <template v-if="state.page === 'home'">
-    <s-banner v-if="banner.active" :data-sid="banner.key"/>
+    <s-banner v-if="banner.active" :data-sid="banner.key" :data-stitle="banner.title"/>
     <template v-for="item in sections" >
-        <s-products v-if="item.section === 'Products'" :data-sid="item.key"/>
+        <s-products v-if="item.section === 'Products'" :data-sid="item.key" :data-stitle="item.title"/>
     </template>
   </template>
   <template v-if="state.page === 'search'">
       <s-search-filter />
       <s-search-products />
   </template>
-  <s-footer :data-sid="footer.key" />`,
+  <s-footer :data-sid="footer.key" :data-stitle="footer.title" />`,
 });
 
 components.value.forEach((comp, index) => {
@@ -78,8 +78,8 @@ components.value.forEach((comp, index) => {
       if (comp.theme === "default") {
         pathName = pathDefault.value;
       }
-      if(props.mode === 'development'){
-        pathName = '/'
+      if (props.mode === "development") {
+        pathName = "/";
       }
       if (comp.path) {
         pathName = pathName + comp.path + "/";

@@ -144,7 +144,6 @@
             <Button label="Button" isDisabled />
             <Button label="Button" isLoading />
             <Button label="Button" isTransparent />
-
           </div>
           <div class="w-full flex flex-wrap gap-5 items-center mb-5">
             <Button variant="secondary" left-icon="x" />
@@ -189,15 +188,15 @@
               :is-beneficiary="args.isBeneficiary"
               :variant="args.variant"
             />
-           <div class="flex gap-3 items-center my-6 flex-wrap">
-            <Chip label="Primary"/>
-            <Chip label="Accent 1" variant="accent-1"/>
-            <Chip label="Accent 2" variant="accent-2"/>
-            <Chip label="Accent 3" variant="accent-3"/>
-            <Chip label="success" variant="success"/>
-            <Chip label="warning" variant="warning"/>
-            <Chip label="error" variant="error"/>
-           </div>
+            <div class="flex gap-3 items-center my-6 flex-wrap">
+              <Chip label="Primary" />
+              <Chip label="Accent 1" variant="accent-1" />
+              <Chip label="Accent 2" variant="accent-2" />
+              <Chip label="Accent 3" variant="accent-3" />
+              <Chip label="success" variant="success" />
+              <Chip label="warning" variant="warning" />
+              <Chip label="error" variant="error" />
+            </div>
           </div>
           <div>
             <NumberInput v-model="NumberInputModel" />
@@ -210,14 +209,22 @@
 </template>
 <script setup>
 import { ref } from "vue";
-import { Button, Accordion, DatePicker, CustomerCard, Chip, NumberInput, Toggle as OcToggle } from "@orchidui/vue";
+import {
+  Button,
+  Accordion,
+  DatePicker,
+  CustomerCard,
+  Chip,
+  NumberInput,
+  Toggle as OcToggle,
+} from "@orchidui/vue";
 
 const navigation = [{ name: "Documentation", href: "/storybook/" }];
 
 const isOpen = ref(false);
 const dynamicContent = ref([]);
-const NumberInputModel = ref(0)
-const ToggleModel = ref(false)
+const NumberInputModel = ref(0);
+const ToggleModel = ref(false);
 const args = {
   // accordion
   header: "Additional Information",
