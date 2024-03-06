@@ -6,7 +6,7 @@ import { MotionPlugin } from "@vueuse/motion";
 
 import "vue3-carousel/dist/carousel.css";
 
-// storefront will get from props like theme [laravel blade]
+//  // TODO: move storefront data to API
 import storefront from "./storefront-default-settings.json";
 
 const mountEl = document.querySelector("#app");

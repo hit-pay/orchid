@@ -42,7 +42,7 @@ const sections = [
   {
     name: "s-top-banner",
     path: "sections",
-    theme: "default",
+    theme: "default"
   },
   {
     name: "s-headers",
@@ -56,7 +56,6 @@ const sections = [
   {
     name: "s-products",
     path: "sections",
-    action: "getProducts",
   },
   {
     name: "s-footer",
