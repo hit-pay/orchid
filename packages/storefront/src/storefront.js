@@ -3,7 +3,7 @@ export function useTheme() {
   const business = ref({});
   const store_design = ref({});
 
-  const state = ref({
+  const state = ref({ 
     sections: {},
     product: {},
     search: {
@@ -15,7 +15,6 @@ export function useTheme() {
       },
       products: {},
     },
-    cart: {},
   });
 
   const general = computed(() => store_design.value.general);
@@ -67,6 +66,13 @@ export function useTheme() {
     },
   });
 
+  const cartProducts = computed(() => {
+    return {
+      total: 0,
+      last_added: 0
+    }
+  })
+
   return {
     initialState,
     state,
@@ -81,5 +87,6 @@ export function useTheme() {
     setState,
     setSectionState,
     setProductState,
+    cartProducts
   };
 }

@@ -17,13 +17,20 @@ const pathDefault = ref("/default/");
 const path = ref(props.theme);
 
 const {
-  business,
-  sections,
-  general,
   state,
   action,
-  initialState,
+  business,
+  general,
+  styles,
+  topBanner,
+  banner,
+  footer,
+  sections,
+  setState,
   setSectionState,
+  setProductState,
+  cartProducts,
+  initialState,
 } = useTheme();
 
 initialState(storefront);
@@ -48,11 +55,19 @@ components.value.forEach((comp, index) => {
             props: comp.props,
             setup() {
               return {
-                business: business.value,
-                general: general.value,
-                sections: sections.value,
-                state: state.value,
-                action: action.value,
+                state,
+                action,
+                business,
+                general,
+                styles,
+                topBanner,
+                banner,
+                footer,
+                sections,
+                setState,
+                setSectionState,
+                setProductState,
+                cartProducts
               };
             },
             template: template,
