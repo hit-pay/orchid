@@ -43,7 +43,7 @@ const formattedTransferMethod = computed(() =>
       :content="`${formattedSourceCurrency} ${transfer.fee}`"
       variant="big"
     />
-    <div v-if="hasFxData">
+    <div>
       <ListDetail
         class="justify-between font-medium [&>span]:text-base"
         label="Transfer type"
