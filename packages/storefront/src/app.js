@@ -75,6 +75,9 @@ components.value.forEach((comp, index) => {
       if (comp.theme === "default") {
         pathName = pathDefault.value;
       }
+      if(props.mode === 'development'){
+        pathName = '/'
+      }
       if (comp.path) {
         pathName = pathName + comp.path + "/";
       }
