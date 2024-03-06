@@ -40,7 +40,7 @@ components.value.forEach((comp, index) => {
         pathName = pathDefault.value;
       }
       if(comp.path){
-        pathName = pathName + "/"+comp.path+"/"
+        pathName = pathName+comp.path+"/"
       }
       fetch(pathName + comp.name + ".html")
         .then((r) => r.text())

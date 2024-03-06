@@ -2,7 +2,8 @@
   <!-- Preview Dummy Products -->
 
   <s-top-banner v-if="topBanner.active" />
-  <s-banners/>
+  <s-headers/>
+  <s-banner/>
   <s-products/>
   <s-products/>
   <s-footer/>
