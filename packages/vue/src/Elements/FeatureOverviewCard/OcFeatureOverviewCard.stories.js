@@ -18,6 +18,7 @@ export const featureOverviewCard = {
       {
         title: "International Payments",
         icon: "world-money",
+        comingSoon: true,
       },
       {
         title: "Add Approvers",

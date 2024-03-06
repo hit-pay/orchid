@@ -1,5 +1,5 @@
 <script setup>
-import { Icon } from "@/orchidui";
+import { Icon, Chip } from "@/orchidui";
 
 defineProps({
   title: {
@@ -32,8 +32,14 @@ defineProps({
         <div
           v-for="feature in features"
           :key="feature.title"
-          class="rounded bg-white flex flex-col gap-2 p-6 items-center justify-center"
+          class="rounded bg-white flex flex-col gap-2 p-6 items-center justify-center relative"
         >
+          <Chip
+            v-if="feature.comingSoon"
+            variant="accent-2"
+            label="Coming soon"
+            class="absolute top-3 left-3"
+          />
           <Icon :name="feature.icon" height="56" width="56" />
           <span class="text-sm font-medium">{{ feature.title }}</span>
         </div>
