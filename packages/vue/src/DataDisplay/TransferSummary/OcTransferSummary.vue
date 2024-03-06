@@ -30,6 +30,7 @@ const formattedTransferMethod = computed(() =>
         label="FX Rate"
         :content="`${formattedSourceCurrency} ${transfer.source_amount}`"
         variant="big"
+        :show-copy-tooltip="false"
       />
       <span class="block text-right text-sm text-oc-text-400">
         {{
@@ -42,6 +43,7 @@ const formattedTransferMethod = computed(() =>
       label="Fee"
       :content="`${formattedSourceCurrency} ${transfer.fee}`"
       variant="big"
+      :show-copy-tooltip="false"
     />
     <div>
       <ListDetail
@@ -49,6 +51,7 @@ const formattedTransferMethod = computed(() =>
         label="Transfer type"
         :content="`${formattedTransferMethod}`"
         variant="big"
+        :show-copy-tooltip="false"
       />
     </div>
   </div>
