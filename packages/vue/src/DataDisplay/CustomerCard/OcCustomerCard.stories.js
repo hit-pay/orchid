@@ -17,7 +17,7 @@ export const overview = {
     variant: "small",
     customer: {
       name: "Alex Turner",
-      email: "alex_turner_turner@arcticmonkey.io",
+      email: "alex_turner@arcticmonkey.io",
       phone_number: "65 8373 3739 18",
       address: {
         street: "123 Main Street",
@@ -37,9 +37,7 @@ export const overview = {
     },
     template: `
           <Theme class="items-center mb-3">
-            <div class="w-1/2">
-              <CustomerCard :customer="args.customer" :variant="args.variant"/>
-            </div>
+            <CustomerCard :customer="args.customer" :variant="args.variant"/>
           </Theme>
         `,
   }),
