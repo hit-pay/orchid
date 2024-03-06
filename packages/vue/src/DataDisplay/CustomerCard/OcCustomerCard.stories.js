@@ -17,7 +17,7 @@ export const overview = {
     variant: "small",
     customer: {
       name: "Alex Turner",
-      email: "alex@arcticmonkey.io",
+      email: "alex_turner@arcticmonkey.io",
       phone_number: "65 8373 3739 18",
       address: {
         street: "123 Main Street",

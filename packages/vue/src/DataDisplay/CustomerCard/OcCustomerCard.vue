@@ -28,7 +28,9 @@ const emit = defineEmits(["addCustomer", "editCustomer", "closeCustomer"]);
     class="rounded shrink-0 border border-oc-gray-200 bg-oc-bg-light flex items-center justify-between gap-4 px-4 py-5 customer-card relative group"
     :class="{ [variant]: true, 'hover:shadow-normal transition': isHover }"
   >
-    <div class="flex flex-col items-center justify-center gap-y-3">
+    <div
+      class="flex flex-col items-center justify-center gap-y-3 overflow-hidden"
+    >
       <div
         v-if="isEdit"
         class="absolute right-3 top-3 transition"
@@ -45,7 +47,7 @@ const emit = defineEmits(["addCustomer", "editCustomer", "closeCustomer"]);
 
       <Icon
         v-if="isClosable"
-        class="absolute -right-1.5 -top-1.5 border-1 border-white overflow-hidden rounded-full text-gray-500 cursor-pointer transition-all duration-300 hover:text-oc-error"
+        class="absolute -right-1.5 -top-1.5 border-1 border-white rounded-full text-gray-500 cursor-pointer transition-all duration-300 hover:text-oc-error"
         name="filled-x-circle"
         @click="emit('closeCustomer')"
       />
@@ -56,9 +58,9 @@ const emit = defineEmits(["addCustomer", "editCustomer", "closeCustomer"]);
           <Avatar class="shrink-0 uppercase" :size="32">
             {{ customer?.name?.[0] || "J" }}
           </Avatar>
-          <div class="flex flex-col font-medium">
+          <div class="flex flex-col font-medium overflow-hidden">
             <div class="flex items-center gap-2">
-              <span>{{ customer?.name || "John" }}</span>
+              <span class="truncate">{{ customer?.name || "John" }}</span>
               <span
                 v-if="isBeneficiary"
                 class="rounded-md py-1 px-3 text-sm text-oc-accent-1-500 bg-oc-accent-1-50"
@@ -69,7 +71,7 @@ const emit = defineEmits(["addCustomer", "editCustomer", "closeCustomer"]);
             <span v-if="isBeneficiary" class="text-sm text-oc-text-400">
               {{ customer.bank_name }} / {{ customer.bank_account_number }}
             </span>
-            <span v-else class="text-sm text-oc-text-400">
+            <span v-else class="text-sm text-oc-text-400 truncate">
               {{ customer?.email || "johndoe@gmail.com" }}
             </span>
           </div>
