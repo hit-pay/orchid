@@ -21,6 +21,10 @@ const props = defineProps({
     default: "horizontal",
     validator: (val) => ["horizontal", "vertical"].includes(val),
   },
+  showCopyTooltip: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 const isVertical = computed(() => props.alignment === "vertical");
@@ -34,7 +38,7 @@ const isVertical = computed(() => props.alignment === "vertical");
     >
       {{ label }}
 
-      <CopyTooltip :value="content">
+      <CopyTooltip v-if="showCopyTooltip" :value="content">
         <template #default="{ isShow }">
           <Icon
             width="14"

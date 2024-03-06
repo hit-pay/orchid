@@ -1,6 +1,11 @@
 <script setup>
 import { Button } from "@/orchidui";
-const emit = defineEmits(["save", "cancel", "addition-click", "dropdown-action"]);
+const emit = defineEmits([
+  "save",
+  "cancel",
+  "addition-click",
+  "dropdown-action",
+]);
 defineProps({
   primaryProps: {
     type: Object,
@@ -9,7 +14,6 @@ defineProps({
     type: Object,
   },
 });
-
 </script>
 <template>
   <div class="flex items-center gap-x-7 ml-auto">
