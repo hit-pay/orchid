@@ -36,26 +36,51 @@ const common = [
       product: Object,
     },
   },
+  {
+    name: "s-search-filter",
+    path: "sections",
+    theme: "default",
+    props:{
+      meta: Object
+    }
+  },
 ];
 
 const sections = [
   {
     name: "s-top-banner",
     path: "sections",
-    theme: "default"
+    theme: "default",
+    state: {
+      show: true
+    }
   },
   {
     name: "s-headers",
     path: "sections",
     theme: "default",
+    state: {
+      showMenu: [],
+      showMobileMenu: false
+    }
   },
   {
     name: "s-banner",
     path: "sections",
+    state: {
+      currentSlide: 1
+    }
   },
   {
     name: "s-products",
     path: "sections",
+    state: {
+      meta: {
+        page: '',
+        category_id: ''
+      },
+      products: []
+    }
   },
   {
     name: "s-footer",
@@ -63,14 +88,20 @@ const sections = [
   },
   // search page sections
   {
-    name: "s-search-filter",
-    path: "sections",
-    theme: "default",
-  },
-  {
     name: "s-search-products",
     path: "sections",
     theme: "default",
+    state: {
+      meta: {
+        page: '',
+        per_page: '',
+        category_ids: '',
+        sort_by: '',
+        price_from: '',
+        price_to: ''
+      },
+      products: []
+    }
   },
 ];
 
