@@ -16,6 +16,11 @@ const common = [
   },
   {
     name: "s-logo",
+    props: {
+      url: '',
+      name: '',
+      showName: true
+    },
   },
   {
     name: "s-navigation-menus",

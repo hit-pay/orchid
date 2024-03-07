@@ -298,6 +298,7 @@
         "alignment": "right",
         "color_bg": null,
         "color_text": null,
+        "show_name": false,
         "active": true
       },
       {
@@ -384,7 +385,7 @@
   },
   "business": {
     "id": "8ba6c772-8c2d-4f3b-a7d6-3f1f0648fa77",
-    "logo": "https://shop.src.test/storage/logos/small/9a50aa69a198471297c749918ffa4aeb.jpg",
+    "logo": "https://shop.src.test/storage/logos/small/9b8156f6ed5746e9ba1d1d88e82fb8af.jpg",
     "banner_promotion": "Get 30% off shipping with minimum purchase of SGD1000",
     "identifier": "custom",
     "name": "Custom",

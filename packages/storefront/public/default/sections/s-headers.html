@@ -2,10 +2,7 @@
   class="max-w-[760px] px-[25px] py-[10px] w-full flex mx-auto" 
   :style="`${s.color_bg ? `background: ${s.color_bg}` : ''}; ${s.color_text ? `color: ${s.color_text}` : ''}`">
   <div class="flex items-center gap-3">
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path fill-rule="evenodd" clip-rule="evenodd" d="M9 2.20833C9.59259 1.76389 10.4074 1.76389 11 2.20833L16.8333 6.58333C17.253 6.89809 17.5 7.39207 17.5 7.91667V15.8333C17.5 16.7538 16.7538 17.5 15.8333 17.5H11.75C11.2437 17.5 10.8333 17.0896 10.8333 16.5833V11.6667C10.8333 11.2064 10.4602 10.8333 10 10.8333C9.53976 10.8333 9.16667 11.2064 9.16667 11.6667V16.5833C9.16667 17.0896 8.75626 17.5 8.25 17.5H4.16667C3.24619 17.5 2.5 16.7538 2.5 15.8333V7.91667C2.5 7.39207 2.74699 6.89809 3.16667 6.58333L9 2.20833ZM10 3.54167L4.16667 7.91667V15.8333H7.5V11.6667C7.5 10.286 8.61929 9.16667 10 9.16667C11.3807 9.16667 12.5 10.286 12.5 11.6667V15.8333H15.8333V7.91667L10 3.54167Z" fill="#03102F"/>
-    </svg>    
-    <h1 class="ml-[20px] text-sm">{{ business.name }}  </h1>
+    <s-logo :url="business.logo" :name="business.name" :show-name="s.show_name ?? true" />
   </div>
   <div class="ml-auto text-sm">
     <template v-for="(menu, idx) in general.navigation_menus">
