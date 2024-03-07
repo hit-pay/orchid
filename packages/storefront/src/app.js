@@ -55,19 +55,19 @@ const app = createApp({
     </select>
     {{state.page }}
   </div>
-  <s-top-banner v-if="topBanner.active" :data-sid="topBanner.key" data-stitle="Top Banner" :s="state.sections.TopBanner" />
-  <s-headers :data-sid="header.key" data-stitle="Header" :s="state.sections.Header" />
+  <s-top-banner v-if="topBanner.active" :data-sid="topBanner.key" data-stitle="Top Banner" :s="{...topBanner, ...state.sections.TopBanner}" />
+  <s-headers :data-sid="header.key" data-stitle="Header" :s="{...header, ...state.sections.Header}" />
   <template v-if="state.page === 'home'">
-    <s-banner v-if="banner.active" :data-sid="banner.key" data-stitle="Banner" :s="state.sections.Banner" />
+    <s-banner v-if="banner.active" :data-sid="banner.key" data-stitle="Banner" :s="{...banner, ...state.sections.Banner}" />
     <template v-for="item in sections" >
-        <s-products v-if="item.section === 'Products'" :data-sid="item.key" :data-stitle="item.title" :s="state.sections[item.key]"/>
+        <s-products v-if="item.section === 'Products'" :data-sid="item.key" :data-stitle="item.title" :s="{...item, ...state.sections[item.key]}"/>
     </template>
   </template>
   <template v-if="state.page === 'search'">
       <s-search-filter />
       <s-search-products />
   </template>
-  <s-footer :data-sid="footer.key" data-stitle="Footer" :s="state.sections.Footer" />`,
+  <s-footer :data-sid="footer.key" data-stitle="Footer" :s="{...footer, ...state.sections.Footer}" />`,
 });
 
 components.value.forEach((comp, index) => {

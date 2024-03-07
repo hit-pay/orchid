@@ -2,7 +2,7 @@
   v-if="s.show"
   v-motion-slide-top
   class="bg-primary text-primary_text  w-full text-center px-12 py-[11px]"
-  :style="`${topBanner.color_bg ? 'background: rgb(60, 8, 72)' : ''}; ${topBanner.color_text ? 'color: rgb(255, 255, 255)' : ''}`"
+  :style="`${s.color_bg ? `background: ${s.color_bg}` : ''}; ${s.color_text ? `color: ${s.color_text}` : ''}`"
 >
   {{business.banner_promotion ?? general.top_banner_content}}
   <svg class="absolute right-3 top-3 cursor-pointer" @click="setState('TopBanner','show', false)" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -29,10 +29,6 @@ Sections Components feature :
 *     business,
 *     general,
 *     styles,
-*     topBanner,
-*     header,
-*     banner,
-*     footer,
 *     sections,
 *     setState,
 
