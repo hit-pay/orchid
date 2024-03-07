@@ -1,4 +1,5 @@
 <header
+  v-motion-fade
   class="w-full shadow-sm"
   :style="`${s.color_bg ? `background: ${s.color_bg}` : ''}; ${s.color_text ? `color: ${s.color_text}` : ''}`"
 >
@@ -10,42 +11,43 @@
         :show-name="s.show_name ?? true"
       />
     </div>
-    <div class="ml-auto text-sm">
+    <div class="lg:flex ml-auto" :class="{
+      'hidden': !s.showMobileMenu,
+      'absolute bg-white min-h-[80vh] lg:min-h-0 w-full lg:w-auto left-0 top-[40px] p-[20px] lg:top-0 lg:p-0 flex lg:relative justify-center': s.showMobileMenu,
+    }">
       <template v-for="(menu, idx) in general.navigation_menus">
-        <a
-          v-if="idx < 12 && (!menu.children || menu.children.length === 0)"
-          class="px-3 py-2 flex-shrink-0"
-          :href="menu.link"
-        >
-          {{ menu.title }}
-        </a>
-        <div class="flex-shrink-0 relative" v-else-if="idx < 12">
-          <div
-            class="flex items-center gap-3 cursor-pointer"
-            @click="setState('Header','showMenu', !s.showMenu.includes(menu.link) ? [...s.showMenu, menu.link] : s.showMenu.filter(sm => sm !== menu.link))"
+       
+        <div class="flex-shrink-0 relative w-full lg:w-auto text-center lg:text-left" >
+          <a
+            :href="menu.link"
+            class="flex items-center gap-1 cursor-pointer justify-center lg:justify-start"
+            @click.prevent="setState('Header','showMenu', !s.showMenu.includes(menu.link) ? [...s.showMenu, menu.link] : s.showMenu.filter(sm => sm !== menu.link))"
           >
             {{ menu.title }}
-            <s-dropdown-icon :open="s.showMenu.includes(menu.link)" />
-          </div>
+            <s-dropdown-icon v-if="menu.children" :open="s.showMenu.includes(menu.link)" />
+          </a>
 
           <div
             v-if="s.showMenu.includes(menu.link)"
             v-motion-fade
-            class="grid p-3 absolute shadow-sm min-w-[150px] rounded"
+            class="grid px-4 py-3 lg:absolute shadow-sm min-w-[150px] rounded"
           >
-            <div class="w-full" v-for="sub in menu.children">
-              <div class="flex cursor-pointer items-center">
-                <a class="p-2 hover:opacity-90" :href="sub.link">
+            <div class="w-full mt-2" v-for="sub in menu.children">
+              <div class="cursor-pointer items-center">
+                <a class="flex items-center gap-1 cursor-pointer justify-center lg:justify-start" :href="sub.link" 
+                @click.prevent="setState('Header','showMenu', !s.showMenu.includes(sub.link) ? [...s.showMenu, sub.link] : s.showMenu.filter(sm => sm !== sub.link))"
+                >
                   {{ sub.title }}
+                  <s-dropdown-icon v-if="sub.children" :open="s.showMenu.includes(sub.link)" />
                 </a>
               </div>
               <div
-                class="flex flex-col"
-                v-if="sub.children && sub.children.length > 0"
+                class="flex flex-col mt-3"
+                v-if="s.showMenu.includes(sub.link) && sub.children && sub.children.length > 0"
               >
                 <a
                   v-for="sub2 in sub.children"
-                  class="w-full px-3 py-2 hover:opacity-90"
+                  class="w-full px-3 py-2 hover:opacity-90 text-sm"
                   :href="sub2.link"
                 >
                   {{ sub2.title }}
@@ -56,9 +58,10 @@
         </div>
       </template>
     </div>
-    <div class="ml-[20px] flex items-center gap-3">
+    <div class="ml-auto lg:ml-[20px] flex items-center gap-3">
       <s-search-icon /> 
       <s-cart-icon /> 
+      <s-menu-icon class="lg:hidden" :open="s.showMobileMenu" @click="setState('Header','showMobileMenu', !s.showMobileMenu)"  /> 
     </div>
   </div>
 </header>

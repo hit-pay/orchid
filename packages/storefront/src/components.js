@@ -9,17 +9,24 @@ const common = [
     },
   },
   {
+    name: "s-logo",
+    props: {
+      url: '',
+      name: '',
+      showName: true
+    },
+  },
+  // ICONS
+  {
     name: "s-dropdown-icon",
     props: {
       open: false,
     },
   },
   {
-    name: "s-logo",
+    name: "s-menu-icon",
     props: {
-      url: '',
-      name: '',
-      showName: true
+      open: false,
     },
   },
   {
@@ -67,7 +74,7 @@ const sections = [
     section: "Header",
     state: {
       showMenu: [],
-      showMobileMenu: false
+      showMobileMenu: true
     }
   },
   {
