@@ -41,14 +41,17 @@ export function useTheme() {
     store_design.value.sections.filter((s) => s.group === "sections"),
   );
 
-  const init = (storefront, theme, page) => {
+  const init = (storefront, componentSettings, theme, page) => {
     let defaultState = {};
     storefront.store_design.sections.forEach((s) => {
-      if (s.group === "sections") {
-        defaultState[s.key] = {
-          products: [],
-          meta: {},
-        };
+      if (s.group !== "styles" && s.group !== "link_in_bio") {
+        const comp = componentSettings.find(c => c.section === s.section)
+        if(comp && comp.state){
+          defaultState[s.key] = comp.state;
+        }else{
+          defaultState[s.key] = {};
+        }
+       
       }
     });
     state.value.sections = defaultState;
@@ -59,14 +62,12 @@ export function useTheme() {
     state.value.page = page;
   };
 
-  const setState = (key, value) => {
-    state.value[key] = value;
-  };
 
-  const setSectionState = (name, key, value) => {
+  const setState = (name, key, value) => {
+    // by default for sections
     state.value.sections[name][key] = value;
   };
-
+  
   const setProductState = (product) => {
     state.value.product = product;
   };
@@ -106,7 +107,6 @@ export function useTheme() {
     footer,
     sections,
     setState,
-    setSectionState,
     setProductState,
     cartProducts,
   };

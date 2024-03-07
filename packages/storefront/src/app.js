@@ -27,13 +27,12 @@ const {
   footer,
   sections,
   setState,
-  setSectionState,
   setProductState,
   cartProducts,
   init,
 } = useTheme();
 
-init(storefront, props.theme, props.page);
+init(storefront, components.value, props.theme, props.page);
 
 const app = createApp({
   setup() {
@@ -101,7 +100,6 @@ components.value.forEach((comp, index) => {
                 footer,
                 sections,
                 setState,
-                setSectionState,
                 setProductState,
                 cartProducts,
               };

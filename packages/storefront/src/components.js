@@ -51,6 +51,7 @@ const sections = [
     name: "s-top-banner",
     path: "sections",
     theme: "default",
+    section: "TopBanner",
     state: {
       show: true
     }
@@ -86,23 +87,23 @@ const sections = [
     name: "s-footer",
     path: "sections",
   },
-  // search page sections
-  {
-    name: "s-search-products",
-    path: "sections",
-    theme: "default",
-    state: {
-      meta: {
-        page: '',
-        per_page: '',
-        category_ids: '',
-        sort_by: '',
-        price_from: '',
-        price_to: ''
-      },
-      products: []
-    }
-  },
+  // coming soon customize search page sections
+  // {
+  //   name: "s-search-products",
+  //   path: "sections",
+  //   theme: "default",
+  //   state: {
+  //     meta: {
+  //       page: '',
+  //       per_page: '',
+  //       category_ids: '',
+  //       sort_by: '',
+  //       price_from: '',
+  //       price_to: ''
+  //     },
+  //     products: []
+  //   }
+  // },
 ];
 
 const components = [...common, ...sections];

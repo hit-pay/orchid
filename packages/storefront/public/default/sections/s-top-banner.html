@@ -1,4 +1,5 @@
 <div
+  v-if="state.sections.TopBanner.show"
   v-motion-slide-top
   class="bg-primary w-full text-center text-primary_text p-4 text-sm lg:text-md"
   :style="`${topBanner.color_bg ? 'background: rgb(60, 8, 72)' : ''}; ${topBanner.color_text ? 'color: rgb(255, 255, 255)' : ''}`"
@@ -11,6 +12,7 @@
     width="24px"
     height="24px"
     viewBox="0 0 24 24"
+    @click="setState('TopBanner','show', false)"
   >
     <g clip-path="url(#a)">
       <g>
