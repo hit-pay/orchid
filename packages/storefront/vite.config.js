@@ -17,7 +17,6 @@ export default defineConfig({
     rollupOptions: {
       input: {
         index: resolve(__dirname, "index.html"),
-        components: resolve(__dirname, "src/components.js"),
         storefront: resolve(__dirname, "src/storefront.js"),
       },
       output: {

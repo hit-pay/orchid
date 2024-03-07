@@ -1,6 +1,6 @@
 {
   "name": "@orchidui/storefront",
-  "version": "0.0.38",
+  "version": "0.0.39",
   "type": "module",
   "scripts": {
     "preview": "vite preview --port 8080",
@@ -26,9 +26,6 @@
   "exports": {
     ".": {
       "import": "./dist/index.js"
-    },
-    "./components": {
-      "import": "./dist/components.js"
     }
   },
   "module": "./dist/index.js",
