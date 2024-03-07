@@ -55,19 +55,19 @@ const app = createApp({
     </select>
     {{state.page }}
   </div>
-  <s-top-banner v-if="topBanner.active" :data-sid="topBanner.key" data-stitle="Top Banner" />
-  <s-headers :data-sid="header.key" data-stitle="Header" />
+  <s-top-banner v-if="topBanner.active" :data-sid="topBanner.key" data-stitle="Top Banner" :s="state.sections.TopBanner" />
+  <s-headers :data-sid="header.key" data-stitle="Header" :s="state.sections.Header" />
   <template v-if="state.page === 'home'">
-    <s-banner v-if="banner.active" :data-sid="banner.key" data-stitle="Banner"/>
+    <s-banner v-if="banner.active" :data-sid="banner.key" data-stitle="Banner" :s="state.sections.Banner" />
     <template v-for="item in sections" >
-        <s-products v-if="item.section === 'Products'" :data-sid="item.key" :data-stitle="item.title"/>
+        <s-products v-if="item.section === 'Products'" :data-sid="item.key" :data-stitle="item.title" :s="state.sections[item.key]"/>
     </template>
   </template>
   <template v-if="state.page === 'search'">
       <s-search-filter />
       <s-search-products />
   </template>
-  <s-footer :data-sid="footer.key" data-stitle="Footer" />`,
+  <s-footer :data-sid="footer.key" data-stitle="Footer" :s="state.sections.Footer" />`,
 });
 
 components.value.forEach((comp, index) => {
@@ -87,7 +87,10 @@ components.value.forEach((comp, index) => {
         .then((r) => r.text())
         .then((template) => {
           const SComponent = {
-            props: comp.props,
+            props: {
+              ...comp.props,
+              s: Object
+            },
             setup() {
               return {
                 state,

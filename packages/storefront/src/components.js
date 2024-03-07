@@ -60,6 +60,7 @@ const sections = [
     name: "s-headers",
     path: "sections",
     theme: "default",
+    section: "Header",
     state: {
       showMenu: [],
       showMobileMenu: false
@@ -68,6 +69,7 @@ const sections = [
   {
     name: "s-banner",
     path: "sections",
+    section: "Banner",
     state: {
       currentSlide: 1
     }
@@ -75,6 +77,7 @@ const sections = [
   {
     name: "s-products",
     path: "sections",
+    section: "Products",
     state: {
       meta: {
         page: '',
@@ -85,25 +88,26 @@ const sections = [
   },
   {
     name: "s-footer",
+    section: "FooterContent",
     path: "sections",
   },
-  // coming soon customize search page sections
-  // {
-  //   name: "s-search-products",
-  //   path: "sections",
-  //   theme: "default",
-  //   state: {
-  //     meta: {
-  //       page: '',
-  //       per_page: '',
-  //       category_ids: '',
-  //       sort_by: '',
-  //       price_from: '',
-  //       price_to: ''
-  //     },
-  //     products: []
-  //   }
-  // },
+  // coming soon feature customize search page sections
+  {
+    name: "s-search-products",
+    path: "sections",
+    theme: "default",
+    state: {
+      meta: {
+        page: '',
+        per_page: '',
+        category_ids: '',
+        sort_by: '',
+        price_from: '',
+        price_to: ''
+      },
+      products: []
+    }
+  },
 ];
 
 const components = [...common, ...sections];
