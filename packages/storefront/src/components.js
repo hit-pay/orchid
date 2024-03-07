@@ -1,3 +1,5 @@
+// TODO : MOVE to JSON props data in production
+
 const common = [
   {
     name: "s-btn",

@@ -60,6 +60,8 @@ export function useTheme() {
 
     state.value.theme = theme;
     state.value.page = page;
+
+    console.log(state.value)
   };
 
 
