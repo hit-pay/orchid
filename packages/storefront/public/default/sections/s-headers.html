@@ -1,34 +1,47 @@
-<header class="max-w-[760px] px-[25px] w-full">
-  <template v-for="(menu, idx) in general.navigation_menus">
-    <a
-      v-if="idx < 12 && (!menu.children || menu.children.length === 0)"
-      class="px-3 py-2 flex-shrink-0"
-      :href="menu.link"
-    >
-      {{ menu.title }}
-    </a>
-    <div class="flex-shrink-0" :label="menu.title" v-else-if="idx < 12">
-      <div class="grid p-3">
-        <div class="w-full" v-for="sub in menu.children">
-          <div class="flex cursor-pointer items-center">
-            <a class="p-2" :href="sub.link">
-              <span> {{ sub.title }}</span>
-            </a>
-          </div>
-          <div
-            class="flex flex-col"
-            v-if="sub.children && sub.children.length > 0"
-          >
-            <a
-              v-for="sub2 in sub.children"
-              class="w-full px-3 py-2"
-              :href="sub2.link"
-            >
-              <span> {{ sub2.title }}</span>
-            </a>
-          </div>
+<header 
+  class="max-w-[760px] px-[25px] py-[10px] w-full flex mx-auto" 
+  :style="`${s.color_bg ? `background: ${s.color_bg}` : ''}; ${s.color_text ? `color: ${s.color_text}` : ''}`">
+  <div class="flex items-center gap-3">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M9 2.20833C9.59259 1.76389 10.4074 1.76389 11 2.20833L16.8333 6.58333C17.253 6.89809 17.5 7.39207 17.5 7.91667V15.8333C17.5 16.7538 16.7538 17.5 15.8333 17.5H11.75C11.2437 17.5 10.8333 17.0896 10.8333 16.5833V11.6667C10.8333 11.2064 10.4602 10.8333 10 10.8333C9.53976 10.8333 9.16667 11.2064 9.16667 11.6667V16.5833C9.16667 17.0896 8.75626 17.5 8.25 17.5H4.16667C3.24619 17.5 2.5 16.7538 2.5 15.8333V7.91667C2.5 7.39207 2.74699 6.89809 3.16667 6.58333L9 2.20833ZM10 3.54167L4.16667 7.91667V15.8333H7.5V11.6667C7.5 10.286 8.61929 9.16667 10 9.16667C11.3807 9.16667 12.5 10.286 12.5 11.6667V15.8333H15.8333V7.91667L10 3.54167Z" fill="#03102F"/>
+    </svg>    
+    <h1 class="ml-[20px] text-sm">{{ business.name }}  </h1>
+  </div>
+  <div class="ml-auto text-sm">
+    <template v-for="(menu, idx) in general.navigation_menus">
+      <a
+        v-if="idx < 12 && (!menu.children || menu.children.length === 0)"
+        class="px-3 py-2 flex-shrink-0"
+        :href="menu.link"
+      >
+        {{ menu.title }}
+      </a>
+      <div class="flex-shrink-0 relative" v-else-if="idx < 12">
+        <div class="flex items-center gap-3 cursor-pointer" @click="setState('Header','showMenu', !s.showMenu.includes(menu.link) ? [...s.showMenu, menu.link] : s.showMenu.filter(sm => sm !== menu.link))">
+          {{ menu.title }}  <s-dropdown-icon :open="s.showMenu.includes(menu.link)" />
         </div>
+        <div v-if="s.showMenu.includes(menu.link)" class="grid p-3 absolute" >
+          <div class="w-full" v-for="sub in menu.children">
+            <div class="flex cursor-pointer items-center">
+              <a class="p-2 flex-shrink-0" :href="sub.link">
+                {{ sub.title }}
+              </a>
+            </div>
+            <div
+              class="flex flex-col"
+              v-if="sub.children && sub.children.length > 0"
+            >
+              <a
+                v-for="sub2 in sub.children"
+                class="w-full px-3 py-2 flex-shrink-0"
+                :href="sub2.link"
+              >
+                {{ sub2.title }}
+              </a>
+            </div>
+          </div> 
+     </div>
       </div>
-    </div>
-  </template>
+    </template>
+  </div>
 </header>

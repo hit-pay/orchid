@@ -68,6 +68,8 @@ export function useTheme() {
   const setState = (name, key, value) => {
     // by default for sections
     state.value.sections[name][key] = value;
+
+    console.log('setState :', name, key, value)
   };
   
   const setProductState = (product) => {

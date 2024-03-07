@@ -86,6 +86,7 @@ components.value.forEach((comp, index) => {
       fetch(pathName + comp.name + ".html")
         .then((r) => r.text())
         .then((template) => {
+          console.log(comp.name, comp.props)
           const SComponent = {
             props: {
               ...comp.props,

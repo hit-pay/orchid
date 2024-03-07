@@ -3,47 +3,46 @@
 const common = [
   {
     name: "s-btn",
-    theme: "default",
+    // theme: "default", add this props if using default theme components
     props: {
-      label: String,
+      label: "",
+    },
+  },
+  {
+    name: "s-dropdown-icon",
+    props: {
+      open: false,
     },
   },
   {
     name: "s-logo",
-    theme: "default",
   },
   {
     name: "s-navigation-menus",
-    theme: "default",
   },
   {
     name: "s-search-icon",
-    theme: "default",
   },
   {
     name: "s-search-popup",
-    theme: "default",
   },
   {
     name: "s-cart-icon",
-    theme: "default",
   },
   {
     name: "s-category-filter",
-    theme: "default",
   },
   {
     name: "s-product-card",
     props: {
-      product: Object,
+      product: {},
     },
   },
   {
     name: "s-search-filter",
     path: "sections",
-    theme: "default",
     props:{
-      meta: Object
+      meta: {}
     }
   },
 ];
@@ -52,7 +51,6 @@ const sections = [
   {
     name: "s-top-banner",
     path: "sections",
-    theme: "default",
     section: "TopBanner",
     state: {
       show: true
@@ -61,7 +59,6 @@ const sections = [
   {
     name: "s-headers",
     path: "sections",
-    theme: "default",
     section: "Header",
     state: {
       showMenu: [],
@@ -97,7 +94,6 @@ const sections = [
   {
     name: "s-search-products",
     path: "sections",
-    theme: "default",
     state: {
       meta: {
         page: '',
