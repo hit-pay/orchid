@@ -64,7 +64,6 @@ export function useTheme() {
     console.log(state.value)
   };
 
-
   const setState = (name, key, value) => {
     // by default for sections
     state.value.sections[name][key] = value;

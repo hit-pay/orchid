@@ -6,12 +6,10 @@ import { MotionPlugin } from "@vueuse/motion";
 
 import "vue3-carousel/dist/carousel.css";
 
-//  // TODO: move storefront data to API
-import storefront from "./storefront-default-settings.json";
-
 const mountEl = document.querySelector("#app");
 const props = { ...mountEl.dataset };
 const components = computed(() => JSON.parse(props.components));
+const storefront = computed(() => JSON.parse(props.storefront));
 const pathDefault = ref("/default/");
 const path = ref("/" + props.theme + "/");
 
@@ -32,7 +30,7 @@ const {
   init,
 } = useTheme();
 
-init(storefront, components.value, props.theme, props.page);
+init(storefront.value, components.value, props.theme, props.page);
 
 const app = createApp({
   setup() {

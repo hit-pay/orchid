@@ -7,15 +7,44 @@
   </head>
   <body>
     <div id="app" data-theme="default" data-page="home"></div>
-
     <script type="module">
-      // TODO: move component to API
-      import { c } from "./src/components.js";
-      document
-        .getElementById("app")
-        .setAttribute("data-components", JSON.stringify(c));
-    </script>
+      // TODO: move to laravel props data
 
-    <script type="module" src="/src/app.js"></script>
+      const urlsToFetch = [
+        '/components.json',
+        '/storefront.json',
+      ];
+        // Function to fetch all of the URLs in parallel
+       const fetchURLs = async (urls) => {
+            try {
+                const promises =
+                    urls.map(url => fetch(url));
+                // Wait for all of the promises to resolve
+                const responses =
+                    await Promise.all(promises);
+                // Extract JSON data from responses
+                const data = await
+                    Promise.all(responses.map(response => response.json()));
+                return data}
+            catch (error) {
+                throw new Error(`Failed to fetch data: ${error}`)
+              }
+        }
+        
+        fetchURLs(urlsToFetch)
+          .then(data => {
+              const appElement = document.querySelector("#app")
+              
+              appElement.setAttribute("data-components", JSON.stringify(data[0]))
+              appElement.setAttribute("data-storefront", JSON.stringify(data[1]))
+
+              const appScript = document.querySelector("#app-js")
+              appScript.setAttribute("src", appScript.getAttribute("preload-src"))
+          })
+          .catch(error => {
+              console.error('Error fetching data:', error)
+          });
+    </script>
+    <script id="app-js" type="module" preload-src="/src/app.js"></script>
   </body>
 </html>
