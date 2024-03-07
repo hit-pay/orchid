@@ -74,7 +74,7 @@ const sections = [
     section: "Header",
     state: {
       showMenu: [],
-      showMobileMenu: true
+      showMobileMenu: false
     }
   },
   {

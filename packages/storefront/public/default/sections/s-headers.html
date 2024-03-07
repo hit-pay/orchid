@@ -13,7 +13,7 @@
     </div>
     <div class="lg:flex ml-auto" :class="{
       'hidden': !s.showMobileMenu,
-      'absolute bg-white min-h-[80vh] lg:min-h-0 w-full lg:w-auto left-0 top-[40px] p-[20px] lg:top-0 lg:p-0 flex lg:relative justify-center': s.showMobileMenu,
+      'transition ease-in-out absolute bg-white min-h-[80vh] lg:min-h-0 w-full lg:w-auto left-0 top-[40px] p-[20px] lg:top-0 lg:p-0 flex lg:relative justify-center': s.showMobileMenu,
     }">
       <template v-for="(menu, idx) in general.navigation_menus">
        
