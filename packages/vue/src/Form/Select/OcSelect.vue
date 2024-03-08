@@ -299,6 +299,7 @@ onMounted(() => {
             ref="searchInputRef"
             v-model="query"
             icon="search"
+            class="sticky top-3 z-10"
             placeholder="Search"
             @update:model-value="$emit('onSearchKeywords', query)"
           >
