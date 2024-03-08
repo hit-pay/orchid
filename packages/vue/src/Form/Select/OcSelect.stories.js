@@ -104,6 +104,7 @@ export const Default = {
     isRequired: false,
     isCheckboxes: false,
     isSelectAll: false,
+    isTransparent: false,
     labelIcon: "",
     tooltipText: "Tooltip text",
     tooltipOptions: {
@@ -139,6 +140,7 @@ export const Default = {
                   :tooltip-options="args.tooltipOptions"
                   :label-icon="args.labelIcon"
                   :tooltip-text="args.tooltipText"
+                  :is-transparent="args.isTransparent"
                   @on-search-keywords="(query) => console.log(query)"
               />
             </div>
