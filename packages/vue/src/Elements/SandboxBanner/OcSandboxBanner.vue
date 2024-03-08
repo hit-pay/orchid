@@ -18,11 +18,9 @@ defineProps({
     class="w-screen relative h-[40px] bg-oc-error flex items-center justify-center text-white"
   >
     <span>
-      {{ title || "You are using test data. Real money won’t be charged" }}
+      {{ title }}
     </span>
 
     <Chip v-if="chipProps" class="absolute left-[40px]" v-bind="chipProps" />
   </div>
 </template>
-
-<style scoped lang="scss"></style>
