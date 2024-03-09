@@ -43,7 +43,7 @@ const emit = defineEmits({
   "option-removed": [],
 });
 
-const localValue = ref(props.modelValue || []);
+const localValue = ref(...(props.modelValue || []));
 
 const inputRef = ref();
 
