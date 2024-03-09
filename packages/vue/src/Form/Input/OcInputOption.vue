@@ -1,6 +1,6 @@
 <script setup>
 import { BaseInput, Input, Chip, Icon } from "@/orchidui";
-import { computed, ref, watch } from 'vue';
+import { computed, ref } from "vue";
 
 const props = defineProps({
   label: String,
@@ -43,7 +43,7 @@ const emit = defineEmits({
   "option-removed": [],
 });
 
-const localValue = ref([]);
+const localValue = ref(...(props.modelValue || []));
 
 const inputRef = ref();
 
@@ -81,12 +81,6 @@ const setNewValue = (value) => {
   emit("update:modelValue", localValue.value);
   emit("option-added", value);
 };
-
-watch(props.modelValue, () => {
-  localValue.value = [...(props.modelValue || [])]
-}, {
-  immediate: true,
-});
 
 defineExpose({
   focus: () => inputRef.value.focus(),
