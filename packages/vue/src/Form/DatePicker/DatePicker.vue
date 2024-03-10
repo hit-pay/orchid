@@ -73,6 +73,7 @@ const props = defineProps({
 });
 
 const isDropdownOpened = ref(false);
+const inputTypeSelecting = ref(undefined)
 
 const isRangeInput = computed(() => props.type === "range");
 
@@ -109,6 +110,10 @@ const resetCalendar = () => {
 
   isDropdownOpened.value = false;
 };
+
+const selectInput = (inputType) => {
+  inputTypeSelecting.value = inputType;
+}
 
 const defaultDateRange = () => [dayjs().toDate(), dayjs().toDate()];
 </script>
@@ -155,6 +160,7 @@ const defaultDateRange = () => [dayjs().toDate(), dayjs().toDate()];
             is-readonly
             :has-error="errorMessage.length > 0"
             :is-required="isRequired"
+            @click="selectInput('from')"
           />
           <Input
             :label="`${label} ${maxLabel}`"
@@ -167,6 +173,7 @@ const defaultDateRange = () => [dayjs().toDate(), dayjs().toDate()];
             is-readonly
             :has-error="errorMessage.length > 0"
             :is-required="isRequired"
+            @click="selectInput('to')"
           />
         </div>
       </div>
@@ -192,6 +199,7 @@ const defaultDateRange = () => [dayjs().toDate(), dayjs().toDate()];
         :min-date="minDate"
         position="inline"
         :type="type"
+        :date-selecting="inputTypeSelecting"
         @update:model-value="updateCalendar"
         @reset-calendar="resetCalendar"
       />
