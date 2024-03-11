@@ -1,0 +1,15 @@
+[
+ 
+  {
+    "name": "s-top-banner",
+    "path": "sections",
+    "section": "TopBanner",
+    "state": {
+      "show": true
+    }
+  },
+  {
+    "name": "s-home-page",
+    "path": "page"
+  }
+]

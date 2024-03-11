@@ -6,13 +6,15 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
-    <div id="app" data-theme="default" data-page="home"></div>
+    <div id="app" data-page="home" data-theme-assets="/default/"></div>
     <script type="module">
       // TODO: move to laravel props data
 
       const urlsToFetch = [
-        '/components.json',
+        '/default/components.json',
         '/storefront.json',
+        '/products.json',
+        '/default/components/layout/app.html',
       ];
         // Function to fetch all of the URLs in parallel
        const fetchURLs = async (urls) => {
@@ -24,7 +26,13 @@
                     await Promise.all(promises);
                 // Extract JSON data from responses
                 const data = await
-                    Promise.all(responses.map(response => response.json()));
+                    Promise.all(responses.map(response => {
+                      if(response.url.includes('.html')){
+                        return response.text()
+                      }else{
+                        return response.json()
+                      }
+                    }));
                 return data}
             catch (error) {
                 throw new Error(`Failed to fetch data: ${error}`)
@@ -36,7 +44,9 @@
               const appElement = document.querySelector("#app")
               
               appElement.setAttribute("data-components", JSON.stringify(data[0]))
-              appElement.setAttribute("data-storefront", JSON.stringify(data[1]))
+              appElement.setAttribute("data-storefront-data", JSON.stringify(data[1]))
+              appElement.setAttribute("data-products", JSON.stringify(data[2]))
+              appElement.setAttribute("data-app-layout", data[3])
 
               const appScript = document.querySelector("#app-js")
               appScript.setAttribute("src", appScript.getAttribute("preload-src"))
@@ -45,6 +55,6 @@
               console.error('Error fetching data:', error)
           });
     </script>
-    <script id="app-js" type="module" preload-src="/src/app.js"></script>
+    <script id="app-js" type="module" preload-src="/src/storefront.js"></script>
   </body>
 </html>

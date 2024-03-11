@@ -1,0 +1,19 @@
+<s-top-banner
+    v-if="topBanner.active && !isLinkInBio"
+    :data-sid="topBanner.key"
+    data-stitle="Top Banner"
+    :s="{...topBanner, ...state.sections.TopBanner}"
+/>
+<s-headers
+    v-if="!isLinkInBio"
+    :data-sid="header.key"
+    data-stitle="Header"
+    :s="{...header, ...state.sections.Header}"
+/>
+<s-home-page />
+<s-footer
+    v-if="!isLinkInBio"
+    :data-sid="footer.key"
+    data-stitle="Footer"
+    :s="{...footer, ...state.sections.Footer}"
+/>

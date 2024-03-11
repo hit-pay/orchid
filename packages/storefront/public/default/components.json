@@ -96,18 +96,7 @@
     "path": "sections"
   },
   {
-    "name": "s-search-products",
-    "path": "sections",
-    "state": {
-      "meta": {
-        "page": "",
-        "per_page": "",
-        "category_ids": "",
-        "sort_by": "",
-        "price_from": "",
-        "price_to": ""
-      },
-      "products": []
-    }
+    "name": "s-home-page",
+    "path": "page"
   }
 ]

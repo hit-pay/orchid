@@ -1,0 +1,11 @@
+<div
+  v-if="s.show"
+  v-motion-slide-top
+  class="bg-primary text-primary_text  w-full text-center px-12 py-[11px]"
+  :style="`${s.color_bg ? `background: ${s.color_bg}` : ''}; ${s.color_text ? `color: ${s.color_text}` : ''}`"
+>
+  {{business.banner_promotion ?? general.top_banner_content}}
+  <svg v-if="general.top_banner_closable" class="absolute right-3 top-3 cursor-pointer" @click="action.setState('TopBanner','show', false)" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M16.192 6.34399L11.949 10.586L7.707 6.34399L6.293 7.75799L10.535 12L6.293 16.242L7.707 17.656L11.949 13.414L16.192 17.656L17.606 16.242L13.364 12L17.606 7.75799L16.192 6.34399Z" fill="white" fill-opacity="0.5"/>
+  </svg>
+</div>

@@ -8,7 +8,7 @@
       <s-logo
         :url="business.logo"
         :name="business.name"
-        :show-name="s.show_name ?? true"
+        :show-name="s.show_business_name"
       />
     </div>
     <div class="lg:flex ml-auto" :class="{
@@ -21,7 +21,7 @@
           <a
             :href="menu.link"
             class="flex items-center gap-1 cursor-pointer justify-center lg:justify-start"
-            @click.prevent="setState('Header','showMenu', !s.showMenu.includes(menu.link) ? [...s.showMenu, menu.link] : s.showMenu.filter(sm => sm !== menu.link))"
+            @click.prevent="action.setState('Header','showMenu', !s.showMenu.includes(menu.link) ? [...s.showMenu, menu.link] : s.showMenu.filter(sm => sm !== menu.link))"
           >
             {{ menu.title }}
             <s-dropdown-icon v-if="menu.children" :open="s.showMenu.includes(menu.link)" />
@@ -35,7 +35,7 @@
             <div class="w-full mt-2" v-for="sub in menu.children">
               <div class="cursor-pointer items-center">
                 <a class="flex items-center gap-1 cursor-pointer justify-center lg:justify-start" :href="sub.link" 
-                @click.prevent="setState('Header','showMenu', !s.showMenu.includes(sub.link) ? [...s.showMenu, sub.link] : s.showMenu.filter(sm => sm !== sub.link))"
+                @click.prevent="action.setState('Header','showMenu', !s.showMenu.includes(sub.link) ? [...s.showMenu, sub.link] : s.showMenu.filter(sm => sm !== sub.link))"
                 >
                   {{ sub.title }}
                   <s-dropdown-icon v-if="sub.children" :open="s.showMenu.includes(sub.link)" />
@@ -61,7 +61,7 @@
     <div class="ml-auto lg:ml-[20px] flex items-center gap-3">
       <s-search-icon /> 
       <s-cart-icon /> 
-      <s-menu-icon class="lg:hidden" :open="s.showMobileMenu" @click="setState('Header','showMobileMenu', !s.showMobileMenu)"  /> 
+      <s-menu-icon class="lg:hidden" :open="s.showMobileMenu" @click="action.setState('Header','showMobileMenu', !s.showMobileMenu)"  /> 
     </div>
   </div>
 </header>

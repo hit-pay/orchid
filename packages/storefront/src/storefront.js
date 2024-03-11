@@ -1,116 +1,168 @@
-import { ref, computed } from "vue";
-export function useTheme() {
-  const business = ref({});
-  const store_design = ref({
-    general: {},
-    sections: [],
-  });
+import {
+  defineAsyncComponent,
+  createApp,
+  ref,
+  computed,
+  reactive,
+} from "vue";
 
-  const state = ref({
-    page: "home",
-    sections: {},
-    product: {},
-    search: {
-      meta: {
-        keyword: "",
-        categories: [],
-        page: 1,
-        per_page: 10,
-      },
-      products: {},
-    },
-  });
+import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
+import { MotionPlugin } from "@vueuse/motion";
+import "vue3-carousel/dist/carousel.css";
 
-  const general = computed(() => store_design.value.general);
-  const styles = computed(() =>
-    store_design.value.sections.find((s) => s.section === "Styles"),
-  );
-  const topBanner = computed(() =>
-    store_design.value.sections.find((s) => s.section === "TopBanner"),
-  );
-  const header = computed(() =>
-    store_design.value.sections.find((s) => s.section === "Header"),
-  );
-  const banner = computed(() =>
-    store_design.value.sections.find((s) => s.section === "Banner"),
-  );
-  const footer = computed(() =>
-    store_design.value.sections.find((s) => s.section === "FooterContent"),
-  );
-  const sections = computed(() =>
-    store_design.value.sections.filter((s) => s.group === "sections"),
-  );
+const mountEl = document.querySelector("#app");
+const props = { ...mountEl.dataset };
 
-  const init = (storefront, componentSettings, theme, page) => {
-    let defaultState = {};
-    storefront.store_design.sections.forEach((s) => {
-      if (s.group !== "styles" && s.group !== "link_in_bio") {
-        const comp = componentSettings.find(c => c.section === s.section)
-        if(comp && comp.state){
-          defaultState[s.key] = comp.state;
-        }else{
-          defaultState[s.key] = {};
-        }
-       
-      }
-    });
-    state.value.sections = defaultState;
-    business.value = storefront.business;
-    store_design.value = storefront.store_design;
+const storefront = computed(() => JSON.parse(props.storefrontData));
+const appLayout = computed(() => props.appLayout);
+const components = computed(() => JSON.parse(props.components));
 
-    state.value.theme = theme;
-    state.value.page = page;
+const path = ref(props.themeAssets + "/components/");
 
-    console.log(state.value)
-  };
+const state = reactive({
+  route: {},
+  business: {},
+  store_design: {
+      general: {},
+      sections: [],
+  },
+  page: "home",
+  sections: {},
+  product: {},
+});
 
-  const setState = (name, key, value) => {
-    // by default for sections
-    state.value.sections[name][key] = value;
-
-    console.log('setState :', name, key, value)
-  };
-  
-  const setProductState = (product) => {
-    state.value.product = product;
-  };
-
-  const action = ref({
-    addToCart: () => {
+const action = {
+  setState(section, key, value) {
+      state.sections[section][key] = value;
+  },
+  addToCart: () => {
       console.log("add to cart");
-    },
-    viewPage: (path) => {
+  },
+  viewPage: (path) => {
       console.log("View page path :", path);
-    },
-    getProducts: () => {
-      // setSectionState()
-    },
-    searchProducts: () => {
-      // api set state.search.products
-    },
-  });
+  },
+  getProducts: () => {
+      //
+  },
+  updateStoreDesign(data) {
+      state.store_design = data;
+  },
+  init: (storefront, componentSettings) => {
+      let defaultState = {};
 
-  const cartProducts = computed(() => {
-    return {
-      total: 0,
-      last_added: 0,
-    };
-  });
+      storefront.store_design.sections.forEach((s) => {
+          if (s.group !== "styles" && s.group !== "link_in_bio") {
+              const comp = componentSettings?.find(
+                  (c) => c.section === s.section,
+              );
+              if (comp && comp.state) {
+                  defaultState[s.key] = comp.state;
+              } else {
+                  defaultState[s.key] = {};
+              }
+          }
+      });
 
-  return {
-    init,
-    state,
-    action,
-    business,
-    general,
-    styles,
-    topBanner,
-    header,
-    banner,
-    footer,
-    sections,
-    setState,
-    setProductState,
-    cartProducts,
-  };
-}
+      state.business = storefront.business;
+      state.store_design = storefront.store_design;
+      state.sections = defaultState;
+  },
+};
+
+action.init(storefront.value, components.value);
+
+const business = computed(() => state.business);
+
+const general = computed(() => state.store_design.general);
+
+const styles = computed(() =>
+  state.store_design.sections.find((s) => s.section === "Styles"),
+);
+const topBanner = computed(() =>
+  state.store_design.sections.find((s) => s.section === "TopBanner"),
+);
+const header = computed(() =>
+  state.store_design.sections.find((s) => s.section === "Header"),
+);
+const banner = computed(() =>
+  state.store_design.sections.find((s) => s.section === "Banner"),
+);
+const footer = computed(() =>
+  state.store_design.sections.find((s) => s.section === "FooterContent"),
+);
+const sections = computed(() =>
+  state.store_design.sections.filter((s) => s.group === "sections"),
+);
+
+const app = createApp({
+  setup() {
+
+      const isHomePage = true;
+      const isLinkInBio = false;
+
+      return {
+          business,
+          state,
+          general,
+          styles,
+          action,
+          // used in layout
+          topBanner,
+          header,
+          footer,
+          // multiple route logic
+          isHomePage,
+          isLinkInBio,
+      };
+  },
+  template: appLayout.value,
+});
+
+components.value.forEach((comp, index) => {
+  const newComponent = defineAsyncComponent(() => {
+      return new Promise((resolve, reject) => {
+          let pathName = path.value;
+          if (comp.path) {
+              pathName = pathName + comp.path + "/";
+          }
+          fetch(pathName + comp.name + ".html")
+              .then((r) => r.text())
+              .then((template) => {
+                  const SComponent = {
+                      props: {
+                          ...comp.props,
+                          s: Object,
+                      },
+                      setup() {
+                          return {
+                              business,
+                              state,
+                              general,
+                              styles,
+                              action,
+                              // used in homepage
+                              banner,
+                              sections,
+                          };
+                      },
+                      template: template,
+                  };
+                  resolve(SComponent);
+              })
+              .catch(() => {
+                  reject("component not found");
+              });
+      });
+  });
+  app.component(comp.name, newComponent);
+
+  if (index + 1 === components.value.length) {
+      app.component("SCarousel", Carousel);
+      app.component("SSlide", Slide);
+      app.component("SSlidePagination", Pagination);
+      app.component("SSlideNavigation", Navigation);
+
+      app.use(MotionPlugin);
+      app.mount("#app");
+  }
+});

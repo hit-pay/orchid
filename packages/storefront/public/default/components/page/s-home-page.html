@@ -1,0 +1,14 @@
+<s-banner
+    v-if="banner.active"
+    :data-sid="banner.key"
+    data-stitle="Banner"
+    :s="{...banner, ...state.sections.Banner}"
+/>
+<template v-for="item in sections">
+    <s-products
+        v-if="item.section === 'Products'"
+        :data-sid="item.key"
+        :data-stitle="item.title"
+        :s="{...item, ...state.sections[item.key]}"
+    />
+</template>

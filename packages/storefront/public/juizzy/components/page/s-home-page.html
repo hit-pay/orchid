@@ -1,0 +1,20 @@
+<old-banner
+    v-if="banner.active"
+    :data-sid="banner.key"
+    data-stitle="Banner"
+    :settings="{...banner, ...state.sections.Banner}"
+/>
+<template v-for="item in sections">
+    <old-products
+        v-if="item.section === 'Products'"
+        :data-sid="item.key"
+        :data-stitle="item.title"
+        :settings="{...item, ...state.sections[item.key]}"
+    />
+    <old-text-and-image
+        v-if="item.section === 'TextAndImage'"
+        :data-sid="item.key"
+        :data-stitle="item.title"
+        :settings="{...item, ...state.sections[item.key]}"
+    />
+</template>
