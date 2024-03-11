@@ -203,7 +203,6 @@ const isDayInRange = (day) => {
 
 const isDayDisabled = (day) => {
   const currentDate = dayjs(selectedDate.value).date(day);
-  console.log('currentDate', currentDate)
   return (
     props.disabledDate(currentDate.toDate()) ||
     (props.minDate && currentDate.isBefore(dayjs(props.minDate), "day")) ||
@@ -237,9 +236,7 @@ const doneSelecting = () => {
 
 const isCalendarIndefinite = ref(false);
 const handleIndefinite = (value) => {
-  console.log('value', value)
   emit("update:isIndefinite", value);
-  // isCalendarIndefinite.value = value;
 };
 </script>
 

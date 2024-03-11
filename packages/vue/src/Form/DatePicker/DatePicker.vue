@@ -125,14 +125,8 @@ const disableAllDates = (value) => {
 const isCalendarIndefinite = ref(false);
 
 const handleIndefinite = (event) => {
-  console.log('event from calendar', event)
-  if (event) {
-    // emit("update:modelValue", 'Indefinite');
-    isCalendarIndefinite.value = true;
-  } else {
-    isCalendarIndefinite.value = false;
-  }
-  event ? emit("update:modelValue", 'Indefinite') : emit("update:modelValue", null);
+  isCalendarIndefinite.value = event;
+  emit("update:modelValue", event ?  "Indefinite" : null);
 }
 </script>
 
