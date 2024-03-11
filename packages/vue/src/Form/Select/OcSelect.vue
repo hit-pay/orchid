@@ -27,6 +27,7 @@ const props = defineProps({
   isCheckboxes: Boolean,
   isSelectAll: Boolean,
   isAddNew: Boolean,
+  isTransparent: Boolean,
   options: Array,
   modelValue: [Array, String, Number],
   maxVisibleOptions: {
@@ -241,6 +242,7 @@ onMounted(() => {
           'border-oc-error': errorMessage && !isDisabled,
           'pointer-events-none bg-oc-bg-dark': isDisabled,
           'py-3': multiple,
+          'border-none !min-h-[30px] px-0': isTransparent,
         }"
       >
         <div v-if="multiple" class="flex flex-wrap gap-2 overflow-hidden">
@@ -297,6 +299,7 @@ onMounted(() => {
             ref="searchInputRef"
             v-model="query"
             icon="search"
+            class="sticky top-3 z-10"
             placeholder="Search"
             @update:model-value="$emit('onSearchKeywords', query)"
           >
