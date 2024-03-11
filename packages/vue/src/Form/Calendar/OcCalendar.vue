@@ -1,5 +1,5 @@
 <script setup>
-import { Button, Icon } from "@/orchidui";
+import { Button, Icon, Checkbox } from "@/orchidui";
 import { computed, ref } from "vue";
 import dayjs from "dayjs";
 import isBetween from "dayjs/plugin/isBetween";
@@ -39,8 +39,16 @@ const props = defineProps({
     type: Function,
     default: () => false,
   },
+  isIndefinite: {
+    type: Boolean,
+    default: false,
+  },
+  inDefiniteLabel: {
+    type: String,
+    default: 'Indefinite'
+  }
 });
-const emit = defineEmits(["update:modelValue", "resetCalendar"]);
+const emit = defineEmits(["update:modelValue", "resetCalendar", "update:isIndefinite"]);
 
 const selectedDate = ref(
   props.type === "range"
@@ -195,6 +203,7 @@ const isDayInRange = (day) => {
 
 const isDayDisabled = (day) => {
   const currentDate = dayjs(selectedDate.value).date(day);
+  console.log('currentDate', currentDate)
   return (
     props.disabledDate(currentDate.toDate()) ||
     (props.minDate && currentDate.isBefore(dayjs(props.minDate), "day")) ||
@@ -225,6 +234,13 @@ const doneSelecting = () => {
       : selectedStartDate.value.toDate(),
   );
 };
+
+const isCalendarIndefinite = ref(false);
+const handleIndefinite = (value) => {
+  console.log('value', value)
+  emit("update:isIndefinite", value);
+  // isCalendarIndefinite.value = value;
+};
 </script>
 
 <template>
@@ -233,8 +249,12 @@ const doneSelecting = () => {
     :class="position === 'floating' ? 'shadow-normal bg-white' : ''"
   >
     <div class="flex items-center justify-between">
-      <span>{{ selectedMonth }}</span>
-      <div class="flex gap-x-3">
+      <span
+        :class="[isCalendarIndefinite ? 'pointer-events-none opacity-[.35]' : '']"
+      >
+        {{ selectedMonth }}
+      </span>
+      <div class="flex gap-x-3" :class="[isCalendarIndefinite ? 'pointer-events-none opacity-[.35]' : '']" >
         <Icon
           name="chevron-down"
           class="rotate-90 cursor-pointer"
@@ -277,6 +297,14 @@ const doneSelecting = () => {
         {{ day }}
       </div>
     </div>
+
+    <slot name="bottom">
+      <span
+        v-if="isIndefinite"
+      >
+          <Checkbox v-model="isCalendarIndefinite" :label="inDefiniteLabel" @update:model-value="handleIndefinite" />
+      </span>
+    </slot>
 
     <div class="flex gap-x-3 justify-end">
       <Button
