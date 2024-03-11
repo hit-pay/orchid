@@ -42,6 +42,9 @@ const className = computed(() => {
     case "gray":
       className = "bg-oc-gray-100 text-oc-gray-700 ";
       break;
+    case "light-red":
+      className = "bg-oc-error-50 text-oc-error";
+      break;
     default:
       className = "bg-oc-primary-50 text-oc-primary ";
       break;
@@ -71,6 +74,9 @@ const iconColor = computed(() => {
       break;
     case "gray":
       className = "text-oc-gray-400 ";
+      break;
+    case "light-red":
+      className = "text-oc-error ";
       break;
     default:
       className = "text-oc-primary-300 ";
