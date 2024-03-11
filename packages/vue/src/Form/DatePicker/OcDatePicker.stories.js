@@ -33,6 +33,7 @@ export const Default = {
     isRequired: true,
     label: "Date",
     isSplitInput: true,
+    isIndefinite: true
   },
   render: (args) => ({
     components: { Theme, DatePicker },
@@ -53,8 +54,8 @@ export const Default = {
           <DatePicker
             v-model="model"
             :key="args.type"
-            type="range"
-            :date-format="args.dateFormat"
+            type="default"
+            date-format="DD/MM/YYYY"
             :error-message="args.errorMessage"
             :disabled-date="checkDisableDate"
             :hint="args.hint"
@@ -65,8 +66,9 @@ export const Default = {
             :max-label="args.maxLabel"
             :is-required="args.isRequired"
             :is-split-input="args.isSplitInput"
+            :is-indefinite="args.isIndefinite"
           />
-          
+
           <div class="mt-8">
             DD/MM/YYYY:  {{ model1 }}
             <DatePicker

@@ -34,12 +34,16 @@ export const Default = {
                   :is-disabled="args.isDisabled"
                   v-model="value"
               >
-              
+
               <template #after>
                 After
               </template>
               </Checkbox>
             </div>
+            <div>
+                Model value:
+                {{ value }}
+              </div>
           </Theme>
         `,
   }),
