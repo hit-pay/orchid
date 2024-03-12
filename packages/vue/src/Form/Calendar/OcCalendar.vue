@@ -308,9 +308,10 @@ const handleIndefinite = (value) => {
         variant="secondary"
         class="w-[72px]"
         label="Clear"
+        :is-disabled="isCalendarIndefinite"
         @click="clearDate"
       />
-      <Button label="Done" class="w-[72px]" @click="doneSelecting" />
+      <Button label="Done" class="w-[72px]" :is-disabled="isCalendarIndefinite" @click="doneSelecting" />
     </div>
   </div>
 </template>

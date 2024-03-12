@@ -72,7 +72,7 @@ const props = defineProps({
   },
   isIndefinite: {
     type: Boolean,
-    default: true
+    default: false
   }
 });
 
