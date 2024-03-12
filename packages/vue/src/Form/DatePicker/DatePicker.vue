@@ -70,6 +70,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  isIndefinite: {
+    type: Boolean,
+    default: true
+  }
 });
 
 const isDropdownOpened = ref(false);
@@ -111,6 +115,19 @@ const resetCalendar = () => {
 };
 
 const defaultDateRange = () => [dayjs().toDate(), dayjs().toDate()];
+
+const disableAllDates = (value) => {
+  const date = dayjs(value);
+  const isInCurrentMonth = (date) => date.get('month') === dayjs().get('month');
+  return isInCurrentMonth(date);
+}
+
+const isCalendarIndefinite = ref(false);
+
+const handleIndefinite = (event) => {
+  isCalendarIndefinite.value = event;
+  emit("update:modelValue", event ?  "Indefinite" : null);
+}
 </script>
 
 <template>
@@ -128,9 +145,8 @@ const defaultDateRange = () => [dayjs().toDate(), dayjs().toDate()];
               ? modelValue && modelValue[0]
                 ? `${formattedDate[0].format(dateFormat)} - ${formattedDate[1].format(dateFormat)}`
                 : ''
-              : modelValue
-                ? formattedDate.format(dateFormat)
-                : ''
+              : modelValue === 'Indefinite' ? 'Indefinite' : modelValue
+                ? formattedDate.format(dateFormat) : ''
           "
           icon="calendar"
           :label="label"
@@ -187,12 +203,14 @@ const defaultDateRange = () => [dayjs().toDate(), dayjs().toDate()];
               ? formattedDate.toDate()
               : new Date()
         "
-        :disabled-date="disabledDate"
+        :disabled-date="isCalendarIndefinite ? disableAllDates : disabledDate"
         :max-date="maxDate"
         :min-date="minDate"
+        :is-indefinite="isIndefinite"
         position="inline"
         :type="type"
         @update:model-value="updateCalendar"
+        @update:is-indefinite="handleIndefinite"
         @reset-calendar="resetCalendar"
       />
     </template>
