@@ -8,16 +8,13 @@ Storybook : https://orchidui.vercel.app/storybook/
 
 npm install
 
-# run @orchidui / storybook
+# how to run OrchidUi on storybook
 
 npm run dev
 
 # publish
 
-npm run build
-cd packages/@orchidui-vue
-npm version patch
-npm publish
+npm run publish
 
 # TODO
 
