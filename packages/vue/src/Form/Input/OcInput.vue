@@ -210,7 +210,7 @@ const isPasswordInput = computed(() => props.inputType === "password");
       </div>
     </div>
 
-    <template #hint>
+    <template v-if="$slots.hint" #hint>
       <slot name="hint" />
     </template>
   </BaseInput>
