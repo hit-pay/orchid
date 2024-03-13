@@ -8,11 +8,11 @@
         {{ item }}
       </div>
     </div>
-    <div ref="barRaceChart" class="h-[100%]" />
+    <div ref="barRaceChart" class="h-full" />
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { computed, ref } from "vue";
 import { useChart } from "@/orchidui/composables/useChart.js";
 
@@ -123,9 +123,7 @@ const options = computed(() => ({
       },
     },
     {
-      data: props.chartData.map(
-        (i) => Math.max(...(props.chartData as number[])) * 0.002,
-      ),
+      data: props.chartData.map((i) => Math.max(...props.chartData) * 0.002),
       type: "bar",
       smooth: true,
       showSymbol: false,
