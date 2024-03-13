@@ -13,7 +13,6 @@ const props = defineProps({
   chartData: Array,
   labelData: Array,
   tooltipFormatter: Function,
-  tooltipCurrency: String,
 });
 const markLineData = ref({
   index: 0,
@@ -87,9 +86,9 @@ const options = computed(() => ({
 
       let percentTamplate = `<div class="text-oc-text-400 text-sm font-medium flex items-center gap-x-1">
                  <div
-                  class="w-0 h-0 rounded-xs border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent ${params.percent < 0 ? "border-t-[10px] border-t-oc-error" : "border-b-[10px] border-b-oc-success"}"
+                  class="w-0 h-0 rounded-xs border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent ${params.data?.percent < 0 ? "border-t-[6px] border-t-oc-error" : "border-b-[6px] border-b-oc-success"}"
                   ></div>
-                  <div>${params.percent}</div>
+                  <div>${params.data?.percent}%</div>
                 </div>`;
 
       return `
@@ -99,9 +98,9 @@ const options = computed(() => ({
                     ${params.name}
                 </span>
             </div>
-            <div class="text-oc-text font-medium text-[12px] flex items-center gap-x-3">
+            <div class="text-oc-text font-medium text-base flex items-center gap-x-3">
                 ${(params.value / 1000).toFixed(1) + "K"}
-                ${params.percent ? percentTamplate : ""}
+                ${params.data?.percent ? percentTamplate : ""}
             </div>
         </div>
 
