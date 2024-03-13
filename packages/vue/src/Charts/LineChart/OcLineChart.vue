@@ -40,7 +40,10 @@ const options = computed(() => ({
         formatter: (params) => {
           const labelIndex = options.value.xAxis.data.indexOf(params.value);
           markLineData.value.index = params.value;
-          markLineData.value.value = options.value.series[0].data[labelIndex];
+
+          const dataValue = options.value.series[0].data[labelIndex];
+
+          markLineData.value.value = dataValue?.value || dataValue;
         },
       },
       lineStyle: {
