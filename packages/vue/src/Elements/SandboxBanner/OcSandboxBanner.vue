@@ -15,9 +15,9 @@ defineProps({
 
 <template>
   <div
-    class="w-screen relative h-[40px] bg-oc-error flex items-center justify-center text-white"
+    class="w-screen relative h-[40px] bg-oc-accent-3 flex items-center justify-center text-white"
   >
-    <span>
+    <span class="text-sm">
       {{ title }}
     </span>
 

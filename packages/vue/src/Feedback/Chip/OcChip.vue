@@ -43,7 +43,7 @@ const className = computed(() => {
       className = "bg-oc-gray-100 text-oc-gray-700 ";
       break;
     case "light-red":
-      className = "bg-oc-error-50 text-oc-error";
+      className = "bg-oc-accent-3-50 text-oc-accent-3";
       break;
     default:
       className = "bg-oc-primary-50 text-oc-primary ";
