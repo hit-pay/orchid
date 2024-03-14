@@ -1,12 +1,13 @@
 import { ref, onBeforeUnmount, onMounted, watch } from "vue";
 import * as echarts from "echarts";
+import { markRaw } from "vue";
 
 export const useChart = (chartRef, options) => {
   const chart = ref();
 
   const renderChart = () => {
     if (chartRef.value) {
-      chart.value = echarts.init(chartRef.value);
+      chart.value = markRaw(echarts.init(chartRef.value));
       chart.value.setOption(options.value);
     }
   };

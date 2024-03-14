@@ -41,7 +41,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { Tooltip } from "@/orchidui";
 import { computed, onMounted, ref } from "vue";
 import { useChart } from "@/orchidui/composables/useChart.js";

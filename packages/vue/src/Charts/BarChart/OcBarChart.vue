@@ -2,7 +2,7 @@
   <div ref="barChart" class="w-full" />
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { computed, ref } from "vue";
 import { useChart } from "@/orchidui/composables/useChart.js";
 
@@ -69,6 +69,7 @@ const options = computed(() => ({
     show: props.showTooltip,
     padding: 0,
     borderWidth: 0,
+    borderRadius: 8,
     formatter: (params) => {
       if (props.tooltipFormatter) {
         return props.tooltipFormatter(params);
