@@ -70,3 +70,37 @@ export const vertical = {
     `,
   }),
 };
+
+export const usingSlot = {
+  name: "Using content slot",
+  argTypes: {
+    variant: {
+      control: "select",
+      options: ["small", "big"],
+    },
+    alignment: {
+      control: "select",
+      options: ["vertical", "horizontal"],
+    },
+  },
+  args: {
+    variant: "big",
+    label: "Alex Turner",
+    alignment: "vertical",
+  },
+  render: (args) => ({
+    components: { ListDetail, Theme },
+    setup() {
+      return {
+        args,
+      };
+    },
+    template: `
+      <Theme class="items-center mb-3">
+        <ListDetail :label="args.label" :content="args.content" :alignment="args.alignment">
+          <template #content><span>alex@arcticmonkey.io</span></template>
+        </ListDetail>
+      </Theme>
+    `,
+  }),
+};

@@ -51,6 +51,10 @@ const isVertical = computed(() => props.alignment === "vertical");
       </CopyTooltip>
     </div>
 
-    <span :class="{ 'text-base font-medium': isVertical }">{{ content }}</span>
+    <div :class="{ 'text-base font-medium': isVertical }">
+      <slot name="content">
+        <span>{{ content }}</span>
+      </slot>
+    </div>
   </div>
 </template>
