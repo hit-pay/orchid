@@ -41,6 +41,8 @@ export const Default = {
       position: "top",
       distance: 10,
     },
+    isCurrency: false,
+    currencyPrecision: 2,
   },
   render: (args) => ({
     components: { Theme, OCInput },
@@ -65,6 +67,8 @@ export const Default = {
                 :tooltip-options="args.tooltipOptions"
                 :label-icon="args.labelIcon"
                 :tooltip-text="args.tooltipText"
+                :is-currency="args.isCurrency"
+                :currency-precision="args.currencyPrecision"
                 autofocus
                 @focus="logEvent('focus')"
                 @blur="logEvent('blur')"
@@ -353,36 +357,19 @@ export const InputOptions = {
   }),
 };
 
-export const FormatValue = {
+export const currencyFormat = {
   args: {
     label: "Currency value",
     placeholder: "Currency format",
+    isCurrency: true,
+    currencyPrecision: 2,
   },
   render: (args) => ({
     components: { Theme, OCInput },
     setup() {
       const modelValue = ref(0);
 
-      const formatValue = (value) => {
-        let output = value;
-
-        if (Number(value) === 0) return "0.00";
-
-        // removing non-digit characters
-        output = +`${output}`.replace(/\D/g, "");
-
-        //
-        return (output / 100).toLocaleString("en-US", {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        });
-      };
-
-      const handleUpdateModelValue = (value) => {
-        modelValue.value = value.replaceAll(",", "");
-      };
-
-      return { modelValue, args, formatValue, handleUpdateModelValue };
+      return { modelValue, args };
     },
     template: `
           <Theme colorMode="light" class="py-4">
@@ -390,8 +377,10 @@ export const FormatValue = {
                 v-model="modelValue"
                 :label="args.label"
                 :placeholder="args.placeholder"
-                :formatValue="formatValue"
+                :is-currency="args.isCurrency"
+                :currency-precision="args.currencyPrecision"
             />
+            <div>Value: [{{modelValue}}]</div>
           </Theme>
         `,
   }),
