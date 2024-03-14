@@ -12,31 +12,37 @@ export const Line = {
     showLegend: true,
     chartData: [
       {
-        value: 39.64,
-        name: "stack_cards",
+        value: 3900.64,
+        name: "Shopify",
+        icon: "plugins/api_shopify",
+        itemStyle: { color: "#9BC34B" },
+      },
+      {
+        value: 2200.21,
+        name: "Link",
+        icon: "plugins/link",
         itemStyle: { color: "#2465DE" },
       },
       {
-        value: 22.21,
-        name: "paynow",
+        value: 1700.44,
+        name: "Invoice",
+        icon: "plugins/invoice",
         itemStyle: { color: "#B14AED" },
       },
       {
-        value: 17.44,
-        name: "atome",
+        value: 1500.78,
+        name: "Recurring billing",
+        icon: "plugins/recurring_billing",
         itemStyle: { color: "#F4B840" },
       },
       {
-        value: 15.78,
-        name: "fave",
-        itemStyle: { color: "#FF6B6C" },
-      },
-      {
-        value: 4.93,
-        name: "",
+        value: 400.93,
+        name: "Others",
+        legendTooltip: ["Online Store (1.5%)", "Google Form (0.3%)"],
         itemStyle: { color: "#E5E6EA" },
       },
     ],
+    tooltipCurrency: "SGD",
   },
   render: (args) => ({
     components: { PieChart },
@@ -51,6 +57,7 @@ export const Line = {
                 :show-tooltip="args.showTooltip"
                 :show-legend="args.showLegend"
                 :chart-data="args.chartData"
+                :tooltip-currency="args.tooltipCurrency"
             />
           </div>
         `,
