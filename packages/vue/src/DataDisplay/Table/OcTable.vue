@@ -8,6 +8,7 @@ const props = defineProps({
     required: true,
   },
   isLoading: Boolean,
+  isBorderless: Boolean,
   loadingRows: {
     type: Number,
     default: 10,
@@ -114,10 +115,11 @@ onMounted(() => onScroll());
 <template>
   <div
     ref="scrollTable"
-    class="flex text-oc-text flex-col border border-oc-gray-200 isolate z-10"
+    class="flex text-oc-text flex-col border-oc-gray-200 isolate z-10"
     :class="[
       isSticky ? 'overflow-x-auto' : 'overflow-hidden',
       isResponsive ? 'rounded' : 'md:rounded',
+      isBorderless ? '' : 'border',
     ]"
     @scroll="onScroll"
   >
@@ -169,6 +171,7 @@ onMounted(() => onScroll());
           v-for="header in headers"
           :key="header.key"
           :text="header.label"
+          :is-loading="isLoading"
           :variant="header.headerVariant"
           :is-sticky="isSticky"
           :class="[
@@ -199,6 +202,7 @@ onMounted(() => onScroll());
         class="flex flex-wrap md:flex-nowrap group/row border-oc-gray-200 md:p-0 py-3"
         :class="{
           'pl-[40px]': isSelectable,
+          'border-b': isBorderless,
         }"
       >
         <TableCell
