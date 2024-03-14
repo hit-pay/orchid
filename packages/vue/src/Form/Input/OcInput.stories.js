@@ -102,7 +102,7 @@ export const MainComponent = {
                 <OCInput
                     :label="args.label" :error-message="args.errorMessage" :hint="args.hint"
                     :placeholder="args.placeholder"
-                    :is-inline-label="args.inlineLabel"
+                    :is-inline-label="args.isInlineLabel"
                     :type="args.type"
                     :icon="args.icon"
                     :disabled="args.disabled"
@@ -110,7 +110,7 @@ export const MainComponent = {
                 <OCInput
                     :label="args.label" :error-message="args.errorMessage" :hint="args.hint"
                     :placeholder="args.placeholder"
-                    :is-inline-label="args.inlineLabel"
+                    :is-inline-label="args.isInlineLabel"
                     :type="args.type"
                     :icon="args.icon"
                     disabled
@@ -118,7 +118,7 @@ export const MainComponent = {
                 <OCInput
                     :label="args.label" :error-message="args.errorMessage" :hint="args.hint"
                     :placeholder="args.placeholder"
-                    :is-inline-label="args.label"
+                    :is-inline-label="args.isInlinelabel"
                     :type="args.type"
                     :icon="args.icon"
                 />
@@ -126,7 +126,7 @@ export const MainComponent = {
               <div class="flex items-end gap-x-4">
                 <OCInput
                     :placeholder="args.placeholder"
-                    :is-inline-label="args.inlineLabel"
+                    :is-inline-label="args.isInlineLabel"
                     :label="args.label" error-message="Default Error" :hint="args.hint"
                     :type="args.type"
                     :icon="args.icon"
@@ -135,7 +135,7 @@ export const MainComponent = {
                 <OCInput
                     :label="args.label" error-message="Disabled Error" :hint="args.hint"
                     :placeholder="args.placeholder"
-                    :is-inline-label="args.inlineLabel"
+                    :is-inline-label="args.isInlineLabel"
                     :type="args.type"
                     :icon="args.icon"
                     disabled
