@@ -20,10 +20,9 @@ defineEmits(["addCustomer", "editCustomer"]);
       v-for="(box, i) in boxes"
       :key="i"
       :class="
-        isCustomer
-          ? '!grid grid-cols-4 grid-rows-2 gap-y-4 w-full !py-4 ' +
-            (box?.style || '')
-          : ''
+        (isCustomer
+          ? '!grid grid-cols-4 grid-rows-2 gap-y-4 w-full !py-4 '
+          : ' ') + box?.style
       "
     >
       <slot
@@ -37,6 +36,8 @@ defineEmits(["addCustomer", "editCustomer"]);
           :key="`${i}-${j}`"
           is-transparent
           :title="field.title"
+          :class="field.class"
+          :is-loading="field.isLoading"
           :content="field.content"
         >
           <template v-if="field.slot && $slots[field.slot]" #content>
