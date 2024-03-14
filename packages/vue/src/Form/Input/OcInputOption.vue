@@ -82,10 +82,11 @@ const setNewValue = (value) => {
   emit("option-added", value);
 };
 
-watch(props.modelValue, () => {
+watch(() => props.modelValue, () => {
   localValue.value = [...(props.modelValue || [])]
 }, {
   immediate: true,
+  deep: true,
 });
 
 defineExpose({
