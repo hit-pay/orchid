@@ -82,10 +82,11 @@ const setNewValue = (value) => {
   emit("option-added", value);
 };
 
-watch(props.modelValue, () => {
+watch(() => props.modelValue, () => {
   localValue.value = [...(props.modelValue || [])]
 }, {
   immediate: true,
+  deep: true,
 });
 
 defineExpose({
@@ -120,28 +121,30 @@ defineExpose({
           }"
         >
           <div class="w-full flex flex-wrap gap-2">
-            <Chip
-              v-for="(option, index) in optionsVisible"
-              :key="`${option}-${index}`"
-              closable
-              :label="option"
-              @remove="removeOption(option)"
-            />
-            <Chip
-              v-if="localValue.length > maxVisibleOptions"
-              variant="gray"
-              @click="areAllOptionsVisible = !areAllOptionsVisible"
-            >
-              <Icon
-                v-if="areAllOptionsVisible"
-                name="minus"
-                width="12"
-                height="12"
+            <slot :options="optionsVisible" :are-all-options-visible="areAllOptionsVisible">
+              <Chip
+                v-for="(option, index) in optionsVisible"
+                :key="`${option}-${index}`"
+                closable
+                :label="option"
+                @remove="removeOption(option)"
               />
-              <span v-else>
-                {{ `+${localValue.length - maxVisibleOptions}` }}
-              </span>
-            </Chip>
+              <Chip
+                v-if="localValue.length > maxVisibleOptions"
+                variant="gray"
+                @click="areAllOptionsVisible = !areAllOptionsVisible"
+              >
+                <Icon
+                  v-if="areAllOptionsVisible"
+                  name="minus"
+                  width="12"
+                  height="12"
+                />
+                <span v-else>
+                  {{ `+${localValue.length - maxVisibleOptions}` }}
+                </span>
+              </Chip>
+            </slot>
 
             <input
               ref="inputRef"
