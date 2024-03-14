@@ -91,6 +91,14 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  isCurrency: {
+    type: Boolean,
+    default: false
+  },
+  currencyPrecision: {
+    type: Number,
+    default: 2
+  }
 });
 
 const emit = defineEmits(["update:modelValue", "blur", "focus"]);
@@ -99,6 +107,31 @@ const attrs = useAttrs();
 
 const inputRef = ref();
 const isPasswordVisible = ref(false);
+
+const formattedValue = computed(() => {
+  if(props.isCurrency) {
+    return formatCurrency(props.modelValue, {showThousandSeparator: true});
+  }
+
+  return props.modelValue;
+});
+
+const formatCurrency = (value, options = {}) => {
+  const { showThousandSeparator } = options
+  let output = (typeof value === 'number') ? value.toFixed(props.currencyPrecision) : value;
+
+  if (Number(output) === 0) return (0).toFixed(props.currencyPrecision);
+
+  // removing non-digit characters
+  output = +`${output}`.replace(/\D/g, '')
+
+  const currencyValue = (output / Math.pow(10, props.currencyPrecision)).toLocaleString("en-US", {
+    minimumFractionDigits: props.currencyPrecision,
+    maximumFractionDigits: props.currencyPrecision,
+  })
+
+  return showThousandSeparator ? currencyValue : currencyValue.replaceAll(',', '');
+};
 
 defineExpose({
   focus: () => inputRef.value.focus(),
@@ -125,6 +158,14 @@ const inputAttrs = computed(() => {
 
   return { inputAttributes, ...rest };
 });
+
+const onInput = event => {
+  if(props.isCurrency) {
+    emit('update:modelValue', formatCurrency(event.target.value));
+  } else {
+    emit('update:modelValue', event.target.value);
+  }
+}
 
 const isPasswordInput = computed(() => props.inputType === "password");
 </script>
@@ -167,7 +208,7 @@ const isPasswordInput = computed(() => props.inputType === "password");
           <span v-if="preFill" class="text-oc-text-300">{{ preFill }}</span>
           <input
             ref="inputRef"
-            :value="modelValue"
+            :value="formattedValue"
             :readonly="isReadonly"
             :placeholder="placeholder"
             :disabled="disabled"
@@ -183,7 +224,7 @@ const isPasswordInput = computed(() => props.inputType === "password");
               isFocused = false;
               $emit('blur');
             "
-            @input="$emit('update:modelValue', $event.target.value)"
+            @input="onInput"
           />
         </div>
       </div>
