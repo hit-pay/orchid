@@ -10,30 +10,38 @@
         position="top"
         class="flex items-center"
         :distance="10"
-        @click="toggleLegendName(item.name)"
       >
         <template #default>
           <div
-            class="flex items-center gap-x-2 cursor-pointer"
-            :class="!legendSelected[item.name] && 'grayscale'"
+            class="flex items-center gap-x-2 cursor-pointer transition-opacity"
+            @click="toggleLegendName(item)"
+            :class="{ 'opacity-30': item.hide }"
           >
             <div
               class="w-3 h-3 rounded-full"
               :style="{ background: item.itemStyle.color }"
             />
-            <img
-              v-if="item.name"
-              :src="legendImages[item.name]"
-              class="max-h-7"
-            />
-            <span v-else>Other</span>
+            <Icon v-if="item.icon" :name="item.icon" width="32" height="32" />
+            <div class="text-sm font-medium text-oc-text-500" v-else>
+              {{ item.name }}
+            </div>
           </div>
         </template>
         <template #popper>
           <div
-            class="py-2 text-sm text-oc-text-400 font-medium px-3 max-w-[217px]"
+            class="py-2 text-sm text-oc-text-400 font-medium px-3 max-w-[217px] w-max"
           >
-            {{ legendTooltipText[item.name] }}
+            <template v-if="item.legendTooltip">
+              <template v-if="Array.isArray(item.legendTooltip)">
+                <div v-for="(text, i) in item.legendTooltip" :key="i">
+                  {{ text }}
+                </div>
+              </template>
+              <template v-else>{{ item.legendTooltip }}</template>
+            </template>
+            <template v-else>
+              {{ item.name }}
+            </template>
           </div>
         </template>
       </Tooltip>
@@ -42,8 +50,8 @@
 </template>
 
 <script setup>
-import { Tooltip } from "@/orchidui";
-import { computed, onMounted, ref } from "vue";
+import { Tooltip, Icon } from "@/orchidui";
+import { computed, ref } from "vue";
 import { useChart } from "@/orchidui/composables/useChart.js";
 
 const props = defineProps({
@@ -51,26 +59,10 @@ const props = defineProps({
   showLegend: Boolean,
   showGrid: Boolean,
   chartData: Array,
+  tooltipFormatter: Function,
+  tooltipCurrency: String,
 });
-const legendSelected = ref({
-  stack_cards: true,
-  paynow: true,
-  atome: true,
-  fave: true,
-});
-const legendImages = {
-  stack_cards: "/images/chart/stack_cards.png",
-  paynow: "/images/chart/paynow.png",
-  atome: "/images/chart/atome.png",
-  fave: "/images/chart/fave.png",
-};
-const legendTooltipText = {
-  stack_cards:
-    "Visa, Mastercard and American Express (Including Apple Pay and Google Pay)",
-  paynow: "Paynow",
-  atome: "Atome",
-  fave: "Fave",
-};
+
 const options = computed(() => ({
   legend: {
     show: false,
@@ -79,23 +71,33 @@ const options = computed(() => ({
     show: props.showTooltip,
     padding: 0,
     formatter: (params) => {
+      if (props.tooltipFormatter) {
+        return props.tooltipFormatter(params);
+      }
+
+      let value = params.value;
+
+      if (props.tooltipCurrency) {
+        const currency = new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: props.tooltipCurrency,
+          maximumFractionDigits: 1,
+        });
+
+        value = currency.format(params.value / 1000) + "K";
+      }
+
       return `
-        <div class="py-2 px-4 flex flex-col gap-y-2">
-            <div class="h-7 flex gap-x-3 w-full justify-between items-center">
-                <span class="uppercase text-sm font-medium">
-                    ${params.seriesName}
+        <div class="py-3 px-4 leading-normal">
+            <div class="flex w-full justify-between items-center">
+                <span class="uppercase text-[10px] font-medium">
+                    ${params.name}
                 </span>
-                ${
-                  params.name
-                    ? '<img src="' +
-                      legendImages[params.name] +
-                      '" class="max-h-7" />'
-                    : "Other"
-                }
             </div>
-            <div class="text-oc-text font-medium text-base">SGD${
-              params.value
-            } (${params.percent})</div>
+            <div class="text-oc-text-500 font-medium text-base flex items-center gap-x-3">
+                ${value}
+                (${params.percent})%
+            </div>
         </div>
 
       `;
@@ -132,21 +134,16 @@ const pieChart = ref();
 
 const { chart } = useChart(pieChart, options);
 
-const toggleLegendName = (name) => {
+const toggleLegendName = (item) => {
   chart.value.dispatchAction({
     type: "legendToggleSelect",
-    name,
+    name: item.name,
   });
+
+  item.hide = !item.hide;
 };
 
 defineExpose({
   toggleLegendName,
-});
-
-onMounted(() => {
-  chart.value.on(
-    "legendselectchanged",
-    (params) => (legendSelected.value = params.selected),
-  );
 });
 </script>
