@@ -22,6 +22,8 @@ export * from "./Elements/AdditionalContent/OcAdditionalContent.js";
 export * from "./Elements/Skeleton/OcSkeleton.js";
 export * from "./Elements/FeatureOverviewCard/OcFeatureOverviewCard.js";
 export * from "./Elements/SandboxBanner/OcSandboxBanner.js";
+export * from "./Elements/Box/OcBox.js";
+export * from "./Elements/AuthenticationOption/AuthenticationOption.js";
 
 export * from "./Feedback/Chip/OcChip.js";
 export * from "./Feedback/Snackbar/OcSnackbar.js";

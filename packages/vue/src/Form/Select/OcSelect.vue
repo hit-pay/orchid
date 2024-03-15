@@ -266,9 +266,11 @@ onMounted(() => {
               :label="`+${localValueOption.length - maxVisibleOptions}`"
             />
           </slot>
-          <span v-if="localValueOption.length === 0" class="text-oc-text-300">{{
-            placeholder
-          }}</span>
+          <span
+            v-if="localValueOption.length === 0"
+            class="text-oc-text-300 md:text-base text-lg"
+            >{{ placeholder }}</span
+          >
         </div>
         <template v-else>
           <span
