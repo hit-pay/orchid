@@ -39,6 +39,15 @@ export const Line = {
       "OCT'23",
       "NOV'23",
     ],
+    tooltipValueFormatter: (value) => {
+      const currency = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "sgd",
+        maximumFractionDigits: 2,
+      });
+
+      return currency.format(value);
+    },
   },
   render: (args) => ({
     components: { LineChart },
@@ -54,6 +63,7 @@ export const Line = {
                 :show-legend="args.showLegend"
                 :chart-data="args.chartData"
                 :label-data="args.labelData"
+                :tooltip-value-formatter="args.tooltipValueFormatter"
             />
           </div>
         `,
