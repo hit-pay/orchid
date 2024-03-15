@@ -22,7 +22,7 @@ const { isMobile } = useWindowWidth();
     >
       <Button
         :size="isMobile ? 'small' : 'default'"
-        :v-bind="secondaryButtonProps"
+        v-bind="secondaryButtonProps"
       />
       <template #menu>
         <div v-if="secondaryButtonProps?.dropdownOptions" class="p-2">
