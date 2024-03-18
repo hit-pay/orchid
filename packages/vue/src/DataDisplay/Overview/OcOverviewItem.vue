@@ -6,6 +6,7 @@ defineProps({
   variant: String,
   title: String,
   tooltip: String,
+  percentTooltip: String,
   content: String,
   info: Boolean,
   isBig: Boolean,
@@ -85,21 +86,38 @@ defineProps({
                 >
                   <div class="truncate">{{ content }}</div>
 
-                  <div class="flex items-center gap-x-1">
-                    <Icon
-                      :name="percentValue > 0 ? 'triangle-up' : 'triangle-down'"
-                      :class="
-                        percentValue > 0
-                          ? 'text-oc-success-500'
-                          : 'text-oc-error-500'
-                      "
-                      width="10"
-                      height="9"
-                    />
-                    <span class="text-oc-text-400 text-sm font-medium">
-                      {{ percentValue }}%
-                    </span>
-                  </div>
+                  <Tooltip
+                    position="top"
+                    popper-class="rounded-sm"
+                    :popper-options="{ strategy: 'fixed' }"
+                  >
+                    <div class="flex items-center gap-x-1">
+                      <Icon
+                        :name="
+                          percentValue > 0 ? 'triangle-up' : 'triangle-down'
+                        "
+                        :class="
+                          percentValue > 0
+                            ? 'text-oc-success-500'
+                            : 'text-oc-error-500'
+                        "
+                        width="10"
+                        height="9"
+                      />
+                      <span
+                        class="text-oc-text-400 text-sm font-medium cursor-default"
+                      >
+                        {{ percentValue }}%
+                      </span>
+                    </div>
+                    <template v-if="percentTooltip" #popper>
+                      <div
+                        class="px-3 bg-white text-center w-[175px] rounded py-2 text-oc-text-400 whitespace-break-spaces font-medium text-sm"
+                      >
+                        {{ percentTooltip }}
+                      </div>
+                    </template>
+                  </Tooltip>
                 </div>
                 <template v-else>{{ content }}</template>
               </slot>
