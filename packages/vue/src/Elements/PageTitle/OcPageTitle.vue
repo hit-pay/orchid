@@ -6,6 +6,7 @@ import { PageTitleRight, Button } from "@/orchidui";
 defineProps({
   title: { type: String, required: true },
   description: { type: String, default: "" },
+  titleClass: { type: String, default: "" },
   primaryButtonProps: Object,
   secondaryButtonProps: Object,
   tooltipOptions: Object,
@@ -36,7 +37,10 @@ defineEmits({
       />
       <div
         class="w-full gap-5"
-        :class="isMobileCombineButtons ? 'hidden md:flex' : 'flex'"
+        :class="[
+          isMobileCombineButtons ? 'hidden md:flex' : 'flex',
+          titleClass,
+        ]"
       >
         <OcTitle
           :title="title"
