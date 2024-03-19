@@ -29,6 +29,11 @@ const props = defineProps({
     type: String,
     default: "floating",
   },
+  dateSelecting: {
+    type: String,
+    default: undefined,
+    validator: (value) => value ? ['from', 'to'].includes(value) : true,
+  },
   modelValue: {
     type: [String, Date, Number, Array],
     default: null,
@@ -76,6 +81,9 @@ const selectedEndDay = ref(
       : null
     : null,
 );
+
+const isStartDateSet = ref(false);
+
 const daysInMonth = computed(() => {
   const date = selectedDate.value;
 
@@ -84,44 +92,57 @@ const daysInMonth = computed(() => {
   return Array.from({ length: lastDay }, (_, i) => i + 1);
 });
 
-const selectedMonth = computed(() => {
-  return selectedDate.value.format("MMMM YYYY");
-});
-const isStartDateSet = ref(false);
+const selectedMonth = computed(() => selectedDate.value.format("MMMM YYYY"));
+
+const isRangeSelection = computed(() => props.type === 'range');
+
 const selectDay = (day) => {
-  if (props.type !== "range") {
+  if (!isRangeSelection.value) {
     let currentMonth = dayjs(selectedMonth.value, "MMMM YYYY").date(day);
 
     selectedStartDay.value = day;
     selectedStartDate.value = currentMonth;
     selectedEndDay.value = null;
     selectedEndDate.value = null;
-  } else {
-    let currentMonth = selectedDate.value.date(day);
-    isStartDateSet.value = selectedStartDay.value === selectedEndDay.value;
 
-    if (!isStartDateSet.value) {
-      isStartDateSet.value = true;
-
-      selectedStartDay.value = day;
-      selectedStartDate.value = currentMonth;
-
-      selectedEndDay.value = day;
-      selectedEndDate.value = currentMonth;
-    } else {
-      if (dayjs(selectedStartDate.value).isSameOrAfter(currentMonth)) {
-        selectedStartDay.value = day;
-        selectedStartDate.value = currentMonth;
-      } else {
-        selectedEndDay.value = day;
-        selectedEndDate.value = currentMonth;
-      }
-    }
+    return;
   }
+
+  let currentMonth = selectedDate.value.date(day);
+  isStartDateSet.value = selectedStartDay.value === selectedEndDay.value;
+
+  if (selectedStartDay.value && props.dateSelecting === 'to') {
+    selectedEndDay.value = day;
+    selectedEndDate.value = currentMonth;
+
+    return;
+  }
+
+  if (!isStartDateSet.value) {
+    isStartDateSet.value = true;
+
+    selectedStartDay.value = day;
+    selectedStartDate.value = currentMonth;
+
+    selectedEndDay.value = day;
+    selectedEndDate.value = currentMonth;
+
+    return;
+  }
+
+  if (dayjs(selectedStartDate.value).isSameOrAfter(currentMonth)) {
+    selectedStartDay.value = day;
+    selectedStartDate.value = currentMonth;
+
+    return;
+  }
+
+  selectedEndDay.value = day;
+  selectedEndDate.value = currentMonth;
 };
 
 const clearDate = () => {
-  if (props.type === "range") {
+  if (isRangeSelection.value) {
     selectedStartDate.value = dayjs(props.modelValue[0] ?? undefined);
     selectedEndDate.value = dayjs(props.modelValue[1]) || dayjs().add(2, "day");
   } else {
@@ -133,11 +154,12 @@ const clearDate = () => {
       ? selectedStartDate.value?.toDate()
       : null;
   selectedEndDay.value =
-    props.type === "range"
+    isRangeSelection.value
       ? selectedEndDate.value?.month() === selectedDate.value?.month()
         ? selectedEndDate.value?.toDate()
         : null
       : null;
+
   emit("resetCalendar");
 };
 
@@ -181,7 +203,7 @@ const isDaySelected = (day) => {
 };
 
 const isDayInRange = (day) => {
-  if (props.type === "range") {
+  if (isRangeSelection.value) {
     const currentDate = selectedDate.value.date(day);
     return (
       isDaySelected(day) ||
@@ -217,7 +239,7 @@ const getRangeDates = () => {
 };
 
 const doneSelecting = () => {
-  if (props.type === "range") {
+  if (isRangeSelection.value) {
     if (
       isDayDisabled(selectedStartDate.value.toDate()) ||
       isDayDisabled(selectedEndDate.value.toDate())
@@ -228,7 +250,7 @@ const doneSelecting = () => {
 
   emit(
     "update:modelValue",
-    props.type === "range"
+    isRangeSelection.value
       ? getRangeDates().map((date) => date.toDate())
       : selectedStartDate.value.toDate(),
   );
@@ -275,7 +297,7 @@ const handleIndefinite = (value) => {
             ? 'bg-oc-primary text-white'
             : 'hover:bg-oc-primary-50-tr',
           isDayDisabled(day) ? 'pointer-events-none opacity-[.35]' : '',
-          type === 'range'
+          isRangeSelection
             ? {
                 'before:bg-oc-primary-50-tr before:px-3 before:w-[calc(100%+0.5rem)] before:h-full before:absolute':
                   isDayInRange(day),
