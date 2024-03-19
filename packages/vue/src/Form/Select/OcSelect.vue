@@ -80,8 +80,8 @@ const optionsKey = ref(new Date().toISOString());
 const isSelectedAll = computed(() => {
   if (props.multiple) {
     return (
-      props.modelValue.length &&
-      props.modelValue.length === filterableOptions.value.length
+      props.modelValue?.length &&
+      props.modelValue?.length === filterableOptions.value.length
     );
   }
   return false;
@@ -120,17 +120,19 @@ const filterableOptions = computed(() => {
 const localValueOption = computed(() => {
   if (props.multiple) {
     let selected = [];
-    for (const value of props.modelValue) {
-      for (const option of props.options) {
-        if (option.values) {
-          option.values.forEach((o) => {
-            if (o.value === value) {
-              selected.push(o);
+    if (props.modelValue) {
+      for (const value of props.modelValue) {
+        for (const option of props.options) {
+          if (option.values) {
+            option.values.forEach((o) => {
+              if (o.value === value) {
+                selected.push(o);
+              }
+            });
+          } else {
+            if (option.value === value) {
+              selected.push(option);
             }
-          });
-        } else {
-          if (option.value === value) {
-            selected.push(option);
           }
         }
       }
@@ -183,7 +185,7 @@ const removeOption = (value) => {
 const selectAll = () => {
   if (!props.isAsynchronousSearch) {
     if (isSelectedAll.value) {
-      emit("update:modelValue", []);
+      emit("update:modelValue", null);
     } else {
       emit(
         "update:modelValue",
