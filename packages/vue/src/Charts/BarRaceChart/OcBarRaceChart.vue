@@ -29,6 +29,7 @@ const props = defineProps({
   legendData: Array,
   yAxisFormatter: Function,
   tooltipFormatter: Function,
+  tooltipValueFormatter: Function,
 });
 
 const variants = {
@@ -81,6 +82,12 @@ const options = computed(() => ({
         return props.tooltipFormatter(params);
       }
 
+      let value = params.value;
+
+      if (props.tooltipValueFormatter) {
+        value = props.tooltipValueFormatter(value);
+      }
+
       return `
         <div class="py-3 px-4 leading-normal">
             <div class="flex w-full justify-between items-center">
@@ -88,7 +95,7 @@ const options = computed(() => ({
                     ${params.name}
                 </span>
             </div>
-            <div class="text-oc-text font-medium text-[12px]">${params.value}</div>
+            <div class="text-oc-text font-medium text-[12px]">${value}</div>
         </div>
 
       `;

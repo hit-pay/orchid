@@ -17,18 +17,18 @@ const onChange = () => {
 };
 </script>
 <template>
-  <VueDraggableNext handle=".drag-el" :list="list" @change="onChange">
-    <transition-group name="list">
-      <slot :list="list"></slot>
-    </transition-group>
+  <VueDraggableNext
+    handle=".drag-el"
+    :list="list"
+    :animation="500"
+    @change="onChange"
+  >
+    <slot :list="list"></slot>
   </VueDraggableNext>
 </template>
 
 <style>
 .grabbing * {
   cursor: grabbing;
-}
-.list-move {
-  transition: transform 0.5s;
 }
 </style>

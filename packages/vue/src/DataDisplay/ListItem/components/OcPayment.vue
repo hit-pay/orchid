@@ -1,5 +1,5 @@
 <script setup>
-import { Icon, Tooltip } from "@/orchidui";
+import { Chip, Icon, Tooltip } from "@/orchidui";
 import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 
 const props = defineProps({
@@ -11,9 +11,9 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
-  chipProps: {
-    type: Object,
-    default: () => ({}),
+  chips: {
+    type: Array,
+    default: () => [],
   },
 });
 
@@ -60,7 +60,17 @@ onBeforeUnmount(() => {
     <div class="flex items-center gap-x-5">
       <div class="flex-1 flex items-center gap-x-3 font-medium capitalize">
         <slot name="logo" />
-        {{ title }}
+        <div class="flex items-center gap-x-3 overflow-hidden">
+          <span class="truncate">{{ title }}</span>
+          <div v-if="chips.length" class="flex gap-3">
+            <Chip
+              v-for="(item, i) in chips"
+              :key="i"
+              class="font-medium"
+              v-bind="item"
+            />
+          </div>
+        </div>
       </div>
       <slot name="right">
         <div

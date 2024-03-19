@@ -60,7 +60,7 @@ const props = defineProps({
   showGrid: Boolean,
   chartData: Array,
   tooltipFormatter: Function,
-  tooltipCurrency: String,
+  tooltipValueFormatter: Function,
 });
 
 const options = computed(() => ({
@@ -77,14 +77,8 @@ const options = computed(() => ({
 
       let value = params.value;
 
-      if (props.tooltipCurrency) {
-        const currency = new Intl.NumberFormat("en-US", {
-          style: "currency",
-          currency: props.tooltipCurrency,
-          maximumFractionDigits: 1,
-        });
-
-        value = currency.format(params.value / 1000) + "K";
+      if (props.tooltipValueFormatter) {
+        value = props.tooltipValueFormatter(value);
       }
 
       return `

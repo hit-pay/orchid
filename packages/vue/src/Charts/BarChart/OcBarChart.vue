@@ -19,7 +19,7 @@ const props = defineProps({
   yAxisFormatter: Function,
   xAxisFormatter: Function,
   tooltipFormatter: Function,
-  tooltipCurrency: String,
+  tooltipValueFormatter: Function,
 });
 
 const variants = {
@@ -77,13 +77,8 @@ const options = computed(() => ({
 
       let value = params.value;
 
-      if (props.tooltipCurrency) {
-        const currency = new Intl.NumberFormat("en-US", {
-          style: "currency",
-          currency: props.tooltipCurrency,
-        });
-
-        value = currency.format(params.value);
+      if (props.tooltipValueFormatter) {
+        value = props.tooltipValueFormatter(value);
       }
 
       return `
