@@ -98,7 +98,7 @@ const options = computed(() => ({
                  <div
                   class="w-0 h-0 rounded-xs border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent ${params.data?.percent < 0 ? "border-t-[6px] border-t-oc-error" : "border-b-[6px] border-b-oc-success"}"
                   ></div>
-                  <div>${params.data?.percent}%</div>
+                  <div>${Math.abs(params.data?.percent)}%</div>
                 </div>`;
 
       return `

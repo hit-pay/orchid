@@ -107,7 +107,7 @@ defineProps({
                       <span
                         class="text-oc-text-400 text-sm font-medium cursor-default"
                       >
-                        {{ percentValue }}%
+                        {{ Math.abs(percentValue) }}%
                       </span>
                     </div>
                     <template v-if="percentTooltip" #popper>
