@@ -238,6 +238,9 @@ onMounted(() => {
       :id="`#${id}`"
       ref="quill"
       :content="modelValue"
+      :options="{
+        bounds: `#${id}`
+      }"
       theme="snow"
       content-type="html"
       class="min-h-[200px]"
