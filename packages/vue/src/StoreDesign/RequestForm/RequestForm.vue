@@ -6,7 +6,7 @@ import {
   Slider,
   Tabs,
 } from "@/orchidui";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { SDMenus } from "@/orchidui/StoreDesign";
 import InputColors from "./Form/InputColors.vue";
 import SelectFont from "./Form/SelectFont.vue";
@@ -31,6 +31,19 @@ const sectionFormData = ref(props.sectionData);
 
 const formErrors = ref({});
 const formValues = ref({});
+
+const ocChipConfig = ref({ label: 'Enabled', variant: 'default' }); // Addition for OcChip configuration
+
+// Watcher added to observe changes in sendEmailStatus and adjust OcChip dynamically
+watch(() => generalFormData.value.sendEmailStatus, (newValue) => {
+  updateOcChipDisplay(newValue);
+});
+
+// Utility function to update OcChip's display based on sendEmailStatus
+function updateOcChipDisplay(sendEmailStatus) {
+  ocChipConfig.value.variant = sendEmailStatus ? 'default' : 'warning'; // Default for enabled, warning for disabled
+  ocChipConfig.value.label = sendEmailStatus ? 'Enabled' : 'Disabled'; // Label update based on status
+}
 
 const setDefaultData = (form) => {
   if (typeof form.name === "object") {
@@ -352,5 +365,11 @@ const showSubForm = ref("");
         </MultipleUploadFile>
       </template>
     </FormBuilder>
+    <!-- Addition: OcChip dynamically displaying based on sendEmailStatus -->
+    <OcChip :variant="ocChipConfig.variant" :label="ocChipConfig.label" />
   </div>
 </template>
+
+<style scoped>
+/* Your existing styles if any */
+</style>
