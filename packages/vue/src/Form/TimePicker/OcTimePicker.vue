@@ -28,6 +28,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  isDisabled: {
+    type: Boolean,
+    default: false,
+  },
   labelIcon: {
     type: String,
     default: "",
@@ -60,6 +64,7 @@ watch(
     v-model="isDropdownOpened"
     menu-classes="min-w-fit"
     :distance="10"
+    :is-disabled="isDisabled"
     @update:model-value="updateActiveTime"
   >
     <Input
@@ -75,6 +80,7 @@ watch(
       :tooltip-text="tooltipText"
       :tooltip-options="tooltipOptions"
       :is-readonly="true"
+      :disabled="isDisabled"
     />
 
     <template #menu>
