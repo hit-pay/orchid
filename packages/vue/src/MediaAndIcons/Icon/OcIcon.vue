@@ -44,6 +44,8 @@ const renderIcon = () => {
     });
 }
 
+renderIcon()
+
 watch(() => props.name, () => {
   renderIcon()
 })
