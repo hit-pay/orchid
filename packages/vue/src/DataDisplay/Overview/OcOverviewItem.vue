@@ -82,7 +82,7 @@ defineProps({
               <slot name="content">
                 <div
                   class="flex items-center gap-x-3 overflow-hidden"
-                  v-if="percentValue !== undefined"
+                  v-if="!isNaN(percentValue)"
                 >
                   <div class="truncate">{{ content }}</div>
 
