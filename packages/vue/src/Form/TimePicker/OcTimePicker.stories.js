@@ -21,6 +21,7 @@ export const Default = {
     placeholder: "",
     errorMessage: "",
     isRequired: false,
+    isDisabled: false,
     labelIcon: "",
     tooltipText: "Tooltip text",
     tooltipOptions: {
