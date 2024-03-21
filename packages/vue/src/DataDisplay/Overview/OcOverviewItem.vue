@@ -82,7 +82,7 @@ defineProps({
               <slot name="content">
                 <div
                   class="flex items-center gap-x-3 overflow-hidden"
-                  v-if="percentValue"
+                  v-if="!isNaN(percentValue)"
                 >
                   <div class="truncate">{{ content }}</div>
 
@@ -94,10 +94,10 @@ defineProps({
                     <div class="flex items-center gap-x-1">
                       <Icon
                         :name="
-                          percentValue > 0 ? 'triangle-up' : 'triangle-down'
+                          percentValue >= 0 ? 'triangle-up' : 'triangle-down'
                         "
                         :class="
-                          percentValue > 0
+                          percentValue >= 0
                             ? 'text-oc-success-500'
                             : 'text-oc-error-500'
                         "
@@ -107,7 +107,11 @@ defineProps({
                       <span
                         class="text-oc-text-400 text-sm font-medium cursor-default"
                       >
-                        {{ Math.abs(percentValue) }}%
+                        {{
+                          percentValue === 0
+                            ? "-"
+                            : `${Math.abs(percentValue)}%`
+                        }}
                       </span>
                     </div>
                     <template v-if="percentTooltip" #popper>
