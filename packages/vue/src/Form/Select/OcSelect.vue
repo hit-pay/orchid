@@ -214,6 +214,10 @@ watch(isDropdownOpened, (value) => {
 onMounted(() => {
   maxPopperWidth.value = baseInput.value.$el.offsetWidth;
 });
+const dropdownRef = ref();
+defineExpose({
+  dropdownRef,
+});
 </script>
 
 <template>
@@ -229,6 +233,7 @@ onMounted(() => {
     :tooltip-options="tooltipOptions"
   >
     <Dropdown
+      ref="dropdownRef"
       v-model="isDropdownOpened"
       class="w-full bg-white"
       :distance="4"
