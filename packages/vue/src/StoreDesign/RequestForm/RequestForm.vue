@@ -6,7 +6,7 @@ import {
   Slider,
   Tabs,
 } from "@/orchidui";
-import { ref } from "vue";
+import { ref, watch, onMounted } from "vue";
 import { SDMenus } from "@/orchidui/StoreDesign";
 import InputColors from "./Form/InputColors.vue";
 import SelectFont from "./Form/SelectFont.vue";
@@ -31,6 +31,18 @@ const sectionFormData = ref(props.sectionData);
 
 const formErrors = ref({});
 const formValues = ref({});
+
+watch([generalFormData, sectionFormData], () => {
+  emit('form-changed', true);
+}, { deep: true });
+
+watch(images, () => {
+  emit('form-changed', true);
+}, { deep: true });
+
+onMounted(() => {
+  emit('form-changed', false);
+});
 
 const setDefaultData = (form) => {
   if (typeof form.name === "object") {
@@ -66,6 +78,7 @@ const emit = defineEmits([
   "delete:images",
   "add:images",
   "update:field",
+  "form-changed",
 ]);
 
 const updateData = (form, value, general = false) => {

@@ -6,12 +6,18 @@ const emit = defineEmits([
   "addition-click",
   "dropdown-action",
 ]);
+
+// New prop for enabling/disabling Save button
 defineProps({
   primaryProps: {
     type: Object,
   },
   secondaryProps: {
     type: Object,
+  },
+  isSaveEnabled: {
+    type: Boolean,
+    default: false,
   },
 });
 </script>
@@ -30,6 +36,7 @@ defineProps({
         <slot name="primary-button">
           <Button
             class="min-w-[100px]"
+            :disabled="!isSaveEnabled" <!-- Modified to react to isSaveEnabled prop -->
             label="Save"
             v-bind="primaryProps"
             @click="$emit('save')"
