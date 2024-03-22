@@ -35,6 +35,7 @@ const props = defineProps({
   preventClickOutside: Boolean,
 });
 const popper = ref();
+const dropdownScroll = ref();
 const toggleDropdown = async () => {
   if (props.isDisabled) return;
   // Need to add a timeout because the popup position cannot be determined while the element is display:none (v-show), which is required for the appearance animation
@@ -62,6 +63,10 @@ const getMaxHeightWithoutOverflow = async () => {
 };
 
 watch(() => props.modelValue, getMaxHeightWithoutOverflow);
+
+defineExpose({
+  dropdownScroll,
+});
 </script>
 
 <template>
@@ -86,6 +91,7 @@ watch(() => props.modelValue, getMaxHeightWithoutOverflow);
         <Transition name="fade">
           <div
             v-show="modelValue"
+            ref="dropdownScroll"
             :class="menuClasses"
             class="rounded bg-oc-bg-light shadow min-w-[162px] overflow-y-auto"
             :style="{
