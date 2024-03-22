@@ -60,7 +60,7 @@ const emit = defineEmits(["addCustomer", "editCustomer", "closeCustomer"]);
           </Avatar>
           <div class="flex flex-col font-medium overflow-hidden">
             <div class="flex items-center gap-2">
-              <span class="truncate">{{ customer?.name || "John" }}</span>
+              <span class="truncate">{{ customer?.name || "-" }}</span>
               <span
                 v-if="isBeneficiary"
                 class="rounded-md py-1 px-3 text-sm text-oc-accent-1-500 bg-oc-accent-1-50"
