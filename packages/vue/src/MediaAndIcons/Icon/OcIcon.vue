@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 const props = defineProps({
   path: {
     type: String,
@@ -29,16 +29,24 @@ const props = defineProps({
   },
 });
 const iconRef = ref(null);
-fetch(`${props.path}/${props.name}.svg`)
-  .then((r) => (r.status === 200 ? r.text() : ""))
-  .then((text) => {
-    if (text && iconRef.value) {
-      const dom = document.createElement("div");
-      dom.innerHTML = text;
-      dom.querySelector("svg").removeAttribute("width");
-      dom.querySelector("svg").removeAttribute("height");
-      iconRef.value.innerHTML = dom.innerHTML;
-      dom.remove();
-    }
-  });
+const renderIcon = () => {
+  fetch(`${props.path}/${props.name}.svg`)
+    .then((r) => (r.status === 200 ? r.text() : ""))
+    .then((text) => {
+      if (text && iconRef.value) {
+        const dom = document.createElement("div");
+        dom.innerHTML = text;
+        dom.querySelector("svg").removeAttribute("width");
+        dom.querySelector("svg").removeAttribute("height");
+        iconRef.value.innerHTML = dom.innerHTML;
+        dom.remove();
+      }
+    });
+}
+
+renderIcon()
+
+watch(() => props.name, () => {
+  renderIcon()
+})
 </script>

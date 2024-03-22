@@ -60,7 +60,8 @@ const options = computed(() => ({
     },
     axisLabel: {
       formatter: (value) => {
-        return (value / 1000).toFixed(1) + "K";
+        let formatter = Intl.NumberFormat("en", { notation: "compact" });
+        return formatter.format(value);
       },
     },
   },
