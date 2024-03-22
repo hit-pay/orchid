@@ -67,6 +67,7 @@ defineEmits(["addCustomer", "editCustomer"]);
       :customer="customer"
       :is-hover="customerIsHover"
       :is-edit="customerIsEdit"
+      class="max-w-[300px]"
       @add-customer="$emit('addCustomer')"
       @edit-customer="$emit('editCustomer', $event)"
     >
