@@ -72,7 +72,11 @@ const emit = defineEmits(["addCustomer", "editCustomer", "closeCustomer"]);
               {{ customer.bank_name }} / {{ customer.bank_account_number }}
             </span>
             <span v-else class="text-sm text-oc-text-400 truncate">
-              {{ customer?.email || "johndoe@gmail.com" }}
+              {{
+                customer?.email ||
+                customer?.phone_number_country_code + customer?.phone_number ||
+                "-"
+              }}
             </span>
           </div>
         </div>
