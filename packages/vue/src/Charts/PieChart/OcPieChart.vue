@@ -88,7 +88,7 @@ const options = computed(() => ({
             </div>
             <div class="text-oc-text-500 font-medium text-base flex items-center gap-x-3">
                 ${value}
-                (${params.percent})%
+                (${params.percent}%)
             </div>
         </div>
 
