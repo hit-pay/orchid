@@ -183,7 +183,13 @@ const args = {
     name: "Alex Turner",
     email: "alex@arcticmonkey.io",
     phone: "+65 8373 3739 18",
-    address: "4666 Dickens Islands Pennsylvania",
+    address: {
+      street: "123 Main Street",
+      city: "Pennsylvania",
+      state: "Pennsylvania",
+      postal_code: "12345 ",
+      country: "USA",
+    },
   },
 };
 export const Default = {
