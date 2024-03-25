@@ -74,7 +74,9 @@ const emit = defineEmits(["addCustomer", "editCustomer", "closeCustomer"]);
             <span v-else class="text-sm text-oc-text-400 truncate">
               {{
                 customer?.email ||
-                customer?.phone_number_country_code + customer?.phone_number ||
+                "+" +
+                  customer?.phone_number_country_code +
+                  customer?.phone_number ||
                 "-"
               }}
             </span>
