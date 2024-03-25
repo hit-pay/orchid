@@ -28,9 +28,7 @@
           </div>
         </template>
         <template #popper>
-          <div
-            class="py-2 text-sm text-oc-text-400 font-medium px-3 max-w-[217px] w-max"
-          >
+          <div class="py-2 text-sm text-oc-text-400 font-medium px-3 w-max">
             <template v-if="item.legendTooltip">
               <template v-if="Array.isArray(item.legendTooltip)">
                 <div v-for="(text, i) in item.legendTooltip" :key="i">
