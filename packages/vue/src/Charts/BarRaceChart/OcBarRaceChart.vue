@@ -3,9 +3,9 @@
     <div class="pt-4 pb-7 flex flex-col h-[100%]">
       <div
         v-for="item in legendData"
-        class="text-[14px] flex flex-1 items-center justify-start"
+        class="text-[14px] flex flex-1 items-center justify-start pr-2"
       >
-        {{ item }}
+        <div class="truncate">{{ item }}</div>
       </div>
     </div>
     <div ref="barRaceChart" class="h-full" />
