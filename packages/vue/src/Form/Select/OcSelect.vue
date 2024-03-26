@@ -289,7 +289,7 @@ defineExpose({
                   class="sticky top-3 z-10"
                   placeholder="Search"
                   input-class="!border-none !shadow-none"
-                  :is-read-only="!isDropdownOpened"
+                  :is-readonly="!isDropdownOpened"
                   @update:model-value="$emit('onSearchKeywords', query)"
                 >
                   <template v-if="isDropdownOpened" #icon>
