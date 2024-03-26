@@ -62,6 +62,7 @@ const props = defineProps({
       strategy: "fixed",
     }),
   },
+  isInlineSearch: Boolean
 });
 
 const emit = defineEmits({
@@ -279,6 +280,20 @@ defineExpose({
             >{{ placeholder }}</span
           >
         </div>
+        <template v-if="isInlineSearch && isFilterable">
+            <Input
+                  v-model="query"
+                  icon="search"
+                  class="sticky top-3 z-10"
+                  placeholder="Search"
+                  input-class="!border-none !shadow-none"
+                  @update:model-value="$emit('onSearchKeywords', query)"
+                >
+                  <template #icon>
+                    <Icon class="w-5 h-5 text-oc-text-400" name="search" />
+                  </template>
+              </Input>
+        </template>
         <template v-else>
           <span
             class="whitespace-nowrap flex gap-x-3 items-center overflow-hidden"
@@ -289,7 +304,7 @@ defineExpose({
               {{ label }}:
             </span>
             <span v-if="localValueOption" class="truncate">
-              {{ localValueOption.label }}
+                {{ localValueOption.label }}
             </span>
             <span v-else class="text-oc-text-300">{{ placeholder }}</span>
           </span>
@@ -304,7 +319,7 @@ defineExpose({
       <template #menu>
         <div class="p-3 flex flex-col gap-y-2">
           <Input
-            v-if="isFilterable"
+            v-if="isFilterable && !isInlineSearch"
             ref="searchInputRef"
             v-model="query"
             icon="search"

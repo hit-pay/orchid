@@ -91,6 +91,10 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  inputClass: {
+    type: String,
+    default: "",
+  },
 });
 
 const emit = defineEmits(["update:modelValue", "blur", "focus"]);
@@ -113,6 +117,7 @@ const inputClasses = computed(() => [
     ? "border-oc-error shadow-oc-error"
     : "border-oc-gray-200 shadow-oc-gray-200",
   props.disabled ? "bg-oc-bg-dark pointer-events-none" : "bg-oc-bg-light",
+  props.inputClass
 ]);
 
 const inputAttrs = computed(() => {

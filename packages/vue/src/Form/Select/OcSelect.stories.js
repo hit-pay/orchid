@@ -98,8 +98,9 @@ export const Default = {
       },
     ],
     isFilterable: true,
+    isInlineSearch: true,
     isAsynchronousSearch: true,
-    isAddNew: false,
+    isAddNew: true,
     isDisabled: false,
     isRequired: false,
     isCheckboxes: false,
@@ -141,6 +142,7 @@ export const Default = {
                   :label-icon="args.labelIcon"
                   :tooltip-text="args.tooltipText"
                   :is-transparent="args.isTransparent"
+                  :is-inline-search="args.isInlineSearch"
                   @on-search-keywords="(query) => console.log(query)"
               />
             </div>
