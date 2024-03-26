@@ -143,7 +143,6 @@ export const Default = {
                   :tooltip-text="args.tooltipText"
                   :is-transparent="args.isTransparent"
                   :is-inline-search="args.isInlineSearch"
-                  search-keywords="Tess Ari Bahtiar"
                   @on-search-keywords="(query) => console.log(query)"
               />
             </div>
