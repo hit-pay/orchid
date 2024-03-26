@@ -71,6 +71,7 @@ const emit = defineEmits({
   "update:modelValue": [],
   "max-option-allowed-set": [],
   onSearchKeywords: "",
+  close: []
 });
 
 const query = ref(props.searchKeywords ?? "");
@@ -244,6 +245,7 @@ defineExpose({
       :popper-style="{ maxWidth: `${maxPopperWidth}px` }"
       :popper-options="popperOptions"
       :is-disabled="isDisabled || isReadonly"
+      @update:model-value="!$event ? $emit('close') : ''"
     >
       <div
         class="border min-h-[36px] w-full px-3 flex justify-between items-center cursor-pointer gap-x-3 rounded"
@@ -284,13 +286,12 @@ defineExpose({
         <template v-if="isInlineSearch && isFilterable && !localValueOption">
             <Input
                   v-model="query"
-                  icon="search"
                   class="sticky top-3 z-10"
                   placeholder="Search"
                   input-class="!border-none !shadow-none"
                   @update:model-value="$emit('onSearchKeywords', query)"
                 >
-                  <template #icon>
+                  <template v-if="isDropdownOpened" #icon>
                     <Icon class="w-5 h-5 text-oc-text-400" name="search" />
                   </template>
               </Input>
