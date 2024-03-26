@@ -62,7 +62,8 @@ const props = defineProps({
       strategy: "fixed",
     }),
   },
-  isInlineSearch: Boolean
+  isInlineSearch: Boolean,
+  searchKeywords: String
 });
 
 const emit = defineEmits({
@@ -72,7 +73,7 @@ const emit = defineEmits({
   onSearchKeywords: "",
 });
 
-const query = ref("");
+const query = ref(props.searchKeywords ?? "");
 const isDropdownOpened = ref(false);
 const searchInputRef = ref();
 
@@ -280,7 +281,7 @@ defineExpose({
             >{{ placeholder }}</span
           >
         </div>
-        <template v-if="isInlineSearch && isFilterable">
+        <template v-if="isInlineSearch && isFilterable && !localValueOption">
             <Input
                   v-model="query"
                   icon="search"
@@ -319,7 +320,7 @@ defineExpose({
       <template #menu>
         <div class="p-3 flex flex-col gap-y-2">
           <Input
-            v-if="isFilterable && !isInlineSearch"
+            v-if="(isFilterable && !isInlineSearch) || (isFilterable && isInlineSearch && localValueOption)"
             ref="searchInputRef"
             v-model="query"
             icon="search"
