@@ -24,7 +24,7 @@ defineEmits(["activate", "customize", "preview", "upgrade", "publish"]);
               @click="$emit('customize', theme)"
             />
           </div>
-          <div v-else-if="theme.draft" class="m-auto">
+          <div v-else-if="theme.draft" class="m-auto flex gap-3">
             <Button
               variant="secondary"
               label="Customize"
