@@ -62,6 +62,8 @@ const props = defineProps({
       strategy: "fixed",
     }),
   },
+  isInlineSearch: Boolean,
+  searchKeywords: String
 });
 
 const emit = defineEmits({
@@ -69,9 +71,10 @@ const emit = defineEmits({
   "update:modelValue": [],
   "max-option-allowed-set": [],
   onSearchKeywords: "",
+  close: []
 });
 
-const query = ref("");
+const query = ref(props.searchKeywords ?? "");
 const isDropdownOpened = ref(false);
 const searchInputRef = ref();
 
@@ -242,6 +245,7 @@ defineExpose({
       :popper-style="{ maxWidth: `${maxPopperWidth}px` }"
       :popper-options="popperOptions"
       :is-disabled="isDisabled || isReadonly"
+      @update:model-value="!$event ? $emit('close') : ''"
     >
       <div
         class="border min-h-[36px] w-full px-3 flex justify-between items-center cursor-pointer gap-x-3 rounded"
@@ -279,6 +283,20 @@ defineExpose({
             >{{ placeholder }}</span
           >
         </div>
+        <template v-if="isInlineSearch && isFilterable && !localValueOption">
+            <Input
+                  v-model="query"
+                  class="sticky top-3 z-10"
+                  placeholder="Search"
+                  input-class="!border-none !shadow-none"
+                  :is-readonly="!isDropdownOpened"
+                  @update:model-value="$emit('onSearchKeywords', query)"
+                >
+                  <template v-if="isDropdownOpened" #icon>
+                    <Icon class="w-5 h-5 text-oc-text-400" name="search" />
+                  </template>
+              </Input>
+        </template>
         <template v-else>
           <span
             class="whitespace-nowrap flex gap-x-3 items-center overflow-hidden"
@@ -289,7 +307,7 @@ defineExpose({
               {{ label }}:
             </span>
             <span v-if="localValueOption" class="truncate">
-              {{ localValueOption.label }}
+                {{ localValueOption.label }}
             </span>
             <span v-else class="text-oc-text-300">{{ placeholder }}</span>
           </span>
@@ -304,7 +322,7 @@ defineExpose({
       <template #menu>
         <div class="p-3 flex flex-col gap-y-2">
           <Input
-            v-if="isFilterable"
+            v-if="(isFilterable && !isInlineSearch) || (isFilterable && isInlineSearch && localValueOption)"
             ref="searchInputRef"
             v-model="query"
             icon="search"
