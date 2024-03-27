@@ -4,7 +4,7 @@ defineProps({
   theme: Object,
   activating: Boolean,
 });
-defineEmits(["activate", "customize", "preview", "upgrade"]);
+defineEmits(["activate", "customize", "preview", "upgrade", "publish"]);
 </script>
 <template>
   <div
@@ -24,13 +24,24 @@ defineEmits(["activate", "customize", "preview", "upgrade"]);
               @click="$emit('customize', theme)"
             />
           </div>
+          <div v-else-if="theme.draft" class="m-auto flex gap-3">
+            <Button
+              variant="secondary"
+              label="Customize"
+              @click="$emit('customize', theme)"
+            />
+            <Button
+              label="Publish"
+              @click="$emit('publish', theme)"
+            />
+          </div>
           <div v-else class="m-auto flex gap-3">
             <Button
               variant="secondary"
               label="Preview"
               @click="$emit('preview', theme)"
             />
-            <Button label="Activate" @click="$emit('activate', theme)" />
+            <Button label="Try Theme" @click="$emit('activate', theme)" />
           </div>
         </template>
         <template v-else>
@@ -45,7 +56,7 @@ defineEmits(["activate", "customize", "preview", "upgrade"]);
                 class="text-oc-text-400 motion-safe:animate-spin"
               ></Icon>
             </div>
-            Activating themes
+            Adding theme
           </div>
         </template>
       </div>
@@ -61,6 +72,7 @@ defineEmits(["activate", "customize", "preview", "upgrade"]);
         <div class="text-oc-text-400 text-sm mt-1">{{ theme.description }}</div>
       </div>
       <Chip v-if="theme.active" class="ml-auto">Active</Chip>
+      <Chip v-if="theme.draft" class="ml-auto">Draft</Chip>
       <Chip
         v-else-if="theme.pro"
         class="ml-auto"
