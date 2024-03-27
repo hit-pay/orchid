@@ -4,7 +4,7 @@ defineProps({
   theme: Object,
   activating: Boolean,
 });
-defineEmits(["activate", "customize", "preview", "upgrade"]);
+defineEmits(["activate", "customize", "preview", "upgrade", "publish"]);
 </script>
 <template>
   <div
@@ -22,6 +22,17 @@ defineEmits(["activate", "customize", "preview", "upgrade"]);
               variant="secondary"
               label="Customize"
               @click="$emit('customize', theme)"
+            />
+          </div>
+          <div v-if="theme.draft" class="m-auto">
+            <Button
+              variant="secondary"
+              label="Customize"
+              @click="$emit('customize', theme)"
+            />
+            <Button
+              label="Publish"
+              @click="$emit('publish', theme)"
             />
           </div>
           <div v-else class="m-auto flex gap-3">
@@ -61,6 +72,7 @@ defineEmits(["activate", "customize", "preview", "upgrade"]);
         <div class="text-oc-text-400 text-sm mt-1">{{ theme.description }}</div>
       </div>
       <Chip v-if="theme.active" class="ml-auto">Active</Chip>
+      <Chip v-if="theme.draft" class="ml-auto">Draft</Chip>
       <Chip
         v-else-if="theme.pro"
         class="ml-auto"
