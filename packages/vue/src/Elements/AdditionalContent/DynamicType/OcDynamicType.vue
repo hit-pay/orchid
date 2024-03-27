@@ -46,7 +46,7 @@ defineEmits(["addCustomer", "editCustomer"]);
         </OverviewItem>
       </template>
       <div v-if="box.showInfo" class="p-2" :class="box.infoTooltipStyle">
-        <Tooltip>
+        <Tooltip :popper-options="{ strategy: 'fixed' }">
           <Icon
             width="16"
             height="16"
