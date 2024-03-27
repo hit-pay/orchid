@@ -30,7 +30,7 @@ defineEmits(["activate", "customize", "preview", "upgrade"]);
               label="Preview"
               @click="$emit('preview', theme)"
             />
-            <Button label="Activate" @click="$emit('activate', theme)" />
+            <Button label="Try Theme" @click="$emit('activate', theme)" />
           </div>
         </template>
         <template v-else>
@@ -45,7 +45,7 @@ defineEmits(["activate", "customize", "preview", "upgrade"]);
                 class="text-oc-text-400 motion-safe:animate-spin"
               ></Icon>
             </div>
-            Activating themes
+            Adding theme
           </div>
         </template>
       </div>
