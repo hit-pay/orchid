@@ -10,7 +10,12 @@ export default {
   tags: ["autodocs"],
 };
 
+const args = {
+    classes: 'hover:shadow bg-oc-background-light hover:bg-oc-accent-1-50'
+  }
+
 export const OcDraggableList = {
+  args,
   render: (args) => ({
     components: {
       Theme,
@@ -18,6 +23,7 @@ export const OcDraggableList = {
       Toggle,
       DropdownItem,
     },
+
     setup() {
       const model = ref([
         {
@@ -31,6 +37,7 @@ export const OcDraggableList = {
           id: "234",
           title: "234 Label ",
           beforeAction: true,
+          link: 'https://orchidui.vercel.app'
         },
         {
           id: "456",
@@ -114,7 +121,20 @@ export const OcDraggableList = {
           <Theme>
             <div class="p-4">{{ model}}</div>
             <div class="w-full min-h-[200px]">
-              <DraggableList v-model="model" is-link>
+              <DraggableList v-model="model" is-link :classes="args.classes">
+                <template #title="{item}">
+                    <div class="flex w-full">
+                      <div class="flex justify-between w-full">
+                        <div class="flex flex-col">
+                          <span class="mb-2">{{ item.title }}</span>
+                          <span> {{ item.link }} </span>
+                        </div>
+                        <div class="flex items-center">
+                          <span>{{ item.id }} </span>
+                        </div>
+                      </div>
+                    </div>
+                </template>
                 <template #action-item="{item}">
                     <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
                     <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
