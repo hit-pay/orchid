@@ -3,6 +3,7 @@ import { Button, Chip, Icon } from "@/orchidui";
 defineProps({
   theme: Object,
   activating: Boolean,
+  isFreeAccount: Boolean
 });
 defineEmits(["activate", "customize", "preview", "upgrade", "publish"]);
 </script>
@@ -41,7 +42,7 @@ defineEmits(["activate", "customize", "preview", "upgrade", "publish"]);
               label="Preview"
               @click="$emit('preview', theme)"
             />
-            <Button label="Try Theme" @click="$emit('activate', theme)" />
+            <Button :label="isFreeAccount ? 'Activate' : 'Try Theme'" @click="$emit('activate', theme)" />
           </div>
         </template>
         <template v-else>
