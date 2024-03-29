@@ -73,7 +73,7 @@ defineEmits(["activate", "customize", "preview", "upgrade", "publish"]);
         <div class="text-oc-text-400 text-sm mt-1">{{ theme.description }}</div>
       </div>
       <Chip v-if="theme.active" class="ml-auto">Active</Chip>
-      <Chip v-if="theme.draft" class="ml-auto">Draft</Chip>
+      <Chip v-else-if="theme.draft" variant="accent-1"  class="ml-auto">Draft</Chip>
       <Chip
         v-else-if="theme.pro"
         class="ml-auto"
