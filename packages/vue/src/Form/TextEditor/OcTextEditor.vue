@@ -233,7 +233,7 @@ onMounted(() => {
     :tooltip-text="tooltipText"
     :tooltip-options="tooltipOptions"
   >
-    <div>
+    <div class="grid">
       <QuillEditor
         v-if="id"
         :id="`#${id}`"
