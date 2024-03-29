@@ -29,6 +29,14 @@ export const Default = {
         description: "Description of theme will be here",
         pro: true,
       },
+
+      {
+        id: 4,
+        thumbnail: "/images/theme1.png",
+        title: "Theme Title 4",
+        description: "Description of theme will be here",
+        draft: true,
+      },
     ],
   },
   render: (args) => ({
