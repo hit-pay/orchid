@@ -8,42 +8,54 @@ const components = [
       {
         id: "s-2",
         n: "promotion",
+        css: {
+          all: {
+            s: {
+              'c-4': `
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                padding: 11px 56px;
+                gap: 8px;
+                isolation: isolate;
+                width: 100%;
+                height: 48px;
+                background: #111111;
+                flex: none;
+                order: 0;
+                flex-grow: 0;
+                z-index: 6;
+              `
+            }
+          }
+        },
         code: [
           {
             id: "c-4",
             tp: "text",
-            val: "Promotion"
-          },
-          {
-            id: "c-5",
-            tp: "text",
-            val: "Big Sale"
+            val: "Banner Promotion"
           }
         ]
       },
     ],
     css: {
-      d: {
-        all: {
-          "c-2": "color:green",
-          "c-3": "color:blue"
-        },
-        s769: {
-          "c-2": "color:green",
-          "c-3": "color:blue"
-        },
-        s480: {
-          "c-2": "color:green",
-          "c-3": "color:blue"
-        }
-      },
-     hover: {
-      an: 'fade',
       all: {
-        "c-2": "color:green",
-        "c-3": "color:blue"
-      }
-     }
+        s: {
+          "c-3": "color:blue",
+        },
+        h: {
+          "c-3": "color:red",
+        },
+      },
+      769: {
+        s: {
+          "c-3": "color:yellow",
+        },
+        h: {
+          "c-3": "color:green",
+        },
+      },
     },
     code: [
       {
@@ -58,7 +70,7 @@ const components = [
       },
       {
         id: "c-3",
-        tp: "text",
+        tp: "h1",
         val: "Header Title"
       }
     ]

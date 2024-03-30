@@ -24,10 +24,13 @@ const createTemplate = (comp) => {
       template += `<${el.val} class="${el.id}" />`
     }else if(el.tp == 'img'){
       template += `<img class="${el.id}" src="${el.val}" />`
+    }else if(el.tp == 'h1'){
+      template += `<h1 class="${el.id}">${el.val}</h1>`
     }else{
       template += `<div class="${el.id}">${el.val}</div>`
     }
   })
+
   return `${template}`
 }
 const createAppLayout = () => {
@@ -66,6 +69,73 @@ const app = createApp({
   template: createAppLayout()
 });
 components.value.forEach((comp, index) => {
+
+  let css = document.createElement("style")
+  let dynamicStyle = ``
+
+  // Default style
+  if(comp?.css?.all?.s){
+    Object.keys(comp?.css?.all?.s)?.forEach((className, index) => {
+        let style = Object.values(comp.css.all.s)[index]
+        dynamicStyle += `
+        .${className}{
+          ${style}
+        }
+      `
+    })
+  }
+  // Hover style
+  if(comp?.css?.all?.h){
+    Object.keys(comp?.css?.all?.h)?.forEach((className, index) => {
+      let style = Object.values(comp.css.all.h)[index]
+        dynamicStyle += `
+        .${className}:hover{
+          ${style}
+        }
+      `
+    })
+  }
+  
+
+  if(comp?.css){
+     Object.values(comp?.css)?.forEach((item, index) => {
+        let screen = Object.keys(comp?.css)[index]
+        if(screen !== 'all'){
+           // Default style
+           if(item.s){
+            Object.keys(item.s)?.forEach((className, index) => {
+              let style = Object.values(item.s)[index]
+              dynamicStyle += `
+              @media (max-width:${screen}px) {
+                .${className}{
+                  ${style}
+                }
+              }
+            `
+          })
+           }
+           
+          // Hover style
+          if(item.h){
+            Object.keys(item.h)?.forEach((className, index) => {
+              let style = Object.values(item.h)[index]
+                dynamicStyle += `
+                @media (max-width:${screen}px) {
+                  .${className}:hover{
+                    ${style}
+                  }
+                }
+              `
+            })
+          }
+        }
+   })
+  }
+
+  css.innerHTML = dynamicStyle
+
+  document.getElementById('app-css').append(css)
+
   const newComponent = {
     props: {
       class: {},
