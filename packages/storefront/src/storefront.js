@@ -19,16 +19,12 @@ export function useStorefront() {
   });
 
   const general = computed(() => store_design.value.general);
-  const sections = computed(() => store_design.value.sections);
 
   const initialState = (storefront) => {
     let defaultState = {};
     storefront.store_design.sections.forEach((s) => {
       if (s.group === "sections") {
-        defaultState[s.key] = {
-          products: [],
-          meta: {},
-        };
+        defaultState[s.key] = {};
       }
     });
     state.value.sections = defaultState;
@@ -36,31 +32,19 @@ export function useStorefront() {
     store_design.value = storefront.store_design;
   };
 
-  const setState = (key, value) => {
-    state.value[key] = value;
-  };
-
-  const setSectionState = (name, key, value) => {
+  const setState = (name, key, value) => {
     state.value.sections[name][key] = value;
-  };
-
-  const setProductState = (product) => {
-    state.value.product = product;
   };
 
   const action = ref({
     addToCart: () => {
       console.log("add to cart");
+      // view cart popup
     },
     viewPage: (path) => {
       console.log("View page path :", path);
-    },
-    getProducts: () => {
-      // setSectionState()
-    },
-    searchProducts: () => {
-      // api set state.search.products
-    },
+      // move to another page
+    }
   });
 
   return {
@@ -69,9 +53,6 @@ export function useStorefront() {
     action,
     business,
     general,
-    sections,
-    setState,
-    setSectionState,
-    setProductState,
+    setState
   };
 }

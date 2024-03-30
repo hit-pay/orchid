@@ -1,5 +1,5 @@
 
-const sections = [
+const components = [
   {
     id: "s-1",
     n: "Header",
@@ -64,7 +64,5 @@ const sections = [
     ]
   }
 ];
-
-const components = [...sections];
 
 export { components as c };

@@ -1,13 +1,7 @@
-import { defineAsyncComponent, createApp, computed } from "vue";
+import { createApp, computed } from "vue";
 import { useStorefront } from "./storefront.js";
-
-import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
 import { MotionPlugin } from "@vueuse/motion";
-
 import storefront from "./storefront-default-settings.json";
-import products from "./products-home.json";
-
-import "vue3-carousel/dist/carousel.css";
 
 const mountEl = document.querySelector("#app");
 const props = { ...mountEl.dataset };
@@ -15,20 +9,13 @@ const components = computed(() => JSON.parse(props.components));
 
 const {
   business,
-  sections,
   general,
   state,
   action,
   initialState,
-  setSectionState,
 } = useStorefront();
 
 initialState(storefront);
-
-setTimeout(() => {
-  // TODO :  create trigger from template
-  setSectionState("product_list_1", "product", products);
-}, 1000);
 
 const createTemplate = (comp) => {
   let template = ``
@@ -41,10 +28,8 @@ const createTemplate = (comp) => {
       template += `<div class="${el.id}">${el.val}</div>`
     }
   })
-  return `<div class="${comp.id}">${template}</div>`
+  return `${template}`
 }
-
-
 const createAppLayout = () => {
   // group : header, section[router-view], footer
   let layout = ``
@@ -81,36 +66,24 @@ const app = createApp({
   template: createAppLayout()
 });
 components.value.forEach((comp, index) => {
-  const newComponent = defineAsyncComponent(() => {
-    return new Promise((resolve) => {
-      const SComponent = {
-        props: {
-          s: {} // custom state
-        },
-        setup() {
-          return {
-            business: business.value,
-            general: general.value,
-            sections: sections.value,
-            state: state.value,
-            action: action.value,
-          };
-        },
-        template: createTemplate(comp),
+  const newComponent = {
+    props: {
+      class: {},
+      s: {} 
+    },
+    setup() {
+      return {
+        business: business.value,
+        general: general.value,
+        state: state.value,
+        action: action.value
       };
-      resolve(SComponent);
-    });
-  });
+    },
+    template: createTemplate(comp),
+  };
   app.component(comp.id, newComponent);
-
   if (index + 1 === components.value.length) {
-    app.component("SCarousel", Carousel);
-    app.component("SSlide", Slide);
-    app.component("SSlidePagination", Pagination);
-    app.component("SSlideNavigation", Navigation);
-
     app.use(MotionPlugin);
-
     app.mount("#app");
   }
 });
