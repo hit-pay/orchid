@@ -1,61 +1,52 @@
-const common = [
-  {
-    name: "s-btn",
-    theme: "default",
-    props: {
-      label: String,
-    },
-  },
-  {
-    name: "s-logo",
-    theme: "default",
-  },
-  {
-    name: "s-navigation-menus",
-    theme: "default",
-  },
-  {
-    name: "s-search-icon",
-    theme: "default",
-  },
-  {
-    name: "s-search-popup",
-    theme: "default",
-  },
-  {
-    name: "s-cart-icon",
-    theme: "default",
-  },
-  {
-    name: "s-category-filter",
-    theme: "default",
-  },
-  {
-    name: "s-product-card",
-    props: {
-      product: Object,
-    },
-  },
-];
 
 const sections = [
   {
-    name: "s-banner-promotion",
-    theme: "default",
-    props: {
-      text: String,
-      isClosable: Boolean,
+    id: "s-x1",
+    n: "promotion",
+    css: {
+      all: {
+        "x1": "color:blue"
+      }
     },
+    code: [
+      {
+        id: "x1",
+        tp: "text",
+        val: "Promotion Banners"
+      }
+    ]
   },
   {
-    name: "s-headers",
-    theme: "default",
-  },
-  {
-    name: "s-products",
-    theme: "default",
-  },
+    id: "s-x2",
+    n: "Header",
+    g: 'header',
+    css: {
+      all: {
+        "x2": "color:red",
+        "x3": "color:red",
+        "x4": "color:red"
+      }
+    },
+    code: [
+      {
+        id: "x2",
+        tp: "el",
+        val: "s-x1"
+      },
+      {
+        id: "x3",
+        tp: "img",
+        val: "https://assets-global.website-files.com/64624bb008de2f11dbf1f3a1/6465f9263eb94044a3743277_HitPay_Blue-min.svg"
+      },
+      {
+        id: "x4",
+        tp: "text",
+        val: "Header Title"
+      }
+    ]
+  }
 ];
 
-const components = [...common, ...sections];
+const components = [...sections];
+
 export { components as c };
