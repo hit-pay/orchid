@@ -1,7 +1,7 @@
 import { createApp, computed } from "vue";
 import { useStorefront } from "./storefront.js";
 import { MotionPlugin } from "@vueuse/motion";
-import storefront from "./storefront-default-settings.json";
+import storefront from "./settings.json";
 
 const mountEl = document.querySelector("#app");
 const props = { ...mountEl.dataset };
