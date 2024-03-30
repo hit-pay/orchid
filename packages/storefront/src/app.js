@@ -51,7 +51,8 @@ const createAppLayout = () => {
   components.value.filter(c => c.g === 'header').forEach((comp) => {
     layout += `<${comp.id} />`
   })
-  layout += `<router-view />`
+
+  // layout += `<router-view />`
 
   // if homepage
   // components.value.filter(c => c.g === 'sections').forEach((comp) => {

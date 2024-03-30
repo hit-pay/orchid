@@ -10,9 +10,32 @@
 
     <script type="module">
       import { c } from "./src/components.js";
+      // child to 1 list
+      let lists = []
+      c.forEach(e => {
+        lists.push(e)
+          e.c?.forEach((e1) => {
+            lists.push(e1)
+            e1.c?.forEach((e2) => {
+              lists.push(e2)
+              e2.c?.forEach((e3) => {
+                lists.push(e3)
+                e3.c?.forEach((e4) => {
+                  lists.push(e4)
+                  e4.c?.forEach((e5) => {
+                    lists.push(e5)
+                    e5.c?.forEach((e6) => {
+                      lists.push(e6)
+                    })
+                  })
+                })
+              })
+            })
+          })
+      });
       document
         .getElementById("app")
-        .setAttribute("data-components", JSON.stringify(c));
+        .setAttribute("data-components", JSON.stringify(lists));
     </script>
     <script type="module" src="/src/app.js"></script>
   </body>
