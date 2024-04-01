@@ -50,7 +50,7 @@ const isOpen = ref(false);
       'left-[-999px] w-0': !modelValue && position === 'left',
     }"
   >
-    <template v-if="modelValue">
+    <div v-if="modelValue">
       <div
         class="flex border-oc-gray-200 gap-x-9 justify-between p-5 items-start border-b"
       >
@@ -127,6 +127,6 @@ const isOpen = ref(false);
         </slot>
       </div>
       <slot name="default"></slot>
-    </template>
+    </div>
   </div>
 </template>
