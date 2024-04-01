@@ -42,7 +42,7 @@ const isOpen = ref(false);
 
 <template>
   <div
-    class="fixed top-0 bottom-0 shadow-xl bg-oc-bg-light transition-all h-full z-50"
+    class="fixed top-0 bottom-0 shadow-xl bg-oc-bg-light transition-all h-full z-50 overflow-y-auto"
     :class="{
       'right-0': modelValue && position === 'right',
       'right-[-999px] w-0': !modelValue && position === 'right',
@@ -52,7 +52,7 @@ const isOpen = ref(false);
   >
     <div v-if="modelValue">
       <div
-        class="flex border-oc-gray-200 gap-x-9 justify-between p-5 items-start border-b"
+        class="flex border-oc-gray-200 gap-x-9 justify-between p-5 items-start border-b sticky bg-oc-bg-light top-0"
       >
         <slot name="header">
           <div class="flex flex-col gap-y-1 max-w-[300px]">
