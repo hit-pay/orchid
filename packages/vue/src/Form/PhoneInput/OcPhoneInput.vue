@@ -137,7 +137,6 @@ const onPaste = (e) => {
     :label-icon="labelIcon"
     :tooltip-text="tooltipText"
     :tooltip-options="tooltipOptions"
-    @paste="onPaste"
     @keydown="preventEventIfNotNumberInput"
     @update:model-value="onInput"
   >
