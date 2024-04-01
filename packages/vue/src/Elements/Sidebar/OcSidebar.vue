@@ -38,17 +38,6 @@ const expandMenu = (id) => {
   emit("changeExpandedMenus", state.expanded);
 };
 
-const changeExpanded = () => {
-  state.loading = true;
-
-  emit("changeExpanded", !props.isExpanded);
-
-  let timeOut = setTimeout(() => {
-    state.loading = false;
-    clearTimeout(timeOut);
-  });
-};
-
 const allClassName = computed(() => {
   let classNames = props.isExpanded ? "w-[300px] " : "w-[102px] ";
   return classNames + props.class;
@@ -76,17 +65,6 @@ onMounted(() => {
     class="cursor-pointer max-h-[inherit] transition-all duration-300 ease-in-out relative bg-[var(--oc-sidebar-background)]"
     :class="allClassName"
   >
-    <button
-      type="button"
-      aria-label="Expand Collapse"
-      class="hidden md:flex bg-oc-text-100 transition-all duration-500 absolute top-[-12px] right-[-12px] z-40 p-3 border rounded-full"
-      :class="{
-        '-rotate-180': !isExpanded,
-      }"
-      @click="changeExpanded"
-    >
-      <Icon width="20" height="20" name="arrow-left-2" />
-    </button>
     <div
       class="grid py-8 w-full max-h-[inherit] overflow-y-auto overflow-x-hidden gap-3 px-8"
     >
