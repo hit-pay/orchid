@@ -219,10 +219,10 @@ const showSubForm = ref("");
       </template>
       <template #Children="{ form }">
         <div
-          class="flex items-center bg-oc-accent-1-50 rounded p-4 -mt-1 cursor-pointer"
-          @click="showSubForm = form.name"
+          class="flex items-center bg-oc-accent-1-50 p-4 -mt-1 cursor-pointer -ml-[12px] w-[calc(100%,+24px)]"
+          @click="showSubForm ? showSubForm = '' : showSubForm = form.name"
         >
-          <div class="w-[30px]">
+          <div v-if="form.icon" class="w-[30px]">
             <Icon
               v-if="form.icon"
               class="text-oc-text-400"
@@ -232,6 +232,9 @@ const showSubForm = ref("");
             />
           </div>
           <div>{{ form.label }}</div>
+          <div class="ml-auto">
+            <Icon name="chevron-down" :class="showSubForm === form.name ? 'rotate-180': ''"  />
+          </div>
         </div>
         <Transition
           enter-active-class="duration-[250ms] ease-out"
@@ -243,16 +246,9 @@ const showSubForm = ref("");
         >
           <div
             v-if="showSubForm === form.name"
-            class="bg-oc-bg-light absolute top-0 left-0 min-h-full w-full z-10 pb-[100px]"
+            class="bg-oc-bg-light"
           >
-            <div
-              class="flex items-center border-b mt-5 p-4 cursor-pointer"
-              @click="showSubForm = ''"
-            >
-              <Icon class="text-oc-text-400" name="chevron-left" />
-              <div class="font-medium">{{ form.label }}</div>
-            </div>
-            <div class="px-7 py-4 mt-4">
+            <div class="py-4 mt-4">
               <FormBuilder
                 id="form-builder-children"
                 class="grid gap-5"
