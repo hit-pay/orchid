@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watch } from "vue";
-import { Icon, Toggle, Button, SelectOptions, Dropdown } from "@/orchidui";
+import { Icon, Toggle, Button, SelectOptions, Dropdown, DropdownItem } from "@/orchidui";
 import { DraggableList } from "@/orchidui/Draggable.js";
 import { RequestForm, ThumbnailSection } from "@/orchidui/StoreDesign";
 import { computed } from "vue";
@@ -360,6 +360,8 @@ const closeSettings = () => {
 };
 
 const showPresetStyle = ref(false)
+const isHomePageDropdownOpen = ref(false)
+
 </script>
 <template>
   <div class="h-full relative">
@@ -435,7 +437,7 @@ const showPresetStyle = ref(false)
               "
             >
               <div class="ml-2">
-                {{ children.label }}
+                {{ children.label }} 
               </div>
               <Icon
                 v-if="children.icon"
@@ -459,10 +461,28 @@ const showPresetStyle = ref(false)
     <div v-else-if="!sidebarActive.section">
       <div class="px-5 py-4 flex cursor-pointer mt-8">
         <div class="text-oc-text-300" @click="changeSubmenu('')">
-          {{ sidebarMenuLabel }}
+          {{ sidebarMenuLabel }} 
         </div>
         <div class="mx-2">/</div>
-        <div class="font-medium">{{ submenuLabel }}</div>
+        <div class="font-medium">
+          <Dropdown
+            v-model="isHomePageDropdownOpen"
+            :distance="10"
+            >
+            {{ submenuLabel }} 
+              <template #menu>
+                <div v-if="sidebarMenuActive.children" class="p-2" @click="isHomePageDropdownOpen = false">
+                  <DropdownItem 
+                    v-for="sectionHomePage in sidebarMenuActive.children"
+                    :key=sectionHomePage.name
+                    :text="sectionHomePage.label"
+                    class="p-2 text-sm"
+                    @click="changeSubmenu(sectionHomePage.name, sectionHomePage.section)"
+                    /> 
+                  </div>
+              </template>
+            </Dropdown>
+        </div>
       </div>
       <div v-if="renderSectionList" class="px-5 mt-4">
         <DraggableList
