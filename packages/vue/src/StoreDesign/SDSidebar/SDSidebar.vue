@@ -61,6 +61,7 @@ const presetOptions = computed(() => {
       value: "custom",
       label: "Custom",
       preview: props.presetCustomPreview,
+      active_preview: props.presetCustomActivePreview,
       sections: [
         {
           section: "Styles",
@@ -75,6 +76,7 @@ const presetOptions = computed(() => {
 const presetValue = computed(() => {
   return props.values.sections.find((s) => s.key === "Styles")["preset"];
 });
+const activePreset = presetOptions.value.find((p) => p.value === presetValue.value);
 
 const updatePreset = (to) => {
   const selectedPreset = presetOptions.value.find((p) => p.value === to);
@@ -356,10 +358,12 @@ const closeSettings = () => {
   emit("close:settings", sectionActive.value.key);
   changeSection("", "");
 };
+
+const showPresetStyle = ref(false)
 </script>
 <template>
   <div class="h-full relative">
-  <div class="h-full overflow-auto border border-gray-200 pb-[150px]">
+  <div class="h-full overflow-auto border border-gray-200 pb-[100px]">
     <div v-if="!sidebarActive.submenu" class="flex flex-col pt-8">
       <div
         v-for="(sidebarMenu, index) in sidebar"
@@ -596,64 +600,63 @@ const closeSettings = () => {
         </div>
       </div>
     </Transition>
-    <div v-if="theme" class="w-full absolute bottom-0" >
-        <div class="bg-oc-bg-light w-full p-[16px] absolute bottom-[84px]">
-          <SelectOptions
-            class="!grid-cols-2"
-            variant="list2"
-            :model-value="presetValue"
-            :options="presetOptions"
-            @update:model-value="updatePreset"
-          >
-            <template #option="{ option, selected }">
-              <div class="p-1 flex flex-col justify-center relative">
-                <div
-                  v-if="option.value === 'custom' && selected"
-                  class="absolute top-0 right-0"
-                >
-                  <Button
-                    label="Edit"
-                    left-icon="pencil"
-                    size="small"
-                    variant="secondary"
-                  />
-                </div>
-                <img :src="option.preview" alt="" />
-                <div
-                  :class="{
-                    'text-oc-primary': selected,
-                  }"
-                  class="text-center mt-2"
-                >
-                  {{ option.label }}
-                </div>
-              </div>
-            </template>
-          </SelectOptions>
-      </div>
-      
-        <div class="w-full flex">
-            <div class="w-3/4 bg-oc-bg-light flex items-center h-[84px] gap-[16px] p-[16px] border-t border-r border-gray-200">
-                <img :src="theme.preview" class="pr-[12px] h-[51px] rounded">
-                <div class="flex flex-col">
-                  <div class="text-oc-text-400 mb-3">Active theme</div>
-                  <div class="text-[14px] font-medium">
-                    Juizzy
+    <div v-if="theme" class=" w-full absolute bottom-0 z-20" >
+          <div v-if="showPresetStyle" class="flex w-full px-[16px] absolute bottom-[84px]">
+              <SelectOptions
+                class="!grid-cols-2 bg-oc-bg-light py-[24px] border-t border-gray-200"
+                variant="list2"
+                :model-value="presetValue"
+                :options="presetOptions"
+                @update:model-value="updatePreset"
+              >
+                <template #option="{ option, selected }">
+                  <div class="p-1 flex flex-col justify-center relative">
+                    <div
+                      v-if="option.value === 'custom' && selected"
+                      class="absolute top-0 right-0"
+                    >
+                      <Button
+                        label="Edit"
+                        left-icon="pencil"
+                        size="small"
+                        variant="secondary"
+                      />
+                    </div>
+                    <img :src="option.preview" alt="" />
+                    <div
+                      :class="{
+                        'text-oc-primary': selected,
+                      }"
+                      class="text-center mt-2"
+                    >
+                      {{ option.label }}
+                    </div>
                   </div>
+                </template>
+              </SelectOptions>
+          </div>
+          <div class="bg-oc-bg-light w-full flex gap-5 border-y border-r border-gray-200 h-[84px]">
+              <div class="bg-oc-bg-light flex items-center  gap-5 p-[16px] border-r border-gray-200">
+                  <img :src="theme.preview" class="h-[51px] rounded-sm">
+                  <div class="flex flex-col">
+                    <div class="text-oc-text-400 mb-3">Active theme</div>
+                    <div class="text-[14px] font-medium">
+                      Juizzy
+                    </div>
+                  </div>
+                <div class="w-[100px] group flex items-center justify-end ml-auto cursor-pointer gap-[8px]">
+                      <span class="hidden group-hover:block text-[10px] mr-2">Change theme</span>
+                      <Icon name="repeat" width="18" height="18"  @click="$emit('changeTheme')" />
+                    </div>
+              </div>
+              <div class="flex gap-3 items-center cursor-pointer" @click="showPresetStyle = !showPresetStyle">
+                <img class="w-[112px]" :src="activePreset.active_preview" />
+                <div>
+                  <Icon name="chevron-down" width="18" height="18" :class="showPresetStyle ? 'rotate-180' : ''" />
                 </div>
-                <div class="group flex items-center ml-auto cursor-pointer gap-[8px]">
-                  <span class="hidden group-hover:block text-[12px] mr-2">Change theme</span>
-                  <Icon name="repeat"  @click="$emit('changeTheme')" />
-                </div>
-            </div>
-            <div class="w-1/4 flex">
-              
-              <div class="p-1 flex flex-col justify-center relative">
-               
               </div>
             </div>
-          </div>
-      </div>
+        </div>
   </div>
 </div>
 </template>
