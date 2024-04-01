@@ -42,7 +42,7 @@ const isOpen = ref(false);
 
 <template>
   <div
-    class="fixed top-0 bottom-0 shadow-xl bg-oc-bg-light transition-all h-full"
+    class="fixed top-0 bottom-0 shadow-xl bg-oc-bg-light transition-all h-full z-50"
     :class="{
       'right-0': modelValue && position === 'right',
       'right-[-999px] w-0': !modelValue && position === 'right',
