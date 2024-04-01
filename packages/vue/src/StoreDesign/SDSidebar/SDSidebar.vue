@@ -689,10 +689,10 @@ const isHomePageDropdownOpen = ref(false);
           <div
             class="bg-oc-bg-light flex items-center gap-5 p-[16px] border-r border-gray-200"
           >
-            <img :src="theme.preview" class="h-[51px] rounded-sm" />
+            <img :src="`${theme.assets}thumbnail.png`" class="h-[51px] rounded-sm" />
             <div class="flex flex-col">
               <div class="text-oc-text-400 mb-3">Active theme</div>
-              <div class="text-[14px] font-medium">Juizzy</div>
+              <div class="text-[14px] font-medium">{{theme.name}}</div>
             </div>
             <div
               class="w-[100px] group flex items-center justify-end ml-auto cursor-pointer gap-[8px]"
