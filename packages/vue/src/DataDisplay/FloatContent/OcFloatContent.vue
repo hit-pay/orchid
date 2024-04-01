@@ -1,5 +1,5 @@
 <script setup>
-import { Dropdown, DropdownItem, Icon } from "@/orchidui";
+import { CopyTooltip, Dropdown, DropdownItem, Icon } from "@/orchidui";
 import { ref } from "vue";
 
 const props = defineProps({
@@ -55,21 +55,34 @@ const isOpen = ref(false);
         class="flex border-oc-gray-200 gap-x-9 justify-between p-5 items-start border-b"
       >
         <slot name="header">
-          <div class="flex flex-col gap-y-1 overflow-hidden">
-            <span
-              class="text-lg font-medium text-ellipsis overflow-hidden whitespace-nowrap"
-            >
+          <div class="flex flex-col gap-y-1 max-w-[300px]">
+            <span class="text-lg font-medium truncate">
               <slot name="title">
                 {{ title }}
               </slot>
             </span>
             <slot name="description">
-              <span
-                v-if="description"
-                class="text-sm text-oc-text-300 text-ellipsis overflow-hidden whitespace-nowrap"
-              >
-                {{ description }}
-              </span>
+              <div class="flex gap-3 items-center">
+                <span
+                  v-if="description"
+                  class="text-sm text-oc-text-300 truncate"
+                >
+                  {{ description }}
+                </span>
+                <CopyTooltip
+                  :value="description"
+                  :tooltip-options="{ strategy: 'fixed' }"
+                >
+                  <template #default="{ isShow }">
+                    <Icon
+                      width="14"
+                      height="14"
+                      class="cursor-pointer text-oc-text-400"
+                      name="copy"
+                    />
+                  </template>
+                </CopyTooltip>
+              </div>
             </slot>
           </div>
           <div class="flex items-center gap-3">
