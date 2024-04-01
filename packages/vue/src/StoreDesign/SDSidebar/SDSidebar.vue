@@ -358,12 +358,14 @@ const closeSettings = () => {
 };
 </script>
 <template>
-  <div class="h-full overflow-auto relative border border-gray-200">
+  <div class="h-full relative">
+  <div class="h-full overflow-auto border border-gray-200 pb-[150px]">
     <div v-if="!sidebarActive.submenu" class="flex flex-col pt-8">
       <div
         v-for="(sidebarMenu, index) in sidebar"
         :key="index"
         class="border-b flex flex-wrap items-center"
+        :class="(sidebarMenu.name === 'styles') ? 'hidden': ''"
       >
         <div
           class="p-4 w-full flex items-center cursor-pointer hover:bg-oc-accent-1-50-tr"
@@ -595,7 +597,7 @@ const closeSettings = () => {
       </div>
     </Transition>
     <div v-if="theme" class="w-full absolute bottom-0" >
-        <!-- <div class="w-full px-5 pb-7 absolute bottom-[84px]">
+        <div class="bg-oc-bg-light w-full p-[16px] absolute bottom-[84px]">
           <SelectOptions
             class="!grid-cols-2"
             variant="list2"
@@ -628,10 +630,10 @@ const closeSettings = () => {
               </div>
             </template>
           </SelectOptions>
-      </div> -->
+      </div>
       
         <div class="w-full flex">
-            <div class="w-2/3 bg-oc-bg-light flex items-center h-[84px] gap-[16px] p-[16px] border-t border-r border-gray-200">
+            <div class="w-3/4 bg-oc-bg-light flex items-center h-[84px] gap-[16px] p-[16px] border-t border-r border-gray-200">
                 <img :src="theme.preview" class="pr-[12px] h-[51px] rounded">
                 <div class="flex flex-col">
                   <div class="text-oc-text-400 mb-3">Active theme</div>
@@ -639,12 +641,19 @@ const closeSettings = () => {
                     Juizzy
                   </div>
                 </div>
-                <Icon name="repeat" class="ml-auto text-oc-text-400 cursor-pointer" @click="$emit('changeTheme')" />
+                <div class="group flex items-center ml-auto cursor-pointer gap-[8px]">
+                  <span class="hidden group-hover:block text-[12px] mr-2">Change theme</span>
+                  <Icon name="repeat"  @click="$emit('changeTheme')" />
+                </div>
             </div>
-            <div class="w-1/3 flex">
-              Tess
+            <div class="w-1/4 flex">
+              
+              <div class="p-1 flex flex-col justify-center relative">
+               
+              </div>
             </div>
           </div>
       </div>
   </div>
+</div>
 </template>
