@@ -280,6 +280,7 @@ export const Default = {
                     :preset-custom-preview="sidebarConfig.presetCustomPreview"
                     :settings="sidebarConfig.settings"
                     :options="options"
+                    :theme="{ name:'juizzy', display_name:'Juizzy', preview: '/images/theme1.png' }"
                     v-model:active="sidebarActive"
                     @update:active="onUpdateSidebarActive"
                     @edit:banner="onEditBanner"
