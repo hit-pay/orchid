@@ -22,6 +22,7 @@ const props = defineProps({
   },
   presetCustomPreview: String,
   options: Object,
+  theme: Object
 });
 
 const getSidebarMenu = (section) => {
@@ -50,6 +51,7 @@ const emit = defineEmits({
   "update:general": [],
   "update:field": [],
   "close:settings": [],
+  "changeTheme": []
 });
 
 const presetOptions = computed(() => {
@@ -389,7 +391,7 @@ const closeSettings = () => {
             {{ sidebarMenu.label }}
           </div>
           <Icon
-            v-if="sidebarMenu.children || sidebarMenu.name === 'styles'"
+            v-if="sidebarMenu.children"
             name="chevron-down"
             class="ml-auto text-oc-text-400"
             :class="
@@ -443,42 +445,6 @@ const closeSettings = () => {
                 name="chevron-right"
                 class="ml-auto text-oc-text-400"
               />
-            </div>
-          </template>
-          <template v-else-if="sidebarMenu.type === 'styles'">
-            <div class="px-5 pb-7">
-              <SelectOptions
-                class="!grid-cols-2"
-                variant="list2"
-                :model-value="presetValue"
-                :options="presetOptions"
-                @update:model-value="updatePreset"
-              >
-                <template #option="{ option, selected }">
-                  <div class="p-1 flex flex-col justify-center relative">
-                    <div
-                      v-if="option.value === 'custom' && selected"
-                      class="absolute top-0 right-0"
-                    >
-                      <Button
-                        label="Edit"
-                        left-icon="pencil"
-                        size="small"
-                        variant="secondary"
-                      />
-                    </div>
-                    <img :src="option.preview" alt="" />
-                    <div
-                      :class="{
-                        'text-oc-primary': selected,
-                      }"
-                      class="text-center mt-2"
-                    >
-                      {{ option.label }}
-                    </div>
-                  </div>
-                </template>
-              </SelectOptions>
             </div>
           </template>
         </div>
@@ -628,8 +594,57 @@ const closeSettings = () => {
         </div>
       </div>
     </Transition>
-    <div class="absolute bottom-0">
-      <slot name="sidebar-bottom" />
-    </div>
+    <div v-if="theme" class="w-full absolute bottom-0" >
+        <!-- <div class="w-full px-5 pb-7 absolute bottom-[84px]">
+          <SelectOptions
+            class="!grid-cols-2"
+            variant="list2"
+            :model-value="presetValue"
+            :options="presetOptions"
+            @update:model-value="updatePreset"
+          >
+            <template #option="{ option, selected }">
+              <div class="p-1 flex flex-col justify-center relative">
+                <div
+                  v-if="option.value === 'custom' && selected"
+                  class="absolute top-0 right-0"
+                >
+                  <Button
+                    label="Edit"
+                    left-icon="pencil"
+                    size="small"
+                    variant="secondary"
+                  />
+                </div>
+                <img :src="option.preview" alt="" />
+                <div
+                  :class="{
+                    'text-oc-primary': selected,
+                  }"
+                  class="text-center mt-2"
+                >
+                  {{ option.label }}
+                </div>
+              </div>
+            </template>
+          </SelectOptions>
+      </div> -->
+      
+        <div class="w-full flex">
+            <div class="w-2/3 bg-oc-bg-light flex items-center h-[84px] gap-[16px] p-[16px] border-t border-r border-gray-200">
+                <img :src="theme.preview" class="pr-[12px] h-[51px] rounded">
+                <div class="flex flex-col">
+                  <div class="text-oc-text-400 mb-3">Active theme</div>
+                  <div class="text-[14px] font-medium">
+                    Juizzy
+                  </div>
+                </div>
+                <Icon name="repeat" class="ml-auto text-oc-text-400 cursor-pointer" @click="$emit('changeTheme')" />
+            </div>
+            <div class="w-1/3 flex">
+              Tess
+            </div>
+          </div>
+      </div>
   </div>
 </template>

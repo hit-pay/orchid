@@ -20,13 +20,6 @@ const sidebar = [
       },
     ],
   },
-  // 2 level
-  {
-    icon: "pallete",
-    type: "styles",
-    name: "styles",
-    label: "Styles",
-  },
   // 3 -> 4 level level
   {
     icon: "link-in-bio",
