@@ -3,19 +3,20 @@ import { ar } from "date-fns/locale";
 import { ref } from "vue";
 
 export default {
-  computed: {
-    ar() {
-      return ar;
-    },
-  },
   component: FloatContent,
   tags: ["autodocs"],
 };
 
 export const overview = {
   name: "Overview",
+  argTypes: {
+    position: {
+      control: "select",
+      options: ["left", "right"],
+    },
+  },
   args: {
-    position: "",
+    position: "right",
     title: "Transaction detail",
     description: "#9a2804fc-74df-4304-a7d7-79d11f9e1db8",
     dropdownOptions: {
@@ -57,6 +58,7 @@ export const overview = {
             :title="args.title"
             :description="args.description" 
             :dropdown-options="args.dropdownOptions"
+            :position="args.position"
         />
       </Theme>
     `,

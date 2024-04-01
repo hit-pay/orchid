@@ -28,6 +28,11 @@ const props = defineProps({
     type: Object,
     default: () => ({}),
   },
+  position: {
+    type: String,
+    validator: (v) => ["left", "right"].includes(v),
+    default: "right",
+  },
 });
 
 const emit = defineEmits(["update:model-value"]);
@@ -37,10 +42,12 @@ const isOpen = ref(false);
 
 <template>
   <div
-    class="fixed top-0 bottom-0 right-0 shadow-xl bg-oc-bg-light transition-all h-full"
+    class="fixed top-0 bottom-0 shadow-xl bg-oc-bg-light transition-all h-full"
     :class="{
-      'right-0': modelValue,
-      'right-[-999px] w-0': !modelValue,
+      'right-0': modelValue && position === 'right',
+      'right-[-999px] w-0': !modelValue && position === 'right',
+      'left-0': modelValue && position === 'left',
+      'left-[-999px] w-0': !modelValue && position === 'left',
     }"
   >
     <template v-if="modelValue">
