@@ -179,6 +179,10 @@ props.requestForm.forEach((f) => {
 });
 
 const showSubForm = ref("");
+
+const toggleSubForm = (name) => {
+  showSubForm.value === name ? showSubForm.value = '' : showSubForm.value = name
+}
 </script>
 <template>
   <div>
@@ -220,7 +224,7 @@ const showSubForm = ref("");
       <template #Children="{ form }">
         <div
           class="flex items-center bg-oc-accent-1-50 p-4 -mt-1 cursor-pointer -ml-[12px] w-[calc(100%,+24px)]"
-          @click="showSubForm ? showSubForm = '' : showSubForm = form.name"
+          @click="toggleSubForm(form.name)"
         >
           <div v-if="form.icon" class="w-[30px]">
             <Icon
