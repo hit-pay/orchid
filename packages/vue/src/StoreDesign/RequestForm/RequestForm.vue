@@ -242,11 +242,11 @@ const toggleSubForm = (name) => {
         </div>
         <Transition
           enter-active-class="duration-[250ms] ease-out"
-          enter-from-class="transform opacity-0 mt-[100px]"
+          enter-from-class="transform opacity-0 mt-[10px]"
           enter-to-class="opacity-100 mt-0"
           leave-active-class="duration-[350ms] ease-out"
           leave-from-class="transform opacity-100 mt-0"
-          leave-to-class="opacity-0 mt-[150px]"
+          leave-to-class="opacity-0"
         >
           <div
             v-if="showSubForm === form.name"
