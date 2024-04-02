@@ -392,23 +392,22 @@ const displayFilterData = computed(() => {
           "
           class="flex items-center px-4 min-h-[52px]"
         >
-          <div
-            v-if="showBulkAction"
-            class="flex gap-5 items-center absolute left-5"
-          >
-            <slot name="bulk-actions" :selected-rows="selected" />
-          </div>
-          <div v-else class="flex gap-3 absolute left-5">
-            <Tabs
-              v-if="filterOptions?.tabs"
-              v-model="filterTab"
-              :tabs="filterOptions.tabs.options"
-              :variant="'pills'"
-              @update:model-value="applyFilter(null)"
-            />
-          </div>
-
-          <slot slot="filter-options">
+          <slot name="header-actions" :selected-rows="selected">
+            <div
+              v-if="showBulkAction"
+              class="flex gap-5 items-center absolute left-5"
+            >
+              <slot name="bulk-actions" :selected-rows="selected" />
+            </div>
+            <div v-else class="flex gap-3 absolute left-5">
+              <Tabs
+                v-if="filterOptions?.tabs"
+                v-model="filterTab"
+                :tabs="filterOptions.tabs.options"
+                :variant="'pills'"
+                @update:model-value="applyFilter(null)"
+              />
+            </div>
             <div
               v-if="filterOptions?.search || filterOptions?.form"
               class="flex gap-3 absolute ml-auto bg-oc-bg-light right-4 max-w-[calc(100%-24px)]"
