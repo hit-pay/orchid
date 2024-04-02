@@ -392,75 +392,77 @@ const displayFilterData = computed(() => {
           "
           class="flex items-center px-4 min-h-[52px]"
         >
-          <div
-            v-if="showBulkAction"
-            class="flex gap-5 items-center absolute left-5"
-          >
-            <slot name="bulk-actions" :selected-rows="selected" />
-          </div>
-          <div v-else class="flex gap-3 absolute left-5">
-            <Tabs
-              v-if="filterOptions?.tabs"
-              v-model="filterTab"
-              :tabs="filterOptions.tabs.options"
-              :variant="'pills'"
-              @update:model-value="applyFilter(null)"
-            />
-          </div>
-          <div
-            v-if="filterOptions?.search || filterOptions?.form"
-            class="flex gap-3 absolute ml-auto bg-oc-bg-light right-4 max-w-[calc(100%-24px)]"
-            :class="
-              !filterOptions
-                ? 'w-full justify-end'
-                : isSearchExpanded
-                  ? 'md:w-fit w-full'
-                  : ''
-            "
-          >
-            <FilterSearch
-              v-if="filterOptions?.search"
-              :is-search-only="!filterOptions.tabs"
-              @add-query="addQuery"
-              @toggle="isSearchExpanded = $event"
-            />
-            <Dropdown
-              v-if="filterOptions?.form"
-              v-model="isDropdownOpened"
-              :distance="9"
-              placement="bottom-end"
+          <slot name="header-actions" :selected-rows="selected">
+            <div
+              v-if="showBulkAction"
+              class="flex gap-5 items-center absolute left-5"
             >
-              <Button
-                :is-active="isDropdownOpened"
-                variant="secondary"
-                left-icon="filter"
+              <slot name="bulk-actions" :selected-rows="selected" />
+            </div>
+            <div v-else class="flex gap-3 absolute left-5">
+              <Tabs
+                v-if="filterOptions?.tabs"
+                v-model="filterTab"
+                :tabs="filterOptions.tabs.options"
+                :variant="'pills'"
+                @update:model-value="applyFilter(null)"
               />
+            </div>
+            <div
+              v-if="filterOptions?.search || filterOptions?.form"
+              class="flex gap-3 absolute ml-auto bg-oc-bg-light right-4 max-w-[calc(100%-24px)]"
+              :class="
+                !filterOptions
+                  ? 'w-full justify-end'
+                  : isSearchExpanded
+                    ? 'md:w-fit w-full'
+                    : ''
+              "
+            >
+              <FilterSearch
+                v-if="filterOptions?.search"
+                :is-search-only="!filterOptions.tabs"
+                @add-query="addQuery"
+                @toggle="isSearchExpanded = $event"
+              />
+              <Dropdown
+                v-if="filterOptions?.form"
+                v-model="isDropdownOpened"
+                :distance="9"
+                placement="bottom-end"
+              >
+                <Button
+                  :is-active="isDropdownOpened"
+                  variant="secondary"
+                  left-icon="filter"
+                />
 
-              <template #menu>
-                <FilterForm
-                  v-if="isDropdownOpened"
-                  :id="id"
-                  :json-form="filterOptions.form ?? []"
-                  :grid="filterOptions.grid ?? null"
-                  :values="props.filter"
-                  :actions="filterOptions.actions"
-                  @apply-filter="applyFilter($event)"
-                  @filter-fields-changed="emit('filter-fields-changed', $event)"
-                  @cancel="isDropdownOpened = false"
-                >
-                  <template #default="{ errors, values, jsonForm, updateForm }">
-                    <slot
-                      name="custom-filter-form"
-                      :errors="errors"
-                      :values="values"
-                      :json-form="jsonForm"
-                      :update-filter="updateForm"
-                    ></slot>
-                  </template>
-                </FilterForm>
-              </template>
-            </Dropdown>
-          </div>
+                <template #menu>
+                  <FilterForm
+                    v-if="isDropdownOpened"
+                    :id="id"
+                    :json-form="filterOptions.form ?? []"
+                    :grid="filterOptions.grid ?? null"
+                    :values="props.filter"
+                    :actions="filterOptions.actions"
+                    @apply-filter="applyFilter($event)"
+                    @filter-fields-changed="emit('filter-fields-changed', $event)"
+                    @cancel="isDropdownOpened = false"
+                  >
+                    <template #default="{ errors, values, jsonForm, updateForm }">
+                      <slot
+                        name="custom-filter-form"
+                        :errors="errors"
+                        :values="values"
+                        :json-form="jsonForm"
+                        :update-filter="updateForm"
+                      ></slot>
+                    </template>
+                  </FilterForm>
+                </template>
+              </Dropdown>
+            </div>
+          </slot>
         </div>
         <FilterSearchFor
           :filters="displayFilterData"
