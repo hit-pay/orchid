@@ -118,7 +118,6 @@ export const bigVariantBeneficiary = {
       name: "Alex Turner",
       currency: "SGD",
       email: "alex@arcticmonkey.io",
-      phone_number: "+65 8373 3739 18",
       bank_name: "DBS Bank",
       bank_account_number: "**** 1234",
     },
