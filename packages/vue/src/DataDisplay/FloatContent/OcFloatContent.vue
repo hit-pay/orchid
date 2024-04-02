@@ -126,7 +126,7 @@ const isOpen = ref(false);
           </div>
         </slot>
       </div>
-      <slot name="default"></slot>
+      <slot name="bottom"></slot>
     </div>
   </div>
 </template>
