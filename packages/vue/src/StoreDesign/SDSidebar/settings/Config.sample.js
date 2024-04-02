@@ -7,11 +7,13 @@ const Config = {
   sidebar: sidebar, // sidebar menus
   settings: settings, // form
   presetCustomPreview: ASSETS_URL + "preset-custom.png",
+  presetCustomActivePreview: "/images/active-preset.png",
   preset: [
     {
       value: "default",
       label: "Default",
       preview: ASSETS_URL + "preset-1.png",
+      active_preview: "/images/active-preset.png",
       sections: [
         // Reset Section Data
         {
@@ -81,6 +83,7 @@ const Config = {
       value: "wood",
       label: "Wood",
       preview: ASSETS_URL + "preset-2.png",
+      active_preview: "/images/active-preset.png",
       sections: [
         {
           section: "Styles",
@@ -149,6 +152,7 @@ const Config = {
       value: "flower",
       label: "Flower",
       preview: ASSETS_URL + "preset-3.png",
+      active_preview: "/images/active-preset.png",
       sections: [
         {
           section: "Styles",

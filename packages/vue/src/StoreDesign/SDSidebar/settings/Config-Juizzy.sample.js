@@ -7,11 +7,13 @@ const Config = {
   sidebar: sidebar, // sidebar menus
   settings: settings, // form
   presetCustomPreview: ASSETS_URL + "preset-custom.png",
+  presetCustomActivePreview: "/images/active-preset.png",
   preset: [
     {
       value: "default",
       label: "Default",
       preview: "/templates/juizzy/images/preset-1.png",
+      active_preview: "/images/active-preset.png",
       sections: [
         {
           section: "Styles",
@@ -80,6 +82,7 @@ const Config = {
       value: "dark",
       label: "Dark",
       preview: "/templates/juizzy/images/preset-2.png",
+      active_preview: "/images/active-preset.png",
       sections: [
         {
           section: "Styles",
@@ -148,6 +151,7 @@ const Config = {
       value: "grape",
       label: "Grape",
       preview: "/templates/juizzy/images/preset-3.png",
+      active_preview: "/images/active-preset.png",
       sections: [
         {
           section: "Styles",

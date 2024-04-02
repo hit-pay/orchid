@@ -89,6 +89,7 @@ const emit = defineEmits(["addCustomer", "editCustomer", "closeCustomer"]);
           class="flex flex-col gap-y-4 pt-4 w-full"
         >
           <ListDetail
+            v-if="!isBeneficiary"
             label="Phone"
             :content="
               customer?.phone_number ? `+${customer.phone_number}` : '-'
@@ -97,7 +98,7 @@ const emit = defineEmits(["addCustomer", "editCustomer", "closeCustomer"]);
           <ListDetail
             v-if="isBeneficiary"
             label="Email"
-            :content="customer.email"
+            :content="customer.email ?? '-'"
           />
           <ListDetail
             v-else
