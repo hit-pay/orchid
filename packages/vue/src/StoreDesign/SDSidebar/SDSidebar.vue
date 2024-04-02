@@ -706,7 +706,7 @@ const isHomePageDropdownOpen = ref(false);
             </div>
           </div>
           <div
-            class="flex gap-3 items-center cursor-pointer"
+            class="flex gap-3 items-center cursor-pointer ml-auto pr-4"
             @click="showPresetStyle = !showPresetStyle"
           >
             <img class="w-[112px]" :src="`${theme.assets}images/preset/${activePreset.value}-sm.png`" />
