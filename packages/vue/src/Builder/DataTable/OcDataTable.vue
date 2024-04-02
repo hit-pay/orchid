@@ -408,7 +408,7 @@ const displayFilterData = computed(() => {
             />
           </div>
 
-          <slot slot="filter-options">
+          <slot name="filter-options">
             <div
               v-if="filterOptions?.search || filterOptions?.form"
               class="flex gap-3 absolute ml-auto bg-oc-bg-light right-4 max-w-[calc(100%-24px)]"
