@@ -1,7 +1,7 @@
 <!-- TODO : group not support nested dynamic -->
 <script setup>
+import { Dropdown, Icon, Tooltip } from "@/orchidui";
 import { Draggable } from "@/orchidui/Draggable";
-import { Icon, Dropdown, Tooltip } from "@/orchidui";
 import { ref } from "vue";
 
 defineProps({
@@ -29,6 +29,7 @@ defineProps({
 defineEmits({
   "update:modelValue": [],
   "click:element": [],
+  "detectMove": null
 });
 const isHovered = ref([]);
 const isDropdownOpen = ref([]);
@@ -39,6 +40,7 @@ const isDropdownOpen = ref([]);
     :model-value="modelValue"
     class="grid gap-3"
     @update:model-value="$emit('update:modelValue', $event)"
+    @detect-move="$emit('detectMove', $event)"
   >
     <!-- wrapper -->
     <div
