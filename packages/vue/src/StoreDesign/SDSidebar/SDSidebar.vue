@@ -27,7 +27,6 @@ const props = defineProps({
   preset: {
     type: Array,
   },
-  presetCustomPreview: String,
   options: Object,
   theme: Object,
 });
@@ -67,8 +66,6 @@ const presetOptions = computed(() => {
     {
       value: "custom",
       label: "Custom",
-      preview: props.presetCustomPreview,
-      active_preview: props.presetCustomActivePreview,
       sections: [
         {
           section: "Styles",
@@ -670,7 +667,7 @@ const isHomePageDropdownOpen = ref(false);
                     variant="secondary"
                   />
                 </div>
-                <img :src="option.preview" alt="" />
+                <img :src="`${theme.assets}images/preset/${option.value}.png`" alt="" />
                 <div
                   :class="{
                     'text-oc-primary': selected,
@@ -712,7 +709,7 @@ const isHomePageDropdownOpen = ref(false);
             class="flex gap-3 items-center cursor-pointer"
             @click="showPresetStyle = !showPresetStyle"
           >
-            <img class="w-[112px]" :src="activePreset.active_preview" />
+            <img class="w-[112px]" :src="`${theme.assets}images/preset/${activePreset.value}-sm.png`" />
             <div>
               <Icon
                 name="chevron-down"
