@@ -11,18 +11,10 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
-  isDropdown: {
-    type: Boolean,
-    default: true,
-  },
   title: String,
   description: String,
   dropdownOptions: {
     type: Object,
-    default: () => ({
-      top: [],
-      bottom: [],
-    }),
   },
   dropdownProps: {
     type: Object,
@@ -86,36 +78,38 @@ const isOpen = ref(false);
             </slot>
           </div>
           <div class="flex items-center gap-3">
-            <Dropdown
-              v-model="isOpen"
-              :popper-options="{ strategy: 'fixed' }"
-              placement="bottom"
-              class="text-sm"
-              v-bind="dropdownProps"
-            >
-              <div
-                v-if="isDropdown"
-                class="p-[6px] rounded cursor-pointer text-oc-gray-500 hover:bg-gray-100 hover:text-oc-text"
+            <template v-if="dropdownOptions">
+              <Dropdown
+                v-model="isOpen"
+                :popper-options="{ strategy: 'fixed' }"
+                placement="bottom"
+                class="text-sm"
+                v-bind="dropdownProps"
               >
-                <Icon name="dots-vertical" width="20" height="20" />
-              </div>
-              <template #menu>
-                <div class="p-2 border-b border-gray-200">
-                  <DropdownItem
-                    v-for="(item, i) in dropdownOptions.top"
-                    :key="i"
-                    v-bind="item"
-                  />
+                <div
+                  class="p-[6px] rounded cursor-pointer text-oc-gray-500 hover:bg-gray-100 hover:text-oc-text"
+                >
+                  <Icon name="dots-vertical" width="20" height="20" />
                 </div>
-                <div v-if="dropdownOptions.bottom" class="p-2">
-                  <DropdownItem
-                    v-for="(item, i) in dropdownOptions.bottom"
-                    :key="i"
-                    v-bind="item"
-                  />
-                </div>
-              </template>
-            </Dropdown>
+                <template #menu>
+                  <div class="p-2 border-b border-gray-200">
+                    <DropdownItem
+                      v-for="(item, i) in dropdownOptions.top"
+                      :key="i"
+                      v-bind="item"
+                    />
+                  </div>
+                  <div v-if="dropdownOptions.bottom" class="p-2">
+                    <DropdownItem
+                      v-for="(item, i) in dropdownOptions.bottom"
+                      :key="i"
+                      v-bind="item"
+                    />
+                  </div>
+                </template>
+              </Dropdown>
+            </template>
+
             <div
               v-if="isClose"
               class="p-[6px] rounded cursor-pointer text-oc-gray-500 hover:bg-gray-100 hover:text-oc-text"
