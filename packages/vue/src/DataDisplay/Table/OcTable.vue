@@ -235,7 +235,7 @@ onMounted(() => onScroll());
       >
         <div
           v-for="(field, i) in fields"
-          :key="`${getRowKey(field)}_${i}`"
+          :key="`${getRowKey(field)}-${i}`"
           :class="{
             'border-b': fields.length !== i + 1,
             'w-max': isSticky,
