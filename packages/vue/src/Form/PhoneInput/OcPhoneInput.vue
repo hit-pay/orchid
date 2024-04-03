@@ -21,6 +21,7 @@ const props = defineProps({
   label: String,
   isInlineLabel: Boolean,
   isDisabled: Boolean,
+  shouldParseCountryCode: Boolean,
   isRequired: {
     type: Boolean,
     default: false,
@@ -97,7 +98,7 @@ const onPaste = (e) => {
     if (text.search(/[^0-9]/g)) {
       text = text.slice(0, 19);
 
-      if (text.length > 5) {
+      if (text.length > 5 && props.shouldParseCountryCode) {
         const { nationalNumber, countryCallingCode, country } =
           parsePhoneNumber("+" + text.replace("+", ""));
 
