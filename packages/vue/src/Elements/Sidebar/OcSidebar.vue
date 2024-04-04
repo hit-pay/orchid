@@ -80,9 +80,12 @@ onMounted(() => {
 
         <div
           v-if="(!sidebar.label || !isExpanded) && index !== 0"
-          class="my-3 w-full border-b border-[var(--oc-sidebar-menu-title)] opacity-50"
-        />
-
+          class="my-3 px-3 md:px-0"
+        >
+          <div
+            class="w-full border-b border-[var(--oc-sidebar-menu-title)] opacity-50"
+          />
+        </div>
         <template v-for="(menu, menuIndex) in sidebar.items" :key="menuIndex">
           <div class="flex flex-col">
             <div
