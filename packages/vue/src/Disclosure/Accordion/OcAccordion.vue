@@ -51,7 +51,7 @@ const changeAccordionHeight = async (open) => {
   await nextTick();
   if (upcomingAccordion.value) {
     upcomingAccordion.value.style.maxHeight = open
-      ? upcomingAccordion.value.scrollHeight + "px"
+      ? "100vh"
       : "0";
   }
 };
