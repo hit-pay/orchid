@@ -80,7 +80,8 @@ onMounted(() => {
 
         <div
           v-if="(!sidebar.label || !isExpanded) && index !== 0"
-          class="my-3 px-3 md:px-0"
+          class="my-3"
+          :class="isExpanded ? 'px-0' : 'px-3'"
         >
           <div
             class="w-full border-b border-[var(--oc-sidebar-menu-title)] opacity-50"
