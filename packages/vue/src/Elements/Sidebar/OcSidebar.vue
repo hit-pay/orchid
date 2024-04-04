@@ -66,7 +66,7 @@ onMounted(() => {
     :class="allClassName"
   >
     <div
-      class="grid py-8 w-full max-h-[inherit] overflow-y-auto overflow-x-hidden gap-3 px-8"
+      class="grid py-7 w-full max-h-[inherit] overflow-y-auto overflow-x-hidden gap-3 px-8"
     >
       <slot name="before" :is-expanded="isExpanded" />
 
