@@ -271,7 +271,7 @@ export const Default = {
     },
     template: `
           <Theme>
-          <div class="flex gap-5 m-5 w-[1200px] overflow-y-auto ">
+          <div class="flex gap-5 m-5 w-[1400px] overflow-y-auto ">
               <div class="h-[90vh] w-[535px] overflow-y-scroll">
                   <SDSidebar 
                     v-model:values="storeDesignData"
@@ -280,7 +280,9 @@ export const Default = {
                     :preset-custom-preview="sidebarConfig.presetCustomPreview"
                     :settings="sidebarConfig.settings"
                     :options="options"
+                    :theme="{ name:'juizzy', display_name:'Juizzy', preview: '/images/theme1.png', assets:'/templates/juizzy/' }"
                     v-model:active="sidebarActive"
+                    class="border-r border-oc-text-100"
                     @update:active="onUpdateSidebarActive"
                     @edit:banner="onEditBanner"
                     @delete:banner="onDeleteBanner"

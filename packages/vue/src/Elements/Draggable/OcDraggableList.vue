@@ -1,7 +1,7 @@
 <!-- TODO : group not support nested dynamic -->
 <script setup>
+import { Dropdown, Icon, Tooltip } from "@/orchidui";
 import { Draggable } from "@/orchidui/Draggable";
-import { Icon, Dropdown, Tooltip } from "@/orchidui";
 import { ref } from "vue";
 
 defineProps({
@@ -29,6 +29,7 @@ defineProps({
 defineEmits({
   "update:modelValue": [],
   "click:element": [],
+  "detectMove": null
 });
 const isHovered = ref([]);
 const isDropdownOpen = ref([]);
@@ -37,14 +38,15 @@ const isDropdownOpen = ref([]);
   <Draggable
     v-slot="{ list }"
     :model-value="modelValue"
-    class="grid gap-5"
+    class="grid gap-3"
     @update:model-value="$emit('update:modelValue', $event)"
+    @detect-move="$emit('detectMove', $event)"
   >
     <!-- wrapper -->
     <div
       v-for="element in list"
       :key="element.id"
-      class="group text-oc-text-500 p-6 flex flex-col w-full rounded border border-gray-200 cursor-pointer"
+      class="group text-oc-text-500 p-4 flex flex-col w-full rounded border border-gray-200 cursor-pointer"
       :class="
         element[childrenKey]
           ? 'hover:shadow bg-oc-gray-50'
