@@ -53,7 +53,12 @@ const props = defineProps({
     default: 'Indefinite'
   }
 });
-const emit = defineEmits(["update:modelValue", "resetCalendar", "update:isIndefinite"]);
+const emit = defineEmits([
+  "update:modelValue",
+  "resetCalendar",
+  "start-date-selected",
+  "update:isIndefinite",
+]);
 
 const selectedDate = ref(
   props.type === "range"
@@ -62,6 +67,8 @@ const selectedDate = ref(
 );
 
 const selectedStartDate = ref(selectedDate.value);
+const isCalendarIndefinite = ref(false);
+const isStartDateSet = ref(false);
 
 const selectedEndDate = ref(
   props.type === "range"
@@ -81,8 +88,6 @@ const selectedEndDay = ref(
       : null
     : null,
 );
-
-const isStartDateSet = ref(false);
 
 const daysInMonth = computed(() => {
   const date = selectedDate.value;
@@ -109,7 +114,6 @@ const selectDay = (day) => {
   }
 
   let currentMonth = selectedDate.value.date(day);
-  isStartDateSet.value = selectedStartDay.value === selectedEndDay.value;
 
   if (selectedStartDay.value && props.dateSelecting === 'to') {
     selectedEndDay.value = day;
@@ -119,13 +123,14 @@ const selectDay = (day) => {
   }
 
   if (!isStartDateSet.value) {
-    isStartDateSet.value = true;
-
     selectedStartDay.value = day;
     selectedStartDate.value = currentMonth;
 
     selectedEndDay.value = day;
     selectedEndDate.value = currentMonth;
+
+    isStartDateSet.value = true;
+    emit('start-date-selected', dayjs(selectedMonth.value, "MMMM YYYY").date(day))
 
     return;
   }
@@ -248,6 +253,7 @@ const doneSelecting = () => {
     }
   }
 
+  isStartDateSet.value = false;
   emit(
     "update:modelValue",
     isRangeSelection.value
@@ -256,7 +262,6 @@ const doneSelecting = () => {
   );
 };
 
-const isCalendarIndefinite = ref(false);
 const handleIndefinite = (value) => {
   emit("update:isIndefinite", value);
 };

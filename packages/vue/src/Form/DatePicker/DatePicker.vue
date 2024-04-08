@@ -76,8 +76,10 @@ const props = defineProps({
   }
 });
 
+const inputTypeSelecting = ref()
+const startDateSelected = ref()
 const isDropdownOpened = ref(false);
-const inputTypeSelecting = ref(undefined)
+const isCalendarIndefinite = ref(false);
 
 const isRangeInput = computed(() => props.type === "range");
 
@@ -95,6 +97,22 @@ const formattedDate = computed(() => {
 
   return ["", ""];
 });
+
+const mintDateComputed = computed(() => {
+  if (props.minDate) {
+    return props.minDate
+  }
+
+  if (isRangeInput.value) {
+    const fromDate = startDateSelected.value ?? formattedDate.value[0];
+
+    return inputTypeSelecting.value === 'from'
+      ? null
+      : dayjs(fromDate).subtract(0, 'day')
+  }
+
+  return null;
+})
 
 const updateCalendar = (newValue) => {
   if (props.type === "range") {
@@ -127,7 +145,10 @@ const disableAllDates = (value) => {
   return isInCurrentMonth(date);
 }
 
-const isCalendarIndefinite = ref(false);
+const selectStartDate = (value) => {
+  selectInput('to');
+  startDateSelected.value = value;
+}
 
 const handleIndefinite = (event) => {
   isCalendarIndefinite.value = event;
@@ -212,11 +233,12 @@ const handleIndefinite = (event) => {
         "
         :disabled-date="isCalendarIndefinite ? disableAllDates : disabledDate"
         :max-date="maxDate"
-        :min-date="minDate"
+        :min-date="mintDateComputed"
         :is-indefinite="isIndefinite"
         position="inline"
         :type="type"
         :date-selecting="inputTypeSelecting"
+        @start-date-selected="selectStartDate"
         @update:model-value="updateCalendar"
         @update:is-indefinite="handleIndefinite"
         @reset-calendar="resetCalendar"
