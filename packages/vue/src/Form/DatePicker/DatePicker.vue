@@ -1,6 +1,6 @@
 <script setup>
 import { Dropdown, Calendar, Input } from "@/orchidui";
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import dayjs from "dayjs";
 
@@ -78,6 +78,8 @@ const props = defineProps({
 
 const inputTypeSelecting = ref()
 const startDateSelected = ref()
+const toInputElement = ref()
+const fromInputElement = ref()
 const isDropdownOpened = ref(false);
 const isCalendarIndefinite = ref(false);
 
@@ -154,6 +156,15 @@ const handleIndefinite = (event) => {
   isCalendarIndefinite.value = event;
   emit("update:modelValue", event ?  "Indefinite" : null);
 }
+
+watch(inputTypeSelecting, (value) => {
+  if (value === 'to') {
+    toInputElement.value?.focus()
+  }
+  if (value === 'from') {
+    fromInputElement.value?.focus()
+  }
+})
 </script>
 
 <template>
@@ -187,6 +198,7 @@ const handleIndefinite = (event) => {
       <div v-else class="flex flex-wrap">
         <div class="w-full flex gap-x-4">
           <Input
+            ref="fromInputElement"
             :label="`${label} ${minLabel}`"
             :model-value="
               formattedDate[0] ? formattedDate[0].format(dateFormat) : ''
@@ -200,6 +212,7 @@ const handleIndefinite = (event) => {
             @click="selectInput('from')"
           />
           <Input
+            ref="toInputElement"
             :label="`${label} ${maxLabel}`"
             :model-value="
               formattedDate[1] ? formattedDate[1].format(dateFormat) : ''
