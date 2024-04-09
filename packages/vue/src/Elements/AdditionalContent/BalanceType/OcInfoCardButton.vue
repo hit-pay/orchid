@@ -1,11 +1,14 @@
 <script setup>
-import { Skeleton } from "@/orchidui";
+import { Skeleton, Chip, Button } from "@/orchidui";
 
 defineProps({
   isActive: Boolean,
   isLoading: Boolean,
   title: String,
   content: String,
+  isDropdown: Boolean,
+  chipOptions: Object,
+  dropdownOptions: Object,
 });
 </script>
 
@@ -25,13 +28,22 @@ defineProps({
     </div>
 
     <template v-else>
-      <span class="text-oc-text-400 text-sm">{{ title }}</span>
-      <span
-        class="text-xl group-hover:text-oc-text"
-        :class="isActive ? 'text-oc-text' : 'text-oc-text-400'"
-      >
-        {{ content }}
-      </span>
+      <div class="flex gap-x-4 items-center">
+        <div class="flex flex-col gap-y-2">
+          <div class="flex items-center gap-x-2">
+            <span class="text-oc-text-400 text-sm">{{ title }}</span>
+            <Chip v-if="chipOptions" v-bind="chipOptions" />
+          </div>
+          <span
+            class="text-xl group-hover:text-oc-text"
+            :class="isActive ? 'text-oc-text' : 'text-oc-text-400'"
+          >
+            {{ content }}
+          </span>
+        </div>
+
+        <Button v-if="isDropdown" v-bind="dropdownOptions" />
+      </div>
     </template>
   </div>
 </template>

@@ -42,15 +42,21 @@ defineEmits({
 <template>
   <div class="flex flex-col gap-y-5">
     <div class="flex gap-x-5">
-      <InfoCardButton
-        v-for="tab in isLoading ? 2 : overviewTabs"
-        :key="tab.value"
-        :title="tab.title"
-        :is-loading="isLoading"
-        :content="tab.content"
-        :is-active="tab.value === overviewActiveTab"
-        @click="$emit('changeTab', tab.value)"
-      />
+      <template v-for="tab in isLoading ? 2 : overviewTabs">
+        <slot :name="tab.value" :tab="tab">
+          <InfoCardButton
+            :key="tab.value"
+            :title="tab.title"
+            :is-loading="isLoading"
+            :content="tab.content"
+            :chip-options="tab.chipOptions"
+            :is-dropdown="tab.isDropdown"
+            :dropdown-options="tab.dropdownOptions"
+            :is-active="tab.value === overviewActiveTab"
+            @click="$emit('changeTab', tab.value)"
+          />
+        </slot>
+      </template>
     </div>
 
     <div class="border-t border-oc-gray-200" />
