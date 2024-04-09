@@ -110,8 +110,8 @@ const copyLink = async () => {
       :is-loading="isLoading"
       @change-tab="$emit('changeTab', $event)"
     >
-      <template v-if="$slots.warning" #warning>
-        <slot name="warning" />
+      <template v-for="(_, name) in $slots" #[name]="slotData">
+        <slot :name="name" v-bind="slotData" />
       </template>
     </BalanceOverview>
   </div>
