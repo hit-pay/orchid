@@ -135,6 +135,15 @@ const args = {
         },
       ],
     },
+    actions: [
+      {
+        icon: "pencil",
+        tooltipContent: "Edit",
+        onClick: () => {
+          console.log("clicked");
+        },
+      },
+    ],
   },
   variant: "default",
   boxes: [],

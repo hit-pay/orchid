@@ -32,7 +32,12 @@ const copyToClipBoard = () => {
         : 'border-transparent'
     "
   >
-    <Tooltip position="top" arrow-hidden :distance="7">
+    <Tooltip
+      v-if="primaryActions?.mainLinkAction"
+      position="top"
+      arrow-hidden
+      :distance="7"
+    >
       <a :href="primaryActions?.mainLinkAction?.url" target="_blank">
         <Icon
           class="p-2 cursor-pointer rounded-sm hover:border-oc-accent-1-50-tr active:text-oc-text-400 hover:text-oc-text hover:bg-oc-accent-1-50-tr"
@@ -47,6 +52,27 @@ const copyToClipBoard = () => {
         </div>
       </template>
     </Tooltip>
+
+    <template v-for="(item, index) in primaryActions.actions" :key="index">
+      <div
+        class="border-l group-hover:border-oc-accent-1-100 border-transparent"
+      />
+      <Tooltip position="top" arrow-hidden :distance="7">
+        <Icon
+          class="p-2 cursor-pointer rounded-sm hover:border-oc-accent-1-50-tr active:text-oc-text-400 hover:text-oc-text hover:bg-oc-accent-1-50-tr"
+          :name="item.icon"
+          @click="item.onClick"
+        />
+
+        <template #popper>
+          <div
+            class="py-2 px-3 whitespace-nowrap text-sm font-medium text-oc-text-400"
+          >
+            {{ item.tooltipContent }}
+          </div>
+        </template>
+      </Tooltip>
+    </template>
 
     <div
       v-if="hasDropdownOptions"
