@@ -55,6 +55,7 @@ const copyToClipBoard = () => {
 
     <template v-for="(item, index) in primaryActions.actions" :key="index">
       <div
+        v-if="primaryActions?.mainLinkAction || index > 0"
         class="border-l group-hover:border-oc-accent-1-100 border-transparent"
       />
       <Tooltip position="top" arrow-hidden :distance="7">
