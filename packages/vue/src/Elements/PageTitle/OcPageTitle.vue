@@ -7,6 +7,7 @@ defineProps({
   title: { type: String, required: true },
   description: { type: String, default: "" },
   titleClass: { type: String, default: "" },
+  copyValue: { type: String, default: "" },
   primaryButtonProps: Object,
   secondaryButtonProps: Object,
   tooltipOptions: Object,
@@ -46,6 +47,7 @@ defineEmits({
           :title="title"
           :description="description"
           :chip-props="chipProps"
+          :copy-value="copyValue"
           :tooltip-options="tooltipOptions"
           :is-copy="isCopy"
           class="flex-1"

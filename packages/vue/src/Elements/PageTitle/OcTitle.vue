@@ -1,9 +1,11 @@
+323
 <script setup>
 import { Chip, CopyTooltip, Icon } from "@/orchidui";
 
 defineProps({
   title: { type: String, required: true },
   description: { type: String, required: true },
+  copyValue: { type: String, default: "" },
   chipProps: Object,
   tooltipOptions: Object,
   isCopy: Boolean,
@@ -34,7 +36,7 @@ defineProps({
 
       <CopyTooltip
         v-if="isCopy"
-        :value="description"
+        :value="copyValue"
         :tooltip-options="tooltipOptions"
       >
         <template #default="{ isShow }">
