@@ -49,6 +49,7 @@ const emit = defineEmits({
   "filter-removed": [],
   "search-query-changed": [],
   "hover:cell": [],
+  "draggable:updated": [],
 });
 
 const paginationOption = computed(() => props.options?.pagination);
@@ -372,9 +373,11 @@ const displayFilterData = computed(() => {
       :row-class="rowClass"
       :row-link="rowLink"
       :is-sticky="tableOptions.isSticky"
+      :is-draggable="tableOptions.isDraggable"
       @update:selected="$emit('update:selected', $event)"
       @click:row="$emit('click:row', $event)"
       @hover:cell="$emit('hover:cell', $event)"
+      @draggable:updated="$emit('draggable:updated', $event)"
     >
       <template
         v-if="
@@ -447,10 +450,14 @@ const displayFilterData = computed(() => {
                     :values="props.filter"
                     :actions="filterOptions.actions"
                     @apply-filter="applyFilter($event)"
-                    @filter-fields-changed="emit('filter-fields-changed', $event)"
+                    @filter-fields-changed="
+                      emit('filter-fields-changed', $event)
+                    "
                     @cancel="isDropdownOpened = false"
                   >
-                    <template #default="{ errors, values, jsonForm, updateForm }">
+                    <template
+                      #default="{ errors, values, jsonForm, updateForm }"
+                    >
                       <slot
                         name="custom-filter-form"
                         :errors="errors"

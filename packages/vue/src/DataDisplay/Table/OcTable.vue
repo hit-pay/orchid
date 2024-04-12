@@ -1,6 +1,7 @@
 <script setup>
 import { TableHeader, TableCell } from "@/orchidui";
 import { ref, computed, onMounted } from "vue";
+import OcDraggable from "@/orchidui/Elements/Draggable/OcDraggable.vue";
 
 const props = defineProps({
   options: {
@@ -31,18 +32,24 @@ const props = defineProps({
     default: false,
   },
   rowLink: String,
+  isDraggable: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits({
   "click:row": [],
   "update:selected": [],
   "hover:cell": [],
+  "draggable:updated": [],
 });
 
 const isSelectable = computed(() => props.options.isSelectable);
 const isCursorPointer = computed(() => props.options.isCursorPointer ?? true);
 const fields = computed(() => props.options.fields);
 const headers = computed(() => props.options.headers);
+const isRowMoving = ref(false);
 
 const getRowKey = computed(() =>
   typeof props.rowKey === "function"
@@ -109,6 +116,10 @@ const onScroll = () => {
     scrollTable.value.scrollLeft + scrollTable.value.clientWidth ===
     scrollTable.value.scrollWidth;
 };
+const onDraggableUpdated = (event) => {
+  isRowMoving.value = false;
+  emit("draggable:updated", event);
+};
 onMounted(() => onScroll());
 </script>
 
@@ -150,6 +161,15 @@ onMounted(() => onScroll());
               : 'flex-wrap md:flex-nowrap'
         "
       >
+        <TableHeader
+          v-if="isDraggable"
+          :is-sticky="isSticky"
+          class="md:ml-0 md:border-b border-oc-gray-200 min-w-[32px]"
+          :class="[
+            isSticky ? 'shrink-0 sticky left-0 z-10' : 'w-[40px] md:w-[5%]',
+          ]"
+        />
+
         <TableHeader
           v-if="isSelectable"
           :is-sticky="isSticky"
@@ -206,6 +226,11 @@ onMounted(() => onScroll());
         }"
       >
         <TableCell
+          v-if="isDraggable"
+          class="opacity-0 flex justify-center absolute left-0 md:relative w-[5%]"
+        />
+
+        <TableCell
           v-if="isSelectable"
           class="opacity-0 flex justify-center absolute left-0 md:relative w-[5%]"
         />
@@ -220,119 +245,143 @@ onMounted(() => onScroll());
       </div>
     </template>
     <template v-else>
-      <slot
-        name="table-body"
-        :fields="fields"
-        :headers="headers"
-        :is-scroll-on-end="isScrollOnEnd"
-        :on-click-row="onClickRow"
-        :is-selectable="isSelectable"
-        :is-cursor-pointer="isCursorPointer"
-        :is-responsive="isResponsive"
-        :is-sticky="isSticky"
-        :row-link="rowLink"
-        :calculate-row-class="calculateRowClass"
+      <OcDraggable
+        :model-value="fields"
+        :is-disabled="!isDraggable"
+        @update:model-value="onDraggableUpdated($event)"
+        @detectMove="isRowMoving = true"
       >
-        <div
-          v-for="(field, i) in fields"
-          :key="`${getRowKey(field)}-${i}`"
-          :class="{
-            'border-b': fields.length !== i + 1,
-            'w-max': isSticky,
-          }"
+        <slot
+          name="table-body"
+          :fields="fields"
+          :headers="headers"
+          :is-scroll-on-end="isScrollOnEnd"
+          :on-click-row="onClickRow"
+          :is-selectable="isSelectable"
+          :is-cursor-pointer="isCursorPointer"
+          :is-responsive="isResponsive"
+          :is-sticky="isSticky"
+          :row-link="rowLink"
+          :calculate-row-class="calculateRowClass"
         >
           <div
-            class="flex relative group/row md:p-0 py-3 min-h-[58px]"
-            :class="[
-              {
-                'pl-[40px]': isSelectable,
-                'cursor-pointer': isCursorPointer,
-              },
-              isResponsive
-                ? 'w-full'
-                : isSticky
-                  ? 'w-max !p-0'
-                  : 'flex-wrap md:flex-nowrap',
-              calculateRowClass(field, i),
-            ]"
+            v-for="(field, i) in fields"
+            :key="`${getRowKey(field)}-${i}`"
+            class="drag-el"
+            :class="{
+              'border-b': fields.length !== i + 1,
+              'w-max': isSticky,
+            }"
           >
-            <TableCell
-              v-if="isSelectable"
-              class="flex border-oc-gray-200 justify-center left-0 min-w-[32px]"
-              :is-last="fields.length === i + 1"
-              :is-selected="
-                selectedRows.some((r) => getRowKey(r) === getRowKey(field))
-              "
+            <div
+              class="flex relative md:p-0 py-3 min-h-[58px]"
               :class="[
-                isSticky
-                  ? 'shrink-0 z-10 left-0 sticky'
-                  : 'md:relative absolute w-[40px] md:w-[5%]',
+                {
+                  'group/row': !isRowMoving,
+                  'pl-[40px]': isSelectable,
+                  'cursor-pointer': isCursorPointer,
+                },
+                isResponsive
+                  ? 'w-full'
+                  : isSticky
+                    ? 'w-max !p-0'
+                    : 'flex-wrap md:flex-nowrap',
+                calculateRowClass(field, i),
               ]"
-              variant="checkbox"
-              @selected="selectRow(field)"
-              @hover:field="$emit('hover:cell', $event)"
-            />
-
-            <TableCell
-              v-for="(header, j) in headers"
-              :key="`${j}-${i}`"
-              class="flex border-oc-gray-200"
-              :is-last="fields.length === i + 1"
-              :variant="header.variant"
-              :is-copy="header.isCopy"
-              :add-description-to-copy-clipboard="
-                header.addDescriptionToCopyClipboard ?? true
-              "
-              :data="field[`${header.key}`] ?? ''"
-              :content="{
-                important: header.important ?? false,
-                title: field[`${header.title}`],
-                description: field[`${header.description}`],
-                href: field[`${header.href}`],
-              }"
-              :chip-options="header.chipOptions"
-              :class="[
-                typeof header.class === 'function'
-                  ? header.class(field)
-                  : header.class,
-                header.stickyLeft && isSelectable
-                  ? 'left-[40px] md:left-[32px]'
-                  : 'left-0',
-                header.stickyRight ? 'right-0' : '',
-                header.stickyLeft || header.stickyRight
-                  ? 'shrink-0 sticky z-10'
-                  : '',
-                header.stickyLeft && !isScrollOnStart
-                  ? 'shadow-right-sticky'
-                  : '',
-                header.stickyRight && !isScrollOnEnd
-                  ? 'shadow-left-sticky'
-                  : '',
-              ]"
-              :image-class="header.imageClass"
-              :link="rowLink && field[rowLink] ? field[rowLink] : ''"
-              @click="onClickRow(field, header)"
-              @hover:field="$emit('hover:cell', $event)"
             >
-              <template #default>
-                <slot
-                  v-if="$slots[header.key]"
-                  :name="header.key"
-                  :item="field"
-                  :data="field[header.key]"
-                  :index="i"
-                />
-              </template>
-            </TableCell>
+              <TableCell
+                v-if="isDraggable"
+                class="flex border-oc-gray-200 justify-center left-0 min-w-[32px]"
+                :is-last="fields.length === i + 1"
+                :class="[
+                  isSticky
+                    ? 'shrink-0 z-10 left-0 sticky'
+                    : 'md:relative absolute w-[40px] md:w-[5%]',
+                ]"
+                icon-class="md:hidden group-hover/row:flex"
+                variant="icon"
+                data="draggable"
+                @hover:field="$emit('hover:cell', $event)"
+              />
+
+              <TableCell
+                v-if="isSelectable"
+                class="flex border-oc-gray-200 justify-center left-0 min-w-[32px]"
+                :is-last="fields.length === i + 1"
+                :is-selected="
+                  selectedRows.some((r) => getRowKey(r) === getRowKey(field))
+                "
+                :class="[
+                  isSticky
+                    ? 'shrink-0 z-10 left-0 sticky'
+                    : 'md:relative absolute w-[40px] md:w-[5%]',
+                ]"
+                variant="checkbox"
+                @selected="selectRow(field)"
+                @hover:field="$emit('hover:cell', $event)"
+              />
+
+              <TableCell
+                v-for="(header, j) in headers"
+                :key="`${j}-${i}`"
+                class="flex border-oc-gray-200"
+                :is-last="fields.length === i + 1"
+                :variant="header.variant"
+                :is-copy="header.isCopy"
+                :add-description-to-copy-clipboard="
+                  header.addDescriptionToCopyClipboard ?? true
+                "
+                :data="field[`${header.key}`] ?? ''"
+                :content="{
+                  important: header.important ?? false,
+                  title: field[`${header.title}`],
+                  description: field[`${header.description}`],
+                  href: field[`${header.href}`],
+                }"
+                :chip-options="header.chipOptions"
+                :class="[
+                  typeof header.class === 'function'
+                    ? header.class(field)
+                    : header.class,
+                  header.stickyLeft && isSelectable
+                    ? 'left-[40px] md:left-[32px]'
+                    : 'left-0',
+                  header.stickyRight ? 'right-0' : '',
+                  header.stickyLeft || header.stickyRight
+                    ? 'shrink-0 sticky z-10'
+                    : '',
+                  header.stickyLeft && !isScrollOnStart
+                    ? 'shadow-right-sticky'
+                    : '',
+                  header.stickyRight && !isScrollOnEnd
+                    ? 'shadow-left-sticky'
+                    : '',
+                ]"
+                :image-class="header.imageClass"
+                :link="rowLink && field[rowLink] ? field[rowLink] : ''"
+                @click="onClickRow(field, header)"
+                @hover:field="$emit('hover:cell', $event)"
+              >
+                <template #default>
+                  <slot
+                    v-if="$slots[header.key]"
+                    :name="header.key"
+                    :item="field"
+                    :data="field[header.key]"
+                    :index="i"
+                  />
+                </template>
+              </TableCell>
+            </div>
+            <div
+              v-if="$slots['extra']"
+              class="flex relative group/row md:p-0 py-3 w-full"
+            >
+              <slot name="extra" :item="field" :index="i" />
+            </div>
           </div>
-          <div
-            v-if="$slots['extra']"
-            class="flex relative group/row md:p-0 py-3 w-full"
-          >
-            <slot name="extra" :item="field" :index="i" />
-          </div>
-        </div>
-      </slot>
+        </slot>
+      </OcDraggable>
       <slot v-if="!fields.length" name="empty" />
     </template>
     <slot name="after" />

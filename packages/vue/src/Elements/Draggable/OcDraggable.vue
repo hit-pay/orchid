@@ -4,19 +4,17 @@ import { computed } from "vue";
 
 const props = defineProps({
   modelValue: Array,
+  isDisabled: Boolean,
 });
 
 const emit = defineEmits({
-    "update:modelValue": [],
-    "detectMove": null
-  },
-);
-
+  "update:modelValue": [],
+  detectMove: null,
+});
 
 const list = computed(() => {
-  return props.modelValue
-})
-
+  return props.modelValue;
+});
 
 const onChange = () => {
   emit("update:modelValue", list.value);
@@ -24,7 +22,7 @@ const onChange = () => {
 
 const detectMove = (event) => {
   emit("detectMove", event);
-}
+};
 </script>
 <template>
   <VueDraggableNext
@@ -33,6 +31,7 @@ const detectMove = (event) => {
     :animation="500"
     :move="detectMove"
     @change="onChange"
+    :disabled="isDisabled"
   >
     <slot :list="list"></slot>
   </VueDraggableNext>

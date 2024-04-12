@@ -50,6 +50,10 @@ export const Default = {
         console.log("onClickRow  ", val);
       };
 
+      const onDraggableUpdated = (val) => {
+        console.log("onDraggableUpdated  ", val);
+      };
+
       const handleOpenDropdown = (itemId) => {
         Object.keys(showDropdown.value).forEach((id) => {
           if (id !== itemId) {
@@ -67,6 +71,7 @@ export const Default = {
         handleOpenDropdown,
         updateFilterData,
         onClickRow,
+        onDraggableUpdated,
       };
     },
     template: `
@@ -91,6 +96,7 @@ export const Default = {
                 @click:row="onClickRow"
                 @filter-fields-changed="changedFields = $event"
                 @hover:cell="console.log('hover:cell: ', $event)"
+                @draggable:updated="onDraggableUpdated"
              >
               <template #before>
                 Slot Before

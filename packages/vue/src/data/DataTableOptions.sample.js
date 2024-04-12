@@ -36,6 +36,7 @@ const DataTableOptions = {
   tableOptions: {
     isSelectable: true,
     isCursorPointer: true,
+    isDraggable: true,
     headers: [
       {
         key: "image",

@@ -48,6 +48,7 @@ const props = defineProps({
     type: String,
     default: "h-full",
   },
+  iconClass: String,
   link: String,
 });
 defineEmits({
@@ -114,6 +115,7 @@ const variantClass = computed(() => ({
         <Icon
           v-else-if="variant === Variants.ICON"
           class="w-6 h-6 mx-auto"
+          :class="iconClass"
           :name="data"
         />
 
