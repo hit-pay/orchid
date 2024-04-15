@@ -98,7 +98,7 @@ const hexToRgb = (hex) => {
     let val = hex
       .replace(
         /^#?([a-f\d])([a-f\d])([a-f\d])$/i, // @ts-ignore
-        (m, r, g, b) => "#" + r + r + g + g + b + b
+        (m, r, g, b) => "#" + r + r + g + g + b + b,
       )
       .substring(1)
       .match(/.{2}/g)

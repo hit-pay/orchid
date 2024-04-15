@@ -1,10 +1,12 @@
 <template>
-    <Input
-        class="w-[75px]"
-        :model-value="internal"
-        @update:model-value="handleInput"
-        @blur="emitModelValue"
-    > <template #leading>%</template></Input>
+  <Input
+    class="w-[75px]"
+    :model-value="internal"
+    @update:model-value="handleInput"
+    @blur="emitModelValue"
+  >
+    <template #leading>%</template></Input
+  >
 </template>
 
 <script setup>
@@ -28,12 +30,12 @@ const handleInput = (value) => {
 };
 
 const emitModelValue = () => {
-  let newValue = parseInt(internal.value)
+  let newValue = parseInt(internal.value);
 
-  if(newValue && newValue <= 100){
-      emits("update:modelValue", newValue);
-  }else{
-      internal.value = props.modelValue
+  if (newValue && newValue <= 100) {
+    emits("update:modelValue", newValue);
+  } else {
+    internal.value = props.modelValue;
   }
 };
 
@@ -42,6 +44,6 @@ watch(
   (newValue, oldValue) => {
     if (newValue !== oldValue) internal.value = newValue;
   },
-  { immediate: true }
+  { immediate: true },
 );
 </script>

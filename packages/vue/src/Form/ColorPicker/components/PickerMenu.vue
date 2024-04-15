@@ -141,9 +141,9 @@
   <div
     v-if="mode == 'gradient'"
     v-show="gradientType == 'radial' && isShowRadialAngleRange"
-    class="ck-cp-linear-angle-container"
+    class="ck-cp-linear-angle-container flex gap-3"
   >
-    <div>
+    <div class="w-1/2">
       <p class="ck-gradient-set-label">
         {{ local.positionX ? local.positionX : "Position X" }}
         <span>{{ percentageX }}%</span>
@@ -156,7 +156,7 @@
         @input="handleInput($event, 'percentageX')"
       />
     </div>
-    <div style="margin-top: 1rem">
+    <div class="w-1/2">
       <p class="ck-gradient-set-label">
         {{ local.positionY ? local.positionY : "Position Y" }}
         <span>{{ percentageY }}%</span>
