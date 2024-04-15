@@ -14,15 +14,15 @@
         <template #default>
           <div
             class="flex items-center gap-x-2 cursor-pointer transition-opacity"
-            @click="toggleLegendName(item)"
             :class="{ 'opacity-30': item.hide }"
+            @click="toggleLegendName(item)"
           >
             <div
               class="w-3 h-3 rounded-full"
               :style="{ background: item.itemStyle.color }"
             />
             <Icon v-if="item.icon" :name="item.icon" width="32" height="32" />
-            <div class="text-sm font-medium text-oc-text-500" v-else>
+            <div v-else class="text-sm font-medium text-oc-text-500">
               {{ item.name }}
             </div>
           </div>
@@ -59,6 +59,10 @@ const props = defineProps({
   chartData: Array,
   tooltipFormatter: Function,
   tooltipValueFormatter: Function,
+  additionalOptions: {
+    type: Object,
+    default: () => ({}),
+  },
 });
 
 const options = computed(() => ({
@@ -121,6 +125,7 @@ const options = computed(() => ({
     bottom: 0,
     containLabel: true,
   },
+  ...props.additionalOptions,
 }));
 const pieChart = ref();
 
