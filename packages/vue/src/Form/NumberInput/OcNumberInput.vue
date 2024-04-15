@@ -4,7 +4,7 @@ import { BaseInput, Button } from "@/orchidui";
 const props = defineProps({
   modelValue: {
     type: [String, Number],
-    default: "1",
+    default: null,
   },
   minValue: {
     type: Number,
@@ -57,7 +57,9 @@ const decrement = () => {
         left-icon="minus"
         @click="decrement"
       />
-      <span class="text-oc-text-300">{{ modelValue }}</span>
+      <span :class="modelValue ? 'font-medium' : 'text-oc-text-300'">{{
+        modelValue || 1
+      }}</span>
       <Button
         variant="secondary"
         class="w-[28px] aspect-square"
