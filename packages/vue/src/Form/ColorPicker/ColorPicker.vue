@@ -1,12 +1,20 @@
 <script setup>
 import { Dropdown, Input, BaseInput } from "@/orchidui";
-import ColorPickerPopup from "./ColorPickerPopup.vue";
+import ColorPickerPopup from "./components/VueColorPicker.vue";
 import { ref } from "vue";
 
 const props = defineProps({
   modelValue: {
     type: String,
     default: "#ff0000",
+  },
+  variant: {
+    type: String,
+    default: "solid",
+  },
+  showOpacity: {
+    type: Boolean,
+    default: true,
   },
 });
 
@@ -39,6 +47,9 @@ const onUpdate = (value) => {
       </Input>
       <template #menu>
         <ColorPickerPopup
+          :variant="variant"
+          :show-alpha="showOpacity"
+          :type="!showOpacity ? 'hex' : 'hex8'"
           :model-value="modelValue"
           @update:model-value="onUpdate"
         />

@@ -24,7 +24,7 @@
       <button
         type="button"
         class="cp-btn"
-        :class="gradientType == 'linear' ? 'active' : ''"
+        :class="gradientType == 'linear' && mode != 'solid' ? 'active' : ''"
         :style="`${iconClasses.linear ? '' : 'padding: 7px;'}`"
         @click="$emit('onChangeMode', 'linear')"
       >
@@ -43,9 +43,9 @@
       <button
         type="button"
         class="cp-btn"
-        :class="gradientType == 'radial' ? 'active' : ''"
-        @click="$emit('onChangeMode', 'radial')"
+        :class="gradientType == 'radial' && mode != 'solid' ? 'active' : ''"
         :style="`${iconClasses.radial ? '' : 'padding: 6px;'}`"
+        @click="$emit('onChangeMode', 'radial')"
       >
         <svg
           version="1.1"
@@ -66,9 +66,9 @@
       style="display: inline-flex; justify-content: end; position: relative"
     >
       <button
-        type="button"
         v-if="isEyeDropperUsing && showEyeDrop"
         id="cp-btn-eyedropper"
+        type="button"
         class="cp-btn"
         :style="`${iconClasses.eyeDroper ? '' : 'padding: 7px;'}`"
         @click="$emit('onClickEyeDropper')"
@@ -89,11 +89,11 @@
       </button>
 
       <button
-        type="button"
         v-if="showColorList"
+        type="button"
         class="cp-btn"
-        @click="$emit('onSaveColor')"
         :style="`${iconClasses.save ? '' : 'padding: 7px;'}`"
+        @click="$emit('onSaveColor')"
       >
         <i v-if="iconClasses.save" :class="iconClasses.save"></i>
         <svg

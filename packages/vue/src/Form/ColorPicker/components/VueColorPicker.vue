@@ -70,6 +70,7 @@
           @update-hsl-value="handleHSLInput"
         />
         <InputOpacity
+          v-if="showAlpha"
           v-model="opacity"
           @update:model-value="setOpacity($event)"
         />
@@ -153,9 +154,13 @@ const props = defineProps({
     },
     type: Object,
   },
+  variant: {
+    type: String,
+    default: "solid",
+  },
 });
 
-const mode = ref("gradient");
+const mode = ref(props.variant == "gradient" ? "gradient" : "solid");
 
 const pickerTemplateRef = ref(null);
 
