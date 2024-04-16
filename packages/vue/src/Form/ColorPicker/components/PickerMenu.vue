@@ -1,19 +1,34 @@
 <template>
-  <div
-    class="ck-cp-menu"
-    :style="mode == 'gradient' ? '' : 'justify-content: end;'"
-  >
-    <div v-if="mode == 'gradient'" class="ck-cp-controller-bar">
+  <div class="ck-cp-menu mb-3 justify-end">
+    <div class="ck-cp-controller-bar">
+      <button
+        type="button"
+        class="cp-btn"
+        :class="mode == 'solid' ? 'active' : ''"
+        style="padding: 7px"
+        @click="$emit('onChangeMode', 'solid')"
+      >
+        <svg
+          width="32"
+          height="32"
+          viewBox="0 0 20 20"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M18.9942 7.85074C18.9134 6.81588 17.9988 6 16.8824 6H3.11765L2.9596 6.00549C1.86387 6.08183 1 6.94564 1 8V12L1.00581 12.1493C1.08665 13.1842 2.00126 14 3.11765 14H16.8824L17.0404 13.9945C18.1362 13.9182 19 13.0544 19 12V8L18.9942 7.85074Z"
+            fill="#61667C"
+          />
+        </svg>
+      </button>
       <button
         type="button"
         class="cp-btn"
         :class="gradientType == 'linear' ? 'active' : ''"
-        @click="$emit('onChangeMode', 'linear')"
         :style="`${iconClasses.linear ? '' : 'padding: 7px;'}`"
+        @click="$emit('onChangeMode', 'linear')"
       >
-        <i v-if="iconClasses.linear" :class="iconClasses.linear"></i>
         <svg
-          v-else
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
           width="32"
@@ -32,9 +47,7 @@
         @click="$emit('onChangeMode', 'radial')"
         :style="`${iconClasses.radial ? '' : 'padding: 6px;'}`"
       >
-        <i v-if="iconClasses.radial" :class="iconClasses.radial"></i>
         <svg
-          v-else
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
           width="32"

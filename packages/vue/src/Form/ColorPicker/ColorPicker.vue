@@ -26,7 +26,7 @@ const onUpdate = (value) => {
 
 <template>
   <BaseInput>
-    <Dropdown v-model="isOpen">
+    <Dropdown v-model="isOpen" prevent-click-outside>
       <Input
         :model-value="inputValue"
         icon="drop"
