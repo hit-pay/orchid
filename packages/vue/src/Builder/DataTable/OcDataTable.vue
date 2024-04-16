@@ -491,6 +491,12 @@ const displayFilterData = computed(() => {
       <template #empty>
         <slot name="empty" />
       </template>
+      <template #table-header="slotProps">
+        <slot name="table-header" v-bind="slotProps"></slot>
+      </template>
+      <template #table-body="slotProps">
+        <slot name="table-body" v-bind="slotProps"></slot>
+      </template>
     </Table>
     <div
       class="flex gap-3 items-center"
