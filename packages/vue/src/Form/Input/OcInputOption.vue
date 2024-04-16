@@ -1,6 +1,6 @@
 <script setup>
 import { BaseInput, Input, Chip, Icon } from "@/orchidui";
-import { computed, ref, watch } from 'vue';
+import { computed, ref, watch } from "vue";
 
 const props = defineProps({
   label: String,
@@ -82,12 +82,16 @@ const setNewValue = (value) => {
   emit("option-added", value);
 };
 
-watch(() => props.modelValue, () => {
-  localValue.value = [...(props.modelValue || [])]
-}, {
-  immediate: true,
-  deep: true,
-});
+watch(
+  () => props.modelValue,
+  () => {
+    localValue.value = [...(props.modelValue || [])];
+  },
+  {
+    immediate: true,
+    deep: true,
+  },
+);
 
 defineExpose({
   focus: () => inputRef.value.focus(),
@@ -121,7 +125,10 @@ defineExpose({
           }"
         >
           <div class="w-full flex flex-wrap gap-2">
-            <slot :options="optionsVisible" :are-all-options-visible="areAllOptionsVisible">
+            <slot
+              :options="optionsVisible"
+              :are-all-options-visible="areAllOptionsVisible"
+            >
               <Chip
                 v-for="(option, index) in optionsVisible"
                 :key="`${option}-${index}`"

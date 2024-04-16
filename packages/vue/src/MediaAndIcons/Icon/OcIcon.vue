@@ -42,11 +42,14 @@ const renderIcon = () => {
         dom.remove();
       }
     });
-}
+};
 
-renderIcon()
+renderIcon();
 
-watch(() => props.name, () => {
-  renderIcon()
-})
+watch(
+  () => props.name,
+  () => {
+    renderIcon();
+  },
+);
 </script>

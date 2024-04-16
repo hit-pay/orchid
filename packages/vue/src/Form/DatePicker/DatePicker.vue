@@ -72,14 +72,14 @@ const props = defineProps({
   },
   isIndefinite: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 });
 
-const inputTypeSelecting = ref()
-const startDateSelected = ref()
-const toInputElement = ref()
-const fromInputElement = ref()
+const inputTypeSelecting = ref();
+const startDateSelected = ref();
+const toInputElement = ref();
+const fromInputElement = ref();
 const isDropdownOpened = ref(false);
 const isCalendarIndefinite = ref(false);
 
@@ -102,19 +102,19 @@ const formattedDate = computed(() => {
 
 const mintDateComputed = computed(() => {
   if (props.minDate) {
-    return props.minDate
+    return props.minDate;
   }
 
   if (isRangeInput.value) {
     const fromDate = startDateSelected.value ?? formattedDate.value[0];
 
-    return inputTypeSelecting.value === 'from'
+    return inputTypeSelecting.value === "from"
       ? null
-      : dayjs(fromDate).subtract(0, 'day')
+      : dayjs(fromDate).subtract(0, "day");
   }
 
   return null;
-})
+});
 
 const updateCalendar = (newValue) => {
   if (props.type === "range") {
@@ -137,34 +137,34 @@ const resetCalendar = () => {
 
 const selectInput = (inputType) => {
   inputTypeSelecting.value = inputType;
-}
+};
 
 const defaultDateRange = () => [dayjs().toDate(), dayjs().toDate()];
 
 const disableAllDates = (value) => {
   const date = dayjs(value);
-  const isInCurrentMonth = (date) => date.get('month') === dayjs().get('month');
+  const isInCurrentMonth = (date) => date.get("month") === dayjs().get("month");
   return isInCurrentMonth(date);
-}
+};
 
 const selectStartDate = (value) => {
-  selectInput('to');
+  selectInput("to");
   startDateSelected.value = value;
-}
+};
 
 const handleIndefinite = (event) => {
   isCalendarIndefinite.value = event;
-  emit("update:modelValue", event ?  "Indefinite" : null);
-}
+  emit("update:modelValue", event ? "Indefinite" : null);
+};
 
 watch(inputTypeSelecting, (value) => {
-  if (value === 'to') {
-    toInputElement.value?.focus()
+  if (value === "to") {
+    toInputElement.value?.focus();
   }
-  if (value === 'from') {
-    fromInputElement.value?.focus()
+  if (value === "from") {
+    fromInputElement.value?.focus();
   }
-})
+});
 </script>
 
 <template>
@@ -182,8 +182,11 @@ watch(inputTypeSelecting, (value) => {
               ? modelValue && modelValue[0]
                 ? `${formattedDate[0].format(dateFormat)} - ${formattedDate[1].format(dateFormat)}`
                 : ''
-              : modelValue === 'Indefinite' ? 'Indefinite' : modelValue
-                ? formattedDate.format(dateFormat) : ''
+              : modelValue === 'Indefinite'
+                ? 'Indefinite'
+                : modelValue
+                  ? formattedDate.format(dateFormat)
+                  : ''
           "
           icon="calendar"
           :label="label"

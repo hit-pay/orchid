@@ -152,8 +152,8 @@ const socialOptions = [
 ];
 
 const getUniqueListBy = (arr, key) => {
-    return [...new Map(arr.map(item => [item[key], item])).values()]
-}
+  return [...new Map(arr.map((item) => [item[key], item])).values()];
+};
 
 const saveMenuItems = (items) => {
   let newModelValue = [...props.modelValue];
@@ -179,7 +179,7 @@ const saveMenuItems = (items) => {
     newModelValue[newModelValue.indexOf(addSubmenuItem.value.item)].children =
       newChildren;
   } else {
-    newModelValue = getUniqueListBy([...newModelValue, ...items], "id")
+    newModelValue = getUniqueListBy([...newModelValue, ...items], "id");
   }
   emit("update:modelValue", newModelValue);
   items?.forEach((i) => {

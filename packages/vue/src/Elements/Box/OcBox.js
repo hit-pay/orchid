@@ -1,3 +1,3 @@
-import Box from './OcBox.vue'
+import Box from "./OcBox.vue";
 
-export { Box}
+export { Box };
