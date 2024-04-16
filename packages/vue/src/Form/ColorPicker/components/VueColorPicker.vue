@@ -1218,7 +1218,9 @@ const onChangeMode = (value) => {
     }, 200);
   } else if (value === "solid") {
     mode.value = "solid";
-    applyValue(props.modelValue);
+    setTimeout(() => {
+      applyValue(props.modelValue);
+    }, 200);
   }
 };
 

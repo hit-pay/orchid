@@ -1,7 +1,7 @@
 <script setup>
 import { Dropdown, Input, BaseInput } from "@/orchidui";
 import ColorPickerPopup from "./components/VueColorPicker.vue";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 
 const props = defineProps({
   modelValue: {
@@ -30,6 +30,22 @@ const onUpdate = (value) => {
   inputValue.value = value;
   emit("update:model-value", value);
 };
+
+const iconProps = computed(() => {
+  if (props.variant === "gradient") {
+    return {
+      class: "w-[20px] h-[20px] hide-svg-icon",
+      style: {
+        background: inputValue.value,
+      },
+    };
+  }
+  return {
+    style: {
+      color: inputValue.value,
+    },
+  };
+});
 </script>
 
 <template>
@@ -38,7 +54,7 @@ const onUpdate = (value) => {
       <Input
         :model-value="inputValue"
         icon="drop"
-        :icon-props="{ style: { color: inputValue } }"
+        :icon-props="iconProps"
         @update:model-value="onUpdate"
       >
         <template v-if="$slots.leading" #leading>
@@ -49,7 +65,7 @@ const onUpdate = (value) => {
         <ColorPickerPopup
           :variant="variant"
           :show-alpha="showOpacity"
-          :type="!showOpacity ? 'hex' : 'hex8'"
+          :type="!showOpacity ? 'HEX' : 'HEX8'"
           :model-value="modelValue"
           @update:model-value="onUpdate"
         />
@@ -57,3 +73,9 @@ const onUpdate = (value) => {
     </Dropdown>
   </BaseInput>
 </template>
+
+<style>
+.hide-svg-icon svg {
+  display: none;
+}
+</style>
