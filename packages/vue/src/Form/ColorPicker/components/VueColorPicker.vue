@@ -9,6 +9,7 @@
       v-model:percentageY="gradientAngle.percentageY"
       v-model:angle="gradientAngle.angle"
       v-model:percentageX="gradientAngle.percentageX"
+      :variant="variant"
       :local="local"
       :iconClasses="iconClasses"
       :inputType="inputType"

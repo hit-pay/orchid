@@ -2,6 +2,7 @@
   <div class="ck-cp-menu mb-3 justify-end">
     <div class="ck-cp-controller-bar">
       <button
+        v-if="variant == 'gradient'"
         type="button"
         class="cp-btn"
         :class="mode == 'solid' ? 'active' : ''"
@@ -22,6 +23,7 @@
         </svg>
       </button>
       <button
+        v-if="variant == 'gradient'"
         type="button"
         class="cp-btn"
         :class="gradientType == 'linear' && mode != 'solid' ? 'active' : ''"
@@ -41,6 +43,7 @@
         </svg>
       </button>
       <button
+        v-if="variant == 'gradient'"
         type="button"
         class="cp-btn"
         :class="gradientType == 'radial' && mode != 'solid' ? 'active' : ''"
@@ -188,6 +191,7 @@
 <script setup>
 import { ref } from "vue";
 defineProps({
+  variant: String,
   mode: {
     default: "gradient",
     type: String,
