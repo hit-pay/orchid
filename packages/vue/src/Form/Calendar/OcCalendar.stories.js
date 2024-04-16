@@ -38,7 +38,7 @@ export const calendarStory = {
     components: {
       Theme,
       Calendar,
-      Checkbox
+      Checkbox,
     },
     setup() {
       const modelValue = ref();

@@ -33,7 +33,7 @@ export const Default = {
     isRequired: true,
     label: "Date",
     isSplitInput: true,
-    isIndefinite: false
+    isIndefinite: false,
   },
   render: (args) => ({
     components: { Theme, DatePicker },

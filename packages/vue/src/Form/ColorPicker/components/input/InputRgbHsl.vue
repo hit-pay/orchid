@@ -112,7 +112,7 @@ if (props.inputType === "RGB") {
     (newValue, oldValue) => {
       if (newValue !== oldValue) internal.value = newValue;
     },
-    { immediate: true, deep: true }
+    { immediate: true, deep: true },
   );
 } else {
   watch(
@@ -124,7 +124,7 @@ if (props.inputType === "RGB") {
         b: val.l,
       };
     },
-    { immediate: true, deep: true }
+    { immediate: true, deep: true },
   );
 }
 </script>

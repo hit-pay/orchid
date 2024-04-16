@@ -447,10 +447,14 @@ const displayFilterData = computed(() => {
                     :values="props.filter"
                     :actions="filterOptions.actions"
                     @apply-filter="applyFilter($event)"
-                    @filter-fields-changed="emit('filter-fields-changed', $event)"
+                    @filter-fields-changed="
+                      emit('filter-fields-changed', $event)
+                    "
                     @cancel="isDropdownOpened = false"
                   >
-                    <template #default="{ errors, values, jsonForm, updateForm }">
+                    <template
+                      #default="{ errors, values, jsonForm, updateForm }"
+                    >
                       <slot
                         name="custom-filter-form"
                         :errors="errors"

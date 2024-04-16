@@ -11,8 +11,8 @@ export default {
 };
 
 const args = {
-    classes: 'hover:shadow bg-oc-background-light hover:bg-oc-accent-1-50'
-  }
+  classes: "hover:shadow bg-oc-background-light hover:bg-oc-accent-1-50",
+};
 
 export const OcDraggableList = {
   args,
@@ -37,7 +37,7 @@ export const OcDraggableList = {
           id: "234",
           title: "234 Label ",
           beforeAction: true,
-          link: 'https://orchidui.vercel.app'
+          link: "https://orchidui.vercel.app",
         },
         {
           id: "456",
