@@ -8,6 +8,8 @@ export * from "./DataDisplay/ListDetail/OcListDetail.js";
 export * from "./DataDisplay/InfoCard/OcInfoCard.js";
 export * from "./DataDisplay/ProgressBar/OcProgressBar.js";
 export * from "./DataDisplay/FloatContent/OcFloatContent.js";
+export * from "./DataDisplay/HorizontalProgressbar/OcHorizontalProgressbar.js";
+export * from "./DataDisplay/OnboardingListItem/OcOnboardingListItem.js";
 
 export * from "./Disclosure/Accordion/OcAccordion.js";
 export * from "./Disclosure/OnboardingAccordion/OnboardingAccordion.js";
