@@ -26,7 +26,7 @@ export const Gradient = {
   render: () => ({
     components: { ColorPicker },
     setup() {
-      const modelValue = ref();
+      const modelValue = ref("");
       return {
         modelValue,
       };
