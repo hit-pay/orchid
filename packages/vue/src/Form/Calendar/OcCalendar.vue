@@ -32,7 +32,7 @@ const props = defineProps({
   dateSelecting: {
     type: String,
     default: undefined,
-    validator: (value) => value ? ['from', 'to'].includes(value) : true,
+    validator: (value) => (value ? ["from", "to"].includes(value) : true),
   },
   modelValue: {
     type: [String, Date, Number, Array],
@@ -50,8 +50,8 @@ const props = defineProps({
   },
   inDefiniteLabel: {
     type: String,
-    default: 'Indefinite'
-  }
+    default: "Indefinite",
+  },
 });
 const emit = defineEmits([
   "update:modelValue",
@@ -99,7 +99,7 @@ const daysInMonth = computed(() => {
 
 const selectedMonth = computed(() => selectedDate.value.format("MMMM YYYY"));
 
-const isRangeSelection = computed(() => props.type === 'range');
+const isRangeSelection = computed(() => props.type === "range");
 
 const selectDay = (day) => {
   if (!isRangeSelection.value) {
@@ -115,7 +115,7 @@ const selectDay = (day) => {
 
   let currentMonth = selectedDate.value.date(day);
 
-  if (selectedStartDay.value && props.dateSelecting === 'to') {
+  if (selectedStartDay.value && props.dateSelecting === "to") {
     selectedEndDay.value = day;
     selectedEndDate.value = currentMonth;
 
@@ -130,7 +130,10 @@ const selectDay = (day) => {
     selectedEndDate.value = currentMonth;
 
     isStartDateSet.value = true;
-    emit('start-date-selected', dayjs(selectedMonth.value, "MMMM YYYY").date(day))
+    emit(
+      "start-date-selected",
+      dayjs(selectedMonth.value, "MMMM YYYY").date(day),
+    );
 
     return;
   }
@@ -158,12 +161,11 @@ const clearDate = () => {
     selectedStartDate.value?.month() === selectedDate.value?.month()
       ? selectedStartDate.value?.toDate()
       : null;
-  selectedEndDay.value =
-    isRangeSelection.value
-      ? selectedEndDate.value?.month() === selectedDate.value?.month()
-        ? selectedEndDate.value?.toDate()
-        : null
-      : null;
+  selectedEndDay.value = isRangeSelection.value
+    ? selectedEndDate.value?.month() === selectedDate.value?.month()
+      ? selectedEndDate.value?.toDate()
+      : null
+    : null;
 
   emit("resetCalendar");
 };
@@ -274,11 +276,18 @@ const handleIndefinite = (value) => {
   >
     <div class="flex items-center justify-between">
       <span
-        :class="[isCalendarIndefinite ? 'pointer-events-none opacity-[.35]' : '']"
+        :class="[
+          isCalendarIndefinite ? 'pointer-events-none opacity-[.35]' : '',
+        ]"
       >
         {{ selectedMonth }}
       </span>
-      <div class="flex gap-x-3" :class="[isCalendarIndefinite ? 'pointer-events-none opacity-[.35]' : '']" >
+      <div
+        class="flex gap-x-3"
+        :class="[
+          isCalendarIndefinite ? 'pointer-events-none opacity-[.35]' : '',
+        ]"
+      >
         <Icon
           name="chevron-down"
           class="rotate-90 cursor-pointer"
@@ -323,10 +332,12 @@ const handleIndefinite = (value) => {
     </div>
 
     <slot name="bottom">
-      <span
-        v-if="isIndefinite"
-      >
-          <Checkbox v-model="isCalendarIndefinite" :label="inDefiniteLabel" @update:model-value="handleIndefinite" />
+      <span v-if="isIndefinite">
+        <Checkbox
+          v-model="isCalendarIndefinite"
+          :label="inDefiniteLabel"
+          @update:model-value="handleIndefinite"
+        />
       </span>
     </slot>
 
@@ -338,7 +349,12 @@ const handleIndefinite = (value) => {
         :is-disabled="isCalendarIndefinite"
         @click="clearDate"
       />
-      <Button label="Done" class="w-[72px]" :is-disabled="isCalendarIndefinite" @click="doneSelecting" />
+      <Button
+        label="Done"
+        class="w-[72px]"
+        :is-disabled="isCalendarIndefinite"
+        @click="doneSelecting"
+      />
     </div>
   </div>
 </template>

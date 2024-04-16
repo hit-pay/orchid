@@ -81,7 +81,7 @@ const presetValue = computed(() => {
   return props.values.sections.find((s) => s.key === "Styles")["preset"];
 });
 const activePreset = presetOptions.value.find(
-  (p) => p.value === presetValue.value
+  (p) => p.value === presetValue.value,
 );
 
 const updatePreset = (to) => {
@@ -90,7 +90,7 @@ const updatePreset = (to) => {
   let newSectionsList = [];
   props.values.sections.forEach((item) => {
     const defaultSettings = selectedPreset.sections.find(
-      (s) => s.section === item.section
+      (s) => s.section === item.section,
     );
     if (defaultSettings) {
       let sectionItem = {
@@ -132,7 +132,7 @@ const sidebarActive = computed(() => {
 });
 
 const availableSections = computed(() =>
-  props.settings.filter((s) => s.group === "sections")
+  props.settings.filter((s) => s.group === "sections"),
 );
 
 const renderForm = ref(null);
@@ -153,7 +153,7 @@ const renderSectionAndForm = () => {
     props.values.sections.forEach((item) => {
       if (item.group === "sections") {
         const sectionItem = props.settings.find(
-          (s) => s.section === item.section
+          (s) => s.section === item.section,
         );
         sectionListCustom.push({
           key: item.key, // required
@@ -171,7 +171,7 @@ const renderSectionAndForm = () => {
   }
 
   sectionActive.value = sectionList.value.find(
-    (s) => s.key === props.active.id
+    (s) => s.key === props.active.id,
   );
 
   setTimeout(() => {
@@ -188,12 +188,12 @@ watch(
   {
     deep: true,
     immediate: true,
-  }
+  },
 );
 
 const sectionActiveValues = computed(() => {
   let sectionValues = props.values.sections.find(
-    (s) => s.key === props.active.id
+    (s) => s.key === props.active.id,
   );
   return sectionValues;
 });
@@ -234,7 +234,7 @@ const sidebarMenuLabel = computed(() => {
 const submenuLabel = computed(() => {
   if (sidebarMenuActive.value.children) {
     const submenu = sidebarMenuActive.value.children.find(
-      (s) => s.name === sidebarActive.value.submenu
+      (s) => s.name === sidebarActive.value.submenu,
     );
     return submenu?.label;
   } else {
@@ -488,7 +488,7 @@ const isHomePageDropdownOpen = ref(false);
                     @click="
                       changeSubmenu(
                         sectionHomePage.name,
-                        sectionHomePage.section
+                        sectionHomePage.section,
                       )
                     "
                   />
@@ -667,7 +667,10 @@ const isHomePageDropdownOpen = ref(false);
                     variant="secondary"
                   />
                 </div>
-                <img :src="`${theme.assets}images/preset/${option.value}.png`" alt="" />
+                <img
+                  :src="`${theme.assets}images/preset/${option.value}.png`"
+                  alt=""
+                />
                 <div
                   :class="{
                     'text-oc-primary': selected,
@@ -686,10 +689,13 @@ const isHomePageDropdownOpen = ref(false);
           <div
             class="bg-oc-bg-light flex items-center gap-5 p-[16px] border-r border-gray-200"
           >
-            <img :src="`${theme.assets}thumbnail.png`" class="h-[51px] rounded-sm" />
+            <img
+              :src="`${theme.assets}thumbnail.png`"
+              class="h-[51px] rounded-sm"
+            />
             <div class="flex flex-col">
               <div class="text-oc-text-400 mb-3">Active theme</div>
-              <div class="text-[14px] font-medium">{{theme.name}}</div>
+              <div class="text-[14px] font-medium">{{ theme.name }}</div>
             </div>
             <div
               class="w-[100px] group flex items-center justify-end ml-auto cursor-pointer gap-[8px]"
@@ -709,7 +715,10 @@ const isHomePageDropdownOpen = ref(false);
             class="flex gap-3 items-center cursor-pointer ml-auto pr-4"
             @click="showPresetStyle = !showPresetStyle"
           >
-            <img class="w-[112px]" :src="`${theme.assets}images/preset/${activePreset.value}-sm.png`" />
+            <img
+              class="w-[112px]"
+              :src="`${theme.assets}images/preset/${activePreset.value}-sm.png`"
+            />
             <div>
               <Icon
                 name="chevron-down"

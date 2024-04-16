@@ -181,8 +181,10 @@ props.requestForm.forEach((f) => {
 const showSubForm = ref("");
 
 const toggleSubForm = (name) => {
-  showSubForm.value === name ? showSubForm.value = '' : showSubForm.value = name
-}
+  showSubForm.value === name
+    ? (showSubForm.value = "")
+    : (showSubForm.value = name);
+};
 </script>
 <template>
   <div>
@@ -237,7 +239,10 @@ const toggleSubForm = (name) => {
           </div>
           <div>{{ form.label }}</div>
           <div class="ml-auto">
-            <Icon name="chevron-down" :class="showSubForm === form.name ? 'rotate-180': ''"  />
+            <Icon
+              name="chevron-down"
+              :class="showSubForm === form.name ? 'rotate-180' : ''"
+            />
           </div>
         </div>
         <Transition
@@ -248,10 +253,7 @@ const toggleSubForm = (name) => {
           leave-from-class="transform opacity-100 mt-0"
           leave-to-class="opacity-0"
         >
-          <div
-            v-if="showSubForm === form.name"
-            class="bg-oc-bg-light"
-          >
+          <div v-if="showSubForm === form.name" class="bg-oc-bg-light">
             <div class="py-4 mt-4">
               <FormBuilder
                 id="form-builder-children"
