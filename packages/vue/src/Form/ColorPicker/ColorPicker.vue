@@ -55,6 +55,7 @@ const iconProps = computed(() => {
         :model-value="inputValue"
         icon="drop"
         :icon-props="iconProps"
+        placeholder="#FFFFFF"
         @update:model-value="onUpdate"
       >
         <template v-if="$slots.leading" #leading>
