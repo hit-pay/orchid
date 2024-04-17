@@ -85,6 +85,7 @@ const activePreset = presetOptions.value.find(
 );
 
 const updatePreset = (to) => {
+  showPresetStyle.value = false
   const selectedPreset = presetOptions.value.find((p) => p.value === to);
 
   let newSectionsList = [];
@@ -642,7 +643,7 @@ const isHomePageDropdownOpen = ref(false);
           </div>
         </div>
       </Transition>
-      <div v-if="theme" class="w-full absolute bottom-0 z-20">
+      <div v-if="theme" class="w-full absolute bottom-0 z-20 h-[84px]">
         <div
           v-if="showPresetStyle"
           class="flex w-full px-[16px] absolute bottom-[84px]"
