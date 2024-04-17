@@ -94,7 +94,7 @@
 </template>
 
 <script setup>
-import { onMounted, onBeforeMount, ref, reactive, provide, watch } from "vue";
+import { onMounted, onBeforeMount, ref, reactive, provide, watch, nextTick } from "vue";
 
 import InputHex from "./input/InputHex.vue";
 import InputRgbHsl from "./input/InputRgbHsl.vue";
@@ -169,7 +169,9 @@ const emits = defineEmits(["update:modelValue"]);
 const emittedValue = ref(props.modelValue);
 const emitUpdateModelValue = (value) => {
   emittedValue.value = value;
-  emits("update:modelValue", value);
+  if(isReady.value){
+    emits("update:modelValue", value);
+  }
 };
 
 const colorList = ref([
@@ -1231,7 +1233,9 @@ onMounted(() => {
   }
   applyValue(props.modelValue);
   handleChangeInputType(inputType.value);
-  isReady.value = true;
+  nextTick(() => {
+    isReady.value = true;
+  })
 });
 </script>
 

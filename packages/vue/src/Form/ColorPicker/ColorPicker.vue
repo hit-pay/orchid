@@ -6,7 +6,7 @@ import { computed, ref } from "vue";
 const props = defineProps({
   modelValue: {
     type: String,
-    default: "#ff0000",
+    default: "",
   },
   variant: {
     type: String,
