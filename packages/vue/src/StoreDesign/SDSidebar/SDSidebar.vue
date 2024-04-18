@@ -80,12 +80,11 @@ const presetOptions = computed(() => {
 const presetValue = computed(() => {
   return props.values.sections.find((s) => s.key === "Styles")["preset"];
 });
-const activePreset = presetOptions.value.find(
-  (p) => p.value === presetValue.value,
-);
-
+const activePreset = computed(() => {
+  return presetOptions.value.find((p) => p.value === presetValue.value);
+});
 const updatePreset = (to) => {
-  showPresetStyle.value = false
+  showPresetStyle.value = false;
   const selectedPreset = presetOptions.value.find((p) => p.value === to);
 
   let newSectionsList = [];
