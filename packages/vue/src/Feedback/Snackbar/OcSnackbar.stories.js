@@ -11,6 +11,11 @@ export const Default = {
       options: ["default", "primary", "error", "warning", "gray"],
       default: "default",
     },
+    size: {
+      control: "select",
+      options: ["small", "big", "default"],
+      default: "default",
+    },
     icon: {
       control: "select",
       options: ["filled-check", "circle", "plus", "x"],
@@ -26,6 +31,14 @@ export const Default = {
     icon: "filled-check",
     color: "default",
     content: "Changes have been successfully saved",
+    description: "Changes have been successfully saved",
+    title: "Success",
+    secondaryButton: {
+      label: "Action",
+    },
+    primaryButton: {
+      label: "Action",
+    },
     isCloseIcon: true,
   },
   render: (args) => ({
