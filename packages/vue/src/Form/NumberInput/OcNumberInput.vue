@@ -28,6 +28,13 @@ const decrement = () => {
     emit("update:modelValue", Number(props.modelValue) - 1);
   }
 };
+const preventEventIfNotNumberInput = (event) => {
+  if ((event.key >= "0" && event.key <= "9") || event.key === "Backspace") {
+    return;
+  }
+
+  event.preventDefault();
+};
 </script>
 
 <template>
@@ -57,9 +64,14 @@ const decrement = () => {
         left-icon="minus"
         @click="decrement"
       />
-      <span :class="modelValue ? 'font-medium' : 'text-oc-text-300'">{{
-        modelValue || 1
-      }}</span>
+      <input
+        :value="modelValue"
+        :class="modelValue ? 'font-medium' : 'text-oc-text-300'"
+        class="outline-0 text-center w-[60px]"
+        placeholder="1"
+        @keydown="preventEventIfNotNumberInput"
+        @input="$emit('update:modelValue', $event.target.value)"
+      />
       <Button
         variant="secondary"
         class="w-[28px] aspect-square"
