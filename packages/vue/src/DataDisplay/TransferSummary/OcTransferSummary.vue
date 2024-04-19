@@ -18,7 +18,7 @@ const formattedPaymentCurrency = computed(() =>
   props.transfer.payment_currency?.toUpperCase(),
 );
 const formattedFeeCurrency = computed(() =>
-  props.transfer.payment_currency?.toUpperCase(),
+  props.transfer.fee_currency?.toUpperCase(),
 );
 const formattedTransferMethod = computed(() =>
   props.transfer.transfer_method?.toUpperCase(),
