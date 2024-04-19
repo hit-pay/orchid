@@ -17,6 +17,9 @@ const formattedSourceCurrency = computed(() =>
 const formattedPaymentCurrency = computed(() =>
   props.transfer.payment_currency?.toUpperCase(),
 );
+const formattedFeeCurrency = computed(() =>
+  props.transfer.fee_currency?.toUpperCase(),
+);
 const formattedTransferMethod = computed(() =>
   props.transfer.transfer_method?.toUpperCase(),
 );
@@ -34,14 +37,14 @@ const formattedTransferMethod = computed(() =>
       />
       <span class="block text-right text-sm text-oc-text-400">
         {{
-          `${formattedPaymentCurrency} 1 = ${formattedSourceCurrency} ${transfer.exchange_rate}`
+          `${formattedSourceCurrency} 1 = ${formattedPaymentCurrency} ${transfer.exchange_rate}`
         }}
       </span>
     </div>
     <ListDetail
       class="justify-between font-medium [&>span]:text-base"
       label="Fee"
-      :content="`${formattedSourceCurrency} ${transfer.fee}`"
+      :content="`${formattedFeeCurrency} ${transfer.fee}`"
       variant="big"
       :show-copy-tooltip="false"
     />
