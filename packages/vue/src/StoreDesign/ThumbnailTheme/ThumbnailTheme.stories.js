@@ -10,23 +10,17 @@ export const Default = {
   args: {
     templates: [
       {
-        id: 1,
-        thumbnail: "/images/theme1.png",
-        title: "Theme Title 1",
-        description: "Description of theme will be here",
-      },
-      {
         id: 2,
         thumbnail: "/images/theme1.png",
         title: "Theme Title 2",
-        description: "Description of theme will be here",
+        description: "Description of theme will be here, of theme will be here",
         active: true,
       },
       {
         id: 3,
         thumbnail: "/images/theme1.png",
         title: "Theme Title 3",
-        description: "Description of theme will be here",
+        description: "Description of theme will be here, of theme will be here",
         pro: true,
       },
 
@@ -34,8 +28,15 @@ export const Default = {
         id: 4,
         thumbnail: "/images/theme1.png",
         title: "Theme Title 4",
-        description: "Description of theme will be here",
+        description: "Description of theme will be here, of theme will be here",
         draft: true,
+      },
+
+      {
+        id: 1,
+        thumbnail: "/images/theme1.png",
+        title: "Theme Title 1",
+        description: "Description of theme will be here, of theme will be here",
       },
     ],
   },

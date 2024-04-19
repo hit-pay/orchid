@@ -30,6 +30,7 @@ const emit = defineEmits([
   "update:uploadedImages",
   "onRemoveImage",
   "onEditImage",
+  "delete"
 ]);
 const isDropdownOpen = ref([]);
 const isEditOpen = ref(false);
@@ -45,13 +46,24 @@ const onDeleteFile = (index) => {
   deleteConfirmationModal.value = true;
   deleteIndex.value = index;
 };
+
+const resetFile = ref(false)
+
 const confirmDeleteFile = () => {
   const deletedImage = props.uploadedImages.find(
     (_, i) => i === deleteIndex.value,
   );
+
   if (deletedImage.current) {
     emit("onRemoveImage", deletedImage);
+  } else {
+    emit("delete", deleteIndex.value);
+    resetFile.value = true
+    setTimeout(() => {
+      resetFile.value = false
+    }, 1000)
   }
+
   emit(
     "update:uploadedImages",
     props.uploadedImages.filter((_, i) => i !== deleteIndex.value),
@@ -93,6 +105,7 @@ const onChange = ($event) => {
         <Icon name="plus" />
       </div>
       <input
+        v-if="!resetFile"
         class="hidden"
         type="file"
         :accept="accept || 'image/png, image/jpeg'"

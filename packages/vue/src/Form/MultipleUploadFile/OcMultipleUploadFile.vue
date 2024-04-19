@@ -93,6 +93,7 @@ onMounted(() => {
         "
         @on-edit-image="$emit('onEditFile', $event)"
         @on-remove-image="$emit('onRemoveFile', $event)"
+        @delete="onDeleteFile"
       >
         <template #action="slotData">
           <slot
