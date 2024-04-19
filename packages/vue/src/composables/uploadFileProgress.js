@@ -85,8 +85,6 @@ export const useUploadFileProgress = (maxSize, emit) => {
 
     currentFiles.value.splice(index, 1);
 
-    console.log("onRemoveFile", currentFiles.value)
-
     emit("update:modelValue", currentFiles.value);
   };
   return {
