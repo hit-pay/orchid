@@ -111,9 +111,9 @@ watch(
         colorClasses[color],
         isFloating && positionClasses[position],
         {
-          'fixed z-[1004]': isFloating,
+          '!fixed z-[1004]': isFloating,
           'gap-x-2 py-3 px-4 items-center': isSmall,
-          'gap-x-5 pt-5 pr-9 pb-6 pl-5 relative items-start': isBig,
+          'gap-x-5 pt-5 pr-9 pb-6 pl-5 items-start': isBig,
           'gap-x-4 py-4 px-5 items-center': !isBig && !isSmall,
         },
       ]"
@@ -141,7 +141,7 @@ watch(
         />
       </template>
       <slot>
-        <div v-if="isBig" class="flex flex-col gap-y-4 w-full">
+        <div v-if="isBig" class="flex relative flex-col gap-y-4 w-full">
           <div class="flex flex-col gap-y-3">
             <span class="font-medium text-oc-text"> {{ title }}</span>
             <span class="text-oc-text-400">{{ description }}</span>
