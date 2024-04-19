@@ -36,12 +36,14 @@ defineProps({
         <Chip v-if="chipOptions" v-bind="chipOptions" />
       </div>
       <Icon
+        v-if="isActive"
         class="shrink-0 text-oc-primary"
         :name="icon"
         width="18"
         height="18"
       />
     </div>
+
     <slot name="content" />
   </div>
 </template>
