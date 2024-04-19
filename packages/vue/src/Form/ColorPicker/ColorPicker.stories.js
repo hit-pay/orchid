@@ -1,5 +1,5 @@
 import ColorPicker from "./ColorPicker.vue";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 
 export default {
   component: ColorPicker,
@@ -27,13 +27,18 @@ export const Gradient = {
     components: { ColorPicker },
     setup() {
       const modelValue = ref("");
+      const styleBg = computed(() => {
+        return `background:${modelValue.value}`;
+      });
       return {
         modelValue,
+        styleBg,
       };
     },
     template: `
-          <div class="h-[400px]">
+          <div>
             <ColorPicker v-model="modelValue" variant="gradient"/>
+            <div class="h-[400px] w-full mt-3" :style="styleBg"></div>
           </div>`,
   }),
 };

@@ -94,7 +94,15 @@
 </template>
 
 <script setup>
-import { onMounted, onBeforeMount, ref, reactive, provide, watch, nextTick } from "vue";
+import {
+  onMounted,
+  onBeforeMount,
+  ref,
+  reactive,
+  provide,
+  watch,
+  nextTick,
+} from "vue";
 
 import InputHex from "./input/InputHex.vue";
 import InputRgbHsl from "./input/InputRgbHsl.vue";
@@ -169,7 +177,7 @@ const emits = defineEmits(["update:modelValue"]);
 const emittedValue = ref(props.modelValue);
 const emitUpdateModelValue = (value) => {
   emittedValue.value = value;
-  if(isReady.value){
+  if (isReady.value) {
     emits("update:modelValue", value);
   }
 };
@@ -1235,7 +1243,7 @@ onMounted(() => {
   handleChangeInputType(inputType.value);
   nextTick(() => {
     isReady.value = true;
-  })
+  });
 });
 </script>
 

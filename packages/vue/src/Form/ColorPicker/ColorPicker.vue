@@ -50,7 +50,7 @@ const iconProps = computed(() => {
 
 <template>
   <BaseInput>
-    <Dropdown v-model="isOpen" prevent-click-outside>
+    <Dropdown v-model="isOpen">
       <Input
         :model-value="inputValue"
         icon="drop"
