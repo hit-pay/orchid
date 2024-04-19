@@ -67,7 +67,7 @@ const preventEventIfNotNumberInput = (event) => {
       <input
         :value="modelValue"
         :class="modelValue ? 'font-medium' : 'text-oc-text-300'"
-        class="outline-none text-center w-[60px]"
+        class="outline-none text-center w-[60px] bg-transparent"
         placeholder="1"
         @keydown="preventEventIfNotNumberInput"
         @input="$emit('update:modelValue', $event.target.value)"
