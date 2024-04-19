@@ -291,6 +291,7 @@ defineExpose({
             input-class="!border-none !shadow-none"
             :is-readonly="!isDropdownOpened"
             @update:model-value="$emit('onSearchKeywords', query)"
+            @keyup.enter="isDropdownOpened = false"
           >
             <template v-if="isDropdownOpened" #icon>
               <Icon class="w-5 h-5 text-oc-text-400" name="search" />
