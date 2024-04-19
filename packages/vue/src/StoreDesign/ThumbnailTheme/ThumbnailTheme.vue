@@ -72,17 +72,19 @@ defineEmits(["activate", "customize", "preview", "upgrade", "publish"]);
         <div class="text-md font-medium">{{ theme.title }}</div>
         <div class="text-oc-text-400 text-sm mt-1">{{ theme.description }}</div>
       </div>
-      <Chip v-if="theme.active" class="ml-auto">Active</Chip>
-      <Chip v-else-if="theme.draft" variant="accent-1" class="ml-auto"
-        >Draft</Chip
-      >
-      <Chip
-        v-else-if="theme.pro"
-        class="ml-auto"
-        variant="accent-2"
-        @click="$emit('upgrade', theme)"
-        >Upgrade</Chip
-      >
+      <div class="h-full flex items-start">
+        <Chip v-if="theme.active" class="ml-auto">Active</Chip>
+        <Chip v-else-if="theme.draft" variant="gray" class="ml-auto"
+          >Draft</Chip
+        >
+        <Chip
+          v-else-if="theme.pro"
+          class="ml-auto"
+          variant="accent-2"
+          @click="$emit('upgrade', theme)"
+          >Upgrade</Chip
+        >
+      </div>
     </div>
   </div>
 </template>

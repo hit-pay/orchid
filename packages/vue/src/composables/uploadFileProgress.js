@@ -84,6 +84,7 @@ export const useUploadFileProgress = (maxSize, emit) => {
     );
 
     currentFiles.value.splice(index, 1);
+
     emit("update:modelValue", currentFiles.value);
   };
   return {
