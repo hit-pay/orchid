@@ -1,4 +1,4 @@
-import { Theme, ListItem, DropdownItem } from "@/orchidui";
+import { Theme, ListItem, DropdownItem, Button } from "@/orchidui";
 
 export default {
   component: ListItem,
@@ -45,22 +45,22 @@ export const listItem = {
       return { args };
     },
     template: `
-          <Theme colorMode="light">
-            <ListItem
-                v-for="i in 5"
-                :is-active="args.active >= i"
-                :key="i"
-                :type="args.type"
-                :title="args.title"
-                :image="args.image"
-                :image-size="args.imageSize"
-                :icon="args.icon"
-                :icon-class="args.iconClass"
-                :icon-text="args.iconText"
-                :description="args.description"
-            />
-          </Theme>
-        `,
+      <Theme colorMode="light">
+        <ListItem
+          v-for="i in 5"
+          :is-active="args.active >= i"
+          :key="i"
+          :type="args.type"
+          :title="args.title"
+          :image="args.image"
+          :image-size="args.imageSize"
+          :icon="args.icon"
+          :icon-class="args.iconClass"
+          :icon-text="args.iconText"
+          :description="args.description"
+        />
+      </Theme>
+    `,
   }),
 };
 export const ListWebhook = {
@@ -78,24 +78,24 @@ export const ListWebhook = {
       return { args };
     },
     template: `
-          <Theme colorMode="light" class="p-10">
-            <ListItem
-                type="webhook"
-                :urls="args.urls"
-                title="Zapier Flow"
-                date="Oct, 20 2023"
-            >
-              <template #menu>
-                <div class="p-2 border-b border-gray-200">
-                  <DropdownItem text="Edit" icon="pencil"/>
-                </div>
-                <div class="p-2">
-                  <DropdownItem text="Delete" variant="destructive" icon="bin"/>
-                </div>
-              </template>
-            </ListItem>
-          </Theme>
-        `,
+      <Theme colorMode="light" class="p-10">
+        <ListItem
+          type="webhook"
+          :urls="args.urls"
+          title="Zapier Flow"
+          date="Oct, 20 2023"
+        >
+          <template #menu>
+            <div class="p-2 border-b border-gray-200">
+              <DropdownItem text="Edit" icon="pencil"/>
+            </div>
+            <div class="p-2">
+              <DropdownItem text="Delete" variant="destructive" icon="bin"/>
+            </div>
+          </template>
+        </ListItem>
+      </Theme>
+    `,
   }),
 };
 
@@ -121,14 +121,14 @@ export const ListPayment = {
       return { args };
     },
     template: `
-          <Theme colorMode="light" class="p-10">
-            <ListItem
-                :title="args.title"
-                :payment-methods="args.paymentMethods"
-                type="payment"
-            />
-          </Theme>
-        `,
+      <Theme colorMode="light" class="p-10">
+        <ListItem
+          :title="args.title"
+          :payment-methods="args.paymentMethods"
+          type="payment"
+        />
+      </Theme>
+    `,
   }),
 };
 
@@ -158,26 +158,80 @@ export const ListGeneral = {
     ],
   },
   render: (args) => ({
-    components: { Theme, ListItem, DropdownItem },
+    components: { Theme, ListItem, DropdownItem, Button },
     setup() {
-      return { args };
+      const methodLogos = [
+        "http://api.src.test/icons/methods/md/visa.png",
+        "http://api.src.test/icons/methods/md/mastercard.png",
+        "http://api.src.test/icons/methods/md/jcb.png",
+        "http://api.src.test/icons/methods/md/unionpay.png",
+        "http://api.src.test/icons/methods/md/amex.png",
+      ]
+      
+      return { args, methodLogos };
     },
     template: `
-          <Theme colorMode="light" class="p-10">
-            <ListItem
-                type="general"
-                v-bind="args"
-            >
-              <template #menu>
-                <div class="p-2 border-b border-gray-200">
-                  <DropdownItem text="Edit" icon="pencil"/>
-                </div>
-                <div class="p-2">
-                  <DropdownItem text="Delete" variant="destructive" icon="bin"/>
-                </div>
-              </template>
-            </ListItem>
-          </Theme>
-        `,
+      <Theme colorMode="light" class="p-10">
+        <ListItem
+          type="general"
+          v-bind="args"
+        >
+          <template #menu>
+            <div class="p-2 border-b border-gray-200">
+              <DropdownItem text="Edit" icon="pencil"/>
+            </div>
+            <div class="p-2">
+              <DropdownItem text="Delete" variant="destructive" icon="bin"/>
+            </div>
+          </template>
+        </ListItem>
+
+        <ListItem
+          type="general"
+          title="Shopee Pay"
+          :chips="[
+            { label: 'Primary' }
+          ]"
+        >
+          <template #logo>
+            <img
+              src="http://api.src.test/icons/providers/shopee.png"
+              width="64"
+              alt="shopee"
+            />
+          </template>
+        </ListItem>
+
+        <ListItem
+          type="general"
+          v-bind="args"
+          :is-dropdown-actions-visible="false"
+        >
+          <template #logo>
+            <img
+              src="http://api.src.test/icons/providers/paynow.png"
+              width="64"
+            />
+          </template>
+          <div
+            class="flex gap-x-4"
+          >
+            <img
+              v-for="(methodImage, index) in methodLogos"
+              :key="index"
+              class="object-contain"
+              :src="methodImage"
+              width="35"
+              :alt="methodImage"
+              height="24"
+            />
+          </div>
+          
+          <template #append>
+            <Button label="Connect" />
+          </template>
+        </ListItem>
+      </Theme>
+    `,
   }),
 };
