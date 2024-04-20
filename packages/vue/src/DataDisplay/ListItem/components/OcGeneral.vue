@@ -55,6 +55,7 @@ const toggleDashboard = () => {
                 :key="i"
                 :label="item.label"
                 :variant="item.variant"
+                :icon="item.icon"
                 class="font-medium"
               />
             </div>
