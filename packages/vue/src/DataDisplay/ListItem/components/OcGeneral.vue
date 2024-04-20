@@ -15,6 +15,10 @@ defineProps({
     default: () => [],
   },
   isDisabled: Boolean,
+  isDropdownActionsVisible: {
+    type: Boolean,
+    default: true,
+  },
 });
 const emit = defineEmits(["more"]);
 const isOpen = ref(false);
@@ -32,7 +36,8 @@ const toggleDashboard = () => {
   >
     <div class="flex items-center gap-x-4 w-full">
       <slot name="logo" />
-      <div class="flex flex-col w-full gap-y-2">
+
+      <div class="flex flex-col flex-1 gap-y-2">
         <div class="flex items-center justify-between">
           <div
             class="flex text-sm text-oc-text-400 items-center gap-x-3 overflow-hidden"
@@ -56,7 +61,7 @@ const toggleDashboard = () => {
           </div>
           <slot name="actions">
             <Dropdown
-              v-if="!isDisabled"
+              v-if="isDropdownActionsVisible && !isDisabled"
               v-model="isOpen"
               placement="bottom-end"
             >
@@ -71,42 +76,47 @@ const toggleDashboard = () => {
             </Dropdown>
           </slot>
         </div>
-        <div class="flex flex-col gap-3">
-          <div class="text-oc-text-400 flex gap-x-2 items-center text-sm">
-            <Icon
-              v-if="descriptionIcon"
-              :name="descriptionIcon"
-              width="16"
-              height="16"
-              class="text-oc-text-400"
-            />
-            {{ description }}
-          </div>
-          <div v-if="details.length" class="flex gap-5">
-            <div
-              v-for="(item, i) in details"
-              :key="i"
-              class="flex items-center gap-2"
-            >
-              <div
-                v-if="item.country"
-                class="fi w-[15px] h-[15px] shadow"
-                :class="'fi-' + item.country"
-              ></div>
+
+        <slot>
+          <div class="flex flex-col gap-3">
+            <div class="text-oc-text-400 flex gap-x-2 items-center text-sm">
               <Icon
-                v-else
-                :name="item.icon"
+                v-if="descriptionIcon"
+                :name="descriptionIcon"
                 width="16"
                 height="16"
                 class="text-oc-text-400"
               />
-              <div class="font-medium text-oc-text-500 text-sm">
-                {{ item.label }}
+              {{ description }}
+            </div>
+            <div v-if="details.length" class="flex gap-5">
+              <div
+                v-for="(item, i) in details"
+                :key="i"
+                class="flex items-center gap-2"
+              >
+                <div
+                  v-if="item.country"
+                  class="fi w-[15px] h-[15px] shadow"
+                  :class="'fi-' + item.country"
+                ></div>
+                <Icon
+                  v-else
+                  :name="item.icon"
+                  width="16"
+                  height="16"
+                  class="text-oc-text-400"
+                />
+                <div class="font-medium text-oc-text-500 text-sm">
+                  {{ item.label }}
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </slot>
       </div>
+
+      <slot name="append" />
     </div>
   </div>
 </template>
