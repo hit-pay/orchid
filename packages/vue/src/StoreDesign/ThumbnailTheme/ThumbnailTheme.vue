@@ -68,7 +68,7 @@ defineEmits(["activate", "customize", "preview", "upgrade", "publish"]);
       />
     </div>
     <div class="p-4 flex items-center">
-      <div>
+      <div class="w-full">
         <div class="text-md font-medium">{{ theme.title }}</div>
         <div class="text-oc-text-400 text-sm mt-1">{{ theme.description }}</div>
       </div>
