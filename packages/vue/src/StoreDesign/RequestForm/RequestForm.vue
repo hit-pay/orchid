@@ -202,12 +202,14 @@ props.requestForm.forEach((f) => {
   }
 });
 
-const showSubForm = ref("");
+const showSubForm = ref([]);
 
 const toggleSubForm = (name) => {
-  showSubForm.value === name
-    ? (showSubForm.value = "")
-    : (showSubForm.value = name);
+  if (showSubForm.value.includes(name)) {
+    showSubForm.value = showSubForm.value.filter((s) => s.name);
+  } else {
+    showSubForm.value.push(name);
+  }
 };
 </script>
 <template>
@@ -249,7 +251,7 @@ const toggleSubForm = (name) => {
       </template>
       <template #Children="{ form }">
         <div
-          class="flex items-center bg-oc-accent-1-50 p-4 -mt-1 cursor-pointer -ml-[12px] w-[calc(100%,+24px)]"
+          class="font-medium flex items-center bg-oc-accent-1-50 p-3 px-7 cursor-pointer -ml-[23px] w-[calc(100%+46px)] -mt-4"
           @click="toggleSubForm(form.name)"
         >
           <div v-if="form.icon" class="w-[30px]">
@@ -265,19 +267,21 @@ const toggleSubForm = (name) => {
           <div class="ml-auto">
             <Icon
               name="chevron-down"
-              :class="showSubForm === form.name ? 'rotate-180' : ''"
+              width="16"
+              height="16"
+              :class="showSubForm.includes(form.name) ? 'rotate-180' : ''"
             />
           </div>
         </div>
         <Transition
-          enter-active-class="duration-[250ms] ease-out"
-          enter-from-class="transform opacity-0 mt-[10px]"
-          enter-to-class="opacity-100 mt-0"
-          leave-active-class="duration-[350ms] ease-out"
-          leave-from-class="transform opacity-100 mt-0"
+          enter-active-class="duration-[100ms] ease-in"
+          enter-from-class="opacity-0"
+          enter-to-class="opacity-100"
+          leave-active-class="duration-[50ms] ease-out"
+          leave-from-class="opacity-100"
           leave-to-class="opacity-0"
         >
-          <div v-if="showSubForm === form.name" class="bg-oc-bg-light">
+          <div v-if="showSubForm.includes(form.name)" class="bg-oc-bg-light">
             <div class="py-4 mt-4">
               <FormBuilder
                 id="form-builder-children"
