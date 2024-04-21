@@ -251,7 +251,10 @@ const toggleSubForm = (name) => {
       </template>
       <template #Children="{ form }">
         <div
-          class="font-medium flex items-center bg-oc-accent-1-50 p-3 px-7 cursor-pointer -ml-[23px] w-[calc(100%+46px)] -mt-4"
+          class="font-medium flex items-center bg-oc-accent-1-50 p-3 px-7 cursor-pointer -ml-[23px] w-[calc(100%+46px)]"
+          :class="{
+            '-mt-4': requestForm[requestForm.indexOf(form) - 1]?.children,
+          }"
           @click="toggleSubForm(form.name)"
         >
           <div v-if="form.icon" class="w-[30px]">
