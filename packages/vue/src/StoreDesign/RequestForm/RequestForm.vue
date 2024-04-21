@@ -32,20 +32,44 @@ const sectionFormData = ref(props.sectionData);
 const formErrors = ref({});
 const formValues = ref({});
 
+const defaultValueType = (value, type) => {
+  if (value === undefined) {
+    if (type === "SectionItem") {
+      return false;
+    } else {
+      return "";
+    }
+  } else {
+    return value;
+  }
+};
+
 const setDefaultData = (form) => {
   if (typeof form.name === "object") {
     form.name.forEach((formName) => {
       if (form.general) {
-        formValues.value[formName.key] = generalFormData.value[formName.key];
+        formValues.value[formName.key] = defaultValueType(
+          generalFormData.value[formName.key],
+          form.type
+        );
       } else {
-        formValues.value[formName.key] = sectionFormData.value[formName.key];
+        formValues.value[formName.key] = defaultValueType(
+          sectionFormData.value[formName.key],
+          form.type
+        );
       }
     });
   } else if (form.name) {
     if (form.general) {
-      formValues.value[form.name] = generalFormData.value[form.name];
+      formValues.value[form.name] = defaultValueType(
+        generalFormData.value[form.name],
+        form.type
+      );
     } else {
-      formValues.value[form.name] = sectionFormData.value[form.name];
+      formValues.value[form.name] = defaultValueType(
+        sectionFormData.value[form.name],
+        form.type
+      );
     }
   }
 };
