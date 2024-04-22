@@ -206,6 +206,7 @@ watch(filterableOptions, () => {
 
 watch(isDropdownOpened, (value) => {
   if (!value) {
+    emit('close');
     return;
   }
 
@@ -245,7 +246,6 @@ defineExpose({
       :popper-style="{ maxWidth: `${maxPopperWidth}px` }"
       :popper-options="popperOptions"
       :is-disabled="isDisabled || isReadonly"
-      @update:model-value="!$event ? $emit('close') : ''"
     >
       <div
         class="border min-h-[36px] w-full px-3 flex justify-between items-center cursor-pointer gap-x-3 rounded"
