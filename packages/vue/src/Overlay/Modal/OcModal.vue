@@ -47,6 +47,10 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  modalId: {
+    type: String,
+    default: '',
+  },
   confirmButtonProps: {
     type: Object,
     default: () => ({
@@ -143,7 +147,10 @@ const sizeClasses = computed(() => ({
         </slot>
       </div>
 
-      <div :class="isBorderless ? 'px-7' : 'p-7'">
+      <div
+        :id="`${modalId}-modal-body-id`"
+        :class="isBorderless ? 'px-7' : 'p-7'"
+      >
         <slot></slot>
       </div>
 
