@@ -254,7 +254,7 @@ const confirmDeleteMenu = () => {
   if (deleteMenuItems.value && deleteMenuItems.value.subitem2) {
     let parentChildren = deleteMenuItems.value.item.children;
     let newChildren = deleteMenuItems.value.subitem.children.filter(
-      (i) => i.id !== deleteMenuItems.value.subitem2.id,
+      (i) => i.id !== deleteMenuItems.value.subitem2.id
     );
     newModelValue[newModelValue.indexOf(deleteMenuItems.value.item)].children[
       parentChildren.indexOf(deleteMenuItems.value.subitem)
@@ -266,7 +266,7 @@ const confirmDeleteMenu = () => {
       children.filter((i) => i.id !== deleteMenuItems.value.subitem.id);
   } else {
     newModelValue = newModelValue.filter(
-      (s) => s.id !== deleteMenuItems.value.item.id,
+      (s) => s.id !== deleteMenuItems.value.item.id
     );
   }
   emit("update:modelValue", newModelValue);
@@ -280,7 +280,7 @@ const selectOption = (option) => {
   let hasSelected = addMenuForm.value.ids.find((o) => o === option.value);
   if (hasSelected) {
     addMenuForm.value.ids = addMenuForm.value.ids.filter(
-      (o) => o !== option.value,
+      (o) => o !== option.value
     );
   } else {
     addMenuForm.value.ids = [...addMenuForm.value.ids, option.value];
@@ -288,6 +288,40 @@ const selectOption = (option) => {
 };
 
 const categoryDropdown = ref([]);
+
+const menuHasAdded = computed(() => {
+  if (props.modelValue.length > 0) {
+    return props.modelValue.map((ct) => ct.id);
+  } else {
+    return [];
+  }
+});
+
+const filteredCategories = computed(() => {
+  if (props.modelValue.length > 0) {
+    return props.options.categories.map((c) => {
+      return {
+        ...c,
+        subLabel: menuHasAdded.value.includes(c.value) ? "has added" : "",
+      };
+    });
+  } else {
+    return props.options.categories;
+  }
+});
+
+const filteredPages = computed(() => {
+  if (props.modelValue.length > 0) {
+    return props.options.pages.map((c) => {
+      return {
+        ...c,
+        subLabel: menuHasAdded.value.includes(c.value) ? "has added" : "",
+      };
+    });
+  } else {
+    return props.options.pages;
+  }
+});
 </script>
 <template>
   <div>
@@ -440,7 +474,7 @@ const categoryDropdown = ref([]);
                   multiple
                   is-filterable
                   is-checkboxes
-                  :options="options.pages"
+                  :options="filteredPages"
                   placeholder="Choose Pages"
                 />
               </div>
@@ -465,7 +499,7 @@ const categoryDropdown = ref([]);
                   is-select-all
                   is-checkboxes
                   is-filterable
-                  :options="options.categories"
+                  :options="filteredCategories"
                   placeholder="Choose Categories"
                 >
                   <template #default="{ fOptions }">
@@ -473,6 +507,7 @@ const categoryDropdown = ref([]);
                       v-for="option in fOptions.filter((o) => !o.parent)"
                       :key="option.value"
                       :label="option.label"
+                      :sub-label="option.subLabel"
                       is-checkboxes
                       :is-selected="
                         addMenuForm.ids.find((o) => o === option.value)
@@ -488,7 +523,7 @@ const categoryDropdown = ref([]);
                       @show:children="categoryDropdown.push(option.value)"
                       @hide:children="
                         categoryDropdown = categoryDropdown.filter(
-                          (c) => c !== option.value,
+                          (c) => c !== option.value
                         )
                       "
                       @select="selectOption(option)"
@@ -505,10 +540,11 @@ const categoryDropdown = ref([]);
                         >
                           <OcOption
                             v-for="option1 in fOptions.filter(
-                              (o) => o.parent === option.value,
+                              (o) => o.parent === option.value
                             )"
                             :key="option1.value"
                             :label="option1.label"
+                            :sub-label="option1.subLabel"
                             is-checkboxes
                             :is-selected="
                               addMenuForm.ids.find((o) => o === option1.value)
@@ -528,7 +564,7 @@ const categoryDropdown = ref([]);
                             "
                             @hide:children="
                               categoryDropdown = categoryDropdown.filter(
-                                (c) => c !== option1.value,
+                                (c) => c !== option1.value
                               )
                             "
                             @select="selectOption(option1)"
@@ -537,7 +573,7 @@ const categoryDropdown = ref([]);
                               <div
                                 v-if="
                                   fOptions.find(
-                                    (o) => o.parent === option1.value,
+                                    (o) => o.parent === option1.value
                                   )
                                 "
                                 class="w-full flex-col ml-5"
@@ -549,14 +585,15 @@ const categoryDropdown = ref([]);
                               >
                                 <OcOption
                                   v-for="option2 in fOptions.filter(
-                                    (o) => o.parent === option1.value,
+                                    (o) => o.parent === option1.value
                                   )"
                                   :key="option2.value"
                                   :label="option2.label"
+                                  :sub-label="option2.subLabel"
                                   is-checkboxes
                                   :is-selected="
                                     addMenuForm.ids.find(
-                                      (o) => o === option2.value,
+                                      (o) => o === option2.value
                                     )
                                       ? true
                                       : false
@@ -633,7 +670,7 @@ const categoryDropdown = ref([]);
                     @update:model-value="
                       editMenuForm.link = getLinkFromOption(
                         $event,
-                        options.pages,
+                        options.pages
                       )
                     "
                   />
@@ -649,7 +686,7 @@ const categoryDropdown = ref([]);
                     @update:model-value="
                       editMenuForm.link = getLinkFromOption(
                         $event,
-                        options.categories,
+                        options.categories
                       )
                     "
                   />

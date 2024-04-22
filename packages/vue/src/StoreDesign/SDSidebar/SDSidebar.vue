@@ -90,7 +90,7 @@ const updatePreset = (to) => {
   let newSectionsList = [];
   props.values.sections.forEach((item) => {
     const defaultSettings = selectedPreset.sections.find(
-      (s) => s.section === item.section,
+      (s) => s.section === item.section
     );
     if (defaultSettings) {
       let sectionItem = {
@@ -132,7 +132,7 @@ const sidebarActive = computed(() => {
 });
 
 const availableSections = computed(() =>
-  props.settings.filter((s) => s.group === "sections"),
+  props.settings.filter((s) => s.group === "sections")
 );
 
 const renderForm = ref(null);
@@ -153,7 +153,7 @@ const renderSectionAndForm = () => {
     props.values.sections.forEach((item) => {
       if (item.group === "sections") {
         const sectionItem = props.settings.find(
-          (s) => s.section === item.section,
+          (s) => s.section === item.section
         );
         sectionListCustom.push({
           key: item.key, // required
@@ -171,7 +171,7 @@ const renderSectionAndForm = () => {
   }
 
   sectionActive.value = sectionList.value.find(
-    (s) => s.key === props.active.id,
+    (s) => s.key === props.active.id
   );
 
   setTimeout(() => {
@@ -188,12 +188,12 @@ watch(
   {
     deep: true,
     immediate: true,
-  },
+  }
 );
 
 const sectionActiveValues = computed(() => {
   let sectionValues = props.values.sections.find(
-    (s) => s.key === props.active.id,
+    (s) => s.key === props.active.id
   );
   return sectionValues;
 });
@@ -234,7 +234,7 @@ const sidebarMenuLabel = computed(() => {
 const submenuLabel = computed(() => {
   if (sidebarMenuActive.value.children) {
     const submenu = sidebarMenuActive.value.children.find(
-      (s) => s.name === sidebarActive.value.submenu,
+      (s) => s.name === sidebarActive.value.submenu
     );
     return submenu?.label;
   } else {
@@ -472,7 +472,10 @@ const isHomePageDropdownOpen = ref(false);
           </div>
           <div class="mx-2">/</div>
           <div class="font-medium">
-            <Dropdown v-model="isHomePageDropdownOpen" :distance="10">
+            <Dropdown
+              v-model="isHomePageDropdownOpen"
+              @mouseover="isHomePageDropdownOpen = true"
+            >
               {{ submenuLabel }}
               <template #menu>
                 <div
@@ -488,7 +491,7 @@ const isHomePageDropdownOpen = ref(false);
                     @click="
                       changeSubmenu(
                         sectionHomePage.name,
-                        sectionHomePage.section,
+                        sectionHomePage.section
                       )
                     "
                   />
