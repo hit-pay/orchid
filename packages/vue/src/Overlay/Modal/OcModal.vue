@@ -39,6 +39,14 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  isHeaderVisible: {
+    type: Boolean,
+    default: true,
+  },
+  isFooterVisible: {
+    type: Boolean,
+    default: true,
+  },
   confirmButtonProps: {
     type: Object,
     default: () => ({
@@ -105,6 +113,7 @@ const sizeClasses = computed(() => ({
       :class="sizeClasses[size]"
     >
       <div
+        v-if="isHeaderVisible"
         class="flex border-oc-gray-200 gap-x-9 justify-between p-5 items-start"
         :class="!isBorderless ? 'border-b' : ''"
       >
@@ -139,6 +148,7 @@ const sizeClasses = computed(() => ({
       </div>
 
       <div
+        v-if="isFooterVisible"
         class="px-5 py-6 border-oc-gray-200 flex gap-x-4"
         :class="[
           footerClass,
