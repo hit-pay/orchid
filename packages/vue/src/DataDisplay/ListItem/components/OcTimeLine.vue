@@ -28,7 +28,7 @@ defineProps({
       >
         <div
           class="w-3 h-3 rounded-full"
-          :class="isActive ? 'bg-oc-accent-1' : ' bg-oc-gray-500'"
+          :class="isActive ? 'bg-oc-primary-500' : ' bg-oc-gray-500'"
         />
       </div>
     </div>
