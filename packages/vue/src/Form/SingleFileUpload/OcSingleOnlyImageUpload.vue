@@ -94,15 +94,17 @@ const changeImage = (url) => {
       />
     </div>
 
-    <ModalCropper
-      v-if="isEditOpen"
-      v-model="isEditOpen"
-      :img="editImg"
-      @close="
-        isEditOpen = false;
-        editImg = '';
-      "
-      @change-image="changeImage"
-    />
+    <teleport to="body">
+      <ModalCropper
+        v-if="isEditOpen"
+        v-model="isEditOpen"
+        :img="editImg"
+        @close="
+          isEditOpen = false;
+          editImg = '';
+        "
+        @change-image="changeImage"
+      />
+    </teleport>
   </div>
 </template>
