@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import { ref, watch, onMounted } from "vue";
 const props = defineProps({
   path: {
     type: String,
@@ -53,8 +53,9 @@ const renderIcon = () => {
       .then((text) => {
         if (text && iconRef.value) {
           if (window.oc_icons) {
+            let windowIcons = JSON.parse(window.oc_icons);
             window.oc_icons = JSON.stringify([
-              ...window.oc_icons,
+              ...windowIcons,
               {
                 name: props.name,
                 svg: text,
@@ -65,11 +66,15 @@ const renderIcon = () => {
         }
       });
   } else {
-    setIconRef(iconData.svg);
+    if (iconRef.value) {
+      setIconRef(iconData.svg);
+    }
   }
 };
 
-renderIcon();
+onMounted(() => {
+  renderIcon();
+});
 
 watch(
   () => props.name,
