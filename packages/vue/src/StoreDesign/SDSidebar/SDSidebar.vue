@@ -698,7 +698,9 @@ const isHomePageDropdownOpen = ref(false);
             />
             <div class="flex flex-col">
               <div class="text-oc-text-400 mb-3">Active theme</div>
-              <div class="text-[14px] font-medium">{{ theme.name }}</div>
+              <div class="text-[14px] font-medium capitalize">
+                {{ theme.name }}
+              </div>
             </div>
             <div
               class="w-[100px] group flex items-center justify-end ml-auto cursor-pointer gap-[8px]"
