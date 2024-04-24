@@ -1,38 +1,55 @@
 <template>
   <div
-    class="ck-cp-container"
     ref="pickerTemplateRef"
+    class="ck-cp-container"
     :cp-theme="theme"
     :class="disabled ? 'ck-cp-disabled ' : ''"
   >
-    <PickerMenu
-      v-model:percentageY="gradientAngle.percentageY"
-      v-model:angle="gradientAngle.angle"
-      v-model:percentageX="gradientAngle.percentageX"
-      :variant="variant"
-      :local="local"
-      :iconClasses="iconClasses"
-      :inputType="inputType"
-      :mode="mode"
-      :showColorList="showColorList"
-      :showInputMenu="showInputMenu"
-      :showEyeDrop="showEyeDrop"
-      :isEyeDropperUsing="isEyeDropperUsing"
-      :gradientType="gradientType"
-      @onChangeMode="onChangeMode"
-      @onInput="setGradientBarColor"
-      @onClickEyeDropper="handleOnClickEyeDropper"
-      @onDeleteColor="deleteColor"
-      @onSaveColor="saveColor"
-    />
+    <div class="flex justify-end border-b h-[46px] relative mt-[-5px]">
+      <ColorType
+        v-if="variant == 'gradient'"
+        class="mr-auto"
+        :variant="variant"
+        :mode="mode"
+        :model-value="modelValue"
+        :iconClasses="iconClasses"
+        :gradientType="gradientType"
+        @onChangeMode="onChangeMode"
+      />
+      <ColorAction
+        class="!absolute right-0"
+        :isEyeDropperUsing="isEyeDropperUsing"
+        :showColorList="showColorList"
+        :showEyeDrop="showEyeDrop"
+        @onClickEyeDropper="handleOnClickEyeDropper"
+        @onSaveColor="saveColor"
+      />
+    </div>
 
-    <PickerWrap @onMouseDown="handlePickerStartOnMouseDown" />
-
-    <GradientBar
+    <div
       v-if="mode == 'gradient'"
-      @onAddColor="addColor"
-      @onMouseDown="handleGradientItemOnMouseDown"
-    />
+      class="grid grid-cols-8 gap-3 my-3 items-center"
+    >
+      <GradientBar
+        class="col-span-5"
+        :gradientType="gradientType"
+        @onAddColor="addColor"
+        @onMouseDown="handleGradientItemOnMouseDown"
+        @onDeleteColor="deleteColor"
+      />
+      <GradientSettings
+        class="col-span-3"
+        v-model:percentageY="gradientAngle.percentageY"
+        v-model:angle="gradientAngle.angle"
+        v-model:percentageX="gradientAngle.percentageX"
+        :local="local"
+        :inputType="inputType"
+        :mode="mode"
+        :gradientType="gradientType"
+        @onInput="setGradientBarColor"
+      />
+    </div>
+    <PickerWrap @onMouseDown="handlePickerStartOnMouseDown" />
 
     <PickerHue
       v-model="hue"
@@ -112,8 +129,11 @@ import SliderOpacity from "./input/SliderOpacity.vue";
 import GradientBar from "./input/SliderGradient.vue";
 import PickerHue from "./input/SliderHue.vue";
 
-import PickerMenu from "./PickerMenu.vue";
+import GradientSettings from "./GradientSettings.vue";
 import PickerWrap from "./PickerWrap.vue";
+
+import ColorType from "./ColorType.vue";
+import ColorAction from "./ColorAction.vue";
 
 import {
   hex8ToRgba,
@@ -136,7 +156,7 @@ const props = defineProps({
   type: { default: "HEX8", type: String },
   inputType: { default: "HEX", type: String },
   theme: { default: "light", type: String },
-  colorListCount: { default: 18, type: Number },
+  colorListCount: { default: 9, type: Number },
   showColorList: { default: true, type: Boolean },
   showEyeDrop: { default: true, type: Boolean },
   showAlpha: { default: true, type: Boolean },
@@ -432,13 +452,13 @@ const handleGradientItemOnMouseDown = (event) => {
 
     if (selectedItem && selectedItem.id != id) {
       const selectedHandle = pickerTemplateRef.value?.querySelector(
-        ".gradient-handle.select",
+        ".gradient-handle.select"
       );
       selectedHandle?.classList.remove("select");
       offsetParent.classList.add("select");
 
       const selectedItemIndex = colorList.value.findIndex(
-        (item) => item.select == true,
+        (item) => item.select == true
       );
 
       for (let i = 0; i < colorList.value.length; i++) {
@@ -486,11 +506,11 @@ const handleGradientMouseMove = (e) => {
     selectedGradientItem.style.left = `${newX}px`;
 
     const percent = parseFloat(
-      ((newX / (client?.width - handleClient?.width)) * 100).toFixed(0),
+      ((newX / (client?.width - handleClient?.width)) * 100).toFixed(0)
     );
 
     const selectedItem = colorList.value.find(
-      (item) => item.id == selectedGradientItem?.id.replace("clr-gb-", ""),
+      (item) => item.id == selectedGradientItem?.id.replace("clr-gb-", "")
     );
 
     if (selectedItem) {
@@ -504,7 +524,7 @@ const handleGradientMouseMove = (e) => {
 const addColor = (e) => {
   const client = gradientMouseBar?.getBoundingClientRect();
   const percent = Math.round(
-    ((e.clientX - (client?.left || 0)) / (client?.width || 1)) * 100,
+    ((e.clientX - (client?.left || 0)) / (client?.width || 1)) * 100
   );
 
   const selectIndex = colorList.value.findIndex((item) => item.select == true);
@@ -524,7 +544,7 @@ const addColor = (e) => {
 
   colorList.value[selectIndex].select = false;
   const selectedHandle = pickerTemplateRef.value?.querySelector(
-    ".gradient-handle.select",
+    ".gradient-handle.select"
   );
   selectedHandle?.classList.remove("select");
 
@@ -532,7 +552,7 @@ const addColor = (e) => {
 
   createGradientItem(item);
   selectedGradientItem = pickerTemplateRef.value?.querySelector(
-    `#clr-gb-${item.id}`,
+    `#clr-gb-${item.id}`
   );
   setGradientBarColor();
 };
@@ -718,7 +738,7 @@ const setGradientBarColor = () => {
     gradientBar.value.style.backgroundImage = barBackground;
 
     let target = pickerTemplateRef.value?.querySelector(
-      "#ck-cp-target-background",
+      "#ck-cp-target-background"
     );
     if (target) {
       target.style.backgroundImage = gradientBarBackgroundImage;
@@ -771,7 +791,7 @@ const deleteColor = () => {
       const deleteItemID = colorList.value[index].id;
       colorList.value.splice(index, 1);
       const deleteElement = pickerTemplateRef.value?.querySelector(
-        `#clr-gb-${deleteItemID}`,
+        `#clr-gb-${deleteItemID}`
       );
       deleteElement?.remove();
 
@@ -779,7 +799,7 @@ const deleteColor = () => {
       if (item) {
         item.select = true;
         selectedGradientItem = pickerTemplateRef.value?.querySelector(
-          `#clr-gb-${item.id}`,
+          `#clr-gb-${item.id}`
         );
         selectedGradientItem?.classList.add("select");
         setToChangeVariebles(item.r, item.g, item.b, item.hue, false);
@@ -861,7 +881,7 @@ const handleRGBAInput = (data) => {
         selectItem.g,
         selectItem.b,
         selectItem.hue,
-        true,
+        true
       );
       setGradientBarColor();
       setSliderOpacityColor();
@@ -895,7 +915,7 @@ const handleHSLInput = (value) => {
       selectColor.g,
       selectColor.b,
       selectColor.hue,
-      true,
+      true
     );
     setGradientBarColor();
     setSliderOpacityColor();
@@ -959,7 +979,7 @@ if (window.EyeDropper) {
 const saveColor = () => {
   const status = localColorList.value.find((color) => color === hexVal.value);
   if (!status) {
-    if (localColorList.value.length === props.colorListCount) {
+    if (localColorList.value.length >= props.colorListCount) {
       localColorList.value.pop();
     }
     let _v = hexVal.value;
@@ -967,7 +987,7 @@ const saveColor = () => {
 
     localStorage.setItem(
       "ck-cp-local-color-list",
-      JSON.stringify(localColorList.value),
+      JSON.stringify(localColorList.value)
     );
   }
 };
@@ -1171,7 +1191,7 @@ const handleChangeInputType = (event) => {
         const { h, s, l } = rgbToHsl(
           selectColor.r,
           selectColor.g,
-          selectColor.b,
+          selectColor.b
         );
         HSL.h = Math.round(h);
         HSL.s = Math.round(s * 100);
@@ -1198,13 +1218,13 @@ watch(
     if (newValue !== oldValue && newValue !== emittedValue.value) {
       colorList.value.forEach((item) => {
         const deleteElement = gradientMouseBar?.querySelector(
-          `#clr-gb-${item.id}`,
+          `#clr-gb-${item.id}`
         );
         deleteElement?.remove();
       });
       applyValue(newValue);
     }
-  },
+  }
 );
 
 onBeforeMount(() => {
@@ -1236,6 +1256,12 @@ const onChangeMode = (value) => {
 };
 
 onMounted(() => {
+  // check is gradient or solid
+  mode.value =
+    props.modelValue.includes("linear") || props.modelValue.includes("radial")
+      ? "gradient"
+      : "solid";
+
   if (mode.value == "gradient") {
     gradientMouseBar = pickerTemplateRef.value?.querySelector(".gradient-bar");
   }
@@ -1430,7 +1456,7 @@ onMounted(() => {
 
   &::-webkit-slider-thumb {
     box-shadow: 0px -0px 6px 0px var(--cp-range-shadow);
-    border: 0.2em solid var(--cp-range-border);
+    border: 0.3em solid var(--cp-range-border);
     background-color: var(--cp-act-color);
     height: 24px;
     width: 24px;
@@ -1444,7 +1470,7 @@ onMounted(() => {
 
   &::-moz-range-thumb {
     box-shadow: 0px -0px 6px 0px var(--cp-range-shadow);
-    border: 0.2em solid var(--cp-range-border);
+    border: 0.3em solid var(--cp-range-border);
     background-color: var(--cp-act-color);
     height: 24px;
     width: 24px;
@@ -1502,7 +1528,7 @@ onMounted(() => {
 
   &::-webkit-slider-thumb {
     box-shadow: 0px -0px 6px 0px var(--cp-range-shadow);
-    border: 0.2em solid var(--cp-range-border);
+    border: 0.3em solid var(--cp-range-border);
     background-color: var(--cp-act-color);
     height: 24px;
     width: 24px;
@@ -1516,7 +1542,7 @@ onMounted(() => {
 
   &::-moz-range-thumb {
     box-shadow: 0px -0px 6px 0px var(--cp-range-shadow);
-    border: 0.2em solid var(--cp-act-color);
+    border: 0.3em solid var(--cp-act-color);
     background-color: var(--cp-act-color);
     height: 24px;
     width: 24px;
@@ -1533,8 +1559,6 @@ onMounted(() => {
   width: 100%;
   position: relative;
   box-sizing: border-box;
-  margin-top: 17px;
-  margin-bottom: 4px;
 }
 
 .gradient-container {
@@ -1561,12 +1585,12 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 0.2em solid var(--cp-act-color);
+  border: 0.3em solid var(--cp-act-color);
 }
 
 .gradient-handle.select .gradient-handle-content {
   background-color: var(--cp-act-color);
-  border: 0.2em solid var(--cp-range-border);
+  border: 0.3em solid var(--cp-range-border);
 }
 
 .gradient-handle.select {
@@ -1614,17 +1638,12 @@ onMounted(() => {
   z-index: 0;
 }
 
-.ck-cp-linear-angle-container {
-  margin: 1rem 0 2rem 0;
-}
-
 .ck-cp-linear-angle-container input[type="range"] {
   margin: 0;
   border-radius: 10px;
   z-index: 10;
   appearance: none;
   background-color: var(--cp-border-color);
-  height: 5px;
   width: 100%;
   display: block;
   outline: none;
@@ -1655,7 +1674,7 @@ onMounted(() => {
   &::-webkit-slider-thumb {
     box-shadow: 0px -0px 6px 0px var(--cp-range-shadow);
     background-color: var(--cp-act-color);
-    height: 24px;
+    height: 16px;
     width: 6px;
     border-radius: 2px;
     appearance: none;
@@ -1668,7 +1687,7 @@ onMounted(() => {
   &::-moz-range-thumb {
     box-shadow: 0px -0px 6px 0px var(--cp-range-shadow);
     background-color: var(--cp-act-color);
-    height: 24px;
+    height: 16px;
     width: 6px;
     border-radius: 2px;
     appearance: none;
@@ -1692,10 +1711,6 @@ onMounted(() => {
   font-weight: 700;
 }
 
-.ck-cp-linear-angle-container p span::before {
-  content: "→ ";
-}
-
 .ck-cp-input-container {
   width: 100%;
   display: flex;
@@ -1709,30 +1724,6 @@ onMounted(() => {
   border: 1px solid var(--cp-border-color);
   color: var(--cp-font-color);
   border-radius: 5px;
-}
-
-.ck-cp-input-container input[type="text"] {
-  padding: 0;
-  width: 100%;
-  text-align: center;
-  height: 30px;
-  flex-shrink: 0;
-  outline: none;
-  font-size: 14px;
-}
-
-.ck-cp-input-container input[type="number"] {
-  padding: 0;
-  appearance: textfield;
-  -moz-appearance: textfield;
-  -webkit-appearance: textfield;
-  border-radius: 5px;
-  text-align: center;
-  flex-shrink: 0;
-  outline: none;
-  height: 100%;
-  width: 100%;
-  font-size: 14px;
 }
 
 .ck-cp-input-container input:focus-visible {

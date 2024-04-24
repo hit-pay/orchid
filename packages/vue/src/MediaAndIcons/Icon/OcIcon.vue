@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import { ref, watch, onMounted } from "vue";
 const props = defineProps({
   path: {
     type: String,
@@ -29,27 +29,57 @@ const props = defineProps({
   },
 });
 const iconRef = ref(null);
-const renderIcon = () => {
-  fetch(`${props.path}/${props.name}.svg`)
-    .then((r) => (r.status === 200 ? r.text() : ""))
-    .then((text) => {
-      if (text && iconRef.value) {
-        const dom = document.createElement("div");
-        dom.innerHTML = text;
-        dom.querySelector("svg").removeAttribute("width");
-        dom.querySelector("svg").removeAttribute("height");
-        iconRef.value.innerHTML = dom.innerHTML;
-        dom.remove();
-      }
-    });
+
+const setIconRef = (text) => {
+  const iconDom = document.createElement("div");
+  iconDom.innerHTML = text;
+  if (iconDom.querySelector("svg")) {
+    iconDom.querySelector("svg").removeAttribute("width");
+    iconDom.querySelector("svg").removeAttribute("height");
+    iconRef.value.innerHTML = iconDom.innerHTML;
+  }
+  iconDom.remove();
 };
 
-renderIcon();
+const renderIcon = () => {
+  let iconData = "";
+  if (window.oc_icons) {
+    let windowIcons = JSON.parse(window.oc_icons);
+    iconData = windowIcons.find((icon) => icon.name === props.name);
+  }
+  if (!iconData) {
+    fetch(`${props.path}/${props.name}.svg`)
+      .then((r) => (r.status === 200 ? r.text() : ""))
+      .then((text) => {
+        if (text && iconRef.value) {
+          if (window.oc_icons) {
+            let windowIcons = JSON.parse(window.oc_icons);
+            window.oc_icons = JSON.stringify([
+              ...windowIcons,
+              {
+                name: props.name,
+                svg: text,
+              },
+            ]);
+          }
+          setIconRef(text);
+        }
+      });
+  } else {
+    if (iconRef.value) {
+      setIconRef(iconData.svg);
+    }
+  }
+};
+
+onMounted(() => {
+  renderIcon();
+});
 
 watch(
   () => props.name,
   () => {
     renderIcon();
-  },
+  }
 );
 </script>

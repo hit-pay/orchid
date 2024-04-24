@@ -79,7 +79,7 @@ const props = defineProps({
     type: String,
     validator: (value) =>
       ["text", "decimal", "numeric", "tel", "search", "email", "url"].includes(
-        value,
+        value
       ),
     default: "text",
   },
