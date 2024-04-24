@@ -1,8 +1,8 @@
 <template>
-  <div ref="gradientSlider" class="relative" @click="onClickSlider">
+  <div ref="gradientSlider" class="relative h-[40px]" @click="onClickSlider">
     <button
       type="button"
-      class="absolute top-[-32px] text-oc-accent-3 rounded-[4px] border-2 border-oc-gray-200 p-2 bg-oc-bg-light"
+      class="absolute top-[-18px] text-oc-accent-3 rounded-[4px] border-2 border-oc-gray-200 p-2 bg-oc-bg-light"
       :class="!showDeleteBtn ? '!hidden' : ''"
       :style="deleteBtnPosition"
       @click="$emit('onDeleteColor')"

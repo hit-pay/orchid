@@ -1,54 +1,51 @@
 <template>
-  <div
-    v-if="mode == 'gradient'"
-    v-show="gradientType == 'linear' && isShowLinearAngleRange"
-    class="ck-cp-linear-angle-container"
-  >
-    <div>
-      <p class="ck-gradient-set-label">
-        {{ local.angle ? local.angle : "Angle" }} <span>{{ angle }}°</span>
-      </p>
-      <input
-        type="range"
-        min="0"
-        max="360"
-        :value="angle"
-        @input="handleInput($event, 'angle')"
-      />
-    </div>
-  </div>
+  <div>
+    <template v-if="gradientType == 'linear' && isShowLinearAngleRange">
+      <div class="ck-cp-linear-angle-container !m-0 !mt-5">
+        <div class="w-full flex">
+          <input
+            class="w-1/2"
+            type="range"
+            min="0"
+            max="360"
+            :value="angle"
+            @input="handleInput($event, 'angle')"
+          />
+          <!-- <p class="w-1/2 px-3 ck-gradient-set-label !m-0">{{ angle }}°</p> -->
+        </div>
+      </div>
+    </template>
 
-  <div
-    v-if="mode == 'gradient'"
-    v-show="gradientType == 'radial' && isShowRadialAngleRange"
-    class="ck-cp-linear-angle-container flex gap-3"
-  >
-    <div class="w-1/2">
-      <p class="ck-gradient-set-label">
-        {{ local.positionX ? local.positionX : "Position X" }}
-        <span>{{ percentageX }}%</span>
-      </p>
-      <input
-        type="range"
-        min="0"
-        max="100"
-        :value="percentageX"
-        @input="handleInput($event, 'percentageX')"
-      />
-    </div>
-    <div class="w-1/2">
-      <p class="ck-gradient-set-label">
-        {{ local.positionY ? local.positionY : "Position Y" }}
-        <span>{{ percentageY }}%</span>
-      </p>
-      <input
-        type="range"
-        min="0"
-        max="100"
-        :value="percentageY"
-        @input="handleInput($event, 'percentageY')"
-      />
-    </div>
+    <template v-if="gradientType == 'radial' && isShowRadialAngleRange">
+      <div class="ck-cp-linear-angle-container flex flex-wrap gap-3 !m-0">
+        <div class="w-full flex">
+          <input
+            class="w-1/2"
+            type="range"
+            min="0"
+            max="100"
+            :value="percentageX"
+            @input="handleInput($event, 'percentageX')"
+          />
+          <!-- <p class="w-1/2 px-3 ck-gradient-set-label !m-0">
+            X {{ percentageX }}%
+          </p> -->
+        </div>
+        <div class="w-full flex">
+          <input
+            class="w-1/2"
+            type="range"
+            min="0"
+            max="100"
+            :value="percentageY"
+            @input="handleInput($event, 'percentageY')"
+          />
+          <!-- <p class="w-1/2 px-3 ck-gradient-set-label !m-0">
+            Y {{ percentageY }}%
+          </p> -->
+        </div>
+      </div>
+    </template>
   </div>
 </template>
 

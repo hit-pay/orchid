@@ -5,7 +5,7 @@
     :cp-theme="theme"
     :class="disabled ? 'ck-cp-disabled ' : ''"
   >
-    <div class="flex justify-end pb-3">
+    <div class="flex justify-end pb-3 border-b">
       <ColorType
         class="mr-auto"
         :variant="variant"
@@ -23,24 +23,26 @@
       />
     </div>
 
-    <GradientBar
-      v-if="mode == 'gradient'"
-      @onAddColor="addColor"
-      @onMouseDown="handleGradientItemOnMouseDown"
-      @onDeleteColor="deleteColor"
-    />
-
-    <GradientSettings
-      v-model:percentageY="gradientAngle.percentageY"
-      v-model:angle="gradientAngle.angle"
-      v-model:percentageX="gradientAngle.percentageX"
-      :local="local"
-      :inputType="inputType"
-      :mode="mode"
-      :gradientType="gradientType"
-      @onInput="setGradientBarColor"
-    />
-
+    <div class="grid grid-cols-8 gap-3 my-3">
+      <GradientBar
+        v-if="mode == 'gradient'"
+        class="col-span-5"
+        @onAddColor="addColor"
+        @onMouseDown="handleGradientItemOnMouseDown"
+        @onDeleteColor="deleteColor"
+      />
+      <GradientSettings
+        class="col-span-3"
+        v-model:percentageY="gradientAngle.percentageY"
+        v-model:angle="gradientAngle.angle"
+        v-model:percentageX="gradientAngle.percentageX"
+        :local="local"
+        :inputType="inputType"
+        :mode="mode"
+        :gradientType="gradientType"
+        @onInput="setGradientBarColor"
+      />
+    </div>
     <PickerWrap @onMouseDown="handlePickerStartOnMouseDown" />
 
     <PickerHue
@@ -1626,17 +1628,12 @@ onMounted(() => {
   z-index: 0;
 }
 
-.ck-cp-linear-angle-container {
-  margin: 1rem 0 2rem 0;
-}
-
 .ck-cp-linear-angle-container input[type="range"] {
   margin: 0;
   border-radius: 10px;
   z-index: 10;
   appearance: none;
   background-color: var(--cp-border-color);
-  height: 5px;
   width: 100%;
   display: block;
   outline: none;
@@ -1667,7 +1664,7 @@ onMounted(() => {
   &::-webkit-slider-thumb {
     box-shadow: 0px -0px 6px 0px var(--cp-range-shadow);
     background-color: var(--cp-act-color);
-    height: 24px;
+    height: 16px;
     width: 6px;
     border-radius: 2px;
     appearance: none;
@@ -1680,7 +1677,7 @@ onMounted(() => {
   &::-moz-range-thumb {
     box-shadow: 0px -0px 6px 0px var(--cp-range-shadow);
     background-color: var(--cp-act-color);
-    height: 24px;
+    height: 16px;
     width: 6px;
     border-radius: 2px;
     appearance: none;
@@ -1704,10 +1701,6 @@ onMounted(() => {
   font-weight: 700;
 }
 
-.ck-cp-linear-angle-container p span::before {
-  content: "→ ";
-}
-
 .ck-cp-input-container {
   width: 100%;
   display: flex;
@@ -1721,30 +1714,6 @@ onMounted(() => {
   border: 1px solid var(--cp-border-color);
   color: var(--cp-font-color);
   border-radius: 5px;
-}
-
-.ck-cp-input-container input[type="text"] {
-  padding: 0;
-  width: 100%;
-  text-align: center;
-  height: 30px;
-  flex-shrink: 0;
-  outline: none;
-  font-size: 14px;
-}
-
-.ck-cp-input-container input[type="number"] {
-  padding: 0;
-  appearance: textfield;
-  -moz-appearance: textfield;
-  -webkit-appearance: textfield;
-  border-radius: 5px;
-  text-align: center;
-  flex-shrink: 0;
-  outline: none;
-  height: 100%;
-  width: 100%;
-  font-size: 14px;
 }
 
 .ck-cp-input-container input:focus-visible {
