@@ -30,6 +30,17 @@ const PRODUCT_FORM = [
         //   label: "Pick Products",
         // },
       ],
+      hint: "click link https://hitpayapp.com <script>alert('hello')</script>",
+      hintWithLink: true,
+    },
+  },
+  {
+    type: "Snackbar",
+    props: {
+      icon: "information",
+      color: "gray",
+      content:
+        "click link https://hitpayapp.com <script>alert('hello')</script>",
     },
   },
   {

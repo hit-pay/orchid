@@ -231,9 +231,9 @@ const snackbarWithLink = (text) => {
       @on-update="onUpdateForm"
     >
       <template #Snackbar="{ form }">
-        <Snackbar v-bind="form.props">{{
-          snackbarWithLink(form.props.content)
-        }}</Snackbar>
+        <Snackbar v-bind="form.props"
+          ><span v-html="snackbarWithLink(form.props.content)"></span
+        ></Snackbar>
       </template>
       <template #Tabs="{ form, value }">
         <Tabs
@@ -307,9 +307,11 @@ const snackbarWithLink = (text) => {
                 @on-update="onUpdateForm"
               >
                 <template #Snackbar="slot">
-                  <Snackbar v-bind="slot.form.props">{{
-                    snackbarWithLink(slot.form.props.content)
-                  }}</Snackbar>
+                  <Snackbar v-bind="slot.form.props"
+                    ><span
+                      v-html="snackbarWithLink(slot.form.props.content)"
+                    ></span
+                  ></Snackbar>
                 </template>
                 <template #Menus="slot">
                   <SDMenus

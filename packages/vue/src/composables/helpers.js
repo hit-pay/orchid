@@ -71,7 +71,7 @@ export const getTextWithLink = (rawHtml) => {
     if (!withProtocol.startsWith("https")) {
       withProtocol = "https://" + matched;
     }
-    const newStr = `<a  target="_blank"  href="${withProtocol}"> ${matched}</a>`;
+    const newStr = `<a class="font-medium" target="_blank"  href="${withProtocol}"> ${matched}</a>`;
     return newStr;
   };
 
