@@ -5,8 +5,9 @@
     :cp-theme="theme"
     :class="disabled ? 'ck-cp-disabled ' : ''"
   >
-    <div class="flex justify-end pb-3 border-b h-[56px] relative">
+    <div class="flex justify-end border-b h-[46px] relative mt-[-5px]">
       <ColorType
+        v-if="variant == 'gradient'"
         class="mr-auto"
         :variant="variant"
         :mode="mode"
