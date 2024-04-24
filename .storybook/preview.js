@@ -2,6 +2,13 @@
 
 import "../src/style.scss";
 
+import { setup } from "@storybook/vue3";
+
+setup((app) => {
+  app.config.globalProperties.window = window;
+  window.oc_icons = "";
+});
+
 const preview = {
   parameters: {
     backgrounds: {
