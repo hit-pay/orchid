@@ -5,6 +5,7 @@ import {
   MultipleUploadFile,
   Slider,
   Tabs,
+  Snackbar,
 } from "@/orchidui";
 import { ref } from "vue";
 import { SDMenus } from "@/orchidui/StoreDesign";
@@ -211,6 +212,12 @@ const toggleSubForm = (name) => {
     showSubForm.value.push(name);
   }
 };
+
+import { getTextWithLink } from "../../composables/helpers";
+
+const snackbarWithLink = (text) => {
+  return getTextWithLink(text);
+};
 </script>
 <template>
   <div>
@@ -223,6 +230,11 @@ const toggleSubForm = (name) => {
       :json-form="requestForm"
       @on-update="onUpdateForm"
     >
+      <template #Snackbar="{ form }">
+        <Snackbar v-bind="form.props">{{
+          snackbarWithLink(form.props.content)
+        }}</Snackbar>
+      </template>
       <template #Tabs="{ form, value }">
         <Tabs
           :model-value="value"
@@ -294,6 +306,11 @@ const toggleSubForm = (name) => {
                 :json-form="form.children"
                 @on-update="onUpdateForm"
               >
+                <template #Snackbar="slot">
+                  <Snackbar v-bind="slot.form.props">{{
+                    snackbarWithLink(slot.form.props.content)
+                  }}</Snackbar>
+                </template>
                 <template #Menus="slot">
                   <SDMenus
                     :model-value="slot.value"
