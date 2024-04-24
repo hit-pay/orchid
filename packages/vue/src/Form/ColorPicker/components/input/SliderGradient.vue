@@ -11,6 +11,10 @@
     </button>
     <div
       class="gradient-bar"
+      :class="{
+        'mt-[20px]': gradientType === 'linear',
+        'mt-[12px]': gradientType === 'radial',
+      }"
       @mousedown="onMousedown"
       @dragstart="handleItemDragStart"
     >
@@ -26,6 +30,11 @@
 <script setup>
 import { inject, ref } from "vue";
 import { Icon } from "@/orchidui";
+
+defineProps({
+  gradientType: String,
+});
+
 const gradientBar = inject("gradientBar");
 
 const gradientSlider = ref();
@@ -33,7 +42,6 @@ const gradientSlider = ref();
 const emit = defineEmits(["onAddColor", "onMouseDown", "onDeleteColor"]);
 
 const handleItemDragStart = (e) => {
-  console.log("handleItemDragStart");
   e.preventDefault();
 };
 

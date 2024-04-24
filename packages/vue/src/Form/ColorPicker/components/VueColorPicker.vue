@@ -5,16 +5,18 @@
     :cp-theme="theme"
     :class="disabled ? 'ck-cp-disabled ' : ''"
   >
-    <div class="flex justify-end pb-3 border-b">
+    <div class="flex justify-end pb-3 border-b h-[56px] relative">
       <ColorType
         class="mr-auto"
         :variant="variant"
         :mode="mode"
+        :model-value="modelValue"
         :iconClasses="iconClasses"
         :gradientType="gradientType"
         @onChangeMode="onChangeMode"
       />
       <ColorAction
+        class="!absolute right-0"
         :isEyeDropperUsing="isEyeDropperUsing"
         :showColorList="showColorList"
         :showEyeDrop="showEyeDrop"
@@ -23,10 +25,13 @@
       />
     </div>
 
-    <div class="grid grid-cols-8 gap-3 my-3 items-center">
+    <div
+      v-if="mode == 'gradient'"
+      class="grid grid-cols-8 gap-3 my-3 items-center"
+    >
       <GradientBar
-        v-if="mode == 'gradient'"
         class="col-span-5"
+        :gradientType="gradientType"
         @onAddColor="addColor"
         @onMouseDown="handleGradientItemOnMouseDown"
         @onDeleteColor="deleteColor"
@@ -1547,8 +1552,6 @@ onMounted(() => {
   width: 100%;
   position: relative;
   box-sizing: border-box;
-  margin-top: 17px;
-  margin-bottom: 4px;
 }
 
 .gradient-container {
