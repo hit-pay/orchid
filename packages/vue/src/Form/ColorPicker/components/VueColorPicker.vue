@@ -150,7 +150,7 @@ const props = defineProps({
   type: { default: "HEX8", type: String },
   inputType: { default: "HEX", type: String },
   theme: { default: "light", type: String },
-  colorListCount: { default: 18, type: Number },
+  colorListCount: { default: 9, type: Number },
   showColorList: { default: true, type: Boolean },
   showEyeDrop: { default: true, type: Boolean },
   showAlpha: { default: true, type: Boolean },
@@ -973,7 +973,7 @@ if (window.EyeDropper) {
 const saveColor = () => {
   const status = localColorList.value.find((color) => color === hexVal.value);
   if (!status) {
-    if (localColorList.value.length === props.colorListCount) {
+    if (localColorList.value.length >= props.colorListCount) {
       localColorList.value.pop();
     }
     let _v = hexVal.value;
