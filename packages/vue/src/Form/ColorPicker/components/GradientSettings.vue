@@ -2,47 +2,68 @@
   <div>
     <template v-if="gradientType == 'linear' && isShowLinearAngleRange">
       <div class="ck-cp-linear-angle-container !m-0 !mt-5">
-        <div class="w-full flex">
+        <div class="w-full grid grid-cols-2 gap-2">
+          <!-- TODO : use degree picker -->
           <input
-            class="w-1/2"
             type="range"
             min="0"
             max="360"
             :value="angle"
-            @input="handleInput($event, 'angle')"
+            @input="handleInput($event.target.value, 'angle')"
           />
-          <!-- <p class="w-1/2 px-3 ck-gradient-set-label !m-0">{{ angle }}°</p> -->
+          <div class="relative">
+            <Input
+              :model-value="angle"
+              placeholder="360"
+              input-type="number"
+              input-mode="numeric"
+              @update:model-value="handleInput($event, 'angle')"
+            />
+            <span class="absolute top-[10px] right-[12px]">°</span>
+          </div>
         </div>
       </div>
     </template>
 
     <template v-if="gradientType == 'radial' && isShowRadialAngleRange">
       <div class="ck-cp-linear-angle-container flex flex-wrap gap-3 !m-0">
-        <div class="w-full flex">
+        <div class="w-full grid grid-cols-2 gap-2">
           <input
-            class="w-1/2"
             type="range"
             min="0"
             max="100"
             :value="percentageX"
-            @input="handleInput($event, 'percentageX')"
+            @input="handleInput($event.target.value, 'percentageX')"
           />
-          <!-- <p class="w-1/2 px-3 ck-gradient-set-label !m-0">
-            X {{ percentageX }}%
-          </p> -->
+          <div class="relative">
+            <Input
+              :model-value="percentageX"
+              placeholder="100"
+              input-type="number"
+              input-mode="numeric"
+              @update:model-value="handleInput($event, 'percentageX')"
+            />
+            <span class="absolute top-[10px] right-[10px]">%</span>
+          </div>
         </div>
-        <div class="w-full flex">
+        <div class="w-full grid grid-cols-2 gap-2">
           <input
-            class="w-1/2"
             type="range"
             min="0"
             max="100"
             :value="percentageY"
-            @input="handleInput($event, 'percentageY')"
+            @input="handleInput($event.target.value, 'percentageY')"
           />
-          <!-- <p class="w-1/2 px-3 ck-gradient-set-label !m-0">
-            Y {{ percentageY }}%
-          </p> -->
+          <div class="relative">
+            <Input
+              :model-value="percentageY"
+              placeholder="100"
+              input-type="number"
+              input-mode="numeric"
+              @update:model-value="handleInput($event, 'percentageY')"
+            />
+            <span class="absolute top-[10px] right-[10px]">%</span>
+          </div>
         </div>
       </div>
     </template>
@@ -50,6 +71,8 @@
 </template>
 
 <script setup>
+import { Input } from "@/orchidui";
+
 import { ref } from "vue";
 defineProps({
   mode: {
@@ -78,19 +101,35 @@ const emits = defineEmits([
   "onInput",
 ]);
 
-const handleInput = (event, type) => {
+const handleInput = (value, type) => {
+  let newValue = parseInt(value);
   switch (type) {
     case "angle":
-      emits("update:angle", parseInt(event.target.value));
+      if (value > 360) {
+        newValue = 360;
+      } else if (value < 0) {
+        newValue = 0;
+      }
+      emits("update:angle", newValue);
       emits("onInput");
       break;
 
     case "percentageX":
-      emits("update:percentageX", parseInt(event.target.value));
+      if (value > 100) {
+        newValue = 100;
+      } else if (value < 0) {
+        newValue = 0;
+      }
+      emits("update:percentageX", newValue);
       emits("onInput");
       break;
     case "percentageY":
-      emits("update:percentageY", parseInt(event.target.value));
+      if (value > 100) {
+        newValue = 100;
+      } else if (value < 0) {
+        newValue = 0;
+      }
+      emits("update:percentageY", newValue);
       emits("onInput");
       break;
   }

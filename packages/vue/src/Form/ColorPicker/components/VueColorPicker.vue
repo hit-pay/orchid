@@ -23,7 +23,7 @@
       />
     </div>
 
-    <div class="grid grid-cols-8 gap-3 my-3">
+    <div class="grid grid-cols-8 gap-3 my-3 items-center">
       <GradientBar
         v-if="mode == 'gradient'"
         class="col-span-5"
