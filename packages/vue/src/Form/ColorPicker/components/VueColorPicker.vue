@@ -1256,6 +1256,12 @@ const onChangeMode = (value) => {
 };
 
 onMounted(() => {
+  // check is gradient or solid
+  mode.value =
+    props.modelValue.includes("linear") || props.modelValue.includes("radial")
+      ? "gradient"
+      : "solid";
+
   if (mode.value == "gradient") {
     gradientMouseBar = pickerTemplateRef.value?.querySelector(".gradient-bar");
   }

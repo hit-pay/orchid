@@ -8,7 +8,7 @@
     >
       <div
         v-if="modelValue && mode == 'solid'"
-        class="w-[28px] h-[28px] rounded-full"
+        class="w-[28px] h-[28px] rounded-full border"
         :style="`background:${modelValue}`"
       ></div>
       <svg
@@ -28,7 +28,6 @@
       </svg>
     </button>
     <button
-      v-if="variant == 'gradient'"
       type="button"
       :class="gradientType == 'linear' && mode != 'solid' ? 'active' : ''"
       :style="`${iconClasses.linear ? '' : 'padding: 7px;'}`"
@@ -36,7 +35,7 @@
     >
       <div
         v-if="modelValue && gradientType == 'linear' && mode != 'solid'"
-        class="w-[28px] h-[28px] rounded-full"
+        class="w-[28px] h-[28px] rounded-full border"
         :style="`background:${modelValue}`"
       ></div>
       <svg
@@ -67,7 +66,6 @@
       </svg>
     </button>
     <button
-      v-if="variant == 'gradient'"
       type="button"
       :class="gradientType == 'radial' && mode != 'solid' ? 'active' : ''"
       :style="`${iconClasses.radial ? '' : 'padding: 6px;'}`"
@@ -75,7 +73,7 @@
     >
       <div
         v-if="modelValue && gradientType == 'radial' && mode != 'solid'"
-        class="w-[28px] h-[28px] rounded-full"
+        class="w-[28px] h-[28px] rounded-full border"
         :style="`background:${modelValue}`"
       ></div>
       <svg

@@ -97,6 +97,7 @@ const STYLES_FORM = [
           {
             props: {
               label: "Background Color",
+              variant: "gradient",
             },
             key: "card_color_bg",
           },
