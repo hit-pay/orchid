@@ -263,7 +263,7 @@ const snackbarWithLink = (text) => {
       </template>
       <template #Children="{ form }">
         <div
-          class="font-medium flex items-center bg-oc-accent-1-50 p-3 px-7 cursor-pointer -ml-[23px] w-[calc(100%+46px)]"
+          class="font-medium flex items-center bg-oc-accent-1-50 py-4 px-7 cursor-pointer -ml-[23px] w-[calc(100%+46px)]"
           :class="{
             '-mt-4': requestForm[requestForm.indexOf(form) - 1]?.children,
           }"
