@@ -102,7 +102,8 @@ const StoreDesign = {
       group: "sections",
       key: "product_list_1",
       section: "Products",
-      title: "Don’t missed themt",
+      title:
+        "Don’t missed them The drinks that started it all. Our juices are made from the freshest fruits and natural ingredients using a cold-pressed method that keeps nutrients and e",
       description:
         "The drinks that started it all. Our juices are made from the freshest fruits and natural ingredients using a cold-pressed method that keeps nutrients and enzymes intact.",
       variant: "grid",
