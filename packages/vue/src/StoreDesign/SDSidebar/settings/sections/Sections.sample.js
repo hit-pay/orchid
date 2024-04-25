@@ -30,7 +30,7 @@ const PRODUCT_FORM = [
         //   label: "Pick Products",
         // },
       ],
-      hint: "click link https://hitpayapp.com <script>alert('hello')</script>",
+      hint: "click oc link oc-link[here|https://hitpayapp.com]oc-end-link",
       hintWithLink: true,
     },
   },
@@ -40,7 +40,7 @@ const PRODUCT_FORM = [
       icon: "information",
       color: "gray",
       content:
-        "click link https://hitpayapp.com <script>alert('hello')</script>",
+        "click oc link oc-link[category-page|product-categories.index]oc-end-link",
     },
   },
   {
