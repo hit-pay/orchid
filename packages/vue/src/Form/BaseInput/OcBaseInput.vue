@@ -1,15 +1,21 @@
 <script setup>
 import { Tooltip, Icon } from "@/orchidui";
-
-defineProps({
+import { computed } from "vue";
+import { getTextWithLink } from "../../composables/helpers";
+const props = defineProps({
   label: String,
   hint: String,
+  hintWithLink: Boolean,
   errorMessage: String,
   isRequired: Boolean,
   labelIcon: String,
   tooltipText: String,
   tooltipOptions: Object,
   labelClass: String,
+});
+
+const getHintWithLink = computed(() => {
+  return getTextWithLink(props.hint);
 });
 </script>
 
@@ -38,7 +44,12 @@ defineProps({
       v-if="(hint || $slots.hint) && !errorMessage"
       class="text-sm flex items-center text-oc-text-400"
     >
-      <slot name="hint">{{ hint }}</slot>
+      <slot name="hint">
+        <template v-if="hintWithLink">
+          <span v-html="getHintWithLink"></span>
+        </template>
+        <template v-else>{{ hint }}</template>
+      </slot>
     </div>
     <div v-if="errorMessage" class="text-sm text-oc-error flex items-center">
       {{ errorMessage }}

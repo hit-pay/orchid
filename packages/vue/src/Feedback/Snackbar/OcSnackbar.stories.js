@@ -2,6 +2,7 @@ import { Theme, Snackbar } from "@/orchidui";
 
 export default {
   component: Snackbar,
+  tags: ["autodocs"],
 };
 
 export const Default = {

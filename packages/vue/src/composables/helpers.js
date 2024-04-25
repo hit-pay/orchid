@@ -59,3 +59,23 @@ export const preventEventIfNotNumberInput = (event, options = {}) => {
 
   event.preventDefault();
 };
+
+export const getTextWithLink = (rawHtml) => {
+  let tempDivElement = document.createElement("div");
+  tempDivElement.innerHTML = rawHtml;
+  let text = tempDivElement.textContent || tempDivElement.innerText || "";
+  tempDivElement.remove();
+
+  const replacer = (matched) => {
+    let withProtocol = matched;
+    if (!withProtocol.startsWith("https")) {
+      withProtocol = "https://" + matched;
+    }
+    const newStr = `<a class="font-medium" target="_blank"  href="${withProtocol}"> ${matched}</a>`;
+    return newStr;
+  };
+
+  const linkRegex = /(https?\:\/\/)?(www\.)?[^\s]+\.[^\s]+/g;
+  const modifiedStr = text.replace(linkRegex, replacer);
+  return modifiedStr;
+};

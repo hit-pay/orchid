@@ -98,7 +98,7 @@ watch(
     await nextTick();
     halfWindowWidth.value =
       (document.body.clientWidth - snackBar.value.clientWidth) / 2;
-  },
+  }
 );
 </script>
 
