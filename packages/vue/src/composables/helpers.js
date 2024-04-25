@@ -71,7 +71,6 @@ export const getTextWithLink = (rawHtml) => {
 
   const ocLink = text.match(/oc-link/);
   const ocEndLink = text.match(/oc-end-link/);
-  console.log(ocLink, ocEndLink);
 
   if (ocLink && ocEndLink) {
     // only accept one link
