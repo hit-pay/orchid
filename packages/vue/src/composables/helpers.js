@@ -84,7 +84,7 @@ export const getTextWithLink = (rawHtml) => {
       .replace("]", "")
       .replace("oc-link", "");
 
-    let htmlLink = `<oc-sd-link to="${onlyLink.split("|")[1]}">${onlyLink.split("|")[0].replace("-", " ")}</oc-sd-link>`;
+    let htmlLink = `<a target="_blank" class="text-oc-accent-1" href="${onlyLink.split("|")[1]}">${onlyLink.split("|")[0].replace("-", " ")}</a>`;
     return text.replace(fullText, htmlLink);
   } else {
     return text;
