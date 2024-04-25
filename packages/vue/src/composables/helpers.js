@@ -66,16 +66,26 @@ export const getTextWithLink = (rawHtml) => {
   let text = tempDivElement.textContent || tempDivElement.innerText || "";
   tempDivElement.remove();
 
-  const replacer = (matched) => {
-    let withProtocol = matched;
-    if (!withProtocol.startsWith("https")) {
-      withProtocol = "https://" + matched;
-    }
-    const newStr = `<a class="font-medium" target="_blank"  href="${withProtocol}"> ${matched}</a>`;
-    return newStr;
-  };
+  // oc-link[category-page|product-categories.index]oc-end-link
+  // oc-link[here|https://hitpayapp.com]oc-end-link
 
-  const linkRegex = /(https?\:\/\/)?(www\.)?[^\s]+\.[^\s]+/g;
-  const modifiedStr = text.replace(linkRegex, replacer);
-  return modifiedStr;
+  const ocLink = text.match(/oc-link/);
+  const ocEndLink = text.match(/oc-end-link/);
+
+  if (ocLink && ocEndLink) {
+    // only accept one link
+
+    let fullText =
+      text.substring(ocLink.index, ocEndLink.index) + "oc-end-link";
+    let onlyLink = text
+      .substring(ocLink.index, ocEndLink.index)
+      .replace("[", "")
+      .replace("]", "")
+      .replace("oc-link", "");
+
+    let htmlLink = `<a target="_blank" class="text-oc-accent-1" href="${onlyLink.split("|")[1]}">${onlyLink.split("|")[0].replace("-", " ")}</a>`;
+    return text.replace(fullText, htmlLink);
+  } else {
+    return text;
+  }
 };

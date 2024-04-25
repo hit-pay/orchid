@@ -25,6 +25,7 @@ defineProps({
     type: String,
     default: "",
   },
+  titleWidth: String,
 });
 defineEmits({
   "update:modelValue": [],
@@ -102,7 +103,7 @@ const isDropdownOpen = ref([]);
           <div class="ml-4 flex w-full">
             <div class="flex items-center flex-wrap w-full">
               <slot name="title" :item="element">
-                <div class="truncate">
+                <div class="truncate" :class="titleWidth">
                   {{ element.title }}
                 </div>
               </slot>

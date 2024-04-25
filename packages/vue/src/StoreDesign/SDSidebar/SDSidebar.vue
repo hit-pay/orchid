@@ -504,6 +504,7 @@ const isHomePageDropdownOpen = ref(false);
           <DraggableList
             :model-value="sectionList"
             class="w-full cursor-pointer"
+            title-width="w-[300px]"
             @click:element="onClickSection"
             @update:model-value="updateOrderedSection"
           >
