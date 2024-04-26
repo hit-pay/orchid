@@ -1,8 +1,8 @@
 <template>
   <div class="grid grid-cols-3 gap-3">
-    <Input v-model="internal.r" placeholder="0" @blur="updateValue('r')" />
-    <Input v-model="internal.g" placeholder="0" @blur="updateValue('g')" />
-    <Input v-model="internal.b" placeholder="0" @blur="updateValue('b')" />
+    <Input v-model="internal.r" placeholder="100" @blur="updateValue('r')" />
+    <Input v-model="internal.g" placeholder="100" @blur="updateValue('g')" />
+    <Input v-model="internal.b" placeholder="100" @blur="updateValue('b')" />
   </div>
 </template>
 
