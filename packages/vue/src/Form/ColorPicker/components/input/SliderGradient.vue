@@ -57,7 +57,13 @@ const setDeleteBtnPosition = () => {
 };
 const onClickSlider = () => {
   setDeleteBtnPosition();
-  showDeleteBtn.value = true;
+  let countElement =
+    gradientSlider.value.querySelectorAll(".gradient-handle")?.length ?? 2;
+  if (countElement > 2) {
+    showDeleteBtn.value = true;
+  } else {
+    showDeleteBtn.value = false;
+  }
 };
 const onDblclick = ($event) => {
   showDeleteBtn.value = false;

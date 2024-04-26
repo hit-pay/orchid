@@ -73,7 +73,9 @@ const toggleDashboard = () => {
                 @click.stop="toggleDashboard"
               />
               <template #menu>
-                <slot name="menu" />
+                <div @click="isOpen = false">
+                  <slot name="menu" />
+                </div>
               </template>
             </Dropdown>
           </slot>
