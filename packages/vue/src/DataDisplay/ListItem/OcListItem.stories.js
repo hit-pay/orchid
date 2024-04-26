@@ -166,9 +166,10 @@ export const ListGeneral = {
         "http://api.src.test/icons/methods/md/jcb.png",
         "http://api.src.test/icons/methods/md/unionpay.png",
         "http://api.src.test/icons/methods/md/amex.png",
-      ]
-      
-      return { args, methodLogos };
+      ];
+      const onClickEdit = () => [alert("edit clicked")];
+
+      return { args, methodLogos, onClickEdit };
     },
     template: `
       <Theme colorMode="light" class="p-10">
@@ -178,7 +179,7 @@ export const ListGeneral = {
         >
           <template #menu>
             <div class="p-2 border-b border-gray-200">
-              <DropdownItem text="Edit" icon="pencil"/>
+              <DropdownItem text="Edit" icon="pencil" @click="onClickEdit" />
             </div>
             <div class="p-2">
               <DropdownItem text="Delete" variant="destructive" icon="bin"/>
