@@ -1,6 +1,7 @@
 <template>
   <Input
     class="w-[75px]"
+    placeholder="100"
     :model-value="internal"
     @update:model-value="handleInput"
     @blur="emitModelValue"
@@ -44,6 +45,6 @@ watch(
   (newValue, oldValue) => {
     if (newValue !== oldValue) internal.value = newValue;
   },
-  { immediate: true },
+  { immediate: true }
 );
 </script>

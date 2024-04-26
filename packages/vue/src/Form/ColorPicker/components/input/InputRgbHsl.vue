@@ -1,8 +1,8 @@
 <template>
   <div class="grid grid-cols-3 gap-3">
-    <Input v-model="internal.r" @blur="updateValue('r')" />
-    <Input v-model="internal.g" @blur="updateValue('g')" />
-    <Input v-model="internal.b" @blur="updateValue('b')" />
+    <Input v-model="internal.r" placeholder="0" @blur="updateValue('r')" />
+    <Input v-model="internal.g" placeholder="0" @blur="updateValue('g')" />
+    <Input v-model="internal.b" placeholder="0" @blur="updateValue('b')" />
   </div>
 </template>
 
@@ -112,7 +112,7 @@ if (props.inputType === "RGB") {
     (newValue, oldValue) => {
       if (newValue !== oldValue) internal.value = newValue;
     },
-    { immediate: true, deep: true },
+    { immediate: true, deep: true }
   );
 } else {
   watch(
@@ -124,7 +124,7 @@ if (props.inputType === "RGB") {
         b: val.l,
       };
     },
-    { immediate: true, deep: true },
+    { immediate: true, deep: true }
   );
 }
 </script>
