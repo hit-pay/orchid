@@ -23,7 +23,7 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
-  isCloseIcon: {
+  dismissible: {
     type: Boolean,
     default: false,
   },
@@ -98,7 +98,7 @@ watch(
     await nextTick();
     halfWindowWidth.value =
       (document.body.clientWidth - snackBar.value.clientWidth) / 2;
-  }
+  },
 );
 </script>
 
@@ -113,11 +113,12 @@ watch(
         {
           '!fixed z-[1004]': isFloating,
           'gap-x-2 py-3 px-4 items-center': isSmall,
-          'gap-x-5 pt-5 pr-9 pb-6 pl-5 items-start': isBig,
+          'gap-x-5 pt-5 pb-6 px-5 items-start': isBig,
           'gap-x-4 py-4 px-5 items-center': !isBig && !isSmall,
+          '!pr-10': dismissible,
         },
       ]"
-      class="border rounded-lg flex shadow-sm snackbar"
+      class="border rounded-lg flex shadow-sm snackbar relative"
       :style="
         isFloating && position.includes('center')
           ? { left: halfWindowWidth + 'px' }
@@ -141,7 +142,7 @@ watch(
         />
       </template>
       <slot>
-        <div v-if="isBig" class="flex relative flex-col gap-y-4 w-full">
+        <div v-if="isBig" class="flex flex-col gap-y-4 w-full">
           <div class="flex flex-col gap-y-3">
             <span class="font-medium text-oc-text"> {{ title }}</span>
             <span class="text-oc-text-400">{{ description }}</span>
@@ -155,12 +156,6 @@ watch(
             />
             <Button v-if="primaryButton" size="small" v-bind="primaryButton" />
           </div>
-          <div
-            class="cursor-pointer absolute top-4 right-4 text-oc-gray-800 opacity-25 hover:opacity-50"
-            @click="$emit('update:modelValue', false)"
-          >
-            <Icon name="x-circle-filled" width="20" height="20" />
-          </div>
         </div>
         <div
           v-else
@@ -173,6 +168,14 @@ watch(
           <span v-else class="text-oc-text" v-html="content" />
         </div>
       </slot>
+
+      <div
+        v-if="dismissible"
+        class="cursor-pointer absolute top-4 right-4 text-oc-gray-800 opacity-25 hover:opacity-50"
+        @click="$emit('update:modelValue', false)"
+      >
+        <Icon name="x-circle-filled" width="20" height="20" />
+      </div>
     </div>
   </Transition>
 </template>

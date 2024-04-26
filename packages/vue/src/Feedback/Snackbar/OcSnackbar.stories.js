@@ -40,7 +40,7 @@ export const Default = {
     primaryButton: {
       label: "Action",
     },
-    isCloseIcon: true,
+    dismissible: false,
   },
   render: (args) => ({
     components: { Snackbar, Theme },
@@ -56,6 +56,7 @@ export const Default = {
         `,
   }),
 };
+
 export const Variants = {
   args: {
     showIcon: true,
@@ -75,6 +76,39 @@ export const Variants = {
               <Snackbar v-bind="args" color="error"/>
               <Snackbar v-bind="args" color="warning"/>
               <Snackbar v-bind="args" color="gray"/>
+            </div>
+          </Theme>
+        `,
+  }),
+};
+
+export const BigSize = {
+  args: {
+    modelValue1: true,
+    modelValue2: true,
+    modelValue3: true,
+    modelValue4: true,
+    modelValue5: true,
+    showIcon: true,
+    icon: "filled-check",
+    title: "Snackbar title",
+    description: "Changes have been successfully saved",
+    dismissible: true,
+    size: "big",
+  },
+  render: (args) => ({
+    components: { Snackbar, Theme },
+    setup() {
+      return { args };
+    },
+    template: `
+          <Theme colorMode="light">
+            <div class="flex flex-col gap-y-4">
+              <Snackbar v-bind="args" v-model="args.modelValue1" />
+              <Snackbar v-bind="args" color="primary" v-model="args.modelValue2" />
+              <Snackbar v-bind="args" color="error" v-model="args.modelValue3" />
+              <Snackbar v-bind="args" color="warning" v-model="args.modelValue4" />
+              <Snackbar v-bind="args" color="gray" v-model="args.modelValue5" />
             </div>
           </Theme>
         `,
