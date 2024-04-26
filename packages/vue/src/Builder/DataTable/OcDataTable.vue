@@ -372,6 +372,7 @@ const displayFilterData = computed(() => {
       :row-class="rowClass"
       :row-link="rowLink"
       :is-sticky="tableOptions.isSticky"
+      :is-borderless="tableOptions.isBorderless"
       @update:selected="$emit('update:selected', $event)"
       @click:row="$emit('click:row', $event)"
       @hover:cell="$emit('hover:cell', $event)"
