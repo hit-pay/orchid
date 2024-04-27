@@ -81,6 +81,13 @@ export const AllSidebar = {
                 @changeExpanded="args.isExpanded = $event">
               <template #before>
                 <OcAccountSetup :isExpanded="args.isExpanded" :progress="args.progress"/>
+                <OcAccountSetup
+                  :isExpanded="args.isExpanded"
+                  :progress="args.progress"
+                  is-pending
+                  :payout-status="{ label: 'Pending', variant: 'warning'}"
+                  :payment-status="{ label: 'Enabled', variant: 'success'}"
+                />
               </template>
               <template v-slot:label="{menu}">
                 <a href="#" class="whitespace-nowrap px-5 py-3">{{ menu.label }}</a>

@@ -1,44 +1,81 @@
 <script setup>
+import OcIcon from '@/orchidui/MediaAndIcons/Icon/OcIcon.vue';
+import OcChip from '@/orchidui/Feedback/Chip/OcChip.vue';
+
 defineProps({
   isExpanded: Boolean,
   progress: {
     type: Number,
     default: 0,
   },
+  isPending: Boolean,
+  paymentStatus: Object,
+  payoutStatus: Object,
 });
 </script>
 
 <template>
   <div
-    class="account-setup-bg p-1 flex items-center justify-center mb-5"
-    :class="isExpanded ? 'rounded' : 'w-fit rounded-full'"
+    class="p-1 flex items-center justify-center mb-5"
+    :class="[
+      isExpanded ? 'rounded' : 'w-fit rounded-full',
+      isPending ? 'bg-oc-warning-500' : 'account-setup-bg',
+    ]"
   >
     <div
       v-if="isExpanded"
       class="p-3 bg-white rounded-[6px] w-full flex flex-col gap-y-5"
     >
-      <div class="flex flex-col gap-y-3">
+      <template v-if="isPending">
         <div
-          class="flex items-center text-[var(--oc-sidebar-menu-active-text)] justify-between"
+          class="p-2 flex gap-3"
         >
-          <span class="font-medium">Account setup</span>
-          <span class="font-bold">{{ progress }}%</span>
+          <div class="p-3 rounded-full border border-oc-warning-500">
+            <OcIcon name="alert" width="20" height="20" class="text-oc-warning-500" />
+          </div>
+
+          <div class="text-oc-text-500 text-sm">We’re currently reviewing your account.</div>
         </div>
-        <div class="h-[12px] w-full rounded-full bg-oc-gray-100 shadow">
+        <div class="mx-[-8px] mb-[-8px] rounded-b-[6px] border-t border-gray-200 bg-oc-gray-50">
+          <div class="py-4 px-5 text-oc-text-400 font-medium">
+            <div v-if="paymentStatus" class="flex items-center">
+              <span class="flex-1">Payment</span>
+              <OcChip v-bind="paymentStatus" />
+            </div>
+            <div v-if="paymentStatus" class="flex items-center mt-3">
+              <span class="flex-1">Payout</span>
+              <OcChip v-bind="payoutStatus" />
+            </div>
+          </div>
+        </div>
+      </template>
+      <template v-else>
+        <div class="flex flex-col gap-y-3">
           <div
-            class="h-[12px] rounded-full bg-[var(--oc-sidebar-menu-active-icon-active)]"
-            :style="{ width: `${progress}%` }"
-          ></div>
+            class="flex items-center text-[var(--oc-sidebar-menu-active-text)] justify-between"
+          >
+            <span class="font-medium">Account setup</span>
+            <span class="font-bold">{{ progress }}%</span>
+          </div>
+          <div class="h-[12px] w-full rounded-full bg-oc-gray-100 shadow">
+            <div
+              class="h-[12px] rounded-full bg-[var(--oc-sidebar-menu-active-icon-active)]"
+              :style="{ width: `${progress}%` }"
+            ></div>
+          </div>
         </div>
-      </div>
-      <div
-        class="text-sm font-bold text-[var(--oc-sidebar-menu-active-text)] text-center"
-      >
-        COMPLETE NOW ->
-      </div>
+        <div
+          class="text-sm font-bold text-[var(--oc-sidebar-menu-active-text)] text-center"
+        >
+          COMPLETE NOW ->
+        </div>
+      </template>
     </div>
     <div v-else class="bg-white rounded-full p-1">
-      <div class="pie-wrapper progress style-2">
+      <div v-if="isPending" class="p-3 rounded-full">
+        <oc-icon name="alert" width="20" height="20" class="text-oc-warning-500" />
+      </div>
+      <div v-else class="pie-wrapper progress style-2">
         <span class="label">{{ progress }}</span>
         <div
           class="pie"
