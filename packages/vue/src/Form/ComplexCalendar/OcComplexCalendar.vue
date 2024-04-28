@@ -9,10 +9,6 @@ defineProps({
   shortcuts: Array,
   cancelButtonProps: Object,
   submitButtonProps: Object,
-  /**
-   * Props to pass to the calendar component from https://vcalendar.io/
-   */
-  calendarProps: Object,
   modelValue: {
     type: Object,
     default: () => ({
@@ -25,6 +21,10 @@ defineProps({
     default: 2,
   },
   withFooter: {
+    type: Boolean,
+    default: true,
+  },
+  isRange: {
     type: Boolean,
     default: true,
   },
@@ -64,13 +64,16 @@ const changeModelValue = (value) => {
         ref="datePicker"
         :model-value="modelValue"
         :model-modifiers="{
-          range: true,
+          range: isRange,
+        }"
+        :class="{
+          'oc-complex-calendar__calendar--single': !isRange,
         }"
         color="primary"
         borderless
         :columns="countCalendars"
-        :calendar-props="calendarProps"
-        @update:range="$emit('update:modelValue', $event)"
+        v-bind="$attrs"
+        @update:model-value="$emit('update:modelValue', $event)"
       />
     </div>
 
@@ -91,6 +94,12 @@ const changeModelValue = (value) => {
   gap: 0 24px;
   --vc-text-lg: 14px;
   @apply grid-cols-1 md:grid-cols-2 #{!important};
+}
+
+.oc-complex-calendar__calendar--single{
+  .vc-pane-layout {
+    @apply grid-cols-1 #{!important};
+  }
 }
 
 .vc-primary {

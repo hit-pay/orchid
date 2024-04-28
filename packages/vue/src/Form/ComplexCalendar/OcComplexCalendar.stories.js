@@ -52,7 +52,6 @@ export const Calendar = {
     submitButtonProps: {
       label: "Done",
     },
-    calendarProps: null,
     countCalendars: 2,
     withFooter: true,
   },
@@ -64,14 +63,54 @@ export const Calendar = {
     },
     template: `
           <Theme class="h-[400px]">
+            {{ modelValue }}
             <ComplexCalendar
                 v-model="modelValue"
                 :shortcuts="args.shortcuts"
-                :calendarProps="args.calendarProps"
                 :cancel-button-props="args.cancelButtonProps"
                 :submit-button-props="args.submitButtonProps"
                 :count-calendars="args.countCalendars"
                 :with-footer="args.withFooter"
+            />
+          </Theme>
+        `,
+  }),
+};
+
+export const Single = {
+  args: {
+    shortcuts: null,
+    cancelButtonProps: {
+      label: "Clear",
+    },
+    submitButtonProps: {
+      label: "Done",
+    },
+    countCalendars: 1,
+    withFooter: true,
+  },
+  render: (args) => ({
+    components: { ComplexCalendar, Theme },
+    setup() {
+      const modelValue = ref('20/10/2000');
+      const masks = ref({
+        modelValue: 'DD-MM-YYYY',
+      });
+      return { modelValue, args, masks };
+    },
+    template: `
+          <Theme class="h-[400px]">
+            {{ modelValue }}
+            <ComplexCalendar
+                v-model.string="modelValue"
+                :shortcuts="args.shortcuts"
+                :cancel-button-props="args.cancelButtonProps"
+                :submit-button-props="args.submitButtonProps"
+                :count-calendars="args.countCalendars"
+                :is-range="false"
+                :with-footer="false"
+                :masks="masks"
+                
             />
           </Theme>
         `,

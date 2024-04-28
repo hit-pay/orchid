@@ -51,7 +51,7 @@ export const calendarStory = {
             <div class="flex gap-x-6 justify-around">
               <div class="gap-y-4 flex flex-col basis-1/2">
                 <span class="text-xl font-bold">Default Calendar</span>
-                <Calendar v-model="modelValue" v-bind="args" type="default">
+                <Calendar v-model="modelValue" v-bind="args" type="default" />
                 <span v-if="modelValue">{{ modelValue }}</span>
               </div>
               <div class="gap-y-4 flex flex-col basis-1/2">
