@@ -236,29 +236,35 @@ watch(inputTypeSelecting, (value) => {
     </div>
 
     <template #menu>
-      <Calendar
-        v-if="!disabled"
-        :model-value="
-          isRangeInput
-            ? modelValue && modelValue[0]
-              ? [formattedDate[0].toDate(), formattedDate[1].toDate()]
-              : defaultDateRange()
-            : formattedDate
-              ? formattedDate.toDate()
-              : new Date()
-        "
-        :disabled-date="isCalendarIndefinite ? disableAllDates : disabledDate"
-        :max-date="maxDate"
-        :min-date="mintDateComputed"
-        :is-indefinite="isIndefinite"
-        position="inline"
-        :type="type"
-        :date-selecting="inputTypeSelecting"
-        @start-date-selected="selectStartDate"
-        @update:model-value="updateCalendar"
-        @update:is-indefinite="handleIndefinite"
-        @reset-calendar="resetCalendar"
-      />
+      <slot
+        name="menu"
+        :update-calendar="updateCalendar"
+        :reset-calendar="resetCalendar"
+      >
+        <Calendar
+          v-if="!disabled"
+          :model-value="
+            isRangeInput
+              ? modelValue && modelValue[0]
+                ? [formattedDate[0].toDate(), formattedDate[1].toDate()]
+                : defaultDateRange()
+              : formattedDate
+                ? formattedDate.toDate()
+                : new Date()
+          "
+          :disabled-date="isCalendarIndefinite ? disableAllDates : disabledDate"
+          :max-date="maxDate"
+          :min-date="mintDateComputed"
+          :is-indefinite="isIndefinite"
+          position="inline"
+          :type="type"
+          :date-selecting="inputTypeSelecting"
+          @start-date-selected="selectStartDate"
+          @update:model-value="updateCalendar"
+          @update:is-indefinite="handleIndefinite"
+          @reset-calendar="resetCalendar"
+        />
+      </slot>
     </template>
   </Dropdown>
 </template>
