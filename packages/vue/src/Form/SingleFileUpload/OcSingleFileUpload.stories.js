@@ -67,7 +67,11 @@ export const Upload = {
   render: () => ({
     components: { SingleFileUpload },
     setup() {
-      const file = ref();
+      const file = ref({
+        current: {
+          path: "https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/covers/small/99d696e564ba45fbaa0fb2e3b43d0e27.jpg",
+        },
+      });
       return {
         file,
       };
