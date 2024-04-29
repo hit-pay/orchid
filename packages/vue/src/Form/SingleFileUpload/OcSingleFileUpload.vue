@@ -203,7 +203,7 @@ const onUploadImage = ($event) => {
           class="relative group w-fit rounded overflow-hidden"
         >
           <video
-            v-if="currentFile?.file.type.includes('video')"
+            v-if="currentFile?.file?.type.includes('video')"
             autoplay
             loop
             :src="videoUrl"
@@ -218,7 +218,7 @@ const onUploadImage = ($event) => {
               <div class="py-2 flex flex-col">
                 <div
                   v-if="
-                    !currentFile?.file.type.includes('video') && allowToEdit
+                    !currentFile?.file?.type.includes('video') && allowToEdit
                   "
                   class="flex p-3 cursor-pointer items-center gap-x-3"
                   @click="onEditFile"
@@ -240,7 +240,7 @@ const onUploadImage = ($event) => {
             </template>
           </Dropdown>
           <ModalCropper
-            v-if="!currentFile?.file.type.includes('video') && isEditOpen"
+            v-if="!currentFile?.file?.type.includes('video') && isEditOpen"
             v-model="isEditOpen"
             :img="editImg"
             @close="
