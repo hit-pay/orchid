@@ -73,7 +73,7 @@ const toggleDashboard = () => {
                 @click.stop="toggleDashboard"
               />
               <template #menu>
-                <div @click="isOpen = false">
+                <div @mouseleave="isOpen = false">
                   <slot name="menu" />
                 </div>
               </template>

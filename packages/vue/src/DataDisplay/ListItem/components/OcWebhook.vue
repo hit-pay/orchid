@@ -33,7 +33,9 @@ const isOpen = ref(false);
           @click="$emit('more')"
         />
         <template #menu>
-          <slot name="menu" />
+          <div @mouseleave="isOpen = false">
+            <slot name="menu" />
+          </div>
         </template>
       </Dropdown>
     </div>

@@ -236,3 +236,58 @@ export const ListGeneral = {
     `,
   }),
 };
+
+export const OcListItemPage = {
+  args: {
+    pages: [
+      {
+        id: "9bd54837-2156-417a-9577-8ff20f895769",
+        business_id: "8ba6c772-8c2d-4f3b-a7d6-3f1f0648fa77",
+        title: "Page Title example",
+        description: `<p><span style="font-size:14px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic maxime recusandae velit, assumenda ullam beatae obcaecati ab ad doloremque quia dolores necessitatibus eligendi nulla asperiores modi voluptas totam. Iste, animi.</span></p>`,
+        enabled: 1,
+        page_path: "page-path-1",
+        page_cover_id: null,
+        page_cover_url: null,
+        created_at: "2024-04-18T09:23:39+08:00",
+        updated_at: "2024-04-18T09:23:39+08:00",
+      },
+      {
+        id: "9bb6447e-edab-4c8c-9652-8186cffc8402",
+        business_id: "8ba6c772-8c2d-4f3b-a7d6-3f1f0648fa77",
+        title: "Page Title example",
+        description:
+          '<p><span style="font-size:14px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic maxime recusandae velit, assumenda ullam beatae obcaecati ab ad doloremque.</span></p>',
+        enabled: 0,
+        page_path: "page-path-2",
+        page_cover_id: null,
+        page_cover_url: null,
+        created_at: "2024-04-02T23:22:35+08:00",
+        updated_at: "2024-04-18T09:22:56+08:00",
+      },
+    ],
+  },
+  render: (args) => ({
+    components: { Theme, ListItem, DropdownItem },
+    setup() {
+      return { args };
+    },
+    template: `
+      <Theme colorMode="light" class="p-10">
+        <ListItem
+          type="page"
+          v-bind="args"
+        >
+          <template #menu>
+            <div class="p-2 border-b border-gray-200">
+              <DropdownItem text="Edit" icon="pencil" />
+            </div>
+            <div class="p-2">
+              <DropdownItem text="Delete" variant="destructive" icon="bin"/>
+            </div>
+          </template>
+        </ListItem>
+      </Theme>
+    `,
+  }),
+};
