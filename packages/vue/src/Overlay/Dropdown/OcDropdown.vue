@@ -66,6 +66,7 @@ watch(() => props.modelValue, getMaxHeightWithoutOverflow);
 
 defineExpose({
   dropdownScroll,
+  toggleDropdown,
 });
 </script>
 
@@ -84,7 +85,7 @@ defineExpose({
       :popper-style="popperStyle"
       :popper-options="popperOptions"
     >
-      <div class="w-[inherit] flex" @click="toggleDropdown">
+      <div class="w-[inherit] flex" @click.stop="toggleDropdown">
         <slot />
       </div>
       <template #popper>

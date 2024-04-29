@@ -46,11 +46,12 @@ const iconProps = computed(() => {
     },
   };
 });
+const dropdownRef = ref();
 </script>
 
 <template>
-  <BaseInput>
-    <Dropdown v-model="isOpen">
+  <BaseInput @click.stop="() => dropdownRef?.toggleDropdown()">
+    <Dropdown ref="dropdownRef" v-model="isOpen">
       <Input
         :model-value="inputValue"
         icon="drop"
