@@ -247,8 +247,9 @@ export const OcListItemPage = {
         description: `<p><span style="font-size:14px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic maxime recusandae velit, assumenda ullam beatae obcaecati ab ad doloremque quia dolores necessitatibus eligendi nulla asperiores modi voluptas totam. Iste, animi.</span></p>`,
         enabled: 1,
         page_path: "page-path-1",
-        page_cover_id: null,
-        page_cover_url: null,
+        page_cover_id: "12345",
+        page_cover_url:
+          "https://blog.hitpayapp.com/content/images/size/w2000/2024/02/-new--Clarissa-Blog-Design---4-.png",
         created_at: "2024-04-18T09:23:39+08:00",
         updated_at: "2024-04-18T09:23:39+08:00",
       },
@@ -276,7 +277,7 @@ export const OcListItemPage = {
       <Theme colorMode="light" class="p-10">
         <ListItem
           type="page"
-          v-bind="args"
+          v-for="page in args.pages" :page="page"
         >
           <template #menu>
             <div class="p-2 border-b border-gray-200">
