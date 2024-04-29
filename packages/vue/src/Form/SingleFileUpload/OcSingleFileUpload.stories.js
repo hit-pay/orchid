@@ -35,6 +35,7 @@ export const Default = {
       return { radios, variant, modelValue, args };
     },
     template: `
+          {{modelValue }}
           <div class="p-5 rounded flex flex-col gap-y-2" :class="args.isImageOnly ? '' : 'bg-oc-bg-dark'">
             <RadioGroup
                 v-if="!args.isImageOnly"
@@ -48,6 +49,7 @@ export const Default = {
             <SingleFileUpload
                 class="max-w-[400px] self-center"
                 v-model="modelValue"
+                format="object"
                 :variant="variant"
                 :is-preview="args.isPreview"
                 :accept="args.accept"

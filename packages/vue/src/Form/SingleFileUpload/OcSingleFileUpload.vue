@@ -6,6 +6,10 @@ import { ModalCropper } from "@/orchidui/Cropper.js";
 import SingleOnlyImageUpload from "./OcSingleOnlyImageUpload.vue";
 
 const props = defineProps({
+  format: {
+    type: String,
+    default: "array",
+  },
   modelValue: Object,
   isPreview: Boolean,
   isImageOnly: Boolean,
@@ -78,7 +82,7 @@ onMounted(() => {
 const onDrop = (ev) => {
   ev.preventDefault();
   const dropFiles = ev.dataTransfer.files;
-  onChangeFile({ target: { files: dropFiles } }, true);
+  onChangeFile({ target: { files: dropFiles } }, props.format === "object");
 };
 const saveLinkFile = () => {
   if (!fileLink.value || !fileName.value) return;
@@ -88,7 +92,10 @@ const changeImage = (url) => {
   currentFile.value.fileUrl = url;
   isEditOpen.value = false;
   editImg.value = "";
-  emit("update:modelValue", currentFile.value);
+  emit(
+    "update:modelValue",
+    props.format === "object" ? currentFile.value : [currentFile.value]
+  );
 };
 
 const checkFileLink = async (link) => {
@@ -106,6 +113,10 @@ const onEditFile = () => {
   isDropdownOpen.value = false;
   isEditOpen.value = true;
 };
+
+const onUploadImage = ($event) => {
+  emit("update:modelValue", $event);
+};
 </script>
 
 <template>
@@ -120,8 +131,8 @@ const onEditFile = () => {
       :accept="accept"
       :uploaded-image="currentFile"
       :image-classes="imageClasses"
-      @update:uploaded-image="$emit('update:modelValue', $event)"
-      @change="onChangeFile($event, true)"
+      @update:uploaded-image="onUploadImage"
+      @change="onChangeFile($event, props.format === 'object')"
       @delete="onDeleteFile(0)"
     />
     <template v-else>
@@ -177,7 +188,7 @@ const onEditFile = () => {
             class="hidden"
             type="file"
             :accept="accept"
-            @change="onChangeFile($event, true)"
+            @change="onChangeFile($event, props.format === 'object')"
           />
         </div>
       </div>
