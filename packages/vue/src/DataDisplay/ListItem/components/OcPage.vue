@@ -19,7 +19,7 @@ const getPageThumbnail = (url) => {
 </script>
 
 <template>
-  <div class="w-full py-4 px-1 mb-3 flex hover:opacity-90">
+  <div class="w-full p-5 flex">
     <div v-if="page.page_cover_url" class="min-w-[100px]">
       <div
         class="w-[100px] h-[100px] rounded !bg-cover"
@@ -46,13 +46,15 @@ const getPageThumbnail = (url) => {
           </Dropdown>
         </div>
       </div>
-      <div class="line-clamp-2 opacity-70 mb-3 max-w-[80%]">
+      <div class="line-clamp-2 mb-3 max-w-[80%] text-oc-text-400">
         {{ stripHtml(page.description) }}
       </div>
       <div class="w-full text-sm lg:mt-4 flex flex-wrap items-center">
         <span class="mr-3">
-          <span class="text-oc-text-400">Last updated : </span>
-          {{ dayjs(page.updated_at).format("DD MMM YYYY") }}</span
+          <span class="text-oc-text-300">Last updated : </span>
+          <span class="text-oc-text-400 font-medium">{{
+            dayjs(page.updated_at).format("DD MMM YYYY")
+          }}</span></span
         >
         <Chip
           class="ml-auto md:ml-0"

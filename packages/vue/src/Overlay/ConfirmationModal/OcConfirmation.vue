@@ -39,7 +39,8 @@ const classIcon = {
       <Icon :name="icon ?? variantIcon[variant]" />
     </div>
     <div class="text-center">
-      <slot name="description">{{ description }}</slot>
+      <!-- TODO: add validation only accept bold, etc -->
+      <slot name="description"><span v-html="description"></span></slot>
     </div>
   </div>
 </template>
