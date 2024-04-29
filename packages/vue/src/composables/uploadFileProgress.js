@@ -3,9 +3,9 @@ import { ref } from "vue";
 export const useUploadFileProgress = (maxSize, emit) => {
   const currentFiles = ref([]);
   const isErrorMaxSize = ref(false);
-  const onChangeFile = (event) => {
+  const onChangeFile = (event, singleFileUpload = false) => {
     const uploadFiles = [...event.target.files].filter(
-      (f) => !currentFiles.value.some((file) => file.fileName === f.name),
+      (f) => !currentFiles.value.some((file) => file.fileName === f.name)
     );
     isErrorMaxSize.value =
       uploadFiles.reduce((acc, file) => acc + file.size, 0) >
@@ -29,7 +29,10 @@ export const useUploadFileProgress = (maxSize, emit) => {
         isLoaded: false,
         extension: file.name.split(".").at(-1) || "png",
       });
-      emit("update:modelValue", currentFiles.value);
+      emit(
+        "update:modelValue",
+        !singleFileUpload ? currentFiles.value : currentFiles.value[0]
+      );
       if (file) {
         addListeners(reader, i);
         reader.readAsDataURL(file);
@@ -49,7 +52,7 @@ export const useUploadFileProgress = (maxSize, emit) => {
     const progressFile = () => {
       currentFiles.value[index].progress =
         Number(
-          (event.loaded / currentFiles.value[index].totalSize).toFixed(2),
+          (event.loaded / currentFiles.value[index].totalSize).toFixed(2)
         ) * 100;
     };
 
@@ -64,14 +67,14 @@ export const useUploadFileProgress = (maxSize, emit) => {
 
   const addListeners = (reader, index) => {
     reader.addEventListener("loadstart", (e) =>
-      handleEventFile(e, reader, index),
+      handleEventFile(e, reader, index)
     );
     reader.addEventListener("load", (e) => handleEventFile(e, reader, index));
     reader.addEventListener("loadend", (e) =>
-      handleEventFile(e, reader, index),
+      handleEventFile(e, reader, index)
     );
     reader.addEventListener("progress", (e) =>
-      handleEventFile(e, reader, index),
+      handleEventFile(e, reader, index)
     );
     reader.addEventListener("error", (e) => handleEventFile(e, reader, index));
     reader.addEventListener("abort", (e) => handleEventFile(e, reader, index));
@@ -80,12 +83,14 @@ export const useUploadFileProgress = (maxSize, emit) => {
   const onDeleteFile = (index) => {
     emit(
       "onRemoveFile",
-      currentFiles.value.find((_, i) => i === index),
+      currentFiles.value.find((_, i) => i === index)
     );
 
     currentFiles.value.splice(index, 1);
-
-    emit("update:modelValue", currentFiles.value);
+    emit(
+      "update:modelValue",
+      currentFiles.value.length > 0 ? currentFiles.value : null
+    );
   };
   return {
     isErrorMaxSize,
