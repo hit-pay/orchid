@@ -5,6 +5,7 @@ import OcWebhook from "./components/OcWebhook.vue";
 import OcPayment from "./components/OcPayment.vue";
 import OcGeneral from "./components/OcGeneral.vue";
 import OcTerminal from "./components/OcTerminal.vue";
+import OcPage from "./components/OcPage.vue";
 
 const props = defineProps({
   isActive: Boolean,
@@ -51,6 +52,8 @@ const getTypeComponent = computed(() => {
       return OcGeneral;
     case "terminal":
       return OcTerminal;
+    case "page":
+      return OcPage;
     default:
       return OcTimeLine;
   }
