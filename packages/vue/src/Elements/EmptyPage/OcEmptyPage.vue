@@ -118,11 +118,13 @@ const sizes = computed(() => ({
     </div>
     <div class="flex flex-col items-center" :class="sizes[size].containerInfo">
       <span :class="sizes[size].title" class="font-medium">{{ title }}</span>
-      <span
-        :class="sizes[size].description"
-        class="text-oc-text-400 text-center"
-        >{{ description }}</span
-      >
+      <slot name="description">
+        <span
+          :class="sizes[size].description"
+          class="text-oc-text-400 text-center"
+          >{{ description }}</span
+        >
+      </slot>
     </div>
     <Button
       v-if="isButton"
