@@ -64,8 +64,15 @@ export const Default = {
 export const Upload = {
   render: () => ({
     components: { SingleFileUpload },
+    setup() {
+      const file = ref();
+      return {
+        file,
+      };
+    },
     template: `
-          <SingleFileUpload/>
+          {{file}}
+          <SingleFileUpload v-model="file" is-preview/>
         `,
   }),
 };

@@ -51,11 +51,11 @@ const editImg = ref("");
 
 const { currentFiles, onChangeFile, onDeleteFile } = useUploadFileProgress(
   props.maxSize,
-  emit,
+  emit
 );
 
 const videoUrl = computed(() =>
-  URL.createObjectURL(currentFiles.value?.[0].file),
+  URL.createObjectURL(currentFiles.value?.[0].file)
 );
 const currentFile = computed(() => currentFiles.value?.[0]);
 onMounted(() => {
@@ -78,7 +78,7 @@ onMounted(() => {
 const onDrop = (ev) => {
   ev.preventDefault();
   const dropFiles = ev.dataTransfer.files;
-  onChangeFile({ target: { files: dropFiles } });
+  onChangeFile({ target: { files: dropFiles } }, true);
 };
 const saveLinkFile = () => {
   if (!fileLink.value || !fileName.value) return;
@@ -121,7 +121,7 @@ const onEditFile = () => {
       :uploaded-image="currentFile"
       :image-classes="imageClasses"
       @update:uploaded-image="$emit('update:modelValue', $event)"
-      @change="onChangeFile"
+      @change="onChangeFile($event, true)"
       @delete="onDeleteFile(0)"
     />
     <template v-else>
@@ -177,7 +177,7 @@ const onEditFile = () => {
             class="hidden"
             type="file"
             :accept="accept"
-            @change="onChangeFile"
+            @change="onChangeFile($event, true)"
           />
         </div>
       </div>
