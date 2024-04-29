@@ -282,6 +282,13 @@ export const OcListItemPage = {
           <template #menu>
             <div class="p-2 border-b border-gray-200">
               <DropdownItem text="Edit" icon="pencil" />
+              <DropdownItem text="Edit" icon="pencil" />
+              <DropdownItem text="Edit" icon="pencil" />
+              <DropdownItem text="Edit" icon="pencil" />
+              <DropdownItem text="Edit" icon="pencil" />
+              <DropdownItem text="Edit" icon="pencil" />
+              <DropdownItem text="Edit" icon="pencil" />
+              <DropdownItem text="Edit" icon="pencil" />
             </div>
             <div class="p-2">
               <DropdownItem text="Delete" variant="destructive" icon="bin"/>
