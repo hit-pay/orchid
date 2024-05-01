@@ -48,7 +48,7 @@ const preventEventIfNotNumberInput = (event) => {
     :tooltip-text="tooltipText"
   >
     <div
-      class="flex w-fit justify-between gap-x-3 h-[36px] items-center min-w-[100px] border rounded px-1"
+      class="flex justify-between gap-x-3 h-[36px] items-center border rounded px-1"
       :class="[
         inputClass,
         isDisabled ? 'bg-oc-bg-dark' : '',
@@ -57,7 +57,7 @@ const preventEventIfNotNumberInput = (event) => {
     >
       <Button
         variant="secondary"
-        class="w-[28px] aspect-square"
+        class="w-[28px] shrink-0 aspect-square"
         size="small"
         icon-class="shrink-0"
         :is-disabled="isDisabled"
@@ -67,14 +67,14 @@ const preventEventIfNotNumberInput = (event) => {
       <input
         :value="modelValue"
         :class="modelValue ? 'font-medium' : 'text-oc-text-300'"
-        class="outline-none text-center w-[60px] bg-transparent"
+        class="outline-none text-center max-w-[calc(100%-76px)] bg-transparent"
         placeholder="1"
         @keydown="preventEventIfNotNumberInput"
         @input="$emit('update:modelValue', $event.target.value)"
       />
       <Button
         variant="secondary"
-        class="w-[28px] aspect-square"
+        class="w-[28px] shrink-0 aspect-square"
         size="small"
         icon-class="shrink-0"
         :is-disabled="isDisabled"

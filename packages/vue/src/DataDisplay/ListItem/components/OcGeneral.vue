@@ -49,7 +49,7 @@ const toggleDashboard = () => {
               {{ title }}
             </span>
 
-            <div v-if="chips.length" class="flex gap-3">
+            <div v-if="chips.length" class="flex gap-3 shrink-0">
               <Chip
                 v-for="(item, i) in chips"
                 :key="i"
@@ -57,7 +57,7 @@ const toggleDashboard = () => {
                 :variant="item.variant"
                 :icon="item.icon"
                 :icon-tooltip="item.iconTooltip"
-                class="font-medium"
+                class="font-medium shrink-0"
               />
             </div>
           </div>

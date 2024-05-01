@@ -49,7 +49,7 @@ const props = defineProps({
   },
   modalId: {
     type: String,
-    default: '',
+    default: "",
   },
   confirmButtonProps: {
     type: Object,
@@ -113,7 +113,7 @@ const sizeClasses = computed(() => ({
       @click="onClickOutside"
     ></div>
     <div
-      class="z-[1008] shadow-normal w-[calc(100%-40px)] bg-oc-bg-light rounded-xl flex flex-col max-h-screen overflow-y-auto"
+      class="z-[1008] shadow-normal w-[calc(100%-40px)] max-h-[96vh] bg-oc-bg-light rounded-xl flex flex-col overflow-y-auto"
       :class="sizeClasses[size]"
     >
       <div
@@ -147,10 +147,7 @@ const sizeClasses = computed(() => ({
         </slot>
       </div>
 
-      <div
-        :id="modalId"
-        :class="isBorderless ? 'px-7' : 'p-7'"
-      >
+      <div :id="modalId" :class="isBorderless ? 'px-7' : 'p-7'">
         <slot></slot>
       </div>
 
