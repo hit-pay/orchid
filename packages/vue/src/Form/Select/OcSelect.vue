@@ -72,6 +72,7 @@ const emit = defineEmits({
   "max-option-allowed-set": [],
   onSearchKeywords: "",
   close: [],
+  toggle: [],
 });
 
 const query = ref(props.searchKeywords ?? "");
@@ -206,7 +207,7 @@ watch(filterableOptions, () => {
 
 watch(isDropdownOpened, (value) => {
   if (!value) {
-    emit('close');
+    emit("close");
     return;
   }
 
@@ -246,6 +247,7 @@ defineExpose({
       :popper-style="{ maxWidth: `${maxPopperWidth}px` }"
       :popper-options="popperOptions"
       :is-disabled="isDisabled || isReadonly"
+      @update:model-value="$emit('toggle')"
     >
       <div
         class="border min-h-[36px] w-full px-3 flex justify-between items-center cursor-pointer gap-x-3 rounded"
@@ -300,7 +302,7 @@ defineExpose({
         </template>
         <template v-else>
           <span
-            class="whitespace-nowrap flex gap-x-3 items-center overflow-hidden"
+            class="whitespace-nowrap flex gap-x-3 text-lg md:text-base items-center overflow-hidden"
           >
             <Icon v-if="icon" :name="icon" width="16" height="16" />
 
@@ -382,7 +384,7 @@ defineExpose({
           <Button
             v-if="isAddNew"
             variant="secondary"
-            class="flex items-center justify-center gap-x-[6px]"
+            class="flex items-center py-2 justify-center gap-x-[6px] sticky bottom-0 bg-white z-10"
             size="small"
             is-transparent
             @click="$emit('addNew')"
