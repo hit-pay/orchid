@@ -246,7 +246,7 @@ const displayDeleteMessage = computed(() => {
   } else if (deleteMenuItems.value.subitem) {
     itemTitle = deleteMenuItems.value.subitem.title;
   }
-  return `Do you want to delete ${itemTitle}`;
+  return `Do you want to delete <b class="font-medium">"${itemTitle}"<b> from menu?`;
 });
 const confirmDeleteMenu = () => {
   isLoading.value = true;
