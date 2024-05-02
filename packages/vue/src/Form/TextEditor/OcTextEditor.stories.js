@@ -48,6 +48,7 @@ export const Default = {
     },
     template: `
           <Theme>
+          {{ modelValue}}
             <TextEditor v-model="modelValue" v-bind="args" @update:image="onUpdateImage"/>
 
             <div class="flex gap-y-6 flex-col mt-8">Preview
