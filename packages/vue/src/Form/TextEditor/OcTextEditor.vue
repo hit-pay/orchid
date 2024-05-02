@@ -103,7 +103,17 @@ const checkStates = (value) => {
   isBlockquoteActive.value = quill.value.getQuill().getFormat().blockquote;
   activeListFormat.value = quill.value.getQuill().getFormat().list;
   activeAlign.value = quill.value.getQuill().getFormat().align;
-  emit("update:modelValue", value || "");
+  // check if innerText null remove tags
+  let domTest = document.createElement('div')
+  domTest.innerHTML = value
+  if (!domTest.innerText) {
+    // reset
+    emit("update:modelValue","");
+  } else {
+    emit("update:modelValue", value || "");
+  }
+  domTest.remove()
+
 };
 const undo = () => {
   quill.value.getQuill().history.undo();
