@@ -36,7 +36,8 @@ const props = defineProps({
 });
 const popper = ref();
 const dropdownScroll = ref();
-const toggleDropdown = async () => {
+const toggleDropdown = async (e) => {
+  if (!e?.target) return;
   if (props.isDisabled) return;
   // Need to add a timeout because the popup position cannot be determined while the element is display:none (v-show), which is required for the appearance animation
   setTimeout(() => popper.value.popperInstance.update(), 0);
