@@ -170,7 +170,7 @@ const onPaste = (e) => {
         <template #menu>
           <div
             ref="countryListRef"
-            class="flex flex-col max-h-[300px] py-2 overflow-y-scroll"
+            class="flex flex-col max-h-[300px] py-2 overflow-y-scroll hidden-scrollbar"
           >
             <div class="px-3 py-1 sticky top-0 bg-oc-bg-light z-[1000]">
               <Input
@@ -213,4 +213,14 @@ const onPaste = (e) => {
 
 <style>
 @import url("https://cdn.jsdelivr.net/gh/lipis/flag-icons@latest/css/flag-icons.min.css");
+
+.hidden-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  /* Hide scrollbar for Chrome, Safari and Opera */
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
 </style>
