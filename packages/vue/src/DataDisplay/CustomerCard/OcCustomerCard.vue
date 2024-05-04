@@ -92,7 +92,11 @@ const emit = defineEmits(["addCustomer", "editCustomer", "closeCustomer"]);
             v-if="!isBeneficiary"
             label="Phone"
             :content="
-              customer?.phone_number ? `+${customer.phone_number}` : '-'
+              customer?.phone_number_country_code && customer?.phone_number
+                ? `+${customer.phone_number_country_code} ${customer.phone_number}`
+                : customer?.phone_number
+                ? customer.phone_number
+                : '-'
             "
           />
           <ListDetail
