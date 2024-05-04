@@ -518,7 +518,7 @@ const displayFilterData = computed(() => {
         @update:model-value="changePage"
       />
       <div
-        v-if="cursorOption"
+        v-if="cursorOption || cursorOption"
         class="flex w-full gap-5 md:justify-start justify-center"
       >
         <PrevNext
