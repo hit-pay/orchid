@@ -500,7 +500,7 @@ const displayFilterData = computed(() => {
       </template>
     </Table>
     <div
-      v-if="paginationOption"
+      v-if="paginationOption || cursorOption"
       class="flex gap-3 items-center"
       :class="
         paginationOption && paginationOption.last_page === 1
