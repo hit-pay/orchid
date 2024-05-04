@@ -500,7 +500,7 @@ const displayFilterData = computed(() => {
       </template>
     </Table>
     <div
-      v-if="paginationOption"
+      v-if="paginationOption || cursorOption"
       class="flex gap-3 items-center"
       :class="
         paginationOption && paginationOption.last_page === 1
@@ -518,7 +518,7 @@ const displayFilterData = computed(() => {
         @update:model-value="changePage"
       />
       <div
-        v-if="cursorOption || cursorOption"
+        v-if="cursorOption"
         class="flex w-full gap-5 md:justify-start justify-center"
       >
         <PrevNext
