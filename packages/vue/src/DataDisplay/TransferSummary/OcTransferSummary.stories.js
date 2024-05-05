@@ -17,6 +17,8 @@ export const overview = {
       source_amount: "134.20",
       source_currency: "sgd",
       fee: "3.50",
+      fee_currency: "SGD",
+      transfer_method: "Local",
     },
   },
   render: (args) => ({
@@ -38,11 +40,12 @@ export const withFxData = {
   args: {
     hasFxData: true,
     transfer: {
-      exchange_rate: "1.34",
-      source_amount: "134.20",
+      exchange_rate: "0.73774386",
+      source_amount: "1,355.48",
       source_currency: "sgd",
       payment_currency: "usd",
       fee: "3.50",
+      fee_currency: "SGD",
       transfer_method: "Local",
     },
   },

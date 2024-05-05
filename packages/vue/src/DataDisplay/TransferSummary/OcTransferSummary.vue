@@ -31,15 +31,10 @@ const formattedTransferMethod = computed(() =>
       <ListDetail
         class="justify-between font-medium [&>span]:text-base"
         label="FX Rate"
-        :content="`${formattedSourceCurrency} ${transfer.source_amount}`"
+        :content="`${formattedSourceCurrency} 1 = ${formattedPaymentCurrency} ${transfer.exchange_rate}`"
         variant="big"
         :show-copy-tooltip="false"
       />
-      <span class="block text-right text-sm text-oc-text-400">
-        {{
-          `${formattedSourceCurrency} 1 = ${formattedPaymentCurrency} ${transfer.exchange_rate}`
-        }}
-      </span>
     </div>
     <ListDetail
       class="justify-between font-medium [&>span]:text-base"
