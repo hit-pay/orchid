@@ -476,7 +476,9 @@ const isHomePageDropdownOpen = ref(false);
               v-model="isHomePageDropdownOpen"
               @mouseover="isHomePageDropdownOpen = true"
             >
-              {{ submenuLabel }}
+             <span class="flex items-center gap-2">
+              {{ submenuLabel }} <Icon :class="isHomePageDropdownOpen ? 'rotate-180' : ''" name="chevron-down" width="14" height="14" />
+             </span>
               <template #menu>
                 <div
                   v-if="sidebarMenuActive.children"
