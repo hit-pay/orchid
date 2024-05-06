@@ -12,6 +12,7 @@ import { SDMenus } from "@/orchidui/StoreDesign";
 import InputColors from "./Form/InputColors.vue";
 import SelectFont from "./Form/SelectFont.vue";
 const props = defineProps({
+  previewMode: String,
   requestForm: Object,
   generalData: Object,
   sectionData: Object,
@@ -228,6 +229,7 @@ const snackbarWithLink = (text) => {
       :errors="formErrors"
       :values="formValues"
       :json-form="requestForm"
+      :preview-mode="previewMode"
       @on-update="onUpdateForm"
     >
       <template #Snackbar="{ form }">
@@ -304,6 +306,7 @@ const snackbarWithLink = (text) => {
                 :errors="formErrors"
                 :values="formValues"
                 :json-form="form.children"
+                :preview-mode="previewMode"
                 @on-update="onUpdateForm"
               >
                 <template #Snackbar="slot">

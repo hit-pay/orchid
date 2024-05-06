@@ -12,6 +12,7 @@ import { DraggableList } from "@/orchidui/Draggable.js";
 import { RequestForm, ThumbnailSection } from "@/orchidui/StoreDesign";
 import { computed } from "vue";
 const props = defineProps({
+  previewMode: String,
   values: {
     type: Object,
   },
@@ -600,6 +601,7 @@ const isHomePageDropdownOpen = ref(false);
               :section-data="sectionActiveValues"
               :request-form="sectionActive.form"
               :options="options"
+              :preview-mode="previewMode"
               @edit:images="
                 $emit('edit:images', { ...$event, section: sectionActive.key })
               "
