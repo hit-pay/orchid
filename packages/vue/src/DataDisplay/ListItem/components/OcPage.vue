@@ -19,7 +19,7 @@ const getPageThumbnail = (url) => {
 </script>
 
 <template>
-  <div class="w-full p-5 flex">
+  <div class="w-full p-5 flex" @mouseleave="isOpen = false">
     <div v-if="page.page_cover_url" class="min-w-[100px]">
       <div
         class="w-[100px] h-[100px] rounded !bg-cover"
@@ -39,9 +39,7 @@ const getPageThumbnail = (url) => {
               <Icon class="text-oc-text-400" name="dots-vertical" />
             </div>
             <template #menu>
-              <div @mouseleave="isOpen = false">
-                <slot name="menu" />
-              </div>
+              <slot name="menu" />
             </template>
           </Dropdown>
         </div>
