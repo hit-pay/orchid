@@ -330,6 +330,7 @@ const filteredPages = computed(() => {
       is-link
       :link-key="linkKey"
       :model-value="modelValue"
+      title-width="w-[300px]"
       @update:model-value="update"
     >
       <template #action-item="{ item }">
@@ -361,6 +362,7 @@ const filteredPages = computed(() => {
           <DraggableList
             v-model="item.children"
             class="w-full"
+            title-width="w-[300px]"
             is-children
             is-link
             :link-key="linkKey"
@@ -402,6 +404,7 @@ const filteredPages = computed(() => {
                 <DraggableList
                   v-model="slot.item.children"
                   class="w-full"
+                  title-width="w-[300px]"
                   is-children
                   is-link
                   :link-key="linkKey"
