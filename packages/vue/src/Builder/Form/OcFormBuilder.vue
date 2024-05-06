@@ -49,6 +49,7 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+  previewMode: String, // only for store design
 });
 
 const emit = defineEmits(["onUpdate"]);
@@ -169,18 +170,32 @@ const setErrorMessage = () => {
 };
 
 const setFormClass = (form) => {
-  if (form.show_if) {
+  if (form.show_if || form.show_if_preview) {
     let formClassName = form.class ? form.class : "";
 
-    if (form.show_if_value !== undefined) {
-      if (form.show_if_value !== modelValue.value[form.show_if]) {
-        formClassName = formClassName + " hidden";
+    if (form.show_if) {
+      // show if by other setting value
+      if (form.show_if_value !== undefined) {
+        if (form.show_if_value !== modelValue.value[form.show_if]) {
+          formClassName = formClassName + " hidden";
+        }
+      } else if (form.show_if_not !== undefined) {
+        if (form.show_if_not === modelValue.value[form.show_if]) {
+          formClassName = formClassName + " hidden";
+        }
       }
-    } else if (form.show_if_not !== undefined) {
-      if (form.show_if_not === modelValue.value[form.show_if]) {
-        formClassName = formClassName + " hidden";
+    } else if (form.show_if_preview) {
+      if (form.show_if_preview_only !== undefined) {
+        if (form.show_if_preview_only !== props.previewMode) {
+          formClassName = formClassName + " hidden";
+        }
+      } else if (form.show_if_preview_not !== undefined) {
+        if (form.show_if_preview_not === props.previewMode) {
+          formClassName = formClassName + " hidden";
+        }
       }
     }
+
     if (typeof form.name === "object") {
       formClass.value[getFirstName(form.name)] = formClassName;
     } else {
@@ -198,7 +213,7 @@ watch(
   },
   {
     deep: true,
-  },
+  }
 );
 
 watch(
@@ -208,7 +223,7 @@ watch(
   },
   {
     deep: true,
-  },
+  }
 );
 
 onMounted(() => {
@@ -265,6 +280,9 @@ onMounted(() => {
         "
         :on-update="onUpdate"
       />
+      <slot
+        :name="`after-${typeof form.name === 'object' ? getFirstName(form.name) : form.name}`"
+      ></slot>
     </div>
   </div>
 </template>
