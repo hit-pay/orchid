@@ -76,7 +76,7 @@ Quill.register(Size, true);
 const id = ref(
   Math.random()
     .toString(36)
-    .replace(/[^a-zA-Z]+/g, ""),
+    .replace(/[^a-zA-Z]+/g, "")
 );
 const isUndoActive = ref(false);
 const isRedoActive = ref(false);
@@ -91,6 +91,7 @@ const activeListFormat = ref("");
 const activeAlign = ref("");
 const quill = ref();
 
+const loaded = ref(false);
 // need for upload to server
 const base64Images = ref(props.image);
 
@@ -104,16 +105,20 @@ const checkStates = (value) => {
   activeListFormat.value = quill.value.getQuill().getFormat().list;
   activeAlign.value = quill.value.getQuill().getFormat().align;
   // check if innerText null remove tags
-  let domTest = document.createElement('div')
-  domTest.innerHTML = value
+  let domTest = document.createElement("div");
+  domTest.innerHTML = value;
+
+  if (!loaded.value) {
+    return;
+  }
+
   if (!domTest.innerText) {
     // reset
-    emit("update:modelValue","");
+    emit("update:modelValue", "");
   } else {
     emit("update:modelValue", value || "");
   }
-  domTest.remove()
-
+  domTest.remove();
 };
 const undo = () => {
   quill.value.getQuill().history.undo();
@@ -230,6 +235,7 @@ const setAlign = (align = undefined) => {
 };
 onMounted(() => {
   setSize(props.initialFontSize || props.fontSizes[0].value);
+  loaded.value = true;
 });
 </script>
 
