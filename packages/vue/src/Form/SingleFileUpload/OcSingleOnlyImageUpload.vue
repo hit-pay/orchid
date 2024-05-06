@@ -72,7 +72,7 @@ const changeImage = (url) => {
               "
             >
               <Icon width="16" height="16" name="pencil" />
-              <span>Edit</span>
+              <span>Edit Image</span>
             </div>
             <div
               class="flex p-3 cursor-pointer items-center text-oc-error gap-x-3"

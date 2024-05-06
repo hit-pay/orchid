@@ -30,7 +30,7 @@ const emit = defineEmits([
   "update:uploadedImages",
   "onRemoveImage",
   "onEditImage",
-  "delete"
+  "delete",
 ]);
 const isDropdownOpen = ref([]);
 const isEditOpen = ref(false);
@@ -47,26 +47,26 @@ const onDeleteFile = (index) => {
   deleteIndex.value = index;
 };
 
-const resetFile = ref(false)
+const resetFile = ref(false);
 
 const confirmDeleteFile = () => {
   const deletedImage = props.uploadedImages.find(
-    (_, i) => i === deleteIndex.value,
+    (_, i) => i === deleteIndex.value
   );
 
   if (deletedImage.current) {
     emit("onRemoveImage", deletedImage);
   } else {
     emit("delete", deleteIndex.value);
-    resetFile.value = true
+    resetFile.value = true;
     setTimeout(() => {
-      resetFile.value = false
-    }, 1000)
+      resetFile.value = false;
+    }, 1000);
   }
 
   emit(
     "update:uploadedImages",
-    props.uploadedImages.filter((_, i) => i !== deleteIndex.value),
+    props.uploadedImages.filter((_, i) => i !== deleteIndex.value)
   );
   deleteConfirmationModal.value = false;
 };
@@ -160,7 +160,7 @@ const onChange = ($event) => {
                     "
                   >
                     <Icon width="16" height="16" name="pencil" />
-                    <span>Edit</span>
+                    <span>Edit Image</span>
                   </div>
                   <div
                     class="flex p-3 cursor-pointer items-center text-oc-error gap-x-3"
