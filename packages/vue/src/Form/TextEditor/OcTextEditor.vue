@@ -176,7 +176,7 @@ const uploadImage = () => {
 
   const input = document.createElement("input");
   input.type = "file";
-  input.accept = "image/*";
+  input.accept = "jpg,.jpeg,.png,.webp,.gif";
   input.onchange = () => {
     const file = input.files[0];
     const reader = new FileReader();
