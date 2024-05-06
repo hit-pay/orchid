@@ -64,7 +64,7 @@ const copyLink = async () => {
       <template #title>
         <div class="flex items-center gap-x-3">
           <span class="font-medium">{{ additionalTitle }}</span>
-          <Chip :variant="chipVariant" :label="chipLabel" />
+          <Chip v-if="chipVariant" :variant="chipVariant" :label="chipLabel" />
         </div>
       </template>
       <template #description>

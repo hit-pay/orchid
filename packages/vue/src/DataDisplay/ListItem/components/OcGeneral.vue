@@ -33,6 +33,7 @@ const toggleDashboard = () => {
   <div
     class="px-5 py-4 rounded border border-gray-200 group"
     :class="{ 'hover:shadow-normal': !isDisabled }"
+    @mouseleave="isOpen = false"
   >
     <div class="flex items-center gap-x-4 w-full">
       <slot name="logo" />
@@ -73,9 +74,7 @@ const toggleDashboard = () => {
                 @click.stop="toggleDashboard"
               />
               <template #menu>
-                <div @mouseleave="isOpen = false">
-                  <slot name="menu" />
-                </div>
+                <slot name="menu" />
               </template>
             </Dropdown>
           </slot>
