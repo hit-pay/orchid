@@ -226,6 +226,13 @@ watch(
   }
 );
 
+watch(
+  () => props.previewMode,
+  () => {
+    setModelValues(props.values);
+  }
+);
+
 onMounted(() => {
   setModelValues(props.values);
   setErrorMessage(props.errors);
