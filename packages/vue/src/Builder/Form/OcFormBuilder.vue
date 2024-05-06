@@ -280,9 +280,6 @@ onMounted(() => {
         "
         :on-update="onUpdate"
       />
-      <slot
-        :name="`after-${typeof form.name === 'object' ? getFirstName(form.name) : form.name}`"
-      ></slot>
     </div>
   </div>
 </template>
