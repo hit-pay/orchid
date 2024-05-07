@@ -31,6 +31,7 @@ const emit = defineEmits([
   "onRemoveImage",
   "onEditImage",
   "delete",
+  "onMaxFileExceed",
 ]);
 const isDropdownOpen = ref([]);
 const isEditOpen = ref(false);
@@ -51,7 +52,7 @@ const resetFile = ref(false);
 
 const confirmDeleteFile = () => {
   const deletedImage = props.uploadedImages.find(
-    (_, i) => i === deleteIndex.value
+    (_, i) => i === deleteIndex.value,
   );
 
   if (deletedImage.current) {
@@ -66,7 +67,7 @@ const confirmDeleteFile = () => {
 
   emit(
     "update:uploadedImages",
-    props.uploadedImages.filter((_, i) => i !== deleteIndex.value)
+    props.uploadedImages.filter((_, i) => i !== deleteIndex.value),
   );
   deleteConfirmationModal.value = false;
 };
@@ -88,11 +89,15 @@ const updateLink = (link) => {
 };
 
 const onChange = ($event) => {
-  let limit =
+  let isExceedLimit =
     props.uploadedImages.length + $event.target.files.length > props.maxImages;
-  if (!props.maxImages || (props.maxImages && !limit)) {
-    emit("change", $event);
+
+  if (props.maxImages && isExceedLimit) {
+    emit("onMaxFileExceed", isExceedLimit);
+    return;
   }
+
+  emit("change", $event);
 };
 </script>
 
