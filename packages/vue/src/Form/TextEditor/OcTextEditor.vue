@@ -49,6 +49,10 @@ const props = defineProps({
     validator: (value) => ["default", "text-only"].includes(value),
     default: "default",
   },
+  placeholder: {
+    type: String,
+    default: "",
+  },
 });
 const emit = defineEmits(["update:modelValue", "update:image"]);
 
@@ -76,7 +80,7 @@ Quill.register(Size, true);
 const id = ref(
   Math.random()
     .toString(36)
-    .replace(/[^a-zA-Z]+/g, "")
+    .replace(/[^a-zA-Z]+/g, ""),
 );
 const isUndoActive = ref(false);
 const isRedoActive = ref(false);
@@ -263,6 +267,7 @@ onMounted(() => {
         class="min-h-[200px]"
         @update:content="checkStates"
         @paste="isValidPasedText"
+        :placeholder="placeholder"
       >
         <template #toolbar>
           <div
