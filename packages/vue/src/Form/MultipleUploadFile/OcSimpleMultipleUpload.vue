@@ -31,7 +31,7 @@ const emit = defineEmits([
   "onRemoveImage",
   "onEditImage",
   "delete",
-  "on-max-images-error",
+  "onMaxFileExceed",
 ]);
 const isDropdownOpen = ref([]);
 const isEditOpen = ref(false);
@@ -89,13 +89,15 @@ const updateLink = (link) => {
 };
 
 const onChange = ($event) => {
-  let limit =
+  let isExceedLimit =
     props.uploadedImages.length + $event.target.files.length > props.maxImages;
-  if (!props.maxImages || (props.maxImages && !limit)) {
-    emit("change", $event);
-  } else if (props.maxImages) {
-    emit("on-max-images-error", limit);
+
+  if (props.maxImages && isExceedLimit) {
+    emit("onMaxFileExceed", isExceedLimit);
+    return;
   }
+
+  emit("change", $event);
 };
 </script>
 

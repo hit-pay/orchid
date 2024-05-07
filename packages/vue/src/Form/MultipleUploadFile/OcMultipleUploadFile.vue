@@ -10,7 +10,7 @@ const emit = defineEmits([
   "onEditFile",
   "onRemoveFile",
   "onExceedMaxFileSize",
-  "onMaxImagesError",
+  "onMaxFileExceed",
 ]);
 const props = defineProps({
   modelValue: {
@@ -95,7 +95,7 @@ onMounted(() => {
         @on-edit-image="$emit('onEditFile', $event)"
         @on-remove-image="$emit('onRemoveFile', $event)"
         @delete="onDeleteFile"
-        @on-max-images-error="$emit('onMaxImagesError', $event)"
+        @on-max-file-exceed="$emit('onMaxFileExceed', $event)"
       >
         <template #action="slotData">
           <slot
