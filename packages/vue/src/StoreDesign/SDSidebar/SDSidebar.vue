@@ -59,6 +59,7 @@ const emit = defineEmits({
   "update:field": [],
   "close:settings": [],
   changeTheme: [],
+  "update:preview-mode": []
 });
 
 const presetOptions = computed(() => {
@@ -622,6 +623,7 @@ const isHomePageDropdownOpen = ref(false);
                   ...$event,
                 })
               "
+              @update:preview-mode="$emit('update:preview-mode',$event)"
             >
             </RequestForm>
           </div>
