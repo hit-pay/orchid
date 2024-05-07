@@ -54,14 +54,16 @@ const HEADER_FORM = [
     },
   },
   {
-    type: "Snackbar",
-    name: "desktop_preview_message",
+    name: "message_device_warning",
     show_if_preview: true,
     show_if_preview_not: "desktop",
+    type: "Snackbar",
     props: {
+      size: "small",
       icon: "information",
       color: "gray",
-      content: "show only if preview mode not desktop",
+      content:
+        "Switch to oc-emit[update:preview-mode|desktop|desktop-preview]oc-end-emit to see the change",
     },
   },
   {
