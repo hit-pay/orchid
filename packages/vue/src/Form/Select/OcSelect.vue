@@ -199,7 +199,6 @@ const selectAll = () => {
   }
 };
 const baseInput = ref();
-const maxPopperWidth = ref(0);
 
 watch(filterableOptions, () => {
   optionsKey.value = new Date().toISOString();
@@ -216,9 +215,15 @@ watch(isDropdownOpened, (value) => {
   });
 });
 
-onMounted(() => {
-  maxPopperWidth.value = baseInput.value.$el.offsetWidth;
-});
+const maxPopperWidth = ref(0);
+const popperStyle = computed(() => {
+  return { maxWidth: `${maxPopperWidth.value}` }
+})
+const onUpdateDropdown = () => {
+  emit('toggle')
+  maxPopperWidth.value = baseInput.value?.$el?.offsetWidth ? `${baseInput.value?.$el?.offsetWidth}px` : '100%'
+}
+
 const dropdownRef = ref();
 defineExpose({
   dropdownRef,
@@ -244,10 +249,10 @@ defineExpose({
       :distance="4"
       popper-class="w-full"
       placement="bottom-end"
-      :popper-style="{ maxWidth: `${maxPopperWidth}px` }"
+      :popper-style="popperStyle"
       :popper-options="popperOptions"
       :is-disabled="isDisabled || isReadonly"
-      @update:model-value="$emit('toggle')"
+      @update:model-value="onUpdateDropdown"
     >
       <div
         class="border min-h-[36px] w-full px-3 flex justify-between items-center cursor-pointer gap-x-3 rounded"
