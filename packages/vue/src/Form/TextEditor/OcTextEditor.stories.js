@@ -36,6 +36,7 @@ export const Default = {
     ],
     initialFontSize: "14px",
     variant: "default",
+    placeholder: "Placeholder",
   },
   render: (args) => ({
     components: { TextEditor, Theme },
