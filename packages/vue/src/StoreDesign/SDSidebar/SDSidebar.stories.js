@@ -253,6 +253,11 @@ export const Default = {
         console.log("field updated :", data);
       };
 
+      const onUpdatePreviewMode = (to) => {
+        console.log("preview mode to :", to);
+
+      }
+
       return {
         sidebarConfig,
         sidebarActive,
@@ -267,6 +272,7 @@ export const Default = {
         content,
         options,
         onUpdateField,
+        onUpdatePreviewMode
       };
     },
     template: `
@@ -288,6 +294,7 @@ export const Default = {
                     @edit:banner="onEditBanner"
                     @delete:banner="onDeleteBanner"
                     @update:field="onUpdateField"
+                    @update:preview-mode="onUpdatePreviewMode"
                     >
                   </SDSidebar>
                 </div>

@@ -11,6 +11,9 @@ import { ref } from "vue";
 import { SDMenus } from "@/orchidui/StoreDesign";
 import InputColors from "./Form/InputColors.vue";
 import SelectFont from "./Form/SelectFont.vue";
+
+import { getTextWithLink } from "../../composables/helpers";
+
 const props = defineProps({
   previewMode: String,
   requestForm: Object,
@@ -27,6 +30,17 @@ const props = defineProps({
     },
   },
 });
+
+
+const emit = defineEmits([
+  "update:generalData",
+  "update:sectionData",
+  "edit:images",
+  "delete:images",
+  "add:images",
+  "update:field",
+  "update:preview-mode"
+]);
 
 const generalFormData = ref(props.generalData);
 const sectionFormData = ref(props.sectionData);
@@ -75,24 +89,45 @@ const setDefaultData = (form) => {
     }
   }
 };
+
+
+// only for Snackbar
+const ocEmitName = ref([]);
+const ocEmitValue = ref([]);
+const ocEmitLabel = ref([]);
+
+const emitCustomAction = (name) => {
+  if(['update:preview-mode'].includes(ocEmitName.value[name])){
+    emit(ocEmitName.value[name], ocEmitValue.value[name])
+  }
+}
+
 Object.values(props.requestForm).forEach((form) => {
   if (form.type === "Children") {
     form.children.forEach((childForm) => {
       setDefaultData(childForm);
+      if(childForm?.type === 'Snackbar' && childForm?.props?.content?.includes('oc-emit')){
+        getTextWithLink(childForm.props.content, (link, value) => {
+          ocEmitName.value[childForm.name] = value[0]
+          ocEmitValue.value[childForm.name] = value[1]
+          ocEmitLabel.value[childForm.name] = childForm.props.content.replace(link, `<span class="underline cursor-pointer">${value[2].replace("-", " ")}</span>`)
+        })
+      }
     });
   } else {
     setDefaultData(form);
+    if(form.type === 'Snackbar'){
+      if(form.type === 'Snackbar' && form?.props?.content?.includes('oc-emit')){
+        getTextWithLink(form.props.content, (link, value) => {
+          ocEmitName.value[form.name] = value[0]
+          ocEmitValue.value[form.name] = value[1]
+          ocEmitLabel.value[form.name] = form.props.content.replace(link,  `<span class="underline cursor-pointer">${value[2].replace("-", " ")}</span>`)
+        })
+      }
+    }
   }
 });
 
-const emit = defineEmits([
-  "update:generalData",
-  "update:sectionData",
-  "edit:images",
-  "delete:images",
-  "add:images",
-  "update:field",
-]);
 
 const updateData = (form, value, general = false) => {
   if (general) {
@@ -214,11 +249,6 @@ const toggleSubForm = (name) => {
   }
 };
 
-import { getTextWithLink } from "../../composables/helpers";
-
-const snackbarWithLink = (text) => {
-  return getTextWithLink(text);
-};
 </script>
 <template>
   <div>
@@ -232,10 +262,13 @@ const snackbarWithLink = (text) => {
       :preview-mode="previewMode"
       @on-update="onUpdateForm"
     >
-      <template #Snackbar="{ form }">
-        <Snackbar v-bind="form.props"
-          ><span v-html="snackbarWithLink(form.props.content)"></span
-        ></Snackbar>
+      <template #Snackbar="{form}">
+        <Snackbar v-bind="form.props" >
+          <span 
+            v-if="form.props.content.includes('oc-emit')" 
+            @click="emitCustomAction(form.name)" v-html="ocEmitLabel[form.name]"></span>
+          <span v-else v-html="getTextWithLink(form.props.content)"></span>
+        </Snackbar>
       </template>
       <template #Tabs="{ form, value }">
         <Tabs
@@ -310,11 +343,13 @@ const snackbarWithLink = (text) => {
                 @on-update="onUpdateForm"
               >
                 <template #Snackbar="slot">
-                  <Snackbar v-bind="slot.form.props"
-                    ><span
-                      v-html="snackbarWithLink(slot.form.props.content)"
-                    ></span
-                  ></Snackbar>
+                  <Snackbar v-bind="slot.form.props" >
+                    <span 
+                      v-if="slot.form.props.content.includes('oc-emit')" 
+                      @click="emitCustomAction(slot.form.name)" v-html="ocEmitLabel[slot.form.name]">
+                    </span>
+                    <span v-else v-html="getTextWithLink(slot.form.props.content)"></span>
+                  </Snackbar>
                 </template>
                 <template #Menus="slot">
                   <SDMenus
