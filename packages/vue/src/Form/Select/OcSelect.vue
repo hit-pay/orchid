@@ -215,9 +215,9 @@ watch(isDropdownOpened, (value) => {
   });
 });
 
-const maxPopperWidth = ref(0);
+const maxPopperWidth = ref('100%');
 const popperStyle = computed(() => {
-  return { maxWidth: `${maxPopperWidth.value}` }
+  return { maxWidth: maxPopperWidth.value }
 })
 const onUpdateDropdown = () => {
   emit('toggle')
