@@ -60,6 +60,14 @@ const copyToClipBoard = () => {
       />
       <Tooltip position="top" arrow-hidden :distance="7">
         <Icon
+          v-if="item?.isCopyButton"
+          class="p-2 cursor-pointer rounded-sm hover:border-oc-accent-1-50-tr active:text-oc-text-400 hover:text-oc-text hover:bg-oc-accent-1-50-tr"
+          :name="isCopied ? 'check' : 'copy'"
+          :class="isCopied ? '!text-oc-success' : ''"
+          @click="copyToClipBoard"
+        />
+        <Icon
+          v-else
           class="p-2 cursor-pointer rounded-sm hover:border-oc-accent-1-50-tr active:text-oc-text-400 hover:text-oc-text hover:bg-oc-accent-1-50-tr"
           :name="item.icon"
           @click="item.onClick"
@@ -69,7 +77,13 @@ const copyToClipBoard = () => {
           <div
             class="py-2 px-3 whitespace-nowrap text-sm font-medium text-oc-text-400"
           >
-            {{ item.tooltipContent }}
+            {{
+              item?.isCopyButton
+                ? isCopied
+                  ? "Link copied!"
+                  : "Copy link"
+                : item.tooltipContent
+            }}
           </div>
         </template>
       </Tooltip>
