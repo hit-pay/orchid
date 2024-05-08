@@ -137,6 +137,9 @@ const args = {
     },
     actions: [
       {
+        isCopyButton: true,
+      },
+      {
         icon: "pencil",
         tooltipContent: "Edit",
         onClick: () => {
