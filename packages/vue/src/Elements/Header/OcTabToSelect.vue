@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import { Icon, Dropdown, DropdownItem } from "@/orchidui";
 
 defineEmits({
@@ -17,11 +17,16 @@ const activeMenu = computed(() =>
 const currentRef = ref();
 const menuRefs = ref([]);
 const changeCurrentPosition = (clickEvent) => {
+  if (!currentRef.value) return;
   const selectedMenu =
     clickEvent?.target || menuRefs.value[props.menus.indexOf(activeMenu.value)];
   currentRef.value.style.width = `${selectedMenu.offsetWidth}px`;
   currentRef.value.style.left = `${selectedMenu.offsetLeft}px`;
 };
+watch(
+  () => props.modelValue,
+  () => changeCurrentPosition(),
+);
 onMounted(() => changeCurrentPosition());
 </script>
 <template>
