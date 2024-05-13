@@ -147,7 +147,14 @@ const setModelValues = (newValues) => {
       modelValue.value[getFirstName(form.name)] = modelValueData;
       setFormClass(form);
     } else {
-      modelValue.value[form.name] = newValues[form.name] ?? "";
+      if (!form.props.parentKey) {
+        modelValue.value[form.name] = newValues[form.name] ?? "";
+      } else {
+        modelValue.value[form.props.parentKey] =
+          newValues[form.props.parentKey] ?? {};
+        modelValue.value[form.props.parentKey][form.name] =
+          newValues[form.props.parentKey][form.name] ?? "";
+      }
       setFormClass(form);
     }
   });
@@ -259,9 +266,13 @@ onMounted(() => {
         v-if="getComponentByType(form.type)"
         v-bind="form.props"
         :model-value="
-          modelValue[
-            typeof form.name === 'object' ? getFirstName(form.name) : form.name
-          ]
+          form.props.parentKey
+            ? modelValue?.[form.props.parentKey]?.[form.name]
+            : modelValue[
+                typeof form.name === 'object'
+                  ? getFirstName(form.name)
+                  : form.name
+              ]
         "
         :error-message="
           errorMessage[
@@ -276,9 +287,13 @@ onMounted(() => {
         :form-id="id"
         :form="form"
         :value="
-          modelValue[
-            typeof form.name === 'object' ? getFirstName(form.name) : form.name
-          ]
+          form.props.parentKey
+            ? modelValue?.[form.props.parentKey]?.[form.name]
+            : modelValue[
+                typeof form.name === 'object'
+                  ? getFirstName(form.name)
+                  : form.name
+              ]
         "
         :error="
           errorMessage[
