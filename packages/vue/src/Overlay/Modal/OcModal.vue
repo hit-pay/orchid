@@ -147,7 +147,13 @@ const sizeClasses = computed(() => ({
         </slot>
       </div>
 
-      <div :id="modalId" :class="isBorderless ? 'px-7' : 'p-7'">
+      <div
+        :id="modalId"
+        :class="[
+          size === 'small' ? 'p-5' : 'p-7',
+          isBorderless ? 'py-0' : '',
+        ]"
+      >
         <slot></slot>
       </div>
 
