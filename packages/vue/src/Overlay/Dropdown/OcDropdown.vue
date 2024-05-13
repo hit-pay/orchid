@@ -68,6 +68,7 @@ watch(() => props.modelValue, getMaxHeightWithoutOverflow);
 defineExpose({
   dropdownScroll,
   toggleDropdown,
+  popper,
 });
 </script>
 
