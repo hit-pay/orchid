@@ -40,7 +40,7 @@ const StoreDesign = {
       color_primary: "#FE7E21",
       color_primary_text: "#FFFFFF",
       color_shadow: "rgba(0, 0, 0, 0.12)",
-      card_color_bg: "#FFFFFF",
+      card_color_bg: "rgba(0, 0, 0, 0.12)",
       card_color_text: "#03102F",
       // Button
       // Button Color using primary color
