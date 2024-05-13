@@ -147,7 +147,7 @@ const setModelValues = (newValues) => {
       modelValue.value[getFirstName(form.name)] = modelValueData;
       setFormClass(form);
     } else {
-      if (!form.props.parentKey) {
+      if (!form.props?.parentKey) {
         modelValue.value[form.name] = newValues[form.name] ?? "";
       } else {
         modelValue.value[form.props.parentKey] =
@@ -266,7 +266,7 @@ onMounted(() => {
         v-if="getComponentByType(form.type)"
         v-bind="form.props"
         :model-value="
-          form.props.parentKey
+          form.props?.parentKey
             ? modelValue?.[form.props.parentKey]?.[form.name]
             : modelValue[
                 typeof form.name === 'object'
@@ -287,7 +287,7 @@ onMounted(() => {
         :form-id="id"
         :form="form"
         :value="
-          form.props.parentKey
+          form.props?.parentKey
             ? modelValue?.[form.props.parentKey]?.[form.name]
             : modelValue[
                 typeof form.name === 'object'
