@@ -53,7 +53,9 @@ defineProps({
           <div
             class="flex whitespace-nowrap items-start gap-x-3 text-xs text-oc-text-300"
           >
-            <span class="uppercase">{{ title }}</span>
+            <slot name="title">
+              <span class="uppercase">{{ title }}</span>
+            </slot>
             <Tooltip
               position="top"
               :popper-options="{ strategy: 'fixed' }"
