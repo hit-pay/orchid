@@ -39,6 +39,7 @@ const props = defineProps({
 });
 const inputRef = ref();
 const isDragover = ref(false);
+const isUploading = ref(false);
 const { isErrorMaxSize, currentFiles, onChangeFile, onDeleteFile } =
   useUploadFileProgress(props.maxSize, emit);
 
@@ -65,6 +66,16 @@ onMounted(() => {
     currentFiles.value = formattedModelValue;
   }
 });
+
+const onChange = (event) => {
+  isUploading.value = true;
+  onChangeFile(event);
+};
+
+const onDelete = (index) => {
+  isUploading.value = false;
+  onDeleteFile(index);
+};
 </script>
 
 <template>
@@ -130,8 +141,8 @@ onMounted(() => {
               </div>
               <span class="text-oc-text-400 text-sm">{{ file?.fileName }}</span>
             </div>
-
             <div
+              v-if="isUploading"
               class="w-[100px] h-[16px] absolute right-0 flex items-center z-40"
               :class="{ 'on-end-loading': file.progress === 100 }"
             >
@@ -151,9 +162,10 @@ onMounted(() => {
               name="bin"
               class="opacity-0 text-oc-error cursor-pointer absolute right-0"
               :class="{
-                'on-enable-delete': file.progress === 100,
+                'on-enable-delete': file.progress === 100 && isUploading,
+                'opacity-100': !isUploading,
               }"
-              @click="onDeleteFile(index)"
+              @click="onDelete(index)"
             />
           </div>
         </div>
@@ -176,7 +188,7 @@ onMounted(() => {
             @dragover="isDragover = true"
             @dragleave="isDragover = false"
             @drop="isDragover = false"
-            @change="onChangeFile"
+            @change="onChange"
           />
           <div
             v-if="!currentFiles.length"
