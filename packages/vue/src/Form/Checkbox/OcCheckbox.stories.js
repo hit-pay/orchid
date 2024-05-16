@@ -12,6 +12,7 @@ export const Default = {
     isPartial: false,
     isDisabled: false,
     label: "Text",
+    topLabel: "Text",
     hint: "Text",
   },
   render: (args) => ({
@@ -30,6 +31,7 @@ export const Default = {
                   :errorMessage="args.errorMessage"
                   :is-partial="args.isPartial"
                   :label="args.label"
+                  :top-label="args.topLabel"
                   :hint="args.hint"
                   :is-disabled="args.isDisabled"
                   v-model="value"

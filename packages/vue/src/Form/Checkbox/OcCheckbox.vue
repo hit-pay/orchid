@@ -7,6 +7,7 @@ const props = defineProps({
   isPartial: Boolean,
   isDisabled: Boolean,
   label: String,
+  topLabel: String,
   hint: String,
   errorMessage: String,
 });
@@ -39,7 +40,7 @@ const onInput = () =>
 </script>
 
 <template>
-  <BaseInput class="w-fit" label="" :hint="hint" :error-message="errorMessage">
+  <BaseInput class="w-fit" :label="topLabel" :hint="hint" :error-message="errorMessage">
     <label class="flex items-center gap-x-3 cursor-pointer">
       <div
         class="w-5 h-5 shrink-0 border flex items-center justify-center rounded-sm"
