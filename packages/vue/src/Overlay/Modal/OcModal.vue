@@ -111,7 +111,8 @@ const sizeClasses = computed(() => ({
     <div
       class="w-full h-full absolute top-0 left-0 z-[1007]"
       @click="onClickOutside"
-    ></div>
+    />
+
     <div
       class="z-[1008] shadow-normal w-[calc(100%-40px)] max-h-[96vh] bg-oc-bg-light rounded-xl flex flex-col overflow-y-auto"
       :class="sizeClasses[size]"
