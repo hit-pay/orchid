@@ -73,9 +73,7 @@ onMounted(() => {
       :label="label"
       :hint="hint"
       :error-message="
-        errorMessage
-          ? isErrorMaxSize && `File(s) is more than ${maxSize}MB`
-          : ''
+        isErrorMaxSize ? `File(s) is more than ${maxSize}MB` : errorMessage
       "
     >
       <OcSimpleMultipleUpload
@@ -109,7 +107,11 @@ onMounted(() => {
       <div
         v-else
         class="relative border rounded p-3 min-w-[30rem] flex flex-col"
-        :class="isErrorMaxSize ? 'border-oc-error' : 'border-oc-gray-200'"
+        :class="
+          isErrorMaxSize || errorMessage
+            ? 'border-oc-error'
+            : 'border-oc-gray-200'
+        "
       >
         <div class="input-file-uploaded flex flex-col gap-y-3">
           <div
