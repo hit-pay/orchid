@@ -79,7 +79,7 @@ const props = defineProps({
     type: String,
     validator: (value) =>
       ["text", "decimal", "numeric", "tel", "search", "email", "url"].includes(
-        value
+        value,
       ),
     default: "text",
   },
@@ -97,7 +97,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(["update:modelValue", "blur", "focus"]);
+const emit = defineEmits(["update:modelValue", "blur", "focus", "paste"]);
 
 const attrs = useAttrs();
 
@@ -190,6 +190,7 @@ const isPasswordInput = computed(() => props.inputType === "password");
               $emit('blur');
             "
             @input="$emit('update:modelValue', $event.target.value)"
+            @paste="$emit('paste')"
           />
         </div>
       </div>
