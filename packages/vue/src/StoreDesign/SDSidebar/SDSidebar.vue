@@ -631,8 +631,12 @@ const isHomePageDropdownOpen = ref(false);
               "
               @update:preview-mode="$emit('update:preview-mode', $event)"
             >
-              <template #SelectProducts>
-                <slot name="SelectProducts" />
+              <template #SelectProducts="slot">
+                <slot
+                  name="SelectProducts"
+                  v-bind="slot"
+                  :section-key="sectionActive.key"
+                />
               </template>
             </RequestForm>
           </div>

@@ -270,8 +270,8 @@ const toggleSubForm = (name) => {
       :preview-mode="previewMode"
       @on-update="onUpdateForm"
     >
-      <template #SelectProducts>
-        <slot name="SelectProducts"></slot>
+      <template #SelectProducts="slot2">
+        <slot name="SelectProducts" v-bind="slot2"></slot>
       </template>
       <template #Snackbar="{ form }">
         <Snackbar v-bind="form.props">
@@ -355,8 +355,8 @@ const toggleSubForm = (name) => {
                 :preview-mode="previewMode"
                 @on-update="onUpdateForm"
               >
-                <template #SelectProducts>
-                  <slot name="SelectProducts"></slot>
+                <template #SelectProducts="slot2">
+                  <slot name="SelectProducts" v-bind="slot2"></slot>
                 </template>
                 <template #Snackbar="slot">
                   <Snackbar v-bind="slot.form.props">
