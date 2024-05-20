@@ -256,6 +256,10 @@ const showImageWidthToolbar = ref(false);
 const updateImageWidth = (val) => {
   imageWidth.value = val;
   quill.value.getQuill().format("width", `${imageWidth.value}%`);
+  window
+    .getSelection()
+    ?.focusNode?.querySelector("img")
+    .setAttribute("style", "margin:auto;display:block");
 };
 
 const onClickContent = () => {
