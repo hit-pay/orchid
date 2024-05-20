@@ -87,7 +87,7 @@ defineExpose({
       :popper-style="popperStyle"
       :popper-options="popperOptions"
     >
-      <div class="w-[inherit] flex" @click.stop="toggleDropdown">
+      <div class="w-[inherit] flex" @click="toggleDropdown">
         <slot />
       </div>
       <template #popper>
