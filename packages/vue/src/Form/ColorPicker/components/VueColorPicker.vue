@@ -26,19 +26,14 @@
       />
     </div>
 
-    <div
-      v-if="mode == 'gradient'"
-      class="grid grid-cols-8 gap-3 my-3 items-center"
-    >
+    <div v-if="mode == 'gradient'" class="grid items-center mb-5">
       <GradientBar
-        class="col-span-5"
         :gradientType="gradientType"
         @onAddColor="addColor"
         @onMouseDown="handleGradientItemOnMouseDown"
         @onDeleteColor="deleteColor"
       />
       <GradientSettings
-        class="col-span-3"
         v-model:percentageY="gradientAngle.percentageY"
         v-model:angle="gradientAngle.angle"
         v-model:percentageX="gradientAngle.percentageX"
@@ -1636,79 +1631,6 @@ onMounted(() => {
   width: 100%;
   height: 14px;
   z-index: 0;
-}
-
-.ck-cp-linear-angle-container input[type="range"] {
-  margin: 0;
-  border-radius: 10px;
-  z-index: 10;
-  appearance: none;
-  background-color: var(--cp-border-color);
-  width: 100%;
-  display: block;
-  outline: none;
-  transition: color 0.05s linear;
-
-  &:focus {
-    outline: none;
-  }
-
-  &:active,
-  &:hover:active {
-    cursor: grabbing;
-    cursor: -webkit-grabbing;
-  }
-
-  &::-moz-range-track {
-    appearance: none;
-    opacity: 0;
-    outline: none;
-  }
-
-  &::-ms-track {
-    outline: none;
-    appearance: none;
-    opacity: 0;
-  }
-
-  &::-webkit-slider-thumb {
-    box-shadow: 0px -0px 6px 0px var(--cp-range-shadow);
-    background-color: var(--cp-act-color);
-    height: 16px;
-    width: 6px;
-    border-radius: 2px;
-    appearance: none;
-    cursor: pointer;
-    cursor: move;
-    cursor: grab;
-    cursor: -webkit-grab;
-  }
-
-  &::-moz-range-thumb {
-    box-shadow: 0px -0px 6px 0px var(--cp-range-shadow);
-    background-color: var(--cp-act-color);
-    height: 16px;
-    width: 6px;
-    border-radius: 2px;
-    appearance: none;
-    cursor: pointer;
-    cursor: move;
-    cursor: grab;
-    cursor: -webkit-grab;
-  }
-}
-
-.ck-cp-linear-angle-container .ck-gradient-set-label {
-  text-align: start;
-  font-size: 13.5px;
-  color: var(--cp-label-color);
-  font-weight: 500;
-  margin-bottom: 15px;
-}
-
-.ck-cp-linear-angle-container .ck-gradient-set-label span {
-  color: var(--cp-act-color);
-  font-weight: 700;
 }
 
 .ck-cp-input-container {
