@@ -1,6 +1,7 @@
 <script setup>
 import Quill from "quill";
 import { QuillEditor } from "./QuillEditor";
+import { ColorPicker } from "@/orchidui/ColorPicker.js";
 
 import { computed, onMounted, ref } from "vue";
 import { BaseInput, Icon, Dropdown } from "@/orchidui";
@@ -80,7 +81,7 @@ Quill.register(Size, true);
 const id = ref(
   Math.random()
     .toString(36)
-    .replace(/[^a-zA-Z]+/g, ""),
+    .replace(/[^a-zA-Z]+/g, "")
 );
 const isUndoActive = ref(false);
 const isRedoActive = ref(false);
@@ -237,6 +238,13 @@ const setAlign = (align = undefined) => {
   quill.value.getQuill().format("align", align);
   activeAlign.value = align;
 };
+
+const colorPickModel = ref("");
+
+const setColor = () => {
+  quill.value.getQuill().format("color", colorPickModel.value);
+};
+
 onMounted(() => {
   setSize(props.initialFontSize || props.fontSizes[0].value);
   loaded.value = true;
@@ -254,6 +262,7 @@ onMounted(() => {
     :tooltip-options="tooltipOptions"
   >
     <div class="grid">
+      {{ colorPickModel }}
       <QuillEditor
         v-if="id"
         :id="`#${id}`"
@@ -265,9 +274,9 @@ onMounted(() => {
         theme="snow"
         content-type="html"
         class="min-h-[200px]"
+        :placeholder="placeholder"
         @update:content="checkStates"
         @paste="isValidPasedText"
-        :placeholder="placeholder"
       >
         <template #toolbar>
           <div
@@ -439,6 +448,14 @@ onMounted(() => {
               </div>
             </template>
 
+            <div class="border-l border-oc-gray-200" />
+            <div class="flex gap-x-3 items-center">
+              <ColorPicker
+                v-model="colorPickModel"
+                hide-input-color
+                @update:model-value="setColor"
+              />
+            </div>
             <template v-if="toolbar.includes('alignment')">
               <div class="border-l border-oc-gray-200" />
 

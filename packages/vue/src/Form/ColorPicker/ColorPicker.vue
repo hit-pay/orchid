@@ -1,5 +1,5 @@
 <script setup>
-import { Dropdown, Input, BaseInput } from "@/orchidui";
+import { Dropdown, Input, BaseInput, Icon } from "@/orchidui";
 import ColorPickerPopup from "./components/VueColorPicker.vue";
 import { computed, ref } from "vue";
 
@@ -12,10 +12,8 @@ const props = defineProps({
     type: String,
     default: "solid",
   },
-  showOpacity: {
-    type: Boolean,
-    default: true,
-  },
+  hideOpacity: Boolean,
+  hideInputColor: Boolean,
 });
 
 const emit = defineEmits(["update:model-value"]);
@@ -50,9 +48,13 @@ const dropdownRef = ref();
 </script>
 
 <template>
-  <BaseInput @click.stop="() => dropdownRef?.toggleDropdown()">
+  <BaseInput
+    :class="hideInputColor ? 'w-[40px]' : ''"
+    @click.stop="() => dropdownRef?.toggleDropdown()"
+  >
     <Dropdown ref="dropdownRef" v-model="isOpen">
       <Input
+        v-if="!hideInputColor"
         :model-value="inputValue"
         icon="drop"
         :icon-props="iconProps"
@@ -63,11 +65,18 @@ const dropdownRef = ref();
           <slot name="leading"></slot>
         </template>
       </Input>
+      <div v-else>
+        <Icon
+          class="cursor-pointer"
+          :style="`color: ${inputValue}`"
+          name="drop"
+        />
+      </div>
       <template #menu>
         <ColorPickerPopup
           :variant="variant"
-          :show-alpha="showOpacity"
-          :type="!showOpacity ? 'HEX' : 'HEX8'"
+          :show-alpha="!hideOpacity"
+          :type="hideOpacity ? 'HEX' : 'HEX8'"
           :model-value="modelValue"
           @update:model-value="onUpdate"
         />
