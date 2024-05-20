@@ -252,10 +252,15 @@ onMounted(() => {
 });
 
 const imageWidth = ref(100);
-
+const showImageWidthToolbar = ref(false);
 const updateImageWidth = (val) => {
   imageWidth.value = val;
   quill.value.getQuill().format("width", `${imageWidth.value}%`);
+};
+
+const onClickContent = () => {
+  let focusNode = window.getSelection()?.focusNode?.innerHTML;
+  showImageWidthToolbar.value = focusNode && focusNode.includes("<img");
 };
 </script>
 
@@ -269,7 +274,7 @@ const updateImageWidth = (val) => {
     :tooltip-text="tooltipText"
     :tooltip-options="tooltipOptions"
   >
-    <div class="grid">
+    <div class="grid" @click="onClickContent">
       <QuillEditor
         v-if="id"
         :id="`#${id}`"
@@ -515,7 +520,7 @@ const updateImageWidth = (val) => {
             </div>
             <div class="border-l border-oc-gray-200" />
 
-            <div class="flex gap-x-3 items-center">
+            <div v-if="showImageWidthToolbar" class="flex gap-x-3 items-center">
               <Slider
                 label="Image width"
                 class="w-[120px]"
