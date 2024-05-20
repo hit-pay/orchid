@@ -111,7 +111,7 @@ defineExpose({
 const isFocused = ref(false);
 const inputClasses = computed(() => [
   {
-    "shadow-[0_0_0_2px]": isFocused.value,
+    "shadow-[0_0_0_2px]": isFocused.value && !props.isReadonly,
   },
   !props.disabled && (props.errorMessage || props.hasError)
     ? "border-oc-error shadow-oc-error"
