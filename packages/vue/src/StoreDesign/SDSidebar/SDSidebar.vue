@@ -59,7 +59,7 @@ const emit = defineEmits({
   "update:field": [],
   "close:settings": [],
   changeTheme: [],
-  "update:preview-mode": []
+  "update:preview-mode": [],
 });
 
 const presetOptions = computed(() => {
@@ -478,9 +478,15 @@ const isHomePageDropdownOpen = ref(false);
               v-model="isHomePageDropdownOpen"
               @mouseover="isHomePageDropdownOpen = true"
             >
-             <span class="flex items-center gap-2">
-              {{ submenuLabel }} <Icon :class="isHomePageDropdownOpen ? 'rotate-180' : ''" name="chevron-down" width="14" height="14" />
-             </span>
+              <span class="flex items-center gap-2">
+                {{ submenuLabel }}
+                <Icon
+                  :class="isHomePageDropdownOpen ? 'rotate-180' : ''"
+                  name="chevron-down"
+                  width="14"
+                  height="14"
+                />
+              </span>
               <template #menu>
                 <div
                   v-if="sidebarMenuActive.children"
@@ -623,8 +629,11 @@ const isHomePageDropdownOpen = ref(false);
                   ...$event,
                 })
               "
-              @update:preview-mode="$emit('update:preview-mode',$event)"
+              @update:preview-mode="$emit('update:preview-mode', $event)"
             >
+              <template #SelectProducts>
+                <slot name="SelectProducts" />
+              </template>
             </RequestForm>
           </div>
         </div>

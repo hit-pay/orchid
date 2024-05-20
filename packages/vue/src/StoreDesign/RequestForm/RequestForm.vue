@@ -31,7 +31,6 @@ const props = defineProps({
   },
 });
 
-
 const emit = defineEmits([
   "update:generalData",
   "update:sectionData",
@@ -39,7 +38,7 @@ const emit = defineEmits([
   "delete:images",
   "add:images",
   "update:field",
-  "update:preview-mode"
+  "update:preview-mode",
 ]);
 
 const generalFormData = ref(props.generalData);
@@ -90,44 +89,54 @@ const setDefaultData = (form) => {
   }
 };
 
-
 // only for Snackbar
 const ocEmitName = ref([]);
 const ocEmitValue = ref([]);
 const ocEmitLabel = ref([]);
 
 const emitCustomAction = (name) => {
-  if(['update:preview-mode'].includes(ocEmitName.value[name])){
-    emit(ocEmitName.value[name], ocEmitValue.value[name])
+  if (["update:preview-mode"].includes(ocEmitName.value[name])) {
+    emit(ocEmitName.value[name], ocEmitValue.value[name]);
   }
-}
+};
 
 Object.values(props.requestForm).forEach((form) => {
   if (form.type === "Children") {
     form.children.forEach((childForm) => {
       setDefaultData(childForm);
-      if(childForm?.type === 'Snackbar' && childForm?.props?.content?.includes('oc-emit')){
+      if (
+        childForm?.type === "Snackbar" &&
+        childForm?.props?.content?.includes("oc-emit")
+      ) {
         getTextWithLink(childForm.props.content, (link, value) => {
-          ocEmitName.value[childForm.name] = value[0]
-          ocEmitValue.value[childForm.name] = value[1]
-          ocEmitLabel.value[childForm.name] = childForm.props.content.replace(link, `<span class="underline cursor-pointer">${value[2].replace("-", " ")}</span>`)
-        })
+          ocEmitName.value[childForm.name] = value[0];
+          ocEmitValue.value[childForm.name] = value[1];
+          ocEmitLabel.value[childForm.name] = childForm.props.content.replace(
+            link,
+            `<span class="underline cursor-pointer">${value[2].replace("-", " ")}</span>`
+          );
+        });
       }
     });
   } else {
     setDefaultData(form);
-    if(form.type === 'Snackbar'){
-      if(form.type === 'Snackbar' && form?.props?.content?.includes('oc-emit')){
+    if (form.type === "Snackbar") {
+      if (
+        form.type === "Snackbar" &&
+        form?.props?.content?.includes("oc-emit")
+      ) {
         getTextWithLink(form.props.content, (link, value) => {
-          ocEmitName.value[form.name] = value[0]
-          ocEmitValue.value[form.name] = value[1]
-          ocEmitLabel.value[form.name] = form.props.content.replace(link,  `<span class="underline cursor-pointer">${value[2].replace("-", " ")}</span>`)
-        })
+          ocEmitName.value[form.name] = value[0];
+          ocEmitValue.value[form.name] = value[1];
+          ocEmitLabel.value[form.name] = form.props.content.replace(
+            link,
+            `<span class="underline cursor-pointer">${value[2].replace("-", " ")}</span>`
+          );
+        });
       }
     }
   }
 });
-
 
 const updateData = (form, value, general = false) => {
   if (general) {
@@ -248,7 +257,6 @@ const toggleSubForm = (name) => {
     showSubForm.value.push(name);
   }
 };
-
 </script>
 <template>
   <div>
@@ -262,11 +270,16 @@ const toggleSubForm = (name) => {
       :preview-mode="previewMode"
       @on-update="onUpdateForm"
     >
-      <template #Snackbar="{form}">
-        <Snackbar v-bind="form.props" >
-          <span 
-            v-if="form.props.content.includes('oc-emit')" 
-            @click="emitCustomAction(form.name)" v-html="ocEmitLabel[form.name]"></span>
+      <template #SelectProducts>
+        <slot name="SelectProducts"></slot>
+      </template>
+      <template #Snackbar="{ form }">
+        <Snackbar v-bind="form.props">
+          <span
+            v-if="form.props.content.includes('oc-emit')"
+            @click="emitCustomAction(form.name)"
+            v-html="ocEmitLabel[form.name]"
+          ></span>
           <span v-else v-html="getTextWithLink(form.props.content)"></span>
         </Snackbar>
       </template>
@@ -342,13 +355,21 @@ const toggleSubForm = (name) => {
                 :preview-mode="previewMode"
                 @on-update="onUpdateForm"
               >
+                <template #SelectProducts>
+                  <slot name="SelectProducts"></slot>
+                </template>
                 <template #Snackbar="slot">
-                  <Snackbar v-bind="slot.form.props" >
-                    <span 
-                      v-if="slot.form.props.content.includes('oc-emit')" 
-                      @click="emitCustomAction(slot.form.name)" v-html="ocEmitLabel[slot.form.name]">
+                  <Snackbar v-bind="slot.form.props">
+                    <span
+                      v-if="slot.form.props.content.includes('oc-emit')"
+                      @click="emitCustomAction(slot.form.name)"
+                      v-html="ocEmitLabel[slot.form.name]"
+                    >
                     </span>
-                    <span v-else v-html="getTextWithLink(slot.form.props.content)"></span>
+                    <span
+                      v-else
+                      v-html="getTextWithLink(slot.form.props.content)"
+                    ></span>
                   </Snackbar>
                 </template>
                 <template #Menus="slot">
