@@ -4,7 +4,7 @@ import { QuillEditor } from "./QuillEditor";
 import { ColorPicker } from "@/orchidui/ColorPicker.js";
 
 import { computed, onMounted, ref } from "vue";
-import { BaseInput, Icon, Dropdown } from "@/orchidui";
+import { BaseInput, Icon, Dropdown, Slider } from "@/orchidui";
 
 const props = defineProps({
   /**
@@ -164,6 +164,7 @@ const setLink = () => {
 const setBlockquote = () => {
   quill.value.getQuill().format("blockquote", !isBlockquoteActive.value);
 };
+
 const readImage = (base64) => {
   const range = quill.value.getQuill().getSelection();
   if (!range) return;
@@ -249,6 +250,22 @@ onMounted(() => {
   setSize(props.initialFontSize || props.fontSizes[0].value);
   loaded.value = true;
 });
+
+const imageWidth = ref(100);
+const showImageWidthToolbar = ref(false);
+const updateImageWidth = (val) => {
+  imageWidth.value = val;
+  quill.value.getQuill().format("width", `${imageWidth.value}%`);
+  window
+    .getSelection()
+    ?.focusNode?.querySelector("img")
+    .setAttribute("style", "margin:auto;display:block");
+};
+
+const onClickContent = () => {
+  let focusNode = window.getSelection()?.focusNode?.innerHTML;
+  showImageWidthToolbar.value = focusNode && focusNode.includes("<img");
+};
 </script>
 
 <template>
@@ -261,8 +278,7 @@ onMounted(() => {
     :tooltip-text="tooltipText"
     :tooltip-options="tooltipOptions"
   >
-    <div class="grid">
-      {{ colorPickModel }}
+    <div class="grid" @click="onClickContent">
       <QuillEditor
         v-if="id"
         :id="`#${id}`"
@@ -447,15 +463,6 @@ onMounted(() => {
                 />
               </div>
             </template>
-
-            <div class="border-l border-oc-gray-200" />
-            <div class="flex gap-x-3 items-center">
-              <ColorPicker
-                v-model="colorPickModel"
-                hide-input-color
-                @update:model-value="setColor"
-              />
-            </div>
             <template v-if="toolbar.includes('alignment')">
               <div class="border-l border-oc-gray-200" />
 
@@ -506,6 +513,27 @@ onMounted(() => {
                 />
               </div>
             </template>
+
+            <div class="border-l border-oc-gray-200" />
+            <div class="flex gap-x-3 items-center">
+              <ColorPicker
+                v-model="colorPickModel"
+                hide-input-color
+                @update:model-value="setColor"
+              />
+            </div>
+            <div class="border-l border-oc-gray-200" />
+
+            <div v-if="showImageWidthToolbar" class="flex gap-x-3 items-center">
+              <Slider
+                label="Image width"
+                class="w-[120px]"
+                :model-value="imageWidth"
+                :min-limit="0"
+                :max-limit="100"
+                @update:modelValue="updateImageWidth"
+              />
+            </div>
           </div>
         </template>
       </QuillEditor>

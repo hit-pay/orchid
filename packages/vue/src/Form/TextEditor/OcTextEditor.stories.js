@@ -43,13 +43,12 @@ export const Default = {
     setup() {
       const modelValue = ref("default model value");
       const onUpdateImage = (base64) => {
-        console.log(base64);
+        // console.log(base64);
       };
       return { args, modelValue, onUpdateImage };
     },
     template: `
           <Theme>
-          {{ modelValue}}
             <TextEditor id="quill-example" v-model="modelValue" v-bind="args" @update:image="onUpdateImage"/>
 
             <div class="flex gap-y-6 flex-col mt-8">Preview
