@@ -255,16 +255,19 @@ const imageWidth = ref(100);
 const showImageWidthToolbar = ref(false);
 const updateImageWidth = (val) => {
   imageWidth.value = val;
-  quill.value.getQuill().format("width", `${imageWidth.value}%`);
-  window
-    .getSelection()
-    ?.focusNode?.querySelector("img")
-    .setAttribute("style", "margin:auto;display:block");
+  const focusNode = window.getSelection()?.focusNode;
+  if (focusNode && focusNode.nodeName !== "#text") {
+    quill.value.getQuill().format("width", `${imageWidth.value}%`);
+    focusNode
+      ?.querySelector("img")
+      ?.setAttribute("style", "margin:auto;display:block");
+  }
 };
 
 const onClickContent = () => {
-  let focusNode = window.getSelection()?.focusNode?.innerHTML;
-  showImageWidthToolbar.value = focusNode && focusNode.includes("<img");
+  const focusNode = window.getSelection()?.focusNode;
+  showImageWidthToolbar.value =
+    focusNode.innerHTML && focusNode.innerHTML.includes("<img");
 };
 </script>
 
