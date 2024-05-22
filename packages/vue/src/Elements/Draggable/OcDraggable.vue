@@ -15,8 +15,8 @@ const list = computed(() => {
   return props.modelValue;
 });
 
-const onChange = () => {
-  emit("update:modelValue", list.value);
+const onChange = (event) => {
+  emit("update:modelValue", list.value, event);
 };
 
 const detectMove = (event) => {
