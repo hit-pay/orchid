@@ -68,16 +68,6 @@
           ></path>
         </svg>
       </button>
-
-      <!-- <ColorAction
-        class="!absolute right-0"
-        :isEyeDropperUsing="isEyeDropperUsing"
-        :showColorList="showColorList"
-        :showEyeDrop="showEyeDrop"
-        @onClickEyeDropper="handleOnClickEyeDropper"
-      /> -->
-      <!-- Auto save on close dropdown -->
-      <!-- @onSaveColor="saveColor" -->
     </div>
 
     <SliderOpacity
@@ -178,7 +168,6 @@ const props = defineProps({
   type: { default: "HEX8", type: String },
   inputType: { default: "HEX", type: String },
   theme: { default: "light", type: String },
-  colorListCount: { default: 9, type: Number },
   showColorList: { default: true, type: Boolean },
   showEyeDrop: { default: true, type: Boolean },
   showAlpha: { default: true, type: Boolean },
@@ -209,6 +198,7 @@ const props = defineProps({
     type: String,
     default: "solid",
   },
+  lastUsedColors: Array,
 });
 
 const mode = ref(props.variant == "gradient" ? "gradient" : "solid");
@@ -229,7 +219,17 @@ const colorList = ref([
   { id: 2, r: 0, g: 0, b: 255, a: 100, percent: 100, hue: 0, select: false },
 ]);
 
-const localColorList = ref([]);
+const localColorList = ref(props.lastUsedColors);
+
+watch(
+  () => props.lastUsedColors,
+  () => {
+    localColorList.value = props.lastUsedColors;
+  },
+  {
+    deep: true,
+  }
+);
 
 const isEyeDropperUsing = ref(false);
 const gradientType = ref("linear");
@@ -999,23 +999,6 @@ if (window.EyeDropper) {
   isEyeDropperUsing.value = true;
 }
 
-const saveColor = () => {
-  // let type = value.includes("linear") ? "linear" : "radial";
-  const status = localColorList.value.find((color) => color === hexVal.value);
-  if (!status) {
-    if (localColorList.value.length >= props.colorListCount) {
-      localColorList.value.pop();
-    }
-    let _v = hexVal.value;
-    localColorList.value.unshift(_v);
-
-    localStorage.setItem(
-      "ck-cp-local-color-list",
-      JSON.stringify(localColorList.value)
-    );
-  }
-};
-
 const parseVModelString = (value = "") => {
   if (mode.value == "gradient") {
     let type = value.includes("linear") ? "linear" : "radial";
@@ -1250,13 +1233,6 @@ watch(
     }
   }
 );
-
-onBeforeMount(() => {
-  let val = localStorage.getItem("ck-cp-local-color-list");
-  if (val) {
-    localColorList.value = JSON.parse(val);
-  }
-});
 
 const onChangeMode = (value) => {
   colorList.value.forEach((item) => {

@@ -45,6 +45,54 @@ const iconProps = computed(() => {
   };
 });
 const dropdownRef = ref();
+
+const localColorList = ref([]);
+
+const updateColorListStorage = () => {
+  if (localColorList.value.length > 9) {
+    localColorList.value = localColorList.value.filter(
+      (localColor, index) => index < 9
+    );
+    localStorage.setItem(
+      "ck-cp-local-color-list",
+      JSON.stringify(localColorList.value)
+    );
+  }
+};
+
+let val = localStorage.getItem("ck-cp-local-color-list");
+if (val) {
+  localColorList.value = [...new Set(JSON.parse(val))];
+  updateColorListStorage();
+}
+
+const onCloseDropdown = (dropdownOpen) => {
+  if (
+    !dropdownOpen &&
+    inputValue.value &&
+    !inputValue.value.includes("linear") &&
+    !inputValue.value.includes("radial")
+  ) {
+    const colorExist = localColorList.value.find(
+      (color) => color === inputValue.value
+    );
+    if (!colorExist) {
+      if (localColorList.value.length >= 9) {
+        localColorList.value.pop();
+      }
+      let _v = inputValue.value;
+      localColorList.value.unshift(_v);
+
+      updateColorListStorage();
+    } else {
+      localColorList.value = [
+        inputValue.value,
+        ...localColorList.value.filter((c) => c !== inputValue.value),
+      ];
+      updateColorListStorage();
+    }
+  }
+};
 </script>
 
 <template>
@@ -52,7 +100,11 @@ const dropdownRef = ref();
     :class="hideInputColor ? 'w-[40px]' : ''"
     @click.stop="() => dropdownRef?.toggleDropdown()"
   >
-    <Dropdown ref="dropdownRef" v-model="isOpen">
+    <Dropdown
+      ref="dropdownRef"
+      v-model="isOpen"
+      @update:model-value="onCloseDropdown"
+    >
       <Input
         v-if="!hideInputColor"
         :model-value="inputValue"
@@ -78,6 +130,7 @@ const dropdownRef = ref();
           :show-alpha="!hideOpacity"
           :type="hideOpacity ? 'HEX' : 'HEX8'"
           :model-value="modelValue"
+          :last-used-colors="localColorList"
           @update:model-value="onUpdate"
         />
       </template>
