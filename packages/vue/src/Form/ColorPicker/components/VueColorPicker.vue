@@ -38,6 +38,7 @@
         @onInput="setGradientBarColor"
       />
     </div>
+    <div v-else class="mb-5"></div>
     <PickerWrap @onMouseDown="handlePickerStartOnMouseDown" />
 
     <div class="flex items-center gap-2">
