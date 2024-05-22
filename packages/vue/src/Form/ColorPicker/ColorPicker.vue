@@ -53,11 +53,11 @@ const updateColorListStorage = () => {
     localColorList.value = localColorList.value.filter(
       (localColor, index) => index < 9
     );
-    localStorage.setItem(
-      "ck-cp-local-color-list",
-      JSON.stringify(localColorList.value)
-    );
   }
+  localStorage.setItem(
+    "ck-cp-local-color-list",
+    JSON.stringify(localColorList.value)
+  );
 };
 
 let val = localStorage.getItem("ck-cp-local-color-list");
@@ -67,12 +67,7 @@ if (val) {
 }
 
 const onCloseDropdown = (dropdownOpen) => {
-  if (
-    !dropdownOpen &&
-    inputValue.value &&
-    !inputValue.value.includes("linear") &&
-    !inputValue.value.includes("radial")
-  ) {
+  if (!dropdownOpen && inputValue.value) {
     const colorExist = localColorList.value.find(
       (color) => color === inputValue.value
     );
@@ -92,6 +87,13 @@ const onCloseDropdown = (dropdownOpen) => {
       updateColorListStorage();
     }
   }
+};
+
+const handleClickLastUsedColor = (color) => {
+  isOpen.value = false;
+  inputValue.value = color;
+
+  setTimeout(() => (isOpen.value = true), 10);
 };
 </script>
 
@@ -132,6 +134,7 @@ const onCloseDropdown = (dropdownOpen) => {
           :model-value="modelValue"
           :last-used-colors="localColorList"
           @update:model-value="onUpdate"
+          @last-used-pick="handleClickLastUsedColor"
         />
       </template>
     </Dropdown>

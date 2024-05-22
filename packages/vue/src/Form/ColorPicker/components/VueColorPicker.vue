@@ -125,15 +125,7 @@
 </template>
 
 <script setup>
-import {
-  onMounted,
-  onBeforeMount,
-  ref,
-  reactive,
-  provide,
-  watch,
-  nextTick,
-} from "vue";
+import { onMounted, ref, reactive, provide, watch, nextTick } from "vue";
 
 import InputHex from "./input/InputHex.vue";
 import InputRgbHsl from "./input/InputRgbHsl.vue";
@@ -206,7 +198,7 @@ const mode = ref(props.variant == "gradient" ? "gradient" : "solid");
 
 const pickerTemplateRef = ref(null);
 
-const emits = defineEmits(["update:modelValue"]);
+const emits = defineEmits(["update:modelValue", "last-used-pick"]);
 const emittedValue = ref(props.modelValue);
 const emitUpdateModelValue = (value) => {
   emittedValue.value = value;
@@ -976,23 +968,7 @@ const onChangeSetToHexValue = () => {
 };
 
 const handleColorItemOnClick = (color) => {
-  // check gradient color
-  hexVal.value = color;
-  let val = hexToRgb(hexVal.value);
-  if (val) {
-    const hueVal = rgbToHue(val.r, val.g, val.b);
-    const selectItem = colorList.value.find((item) => item.select == true);
-    if (selectItem) {
-      selectItem.r = val.r;
-      selectItem.g = val.g;
-      selectItem.b = val.b;
-      selectItem.hue = hueVal;
-
-      setToChangeVariebles(val.r, val.g, val.b, selectItem.hue, true);
-      setGradientBarColor();
-      setSliderOpacityColor();
-    }
-  }
+  emits("last-used-pick", color);
 };
 
 /* @ts-ignore */
