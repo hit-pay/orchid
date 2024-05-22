@@ -15,6 +15,7 @@ export const Pills = {
   },
   args: {
     variant: "pills",
+    isArrows: true,
     tabs: [
       {
         label: "All",
@@ -80,7 +81,7 @@ export const Pills = {
     },
     template: `
           <Theme>
-            <Tabs v-model="activeTab" :tabs="args.tabs" :variant="args.variant" :max-count="args.maxCount" />
+            <Tabs v-model="activeTab" :tabs="args.tabs" :variant="args.variant" :max-count="args.maxCount" :is-arrows="args.isArrows" />
           </Theme>
         `,
   }),

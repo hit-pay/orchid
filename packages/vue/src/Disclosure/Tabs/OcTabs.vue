@@ -11,12 +11,12 @@ const props = defineProps({
   tabs: Array,
   modelValue: [String, Array],
   maxCount: Number,
+  isArrows: Boolean,
 });
 
 const position = ref(0);
 const tabsVisible = ref(0);
 const tabsContainer = ref();
-const isArrows = ref(false);
 
 const tabWidth = 100;
 
@@ -63,9 +63,8 @@ const scrollToTab = () => {
 
 onMounted(() => {
   setVisibleTabsLength();
-  isArrows.value = tabsVisible.value < props.tabs.length;
 
-  if (isArrows.value) {
+  if (props.isArrows) {
     scrollToTab();
   }
 });
