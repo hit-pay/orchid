@@ -22,52 +22,52 @@ export const Pills = {
       },
       {
         label: "Filter 01",
-        value: 1,
+        value: "1",
       },
       {
         label: "Filter 02",
-        value: 2,
+        value: "2",
       },
       {
         label: "Filter 03",
-        value: 3,
+        value: "3",
         count: 10,
       },
       {
         label: "Filter 04",
-        value: 4,
+        value: "4",
       },
       {
         label: "Filter 05",
-        value: 5,
+        value: "5",
       },
       {
         label: "Filter 06",
-        value: 6,
+        value: "6",
       },
       {
         label: "Filter 07",
-        value: 7,
+        value: "7",
       },
       {
         label: "Filter 08",
-        value: 8,
+        value: "8",
       },
       {
         label: "Filter 09",
-        value: 9,
+        value: "9",
       },
       {
         label: "Filter 10",
-        value: 10,
+        value: "10",
       },
       {
         label: "Filter 11",
-        value: 11,
+        value: "11",
       },
       {
         label: "Filter 12",
-        value: 12,
+        value: "12",
       },
     ],
     maxCount: 9,
@@ -75,7 +75,7 @@ export const Pills = {
   render: (args) => ({
     components: { Theme, Tabs },
     setup() {
-      const activeTab = ref("1");
+      const activeTab = ref("8");
       return { activeTab, args };
     },
     template: `

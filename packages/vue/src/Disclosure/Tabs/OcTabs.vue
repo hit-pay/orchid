@@ -20,35 +20,29 @@ const isArrows = ref(false);
 
 const tabWidth = 100;
 
-defineEmits({
+const emit = defineEmits({
   "update:modelValue": [],
 });
+
+const currentIndex = computed(() =>
+  props.tabs.findIndex((item) => item.value === props.modelValue),
+);
+
 const isPillVariant = computed(() => props.variant === "pills");
 
 const setVisibleTabsLength = () => {
   tabsVisible.value = Math.round(tabsContainer.value.clientWidth / tabWidth);
 };
 
-const right = () => {
-  setVisibleTabsLength();
+const move = (direction) => {
+  const index =
+    direction === "left" ? --currentIndex.value : ++currentIndex.value;
 
-  position.value++;
+  const value = props.tabs[index]?.value;
 
-  tabsContainer.value?.scroll({
-    left: position.value * tabWidth,
-    behavior: "smooth",
-  });
-};
-
-const left = () => {
-  setVisibleTabsLength();
-
-  position.value--;
-
-  tabsContainer.value?.scroll({
-    left: position.value * tabWidth,
-    behavior: "smooth",
-  });
+  if (value !== undefined) {
+    emit("update:modelValue", value);
+  }
 };
 
 onMounted(() => {
@@ -64,6 +58,28 @@ watch(
   },
   {
     deep: true,
+  },
+);
+
+watch(
+  () => props.modelValue,
+  (value) => {
+    const index = props.tabs.findIndex((item) => item.value === value);
+
+    if (index > -1) {
+      setTimeout(() => {
+        setVisibleTabsLength();
+        position.value = index;
+
+        tabsContainer.value?.scroll({
+          left: index * tabWidth,
+          behavior: "smooth",
+        });
+      }, 0);
+    }
+  },
+  {
+    immediate: true,
   },
 );
 </script>
@@ -85,7 +101,7 @@ watch(
       :class="{ 'pb-4': !isPillVariant }"
     >
       <Icon
-        @click.prevent="left"
+        @click.prevent="move('left')"
         name="chevron-left"
         width="16"
         height="16"
@@ -121,12 +137,12 @@ watch(
       </slot>
     </div>
     <div
-      v-if="tabsVisible + position !== tabs.length && isArrows"
+      v-if="tabsVisible + position < tabs.length && isArrows"
       class="sticky top-0 bottom-0 right-0 flex items-center bg-white"
       :class="{ 'pb-4': !isPillVariant }"
     >
       <Icon
-        @click="right"
+        @click="move('right')"
         name="chevron-right"
         width="16"
         height="16"
