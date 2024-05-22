@@ -257,10 +257,12 @@ const updateImageWidth = (val) => {
   imageWidth.value = val;
   const focusNode = window.getSelection()?.focusNode;
   if (focusNode && focusNode.nodeName !== "#text") {
-    quill.value.getQuill().format("width", `${imageWidth.value}%`);
     focusNode
       ?.querySelector("img")
-      ?.setAttribute("style", "margin:auto;display:block");
+      ?.setAttribute(
+        "style",
+        `margin:auto;width:${imageWidth.value}%;display:block;`
+      );
   }
 };
 
