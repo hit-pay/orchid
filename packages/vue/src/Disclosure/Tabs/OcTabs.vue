@@ -106,7 +106,7 @@ watch(
           : isPillVariant
             ? 'text-oc-text-400'
             : 'border-transparent text-oc-text-400',
-        isArrows ? `!justify-normal !min-w-[${tabWidth}px]` : '',
+        isArrows ? '!justify-normal !min-w-[100px]' : '',
       ]"
       @click="$emit('update:modelValue', tab.value)"
     >
