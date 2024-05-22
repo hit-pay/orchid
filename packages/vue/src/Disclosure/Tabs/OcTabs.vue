@@ -1,5 +1,6 @@
 <script setup>
-import { computed } from "vue";
+import { computed, onMounted, ref } from "vue";
+import { Icon } from "@/orchidui";
 
 const props = defineProps({
   variant: {
@@ -11,21 +12,79 @@ const props = defineProps({
   modelValue: [String, Array],
   maxCount: Number,
 });
+
+const position = ref(0);
+const tabsVisible = ref(0);
+const tabsContainer = ref();
+const isArrows = ref(false);
+
+const tabWidth = 100;
+
 defineEmits({
   "update:modelValue": [],
 });
 const isPillVariant = computed(() => props.variant === "pills");
+
+const setVisibleElement = () => {
+  tabsVisible.value = Math.round(tabsContainer.value.clientWidth / tabWidth);
+};
+
+const right = () => {
+  setVisibleElement();
+
+  position.value++;
+
+  tabsContainer.value?.scroll({
+    left: position.value * tabWidth,
+    behavior: "smooth",
+  });
+};
+
+const left = () => {
+  setVisibleElement();
+
+  position.value--;
+
+  tabsContainer.value?.scroll({
+    left: position.value * tabWidth,
+    behavior: "smooth",
+  });
+};
+
+onMounted(() => {
+  setVisibleElement();
+
+  isArrows.value = tabsVisible.value < props.tabs.length;
+});
 </script>
 
 <template>
   <div
+    id="test"
+    ref="tabsContainer"
     class="flex normal-case"
-    :class="isPillVariant ? 'gap-x-2' : 'border-b border-oc-gray-200'"
+    :class="{
+      'gap-x-2': isPillVariant,
+      'border-b border-oc-gray-200': !isPillVariant,
+      'overflow-hidden': isArrows,
+    }"
   >
+    <div
+      class="absolute top-0 bottom-0 left-0 z-[1] flex items-center pb-4 bg-white"
+      v-if="position > 0 && isArrows"
+    >
+      <Icon
+        @click.prevent="left"
+        name="chevron-left"
+        width="16"
+        height="16"
+        class="text-oc-text-400 cursor-pointer hover:text-oc-text-500"
+      />
+    </div>
     <div
       v-for="tab in tabs"
       :key="tab.value"
-      class="cursor-pointer min-w-[48px] gap-x-3 items-center flex justify-center text-sm hover:text-oc-text-500"
+      class="relative cursor-pointer min-w-[48px] gap-x-3 items-center flex justify-center text-sm hover:text-oc-text-500"
       :class="[
         tab.class,
         isPillVariant ? 'py-2 px-3 rounded' : 'px-4 pb-3 border-b-2 -mb-[1px]',
@@ -36,18 +95,31 @@ const isPillVariant = computed(() => props.variant === "pills");
           : isPillVariant
             ? 'text-oc-text-400'
             : 'border-transparent text-oc-text-400',
+        isArrows ? `!justify-normal !min-w-[${tabWidth}px]` : '',
       ]"
       @click="$emit('update:modelValue', tab.value)"
     >
       <slot :name="tab.value">
-        {{ tab.label }}
+        <div :class="{ truncate: isArrows }">{{ tab.label }}</div>
         <div
           v-if="tab.count"
-          class="bg-oc-error rounded-full h-6 w-6 flex items-center justify-center text-xs font-bold text-white"
+          class="bg-oc-error rounded-full h-6 w-6 flex items-center justify-center text-xs font-bold text-white px-4"
         >
           {{ tab.count > maxCount ? `${maxCount}+` : tab.count }}
         </div>
       </slot>
+    </div>
+    <div
+      class="absolute top-0 bottom-0 right-0 flex items-center pb-4 bg-white"
+      v-if="tabsVisible + position !== tabs.length && isArrows"
+    >
+      <Icon
+        @click="right"
+        name="chevron-right"
+        width="16"
+        height="16"
+        class="text-oc-text-400 cursor-pointer hover:text-oc-text-500"
+      />
     </div>
   </div>
 </template>
