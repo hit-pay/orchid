@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import { Icon } from "@/orchidui";
 
 const props = defineProps({
@@ -25,12 +25,12 @@ defineEmits({
 });
 const isPillVariant = computed(() => props.variant === "pills");
 
-const setVisibleElement = () => {
+const setVisibleTabsLength = () => {
   tabsVisible.value = Math.round(tabsContainer.value.clientWidth / tabWidth);
 };
 
 const right = () => {
-  setVisibleElement();
+  setVisibleTabsLength();
 
   position.value++;
 
@@ -41,7 +41,7 @@ const right = () => {
 };
 
 const left = () => {
-  setVisibleElement();
+  setVisibleTabsLength();
 
   position.value--;
 
@@ -52,10 +52,20 @@ const left = () => {
 };
 
 onMounted(() => {
-  setVisibleElement();
+  setVisibleTabsLength();
 
   isArrows.value = tabsVisible.value < props.tabs.length;
 });
+
+watch(
+  () => props.tabs,
+  () => {
+    setVisibleTabsLength();
+  },
+  {
+    deep: true,
+  },
+);
 </script>
 
 <template>
@@ -66,12 +76,13 @@ onMounted(() => {
     :class="{
       'gap-x-2': isPillVariant,
       'border-b border-oc-gray-200': !isPillVariant,
-      'overflow-hidden': isArrows,
+      'overflow-hidden relative': isArrows,
     }"
   >
     <div
-      class="absolute top-0 bottom-0 left-0 z-[1] flex items-center pb-4 bg-white"
       v-if="position > 0 && isArrows"
+      class="sticky top-0 bottom-0 left-0 z-[1] flex items-center bg-white"
+      :class="{ 'pb-4': !isPillVariant }"
     >
       <Icon
         @click.prevent="left"
@@ -110,8 +121,9 @@ onMounted(() => {
       </slot>
     </div>
     <div
-      class="absolute top-0 bottom-0 right-0 flex items-center pb-4 bg-white"
       v-if="tabsVisible + position !== tabs.length && isArrows"
+      class="sticky top-0 bottom-0 right-0 flex items-center bg-white"
+      :class="{ 'pb-4': !isPillVariant }"
     >
       <Icon
         @click="right"
