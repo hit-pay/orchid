@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted, ref, watch } from "vue";
+import { computed, nextTick, onMounted, ref, watch } from "vue";
 import { Icon } from "@/orchidui";
 
 const props = defineProps({
@@ -45,10 +45,29 @@ const move = (direction) => {
   }
 };
 
+const scrollToTab = () => {
+  const index = props.tabs.findIndex((item) => item.value === props.modelValue);
+
+  if (index > -1) {
+    nextTick(() => {
+      setVisibleTabsLength();
+      position.value = index;
+
+      tabsContainer.value?.scroll({
+        left: index * tabWidth,
+        behavior: "smooth",
+      });
+    });
+  }
+};
+
 onMounted(() => {
   setVisibleTabsLength();
-
   isArrows.value = tabsVisible.value < props.tabs.length;
+
+  if (isArrows.value) {
+    scrollToTab();
+  }
 });
 
 watch(
@@ -63,23 +82,8 @@ watch(
 
 watch(
   () => props.modelValue,
-  (value) => {
-    const index = props.tabs.findIndex((item) => item.value === value);
-
-    if (index > -1) {
-      setTimeout(() => {
-        setVisibleTabsLength();
-        position.value = index;
-
-        tabsContainer.value?.scroll({
-          left: index * tabWidth,
-          behavior: "smooth",
-        });
-      }, 0);
-    }
-  },
-  {
-    immediate: true,
+  () => {
+    scrollToTab();
   },
 );
 </script>
