@@ -5,9 +5,11 @@
     :cp-theme="theme"
     :class="disabled ? 'ck-cp-disabled ' : ''"
   >
-    <div class="flex justify-end border-b h-[46px] relative mt-[-5px]">
+    <div
+      v-if="variant == 'gradient'"
+      class="flex justify-end border-b h-[46px] relative mt-[-5px]"
+    >
       <ColorType
-        v-if="variant == 'gradient'"
         class="mr-auto"
         :variant="variant"
         :mode="mode"
@@ -15,14 +17,6 @@
         :iconClasses="iconClasses"
         :gradientType="gradientType"
         @onChangeMode="onChangeMode"
-      />
-      <ColorAction
-        class="!absolute right-0"
-        :isEyeDropperUsing="isEyeDropperUsing"
-        :showColorList="showColorList"
-        :showEyeDrop="showEyeDrop"
-        @onClickEyeDropper="handleOnClickEyeDropper"
-        @onSaveColor="saveColor"
       />
     </div>
 
@@ -44,13 +38,38 @@
         @onInput="setGradientBarColor"
       />
     </div>
+    <div v-else class="mb-5"></div>
     <PickerWrap @onMouseDown="handlePickerStartOnMouseDown" />
 
-    <PickerHue
-      v-model="hue"
-      @onInput="setHue(false)"
-      @onChange="handleHueChange"
-    />
+    <div class="flex items-center gap-2">
+      <PickerHue
+        :class="isEyeDropperUsing ? 'max-w-[90%]' : ''"
+        v-model="hue"
+        @onInput="setHue(false)"
+        @onChange="handleHueChange"
+      />
+
+      <button
+        v-if="isEyeDropperUsing"
+        id="cp-btn-eyedropper"
+        type="button"
+        class="cp-btn"
+        style="padding: 7px"
+        @click="handleOnClickEyeDropper"
+      >
+        <svg
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 32 32"
+        >
+          <path
+            d="M21.35 1.825l-6.344 6.35-0.588-0.588c-0.781-0.781-2.050-0.781-2.831 0s-0.781 2.050 0 2.831l10 10c0.781 0.781 2.050 0.781 2.831 0s0.781-2.050 0-2.831l-0.587-0.587 6.344-6.35c2.438-2.438 2.438-6.388 0-8.819s-6.387-2.438-8.819 0zM3.462 20.206c-0.938 0.938-1.462 2.212-1.462 3.538v2.65l-1.663 2.494c-0.531 0.794-0.425 1.85 0.25 2.525s1.731 0.781 2.525 0.25l2.494-1.663h2.65c1.325 0 2.6-0.525 3.537-1.462l7.544-7.544-2.831-2.831-7.544 7.544c-0.188 0.188-0.444 0.294-0.706 0.294h-2.256v-2.256c0-0.262 0.106-0.519 0.294-0.706l7.544-7.544-2.831-2.831-7.544 7.544z"
+          ></path>
+        </svg>
+      </button>
+    </div>
 
     <SliderOpacity
       v-if="showAlpha"
@@ -98,7 +117,7 @@
         v-for="color in localColorList"
         :key="`color-${color}`"
         class="ck-cp-color-item !w-[32px] !h-[32px]"
-        :style="{ backgroundColor: color }"
+        :style="`background:${color}`"
         @click="handleColorItemOnClick(color)"
       ></div>
     </div>
@@ -106,15 +125,7 @@
 </template>
 
 <script setup>
-import {
-  onMounted,
-  onBeforeMount,
-  ref,
-  reactive,
-  provide,
-  watch,
-  nextTick,
-} from "vue";
+import { onMounted, ref, reactive, provide, watch, nextTick } from "vue";
 
 import InputHex from "./input/InputHex.vue";
 import InputRgbHsl from "./input/InputRgbHsl.vue";
@@ -128,7 +139,6 @@ import GradientSettings from "./GradientSettings.vue";
 import PickerWrap from "./PickerWrap.vue";
 
 import ColorType from "./ColorType.vue";
-import ColorAction from "./ColorAction.vue";
 
 import {
   hex8ToRgba,
@@ -151,7 +161,6 @@ const props = defineProps({
   type: { default: "HEX8", type: String },
   inputType: { default: "HEX", type: String },
   theme: { default: "light", type: String },
-  colorListCount: { default: 9, type: Number },
   showColorList: { default: true, type: Boolean },
   showEyeDrop: { default: true, type: Boolean },
   showAlpha: { default: true, type: Boolean },
@@ -182,13 +191,14 @@ const props = defineProps({
     type: String,
     default: "solid",
   },
+  lastUsedColors: Array,
 });
 
 const mode = ref(props.variant == "gradient" ? "gradient" : "solid");
 
 const pickerTemplateRef = ref(null);
 
-const emits = defineEmits(["update:modelValue"]);
+const emits = defineEmits(["update:modelValue", "last-used-pick"]);
 const emittedValue = ref(props.modelValue);
 const emitUpdateModelValue = (value) => {
   emittedValue.value = value;
@@ -202,7 +212,17 @@ const colorList = ref([
   { id: 2, r: 0, g: 0, b: 255, a: 100, percent: 100, hue: 0, select: false },
 ]);
 
-const localColorList = ref([]);
+const localColorList = ref(props.lastUsedColors);
+
+watch(
+  () => props.lastUsedColors,
+  () => {
+    localColorList.value = props.lastUsedColors;
+  },
+  {
+    deep: true,
+  }
+);
 
 const isEyeDropperUsing = ref(false);
 const gradientType = ref("linear");
@@ -948,44 +968,13 @@ const onChangeSetToHexValue = () => {
 };
 
 const handleColorItemOnClick = (color) => {
-  hexVal.value = color;
-  let val = hexToRgb(hexVal.value);
-  if (val) {
-    const hueVal = rgbToHue(val.r, val.g, val.b);
-    const selectItem = colorList.value.find((item) => item.select == true);
-    if (selectItem) {
-      selectItem.r = val.r;
-      selectItem.g = val.g;
-      selectItem.b = val.b;
-      selectItem.hue = hueVal;
-
-      setToChangeVariebles(val.r, val.g, val.b, selectItem.hue, true);
-      setGradientBarColor();
-      setSliderOpacityColor();
-    }
-  }
+  emits("last-used-pick", color);
 };
 
 /* @ts-ignore */
 if (window.EyeDropper) {
   isEyeDropperUsing.value = true;
 }
-
-const saveColor = () => {
-  const status = localColorList.value.find((color) => color === hexVal.value);
-  if (!status) {
-    if (localColorList.value.length >= props.colorListCount) {
-      localColorList.value.pop();
-    }
-    let _v = hexVal.value;
-    localColorList.value.unshift(_v);
-
-    localStorage.setItem(
-      "ck-cp-local-color-list",
-      JSON.stringify(localColorList.value)
-    );
-  }
-};
 
 const parseVModelString = (value = "") => {
   if (mode.value == "gradient") {
@@ -1221,13 +1210,6 @@ watch(
     }
   }
 );
-
-onBeforeMount(() => {
-  let val = localStorage.getItem("ck-cp-local-color-list");
-  if (val) {
-    localColorList.value = JSON.parse(val);
-  }
-});
 
 const onChangeMode = (value) => {
   colorList.value.forEach((item) => {
