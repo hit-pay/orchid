@@ -27,20 +27,25 @@ defineProps({
   },
   titleWidth: String,
 });
-defineEmits({
+
+const emit = defineEmits({
   "update:modelValue": [],
   "click:element": [],
   detectMove: null,
 });
 const isHovered = ref([]);
 const isDropdownOpen = ref([]);
+
+const handleEmit = (list, element) => {
+  emit('update:modelValue', list, element)
+}
 </script>
 <template>
   <Draggable
     v-slot="{ list }"
     :model-value="modelValue"
     class="grid gap-3"
-    @update:model-value="$emit('update:modelValue', $event)"
+    @update:model-value="(changedList, changedElement) => handleEmit(changedList, changedElement)"
     @detect-move="$emit('detectMove', $event)"
   >
     <!-- wrapper -->
