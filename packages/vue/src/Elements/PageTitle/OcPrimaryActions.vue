@@ -21,6 +21,9 @@ const copyToClipBoard = () => {
   emit("copy");
   setTimeout(() => (isCopied.value = false), 1500);
 };
+
+const copyButtonTooltipText = computed(() => props.primaryActions?.copyTooltipContent ?? 'Copy link')
+const copiedButtonTooltipText = computed(() => props.primaryActions?.copiedTooltipContent ?? 'Link copied!')
 </script>
 
 <template>
@@ -80,8 +83,8 @@ const copyToClipBoard = () => {
             {{
               item?.isCopyButton
                 ? isCopied
-                  ? "Link copied!"
-                  : "Copy link"
+                  ? copiedButtonTooltipText
+                  : copyButtonTooltipText
                 : item.tooltipContent
             }}
           </div>
@@ -100,10 +103,19 @@ const copyToClipBoard = () => {
       v-model="isDropdownOpened"
       :distance="6"
     >
-      <Icon
-        class="p-2 cursor-pointer rounded-sm hover:bg-oc-accent-1-50-tr"
-        name="dots-vertical"
-      />
+      <Tooltip position="top" arrow-hidden :distance="7">
+        <Icon
+          class="p-2 cursor-pointer rounded-sm hover:bg-oc-accent-1-50-tr"
+          name="dots-vertical"
+        />
+        <template #popper>
+          <div
+            class="py-2 px-3 whitespace-nowrap text-sm font-medium text-oc-text-400"
+          >
+            More actions
+          </div>
+        </template>
+      </Tooltip>
 
       <template #menu>
         <div class="flex flex-col">
@@ -115,7 +127,7 @@ const copyToClipBoard = () => {
               <DropdownItem
                 v-if="item?.isCopyButton"
                 :icon="isCopied ? 'check' : 'copy'"
-                :text="isCopied ? 'Link copied!' : 'Copy link'"
+                :text="isCopied ? copiedButtonTooltipText : copyButtonTooltipText"
                 :icon-classes="isCopied ? '!text-oc-success' : ''"
                 @click="copyToClipBoard"
               />
