@@ -22,8 +22,8 @@ const copyToClipBoard = () => {
   setTimeout(() => (isCopied.value = false), 1500);
 };
 
-const copyButtonTooltipText = computed(() => props.primaryActions?.mainLinkAction?.copyTooltipContent ?? 'Copy link')
-const copiedButtonTooltipText = computed(() => props.primaryActions?.mainLinkAction?.copiedTooltipContent ?? 'Link copied!')
+const copyButtonTooltipText = computed(() => props.primaryActions?.copyTooltipContent ?? 'Copy link')
+const copiedButtonTooltipText = computed(() => props.primaryActions?.copiedTooltipContent ?? 'Link copied!')
 </script>
 
 <template>
