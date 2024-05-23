@@ -81,7 +81,7 @@ Quill.register(Size, true);
 const id = ref(
   Math.random()
     .toString(36)
-    .replace(/[^a-zA-Z]+/g, "")
+    .replace(/[^a-zA-Z]+/g, ""),
 );
 const isUndoActive = ref(false);
 const isRedoActive = ref(false);
@@ -261,7 +261,7 @@ const updateImageWidth = (val) => {
       ?.querySelector("img")
       ?.setAttribute(
         "style",
-        `margin:auto;width:${imageWidth.value}%;display:block;`
+        `margin:auto;width:${imageWidth.value}%;display:block;`,
       );
   }
 };
@@ -283,7 +283,11 @@ const onClickContent = () => {
     :tooltip-text="tooltipText"
     :tooltip-options="tooltipOptions"
   >
-    <div class="grid" @click="onClickContent">
+    <div
+      class="grid"
+      :class="{ 'has-error': errorMessage }"
+      @click="onClickContent"
+    >
       <QuillEditor
         v-if="id"
         :id="`#${id}`"
