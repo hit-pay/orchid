@@ -1,6 +1,6 @@
 <script setup>
-import { VueDraggableNext } from "vue-draggable-next";
 import { computed } from "vue";
+import { VueDraggableNext } from "vue-draggable-next";
 
 const props = defineProps({
   modelValue: Array,
