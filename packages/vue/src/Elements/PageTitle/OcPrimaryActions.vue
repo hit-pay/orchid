@@ -100,10 +100,19 @@ const copyToClipBoard = () => {
       v-model="isDropdownOpened"
       :distance="6"
     >
-      <Icon
-        class="p-2 cursor-pointer rounded-sm hover:bg-oc-accent-1-50-tr"
-        name="dots-vertical"
-      />
+      <Tooltip position="top" arrow-hidden :distance="7">
+        <Icon
+          class="p-2 cursor-pointer rounded-sm hover:bg-oc-accent-1-50-tr"
+          name="dots-vertical"
+        />
+        <template #popper>
+          <div
+            class="py-2 px-3 whitespace-nowrap text-sm font-medium text-oc-text-400"
+          >
+            More actions
+          </div>
+        </template>
+      </Tooltip>
 
       <template #menu>
         <div class="flex flex-col">
