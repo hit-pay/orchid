@@ -842,6 +842,15 @@
   font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   padding: 8px;
 }
+.has-error {
+  .ql-toolbar.ql-snow {
+    border-color: #dc3545;
+    border-bottom: 1px solid #d1d5db;
+  }
+  .ql-container.ql-snow {
+    border-color: #dc3545;
+  }
+}
 .ql-toolbar.ql-snow .ql-formats {
   margin-right: 15px;
 }
