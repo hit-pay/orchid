@@ -107,6 +107,8 @@ const args = {
   primaryActions: {
     mainLinkAction: {
       tooltipContent: "Preview Link",
+      copyTooltipContent: 'Copy payment link',
+      copiedTooltipContent: 'Payment link copied!',
       url: "https://securecheckout.staging.hit-pay.com/payment-request/@minstore-edit43",
     },
     dropdownOptions: {
