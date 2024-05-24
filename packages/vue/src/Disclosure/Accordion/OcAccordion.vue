@@ -1,5 +1,5 @@
 <script setup>
-import { nextTick, onUpdated, ref, watch } from "vue";
+import { nextTick, onMounted, onUpdated, ref, watch } from "vue";
 import { Icon } from "@/orchidui";
 
 const upcomingAccordion = ref();
@@ -47,7 +47,6 @@ defineEmits({
 });
 
 const changeAccordionHeight = async (open) => {
-  if (props.isDisabled) return;
   await nextTick();
   if (upcomingAccordion.value) {
     upcomingAccordion.value.style.maxHeight = open ? "max-content" : "0";
@@ -58,6 +57,8 @@ watch(() => props.isExpandable, changeAccordionHeight);
 onUpdated(() => {
   changeAccordionHeight(props.isExpandable);
 });
+
+onMounted(() => changeAccordionHeight(props.isExpandable));
 </script>
 
 <template>
