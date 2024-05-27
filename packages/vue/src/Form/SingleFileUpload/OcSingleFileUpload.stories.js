@@ -35,7 +35,6 @@ export const Default = {
       return { radios, variant, modelValue, args };
     },
     template: `
-          {{modelValue }}
           <div class="p-5 rounded flex flex-col gap-y-2" :class="args.isImageOnly ? '' : 'bg-oc-bg-dark'">
             <RadioGroup
                 v-if="!args.isImageOnly"

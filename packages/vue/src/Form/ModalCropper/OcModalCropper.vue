@@ -19,7 +19,7 @@ const cancelButtonProps = {
 
 const localImage = ref("");
 const isAwsImage = ref(false);
-
+const imageChanged = ref(false);
 watch(
   () => props.img,
   (img) => {
@@ -39,7 +39,8 @@ watch(
 const confirmButtonProps = ref({
   label: "Save",
   onClick: () => {
-    if (localImage.value) {
+    console.log("imageChanged.value", imageChanged.value);
+    if (localImage.value && imageChanged.value) {
       localImage.value = null;
       const { canvas } = cropper.value.getResult();
       emit("changeImage", canvas.toDataURL());
@@ -96,6 +97,7 @@ const defaultSize = ({ imageSize, visibleArea }) => {
         :resize-image="{ wheel: false }"
         background-class="test"
         :default-size="defaultSize"
+        @change="imageChanged = true"
       />
       <img v-else class="w-full" :src="img" />
 
