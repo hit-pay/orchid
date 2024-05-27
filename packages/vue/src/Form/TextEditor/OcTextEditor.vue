@@ -70,6 +70,15 @@ const variants = {
     "alignment",
   ],
   "text-only": ["changes", "font-size", "font-style", "link"],
+  "no-media": [
+    "changes",
+    "font-size",
+    "font-style",
+    "link",
+    "quote",
+    "list",
+    "alignment",
+  ],
 };
 
 const toolbar = computed(() => variants[props.variant]);
