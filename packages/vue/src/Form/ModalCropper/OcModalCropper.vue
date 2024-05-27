@@ -20,8 +20,6 @@ const cancelButtonProps = {
 const localImage = ref("");
 const isAwsImage = ref(false);
 const imageChanged = ref(false);
-
-const oldLink = props.link;
 const localLinkValue = ref(props.link);
 
 watch(
@@ -43,7 +41,7 @@ watch(
 const confirmButtonProps = ref({
   label: "Save",
   onClick: () => {
-    if (oldLink !== localLinkValue.value) {
+    if (localLinkValue.value) {
       emit("update:link", localLinkValue.value);
     }
     if (localImage.value && imageChanged.value) {
