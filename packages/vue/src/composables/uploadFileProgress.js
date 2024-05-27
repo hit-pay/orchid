@@ -23,6 +23,7 @@ export const useUploadFileProgress = (maxSize, emit) => {
       currentFiles.value.unshift({
         file: file,
         fileName: file.name,
+        link: file.link,
         progress: 0,
         fileUrl: "",
         totalSize: 0,

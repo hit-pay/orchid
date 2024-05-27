@@ -64,6 +64,7 @@ export const MultipleImages = {
             id: "image_1",
             path: "https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/covers/small/99d696e564ba45fbaa0fb2e3b43d0e27.jpg",
             caption: "Image 1",
+            link: "https://test-link.com",
           },
         },
         {
@@ -98,6 +99,7 @@ export const MultipleImages = {
             :error-message="args.errorMessage"
             is-image-only
             :columnsCount="args.columnsCount"
+            with-link
             @onEditFile="onEditFile"
             @onRemoveFile="onRemoveFile"
         >
