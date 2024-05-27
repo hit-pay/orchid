@@ -33,7 +33,7 @@ watch(
       }
     }
   },
-  { immediate: true },
+  { immediate: true }
 );
 
 const confirmButtonProps = ref({
@@ -63,6 +63,13 @@ const fileUpload = (e) => {
     localImage.value = URL.createObjectURL(e.target.files[0]);
   }
 };
+
+const defaultSize = ({ imageSize, visibleArea }) => {
+  return {
+    width: (visibleArea || imageSize).width,
+    height: (visibleArea || imageSize).height,
+  };
+};
 </script>
 
 <template>
@@ -88,6 +95,7 @@ const fileUpload = (e) => {
         :src="localImage"
         :resize-image="{ wheel: false }"
         background-class="test"
+        :default-size="defaultSize"
       />
       <img v-else class="w-full" :src="img" />
 
