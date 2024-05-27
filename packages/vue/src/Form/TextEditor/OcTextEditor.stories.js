@@ -10,7 +10,7 @@ export const Default = {
   argTypes: {
     variant: {
       control: "select",
-      options: ["default", "text-only"],
+      options: ["default", "text-only", "no-media"],
     },
   },
   args: {
