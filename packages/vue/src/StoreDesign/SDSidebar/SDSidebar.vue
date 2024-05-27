@@ -742,7 +742,7 @@ const isHomePageDropdownOpen = ref(false);
           >
             <img
               class="w-[112px]"
-              :src="`${theme.assets}images/preset/${activePreset.value}-sm.png`"
+              :src="`${theme.assets}images/preset/${activePreset.value}-sm.svg`"
             />
             <div>
               <Icon
