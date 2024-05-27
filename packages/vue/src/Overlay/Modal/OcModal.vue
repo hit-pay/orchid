@@ -106,6 +106,7 @@ const sizeClasses = computed(() => ({
 <template>
   <div
     v-if="modelValue"
+    id="modal-overlay-wrapper"
     class="fixed w-screen z-[1007] top-0 left-0 h-full min-h-screen bg-black/[.45] flex items-center justify-center"
   >
     <div
@@ -150,10 +151,7 @@ const sizeClasses = computed(() => ({
 
       <div
         :id="modalId"
-        :class="[
-          size === 'small' ? 'p-5' : 'p-7',
-          isBorderless ? 'py-0' : '',
-        ]"
+        :class="[size === 'small' ? 'p-5' : 'p-7', isBorderless ? 'py-0' : '']"
       >
         <slot></slot>
       </div>

@@ -131,7 +131,7 @@ const copiedButtonTooltipText = computed(() => props.primaryActions?.copiedToolt
                 :icon-classes="isCopied ? '!text-oc-success' : ''"
                 @click="copyToClipBoard"
               />
-              <DropdownItem v-else v-bind="item" />
+              <DropdownItem v-else v-bind="item" @click="isDropdownOpened = false" />
             </template>
           </div>
           <div v-if="primaryActions.dropdownOptions?.bottom" class="p-2">
@@ -139,6 +139,7 @@ const copiedButtonTooltipText = computed(() => props.primaryActions?.copiedToolt
               v-for="(item, i) in primaryActions.dropdownOptions?.bottom"
               :key="i"
               v-bind="item"
+              @click="isDropdownOpened = false"
             />
           </div>
         </div>

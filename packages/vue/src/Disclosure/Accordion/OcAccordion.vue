@@ -47,7 +47,6 @@ defineEmits({
 });
 
 const changeAccordionHeight = async (open) => {
-  if (props.isDisabled) return;
   await nextTick();
   if (upcomingAccordion.value) {
     upcomingAccordion.value.style.maxHeight = open ? "max-content" : "0";
