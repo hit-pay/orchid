@@ -52,7 +52,7 @@ const resetFile = ref(false);
 
 const confirmDeleteFile = () => {
   const deletedImage = props.uploadedImages.find(
-    (_, i) => i === deleteIndex.value,
+    (_, i) => i === deleteIndex.value
   );
 
   if (deletedImage.current) {
@@ -67,7 +67,7 @@ const confirmDeleteFile = () => {
 
   emit(
     "update:uploadedImages",
-    props.uploadedImages.filter((_, i) => i !== deleteIndex.value),
+    props.uploadedImages.filter((_, i) => i !== deleteIndex.value)
   );
   deleteConfirmationModal.value = false;
 };
@@ -83,8 +83,10 @@ const changeImage = (url) => {
   }
 };
 const updateLink = (link) => {
-  const changedFile = props.uploadedImages[editImgIndex.value];
+  console.log("updateLink", updateLink);
+  let changedFile = props.uploadedImages[editImgIndex.value];
   changedFile.link = link;
+  console.log("props.uploadedImages", props.uploadedImages);
   emit("update:uploadedImages", props.uploadedImages);
 };
 

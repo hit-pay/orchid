@@ -20,6 +20,10 @@ const cancelButtonProps = {
 const localImage = ref("");
 const isAwsImage = ref(false);
 const imageChanged = ref(false);
+
+const oldLink = props.link;
+const localLinkValue = ref(props.link);
+
 watch(
   () => props.img,
   (img) => {
@@ -39,7 +43,9 @@ watch(
 const confirmButtonProps = ref({
   label: "Save",
   onClick: () => {
-    console.log("imageChanged.value", imageChanged.value);
+    if (oldLink !== localLinkValue.value) {
+      emit("update:link", localLinkValue.value);
+    }
     if (localImage.value && imageChanged.value) {
       localImage.value = null;
       const { canvas } = cropper.value.getResult();
@@ -140,10 +146,9 @@ const defaultSize = ({ imageSize, visibleArea }) => {
       <div>
         <Input
           v-if="withLink"
-          :model-value="link"
+          v-model="localLinkValue"
           label="Link"
           placeholder="https://website.com"
-          @update:model-value="$emit('update:link', $event)"
         />
       </div>
     </div>
