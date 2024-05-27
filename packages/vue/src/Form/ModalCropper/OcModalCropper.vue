@@ -19,6 +19,8 @@ const cancelButtonProps = {
 
 const localImage = ref("");
 const isAwsImage = ref(false);
+const imageChanged = ref(false);
+const localLinkValue = ref(props.link);
 
 watch(
   () => props.img,
@@ -33,13 +35,16 @@ watch(
       }
     }
   },
-  { immediate: true },
+  { immediate: true }
 );
 
 const confirmButtonProps = ref({
   label: "Save",
   onClick: () => {
-    if (localImage.value) {
+    if (localLinkValue.value) {
+      emit("update:link", localLinkValue.value);
+    }
+    if (localImage.value && imageChanged.value) {
       localImage.value = null;
       const { canvas } = cropper.value.getResult();
       emit("changeImage", canvas.toDataURL());
@@ -62,6 +67,13 @@ const fileUpload = (e) => {
   } else {
     localImage.value = URL.createObjectURL(e.target.files[0]);
   }
+};
+
+const defaultSize = ({ imageSize, visibleArea }) => {
+  return {
+    width: (visibleArea || imageSize).width,
+    height: (visibleArea || imageSize).height,
+  };
 };
 </script>
 
@@ -88,6 +100,8 @@ const fileUpload = (e) => {
         :src="localImage"
         :resize-image="{ wheel: false }"
         background-class="test"
+        :default-size="defaultSize"
+        @change="imageChanged = true"
       />
       <img v-else class="w-full" :src="img" />
 
@@ -130,10 +144,9 @@ const fileUpload = (e) => {
       <div>
         <Input
           v-if="withLink"
-          :model-value="link"
+          v-model="localLinkValue"
           label="Link"
           placeholder="https://website.com"
-          @update:model-value="$emit('update:link', $event)"
         />
       </div>
     </div>
