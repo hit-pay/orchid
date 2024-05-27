@@ -69,7 +69,15 @@ const variants = {
     "list",
     "alignment",
   ],
-  "text-only": ["changes", "font-size", "font-style", "link"],
+  "text-only": [
+    "changes",
+    "font-size",
+    "font-style",
+    "link",
+    "quote",
+    "list",
+    "alignment",
+  ],
 };
 
 const toolbar = computed(() => variants[props.variant]);
@@ -81,7 +89,7 @@ Quill.register(Size, true);
 const id = ref(
   Math.random()
     .toString(36)
-    .replace(/[^a-zA-Z]+/g, ""),
+    .replace(/[^a-zA-Z]+/g, "")
 );
 const isUndoActive = ref(false);
 const isRedoActive = ref(false);
@@ -257,12 +265,10 @@ const updateImageWidth = (val) => {
   imageWidth.value = val;
   const focusNode = window.getSelection()?.focusNode;
   if (focusNode && focusNode.nodeName !== "#text") {
+    quill.value.getQuill().format("width", `${imageWidth.value}%`);
     focusNode
       ?.querySelector("img")
-      ?.setAttribute(
-        "style",
-        `margin:auto;width:${imageWidth.value}%;display:block;`,
-      );
+      ?.setAttribute("style", `margin:auto;display:block;`);
   }
 };
 
@@ -529,7 +535,17 @@ const onClickContent = () => {
                 v-model="colorPickModel"
                 hide-input-color
                 @update:model-value="setColor"
-              />
+              >
+                <template #picker-icon>
+                  <div class="grid cursor-pointer">
+                    <div :style="`color:${colorPickModel}`">A</div>
+                    <div
+                      class="h-[5px] w-full rounded border"
+                      :style="`background:${colorPickModel}`"
+                    ></div>
+                  </div>
+                </template>
+              </ColorPicker>
             </div>
             <div class="border-l border-oc-gray-200" />
 

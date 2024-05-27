@@ -120,11 +120,13 @@ const handleClickLastUsedColor = (color) => {
         </template>
       </Input>
       <div v-else>
-        <Icon
-          class="cursor-pointer"
-          :style="`color: ${inputValue}`"
-          name="drop"
-        />
+        <slot name="picker-icon">
+          <Icon
+            class="cursor-pointer"
+            :style="`color: ${inputValue}`"
+            name="drop"
+          />
+        </slot>
       </div>
       <template #menu>
         <ColorPickerPopup
