@@ -83,10 +83,8 @@ const changeImage = (url) => {
   }
 };
 const updateLink = (link) => {
-  console.log("updateLink", updateLink);
   let changedFile = props.uploadedImages[editImgIndex.value];
   changedFile.link = link;
-  console.log("props.uploadedImages", props.uploadedImages);
   emit("update:uploadedImages", props.uploadedImages);
 };
 
