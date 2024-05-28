@@ -1226,6 +1226,13 @@ const onChangeMode = (value) => {
     }, 200);
   } else if (value === "solid") {
     mode.value = "solid";
+
+    colorList.value = colorList.value.map((c) => {
+      c.select = false;
+      return c;
+    });
+    colorList.value[0].select = true;
+
     setTimeout(() => {
       applyValue(props.modelValue);
     }, 200);
