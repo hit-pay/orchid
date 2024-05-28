@@ -7,7 +7,10 @@
         :min-limit="0"
         :max-limit="360"
         @update:modelValue="handleInput($event, 'angle')"
-      />
+      >
+        <template #min-limit-label>0 </template>
+        <template #max-limit-label>100<span>&#176;</span></template>
+      </Slider>
     </template>
 
     <template v-if="gradientType == 'radial' && isShowRadialAngleRange">
@@ -18,14 +21,20 @@
           :min-limit="0"
           :max-limit="100"
           @update:modelValue="handleInput($event, 'percentageX')"
-        />
+        >
+          <template #min-limit-label>0</template>
+          <template #max-limit-label>100%</template>
+        </Slider>
         <Slider
           label="Position Y"
           :model-value="percentageY"
           :min-limit="0"
           :max-limit="100"
           @update:modelValue="handleInput($event, 'percentageY')"
-        />
+        >
+          <template #min-limit-label>0</template>
+          <template #max-limit-label>100%</template>
+        </Slider>
       </div>
     </template>
   </div>
