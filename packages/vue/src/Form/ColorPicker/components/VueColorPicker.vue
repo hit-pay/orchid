@@ -114,7 +114,7 @@
       class="ck-cp-local-color-conatiner"
     >
       <div
-        v-for="color in localColorList"
+        v-for="color in localColorListFiltered"
         :key="`color-${color}`"
         class="ck-cp-color-item !w-[32px] !h-[32px]"
         :style="`background:${color}`"
@@ -125,7 +125,15 @@
 </template>
 
 <script setup>
-import { onMounted, ref, reactive, provide, watch, nextTick } from "vue";
+import {
+  onMounted,
+  ref,
+  reactive,
+  provide,
+  watch,
+  nextTick,
+  computed,
+} from "vue";
 
 import InputHex from "./input/InputHex.vue";
 import InputRgbHsl from "./input/InputRgbHsl.vue";
@@ -223,6 +231,15 @@ watch(
     deep: true,
   }
 );
+
+const localColorListFiltered = computed(() => {
+  if (props.variant !== "gradient") {
+    return localColorList.value.filter(
+      (c) => !c.includes("linear") && !c.includes("radial")
+    );
+  }
+  return localColorList.value;
+});
 
 const isEyeDropperUsing = ref(false);
 const gradientType = ref("linear");
