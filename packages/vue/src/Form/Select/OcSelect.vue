@@ -400,5 +400,11 @@ defineExpose({
         </div>
       </template>
     </Dropdown>
+    <template #tooltipText>
+      <div v-if="$slots.selectTooltipText">
+        <slot name="selectTooltipText"></slot>
+      </div>
+
+    </template>
   </BaseInput>
 </template>
