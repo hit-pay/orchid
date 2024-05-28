@@ -91,9 +91,11 @@ const onCloseDropdown = (dropdownOpen) => {
 
 const handleClickLastUsedColor = (color) => {
   isOpen.value = false;
-  inputValue.value = color;
-
-  setTimeout(() => (isOpen.value = true), 10);
+  setTimeout(() => {
+    inputValue.value = color;
+    emit("update:model-value", color);
+    isOpen.value = true;
+  }, 50);
 };
 </script>
 
@@ -130,6 +132,7 @@ const handleClickLastUsedColor = (color) => {
       </div>
       <template #menu>
         <ColorPickerPopup
+          v-if="isOpen"
           :variant="variant"
           :show-alpha="!hideOpacity"
           :type="hideOpacity ? 'HEX' : 'HEX8'"

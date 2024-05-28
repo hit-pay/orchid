@@ -81,7 +81,7 @@ const fillColor = (onlyFillColor = false) => {
       "update:modelValue",
       props.type === "range"
         ? [sliderOne.value?.value, sliderTwo.value?.value]
-        : sliderOne.value.value,
+        : sliderOne.value.value
     );
   }
 };
@@ -160,8 +160,12 @@ onMounted(() => updateSlider());
         {{ modelValue?.[1] }}
       </div>
 
-      <span class="absolute bottom-0 left-0">{{ minLimit }}</span>
-      <span class="absolute bottom-0 right-0">{{ maxLimit }}</span>
+      <span class="absolute bottom-0 left-0"
+        ><slot name="min-limit-label">{{ minLimit }}</slot></span
+      >
+      <span class="absolute bottom-0 right-0"
+        ><slot name="max-limit-label">{{ maxLimit }}</slot></span
+      >
     </div>
     <div
       v-if="variant === 'right'"
