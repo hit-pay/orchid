@@ -37,20 +37,22 @@ const isHovered = ref([]);
 const isDropdownOpen = ref([]);
 
 const handleEmit = (list, element) => {
-  emit('update:modelValue', list, element)
-}
+  emit("update:modelValue", list, element);
+};
 </script>
 <template>
   <Draggable
     v-slot="{ list }"
     :model-value="modelValue"
     class="grid gap-3"
-    @update:model-value="(changedList, changedElement) => handleEmit(changedList, changedElement)"
+    @update:model-value="
+      (changedList, changedElement) => handleEmit(changedList, changedElement)
+    "
     @detect-move="$emit('detectMove', $event)"
   >
     <!-- wrapper -->
     <div
-      v-for="element in list"
+      v-for="(element, indexElement) in list"
       :key="element.id"
       class="group text-oc-text-500 p-4 flex flex-col w-full rounded border border-gray-200 cursor-pointer"
       :class="
@@ -159,7 +161,11 @@ const handleEmit = (list, element) => {
                 <Icon name="dots-vertical" />
               </div>
               <template #menu>
-                <slot name="action-item" :item="element"></slot>
+                <slot
+                  name="action-item"
+                  :item="element"
+                  :index="indexElement"
+                ></slot>
               </template>
             </Dropdown>
           </slot>

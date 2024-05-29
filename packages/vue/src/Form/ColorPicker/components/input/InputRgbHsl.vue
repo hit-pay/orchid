@@ -1,8 +1,20 @@
 <template>
   <div class="grid grid-cols-3 gap-3">
-    <Input v-model="internal.r" placeholder="100" @blur="updateValue('r')" />
-    <Input v-model="internal.g" placeholder="100" @blur="updateValue('g')" />
-    <Input v-model="internal.b" placeholder="100" @blur="updateValue('b')" />
+    <Input
+      :model-value="internal.r"
+      placeholder="100"
+      @update:model-value="updateValue('r', $event)"
+    />
+    <Input
+      :model-value="internal.g"
+      placeholder="100"
+      @update:model-value="updateValue('g', $event)"
+    />
+    <Input
+      :model-value="internal.b"
+      placeholder="100"
+      @update:model-value="updateValue('b', $event)"
+    />
   </div>
 </template>
 
@@ -28,9 +40,13 @@ const emits = defineEmits({
   "update-hsl-value": [],
 });
 
-const internal = ref("");
+const internal = ref({
+  r: 0,
+  g: 0,
+  b: 0,
+});
 
-const updateValue = (rgbType) => {
+const updateValue = (rgbType, value) => {
   let maxLength = 255;
   if (props.inputType == "HSL") {
     maxLength = 100;
@@ -39,49 +55,39 @@ const updateValue = (rgbType) => {
     }
   }
   // validate
+
+  if (isNaN(parseInt(value))) {
+    return;
+  }
+
   if (rgbType == "r") {
-    let rInput = parseInt(internal.value.r);
+    let rInput = parseInt(value);
     if (rInput <= maxLength) {
+      internal.value.r = rInput;
       if (props.inputType == "RGB") {
         updateRgb("r");
       } else {
         updateHsl();
       }
-    } else {
-      if (props.inputType == "RGB") {
-        internal.value.r = props.rgbValue.r;
-      } else {
-        internal.value.r = props.hslValue.h;
-      }
     }
   } else if (rgbType == "g") {
-    let rInput = parseInt(internal.value.g);
-    if (rInput <= maxLength) {
+    let gInput = parseInt(value);
+    if (gInput <= maxLength) {
+      internal.value.g = gInput;
       if (props.inputType == "RGB") {
         updateRgb("g");
       } else {
         updateHsl();
       }
-    } else {
-      if (props.inputType == "RGB") {
-        internal.value.g = props.rgbValue.g;
-      } else {
-        internal.value.g = props.hslValue.s;
-      }
     }
   } else if (rgbType == "b") {
-    let rInput = parseInt(internal.value.b);
-    if (rInput <= maxLength) {
+    let bInput = parseInt(value);
+    if (bInput <= maxLength) {
+      internal.value.b = bInput;
       if (props.inputType == "RGB") {
         updateRgb("b");
       } else {
         updateHsl();
-      }
-    } else {
-      if (props.inputType == "RGB") {
-        internal.value.b = props.rgbValue.b;
-      } else {
-        internal.value.g = props.hslValue.l;
       }
     }
   }

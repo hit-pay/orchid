@@ -1,7 +1,7 @@
 <script setup>
 import { Toggle, Icon, Tooltip } from "@/orchidui";
 
-defineProps({
+const props = defineProps({
   title: String,
   description: {
     type: String,
@@ -16,8 +16,13 @@ defineProps({
   toggleProps: Object,
   popperMessage: String,
   errorMessage: String,
+  defaultValue: Boolean,
 });
-defineEmits(["update:modelValue"]);
+const emit = defineEmits(["update:modelValue"]);
+
+if (props.defaultValue) {
+  emit("update:modelValue", true);
+}
 </script>
 
 <template>

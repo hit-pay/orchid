@@ -82,12 +82,11 @@ export const useUploadFileProgress = (maxSize, emit) => {
   };
 
   const onDeleteFile = (index) => {
-    emit(
-      "onRemoveFile",
-      currentFiles.value.find((_, i) => i === index)
-    );
+    let selected = currentFiles.value.find((_, i) => i === index);
+    currentFiles.value = currentFiles.value.filter((c) => c !== selected);
 
-    currentFiles.value.splice(index, 1);
+    emit("onRemoveFile", selected);
+
     emit(
       "update:modelValue",
       currentFiles.value.length > 0 ? currentFiles.value : null
