@@ -45,11 +45,11 @@ const isDropdownOpened = ref(false);
 const selectedLinkType = ref(props.type ?? props.links?.[0]?.value);
 const linkTitle = ref(props.title ?? "");
 const selectedLinkTypeProps = computed(
-  () => props.links.find((link) => link.value === selectedLinkType.value) ?? {},
+  () => props.links.find((link) => link.value === selectedLinkType.value) ?? {}
 );
 const preFill = computed(() => selectedLinkTypeProps.value.preFill ?? "");
 const localValue = ref(
-  props.modelValue ? props.modelValue.replace(preFill.value, "") : "",
+  props.modelValue ? props.modelValue.replace(preFill.value, "") : ""
 );
 
 const updateLinkType = (value) => {
@@ -67,7 +67,7 @@ const update = (value) => {
 };
 
 const placeholderInput = computed(
-  () => selectedLinkTypeProps.value.placeholder ?? "",
+  () => selectedLinkTypeProps.value.placeholder ?? ""
 );
 const isOtherLink = computed(() => selectedLinkType.value === "link");
 </script>
@@ -80,6 +80,7 @@ const isOtherLink = computed(() => selectedLinkType.value === "link");
       class="mb-3"
       label="Title"
       placeholder="Title"
+      :error-message="errorMessage"
       @update:model-value="$emit('update:title', $event)"
     />
     <Input
