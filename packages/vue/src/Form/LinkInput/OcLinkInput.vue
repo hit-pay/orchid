@@ -80,6 +80,7 @@ const isOtherLink = computed(() => selectedLinkType.value === "link");
       class="mb-3"
       label="Title"
       placeholder="Title"
+      :error-message="errorMessage ? ' ' : ''"
       @update:model-value="$emit('update:title', $event)"
     />
     <Input
