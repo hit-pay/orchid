@@ -1,3 +1,4 @@
-import PieChart from "./OcPieChart.vue";
+import { defineAsyncComponent } from "vue";
 
+const PieChart = defineAsyncComponent(() => import("./OcPieChart.vue"));
 export { PieChart };
