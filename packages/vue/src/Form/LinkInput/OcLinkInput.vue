@@ -53,6 +53,13 @@ const localValue = ref(
 );
 
 const updateLinkType = (value) => {
+  const newPreFill = props.links.find((link) => link.value === value)?.preFill;
+
+  emit(
+    "update:modelValue",
+    props.modelValue.replace(preFill.value, newPreFill)
+  );
+
   selectedLinkType.value = value;
   emit("update:type", value);
   isDropdownOpened.value = false;
