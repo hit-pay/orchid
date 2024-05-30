@@ -174,7 +174,7 @@ const handleEmit = (list, element) => {
 
       <!-- extra content -->
       <div class="flex w-full">
-        <slot name="content" :item="element" />
+        <slot name="content" :item="element" :index="indexElement" />
       </div>
     </div>
   </Draggable>
