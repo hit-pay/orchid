@@ -220,7 +220,7 @@ watch(
   },
   {
     deep: true,
-  }
+  },
 );
 
 watch(
@@ -230,14 +230,14 @@ watch(
   },
   {
     deep: true,
-  }
+  },
 );
 
 watch(
   () => props.previewMode,
   () => {
     setModelValues(props.values);
-  }
+  },
 );
 
 onMounted(() => {

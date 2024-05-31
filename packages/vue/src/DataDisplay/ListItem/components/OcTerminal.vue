@@ -4,6 +4,7 @@ import { Chip, Button } from "@/orchidui";
 defineProps({
   title: String,
   image: String,
+  imageClass: String,
   imageSize: {
     type: String,
     default: "medium",
@@ -33,10 +34,15 @@ const imageSizes = {
     :class="{ 'hover:shadow-normal': !isDisabled }"
   >
     <div
-      class="shrink-0 aspect-square bg-oc-bg-dark rounded overflow-hidden"
+      class="shrink-0 aspect-square flex items-center justify-center bg-oc-bg-dark rounded overflow-hidden"
       :class="imageSizes[imageSize]"
     >
-      <img :src="image" alt="terminal" class="object-contain h-full w-full" />
+      <img
+        :src="image"
+        :class="imageClass"
+        alt="terminal"
+        class="object-contain h-full w-full"
+      />
     </div>
 
     <div class="flex flex-col gap-y-1 overflow-hidden">

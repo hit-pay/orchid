@@ -10,9 +10,6 @@ import {
   Skeleton,
 } from "@/orchidui";
 import dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
-
-dayjs.extend(utc);
 
 const Variants = {
   CHECKBOX: "checkbox",
@@ -154,7 +151,7 @@ const variantClass = computed(() => ({
         <TableCellContent
           v-else-if="variant === Variants.DATETIME"
           :title="dayjs(data).format('D MMM, YYYY')"
-          :description="dayjs.utc(data).local().format('h:mm A')"
+          :description="dayjs(data).format('h:mm A')"
           :link="link"
         />
 
