@@ -59,7 +59,7 @@ export const Default = {
                 </template>
               </Tooltip>
               <Tooltip :key="args.trigger" :trigger="args.trigger" :distance="args.distance" :skidding="args.skidding"
-                       :position="args.position"
+                       :position="args.position" is-popover
                        popper-class="bg-oc-gray-900 text-oc-text-100">
                 <div class="p-3 rounded-sm cursor-pointer">Trigger</div>
                 <template #popper>

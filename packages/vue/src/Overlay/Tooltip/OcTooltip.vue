@@ -50,11 +50,17 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  isPopover: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const isShow = ref(false);
 const triggerEl = ref();
+const popperBodyEl = ref();
 const popper = ref();
+
 const show = () => {
   isShow.value = true;
   // Update its position
@@ -76,9 +82,19 @@ onMounted(() => {
     hideEvents.forEach((event) => {
       triggerEl.value.addEventListener(event, hide);
     });
+
+    if (props.isPopover) {
+      showEvents.forEach((event) => {
+        popperBodyEl.value.addEventListener(event, show);
+      });
+
+      hideEvents.forEach((event) => {
+        popperBodyEl.value.addEventListener(event, hide);
+      });
+    }
   } else {
     triggerEl.value.addEventListener("click", () =>
-      isShow.value ? hide() : show()
+      isShow.value ? hide() : show(),
     );
   }
 });
@@ -101,7 +117,12 @@ const onClickOutside = () => {
       </div>
       <template #popper>
         <Transition :name="transitionName">
-          <div v-show="isShow" class="oc-tooltip" :class="popperClass">
+          <div
+            v-show="isShow"
+            ref="popperBodyEl"
+            class="oc-tooltip"
+            :class="popperClass"
+          >
             <slot name="popper" />
             <div v-if="!arrowHidden" class="oc-arrow" data-popper-arrow />
           </div>
