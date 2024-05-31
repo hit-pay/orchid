@@ -25,7 +25,7 @@ defineEmits(["update:model-value"]);
         :value="i + 1"
         :is-current="i === modelValue"
         :is-completed="i < modelValue"
-        class="flex flex-col gap-y-3 text-sm"
+        class="flex flex-col gap-y-3 items-center text-sm"
         @click="$emit('update:model-value', i)"
       />
     </slot>
