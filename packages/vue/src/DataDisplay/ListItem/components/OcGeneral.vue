@@ -108,9 +108,11 @@ const toggleDashboard = () => {
                   :name="item.icon"
                   width="16"
                   height="16"
-                  class="text-oc-text-400"
+                  class="text-oc-text-400 shrink-0"
                 />
-                <div class="font-medium text-oc-text-500 text-sm">
+                <div
+                  class="font-medium whitespace-nowrap text-oc-text-500 text-sm"
+                >
                   {{ item.label }}
                 </div>
               </div>

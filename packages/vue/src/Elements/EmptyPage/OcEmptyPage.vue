@@ -41,6 +41,10 @@ defineProps({
     validator: (value) => ["large", "default", "small"].includes(value),
     default: "default",
   },
+  hideBadge: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const sizes = computed(() => ({
@@ -108,7 +112,7 @@ const sizes = computed(() => ({
         />
       </div>
       <Icon
-        v-if="!isUpgrade"
+        v-if="!isUpgrade && !hideBadge"
         name="exclamation"
         :width="sizes[size].badge.size"
         :height="sizes[size].badge.size"

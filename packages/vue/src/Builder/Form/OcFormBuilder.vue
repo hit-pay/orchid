@@ -255,11 +255,12 @@ onMounted(() => {
       v-for="form in jsonForm"
       :key="getFormKey(form.name)"
       :style="grid ? gridArea(form.name) : ''"
-      :class="
+      :class="[
         formClass[
           typeof form.name === 'object' ? getFirstName(form.name) : form.name
-        ]
-      "
+        ],
+        form.class,
+      ]"
     >
       <component
         :is="getComponentByType(form.type)"
