@@ -2,6 +2,7 @@
 import { Button, Icon, Checkbox } from "@/orchidui";
 import { computed, ref } from "vue";
 import dayjs from "dayjs";
+import { debounce } from "lodash-es";
 import isBetween from "dayjs/plugin/isBetween";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
@@ -69,6 +70,7 @@ const selectedDate = ref(
 const selectedStartDate = ref(selectedDate.value);
 const isCalendarIndefinite = ref(false);
 const isStartDateSet = ref(false);
+const hoveringDay = ref();
 
 const selectedEndDate = ref(
   props.type === "range"
@@ -101,53 +103,6 @@ const selectedMonth = computed(() => selectedDate.value.format("MMMM YYYY"));
 
 const isRangeSelection = computed(() => props.type === "range");
 
-const selectDay = (day) => {
-  if (!isRangeSelection.value) {
-    let currentMonth = dayjs(selectedMonth.value, "MMMM YYYY").date(day);
-
-    selectedStartDay.value = day;
-    selectedStartDate.value = currentMonth;
-    selectedEndDay.value = null;
-    selectedEndDate.value = null;
-
-    return;
-  }
-
-  let currentMonth = selectedDate.value.date(day);
-
-  if (selectedStartDay.value && props.dateSelecting === "to") {
-    selectedEndDay.value = day;
-    selectedEndDate.value = currentMonth;
-
-    return;
-  }
-
-  if (!isStartDateSet.value) {
-    selectedStartDay.value = day;
-    selectedStartDate.value = currentMonth;
-
-    selectedEndDay.value = day;
-    selectedEndDate.value = currentMonth;
-
-    isStartDateSet.value = true;
-    emit(
-      "start-date-selected",
-      dayjs(selectedMonth.value, "MMMM YYYY").date(day),
-    );
-
-    return;
-  }
-
-  if (dayjs(selectedStartDate.value).isSameOrAfter(currentMonth)) {
-    selectedStartDay.value = day;
-    selectedStartDate.value = currentMonth;
-
-    return;
-  }
-
-  selectedEndDay.value = day;
-  selectedEndDate.value = currentMonth;
-};
 
 const clearDate = () => {
   if (isRangeSelection.value) {
@@ -222,6 +177,7 @@ const isDayInRange = (day) => {
       )
     );
   }
+
   return (
     selectedStartDay.value &&
     selectedEndDay.value &&
@@ -267,6 +223,58 @@ const doneSelecting = () => {
 const handleIndefinite = (value) => {
   emit("update:isIndefinite", value);
 };
+
+const selectDay = (day, shouldEmit = true) => {
+  if (!isRangeSelection.value) {
+    let currentMonth = dayjs(selectedMonth.value, "MMMM YYYY").date(day);
+
+    selectedStartDay.value = day;
+    selectedStartDate.value = currentMonth;
+    selectedEndDay.value = null;
+    selectedEndDate.value = null;
+
+    return;
+  }
+
+  let currentMonth = selectedDate.value.date(day);
+
+  if (!isStartDateSet.value) {
+    selectedStartDay.value = day;
+    selectedStartDate.value = currentMonth;
+
+    // Set end date the same to not show dates in range
+    selectedEndDay.value = day;
+    selectedEndDate.value = currentMonth;
+    isStartDateSet.value = true;
+
+    return;
+  }
+
+  const from = selectedStartDate.value;
+  const result = [from, currentMonth]
+
+  if (dayjs(selectedStartDate.value).isSameOrAfter(currentMonth)) {
+    result.reverse()
+  }
+
+  selectedStartDate.value = result[0];
+  selectedStartDay.value = result[0].date();
+  selectedEndDate.value = result[1];
+  selectedEndDay.value = result[1].date();
+
+  if (shouldEmit) {
+    doneSelecting();
+  }
+};
+
+const selectDayDebounced = debounce((value) => {
+  // Do not hover state when model value is selected
+  if (!isStartDateSet.value) {
+    return
+  }
+
+  selectDay(value, false)
+}, 100);
 </script>
 
 <template>
@@ -313,12 +321,11 @@ const handleIndefinite = (value) => {
           isDayDisabled(day) ? 'pointer-events-none opacity-[.35]' : '',
           isRangeSelection
             ? {
-                'before:bg-oc-primary-50-tr before:px-3 before:w-[calc(100%+0.5rem)] before:h-full before:absolute':
-                  isDayInRange(day),
-                'before:rounded-l-full before:left-0 before:!w-[calc(100%+0.25rem)]':
-                  isDayInRange(day) && day === selectedStartDay,
-                'before:rounded-r-full before:right-0 before:!w-[calc(100%+0.25rem)]':
-                  isDayInRange(day) && day === selectedEndDay,
+                ...(isDayInRange(day) && {
+                  'before:bg-oc-primary-50-tr before:px-3 before:w-[calc(100%+0.5rem)] before:h-full before:absolute': true,
+                  'before:rounded-l-full before:left-0 before:!w-[calc(100%+0.25rem)]': day === selectedStartDay,
+                  'before:rounded-r-full before:right-0 before:!w-[calc(100%+0.25rem)]': day === selectedEndDay,
+                }),
                 'before:bg-transparent':
                   selectedStartDay !== null &&
                   selectedStartDay === selectedEndDay,
@@ -326,6 +333,7 @@ const handleIndefinite = (value) => {
             : '',
         ]"
         @click="selectDay(day)"
+        @mouseover="selectDayDebounced(day)"
       >
         {{ day }}
       </div>
@@ -341,6 +349,7 @@ const handleIndefinite = (value) => {
       </span>
     </slot>
 
+    {{ daysActive }}
     <div class="flex gap-x-3 justify-end">
       <Button
         variant="secondary"
