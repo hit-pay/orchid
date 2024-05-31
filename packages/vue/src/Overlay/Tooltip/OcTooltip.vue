@@ -78,7 +78,7 @@ onMounted(() => {
     });
   } else {
     triggerEl.value.addEventListener("click", () =>
-      isShow.value ? hide() : show(),
+      isShow.value ? hide() : show()
     );
   }
 });
@@ -88,7 +88,7 @@ const onClickOutside = () => {
 </script>
 
 <template>
-  <span v-click-outside="onClickOutside" class="relative oc-tooltip-wrapper">
+  <span v-click-outside="onClickOutside" class="oc-tooltip-wrapper">
     <Popper
       ref="popper"
       :placement="position"
