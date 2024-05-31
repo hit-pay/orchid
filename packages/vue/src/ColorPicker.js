@@ -1,3 +1,6 @@
+import { defineAsyncComponent } from "vue";
 import ColorPicker from "./Form/ColorPicker/ColorPicker.vue";
-import ColorPickerPopup from "./Form/ColorPicker/components/VueColorPicker.vue";
+const ColorPickerPopup = defineAsyncComponent(
+  () => import("./Form/ColorPicker/components/VueColorPicker.vue")
+);
 export { ColorPicker, ColorPickerPopup };
