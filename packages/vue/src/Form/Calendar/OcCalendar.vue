@@ -30,11 +30,6 @@ const props = defineProps({
     type: String,
     default: "floating",
   },
-  dateSelecting: {
-    type: String,
-    default: undefined,
-    validator: (value) => (value ? ["from", "to"].includes(value) : true),
-  },
   modelValue: {
     type: [String, Date, Number, Array],
     default: null,
@@ -57,35 +52,22 @@ const props = defineProps({
 const emit = defineEmits([
   "update:modelValue",
   "resetCalendar",
-  "start-date-selected",
   "update:isIndefinite",
 ]);
 
-const isRangeSelection = computed(() => props.type === "range");
+const selectedDate = ref();
 
-const selectedDate = ref(
-  isRangeSelection.value
-    ? dayjs(props.modelValue?.[0])
-    : dayjs(props.modelValue ?? undefined),
-);
+const selectedStartDate = ref();
+const selectedEndDate = ref();
+const selectedStartDay = ref();
+const selectedEndDay = ref();
 
-const selectedStartDate = ref(selectedDate.value);
-const isCalendarIndefinite = ref(false);
-const isStartDateSet = ref(false);
 const hoveringDate = ref();
 
-const selectedEndDate = ref(
-  isRangeSelection.value
-    ? dayjs(props.modelValue?.[1])
-    : null,
-);
+const isCalendarIndefinite = ref(false);
+const isStartDateSet = ref(false);
 
-const selectedStartDay = ref(props.modelValue ? selectedStartDate.value.date() : null);
-const selectedEndDay = ref(
-    isRangeSelection.value && props.modelValue && selectedEndDate.value.month() === selectedDate.value.month()
-      ? selectedEndDate.value.date()
-      : null,
-);
+const isRangeSelection = computed(() => props.type === "range");
 
 const daysInMonth = computed(() => {
   const date = selectedDate.value;
@@ -107,46 +89,33 @@ const selectedRangeDate = computed(() => {
   }
 
   return {
-    start: result[0],
-    end: result[1],
+    from: result[0],
+    to: result[1],
   }
 })
 
-const clearDate = () => {
-  if (isRangeSelection.value) {
-    selectedStartDate.value = dayjs(props.modelValue[0] ?? undefined);
-    selectedEndDate.value = dayjs(props.modelValue[1]) || dayjs().add(2, "day");
-  } else {
-    selectedStartDate.value = dayjs(props.modelValue ?? undefined);
+const prevMonth = () => {
+  hoveringDate.value = null;
+  selectedDate.value = selectedDate.value.subtract(1, "month");
+
+  if (!selectedStartDate.value) {
+    return;
   }
 
-  selectedStartDay.value =
-    selectedStartDate.value?.month() === selectedDate.value?.month()
-      ? selectedStartDate.value?.toDate()
-      : null;
-  selectedEndDay.value = isRangeSelection.value
-    ? selectedEndDate.value?.month() === selectedDate.value?.month()
-      ? selectedEndDate.value?.toDate()
-      : null
-    : null;
-
-  emit("resetCalendar");
-};
-
-const prevMonth = () => {
-  selectedDate.value = selectedDate.value.subtract(1, "month");
   selectedStartDay.value =
     selectedDate.value.month() === selectedStartDate.value.month()
       ? selectedStartDate.value.date()
       : null;
   selectedEndDay.value =
-    dayjs(selectedDate.value).month() === dayjs(selectedEndDate.value).month()
+    selectedDate.value.month() === selectedEndDate.value.month()
       ? dayjs(selectedEndDate.value).date()
       : null;
 };
 
 const nextMonth = () => {
+  hoveringDate.value = null;
   selectedDate.value = selectedDate.value.add(1, "month");
+
   selectedStartDay.value =
     dayjs(selectedDate.value).month() === dayjs(selectedStartDate.value).month()
       ? dayjs(selectedStartDate.value).date()
@@ -160,12 +129,12 @@ const nextMonth = () => {
 const isDaySelected = (day) => {
   return (
     (selectedStartDay.value === day &&
-      dayjs(selectedMonth.value, "MMMM YYYY").isSame(
+        selectedDate.value.isSame(
         selectedStartDate.value,
         "month",
       )) ||
     (selectedEndDay.value === day &&
-      dayjs(selectedMonth.value, "MMMM YYYY").isSame(
+        selectedDate.value.isSame(
         selectedEndDate.value,
         "month",
       ))
@@ -194,11 +163,11 @@ const isDayInRange = (day) => {
 };
 
 const isDayDisabled = (day) => {
-  const currentDate = dayjs(selectedDate.value).date(day);
+  const currentDate = selectedDate.value.date(day);
   return (
-    props.disabledDate(currentDate.toDate()) ||
-    (props.minDate && currentDate.isBefore(dayjs(props.minDate), "day")) ||
-    (props.maxDate && currentDate.isAfter(dayjs(props.maxDate), "day"))
+    props.disabledDate(currentDate.toDate())
+    || (props.minDate && currentDate.isBefore(dayjs(props.minDate), "day"))
+    || (props.maxDate && currentDate.isAfter(dayjs(props.maxDate), "day"))
   );
 };
 
@@ -272,7 +241,28 @@ const selectDayDebounced = debounce((value) => {
   }
 
   selectDay(value, false)
-}, 100);
+}, 50);
+
+const initCalendar = () => {
+  const model = isRangeSelection.value ? props.modelValue?.[0] : props.modelValue;
+
+  // set calendar is from modelValue, else default is current month
+  selectedDate.value = dayjs(model);
+  selectedStartDate.value = model && selectedDate.value;
+  selectedStartDay.value = model && selectedStartDate.value.date();
+
+  if (!isRangeSelection.value || !model) {
+    return
+  }
+
+  // set data for range date selection
+  selectedEndDate.value = dayjs(props.modelValue?.[1]);
+  selectedEndDay.value = selectedEndDate.value.month() === selectedDate.value.month()
+      ? selectedEndDate.value.date()
+      : undefined;
+}
+
+initCalendar();
 </script>
 
 <template>
@@ -321,8 +311,8 @@ const selectDayDebounced = debounce((value) => {
             ? {
                 ...(isDayInRange(day) && {
                   'before:bg-oc-primary-50-tr before:px-3 before:w-[calc(100%+0.5rem)] before:h-full before:absolute': true,
-                  'before:rounded-l-full before:left-0 before:!w-[calc(100%+0.25rem)]': day === selectedRangeDate.start?.date(),
-                  'before:rounded-r-full before:right-0 before:!w-[calc(100%+0.25rem)]': day === selectedRangeDate.end?.date(),
+                  'before:rounded-l-full before:left-0 before:!w-[calc(100%+0.25rem)]': selectedRangeDate.from?.isSame(selectedDate.date(day)),
+                  'before:rounded-r-full before:right-0 before:!w-[calc(100%+0.25rem)]': selectedRangeDate.to?.isSame(selectedDate.date(day)),
                 }),
                 'before:bg-transparent':
                   selectedStartDay !== null &&
@@ -353,7 +343,7 @@ const selectDayDebounced = debounce((value) => {
         class="w-[72px]"
         label="Clear"
         :is-disabled="isCalendarIndefinite"
-        @click="clearDate"
+        @click="initCalendar"
       />
       <Button
         label="Done"
