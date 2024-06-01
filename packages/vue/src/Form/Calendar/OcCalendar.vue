@@ -81,7 +81,7 @@ const selectedMonth = computed(() => selectedDate.value.format("MMMM YYYY"));
 
 const selectedRangeDate = computed(() => {
   const start = selectedStartDate.value;
-  const end = hoveringDate.value ?? selectedEndDate.value;
+  const end = selectedEndDate.value ?? hoveringDate.value;
   const result = [start, end]
 
   if (dayjs(start).isSameOrAfter(end)) {
@@ -171,12 +171,6 @@ const isDayDisabled = (day) => {
   );
 };
 
-const getRangeDates = () => {
-  return [selectedStartDate.value, selectedEndDate.value].sort((a, b) =>
-    a.isBefore(b) ? -1 : 1,
-  );
-};
-
 const doneSelecting = () => {
   if (isRangeSelection.value) {
     if (
@@ -191,7 +185,7 @@ const doneSelecting = () => {
   emit(
     "update:modelValue",
     isRangeSelection.value
-      ? getRangeDates().map((date) => date.toDate())
+      ? [selectedRangeDate.value.from, selectedRangeDate.value.to].map((date) => date.toDate())
       : selectedStartDate.value.toDate(),
   );
 };
@@ -218,9 +212,9 @@ const selectDay = (day, shouldEmit = true) => {
     selectedStartDay.value = day;
     selectedStartDate.value = currentMonth;
 
-    // Set end date the same to not show dates in range
-    selectedEndDay.value = day;
-    selectedEndDate.value = currentMonth;
+    // reset end date the same to not show dates in range
+    selectedEndDay.value = undefined;
+    selectedEndDate.value = undefined;
     isStartDateSet.value = true;
 
     return;
@@ -258,8 +252,8 @@ const initCalendar = () => {
   // set data for range date selection
   selectedEndDate.value = dayjs(props.modelValue?.[1]);
   selectedEndDay.value = selectedEndDate.value.month() === selectedDate.value.month()
-      ? selectedEndDate.value.date()
-      : undefined;
+    ? selectedEndDate.value.date()
+    : undefined;
 }
 
 initCalendar();
