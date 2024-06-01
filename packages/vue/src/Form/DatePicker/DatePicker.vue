@@ -247,7 +247,7 @@ watch(inputTypeSelecting, (value) => {
             isRangeInput
               ? modelValue && modelValue[0]
                 ? [formattedDate[0].toDate(), formattedDate[1].toDate()]
-                : defaultDateRange()
+                : undefined
               : formattedDate
                 ? formattedDate.toDate()
                 : new Date()

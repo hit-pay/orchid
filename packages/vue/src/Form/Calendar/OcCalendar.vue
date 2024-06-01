@@ -61,34 +61,30 @@ const emit = defineEmits([
   "update:isIndefinite",
 ]);
 
+const isRangeSelection = computed(() => props.type === "range");
+
 const selectedDate = ref(
-  props.type === "range"
-    ? dayjs(props.modelValue[0] ?? undefined)
+  isRangeSelection.value
+    ? dayjs(props.modelValue?.[0])
     : dayjs(props.modelValue ?? undefined),
 );
 
 const selectedStartDate = ref(selectedDate.value);
 const isCalendarIndefinite = ref(false);
 const isStartDateSet = ref(false);
-const hoveringDay = ref();
+const hoveringDate = ref();
 
 const selectedEndDate = ref(
-  props.type === "range"
-    ? dayjs(props.modelValue[1] ?? selectedStartDate.value.add(2, "day"))
+  isRangeSelection.value
+    ? dayjs(props.modelValue?.[1])
     : null,
 );
 
-const selectedStartDay = ref(
-  selectedStartDate.value.isSame(selectedDate.value, "month")
-    ? dayjs(selectedStartDate.value).date()
-    : null,
-);
+const selectedStartDay = ref(props.modelValue ? selectedStartDate.value.date() : null);
 const selectedEndDay = ref(
-  props.type === "range"
-    ? selectedEndDate.value.month() === selectedDate.value.month()
+    isRangeSelection.value && props.modelValue && selectedEndDate.value.month() === selectedDate.value.month()
       ? selectedEndDate.value.date()
-      : null
-    : null,
+      : null,
 );
 
 const daysInMonth = computed(() => {
@@ -101,8 +97,20 @@ const daysInMonth = computed(() => {
 
 const selectedMonth = computed(() => selectedDate.value.format("MMMM YYYY"));
 
-const isRangeSelection = computed(() => props.type === "range");
+const selectedRangeDate = computed(() => {
+  const start = selectedStartDate.value;
+  const end = hoveringDate.value ?? selectedEndDate.value;
+  const result = [start, end]
 
+  if (dayjs(start).isSameOrAfter(end)) {
+    result.reverse()
+  }
+
+  return {
+    start: result[0],
+    end: result[1],
+  }
+})
 
 const clearDate = () => {
   if (isRangeSelection.value) {
@@ -168,7 +176,6 @@ const isDayInRange = (day) => {
   if (isRangeSelection.value) {
     const currentDate = selectedDate.value.date(day);
     return (
-      isDaySelected(day) ||
       currentDate.isBetween(
         selectedStartDate.value,
         selectedEndDate.value,
@@ -250,17 +257,8 @@ const selectDay = (day, shouldEmit = true) => {
     return;
   }
 
-  const from = selectedStartDate.value;
-  const result = [from, currentMonth]
-
-  if (dayjs(selectedStartDate.value).isSameOrAfter(currentMonth)) {
-    result.reverse()
-  }
-
-  selectedStartDate.value = result[0];
-  selectedStartDay.value = result[0].date();
-  selectedEndDate.value = result[1];
-  selectedEndDay.value = result[1].date();
+  selectedEndDate.value = currentMonth;
+  selectedEndDay.value = day;
 
   if (shouldEmit) {
     doneSelecting();
@@ -268,7 +266,7 @@ const selectDay = (day, shouldEmit = true) => {
 };
 
 const selectDayDebounced = debounce((value) => {
-  // Do not hover state when model value is selected
+  // Do not add hover state when start date has not selected
   if (!isStartDateSet.value) {
     return
   }
@@ -323,8 +321,8 @@ const selectDayDebounced = debounce((value) => {
             ? {
                 ...(isDayInRange(day) && {
                   'before:bg-oc-primary-50-tr before:px-3 before:w-[calc(100%+0.5rem)] before:h-full before:absolute': true,
-                  'before:rounded-l-full before:left-0 before:!w-[calc(100%+0.25rem)]': day === selectedStartDay,
-                  'before:rounded-r-full before:right-0 before:!w-[calc(100%+0.25rem)]': day === selectedEndDay,
+                  'before:rounded-l-full before:left-0 before:!w-[calc(100%+0.25rem)]': day === selectedRangeDate.start?.date(),
+                  'before:rounded-r-full before:right-0 before:!w-[calc(100%+0.25rem)]': day === selectedRangeDate.end?.date(),
                 }),
                 'before:bg-transparent':
                   selectedStartDay !== null &&
@@ -349,7 +347,6 @@ const selectDayDebounced = debounce((value) => {
       </span>
     </slot>
 
-    {{ daysActive }}
     <div class="flex gap-x-3 justify-end">
       <Button
         variant="secondary"
