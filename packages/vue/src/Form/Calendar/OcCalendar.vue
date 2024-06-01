@@ -82,9 +82,9 @@ const selectedMonth = computed(() => selectedDate.value.format("MMMM YYYY"));
 const selectedRangeDate = computed(() => {
   const start = selectedStartDate.value;
   const end = selectedEndDate.value ?? hoveringDate.value;
-  const result = [start, end]
+  const result = [start, end];
 
-  if (dayjs(start).isSameOrAfter(end)) {
+  if (end && start?.isAfter(end)) {
     result.reverse()
   }
 
@@ -94,6 +94,12 @@ const selectedRangeDate = computed(() => {
   }
 })
 
+const hasSelectedState = computed(() => Object.values(selectedRangeDate.value).filter(Boolean).length > 1)
+
+const currentSelectedMonth = computed(() => selectedDate.value.month())
+const isSelectedSameStartMonth = computed(() => currentSelectedMonth.value === selectedStartDate.value?.month())
+const isSelectedSameEndMonth = computed(() => currentSelectedMonth.value === selectedEndDate.value?.month())
+
 const prevMonth = () => {
   hoveringDate.value = null;
   selectedDate.value = selectedDate.value.subtract(1, "month");
@@ -102,52 +108,36 @@ const prevMonth = () => {
     return;
   }
 
-  selectedStartDay.value =
-    selectedDate.value.month() === selectedStartDate.value.month()
-      ? selectedStartDate.value.date()
-      : null;
-  selectedEndDay.value =
-    selectedDate.value.month() === selectedEndDate.value.month()
-      ? dayjs(selectedEndDate.value).date()
-      : null;
+  selectedStartDay.value = isSelectedSameStartMonth.value ? selectedStartDate.value.date() : null;
+  selectedEndDay.value = isSelectedSameEndMonth.value ? selectedEndDate.value.date() : null;
 };
 
 const nextMonth = () => {
   hoveringDate.value = null;
   selectedDate.value = selectedDate.value.add(1, "month");
 
-  selectedStartDay.value =
-    dayjs(selectedDate.value).month() === dayjs(selectedStartDate.value).month()
-      ? dayjs(selectedStartDate.value).date()
-      : null;
-  selectedEndDay.value =
-    dayjs(selectedDate.value).month() === dayjs(selectedEndDate.value).month()
-      ? dayjs(selectedEndDate.value).date()
-      : null;
+  selectedStartDay.value = isSelectedSameStartMonth.value ? selectedStartDate.value.date() : null;
+  selectedEndDay.value = isSelectedSameEndMonth.value ? selectedEndDate.value.date() : null;
 };
 
 const isDaySelected = (day) => {
-  return (
-    (selectedStartDay.value === day &&
-        selectedDate.value.isSame(
-        selectedStartDate.value,
-        "month",
-      )) ||
-    (selectedEndDay.value === day &&
-        selectedDate.value.isSame(
-        selectedEndDate.value,
-        "month",
-      ))
-  );
+  const date = selectedDate.value.date(day);
+
+  return Object.values(selectedRangeDate.value).filter(Boolean).find((selected) => selected.isSame(date));
 };
 
 const isDayInRange = (day) => {
   if (isRangeSelection.value) {
+    if (!hasSelectedState.value) {
+      return false;
+    }
+
     const currentDate = selectedDate.value.date(day);
+
     return (
       currentDate.isBetween(
-        selectedStartDate.value,
-        selectedEndDate.value,
+        selectedRangeDate.value.from,
+        selectedRangeDate.value.to,
         null,
         "[]",
       )
@@ -206,7 +196,7 @@ const selectDay = (day, shouldEmit = true) => {
     return;
   }
 
-  let currentMonth = selectedDate.value.date(day);
+  let currentMonth = day && selectedDate.value.date(day);
 
   if (!isStartDateSet.value) {
     selectedStartDay.value = day;
@@ -251,7 +241,7 @@ const initCalendar = () => {
 
   // set data for range date selection
   selectedEndDate.value = dayjs(props.modelValue?.[1]);
-  selectedEndDay.value = selectedEndDate.value.month() === selectedDate.value.month()
+  selectedEndDay.value = selectedEndDate.value?.month() === selectedDate.value.month()
     ? selectedEndDate.value.date()
     : undefined;
 }
@@ -291,7 +281,10 @@ initCalendar();
       </div>
     </div>
 
-    <div class="grid grid-cols-7 w-fit gap-3">
+    <div
+      class="grid grid-cols-7 w-fit gap-3"
+      @mouseout="selectDayDebounced(undefined)"
+    >
       <div
         v-for="day in daysInMonth"
         :key="day"
@@ -305,7 +298,7 @@ initCalendar();
             ? {
                 ...(isDayInRange(day) && {
                   'before:bg-oc-primary-50-tr before:px-3 before:w-[calc(100%+0.5rem)] before:h-full before:absolute': true,
-                  'before:rounded-l-full before:left-0 before:!w-[calc(100%+0.25rem)]': selectedRangeDate.from?.isSame(selectedDate.date(day)),
+                  'before:rounded-l-full before:left-0 before:!w-[calc(100%+0.25rem)]': selectedRangeDate.from.isSame(selectedDate.date(day)),
                   'before:rounded-r-full before:right-0 before:!w-[calc(100%+0.25rem)]': selectedRangeDate.to?.isSame(selectedDate.date(day)),
                 }),
                 'before:bg-transparent':
