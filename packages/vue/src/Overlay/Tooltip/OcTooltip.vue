@@ -94,7 +94,7 @@ onMounted(() => {
     }
   } else {
     triggerEl.value.addEventListener("click", () =>
-      isShow.value ? hide() : show(),
+      isShow.value ? hide() : show()
     );
   }
 });
@@ -111,6 +111,7 @@ const onClickOutside = () => {
       :skidding="skidding"
       :distance="distance"
       :popper-options="popperOptions"
+      class="!z-[1010]"
     >
       <div ref="triggerEl" class="w-[inherit] relative">
         <slot />
@@ -137,7 +138,7 @@ const onClickOutside = () => {
   box-shadow:
     0 3px 22px 0 rgba(38, 42, 50, 0.09),
     0 1px 3px 0 rgba(0, 0, 0, 0.1);
-  @apply rounded-sm z-[1006];
+  @apply rounded-sm z-[1010];
 
   &-wrapper {
     div[data-popper-placement^="top"] .oc-arrow {

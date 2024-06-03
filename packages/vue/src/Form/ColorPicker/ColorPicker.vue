@@ -106,7 +106,7 @@ const handleClickLastUsedColor = (color) => {
 <template>
   <BaseInput
     :class="hideInputColor ? 'w-[40px]' : ''"
-    @click.stop="() => dropdownRef?.toggleDropdown()"
+    @click="() => dropdownRef?.toggleDropdown()"
   >
     <Dropdown
       ref="dropdownRef"

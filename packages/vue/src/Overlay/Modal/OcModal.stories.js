@@ -179,6 +179,9 @@ export const FormInModal = {
                 :values="values"
                 :json-form="JSON_FORM"
                 @onUpdate="onUpdateForm" />
+                <div class="h-[1000px]">
+                space area
+                </div>
               </Modal>
             </div>
           </Theme>
