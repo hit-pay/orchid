@@ -1,6 +1,6 @@
 <script setup>
 import { Icon, Button } from "@/orchidui";
-import { computed } from "vue";
+import { computed, ref, watch, onUnmounted } from "vue";
 
 const props = defineProps({
   isBorderless: Boolean,
@@ -101,6 +101,20 @@ const sizeClasses = computed(() => ({
   medium: "max-w-[480px]",
   small: "max-w-[320px]",
 }));
+
+const scrollArea = ref()
+const  handleScroll = () => {
+  scrollArea.value?.click()
+}
+watch(() => props.modelValue, () => {
+  setTimeout(() => {
+    scrollArea.value?.addEventListener('scroll', handleScroll);
+  }, 100)
+})
+
+onUnmounted(() => {
+  scrollArea.value?.removeEventListener('scroll', handleScroll);
+})
 </script>
 
 <template>
@@ -115,12 +129,12 @@ const sizeClasses = computed(() => ({
     />
 
     <div
-      class="z-[1008] shadow-normal w-[calc(100%-40px)] max-h-[96vh] bg-oc-bg-light rounded-xl flex flex-col overflow-y-auto"
+      class="z-[1008] shadow-normal w-[calc(100%-40px)] max-h-[96vh] bg-oc-bg-light rounded-xl flex flex-col "
       :class="sizeClasses[size]"
     >
       <div
         v-if="isHeaderVisible"
-        class="flex border-oc-gray-200 gap-x-9 justify-between p-5 items-start"
+        class="flex bg-inherit border-oc-gray-200 gap-x-9 justify-between p-5 items-start z-[1011] rounded-t-xl"
         :class="!isBorderless ? 'border-b' : ''"
       >
         <slot name="header">
@@ -151,6 +165,8 @@ const sizeClasses = computed(() => ({
 
       <div
         :id="modalId"
+        ref="scrollArea"
+        class="overflow-y-auto"
         :class="[size === 'small' ? 'p-5' : 'p-7', isBorderless ? 'py-0' : '']"
       >
         <slot></slot>
