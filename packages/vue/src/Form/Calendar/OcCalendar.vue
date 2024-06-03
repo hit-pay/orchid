@@ -51,7 +51,7 @@ const props = defineProps({
 });
 const emit = defineEmits([
   "update:modelValue",
-  "resetCalendar",
+  "reset-calendar",
   "update:isIndefinite",
 ]);
 
@@ -326,17 +326,10 @@ initCalendar();
 
     <div class="flex gap-x-3 justify-end">
       <Button
-        variant="secondary"
-        class="w-[72px]"
-        label="Clear"
-        :is-disabled="isCalendarIndefinite"
-        @click="initCalendar"
-      />
-      <Button
-        label="Done"
+        label="Reset"
         class="w-[72px]"
         :is-disabled="isCalendarIndefinite"
-        @click="doneSelecting"
+        @click="emit('reset-calendar')"
       />
     </div>
   </div>
