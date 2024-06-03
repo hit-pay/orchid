@@ -192,6 +192,7 @@ const selectDay = (day, shouldEmit = true) => {
     selectedStartDate.value = currentMonth;
     selectedEndDay.value = null;
     selectedEndDate.value = null;
+    doneSelecting()
 
     return;
   }
