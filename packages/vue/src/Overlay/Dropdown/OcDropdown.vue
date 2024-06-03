@@ -101,7 +101,7 @@ defineExpose({
               maxHeight: (maxMenuHeight || maxPopperHeight) + 'px',
             }"
           >
-            <slot name="menu" />
+            <slot name="menu" :isPopoverOpen="modelValue" />
           </div>
         </Transition>
       </template>

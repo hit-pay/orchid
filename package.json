@@ -24,6 +24,7 @@
     "esbuild": "^0.20.1",
     "flag-icons": "^6.11.1",
     "libphonenumber-js": "^1.10.51",
+    "lodash-es": "^4.17.21",
     "quill": "^2.0.0-rc.0",
     "shikiji": "^0.9.18",
     "v-calendar": "^3.1.2",

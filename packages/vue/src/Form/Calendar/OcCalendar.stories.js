@@ -1,6 +1,5 @@
 import { Theme, Calendar, Checkbox } from "@/orchidui";
 import { ref } from "vue";
-import dayjs from "dayjs";
 
 export default {
   component: Calendar,
