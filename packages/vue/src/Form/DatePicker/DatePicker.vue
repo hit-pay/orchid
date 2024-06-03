@@ -1,6 +1,6 @@
 <script setup>
 import { Dropdown, Calendar, Input } from "@/orchidui";
-import { computed, ref, watch } from "vue";
+import { computed, ref } from "vue";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import dayjs from "dayjs";
 
@@ -76,7 +76,6 @@ const props = defineProps({
   },
 });
 
-const inputTypeSelecting = ref();
 const startDateSelected = ref();
 const toInputElement = ref();
 const fromInputElement = ref();
@@ -100,22 +99,6 @@ const formattedDate = computed(() => {
   return ["", ""];
 });
 
-const mintDateComputed = computed(() => {
-  if (props.minDate) {
-    return props.minDate;
-  }
-
-  if (isRangeInput.value) {
-    const fromDate = startDateSelected.value ?? formattedDate.value[0];
-
-    return inputTypeSelecting.value === "from"
-      ? null
-      : dayjs(fromDate).subtract(0, "day");
-  }
-
-  return null;
-});
-
 const updateCalendar = (newValue) => {
   if (props.type === "range") {
     emit("update:modelValue", [
@@ -135,36 +118,16 @@ const resetCalendar = () => {
   isDropdownOpened.value = false;
 };
 
-const selectInput = (inputType) => {
-  inputTypeSelecting.value = inputType;
-};
-
-const defaultDateRange = () => [dayjs().toDate(), dayjs().toDate()];
-
 const disableAllDates = (value) => {
   const date = dayjs(value);
   const isInCurrentMonth = (date) => date.get("month") === dayjs().get("month");
   return isInCurrentMonth(date);
 };
 
-const selectStartDate = (value) => {
-  selectInput("to");
-  startDateSelected.value = value;
-};
-
 const handleIndefinite = (event) => {
   isCalendarIndefinite.value = event;
   emit("update:modelValue", event ? "Indefinite" : null);
 };
-
-watch(inputTypeSelecting, (value) => {
-  if (value === "to") {
-    toInputElement.value?.focus();
-  }
-  if (value === "from") {
-    fromInputElement.value?.focus();
-  }
-});
 </script>
 
 <template>
@@ -212,7 +175,6 @@ watch(inputTypeSelecting, (value) => {
             is-readonly
             :has-error="errorMessage.length > 0"
             :is-required="isRequired"
-            @click="selectInput('from')"
           />
           <Input
             ref="toInputElement"
@@ -226,7 +188,6 @@ watch(inputTypeSelecting, (value) => {
             is-readonly
             :has-error="errorMessage.length > 0"
             :is-required="isRequired"
-            @click="selectInput('to')"
           />
         </div>
       </div>
@@ -235,31 +196,30 @@ watch(inputTypeSelecting, (value) => {
       </div>
     </div>
 
-    <template #menu>
+    <template #menu="{ isPopoverOpen }">
       <slot
         name="menu"
+        :is-popover-open="isPopoverOpen"
         :update-calendar="updateCalendar"
         :reset-calendar="resetCalendar"
       >
         <Calendar
-          v-if="!disabled"
+          v-if="!disabled && isPopoverOpen"
           :model-value="
             isRangeInput
               ? modelValue && modelValue[0]
                 ? [formattedDate[0].toDate(), formattedDate[1].toDate()]
-                : defaultDateRange()
+                : undefined
               : formattedDate
                 ? formattedDate.toDate()
                 : new Date()
           "
           :disabled-date="isCalendarIndefinite ? disableAllDates : disabledDate"
           :max-date="maxDate"
-          :min-date="mintDateComputed"
+          :min-date="minDate"
           :is-indefinite="isIndefinite"
           position="inline"
           :type="type"
-          :date-selecting="inputTypeSelecting"
-          @start-date-selected="selectStartDate"
           @update:model-value="updateCalendar"
           @update:is-indefinite="handleIndefinite"
           @reset-calendar="resetCalendar"
