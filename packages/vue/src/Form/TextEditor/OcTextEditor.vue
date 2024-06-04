@@ -86,6 +86,17 @@ const Size = Quill.import("attributors/style/size");
 Size.whitelist = props.fontSizes.map((f) => f.value);
 Quill.register(Size, true);
 
+const AlignStyle = Quill.import('attributors/style/align');
+Quill.register(AlignStyle, true);
+const BackgroundStyle = Quill.import('attributors/style/background');
+Quill.register(BackgroundStyle, true);
+const ColorStyle = Quill.import('attributors/style/color');
+Quill.register(ColorStyle, true);
+const DirectionStyle = Quill.import('attributors/style/direction');
+Quill.register(DirectionStyle, true);
+const FontStyle = Quill.import('attributors/style/font');
+Quill.register(FontStyle, true);
+
 const id = ref(
   Math.random()
     .toString(36)
