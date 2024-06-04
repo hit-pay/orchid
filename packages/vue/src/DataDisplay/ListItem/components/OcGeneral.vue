@@ -38,7 +38,7 @@ const toggleDashboard = () => {
     <div class="flex items-center gap-x-4 w-full">
       <slot name="logo" />
 
-      <div class="flex flex-col flex-1 gap-y-2">
+      <div class="flex flex-col flex-1 gap-y-3">
         <div class="flex items-center justify-between">
           <div
             class="flex text-sm text-oc-text-400 items-center gap-x-3 overflow-hidden"
