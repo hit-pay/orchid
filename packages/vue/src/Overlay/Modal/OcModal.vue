@@ -134,7 +134,7 @@ onUnmounted(() => {
     >
       <div
         v-if="isHeaderVisible"
-        class="flex bg-inherit border-oc-gray-200 gap-x-9 justify-between p-5 items-start z-[1011] rounded-t-xl"
+        class="flex bg-inherit border-oc-gray-200 gap-x-9 justify-between p-5 items-start rounded-t-xl"
         :class="!isBorderless ? 'border-b' : ''"
       >
         <slot name="header">

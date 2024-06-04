@@ -154,6 +154,14 @@ export const FormInModal = {
             ],
           },
         },
+        {
+          name: "date_picker",
+          type: "DatePicker",
+          props: {
+            label: "Select Multiple",
+            hint: "This is a hint text to help user",
+          },
+        },
       ];
       return { modalValue, args, values, errors, onUpdateForm, JSON_FORM };
     },
