@@ -36,6 +36,9 @@ const labelClasses = `absolute top-0 left-0 bg-oc-primary-100 rounded-full curso
   >
     <input
       class="toggle-input hidden"
+      :class="{
+        'is-checked': modelValue,
+      }"
       :value="modelValue"
       :checked="modelValue"
       type="checkbox"
@@ -49,16 +52,16 @@ const labelClasses = `absolute top-0 left-0 bg-oc-primary-100 rounded-full curso
 </template>
 
 <style scoped lang="scss">
-.toggle-switch .toggle-input:checked + .toggle-label {
+.toggle-switch .toggle-input.is-checked + .toggle-label {
   @apply bg-[var(--oc-primary-500)];
 }
 
 .toggle-switch {
-  .toggle-input:checked + .toggle-label::before {
+  .toggle-input.is-checked + .toggle-label::before {
     @apply translate-x-[18px];
   }
 
-  &.small .toggle-input:checked + .toggle-label::before {
+  &.small .toggle-input.is-checked + .toggle-label::before {
     @apply translate-x-[11px];
   }
 }
