@@ -9,7 +9,7 @@
         @update:modelValue="handleInput($event, 'angle')"
       >
         <template #min-limit-label>0 </template>
-        <template #max-limit-label>100<span>&#176;</span></template>
+        <template #max-limit-label>360<span>&#176;</span></template>
       </Slider>
     </template>
 

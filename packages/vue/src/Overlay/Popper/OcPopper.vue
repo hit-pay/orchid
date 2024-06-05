@@ -86,7 +86,7 @@ watch(
       ref="popper"
       :class="popperClass"
       :style="popperStyle"
-      class="z-[1010]"
+      class="z-[1005]"
     >
       <slot name="popper" />
     </div>
