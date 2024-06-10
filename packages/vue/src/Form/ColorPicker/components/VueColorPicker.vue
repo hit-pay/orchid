@@ -20,7 +20,7 @@
       />
     </div>
 
-    <div v-if="mode == 'gradient'" class="grid items-center mb-5">
+    <div v-if="mode == 'gradient' && variant == 'gradient'" class="grid items-center mb-5">
       <GradientBar
         :gradientType="gradientType"
         @onAddColor="addColor"
@@ -31,7 +31,6 @@
         v-model:percentageY="gradientAngle.percentageY"
         v-model:angle="gradientAngle.angle"
         v-model:percentageX="gradientAngle.percentageX"
-        :local="local"
         :inputType="inputType"
         :mode="mode"
         :gradientType="gradientType"
@@ -175,12 +174,6 @@ const props = defineProps({
   showInputMenu: { default: true, type: Boolean },
   showInputSet: { default: true, type: Boolean },
   disabled: { default: false, type: Boolean },
-  local: {
-    default: () => {
-      return { angle: "", positionX: "", positionY: "" };
-    },
-    type: Object,
-  },
   iconClasses: {
     default: () => {
       return {
