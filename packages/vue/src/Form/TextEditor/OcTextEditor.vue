@@ -283,6 +283,23 @@ const updateImageWidth = (val) => {
   }
 };
 
+const setImageAlign = (align = 'left') => {
+  const focusNode = window.getSelection()?.focusNode;
+  if (focusNode && focusNode.nodeName !== "#text") {
+
+    let imageAlign = `float:left`
+    if(align == 'center'){
+      imageAlign = ``
+    }else if(align == 'right'){
+      imageAlign = `float:right`
+    }
+
+    focusNode
+      ?.querySelector("img")
+      ?.setAttribute("style", `margin:auto;display:block;${imageAlign}`);
+  }
+}
+
 const onClickContent = () => {
   const focusNode = window.getSelection()?.focusNode;
   showImageWidthToolbar.value =
@@ -567,8 +584,31 @@ const onClickContent = () => {
                 :model-value="imageWidth"
                 :min-limit="0"
                 :max-limit="100"
-                @update:modelValue="updateImageWidth"
+                @update:model-value="updateImageWidth"
               />
+              <div class="flex">
+                  <Icon
+                  class="cursor-pointer"
+                  width="20"
+                  height="20"
+                  name="text-editor/left"
+                  @click="setImageAlign()"
+                />
+                <Icon
+                  class="cursor-pointer"
+                  width="20"
+                  height="20"
+                  name="text-editor/center"
+                  @click="setImageAlign('center')"
+                />
+                <Icon
+                  class="cursor-pointer"
+                  width="20"
+                  height="20"
+                  name="text-editor/right"
+                  @click="setImageAlign('right')"
+                />
+                </div>
             </div>
           </div>
         </template>
