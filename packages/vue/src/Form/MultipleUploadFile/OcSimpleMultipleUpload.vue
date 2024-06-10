@@ -94,7 +94,6 @@ const updateLink = (link) => {
 const onChange = ($event) => {
   let isExceedLimit =
     props.uploadedImages.length + $event.target.files.length > props.maxImages;
-
   if (props.maxImages && isExceedLimit) {
     emit("onMaxFileExceed", isExceedLimit);
     return;
@@ -102,11 +101,12 @@ const onChange = ($event) => {
 
   emit("change", $event);
 };
+const showAddBtn = computed(() => props.maxImages == undefined || (props.maxImages && props.uploadedImages.length < props.maxImages))
 </script>
 
 <template>
   <div class="relative min-h-[100px]">
-    <label class="absolute">
+    <label v-if="showAddBtn" class="absolute" >
       <div
         class="w-[100px] hover:bg-oc-primary-50 cursor-pointer bg-oc-accent-1-50 text-oc-accent-1 rounded aspect-square flex items-center justify-center"
       >
@@ -117,7 +117,7 @@ const onChange = ($event) => {
         class="hidden"
         type="file"
         :accept="accept || 'image/png, image/jpeg'"
-        multiple
+        :multiple="props.maxImages !== 1"
         @change="onChange"
       />
     </label>
@@ -136,7 +136,7 @@ const onChange = ($event) => {
           class="w-[100px] group relative cursor-pointer aspect-square border rounded border-oc-accent-1-100 bg-cover bg-center"
           :class="{
             'border-oc-primary': selectedImage.fileName === img.fileName,
-            'col-start-2': i === 0,
+            'col-start-2': i === 0 && showAddBtn,
           }"
           :style="`background-image: url(${img.fileUrl})`"
           @click="$emit('update:selectedImage', img)"
