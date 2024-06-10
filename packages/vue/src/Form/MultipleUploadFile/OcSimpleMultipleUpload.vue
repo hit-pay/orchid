@@ -94,7 +94,6 @@ const updateLink = (link) => {
 const onChange = ($event) => {
   let isExceedLimit =
     props.uploadedImages.length + $event.target.files.length > props.maxImages;
-
   if (props.maxImages && isExceedLimit) {
     emit("onMaxFileExceed", isExceedLimit);
     return;
@@ -127,7 +126,7 @@ const showAddBtn = computed(() => props.maxImages == undefined || (props.maxImag
       :model-value="uploadedImages"
       filter="filtered-el"
       class="grid w-fit grid-cols-3 gap-3"
-      :style="`grid-template-columns: repeat(${columnsCount}, ${showAddBtn ? 1 : 0}fr)`"
+      :style="`grid-template-columns: repeat(${columnsCount}, 1fr)`"
       @update:model-value="$emit('update:uploadedImages', $event)"
     >
       <template #default="{ list }">
@@ -137,7 +136,7 @@ const showAddBtn = computed(() => props.maxImages == undefined || (props.maxImag
           class="w-[100px] group relative cursor-pointer aspect-square border rounded border-oc-accent-1-100 bg-cover bg-center"
           :class="{
             'border-oc-primary': selectedImage.fileName === img.fileName,
-            'col-start-2': i === 0,
+            'col-start-2': i === 0 && showAddBtn,
           }"
           :style="`background-image: url(${img.fileUrl})`"
           @click="$emit('update:selectedImage', img)"
