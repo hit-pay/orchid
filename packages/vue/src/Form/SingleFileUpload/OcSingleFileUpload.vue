@@ -55,7 +55,8 @@ const editImg = ref("");
 
 const { currentFiles, onChangeFile, onDeleteFile } = useUploadFileProgress(
   props.maxSize,
-  emit
+  emit,
+  props.accept
 );
 
 const videoUrl = computed(() =>
@@ -122,7 +123,7 @@ const onUploadImage = ($event) => {
 <template>
   <BaseInput
     :label="label"
-    :labelClass="labelClass"
+    :label-class="labelClass"
     :hint="hint"
     :error-message="errorMessage"
   >

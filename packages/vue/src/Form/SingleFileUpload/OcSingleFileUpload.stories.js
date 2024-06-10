@@ -9,7 +9,7 @@ export default {
 
 export const Default = {
   args: {
-    accept: "",
+    accept: ".png",
     isPreview: false,
     isImageOnly: false,
     maxSize: 5,
@@ -66,11 +66,7 @@ export const Upload = {
   render: () => ({
     components: { SingleFileUpload },
     setup() {
-      const file = ref({
-        current: {
-          path: "https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/covers/small/99d696e564ba45fbaa0fb2e3b43d0e27.jpg",
-        },
-      });
+      const file = ref();
       return {
         file,
       };

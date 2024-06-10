@@ -1,15 +1,32 @@
 import { ref } from "vue";
 
-export const useUploadFileProgress = (maxSize, emit) => {
+
+const validateImageExtension = (file, extensions)  => {
+  const allowedExtensions = extensions.split(',');
+  const extension = file.name.split('.').pop().toLowerCase();
+  return allowedExtensions.indexOf(extension) !== -1;
+}
+export const useUploadFileProgress = (maxSize, emit, acceptExtensions) => {
   const currentFiles = ref([]);
   const isErrorMaxSize = ref(false);
   const onChangeFile = (event, singleFileUpload = false) => {
+    
     const uploadFiles = [...event.target.files].filter(
-      (f) => !currentFiles.value.some((file) => file.fileName === f.name)
+      (f) => {
+        const checkExist = !currentFiles.value.some((file) => file.fileName === f.name)
+        if(acceptExtensions){
+          const checkExt = validateImageExtension(f, acceptExtensions)
+          return checkExist && checkExt
+        }else{
+          return checkExist
+        }
+      }
     );
+
     isErrorMaxSize.value =
       uploadFiles.reduce((acc, file) => acc + file.size, 0) >
       maxSize * 1024 * 1024;
+
     if (isErrorMaxSize.value) {
       emit("onExceedMaxFileSize", uploadFiles);
 
