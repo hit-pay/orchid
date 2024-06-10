@@ -74,6 +74,9 @@ const confirmDeleteFile = () => {
 const changeImage = (url) => {
   const changedFile = props.uploadedImages[editImgIndex.value];
   changedFile.fileUrl = url;
+
+  changedFile.fileName = Date.now();
+
   isEditOpen.value = false;
   editImgIndex.value = "";
   editLink.value = "";

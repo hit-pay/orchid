@@ -125,7 +125,7 @@ export const QuillEditor = defineComponent({
       (_a = quill.getModule("toolbar")) === null || _a === void 0
         ? void 0
         : _a.container.addEventListener("mousedown", (e) => {
-            if (["picker-hue-range-slider","picker-opacity-slider"].includes(e.target.getAttribute("class"))) {
+            if (["picker-hue-range-slider","picker-opacity-slider"].includes(e.target.getAttribute("class")) || e.target.tagName === 'INPUT') {
               // remove prevent default
             } else {
               e.preventDefault();

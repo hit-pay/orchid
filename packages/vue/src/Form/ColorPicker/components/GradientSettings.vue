@@ -42,8 +42,8 @@
 
 <script setup>
 import { Slider } from "@/orchidui";
+import { ref, onMounted } from "vue";
 
-import { ref } from "vue";
 defineProps({
   mode: {
     default: "gradient",
@@ -53,17 +53,18 @@ defineProps({
   angle: { default: 90, type: Number },
   percentageX: { default: 50, type: Number },
   percentageY: { default: 50, type: Number },
-  local: {
-    default: () => {
-      return { angle: "", positionX: "", positionY: "" };
-    },
-    type: Object,
-  },
 });
 
-const isShowLinearAngleRange = ref(true);
-const isShowRadialAngleRange = ref(true);
+const isShowLinearAngleRange = ref(false);
+const isShowRadialAngleRange = ref(false);
 
+
+onMounted(() => {
+
+  isShowLinearAngleRange.value = true
+  isShowRadialAngleRange.value = true
+
+})
 const emits = defineEmits([
   "update:angle",
   "update:percentageX",
