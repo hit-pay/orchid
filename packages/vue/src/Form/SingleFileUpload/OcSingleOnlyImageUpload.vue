@@ -25,6 +25,7 @@ const editImg = ref("");
 const changeImage = (url) => {
   const changedFile = props.uploadedImage;
   changedFile.fileUrl = url;
+  changedFile.fileName = Date.now();
   isEditOpen.value = false;
   editImg.value = "";
   emit("update:uploadedImage", changedFile);

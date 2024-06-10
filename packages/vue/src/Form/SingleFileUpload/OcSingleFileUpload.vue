@@ -91,6 +91,7 @@ const saveLinkFile = () => {
 };
 const changeImage = (url) => {
   currentFile.value.fileUrl = url;
+  currentFile.value.fileName = Date.now();
   isEditOpen.value = false;
   editImg.value = "";
   emit(
