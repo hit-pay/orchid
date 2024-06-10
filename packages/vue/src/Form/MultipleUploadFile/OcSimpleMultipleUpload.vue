@@ -102,11 +102,12 @@ const onChange = ($event) => {
 
   emit("change", $event);
 };
+const showAddBtn = computed(() => props.maxImages == undefined || (props.maxImages && props.uploadedImages.length < props.maxImages))
 </script>
 
 <template>
   <div class="relative min-h-[100px]">
-    <label class="absolute">
+    <label v-if="showAddBtn" class="absolute" >
       <div
         class="w-[100px] hover:bg-oc-primary-50 cursor-pointer bg-oc-accent-1-50 text-oc-accent-1 rounded aspect-square flex items-center justify-center"
       >
@@ -117,7 +118,7 @@ const onChange = ($event) => {
         class="hidden"
         type="file"
         :accept="accept || 'image/png, image/jpeg'"
-        multiple
+        :multiple="props.maxImages !== 1"
         @change="onChange"
       />
     </label>
@@ -126,7 +127,7 @@ const onChange = ($event) => {
       :model-value="uploadedImages"
       filter="filtered-el"
       class="grid w-fit grid-cols-3 gap-3"
-      :style="`grid-template-columns: repeat(${columnsCount}, 1fr)`"
+      :style="`grid-template-columns: repeat(${columnsCount}, ${showAddBtn ? 1 : 0}fr)`"
       @update:model-value="$emit('update:uploadedImages', $event)"
     >
       <template #default="{ list }">
