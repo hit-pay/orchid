@@ -5,6 +5,7 @@
     :model-value="internal"
     @update:model-value="handleInput"
     @blur="emitModelValue"
+    @keyup.enter="emitModelValue"
   >
     <template #leading>%</template></Input
   >
