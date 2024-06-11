@@ -37,6 +37,7 @@ const props = defineProps({
     default: () => [],
   },
   isDisabled: Boolean,
+  isTransparent: Boolean,
 });
 defineEmits(["more", "edit", "delete", "click:item"]);
 
