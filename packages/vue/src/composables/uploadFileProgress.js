@@ -4,7 +4,7 @@ import { ref } from "vue";
 const validateImageExtension = (file, extensions)  => {
   const allowedExtensions = extensions.split(',');
   const extension = file.name.split('.').pop().toLowerCase();
-  return allowedExtensions.indexOf(extension) !== -1;
+  return allowedExtensions.indexOf(`.${extension}`) !== -1;
 }
 export const useUploadFileProgress = (maxSize, emit, acceptExtensions) => {
   const currentFiles = ref([]);
