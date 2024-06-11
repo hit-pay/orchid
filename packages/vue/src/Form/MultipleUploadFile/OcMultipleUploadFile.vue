@@ -42,7 +42,7 @@ const inputRef = ref();
 const isDragover = ref(false);
 const isUploading = ref(false);
 const { isErrorMaxSize, currentFiles, onChangeFile, onDeleteFile } =
-  useUploadFileProgress(props.maxSize, emit, props.validateAcceptFileType ? props.accept : false);
+  useUploadFileProgress(props.maxSize, emit, props.accept, props.validateAcceptFileType);
 
 onMounted(() => {
   const formattedModelValue = [];

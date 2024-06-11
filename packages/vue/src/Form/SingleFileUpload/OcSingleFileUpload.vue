@@ -59,7 +59,8 @@ const editImg = ref("");
 const { currentFiles, onChangeFile, onDeleteFile } = useUploadFileProgress(
   props.maxSize,
   emit,
-  props.validateAcceptFileType ? props.accept : false
+  props.accept,
+  props.validateAcceptFileType
 );
 
 const videoUrl = computed(() =>

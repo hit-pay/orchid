@@ -2,10 +2,14 @@ import { ref } from "vue";
 
 
 const validateImageExtension = (file, extensions)  => {
-  // TODO : need more file validation 
+  
   // 'image/png,image/jpeg,image/gif,application/pdf'
   // 'png,jpg,gif,pdf'
   // '.png,.jpg,.gif,.pdf'
+
+  // TODO : need more file validation 
+  // 'images/*' :: not ready
+  // 'application/*' :: not ready
   const allowedExtensions = extensions.split(',');
   const extension = file.name.split('.').pop().toLowerCase();
 
@@ -13,7 +17,7 @@ const validateImageExtension = (file, extensions)  => {
     return ext.includes(extension)
   })
 }
-export const useUploadFileProgress = (maxSize, emit, acceptExtensions) => {
+export const useUploadFileProgress = (maxSize, emit, acceptExtensions, validateAcceptFileType = false) => {
   const currentFiles = ref([]);
   const isErrorMaxSize = ref(false);
   const onChangeFile = (event, singleFileUpload = false) => {
@@ -24,7 +28,7 @@ export const useUploadFileProgress = (maxSize, emit, acceptExtensions) => {
         if(!checkExist){
           emit("fileExist")
         }
-        if(acceptExtensions){
+        if(validateAcceptFileType){
           const checkExt = validateImageExtension(f, acceptExtensions)
           if(!checkExt){
             emit("invalidFileType")
