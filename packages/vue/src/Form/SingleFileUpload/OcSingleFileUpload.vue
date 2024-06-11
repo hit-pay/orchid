@@ -18,6 +18,7 @@ const props = defineProps({
    */
   maxSize: Number,
   accept: String,
+  validateAcceptFileType: Boolean,
   errorMessage: String,
   imageClasses: String,
   allowToEdit: {
@@ -58,7 +59,8 @@ const editImg = ref("");
 const { currentFiles, onChangeFile, onDeleteFile } = useUploadFileProgress(
   props.maxSize,
   emit,
-  props.accept
+  props.accept,
+  props.validateAcceptFileType
 );
 
 const videoUrl = computed(() =>

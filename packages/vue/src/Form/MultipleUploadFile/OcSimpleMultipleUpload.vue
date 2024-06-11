@@ -79,13 +79,14 @@ const changeImage = (url) => {
 
   changedFile.fileName = Date.now();
 
+  emit("onEditImage", {...changedFile, index: editImgIndex.value});
+
+
   isEditOpen.value = false;
   editImgIndex.value = "";
   editLink.value = "";
 
-  if (changedFile.current) {
-    emit("onEditImage", changedFile);
-  }
+
 };
 const updateLink = (link) => {
   let changedFile = props.uploadedImages[editImgIndex.value];
