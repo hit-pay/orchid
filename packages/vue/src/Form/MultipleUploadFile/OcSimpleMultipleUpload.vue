@@ -32,6 +32,8 @@ const emit = defineEmits([
   "onEditImage",
   "delete",
   "onMaxFileExceed",
+  "fileExist",
+  "invalidFileType"
 ]);
 const isDropdownOpen = ref([]);
 const isEditOpen = ref(false);

@@ -14,8 +14,12 @@ export const useUploadFileProgress = (maxSize, emit, acceptExtensions) => {
     const uploadFiles = [...event.target.files].filter(
       (f) => {
         const checkExist = !currentFiles.value.some((file) => file.fileName === f.name)
+        emit("fileExist")
         if(acceptExtensions){
           const checkExt = validateImageExtension(f, acceptExtensions)
+          if(checkExist){
+            emit("invalidFileType")
+          }
           return checkExist && checkExt
         }else{
           return checkExist

@@ -42,6 +42,8 @@ const emit = defineEmits([
   "update:modelValue",
   "onRemoveFile",
   "onExceedMaxFileSize",
+  "fileExist",
+  "invalidFileType"
 ]);
 
 const inputRef = ref();
