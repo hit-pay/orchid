@@ -19,6 +19,7 @@ defineProps({
     type: Boolean,
     default: true,
   },
+  isTransparent: Boolean,
 });
 const emit = defineEmits(["more"]);
 const isOpen = ref(false);
@@ -32,7 +33,10 @@ const toggleDashboard = () => {
 <template>
   <div
     class="px-5 py-4 rounded border border-gray-200 group"
-    :class="{ 'hover:shadow-normal': !isDisabled }"
+    :class="{
+      'hover:shadow-normal': !isDisabled && !isTransparent,
+      'border-none !p-0': isTransparent,
+    }"
     @mouseleave="isOpen = false"
   >
     <div class="flex items-center gap-x-4 w-full">
