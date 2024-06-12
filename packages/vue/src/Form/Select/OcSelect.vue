@@ -407,8 +407,8 @@ defineExpose({
         <slot name="selectTooltipText"></slot>
       </div>
     </template>
-    <template v-for="(_, name) in $slots" #[name]="slotData">
-      <slot :name="name" v-bind="slotData" />
+    <template v-if="$slots.hint" #hint>
+      <slot name="hint" />
     </template>
   </BaseInput>
 </template>
