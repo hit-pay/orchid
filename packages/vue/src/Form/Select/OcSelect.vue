@@ -215,14 +215,16 @@ watch(isDropdownOpened, (value) => {
   });
 });
 
-const maxPopperWidth = ref('100%');
+const maxPopperWidth = ref("100%");
 const popperStyle = computed(() => {
-  return { maxWidth: maxPopperWidth.value }
-})
+  return { maxWidth: maxPopperWidth.value };
+});
 const onUpdateDropdown = () => {
-  emit('toggle')
-  maxPopperWidth.value = baseInput.value?.$el?.offsetWidth ? `${baseInput.value?.$el?.offsetWidth}px` : '100%'
-}
+  emit("toggle");
+  maxPopperWidth.value = baseInput.value?.$el?.offsetWidth
+    ? `${baseInput.value?.$el?.offsetWidth}px`
+    : "100%";
+};
 
 const dropdownRef = ref();
 defineExpose({
@@ -404,7 +406,9 @@ defineExpose({
       <div v-if="$slots.selectTooltipText">
         <slot name="selectTooltipText"></slot>
       </div>
-
+    </template>
+    <template v-for="(_, name) in $slots" #[name]="slotData">
+      <slot :name="name" v-bind="slotData" />
     </template>
   </BaseInput>
 </template>
