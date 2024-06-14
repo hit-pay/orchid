@@ -25,7 +25,7 @@ export const Default = {
             <div class="flex items-center justify-center">
               <SwitchTabs :options="args.options" :active-option="selectedOption" @select="selectedOption = $event"/>
             </div>
-          </Theme
+          </Theme>
         `,
   }),
 };
