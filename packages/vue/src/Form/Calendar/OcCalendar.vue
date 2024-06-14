@@ -85,20 +85,26 @@ const selectedRangeDate = computed(() => {
   const result = [start, end];
 
   if (end && start?.isAfter(end)) {
-    result.reverse()
+    result.reverse();
   }
 
   return {
     from: result[0],
     to: result[1],
-  }
-})
+  };
+});
 
-const hasSelectedState = computed(() => Object.values(selectedRangeDate.value).filter(Boolean).length > 1)
+const hasSelectedState = computed(
+  () => Object.values(selectedRangeDate.value).filter(Boolean).length > 1,
+);
 
-const currentSelectedMonth = computed(() => selectedDate.value.month())
-const isSelectedSameStartMonth = computed(() => currentSelectedMonth.value === selectedStartDate.value?.month())
-const isSelectedSameEndMonth = computed(() => currentSelectedMonth.value === selectedEndDate.value?.month())
+const currentSelectedMonth = computed(() => selectedDate.value.month());
+const isSelectedSameStartMonth = computed(
+  () => currentSelectedMonth.value === selectedStartDate.value?.month(),
+);
+const isSelectedSameEndMonth = computed(
+  () => currentSelectedMonth.value === selectedEndDate.value?.month(),
+);
 
 const prevMonth = () => {
   hoveringDate.value = null;
@@ -108,22 +114,32 @@ const prevMonth = () => {
     return;
   }
 
-  selectedStartDay.value = isSelectedSameStartMonth.value ? selectedStartDate.value.date() : null;
-  selectedEndDay.value = isSelectedSameEndMonth.value ? selectedEndDate.value.date() : null;
+  selectedStartDay.value = isSelectedSameStartMonth.value
+    ? selectedStartDate.value.date()
+    : null;
+  selectedEndDay.value = isSelectedSameEndMonth.value
+    ? selectedEndDate.value.date()
+    : null;
 };
 
 const nextMonth = () => {
   hoveringDate.value = null;
   selectedDate.value = selectedDate.value.add(1, "month");
 
-  selectedStartDay.value = isSelectedSameStartMonth.value ? selectedStartDate.value.date() : null;
-  selectedEndDay.value = isSelectedSameEndMonth.value ? selectedEndDate.value.date() : null;
+  selectedStartDay.value = isSelectedSameStartMonth.value
+    ? selectedStartDate.value.date()
+    : null;
+  selectedEndDay.value = isSelectedSameEndMonth.value
+    ? selectedEndDate.value.date()
+    : null;
 };
 
 const isDaySelected = (day) => {
   const date = selectedDate.value.date(day);
 
-  return Object.values(selectedRangeDate.value).filter(Boolean).find((selected) => selected.isSame(date));
+  return Object.values(selectedRangeDate.value)
+    .filter(Boolean)
+    .find((selected) => selected.isSame(date));
 };
 
 const isDayInRange = (day) => {
@@ -134,13 +150,11 @@ const isDayInRange = (day) => {
 
     const currentDate = selectedDate.value.date(day);
 
-    return (
-      currentDate.isBetween(
-        selectedRangeDate.value.from,
-        selectedRangeDate.value.to,
-        null,
-        "[]",
-      )
+    return currentDate.isBetween(
+      selectedRangeDate.value.from,
+      selectedRangeDate.value.to,
+      null,
+      "[]",
     );
   }
 
@@ -155,9 +169,9 @@ const isDayInRange = (day) => {
 const isDayDisabled = (day) => {
   const currentDate = selectedDate.value.date(day);
   return (
-    props.disabledDate(currentDate.toDate())
-    || (props.minDate && currentDate.isBefore(dayjs(props.minDate), "day"))
-    || (props.maxDate && currentDate.isAfter(dayjs(props.maxDate), "day"))
+    props.disabledDate(currentDate.toDate()) ||
+    (props.minDate && currentDate.isBefore(dayjs(props.minDate), "day")) ||
+    (props.maxDate && currentDate.isAfter(dayjs(props.maxDate), "day"))
   );
 };
 
@@ -175,7 +189,9 @@ const doneSelecting = () => {
   emit(
     "update:modelValue",
     isRangeSelection.value
-      ? [selectedRangeDate.value.from, selectedRangeDate.value.to].map((date) => date.toDate())
+      ? [selectedRangeDate.value.from, selectedRangeDate.value.to].map((date) =>
+          date.toDate(),
+        )
       : selectedStartDate.value.toDate(),
   );
 };
@@ -192,7 +208,7 @@ const selectDay = (day, shouldEmit = true) => {
     selectedStartDate.value = currentMonth;
     selectedEndDay.value = null;
     selectedEndDate.value = null;
-    doneSelecting()
+    doneSelecting();
 
     return;
   }
@@ -222,14 +238,16 @@ const selectDay = (day, shouldEmit = true) => {
 const selectDayDebounced = debounce((value) => {
   // Do not add hover state when start date has not selected
   if (!isStartDateSet.value) {
-    return
+    return;
   }
 
-  selectDay(value, false)
+  selectDay(value, false);
 }, 50);
 
 const initCalendar = () => {
-  const model = isRangeSelection.value ? props.modelValue?.[0] : props.modelValue;
+  const model = isRangeSelection.value
+    ? props.modelValue?.[0]
+    : props.modelValue;
 
   // set calendar is from modelValue, else default is current month
   selectedDate.value = dayjs(model);
@@ -237,15 +255,16 @@ const initCalendar = () => {
   selectedStartDay.value = model && selectedStartDate.value.date();
 
   if (!isRangeSelection.value || !model) {
-    return
+    return;
   }
 
   // set data for range date selection
   selectedEndDate.value = dayjs(props.modelValue?.[1]);
-  selectedEndDay.value = selectedEndDate.value?.month() === selectedDate.value.month()
-    ? selectedEndDate.value.date()
-    : undefined;
-}
+  selectedEndDay.value =
+    selectedEndDate.value?.month() === selectedDate.value.month()
+      ? selectedEndDate.value.date()
+      : undefined;
+};
 
 initCalendar();
 </script>
@@ -299,8 +318,10 @@ initCalendar();
             ? {
                 ...(isDayInRange(day) && {
                   'before:bg-oc-primary-50-tr before:px-3 before:w-[calc(100%+0.5rem)] before:h-full before:absolute': true,
-                  'before:rounded-l-full before:left-0 before:!w-[calc(100%+0.25rem)]': selectedRangeDate.from.isSame(selectedDate.date(day)),
-                  'before:rounded-r-full before:right-0 before:!w-[calc(100%+0.25rem)]': selectedRangeDate.to?.isSame(selectedDate.date(day)),
+                  'before:rounded-l-full before:left-0 before:!w-[calc(100%+0.25rem)]':
+                    selectedRangeDate.from.isSame(selectedDate.date(day)),
+                  'before:rounded-r-full before:right-0 before:!w-[calc(100%+0.25rem)]':
+                    selectedRangeDate.to?.isSame(selectedDate.date(day)),
                 }),
                 'before:bg-transparent':
                   selectedStartDay !== null &&

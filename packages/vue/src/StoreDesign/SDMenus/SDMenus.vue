@@ -254,7 +254,7 @@ const confirmDeleteMenu = () => {
   if (deleteMenuItems.value && deleteMenuItems.value.subitem2) {
     let parentChildren = deleteMenuItems.value.item.children;
     let newChildren = deleteMenuItems.value.subitem.children.filter(
-      (i) => i.id !== deleteMenuItems.value.subitem2.id
+      (i) => i.id !== deleteMenuItems.value.subitem2.id,
     );
     newModelValue[newModelValue.indexOf(deleteMenuItems.value.item)].children[
       parentChildren.indexOf(deleteMenuItems.value.subitem)
@@ -266,7 +266,7 @@ const confirmDeleteMenu = () => {
       children.filter((i) => i.id !== deleteMenuItems.value.subitem.id);
   } else {
     newModelValue = newModelValue.filter(
-      (s) => s.id !== deleteMenuItems.value.item.id
+      (s) => s.id !== deleteMenuItems.value.item.id,
     );
   }
   emit("update:modelValue", newModelValue);
@@ -280,7 +280,7 @@ const selectOption = (option) => {
   let hasSelected = addMenuForm.value.ids.find((o) => o === option.value);
   if (hasSelected) {
     addMenuForm.value.ids = addMenuForm.value.ids.filter(
-      (o) => o !== option.value
+      (o) => o !== option.value,
     );
   } else {
     addMenuForm.value.ids = [...addMenuForm.value.ids, option.value];
@@ -526,7 +526,7 @@ const filteredPages = computed(() => {
                       @show:children="categoryDropdown.push(option.value)"
                       @hide:children="
                         categoryDropdown = categoryDropdown.filter(
-                          (c) => c !== option.value
+                          (c) => c !== option.value,
                         )
                       "
                       @select="selectOption(option)"
@@ -543,7 +543,7 @@ const filteredPages = computed(() => {
                         >
                           <OcOption
                             v-for="option1 in fOptions.filter(
-                              (o) => o.parent === option.value
+                              (o) => o.parent === option.value,
                             )"
                             :key="option1.value"
                             :label="option1.label"
@@ -567,7 +567,7 @@ const filteredPages = computed(() => {
                             "
                             @hide:children="
                               categoryDropdown = categoryDropdown.filter(
-                                (c) => c !== option1.value
+                                (c) => c !== option1.value,
                               )
                             "
                             @select="selectOption(option1)"
@@ -576,7 +576,7 @@ const filteredPages = computed(() => {
                               <div
                                 v-if="
                                   fOptions.find(
-                                    (o) => o.parent === option1.value
+                                    (o) => o.parent === option1.value,
                                   )
                                 "
                                 class="w-full flex-col ml-5"
@@ -588,7 +588,7 @@ const filteredPages = computed(() => {
                               >
                                 <OcOption
                                   v-for="option2 in fOptions.filter(
-                                    (o) => o.parent === option1.value
+                                    (o) => o.parent === option1.value,
                                   )"
                                   :key="option2.value"
                                   :label="option2.label"
@@ -596,7 +596,7 @@ const filteredPages = computed(() => {
                                   is-checkboxes
                                   :is-selected="
                                     addMenuForm.ids.find(
-                                      (o) => o === option2.value
+                                      (o) => o === option2.value,
                                     )
                                       ? true
                                       : false
@@ -673,7 +673,7 @@ const filteredPages = computed(() => {
                     @update:model-value="
                       editMenuForm.link = getLinkFromOption(
                         $event,
-                        options.pages
+                        options.pages,
                       )
                     "
                   />
@@ -689,7 +689,7 @@ const filteredPages = computed(() => {
                     @update:model-value="
                       editMenuForm.link = getLinkFromOption(
                         $event,
-                        options.categories
+                        options.categories,
                       )
                     "
                   />

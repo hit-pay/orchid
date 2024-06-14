@@ -1,44 +1,46 @@
 import { ref } from "vue";
 
-
-const validateImageExtension = (file, extensions)  => {
-  
+const validateImageExtension = (file, extensions) => {
   // 'image/png,image/jpeg,image/gif,application/pdf'
   // 'png,jpg,gif,pdf'
   // '.png,.jpg,.gif,.pdf'
 
-  // TODO : need more file validation 
+  // TODO : need more file validation
   // 'images/*' :: not ready
   // 'application/*' :: not ready
-  const allowedExtensions = extensions.split(',');
-  const extension = file.name.split('.').pop().toLowerCase();
+  const allowedExtensions = extensions.split(",");
+  const extension = file.name.split(".").pop().toLowerCase();
 
   return allowedExtensions.find((ext) => {
-    return ext.includes(extension)
-  })
-}
-export const useUploadFileProgress = (maxSize, emit, acceptExtensions, validateAcceptFileType = false) => {
+    return ext.includes(extension);
+  });
+};
+export const useUploadFileProgress = (
+  maxSize,
+  emit,
+  acceptExtensions,
+  validateAcceptFileType = false,
+) => {
   const currentFiles = ref([]);
   const isErrorMaxSize = ref(false);
   const onChangeFile = (event, singleFileUpload = false) => {
-    
-    const uploadFiles = [...event.target.files].filter(
-      (f) => {
-        const checkExist = !currentFiles.value.some((file) => file.fileName === f.name)
-        if(!checkExist){
-          emit("fileExist")
-        }
-        if(validateAcceptFileType){
-          const checkExt = validateImageExtension(f, acceptExtensions)
-          if(!checkExt){
-            emit("invalidFileType")
-          }
-          return checkExist && checkExt
-        }else{
-          return checkExist
-        }
+    const uploadFiles = [...event.target.files].filter((f) => {
+      const checkExist = !currentFiles.value.some(
+        (file) => file.fileName === f.name,
+      );
+      if (!checkExist) {
+        emit("fileExist");
       }
-    );
+      if (validateAcceptFileType) {
+        const checkExt = validateImageExtension(f, acceptExtensions);
+        if (!checkExt) {
+          emit("invalidFileType");
+        }
+        return checkExist && checkExt;
+      } else {
+        return checkExist;
+      }
+    });
 
     isErrorMaxSize.value =
       uploadFiles.reduce((acc, file) => acc + file.size, 0) >
@@ -66,7 +68,7 @@ export const useUploadFileProgress = (maxSize, emit, acceptExtensions, validateA
       });
       emit(
         "update:modelValue",
-        !singleFileUpload ? currentFiles.value : currentFiles.value[0]
+        !singleFileUpload ? currentFiles.value : currentFiles.value[0],
       );
       if (file) {
         addListeners(reader, i);
@@ -87,7 +89,7 @@ export const useUploadFileProgress = (maxSize, emit, acceptExtensions, validateA
     const progressFile = () => {
       currentFiles.value[index].progress =
         Number(
-          (event.loaded / currentFiles.value[index].totalSize).toFixed(2)
+          (event.loaded / currentFiles.value[index].totalSize).toFixed(2),
         ) * 100;
     };
 
@@ -102,14 +104,14 @@ export const useUploadFileProgress = (maxSize, emit, acceptExtensions, validateA
 
   const addListeners = (reader, index) => {
     reader.addEventListener("loadstart", (e) =>
-      handleEventFile(e, reader, index)
+      handleEventFile(e, reader, index),
     );
     reader.addEventListener("load", (e) => handleEventFile(e, reader, index));
     reader.addEventListener("loadend", (e) =>
-      handleEventFile(e, reader, index)
+      handleEventFile(e, reader, index),
     );
     reader.addEventListener("progress", (e) =>
-      handleEventFile(e, reader, index)
+      handleEventFile(e, reader, index),
     );
     reader.addEventListener("error", (e) => handleEventFile(e, reader, index));
     reader.addEventListener("abort", (e) => handleEventFile(e, reader, index));
@@ -123,7 +125,7 @@ export const useUploadFileProgress = (maxSize, emit, acceptExtensions, validateA
 
     emit(
       "update:modelValue",
-      currentFiles.value.length > 0 ? currentFiles.value : null
+      currentFiles.value.length > 0 ? currentFiles.value : null,
     );
   };
   return {

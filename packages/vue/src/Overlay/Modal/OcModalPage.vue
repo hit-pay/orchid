@@ -23,11 +23,7 @@ const props = defineProps({
     default: false,
   },
 });
-const emit = defineEmits([
-  "update:modelValue",
-  "back",
-  "click:outside",
-]);
+const emit = defineEmits(["update:modelValue", "back", "click:outside"]);
 
 const closeModal = () => {
   if (props.preventClose) {
@@ -55,11 +51,13 @@ const onClickOutside = async () => {
     v-if="modelValue"
     class="fixed w-screen z-[1007] bg-white top-0 left-0 h-full min-h-screen bg-black/[.45] flex items-center justify-center"
   >
-    <div class="w-full h-full absolute top-0 left-0 z-[1007]" @click="onClickOutside" />
+    <div
+      class="w-full h-full absolute top-0 left-0 z-[1007]"
+      @click="onClickOutside"
+    />
 
     <div
-      class="relative z-[1008] shadow-normal w-[calc(100%-40px)] h-[calc(100%-40px)] max-w-[1440px]
-      bg-[linear-gradient(180deg,_rgba(229,_238,_255,_0.5)_0%,_rgba(229,_238,_255,_0)_77.75%)] rounded-xl flex flex-col overflow-y-auto"
+      class="relative z-[1008] shadow-normal w-[calc(100%-40px)] h-[calc(100%-40px)] max-w-[1440px] bg-[linear-gradient(180deg,_rgba(229,_238,_255,_0.5)_0%,_rgba(229,_238,_255,_0)_77.75%)] rounded-xl flex flex-col overflow-y-auto"
     >
       <div
         v-if="isBackButtonVisible"

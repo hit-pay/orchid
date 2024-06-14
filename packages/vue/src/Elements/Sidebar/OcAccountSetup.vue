@@ -1,6 +1,6 @@
 <script setup>
-import OcIcon from '@/orchidui/MediaAndIcons/Icon/OcIcon.vue';
-import OcChip from '@/orchidui/Feedback/Chip/OcChip.vue';
+import OcIcon from "@/orchidui/MediaAndIcons/Icon/OcIcon.vue";
+import OcChip from "@/orchidui/Feedback/Chip/OcChip.vue";
 
 defineProps({
   isExpanded: Boolean,
@@ -27,16 +27,23 @@ defineProps({
       class="p-3 bg-white rounded-[6px] w-full flex flex-col gap-y-5"
     >
       <template v-if="isPending">
-        <div
-          class="p-2 flex gap-3"
-        >
+        <div class="p-2 flex gap-3">
           <div class="p-3 rounded-full border border-oc-warning-500">
-            <OcIcon name="alert" width="20" height="20" class="text-oc-warning-500" />
+            <OcIcon
+              name="alert"
+              width="20"
+              height="20"
+              class="text-oc-warning-500"
+            />
           </div>
 
-          <div class="text-oc-text-500 text-sm">We’re currently reviewing your account.</div>
+          <div class="text-oc-text-500 text-sm">
+            We’re currently reviewing your account.
+          </div>
         </div>
-        <div class="mx-[-8px] mb-[-8px] rounded-b-[6px] border-t border-gray-200 bg-oc-gray-50">
+        <div
+          class="mx-[-8px] mb-[-8px] rounded-b-[6px] border-t border-gray-200 bg-oc-gray-50"
+        >
           <div class="py-4 px-5 text-oc-text-400 font-medium">
             <div v-if="paymentStatus" class="flex items-center">
               <span class="flex-1">Payment</span>
@@ -73,7 +80,12 @@ defineProps({
     </div>
     <div v-else class="bg-white rounded-full p-1">
       <div v-if="isPending" class="p-3 rounded-full">
-        <oc-icon name="alert" width="20" height="20" class="text-oc-warning-500" />
+        <oc-icon
+          name="alert"
+          width="20"
+          height="20"
+          class="text-oc-warning-500"
+        />
       </div>
       <div v-else class="pie-wrapper progress style-2">
         <span class="label">{{ progress }}</span>

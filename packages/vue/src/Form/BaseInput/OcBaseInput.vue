@@ -26,11 +26,11 @@ defineProps({
       <Tooltip v-if="labelIcon" v-bind="tooltipOptions">
         <Icon width="16" height="16" :name="labelIcon" />
         <template #popper>
-            <slot name="tooltipText">
-              <div v-if="tooltipText" class="px-3 py-2">
-                {{ tooltipText }}
-              </div>
-            </slot>
+          <slot name="tooltipText">
+            <div v-if="tooltipText" class="px-3 py-2">
+              {{ tooltipText }}
+            </div>
+          </slot>
         </template>
       </Tooltip>
     </label>

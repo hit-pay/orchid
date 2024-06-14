@@ -86,21 +86,21 @@ const Size = Quill.import("attributors/style/size");
 Size.whitelist = props.fontSizes.map((f) => f.value);
 Quill.register(Size, true);
 
-const AlignStyle = Quill.import('attributors/style/align');
+const AlignStyle = Quill.import("attributors/style/align");
 Quill.register(AlignStyle, true);
-const BackgroundStyle = Quill.import('attributors/style/background');
+const BackgroundStyle = Quill.import("attributors/style/background");
 Quill.register(BackgroundStyle, true);
-const ColorStyle = Quill.import('attributors/style/color');
+const ColorStyle = Quill.import("attributors/style/color");
 Quill.register(ColorStyle, true);
-const DirectionStyle = Quill.import('attributors/style/direction');
+const DirectionStyle = Quill.import("attributors/style/direction");
 Quill.register(DirectionStyle, true);
-const FontStyle = Quill.import('attributors/style/font');
+const FontStyle = Quill.import("attributors/style/font");
 Quill.register(FontStyle, true);
 
 const id = ref(
   Math.random()
     .toString(36)
-    .replace(/[^a-zA-Z]+/g, "")
+    .replace(/[^a-zA-Z]+/g, ""),
 );
 const isUndoActive = ref(false);
 const isRedoActive = ref(false);
@@ -283,22 +283,21 @@ const updateImageWidth = (val) => {
   }
 };
 
-const setImageAlign = (align = 'left') => {
+const setImageAlign = (align = "left") => {
   const focusNode = window.getSelection()?.focusNode;
   if (focusNode && focusNode.nodeName !== "#text") {
-
-    let imageAlign = `float:left`
-    if(align == 'center'){
-      imageAlign = ``
-    }else if(align == 'right'){
-      imageAlign = `float:right`
+    let imageAlign = `float:left`;
+    if (align == "center") {
+      imageAlign = ``;
+    } else if (align == "right") {
+      imageAlign = `float:right`;
     }
 
     focusNode
       ?.querySelector("img")
       ?.setAttribute("style", `margin:auto;display:block;${imageAlign}`);
   }
-}
+};
 
 const onClickContent = () => {
   const focusNode = window.getSelection()?.focusNode;
@@ -587,7 +586,7 @@ const onClickContent = () => {
                 @update:model-value="updateImageWidth"
               />
               <div class="flex">
-                  <Icon
+                <Icon
                   class="cursor-pointer"
                   width="20"
                   height="20"
@@ -608,7 +607,7 @@ const onClickContent = () => {
                   name="text-editor/right"
                   @click="setImageAlign('right')"
                 />
-                </div>
+              </div>
             </div>
           </div>
         </template>

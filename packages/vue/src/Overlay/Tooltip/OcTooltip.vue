@@ -94,7 +94,7 @@ onMounted(() => {
     }
   } else {
     triggerEl.value.addEventListener("click", () =>
-      isShow.value ? hide() : show()
+      isShow.value ? hide() : show(),
     );
   }
 });

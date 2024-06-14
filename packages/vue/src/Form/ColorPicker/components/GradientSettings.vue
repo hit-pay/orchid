@@ -58,13 +58,10 @@ defineProps({
 const isShowLinearAngleRange = ref(false);
 const isShowRadialAngleRange = ref(false);
 
-
 onMounted(() => {
-
-  isShowLinearAngleRange.value = true
-  isShowRadialAngleRange.value = true
-
-})
+  isShowLinearAngleRange.value = true;
+  isShowRadialAngleRange.value = true;
+});
 const emits = defineEmits([
   "update:angle",
   "update:percentageX",

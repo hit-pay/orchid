@@ -102,19 +102,22 @@ const sizeClasses = computed(() => ({
   small: "max-w-[320px]",
 }));
 
-const scrollArea = ref()
-const  handleScroll = () => {
-  scrollArea.value?.click()
-}
-watch(() => props.modelValue, () => {
-  setTimeout(() => {
-    scrollArea.value?.addEventListener('scroll', handleScroll);
-  }, 100)
-})
+const scrollArea = ref();
+const handleScroll = () => {
+  scrollArea.value?.click();
+};
+watch(
+  () => props.modelValue,
+  () => {
+    setTimeout(() => {
+      scrollArea.value?.addEventListener("scroll", handleScroll);
+    }, 100);
+  },
+);
 
 onUnmounted(() => {
-  scrollArea.value?.removeEventListener('scroll', handleScroll);
-})
+  scrollArea.value?.removeEventListener("scroll", handleScroll);
+});
 </script>
 
 <template>
@@ -129,7 +132,7 @@ onUnmounted(() => {
     />
 
     <div
-      class="z-[1008] shadow-normal w-[calc(100%-40px)] max-h-[96vh] bg-oc-bg-light rounded-xl flex flex-col "
+      class="z-[1008] shadow-normal w-[calc(100%-40px)] max-h-[96vh] bg-oc-bg-light rounded-xl flex flex-col"
       :class="sizeClasses[size]"
     >
       <div

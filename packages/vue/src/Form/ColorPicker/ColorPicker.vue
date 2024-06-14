@@ -4,7 +4,7 @@ import { computed, ref } from "vue";
 import { defineAsyncComponent } from "vue";
 
 const ColorPickerPopup = defineAsyncComponent(
-  () => import("./components/VueColorPicker.vue")
+  () => import("./components/VueColorPicker.vue"),
 );
 
 const props = defineProps({
@@ -55,12 +55,12 @@ const localColorList = ref([]);
 const updateColorListStorage = () => {
   if (localColorList.value.length > 9) {
     localColorList.value = localColorList.value.filter(
-      (localColor, index) => index < 9
+      (localColor, index) => index < 9,
     );
   }
   localStorage.setItem(
     "ck-cp-local-color-list",
-    JSON.stringify(localColorList.value)
+    JSON.stringify(localColorList.value),
   );
 };
 
@@ -73,7 +73,7 @@ if (val) {
 const onCloseDropdown = (dropdownOpen) => {
   if (!dropdownOpen && inputValue.value) {
     const colorExist = localColorList.value.find(
-      (color) => color === inputValue.value
+      (color) => color === inputValue.value,
     );
     if (!colorExist) {
       if (localColorList.value.length >= 9) {
@@ -92,7 +92,7 @@ const onCloseDropdown = (dropdownOpen) => {
     }
   }
 };
-const isLoading = ref(false)
+const isLoading = ref(false);
 const handleClickLastUsedColor = (color) => {
   isLoading.value = true;
   setTimeout(() => {

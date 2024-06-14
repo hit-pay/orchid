@@ -60,9 +60,7 @@ export const preventEventIfNotNumberInput = (event, options = {}) => {
   event.preventDefault();
 };
 
-
 export const getTextWithAction = (text, callback) => {
-
   const ocLink = text.match(/oc-emit/);
   const ocEndLink = text.match(/oc-end-emit/);
 
@@ -76,15 +74,14 @@ export const getTextWithAction = (text, callback) => {
       .replace("oc-emit", "");
     // Switch to oc-emit[preview-to|desktop|desktop-preview]oc-end-emit to see the change
     let htmlLink = `<span class="underline font-medium">${onlyLink.split("|")[2].replace("-", " ")}</span>`;
-    if(callback){
-      callback(fullText, onlyLink.split('|'))
+    if (callback) {
+      callback(fullText, onlyLink.split("|"));
     }
     return text.replace(fullText, htmlLink);
   } else {
     return text;
   }
 };
-
 
 export const getTextWithLink = (rawHtml, callback) => {
   let tempDivElement = document.createElement("div");

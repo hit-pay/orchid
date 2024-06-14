@@ -387,7 +387,7 @@
   text-align: right;
 }
 .ql-editor.ql-blank::before {
-  color: #9295A5;
+  color: #9295a5;
   content: attr(data-placeholder);
   left: 15px;
   pointer-events: none;

@@ -125,7 +125,12 @@ export const QuillEditor = defineComponent({
       (_a = quill.getModule("toolbar")) === null || _a === void 0
         ? void 0
         : _a.container.addEventListener("mousedown", (e) => {
-            if (["picker-hue-range-slider","picker-opacity-slider"].includes(e.target.getAttribute("class")) || e.target.tagName === 'INPUT') {
+            if (
+              ["picker-hue-range-slider", "picker-opacity-slider"].includes(
+                e.target.getAttribute("class"),
+              ) ||
+              e.target.tagName === "INPUT"
+            ) {
               // remove prevent default
             } else {
               e.preventDefault();
@@ -165,14 +170,14 @@ export const QuillEditor = defineComponent({
         clientOptions.modules = Object.assign(
           {},
           clientOptions.modules,
-          modules
+          modules,
         );
       }
       return Object.assign(
         {},
         props.globalOptions,
         props.options,
-        clientOptions
+        clientOptions,
       );
     };
     const maybeClone = (delta) => {
@@ -180,7 +185,7 @@ export const QuillEditor = defineComponent({
     };
     const deltaHasValuesOtherThanRetain = (delta) => {
       return Object.values(delta.ops).some(
-        (v) => !v.retain || Object.keys(v).length !== 1
+        (v) => !v.retain || Object.keys(v).length !== 1,
       );
     };
     // Doesn't need reactivity, but does need to be cloned to avoid deep mutations always registering as equal
@@ -340,18 +345,18 @@ export const QuillEditor = defineComponent({
           nextTick(() =>
             quill === null || quill === void 0
               ? void 0
-              : quill.setSelection(selection)
+              : quill.setSelection(selection),
           );
         }
         setContents(newContent);
       },
-      { deep: true }
+      { deep: true },
     );
     watch(
       () => props.enable,
       (newValue) => {
         if (quill) quill.enable(newValue);
-      }
+      },
     );
     return {
       editor,
