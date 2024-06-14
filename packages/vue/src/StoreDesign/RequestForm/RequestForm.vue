@@ -65,12 +65,12 @@ const setDefaultData = (form) => {
       if (form.general) {
         formValues.value[formName.key] = defaultValueType(
           generalFormData.value[formName.key],
-          form.type
+          form.type,
         );
       } else {
         formValues.value[formName.key] = defaultValueType(
           sectionFormData.value[formName.key],
-          form.type
+          form.type,
         );
       }
     });
@@ -78,12 +78,12 @@ const setDefaultData = (form) => {
     if (form.general) {
       formValues.value[form.name] = defaultValueType(
         generalFormData.value[form.name],
-        form.type
+        form.type,
       );
     } else {
       formValues.value[form.name] = defaultValueType(
         sectionFormData.value[form.name],
-        form.type
+        form.type,
       );
     }
   }
@@ -113,7 +113,7 @@ Object.values(props.requestForm).forEach((form) => {
           ocEmitValue.value[childForm.name] = value[1];
           ocEmitLabel.value[childForm.name] = childForm.props.content.replace(
             link,
-            `<span class="underline cursor-pointer">${value[2].replace("-", " ")}</span>`
+            `<span class="underline cursor-pointer">${value[2].replace("-", " ")}</span>`,
           );
         });
       }
@@ -130,7 +130,7 @@ Object.values(props.requestForm).forEach((form) => {
           ocEmitValue.value[form.name] = value[1];
           ocEmitLabel.value[form.name] = form.props.content.replace(
             link,
-            `<span class="underline cursor-pointer">${value[2].replace("-", " ")}</span>`
+            `<span class="underline cursor-pointer">${value[2].replace("-", " ")}</span>`,
           );
         });
       }

@@ -92,9 +92,9 @@ export const Single = {
   render: (args) => ({
     components: { ComplexCalendar, Theme },
     setup() {
-      const modelValue = ref('20/10/2000');
+      const modelValue = ref("20/10/2000");
       const masks = ref({
-        modelValue: 'DD-MM-YYYY',
+        modelValue: "DD-MM-YYYY",
       });
       return { modelValue, args, masks };
     },

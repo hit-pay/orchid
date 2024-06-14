@@ -1,7 +1,7 @@
 import { Theme, DatePicker, Calendar } from "@/orchidui";
 import dayjs from "dayjs";
 import { ref } from "vue";
-import OcComplexCalendar from '@/orchidui/Form/ComplexCalendar/OcComplexCalendar.vue';
+import OcComplexCalendar from "@/orchidui/Form/ComplexCalendar/OcComplexCalendar.vue";
 
 export default {
   components: { Calendar },
@@ -129,13 +129,13 @@ export const VDatePicker = {
       const checkDisableDate = (value) => {
         return dayjs().add(7, "day").isBefore(dayjs(value));
       };
-      
+
       const model = ref("2000/08/20");
       const disabledDates = ref([
         {
-          start: dayjs('2000/08/22', args.dateFormat).toDate(),
-          end: null
-        }
+          start: dayjs("2000/08/22", args.dateFormat).toDate(),
+          end: null,
+        },
       ]);
 
       return { args, checkDisableDate, model, disabledDates };

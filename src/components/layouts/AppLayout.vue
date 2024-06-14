@@ -69,6 +69,9 @@
 <script setup>
 const navigation = [
   { name: "Documentation", href: "/storybook/" },
-  { name: "Hitpay Online Store", href: "https://www.hitpayapp.com/online-store" }
+  {
+    name: "Hitpay Online Store",
+    href: "https://www.hitpayapp.com/online-store",
+  },
 ];
 </script>

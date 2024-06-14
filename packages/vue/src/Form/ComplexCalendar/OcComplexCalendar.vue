@@ -96,7 +96,7 @@ const changeModelValue = (value) => {
   @apply grid-cols-1 md:grid-cols-2 #{!important};
 }
 
-.oc-complex-calendar__calendar--single{
+.oc-complex-calendar__calendar--single {
   .vc-pane-layout {
     @apply grid-cols-1 #{!important};
   }

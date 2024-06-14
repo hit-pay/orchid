@@ -15,9 +15,11 @@ defineProps({
 </script>
 
 <template>
-  <div class="w-full flex flex-wrap relative hover:bg-oc-accent-1-50 rounded-sm">
+  <div
+    class="w-full flex flex-wrap relative hover:bg-oc-accent-1-50 rounded-sm"
+  >
     <div
-      class="w-full p-3 flex items-center text-oc-text-400 justify-between cursor-pointer gap-x-3 "
+      class="w-full p-3 flex items-center text-oc-text-400 justify-between cursor-pointer gap-x-3"
       :class="{
         'bg-oc-accent-1-50': isSelected && !isCheckboxes,
         'opacity-50 hover:bg-white !cursor-default': isDisabled,

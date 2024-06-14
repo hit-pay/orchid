@@ -22,8 +22,12 @@ const copyToClipBoard = () => {
   setTimeout(() => (isCopied.value = false), 1500);
 };
 
-const copyButtonTooltipText = computed(() => props.primaryActions?.copyTooltipContent ?? 'Copy link')
-const copiedButtonTooltipText = computed(() => props.primaryActions?.copiedTooltipContent ?? 'Link copied!')
+const copyButtonTooltipText = computed(
+  () => props.primaryActions?.copyTooltipContent ?? "Copy link",
+);
+const copiedButtonTooltipText = computed(
+  () => props.primaryActions?.copiedTooltipContent ?? "Link copied!",
+);
 </script>
 
 <template>
@@ -127,11 +131,17 @@ const copiedButtonTooltipText = computed(() => props.primaryActions?.copiedToolt
               <DropdownItem
                 v-if="item?.isCopyButton"
                 :icon="isCopied ? 'check' : 'copy'"
-                :text="isCopied ? copiedButtonTooltipText : copyButtonTooltipText"
+                :text="
+                  isCopied ? copiedButtonTooltipText : copyButtonTooltipText
+                "
                 :icon-classes="isCopied ? '!text-oc-success' : ''"
                 @click="copyToClipBoard"
               />
-              <DropdownItem v-else v-bind="item" @click="isDropdownOpened = false" />
+              <DropdownItem
+                v-else
+                v-bind="item"
+                @click="isDropdownOpened = false"
+              />
             </template>
           </div>
           <div v-if="primaryActions.dropdownOptions?.bottom" class="p-2">

@@ -7,8 +7,7 @@ export default {
 };
 export const Default = {
   argTypes: {},
-  args: {
-  },
+  args: {},
   render: (args) => ({
     components: { Theme, Button, OcModalPage },
     setup() {

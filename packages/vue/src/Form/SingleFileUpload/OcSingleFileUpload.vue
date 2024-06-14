@@ -44,7 +44,7 @@ const emit = defineEmits([
   "onRemoveFile",
   "onExceedMaxFileSize",
   "fileExist",
-  "invalidFileType"
+  "invalidFileType",
 ]);
 
 const inputRef = ref();
@@ -60,11 +60,11 @@ const { currentFiles, onChangeFile, onDeleteFile } = useUploadFileProgress(
   props.maxSize,
   emit,
   props.accept,
-  props.validateAcceptFileType
+  props.validateAcceptFileType,
 );
 
 const videoUrl = computed(() =>
-  URL.createObjectURL(currentFiles.value?.[0].file)
+  URL.createObjectURL(currentFiles.value?.[0].file),
 );
 const currentFile = computed(() => currentFiles.value?.[0]);
 onMounted(() => {
@@ -100,7 +100,7 @@ const changeImage = (url) => {
   editImg.value = "";
   emit(
     "update:modelValue",
-    props.format === "object" ? currentFile.value : [currentFile.value]
+    props.format === "object" ? currentFile.value : [currentFile.value],
   );
 };
 

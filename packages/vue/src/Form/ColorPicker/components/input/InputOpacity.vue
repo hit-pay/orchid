@@ -46,6 +46,6 @@ watch(
   (newValue, oldValue) => {
     if (newValue !== oldValue) internal.value = newValue;
   },
-  { immediate: true }
+  { immediate: true },
 );
 </script>

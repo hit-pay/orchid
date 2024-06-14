@@ -60,11 +60,7 @@ defineProps({
     </div>
 
     <slot name="action">
-      <Button
-        v-if="isButtonVisible"
-        v-bind="buttonOptions"
-        class="shrink-0"
-      />
+      <Button v-if="isButtonVisible" v-bind="buttonOptions" class="shrink-0" />
     </slot>
   </div>
 </template>

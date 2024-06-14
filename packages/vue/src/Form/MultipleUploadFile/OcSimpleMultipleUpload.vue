@@ -33,7 +33,7 @@ const emit = defineEmits([
   "delete",
   "onMaxFileExceed",
   "fileExist",
-  "invalidFileType"
+  "invalidFileType",
 ]);
 const isDropdownOpen = ref([]);
 const isEditOpen = ref(false);
@@ -54,7 +54,7 @@ const resetFile = ref(false);
 
 const confirmDeleteFile = () => {
   const deletedImage = props.uploadedImages.find(
-    (_, i) => i === deleteIndex.value
+    (_, i) => i === deleteIndex.value,
   );
 
   if (deletedImage.current) {
@@ -69,7 +69,7 @@ const confirmDeleteFile = () => {
 
   emit(
     "update:uploadedImages",
-    props.uploadedImages.filter((_, i) => i !== deleteIndex.value)
+    props.uploadedImages.filter((_, i) => i !== deleteIndex.value),
   );
   deleteConfirmationModal.value = false;
 };
@@ -79,14 +79,11 @@ const changeImage = (url) => {
 
   changedFile.fileName = Date.now();
 
-  emit("onEditImage", {...changedFile, index: editImgIndex.value});
-
+  emit("onEditImage", { ...changedFile, index: editImgIndex.value });
 
   isEditOpen.value = false;
   editImgIndex.value = "";
   editLink.value = "";
-
-
 };
 const updateLink = (link) => {
   let changedFile = props.uploadedImages[editImgIndex.value];
@@ -104,12 +101,16 @@ const onChange = ($event) => {
 
   emit("change", $event);
 };
-const showAddBtn = computed(() => props.maxImages == undefined || (props.maxImages && props.uploadedImages.length < props.maxImages))
+const showAddBtn = computed(
+  () =>
+    props.maxImages == undefined ||
+    (props.maxImages && props.uploadedImages.length < props.maxImages),
+);
 </script>
 
 <template>
   <div class="relative min-h-[100px]">
-    <label v-if="showAddBtn" class="absolute" >
+    <label v-if="showAddBtn" class="absolute">
       <div
         class="w-[100px] hover:bg-oc-primary-50 cursor-pointer bg-oc-accent-1-50 text-oc-accent-1 rounded aspect-square flex items-center justify-center"
       >

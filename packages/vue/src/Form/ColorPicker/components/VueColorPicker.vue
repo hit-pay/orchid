@@ -20,7 +20,10 @@
       />
     </div>
 
-    <div v-if="mode == 'gradient' && variant == 'gradient'" class="grid items-center mb-5">
+    <div
+      v-if="mode == 'gradient' && variant == 'gradient'"
+      class="grid items-center mb-5"
+    >
       <GradientBar
         :gradientType="gradientType"
         @onAddColor="addColor"
@@ -222,13 +225,13 @@ watch(
   },
   {
     deep: true,
-  }
+  },
 );
 
 const localColorListFiltered = computed(() => {
   if (props.variant !== "gradient") {
     return localColorList.value.filter(
-      (c) => !c.includes("linear") && !c.includes("radial")
+      (c) => !c.includes("linear") && !c.includes("radial"),
     );
   }
   return localColorList.value;
@@ -477,13 +480,13 @@ const handleGradientItemOnMouseDown = (event) => {
 
     if (selectedItem && selectedItem.id != id) {
       const selectedHandle = pickerTemplateRef.value?.querySelector(
-        ".gradient-handle.select"
+        ".gradient-handle.select",
       );
       selectedHandle?.classList.remove("select");
       offsetParent.classList.add("select");
 
       const selectedItemIndex = colorList.value.findIndex(
-        (item) => item.select == true
+        (item) => item.select == true,
       );
 
       for (let i = 0; i < colorList.value.length; i++) {
@@ -531,11 +534,11 @@ const handleGradientMouseMove = (e) => {
     selectedGradientItem.style.left = `${newX}px`;
 
     const percent = parseFloat(
-      ((newX / (client?.width - handleClient?.width)) * 100).toFixed(0)
+      ((newX / (client?.width - handleClient?.width)) * 100).toFixed(0),
     );
 
     const selectedItem = colorList.value.find(
-      (item) => item.id == selectedGradientItem?.id.replace("clr-gb-", "")
+      (item) => item.id == selectedGradientItem?.id.replace("clr-gb-", ""),
     );
 
     if (selectedItem) {
@@ -549,7 +552,7 @@ const handleGradientMouseMove = (e) => {
 const addColor = (e) => {
   const client = gradientMouseBar?.getBoundingClientRect();
   const percent = Math.round(
-    ((e.clientX - (client?.left || 0)) / (client?.width || 1)) * 100
+    ((e.clientX - (client?.left || 0)) / (client?.width || 1)) * 100,
   );
 
   const selectIndex = colorList.value.findIndex((item) => item.select == true);
@@ -569,7 +572,7 @@ const addColor = (e) => {
 
   colorList.value[selectIndex].select = false;
   const selectedHandle = pickerTemplateRef.value?.querySelector(
-    ".gradient-handle.select"
+    ".gradient-handle.select",
   );
   selectedHandle?.classList.remove("select");
 
@@ -577,7 +580,7 @@ const addColor = (e) => {
 
   createGradientItem(item);
   selectedGradientItem = pickerTemplateRef.value?.querySelector(
-    `#clr-gb-${item.id}`
+    `#clr-gb-${item.id}`,
   );
   setGradientBarColor();
 };
@@ -763,7 +766,7 @@ const setGradientBarColor = () => {
     gradientBar.value.style.backgroundImage = barBackground;
 
     let target = pickerTemplateRef.value?.querySelector(
-      "#ck-cp-target-background"
+      "#ck-cp-target-background",
     );
     if (target) {
       target.style.backgroundImage = gradientBarBackgroundImage;
@@ -816,7 +819,7 @@ const deleteColor = () => {
       const deleteItemID = colorList.value[index].id;
       colorList.value.splice(index, 1);
       const deleteElement = pickerTemplateRef.value?.querySelector(
-        `#clr-gb-${deleteItemID}`
+        `#clr-gb-${deleteItemID}`,
       );
       deleteElement?.remove();
 
@@ -824,7 +827,7 @@ const deleteColor = () => {
       if (item) {
         item.select = true;
         selectedGradientItem = pickerTemplateRef.value?.querySelector(
-          `#clr-gb-${item.id}`
+          `#clr-gb-${item.id}`,
         );
         selectedGradientItem?.classList.add("select");
         setToChangeVariebles(item.r, item.g, item.b, item.hue, false);
@@ -906,7 +909,7 @@ const handleRGBAInput = (data) => {
         selectItem.g,
         selectItem.b,
         selectItem.hue,
-        true
+        true,
       );
       setGradientBarColor();
       setSliderOpacityColor();
@@ -940,7 +943,7 @@ const handleHSLInput = (value) => {
       selectColor.g,
       selectColor.b,
       selectColor.hue,
-      true
+      true,
     );
     setGradientBarColor();
     setSliderOpacityColor();
@@ -1185,7 +1188,7 @@ const handleChangeInputType = (event) => {
         const { h, s, l } = rgbToHsl(
           selectColor.r,
           selectColor.g,
-          selectColor.b
+          selectColor.b,
         );
         HSL.h = Math.round(h);
         HSL.s = Math.round(s * 100);
@@ -1212,13 +1215,13 @@ watch(
     if (newValue !== oldValue && newValue !== emittedValue.value) {
       colorList.value.forEach((item) => {
         const deleteElement = gradientMouseBar?.querySelector(
-          `#clr-gb-${item.id}`
+          `#clr-gb-${item.id}`,
         );
         deleteElement?.remove();
       });
       applyValue(newValue);
     }
-  }
+  },
 );
 
 const onChangeMode = (value) => {

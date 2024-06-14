@@ -95,8 +95,8 @@ const emit = defineEmits(["addCustomer", "editCustomer", "closeCustomer"]);
               customer?.phone_number_country_code && customer?.phone_number
                 ? `+${customer.phone_number_country_code} ${customer.phone_number}`
                 : customer?.phone_number
-                ? customer.phone_number
-                : '-'
+                  ? customer.phone_number
+                  : '-'
             "
           />
           <ListDetail

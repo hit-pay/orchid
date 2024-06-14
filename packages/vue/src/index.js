@@ -16,6 +16,7 @@ export * from "./Disclosure/OnboardingAccordion/OnboardingAccordion.js";
 export * from "./Disclosure/Tabs/Tabs.js";
 export * from "./Disclosure/Steps/OcSteps.js";
 export * from "./Disclosure/Variants/OcVariants.js";
+export * from "./Disclosure/SwitchTabs/OcSwitchTabs.js";
 
 export * from "./Elements/Header/OcHeader.js";
 export * from "./Elements/PageTitle/OcPageTitle.js";

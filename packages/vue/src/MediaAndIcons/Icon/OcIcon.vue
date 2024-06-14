@@ -80,6 +80,6 @@ watch(
   () => props.name,
   () => {
     renderIcon();
-  }
+  },
 );
 </script>

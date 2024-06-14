@@ -255,8 +255,7 @@ export const Default = {
 
       const onUpdatePreviewMode = (to) => {
         console.log("preview mode to :", to);
-
-      }
+      };
 
       return {
         sidebarConfig,
@@ -272,7 +271,7 @@ export const Default = {
         content,
         options,
         onUpdateField,
-        onUpdatePreviewMode
+        onUpdatePreviewMode,
       };
     },
     template: `
