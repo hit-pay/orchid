@@ -1,62 +1,60 @@
 <script setup>
-import { Input, Dropdown } from "@/orchidui";
-import { defineAsyncComponent, ref, watch } from "vue";
-import dayjs from "dayjs";
+import { Input, Dropdown } from '@/orchidui'
+import { defineAsyncComponent, ref, watch } from 'vue'
+import dayjs from 'dayjs'
 
 const emit = defineEmits({
-  "update:modelValue": [],
-});
+  'update:modelValue': []
+})
 
-const TimePopup = defineAsyncComponent(
-  () => import("@/orchidui/Form/TimePicker/OcTimePopup.vue"),
-);
+const TimePopup = defineAsyncComponent(() => import('@/orchidui/Form/TimePicker/OcTimePopup.vue'))
 
-const popup = ref();
-const isDropdownOpened = ref(false);
+const popup = ref()
+const isDropdownOpened = ref(false)
 const props = defineProps({
   modelValue: [String, Date],
   label: String,
   hint: String,
   icon: {
     type: String,
-    default: "time",
+    default: 'time'
   },
   preFill: String,
   placeholder: String,
   errorMessage: String,
   isRequired: {
     type: Boolean,
-    default: false,
+    default: false
   },
   isDisabled: {
     type: Boolean,
-    default: false,
+    default: false
   },
   labelIcon: {
     type: String,
-    default: "",
+    default: ''
   },
   tooltipText: {
     type: String,
-    default: "",
+    default: ''
   },
   tooltipOptions: {
     type: Object,
-    default: () => ({}),
-  },
-});
-const time = ref(props.modelValue);
+    default: () => ({})
+  }
+})
+const time = ref(props.modelValue)
 const updateActiveTime = () => {
-  emit("update:modelValue", time.value);
-  setTimeout(() => popup.value?.updateActiveTime(), 300);
-};
+  emit('update:modelValue', time.value)
+  setTimeout(() => popup.value?.updateActiveTime(), 300)
+}
 watch(
   () => props.modelValue,
   (value) => {
-    time.value = value != "" ? value : dayjs().toDate();
+    time.value = value != '' ? value : dayjs().toDate()
   },
-  { immediate: true },
-);
+  { immediate: true }
+)
 </script>
 
 <template>

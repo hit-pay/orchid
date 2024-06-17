@@ -1,52 +1,52 @@
-import { Theme, DatePicker, Calendar } from "@/orchidui";
-import dayjs from "dayjs";
-import { ref } from "vue";
-import OcComplexCalendar from "@/orchidui/Form/ComplexCalendar/OcComplexCalendar.vue";
+import { Theme, DatePicker, Calendar } from '@/orchidui'
+import dayjs from 'dayjs'
+import { ref } from 'vue'
+import OcComplexCalendar from '@/orchidui/Form/ComplexCalendar/OcComplexCalendar.vue'
 
 export default {
   components: { Calendar },
   component: DatePicker,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const Default = {
   argTypes: {
     type: {
-      control: "select",
-      options: ["default", "range"],
+      control: 'select',
+      options: ['default', 'range']
     },
     minDate: {
-      control: "text",
+      control: 'text'
     },
     maxDate: {
-      control: "text",
-    },
+      control: 'text'
+    }
   },
   args: {
-    type: "range",
-    dateFormat: "YYYY-MM-DD",
-    errorMessage: "",
-    hint: "",
-    minLabel: "From",
-    maxLabel: "To",
+    type: 'range',
+    dateFormat: 'YYYY-MM-DD',
+    errorMessage: '',
+    hint: '',
+    minLabel: 'From',
+    maxLabel: 'To',
     minDate: null,
     maxDate: null,
     isRequired: true,
-    label: "Date",
+    label: 'Date',
     isSplitInput: true,
-    isIndefinite: false,
+    isIndefinite: false
   },
   render: (args) => ({
     components: { Theme, DatePicker },
     setup() {
       // Disable date after next week
       const checkDisableDate = (value) => {
-        return dayjs().add(7, "day").isBefore(dayjs(value));
-      };
-      const model = ref("");
-      const model1 = ref([]);
+        return dayjs().add(7, 'day').isBefore(dayjs(value))
+      }
+      const model = ref('')
+      const model1 = ref([])
 
-      return { args, checkDisableDate, model, model1 };
+      return { args, checkDisableDate, model, model1 }
     },
     template: `
       <Theme>
@@ -91,54 +91,54 @@ export const Default = {
           </div>
         </div>
       </Theme>
-    `,
-  }),
-};
+    `
+  })
+}
 
 export const VDatePicker = {
   argTypes: {
     type: {
-      control: "select",
-      options: ["default", "range"],
+      control: 'select',
+      options: ['default', 'range']
     },
     minDate: {
-      control: "text",
+      control: 'text'
     },
     maxDate: {
-      control: "text",
-    },
+      control: 'text'
+    }
   },
   args: {
-    type: "range",
-    dateFormat: "YYYY-MM-DD",
-    errorMessage: "",
-    hint: "",
-    minLabel: "From",
-    maxLabel: "To",
+    type: 'range',
+    dateFormat: 'YYYY-MM-DD',
+    errorMessage: '',
+    hint: '',
+    minLabel: 'From',
+    maxLabel: 'To',
     minDate: null,
     maxDate: null,
     isRequired: true,
-    label: "Date",
+    label: 'Date',
     isSplitInput: true,
-    isIndefinite: false,
+    isIndefinite: false
   },
   render: (args) => ({
     components: { Theme, DatePicker, OcComplexCalendar },
     setup() {
       // Disable date after next week
       const checkDisableDate = (value) => {
-        return dayjs().add(7, "day").isBefore(dayjs(value));
-      };
+        return dayjs().add(7, 'day').isBefore(dayjs(value))
+      }
 
-      const model = ref("2000/08/20");
+      const model = ref('2000/08/20')
       const disabledDates = ref([
         {
-          start: dayjs("2000/08/22", args.dateFormat).toDate(),
-          end: null,
-        },
-      ]);
+          start: dayjs('2000/08/22', args.dateFormat).toDate(),
+          end: null
+        }
+      ])
 
-      return { args, checkDisableDate, model, disabledDates };
+      return { args, checkDisableDate, model, disabledDates }
     },
     template: `
       <Theme>
@@ -176,6 +176,6 @@ export const VDatePicker = {
           </DatePicker>
         </div>
       </Theme>
-    `,
-  }),
-};
+    `
+  })
+}

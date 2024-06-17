@@ -1,35 +1,35 @@
 <script setup>
-import { CopyTooltip, Dropdown, DropdownItem, Icon } from "@/orchidui";
-import { ref } from "vue";
+import { CopyTooltip, Dropdown, DropdownItem, Icon } from '@/orchidui'
+import { ref } from 'vue'
 
 const props = defineProps({
   modelValue: {
     type: Boolean,
-    default: false,
+    default: false
   },
   isClose: {
     type: Boolean,
-    default: true,
+    default: true
   },
   title: String,
   description: String,
   dropdownOptions: {
-    type: Object,
+    type: Object
   },
   dropdownProps: {
     type: Object,
-    default: () => ({}),
+    default: () => ({})
   },
   position: {
     type: String,
-    validator: (v) => ["left", "right"].includes(v),
-    default: "right",
-  },
-});
+    validator: (v) => ['left', 'right'].includes(v),
+    default: 'right'
+  }
+})
 
-const emit = defineEmits(["update:model-value"]);
+const emit = defineEmits(['update:model-value'])
 
-const isOpen = ref(false);
+const isOpen = ref(false)
 </script>
 
 <template>
@@ -39,7 +39,7 @@ const isOpen = ref(false);
       'right-0': modelValue && position === 'right',
       'right-[-999px] w-0': !modelValue && position === 'right',
       'left-0': modelValue && position === 'left',
-      'left-[-999px] w-0': !modelValue && position === 'left',
+      'left-[-999px] w-0': !modelValue && position === 'left'
     }"
   >
     <div v-if="modelValue">
@@ -55,16 +55,10 @@ const isOpen = ref(false);
             </span>
             <slot name="description">
               <div class="flex gap-3 items-center">
-                <span
-                  v-if="description"
-                  class="text-sm text-oc-text-300 truncate"
-                >
+                <span v-if="description" class="text-sm text-oc-text-300 truncate">
                   {{ description }}
                 </span>
-                <CopyTooltip
-                  :value="description"
-                  :tooltip-options="{ strategy: 'fixed' }"
-                >
+                <CopyTooltip :value="description" :tooltip-options="{ strategy: 'fixed' }">
                   <template #default="{ isShow }">
                     <Icon
                       width="14"
@@ -93,11 +87,7 @@ const isOpen = ref(false);
                 </div>
                 <template #menu>
                   <div class="p-2 border-b border-gray-200">
-                    <DropdownItem
-                      v-for="(item, i) in dropdownOptions.top"
-                      :key="i"
-                      v-bind="item"
-                    />
+                    <DropdownItem v-for="(item, i) in dropdownOptions.top" :key="i" v-bind="item" />
                   </div>
                   <div v-if="dropdownOptions.bottom" class="p-2">
                     <DropdownItem

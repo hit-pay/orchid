@@ -1,14 +1,6 @@
 <script setup>
-import {
-  BaseInput,
-  Input,
-  Option,
-  Icon,
-  Chip,
-  Button,
-  Dropdown,
-} from "@/orchidui";
-import { computed, nextTick, onMounted, ref, watch } from "vue";
+import { BaseInput, Input, Option, Icon, Chip, Button, Dropdown } from '@/orchidui'
+import { computed, nextTick, onMounted, ref, watch } from 'vue'
 
 const props = defineProps({
   label: String,
@@ -17,7 +9,7 @@ const props = defineProps({
   errorMessage: String,
   placeholder: {
     type: String,
-    default: "Placeholder",
+    default: 'Placeholder'
   },
   isInlineLabel: Boolean,
   isFilterable: Boolean,
@@ -32,204 +24,199 @@ const props = defineProps({
   modelValue: [Array, String, Number],
   maxVisibleOptions: {
     type: Number,
-    default: 0,
+    default: 0
   },
   multiple: Boolean,
   maxOptionAllowed: Number,
   isRequired: {
     type: Boolean,
-    default: false,
+    default: false
   },
   labelIcon: {
     type: String,
-    default: "",
+    default: ''
   },
   tooltipText: {
     type: String,
-    default: "",
+    default: ''
   },
   tooltipOptions: {
     type: Object,
-    default: () => ({}),
+    default: () => ({})
   },
   chipProps: {
     type: Object,
-    default: () => ({}),
+    default: () => ({})
   },
   popperOptions: {
     type: Object,
     default: () => ({
-      strategy: "fixed",
-    }),
+      strategy: 'fixed'
+    })
   },
   isInlineSearch: Boolean,
-  searchKeywords: String,
-});
+  searchKeywords: String
+})
 
 const emit = defineEmits({
   addNew: [],
-  "update:modelValue": [],
-  "max-option-allowed-set": [],
-  onSearchKeywords: "",
+  'update:modelValue': [],
+  'max-option-allowed-set': [],
+  onSearchKeywords: '',
   close: [],
-  toggle: [],
-});
+  toggle: []
+})
 
-const query = ref(props.searchKeywords ?? "");
-const isDropdownOpened = ref(false);
-const searchInputRef = ref();
+const query = ref(props.searchKeywords ?? '')
+const isDropdownOpened = ref(false)
+const searchInputRef = ref()
 
-const optionsKey = ref(new Date().toISOString());
+const optionsKey = ref(new Date().toISOString())
 
 const isSelectedAll = computed(() => {
   if (props.multiple) {
-    return (
-      props.modelValue?.length &&
-      props.modelValue?.length === filterableOptions.value.length
-    );
+    return props.modelValue?.length && props.modelValue?.length === filterableOptions.value.length
   }
-  return false;
-});
+  return false
+})
 
 const filterableOptions = computed(() => {
-  const filteredOptions = [];
+  const filteredOptions = []
 
   for (const option of props.options) {
     if (option.values) {
       const filteredGroup = option.values.filter(
         (subOption) =>
           subOption.label?.toLowerCase().includes(query.value.toLowerCase()) ||
-          subOption.subLabel?.toLowerCase().includes(query.value.toLowerCase()),
-      );
+          subOption.subLabel?.toLowerCase().includes(query.value.toLowerCase())
+      )
 
       if (filteredGroup.length > 0) {
         filteredOptions.push({
           label: option.label,
-          values: filteredGroup,
-        });
+          values: filteredGroup
+        })
       }
     } else {
       if (
         option.label?.toLowerCase().includes(query.value.toLowerCase()) ||
         option.subLabel?.toLowerCase().includes(query.value.toLowerCase())
       ) {
-        filteredOptions.push(option);
+        filteredOptions.push(option)
       }
     }
   }
 
-  return filteredOptions;
-});
+  return filteredOptions
+})
 
 const localValueOption = computed(() => {
   if (props.multiple) {
-    let selected = [];
+    let selected = []
     if (props.modelValue) {
       for (const value of props.modelValue) {
         for (const option of props.options) {
           if (option.values) {
             option.values.forEach((o) => {
               if (o.value === value) {
-                selected.push(o);
+                selected.push(o)
               }
-            });
+            })
           } else {
             if (option.value === value) {
-              selected.push(option);
+              selected.push(option)
             }
           }
         }
       }
     }
-    return selected;
+    return selected
   } else {
-    return props.options.find((o) => o.value === props.modelValue);
+    return props.options.find((o) => o.value === props.modelValue)
   }
-});
+})
 
 const selectOption = (option) => {
   if (option.isDisabled) {
-    return;
+    return
   }
 
-  let result;
+  let result
 
   if (props.multiple) {
-    const isOptionHasBeenSelected = (props.modelValue || []).find(
-      (o) => o === option.value,
-    );
+    const isOptionHasBeenSelected = (props.modelValue || []).find((o) => o === option.value)
 
     if (
       !isOptionHasBeenSelected &&
       props.maxOptionAllowed &&
       localValueOption.value?.length >= Number(props.maxOptionAllowed)
     ) {
-      emit("max-option-allowed-set");
+      emit('max-option-allowed-set')
 
-      return;
+      return
     }
 
     result = isOptionHasBeenSelected
       ? (props.modelValue || []).filter((o) => o !== option.value)
-      : [...(props.modelValue || []), option.value];
+      : [...(props.modelValue || []), option.value]
   } else {
-    result = option.value;
+    result = option.value
 
-    isDropdownOpened.value = false;
+    isDropdownOpened.value = false
   }
 
-  emit("update:modelValue", result);
-};
+  emit('update:modelValue', result)
+}
 const removeOption = (value) => {
   emit(
-    "update:modelValue",
-    (props.modelValue || []).filter((o) => o !== value),
-  );
-};
+    'update:modelValue',
+    (props.modelValue || []).filter((o) => o !== value)
+  )
+}
 const selectAll = () => {
   if (!props.isAsynchronousSearch) {
     if (isSelectedAll.value) {
-      emit("update:modelValue", null);
+      emit('update:modelValue', null)
     } else {
       emit(
-        "update:modelValue",
-        filterableOptions.value.map((o) => o.value),
-      );
+        'update:modelValue',
+        filterableOptions.value.map((o) => o.value)
+      )
     }
   }
-};
-const baseInput = ref();
+}
+const baseInput = ref()
 
 watch(filterableOptions, () => {
-  optionsKey.value = new Date().toISOString();
-});
+  optionsKey.value = new Date().toISOString()
+})
 
 watch(isDropdownOpened, (value) => {
   if (!value) {
-    emit("close");
-    return;
+    emit('close')
+    return
   }
 
   nextTick(() => {
-    searchInputRef.value?.focus();
-  });
-});
+    searchInputRef.value?.focus()
+  })
+})
 
-const maxPopperWidth = ref("100%");
+const maxPopperWidth = ref('100%')
 const popperStyle = computed(() => {
-  return { maxWidth: maxPopperWidth.value };
-});
+  return { maxWidth: maxPopperWidth.value }
+})
 const onUpdateDropdown = () => {
-  emit("toggle");
+  emit('toggle')
   maxPopperWidth.value = baseInput.value?.$el?.offsetWidth
     ? `${baseInput.value?.$el?.offsetWidth}px`
-    : "100%";
-};
+    : '100%'
+}
 
-const dropdownRef = ref();
+const dropdownRef = ref()
 defineExpose({
-  dropdownRef,
-});
+  dropdownRef
+})
 </script>
 
 <template>
@@ -262,7 +249,7 @@ defineExpose({
           'border-oc-error': errorMessage && !isDisabled,
           'pointer-events-none bg-oc-bg-dark': isDisabled,
           'py-3': multiple,
-          'border-none !min-h-[30px] px-0': isTransparent,
+          'border-none !min-h-[30px] px-0': isTransparent
         }"
       >
         <div v-if="multiple" class="flex flex-wrap gap-2 overflow-hidden">
@@ -280,9 +267,7 @@ defineExpose({
               @remove="removeOption(option.value)"
             />
             <Chip
-              v-if="
-                maxVisibleOptions && localValueOption.length > maxVisibleOptions
-              "
+              v-if="maxVisibleOptions && localValueOption.length > maxVisibleOptions"
               :label="`+${localValueOption.length - maxVisibleOptions}`"
             />
           </slot>
@@ -313,9 +298,7 @@ defineExpose({
           >
             <Icon v-if="icon" :name="icon" width="16" height="16" />
 
-            <span v-if="isInlineLabel && label" class="text-oc-text-300">
-              {{ label }}:
-            </span>
+            <span v-if="isInlineLabel && label" class="text-oc-text-300"> {{ label }}: </span>
             <span v-if="localValueOption" class="truncate">
               {{ localValueOption.label }}
             </span>
@@ -350,12 +333,7 @@ defineExpose({
 
           <div class="flex flex-col gap-y-2">
             <Option
-              v-if="
-                isCheckboxes &&
-                isSelectAll &&
-                filterableOptions.length &&
-                multiple
-              "
+              v-if="isCheckboxes && isSelectAll && filterableOptions.length && multiple"
               :is-selected="isSelectedAll"
               is-checkboxes
               :is-partial="!isSelectedAll && !!modelValue?.length"
@@ -363,11 +341,7 @@ defineExpose({
               label="Select All"
               @click="selectAll"
             />
-            <slot
-              :key="optionsKey"
-              :f-options="filterableOptions"
-              :select-option="selectOption"
-            >
+            <slot :key="optionsKey" :f-options="filterableOptions" :select-option="selectOption">
               <Option
                 v-for="option in filterableOptions"
                 :key="option.value"

@@ -1,9 +1,9 @@
-import PieChart from "./OcPieChart.vue";
+import PieChart from './OcPieChart.vue'
 
 export default {
   component: PieChart,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const Line = {
   args: {
@@ -13,41 +13,41 @@ export const Line = {
     chartData: [
       {
         value: 3900.64,
-        name: "Shopify",
-        icon: "plugins/api_shopify",
-        itemStyle: { color: "#9BC34B" },
+        name: 'Shopify',
+        icon: 'plugins/api_shopify',
+        itemStyle: { color: '#9BC34B' }
       },
       {
         value: 2200.21,
-        name: "Link",
-        icon: "plugins/link",
-        itemStyle: { color: "#2465DE" },
+        name: 'Link',
+        icon: 'plugins/link',
+        itemStyle: { color: '#2465DE' }
       },
       {
         value: 1700.44,
-        name: "Invoice",
-        icon: "plugins/invoice",
-        itemStyle: { color: "#B14AED" },
+        name: 'Invoice',
+        icon: 'plugins/invoice',
+        itemStyle: { color: '#B14AED' }
       },
       {
         value: 1500.78,
-        name: "Recurring billing",
-        icon: "plugins/recurring_billing",
-        itemStyle: { color: "#F4B840" },
+        name: 'Recurring billing',
+        icon: 'plugins/recurring_billing',
+        itemStyle: { color: '#F4B840' }
       },
       {
         value: 400.93,
-        name: "Others",
-        legendTooltip: ["Online Store (1.5%)", "Google Form (0.3%)"],
-        itemStyle: { color: "#E5E6EA" },
-      },
+        name: 'Others',
+        legendTooltip: ['Online Store (1.5%)', 'Google Form (0.3%)'],
+        itemStyle: { color: '#E5E6EA' }
+      }
     ],
-    tooltipCurrency: "SGD",
+    tooltipCurrency: 'SGD'
   },
   render: (args) => ({
     components: { PieChart },
     setup() {
-      return { args };
+      return { args }
     },
     template: `
           <div>
@@ -60,6 +60,6 @@ export const Line = {
                 :tooltip-currency="args.tooltipCurrency"
             />
           </div>
-        `,
-  }),
-};
+        `
+  })
+}

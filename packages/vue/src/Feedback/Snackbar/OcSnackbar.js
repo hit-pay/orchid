@@ -1,3 +1,3 @@
-import Snackbar from "./OcSnackbar.vue";
+import Snackbar from './OcSnackbar.vue'
 
-export { Snackbar };
+export { Snackbar }

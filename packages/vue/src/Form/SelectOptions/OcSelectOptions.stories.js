@@ -1,196 +1,192 @@
-import { Theme } from "@/orchidui";
-import { FormBuilder, SelectOptions } from "@/orchidui";
+import { Theme } from '@/orchidui'
+import { FormBuilder, SelectOptions } from '@/orchidui'
 
-import { ref } from "vue";
+import { ref } from 'vue'
 
 export default {
-  tags: ["autodocs"],
-  component: SelectOptions,
-};
+  tags: ['autodocs'],
+  component: SelectOptions
+}
 
 export const Default = {
   args: {
     jsonForm: [
       {
-        name: "select_options",
-        type: "SelectOptions",
+        name: 'select_options',
+        type: 'SelectOptions',
         props: {
-          label: "Example Label",
-          hint: "This is a hint text to help user",
-          placeholder: "placeholder",
+          label: 'Example Label',
+          hint: 'This is a hint text to help user',
+          placeholder: 'placeholder',
           options: [
             {
-              preview: "/images/request-form.svg",
-              label: "Option 1",
-              value: 1,
+              preview: '/images/request-form.svg',
+              label: 'Option 1',
+              value: 1
             },
             {
-              preview: "/images/request-form.svg",
-              label: "Option 2",
-              value: 2,
+              preview: '/images/request-form.svg',
+              label: 'Option 2',
+              value: 2
             },
             {
-              preview: "/images/request-form.svg",
-              label: "Option 3",
-              value: 3,
-            },
-          ],
-        },
+              preview: '/images/request-form.svg',
+              label: 'Option 3',
+              value: 3
+            }
+          ]
+        }
       },
       {
-        name: "select_options_2",
-        type: "SelectOptions",
+        name: 'select_options_2',
+        type: 'SelectOptions',
         props: {
-          label: "Example Label",
+          label: 'Example Label',
           options: [
             {
-              preview: "/images/request-form.svg",
-              label: "Option 1",
-              value: 1,
+              preview: '/images/request-form.svg',
+              label: 'Option 1',
+              value: 1
             },
             {
-              preview: "/images/request-form.svg",
-              label: "Option 2",
-              value: 2,
-            },
-          ],
-        },
+              preview: '/images/request-form.svg',
+              label: 'Option 2',
+              value: 2
+            }
+          ]
+        }
       },
       {
-        name: "select_options_3",
-        type: "SelectOptions",
+        name: 'select_options_3',
+        type: 'SelectOptions',
         props: {
-          variant: "list",
-          label: "Example Label",
-          hint: "This is a hint text to help user",
-          placeholder: "placeholder",
+          variant: 'list',
+          label: 'Example Label',
+          hint: 'This is a hint text to help user',
+          placeholder: 'placeholder',
           options: [
             {
-              preview: "/images/request-form-1.svg",
-              label: "Option 1",
+              preview: '/images/request-form-1.svg',
+              label: 'Option 1',
               value: 1,
-              description:
-                "Useful if most of your product visuals are wider than taller",
+              description: 'Useful if most of your product visuals are wider than taller'
             },
             {
-              preview: "/images/request-form-1.svg",
-              label: "Option 2",
+              preview: '/images/request-form-1.svg',
+              label: 'Option 2',
               value: 2,
-              description:
-                "Useful if most of your product visuals are wider than taller",
+              description: 'Useful if most of your product visuals are wider than taller'
             },
             {
-              preview: "/images/request-form-1.svg",
-              label: "Option 3",
+              preview: '/images/request-form-1.svg',
+              label: 'Option 3',
               value: 3,
-              description:
-                "Useful if most of your product visuals are wider than taller",
+              description: 'Useful if most of your product visuals are wider than taller'
             },
             {
-              preview: "/images/request-form-1.svg",
-              label: "Option 4",
+              preview: '/images/request-form-1.svg',
+              label: 'Option 4',
               value: 4,
-              description:
-                "Useful if most of your product visuals are wider than taller",
-            },
-          ],
-        },
+              description: 'Useful if most of your product visuals are wider than taller'
+            }
+          ]
+        }
       },
       {
-        name: "select_options_4",
-        type: "SelectOptions",
+        name: 'select_options_4',
+        type: 'SelectOptions',
         props: {
-          variant: "list2",
-          label: "Example Label",
-          hint: "This is a hint text to help user",
-          placeholder: "placeholder",
+          variant: 'list2',
+          label: 'Example Label',
+          hint: 'This is a hint text to help user',
+          placeholder: 'placeholder',
           options: [
             {
-              label: "Option 1",
+              label: 'Option 1',
               value: 1,
-              description: "Smaller height, fit to screen width",
+              description: 'Smaller height, fit to screen width'
             },
             {
-              label: "Option 2",
+              label: 'Option 2',
               value: 2,
-              description: "Smaller height, fit to screen width",
-            },
-          ],
-        },
+              description: 'Smaller height, fit to screen width'
+            }
+          ]
+        }
       },
       {
-        name: "select_options_5",
-        type: "SelectOptions",
+        name: 'select_options_5',
+        type: 'SelectOptions',
         props: {
-          variant: "list",
-          label: "Example Label",
-          hint: "This is a hint text to help user",
-          placeholder: "placeholder",
+          variant: 'list',
+          label: 'Example Label',
+          hint: 'This is a hint text to help user',
+          placeholder: 'placeholder',
           options: [
             {
-              label: "Option 1",
+              label: 'Option 1',
               value: 1,
-              description: "Smaller height, fit to screen width",
+              description: 'Smaller height, fit to screen width'
             },
             {
-              label: "Option 2",
+              label: 'Option 2',
               value: 2,
-              description: "Smaller height, fit to screen width",
-            },
-          ],
-        },
+              description: 'Smaller height, fit to screen width'
+            }
+          ]
+        }
       },
       {
-        name: "select_options_6",
-        type: "SelectOptions",
+        name: 'select_options_6',
+        type: 'SelectOptions',
         props: {
-          variant: "list",
-          label: "Borderless",
-          hint: "This is a hint text to help user",
-          placeholder: "placeholder",
+          variant: 'list',
+          label: 'Borderless',
+          hint: 'This is a hint text to help user',
+          placeholder: 'placeholder',
           borderless: true,
           options: [
             {
-              label: "Option 1",
+              label: 'Option 1',
               value: 1,
-              description: "Smaller height, fit to screen width",
+              description: 'Smaller height, fit to screen width'
             },
             {
-              label: "Option 2",
+              label: 'Option 2',
               value: 2,
-              description: "Smaller height, fit to screen width",
-            },
-          ],
-        },
-      },
-    ],
+              description: 'Smaller height, fit to screen width'
+            }
+          ]
+        }
+      }
+    ]
   },
   render: (args) => ({
     components: { Theme, FormBuilder, SelectOptions },
     setup() {
       const values = ref({
-        select_options: "",
-        select_options_1: "",
-        select_options_2: "",
-        select_options_3: "",
-        select_options_4: "",
-        select_options_5: "",
-        select_options_6: "",
-      });
-      const errors = ref({});
+        select_options: '',
+        select_options_1: '',
+        select_options_2: '',
+        select_options_3: '',
+        select_options_4: '',
+        select_options_5: '',
+        select_options_6: ''
+      })
+      const errors = ref({})
 
       const onUpdateForm = (form, value = null) => {
-        console.log(form, value);
-        if (typeof form.name === "object") {
+        console.log(form, value)
+        if (typeof form.name === 'object') {
           form.name.forEach((formName, index) => {
-            values.value[formName.key] = value[index];
-          });
+            values.value[formName.key] = value[index]
+          })
         } else {
-          values.value[form.name] = value;
+          values.value[form.name] = value
         }
-      };
+      }
 
-      return { values, errors, onUpdateForm, args };
+      return { values, errors, onUpdateForm, args }
     },
     template: `
           <Theme>
@@ -206,6 +202,6 @@ export const Default = {
               </FormBuilder>
             </div>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}

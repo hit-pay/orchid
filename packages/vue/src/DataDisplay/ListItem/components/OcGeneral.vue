@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Chip, Icon, Dropdown } from "@/orchidui";
-import { ref } from "vue";
+import { Chip, Icon, Dropdown } from '@/orchidui'
+import { ref } from 'vue'
 
 defineProps({
   title: String,
@@ -8,26 +8,26 @@ defineProps({
   descriptionIcon: String,
   chips: {
     type: Array,
-    default: () => [],
+    default: () => []
   },
   details: {
     type: Array,
-    default: () => [],
+    default: () => []
   },
   isDisabled: Boolean,
   isDropdownActionsVisible: {
     type: Boolean,
-    default: true,
+    default: true
   },
-  isTransparent: Boolean,
-});
-const emit = defineEmits(["more"]);
-const isOpen = ref(false);
+  isTransparent: Boolean
+})
+const emit = defineEmits(['more'])
+const isOpen = ref(false)
 
 const toggleDashboard = () => {
-  isOpen.value = !isOpen.value;
-  emit("more");
-};
+  isOpen.value = !isOpen.value
+  emit('more')
+}
 </script>
 
 <template>
@@ -35,7 +35,7 @@ const toggleDashboard = () => {
     class="px-5 py-4 rounded border border-gray-200 group"
     :class="{
       'hover:shadow-normal': !isDisabled && !isTransparent,
-      'border-none !p-0': isTransparent,
+      'border-none !p-0': isTransparent
     }"
     @mouseleave="isOpen = false"
   >
@@ -44,13 +44,8 @@ const toggleDashboard = () => {
 
       <div class="flex flex-col flex-1 gap-y-3">
         <div class="flex items-center justify-between">
-          <div
-            class="flex text-sm text-oc-text-400 items-center gap-x-3 overflow-hidden"
-          >
-            <span
-              v-if="title"
-              class="text-base text-oc-text font-medium truncate"
-            >
+          <div class="flex text-sm text-oc-text-400 items-center gap-x-3 overflow-hidden">
+            <span v-if="title" class="text-base text-oc-text font-medium truncate">
               {{ title }}
             </span>
 
@@ -85,10 +80,7 @@ const toggleDashboard = () => {
         </div>
 
         <slot>
-          <div
-            class="flex flex-col gap-3"
-            v-if="descriptionIcon || description"
-          >
+          <div class="flex flex-col gap-3" v-if="descriptionIcon || description">
             <div class="text-oc-text-400 flex gap-x-2 items-center text-sm">
               <Icon
                 v-if="descriptionIcon"
@@ -100,11 +92,7 @@ const toggleDashboard = () => {
               {{ description }}
             </div>
             <div v-if="details.length" class="flex gap-5">
-              <div
-                v-for="(item, i) in details"
-                :key="i"
-                class="flex items-center gap-2"
-              >
+              <div v-for="(item, i) in details" :key="i" class="flex items-center gap-2">
                 <div
                   v-if="item.country"
                   class="fi w-[15px] h-[15px] shadow"
@@ -117,9 +105,7 @@ const toggleDashboard = () => {
                   height="16"
                   class="text-oc-text-400 shrink-0"
                 />
-                <div
-                  class="font-medium whitespace-nowrap text-oc-text-500 text-sm"
-                >
+                <div class="font-medium whitespace-nowrap text-oc-text-500 text-sm">
                   {{ item.label }}
                 </div>
               </div>

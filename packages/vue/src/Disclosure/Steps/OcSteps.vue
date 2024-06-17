@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import Step from "./OcStep.vue";
+import Step from './OcStep.vue'
 
 defineProps({
   steps: {
     type: Array,
-    default: () => [],
+    default: () => []
   },
   modelValue: {
     type: Number,
-    default: 0,
-  },
-});
+    default: 0
+  }
+})
 
-defineEmits(["update:model-value"]);
+defineEmits(['update:model-value'])
 </script>
 
 <template>

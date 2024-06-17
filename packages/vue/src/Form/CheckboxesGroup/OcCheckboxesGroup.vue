@@ -1,52 +1,50 @@
 <script setup>
-import { computed } from "vue";
-import { Checkbox, BaseInput } from "@/orchidui";
+import { computed } from 'vue'
+import { Checkbox, BaseInput } from '@/orchidui'
 
 const props = defineProps({
   alignment: {
     type: String,
-    default: "vertical",
+    default: 'vertical'
   },
   checkboxes: Array,
   modelValue: {
-    type: [Array, String],
+    type: [Array, String]
   },
   label: String,
   errorMessage: String,
   hint: String,
   isDisabled: Boolean,
-  isSelectAll: Boolean,
-});
+  isSelectAll: Boolean
+})
 const emit = defineEmits({
-  "update:modelValue": [],
-});
+  'update:modelValue': []
+})
 
 const alignmentClasses = computed(() => ({
-  horizontal: "gap-x-5 flex-wrap",
-  vertical: "flex-col gap-y-3",
-}));
-const isSelectedCheckbox = (value) => props.modelValue?.includes(value);
+  horizontal: 'gap-x-5 flex-wrap',
+  vertical: 'flex-col gap-y-3'
+}))
+const isSelectedCheckbox = (value) => props.modelValue?.includes(value)
 const toggleCheckbox = (value) => {
   emit(
-    "update:modelValue",
+    'update:modelValue',
     isSelectedCheckbox(value)
       ? props.modelValue.filter((v) => v !== value)
-      : [...props.modelValue, value],
-  );
-};
+      : [...props.modelValue, value]
+  )
+}
 const isAllSelected = computed(() =>
-  props.checkboxes?.every((checkbox) => isSelectedCheckbox(checkbox?.value)),
-);
-const allCheckboxValues = computed(() =>
-  props.checkboxes?.map((checkbox) => checkbox?.value),
-);
+  props.checkboxes?.every((checkbox) => isSelectedCheckbox(checkbox?.value))
+)
+const allCheckboxValues = computed(() => props.checkboxes?.map((checkbox) => checkbox?.value))
 const selectAll = () => {
   if (isAllSelected.value) {
-    emit("update:modelValue", []);
+    emit('update:modelValue', [])
   } else {
-    emit("update:modelValue", allCheckboxValues.value);
+    emit('update:modelValue', allCheckboxValues.value)
   }
-};
+}
 </script>
 
 <template>

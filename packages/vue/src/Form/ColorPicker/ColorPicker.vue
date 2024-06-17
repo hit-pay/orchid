@@ -1,118 +1,102 @@
 <script setup>
-import { Dropdown, Input, BaseInput, Icon } from "@/orchidui";
-import { computed, ref } from "vue";
-import { defineAsyncComponent } from "vue";
+import { Dropdown, Input, BaseInput, Icon } from '@/orchidui'
+import { computed, ref } from 'vue'
+import { defineAsyncComponent } from 'vue'
 
-const ColorPickerPopup = defineAsyncComponent(
-  () => import("./components/VueColorPicker.vue"),
-);
+const ColorPickerPopup = defineAsyncComponent(() => import('./components/VueColorPicker.vue'))
 
 const props = defineProps({
   modelValue: {
     type: String,
-    default: "",
+    default: ''
   },
   variant: {
     type: String,
-    default: "solid",
+    default: 'solid'
   },
   hideOpacity: Boolean,
-  hideInputColor: Boolean,
-});
+  hideInputColor: Boolean
+})
 
-const emit = defineEmits(["update:model-value"]);
+const emit = defineEmits(['update:model-value'])
 
-const isOpen = ref(false);
-const inputValue = ref(props.modelValue);
+const isOpen = ref(false)
+const inputValue = ref(props.modelValue)
 
 const onUpdate = (value) => {
   if (!value) {
-    return;
+    return
   }
-  inputValue.value = value;
-  emit("update:model-value", value);
-};
+  inputValue.value = value
+  emit('update:model-value', value)
+}
 
 const iconProps = computed(() => {
-  if (props.variant === "gradient") {
+  if (props.variant === 'gradient') {
     return {
-      class: "w-[20px] h-[20px] hide-svg-icon",
+      class: 'w-[20px] h-[20px] hide-svg-icon',
       style: {
-        background: inputValue.value,
-      },
-    };
+        background: inputValue.value
+      }
+    }
   }
   return {
     style: {
-      color: inputValue.value,
-    },
-  };
-});
-const dropdownRef = ref();
+      color: inputValue.value
+    }
+  }
+})
+const dropdownRef = ref()
 
-const localColorList = ref([]);
+const localColorList = ref([])
 
 const updateColorListStorage = () => {
   if (localColorList.value.length > 9) {
-    localColorList.value = localColorList.value.filter(
-      (localColor, index) => index < 9,
-    );
+    localColorList.value = localColorList.value.filter((localColor, index) => index < 9)
   }
-  localStorage.setItem(
-    "ck-cp-local-color-list",
-    JSON.stringify(localColorList.value),
-  );
-};
+  localStorage.setItem('ck-cp-local-color-list', JSON.stringify(localColorList.value))
+}
 
-let val = localStorage.getItem("ck-cp-local-color-list");
+let val = localStorage.getItem('ck-cp-local-color-list')
 if (val) {
-  localColorList.value = [...new Set(JSON.parse(val))];
-  updateColorListStorage();
+  localColorList.value = [...new Set(JSON.parse(val))]
+  updateColorListStorage()
 }
 
 const onCloseDropdown = (dropdownOpen) => {
   if (!dropdownOpen && inputValue.value) {
-    const colorExist = localColorList.value.find(
-      (color) => color === inputValue.value,
-    );
+    const colorExist = localColorList.value.find((color) => color === inputValue.value)
     if (!colorExist) {
       if (localColorList.value.length >= 9) {
-        localColorList.value.pop();
+        localColorList.value.pop()
       }
-      let _v = inputValue.value;
-      localColorList.value.unshift(_v);
+      let _v = inputValue.value
+      localColorList.value.unshift(_v)
 
-      updateColorListStorage();
+      updateColorListStorage()
     } else {
       localColorList.value = [
         inputValue.value,
-        ...localColorList.value.filter((c) => c !== inputValue.value),
-      ];
-      updateColorListStorage();
+        ...localColorList.value.filter((c) => c !== inputValue.value)
+      ]
+      updateColorListStorage()
     }
   }
-};
-const isLoading = ref(false);
+}
+const isLoading = ref(false)
 const handleClickLastUsedColor = (color) => {
-  isLoading.value = true;
+  isLoading.value = true
   setTimeout(() => {
-    inputValue.value = color;
-    emit("update:model-value", color);
-    isLoading.value = false;
-  }, 100);
-};
+    inputValue.value = color
+    emit('update:model-value', color)
+    isLoading.value = false
+  }, 100)
+}
 </script>
 
 <template>
-  <BaseInput
-    :class="hideInputColor ? 'w-[40px]' : ''"
-    @click="() => dropdownRef?.toggleDropdown()"
-  >
-    <Dropdown
-      ref="dropdownRef"
-      v-model="isOpen"
-      @update:model-value="onCloseDropdown"
-    >
+  <BaseInput :class="hideInputColor ? 'w-[40px]' : ''" @click="() => dropdownRef?.toggleDropdown()">
+    <Dropdown ref="dropdownRef" v-model="isOpen" @update:model-value="onCloseDropdown">
       <Input
         v-if="!hideInputColor"
         :model-value="inputValue"
@@ -127,11 +111,7 @@ const handleClickLastUsedColor = (color) => {
       </Input>
       <div v-else>
         <slot name="picker-icon">
-          <Icon
-            class="cursor-pointer"
-            :style="`color: ${inputValue}`"
-            name="drop"
-          />
+          <Icon class="cursor-pointer" :style="`color: ${inputValue}`" name="drop" />
         </slot>
       </div>
       <template #menu>

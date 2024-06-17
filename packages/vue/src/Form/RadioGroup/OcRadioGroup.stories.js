@@ -1,52 +1,52 @@
-import { Theme, RadioGroup } from "@/orchidui";
-import { ref } from "vue";
+import { Theme, RadioGroup } from '@/orchidui'
+import { ref } from 'vue'
 
 export default {
   component: RadioGroup,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const Default = {
   argTypes: {
     alignment: {
-      control: "select",
-      options: ["vertical", "horizontal"],
-    },
+      control: 'select',
+      options: ['vertical', 'horizontal']
+    }
   },
   args: {
-    alignment: "vertical",
-    label: "Label",
-    hint: "Hint",
-    errorMessage: "",
+    alignment: 'vertical',
+    label: 'Label',
+    hint: 'Hint',
+    errorMessage: '',
     radio: [
       {
-        label: "Text",
-        value: "0",
+        label: 'Text',
+        value: '0'
       },
       {
-        label: "Text",
-        value: "1",
+        label: 'Text',
+        value: '1'
       },
       {
-        label: "Text",
-        value: "2",
+        label: 'Text',
+        value: '2'
       },
       {
-        label: "Text",
-        value: "3",
+        label: 'Text',
+        value: '3'
       },
       {
-        label: "is Disabled",
-        value: "4",
-        isDisabled: true,
-      },
-    ],
+        label: 'is Disabled',
+        value: '4',
+        isDisabled: true
+      }
+    ]
   },
   render: (args) => ({
     components: { RadioGroup, Theme },
     setup() {
-      const selectedRadio = ref();
-      return { args, selectedRadio };
+      const selectedRadio = ref()
+      return { args, selectedRadio }
     },
     template: `
       <Theme>
@@ -66,40 +66,40 @@ export const Default = {
           </div>
         </div>
       </Theme>
-    `,
-  }),
-};
+    `
+  })
+}
 export const directionVariants = {
   args: {
     radio: [
       {
-        label: "Text 1",
-        value: "Text 1",
+        label: 'Text 1',
+        value: 'Text 1'
       },
       {
-        label: "Text 2",
-        value: "Text 2",
+        label: 'Text 2',
+        value: 'Text 2'
       },
       {
-        label: "Text 3",
-        value: "Text 3",
+        label: 'Text 3',
+        value: 'Text 3'
       },
       {
-        label: "Text 4",
-        value: "Text 4",
+        label: 'Text 4',
+        value: 'Text 4'
       },
       {
-        label: "Text 5",
-        value: "Text 5",
-      },
-    ],
+        label: 'Text 5',
+        value: 'Text 5'
+      }
+    ]
   },
   render: (args) => ({
     components: { RadioGroup, Theme },
     setup() {
-      const selectedRadio1 = ref();
-      const selectedRadio2 = ref();
-      return { selectedRadio1, selectedRadio2, args };
+      const selectedRadio1 = ref()
+      const selectedRadio2 = ref()
+      return { selectedRadio1, selectedRadio2, args }
     },
     template: `
       <Theme>
@@ -121,46 +121,46 @@ export const directionVariants = {
           />
         </div>
       </Theme>
-    `,
-  }),
-};
+    `
+  })
+}
 
 export const buttonVariants = {
   args: {
     radio: [
       {
-        label: "Text",
+        label: 'Text',
         value: 6,
-        icon: "phone",
+        icon: 'phone'
       },
       {
-        label: "Text",
+        label: 'Text',
         value: 7,
-        icon: "email",
+        icon: 'email'
       },
       {
-        label: "Text",
+        label: 'Text',
         value: 8,
-        icon: "facebook",
+        icon: 'facebook'
       },
       {
-        label: "Text",
+        label: 'Text',
         value: 9,
-        icon: "tiktok",
+        icon: 'tiktok'
       },
       {
-        label: "Text",
+        label: 'Text',
         value: 10,
-        icon: "telegram",
-      },
-    ],
+        icon: 'telegram'
+      }
+    ]
   },
   render: (args) => ({
     components: { RadioGroup, Theme },
     setup() {
-      const selectedRadio1 = ref();
-      const selectedRadio2 = ref();
-      return { selectedRadio1, selectedRadio2, args };
+      const selectedRadio1 = ref()
+      const selectedRadio2 = ref()
+      return { selectedRadio1, selectedRadio2, args }
     },
     template: `
       <Theme>
@@ -183,6 +183,6 @@ export const buttonVariants = {
           />
         </div>
       </Theme>
-    `,
-  }),
-};
+    `
+  })
+}

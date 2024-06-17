@@ -1,12 +1,12 @@
 <script setup>
-import { OverviewItem } from "@/orchidui";
+import { OverviewItem } from '@/orchidui'
 
 defineProps({
   title: String,
   containerClass: String,
   items: Array,
-  isLoading: Boolean,
-});
+  isLoading: Boolean
+})
 </script>
 
 <template>

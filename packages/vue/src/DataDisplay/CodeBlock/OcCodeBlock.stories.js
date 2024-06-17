@@ -1,19 +1,19 @@
-import CodeBlock from "./OcCodeBlock.vue";
+import CodeBlock from './OcCodeBlock.vue'
 
 export default {
   component: CodeBlock,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const Default = {
   argTypes: {
     lang: {
-      control: "select",
-      options: ["json", "text"],
-    },
+      control: 'select',
+      options: ['json', 'text']
+    }
   },
   args: {
-    lang: "json",
+    lang: 'json',
     jsonObject: `{
   "widget": {
     "debug": "on",
@@ -41,17 +41,17 @@ export const Default = {
       "onMouseUp": "sun1.opacity = (sun1.opacity / 100) * 90;"
     }
   }
-}`,
+}`
   },
   render: (args) => ({
     components: {
-      CodeBlock,
+      CodeBlock
     },
     setup() {
-      return { args };
+      return { args }
     },
     template: `
           <CodeBlock :json-object="args.jsonObject" :lang="args.lang" :key="args.lang"/>
-        `,
-  }),
-};
+        `
+  })
+}

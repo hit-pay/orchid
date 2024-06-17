@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { BaseInput, Button } from "@/orchidui";
+import { BaseInput, Button } from '@/orchidui'
 
 const props = defineProps({
   modelValue: {
     type: [String, Number],
-    default: null,
+    default: null
   },
   minValue: {
     type: Number,
-    default: 1,
+    default: 1
   },
   label: String,
   errorMessage: String,
@@ -18,23 +18,23 @@ const props = defineProps({
   labelIcon: String,
   isRequired: Boolean,
   tooltipText: String,
-  inputClass: [String, Array, Object],
-});
-const emit = defineEmits(["update:modelValue"]);
+  inputClass: [String, Array, Object]
+})
+const emit = defineEmits(['update:modelValue'])
 
-const increment = () => emit("update:modelValue", Number(props.modelValue) + 1);
+const increment = () => emit('update:modelValue', Number(props.modelValue) + 1)
 const decrement = () => {
   if (Number(props.modelValue) > props.minValue) {
-    emit("update:modelValue", Number(props.modelValue) - 1);
+    emit('update:modelValue', Number(props.modelValue) - 1)
   }
-};
+}
 const preventEventIfNotNumberInput = (event) => {
-  if ((event.key >= "0" && event.key <= "9") || event.key === "Backspace") {
-    return;
+  if ((event.key >= '0' && event.key <= '9') || event.key === 'Backspace') {
+    return
   }
 
-  event.preventDefault();
-};
+  event.preventDefault()
+}
 </script>
 
 <template>
@@ -52,7 +52,7 @@ const preventEventIfNotNumberInput = (event) => {
       :class="[
         inputClass,
         isDisabled ? 'bg-oc-bg-dark' : '',
-        errorMessage ? 'border-oc-error' : 'border-oc-gray-200',
+        errorMessage ? 'border-oc-error' : 'border-oc-gray-200'
       ]"
     >
       <Button

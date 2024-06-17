@@ -1,12 +1,12 @@
 <script setup>
-import { Icon, Dropdown, DropdownItem } from "@/orchidui";
-import { ref } from "vue";
+import { Icon, Dropdown, DropdownItem } from '@/orchidui'
+import { ref } from 'vue'
 
 defineProps({
-  isSubHeader: Boolean,
-});
+  isSubHeader: Boolean
+})
 
-const isDropdownOpened = ref(false);
+const isDropdownOpened = ref(false)
 </script>
 <template>
   <a
@@ -16,29 +16,15 @@ const isDropdownOpened = ref(false);
     aria-label="Home Page"
   >
     <Icon class="mt-1" name="hitpay/logo" width="26" height="28" />
-    <Icon
-      class="mt-3 hidden md:block"
-      name="hitpay/hitpay"
-      width="74"
-      height="24"
-    />
+    <Icon class="mt-3 hidden md:block" name="hitpay/hitpay" width="74" height="24" />
   </a>
   <Dropdown v-model="isDropdownOpened" :distance="10" class="hidden md:block">
     <div
       class="cursor-pointer flex rounded-full max-w-[150px] overflow-hidden items-center gap-x-2 py-2 px-3"
-      :class="
-        isSubHeader ? 'text-oc-text-100' : 'text-oc-text-400 bg-oc-accent-1-50'
-      "
+      :class="isSubHeader ? 'text-oc-text-100' : 'text-oc-text-400 bg-oc-accent-1-50'"
     >
-      <Icon
-        width="16"
-        height="16"
-        name="store"
-        class="shrink-0 text-oc-accent-1-400"
-      />
-      <span class="overflow-hidden text-ellipsis whitespace-nowrap"
-        >Shenzhen Huajin test</span
-      >
+      <Icon width="16" height="16" name="store" class="shrink-0 text-oc-accent-1-400" />
+      <span class="overflow-hidden text-ellipsis whitespace-nowrap">Shenzhen Huajin test</span>
     </div>
     <template #menu>
       <div class="flex flex-col">

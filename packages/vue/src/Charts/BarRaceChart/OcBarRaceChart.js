@@ -1,3 +1,3 @@
-import { defineAsyncComponent } from "vue";
-const BarRaceChart = defineAsyncComponent(() => import("./OcBarRaceChart.vue"));
-export { BarRaceChart };
+import { defineAsyncComponent } from 'vue'
+const BarRaceChart = defineAsyncComponent(() => import('./OcBarRaceChart.vue'))
+export { BarRaceChart }

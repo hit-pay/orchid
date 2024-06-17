@@ -1,27 +1,24 @@
 <script setup>
-import { defineAsyncComponent } from "vue";
-const ColorPicker = defineAsyncComponent(
-  () => import("../../../Form/ColorPicker/ColorPicker.vue"),
-);
-import { Icon } from "@/orchidui";
+import { defineAsyncComponent } from 'vue'
+const ColorPicker = defineAsyncComponent(() => import('../../../Form/ColorPicker/ColorPicker.vue'))
+import { Icon } from '@/orchidui'
 const props = defineProps({
   modelValue: {
     type: Array,
-    default: () => [],
+    default: () => []
   },
-  form: Object,
-});
+  form: Object
+})
 
 defineEmits({
-  "update:modelValue": [],
-});
+  'update:modelValue': []
+})
 
 const getNewValues = (index, newVal) => {
-  let newValues =
-    props.modelValue && props.modelValue.length > 0 ? props.modelValue : [];
-  newValues[index] = newVal;
-  return newValues;
-};
+  let newValues = props.modelValue && props.modelValue.length > 0 ? props.modelValue : []
+  newValues[index] = newVal
+  return newValues
+}
 </script>
 
 <template>
@@ -36,9 +33,7 @@ const getNewValues = (index, newVal) => {
             : '#FFFFFF'
         "
         v-bind="name.props"
-        @update:model-value="
-          $emit('update:modelValue', getNewValues(index, $event))
-        "
+        @update:model-value="$emit('update:modelValue', getNewValues(index, $event))"
       >
         <template #leading>
           <Icon class="ml-auto" name="paint" />

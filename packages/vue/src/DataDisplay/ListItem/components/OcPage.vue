@@ -1,21 +1,21 @@
 <script setup>
-import { Chip, Icon, Dropdown } from "@/orchidui";
-import { ref } from "vue";
-import dayjs from "dayjs";
+import { Chip, Icon, Dropdown } from '@/orchidui'
+import { ref } from 'vue'
+import dayjs from 'dayjs'
 
 defineProps({
-  page: Object,
-});
-const isOpen = ref(false);
+  page: Object
+})
+const isOpen = ref(false)
 const stripHtml = (html) => {
-  let tmp = document.createElement("DIV");
-  tmp.innerHTML = html;
-  return tmp.textContent || tmp.innerText || "";
-};
+  let tmp = document.createElement('DIV')
+  tmp.innerHTML = html
+  return tmp.textContent || tmp.innerText || ''
+}
 
 const getPageThumbnail = (url) => {
-  return url?.replace("generics/medium/", "generics/thumbnail/");
-};
+  return url?.replace('generics/medium/', 'generics/thumbnail/')
+}
 </script>
 
 <template>
@@ -33,9 +33,7 @@ const getPageThumbnail = (url) => {
         </div>
         <div class="ml-auto">
           <Dropdown v-model="isOpen" placement="bottom-end">
-            <div
-              class="cursor-pointer flex hover:bg-oc-gray-200 items-center rounded p-2"
-            >
+            <div class="cursor-pointer flex hover:bg-oc-gray-200 items-center rounded p-2">
               <Icon class="text-oc-text-400" name="dots-vertical" />
             </div>
             <template #menu>
@@ -51,14 +49,12 @@ const getPageThumbnail = (url) => {
         <span class="mr-3">
           <span class="text-oc-text-300">Last updated : </span>
           <span class="text-oc-text-400 font-medium">{{
-            dayjs(page.updated_at).format("DD MMM YYYY")
+            dayjs(page.updated_at).format('DD MMM YYYY')
           }}</span></span
         >
-        <Chip
-          class="ml-auto md:ml-0"
-          :variant="!page.enabled ? 'gray' : 'primary'"
-          >{{ page.enabled ? "Published" : "Draft" }}</Chip
-        >
+        <Chip class="ml-auto md:ml-0" :variant="!page.enabled ? 'gray' : 'primary'">{{
+          page.enabled ? 'Published' : 'Draft'
+        }}</Chip>
       </div>
     </div>
   </div>

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed } from 'vue'
 import {
   DropdownItem,
   Button,
@@ -9,26 +9,26 @@ import {
   LinkInput,
   Input,
   ConfirmationModal,
-  Option as OcOption,
-} from "@/orchidui";
-import { DraggableList } from "@/orchidui/Draggable.js";
+  Option as OcOption
+} from '@/orchidui'
+import { DraggableList } from '@/orchidui/Draggable.js'
 const props = defineProps({
   modelValue: {
     type: Array,
-    default: () => [],
+    default: () => []
   },
   variant: {
     type: String,
-    default: "default", // social
+    default: 'default' // social
   },
   hasSubmenu: Boolean,
   submenuLevel: {
     type: [String, Number],
-    default: 1,
+    default: 1
   },
   linkKey: {
     type: String,
-    default: "link",
+    default: 'link'
   },
   noMenuIcon: String,
   options: {
@@ -36,292 +36,284 @@ const props = defineProps({
     default: () => {
       return {
         categories: [],
-        pages: [],
-      };
-    },
-  },
-});
+        pages: []
+      }
+    }
+  }
+})
 
-const isLoading = ref(false);
+const isLoading = ref(false)
 const emit = defineEmits({
-  "update:modelValue": [],
-  "add:menu": [],
-});
+  'update:modelValue': [],
+  'add:menu': []
+})
 
-const update = (value) => emit("update:modelValue", value);
+const update = (value) => emit('update:modelValue', value)
 
-const isSocial = computed(() => props.variant === "social");
+const isSocial = computed(() => props.variant === 'social')
 
-const addMenuForm = ref(null);
-const addSubmenuItem = ref(null);
-const addMenuModal = ref(false);
+const addMenuForm = ref(null)
+const addSubmenuItem = ref(null)
+const addMenuModal = ref(false)
 
-const editMenuModal = ref(false);
-const editMenuForm = ref(null);
+const editMenuModal = ref(false)
+const editMenuForm = ref(null)
 
 const addMenu = (submenu = false) => {
   if (!submenu) {
-    addSubmenuItem.value = null;
+    addSubmenuItem.value = null
   }
-  addMenuModal.value = true;
+  addMenuModal.value = true
   addMenuForm.value = {
     ids: [],
-    type: isSocial.value ? "facebook" : "page",
-    title: "",
-    link: "",
-  };
-};
+    type: isSocial.value ? 'facebook' : 'page',
+    title: '',
+    link: ''
+  }
+}
 
 const addSubMenu = (item, subitem) => {
   addSubmenuItem.value = {
     item: item,
-    subitem: subitem,
-  };
-  addMenu(true);
-};
+    subitem: subitem
+  }
+  addMenu(true)
+}
 
 const editMenu = (item) => {
-  editMenuModal.value = true;
-  editMenuForm.value = item;
-};
+  editMenuModal.value = true
+  editMenuForm.value = item
+}
 
 const socialOptions = [
   {
-    value: "facebook",
-    label: "Facebook",
-    icon: "facebook",
-    preFill: "https://facebook.com/",
-    placeholder: "@username",
+    value: 'facebook',
+    label: 'Facebook',
+    icon: 'facebook',
+    preFill: 'https://facebook.com/',
+    placeholder: '@username'
   },
   {
-    value: "instagram",
-    label: "Instagram",
-    icon: "instagram",
-    preFill: "https://instagram.com/",
-    placeholder: "@username",
+    value: 'instagram',
+    label: 'Instagram',
+    icon: 'instagram',
+    preFill: 'https://instagram.com/',
+    placeholder: '@username'
   },
   {
-    value: "twitter",
-    label: "(X) Twitter",
-    icon: "twitter",
-    preFill: "https://twitter.com/",
-    placeholder: "@username",
+    value: 'twitter',
+    label: '(X) Twitter',
+    icon: 'twitter',
+    preFill: 'https://twitter.com/',
+    placeholder: '@username'
   },
   {
-    value: "tiktok",
-    label: "Tiktok",
-    icon: "tiktok",
-    preFill: "https://tiktok.com/",
-    placeholder: "@username",
+    value: 'tiktok',
+    label: 'Tiktok',
+    icon: 'tiktok',
+    preFill: 'https://tiktok.com/',
+    placeholder: '@username'
   },
   {
-    value: "email",
-    label: "Email",
-    icon: "email",
-    preFill: "mailto:",
-    placeholder: "example@mail.com",
+    value: 'email',
+    label: 'Email',
+    icon: 'email',
+    preFill: 'mailto:',
+    placeholder: 'example@mail.com'
   },
   {
-    value: "phone",
-    label: "Phone Number",
-    icon: "phone",
-    preFill: "tel:",
-    placeholder: "628xxx",
+    value: 'phone',
+    label: 'Phone Number',
+    icon: 'phone',
+    preFill: 'tel:',
+    placeholder: '628xxx'
   },
   {
-    value: "whatsapp",
-    label: "Whatsapp",
-    icon: "whatsapp",
-    preFill: "https://wa.me/",
-    placeholder: "628xxx",
+    value: 'whatsapp',
+    label: 'Whatsapp',
+    icon: 'whatsapp',
+    preFill: 'https://wa.me/',
+    placeholder: '628xxx'
   },
   {
-    value: "telegram",
-    label: "Telegram",
-    icon: "telegram",
-    preFill: "https://t.me/",
-    placeholder: "628xxx",
+    value: 'telegram',
+    label: 'Telegram',
+    icon: 'telegram',
+    preFill: 'https://t.me/',
+    placeholder: '628xxx'
   },
   {
-    value: "link",
-    label: "Other website",
-    icon: "link",
-    preFill: "https://",
-    placeholder: "website.com",
-  },
-];
+    value: 'link',
+    label: 'Other website',
+    icon: 'link',
+    preFill: 'https://',
+    placeholder: 'website.com'
+  }
+]
 
 const getUniqueListBy = (arr, key) => {
-  return [...new Map(arr.map((item) => [item[key], item])).values()];
-};
+  return [...new Map(arr.map((item) => [item[key], item])).values()]
+}
 
 const saveMenuItems = (items) => {
-  let newModelValue = [...props.modelValue];
+  let newModelValue = [...props.modelValue]
   if (addSubmenuItem.value && addSubmenuItem.value.subitem) {
-    let parentChildren = addSubmenuItem.value.item.children;
-    let children =
-      parentChildren[parentChildren.indexOf(addSubmenuItem.value.subitem)]
-        .children;
-    let newChildren = [...items];
+    let parentChildren = addSubmenuItem.value.item.children
+    let children = parentChildren[parentChildren.indexOf(addSubmenuItem.value.subitem)].children
+    let newChildren = [...items]
     if (children) {
-      newChildren = getUniqueListBy([...children, ...items], "id");
+      newChildren = getUniqueListBy([...children, ...items], 'id')
     }
     newModelValue[newModelValue.indexOf(addSubmenuItem.value.item)].children[
       parentChildren.indexOf(addSubmenuItem.value.subitem)
-    ].children = newChildren;
+    ].children = newChildren
   } else if (addSubmenuItem.value && addSubmenuItem.value.item) {
-    let children =
-      newModelValue[newModelValue.indexOf(addSubmenuItem.value.item)].children;
-    let newChildren = [...items];
+    let children = newModelValue[newModelValue.indexOf(addSubmenuItem.value.item)].children
+    let newChildren = [...items]
     if (children) {
-      newChildren = getUniqueListBy([...children, ...items], "id");
+      newChildren = getUniqueListBy([...children, ...items], 'id')
     }
-    newModelValue[newModelValue.indexOf(addSubmenuItem.value.item)].children =
-      newChildren;
+    newModelValue[newModelValue.indexOf(addSubmenuItem.value.item)].children = newChildren
   } else {
-    newModelValue = getUniqueListBy([...newModelValue, ...items], "id");
+    newModelValue = getUniqueListBy([...newModelValue, ...items], 'id')
   }
-  emit("update:modelValue", newModelValue);
+  emit('update:modelValue', newModelValue)
   items?.forEach((i) => {
-    emit("add:menu", i);
-  });
+    emit('add:menu', i)
+  })
 
-  addMenuModal.value = false;
+  addMenuModal.value = false
 
   setTimeout(() => {
-    isLoading.value = false;
-  }, 50);
-};
+    isLoading.value = false
+  }, 50)
+}
 const saveMenu = () => {
-  isLoading.value = true;
+  isLoading.value = true
   if (addMenuForm.value.ids.length > 0) {
-    let newMenus = [];
+    let newMenus = []
     addMenuForm.value.ids.forEach((value) => {
-      let selected = null;
-      if (addMenuForm.value.type === "page") {
-        selected = props.options.pages.find((p) => p.value === value);
-      } else if (addMenuForm.value.type === "category") {
-        selected = props.options.categories.find((p) => p.value === value);
+      let selected = null
+      if (addMenuForm.value.type === 'page') {
+        selected = props.options.pages.find((p) => p.value === value)
+      } else if (addMenuForm.value.type === 'category') {
+        selected = props.options.categories.find((p) => p.value === value)
       }
       newMenus.push({
         id: selected.value,
         type: addMenuForm.value.type,
         title: selected.label,
-        link: selected.link,
-      });
-    });
-    saveMenuItems(newMenus);
+        link: selected.link
+      })
+    })
+    saveMenuItems(newMenus)
   } else if (
     addMenuForm.value.title &&
     addMenuForm.value.link &&
-    addMenuForm.value.link !== "https://"
+    addMenuForm.value.link !== 'https://'
   ) {
     let newMenu = {
-      id: "new_" + Date.now(),
+      id: 'new_' + Date.now(),
       icon: addMenuForm.value.type,
       type: addMenuForm.value.type,
       title: addMenuForm.value.title,
-      link: addMenuForm.value.link,
-    };
-    saveMenuItems([newMenu]);
+      link: addMenuForm.value.link
+    }
+    saveMenuItems([newMenu])
   }
-};
+}
 
 const getLinkFromOption = (value, opt) => {
-  return opt.find((o) => o.value === value).link;
-};
+  return opt.find((o) => o.value === value).link
+}
 
-const deleteMenuItems = ref(null);
+const deleteMenuItems = ref(null)
 const deleteMenu = (item, subitem, subitem2) => {
   deleteMenuItems.value = {
     item: item,
     subitem: subitem,
-    subitem2: subitem2,
-  };
-};
-const displayDeleteMessage = computed(() => {
-  let itemTitle = deleteMenuItems.value.item.title;
-  if (deleteMenuItems.value.subitem2) {
-    itemTitle = deleteMenuItems.value.subitem2.title;
-  } else if (deleteMenuItems.value.subitem) {
-    itemTitle = deleteMenuItems.value.subitem.title;
+    subitem2: subitem2
   }
-  return `Do you want to delete <b class="font-medium">"${itemTitle}"<b> from menu?`;
-});
+}
+const displayDeleteMessage = computed(() => {
+  let itemTitle = deleteMenuItems.value.item.title
+  if (deleteMenuItems.value.subitem2) {
+    itemTitle = deleteMenuItems.value.subitem2.title
+  } else if (deleteMenuItems.value.subitem) {
+    itemTitle = deleteMenuItems.value.subitem.title
+  }
+  return `Do you want to delete <b class="font-medium">"${itemTitle}"<b> from menu?`
+})
 const confirmDeleteMenu = () => {
-  isLoading.value = true;
-  let newModelValue = [...props.modelValue];
+  isLoading.value = true
+  let newModelValue = [...props.modelValue]
   if (deleteMenuItems.value && deleteMenuItems.value.subitem2) {
-    let parentChildren = deleteMenuItems.value.item.children;
+    let parentChildren = deleteMenuItems.value.item.children
     let newChildren = deleteMenuItems.value.subitem.children.filter(
-      (i) => i.id !== deleteMenuItems.value.subitem2.id,
-    );
+      (i) => i.id !== deleteMenuItems.value.subitem2.id
+    )
     newModelValue[newModelValue.indexOf(deleteMenuItems.value.item)].children[
       parentChildren.indexOf(deleteMenuItems.value.subitem)
-    ].children = newChildren;
+    ].children = newChildren
   } else if (deleteMenuItems.value && deleteMenuItems.value.subitem) {
-    let children =
-      newModelValue[newModelValue.indexOf(deleteMenuItems.value.item)].children;
-    newModelValue[newModelValue.indexOf(deleteMenuItems.value.item)].children =
-      children.filter((i) => i.id !== deleteMenuItems.value.subitem.id);
+    let children = newModelValue[newModelValue.indexOf(deleteMenuItems.value.item)].children
+    newModelValue[newModelValue.indexOf(deleteMenuItems.value.item)].children = children.filter(
+      (i) => i.id !== deleteMenuItems.value.subitem.id
+    )
   } else {
-    newModelValue = newModelValue.filter(
-      (s) => s.id !== deleteMenuItems.value.item.id,
-    );
+    newModelValue = newModelValue.filter((s) => s.id !== deleteMenuItems.value.item.id)
   }
-  emit("update:modelValue", newModelValue);
+  emit('update:modelValue', newModelValue)
   setTimeout(() => {
-    isLoading.value = false;
-    deleteMenuItems.value = null;
-  }, 50);
-};
+    isLoading.value = false
+    deleteMenuItems.value = null
+  }, 50)
+}
 
 const selectOption = (option) => {
-  let hasSelected = addMenuForm.value.ids.find((o) => o === option.value);
+  let hasSelected = addMenuForm.value.ids.find((o) => o === option.value)
   if (hasSelected) {
-    addMenuForm.value.ids = addMenuForm.value.ids.filter(
-      (o) => o !== option.value,
-    );
+    addMenuForm.value.ids = addMenuForm.value.ids.filter((o) => o !== option.value)
   } else {
-    addMenuForm.value.ids = [...addMenuForm.value.ids, option.value];
+    addMenuForm.value.ids = [...addMenuForm.value.ids, option.value]
   }
-};
+}
 
-const categoryDropdown = ref([]);
+const categoryDropdown = ref([])
 
 const menuHasAdded = computed(() => {
   if (props.modelValue.length > 0) {
-    return props.modelValue.map((ct) => ct.id);
+    return props.modelValue.map((ct) => ct.id)
   } else {
-    return [];
+    return []
   }
-});
+})
 
 const filteredCategories = computed(() => {
   if (props.modelValue.length > 0) {
     return props.options.categories.map((c) => {
       return {
         ...c,
-        subLabel: menuHasAdded.value.includes(c.value) ? "has added" : "",
-      };
-    });
+        subLabel: menuHasAdded.value.includes(c.value) ? 'has added' : ''
+      }
+    })
   } else {
-    return props.options.categories;
+    return props.options.categories
   }
-});
+})
 
 const filteredPages = computed(() => {
   if (props.modelValue.length > 0) {
     return props.options.pages.map((c) => {
       return {
         ...c,
-        subLabel: menuHasAdded.value.includes(c.value) ? "has added" : "",
-      };
-    });
+        subLabel: menuHasAdded.value.includes(c.value) ? 'has added' : ''
+      }
+    })
   } else {
-    return props.options.pages;
+    return props.options.pages
   }
-});
+})
 </script>
 <template>
   <div>
@@ -370,11 +362,7 @@ const filteredPages = computed(() => {
             <template #action-item="slot">
               <div class="flex flex-col">
                 <div class="p-2 border-b border-gray-200">
-                  <DropdownItem
-                    text="Edit"
-                    icon="pencil"
-                    @click="editMenu(item, slot.item)"
-                  />
+                  <DropdownItem text="Edit" icon="pencil" @click="editMenu(item, slot.item)" />
                   <DropdownItem
                     v-if="submenuLevel == 2"
                     text="Add submenu"
@@ -394,11 +382,7 @@ const filteredPages = computed(() => {
             </template>
             <template #content="slot">
               <div
-                v-if="
-                  slot.item.children &&
-                  slot.item.children.length > 0 &&
-                  submenuLevel == 2
-                "
+                v-if="slot.item.children && slot.item.children.length > 0 && submenuLevel == 2"
                 class="flex w-full my-5"
               >
                 <DraggableList
@@ -457,7 +441,7 @@ const filteredPages = computed(() => {
         title="Add Menu"
         :confirm-button-props="{
           label: 'Save',
-          onClick: () => saveMenu(),
+          onClick: () => saveMenu()
         }"
       >
         <div class="flex flex-col gap-5">
@@ -491,10 +475,7 @@ const filteredPages = computed(() => {
                 @update:model-value="addMenuForm.type = 'category'"
               />
 
-              <div
-                v-if="addMenuForm.type === 'category'"
-                class="w-full pl-4 mt-4"
-              >
+              <div v-if="addMenuForm.type === 'category'" class="w-full pl-4 mt-4">
                 <Select
                   v-if="options.categories.length > 0"
                   v-model="addMenuForm.ids"
@@ -512,22 +493,12 @@ const filteredPages = computed(() => {
                       :label="option.label"
                       :sub-label="option.subLabel"
                       is-checkboxes
-                      :is-selected="
-                        addMenuForm.ids.find((o) => o === option.value)
-                          ? true
-                          : false
-                      "
-                      :has-children="
-                        fOptions.find((o) => o.parent === option.value)
-                          ? true
-                          : false
-                      "
+                      :is-selected="addMenuForm.ids.find((o) => o === option.value) ? true : false"
+                      :has-children="fOptions.find((o) => o.parent === option.value) ? true : false"
                       :show-children="categoryDropdown.includes(option.value)"
                       @show:children="categoryDropdown.push(option.value)"
                       @hide:children="
-                        categoryDropdown = categoryDropdown.filter(
-                          (c) => c !== option.value,
-                        )
+                        categoryDropdown = categoryDropdown.filter((c) => c !== option.value)
                       "
                       @select="selectOption(option)"
                     >
@@ -535,71 +506,45 @@ const filteredPages = computed(() => {
                         <div
                           v-if="fOptions.find((o) => o.parent === option.value)"
                           class="w-full flex-col ml-5"
-                          :class="
-                            categoryDropdown.includes(option.value)
-                              ? 'flex'
-                              : 'hidden'
-                          "
+                          :class="categoryDropdown.includes(option.value) ? 'flex' : 'hidden'"
                         >
                           <OcOption
-                            v-for="option1 in fOptions.filter(
-                              (o) => o.parent === option.value,
-                            )"
+                            v-for="option1 in fOptions.filter((o) => o.parent === option.value)"
                             :key="option1.value"
                             :label="option1.label"
                             :sub-label="option1.subLabel"
                             is-checkboxes
                             :is-selected="
-                              addMenuForm.ids.find((o) => o === option1.value)
-                                ? true
-                                : false
+                              addMenuForm.ids.find((o) => o === option1.value) ? true : false
                             "
                             :has-children="
-                              fOptions.find((o) => o.parent === option1.value)
-                                ? true
-                                : false
+                              fOptions.find((o) => o.parent === option1.value) ? true : false
                             "
-                            :show-children="
-                              categoryDropdown.includes(option1.value)
-                            "
-                            @show:children="
-                              categoryDropdown.push(option1.value)
-                            "
+                            :show-children="categoryDropdown.includes(option1.value)"
+                            @show:children="categoryDropdown.push(option1.value)"
                             @hide:children="
-                              categoryDropdown = categoryDropdown.filter(
-                                (c) => c !== option1.value,
-                              )
+                              categoryDropdown = categoryDropdown.filter((c) => c !== option1.value)
                             "
                             @select="selectOption(option1)"
                           >
                             <template #after>
                               <div
-                                v-if="
-                                  fOptions.find(
-                                    (o) => o.parent === option1.value,
-                                  )
-                                "
+                                v-if="fOptions.find((o) => o.parent === option1.value)"
                                 class="w-full flex-col ml-5"
                                 :class="
-                                  categoryDropdown.includes(option1.value)
-                                    ? 'flex'
-                                    : 'hidden'
+                                  categoryDropdown.includes(option1.value) ? 'flex' : 'hidden'
                                 "
                               >
                                 <OcOption
                                   v-for="option2 in fOptions.filter(
-                                    (o) => o.parent === option1.value,
+                                    (o) => o.parent === option1.value
                                   )"
                                   :key="option2.value"
                                   :label="option2.label"
                                   :sub-label="option2.subLabel"
                                   is-checkboxes
                                   :is-selected="
-                                    addMenuForm.ids.find(
-                                      (o) => o === option2.value,
-                                    )
-                                      ? true
-                                      : false
+                                    addMenuForm.ids.find((o) => o === option2.value) ? true : false
                                   "
                                   @select="selectOption(option2)"
                                 >
@@ -624,10 +569,7 @@ const filteredPages = computed(() => {
               label="External link"
               @update:model-value="addMenuForm.type = 'link'"
             />
-            <div
-              v-if="!['page', 'category'].includes(addMenuForm.type)"
-              class="w-full pl-4 mt-4"
-            >
+            <div v-if="!['page', 'category'].includes(addMenuForm.type)" class="w-full pl-4 mt-4">
               <LinkInput
                 v-model="addMenuForm.link"
                 v-model:type="addMenuForm.type"
@@ -646,10 +588,10 @@ const filteredPages = computed(() => {
         class="!w-full !h-full"
         title="Edit Menu"
         :confirm-button-props="{
-          class: 'hidden',
+          class: 'hidden'
         }"
         :cancel-button-props="{
-          label: 'Close',
+          label: 'Close'
         }"
       >
         <div class="flex flex-col gap-5">
@@ -671,10 +613,7 @@ const filteredPages = computed(() => {
                     label="Choose Page"
                     placeholder="Choose Page"
                     @update:model-value="
-                      editMenuForm.link = getLinkFromOption(
-                        $event,
-                        options.pages,
-                      )
+                      editMenuForm.link = getLinkFromOption($event, options.pages)
                     "
                   />
                 </div>
@@ -687,10 +626,7 @@ const filteredPages = computed(() => {
                     placeholder="Choose Category"
                     is-filterable
                     @update:model-value="
-                      editMenuForm.link = getLinkFromOption(
-                        $event,
-                        options.categories,
-                      )
+                      editMenuForm.link = getLinkFromOption($event, options.categories)
                     "
                   />
                 </div>

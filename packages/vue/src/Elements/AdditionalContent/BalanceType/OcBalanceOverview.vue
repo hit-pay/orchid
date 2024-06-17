@@ -1,42 +1,42 @@
 <script setup>
-import InfoCardButton from "./OcInfoCardButton.vue";
-import TopActions from "./OcTopActions.vue";
-import { Overview } from "@/orchidui";
+import InfoCardButton from './OcInfoCardButton.vue'
+import TopActions from './OcTopActions.vue'
+import { Overview } from '@/orchidui'
 
 defineProps({
   overviewItems: {
     type: Array,
-    default: () => [],
+    default: () => []
   },
   overviewTabs: {
     type: Array,
-    default: () => [],
+    default: () => []
   },
   overviewActiveTab: {
     type: String,
-    default: "",
+    default: ''
   },
   secondaryButtonProps: Object,
   moreButtonProps: Object,
   containerClass: String,
   dropdownItems: {
     type: Array,
-    default: () => [],
+    default: () => []
   },
   paymentMethods: {
     type: Array,
-    default: () => [],
+    default: () => []
   },
   isLoading: Boolean,
   dropdownProps: {
     type: Object,
-    default: () => ({}),
-  },
-});
+    default: () => ({})
+  }
+})
 
 defineEmits({
-  changeTab: [],
-});
+  changeTab: []
+})
 </script>
 
 <template>

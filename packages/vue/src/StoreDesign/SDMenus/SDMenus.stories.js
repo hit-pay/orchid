@@ -1,107 +1,107 @@
-import { Theme } from "@/orchidui";
+import { Theme } from '@/orchidui'
 
-import SDMenus from "./SDMenus.vue";
-import { ref } from "vue";
+import SDMenus from './SDMenus.vue'
+import { ref } from 'vue'
 export default {
   component: SDMenus,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const SDMenusDefault = {
   args: {
     hasSubmenu: true,
-    submenuLevel: 2,
+    submenuLevel: 2
   },
   render: (args) => ({
     components: {
       Theme,
-      SDMenus,
+      SDMenus
     },
     setup() {
       const model = ref([
         {
-          id: "123",
-          icon: "banner",
-          title: "Menu",
-          type: "link",
-          link: "https://orchidui.vercel.app/?m=http://localhost:6006/?path=/docs/storedesign-sdmenus--docs",
+          id: '123',
+          icon: 'banner',
+          title: 'Menu',
+          type: 'link',
+          link: 'https://orchidui.vercel.app/?m=http://localhost:6006/?path=/docs/storedesign-sdmenus--docs'
         },
         {
-          id: "234",
-          title: "Menu ",
-          link: "https://orchidui.vercel.app",
+          id: '234',
+          title: 'Menu ',
+          link: 'https://orchidui.vercel.app'
         },
         {
-          id: "456",
-          icon: "top-banner",
-          title: "Menu",
+          id: '456',
+          icon: 'top-banner',
+          title: 'Menu',
           children: [
             {
-              id: "123",
-              icon: "banner",
-              title: "SubMenu ",
-              link: "https://orchidui.vercel.app",
+              id: '123',
+              icon: 'banner',
+              title: 'SubMenu ',
+              link: 'https://orchidui.vercel.app'
             },
             {
-              id: "234",
-              icon: "banner",
-              title: "SubMenu",
-              link: "https://orchidui.vercel.app",
-            },
-          ],
+              id: '234',
+              icon: 'banner',
+              title: 'SubMenu',
+              link: 'https://orchidui.vercel.app'
+            }
+          ]
         },
         {
-          id: "272",
-          title: "Menu ",
+          id: '272',
+          title: 'Menu ',
           children: [
             {
-              id: "123",
-              icon: "banner",
-              title: "Submenu ",
-              link: "https://orchidui.vercel.app",
+              id: '123',
+              icon: 'banner',
+              title: 'Submenu ',
+              link: 'https://orchidui.vercel.app'
             },
             {
-              id: "272",
-              title: "Submenu  ",
+              id: '272',
+              title: 'Submenu  ',
               children: [
                 {
-                  id: "123",
-                  icon: "banner",
-                  title: "Submenu 2",
-                  link: "https://orchidui.vercel.app",
+                  id: '123',
+                  icon: 'banner',
+                  title: 'Submenu 2',
+                  link: 'https://orchidui.vercel.app'
                 },
                 {
-                  id: "234",
-                  icon: "banner",
-                  title: "Submenu 2",
-                  link: "https://orchidui.vercel.app",
-                },
-              ],
+                  id: '234',
+                  icon: 'banner',
+                  title: 'Submenu 2',
+                  link: 'https://orchidui.vercel.app'
+                }
+              ]
             },
             {
-              id: "667",
-              title: "SubMenu ",
-              link: "https://orchidui.vercel.app",
+              id: '667',
+              title: 'SubMenu ',
+              link: 'https://orchidui.vercel.app'
             },
             {
-              id: "781",
-              title: "Submenu ",
-              link: "https://orchidui.vercel.app",
-            },
-          ],
+              id: '781',
+              title: 'Submenu ',
+              link: 'https://orchidui.vercel.app'
+            }
+          ]
         },
         {
-          id: "667",
-          title: "Menu ",
-          link: "https://orchidui.vercel.app",
+          id: '667',
+          title: 'Menu ',
+          link: 'https://orchidui.vercel.app'
         },
         {
-          id: "781",
-          title: "Menu ",
-          link: "https://orchidui.vercel.app",
-        },
-      ]);
-      return { args, model };
+          id: '781',
+          title: 'Menu ',
+          link: 'https://orchidui.vercel.app'
+        }
+      ])
+      return { args, model }
     },
     template: `
           <Theme>
@@ -114,6 +114,6 @@ export const SDMenusDefault = {
               </div>
             </div>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}

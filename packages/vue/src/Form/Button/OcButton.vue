@@ -1,6 +1,6 @@
 <script setup>
-import { computed, ref } from "vue";
-import { Icon } from "@/orchidui";
+import { computed, ref } from 'vue'
+import { Icon } from '@/orchidui'
 
 const props = defineProps({
   label: String,
@@ -16,37 +16,33 @@ const props = defineProps({
   isRoundedFull: Boolean,
   variant: {
     type: String,
-    default: "primary",
+    default: 'primary'
   },
   size: {
     type: String,
-    default: "default",
-  },
-});
-defineEmits(["addition-click"]);
-const isPressed = ref(false);
-const isIconOnly = computed(
-  () => (props.leftIcon || props.rightIcon) && !props.label,
-);
+    default: 'default'
+  }
+})
+defineEmits(['addition-click'])
+const isPressed = ref(false)
+const isIconOnly = computed(() => (props.leftIcon || props.rightIcon) && !props.label)
 const additionalAreaSize = computed(() => ({
-  default: "w-10 h-[36px]",
-  small: "w-9 h-8",
-  big: "w-[48px] h-[44px]",
-}));
+  default: 'w-10 h-[36px]',
+  small: 'w-9 h-8',
+  big: 'w-[48px] h-[44px]'
+}))
 
 const shadowContainer = computed(() => ({
-  primary:
-    "shadow-[0_1.5px_0_0_var(--oc-primary-500)] bg-[var(--oc-primary-500)]",
-  secondary: " shadow-[0_1.5px_0_0] shadow-[#E5E5E5] bg-[#E5E5E5]",
-  destructive:
-    "shadow-[0_1.5px_0_0_var(--oc-error-500)] bg-[var(--oc-error-500)]",
-}));
+  primary: 'shadow-[0_1.5px_0_0_var(--oc-primary-500)] bg-[var(--oc-primary-500)]',
+  secondary: ' shadow-[0_1.5px_0_0] shadow-[#E5E5E5] bg-[#E5E5E5]',
+  destructive: 'shadow-[0_1.5px_0_0_var(--oc-error-500)] bg-[var(--oc-error-500)]'
+}))
 
 const additionalAreaIconSize = computed(() => ({
-  default: "w-[18px] h-[18px]",
-  small: "w-5 h-5",
-  big: "w-6 h-6",
-}));
+  default: 'w-[18px] h-[18px]',
+  small: 'w-5 h-5',
+  big: 'w-6 h-6'
+}))
 
 const showShadow = computed(
   () =>
@@ -55,55 +51,40 @@ const showShadow = computed(
     !props.isDisabled &&
     !props.isLoading &&
     !props.isActive &&
-    shadowContainer.value[props.variant],
-);
+    shadowContainer.value[props.variant]
+)
 
 const buttonTypeClasses = computed(() => ({
   primary: !props.isTransparent
-    ? "border border-oc-primary oc-btn-primary text-oc-text-100 dark:text-oc-text-500"
-    : "text-oc-primary hover:text-oc-primary-400 active:text-oc-primary",
+    ? 'border border-oc-primary oc-btn-primary text-oc-text-100 dark:text-oc-text-500'
+    : 'text-oc-primary hover:text-oc-primary-400 active:text-oc-primary',
   secondary: !props.isTransparent
-    ? "border border-oc-gray text-oc-text-400 dark:text-oc-text-100 oc-btn-secondary"
-    : "text-oc-text-400 hover:text-oc-text-300 active:text-oc-text-400",
+    ? 'border border-oc-gray text-oc-text-400 dark:text-oc-text-100 oc-btn-secondary'
+    : 'text-oc-text-400 hover:text-oc-text-300 active:text-oc-text-400',
   destructive: !props.isTransparent
-    ? "border border-oc-error oc-btn-error text-oc-text-100 dark:text-oc-text-500"
-    : "text-oc-error hover:text-oc-error-300 active:text-oc-error",
-}));
+    ? 'border border-oc-error oc-btn-error text-oc-text-100 dark:text-oc-text-500'
+    : 'text-oc-error hover:text-oc-error-300 active:text-oc-error'
+}))
 
 const buttonSizeClasses = computed(() => ({
-  default: !props.isTransparent
-    ? isIconOnly.value
-      ? "p-3"
-      : "px-4 py-3"
-    : "py-3",
-  small:
-    (!props.isTransparent ? (isIconOnly.value ? "w-8 p-3" : "p-3") : "") +
-    " h-8 text-sm",
+  default: !props.isTransparent ? (isIconOnly.value ? 'p-3' : 'px-4 py-3') : 'py-3',
+  small: (!props.isTransparent ? (isIconOnly.value ? 'w-8 p-3' : 'p-3') : '') + ' h-8 text-sm',
   big:
-    (!props.isTransparent
-      ? isIconOnly.value
-        ? "py-3 px-4"
-        : "py-3 px-[14px]"
-      : "py-3 ") + " text-lg h-[44px]",
-}));
-const roundedClasses = computed(() =>
-  props.isRoundedFull ? "rounded-full" : "rounded",
-);
+    (!props.isTransparent ? (isIconOnly.value ? 'py-3 px-4' : 'py-3 px-[14px]') : 'py-3 ') +
+    ' text-lg h-[44px]'
+}))
+const roundedClasses = computed(() => (props.isRoundedFull ? 'rounded-full' : 'rounded'))
 
 const iconSize = computed(() => ({
-  default: "18",
-  small: "16",
-  big: "20",
-}));
+  default: '18',
+  small: '16',
+  big: '20'
+}))
 </script>
 <template>
   <div
     class="flex overflow-hidden"
-    :class="[
-      showShadow,
-      roundedClasses,
-      isDisabled || isLoading ? 'pointer-events-none' : '',
-    ]"
+    :class="[showShadow, roundedClasses, isDisabled || isLoading ? 'pointer-events-none' : '']"
   >
     <button
       class="oc-btn relative w-full text-center justify-center font-medium gap-x-3 flex items-center"
@@ -112,7 +93,7 @@ const iconSize = computed(() => ({
         buttonTypeClasses[variant],
         buttonSizeClasses[size],
         isActive ? 'active' : '',
-        isAdditionalArea ? 'rounded-l-[inherit]' : 'rounded-[inherit]',
+        isAdditionalArea ? 'rounded-l-[inherit]' : 'rounded-[inherit]'
       ]"
       @mousedown="isPressed = true"
       @mouseup="isPressed = false"
@@ -156,10 +137,7 @@ const iconSize = computed(() => ({
       @click.stop="$emit('addition-click')"
     >
       <slot name="additional-content">
-        <Icon
-          :name="additionalAreaIcon"
-          :class="additionalAreaIconSize[size]"
-        />
+        <Icon :name="additionalAreaIcon" :class="additionalAreaIconSize[size]" />
       </slot>
     </div>
   </div>

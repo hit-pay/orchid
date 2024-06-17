@@ -1,18 +1,11 @@
 <script setup>
-import {
-  FormBuilder,
-  Icon,
-  MultipleUploadFile,
-  Slider,
-  Tabs,
-  Snackbar,
-} from "@/orchidui";
-import { ref } from "vue";
-import { SDMenus } from "@/orchidui/StoreDesign";
-import InputColors from "./Form/InputColors.vue";
-import SelectFont from "./Form/SelectFont.vue";
+import { FormBuilder, Icon, MultipleUploadFile, Slider, Tabs, Snackbar } from '@/orchidui'
+import { ref } from 'vue'
+import { SDMenus } from '@/orchidui/StoreDesign'
+import InputColors from './Form/InputColors.vue'
+import SelectFont from './Form/SelectFont.vue'
 
-import { getTextWithLink } from "../../composables/helpers";
+import { getTextWithLink } from '../../composables/helpers'
 
 const props = defineProps({
   previewMode: String,
@@ -25,238 +18,226 @@ const props = defineProps({
       return {
         categories: [],
         pages: [],
-        products: [],
-      };
-    },
-  },
-});
+        products: []
+      }
+    }
+  }
+})
 
 const emit = defineEmits([
-  "update:generalData",
-  "update:sectionData",
-  "edit:images",
-  "delete:images",
-  "add:images",
-  "update:field",
-  "update:preview-mode",
-]);
+  'update:generalData',
+  'update:sectionData',
+  'edit:images',
+  'delete:images',
+  'add:images',
+  'update:field',
+  'update:preview-mode'
+])
 
-const generalFormData = ref(props.generalData);
-const sectionFormData = ref(props.sectionData);
+const generalFormData = ref(props.generalData)
+const sectionFormData = ref(props.sectionData)
 
-const formErrors = ref({});
-const formValues = ref({});
+const formErrors = ref({})
+const formValues = ref({})
 
 const defaultValueType = (value, type) => {
   if (value === undefined) {
-    if (type === "SectionItem") {
-      return false;
+    if (type === 'SectionItem') {
+      return false
     } else {
-      return "";
+      return ''
     }
   } else {
-    return value;
+    return value
   }
-};
+}
 
 const setDefaultData = (form) => {
-  if (typeof form.name === "object") {
+  if (typeof form.name === 'object') {
     form.name.forEach((formName) => {
       if (form.general) {
         formValues.value[formName.key] = defaultValueType(
           generalFormData.value[formName.key],
-          form.type,
-        );
+          form.type
+        )
       } else {
         formValues.value[formName.key] = defaultValueType(
           sectionFormData.value[formName.key],
-          form.type,
-        );
+          form.type
+        )
       }
-    });
+    })
   } else if (form.name) {
     if (form.general) {
-      formValues.value[form.name] = defaultValueType(
-        generalFormData.value[form.name],
-        form.type,
-      );
+      formValues.value[form.name] = defaultValueType(generalFormData.value[form.name], form.type)
     } else {
-      formValues.value[form.name] = defaultValueType(
-        sectionFormData.value[form.name],
-        form.type,
-      );
+      formValues.value[form.name] = defaultValueType(sectionFormData.value[form.name], form.type)
     }
   }
-};
+}
 
 // only for Snackbar
-const ocEmitName = ref([]);
-const ocEmitValue = ref([]);
-const ocEmitLabel = ref([]);
+const ocEmitName = ref([])
+const ocEmitValue = ref([])
+const ocEmitLabel = ref([])
 
 const emitCustomAction = (name) => {
-  if (["update:preview-mode"].includes(ocEmitName.value[name])) {
-    emit(ocEmitName.value[name], ocEmitValue.value[name]);
+  if (['update:preview-mode'].includes(ocEmitName.value[name])) {
+    emit(ocEmitName.value[name], ocEmitValue.value[name])
   }
-};
+}
 
 Object.values(props.requestForm).forEach((form) => {
-  if (form.type === "Children") {
+  if (form.type === 'Children') {
     form.children.forEach((childForm) => {
-      setDefaultData(childForm);
-      if (
-        childForm?.type === "Snackbar" &&
-        childForm?.props?.content?.includes("oc-emit")
-      ) {
+      setDefaultData(childForm)
+      if (childForm?.type === 'Snackbar' && childForm?.props?.content?.includes('oc-emit')) {
         getTextWithLink(childForm.props.content, (link, value) => {
-          ocEmitName.value[childForm.name] = value[0];
-          ocEmitValue.value[childForm.name] = value[1];
+          ocEmitName.value[childForm.name] = value[0]
+          ocEmitValue.value[childForm.name] = value[1]
           ocEmitLabel.value[childForm.name] = childForm.props.content.replace(
             link,
-            `<span class="underline cursor-pointer">${value[2].replace("-", " ")}</span>`,
-          );
-        });
+            `<span class="underline cursor-pointer">${value[2].replace('-', ' ')}</span>`
+          )
+        })
       }
-    });
+    })
   } else {
-    setDefaultData(form);
-    if (form.type === "Snackbar") {
-      if (
-        form.type === "Snackbar" &&
-        form?.props?.content?.includes("oc-emit")
-      ) {
+    setDefaultData(form)
+    if (form.type === 'Snackbar') {
+      if (form.type === 'Snackbar' && form?.props?.content?.includes('oc-emit')) {
         getTextWithLink(form.props.content, (link, value) => {
-          ocEmitName.value[form.name] = value[0];
-          ocEmitValue.value[form.name] = value[1];
+          ocEmitName.value[form.name] = value[0]
+          ocEmitValue.value[form.name] = value[1]
           ocEmitLabel.value[form.name] = form.props.content.replace(
             link,
-            `<span class="underline cursor-pointer">${value[2].replace("-", " ")}</span>`,
-          );
-        });
+            `<span class="underline cursor-pointer">${value[2].replace('-', ' ')}</span>`
+          )
+        })
       }
     }
   }
-});
+})
 
 const updateData = (form, value, general = false) => {
   if (general) {
-    emit("update:generalData", generalFormData.value);
+    emit('update:generalData', generalFormData.value)
   } else {
-    emit("update:sectionData", sectionFormData.value);
+    emit('update:sectionData', sectionFormData.value)
   }
-  emit("update:field", {
+  emit('update:field', {
     general: form.general ? true : false,
     field: form.name,
-    value: value,
-  });
-};
+    value: value
+  })
+}
 
 const onUpdateForm = (form, value = null) => {
-  if (typeof form.name === "object") {
+  if (typeof form.name === 'object') {
     form.name.forEach((formName, index) => {
-      formValues.value[formName.key] = value[index];
+      formValues.value[formName.key] = value[index]
       if (form.general) {
-        generalFormData.value[formName.key] = value[index];
-        updateData(form, value, true);
+        generalFormData.value[formName.key] = value[index]
+        updateData(form, value, true)
       } else {
-        sectionFormData.value[formName.key] = value[index];
-        updateData(form, value);
+        sectionFormData.value[formName.key] = value[index]
+        updateData(form, value)
       }
-    });
+    })
   } else {
-    formValues.value[form.name] = value;
+    formValues.value[form.name] = value
     if (form.general) {
-      generalFormData.value[form.name] = value;
-      updateData(form, value, true);
+      generalFormData.value[form.name] = value
+      updateData(form, value, true)
     } else {
-      sectionFormData.value[form.name] = value;
-      updateData(form, value);
+      sectionFormData.value[form.name] = value
+      updateData(form, value)
     }
   }
-};
+}
 
 const formatimages = (value, form) => {
-  let newFormatImages = [];
+  let newFormatImages = []
   value.forEach((image) => {
     if (image.current) {
-      newFormatImages.push(image.current);
+      newFormatImages.push(image.current)
     } else {
       const newFormat = {
-        id: "is_new_" + Date.now(),
+        id: 'is_new_' + Date.now(),
         path: image.fileUrl,
-        link: image.link ?? image.current?.link ?? "",
-      };
-      newFormatImages.push(newFormat);
-      emit("add:images", {
+        link: image.link ?? image.current?.link ?? ''
+      }
+      newFormatImages.push(newFormat)
+      emit('add:images', {
         form: form,
-        value: newFormat,
-      });
+        value: newFormat
+      })
     }
-  });
-  return newFormatImages;
-};
+  })
+  return newFormatImages
+}
 const onUpdateimages = (form, newValue) => {
-  images[form.name] = newValue;
+  images[form.name] = newValue
   setTimeout(() => {
-    const formatValue = formatimages(images[form.name], form);
-    onUpdateForm(form, formatValue);
-  }, 100);
-};
+    const formatValue = formatimages(images[form.name], form)
+    onUpdateForm(form, formatValue)
+  }, 100)
+}
 
 const onDeleteimages = (form, value) => {
-  emit("delete:images", {
+  emit('delete:images', {
     form: form,
-    value: value,
-  });
-};
+    value: value
+  })
+}
 
 const onEditimages = (form, value) => {
-  emit("edit:images", {
+  emit('edit:images', {
     form: form,
-    value: value,
-  });
-};
+    value: value
+  })
+}
 
-const imageLoaded = ref(false);
-const images = ref([]);
+const imageLoaded = ref(false)
+const images = ref([])
 
 const formatImagesValue = (value, name) => {
   if (Array.isArray(value)) {
-    let newFormatImages = [];
+    let newFormatImages = []
     value.forEach((image) => {
       newFormatImages.push({
-        current: image,
-      });
-    });
-    images.value[name] = newFormatImages;
-    imageLoaded.value = true;
+        current: image
+      })
+    })
+    images.value[name] = newFormatImages
+    imageLoaded.value = true
   } else {
-    images.value[name] = [];
-    imageLoaded.value = true;
+    images.value[name] = []
+    imageLoaded.value = true
   }
-};
+}
 
 props.requestForm.forEach((f) => {
-  if (f.type === "Images") {
-    formatImagesValue(formValues.value[f.name], f.name);
-  } else if (f.type === "Children") {
+  if (f.type === 'Images') {
+    formatImagesValue(formValues.value[f.name], f.name)
+  } else if (f.type === 'Children') {
     f.children.forEach((childForm) => {
-      if (childForm.type === "Images") {
-        formatImagesValue(formValues.value[childForm.name], childForm.name);
+      if (childForm.type === 'Images') {
+        formatImagesValue(formValues.value[childForm.name], childForm.name)
       }
-    });
+    })
   }
-});
+})
 
-const showSubForm = ref([]);
+const showSubForm = ref([])
 
 const toggleSubForm = (name) => {
   if (showSubForm.value.includes(name)) {
-    showSubForm.value = showSubForm.value.filter((s) => s.name);
+    showSubForm.value = showSubForm.value.filter((s) => s.name)
   } else {
-    showSubForm.value.push(name);
+    showSubForm.value.push(name)
   }
-};
+}
 </script>
 <template>
   <div>
@@ -304,7 +285,7 @@ const toggleSubForm = (name) => {
               general: form.general ? true : false,
               field: form.name,
               value: value,
-              child: $event,
+              child: $event
             })
           "
         />
@@ -313,7 +294,7 @@ const toggleSubForm = (name) => {
         <div
           class="font-medium flex items-center bg-oc-accent-1-50 py-4 px-7 cursor-pointer -ml-[23px] w-[calc(100%+46px)]"
           :class="{
-            '-mt-4': requestForm[requestForm.indexOf(form) - 1]?.children,
+            '-mt-4': requestForm[requestForm.indexOf(form) - 1]?.children
           }"
           @click="toggleSubForm(form.name)"
         >
@@ -366,10 +347,7 @@ const toggleSubForm = (name) => {
                       v-html="ocEmitLabel[slot.form.name]"
                     >
                     </span>
-                    <span
-                      v-else
-                      v-html="getTextWithLink(slot.form.props.content)"
-                    ></span>
+                    <span v-else v-html="getTextWithLink(slot.form.props.content)"></span>
                   </Snackbar>
                 </template>
                 <template #Menus="slot">
@@ -386,7 +364,7 @@ const toggleSubForm = (name) => {
                         general: slot.form.general ? true : false,
                         field: slot.form.name,
                         value: slot.value,
-                        child: $event,
+                        child: $event
                       })
                     "
                   />

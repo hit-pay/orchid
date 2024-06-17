@@ -1,123 +1,118 @@
 <script setup>
-import { Icon, Button } from "@/orchidui";
-import { computed, ref, watch, onUnmounted } from "vue";
+import { Icon, Button } from '@/orchidui'
+import { computed, ref, watch, onUnmounted } from 'vue'
 
 const props = defineProps({
   isBorderless: Boolean,
   footerClass: {
     type: String,
-    default: "justify-end",
+    default: 'justify-end'
   },
   modelValue: {
     type: Boolean,
-    default: false,
+    default: false
   },
   title: {
     type: String,
-    default: "",
+    default: ''
   },
   description: {
     type: String,
-    default: "",
+    default: ''
   },
   persistent: {
     type: Boolean,
-    default: false,
+    default: false
   },
   isCloseIcon: {
     type: Boolean,
-    default: true,
+    default: true
   },
   cancelButtonProps: {
     type: Object,
     default: () => ({
-      label: "Cancel",
-      variant: "secondary",
-    }),
+      label: 'Cancel',
+      variant: 'secondary'
+    })
   },
   preventClose: {
     type: Boolean,
-    default: false,
+    default: false
   },
   isHeaderVisible: {
     type: Boolean,
-    default: true,
+    default: true
   },
   isFooterVisible: {
     type: Boolean,
-    default: true,
+    default: true
   },
   modalId: {
     type: String,
-    default: "",
+    default: ''
   },
   confirmButtonProps: {
     type: Object,
     default: () => ({
-      label: "OK",
-      class: "min-w-[112px]",
-    }),
+      label: 'OK',
+      class: 'min-w-[112px]'
+    })
   },
   size: {
     type: String,
-    default: "default",
-    validator: (val) => ["default", "medium", "small"].includes(val),
-  },
-});
-const emit = defineEmits([
-  "update:modelValue",
-  "confirm",
-  "cancel",
-  "click:outside",
-]);
+    default: 'default',
+    validator: (val) => ['default', 'medium', 'small'].includes(val)
+  }
+})
+const emit = defineEmits(['update:modelValue', 'confirm', 'cancel', 'click:outside'])
 
 const closeModal = () => {
   if (props.preventClose) {
-    return;
+    return
   }
 
-  emit("update:modelValue", false);
-};
+  emit('update:modelValue', false)
+}
 
 const onClickOutside = async () => {
-  emit("click:outside");
+  emit('click:outside')
 
   if (props.persistent) {
-    return;
+    return
   }
 
   if (props.modelValue) {
-    closeModal();
+    closeModal()
   }
-};
+}
 
 const cancel = () => {
-  emit("cancel");
-  closeModal();
-};
+  emit('cancel')
+  closeModal()
+}
 
 const sizeClasses = computed(() => ({
-  default: "max-w-[640px]",
-  medium: "max-w-[480px]",
-  small: "max-w-[320px]",
-}));
+  default: 'max-w-[640px]',
+  medium: 'max-w-[480px]',
+  small: 'max-w-[320px]'
+}))
 
-const scrollArea = ref();
+const scrollArea = ref()
 const handleScroll = () => {
-  scrollArea.value?.click();
-};
+  scrollArea.value?.click()
+}
 watch(
   () => props.modelValue,
   () => {
     setTimeout(() => {
-      scrollArea.value?.addEventListener("scroll", handleScroll);
-    }, 100);
-  },
-);
+      scrollArea.value?.addEventListener('scroll', handleScroll)
+    }, 100)
+  }
+)
 
 onUnmounted(() => {
-  scrollArea.value?.removeEventListener("scroll", handleScroll);
-});
+  scrollArea.value?.removeEventListener('scroll', handleScroll)
+})
 </script>
 
 <template>
@@ -126,10 +121,7 @@ onUnmounted(() => {
     id="modal-overlay-wrapper"
     class="fixed w-screen z-[1007] top-0 left-0 h-full min-h-screen bg-black/[.45] flex items-center justify-center"
   >
-    <div
-      class="w-full h-full absolute top-0 left-0 z-[1007]"
-      @click="onClickOutside"
-    />
+    <div class="w-full h-full absolute top-0 left-0 z-[1007]" @click="onClickOutside" />
 
     <div
       class="z-[1008] shadow-normal w-[calc(100%-40px)] max-h-[96vh] bg-oc-bg-light rounded-xl flex flex-col"
@@ -142,9 +134,7 @@ onUnmounted(() => {
       >
         <slot name="header">
           <div class="flex flex-col gap-y-1 overflow-hidden">
-            <span
-              class="text-lg font-medium text-ellipsis overflow-hidden whitespace-nowrap"
-            >
+            <span class="text-lg font-medium text-ellipsis overflow-hidden whitespace-nowrap">
               {{ title }}
             </span>
             <slot name="description">
@@ -181,8 +171,8 @@ onUnmounted(() => {
         :class="[
           footerClass,
           {
-            'border-t': !isBorderless,
-          },
+            'border-t': !isBorderless
+          }
         ]"
       >
         <slot name="footer">

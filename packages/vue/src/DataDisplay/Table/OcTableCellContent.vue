@@ -4,10 +4,10 @@ defineProps({
   title: String,
   description: String,
   href: String,
-  link: String,
-});
+  link: String
+})
 
-import { TableLink } from "@/orchidui";
+import { TableLink } from '@/orchidui'
 </script>
 
 <template>
@@ -25,9 +25,7 @@ import { TableLink } from "@/orchidui";
       <template v-else>{{ title }}</template>
       <span v-if="!title">-</span>
     </span>
-    <span
-      class="overflow-hidden text-ellipsis text-oc-text-400 text-sm truncate"
-    >
+    <span class="overflow-hidden text-ellipsis text-oc-text-400 text-sm truncate">
       <slot name="description" :description="description">
         {{ description }}
       </slot>

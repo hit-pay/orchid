@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { CustomerCard, OverviewItem, Icon, Tooltip, Button } from "@/orchidui";
-import BoxDetails from "./OcBoxDetails.vue";
+import { ref } from 'vue'
+import { CustomerCard, OverviewItem, Icon, Tooltip, Button } from '@/orchidui'
+import BoxDetails from './OcBoxDetails.vue'
 
-const isDetailsOpen = ref(false);
+const isDetailsOpen = ref(false)
 
 defineProps({
   boxes: { type: Array, default: () => [] },
   isCustomer: { type: Boolean, default: false },
-  customerCardVariant: { type: String, default: "big" },
-  customer: { type: Object, default: null },
-});
-defineEmits(["addCustomer"]);
+  customerCardVariant: { type: String, default: 'big' },
+  customer: { type: Object, default: null }
+})
+defineEmits(['addCustomer'])
 </script>
 
 <template>

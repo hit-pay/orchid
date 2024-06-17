@@ -1,3 +1,3 @@
-import OnboardingProgressbar from "./OcOnboardingProgressbar.vue";
+import OnboardingProgressbar from './OcOnboardingProgressbar.vue'
 
-export { OnboardingProgressbar };
+export { OnboardingProgressbar }

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Chip, Button } from "@/orchidui";
+import { Chip, Button } from '@/orchidui'
 
 defineProps({
   title: String,
@@ -7,25 +7,25 @@ defineProps({
   imageClass: String,
   imageSize: {
     type: String,
-    default: "medium",
+    default: 'medium'
   },
   description: String,
   chips: {
     type: Array,
-    default: () => [],
+    default: () => []
   },
   buttonProps: {
     type: Object,
-    default: () => null,
+    default: () => null
   },
-  isDisabled: Boolean,
-});
+  isDisabled: Boolean
+})
 
 const imageSizes = {
-  small: "w-10",
-  medium: "w-[56px]",
-  large: "w-16",
-};
+  small: 'w-10',
+  medium: 'w-[56px]',
+  large: 'w-16'
+}
 </script>
 
 <template>
@@ -37,12 +37,7 @@ const imageSizes = {
       class="shrink-0 aspect-square flex items-center justify-center bg-oc-bg-dark rounded overflow-hidden"
       :class="imageSizes[imageSize]"
     >
-      <img
-        :src="image"
-        :class="imageClass"
-        alt="terminal"
-        class="object-contain h-full w-full"
-      />
+      <img :src="image" :class="imageClass" alt="terminal" class="object-contain h-full w-full" />
     </div>
 
     <div class="flex flex-col gap-y-1 overflow-hidden">
@@ -72,11 +67,6 @@ const imageSizes = {
       </div>
     </div>
 
-    <Button
-      v-if="buttonProps"
-      class="shrink-0"
-      size="small"
-      v-bind="buttonProps"
-    />
+    <Button v-if="buttonProps" class="shrink-0" size="small" v-bind="buttonProps" />
   </div>
 </template>

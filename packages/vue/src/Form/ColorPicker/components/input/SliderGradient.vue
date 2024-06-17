@@ -13,61 +13,56 @@
       class="gradient-bar"
       :class="{
         'mt-[20px]': gradientType === 'linear',
-        'mt-[12px]': gradientType === 'radial',
+        'mt-[12px]': gradientType === 'radial'
       }"
       @mousedown="onMousedown"
       @dragstart="handleItemDragStart"
     >
-      <div
-        ref="gradientBar"
-        class="gradient-container"
-        @dblclick="onDblclick"
-      ></div>
+      <div ref="gradientBar" class="gradient-container" @dblclick="onDblclick"></div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { inject, ref } from "vue";
-import { Icon } from "@/orchidui";
+import { inject, ref } from 'vue'
+import { Icon } from '@/orchidui'
 
 defineProps({
-  gradientType: String,
-});
+  gradientType: String
+})
 
-const gradientBar = inject("gradientBar");
+const gradientBar = inject('gradientBar')
 
-const gradientSlider = ref();
+const gradientSlider = ref()
 
-const emit = defineEmits(["onAddColor", "onMouseDown", "onDeleteColor"]);
+const emit = defineEmits(['onAddColor', 'onMouseDown', 'onDeleteColor'])
 
 const handleItemDragStart = (e) => {
-  e.preventDefault();
-};
+  e.preventDefault()
+}
 
-const deleteBtnPosition = ref("left:0");
-const showDeleteBtn = ref(false);
+const deleteBtnPosition = ref('left:0')
+const showDeleteBtn = ref(false)
 const onMousedown = ($event) => {
-  emit("onMouseDown", $event);
-};
+  emit('onMouseDown', $event)
+}
 
 const setDeleteBtnPosition = () => {
-  let getActiveColor = gradientSlider.value.querySelector(".select");
-  deleteBtnPosition.value = getActiveColor?.getAttribute("style");
-};
+  let getActiveColor = gradientSlider.value.querySelector('.select')
+  deleteBtnPosition.value = getActiveColor?.getAttribute('style')
+}
 const onClickSlider = () => {
-  setDeleteBtnPosition();
-  let countElement =
-    gradientSlider.value.querySelectorAll(".gradient-handle")?.length ?? 2;
+  setDeleteBtnPosition()
+  let countElement = gradientSlider.value.querySelectorAll('.gradient-handle')?.length ?? 2
   if (countElement > 2) {
-    showDeleteBtn.value = true;
+    showDeleteBtn.value = true
   } else {
-    showDeleteBtn.value = false;
+    showDeleteBtn.value = false
   }
-};
+}
 const onDblclick = ($event) => {
-  showDeleteBtn.value = false;
+  showDeleteBtn.value = false
 
-  emit("onAddColor", $event);
-};
+  emit('onAddColor', $event)
+}
 </script>

@@ -41,65 +41,60 @@
 </template>
 
 <script setup>
-import { Slider } from "@/orchidui";
-import { ref, onMounted } from "vue";
+import { Slider } from '@/orchidui'
+import { ref, onMounted } from 'vue'
 
 defineProps({
   mode: {
-    default: "gradient",
-    type: String,
+    default: 'gradient',
+    type: String
   },
-  gradientType: { default: "linear", type: String },
+  gradientType: { default: 'linear', type: String },
   angle: { default: 90, type: Number },
   percentageX: { default: 50, type: Number },
-  percentageY: { default: 50, type: Number },
-});
+  percentageY: { default: 50, type: Number }
+})
 
-const isShowLinearAngleRange = ref(false);
-const isShowRadialAngleRange = ref(false);
+const isShowLinearAngleRange = ref(false)
+const isShowRadialAngleRange = ref(false)
 
 onMounted(() => {
-  isShowLinearAngleRange.value = true;
-  isShowRadialAngleRange.value = true;
-});
-const emits = defineEmits([
-  "update:angle",
-  "update:percentageX",
-  "update:percentageY",
-  "onInput",
-]);
+  isShowLinearAngleRange.value = true
+  isShowRadialAngleRange.value = true
+})
+const emits = defineEmits(['update:angle', 'update:percentageX', 'update:percentageY', 'onInput'])
 
 const handleInput = (value, type) => {
-  let newValue = parseInt(value);
+  let newValue = parseInt(value)
   switch (type) {
-    case "angle":
+    case 'angle':
       if (value > 360) {
-        newValue = 360;
+        newValue = 360
       } else if (value < 0) {
-        newValue = 0;
+        newValue = 0
       }
-      emits("update:angle", newValue);
-      emits("onInput");
-      break;
+      emits('update:angle', newValue)
+      emits('onInput')
+      break
 
-    case "percentageX":
+    case 'percentageX':
       if (value > 100) {
-        newValue = 100;
+        newValue = 100
       } else if (value < 0) {
-        newValue = 0;
+        newValue = 0
       }
-      emits("update:percentageX", newValue);
-      emits("onInput");
-      break;
-    case "percentageY":
+      emits('update:percentageX', newValue)
+      emits('onInput')
+      break
+    case 'percentageY':
       if (value > 100) {
-        newValue = 100;
+        newValue = 100
       } else if (value < 0) {
-        newValue = 0;
+        newValue = 0
       }
-      emits("update:percentageY", newValue);
-      emits("onInput");
-      break;
+      emits('update:percentageY', newValue)
+      emits('onInput')
+      break
   }
-};
+}
 </script>

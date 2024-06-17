@@ -1,2 +1,2 @@
-import FormBuilder from "./OcFormBuilder.vue";
-export { FormBuilder };
+import FormBuilder from './OcFormBuilder.vue'
+export { FormBuilder }

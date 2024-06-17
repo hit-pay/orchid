@@ -1,82 +1,82 @@
 <script setup>
-import { Modal } from "@/orchidui";
-import { computed } from "vue";
-import Confirmation from "./OcConfirmation.vue";
+import { Modal } from '@/orchidui'
+import { computed } from 'vue'
+import Confirmation from './OcConfirmation.vue'
 
 const props = defineProps({
   modelValue: {
     type: Boolean,
-    default: false,
+    default: false
   },
   title: {
     type: String,
-    default: "Are you sure?",
+    default: 'Are you sure?'
   },
   iconClass: {
     type: String,
-    default: "",
+    default: ''
   },
   description: {
     type: String,
-    default: "",
+    default: ''
   },
   variant: {
     type: String,
-    default: "delete",
+    default: 'delete'
   },
   icon: String,
   labelConfirm: String,
   labelCancel: String,
   isLoading: {
     type: Boolean,
-    default: false,
+    default: false
   },
   hideIcon: {
     type: Boolean,
-    default: false,
+    default: false
   },
   persistent: {
     type: Boolean,
-    default: false,
+    default: false
   },
   contentClass: String,
-  confirmButtonProps: Object,
-});
-const emit = defineEmits(["confirm", "cancel", "update:model-value"]);
+  confirmButtonProps: Object
+})
+const emit = defineEmits(['confirm', 'cancel', 'update:model-value'])
 const cancelButton = computed(() => ({
   delete: {},
   warning: {},
   success: {
-    class: "hidden",
+    class: 'hidden'
   },
   question: {
-    label: "No",
-  },
-}));
+    label: 'No'
+  }
+}))
 const confirmButton = computed(() => ({
   delete: {
-    label: "Delete",
-    variant: "destructive",
-    isLoading: props.isLoading ?? false,
+    label: 'Delete',
+    variant: 'destructive',
+    isLoading: props.isLoading ?? false
   },
   warning: {
-    label: "Delete",
-    variant: "destructive",
-    isLoading: props.isLoading ?? false,
+    label: 'Delete',
+    variant: 'destructive',
+    isLoading: props.isLoading ?? false
   },
   success: {
-    isLoading: props.isLoading ?? false,
+    isLoading: props.isLoading ?? false
   },
   question: {
-    label: "Yes",
-    isLoading: props.isLoading ?? false,
-  },
-}));
+    label: 'Yes',
+    isLoading: props.isLoading ?? false
+  }
+}))
 
 const emitModelValue = (e) => {
-  emit("update:model-value", e);
-  emit("cancel");
-};
+  emit('update:model-value', e)
+  emit('cancel')
+}
 </script>
 
 <template>
@@ -90,7 +90,7 @@ const emitModelValue = (e) => {
       labelCancel
         ? {
             ...cancelButton[variant],
-            label: labelCancel,
+            label: labelCancel
           }
         : cancelButton[variant]
     "
@@ -98,10 +98,10 @@ const emitModelValue = (e) => {
       ...(labelConfirm
         ? {
             ...confirmButton[variant],
-            label: labelConfirm,
+            label: labelConfirm
           }
         : confirmButton[variant]),
-      ...confirmButtonProps,
+      ...confirmButtonProps
     }"
     footer-class="justify-center"
     @update:model-value="emitModelValue"

@@ -1,43 +1,43 @@
-import { Theme, CardInput } from "@/orchidui";
-import { ref } from "vue";
+import { Theme, CardInput } from '@/orchidui'
+import { ref } from 'vue'
 
 export default {
   component: CardInput,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const Default = {
   argTypes: {
     cardType: {
-      control: "select",
-      options: ["mastercard", "visa"],
+      control: 'select',
+      options: ['mastercard', 'visa']
     },
     labelIcon: {
-      control: "select",
-      options: ["", "question-mark"],
-    },
+      control: 'select',
+      options: ['', 'question-mark']
+    }
   },
   args: {
-    hint: "This is a hint text to help user.",
-    placeholder: "Placeholder",
+    hint: 'This is a hint text to help user.',
+    placeholder: 'Placeholder',
     isInlineLabel: false,
     isDisabled: false,
-    label: "",
-    errorMessage: "",
-    cardType: "mastercard",
+    label: '',
+    errorMessage: '',
+    cardType: 'mastercard',
     isRequired: false,
-    labelIcon: "",
-    tooltipText: "Tooltip text",
+    labelIcon: '',
+    tooltipText: 'Tooltip text',
     tooltipOptions: {
-      position: "top",
-      distance: 10,
-    },
+      position: 'top',
+      distance: 10
+    }
   },
   render: (args) => ({
     components: { Theme, CardInput },
     setup() {
-      const text = ref("");
-      return { text, args };
+      const text = ref('')
+      return { text, args }
     },
     template: `
           <Theme>
@@ -56,6 +56,6 @@ export const Default = {
                 :tooltip-text="args.tooltipText"
             />
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}

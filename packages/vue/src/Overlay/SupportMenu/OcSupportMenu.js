@@ -1,2 +1,2 @@
-import SupportMenu from "./OcSupportMenu.vue";
-export { SupportMenu };
+import SupportMenu from './OcSupportMenu.vue'
+export { SupportMenu }

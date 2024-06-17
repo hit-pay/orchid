@@ -1,32 +1,32 @@
-import { Theme, Avatar } from "@/orchidui";
-import { ref } from "vue";
+import { Theme, Avatar } from '@/orchidui'
+import { ref } from 'vue'
 
 export default {
   component: Avatar,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const Default = {
   argTypes: {
     type: {
-      control: "select",
-      options: ["default", "business", "image"],
+      control: 'select',
+      options: ['default', 'business', 'image']
     },
     size: {
-      control: "select",
-      options: [24, 32, 40, 48, 64],
-    },
+      control: 'select',
+      options: [24, 32, 40, 48, 64]
+    }
   },
   args: {
     size: 32,
-    type: "default",
+    type: 'default'
   },
   render: (args) => ({
     components: { Avatar, Theme },
     setup() {
       return {
-        args,
-      };
+        args
+      }
     },
     template: `
           <Theme>
@@ -34,17 +34,17 @@ export const Default = {
               <Avatar :size="args.size" :type="args.type"/>
             </div>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}
 export const Sizes = {
   render: () => ({
     components: { Avatar, Theme },
     setup() {
-      const sizes = ref([64, 48, 40, 32, 24]);
+      const sizes = ref([64, 48, 40, 32, 24])
       return {
-        sizes,
-      };
+        sizes
+      }
     },
     template: `
           <Theme>
@@ -60,6 +60,6 @@ export const Sizes = {
               </div>
             </div>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}

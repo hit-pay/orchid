@@ -1,50 +1,50 @@
-import { Theme, CheckboxesGroup } from "@/orchidui";
-import { ref, watch } from "vue";
+import { Theme, CheckboxesGroup } from '@/orchidui'
+import { ref, watch } from 'vue'
 
 export default {
   component: CheckboxesGroup,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const Default = {
   argTypes: {
     alignment: {
-      control: "select",
-      options: ["vertical", "horizontal"],
-    },
+      control: 'select',
+      options: ['vertical', 'horizontal']
+    }
   },
   args: {
-    label: "Label",
-    hint: "Hint",
-    errorMessage: "",
-    alignment: "vertical",
+    label: 'Label',
+    hint: 'Hint',
+    errorMessage: '',
+    alignment: 'vertical',
     isDisabled: false,
     isSelectAll: false,
     checkboxes: [
       {
-        label: "Text",
-        value: 0,
+        label: 'Text',
+        value: 0
       },
       {
-        label: "Text",
-        value: 1,
+        label: 'Text',
+        value: 1
       },
       {
-        label: "Text",
+        label: 'Text',
         value: 2,
-        isDisabled: true,
-      },
-    ],
+        isDisabled: true
+      }
+    ]
   },
   render: (args) => ({
     components: { CheckboxesGroup, Theme },
     setup() {
-      const selectedCheckboxes = ref([]);
+      const selectedCheckboxes = ref([])
       watch(
         () => args.modelValue,
-        (val) => (selectedCheckboxes.value = val),
-      );
-      return { args, selectedCheckboxes };
+        (val) => (selectedCheckboxes.value = val)
+      )
+      return { args, selectedCheckboxes }
     },
     template: `
           <Theme>
@@ -65,39 +65,39 @@ export const Default = {
               </div>
             </div>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}
 export const Variants = {
   args: {
-    label: "Label",
+    label: 'Label',
     checkboxes: [
       {
-        label: "Text",
-        value: 0,
+        label: 'Text',
+        value: 0
       },
       {
-        label: "Text",
-        value: 1,
+        label: 'Text',
+        value: 1
       },
       {
-        label: "Text",
-        value: 2,
+        label: 'Text',
+        value: 2
       },
       {
-        label: "Text",
-        value: 3,
+        label: 'Text',
+        value: 3
       },
       {
-        label: "Text",
-        value: 5,
-      },
-    ],
+        label: 'Text',
+        value: 5
+      }
+    ]
   },
   render: (args) => ({
     components: { CheckboxesGroup, Theme },
     setup() {
-      return { args };
+      return { args }
     },
     template: `
           <Theme>
@@ -115,6 +115,6 @@ export const Variants = {
               />
             </div>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}

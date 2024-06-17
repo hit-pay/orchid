@@ -1,23 +1,23 @@
-import { NumberInput } from "./OcNumberInput.js";
-import { ref } from "vue";
+import { NumberInput } from './OcNumberInput.js'
+import { ref } from 'vue'
 
 export default {
   component: NumberInput,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const Default = {
   args: {
-    isDisabled: false,
+    isDisabled: false
   },
   render: (args) => ({
     components: { NumberInput },
     setup() {
-      const modalValue = ref();
-      return { modalValue, args };
+      const modalValue = ref()
+      return { modalValue, args }
     },
     template: `
           <NumberInput v-model="modalValue" v-bind="args"/>
-        `,
-  }),
-};
+        `
+  })
+}

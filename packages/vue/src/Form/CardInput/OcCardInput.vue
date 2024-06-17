@@ -1,5 +1,5 @@
 <script setup>
-import { Input, Icon } from "@/orchidui";
+import { Input, Icon } from '@/orchidui'
 
 defineProps({
   placeholder: String,
@@ -12,24 +12,24 @@ defineProps({
   modelValue: String,
   isRequired: {
     type: Boolean,
-    default: false,
+    default: false
   },
   labelIcon: {
     type: String,
-    default: "",
+    default: ''
   },
   tooltipText: {
     type: String,
-    default: "",
+    default: ''
   },
   tooltipOptions: {
     type: Object,
-    default: () => ({}),
-  },
-});
+    default: () => ({})
+  }
+})
 defineEmits({
-  "update:modelValue": [],
-});
+  'update:modelValue': []
+})
 </script>
 
 <template>

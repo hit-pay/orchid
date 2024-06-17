@@ -1,5 +1,5 @@
-import Sidebar from "./OcSidebar.vue";
-import SidebarSubmenu from "./OcSidebarSubmenu.vue";
-import AccountSetup from "./OcAccountSetup.vue";
+import Sidebar from './OcSidebar.vue'
+import SidebarSubmenu from './OcSidebarSubmenu.vue'
+import AccountSetup from './OcAccountSetup.vue'
 
-export { Sidebar, SidebarSubmenu, AccountSetup };
+export { Sidebar, SidebarSubmenu, AccountSetup }

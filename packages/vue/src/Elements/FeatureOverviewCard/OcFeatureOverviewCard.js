@@ -1,3 +1,3 @@
-import FeatureOverviewCard from "./OcFeatureOverviewCard.vue";
+import FeatureOverviewCard from './OcFeatureOverviewCard.vue'
 
-export { FeatureOverviewCard };
+export { FeatureOverviewCard }

@@ -1,46 +1,46 @@
 <script setup>
-import { computed } from "vue";
-import { TableHeader, Chip } from "@/orchidui";
+import { computed } from 'vue'
+import { TableHeader, Chip } from '@/orchidui'
 const props = defineProps({
   filters: Object,
-  queries: Object,
-});
+  queries: Object
+})
 const emit = defineEmits({
   removeQuery: [],
   removeFilter: [],
-  removeAll: [],
-});
+  removeAll: []
+})
 
 const filterData = computed(() => {
-  let filterData = [];
+  let filterData = []
   props.filters?.forEach((filter) => {
     if (filter.multiNames) {
-      const exist = filterData.find((f) => f.name === filter.multiNames[0]);
+      const exist = filterData.find((f) => f.name === filter.multiNames[0])
       if (!exist) {
-        filterData.push(filter);
+        filterData.push(filter)
       } else {
-        exist.label = exist.label + filter.label;
+        exist.label = exist.label + filter.label
       }
     } else {
-      filterData.push(filter);
+      filterData.push(filter)
     }
-  });
-  return filterData;
-});
+  })
+  return filterData
+})
 
 const removeFilter = (name, multiNames) => {
-  let filter = {};
-  filter[name] = "";
+  let filter = {}
+  filter[name] = ''
   if (multiNames) {
     multiNames.forEach((filterName) => {
-      let multifilter = {};
-      multifilter[filterName] = "";
-      emit("removeFilter", multifilter, filterName);
-    });
+      let multifilter = {}
+      multifilter[filterName] = ''
+      emit('removeFilter', multifilter, filterName)
+    })
   } else {
-    emit("removeFilter", filter, name);
+    emit('removeFilter', filter, name)
   }
-};
+}
 </script>
 
 <template>
@@ -66,12 +66,7 @@ const removeFilter = (name, multiNames) => {
         :label="item.label"
         @remove="removeFilter(item.name, item.multiNames)"
       />
-      <Chip
-        variant="gray"
-        class="cursor-pointer"
-        label="Clear all"
-        @click="$emit('removeAll')"
-      />
+      <Chip variant="gray" class="cursor-pointer" label="Clear all" @click="$emit('removeAll')" />
     </div>
   </TableHeader>
 </template>

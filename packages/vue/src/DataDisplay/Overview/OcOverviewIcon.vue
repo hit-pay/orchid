@@ -1,33 +1,33 @@
 <script setup>
-import { Icon } from "@/orchidui";
-import { computed } from "vue";
+import { Icon } from '@/orchidui'
+import { computed } from 'vue'
 
 defineProps({
   icon: {
     type: String,
-    default: "circle",
+    default: 'circle'
   },
   variant: {
     type: String,
-    default: "blue",
+    default: 'blue'
   },
   width: {
     type: String,
-    default: "22",
+    default: '22'
   },
   height: {
     type: String,
-    default: "22",
-  },
-});
+    default: '22'
+  }
+})
 const variantClasses = computed(() => ({
-  gray: "bg-oc-gray-100 text-oc-gray-700",
-  orange: "bg-oc-warning-50-tr text-oc-warning-600",
-  red: "bg-oc-error-50-tr text-oc-error",
-  green: "bg-oc-success-50-tr text-oc-success",
-  accent: "bg-oc-accent-1-50-tr text-oc-accent-1",
-  blue: "bg-oc-primary-50-tr text-oc-primary",
-}));
+  gray: 'bg-oc-gray-100 text-oc-gray-700',
+  orange: 'bg-oc-warning-50-tr text-oc-warning-600',
+  red: 'bg-oc-error-50-tr text-oc-error',
+  green: 'bg-oc-success-50-tr text-oc-success',
+  accent: 'bg-oc-accent-1-50-tr text-oc-accent-1',
+  blue: 'bg-oc-primary-50-tr text-oc-primary'
+}))
 </script>
 
 <template>

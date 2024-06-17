@@ -1,42 +1,42 @@
-import { Theme, Popper } from "@/orchidui";
+import { Theme, Popper } from '@/orchidui'
 
 export default {
   component: Popper,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const Default = {
   argTypes: {
     placement: {
-      control: "select",
+      control: 'select',
       options: [
-        "top-start",
-        "top",
-        "top-end",
-        "right-start",
-        "right",
-        "right-end",
-        "bottom-start",
-        "bottom",
-        "bottom-end",
-        "left-start",
-        "left",
-        "left-end",
-      ],
-    },
+        'top-start',
+        'top',
+        'top-end',
+        'right-start',
+        'right',
+        'right-end',
+        'bottom-start',
+        'bottom',
+        'bottom-end',
+        'left-start',
+        'left',
+        'left-end'
+      ]
+    }
   },
   args: {
-    placement: "top",
+    placement: 'top',
     skidding: 0,
     distance: 5,
-    isFlipEnabled: true,
+    isFlipEnabled: true
   },
   render: (args) => ({
     components: { Popper, Theme },
     setup() {
       return {
-        args,
-      };
+        args
+      }
     },
     template: `
           <Theme>
@@ -65,6 +65,6 @@ export const Default = {
               </div>
             </div>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}

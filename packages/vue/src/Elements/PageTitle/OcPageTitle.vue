@@ -1,25 +1,25 @@
 <script setup>
-import OcTitle from "./OcTitle.vue";
-import MobilePageTitle from "./OcMobilePageTitle.vue";
-import { PageTitleRight, Button } from "@/orchidui";
+import OcTitle from './OcTitle.vue'
+import MobilePageTitle from './OcMobilePageTitle.vue'
+import { PageTitleRight, Button } from '@/orchidui'
 
 defineProps({
   title: { type: String, required: true },
-  description: { type: String, default: "" },
-  titleClass: { type: String, default: "" },
-  copyValue: { type: String, default: "" },
+  description: { type: String, default: '' },
+  titleClass: { type: String, default: '' },
+  copyValue: { type: String, default: '' },
   primaryButtonProps: Object,
   secondaryButtonProps: Object,
   tooltipOptions: Object,
   chipProps: Object,
   isCopy: Boolean,
   isBack: { type: Boolean, default: false },
-  isMobileCombineButtons: { type: Boolean, default: false },
-});
+  isMobileCombineButtons: { type: Boolean, default: false }
+})
 defineEmits({
   changeTab: [],
-  back: [],
-});
+  back: []
+})
 </script>
 
 <template>
@@ -38,10 +38,7 @@ defineEmits({
       />
       <div
         class="w-full gap-5"
-        :class="[
-          isMobileCombineButtons ? 'hidden md:flex' : 'flex',
-          titleClass,
-        ]"
+        :class="[isMobileCombineButtons ? 'hidden md:flex' : 'flex', titleClass]"
       >
         <OcTitle
           :title="title"

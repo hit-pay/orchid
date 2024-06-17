@@ -1,23 +1,23 @@
 <script setup>
-import { computed } from "vue";
-import { Icon } from "@/orchidui";
+import { computed } from 'vue'
+import { Icon } from '@/orchidui'
 
 defineProps({
   variant: {
     type: String,
-    default: "default",
+    default: 'default'
   },
   icon: String,
   iconClasses: String,
   text: String,
   subText: String,
   pointed: Boolean,
-  iconProps: Object,
-});
+  iconProps: Object
+})
 const variantClasses = computed(() => ({
-  default: "text-oc-text",
-  destructive: "text-oc-error",
-}));
+  default: 'text-oc-text',
+  destructive: 'text-oc-error'
+}))
 </script>
 
 <template>
@@ -26,13 +26,7 @@ const variantClasses = computed(() => ({
     :class="variantClasses[variant]"
   >
     <div class="flex items-center gap-x-3 p-3">
-      <Icon
-        v-if="icon"
-        class="w-5 h-5"
-        :name="icon"
-        v-bind="iconProps"
-        :class="iconClasses"
-      />
+      <Icon v-if="icon" class="w-5 h-5" :name="icon" v-bind="iconProps" :class="iconClasses" />
 
       <span class="md:text-base text-sm">{{ text }}</span>
 

@@ -1,24 +1,22 @@
 323
 <script setup>
-import { Chip, CopyTooltip, Icon } from "@/orchidui";
+import { Chip, CopyTooltip, Icon } from '@/orchidui'
 
 defineProps({
   title: { type: String, required: true },
   description: { type: String, required: true },
-  copyValue: { type: String, default: "" },
+  copyValue: { type: String, default: '' },
   chipProps: Object,
   tooltipOptions: Object,
-  isCopy: Boolean,
-});
+  isCopy: Boolean
+})
 </script>
 
 <template>
   <div class="flex text-oc-text justify-center flex-col gap-y-3 max-w-full">
     <div class="md:text-xl font-medium flex items-center gap-x-3">
       <slot name="title">
-        <span
-          class="whitespace-nowrap text-ellipsis overflow-hidden md:text-base lg:text-xl"
-        >
+        <span class="whitespace-nowrap text-ellipsis overflow-hidden md:text-base lg:text-xl">
           {{ title }}
         </span>
       </slot>
@@ -34,11 +32,7 @@ defineProps({
         </span>
       </slot>
 
-      <CopyTooltip
-        v-if="isCopy"
-        :value="copyValue"
-        :tooltip-options="tooltipOptions"
-      >
+      <CopyTooltip v-if="isCopy" :value="copyValue" :tooltip-options="tooltipOptions">
         <template #default="{ isShow }">
           <Icon
             width="16"

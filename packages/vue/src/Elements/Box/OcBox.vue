@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { OverviewIcon } from "@/orchidui";
+import { OverviewIcon } from '@/orchidui'
 
 defineProps({
   icon: String,
@@ -8,8 +8,8 @@ defineProps({
   variant: String,
   title: String,
   description: String,
-  isActive: Boolean,
-});
+  isActive: Boolean
+})
 </script>
 
 <template>
@@ -17,12 +17,7 @@ defineProps({
     class="rounded py-7 px-5 border bg-oc-bg-light flex flex-col gap-y-5 items-center shadow-sm"
     :class="isActive ? 'border-oc-primary' : 'border-oc-gray-200'"
   >
-    <OverviewIcon
-      :icon="icon"
-      :width="width"
-      :height="height"
-      :variant="variant"
-    />
+    <OverviewIcon :icon="icon" :width="width" :height="height" :variant="variant" />
 
     <div class="flex flex-col text-center gap-y-3">
       <span class="text-lg font-medium">{{ title }}</span>

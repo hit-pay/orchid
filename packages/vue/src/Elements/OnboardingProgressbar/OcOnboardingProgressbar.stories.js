@@ -1,25 +1,25 @@
-import { OnboardingProgressbar } from "@/orchidui";
+import { OnboardingProgressbar } from '@/orchidui'
 
 export default {
   component: OnboardingProgressbar,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 const ChartData = [
-  { value: 60, name: "Primary", itemStyle: { color: "#2465DE" } },
-  { value: 20, name: "Warning", itemStyle: { color: "#FFD47D" } },
-  { value: 20, name: "Empty", itemStyle: { color: "#F8F9FC" } },
-];
+  { value: 60, name: 'Primary', itemStyle: { color: '#2465DE' } },
+  { value: 20, name: 'Warning', itemStyle: { color: '#FFD47D' } },
+  { value: 20, name: 'Empty', itemStyle: { color: '#F8F9FC' } }
+]
 export const Default = {
   args: {
     value: 50,
-    title: "⌛️ We’re verifying your account!",
-    description: "",
-    chartData: ChartData,
+    title: '⌛️ We’re verifying your account!',
+    description: '',
+    chartData: ChartData
   },
   render: (args) => ({
     components: { OnboardingProgressbar },
     setup() {
-      return { args };
+      return { args }
     },
     template: `
           <OnboardingProgressbar v-bind="args">
@@ -31,6 +31,6 @@ export const Default = {
       </span>
             </template>
           </OnboardingProgressbar>
-        `,
-  }),
-};
+        `
+  })
+}

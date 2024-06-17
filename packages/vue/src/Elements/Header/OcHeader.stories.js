@@ -9,41 +9,41 @@ import {
   Icon,
   Dropdown,
   DropdownItem,
-  Button,
-} from "@/orchidui";
+  Button
+} from '@/orchidui'
 
-import SampleHeaderLeft from "./SampleHeaderLeft.vue";
-import SampleHeaderRight from "./SampleHeaderRight.vue";
+import SampleHeaderLeft from './SampleHeaderLeft.vue'
+import SampleHeaderRight from './SampleHeaderRight.vue'
 
-import { ref, computed } from "vue";
+import { ref, computed } from 'vue'
 
 export default {
   component: Header,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const HeaderElement = {
   args: {
     menus: [
       {
-        label: "Payments",
-        value: "payments",
-        sidebarClass: "layout-payment",
-        path: "payments",
+        label: 'Payments',
+        value: 'payments',
+        sidebarClass: 'layout-payment',
+        path: 'payments'
       },
       {
-        label: "Point of Sale",
-        value: "point_of_sale",
-        sidebarClass: "layout-pos",
-        path: "point_of_sale",
+        label: 'Point of Sale',
+        value: 'point_of_sale',
+        sidebarClass: 'layout-pos',
+        path: 'point_of_sale'
       },
       {
-        label: "Online Store",
-        value: "online_store",
-        sidebarClass: "layout-online-store",
-        path: "online_store",
-      },
-    ],
+        label: 'Online Store',
+        value: 'online_store',
+        sidebarClass: 'layout-online-store',
+        path: 'online_store'
+      }
+    ]
   },
   render: (args) => ({
     components: {
@@ -55,15 +55,15 @@ export const HeaderElement = {
       HeaderRight,
       SampleHeaderLeft,
       TabToSelect,
-      SampleHeaderRight,
+      SampleHeaderRight
     },
     setup() {
-      const activeMenuValue = ref("online_store");
+      const activeMenuValue = ref('online_store')
       const activeMenuLabel = computed(() => {
-        return args.menus.find((m) => m.value === activeMenuValue.value).label;
-      });
+        return args.menus.find((m) => m.value === activeMenuValue.value).label
+      })
 
-      return { args, activeMenuValue, activeMenuLabel };
+      return { args, activeMenuValue, activeMenuLabel }
     },
     template: `
           <Theme>
@@ -84,13 +84,13 @@ export const HeaderElement = {
               </Header>
             </div>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}
 
 export const SubHeaderElement = {
   args: {
-    isSaved: true,
+    isSaved: true
   },
   render: (args) => ({
     components: {
@@ -99,15 +99,15 @@ export const SubHeaderElement = {
       HeaderLeft,
       HeaderCenter,
       HeaderRight,
-      SampleHeaderLeft,
+      SampleHeaderLeft
     },
     setup() {
-      const activeMenuValue = ref("payments");
+      const activeMenuValue = ref('payments')
       const activeMenuLabel = computed(() => {
-        return args.menus.find((m) => m.value === activeMenuValue.value).label;
-      });
+        return args.menus.find((m) => m.value === activeMenuValue.value).label
+      })
 
-      return { args, activeMenuValue, activeMenuLabel };
+      return { args, activeMenuValue, activeMenuLabel }
     },
     template: `
           <Theme>
@@ -123,23 +123,23 @@ export const SubHeaderElement = {
               </HeaderRight>
             </SubHeader>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}
 
 export const SubHeaderDropdownElement = {
   args: {
     isSaved: true,
     primaryProps: {
-      label: "Create",
+      label: 'Create'
     },
     dropdownOptions: [
       {
-        label: "Save as Draft",
-        icon: "floppy",
-        action: "save-as-draft",
-      },
-    ],
+        label: 'Save as Draft',
+        icon: 'floppy',
+        action: 'save-as-draft'
+      }
+    ]
   },
   render: (args) => ({
     components: {
@@ -151,30 +151,30 @@ export const SubHeaderDropdownElement = {
       SampleHeaderLeft,
       Dropdown,
       DropdownItem,
-      Button,
+      Button
     },
     setup() {
-      const activeMenuValue = ref("payments");
+      const activeMenuValue = ref('payments')
       const activeMenuLabel = computed(() => {
-        return args.menus.find((m) => m.value === activeMenuValue.value).label;
-      });
+        return args.menus.find((m) => m.value === activeMenuValue.value).label
+      })
 
-      const isDropdownOpen = ref(false);
+      const isDropdownOpen = ref(false)
 
       const onDropdownItemClick = (action) => {
-        if (!action) return;
+        if (!action) return
 
-        console.log("dropdown-action", action);
-        isDropdownOpen.value = false;
-      };
+        console.log('dropdown-action', action)
+        isDropdownOpen.value = false
+      }
 
       return {
         args,
         activeMenuValue,
         activeMenuLabel,
         isDropdownOpen,
-        onDropdownItemClick,
-      };
+        onDropdownItemClick
+      }
     },
     template: `
           <Theme>
@@ -213,6 +213,6 @@ export const SubHeaderDropdownElement = {
               </HeaderRight>
             </SubHeader>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}

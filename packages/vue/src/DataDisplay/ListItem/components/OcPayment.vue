@@ -1,55 +1,50 @@
 <script setup>
-import { Chip, Icon, Tooltip } from "@/orchidui";
-import { computed, onBeforeUnmount, onMounted, ref } from "vue";
+import { Chip, Icon, Tooltip } from '@/orchidui'
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 
 const props = defineProps({
   title: {
     type: String,
-    default: "Title",
+    default: 'Title'
   },
   paymentMethods: {
     type: Array,
-    default: () => [],
+    default: () => []
   },
   chips: {
     type: Array,
-    default: () => [],
-  },
-});
+    default: () => []
+  }
+})
 
-defineEmits(["edit", "delete"]);
+defineEmits(['edit', 'delete'])
 
-const isSliced = computed(
-  () => props.paymentMethods?.length > blocksPerLine.value,
-);
+const isSliced = computed(() => props.paymentMethods?.length > blocksPerLine.value)
 const restPaymentMethods = computed(() =>
-  props.paymentMethods?.slice(
-    blocksPerLine.value,
-    props.paymentMethods?.length,
-  ),
-);
-const cardContainer = ref();
-const blocksPerLine = ref(props.paymentMethods?.length);
+  props.paymentMethods?.slice(blocksPerLine.value, props.paymentMethods?.length)
+)
+const cardContainer = ref()
+const blocksPerLine = ref(props.paymentMethods?.length)
 const calculateBlocksPerLine = () => {
   const containerWidth =
     cardContainer.value.clientWidth -
     105 /* front span */ -
     32 /* padding */ -
     4 * props.paymentMethods?.length /* gap */ -
-    35; /* tooltip block */
-  const blockWidth = 35; /* image width */
+    35 /* tooltip block */
+  const blockWidth = 35 /* image width */
 
-  blocksPerLine.value = Math.floor(containerWidth / blockWidth);
-};
+  blocksPerLine.value = Math.floor(containerWidth / blockWidth)
+}
 
 onMounted(() => {
-  calculateBlocksPerLine();
-  window.addEventListener("resize", calculateBlocksPerLine);
-});
+  calculateBlocksPerLine()
+  window.addEventListener('resize', calculateBlocksPerLine)
+})
 
 onBeforeUnmount(() => {
-  window.removeEventListener("resize", calculateBlocksPerLine);
-});
+  window.removeEventListener('resize', calculateBlocksPerLine)
+})
 </script>
 
 <template>
@@ -63,12 +58,7 @@ onBeforeUnmount(() => {
         <div class="flex items-center gap-x-3 overflow-hidden">
           <span class="truncate">{{ title }}</span>
           <div v-if="chips.length" class="flex gap-3">
-            <Chip
-              v-for="(item, i) in chips"
-              :key="i"
-              class="font-medium"
-              v-bind="item"
-            />
+            <Chip v-for="(item, i) in chips" :key="i" class="font-medium" v-bind="item" />
           </div>
         </div>
       </div>
@@ -76,25 +66,15 @@ onBeforeUnmount(() => {
         <div
           class="border opacity-0 group-hover:opacity-100 border-oc-accent-1-100 rounded-sm p-1 flex gap-x-1"
         >
-          <Icon
-            name="pencil"
-            class="cursor-pointer text-oc-text-400 p-2"
-            @click="$emit('edit')"
-          />
+          <Icon name="pencil" class="cursor-pointer text-oc-text-400 p-2" @click="$emit('edit')" />
           <div class="border-r border-gray-200" />
-          <Icon
-            name="bin"
-            class="cursor-pointer text-oc-error p-2"
-            @click="$emit('delete')"
-          />
+          <Icon name="bin" class="cursor-pointer text-oc-error p-2" @click="$emit('delete')" />
         </div>
       </slot>
     </div>
 
     <div v-if="paymentMethods?.length" class="flex items-center gap-x-2">
-      <span class="text-sm font-medium text-oc-text-300 whitespace-nowrap"
-        >Payment methods</span
-      >
+      <span class="text-sm font-medium text-oc-text-300 whitespace-nowrap">Payment methods</span>
       <img
         v-for="method in paymentMethods.slice(0, blocksPerLine)"
         :key="method.method"
@@ -103,11 +83,7 @@ onBeforeUnmount(() => {
         :alt="method.method"
         :src="method.svg"
       />
-      <Tooltip
-        v-if="isSliced"
-        position="top-end"
-        :popper-options="{ strategy: 'fixed' }"
-      >
+      <Tooltip v-if="isSliced" position="top-end" :popper-options="{ strategy: 'fixed' }">
         <template #default="{ isShow }">
           <div
             class="text-sm w-[35px] h-[24px] flex items-center justify-center border rounded-sm font-medium whitespace-nowrap"

@@ -1,23 +1,23 @@
-import { VerificationOption, RadioGroup } from "@/orchidui";
-import singpassImage from "./singpass.png";
+import { VerificationOption, RadioGroup } from '@/orchidui'
+import singpassImage from './singpass.png'
 
 export default {
   component: VerificationOption,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 export const Default = {
   args: {
-    title: "Enter form manually",
+    title: 'Enter form manually',
     chipOptions: {
-      label: "2 days verification",
-      variant: "warning",
-      icon: "time",
-    },
+      label: '2 days verification',
+      variant: 'warning',
+      icon: 'time'
+    }
   },
   render: (args) => ({
     components: { VerificationOption, RadioGroup },
     setup() {
-      return { args, singpassImage };
+      return { args, singpassImage }
     },
     template: `
           <div class="flex flex-col gap-y-6">
@@ -63,6 +63,6 @@ export const Default = {
               </template>
             </VerificationOption>
           </div>
-        `,
-  }),
-};
+        `
+  })
+}

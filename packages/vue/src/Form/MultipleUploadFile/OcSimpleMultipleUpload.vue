@@ -1,111 +1,108 @@
 <script setup>
-import { Dropdown, Icon, ConfirmationModal } from "@/orchidui";
-import { ref, computed } from "vue";
-import { Draggable } from "@/orchidui/Draggable.js";
-import { ModalCropper } from "@/orchidui/Cropper.js";
+import { Dropdown, Icon, ConfirmationModal } from '@/orchidui'
+import { ref, computed } from 'vue'
+import { Draggable } from '@/orchidui/Draggable.js'
+import { ModalCropper } from '@/orchidui/Cropper.js'
 
 const props = defineProps({
   accept: {
     type: String,
-    default: "",
+    default: ''
   },
   uploadedImages: {
     type: Array,
-    default: () => [],
+    default: () => []
   },
   selectedImage: {
     type: Object,
-    default: () => ({}),
+    default: () => ({})
   },
   columnsCount: {
     type: Number,
-    default: 3,
+    default: 3
   },
   withLink: Boolean,
-  maxImages: Number,
-});
+  maxImages: Number
+})
 const emit = defineEmits([
-  "change",
-  "update:selectedImage",
-  "update:uploadedImages",
-  "onRemoveImage",
-  "onEditImage",
-  "delete",
-  "onMaxFileExceed",
-  "fileExist",
-  "invalidFileType",
-]);
-const isDropdownOpen = ref([]);
-const isEditOpen = ref(false);
-const editImgIndex = ref("");
-const editLink = ref("");
+  'change',
+  'update:selectedImage',
+  'update:uploadedImages',
+  'onRemoveImage',
+  'onEditImage',
+  'delete',
+  'onMaxFileExceed',
+  'fileExist',
+  'invalidFileType'
+])
+const isDropdownOpen = ref([])
+const isEditOpen = ref(false)
+const editImgIndex = ref('')
+const editLink = ref('')
 
 const editImgIndexFileUrl = computed(() => {
-  return props.uploadedImages[editImgIndex.value].fileUrl;
-});
-const deleteConfirmationModal = ref(false);
-const deleteIndex = ref("");
+  return props.uploadedImages[editImgIndex.value].fileUrl
+})
+const deleteConfirmationModal = ref(false)
+const deleteIndex = ref('')
 const onDeleteFile = (index) => {
-  deleteConfirmationModal.value = true;
-  deleteIndex.value = index;
-};
+  deleteConfirmationModal.value = true
+  deleteIndex.value = index
+}
 
-const resetFile = ref(false);
+const resetFile = ref(false)
 
 const confirmDeleteFile = () => {
-  const deletedImage = props.uploadedImages.find(
-    (_, i) => i === deleteIndex.value,
-  );
+  const deletedImage = props.uploadedImages.find((_, i) => i === deleteIndex.value)
 
   if (deletedImage.current) {
-    emit("onRemoveImage", deletedImage);
+    emit('onRemoveImage', deletedImage)
   } else {
-    emit("delete", deleteIndex.value);
-    resetFile.value = true;
+    emit('delete', deleteIndex.value)
+    resetFile.value = true
     setTimeout(() => {
-      resetFile.value = false;
-    }, 1000);
+      resetFile.value = false
+    }, 1000)
   }
 
   emit(
-    "update:uploadedImages",
-    props.uploadedImages.filter((_, i) => i !== deleteIndex.value),
-  );
-  deleteConfirmationModal.value = false;
-};
+    'update:uploadedImages',
+    props.uploadedImages.filter((_, i) => i !== deleteIndex.value)
+  )
+  deleteConfirmationModal.value = false
+}
 const changeImage = (url) => {
-  const changedFile = props.uploadedImages[editImgIndex.value];
-  changedFile.fileUrl = url;
+  const changedFile = props.uploadedImages[editImgIndex.value]
+  changedFile.fileUrl = url
 
-  changedFile.fileName = Date.now();
+  changedFile.fileName = Date.now()
 
-  emit("onEditImage", { ...changedFile, index: editImgIndex.value });
+  emit('onEditImage', { ...changedFile, index: editImgIndex.value })
 
-  isEditOpen.value = false;
-  editImgIndex.value = "";
-  editLink.value = "";
-};
+  isEditOpen.value = false
+  editImgIndex.value = ''
+  editLink.value = ''
+}
 const updateLink = (link) => {
-  let changedFile = props.uploadedImages[editImgIndex.value];
-  changedFile.link = link;
-  emit("update:uploadedImages", props.uploadedImages);
-};
+  let changedFile = props.uploadedImages[editImgIndex.value]
+  changedFile.link = link
+  emit('update:uploadedImages', props.uploadedImages)
+}
 
 const onChange = ($event) => {
-  let isExceedLimit =
-    props.uploadedImages.length + $event.target.files.length > props.maxImages;
+  let isExceedLimit = props.uploadedImages.length + $event.target.files.length > props.maxImages
   if (props.maxImages && isExceedLimit) {
-    emit("onMaxFileExceed", isExceedLimit);
-    return;
+    emit('onMaxFileExceed', isExceedLimit)
+    return
   }
 
-  emit("change", $event);
-};
+  emit('change', $event)
+}
 const showAddBtn = computed(
   () =>
     props.maxImages == undefined ||
-    (props.maxImages && props.uploadedImages.length < props.maxImages),
-);
+    (props.maxImages && props.uploadedImages.length < props.maxImages)
+)
 </script>
 
 <template>
@@ -140,7 +137,7 @@ const showAddBtn = computed(
           class="w-[100px] group relative cursor-pointer aspect-square border rounded border-oc-accent-1-100 bg-cover bg-center"
           :class="{
             'border-oc-primary': selectedImage.fileName === img.fileName,
-            'col-start-2': i === 0 && showAddBtn,
+            'col-start-2': i === 0 && showAddBtn
           }"
           :style="`background-image: url(${img.fileUrl})`"
           @click="$emit('update:selectedImage', img)"
@@ -155,20 +152,15 @@ const showAddBtn = computed(
               class="absolute right-0 cursor-pointer w-[32px] flex h-[32px] items-center justify-center text-oc-bg-light"
             />
             <template #menu>
-              <slot
-                name="action"
-                :item="img"
-                :remove-item="onDeleteFile"
-                :file-index="i"
-              >
+              <slot name="action" :item="img" :remove-item="onDeleteFile" :file-index="i">
                 <div class="py-2 flex flex-col">
                   <div
                     class="flex p-3 cursor-pointer items-center gap-x-3"
                     @click="
-                      editImgIndex = i;
-                      editLink = img.link;
-                      isDropdownOpen[i] = false;
-                      isEditOpen = true;
+                      editImgIndex = i
+                      editLink = img.link
+                      isDropdownOpen[i] = false
+                      isEditOpen = true
                     "
                   >
                     <Icon width="16" height="16" name="pencil" />
@@ -177,8 +169,8 @@ const showAddBtn = computed(
                   <div
                     class="flex p-3 cursor-pointer items-center text-oc-error gap-x-3"
                     @click="
-                      onDeleteFile(i);
-                      isDropdownOpen[i] = false;
+                      onDeleteFile(i)
+                      isDropdownOpen[i] = false
                     "
                   >
                     <Icon width="16" height="16" name="bin" />
@@ -220,8 +212,8 @@ const showAddBtn = computed(
       :with-link="withLink"
       :link="editLink"
       @close="
-        isEditOpen = false;
-        editImgIndex = '';
+        isEditOpen = false
+        editImgIndex = ''
       "
       @change-image="changeImage"
       @update:link="updateLink"

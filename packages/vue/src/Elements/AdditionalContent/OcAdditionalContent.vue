@@ -1,26 +1,26 @@
 <script setup>
-import { Chip, PrimaryActions } from "@/orchidui";
-import OcTitle from "@/orchidui/Elements/PageTitle/OcTitle.vue";
-import BalanceOverview from "./BalanceType/OcBalanceOverview.vue";
-import DynamicType from "./DynamicType/OcDynamicType.vue";
+import { Chip, PrimaryActions } from '@/orchidui'
+import OcTitle from '@/orchidui/Elements/PageTitle/OcTitle.vue'
+import BalanceOverview from './BalanceType/OcBalanceOverview.vue'
+import DynamicType from './DynamicType/OcDynamicType.vue'
 
 const props = defineProps({
-  mainLink: { type: String, default: "" },
-  balanceContainerClass: { type: String, default: "" },
-  userId: { type: String, default: "" },
-  chipVariant: { type: String, default: "" },
-  chipLabel: { type: String, default: "" },
-  additionalTitle: { type: String, default: "" },
+  mainLink: { type: String, default: '' },
+  balanceContainerClass: { type: String, default: '' },
+  userId: { type: String, default: '' },
+  chipVariant: { type: String, default: '' },
+  chipLabel: { type: String, default: '' },
+  additionalTitle: { type: String, default: '' },
   primaryActions: { type: Object, default: null },
-  overviewActiveTab: { type: String, default: "" },
-  customerCardVariant: { type: String, default: "" },
+  overviewActiveTab: { type: String, default: '' },
+  customerCardVariant: { type: String, default: '' },
   customer: { type: Object, default: null },
   customerIsHover: { type: Boolean, default: false },
   customerIsEdit: { type: Boolean, default: false },
   variant: {
     type: String,
-    default: "default",
-    validator: (val) => ["default", "dynamic", "balance"].includes(val),
+    default: 'default',
+    validator: (val) => ['default', 'dynamic', 'balance'].includes(val)
   },
   boxes: { type: Array, default: () => [] },
   isCustomer: { type: Boolean, default: false },
@@ -31,25 +31,25 @@ const props = defineProps({
   moreButtonProps: { type: Object, default: null },
   dropdownProps: {
     type: Object,
-    default: () => ({}),
+    default: () => ({})
   },
   dropdownItems: { type: Array, default: () => [] },
   paymentMethods: { type: Array, default: () => [] },
-  additionalStyling: { type: String, default: "" },
-});
+  additionalStyling: { type: String, default: '' }
+})
 
 defineEmits({
   changeTab: [],
   addCustomer: [],
-  editCustomer: [],
-});
+  editCustomer: []
+})
 const copyLink = async () => {
   try {
-    await navigator.clipboard.writeText(props.mainLink + props.userId);
+    await navigator.clipboard.writeText(props.mainLink + props.userId)
   } catch (err) {
-    console.error("Unable to copy text to clipboard. Error: ", err);
+    console.error('Unable to copy text to clipboard. Error: ', err)
   }
-};
+}
 </script>
 
 <template>

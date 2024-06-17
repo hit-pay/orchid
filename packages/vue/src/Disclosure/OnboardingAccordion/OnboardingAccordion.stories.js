@@ -1,34 +1,27 @@
-import OnboardingAccordion from "./OnboardingAccordion.vue";
+import OnboardingAccordion from './OnboardingAccordion.vue'
 
 export default {
   component: OnboardingAccordion,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const Default = {
   argTypes: {
     variant: {
-      control: "select",
-      options: [
-        "completed",
-        "not_completed",
-        "current",
-        "partially_completed",
-        "pending",
-        "error",
-      ],
-    },
+      control: 'select',
+      options: ['completed', 'not_completed', 'current', 'partially_completed', 'pending', 'error']
+    }
   },
   args: {
-    title: "Choose product type",
-    description: "Tell us what type of products your are selling",
+    title: 'Choose product type',
+    description: 'Tell us what type of products your are selling',
     isBorder: false,
-    variant: "completed",
+    variant: 'completed'
   },
   render: (args) => ({
     components: { OnboardingAccordion },
     setup() {
-      return { args };
+      return { args }
     },
     template: `
           <div class="w-full flex flex-col gap-y-4">
@@ -81,6 +74,6 @@ export const Default = {
               <div class="p-10">Tested body</div>
             </OnboardingAccordion>
           </div>
-        `,
-  }),
-};
+        `
+  })
+}

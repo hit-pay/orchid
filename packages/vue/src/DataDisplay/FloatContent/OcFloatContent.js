@@ -1,2 +1,2 @@
-import FloatContent from "./OcFloatContent.vue";
-export { FloatContent };
+import FloatContent from './OcFloatContent.vue'
+export { FloatContent }

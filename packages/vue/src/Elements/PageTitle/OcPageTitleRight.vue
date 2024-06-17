@@ -1,29 +1,20 @@
 <script setup>
-import { Button, Dropdown, DropdownItem, Tooltip } from "@/orchidui";
-import { ref } from "vue";
-import { useWindowWidth } from "@/orchidui/composables/useWindowWidth.js";
+import { Button, Dropdown, DropdownItem, Tooltip } from '@/orchidui'
+import { ref } from 'vue'
+import { useWindowWidth } from '@/orchidui/composables/useWindowWidth.js'
 
 const props = defineProps({
   primaryButtonProps: Object,
-  secondaryButtonProps: Object,
-});
+  secondaryButtonProps: Object
+})
 
-const isDropdownOpened = ref(
-  props.secondaryButtonProps?.isDropdownOpened ?? false,
-);
-const { isMobile } = useWindowWidth();
+const isDropdownOpened = ref(props.secondaryButtonProps?.isDropdownOpened ?? false)
+const { isMobile } = useWindowWidth()
 </script>
 <template>
   <div class="flex gap-x-3 items-center">
-    <Dropdown
-      v-if="secondaryButtonProps"
-      v-model="isDropdownOpened"
-      :distance="10"
-    >
-      <Button
-        :size="isMobile ? 'small' : 'default'"
-        v-bind="secondaryButtonProps"
-      />
+    <Dropdown v-if="secondaryButtonProps" v-model="isDropdownOpened" :distance="10">
+      <Button :size="isMobile ? 'small' : 'default'" v-bind="secondaryButtonProps" />
       <template #menu>
         <div v-if="secondaryButtonProps?.dropdownOptions" class="p-2">
           <DropdownItem
@@ -40,10 +31,7 @@ const { isMobile } = useWindowWidth();
       :distance="4"
       arrow-hidden
     >
-      <Button
-        :size="isMobile ? 'small' : 'default'"
-        v-bind="primaryButtonProps"
-      />
+      <Button :size="isMobile ? 'small' : 'default'" v-bind="primaryButtonProps" />
       <template #popper>
         <div
           class="px-3 py-[5px] whitespace-nowrap font-medium text-sm text-oc-text-400 flex gap-x-3 items-center"

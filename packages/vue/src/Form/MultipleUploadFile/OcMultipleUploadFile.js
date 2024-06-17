@@ -1,3 +1,3 @@
-import MultipleUploadFile from "./OcMultipleUploadFile.vue";
+import MultipleUploadFile from './OcMultipleUploadFile.vue'
 
-export { MultipleUploadFile };
+export { MultipleUploadFile }

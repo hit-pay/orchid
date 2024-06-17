@@ -1,6 +1,4 @@
-import { defineAsyncComponent } from "vue";
+import { defineAsyncComponent } from 'vue'
 
-const ModalCropper = defineAsyncComponent(
-  () => import("./Form/ModalCropper/OcModalCropper.vue"),
-);
-export { ModalCropper };
+const ModalCropper = defineAsyncComponent(() => import('./Form/ModalCropper/OcModalCropper.vue'))
+export { ModalCropper }

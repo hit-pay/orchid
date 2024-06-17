@@ -1,12 +1,12 @@
 <script setup>
-import { BaseInput, Icon } from "@/orchidui";
+import { BaseInput, Icon } from '@/orchidui'
 
-import { computed } from "vue";
+import { computed } from 'vue'
 
 const props = defineProps({
   variant: {
     type: String,
-    default: "grid",
+    default: 'grid'
   },
   label: String,
   hint: String,
@@ -18,34 +18,34 @@ const props = defineProps({
   modelValue: [Array, String, Number],
   isRequired: {
     type: Boolean,
-    default: false,
+    default: false
   },
   labelIcon: {
     type: String,
-    default: "",
+    default: ''
   },
   tooltipText: {
     type: String,
-    default: "",
+    default: ''
   },
   tooltipOptions: {
     type: Object,
-    default: () => ({}),
+    default: () => ({})
   },
-  class: String,
-});
+  class: String
+})
 
 const emit = defineEmits({
-  "update:modelValue": [],
-});
+  'update:modelValue': []
+})
 
 const update = (value) => {
-  emit("update:modelValue", value);
-};
+  emit('update:modelValue', value)
+}
 
 const isGridVariant = computed(() => {
-  return props.variant === "grid";
-});
+  return props.variant === 'grid'
+})
 </script>
 
 <template>
@@ -62,11 +62,7 @@ const isGridVariant = computed(() => {
       class="w-full grid gap-3"
       :class="[
         props.class,
-        isGridVariant
-          ? 'grid-cols-3'
-          : variant === 'list2'
-            ? 'grid-cols-2'
-            : '',
+        isGridVariant ? 'grid-cols-3' : variant === 'list2' ? 'grid-cols-2' : ''
       ]"
     >
       <div
@@ -74,11 +70,10 @@ const isGridVariant = computed(() => {
         :key="opt.value"
         class="cursor-pointer group items-start"
         :class="{
-          'flex border border-oc-gray-200 p-3 rounded hover:shadow':
-            !isGridVariant,
+          'flex border border-oc-gray-200 p-3 rounded hover:shadow': !isGridVariant,
           'border-2 border-oc-primary':
             !isGridVariant && opt.value.toString() === modelValue.toString(),
-          '!border-0 hover:bg-oc-accent-1-50 flex': borderless,
+          '!border-0 hover:bg-oc-accent-1-50 flex': borderless
         }"
         @click="update(opt.value)"
       >
@@ -94,38 +89,27 @@ const isGridVariant = computed(() => {
               'border-2 border-oc-primary':
                 isGridVariant && opt.value.toString() === modelValue.toString(),
               'border border-oc-gray-200':
-                (isGridVariant &&
-                  opt.value.toString() !== modelValue.toString()) ||
-                !isGridVariant,
+                (isGridVariant && opt.value.toString() !== modelValue.toString()) || !isGridVariant,
               'w-full': isGridVariant,
-              'w-[50px]': !isGridVariant,
+              'w-[50px]': !isGridVariant
             }"
             :src="opt.preview"
           />
           <div
             class="mt-2"
-            :class="[
-              isGridVariant ? 'text-center' : 'px-3',
-              borderless ? 'flex-1' : '',
-            ]"
+            :class="[isGridVariant ? 'text-center' : 'px-3', borderless ? 'flex-1' : '']"
           >
             <span
               class="font-medium text-oc-text-400 group-hover:text-oc-text-500"
               :class="{
                 'text-sm ': isGridVariant,
                 'text-oc-text-400 group-hover:text-oc-text-500':
-                  isGridVariant &&
-                  opt.value.toString() !== modelValue.toString(),
-                'text-oc-text-500':
-                  isGridVariant &&
-                  opt.value.toString() === modelValue.toString(),
+                  isGridVariant && opt.value.toString() !== modelValue.toString(),
+                'text-oc-text-500': isGridVariant && opt.value.toString() === modelValue.toString()
               }"
               >{{ opt.label }}</span
             >
-            <div
-              v-if="opt.description"
-              class="flex text-sm text-oc-text-400 mt-2"
-            >
+            <div v-if="opt.description" class="flex text-sm text-oc-text-400 mt-2">
               {{ opt.description }}
             </div>
           </div>
@@ -135,11 +119,7 @@ const isGridVariant = computed(() => {
             height="16"
             name="check-2"
             class="text-oc-primary"
-            :class="
-              opt.value.toString() === modelValue.toString()
-                ? 'opacity-100'
-                : 'opacity-0'
-            "
+            :class="opt.value.toString() === modelValue.toString() ? 'opacity-100' : 'opacity-0'"
           />
         </slot>
       </div>

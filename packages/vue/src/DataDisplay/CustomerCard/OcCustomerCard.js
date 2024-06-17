@@ -1,2 +1,2 @@
-import CustomerCard from "./OcCustomerCard.vue";
-export { CustomerCard };
+import CustomerCard from './OcCustomerCard.vue'
+export { CustomerCard }

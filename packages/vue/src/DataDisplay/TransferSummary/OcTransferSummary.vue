@@ -1,28 +1,20 @@
 <script setup>
-import { ListDetail } from "@/orchidui";
-import { computed } from "vue";
+import { ListDetail } from '@/orchidui'
+import { computed } from 'vue'
 
 const props = defineProps({
   transfer: {
     type: Object,
-    required: true,
+    required: true
   },
 
-  hasFxData: Boolean,
-});
+  hasFxData: Boolean
+})
 
-const formattedSourceCurrency = computed(() =>
-  props.transfer.source_currency?.toUpperCase(),
-);
-const formattedPaymentCurrency = computed(() =>
-  props.transfer.payment_currency?.toUpperCase(),
-);
-const formattedFeeCurrency = computed(() =>
-  props.transfer.fee_currency?.toUpperCase(),
-);
-const formattedTransferMethod = computed(() =>
-  props.transfer.transfer_method?.toUpperCase(),
-);
+const formattedSourceCurrency = computed(() => props.transfer.source_currency?.toUpperCase())
+const formattedPaymentCurrency = computed(() => props.transfer.payment_currency?.toUpperCase())
+const formattedFeeCurrency = computed(() => props.transfer.fee_currency?.toUpperCase())
+const formattedTransferMethod = computed(() => props.transfer.transfer_method?.toUpperCase())
 </script>
 
 <template>

@@ -1,3 +1,3 @@
-import AuthenticationOption from "./OcAuthenticationOption.vue";
+import AuthenticationOption from './OcAuthenticationOption.vue'
 
-export { AuthenticationOption };
+export { AuthenticationOption }

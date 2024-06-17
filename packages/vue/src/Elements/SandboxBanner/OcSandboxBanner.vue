@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { Chip } from "@/orchidui";
+import { Chip } from '@/orchidui'
 
 defineProps({
   title: {
     type: String,
-    default: "",
+    default: ''
   },
   chipProps: {
     type: Object,
-    default: () => null,
-  },
-});
+    default: () => null
+  }
+})
 </script>
 
 <template>

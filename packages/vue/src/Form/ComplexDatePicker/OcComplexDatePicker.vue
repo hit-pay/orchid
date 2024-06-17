@@ -1,11 +1,11 @@
 <script setup>
-import { Dropdown, Input, BaseInput } from "@/orchidui";
-import { ComplexCalendar } from "@/orchidui/Calendar";
-import { ref } from "vue";
-import dayjs from "dayjs";
-import customParseFormat from "dayjs/plugin/customParseFormat";
+import { Dropdown, Input, BaseInput } from '@/orchidui'
+import { ComplexCalendar } from '@/orchidui/Calendar'
+import { ref } from 'vue'
+import dayjs from 'dayjs'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
 
-dayjs.extend(customParseFormat);
+dayjs.extend(customParseFormat)
 
 defineProps({
   shortcuts: Array,
@@ -19,20 +19,20 @@ defineProps({
     type: Object,
     default: () => ({
       start: new Date(),
-      end: new Date(),
-    }),
+      end: new Date()
+    })
   },
   formatDate: {
     type: String,
-    default: "DD/MM/YYYY",
+    default: 'DD/MM/YYYY'
   },
   countCalendars: {
     type: Number,
-    default: 2,
+    default: 2
   },
   withFooter: {
     type: Boolean,
-    default: true,
+    default: true
   },
   label: String,
   hint: String,
@@ -40,12 +40,12 @@ defineProps({
   errorMessage: String,
   labelIcon: String,
   tooltipText: String,
-  tooltipOptions: Object,
-});
+  tooltipOptions: Object
+})
 defineEmits({
-  "update:modelValue": [],
-});
-const isOpen = ref(false);
+  'update:modelValue': []
+})
+const isOpen = ref(false)
 </script>
 
 <template>
@@ -61,7 +61,7 @@ const isOpen = ref(false);
     <Dropdown v-model="isOpen" position="bottom" class="w-full">
       <Input
         :model-value="`${dayjs(modelValue.start).format(formatDate)} - ${dayjs(
-          modelValue.end,
+          modelValue.end
         ).format(formatDate)}`"
         icon="calendar"
         readonly

@@ -9,77 +9,77 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted } from "vue";
+import { ref, watch, onMounted } from 'vue'
 const props = defineProps({
   path: {
     type: String,
-    default: "/icons/orchidui",
+    default: '/icons/orchidui'
   },
   name: {
     type: String,
-    required: true,
+    required: true
   },
   width: {
     type: String,
-    default: "24",
+    default: '24'
   },
   height: {
     type: String,
-    default: "24",
-  },
-});
-const iconRef = ref(null);
+    default: '24'
+  }
+})
+const iconRef = ref(null)
 
 const setIconRef = (text) => {
-  const iconDom = document.createElement("div");
-  iconDom.innerHTML = text;
-  if (iconDom.querySelector("svg")) {
-    iconDom.querySelector("svg").removeAttribute("width");
-    iconDom.querySelector("svg").removeAttribute("height");
-    iconRef.value.innerHTML = iconDom.innerHTML;
+  const iconDom = document.createElement('div')
+  iconDom.innerHTML = text
+  if (iconDom.querySelector('svg')) {
+    iconDom.querySelector('svg').removeAttribute('width')
+    iconDom.querySelector('svg').removeAttribute('height')
+    iconRef.value.innerHTML = iconDom.innerHTML
   }
-  iconDom.remove();
-};
+  iconDom.remove()
+}
 
 const renderIcon = () => {
-  let iconData = "";
+  let iconData = ''
   if (window.oc_icons) {
-    let windowIcons = JSON.parse(window.oc_icons);
-    iconData = windowIcons.find((icon) => icon.name === props.name);
+    let windowIcons = JSON.parse(window.oc_icons)
+    iconData = windowIcons.find((icon) => icon.name === props.name)
   }
   if (!iconData) {
     fetch(`${props.path}/${props.name}.svg`)
-      .then((r) => (r.status === 200 ? r.text() : ""))
+      .then((r) => (r.status === 200 ? r.text() : ''))
       .then((text) => {
         if (text && iconRef.value) {
           if (window.oc_icons) {
-            let windowIcons = JSON.parse(window.oc_icons);
+            let windowIcons = JSON.parse(window.oc_icons)
             window.oc_icons = JSON.stringify([
               ...windowIcons,
               {
                 name: props.name,
-                svg: text,
-              },
-            ]);
+                svg: text
+              }
+            ])
           }
-          setIconRef(text);
+          setIconRef(text)
         }
-      });
+      })
   } else {
     if (iconRef.value) {
-      setIconRef(iconData.svg);
+      setIconRef(iconData.svg)
     }
   }
-};
+}
 
 onMounted(() => {
-  renderIcon();
-});
+  renderIcon()
+})
 
 watch(
   () => props.name,
   () => {
-    renderIcon();
-  },
-);
+    renderIcon()
+  }
+)
 </script>

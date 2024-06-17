@@ -1,33 +1,33 @@
 <script setup>
-import { Icon, CopyTooltip } from "@/orchidui";
-import { computed } from "vue";
+import { Icon, CopyTooltip } from '@/orchidui'
+import { computed } from 'vue'
 
 const props = defineProps({
   label: {
     type: String,
-    default: "",
+    default: ''
   },
   content: {
     type: String,
-    default: "",
+    default: ''
   },
   variant: {
     type: String,
-    default: "small",
-    validator: (val) => ["small", "big"].includes(val),
+    default: 'small',
+    validator: (val) => ['small', 'big'].includes(val)
   },
   alignment: {
     type: String,
-    default: "horizontal",
-    validator: (val) => ["horizontal", "vertical"].includes(val),
+    default: 'horizontal',
+    validator: (val) => ['horizontal', 'vertical'].includes(val)
   },
   showCopyTooltip: {
     type: Boolean,
-    default: true,
-  },
-});
+    default: true
+  }
+})
 
-const isVertical = computed(() => props.alignment === "vertical");
+const isVertical = computed(() => props.alignment === 'vertical')
 </script>
 
 <template>

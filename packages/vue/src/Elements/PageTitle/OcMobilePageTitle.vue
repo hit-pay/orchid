@@ -1,23 +1,16 @@
 <script setup lang="ts">
-import {
-  Button,
-  Icon,
-  Dropdown,
-  DropdownItem,
-  CopyTooltip,
-  Chip,
-} from "@/orchidui";
-import { ref } from "vue";
+import { Button, Icon, Dropdown, DropdownItem, CopyTooltip, Chip } from '@/orchidui'
+import { ref } from 'vue'
 
 defineProps({
   title: { type: String },
   description: { type: String },
   primaryButtonProps: Object,
   chipProps: Object,
-  secondaryButtonProps: Object,
-});
+  secondaryButtonProps: Object
+})
 
-const isOpen = ref(false);
+const isOpen = ref(false)
 </script>
 
 <template>
@@ -39,11 +32,7 @@ const isOpen = ref(false);
                 :text="secondaryButtonProps?.label"
                 :icon="secondaryButtonProps?.leftIcon"
               />
-              <template
-                v-if="
-                  secondaryButtonProps && secondaryButtonProps.dropdownOptions
-                "
-              >
+              <template v-if="secondaryButtonProps && secondaryButtonProps.dropdownOptions">
                 <DropdownItem
                   v-for="option in secondaryButtonProps.dropdownOptions"
                   :key="option.text"

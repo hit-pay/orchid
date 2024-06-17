@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref } from 'vue'
 import {
   Button,
   Accordion,
@@ -7,34 +7,34 @@ import {
   CustomerCard,
   Chip,
   NumberInput,
-  Toggle as OcToggle,
-} from "@orchidui/vue";
+  Toggle as OcToggle
+} from '@orchidui/vue'
 
-const isOpen = ref(false);
-const dynamicContent = ref([]);
-const NumberInputModel = ref(0);
-const ToggleModel = ref(false);
+const isOpen = ref(false)
+const dynamicContent = ref([])
+const NumberInputModel = ref(0)
+const ToggleModel = ref(false)
 const args = {
   // accordion
-  header: "Additional Information",
-  body: "Accordion content",
-  icon: "chevron-down",
+  header: 'Additional Information',
+  body: 'Accordion content',
+  icon: 'chevron-down',
   showIcon: true,
   isAnimated: true,
   isExpandable: false,
   isDisabled: false,
   // customer
-  variant: "small",
+  variant: 'small',
   customer: {
-    name: "Alex Turner",
-    currency: "SGD",
-    email: "alex@arcticmonkey.io",
-    phone_number: "+65 8373 3739 18",
-    bank_name: "DBS Bank",
-    bank_account_number: "**** 1234",
+    name: 'Alex Turner',
+    currency: 'SGD',
+    email: 'alex@arcticmonkey.io',
+    phone_number: '+65 8373 3739 18',
+    bank_name: 'DBS Bank',
+    bank_account_number: '**** 1234'
   },
-  isBeneficiary: true,
-};
+  isBeneficiary: true
+}
 </script>
 <template>
   <div class="grid lg:grid-cols-2">
@@ -48,25 +48,21 @@ const args = {
             class="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20"
           >
             Crafted by HitPay
-            <a
-              href="https://hitpayapp.com"
-              class="font-semibold text-indigo-600"
+            <a href="https://hitpayapp.com" class="font-semibold text-indigo-600"
               ><span class="absolute inset-0" aria-hidden="true" />Read more
               <span aria-hidden="true">&rarr;</span></a
             >
           </div>
         </div>
         <p class="mt-6 text-lg leading-8 text-gray-600">
-          The Open Source UI Library for Vue3 offers a wide range of components
-          and tools to streamline the development process for Vue.js
-          applications. With a focus on flexibility and customization, this
-          library provides developers with the ability to create modern and
+          The Open Source UI Library for Vue3 offers a wide range of components and tools to
+          streamline the development process for Vue.js applications. With a focus on flexibility
+          and customization, this library provides developers with the ability to create modern and
           responsive user interfaces with ease.
           <br />
           <br />
-          Whether you are building a simple website or a complex web
-          application, this UI library has everything you need to enhance the
-          user experience and improve overall functionality.
+          Whether you are building a simple website or a complex web application, this UI library
+          has everything you need to enhance the user experience and improve overall functionality.
         </p>
         <div class="mt-10 flex items-center justify-center gap-x-6">
           <a
@@ -120,12 +116,7 @@ const args = {
       </div>
       <div class="w-full flex flex-wrap gap-5 items-center mb-5">
         <Button variant="secondary" left-icon="x" />
-        <Button
-          variant="secondary"
-          left-icon="x"
-          rightIcon="circle"
-          label="Button"
-        />
+        <Button variant="secondary" left-icon="x" rightIcon="circle" label="Button" />
         <Button variant="secondary" label="Button" isDisabled />
         <Button variant="secondary" label="Button" isLoading />
         <Button variant="secondary" label="Button" isTransparent />
@@ -144,9 +135,7 @@ const args = {
           <template #body>
             <DatePicker />
             <div class="flex flex-col gap-3 mt-3">
-              <div v-for="item in dynamicContent" :key="item">
-                Dynamic Content {{ item }}
-              </div>
+              <div v-for="item in dynamicContent" :key="item">Dynamic Content {{ item }}</div>
               <Button
                 size="small"
                 label="Add Content"

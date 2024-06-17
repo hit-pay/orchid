@@ -15,13 +15,13 @@
 
 <script setup>
 defineProps({
-  modelValue: { default: 0, type: Number },
-});
+  modelValue: { default: 0, type: Number }
+})
 
-const emits = defineEmits(["update:modelValue", "onInput", "onChange"]);
+const emits = defineEmits(['update:modelValue', 'onInput', 'onChange'])
 
 const handleInput = (event) => {
-  emits("update:modelValue", parseFloat(event.target.value));
-  emits("onInput", event);
-};
+  emits('update:modelValue', parseFloat(event.target.value))
+  emits('onInput', event)
+}
 </script>

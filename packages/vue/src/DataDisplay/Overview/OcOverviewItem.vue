@@ -1,5 +1,5 @@
 <script setup>
-import { OverviewIcon, Icon, Tooltip, Skeleton } from "@/orchidui";
+import { OverviewIcon, Icon, Tooltip, Skeleton } from '@/orchidui'
 
 defineProps({
   icon: String,
@@ -16,20 +16,18 @@ defineProps({
   percentValue: Number,
   iconWidth: {
     type: String,
-    default: "22",
+    default: '22'
   },
   iconHeight: {
     type: String,
-    default: "22",
-  },
-});
+    default: '22'
+  }
+})
 </script>
 
 <template>
   <div
-    :class="
-      isTransparent ? 'p-3' : 'border p-4 bg-oc-bg-light border-oc-gray-200 '
-    "
+    :class="isTransparent ? 'p-3' : 'border p-4 bg-oc-bg-light border-oc-gray-200 '"
     class="flex flex-col gap-y-4 md:overflow-hidden w-full md:w-auto rounded"
   >
     <div v-if="isLoading" class="flex flex-col gap-y-3 min-w-[132px]">
@@ -38,10 +36,7 @@ defineProps({
     </div>
 
     <template v-else>
-      <div
-        class="flex items-center"
-        :class="isBig ? 'gap-x-[.75rem]' : 'gap-x-3'"
-      >
+      <div class="flex items-center" :class="isBig ? 'gap-x-[.75rem]' : 'gap-x-3'">
         <OverviewIcon
           v-if="icon"
           :icon="icon"
@@ -50,9 +45,7 @@ defineProps({
           :width="iconWidth"
         />
         <div class="flex flex-col gap-y-px font-medium overflow-hidden">
-          <div
-            class="flex whitespace-nowrap items-start gap-x-3 text-xs text-oc-text-300"
-          >
+          <div class="flex whitespace-nowrap items-start gap-x-3 text-xs text-oc-text-300">
             <slot name="title">
               <span class="uppercase">{{ title }}</span>
             </slot>
@@ -82,10 +75,7 @@ defineProps({
             <Icon v-if="isCard" width="35" name="payment-methods/visa" />
             <span :class="isBig ? 'text-xl' : ''" class="truncate">
               <slot name="content">
-                <div
-                  class="flex items-center gap-x-3 overflow-hidden"
-                  v-if="!isNaN(percentValue)"
-                >
+                <div class="flex items-center gap-x-3 overflow-hidden" v-if="!isNaN(percentValue)">
                   <div class="truncate">{{ content }}</div>
 
                   <Tooltip
@@ -95,25 +85,13 @@ defineProps({
                   >
                     <div class="flex items-center gap-x-1">
                       <Icon
-                        :name="
-                          percentValue >= 0 ? 'triangle-up' : 'triangle-down'
-                        "
-                        :class="
-                          percentValue >= 0
-                            ? 'text-oc-success-500'
-                            : 'text-oc-error-500'
-                        "
+                        :name="percentValue >= 0 ? 'triangle-up' : 'triangle-down'"
+                        :class="percentValue >= 0 ? 'text-oc-success-500' : 'text-oc-error-500'"
                         width="10"
                         height="9"
                       />
-                      <span
-                        class="text-oc-text-400 text-sm font-medium cursor-default"
-                      >
-                        {{
-                          percentValue === 0
-                            ? "-"
-                            : `${Math.abs(percentValue)}%`
-                        }}
+                      <span class="text-oc-text-400 text-sm font-medium cursor-default">
+                        {{ percentValue === 0 ? '-' : `${Math.abs(percentValue)}%` }}
                       </span>
                     </div>
                     <template v-if="percentTooltip" #popper>

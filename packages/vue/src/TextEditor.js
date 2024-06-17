@@ -1,3 +1,3 @@
-import TextEditor from "./Form/TextEditor/OcTextEditor.vue";
+import TextEditor from './Form/TextEditor/OcTextEditor.vue'
 
-export { TextEditor };
+export { TextEditor }

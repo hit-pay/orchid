@@ -1,38 +1,38 @@
 <script setup lang="ts">
-import { Dropdown, Icon, DropdownItem } from "@/orchidui";
+import { Dropdown, Icon, DropdownItem } from '@/orchidui'
 
 defineProps({
   modelValue: {
     type: Boolean,
-    default: false,
+    default: false
   },
   title: {
     type: String,
-    default: "Have a question?",
+    default: 'Have a question?'
   },
   info: {
     type: String,
-    default: "We're ready to guide you through anything you need!",
+    default: "We're ready to guide you through anything you need!"
   },
   confirmButtonProps: {
     type: Object,
-    default: () => ({}),
+    default: () => ({})
   },
   topMenu: {
     type: Array,
-    default: () => [],
+    default: () => []
   },
   bottomMenu: {
     type: Array,
-    default: () => [],
-  },
-});
+    default: () => []
+  }
+})
 
-defineEmits(["update:modelValue"]);
+defineEmits(['update:modelValue'])
 
 const popperOptions = {
-  arrowHidden: true,
-};
+  arrowHidden: true
+}
 </script>
 
 <template>
@@ -58,12 +58,7 @@ const popperOptions = {
               </span>
             </div>
 
-            <DropdownItem
-              v-for="(item, i) in group.items"
-              :key="i"
-              class="text-sm"
-              v-bind="item"
-            >
+            <DropdownItem v-for="(item, i) in group.items" :key="i" class="text-sm" v-bind="item">
               <template #badge>
                 <slot name="badge" />
               </template>
@@ -72,12 +67,7 @@ const popperOptions = {
 
           <div class="w-full border-t border-gray-200" />
 
-          <DropdownItem
-            v-for="(item, i) in bottomMenu"
-            :key="i"
-            class="text-sm"
-            v-bind="item"
-          >
+          <DropdownItem v-for="(item, i) in bottomMenu" :key="i" class="text-sm" v-bind="item">
             <template #badge>
               <slot name="badge" />
             </template>

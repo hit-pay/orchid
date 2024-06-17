@@ -1,18 +1,18 @@
 <script setup>
-import { Icon } from "@/orchidui";
+import { Icon } from '@/orchidui'
 defineProps({
   isExpanded: {
     type: Boolean,
-    default: true,
+    default: true
   },
   isExpandedSidebar: {
     type: Boolean,
-    default: false,
+    default: false
   },
   menu: {
-    type: Object,
-  },
-});
+    type: Object
+  }
+})
 </script>
 
 <template>
@@ -26,7 +26,7 @@ defineProps({
       class="text-oc-text-400 flex items-center rounded hover:bg-[var(--oc-sidebar-menu-hover)]"
       :class="{
         'font-medium bg-[var(--oc-sidebar-menu-active)] text-[var(--oc-sidebar-menu-active-text)]':
-          submenu.active,
+          submenu.active
       }"
     >
       <Icon
@@ -36,7 +36,7 @@ defineProps({
         class="flex z-[1] ml-5"
         :class="{
           'text-[var(--oc-sidebar-menu-active-icon)]': !submenu.active,
-          'text-[var(--oc-sidebar-menu-active-icon-active)]': submenu.active,
+          'text-[var(--oc-sidebar-menu-active-icon-active)]': submenu.active
         }"
         name="sidebar-submenu-icon"
       />

@@ -1,3 +1,3 @@
-import Criteria from "./OcCriteria.vue";
+import Criteria from './OcCriteria.vue'
 
-export { Criteria };
+export { Criteria }

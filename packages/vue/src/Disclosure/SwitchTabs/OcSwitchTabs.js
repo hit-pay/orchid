@@ -1,3 +1,3 @@
-import SwitchTabs from "./OcSwitchTabs.vue";
+import SwitchTabs from './OcSwitchTabs.vue'
 
-export { SwitchTabs };
+export { SwitchTabs }

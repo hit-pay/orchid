@@ -1,3 +1,3 @@
-import SandboxBanner from "./OcSandboxBanner.vue";
+import SandboxBanner from './OcSandboxBanner.vue'
 
-export { SandboxBanner };
+export { SandboxBanner }

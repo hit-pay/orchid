@@ -1,197 +1,197 @@
-const ASSETS_URL = "/templates/default/images/";
+const ASSETS_URL = '/templates/default/images/'
 
 const FOOTER_CONTENT_FORM = [
   {
-    type: "SectionItem",
+    type: 'SectionItem',
     props: {
-      title: "Colors",
-    },
+      title: 'Colors'
+    }
   },
   {
     name: [
       {
         props: {
-          label: "Background Color",
+          label: 'Background Color'
         },
-        key: "color_bg",
+        key: 'color_bg'
       },
       {
         props: {
-          label: "Text Color",
+          label: 'Text Color'
         },
-        key: "color_text",
-      },
+        key: 'color_text'
+      }
     ],
-    type: "Colors",
+    type: 'Colors'
   },
   {
-    name: "CopmanyDetail",
-    type: "Children",
-    icon: "pin-map",
-    label: "Company Detail",
+    name: 'CopmanyDetail',
+    type: 'Children',
+    icon: 'pin-map',
+    label: 'Company Detail',
     children: [
       {
-        type: "SectionItem",
+        type: 'SectionItem',
         props: {
-          title: "Footer Logo",
-          description: "Recommended size 640x640 pixels",
-        },
+          title: 'Footer Logo',
+          description: 'Recommended size 640x640 pixels'
+        }
       },
       {
-        type: "Images",
-        name: "footer_logo",
+        type: 'Images',
+        name: 'footer_logo',
         props: {
-          maxImages: 1,
-        },
+          maxImages: 1
+        }
       },
       {
-        type: "SectionItem",
+        type: 'SectionItem',
         props: {
-          title: "Content",
-        },
+          title: 'Content'
+        }
       },
       {
-        type: "TextArea",
-        name: "footer_content",
-      },
-    ],
+        type: 'TextArea',
+        name: 'footer_content'
+      }
+    ]
   },
   {
-    name: "PaymentLogo",
-    type: "Children",
-    icon: "bank-card",
-    label: "Payment Method Logo",
+    name: 'PaymentLogo',
+    type: 'Children',
+    icon: 'bank-card',
+    label: 'Payment Method Logo',
     children: [
       {
-        type: "SectionItem",
+        type: 'SectionItem',
         props: {
-          title: "Choose payment method",
-        },
+          title: 'Choose payment method'
+        }
       },
       {
         general: true,
-        name: "payment_methods",
-        type: "Select",
+        name: 'payment_methods',
+        type: 'Select',
         props: {
           multiple: true,
-          placeholder: "Select payment method",
+          placeholder: 'Select payment method',
           options: [
             {
-              label: "Atome",
-              value: "atome",
+              label: 'Atome',
+              value: 'atome'
             },
             {
-              label: "Shopeback",
-              value: "shopeback",
-            },
-          ],
-        },
-      },
-    ],
+              label: 'Shopeback',
+              value: 'shopeback'
+            }
+          ]
+        }
+      }
+    ]
   },
   {
-    name: "FooterLink1",
-    type: "Children",
-    icon: "align-top",
-    label: "Footer Link 1",
+    name: 'FooterLink1',
+    type: 'Children',
+    icon: 'align-top',
+    label: 'Footer Link 1',
     children: [
       {
-        type: "SectionItem",
+        type: 'SectionItem',
         props: {
-          title: "Title",
-        },
+          title: 'Title'
+        }
       },
       {
         general: true,
-        type: "Input",
-        name: "footer_link_1_title",
+        type: 'Input',
+        name: 'footer_link_1_title',
         props: {
-          placeholder: "Company",
-        },
+          placeholder: 'Company'
+        }
       },
       {
-        type: "SectionItem",
+        type: 'SectionItem',
         props: {
-          title: "Menus",
-        },
+          title: 'Menus'
+        }
       },
       {
         general: true,
-        name: "footer_link_1_menus",
-        type: "Menus",
-        noMenuIcon: ASSETS_URL + "no-menu-footer.png",
-      },
-    ],
+        name: 'footer_link_1_menus',
+        type: 'Menus',
+        noMenuIcon: ASSETS_URL + 'no-menu-footer.png'
+      }
+    ]
   },
   {
-    name: "FooterLink2",
-    type: "Children",
-    icon: "align-top",
-    label: "Footer Link 2",
+    name: 'FooterLink2',
+    type: 'Children',
+    icon: 'align-top',
+    label: 'Footer Link 2',
     children: [
       {
-        type: "SectionItem",
+        type: 'SectionItem',
         props: {
-          title: "Title",
-        },
+          title: 'Title'
+        }
       },
       {
         general: true,
-        type: "Input",
-        name: "footer_link_2_title",
+        type: 'Input',
+        name: 'footer_link_2_title',
         props: {
-          placeholder: "Company",
-        },
+          placeholder: 'Company'
+        }
       },
       {
-        type: "SectionItem",
+        type: 'SectionItem',
         props: {
-          title: "Menus",
-        },
+          title: 'Menus'
+        }
       },
       {
         general: true,
-        name: "footer_link_2_menus",
-        type: "Menus",
-        noMenuIcon: ASSETS_URL + "no-menu-footer.png",
-      },
-    ],
+        name: 'footer_link_2_menus',
+        type: 'Menus',
+        noMenuIcon: ASSETS_URL + 'no-menu-footer.png'
+      }
+    ]
   },
   {
-    name: "SocialMedia",
-    type: "Children",
-    icon: "facebook",
-    label: "Social Media",
+    name: 'SocialMedia',
+    type: 'Children',
+    icon: 'facebook',
+    label: 'Social Media',
     children: [
       {
-        type: "SectionItem",
+        type: 'SectionItem',
         props: {
-          title: "Title",
-        },
+          title: 'Title'
+        }
       },
       {
         general: true,
-        type: "Input",
-        name: "footer_social_title",
+        type: 'Input',
+        name: 'footer_social_title',
         props: {
-          placeholder: "Follow Us",
-        },
+          placeholder: 'Follow Us'
+        }
       },
       {
-        type: "SectionItem",
+        type: 'SectionItem',
         props: {
-          title: "Menus",
-        },
+          title: 'Menus'
+        }
       },
       {
         general: true,
-        name: "footer_social_menus",
-        type: "Menus",
-        variant: "social",
-        noMenuIcon: ASSETS_URL + "no-menu-footer.png",
-      },
-    ],
-  },
-];
+        name: 'footer_social_menus',
+        type: 'Menus',
+        variant: 'social',
+        noMenuIcon: ASSETS_URL + 'no-menu-footer.png'
+      }
+    ]
+  }
+]
 
-export { FOOTER_CONTENT_FORM };
+export { FOOTER_CONTENT_FORM }

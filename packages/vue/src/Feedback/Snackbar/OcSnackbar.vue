@@ -1,105 +1,104 @@
 <script setup>
-import { Icon, Button } from "@/orchidui";
-import { computed, nextTick, ref, watch } from "vue";
+import { Icon, Button } from '@/orchidui'
+import { computed, nextTick, ref, watch } from 'vue'
 
 const props = defineProps({
   modelValue: {
     type: Boolean,
-    default: true,
+    default: true
   },
   color: {
     type: String,
-    default: "default",
+    default: 'default'
   },
   content: {
     type: String,
-    default: "",
+    default: ''
   },
   icon: {
     type: String,
-    default: "filled-check",
+    default: 'filled-check'
   },
   showIcon: {
     type: Boolean,
-    default: true,
+    default: true
   },
   dismissible: {
     type: Boolean,
-    default: false,
+    default: false
   },
   isFloating: {
     type: Boolean,
-    default: false,
+    default: false
   },
   isRawHtml: {
     type: Boolean,
-    default: false,
+    default: false
   },
   position: {
     type: String,
-    default: "top-center",
+    default: 'top-center'
   },
   transitionName: {
     type: String,
-    default: "slide-from-top",
+    default: 'slide-from-top'
   },
   title: {
     type: String,
-    default: "",
+    default: ''
   },
   description: {
     type: String,
-    default: "",
+    default: ''
   },
   secondaryButton: {
     type: Object,
-    default: () => null,
+    default: () => null
   },
   primaryButton: {
     type: Object,
-    default: () => null,
+    default: () => null
   },
   size: {
     type: String,
-    default: "default",
-    validator: (value) => ["default", "big", "small"].includes(value),
-  },
-});
-defineEmits(["update:modelValue"]);
+    default: 'default',
+    validator: (value) => ['default', 'big', 'small'].includes(value)
+  }
+})
+defineEmits(['update:modelValue'])
 const colorClasses = Object.freeze({
-  default: "border-oc-success-200 bg-oc-success-50 text-oc-success-500",
-  primary: "border-oc-primary-200 bg-oc-primary-50 text-oc-primary-500",
-  error: "border-oc-error-200 bg-oc-error-50 text-oc-error-500",
-  warning: "border-oc-warning-200 bg-oc-warning-50 text-oc-warning-500",
-  gray: "border-oc-gray-300 bg-oc-gray-100 text-oc-gray-700",
-});
+  default: 'border-oc-success-200 bg-oc-success-50 text-oc-success-500',
+  primary: 'border-oc-primary-200 bg-oc-primary-50 text-oc-primary-500',
+  error: 'border-oc-error-200 bg-oc-error-50 text-oc-error-500',
+  warning: 'border-oc-warning-200 bg-oc-warning-50 text-oc-warning-500',
+  gray: 'border-oc-gray-300 bg-oc-gray-100 text-oc-gray-700'
+})
 const positionClasses = {
-  "top-center": "top-4",
-  "top-left": "top-4 left-4",
-  "top-right": "top-4 right-4",
-  "bottom-center": "bottom-4",
-  "bottom-left": "bottom-4 left-4",
-  "bottom-right": "bottom-4 right-4",
-};
+  'top-center': 'top-4',
+  'top-left': 'top-4 left-4',
+  'top-right': 'top-4 right-4',
+  'bottom-center': 'bottom-4',
+  'bottom-left': 'bottom-4 left-4',
+  'bottom-right': 'bottom-4 right-4'
+}
 const iconBgClasses = {
-  default: "bg-oc-success-100",
-  primary: "bg-oc-primary-100",
-  error: "bg-oc-error-100",
-  warning: "bg-oc-warning-100",
-  gray: "bg-oc-gray-200",
-};
-const snackBar = ref();
-const halfWindowWidth = ref();
-const isSmall = computed(() => props.size === "small");
-const isBig = computed(() => props.size === "big");
+  default: 'bg-oc-success-100',
+  primary: 'bg-oc-primary-100',
+  error: 'bg-oc-error-100',
+  warning: 'bg-oc-warning-100',
+  gray: 'bg-oc-gray-200'
+}
+const snackBar = ref()
+const halfWindowWidth = ref()
+const isSmall = computed(() => props.size === 'small')
+const isBig = computed(() => props.size === 'big')
 watch(
   () => props.modelValue,
   async () => {
-    await nextTick();
-    halfWindowWidth.value =
-      (document.body.clientWidth - snackBar.value.clientWidth) / 2;
-  },
-);
+    await nextTick()
+    halfWindowWidth.value = (document.body.clientWidth - snackBar.value.clientWidth) / 2
+  }
+)
 </script>
 
 <template>
@@ -115,15 +114,11 @@ watch(
           'gap-x-2 py-3 px-4 items-center': isSmall,
           'gap-x-5 pt-5 pb-6 px-5 items-start': isBig,
           'gap-x-4 py-4 px-5 items-center': !isBig && !isSmall,
-          '!pr-10': dismissible,
-        },
+          '!pr-10': dismissible
+        }
       ]"
       class="border rounded-lg flex shadow-sm snackbar relative"
-      :style="
-        isFloating && position.includes('center')
-          ? { left: halfWindowWidth + 'px' }
-          : ''
-      "
+      :style="isFloating && position.includes('center') ? { left: halfWindowWidth + 'px' } : ''"
     >
       <template v-if="showIcon">
         <div

@@ -1,19 +1,19 @@
-import { Theme, Dropdown, DropdownItem } from "@/orchidui";
-import { ref } from "vue";
+import { Theme, Dropdown, DropdownItem } from '@/orchidui'
+import { ref } from 'vue'
 
 export default {
   component: Dropdown,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const Default = {
   render: () => ({
     components: { Dropdown, Theme, DropdownItem },
     setup() {
-      const isDropdownOpened = ref(false);
+      const isDropdownOpened = ref(false)
       return {
-        isDropdownOpened,
-      };
+        isDropdownOpened
+      }
     },
     template: `
           <Theme>
@@ -35,6 +35,6 @@ export const Default = {
               </Dropdown>
             </div>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}

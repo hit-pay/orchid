@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { ListUrl, Icon, Dropdown } from "@/orchidui";
-import { ref } from "vue";
+import { ListUrl, Icon, Dropdown } from '@/orchidui'
+import { ref } from 'vue'
 
 defineProps({
   urls: {
     type: Array,
-    default: () => [],
+    default: () => []
   },
   title: String,
-  date: String,
-});
-defineEmits(["more"]);
-const isOpen = ref(false);
+  date: String
+})
+defineEmits(['more'])
+const isOpen = ref(false)
 </script>
 
 <template>
@@ -40,12 +40,7 @@ const isOpen = ref(false);
       </Dropdown>
     </div>
     <div v-if="urls?.length" class="flex flex-col gap-y-3">
-      <ListUrl
-        v-for="(url, i) in urls"
-        :key="i"
-        :title="url.title"
-        :url="url.url"
-      />
+      <ListUrl v-for="(url, i) in urls" :key="i" :title="url.title" :url="url.url" />
     </div>
   </div>
 </template>

@@ -1,3 +1,3 @@
-import RangeInput from "./OcRangeInput.vue";
+import RangeInput from './OcRangeInput.vue'
 
-export { RangeInput };
+export { RangeInput }

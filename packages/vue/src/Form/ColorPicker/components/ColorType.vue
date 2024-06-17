@@ -70,21 +70,21 @@
 defineProps({
   variant: String,
   mode: {
-    default: "gradient",
-    type: String,
+    default: 'gradient',
+    type: String
   },
-  gradientType: { default: "linear", type: String },
+  gradientType: { default: 'linear', type: String },
   iconClasses: {
     default: () => {
       return {
-        linear: "",
-        radial: "",
-      };
+        linear: '',
+        radial: ''
+      }
     },
-    type: Object,
+    type: Object
   },
-  modelValue: String,
-});
+  modelValue: String
+})
 
-defineEmits(["onChangeMode"]);
+defineEmits(['onChangeMode'])
 </script>

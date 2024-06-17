@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { Icon } from "@/orchidui";
-import { useSlots } from "vue";
+import { Icon } from '@/orchidui'
+import { useSlots } from 'vue'
 
-const slots = useSlots();
+const slots = useSlots()
 
-const hasSlot = (name) => !!slots[name];
+const hasSlot = (name) => !!slots[name]
 
 defineProps({
   isActive: Boolean,
@@ -13,8 +13,8 @@ defineProps({
   icon: String,
   iconClass: String,
   iconText: String,
-  iconTextClass: String,
-});
+  iconTextClass: String
+})
 </script>
 
 <template>

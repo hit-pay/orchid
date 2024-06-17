@@ -1,8 +1,8 @@
-import { Theme, Chip } from "@/orchidui";
+import { Theme, Chip } from '@/orchidui'
 export default {
   component: Chip,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const VariantColor = {
   render: () => ({
@@ -18,9 +18,9 @@ export const VariantColor = {
             <Chip label="error" variant="error"/>
             <Chip should-truncate-chip label="Label is long and should be truncated" variant="error"/>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}
 
 export const HasIcon = {
   render: () => ({
@@ -30,6 +30,6 @@ export const HasIcon = {
         <Chip label="Gray" variant="gray" icon="plus" />
         <Chip label="Success" variant="success" icon="check" icon-tooltip="Icon Tooltip" />
       </Theme>
-    `,
-  }),
-};
+    `
+  })
+}

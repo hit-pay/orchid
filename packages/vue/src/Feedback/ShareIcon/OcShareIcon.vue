@@ -1,14 +1,14 @@
 <script setup>
-import { Icon, Tooltip } from "@/orchidui";
+import { Icon, Tooltip } from '@/orchidui'
 
 defineProps({
   text: String,
   icon: String,
   isOnlyIcon: Boolean,
   tooltipOptions: {
-    type: Object,
-  },
-});
+    type: Object
+  }
+})
 </script>
 
 <template>

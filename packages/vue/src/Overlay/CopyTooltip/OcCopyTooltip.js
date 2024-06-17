@@ -1,3 +1,3 @@
-import CopyTooltip from "./OcCopyTooltip.vue";
+import CopyTooltip from './OcCopyTooltip.vue'
 
-export { CopyTooltip };
+export { CopyTooltip }

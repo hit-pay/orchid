@@ -1,45 +1,37 @@
-import { TableCell } from "@/orchidui";
+import { TableCell } from '@/orchidui'
 
 export default {
   component: TableCell,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 export const Default = {
   argTypes: {
     variant: {
-      control: "select",
-      options: [
-        "content",
-        "checkbox",
-        "chip",
-        "datetime",
-        "icon",
-        "image",
-        "empty",
-      ],
-    },
+      control: 'select',
+      options: ['content', 'checkbox', 'chip', 'datetime', 'icon', 'image', 'empty']
+    }
   },
   args: {
-    variant: "content",
+    variant: 'content',
     isSelected: false,
     isSimple: true,
     isLast: false,
     isCopy: false,
-    data: "",
+    data: '',
     isLoading: false,
     chipOptions: {},
     content: {
-      title: "",
-      description: "",
+      title: '',
+      description: ''
     },
-    datetime: "",
-    imageClass: "h-full",
+    datetime: '',
+    imageClass: 'h-full'
   },
 
   render: (args) => ({
     components: { TableCell },
     setup() {
-      return { args };
+      return { args }
     },
     template: `
           <div class="flex group/row">
@@ -56,6 +48,6 @@ export const Default = {
             <TableCell class="flex-1" v-bind="args" variant="checkbox"/>
             <TableCell class="flex-1" v-bind="args" variant="empty"/>
           </div>
-        `,
-  }),
-};
+        `
+  })
+}

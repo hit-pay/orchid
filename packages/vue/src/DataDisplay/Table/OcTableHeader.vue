@@ -1,31 +1,31 @@
 <script setup>
-import { computed } from "vue";
-import { Checkbox, Skeleton } from "@/orchidui";
+import { computed } from 'vue'
+import { Checkbox, Skeleton } from '@/orchidui'
 
 const Variants = {
-  TEXT: "text",
-  CHECKBOX: "checkbox",
-};
+  TEXT: 'text',
+  CHECKBOX: 'checkbox'
+}
 
 defineProps({
   variant: {
     type: String,
-    default: "text",
-    validator: (value) => ["text", "checkbox"].includes(value),
+    default: 'text',
+    validator: (value) => ['text', 'checkbox'].includes(value)
   },
   text: String,
   isPartial: Boolean,
   isChecked: Boolean,
   isSticky: Boolean,
-  isLoading: Boolean,
-});
+  isLoading: Boolean
+})
 defineEmits({
-  selectAll: [],
-});
+  selectAll: []
+})
 const variantClass = computed(() => ({
-  text: "px-4 py-3",
-  checkbox: "p-4 md:p-3",
-}));
+  text: 'px-4 py-3',
+  checkbox: 'p-4 md:p-3'
+}))
 </script>
 
 <template>
@@ -33,10 +33,7 @@ const variantClass = computed(() => ({
     class="whitespace-nowrap text-start uppercase text-oc-text-400 leading-[18px] text-xs font-medium bg-oc-gray-50 flex items-center gap-3"
     :class="variantClass[variant]"
   >
-    <Skeleton
-      v-if="isLoading"
-      class="rounded-full w-full overflow-hidden h-6"
-    />
+    <Skeleton v-if="isLoading" class="rounded-full w-full overflow-hidden h-6" />
     <template v-else>
       <slot v-if="variant === Variants.TEXT">{{ text }}</slot>
       <slot v-else>
@@ -47,11 +44,7 @@ const variantClass = computed(() => ({
             @update:model-value="$emit('selectAll', $event)"
           />
         </div>
-        <span
-          class="text-oc-text-500"
-          :class="isSticky ? 'hidden' : 'md:hidden'"
-          >Select all</span
-        >
+        <span class="text-oc-text-500" :class="isSticky ? 'hidden' : 'md:hidden'">Select all</span>
       </slot>
     </template>
   </div>

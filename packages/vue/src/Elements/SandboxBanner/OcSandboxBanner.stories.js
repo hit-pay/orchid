@@ -1,27 +1,27 @@
-import SandboxBanner from "./OcSandboxBanner.vue";
+import SandboxBanner from './OcSandboxBanner.vue'
 
 export default {
   component: SandboxBanner,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const Default = {
   args: {
-    title: "You are using test data. Real money won’t be charged",
+    title: 'You are using test data. Real money won’t be charged',
     chipProps: {
-      label: "Sandbox Banner",
-      variant: "light-red",
-    },
+      label: 'Sandbox Banner',
+      variant: 'light-red'
+    }
   },
   render: (args) => ({
     components: {
-      SandboxBanner,
+      SandboxBanner
     },
     setup() {
-      return { args };
+      return { args }
     },
     template: `
           <SandboxBanner :title="args.title" :chipProps="args.chipProps"/>
-        `,
-  }),
-};
+        `
+  })
+}

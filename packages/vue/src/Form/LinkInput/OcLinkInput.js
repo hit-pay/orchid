@@ -1,3 +1,3 @@
-import LinkInput from "./OcLinkInput.vue";
+import LinkInput from './OcLinkInput.vue'
 
-export { LinkInput };
+export { LinkInput }

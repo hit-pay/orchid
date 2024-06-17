@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { Icon, CopyTooltip } from "@/orchidui";
+import { Icon, CopyTooltip } from '@/orchidui'
 
 defineProps({
   title: String,
   url: String,
   isCopy: {
     type: Boolean,
-    default: true,
-  },
-});
+    default: true
+  }
+})
 </script>
 
 <template>

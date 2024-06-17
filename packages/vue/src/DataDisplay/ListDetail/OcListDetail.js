@@ -1,3 +1,3 @@
-import ListDetail from "./OcListDetail.vue";
+import ListDetail from './OcListDetail.vue'
 
-export { ListDetail };
+export { ListDetail }

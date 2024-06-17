@@ -1,39 +1,39 @@
-import { Theme, TextArea } from "@/orchidui";
-import { ref } from "vue";
+import { Theme, TextArea } from '@/orchidui'
+import { ref } from 'vue'
 
 export default {
   component: TextArea,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const Default = {
   argTypes: {
     labelIcon: {
-      control: "select",
-      options: ["", "question-mark"],
-    },
+      control: 'select',
+      options: ['', 'question-mark']
+    }
   },
   args: {
-    hint: "This is a hint text to help user.",
-    placeholder: "Placeholder",
-    label: "",
-    errorMessage: "",
+    hint: 'This is a hint text to help user.',
+    placeholder: 'Placeholder',
+    label: '',
+    errorMessage: '',
     rows: 5,
     autoResize: false,
     isDisabled: false,
     isRequired: false,
-    labelIcon: "",
-    tooltipText: "Tooltip text",
+    labelIcon: '',
+    tooltipText: 'Tooltip text',
     tooltipOptions: {
-      position: "top",
-      distance: 10,
-    },
+      position: 'top',
+      distance: 10
+    }
   },
   render: (args) => ({
     components: { Theme, TextArea },
     setup() {
-      const text = ref("");
-      return { text, args };
+      const text = ref('')
+      return { text, args }
     },
     template: `
           <Theme>
@@ -52,6 +52,6 @@ export const Default = {
                 :tooltip-text="args.tooltipText"
             />
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}

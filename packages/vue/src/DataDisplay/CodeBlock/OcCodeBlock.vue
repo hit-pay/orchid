@@ -1,33 +1,33 @@
 <script setup lang="ts">
-import { getHighlighter } from "shikiji";
-import { onMounted, ref } from "vue";
-import customTheme from "./customTheme";
-import jsonLang from "shikiji/dist/langs/json.mjs";
+import { getHighlighter } from 'shikiji'
+import { onMounted, ref } from 'vue'
+import customTheme from './customTheme'
+import jsonLang from 'shikiji/dist/langs/json.mjs'
 
 const props = defineProps({
   jsonObject: {
     type: String,
-    required: true,
+    required: true
   },
   lang: {
     type: String,
-    default: "json",
-  },
-});
+    default: 'json'
+  }
+})
 
-const json = ref();
+const json = ref()
 
 onMounted(async () => {
   const highlighter = await getHighlighter({
     themes: [customTheme],
-    langs: [jsonLang],
-  });
+    langs: [jsonLang]
+  })
 
   json.value = highlighter.codeToHtml(props.jsonObject, {
-    theme: "Custom Theme",
-    lang: props.lang,
-  });
-});
+    theme: 'Custom Theme',
+    lang: props.lang
+  })
+})
 </script>
 
 <template>
@@ -37,7 +37,7 @@ onMounted(async () => {
 .code-block {
   * code,
   * pre {
-    font-family: "Fira Code", monospace;
+    font-family: 'Fira Code', monospace;
     font-size: 12px;
   }
 }

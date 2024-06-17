@@ -1,35 +1,35 @@
-import { Theme, Sidebar } from "@/orchidui";
+import { Theme, Sidebar } from '@/orchidui'
 
 import {
   PAYMENTS_SIDEBAR_GROUP,
   POS_SIDEBAR_GROUP,
-  ONLINE_STORE_SIDEBAR_GROUP,
-} from "./HitpaySidebar.sample.js";
-import OcAccountSetup from "./OcAccountSetup.vue";
+  ONLINE_STORE_SIDEBAR_GROUP
+} from './HitpaySidebar.sample.js'
+import OcAccountSetup from './OcAccountSetup.vue'
 
 export default {
   component: Sidebar,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const Default = {
   argTypes: {
     icon: {
-      control: "select",
-      options: ["", "circle"],
-    },
+      control: 'select',
+      options: ['', 'circle']
+    }
   },
   args: {
     isExpanded: true,
     payment_sidebar_menu: PAYMENTS_SIDEBAR_GROUP,
     pos_sidebar_menu: POS_SIDEBAR_GROUP,
     online_store_sidebar_menu: ONLINE_STORE_SIDEBAR_GROUP,
-    progress: 80,
+    progress: 80
   },
   render: (args) => ({
     components: { Sidebar, Theme, OcAccountSetup },
     setup() {
-      return { args };
+      return { args }
     },
     template: `
           <Theme class="layout-payment mb-8">
@@ -49,28 +49,28 @@ export const Default = {
               </template>
             </Sidebar>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}
 
 export const AllSidebar = {
   argTypes: {
     icon: {
-      control: "select",
-      options: ["", "circle"],
-    },
+      control: 'select',
+      options: ['', 'circle']
+    }
   },
   args: {
     isExpanded: true,
     payment_sidebar_menu: PAYMENTS_SIDEBAR_GROUP,
     pos_sidebar_menu: POS_SIDEBAR_GROUP,
     online_store_sidebar_menu: ONLINE_STORE_SIDEBAR_GROUP,
-    progress: 80,
+    progress: 80
   },
   render: (args) => ({
     components: { Sidebar, Theme, OcAccountSetup },
     setup() {
-      return { args };
+      return { args }
     },
     template: `
           <Theme class="layout-payment mb-8">
@@ -158,6 +158,6 @@ export const AllSidebar = {
               </template>
             </Sidebar>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}

@@ -1,3 +1,3 @@
-import { defineAsyncComponent } from "vue";
-const LineChart = defineAsyncComponent(() => import("./OcLineChart.vue"));
-export { LineChart };
+import { defineAsyncComponent } from 'vue'
+const LineChart = defineAsyncComponent(() => import('./OcLineChart.vue'))
+export { LineChart }

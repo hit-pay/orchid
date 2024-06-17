@@ -1,9 +1,9 @@
-import LineChart from "./OcLineChart.vue";
+import LineChart from './OcLineChart.vue'
 
 export default {
   component: LineChart,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const Line = {
   args: {
@@ -23,7 +23,7 @@ export const Line = {
       { value: 2324, percent: -5 },
       { value: 1218, percent: 6 },
       { value: 2135, percent: -34 },
-      { value: 1147, percent: 7 },
+      { value: 1147, percent: 7 }
     ],
     labelData: [
       "NOV'22",
@@ -37,22 +37,22 @@ export const Line = {
       "AUG'23",
       "SEP'23",
       "OCT'23",
-      "NOV'23",
+      "NOV'23"
     ],
     tooltipValueFormatter: (value) => {
-      const currency = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "sgd",
-        maximumFractionDigits: 2,
-      });
+      const currency = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'sgd',
+        maximumFractionDigits: 2
+      })
 
-      return currency.format(value);
-    },
+      return currency.format(value)
+    }
   },
   render: (args) => ({
     components: { LineChart },
     setup() {
-      return { args };
+      return { args }
     },
     template: `
           <div>
@@ -66,6 +66,6 @@ export const Line = {
                 :tooltip-value-formatter="args.tooltipValueFormatter"
             />
           </div>
-        `,
-  }),
-};
+        `
+  })
+}

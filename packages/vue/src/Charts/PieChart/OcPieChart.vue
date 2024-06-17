@@ -17,10 +17,7 @@
             :class="{ 'opacity-30': item.hide }"
             @click="toggleLegendName(item)"
           >
-            <div
-              class="w-3 h-3 rounded-full"
-              :style="{ background: item.itemStyle.color }"
-            />
+            <div class="w-3 h-3 rounded-full" :style="{ background: item.itemStyle.color }" />
             <Icon v-if="item.icon" :name="item.icon" width="32" height="32" />
             <div v-else class="text-sm font-medium text-oc-text-500">
               {{ item.name }}
@@ -48,9 +45,9 @@
 </template>
 
 <script setup>
-import { Tooltip, Icon } from "@/orchidui";
-import { computed, ref } from "vue";
-import { useChart } from "@/orchidui/composables/useChart.js";
+import { Tooltip, Icon } from '@/orchidui'
+import { computed, ref } from 'vue'
+import { useChart } from '@/orchidui/composables/useChart.js'
 
 const props = defineProps({
   showTooltip: Boolean,
@@ -61,26 +58,26 @@ const props = defineProps({
   tooltipValueFormatter: Function,
   additionalOptions: {
     type: Object,
-    default: () => ({}),
-  },
-});
+    default: () => ({})
+  }
+})
 
 const options = computed(() => ({
   legend: {
-    show: false,
+    show: false
   },
   tooltip: {
     show: props.showTooltip,
     padding: 0,
     formatter: (params) => {
       if (props.tooltipFormatter) {
-        return props.tooltipFormatter(params);
+        return props.tooltipFormatter(params)
       }
 
-      let value = params.value;
+      let value = params.value
 
       if (props.tooltipValueFormatter) {
-        value = props.tooltipValueFormatter(value);
+        value = props.tooltipValueFormatter(value)
       }
 
       return `
@@ -96,51 +93,51 @@ const options = computed(() => ({
             </div>
         </div>
 
-      `;
-    },
+      `
+    }
   },
   series: [
     {
-      name: "Payment by",
-      type: "pie",
-      radius: "80%",
+      name: 'Payment by',
+      type: 'pie',
+      radius: '80%',
       data: props.chartData,
       label: {
-        show: false,
+        show: false
       },
       emphasis: {
         itemStyle: {
           shadowBlur: 10,
           shadowOffsetX: 0,
-          shadowColor: "rgba(0, 0, 0, 0.5)",
-        },
-      },
-    },
+          shadowColor: 'rgba(0, 0, 0, 0.5)'
+        }
+      }
+    }
   ],
   grid: {
     show: props.showGrid,
     right: 0,
     left: 0,
-    top: "10px",
+    top: '10px',
     bottom: 0,
-    containLabel: true,
+    containLabel: true
   },
-  ...props.additionalOptions,
-}));
-const pieChart = ref();
+  ...props.additionalOptions
+}))
+const pieChart = ref()
 
-const { chart } = useChart(pieChart, options);
+const { chart } = useChart(pieChart, options)
 
 const toggleLegendName = (item) => {
   chart.value.dispatchAction({
-    type: "legendToggleSelect",
-    name: item.name,
-  });
+    type: 'legendToggleSelect',
+    name: item.name
+  })
 
-  item.hide = !item.hide;
-};
+  item.hide = !item.hide
+}
 
 defineExpose({
-  toggleLegendName,
-});
+  toggleLegendName
+})
 </script>

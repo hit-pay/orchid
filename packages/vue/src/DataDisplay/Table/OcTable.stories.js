@@ -1,31 +1,20 @@
-import {
-  Theme,
-  Table,
-  Chip,
-  Icon,
-  Toggle,
-  TableCellContent,
-  TableCell,
-} from "@/orchidui";
-import TextEditor from "../../Form/TextEditor/OcTextEditor.vue";
+import { Theme, Table, Chip, Icon, Toggle, TableCellContent, TableCell } from '@/orchidui'
+import TextEditor from '../../Form/TextEditor/OcTextEditor.vue'
 
-import { ref } from "vue";
-import {
-  TableOptions,
-  StickyTableOptions,
-} from "../../data/TableOptions.sample";
+import { ref } from 'vue'
+import { TableOptions, StickyTableOptions } from '../../data/TableOptions.sample'
 
 export default {
   component: Table,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const Default = {
   args: {
     options: TableOptions,
     isLoading: false,
     isSticky: false,
-    loadingRows: 10,
+    loadingRows: 10
   },
   render: (args) => ({
     components: {
@@ -34,16 +23,16 @@ export const Default = {
       Icon,
       Toggle,
       Chip,
-      TableCellContent,
+      TableCellContent
     },
     setup() {
-      const selectedRows = ref([]);
+      const selectedRows = ref([])
       const onClickRow = (item) => {
-        console.log("on click row", item);
-      };
+        console.log('on click row', item)
+      }
 
-      const rowClass = (r, i) => `z-[${100 - i}]`;
-      return { StickyTableOptions, args, selectedRows, onClickRow, rowClass };
+      const rowClass = (r, i) => `z-[${100 - i}]`
+      return { StickyTableOptions, args, selectedRows, onClickRow, rowClass }
     },
     template: `
           <Theme>
@@ -69,15 +58,15 @@ export const Default = {
               </template>
             </Table>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}
 
 export const ExtraContent = {
   args: {
     options: TableOptions,
     isLoading: false,
-    loadingRows: 10,
+    loadingRows: 10
   },
   render: (args) => ({
     components: {
@@ -88,14 +77,14 @@ export const ExtraContent = {
       Chip,
       TableCellContent,
       TableCell,
-      TextEditor,
+      TextEditor
     },
     setup() {
-      const selectedRows = ref([]);
+      const selectedRows = ref([])
       const onClickRow = (item) => {
-        console.log("on click row", item);
-      };
-      return { args, selectedRows, onClickRow };
+        console.log('on click row', item)
+      }
+      return { args, selectedRows, onClickRow }
     },
     template: `
           <Theme>
@@ -136,6 +125,6 @@ export const ExtraContent = {
               </template>
             </Table>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}

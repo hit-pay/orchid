@@ -1,28 +1,28 @@
-import { Theme, Checkbox } from "@/orchidui";
-import { ref } from "vue";
+import { Theme, Checkbox } from '@/orchidui'
+import { ref } from 'vue'
 
 export default {
   component: Checkbox,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const Default = {
   args: {
     errorMessage: false,
     isPartial: false,
     isDisabled: false,
-    label: "Text",
-    topLabel: "Text",
-    hint: "Text",
+    label: 'Text',
+    topLabel: 'Text',
+    hint: 'Text'
   },
   render: (args) => ({
     components: { Checkbox, Theme },
     setup() {
-      const value = ref(false);
+      const value = ref(false)
       return {
         value,
-        args,
-      };
+        args
+      }
     },
     template: `
           <Theme>
@@ -47,9 +47,9 @@ export const Default = {
                 {{ value }}
               </div>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}
 export const Variants = {
   render: () => ({
     components: { Checkbox, Theme },
@@ -67,6 +67,6 @@ export const Variants = {
               <Checkbox is-partial disabled/>
             </div>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}

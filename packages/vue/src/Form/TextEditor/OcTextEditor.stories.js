@@ -1,51 +1,51 @@
-import { Theme } from "@/orchidui";
-import TextEditor from "./OcTextEditor.vue";
-import { ref } from "vue";
+import { Theme } from '@/orchidui'
+import TextEditor from './OcTextEditor.vue'
+import { ref } from 'vue'
 
 export default {
   component: TextEditor,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 export const Default = {
   argTypes: {
     variant: {
-      control: "select",
-      options: ["default", "text-only"],
-    },
+      control: 'select',
+      options: ['default', 'text-only']
+    }
   },
   args: {
-    label: "Label",
+    label: 'Label',
     isRequired: true,
     fontSizes: [
       {
-        label: "Default",
-        value: "14px",
+        label: 'Default',
+        value: '14px'
       },
       {
-        label: "Medium",
-        value: "16px",
+        label: 'Medium',
+        value: '16px'
       },
       {
-        label: "Large",
-        value: "18px",
+        label: 'Large',
+        value: '18px'
       },
       {
-        label: "Extra Large",
-        value: "20px",
-      },
+        label: 'Extra Large',
+        value: '20px'
+      }
     ],
-    initialFontSize: "14px",
-    variant: "default",
-    placeholder: "Placeholder",
+    initialFontSize: '14px',
+    variant: 'default',
+    placeholder: 'Placeholder'
   },
   render: (args) => ({
     components: { TextEditor, Theme },
     setup() {
-      const modelValue = ref("default model value");
+      const modelValue = ref('default model value')
       const onUpdateImage = (base64) => {
         // console.log(base64);
-      };
-      return { args, modelValue, onUpdateImage };
+      }
+      return { args, modelValue, onUpdateImage }
     },
     template: `
           <Theme>
@@ -55,6 +55,6 @@ export const Default = {
               <div v-html="modelValue"/>
             </div>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}

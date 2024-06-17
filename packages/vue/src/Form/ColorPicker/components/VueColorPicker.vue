@@ -5,10 +5,7 @@
     :cp-theme="theme"
     :class="disabled ? 'ck-cp-disabled ' : ''"
   >
-    <div
-      v-if="variant == 'gradient'"
-      class="flex justify-end border-b h-[46px] relative mt-[-5px]"
-    >
+    <div v-if="variant == 'gradient'" class="flex justify-end border-b h-[46px] relative mt-[-5px]">
       <ColorType
         class="mr-auto"
         :variant="variant"
@@ -20,10 +17,7 @@
       />
     </div>
 
-    <div
-      v-if="mode == 'gradient' && variant == 'gradient'"
-      class="grid items-center mb-5"
-    >
+    <div v-if="mode == 'gradient' && variant == 'gradient'" class="grid items-center mb-5">
       <GradientBar
         :gradientType="gradientType"
         @onAddColor="addColor"
@@ -73,25 +67,14 @@
       </button>
     </div>
 
-    <SliderOpacity
-      v-if="showAlpha"
-      v-model="opacity"
-      @onInput="setOpacity($event.target.value)"
-    />
+    <SliderOpacity v-if="showAlpha" v-model="opacity" @onInput="setOpacity($event.target.value)" />
 
     <div v-show="false" id="ck-cp-target-background"></div>
 
     <div class="flex gap-3">
-      <SelectColorFormat
-        :model-value="inputType"
-        @update:model-value="handleChangeInputType"
-      />
+      <SelectColorFormat :model-value="inputType" @update:model-value="handleChangeInputType" />
       <div class="w-full flex gap-3" v-if="isReady && showInputSet">
-        <InputHex
-          v-if="inputType == 'HEX'"
-          v-model="hexVal"
-          @update:model-value="applyHex"
-        />
+        <InputHex v-if="inputType == 'HEX'" v-model="hexVal" @update:model-value="applyHex" />
         <InputRgbHsl
           v-if="inputType == 'RGB'"
           :rgb-value="colorList.find((item) => item.select == true)"
@@ -103,18 +86,11 @@
           :hsl-value="HSL"
           @update-hsl-value="handleHSLInput"
         />
-        <InputOpacity
-          v-if="showAlpha"
-          v-model="opacity"
-          @update:model-value="setOpacity($event)"
-        />
+        <InputOpacity v-if="showAlpha" v-model="opacity" @update:model-value="setOpacity($event)" />
       </div>
     </div>
     <div class="text-oc-text-400 text-sm my-3">Last used</div>
-    <div
-      v-if="localColorList.length > 0 && showColorList"
-      class="ck-cp-local-color-conatiner"
-    >
+    <div v-if="localColorList.length > 0 && showColorList" class="ck-cp-local-color-conatiner">
       <div
         v-for="color in localColorListFiltered"
         :key="`color-${color}`"
@@ -127,28 +103,20 @@
 </template>
 
 <script setup>
-import {
-  onMounted,
-  ref,
-  reactive,
-  provide,
-  watch,
-  nextTick,
-  computed,
-} from "vue";
+import { onMounted, ref, reactive, provide, watch, nextTick, computed } from 'vue'
 
-import InputHex from "./input/InputHex.vue";
-import InputRgbHsl from "./input/InputRgbHsl.vue";
-import InputOpacity from "./input/InputOpacity.vue";
-import SelectColorFormat from "./input/SelectColorFormat.vue";
-import SliderOpacity from "./input/SliderOpacity.vue";
-import GradientBar from "./input/SliderGradient.vue";
-import PickerHue from "./input/SliderHue.vue";
+import InputHex from './input/InputHex.vue'
+import InputRgbHsl from './input/InputRgbHsl.vue'
+import InputOpacity from './input/InputOpacity.vue'
+import SelectColorFormat from './input/SelectColorFormat.vue'
+import SliderOpacity from './input/SliderOpacity.vue'
+import GradientBar from './input/SliderGradient.vue'
+import PickerHue from './input/SliderHue.vue'
 
-import GradientSettings from "./GradientSettings.vue";
-import PickerWrap from "./PickerWrap.vue";
+import GradientSettings from './GradientSettings.vue'
+import PickerWrap from './PickerWrap.vue'
 
-import ColorType from "./ColorType.vue";
+import ColorType from './ColorType.vue'
 
 import {
   hex8ToRgba,
@@ -160,17 +128,17 @@ import {
   rgb2Hex,
   rgbToHsl,
   rgbToHue,
-  rgbaToHex8,
-} from "./converters";
+  rgbaToHex8
+} from './converters'
 
 const props = defineProps({
   modelValue: {
-    default: "",
-    type: String,
+    default: '',
+    type: String
   },
-  type: { default: "HEX8", type: String },
-  inputType: { default: "HEX", type: String },
-  theme: { default: "light", type: String },
+  type: { default: 'HEX8', type: String },
+  inputType: { default: 'HEX', type: String },
+  theme: { default: 'light', type: String },
   showColorList: { default: true, type: Boolean },
   showEyeDrop: { default: true, type: Boolean },
   showAlpha: { default: true, type: Boolean },
@@ -180,384 +148,367 @@ const props = defineProps({
   iconClasses: {
     default: () => {
       return {
-        linear: "",
-        radial: "",
-        ruler: "",
-        eyeDroper: "",
-        inputMenu: "",
-        save: "",
-        delete: "",
-      };
+        linear: '',
+        radial: '',
+        ruler: '',
+        eyeDroper: '',
+        inputMenu: '',
+        save: '',
+        delete: ''
+      }
     },
-    type: Object,
+    type: Object
   },
   variant: {
     type: String,
-    default: "solid",
+    default: 'solid'
   },
-  lastUsedColors: Array,
-});
+  lastUsedColors: Array
+})
 
-const mode = ref(props.variant == "gradient" ? "gradient" : "solid");
+const mode = ref(props.variant == 'gradient' ? 'gradient' : 'solid')
 
-const pickerTemplateRef = ref(null);
+const pickerTemplateRef = ref(null)
 
-const emits = defineEmits(["update:modelValue", "last-used-pick"]);
-const emittedValue = ref(props.modelValue);
+const emits = defineEmits(['update:modelValue', 'last-used-pick'])
+const emittedValue = ref(props.modelValue)
 const emitUpdateModelValue = (value) => {
-  emittedValue.value = value;
+  emittedValue.value = value
   if (isReady.value) {
-    emits("update:modelValue", value);
+    emits('update:modelValue', value)
   }
-};
+}
 
 const colorList = ref([
   { id: 1, r: 68, g: 71, b: 119, a: 100, percent: 0, hue: 0, select: true },
-  { id: 2, r: 0, g: 0, b: 255, a: 100, percent: 100, hue: 0, select: false },
-]);
+  { id: 2, r: 0, g: 0, b: 255, a: 100, percent: 100, hue: 0, select: false }
+])
 
-const localColorList = ref(props.lastUsedColors);
+const localColorList = ref(props.lastUsedColors)
 
 watch(
   () => props.lastUsedColors,
   () => {
-    localColorList.value = props.lastUsedColors;
+    localColorList.value = props.lastUsedColors
   },
   {
-    deep: true,
-  },
-);
+    deep: true
+  }
+)
 
 const localColorListFiltered = computed(() => {
-  if (props.variant !== "gradient") {
-    return localColorList.value.filter(
-      (c) => !c.includes("linear") && !c.includes("radial"),
-    );
+  if (props.variant !== 'gradient') {
+    return localColorList.value.filter((c) => !c.includes('linear') && !c.includes('radial'))
   }
-  return localColorList.value;
-});
+  return localColorList.value
+})
 
-const isEyeDropperUsing = ref(false);
-const gradientType = ref("linear");
+const isEyeDropperUsing = ref(false)
+const gradientType = ref('linear')
 const gradientAngle = reactive({
   angle: 90,
   percentageX: 50,
-  percentageY: 50,
-});
+  percentageY: 50
+})
 
-const hexVal = ref("");
-const inputType = ref(props.inputType);
-const isReady = ref(false);
-const opacitySlider = ref();
-const gradientBar = ref();
-const canvas = ref();
-const pickerWrap = ref();
-const pickerPointer = ref();
+const hexVal = ref('')
+const inputType = ref(props.inputType)
+const isReady = ref(false)
+const opacitySlider = ref()
+const gradientBar = ref()
+const canvas = ref()
+const pickerWrap = ref()
+const pickerPointer = ref()
 
 const HSL = reactive({
   h: 0,
   s: 0,
-  l: 0,
-});
+  l: 0
+})
 
-provide("gradientBar", gradientBar);
-provide("canvas", canvas);
-provide("pickerWrap", pickerWrap);
-provide("pickerPointer", pickerPointer);
-provide("opacitySlider", opacitySlider);
+provide('gradientBar', gradientBar)
+provide('canvas', canvas)
+provide('pickerWrap', pickerWrap)
+provide('pickerPointer', pickerPointer)
+provide('opacitySlider', opacitySlider)
 
-let divX = 0;
-let divY = 0;
-let offsetX = 0;
-let offsetY = 0;
-let BottomPoint = 0;
-let RightPoint = 0;
+let divX = 0
+let divY = 0
+let offsetX = 0
+let offsetY = 0
+let BottomPoint = 0
+let RightPoint = 0
 
 const handlePickerStartOnMouseDown = (event) => {
-  if (!pickerWrap.value || !pickerPointer.value) return;
+  if (!pickerWrap.value || !pickerPointer.value) return
 
-  BottomPoint =
-    pickerWrap.value.offsetHeight - pickerPointer.value.offsetHeight;
-  RightPoint = pickerWrap.value.offsetWidth - pickerPointer.value.offsetWidth;
+  BottomPoint = pickerWrap.value.offsetHeight - pickerPointer.value.offsetHeight
+  RightPoint = pickerWrap.value.offsetWidth - pickerPointer.value.offsetWidth
 
-  offsetX = event.clientX - event.target.getBoundingClientRect().left;
-  offsetY = event.clientY - event.target.getBoundingClientRect().top;
+  offsetX = event.clientX - event.target.getBoundingClientRect().left
+  offsetY = event.clientY - event.target.getBoundingClientRect().top
 
-  divX = offsetX - pickerPointer.value.offsetWidth / 2;
-  divY = offsetY - pickerPointer.value.offsetHeight / 2;
+  divX = offsetX - pickerPointer.value.offsetWidth / 2
+  divY = offsetY - pickerPointer.value.offsetHeight / 2
 
-  pickerPointer.value.style.left = `${divX}px`;
-  pickerPointer.value.style.top = `${divY}px`;
+  pickerPointer.value.style.left = `${divX}px`
+  pickerPointer.value.style.top = `${divY}px`
 
-  updatePickerPosition(false);
-  onChangeSetToHexValue();
+  updatePickerPosition(false)
+  onChangeSetToHexValue()
 
-  window.addEventListener("mousemove", handlePickerOnMouseMove);
-  window.addEventListener("mouseup", handlePickerOnMouseUp);
-};
+  window.addEventListener('mousemove', handlePickerOnMouseMove)
+  window.addEventListener('mouseup', handlePickerOnMouseUp)
+}
 
 const handlePickerOnMouseMove = (event) => {
-  event.preventDefault();
-  const client = pickerWrap.value.getBoundingClientRect();
+  event.preventDefault()
+  const client = pickerWrap.value.getBoundingClientRect()
 
-  const newX =
-    event.clientX - client.left - pickerPointer.value.offsetWidth / 2;
-  const newY =
-    event.clientY - client.top - pickerPointer.value.offsetHeight / 2;
+  const newX = event.clientX - client.left - pickerPointer.value.offsetWidth / 2
+  const newY = event.clientY - client.top - pickerPointer.value.offsetHeight / 2
 
   if (newX >= 0 && newX <= RightPoint) {
-    divX = newX;
-    pickerPointer.value.style.left = `${newX}px`;
+    divX = newX
+    pickerPointer.value.style.left = `${newX}px`
   } else if (0 > newX) {
-    divX = 0;
-    pickerPointer.value.style.left = `${0}px`;
+    divX = 0
+    pickerPointer.value.style.left = `${0}px`
   } else if (newX > RightPoint) {
-    divX = RightPoint;
-    pickerPointer.value.style.left = `${RightPoint}px`;
+    divX = RightPoint
+    pickerPointer.value.style.left = `${RightPoint}px`
   }
 
   if (newY >= 0 && newY <= BottomPoint) {
-    divY = newY;
-    pickerPointer.value.style.top = `${newY}px`;
+    divY = newY
+    pickerPointer.value.style.top = `${newY}px`
   } else if (0 > newY) {
-    divY = 0;
-    pickerPointer.value.style.top = `${0}px`;
+    divY = 0
+    pickerPointer.value.style.top = `${0}px`
   } else if (newY > BottomPoint) {
-    divY = BottomPoint;
-    pickerPointer.value.style.top = `${BottomPoint}px`;
+    divY = BottomPoint
+    pickerPointer.value.style.top = `${BottomPoint}px`
   }
-  updatePickerPosition(false);
-  onChangeSetToHexValue();
-};
+  updatePickerPosition(false)
+  onChangeSetToHexValue()
+}
 
 const handlePickerOnMouseUp = () => {
-  window.removeEventListener("mousemove", handlePickerOnMouseMove);
-  window.removeEventListener("mouseup", handlePickerOnMouseUp);
-};
+  window.removeEventListener('mousemove', handlePickerOnMouseMove)
+  window.removeEventListener('mouseup', handlePickerOnMouseUp)
+}
 
 const updatePickerPosition = (isNotUpdate) => {
   if (!isNotUpdate) {
-    let SL = calculateSL();
-    const val = hslToRgb(hue.value, SL.s, SL.l);
+    let SL = calculateSL()
+    const val = hslToRgb(hue.value, SL.s, SL.l)
     if (val) {
       if (isReady.value) {
-        let colorItem = colorList.value.find((item) => item.select == true);
+        let colorItem = colorList.value.find((item) => item.select == true)
         if (colorItem) {
-          colorItem.r = val.r;
-          colorItem.g = val.g;
-          colorItem.b = val.b;
+          colorItem.r = val.r
+          colorItem.g = val.g
+          colorItem.b = val.b
         }
       }
-      setSliderOpacityColor();
-      setGradientBarColor();
+      setSliderOpacityColor()
+      setGradientBarColor()
     }
   }
-};
+}
 
 // HUE FONKSİYONLARI
-const hue = ref(0);
+const hue = ref(0)
 
 const setHue = async (isUpdate) => {
-  const { rgb } = hsl2Hex(hue.value, 100, 50);
-  redrawTheCanvas(rgb);
+  const { rgb } = hsl2Hex(hue.value, 100, 50)
+  redrawTheCanvas(rgb)
   setTimeout(() => {
-    updatePickerPosition(isUpdate);
-    onChangeSetToHexValue();
-  }, 0);
-};
+    updatePickerPosition(isUpdate)
+    onChangeSetToHexValue()
+  }, 0)
+}
 
 const calculateSL = () => {
-  let obj = { s: 0, l: 0 };
+  let obj = { s: 0, l: 0 }
 
-  let rightLine =
-    pickerWrap.value.offsetWidth - pickerPointer.value.offsetWidth;
-  let bottomLine =
-    pickerWrap.value.offsetHeight - pickerPointer.value.offsetHeight;
-  let x = parseInt(pickerPointer.value.style.left);
-  let y = parseInt(pickerPointer.value.style.top);
+  let rightLine = pickerWrap.value.offsetWidth - pickerPointer.value.offsetWidth
+  let bottomLine = pickerWrap.value.offsetHeight - pickerPointer.value.offsetHeight
+  let x = parseInt(pickerPointer.value.style.left)
+  let y = parseInt(pickerPointer.value.style.top)
 
-  let hsv_value = 1 - y / bottomLine;
-  let hsv_saturation = x / rightLine;
+  let hsv_value = 1 - y / bottomLine
+  let hsv_saturation = x / rightLine
 
-  obj.l = (hsv_value / 2) * (2 - hsv_saturation);
-  obj.s = (hsv_value * hsv_saturation) / (1 - Math.abs(2 * obj.l - 1));
+  obj.l = (hsv_value / 2) * (2 - hsv_saturation)
+  obj.s = (hsv_value * hsv_saturation) / (1 - Math.abs(2 * obj.l - 1))
 
   if (Number.isNaN(obj.s)) {
-    obj.s = obj.l;
+    obj.s = obj.l
   }
 
-  obj.l = obj.l > 1 ? 1 : obj.l;
-  obj.s = obj.s > 1 ? 1 : obj.s;
-  return obj;
-};
+  obj.l = obj.l > 1 ? 1 : obj.l
+  obj.s = obj.s > 1 ? 1 : obj.s
+  return obj
+}
 
 const findColorCoordinates = () => {
-  const targetColor = colorList.value.find((item) => item.select == true);
+  const targetColor = colorList.value.find((item) => item.select == true)
 
   if (targetColor) {
-    const { l, s } = rgbToHsl(targetColor.r, targetColor.g, targetColor.b);
-    let lightness = l;
-    let saturation = s;
+    const { l, s } = rgbToHsl(targetColor.r, targetColor.g, targetColor.b)
+    let lightness = l
+    let saturation = s
 
     if (Number.isNaN(saturation)) {
-      saturation = lightness;
+      saturation = lightness
     }
 
-    let coordinates = { x: 0, y: 0 };
-    let rightLine =
-      pickerWrap.value.offsetWidth - pickerPointer.value.offsetWidth;
-    let bottomLine =
-      pickerWrap.value.offsetHeight - pickerPointer.value.offsetHeight;
+    let coordinates = { x: 0, y: 0 }
+    let rightLine = pickerWrap.value.offsetWidth - pickerPointer.value.offsetWidth
+    let bottomLine = pickerWrap.value.offsetHeight - pickerPointer.value.offsetHeight
 
     const [posx_inv, posy_inv] =
       2 * lightness - 1 < 0
         ? [
             (rightLine * 2 * saturation) / (1 + saturation),
-            bottomLine * (1 - lightness * (1 + saturation)),
+            bottomLine * (1 - lightness * (1 + saturation))
           ]
         : [
             (-rightLine * 2 * (lightness - 1) * saturation) /
               (lightness + saturation - lightness * saturation),
-            bottomLine * (lightness - 1) * (saturation - 1),
-          ];
+            bottomLine * (lightness - 1) * (saturation - 1)
+          ]
 
-    coordinates.x = posx_inv;
-    coordinates.y = posy_inv;
-    return coordinates;
+    coordinates.x = posx_inv
+    coordinates.y = posy_inv
+    return coordinates
   } else {
-    return null;
+    return null
   }
-};
+}
 
 const handleHueChange = () => {
-  const selectedItem = colorList.value.find((item) => item.select == true);
+  const selectedItem = colorList.value.find((item) => item.select == true)
 
   if (selectedItem) {
-    selectedItem.hue = hue.value;
+    selectedItem.hue = hue.value
   }
-};
+}
 
 // Opacity Bar Funcs
 
-const opacity = ref(100);
+const opacity = ref(100)
 const setOpacity = (value) => {
   if (props.showAlpha) {
-    const selectedItem = colorList.value.find((item) => item.select == true);
+    const selectedItem = colorList.value.find((item) => item.select == true)
 
     if (selectedItem) {
-      selectedItem.a = parseInt(value);
-      setGradientBarColor();
+      selectedItem.a = parseInt(value)
+      setGradientBarColor()
     }
   }
-};
+}
 // Gradient Bar Funcs
 const setToLeftGradientBarItem = (val) => {
   const handleClient = pickerTemplateRef.value
-    ?.querySelector(".gradient-handle-content")
-    ?.getBoundingClientRect(); // Elementin varlığını kontrol etmek için "?." kullanımı
+    ?.querySelector('.gradient-handle-content')
+    ?.getBoundingClientRect() // Elementin varlığını kontrol etmek için "?." kullanımı
 
   if (val === 0) {
-    return "0px";
+    return '0px'
   } else if (val === 100 && handleClient) {
-    const gw = gradientBar.value?.offsetWidth || 0; // Değerin null olma durumunu ele almak için "?." kullanımı
-    return `${gw - (handleClient.width || 0)}px`;
+    const gw = gradientBar.value?.offsetWidth || 0 // Değerin null olma durumunu ele almak için "?." kullanımı
+    return `${gw - (handleClient.width || 0)}px`
   } else {
-    const gw = (gradientBar.value?.offsetWidth || 0) * (val / 100);
-    return `${gw - (handleClient?.width || 0) / 2}px`;
+    const gw = (gradientBar.value?.offsetWidth || 0) * (val / 100)
+    return `${gw - (handleClient?.width || 0) / 2}px`
   }
-};
+}
 
-let gradientMouseBar = null;
-let selectedGradientItem = null;
+let gradientMouseBar = null
+let selectedGradientItem = null
 
 const handleGradientItemOnMouseDown = (event) => {
-  const target = event.target;
-  const offsetParent = target.offsetParent;
-  if (offsetParent?.id?.includes("clr-gb-")) {
-    const id = offsetParent.id.replace("clr-gb-", "");
-    selectedGradientItem = offsetParent;
-    const selectedItem = colorList.value.find((item) => item.select == true);
+  const target = event.target
+  const offsetParent = target.offsetParent
+  if (offsetParent?.id?.includes('clr-gb-')) {
+    const id = offsetParent.id.replace('clr-gb-', '')
+    selectedGradientItem = offsetParent
+    const selectedItem = colorList.value.find((item) => item.select == true)
 
     if (selectedItem && selectedItem.id != id) {
-      const selectedHandle = pickerTemplateRef.value?.querySelector(
-        ".gradient-handle.select",
-      );
-      selectedHandle?.classList.remove("select");
-      offsetParent.classList.add("select");
+      const selectedHandle = pickerTemplateRef.value?.querySelector('.gradient-handle.select')
+      selectedHandle?.classList.remove('select')
+      offsetParent.classList.add('select')
 
-      const selectedItemIndex = colorList.value.findIndex(
-        (item) => item.select == true,
-      );
+      const selectedItemIndex = colorList.value.findIndex((item) => item.select == true)
 
       for (let i = 0; i < colorList.value.length; i++) {
-        const item = colorList.value[i];
+        const item = colorList.value[i]
         if (item.id == id) {
           if (selectedItemIndex != -1) {
-            colorList.value[selectedItemIndex].select = false;
+            colorList.value[selectedItemIndex].select = false
           }
-          colorList.value[i].select = true;
-          opacity.value = item.a;
-          setToChangeVariebles(item.r, item.g, item.b, item.hue, true);
-          setSliderOpacityColor();
-          onChangeSetToHexValue();
-          break;
+          colorList.value[i].select = true
+          opacity.value = item.a
+          setToChangeVariebles(item.r, item.g, item.b, item.hue, true)
+          setSliderOpacityColor()
+          onChangeSetToHexValue()
+          break
         }
       }
     }
-    window.addEventListener("mousemove", handleGradientMouseMove);
-    window.addEventListener("mouseup", handleGradientItemOnMouseUp);
+    window.addEventListener('mousemove', handleGradientMouseMove)
+    window.addEventListener('mouseup', handleGradientItemOnMouseUp)
   }
-};
+}
 
 const handleGradientItemOnMouseUp = () => {
-  window.removeEventListener("mousemove", handleGradientMouseMove);
-  window.removeEventListener("mouseup", handleGradientItemOnMouseDown);
-};
+  window.removeEventListener('mousemove', handleGradientMouseMove)
+  window.removeEventListener('mouseup', handleGradientItemOnMouseDown)
+}
 
 const handleGradientMouseMove = (e) => {
-  e.preventDefault();
+  e.preventDefault()
 
   const handleClient = pickerTemplateRef.value
-    ?.querySelector(".gradient-handle-content")
-    ?.getBoundingClientRect();
-  const client = gradientMouseBar?.getBoundingClientRect();
-  const lastRightPoint = client.width - handleClient?.width;
-  let newX = e.clientX - (client.left || 0) - (handleClient?.width || 0) / 2;
+    ?.querySelector('.gradient-handle-content')
+    ?.getBoundingClientRect()
+  const client = gradientMouseBar?.getBoundingClientRect()
+  const lastRightPoint = client.width - handleClient?.width
+  let newX = e.clientX - (client.left || 0) - (handleClient?.width || 0) / 2
 
   if (newX < 0) {
-    newX = 0;
+    newX = 0
   } else if (newX > lastRightPoint) {
-    newX = lastRightPoint;
+    newX = lastRightPoint
   }
 
   if (selectedGradientItem) {
-    selectedGradientItem.style.left = `${newX}px`;
+    selectedGradientItem.style.left = `${newX}px`
 
-    const percent = parseFloat(
-      ((newX / (client?.width - handleClient?.width)) * 100).toFixed(0),
-    );
+    const percent = parseFloat(((newX / (client?.width - handleClient?.width)) * 100).toFixed(0))
 
     const selectedItem = colorList.value.find(
-      (item) => item.id == selectedGradientItem?.id.replace("clr-gb-", ""),
-    );
+      (item) => item.id == selectedGradientItem?.id.replace('clr-gb-', '')
+    )
 
     if (selectedItem) {
-      selectedItem.percent = percent;
+      selectedItem.percent = percent
     }
 
-    setGradientBarColor();
+    setGradientBarColor()
   }
-};
+}
 
 const addColor = (e) => {
-  const client = gradientMouseBar?.getBoundingClientRect();
-  const percent = Math.round(
-    ((e.clientX - (client?.left || 0)) / (client?.width || 1)) * 100,
-  );
+  const client = gradientMouseBar?.getBoundingClientRect()
+  const percent = Math.round(((e.clientX - (client?.left || 0)) / (client?.width || 1)) * 100)
 
-  const selectIndex = colorList.value.findIndex((item) => item.select == true);
+  const selectIndex = colorList.value.findIndex((item) => item.select == true)
 
-  const selectItem = colorList.value[selectIndex];
+  const selectItem = colorList.value[selectIndex]
 
   const item = {
     id: Date.now(),
@@ -567,444 +518,405 @@ const addColor = (e) => {
     a: selectItem.a,
     percent: percent,
     hue: selectItem.hue,
-    select: true,
-  };
+    select: true
+  }
 
-  colorList.value[selectIndex].select = false;
-  const selectedHandle = pickerTemplateRef.value?.querySelector(
-    ".gradient-handle.select",
-  );
-  selectedHandle?.classList.remove("select");
+  colorList.value[selectIndex].select = false
+  const selectedHandle = pickerTemplateRef.value?.querySelector('.gradient-handle.select')
+  selectedHandle?.classList.remove('select')
 
-  colorList.value = [...colorList.value, item];
+  colorList.value = [...colorList.value, item]
 
-  createGradientItem(item);
-  selectedGradientItem = pickerTemplateRef.value?.querySelector(
-    `#clr-gb-${item.id}`,
-  );
-  setGradientBarColor();
-};
+  createGradientItem(item)
+  selectedGradientItem = pickerTemplateRef.value?.querySelector(`#clr-gb-${item.id}`)
+  setGradientBarColor()
+}
 
 // Extra Funcs
 
 const isColorInStrip = (selectedColor) => {
   if (selectedColor.r == 0 && selectedColor.g == 0 && selectedColor.b == 0) {
-    return true;
-  } else if (
-    selectedColor.r == 255 &&
-    selectedColor.g == 255 &&
-    selectedColor.b == 255
-  ) {
-    return true;
+    return true
+  } else if (selectedColor.r == 255 && selectedColor.g == 255 && selectedColor.b == 255) {
+    return true
   } else {
-    const ctx = canvas.value.getContext("2d", { willReadFrequently: true });
-    const width = canvas.value.width;
-    const height = canvas.value.height;
-    const imageData = ctx.getImageData(0, 0, width, height).data;
+    const ctx = canvas.value.getContext('2d', { willReadFrequently: true })
+    const width = canvas.value.width
+    const height = canvas.value.height
+    const imageData = ctx.getImageData(0, 0, width, height).data
 
     // Seçilen renk bileşenlerini al
-    const selectedR = selectedColor.r;
-    const selectedG = selectedColor.g;
-    const selectedB = selectedColor.b;
+    const selectedR = selectedColor.r
+    const selectedG = selectedColor.g
+    const selectedB = selectedColor.b
 
     for (let y = 0; y < height; y++) {
       for (let x = 0; x < width; x++) {
-        const i = (y * width + x) * 4; // Her piksel 4 bileşenli (RGBA)
-        const r = imageData[i];
-        const g = imageData[i + 1];
-        const b = imageData[i + 2];
+        const i = (y * width + x) * 4 // Her piksel 4 bileşenli (RGBA)
+        const r = imageData[i]
+        const g = imageData[i + 1]
+        const b = imageData[i + 2]
 
         // Seçilen renkle piksel renklerini karşılaştır
         if (r === selectedR && g === selectedG && b === selectedB) {
-          return true; // Eşleşme bulundu, renk color-strip içinde
+          return true // Eşleşme bulundu, renk color-strip içinde
         }
       }
     }
 
-    return false; // Eşleşme bulunamadı, renk color-strip dışında
+    return false // Eşleşme bulunamadı, renk color-strip dışında
   }
-};
+}
 
 const setToChangeVariebles = (r, g, b, hueVal, isNotUpdate) => {
   setTimeout(() => {
     if (!isColorInStrip({ r, g, b })) {
-      let coord = findColorCoordinates();
+      let coord = findColorCoordinates()
       if (coord) {
-        pickerPointer.value.style.left = `${coord.x}px`;
-        pickerPointer.value.style.top = `${coord.y}px`;
+        pickerPointer.value.style.left = `${coord.x}px`
+        pickerPointer.value.style.top = `${coord.y}px`
       }
-      hue.value = hueVal;
-      setHue(isNotUpdate);
+      hue.value = hueVal
+      setHue(isNotUpdate)
     } else {
-      let coord = findColorCoordinates();
+      let coord = findColorCoordinates()
       if (coord) {
-        pickerPointer.value.style.left = `${coord.x}px`;
-        pickerPointer.value.style.top = `${coord.y}px`;
+        pickerPointer.value.style.left = `${coord.x}px`
+        pickerPointer.value.style.top = `${coord.y}px`
       }
     }
-  }, 0);
-};
+  }, 0)
+}
 
 const setFirstEmptyValue = () => {
-  colorList.value.forEach((item) => createGradientItem(item));
+  colorList.value.forEach((item) => createGradientItem(item))
 
-  firstSetHue();
-  const clr = colorList.value[0];
-  hue.value = clr.hue;
-  setHue(true);
+  firstSetHue()
+  const clr = colorList.value[0]
+  hue.value = clr.hue
+  setHue(true)
 
-  let coord = findColorCoordinates();
+  let coord = findColorCoordinates()
   if (coord) {
-    pickerPointer.value.style.left = `${coord.x}px`;
-    pickerPointer.value.style.top = `${coord.y}px`;
+    pickerPointer.value.style.left = `${coord.x}px`
+    pickerPointer.value.style.top = `${coord.y}px`
   }
-  setSliderOpacityColor();
-  setGradientBarColor();
-};
+  setSliderOpacityColor()
+  setGradientBarColor()
+}
 
 // SET ITEMS COLORS FUNCS
 
 const createGradientItem = (item) => {
-  if (mode.value == "gradient") {
-    let el = document.createElement("div");
-    el.id = `clr-gb-${item.id}`;
-    el.classList.add("gradient-handle");
-    el.style.left = setToLeftGradientBarItem(item.percent);
+  if (mode.value == 'gradient') {
+    let el = document.createElement('div')
+    el.id = `clr-gb-${item.id}`
+    el.classList.add('gradient-handle')
+    el.style.left = setToLeftGradientBarItem(item.percent)
 
-    let elChild = document.createElement("div");
-    elChild.classList.add("gradient-handle-content");
+    let elChild = document.createElement('div')
+    elChild.classList.add('gradient-handle-content')
     if (item.select == true) {
-      el.classList.add("select");
+      el.classList.add('select')
     }
 
-    el.appendChild(elChild);
+    el.appendChild(elChild)
     if (gradientMouseBar) {
-      gradientMouseBar.appendChild(el);
+      gradientMouseBar.appendChild(el)
     }
   }
-};
+}
 
 const redrawTheCanvas = (rgb) => {
-  const context = canvas.value.getContext("2d", { willReadFrequently: true });
-  const endX = canvas.value.width;
-  const endY = canvas.value.height;
+  const context = canvas.value.getContext('2d', { willReadFrequently: true })
+  const endX = canvas.value.width
+  const endY = canvas.value.height
 
-  context.fillStyle = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
-  context.fillRect(0, 0, endX, endY);
+  context.fillStyle = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`
+  context.fillRect(0, 0, endX, endY)
 
-  let grdWhite = context.createLinearGradient(0, 0, endX - 12, 0);
-  grdWhite.addColorStop(0, "rgb(255,255,255)");
-  grdWhite.addColorStop(1, "rgba(255,255,255,0)");
-  context.fillStyle = grdWhite;
-  context.fillRect(0, 0, endX, endY);
+  let grdWhite = context.createLinearGradient(0, 0, endX - 12, 0)
+  grdWhite.addColorStop(0, 'rgb(255,255,255)')
+  grdWhite.addColorStop(1, 'rgba(255,255,255,0)')
+  context.fillStyle = grdWhite
+  context.fillRect(0, 0, endX, endY)
 
-  let grdBlack = context.createLinearGradient(0, 0, 0, endY);
-  grdBlack.addColorStop(0, "rgba(0,0,0,0)");
-  grdBlack.addColorStop(1, "rgb(0,0,0)");
-  context.fillStyle = grdBlack;
-  context.fillRect(0, 0, endX, endY);
-};
+  let grdBlack = context.createLinearGradient(0, 0, 0, endY)
+  grdBlack.addColorStop(0, 'rgba(0,0,0,0)')
+  grdBlack.addColorStop(1, 'rgb(0,0,0)')
+  context.fillStyle = grdBlack
+  context.fillRect(0, 0, endX, endY)
+}
 
 const setSliderOpacityColor = () => {
   if (props.showAlpha) {
-    let colorItem = colorList.value.find((item) => item.select == true);
+    let colorItem = colorList.value.find((item) => item.select == true)
     if (colorItem) {
-      opacitySlider.value.style.background = ` linear-gradient(90deg,rgba(255, 255, 255, 0) 0%, rgba(${colorItem.r}, ${colorItem.g}, ${colorItem.b}, 100) 97%)`;
+      opacitySlider.value.style.background = ` linear-gradient(90deg,rgba(255, 255, 255, 0) 0%, rgba(${colorItem.r}, ${colorItem.g}, ${colorItem.b}, 100) 97%)`
     }
   }
-};
+}
 
 const setGradientBarColor = () => {
-  if (mode.value == "gradient") {
+  if (mode.value == 'gradient') {
     colorList.value.sort((a, b) => {
-      return a.percent - b.percent;
-    });
+      return a.percent - b.percent
+    })
 
-    let barBackground = "linear-gradient(90deg, ";
-    let gradientBarBackgroundImage;
+    let barBackground = 'linear-gradient(90deg, '
+    let gradientBarBackgroundImage
 
-    if (gradientType.value == "linear") {
-      gradientBarBackgroundImage = `linear-gradient(${gradientAngle.angle}deg, `;
+    if (gradientType.value == 'linear') {
+      gradientBarBackgroundImage = `linear-gradient(${gradientAngle.angle}deg, `
       for (let i = 0; i < colorList.value.length; i++) {
-        const { r, g, b, a, percent } = colorList.value[i];
+        const { r, g, b, a, percent } = colorList.value[i]
 
         if (colorList.value.length - 1 == i) {
-          barBackground =
-            barBackground + `rgba(${r},${g},${b},${a / 100}) ${percent}%)`;
+          barBackground = barBackground + `rgba(${r},${g},${b},${a / 100}) ${percent}%)`
           gradientBarBackgroundImage =
-            gradientBarBackgroundImage +
-            `rgba(${r},${g},${b},${a / 100}) ${percent}%)`;
+            gradientBarBackgroundImage + `rgba(${r},${g},${b},${a / 100}) ${percent}%)`
         } else {
-          barBackground =
-            barBackground + `rgba(${r},${g},${b},${a / 100}) ${percent}%, `;
+          barBackground = barBackground + `rgba(${r},${g},${b},${a / 100}) ${percent}%, `
           gradientBarBackgroundImage =
-            gradientBarBackgroundImage +
-            `rgba(${r},${g},${b},${a / 100}) ${percent}%, `;
+            gradientBarBackgroundImage + `rgba(${r},${g},${b},${a / 100}) ${percent}%, `
         }
       }
     } else {
-      gradientBarBackgroundImage = `radial-gradient(circle at ${gradientAngle.percentageX}% ${gradientAngle.percentageY}%, `;
+      gradientBarBackgroundImage = `radial-gradient(circle at ${gradientAngle.percentageX}% ${gradientAngle.percentageY}%, `
       for (let i = 0; i < colorList.value.length; i++) {
-        const { r, g, b, a, percent } = colorList.value[i];
+        const { r, g, b, a, percent } = colorList.value[i]
 
         if (colorList.value.length - 1 == i) {
-          barBackground =
-            barBackground + `rgba(${r},${g},${b},${a / 100}) ${percent}%)`;
+          barBackground = barBackground + `rgba(${r},${g},${b},${a / 100}) ${percent}%)`
           gradientBarBackgroundImage =
-            gradientBarBackgroundImage +
-            `rgba(${r},${g},${b},${a / 100}) ${percent}%)`;
+            gradientBarBackgroundImage + `rgba(${r},${g},${b},${a / 100}) ${percent}%)`
         } else {
-          barBackground =
-            barBackground + `rgba(${r},${g},${b},${a / 100}) ${percent}%, `;
+          barBackground = barBackground + `rgba(${r},${g},${b},${a / 100}) ${percent}%, `
           gradientBarBackgroundImage =
-            gradientBarBackgroundImage +
-            `rgba(${r},${g},${b},${a / 100}) ${percent}%, `;
+            gradientBarBackgroundImage + `rgba(${r},${g},${b},${a / 100}) ${percent}%, `
         }
       }
     }
 
-    gradientBar.value.style.backgroundImage = barBackground;
+    gradientBar.value.style.backgroundImage = barBackground
 
-    let target = pickerTemplateRef.value?.querySelector(
-      "#ck-cp-target-background",
-    );
+    let target = pickerTemplateRef.value?.querySelector('#ck-cp-target-background')
     if (target) {
-      target.style.backgroundImage = gradientBarBackgroundImage;
+      target.style.backgroundImage = gradientBarBackgroundImage
       if (isReady.value) {
-        emitUpdateModelValue(target.style.backgroundImage);
+        emitUpdateModelValue(target.style.backgroundImage)
       }
     }
   } else {
-    const { r, g, b, a } = colorList.value[0];
-    let val = "";
+    const { r, g, b, a } = colorList.value[0]
+    let val = ''
 
     switch (props.type) {
-      case "HEX8":
-        val = rgbaToHex8(r, g, b, a / 100);
-        break;
-      case "RGBA":
-        val = `rgba(${r},${g},${b},${a / 100})`;
-        break;
-      case "RGB":
-        val = `rgb(${r},${g},${b})`;
-        break;
-      case "HEX":
-        val = rgb2Hex(r, g, b);
-        break;
+      case 'HEX8':
+        val = rgbaToHex8(r, g, b, a / 100)
+        break
+      case 'RGBA':
+        val = `rgba(${r},${g},${b},${a / 100})`
+        break
+      case 'RGB':
+        val = `rgb(${r},${g},${b})`
+        break
+      case 'HEX':
+        val = rgb2Hex(r, g, b)
+        break
       default:
-        break;
+        break
     }
-    emitUpdateModelValue(val);
+    emitUpdateModelValue(val)
   }
-};
+}
 
 const firstSetHue = () => {
   colorList.value.forEach((clr) => {
-    clr.hue = rgbToHue(clr.r, clr.g, clr.b);
-  });
-};
+    clr.hue = rgbToHue(clr.r, clr.g, clr.b)
+  })
+}
 
 // Menu Func
 const setBackgroundType = (event) => {
-  gradientType.value = event;
+  gradientType.value = event
 
-  setGradientBarColor();
-};
+  setGradientBarColor()
+}
 
 const deleteColor = () => {
   if (colorList.value.length > 2) {
-    const index = colorList.value.findIndex((item) => item.select == true);
+    const index = colorList.value.findIndex((item) => item.select == true)
 
     if (index !== -1) {
-      const deleteItemID = colorList.value[index].id;
-      colorList.value.splice(index, 1);
-      const deleteElement = pickerTemplateRef.value?.querySelector(
-        `#clr-gb-${deleteItemID}`,
-      );
-      deleteElement?.remove();
+      const deleteItemID = colorList.value[index].id
+      colorList.value.splice(index, 1)
+      const deleteElement = pickerTemplateRef.value?.querySelector(`#clr-gb-${deleteItemID}`)
+      deleteElement?.remove()
 
-      const item = colorList.value[0];
+      const item = colorList.value[0]
       if (item) {
-        item.select = true;
-        selectedGradientItem = pickerTemplateRef.value?.querySelector(
-          `#clr-gb-${item.id}`,
-        );
-        selectedGradientItem?.classList.add("select");
-        setToChangeVariebles(item.r, item.g, item.b, item.hue, false);
-        onChangeSetToHexValue();
-        setGradientBarColor();
+        item.select = true
+        selectedGradientItem = pickerTemplateRef.value?.querySelector(`#clr-gb-${item.id}`)
+        selectedGradientItem?.classList.add('select')
+        setToChangeVariebles(item.r, item.g, item.b, item.hue, false)
+        onChangeSetToHexValue()
+        setGradientBarColor()
       }
     }
   }
-};
+}
 
 const handleOnClickEyeDropper = () => {
-  const el = pickerTemplateRef.value?.querySelector("#cp-btn-eyedropper");
-  el?.classList.add("active");
+  const el = pickerTemplateRef.value?.querySelector('#cp-btn-eyedropper')
+  el?.classList.add('active')
 
   // @ts-ignore
-  const eyeDropper = new EyeDropper();
+  const eyeDropper = new EyeDropper()
 
   eyeDropper
     .open()
     // @ts-ignore
     .then((result) => {
-      const { sRGBHex } = result;
+      const { sRGBHex } = result
 
-      const selectedItem = colorList.value.find((item) => item.select == true);
-      const val = hexToRgb(sRGBHex);
+      const selectedItem = colorList.value.find((item) => item.select == true)
+      const val = hexToRgb(sRGBHex)
 
       if (val) {
-        const hueVal = rgbToHue(val.r, val.g, val.b);
+        const hueVal = rgbToHue(val.r, val.g, val.b)
 
         if (selectedItem) {
-          selectedItem.hue = hueVal;
-          selectedItem.r = val.r;
-          selectedItem.g = val.g;
-          selectedItem.b = val.b;
+          selectedItem.hue = hueVal
+          selectedItem.r = val.r
+          selectedItem.g = val.g
+          selectedItem.b = val.b
         }
 
         if (!isColorInStrip(val)) {
-          hue.value = hueVal;
-          const { rgb } = hsl2Hex(hueVal, 100, 50);
-          redrawTheCanvas(rgb);
-          const coord = findColorCoordinates();
+          hue.value = hueVal
+          const { rgb } = hsl2Hex(hueVal, 100, 50)
+          redrawTheCanvas(rgb)
+          const coord = findColorCoordinates()
           if (coord) {
-            pickerPointer.value.style.left = `${coord.x}px`;
-            pickerPointer.value.style.top = `${coord.y}px`;
+            pickerPointer.value.style.left = `${coord.x}px`
+            pickerPointer.value.style.top = `${coord.y}px`
           }
         } else {
-          const coord = findColorCoordinates();
+          const coord = findColorCoordinates()
           if (coord) {
-            pickerPointer.value.style.left = `${coord.x}px`;
-            pickerPointer.value.style.top = `${coord.y}px`;
+            pickerPointer.value.style.left = `${coord.x}px`
+            pickerPointer.value.style.top = `${coord.y}px`
           }
         }
 
-        onChangeSetToHexValue();
-        setSliderOpacityColor();
-        setGradientBarColor();
+        onChangeSetToHexValue()
+        setSliderOpacityColor()
+        setGradientBarColor()
 
-        el?.classList.remove("active");
+        el?.classList.remove('active')
       }
     })
     .catch(() => {
-      el?.classList.remove("active");
-    });
-};
+      el?.classList.remove('active')
+    })
+}
 
 const handleRGBAInput = (data) => {
-  const { value, type } = data;
-  if (type != "a") {
-    const selectItem = colorList.value.find((item) => item.select == true);
+  const { value, type } = data
+  if (type != 'a') {
+    const selectItem = colorList.value.find((item) => item.select == true)
     if (selectItem) {
-      selectItem.r = parseInt(value.r);
-      selectItem.g = parseInt(value.g);
-      selectItem.b = parseInt(value.b);
+      selectItem.r = parseInt(value.r)
+      selectItem.g = parseInt(value.g)
+      selectItem.b = parseInt(value.b)
 
-      const hueVal = rgbToHue(selectItem.r, selectItem.g, selectItem.b);
-      selectItem.hue = hueVal;
-      setToChangeVariebles(
-        selectItem.r,
-        selectItem.g,
-        selectItem.b,
-        selectItem.hue,
-        true,
-      );
-      setGradientBarColor();
-      setSliderOpacityColor();
+      const hueVal = rgbToHue(selectItem.r, selectItem.g, selectItem.b)
+      selectItem.hue = hueVal
+      setToChangeVariebles(selectItem.r, selectItem.g, selectItem.b, selectItem.hue, true)
+      setGradientBarColor()
+      setSliderOpacityColor()
     }
   } else {
-    opacity.value = value;
-    setGradientBarColor();
-    setSliderOpacityColor();
+    opacity.value = value
+    setGradientBarColor()
+    setSliderOpacityColor()
   }
-};
+}
 
 const handleHSLInput = (value) => {
-  HSL.h = value.h;
-  HSL.s = value.s;
-  HSL.l = value.l;
-  const selectColor = colorList.value.find((color) => color.select == true);
-  if (
-    selectColor &&
-    !Number.isNaN(HSL.h) &&
-    !Number.isNaN(HSL.s) &&
-    !Number.isNaN(HSL.l)
-  ) {
-    const { r, g, b } = hslToRgb(HSL.h, HSL.s / 100, HSL.l / 100);
+  HSL.h = value.h
+  HSL.s = value.s
+  HSL.l = value.l
+  const selectColor = colorList.value.find((color) => color.select == true)
+  if (selectColor && !Number.isNaN(HSL.h) && !Number.isNaN(HSL.s) && !Number.isNaN(HSL.l)) {
+    const { r, g, b } = hslToRgb(HSL.h, HSL.s / 100, HSL.l / 100)
 
-    selectColor.hue = HSL.h;
-    selectColor.r = r;
-    selectColor.g = g;
-    selectColor.b = b;
-    setToChangeVariebles(
-      selectColor.r,
-      selectColor.g,
-      selectColor.b,
-      selectColor.hue,
-      true,
-    );
-    setGradientBarColor();
-    setSliderOpacityColor();
+    selectColor.hue = HSL.h
+    selectColor.r = r
+    selectColor.g = g
+    selectColor.b = b
+    setToChangeVariebles(selectColor.r, selectColor.g, selectColor.b, selectColor.hue, true)
+    setGradientBarColor()
+    setSliderOpacityColor()
   }
-};
+}
 
 const applyHex = () => {
   if (hexVal.value) {
-    const rgb = hexToRgb(hexVal.value);
+    const rgb = hexToRgb(hexVal.value)
 
     if (rgb) {
-      const hueVal = rgbToHue(rgb.r, rgb.g, rgb.b);
-      const selectItem = colorList.value.find((item) => item.select == true);
+      const hueVal = rgbToHue(rgb.r, rgb.g, rgb.b)
+      const selectItem = colorList.value.find((item) => item.select == true)
       if (selectItem) {
-        selectItem.r = rgb.r;
-        selectItem.g = rgb.g;
-        selectItem.b = rgb.b;
-        selectItem.hue = hueVal;
+        selectItem.r = rgb.r
+        selectItem.g = rgb.g
+        selectItem.b = rgb.b
+        selectItem.hue = hueVal
 
-        setToChangeVariebles(rgb.r, rgb.g, rgb.b, selectItem.hue, true);
-        setGradientBarColor();
-        setSliderOpacityColor();
-        handleChangeInputType(inputType.value);
+        setToChangeVariebles(rgb.r, rgb.g, rgb.b, selectItem.hue, true)
+        setGradientBarColor()
+        setSliderOpacityColor()
+        handleChangeInputType(inputType.value)
       }
     }
   }
-};
+}
 
 const onChangeSetToHexValue = () => {
-  const item = colorList.value.find((item) => item.select == true);
+  const item = colorList.value.find((item) => item.select == true)
   if (item) {
-    hexVal.value = rgb2Hex(item.r, item.g, item.b).toUpperCase();
+    hexVal.value = rgb2Hex(item.r, item.g, item.b).toUpperCase()
   }
-  handleChangeInputType(inputType.value);
-};
+  handleChangeInputType(inputType.value)
+}
 
 const handleColorItemOnClick = (color) => {
-  emits("last-used-pick", color);
-};
+  emits('last-used-pick', color)
+}
 
 /* @ts-ignore */
 if (window.EyeDropper) {
-  isEyeDropperUsing.value = true;
+  isEyeDropperUsing.value = true
 }
 
-const parseVModelString = (value = "") => {
-  if (mode.value == "gradient") {
-    let type = value.includes("linear") ? "linear" : "radial";
-    let newColorList = [];
+const parseVModelString = (value = '') => {
+  if (mode.value == 'gradient') {
+    let type = value.includes('linear') ? 'linear' : 'radial'
+    let newColorList = []
 
-    gradientType.value = type;
-    if (type == "linear") {
-      let regexPattern = /^linear-gradient\((.*)\)$/;
-      let matches = value.replace(";", "").trim().match(regexPattern);
-      let parsValueRGX = /,\s*(?![^()]*\))/;
+    gradientType.value = type
+    if (type == 'linear') {
+      let regexPattern = /^linear-gradient\((.*)\)$/
+      let matches = value.replace(';', '').trim().match(regexPattern)
+      let parsValueRGX = /,\s*(?![^()]*\))/
 
       if (matches) {
-        let valueList = matches[1].split(parsValueRGX);
+        let valueList = matches[1].split(parsValueRGX)
 
         for (let i = 0; i < valueList.length; i++) {
-          const element = valueList[i];
+          const element = valueList[i]
 
           let colorObj = {
             id: i,
@@ -1014,55 +926,55 @@ const parseVModelString = (value = "") => {
             a: 100,
             percent: 100,
             hue: 0,
-            select: false,
-          };
+            select: false
+          }
 
-          if (element.includes("deg")) {
-            gradientAngle.angle = parseInt(element.replace("deg", ""));
-          } else if (element.includes("rgba")) {
+          if (element.includes('deg')) {
+            gradientAngle.angle = parseInt(element.replace('deg', ''))
+          } else if (element.includes('rgba')) {
             let colorVal = element
               .trim()
-              .replace(/rgba|\(|\)|%/g, "")
-              .replace(/,/g, " ")
-              .split(" ");
+              .replace(/rgba|\(|\)|%/g, '')
+              .replace(/,/g, ' ')
+              .split(' ')
 
-            colorVal = colorVal.filter((x) => x.trim() !== "");
+            colorVal = colorVal.filter((x) => x.trim() !== '')
 
-            colorObj.r = parseInt(colorVal[0]);
-            colorObj.g = parseInt(colorVal[1]);
-            colorObj.b = parseInt(colorVal[2]);
-            colorObj.a = parseFloat(colorVal[3]) * 100;
-            colorObj.percent = parseInt(colorVal[4]);
+            colorObj.r = parseInt(colorVal[0])
+            colorObj.g = parseInt(colorVal[1])
+            colorObj.b = parseInt(colorVal[2])
+            colorObj.a = parseFloat(colorVal[3]) * 100
+            colorObj.percent = parseInt(colorVal[4])
 
-            newColorList.push(colorObj);
-          } else if (element.includes("rgb")) {
+            newColorList.push(colorObj)
+          } else if (element.includes('rgb')) {
             let colorVal = element
               .trim()
-              .replace(/rgb|\(|\)|%/g, "")
-              .replace(/,/g, " ")
-              .split(" ");
+              .replace(/rgb|\(|\)|%/g, '')
+              .replace(/,/g, ' ')
+              .split(' ')
 
-            colorVal = colorVal.filter((x) => x.trim() !== "");
+            colorVal = colorVal.filter((x) => x.trim() !== '')
 
-            colorObj.r = parseInt(colorVal[0]);
-            colorObj.g = parseInt(colorVal[1]);
-            colorObj.b = parseInt(colorVal[2]);
-            colorObj.percent = parseInt(colorVal[3]);
+            colorObj.r = parseInt(colorVal[0])
+            colorObj.g = parseInt(colorVal[1])
+            colorObj.b = parseInt(colorVal[2])
+            colorObj.percent = parseInt(colorVal[3])
 
-            newColorList.push(colorObj);
+            newColorList.push(colorObj)
           }
         }
       }
     } else {
-      let regexPattern = /^radial-gradient\((.*)\)$/;
-      let matches = value.replace(";", "").trim().match(regexPattern);
-      let parsValueRGX = /,\s*(?![^()]*\))/;
+      let regexPattern = /^radial-gradient\((.*)\)$/
+      let matches = value.replace(';', '').trim().match(regexPattern)
+      let parsValueRGX = /,\s*(?![^()]*\))/
 
       if (matches) {
-        let valueList = matches[1].split(parsValueRGX);
+        let valueList = matches[1].split(parsValueRGX)
 
         for (let i = 0; i < valueList.length; i++) {
-          const element = valueList[i];
+          const element = valueList[i]
 
           let colorObj = {
             id: i,
@@ -1072,55 +984,55 @@ const parseVModelString = (value = "") => {
             a: 100,
             percent: 100,
             hue: 0,
-            select: false,
-          };
-          if (element.includes("circle at")) {
+            select: false
+          }
+          if (element.includes('circle at')) {
             let angleXY = element
-              .replace("circle at ", "")
-              .replace(" ", "")
-              .replace(/%/g, " ")
+              .replace('circle at ', '')
+              .replace(' ', '')
+              .replace(/%/g, ' ')
               .trim()
-              .split(" ");
-            gradientAngle.percentageX = parseInt(angleXY[0]);
-            gradientAngle.percentageY = parseInt(angleXY[1]);
-          } else if (element.includes("rgba")) {
+              .split(' ')
+            gradientAngle.percentageX = parseInt(angleXY[0])
+            gradientAngle.percentageY = parseInt(angleXY[1])
+          } else if (element.includes('rgba')) {
             let colorVal = element
-              .replace(/rgba|\(|\)|%/g, "")
-              .replace(/,/g, " ")
-              .split(" ");
+              .replace(/rgba|\(|\)|%/g, '')
+              .replace(/,/g, ' ')
+              .split(' ')
 
-            colorVal = colorVal.filter((x) => x.trim() !== "");
+            colorVal = colorVal.filter((x) => x.trim() !== '')
 
-            colorObj.r = parseInt(colorVal[0]);
-            colorObj.g = parseInt(colorVal[1]);
-            colorObj.b = parseInt(colorVal[2]);
-            colorObj.a = parseFloat(colorVal[3]) * 100;
-            colorObj.percent = parseInt(colorVal[4]);
+            colorObj.r = parseInt(colorVal[0])
+            colorObj.g = parseInt(colorVal[1])
+            colorObj.b = parseInt(colorVal[2])
+            colorObj.a = parseFloat(colorVal[3]) * 100
+            colorObj.percent = parseInt(colorVal[4])
 
-            newColorList.push(colorObj);
-          } else if (element.includes("rgb")) {
+            newColorList.push(colorObj)
+          } else if (element.includes('rgb')) {
             let colorVal = element
-              .replace(/rgb|\(|\)|%/g, "")
-              .replace(/,/g, " ")
-              .split(" ");
+              .replace(/rgb|\(|\)|%/g, '')
+              .replace(/,/g, ' ')
+              .split(' ')
 
-            colorVal = colorVal.filter((x) => x.trim() !== "");
+            colorVal = colorVal.filter((x) => x.trim() !== '')
 
-            colorObj.r = parseInt(colorVal[0]);
-            colorObj.g = parseInt(colorVal[1]);
-            colorObj.b = parseInt(colorVal[2]);
-            colorObj.percent = parseInt(colorVal[3]);
+            colorObj.r = parseInt(colorVal[0])
+            colorObj.g = parseInt(colorVal[1])
+            colorObj.b = parseInt(colorVal[2])
+            colorObj.percent = parseInt(colorVal[3])
 
-            newColorList.push(colorObj);
+            newColorList.push(colorObj)
           }
         }
       }
     }
 
     if (newColorList.length > 1) {
-      colorList.value = newColorList;
-      colorList.value[0].select = true;
-      opacity.value = colorList.value[0].a;
+      colorList.value = newColorList
+      colorList.value[0].select = true
+      opacity.value = colorList.value[0].a
     }
   } else {
     if (value) {
@@ -1128,146 +1040,139 @@ const parseVModelString = (value = "") => {
         r: 0,
         g: 0,
         b: 0,
-        a: 0,
-      };
-      if (value.includes("#")) {
+        a: 0
+      }
+      if (value.includes('#')) {
         if (value.length >= 8) {
           // Color Code HEX8
-          color = hex8ToRgba(value);
+          color = hex8ToRgba(value)
         } else {
           // Color Code HEX
-          let _v = hexToRgb(value);
+          let _v = hexToRgb(value)
           if (_v) {
-            color.a = 1;
-            color.r = _v.r;
-            color.g = _v.g;
-            color.b = _v.b;
+            color.a = 1
+            color.r = _v.r
+            color.g = _v.g
+            color.b = _v.b
           } else {
-            color = null;
+            color = null
           }
         }
-      } else if (value.includes("rgb")) {
-        if (value.includes("rgba")) {
+      } else if (value.includes('rgb')) {
+        if (value.includes('rgba')) {
           // Color Code RGBA
-          color = parseRgba(value);
+          color = parseRgba(value)
         } else {
           // Color Code RGB
-          let result = parseRgb(value);
+          let result = parseRgb(value)
 
           if (result) {
-            color.a = 1;
-            color.r = result.r;
-            color.g = result.g;
-            color.b = result.b;
+            color.a = 1
+            color.r = result.r
+            color.g = result.g
+            color.b = result.b
           } else {
-            color = null;
+            color = null
           }
         }
       }
 
       if (color) {
-        colorList.value[0].r = color.r;
-        colorList.value[0].b = color.b;
-        colorList.value[0].g = color.g;
-        colorList.value[0].a = parseInt((color.a * 100).toFixed(0));
-        opacity.value = colorList.value[0].a;
-        colorList.value[0].hue = 0;
+        colorList.value[0].r = color.r
+        colorList.value[0].b = color.b
+        colorList.value[0].g = color.g
+        colorList.value[0].a = parseInt((color.a * 100).toFixed(0))
+        opacity.value = colorList.value[0].a
+        colorList.value[0].hue = 0
       }
     }
   }
-};
+}
 
 const handleChangeInputType = (event) => {
-  const selectColor = colorList.value.find((color) => color.select == true);
+  const selectColor = colorList.value.find((color) => color.select == true)
 
   if (selectColor) {
     switch (event) {
-      case "RGB":
-        break;
-      case "HSL": {
-        const { h, s, l } = rgbToHsl(
-          selectColor.r,
-          selectColor.g,
-          selectColor.b,
-        );
-        HSL.h = Math.round(h);
-        HSL.s = Math.round(s * 100);
-        HSL.l = Math.round(l * 100);
-        break;
+      case 'RGB':
+        break
+      case 'HSL': {
+        const { h, s, l } = rgbToHsl(selectColor.r, selectColor.g, selectColor.b)
+        HSL.h = Math.round(h)
+        HSL.s = Math.round(s * 100)
+        HSL.l = Math.round(l * 100)
+        break
       }
     }
-    inputType.value = event;
+    inputType.value = event
   }
-};
+}
 
 const applyValue = (value) => {
   if (!value) {
-    setFirstEmptyValue();
+    setFirstEmptyValue()
   } else {
-    parseVModelString(value);
-    setFirstEmptyValue();
+    parseVModelString(value)
+    setFirstEmptyValue()
   }
-};
+}
 
 watch(
   () => props.modelValue,
   (newValue, oldValue) => {
     if (newValue !== oldValue && newValue !== emittedValue.value) {
       colorList.value.forEach((item) => {
-        const deleteElement = gradientMouseBar?.querySelector(
-          `#clr-gb-${item.id}`,
-        );
-        deleteElement?.remove();
-      });
-      applyValue(newValue);
+        const deleteElement = gradientMouseBar?.querySelector(`#clr-gb-${item.id}`)
+        deleteElement?.remove()
+      })
+      applyValue(newValue)
     }
-  },
-);
+  }
+)
 
 const onChangeMode = (value) => {
   colorList.value.forEach((item) => {
-    const deleteElement = gradientMouseBar?.querySelector(`#clr-gb-${item.id}`);
-    deleteElement?.remove();
-  });
-  if (value !== "solid") {
-    mode.value = "gradient";
+    const deleteElement = gradientMouseBar?.querySelector(`#clr-gb-${item.id}`)
+    deleteElement?.remove()
+  })
+  if (value !== 'solid') {
+    mode.value = 'gradient'
     setTimeout(() => {
-      gradientMouseBar =
-        pickerTemplateRef.value?.querySelector(".gradient-bar");
-      setBackgroundType(value);
-      setFirstEmptyValue();
-    }, 200);
-  } else if (value === "solid") {
-    mode.value = "solid";
+      gradientMouseBar = pickerTemplateRef.value?.querySelector('.gradient-bar')
+      setBackgroundType(value)
+      setFirstEmptyValue()
+    }, 200)
+  } else if (value === 'solid') {
+    mode.value = 'solid'
 
     colorList.value = colorList.value.map((c) => {
-      c.select = false;
-      return c;
-    });
-    colorList.value[0].select = true;
+      c.select = false
+      return c
+    })
+    colorList.value[0].select = true
 
     setTimeout(() => {
-      applyValue(props.modelValue);
-    }, 200);
+      applyValue(props.modelValue)
+    }, 200)
   }
-};
+}
 
 onMounted(() => {
   // check is gradient or solid
   mode.value =
-    props.modelValue.includes("linear") || props.modelValue.includes("radial")
-      ? "gradient"
-      : "solid";
+    props.modelValue.includes('linear') || props.modelValue.includes('radial')
+      ? 'gradient'
+      : 'solid'
 
-  if (mode.value == "gradient") {
-    gradientMouseBar = pickerTemplateRef.value?.querySelector(".gradient-bar");
+  if (mode.value == 'gradient') {
+    gradientMouseBar = pickerTemplateRef.value?.querySelector('.gradient-bar')
   }
-  applyValue(props.modelValue);
-  handleChangeInputType(inputType.value);
+  applyValue(props.modelValue)
+  handleChangeInputType(inputType.value)
   nextTick(() => {
-    isReady.value = true;
-  });
-});
+    isReady.value = true
+  })
+})
 </script>
 
 <style lang="scss">
@@ -1294,7 +1199,7 @@ onMounted(() => {
   height: auto;
 }
 
-.ck-cp-container[cp-theme="dark"] {
+.ck-cp-container[cp-theme='dark'] {
   --cp-container-bg: #212529;
   --cp-input-menu-bg: #242629;
   --cp-border-color: #43474b;
@@ -1306,7 +1211,7 @@ onMounted(() => {
 
 .ck-cp-container * {
   outline: none;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .ck-cp-controller-bar {
@@ -1654,8 +1559,8 @@ onMounted(() => {
   border: 1px solid var(--cp-act-color);
 }
 
-.ck-cp-input-container input[type="number"]::-webkit-inner-spin-button,
-.ck-cp-input-container input[type="number"]::-webkit-outer-spin-button {
+.ck-cp-input-container input[type='number']::-webkit-inner-spin-button,
+.ck-cp-input-container input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   display: none;
   margin: 0;

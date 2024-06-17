@@ -1,3 +1,3 @@
-import OnboardingAccordion from "./OnboardingAccordion.vue";
+import OnboardingAccordion from './OnboardingAccordion.vue'
 
-export { OnboardingAccordion };
+export { OnboardingAccordion }

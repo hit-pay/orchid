@@ -1,3 +1,3 @@
-import NumberInput from "./OcNumberInput.vue";
+import NumberInput from './OcNumberInput.vue'
 
-export { NumberInput };
+export { NumberInput }

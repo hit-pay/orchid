@@ -12,15 +12,15 @@
 </template>
 
 <script setup>
-import { inject } from "vue";
+import { inject } from 'vue'
 
-defineEmits(["onMouseDown"]);
+defineEmits(['onMouseDown'])
 
-const canvas = inject("canvas");
-const pickerWrap = inject("pickerWrap");
-const pickerPointer = inject("pickerPointer");
+const canvas = inject('canvas')
+const pickerWrap = inject('pickerWrap')
+const pickerPointer = inject('pickerPointer')
 
 const handleItemDragStart = (e) => {
-  e.preventDefault();
-};
+  e.preventDefault()
+}
 </script>

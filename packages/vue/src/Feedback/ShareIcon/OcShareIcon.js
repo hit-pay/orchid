@@ -1,3 +1,3 @@
-import ShareIcon from "./OcShareIcon.vue";
+import ShareIcon from './OcShareIcon.vue'
 
-export { ShareIcon };
+export { ShareIcon }

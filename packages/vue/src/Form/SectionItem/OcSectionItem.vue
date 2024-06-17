@@ -1,27 +1,27 @@
 <script setup>
-import { Toggle, Icon, Tooltip } from "@/orchidui";
+import { Toggle, Icon, Tooltip } from '@/orchidui'
 
 const props = defineProps({
   title: String,
   description: {
     type: String,
-    default: "",
+    default: ''
   },
   icon: String,
   modelValue: {
     type: Boolean,
-    default: false,
+    default: false
   },
   isToggle: Boolean,
   toggleProps: Object,
   popperMessage: String,
   errorMessage: String,
-  defaultValue: Boolean,
-});
-const emit = defineEmits(["update:modelValue"]);
+  defaultValue: Boolean
+})
+const emit = defineEmits(['update:modelValue'])
 
 if (props.defaultValue) {
-  emit("update:modelValue", true);
+  emit('update:modelValue', true)
 }
 </script>
 
