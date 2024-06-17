@@ -95,7 +95,7 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['update:modelValue', 'blur', 'focus', 'paste'])
+defineEmits(['update:modelValue', 'blur', 'focus', 'paste'])
 
 const attrs = useAttrs()
 
@@ -173,12 +173,16 @@ const isPasswordInput = computed(() => props.inputType === 'password')
             v-bind="inputAttrs"
             :type="isPasswordInput && isPasswordVisible ? 'text' : inputType"
             @focus="
-              isFocused = true
-              $emit('focus')
+              () => {
+                isFocused = true
+                $emit('focus')
+              }
             "
             @blur="
-              isFocused = false
-              $emit('blur')
+              () => {
+                isFocused = false
+                $emit('blur')
+              }
             "
             @input="$emit('update:modelValue', $event.target.value)"
             @paste="$emit('paste')"

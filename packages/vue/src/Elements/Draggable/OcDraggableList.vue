@@ -63,8 +63,10 @@ const handleEmit = (list, element) => {
               : 'hover:shadow bg-oc-accent-1-50 hover:bg-oc-gray-50'
       "
       @mouseleave="
-        isDropdownOpen[element.id] = false
-        isHovered[element.id] = false
+        () => {
+          isDropdownOpen[element.id] = false
+          isHovered[element.id] = false
+        }
       "
       @mouseover="isHovered[element.id] = true"
       @click="$emit('click:element', element)"

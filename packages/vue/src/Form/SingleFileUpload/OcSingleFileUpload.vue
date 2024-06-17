@@ -206,8 +206,10 @@ const onUploadImage = ($event) => {
                 <div
                   class="flex p-3 cursor-pointer items-center text-oc-error gap-x-3"
                   @click="
-                    onDeleteFile(0)
-                    isDropdownOpen = false
+                    () => {
+                      onDeleteFile(0)
+                      isDropdownOpen = false
+                    }
                   "
                 >
                   <Icon width="16" height="16" name="bin" />
@@ -221,8 +223,10 @@ const onUploadImage = ($event) => {
             v-model="isEditOpen"
             :img="editImg"
             @close="
-              isEditOpen = false
-              editImg = ''
+              () => {
+                isEditOpen = false
+                editImg = ''
+              }
             "
             @change-image="changeImage"
           />

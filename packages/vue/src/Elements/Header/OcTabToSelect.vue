@@ -35,9 +35,11 @@ onMounted(() => changeCurrentPosition())
       class="h-[36px] z-10 px-7 transition-all flex items-center justify-center rounded-full text-oc-text-500 hover:text-oc-accent-1 cursor-pointer"
       :class="[item.value === modelValue ? 'font-medium !text-white' : '']"
       @click="
-        changeCurrentPosition($event)
-        $emit('changePath', item.path)
-        $emit('update:modelValue', item.value)
+        ($event) => {
+          changeCurrentPosition($event)
+          $emit('changePath', item.path)
+          $emit('update:modelValue', item.value)
+        }
       "
     >
       {{ item.label }}
@@ -69,8 +71,10 @@ onMounted(() => changeCurrentPosition())
               : '!text-oc-text-400'
           ]"
           @click="
-            $emit('changePath', item.path)
-            $emit('update:modelValue', item.value)
+            () => {
+              $emit('changePath', item.path)
+              $emit('update:modelValue', item.value)
+            }
           "
         />
       </div>

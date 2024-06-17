@@ -157,10 +157,12 @@ const showAddBtn = computed(
                   <div
                     class="flex p-3 cursor-pointer items-center gap-x-3"
                     @click="
-                      editImgIndex = i
-                      editLink = img.link
-                      isDropdownOpen[i] = false
-                      isEditOpen = true
+                      () => {
+                        editImgIndex = i
+                        editLink = img.link
+                        isDropdownOpen[i] = false
+                        isEditOpen = true
+                      }
                     "
                   >
                     <Icon width="16" height="16" name="pencil" />
@@ -169,8 +171,10 @@ const showAddBtn = computed(
                   <div
                     class="flex p-3 cursor-pointer items-center text-oc-error gap-x-3"
                     @click="
-                      onDeleteFile(i)
-                      isDropdownOpen[i] = false
+                      () => {
+                        onDeleteFile(i)
+                        isDropdownOpen[i] = false
+                      }
                     "
                   >
                     <Icon width="16" height="16" name="bin" />
@@ -212,8 +216,10 @@ const showAddBtn = computed(
       :with-link="withLink"
       :link="editLink"
       @close="
-        isEditOpen = false
-        editImgIndex = ''
+        () => {
+          isEditOpen = false
+          editImgIndex = ''
+        }
       "
       @change-image="changeImage"
       @update:link="updateLink"

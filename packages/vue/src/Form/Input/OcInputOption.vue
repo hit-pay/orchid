@@ -1,5 +1,5 @@
 <script setup>
-import { BaseInput, Input, Chip, Icon } from '@/orchidui'
+import { BaseInput, Chip, Icon } from '@/orchidui'
 import { computed, ref, watch } from 'vue'
 
 const props = defineProps({
@@ -40,7 +40,8 @@ const props = defineProps({
 const emit = defineEmits({
   'update:modelValue': [],
   'option-added': [],
-  'option-removed': []
+  'option-removed': [],
+  blur: []
 })
 
 const localValue = ref([])
@@ -151,8 +152,11 @@ defineExpose({
               :class="optionsVisible?.length === 0 ? 'min-w-full' : 'min-w-[80px]'"
               @focus="isFocused = true"
               @blur="
-                isFocused = false
-                $emit('blur', $event)
+                ($event) => {
+                  console.log('$event: ', $event)
+                  isFocused = false
+                  $emit('blur', $event)
+                }
               "
               @keyup.enter="setNewValue($event.target.value)"
             />

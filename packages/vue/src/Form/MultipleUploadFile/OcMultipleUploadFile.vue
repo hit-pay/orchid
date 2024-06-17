@@ -101,8 +101,10 @@ const onDelete = (index) => {
         @change="onChangeFile"
         @update:selected-image="$emit('update:selectedImage', $event)"
         @update:uploaded-images="
-          currentFiles = $event
-          $emit('update:modelValue', $event)
+          ($event) => {
+            currentFiles = $event
+            $emit('update:modelValue', $event)
+          }
         "
         @on-edit-image="$emit('onEditFile', $event)"
         @on-remove-image="$emit('onRemoveFile', $event)"

@@ -33,8 +33,10 @@ const onSearchOpen = async () => {
         class="md:min-w-[310px]"
         icon="search"
         @keyup.enter="
-          $emit('addQuery', query)
-          query = ''
+          () => {
+            $emit('addQuery', query)
+            query = ''
+          }
         "
       />
 
@@ -44,17 +46,21 @@ const onSearchOpen = async () => {
         variant="secondary"
         class="shrink-0"
         @click="
-          $emit('addQuery', query)
-          query = ''
+          () => {
+            $emit('addQuery', query)
+            query = ''
+          }
         "
       />
       <span
         v-else
         class="py-3 text-base cursor-pointer flex normal-case items-center font-medium text-oc-text-400"
         @click="
-          isSearchOpen = false
-          $emit('toggle', isSearchOpen)
-          query = ''
+          () => {
+            isSearchOpen = false
+            $emit('toggle', isSearchOpen)
+            query = ''
+          }
         "
       >
         Clear
