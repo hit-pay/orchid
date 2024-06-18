@@ -78,6 +78,9 @@ const emit = defineEmits({
 const query = ref(props.searchKeywords ?? "");
 const isDropdownOpened = ref(false);
 const searchInputRef = ref();
+const dropdownRef = ref();
+const filterableOptionsRef = ref([])
+const selectListRef = ref()
 
 const optionsKey = ref(new Date().toISOString());
 
@@ -224,9 +227,33 @@ const onUpdateDropdown = () => {
   maxPopperWidth.value = baseInput.value?.$el?.offsetWidth
     ? `${baseInput.value?.$el?.offsetWidth}px`
     : "100%";
+
+  setTimeout(() => {
+    let currentValue;
+    let selectedIndex;
+
+    if(Array.isArray(props.modelValue)) {
+      currentValue = props.modelValue[0] ?? null
+    } else {
+      currentValue = props.modelValue
+    }
+
+    if(!currentValue) return;
+
+    filterableOptions.value.find((option, index) => {
+      if(option.value === currentValue) {
+        selectedIndex = index
+        return true
+      }
+    })
+
+    const el = filterableOptionsRef.value[selectedIndex]
+    const top = el.optionItemRef?.offsetTop;
+
+    selectListRef.value.parentNode.scrollTo(0, top - 60, { behavior: "smooth" });
+  }, 10);
 };
 
-const dropdownRef = ref();
 defineExpose({
   dropdownRef,
 });
@@ -330,7 +357,7 @@ defineExpose({
       </div>
 
       <template #menu>
-        <div class="p-3 flex flex-col gap-y-2">
+        <div ref="selectListRef" class="p-3 flex flex-col gap-y-2">
           <Input
             v-if="
               (isFilterable && !isInlineSearch) ||
@@ -370,6 +397,7 @@ defineExpose({
             >
               <Option
                 v-for="option in filterableOptions"
+                ref="filterableOptionsRef"
                 :key="option.value"
                 :label="option.label"
                 :sub-label="option.subLabel"
