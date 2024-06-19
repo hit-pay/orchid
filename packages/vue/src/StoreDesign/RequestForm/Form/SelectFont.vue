@@ -45,8 +45,10 @@ if (style.styleSheet) {
         class="p-3 flex items-center text-oc-text-400 justify-between cursor-pointer hover:bg-oc-accent-1-50 gap-x-3 rounded-sm"
         :class="modelValue === option.value ? 'bg-oc-accent-1-50' : ''"
         @click="
-          selectOption(option.value)
-          $emit('update:model-value', option.value)
+          () => {
+            selectOption(option.value)
+            $emit('update:model-value', option.value)
+          }
         "
       >
         <div class="flex flex-col gap-3" :class="`oc-font-${getClassName(option.value[0])}`">
