@@ -80,7 +80,7 @@ const toggleDashboard = () => {
         </div>
 
         <slot>
-          <div class="flex flex-col gap-3" v-if="descriptionIcon || description">
+          <div class="flex flex-col gap-3" v-if="descriptionIcon || description || details.length">
             <div class="text-oc-text-400 flex gap-x-2 items-center text-sm">
               <Icon
                 v-if="descriptionIcon"
