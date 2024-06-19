@@ -1,28 +1,28 @@
-import { InfoCard, Button, OverviewItem } from "@/orchidui";
+import { InfoCard, Button, OverviewItem } from '@/orchidui'
 
 export default {
   component: InfoCard,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const infoCard = {
   args: {
-    title: "Card Title",
-    titleIcon: "information",
-    titleIconTooltip: "Hello I am tooltip!",
+    title: 'Card Title',
+    titleIcon: 'information',
+    titleIconTooltip: 'Hello I am tooltip!',
     isLoading: false,
     transparent: false,
     hover: true,
     shadow: false,
     noData: false,
-    noDataDescription: "No items on the site yet",
+    noDataDescription: 'No items on the site yet'
   },
   render: (args) => ({
     components: { InfoCard, Button, OverviewItem },
     setup() {
       return {
-        args,
-      };
+        args
+      }
     },
     template: `
           <InfoCard :title="args.title"
@@ -44,6 +44,6 @@ export const infoCard = {
               <Button>Button</Button>
             </template>
           </InfoCard>
-        `,
-  }),
-};
+        `
+  })
+}

@@ -1,33 +1,33 @@
 <script setup>
-import { Select, Icon } from "@/orchidui";
-defineEmits("update:model-value");
+import { Select, Icon } from '@/orchidui'
+defineEmits('update:model-value')
 const props = defineProps({
   modelValue: Array,
   label: String,
   options: {
-    type: Array,
-  },
-});
+    type: Array
+  }
+})
 
 const getClassName = (font) => {
-  return font.replace(/[^a-zA-Z]/g, "");
-};
-let css = ``;
+  return font.replace(/[^a-zA-Z]/g, '')
+}
+let css = ``
 for (let index = 0; index < props.options.length; index++) {
-  css += `@import url('${props.options[index].value[1]}');`;
+  css += `@import url('${props.options[index].value[1]}');`
   css += `.oc-font-${getClassName(props.options[index].value[0])}{
     font-family: ${props.options[index].value[0]};
     font-weight: ${props.options[index].weight};
-  }`;
+  }`
 }
-let head = document.head || document.getElementsByTagName("head")[0];
-let style = document.createElement("style");
-head.appendChild(style);
-style.type = "text/css";
+let head = document.head || document.getElementsByTagName('head')[0]
+let style = document.createElement('style')
+head.appendChild(style)
+style.type = 'text/css'
 if (style.styleSheet) {
-  style.styleSheet.cssText = css;
+  style.styleSheet.cssText = css
 } else {
-  style.appendChild(document.createTextNode(css));
+  style.appendChild(document.createTextNode(css))
 }
 </script>
 <template>
@@ -45,21 +45,14 @@ if (style.styleSheet) {
         class="p-3 flex items-center text-oc-text-400 justify-between cursor-pointer hover:bg-oc-accent-1-50 gap-x-3 rounded-sm"
         :class="modelValue === option.value ? 'bg-oc-accent-1-50' : ''"
         @click="
-          selectOption(option.value);
-          $emit('update:model-value', option.value);
+          selectOption(option.value)
+          $emit('update:model-value', option.value)
         "
       >
-        <div
-          class="flex flex-col gap-3"
-          :class="`oc-font-${getClassName(option.value[0])}`"
-        >
+        <div class="flex flex-col gap-3" :class="`oc-font-${getClassName(option.value[0])}`">
           {{ option.label }}
         </div>
-        <Icon
-          v-if="modelValue === option.value"
-          class="w-5 h-5 text-oc-primary"
-          name="check-2"
-        />
+        <Icon v-if="modelValue === option.value" class="w-5 h-5 text-oc-primary" name="check-2" />
       </div>
     </template>
   </Select>

@@ -1,44 +1,44 @@
-import { Theme, PhoneInput } from "@/orchidui";
-import countryCodes from "../../data/CountryCodes.sample";
-import { ref } from "vue";
+import { Theme, PhoneInput } from '@/orchidui'
+import countryCodes from '../../data/CountryCodes.sample'
+import { ref } from 'vue'
 
 export default {
   component: PhoneInput,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const Default = {
   argTypes: {
     initialCountryCode: {
-      control: "select",
-      options: ["sg", "be", "ua", "sa"],
+      control: 'select',
+      options: ['sg', 'be', 'ua', 'sa']
     },
     labelIcon: {
-      control: "select",
-      options: ["", "question-mark"],
-    },
+      control: 'select',
+      options: ['', 'question-mark']
+    }
   },
   args: {
-    initialCountryCode: "sg",
-    placeholder: "Placeholder",
-    hint: "This is a hint text to help user.",
-    errorMessage: "",
+    initialCountryCode: 'sg',
+    placeholder: 'Placeholder',
+    hint: 'This is a hint text to help user.',
+    errorMessage: '',
     isInlineLabel: false,
     isDisabled: false,
-    label: "",
+    label: '',
     isRequired: false,
-    labelIcon: "",
-    tooltipText: "Tooltip text",
+    labelIcon: '',
+    tooltipText: 'Tooltip text',
     tooltipOptions: {
-      position: "top",
-      distance: 10,
-    },
+      position: 'top',
+      distance: 10
+    }
   },
   render: (args) => ({
     components: { Theme, PhoneInput },
     setup() {
-      const modelValue = ref(null);
-      return { modelValue, args, countryCodes };
+      const modelValue = ref(null)
+      return { modelValue, args, countryCodes }
     },
     template: `
           <Theme>
@@ -63,6 +63,6 @@ export const Default = {
               />
             </div>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}

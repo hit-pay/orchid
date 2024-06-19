@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Icon, Chip } from "@/orchidui";
+import { Icon, Chip } from '@/orchidui'
 
 defineProps({
   icon: String,
@@ -8,8 +8,8 @@ defineProps({
   iconClass: String,
   title: String,
   isActive: Boolean,
-  chipProps: Object,
-});
+  chipProps: Object
+})
 </script>
 
 <template>
@@ -17,19 +17,9 @@ defineProps({
     class="relative border rounded gap-x-3 flex justify-center items-center py-6 px-5 bg-oc-bg-light shadow-sm cursor-pointer hover:border-oc-primary duration-500"
     :class="isActive ? 'border-oc-primary' : 'border-oc-gray-200'"
   >
-    <Icon
-      v-if="icon"
-      :name="icon"
-      :width="width"
-      :height="height"
-      :class="iconClass"
-    />
+    <Icon v-if="icon" :name="icon" :width="width" :height="height" :class="iconClass" />
     <span>{{ title }}</span>
 
-    <Chip
-      v-if="chipProps"
-      v-bind="chipProps"
-      class="absolute top-0 -translate-y-1/2 sm:right-9"
-    />
+    <Chip v-if="chipProps" v-bind="chipProps" class="absolute top-0 -translate-y-1/2 sm:right-9" />
   </div>
 </template>

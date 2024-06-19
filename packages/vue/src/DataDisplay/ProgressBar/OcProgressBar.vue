@@ -2,20 +2,20 @@
 const props = defineProps({
   steps: {
     type: Number,
-    required: true,
+    required: true
   },
 
   currentStep: {
     type: Number,
-    default: 1,
+    default: 1
   },
 
-  label: String,
-});
+  label: String
+})
 
 const isStepCompleted = (index) => {
-  return index <= props.currentStep;
-};
+  return index <= props.currentStep
+}
 </script>
 
 <template>

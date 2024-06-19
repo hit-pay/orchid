@@ -1,3 +1,3 @@
-import Slider from "./OcSlider.vue";
+import Slider from './OcSlider.vue'
 
-export { Slider };
+export { Slider }

@@ -1,3 +1,3 @@
-import Tooltip from "./OcTooltip.vue";
+import Tooltip from './OcTooltip.vue'
 
-export { Tooltip };
+export { Tooltip }

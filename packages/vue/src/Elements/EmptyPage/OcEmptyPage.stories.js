@@ -1,38 +1,38 @@
-import { Theme, EmptyPage } from "@/orchidui";
+import { Theme, EmptyPage } from '@/orchidui'
 
 export default {
   component: EmptyPage,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const emptyPage = {
   argTypes: {
     size: {
-      control: "select",
-      options: ["small", "default", "large"],
-    },
+      control: 'select',
+      options: ['small', 'default', 'large']
+    }
   },
   args: {
-    title: "Title",
-    description: "Description",
+    title: 'Title',
+    description: 'Description',
     isButton: true,
     isUpgrade: true,
-    addButtonLabel: "Add new",
-    upgradeLabel: "Upgrade now",
-    size: undefined,
+    addButtonLabel: 'Add new',
+    upgradeLabel: 'Upgrade now',
+    size: undefined
   },
   render: (args) => ({
     components: {
       Theme,
-      EmptyPage,
+      EmptyPage
     },
     setup() {
-      return { args };
+      return { args }
     },
     template: `
           <Theme>
             <EmptyPage v-bind="args"/>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}

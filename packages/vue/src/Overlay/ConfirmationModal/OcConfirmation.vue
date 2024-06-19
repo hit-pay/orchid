@@ -1,32 +1,32 @@
 <script setup>
-import { Icon } from "@/orchidui";
+import { Icon } from '@/orchidui'
 
 defineProps({
   description: String,
   iconClass: String,
   variant: {
     type: String,
-    default: "delete",
+    default: 'delete'
   },
   hideIcon: {
     type: Boolean,
-    default: false,
+    default: false
   },
   icon: String,
-  contentClass: String,
-});
+  contentClass: String
+})
 const variantIcon = {
-  delete: "bin",
-  warning: "alert",
-  success: "check-2",
-  question: "question-mark",
-};
+  delete: 'bin',
+  warning: 'alert',
+  success: 'check-2',
+  question: 'question-mark'
+}
 const classIcon = {
-  delete: "text-oc-error bg-oc-error-50-tr",
-  warning: "text-oc-warning-600 bg-oc-warning-50-tr",
-  success: "text-oc-success bg-oc-success-50-tr",
-  question: "text-oc-accent-1 bg-oc-accent-1-50-tr",
-};
+  delete: 'text-oc-error bg-oc-error-50-tr',
+  warning: 'text-oc-warning-600 bg-oc-warning-50-tr',
+  success: 'text-oc-success bg-oc-success-50-tr',
+  question: 'text-oc-accent-1 bg-oc-accent-1-50-tr'
+}
 </script>
 
 <template>

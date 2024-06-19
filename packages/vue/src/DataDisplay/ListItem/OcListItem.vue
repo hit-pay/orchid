@@ -1,11 +1,11 @@
 <script setup>
-import { computed } from "vue";
-import OcTimeLine from "./components/OcTimeLine.vue";
-import OcWebhook from "./components/OcWebhook.vue";
-import OcPayment from "./components/OcPayment.vue";
-import OcGeneral from "./components/OcGeneral.vue";
-import OcTerminal from "./components/OcTerminal.vue";
-import OcPage from "./components/OcPage.vue";
+import { computed } from 'vue'
+import OcTimeLine from './components/OcTimeLine.vue'
+import OcWebhook from './components/OcWebhook.vue'
+import OcPayment from './components/OcPayment.vue'
+import OcGeneral from './components/OcGeneral.vue'
+import OcTerminal from './components/OcTerminal.vue'
+import OcPage from './components/OcPage.vue'
 
 const props = defineProps({
   isActive: Boolean,
@@ -18,47 +18,47 @@ const props = defineProps({
   date: String,
   type: {
     type: String,
-    default: "timeLine",
+    default: 'timeLine'
   },
   urls: {
     type: Array,
-    default: () => [],
+    default: () => []
   },
   paymentMethods: {
     type: Array,
-    default: () => [],
+    default: () => []
   },
   chips: {
     type: Array,
-    default: () => [],
+    default: () => []
   },
   details: {
     type: Array,
-    default: () => [],
+    default: () => []
   },
   isDisabled: Boolean,
-  isTransparent: Boolean,
-});
-defineEmits(["more", "edit", "delete", "click:item"]);
+  isTransparent: Boolean
+})
+defineEmits(['more', 'edit', 'delete', 'click:item'])
 
 const getTypeComponent = computed(() => {
   switch (props.type) {
-    case "timeLine":
-      return OcTimeLine;
-    case "webhook":
-      return OcWebhook;
-    case "payment":
-      return OcPayment;
-    case "general":
-      return OcGeneral;
-    case "terminal":
-      return OcTerminal;
-    case "page":
-      return OcPage;
+    case 'timeLine':
+      return OcTimeLine
+    case 'webhook':
+      return OcWebhook
+    case 'payment':
+      return OcPayment
+    case 'general':
+      return OcGeneral
+    case 'terminal':
+      return OcTerminal
+    case 'page':
+      return OcPage
     default:
-      return OcTimeLine;
+      return OcTimeLine
   }
-});
+})
 </script>
 
 <template>

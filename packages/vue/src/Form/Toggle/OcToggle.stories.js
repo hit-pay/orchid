@@ -1,30 +1,30 @@
-import { Theme, Toggle } from "@/orchidui";
-import { ref } from "vue";
+import { Theme, Toggle } from '@/orchidui'
+import { ref } from 'vue'
 
 export default {
   component: Toggle,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const Default = {
   argTypes: {
     size: {
-      control: "select",
-      options: ["default", "small"],
-    },
+      control: 'select',
+      options: ['default', 'small']
+    }
   },
   args: {
     disabled: false,
-    size: "default",
+    size: 'default'
   },
   render: (args) => ({
     components: { Toggle, Theme },
     setup() {
-      const value = ref(false);
+      const value = ref(false)
       return {
         value,
-        args,
-      };
+        args
+      }
     },
     template: `
           <Theme>
@@ -33,9 +33,9 @@ export const Default = {
                 v-model="value" :size="args.size"
             />
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}
 export const Variants = {
   render: () => ({
     components: { Toggle, Theme },
@@ -48,6 +48,6 @@ export const Variants = {
               <Toggle size="small" :model-value="false"/>
             </div>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}

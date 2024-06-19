@@ -1,3 +1,3 @@
-import CardInput from "./OcCardInput.vue";
+import CardInput from './OcCardInput.vue'
 
-export { CardInput };
+export { CardInput }

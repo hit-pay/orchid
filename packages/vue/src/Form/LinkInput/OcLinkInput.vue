@@ -1,6 +1,6 @@
 <script setup>
-import { Input, Dropdown, Icon } from "@/orchidui";
-import { computed, ref } from "vue";
+import { Input, Dropdown, Icon } from '@/orchidui'
+import { computed, ref } from 'vue'
 
 const props = defineProps({
   placeholder: String,
@@ -14,69 +14,62 @@ const props = defineProps({
   title: String,
   links: {
     type: Array,
-    default: () => [],
+    default: () => []
   },
   isRequired: {
     type: Boolean,
-    default: false,
+    default: false
   },
   labelIcon: {
     type: String,
-    default: "",
+    default: ''
   },
   tooltipText: {
     type: String,
-    default: "",
+    default: ''
   },
   tooltipOptions: {
     type: Object,
-    default: () => ({}),
+    default: () => ({})
   },
-  isEdit: Boolean,
-});
+  isEdit: Boolean
+})
 
 const emit = defineEmits({
-  "update:modelValue": [],
-  "update:type": [],
-  "update:title": [],
-});
+  'update:modelValue': [],
+  'update:type': [],
+  'update:title': []
+})
 
-const isDropdownOpened = ref(false);
-const selectedLinkType = ref(props.type ?? props.links?.[0]?.value);
-const linkTitle = ref(props.title ?? "");
+const isDropdownOpened = ref(false)
+const selectedLinkType = ref(props.type ?? props.links?.[0]?.value)
+const linkTitle = ref(props.title ?? '')
 const selectedLinkTypeProps = computed(
-  () => props.links.find((link) => link.value === selectedLinkType.value) ?? {},
-);
-const preFill = computed(() => selectedLinkTypeProps.value.preFill ?? "");
-const localValue = ref(
-  props.modelValue ? props.modelValue.replace(preFill.value, "") : "",
-);
+  () => props.links.find((link) => link.value === selectedLinkType.value) ?? {}
+)
+const preFill = computed(() => selectedLinkTypeProps.value.preFill ?? '')
+const localValue = ref(props.modelValue ? props.modelValue.replace(preFill.value, '') : '')
 
 const updateLinkType = (value) => {
-  const newPreFill = props.links.find((link) => link.value === value)?.preFill;
+  const newPreFill = props.links.find((link) => link.value === value)?.preFill
 
-  emit(
-    "update:modelValue",
-    props.modelValue.replace(preFill.value, newPreFill),
-  );
+  emit('update:modelValue', props.modelValue.replace(preFill.value, newPreFill))
 
-  selectedLinkType.value = value;
-  emit("update:type", value);
-  isDropdownOpened.value = false;
-};
+  selectedLinkType.value = value
+  emit('update:type', value)
+  isDropdownOpened.value = false
+}
 
 const update = (value) => {
-  localValue.value = value;
-  emit("update:modelValue", preFill.value + value);
-  if (!props.isEdit && selectedLinkType.value !== "link") {
-    emit("update:title", value);
+  localValue.value = value
+  emit('update:modelValue', preFill.value + value)
+  if (!props.isEdit && selectedLinkType.value !== 'link') {
+    emit('update:title', value)
   }
-};
+}
 
-const placeholderInput = computed(
-  () => selectedLinkTypeProps.value.placeholder ?? "",
-);
-const isOtherLink = computed(() => selectedLinkType.value === "link");
+const placeholderInput = computed(() => selectedLinkTypeProps.value.placeholder ?? '')
+const isOtherLink = computed(() => selectedLinkType.value === 'link')
 </script>
 
 <template>

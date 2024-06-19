@@ -1,6 +1,6 @@
 <script setup>
-import { Icon, Tooltip } from "@/orchidui";
-import { useSlots } from "vue";
+import { Icon, Tooltip } from '@/orchidui'
+import { useSlots } from 'vue'
 
 defineProps({
   isLoading: Boolean,
@@ -12,12 +12,12 @@ defineProps({
   hover: Boolean,
   shadow: Boolean,
   noData: Boolean,
-  noDataDescription: String,
-});
+  noDataDescription: String
+})
 
-const slots = useSlots();
+const slots = useSlots()
 
-const hasSlot = (name) => !!slots[name];
+const hasSlot = (name) => !!slots[name]
 </script>
 
 <template>
@@ -26,7 +26,7 @@ const hasSlot = (name) => !!slots[name];
     :class="{
       'border-transparent': transparent,
       'hover:shadow': hover,
-      shadow: shadow,
+      shadow: shadow
     }"
   >
     <div
@@ -35,16 +35,10 @@ const hasSlot = (name) => !!slots[name];
       :class="titleClass"
     >
       <div class="uppercase">{{ title }}</div>
-      <Tooltip
-        popper-class="w-max bg-oc-bg"
-        position="top-start"
-        v-if="titleIconTooltip"
-      >
+      <Tooltip popper-class="w-max bg-oc-bg" position="top-start" v-if="titleIconTooltip">
         <Icon class="ml-[3px]" :name="titleIcon" width="16" height="16" />
         <template #popper>
-          <div
-            class="flex flex-col px-3 py-2 text-[12px] text-oc-text-400 font-medium text-sm"
-          >
+          <div class="flex flex-col px-3 py-2 text-[12px] text-oc-text-400 font-medium text-sm">
             {{ titleIconTooltip }}
           </div>
         </template>

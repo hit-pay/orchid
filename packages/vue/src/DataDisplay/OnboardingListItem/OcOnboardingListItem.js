@@ -1,3 +1,3 @@
-import OcOnboardingListItem from "./OcOnboardingListItem.vue";
+import OcOnboardingListItem from './OcOnboardingListItem.vue'
 
-export { OcOnboardingListItem };
+export { OcOnboardingListItem }

@@ -1,5 +1,5 @@
 <script setup>
-import { Skeleton, Chip, Button } from "@/orchidui";
+import { Skeleton, Chip, Button } from '@/orchidui'
 
 defineProps({
   isActive: Boolean,
@@ -8,18 +8,16 @@ defineProps({
   content: String,
   isDropdown: Boolean,
   chipOptions: Object,
-  dropdownOptions: Object,
-});
+  dropdownOptions: Object
+})
 </script>
 
 <template>
   <div
     class="cursor-pointer rounded group font-medium justify-center border gap-y-2 md:w-fit w-full flex flex-col hover:shadow-normal"
     :class="[
-      isActive && !isLoading
-        ? 'border-b-[3px] border-oc-primary'
-        : 'border-oc-accent-1-100',
-      !isLoading ? 'px-5 py-4 h-[76px]' : 'p-3',
+      isActive && !isLoading ? 'border-b-[3px] border-oc-primary' : 'border-oc-accent-1-100',
+      !isLoading ? 'px-5 py-4 h-[76px]' : 'p-3'
     ]"
   >
     <div v-if="isLoading" class="min-w-[138px] flex flex-col gap-y-3">

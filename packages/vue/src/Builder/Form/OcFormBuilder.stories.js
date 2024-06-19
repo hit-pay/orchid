@@ -1,28 +1,20 @@
-import {
-  Theme,
-  FormBuilder,
-  Button,
-  Input,
-  Dropdown,
-  DropdownItem,
-  Icon,
-} from "@/orchidui";
+import { Theme, FormBuilder, Button, Input, Dropdown, DropdownItem, Icon } from '@/orchidui'
 
-import { ref } from "vue";
-import { SampleJsonForm } from "../../data/JsonForm.sample";
+import { ref } from 'vue'
+import { SampleJsonForm } from '../../data/JsonForm.sample'
 
 export default {
   component: FormBuilder,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const Default = {
   args: {
     values: {
-      range_input: [0, 100],
+      range_input: [0, 100]
     },
     errors: {
-      card_input: "",
+      card_input: ''
     },
     grid: {
       xs: {
@@ -46,8 +38,8 @@ export const Default = {
               date_picker_range_from
               toggle_field
           `,
-        rows: "auto",
-        columns: "100%",
+        rows: 'auto',
+        columns: '100%'
       },
       sm: {
         area: `
@@ -70,8 +62,8 @@ export const Default = {
               date_picker_range_from
               toggle_field
           `,
-        rows: "auto",
-        columns: "100%",
+        rows: 'auto',
+        columns: '100%'
       },
       lg: {
         area: `
@@ -85,10 +77,10 @@ export const Default = {
             time_picker_test date_picker_test
             date_picker_range_from toggle_field
           `,
-        rows: "auto",
-        columns: "50% 50%",
-      },
-    },
+        rows: 'auto',
+        columns: '50% 50%'
+      }
+    }
   },
   render: (args) => ({
     components: {
@@ -98,31 +90,31 @@ export const Default = {
       Input,
       Dropdown,
       DropdownItem,
-      Icon,
+      Icon
     },
     setup() {
-      const values = ref(args.values);
-      const errors = ref(args.errors);
+      const values = ref(args.values)
+      const errors = ref(args.errors)
 
       const onUpdateForm = (form, value = null) => {
-        if (typeof form.name === "object") {
+        if (typeof form.name === 'object') {
           form.name.forEach((formName, index) => {
-            values.value[formName.key] = value[index];
-          });
+            values.value[formName.key] = value[index]
+          })
         } else {
-          values.value[form.name] = value;
+          values.value[form.name] = value
         }
-      };
+      }
 
-      const isOpenedDropdown = ref(false);
+      const isOpenedDropdown = ref(false)
       return {
         args,
         values,
         errors,
         onUpdateForm,
         isOpenedDropdown,
-        SampleJsonForm,
-      };
+        SampleJsonForm
+      }
     },
     template: `
           <Theme class="p-8">
@@ -190,100 +182,100 @@ export const Default = {
               </template>
             </FormBuilder>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}
 
 export const ShowIfLogic = {
   args: {
     values: {
-      select_product_from: "all_product",
-      limit_feature_product: false,
+      select_product_from: 'all_product',
+      limit_feature_product: false
     },
-    errors: {},
+    errors: {}
   },
   render: (args) => ({
     components: {
       Theme,
-      FormBuilder,
+      FormBuilder
     },
     setup() {
-      const values = ref(args.values);
-      const errors = ref(args.errors);
+      const values = ref(args.values)
+      const errors = ref(args.errors)
 
       const onUpdateForm = (form, value = null) => {
-        console.log("onUpdateForm", form, value);
-        if (typeof form.name === "object") {
+        console.log('onUpdateForm', form, value)
+        if (typeof form.name === 'object') {
           form.name.forEach((formName, index) => {
-            values.value[formName.key] = value[index];
-          });
+            values.value[formName.key] = value[index]
+          })
         } else {
-          values.value[form.name] = value;
+          values.value[form.name] = value
         }
-      };
+      }
 
-      const isOpenedDropdown = ref(false);
+      const isOpenedDropdown = ref(false)
 
       const JsonForm = [
         {
-          name: "select_product_from_section",
-          type: "SectionItem",
+          name: 'select_product_from_section',
+          type: 'SectionItem',
           props: {
-            title: "Select product from",
-          },
+            title: 'Select product from'
+          }
         },
         {
-          name: "select_product_from",
-          type: "Select",
+          name: 'select_product_from',
+          type: 'Select',
           props: {
             options: [
               {
-                value: "feature",
-                label: "Feature product",
+                value: 'feature',
+                label: 'Feature product'
               },
               {
-                value: "all_product",
-                label: "All product",
+                value: 'all_product',
+                label: 'All product'
               },
               {
-                value: "product_category",
-                label: "Product Category",
+                value: 'product_category',
+                label: 'Product Category'
               },
               {
-                value: "pick_products",
-                label: "Pick Products",
-              },
+                value: 'pick_products',
+                label: 'Pick Products'
+              }
             ],
-            hint: "Learn how to make featured products here.",
-          },
+            hint: 'Learn how to make featured products here.'
+          }
         },
         {
-          name: "limit_feature_product",
-          type: "SectionItem",
+          name: 'limit_feature_product',
+          type: 'SectionItem',
           props: {
-            title: "Limit featured products",
-            isToggle: true,
-          },
+            title: 'Limit featured products',
+            isToggle: true
+          }
         },
         {
-          name: "input",
-          type: "Input",
-          show_if: "limit_feature_product",
+          name: 'input',
+          type: 'Input',
+          show_if: 'limit_feature_product',
           show_if_value: true,
           props: {
-            label: "How many featured products do you want to show?",
-            placeholder: "placeholder",
-          },
-        },
-      ];
+            label: 'How many featured products do you want to show?',
+            placeholder: 'placeholder'
+          }
+        }
+      ]
       return {
         JsonForm,
         args,
         values,
         errors,
         onUpdateForm,
-        isOpenedDropdown,
-      };
+        isOpenedDropdown
+      }
     },
     template: `
           <Theme class="p-8">
@@ -302,6 +294,6 @@ export const ShowIfLogic = {
             >
             </FormBuilder>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}

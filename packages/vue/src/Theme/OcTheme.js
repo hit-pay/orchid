@@ -1,3 +1,3 @@
-import Theme from "./OcTheme.vue";
+import Theme from './OcTheme.vue'
 
-export { Theme };
+export { Theme }

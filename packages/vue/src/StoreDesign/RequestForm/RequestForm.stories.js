@@ -1,62 +1,60 @@
-import { Theme } from "@/orchidui";
+import { Theme } from '@/orchidui'
 
-import RequestForm from "./RequestForm.vue";
-import { ref } from "vue";
+import RequestForm from './RequestForm.vue'
+import { ref } from 'vue'
 export default {
   component: RequestForm,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 const GENERAL_SETTINGS = {
-  top_banner_content: "general value test",
-};
+  top_banner_content: 'general value test'
+}
 
 const SECTION_SETTINGS = [
   {
-    key: "unique_key_1",
-    section: "TopBanner",
-    closable: false,
+    key: 'unique_key_1',
+    section: 'TopBanner',
+    closable: false
   },
   {
-    key: "unique_key_2",
-    section: "Banner",
-  },
-];
+    key: 'unique_key_2',
+    section: 'Banner'
+  }
+]
 
 export const SDTopBanner = {
   render: () => ({
     components: {
       Theme,
-      RequestForm,
+      RequestForm
     },
     setup() {
-      const generalData = ref(GENERAL_SETTINGS);
-      const sectionData = ref(
-        SECTION_SETTINGS.find((s) => s.section === "TopBanner"),
-      );
+      const generalData = ref(GENERAL_SETTINGS)
+      const sectionData = ref(SECTION_SETTINGS.find((s) => s.section === 'TopBanner'))
       const JSON_FORM = [
         {
-          name: "closable",
-          type: "SectionItem",
+          name: 'closable',
+          type: 'SectionItem',
           props: {
-            title: "Closable",
-            isToggle: true,
-          },
+            title: 'Closable',
+            isToggle: true
+          }
         },
         {
-          type: "SectionItem",
+          type: 'SectionItem',
           props: {
-            title: "Content",
-          },
+            title: 'Content'
+          }
         },
         {
           general: true,
-          name: "top_banner_content",
-          type: "TextArea",
-        },
-      ];
+          name: 'top_banner_content',
+          type: 'TextArea'
+        }
+      ]
 
-      return { JSON_FORM, generalData, sectionData };
+      return { JSON_FORM, generalData, sectionData }
     },
     template: `
           <Theme>
@@ -68,6 +66,6 @@ export const SDTopBanner = {
             </div>
             </div>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}

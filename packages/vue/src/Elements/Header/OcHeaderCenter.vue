@@ -1,9 +1,9 @@
 <script setup>
-import { Icon } from "@/orchidui";
+import { Icon } from '@/orchidui'
 defineProps({
-  isSaved: Boolean,
-});
-defineEmits(["back"]);
+  isSaved: Boolean
+})
+defineEmits(['back'])
 </script>
 <template>
   <div class="flex items-center">
@@ -17,9 +17,7 @@ defineEmits(["back"]);
         <Icon name="chevron-down" class="rotate-90" />
         Back
       </span>
-      <span v-else class="text-oc-text-300 text-sm md:text-base">
-        Unsaved changes
-      </span>
+      <span v-else class="text-oc-text-300 text-sm md:text-base"> Unsaved changes </span>
       <slot name="after" />
     </slot>
   </div>

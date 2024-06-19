@@ -1,37 +1,37 @@
-import OcBarRaceChart from "./OcBarRaceChart.vue";
+import OcBarRaceChart from './OcBarRaceChart.vue'
 
 export default {
   component: OcBarRaceChart,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const barRace = {
   argTypes: {
     variant: {
-      control: "select",
-      options: ["primary", "purple"],
-    },
+      control: 'select',
+      options: ['primary', 'purple']
+    }
   },
   args: {
-    variant: "primary",
+    variant: 'primary',
     showGrid: false,
     showTooltip: true,
     showLegend: true,
     chartData: [62, 11, 8, 6, 5, 2],
-    labelData: ["50%", "23%", "12%", "10%", "8%", "8%"],
+    labelData: ['50%', '23%', '12%', '10%', '8%', '8%'],
     legendData: [
-      "Running shoes",
+      'Running shoes',
       "Women's ribbed top",
-      "Fleece sweatshirt",
-      "Sportswear Tech Fleece",
-      "Joggers",
-      "Joggers",
-    ],
+      'Fleece sweatshirt',
+      'Sportswear Tech Fleece',
+      'Joggers',
+      'Joggers'
+    ]
   },
   render: (args) => ({
     components: { OcBarRaceChart },
     setup() {
-      return { args };
+      return { args }
     },
     template: `
           <div>
@@ -46,6 +46,6 @@ export const barRace = {
                 :legend-data="args.legendData"
             />
           </div>
-        `,
-  }),
-};
+        `
+  })
+}

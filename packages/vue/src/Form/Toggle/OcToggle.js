@@ -1,3 +1,3 @@
-import Toggle from "./OcToggle.vue";
+import Toggle from './OcToggle.vue'
 
-export { Toggle };
+export { Toggle }

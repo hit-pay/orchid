@@ -1,49 +1,49 @@
-import { Theme, Calendar, Checkbox } from "@/orchidui";
-import { ref } from "vue";
+import { Theme, Calendar, Checkbox } from '@/orchidui'
+import { ref } from 'vue'
 
 export default {
   component: Calendar,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const calendarStory = {
   argTypes: {
     disabledDate: {
-      control: "object",
+      control: 'object',
       description:
-        "a function determining if a date is disabled with that date as its parameter. Should return a Boolean",
+        'a function determining if a date is disabled with that date as its parameter. Should return a Boolean'
     },
     type: {
-      control: "select",
-      options: ["default", "range"],
+      control: 'select',
+      options: ['default', 'range']
     },
     position: {
-      control: "select",
-      options: ["floating", "inline"],
+      control: 'select',
+      options: ['floating', 'inline']
     },
     isIndefinite: {
-      control: "boolean",
-      description: "Whether the calendar is indefinite or not",
-    },
+      control: 'boolean',
+      description: 'Whether the calendar is indefinite or not'
+    }
   },
   args: {
-    type: "default",
-    minDate: "",
-    maxDate: "",
-    position: "floating",
-    isIndefinite: false,
+    type: 'default',
+    minDate: '',
+    maxDate: '',
+    position: 'floating',
+    isIndefinite: false
   },
   render: (args) => ({
     components: {
       Theme,
       Calendar,
-      Checkbox,
+      Checkbox
     },
     setup() {
-      const modelValue = ref();
-      const rangeModelValue = ref([]);
+      const modelValue = ref()
+      const rangeModelValue = ref([])
 
-      return { modelValue, rangeModelValue, args };
+      return { modelValue, rangeModelValue, args }
     },
     template: `
           <Theme>
@@ -60,6 +60,6 @@ export const calendarStory = {
               </div>
             </div>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}

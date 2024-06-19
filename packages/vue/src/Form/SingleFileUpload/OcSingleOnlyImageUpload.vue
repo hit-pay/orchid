@@ -1,35 +1,35 @@
 <script setup lang="ts">
-import { Icon, Dropdown } from "@/orchidui";
-import { ModalCropper } from "@/orchidui/Cropper.js";
-import { ref } from "vue";
+import { Icon, Dropdown } from '@/orchidui'
+import { ModalCropper } from '@/orchidui/Cropper.js'
+import { ref } from 'vue'
 
 const props = defineProps({
   accept: {
     type: String,
-    default: "",
+    default: ''
   },
   uploadedImage: {
     type: Object,
-    default: () => ({}),
+    default: () => ({})
   },
   imageClasses: {
     type: String,
-    default: "",
-  },
-});
-const emit = defineEmits(["change", "update:uploadedImage", "delete"]);
-const isDropdownOpen = ref(false);
-const isEditOpen = ref(false);
-const editImg = ref("");
+    default: ''
+  }
+})
+const emit = defineEmits(['change', 'update:uploadedImage', 'delete'])
+const isDropdownOpen = ref(false)
+const isEditOpen = ref(false)
+const editImg = ref('')
 
 const changeImage = (url) => {
-  const changedFile = props.uploadedImage;
-  changedFile.fileUrl = url;
-  changedFile.fileName = Date.now();
-  isEditOpen.value = false;
-  editImg.value = "";
-  emit("update:uploadedImage", changedFile);
-};
+  const changedFile = props.uploadedImage
+  changedFile.fileUrl = url
+  changedFile.fileName = Date.now()
+  isEditOpen.value = false
+  editImg.value = ''
+  emit('update:uploadedImage', changedFile)
+}
 </script>
 
 <template>
@@ -67,9 +67,11 @@ const changeImage = (url) => {
             <div
               class="flex p-3 cursor-pointer items-center gap-x-3"
               @click="
-                editImg = uploadedImage.fileUrl;
-                isDropdownOpen = false;
-                isEditOpen = true;
+                () => {
+                  editImg = uploadedImage.fileUrl
+                  isDropdownOpen = false
+                  isEditOpen = true
+                }
               "
             >
               <Icon width="16" height="16" name="pencil" />
@@ -78,8 +80,10 @@ const changeImage = (url) => {
             <div
               class="flex p-3 cursor-pointer items-center text-oc-error gap-x-3"
               @click="
-                $emit('delete');
-                isDropdownOpen = false;
+                () => {
+                  $emit('delete')
+                  isDropdownOpen = false
+                }
               "
             >
               <Icon width="16" height="16" name="bin" />
@@ -88,11 +92,7 @@ const changeImage = (url) => {
           </div>
         </template>
       </Dropdown>
-      <img
-        :src="uploadedImage.fileUrl"
-        alt="uploaded-image"
-        class="object-contain h-full w-full"
-      />
+      <img :src="uploadedImage.fileUrl" alt="uploaded-image" class="object-contain h-full w-full" />
     </div>
 
     <teleport to="body">
@@ -101,8 +101,10 @@ const changeImage = (url) => {
         v-model="isEditOpen"
         :img="editImg"
         @close="
-          isEditOpen = false;
-          editImg = '';
+          () => {
+            isEditOpen = false
+            editImg = ''
+          }
         "
         @change-image="changeImage"
       />

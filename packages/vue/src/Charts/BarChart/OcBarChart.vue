@@ -3,13 +3,13 @@
 </template>
 
 <script setup>
-import { computed, ref } from "vue";
-import { useChart } from "@/orchidui/composables/useChart.js";
+import { computed, ref } from 'vue'
+import { useChart } from '@/orchidui/composables/useChart.js'
 
 const props = defineProps({
   variant: {
     type: String,
-    validator: (value) => ["primary", "purple"].includes(value),
+    validator: (value) => ['primary', 'purple'].includes(value)
   },
   showTooltip: Boolean,
   showLegend: Boolean,
@@ -19,51 +19,51 @@ const props = defineProps({
   yAxisFormatter: Function,
   xAxisFormatter: Function,
   tooltipFormatter: Function,
-  tooltipValueFormatter: Function,
-});
+  tooltipValueFormatter: Function
+})
 
 const variants = {
-  primary: "#2465DE",
-  purple: "#B14AED",
-};
+  primary: '#2465DE',
+  purple: '#B14AED'
+}
 
 const options = computed(() => ({
   xAxis: {
-    type: "category",
+    type: 'category',
     data: props.labelData,
     axisTick: {
-      show: false,
+      show: false
     },
     axisLabel: {
-      color: "#9295A5",
-      formatter: props.xAxisFormatter,
+      color: '#9295A5',
+      formatter: props.xAxisFormatter
     },
     axisLine: {
       lineStyle: {
-        color: "#F2F2F4",
-      },
-    },
+        color: '#F2F2F4'
+      }
+    }
   },
   yAxis: {
-    type: "value",
+    type: 'value',
     splitLine: {
-      show: false,
+      show: false
     },
     axisLabel: {
-      color: "#9295A5",
-      formatter: props.yAxisFormatter,
-    },
+      color: '#9295A5',
+      formatter: props.yAxisFormatter
+    }
   },
   grid: {
     show: props.showGrid,
-    right: "10px",
+    right: '10px',
     left: 0,
-    top: "10px",
+    top: '10px',
     bottom: 0,
-    containLabel: true,
+    containLabel: true
   },
   legend: {
-    show: props.showLegend,
+    show: props.showLegend
   },
   tooltip: {
     show: props.showTooltip,
@@ -72,13 +72,13 @@ const options = computed(() => ({
     borderRadius: 8,
     formatter: (params) => {
       if (props.tooltipFormatter) {
-        return props.tooltipFormatter(params);
+        return props.tooltipFormatter(params)
       }
 
-      let value = params.value;
+      let value = params.value
 
       if (props.tooltipValueFormatter) {
-        value = props.tooltipValueFormatter(value);
+        value = props.tooltipValueFormatter(value)
       }
 
       return `
@@ -91,31 +91,31 @@ const options = computed(() => ({
             <div class="text-oc-text font-medium text-[12px]">${value}</div>
         </div>
 
-      `;
-    },
+      `
+    }
   },
   series: [
     {
       data: props.chartData,
-      type: "bar",
+      type: 'bar',
       smooth: true,
       showSymbol: false,
       itemStyle: {
         color: variants[props.variant],
         opacity: 0.5,
-        borderRadius: [4, 4, 0, 0], // Sets a 4pt radius for the top-left and top-right corners
+        borderRadius: [4, 4, 0, 0] // Sets a 4pt radius for the top-left and top-right corners
       },
       emphasis: {
         itemStyle: {
           color: variants[props.variant],
           opacity: 1,
-          borderRadius: [4, 4, 0, 0], // Reapply the 4pt radius for emphasis states
-        },
-      },
-    },
-  ],
-}));
-const barChart = ref();
+          borderRadius: [4, 4, 0, 0] // Reapply the 4pt radius for emphasis states
+        }
+      }
+    }
+  ]
+}))
+const barChart = ref()
 
-useChart(barChart, options);
+useChart(barChart, options)
 </script>

@@ -1,10 +1,10 @@
-import { Theme, RangeInput } from "@/orchidui";
-import { ref } from "vue";
+import { Theme, RangeInput } from '@/orchidui'
+import { ref } from 'vue'
 
 export default {
   component: RangeInput,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const Default = {
   argTypes: {},
@@ -12,17 +12,17 @@ export const Default = {
     maxLimit: 100,
     minLimit: 0,
     minGap: 0,
-    label: "",
-    hint: "",
-    errorMessage: "",
-    onlyInput: true,
+    label: '',
+    hint: '',
+    errorMessage: '',
+    onlyInput: true
   },
   render: (args) => ({
     components: { Theme, RangeInput },
     setup() {
-      const modelValue = ref("");
+      const modelValue = ref('')
 
-      return { args, modelValue };
+      return { args, modelValue }
     },
     template: `
           <Theme>
@@ -38,6 +38,6 @@ export const Default = {
                 :errorMessage="args.errorMessage"
             />
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}

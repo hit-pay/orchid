@@ -1,9 +1,9 @@
 <script setup>
-import { Button } from "@/orchidui";
+import { Button } from '@/orchidui'
 defineProps({
-  section: Object,
-});
-defineEmits(["add", "customize"]);
+  section: Object
+})
+defineEmits(['add', 'customize'])
 </script>
 <template>
   <div class="flex flex-col">
@@ -19,12 +19,7 @@ defineEmits(["add", "customize"]);
             size="small"
             @click="$emit('customize', section)"
           />
-          <Button
-            class="w-1/2"
-            label="Add"
-            size="small"
-            @click="$emit('add', section)"
-          />
+          <Button class="w-1/2" label="Add" size="small" @click="$emit('add', section)" />
         </div>
       </div>
       <img class="w-full" :src="section.preview" :alt="section.title" />

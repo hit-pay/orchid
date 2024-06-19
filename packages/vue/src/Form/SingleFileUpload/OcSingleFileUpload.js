@@ -1,3 +1,3 @@
-import SingleFileUpload from "./OcSingleFileUpload.vue";
+import SingleFileUpload from './OcSingleFileUpload.vue'
 
-export { SingleFileUpload };
+export { SingleFileUpload }

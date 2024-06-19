@@ -1,24 +1,24 @@
-import { Theme, ShareIcon } from "@/orchidui";
+import { Theme, ShareIcon } from '@/orchidui'
 
 export default {
   component: ShareIcon,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const VariantColor = {
   args: {
-    text: "Whatsapp",
-    icon: "whatsapp",
+    text: 'Whatsapp',
+    icon: 'whatsapp',
     isOnlyIcon: true,
     tooltipOptions: {
-      position: "bottom",
-      distance: 9,
-    },
+      position: 'bottom',
+      distance: 9
+    }
   },
   render: (args) => ({
     components: { ShareIcon, Theme },
     setup() {
-      return { args };
+      return { args }
     },
     template: `
           <Theme>
@@ -26,6 +26,6 @@ export const VariantColor = {
               <ShareIcon v-bind="args"/>
             </div>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}

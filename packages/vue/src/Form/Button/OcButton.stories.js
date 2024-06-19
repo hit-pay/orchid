@@ -1,50 +1,50 @@
-import { Theme, Button } from "@/orchidui";
+import { Theme, Button } from '@/orchidui'
 
 export default {
   component: Button,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const Default = {
   argTypes: {
     leftIcon: {
-      control: "select",
-      options: ["", "circle"],
+      control: 'select',
+      options: ['', 'circle']
     },
     additionalAreaIcon: {
-      control: "select",
-      options: ["", "chevron-down", "circle"],
+      control: 'select',
+      options: ['', 'chevron-down', 'circle']
     },
     rightIcon: {
-      control: "select",
-      options: ["", "plus"],
+      control: 'select',
+      options: ['', 'plus']
     },
     variant: {
-      control: "select",
-      options: ["primary", "secondary", "destructive"],
+      control: 'select',
+      options: ['primary', 'secondary', 'destructive']
     },
     size: {
-      control: "select",
-      options: ["default", "small", "big"],
-    },
+      control: 'select',
+      options: ['default', 'small', 'big']
+    }
   },
   args: {
-    label: "Button Text",
-    leftIcon: "",
-    rightIcon: "",
+    label: 'Button Text',
+    leftIcon: '',
+    rightIcon: '',
     isDisabled: false,
     isLoading: false,
     isTransparent: false,
     isAdditionalArea: false,
-    additionalAreaIcon: "chevron-down",
+    additionalAreaIcon: 'chevron-down',
     isRoundedFull: false,
-    variant: "primary",
-    size: "default",
+    variant: 'primary',
+    size: 'default'
   },
   render: (args) => ({
     components: { Button, Theme },
     setup() {
-      return { args };
+      return { args }
     },
     template: `
           <Theme colorMode="light">
@@ -64,9 +64,9 @@ export const Default = {
               />
             </div>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}
 
 export const SizeVariant = {
   render: () => ({
@@ -91,9 +91,9 @@ export const SizeVariant = {
               <Button size="big" variant="destructive" label="Button Text"/>
             </div>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}
 
 export const ButtonVariant = {
   render: () => ({
@@ -125,6 +125,6 @@ export const ButtonVariant = {
               <Button variant="destructive" label="Button Text" is-additional-area additionalAreaIcon="chevron-down"/>
             </div>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}

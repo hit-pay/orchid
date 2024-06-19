@@ -1,52 +1,52 @@
-import { Theme, PageTitle } from "@/orchidui";
+import { Theme, PageTitle } from '@/orchidui'
 
 export default {
   component: PageTitle,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const Default = {
   args: {
-    title: "Page Title",
-    description: "",
+    title: 'Page Title',
+    description: '',
     primaryButtonProps: {
-      leftIcon: "plus",
-      label: "Primary",
+      leftIcon: 'plus',
+      label: 'Primary',
       onClick: () => {
-        console.log("click new payment link");
-      },
+        console.log('click new payment link')
+      }
     },
     secondaryButtonProps: {
       isDropdownOpened: false,
-      variant: "secondary",
-      label: "Secondary",
+      variant: 'secondary',
+      label: 'Secondary',
       dropdownOptions: [
         {
-          name: "bulk_create",
-          icon: "upload",
-          text: "Bulk create",
+          name: 'bulk_create',
+          icon: 'upload',
+          text: 'Bulk create',
           onClick: () => {
-            console.log("click bulk create");
-          },
+            console.log('click bulk create')
+          }
         },
         {
-          name: "download",
-          icon: "download",
-          text: "Export",
+          name: 'download',
+          icon: 'download',
+          text: 'Export',
           onClick: () => {
-            console.log("click download");
-          },
-        },
-      ],
+            console.log('click download')
+          }
+        }
+      ]
     },
     isBack: false,
     isCopy: false,
-    chipOptions: null,
+    chipOptions: null
   },
   render: (args) => ({
     components: { PageTitle, Theme },
     setup() {
-      return { args };
+      return { args }
     },
     template: `
           <Theme>
@@ -56,6 +56,6 @@ export const Default = {
               </template>
             </PageTitle>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}

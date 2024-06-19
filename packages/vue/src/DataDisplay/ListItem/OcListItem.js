@@ -1,4 +1,4 @@
-import ListItem from "./OcListItem.vue";
-import ListUrl from "./components/OcListUrl.vue";
+import ListItem from './OcListItem.vue'
+import ListUrl from './components/OcListUrl.vue'
 
-export { ListItem, ListUrl };
+export { ListItem, ListUrl }

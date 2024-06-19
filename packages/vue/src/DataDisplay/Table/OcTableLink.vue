@@ -1,7 +1,7 @@
 <script setup>
 defineProps({
-  link: String,
-});
+  link: String
+})
 </script>
 <template>
   <div v-if="!link">

@@ -1,5 +1,5 @@
-import Overview from "./OcOverview.vue";
-import OverviewIcon from "./OcOverviewIcon.vue";
-import OverviewItem from "./OcOverviewItem.vue";
+import Overview from './OcOverview.vue'
+import OverviewIcon from './OcOverviewIcon.vue'
+import OverviewItem from './OcOverviewItem.vue'
 
-export { Overview, OverviewIcon, OverviewItem };
+export { Overview, OverviewIcon, OverviewItem }

@@ -1,3 +1,3 @@
-import Radio from "./OcRadio.vue";
+import Radio from './OcRadio.vue'
 
-export { Radio };
+export { Radio }

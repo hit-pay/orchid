@@ -1,8 +1,8 @@
 <script setup>
-import { ref } from "vue";
-import { Icon, Checkbox } from "@/orchidui";
+import { ref } from 'vue'
+import { Icon, Checkbox } from '@/orchidui'
 
-defineEmits(["select", "show:children", "hide:children"]);
+defineEmits(['select', 'show:children', 'hide:children'])
 defineProps({
   label: String,
   subLabel: String,
@@ -11,15 +11,14 @@ defineProps({
   isPartial: Boolean,
   hasChildren: Boolean,
   showChildren: Boolean,
-  isDisabled: Boolean,
-});
+  isDisabled: Boolean
+})
 
 const optionItemRef = ref()
 
 defineExpose({
-  optionItemRef,
-});
-
+  optionItemRef
+})
 </script>
 
 <template>
@@ -31,7 +30,7 @@ defineExpose({
       class="w-full p-3 flex items-center text-oc-text-400 justify-between cursor-pointer gap-x-3"
       :class="{
         'bg-oc-accent-1-50': isSelected && !isCheckboxes,
-        'opacity-50 hover:bg-white !cursor-default': isDisabled,
+        'opacity-50 hover:bg-white !cursor-default': isDisabled
       }"
       @click="$emit('select')"
     >
@@ -46,18 +45,12 @@ defineExpose({
 
         <div class="flex flex-col gap-3" :class="{ 'flex-1': isCheckboxes }">
           <span>{{ label }}</span>
-          <span v-if="subLabel" class="text-sm text-oc-text-300">{{
-            subLabel
-          }}</span>
+          <span v-if="subLabel" class="text-sm text-oc-text-300">{{ subLabel }}</span>
         </div>
 
         <slot name="leading"></slot>
       </div>
-      <Icon
-        v-if="isSelected && !isCheckboxes"
-        class="w-5 h-5 text-oc-primary"
-        name="check-2"
-      />
+      <Icon v-if="isSelected && !isCheckboxes" class="w-5 h-5 text-oc-primary" name="check-2" />
     </div>
     <Icon
       v-if="hasChildren"

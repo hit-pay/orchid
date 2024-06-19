@@ -8,22 +8,22 @@ import {
   TableCellContent,
   Button,
   Dropdown,
-  DropdownItem,
-} from "@/orchidui";
+  DropdownItem
+} from '@/orchidui'
 
-import { ref } from "vue";
+import { ref } from 'vue'
 
 export default {
   component: DataTable,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
-import { DataTableOptions, Filter } from "../../data/DataTableOptions.sample";
+import { DataTableOptions, Filter } from '../../data/DataTableOptions.sample'
 
 export const Default = {
   args: {
     options: DataTableOptions,
-    isLoading: false,
+    isLoading: false
   },
   render: (args) => ({
     components: {
@@ -36,27 +36,27 @@ export const Default = {
       TableCellContent,
       Button,
       Dropdown,
-      DropdownItem,
+      DropdownItem
     },
     setup() {
-      const filter = ref(Filter);
-      const changedFields = ref([]);
-      const selectedRows = ref([]);
-      const showDropdown = ref({});
+      const filter = ref(Filter)
+      const changedFields = ref([])
+      const selectedRows = ref([])
+      const showDropdown = ref({})
       const updateFilterData = (data) => {
-        filter.value = data;
-      };
+        filter.value = data
+      }
       const onClickRow = (val) => {
-        console.log("onClickRow  ", val);
-      };
+        console.log('onClickRow  ', val)
+      }
 
       const handleOpenDropdown = (itemId) => {
         Object.keys(showDropdown.value).forEach((id) => {
           if (id !== itemId) {
-            showDropdown.value[id] = false;
+            showDropdown.value[id] = false
           }
-        });
-      };
+        })
+      }
 
       return {
         args,
@@ -66,8 +66,8 @@ export const Default = {
         showDropdown,
         handleOpenDropdown,
         updateFilterData,
-        onClickRow,
-      };
+        onClickRow
+      }
     },
     template: `
           <Theme class="p-8">
@@ -175,6 +175,6 @@ export const Default = {
               </template>
             </DataTable>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}

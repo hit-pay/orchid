@@ -1,18 +1,18 @@
-import { Theme, Button, OcModalPage } from "@/orchidui";
-import { ref } from "vue";
+import { Theme, Button, OcModalPage } from '@/orchidui'
+import { ref } from 'vue'
 
 export default {
   component: OcModalPage,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 export const Default = {
   argTypes: {},
   args: {},
   render: (args) => ({
     components: { Theme, Button, OcModalPage },
     setup() {
-      const modalValue = ref(false);
-      return { modalValue, args };
+      const modalValue = ref(false)
+      return { modalValue, args }
     },
     template: `
       <Theme>
@@ -49,6 +49,6 @@ export const Default = {
           </OcModalPage>
         </div>
       </Theme>
-    `,
-  }),
-};
+    `
+  })
+}

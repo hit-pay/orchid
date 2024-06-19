@@ -1,188 +1,188 @@
-import { FONT_HEADING_OPTIONS, FONT_BODY_OPTIONS } from "../Font.sample";
+import { FONT_HEADING_OPTIONS, FONT_BODY_OPTIONS } from '../Font.sample'
 const STYLES_FORM = [
   {
-    name: "Font",
-    type: "Children",
-    icon: "font",
-    label: "Fonts",
+    name: 'Font',
+    type: 'Children',
+    icon: 'font',
+    label: 'Fonts',
     children: [
       {
-        name: "font_heading",
-        type: "Font",
-        options: "font_heading",
+        name: 'font_heading',
+        type: 'Font',
+        options: 'font_heading',
         props: {
-          label: "Heading",
-          placeholder: "Choose Font",
-          options: FONT_HEADING_OPTIONS,
-        },
+          label: 'Heading',
+          placeholder: 'Choose Font',
+          options: FONT_HEADING_OPTIONS
+        }
       },
       {
-        name: "font_body",
-        type: "Font",
-        options: "font_body",
+        name: 'font_body',
+        type: 'Font',
+        options: 'font_body',
         props: {
-          label: "Body",
-          placeholder: "Choose Font",
-          options: FONT_BODY_OPTIONS,
-        },
-      },
-    ],
+          label: 'Body',
+          placeholder: 'Choose Font',
+          options: FONT_BODY_OPTIONS
+        }
+      }
+    ]
   },
   {
-    name: "GlobalColor",
-    type: "Children",
-    icon: "color-circle",
-    label: "Global Colors",
+    name: 'GlobalColor',
+    type: 'Children',
+    icon: 'color-circle',
+    label: 'Global Colors',
     children: [
       {
-        type: "Colors",
+        type: 'Colors',
         name: [
           {
             props: {
-              label: "Background Color",
+              label: 'Background Color'
             },
-            key: "color_bg",
+            key: 'color_bg'
           },
           {
             props: {
-              label: "Text Color",
+              label: 'Text Color'
             },
-            key: "color_text",
-          },
-        ],
-      },
-    ],
+            key: 'color_text'
+          }
+        ]
+      }
+    ]
   },
   {
-    name: "Button",
-    type: "Children",
-    icon: "button",
-    label: "Button",
-    children: [
-      {
-        name: [
-          {
-            props: {
-              label: "Background Color",
-            },
-            key: "color_primary",
-          },
-          {
-            props: {
-              label: "Text Color",
-            },
-            key: "color_primary_text",
-          },
-        ],
-        type: "Colors",
-      },
-      {
-        name: "button_rounded",
-        type: "Slider",
-        props: {
-          label: "Rounded Corner",
-          variant: "right",
-        },
-      },
-    ],
-  },
-  {
-    name: "ProductCard",
-    type: "Children",
-    icon: "product-card",
-    label: "Card",
+    name: 'Button',
+    type: 'Children',
+    icon: 'button',
+    label: 'Button',
     children: [
       {
         name: [
           {
             props: {
-              label: "Background Color",
-              variant: "gradient",
+              label: 'Background Color'
             },
-            key: "card_color_bg",
+            key: 'color_primary'
           },
           {
             props: {
-              label: "Text Color",
+              label: 'Text Color'
             },
-            key: "card_color_text",
-          },
+            key: 'color_primary_text'
+          }
         ],
-        type: "Colors",
+        type: 'Colors'
       },
       {
-        name: "card_rounded",
-        type: "Slider",
+        name: 'button_rounded',
+        type: 'Slider',
         props: {
-          label: "Rounded Corner",
-          variant: "right",
-        },
+          label: 'Rounded Corner',
+          variant: 'right'
+        }
+      }
+    ]
+  },
+  {
+    name: 'ProductCard',
+    type: 'Children',
+    icon: 'product-card',
+    label: 'Card',
+    children: [
+      {
+        name: [
+          {
+            props: {
+              label: 'Background Color',
+              variant: 'gradient'
+            },
+            key: 'card_color_bg'
+          },
+          {
+            props: {
+              label: 'Text Color'
+            },
+            key: 'card_color_text'
+          }
+        ],
+        type: 'Colors'
       },
       {
-        name: "card_shadow",
-        type: "RadioGroup",
+        name: 'card_rounded',
+        type: 'Slider',
         props: {
-          label: "Shadow size",
-          alignment: "horizontal",
+          label: 'Rounded Corner',
+          variant: 'right'
+        }
+      },
+      {
+        name: 'card_shadow',
+        type: 'RadioGroup',
+        props: {
+          label: 'Shadow size',
+          alignment: 'horizontal',
           radio: [
             {
-              value: "none",
-              label: "None",
+              value: 'none',
+              label: 'None'
             },
             {
-              value: "0px 4px 30px -12px var(--color-shadow)",
-              label: "Small",
+              value: '0px 4px 30px -12px var(--color-shadow)',
+              label: 'Small'
             },
             {
-              value: "0px 4px 30px -4px var(--color-shadow)",
-              label: "Medium",
+              value: '0px 4px 30px -4px var(--color-shadow)',
+              label: 'Medium'
             },
             {
-              value: "0px 4px 30px 0px var(--color-shadow)",
-              label: "Large",
-            },
-          ],
-        },
+              value: '0px 4px 30px 0px var(--color-shadow)',
+              label: 'Large'
+            }
+          ]
+        }
       },
       {
-        name: "card_shadow_effect",
-        type: "RadioGroup",
+        name: 'card_shadow_effect',
+        type: 'RadioGroup',
         props: {
-          label: "Shadow size effect",
-          alignment: "horizontal",
+          label: 'Shadow size effect',
+          alignment: 'horizontal',
           radio: [
             {
-              value: "none",
-              label: "None",
+              value: 'none',
+              label: 'None'
             },
             {
-              value: "0px 4px 30px -12px var(--color-shadow)",
-              label: "Small",
+              value: '0px 4px 30px -12px var(--color-shadow)',
+              label: 'Small'
             },
             {
-              value: "0px 4px 30px -4px var(--color-shadow)",
-              label: "Medium",
+              value: '0px 4px 30px -4px var(--color-shadow)',
+              label: 'Medium'
             },
             {
-              value: "0px 4px 30px 0px var(--color-shadow)",
-              label: "Large",
-            },
-          ],
-        },
+              value: '0px 4px 30px 0px var(--color-shadow)',
+              label: 'Large'
+            }
+          ]
+        }
       },
       {
         name: [
           {
             props: {
-              label: "Shadow Color",
+              label: 'Shadow Color'
             },
-            key: "color_shadow",
-          },
+            key: 'color_shadow'
+          }
         ],
-        type: "Colors",
-      },
-    ],
-  },
-];
+        type: 'Colors'
+      }
+    ]
+  }
+]
 
-export { STYLES_FORM };
+export { STYLES_FORM }

@@ -1,51 +1,44 @@
 <script setup lang="ts">
-import { Icon } from "@/orchidui";
-import { ref, watch } from "vue";
-import OnboardingStatusIcon from "./OnboardingStatusIcon.vue";
+import { Icon } from '@/orchidui'
+import { ref, watch } from 'vue'
+import OnboardingStatusIcon from './OnboardingStatusIcon.vue'
 
 defineProps({
   description: {
     type: String,
-    default: "",
+    default: ''
   },
   title: {
     type: String,
-    default: "",
+    default: ''
   },
   isBorder: {
     type: Boolean,
-    default: false,
+    default: false
   },
   variant: {
     type: String,
-    default: "current",
+    default: 'current',
     validator: (value) =>
-      [
-        "completed",
-        "not_completed",
-        "current",
-        "partially_completed",
-        "pending",
-        "error",
-      ].includes(value),
-  },
-});
+      ['completed', 'not_completed', 'current', 'partially_completed', 'pending', 'error'].includes(
+        value
+      )
+  }
+})
 
-const bodyWrapper = ref();
-const isOpen = ref(false);
+const bodyWrapper = ref()
+const isOpen = ref(false)
 
 const calculateHeight = () => {
   if (bodyWrapper.value) {
-    bodyWrapper.value.style.height = isOpen.value
-      ? `${bodyWrapper.value.scrollHeight}px`
-      : "0px";
+    bodyWrapper.value.style.height = isOpen.value ? `${bodyWrapper.value.scrollHeight}px` : '0px'
   }
-};
+}
 const toggle = () => {
-  isOpen.value = !isOpen.value;
-  calculateHeight();
-};
-watch(() => bodyWrapper.value, calculateHeight);
+  isOpen.value = !isOpen.value
+  calculateHeight()
+}
+watch(() => bodyWrapper.value, calculateHeight)
 </script>
 
 <template>

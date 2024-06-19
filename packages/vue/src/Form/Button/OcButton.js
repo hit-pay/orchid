@@ -1,3 +1,3 @@
-import Button from "./OcButton.vue";
+import Button from './OcButton.vue'
 
-export { Button };
+export { Button }

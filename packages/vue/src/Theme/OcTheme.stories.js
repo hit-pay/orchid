@@ -1,9 +1,9 @@
-import { Theme } from "@/orchidui";
+import { Theme } from '@/orchidui'
 
 export default {
   component: Theme,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const ColorMode = {
   render: () => ({
@@ -17,6 +17,6 @@ export const ColorMode = {
               Dark Mode
             </Theme>
           </div>
-        `,
-  }),
-};
+        `
+  })
+}

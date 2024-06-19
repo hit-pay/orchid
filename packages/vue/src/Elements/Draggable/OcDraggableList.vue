@@ -1,53 +1,51 @@
 <!-- TODO : group not support nested dynamic -->
 <script setup>
-import { Dropdown, Icon, Tooltip } from "@/orchidui";
-import { Draggable } from "@/orchidui/Draggable";
-import { ref } from "vue";
+import { Dropdown, Icon, Tooltip } from '@/orchidui'
+import { Draggable } from '@/orchidui/Draggable'
+import { ref } from 'vue'
 
 defineProps({
   modelValue: Array,
   iconKey: {
     type: String,
-    default: "icon",
+    default: 'icon'
   },
   isChildren: Boolean,
   childrenKey: {
     type: String,
-    default: "children",
+    default: 'children'
   },
   isLink: Boolean,
   linkKey: {
     type: String,
-    default: "link",
+    default: 'link'
   },
   isDisabled: Boolean,
   classes: {
     type: String,
-    default: "",
+    default: ''
   },
-  titleWidth: String,
-});
+  titleWidth: String
+})
 
 const emit = defineEmits({
-  "update:modelValue": [],
-  "click:element": [],
-  detectMove: null,
-});
-const isHovered = ref([]);
-const isDropdownOpen = ref([]);
+  'update:modelValue': [],
+  'click:element': [],
+  detectMove: null
+})
+const isHovered = ref([])
+const isDropdownOpen = ref([])
 
 const handleEmit = (list, element) => {
-  emit("update:modelValue", list, element);
-};
+  emit('update:modelValue', list, element)
+}
 </script>
 <template>
   <Draggable
     v-slot="{ list }"
     :model-value="modelValue"
     class="grid gap-3"
-    @update:model-value="
-      (changedList, changedElement) => handleEmit(changedList, changedElement)
-    "
+    @update:model-value="(changedList, changedElement) => handleEmit(changedList, changedElement)"
     @detect-move="$emit('detectMove', $event)"
   >
     <!-- wrapper -->
@@ -65,8 +63,10 @@ const handleEmit = (list, element) => {
               : 'hover:shadow bg-oc-accent-1-50 hover:bg-oc-gray-50'
       "
       @mouseleave="
-        isDropdownOpen[element.id] = false;
-        isHovered[element.id] = false;
+        () => {
+          isDropdownOpen[element.id] = false
+          isHovered[element.id] = false
+        }
       "
       @mouseover="isHovered[element.id] = true"
       @click="$emit('click:element', element)"
@@ -78,9 +78,7 @@ const handleEmit = (list, element) => {
           <!-- icon -->
           <div
             class="px-2 flex items-center"
-            :class="
-              !isDisabled && !element.isDisable ? 'drag-el cursor-move' : ''
-            "
+            :class="!isDisabled && !element.isDisable ? 'drag-el cursor-move' : ''"
           >
             <Icon
               v-if="!isDisabled && !element.isDisable"
@@ -161,11 +159,7 @@ const handleEmit = (list, element) => {
                 <Icon name="dots-vertical" />
               </div>
               <template #menu>
-                <slot
-                  name="action-item"
-                  :item="element"
-                  :index="indexElement"
-                ></slot>
+                <slot name="action-item" :item="element" :index="indexElement"></slot>
               </template>
             </Dropdown>
           </slot>

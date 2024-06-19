@@ -1,3 +1,3 @@
-import HorizontalProgressbar from "./OcHorizontalProgressbar.vue";
+import HorizontalProgressbar from './OcHorizontalProgressbar.vue'
 
-export { HorizontalProgressbar };
+export { HorizontalProgressbar }

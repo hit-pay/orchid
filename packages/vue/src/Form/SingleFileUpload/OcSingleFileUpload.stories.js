@@ -1,38 +1,38 @@
-import { ref } from "vue";
-import { SingleFileUpload } from "@/orchidui";
-import { RadioGroup } from "@/orchidui";
+import { ref } from 'vue'
+import { SingleFileUpload } from '@/orchidui'
+import { RadioGroup } from '@/orchidui'
 
 export default {
   component: SingleFileUpload,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const Default = {
   args: {
-    accept: ".png",
+    accept: '.png',
     isPreview: false,
     isImageOnly: false,
     maxSize: 5,
-    label: "",
-    hint: "",
-    errorMessage: "",
+    label: '',
+    hint: '',
+    errorMessage: ''
   },
   render: (args) => ({
     components: { SingleFileUpload, RadioGroup },
     setup() {
-      const modelValue = ref();
-      const variant = ref("upload");
+      const modelValue = ref()
+      const variant = ref('upload')
       const radios = [
         {
-          label: "Upload file",
-          value: "upload",
+          label: 'Upload file',
+          value: 'upload'
         },
         {
-          label: "Insert from URL",
-          value: "url",
-        },
-      ];
-      return { radios, variant, modelValue, args };
+          label: 'Insert from URL',
+          value: 'url'
+        }
+      ]
+      return { radios, variant, modelValue, args }
     },
     template: `
           <div class="p-5 rounded flex flex-col gap-y-2" :class="args.isImageOnly ? '' : 'bg-oc-bg-dark'">
@@ -59,48 +59,48 @@ export const Default = {
                 :error-message="args.errorMessage"/>
           </div>
 
-        `,
-  }),
-};
+        `
+  })
+}
 export const Upload = {
   render: () => ({
     components: { SingleFileUpload },
     setup() {
-      const file = ref();
+      const file = ref()
       return {
-        file,
-      };
+        file
+      }
     },
     template: `
           {{file}}
           <SingleFileUpload v-model="file" is-preview/>
-        `,
-  }),
-};
+        `
+  })
+}
 export const Url = {
   render: () => ({
     components: { SingleFileUpload },
     template: `
           <SingleFileUpload variant="url"/>
-        `,
-  }),
-};
+        `
+  })
+}
 export const ImageOnly = {
   render: () => ({
     components: { SingleFileUpload },
     setup() {
       const imageRef = ref({
         current: {
-          id: "image_1",
-          path: "https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/covers/small/99d696e564ba45fbaa0fb2e3b43d0e27.jpg",
-          caption: "Image 1",
-        },
+          id: 'image_1',
+          path: 'https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/covers/small/99d696e564ba45fbaa0fb2e3b43d0e27.jpg',
+          caption: 'Image 1'
+        }
         //
-      });
+      })
       const onRemoveFile = (data) => {
-        console.log(data);
-      };
-      return { imageRef, onRemoveFile };
+        console.log(data)
+      }
+      return { imageRef, onRemoveFile }
     },
     template: `
 
@@ -110,6 +110,6 @@ export const ImageOnly = {
             is-image-only    
             @onRemoveFile="onRemoveFile"
           />
-        `,
-  }),
-};
+        `
+  })
+}

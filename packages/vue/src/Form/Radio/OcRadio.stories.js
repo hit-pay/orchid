@@ -1,21 +1,21 @@
-import { Theme, Radio } from "@/orchidui";
+import { Theme, Radio } from '@/orchidui'
 
 export default {
   component: Radio,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const Default = {
   args: {
     modelValue: false,
-    errorMessage: "",
+    errorMessage: '',
     isDisabled: false,
-    label: "Text",
-    hint: "Text",
+    label: 'Text',
+    hint: 'Text'
   },
   render: (args) => ({
     setup() {
-      return { args };
+      return { args }
     },
     components: { Radio, Theme },
     template: `
@@ -28,9 +28,9 @@ export const Default = {
           :is-disabled="args.isDisabled"
         />
       </Theme>
-    `,
-  }),
-};
+    `
+  })
+}
 export const Variants = {
   render: () => ({
     components: { Radio, Theme },
@@ -44,9 +44,9 @@ export const Variants = {
           <Radio :model-value="false" is-disabled/>
         </div>
       </Theme>
-    `,
-  }),
-};
+    `
+  })
+}
 
 export const LabelVariants = {
   render: () => ({
@@ -61,9 +61,9 @@ export const LabelVariants = {
           <Radio model-value="5" errorMessage="Error" label="Text"/>
         </div>
       </Theme>
-    `,
-  }),
-};
+    `
+  })
+}
 
 export const buttonVariants = {
   render: () => ({
@@ -78,6 +78,6 @@ export const buttonVariants = {
           <Radio model-value="5" :is-button-variant="true" icon="email" errorMessage="Error" label="Text"/>
         </div>
       </Theme>
-    `,
-  }),
-};
+    `
+  })
+}

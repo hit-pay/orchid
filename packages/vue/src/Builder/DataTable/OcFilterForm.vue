@@ -1,79 +1,73 @@
 <script setup>
-import { Button, FormBuilder } from "@/orchidui";
-import { ref, computed, onMounted } from "vue";
+import { Button, FormBuilder } from '@/orchidui'
+import { ref, computed, onMounted } from 'vue'
 
 const props = defineProps({
   id: {
     type: String,
-    required: true,
+    required: true
   },
   jsonForm: {
-    type: Array,
+    type: Array
   },
   values: {
-    type: Object,
+    type: Object
   },
   actions: {
-    type: Object,
+    type: Object
   },
   grid: {
     type: Object,
-    default: null,
-  },
-});
+    default: null
+  }
+})
 
-const emit = defineEmits(["applyFilter", "cancel", "filter-fields-changed"]);
+const emit = defineEmits(['applyFilter', 'cancel', 'filter-fields-changed'])
 
-const valuesData = ref({});
-const errorsData = ref({});
-const changedFields = ref([]);
+const valuesData = ref({})
+const errorsData = ref({})
+const changedFields = ref([])
 
 const updateChangedFields = (changedField) => {
-  const index = changedFields.value.findIndex(
-    (field) => field === changedField,
-  );
+  const index = changedFields.value.findIndex((field) => field === changedField)
 
   if (index >= 0) {
-    return;
+    return
   }
 
-  changedFields.value.push(changedField);
-};
+  changedFields.value.push(changedField)
+}
 
 const onUpdateForm = (form, value = null) => {
-  if (typeof form.name === "object") {
+  if (typeof form.name === 'object') {
     form.name.forEach((formName, index) => {
-      valuesData.value[formName.key] = value[index];
-    });
+      valuesData.value[formName.key] = value[index]
+    })
   } else {
-    valuesData.value[form.name] = value;
+    valuesData.value[form.name] = value
   }
 
-  updateChangedFields(form.name);
-};
+  updateChangedFields(form.name)
+}
 
 const filterAdded = computed(() => {
-  return Object.values(valuesData.value).length > 0;
-});
+  return Object.values(valuesData.value).length > 0
+})
 
-const applyButtonLabel = computed(
-  () => props.actions?.applyButton?.label || "Apply",
-);
-const cancelButtonLabel = computed(
-  () => props.actions?.cancelButton?.label || "Cancel",
-);
+const applyButtonLabel = computed(() => props.actions?.applyButton?.label || 'Apply')
+const cancelButtonLabel = computed(() => props.actions?.cancelButton?.label || 'Cancel')
 
 onMounted(() => {
-  valuesData.value = { ...props.values };
-});
+  valuesData.value = { ...props.values }
+})
 
 const applyFilter = () => {
-  emit("applyFilter", valuesData.value);
-  emit("filter-fields-changed", changedFields.value);
+  emit('applyFilter', valuesData.value)
+  emit('filter-fields-changed', changedFields.value)
 
   // reset after emit
-  changedFields.value = [];
-};
+  changedFields.value = []
+}
 </script>
 <template>
   <div class="flex w-[326px] flex-col gap-y-5">

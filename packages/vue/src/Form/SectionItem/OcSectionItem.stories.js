@@ -1,32 +1,32 @@
-import { Theme, SectionItem } from "@/orchidui";
-import { ref } from "vue";
+import { Theme, SectionItem } from '@/orchidui'
+import { ref } from 'vue'
 
 export default {
   component: SectionItem,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const sectionItem = {
   argTypes: {
     icon: {
-      control: "select",
-      options: ["information", "check", "x", ""],
-    },
+      control: 'select',
+      options: ['information', 'check', 'x', '']
+    }
   },
   args: {
-    title: "Title",
-    description: "Description",
+    title: 'Title',
+    description: 'Description',
     toggleProps: {},
     isToggle: true,
-    icon: "check",
-    popperMessage: "Information",
-    errorMessage: "",
+    icon: 'check',
+    popperMessage: 'Information',
+    errorMessage: ''
   },
   render: (args) => ({
     components: { Theme, SectionItem },
     setup() {
-      const modelValue = ref(false);
-      return { args, modelValue };
+      const modelValue = ref(false)
+      return { args, modelValue }
     },
     template: `
           <Theme colorMode="light">
@@ -43,6 +43,6 @@ export const sectionItem = {
               />
             </div>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}

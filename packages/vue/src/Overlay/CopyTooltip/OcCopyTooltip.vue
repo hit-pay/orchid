@@ -1,30 +1,30 @@
 <script setup lang="ts">
-import { Icon, Tooltip } from "@/orchidui";
+import { Icon, Tooltip } from '@/orchidui'
 
 defineProps({
   value: [String, Blob],
   tooltipText: {
     type: String,
-    default: "Copied!",
+    default: 'Copied!'
   },
-  tooltipOptions: Object,
-});
+  tooltipOptions: Object
+})
 
 const copyToClipboard = async (data) => {
   try {
     if (data instanceof Blob) {
       await navigator.clipboard.write([
         new ClipboardItem({
-          [data.type]: data,
-        }),
-      ]);
+          [data.type]: data
+        })
+      ])
     } else {
-      await navigator.clipboard.writeText(data);
+      await navigator.clipboard.writeText(data)
     }
   } catch (err) {
-    console.error("Unable to copy text to clipboard. Error: ", err);
+    console.error('Unable to copy text to clipboard. Error: ', err)
   }
-};
+}
 </script>
 
 <template>

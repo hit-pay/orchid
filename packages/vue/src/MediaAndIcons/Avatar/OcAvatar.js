@@ -1,3 +1,3 @@
-import Avatar from "./OcAvatar.vue";
+import Avatar from './OcAvatar.vue'
 
-export { Avatar };
+export { Avatar }

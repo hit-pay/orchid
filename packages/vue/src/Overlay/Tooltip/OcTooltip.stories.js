@@ -1,46 +1,46 @@
-import { Theme, Tooltip } from "@/orchidui";
+import { Theme, Tooltip } from '@/orchidui'
 
 export default {
   component: Tooltip,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const Default = {
   argTypes: {
     trigger: {
-      control: "select",
-      options: ["hover", "click"],
+      control: 'select',
+      options: ['hover', 'click']
     },
     position: {
-      control: "select",
+      control: 'select',
       options: [
-        "top-start",
-        "top",
-        "top-end",
-        "right-start",
-        "right",
-        "right-end",
-        "bottom-start",
-        "bottom",
-        "bottom-end",
-        "left-start",
-        "left",
-        "left-end",
-      ],
-    },
+        'top-start',
+        'top',
+        'top-end',
+        'right-start',
+        'right',
+        'right-end',
+        'bottom-start',
+        'bottom',
+        'bottom-end',
+        'left-start',
+        'left',
+        'left-end'
+      ]
+    }
   },
   args: {
-    position: "bottom",
-    trigger: "hover",
+    position: 'bottom',
+    trigger: 'hover',
     distance: 10,
-    skidding: 0,
+    skidding: 0
   },
   render: (args) => ({
     components: { Tooltip, Theme },
     setup() {
       return {
-        args,
-      };
+        args
+      }
     },
     template: `
           <Theme>
@@ -74,6 +74,6 @@ export const Default = {
               </Tooltip>
             </div>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}

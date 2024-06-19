@@ -1,3 +1,3 @@
-import SelectOptions from "./OcSelectOptions.vue";
+import SelectOptions from './OcSelectOptions.vue'
 
-export { SelectOptions };
+export { SelectOptions }

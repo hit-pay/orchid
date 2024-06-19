@@ -1,24 +1,24 @@
 <script setup lang="ts">
-import { Icon } from "@/orchidui";
+import { Icon } from '@/orchidui'
 
 defineProps({
   title: {
     type: String,
-    default: "",
+    default: ''
   },
   value: {
     type: [String, Number],
-    default: "",
+    default: ''
   },
   isCurrent: {
     type: Boolean,
-    default: false,
+    default: false
   },
   isCompleted: {
     type: Boolean,
-    default: false,
-  },
-});
+    default: false
+  }
+})
 </script>
 
 <template>
@@ -30,7 +30,7 @@ defineProps({
       class="rounded-full flex items-center justify-center w-7 h-7 font-medium"
       :class="[
         isCompleted ? 'text-white bg-oc-primary' : 'border border-oc-gray-300',
-        isCurrent ? 'border-oc-gray-800' : '',
+        isCurrent ? 'border-oc-gray-800' : ''
       ]"
     >
       <Icon v-if="isCompleted" name="check-2" width="12" height="12" />

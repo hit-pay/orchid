@@ -1,3 +1,3 @@
-import ConfirmationModal from "./OcConfirmationModal.vue";
+import ConfirmationModal from './OcConfirmationModal.vue'
 
-export { ConfirmationModal };
+export { ConfirmationModal }

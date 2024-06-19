@@ -2,16 +2,14 @@
 defineProps({
   methods: {
     type: Array,
-    default: () => [],
-  },
-});
+    default: () => []
+  }
+})
 </script>
 
 <template>
   <div class="flex items-center gap-x-4 overflow-hidden">
-    <span class="text-xs shrink-0 font-medium text-oc-text-300 uppercase">
-      Payment methods
-    </span>
+    <span class="text-xs shrink-0 font-medium text-oc-text-300 uppercase"> Payment methods </span>
     <div class="flex gap-x-2 overflow-auto">
       <img
         v-for="method in methods"

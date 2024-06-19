@@ -2,21 +2,19 @@
 defineProps({
   options: {
     type: Array,
-    required: true,
+    required: true
   },
   activeOption: {
     type: String,
-    default: "",
-  },
-});
+    default: ''
+  }
+})
 
-defineEmits(["select"]);
+defineEmits(['select'])
 </script>
 
 <template>
-  <div
-    class="flex items-center gap-2 p-2 rounded-full shadow-inner border border-oc-gray-200"
-  >
+  <div class="flex items-center gap-2 p-2 rounded-full shadow-inner border border-oc-gray-200">
     <div
       v-for="option in options"
       :key="option.value"

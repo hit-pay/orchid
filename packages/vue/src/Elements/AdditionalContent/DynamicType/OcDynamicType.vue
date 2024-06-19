@@ -1,17 +1,17 @@
 <script setup>
-import { CustomerCard, OverviewItem, Icon, Tooltip } from "@/orchidui";
-import BoxDetails from "./OcBoxDetails.vue";
-import MobileDynamicType from "./MobileDynamicType.vue";
+import { CustomerCard, OverviewItem, Icon, Tooltip } from '@/orchidui'
+import BoxDetails from './OcBoxDetails.vue'
+import MobileDynamicType from './MobileDynamicType.vue'
 
 defineProps({
   boxes: { type: Array, default: () => [] },
   isCustomer: { type: Boolean, default: false },
-  customerCardVariant: { type: String, default: "big" },
+  customerCardVariant: { type: String, default: 'big' },
   customer: { type: Object, default: null },
   customerIsHover: { type: Boolean, default: false },
-  customerIsEdit: { type: Boolean, default: false },
-});
-defineEmits(["addCustomer", "editCustomer"]);
+  customerIsEdit: { type: Boolean, default: false }
+})
+defineEmits(['addCustomer', 'editCustomer'])
 </script>
 
 <template>
@@ -20,16 +20,10 @@ defineEmits(["addCustomer", "editCustomer"]);
       v-for="(box, i) in boxes"
       :key="i"
       :class="
-        (isCustomer
-          ? '!grid grid-cols-4 grid-rows-2 gap-y-4 w-full !py-4 '
-          : ' ') + box?.style
+        (isCustomer ? '!grid grid-cols-4 grid-rows-2 gap-y-4 w-full !py-4 ' : ' ') + box?.style
       "
     >
-      <slot
-        v-if="box.slot && $slots[box.slot]"
-        :name="box.slot"
-        :data="{ ...box, key: i }"
-      />
+      <slot v-if="box.slot && $slots[box.slot]" :name="box.slot" :data="{ ...box, key: i }" />
       <template v-else>
         <OverviewItem
           v-for="(field, j) in box.items"

@@ -1,25 +1,25 @@
 <script setup>
-import { onMounted, ref } from "vue";
-import { Icon, BaseInput } from "@/orchidui";
-import { useUploadFileProgress } from "@/orchidui/composables/uploadFileProgress.js";
-import OcSimpleMultipleUpload from "./OcSimpleMultipleUpload.vue";
+import { onMounted, ref } from 'vue'
+import { Icon, BaseInput } from '@/orchidui'
+import { useUploadFileProgress } from '@/orchidui/composables/uploadFileProgress.js'
+import OcSimpleMultipleUpload from './OcSimpleMultipleUpload.vue'
 
 const emit = defineEmits([
-  "update:modelValue",
-  "update:selectedImage",
-  "onEditFile",
-  "onRemoveFile",
-  "onExceedMaxFileSize",
-  "onMaxFileExceed",
-]);
+  'update:modelValue',
+  'update:selectedImage',
+  'onEditFile',
+  'onRemoveFile',
+  'onExceedMaxFileSize',
+  'onMaxFileExceed'
+])
 const props = defineProps({
   modelValue: {
     type: Array,
-    default: () => [],
+    default: () => []
   },
   accept: {
     type: String,
-    default: "",
+    default: ''
   },
   validateAcceptFileType: Boolean,
   /**
@@ -34,23 +34,22 @@ const props = defineProps({
   columnsCount: Number,
   selectedImage: {
     type: Object,
-    default: () => ({}),
+    default: () => ({})
   },
-  withLink: Boolean,
-});
-const inputRef = ref();
-const isDragover = ref(false);
-const isUploading = ref(false);
-const { isErrorMaxSize, currentFiles, onChangeFile, onDeleteFile } =
-  useUploadFileProgress(
-    props.maxSize,
-    emit,
-    props.accept,
-    props.validateAcceptFileType,
-  );
+  withLink: Boolean
+})
+const inputRef = ref()
+const isDragover = ref(false)
+const isUploading = ref(false)
+const { isErrorMaxSize, currentFiles, onChangeFile, onDeleteFile } = useUploadFileProgress(
+  props.maxSize,
+  emit,
+  props.accept,
+  props.validateAcceptFileType
+)
 
 onMounted(() => {
-  const formattedModelValue = [];
+  const formattedModelValue = []
 
   if (props.modelValue.length > 0) {
     props.modelValue.forEach((item) => {
@@ -58,30 +57,30 @@ onMounted(() => {
         formattedModelValue.push({
           current: item.current,
           file: null,
-          fileName: item.current.caption ?? "",
+          fileName: item.current.caption ?? '',
           progress: 100,
           fileUrl: item.current.path,
           totalSize: item.current.file_size ?? 0,
           isLoaded: true,
-          extension: item.current.extension ?? "png",
-          link: item.current.link,
-        });
+          extension: item.current.extension ?? 'png',
+          link: item.current.link
+        })
       }
-    });
+    })
 
-    currentFiles.value = formattedModelValue;
+    currentFiles.value = formattedModelValue
   }
-});
+})
 
 const onChange = (event) => {
-  isUploading.value = true;
-  onChangeFile(event);
-};
+  isUploading.value = true
+  onChangeFile(event)
+}
 
 const onDelete = (index) => {
-  isUploading.value = false;
-  onDeleteFile(index);
-};
+  isUploading.value = false
+  onDeleteFile(index)
+}
 </script>
 
 <template>
@@ -89,9 +88,7 @@ const onDelete = (index) => {
     <BaseInput
       :label="label"
       :hint="hint"
-      :error-message="
-        isErrorMaxSize ? `File(s) is more than ${maxSize}MB` : errorMessage
-      "
+      :error-message="isErrorMaxSize ? `File(s) is more than ${maxSize}MB` : errorMessage"
     >
       <OcSimpleMultipleUpload
         v-if="isImageOnly"
@@ -104,8 +101,10 @@ const onDelete = (index) => {
         @change="onChangeFile"
         @update:selected-image="$emit('update:selectedImage', $event)"
         @update:uploaded-images="
-          currentFiles = $event;
-          $emit('update:modelValue', $event);
+          ($event) => {
+            currentFiles = $event
+            $emit('update:modelValue', $event)
+          }
         "
         @on-edit-image="$emit('onEditFile', $event)"
         @on-remove-image="$emit('onRemoveFile', $event)"
@@ -124,11 +123,7 @@ const onDelete = (index) => {
       <div
         v-else
         class="relative border rounded p-3 min-w-[30rem] flex flex-col"
-        :class="
-          isErrorMaxSize || errorMessage
-            ? 'border-oc-error'
-            : 'border-oc-gray-200'
-        "
+        :class="isErrorMaxSize || errorMessage ? 'border-oc-error' : 'border-oc-gray-200'"
       >
         <div class="input-file-uploaded flex flex-col gap-y-3">
           <div
@@ -137,9 +132,7 @@ const onDelete = (index) => {
             class="flex justify-between relative items-center w-full last:mb-2"
           >
             <div class="flex items-center gap-x-3">
-              <div
-                class="flex flex-col items-center justify-center text-oc-text-300"
-              >
+              <div class="flex flex-col items-center justify-center text-oc-text-300">
                 <Icon name="file-extension" width="14" height="10" />
                 <span class="uppercase text-[8px] font-bold leading-none block">
                   {{ file.extension }}
@@ -169,7 +162,7 @@ const onDelete = (index) => {
               class="opacity-0 text-oc-error cursor-pointer absolute right-0"
               :class="{
                 'on-enable-delete': file.progress === 100 && isUploading,
-                'opacity-100': !isUploading,
+                'opacity-100': !isUploading
               }"
               @click="onDelete(index)"
             />
@@ -181,7 +174,7 @@ const onDelete = (index) => {
           class="relative overflow-hidden rounded-sm flex-1 flex flex-col transition-all border-transparent border-dashed hover:border-oc-primary cursor-pointer"
           :class="{
             '!border-oc-primary': isDragover,
-            border: !currentFiles.length,
+            border: !currentFiles.length
           }"
         >
           <input

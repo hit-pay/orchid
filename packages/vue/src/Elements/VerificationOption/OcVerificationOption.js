@@ -1,3 +1,3 @@
-import VerificationOption from "./OcVerificationOption.vue";
+import VerificationOption from './OcVerificationOption.vue'
 
-export { VerificationOption };
+export { VerificationOption }

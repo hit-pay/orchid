@@ -1,24 +1,24 @@
-import { Theme, SwitchTabs } from "@/orchidui";
-import { ref } from "vue";
+import { Theme, SwitchTabs } from '@/orchidui'
+import { ref } from 'vue'
 
 export default {
   component: SwitchTabs,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const Default = {
   args: {
     options: [
-      { label: "Weekly", value: "weekly" },
-      { label: "Monthly", value: "monthly" },
-      { label: "Yearly", value: "annually" },
-    ],
+      { label: 'Weekly', value: 'weekly' },
+      { label: 'Monthly', value: 'monthly' },
+      { label: 'Yearly', value: 'annually' }
+    ]
   },
   render: (args) => ({
     components: { Theme, SwitchTabs },
     setup() {
-      const selectedOption = ref("weekly");
-      return { args, selectedOption };
+      const selectedOption = ref('weekly')
+      return { args, selectedOption }
     },
     template: `
           <Theme>
@@ -26,6 +26,6 @@ export const Default = {
               <SwitchTabs :options="args.options" :active-option="selectedOption" @select="selectedOption = $event"/>
             </div>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}

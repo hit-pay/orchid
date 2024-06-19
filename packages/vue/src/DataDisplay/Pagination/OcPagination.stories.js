@@ -1,37 +1,37 @@
-import { Theme, Pagination } from "@/orchidui";
-import { ref } from "vue";
+import { Theme, Pagination } from '@/orchidui'
+import { ref } from 'vue'
 
 export default {
   component: Pagination,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const pagination = {
   argTypes: {
     size: {
-      control: "select",
-      options: ["default", "small", "big"],
+      control: 'select',
+      options: ['default', 'small', 'big']
     },
     strategy: {
-      control: "select",
-      options: ["default", "cursor"],
-    },
+      control: 'select',
+      options: ['default', 'cursor']
+    }
   },
   args: {
     totalVisible: 5,
-    size: "default",
+    size: 'default',
     maxPage: 15,
     isRounded: false,
-    strategy: "default",
+    strategy: 'default'
   },
   render: (args) => ({
     components: { Pagination, Theme },
     setup() {
-      const currentPage = ref(1);
+      const currentPage = ref(1)
       return {
         currentPage,
-        args,
-      };
+        args
+      }
     },
     template: `
           <Theme class="flex gap-3 items-center mb-3">
@@ -45,6 +45,6 @@ export const pagination = {
                 v-model="currentPage"
             />
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}

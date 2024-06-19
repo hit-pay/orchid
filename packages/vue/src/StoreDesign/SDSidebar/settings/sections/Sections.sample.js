@@ -1,394 +1,390 @@
-const ASSETS_URL = "/templates/default/images/";
+const ASSETS_URL = '/templates/default/images/'
 
 const PRODUCT_FORM = [
   {
-    type: "SectionItem",
+    type: 'SectionItem',
     props: {
-      title: "Select Product From",
-    },
+      title: 'Select Product From'
+    }
   },
   {
-    name: "product_from",
-    type: "Select",
+    name: 'product_from',
+    type: 'Select',
     props: {
-      placeholder: "Select Product from",
+      placeholder: 'Select Product from',
       options: [
         {
-          value: "all",
-          label: "All Products",
+          value: 'all',
+          label: 'All Products'
         },
         {
-          value: "feature",
-          label: "Featured Product",
+          value: 'feature',
+          label: 'Featured Product'
         },
         {
-          value: "category",
-          label: "Product Category",
-        },
+          value: 'category',
+          label: 'Product Category'
+        }
         // {
         //   value: "pick_products",
         //   label: "Pick Products",
         // },
       ],
-      hint: "click oc link oc-link[here|https://hitpayapp.com]oc-end-link",
-      hintWithLink: true,
-    },
+      hint: 'click oc link oc-link[here|https://hitpayapp.com]oc-end-link',
+      hintWithLink: true
+    }
   },
   {
-    type: "Snackbar",
+    type: 'Snackbar',
     props: {
-      icon: "information",
-      color: "gray",
-      content: "click oc link oc-link[here|https://hitpayapp.com]oc-end-link",
-    },
+      icon: 'information',
+      color: 'gray',
+      content: 'click oc link oc-link[here|https://hitpayapp.com]oc-end-link'
+    }
   },
   {
-    type: "Snackbar",
+    type: 'Snackbar',
     props: {
-      icon: "information",
-      color: "gray",
-      content:
-        "click oc link oc-link[category-page|product-categories.index]oc-end-link",
-    },
+      icon: 'information',
+      color: 'gray',
+      content: 'click oc link oc-link[category-page|product-categories.index]oc-end-link'
+    }
   },
   {
-    type: "SectionItem",
+    type: 'SectionItem',
     props: {
-      title: "Select Product Category",
-    },
+      title: 'Select Product Category'
+    }
   },
   {
-    show_if: "product_from",
-    show_if_value: "category",
-    name: "product_category",
-    type: "Select",
-    options: "categories",
+    show_if: 'product_from',
+    show_if_value: 'category',
+    name: 'product_category',
+    type: 'Select',
+    options: 'categories',
     props: {
-      placeholder: "Select Product Category",
+      placeholder: 'Select Product Category',
       options: [
         {
-          value: "",
-          label: "Loading...",
-        },
-      ],
-    },
+          value: '',
+          label: 'Loading...'
+        }
+      ]
+    }
   },
 
   {
-    type: "SectionItem",
+    type: 'SectionItem',
     props: {
-      title: "Type",
-    },
+      title: 'Type'
+    }
   },
 
   {
-    name: "variant",
-    type: "SelectOptions",
+    name: 'variant',
+    type: 'SelectOptions',
     props: {
       options: [
         {
-          preview: ASSETS_URL + "product-type-carousel.png",
-          value: "carousel",
-          label: "Carousel",
+          preview: ASSETS_URL + 'product-type-carousel.png',
+          value: 'carousel',
+          label: 'Carousel'
         },
         {
-          preview: ASSETS_URL + "product-type-grid.png",
-          value: "grid",
-          label: "Grid",
-        },
-      ],
-    },
+          preview: ASSETS_URL + 'product-type-grid.png',
+          value: 'grid',
+          label: 'Grid'
+        }
+      ]
+    }
   },
 
   {
-    type: "SectionItem",
+    type: 'SectionItem',
     props: {
-      title: "Columns",
-    },
+      title: 'Columns'
+    }
   },
   {
-    show_if: "variant",
-    show_if_value: "grid",
-    name: "column_grid",
-    type: "SelectOptions",
+    show_if: 'variant',
+    show_if_value: 'grid',
+    name: 'column_grid',
+    type: 'SelectOptions',
     props: {
       options: [
         {
-          preview: ASSETS_URL + "product-column-4-grid.png",
-          label: "4 columns",
-          value: [2, 3, 4],
+          preview: ASSETS_URL + 'product-column-4-grid.png',
+          label: '4 columns',
+          value: [2, 3, 4]
         },
         {
-          preview: ASSETS_URL + "product-column-3-grid.png",
-          label: "3 columns",
-          value: [1, 2, 3],
+          preview: ASSETS_URL + 'product-column-3-grid.png',
+          label: '3 columns',
+          value: [1, 2, 3]
         },
         {
-          preview: ASSETS_URL + "product-column-2-grid.png",
-          label: "2 columns",
-          value: [1, 2, 2],
-        },
-      ],
-    },
+          preview: ASSETS_URL + 'product-column-2-grid.png',
+          label: '2 columns',
+          value: [1, 2, 2]
+        }
+      ]
+    }
   },
   {
-    show_if: "variant",
-    show_if_value: "carousel",
-    name: "column_carousel",
-    type: "SelectOptions",
+    show_if: 'variant',
+    show_if_value: 'carousel',
+    name: 'column_carousel',
+    type: 'SelectOptions',
     props: {
       options: [
         {
-          preview: ASSETS_URL + "product-column-4-carousel.png",
-          label: "4 columns",
-          value: [2, 3, 4],
+          preview: ASSETS_URL + 'product-column-4-carousel.png',
+          label: '4 columns',
+          value: [2, 3, 4]
         },
         {
-          preview: ASSETS_URL + "product-column-3-carousel.png",
-          label: "3 columns",
-          value: [1, 2, 3],
+          preview: ASSETS_URL + 'product-column-3-carousel.png',
+          label: '3 columns',
+          value: [1, 2, 3]
         },
         {
-          preview: ASSETS_URL + "product-column-2-carousel.png",
-          label: "2 columns",
-          value: [1, 2, 2],
-        },
-      ],
-    },
+          preview: ASSETS_URL + 'product-column-2-carousel.png',
+          label: '2 columns',
+          value: [1, 2, 2]
+        }
+      ]
+    }
   },
   {
-    type: "SectionItem",
+    type: 'SectionItem',
     props: {
-      title: "Product image shape",
-    },
+      title: 'Product image shape'
+    }
   },
   {
     general: true,
-    name: "product_ratio",
-    type: "SelectOptions",
+    name: 'product_ratio',
+    type: 'SelectOptions',
     props: {
-      variant: "list2",
+      variant: 'list2',
       options: [
         {
-          preview: ASSETS_URL + "product-ratio-square.png",
-          label: "Square",
-          value: "1,1",
-          description:
-            "Useful if most of your product visuals are equally tall and wide",
+          preview: ASSETS_URL + 'product-ratio-square.png',
+          label: 'Square',
+          value: '1,1',
+          description: 'Useful if most of your product visuals are equally tall and wide'
         },
         {
-          preview: ASSETS_URL + "product-ratio-landscape.png",
-          label: "Landscape",
-          value: "6,4",
-          description:
-            "Useful if most of your product visuals are wider than taller",
+          preview: ASSETS_URL + 'product-ratio-landscape.png',
+          label: 'Landscape',
+          value: '6,4',
+          description: 'Useful if most of your product visuals are wider than taller'
         },
         {
-          preview: ASSETS_URL + "product-ratio-portrait.png",
-          label: "Portrait",
-          value: "4,6",
-          description:
-            "Useful if most of your product visuals are wider than taller",
-        },
-      ],
-    },
+          preview: ASSETS_URL + 'product-ratio-portrait.png',
+          label: 'Portrait',
+          value: '4,6',
+          description: 'Useful if most of your product visuals are wider than taller'
+        }
+      ]
+    }
   },
   // only for default theme
   {
-    name: "show_category_filter",
-    type: "SectionItem",
+    name: 'show_category_filter',
+    type: 'SectionItem',
     props: {
       isToggle: true,
-      title: "Show category filter",
-    },
+      title: 'Show category filter'
+    }
   },
   {
-    show_if: "show_category_filter",
+    show_if: 'show_category_filter',
     show_if_value: true,
     name: [
       {
         props: {
-          label: "Category Background Color",
+          label: 'Category Background Color'
         },
-        key: "category_color_bg",
+        key: 'category_color_bg'
       },
       {
         props: {
-          label: "Category Text Color",
+          label: 'Category Text Color'
         },
-        key: "category_color_text",
-      },
+        key: 'category_color_text'
+      }
     ],
-    type: "Colors",
+    type: 'Colors'
   },
   {
-    show_if: "variant",
-    show_if_value: "carousel",
-    name: "is_limit_products",
-    type: "SectionItem",
+    show_if: 'variant',
+    show_if_value: 'carousel',
+    name: 'is_limit_products',
+    type: 'SectionItem',
     props: {
       isToggle: true,
-      title: "How many products do you want to show?",
-    },
+      title: 'How many products do you want to show?'
+    }
   },
   {
-    show_if: "is_limit_products",
+    show_if: 'is_limit_products',
     show_if_value: true,
-    name: "limit_products",
-    type: "Input",
+    name: 'limit_products',
+    type: 'Input',
     props: {
-      placeholder: "6",
-    },
+      placeholder: '6'
+    }
   },
   {
-    show_if: "variant",
-    show_if_value: "grid",
-    type: "SectionItem",
-    name: "view_all_button",
+    show_if: 'variant',
+    show_if_value: 'grid',
+    type: 'SectionItem',
+    name: 'view_all_button',
     props: {
       isToggle: true,
-      title: "View all Button",
-    },
+      title: 'View all Button'
+    }
   },
   {
-    name: "title",
-    type: "Input",
+    name: 'title',
+    type: 'Input',
     props: {
-      label: "Title",
-    },
+      label: 'Title'
+    }
   },
   {
-    name: "description",
-    type: "TextArea",
+    name: 'description',
+    type: 'TextArea',
     props: {
-      label: "Description",
-    },
-  },
-];
+      label: 'Description'
+    }
+  }
+]
 
 const TEXT_AND_IMAGE_FORM = [
   {
-    type: "SectionItem",
+    type: 'SectionItem',
     props: {
-      title: "Image Width",
-    },
+      title: 'Image Width'
+    }
   },
   {
-    name: "variant",
-    type: "SelectOptions",
+    name: 'variant',
+    type: 'SelectOptions',
     props: {
       options: [
         {
-          preview: ASSETS_URL + "s-image-width-half.png",
-          value: "half",
-          label: "Half Width",
+          preview: ASSETS_URL + 's-image-width-half.png',
+          value: 'half',
+          label: 'Half Width'
         },
         {
-          preview: ASSETS_URL + "s-image-width-full.png",
-          value: "full",
-          label: "Full Width",
-        },
-      ],
-    },
+          preview: ASSETS_URL + 's-image-width-full.png',
+          value: 'full',
+          label: 'Full Width'
+        }
+      ]
+    }
   },
   {
-    type: "SectionItem",
+    type: 'SectionItem',
     props: {
-      title: "alignment",
-    },
+      title: 'alignment'
+    }
   },
   {
-    show_if: "variant",
-    show_if_value: "half",
-    name: "alignment_half",
-    type: "SelectOptions",
+    show_if: 'variant',
+    show_if_value: 'half',
+    name: 'alignment_half',
+    type: 'SelectOptions',
     props: {
       options: [
         {
-          preview: ASSETS_URL + "s-image-text-left-half.png",
-          value: "left",
-          label: "Text Left",
+          preview: ASSETS_URL + 's-image-text-left-half.png',
+          value: 'left',
+          label: 'Text Left'
         },
         {
-          preview: ASSETS_URL + "s-image-text-right-half.png",
-          value: "right",
-          label: "Text right",
-        },
-      ],
-    },
+          preview: ASSETS_URL + 's-image-text-right-half.png',
+          value: 'right',
+          label: 'Text right'
+        }
+      ]
+    }
   },
   {
-    show_if: "variant",
-    show_if_value: "full",
-    name: "alignment_full",
-    type: "SelectOptions",
+    show_if: 'variant',
+    show_if_value: 'full',
+    name: 'alignment_full',
+    type: 'SelectOptions',
     props: {
       options: [
         {
-          preview: ASSETS_URL + "s-image-text-left-full.png",
-          value: "left",
-          label: "Text Left",
+          preview: ASSETS_URL + 's-image-text-left-full.png',
+          value: 'left',
+          label: 'Text Left'
         },
         {
-          preview: ASSETS_URL + "s-image-text-center-full.png",
-          value: "center",
-          label: "Text center",
+          preview: ASSETS_URL + 's-image-text-center-full.png',
+          value: 'center',
+          label: 'Text center'
         },
         {
-          preview: ASSETS_URL + "s-image-text-right-full.png",
-          value: "right",
-          label: "Text right",
-        },
-      ],
-    },
+          preview: ASSETS_URL + 's-image-text-right-full.png',
+          value: 'right',
+          label: 'Text right'
+        }
+      ]
+    }
   },
   {
-    type: "SectionItem",
+    type: 'SectionItem',
     props: {
-      title: "Upload Images",
-      description: "Recommended size 1440x400 pixels",
-    },
+      title: 'Upload Images',
+      description: 'Recommended size 1440x400 pixels'
+    }
   },
   {
-    type: "Images",
-    name: "images",
+    type: 'Images',
+    name: 'images',
     props: {
-      maxImages: 1,
-    },
+      maxImages: 1
+    }
   },
   {
-    type: "SectionItem",
+    type: 'SectionItem',
     props: {
-      title: "Content",
-    },
+      title: 'Content'
+    }
   },
   {
-    name: "title",
-    type: "Input",
+    name: 'title',
+    type: 'Input',
     props: {
-      label: "Title",
-    },
+      label: 'Title'
+    }
   },
   {
-    name: "description",
-    type: "TextArea",
+    name: 'description',
+    type: 'TextArea',
     props: {
-      label: "Description",
-    },
+      label: 'Description'
+    }
   },
   {
-    name: "button_text",
-    type: "Input",
+    name: 'button_text',
+    type: 'Input',
     props: {
-      label: "Button text",
-    },
+      label: 'Button text'
+    }
   },
   {
-    name: "button_link",
-    type: "Input",
+    name: 'button_link',
+    type: 'Input',
     props: {
-      label: "Button Link",
-    },
-  },
-];
-export { PRODUCT_FORM, TEXT_AND_IMAGE_FORM };
+      label: 'Button Link'
+    }
+  }
+]
+export { PRODUCT_FORM, TEXT_AND_IMAGE_FORM }

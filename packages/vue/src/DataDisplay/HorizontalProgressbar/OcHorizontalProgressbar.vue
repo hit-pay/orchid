@@ -2,17 +2,17 @@
 defineProps({
   label: {
     type: String,
-    default: "",
+    default: ''
   },
   max: {
     type: Number,
-    default: 0,
+    default: 0
   },
   current: {
     type: Number,
-    default: 0,
-  },
-});
+    default: 0
+  }
+})
 </script>
 
 <template>

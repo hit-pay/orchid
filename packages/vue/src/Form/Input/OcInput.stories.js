@@ -1,54 +1,54 @@
-import Theme from "../../Theme/OcTheme.vue";
-import OCInput from "./OcInput.vue";
-import Dropdown from "../../Overlay/Dropdown/OcDropdown.vue";
-import DropdownItem from "../../Overlay/Dropdown/OcDropdownItem.vue";
-import Icon from "../../MediaAndIcons/Icon/OcIcon.vue";
-import { ref } from "vue";
-import BaseInput from "../BaseInput/OcBaseInput.vue";
-import { InputOption } from "@/orchidui";
+import Theme from '../../Theme/OcTheme.vue'
+import OCInput from './OcInput.vue'
+import Dropdown from '../../Overlay/Dropdown/OcDropdown.vue'
+import DropdownItem from '../../Overlay/Dropdown/OcDropdownItem.vue'
+import Icon from '../../MediaAndIcons/Icon/OcIcon.vue'
+import { ref } from 'vue'
+import BaseInput from '../BaseInput/OcBaseInput.vue'
+import { InputOption } from '@/orchidui'
 
 export default {
   component: OCInput,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const Default = {
   argTypes: {
     icon: {
-      control: "select",
-      options: ["", "circle"],
+      control: 'select',
+      options: ['', 'circle']
     },
     errorMessage: {
-      control: "text",
+      control: 'text'
     },
     labelIcon: {
-      control: "select",
-      options: ["", "question-mark"],
-    },
+      control: 'select',
+      options: ['', 'question-mark']
+    }
   },
   args: {
-    label: "Label",
-    hint: "Hint",
-    errorMessage: "",
-    placeholder: "Placeholder",
-    icon: "",
+    label: 'Label',
+    hint: 'Hint',
+    errorMessage: '',
+    placeholder: 'Placeholder',
+    icon: '',
     disabled: false,
     isInlineLabel: false,
     isRequired: false,
-    labelIcon: "",
-    tooltipText: "Tooltip text",
+    labelIcon: '',
+    tooltipText: 'Tooltip text',
     tooltipOptions: {
-      position: "top",
-      distance: 10,
-    },
+      position: 'top',
+      distance: 10
+    }
   },
   render: (args) => ({
     components: { Theme, OCInput },
     setup() {
-      const modelValue = ref();
-      const logEvent = (name) => console.info(`Event: ${name}`);
+      const modelValue = ref()
+      const logEvent = (name) => console.info(`Event: ${name}`)
 
-      return { modelValue, args, logEvent };
+      return { modelValue, args, logEvent }
     },
     template: `
           <Theme colorMode="light" class="py-4">
@@ -70,26 +70,26 @@ export const Default = {
                 @blur="logEvent('blur')"
             />
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}
 
 export const MainComponent = {
   args: {
-    label: "Label",
-    hint: "Hint",
-    errorMessage: "",
-    placeholder: "Placeholder",
-    type: "",
-    icon: "",
+    label: 'Label',
+    hint: 'Hint',
+    errorMessage: '',
+    placeholder: 'Placeholder',
+    type: '',
+    icon: '',
     disabled: false,
-    isInlineLabel: false,
+    isInlineLabel: false
   },
   render: (args) => ({
     components: { Theme, OCInput },
     setup() {
-      const text = ref("Text");
-      return { text, args };
+      const text = ref('Text')
+      return { text, args }
     },
     template: `
           <Theme colorMode="light">
@@ -148,18 +148,18 @@ export const MainComponent = {
               </div>
             </div>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}
 
 export const Trailing = {
   render: () => ({
     components: { Theme, OCInput, Dropdown, DropdownItem, Icon },
     setup() {
-      const isDropdownOpen = ref([]);
+      const isDropdownOpen = ref([])
       return {
-        isDropdownOpen,
-      };
+        isDropdownOpen
+      }
     },
     template: `
           <Theme colorMode="light">
@@ -224,19 +224,19 @@ export const Trailing = {
               </OCInput>
             </div>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}
 
 export const After = {
   render: () => ({
     components: { Theme, OCInput, Icon },
     setup() {
-      const modelValue = ref("");
+      const modelValue = ref('')
 
       return {
-        modelValue,
-      };
+        modelValue
+      }
     },
     template: `
       <Theme colorMode="light" class="py-4">
@@ -253,18 +253,18 @@ export const After = {
           </template>
         </OCInput>
       </Theme>
-    `,
-  }),
-};
+    `
+  })
+}
 
 export const Leading = {
   render: () => ({
     components: { Theme, OCInput, Dropdown, DropdownItem, Icon, BaseInput },
     setup() {
-      const isDropdownOpen = ref([]);
+      const isDropdownOpen = ref([])
       return {
-        isDropdownOpen,
-      };
+        isDropdownOpen
+      }
     },
     template: `
           <Theme colorMode="light">
@@ -327,16 +327,16 @@ export const Leading = {
               </OCInput>
             </div>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}
 
 export const InputOptions = {
   render: () => ({
     components: { Theme, InputOption },
     setup() {
-      const selectedOption = ref(["Option 1", "options 2"]);
-      return { selectedOption };
+      const selectedOption = ref(['Option 1', 'options 2'])
+      return { selectedOption }
     },
     template: `
           <Theme colorMode="light">
@@ -349,40 +349,40 @@ export const InputOptions = {
 
             <div class="mt-4">Selected value: {{ selectedOption }}</div>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}
 
 export const FormatValue = {
   args: {
-    label: "Currency value",
-    placeholder: "Currency format",
+    label: 'Currency value',
+    placeholder: 'Currency format'
   },
   render: (args) => ({
     components: { Theme, OCInput },
     setup() {
-      const modelValue = ref(0);
+      const modelValue = ref(0)
 
       const formatValue = (value) => {
-        let output = value;
+        let output = value
 
-        if (Number(value) === 0) return "0.00";
+        if (Number(value) === 0) return '0.00'
 
         // removing non-digit characters
-        output = +`${output}`.replace(/\D/g, "");
+        output = +`${output}`.replace(/\D/g, '')
 
         //
-        return (output / 100).toLocaleString("en-US", {
+        return (output / 100).toLocaleString('en-US', {
           minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        });
-      };
+          maximumFractionDigits: 2
+        })
+      }
 
       const handleUpdateModelValue = (value) => {
-        modelValue.value = value.replaceAll(",", "");
-      };
+        modelValue.value = value.replaceAll(',', '')
+      }
 
-      return { modelValue, args, formatValue, handleUpdateModelValue };
+      return { modelValue, args, formatValue, handleUpdateModelValue }
     },
     template: `
           <Theme colorMode="light" class="py-4">
@@ -393,26 +393,26 @@ export const FormatValue = {
                 :formatValue="formatValue"
             />
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}
 
 export const passwordInput = {
-  name: "Password Input",
+  name: 'Password Input',
   argTypes: {},
   args: {
-    label: "Password",
-    hint: "Enter your HitPay password",
-    placeholder: "Password",
+    label: 'Password',
+    hint: 'Enter your HitPay password',
+    placeholder: 'Password',
     isRequired: true,
-    inputType: "password",
+    inputType: 'password'
   },
   render: (args) => ({
     components: { Theme, OCInput },
     setup() {
-      const modelValue = ref();
+      const modelValue = ref()
 
-      return { modelValue, args };
+      return { modelValue, args }
     },
     template: `
           <Theme colorMode="light" class="py-4">
@@ -425,6 +425,6 @@ export const passwordInput = {
                 :input-type="args.inputType"
             />
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}

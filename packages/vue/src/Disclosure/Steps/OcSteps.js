@@ -1,4 +1,4 @@
-import Steps from "./OcSteps.vue";
-import Step from "./OcStep.vue";
+import Steps from './OcSteps.vue'
+import Step from './OcStep.vue'
 
-export { Steps, Step };
+export { Steps, Step }

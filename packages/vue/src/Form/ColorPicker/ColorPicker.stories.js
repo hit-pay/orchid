@@ -1,44 +1,44 @@
-import ColorPicker from "./ColorPicker.vue";
-import { computed, ref } from "vue";
+import ColorPicker from './ColorPicker.vue'
+import { computed, ref } from 'vue'
 
 export default {
   component: ColorPicker,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const Default = {
   render: () => ({
     components: { ColorPicker },
     setup() {
-      const modelValue = ref();
+      const modelValue = ref()
       return {
-        modelValue,
-      };
+        modelValue
+      }
     },
     template: `
           <div class="h-[400px]">
             <ColorPicker v-model="modelValue" :show-opacity="false" />
-          </div>`,
-  }),
-};
+          </div>`
+  })
+}
 
 export const Gradient = {
   render: () => ({
     components: { ColorPicker },
     setup() {
-      const modelValue = ref("");
+      const modelValue = ref('')
       const styleBg = computed(() => {
-        return `background:${modelValue.value}`;
-      });
+        return `background:${modelValue.value}`
+      })
       return {
         modelValue,
-        styleBg,
-      };
+        styleBg
+      }
     },
     template: `
           <div>
             <ColorPicker v-model="modelValue" variant="gradient"/>
             <div class="h-[400px] w-full mt-3" :style="styleBg"></div>
-          </div>`,
-  }),
-};
+          </div>`
+  })
+}

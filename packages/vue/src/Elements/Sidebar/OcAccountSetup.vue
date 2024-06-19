@@ -1,17 +1,17 @@
 <script setup>
-import OcIcon from "@/orchidui/MediaAndIcons/Icon/OcIcon.vue";
-import OcChip from "@/orchidui/Feedback/Chip/OcChip.vue";
+import OcIcon from '@/orchidui/MediaAndIcons/Icon/OcIcon.vue'
+import OcChip from '@/orchidui/Feedback/Chip/OcChip.vue'
 
 defineProps({
   isExpanded: Boolean,
   progress: {
     type: Number,
-    default: 0,
+    default: 0
   },
   isPending: Boolean,
   paymentStatus: Object,
-  payoutStatus: Object,
-});
+  payoutStatus: Object
+})
 </script>
 
 <template>
@@ -19,31 +19,19 @@ defineProps({
     class="p-1 flex items-center justify-center mb-5"
     :class="[
       isExpanded ? 'rounded' : 'w-fit rounded-full',
-      isPending ? 'bg-oc-warning-500' : 'account-setup-bg',
+      isPending ? 'bg-oc-warning-500' : 'account-setup-bg'
     ]"
   >
-    <div
-      v-if="isExpanded"
-      class="p-3 bg-white rounded-[6px] w-full flex flex-col gap-y-5"
-    >
+    <div v-if="isExpanded" class="p-3 bg-white rounded-[6px] w-full flex flex-col gap-y-5">
       <template v-if="isPending">
         <div class="p-2 flex gap-3">
           <div class="p-3 rounded-full border border-oc-warning-500">
-            <OcIcon
-              name="alert"
-              width="20"
-              height="20"
-              class="text-oc-warning-500"
-            />
+            <OcIcon name="alert" width="20" height="20" class="text-oc-warning-500" />
           </div>
 
-          <div class="text-oc-text-500 text-sm">
-            We’re currently reviewing your account.
-          </div>
+          <div class="text-oc-text-500 text-sm">We’re currently reviewing your account.</div>
         </div>
-        <div
-          class="mx-[-8px] mb-[-8px] rounded-b-[6px] border-t border-gray-200 bg-oc-gray-50"
-        >
+        <div class="mx-[-8px] mb-[-8px] rounded-b-[6px] border-t border-gray-200 bg-oc-gray-50">
           <div class="py-4 px-5 text-oc-text-400 font-medium">
             <div v-if="paymentStatus" class="flex items-center">
               <span class="flex-1">Payment</span>
@@ -58,9 +46,7 @@ defineProps({
       </template>
       <template v-else>
         <div class="flex flex-col gap-y-3">
-          <div
-            class="flex items-center text-[var(--oc-sidebar-menu-active-text)] justify-between"
-          >
+          <div class="flex items-center text-[var(--oc-sidebar-menu-active-text)] justify-between">
             <span class="font-medium">Account setup</span>
             <span class="font-bold">{{ progress }}%</span>
           </div>
@@ -71,28 +57,21 @@ defineProps({
             ></div>
           </div>
         </div>
-        <div
-          class="text-sm font-bold text-[var(--oc-sidebar-menu-active-text)] text-center"
-        >
+        <div class="text-sm font-bold text-[var(--oc-sidebar-menu-active-text)] text-center">
           COMPLETE NOW ->
         </div>
       </template>
     </div>
     <div v-else class="bg-white rounded-full p-1">
       <div v-if="isPending" class="p-3 rounded-full">
-        <oc-icon
-          name="alert"
-          width="20"
-          height="20"
-          class="text-oc-warning-500"
-        />
+        <oc-icon name="alert" width="20" height="20" class="text-oc-warning-500" />
       </div>
       <div v-else class="pie-wrapper progress style-2">
         <span class="label">{{ progress }}</span>
         <div
           class="pie"
           :style="{
-            clip: progress > 50 ? 'rect(auto, auto, auto, auto)' : '',
+            clip: progress > 50 ? 'rect(auto, auto, auto, auto)' : ''
           }"
         >
           <div

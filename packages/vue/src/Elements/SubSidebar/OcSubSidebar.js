@@ -1,3 +1,3 @@
-import SubSidebar from "./OcSubSidebar.vue";
+import SubSidebar from './OcSubSidebar.vue'
 
-export { SubSidebar };
+export { SubSidebar }

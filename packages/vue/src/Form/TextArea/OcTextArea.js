@@ -1,3 +1,3 @@
-import TextArea from "./OcTextArea.vue";
+import TextArea from './OcTextArea.vue'
 
-export { TextArea };
+export { TextArea }

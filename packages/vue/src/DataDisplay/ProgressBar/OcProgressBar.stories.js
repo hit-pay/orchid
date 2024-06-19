@@ -1,9 +1,9 @@
-import { Theme, ProgressBar } from "@/orchidui";
+import { Theme, ProgressBar } from '@/orchidui'
 
 export default {
   component: ProgressBar,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const Default = {
   render: () => ({
@@ -25,6 +25,6 @@ export const Default = {
           />
         </div>
       </Theme>
-    `,
-  }),
-};
+    `
+  })
+}

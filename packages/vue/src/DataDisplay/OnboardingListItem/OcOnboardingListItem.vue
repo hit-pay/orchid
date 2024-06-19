@@ -1,32 +1,32 @@
 <script setup lang="ts">
-import { Button, Icon } from "@/orchidui";
+import { Button, Icon } from '@/orchidui'
 
 defineProps({
   title: {
     type: String,
-    default: "",
+    default: ''
   },
   description: {
     type: String,
-    default: "",
+    default: ''
   },
   buttonOptions: {
     type: Object,
-    default: () => ({}),
+    default: () => ({})
   },
   status: {
     type: String,
-    default: "",
+    default: ''
   },
   number: {
     type: Number,
-    default: 1,
+    default: 1
   },
   isButtonVisible: {
     type: Boolean,
-    default: true,
-  },
-});
+    default: true
+  }
+})
 </script>
 
 <template>

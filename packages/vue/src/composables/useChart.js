@@ -1,45 +1,45 @@
-import { ref, onBeforeUnmount, onMounted, watch } from "vue";
-import * as echarts from "echarts";
-import { markRaw } from "vue";
+import { ref, onBeforeUnmount, onMounted, watch } from 'vue'
+import * as echarts from 'echarts'
+import { markRaw } from 'vue'
 
 export const useChart = (chartRef, options) => {
-  const chart = ref();
+  const chart = ref()
 
   const renderChart = () => {
     if (chartRef.value) {
-      chart.value = markRaw(echarts.init(chartRef.value));
-      chart.value.setOption(options.value);
+      chart.value = markRaw(echarts.init(chartRef.value))
+      chart.value.setOption(options.value)
     }
-  };
+  }
 
   const resizeChart = () => {
     if (chart.value) {
-      chart.value.dispose();
+      chart.value.dispose()
     }
-    renderChart();
-  };
+    renderChart()
+  }
 
   onMounted(() => {
-    renderChart();
-    window.addEventListener("resize", resizeChart);
-  });
+    renderChart()
+    window.addEventListener('resize', resizeChart)
+  })
   onBeforeUnmount(() => {
     if (chart.value) {
-      chart.value.dispose();
+      chart.value.dispose()
     }
 
-    window.removeEventListener("resize", resizeChart);
-  });
+    window.removeEventListener('resize', resizeChart)
+  })
 
   watch(
     () => options.value,
     (val) => {
-      chart.value.setOption(val);
+      chart.value.setOption(val)
     },
-    { deep: true },
-  );
+    { deep: true }
+  )
 
   return {
-    chart,
-  };
-};
+    chart
+  }
+}

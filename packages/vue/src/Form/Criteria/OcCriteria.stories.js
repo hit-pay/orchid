@@ -1,19 +1,19 @@
-import { Criteria, Theme } from "@/orchidui";
+import { Criteria, Theme } from '@/orchidui'
 
 export default {
   component: Criteria,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const Default = {
   args: {
     modelValue: false,
-    label: "Text",
+    label: 'Text'
   },
   render: (args) => ({
     components: { Criteria, Theme },
     setup() {
-      return { args };
+      return { args }
     },
     template: `
           <Theme>
@@ -22,9 +22,9 @@ export const Default = {
                 :label="args.label"
             />
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}
 export const Variants = {
   render: () => ({
     components: { Criteria, Theme },
@@ -35,6 +35,6 @@ export const Variants = {
               <Criteria label="Text" :model-value="true"/>
             </div>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}

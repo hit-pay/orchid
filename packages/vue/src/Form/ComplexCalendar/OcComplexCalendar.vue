@@ -1,9 +1,9 @@
 <script setup>
-import { DatePicker } from "v-calendar";
-import "v-calendar/style.css";
-import { ref } from "vue";
-import dayjs from "dayjs";
-import { Button } from "@/orchidui";
+import { DatePicker } from 'v-calendar'
+import 'v-calendar/style.css'
+import { ref } from 'vue'
+import dayjs from 'dayjs'
+import { Button } from '@/orchidui'
 
 defineProps({
   shortcuts: Array,
@@ -13,30 +13,30 @@ defineProps({
     type: Object,
     default: () => ({
       start: new Date(),
-      end: new Date(),
-    }),
+      end: new Date()
+    })
   },
   countCalendars: {
     type: Number,
-    default: 2,
+    default: 2
   },
   withFooter: {
     type: Boolean,
-    default: true,
+    default: true
   },
   isRange: {
     type: Boolean,
-    default: true,
-  },
-});
+    default: true
+  }
+})
 const emit = defineEmits({
-  "update:modelValue": [],
-});
-const datePicker = ref();
+  'update:modelValue': []
+})
+const datePicker = ref()
 const changeModelValue = (value) => {
-  emit("update:modelValue", value);
-  datePicker.value.calendarRef.focusDate(value.start);
-};
+  emit('update:modelValue', value)
+  datePicker.value.calendarRef.focusDate(value.start)
+}
 </script>
 
 <template>
@@ -64,10 +64,10 @@ const changeModelValue = (value) => {
         ref="datePicker"
         :model-value="modelValue"
         :model-modifiers="{
-          range: isRange,
+          range: isRange
         }"
         :class="{
-          'oc-complex-calendar__calendar--single': !isRange,
+          'oc-complex-calendar__calendar--single': !isRange
         }"
         color="primary"
         borderless
@@ -78,12 +78,7 @@ const changeModelValue = (value) => {
     </div>
 
     <div v-if="withFooter" class="flex justify-end gap-x-3">
-      <Button
-        class="min-w-[72px]"
-        label="Clear"
-        variant="secondary"
-        v-bind="cancelButtonProps"
-      />
+      <Button class="min-w-[72px]" label="Clear" variant="secondary" v-bind="cancelButtonProps" />
       <Button class="min-w-[72px]" label="Done" v-bind="submitButtonProps" />
     </div>
   </div>

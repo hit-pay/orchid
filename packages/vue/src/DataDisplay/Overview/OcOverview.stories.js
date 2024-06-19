@@ -1,29 +1,29 @@
-import { Theme, Overview, OverviewIcon, OverviewItem } from "@/orchidui";
+import { Theme, Overview, OverviewIcon, OverviewItem } from '@/orchidui'
 
 export default {
   component: OverviewItem,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 export const overviewItem = {
   args: {
-    icon: "circle",
-    content: "Content",
-    title: "Title",
-    variant: "blue",
+    icon: 'circle',
+    content: 'Content',
+    title: 'Title',
+    variant: 'blue',
     info: false,
     isBig: false,
     isTransparent: false,
     isCard: false,
     percentValue: undefined,
-    percentTooltip: "",
-    tooltip: "",
+    percentTooltip: '',
+    tooltip: ''
   },
   render: (args) => ({
     components: { OverviewItem, Theme },
     setup() {
       return {
-        args,
-      };
+        args
+      }
     },
     template: `
           <Theme class="items-center mb-3">
@@ -41,53 +41,53 @@ export const overviewItem = {
                 :percent-tooltip="args.percentTooltip"
             />
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}
 export const overview = {
   args: {
-    title: "",
+    title: '',
     items: [
       {
-        title: "Total revenue",
-        content: "SGD 11,170.00",
-        icon: "coins",
-        variant: "blue",
+        title: 'Total revenue',
+        content: 'SGD 11,170.00',
+        icon: 'coins',
+        variant: 'blue'
       },
       {
-        title: "This month",
-        content: "SGD 1,870.00",
-        icon: "coin",
-        variant: "accent",
+        title: 'This month',
+        content: 'SGD 1,870.00',
+        icon: 'coin',
+        variant: 'accent'
       },
       {
-        title: "Completed",
-        content: "20",
-        icon: "check",
-        variant: "green",
+        title: 'Completed',
+        content: '20',
+        icon: 'check',
+        variant: 'green'
       },
       {
-        title: "Refunded",
-        content: "3",
-        icon: "backward",
-        variant: "red",
-      },
-    ],
+        title: 'Refunded',
+        content: '3',
+        icon: 'backward',
+        variant: 'red'
+      }
+    ]
   },
   render: (args) => ({
     components: { Overview, Theme },
     setup() {
       return {
-        args,
-      };
+        args
+      }
     },
     template: `
           <Theme class="items-center mb-3">
             <Overview :items="args.items" :title="args.title"/>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}
 export const overviewIcon = {
   render: () => ({
     components: { Theme, OverviewIcon },
@@ -102,6 +102,6 @@ export const overviewIcon = {
               <OverviewIcon variant="gray"/>
             </div>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}

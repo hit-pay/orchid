@@ -1,11 +1,11 @@
 <script setup>
-import { Button, Chip, Icon } from "@/orchidui";
+import { Button, Chip, Icon } from '@/orchidui'
 defineProps({
   theme: Object,
   activating: Boolean,
-  isFreeAccount: Boolean,
-});
-defineEmits(["activate", "customize", "preview", "upgrade", "publish"]);
+  isFreeAccount: Boolean
+})
+defineEmits(['activate', 'customize', 'preview', 'upgrade', 'publish'])
 </script>
 <template>
   <div
@@ -19,26 +19,14 @@ defineEmits(["activate", "customize", "preview", "upgrade", "publish"]);
       >
         <template v-if="!activating">
           <div v-if="theme.active" class="m-auto">
-            <Button
-              variant="secondary"
-              label="Customize"
-              @click="$emit('customize', theme)"
-            />
+            <Button variant="secondary" label="Customize" @click="$emit('customize', theme)" />
           </div>
           <div v-else-if="theme.draft" class="m-auto flex gap-3">
-            <Button
-              variant="secondary"
-              label="Customize"
-              @click="$emit('customize', theme)"
-            />
+            <Button variant="secondary" label="Customize" @click="$emit('customize', theme)" />
             <Button label="Publish" @click="$emit('publish', theme)" />
           </div>
           <div v-else class="m-auto flex gap-3">
-            <Button
-              variant="secondary"
-              label="Preview"
-              @click="$emit('preview', theme)"
-            />
+            <Button variant="secondary" label="Preview" @click="$emit('preview', theme)" />
             <Button
               :label="isFreeAccount ? 'Activate' : 'Try Theme'"
               @click="$emit('activate', theme)"
@@ -46,9 +34,7 @@ defineEmits(["activate", "customize", "preview", "upgrade", "publish"]);
           </div>
         </template>
         <template v-else>
-          <div
-            class="m-auto bg-white/75 rounded p-5 flex text-center flex-col justify-center"
-          >
+          <div class="m-auto bg-white/75 rounded p-5 flex text-center flex-col justify-center">
             <div class="mx-auto mb-3">
               <Icon
                 name="loading-2"
@@ -61,11 +47,7 @@ defineEmits(["activate", "customize", "preview", "upgrade", "publish"]);
           </div>
         </template>
       </div>
-      <img
-        class="w-full rounded-t-md"
-        :src="theme.thumbnail"
-        :alt="theme.title"
-      />
+      <img class="w-full rounded-t-md" :src="theme.thumbnail" :alt="theme.title" />
     </div>
     <div class="p-4 flex items-center">
       <div class="w-full">
@@ -74,9 +56,7 @@ defineEmits(["activate", "customize", "preview", "upgrade", "publish"]);
       </div>
       <div class="h-full flex items-start">
         <Chip v-if="theme.active" class="ml-auto">Active</Chip>
-        <Chip v-else-if="theme.draft" variant="gray" class="ml-auto"
-          >Draft</Chip
-        >
+        <Chip v-else-if="theme.draft" variant="gray" class="ml-auto">Draft</Chip>
         <Chip
           v-else-if="theme.pro"
           class="ml-auto"

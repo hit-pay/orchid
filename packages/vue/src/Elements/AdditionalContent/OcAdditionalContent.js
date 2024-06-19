@@ -1,4 +1,4 @@
-import AdditionalContent from "./OcAdditionalContent.vue";
-import InfoCardButton from "./BalanceType/OcInfoCardButton.vue";
+import AdditionalContent from './OcAdditionalContent.vue'
+import InfoCardButton from './BalanceType/OcInfoCardButton.vue'
 
-export { AdditionalContent, InfoCardButton };
+export { AdditionalContent, InfoCardButton }

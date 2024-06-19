@@ -1,3 +1,3 @@
-import Popper from "./OcPopper.vue";
+import Popper from './OcPopper.vue'
 
-export { Popper };
+export { Popper }

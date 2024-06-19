@@ -1,3 +1,3 @@
-import InfoCard from "./OcInfoCard.vue";
+import InfoCard from './OcInfoCard.vue'
 
-export { InfoCard };
+export { InfoCard }

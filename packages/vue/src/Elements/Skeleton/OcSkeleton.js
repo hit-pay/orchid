@@ -1,3 +1,3 @@
-import Skeleton from "./OcSkeleton.vue";
+import Skeleton from './OcSkeleton.vue'
 
-export { Skeleton };
+export { Skeleton }

@@ -1,142 +1,137 @@
 <script setup>
-import { Dropdown, Calendar, Input } from "@/orchidui";
-import { computed, ref } from "vue";
-import customParseFormat from "dayjs/plugin/customParseFormat";
-import dayjs from "dayjs";
+import { Dropdown, Calendar, Input } from '@/orchidui'
+import { computed, ref } from 'vue'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
+import dayjs from 'dayjs'
 
 // Getting invalid date while using 'DD/MM/YYYY' format
 // https://github.com/iamkun/dayjs/issues/1786
-dayjs.extend(customParseFormat);
+dayjs.extend(customParseFormat)
 
-const emit = defineEmits(["update:modelValue", "resetCalendar"]);
+const emit = defineEmits(['update:modelValue', 'resetCalendar'])
 const props = defineProps({
   modelValue: {
-    type: [String, Date, Number, Array],
+    type: [String, Date, Number, Array]
   },
   type: {
     type: String,
-    default: "default",
-    validator: (val) => ["default", "range"].includes(val),
+    default: 'default',
+    validator: (val) => ['default', 'range'].includes(val)
   },
   disabledDate: {
     type: Function,
-    default: () => false,
+    default: () => false
   },
   minDate: {
     type: [String, Date, Number],
-    default: null,
+    default: null
   },
   maxDate: {
     type: [String, Date, Number],
-    default: null,
+    default: null
   },
   dateFormat: {
     type: String,
-    default: "YYYY-MM-DD",
+    default: 'YYYY-MM-DD'
   },
   disabled: {
     type: Boolean,
-    default: false,
+    default: false
   },
   errorMessage: {
     type: String,
-    default: "",
+    default: ''
   },
   label: {
     type: String,
-    default: "",
+    default: ''
   },
   hint: {
     type: String,
-    default: "",
+    default: ''
   },
   placeholder: {
     type: String,
-    default: "DD/MM/YYYY",
+    default: 'DD/MM/YYYY'
   },
   isSplitInput: {
     type: Boolean,
-    default: true,
+    default: true
   },
   minLabel: {
     type: String,
-    default: "From",
+    default: 'From'
   },
   maxLabel: {
     type: String,
-    default: "To",
+    default: 'To'
   },
   isRequired: {
     type: Boolean,
-    default: false,
+    default: false
   },
   isIndefinite: {
     type: Boolean,
-    default: false,
-  },
-});
+    default: false
+  }
+})
 
-const startDateSelected = ref();
-const toInputElement = ref();
-const fromInputElement = ref();
-const isDropdownOpened = ref(false);
-const isCalendarIndefinite = ref(false);
+const startDateSelected = ref()
+const toInputElement = ref()
+const fromInputElement = ref()
+const isDropdownOpened = ref(false)
+const isCalendarIndefinite = ref(false)
 
-const isRangeInput = computed(() => props.type === "range");
+const isRangeInput = computed(() => props.type === 'range')
 
 const formattedDate = computed(() => {
   if (!isRangeInput.value) {
-    return props.modelValue ? dayjs(props.modelValue, props.dateFormat) : "";
+    return props.modelValue ? dayjs(props.modelValue, props.dateFormat) : ''
   }
 
   if (props.modelValue && props.modelValue[0]) {
     return [
       dayjs(props.modelValue[0], props.dateFormat),
-      dayjs(props.modelValue[1], props.dateFormat),
-    ];
+      dayjs(props.modelValue[1], props.dateFormat)
+    ]
   }
 
-  return ["", ""];
-});
+  return ['', '']
+})
 
 const updateCalendar = (newValue) => {
-  if (props.type === "range") {
-    emit("update:modelValue", [
+  if (props.type === 'range') {
+    emit('update:modelValue', [
       dayjs(newValue[0]).format(props.dateFormat),
-      dayjs(newValue[1]).format(props.dateFormat),
-    ]);
+      dayjs(newValue[1]).format(props.dateFormat)
+    ])
   } else {
-    emit("update:modelValue", dayjs(newValue).format(props.dateFormat));
+    emit('update:modelValue', dayjs(newValue).format(props.dateFormat))
   }
-  isDropdownOpened.value = false;
-};
+  isDropdownOpened.value = false
+}
 
 const resetCalendar = () => {
-  emit("resetCalendar");
-  emit("update:modelValue", isRangeInput.value ? [] : null);
+  emit('resetCalendar')
+  emit('update:modelValue', isRangeInput.value ? [] : null)
 
-  isDropdownOpened.value = false;
-};
+  isDropdownOpened.value = false
+}
 
 const disableAllDates = (value) => {
-  const date = dayjs(value);
-  const isInCurrentMonth = (date) => date.get("month") === dayjs().get("month");
-  return isInCurrentMonth(date);
-};
+  const date = dayjs(value)
+  const isInCurrentMonth = (date) => date.get('month') === dayjs().get('month')
+  return isInCurrentMonth(date)
+}
 
 const handleIndefinite = (event) => {
-  isCalendarIndefinite.value = event;
-  emit("update:modelValue", event ? "Indefinite" : null);
-};
+  isCalendarIndefinite.value = event
+  emit('update:modelValue', event ? 'Indefinite' : null)
+}
 </script>
 
 <template>
-  <Dropdown
-    v-model="isDropdownOpened"
-    placement="bottom-start"
-    :distance="10"
-    class="w-full"
-  >
+  <Dropdown v-model="isDropdownOpened" placement="bottom-start" :distance="10" class="w-full">
     <div class="flex flex-col gap-y-2 w-full">
       <div v-if="!isSplitInput || !isRangeInput" class="flex w-full">
         <Input
@@ -166,9 +161,7 @@ const handleIndefinite = (event) => {
           <Input
             ref="fromInputElement"
             :label="`${label} ${minLabel}`"
-            :model-value="
-              formattedDate[0] ? formattedDate[0].format(dateFormat) : ''
-            "
+            :model-value="formattedDate[0] ? formattedDate[0].format(dateFormat) : ''"
             icon="calendar"
             :placeholder="placeholder"
             :disabled="disabled"
@@ -179,9 +172,7 @@ const handleIndefinite = (event) => {
           <Input
             ref="toInputElement"
             :label="`${label} ${maxLabel}`"
-            :model-value="
-              formattedDate[1] ? formattedDate[1].format(dateFormat) : ''
-            "
+            :model-value="formattedDate[1] ? formattedDate[1].format(dateFormat) : ''"
             icon="calendar"
             :placeholder="placeholder"
             :disabled="disabled"

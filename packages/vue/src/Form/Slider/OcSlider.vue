@@ -1,106 +1,96 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted } from 'vue'
 
 const props = defineProps({
   maxLimit: {
     type: Number,
-    default: 100,
+    default: 100
   },
   minLimit: {
     type: Number,
-    default: 0,
+    default: 0
   },
   minGap: {
     type: Number,
-    default: 0,
+    default: 0
   },
   type: {
     type: String,
-    default: "default",
+    default: 'default'
   },
   modelValue: {
     type: [Array, Number, String],
-    default: 0,
+    default: 0
   },
   label: String,
   variant: {
     type: String,
-    default: "default",
-  },
-});
+    default: 'default'
+  }
+})
 
 const emit = defineEmits({
-  "update:modelValue": [],
-});
+  'update:modelValue': []
+})
 
-const sliderOne = ref();
-const sliderTwo = ref();
-const sliderTrack = ref();
-const percent1 = ref(0);
-const percent2 = ref(0);
+const sliderOne = ref()
+const sliderTwo = ref()
+const sliderTrack = ref()
+const percent1 = ref(0)
+const percent2 = ref(0)
 const slideOne = () => {
-  if (props.type === "range") {
-    if (
-      parseInt(sliderTwo.value?.value) - parseInt(sliderOne.value?.value) <=
-      props.minGap
-    ) {
-      sliderOne.value.value = parseInt(sliderTwo.value.value) - props.minGap;
+  if (props.type === 'range') {
+    if (parseInt(sliderTwo.value?.value) - parseInt(sliderOne.value?.value) <= props.minGap) {
+      sliderOne.value.value = parseInt(sliderTwo.value.value) - props.minGap
     }
   }
-  fillColor();
-};
+  fillColor()
+}
 
 const slideTwo = () => {
-  if (
-    parseInt(sliderTwo.value?.value) - parseInt(sliderOne.value?.value) <=
-    props.minGap
-  ) {
-    sliderTwo.value.value = parseInt(sliderOne.value?.value) + props.minGap;
+  if (parseInt(sliderTwo.value?.value) - parseInt(sliderOne.value?.value) <= props.minGap) {
+    sliderTwo.value.value = parseInt(sliderOne.value?.value) + props.minGap
   }
-  fillColor();
-};
+  fillColor()
+}
 
 const fillColor = (onlyFillColor = false) => {
   percent1.value =
-    ((sliderOne.value?.value - props.minLimit) /
-      (props.maxLimit - props.minLimit)) *
-    100;
+    ((sliderOne.value?.value - props.minLimit) / (props.maxLimit - props.minLimit)) * 100
   percent2.value =
-    props.type === "range"
-      ? ((sliderTwo.value?.value - props.minLimit) /
-          (props.maxLimit - props.minLimit)) *
-        100
-      : 0;
+    props.type === 'range'
+      ? ((sliderTwo.value?.value - props.minLimit) / (props.maxLimit - props.minLimit)) * 100
+      : 0
   sliderTrack.value.style.background =
-    props.type === "range"
+    props.type === 'range'
       ? `linear-gradient(to right, var(--oc-gray-100) ${percent1.value}% , var(--oc-primary-500) ${percent1.value}% , var(--oc-primary-500) ${percent2.value}%, var(--oc-gray-100) ${percent2.value}%)`
-      : `linear-gradient(to right, var(--oc-primary-500) ${percent1.value}%, var(--oc-gray-100) ${percent1.value}%)`;
+      : `linear-gradient(to right, var(--oc-primary-500) ${percent1.value}%, var(--oc-gray-100) ${percent1.value}%)`
 
   if (!onlyFillColor) {
     emit(
-      "update:modelValue",
-      props.type === "range"
+      'update:modelValue',
+      props.type === 'range'
         ? [sliderOne.value?.value, sliderTwo.value?.value]
-        : sliderOne.value.value,
-    );
+        : sliderOne.value.value
+    )
   }
-};
+}
 const updateSlider = (value) => {
-  if (value && value[0] && value[1] && props.type === "range") {
-    sliderOne.value.value = Number(value[0]);
-    sliderTwo.value.value = Number(value[1]);
+  if (value && value[0] && value[1] && props.type === 'range') {
+    sliderOne.value.value = Number(value[0])
+    sliderTwo.value.value = Number(value[1])
 
-    slideOne();
-    if (props.type === "range") slideTwo();
+    slideOne()
+    if (props.type === 'range') slideTwo()
   } else {
-    fillColor(true);
+    fillColor(true)
   }
-};
+}
 defineExpose({
-  updateSlider,
-});
+  updateSlider
+})
 
-onMounted(() => updateSlider());
+onMounted(() => updateSlider())
 </script>
 
 <template>
@@ -117,13 +107,10 @@ onMounted(() => updateSlider());
       class="relative h-[33px]"
       :class="{
         'w-full': variant === 'default',
-        'w-[85%]': variant === 'right',
+        'w-[85%]': variant === 'right'
       }"
     >
-      <div
-        ref="sliderTrack"
-        class="rounded-full h-3 absolute m-auto top-0 w-full group"
-      />
+      <div ref="sliderTrack" class="rounded-full h-3 absolute m-auto top-0 w-full group" />
 
       <input
         ref="sliderOne"
@@ -149,7 +136,7 @@ onMounted(() => updateSlider());
         class="group-hover:block absolute top-[1rem] z-[1] -translate-x-1/2 rounded-sm py-[3px] px-[6px] min-w-[28px] bg-oc-text-500 text-center text-white text-sm font-medium leading-[20px]"
         :style="`left: ${percent1}%`"
       >
-        {{ type === "range" ? modelValue?.[0] : modelValue }}
+        {{ type === 'range' ? modelValue?.[0] : modelValue }}
       </div>
 
       <div
@@ -171,13 +158,13 @@ onMounted(() => updateSlider());
       v-if="variant === 'right'"
       class="border border-oc-gray-200 rounded-lg ml-auto w-[11%] flex items-center -mt-4 justify-center"
     >
-      {{ type === "range" ? modelValue?.[0] : modelValue }}
+      {{ type === 'range' ? modelValue?.[0] : modelValue }}
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-input[type="range"] {
+input[type='range'] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;

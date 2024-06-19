@@ -15,18 +15,18 @@
 </template>
 
 <script setup>
-import { inject } from "vue";
+import { inject } from 'vue'
 
 defineProps({
-  modelValue: { default: 0, type: Number },
-});
+  modelValue: { default: 0, type: Number }
+})
 
-const opacitySlider = inject("opacitySlider");
+const opacitySlider = inject('opacitySlider')
 
-const emits = defineEmits(["update:modelValue", "onInput"]);
+const emits = defineEmits(['update:modelValue', 'onInput'])
 
 const handleInput = (event) => {
-  emits("update:modelValue", parseInt(event.target.value));
-  emits("onInput", event);
-};
+  emits('update:modelValue', parseInt(event.target.value))
+  emits('onInput', event)
+}
 </script>

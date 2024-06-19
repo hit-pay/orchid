@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { Variant } from "@/orchidui";
+import { Variant } from '@/orchidui'
 
 defineProps({
   variants: {
     type: Array,
-    default: () => [],
+    default: () => []
   },
   modelValue: {
     type: [String, Number],
-    default: "",
-  },
-});
+    default: ''
+  }
+})
 
-defineEmits(["update:modelValue"]);
+defineEmits(['update:modelValue'])
 </script>
 
 <template>
@@ -22,12 +22,7 @@ defineEmits(["update:modelValue"]);
       :key="variant.value"
       :is-active="variant.value === modelValue"
       v-bind="variant"
-      @click="
-        $emit(
-          'update:modelValue',
-          variant.isDisabled ? modelValue : variant.value,
-        )
-      "
+      @click="$emit('update:modelValue', variant.isDisabled ? modelValue : variant.value)"
     >
       <template v-for="(_, name) in $slots" #[name]="slotData">
         <slot :name="name" v-bind="slotData" />

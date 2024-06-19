@@ -1,87 +1,80 @@
 <script setup>
-import { Popper } from "@/orchidui";
-import { clickOutside as vClickOutside } from "../../directives/clickOutside.js";
-import { ref, watch } from "vue"; // Import the directive
+import { Popper } from '@/orchidui'
+import { clickOutside as vClickOutside } from '../../directives/clickOutside.js'
+import { ref, watch } from 'vue' // Import the directive
 
 const emit = defineEmits({
-  "update:modelValue": [],
-});
+  'update:modelValue': []
+})
 
 const props = defineProps({
   distance: {
     type: Number,
-    default: 4,
+    default: 4
   },
   skidding: {
     type: Number,
-    default: 0,
+    default: 0
   },
   isDisabled: Boolean,
   menuClasses: String,
   placement: {
     type: String,
-    default: "bottom-start",
+    default: 'bottom-start'
   },
   popperOptions: {
     type: Object,
     default: () => ({
-      strategy: "fixed",
-    }),
+      strategy: 'fixed'
+    })
   },
   maxMenuHeight: Number,
   popperStyle: Object,
   popperClass: [String, Array, Object],
   modelValue: Boolean,
-  preventClickOutside: Boolean,
-});
-const popper = ref();
-const dropdownScroll = ref();
+  preventClickOutside: Boolean
+})
+const popper = ref()
+const dropdownScroll = ref()
 const toggleDropdown = async (e) => {
-  if (!e?.target) return;
-  if (props.isDisabled) return;
+  if (!e?.target) return
+  if (props.isDisabled) return
   // Need to add a timeout because the popup position cannot be determined while the element is display:none (v-show), which is required for the appearance animation
-  setTimeout(() => popper.value.popperInstance.update(), 0);
-  emit("update:modelValue", !props.modelValue);
-};
+  setTimeout(() => popper.value.popperInstance.update(), 0)
+  emit('update:modelValue', !props.modelValue)
+}
 const onClickOutside = () => {
-  if (props.modelValue && !props.preventClickOutside)
-    emit("update:modelValue", false);
-};
-const parentElement = ref();
-const maxPopperHeight = ref(0);
+  if (props.modelValue && !props.preventClickOutside) emit('update:modelValue', false)
+}
+const parentElement = ref()
+const maxPopperHeight = ref(0)
 
 const getMaxHeightWithoutOverflow = async () => {
-  const viewportHeight =
-    window.innerHeight || document.documentElement.clientHeight;
+  const viewportHeight = window.innerHeight || document.documentElement.clientHeight
 
-  const parentElementTop = parentElement.value.getBoundingClientRect().top;
+  const parentElementTop = parentElement.value.getBoundingClientRect().top
 
-  const parentElementBottom =
-    viewportHeight - parentElement.value.getBoundingClientRect().bottom;
+  const parentElementBottom = viewportHeight - parentElement.value.getBoundingClientRect().bottom
 
-  const max = Math.max(parentElementTop, parentElementBottom);
-  const additionalTopOffset = max === parentElementTop ? 2.5 : 0;
+  const max = Math.max(parentElementTop, parentElementBottom)
+  const additionalTopOffset = max === parentElementTop ? 2.5 : 0
 
-  const maxHeight = max - (2 + additionalTopOffset) * 16; // offset;
+  const maxHeight = max - (2 + additionalTopOffset) * 16 // offset;
 
-  maxPopperHeight.value = maxHeight > 0 ? maxHeight : 0;
-};
+  maxPopperHeight.value = maxHeight > 0 ? maxHeight : 0
+}
 
-watch(() => props.modelValue, getMaxHeightWithoutOverflow);
+watch(() => props.modelValue, getMaxHeightWithoutOverflow)
 
 defineExpose({
   dropdownScroll,
   toggleDropdown,
-  popper,
-});
+  popper
+})
 </script>
 
 <template>
-  <span
-    ref="parentElement"
-    v-click-outside="onClickOutside"
-    class="flex w-[inherit]"
-  >
+  <span ref="parentElement" v-click-outside="onClickOutside" class="flex w-[inherit]">
     <Popper
       ref="popper"
       :placement="placement"
@@ -102,7 +95,7 @@ defineExpose({
             :class="menuClasses"
             class="rounded bg-oc-bg-light shadow min-w-[162px] overflow-y-auto"
             :style="{
-              maxHeight: (maxMenuHeight || maxPopperHeight) + 'px',
+              maxHeight: (maxMenuHeight || maxPopperHeight) + 'px'
             }"
           >
             <slot name="menu" :isPopoverOpen="modelValue" />

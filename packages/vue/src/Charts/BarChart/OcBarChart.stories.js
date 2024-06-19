@@ -1,26 +1,23 @@
-import OcBarChart from "./OcBarChart.vue";
+import OcBarChart from './OcBarChart.vue'
 
 export default {
   component: OcBarChart,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const barChart = {
   argTypes: {
     variant: {
-      control: "select",
-      options: ["primary", "purple"],
-    },
+      control: 'select',
+      options: ['primary', 'purple']
+    }
   },
   args: {
-    variant: "primary",
+    variant: 'primary',
     showGrid: false,
     showTooltip: true,
     showLegend: true,
-    chartData: [
-      500, 730, 824, 1218.88, 2135, 1147, 760, 1150, 2130, 2324, 1218, 2135,
-      1147,
-    ],
+    chartData: [500, 730, 824, 1218.88, 2135, 1147, 760, 1150, 2130, 2324, 1218, 2135, 1147],
     labelData: [
       "NOV'22",
       "DEC'22",
@@ -33,17 +30,17 @@ export const barChart = {
       "AUG'23",
       "SEP'23",
       "OCT'23",
-      "NOV'23",
+      "NOV'23"
     ],
     yAxisFormatter: (value) => {
-      return (value / 1000).toFixed(1) + "K";
+      return (value / 1000).toFixed(1) + 'K'
     },
-    tooltipCurrency: "SGD",
+    tooltipCurrency: 'SGD'
   },
   render: (args) => ({
     components: { OcBarChart },
     setup() {
-      return { args };
+      return { args }
     },
     template: `
           <div>
@@ -59,6 +56,6 @@ export const barChart = {
                 :y-axis-formatter="args.yAxisFormatter"
             />
           </div>
-        `,
-  }),
-};
+        `
+  })
+}

@@ -1,22 +1,22 @@
-import { HorizontalProgressbar } from "@/orchidui";
+import { HorizontalProgressbar } from '@/orchidui'
 
 export default {
   component: HorizontalProgressbar,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const Default = {
   args: {
     max: 5,
-    current: 3,
+    current: 3
   },
   render: (args) => ({
     components: { HorizontalProgressbar },
     setup() {
-      return { args };
+      return { args }
     },
     template: `
           <HorizontalProgressbar v-bind="args" :label="\`${args.current} / ${args.max} completed\`"/>
-        `,
-  }),
-};
+        `
+  })
+}

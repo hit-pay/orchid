@@ -1,106 +1,104 @@
 <script setup>
-import { onMounted, ref } from "vue";
-import { Popper } from "@/orchidui";
-import { clickOutside as vClickOutside } from "../../directives/clickOutside.js";
+import { onMounted, ref } from 'vue'
+import { Popper } from '@/orchidui'
+import { clickOutside as vClickOutside } from '../../directives/clickOutside.js'
 
 const props = defineProps({
   popperClass: {
     type: String,
-    default: "bg-oc-bg-light",
+    default: 'bg-oc-bg-light'
   },
   distance: {
     type: [String, Number],
-    default: 5,
+    default: 5
   },
   skidding: {
     type: Number,
-    default: 0,
+    default: 0
   },
   transitionName: {
     type: String,
-    default: "fade",
+    default: 'fade'
   },
   hideAfter: Number,
   popperOptions: Object,
   trigger: {
     type: String,
-    default: "hover",
-    validator: (val) => ["hover", "click"].includes(val),
+    default: 'hover',
+    validator: (val) => ['hover', 'click'].includes(val)
   },
   position: {
     type: String,
-    default: "bottom",
+    default: 'bottom',
     validator: (value) =>
       [
-        "top-start",
-        "top",
-        "top-end",
-        "right-start",
-        "right",
-        "right-end",
-        "bottom-start",
-        "bottom",
-        "bottom-end",
-        "left-start",
-        "left",
-        "left-end",
-      ].includes(value),
+        'top-start',
+        'top',
+        'top-end',
+        'right-start',
+        'right',
+        'right-end',
+        'bottom-start',
+        'bottom',
+        'bottom-end',
+        'left-start',
+        'left',
+        'left-end'
+      ].includes(value)
   },
   arrowHidden: {
     type: Boolean,
-    default: false,
+    default: false
   },
   isPopover: {
     type: Boolean,
-    default: false,
-  },
-});
+    default: false
+  }
+})
 
-const isShow = ref(false);
-const triggerEl = ref();
-const popperBodyEl = ref();
-const popper = ref();
+const isShow = ref(false)
+const triggerEl = ref()
+const popperBodyEl = ref()
+const popper = ref()
 
 const show = () => {
-  isShow.value = true;
+  isShow.value = true
   // Update its position
-  popper.value.popperInstance.update();
-  if (props.hideAfter) setTimeout(() => hide(), props.hideAfter);
-};
+  popper.value.popperInstance.update()
+  if (props.hideAfter) setTimeout(() => hide(), props.hideAfter)
+}
 
-const hide = () => (isShow.value = false);
+const hide = () => (isShow.value = false)
 
 onMounted(() => {
-  if (props.trigger === "hover") {
-    const showEvents = ["mouseenter", "focus"];
-    const hideEvents = ["mouseleave", "blur"];
+  if (props.trigger === 'hover') {
+    const showEvents = ['mouseenter', 'focus']
+    const hideEvents = ['mouseleave', 'blur']
 
     showEvents.forEach((event) => {
-      triggerEl.value.addEventListener(event, show);
-    });
+      triggerEl.value.addEventListener(event, show)
+    })
 
     hideEvents.forEach((event) => {
-      triggerEl.value.addEventListener(event, hide);
-    });
+      triggerEl.value.addEventListener(event, hide)
+    })
 
     if (props.isPopover) {
       showEvents.forEach((event) => {
-        popperBodyEl.value.addEventListener(event, show);
-      });
+        popperBodyEl.value.addEventListener(event, show)
+      })
 
       hideEvents.forEach((event) => {
-        popperBodyEl.value.addEventListener(event, hide);
-      });
+        popperBodyEl.value.addEventListener(event, hide)
+      })
     }
   } else {
-    triggerEl.value.addEventListener("click", () =>
-      isShow.value ? hide() : show(),
-    );
+    triggerEl.value.addEventListener('click', () => (isShow.value ? hide() : show()))
   }
-});
+})
 const onClickOutside = () => {
-  if (isShow.value) hide();
-};
+  if (isShow.value) hide()
+}
 </script>
 
 <template>
@@ -118,12 +116,7 @@ const onClickOutside = () => {
       </div>
       <template #popper>
         <Transition :name="transitionName">
-          <div
-            v-show="isShow"
-            ref="popperBodyEl"
-            class="oc-tooltip"
-            :class="popperClass"
-          >
+          <div v-show="isShow" ref="popperBodyEl" class="oc-tooltip" :class="popperClass">
             <slot name="popper" />
             <div v-if="!arrowHidden" class="oc-arrow" data-popper-arrow />
           </div>
@@ -141,19 +134,19 @@ const onClickOutside = () => {
   @apply rounded-sm z-[1010];
 
   &-wrapper {
-    div[data-popper-placement^="top"] .oc-arrow {
+    div[data-popper-placement^='top'] .oc-arrow {
       bottom: -4px;
     }
 
-    div[data-popper-placement^="bottom"] .oc-arrow {
+    div[data-popper-placement^='bottom'] .oc-arrow {
       top: -4px;
     }
 
-    div[data-popper-placement^="left"] .oc-arrow {
+    div[data-popper-placement^='left'] .oc-arrow {
       right: -4px;
     }
 
-    div[data-popper-placement^="right"] .oc-arrow {
+    div[data-popper-placement^='right'] .oc-arrow {
       left: -4px;
     }
   }
@@ -169,7 +162,7 @@ const onClickOutside = () => {
 
     &::before {
       visibility: visible;
-      content: "";
+      content: '';
       transform: rotate(45deg);
     }
   }

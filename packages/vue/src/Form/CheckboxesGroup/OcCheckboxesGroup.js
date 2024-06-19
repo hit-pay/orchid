@@ -1,3 +1,3 @@
-import CheckboxesGroup from "./OcCheckboxesGroup.vue";
+import CheckboxesGroup from './OcCheckboxesGroup.vue'
 
-export { CheckboxesGroup };
+export { CheckboxesGroup }

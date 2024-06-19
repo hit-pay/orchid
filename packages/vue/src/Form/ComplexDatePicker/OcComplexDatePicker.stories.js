@@ -1,76 +1,76 @@
-import { ComplexCalendar } from "@/orchidui/Calendar.js";
-import { Theme } from "@/orchidui";
-import dayjs from "dayjs";
-import { ref } from "vue";
+import { ComplexCalendar } from '@/orchidui/Calendar.js'
+import { Theme } from '@/orchidui'
+import dayjs from 'dayjs'
+import { ref } from 'vue'
 
 export default {
   component: ComplexCalendar,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 export const Calendar = {
   args: {
     shortcuts: [
       {
-        label: "Today",
+        label: 'Today',
         value: {
           start: new Date(),
-          end: new Date(),
-        },
+          end: new Date()
+        }
       },
       {
-        label: "Yesterday",
+        label: 'Yesterday',
         value: {
-          start: dayjs().subtract(1, "day").toDate(),
-          end: dayjs().subtract(1, "day").toDate(),
-        },
+          start: dayjs().subtract(1, 'day').toDate(),
+          end: dayjs().subtract(1, 'day').toDate()
+        }
       },
       {
-        label: "This week",
+        label: 'This week',
         value: {
-          start: dayjs().startOf("week").toDate(),
-          end: dayjs().endOf("week").toDate(),
-        },
+          start: dayjs().startOf('week').toDate(),
+          end: dayjs().endOf('week').toDate()
+        }
       },
       {
-        label: "This month",
+        label: 'This month',
         value: {
-          start: dayjs().startOf("month").toDate(),
-          end: dayjs().endOf("month").toDate(),
-        },
+          start: dayjs().startOf('month').toDate(),
+          end: dayjs().endOf('month').toDate()
+        }
       },
       {
-        label: "Last month",
+        label: 'Last month',
         value: {
-          start: dayjs().subtract(1, "month").startOf("month").toDate(),
-          end: dayjs().subtract(1, "month").endOf("month").toDate(),
-        },
-      },
+          start: dayjs().subtract(1, 'month').startOf('month').toDate(),
+          end: dayjs().subtract(1, 'month').endOf('month').toDate()
+        }
+      }
     ],
     cancelButtonProps: {
-      label: "Clear",
+      label: 'Clear'
     },
     submitButtonProps: {
-      label: "Done",
+      label: 'Done'
     },
     calendarProps: null,
-    formatDate: "DD/MM/YYYY",
+    formatDate: 'DD/MM/YYYY',
     countCalendars: 2,
     withFooter: true,
-    label: "",
-    hint: "",
-    errorMessage: "",
+    label: '',
+    hint: '',
+    errorMessage: ''
   },
   argTypes: {
     formatDate: {
-      control: "select",
-      options: ["DD/MM/YYYY", "MM/DD/YYYY", "YYYY/MM/DD"],
-    },
+      control: 'select',
+      options: ['DD/MM/YYYY', 'MM/DD/YYYY', 'YYYY/MM/DD']
+    }
   },
   render: (args) => ({
     components: { ComplexCalendar, Theme },
     setup() {
-      const range = ref();
-      return { args, range };
+      const range = ref()
+      return { args, range }
     },
     template: `
           <Theme class="h-[400px]">
@@ -88,6 +88,6 @@ export const Calendar = {
                 :error-message="args.errorMessage"
             />
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}

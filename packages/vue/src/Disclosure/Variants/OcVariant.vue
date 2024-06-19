@@ -1,32 +1,32 @@
 <script setup lang="ts">
-import { Icon } from "@/orchidui";
+import { Icon } from '@/orchidui'
 
 defineProps({
   icon: {
     type: String,
-    default: "",
+    default: ''
   },
   label: {
     type: String,
-    default: "",
+    default: ''
   },
   isActive: {
     type: Boolean,
-    default: false,
+    default: false
   },
   isDisabled: {
     type: Boolean,
-    default: false,
+    default: false
   },
   iconOptions: {
     type: Object,
-    default: null,
+    default: null
   },
   value: {
     type: [String, Number],
-    default: "",
-  },
-});
+    default: ''
+  }
+})
 </script>
 
 <template>
@@ -46,15 +46,12 @@ defineProps({
         width="18"
         height="18"
         :name="icon"
-        :class="
-          isDisabled ? 'text-oc-text-200' : isActive ? '' : 'text-oc-text-400'
-        "
+        :class="isDisabled ? 'text-oc-text-200' : isActive ? '' : 'text-oc-text-400'"
         v-bind="iconOptions"
       />
-      <span
-        :class="isDisabled ? 'text-oc-text-300' : isActive ? 'font-medium' : ''"
-        >{{ label }}</span
-      >
+      <span :class="isDisabled ? 'text-oc-text-300' : isActive ? 'font-medium' : ''">{{
+        label
+      }}</span>
     </div>
     <slot :name="`${value}-description`" />
   </div>

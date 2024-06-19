@@ -1,6 +1,6 @@
 <script setup>
-import { BaseInput } from "@/orchidui";
-import { ref } from "vue";
+import { BaseInput } from '@/orchidui'
+import { ref } from 'vue'
 
 defineProps({
   placeholder: String,
@@ -13,37 +13,37 @@ defineProps({
   isDisabled: Boolean,
   isRequired: {
     type: Boolean,
-    default: false,
+    default: false
   },
   labelIcon: {
     type: String,
-    default: "",
+    default: ''
   },
   tooltipText: {
     type: String,
-    default: "",
+    default: ''
   },
   tooltipOptions: {
     type: Object,
-    default: () => ({}),
-  },
-});
+    default: () => ({})
+  }
+})
 
 const emit = defineEmits({
-  "update:modelValue": [],
-});
+  'update:modelValue': []
+})
 
-const isFocused = ref(false);
+const isFocused = ref(false)
 
-const MIN_HEIGHT = "18px";
+const MIN_HEIGHT = '18px'
 
 const onInput = (event) => {
-  const input = event.target;
-  if (!input) return;
-  input.style.height = MIN_HEIGHT;
-  input.style.height = input.scrollHeight + "px";
-  emit("update:modelValue", input.value);
-};
+  const input = event.target
+  if (!input) return
+  input.style.height = MIN_HEIGHT
+  input.style.height = input.scrollHeight + 'px'
+  emit('update:modelValue', input.value)
+}
 </script>
 
 <template>
@@ -60,9 +60,7 @@ const onInput = (event) => {
       class="outline-none p-3 min-h-[120px] rounded border resize-none disabled:bg-oc-bg-dark"
       :class="[
         isFocused ? 'shadow-[0_0_0_2px]' : '',
-        errorMessage
-          ? 'border-oc-error shadow-oc-error'
-          : 'border-oc-gray-200 shadow-oc-gray-200',
+        errorMessage ? 'border-oc-error shadow-oc-error' : 'border-oc-gray-200 shadow-oc-gray-200'
       ]"
       :disabled="isDisabled"
       :value="modelValue"

@@ -1,16 +1,16 @@
-import { Theme, Icon } from "@/orchidui";
+import { Theme, Icon } from '@/orchidui'
 export default {
   component: Icon,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const Default = {
   render: (args) => ({
     components: { Icon, Theme },
     setup() {
       return {
-        args,
-      };
+        args
+      }
     },
     template: `
           <Theme>
@@ -18,6 +18,6 @@ export const Default = {
               <Icon width="22" height="16" name="flags/SG"/>
             </div>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}

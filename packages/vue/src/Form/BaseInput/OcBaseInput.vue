@@ -1,5 +1,5 @@
 <script setup>
-import { Tooltip, Icon } from "@/orchidui";
+import { Tooltip, Icon } from '@/orchidui'
 defineProps({
   label: String,
   hint: String,
@@ -8,8 +8,8 @@ defineProps({
   labelIcon: String,
   tooltipText: String,
   tooltipOptions: Object,
-  labelClass: String,
-});
+  labelClass: String
+})
 </script>
 
 <template>

@@ -9,356 +9,332 @@ import {
   FilterSearchFor,
   FilterForm,
   Button,
-  Dropdown,
-} from "@/orchidui";
-import { ref, computed } from "vue";
-import dayjs from "dayjs";
+  Dropdown
+} from '@/orchidui'
+import { ref, computed } from 'vue'
+import dayjs from 'dayjs'
 
 const props = defineProps({
   isLoading: Boolean,
   id: {
     type: String,
-    required: true,
+    required: true
   },
   options: {
     type: Object,
-    required: true,
+    required: true
   },
   filter: {
     type: Object,
-    required: true,
+    required: true
   },
   selected: {
     type: Array,
-    required: false,
+    required: false
   },
   rowClass: String,
   rowKey: {
     type: String,
     Function,
-    default: "id",
+    default: 'id'
   },
-  rowLink: String,
-});
+  rowLink: String
+})
 
 const emit = defineEmits({
-  "update:selected": [],
-  "update:filter": [],
-  "click:row": [],
-  "filter-fields-changed": [],
-  "filter-removed": [],
-  "search-query-changed": [],
-  "hover:cell": [],
-});
+  'update:selected': [],
+  'update:filter': [],
+  'click:row': [],
+  'filter-fields-changed': [],
+  'filter-removed': [],
+  'search-query-changed': [],
+  'hover:cell': []
+})
 
-const paginationOption = computed(() => props.options?.pagination);
+const paginationOption = computed(() => props.options?.pagination)
 
-const cursorOption = computed(() => props.options?.cursor);
+const cursorOption = computed(() => props.options?.cursor)
 
-const tableOptions = computed(() => props.options?.tableOptions);
+const tableOptions = computed(() => props.options?.tableOptions)
 
-const filterOptions = computed(() => props.options?.filterOptions);
+const filterOptions = computed(() => props.options?.filterOptions)
 
-const hidePerPageDropdown = computed(() => props.options?.hidePerPageDropdown);
+const hidePerPageDropdown = computed(() => props.options?.hidePerPageDropdown)
 
-const isLastPage = computed(() => paginationOption.value?.last_page === 1);
+const isLastPage = computed(() => paginationOption.value?.last_page === 1)
 
-const isDropdownOpened = ref(false);
-const filterTab = ref(props.filter[filterOptions.value?.tabs?.key]);
-const currentPage = ref(props.filter.page);
+const isDropdownOpened = ref(false)
+const filterTab = ref(props.filter[filterOptions.value?.tabs?.key])
+const currentPage = ref(props.filter.page)
 const perPage = ref(
   filterOptions.value?.per_page?.key
     ? props.filter[filterOptions.value?.per_page?.key]
-    : props.filter.per_page,
-);
-const defaultQuery =
-  props.filter[filterOptions.value?.search?.key]?.trim() ?? "";
-const queries = ref(defaultQuery ? defaultQuery.split(",") : []);
-const isSearchExpanded = ref(false);
+    : props.filter.per_page
+)
+const defaultQuery = props.filter[filterOptions.value?.search?.key]?.trim() ?? ''
+const queries = ref(defaultQuery ? defaultQuery.split(',') : [])
+const isSearchExpanded = ref(false)
 
 const customPerPageOptions = computed(() =>
   props.options?.perPageOptions?.map(
     (perPage) =>
       ({
         label: `${perPage}`,
-        value: perPage,
-      }) ?? null,
-  ),
-);
+        value: perPage
+      }) ?? null
+  )
+)
 
 const perPageOptions = computed(() => {
   let default_per_page_option = [
     {
-      label: "10",
-      value: 10,
+      label: '10',
+      value: 10
     },
     {
-      label: "15",
-      value: 15,
+      label: '15',
+      value: 15
     },
     {
-      label: "20",
-      value: 20,
+      label: '20',
+      value: 20
     },
     {
-      label: "25",
-      value: 25,
+      label: '25',
+      value: 25
     },
     {
-      label: "40",
-      value: 40,
+      label: '40',
+      value: 40
     },
     {
-      label: "50",
-      value: 50,
+      label: '50',
+      value: 50
     },
     {
-      label: "75",
-      value: 75,
+      label: '75',
+      value: 75
     },
     {
-      label: "99",
-      value: 99,
-    },
-  ];
-  let opt = customPerPageOptions.value ?? default_per_page_option;
+      label: '99',
+      value: 99
+    }
+  ]
+  let opt = customPerPageOptions.value ?? default_per_page_option
   if (paginationOption.value) {
-    const maxLength =
-      paginationOption.value.total < 100 ? paginationOption.value.total : 100;
+    const maxLength = paginationOption.value.total < 100 ? paginationOption.value.total : 100
     if (maxLength > 10) {
       opt = opt.filter((p) => {
-        return p.value <= maxLength;
-      });
+        return p.value <= maxLength
+      })
     }
   }
-  return [...new Set(opt)];
-});
+  return [...new Set(opt)]
+})
 
 const showBulkAction = computed(() => {
-  return props.selected?.length > 0;
-});
+  return props.selected?.length > 0
+})
 
 const addQuery = (query) => {
-  if (!query.trim() || queries.value.includes(query)) return;
+  if (!query.trim() || queries.value.includes(query)) return
   if (!filterOptions.value) {
-    queries.value = [query];
+    queries.value = [query]
   } else {
-    queries.value.push(query);
+    queries.value.push(query)
   }
-  applyFilter();
-  emit("search-query-changed", query);
-};
-const removeQuery = (query) => {
-  queries.value = queries.value.filter((q) => q !== query);
-  applyFilter();
-};
-const defaultFilterData = props.filter;
-if (!defaultFilterData && paginationOption) {
-  defaultFilterData.page = 1;
-} else if (!defaultFilterData && cursorOption) {
-  defaultFilterData.cursor = "";
+  applyFilter()
+  emit('search-query-changed', query)
 }
-const filterData = ref(defaultFilterData);
+const removeQuery = (query) => {
+  queries.value = queries.value.filter((q) => q !== query)
+  applyFilter()
+}
+const defaultFilterData = props.filter
+if (!defaultFilterData && paginationOption) {
+  defaultFilterData.page = 1
+} else if (!defaultFilterData && cursorOption) {
+  defaultFilterData.cursor = ''
+}
+const filterData = ref(defaultFilterData)
 
 const removeAllQueryFilter = () => {
-  queries.value = [];
+  queries.value = []
 
-  const defaultFilters = {};
+  const defaultFilters = {}
 
   if (filterOptions.value) {
-    defaultFilterData.page = 1;
+    defaultFilterData.page = 1
   } else {
-    defaultFilterData.cursor = "";
+    defaultFilterData.cursor = ''
   }
 
   if (filterOptions.value?.per_page?.key) {
-    defaultFilters[filterOptions.value?.per_page?.key] = perPage.value;
+    defaultFilters[filterOptions.value?.per_page?.key] = perPage.value
   } else {
-    defaultFilters.per_page = perPage.value;
+    defaultFilters.per_page = perPage.value
   }
   if (filterOptions.value?.tabs?.key) {
-    defaultFilters[filterOptions.value?.tabs?.key] = filterTab.value;
+    defaultFilters[filterOptions.value?.tabs?.key] = filterTab.value
   } else {
-    defaultFilters.tabs = filterTab.value;
+    defaultFilters.tabs = filterTab.value
   }
 
-  filterData.value = defaultFilters;
+  filterData.value = defaultFilters
 
-  applyFilter();
-};
+  applyFilter()
+}
 
 const changePage = () => {
-  applyFilter(null, currentPage.value);
-};
+  applyFilter(null, currentPage.value)
+}
 
-const applyFilter = (
-  filterForm = null,
-  isChangePage = false,
-  changeCursor = "",
-) => {
+const applyFilter = (filterForm = null, isChangePage = false, changeCursor = '') => {
   if (paginationOption.value && !isChangePage) {
-    currentPage.value = 1;
+    currentPage.value = 1
   }
   if (paginationOption.value) {
-    filterData.value.page = currentPage.value;
+    filterData.value.page = currentPage.value
   } else {
-    filterData.value.cursor = changeCursor;
+    filterData.value.cursor = changeCursor
   }
 
   if (filterOptions.value?.per_page) {
-    filterData.value[filterOptions.value.per_page.key] = perPage.value;
+    filterData.value[filterOptions.value.per_page.key] = perPage.value
   } else {
-    filterData.value.per_page = perPage.value;
+    filterData.value.per_page = perPage.value
   }
 
   if (filterOptions.value?.tabs) {
-    filterData.value[filterOptions.value.tabs.key] = filterTab.value;
+    filterData.value[filterOptions.value.tabs.key] = filterTab.value
   }
   if (filterOptions.value?.search) {
-    filterData.value[filterOptions.value.search.key] = queries.value.join();
+    filterData.value[filterOptions.value.search.key] = queries.value.join()
   }
 
   if (filterForm) {
-    isDropdownOpened.value = false;
-    filterData.value = { ...filterData.value, ...filterForm };
+    isDropdownOpened.value = false
+    filterData.value = { ...filterData.value, ...filterForm }
   }
-  emit("update:filter", filterData.value);
-};
+  emit('update:filter', filterData.value)
+}
 
 const removeFilter = (filter, field) => {
-  applyFilter(filter);
-  emit("filter-removed", field);
-};
+  applyFilter(filter)
+  emit('filter-removed', field)
+}
 
 const getFilterNames = (filterNames) => {
-  let names = [];
+  let names = []
   filterNames.forEach((name) => {
-    names.push(name.key);
-  });
-  return names;
-};
+    names.push(name.key)
+  })
+  return names
+}
 
 const displayFilterData = computed(() => {
   if (filterData.value) {
-    let display = [];
+    let display = []
 
     Object.keys(filterData.value).forEach((name) => {
-      let filterTabKey = filterOptions.value?.tabs?.key;
-      const filterSearchKey = filterOptions.value?.search?.key;
-      const filterPerPageKey = filterOptions.value?.per_page?.key ?? "per_page";
+      let filterTabKey = filterOptions.value?.tabs?.key
+      const filterSearchKey = filterOptions.value?.search?.key
+      const filterPerPageKey = filterOptions.value?.per_page?.key ?? 'per_page'
 
       filterOptions.value.form?.find((f) => {
         if (f.name === filterTabKey) {
-          filterTabKey = "";
+          filterTabKey = ''
         }
-      });
+      })
 
       if (
-        name !== "page" &&
-        name !== "cursor" &&
+        name !== 'page' &&
+        name !== 'cursor' &&
         name !== filterPerPageKey &&
         name !== filterTabKey &&
         name !== filterSearchKey
       ) {
-        let isMultiNames = null;
+        let isMultiNames = null
         let option = filterOptions.value.form?.find((f) => {
-          if (typeof f.name === "object") {
-            let isSelectedOption = false;
+          if (typeof f.name === 'object') {
+            let isSelectedOption = false
             f.name.forEach((formName) => {
               if (formName.key === name) {
-                isSelectedOption = true;
-                isMultiNames = getFilterNames(f.name);
+                isSelectedOption = true
+                isMultiNames = getFilterNames(f.name)
               }
-            });
-            return isSelectedOption;
+            })
+            return isSelectedOption
           } else {
-            return f.name === name;
+            return f.name === name
           }
-        });
+        })
 
-        let optionLabel = "";
+        let optionLabel = ''
 
         if (option && filterData.value[name]) {
-          if (typeof option.name === "object") {
+          if (typeof option.name === 'object') {
             option.name?.forEach((formName) => {
               if (optionLabel) {
-                optionLabel += " - ";
+                optionLabel += ' - '
               }
-              optionLabel += filterData.value[formName.key];
-            });
+              optionLabel += filterData.value[formName.key]
+            })
           } else {
-            optionLabel = filterData.value[name];
+            optionLabel = filterData.value[name]
           }
 
           if (option.props.options) {
             const selectedValuesInArray = option.props.multiple
               ? filterData.value[name]
-              : [filterData.value[name]];
+              : [filterData.value[name]]
 
             optionLabel = selectedValuesInArray
               .map(
                 (selectedValue) =>
-                  option.props.options.find(
-                    ({ value }) => value === selectedValue,
-                  )?.label,
+                  option.props.options.find(({ value }) => value === selectedValue)?.label
               )
-              .join(", ");
+              .join(', ')
           }
 
-          if (option.type === "RangeInput") {
+          if (option.type === 'RangeInput') {
             if (Array.isArray(filterData.value[name])) {
               optionLabel =
-                filterData.value[name][0]
-                  .toString()
-                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",") +
-                " - " +
-                filterData.value[name][1]
-                  .toString()
-                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                filterData.value[name][0].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') +
+                ' - ' +
+                filterData.value[name][1].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
             }
           }
 
-          if (option.type === "DatePicker") {
-            if (
-              option?.props?.type === "range" &&
-              option.name &&
-              option.name[1]
-            ) {
-              const startDate = dayjs(
-                filterData.value[option.name[0].key],
-              ).format("MM/DD/YYYY");
-              const endDate = dayjs(
-                filterData.value[option.name[1].key],
-              ).format("MM/DD/YYYY");
+          if (option.type === 'DatePicker') {
+            if (option?.props?.type === 'range' && option.name && option.name[1]) {
+              const startDate = dayjs(filterData.value[option.name[0].key]).format('MM/DD/YYYY')
+              const endDate = dayjs(filterData.value[option.name[1].key]).format('MM/DD/YYYY')
 
-              optionLabel =
-                startDate === endDate ? startDate : startDate + " - " + endDate;
-            } else
-              optionLabel = dayjs(filterData.value[option.name]).format(
-                "MM/DD/YYYY",
-              );
+              optionLabel = startDate === endDate ? startDate : startDate + ' - ' + endDate
+            } else optionLabel = dayjs(filterData.value[option.name]).format('MM/DD/YYYY')
           }
 
-          let label = `${option?.props?.label} : ${optionLabel}`;
-          if (option && option.name && typeof option.name === "object") {
-            const exist = display.find((f) => f.name === isMultiNames[0]);
+          let label = `${option?.props?.label} : ${optionLabel}`
+          if (option && option.name && typeof option.name === 'object') {
+            const exist = display.find((f) => f.name === isMultiNames[0])
             if (exist) {
-              label = ``;
+              label = ``
             }
           }
 
           display.push({
             label: label,
             name: name,
-            multiNames: isMultiNames,
-          });
+            multiNames: isMultiNames
+          })
         }
       }
-    });
-    return display;
+    })
+    return display
   }
-  return [];
-});
+  return []
+})
 </script>
 <template>
   <div class="flex flex-col gap-9 relative">
@@ -378,25 +354,15 @@ const displayFilterData = computed(() => {
       @hover:cell="$emit('hover:cell', $event)"
     >
       <template
-        v-if="
-          $slots.before ||
-          filterOptions?.search ||
-          filterOptions?.form ||
-          filterOptions?.tabs
-        "
+        v-if="$slots.before || filterOptions?.search || filterOptions?.form || filterOptions?.tabs"
         #before
       >
         <slot name="before" />
         <div
-          v-if="
-            filterOptions?.search || filterOptions?.form || filterOptions?.tabs
-          "
+          v-if="filterOptions?.search || filterOptions?.form || filterOptions?.tabs"
           class="flex items-center px-4 min-h-[52px]"
         >
-          <div
-            v-if="showBulkAction"
-            class="flex gap-5 items-center absolute left-5"
-          >
+          <div v-if="showBulkAction" class="flex gap-5 items-center absolute left-5">
             <slot name="bulk-actions" :selected-rows="selected" />
           </div>
           <div v-else class="flex gap-3 absolute left-5">
@@ -414,11 +380,7 @@ const displayFilterData = computed(() => {
               v-if="filterOptions?.search || filterOptions?.form"
               class="flex gap-3 absolute ml-auto bg-oc-bg-light right-4 max-w-[calc(100%-24px)]"
               :class="
-                !filterOptions
-                  ? 'w-full justify-end'
-                  : isSearchExpanded
-                    ? 'md:w-fit w-full'
-                    : ''
+                !filterOptions ? 'w-full justify-end' : isSearchExpanded ? 'md:w-fit w-full' : ''
               "
             >
               <FilterSearch
@@ -433,11 +395,7 @@ const displayFilterData = computed(() => {
                 :distance="9"
                 placement="bottom-end"
               >
-                <Button
-                  :is-active="isDropdownOpened"
-                  variant="secondary"
-                  left-icon="filter"
-                />
+                <Button :is-active="isDropdownOpened" variant="secondary" left-icon="filter" />
 
                 <template #menu>
                   <FilterForm
@@ -448,14 +406,10 @@ const displayFilterData = computed(() => {
                     :values="props.filter"
                     :actions="filterOptions.actions"
                     @apply-filter="applyFilter($event)"
-                    @filter-fields-changed="
-                      emit('filter-fields-changed', $event)
-                    "
+                    @filter-fields-changed="emit('filter-fields-changed', $event)"
                     @cancel="isDropdownOpened = false"
                   >
-                    <template
-                      #default="{ errors, values, jsonForm, updateForm }"
-                    >
+                    <template #default="{ errors, values, jsonForm, updateForm }">
                       <slot
                         name="custom-filter-form"
                         :errors="errors"
@@ -502,11 +456,7 @@ const displayFilterData = computed(() => {
     <div
       v-if="paginationOption || cursorOption"
       class="flex gap-3 items-center"
-      :class="
-        paginationOption && paginationOption.last_page === 1
-          ? 'justify-end'
-          : ''
-      "
+      :class="paginationOption && paginationOption.last_page === 1 ? 'justify-end' : ''"
     >
       <Pagination
         v-if="paginationOption && !isLastPage"
@@ -517,26 +467,15 @@ const displayFilterData = computed(() => {
         total-visible="5"
         @update:model-value="changePage"
       />
-      <div
-        v-if="cursorOption"
-        class="flex w-full gap-5 md:justify-start justify-center"
-      >
+      <div v-if="cursorOption" class="flex w-full gap-5 md:justify-start justify-center">
         <PrevNext
           :disabled="!cursorOption.prev"
-          @click="
-            cursorOption.prev
-              ? applyFilter(null, false, cursorOption.prev)
-              : null
-          "
+          @click="cursorOption.prev ? applyFilter(null, false, cursorOption.prev) : null"
         />
         <PrevNext
           :disabled="!cursorOption.next"
           is-next
-          @click="
-            cursorOption.next
-              ? applyFilter(null, false, cursorOption.next)
-              : null
-          "
+          @click="cursorOption.next ? applyFilter(null, false, cursorOption.next) : null"
         />
       </div>
       <div v-if="!hidePerPageDropdown" class="hidden md:flex items-center">

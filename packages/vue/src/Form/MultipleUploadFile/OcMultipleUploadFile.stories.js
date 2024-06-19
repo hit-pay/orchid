@@ -1,28 +1,28 @@
-import { Theme } from "@/orchidui";
-import MultipleUploadFile from "./OcMultipleUploadFile.vue";
-import { ref } from "vue";
+import { Theme } from '@/orchidui'
+import MultipleUploadFile from './OcMultipleUploadFile.vue'
+import { ref } from 'vue'
 
 export default {
   component: MultipleUploadFile,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 export const Default = {
   args: {
-    accept: "",
+    accept: '',
     maxSize: 5,
-    hint: "",
-    label: "",
-    errorMessage: "",
+    hint: '',
+    label: '',
+    errorMessage: '',
     isImageOnly: false,
     columnsCount: 3,
-    withLink: false,
+    withLink: false
   },
   render: (args) => ({
     components: { MultipleUploadFile, Theme },
     setup() {
-      const modelValue = ref([]);
-      const selectedImage = ref();
-      return { modelValue, args, selectedImage };
+      const modelValue = ref([])
+      const selectedImage = ref()
+      return { modelValue, args, selectedImage }
     },
     template: `
           <Theme class="min-h-[500px]">
@@ -42,18 +42,18 @@ export const Default = {
                 :with-link="args.withLink"
             />
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}
 export const MultipleImages = {
   args: {
-    accept: "",
+    accept: '',
     maxSize: 5,
-    hint: "The optimal product image size is at least 800x800 px. PNG and JPG format is supported.",
-    label: "label example",
-    errorMessage: "",
+    hint: 'The optimal product image size is at least 800x800 px. PNG and JPG format is supported.',
+    label: 'label example',
+    errorMessage: '',
     isImageOnly: false,
-    columnsCount: 3,
+    columnsCount: 3
   },
   render: (args) => ({
     components: { MultipleUploadFile, Theme },
@@ -61,28 +61,28 @@ export const MultipleImages = {
       const modelValue = ref([
         {
           current: {
-            id: "image_1",
-            path: "https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/covers/small/99d696e564ba45fbaa0fb2e3b43d0e27.jpg",
-            caption: "Image 1",
-            link: "https://test-link.com",
-          },
+            id: 'image_1',
+            path: 'https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/covers/small/99d696e564ba45fbaa0fb2e3b43d0e27.jpg',
+            caption: 'Image 1',
+            link: 'https://test-link.com'
+          }
         },
         {
           current: {
-            id: "image_2",
-            path: "https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/products/small/99a6b905ea094d48bde25dc0c0eaa840.jpg",
-            caption: "Image 2",
-          },
-        },
-      ]);
-      const selectedImage = ref();
+            id: 'image_2',
+            path: 'https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/products/small/99a6b905ea094d48bde25dc0c0eaa840.jpg',
+            caption: 'Image 2'
+          }
+        }
+      ])
+      const selectedImage = ref()
       const onRemoveFile = (currentFile) => {
-        console.log("removed ", currentFile.current);
-      };
+        console.log('removed ', currentFile.current)
+      }
       const onEditFile = (currentFile) => {
-        console.log("edited", currentFile.current);
-      };
-      return { modelValue, args, selectedImage, onRemoveFile, onEditFile };
+        console.log('edited', currentFile.current)
+      }
+      return { modelValue, args, selectedImage, onRemoveFile, onEditFile }
     },
     template: `
       <Theme class="min-h-[500px]">
@@ -105,6 +105,6 @@ export const MultipleImages = {
         >
         </MultipleUploadFile>
       </Theme>
-    `,
-  }),
-};
+    `
+  })
+}

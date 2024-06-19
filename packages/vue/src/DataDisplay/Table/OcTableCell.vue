@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from "vue";
+import { computed } from 'vue'
 import {
   Checkbox,
   Icon,
@@ -7,25 +7,25 @@ import {
   TableCellContent,
   Chip,
   TableLink,
-  Skeleton,
-} from "@/orchidui";
-import dayjs from "dayjs";
+  Skeleton
+} from '@/orchidui'
+import dayjs from 'dayjs'
 
 const Variants = {
-  CHECKBOX: "checkbox",
-  CONTENT: "content",
-  CHIP: "chip",
-  DATETIME: "datetime",
-  ICON: "icon",
-  IMAGE: "image",
-  EMPTY: "empty",
-  DEFAULT: "default",
-};
+  CHECKBOX: 'checkbox',
+  CONTENT: 'content',
+  CHIP: 'chip',
+  DATETIME: 'datetime',
+  ICON: 'icon',
+  IMAGE: 'image',
+  EMPTY: 'empty',
+  DEFAULT: 'default'
+}
 const props = defineProps({
   isSimple: Boolean,
   variant: {
     type: String,
-    default: "default",
+    default: 'default'
   },
   isLast: Boolean,
   isCopy: Boolean,
@@ -39,38 +39,38 @@ const props = defineProps({
     default() {
       return {
         title: null,
-        description: null,
-      };
-    },
+        description: null
+      }
+    }
   },
   datetime: String,
   imageClass: {
     type: String,
-    default: "h-full",
+    default: 'h-full'
   },
-  link: String,
-});
+  link: String
+})
 defineEmits({
   selected: [],
   copied: [],
-  "click:field": [],
-  "hover:field": [],
-});
+  'click:field': [],
+  'hover:field': []
+})
 
 const hasContentData = computed(() => {
-  return props.data || props.content.title || props.content.description;
-});
+  return props.data || props.content.title || props.content.description
+})
 
 const variantClass = computed(() => ({
-  [Variants.CHECKBOX]: "md:px-2 px-4 min-w-[32px]",
-  [Variants.ICON]: "md:px-2 px-4 min-w-[32px] ",
-  [Variants.IMAGE]: "md:px-2 px-4 min-w-[32px]",
-  [Variants.CONTENT]: "px-4",
-  [Variants.CHIP]: "px-4",
-  [Variants.DATETIME]: "px-4",
-  [Variants.EMPTY]: "px-4 min-w-[48px]",
-  [Variants.DEFAULT]: "px-4",
-}));
+  [Variants.CHECKBOX]: 'md:px-2 px-4 min-w-[32px]',
+  [Variants.ICON]: 'md:px-2 px-4 min-w-[32px] ',
+  [Variants.IMAGE]: 'md:px-2 px-4 min-w-[32px]',
+  [Variants.CONTENT]: 'px-4',
+  [Variants.CHIP]: 'px-4',
+  [Variants.DATETIME]: 'px-4',
+  [Variants.EMPTY]: 'px-4 min-w-[48px]',
+  [Variants.DEFAULT]: 'px-4'
+}))
 </script>
 
 <template>
@@ -79,15 +79,12 @@ const variantClass = computed(() => ({
       variantClass[variant],
       {
         'flex items-center': isLoading,
-        'md:px-4 px-3 py-1': variant !== Variants.CHECKBOX,
-      },
+        'md:px-4 px-3 py-1': variant !== Variants.CHECKBOX
+      }
     ]"
     class="md:py-3 bg-oc-bg-light md:min-h-[58px] md:group-hover/row:bg-oc-gray-50 items-center"
   >
-    <Skeleton
-      v-if="isLoading"
-      class="rounded-full w-full overflow-hidden h-6"
-    />
+    <Skeleton v-if="isLoading" class="rounded-full w-full overflow-hidden h-6" />
 
     <div
       v-else
@@ -101,35 +98,16 @@ const variantClass = computed(() => ({
           v-if="variant === Variants.CHECKBOX"
           :model-value="isSelected"
           class="m-auto justify-center items-center"
-          :class="
-            isSelected
-              ? 'flex'
-              : isSimple
-                ? ''
-                : 'md:hidden group-hover/row:flex'
-          "
+          :class="isSelected ? 'flex' : isSimple ? '' : 'md:hidden group-hover/row:flex'"
           @update:model-value="$emit('selected')"
         />
         <!--  ICON    -->
-        <Icon
-          v-else-if="variant === Variants.ICON"
-          class="w-6 h-6 mx-auto"
-          :name="data"
-        />
+        <Icon v-else-if="variant === Variants.ICON" class="w-6 h-6 mx-auto" :name="data" />
 
         <!--  IMAGE    -->
         <template v-else-if="variant === Variants.IMAGE">
-          <TableLink
-            v-if="data"
-            :link="link"
-            class="h-[42px] min-w-[42px] rounded mx-auto"
-          >
-            <img
-              :class="imageClass"
-              alt="table-img"
-              class="h-full"
-              :src="data"
-            />
+          <TableLink v-if="data" :link="link" class="h-[42px] min-w-[42px] rounded mx-auto">
+            <img :class="imageClass" alt="table-img" class="h-full" :src="data" />
           </TableLink>
           <TableLink
             v-else
@@ -141,10 +119,7 @@ const variantClass = computed(() => ({
         </template>
 
         <!--  EMPTY    -->
-        <TableLink
-          v-else-if="variant === Variants.EMPTY"
-          :link="link"
-          class="w-full h-full"
+        <TableLink v-else-if="variant === Variants.EMPTY" :link="link" class="w-full h-full"
           >-
         </TableLink>
 
@@ -156,11 +131,7 @@ const variantClass = computed(() => ({
         />
 
         <!--   CONTENT   -->
-        <TableCellContent
-          v-else-if="variant === Variants.CONTENT"
-          v-bind="content"
-          :link="link"
-        />
+        <TableCellContent v-else-if="variant === Variants.CONTENT" v-bind="content" :link="link" />
         <TableLink v-else-if="variant === Variants.CHIP" :link="link">
           <!--   CHIP   -->
           <Chip :label="data" :variant="chipOptions[data]" />
@@ -189,7 +160,7 @@ const variantClass = computed(() => ({
             : data
         "
         :tooltip-options="{
-          transitionName: 'copy',
+          transitionName: 'copy'
         }"
       >
         <Icon

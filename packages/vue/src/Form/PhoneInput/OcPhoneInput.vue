@@ -1,20 +1,20 @@
 <script setup>
-import { Dropdown, Input, Icon } from "@/orchidui";
-import { computed, ref } from "vue";
-import codes from "../../data/CountryCodes.sample";
-import { preventEventIfNotNumberInput } from "@/orchidui/composables/helpers.js";
-import { parsePhoneNumber } from "libphonenumber-js";
+import { Dropdown, Input, Icon } from '@/orchidui'
+import { computed, ref } from 'vue'
+import codes from '../../data/CountryCodes.sample'
+import { preventEventIfNotNumberInput } from '@/orchidui/composables/helpers.js'
+import { parsePhoneNumber } from 'libphonenumber-js'
 
 const props = defineProps({
   countryCodes: { type: Array, default: () => codes },
   initialCountryCode: {
     type: String,
-    default: "sg",
+    default: 'sg'
   },
   errorMessage: String,
   modelValue: {
     type: Array,
-    default: () => ["sg", ""],
+    default: () => ['sg', '']
   },
   placeholder: String,
   hint: String,
@@ -24,105 +24,94 @@ const props = defineProps({
   shouldParseCountryCode: Boolean,
   isRequired: {
     type: Boolean,
-    default: false,
+    default: false
   },
   labelIcon: {
     type: String,
-    default: "",
+    default: ''
   },
   tooltipText: {
     type: String,
-    default: "",
+    default: ''
   },
   tooltipOptions: {
     type: Object,
-    default: () => ({}),
-  },
-});
+    default: () => ({})
+  }
+})
 const emit = defineEmits({
-  "update:modelValue": [],
-});
+  'update:modelValue': []
+})
 
-let defaultCountryCode = props.initialCountryCode;
+let defaultCountryCode = props.initialCountryCode
 
 if (props.modelValue && props.modelValue[0]) {
-  const country = props.countryCodes.find(
-    (c) => c.code === props.modelValue[0].toString(),
-  );
-  country ? (defaultCountryCode = country.iso.toLowerCase()) : "";
+  const country = props.countryCodes.find((c) => c.code === props.modelValue[0].toString())
+  country ? (defaultCountryCode = country.iso.toLowerCase()) : ''
 }
 
-const selectedCountryIso = ref(defaultCountryCode);
-const isDropdownOpened = ref(false);
-const query = ref("");
+const selectedCountryIso = ref(defaultCountryCode)
+const isDropdownOpened = ref(false)
+const query = ref('')
 const filteredCountryCodes = computed(() =>
   props.countryCodes
-    .filter((country) =>
-      country.country.toLowerCase().includes(query.value.toLowerCase()),
-    )
-    .sort((a, b) => a.country.localeCompare(b.country)),
-);
+    .filter((country) => country.country.toLowerCase().includes(query.value.toLowerCase()))
+    .sort((a, b) => a.country.localeCompare(b.country))
+)
 const getCountryObject = (iso) =>
-  props.countryCodes.find(
-    (country) => country.iso.toLowerCase() === iso.toLowerCase(),
-  ) || null;
+  props.countryCodes.find((country) => country.iso.toLowerCase() === iso.toLowerCase()) || null
 
-const getCountryCode = (iso) => getCountryObject(iso)?.code || "";
+const getCountryCode = (iso) => getCountryObject(iso)?.code || ''
 
 const onInput = (value) => {
-  emit("update:modelValue", [getCountryCode(selectedCountryIso.value), value]);
-};
+  emit('update:modelValue', [getCountryCode(selectedCountryIso.value), value])
+}
 const changeSelectedCountry = (iso, code, value = null) => {
-  selectedCountryIso.value = iso.toLowerCase();
-  emit("update:modelValue", [code, value || props.modelValue?.[1] || ""]);
-  isDropdownOpened.value = false;
-};
+  selectedCountryIso.value = iso.toLowerCase()
+  emit('update:modelValue', [code, value || props.modelValue?.[1] || ''])
+  isDropdownOpened.value = false
+}
 
-const countryListRef = ref(null);
-const countryListItemRef = ref([]);
+const countryListRef = ref(null)
+const countryListItemRef = ref([])
 const scrollToSelectedCountry = () => {
   setTimeout(() => {
     const indexSelectedCountry = filteredCountryCodes.value.indexOf(
-      getCountryObject(selectedCountryIso.value),
-    );
-    const countryEl = countryListItemRef.value[indexSelectedCountry];
-    const top = countryEl.offsetTop;
-    countryListRef.value.scrollTo(0, top - 60, { behavior: "smooth" });
-  }, 10);
-};
+      getCountryObject(selectedCountryIso.value)
+    )
+    const countryEl = countryListItemRef.value[indexSelectedCountry]
+    const top = countryEl.offsetTop
+    countryListRef.value.scrollTo(0, top - 60, { behavior: 'smooth' })
+  }, 10)
+}
 
 const onPaste = (e) => {
-  let text = e.clipboardData.getData("Text");
+  let text = e.clipboardData.getData('Text')
 
   try {
     if (text.search(/[^0-9]/g) < 0) {
-      text = text.slice(0, 19);
+      text = text.slice(0, 19)
 
       if (text.length > 5 && props.shouldParseCountryCode) {
-        const { nationalNumber, countryCallingCode, country } =
-          parsePhoneNumber("+" + text.replace("+", ""));
+        const { nationalNumber, countryCallingCode, country } = parsePhoneNumber(
+          '+' + text.replace('+', '')
+        )
 
         if (countryCallingCode && country) {
-          changeSelectedCountry(country, countryCallingCode, nationalNumber);
+          changeSelectedCountry(country, countryCallingCode, nationalNumber)
         } else {
-          emit("update:modelValue", [
-            getCountryCode(selectedCountryIso.value),
-            nationalNumber,
-          ]);
+          emit('update:modelValue', [getCountryCode(selectedCountryIso.value), nationalNumber])
         }
       } else {
-        emit("update:modelValue", [
-          getCountryCode(selectedCountryIso.value),
-          text,
-        ]);
+        emit('update:modelValue', [getCountryCode(selectedCountryIso.value), text])
       }
     }
   } catch {
-    emit("update:modelValue", [getCountryCode(selectedCountryIso.value), text]);
+    emit('update:modelValue', [getCountryCode(selectedCountryIso.value), text])
   }
 
-  e.preventDefault();
-};
+  e.preventDefault()
+}
 </script>
 
 <template>
@@ -159,12 +148,7 @@ const onPaste = (e) => {
             +{{ getCountryCode(selectedCountryIso) }}
           </span>
 
-          <Icon
-            width="16"
-            height="16"
-            class="text-oc-text-400"
-            name="chevron-down"
-          />
+          <Icon width="16" height="16" class="text-oc-text-400" name="chevron-down" />
         </div>
 
         <template #menu>
@@ -173,13 +157,7 @@ const onPaste = (e) => {
             class="flex flex-col max-h-[300px] py-2 overflow-y-scroll hidden-scrollbar"
           >
             <div class="px-3 py-1 sticky top-0 bg-oc-bg-light z-[1000]">
-              <Input
-                v-model="query"
-                icon="search"
-                placeholder="Search"
-                @keydown.stop
-                @click.stop
-              >
+              <Input v-model="query" icon="search" placeholder="Search" @keydown.stop @click.stop>
                 <template #icon>
                   <Icon class="w-5 h-5 text-oc-text-400" name="search" />
                 </template>
@@ -191,9 +169,7 @@ const onPaste = (e) => {
               :key="i"
               class="py-3 px-4 flex gap-x-4 items-center hover:bg-oc-gray-50 cursor-pointer"
               :class="
-                selectedCountryIso === country.iso.toLowerCase()
-                  ? 'bg-oc-gray-50 font-medium'
-                  : ''
+                selectedCountryIso === country.iso.toLowerCase() ? 'bg-oc-gray-50 font-medium' : ''
               "
               @click="changeSelectedCountry(country.iso, country.code)"
             >
@@ -212,7 +188,7 @@ const onPaste = (e) => {
 </template>
 
 <style>
-@import url("https://cdn.jsdelivr.net/gh/lipis/flag-icons@latest/css/flag-icons.min.css");
+@import url('https://cdn.jsdelivr.net/gh/lipis/flag-icons@latest/css/flag-icons.min.css');
 
 .hidden-scrollbar {
   -ms-overflow-style: none; /* IE and Edge */

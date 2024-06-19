@@ -1,38 +1,38 @@
-import { Theme, Accordion, DatePicker, Button } from "@/orchidui";
-import { ref, watch } from "vue";
+import { Theme, Accordion, DatePicker, Button } from '@/orchidui'
+import { ref, watch } from 'vue'
 
 export default {
   component: Accordion,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const OcAccordion = {
   argTypes: {
     icon: {
-      control: "select",
-      options: ["chevron-down", "x", "plus"],
-    },
+      control: 'select',
+      options: ['chevron-down', 'x', 'plus']
+    }
   },
   args: {
-    header: "Additional Information",
-    body: "Accordion content",
-    icon: "chevron-down",
+    header: 'Additional Information',
+    body: 'Accordion content',
+    icon: 'chevron-down',
     showIcon: true,
     isAnimated: true,
     isExpandable: false,
-    isDisabled: false,
+    isDisabled: false
   },
   render: (args) => ({
     components: { Accordion, Theme, DatePicker, Button },
     setup() {
-      const isOpen = ref(false);
-      const dynamicContent = ref([]);
+      const isOpen = ref(false)
+      const dynamicContent = ref([])
 
       watch(
         () => args.isExpandable,
-        (val) => (isOpen.value = args.isDisabled ? false : val),
-      );
-      return { isOpen, dynamicContent, args };
+        (val) => (isOpen.value = args.isDisabled ? false : val)
+      )
+      return { isOpen, dynamicContent, args }
     },
     template: `
           <Theme class="h-[500px]">
@@ -55,6 +55,6 @@ export const OcAccordion = {
               </template>
             </Accordion>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}

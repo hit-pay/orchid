@@ -1,101 +1,101 @@
-import { Theme, Select, Option, GroupOptions } from "@/orchidui";
-import { ref } from "vue";
+import { Theme, Select, Option, GroupOptions } from '@/orchidui'
+import { ref } from 'vue'
 
 export default {
   component: Select,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const Default = {
   argTypes: {
     labelIcon: {
-      control: "select",
-      options: ["", "question-mark"],
-    },
+      control: 'select',
+      options: ['', 'question-mark']
+    }
   },
   args: {
-    label: "Label",
-    hint: "Hint",
-    placeholder: "Placeholder",
+    label: 'Label',
+    hint: 'Hint',
+    placeholder: 'Placeholder',
     isInlineLabel: false,
-    errorMessage: "",
+    errorMessage: '',
     options: [
       {
-        label: "Option 1",
-        subLabel: "sub label of Option 1",
+        label: 'Option 1',
+        subLabel: 'sub label of Option 1',
         image:
-          "https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/covers/small/99d696e564ba45fbaa0fb2e3b43d0e27.jpg",
-        value: 1,
+          'https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/covers/small/99d696e564ba45fbaa0fb2e3b43d0e27.jpg',
+        value: 1
       },
       {
-        label: "Option 2",
-        subLabel: "sub label of Option 2",
+        label: 'Option 2',
+        subLabel: 'sub label of Option 2',
         value: 2,
-        isDisabled: true,
+        isDisabled: true
       },
       {
-        label: "Option 3",
+        label: 'Option 3',
         value: 3,
-        isDisabled: true,
+        isDisabled: true
       },
       {
-        label: "Option 4",
-        value: 4,
+        label: 'Option 4',
+        value: 4
       },
       {
-        label: "Option 1",
-        subLabel: "sub label of Option 1",
-        value: 5,
+        label: 'Option 1',
+        subLabel: 'sub label of Option 1',
+        value: 5
       },
       {
-        label: "Option 2",
-        subLabel: "sub label of Option 2",
-        value: 6,
+        label: 'Option 2',
+        subLabel: 'sub label of Option 2',
+        value: 6
       },
       {
-        label: "Option 3",
-        value: 7,
+        label: 'Option 3',
+        value: 7
       },
       {
-        label: "Option 4",
-        value: 8,
+        label: 'Option 4',
+        value: 8
       },
       {
-        label: "Option 1",
-        subLabel: "sub label of Option 1",
-        value: 9,
+        label: 'Option 1',
+        subLabel: 'sub label of Option 1',
+        value: 9
       },
       {
-        label: "Option 2",
-        subLabel: "sub label of Option 2",
-        value: 10,
+        label: 'Option 2',
+        subLabel: 'sub label of Option 2',
+        value: 10
       },
       {
-        label: "Option 3",
-        value: 11,
+        label: 'Option 3',
+        value: 11
       },
       {
-        label: "Option 4",
-        value: 12,
+        label: 'Option 4',
+        value: 12
       },
       {
-        label: "Option 1",
-        subLabel: "sub label of Option 1",
-        value: 13,
+        label: 'Option 1',
+        subLabel: 'sub label of Option 1',
+        value: 13
       },
       {
-        label: "Option 2",
-        subLabel: "sub label of Option 2",
-        value: 14,
+        label: 'Option 2',
+        subLabel: 'sub label of Option 2',
+        value: 14
       },
       {
-        label: "Option 3",
-        value: 15,
+        label: 'Option 3',
+        value: 15
       },
       {
-        label: "Option 4",
-        value: 16,
-      },
+        label: 'Option 4',
+        value: 16
+      }
     ],
     isFilterable: true,
     isInlineSearch: true,
@@ -106,18 +106,18 @@ export const Default = {
     isCheckboxes: false,
     isSelectAll: false,
     isTransparent: false,
-    labelIcon: "",
-    tooltipText: "Tooltip text",
+    labelIcon: '',
+    tooltipText: 'Tooltip text',
     tooltipOptions: {
-      position: "top",
-      distance: 10,
-    },
+      position: 'top',
+      distance: 10
+    }
   },
   render: (args) => ({
     components: { Theme, Select, Option },
     setup() {
-      const selectedOption = ref();
-      return { selectedOption, args };
+      const selectedOption = ref()
+      return { selectedOption, args }
     },
     template: `
           <Theme colorMode="light">
@@ -147,9 +147,9 @@ export const Default = {
               />
             </div>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}
 
 export const OcGroupOptions = {
   render: () => ({
@@ -157,53 +157,53 @@ export const OcGroupOptions = {
     setup() {
       const options = [
         {
-          label: "Group 1",
+          label: 'Group 1',
           value: [
             {
-              label: "Option 1",
+              label: 'Option 1',
               image:
-                "https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/covers/small/99d696e564ba45fbaa0fb2e3b43d0e27.jpg",
-              value: 1,
+                'https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/covers/small/99d696e564ba45fbaa0fb2e3b43d0e27.jpg',
+              value: 1
             },
             {
-              label: "Option 2",
-              value: 2,
+              label: 'Option 2',
+              value: 2
             },
             {
-              label: "Option 3",
-              value: 3,
+              label: 'Option 3',
+              value: 3
             },
             {
-              label: "Option 4",
-              value: 4,
-            },
-          ],
+              label: 'Option 4',
+              value: 4
+            }
+          ]
         },
         {
-          label: "Group 2",
+          label: 'Group 2',
           value: [
             {
-              label: "Option 11",
-              value: 11,
+              label: 'Option 11',
+              value: 11
             },
             {
-              label: "Option 22",
-              value: 22,
+              label: 'Option 22',
+              value: 22
             },
             {
-              label: "Option 33",
-              value: 33,
+              label: 'Option 33',
+              value: 33
             },
             {
-              label: "Option 44",
-              value: 44,
-            },
-          ],
-        },
-      ];
+              label: 'Option 44',
+              value: 44
+            }
+          ]
+        }
+      ]
 
-      const selectedOption = ref();
-      return { selectedOption, options };
+      const selectedOption = ref()
+      return { selectedOption, options }
     },
     template: `
           <Theme colorMode="light">
@@ -231,9 +231,9 @@ export const OcGroupOptions = {
               </template>
             </Select>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}
 
 export const Multiple = {
   render: () => ({
@@ -241,85 +241,85 @@ export const Multiple = {
     setup() {
       const options = [
         {
-          label: "Option 1",
+          label: 'Option 1',
           image:
-            "https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/covers/small/99d696e564ba45fbaa0fb2e3b43d0e27.jpg",
-          value: 1,
+            'https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/covers/small/99d696e564ba45fbaa0fb2e3b43d0e27.jpg',
+          value: 1
         },
         {
-          label: "Option 2",
+          label: 'Option 2',
           image:
-            "https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/covers/small/99d696e564ba45fbaa0fb2e3b43d0e27.jpg",
-          value: 2,
+            'https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/covers/small/99d696e564ba45fbaa0fb2e3b43d0e27.jpg',
+          value: 2
         },
         {
-          label: "Option 3",
-          value: 3,
+          label: 'Option 3',
+          value: 3
         },
         {
-          label: "Option 4 with very long text, it should be truncated",
-          value: 4,
-        },
-      ];
+          label: 'Option 4 with very long text, it should be truncated',
+          value: 4
+        }
+      ]
       const groups = [
         {
-          label: "Group 1",
+          label: 'Group 1',
           values: [
             {
-              label: "Option 1",
-              value: 1,
+              label: 'Option 1',
+              value: 1
             },
             {
-              label: "Option 2",
-              value: 2,
+              label: 'Option 2',
+              value: 2
             },
             {
-              label: "Option 3",
-              value: 3,
+              label: 'Option 3',
+              value: 3
             },
             {
-              label: "Option 4",
-              value: 4,
-            },
-          ],
+              label: 'Option 4',
+              value: 4
+            }
+          ]
         },
         {
-          label: "Group 2",
+          label: 'Group 2',
           values: [
             {
-              label: "Option 11",
-              value: 11,
+              label: 'Option 11',
+              value: 11
             },
             {
-              label: "Option 22",
-              value: 22,
+              label: 'Option 22',
+              value: 22
             },
             {
-              label: "Option 33",
-              value: 33,
+              label: 'Option 33',
+              value: 33
             },
             {
-              label: "Option 44",
-              value: 44,
-            },
-          ],
-        },
-      ];
+              label: 'Option 44',
+              value: 44
+            }
+          ]
+        }
+      ]
 
-      const selectedOption = ref([]);
-      const selectedGroups = ref([]);
+      const selectedOption = ref([])
+      const selectedGroups = ref([])
 
       const setExceedMaxOption = () => {
-        console.log("Exceed max options allowed");
-      };
+        console.log('Exceed max options allowed')
+      }
 
       return {
         selectedOption,
         selectedGroups,
         groups,
         options,
-        setExceedMaxOption,
-      };
+        setExceedMaxOption
+      }
     },
     template: `
           <Theme colorMode="light" class="p-10 flex flex-col gap-y-8">
@@ -385,6 +385,6 @@ export const Multiple = {
             </Select>
             <div class="mt-4">Selected value: {{ selectedGroups }}</div>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}

@@ -1,4 +1,4 @@
-import Variants from "./OcVariants.vue";
-import Variant from "./OcVariant.vue";
+import Variants from './OcVariants.vue'
+import Variant from './OcVariant.vue'
 
-export { Variants, Variant };
+export { Variants, Variant }

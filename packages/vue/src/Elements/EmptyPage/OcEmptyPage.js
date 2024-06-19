@@ -1,3 +1,3 @@
-import EmptyPage from "./OcEmptyPage.vue";
+import EmptyPage from './OcEmptyPage.vue'
 
-export { EmptyPage };
+export { EmptyPage }

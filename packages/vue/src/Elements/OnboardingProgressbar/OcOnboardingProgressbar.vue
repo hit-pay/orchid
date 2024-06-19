@@ -1,54 +1,54 @@
 <script setup lang="ts">
-import { PieChart } from "@/orchidui/Charts";
-import { computed } from "vue";
+import { PieChart } from '@/orchidui/Charts'
+import { computed } from 'vue'
 
 const props = defineProps({
   title: {
     type: String,
-    default: "",
+    default: ''
   },
   description: {
     type: String,
-    default: "",
+    default: ''
   },
   value: {
     type: [String, Number],
-    default: "0",
+    default: '0'
   },
   chartData: {
     type: Array,
-    default: () => [],
-  },
-});
+    default: () => []
+  }
+})
 const chartOptions = computed(() => ({
   grid: {
-    containLabel: false,
+    containLabel: false
   },
   series:
     [
       {
-        name: "Onboarding Progressbar",
-        type: "pie",
+        name: 'Onboarding Progressbar',
+        type: 'pie',
         emphasis: {
-          disabled: true,
+          disabled: true
         },
         avoidLabelOverlap: false,
         label: {
-          color: "#000",
-          fontWeight: "bold",
-          fontFamily: "Inter",
-          fontSize: "24",
-          position: "center",
-          formatter: () => props.value + "%",
+          color: '#000',
+          fontWeight: 'bold',
+          fontFamily: 'Inter',
+          fontSize: '24',
+          position: 'center',
+          formatter: () => props.value + '%'
         },
         labelLine: {
-          show: true,
+          show: true
         },
-        radius: ["60%", "100%"],
-        data: props.chartData,
-      },
-    ] || [],
-}));
+        radius: ['60%', '100%'],
+        data: props.chartData
+      }
+    ] || []
+}))
 </script>
 
 <template>

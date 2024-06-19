@@ -1,51 +1,51 @@
-import { Theme, Snackbar } from "@/orchidui";
+import { Theme, Snackbar } from '@/orchidui'
 
 export default {
   component: Snackbar,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const Default = {
   argTypes: {
     color: {
-      control: "select",
-      options: ["default", "primary", "error", "warning", "gray"],
-      default: "default",
+      control: 'select',
+      options: ['default', 'primary', 'error', 'warning', 'gray'],
+      default: 'default'
     },
     size: {
-      control: "select",
-      options: ["small", "big", "default"],
-      default: "default",
+      control: 'select',
+      options: ['small', 'big', 'default'],
+      default: 'default'
     },
     icon: {
-      control: "select",
-      options: ["filled-check", "circle", "plus", "x"],
-      default: "filled-check",
-    },
+      control: 'select',
+      options: ['filled-check', 'circle', 'plus', 'x'],
+      default: 'filled-check'
+    }
   },
   args: {
     modelValue: true,
     showIcon: true,
     isFloating: true,
-    position: "top-center",
-    transitionName: "slide-from-top",
-    icon: "filled-check",
-    color: "default",
-    content: "Changes have been successfully saved",
-    description: "Changes have been successfully saved",
-    title: "Success",
+    position: 'top-center',
+    transitionName: 'slide-from-top',
+    icon: 'filled-check',
+    color: 'default',
+    content: 'Changes have been successfully saved',
+    description: 'Changes have been successfully saved',
+    title: 'Success',
     secondaryButton: {
-      label: "Action",
+      label: 'Action'
     },
     primaryButton: {
-      label: "Action",
+      label: 'Action'
     },
-    dismissible: false,
+    dismissible: false
   },
   render: (args) => ({
     components: { Snackbar, Theme },
     setup() {
-      return { args };
+      return { args }
     },
     template: `
           <Theme colorMode="light" class="h-[300px]">
@@ -53,20 +53,20 @@ export const Default = {
               <Snackbar v-bind="args" v-model="args.modelValue"/>
             </div>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}
 
 export const Variants = {
   args: {
     showIcon: true,
-    icon: "filled-check",
-    content: "Changes have been successfully saved",
+    icon: 'filled-check',
+    content: 'Changes have been successfully saved'
   },
   render: (args) => ({
     components: { Snackbar, Theme },
     setup() {
-      return { args };
+      return { args }
     },
     template: `
           <Theme colorMode="light">
@@ -78,9 +78,9 @@ export const Variants = {
               <Snackbar v-bind="args" color="gray"/>
             </div>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}
 
 export const BigSize = {
   args: {
@@ -90,16 +90,16 @@ export const BigSize = {
     modelValue4: true,
     modelValue5: true,
     showIcon: true,
-    icon: "filled-check",
-    title: "Snackbar title",
-    description: "Changes have been successfully saved",
+    icon: 'filled-check',
+    title: 'Snackbar title',
+    description: 'Changes have been successfully saved',
     dismissible: true,
-    size: "big",
+    size: 'big'
   },
   render: (args) => ({
     components: { Snackbar, Theme },
     setup() {
-      return { args };
+      return { args }
     },
     template: `
           <Theme colorMode="light">
@@ -111,6 +111,6 @@ export const BigSize = {
               <Snackbar v-bind="args" color="gray" v-model="args.modelValue5" />
             </div>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}

@@ -1,74 +1,74 @@
-import { Theme, LinkInput } from "@/orchidui";
-import { ref } from "vue";
+import { Theme, LinkInput } from '@/orchidui'
+import { ref } from 'vue'
 
 export default {
   component: LinkInput,
-  tags: ["autodocs"],
-};
+  tags: ['autodocs']
+}
 
 export const Default = {
   argTypes: {
     labelIcon: {
-      control: "select",
-      options: ["", "question-mark"],
-    },
+      control: 'select',
+      options: ['', 'question-mark']
+    }
   },
   args: {
-    hint: "",
-    placeholder: "@username",
+    hint: '',
+    placeholder: '@username',
     isInlineLabel: false,
     isDisabled: false,
-    label: "Enter Username",
-    errorMessage: "",
+    label: 'Enter Username',
+    errorMessage: '',
     isRequired: false,
-    labelIcon: "",
-    tooltipText: "Tooltip text",
+    labelIcon: '',
+    tooltipText: 'Tooltip text',
     tooltipOptions: {
-      position: "top",
-      distance: 10,
+      position: 'top',
+      distance: 10
     },
     links: [
       {
-        value: "facebook",
-        placeholder: "@username",
-        label: "Facebook",
-        icon: "facebook",
-        preFill: "https://facebook.com/",
+        value: 'facebook',
+        placeholder: '@username',
+        label: 'Facebook',
+        icon: 'facebook',
+        preFill: 'https://facebook.com/'
       },
       {
-        value: "instagram",
-        label: "Instagram",
-        icon: "instagram",
-        preFill: "https://instagram.com/",
+        value: 'instagram',
+        label: 'Instagram',
+        icon: 'instagram',
+        preFill: 'https://instagram.com/'
       },
       {
-        value: "twitter",
-        label: "(X) Twitter",
-        icon: "twitter",
-        preFill: "https://twitter.com/",
+        value: 'twitter',
+        label: '(X) Twitter',
+        icon: 'twitter',
+        preFill: 'https://twitter.com/'
       },
       {
-        value: "tiktok",
-        label: "Tiktok",
-        icon: "tiktok",
-        preFill: "https://tiktok.com/",
+        value: 'tiktok',
+        label: 'Tiktok',
+        icon: 'tiktok',
+        preFill: 'https://tiktok.com/'
       },
       {
-        value: "link",
-        label: "Other website",
-        placeholder: "website.com",
-        icon: "earth",
-        preFill: "https://",
-      },
-    ],
+        value: 'link',
+        label: 'Other website',
+        placeholder: 'website.com',
+        icon: 'earth',
+        preFill: 'https://'
+      }
+    ]
   },
   render: (args) => ({
     components: { Theme, LinkInput },
     setup() {
-      const linkType = ref("twitter");
-      const linkValue = ref("");
-      const linkTitle = ref("");
-      return { linkType, linkValue, linkTitle, args };
+      const linkType = ref('twitter')
+      const linkValue = ref('')
+      const linkTitle = ref('')
+      return { linkType, linkValue, linkTitle, args }
     },
     template: `
           <Theme>
@@ -97,6 +97,6 @@ export const Default = {
               />
             </div>
           </Theme>
-        `,
-  }),
-};
+        `
+  })
+}

@@ -1,3 +1,3 @@
-import Tabs from "./OcTabs.vue";
+import Tabs from './OcTabs.vue'
 
-export { Tabs };
+export { Tabs }
