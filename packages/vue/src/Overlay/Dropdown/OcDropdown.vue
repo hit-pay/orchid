@@ -95,10 +95,10 @@ defineExpose({
             :class="menuClasses"
             class="rounded bg-oc-bg-light shadow min-w-[162px] overflow-y-auto"
             :style="{
-              maxHeight: (maxMenuHeight || maxPopperHeight) + 'px'
+              maxHeight: (maxMenuHeight || maxPopperHeight) - 68 + 'px'
             }"
           >
-            <slot name="menu" :isPopoverOpen="modelValue" />
+            <slot name="menu" :is-popover-open="modelValue" />
           </div>
         </Transition>
       </template>
