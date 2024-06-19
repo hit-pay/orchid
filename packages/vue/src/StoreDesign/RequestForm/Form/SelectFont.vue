@@ -1,6 +1,6 @@
 <script setup>
 import { Select, Icon } from '@/orchidui'
-defineEmits('update:model-value')
+const emit = defineEmits('update:model-value')
 const props = defineProps({
   modelValue: Array,
   label: String,
@@ -29,6 +29,11 @@ if (style.styleSheet) {
 } else {
   style.appendChild(document.createTextNode(css))
 }
+
+const selectFont = (selectOption, option) => {
+  selectOption(option.value)
+  emit('update:model-value', option.value)
+}
 </script>
 <template>
   <Select
@@ -44,12 +49,7 @@ if (style.styleSheet) {
         :key="option"
         class="p-3 flex items-center text-oc-text-400 justify-between cursor-pointer hover:bg-oc-accent-1-50 gap-x-3 rounded-sm"
         :class="modelValue === option.value ? 'bg-oc-accent-1-50' : ''"
-        @click="
-          () => {
-            selectOption(option.value)
-            $emit('update:model-value', option.value)
-          }
-        "
+        @click="selectFont(selectOption, option)"
       >
         <div class="flex flex-col gap-3" :class="`oc-font-${getClassName(option.value[0])}`">
           {{ option.label }}
