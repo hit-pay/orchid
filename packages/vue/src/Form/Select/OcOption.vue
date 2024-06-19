@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from "vue";
 import { Icon, Checkbox } from "@/orchidui";
 
 defineEmits(["select", "show:children", "hide:children"]);
@@ -12,10 +13,18 @@ defineProps({
   showChildren: Boolean,
   isDisabled: Boolean,
 });
+
+const optionItemRef = ref()
+
+defineExpose({
+  optionItemRef,
+});
+
 </script>
 
 <template>
   <div
+    ref="optionItemRef"
     class="w-full flex flex-wrap relative hover:bg-oc-accent-1-50 rounded-sm"
   >
     <div
