@@ -112,8 +112,9 @@ export const QuillEditor = defineComponent({
       quill.on('editor-change', handleEditorChange)
       // Remove editor class when theme changes
       if (props.theme !== 'bubble') editor.value.classList.remove('ql-bubble')
-      if (props.theme !== 'snow') editor.value.classList.remove('ql-snow')
-      // Fix clicking the quill toolbar is detected as blur event
+      if (props.theme !== 'snow')
+        editor.value.classList.remove('ql-snow')
+        // Fix clicking the quill toolbar is detected as blur event
       ;(_a = quill.getModule('toolbar')) === null || _a === void 0
         ? void 0
         : _a.container.addEventListener('mousedown', (e) => {
