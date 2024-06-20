@@ -15,7 +15,10 @@ const props = defineProps({
     default: 'solid'
   },
   hideOpacity: Boolean,
-  hideInputColor: Boolean
+  hideInputColor: Boolean,
+  presetColors: {
+    type: Array
+  }
 })
 
 const emit = defineEmits(['update:model-value'])
@@ -96,7 +99,12 @@ const handleClickLastUsedColor = (color) => {
 
 <template>
   <BaseInput :class="hideInputColor ? 'w-[40px]' : ''" @click="() => dropdownRef?.toggleDropdown()">
-    <Dropdown ref="dropdownRef" v-model="isOpen" @update:model-value="onCloseDropdown">
+    <Dropdown
+      ref="dropdownRef"
+      v-model="isOpen"
+      @update:model-value="onCloseDropdown"
+      max-menu-height="auto"
+    >
       <Input
         v-if="!hideInputColor"
         :model-value="inputValue"
@@ -122,6 +130,7 @@ const handleClickLastUsedColor = (color) => {
           :type="hideOpacity ? 'HEX' : 'HEX8'"
           :model-value="modelValue"
           :last-used-colors="localColorList"
+          :preset-colors="presetColors"
           @update:model-value="onUpdate"
           @last-used-pick="handleClickLastUsedColor"
         />
