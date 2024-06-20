@@ -34,7 +34,20 @@
         @onInput="setGradientBarColor"
       />
     </div>
-    <div v-else class="mb-5"></div>
+    <div v-else :class="{ 'mb-5': !presetColors }">
+      <div v-if="presetColors">
+        <div class="text-oc-text-400 text-sm my-3 font-medium">Choose color</div>
+        <div class="ck-cp-local-color-conatiner">
+          <div
+            v-for="color in presetColors"
+            :key="`color-${color}`"
+            class="ck-cp-color-item !w-[32px] !h-[32px]"
+            :style="`background:${color}`"
+            @click="handleColorItemOnClick(color)"
+          ></div>
+        </div>
+      </div>
+    </div>
     <PickerWrap @onMouseDown="handlePickerStartOnMouseDown" />
 
     <div class="flex items-center gap-2">
@@ -89,7 +102,7 @@
         <InputOpacity v-if="showAlpha" v-model="opacity" @update:model-value="setOpacity($event)" />
       </div>
     </div>
-    <div class="text-oc-text-400 text-sm my-3">Last used</div>
+    <div class="text-oc-text-400 text-sm my-3 font-medium font-inter">Last used</div>
     <div v-if="localColorList.length > 0 && showColorList" class="ck-cp-local-color-conatiner">
       <div
         v-for="color in localColorListFiltered"
@@ -159,6 +172,7 @@ const props = defineProps({
     },
     type: Object
   },
+  presetColors: Array,
   variant: {
     type: String,
     default: 'solid'
@@ -1211,7 +1225,7 @@ onMounted(() => {
 
 .ck-cp-container * {
   outline: none;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: Inter, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .ck-cp-controller-bar {
