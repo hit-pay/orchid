@@ -130,7 +130,9 @@ const onToggle = (isOpen) => {
 
   &,
   &::before {
-    @apply absolute w-5 h-5 bg-inherit;
+    @apply absolute bg-inherit;
+    height: 1rem;
+    width: 1rem;
   }
 
   &::before {
