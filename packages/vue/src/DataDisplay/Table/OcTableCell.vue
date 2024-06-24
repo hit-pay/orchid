@@ -61,6 +61,22 @@ const hasContentData = computed(() => {
   return props.data || props.content.title || props.content.description
 })
 
+const chipProps = computed(() => {
+  const options = props.chipOptions[props.data]
+
+  if (typeof options === 'object') {
+    return {
+      label: options.label || props.data,
+      ...options
+    }
+  }
+
+  return {
+    label: props.data,
+    variant: options
+  }
+})
+
 const variantClass = computed(() => ({
   [Variants.CHECKBOX]: 'md:px-2 px-4 min-w-[32px]',
   [Variants.ICON]: 'md:px-2 px-4 min-w-[32px] ',
@@ -134,7 +150,7 @@ const variantClass = computed(() => ({
         <TableCellContent v-else-if="variant === Variants.CONTENT" v-bind="content" :link="link" />
         <TableLink v-else-if="variant === Variants.CHIP" :link="link">
           <!--   CHIP   -->
-          <Chip :label="data" :variant="chipOptions[data]" />
+          <Chip v-bind="chipProps" />
         </TableLink>
 
         <!--  DEFAULT    -->

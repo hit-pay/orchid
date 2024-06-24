@@ -73,7 +73,15 @@ const DataTableOptions = {
       {
         key: 'col5',
         label: 'Table Header',
-        class: 'w-1/2 md:w-[15%]'
+        class: 'w-1/2 md:w-[15%]',
+        variant: 'chip',
+        chipOptions: {
+          Label: {
+            label: 'Label',
+            variant: 'success',
+            icon: 'check'
+          }
+        }
       },
       {
         key: 'col6',
