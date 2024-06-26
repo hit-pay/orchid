@@ -315,9 +315,9 @@ const onClickContent = () => {
         @paste="isValidPasedText"
       >
         <template #toolbar>
-          <div :id="id" class="flex min-h-[36px] flex-wrap !py-2 !px-3 gap-x-5 gap-y-2 rounded-t">
+          <div :id="id" class="flex min-h-[36px] flex-wrap !py-2 !px-3 gap-y-2 rounded-t">
             <template v-if="toolbar.includes('changes')">
-              <div class="flex items-center gap-x-3">
+              <div class="flex items-center gap-x-3 px-5">
                 <Icon
                   :class="isUndoActive ? 'text-oc-text cursor-pointer' : 'text-oc-text-300'"
                   width="20"
@@ -338,7 +338,7 @@ const onClickContent = () => {
             </template>
 
             <template v-if="toolbar.includes('font-size')">
-              <Dropdown v-model="isSizeActive">
+              <Dropdown v-model="isSizeActive" class="px-5">
                 <div class="flex items-center gap-x-5 cursor-pointer">
                   {{ fontSizes.find((font) => font.value === activeSize)?.label }}
                   <Icon
@@ -368,7 +368,7 @@ const onClickContent = () => {
             </template>
 
             <template v-if="toolbar.includes('font-style')">
-              <div class="flex gap-x-3 items-center">
+              <div class="flex gap-x-3 items-center px-5">
                 <Icon
                   class="cursor-pointer"
                   :class="isBoldActive ? 'text-oc-text' : 'text-oc-text-300'"
@@ -398,7 +398,7 @@ const onClickContent = () => {
               <div class="border-l border-oc-gray-200" />
             </template>
 
-            <div class="flex items-center gap-x-3">
+            <div class="flex items-center gap-x-3 px-5">
               <Icon
                 v-if="toolbar.includes('link')"
                 class="cursor-pointer"
@@ -437,7 +437,7 @@ const onClickContent = () => {
             <template v-if="toolbar.includes('list')">
               <div class="border-l border-oc-gray-200" />
 
-              <div class="flex gap-x-3 items-center">
+              <div class="flex gap-x-3 items-center px-5">
                 <Icon
                   class="cursor-pointer"
                   :class="activeListFormat === 'bullet' ? 'text-oc-text' : 'text-oc-text-300'"
@@ -459,7 +459,7 @@ const onClickContent = () => {
             <template v-if="toolbar.includes('alignment')">
               <div class="border-l border-oc-gray-200" />
 
-              <div class="flex gap-x-3 items-center">
+              <div class="flex gap-x-3 items-center px-5">
                 <Icon
                   class="cursor-pointer"
                   :class="!activeAlign ? 'text-oc-text' : 'text-oc-text-300'"
@@ -496,10 +496,10 @@ const onClickContent = () => {
             </template>
 
             <div class="border-l border-oc-gray-200" />
-            <div class="flex gap-x-3 items-center">
+            <div class="flex items-center">
               <ColorPicker v-model="colorPickModel" hide-input-color @update:model-value="setColor">
                 <template #picker-icon>
-                  <div class="grid cursor-pointer">
+                  <div class="grid cursor-pointer px-5">
                     <div :style="`color:${colorPickModel}`">A</div>
                     <div
                       class="h-[5px] w-full rounded border"
@@ -511,7 +511,7 @@ const onClickContent = () => {
             </div>
             <div class="border-l border-oc-gray-200" />
 
-            <div v-if="showImageWidthToolbar" class="flex gap-x-3 items-center">
+            <div v-if="showImageWidthToolbar" class="flex gap-x-3 items-center px-5">
               <Slider
                 label="Image width"
                 class="w-[120px]"
