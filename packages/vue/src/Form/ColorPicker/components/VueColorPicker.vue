@@ -1209,7 +1209,7 @@ onMounted(() => {
   background-color: var(--cp-container-bg);
   border-radius: 1rem;
   padding: 10px;
-  width: 352px;
+  width: 311px;
   height: auto;
 }
 
@@ -1277,7 +1277,7 @@ onMounted(() => {
 
 .cp-picker-wrap {
   width: 100%;
-  height: 145px;
+  height: 238px;
   position: relative;
   overflow: hidden;
 }
