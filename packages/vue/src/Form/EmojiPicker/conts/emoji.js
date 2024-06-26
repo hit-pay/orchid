@@ -291,6 +291,7 @@ export const EMOJI_LIST = {
   rabbit2: '🐇',
   chipmunk: '🐿',
   paw_prints: '🐾',
+  jack_o_lantern: '🎃',
   dragon: '🐉',
   dragon_face: '🐲',
   cactus: '🌵',
@@ -318,7 +319,6 @@ export const EMOJI_LIST = {
   bouquet: '💐',
   mushroom: '🍄',
   chestnut: '🌰',
-  jack_o_lantern: '🎃',
   shell: '🐚',
   spider_web: '🕸',
   earth_americas: '🌎',
@@ -867,6 +867,7 @@ export const EMOJI_LIST = {
   ab: '🆎',
   cl: '🆑',
   sos: '🆘',
+  warning: '⚠️',
   no_entry: '⛔',
   name_badge: '📛',
   no_entry_sign: '🚫',
@@ -1012,4 +1013,16 @@ export const EMOJI_LIST = {
   clock1030: '🕥',
   clock1130: '🕦',
   clock1230: '🕧'
+}
+
+export const EMOJI_CATEGORIES = {
+  grinning: '😀',
+  blonde_man: '👱',
+  dog: '🐵',
+  jack_o_lantern: '🎃',
+  earth_americas: '🌎',
+  star: '⭐',
+  grapes: '🍇',
+  crossed_flags: '🎌',
+  warning: '⚠️'
 }
