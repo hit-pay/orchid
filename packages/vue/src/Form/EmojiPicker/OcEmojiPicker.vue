@@ -94,7 +94,7 @@ const onToggle = (isOpen) => {
             <Input v-model="search" placeholder="Search" icon="search" />
           </div>
           <div
-            class="grid grid-cols-9 gap-3 max-h-[204px] overflow-y-auto mt-3 mb-5"
+            class="grid grid-cols-9 gap-3 max-h-[204px] overflow-y-auto overflow-x-hidden mt-3 mb-5"
             v-if="filteredList.length"
           >
             <div
