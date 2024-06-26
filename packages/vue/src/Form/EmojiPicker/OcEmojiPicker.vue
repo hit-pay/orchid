@@ -68,7 +68,7 @@ const selectCategory = (key) => {
 const onScroll = (e) => {
   categoriesList.value.forEach(([key]) => {
     const offsetTop = document.getElementById(`emoji-${key}`).offsetTop
-    if (e.target.scrollTop >= offsetTop) {
+    if (e.target.scrollTop >= offsetTop - 20) {
       activeCategory.value = key
     }
   })
@@ -81,7 +81,7 @@ const onScroll = (e) => {
   >
     <Dropdown
       v-model="isOpen"
-      :max-menu-height="500"
+      :max-menu-height="600"
       class="!w-auto z-50"
       :popper-options="{
         ...popperOptions
