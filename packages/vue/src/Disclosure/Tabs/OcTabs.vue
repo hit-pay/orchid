@@ -24,7 +24,7 @@ const tabsVisible = ref(0)
 const tabsContainer = ref()
 
 const tabWidth = 100
-const tabHeight = 40
+const tabHeight = 35
 
 const emit = defineEmits({
   'update:modelValue': []
@@ -113,14 +113,14 @@ watch(
       'gap-x-2': isPillVariant,
       'border-b border-oc-gray-200': !isPillVariant,
       'overflow-hidden relative': isArrows,
-      'flex-col max-w-fit max-h-full': isVerticalTabs,
+      'flex-col max-h-full': isVerticalTabs,
       'gap-y-2': isPillVariant && isVerticalTabs
     }"
   >
     <div
       v-if="position > 0 && isArrows"
       class="sticky top-0 bottom-0 left-0 z-[1] flex items-center bg-white"
-      :class="{ 'pb-4': !isPillVariant, 'self-center': isVerticalTabs }"
+      :class="{ 'pb-4': !isPillVariant, 'justify-center': isVerticalTabs }"
     >
       <Icon
         :name="!isVerticalTabs ? 'chevron-left' : 'chevron-up'"
@@ -146,7 +146,8 @@ watch(
               ? 'text-oc-text-400'
               : 'border-transparent text-oc-text-400',
           isArrows ? '!justify-normal !min-w-[100px]' : '',
-          isVerticalTabs ? '!min-w-[224px] py-3 px-5' : ''
+          isVerticalTabs ? '!justify-start w-full py-3 px-5' : '',
+          isVerticalTabs && isArrows ? '!min-h-[35px]' : ''
         ]"
         @click="$emit('update:modelValue', tab.value)"
       >
@@ -166,7 +167,7 @@ watch(
       class="sticky top-0 bottom-0 right-0 flex items-center bg-white"
       :class="{
         'pb-4': !isPillVariant,
-        'self-center': isVerticalTabs
+        'justify-center': isVerticalTabs
       }"
     >
       <Icon

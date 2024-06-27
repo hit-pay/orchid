@@ -162,7 +162,7 @@ export const verticalTabs = {
     },
     template: `
           <Theme>
-          <div style="height: 200px; overflow: hidden;">
+          <div style="height: 200px; width: 225px; overflow: hidden;">
             <Tabs v-model="activeTab" :tabs="args.tabs" :variant="args.variant" :max-count="args.maxCount" :is-arrows="args.isArrows" :direction="args.direction" />
             </div>
           </Theme>
