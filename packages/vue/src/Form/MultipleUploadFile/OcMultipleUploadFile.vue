@@ -192,7 +192,7 @@ const onDelete = (index) => {
           />
           <div
             v-if="!currentFiles.length"
-            class="w-full text-oc-text-300 text-sm h -full flex-1 flex flex-col justify-center items-center my-auto min-h-[7rem] transition-all duration-300 gap-2"
+            class="w-full text-oc-text-300 text-sm h -full flex-1 flex flex-col justify-center items-center my-auto min-h-[120px] transition-all duration-300 gap-2"
           >
             <Icon name="upload" class="text-oc-accent-1" />
             <div v-if="labelUploadArea">{{ labelUploadArea }}</div>

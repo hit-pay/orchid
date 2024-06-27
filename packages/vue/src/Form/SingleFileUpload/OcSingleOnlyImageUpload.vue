@@ -41,9 +41,9 @@ const changeImage = (url) => {
       :class="{ 'flex-1': showUploadImageArea }"
       class="relative group overflow-hidden"
     >
-      <div v-if="showUploadImageArea" class="border rounded p-3">
+      <div v-if="showUploadImageArea" class="border rounded p-3 min-h-[140px] h-full">
         <div
-          class="w-full text-oc-text-300 text-sm h -full flex-1 flex flex-col justify-center items-center my-auto min-h-[7rem] transition-all border border-transparent border-dashed group-hover:border-oc-primary rounded-sm cursor-pointer"
+          class="w-full text-oc-text-300 text-sm h-full flex flex-col justify-center items-center transition-all border border-transparent border-dashed group-hover:border-oc-primary rounded-sm cursor-pointer"
           :class="{ '!border-oc-primary': isDragover }"
         >
           <Icon name="upload" class="text-oc-accent-1" />
