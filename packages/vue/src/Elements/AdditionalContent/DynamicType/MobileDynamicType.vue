@@ -86,7 +86,7 @@ defineEmits(['addCustomer'])
               :is-loading="field.isLoading"
               v-bind="field"
             >
-              <template v-if="field.slot && $slots[field.slot]" #content>
+               <template v-if="field.slot && $slots[field.slot]" #content>
                 <slot :name="field.slot" :data="field.content" />
               </template>
             </OverviewItem>
