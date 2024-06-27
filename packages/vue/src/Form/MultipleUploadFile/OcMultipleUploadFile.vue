@@ -36,7 +36,8 @@ const props = defineProps({
     type: Object,
     default: () => ({})
   },
-  withLink: Boolean
+  withLink: Boolean,
+  labelUploadArea: String
 })
 const inputRef = ref()
 const isDragover = ref(false)
@@ -191,11 +192,14 @@ const onDelete = (index) => {
           />
           <div
             v-if="!currentFiles.length"
-            class="w-full text-oc-text-300 text-sm h -full flex-1 flex flex-col justify-center items-center my-auto min-h-[7rem] transition-all duration-300"
+            class="w-full text-oc-text-300 text-sm h -full flex-1 flex flex-col justify-center items-center my-auto min-h-[7rem] transition-all duration-300 gap-2"
           >
             <Icon name="upload" class="text-oc-accent-1" />
-            <span>Select documents or drag here</span>
-            <span>File max {{ maxSize }}MB</span>
+            <div v-if="labelUploadArea">{{ labelUploadArea }}</div>
+            <div v-else class="text-center">
+              <div>Select documents or drag here</div>
+              <div>File max {{ maxSize }}MB</div>
+            </div>
           </div>
           <div v-else class="mt-3 flex items-center justify-center">
             <span class="text-oc-accent-1 text-sm">+ Add more</span>

@@ -13,6 +13,7 @@ const props = defineProps({
   modelValue: Object,
   isPreview: Boolean,
   isImageOnly: Boolean,
+  showUploadImageArea: Boolean,
   /**
    * Maximum file size in MB
    */
@@ -127,6 +128,7 @@ const onUploadImage = ($event) => {
       :accept="accept"
       :uploaded-image="currentFile"
       :image-classes="imageClasses"
+      :show-upload-image-area="showUploadImageArea"
       @update:uploaded-image="onUploadImage"
       @change="onChangeFile($event, props.format === 'object')"
       @delete="onDeleteFile(0)"
