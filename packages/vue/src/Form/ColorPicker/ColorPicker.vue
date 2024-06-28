@@ -54,8 +54,8 @@ const dropdownRef = ref()
 const localColorList = ref([])
 
 const updateColorListStorage = () => {
-  if (localColorList.value.length > 9) {
-    localColorList.value = localColorList.value.filter((localColor, index) => index < 9)
+  if (localColorList.value.length > 8) {
+    localColorList.value = localColorList.value.filter((localColor, index) => index < 8)
   }
   localStorage.setItem('ck-cp-local-color-list', JSON.stringify(localColorList.value))
 }
@@ -88,12 +88,9 @@ const onCloseDropdown = (dropdownOpen) => {
 }
 const isLoading = ref(false)
 const handleClickLastUsedColor = (color) => {
-  isLoading.value = true
-  setTimeout(() => {
-    inputValue.value = color
-    emit('update:model-value', color)
-    isLoading.value = false
-  }, 100)
+  inputValue.value = color
+  emit('update:model-value', color)
+  isOpen.value = false
 }
 </script>
 

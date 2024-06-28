@@ -5,7 +5,10 @@
     :cp-theme="theme"
     :class="disabled ? 'ck-cp-disabled ' : ''"
   >
-    <div v-if="variant == 'gradient'" class="flex justify-end border-b h-[46px] relative mt-[-5px]">
+    <div
+      v-if="variant == 'gradient'"
+      class="flex justify-end border-b h-[46px] relative mt-[-5px] mb-5"
+    >
       <ColorType
         class="mr-auto"
         :variant="variant"
@@ -34,7 +37,7 @@
         @onInput="setGradientBarColor"
       />
     </div>
-    <div v-else :class="{ 'mb-5': !presetColors }">
+    <div v-else>
       <div v-if="presetColors">
         <div class="text-oc-text-400 text-sm my-3 font-medium">Choose color</div>
         <div class="ck-cp-local-color-conatiner">
@@ -1209,7 +1212,7 @@ onMounted(() => {
   background-color: var(--cp-container-bg);
   border-radius: 1rem;
   padding: 10px;
-  width: 352px;
+  width: 311px;
   height: auto;
 }
 
@@ -1277,7 +1280,7 @@ onMounted(() => {
 
 .cp-picker-wrap {
   width: 100%;
-  height: 145px;
+  height: 238px;
   position: relative;
   overflow: hidden;
 }

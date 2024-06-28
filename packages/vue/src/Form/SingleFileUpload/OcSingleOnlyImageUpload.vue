@@ -15,12 +15,14 @@ const props = defineProps({
   imageClasses: {
     type: String,
     default: ''
-  }
+  },
+  showUploadImageArea: Boolean
 })
 const emit = defineEmits(['change', 'update:uploadedImage', 'delete'])
 const isDropdownOpen = ref(false)
 const isEditOpen = ref(false)
 const editImg = ref('')
+const isDragover = ref(false)
 
 const changeImage = (url) => {
   const changedFile = props.uploadedImage
@@ -34,18 +36,36 @@ const changeImage = (url) => {
 
 <template>
   <div class="flex gap-x-3">
-    <label v-if="!uploadedImage?.fileUrl">
+    <label
+      v-if="!uploadedImage?.fileUrl"
+      :class="{ 'flex-1': showUploadImageArea }"
+      class="relative group overflow-hidden"
+    >
+      <div v-if="showUploadImageArea" class="border rounded p-3 min-h-[140px] h-full">
+        <div
+          class="w-full text-oc-text-300 text-sm h-full flex flex-col justify-center items-center transition-all border border-transparent border-dashed group-hover:border-oc-primary rounded-sm cursor-pointer"
+          :class="{ '!border-oc-primary': isDragover }"
+        >
+          <Icon name="upload" class="text-oc-accent-1" />
+          <div>Upload Image</div>
+        </div>
+      </div>
+
       <div
-        class="w-[100px] hover:bg-oc-primary-50 cursor-pointer bg-oc-accent-1-50 text-oc-accent-1 rounded aspect-square flex items-center justify-center"
+        v-else
+        class="w-[100px] group-hover:bg-oc-primary-50 cursor-pointer bg-oc-accent-1-50 text-oc-accent-1 rounded aspect-square flex items-center justify-center"
         :class="imageClasses"
       >
         <Icon name="plus" />
       </div>
       <input
-        class="hidden"
+        class="w-full h-full absolute opacity-0 cursor-pointer top-0"
         type="file"
         :accept="accept || 'image/png, image/jpeg'"
         @change="$emit('change', $event)"
+        @dragover="isDragover = true"
+        @dragleave="isDragover = false"
+        @drop="isDragover = false"
       />
     </label>
     <div

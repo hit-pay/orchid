@@ -108,6 +108,7 @@ export const ImageOnly = {
           <SingleFileUpload 
             v-model="imageRef"
             is-image-only    
+            show-upload-image-area
             @onRemoveFile="onRemoveFile"
           />
         `
