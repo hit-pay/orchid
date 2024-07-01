@@ -35,6 +35,7 @@ export * from './Elements/OnboardingProgressbar/OcOnboardingProgressbar.js'
 export * from './Feedback/Chip/OcChip.js'
 export * from './Feedback/Snackbar/OcSnackbar.js'
 export * from './Feedback/ShareIcon/OcShareIcon.js'
+export * from './Feedback/Tag/OcTag.js'
 
 export * from './Form'
 
@@ -48,6 +49,7 @@ export * from './Overlay/ConfirmationModal/OcConfirmationModal.js'
 export * from './Overlay/Popper/OcPopper.js'
 export * from './Overlay/SupportMenu/OcSupportMenu.js'
 export * from './Overlay/CopyTooltip/OcCopyTooltip.js'
+export * from './Overlay/Whitelist/OcWhiteList.js'
 
 export * from './Theme/OcTheme.js'
 
