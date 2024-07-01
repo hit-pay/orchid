@@ -273,5 +273,9 @@ const onUploadImage = ($event) => {
         </template>
       </div>
     </template>
+
+    <template #hint>
+      <slot name="hint"></slot>
+    </template>
   </BaseInput>
 </template>

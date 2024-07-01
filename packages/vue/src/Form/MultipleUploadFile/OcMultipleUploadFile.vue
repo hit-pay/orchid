@@ -206,6 +206,10 @@ const onDelete = (index) => {
           </div>
         </label>
       </div>
+
+      <template #hint>
+        <slot name="hint"></slot>
+      </template>
     </BaseInput>
   </div>
 </template>
