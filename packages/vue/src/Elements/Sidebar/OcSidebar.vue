@@ -106,7 +106,6 @@ onMounted(() => {
                 v-else
                 v-model="dropdownOpen[menu.name + '-' + menuIndex]"
                 placement="right-start"
-                @update:model-value="$emit('click:sidebar-icon', menu)"
               >
                 <button
                   type="button"
@@ -122,6 +121,7 @@ onMounted(() => {
                       'text-[var(--oc-sidebar-menu-active-icon-active)]': menu.active
                     }"
                     :name="menu.icon"
+                    @click="$emit('click:sidebar-icon', menu)"
                   />
                 </button>
                 <template #menu>
