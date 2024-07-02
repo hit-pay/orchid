@@ -7,6 +7,10 @@ const props = defineProps({
     type: String,
     default: ''
   },
+  descriptionClass: {
+    type: String,
+    default: ''
+  },
   icon: String,
   modelValue: {
     type: Boolean,
@@ -45,7 +49,7 @@ if (props.defaultValue) {
           </template>
         </Tooltip>
       </div>
-      <span v-if="description" class="text-oc-text-400 text-sm break-all">
+      <span v-if="description" class="text-oc-text-400 text-sm" :class="descriptionClass">
         {{ description }}
       </span>
       <div v-if="errorMessage" class="text-sm text-oc-error flex items-center">
