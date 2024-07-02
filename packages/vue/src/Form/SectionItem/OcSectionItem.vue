@@ -24,7 +24,7 @@ const props = defineProps({
 })
 const emit = defineEmits(['update:modelValue'])
 
-if (props.defaultValue) {
+if (props.defaultValue === true && (props.modelValue === null || props.modelValue === undefined)) {
   emit('update:modelValue', true)
 }
 </script>
