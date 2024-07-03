@@ -24,7 +24,7 @@ defineProps({
 const emit = defineEmits(['more'])
 const isOpen = ref(false)
 
-const toggleDashboard = () => {
+const toggleDropdown = () => {
   isOpen.value = !isOpen.value
   emit('more')
 }
@@ -70,7 +70,7 @@ const toggleDashboard = () => {
               <Icon
                 name="dots-vertical"
                 class="opacity-0 p-2 group-hover:opacity-100 cursor-pointer active:bg-oc-gray-100 rounded"
-                @click.stop="toggleDashboard"
+                @click.stop="toggleDropdown"
               />
               <template #menu>
                 <slot name="menu" />
