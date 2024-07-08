@@ -81,7 +81,11 @@ const props = defineProps({
       start: null,
       end: null
     })
-  }
+  },
+  countCalendars: {
+    type: Number,
+    default: 2
+  },
 })
 
 const startDateSelected = ref()
@@ -229,7 +233,7 @@ const handleIndefinite = (event) => {
           <ComplexCalendar
             :model-value="{ start: modelValue?.[0], end: modelValue?.[1] }"
             :shortcuts="[]"
-            :count-calendars="2"
+            :count-calendars="countCalendars"
             is-range
             :with-footer="false"
             :masks="{ modelValue: dateFormat }"
