@@ -46,6 +46,10 @@ const props = defineProps({
   inDefiniteLabel: {
     type: String,
     default: 'Indefinite'
+  },
+  hideActions: {
+    type: Boolean,
+    default: false
   }
 })
 const emit = defineEmits(['update:modelValue', 'reset-calendar', 'update:isIndefinite'])
@@ -309,7 +313,7 @@ initCalendar()
       </span>
     </slot>
 
-    <div class="flex gap-x-3 justify-end">
+    <div v-if="!hideActions" class="flex gap-x-3 justify-end">
       <Button
         label="Reset"
         class="w-[72px]"

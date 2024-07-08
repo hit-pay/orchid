@@ -34,7 +34,8 @@ export const Default = {
     isRequired: true,
     label: 'Date',
     isSplitInput: true,
-    isIndefinite: false
+    isIndefinite: false,
+    disabled: false
   },
   render: (args) => ({
     components: { Theme, DatePicker },
@@ -49,49 +50,51 @@ export const Default = {
       return { args, checkDisableDate, model, model1 }
     },
     template: `
-      <Theme>
-        <div class="w-full h-[400px]">
-          {{ model }}
-          <DatePicker
-            v-model="model"
-            :key="args.type"
-            type="default"
-            date-format="DD/MM/YYYY"
-            :error-message="args.errorMessage"
-            :disabled-date="checkDisableDate"
-            :hint="args.hint"
-            :min-date="args.minDate"
-            :max-date="args.maxDate"
-            :label="args.label"
-            :min-label="args.minLabel"
-            :max-label="args.maxLabel"
-            :is-required="args.isRequired"
-            :is-split-input="args.isSplitInput"
-            :is-indefinite="args.isIndefinite"
-          />
+          <Theme>
+            <div class="w-full h-[550px]">
+              {{ model }}
+              <DatePicker
+                  v-model="model"
+                  :key="args.type"
+                  type="default"
+                  date-format="DD/MM/YYYY"
+                  :error-message="args.errorMessage"
+                  :disabled-date="checkDisableDate"
+                  :hint="args.hint"
+                  :disabled="args.disabled"
+                  :min-date="args.minDate"
+                  :max-date="args.maxDate"
+                  :label="args.label"
+                  :min-label="args.minLabel"
+                  :max-label="args.maxLabel"
+                  :is-required="args.isRequired"
+                  :is-split-input="args.isSplitInput"
+                  :is-indefinite="args.isIndefinite"
+              />
 
-          <div class="mt-8">
-            DD/MM/YYYY:  {{ model1 }}
-            <DatePicker
-              v-model="model1"
-              :key="args.type"
-              :type="args.type"
-              date-format="DD/MM/YYYY"
-              :error-message="args.errorMessage"
-              :disabled-date="checkDisableDate"
-              :hint="args.hint"
-              :min-date="args.minDate"
-              :max-date="args.maxDate"
-              :label="args.label"
-              :min-label="args.minLabel"
-              :max-label="args.maxLabel"
-              :is-required="args.isRequired"
-              :is-split-input="args.isSplitInput"
-            />
-          </div>
-        </div>
-      </Theme>
-    `
+              <div class="mt-8 w-fit">
+                DD/MM/YYYY:  {{ model1 }}
+                <DatePicker
+                    v-model="model1"
+                    :key="args.type"
+                    :type="args.type"
+                    date-format="DD/MM/YYYY"
+                    :disabled="args.disabled"
+                    :error-message="args.errorMessage"
+                    :disabled-date="checkDisableDate"
+                    :hint="args.hint"
+                    :min-date="args.minDate"
+                    :max-date="args.maxDate"
+                    :label="args.label"
+                    :min-label="args.minLabel"
+                    :max-label="args.maxLabel"
+                    :is-required="args.isRequired"
+                    :is-split-input="args.isSplitInput"
+                />
+              </div>
+            </div>
+          </Theme>
+        `
   })
 }
 
@@ -141,41 +144,42 @@ export const VDatePicker = {
       return { args, checkDisableDate, model, disabledDates }
     },
     template: `
-      <Theme>
-        <div class="w-full h-[400px]">
-          {{ args.dateFormat }}: {{ model }} {{ disabledDates }}
-          <DatePicker
-            v-model="model"
-            :key="args.type"
-            type="default"
-            :error-message="args.errorMessage"
-            :disabled-date="checkDisableDate"
-            :hint="args.hint"
-            :min-date="args.minDate"
-            :max-date="args.maxDate"
-            :label="args.label"
-            :min-label="args.minLabel"
-            :max-label="args.maxLabel"
-            :date-format="args.dateFormat"
-            :is-required="args.isRequired"
-            :is-split-input="args.isSplitInput"
-            :is-indefinite="args.isIndefinite"
-          >
-            <template #menu="{ resetCalendar, updateCalendar}">
-              <OcComplexCalendar
-                :model-value="model"
-                :shortcuts="[]"
-                :count-calendars="1"
-                :is-range="false"
-                :with-footer="false"
-                :disabled-dates="disabledDates"
-                :masks="{ modelValue: args.dateFormat }"
-                @update:model-value="updateCalendar"
-              />
-            </template>
-          </DatePicker>
-        </div>
-      </Theme>
-    `
+          <Theme>
+            <div class="w-full h-[400px]">
+              {{ args.dateFormat }}: {{ model }} {{ disabledDates }}
+              <DatePicker
+                  v-model="model"
+                  :key="args.type"
+                  type="default"
+                  :error-message="args.errorMessage"
+                  :disabled-date="checkDisableDate"
+                  :hint="args.hint"
+                  :disabled="args.disabled"
+                  :min-date="args.minDate"
+                  :max-date="args.maxDate"
+                  :label="args.label"
+                  :min-label="args.minLabel"
+                  :max-label="args.maxLabel"
+                  :date-format="args.dateFormat"
+                  :is-required="args.isRequired"
+                  :is-split-input="args.isSplitInput"
+                  :is-indefinite="args.isIndefinite"
+              >
+                <template #menu="{ resetCalendar, updateCalendar}">
+                  <OcComplexCalendar
+                      :model-value="model"
+                      :shortcuts="[]"
+                      :count-calendars="1"
+                      :is-range="false"
+                      :with-footer="false"
+                      :disabled-dates="disabledDates"
+                      :masks="{ modelValue: args.dateFormat }"
+                      @update:model-value="updateCalendar"
+                  />
+                </template>
+              </DatePicker>
+            </div>
+          </Theme>
+        `
   })
 }
