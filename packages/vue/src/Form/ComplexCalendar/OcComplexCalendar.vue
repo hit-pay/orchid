@@ -67,7 +67,7 @@ const changeModelValue = (value) => {
           range: isRange
         }"
         :class="{
-          'oc-complex-calendar__calendar--single': !isRange
+          'oc-complex-calendar__calendar--single': !isRange || countCalendars == 1
         }"
         locale="en"
         color="primary"

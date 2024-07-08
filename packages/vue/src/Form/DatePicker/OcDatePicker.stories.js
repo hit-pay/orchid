@@ -35,7 +35,8 @@ export const Default = {
     label: 'Date',
     isSplitInput: true,
     isIndefinite: false,
-    disabled: false
+    disabled: false,
+    countCalendars: 2
   },
   render: (args) => ({
     components: { Theme, DatePicker },
@@ -90,6 +91,7 @@ export const Default = {
                     :max-label="args.maxLabel"
                     :is-required="args.isRequired"
                     :is-split-input="args.isSplitInput"
+                    :count-calendars="args.countCalendars"
                 />
               </div>
             </div>
