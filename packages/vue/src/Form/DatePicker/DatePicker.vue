@@ -3,6 +3,7 @@ import { Dropdown, Calendar, Input, BaseInput, Icon } from '@/orchidui'
 import { computed, ref } from 'vue'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import dayjs from 'dayjs'
+import ComplexCalendar from '@/orchidui/Form/ComplexCalendar/OcComplexCalendar.vue'
 
 // Getting invalid date while using 'DD/MM/YYYY' format
 // https://github.com/iamkun/dayjs/issues/1786
@@ -73,6 +74,13 @@ const props = defineProps({
   isIndefinite: {
     type: Boolean,
     default: false
+  },
+  disabledRange: {
+    type: Object,
+    default: () => ({
+      start: null,
+      end: null
+    })
   }
 })
 
@@ -101,10 +109,15 @@ const formattedDate = computed(() => {
 
 const updateCalendar = (newValue) => {
   if (props.type === 'range') {
-    emit('update:modelValue', [
-      dayjs(newValue[0]).format(props.dateFormat),
-      dayjs(newValue[1]).format(props.dateFormat)
-    ])
+    emit(
+      'update:modelValue',
+      newValue
+        ? [
+            dayjs(newValue.start).format(props.dateFormat),
+            dayjs(newValue.end).format(props.dateFormat)
+          ]
+        : []
+    )
   } else {
     emit('update:modelValue', dayjs(newValue).format(props.dateFormat))
   }
@@ -212,21 +225,23 @@ const handleIndefinite = (event) => {
         :update-calendar="updateCalendar"
         :reset-calendar="resetCalendar"
       >
+        <template v-if="isRangeInput">
+          <ComplexCalendar
+            :model-value="{ start: modelValue[0], end: modelValue[1] }"
+            :shortcuts="[]"
+            :count-calendars="2"
+            is-range
+            :with-footer="false"
+            :masks="{ modelValue: dateFormat }"
+            @update:model-value="updateCalendar"
+          />
+        </template>
         <Calendar
-          v-if="!disabled && isPopoverOpen"
-          :model-value="
-            isRangeInput
-              ? modelValue && modelValue[0]
-                ? [formattedDate[0].toDate(), formattedDate[1].toDate()]
-                : undefined
-              : formattedDate
-                ? formattedDate.toDate()
-                : new Date()
-          "
+          v-else-if="!disabled && isPopoverOpen"
+          :model-value="formattedDate ? formattedDate.toDate() : new Date()"
           :disabled-date="isCalendarIndefinite ? disableAllDates : disabledDate"
           :max-date="maxDate"
           :min-date="minDate"
-          :hide-actions="isRangeInput"
           :is-indefinite="isIndefinite"
           position="inline"
           :type="type"
