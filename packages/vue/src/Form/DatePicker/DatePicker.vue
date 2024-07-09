@@ -231,7 +231,7 @@ const handleIndefinite = (event) => {
       >
         <template v-if="isRangeInput">
           <ComplexCalendar
-            :model-value="{ start: modelValue[0], end: modelValue[1] }"
+            :model-value="{ start: modelValue?.[0], end: modelValue?.[1] }"
             :shortcuts="[]"
             :count-calendars="countCalendars"
             is-range
