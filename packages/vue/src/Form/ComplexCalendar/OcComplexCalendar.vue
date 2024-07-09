@@ -33,7 +33,6 @@ defineProps({
   },
   maxDate: {
     type: [String, Date, Number],
-
   }
 })
 const emit = defineEmits({
