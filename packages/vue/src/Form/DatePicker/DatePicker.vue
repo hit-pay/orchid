@@ -236,6 +236,8 @@ const handleIndefinite = (event) => {
             :count-calendars="countCalendars"
             is-range
             :with-footer="false"
+            :min-date="minDate"
+            :max-date="maxDate"
             :masks="{ modelValue: dateFormat }"
             @update:model-value="updateCalendar"
           />
