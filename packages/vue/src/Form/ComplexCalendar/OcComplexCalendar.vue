@@ -30,11 +30,10 @@ defineProps({
   },
   minDate: {
     type: [String, Date, Number],
-    default: undefined
   },
   maxDate: {
     type: [String, Date, Number],
-    default: undefined
+
   }
 })
 const emit = defineEmits({
