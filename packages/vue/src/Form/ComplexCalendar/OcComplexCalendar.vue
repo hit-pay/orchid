@@ -27,6 +27,13 @@ defineProps({
   isRange: {
     type: Boolean,
     default: true
+  },
+  minDate: {
+    type: [String, Date, Number],
+  },
+  maxDate: {
+    type: [String, Date, Number],
+
   }
 })
 const emit = defineEmits({
@@ -74,6 +81,8 @@ const changeModelValue = (value) => {
         borderless
         :columns="countCalendars"
         v-bind="$attrs"
+        :min-date="minDate"
+        :max-date="maxDate"
         @update:model-value="$emit('update:modelValue', $event)"
       />
     </div>
