@@ -72,8 +72,9 @@ const planTierDescription = computed(() => {
 
       <!-- Button -->
       <Button
-        v-if="!isFreeTier"
-        label="Start 14 day trial"
+        v-if="!isPlanActive"
+        :label="isFreeTier ? 'Change to Free' : 'Start 14 day trial'"
+        :variant="isFreeTier ? 'secondary' : 'primary'"
         size="big"
         class="mb-5"
         @click="emit('select')"
