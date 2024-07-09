@@ -1,8 +1,9 @@
 <script setup>
-import { Dropdown, Calendar, Input } from '@/orchidui'
+import { Dropdown, Calendar, Input, BaseInput, Icon } from '@/orchidui'
 import { computed, ref } from 'vue'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import dayjs from 'dayjs'
+import ComplexCalendar from '@/orchidui/Form/ComplexCalendar/OcComplexCalendar.vue'
 
 // Getting invalid date while using 'DD/MM/YYYY' format
 // https://github.com/iamkun/dayjs/issues/1786
@@ -73,7 +74,18 @@ const props = defineProps({
   isIndefinite: {
     type: Boolean,
     default: false
-  }
+  },
+  disabledRange: {
+    type: Object,
+    default: () => ({
+      start: null,
+      end: null
+    })
+  },
+  countCalendars: {
+    type: Number,
+    default: 2
+  },
 })
 
 const startDateSelected = ref()
@@ -101,10 +113,15 @@ const formattedDate = computed(() => {
 
 const updateCalendar = (newValue) => {
   if (props.type === 'range') {
-    emit('update:modelValue', [
-      dayjs(newValue[0]).format(props.dateFormat),
-      dayjs(newValue[1]).format(props.dateFormat)
-    ])
+    emit(
+      'update:modelValue',
+      newValue
+        ? [
+            dayjs(newValue.start).format(props.dateFormat),
+            dayjs(newValue.end).format(props.dateFormat)
+          ]
+        : []
+    )
   } else {
     emit('update:modelValue', dayjs(newValue).format(props.dateFormat))
   }
@@ -133,57 +150,75 @@ const handleIndefinite = (event) => {
 <template>
   <Dropdown v-model="isDropdownOpened" placement="bottom-start" :distance="10" class="w-full">
     <div class="flex flex-col gap-y-2 w-full">
-      <div v-if="!isSplitInput || !isRangeInput" class="flex w-full">
-        <Input
-          :model-value="
-            isRangeInput
-              ? modelValue && modelValue[0]
-                ? `${formattedDate[0].format(dateFormat)} - ${formattedDate[1].format(dateFormat)}`
-                : ''
-              : modelValue === 'Indefinite'
-                ? 'Indefinite'
-                : modelValue
-                  ? formattedDate.format(dateFormat)
+      <template v-if="!isSplitInput || !isRangeInput">
+        <div class="flex w-full">
+          <Input
+            :model-value="
+              isRangeInput
+                ? modelValue && modelValue[0]
+                  ? `${formattedDate[0].format(dateFormat)} - ${formattedDate[1].format(dateFormat)}`
                   : ''
-          "
-          icon="calendar"
-          :label="label"
-          :hint="hint"
-          :placeholder="placeholder"
-          :disabled="disabled"
-          is-readonly
-          :has-error="errorMessage.length > 0"
-          :is-required="isRequired"
-        />
-      </div>
-      <div v-else class="flex flex-wrap">
-        <div class="w-full flex gap-x-4">
-          <Input
-            ref="fromInputElement"
-            :label="`${label} ${minLabel}`"
-            :model-value="formattedDate[0] ? formattedDate[0].format(dateFormat) : ''"
+                : modelValue === 'Indefinite'
+                  ? 'Indefinite'
+                  : modelValue
+                    ? formattedDate.format(dateFormat)
+                    : ''
+            "
             icon="calendar"
-            :placeholder="placeholder"
-            :disabled="disabled"
-            is-readonly
-            :has-error="errorMessage.length > 0"
-            :is-required="isRequired"
-          />
-          <Input
-            ref="toInputElement"
-            :label="`${label} ${maxLabel}`"
-            :model-value="formattedDate[1] ? formattedDate[1].format(dateFormat) : ''"
-            icon="calendar"
-            :placeholder="placeholder"
-            :disabled="disabled"
-            is-readonly
-            :has-error="errorMessage.length > 0"
+            :label="label"
+            :hint="hint"
             :is-required="isRequired"
           />
         </div>
-      </div>
-      <div v-if="errorMessage" class="text-sm text-oc-error flex items-center">
-        {{ errorMessage }}
+        <div v-if="errorMessage" class="text-sm text-oc-error flex items-center">
+          {{ errorMessage }}
+        </div>
+      </template>
+      <div v-else class="flex flex-wrap cursor-pointer">
+        <BaseInput
+          :error-message="errorMessage"
+          :hint="hint"
+          :is-required="isRequired"
+          :label="label"
+        >
+          <div
+            class="rounded justify-between border flex items-center gap-3 h-[36px] px-3"
+            :class="[
+              errorMessage
+                ? 'border-oc-error shadow-oc-error'
+                : 'border-oc-gray-200 shadow-oc-gray-200',
+              disabled ? 'pointer-events-none bg-oc-bg-dark' : 'bg-white',
+              {
+                'shadow-[0_0_0_2px]': isDropdownOpened && !disabled
+              }
+            ]"
+          >
+            <div class="flex items-center gap-x-3">
+              <Icon name="calendar" class="text-oc-text-400" />
+              <input
+                placeholder="Start date"
+                :value="formattedDate[0] ? formattedDate[0].format(dateFormat) : ''"
+                class="text-center bg-transparent outline-0 pointer-events-none w-full placeholder:text-oc-text-300"
+              />
+            </div>
+            <span class="text-oc-text-400">To</span>
+            <div class="flex items-center gap-x-3">
+              <input
+                placeholder="End date"
+                :value="formattedDate[1] ? formattedDate[1].format(dateFormat) : ''"
+                class="text-center bg-transparent outline-0 w-full placeholder:text-oc-text-300"
+              />
+              <Icon
+                :class="formattedDate.every(Boolean) ? 'opacity-100' : 'opacity-0'"
+                width="16"
+                height="16"
+                class="text-oc-text-400"
+                name="filled-x-circle"
+                @click.stop="resetCalendar"
+              />
+            </div>
+          </div>
+        </BaseInput>
       </div>
     </div>
 
@@ -194,17 +229,20 @@ const handleIndefinite = (event) => {
         :update-calendar="updateCalendar"
         :reset-calendar="resetCalendar"
       >
+        <template v-if="isRangeInput">
+          <ComplexCalendar
+            :model-value="{ start: modelValue?.[0], end: modelValue?.[1] }"
+            :shortcuts="[]"
+            :count-calendars="countCalendars"
+            is-range
+            :with-footer="false"
+            :masks="{ modelValue: dateFormat }"
+            @update:model-value="updateCalendar"
+          />
+        </template>
         <Calendar
-          v-if="!disabled && isPopoverOpen"
-          :model-value="
-            isRangeInput
-              ? modelValue && modelValue[0]
-                ? [formattedDate[0].toDate(), formattedDate[1].toDate()]
-                : undefined
-              : formattedDate
-                ? formattedDate.toDate()
-                : new Date()
-          "
+          v-else-if="!disabled && isPopoverOpen"
+          :model-value="formattedDate ? formattedDate.toDate() : new Date()"
           :disabled-date="isCalendarIndefinite ? disableAllDates : disabledDate"
           :max-date="maxDate"
           :min-date="minDate"

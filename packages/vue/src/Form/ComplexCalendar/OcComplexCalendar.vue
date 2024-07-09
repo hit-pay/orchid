@@ -42,7 +42,7 @@ const changeModelValue = (value) => {
 <template>
   <div class="flex flex-col p-6 gap-y-7 w-fit shadow-normal rounded">
     <div class="flex gap-x-7">
-      <div v-if="shortcuts" class="flex flex-col py-2 gap-y-4">
+      <div v-if="shortcuts?.length" class="flex flex-col py-2 gap-y-4">
         <div
           v-for="shortcut in shortcuts"
           :key="shortcut"
@@ -67,8 +67,9 @@ const changeModelValue = (value) => {
           range: isRange
         }"
         :class="{
-          'oc-complex-calendar__calendar--single': !isRange
+          'oc-complex-calendar__calendar--single': !isRange || countCalendars == 1
         }"
+        locale="en"
         color="primary"
         borderless
         :columns="countCalendars"
