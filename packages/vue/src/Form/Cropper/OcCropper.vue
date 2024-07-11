@@ -108,7 +108,7 @@ const defaultSize = ({ imageSize, visibleArea }) => {
 <style lang="scss">
 .cropper-background {
   background:
-    url('./images/empty-space.svg'),
+    url('/images/empty-space.svg'),
     lightgray 0 0% / 50px 50px repeat;
 }
 
