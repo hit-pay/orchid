@@ -1,5 +1,5 @@
 <script setup>
-import { Modal, Button, Input } from '@/orchidui'
+import { Button, Input } from '@/orchidui'
 import { Cropper } from 'vue-advanced-cropper'
 import 'vue-advanced-cropper/dist/style.css'
 import { nextTick, ref, watch } from 'vue'
@@ -38,12 +38,11 @@ watch(
 )
 
 const onChange = () => {
-  console.log('sdfsdf')
-  if (localImage.value) {
-    localImage.value = null
+  if (localImage.value && imageChanged.value) {
     const { canvas } = cropper.value.getResult()
     emit('changeImage', canvas.toDataURL())
   }
+  imageChanged.value = true
 }
 const rotate = (angle) => cropper.value?.rotate(angle)
 const zoom = (zoom) => cropper.value?.zoom(zoom)
@@ -79,7 +78,7 @@ const defaultSize = ({ imageSize, visibleArea }) => {
       class="w-[592px] h-[300px]"
       :src="localImage"
       :resize-image="{ wheel: false }"
-      background-class="test"
+      background-class="cropper-background"
       :default-size="defaultSize"
       @change="onChange"
     />
@@ -114,9 +113,9 @@ const defaultSize = ({ imageSize, visibleArea }) => {
 </template>
 
 <style lang="scss">
-.test {
+.cropper-background {
   background:
-    url('./assets/empty-space.png'),
+    url('./images/empty-space.svg'),
     lightgray 0 0% / 50px 50px repeat;
 }
 
