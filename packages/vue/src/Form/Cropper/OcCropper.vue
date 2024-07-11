@@ -1,37 +1,30 @@
 <script setup>
 import { Button, Input } from '@/orchidui'
 import { Cropper } from 'vue-advanced-cropper'
-import 'vue-advanced-cropper/dist/style.css'
 import { nextTick, ref, watch } from 'vue'
+import 'vue-advanced-cropper/dist/style.css'
 
 const props = defineProps({
   withLink: Boolean,
   link: String,
   img: String,
-  maxSize: String
+  maxSize: [String, Number]
 })
 const emit = defineEmits(['changeImage', 'update:link'])
 const cropper = ref()
-const file_upload = ref()
+const fileUploadEl = ref()
+const imageEl = ref()
 
 const localImage = ref('')
-const isAwsImage = ref(false)
 const imageChanged = ref(false)
 
 watch(
   () => props.img,
   (img) => {
     if (img) {
-      if (img.includes('.amazonaws.com')) {
-        isAwsImage.value = true
-        localImage.value = ''
-      } else {
-        isAwsImage.value = false
-
-        nextTick(() => {
-          localImage.value = img
-        })
-      }
+      nextTick(() => {
+        localImage.value = img
+      })
     }
   },
   { immediate: true }
@@ -48,11 +41,11 @@ const rotate = (angle) => cropper.value?.rotate(angle)
 const zoom = (zoom) => cropper.value?.zoom(zoom)
 
 const replaceImage = () => {
-  file_upload.value.click()
+  fileUploadEl.value.click()
 }
 
 const fileUpload = (e) => {
-  if (e.target.files[0] / (1024 * 1024) > 5) {
+  if (e.target.files[0] / (1024 * 1024) > +props.maxSize) {
     e.preventDefault()
     return false
   } else {
@@ -70,12 +63,12 @@ const defaultSize = ({ imageSize, visibleArea }) => {
 
 <template>
   <div class="flex flex-col gap-y-5">
-    <input ref="file_upload" accept="image/*" type="file" class="hidden" @change="fileUpload" />
+    <input ref="fileUploadEl" accept="image/*" type="file" class="hidden" @change="fileUpload" />
 
     <Cropper
       v-if="localImage"
       ref="cropper"
-      class="w-[592px] h-[300px]"
+      class="w-full h-[300px]"
       :src="localImage"
       :resize-image="{ wheel: false }"
       background-class="cropper-background"

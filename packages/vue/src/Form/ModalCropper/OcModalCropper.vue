@@ -1,15 +1,13 @@
 <script setup>
 import { Modal } from '@/orchidui'
-import 'vue-advanced-cropper/dist/style.css'
 import { ref } from 'vue'
-
-import OcCropper from '../Cropper/OcCropper.vue'
+import { Cropper } from '../Cropper/OcCropper'
 
 const props = defineProps({
   withLink: Boolean,
   link: String,
   img: String,
-  maxSize: String
+  maxSize: [String, Number]
 })
 const emit = defineEmits(['changeImage', 'close', 'update:link'])
 const cropper = ref()
@@ -43,7 +41,7 @@ const confirmButtonProps = ref({
     :cancel-button-props="cancelButtonProps"
     :confirm-button-props="confirmButtonProps"
   >
-    <OcCropper
+    <Cropper
       :withLink="withLink"
       :link="link"
       :img="img"
