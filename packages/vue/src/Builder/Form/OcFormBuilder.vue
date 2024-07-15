@@ -15,7 +15,8 @@ import {
   RangeInput,
   Checkbox,
   SectionItem,
-  SelectOptions
+  SelectOptions,
+  Slider
   // TODO : add all form here , best load as async component
 } from '@/orchidui'
 import { ref, computed, watch, onMounted } from 'vue'
@@ -72,6 +73,7 @@ const FormTypes = {
   TimePicker: TimePicker,
   DatePicker: DatePicker,
   Checkbox: Checkbox,
+  Slider: Slider,
   RangeInput: RangeInput,
   PhoneInput: PhoneInput,
   SectionItem: SectionItem,
