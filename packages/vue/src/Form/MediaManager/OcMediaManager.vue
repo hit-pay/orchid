@@ -10,6 +10,7 @@ import {
 } from '@/orchidui'
 import { ref, computed, watch } from 'vue'
 import { ModalCropper } from '@/orchidui/Cropper.js'
+import { useUploadFileProgress } from '@/orchidui/composables/uploadFileProgress.js'
 
 const props = defineProps({
   modelValue: {
@@ -19,6 +20,10 @@ const props = defineProps({
   accept: {
     type: String,
     default: ''
+  },
+  files: {
+    type: Array,
+    default: () => []
   },
   uploadedImages: {
     type: Array,
@@ -47,6 +52,14 @@ const emit = defineEmits([
   'invalidFileType',
   'update:modelValue'
 ])
+
+const { isErrorMaxSize, currentFiles, onChangeFile, onDeleteFile } = useUploadFileProgress(
+  props.maxSize,
+  emit,
+  props.accept,
+  props.validateAcceptFileType
+)
+
 const isEditOpen = ref(false)
 const editImgIndex = ref('')
 const editLink = ref('')
@@ -58,7 +71,7 @@ const editImgIndexFileUrl = computed(() => {
 })
 const deleteConfirmationModal = ref(false)
 const deleteIndex = ref('')
-const onDeleteFile = (index) => {
+const deleteFile = (index) => {
   deleteConfirmationModal.value = true
   deleteIndex.value = index
 }
@@ -66,22 +79,7 @@ const onDeleteFile = (index) => {
 const resetFile = ref(false)
 
 const confirmDeleteFile = () => {
-  const deletedImage = props.uploadedImages.find((_, i) => i === deleteIndex.value)
-
-  if (deletedImage.current) {
-    emit('onRemoveImage', deletedImage)
-  } else {
-    emit('delete', deleteIndex.value)
-    resetFile.value = true
-    setTimeout(() => {
-      resetFile.value = false
-    }, 1000)
-  }
-
-  emit(
-    'update:uploadedImages',
-    props.uploadedImages.filter((_, i) => i !== deleteIndex.value)
-  )
+  onDeleteFile(deleteIndex.value)
   deleteConfirmationModal.value = false
 }
 const changeImage = (url) => {
@@ -103,13 +101,7 @@ const updateLink = (link) => {
 }
 
 const onChange = ($event) => {
-  let isExceedLimit = props.uploadedImages.length + $event.target.files.length > props.maxImages
-  if (props.maxImages && isExceedLimit) {
-    emit('onMaxFileExceed', isExceedLimit)
-    return
-  }
-
-  emit('change', $event)
+  onChangeFile($event)
 }
 const showAddBtn = computed(
   () =>
@@ -126,7 +118,7 @@ const tabs = ref([
 const save = () => {
   emit(
     'update:uploadedImages',
-    images.value.filter(({ isSelected }) => isSelected)
+    currentFiles.value.filter(({ isSelected }) => isSelected)
   )
   emit('update:modelValue', false)
 }
@@ -134,9 +126,8 @@ const save = () => {
 watch(
   () => props.uploadedImages,
   () => {
-    images.value = [...props.uploadedImages]
-  },
-  { deep: true }
+    currentFiles.value = [...props.uploadedImages]
+  }
 )
 </script>
 
@@ -180,7 +171,7 @@ watch(
           </label>
           <div
             class="h-[100px] rounded overflow-hidden bg-gray-50 bg-cover bg-center group relative cursor-pointer border-2 border-transparent"
-            v-for="(item, index) in images"
+            v-for="(item, index) in currentFiles"
             :key="item.fileName"
             :class="{
               '!border-oc-primary': item.isSelected
@@ -223,7 +214,7 @@ watch(
                       variant="destructive"
                       @click="
                         () => {
-                          onDeleteFile(index)
+                          deleteFile(index)
                           isDropdownOpen[index] = false
                         }
                       "
