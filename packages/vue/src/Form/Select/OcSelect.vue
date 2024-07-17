@@ -20,6 +20,7 @@ const props = defineProps({
   isSelectAll: Boolean,
   isAddNew: Boolean,
   isTransparent: Boolean,
+  hideChevron: Boolean,
   options: Array,
   modelValue: [Array, String, Number],
   maxVisibleOptions: {
@@ -333,6 +334,7 @@ defineExpose({
           </span>
         </template>
         <Icon
+          v-if="!hideChevron"
           class="w-5 h-5 text-oc-text-400 transition-all shrink-0 duration-500"
           :class="isDropdownOpened && '-rotate-180'"
           name="chevron-down"
