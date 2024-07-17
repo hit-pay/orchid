@@ -1,4 +1,6 @@
 import { defineAsyncComponent } from 'vue'
 
 const ModalCropper = defineAsyncComponent(() => import('./Form/ModalCropper/OcModalCropper.vue'))
-export { ModalCropper }
+const Cropper = defineAsyncComponent(() => import('./Form/Cropper/OcCropper.vue'))
+
+export { ModalCropper, Cropper }

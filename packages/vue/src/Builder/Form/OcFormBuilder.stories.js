@@ -190,7 +190,8 @@ export const ShowIfLogic = {
   args: {
     values: {
       select_product_from: 'all_product',
-      limit_feature_product: false
+      limit_feature_product: false,
+      slider: 10
     },
     errors: {}
   },
@@ -265,6 +266,17 @@ export const ShowIfLogic = {
           props: {
             label: 'How many featured products do you want to show?',
             placeholder: 'placeholder'
+          }
+        },
+        {
+          name: 'slider',
+          type: 'Slider',
+          props: {
+            label: 'How many featured products do you want to show?',
+            minGap: 0,
+            minLimit: 0,
+            maxLimit: 100,
+            type: 'default'
           }
         }
       ]
