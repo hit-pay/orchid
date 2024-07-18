@@ -47,6 +47,10 @@ const props = defineProps({
     type: String,
     default: 'text'
   },
+  autocomplete: {
+    type: String,
+    default: 'one-time-code'
+  },
   preFill: {
     type: String,
     default: ''
@@ -167,7 +171,7 @@ const isPasswordInput = computed(() => props.inputType === 'password')
             :readonly="isReadonly"
             :placeholder="placeholder"
             :disabled="disabled"
-            :autocomplete="inputType"
+            :autocomplete="autocomplete"
             :inputmode="inputMode"
             class="h-7 outline-none md:text-base text-lg w-full text-oc-text disabled:bg-transparent disabled:text-oc-text-300 text-ellipsis placeholder:font-normal placeholder:text-oc-text-300 bg-oc-bg-light"
             v-bind="inputAttrs"
