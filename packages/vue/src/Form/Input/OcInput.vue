@@ -49,7 +49,7 @@ const props = defineProps({
   },
   autocomplete: {
     type: String,
-    default: 'off'
+    default: 'one-time-code'
   },
   preFill: {
     type: String,

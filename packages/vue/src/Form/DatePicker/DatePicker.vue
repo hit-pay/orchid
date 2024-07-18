@@ -85,12 +85,9 @@ const props = defineProps({
   countCalendars: {
     type: Number,
     default: 2
-  },
+  }
 })
 
-const startDateSelected = ref()
-const toInputElement = ref()
-const fromInputElement = ref()
 const isDropdownOpened = ref(false)
 const isCalendarIndefinite = ref(false)
 
@@ -259,3 +256,9 @@ const handleIndefinite = (event) => {
     </template>
   </Dropdown>
 </template>
+
+<style>
+.vc-day-content.vc-disabled {
+  pointer-events: none;
+}
+</style>
