@@ -7,11 +7,13 @@ import isBetween from 'dayjs/plugin/isBetween'
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
+import LocaleData from 'dayjs/plugin/LocaleData'
 
 dayjs.extend(isBetween)
 dayjs.extend(isSameOrBefore)
 dayjs.extend(isSameOrAfter)
 dayjs.extend(customParseFormat)
+dayjs.extend(LocaleData)
 
 const props = defineProps({
   type: {
@@ -72,7 +74,9 @@ const daysInMonth = computed(() => {
   return Array.from({ length: lastDay }, (_, i) => i + 1)
 })
 
-const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+const months = computed(() => {
+  return dayjs.localeData().monthsShort()
+})
 
 const selectedMonth = computed(() => selectedDate.value.format('MMMM YYYY'))
 const selectedYear = computed(() => selectedDate.value.format('YYYY'))
