@@ -1,5 +1,5 @@
 <script setup>
-import { Button, Icon, Checkbox } from '@/orchidui'
+import { Button, Icon, Checkbox, Tooltip } from '@/orchidui'
 import { computed, ref } from 'vue'
 import dayjs from 'dayjs'
 import { debounce } from 'lodash-es'
@@ -7,11 +7,13 @@ import isBetween from 'dayjs/plugin/isBetween'
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
+import LocaleData from 'dayjs/plugin/LocaleData'
 
 dayjs.extend(isBetween)
 dayjs.extend(isSameOrBefore)
 dayjs.extend(isSameOrAfter)
 dayjs.extend(customParseFormat)
+dayjs.extend(LocaleData)
 
 const props = defineProps({
   type: {
@@ -72,7 +74,14 @@ const daysInMonth = computed(() => {
   return Array.from({ length: lastDay }, (_, i) => i + 1)
 })
 
+const months = computed(() => {
+  return dayjs.monthsShort()
+})
+
 const selectedMonth = computed(() => selectedDate.value.format('MMMM YYYY'))
+const selectedYear = computed(() => selectedDate.value.format('YYYY'))
+
+const currentMonth = computed(() => selectedDate.value.format('MMM'))
 
 const selectedRangeDate = computed(() => {
   const start = selectedStartDate.value
@@ -119,6 +128,21 @@ const nextMonth = () => {
 
   selectedStartDay.value = isSelectedSameStartMonth.value ? selectedStartDate.value.date() : null
   selectedEndDay.value = isSelectedSameEndMonth.value ? selectedEndDate.value.date() : null
+}
+
+const setMonth = (month) => {
+  hoveringDate.value = null
+  selectedDate.value = selectedDate.value.set('month', month)
+}
+
+const prevYear = () => {
+  hoveringDate.value = null
+  selectedDate.value = selectedDate.value.subtract(1, 'year')
+}
+
+const nextYear = () => {
+  hoveringDate.value = null
+  selectedDate.value = selectedDate.value.add(1, 'year')
 }
 
 const isDaySelected = (day) => {
@@ -258,9 +282,43 @@ initCalendar()
     :class="position === 'floating' ? 'shadow-normal bg-white' : ''"
   >
     <div class="flex items-center justify-between">
-      <span :class="[isCalendarIndefinite ? 'pointer-events-none opacity-[.35]' : '']">
-        {{ selectedMonth }}
-      </span>
+      <Tooltip
+        :distance="10"
+        position="bottom"
+        is-popover
+        trigger="click"
+        :popper-options="{ strategy: 'fixed' }"
+      >
+        <span
+          :class="[isCalendarIndefinite ? 'pointer-events-none opacity-[.35]' : '']"
+          class="cursor-pointer hover:opacity-50 transition"
+        >
+          {{ selectedMonth }}
+        </span>
+        <template #popper>
+          <div class="flex flex-col gap-2 p-3">
+            <div class="flex justify-between items-center">
+              <Button left-icon="chevron-left" is-transparent @click="prevYear" />
+              <div class="font-medium">{{ selectedYear }}</div>
+              <Button left-icon="chevron-right" is-transparent @click="nextYear" />
+            </div>
+
+            <div class="grid grid-cols-3 gap-3">
+              <div
+                v-for="(month, index) in months"
+                :key="month"
+                class="px-4 py-2 hover:border-oc-gray-200 border-2 border-transparent transition text-center rounded cursor-pointer"
+                :class="{
+                  '!border-oc-primary bg-oc-primary text-white': currentMonth === month
+                }"
+                @click="setMonth(index)"
+              >
+                {{ month }}
+              </div>
+            </div>
+          </div>
+        </template>
+      </Tooltip>
       <div
         class="flex gap-x-3"
         :class="[isCalendarIndefinite ? 'pointer-events-none opacity-[.35]' : '']"
