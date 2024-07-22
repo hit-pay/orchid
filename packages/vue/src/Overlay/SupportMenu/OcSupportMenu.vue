@@ -25,6 +25,10 @@ defineProps({
   bottomMenu: {
     type: Array,
     default: () => []
+  },
+  questionBtnProps: {
+    type: Object,
+    default: () => ({})
   }
 })
 
@@ -46,6 +50,7 @@ const popperOptions = {
     >
       <div
         class="w-[40px] flex text-white items-center bg-oc-text active:bg-oc-gray-800 justify-center aspect-square rounded-full cursor-pointer"
+        v-bind="questionBtnProps"
       >
         <Icon name="question" width="33" height="33" />
       </div>
