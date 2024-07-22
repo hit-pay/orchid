@@ -322,7 +322,6 @@ export const Trailing = {
                     is-transparent
                     is-slim
                     @click.stop
-                    @keydown.stop
                     @update:model-value="updateSelectedCurrency"
                   />
                 </template>
@@ -337,7 +336,6 @@ export const Trailing = {
                     is-transparent
                     is-slim
                     @click.stop
-                    @keydown.stop
                     @update:model-value="updateSelectedCurrency"
                   />
                 </template>
@@ -353,7 +351,6 @@ export const Trailing = {
                     is-transparent
                     is-slim
                     @click.stop
-                    @keydown.stop
                     @update:model-value="updateSelectedCurrency"
                   />
                 </template>
