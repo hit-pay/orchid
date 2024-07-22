@@ -106,6 +106,7 @@ export const Default = {
     isCheckboxes: false,
     isSelectAll: false,
     isTransparent: false,
+    isSlim: false,
     labelIcon: '',
     tooltipText: 'Tooltip text',
     tooltipOptions: {

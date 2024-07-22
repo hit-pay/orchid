@@ -20,6 +20,7 @@ const props = defineProps({
   isSelectAll: Boolean,
   isAddNew: Boolean,
   isTransparent: Boolean,
+  isSlim: Boolean,
   hideChevron: Boolean,
   options: Array,
   modelValue: [Array, String, Number],
@@ -263,6 +264,9 @@ defineExpose({
       ref="dropdownRef"
       v-model="isDropdownOpened"
       class="w-full bg-white"
+      :class="{
+        '!bg-transparent': isTransparent,
+      }"
       :distance="4"
       popper-class="w-full"
       placement="bottom-end"
@@ -277,7 +281,8 @@ defineExpose({
           'border-oc-error': errorMessage && !isDisabled,
           'pointer-events-none bg-oc-bg-dark': isDisabled,
           'py-3': multiple,
-          'border-none !min-h-[30px] px-0': isTransparent
+          'border-none !min-h-[30px] px-0': isTransparent,
+          'border-none !min-h-[18px] !px-0': isSlim
         }"
       >
         <div v-if="multiple" class="flex flex-wrap gap-2 overflow-hidden">
