@@ -29,7 +29,8 @@ defineProps({
   questionBtnProps: {
     type: Object,
     default: () => ({})
-  }
+  },
+  isPointed: Boolean
 })
 
 defineEmits(['update:modelValue'])
@@ -48,11 +49,15 @@ const popperOptions = {
       :distance="8"
       @update:model-value="$emit('update:modelValue', $event)"
     >
-      <div
-        class="w-[40px] flex text-white items-center bg-oc-text active:bg-oc-gray-800 justify-center aspect-square rounded-full cursor-pointer"
-        v-bind="questionBtnProps"
-      >
-        <Icon name="question" width="33" height="33" />
+      <div class="relative">
+        <div class="flex items-center justify-end" v-if="isPointed">
+          <div class="w-[6px] aspect-square rounded-full bg-oc-error" />
+        </div>
+        <div
+          class="w-[40px] flex text-white items-center bg-oc-text active:bg-oc-gray-800 justify-center aspect-square rounded-full cursor-pointer"
+        >
+          <Icon name="question" width="33" height="33" />
+        </div>
       </div>
       <template #menu>
         <div class="min-w-[180px]">

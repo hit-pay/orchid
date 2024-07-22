@@ -11,6 +11,7 @@ export const Default = {
     title: undefined,
     info: undefined,
     confirmButtonProps: undefined,
+    isPointed: true,
     topMenu: [
       {
         title: 'support',
@@ -69,7 +70,7 @@ export const Default = {
     template: `
           <Theme class="h-[450px] w-full">
             <SupportMenu v-model="modelValue" :confirmButtonProps="args.confirmButtonProps"
-                         :title="args.title" :info="args.info" :topMenu="args.topMenu" :bottomMenu="args.bottomMenu"/>
+                         :title="args.title" :info="args.info" :topMenu="args.topMenu" :bottomMenu="args.bottomMenu" :is-pointed="args.isPointed"/>
           </Theme>
         `
   })
