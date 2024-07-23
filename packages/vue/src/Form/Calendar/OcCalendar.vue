@@ -1,5 +1,5 @@
 <script setup>
-import { Button, Icon, Checkbox, Tooltip } from '@/orchidui'
+import { Button, Icon, Checkbox, Dropdown } from '@/orchidui'
 import { computed, ref } from 'vue'
 import dayjs from 'dayjs'
 import { debounce } from 'lodash-es'
@@ -57,10 +57,14 @@ const selectedEndDate = ref()
 const selectedStartDay = ref()
 const selectedEndDay = ref()
 
+const selectedYearDate = ref()
+
 const hoveringDate = ref()
 
 const isCalendarIndefinite = ref(false)
 const isStartDateSet = ref(false)
+const isChooseYear = ref(false)
+const isOpenChooseMonth = ref(false)
 
 const isRangeSelection = computed(() => props.type === 'range')
 
@@ -75,7 +79,9 @@ const daysInMonth = computed(() => {
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
 const selectedMonth = computed(() => selectedDate.value.format('MMMM YYYY'))
-const selectedYear = computed(() => selectedDate.value.format('YYYY'))
+const selectedYear = computed(() =>
+  isChooseYear.value ? selectedYearDate.value.format('YYYY') : selectedDate.value.format('YYYY')
+)
 
 const currentMonth = computed(() => selectedDate.value.format('MMM'))
 
@@ -129,16 +135,38 @@ const nextMonth = () => {
 const setMonth = (month) => {
   hoveringDate.value = null
   selectedDate.value = selectedDate.value.set('month', month)
+  isOpenChooseMonth.value = false
+}
+
+const setYear = (year) => {
+  hoveringDate.value = null
+  selectedDate.value = selectedDate.value.set('year', year)
+  isChooseYear.value = false
 }
 
 const prevYear = () => {
   hoveringDate.value = null
-  selectedDate.value = selectedDate.value.subtract(1, 'year')
+
+  if (isChooseYear.value) {
+    selectedYearDate.value = selectedYearDate.value.subtract(11, 'year')
+  } else {
+    selectedDate.value = selectedDate.value.subtract(1, 'year')
+  }
 }
 
 const nextYear = () => {
   hoveringDate.value = null
-  selectedDate.value = selectedDate.value.add(1, 'year')
+
+  if (isChooseYear.value) {
+    selectedYearDate.value = selectedYearDate.value.add(11, 'year')
+  } else {
+    selectedDate.value = selectedDate.value.add(1, 'year')
+  }
+}
+
+const openChooseMonth = () => {
+  isChooseYear.value = false
+  isOpenChooseMonth.value = !isOpenChooseMonth.value
 }
 
 const isDaySelected = (day) => {
@@ -254,6 +282,7 @@ const initCalendar = () => {
 
   // set calendar is from modelValue, else default is current month
   selectedDate.value = dayjs(model)
+  selectedYearDate.value = dayjs(model)
   selectedStartDate.value = model && selectedDate.value
   selectedStartDay.value = model && selectedStartDate.value.date()
 
@@ -269,6 +298,17 @@ const initCalendar = () => {
       : undefined
 }
 
+const getYears = (startYear) => {
+  const currentYear = startYear + 11
+  const years = []
+
+  while (startYear <= currentYear) {
+    years.push(startYear++)
+  }
+
+  return years
+}
+
 initCalendar()
 </script>
 
@@ -278,7 +318,8 @@ initCalendar()
     :class="position === 'floating' ? 'shadow-normal bg-white' : ''"
   >
     <div class="flex items-center justify-between">
-      <Tooltip
+      <Dropdown
+        v-model="isOpenChooseMonth"
         :distance="10"
         position="bottom"
         is-popover
@@ -288,18 +329,39 @@ initCalendar()
         <span
           :class="[isCalendarIndefinite ? 'pointer-events-none opacity-[.35]' : '']"
           class="cursor-pointer hover:opacity-50 transition"
+          @click.stop="openChooseMonth"
         >
           {{ selectedMonth }}
         </span>
-        <template #popper>
+        <template #menu>
           <div class="flex flex-col gap-2 p-3">
             <div class="flex justify-between items-center">
               <Button left-icon="chevron-left" is-transparent @click="prevYear" />
-              <div class="font-medium">{{ selectedYear }}</div>
+              <div
+                class="cursor-pointer hover:opacity-50 transition"
+                @click="isChooseYear = !isChooseYear"
+              >
+                <div v-if="isChooseYear">{{ selectedYear - 11 }} - {{ selectedYear }}</div>
+                <div v-else>{{ selectedYear }}</div>
+              </div>
               <Button left-icon="chevron-right" is-transparent @click="nextYear" />
             </div>
 
-            <div class="grid grid-cols-3 gap-3">
+            <div class="grid grid-cols-3 gap-3" v-if="isChooseYear">
+              <div
+                v-for="year in getYears(selectedYear - 11)"
+                :key="year"
+                class="px-4 py-2 hover:border-oc-gray-200 border-2 border-transparent transition text-center rounded cursor-pointer"
+                :class="{
+                  '!border-oc-primary bg-oc-primary text-white': selectedDate.year() === year
+                }"
+                @click="setYear(year)"
+              >
+                {{ year }}
+              </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-3" v-else>
               <div
                 v-for="(month, index) in months"
                 :key="month"
@@ -314,7 +376,7 @@ initCalendar()
             </div>
           </div>
         </template>
-      </Tooltip>
+      </Dropdown>
       <div
         class="flex gap-x-3"
         :class="[isCalendarIndefinite ? 'pointer-events-none opacity-[.35]' : '']"
