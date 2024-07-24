@@ -281,7 +281,7 @@ defineExpose({
           'border-oc-error': errorMessage && !isDisabled,
           'pointer-events-none bg-oc-bg-dark': isDisabled,
           'py-3': multiple,
-          'border-none !min-h-[30px] px-0': isTransparent,
+          'border-none !min-h-[30px] !px-0': isTransparent && !isSlim,
           'border-none !min-h-[18px] !px-0': isSlim
         }"
       >
