@@ -27,7 +27,7 @@ const labelClasses = `absolute top-0 left-0 bg-oc-primary-100 rounded-full curso
 </script>
 
 <template>
-  <div class="inline-flex items-center gap-3">
+  <div class="inline-flex items-center gap-3 h-fit">
     <label
       class="toggle-switch relative inline-block"
       :class="[toggleSizeClasses[size], size, disabled ? 'pointer-events-none opacity-60' : '']"
