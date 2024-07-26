@@ -7,6 +7,7 @@ import CrossSellOsLogo from '@/orchidui/DataDisplay/Card/logo-animations/CrossSe
 import VideoLogo from '@/orchidui/DataDisplay/Card/logo-animations/VideoLogo.vue'
 import EducationLogo from '@/orchidui/DataDisplay/Card/logo-animations/EducationLogo.vue'
 
+defineEmits(['hide-all', 'learn-more'])
 const props = defineProps({
   type: {
     type: String,
@@ -67,10 +68,11 @@ const typesClasses = {
         class="group-hover:flex hidden px-3 absolute top-2 z-10"
         :class="isReverse ? 'left-2' : 'right-2'"
         label="Hide all"
+        @click="$emit('hide-all')"
       />
 
       <div v-if="isFull" class="flex-1 flex justify-end pr-5">
-        <Button label="Learn more ->" is-transparent />
+        <Button label="Learn more ->" is-transparent @click="$emit('learn-more')" />
       </div>
 
       <img
