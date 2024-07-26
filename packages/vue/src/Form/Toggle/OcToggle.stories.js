@@ -15,7 +15,8 @@ export const Default = {
   },
   args: {
     disabled: false,
-    size: 'default'
+    size: 'default',
+    label: 'Label'
   },
   render: (args) => ({
     components: { Toggle, Theme },
@@ -29,8 +30,8 @@ export const Default = {
     template: `
           <Theme>
             <Toggle
-                :disabled="args.disabled"
-                v-model="value" :size="args.size"
+                v-model="value"
+                v-bind="args"
             />
           </Theme>
         `
