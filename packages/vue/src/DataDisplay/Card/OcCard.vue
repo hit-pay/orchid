@@ -32,17 +32,21 @@ const props = defineProps({
   fullButtonProps: {
     type: Object,
     default: () => {}
+  },
+  hideButtonProps: {
+    type: Object,
+    default: () => {}
   }
 })
 const isReverse = computed(() => ['cross_sell_pos', 'cross_sell_os'].includes(props.type))
 const gradientBorder =
-  'before:w-[calc(100%+2px)] before:absolute before:left-[-1px] before:h-[calc(100%+2px)] before:z-[-1] before:rounded-[9px] before:bg-gradient-to-r before:from-[#F8BFBC] before:to-[#CDBBF4]'
+  'w-[calc(100%+2px)] absolute left-[-1px] h-[calc(100%+2px)] z-[-1] rounded-[9px] bg-gradient-to-r from-[#F8BFBC] to-[#CDBBF4]'
 const typesClasses = {
-  education: 'bg-white  ' + gradientBorder,
-  cross_feature: 'bg-white ' + gradientBorder,
+  education: 'bg-white',
+  cross_feature: 'bg-white ',
   cross_sell_pos: 'bg-[#F5F4EF]',
-  cross_sell_os: 'bg-[#FDF2F9] ' + gradientBorder,
-  video: 'bg-white ' + gradientBorder
+  cross_sell_os: 'bg-[#FDF2F9] ',
+  video: 'bg-white '
 }
 const versionBg = {
   education: '!bg-oc-accent-1-600',
@@ -72,6 +76,7 @@ const mobileIcon = computed(() => {
       version === 'v1' ? versionBg[type] : ''
     ]"
   >
+    <div v-if="type !== 'cross_sell_pos'" :class="gradientBorder" />
     <div
       class="md:gap-x-6 pr-7 py-7 pl-5 md:p-0 items-center h-full relative flex overflow-hidden rounded w-full"
     >
@@ -111,6 +116,7 @@ const mobileIcon = computed(() => {
         variant="secondary"
         class="md:group-hover:flex hidden px-3 absolute top-2 z-10 right-2"
         label="Hide all"
+        v-bind="hideButtonProps"
         @click="$emit('hide-all')"
       />
 
