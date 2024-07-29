@@ -24,6 +24,10 @@ const props = defineProps({
   description: {
     type: String,
     default: ''
+  },
+  fullButtonProps: {
+    type: Object,
+    default: () => {}
   }
 })
 const isReverse = computed(() => ['cross_sell_pos', 'cross_sell_os'].includes(props.type))
@@ -72,7 +76,12 @@ const typesClasses = {
       />
 
       <div v-if="isFull" class="flex-1 flex justify-end pr-5">
-        <Button label="Learn more ->" is-transparent @click="$emit('learn-more')" />
+        <Button
+          label="Learn more ->"
+          is-transparent
+          v-bind="fullButtonProps"
+          @click="$emit('learn-more')"
+        />
       </div>
 
       <img
