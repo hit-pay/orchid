@@ -7,7 +7,8 @@ const props = defineProps({
   size: {
     type: String,
     default: 'default'
-  }
+  },
+  label: String
 })
 const emit = defineEmits({
   'update:modelValue': []
@@ -26,25 +27,28 @@ const labelClasses = `absolute top-0 left-0 bg-oc-primary-100 rounded-full curso
 </script>
 
 <template>
-  <label
-    class="toggle-switch relative inline-block"
-    :class="[toggleSizeClasses[size], size, disabled ? 'pointer-events-none opacity-60' : '']"
-  >
-    <input
-      class="toggle-input hidden"
-      :class="{
-        'is-checked': modelValue
-      }"
-      :value="modelValue"
-      :checked="modelValue"
-      type="checkbox"
-      @change="onInput"
-    />
-    <span
-      class="toggle-label"
-      :class="[labelClasses, toggleSizeClasses[size], ellipseClasses[size]]"
-    ></span>
-  </label>
+  <div class="inline-flex items-center gap-3 h-fit">
+    <label
+      class="toggle-switch relative inline-block"
+      :class="[toggleSizeClasses[size], size, disabled ? 'pointer-events-none opacity-60' : '']"
+    >
+      <input
+        class="toggle-input hidden"
+        :class="{
+          'is-checked': modelValue
+        }"
+        :value="modelValue"
+        :checked="modelValue"
+        type="checkbox"
+        @change="onInput"
+      />
+      <span
+        class="toggle-label"
+        :class="[labelClasses, toggleSizeClasses[size], ellipseClasses[size]]"
+      ></span>
+    </label>
+    <div v-if="label" class="text-sm cursor-pointer" @click="onInput">{{ label }}</div>
+  </div>
 </template>
 
 <style scoped lang="scss">
