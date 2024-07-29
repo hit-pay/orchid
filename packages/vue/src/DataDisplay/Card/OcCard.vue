@@ -38,9 +38,8 @@ const props = defineProps({
     default: () => {}
   }
 })
-const isReverse = computed(() => ['cross_sell_pos', 'cross_sell_os'].includes(props.type))
 const gradientBorder =
-  'w-[calc(100%+2px)] absolute left-[-1px] h-[calc(100%+2px)] z-[-1] rounded-[9px] bg-gradient-to-r from-[#F8BFBC] to-[#CDBBF4]'
+  'w-full absolute left-0 top-0 h-full z-[1] rounded-[9px] bg-gradient-to-r from-[#F8BFBC] to-[#CDBBF4]'
 const typesClasses = {
   education: 'bg-white',
   cross_feature: 'bg-white ',
@@ -68,17 +67,11 @@ const mobileIcon = computed(() => {
 </script>
 
 <template>
-  <div
-    class="relative group gap-x-6 items-center flex md:h-[144px] rounded"
-    :class="[
-      typesClasses[type],
-      isReverse && !isFull ? 'flex-row-reverse' : '',
-      version === 'v1' ? versionBg[type] : ''
-    ]"
-  >
+  <div class="relative group gap-x-6 items-center px-px flex rounded">
     <div v-if="type !== 'cross_sell_pos'" :class="gradientBorder" />
     <div
-      class="md:gap-x-6 pr-7 py-7 pl-5 md:p-0 items-center h-full relative flex overflow-hidden rounded w-full"
+      class="md:gap-x-6 pr-7 z-[1] py-7 pl-5 my-px md:h-[144px] md:p-0 items-center h-full relative flex overflow-hidden rounded w-full"
+      :class="[version === 'v1' ? versionBg[type] : '', typesClasses[type]]"
     >
       <slot name="logo">
         <EducationLogo v-if="type === 'education'" />
