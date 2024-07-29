@@ -77,7 +77,7 @@ const typesClasses = {
 
       <img
         v-if="type === 'video'"
-        class="absolute right-0 group-hover:-right-8 transition-all ease-in-out"
+        class="absolute right-0 group-hover:-right-8 transition-all duration-300 ease-in-out"
         alt="video_blur"
         src="./assets/video_blur.svg"
       />
