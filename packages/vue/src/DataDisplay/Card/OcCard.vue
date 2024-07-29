@@ -17,6 +17,10 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
+  version: {
+    type: String,
+    default: 'v2'
+  },
   title: {
     type: String,
     default: ''
@@ -40,6 +44,13 @@ const typesClasses = {
   cross_sell_os: 'bg-[#FDF2F9] ' + gradientBorder,
   video: 'bg-white ' + gradientBorder
 }
+const versionBg = {
+  education: '!bg-oc-accent-1-600',
+  cross_feature: '!bg-oc-accent-2',
+  cross_sell_pos: '!bg-[#FDB012]',
+  cross_sell_os: '!bg-[#EC6ABC]',
+  video: '!bg-oc-gray-800'
+}
 const mobileIcon = computed(() => {
   const icons = {
     education: 'book',
@@ -55,7 +66,11 @@ const mobileIcon = computed(() => {
 <template>
   <div
     class="relative group gap-x-6 items-center flex md:h-[144px] rounded"
-    :class="[typesClasses[type], isReverse && !isFull ? 'flex-row-reverse' : '']"
+    :class="[
+      typesClasses[type],
+      isReverse && !isFull ? 'flex-row-reverse' : '',
+      version === 'v1' ? versionBg[type] : ''
+    ]"
   >
     <div
       class="md:gap-x-6 pr-7 py-7 pl-5 md:p-0 items-center h-full relative flex overflow-hidden rounded w-full"
@@ -77,10 +92,16 @@ const mobileIcon = computed(() => {
           <Icon :name="mobileIcon" width="20" height="20" />
         </div>
         <slot name="title">
-          <span class="font-medium md:text-xl">{{ title }}</span>
+          <span class="font-medium md:text-xl" :class="version === 'v2' ? '' : 'text-white'">{{
+            title
+          }}</span>
         </slot>
         <slot name="description">
-          <span class="text-oc-text-400 md:text-base text-sm">{{ description }}</span>
+          <span
+            class="md:text-base text-sm"
+            :class="version === 'v2' ? 'text-oc-text-400' : 'text-oc-accent-1-100'"
+            >{{ description }}</span
+          >
         </slot>
       </div>
 
@@ -111,7 +132,7 @@ const mobileIcon = computed(() => {
       </div>
 
       <img
-        v-if="type === 'video'"
+        v-if="type === 'video' && version !== 'v1'"
         class="absolute right-0 group-hover:-right-8 transition-all duration-300 ease-in-out"
         alt="video_blur"
         src="./assets/video_blur.svg"
