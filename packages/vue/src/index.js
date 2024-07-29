@@ -34,6 +34,7 @@ export * from './Elements/OnboardingProgressbar/OcOnboardingProgressbar.js'
 
 export * from './Feedback/Chip/OcChip.js'
 export * from './Feedback/Snackbar/OcSnackbar.js'
+export * from './Feedback/Banner/OcBanner.js'
 export * from './Feedback/ShareIcon/OcShareIcon.js'
 export * from './Feedback/Tag/OcTag.js'
 
