@@ -1,5 +1,5 @@
 <template>
-  <div class="relative overflow-hidden ml-3 w-[148px] h-[144px]">
+  <div class="relative overflow-hidden ml-3 w-[148px] h-[144px] hidden md:block">
     <img
       src="../assets/iphone_13.svg"
       alt="iphone_13.svg"

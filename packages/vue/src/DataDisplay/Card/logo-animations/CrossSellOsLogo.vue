@@ -1,5 +1,5 @@
 <template>
-  <div class="relative overflow-hidden rounded w-[148px] h-[144px]">
+  <div class="relative overflow-hidden rounded w-[148px] h-[144px] hidden md:block">
     <img
       src="../assets/bigger.svg"
       alt="bigger.svg"

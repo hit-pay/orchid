@@ -1,5 +1,5 @@
 <template>
-  <div class="ml-5 relative overflow-hidden flex items-center justify-center">
+  <div class="ml-5 relative overflow-hidden items-center justify-center hidden md:flex">
     <img src="../assets/video-image.svg" alt="video-image.svg" />
     <img
       src="../assets/play.svg"

@@ -1,5 +1,5 @@
 <script setup>
-import { Button } from '@/orchidui'
+import { Button, Icon } from '@/orchidui'
 import { computed } from 'vue'
 import CrossFeatureLogo from '@/orchidui/DataDisplay/Card/logo-animations/CrossFeatureLogo.vue'
 import CrossSellPosLogo from '@/orchidui/DataDisplay/Card/logo-animations/CrossSellPosLogo.vue'
@@ -40,14 +40,26 @@ const typesClasses = {
   cross_sell_os: 'bg-[#FDF2F9] ' + gradientBorder,
   video: 'bg-white ' + gradientBorder
 }
+const mobileIcon = computed(() => {
+  const icons = {
+    education: 'book',
+    cross_feature: 'receipt',
+    cross_sell_pos: 'counter',
+    cross_sell_os: 'shopping_cart',
+    video: 'play'
+  }
+  return icons[props.type]
+})
 </script>
 
 <template>
   <div
-    class="relative group gap-x-6 items-center flex h-[144px] rounded"
+    class="relative group gap-x-6 items-center flex md:h-[144px] rounded"
     :class="[typesClasses[type], isReverse && !isFull ? 'flex-row-reverse' : '']"
   >
-    <div class="gap-x-6 items-center h-full relative flex overflow-hidden rounded w-full">
+    <div
+      class="md:gap-x-6 pr-7 py-7 pl-5 md:p-0 items-center h-full relative flex overflow-hidden rounded w-full"
+    >
       <slot name="logo">
         <EducationLogo v-if="type === 'education'" />
 
@@ -60,18 +72,32 @@ const typesClasses = {
         <VideoLogo v-if="type === 'video'" />
       </slot>
 
-      <div class="max-w-[338px] flex flex-col w-full gap-y-3">
-        <span class="font-medium text-xl">{{ title }}</span>
-        <span class="text-oc-text-400">{{ description }}</span>
+      <div class="max-w-[338px] relative z-10 flex flex-col w-full gap-y-3">
+        <div class="md:hidden w-fit p-2 rounded-sm bg-white text-oc-text">
+          <Icon :name="mobileIcon" width="20" height="20" />
+        </div>
+        <slot name="title">
+          <span class="font-medium md:text-xl">{{ title }}</span>
+        </slot>
+        <slot name="description">
+          <span class="text-oc-text-400 md:text-base text-sm">{{ description }}</span>
+        </slot>
       </div>
 
       <Button
         is-transparent
         size="small"
         variant="secondary"
-        class="group-hover:flex hidden px-3 absolute top-2 z-10"
-        :class="isReverse ? 'left-2' : 'right-2'"
+        class="md:group-hover:flex hidden px-3 absolute top-2 z-10 right-2"
         label="Hide all"
+        @click="$emit('hide-all')"
+      />
+
+      <Icon
+        name="filled-x-circle"
+        width="20"
+        height="20"
+        class="md:hidden absolute top-3 z-10 right-3 text-oc-text-200"
         @click="$emit('hide-all')"
       />
 
