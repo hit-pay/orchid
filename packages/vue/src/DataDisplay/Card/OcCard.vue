@@ -39,7 +39,7 @@ const props = defineProps({
   }
 })
 const gradientBorder =
-  'w-[calc(100%)] absolute left-0 top-0 h-[calc(100%)] z-[1] rounded-[9px] bg-gradient-to-r from-[#F8BFBC] to-[#CDBBF4]'
+  'w-full absolute left-0 top-0 h-full z-[1] rounded-[9px] bg-gradient-to-r from-[#F8BFBC] to-[#CDBBF4]'
 const typesClasses = {
   education: 'bg-white',
   cross_feature: 'bg-white ',
