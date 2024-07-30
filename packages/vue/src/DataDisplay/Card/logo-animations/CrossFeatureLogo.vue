@@ -3,7 +3,7 @@
     <img
       src="../assets/cross_feature.svg"
       alt="cross_feature.svg"
-      class="translate-y-[16px] z-10 hidden md:block relative transition-all duration-400 ease-out group-hover:translate-y-0"
+      class="translate-y-0 z-10 hidden md:block relative transition-all duration-[400ms] ease-in-out group-hover:translate-y-[16px]"
     />
     <img
       src="../assets/cross_feature_blur.svg"
