@@ -132,7 +132,7 @@ const mobileIcon = computed(() => {
 
       <img
         v-if="type === 'video' && version !== 'v1'"
-        class="absolute right-0 group-hover:-right-8 transition-all duration-400 ease-out"
+        class="absolute right-0 group-hover:-right-8 transition-all duration-[400ms] ease-in-out"
         alt="video_blur"
         src="./assets/video_blur.svg"
       />
