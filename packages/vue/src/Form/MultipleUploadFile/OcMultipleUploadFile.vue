@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref } from 'vue'
-import { Icon, BaseInput } from '@/orchidui'
+import { Icon, BaseInput, Button } from '@/orchidui'
 import { useUploadFileProgress } from '@/orchidui/composables/uploadFileProgress.js'
 import OcSimpleMultipleUpload from './OcSimpleMultipleUpload.vue'
 
@@ -37,7 +37,14 @@ const props = defineProps({
     default: () => ({})
   },
   withLink: Boolean,
-  labelUploadArea: String
+  labelUploadArea: String,
+  isButtonOnly: Boolean,
+  buttonUploadProps: {
+    type: Object,
+    default: () => ({
+      label: 'Upload'
+    })
+  }
 })
 const inputRef = ref()
 const isDragover = ref(false)
@@ -121,6 +128,19 @@ const onDelete = (index) => {
           />
         </template>
       </OcSimpleMultipleUpload>
+      <template v-else-if="isButtonOnly">
+        <Button v-bind="buttonUploadProps" @click="inputRef?.click()" />
+
+        <input
+          id="my-file"
+          ref="inputRef"
+          class="hidden"
+          type="file"
+          multiple
+          :accept="accept"
+          @change="onChange"
+        />
+      </template>
       <div
         v-else
         class="relative border rounded p-3 min-w-[30rem] flex flex-col"
