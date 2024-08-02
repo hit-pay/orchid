@@ -15,7 +15,12 @@ export const Default = {
     maxSize: 5,
     label: '',
     hint: '',
-    errorMessage: ''
+    errorMessage: '',
+    isButtonOnly: true,
+    buttonUploadProps: {
+      label: 'Upload',
+      leftIcon: 'upload'
+    }
   },
   render: (args) => ({
     components: { SingleFileUpload, RadioGroup },
@@ -56,7 +61,10 @@ export const Default = {
                 :max-size="args.maxSize"
                 :label="args.label"
                 :hint="args.hint"
-                :error-message="args.errorMessage"/>
+                :error-message="args.errorMessage"
+                :is-button-only="variant === 'url' ? false : args.isButtonOnly"
+                :button-upload-props="args.buttonUploadProps"
+            />
           </div>
 
         `

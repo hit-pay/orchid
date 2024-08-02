@@ -15,7 +15,12 @@ export const Default = {
     errorMessage: '',
     isImageOnly: false,
     columnsCount: 3,
-    withLink: false
+    withLink: false,
+    isButtonOnly: true,
+    buttonUploadProps: {
+      label: 'Upload',
+      leftIcon: 'upload'
+    }
   },
   render: (args) => ({
     components: { MultipleUploadFile, Theme },
@@ -40,6 +45,8 @@ export const Default = {
                 :isImageOnly="args.isImageOnly"
                 :columnsCount="args.columnsCount"
                 :with-link="args.withLink"
+                :is-button-only="args.isButtonOnly"
+                :button-upload-props="args.buttonUploadProps"
             />
           </Theme>
         `

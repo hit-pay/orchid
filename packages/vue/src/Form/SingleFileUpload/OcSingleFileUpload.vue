@@ -38,7 +38,14 @@ const props = defineProps({
     default: 'upload',
     validator: (val) => ['upload', 'url'].includes(val)
   },
-  shouldTruncateFileName: Boolean
+  shouldTruncateFileName: Boolean,
+  isButtonOnly: Boolean,
+  buttonUploadProps: {
+    type: Object,
+    default: () => ({
+      label: 'Upload'
+    })
+  }
 })
 const emit = defineEmits([
   'update:modelValue',
@@ -133,6 +140,17 @@ const onUploadImage = ($event) => {
       @change="onChangeFile($event, props.format === 'object')"
       @delete="onDeleteFile(0)"
     />
+    <template v-else-if="isButtonOnly">
+      <Button v-bind="buttonUploadProps" @click="inputRef?.click()" />
+
+      <input
+        ref="inputRef"
+        class="hidden"
+        type="file"
+        :accept="accept"
+        @change="onChangeFile($event, props.format === 'object')"
+      />
+    </template>
     <template v-else>
       <div v-if="!currentFiles.length" class="py-2 flex flex-col items-center gap-y-4">
         <div class="flex items-baseline gap-x-3 w-full">
