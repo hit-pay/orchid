@@ -145,7 +145,7 @@ const handleIndefinite = (event) => {
 </script>
 
 <template>
-  <Dropdown v-model="isDropdownOpened" placement="bottom-start" :distance="10" class="w-full">
+  <Dropdown v-model="isDropdownOpened" :is-disabled="disabled" placement="bottom-start" :distance="10" class="w-full">
     <div class="flex flex-col gap-y-2 w-full">
       <template v-if="!isSplitInput || !isRangeInput">
         <div class="flex w-full">
@@ -165,6 +165,7 @@ const handleIndefinite = (event) => {
             :label="label"
             :hint="hint"
             :is-required="isRequired"
+            :disabled="disabled"
           />
         </div>
         <div v-if="errorMessage" class="text-sm text-oc-error flex items-center">
