@@ -1,4 +1,13 @@
-import { Theme, Table, Chip, Icon, Toggle, TableCellContent, TableCell } from '@/orchidui'
+import {
+  Theme,
+  Table,
+  Chip,
+  Icon,
+  Toggle,
+  TableCellContent,
+  TableCell,
+  ExpandingTable
+} from '@/orchidui'
 import TextEditor from '../../Form/TextEditor/OcTextEditor.vue'
 
 import { ref } from 'vue'
@@ -89,10 +98,10 @@ export const ExtraContent = {
     template: `
           <Theme>
             <Table v-model="selectedRows"
-              :options="args.options"
-              :is-loading="args.isLoading"
-              :loadingRows="args.loadingRows"
-              @click-row="onClickRow"
+                   :options="args.options"
+                   :is-loading="args.isLoading"
+                   :loadingRows="args.loadingRows"
+                   @click-row="onClickRow"
             >
               <template #col4="{ data }">
                 <span class="text-oc-text-400 text-sm">{{ data }}</span>
@@ -110,13 +119,13 @@ export const ExtraContent = {
               </template>
               <template #extra="{ item, index }">
                 <TableCell
-                  v-if="item.col7"
-                  class="flex border-oc-gray-200 w-full"
-                  :is-last="args.options.fields.length === index + 1"
+                    v-if="item.col7"
+                    class="flex border-oc-gray-200 w-full"
+                    :is-last="args.options.fields.length === index + 1"
                 >
                   <TextEditor
-                    v-model="item.col7"
-                    v-bind="{fontSizes:[{label:'Default',value:'14px'},{label:'Medium',value:'16px'},{label:'Large',value:'18px'},{label:'Extra Large',value:'20px'}],initialFontSize:'14px'}"
+                      v-model="item.col7"
+                      v-bind="{fontSizes:[{label:'Default',value:'14px'},{label:'Medium',value:'16px'},{label:'Large',value:'18px'},{label:'Extra Large',value:'20px'}],initialFontSize:'14px'}"
                   />
                 </TableCell>
               </template>
@@ -125,6 +134,57 @@ export const ExtraContent = {
               </template>
             </Table>
           </Theme>
+        `
+  })
+}
+export const expandingTable = {
+  args: {},
+  render: (args) => ({
+    components: {
+      ExpandingTable
+    },
+    setup() {
+      const selectedRows = ref([])
+
+      const headers = [
+        {
+          key: 'gross_sales',
+          label: 'Gross Sales',
+          important: true,
+          children: [
+            {
+              label: 'Quick Sale',
+              key: 'quick_sale'
+            },
+            {
+              label: 'Products',
+              key: 'products'
+            }
+          ]
+        },
+        {
+          label: 'Surcharges',
+          key: 'surcharges',
+          infoText: 'Additional charge or payment'
+        }
+      ]
+      const fields = {
+        gross_sales: {
+          quick_sale: 100,
+          products: 200
+        },
+        surcharges: 50
+      }
+      return { args, headers, fields, selectedRows }
+    },
+    template: `
+          <div class="p-10">
+            <ExpandingTable :headers="headers" :fields="fields">
+              <template #gross_sales="{value}">
+                {{ Object.values(value).reduce((acc, numb) => acc + numb, 0) }}
+              </template>
+            </ExpandingTable>
+          </div>
         `
   })
 }
