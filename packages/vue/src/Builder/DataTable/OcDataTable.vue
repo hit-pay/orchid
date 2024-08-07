@@ -385,7 +385,7 @@ const displayFilterData = computed(() => {
             >
               <FilterSearch
                 v-if="filterOptions?.search"
-                :is-search-only="!filterOptions.tabs"
+                :is-search-only="!filterOptions.tabs || filterOptions.isSearchOnly"
                 @add-query="addQuery"
                 @toggle="isSearchExpanded = $event"
               />
