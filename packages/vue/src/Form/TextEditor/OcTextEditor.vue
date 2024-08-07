@@ -309,7 +309,7 @@ const onClickContent = () => {
         }"
         theme="snow"
         content-type="html"
-        class="min-h-[200px] overflow-hidden"
+        class="min-h-[200px]"
         :placeholder="placeholder"
         @update:content="checkStates"
         @paste="isValidPasedText"
