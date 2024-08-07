@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import ExpandingTableRow from './OcExpadingTableRow.vue'
+import ExpandingHeaderRow from './OcExpandingHeaderRow.vue'
 
 defineProps({
   total: {
@@ -13,16 +14,22 @@ defineProps({
   fields: {
     type: Object,
     required: true
+  },
+  isAlternative: {
+    type: Boolean,
+    default: false
   }
 })
 </script>
 
 <template>
   <div class="flex flex-col border rounded w-full border-oc-gray-200 overflow-hidden">
+    <ExpandingHeaderRow v-if="!isAlternative" :headers="headers" />
     <ExpandingTableRow
       v-for="(row, i) in headers"
       :key="i"
       :row="row"
+      :is-alternative="isAlternative"
       :value="fields[row.key]"
       :important="row.important"
     >

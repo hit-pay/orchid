@@ -5,6 +5,7 @@ import TableCellContent from './OcTableCellContent.vue'
 import TableLink from './OcTableLink.vue'
 import ExpandingTable from './ExpandingTable/OcExpadingTable.vue'
 import ExpandingTableRow from './ExpandingTable/OcExpadingTableRow.vue'
+import ExpandingHeaderRow from './ExpandingTable/OcExpandingHeaderRow.vue'
 
 export {
   Table,
@@ -13,5 +14,6 @@ export {
   TableCell,
   TableCellContent,
   TableLink,
-  ExpandingTableRow
+  ExpandingTableRow,
+  ExpandingHeaderRow
 }

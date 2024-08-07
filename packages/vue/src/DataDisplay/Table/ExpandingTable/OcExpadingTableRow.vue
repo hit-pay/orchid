@@ -19,6 +19,10 @@ defineProps({
   isTotal: {
     type: Boolean,
     default: false
+  },
+  isAlternative: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -87,6 +91,7 @@ const toggleExpand = () => {
       :key="i"
       :row="child"
       :important="child.important"
+      :is-alternative="isAlternative"
       :value="value[child.key]"
       :depth="depth + 1"
     >

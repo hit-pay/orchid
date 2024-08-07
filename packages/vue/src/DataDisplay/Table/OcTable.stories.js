@@ -138,7 +138,9 @@ export const ExtraContent = {
   })
 }
 export const expandingTable = {
-  args: {},
+  args: {
+    isAlternative: true
+  },
   render: (args) => ({
     components: {
       ExpandingTable
@@ -179,7 +181,7 @@ export const expandingTable = {
     },
     template: `
           <div class="p-10">
-            <ExpandingTable :headers="headers" :fields="fields">
+            <ExpandingTable :is-alternative="args.isAlternative" :headers="headers" :fields="fields">
               <template #gross_sales="{value}">
                 {{ Object.values(value).reduce((acc, numb) => acc + numb, 0) }}
               </template>
