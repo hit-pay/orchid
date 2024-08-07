@@ -90,7 +90,7 @@ const props = defineProps({
 
 const isDropdownOpened = ref(false)
 const isCalendarIndefinite = ref(false)
-
+const inputtedData = ref([])
 const isRangeInput = computed(() => props.type === 'range')
 
 const formattedDate = computed(() => {
@@ -141,6 +141,14 @@ const disableAllDates = (value) => {
 const handleIndefinite = (event) => {
   isCalendarIndefinite.value = event
   emit('update:modelValue', event ? 'Indefinite' : null)
+}
+const convertInputted = (value, index) => {
+  // check is valid date
+  const isDateValid = dayjs(value).isValid()
+  if (!isDateValid) return
+  inputtedData.value[index] = dayjs(value, props.dateFormat).format(props.dateFormat)
+  inputtedData.value[index ? 0 : 1] =
+    props.modelValue[index ? 0 : 1] || dayjs().format(props.dateFormat)
 }
 </script>
 
@@ -195,7 +203,9 @@ const handleIndefinite = (event) => {
               <input
                 placeholder="Start date"
                 :value="formattedDate[0] ? formattedDate[0].format(dateFormat) : ''"
-                class="text-center bg-transparent outline-0 pointer-events-none w-full placeholder:text-oc-text-300"
+                class="text-center bg-transparent outline-0 w-full placeholder:text-oc-text-300"
+                @input="convertInputted($event.target.value, 0)"
+                @keydown.enter="$emit('update:modelValue', inputtedData)"
               />
             </div>
             <span class="text-oc-text-400">To</span>
@@ -204,6 +214,8 @@ const handleIndefinite = (event) => {
                 placeholder="End date"
                 :value="formattedDate[1] ? formattedDate[1].format(dateFormat) : ''"
                 class="text-center bg-transparent outline-0 w-full placeholder:text-oc-text-300"
+                @input="convertInputted($event.target.value, 1)"
+                @keydown.enter="$emit('update:modelValue', inputtedData)"
               />
               <Icon
                 :class="formattedDate.every(Boolean) ? 'opacity-100' : 'opacity-0'"
