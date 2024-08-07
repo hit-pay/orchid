@@ -34,6 +34,7 @@ defineProps({
           </div>
           <span class="text-oc-text-400">{{ description }}</span>
         </div>
+        <slot name="bottom"></slot>
       </div>
       <div class="py-6 px-5 flex items-center justify-center">
         <slot name="footer">
