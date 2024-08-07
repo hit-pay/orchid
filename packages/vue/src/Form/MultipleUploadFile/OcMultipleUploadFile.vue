@@ -71,7 +71,8 @@ onMounted(() => {
           totalSize: item.current.file_size ?? 0,
           isLoaded: true,
           extension: item.current.extension ?? 'png',
-          link: item.current.link
+          link: item.current.link,
+          isSelected: true
         })
       }
     })
