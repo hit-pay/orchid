@@ -8,7 +8,8 @@ defineProps({
   content: String,
   isDropdown: Boolean,
   chipOptions: Object,
-  dropdownOptions: Object
+  dropdownOptions: Object,
+  countryIso: String
 })
 </script>
 
@@ -17,7 +18,7 @@ defineProps({
     class="cursor-pointer rounded group font-medium justify-center border gap-y-2 md:w-fit w-full flex flex-col hover:shadow-normal"
     :class="[
       isActive && !isLoading ? 'border-b-[3px] border-oc-primary' : 'border-oc-accent-1-100',
-      !isLoading ? 'px-5 py-4 h-[76px]' : 'p-3'
+      !isLoading ? 'px-5 py-4 min-h-[62px] max-h-[76px]' : 'p-3'
     ]"
   >
     <div v-if="isLoading" class="min-w-[138px] flex flex-col gap-y-3">
@@ -33,9 +34,15 @@ defineProps({
             <Chip v-if="chipOptions" v-bind="chipOptions" />
           </div>
           <span
-            class="text-xl group-hover:text-oc-text"
+            class="flex gap-x-4 items-center text-xl group-hover:text-oc-text"
             :class="isActive ? 'text-oc-text' : 'text-oc-text-400'"
           >
+            <div v-if="countryIso" class="flex justify-center items-center w-[38px] h-[38px] rounded-full bg-oc-gray-100">
+              <div
+                class="fi  !w-[24px] !h-[16px] !rounded-[1px]"
+                :class="`fi-${countryIso}`"
+              />
+            </div>
             {{ content }}
           </span>
         </div>
