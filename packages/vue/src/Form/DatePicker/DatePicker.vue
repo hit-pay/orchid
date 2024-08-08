@@ -90,7 +90,7 @@ const props = defineProps({
 
 const isDropdownOpened = ref(false)
 const isCalendarIndefinite = ref(false)
-
+const inputtedData = ref([])
 const isRangeInput = computed(() => props.type === 'range')
 
 const formattedDate = computed(() => {
@@ -142,10 +142,18 @@ const handleIndefinite = (event) => {
   isCalendarIndefinite.value = event
   emit('update:modelValue', event ? 'Indefinite' : null)
 }
+const convertInputted = (value, index) => {
+  // check is valid date
+  const isDateValid = dayjs(value).isValid()
+  if (!isDateValid) return
+  inputtedData.value[index] = dayjs(value, props.dateFormat).format(props.dateFormat)
+  inputtedData.value[index ? 0 : 1] =
+    props.modelValue[index ? 0 : 1] || dayjs().format(props.dateFormat)
+}
 </script>
 
 <template>
-  <Dropdown v-model="isDropdownOpened" placement="bottom-start" :distance="10" class="w-full">
+  <Dropdown v-model="isDropdownOpened" :is-disabled="disabled" placement="bottom-start" :distance="10" class="w-full">
     <div class="flex flex-col gap-y-2 w-full">
       <template v-if="!isSplitInput || !isRangeInput">
         <div class="flex w-full">
@@ -165,6 +173,7 @@ const handleIndefinite = (event) => {
             :label="label"
             :hint="hint"
             :is-required="isRequired"
+            :disabled="disabled"
           />
         </div>
         <div v-if="errorMessage" class="text-sm text-oc-error flex items-center">
@@ -195,7 +204,9 @@ const handleIndefinite = (event) => {
               <input
                 placeholder="Start date"
                 :value="formattedDate[0] ? formattedDate[0].format(dateFormat) : ''"
-                class="text-center bg-transparent outline-0 pointer-events-none w-full placeholder:text-oc-text-300"
+                class="text-center bg-transparent outline-0 w-full placeholder:text-oc-text-300"
+                @input="convertInputted($event.target.value, 0)"
+                @keydown.enter="$emit('update:modelValue', inputtedData)"
               />
             </div>
             <span class="text-oc-text-400">To</span>
@@ -204,6 +215,8 @@ const handleIndefinite = (event) => {
                 placeholder="End date"
                 :value="formattedDate[1] ? formattedDate[1].format(dateFormat) : ''"
                 class="text-center bg-transparent outline-0 w-full placeholder:text-oc-text-300"
+                @input="convertInputted($event.target.value, 1)"
+                @keydown.enter="$emit('update:modelValue', inputtedData)"
               />
               <Icon
                 :class="formattedDate.every(Boolean) ? 'opacity-100' : 'opacity-0'"

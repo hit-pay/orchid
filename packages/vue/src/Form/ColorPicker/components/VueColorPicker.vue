@@ -1212,7 +1212,7 @@ onMounted(() => {
   background-color: var(--cp-container-bg);
   border-radius: 1rem;
   padding: 10px;
-  width: 311px;
+  width: 352px;
   height: auto;
 }
 
