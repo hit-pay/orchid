@@ -53,6 +53,7 @@ defineEmits({
             :is-dropdown="tab.isDropdown"
             :dropdown-options="tab.dropdownOptions"
             :is-active="tab.value === overviewActiveTab"
+            :country-iso="tab.countryIso"
             @click="$emit('changeTab', tab.value)"
           />
         </slot>
