@@ -8,6 +8,14 @@ defineProps({
     type: Number,
     default: 0
   },
+  headers: {
+    type: Array,
+    default: () => []
+  },
+  fields: {
+    type: Array,
+    default: () => []
+  },
   value: {
     type: [String, Number, Date, Object],
     default: 0
@@ -59,25 +67,34 @@ const toggleExpand = () => {
         :class="isExpanded ? 'rotate-180' : ''"
       />
     </div>
-    <div
-      class="flex-1 gap-x-2 items-center flex px-4 py-3"
-      :style="depth ? { paddingLeft: 12 + depth * 20 + 'px' } : {}"
-    >
-      {{ row.label }}
-      <Tooltip>
-        <Icon v-if="row.infoText" name="information" width="16" height="16" />
-        <template #popper>
-          <div class="rounded-xs text-sm font-medium text-oc-text-400 p-2">
-            {{ row.infoText }}
-          </div>
-        </template>
-      </Tooltip>
-    </div>
-    <div class="flex-1 text-right">
-      <slot :name="row.key" :value="value">
-        {{ value }}
-      </slot>
-    </div>
+    <template v-if="!isAlternative">
+      <div
+        class="flex-1 gap-x-2 items-center flex px-4 py-3"
+        :style="depth ? { paddingLeft: 12 + depth * 20 + 'px' } : {}"
+      >
+        {{ row.label }}
+        <Tooltip>
+          <Icon v-if="row.infoText" name="information" width="16" height="16" />
+          <template #popper>
+            <div class="rounded-xs text-sm font-medium text-oc-text-400 p-2">
+              {{ row.infoText }}
+            </div>
+          </template>
+        </Tooltip>
+      </div>
+      <div class="flex-1 text-right">
+        <slot :name="row.key" :value="value">
+          {{ value }}
+        </slot>
+      </div>
+    </template>
+    <template v-else>
+      <div v-for="header in headers" :key="header.key" class="flex-1 text-right">
+        <slot :name="header.key" :data="row[header.key]" :item="row">
+          {{ row[header.key] }}
+        </slot>
+      </div>
+    </template>
     <div class="w-9"></div>
   </div>
   <div
@@ -89,10 +106,12 @@ const toggleExpand = () => {
     <ExpandingTableRow
       v-for="(child, i) in row.children"
       :key="i"
+      :headers="headers"
       :row="child"
       :important="child.important"
       :is-alternative="isAlternative"
       :value="value[child.key]"
+      :fields="fields"
       :depth="depth + 1"
     >
       <template v-for="(_, name) in $slots" #[name]="slotData">
