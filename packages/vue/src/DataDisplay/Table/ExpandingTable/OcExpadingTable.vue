@@ -24,19 +24,36 @@ defineProps({
 
 <template>
   <div class="flex flex-col border rounded w-full border-oc-gray-200 overflow-hidden">
-    <ExpandingHeaderRow v-if="!isAlternative" :headers="headers" />
-    <ExpandingTableRow
-      v-for="(row, i) in headers"
-      :key="i"
-      :row="row"
-      :is-alternative="isAlternative"
-      :value="fields[row.key]"
-      :important="row.important"
-    >
-      <template v-for="(_, name) in $slots" #[name]="slotData">
-        <slot :name="name" v-bind="slotData" />
-      </template>
-    </ExpandingTableRow>
+    <template v-if="isAlternative">
+      <ExpandingHeaderRow :headers="headers" />
+
+      <ExpandingTableRow
+        v-for="(row, i) in fields"
+        :key="i"
+        :row="row"
+        :headers="headers"
+        :is-alternative="isAlternative"
+        :important="row.important"
+      >
+        <template v-for="(_, name) in $slots" #[name]="slotData">
+          <slot :name="name" v-bind="slotData" />
+        </template>
+      </ExpandingTableRow>
+    </template>
+    <template v-else>
+      <ExpandingTableRow
+        v-for="(row, i) in headers"
+        :key="i"
+        :row="row"
+        :is-alternative="isAlternative"
+        :value="fields[row.key]"
+        :important="row.important"
+      >
+        <template v-for="(_, name) in $slots" #[name]="slotData">
+          <slot :name="name" v-bind="slotData" />
+        </template>
+      </ExpandingTableRow>
+    </template>
     <slot name="total">
       <ExpandingTableRow is-total :row="{ label: 'Total' }" :value="total" />
     </slot>
