@@ -24,7 +24,7 @@ defineProps({
 
 <template>
   <div class="flex flex-col border rounded w-full border-oc-gray-200 overflow-hidden">
-    <ExpandingHeaderRow v-if="!isAlternative" :headers="headers" />
+    <ExpandingHeaderRow v-if="isAlternative" :headers="headers" />
     <ExpandingTableRow
       v-for="(row, i) in headers"
       :key="i"
