@@ -7,7 +7,11 @@ defineProps({
   },
   secondaryProps: {
     type: Object
-  }
+  },
+  isSecondaryButtonVisible: {
+    type: Boolean,
+    default: true
+  },
 })
 </script>
 <template>
@@ -16,6 +20,7 @@ defineProps({
       <slot name="before" />
       <div class="flex gap-x-3">
         <Button
+          v-if="isSecondaryButtonVisible"
           class="min-w-[100px]"
           variant="secondary"
           label="Cancel"
