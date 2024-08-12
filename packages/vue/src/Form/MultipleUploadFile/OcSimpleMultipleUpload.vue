@@ -201,7 +201,7 @@ const showAddBtn = computed(
           <div
             class="z-[1009] hidden group-hover:flex absolute bg-black/30 w-full h-full top-0 left-0 rounded"
           >
-            <span class="cursor-pointer m-auto drag-el">
+            <span v-if="props.maxImages !== 1" class="cursor-pointer m-auto drag-el">
               <Icon name="arrows" class="text-oc-accent-1-50" />
             </span>
           </div>
