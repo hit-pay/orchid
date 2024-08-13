@@ -153,7 +153,13 @@ const convertInputted = (value, index) => {
 </script>
 
 <template>
-  <Dropdown v-model="isDropdownOpened" :is-disabled="disabled" placement="bottom-start" :distance="10" class="w-full">
+  <Dropdown
+    v-model="isDropdownOpened"
+    :is-disabled="disabled"
+    placement="bottom-start"
+    :distance="10"
+    class="w-full"
+  >
     <div class="flex flex-col gap-y-2 w-full">
       <template v-if="!isSplitInput || !isRangeInput">
         <div class="flex w-full">
@@ -207,6 +213,7 @@ const convertInputted = (value, index) => {
                 class="text-center bg-transparent outline-0 w-full placeholder:text-oc-text-300"
                 @input="convertInputted($event.target.value, 0)"
                 @keydown.enter="$emit('update:modelValue', inputtedData)"
+                @blur="$emit('update:modelValue', inputtedData)"
               />
             </div>
             <span class="text-oc-text-400">To</span>
@@ -217,6 +224,7 @@ const convertInputted = (value, index) => {
                 class="text-center bg-transparent outline-0 w-full placeholder:text-oc-text-300"
                 @input="convertInputted($event.target.value, 1)"
                 @keydown.enter="$emit('update:modelValue', inputtedData)"
+                @blur="$emit('update:modelValue', inputtedData)"
               />
               <Icon
                 :class="formattedDate.every(Boolean) ? 'opacity-100' : 'opacity-0'"
