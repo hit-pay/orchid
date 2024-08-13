@@ -8,14 +8,6 @@ defineProps({
     type: Number,
     default: 0
   },
-  headers: {
-    type: Array,
-    default: () => []
-  },
-  fields: {
-    type: Array,
-    default: () => []
-  },
   value: {
     type: [String, Number, Date, Object],
     default: 0
@@ -50,7 +42,7 @@ const toggleExpand = () => {
 
 <template>
   <div
-    class="h-[58px] w-full flex items-center"
+    class="h-[58px] w-full flex items-center last:border-b-0"
     :class="{
       'font-medium': important || isTotal,
       'bg-oc-gray-900 text-white': isTotal,
@@ -89,7 +81,7 @@ const toggleExpand = () => {
       </div>
     </template>
     <template v-else>
-      <div v-for="header in headers" :key="header.key" class="flex-1 text-right">
+      <div v-for="header in headers" :key="header.key" class="flex-1 truncate">
         <slot :name="header.key" :data="row[header.key]" :item="row">
           {{ row[header.key] }}
         </slot>
@@ -106,12 +98,10 @@ const toggleExpand = () => {
     <ExpandingTableRow
       v-for="(child, i) in row.children"
       :key="i"
-      :headers="headers"
       :row="child"
       :important="child.important"
       :is-alternative="isAlternative"
       :value="value[child.key]"
-      :fields="fields"
       :depth="depth + 1"
     >
       <template v-for="(_, name) in $slots" #[name]="slotData">
