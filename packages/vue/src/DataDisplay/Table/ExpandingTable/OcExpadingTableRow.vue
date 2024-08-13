@@ -81,7 +81,7 @@ const toggleExpand = () => {
       </div>
     </template>
     <template v-else>
-      <div v-for="header in headers" :key="header.key" class="flex-1">
+      <div v-for="header in headers" :key="header.key" class="flex-1 truncate">
         <slot :name="header.key" :data="row[header.key]" :item="row">
           {{ row[header.key] }}
         </slot>
