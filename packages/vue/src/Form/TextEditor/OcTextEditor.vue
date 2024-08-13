@@ -560,6 +560,9 @@ const onClickContent = () => {
 
 .ql-editor {
   @apply min-h-[200px];
+  @apply break-words;
+
+  word-break: break-word;
 }
 
 ol li {
