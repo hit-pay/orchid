@@ -53,7 +53,7 @@ const props = defineProps({
   },
   placeholder: {
     type: String,
-    default: 'DD/MM/YYYY'
+    default: 'YYYY/MM/DD'
   },
   isSplitInput: {
     type: Boolean,
@@ -180,6 +180,7 @@ const convertInputted = (value, index) => {
             :hint="hint"
             :is-required="isRequired"
             :disabled="disabled"
+            :placeholder="placeholder"
           />
         </div>
         <div v-if="errorMessage" class="text-sm text-oc-error flex items-center">
