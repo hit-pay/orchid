@@ -12,6 +12,10 @@ defineProps({
     type: [String, Number, Date, Object],
     default: 0
   },
+  headers: {
+    type: Array,
+    default: () => []
+  },
   important: {
     type: Boolean,
     default: false
@@ -42,10 +46,11 @@ const toggleExpand = () => {
 
 <template>
   <div
-    class="h-[58px] w-full flex items-center last:border-b-0"
+    class="h-[58px] w-full flex items-center"
     :class="{
       'font-medium': important || isTotal,
       'bg-oc-gray-900 text-white': isTotal,
+      'bg-oc-bg-dark': depth,
       'border-b border-oc-gray-200': !isTotal
     }"
   >
@@ -74,14 +79,19 @@ const toggleExpand = () => {
           </template>
         </Tooltip>
       </div>
-      <div class="flex-1 text-right">
+      <div class="flex-1 truncate" :class="row.itemClasses">
         <slot :name="row.key" :value="value">
           {{ value }}
         </slot>
       </div>
     </template>
     <template v-else>
-      <div v-for="header in headers" :key="header.key" class="flex-1 truncate">
+      <div
+        v-for="header in headers"
+        :key="header.key"
+        class="flex-1 truncate px-4"
+        :class="header.itemClasses"
+      >
         <slot :name="header.key" :data="row[header.key]" :item="row">
           {{ row[header.key] }}
         </slot>
