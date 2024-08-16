@@ -23,7 +23,7 @@ watch(
   (img) => {
     if (img) {
       nextTick(() => {
-        localImage.value = img
+        localImage.value = `${img}?time=${Date.now()}`
       })
     }
   },
