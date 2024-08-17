@@ -99,6 +99,33 @@ export const ListWebhook = {
   })
 }
 
+export const ListLogo = {
+  args: {
+    urls: [
+      {
+        logo: 'https://orchid.software',
+        title: 'Title'
+      }
+    ]
+  },
+  render: (args) => ({
+    components: { Theme, ListItem },
+    setup() {
+      return { args }
+    },
+    template: `
+      <Theme colorMode="light" class="p-10">
+        <ListItem
+          type="logo"
+          title="Zapier Flow"
+          image="/images/partner-logo/web-delegate.png"
+        >
+        </ListItem>
+      </Theme>
+    `
+  })
+}
+
 export const ListPayment = {
   args: {
     title: 'shopify',

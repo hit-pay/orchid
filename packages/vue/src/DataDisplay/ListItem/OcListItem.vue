@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import OcTimeLine from './components/OcTimeLine.vue'
 import OcWebhook from './components/OcWebhook.vue'
+import OcLogo from './components/OcLogo.vue'
 import OcPayment from './components/OcPayment.vue'
 import OcGeneral from './components/OcGeneral.vue'
 import OcTerminal from './components/OcTerminal.vue'
@@ -53,6 +54,8 @@ const getTypeComponent = computed(() => {
       return OcGeneral
     case 'terminal':
       return OcTerminal
+    case 'logo':
+      return OcLogo
     case 'page':
       return OcPage
     default:
