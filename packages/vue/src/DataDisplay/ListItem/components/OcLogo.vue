@@ -5,7 +5,6 @@ defineProps({
   title: String,
   image: String,
   imageClass: String,
-  description: String,
 })
 </script>
 
