@@ -9,7 +9,7 @@ import ComplexCalendar from '@/orchidui/Form/ComplexCalendar/OcComplexCalendar.v
 // https://github.com/iamkun/dayjs/issues/1786
 dayjs.extend(customParseFormat)
 
-const emit = defineEmits(['update:modelValue', 'resetCalendar'])
+const emit = defineEmits(['update:modelValue', 'resetCalendar', 'error'])
 const props = defineProps({
   modelValue: {
     type: [String, Date, Number, Array]
@@ -94,6 +94,7 @@ const props = defineProps({
 
 const isDropdownOpened = ref(false)
 const isCalendarIndefinite = ref(false)
+const isDateInvalid = ref(false)
 const inputtedData = ref([])
 const isRangeInput = computed(() => props.type === 'range')
 
@@ -146,21 +147,19 @@ const handleIndefinite = (event) => {
   isCalendarIndefinite.value = event
   emit('update:modelValue', event ? 'Indefinite' : null)
 }
-const convertInputted = (value, index) => {
-  // check is valid date
-  const isDateValid = dayjs(value).isValid()
-  if (!isDateValid) return
-  inputtedData.value[index] = dayjs(value, props.dateFormat).format(props.dateFormat)
-  inputtedData.value[index ? 0 : 1] =
-    props.modelValue[index ? 0 : 1] || dayjs().format(props.dateFormat)
+const parseInputtedDate = (value, index) => {
+  const date = dayjs(value, props.dateFormat, true)
+  inputtedData.value[index] = date.format(props.dateFormat)
+  inputtedData.value[index ? 0 : 1] = dayjs().format(props.dateFormat)
 }
-const updateInputted = () => {
-  if (!inputtedData.value.length) return
-  if (inputtedData.value.some((d) => !dayjs(d).isValid())) return
-  emit(
-    'update:modelValue',
-    inputtedData.value.map((d) => dayjs(d).format(props.dateFormat))
-  )
+const validateAndEmit = () => {
+  isDateInvalid.value = false
+  if (inputtedData.value.some((d) => !dayjs(d, props.dateFormat).isValid())) {
+    isDateInvalid.value = true
+    inputtedData.value = []
+    return
+  }
+  emit('update:modelValue', inputtedData.value)
 }
 </script>
 
@@ -200,7 +199,9 @@ const updateInputted = () => {
       </template>
       <div v-else class="flex flex-wrap cursor-pointer">
         <BaseInput
-          :error-message="errorMessage"
+          :error-message="
+            isDateInvalid ? `Invalid Date. Try this format (${dateFormat})` : errorMessage
+          "
           :hint="hint"
           :is-required="isRequired"
           :label="label"
@@ -208,7 +209,7 @@ const updateInputted = () => {
           <div
             class="rounded justify-between border flex items-center gap-3 h-[36px] px-3"
             :class="[
-              errorMessage
+              errorMessage || isDateInvalid
                 ? 'border-oc-error shadow-oc-error'
                 : 'border-oc-gray-200 shadow-oc-gray-200',
               disabled ? 'pointer-events-none bg-oc-bg-dark' : 'bg-white',
@@ -223,9 +224,9 @@ const updateInputted = () => {
                 placeholder="Start date"
                 :value="formattedDate[0] ? formattedDate[0].format(dateFormat) : ''"
                 class="text-center bg-transparent outline-0 w-full placeholder:text-oc-text-300"
-                @input="convertInputted($event.target.value, 0)"
-                @keydown.enter="updateInputted"
-                @blur="updateInputted"
+                @input="parseInputtedDate($event.target.value, 0)"
+                @keydown.enter="validateAndEmit"
+                @blur="validateAndEmit"
               />
             </div>
             <span class="text-oc-text-400">To</span>
@@ -234,9 +235,9 @@ const updateInputted = () => {
                 placeholder="End date"
                 :value="formattedDate[1] ? formattedDate[1].format(dateFormat) : ''"
                 class="text-center bg-transparent outline-0 w-full placeholder:text-oc-text-300"
-                @input="convertInputted($event.target.value, 1)"
-                @keydown.enter="updateInputted"
-                @blur="updateInputted"
+                @input="parseInputtedDate($event.target.value, 1)"
+                @keydown.enter="validateAndEmit"
+                @blur="validateAndEmit"
               />
               <Icon
                 :class="formattedDate.every(Boolean) ? 'opacity-100' : 'opacity-0'"
