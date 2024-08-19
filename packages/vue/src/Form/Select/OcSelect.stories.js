@@ -108,6 +108,7 @@ export const Default = {
     isTransparent: false,
     isSlim: false,
     labelIcon: '',
+    isClearable: true,
     tooltipText: 'Tooltip text',
     tooltipOptions: {
       position: 'top',
@@ -142,8 +143,10 @@ export const Default = {
                   :tooltip-options="args.tooltipOptions"
                   :label-icon="args.labelIcon"
                   :tooltip-text="args.tooltipText"
+                  :is-clearable="args.isClearable"
                   :is-transparent="args.isTransparent"
                   :is-inline-search="args.isInlineSearch"
+                  @cleared="selectedOption = undefined"
                   @on-search-keywords="(query) => console.log(query)"
               />
             </div>

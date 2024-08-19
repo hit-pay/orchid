@@ -57,6 +57,7 @@ const props = defineProps({
     })
   },
   isInlineSearch: Boolean,
+  isClearable: Boolean,
   searchKeywords: String
 })
 
@@ -66,7 +67,8 @@ const emit = defineEmits({
   'max-option-allowed-set': [],
   onSearchKeywords: '',
   close: [],
-  toggle: []
+  toggle: [],
+  cleared: [],
 })
 
 const query = ref(props.searchKeywords ?? '')
@@ -338,6 +340,14 @@ defineExpose({
             <span v-else class="text-oc-text-300">{{ placeholder }}</span>
           </span>
         </template>
+        <Icon
+          v-if="modelValue && isClearable"
+          class="text-oc-text-400 ml-auto transition-all shrink-0 duration-500 hover:rotate-90"
+          width="16"
+          height="16"
+          name="x"
+          @click.stop="emit('cleared')"
+        />
         <Icon
           v-if="!hideChevron"
           class="w-5 h-5 text-oc-text-400 transition-all shrink-0 duration-500"
