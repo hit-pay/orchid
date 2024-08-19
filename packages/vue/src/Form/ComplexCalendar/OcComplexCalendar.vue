@@ -29,10 +29,10 @@ defineProps({
     default: true
   },
   minDate: {
-    type: [String, Date, Number],
+    type: [String, Date, Number]
   },
   maxDate: {
-    type: [String, Date, Number],
+    type: [String, Date, Number]
   }
 })
 const emit = defineEmits({
@@ -41,7 +41,7 @@ const emit = defineEmits({
 const datePicker = ref()
 const changeModelValue = (value) => {
   emit('update:modelValue', value)
-  datePicker.value.calendarRef.focusDate(value.start)
+  datePicker.value.calendarRef.focusDate(dayjs(value.start).toDate())
 }
 </script>
 
