@@ -85,6 +85,10 @@ const props = defineProps({
   countCalendars: {
     type: Number,
     default: 2
+  },
+  shortcuts: {
+    type: Array,
+    default: () => []
   }
 })
 
@@ -150,6 +154,14 @@ const convertInputted = (value, index) => {
   inputtedData.value[index ? 0 : 1] =
     props.modelValue[index ? 0 : 1] || dayjs().format(props.dateFormat)
 }
+const updateInputted = () => {
+  if (!inputtedData.value.length) return
+  if (inputtedData.value.some((d) => !dayjs(d).isValid())) return
+  emit(
+    'update:modelValue',
+    inputtedData.value.map((d) => dayjs(d).format(props.dateFormat))
+  )
+}
 </script>
 
 <template>
@@ -212,8 +224,8 @@ const convertInputted = (value, index) => {
                 :value="formattedDate[0] ? formattedDate[0].format(dateFormat) : ''"
                 class="text-center bg-transparent outline-0 w-full placeholder:text-oc-text-300"
                 @input="convertInputted($event.target.value, 0)"
-                @keydown.enter="$emit('update:modelValue', inputtedData)"
-                @blur="$emit('update:modelValue', inputtedData)"
+                @keydown.enter="updateInputted"
+                @blur="updateInputted"
               />
             </div>
             <span class="text-oc-text-400">To</span>
@@ -223,8 +235,8 @@ const convertInputted = (value, index) => {
                 :value="formattedDate[1] ? formattedDate[1].format(dateFormat) : ''"
                 class="text-center bg-transparent outline-0 w-full placeholder:text-oc-text-300"
                 @input="convertInputted($event.target.value, 1)"
-                @keydown.enter="$emit('update:modelValue', inputtedData)"
-                @blur="$emit('update:modelValue', inputtedData)"
+                @keydown.enter="updateInputted"
+                @blur="updateInputted"
               />
               <Icon
                 :class="formattedDate.every(Boolean) ? 'opacity-100' : 'opacity-0'"
@@ -250,7 +262,7 @@ const convertInputted = (value, index) => {
         <template v-if="isRangeInput">
           <ComplexCalendar
             :model-value="{ start: modelValue?.[0], end: modelValue?.[1] }"
-            :shortcuts="[]"
+            :shortcuts="shortcuts"
             :count-calendars="countCalendars"
             is-range
             :with-footer="false"

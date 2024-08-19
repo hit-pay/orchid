@@ -45,6 +45,7 @@ defineProps({
         v-for="(row, i) in headers"
         :key="i"
         :row="row"
+        :headers="headers"
         :is-alternative="isAlternative"
         :value="fields[row.key]"
         :important="row.important"
@@ -55,7 +56,7 @@ defineProps({
       </ExpandingTableRow>
     </template>
     <slot name="total">
-      <ExpandingTableRow is-total :row="{ label: 'Total' }" :value="total" />
+      <ExpandingTableRow is-total :headers="headers" :row="{ label: 'Total' }" :value="total" />
     </slot>
   </div>
 </template>

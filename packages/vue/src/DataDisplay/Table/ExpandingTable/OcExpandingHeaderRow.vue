@@ -18,6 +18,7 @@ defineProps({
     >
       {{ header.label }}
     </div>
+    <div class="w-9" />
   </div>
 </template>
 
