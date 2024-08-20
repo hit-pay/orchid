@@ -151,7 +151,7 @@ const parseInputtedDate = (value, index) => {
   const date = dayjs(value, props.dateFormat, true)
   inputtedData.value[index] = date.format(props.dateFormat)
   inputtedData.value[index ? 0 : 1] =
-    inputtedData.value[index ? 0 : 1] || dayjs().format(props.dateFormat)
+    props.modelValue[index ? 0 : 1] || dayjs().format(props.dateFormat)
 }
 const validateAndEmit = () => {
   isDateInvalid.value = false
