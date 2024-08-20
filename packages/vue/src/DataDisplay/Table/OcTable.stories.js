@@ -177,13 +177,34 @@ export const expandingTable = {
         },
         surcharges: 50
       }
-      return { args, headers, fields, selectedRows }
+      const headers2 = [
+        {
+          label: 'Header 1',
+          key: 'key1'
+        },
+        {
+          label: 'Header 2',
+          key: 'key2'
+        }
+      ]
+      const fields2 = [
+        {
+          key1: '1',
+          key2: '2'
+        }
+      ]
+      return { args, fields2, headers, fields, headers2, selectedRows }
     },
     template: `
           <div class="p-10">
-            <ExpandingTable :is-alternative="args.isAlternative" :headers="headers" :fields="fields">
+            <ExpandingTable class="mb-10" :is-alternative="false" :headers="headers" :fields="fields">
               <template #gross_sales="{value}">
-                {{ Object.values(value).reduce((acc, numb) => acc + numb, 0) }}
+                {{ value.quick_sale + value.products }}
+              </template>
+            </ExpandingTable>
+            <ExpandingTable is-alternative is-loading :headers="headers2" :fields="fields2">
+              <template #total>
+                <div/>
               </template>
             </ExpandingTable>
           </div>

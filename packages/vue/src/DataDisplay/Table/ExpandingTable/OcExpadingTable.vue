@@ -18,6 +18,10 @@ defineProps({
   isAlternative: {
     type: Boolean,
     default: false
+  },
+  isLoading: {
+    type: Boolean,
+    default: false
   }
 })
 </script>
@@ -32,6 +36,7 @@ defineProps({
         :key="i"
         :row="row"
         :headers="headers"
+        :is-loading="isLoading"
         :is-alternative="isAlternative"
         :important="row.important"
       >
@@ -46,6 +51,7 @@ defineProps({
         :key="i"
         :row="row"
         :headers="headers"
+        :is-loading="isLoading"
         :is-alternative="isAlternative"
         :value="fields[row.key]"
         :important="row.important"
