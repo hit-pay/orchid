@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Icon, ExpandingTableRow, Tooltip } from '@/orchidui'
+import { Icon, ExpandingTableRow, Tooltip, Skeleton } from '@/orchidui'
 import { ref } from 'vue'
 
 defineProps({
@@ -25,6 +25,10 @@ defineProps({
     default: false
   },
   isAlternative: {
+    type: Boolean,
+    default: false
+  },
+  isLoading: {
     type: Boolean,
     default: false
   }
@@ -92,7 +96,8 @@ const toggleExpand = () => {
         class="flex-1 truncate px-4"
         :class="header.itemClasses"
       >
-        <slot :name="header.key" :data="row[header.key]" :item="row">
+        <Skeleton v-if="isLoading" class="w-full h-5 rounded" />
+        <slot v-else :name="header.key" :data="row[header.key]" :item="row">
           {{ row[header.key] }}
         </slot>
       </div>
@@ -111,6 +116,8 @@ const toggleExpand = () => {
       :row="child"
       :important="child.important"
       :is-alternative="isAlternative"
+      :is-loading="isLoading"
+      :headers="headers"
       :value="value[child.key]"
       :depth="depth + 1"
     >
