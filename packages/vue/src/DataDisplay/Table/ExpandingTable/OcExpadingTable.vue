@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import ExpandingTableRow from './OcExpadingTableRow.vue'
 import ExpandingHeaderRow from './OcExpandingHeaderRow.vue'
+import { computed } from 'vue'
 
-defineProps({
+const props = defineProps({
   total: {
     type: Number,
     default: 0
@@ -22,8 +23,13 @@ defineProps({
   isLoading: {
     type: Boolean,
     default: false
+  },
+  loadingRows: {
+    type: Number,
+    default: 5
   }
 })
+const emptyRow = computed(() => Object.fromEntries(props.headers.map((h) => [h.key, ''])))
 </script>
 
 <template>
@@ -31,19 +37,31 @@ defineProps({
     <template v-if="isAlternative">
       <ExpandingHeaderRow :headers="headers" />
 
-      <ExpandingTableRow
-        v-for="(row, i) in fields"
-        :key="i"
-        :row="row"
-        :headers="headers"
-        :is-loading="isLoading"
-        :is-alternative="isAlternative"
-        :important="row.important"
-      >
-        <template v-for="(_, name) in $slots" #[name]="slotData">
-          <slot :name="name" v-bind="slotData" />
-        </template>
-      </ExpandingTableRow>
+      <template v-if="isLoading && !fields.length">
+        <ExpandingTableRow
+          v-for="rowInd in loadingRows"
+          :key="rowInd"
+          is-loading
+          :is-alternative="isAlternative"
+          :row="emptyRow"
+          :headers="headers"
+        />
+      </template>
+      <template v-else>
+        <ExpandingTableRow
+          v-for="(row, i) in fields"
+          :key="i"
+          :row="row"
+          :headers="headers"
+          :is-loading="isLoading"
+          :is-alternative="isAlternative"
+          :important="row.important"
+        >
+          <template v-for="(_, name) in $slots" #[name]="slotData">
+            <slot :name="name" v-bind="slotData" />
+          </template>
+        </ExpandingTableRow>
+      </template>
     </template>
     <template v-else>
       <ExpandingTableRow
