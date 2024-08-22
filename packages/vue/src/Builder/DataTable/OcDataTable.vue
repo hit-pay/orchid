@@ -453,6 +453,7 @@ const displayFilterData = computed(() => {
         <slot name="table-body" v-bind="slotProps"></slot>
       </template>
     </Table>
+    <slot name="before-pagination"></slot>
     <div
       v-if="paginationOption || cursorOption"
       class="flex gap-3 items-center"
