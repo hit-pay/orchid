@@ -151,7 +151,7 @@ const parseInputtedDate = (value, index) => {
   const date = dayjs(value, props.dateFormat, true)
   inputtedData.value[index] = date.format(props.dateFormat)
   inputtedData.value[index ? 0 : 1] =
-    props.modelValue[index ? 0 : 1] || dayjs().format(props.dateFormat)
+    props.modelValue?.[index ? 0 : 1] || dayjs().format(props.dateFormat)
 }
 const validateAndEmit = () => {
   isDateInvalid.value = false
@@ -264,7 +264,10 @@ const validateAndEmit = () => {
       >
         <template v-if="isRangeInput">
           <ComplexCalendar
-            :model-value="{ start: modelValue?.[0], end: modelValue?.[1] }"
+            :model-value="{
+              start: modelValue?.[0],
+              end: modelValue?.[1]
+            }"
             :shortcuts="shortcuts"
             :count-calendars="countCalendars"
             is-range
