@@ -7,6 +7,7 @@ import OcPayment from './components/OcPayment.vue'
 import OcGeneral from './components/OcGeneral.vue'
 import OcTerminal from './components/OcTerminal.vue'
 import OcPage from './components/OcPage.vue'
+import OcAccordion from './components/OcAccordion.vue'
 
 const props = defineProps({
   isActive: Boolean,
@@ -38,7 +39,8 @@ const props = defineProps({
     default: () => []
   },
   isDisabled: Boolean,
-  isTransparent: Boolean
+  isTransparent: Boolean,
+  isDraggable: Boolean
 })
 defineEmits(['more', 'edit', 'delete', 'click:item'])
 
@@ -58,6 +60,8 @@ const getTypeComponent = computed(() => {
       return OcLogo
     case 'page':
       return OcPage
+    case 'accordion':
+      return OcAccordion
     default:
       return OcTimeLine
   }
