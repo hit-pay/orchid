@@ -13,7 +13,7 @@ export const listItem = {
     },
     type: {
       control: 'select',
-      options: ['timeline', 'webhook', 'payment', 'terminal']
+      options: ['timeline', 'webhook', 'payment', 'terminal', 'general', 'accordion']
     },
     active: {
       control: {
@@ -45,7 +45,7 @@ export const listItem = {
       return { args }
     },
     template: `
-      <Theme colorMode="light">
+      <Theme colorMode="light" class="flex flex-col gap-5">
         <ListItem
           v-for="i in 5"
           :is-active="args.active >= i"
@@ -321,6 +321,32 @@ export const OcListItemPage = {
               <DropdownItem text="Delete" variant="destructive" icon="bin"/>
             </div>
           </template>
+        </ListItem>
+      </Theme>
+    `
+  })
+}
+
+export const ListItemAccordion = {
+  args: {
+    title: 'Extra Toppings',
+    description: 'Strawberry, Chocolate, and Cheese',
+    isDisabled: false,
+    isTransparent: false,
+    isDraggable: true
+  },
+  render: (args) => ({
+    components: { Theme, ListItem },
+    setup() {
+      return { args }
+    },
+    template: `
+      <Theme colorMode="light" class="p-10">
+        <ListItem
+         v-bind="args"
+          type="accordion"
+        >
+          <template #content>Content</template>
         </ListItem>
       </Theme>
     `
