@@ -1,10 +1,14 @@
 <script setup lang="ts">
-import { Icon } from '@/orchidui'
+import { Chip, Icon } from '@/orchidui'
 import { ref } from 'vue'
 
 defineProps({
   title: String,
   description: String,
+  chips: {
+    type: Array,
+    default: () => []
+  },
   isDisabled: Boolean,
   isTransparent: Boolean,
   isDraggable: Boolean
@@ -44,6 +48,18 @@ const toggleAccordion = () => {
               <span v-if="title" class="text-base text-oc-text font-medium truncate">
                 {{ title }}
               </span>
+
+              <div v-if="chips.length" class="flex gap-3 shrink-0">
+                <Chip
+                  v-for="(item, i) in chips"
+                  :key="i"
+                  :label="item.label"
+                  :variant="item.variant"
+                  :icon="item.icon"
+                  :icon-tooltip="item.iconTooltip"
+                  class="font-medium shrink-0"
+                />
+              </div>
             </div>
           </div>
 
