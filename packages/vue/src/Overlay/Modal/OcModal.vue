@@ -64,7 +64,13 @@ const props = defineProps({
     validator: (val) => ['default', 'medium', 'small'].includes(val)
   }
 })
-const emit = defineEmits(['update:modelValue', 'confirm', 'cancel', 'click:outside'])
+const emit = defineEmits([
+  'update:modelValue',
+  'confirm',
+  'cancel',
+  'click:outside',
+  'content-scroll'
+])
 
 const closeModal = () => {
   if (props.preventClose) {
@@ -98,8 +104,9 @@ const sizeClasses = computed(() => ({
 }))
 
 const scrollArea = ref()
-const handleScroll = () => {
+const handleScroll = (e) => {
   scrollArea.value?.click()
+  emit('content-scroll', e)
 }
 watch(
   () => props.modelValue,
