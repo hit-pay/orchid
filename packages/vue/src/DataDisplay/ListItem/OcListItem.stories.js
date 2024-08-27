@@ -333,7 +333,12 @@ export const ListItemAccordion = {
     description: 'Strawberry, Chocolate, and Cheese',
     isDisabled: false,
     isTransparent: false,
-    isDraggable: true
+    isDraggable: true,
+    chips: [
+      {
+        label: 'Required'
+      }
+    ]
   },
   render: (args) => ({
     components: { Theme, ListItem },
