@@ -106,7 +106,6 @@ const sizeClasses = computed(() => ({
 const scrollArea = ref()
 const handleScroll = (e) => {
   scrollArea.value?.click()
-  emit('content-scroll', e)
 }
 watch(
   () => props.modelValue,
@@ -168,6 +167,7 @@ onUnmounted(() => {
         ref="scrollArea"
         class="overflow-y-auto"
         :class="[size === 'small' ? 'p-5' : 'p-7', isBorderless ? 'py-0' : '']"
+        @scroll="emit('content-scroll', $event)"
       >
         <slot></slot>
       </div>
