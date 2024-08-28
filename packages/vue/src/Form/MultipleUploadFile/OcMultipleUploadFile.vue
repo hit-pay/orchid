@@ -128,21 +128,10 @@ const onDelete = (index) => {
           />
         </template>
       </OcSimpleMultipleUpload>
-      <template v-else-if="isButtonOnly && !$slots.default">
-        <Button v-bind="buttonUploadProps" @click="inputRef?.click()" />
-
-        <input
-          id="my-file"
-          ref="inputRef"
-          class="hidden"
-          type="file"
-          multiple
-          :accept="accept"
-          @change="onChange"
-        />
-      </template>
-      <div v-else-if="$slots.default" @click="inputRef?.click()">
-        <slot name="default"> </slot>
+      <div v-else-if="isButtonOnly" class="flex" @click="inputRef?.click()">
+        <slot name="button">
+          <Button v-bind="buttonUploadProps" />
+        </slot>
 
         <input
           id="my-file"
