@@ -23,7 +23,7 @@ watch(
   (img) => {
     if (img) {
       nextTick(() => {
-        localImage.value = `${img}?time=${Date.now()}`
+        localImage.value = img.includes('base64') ? img : `${img}?time=${Date.now()}`
       })
     }
   },
