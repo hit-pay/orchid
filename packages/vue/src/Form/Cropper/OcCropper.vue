@@ -23,7 +23,12 @@ watch(
   (img) => {
     if (img) {
       nextTick(() => {
-        localImage.value = `${img}?time=${Date.now()}`
+        try {
+          window.atob(img)
+          localImage.value = img
+        } catch {
+          localImage.value = `${img}?time=${Date.now()}`
+        }
       })
     }
   },
