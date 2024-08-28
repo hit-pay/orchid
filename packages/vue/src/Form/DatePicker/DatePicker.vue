@@ -154,6 +154,7 @@ const parseInputtedDate = (value, index) => {
     props.modelValue?.[index ? 0 : 1] || dayjs().format(props.dateFormat)
 }
 const validateAndEmit = () => {
+  if (!inputtedData.value.length) return
   isDateInvalid.value = false
   if (inputtedData.value.some((d) => !dayjs(d, props.dateFormat).isValid())) {
     isDateInvalid.value = true
@@ -161,6 +162,7 @@ const validateAndEmit = () => {
     return
   }
   emit('update:modelValue', inputtedData.value)
+  inputtedData.value = []
 }
 </script>
 
@@ -219,6 +221,7 @@ const validateAndEmit = () => {
                 'shadow-[0_0_0_2px]': isDropdownOpened && !disabled
               }
             ]"
+            @click="isDropdownOpened ? $event.stopPropagation : null"
           >
             <div class="flex items-center gap-x-3">
               <Icon name="calendar" class="text-oc-text-400" />
