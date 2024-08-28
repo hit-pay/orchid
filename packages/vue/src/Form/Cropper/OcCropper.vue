@@ -24,10 +24,17 @@ watch(
     if (img) {
       nextTick(() => {
         try {
-          window.atob(img)
-          localImage.value = img
+          const url = new URL(img)
+
+          const isLink = url.protocol === 'http:' || url.protocol === 'https:'
+
+          if (isLink) {
+            localImage.value = `${img}?${Date.now()}`
+          } else {
+            localImage.value = img
+          }
         } catch {
-          localImage.value = `${img}?time=${Date.now()}`
+          localImage.value = img
         }
       })
     }
