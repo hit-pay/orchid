@@ -89,6 +89,10 @@ const onDelete = (index) => {
   isUploading.value = false
   onDeleteFile(index)
 }
+
+const triggerInput = () => {
+  inputRef.value?.click()
+}
 </script>
 
 <template>
@@ -128,9 +132,9 @@ const onDelete = (index) => {
           />
         </template>
       </OcSimpleMultipleUpload>
-      <div v-else-if="isButtonOnly" class="flex" @click="inputRef?.click()">
-        <slot name="button">
-          <Button v-bind="buttonUploadProps" />
+      <template v-else-if="isButtonOnly">
+        <slot name="button" :trigger-input="triggerInput">
+          <Button v-bind="buttonUploadProps" @click="triggerInput" />
         </slot>
 
         <input
@@ -142,7 +146,7 @@ const onDelete = (index) => {
           :accept="accept"
           @change="onChange"
         />
-      </div>
+      </template>
       <div
         v-else
         class="relative border rounded p-3 min-w-[30rem] flex flex-col"
