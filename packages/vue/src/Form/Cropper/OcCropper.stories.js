@@ -10,7 +10,8 @@ export const Default = {
     link: '',
     label: '',
     withLink: false,
-    img: '/images/image.jpg'
+    img: '/images/image.jpg',
+    isReplaceImage: true
   },
   render: (args) => ({
     components: { Cropper, Theme },
@@ -30,6 +31,7 @@ export const Default = {
                 :link="args.link"
                 :img="args.img"
                 :max-size="args.maxSize"
+                :is-replace-image="args.isReplaceImage"
                 @change-image="args.image = $event"
                 @update:link="args.link = $event"
             />
