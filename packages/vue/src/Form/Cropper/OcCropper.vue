@@ -8,12 +8,15 @@ const props = defineProps({
   withLink: Boolean,
   link: String,
   img: String,
-  maxSize: [String, Number]
+  maxSize: [String, Number],
+  isReplaceImage: {
+    type: Boolean,
+    default: true
+  }
 })
 const emit = defineEmits(['changeImage', 'update:link'])
 const cropper = ref()
 const fileUploadEl = ref()
-const imageEl = ref()
 
 const localImage = ref('')
 const imageChanged = ref(false)
@@ -75,7 +78,14 @@ const defaultSize = ({ imageSize, visibleArea }) => {
 
 <template>
   <div class="flex flex-col gap-y-5">
-    <input ref="fileUploadEl" accept="image/*" type="file" class="hidden" @change="fileUpload" />
+    <input
+      id="cropper-file-input"
+      ref="fileUploadEl"
+      accept="image/*"
+      type="file"
+      class="hidden"
+      @change="fileUpload"
+    />
 
     <Cropper
       v-if="localImage"
@@ -97,6 +107,7 @@ const defaultSize = ({ imageSize, visibleArea }) => {
         <Button variant="secondary" size="small" left-icon="forward" @click="rotate(90)" />
       </template>
       <Button
+        v-if="isReplaceImage"
         class="absolute right-0"
         variant="secondary"
         size="small"
