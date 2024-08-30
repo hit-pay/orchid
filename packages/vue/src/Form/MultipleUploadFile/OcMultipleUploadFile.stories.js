@@ -1,4 +1,4 @@
-import { Theme } from '@/orchidui'
+import { Theme, Toggle } from '@/orchidui'
 import MultipleUploadFile from './OcMultipleUploadFile.vue'
 import { ref } from 'vue'
 
@@ -49,6 +49,38 @@ export const Default = {
                 :button-upload-props="args.buttonUploadProps"
             />
           </Theme>
+        `
+  })
+}
+
+export const Files = {
+  render: (args) => ({
+    components: { MultipleUploadFile, Theme, Toggle },
+    setup() {
+      const modelValue = ref([])
+      const isDisabled = ref(false)
+      return { modelValue, isDisabled }
+    },
+    template: `
+      <Theme class="min-h-[500px]">
+        {{ modelValue }}
+        
+        <br />
+
+        <Toggle
+            v-model="isDisabled"
+            label="Disable"
+            class="mt-7"
+        />
+
+        <MultipleUploadFile
+            v-model="modelValue"
+            :max-size="10"
+            label="File uploader"
+            class="mt-5"
+            :is-disabled="isDisabled"
+        />
+      </Theme>
         `
   })
 }

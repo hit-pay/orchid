@@ -40,6 +40,7 @@ const props = defineProps({
   },
   shouldTruncateFileName: Boolean,
   isButtonOnly: Boolean,
+  isDisabled: Boolean,
   buttonUploadProps: {
     type: Object,
     default: () => ({
@@ -167,19 +168,24 @@ const onUploadImage = ($event) => {
           </template>
 
           <div
-            v-else
-            class="p-3 flex bg-white items-center gap-x-5 rounded border w-full"
-            :class="isDragover ? 'border-oc-primary border-dashed' : 'border-oc-gray-200'"
+            class="p-3 flex bg-white items-center gap-x-5 rounded border w-full "
+            :class="[
+              isDragover ? 'border-oc-primary border-dashed' : 'border-oc-gray-200',
+              {
+                '!bg-oc-bg-dark': isDisabled,
+              }
+            ]"
             @dragenter="isDragover = true"
             @dragleave="isDragover = false"
             @drop="onDrop"
             @dragover.prevent
           >
             <span class="text-sm flex-1 text-oc-text-400 pointer-events-none">
-              Choose file from your computer or drag here
+              {{ isDisabled ? 'Upload disabled' : 'Choose file from your computer or drag here' }}
             </span>
             <Button
               size="small"
+              :is-disabled="isDisabled"
               :variant="uploadButtonOptions?.variant ?? 'secondary'"
               :left-icon="uploadButtonOptions?.leftIcon ?? 'upload'"
               :label="uploadButtonOptions?.label ?? 'Upload'"
@@ -200,7 +206,10 @@ const onUploadImage = ($event) => {
       <div
         v-else
         class="p-3 rounded border flex gap-x-5 border-oc-gray-200 bg-white items-center"
-        :class="isPreview && 'w-fit'"
+        :class="{
+          'w-fit': isPreview,
+          '!bg-oc-bg-dark': isDisabled,
+        }"
       >
         <div
           v-if="isPreview && currentFile?.progress === 100"
@@ -278,6 +287,7 @@ const onUploadImage = ($event) => {
               </div>
             </div>
             <div
+              v-if="!isDisabled"
               class="w-[36px] cursor-pointer flex text-oc-error items-center justify-center"
               @click="onDeleteFile(0)"
             >
