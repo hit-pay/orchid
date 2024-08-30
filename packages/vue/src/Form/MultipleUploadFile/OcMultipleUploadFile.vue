@@ -37,6 +37,7 @@ const props = defineProps({
     default: () => ({})
   },
   withLink: Boolean,
+  isDisabled: Boolean,
   labelUploadArea: String,
   isButtonOnly: Boolean,
   buttonUploadProps: {
@@ -150,7 +151,12 @@ const triggerInput = () => {
       <div
         v-else
         class="relative border rounded p-3 min-w-[30rem] flex flex-col"
-        :class="isErrorMaxSize || errorMessage ? 'border-oc-error' : 'border-oc-gray-200'"
+        :class="[
+          isErrorMaxSize || errorMessage ? 'border-oc-error' : 'border-oc-gray-200',
+          {
+            'bg-oc-bg-dark': isDisabled
+          }
+        ]"
       >
         <div class="input-file-uploaded flex flex-col gap-y-3">
           <div
@@ -183,6 +189,7 @@ const triggerInput = () => {
             </div>
 
             <Icon
+              v-if="!isDisabled"
               width="12"
               height="12"
               name="bin"
@@ -198,13 +205,15 @@ const triggerInput = () => {
         <label
           tabindex="0"
           for="my-file"
-          class="relative overflow-hidden rounded-sm flex-1 flex flex-col transition-all border-transparent border-dashed hover:border-oc-primary cursor-pointer"
+          class="relative overflow-hidden rounded-sm flex-1 flex flex-col transition-all border-transparent border-dashed hover:border-oc-primary"
           :class="{
-            '!border-oc-primary': isDragover,
-            border: !currentFiles.length
+            '!border-oc-primary': isDragover && !isDisabled,
+            border: !currentFiles.length,
+            'cursor-pointer': !isDisabled
           }"
         >
           <input
+            v-if="!isDisabled"
             id="my-file"
             ref="inputRef"
             class="w-full h-full absolute opacity-0 cursor-pointer"
@@ -218,16 +227,17 @@ const triggerInput = () => {
           />
           <div
             v-if="!currentFiles.length"
-            class="w-full text-oc-text-300 text-sm h -full flex-1 flex flex-col justify-center items-center my-auto min-h-[120px] transition-all duration-300 gap-2"
+            class="w-full text-oc-text-300 text-sm h-full flex-1 flex flex-col justify-center items-center my-auto min-h-[120px] transition-all duration-300 gap-2"
           >
-            <Icon name="upload" class="text-oc-accent-1" />
+            <Icon name="upload" :class="isDisabled ? 'text-oc-accent-1-200' : 'text-oc-accent-1'" />
             <div v-if="labelUploadArea">{{ labelUploadArea }}</div>
+            <div v-else-if="isDisabled">Upload disabled</div>
             <div v-else class="text-center">
               <div>Select documents or drag here</div>
               <div>File max {{ maxSize }}MB</div>
             </div>
           </div>
-          <div v-else class="mt-3 flex items-center justify-center">
+          <div v-else-if="!isDisabled" class="mt-3 flex items-center justify-center">
             <span class="text-oc-accent-1 text-sm">+ Add more</span>
           </div>
         </label>
