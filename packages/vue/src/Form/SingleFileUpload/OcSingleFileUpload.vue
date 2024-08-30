@@ -40,6 +40,7 @@ const props = defineProps({
   },
   shouldTruncateFileName: Boolean,
   isButtonOnly: Boolean,
+  isDisabled: Boolean,
   buttonUploadProps: {
     type: Object,
     default: () => ({
@@ -167,7 +168,7 @@ const onUploadImage = ($event) => {
           </template>
 
           <div
-            v-else
+            v-else-if="!isDisabled"
             class="p-3 flex bg-white items-center gap-x-5 rounded border w-full"
             :class="isDragover ? 'border-oc-primary border-dashed' : 'border-oc-gray-200'"
             @dragenter="isDragover = true"
@@ -278,6 +279,7 @@ const onUploadImage = ($event) => {
               </div>
             </div>
             <div
+              v-if="!isDisabled"
               class="w-[36px] cursor-pointer flex text-oc-error items-center justify-center"
               @click="onDeleteFile(0)"
             >
