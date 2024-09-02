@@ -13,6 +13,7 @@ import {
 } from '@/orchidui'
 import { ref, computed } from 'vue'
 import dayjs from 'dayjs'
+import ColumnEdit from '@/orchidui/Builder/DataTable/ColumnEdit.vue'
 
 const props = defineProps({
   isLoading: Boolean,
@@ -57,6 +58,10 @@ const cursorOption = computed(() => props.options?.cursor)
 
 const tableOptions = computed(() => props.options?.tableOptions)
 
+const editedTableOptions = computed(() => ({
+  ...props.options?.tableOptions,
+  headers: props.options?.tableOptions.headers.filter((h) => isColumnActive(h.key))
+}))
 const filterOptions = computed(() => props.options?.filterOptions)
 
 const hidePerPageDropdown = computed(() => props.options?.hidePerPageDropdown)
@@ -335,6 +340,15 @@ const displayFilterData = computed(() => {
   }
   return []
 })
+const isColumnActive = (headerKey) =>
+  filterData.value?.[filterOptions.value.columnEdit.key]?.active?.find((h) => h.key === headerKey)
+    ?.isActive ?? true
+
+const updateOrder = ({ fixedHeaders, activeHeaders }) => {
+  filterData.value[filterOptions.value.columnEdit.key].fixed = fixedHeaders
+  filterData.value[filterOptions.value.columnEdit.key].active = activeHeaders
+  tableOptions.value.headers = [...fixedHeaders, ...activeHeaders]
+}
 </script>
 <template>
   <div class="flex flex-col gap-9 relative">
@@ -342,7 +356,7 @@ const displayFilterData = computed(() => {
       v-if="tableOptions"
       :selected="selected"
       :row-key="rowKey"
-      :options="tableOptions"
+      :options="editedTableOptions"
       :is-loading="isLoading"
       :loading-rows="perPage"
       :row-class="rowClass"
@@ -421,6 +435,12 @@ const displayFilterData = computed(() => {
                   </FilterForm>
                 </template>
               </Dropdown>
+              <ColumnEdit
+                v-if="filterOptions.columnEdit"
+                :options="filterData.columnEdit"
+                :headers="tableOptions?.headers || []"
+                @update-order="updateOrder"
+              />
             </div>
           </slot>
         </div>
