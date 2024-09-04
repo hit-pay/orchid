@@ -76,11 +76,11 @@ const changeImage = (url) => {
       <Dropdown
         v-model="isDropdownOpen"
         placement="bottom-end"
-        class="absolute top-2 right-2 z-[1010] hidden group-hover:flex"
+        class="absolute top-2 right-2 z-[1010]"
       >
         <Icon
           name="dots-vertical"
-          class="absolute right-0 cursor-pointer bg-black/[.45] rounded-full w-[32px] h-[32px] flex items-center justify-center text-oc-bg-light"
+          class="hidden group-hover:flex absolute right-0 cursor-pointer bg-black/[.45] rounded-full w-[32px] h-[32px] items-center justify-center text-oc-bg-light"
         />
         <template #menu>
           <div class="py-2 flex flex-col">
