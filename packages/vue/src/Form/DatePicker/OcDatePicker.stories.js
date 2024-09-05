@@ -48,7 +48,7 @@ export const Default = {
       const model = ref('')
       const model1 = ref([])
 
-      return { args, checkDisableDate, model, model1 }
+      return { args, checkDisableDate, model, model1, dayjs }
     },
     template: `
           <Theme>
@@ -85,7 +85,7 @@ export const Default = {
                     :disabled-date="checkDisableDate"
                     :hint="args.hint"
                     :min-date="args.minDate"
-                    :max-date="args.maxDate"
+                    :max-date="dayjs().format('YYYY-MM-DD')"
                     :label="args.label"
                     :min-label="args.minLabel"
                     :max-label="args.maxLabel"
