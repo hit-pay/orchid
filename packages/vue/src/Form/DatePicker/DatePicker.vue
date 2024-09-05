@@ -161,11 +161,13 @@ const validateAndEmit = () => {
     inputtedData.value = []
     return
   }
-  inputtedData.value = inputtedData.value.map((date) =>
-    dayjs(date, props.dateFormat).isSameOrBefore(dayjs(props.maxDate))
-      ? date
-      : dayjs(props.maxDate).format(props.dateFormat)
-  )
+  if (props.maxDate) {
+    inputtedData.value = inputtedData.value.map((date) =>
+      dayjs(date, props.dateFormat).isSameOrBefore(dayjs(props.maxDate))
+        ? date
+        : dayjs(props.maxDate).format(props.dateFormat)
+    )
+  }
   emit('update:modelValue', inputtedData.value)
   inputtedData.value = []
 }
