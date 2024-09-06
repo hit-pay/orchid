@@ -41,7 +41,7 @@ defineEmits({
 
 <template>
   <div class="flex flex-col gap-y-5">
-    <div class="flex gap-x-5">
+    <div class="flex gap-x-5 overflow-x-auto">
       <template v-for="tab in isLoading ? 2 : overviewTabs">
         <slot :name="tab.value" :tab="tab">
           <InfoCardButton
