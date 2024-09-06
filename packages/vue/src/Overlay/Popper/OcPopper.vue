@@ -5,9 +5,7 @@ import { onMounted, ref, watch } from 'vue'
 const reference = ref()
 const popper = ref()
 const popperInstance = ref()
-defineExpose({
-  popperInstance
-})
+
 const props = defineProps({
   placement: {
     type: String,
@@ -43,6 +41,7 @@ const props = defineProps({
     default: false
   }
 })
+
 const getPopperOptions = () => ({
   placement: props.placement,
   modifiers: [
@@ -60,6 +59,10 @@ const getPopperOptions = () => ({
   ...(props.popperOptions || [])
 })
 
+const checkElementIsInsidePopper = (targetElement) => {
+  return targetElement && popper.value?.contains(targetElement)
+}
+
 onMounted(() => {
   popperInstance.value = createPopper(reference.value, popper.value, getPopperOptions())
 
@@ -75,6 +78,11 @@ watch(
   },
   { deep: true }
 )
+
+defineExpose({
+  popperInstance,
+  checkElementIsInsidePopper
+})
 </script>
 
 <template>

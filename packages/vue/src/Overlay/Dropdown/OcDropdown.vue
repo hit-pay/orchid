@@ -44,7 +44,15 @@ const toggleDropdown = async (e) => {
   setTimeout(() => popper.value.popperInstance.update(), 0)
   emit('update:modelValue', !props.modelValue)
 }
-const onClickOutside = () => {
+const onClickOutside = (e) => {
+  if (
+    props.isAttachToBody &&
+    !props.preventClickOutside &&
+    popper.value.checkElementIsInsidePopper(e.target)
+  ) {
+    return
+  }
+
   if (props.modelValue && !props.preventClickOutside) emit('update:modelValue', false)
 }
 const parentElement = ref()
