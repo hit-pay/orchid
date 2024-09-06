@@ -37,6 +37,10 @@ const props = defineProps({
   popperClass: {
     type: [String, Array, Object],
     default: ''
+  },
+  isAttachToBody: {
+    type: Boolean,
+    default: false
   }
 })
 const getPopperOptions = () => ({
@@ -78,8 +82,10 @@ watch(
     <div ref="reference" class="w-[inherit] flex">
       <slot />
     </div>
-    <div ref="popper" :class="popperClass" :style="popperStyle" class="z-[1005]">
-      <slot name="popper" />
-    </div>
+    <teleport to="body" :disabled="!isAttachToBody">
+      <div ref="popper" :class="popperClass" :style="popperStyle" class="z-[1005]">
+        <slot name="popper" />
+      </div>
+    </teleport>
   </div>
 </template>

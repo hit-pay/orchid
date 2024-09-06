@@ -394,6 +394,7 @@ const displayFilterData = computed(() => {
                 v-model="isDropdownOpened"
                 :distance="9"
                 placement="bottom-end"
+                is-attach-to-body
               >
                 <Button :is-active="isDropdownOpened" variant="secondary" left-icon="filter" />
 

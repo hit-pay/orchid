@@ -32,7 +32,8 @@ const props = defineProps({
   popperStyle: Object,
   popperClass: [String, Array, Object],
   modelValue: Boolean,
-  preventClickOutside: Boolean
+  preventClickOutside: Boolean,
+  isAttachToBody: Boolean
 })
 const popper = ref()
 const dropdownScroll = ref()
@@ -84,6 +85,7 @@ defineExpose({
       :skidding="skidding"
       :popper-style="popperStyle"
       :popper-options="popperOptions"
+      :is-attach-to-body="isAttachToBody"
     >
       <div class="w-[inherit] flex" @click="toggleDropdown">
         <slot />
