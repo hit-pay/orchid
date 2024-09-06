@@ -31,6 +31,9 @@ const DataTableOptions = {
     search: {
       key: 'keywords'
     },
+    columnEdit: {
+      key: 'columnEdit'
+    },
     form: SampleFilterForm
   },
   tableOptions: {
@@ -43,17 +46,17 @@ const DataTableOptions = {
         key: 'image',
         variant: 'image',
         label: 'Image',
-        class: 'w-1/2 md:w-[5%]'
+        class: 'w-1/2 md:min-w-[5%]'
       },
       {
         key: 'col1',
         label: 'Table Header',
-        class: 'w-1/2 md:w-[20%]'
+        class: 'w-1/2 md:min-w-[20%]'
       },
       {
         key: 'col2',
         label: 'Table Header',
-        class: 'w-1/2 md:w-[10%]'
+        class: 'w-1/2 md:min-w-[10%]'
       },
       {
         key: 'col3',
@@ -64,17 +67,17 @@ const DataTableOptions = {
         description: 'col3Description',
         isCopy: true,
         addDescriptionToCopyClipboard: true,
-        class: 'w-1/2 md:w-[12%]'
+        class: 'w-1/2 md:min-w-[12%]'
       },
       {
         key: 'col4',
         label: 'Table Header',
-        class: 'w-1/2 md:w-[18%]'
+        class: 'w-1/2 md:min-w-[18%]'
       },
       {
         key: 'col5',
         label: 'Table Header',
-        class: 'w-1/2 md:w-[15%]',
+        class: 'w-1/2 md:min-w-[15%]',
         variant: 'chip',
         chipOptions: {
           Label: {
@@ -87,14 +90,14 @@ const DataTableOptions = {
       {
         key: 'col6',
         label: 'Header',
-        class: 'w-1/2 md:w-[10%]'
+        class: 'w-1/2 md:min-w-[10%]'
       },
       {
         key: 'actions',
         label: '',
         headerVariant: 'text',
         variant: 'icon',
-        class: 'w-1/2 md:w-[5%]'
+        class: 'w-1/2 md:min-w-[5%]'
       }
     ],
     fields: [
@@ -218,7 +221,8 @@ const DataTableOptions = {
 const Filter = {
   page: 1,
   per_page: 10,
-  tabs: ''
+  tabs: '',
+  columnEdit: {}
 }
 
 export { DataTableOptions, Filter }
