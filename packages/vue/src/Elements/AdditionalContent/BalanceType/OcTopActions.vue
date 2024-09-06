@@ -27,7 +27,7 @@ const isOpen = ref(false)
   <div class="flex justify-between md:flex-row flex-col gap-y-3 gap-x-4 md:gap-y-0">
     <Skeleton v-if="isLoading" class="h-[20px] w-[322px] rounded-sm" />
     <PaymentMethods v-if="!isLoading && paymentMethods.length" :methods="paymentMethods" />
-
+    <div v-else></div>
     <Skeleton v-if="isLoading" class="h-[20px] w-[168px] rounded-sm" />
     <div v-else class="flex shrink-0 gap-x-3">
       <Dropdown

@@ -37,11 +37,11 @@ defineProps({
             class="flex gap-x-4 items-center text-xl group-hover:text-oc-text"
             :class="isActive ? 'text-oc-text' : 'text-oc-text-400'"
           >
-            <div v-if="countryIso" class="flex justify-center items-center w-[38px] h-[38px] rounded-full bg-oc-gray-100">
-              <div
-                class="fi  !w-[24px] !h-[16px] !rounded-[1px]"
-                :class="`fi-${countryIso}`"
-              />
+            <div
+              v-if="countryIso"
+              class="flex justify-center items-center w-[38px] h-[38px] shrink-0 rounded-full bg-oc-gray-100"
+            >
+              <div class="fi !w-[24px] !h-[16px] !rounded-[1px]" :class="`fi-${countryIso}`" />
             </div>
             {{ content }}
           </span>
