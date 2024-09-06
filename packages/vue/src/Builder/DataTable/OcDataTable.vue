@@ -341,12 +341,12 @@ const displayFilterData = computed(() => {
   return []
 })
 const isColumnActive = (headerKey) =>
-  filterData.value?.[filterOptions.value.columnEdit.key]?.active?.find((h) => h.key === headerKey)
+  filterData.value?.[filterOptions.value?.columnEdit?.key]?.active?.find((h) => h.key === headerKey)
     ?.isActive ?? true
 
 const updateOrder = ({ fixedHeaders, activeHeaders }) => {
-  filterData.value[filterOptions.value.columnEdit.key].fixed = fixedHeaders
-  filterData.value[filterOptions.value.columnEdit.key].active = activeHeaders
+  filterData.value[filterOptions.value?.columnEdit?.key].fixed = fixedHeaders
+  filterData.value[filterOptions.value?.columnEdit?.key].active = activeHeaders
   tableOptions.value.headers = [...fixedHeaders, ...activeHeaders]
 }
 </script>
