@@ -46,9 +46,9 @@ const toggleDropdown = async (e) => {
 }
 const onClickOutside = (e) => {
   if (
-    popper.value.checkElementIsInsidePopper(e.target) &&
     props.isAttachToBody &&
-    !props.preventClickOutside
+    !props.preventClickOutside &&
+    popper.value.checkElementIsInsidePopper(e.target)
   ) {
     return
   }
