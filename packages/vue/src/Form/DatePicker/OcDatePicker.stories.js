@@ -48,7 +48,7 @@ export const Default = {
       const model = ref('')
       const model1 = ref([])
 
-      return { args, checkDisableDate, model, model1 }
+      return { args, checkDisableDate, model, model1, dayjs }
     },
     template: `
           <Theme>
