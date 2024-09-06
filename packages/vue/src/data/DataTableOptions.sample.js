@@ -34,6 +34,7 @@ const DataTableOptions = {
     form: SampleFilterForm
   },
   tableOptions: {
+    isSticky: false,
     isSelectable: true,
     isCursorPointer: true,
     isBorderless: false,
