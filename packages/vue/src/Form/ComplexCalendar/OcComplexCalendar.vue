@@ -57,7 +57,9 @@ const changeModelValue = (value) => {
             dayjs(shortcut.value.start).format('YY-MM-DD') ===
               dayjs(modelValue.start).format('YY-MM-DD') &&
             dayjs(shortcut.value.end).format('YY-MM-DD') ===
-              dayjs(modelValue.end).format('YY-MM-DD')
+              dayjs(modelValue.end).format('YY-MM-DD') &&
+            modelValue.end &&
+            modelValue.start
               ? 'bg-oc-primary-50'
               : 'hover:bg-oc-accent-1-50'
           "
