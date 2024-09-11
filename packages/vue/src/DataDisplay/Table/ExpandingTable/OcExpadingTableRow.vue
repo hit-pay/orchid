@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Icon, ExpandingTableRow, Tooltip, Skeleton } from '@/orchidui'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 defineProps({
   row: Object,
@@ -37,7 +37,10 @@ defineProps({
 const isExpanded = ref(false)
 const maxHeight = ref('0')
 const childrenWrapper = ref()
-
+const itemsCellRef = ref()
+const truncatedHeaders = computed(() =>
+  itemsCellRef.value?.map((el) => el.scrollWidth > el.clientWidth)
+)
 const toggleExpand = () => {
   isExpanded.value = !isExpanded.value
   if (isExpanded.value) {
@@ -91,14 +94,26 @@ const toggleExpand = () => {
     </template>
     <template v-else>
       <div
-        v-for="header in headers"
+        v-for="(header, i) in headers"
         :key="header.key"
+        ref="itemsCellRef"
         class="flex-1 truncate px-4"
         :class="header.itemClasses"
       >
         <Skeleton v-if="isLoading" class="w-full h-5 rounded" />
-        <slot v-else :name="header.key" :data="row[header.key]" :item="row">
-          {{ row[header.key] }}
+        <slot v-else :name="header.key" :data="row?.[header?.key]" :item="row">
+          <Tooltip
+            v-if="truncatedHeaders?.[i]"
+            class="overflow-hidden w-[-webkit-fill-available]"
+            arrow-hidden
+            position="top"
+          >
+            <div class="truncate">{{ row?.[header?.key] }}</div>
+            <template #popper>
+              <div class="py-1 px-2">{{ row?.[header?.key] }}</div>
+            </template>
+          </Tooltip>
+          <template v-else> {{ row?.[header?.key] }}</template>
         </slot>
       </div>
     </template>
