@@ -2,6 +2,7 @@
 import { Dropdown, Button, Icon, Checkbox } from '@/orchidui'
 import { ref, onMounted } from 'vue'
 import { VueDraggableNext } from 'vue-draggable-next'
+import { formatHeadersFromLocalStorage, getFromLocalStorage } from './utils/editColumnsUtils'
 
 const emit = defineEmits(['change-active', 'onMoved', 'update-order'])
 const props = defineProps({
@@ -12,20 +13,25 @@ const props = defineProps({
   headers: {
     type: Array,
     default: () => []
+  },
+  localKey: {
+    type: String,
+    default: ''
   }
 })
 const activeHeaders = ref([])
 const fixedHeaders = ref([])
 const isColumnEditOpened = ref(false)
 
-const updateFilters = () => {
+const updateFilters = (isOnMount = false) => {
   fixedHeaders.value = fixedHeaders.value.map((header) => ({
     ...header,
     isActive: true
   }))
   emit('update-order', {
     fixedHeaders: fixedHeaders.value,
-    activeHeaders: activeHeaders.value
+    activeHeaders: activeHeaders.value,
+    isOnMount
   })
 }
 
@@ -35,22 +41,26 @@ const dragOptions = {
   group: 'headers',
   animation: 500,
   forceFallback: false,
-  move: (evt) => !!evt.draggedContext.futureIndex,
-  'onUpdate:modelValue': updateFilters
+  move: (evt) => (evt.to.dataset.activeHeaders ? true : !!evt.draggedContext.futureIndex),
+  'onUpdate:modelValue': () => updateFilters()
 }
 
 onMounted(() => {
-  fixedHeaders.value = props.headers.slice(0, 1)
-  activeHeaders.value = props.headers.slice(1).map((header) => ({
-    ...header,
-    isActive: true
-  }))
-  updateFilters()
+  const columnEdit = getFromLocalStorage(props.localKey)
+  const { fixed, active } = formatHeadersFromLocalStorage(columnEdit, props.headers, props.localKey)
+  fixedHeaders.value = fixed || props.headers.slice(0, 1)
+  activeHeaders.value =
+    active ||
+    props.headers.slice(1).map((header) => ({
+      ...header,
+      isActive: true
+    }))
+  updateFilters(true)
 })
 </script>
 
 <template>
-  <Dropdown v-model="isColumnEditOpened">
+  <Dropdown v-model="isColumnEditOpened" class="h-[36px]">
     <Button label="Edit Column" left-icon="setting" variant="secondary" />
     <template #menu>
       <div class="p-5 gap-y-4 text-sm flex w-[250px] flex-col">
@@ -79,14 +89,23 @@ onMounted(() => {
         </div>
         <div class="gap-y-2 flex flex-col">
           <span class="text-oc-text-400 font-medium">Active columns</span>
-          <VueDraggableNext key="key" v-model="activeHeaders" v-bind="dragOptions">
+          <VueDraggableNext
+            key="key"
+            v-model="activeHeaders"
+            v-bind="dragOptions"
+            data-active-headers="true"
+          >
             <div
               v-for="activeHeader in activeHeaders"
               :key="activeHeader.key"
               class="flex items-center bg-white justify-between h-[26px]"
             >
               <div class="flex items-center w-full gap-x-3">
-                <Checkbox v-model="activeHeader.isActive" class="!w-fit" />
+                <Checkbox
+                  v-model="activeHeader.isActive"
+                  class="!w-fit"
+                  @update:model-value="updateFilters()"
+                />
                 <div class="truncate w-full max-w-[160px]">{{ activeHeader.label }}</div>
               </div>
               <Icon

@@ -11,9 +11,15 @@ import {
   Button,
   Dropdown
 } from '@/orchidui'
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import dayjs from 'dayjs'
 import ColumnEdit from '@/orchidui/Builder/DataTable/ColumnEdit.vue'
+import {
+  formatHeadersToLocalStorage,
+  setInLocalStorage,
+  getFromLocalStorage,
+  formatHeadersFromLocalStorage
+} from './utils/editColumnsUtils.js'
 
 const props = defineProps({
   isLoading: Boolean,
@@ -344,11 +350,31 @@ const isColumnActive = (headerKey) =>
   filterData.value?.[filterOptions.value?.columnEdit?.key]?.active?.find((h) => h.key === headerKey)
     ?.isActive ?? true
 
-const updateOrder = ({ fixedHeaders, activeHeaders }) => {
+const updateOrder = ({ fixedHeaders, activeHeaders, isOnMount }) => {
   filterData.value[filterOptions.value?.columnEdit?.key].fixed = fixedHeaders
   filterData.value[filterOptions.value?.columnEdit?.key].active = activeHeaders
   tableOptions.value.headers = [...fixedHeaders, ...activeHeaders]
+  if (!isOnMount) {
+    const data = formatHeadersToLocalStorage(fixedHeaders, activeHeaders)
+    setInLocalStorage(filterOptions.value.columnEdit.localStorageKey, data)
+  }
 }
+onMounted(() => {
+  if (filterOptions.value?.columnEdit?.localStorageKey) {
+    const columnEdit = getFromLocalStorage(filterOptions.value.columnEdit.localStorageKey)
+    if (columnEdit) {
+      const { fixed, active } = formatHeadersFromLocalStorage(
+        columnEdit,
+        tableOptions.value.headers,
+        filterOptions.value.columnEdit.localStorageKey
+      )
+
+      filterData.value[filterOptions.value?.columnEdit?.key].fixed = fixed
+      filterData.value[filterOptions.value?.columnEdit?.key].active = active
+      tableOptions.value.headers = [...fixed, ...active]
+    }
+  }
+})
 </script>
 <template>
   <div class="flex flex-col gap-9 relative">
@@ -391,7 +417,7 @@ const updateOrder = ({ fixedHeaders, activeHeaders }) => {
 
           <slot name="filter-options">
             <div
-              v-if="filterOptions?.search || filterOptions?.form"
+              v-if="filterOptions?.search || filterOptions?.form || filterOptions?.columnEdit"
               class="flex gap-3 absolute ml-auto bg-oc-bg-light right-4 max-w-[calc(100%-24px)]"
               :class="
                 !filterOptions ? 'w-full justify-end' : isSearchExpanded ? 'md:w-fit w-full' : ''
@@ -440,6 +466,7 @@ const updateOrder = ({ fixedHeaders, activeHeaders }) => {
                 v-if="filterOptions.columnEdit"
                 :options="filterData.columnEdit"
                 :headers="tableOptions?.headers || []"
+                :local-key="filterOptions.columnEdit.localStorageKey"
                 @update-order="updateOrder"
               />
             </div>
