@@ -81,7 +81,7 @@ onMounted(() => {
                 v-if="i"
                 width="18"
                 height="18"
-                class="text-oc-text-400 drag-el"
+                class="text-oc-text-400 drag-el cursor-move"
                 name="draggable"
               />
             </div>
@@ -112,7 +112,7 @@ onMounted(() => {
                 v-if="activeHeaders.length > 1"
                 width="18"
                 height="18"
-                class="text-oc-text-400 drag-el"
+                class="text-oc-text-400 drag-el cursor-move"
                 name="draggable"
               />
             </div>
