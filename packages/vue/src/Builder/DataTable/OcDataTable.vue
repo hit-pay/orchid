@@ -11,7 +11,7 @@ import {
   Button,
   Dropdown
 } from '@/orchidui'
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import dayjs from 'dayjs'
 import ColumnEdit from '@/orchidui/Builder/DataTable/ColumnEdit.vue'
 
@@ -344,11 +344,28 @@ const isColumnActive = (headerKey) =>
   filterData.value?.[filterOptions.value?.columnEdit?.key]?.active?.find((h) => h.key === headerKey)
     ?.isActive ?? true
 
-const updateOrder = ({ fixedHeaders, activeHeaders }) => {
+const updateOrder = ({ fixedHeaders, activeHeaders, isOnMount }) => {
   filterData.value[filterOptions.value?.columnEdit?.key].fixed = fixedHeaders
   filterData.value[filterOptions.value?.columnEdit?.key].active = activeHeaders
   tableOptions.value.headers = [...fixedHeaders, ...activeHeaders]
+  if (!isOnMount) {
+    localStorage.setItem(
+      filterOptions.value.columnEdit.localStorageKey,
+      JSON.stringify({ fixed: fixedHeaders, active: activeHeaders })
+    )
+  }
 }
+onMounted(() => {
+  if (filterOptions.value?.columnEdit?.localStorageKey) {
+    const columnEdit = localStorage.getItem(filterOptions.value.columnEdit.localStorageKey)
+    if (columnEdit) {
+      const { fixed, active } = JSON.parse(columnEdit)
+      filterData.value[filterOptions.value?.columnEdit?.key].fixed = fixed
+      filterData.value[filterOptions.value?.columnEdit?.key].active = active
+      tableOptions.value.headers = [...fixed, ...active]
+    }
+  }
+})
 </script>
 <template>
   <div class="flex flex-col gap-9 relative">
@@ -391,7 +408,7 @@ const updateOrder = ({ fixedHeaders, activeHeaders }) => {
 
           <slot name="filter-options">
             <div
-              v-if="filterOptions?.search || filterOptions?.form"
+              v-if="filterOptions?.search || filterOptions?.form || filterOptions?.columnEdit"
               class="flex gap-3 absolute ml-auto bg-oc-bg-light right-4 max-w-[calc(100%-24px)]"
               :class="
                 !filterOptions ? 'w-full justify-end' : isSearchExpanded ? 'md:w-fit w-full' : ''
@@ -440,6 +457,7 @@ const updateOrder = ({ fixedHeaders, activeHeaders }) => {
                 v-if="filterOptions.columnEdit"
                 :options="filterData.columnEdit"
                 :headers="tableOptions?.headers || []"
+                :local-key="filterOptions.columnEdit.localStorageKey"
                 @update-order="updateOrder"
               />
             </div>
