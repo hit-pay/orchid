@@ -2,6 +2,7 @@
 import { Dropdown, Button, Icon, Checkbox } from '@/orchidui'
 import { ref, onMounted } from 'vue'
 import { VueDraggableNext } from 'vue-draggable-next'
+import { formatHeadersFromLocalStorage, getFromLocalStorage } from './utils/editColumnsUtils'
 
 const emit = defineEmits(['change-active', 'onMoved', 'update-order'])
 const props = defineProps({
@@ -45,9 +46,8 @@ const dragOptions = {
 }
 
 onMounted(() => {
-  const columnEdit = localStorage.getItem(props.localKey)
-  const { fixed, active } = columnEdit ? JSON.parse(columnEdit) : { fixed: null, active: null }
-
+  const columnEdit = getFromLocalStorage(props.localKey)
+  const { fixed, active } = formatHeadersFromLocalStorage(columnEdit, props.headers, props.localKey)
   fixedHeaders.value = fixed || props.headers.slice(0, 1)
   activeHeaders.value =
     active ||

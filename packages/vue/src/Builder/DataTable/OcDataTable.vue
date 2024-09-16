@@ -14,6 +14,12 @@ import {
 import { ref, computed, onMounted } from 'vue'
 import dayjs from 'dayjs'
 import ColumnEdit from '@/orchidui/Builder/DataTable/ColumnEdit.vue'
+import {
+  formatHeadersToLocalStorage,
+  setInLocalStorage,
+  getFromLocalStorage,
+  formatHeadersFromLocalStorage
+} from './utils/editColumnsUtils.js'
 
 const props = defineProps({
   isLoading: Boolean,
@@ -349,17 +355,20 @@ const updateOrder = ({ fixedHeaders, activeHeaders, isOnMount }) => {
   filterData.value[filterOptions.value?.columnEdit?.key].active = activeHeaders
   tableOptions.value.headers = [...fixedHeaders, ...activeHeaders]
   if (!isOnMount) {
-    localStorage.setItem(
-      filterOptions.value.columnEdit.localStorageKey,
-      JSON.stringify({ fixed: fixedHeaders, active: activeHeaders })
-    )
+    const data = formatHeadersToLocalStorage(fixedHeaders, activeHeaders)
+    setInLocalStorage(filterOptions.value.columnEdit.localStorageKey, data)
   }
 }
 onMounted(() => {
   if (filterOptions.value?.columnEdit?.localStorageKey) {
-    const columnEdit = localStorage.getItem(filterOptions.value.columnEdit.localStorageKey)
+    const columnEdit = getFromLocalStorage(filterOptions.value.columnEdit.localStorageKey)
     if (columnEdit) {
-      const { fixed, active } = JSON.parse(columnEdit)
+      const { fixed, active } = formatHeadersFromLocalStorage(
+        columnEdit,
+        tableOptions.value.headers,
+        filterOptions.value.columnEdit.localStorageKey
+      )
+
       filterData.value[filterOptions.value?.columnEdit?.key].fixed = fixed
       filterData.value[filterOptions.value?.columnEdit?.key].active = active
       tableOptions.value.headers = [...fixed, ...active]
