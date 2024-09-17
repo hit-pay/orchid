@@ -95,27 +95,28 @@ onMounted(() => {
             v-bind="dragOptions"
             data-active-headers="true"
           >
-            <div
-              v-for="activeHeader in activeHeaders"
-              :key="activeHeader.key"
-              class="flex items-center bg-white justify-between h-[26px]"
-            >
-              <div class="flex items-center w-full gap-x-3">
-                <Checkbox
-                  v-model="activeHeader.isActive"
-                  class="!w-fit"
-                  @update:model-value="updateFilters()"
+            <template v-for="activeHeader in activeHeaders" :key="activeHeader.key">
+              <div
+                v-if="activeHeader.key !== 'actions'"
+                class="flex items-center bg-white justify-between h-[26px]"
+              >
+                <div class="flex items-center w-full gap-x-3">
+                  <Checkbox
+                    v-model="activeHeader.isActive"
+                    class="!w-fit"
+                    @update:model-value="updateFilters()"
+                  />
+                  <div class="truncate w-full max-w-[160px]">{{ activeHeader.label }}</div>
+                </div>
+                <Icon
+                  v-if="activeHeaders.length > 1"
+                  width="18"
+                  height="18"
+                  class="text-oc-text-400 drag-el cursor-move"
+                  name="draggable"
                 />
-                <div class="truncate w-full max-w-[160px]">{{ activeHeader.label }}</div>
               </div>
-              <Icon
-                v-if="activeHeaders.length > 1"
-                width="18"
-                height="18"
-                class="text-oc-text-400 drag-el cursor-move"
-                name="draggable"
-              />
-            </div>
+            </template>
           </VueDraggableNext>
         </div>
       </div>
