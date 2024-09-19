@@ -32,7 +32,8 @@ const DataTableOptions = {
       key: 'keywords'
     },
     columnEdit: {
-      key: 'columnEdit'
+      key: 'columnEdit',
+      localStorageKey: `test-local-storage-table`
     },
     form: SampleFilterForm
   },
@@ -222,7 +223,14 @@ const Filter = {
   page: 1,
   per_page: 10,
   tabs: '',
-  columnEdit: {}
+  columnEdit: {
+    active: [
+      {
+        key: 'col1',
+        isActive: false
+      }
+    ]
+  }
 }
 
 export { DataTableOptions, Filter }
