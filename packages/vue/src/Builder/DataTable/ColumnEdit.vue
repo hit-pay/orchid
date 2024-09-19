@@ -53,7 +53,7 @@ onMounted(() => {
     active ||
     props.headers.slice(1).map((header) => ({
       ...header,
-      isActive: true
+      isActive: props.options?.active?.find((h) => h.key === header.key)?.isActive ?? true
     }))
   updateFilters(true)
 })
