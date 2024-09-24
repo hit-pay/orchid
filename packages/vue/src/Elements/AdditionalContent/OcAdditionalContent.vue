@@ -35,7 +35,8 @@ const props = defineProps({
   },
   dropdownItems: { type: Array, default: () => [] },
   paymentMethods: { type: Array, default: () => [] },
-  additionalStyling: { type: String, default: '' }
+  additionalStyling: { type: String, default: '' },
+  href: { type: String, default: '' }
 })
 
 defineEmits({
@@ -70,7 +71,7 @@ const copyLink = async () => {
       <template #description>
         <div class="flex items-center gap-x-2 max-w-full">
           <a
-            :href="`${mainLink}${userId}`"
+            :href="href || `${mainLink}${userId}`"
             target="_blank"
             class="text-oc-text-400 flex items-center overflow-hidden cursor-pointer"
           >
