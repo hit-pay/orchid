@@ -60,7 +60,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <Dropdown v-model="isColumnEditOpened" class="h-[36px]">
+  <Dropdown v-model="isColumnEditOpened" class="h-[36px]" is-attach-to-body>
     <Button label="Edit Column" left-icon="setting" variant="secondary" />
     <template #menu>
       <div class="p-5 gap-y-4 text-sm flex w-[250px] flex-col">
