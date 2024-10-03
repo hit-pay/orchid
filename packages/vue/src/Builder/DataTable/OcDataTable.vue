@@ -11,7 +11,7 @@ import {
   Button,
   Dropdown
 } from '@/orchidui'
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import dayjs from 'dayjs'
 import ColumnEdit from '@/orchidui/Builder/DataTable/ColumnEdit.vue'
 import {
@@ -62,11 +62,11 @@ const paginationOption = computed(() => props.options?.pagination)
 
 const cursorOption = computed(() => props.options?.cursor)
 
-const tableOptions = computed(() => props.options?.tableOptions)
+const tableOptions = ref()
 
 const editedTableOptions = computed(() => ({
-  ...props.options?.tableOptions,
-  headers: props.options?.tableOptions.headers.filter((h) => isColumnActive(h.key))
+  ...tableOptions.value,
+  headers: tableOptions.value?.headers.filter((h) => isColumnActive(h.key))
 }))
 const filterOptions = computed(() => props.options?.filterOptions)
 
@@ -359,7 +359,7 @@ const updateOrder = ({ fixedHeaders, activeHeaders, isOnMount }) => {
     setInLocalStorage(filterOptions.value.columnEdit.localStorageKey, data)
   }
 }
-onMounted(() => {
+const setOrderedHeaders = () => {
   if (filterOptions.value?.columnEdit?.localStorageKey) {
     const columnEdit = getFromLocalStorage(filterOptions.value.columnEdit.localStorageKey)
     if (columnEdit) {
@@ -374,6 +374,13 @@ onMounted(() => {
       tableOptions.value.headers = [...fixed, ...active]
     }
   }
+}
+
+onMounted(() => {
+  tableOptions.value = props.options?.tableOptions
+  
+    setOrderedHeaders()
+  
 })
 </script>
 <template>
