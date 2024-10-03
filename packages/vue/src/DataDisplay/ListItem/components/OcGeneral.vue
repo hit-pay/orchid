@@ -57,6 +57,7 @@ const toggleDropdown = () => {
                 :variant="item.variant"
                 :icon="item.icon"
                 :icon-tooltip="item.iconTooltip"
+                :class="item.class"
                 class="font-medium shrink-0"
               />
             </div>
