@@ -177,9 +177,9 @@ const isPasswordInput = computed(() => props.inputType === 'password')
             v-bind="inputAttrs"
             :type="isPasswordInput && isPasswordVisible ? 'text' : inputType"
             @focus="
-              () => {
+              (e) => {
                 isFocused = true
-                $emit('focus')
+                $emit('focus', e)
               }
             "
             @blur="
