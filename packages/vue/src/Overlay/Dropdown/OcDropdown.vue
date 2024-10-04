@@ -41,7 +41,7 @@ const toggleDropdown = async (e) => {
   if (!e?.target) return
   if (props.isDisabled) return
   // Need to add a timeout because the popup position cannot be determined while the element is display:none (v-show), which is required for the appearance animation
-  setTimeout(() => popper.value.popperInstance.update(), 0)
+  setTimeout(() => popper.value?.popperInstance?.update(), 0)
   emit('update:modelValue', !props.modelValue)
 }
 const onClickOutside = (e) => {

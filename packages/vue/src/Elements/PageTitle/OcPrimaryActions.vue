@@ -62,6 +62,7 @@ const copiedButtonTooltipText = computed(
           v-else
           class="p-2 cursor-pointer rounded-sm hover:border-oc-accent-1-50-tr active:text-oc-text-400 hover:text-oc-text hover:bg-oc-accent-1-50-tr"
           :name="item.icon"
+          :class="item.class ?? ''"
           @click="item.onClick"
         />
 
