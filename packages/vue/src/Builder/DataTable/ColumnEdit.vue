@@ -53,14 +53,14 @@ onMounted(() => {
     active ||
     props.headers.slice(1).map((header) => ({
       ...header,
-      isActive: true
+      isActive: props.options?.active?.find((h) => h.key === header.key)?.isActive ?? true
     }))
   updateFilters(true)
 })
 </script>
 
 <template>
-  <Dropdown v-model="isColumnEditOpened" class="h-[36px]">
+  <Dropdown v-model="isColumnEditOpened" class="h-[36px]" is-attach-to-body>
     <Button label="Edit Column" left-icon="setting" variant="secondary" />
     <template #menu>
       <div class="p-5 gap-y-4 text-sm flex w-[250px] flex-col">
@@ -95,27 +95,28 @@ onMounted(() => {
             v-bind="dragOptions"
             data-active-headers="true"
           >
-            <div
-              v-for="activeHeader in activeHeaders"
-              :key="activeHeader.key"
-              class="flex items-center bg-white justify-between h-[26px]"
-            >
-              <div class="flex items-center w-full gap-x-3">
-                <Checkbox
-                  v-model="activeHeader.isActive"
-                  class="!w-fit"
-                  @update:model-value="updateFilters()"
+            <template v-for="activeHeader in activeHeaders" :key="activeHeader.key">
+              <div
+                v-if="activeHeader.key !== 'actions'"
+                class="flex items-center bg-white justify-between h-[26px]"
+              >
+                <div class="flex items-center w-full gap-x-3">
+                  <Checkbox
+                    v-model="activeHeader.isActive"
+                    class="!w-fit"
+                    @update:model-value="updateFilters()"
+                  />
+                  <div class="truncate w-full max-w-[160px]">{{ activeHeader.label }}</div>
+                </div>
+                <Icon
+                  v-if="activeHeaders.length > 1"
+                  width="18"
+                  height="18"
+                  class="text-oc-text-400 drag-el cursor-move"
+                  name="draggable"
                 />
-                <div class="truncate w-full max-w-[160px]">{{ activeHeader.label }}</div>
               </div>
-              <Icon
-                v-if="activeHeaders.length > 1"
-                width="18"
-                height="18"
-                class="text-oc-text-400 drag-el cursor-move"
-                name="draggable"
-              />
-            </div>
+            </template>
           </VueDraggableNext>
         </div>
       </div>
