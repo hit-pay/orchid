@@ -284,6 +284,7 @@ export const ShowIfLogic = {
           type: 'Select',
           props: {
             label: 'Select Columns',
+            class: 'w-full lg:w-1/3',
             options: [
               {
                 value: '1',
@@ -300,6 +301,23 @@ export const ShowIfLogic = {
             ],
             hint: 'Learn how to make featured products here.'
           }
+        },
+        {
+          name: 'Content2',
+          type: 'Children',
+          show_if: 'columns',
+          show_if_min: '2',
+          label: 'Content Column 2',
+          children: [
+            {
+              name: 'title_2',
+              type: 'Input',
+              props: {
+                label: 'Title',
+                placeholder: 'Title'
+              }
+            }
+          ]
         },
         {
           name: 'input_column_1',
@@ -356,6 +374,7 @@ export const ShowIfLogic = {
                 :json-form="JsonForm"
                 @onUpdate="onUpdateForm"
             >
+             <template #Children="{form}">{{form}}</template>
             </FormBuilder>
           </Theme>
         `
