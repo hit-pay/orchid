@@ -158,6 +158,28 @@ export const Default = {
             }
           ]
         }
+      },
+      {
+        name: 'aligment',
+        type: 'SelectOptions',
+        props: {
+          label: 'Icon Option Label',
+          optionType: 'icon',
+          options: [
+            {
+              value: 'left',
+              icon_name: 'text-editor/left'
+            },
+            {
+              value: 'center',
+              icon_name: 'text-editor/center'
+            },
+            {
+              value: 'right',
+              icon_name: 'text-editor/right'
+            }
+          ]
+        }
       }
     ]
   },

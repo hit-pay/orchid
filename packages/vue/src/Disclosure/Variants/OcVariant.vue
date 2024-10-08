@@ -49,12 +49,10 @@ defineProps({
         :class="isDisabled ? 'text-oc-text-200' : isActive ? '' : 'text-oc-text-400'"
         v-bind="iconOptions"
       />
-      <span :class="isDisabled ? 'text-oc-text-300' : isActive ? 'font-medium' : ''">{{
+      <span v-if="label" :class="isDisabled ? 'text-oc-text-300' : isActive ? 'font-medium' : ''">{{
         label
       }}</span>
     </div>
     <slot :name="`${value}-description`" />
   </div>
 </template>
-
-<style scoped lang="scss"></style>
