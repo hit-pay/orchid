@@ -64,8 +64,8 @@ const cursorOption = computed(() => props.options?.cursor)
 
 const tableOptions = computed(() => props.options?.tableOptions)
 const editedTableOptions = computed(() => ({
-  ...props.options?.tableOptions,
-  headers: props.options?.tableOptions.headers.filter((h) => isColumnActive(h.key))
+  ...tableOptions.value,
+  headers: tableOptions.value?.headers.filter((h) => isColumnActive(h.key))
 }))
 const filterOptions = computed(() => props.options?.filterOptions)
 
@@ -376,10 +376,7 @@ const setOrderedHeaders = () => {
 }
 
 onMounted(() => {
-  tableOptions.value = props.options?.tableOptions
-  
-    setOrderedHeaders()
-  
+  setOrderedHeaders()
 })
 </script>
 <template>
