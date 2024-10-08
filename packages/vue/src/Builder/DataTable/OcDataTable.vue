@@ -61,11 +61,12 @@ const emit = defineEmits({
 const paginationOption = computed(() => props.options?.pagination)
 
 const cursorOption = computed(() => props.options?.cursor)
+const modifiedTableHeaders = ref()
 
-const tableOptions = computed(() => props.options?.tableOptions)
+const tableOptions = computed(() =>  props.options?.tableOptions)
 const editedTableOptions = computed(() => ({
   ...tableOptions.value,
-  headers: tableOptions.value?.headers.filter((h) => isColumnActive(h.key))
+  headers: modifiedTableHeaders.value ? modifiedTableHeaders.value.filter((h) => isColumnActive(h.key)) : tableOptions.value?.headers.filter((h) => isColumnActive(h.key))
 }))
 const filterOptions = computed(() => props.options?.filterOptions)
 
@@ -352,7 +353,7 @@ const isColumnActive = (headerKey) =>
 const updateOrder = ({ fixedHeaders, activeHeaders, isOnMount }) => {
   filterData.value[filterOptions.value?.columnEdit?.key].fixed = fixedHeaders
   filterData.value[filterOptions.value?.columnEdit?.key].active = activeHeaders
-  tableOptions.value.headers = [...fixedHeaders, ...activeHeaders]
+  modifiedTableHeaders.value = [...fixedHeaders, ...activeHeaders]
   if (!isOnMount) {
     const data = formatHeadersToLocalStorage(fixedHeaders, activeHeaders)
     setInLocalStorage(filterOptions.value.columnEdit.localStorageKey, data)
@@ -370,7 +371,7 @@ const setOrderedHeaders = () => {
 
       filterData.value[filterOptions.value?.columnEdit?.key].fixed = fixed
       filterData.value[filterOptions.value?.columnEdit?.key].active = active
-      tableOptions.value.headers = [...fixed, ...active]
+      modifiedTableHeaders.value = [...fixed, ...active]
     }
   }
 }
