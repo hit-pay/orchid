@@ -284,6 +284,7 @@ export const ShowIfLogic = {
           type: 'Select',
           props: {
             label: 'Select Columns',
+            class: 'w-full lg:w-1/3',
             options: [
               {
                 value: '1',
