@@ -303,6 +303,23 @@ export const ShowIfLogic = {
           }
         },
         {
+          name: 'Content2',
+          type: 'Children',
+          show_if: 'columns',
+          show_if_min: '2',
+          label: 'Content Column 2',
+          children: [
+            {
+              name: 'title_2',
+              type: 'Input',
+              props: {
+                label: 'Title',
+                placeholder: 'Title'
+              }
+            }
+          ]
+        },
+        {
           name: 'input_column_1',
           type: 'Input',
           show_if: 'column',
