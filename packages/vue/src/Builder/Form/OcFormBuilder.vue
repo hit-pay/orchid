@@ -266,7 +266,7 @@ onMounted(() => {
       :key="getFormKey(form.name)"
       :style="grid ? gridArea(form.name) : ''"
       :class="[
-        !form.type !== 'Children'
+        form.type !== 'Children'
           ? formClass[typeof form.name === 'object' ? getFirstName(form.name) : form.name]
           : '',
         form.class
