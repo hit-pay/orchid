@@ -62,11 +62,10 @@ const paginationOption = computed(() => props.options?.pagination)
 
 const cursorOption = computed(() => props.options?.cursor)
 
-const tableOptions = ref()
-
+const tableOptions = computed(() => props.options?.tableOptions)
 const editedTableOptions = computed(() => ({
-  ...tableOptions.value,
-  headers: tableOptions.value?.headers.filter((h) => isColumnActive(h.key))
+  ...props.options?.tableOptions,
+  headers: props.options?.tableOptions.headers.filter((h) => isColumnActive(h.key))
 }))
 const filterOptions = computed(() => props.options?.filterOptions)
 
