@@ -278,6 +278,58 @@ export const ShowIfLogic = {
             maxLimit: 100,
             type: 'default'
           }
+        },
+        {
+          name: 'column',
+          type: 'Select',
+          props: {
+            label: 'Select Columns',
+            options: [
+              {
+                value: '1',
+                label: '1 Column'
+              },
+              {
+                value: '2',
+                label: '2 Column'
+              },
+              {
+                value: '3',
+                label: '3 Column'
+              }
+            ],
+            hint: 'Learn how to make featured products here.'
+          }
+        },
+        {
+          name: 'input_column_1',
+          type: 'Input',
+          show_if: 'column',
+          show_if_min: '1',
+          props: {
+            label: 'This will show if column > 1',
+            placeholder: 'placeholder'
+          }
+        },
+        {
+          name: 'input_column_2',
+          type: 'Input',
+          show_if: 'column',
+          show_if_min: '2',
+          props: {
+            label: 'This will show if column > 2',
+            placeholder: 'placeholder'
+          }
+        },
+        {
+          name: 'input_column_3',
+          type: 'Input',
+          show_if: 'column',
+          show_if_min: '3',
+          props: {
+            label: 'This will show if column > 3',
+            placeholder: 'placeholder'
+          }
         }
       ]
       return {

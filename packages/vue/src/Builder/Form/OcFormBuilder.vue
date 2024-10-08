@@ -192,6 +192,14 @@ const setFormClass = (form) => {
         if (form.show_if_not === modelValue.value[form.show_if]) {
           formClassName = formClassName + ' hidden'
         }
+      } else if (form.show_if_min !== undefined) {
+        let minValue = isNaN(parseInt(modelValue.value[form.show_if]))
+          ? 1
+          : parseInt(modelValue.value[form.show_if])
+
+        if (minValue < parseInt(form.show_if_min)) {
+          formClassName = formClassName + ' hidden'
+        }
       }
     } else if (form.show_if_preview) {
       if (form.show_if_preview_only !== undefined) {
