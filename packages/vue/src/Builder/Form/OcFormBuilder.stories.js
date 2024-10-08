@@ -374,6 +374,7 @@ export const ShowIfLogic = {
                 :json-form="JsonForm"
                 @onUpdate="onUpdateForm"
             >
+             <template #Children="{form}">{{form}}</template>
             </FormBuilder>
           </Theme>
         `
