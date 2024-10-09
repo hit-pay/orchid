@@ -45,9 +45,11 @@ const toggleDropdown = () => {
       <div class="flex flex-col flex-1 gap-y-3">
         <div class="flex items-center justify-between">
           <div class="flex text-sm text-oc-text-400 items-center gap-x-3 overflow-hidden">
-            <span v-if="title" class="text-base text-oc-text font-medium truncate">
-              {{ title }}
-            </span>
+            <slot name="title">
+              <span v-if="title" class="text-base text-oc-text font-medium truncate">
+                {{ title }}
+              </span>
+            </slot>
 
             <div v-if="chips.length" class="flex gap-3 shrink-0">
               <Chip
