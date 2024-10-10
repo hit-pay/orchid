@@ -248,6 +248,10 @@ const onUpdateDropdown = () => {
 }
 
 const loadMore = (e) => {
+  if (props.isLoading) {
+    return
+  }
+
   const scrollDifference = e.target?.scrollHeight - Math.round(e.target?.scrollTop)
 
   if (scrollDifference <= e.target?.clientHeight) {
