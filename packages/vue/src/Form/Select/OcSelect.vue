@@ -1,5 +1,5 @@
 <script setup>
-import { BaseInput, Input, Option, Icon, Chip, Button, Dropdown } from '@/orchidui'
+import { BaseInput, Input, Option, Icon, Chip, Button, Dropdown, Skeleton } from '@/orchidui'
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
 
 const props = defineProps({
@@ -58,7 +58,8 @@ const props = defineProps({
   },
   isInlineSearch: Boolean,
   isClearable: Boolean,
-  searchKeywords: String
+  searchKeywords: String,
+  isLoading: Boolean
 })
 
 const emit = defineEmits({
@@ -69,6 +70,7 @@ const emit = defineEmits({
   close: [],
   toggle: [],
   cleared: [],
+  loadMore: []
 })
 
 const query = ref(props.searchKeywords ?? '')
@@ -245,6 +247,18 @@ const onUpdateDropdown = () => {
   }, 10)
 }
 
+const loadMore = (e) => {
+  if (props.isLoading) {
+    return
+  }
+
+  const scrollDifference = e.target?.scrollHeight - Math.round(e.target?.scrollTop)
+
+  if (scrollDifference <= e.target?.clientHeight) {
+    emit('loadMore')
+  }
+}
+
 defineExpose({
   dropdownRef
 })
@@ -267,7 +281,7 @@ defineExpose({
       v-model="isDropdownOpened"
       class="w-full bg-white"
       :class="{
-        '!bg-transparent': isTransparent,
+        '!bg-transparent': isTransparent
       }"
       :distance="4"
       popper-class="w-full"
@@ -276,6 +290,7 @@ defineExpose({
       :popper-options="popperOptions"
       :is-disabled="isDisabled || isReadonly"
       @update:model-value="onUpdateDropdown"
+      @scroll="loadMore"
     >
       <div
         class="border min-h-[36px] w-full px-3 flex justify-between items-center cursor-pointer gap-x-3 rounded"
@@ -405,6 +420,12 @@ defineExpose({
               />
             </slot>
             <slot name="infinite-scrolling"></slot>
+
+            <Skeleton
+              v-if="isLoading"
+              class="h-[20px] rounded-sm"
+              :class="{ 'mt-2': !options.length && isFilterable }"
+            />
           </div>
 
           <Button

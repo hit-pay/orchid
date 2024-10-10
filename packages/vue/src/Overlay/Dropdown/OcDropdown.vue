@@ -4,7 +4,8 @@ import { clickOutside as vClickOutside } from '../../directives/clickOutside.js'
 import { ref, watch } from 'vue' // Import the directive
 
 const emit = defineEmits({
-  'update:modelValue': []
+  'update:modelValue': [],
+  scroll: []
 })
 
 const props = defineProps({
@@ -108,6 +109,7 @@ defineExpose({
             :style="{
               maxHeight: (maxMenuHeight || maxPopperHeight) - 68 + 'px'
             }"
+            @scroll="$emit('scroll', $event)"
           >
             <slot name="menu" :is-popover-open="modelValue" />
           </div>
