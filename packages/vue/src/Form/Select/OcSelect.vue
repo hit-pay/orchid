@@ -1,6 +1,6 @@
 <script setup>
 import { BaseInput, Input, Option, Icon, Chip, Button, Dropdown, Skeleton } from '@/orchidui'
-import { computed, nextTick, onMounted, ref, watch } from 'vue'
+import { computed, nextTick, ref, watch } from 'vue'
 
 const props = defineProps({
   label: String,
@@ -279,7 +279,7 @@ defineExpose({
     <Dropdown
       ref="dropdownRef"
       v-model="isDropdownOpened"
-      class="w-full bg-white"
+      class="w-full"
       :class="{
         '!bg-transparent': isTransparent
       }"
@@ -293,7 +293,7 @@ defineExpose({
       @scroll="loadMore"
     >
       <div
-        class="border min-h-[36px] w-full px-3 flex justify-between items-center cursor-pointer gap-x-3 rounded"
+        class="border min-h-[36px] w-full px-3 flex justify-between items-center bg-white cursor-pointer gap-x-3 rounded"
         :class="{
           'border-oc-error': errorMessage && !isDisabled,
           'pointer-events-none bg-oc-bg-dark': isDisabled,
