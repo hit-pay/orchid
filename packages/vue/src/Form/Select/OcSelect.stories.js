@@ -148,6 +148,7 @@ export const Default = {
                   :is-inline-search="args.isInlineSearch"
                   @cleared="selectedOption = undefined"
                   @on-search-keywords="(query) => console.log(query)"
+                  @load-more="() => console.log('load-more')"
               />
             </div>
           </Theme>
@@ -220,6 +221,7 @@ export const OcGroupOptions = {
                 is-filterable
                 is-add-new
                 placeholder="Placeholder"
+                @load-more="() => console.log('load-more')"
             >
               <template #default="{fOptions}">
                 <GroupOptions v-for="group in fOptions" :label="group.label">
@@ -337,6 +339,7 @@ export const Multiple = {
                 is-select-all
                 multiple
                 placeholder="Placeholder"
+                @load-more="() => console.log('load-more')"
             />
 
             <Select
