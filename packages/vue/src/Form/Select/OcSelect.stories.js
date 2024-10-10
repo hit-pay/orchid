@@ -19,6 +19,7 @@ export const Default = {
     placeholder: 'Placeholder',
     isInlineLabel: false,
     errorMessage: '',
+    isLoading: false,
     options: [
       {
         label: 'Option 1',
@@ -146,6 +147,7 @@ export const Default = {
                   :is-clearable="args.isClearable"
                   :is-transparent="args.isTransparent"
                   :is-inline-search="args.isInlineSearch"
+                  :is-loading="args.isLoading"
                   @cleared="selectedOption = undefined"
                   @on-search-keywords="(query) => console.log(query)"
                   @load-more="() => console.log('load-more')"

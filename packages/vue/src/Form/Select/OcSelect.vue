@@ -1,5 +1,5 @@
 <script setup>
-import { BaseInput, Input, Option, Icon, Chip, Button, Dropdown } from '@/orchidui'
+import { BaseInput, Input, Option, Icon, Chip, Button, Dropdown, Skeleton } from '@/orchidui'
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
 
 const props = defineProps({
@@ -58,7 +58,8 @@ const props = defineProps({
   },
   isInlineSearch: Boolean,
   isClearable: Boolean,
-  searchKeywords: String
+  searchKeywords: String,
+  isLoading: Boolean
 })
 
 const emit = defineEmits({
@@ -415,6 +416,12 @@ defineExpose({
               />
             </slot>
             <slot name="infinite-scrolling"></slot>
+
+            <Skeleton
+              v-if="isLoading"
+              class="h-[20px] rounded-sm"
+              :class="{ 'mt-2': !options.length && isFilterable }"
+            />
           </div>
 
           <Button
