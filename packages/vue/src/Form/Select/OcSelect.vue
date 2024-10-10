@@ -330,7 +330,6 @@ defineExpose({
         <template v-if="isInlineSearch && isFilterable && !localValueOption">
           <Input
             v-model="query"
-            class="sticky top-3 z-10"
             placeholder="Search"
             input-class="!border-none !shadow-none"
             :is-readonly="!isDropdownOpened"
@@ -372,16 +371,16 @@ defineExpose({
       </div>
 
       <template #menu>
-        <div ref="selectListRef" class="p-3 flex flex-col gap-y-2">
-          <Input
+        <div ref="selectListRef" class=" flex flex-col gap-y-2">
+          <div
             v-if="
               (isFilterable && !isInlineSearch) ||
               (isFilterable && isInlineSearch && localValueOption)
-            "
+            " class="sticky px-3 pt-3 top-0 z-10 bg-white">
+          <Input
             ref="searchInputRef"
             v-model="query"
             icon="search"
-            class="sticky top-3 z-10"
             placeholder="Search"
             @update:model-value="$emit('onSearchKeywords', query)"
           >
@@ -389,8 +388,9 @@ defineExpose({
               <Icon class="w-5 h-5 text-oc-text-400" name="search" />
             </template>
           </Input>
+        </div>
 
-          <div class="flex flex-col gap-y-2">
+          <div class="flex px-3 pb-3 flex-col gap-y-2">
             <Option
               v-if="isCheckboxes && isSelectAll && filterableOptions.length && multiple"
               :is-selected="isSelectedAll"
