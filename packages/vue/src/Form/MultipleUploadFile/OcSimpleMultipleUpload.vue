@@ -3,6 +3,7 @@ import { Dropdown, Icon, ConfirmationModal } from '@/orchidui'
 import { ref, computed } from 'vue'
 import { Draggable } from '@/orchidui/Draggable.js'
 import { ModalCropper } from '@/orchidui/Cropper.js'
+import { MediaManager } from '../MediaManager/OcMediaManager.js'
 
 const props = defineProps({
   accept: {
@@ -51,6 +52,7 @@ const onDeleteFile = (index) => {
 }
 
 const resetFile = ref(false)
+const show = ref(false)
 
 const confirmDeleteFile = () => {
   const deletedImage = props.uploadedImages.find((_, i) => i === deleteIndex.value)
@@ -107,20 +109,20 @@ const showAddBtn = computed(
 
 <template>
   <div class="relative min-h-[100px]">
-    <label v-if="showAddBtn" class="absolute">
+    <label v-if="showAddBtn" class="absolute" @click="show = true">
       <div
         class="w-[100px] hover:bg-oc-primary-50 cursor-pointer bg-oc-accent-1-50 text-oc-accent-1 rounded aspect-square flex items-center justify-center"
       >
         <Icon name="plus" />
       </div>
-      <input
-        v-if="!resetFile"
-        class="hidden"
-        type="file"
-        :accept="accept || 'image/png, image/jpeg'"
-        :multiple="props.maxImages !== 1"
-        @change="onChange"
-      />
+      <!--      <input-->
+      <!--        v-if="!resetFile"-->
+      <!--        class="hidden"-->
+      <!--        type="file"-->
+      <!--        :accept="accept || 'image/png, image/jpeg'"-->
+      <!--        :multiple="props.maxImages !== 1"-->
+      <!--        @change="onChange"-->
+      <!--      />-->
     </label>
     <Draggable
       :key="uploadedImages.length"
@@ -229,6 +231,17 @@ const showAddBtn = computed(
       v-model="deleteConfirmationModal"
       description="Do you want to delete this image ?"
       @confirm="confirmDeleteFile"
+    />
+
+    <MediaManager
+      v-model="show"
+      :accept="accept"
+      :selected-image="selectedImage"
+      :uploaded-images="uploadedImages"
+      :with-link="withLink"
+      @change="onChange"
+      @update:selected-image="$emit('update:selectedImage', $event)"
+      @update:uploaded-images="$emit('update:uploadedImages', $event)"
     />
   </div>
 </template>
