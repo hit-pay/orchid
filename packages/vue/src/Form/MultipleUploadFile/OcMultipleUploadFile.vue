@@ -72,7 +72,10 @@ onMounted(() => {
           totalSize: item.current.file_size ?? 0,
           isLoaded: true,
           extension: item.current.extension ?? 'png',
-          link: item.current.link
+          description: item.current.description,
+          caption: item.current.caption,
+          caption_variant: item.current.caption_variant,
+          lightbox: item.current.lightbox
         })
       }
     })

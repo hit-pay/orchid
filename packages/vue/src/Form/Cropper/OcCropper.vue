@@ -171,7 +171,7 @@ const isLightBox = ref(localInputOptionsValue.value.lightbox ? true : false)
         />
         <RadioGroup
           v-if="inputOptions?.includes('caption') && showCaption"
-          v-model="localInputOptionsValue.caption_variant"
+          :model-value="localInputOptionsValue.caption_variant"
           group-name="caption_variant"
           alignment="horizontal"
           :radio="[

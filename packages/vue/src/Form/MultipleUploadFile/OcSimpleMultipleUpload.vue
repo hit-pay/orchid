@@ -88,7 +88,6 @@ const updateInputOption = (optionValues) => {
   Object.keys(optionValues).forEach((key) => {
     changedFile[key] = optionValues[key]
   })
-  console.log('updateInputOption -> changedFile :', changedFile)
   emit('update:uploadedImages', props.uploadedImages)
 }
 

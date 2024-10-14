@@ -15,7 +15,10 @@ export const Default = {
   render: (args) => ({
     components: { Cropper, Theme },
     setup() {
-      let modelValueOptions = ref({})
+      let modelValueOptions = ref({
+        caption: 'hello',
+        caption_variant: 'hover'
+      })
       return { args, modelValueOptions }
     },
     template: `
@@ -32,8 +35,9 @@ export const Default = {
                 :max-size="args.maxSize"
                 :is-replace-image="args.isReplaceImage"
 
+
                 :input-options="['description','link','caption','lightbox']"
-                :model-value-options="modelValueOptions"
+                :input-option-values="modelValueOptions"
                 
                 @change-image="args.image = $event"
                 @update:input-options="modelValueOptions = $event"
