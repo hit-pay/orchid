@@ -21,7 +21,7 @@ const props = defineProps({
     type: Number,
     default: 3
   },
-  withLink: Boolean,
+  inputOptions: Array,
   maxImages: Number
 })
 const emit = defineEmits([
@@ -38,7 +38,7 @@ const emit = defineEmits([
 const isDropdownOpen = ref([])
 const isEditOpen = ref(false)
 const editImgIndex = ref('')
-const editLink = ref('')
+const editInputOptions = ref({})
 
 const editImgIndexFileUrl = computed(() => {
   return props.uploadedImages[editImgIndex.value].fileUrl
@@ -81,11 +81,14 @@ const changeImage = (url) => {
 
   isEditOpen.value = false
   editImgIndex.value = ''
-  editLink.value = ''
+  editInputOptions.value = ''
 }
-const updateLink = (link) => {
+const updateInputOption = (optionValues) => {
   let changedFile = props.uploadedImages[editImgIndex.value]
-  changedFile.link = link
+  Object.keys(optionValues).forEach((key) => {
+    changedFile[key] = optionValues[key]
+  })
+  console.log('changedFile :', changedFile)
   emit('update:uploadedImages', props.uploadedImages)
 }
 
@@ -159,7 +162,7 @@ const showAddBtn = computed(
                     @click="
                       () => {
                         editImgIndex = i
-                        editLink = img.link
+                        editInputOptions = img
                         isDropdownOpen[i] = false
                         isEditOpen = true
                       }
@@ -222,7 +225,7 @@ const showAddBtn = computed(
         }
       "
       @change-image="changeImage"
-      @update:link="updateLink"
+      @update:input-options="updateInputOption"
     />
 
     <ConfirmationModal

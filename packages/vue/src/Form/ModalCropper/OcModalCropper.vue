@@ -4,8 +4,8 @@ import { ref } from 'vue'
 import { Cropper } from '../Cropper/OcCropper'
 
 const props = defineProps({
-  withLink: Boolean,
-  link: String,
+  inputOptions: Array,
+  inputOptionValues: Object,
   img: String,
   maxSize: [String, Number]
 })
@@ -42,10 +42,10 @@ const confirmButtonProps = ref({
     :confirm-button-props="confirmButtonProps"
   >
     <Cropper
-      :withLink="withLink"
-      :link="link"
+      :input-option="inputOptions"
+      :input-option-values="inputOptionValues"
       :img="img"
-      :maxSize="maxSize"
+      :max-size="maxSize"
       @change-image="image = $event"
       @update:link="localLinkValue = $event"
     />

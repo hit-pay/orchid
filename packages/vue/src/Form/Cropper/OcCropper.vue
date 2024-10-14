@@ -5,8 +5,8 @@ import { nextTick, ref, watch } from 'vue'
 import 'vue-advanced-cropper/dist/style.css'
 
 const props = defineProps({
-  withLink: Boolean,
-  link: String,
+  inputOptions: Array,
+  inputOptionValues: Object,
   img: String,
   maxSize: [String, Number],
   isReplaceImage: {
@@ -14,12 +14,14 @@ const props = defineProps({
     default: true
   }
 })
-const emit = defineEmits(['changeImage', 'update:link'])
+const emit = defineEmits(['changeImage', 'update:input-options'])
 const cropper = ref()
 const fileUploadEl = ref()
 
 const localImage = ref('')
 const imageChanged = ref(false)
+
+const localInputOptionsValue = ref(props.inputOptionValues ?? {})
 
 watch(
   () => props.img,
@@ -74,6 +76,15 @@ const defaultSize = ({ imageSize, visibleArea }) => {
     height: (visibleArea || imageSize).height
   }
 }
+
+const updateLink = (link) => {
+  let newValue = {
+    ...props.inputOptionValues,
+    link: link
+  }
+
+  emit('update:input-options', newValue)
+}
 </script>
 
 <template>
@@ -118,11 +129,11 @@ const defaultSize = ({ imageSize, visibleArea }) => {
     </div>
     <div>
       <Input
-        v-if="withLink"
+        v-if="inputOptions?.includes('link')"
+        v-model="localInputOptionsValue.link"
         placeholder="https://website.com"
         label="Link"
-        :model-value="link"
-        @update:model-value="emit('update:link', $event)"
+        @update:model-value="updateLink"
       />
     </div>
   </div>

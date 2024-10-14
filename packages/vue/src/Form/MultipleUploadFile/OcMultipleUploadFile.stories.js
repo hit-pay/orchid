@@ -15,7 +15,6 @@ export const Default = {
     errorMessage: '',
     isImageOnly: false,
     columnsCount: 3,
-    withLink: false,
     isButtonOnly: true,
     buttonUploadProps: {
       label: 'Upload',
