@@ -192,7 +192,7 @@ const isLightBox = ref(localInputOptionsValue.value.lightbox ? true : false)
         <Checkbox
           v-if="inputOptions?.includes('lightbox')"
           v-model="isLightBox"
-          label="Caption"
+          label="Lightbox"
           @update:model-value="updateOptions('lightbox', $event)"
         >
           <template #after>
