@@ -4,12 +4,12 @@ import { ref } from 'vue'
 import { Cropper } from '../Cropper/OcCropper'
 
 const props = defineProps({
-  withLink: Boolean,
-  link: String,
+  inputOptions: Array,
+  inputOptionValues: Object,
   img: String,
   maxSize: [String, Number]
 })
-const emit = defineEmits(['changeImage', 'close', 'update:link'])
+const emit = defineEmits(['changeImage', 'close', 'update:input-options'])
 const cropper = ref()
 const file_upload = ref()
 const cancelButtonProps = {
@@ -23,7 +23,7 @@ const confirmButtonProps = ref({
   label: 'Save',
   onClick: () => {
     if (localLinkValue.value) {
-      emit('update:link', localLinkValue.value)
+      emit('update:input-options', localLinkValue.value)
     }
     if (image.value) {
       emit('changeImage', image.value)
@@ -42,12 +42,12 @@ const confirmButtonProps = ref({
     :confirm-button-props="confirmButtonProps"
   >
     <Cropper
-      :withLink="withLink"
-      :link="link"
+      :input-options="inputOptions"
+      :input-option-values="inputOptionValues"
       :img="img"
-      :maxSize="maxSize"
+      :max-size="maxSize"
       @change-image="image = $event"
-      @update:link="localLinkValue = $event"
+      @update:input-options="localLinkValue = $event"
     />
   </Modal>
 </template>

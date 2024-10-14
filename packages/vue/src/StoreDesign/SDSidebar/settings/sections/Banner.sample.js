@@ -55,7 +55,8 @@ const BANNER_FORM = [
     type: 'Images',
     name: 'banners',
     props: {
-      maxImages: 8
+      maxImages: 8,
+      options: ['link']
     }
   },
   {
