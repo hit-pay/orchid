@@ -44,7 +44,7 @@ export const Default = {
                 :error-message="args.errorMessage"
                 :isImageOnly="args.isImageOnly"
                 :columnsCount="args.columnsCount"
-                :with-link="args.withLink"
+                :input-options="['link']"
                 :is-button-only="args.isButtonOnly"
                 :button-upload-props="args.buttonUploadProps"
             />
@@ -138,7 +138,6 @@ export const MultipleImages = {
             :error-message="args.errorMessage"
             is-image-only
             :columnsCount="args.columnsCount"
-            with-link
             @onEditFile="onEditFile"
             @onRemoveFile="onRemoveFile"
         >

@@ -36,7 +36,7 @@ const props = defineProps({
     type: Object,
     default: () => ({})
   },
-  withLink: Boolean,
+  inputOptions: Array,
   isDisabled: Boolean,
   labelUploadArea: String,
   isButtonOnly: Boolean,
@@ -109,7 +109,7 @@ const triggerInput = () => {
         :selected-image="selectedImage"
         :columns-count="columnsCount"
         :accept="accept"
-        :with-link="withLink"
+        :input-options="inputOptions"
         :max-images="maxImages"
         @change="onChangeFile"
         @update:selected-image="$emit('update:selectedImage', $event)"

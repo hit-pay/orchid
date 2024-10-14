@@ -404,7 +404,6 @@ const toggleSubForm = (name) => {
                     :important="true"
                     is-image-only
                     :columns-count="slot.form.props?.columnsCount ?? 4"
-                    with-link
                     @update:model-value="onUpdateimages(slot.form, $event)"
                     @on-edit-file="onEditimages(slot.form, $event)"
                     @on-remove-file="onDeleteimages(slot.form, $event)"
@@ -433,7 +432,6 @@ const toggleSubForm = (name) => {
           :important="true"
           is-image-only
           :columns-count="form.props?.columnsCount ?? 4"
-          with-link
           @update:model-value="onUpdateimages(form, $event)"
           @on-edit-file="onEditimages(form, $event)"
           @on-remove-file="onDeleteimages(form, $event)"
