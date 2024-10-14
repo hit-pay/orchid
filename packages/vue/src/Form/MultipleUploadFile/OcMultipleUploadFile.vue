@@ -73,6 +73,7 @@ onMounted(() => {
           isLoaded: true,
           extension: item.current.extension ?? 'png',
           description: item.current.description,
+          link: item.current.link,
           caption: item.current.caption,
           caption_variant: item.current.caption_variant,
           lightbox: item.current.lightbox
