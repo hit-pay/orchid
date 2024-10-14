@@ -81,14 +81,14 @@ const changeImage = (url) => {
 
   isEditOpen.value = false
   editImgIndex.value = ''
-  editInputOptions.value = ''
+  editInputOptions.value = {}
 }
 const updateInputOption = (optionValues) => {
   let changedFile = props.uploadedImages[editImgIndex.value]
   Object.keys(optionValues).forEach((key) => {
     changedFile[key] = optionValues[key]
   })
-  console.log('changedFile :', changedFile)
+  console.log('updateInputOption -> changedFile :', changedFile)
   emit('update:uploadedImages', props.uploadedImages)
 }
 
@@ -106,6 +106,15 @@ const showAddBtn = computed(
     props.maxImages == undefined ||
     (props.maxImages && props.uploadedImages.length < props.maxImages)
 )
+
+const editSelectedImage = (i, img) => {
+  editImgIndex.value = i
+  props.inputOptions?.forEach((key) => {
+    editInputOptions.value[key] = img[key]
+  })
+  isDropdownOpen[i] = false
+  isEditOpen.value = true
+}
 </script>
 
 <template>
@@ -159,14 +168,7 @@ const showAddBtn = computed(
                 <div class="py-2 flex flex-col">
                   <div
                     class="flex p-3 cursor-pointer items-center gap-x-3"
-                    @click="
-                      () => {
-                        editImgIndex = i
-                        editInputOptions = img
-                        isDropdownOpen[i] = false
-                        isEditOpen = true
-                      }
-                    "
+                    @click="editSelectedImage(i, img)"
                   >
                     <Icon width="16" height="16" name="pencil" />
                     <span>Edit Image</span>
@@ -217,7 +219,7 @@ const showAddBtn = computed(
       v-model="isEditOpen"
       :img="editImgIndexFileUrl"
       :input-options="inputOptions"
-      :link="editLink"
+      :input-option-values="editInputOptions"
       @close="
         () => {
           isEditOpen = false

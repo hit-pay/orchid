@@ -1,5 +1,5 @@
 <script setup>
-import { Button, Input } from '@/orchidui'
+import { Button, Input, Checkbox, RadioGroup, Icon, Tooltip } from '@/orchidui'
 import { Cropper } from 'vue-advanced-cropper'
 import { nextTick, ref, watch } from 'vue'
 import 'vue-advanced-cropper/dist/style.css'
@@ -22,6 +22,16 @@ const localImage = ref('')
 const imageChanged = ref(false)
 
 const localInputOptionsValue = ref(props.inputOptionValues ?? {})
+
+watch(
+  () => props.inputOptionValues,
+  () => {
+    localInputOptionsValue.value = props.inputOptionValues
+  },
+  {
+    deep: true
+  }
+)
 
 watch(
   () => props.img,
@@ -77,14 +87,15 @@ const defaultSize = ({ imageSize, visibleArea }) => {
   }
 }
 
-const updateLink = (link) => {
-  let newValue = {
-    ...props.inputOptionValues,
-    link: link
-  }
-
+const updateOptions = (key, value) => {
+  let newValue = localInputOptionsValue.value
+  newValue[key] = value
   emit('update:input-options', newValue)
 }
+
+const showCaption = ref(localInputOptionsValue.value.caption ? true : false)
+
+const isLightBox = ref(localInputOptionsValue.value.lightbox ? true : false)
 </script>
 
 <template>
@@ -127,14 +138,75 @@ const updateLink = (link) => {
         @click="replaceImage"
       />
     </div>
-    <div>
+    <div class="grid grid-cols-2 gap-4">
+      <Input
+        v-if="inputOptions?.includes('description')"
+        v-model="localInputOptionsValue.description"
+        label="Describe Image"
+        placeholder=""
+        @update:model-value="updateOptions('description', $event)"
+      />
+
       <Input
         v-if="inputOptions?.includes('link')"
         v-model="localInputOptionsValue.link"
-        placeholder="https://website.com"
-        label="Link"
-        @update:model-value="updateLink"
+        placeholder="https://hitpayapp.com"
+        label="Link to"
+        @update:model-value="updateOptions('link', $event)"
       />
+
+      <div>
+        <Checkbox
+          v-if="inputOptions?.includes('caption')"
+          v-model="showCaption"
+          label="Caption"
+          class="mb-4"
+        />
+        <Input
+          v-if="inputOptions?.includes('caption') && showCaption"
+          v-model="localInputOptionsValue.caption"
+          class="mb-4"
+          placeholder=""
+          @update:model-value="updateOptions('caption', $event)"
+        />
+        <RadioGroup
+          v-if="inputOptions?.includes('caption') && showCaption"
+          v-model="localInputOptionsValue.caption_variant"
+          group-name="caption_variant"
+          alignment="horizontal"
+          :radio="[
+            {
+              value: 'hover',
+              label: 'Show on hover'
+            },
+            {
+              value: 'bottom',
+              label: 'Show on bottom'
+            }
+          ]"
+          label="Caption position"
+          @update:model-value="updateOptions('caption_variant', $event)"
+        />
+      </div>
+      <div>
+        <Checkbox
+          v-if="inputOptions?.includes('lightbox')"
+          v-model="isLightBox"
+          label="Caption"
+          @update:model-value="updateOptions('lightbox', $event)"
+        >
+          <template #after>
+            <Tooltip position="bottom" :distance="10" popper-class="bg-oc-bg-light min-w-[125px]">
+              <Icon name="question-mark" width="16" height="16" class="text-oc-accent-1-500" />
+              <template #popper>
+                <div class="text-oc-text-400 text-sm px-3 py-2 font-medium text-center">
+                  Show lightbox when click the image
+                </div>
+              </template>
+            </Tooltip>
+          </template>
+        </Checkbox>
+      </div>
     </div>
   </div>
 </template>

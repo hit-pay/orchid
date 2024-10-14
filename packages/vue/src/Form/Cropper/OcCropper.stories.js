@@ -32,7 +32,7 @@ export const Default = {
                 :max-size="args.maxSize"
                 :is-replace-image="args.isReplaceImage"
 
-                :input-options="['link']"
+                :input-options="['description','link','caption','lightbox']"
                 :model-value-options="modelValueOptions"
                 
                 @change-image="args.image = $event"
