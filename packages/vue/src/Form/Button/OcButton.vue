@@ -27,9 +27,9 @@ defineEmits(['addition-click'])
 const isPressed = ref(false)
 const isIconOnly = computed(() => (props.leftIcon || props.rightIcon) && !props.label)
 const additionalAreaSize = computed(() => ({
-  default: 'w-10 h-[36px]',
+  default: 'w-10',
   small: 'w-9 h-8',
-  big: 'w-[48px] h-[44px]'
+  big: 'w-[48px]'
 }))
 
 const shadowContainer = computed(() => ({
