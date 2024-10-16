@@ -1,4 +1,4 @@
-import { Theme, Tabs } from '@/orchidui'
+import { Theme, Tabs, PaymentTab } from '@/orchidui'
 import { ref } from 'vue'
 
 export default {
@@ -166,6 +166,42 @@ export const verticalTabs = {
             <Tabs v-model="activeTab" :tabs="args.tabs" :variant="args.variant" :max-count="args.maxCount" :is-arrows="args.isArrows" :direction="args.direction" />
             </div>
           </Theme>
+        `
+  })
+}
+
+export const PaymentTabsExample = {
+  args: {
+    tabs: [
+      {
+        label: 'Without logo',
+        value: ''
+      },
+      {
+        label: 'Payment',
+        logo: 'https://dashboard.src.test/icons/methods/sm/paynow.png',
+
+        value: 'payment'
+      },
+      {
+        label: 'Payment2',
+        logo: 'https://dashboard.src.test/icons/methods/sm/paynow.png',
+
+        value: 'payment2'
+      },
+      
+    ]
+  },
+  render: (args) => ({
+    components: { PaymentTab },
+    setup() {
+      const activeTab = ref('payment')
+      return { activeTab, args }
+    },
+    template: `
+          <div class="flex gap-x-3 m-10">
+            <PaymentTab v-for="tab in args.tabs" v-model="activeTab" :tab="tab" />
+            </div>
         `
   })
 }
