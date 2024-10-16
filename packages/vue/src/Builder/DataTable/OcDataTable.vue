@@ -11,7 +11,7 @@ import {
   Button,
   Dropdown
 } from '@/orchidui'
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import dayjs from 'dayjs'
 import ColumnEdit from '@/orchidui/Builder/DataTable/ColumnEdit.vue'
 import {
@@ -226,6 +226,11 @@ const applyFilter = (filterForm = null, isChangePage = false, changeCursor = '')
   if (filterForm) {
     isDropdownOpened.value = false
     filterData.value = { ...filterData.value, ...filterForm }
+    Object.keys(filterData.value).forEach((key) => {
+      if (Array.isArray(filterData.value[key]) && filterData.value[key].length === 0) {
+        delete filterData.value[key]
+      }
+    })
   }
   emit('update:filter', filterData.value)
 }
