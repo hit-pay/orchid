@@ -1,16 +1,19 @@
 <template>
   <div class="grid grid-cols-3 gap-3">
     <Input
+      id="color-picker-input-r"
       :model-value="internal.r"
       placeholder="100"
       @update:model-value="updateValue('r', $event)"
     />
     <Input
+      id="color-picker-input-g"
       :model-value="internal.g"
       placeholder="100"
       @update:model-value="updateValue('g', $event)"
     />
     <Input
+      id="color-picker-input-b"
       :model-value="internal.b"
       placeholder="100"
       @update:model-value="updateValue('b', $event)"
@@ -47,6 +50,8 @@ const internal = ref({
 })
 
 const updateValue = (rgbType, value) => {
+  const element = document.getElementById(`color-picker-input-${rgbType}`)
+
   let maxLength = 255
   if (props.inputType == 'HSL') {
     maxLength = 100
@@ -91,6 +96,8 @@ const updateValue = (rgbType, value) => {
       }
     }
   }
+
+  element?.querySelector('input')?.focus()
 }
 
 const updateRgb = (tp) => {

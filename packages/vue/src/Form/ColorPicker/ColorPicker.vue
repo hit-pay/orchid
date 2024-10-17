@@ -101,6 +101,7 @@ const handleClickLastUsedColor = (color) => {
       v-model="isOpen"
       @update:model-value="onCloseDropdown"
       :max-menu-height="800"
+      is-attach-to-body
     >
       <Input
         v-if="!hideInputColor"
