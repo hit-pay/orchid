@@ -1,19 +1,19 @@
 <template>
   <div class="grid grid-cols-3 gap-3">
     <Input
-      id="color-picker-input-r"
+      ref="rInputEl"
       :model-value="internal.r"
       placeholder="100"
       @update:model-value="updateValue('r', $event)"
     />
     <Input
-      id="color-picker-input-g"
+      ref="gInputEl"
       :model-value="internal.g"
       placeholder="100"
       @update:model-value="updateValue('g', $event)"
     />
     <Input
-      id="color-picker-input-b"
+      ref="bInputEl"
       :model-value="internal.b"
       placeholder="100"
       @update:model-value="updateValue('b', $event)"
@@ -49,9 +49,11 @@ const internal = ref({
   b: 0
 })
 
-const updateValue = (rgbType, value) => {
-  const element = document.getElementById(`color-picker-input-${rgbType}`)
+const rInputEl = ref()
+const gInputEl = ref()
+const bInputEl = ref()
 
+const updateValue = (rgbType, value) => {
   let maxLength = 255
   if (props.inputType == 'HSL') {
     maxLength = 100
@@ -75,6 +77,7 @@ const updateValue = (rgbType, value) => {
         updateHsl()
       }
     }
+    rInputEl.value?.focus()
   } else if (rgbType == 'g') {
     let gInput = parseInt(value)
     if (gInput <= maxLength) {
@@ -85,6 +88,7 @@ const updateValue = (rgbType, value) => {
         updateHsl()
       }
     }
+    gInputEl.value?.focus()
   } else if (rgbType == 'b') {
     let bInput = parseInt(value)
     if (bInput <= maxLength) {
@@ -95,9 +99,8 @@ const updateValue = (rgbType, value) => {
         updateHsl()
       }
     }
+    bInputEl.value?.focus()
   }
-
-  element?.querySelector('input')?.focus()
 }
 
 const updateRgb = (tp) => {
