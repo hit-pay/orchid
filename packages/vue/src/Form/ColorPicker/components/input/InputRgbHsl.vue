@@ -1,16 +1,19 @@
 <template>
   <div class="grid grid-cols-3 gap-3">
     <Input
+      ref="rInputEl"
       :model-value="internal.r"
       placeholder="100"
       @update:model-value="updateValue('r', $event)"
     />
     <Input
+      ref="gInputEl"
       :model-value="internal.g"
       placeholder="100"
       @update:model-value="updateValue('g', $event)"
     />
     <Input
+      ref="bInputEl"
       :model-value="internal.b"
       placeholder="100"
       @update:model-value="updateValue('b', $event)"
@@ -46,6 +49,10 @@ const internal = ref({
   b: 0
 })
 
+const rInputEl = ref()
+const gInputEl = ref()
+const bInputEl = ref()
+
 const updateValue = (rgbType, value) => {
   let maxLength = 255
   if (props.inputType == 'HSL') {
@@ -70,6 +77,7 @@ const updateValue = (rgbType, value) => {
         updateHsl()
       }
     }
+    rInputEl.value?.focus()
   } else if (rgbType == 'g') {
     let gInput = parseInt(value)
     if (gInput <= maxLength) {
@@ -80,6 +88,7 @@ const updateValue = (rgbType, value) => {
         updateHsl()
       }
     }
+    gInputEl.value?.focus()
   } else if (rgbType == 'b') {
     let bInput = parseInt(value)
     if (bInput <= maxLength) {
@@ -90,6 +99,7 @@ const updateValue = (rgbType, value) => {
         updateHsl()
       }
     }
+    bInputEl.value?.focus()
   }
 }
 
