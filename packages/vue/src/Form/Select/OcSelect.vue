@@ -394,7 +394,7 @@ defineExpose({
 
           <div
             class="flex px-3 pb-3 flex-col gap-y-2"
-            :class="{ 'pt-3': !isFilterable || isInlineSearch }"
+            :class="{ 'pt-3': !isFilterable || (isInlineSearch && !localValueOption) }"
           >
             <Option
               v-if="isCheckboxes && isSelectAll && filterableOptions.length && multiple"
