@@ -10,6 +10,10 @@ defineProps({
     default: () => []
   },
   isDisabled: Boolean,
+  hasActions: {
+    type: Boolean,
+    default: true,
+  },
   isTransparent: Boolean,
   isDraggable: Boolean
 })
@@ -72,8 +76,12 @@ const toggleAccordion = () => {
           </slot>
         </div>
 
-        <slot name="right">
-          <div class="flex items-center gap-4 opacity-0 group-hover:opacity-100">
+        <slot
+          name="right"
+          :is-open="isOpen"
+          :toggle-accordion="toggleAccordion"
+        >
+          <div v-if="hasActions" class="flex items-center gap-4 opacity-0 group-hover:opacity-100">
             <div class="border border-oc-accent-1-100 rounded-sm p-1 flex gap-x-1">
               <Icon
                 name="pencil"
