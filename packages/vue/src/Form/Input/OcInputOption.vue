@@ -67,20 +67,30 @@ const removeOption = (value) => {
   emit('update:modelValue', localValue.value)
 }
 
-const setNewValue = (value) => {
-  if (!value?.trim()) {
+const setNewValue = (targetValue) => {
+  if (!targetValue?.trim()) {
     return
   }
 
-  if (!props.allowDuplicated && props.modelValue?.includes(value)) {
-    return
+  const items = targetValue?.split(',') || []
+
+  items.forEach((value) => {
+    if (!value?.trim()) {
+      return
+    }
+
+    if (!props.allowDuplicated && localValue.value?.includes(value)) {
+      return
+    }
+
+    localValue.value.push(value)
+    emit('option-added', value)
+  })
+
+  if (items.length) {
+    query.value = ''
+    emit('update:modelValue', localValue.value)
   }
-
-  localValue.value.push(value)
-  query.value = ''
-
-  emit('update:modelValue', localValue.value)
-  emit('option-added', value)
 }
 
 watch(
