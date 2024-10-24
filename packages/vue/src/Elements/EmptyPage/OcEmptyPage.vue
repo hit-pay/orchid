@@ -20,6 +20,10 @@ defineProps({
     type: Boolean,
     default: false
   },
+  containerClass: {
+    type: [Array, String],
+    required: false,
+  },
   upgradeLabel: {
     type: String,
     default: 'Upgrade now'
@@ -99,9 +103,11 @@ const sizes = computed(() => ({
       <div
         class="flex justify-center border rounded-full items-center aspect-square"
         :class="[
-          isUpgrade
-            ? 'text-oc-warning-600 border-oc-warning-300 bg-oc-warning-50'
-            : 'text-oc-text-400 border-oc-gray-200 bg-oc-gray-50',
+          containerClass
+            ? containerClass
+            : (isUpgrade
+              ? 'text-oc-warning-600 border-oc-warning-300 bg-oc-warning-50'
+              : 'text-oc-text-400 border-oc-gray-200 bg-oc-gray-50'),
           sizes[size].icon.container
         ]"
       >

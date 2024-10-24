@@ -23,6 +23,10 @@ const isOpen = ref(false)
 const toggleAccordion = () => {
   isOpen.value = !isOpen.value
 }
+
+defineExpose({
+  toggleAccordion,
+})
 </script>
 
 <template>
