@@ -45,7 +45,9 @@ defineExpose({
 
         <div class="flex flex-col gap-3 overflow-hidden" :class="{ 'flex-1': isCheckboxes }">
           <span class="truncate">{{ label }}</span>
-          <span v-if="subLabel" class="text-sm text-oc-text-300">{{ subLabel }}</span>
+          <slot name="sub-label">
+            <span v-if="subLabel" class="text-sm text-oc-text-300">{{ subLabel }}</span>
+          </slot>
         </div>
 
         <slot name="leading"></slot>
