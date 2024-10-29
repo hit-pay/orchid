@@ -58,6 +58,7 @@ const toggleDropdown = () => {
                 :label="item.label"
                 :variant="item.variant"
                 :icon="item.icon"
+                :icon-size="item.iconSize"
                 :icon-tooltip="item.iconTooltip"
                 :class="item.class"
                 class="font-medium shrink-0"
