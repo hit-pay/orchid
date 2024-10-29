@@ -9,6 +9,7 @@ const props = defineProps({
   },
   label: String,
   icon: String,
+  iconSize: String,
   iconTooltip: String,
   closable: Boolean,
   shouldTruncateChip: Boolean,
@@ -101,7 +102,7 @@ const iconColor = computed(() => {
             </div>
           </template>
         </Tooltip>
-        <Icon v-else-if="icon" width="18" height="18" :name="icon" />
+        <Icon v-else-if="icon" :width="iconSize ?? 18" :height="iconSize ?? 18" :name="icon" />
         <div
           :class="{
             'truncate max-w-[180px]': shouldTruncateChip
