@@ -2,7 +2,7 @@
 import { Chip, Icon } from '@/orchidui'
 import { ref } from 'vue'
 
-defineProps({
+const props = defineProps({
   title: String,
   description: String,
   chips: {
@@ -15,12 +15,17 @@ defineProps({
     default: true,
   },
   isTransparent: Boolean,
-  isDraggable: Boolean
+  isDraggable: Boolean,
+  isNoToggleForced: Boolean,
 })
 const emit = defineEmits(['edit', 'delete'])
 const isOpen = ref(false)
 
 const toggleAccordion = () => {
+  if (props.isNoToggleForced) {
+    return;
+  }
+
   isOpen.value = !isOpen.value
 }
 
