@@ -14,7 +14,8 @@ const props = defineProps({
   chips: {
     type: Array,
     default: () => []
-  }
+  },
+  description: String
 })
 
 defineEmits(['edit', 'delete'])
@@ -55,10 +56,15 @@ onBeforeUnmount(() => {
     <div class="flex items-center gap-x-5">
       <div class="flex-1 flex items-center gap-x-3 font-medium capitalize">
         <slot name="logo" />
-        <div class="flex items-center gap-x-3 overflow-hidden">
-          <span class="truncate">{{ title }}</span>
-          <div v-if="chips.length" class="flex gap-3">
-            <Chip v-for="(item, i) in chips" :key="i" class="font-medium" v-bind="item" />
+        <div class="flex flex-col gap-2">
+          <div class="flex items-center gap-x-3 overflow-hidden">
+            <span class="truncate">{{ title }}</span>
+            <div v-if="chips.length" class="flex gap-3">
+              <Chip v-for="(item, i) in chips" :key="i" class="font-medium" v-bind="item" />
+            </div>
+          </div>
+          <div v-if="description" class="text-oc-text-400 flex gap-x-2 items-center text-sm">
+            {{ description }}
           </div>
         </div>
       </div>
