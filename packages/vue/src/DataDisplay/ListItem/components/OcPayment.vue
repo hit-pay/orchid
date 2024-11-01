@@ -63,7 +63,10 @@ onBeforeUnmount(() => {
               <Chip v-for="(item, i) in chips" :key="i" class="font-medium" v-bind="item" />
             </div>
           </div>
-          <div v-if="description" class="text-oc-text-400 flex gap-x-2 items-center text-sm">
+          <div
+            v-if="description"
+            class="text-oc-text-400 flex gap-x-2 items-center text-sm font-normal normal-case"
+          >
             {{ description }}
           </div>
         </div>
