@@ -132,15 +132,16 @@ export const ListPayment = {
     paymentMethods: [
       {
         method: 'paynow_online',
-        sm: 'https://dashboard.src.test/icons/methods/sm/paynow.png',
-        md: 'https://dashboard.src.test/icons/methods/md/paynow.png'
+        svg: 'http://api.src.test/icons/methods/md/paynow.png',
+        md: 'http://api.src.test/icons/methods/md/paynow.png'
       },
       {
         method: 'card',
-        sm: 'https://dashboard.src.test/icons/methods/sm/card.png',
-        md: 'https://dashboard.src.test/icons/methods/md/card.png'
+        svg: 'http://api.src.test/icons/methods/md/visa.png',
+        md: 'http://api.src.test/icons/methods/md/visa.png'
       }
-    ]
+    ],
+    description: 'Description'
   },
   render: (args) => ({
     components: { Theme, ListItem },
@@ -152,8 +153,15 @@ export const ListPayment = {
         <ListItem
           :title="args.title"
           :payment-methods="args.paymentMethods"
+          :description="args.description"
           type="payment"
-        />
+        >
+          <template #logo>
+            <div class="rounded-sm p-2 bg-oc-accent-1-50">
+              <img src="http://api.src.test/icons/providers/shopee.png" class="w-[32px] h-[32px]"/>
+            </div>
+          </template>
+        </ListItem>
       </Theme>
     `
   })
