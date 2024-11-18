@@ -11,7 +11,9 @@ export const Default = {
     errorMessage: '',
     isDisabled: false,
     label: 'Text',
-    hint: 'Text'
+    hint: 'Text',
+    tooltipText: 'Tooltip text',
+    labelIcon: 'information'
   },
   render: (args) => ({
     setup() {
@@ -25,6 +27,8 @@ export const Default = {
           :errorMessage="args.errorMessage"
           :hint="args.hint"
           :label="args.label"
+          :tooltip-text="args.tooltipText"
+          :label-icon="args.labelIcon"
           :is-disabled="args.isDisabled"
         />
       </Theme>

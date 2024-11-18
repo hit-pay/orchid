@@ -1,5 +1,5 @@
 <script setup>
-import { BaseInput, Icon } from '@/orchidui'
+import { BaseInput, Icon, Tooltip } from '@/orchidui'
 
 defineProps({
   modelValue: [String, Boolean],
@@ -10,6 +10,9 @@ defineProps({
   groupName: String,
   errorMessage: String,
   hint: String,
+  tooltipText: String,
+  labelIcon: String,
+  tooltipOptions: Object,
   isButtonVariant: Boolean,
   icon: String
 })
@@ -65,7 +68,20 @@ defineEmits({
       <slot>
         <span v-if="label" class="text-sm">{{ label }}</span>
       </slot>
+
+      <Tooltip v-if="labelIcon" v-bind="tooltipOptions">
+      <Icon width="16" height="16" :name="labelIcon" class="text-oc-text-400" />
+      <template #popper>
+        <slot name="tooltipText">
+          <div v-if="tooltipText" class="px-3 py-2">
+            {{ tooltipText }}
+          </div>
+        </slot>
+      </template>
+    </Tooltip>
     </label>
+
+ 
   </BaseInput>
 </template>
 
