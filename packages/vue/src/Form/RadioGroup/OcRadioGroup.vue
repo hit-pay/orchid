@@ -43,6 +43,9 @@ const onInput = (value) => {
         :checked="item.value === modelValue"
         :is-disabled="!!item.isDisabled"
         :group-name="groupName"
+        :tooltip-text="item.tooltipText"
+        :label-icon="item.labelIcon"
+        :tooltip-options="item.tooltipOptions"
         :is-button-variant="isButtonVariant"
         @update:model-value="onInput"
       />
