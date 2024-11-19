@@ -72,10 +72,10 @@ defineEmits({
       <Tooltip v-if="labelIcon" v-bind="tooltipOptions">
       <Icon width="16" height="16" :name="labelIcon" class="text-oc-text-400" />
       <template #popper>
-        <slot name="tooltipText">
-          <div v-if="tooltipText" class="px-3 py-2">
-            {{ tooltipText }}
-          </div>
+          <slot name="tooltipText">
+            <div v-if="tooltipText" class="px-3 py-2 whitespace-nowrap">
+              {{ tooltipText }}
+            </div>
         </slot>
       </template>
     </Tooltip>
