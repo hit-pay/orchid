@@ -141,7 +141,7 @@ const localValueOption = computed(() => {
     }
     return selected
   } else {
-    return props.options.find((o) => o.value === props.modelValue)
+    return props.options.find((o) => o.value.toString() === props.modelValue?.toString())
   }
 })
 
