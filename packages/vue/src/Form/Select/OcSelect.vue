@@ -134,6 +134,8 @@ const localValueOption = computed(() => {
           } else {
             if (option.value === value) {
               selected.push(option)
+            } else if (option.value.toString() == value.toString()) {
+              selected.push(option)
             }
           }
         }
