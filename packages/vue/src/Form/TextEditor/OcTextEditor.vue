@@ -466,7 +466,7 @@ const onClickContent = () => {
                   width="20"
                   height="20"
                   name="text-editor/left"
-                  @click="setAlign()"
+                  @click="setAlign('left')"
                 />
                 <Icon
                   class="cursor-pointer"
