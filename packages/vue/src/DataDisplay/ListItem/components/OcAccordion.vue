@@ -42,8 +42,15 @@ defineExpose({
       'border-none !p-0': isTransparent
     }"
   >
-    <div class="flex gap-4 items-stretch" :class="{ 'border-b': isOpen }">
+    <div
+      class="flex gap-4 items-stretch"
+      :class="{
+        'border-b': isOpen,
+        'pl-5': !isNoToggleForced,
+      }"
+    >
       <div
+        v-if="isNoToggleForced"
         class="flex items-center p-3 border-r bg-gray-50 cursor-pointer"
         @click="toggleAccordion"
       >
@@ -111,7 +118,7 @@ defineExpose({
         </slot>
       </div>
     </div>
-    <div v-if="isOpen" class="py-5 px-7">
+    <div v-show="isOpen" class="py-5 px-7">
       <slot name="content" />
     </div>
   </div>
