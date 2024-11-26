@@ -46,11 +46,11 @@ defineExpose({
       class="flex gap-4 items-stretch"
       :class="{
         'border-b': isOpen,
-        'pl-5': !isNoToggleForced,
+        'pl-5': isNoToggleForced,
       }"
     >
       <div
-        v-if="isNoToggleForced"
+        v-if="!isNoToggleForced"
         class="flex items-center p-3 border-r bg-gray-50 cursor-pointer"
         @click="toggleAccordion"
       >

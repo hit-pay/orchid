@@ -361,6 +361,14 @@ export const ListItemAccordion = {
         >
           <template #content>Content</template>
         </ListItem>
+        <div class="my-3" />
+        <ListItem
+         v-bind="args"
+          type="accordion"
+         is-no-toggle-forced
+        >
+          <template #content>Content</template>
+        </ListItem>
       </Theme>
     `
   })
