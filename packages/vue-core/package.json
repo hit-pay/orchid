@@ -20,6 +20,9 @@
     ".": {
       "import": "./dist/index.js"
     },
+    "./readme.js": {
+      "import": "./readme.js"
+    },
     "./Chart": {
       "import": "./dist/Chart.js"
     },
