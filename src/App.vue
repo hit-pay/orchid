@@ -1,5 +1,5 @@
 <script setup>
-import HomePage from './HomePage.vue'
+import Examples from './Examples.vue'
 const navigation = [
   { name: 'Documentation', href: '/storybook/' },
   {
@@ -69,7 +69,7 @@ const navigation = [
           "
         />
       </div>
-      <HomePage />
+      <Examples />
     </div>
   </div>
 </template>
