@@ -89,6 +89,25 @@ Quill.register(DirectionStyle, true)
 const FontStyle = Quill.import('attributors/style/font')
 Quill.register(FontStyle, true)
 
+const BlockEmbed = Quill.import('blots/block/embed')
+
+class DividerBlot extends BlockEmbed {
+  static blotName = 'divider'
+  static tagName = 'hr'
+}
+
+Quill.register(DividerBlot)
+
+const addDivider = () => {
+  const index = quill.value.getQuill().getSelection(true)
+  if (index) {
+    const range = quill.value.getQuill().getSelection(true)
+    quill.value.getQuill().insertText(range.index, '\n', Quill.sources.USER)
+    quill.value.getQuill().insertEmbed(range.index + 1, 'divider', true, Quill.sources.USER)
+    quill.value.getQuill().setSelection(range.index + 2, Quill.sources.SILENT)
+  }
+}
+
 const id = ref(
   Math.random()
     .toString(36)
@@ -494,7 +513,6 @@ const onClickContent = () => {
                 />
               </div>
             </template>
-
             <div class="border-l border-oc-gray-200" />
             <div class="flex items-center">
               <ColorPicker v-model="colorPickModel" hide-input-color @update:model-value="setColor">
@@ -510,7 +528,6 @@ const onClickContent = () => {
               </ColorPicker>
             </div>
             <div class="border-l border-oc-gray-200" />
-
             <div v-if="showImageWidthToolbar" class="flex gap-x-3 items-center px-5">
               <Slider
                 label="Image width"
@@ -543,6 +560,23 @@ const onClickContent = () => {
                   @click="setImageAlign('right')"
                 />
               </div>
+            </div>
+            <div class="mt-1 mx-2">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 15 15"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                @click="addDivider()"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M2 7.5C2 7.22386 2.22386 7 2.5 7H12.5C12.7761 7 13 7.22386 13 7.5C13 7.77614 12.7761 8 12.5 8H2.5C2.22386 8 2 7.77614 2 7.5Z"
+                  fill="#000000"
+                />
+              </svg>
             </div>
           </div>
         </template>
