@@ -14,13 +14,13 @@ jobs:
       - name: Running ci
         run: npm ci
       - name: Install dependencies
-        run: cd packages/vue && npm install
+        run: cd packages/vue-core && npm install
       - name: build orchid package
-        run: cd packages/vue && npm run build
+        run: cd packages/vue-core && npm run build
       - name: Update version package
-        run: cd packages/vue && npm version patch
+        run: cd packages/vue-core && npm version patch
       - name: Publish package
-        run: cd packages/vue && npm publish
+        run: cd packages/vue-core && npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Authenticate with GitHub package registry

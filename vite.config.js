@@ -7,8 +7,8 @@ export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: {
-      '@/orchidui-core': resolve(__dirname, './packages/vue/src/'),
-      '@/orchidui-dashboard': resolve(__dirname, './packages/dashboard/src/')
+      '@/orchidui-core': resolve(__dirname, './packages/vue-core/src/'),
+      '@/orchidui-dashboard': resolve(__dirname, './packages/vue-dashboard/src/')
     }
   }
 })

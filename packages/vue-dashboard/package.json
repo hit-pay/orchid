@@ -1,0 +1,36 @@
+{
+  "name": "@orchidui/vue-dashboard",
+  "description": "Orchid UI , Dashboard Ui Library Vue 3 tailwind css",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "update-version": "npm version patch"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hit-pay/orchid.git",
+    "directory": "packages/vue-dashboard"
+  },
+  "homepage": "https://orchidui.vercel.app/",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    },
+    "./dist/style.css": {
+      "import": "./dist/style.css",
+      "require": "./dist/style.css"
+    }
+  },
+  "module": "./dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "license": "MIT",
+  "resolutions": {
+    "rollup": "npm:@rollup/wasm-node"
+  }
+}

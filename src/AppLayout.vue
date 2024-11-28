@@ -33,7 +33,7 @@ const navigation = [
         </div>
         <div class="lg:flex lg:flex-1 lg:justify-end">
           <a
-            href="https://www.npmjs.com/package/@orchidui/vue"
+            href="https://www.npmjs.com/package/@orchidui/vue-core"
             class="text-sm font-semibold leading-6 text-gray-900"
             >NPM<span aria-hidden="true">&rarr;</span></a
           >
