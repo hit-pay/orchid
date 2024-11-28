@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import './scss/main.scss'
 import '@orchidui/vue/dist/style.css'
-import App from './App.vue'
+import AppLayout from './AppLayout.vue'
 
-createApp(App).mount('#app')
+createApp(AppLayout).mount('#app')
