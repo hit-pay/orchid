@@ -48,7 +48,7 @@ defineEmits({
         'bg-gray-200': isDisabled && isButtonVariant,
         '!border-oc-error': errorMessage && isButtonVariant,
         'radio-button__label--button border-gray-200 border py-3 px-5 rounded': isButtonVariant,
-        '!px-6 !py-5': isButtonVariantWithRadio
+        '!px-6 !py-5 !gap-x-4': isButtonVariantWithRadio
       }"
     >
       <span

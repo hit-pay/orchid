@@ -68,7 +68,7 @@ export const Default = {
         `
   })
 }
-export const Variants = {
+export const buttonVariants = {
   args: {
     label: 'Label',
     checkboxes: [
@@ -97,21 +97,27 @@ export const Variants = {
   render: (args) => ({
     components: { CheckboxesGroup, Theme },
     setup() {
-      return { args }
+      const selectedCheckbox1 = ref([])
+      const selectedCheckbox2 = ref([])
+
+      return { selectedCheckbox1, selectedCheckbox2, args }
     },
     template: `
           <Theme>
             <div class="flex flex-col gap-y-4">
               <CheckboxesGroup
+                  v-model="selectedCheckbox1"
                   :checkboxes="args.checkboxes"
                   :label="args.label"
                   alignment="vertical"
-
+                  is-button-variant
               />
               <CheckboxesGroup
+                  v-model="selectedCheckbox2"
                   :checkboxes="args.checkboxes"
                   :label="args.label"
                   alignment="horizontal"
+                  is-button-variant
               />
             </div>
           </Theme>

@@ -15,7 +15,8 @@ defineProps({
   hint: String,
   modelValue: String,
   isButtonVariant: Boolean,
-  isButtonVariantWithRadio: Boolean
+  isButtonVariantWithRadio: Boolean,
+  isBlock: Boolean
 })
 const emit = defineEmits({
   'update:modelValue': []
@@ -36,7 +37,7 @@ const onInput = (value) => {
         v-for="(item, i) in radio"
         :id="item.value"
         :key="i"
-        class="!w-fit"
+        :class="{ '!w-fit': !isBlock }"
         :model-value="item.value"
         :label="item.label"
         :icon="item.icon"

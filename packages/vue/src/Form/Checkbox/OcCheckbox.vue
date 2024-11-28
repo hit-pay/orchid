@@ -9,7 +9,8 @@ const props = defineProps({
   label: String,
   topLabel: String,
   hint: String,
-  errorMessage: String
+  errorMessage: String,
+  isButtonVariant: Boolean
 })
 const emit = defineEmits({
   'update:modelValue': []
@@ -38,9 +39,17 @@ const onInput = () => emit('update:modelValue', !props.isDisabled ? !props.model
 
 <template>
   <BaseInput class="w-fit" :label="topLabel" :hint="hint" :error-message="errorMessage">
-    <label class="flex items-center gap-x-3 cursor-pointer">
+    <label
+      class="flex items-center gap-x-3 cursor-pointer"
+      :class="{
+        '!border-oc-error': errorMessage && isButtonVariant,
+        'border-gray-200 border py-5 px-6 rounded cursor-pointer transition-all duration-300 !gap-x-4':
+          isButtonVariant,
+        'border-oc-primary-500': modelValue
+      }"
+    >
       <div
-        class="w-5 h-5 shrink-0 border flex items-center justify-center rounded-sm"
+        class="w-5 h-5 shrink-0 border flex items-center justify-center rounded-sm transition-all duration-300"
         :class="computedClasses"
       >
         <Icon
@@ -57,7 +66,7 @@ const onInput = () => emit('update:modelValue', !props.isDisabled ? !props.model
         />
       </div>
 
-      <span v-if="label" class="text-sm">{{ label }}</span>
+      <span v-if="label" :class="{ 'text-sm': !isButtonVariant }">{{ label }}</span>
       <input
         :value="modelValue"
         type="checkbox"
