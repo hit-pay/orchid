@@ -3,7 +3,7 @@ import { Dropdown, Calendar, Input, BaseInput, Icon } from '@orchidui/vue'
 import { computed, ref } from 'vue'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import dayjs from 'dayjs'
-import ComplexCalendar from '@orchidui/vue/Form/ComplexCalendar/OcComplexCalendar.vue'
+import ComplexCalendar from '@/orchidui-core/Form/ComplexCalendar/OcComplexCalendar.vue'
 
 // Getting invalid date while using 'DD/MM/YYYY' format
 // https://github.com/iamkun/dayjs/issues/1786

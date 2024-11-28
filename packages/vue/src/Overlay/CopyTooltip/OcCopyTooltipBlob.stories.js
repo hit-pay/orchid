@@ -1,5 +1,5 @@
-import OcCopyTooltip from '@orchidui/vue/Overlay/CopyTooltip/OcCopyTooltip.vue'
-import OcButton from '@orchidui/vue/Form/Button/OcButton.vue'
+import OcCopyTooltip from '@/orchidui-core/Overlay/CopyTooltip/OcCopyTooltip.vue'
+import OcButton from '@/orchidui-core/Form/Button/OcButton.vue'
 
 export default {
   component: OcCopyTooltip,

@@ -1,7 +1,7 @@
 <script setup>
 import Quill from 'quill'
 import { QuillEditor } from './QuillEditor'
-import { ColorPicker } from '@orchidui/vue/ColorPicker.js'
+import { ColorPicker } from '@/orchidui-core/ColorPicker.js'
 
 import { computed, onMounted, ref } from 'vue'
 import { BaseInput, Icon, Dropdown, Slider } from '@orchidui/vue'

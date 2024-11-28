@@ -1,4 +1,5 @@
-import { Theme, Modal, Button, FormBuilder } from '@orchidui/vue'
+import { Theme, Modal, Button } from '@orchidui/vue'
+import { FormBuilder } from '@orchidui/dashboard'
 import { ref } from 'vue'
 
 export default {

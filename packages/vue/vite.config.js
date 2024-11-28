@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import fg from 'fast-glob'
 import vue from '@vitejs/plugin-vue'
+import { resolve } from 'path'
 
 // Defines an array of entry points to be used to search for files.
 const entryPoints = ['src/**/*.js']
@@ -30,6 +31,11 @@ const entries = Object.fromEntries(entities)
 
 export default defineConfig({
   plugins: [vue()],
+  resolve: {
+    alias: {
+      '@/orchidui-core': resolve(__dirname, './src/')
+    }
+  },
   build: {
     outDir: 'dist',
     lib: {

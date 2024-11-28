@@ -1,8 +1,8 @@
 <script setup>
 import { Dropdown, Icon, ConfirmationModal } from '@orchidui/vue'
 import { ref, computed } from 'vue'
-import { Draggable } from '@orchidui/vue/Draggable.js'
-import { ModalCropper } from '@orchidui/vue/Cropper.js'
+import { Draggable } from '@/orchidui-core/Draggable.js'
+import { ModalCropper } from '@/orchidui-core/Cropper.js'
 
 const props = defineProps({
   accept: {

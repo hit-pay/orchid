@@ -1,6 +1,6 @@
 <script setup>
 import { Chip, PrimaryActions } from '@orchidui/vue'
-import OcTitle from '@orchidui/vue/Elements/PageTitle/OcTitle.vue'
+import OcTitle from '@/orchidui-core/Elements/PageTitle/OcTitle.vue'
 import BalanceOverview from './BalanceType/OcBalanceOverview.vue'
 import DynamicType from './DynamicType/OcDynamicType.vue'
 

@@ -1,6 +1,5 @@
 import {
   Theme,
-  DataTable,
   Table,
   Chip,
   Icon,
@@ -10,6 +9,8 @@ import {
   Dropdown,
   DropdownItem
 } from '@orchidui/vue'
+
+import { DataTable } from '@orchidui/dashboard'
 
 import { ref } from 'vue'
 

@@ -1,5 +1,5 @@
-import { Theme, FormBuilder, Button, Input, Dropdown, DropdownItem, Icon } from '@orchidui/vue'
-
+import { Theme, Button, Input, Dropdown, DropdownItem, Icon } from '@orchidui/vue'
+import { FormBuilder } from '@orchidui/dashboard'
 import { ref } from 'vue'
 import { SampleJsonForm } from '../../data/JsonForm.sample'
 

@@ -1,6 +1,6 @@
 <script setup>
-import OcIcon from '@orchidui/vue/MediaAndIcons/Icon/OcIcon.vue'
-import OcChip from '@orchidui/vue/Feedback/Chip/OcChip.vue'
+import OcIcon from '@/orchidui-core/MediaAndIcons/Icon/OcIcon.vue'
+import OcChip from '@/orchidui-core/Feedback/Chip/OcChip.vue'
 
 defineProps({
   isExpanded: Boolean,

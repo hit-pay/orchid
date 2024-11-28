@@ -1,6 +1,6 @@
 <script setup>
 import { Dropdown, Input, BaseInput } from '@orchidui/vue'
-import { ComplexCalendar } from '@orchidui/vue/Calendar'
+import { ComplexCalendar } from '@/orchidui-core/Calendar'
 import { ref } from 'vue'
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'

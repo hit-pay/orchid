@@ -1,4 +1,4 @@
-import { ComplexCalendar } from '@orchidui/vue/Calendar.js'
+import { ComplexCalendar } from '@/orchidui-core/Calendar.js'
 import { Theme } from '@orchidui/vue'
 import dayjs from 'dayjs'
 import { ref } from 'vue'

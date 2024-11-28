@@ -1,11 +1,11 @@
 <script setup>
 import { Button, Icon } from '@orchidui/vue'
 import { computed } from 'vue'
-import CrossFeatureLogo from '@orchidui/vue/DataDisplay/Card/logo-animations/CrossFeatureLogo.vue'
-import CrossSellPosLogo from '@orchidui/vue/DataDisplay/Card/logo-animations/CrossSellPosLogo.vue'
-import CrossSellOsLogo from '@orchidui/vue/DataDisplay/Card/logo-animations/CrossSellOsLogo.vue'
-import VideoLogo from '@orchidui/vue/DataDisplay/Card/logo-animations/VideoLogo.vue'
-import EducationLogo from '@orchidui/vue/DataDisplay/Card/logo-animations/EducationLogo.vue'
+import CrossFeatureLogo from '@/orchidui-core/DataDisplay/Card/logo-animations/CrossFeatureLogo.vue'
+import CrossSellPosLogo from '@/orchidui-core/DataDisplay/Card/logo-animations/CrossSellPosLogo.vue'
+import CrossSellOsLogo from '@/orchidui-core/DataDisplay/Card/logo-animations/CrossSellOsLogo.vue'
+import VideoLogo from '@/orchidui-core/DataDisplay/Card/logo-animations/VideoLogo.vue'
+import EducationLogo from '@/orchidui-core/DataDisplay/Card/logo-animations/EducationLogo.vue'
 
 defineEmits(['hide-all', 'learn-more'])
 const props = defineProps({

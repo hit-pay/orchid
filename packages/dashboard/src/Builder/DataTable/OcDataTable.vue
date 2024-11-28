@@ -1,16 +1,7 @@
 <script setup>
-import {
-  Table,
-  Pagination,
-  PrevNext,
-  Select,
-  Tabs,
-  FilterSearch,
-  FilterSearchFor,
-  FilterForm,
-  Button,
-  Dropdown
-} from '@orchidui/vue'
+import { Table, Pagination, PrevNext, Select, Tabs, Button, Dropdown } from '@orchidui/vue'
+import { FilterSearch, FilterSearchFor, FilterForm } from '@orchidui/dashboard'
+
 import { ref, computed, onMounted } from 'vue'
 import dayjs from 'dayjs'
 import ColumnEdit from './ColumnEdit.vue'

@@ -1,7 +1,7 @@
 import { Theme, DatePicker, Calendar } from '@orchidui/vue'
 import dayjs from 'dayjs'
 import { ref } from 'vue'
-import OcComplexCalendar from '@orchidui/vue/Form/ComplexCalendar/OcComplexCalendar.vue'
+import OcComplexCalendar from '@/orchidui-core/Form/ComplexCalendar/OcComplexCalendar.vue'
 
 export default {
   components: { Calendar },

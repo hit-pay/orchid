@@ -14,7 +14,7 @@
 
 <script setup>
 import { computed, ref } from 'vue'
-import { useChart } from '@orchidui/vue/composables/useChart.js'
+import { useChart } from '@/orchidui-core/composables/useChart.js'
 
 const props = defineProps({
   variant: {

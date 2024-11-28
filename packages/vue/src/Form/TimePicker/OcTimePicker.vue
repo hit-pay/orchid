@@ -8,7 +8,7 @@ const emit = defineEmits({
 })
 
 const TimePopup = defineAsyncComponent(
-  () => import('@orchidui/vue/Form/TimePicker/OcTimePopup.vue')
+  () => import('@/orchidui-core/Form/TimePicker/OcTimePopup.vue')
 )
 
 const popup = ref()

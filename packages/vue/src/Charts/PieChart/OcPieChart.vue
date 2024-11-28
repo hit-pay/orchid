@@ -47,7 +47,7 @@
 <script setup>
 import { Tooltip, Icon } from '@orchidui/vue'
 import { computed, ref } from 'vue'
-import { useChart } from '@orchidui/vue/composables/useChart.js'
+import { useChart } from '@/orchidui-core/composables/useChart.js'
 
 const props = defineProps({
   showTooltip: Boolean,

@@ -1,8 +1,8 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue'
 import { Input, Button, BaseInput, Icon, Dropdown } from '@orchidui/vue'
-import { useUploadFileProgress } from '@orchidui/vue/composables/uploadFileProgress.js'
-import { ModalCropper } from '@orchidui/vue/Cropper.js'
+import { useUploadFileProgress } from '@/orchidui-core/composables/uploadFileProgress.js'
+import { ModalCropper } from '@/orchidui-core/Cropper.js'
 import SingleOnlyImageUpload from './OcSingleOnlyImageUpload.vue'
 
 const props = defineProps({

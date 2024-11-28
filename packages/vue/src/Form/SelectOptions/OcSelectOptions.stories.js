@@ -1,6 +1,6 @@
 import { Theme } from '@orchidui/vue'
-import { FormBuilder, SelectOptions } from '@orchidui/vue'
-
+import { SelectOptions } from '@orchidui/vue'
+import { FormBuilder } from '@orchidui/dashboard'
 import { ref } from 'vue'
 
 export default {

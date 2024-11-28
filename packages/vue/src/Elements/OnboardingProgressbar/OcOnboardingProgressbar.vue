@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PieChart } from '@orchidui/vue/Charts'
+import { PieChart } from '@/orchidui-core/Charts'
 import { computed } from 'vue'
 
 const props = defineProps({
