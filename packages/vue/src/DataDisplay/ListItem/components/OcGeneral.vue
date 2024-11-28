@@ -42,7 +42,7 @@ const toggleDropdown = () => {
     <div class="flex items-center gap-x-4 w-full">
       <slot name="logo" />
 
-      <div class="flex flex-col flex-1 gap-y-3">
+      <div class="flex flex-col flex-1 gap-y-3 overflow-hidden">
         <div class="flex items-center justify-between">
           <div class="flex text-sm text-oc-text-400 items-center gap-x-3 overflow-hidden">
             <slot name="title">
@@ -58,6 +58,7 @@ const toggleDropdown = () => {
                 :label="item.label"
                 :variant="item.variant"
                 :icon="item.icon"
+                :icon-size="item.iconSize"
                 :icon-tooltip="item.iconTooltip"
                 :class="item.class"
                 class="font-medium shrink-0"
@@ -83,7 +84,7 @@ const toggleDropdown = () => {
         </div>
 
         <slot>
-          <div class="flex flex-col gap-3" v-if="descriptionIcon || description || details.length">
+          <div v-if="descriptionIcon || description || details.length" class="flex flex-col gap-3">
             <div class="text-oc-text-400 flex gap-x-2 items-center text-sm">
               <Icon
                 v-if="descriptionIcon"

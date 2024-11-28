@@ -1,6 +1,6 @@
 <script setup>
 import { BaseInput, Input, Option, Icon, Chip, Button, Dropdown, Skeleton } from '@/orchidui'
-import { computed, nextTick, onMounted, ref, watch } from 'vue'
+import { computed, nextTick, ref, watch } from 'vue'
 
 const props = defineProps({
   label: String,
@@ -141,7 +141,7 @@ const localValueOption = computed(() => {
     }
     return selected
   } else {
-    return props.options.find((o) => o.value === props.modelValue)
+    return props.options.find((o) => o.value.toString() === props.modelValue?.toString())
   }
 })
 
@@ -279,7 +279,7 @@ defineExpose({
     <Dropdown
       ref="dropdownRef"
       v-model="isDropdownOpened"
-      class="w-full bg-white"
+      class="w-full"
       :class="{
         '!bg-transparent': isTransparent
       }"
@@ -293,10 +293,10 @@ defineExpose({
       @scroll="loadMore"
     >
       <div
-        class="border min-h-[36px] w-full px-3 flex justify-between items-center cursor-pointer gap-x-3 rounded"
+        class="border min-h-[36px] w-full px-3 flex justify-between items-center bg-white cursor-pointer gap-x-3 rounded"
         :class="{
           'border-oc-error': errorMessage && !isDisabled,
-          'pointer-events-none bg-oc-bg-dark': isDisabled,
+          'pointer-events-none !bg-oc-bg-dark': isDisabled,
           'py-3': multiple,
           'border-none !min-h-[30px] !px-0': isTransparent && !isSlim,
           'border-none !min-h-[18px] !px-0': isSlim
@@ -330,7 +330,6 @@ defineExpose({
         <template v-if="isInlineSearch && isFilterable && !localValueOption">
           <Input
             v-model="query"
-            class="sticky top-3 z-10"
             placeholder="Search"
             input-class="!border-none !shadow-none"
             :is-readonly="!isDropdownOpened"
@@ -372,25 +371,31 @@ defineExpose({
       </div>
 
       <template #menu>
-        <div ref="selectListRef" class="p-3 flex flex-col gap-y-2">
-          <Input
+        <div ref="selectListRef" class="flex flex-col gap-y-2">
+          <div
             v-if="
               (isFilterable && !isInlineSearch) ||
               (isFilterable && isInlineSearch && localValueOption)
             "
-            ref="searchInputRef"
-            v-model="query"
-            icon="search"
-            class="sticky top-3 z-10"
-            placeholder="Search"
-            @update:model-value="$emit('onSearchKeywords', query)"
+            class="sticky px-3 pt-3 top-0 z-10 bg-white"
           >
-            <template #icon>
-              <Icon class="w-5 h-5 text-oc-text-400" name="search" />
-            </template>
-          </Input>
+            <Input
+              ref="searchInputRef"
+              v-model="query"
+              icon="search"
+              placeholder="Search"
+              @update:model-value="$emit('onSearchKeywords', query)"
+            >
+              <template #icon>
+                <Icon class="w-5 h-5 text-oc-text-400" name="search" />
+              </template>
+            </Input>
+          </div>
 
-          <div class="flex flex-col gap-y-2">
+          <div
+            class="flex px-3 pb-3 flex-col gap-y-2"
+            :class="{ 'pt-3': !isFilterable || (isInlineSearch && !localValueOption) }"
+          >
             <Option
               v-if="isCheckboxes && isSelectAll && filterableOptions.length && multiple"
               :is-selected="isSelectedAll"

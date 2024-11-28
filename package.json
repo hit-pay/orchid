@@ -3,13 +3,14 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "dev": "storybook dev -p 6006",
+    "dev:home": "vite dev",
     "build:storybook": "storybook build -o public/storybook",
-    "astro": "astro",
-    "dev:playground": "astro dev",
-    "build": "npm run build:storybook && astro build",
-    "preview": "astro build && npm run build:storybook && astro preview",
+    "build": "npm run build:storybook",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix packages",
     "format": "prettier .  --write",
     "build:package": "cd packages/vue &&  npm install && npm run build",
@@ -17,7 +18,7 @@
     "publish": "npm run build:package && npm run publish:package"
   },
   "dependencies": {
-    "@orchidui/vue": "^0.5.9",
+    "@orchidui/vue": "workspace:*",
     "@popperjs/core": "^2.11.8",
     "dayjs": "^1.11.10",
     "echarts": "^5.4.3",
@@ -33,7 +34,6 @@
     "vue3-colorpicker": "^2.2.3"
   },
   "devDependencies": {
-    "@astrojs/vue": "^4.0.8",
     "@storybook/addon-essentials": "^7.6.12",
     "@storybook/addon-interactions": "^7.6.12",
     "@storybook/addon-links": "^7.6.12",
@@ -42,7 +42,6 @@
     "@storybook/vue3": "^7.6.12",
     "@storybook/vue3-vite": "^7.6.12",
     "@vue/eslint-config-prettier": "^8.0.0",
-    "astro": "^4.4.11",
     "autoprefixer": "^10.4.16",
     "eslint-config-prettier": "^9.0.0",
     "eslint-config-standard": "^17.1.0",

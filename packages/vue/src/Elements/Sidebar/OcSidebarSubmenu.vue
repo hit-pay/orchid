@@ -33,7 +33,7 @@ defineProps({
         v-if="isExpandedSidebar"
         width="22"
         height="22"
-        class="flex z-[1] ml-5"
+        class="flex z-[1] ml-[17.5px]"
         :class="{
           'text-[var(--oc-sidebar-menu-active-icon)]': !submenu.active,
           'text-[var(--oc-sidebar-menu-active-icon-active)]': submenu.active

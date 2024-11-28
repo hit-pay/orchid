@@ -401,10 +401,10 @@ const toggleSubForm = (name) => {
                     :hint="slot.form.props?.hint ?? ''"
                     :max-size="5"
                     :max-images="slot.form.props?.maxImages ?? 8"
+                    :input-options="form.props?.options"
                     :important="true"
                     is-image-only
                     :columns-count="slot.form.props?.columnsCount ?? 4"
-                    with-link
                     @update:model-value="onUpdateimages(slot.form, $event)"
                     @on-edit-file="onEditimages(slot.form, $event)"
                     @on-remove-file="onDeleteimages(slot.form, $event)"
@@ -430,10 +430,10 @@ const toggleSubForm = (name) => {
           :hint="form.props?.hint ?? ''"
           :max-size="5"
           :max-images="form.props?.maxImages ?? 8"
+          :input-options="form.props?.options"
           :important="true"
           is-image-only
           :columns-count="form.props?.columnsCount ?? 4"
-          with-link
           @update:model-value="onUpdateimages(form, $event)"
           @on-edit-file="onEditimages(form, $event)"
           @on-remove-file="onDeleteimages(form, $event)"

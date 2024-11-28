@@ -59,11 +59,12 @@
           "
         />
       </div>
-      <slot></slot>
+      <HomePage />
     </div>
   </div>
 </template>
 <script setup>
+import HomePage from './HomePage.vue'
 const navigation = [
   { name: 'Documentation', href: '/storybook/' },
   {

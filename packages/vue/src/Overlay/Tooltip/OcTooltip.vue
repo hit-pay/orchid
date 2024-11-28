@@ -138,6 +138,10 @@ const onClickOutside = () => {
       bottom: -4px;
     }
 
+    div[data-popper-placement^='top'] .oc-arrow {
+      bottom: -4px;
+    }
+
     div[data-popper-placement^='bottom'] .oc-arrow {
       top: -4px;
     }

@@ -186,3 +186,62 @@ export const buttonVariants = {
     `
   })
 }
+
+export const buttonVariantsWithRadio = {
+  args: {
+    radio: [
+      {
+        label: 'Text',
+        value: 6
+      },
+      {
+        label: 'Text',
+        value: 7
+      },
+      {
+        label: 'Text',
+        value: 8
+      },
+      {
+        label: 'Text',
+        value: 9
+      },
+      {
+        label: 'Text',
+        value: 10
+      }
+    ]
+  },
+  render: (args) => ({
+    components: { RadioGroup, Theme },
+    setup() {
+      const selectedRadio1 = ref()
+      const selectedRadio2 = ref()
+      return { selectedRadio1, selectedRadio2, args }
+    },
+    template: `
+      <Theme>
+        <div class="flex flex-col gap-y-4">
+          <RadioGroup
+            v-model="selectedRadio1"
+            :radio="args.radio"
+            label="Label"
+            group-name="radio3"
+            alignment="vertical"
+            :is-button-variant="true"
+            :is-button-variant-with-radio="true"
+          />
+          <RadioGroup
+            v-model="selectedRadio2"
+            :radio="args.radio"
+            label="Label"
+            group-name="radio4"
+            alignment="horizontal"
+            :is-button-variant="true"
+            :is-button-variant-with-radio="true"
+          />
+        </div>
+      </Theme>
+    `
+  })
+}

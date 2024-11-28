@@ -1,22 +1,25 @@
 import { Theme } from '@/orchidui'
 import { Cropper } from './OcCropper'
 
+import { ref } from 'vue'
 export default {
   component: Cropper,
   tags: ['autodocs']
 }
 export const Default = {
   args: {
-    link: '',
     label: '',
-    withLink: false,
     img: '/images/image.jpg',
     isReplaceImage: true
   },
   render: (args) => ({
     components: { Cropper, Theme },
     setup() {
-      return { args }
+      let modelValueOptions = ref({
+        caption: 'hello',
+        caption_variant: 'hover'
+      })
+      return { args, modelValueOptions }
     },
     template: `
           <Theme class="min-h-[500px]">
@@ -26,14 +29,18 @@ export const Default = {
               <img :src="args.image" class="max-w-2xl" />
             </div>
             
+            {{ modelValueOptions }}
             <Cropper
-                :withLink="args.withLink"
-                :link="args.link"
                 :img="args.img"
                 :max-size="args.maxSize"
                 :is-replace-image="args.isReplaceImage"
+
+
+                :input-options="['description','link','caption','lightbox']"
+                :input-option-values="modelValueOptions"
+                
                 @change-image="args.image = $event"
-                @update:link="args.link = $event"
+                @update:input-options="modelValueOptions = $event"
             />
           </Theme>
         `

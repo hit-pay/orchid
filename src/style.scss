@@ -39,3 +39,64 @@
 
 @tailwind components;
 @tailwind utilities;
+
+.foundation {
+  --oc-sidebar-background: var(--oc-background-dark);
+  --oc-sidebar-menu-hover: var(--oc-accent-1-50-tr);
+  --oc-sidebar-menu-active: var(--oc-accent-1-50-tr);
+  --oc-sidebar-menu-title: var(--oc-accent-1-200);
+  --oc-sidebar-menu-active-text: var(--oc-accent-1-500);
+  --oc-sidebar-menu-active-icon: var(--oc-accent-1-400);
+  --oc-sidebar-menu-active-icon-active: var(--oc-primary-500);
+}
+
+.components {
+  --oc-sidebar-background: #fbfbf9;
+  --oc-sidebar-menu-hover: #f5f4ef;
+  --oc-sidebar-menu-active: #f5f4ef;
+  --oc-sidebar-menu-title: #a6b3cd;
+  --oc-sidebar-menu-active-text: #03102f;
+  --oc-sidebar-menu-active-icon: #5a514b;
+  --oc-sidebar-menu-active-icon-active: #fdb012;
+}
+
+.case-studies {
+  --oc-sidebar-background: #f9fbf9;
+  --oc-sidebar-menu-hover: #eff5f0;
+  --oc-sidebar-menu-active: #eff5f0;
+  --oc-sidebar-menu-title: #a6b3cd;
+  --oc-sidebar-menu-active-text: #03102f;
+  --oc-sidebar-menu-active-icon: #566650;
+  --oc-sidebar-menu-active-icon-active: #0ea81b;
+}
+.dark {
+  .foundation {
+    --oc-sidebar-background: var(--oc-background-dark);
+    --oc-sidebar-menu-hover: var(--oc-accent-1-50-tr);
+    --oc-sidebar-menu-active: var(--oc-accent-1-50-tr);
+    --oc-sidebar-menu-title: var(--oc-accent-1-200);
+    --oc-sidebar-menu-active-text: var(--oc-accent-1-500);
+    --oc-sidebar-menu-active-icon: var(--oc-accent-1-400);
+    --oc-sidebar-menu-active-icon-active: var(--oc-primary-500);
+  }
+
+  .components {
+    --oc-sidebar-background: var(--oc-background-dark);
+    --oc-sidebar-menu-hover: var(--oc-warning-50-tr);
+    --oc-sidebar-menu-active: var(--oc-warning-50-tr);
+    --oc-sidebar-menu-title: var(--oc-warning-200);
+    --oc-sidebar-menu-active-text: var(--oc-warning-500);
+    --oc-sidebar-menu-active-icon: var(--oc-warning-400);
+    --oc-sidebar-menu-active-icon-active: var(--oc-warning-500);
+  }
+
+  .case-studies {
+    --oc-sidebar-background: var(--oc-background-dark);
+    --oc-sidebar-menu-hover: var(--oc-success-50-tr);
+    --oc-sidebar-menu-active: var(--oc-success-50-tr);
+    --oc-sidebar-menu-title: var(--oc-success-200);
+    --oc-sidebar-menu-active-text: var(--oc-success-500);
+    --oc-sidebar-menu-active-icon: var(--oc-success-400);
+    --oc-sidebar-menu-active-icon-active: var(--oc-success-500);
+  }
+}

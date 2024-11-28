@@ -21,7 +21,7 @@ const props = defineProps({
     type: Number,
     default: 3
   },
-  withLink: Boolean,
+  inputOptions: Array,
   maxImages: Number
 })
 const emit = defineEmits([
@@ -38,7 +38,7 @@ const emit = defineEmits([
 const isDropdownOpen = ref([])
 const isEditOpen = ref(false)
 const editImgIndex = ref('')
-const editLink = ref('')
+const editInputOptions = ref({})
 
 const editImgIndexFileUrl = computed(() => {
   return props.uploadedImages[editImgIndex.value].fileUrl
@@ -81,11 +81,13 @@ const changeImage = (url) => {
 
   isEditOpen.value = false
   editImgIndex.value = ''
-  editLink.value = ''
+  editInputOptions.value = {}
 }
-const updateLink = (link) => {
+const updateInputOption = (optionValues) => {
   let changedFile = props.uploadedImages[editImgIndex.value]
-  changedFile.link = link
+  Object.keys(optionValues).forEach((key) => {
+    changedFile[key] = optionValues[key]
+  })
   emit('update:uploadedImages', props.uploadedImages)
 }
 
@@ -103,6 +105,15 @@ const showAddBtn = computed(
     props.maxImages == undefined ||
     (props.maxImages && props.uploadedImages.length < props.maxImages)
 )
+
+const editSelectedImage = (i, img) => {
+  editImgIndex.value = i
+  props.inputOptions?.forEach((key) => {
+    editInputOptions.value[key] = img[key]
+  })
+  isDropdownOpen[i] = false
+  isEditOpen.value = true
+}
 </script>
 
 <template>
@@ -156,14 +167,7 @@ const showAddBtn = computed(
                 <div class="py-2 flex flex-col">
                   <div
                     class="flex p-3 cursor-pointer items-center gap-x-3"
-                    @click="
-                      () => {
-                        editImgIndex = i
-                        editLink = img.link
-                        isDropdownOpen[i] = false
-                        isEditOpen = true
-                      }
-                    "
+                    @click="editSelectedImage(i, img)"
                   >
                     <Icon width="16" height="16" name="pencil" />
                     <span>Edit Image</span>
@@ -213,8 +217,8 @@ const showAddBtn = computed(
       v-if="isEditOpen"
       v-model="isEditOpen"
       :img="editImgIndexFileUrl"
-      :with-link="withLink"
-      :link="editLink"
+      :input-options="inputOptions"
+      :input-option-values="editInputOptions"
       @close="
         () => {
           isEditOpen = false
@@ -222,7 +226,7 @@ const showAddBtn = computed(
         }
       "
       @change-image="changeImage"
-      @update:link="updateLink"
+      @update:input-options="updateInputOption"
     />
 
     <ConfirmationModal

@@ -15,7 +15,9 @@ const props = defineProps({
   errorMessage: String,
   hint: String,
   isDisabled: Boolean,
-  isSelectAll: Boolean
+  isSelectAll: Boolean,
+  isButtonVariant: Boolean,
+  isBlock: Boolean
 })
 const emit = defineEmits({
   'update:modelValue': []
@@ -56,6 +58,7 @@ const selectAll = () => {
         :is-disabled="isDisabled"
         :value="allCheckboxValues"
         :model-value="isAllSelected"
+        :is-button-variant="isButtonVariant"
         @update:model-value="selectAll"
       />
       <Checkbox
@@ -65,8 +68,9 @@ const selectAll = () => {
         :value="checkbox.value"
         :is-error="!!errorMessage"
         :is-disabled="isDisabled"
-        class="!w-fit"
+        :class="{ '!w-fit': !isBlock }"
         :model-value="isSelectedCheckbox(checkbox.value)"
+        :is-button-variant="isButtonVariant"
         @update:model-value="toggleCheckbox(checkbox.value)"
       />
     </div>

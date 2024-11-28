@@ -2,7 +2,7 @@
 import { Chip, Icon } from '@/orchidui'
 import { ref } from 'vue'
 
-defineProps({
+const props = defineProps({
   title: String,
   description: String,
   chips: {
@@ -10,15 +10,28 @@ defineProps({
     default: () => []
   },
   isDisabled: Boolean,
+  hasActions: {
+    type: Boolean,
+    default: true,
+  },
   isTransparent: Boolean,
-  isDraggable: Boolean
+  isDraggable: Boolean,
+  isNoToggleForced: Boolean,
 })
 const emit = defineEmits(['edit', 'delete'])
 const isOpen = ref(false)
 
 const toggleAccordion = () => {
+  if (props.isNoToggleForced) {
+    return;
+  }
+
   isOpen.value = !isOpen.value
 }
+
+defineExpose({
+  toggleAccordion,
+})
 </script>
 
 <template>
@@ -29,8 +42,15 @@ const toggleAccordion = () => {
       'border-none !p-0': isTransparent
     }"
   >
-    <div class="flex gap-4 items-stretch" :class="{ 'border-b': isOpen }">
+    <div
+      class="flex gap-4 items-stretch"
+      :class="{
+        'border-b': isOpen,
+        'pl-5': isNoToggleForced,
+      }"
+    >
       <div
+        v-if="!isNoToggleForced"
         class="flex items-center p-3 border-r bg-gray-50 cursor-pointer"
         @click="toggleAccordion"
       >
@@ -72,8 +92,12 @@ const toggleAccordion = () => {
           </slot>
         </div>
 
-        <slot name="right">
-          <div class="flex items-center gap-4 opacity-0 group-hover:opacity-100">
+        <slot
+          name="right"
+          :is-open="isOpen"
+          :toggle-accordion="toggleAccordion"
+        >
+          <div v-if="hasActions" class="flex items-center gap-4 opacity-0 group-hover:opacity-100">
             <div class="border border-oc-accent-1-100 rounded-sm p-1 flex gap-x-1">
               <Icon
                 name="pencil"
@@ -94,7 +118,7 @@ const toggleAccordion = () => {
         </slot>
       </div>
     </div>
-    <div v-if="isOpen" class="py-5 px-7">
+    <div v-show="isOpen" class="py-5 px-7">
       <slot name="content" />
     </div>
   </div>
