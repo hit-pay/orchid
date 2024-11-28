@@ -561,7 +561,7 @@ const onClickContent = () => {
                 />
               </div>
             </div>
-            <div class="mt-1 mx-2">
+            <div class="mt-1 mx-2 cursor-pointer">
               <svg
                 width="20"
                 height="20"
