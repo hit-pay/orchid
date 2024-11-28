@@ -1,5 +1,5 @@
 <script setup>
-import { Icon, Chip } from '@orchidui/vue-core'
+import { Icon, Chip } from '@/orchidui-core'
 
 defineProps({
   title: {

@@ -1,5 +1,5 @@
 import { defineAsyncComponent as o } from "vue";
-const e = o(() => import("../../OcPieChart-BZ5LCDes.js"));
+const e = o(() => import("../../OcPieChart-uUDEsIZT.js"));
 export {
   e as PieChart
 };

@@ -1,5 +1,5 @@
 <script setup>
-import { Tooltip, Button, Avatar, Dropdown, DropdownItem } from '@orchidui/vue-core'
+import { Tooltip, Button, Avatar, Dropdown, DropdownItem } from '@/orchidui-core'
 import { ref } from 'vue'
 
 const isDropdownOpened = ref(false)

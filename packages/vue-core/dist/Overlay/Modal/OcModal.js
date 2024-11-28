@@ -1,5 +1,6 @@
-import { _ as d, a as e } from "../../OcModalPage-BmU4mQ8X.js";
+import { _ as r } from "../../OcModal-BKjHuV_w.js";
+import { _ as d } from "../../OcModalPage-Cc2JlLjv.js";
 export {
-  d as Modal,
-  e as OcModalPage
+  r as Modal,
+  d as OcModalPage
 };

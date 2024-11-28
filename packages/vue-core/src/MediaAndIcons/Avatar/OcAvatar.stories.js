@@ -1,4 +1,4 @@
-import { Theme, Avatar } from '@orchidui/vue-core'
+import { Theme, Avatar } from '@/orchidui-core'
 import { ref } from 'vue'
 
 export default {

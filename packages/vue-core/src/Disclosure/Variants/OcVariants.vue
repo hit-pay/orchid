@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Variant } from '@orchidui/vue-core'
+import { Variant } from '@/orchidui-core'
 
 defineProps({
   variants: {

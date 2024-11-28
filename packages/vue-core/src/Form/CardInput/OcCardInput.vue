@@ -1,5 +1,5 @@
 <script setup>
-import { Input, Icon } from '@orchidui/vue-core'
+import { Input, Icon } from '@/orchidui-core'
 
 defineProps({
   placeholder: String,

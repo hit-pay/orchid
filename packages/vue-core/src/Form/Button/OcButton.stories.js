@@ -1,4 +1,4 @@
-import { Theme, Button } from '@orchidui/vue-core'
+import { Theme, Button } from '@/orchidui-core'
 
 export default {
   component: Button,

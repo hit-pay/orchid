@@ -7,7 +7,7 @@ defineProps({
   link: String
 })
 
-import { TableLink } from '@orchidui/vue-core'
+import { TableLink } from '@/orchidui-core'
 </script>
 
 <template>

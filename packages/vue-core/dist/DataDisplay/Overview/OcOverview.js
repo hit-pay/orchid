@@ -1,6 +1,7 @@
-import { _ as r, a, b as i } from "../../OcOverviewItem-BiJ9ROIM.js";
+import { _ as v, a as o } from "../../OcOverviewItem-f2qg2KV5.js";
+import { _ as i } from "../../OcOverviewIcon-jCLuTU_N.js";
 export {
-  r as Overview,
-  a as OverviewIcon,
-  i as OverviewItem
+  v as Overview,
+  i as OverviewIcon,
+  o as OverviewItem
 };

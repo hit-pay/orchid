@@ -1,5 +1,5 @@
 <script setup>
-import { Dropdown, Calendar, Input, BaseInput, Icon } from '@orchidui/vue-core'
+import { Dropdown, Calendar, Input, BaseInput, Icon } from '@/orchidui-core'
 import { computed, ref } from 'vue'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import dayjs from 'dayjs'

@@ -1,5 +1,5 @@
 <script setup>
-import { Button, Icon } from '@orchidui/vue-core'
+import { Button, Icon } from '@/orchidui-core'
 import { computed } from 'vue'
 
 defineEmits('click:Button')

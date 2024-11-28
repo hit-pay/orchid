@@ -1,7 +1,7 @@
 <script setup>
 import OcTitle from './OcTitle.vue'
 import MobilePageTitle from './OcMobilePageTitle.vue'
-import { PageTitleRight, Button } from '@orchidui/vue-core'
+import { PageTitleRight, Button } from '@/orchidui-core'
 
 defineProps({
   title: { type: String, required: true },

@@ -1,5 +1,5 @@
 <script setup>
-import { Dropdown, Input, Icon } from '@orchidui/vue-core'
+import { Dropdown, Input, Icon } from '@/orchidui-core'
 import { computed, ref } from 'vue'
 import codes from '../../data/CountryCodes.sample'
 import { preventEventIfNotNumberInput } from '@/orchidui-core/composables/helpers.js'

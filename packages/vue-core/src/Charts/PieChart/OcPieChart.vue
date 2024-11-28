@@ -45,7 +45,7 @@
 </template>
 
 <script setup>
-import { Tooltip, Icon } from '@orchidui/vue-core'
+import { Tooltip, Icon } from '@/orchidui-core'
 import { computed, ref } from 'vue'
 import { useChart } from '@/orchidui-core/composables/useChart.js'
 

@@ -1,5 +1,5 @@
 <script setup>
-import { Icon, Tooltip } from '@orchidui/vue-core'
+import { Icon, Tooltip } from '@/orchidui-core'
 import { useSlots } from 'vue'
 
 defineProps({

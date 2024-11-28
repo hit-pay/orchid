@@ -10,7 +10,7 @@ import {
   Dropdown,
   DropdownItem,
   Button
-} from '@orchidui/vue-core'
+} from '@/orchidui-core'
 
 import SampleHeaderLeft from './SampleHeaderLeft.vue'
 import SampleHeaderRight from './SampleHeaderRight.vue'

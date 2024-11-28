@@ -1,4 +1,4 @@
-import { InfoCard, Button, OverviewItem } from '@orchidui/vue-core'
+import { InfoCard, Button, OverviewItem } from '@/orchidui-core'
 
 export default {
   component: InfoCard,

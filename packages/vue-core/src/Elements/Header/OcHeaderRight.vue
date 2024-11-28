@@ -1,5 +1,5 @@
 <script setup>
-import { Button } from '@orchidui/vue-core'
+import { Button } from '@/orchidui-core'
 const emit = defineEmits(['save', 'cancel', 'addition-click', 'dropdown-action'])
 defineProps({
   primaryProps: {

@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref } from 'vue'
-import { Icon, BaseInput, Button } from '@orchidui/vue-core'
+import { Icon, BaseInput, Button } from '@/orchidui-core'
 import { useUploadFileProgress } from '@/orchidui-core/composables/uploadFileProgress.js'
 import OcSimpleMultipleUpload from './OcSimpleMultipleUpload.vue'
 

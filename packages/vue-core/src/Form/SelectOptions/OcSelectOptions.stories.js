@@ -1,5 +1,5 @@
-import { Theme } from '@orchidui/vue-core'
-import { SelectOptions } from '@orchidui/vue-core'
+import { Theme } from '@/orchidui-core'
+import { SelectOptions } from '@/orchidui-core'
 import { FormBuilder } from '@orchidui/vue-dashboard'
 import { ref } from 'vue'
 

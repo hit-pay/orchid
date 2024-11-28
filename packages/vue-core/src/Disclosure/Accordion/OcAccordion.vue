@@ -1,6 +1,6 @@
 <script setup>
 import { nextTick, onUpdated, ref, watch } from 'vue'
-import { Icon } from '@orchidui/vue-core'
+import { Icon } from '@/orchidui-core'
 
 const upcomingAccordion = ref()
 

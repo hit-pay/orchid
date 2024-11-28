@@ -1,5 +1,5 @@
 <script setup>
-import { FormBuilder } from '@/orchidui-dashboard'
+import { FormBuilder } from '@orchidui/vue-core'
 import { Button } from '@orchidui/vue-core'
 import { ref, computed, onMounted } from 'vue'
 

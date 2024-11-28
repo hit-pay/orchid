@@ -1,4 +1,4 @@
-import { Theme, Tabs, PaymentTab } from '@orchidui/vue-core'
+import { Theme, Tabs, PaymentTab } from '@/orchidui-core'
 import { ref } from 'vue'
 
 export default {

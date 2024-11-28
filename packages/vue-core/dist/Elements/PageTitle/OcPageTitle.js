@@ -1,6 +1,7 @@
-import { _ as i, O as t, a as r } from "../../OcPageTitleRight-DdlcVEiz.js";
+import { _ as r, P as t } from "../../OcPageTitleRight-gfFL4og_.js";
+import { _ as o } from "../../OcPrimaryActions-D0RDT8B2.js";
 export {
-  i as PageTitle,
+  r as PageTitle,
   t as PageTitleRight,
-  r as PrimaryActions
+  o as PrimaryActions
 };

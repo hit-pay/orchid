@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue'
-import { Icon, Tooltip } from '@orchidui/vue-core'
+import { Icon, Tooltip } from '@/orchidui-core'
 
 const props = defineProps({
   variant: {

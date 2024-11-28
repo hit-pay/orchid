@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Button } from '@orchidui/vue-core'
+import { Button } from '@/orchidui-core'
 
 defineProps({
   title: String,

@@ -8,7 +8,7 @@ import {
   Chip,
   TableLink,
   Skeleton
-} from '@orchidui/vue-core'
+} from '@/orchidui-core'
 import dayjs from 'dayjs'
 
 const Variants = {

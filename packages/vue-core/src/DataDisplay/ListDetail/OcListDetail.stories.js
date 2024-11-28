@@ -1,4 +1,4 @@
-import { Theme, ListDetail } from '@orchidui/vue-core'
+import { Theme, ListDetail } from '@/orchidui-core'
 
 export default {
   component: ListDetail,

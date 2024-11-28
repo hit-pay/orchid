@@ -1,5 +1,5 @@
 <script setup>
-import { Input, Slider, BaseInput } from '@orchidui/vue-core'
+import { Input, Slider, BaseInput } from '@/orchidui-core'
 import { ref, onMounted } from 'vue'
 
 const props = defineProps({

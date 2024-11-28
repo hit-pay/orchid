@@ -1,5 +1,5 @@
 <script setup>
-import { BaseInput, Icon } from '@orchidui/vue-core'
+import { BaseInput, Icon } from '@/orchidui-core'
 
 import { computed } from 'vue'
 

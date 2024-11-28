@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Icon } from '@orchidui/vue-core'
+import { Icon } from '@/orchidui-core'
 
 const props = defineProps({
   variant: {

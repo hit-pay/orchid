@@ -1,5 +1,5 @@
 <script setup>
-import { OverviewIcon, Icon, Tooltip, Skeleton } from '@orchidui/vue-core'
+import { OverviewIcon, Icon, Tooltip, Skeleton } from '@/orchidui-core'
 
 defineProps({
   icon: String,

@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-import { Input } from '@orchidui/vue-core'
+import { Input } from '@/orchidui-core'
 import { ref, watch } from 'vue'
 
 const props = defineProps({

@@ -1,5 +1,5 @@
 <script setup>
-import { BaseInput, Icon, Tooltip } from '@orchidui/vue-core'
+import { BaseInput, Icon, Tooltip } from '@/orchidui-core'
 
 defineProps({
   modelValue: [String, Boolean],

@@ -1,5 +1,5 @@
 <script setup>
-import { Icon, Button } from '@orchidui/vue-core'
+import { Icon, Button } from '@/orchidui-core'
 
 const props = defineProps({
   modelValue: {

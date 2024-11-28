@@ -1,5 +1,5 @@
 <script setup>
-import { Chip, Icon, Tooltip } from '@orchidui/vue-core'
+import { Chip, Icon, Tooltip } from '@/orchidui-core'
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 
 const props = defineProps({

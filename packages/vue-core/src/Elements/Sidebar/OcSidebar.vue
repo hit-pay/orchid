@@ -1,6 +1,6 @@
 <script setup>
 import { ref, reactive, onMounted, computed } from 'vue'
-import { Icon, SidebarSubmenu, Dropdown } from '@orchidui/vue-core'
+import { Icon, SidebarSubmenu, Dropdown } from '@/orchidui-core'
 
 const emit = defineEmits(['changeExpanded', 'click:sidebar-icon', 'changeExpandedMenus'])
 

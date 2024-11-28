@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Icon, Tooltip } from '@orchidui/vue-core'
+import { Icon, Tooltip } from '@/orchidui-core'
 
 defineProps({
   value: [String, Blob],

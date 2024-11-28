@@ -1,6 +1,6 @@
 import { ref } from 'vue'
-import { SingleFileUpload } from '@orchidui/vue-core'
-import { RadioGroup } from '@orchidui/vue-core'
+import { SingleFileUpload } from '@/orchidui-core'
+import { RadioGroup } from '@/orchidui-core'
 
 export default {
   component: SingleFileUpload,

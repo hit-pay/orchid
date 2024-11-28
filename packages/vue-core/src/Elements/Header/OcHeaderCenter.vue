@@ -1,5 +1,5 @@
 <script setup>
-import { Icon } from '@orchidui/vue-core'
+import { Icon } from '@/orchidui-core'
 defineProps({
   isSaved: Boolean
 })

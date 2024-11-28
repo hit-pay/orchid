@@ -2,7 +2,7 @@
   "include": ["packages", "types", "scripts"],
   "compilerOptions": {
     "paths": {
-      "@orchidui/vue-core": ["./packages/vue-core/src"],
+      "@/orchidui-core": ["./packages/vue-core/src"],
       "@orchidui/vue-dashboard": ["./packages/vue-dashboard/src"]
     }
   }

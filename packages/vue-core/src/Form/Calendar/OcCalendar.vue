@@ -1,5 +1,5 @@
 <script setup>
-import { Button, Icon, Checkbox, Dropdown } from '@orchidui/vue-core'
+import { Button, Icon, Checkbox, Dropdown } from '@/orchidui-core'
 import { computed, ref } from 'vue'
 import dayjs from 'dayjs'
 import { debounce } from 'lodash-es'

@@ -1,4 +1,4 @@
-import { O as a } from "../../OcCustomerCard-BMfRPpH-.js";
+import { C } from "../../OcCustomerCard-DeynYOgo.js";
 export {
-  a as CustomerCard
+  C as CustomerCard
 };

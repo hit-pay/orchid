@@ -1,5 +1,5 @@
 <script setup>
-import { OverviewItem } from '@orchidui/vue-core'
+import { OverviewItem } from '@/orchidui-core'
 
 defineProps({
   title: String,

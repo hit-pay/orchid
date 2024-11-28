@@ -1,4 +1,4 @@
-import { OcOnboardingListItem } from '@orchidui/vue-core'
+import { OcOnboardingListItem } from '@/orchidui-core'
 
 export default {
   component: OcOnboardingListItem,

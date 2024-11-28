@@ -1,4 +1,4 @@
-import { Theme, Banner } from '@orchidui/vue-core'
+import { Theme, Banner } from '@/orchidui-core'
 
 export default {
   component: Banner,

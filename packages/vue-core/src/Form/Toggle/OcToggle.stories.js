@@ -1,4 +1,4 @@
-import { Theme, Toggle } from '@orchidui/vue-core'
+import { Theme, Toggle } from '@/orchidui-core'
 import { ref } from 'vue'
 
 export default {

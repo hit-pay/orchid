@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ListUrl, Icon, Dropdown } from '@orchidui/vue-core'
+import { ListUrl, Icon, Dropdown } from '@/orchidui-core'
 import { ref } from 'vue'
 
 defineProps({

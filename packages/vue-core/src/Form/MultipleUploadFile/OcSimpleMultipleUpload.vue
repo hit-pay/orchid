@@ -1,5 +1,5 @@
 <script setup>
-import { Dropdown, Icon, ConfirmationModal } from '@orchidui/vue-core'
+import { Dropdown, Icon, ConfirmationModal } from '@/orchidui-core'
 import { ref, computed } from 'vue'
 import { Draggable } from '@/orchidui-core/Draggable.js'
 import { ModalCropper } from '@/orchidui-core/Cropper.js'

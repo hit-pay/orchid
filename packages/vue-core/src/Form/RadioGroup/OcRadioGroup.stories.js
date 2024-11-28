@@ -1,4 +1,4 @@
-import { Theme, RadioGroup } from '@orchidui/vue-core'
+import { Theme, RadioGroup } from '@/orchidui-core'
 import { ref } from 'vue'
 
 export default {

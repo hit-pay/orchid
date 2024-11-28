@@ -1,4 +1,4 @@
-import { Theme, CardInput } from '@orchidui/vue-core'
+import { Theme, CardInput } from '@/orchidui-core'
 import { ref } from 'vue'
 
 export default {

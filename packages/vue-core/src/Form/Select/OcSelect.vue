@@ -1,14 +1,5 @@
 <script setup>
-import {
-  BaseInput,
-  Input,
-  Option,
-  Icon,
-  Chip,
-  Button,
-  Dropdown,
-  Skeleton
-} from '@orchidui/vue-core'
+import { BaseInput, Input, Option, Icon, Chip, Button, Dropdown, Skeleton } from '@/orchidui-core'
 import { computed, nextTick, ref, watch } from 'vue'
 
 const props = defineProps({

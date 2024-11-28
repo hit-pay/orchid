@@ -1,4 +1,4 @@
-import { Theme, EmptyPage } from '@orchidui/vue-core'
+import { Theme, EmptyPage } from '@/orchidui-core'
 
 export default {
   component: EmptyPage,

@@ -1,4 +1,4 @@
-import { Theme } from '@orchidui/vue-core'
+import { Theme } from '@/orchidui-core'
 import ThumbnailSection from './ThumbnailSection.vue'
 
 export default {

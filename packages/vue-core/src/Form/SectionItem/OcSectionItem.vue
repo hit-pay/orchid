@@ -1,5 +1,5 @@
 <script setup>
-import { Toggle, Icon, Tooltip } from '@orchidui/vue-core'
+import { Toggle, Icon, Tooltip } from '@/orchidui-core'
 
 const props = defineProps({
   title: String,

@@ -5,8 +5,8 @@ import DropdownItem from '../../Overlay/Dropdown/OcDropdownItem.vue'
 import Icon from '../../MediaAndIcons/Icon/OcIcon.vue'
 import { ref } from 'vue'
 import BaseInput from '../BaseInput/OcBaseInput.vue'
-import { InputOption } from '@orchidui/vue-core'
-import { Select } from '@orchidui/vue-core'
+import { InputOption } from '@/orchidui-core'
+import { Select } from '@/orchidui-core'
 
 export default {
   component: OCInput,

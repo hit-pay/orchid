@@ -1,4 +1,4 @@
-import { Theme, Button, OcModalPage, Icon } from '@orchidui/vue-core'
+import { Theme, Button, OcModalPage, Icon } from '@/orchidui-core'
 import { ref } from 'vue'
 
 export default {

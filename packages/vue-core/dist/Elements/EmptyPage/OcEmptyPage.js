@@ -1,4 +1,4 @@
-import { _ as m } from "../../OcEmptyPage-DWAYs_Nz.js";
+import { _ as m } from "../../OcEmptyPage-BECFLTDj.js";
 export {
   m as EmptyPage
 };

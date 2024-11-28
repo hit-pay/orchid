@@ -1,4 +1,4 @@
-import { Theme, Pagination } from '@orchidui/vue-core'
+import { Theme, Pagination } from '@/orchidui-core'
 import { ref } from 'vue'
 
 export default {

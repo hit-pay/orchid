@@ -1,5 +1,5 @@
 <script setup>
-import { Dropdown, Input, BaseInput } from '@orchidui/vue-core'
+import { Dropdown, Input, BaseInput } from '@/orchidui-core'
 import { ComplexCalendar } from '@/orchidui-core/Calendar'
 import { ref } from 'vue'
 import dayjs from 'dayjs'

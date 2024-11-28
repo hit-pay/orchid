@@ -1,4 +1,4 @@
-import { O as o } from "../../OcSlider-DSFHUyqz.js";
+import { S as o } from "../../OcSlider-Bsi-ckbP.js";
 export {
   o as Slider
 };

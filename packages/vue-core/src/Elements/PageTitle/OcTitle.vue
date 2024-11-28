@@ -1,6 +1,6 @@
 323
 <script setup>
-import { Chip, CopyTooltip, Icon } from '@orchidui/vue-core'
+import { Chip, CopyTooltip, Icon } from '@/orchidui-core'
 
 defineProps({
   title: { type: String, required: true },

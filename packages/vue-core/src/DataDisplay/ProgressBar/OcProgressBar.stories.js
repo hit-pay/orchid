@@ -1,4 +1,4 @@
-import { Theme, ProgressBar } from '@orchidui/vue-core'
+import { Theme, ProgressBar } from '@/orchidui-core'
 
 export default {
   component: ProgressBar,

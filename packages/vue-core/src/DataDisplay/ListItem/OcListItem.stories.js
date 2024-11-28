@@ -1,4 +1,4 @@
-import { Theme, ListItem, DropdownItem, Button } from '@orchidui/vue-core'
+import { Theme, ListItem, DropdownItem, Button } from '@/orchidui-core'
 
 export default {
   component: ListItem,

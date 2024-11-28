@@ -1,6 +1,6 @@
 <script setup>
 import { computed, onMounted, ref, watch } from 'vue'
-import { Icon, Dropdown, DropdownItem } from '@orchidui/vue-core'
+import { Icon, Dropdown, DropdownItem } from '@/orchidui-core'
 
 defineEmits({
   changePath: [],

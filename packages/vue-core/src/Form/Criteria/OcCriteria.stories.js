@@ -1,4 +1,4 @@
-import { Criteria, Theme } from '@orchidui/vue-core'
+import { Criteria, Theme } from '@/orchidui-core'
 
 export default {
   component: Criteria,

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BaseInput, Button } from '@orchidui/vue-core'
+import { BaseInput, Button } from '@/orchidui-core'
 
 const props = defineProps({
   modelValue: {

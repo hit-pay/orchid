@@ -1,4 +1,4 @@
-import { _ as a } from "../../OcInfoCard-B1eNOGS6.js";
+import { _ as a } from "../../OcInfoCard-CfL6Jn7p.js";
 export {
   a as InfoCard
 };

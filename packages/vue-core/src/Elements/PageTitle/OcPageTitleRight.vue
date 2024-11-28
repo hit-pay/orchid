@@ -1,5 +1,5 @@
 <script setup>
-import { Button, Dropdown, DropdownItem, Tooltip } from '@orchidui/vue-core'
+import { Button, Dropdown, DropdownItem, Tooltip } from '@/orchidui-core'
 import { ref } from 'vue'
 import { useWindowWidth } from '@/orchidui-core/composables/useWindowWidth.js'
 

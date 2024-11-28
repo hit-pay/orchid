@@ -1,4 +1,4 @@
-import { Theme, SwitchTabs } from '@orchidui/vue-core'
+import { Theme, SwitchTabs } from '@/orchidui-core'
 import { ref } from 'vue'
 
 export default {

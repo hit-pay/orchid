@@ -1,4 +1,4 @@
-import { Theme, Popper } from '@orchidui/vue-core'
+import { Theme, Popper } from '@/orchidui-core'
 
 export default {
   component: Popper,

@@ -1,4 +1,4 @@
-import { Theme, PhoneInput } from '@orchidui/vue-core'
+import { Theme, PhoneInput } from '@/orchidui-core'
 import countryCodes from '../../data/CountryCodes.sample'
 import { ref } from 'vue'
 

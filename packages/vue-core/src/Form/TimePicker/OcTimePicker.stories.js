@@ -1,4 +1,4 @@
-import { Theme, TimePicker } from '@orchidui/vue-core'
+import { Theme, TimePicker } from '@/orchidui-core'
 import { ref } from 'vue'
 
 export default {

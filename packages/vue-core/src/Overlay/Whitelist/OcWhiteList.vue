@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Button, Tag } from '@orchidui/vue-core'
+import { Button, Tag } from '@/orchidui-core'
 
 defineProps({
   buttonProps: {

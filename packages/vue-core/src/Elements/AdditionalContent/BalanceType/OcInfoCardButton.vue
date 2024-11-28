@@ -1,5 +1,5 @@
 <script setup>
-import { Skeleton, Chip, Button } from '@orchidui/vue-core'
+import { Skeleton, Chip, Button } from '@/orchidui-core'
 
 defineProps({
   isActive: Boolean,

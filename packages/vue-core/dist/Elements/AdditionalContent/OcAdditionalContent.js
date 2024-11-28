@@ -1,4 +1,4 @@
-import { _ as a, a as n } from "../../OcAdditionalContent-C8rjY31h.js";
+import { _ as a, a as n } from "../../OcAdditionalContent-DCnTw5Ab.js";
 export {
   a as AdditionalContent,
   n as InfoCardButton

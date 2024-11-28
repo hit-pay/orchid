@@ -1,4 +1,4 @@
-import { Variants } from '@orchidui/vue-core'
+import { Variants } from '@/orchidui-core'
 import { ref } from 'vue'
 
 export default {

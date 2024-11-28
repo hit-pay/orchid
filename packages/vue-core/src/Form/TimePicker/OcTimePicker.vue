@@ -1,5 +1,5 @@
 <script setup>
-import { Input, Dropdown } from '@orchidui/vue-core'
+import { Input, Dropdown } from '@/orchidui-core'
 import { defineAsyncComponent, ref, watch } from 'vue'
 import dayjs from 'dayjs'
 

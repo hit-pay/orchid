@@ -1,5 +1,5 @@
 <script setup>
-import { Dropdown, Input, BaseInput, Icon } from '@orchidui/vue-core'
+import { Dropdown, Input, BaseInput, Icon } from '@/orchidui-core'
 import { computed, ref } from 'vue'
 import { defineAsyncComponent } from 'vue'
 

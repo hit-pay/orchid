@@ -1,4 +1,4 @@
-import { OnboardingProgressbar } from '@orchidui/vue-core'
+import { OnboardingProgressbar } from '@/orchidui-core'
 
 export default {
   component: OnboardingProgressbar,

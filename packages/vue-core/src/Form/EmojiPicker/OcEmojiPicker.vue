@@ -1,5 +1,5 @@
 <script setup>
-import { Dropdown, Button, Input } from '@orchidui/vue-core'
+import { Dropdown, Button, Input } from '@/orchidui-core'
 import { computed, ref } from 'vue'
 import { EMOJI_CATEGORIES, EMOJI_LIST } from './conts/emoji.js'
 

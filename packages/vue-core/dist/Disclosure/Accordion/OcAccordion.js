@@ -1,4 +1,4 @@
-import { _ as c } from "../../OcAccordion-0NUJibRb.js";
+import { _ as c } from "../../OcAccordion-BhVHh4EY.js";
 export {
   c as Accordion
 };

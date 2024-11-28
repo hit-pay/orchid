@@ -1,5 +1,5 @@
 <script setup>
-import { Button, Input, Checkbox, RadioGroup, Icon, Tooltip } from '@orchidui/vue-core'
+import { Button, Input, Checkbox, RadioGroup, Icon, Tooltip } from '@/orchidui-core'
 import { Cropper } from 'vue-advanced-cropper'
 import { nextTick, ref, watch } from 'vue'
 import 'vue-advanced-cropper/dist/style.css'

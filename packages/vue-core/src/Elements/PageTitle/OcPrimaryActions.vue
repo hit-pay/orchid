@@ -1,5 +1,5 @@
 <script setup>
-import { Icon, Tooltip, Dropdown, DropdownItem } from '@orchidui/vue-core'
+import { Icon, Tooltip, Dropdown, DropdownItem } from '@/orchidui-core'
 import { computed, ref } from 'vue'
 
 const props = defineProps({

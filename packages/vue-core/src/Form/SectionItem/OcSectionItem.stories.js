@@ -1,4 +1,4 @@
-import { Theme, SectionItem } from '@orchidui/vue-core'
+import { Theme, SectionItem } from '@/orchidui-core'
 import { ref } from 'vue'
 
 export default {

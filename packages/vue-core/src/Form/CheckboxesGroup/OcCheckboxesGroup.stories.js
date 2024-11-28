@@ -1,4 +1,4 @@
-import { Theme, CheckboxesGroup } from '@orchidui/vue-core'
+import { Theme, CheckboxesGroup } from '@/orchidui-core'
 import { ref, watch } from 'vue'
 
 export default {

@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue'
-import { Checkbox, Skeleton } from '@orchidui/vue-core'
+import { Checkbox, Skeleton } from '@/orchidui-core'
 
 const Variants = {
   TEXT: 'text',

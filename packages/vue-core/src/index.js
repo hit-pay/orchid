@@ -54,3 +54,5 @@ export * from './Overlay/CopyTooltip/OcCopyTooltip.js'
 export * from './Overlay/Whitelist/OcWhiteList.js'
 
 export * from './Theme/OcTheme.js'
+
+export * from './FormBuilder/OcFormBuilder.js'

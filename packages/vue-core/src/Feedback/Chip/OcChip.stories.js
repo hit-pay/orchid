@@ -1,4 +1,4 @@
-import { Theme, Chip } from '@orchidui/vue-core'
+import { Theme, Chip } from '@/orchidui-core'
 export default {
   component: Chip,
   tags: ['autodocs']

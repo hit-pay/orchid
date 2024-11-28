@@ -1,4 +1,4 @@
-import { Theme, Sidebar } from '@orchidui/vue-core'
+import { Theme, Sidebar } from '@/orchidui-core'
 
 import {
   PAYMENTS_SIDEBAR_GROUP,

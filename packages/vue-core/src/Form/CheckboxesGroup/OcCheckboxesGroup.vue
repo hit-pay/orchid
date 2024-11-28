@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue'
-import { Checkbox, BaseInput } from '@orchidui/vue-core'
+import { Checkbox, BaseInput } from '@/orchidui-core'
 
 const props = defineProps({
   alignment: {

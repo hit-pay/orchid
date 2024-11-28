@@ -14,14 +14,13 @@
     "build:landing": "vite build",
     "build:storybook": "storybook build -o public/storybook",
     "build:core": "cd packages/vue-core && npm run build",
-    "build:dashboard": "cd packages/vue-dashboard && npm run build",
+    "build:dashboard": "cd packages/vue-dashboard && npm i @orchidui/vue-core@latest &&  npm run build",
     "build": "npm run build:core && npm run build:dashboard && npm run build:storybook && npm run build:landing",
     "publish:core-package": "npm run build:core && cd packages/vue-core && npm version patch && npm publish",
     "publish:dashboard-package": "npm run build:dashboard && cd packages/vue-dashboard && npm version patch && npm publish",
     "publish": "npm run publish:core-package && npm run publish:dashboard-package"
   },
   "dependencies": {
-    "@orchidui/vue-core": "workspaces/*",
     "@popperjs/core": "^2.11.8",
     "dayjs": "^1.11.10",
     "echarts": "^5.4.3",

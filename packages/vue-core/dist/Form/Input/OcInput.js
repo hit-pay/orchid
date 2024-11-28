@@ -1,5 +1,6 @@
-import { _ as a, a as n } from "../../OcInputOption-CNb6VuVt.js";
+import { _ as t } from "../../OcInput-BhmeVr1A.js";
+import { _ as n } from "../../OcInputOption-DXCehfLz.js";
 export {
-  a as Input,
+  t as Input,
   n as InputOption
 };

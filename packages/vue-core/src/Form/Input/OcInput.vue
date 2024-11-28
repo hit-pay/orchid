@@ -1,6 +1,6 @@
 <script setup>
 import { computed, ref, useAttrs } from 'vue'
-import { BaseInput, Icon } from '@orchidui/vue-core'
+import { BaseInput, Icon } from '@/orchidui-core'
 
 const props = defineProps({
   disabled: {

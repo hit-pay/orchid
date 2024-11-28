@@ -1,4 +1,4 @@
-import { O as r } from "../../OcSkeleton-BgoOR1qd.js";
+import { S as r } from "../../OcSkeleton-BdPTmGh0.js";
 export {
   r as Skeleton
 };

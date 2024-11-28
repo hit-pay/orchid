@@ -1,5 +1,5 @@
 <script setup>
-import { BaseInput, Chip, Icon } from '@orchidui/vue-core'
+import { BaseInput, Chip, Icon } from '@/orchidui-core'
 import { computed, ref, watch } from 'vue'
 
 const props = defineProps({

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { OverviewIcon } from '@orchidui/vue-core'
+import { OverviewIcon } from '@/orchidui-core'
 
 defineProps({
   icon: String,

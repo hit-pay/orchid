@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Icon, ExpandingTableRow, Tooltip, Skeleton } from '@orchidui/vue-core'
+import { Icon, ExpandingTableRow, Tooltip, Skeleton } from '@/orchidui-core'
 import { ref, computed } from 'vue'
 
 defineProps({

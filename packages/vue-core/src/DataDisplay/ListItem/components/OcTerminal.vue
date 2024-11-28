@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Chip, Button } from '@orchidui/vue-core'
+import { Chip, Button } from '@/orchidui-core'
 
 defineProps({
   title: String,

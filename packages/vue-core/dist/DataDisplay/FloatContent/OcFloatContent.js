@@ -1,4 +1,4 @@
-import { _ as a } from "../../OcFloatContent-CJFc-wgv.js";
+import { _ as a } from "../../OcFloatContent-1qcAu-vl.js";
 export {
   a as FloatContent
 };
