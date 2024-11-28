@@ -41,7 +41,7 @@
 </template>
 
 <script setup>
-import { Slider } from '@/orchidui-core'
+import { Slider } from '@orchidui/vue-core'
 import { ref, onMounted } from 'vue'
 
 defineProps({

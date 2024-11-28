@@ -8,7 +8,7 @@ import {
   TableCell,
   ExpandingTable
 } from '@/orchidui-core'
-import TextEditor from '../../Form/TextEditor/OcTextEditor.vue'
+import { TextEditor } from '@/orchidui-dashboard'
 
 import { ref } from 'vue'
 import { TableOptions, StickyTableOptions } from '../../data/TableOptions.sample'

@@ -29,9 +29,6 @@
     "./CodeBlock": {
       "import": "./dist/CodeBlock.js"
     },
-    "./TextEditor": {
-      "import": "./dist/TextEditor.js"
-    },
     "./Calendar": {
       "import": "./dist/Calendar.js"
     },
@@ -40,9 +37,6 @@
     },
     "./StoreDesign": {
       "import": "./dist/StoreDesign.js"
-    },
-    "./ColorPicker": {
-      "import": "./dist/ColorPicker.js"
     },
     "./EmojiPicker": {
       "import": "./dist/EmojiPicker.js"

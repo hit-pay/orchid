@@ -1,4 +1,4 @@
-import ColorPicker from './ColorPicker.vue'
+import { ColorPicker } from '@/orchidui-dashboard'
 import { computed, ref } from 'vue'
 
 export default {

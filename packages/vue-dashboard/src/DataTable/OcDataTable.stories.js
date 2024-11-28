@@ -8,7 +8,7 @@ import {
   Button,
   Dropdown,
   DropdownItem
-} from '@orchidui/vue-core'
+} from '@/orchidui-core'
 
 import { DataTable } from '@/orchidui-dashboard'
 

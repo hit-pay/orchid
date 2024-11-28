@@ -1,9 +1,7 @@
 <script setup>
-import { Dropdown, Input, BaseInput, Icon } from '@/orchidui-core'
+import { ColorPickerPopup } from '@/orchidui-dashboard'
+import { Dropdown, Input, BaseInput, Icon } from '@orchidui/vue-core'
 import { computed, ref } from 'vue'
-import { defineAsyncComponent } from 'vue'
-
-const ColorPickerPopup = defineAsyncComponent(() => import('./components/VueColorPicker.vue'))
 
 const props = defineProps({
   modelValue: {
