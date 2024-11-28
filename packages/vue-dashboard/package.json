@@ -1,7 +1,7 @@
 {
   "name": "@orchidui/vue-dashboard",
   "description": "Orchid UI , Dashboard Ui Library Vue 3 tailwind css",
-  "version": "0.0.6",
+  "version": "0.0.13",
   "type": "module",
   "scripts": {
     "build": "vite build",
@@ -32,8 +32,5 @@
   "license": "MIT",
   "resolutions": {
     "rollup": "npm:@rollup/wasm-node"
-  },
-  "dependencies": {
-    "@orchidui/vue-core": "^0.0.6"
   }
 }

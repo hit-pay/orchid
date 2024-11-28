@@ -4,7 +4,7 @@ import { setup } from '@storybook/vue3'
 
 import '../src/scss/main.scss'
 import '@/orchidui-core/dist/style.css'
-import '@orchidui/vue-dashboard/dist/style.css'
+import '@/orchidui-dashboard/dist/style.css'
 
 setup((app) => {
   app.config.globalProperties.window = window

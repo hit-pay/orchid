@@ -1,1 +1,1 @@
-export * from './Builder/DataTable/OcDataTable.js'
+export * from './DataTable/OcDataTable.js'
