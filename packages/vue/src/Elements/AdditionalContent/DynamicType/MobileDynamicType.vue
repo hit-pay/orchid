@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { Button, CustomerCard, Icon, OverviewItem, Tooltip } from '@/orchidui';
-import { ref } from 'vue';
-import BoxDetails from './OcBoxDetails.vue';
+import { Button, CustomerCard, Icon, OverviewItem, Tooltip } from '@orchidui/vue'
+import { ref } from 'vue'
+import BoxDetails from './OcBoxDetails.vue'
 
 const isDetailsOpen = ref(false)
 
@@ -86,7 +86,7 @@ defineEmits(['addCustomer'])
               :is-loading="field.isLoading"
               v-bind="field"
             >
-               <template v-if="field.slot && $slots[field.slot]" #content>
+              <template v-if="field.slot && $slots[field.slot]" #content>
                 <slot :name="field.slot" :data="field.content" />
               </template>
             </OverviewItem>

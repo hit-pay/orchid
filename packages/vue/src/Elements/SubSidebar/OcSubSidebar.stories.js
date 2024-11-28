@@ -1,4 +1,4 @@
-import { Theme, SubSidebar } from '@/orchidui'
+import { Theme, SubSidebar } from '@orchidui/vue'
 import { ref } from 'vue'
 
 export default {

@@ -1,5 +1,5 @@
 <script setup>
-import { TableHeader, TableCell } from '@/orchidui'
+import { TableHeader, TableCell } from '@orchidui/vue'
 import { ref, computed, onMounted } from 'vue'
 
 const props = defineProps({

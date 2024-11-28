@@ -1,5 +1,5 @@
 <script setup>
-import { Button, Chip, Icon } from '@/orchidui'
+import { Button, Chip, Icon } from '@orchidui/vue'
 defineProps({
   theme: Object,
   activating: Boolean,

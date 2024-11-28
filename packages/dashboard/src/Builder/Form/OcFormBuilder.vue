@@ -17,8 +17,7 @@ import {
   SectionItem,
   SelectOptions,
   Slider
-  // TODO : add all form here , best load as async component
-} from '@/orchidui'
+} from '@orchidui/vue'
 import { ref, computed, watch, onMounted } from 'vue'
 
 const props = defineProps({

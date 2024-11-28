@@ -1,4 +1,4 @@
-import { Theme, Snackbar } from '@/orchidui'
+import { Theme, Snackbar } from '@orchidui/vue'
 
 export default {
   component: Snackbar,

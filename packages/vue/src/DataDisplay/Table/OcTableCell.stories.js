@@ -1,4 +1,4 @@
-import { TableCell } from '@/orchidui'
+import { TableCell } from '@orchidui/vue'
 
 export default {
   component: TableCell,

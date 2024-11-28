@@ -1,4 +1,4 @@
-import { AdditionalContent, OverviewItem, Theme } from '@/orchidui'
+import { AdditionalContent, OverviewItem, Theme } from '@orchidui/vue'
 
 export default {
   components: { OverviewItem },

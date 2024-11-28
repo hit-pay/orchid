@@ -1,4 +1,4 @@
-import { Theme, Slider } from '@/orchidui'
+import { Theme, Slider } from '@orchidui/vue'
 import { ref } from 'vue'
 
 export default {

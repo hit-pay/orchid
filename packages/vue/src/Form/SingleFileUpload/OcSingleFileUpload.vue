@@ -1,8 +1,8 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue'
-import { Input, Button, BaseInput, Icon, Dropdown } from '@/orchidui'
-import { useUploadFileProgress } from '@/orchidui/composables/uploadFileProgress.js'
-import { ModalCropper } from '@/orchidui/Cropper.js'
+import { Input, Button, BaseInput, Icon, Dropdown } from '@orchidui/vue'
+import { useUploadFileProgress } from '@orchidui/vue/composables/uploadFileProgress.js'
+import { ModalCropper } from '@orchidui/vue/Cropper.js'
 import SingleOnlyImageUpload from './OcSingleOnlyImageUpload.vue'
 
 const props = defineProps({
@@ -168,11 +168,11 @@ const onUploadImage = ($event) => {
           </template>
 
           <div
-            class="p-3 flex bg-white items-center gap-x-5 rounded border w-full "
+            class="p-3 flex bg-white items-center gap-x-5 rounded border w-full"
             :class="[
               isDragover ? 'border-oc-primary border-dashed' : 'border-oc-gray-200',
               {
-                '!bg-oc-bg-dark': isDisabled,
+                '!bg-oc-bg-dark': isDisabled
               }
             ]"
             @dragenter="isDragover = true"
@@ -208,7 +208,7 @@ const onUploadImage = ($event) => {
         class="p-3 rounded border flex gap-x-5 border-oc-gray-200 bg-white items-center"
         :class="{
           'w-fit': isPreview,
-          '!bg-oc-bg-dark': isDisabled,
+          '!bg-oc-bg-dark': isDisabled
         }"
       >
         <div

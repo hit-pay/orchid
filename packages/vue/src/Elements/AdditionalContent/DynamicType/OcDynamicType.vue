@@ -1,5 +1,5 @@
 <script setup>
-import { CustomerCard, OverviewItem, Icon, Tooltip } from '@/orchidui'
+import { CustomerCard, OverviewItem, Icon, Tooltip } from '@orchidui/vue'
 import BoxDetails from './OcBoxDetails.vue'
 import MobileDynamicType from './MobileDynamicType.vue'
 

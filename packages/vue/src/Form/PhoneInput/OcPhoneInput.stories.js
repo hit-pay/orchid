@@ -1,4 +1,4 @@
-import { Theme, PhoneInput } from '@/orchidui'
+import { Theme, PhoneInput } from '@orchidui/vue'
 import countryCodes from '../../data/CountryCodes.sample'
 import { ref } from 'vue'
 

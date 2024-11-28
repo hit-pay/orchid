@@ -1,5 +1,5 @@
 <script setup>
-import { Icon } from '@/orchidui'
+import { Icon } from '@orchidui/vue'
 import { computed } from 'vue'
 defineProps({
   disabled: Boolean,

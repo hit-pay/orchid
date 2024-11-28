@@ -1,6 +1,6 @@
 <script setup>
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
-import { Icon } from '@/orchidui'
+import { Icon } from '@orchidui/vue'
 
 const props = defineProps({
   variant: {

@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue'
-import { Radio, BaseInput } from '@/orchidui'
+import { Radio, BaseInput } from '@orchidui/vue'
 
 defineProps({
   alignment: {

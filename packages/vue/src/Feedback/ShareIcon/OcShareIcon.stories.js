@@ -1,4 +1,4 @@
-import { Theme, ShareIcon } from '@/orchidui'
+import { Theme, ShareIcon } from '@orchidui/vue'
 
 export default {
   component: ShareIcon,

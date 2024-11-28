@@ -1,5 +1,5 @@
 <script setup>
-import { Button, Skeleton, Dropdown, Tooltip, DropdownItem } from '@/orchidui'
+import { Button, Skeleton, Dropdown, Tooltip, DropdownItem } from '@orchidui/vue'
 import PaymentMethods from './OcPaymentMethods.vue'
 import { ref } from 'vue'
 

@@ -5,7 +5,7 @@
 <script setup>
 import * as echarts from 'echarts'
 import { computed, onMounted, ref } from 'vue'
-import { useChart } from '@/orchidui/composables/useChart.js'
+import { useChart } from '@orchidui/vue/composables/useChart.js'
 const props = defineProps({
   showTooltip: Boolean,
   showLegend: Boolean,

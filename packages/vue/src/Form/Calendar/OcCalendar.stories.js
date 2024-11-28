@@ -1,4 +1,4 @@
-import { Theme, Calendar, Checkbox } from '@/orchidui'
+import { Theme, Calendar, Checkbox } from '@orchidui/vue'
 import { ref } from 'vue'
 
 export default {

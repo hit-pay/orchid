@@ -1,4 +1,4 @@
-import { VerificationOption, RadioGroup } from '@/orchidui'
+import { VerificationOption, RadioGroup } from '@orchidui/vue'
 import singpassImage from './singpass.png'
 
 export default {

@@ -1,4 +1,4 @@
-import { Theme, Accordion, DatePicker, Button } from '@/orchidui'
+import { Theme, Accordion, DatePicker, Button } from '@orchidui/vue'
 import { ref, watch } from 'vue'
 
 export default {

@@ -1,4 +1,4 @@
-import { HorizontalProgressbar } from '@/orchidui'
+import { HorizontalProgressbar } from '@orchidui/vue'
 
 export default {
   component: HorizontalProgressbar,

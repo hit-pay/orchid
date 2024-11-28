@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Chip, Icon } from '@/orchidui'
+import { Chip, Icon } from '@orchidui/vue'
 
 defineProps({
   title: {

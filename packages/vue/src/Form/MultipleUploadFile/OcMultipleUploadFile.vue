@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, ref } from 'vue'
-import { Icon, BaseInput, Button } from '@/orchidui'
-import { useUploadFileProgress } from '@/orchidui/composables/uploadFileProgress.js'
+import { Icon, BaseInput, Button } from '@orchidui/vue'
+import { useUploadFileProgress } from '@orchidui/vue/composables/uploadFileProgress.js'
 import OcSimpleMultipleUpload from './OcSimpleMultipleUpload.vue'
 
 const emit = defineEmits([

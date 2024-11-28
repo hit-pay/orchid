@@ -1,4 +1,4 @@
-import { Theme, CustomerCard } from '@/orchidui'
+import { Theme, CustomerCard } from '@orchidui/vue'
 
 export default {
   component: CustomerCard,

@@ -1,4 +1,4 @@
-import { Theme } from '@/orchidui'
+import { Theme } from '@orchidui/vue'
 import { Cropper } from './OcCropper'
 
 import { ref } from 'vue'

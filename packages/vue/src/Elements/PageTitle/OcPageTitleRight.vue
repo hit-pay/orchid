@@ -1,7 +1,7 @@
 <script setup>
-import { Button, Dropdown, DropdownItem, Tooltip } from '@/orchidui'
+import { Button, Dropdown, DropdownItem, Tooltip } from '@orchidui/vue'
 import { ref } from 'vue'
-import { useWindowWidth } from '@/orchidui/composables/useWindowWidth.js'
+import { useWindowWidth } from '@orchidui/vue/composables/useWindowWidth.js'
 
 const props = defineProps({
   primaryButtonProps: Object,

@@ -1,5 +1,5 @@
 <script setup>
-import { Button } from '@/orchidui'
+import { Button } from '@orchidui/vue'
 const emit = defineEmits(['save', 'cancel', 'addition-click', 'dropdown-action'])
 defineProps({
   primaryProps: {
@@ -11,7 +11,7 @@ defineProps({
   isSecondaryButtonVisible: {
     type: Boolean,
     default: true
-  },
+  }
 })
 </script>
 <template>

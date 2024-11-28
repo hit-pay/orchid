@@ -1,4 +1,4 @@
-import { Theme, LinkInput } from '@/orchidui'
+import { Theme, LinkInput } from '@orchidui/vue'
 import { ref } from 'vue'
 
 export default {

@@ -1,4 +1,4 @@
-import { Theme, Button } from '@/orchidui'
+import { Theme, Button } from '@orchidui/vue'
 
 export default {
   component: Button,

@@ -1,4 +1,4 @@
-import { Theme, Tooltip } from '@/orchidui'
+import { Theme, Tooltip } from '@orchidui/vue'
 
 export default {
   component: Tooltip,

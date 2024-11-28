@@ -1,4 +1,4 @@
-import { Tag } from '@/orchidui'
+import { Tag } from '@orchidui/vue'
 
 export default {
   component: Tag,

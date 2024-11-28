@@ -1,4 +1,4 @@
-import { Theme, FeatureOverviewCard } from '@/orchidui'
+import { Theme, FeatureOverviewCard } from '@orchidui/vue'
 
 export default {
   component: FeatureOverviewCard,

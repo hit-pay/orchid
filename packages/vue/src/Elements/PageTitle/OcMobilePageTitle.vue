@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Button, Icon, Dropdown, DropdownItem, CopyTooltip, Chip } from '@/orchidui'
+import { Button, Icon, Dropdown, DropdownItem, CopyTooltip, Chip } from '@orchidui/vue'
 import { ref } from 'vue'
 
 defineProps({

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Dropdown, Button, Icon, Checkbox } from '@/orchidui'
+import { Dropdown, Button, Icon, Checkbox } from '@orchidui/vue'
 import { ref, onMounted } from 'vue'
 import { VueDraggableNext } from 'vue-draggable-next'
 import { formatHeadersFromLocalStorage, getFromLocalStorage } from './utils/editColumnsUtils'

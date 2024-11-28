@@ -1,4 +1,4 @@
-import { Theme } from '@/orchidui'
+import { Theme } from '@orchidui/vue'
 import ThumbnailTheme from './ThumbnailTheme.vue'
 
 export default {

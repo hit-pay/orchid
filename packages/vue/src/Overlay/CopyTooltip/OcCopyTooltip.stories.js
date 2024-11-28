@@ -1,4 +1,4 @@
-import OcCopyTooltip from '@/orchidui/Overlay/CopyTooltip/OcCopyTooltip.vue'
+import OcCopyTooltip from '@orchidui/vue/Overlay/CopyTooltip/OcCopyTooltip.vue'
 
 export default {
   component: OcCopyTooltip,

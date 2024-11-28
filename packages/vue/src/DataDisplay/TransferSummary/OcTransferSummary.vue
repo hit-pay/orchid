@@ -1,5 +1,5 @@
 <script setup>
-import { ListDetail } from '@/orchidui'
+import { ListDetail } from '@orchidui/vue'
 import { computed } from 'vue'
 
 const props = defineProps({

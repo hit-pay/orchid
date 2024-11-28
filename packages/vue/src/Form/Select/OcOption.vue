@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import { Icon, Checkbox } from '@/orchidui'
+import { Icon, Checkbox } from '@orchidui/vue'
 
 defineEmits(['select', 'show:children', 'hide:children'])
 defineProps({

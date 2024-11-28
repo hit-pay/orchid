@@ -1,8 +1,10 @@
 {
+  "include": ["packages", "types", "scripts"],
   "compilerOptions": {
-    "baseUrl": ".",
     "paths": {
-      "@/orchidui": ["packages/vue/src/*"]
+      "@orchidui/vue": ["./packages/vue/src"],
+      "@orchidui/dashboard": ["./packages/dashboard/src"],
+      "@orchidui/core": ["./packages/core/src"]
     }
   }
 }

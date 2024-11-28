@@ -1,5 +1,5 @@
 <script setup>
-import { PrevNext, PaginationNumber } from '@/orchidui'
+import { PrevNext, PaginationNumber } from '@orchidui/vue'
 import { computed } from 'vue'
 
 const props = defineProps({

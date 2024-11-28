@@ -1,4 +1,4 @@
-import { Theme, Tabs, PaymentTab } from '@/orchidui'
+import { Theme, Tabs, PaymentTab } from '@orchidui/vue'
 import { ref } from 'vue'
 
 export default {
@@ -188,8 +188,7 @@ export const PaymentTabsExample = {
         logo: 'https://dashboard.src.test/icons/methods/sm/paynow.png',
 
         value: 'payment2'
-      },
-      
+      }
     ]
   },
   render: (args) => ({

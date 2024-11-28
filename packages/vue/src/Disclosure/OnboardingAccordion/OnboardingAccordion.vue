@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Icon } from '@/orchidui'
+import { Icon } from '@orchidui/vue'
 import { ref, watch } from 'vue'
 import OnboardingStatusIcon from './OnboardingStatusIcon.vue'
 

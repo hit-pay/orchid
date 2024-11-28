@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue'
-import { Button, Chip, Icon } from '@/orchidui'
+import { Button, Chip, Icon } from '@orchidui/vue'
 
 const props = defineProps({
   planTier: {

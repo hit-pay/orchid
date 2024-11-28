@@ -1,4 +1,4 @@
-import { ConfirmationModal, Button } from '@/orchidui'
+import { ConfirmationModal, Button } from '@orchidui/vue'
 import { ref } from 'vue'
 
 export default {

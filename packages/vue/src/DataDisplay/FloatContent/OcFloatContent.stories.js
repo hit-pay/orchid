@@ -1,4 +1,4 @@
-import { Theme, FloatContent, Button } from '@/orchidui'
+import { Theme, FloatContent, Button } from '@orchidui/vue'
 import { ar } from 'date-fns/locale'
 import { ref } from 'vue'
 

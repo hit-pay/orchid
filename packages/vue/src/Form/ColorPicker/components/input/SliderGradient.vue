@@ -25,7 +25,7 @@
 
 <script setup>
 import { inject, ref } from 'vue'
-import { Icon } from '@/orchidui'
+import { Icon } from '@orchidui/vue'
 
 defineProps({
   gradientType: String

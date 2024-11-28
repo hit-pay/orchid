@@ -1,4 +1,4 @@
-import { Theme, PageTitle } from '@/orchidui'
+import { Theme, PageTitle } from '@orchidui/vue'
 
 export default {
   component: PageTitle,

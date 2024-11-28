@@ -1,4 +1,4 @@
-import { Theme, Toggle } from '@/orchidui'
+import { Theme, Toggle } from '@orchidui/vue'
 import MultipleUploadFile from './OcMultipleUploadFile.vue'
 import { ref } from 'vue'
 

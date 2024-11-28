@@ -10,10 +10,10 @@ import {
   FilterForm,
   Button,
   Dropdown
-} from '@/orchidui'
+} from '@orchidui/vue'
 import { ref, computed, onMounted } from 'vue'
 import dayjs from 'dayjs'
-import ColumnEdit from '@/orchidui/Builder/DataTable/ColumnEdit.vue'
+import ColumnEdit from './ColumnEdit.vue'
 import {
   formatHeadersToLocalStorage,
   setInLocalStorage,
@@ -63,10 +63,12 @@ const paginationOption = computed(() => props.options?.pagination)
 const cursorOption = computed(() => props.options?.cursor)
 const modifiedTableHeaders = ref()
 
-const tableOptions = computed(() =>  props.options?.tableOptions)
+const tableOptions = computed(() => props.options?.tableOptions)
 const editedTableOptions = computed(() => ({
   ...tableOptions.value,
-  headers: modifiedTableHeaders.value ? modifiedTableHeaders.value.filter((h) => isColumnActive(h.key)) : tableOptions.value?.headers.filter((h) => isColumnActive(h.key))
+  headers: modifiedTableHeaders.value
+    ? modifiedTableHeaders.value.filter((h) => isColumnActive(h.key))
+    : tableOptions.value?.headers.filter((h) => isColumnActive(h.key))
 }))
 const filterOptions = computed(() => props.options?.filterOptions)
 

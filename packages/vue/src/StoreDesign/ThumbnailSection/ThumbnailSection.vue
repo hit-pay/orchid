@@ -1,5 +1,5 @@
 <script setup>
-import { Button } from '@/orchidui'
+import { Button } from '@orchidui/vue'
 defineProps({
   section: Object
 })

@@ -1,5 +1,5 @@
 <script setup>
-import { Icon, CopyTooltip } from '@/orchidui'
+import { Icon, CopyTooltip } from '@orchidui/vue'
 import { computed } from 'vue'
 
 const props = defineProps({

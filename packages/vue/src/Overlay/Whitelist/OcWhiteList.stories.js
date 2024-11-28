@@ -1,4 +1,4 @@
-import { WhiteList, Button } from '@/orchidui'
+import { WhiteList, Button } from '@orchidui/vue'
 
 export default {
   component: WhiteList,

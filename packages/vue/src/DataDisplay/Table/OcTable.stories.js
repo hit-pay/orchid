@@ -7,7 +7,7 @@ import {
   TableCellContent,
   TableCell,
   ExpandingTable
-} from '@/orchidui'
+} from '@orchidui/vue'
 import TextEditor from '../../Form/TextEditor/OcTextEditor.vue'
 
 import { ref } from 'vue'

@@ -1,5 +1,5 @@
 <script setup>
-import { Chip, Icon, Dropdown } from '@/orchidui'
+import { Chip, Icon, Dropdown } from '@orchidui/vue'
 import { ref } from 'vue'
 import dayjs from 'dayjs'
 

@@ -1,4 +1,4 @@
-import { Theme, Radio } from '@/orchidui'
+import { Theme, Radio } from '@orchidui/vue'
 
 export default {
   component: Radio,

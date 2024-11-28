@@ -1,8 +1,8 @@
 <script setup>
-import { Dropdown, Input, Icon } from '@/orchidui'
+import { Dropdown, Input, Icon } from '@orchidui/vue'
 import { computed, ref } from 'vue'
 import codes from '../../data/CountryCodes.sample'
-import { preventEventIfNotNumberInput } from '@/orchidui/composables/helpers.js'
+import { preventEventIfNotNumberInput } from '@orchidui/vue/composables/helpers.js'
 import { parsePhoneNumber } from 'libphonenumber-js'
 
 const props = defineProps({

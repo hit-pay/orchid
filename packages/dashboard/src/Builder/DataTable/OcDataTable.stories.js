@@ -9,7 +9,7 @@ import {
   Button,
   Dropdown,
   DropdownItem
-} from '@/orchidui'
+} from '@orchidui/vue'
 
 import { ref } from 'vue'
 

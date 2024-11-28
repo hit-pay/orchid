@@ -1,4 +1,4 @@
-import { Theme, TransferSummary } from '@/orchidui'
+import { Theme, TransferSummary } from '@orchidui/vue'
 
 export default {
   component: TransferSummary,

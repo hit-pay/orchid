@@ -1,5 +1,5 @@
 <script setup>
-import { Button, Icon } from '@/orchidui'
+import { Button, Icon } from '@orchidui/vue'
 import { computed } from 'vue'
 
 defineEmits('click:Button')
@@ -22,7 +22,7 @@ defineProps({
   },
   containerClass: {
     type: [Array, String],
-    required: false,
+    required: false
   },
   upgradeLabel: {
     type: String,
@@ -105,9 +105,9 @@ const sizes = computed(() => ({
         :class="[
           containerClass
             ? containerClass
-            : (isUpgrade
+            : isUpgrade
               ? 'text-oc-warning-600 border-oc-warning-300 bg-oc-warning-50'
-              : 'text-oc-text-400 border-oc-gray-200 bg-oc-gray-50'),
+              : 'text-oc-text-400 border-oc-gray-200 bg-oc-gray-50',
           sizes[size].icon.container
         ]"
       >

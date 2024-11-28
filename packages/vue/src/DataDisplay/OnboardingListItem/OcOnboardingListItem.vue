@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Button, Icon } from '@/orchidui'
+import { Button, Icon } from '@orchidui/vue'
 
 defineProps({
   title: {

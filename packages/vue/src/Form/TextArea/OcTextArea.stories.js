@@ -1,4 +1,4 @@
-import { Theme, TextArea } from '@/orchidui'
+import { Theme, TextArea } from '@orchidui/vue'
 import { ref } from 'vue'
 
 export default {

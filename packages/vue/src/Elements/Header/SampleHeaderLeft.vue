@@ -1,5 +1,5 @@
 <script setup>
-import { Icon, Dropdown, DropdownItem } from '@/orchidui'
+import { Icon, Dropdown, DropdownItem } from '@orchidui/vue'
 import { ref } from 'vue'
 
 defineProps({

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Chip, Icon } from '@/orchidui'
+import { Chip, Icon } from '@orchidui/vue'
 import { ref } from 'vue'
 
 const props = defineProps({
@@ -12,25 +12,25 @@ const props = defineProps({
   isDisabled: Boolean,
   hasActions: {
     type: Boolean,
-    default: true,
+    default: true
   },
   isTransparent: Boolean,
   isDraggable: Boolean,
-  isNoToggleForced: Boolean,
+  isNoToggleForced: Boolean
 })
 const emit = defineEmits(['edit', 'delete'])
 const isOpen = ref(false)
 
 const toggleAccordion = () => {
   if (props.isNoToggleForced) {
-    return;
+    return
   }
 
   isOpen.value = !isOpen.value
 }
 
 defineExpose({
-  toggleAccordion,
+  toggleAccordion
 })
 </script>
 
@@ -46,7 +46,7 @@ defineExpose({
       class="flex gap-4 items-stretch"
       :class="{
         'border-b': isOpen,
-        'pl-5': isNoToggleForced,
+        'pl-5': isNoToggleForced
       }"
     >
       <div
@@ -92,11 +92,7 @@ defineExpose({
           </slot>
         </div>
 
-        <slot
-          name="right"
-          :is-open="isOpen"
-          :toggle-accordion="toggleAccordion"
-        >
+        <slot name="right" :is-open="isOpen" :toggle-accordion="toggleAccordion">
           <div v-if="hasActions" class="flex items-center gap-4 opacity-0 group-hover:opacity-100">
             <div class="border border-oc-accent-1-100 rounded-sm p-1 flex gap-x-1">
               <Icon

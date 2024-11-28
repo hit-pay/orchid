@@ -1,6 +1,6 @@
 import { ref } from 'vue'
-import { SingleFileUpload } from '@/orchidui'
-import { RadioGroup } from '@/orchidui'
+import { SingleFileUpload } from '@orchidui/vue'
+import { RadioGroup } from '@orchidui/vue'
 
 export default {
   component: SingleFileUpload,
@@ -106,7 +106,7 @@ export const Disabled = {
       })
 
       return {
-        imageRef,
+        imageRef
       }
     },
     template: `

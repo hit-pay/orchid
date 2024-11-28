@@ -1,5 +1,5 @@
-import { Theme } from '@/orchidui'
-import { FormBuilder, SelectOptions } from '@/orchidui'
+import { Theme } from '@orchidui/vue'
+import { FormBuilder, SelectOptions } from '@orchidui/vue'
 
 import { ref } from 'vue'
 

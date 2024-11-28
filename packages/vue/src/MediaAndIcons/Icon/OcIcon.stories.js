@@ -1,4 +1,4 @@
-import { Theme, Icon } from '@/orchidui'
+import { Theme, Icon } from '@orchidui/vue'
 export default {
   component: Icon,
   tags: ['autodocs']

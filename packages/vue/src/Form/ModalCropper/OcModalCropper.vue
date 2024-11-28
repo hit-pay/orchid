@@ -1,5 +1,5 @@
 <script setup>
-import { Modal } from '@/orchidui'
+import { Modal } from '@orchidui/vue'
 import { ref } from 'vue'
 import { Cropper } from '../Cropper/OcCropper'
 

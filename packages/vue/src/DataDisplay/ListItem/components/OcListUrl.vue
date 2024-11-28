@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Icon, CopyTooltip } from '@/orchidui'
+import { Icon, CopyTooltip } from '@orchidui/vue'
 
 defineProps({
   title: String,

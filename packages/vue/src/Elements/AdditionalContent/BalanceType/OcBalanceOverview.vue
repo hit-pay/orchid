@@ -1,7 +1,7 @@
 <script setup>
 import InfoCardButton from './OcInfoCardButton.vue'
 import TopActions from './OcTopActions.vue'
-import { Overview } from '@/orchidui'
+import { Overview } from '@orchidui/vue'
 
 defineProps({
   overviewItems: {

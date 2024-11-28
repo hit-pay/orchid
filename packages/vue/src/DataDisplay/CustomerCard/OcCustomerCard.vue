@@ -1,5 +1,5 @@
 <script setup>
-import { Avatar, ListDetail, Button, Icon } from '@/orchidui'
+import { Avatar, ListDetail, Button, Icon } from '@orchidui/vue'
 
 defineProps({
   variant: {

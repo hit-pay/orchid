@@ -1,4 +1,4 @@
-import { Theme, SupportMenu } from '@/orchidui'
+import { Theme, SupportMenu } from '@orchidui/vue'
 import { ref } from 'vue'
 
 export default {

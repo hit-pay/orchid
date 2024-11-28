@@ -1,5 +1,5 @@
 <script setup>
-import { Modal } from '@/orchidui'
+import { Modal } from '@orchidui/vue'
 import { computed } from 'vue'
 import Confirmation from './OcConfirmation.vue'
 
