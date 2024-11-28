@@ -1,4 +1,4 @@
-import { _ as e } from "../../OcCriteria-CPPzyi-v.js";
+import { _ as e } from "../../OcCriteria-29mmjVjq.js";
 export {
   e as Criteria
 };

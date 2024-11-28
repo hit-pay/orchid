@@ -1,4 +1,4 @@
-import { _ as e } from "../../OcListDetail-LL1dTnu5.js";
+import { _ as e } from "../../OcListDetail-C43ePczY.js";
 export {
   e as ListDetail
 };

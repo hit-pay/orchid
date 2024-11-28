@@ -25,7 +25,6 @@
     "@popperjs/core": "^2.11.8",
     "dayjs": "^1.11.10",
     "echarts": "^5.4.3",
-    "esbuild": "^0.20.1",
     "flag-icons": "^6.11.1",
     "libphonenumber-js": "^1.10.51",
     "lodash-es": "^4.17.21",
@@ -60,10 +59,5 @@
     "tailwindcss": "^3.4.3",
     "vite": "^5.4.11",
     "vue": "^3.3.4"
-  },
-  "overrides": {
-    "vite": {
-      "rollup": "npm:@rollup/wasm-node"
-    }
   }
 }

@@ -1,4 +1,4 @@
-import { default as o } from "../../OcCropper-dmUsZD15.js";
+import { default as o } from "../../OcCropper-DOwr-PIc.js";
 export {
   o as Cropper
 };

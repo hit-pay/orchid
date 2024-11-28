@@ -1,4 +1,4 @@
-import { O as e } from "../../OcBanner-CDgvBT3n.js";
+import { O as e } from "../../OcBanner-DIRPp7Ws.js";
 export {
   e as Banner
 };

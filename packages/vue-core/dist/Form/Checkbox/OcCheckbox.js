@@ -1,4 +1,4 @@
-import { _ as r } from "../../OcCheckbox-CPEV7kEq.js";
+import { _ as r } from "../../OcCheckbox-QQwvZJsC.js";
 export {
   r as Checkbox
 };

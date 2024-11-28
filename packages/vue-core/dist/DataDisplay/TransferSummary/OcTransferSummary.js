@@ -1,4 +1,4 @@
-import { _ as m } from "../../OcTransferSummary-COIz6bDp.js";
+import { _ as m } from "../../OcTransferSummary-BFJUciUK.js";
 export {
   m as TransferSummary
 };

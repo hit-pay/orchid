@@ -1,4 +1,4 @@
-import { _ as o } from "../../OcSingleFileUpload-BQKjD8u1.js";
+import { _ as o } from "../../OcSingleFileUpload-_mboCyxh.js";
 export {
   o as SingleFileUpload
 };

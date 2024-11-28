@@ -1,4 +1,4 @@
-import { _ as a } from "../../OcShareIcon-BLi6FU1z.js";
+import { _ as a } from "../../OcShareIcon-FKpZt9k2.js";
 export {
   a as ShareIcon
 };

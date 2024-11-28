@@ -1,4 +1,4 @@
-import { _ as r } from "../../OcConfirmationModal-DVxji1cF.js";
+import { _ as r } from "../../OcConfirmationModal-BvNNhi48.js";
 export {
   r as ConfirmationModal
 };

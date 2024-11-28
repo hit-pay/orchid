@@ -1,4 +1,4 @@
-import { O as r } from "../../OcTooltip-D_IQeXuu.js";
+import { O as r } from "../../OcTooltip-BME37Xor.js";
 export {
   r as Tooltip
 };
