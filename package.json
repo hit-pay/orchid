@@ -32,8 +32,8 @@
     "vue-advanced-cropper": "^2.8.8",
     "vue-draggable-next": "^2.2.1",
     "vue3-colorpicker": "^2.2.3",
-    "@orchidui/vue-core": "latest",
-    "@orchidui/vue-dashboard": "latest"
+    "@orchidui/vue-core": "workspaces:*",
+    "@orchidui/vue-dashboard": "workspaces:*"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.6.12",
