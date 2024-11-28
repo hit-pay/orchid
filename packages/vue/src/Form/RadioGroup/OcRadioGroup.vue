@@ -14,7 +14,8 @@ defineProps({
   errorMessage: String,
   hint: String,
   modelValue: String,
-  isButtonVariant: Boolean
+  isButtonVariant: Boolean,
+  isButtonVariantWithRadio: Boolean
 })
 const emit = defineEmits({
   'update:modelValue': []
@@ -47,6 +48,7 @@ const onInput = (value) => {
         :label-icon="item.labelIcon"
         :tooltip-options="item.tooltipOptions"
         :is-button-variant="isButtonVariant"
+        :is-button-variant-with-radio="isButtonVariantWithRadio"
         @update:model-value="onInput"
       />
     </div>
