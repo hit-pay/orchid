@@ -32,8 +32,5 @@
   "license": "MIT",
   "resolutions": {
     "rollup": "npm:@rollup/wasm-node"
-  },
-  "dependencies": {
-    "@orchidui/vue-core": "^0.0.4"
   }
 }

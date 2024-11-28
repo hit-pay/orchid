@@ -21,6 +21,7 @@
     "publish": "npm run publish:core-package && npm run publish:dashboard-package"
   },
   "dependencies": {
+    "@orchidui/vue-core": "workspaces/*",
     "@popperjs/core": "^2.11.8",
     "dayjs": "^1.11.10",
     "echarts": "^5.4.3",
