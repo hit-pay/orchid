@@ -1,10 +1,10 @@
 <script setup>
 import { Table, Pagination, PrevNext, Select, Tabs, Button, Dropdown } from '@orchidui/vue'
 import { FilterSearch, FilterSearchFor, FilterForm } from '@orchidui/dashboard'
-
 import { ref, computed, onMounted } from 'vue'
 import dayjs from 'dayjs'
 import ColumnEdit from './ColumnEdit.vue'
+
 import {
   formatHeadersToLocalStorage,
   setInLocalStorage,
@@ -193,7 +193,7 @@ const changePage = () => {
   applyFilter(null, currentPage.value)
 }
 
-const applyFilter = (filterForm = null, isChangePage = false, changeCursor = '') => {
+const applyFilter = (filterFormData = null, isChangePage = false, changeCursor = '') => {
   if (paginationOption.value && !isChangePage) {
     currentPage.value = 1
   }
@@ -216,9 +216,9 @@ const applyFilter = (filterForm = null, isChangePage = false, changeCursor = '')
     filterData.value[filterOptions.value.search.key] = queries.value.join()
   }
 
-  if (filterForm) {
+  if (filterFormData) {
     isDropdownOpened.value = false
-    filterData.value = { ...filterData.value, ...filterForm }
+    filterData.value = { ...filterData.value, ...filterFormData }
     Object.keys(filterData.value).forEach((key) => {
       if (Array.isArray(filterData.value[key]) && filterData.value[key].length === 0) {
         delete filterData.value[key]

@@ -1,5 +1,9 @@
 module.exports = {
-  content: ['./packages/vue/src/**/*.{vue,js,ts,jsx,tsx}', './src/**/*.{vue,js,ts,jsx,tsx}'],
+  content: [
+    './packages/vue/src/**/*.{vue,js,ts,jsx,tsx}',
+    './packages/dashboard/src/**/*.{vue,js,ts,jsx,tsx}',
+    './src/**/*.{vue,js,ts,jsx,tsx}'
+  ],
   darkMode: 'class',
   theme: {
     fontSize: {

@@ -3,7 +3,11 @@
 import { mergeConfig } from 'vite'
 
 const config = {
-  stories: ['../stories/**/*.mdx', '../packages/vue/src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
+  stories: [
+    '../stories/**/*.mdx',
+    '../packages/dashboard/src/**/*.stories.@(js|jsx|mjs|ts|tsx)',
+    '../packages/vue/src/**/*.stories.@(js|jsx|mjs|ts|tsx)'
+  ],
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
