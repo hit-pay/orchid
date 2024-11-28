@@ -26,7 +26,6 @@
     "dayjs": "^1.11.10",
     "echarts": "^5.4.3",
     "esbuild": "^0.20.1",
-    "esbuild-wasm": "0.24.0",
     "flag-icons": "^6.11.1",
     "libphonenumber-js": "^1.10.51",
     "lodash-es": "^4.17.21",
@@ -43,6 +42,7 @@
     "@storybook/addon-links": "^7.6.12",
     "@storybook/blocks": "^7.6.12",
     "@storybook/testing-library": "^0.2.2",
+    "@storybook/vue3": "^7.6.12",
     "@storybook/vue3-vite": "^7.6.12",
     "@vitejs/plugin-vue": "^5.0.3",
     "@vue/eslint-config-prettier": "^8.0.0",
@@ -55,10 +55,15 @@
     "postcss-import": "^15.1.0",
     "sass": "^1.68.0",
     "shikiji": "^0.9.10",
-    "storybook": "^8.4.5",
+    "storybook": "^7.6.15",
     "storybook-addon-root-attribute": "^1.0.2",
     "tailwindcss": "^3.4.3",
     "vite": "^5.4.11",
     "vue": "^3.3.4"
+  },
+  "overrides": {
+    "vite": {
+      "rollup": "npm:@rollup/wasm-node"
+    }
   }
 }
