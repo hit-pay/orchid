@@ -14,6 +14,7 @@ defineProps({
   labelIcon: String,
   tooltipOptions: Object,
   isButtonVariant: Boolean,
+  isButtonVariantWithRadio: Boolean,
   icon: String
 })
 defineEmits({
@@ -46,11 +47,12 @@ defineEmits({
         '!text-oc-text-300': isDisabled,
         'bg-gray-200': isDisabled && isButtonVariant,
         '!border-oc-error': errorMessage && isButtonVariant,
-        'radio-button__label--button border-gray-200 border py-3 px-5 rounded': isButtonVariant
+        'radio-button__label--button border-gray-200 border py-3 px-5 rounded': isButtonVariant,
+        '!px-6 !py-5 !gap-x-4': isButtonVariantWithRadio
       }"
     >
       <span
-        v-if="!isButtonVariant"
+        v-if="!isButtonVariant || isButtonVariantWithRadio"
         class="radio-button__custom w-5 h-5 rounded-full border transition-all duration-300"
         :class="[
           isDisabled || !modelValue ? 'border-oc-primary-200 bg-oc-primary-50' : '',
@@ -66,22 +68,20 @@ defineEmits({
       />
 
       <slot>
-        <span v-if="label" class="text-sm">{{ label }}</span>
+        <span v-if="label" :class="{ 'text-sm': !isButtonVariantWithRadio }">{{ label }}</span>
       </slot>
 
       <Tooltip v-if="labelIcon" v-bind="tooltipOptions">
-      <Icon width="16" height="16" :name="labelIcon" class="text-oc-text-400" />
-      <template #popper>
+        <Icon width="16" height="16" :name="labelIcon" class="text-oc-text-400" />
+        <template #popper>
           <slot name="tooltipText">
             <div v-if="tooltipText" class="px-3 py-2 whitespace-nowrap">
               {{ tooltipText }}
             </div>
-        </slot>
-      </template>
-    </Tooltip>
+          </slot>
+        </template>
+      </Tooltip>
     </label>
-
- 
   </BaseInput>
 </template>
 
