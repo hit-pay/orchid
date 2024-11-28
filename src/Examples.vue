@@ -8,7 +8,7 @@ import {
   Chip,
   NumberInput,
   Toggle as OcToggle
-} from '@orchidui/vue-core'
+} from '@/orchidui-core'
 
 const isOpen = ref(false)
 const dynamicContent = ref([])
