@@ -542,3 +542,7 @@ onMounted(() => {
     </div>
   </div>
 </template>
+<style>
+.oc-data-tables {
+}
+</style>

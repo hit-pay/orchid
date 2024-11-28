@@ -10,7 +10,7 @@ import {
   DropdownItem
 } from '@orchidui/vue-core'
 
-import { DataTable } from '@orchidui/vue-core'
+import { DataTable } from '@orchidui/vue-dashboard'
 
 import { ref } from 'vue'
 
