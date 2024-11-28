@@ -20,8 +20,8 @@ npm run publish
 
 1. npx command for copy all icons to local public folder
 
-
 Migration components to @orchidui/vue-dashboard
+
 1. FormBuilder
 2. DataTables
 3. FilterSearch
