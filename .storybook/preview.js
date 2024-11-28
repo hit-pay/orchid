@@ -3,8 +3,8 @@
 import { setup } from '@storybook/vue3'
 
 import '../src/scss/main.scss'
-import '@orchidui/vue-core/dist/style.css'
-import '@orchidui/vue-dashboard/dist/style.css'
+import '@/orchidui-core-style.css'
+import '@/orchidui-dashboard-style.css'
 
 setup((app) => {
   app.config.globalProperties.window = window

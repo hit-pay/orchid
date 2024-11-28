@@ -3,7 +3,7 @@
   "compilerOptions": {
     "paths": {
       "@/orchidui-core": ["./packages/vue-core/src"],
-      "@orchidui/vue-dashboard": ["./packages/vue-dashboard/src"]
+      "@/orchidui-dashboard": ["./packages/vue-dashboard/src"]
     }
   }
 }

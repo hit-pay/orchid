@@ -20,9 +20,6 @@
     ".": {
       "import": "./dist/index.js"
     },
-    "./readme.js": {
-      "import": "./readme.js"
-    },
     "./dist/style.css": {
       "import": "./dist/style.css",
       "require": "./dist/style.css"

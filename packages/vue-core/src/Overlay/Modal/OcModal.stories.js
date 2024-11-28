@@ -1,5 +1,5 @@
 import { Theme, Modal, Button } from '@/orchidui-core'
-import { FormBuilder } from '@orchidui/vue-core'
+import { FormBuilder } from '@/orchidui-core'
 import { ref } from 'vue'
 
 export default {
