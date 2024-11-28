@@ -1,6 +1,6 @@
 /** @type { import('@storybook/vue3').Preview } */
 
-import '../src/style.scss'
+import '../src/scss/main.scss'
 
 import { setup } from '@storybook/vue3'
 

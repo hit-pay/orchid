@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import './style.scss'
+import './scss/main.scss'
 import '@orchidui/vue/dist/style.css'
 import App from './App.vue'
 
