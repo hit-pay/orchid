@@ -1,3 +1,13 @@
+<script setup>
+import HomePage from './HomePage.vue'
+const navigation = [
+  { name: 'Documentation', href: '/storybook/' },
+  {
+    name: 'Hitpay Online Store',
+    href: 'https://www.hitpayapp.com/online-store'
+  }
+]
+</script>
 <template>
   <div class="bg-white">
     <header class="absolute inset-x-0 top-0 z-50">
@@ -63,13 +73,3 @@
     </div>
   </div>
 </template>
-<script setup>
-import HomePage from './HomePage.vue'
-const navigation = [
-  { name: 'Documentation', href: '/storybook/' },
-  {
-    name: 'Hitpay Online Store',
-    href: 'https://www.hitpayapp.com/online-store'
-  }
-]
-</script>

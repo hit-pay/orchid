@@ -117,7 +117,7 @@ const args = {
       <div class="w-full flex flex-wrap gap-5 items-center mb-5">
         <Button variant="secondary" left-icon="x" />
         <Button variant="secondary" left-icon="x" rightIcon="circle" label="Button" />
-        <Button variant="secondary" label="Button" isDisabled />
+        <Button variant="secondary" label="Button" is-disabled />
         <Button variant="secondary" label="Button" isLoading />
         <Button variant="secondary" label="Button" isTransparent />
       </div>
