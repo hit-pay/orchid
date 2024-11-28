@@ -104,26 +104,6 @@ const SampleJsonForm = [
     }
   },
   {
-    name: [
-      {
-        key: 'country_code_field',
-        rule: 'required'
-      },
-      {
-        key: 'phone_number_field',
-        rule: 'required'
-      }
-    ],
-    key: 'phone_number_field',
-    type: 'PhoneInput',
-    props: {
-      countryCodes: countryCodes,
-      label: 'Example Label',
-      hint: 'This is a hint text to help user',
-      placeholder: 'placeholder'
-    }
-  },
-  {
     name: 'radio_group',
     key: 'radio_group',
     type: 'RadioGroup',

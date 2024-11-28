@@ -71,15 +71,6 @@ export const Default = {
     },
     template: `
           <Theme class="p-8">
-            <div>
-               <pre class="bg-black text-white p-4 rounded mb-5">{{filter}}</pre>
-              <div>
-                Filter fields changed: {{ changedFields }}
-              </div>
-              <div>
-                Selected item: {{ selectedRows.map(({ id }) => id).join(', ') }}
-              </div>
-            </div>
             <DataTable 
                 id="sample-data-table"
                 v-model:selected="selectedRows"
@@ -92,9 +83,6 @@ export const Default = {
                 @filter-fields-changed="changedFields = $event"
                 @hover:cell="console.log('hover:cell: ', $event)"
              >
-              <template #before>
-                Slot Before
-              </template>
               <template #bulk-actions="{selectedRows}">
                 <Button
                     label="Publish"
@@ -166,9 +154,6 @@ export const Default = {
                     </div>
                   </template>
                 </Dropdown>
-              </template>
-              <template #after>
-                Slot After
               </template>
             </DataTable>
           </Theme>

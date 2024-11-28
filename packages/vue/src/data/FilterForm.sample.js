@@ -44,48 +44,6 @@ const SampleFilterForm = [
     }
   },
   {
-    name: 'only_date',
-    type: 'DatePicker',
-    props: {
-      label: 'DatePicker',
-      hint: 'This is a hint text to help user',
-      placeholder: 'placeholder'
-    }
-  },
-  {
-    name: 'radio_group',
-    type: 'RadioGroup',
-    props: {
-      groupName: 'unique_group_name',
-      label: 'RadioGroup',
-      hint: 'This is a hint text to help user',
-      placeholder: 'placeholder',
-      radio: [
-        {
-          label: 'Text',
-          value: '0'
-        },
-        {
-          label: 'Text',
-          value: '1'
-        },
-        {
-          label: 'Text',
-          value: '2'
-        },
-        {
-          label: 'Text',
-          value: '3'
-        },
-        {
-          label: 'is Disabled',
-          value: '4',
-          isDisabled: true
-        }
-      ]
-    }
-  },
-  {
     name: [
       {
         key: 'total_range_from'
@@ -121,36 +79,6 @@ const SampleFilterForm = [
         {
           label: 'Option 3',
           value: 3
-        },
-        {
-          label: 'Option 4',
-          value: 4
-        }
-      ]
-    }
-  },
-  {
-    name: 'select_multiple',
-    type: 'Select',
-    props: {
-      label: 'Select Multiple',
-      hint: 'This is a hint text to help user',
-      placeholder: 'placeholder',
-      isCheckboxes: true,
-      isSelectAll: true,
-      multiple: true,
-      options: [
-        {
-          label: 'Option 1',
-          value: crypto.randomUUID()
-        },
-        {
-          label: 'Option 2',
-          value: crypto.randomUUID()
-        },
-        {
-          label: 'Option 3',
-          value: crypto.randomUUID()
         },
         {
           label: 'Option 4',

@@ -118,21 +118,6 @@ export const Default = {
     },
     template: `
           <Theme class="p-8">
-            <div class="grid md:grid-cols-2 gap-5 mb-5">
-              <p>
-                Values : {{ values }}
-              </p>
-              <p>
-                Errors : {{ errors }}
-              </p>
-            </div>
-            <Button
-              label="Trigger errors"
-              @click="errors = {
-                phone_number_field: 'Field is invalid format',
-                input: 'Field is required',
-              }"
-            />
             <FormBuilder
                 id="form-builder"
                 class="gap-5"

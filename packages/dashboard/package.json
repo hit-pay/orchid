@@ -1,11 +1,11 @@
 {
-  "name": "@orchidui/dashboard",
-  "description": "Orchid UI , UI Dashboard Library for Vue 3 and tailwind css",
-  "version": "0.0.1",
+  "name": "@orchidui/vue",
+  "description": "Orchid UI , Dashboard Ui Library Vue 3 tailwind css",
+  "version": "0.5.523",
   "type": "module",
   "scripts": {
     "build": "vite build",
-    "update-version": "npm version patch --beta"
+    "update-version": "npm version patch"
   },
   "publishConfig": {
     "access": "public"
@@ -13,12 +13,16 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hit-pay/orchid.git",
-    "directory": "packages/ui"
+    "directory": "packages/vue"
   },
   "homepage": "https://orchidui.vercel.app/",
   "exports": {
     ".": {
       "import": "./dist/index.js"
+    },
+    "./dist/style.css": {
+      "import": "./dist/style.css",
+      "require": "./dist/style.css"
     }
   },
   "module": "./dist/index.js",
