@@ -20,7 +20,7 @@
   ></Select>
 </template>
 <script setup>
-import { Select } from '@orchidui/vue-core'
+import { Select } from '@hitpay/orchid-ui'
 import { ref } from 'vue'
 const props = defineProps({
   modelValue: { default: 'RGB', type: String }

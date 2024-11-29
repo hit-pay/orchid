@@ -45,7 +45,7 @@ export default defineConfig({
     rollupOptions: {
       external: [
         'vue',
-        '@orchidui/vue-core',
+        '@hitpay/orchid-ui',
         '@popperjs/core',
         'dayjs',
         'v-calendar',

@@ -5,8 +5,8 @@ import { mergeConfig } from 'vite'
 const config = {
   stories: [
     '../stories/**/*.mdx',
-    '../packages/vue-dashboard/src/**/*.stories.@(js|jsx|mjs|ts|tsx)',
-    '../packages/vue-core/src/**/*.stories.@(js|jsx|mjs|ts|tsx)'
+    '../packages/dashboard/src/**/*.stories.@(js|jsx|mjs|ts|tsx)',
+    '../packages/core/src/**/*.stories.@(js|jsx|mjs|ts|tsx)'
   ],
   addons: [
     '@storybook/addon-links',

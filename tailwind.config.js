@@ -1,7 +1,7 @@
 module.exports = {
   content: [
-    './packages/vue-core/src/**/*.{vue,js,ts,jsx,tsx}',
-    './packages/vue-dashboard/src/**/*.{vue,js,ts,jsx,tsx}',
+    './packages/core/src/**/*.{vue,js,ts,jsx,tsx}',
+    './packages/dashboard/src/**/*.{vue,js,ts,jsx,tsx}',
     './src/**/*.{vue,js,ts,jsx,tsx}'
   ],
   darkMode: 'class',

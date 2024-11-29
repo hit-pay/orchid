@@ -13,11 +13,11 @@
     "dev:landing": "vite dev",
     "build:landing": "vite build",
     "build:storybook": "storybook build -o public/storybook",
-    "build:core": "cd packages/vue-core && npm run build",
-    "build:dashboard": "npm install && cd packages/vue-dashboard && npm run build",
+    "build:core": "cd packages/core && npm run build",
+    "build:dashboard": "npm install && cd packages/dashboard && npm run build",
     "build": "npm run build:core && npm run build:dashboard && npm install && npm run build:storybook && npm run build:landing",
-    "publish:core": "npm run build:core && cd packages/vue-core && npm version patch && npm publish",
-    "publish:dashboard": "npm run build:dashboard && cd packages/vue-dashboard && npm version patch && npm publish"
+    "publish:core": "npm run build:core && cd packages/core && npm version patch && npm publish",
+    "publish:dashboard": "npm run build:dashboard && cd packages/dashboard && npm version patch && npm publish"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",

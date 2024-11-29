@@ -1,6 +1,6 @@
 <script setup>
 import { nextTick, ref } from 'vue'
-import { Button, Input } from '@orchidui/vue-core'
+import { Button, Input } from '@hitpay/orchid-ui'
 
 const emit = defineEmits({
   addQuery: [],

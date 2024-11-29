@@ -1,6 +1,6 @@
 <script setup>
 import { ColorPickerPopup } from '@/orchidui-dashboard'
-import { Dropdown, Input, BaseInput, Icon } from '@orchidui/vue-core'
+import { Dropdown, Input, BaseInput, Icon } from '@hitpay/orchid-ui'
 import { computed, ref } from 'vue'
 
 const props = defineProps({

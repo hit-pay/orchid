@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue'
-import { TableHeader, Chip } from '@orchidui/vue-core'
+import { TableHeader, Chip } from '@hitpay/orchid-ui'
 const props = defineProps({
   filters: Object,
   queries: Object
