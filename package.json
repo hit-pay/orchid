@@ -16,8 +16,11 @@
     "build:core": "cd packages/core && npm run build",
     "build:dashboard": "npm install && cd packages/dashboard && npm run build",
     "build": "npm run build:core && npm run build:dashboard && npm install && npm run build:storybook && npm run build:landing",
-    "publish:core": "npm run build:core && cd packages/core && npm version minor && npm publish",
-    "publish:dashboard": "npm run build:dashboard && cd packages/dashboard && npm version minor && npm publish"
+    "version:update-core": "cd packages/core && npm version minor",
+    "version:update-dashboard": "cd packages/dashboard && npm version minor",
+    "version:update": "npm run version:update-core && npm run version:update-dashboard",
+    "publish:core": "npm run build:core && cd packages/core && npm publish",
+    "publish:dashboard": "npm run build:dashboard && cd packages/dashboard && npm publish"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
