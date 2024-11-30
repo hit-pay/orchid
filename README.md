@@ -16,9 +16,16 @@ npm run dev
 
 npm run publish
 
-# TODO
 
-1. npx command for copy all icons to local public folder
+Migration Components :
+1. DataTables (idea)
+2. Card
+3. Charts
+4. CodeBlock
+5. ColorPicker
+6. OnBoardingProgressbar
+7. TextEditor
 
-
-1. DataTables
+Issue Stories :
+1. OcTabs
+2. OcCalendar
