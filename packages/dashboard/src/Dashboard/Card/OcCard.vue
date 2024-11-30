@@ -1,5 +1,5 @@
 <script setup>
-import { Button, Icon } from '@hitpay/orchid-ui'
+import { Button, Icon } from '@orchidui/core'
 import { computed } from 'vue'
 import CrossFeatureLogo from '@/orchidui-dashboard/Dashboard/Card/logo-animations/CrossFeatureLogo.vue'
 import CrossSellPosLogo from '@/orchidui-dashboard/Dashboard/Card/logo-animations/CrossSellPosLogo.vue'

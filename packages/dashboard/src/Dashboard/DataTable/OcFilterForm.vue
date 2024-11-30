@@ -1,6 +1,6 @@
 <script setup>
-import { FormBuilder } from '@hitpay/orchid-ui'
-import { Button } from '@hitpay/orchid-ui'
+import { FormBuilder } from '@orchidui/core'
+import { Button } from '@orchidui/core'
 import { ref, computed, onMounted } from 'vue'
 
 const props = defineProps({

@@ -41,7 +41,7 @@
 </template>
 
 <script setup>
-import { Slider } from '@hitpay/orchid-ui'
+import { Slider } from '@orchidui/core'
 import { ref, onMounted } from 'vue'
 
 defineProps({

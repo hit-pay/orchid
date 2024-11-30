@@ -1,5 +1,5 @@
 <script setup>
-import { Table, Pagination, PrevNext, Select, Tabs, Button, Dropdown } from '@hitpay/orchid-ui'
+import { Table, Pagination, PrevNext, Select, Tabs, Button, Dropdown } from '@orchidui/core'
 import { FilterSearch, FilterSearchFor, FilterForm } from '@/orchidui-dashboard'
 
 import { ref, computed, onMounted } from 'vue'

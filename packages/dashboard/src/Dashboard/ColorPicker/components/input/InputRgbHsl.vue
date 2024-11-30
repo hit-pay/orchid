@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-import { Input } from '@hitpay/orchid-ui'
+import { Input } from '@orchidui/core'
 import { ref, watch } from 'vue'
 
 const props = defineProps({

@@ -46,7 +46,7 @@
 
 <script setup>
 import { computed, ref } from 'vue'
-import { Tooltip, Icon } from '@hitpay/orchid-ui'
+import { Tooltip, Icon } from '@orchidui/core'
 import { useChart } from '@/orchidui-dashboard/Dashboard/composables/useChart.js'
 
 const props = defineProps({

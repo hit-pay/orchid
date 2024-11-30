@@ -25,7 +25,7 @@
 
 <script setup>
 import { inject, ref } from 'vue'
-import { Icon } from '@hitpay/orchid-ui'
+import { Icon } from '@orchidui/core'
 
 defineProps({
   gradientType: String

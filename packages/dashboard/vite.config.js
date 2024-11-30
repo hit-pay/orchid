@@ -43,7 +43,7 @@ export default defineConfig({
       formats: ['es']
     },
     rollupOptions: {
-      external: ['vue', '@hitpay/orchid-ui', 'echarts', 'shikiji']
+      external: ['vue', '@orchidui/core', 'echarts', 'shikiji']
     }
   }
 })

@@ -1,5 +1,5 @@
 <script setup>
-import { Dropdown, Button, Icon, Checkbox } from '@hitpay/orchid-ui'
+import { Dropdown, Button, Icon, Checkbox } from '@orchidui/core'
 import { ref, onMounted } from 'vue'
 import { VueDraggableNext } from 'vue-draggable-next'
 import { formatHeadersFromLocalStorage, getFromLocalStorage } from './utils/editColumnsUtils'

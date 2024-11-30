@@ -4,7 +4,7 @@ import { QuillEditor } from './QuillEditor'
 import { ColorPicker } from '@/orchidui-dashboard'
 
 import { computed, onMounted, ref } from 'vue'
-import { BaseInput, Icon, Dropdown, Slider } from '@hitpay/orchid-ui'
+import { BaseInput, Icon, Dropdown, Slider } from '@orchidui/core'
 
 const props = defineProps({
   /**
