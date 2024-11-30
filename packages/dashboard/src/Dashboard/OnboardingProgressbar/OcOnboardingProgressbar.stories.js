@@ -1,4 +1,4 @@
-import { OnboardingProgressbar } from '@/orchidui-core'
+import { OnboardingProgressbar } from '@/orchidui-dashboard'
 
 export default {
   component: OnboardingProgressbar,

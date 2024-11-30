@@ -50,7 +50,6 @@ export default defineConfig({
         'v-calendar',
         'vue-advanced-cropper',
         'vue-draggable-next',
-        'echarts',
         'shikiji',
         'libphonenumber-js'
       ]

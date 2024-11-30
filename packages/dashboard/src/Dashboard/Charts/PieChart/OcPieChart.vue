@@ -45,9 +45,9 @@
 </template>
 
 <script setup>
-import { Tooltip, Icon } from '@/orchidui-core'
 import { computed, ref } from 'vue'
-import { useChart } from '@/orchidui-core/composables/useChart.js'
+import { Tooltip, Icon } from '@hitpay/orchid-ui'
+import { useChart } from '@/orchidui-dashboard/Dashboard/composables/useChart.js'
 
 const props = defineProps({
   showTooltip: Boolean,

@@ -31,7 +31,6 @@ export * from './Elements/SandboxBanner/OcSandboxBanner.js'
 export * from './Elements/Box/OcBox.js'
 export * from './Elements/AuthenticationOption/AuthenticationOption.js'
 export * from './Elements/VerificationOption/OcVerificationOption.js'
-export * from './Elements/OnboardingProgressbar/OcOnboardingProgressbar.js'
 
 export * from './Feedback/Chip/OcChip.js'
 export * from './Feedback/Snackbar/OcSnackbar.js'

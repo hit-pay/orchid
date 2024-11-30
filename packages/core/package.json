@@ -20,9 +20,6 @@
     ".": {
       "import": "./dist/index.js"
     },
-    "./Chart": {
-      "import": "./dist/Chart.js"
-    },
     "./Cropper": {
       "import": "./dist/Cropper.js"
     },
