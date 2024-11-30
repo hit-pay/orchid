@@ -1,11 +1,10 @@
 {
   "name": "@hitpay/orchid-ui",
   "description": "Orchid UI, Library Vue 3 tailwind css",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "build": "vite build",
-    "update-version": "npm version minor"
+    "build": "vite build"
   },
   "publishConfig": {
     "access": "public"
