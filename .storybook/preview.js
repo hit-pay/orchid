@@ -1,8 +1,10 @@
 /** @type { import('@storybook/vue3').Preview } */
 
-import '../src/style.scss'
-
 import { setup } from '@storybook/vue3'
+
+import '../src/scss/main.scss'
+import '@/orchidui-core-style.css'
+import '@/orchidui-dashboard-style.css'
 
 setup((app) => {
   app.config.globalProperties.window = window

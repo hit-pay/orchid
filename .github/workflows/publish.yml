@@ -1,7 +1,7 @@
 ---
 on:
   push:
-    branches: main
+    branches: next
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -14,13 +14,11 @@ jobs:
       - name: Running ci
         run: npm ci
       - name: Install dependencies
-        run: cd packages/vue && npm install
-      - name: build orchid package
-        run: cd packages/vue && npm run build
-      - name: Update version package
-        run: cd packages/vue && npm version patch
-      - name: Publish package
-        run: cd packages/vue && npm publish
+        run: npm install
+      - name: build orchid core
+        run: npm run publish:core
+      - name: build orchid dashboard
+        run: npm run publish:dashboard
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Authenticate with GitHub package registry

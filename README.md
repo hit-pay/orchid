@@ -19,3 +19,6 @@ npm run publish
 # TODO
 
 1. npx command for copy all icons to local public folder
+
+
+1. DataTables
