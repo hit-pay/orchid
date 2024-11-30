@@ -43,15 +43,7 @@ export default defineConfig({
       formats: ['es']
     },
     rollupOptions: {
-      external: [
-        '@hitpay/orchid-ui',
-        'v-calendar',
-        'vue-advanced-cropper',
-        'vue-draggable-next',
-        'echarts',
-        'shikiji',
-        'vue3-colorpicker'
-      ]
+      external: ['vue', '@hitpay/orchid-ui', 'echarts', 'shikiji']
     }
   }
 })

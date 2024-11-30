@@ -30,8 +30,7 @@
     "shikiji": "^0.9.18",
     "v-calendar": "^3.1.2",
     "vue-advanced-cropper": "^2.8.8",
-    "vue-draggable-next": "^2.2.1",
-    "vue3-colorpicker": "^2.2.3"
+    "vue-draggable-next": "^2.2.1"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.6.12",
