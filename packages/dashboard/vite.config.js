@@ -44,17 +44,13 @@ export default defineConfig({
     },
     rollupOptions: {
       external: [
-        'vue',
         '@hitpay/orchid-ui',
-        '@popperjs/core',
-        'dayjs',
         'v-calendar',
         'vue-advanced-cropper',
         'vue-draggable-next',
         'echarts',
         'shikiji',
-        'vue3-colorpicker',
-        'libphonenumber-js'
+        'vue3-colorpicker'
       ]
     }
   }
