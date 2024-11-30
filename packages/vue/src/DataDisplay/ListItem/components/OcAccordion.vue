@@ -62,6 +62,7 @@ defineExpose({
         />
       </div>
       <div class="flex items-center gap-x-4 w-full p-5 pl-0">
+        <slot name="logo"></slot>
         <div class="flex flex-col flex-1 gap-y-3">
           <div class="flex items-center justify-between">
             <div class="flex text-sm text-oc-text-400 items-center gap-x-3 overflow-hidden">
@@ -84,7 +85,7 @@ defineExpose({
           </div>
 
           <slot>
-            <div class="flex flex-col gap-3" v-if="description">
+            <div v-if="description" class="flex flex-col gap-3">
               <div class="text-oc-text-400 flex gap-x-2 items-center text-sm">
                 {{ description }}
               </div>
