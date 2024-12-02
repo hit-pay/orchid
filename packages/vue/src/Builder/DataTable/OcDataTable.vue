@@ -186,9 +186,9 @@ const removeAllQueryFilter = () => {
     defaultFilters.per_page = perPage.value
   }
   if (filterOptions.value?.tabs?.key) {
-    defaultFilters[filterOptions.value?.tabs?.key] = filterTab.value
+    filterTab.value = ''
   } else {
-    defaultFilters.tabs = filterTab.value
+    filterTab.value = ''
   }
 
   filterData.value = defaultFilters
