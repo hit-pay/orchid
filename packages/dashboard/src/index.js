@@ -7,7 +7,6 @@ import OnboardingProgressbar from '@/orchidui-dashboard/Dashboard/OnboardingProg
 const CodeBlock = defineAsyncComponent(
   () => import('@/orchidui-dashboard/Dashboard/CodeBlock/OcCodeBlock.vue')
 )
-
 export * from '@/orchidui-dashboard/Dashboard/Charts/LineChart/OcLineChart.js'
 export * from '@/orchidui-dashboard/Dashboard/Charts/PieChart/OcPieChart.js'
 export * from '@/orchidui-dashboard/Dashboard/Charts/BarChart/OcBarChart.js'
@@ -23,3 +22,15 @@ export {
   ColorPickerPopup,
   CodeBlock
 }
+
+// all components :
+// OnboardingProgressbar
+// TextEditor
+// ColorPicker
+// ColorPickerPopup
+// CodeBlock
+// Card
+// BarChart
+// BarRaceChart
+// LineChart
+// PieChart
