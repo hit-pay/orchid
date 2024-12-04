@@ -206,7 +206,7 @@ const changePage = () => {
 }
 
 const saveFilterInLocalStorage = () => {
-  if (filterOptions.value?.columnEdit?.localStorageKey) {
+  if (props.id) {
     setInLocalStorage(props.id, JSON.stringify(filterData.value))
   }
 }
