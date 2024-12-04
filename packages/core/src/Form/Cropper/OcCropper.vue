@@ -214,7 +214,7 @@ const isLightBox = ref(localInputOptionsValue.value.lightbox ? true : false)
 <style lang="scss">
 .cropper-background {
   background:
-    url('/images/empty-space.svg'),
+    url('data:image/svg+xml,<svg width="530" height="300" viewBox="0 0 530 300" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><rect width="530" height="300" fill="url(%23pattern0_4033_144833)" fill-opacity="0.2"/><defs><pattern id="pattern0_4033_144833" patternContentUnits="objectBoundingBox" width="0.0603774" height="0.106667"><use xlink:href="%23image0_4033_144833" transform="scale(0.000943396 0.00166667)"/></pattern><image id="image0_4033_144833" width="64" height="64" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAONJREFUeF7t20EOhEAIRFG4/6F7DvEnYeFzryQIv6pBd2behOu9dPvsbog+k+NLgArQAqmJcw9iAAhSgZKB3IJkkAySQTJ4CiE+gA8oBeg0mH3Ai084P89HhqwEqIA209ICsQdjAeaZIgaAYKxBDMCAYy8fXwAIgiAIcoJpJEYGI4VjB3YrbC9gL2AvkCB43cM5PgZgAAZgQFnNZAhdGykQBEEQBEEQDBmgAm2glM/z+QUYisYUGoldO7kY32IEAzCg6RgIRgjFAsw+AgRBMNYgBmCAT2TCYfoPPz/HCqQCX1eBHzHnv7C7WhBSAAAAAElFTkSuQmCC"/></defs></svg>'),
     lightgray 0 0% / 50px 50px repeat;
 }
 

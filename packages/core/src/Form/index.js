@@ -16,7 +16,6 @@ export * from './TextArea/OcTextArea.js'
 
 export * from './Calendar/OcCalendar.js'
 export * from './DatePicker/OcDatePicker.js'
-export * from './TimePicker/OcTimePicker.js'
 export * from './Slider/OcSlider.js'
 
 export * from './SectionItem/OcSectionItem.js'

@@ -19,21 +19,6 @@
     ".": {
       "import": "./dist/index.js"
     },
-    "./Cropper": {
-      "import": "./dist/Cropper.js"
-    },
-    "./Calendar": {
-      "import": "./dist/Calendar.js"
-    },
-    "./Draggable": {
-      "import": "./dist/Draggable.js"
-    },
-    "./StoreDesign": {
-      "import": "./dist/StoreDesign.js"
-    },
-    "./EmojiPicker": {
-      "import": "./dist/EmojiPicker.js"
-    },
     "./dist/style.css": {
       "import": "./dist/style.css",
       "require": "./dist/style.css"

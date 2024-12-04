@@ -1,3 +1,5 @@
+import { defineAsyncComponent } from 'vue'
+
 export * from './DataDisplay/Table/OcTable.js'
 export * from './DataDisplay/Pagination/OcPagination.js'
 export * from './DataDisplay/Overview/OcOverview.js'
@@ -55,9 +57,61 @@ export * from './Theme/OcTheme.js'
 
 export * from './FormBuilder/OcFormBuilder.js'
 
+//
 import DataTable from '@/orchidui-core/DataTable/OcDataTable.vue'
 import FilterSearch from '@/orchidui-core/DataTable/OcFilterSearch.vue'
 import FilterSearchFor from '@/orchidui-core/DataTable/OcFilterSearchFor.vue'
 import FilterForm from '@/orchidui-core/DataTable/OcFilterForm.vue'
 
 export { DataTable, FilterSearch, FilterSearchFor, FilterForm }
+
+//
+const ComplexCalendar = defineAsyncComponent(
+  () => import('./Form/ComplexCalendar/OcComplexCalendar.vue')
+)
+const ComplexDatePicker = defineAsyncComponent(
+  () => import('./Form/ComplexDatePicker/OcComplexDatePicker.vue')
+)
+//
+const ModalCropper = defineAsyncComponent(() => import('./Form/ModalCropper/OcModalCropper.vue'))
+const Cropper = defineAsyncComponent(() => import('./Form/Cropper/OcCropper.vue'))
+//
+const Draggable = defineAsyncComponent(() => import('./Elements/Draggable/OcDraggable.vue'))
+const DraggableList = defineAsyncComponent(() => import('./Elements/Draggable/OcDraggableList.vue'))
+//
+const EmojiPicker = defineAsyncComponent(() => import('./Form/EmojiPicker/OcEmojiPicker.vue'))
+//
+const ThumbnailTheme = defineAsyncComponent(
+  () => import('./StoreDesign/ThumbnailTheme/ThumbnailTheme.vue')
+)
+
+const ThumbnailSection = defineAsyncComponent(
+  () => import('./StoreDesign/ThumbnailSection/ThumbnailSection.vue')
+)
+const SubPlanCard = defineAsyncComponent(() => import('./StoreDesign/SubPlanCard/SubPlanCard.vue'))
+
+//
+const TimePopup = defineAsyncComponent(() => import('./Form/TimePicker/OcTimePopup.vue'))
+const TimePicker = defineAsyncComponent(() => import('./Form/TimePicker/OcTimePicker.vue'))
+
+export {}
+
+export {
+  // calendar
+  ComplexCalendar,
+  ComplexDatePicker,
+  // cropper
+  ModalCropper,
+  Cropper,
+  // draggable
+  Draggable,
+  DraggableList,
+  // emoji picker
+  EmojiPicker,
+  // store design
+  ThumbnailTheme,
+  ThumbnailSection,
+  SubPlanCard,
+  TimePopup,
+  TimePicker
+}

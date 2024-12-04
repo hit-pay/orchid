@@ -1,15 +1,11 @@
 <script setup>
-import { Input, Dropdown } from '@/orchidui-core'
-import { defineAsyncComponent, ref, watch } from 'vue'
+import { Input, Dropdown, TimePopup } from '@/orchidui-core'
+import { ref, watch } from 'vue'
 import dayjs from 'dayjs'
 
 const emit = defineEmits({
   'update:modelValue': []
 })
-
-const TimePopup = defineAsyncComponent(
-  () => import('@/orchidui-core/Form/TimePicker/OcTimePopup.vue')
-)
 
 const popup = ref()
 const isDropdownOpened = ref(false)

@@ -1,7 +1,7 @@
 <!-- TODO : group not support nested dynamic -->
 <script setup>
 import { Dropdown, Icon, Tooltip } from '@/orchidui-core'
-import { Draggable } from '@/orchidui-core/Draggable'
+import { Draggable } from '@/orchidui-core'
 import { ref } from 'vue'
 
 defineProps({
