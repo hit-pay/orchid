@@ -100,7 +100,7 @@ export const ButtonVariant = {
     components: { Button, Theme },
     template: `
           <Theme colorMode="light">
-            <div class="flex gap-3 items-center  mb-3">
+            <div class="flex gap-5 items-center  mb-3">
               <Button left-icon="x"/>
               <Button left-icon="x" rightIcon="circle" label="Button Text"/>
               <Button label="Button Text" isDisabled/>
@@ -108,7 +108,7 @@ export const ButtonVariant = {
               <Button label="Button Text" isTransparent/>
               <Button label="Button Text" is-additional-area additionalAreaIcon="chevron-down"/>
             </div>
-            <div class="flex gap-3 items-center  mb-3">
+            <div class="flex gap-5 items-center  mb-3">
               <Button variant="secondary" left-icon="x"/>
               <Button variant="secondary" left-icon="x" rightIcon="circle" label="Button Text"/>
               <Button variant="secondary" label="Button Text" isDisabled/>
@@ -116,7 +116,7 @@ export const ButtonVariant = {
               <Button variant="secondary" label="Button Text" isTransparent/>
               <Button variant="secondary" label="Button Text" is-additional-area additionalAreaIcon="chevron-down"/>
             </div>
-            <div class="flex gap-3 items-center  mb-3">
+            <div class="flex gap-5 items-center  mb-3">
               <Button variant="destructive" left-icon="x"/>
               <Button variant="destructive" left-icon="x" rightIcon="circle" label="Button Text"/>
               <Button variant="destructive" label="Button Text" isDisabled/>
