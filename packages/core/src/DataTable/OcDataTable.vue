@@ -1,6 +1,16 @@
 <script setup>
-import { Table, Pagination, PrevNext, Select, Tabs, Button, Dropdown } from '@orchidui/core'
-import { FilterSearch, FilterSearchFor, FilterForm } from '@/orchidui-dashboard'
+import {
+  FilterSearch,
+  FilterSearchFor,
+  FilterForm,
+  Table,
+  Pagination,
+  PrevNext,
+  Select,
+  Tabs,
+  Button,
+  Dropdown
+} from '@/orchidui-core'
 
 import { ref, computed, onMounted } from 'vue'
 import dayjs from 'dayjs'

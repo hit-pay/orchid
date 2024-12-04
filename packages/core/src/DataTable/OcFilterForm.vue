@@ -1,6 +1,5 @@
 <script setup>
-import { FormBuilder } from '@orchidui/core'
-import { Button } from '@orchidui/core'
+import { Button, FormBuilder } from '@/orchidui-core'
 import { ref, computed, onMounted } from 'vue'
 
 const props = defineProps({

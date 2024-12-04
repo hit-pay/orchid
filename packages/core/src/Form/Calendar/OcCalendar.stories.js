@@ -40,7 +40,7 @@ export const calendarStory = {
       Checkbox
     },
     setup() {
-      const modelValue = ref()
+      const modelValue = ref(Date.now())
       const rangeModelValue = ref([])
 
       return { modelValue, rangeModelValue, args }

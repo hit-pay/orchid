@@ -1,6 +1,6 @@
 <script setup>
 import { nextTick, ref } from 'vue'
-import { Button, Input } from '@orchidui/core'
+import { Button, Input } from '@/orchidui-core'
 
 const emit = defineEmits({
   addQuery: [],

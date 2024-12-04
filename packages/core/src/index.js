@@ -54,3 +54,10 @@ export * from './Overlay/Whitelist/OcWhiteList.js'
 export * from './Theme/OcTheme.js'
 
 export * from './FormBuilder/OcFormBuilder.js'
+
+import DataTable from '@/orchidui-core/DataTable/OcDataTable.vue'
+import FilterSearch from '@/orchidui-core/DataTable/OcFilterSearch.vue'
+import FilterSearchFor from '@/orchidui-core/DataTable/OcFilterSearchFor.vue'
+import FilterForm from '@/orchidui-core/DataTable/OcFilterForm.vue'
+
+export { DataTable, FilterSearch, FilterSearchFor, FilterForm }
