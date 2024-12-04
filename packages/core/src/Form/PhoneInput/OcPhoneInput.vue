@@ -1,12 +1,11 @@
 <script setup>
 import { Dropdown, Input, Icon } from '@/orchidui-core'
 import { computed, ref } from 'vue'
-import codes from '../../data/CountryCodes.sample'
 import { preventEventIfNotNumberInput } from '@/orchidui-core/composables/helpers.js'
 import { parsePhoneNumber } from 'libphonenumber-js'
 
 const props = defineProps({
-  countryCodes: { type: Array, default: () => codes },
+  countryCodes: { type: Array, default: () => [] },
   initialCountryCode: {
     type: String,
     default: 'sg'

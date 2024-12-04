@@ -58,12 +58,11 @@ export * from './Theme/OcTheme.js'
 export * from './FormBuilder/OcFormBuilder.js'
 
 //
-import DataTable from '@/orchidui-core/DataTable/OcDataTable.vue'
-import FilterSearch from '@/orchidui-core/DataTable/OcFilterSearch.vue'
-import FilterSearchFor from '@/orchidui-core/DataTable/OcFilterSearchFor.vue'
-import FilterForm from '@/orchidui-core/DataTable/OcFilterForm.vue'
 
-export { DataTable, FilterSearch, FilterSearchFor, FilterForm }
+const DataTable = defineAsyncComponent(() => import('./DataTable/OcDataTable.vue'))
+const FilterSearch = defineAsyncComponent(() => import('./DataTable/OcFilterSearch.vue'))
+const FilterSearchFor = defineAsyncComponent(() => import('./DataTable/OcFilterSearchFor.vue'))
+const FilterForm = defineAsyncComponent(() => import('./DataTable/OcFilterForm.vue'))
 
 //
 const ComplexCalendar = defineAsyncComponent(
@@ -97,6 +96,11 @@ const TimePicker = defineAsyncComponent(() => import('./Form/TimePicker/OcTimePi
 export {}
 
 export {
+  // datatable
+  DataTable,
+  FilterSearch,
+  FilterSearchFor,
+  FilterForm,
   // calendar
   ComplexCalendar,
   ComplexDatePicker,
