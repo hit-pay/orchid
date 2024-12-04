@@ -16,10 +16,16 @@ npm run dev
 
 npm run publish
 
-# TODO
+Migration Components :
+1. DataTables (idea)
+2. Card
+3. Charts
+4. CodeBlock
+5. ColorPicker
+6. OnBoardingProgressbar
+7. TextEditor
 
 Issue Stories :
 1. OcTabs
 2. OcCalendar
 3. OcCard (assets files)
-
