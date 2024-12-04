@@ -165,7 +165,7 @@ const filterData = ref(defaultFilterData)
 
 const removeAllQueryFilter = () => {
   queries.value = []
-
+  filterTab.value = ''
   const defaultFilters = {}
 
   if (filterOptions.value) {
@@ -179,6 +179,7 @@ const removeAllQueryFilter = () => {
   } else {
     defaultFilters.per_page = perPage.value
   }
+  
   if (filterOptions.value?.tabs?.key) {
     defaultFilters[filterOptions.value?.tabs?.key] = filterTab.value
   } else {

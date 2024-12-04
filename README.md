@@ -16,7 +16,6 @@ npm run dev
 
 npm run publish
 
-
 Migration Components :
 1. DataTables (idea)
 2. Card
@@ -29,3 +28,4 @@ Migration Components :
 Issue Stories :
 1. OcTabs
 2. OcCalendar
+3. OcCard (assets files)
