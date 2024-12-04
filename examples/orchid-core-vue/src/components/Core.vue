@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from 'vue'
 import {
-  Theme,
   Button,
   Accordion,
   DatePicker,
@@ -9,7 +8,7 @@ import {
   Chip,
   NumberInput,
   Toggle as OcToggle
-} from '@/orchidui-core'
+} from '@orchidui/core'
 
 const isOpen = ref(false)
 const dynamicContent = ref([])
