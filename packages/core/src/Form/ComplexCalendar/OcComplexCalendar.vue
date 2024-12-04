@@ -1,6 +1,5 @@
 <script setup>
 import { DatePicker } from 'v-calendar'
-import 'v-calendar/style.css'
 import { ref } from 'vue'
 import dayjs from 'dayjs'
 import { Button } from '@/orchidui-core'
