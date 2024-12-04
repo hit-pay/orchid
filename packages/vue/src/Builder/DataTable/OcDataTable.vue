@@ -201,6 +201,19 @@ const changePage = () => {
   applyFilter(null, currentPage.value)
 }
 
+const saveFilterInLocalStorage = () => {
+  if (filterOptions.value?.columnEdit?.localStorageKey) {
+    setInLocalStorage(props.id, JSON.stringify(filterData.value))
+  }
+}
+
+const getFilterFromLocalStorage = () => {
+  if (props.id) {
+    return getFromLocalStorage(props.id)
+  }
+  return null
+}
+
 const applyFilter = (filterForm = null, isChangePage = false, changeCursor = '') => {
   if (paginationOption.value && !isChangePage) {
     currentPage.value = 1
@@ -233,6 +246,7 @@ const applyFilter = (filterForm = null, isChangePage = false, changeCursor = '')
       }
     })
   }
+  saveFilterInLocalStorage()
   emit('update:filter', filterData.value)
 }
 
@@ -384,6 +398,12 @@ const setOrderedHeaders = () => {
 
 onMounted(() => {
   setOrderedHeaders()
+  const filterFromLocalStorage = getFilterFromLocalStorage()
+  if (filterFromLocalStorage) {
+    filterData.value = JSON.parse(filterFromLocalStorage)
+    filterTab.value = filterTab.value || filterData.value?.tabs || filterData.value?.[filterOptions.value?.tabs?.key]
+    applyFilter()
+  }
 })
 </script>
 <template>
