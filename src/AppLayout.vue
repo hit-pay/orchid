@@ -25,19 +25,19 @@ const onClickNav = (e, item) => {
   }
 }
 
-const activeMenuValue = ref('core')
+const activeMenuValue = ref('dashboard')
 const menus = [
-  {
-    label: 'Core UI',
-    value: 'core',
-    sidebarClass: 'layout-payment',
-    path: 'core'
-  },
   {
     label: 'Dashboard UI',
     value: 'dashboard',
     sidebarClass: 'layout-pos',
     path: 'dashboard'
+  },
+  {
+    label: 'Core UI',
+    value: 'core',
+    sidebarClass: 'layout-payment',
+    path: 'core'
   }
 ]
 </script>
@@ -133,15 +133,61 @@ const menus = [
         </OcHeader>
       </div>
       <div class="flex flex-wrap">
-        <div class="w-full xl:w-1/3">
+        <div class="w-full lg:w-1/3 xl:w-1/4">
           <CrossSell />
         </div>
-        <div class="w-full xl:w-2/3">
-          <iframe
-            class="w-full h-[200px]"
-            src="https://orchid-git-next-hit-pay.vercel.app/storybook/iframe.html?args=&id=form-button-ocbutton--button-variant&viewMode=story"
-          >
-          </iframe>
+        <div class="w-full lg:w-2/3 xl:w-3/4 px-5">
+          <template v-if="activeMenuValue == 'core'">
+            <div class="grid gap-5 my-5">
+              <h2 class="flex items-center">
+                All components that are not in the dashboard ui, you can see full documentation on
+                <a href="http://localhost:5173/storybook/">
+                  <Button class="ml-4" size="small">Storybook</Button>
+                </a>
+              </h2>
+            </div>
+          </template>
+          <template v-else-if="activeMenuValue == 'dashboard'">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+              <div>
+                <h3 class="mb-2">BarChart</h3>
+                <iframe
+                  class="w-full h-[350px] border border-gray-200 rounded p-3"
+                  src="https://orchid-git-next-hit-pay.vercel.app/storybook/iframe.html?args=&id=dashboard-charts-barchart-ocbarchart--bar-chart&viewMode=story"
+                >
+                </iframe>
+              </div>
+              <div>
+                <h3 class="mb-2">BarRaceChart</h3>
+                <iframe
+                  class="w-full h-[350px] border border-gray-200 rounded p-3"
+                  src="https://orchid-git-next-hit-pay.vercel.app/storybook/iframe.html?args=&id=dashboard-charts-barracechart-ocbarracechart--bar-race&viewMode=story"
+                >
+                </iframe>
+              </div>
+              <iframe
+                class="w-full h-[350px] border border-gray-200 rounded p-3"
+                src="https://orchid-git-next-hit-pay.vercel.app/storybook/iframe.html?args=&id=dashboard-charts-linechart-oclinechart--line&viewMode=story"
+              >
+              </iframe>
+              <iframe
+                class="w-full h-[350px] border border-gray-200 rounded p-3"
+                src="https://orchid-git-next-hit-pay.vercel.app/storybook/iframe.html?args=&id=dashboard-charts-piechart-ocpiechart--line&viewMode=story"
+              >
+              </iframe>
+            </div>
+            <div class="grid gap-5 my-5">
+              <iframe
+                class="w-full h-[1140px] border border-gray-200 rounded p-3"
+                src="https://orchid-git-next-hit-pay.vercel.app/storybook/iframe.html?args=&id=dashboard-card-occard--default&viewMode=story"
+              >
+              </iframe>
+              <iframe
+                class="w-full h-[580px] border border-gray-200 rounded p-3"
+                src="https://orchid-git-next-hit-pay.vercel.app/storybook/iframe.html?args=&id=dashboard-codeblock-occodeblock--default&viewMode=story"
+              ></iframe>
+            </div>
+          </template>
         </div>
       </div>
     </template>
