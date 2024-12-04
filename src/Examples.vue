@@ -1,12 +1,12 @@
 <script setup>
 import { ref } from 'vue'
 import {
-  Theme,
   Button,
   Accordion,
   DatePicker,
   CustomerCard,
   Chip,
+  Input,
   NumberInput,
   Toggle as OcToggle
 } from '@/orchidui-core'
@@ -80,11 +80,11 @@ const args = {
       </div>
     </div>
     <div
-      class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
+      class="absolute inset-x-0 -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
       aria-hidden="true"
     >
       <div
-        class="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
+        class="relative left-[calc(50%-30rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
         style="
           clip-path: polygon(
             74.1% 44.1%,
@@ -123,6 +123,7 @@ const args = {
         <Button variant="secondary" label="Button" isTransparent />
       </div>
       <div class="lg:w-1/2 mb-3">
+        <DatePicker class="mb-3" />
         <Accordion
           v-model:isExpandable="isOpen"
           :header="args.header"
@@ -134,7 +135,7 @@ const args = {
           :is-disabled="args.isDisabled"
         >
           <template #body>
-            <DatePicker />
+            <Input />
             <div class="flex flex-col gap-3 mt-3">
               <div v-for="item in dynamicContent" :key="item">Dynamic Content {{ item }}</div>
               <Button
@@ -161,15 +162,10 @@ const args = {
           <Chip label="error" variant="error" />
         </div>
       </div>
-      <div>
+      <OcToggle v-model="ToggleModel" class="mt-5" />
+      <div class="flex gap-3 items-center my-6 flex-wrap w-1/2">
         <NumberInput v-model="NumberInputModel" />
-        <OcToggle v-model="ToggleModel" class="mt-5" />
       </div>
     </div>
-    <iframe
-      class="w-full h-[200px]"
-      src="https://orchid-git-next-hit-pay.vercel.app/storybook/iframe.html?args=&id=form-button-ocbutton--button-variant&viewMode=story"
-    >
-    </iframe>
   </div>
 </template>
