@@ -17,14 +17,12 @@ jobs:
         run: npm install
       - name: Login npm
         run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-      - name: update version orchid core
-        run: npm run version:update-core-patch
+      - name: update version orchid
+        run: npm run update:version-patch
       - name: build orchid core
         run: npm run publish:core
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: update version orchid dashboard
-        run: npm run version:update-dashboard-patch
       - name: publish orchid dashboard
         run: npm run publish:dashboard
         env:
