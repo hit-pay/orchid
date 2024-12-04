@@ -18,7 +18,8 @@ npm run publish
 
 # TODO
 
-1. npx command for copy all icons to local public folder
+Issue Stories :
+1. OcTabs
+2. OcCalendar
+3. OcCard (assets files)
 
-
-1. DataTables
