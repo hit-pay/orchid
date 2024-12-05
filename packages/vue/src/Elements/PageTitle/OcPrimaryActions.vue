@@ -114,12 +114,18 @@ const copiedButtonTooltipText = computed(
             </template>
           </div>
           <div v-if="primaryActions.dropdownOptions?.bottom" class="p-2">
-            <DropdownItem
-              v-for="(item, i) in primaryActions.dropdownOptions?.bottom"
-              :key="i"
-              v-bind="item"
-              @click="isDropdownOpened = false"
-            />
+            <div v-for="(item, i) in primaryActions.dropdownOptions?.bottom" :key="i">
+              <Tooltip v-if="item?.tooltipText" position="bottom" :distance="14" class="!w-full">
+                <DropdownItem v-bind="item" @click="isDropdownOpened = false" />
+                <template #popper>
+                  <div class="py-2 px-3 whitespace-nowrap text-sm font-medium text-oc-text-400">
+                    {{ item?.tooltipText }}
+                  </div>
+                </template>
+              </Tooltip>
+
+              <DropdownItem v-else v-bind="item" @click="isDropdownOpened = false" />
+            </div>
           </div>
         </div>
       </template>
