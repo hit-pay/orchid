@@ -11,6 +11,10 @@ const props = defineProps({
     type: String,
     default: 'Placeholder'
   },
+  searchPlaceholder: {
+    type: String,
+    default: 'Search'
+  },
   isInlineLabel: Boolean,
   isFilterable: Boolean,
   isAsynchronousSearch: Boolean,
@@ -330,7 +334,7 @@ defineExpose({
         <template v-if="isInlineSearch && isFilterable && !localValueOption">
           <Input
             v-model="query"
-            placeholder="Search"
+            :placeholder="searchPlaceholder"
             input-class="!border-none !shadow-none"
             :is-readonly="!isDropdownOpened"
             @update:model-value="$emit('onSearchKeywords', query)"
