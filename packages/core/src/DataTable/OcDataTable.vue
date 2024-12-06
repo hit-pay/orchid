@@ -255,6 +255,9 @@ const applyFilter = (filterFormData = null, isChangePage = false, changeCursor =
 }
 
 const removeFilter = (filter, field) => {
+  if (filter === filterOptions.value.tabs.key || filter === 'tabs') {
+    filterTab.value = ''
+  }
   applyFilter(filter)
   emit('filter-removed', field)
 }
