@@ -19,26 +19,32 @@ defineEmits(['addCustomer'])
     <BoxDetails class="!flex-nowrap flex-col w-full">
       <div class="flex">
         <OverviewItem
-          v-for="(field, i) in boxes[0].items.slice(0, 2)"
+          v-for="(field, i) in boxes[0]?.items.slice(0, 2)"
           :key="i"
           is-transparent
           :title="field.title"
           :content="field.content"
+          :class="field.class"
+          :is-loading="field.isLoading"
+          v-bind="field"
         >
-          <div v-if="box.showInfo" class="p-2">
-            <Tooltip>
-              <Icon
-                width="16"
-                height="16"
-                class="!w-[20px] !h-[20px] text-oc-text-300"
-                name="information"
-              />
-              <template #popper>
-                <div class="py-2 px-3">{{ box.infoTooltip }}</div>
-              </template>
-            </Tooltip>
-          </div>
+          <template v-if="field.slot && $slots[field.slot]" #content>
+            <slot :name="field.slot" :data="field.content" />
+          </template>
         </OverviewItem>
+        <div v-if="boxes[0]?.showInfo" class="p-2">
+          <Tooltip>
+            <Icon
+              width="16"
+              height="16"
+              class="!w-[20px] !h-[20px] text-oc-text-300"
+              name="information"
+            />
+            <template #popper>
+              <div class="py-2 px-3">{{ boxes[0]?.infoTooltip }}</div>
+            </template>
+          </Tooltip>
+        </div>
       </div>
       <Button
         class="self-start px-3"

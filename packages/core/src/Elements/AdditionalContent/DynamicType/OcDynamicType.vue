@@ -83,5 +83,9 @@ defineEmits(['addCustomer', 'editCustomer'])
     :customer-card-variant="customerCardVariant"
     :customer="customer"
     @add-customer="$emit('addCustomer')"
-  />
+  >
+    <template v-for="(_, name) in $slots" #[name]="slotData">
+        <slot :name="name" v-bind="slotData" />
+    </template>
+  </MobileDynamicType>
 </template>
