@@ -61,9 +61,9 @@ defineExpose({
           class="text-oc-text-400"
         />
       </div>
-      <div class="flex items-center gap-x-4 w-full p-5 pl-0">
+      <div class="flex items-center gap-x-4 w-full p-5 pl-0 overflow-hidden">
         <slot name="logo"></slot>
-        <div class="flex flex-col flex-1 gap-y-3">
+        <div class="flex flex-col flex-1 gap-y-3 overflow-hidden">
           <div class="flex items-center justify-between">
             <div class="flex text-sm text-oc-text-400 items-center gap-x-3 overflow-hidden">
               <span v-if="title" class="text-base text-oc-text font-medium truncate">

@@ -11,7 +11,11 @@ const props = defineProps({
     type: String,
     default: 'Placeholder'
   },
-  searchPlaceholder: {
+  defaultSearchPlaceholder: {
+    type: String,
+    default: 'Search'
+  },
+  inlineSearchPlaceholder: {
     type: String,
     default: 'Search'
   },
@@ -334,7 +338,7 @@ defineExpose({
         <template v-if="isInlineSearch && isFilterable && !localValueOption">
           <Input
             v-model="query"
-            :placeholder="searchPlaceholder"
+            :placeholder="defaultSearchPlaceholder"
             input-class="!border-none !shadow-none"
             :is-readonly="!isDropdownOpened"
             @update:model-value="$emit('onSearchKeywords', query)"
@@ -387,7 +391,7 @@ defineExpose({
               ref="searchInputRef"
               v-model="query"
               icon="search"
-              placeholder="Search"
+              :placeholder="inlineSearchPlaceholder"
               @update:model-value="$emit('onSearchKeywords', query)"
             >
               <template #icon>
