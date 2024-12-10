@@ -41,7 +41,10 @@ defineProps({
               v-if="countryIso"
               class="flex justify-center items-center w-[38px] h-[38px] shrink-0 rounded-full bg-oc-gray-100"
             >
-              <div class="fi !w-[24px] !h-[16px] !rounded-[1px]" :class="`fi-${countryIso}`" />
+              <Icon
+                class="!w-[24px] !h-[16px] !rounded-[1px]"
+                :name="`flags/${countryIso.toUpperCase()}`"
+              />
             </div>
             {{ content }}
           </span>
