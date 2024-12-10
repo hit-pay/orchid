@@ -175,7 +175,8 @@ const args = {
     {
       title: 'HitPay Balance',
       content: 'SGD 1,110.00',
-      value: 'hitpay'
+      value: 'hitpay',
+      countryIso: 'US'
     },
     {
       title: 'Card Balance',
