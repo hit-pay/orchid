@@ -13,10 +13,10 @@ jobs:
           registry-url: https://registry.npmjs.org
       - name: Running ci
         run: npm ci
-      - name: Install dependencies
-        run: npm install
       - name: Login npm
         run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+      - name: Install dependencies
+        run: npm install
       - name: build orchid core
         run: npm run publish:core
         env:
