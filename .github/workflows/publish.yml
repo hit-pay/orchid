@@ -21,6 +21,8 @@ jobs:
         run: npm run publish:core
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Update orchid core
+        run: cd packages/dashboard && npm install @orchidui/core@latest
       - name: publish orchid dashboard
         run: npm run publish:dashboard
         env:
