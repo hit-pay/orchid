@@ -12,25 +12,25 @@ const props = defineProps({
   isDisabled: Boolean,
   hasActions: {
     type: Boolean,
-    default: true,
+    default: true
   },
   isTransparent: Boolean,
   isDraggable: Boolean,
-  isNoToggleForced: Boolean,
+  isNoToggleForced: Boolean
 })
 const emit = defineEmits(['edit', 'delete'])
 const isOpen = ref(false)
 
 const toggleAccordion = () => {
   if (props.isNoToggleForced) {
-    return;
+    return
   }
 
   isOpen.value = !isOpen.value
 }
 
 defineExpose({
-  toggleAccordion,
+  toggleAccordion
 })
 </script>
 
@@ -46,7 +46,7 @@ defineExpose({
       class="flex gap-4 items-stretch"
       :class="{
         'border-b': isOpen,
-        'pl-5': isNoToggleForced,
+        'pl-5': isNoToggleForced
       }"
     >
       <div
@@ -61,9 +61,9 @@ defineExpose({
           class="text-oc-text-400"
         />
       </div>
-      <div class="flex items-center gap-x-4 w-full p-5 pl-0">
+      <div class="flex items-center gap-x-4 w-full p-5 pl-0 overflow-hidden">
         <slot name="logo"></slot>
-        <div class="flex flex-col flex-1 gap-y-3">
+        <div class="flex flex-col flex-1 gap-y-3 overflow-hidden">
           <div class="flex items-center justify-between">
             <div class="flex text-sm text-oc-text-400 items-center gap-x-3 overflow-hidden">
               <span v-if="title" class="text-base text-oc-text font-medium truncate">
@@ -93,11 +93,7 @@ defineExpose({
           </slot>
         </div>
 
-        <slot
-          name="right"
-          :is-open="isOpen"
-          :toggle-accordion="toggleAccordion"
-        >
+        <slot name="right" :is-open="isOpen" :toggle-accordion="toggleAccordion">
           <div v-if="hasActions" class="flex items-center gap-4 opacity-0 group-hover:opacity-100">
             <div class="border border-oc-accent-1-100 rounded-sm p-1 flex gap-x-1">
               <Icon
