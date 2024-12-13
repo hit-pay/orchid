@@ -23,7 +23,8 @@
     "update:version-patch": "npm run version:update-core-patch && npm run version:update-dashboard-patch",
     "update:version-minor": "npm run version:update-core && npm run version:update-dashboard",
     "publish:core": "npm run build:core && cd packages/core && npm publish",
-    "publish:dashboard": "npm run build:dashboard && cd packages/dashboard && npm publish"
+    "publish:dashboard": "npm run build:dashboard && cd packages/dashboard && npm publish",
+    "release": "npm run update:version-patch && bun run release.js"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
