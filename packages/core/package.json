@@ -1,0 +1,35 @@
+{
+  "name": "@orchidui/core",
+  "description": "Orchid UI, Library Vue 3 tailwind css",
+  "version": "1.0.19",
+  "type": "module",
+  "scripts": {
+    "build": "vite build"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hit-pay/orchid.git",
+    "directory": "packages/core"
+  },
+  "homepage": "https://orchidui.vercel.app/",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    },
+    "./dist/style.css": {
+      "import": "./dist/style.css",
+      "require": "./dist/style.css"
+    }
+  },
+  "module": "./dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "license": "MIT",
+  "resolutions": {
+    "rollup": "npm:@rollup/wasm-node"
+  }
+}
