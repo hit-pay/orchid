@@ -17,8 +17,6 @@ jobs:
         run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Install dependencies
         run: npm install
-      - name: run release beta
-        run: npm run release
       - name: build orchid core
         run: npm run publish-dev:core
         env:
