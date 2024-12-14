@@ -1,9 +1,8 @@
 import { exec } from 'child_process'
-exec('cd packages/core && npm version minor')
-exec('cd packages/dashboard && npm version minor')
+exec('cd packages/core && npm version prerelease')
+exec('cd packages/dashboard && npm version prerelease')
 
 const { version } = require('./packages/core/package.json')
-
 const fs = require('fs')
 const packageJsonPath = './packages/dashboard/package.json'
 
