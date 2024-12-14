@@ -24,6 +24,8 @@
     "update:version-minor": "npm run version:update-core && npm run version:update-dashboard",
     "publish:core": "npm run build:core && cd packages/core && npm publish",
     "publish:dashboard": "npm run build:dashboard && cd packages/dashboard && npm publish",
+    "publish-dev:core": "npm run build:core && cd packages/core && npm publish --tag beta",
+    "publish-dev:dashboard": "npm run build:dashboard && cd packages/dashboard && npm publish --tag beta",
     "release": "npm run update:version-patch && bun run release.js"
   },
   "dependencies": {

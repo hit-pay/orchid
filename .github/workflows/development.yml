@@ -1,0 +1,29 @@
+---
+on:
+  push:
+    branches: development-test
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          registry-url: https://registry.npmjs.org
+      - name: Running ci
+        run: npm ci
+      - name: Login npm
+        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+      - name: Install dependencies
+        run: npm install
+      - name: run release beta
+        run: npm run release
+      - name: build orchid core
+        run: npm run publish-dev:core
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: publish orchid dashboard
+        run: npm run publish-dev:dashboard
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
