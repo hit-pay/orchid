@@ -1,3 +1,0 @@
-const validator = () => {};
-
-export { validator };

@@ -1,9 +1,9 @@
 {
-  "extends": "astro/tsconfigs/base",
+  "include": ["packages", "types", "scripts"],
   "compilerOptions": {
-    "baseUrl": ".",
     "paths": {
-      "@/orchidui": ["packages/vue/src/*"]
+      "@/orchidui-core": ["./packages/core/src"],
+      "@/orchidui-dashboard": ["./packages/dashboard/src"]
     }
   }
 }
