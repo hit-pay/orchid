@@ -19,4 +19,4 @@ function updateDependency(dependencyName, newVersion) {
   console.log('package.json updated successfully.')
 }
 
-updateDependency('@orchidui/core', 'dev')
+updateDependency('@orchidui/core', 'beta')
