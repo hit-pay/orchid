@@ -17,9 +17,6 @@ watch(
   },
   { immediate: true }
 )
-onMounted(() => {
-  console.log('this from orchid @beta')
-})
 </script>
 
 <template>
