@@ -1,4 +1,6 @@
-const { version } = require('./packages/core/package.json')
+import { exec } from 'child_process'
+exec('cd packages/core && npm version prerelease')
+exec('cd packages/dashboard && npm version prerelease')
 
 const fs = require('fs')
 const packageJsonPath = './packages/dashboard/package.json'
@@ -17,4 +19,4 @@ function updateDependency(dependencyName, newVersion) {
   console.log('package.json updated successfully.')
 }
 
-updateDependency('@orchidui/core', version)
+updateDependency('@orchidui/core', 'beta')
