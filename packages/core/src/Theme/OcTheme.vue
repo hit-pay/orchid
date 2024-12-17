@@ -1,5 +1,5 @@
 <script setup>
-import { watch } from 'vue'
+import { onMounted, watch } from 'vue'
 const props = defineProps({
   colorMode: {
     type: String,
