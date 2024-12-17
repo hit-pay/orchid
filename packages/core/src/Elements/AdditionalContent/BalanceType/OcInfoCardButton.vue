@@ -1,5 +1,5 @@
 <script setup>
-import { Skeleton, Chip, Button } from '@/orchidui-core'
+import { Skeleton, Chip, Button, Icon } from '@/orchidui-core'
 
 defineProps({
   isActive: Boolean,

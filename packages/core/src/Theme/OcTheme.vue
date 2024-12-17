@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, watch } from 'vue'
+import { watch } from 'vue'
 const props = defineProps({
   colorMode: {
     type: String,
@@ -17,9 +17,6 @@ watch(
   },
   { immediate: true }
 )
-onMounted(() => {
-  console.log('this from orchid @beta')
-})
 </script>
 
 <template>
