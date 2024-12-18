@@ -67,7 +67,8 @@ const props = defineProps({
   isInlineSearch: Boolean,
   isClearable: Boolean,
   searchKeywords: String,
-  isLoading: Boolean
+  isLoading: Boolean,
+  menuClasses: String
 })
 
 const emit = defineEmits({
@@ -297,6 +298,7 @@ defineExpose({
       :popper-style="popperStyle"
       :popper-options="popperOptions"
       :is-disabled="isDisabled || isReadonly"
+      :menu-classes="menuClasses"
       @update:model-value="onUpdateDropdown"
       @scroll="loadMore"
     >
