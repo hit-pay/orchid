@@ -35,7 +35,6 @@ const onSearchOpen = async () => {
         @keyup.enter="
           () => {
             $emit('addQuery', query)
-            query = ''
           }
         "
       />
