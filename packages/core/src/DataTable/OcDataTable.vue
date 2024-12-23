@@ -153,11 +153,7 @@ const showBulkAction = computed(() => {
 
 const addQuery = (query) => {
   if (!query.trim() || queries.value.includes(query)) return
-  if (!filterOptions.value) {
-    queries.value = [query]
-  } else {
-    queries.value.push(query)
-  }
+  queries.value = [query]
   applyFilter()
   emit('search-query-changed', query)
 }
