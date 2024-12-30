@@ -36,7 +36,8 @@ const props = defineProps({
 const emit = defineEmits({
   'click:row': [],
   'update:selected': [],
-  'hover:cell': []
+  'hover:cell': [],
+  'click:row-meta': []
 })
 
 const isSelectable = computed(() => props.options.isSelectable)
@@ -87,8 +88,15 @@ const calculateRowClass = computed(() => {
   return () => props.rowClass
 })
 
-const onClickRow = (field, header) => {
+const onClickRow = (field, header, event) => {
   if (!header.disableClickRow && header.key !== 'actions') {
+    if (event.metaKey) {
+      emit('click:row-meta', {
+        field: field,
+        header: header
+      })
+      return
+    }
     emit('click:row', {
       field: field,
       header: header
@@ -270,7 +278,7 @@ onMounted(() => onScroll())
               ]"
               :image-class="header.imageClass"
               :link="rowLink && field[rowLink] ? field[rowLink] : ''"
-              @click="onClickRow(field, header)"
+              @click="onClickRow(field, header, $event)"
               @hover:field="$emit('hover:cell', $event)"
             >
               <template #default>

@@ -57,7 +57,8 @@ const emit = defineEmits({
   'filter-fields-changed': [],
   'filter-removed': [],
   'search-query-changed': [],
-  'hover:cell': []
+  'hover:cell': [],
+  'click:row-meta': []
 })
 
 const paginationOption = computed(() => props.options?.pagination)
@@ -427,6 +428,7 @@ onMounted(() => {
       :is-borderless="tableOptions.isBorderless"
       @update:selected="$emit('update:selected', $event)"
       @click:row="$emit('click:row', $event)"
+      @click:row-meta="$emit('click:row-meta', $event)"
       @hover:cell="$emit('hover:cell', $event)"
     >
       <template

@@ -70,7 +70,14 @@ const popperOptions = {
 
             <DropdownItem v-for="(item, i) in group.items" :key="i" class="text-sm" v-bind="item">
               <template #badge>
-                <slot name="badge" />
+                <slot name="badge" :item="item" />
+                <Icon
+                  v-if="item.isLoading"
+                  :width="16"
+                  :height="16"
+                  class="animate-spin"
+                  name="loading-2"
+                />
               </template>
             </DropdownItem>
           </template>
@@ -79,7 +86,14 @@ const popperOptions = {
 
           <DropdownItem v-for="(item, i) in bottomMenu" :key="i" class="text-sm" v-bind="item">
             <template #badge>
-              <slot name="badge" />
+              <slot name="badge" :item="item" />
+              <Icon
+                v-if="item.isLoading"
+                :width="16"
+                :height="16"
+                class="animate-spin"
+                name="loading-2"
+              />
             </template>
           </DropdownItem>
         </div>
