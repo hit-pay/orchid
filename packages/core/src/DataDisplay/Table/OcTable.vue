@@ -97,11 +97,11 @@ const onClickRow = (field, header, event) => {
       })
       return
     }
+    emit('click:row', {
+      field: field,
+      header: header
+    })
   }
-  emit('click:row', {
-    field: field,
-    header: header
-  })
 }
 const isScrollOnStart = ref(true)
 const isScrollOnEnd = ref(true)
