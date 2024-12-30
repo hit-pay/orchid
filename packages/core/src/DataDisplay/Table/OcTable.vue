@@ -89,21 +89,19 @@ const calculateRowClass = computed(() => {
 })
 
 const onClickRow = (field, header, event) => {
-  
   if (!header.disableClickRow && header.key !== 'actions') {
-
-  if(event.metaKey) {
-    emit('click:row-meta', {
+    if (event.metaKey) {
+      emit('click:row-meta', {
         field: field,
         header: header
       })
       return
     }
-    emit('click:row', {
-      field: field,
-      header: header
-    })
   }
+  emit('click:row', {
+    field: field,
+    header: header
+  })
 }
 const isScrollOnStart = ref(true)
 const isScrollOnEnd = ref(true)
