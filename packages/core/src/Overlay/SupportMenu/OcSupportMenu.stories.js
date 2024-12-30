@@ -35,7 +35,8 @@ export const Default = {
         items: [
           {
             text: 'User Guides',
-            icon: 'document'
+            icon: 'document',
+            isLoading: true,
           },
           {
             text: 'Blog',
@@ -48,7 +49,8 @@ export const Default = {
       {
         text: 'What’s new',
         icon: 'sparkle-2',
-        pointed: true
+        pointed: true,
+        isLoading: true,
       },
       {
         text: 'Feedback',
