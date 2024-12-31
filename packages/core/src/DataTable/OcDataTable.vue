@@ -409,7 +409,10 @@ onMounted(() => {
       filterTab.value ||
       filterData.value?.tabs ||
       filterData.value?.[filterOptions.value?.tabs?.key]
-    applyFilter()
+
+    currentPage.value = filterData.value?.page || 1
+
+    applyFilter(null, true, filterData.value.cursor)
   }
 })
 </script>
