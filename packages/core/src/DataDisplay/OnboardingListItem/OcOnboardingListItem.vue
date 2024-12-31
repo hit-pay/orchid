@@ -45,7 +45,7 @@ defineProps({
         <Icon name="time-filled" width="18" height="18" />
       </div>
       <div
-        v-else
+        v-else-if="number"
         class="w-[24px] h-[24px] min-w-[24px] text-oc-text-300 text-sm font-medium flex items-center justify-center border rounded-full border-oc-gray-200"
       >
         {{ number }}

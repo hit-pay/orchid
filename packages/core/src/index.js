@@ -30,6 +30,7 @@ export * from './Elements/Skeleton/OcSkeleton.js'
 export * from './Elements/FeatureOverviewCard/OcFeatureOverviewCard.js'
 export * from './Elements/SandboxBanner/OcSandboxBanner.js'
 export * from './Elements/Box/OcBox.js'
+export * from './Elements/Section/OcSection.js'
 export * from './Elements/AuthenticationOption/AuthenticationOption.js'
 export * from './Elements/VerificationOption/OcVerificationOption.js'
 
