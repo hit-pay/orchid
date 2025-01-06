@@ -1,4 +1,4 @@
-import { Theme, Sidebar } from '@/orchidui-core'
+import { Theme, Sidebar, SidebarFeatureBanners, AccountSetupProgress } from '@/orchidui-core'
 
 import {
   PAYMENTS_SIDEBAR_GROUP,
@@ -27,7 +27,7 @@ export const Default = {
     progress: 80
   },
   render: (args) => ({
-    components: { Sidebar, Theme, OcAccountSetup },
+    components: { Sidebar, Theme, OcAccountSetup, SidebarFeatureBanners, AccountSetupProgress },
     setup() {
       return { args }
     },
@@ -38,6 +38,14 @@ export const Default = {
                 :sidebar-menu="args.payment_sidebar_menu"
                 :isExpanded="args.isExpanded"
                 @changeExpanded="args.isExpanded = $event">
+                <template #banner>
+                  <AccountSetupProgress :value="43" info-label="Add your bank account" />
+                  <SidebarFeatureBanners 
+                    title="Late invoice fee" 
+                    is-stacked 
+                    description="You can now automate late fees on unpaid invoices by setting a fixed amount or percentage of the total, applied after a custom grace period."
+                  />
+                </template>
               <template #before>
                 <OcAccountSetup :isExpanded="args.isExpanded" :progress="args.progress"/>
               </template>

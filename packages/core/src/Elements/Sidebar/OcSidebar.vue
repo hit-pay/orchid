@@ -1,8 +1,8 @@
 <script setup>
-import { ref, reactive, onMounted, computed } from 'vue'
-import { Icon, SidebarSubmenu, Dropdown } from '@/orchidui-core'
+import { reactive, onMounted, computed } from 'vue'
+import { SidebarHead, SideBarMenu, SidebarSubMenuItem, SidebarFooter } from '@/orchidui-core'
 
-const emit = defineEmits(['changeExpanded', 'click:sidebar-icon', 'changeExpandedMenus'])
+const emit = defineEmits(['changeExpanded', 'click:sidebar-icon', 'changeExpandedMenus', 'redirect', 'user-click', 'support-click'])
 
 const props = defineProps({
   class: {
@@ -14,10 +14,11 @@ const props = defineProps({
   },
   sidebarMenu: {
     type: Array
+  },
+  displayName: {
+    type: String
   }
 })
-
-const dropdownOpen = ref([])
 
 const state = reactive({
   loading: true,
@@ -34,8 +35,16 @@ const expandMenu = (id) => {
   emit('changeExpandedMenus', state.expanded)
 }
 
+const expandOrRedirect = (menuItem) => {
+  if (menuItem.children?.length) {
+    expandMenu(menuItem.name)
+  } else {
+    emit('redirect', menuItem.path)
+  }
+}
+
 const allClassName = computed(() => {
-  let classNames = props.isExpanded ? 'w-[300px] ' : 'w-[102px] '
+  let classNames = props.isExpanded ? 'w-[300px] ' : 'w-[76px] '
   return classNames + props.class
 })
 
@@ -61,127 +70,51 @@ onMounted(() => {
     class="cursor-pointer max-h-[inherit] transition-all duration-300 ease-in-out relative bg-[var(--oc-sidebar-background)]"
     :class="allClassName"
   >
-    <div class="grid py-7 w-full max-h-[inherit] overflow-y-auto overflow-x-hidden gap-3 px-8">
+    <div class="grid py-4 max-h-[inherit] gap-3 px-6">
       <slot name="before" :is-expanded="isExpanded" />
 
       <template v-for="(sidebar, index) in sidebarMenu" :key="index">
-        <h2
-          v-if="isExpanded && sidebar.label"
-          class="text-sm uppercase text-[var(--oc-sidebar-menu-title)] my-3"
+        <div v-if="!isExpanded" class="border-t border-oc-gray-200 last:hidden first:hidden"></div>
+        <SidebarHead
+          v-if="sidebar.label || sidebar.items.length > 0"
+          :label="sidebar.label"
+          :is-sidebar-expanded="isExpanded"
         >
-          {{ sidebar.label }}
-        </h2>
-
-        <div
-          v-if="(!sidebar.label || !isExpanded) && index !== 0"
-          class="my-3"
-          :class="isExpanded ? 'px-0' : 'px-3'"
-        >
-          <div class="w-full border-b border-[var(--oc-sidebar-menu-title)] opacity-50" />
-        </div>
-        <template v-for="(menu, menuIndex) in sidebar.items" :key="menuIndex">
-          <div class="flex flex-col">
-            <div
-              class="flex items-center rounded transition-all duration-500 hover:bg-[var(--oc-sidebar-menu-hover)]"
-              :class="{
-                'px-5 py-3': isExpanded,
-                'font-medium bg-[var(--oc-sidebar-menu-active)] text-[var(--oc-sidebar-menu-active-text)]':
-                  menu.active
-              }"
-              @click="expandMenu(menu.name)"
-            >
-              <Icon
-                v-if="isExpanded"
-                width="22"
-                height="22"
-                class="z-[1] relative"
-                :class="{
-                  'text-[var(--oc-sidebar-menu-active-icon)]': !menu.active,
-                  'text-[var(--oc-sidebar-menu-active-icon-active)]': menu.active
-                }"
-                :name="menu.icon"
+          <SideBarMenu 
+            v-for="(menu, menuIndex) in sidebar.items" 
+            :key="menuIndex" 
+            :icon="menu.icon" 
+            :label="menu.label"
+            :is-active="menu.active"
+            :is-expanded="isExpanded"
+            :is-menu-expanded="state.expanded.includes(menu.name)"
+            @click="expandOrRedirect(menu)"
+            @close-menu="expandMenu(menu.name)"
+          >
+            
+              <SidebarSubMenuItem 
+                v-for="(submenu, submenuIndex) in menu.children" 
+                :key="submenuIndex" 
+                :icon="submenu.icon" 
+                :label="submenu.label" 
+                :is-active="submenu.active" 
+                :is-expanded="isExpanded"
+                @click="$emit('redirect', submenu.path)"
               />
-
-              <Dropdown
-                v-else
-                v-model="dropdownOpen[menu.name + '-' + menuIndex]"
-                placement="right-start"
-              >
-                <button
-                  type="button"
-                  :class="{
-                    'p-4': !isExpanded
-                  }"
-                >
-                  <Icon
-                    width="22"
-                    height="22"
-                    :class="{
-                      'text-[var(--oc-sidebar-menu-active-icon)]': !menu.active,
-                      'text-[var(--oc-sidebar-menu-active-icon-active)]': menu.active
-                    }"
-                    :name="menu.icon"
-                    @click="$emit('click:sidebar-icon', menu)"
-                  />
-                </button>
-                <template #menu>
-                  <div
-                    v-if="dropdownOpen[menu.name + '-' + menuIndex]"
-                    class="p-3 gap-4 bg-oc-bg shadow-sm rounded w-[200px]"
-                  >
-                    <div
-                      v-if="!menu.children"
-                      class="flex items-center rounded hover:bg-[var(--oc-sidebar-menu-hover)]"
-                      :class="{
-                        'font-medium bg-[var(--oc-sidebar-menu-active)] text-[var(--oc-sidebar-menu-active-text)]':
-                          menu.active
-                      }"
-                    >
-                      <slot v-if="!isExpanded" name="label" :menu="menu" />
-                    </div>
-                    <SidebarSubmenu v-if="menu.children" :menu="menu" is-expanded>
-                      <template #label="{ submenu }">
-                        <slot name="submenu_label" :menu="menu" :submenu="submenu" />
-                      </template>
-                    </SidebarSubmenu>
-                  </div>
-                </template>
-              </Dropdown>
-
-              <!--              <transition-->
-              <!--                tag="div"-->
-              <!--                class="transition-all duration-500"-->
-              <!--                leave-active-class="opacity-0"-->
-              <!--                enter-from-class="opacity-0"-->
-              <!--                enter-to-class="opacity-100"-->
-              <!--              >-->
-              <slot v-if="isExpanded" name="label" :menu="menu" />
-              <!--              </transition>-->
-            </div>
-            <div v-if="isExpanded" class="relative flex flex-col">
-              <div class="absolute border-l left-[27px] bottom-[17px] h-full" />
-              <SidebarSubmenu
-                v-if="menu.children"
-                :menu="menu"
-                :class="state.expanded.includes(menu.name) && 'mt-3'"
-                :is-expanded-sidebar="isExpanded"
-                :is-expanded="state.expanded.includes(menu.name)"
-              >
-                <template #label="{ submenu }">
-                  <slot
-                    name="submenu_label"
-                    :menu="menu"
-                    :submenu="submenu"
-                    :is-expanded="isExpanded"
-                  />
-                </template>
-              </SidebarSubmenu>
-            </div>
-          </div>
-        </template>
+            
+          </SideBarMenu>
+        </SidebarHead>
       </template>
 
       <slot name="after" :is-expanded="isExpanded" />
     </div>
+    <SidebarFooter 
+      :is-expanded="isExpanded" 
+      :display-name="displayName" 
+      @user-click="$emit('user-click')" 
+      @support-click="$emit('support-click')"
+    >
+      <slot name="banner" />
+    </SidebarFooter>
   </div>
 </template>
