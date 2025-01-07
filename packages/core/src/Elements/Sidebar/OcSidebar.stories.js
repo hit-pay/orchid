@@ -1,4 +1,4 @@
-import { Theme, Sidebar, SidebarFeatureBanners, AccountSetupProgress } from '@/orchidui-core'
+import { Theme, Sidebar, SidebarFeatureBanners, AccountSetupProgress, DropdownItem } from '@/orchidui-core'
 
 import {
   PAYMENTS_SIDEBAR_GROUP,
@@ -27,7 +27,7 @@ export const Default = {
     progress: 80
   },
   render: (args) => ({
-    components: { Sidebar, Theme, OcAccountSetup, SidebarFeatureBanners, AccountSetupProgress },
+    components: { Sidebar, Theme, OcAccountSetup, SidebarFeatureBanners, AccountSetupProgress, DropdownItem },
     setup() {
       return { args }
     },
@@ -49,11 +49,21 @@ export const Default = {
               <template #before>
                 <OcAccountSetup :isExpanded="args.isExpanded" :progress="args.progress"/>
               </template>
-              <template v-slot:label="{menu}">
-                <a href="#" class="whitespace-nowrap px-5 py-3">{{ menu.label }}</a>
-              </template>
-              <template v-slot:submenu_label="{submenu}">
-                <a href="#" class="whitespace-nowrap px-5 py-3">{{ submenu.label }}</a>
+              <template #user-menu="{ toggle}">
+                <div class="p-2 border-b border-gray-200">
+                  <a :href="'#'" @click="onClickDropdownItem('user-account.index', toggle)">
+                      <DropdownItem :text="userName" />
+                    </a>
+                    <a href="'#'" @click="onClickDropdownItem('user-account.security', toggle)">
+                      <DropdownItem text="Security" />
+                    </a>
+                    <a v-if="isAdmin" :href="getDomain('', 'admin')">
+                      <DropdownItem text="Admin Dashboard" />
+                    </a>
+                  </div>
+                  <div class="p-2">
+                    <DropdownItem @click="logout" text="Logout" variant="destructive" />
+                  </div>
               </template>
             </Sidebar>
           </Theme>
