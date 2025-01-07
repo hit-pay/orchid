@@ -39,7 +39,7 @@ export const Default = {
                 :isExpanded="args.isExpanded"
                 @changeExpanded="args.isExpanded = $event">
                 <template #banner>
-                  <AccountSetupProgress :value="43" info-label="Add your bank account" />
+                  <AccountSetupProgress :value="args.progress" info-label="Add your bank account" />
                   <SidebarFeatureBanners 
                     title="Late invoice fee" 
                     is-stacked 
