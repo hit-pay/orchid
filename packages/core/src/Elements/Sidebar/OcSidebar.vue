@@ -105,7 +105,7 @@ onMounted(() => {
               :label="submenu.label"
               :is-active="submenu.active"
               :is-expanded="isExpanded"
-              @click="$emit('redirect', submenu.path)"
+              @click="$emit('redirect', submenu)"
             />
           </SideBarMenu>
         </SidebarHead>
