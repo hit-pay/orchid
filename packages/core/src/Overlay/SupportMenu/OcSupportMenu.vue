@@ -73,8 +73,8 @@ const popperOptions = {
                 <slot name="badge" :item="item" />
                 <Icon
                   v-if="item.isLoading"
-                  :width="16"
-                  :height="16"
+                  width="16"
+                  height="16"
                   class="animate-spin"
                   name="loading-2"
                 />
@@ -89,8 +89,8 @@ const popperOptions = {
               <slot name="badge" :item="item" />
               <Icon
                 v-if="item.isLoading"
-                :width="16"
-                :height="16"
+                width="16"
+                height="16"
                 class="animate-spin"
                 name="loading-2"
               />
