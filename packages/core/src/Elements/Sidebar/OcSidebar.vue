@@ -39,7 +39,7 @@ const expandOrRedirect = (menuItem) => {
   if (menuItem.children?.length) {
     expandMenu(menuItem.name)
   } else {
-    emit('redirect', menuItem.path)
+    emit('redirect', menuItem)
   }
 }
 
@@ -67,10 +67,10 @@ onMounted(() => {
 
 <template>
   <div
-    class="cursor-pointer max-h-[inherit] transition-all duration-300 ease-in-out relative bg-[var(--oc-sidebar-background)]"
-    :class="allClassName"
+    class="cursor-pointer flex flex-col transition-all duration-300 ease-in-out relative bg-[var(--oc-sidebar-background)]"
+    :class="[allClassName, { 'overflow-auto': isExpanded }]"
   >
-    <div class="grid py-4 max-h-[inherit] gap-3 px-6">
+    <div class="flex flex-col flex-1 py-4 gap-3 px-6">
       <slot name="before" :is-expanded="isExpanded" />
 
       <template v-for="(sidebar, index) in sidebarMenu" :key="index">
@@ -99,7 +99,7 @@ onMounted(() => {
                 :label="submenu.label" 
                 :is-active="submenu.active" 
                 :is-expanded="isExpanded"
-                @click="$emit('redirect', submenu.path)"
+                @click="$emit('redirect', submenu)"
               />
             
           </SideBarMenu>

@@ -2,6 +2,7 @@
  <div v-click-outside="onClickOutside"  class="relative" >
   <Tooltip position="right" :distance="10" :popper-options="{ strategy: 'fixed' }" >
     <div
+    ref="menuItemRef"
     class="py-2 px-3 gap-x-3 flex items-center rounded hover:bg-[var(--oc-sidebar-menu-active)]"
     :class="{ 
       'bg-[var(--oc-sidebar-menu-active)]': isActive, 
@@ -43,7 +44,8 @@
   </div>
   <div
     v-if="!isExpanded && isMenuExpanded"
-   class="absolute right-[6px] bottom-3 p-2 flex flex-col gap-y-1 min-w-[162px]  translate-x-full  translate-y-full shadow-normal w-full bg-white rounded"
+    ref="menuRef"
+   class="z-10 p-2 flex flex-col gap-y-1 min-w-[162px] shadow-normal bg-white rounded"
    @click.stop
   >
     <slot />
@@ -52,6 +54,8 @@
 </template>
 
 <script setup>
+import { ref, watch } from 'vue'
+import { createPopper } from '@popperjs/core'
 import { Icon, Tooltip } from '@/orchidui-core'
 import { clickOutside as vClickOutside } from '../../directives/clickOutside.js'
 
@@ -63,10 +67,20 @@ const props = defineProps({
   isMenuExpanded: Boolean
 })
 
+const menuItemRef = ref(null)
+const menuRef = ref(null)
+
 const emit = defineEmits(['close-menu'])
 
 const onClickOutside = () => {
   if(props.isExpanded || !props.isMenuExpanded) return
   emit('close-menu')
 }
+watch(() => [props.isExpanded, menuRef.value, menuItemRef.value], () => {
+  if(!menuItemRef.value || !menuRef.value || props.isExpanded) return
+  createPopper(menuItemRef.value, menuRef.value, {
+    placement: 'right-start',
+    strategy: 'fixed'
+  });
+})
 </script>
