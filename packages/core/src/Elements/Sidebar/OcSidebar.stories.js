@@ -51,13 +51,13 @@ export const Default = {
               </template>
               <template #user-menu="{ toggle}">
                 <div class="p-2 border-b border-gray-200">
-                  <a :href="'#'" @click="onClickDropdownItem('user-account.index', toggle)">
-                      <DropdownItem :text="userName" />
+                  <a href="#">
+                      <DropdownItem text="userName" />
                     </a>
-                    <a href="'#'" @click="onClickDropdownItem('user-account.security', toggle)">
+                    <a href="#">
                       <DropdownItem text="Security" />
                     </a>
-                    <a v-if="isAdmin" :href="getDomain('', 'admin')">
+                    <a v-if="isAdmin" href="#">
                       <DropdownItem text="Admin Dashboard" />
                     </a>
                   </div>
