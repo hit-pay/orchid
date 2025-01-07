@@ -448,6 +448,7 @@ onMounted(() => {
             <Tabs
               v-if="filterOptions?.tabs"
               v-model="filterTab"
+              :is-disabled="isLoading"
               :tabs="filterOptions.tabs.options"
               :variant="'pills'"
               @update:model-value="applyFilter(null)"
