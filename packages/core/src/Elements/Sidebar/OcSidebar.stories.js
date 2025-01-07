@@ -1,4 +1,5 @@
-import { Theme, Sidebar, SidebarFeatureBanners, AccountSetupProgress, DropdownItem } from '@/orchidui-core'
+import { ref } from 'vue'
+import { Theme, Sidebar, SidebarFeatureBanners, AccountSetupProgress, DropdownItem, Avatar, Dropdown } from '@/orchidui-core'
 
 import {
   PAYMENTS_SIDEBAR_GROUP,
@@ -27,9 +28,10 @@ export const Default = {
     progress: 80
   },
   render: (args) => ({
-    components: { Sidebar, Theme, OcAccountSetup, SidebarFeatureBanners, AccountSetupProgress, DropdownItem },
+    components: { Sidebar, Theme, OcAccountSetup, SidebarFeatureBanners, AccountSetupProgress, DropdownItem, Avatar, Dropdown },
     setup() {
-      return { args }
+      const rightMenuDropdown = ref(false)
+      return { args, rightMenuDropdown }
     },
     template: `
           <Theme class="layout-payment mb-8">
@@ -49,22 +51,28 @@ export const Default = {
               <template #before>
                 <OcAccountSetup :isExpanded="args.isExpanded" :progress="args.progress"/>
               </template>
-              <template #user-menu="{ toggle}">
-                <div class="p-2 border-b border-gray-200">
-                  <a href="#">
-                      <DropdownItem text="userName" />
-                    </a>
-                    <a href="#">
-                      <DropdownItem text="Security" />
-                    </a>
-                    <a v-if="isAdmin" href="#">
-                      <DropdownItem text="Admin Dashboard" />
-                    </a>
+              <template #user>
+                <Dropdown v-model="rightMenuDropdown" placement="bottom-end" :distance="10">
+                  <Avatar class="uppercase cursor-pointer" :size="32">
+                   J
+                  </Avatar>
+                  <template #menu>
+                    <div class="flex flex-col">
+                      <div class="p-2 border-b border-gray-200">
+                        <a href="#">
+                          <DropdownItem text="userName" />
+                        </a>
+                        <a href="#">
+                          <DropdownItem text="Security" />
+                        </a>
+                      </div>
+                      <div class="p-2">
+                        <DropdownItem @click="logout" text="Logout" variant="destructive" />
+                    </div>
                   </div>
-                  <div class="p-2">
-                    <DropdownItem @click="logout" text="Logout" variant="destructive" />
-                  </div>
-              </template>
+                </template>
+              </Dropdown>
+            </template>
             </Sidebar>
           </Theme>
         `
