@@ -122,7 +122,7 @@ onMounted(() => {
       @support-click="$emit('support-click')"
     >
       <slot name="banner" />
-      <template v-if="$slots.userMenu" #user-menu="{ toggle }">
+      <template #user-menu="{ toggle }">
         <slot name="user-menu" :toggle="toggle" />
       </template>
     </SidebarFooter>

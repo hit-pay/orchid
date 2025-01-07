@@ -13,7 +13,7 @@
           <Icon name="chat-2" width="18" height="18" />
           <span v-if="isExpanded">Contact support</span>
         </div>
-        <Dropdown v-model="isUserMenuOpen" placement="top">
+        <Dropdown v-model="isUserMenuOpen" placement="top-start">
           <Avatar :size="32" class="shrink-0 uppercase" @click="$emit('user-click')">{{ displayName || 'J' }}</Avatar>
           <template #menu>
             <div class="flex flex-col">
