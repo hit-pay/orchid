@@ -18,15 +18,18 @@ export const Default = {
         items: [
           {
             text: 'Whatsapp',
-            icon: 'whatsapp-colored'
+            icon: 'whatsapp-colored',
+            isLoading: true,
           },
           {
             text: 'Email Us',
-            icon: 'email'
+            icon: 'email',
+            isLoading: true,
           },
           {
             text: 'Record a Bug',
-            icon: 'bug'
+            icon: 'bug',
+            isLoading: true,
           }
         ]
       },
@@ -50,7 +53,7 @@ export const Default = {
         text: 'What’s new',
         icon: 'sparkle-2',
         pointed: true,
-        isLoading: true,
+        isLoading: false,
       },
       {
         text: 'Feedback',
@@ -72,7 +75,7 @@ export const Default = {
     template: `
           <Theme class="h-[450px] w-full">
             <SupportMenu v-model="modelValue" :confirmButtonProps="args.confirmButtonProps"
-                         :title="args.title" :info="args.info" :topMenu="args.topMenu" :bottomMenu="args.bottomMenu" :is-pointed="args.isPointed"/>
+                         :title="args.title" :info="args.info" :topMenu="args.topMenu" :bottomMenu="args.bottomMenu" />
           </Theme>
         `
   })

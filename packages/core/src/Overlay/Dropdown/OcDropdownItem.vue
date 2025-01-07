@@ -11,7 +11,6 @@ defineProps({
   iconClasses: String,
   text: String,
   subText: String,
-  pointed: Boolean,
   iconProps: Object
 })
 const variantClasses = computed(() => ({
@@ -30,9 +29,7 @@ const variantClasses = computed(() => ({
 
       <span class="md:text-base text-sm">{{ text }}</span>
 
-      <slot v-if="pointed" name="badge">
-        <div class="w-[6px] aspect-square rounded-full bg-oc-error" />
-      </slot>
+      <slot name="badge" />
     </div>
 
     <div v-if="subText" class="p-3 text-sm text-oc-text-300">
