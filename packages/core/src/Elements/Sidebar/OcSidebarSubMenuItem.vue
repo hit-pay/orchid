@@ -7,7 +7,7 @@
       'rounded-sm p-3 h-[34px] text-sm': !isExpanded
     }"
   >
-    <div class="flex-1">{{ label }}</div>
+    <div class="flex-1 whitespace-nowrap">{{ label }}</div>
     <div v-if="isBeta" class="bg-oc-warning text-white shrink-0 py-1 px-3 rounded-sm uppercase text-xs font-medium">
       BETA
     </div>
