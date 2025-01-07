@@ -2,7 +2,14 @@
 import { reactive, onMounted, computed } from 'vue'
 import { SidebarHead, SideBarMenu, SidebarSubMenuItem, SidebarFooter } from '@/orchidui-core'
 
-const emit = defineEmits(['changeExpanded', 'click:sidebar-icon', 'changeExpandedMenus', 'redirect', 'user-click', 'support-click'])
+const emit = defineEmits([
+  'changeExpanded',
+  'click:sidebar-icon',
+  'changeExpandedMenus',
+  'redirect',
+  'user-click',
+  'support-click'
+])
 
 const props = defineProps({
   class: {
@@ -80,10 +87,10 @@ onMounted(() => {
           :label="sidebar.label"
           :is-sidebar-expanded="isExpanded"
         >
-          <SideBarMenu 
-            v-for="(menu, menuIndex) in sidebar.items" 
-            :key="menuIndex" 
-            :icon="menu.icon" 
+          <SideBarMenu
+            v-for="(menu, menuIndex) in sidebar.items"
+            :key="menuIndex"
+            :icon="menu.icon"
             :label="menu.label"
             :is-active="menu.active"
             :is-expanded="isExpanded"
@@ -108,10 +115,10 @@ onMounted(() => {
 
       <slot name="after" :is-expanded="isExpanded" />
     </div>
-    <SidebarFooter 
-      :is-expanded="isExpanded" 
-      :display-name="displayName" 
-      @user-click="$emit('user-click')" 
+    <SidebarFooter
+      :is-expanded="isExpanded"
+      :display-name="displayName"
+      @user-click="$emit('user-click')"
       @support-click="$emit('support-click')"
     >
       <slot name="banner" />

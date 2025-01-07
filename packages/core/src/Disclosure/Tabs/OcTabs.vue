@@ -12,6 +12,7 @@ const props = defineProps({
   modelValue: [String, Array],
   maxCount: Number,
   isArrows: Boolean,
+  isDisabled: Boolean,
   direction: {
     type: String,
     default: 'horizontal',
@@ -78,6 +79,12 @@ const scrollToTab = () => {
   }
 }
 
+const setTab = (value) => {
+  if (!props.isDisabled) {
+    emit('update:modelValue', value)
+  }
+}
+
 onMounted(() => {
   setVisibleTabsLength()
 
@@ -134,7 +141,7 @@ watch(
       <div
         v-for="tab in tabs"
         :key="tab.value"
-        class="relative cursor-pointer min-w-[48px] gap-x-3 items-center flex justify-center text-sm hover:text-oc-text-500"
+        class="relative cursor-pointer min-w-[48px] gap-x-3 items-center flex justify-center text-sm"
         :class="[
           tab.class,
           isPillVariant ? 'py-2 px-3 rounded' : 'px-4 pb-3 border-b-2 -mb-[1px]',
@@ -147,9 +154,10 @@ watch(
               : 'border-transparent text-oc-text-400',
           isArrows ? '!justify-normal !min-w-[100px]' : '',
           isVerticalTabs ? '!justify-start w-full py-3 px-5' : '',
-          isVerticalTabs && isArrows ? '!min-h-[35px]' : ''
+          isVerticalTabs && isArrows ? '!min-h-[35px]' : '',
+          isDisabled ? 'opacity-60 !cursor-default' : 'hover:text-oc-text-500'
         ]"
-        @click="$emit('update:modelValue', tab.value)"
+        @click="setTab(tab.value)"
       >
         <slot :name="tab.value">
           <div :class="{ truncate: isArrows }">{{ tab.label }}</div>
