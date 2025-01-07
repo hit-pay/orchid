@@ -122,8 +122,8 @@ onMounted(() => {
       @support-click="$emit('support-click')"
     >
       <slot name="banner" />
-      <template #user-menu="{ toggle }">
-        <slot name="user-menu" :toggle="toggle" />
+      <template #user>
+        <slot name="user" />
       </template>
     </SidebarFooter>
   </div>

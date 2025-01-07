@@ -270,7 +270,7 @@ onMounted(() => onScroll())
                 header.stickyRight && !isScrollOnEnd ? 'shadow-left-sticky' : ''
               ]"
               :image-class="header.imageClass"
-              :link="rowLink && field[rowLink] ? field[rowLink] : ''"
+              :link="rowLink && field[rowLink] && header.key !== 'actions' ? field[rowLink] : ''"
               @click="onClickRow(field, header)"
               @hover:field="$emit('hover:cell', $event)"
             >

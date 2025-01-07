@@ -90,7 +90,9 @@ const variantClass = computed(() => ({
 </script>
 
 <template>
-  <div
+  <component
+    :is="link ? 'a' : 'div'"
+    :href="link"
     :class="[
       variantClass[variant],
       {
@@ -122,22 +124,19 @@ const variantClass = computed(() => ({
 
         <!--  IMAGE    -->
         <template v-else-if="variant === Variants.IMAGE">
-          <TableLink v-if="data" :link="link" class="h-[42px] min-w-[42px] rounded mx-auto">
+          <div v-if="data" class="h-[42px] min-w-[42px] rounded mx-auto">
             <img :class="imageClass" alt="table-img" class="h-full" :src="data" />
-          </TableLink>
-          <TableLink
+          </div>
+          <div
             v-else
-            :link="link"
             class="h-[42px] mx-auto w-[42px] bg-oc-bg-dark flex items-center justify-center rounded"
           >
             <Icon width="20" height="20" name="image" />
-          </TableLink>
+          </div>
         </template>
 
         <!--  EMPTY    -->
-        <TableLink v-else-if="variant === Variants.EMPTY" :link="link" class="w-full h-full"
-          >-
-        </TableLink>
+        <div v-else-if="variant === Variants.EMPTY" class="w-full h-full">-</div>
 
         <TableCellContent
           v-else-if="variant === Variants.DATETIME"
@@ -148,20 +147,16 @@ const variantClass = computed(() => ({
 
         <!--   CONTENT   -->
         <TableCellContent v-else-if="variant === Variants.CONTENT" v-bind="content" :link="link" />
-        <TableLink v-else-if="variant === Variants.CHIP" :link="link">
+        <div v-else-if="variant === Variants.CHIP" :link="link">
           <!--   CHIP   -->
           <Chip v-bind="chipProps" />
-        </TableLink>
+        </div>
 
         <!--  DEFAULT    -->
-        <TableLink
-          v-else-if="variant === Variants.DEFAULT"
-          :link="link"
-          class="flex items-center w-full"
-        >
+        <div v-else-if="variant === Variants.DEFAULT" class="flex items-center w-full">
           {{ data }}
-        </TableLink>
-        <TableLink v-else :link="link" class="w-full h-full">-</TableLink>
+        </div>
+        <div v-else :link="link" class="w-full h-full">-</div>
       </slot>
 
       <CopyTooltip
@@ -178,14 +173,16 @@ const variantClass = computed(() => ({
         :tooltip-options="{
           transitionName: 'copy'
         }"
+       
       >
         <Icon
           class="cursor-pointer w-5 h-5 group-hover/row:opacity-100 md:opacity-0 ml-2"
           name="copy"
+          @click.prevent
         />
       </CopyTooltip>
     </div>
-  </div>
+  </component>
 </template>
 <style lang="scss">
 .copy-enter-active,
