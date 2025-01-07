@@ -13,19 +13,33 @@
           <Icon name="chat-2" width="18" height="18" />
           <span v-if="isExpanded">Contact support</span>
         </div>
-        <Avatar :size="32" class="shrink-0 uppercase" @click="$emit('user-click')">{{ displayName || 'J' }}</Avatar>
+        <Dropdown v-model="isUserMenuOpen">
+          <Avatar :size="32" class="shrink-0 uppercase" @click="$emit('user-click')">{{ displayName || 'J' }}</Avatar>
+          <template #menu>
+            <div class="flex flex-col">
+             <slot name="user-menu" :toggle="toggleUserMenu" />
+            </div>
+          </template>
+        </Dropdown>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { Avatar, Icon } from '@/orchidui-core'
+import { Avatar, Icon, Dropdown } from '@/orchidui-core'
+import { ref } from 'vue'
 
 defineProps({
   displayName: String,
   isExpanded: Boolean
 })
+
+const isUserMenuOpen = ref(false)
+
+const toggleUserMenu = () => {
+  isUserMenuOpen.value = !isUserMenuOpen.value
+}
 
 defineEmits(['user-click', 'support-click'])
 </script>
