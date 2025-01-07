@@ -38,14 +38,6 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
-  loopDelayMin: {
-    type: Number,
-    default: 0,
-  },
-  loopDelayMax: {
-    type: Number,
-    default: 0,
-  },
 })
 
 // Emits
@@ -69,7 +61,6 @@ const style = ref({
 
 // select the HTML to render the animation
 const lottieContainerRef = ref();
-let timeoutId = undefined;
 
 const jsonData = ref();
 
@@ -87,14 +78,6 @@ const loadJsonData = async (path) => {
   jsonData.value = await response.json();
 };
 
-const getRandomInt = (min, max) => {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-
-  // The maximum is exclusive and the minimum is inclusive
-  return Math.floor(Math.random() * (max - min)) + min;
-};
-
 const play = () => {
   animationItem.value?.play();
 }
@@ -102,17 +85,6 @@ const play = () => {
 const stop = () => {
   animationItem.value?.stop();
 }
-
-const executeLoop = () => {
-  animationItem.value?.play();
-
-  timeoutId = window.setTimeout(() => {
-    animationItem.value?.stop();
-    executeLoop();
-  }, getRandomInt(props.loopDelayMin, props.loopDelayMax === 0
-      ? props.loopDelayMin
-      : props.loopDelayMax));
-};
 
 const init = async () => {
   style.value = {
@@ -155,13 +127,6 @@ const init = async () => {
   if (props.autoplay) {
     play();
   }
-
-  if (props.loopDelayMin > 0) {
-    animationItem.value.loop = false;
-    animationItem.value.autoplay = false;
-
-    executeLoop();
-  }
 };
 
 // Watch
@@ -169,12 +134,6 @@ watch(() => props.path, init);
 
 // Mounted
 onMounted(init);
-
-onUnmounted(() => {
-  if (timeoutId) {
-    clearInterval(timeoutId);
-  }
-});
 
 defineExpose({
   play,
