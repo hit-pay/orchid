@@ -1,6 +1,6 @@
 <template>
  <div v-click-outside="onClickOutside"  class="relative" >
-  <Tooltip position="right" :distance="10" :popper-options="{ strategy: 'fixed' }" >
+  <Tooltip position="right" :distance="10" :popper-options="{ strategy: 'fixed' }" class="w-full" >
     <div
     ref="menuItemRef"
     class="py-2 px-3 gap-x-3 flex items-center rounded hover:bg-[var(--oc-sidebar-menu-active)]"
@@ -24,7 +24,7 @@
   </div>
   <template v-if="!isExpanded" #popper>
     <div class="py-2 whitespace-nowrap px-3 text-sm text-oc-text-400 font-medium">
-      {{ label }}
+      <span class="ml-1">{{ label }}</span>
     </div>
   </template>
   </Tooltip>
