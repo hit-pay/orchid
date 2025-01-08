@@ -45,7 +45,7 @@
   <div
     v-if="!isExpanded && isMenuExpanded"
     ref="menuRef"
-   class="z-10 p-2 flex flex-col gap-y-1 min-w-[162px] shadow-normal bg-white rounded"
+   class="z-50 p-2 flex flex-col gap-y-1 min-w-[162px] shadow-normal bg-white rounded"
    @click.stop
   >
     <slot />
