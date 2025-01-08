@@ -374,6 +374,9 @@ const isColumnActive = (headerKey) =>
     ?.isActive ?? true
 
 const updateOrder = ({ fixedHeaders, activeHeaders, isOnMount }) => {
+  if (!filterData.value[filterOptions.value?.columnEdit?.key]) {
+    filterData.value[filterOptions.value?.columnEdit?.key] = {};
+  }
   filterData.value[filterOptions.value?.columnEdit?.key].fixed = fixedHeaders
   filterData.value[filterOptions.value?.columnEdit?.key].active = activeHeaders
   modifiedTableHeaders.value = [...fixedHeaders, ...activeHeaders]
