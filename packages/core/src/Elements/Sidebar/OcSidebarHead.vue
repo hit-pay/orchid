@@ -2,7 +2,7 @@
   <div>
     <div class="pb-2" @click="isExpanded = !isExpanded">
       <div
-        v-if="isSidebarExpanded"
+        v-if="isSidebarExpanded && label"
         class="pl-3 uppercase relative text-medium text-sm" 
         :class="isExpanded ? 'text-oc-accent-1-200' : 'text-oc-accent-1-300'"
       >
@@ -23,7 +23,7 @@
         'overflow-hidden': isSidebarExpanded,
       }"
     >
-      <div class="min-h-0 flex flex-col gap-y-2">
+      <div class="min-h-0 flex flex-col" :class="isSidebarExpanded ? 'gap-y-2' : 'gap-y-4'">
         <slot />
       </div>
     </div>
