@@ -19,7 +19,7 @@
     <div
       class="grid transition-all grid-rows-[1fr] duration-300 ease-in-out"
       :class="{
-        '!grid-rows-[0fr]': !isExpanded,
+        '!grid-rows-[0fr]': !isExpanded && isSidebarExpanded,
         'overflow-hidden': isSidebarExpanded,
       }"
     >
