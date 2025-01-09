@@ -1,6 +1,6 @@
 <template>
   <div
-    class="py-4 sticky bottom-0 left-0 px-6 bg-oc-gray-50 border-t border-oc-gray-200" >
+    class="py-4 sticky z-[1005] bottom-0 left-0 px-6 bg-oc-gray-50 border-t border-oc-gray-200" >
     <div class="flex flex-col gap-y-3">
       <slot v-if="isExpanded"></slot>
       <div

@@ -3,7 +3,7 @@
   <Tooltip position="right" :distance="10" :popper-options="{ strategy: 'fixed' }" class="w-full" >
     <div
     ref="menuItemRef"
-    class="py-2 px-3 gap-x-3 flex items-center rounded hover:bg-[var(--oc-sidebar-menu-active)]"
+    class="py-2 px-3 z gap-x-3 flex items-center rounded hover:bg-[var(--oc-sidebar-menu-active)]"
     :class="{ 
       'bg-[var(--oc-sidebar-menu-active)]': isActive, 
       'w-full': isExpanded 
@@ -45,7 +45,7 @@
   <div
     v-if="!isExpanded && isMenuExpanded"
     ref="menuRef"
-   class="z-50 p-2 flex flex-col gap-y-1 min-w-[162px] shadow-normal bg-white rounded"
+   class="z-[1005] p-2 flex flex-col gap-y-1 min-w-[162px] shadow-normal bg-white rounded"
    @click.stop
   >
     <slot />
