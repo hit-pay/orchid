@@ -94,6 +94,10 @@ const SubPlanCard = defineAsyncComponent(() => import('./StoreDesign/SubPlanCard
 const TimePopup = defineAsyncComponent(() => import('./Form/TimePicker/OcTimePopup.vue'))
 const TimePicker = defineAsyncComponent(() => import('./Form/TimePicker/OcTimePicker.vue'))
 
+const AccountSetupProgress = defineAsyncComponent(
+  () => import('./Elements/Sidebar/OcAccountSetupProgress.vue')
+)
+
 export {}
 
 export {
@@ -118,5 +122,7 @@ export {
   ThumbnailSection,
   SubPlanCard,
   TimePopup,
-  TimePicker
+  TimePicker,
+  // sidebar
+  AccountSetupProgress
 }
