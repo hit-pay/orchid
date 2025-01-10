@@ -1,4 +1,5 @@
-import { Theme, Sidebar } from '@/orchidui-core'
+import { ref } from 'vue'
+import { Theme, Sidebar, SidebarFeatureBanners, AccountSetupProgress, DropdownItem, Avatar, Dropdown } from '@/orchidui-core'
 
 import {
   PAYMENTS_SIDEBAR_GROUP,
@@ -27,9 +28,10 @@ export const Default = {
     progress: 80
   },
   render: (args) => ({
-    components: { Sidebar, Theme, OcAccountSetup },
+    components: { Sidebar, Theme, OcAccountSetup, SidebarFeatureBanners, AccountSetupProgress, DropdownItem, Avatar, Dropdown },
     setup() {
-      return { args }
+      const rightMenuDropdown = ref(false)
+      return { args, rightMenuDropdown }
     },
     template: `
           <Theme class="layout-payment mb-8">
@@ -38,15 +40,39 @@ export const Default = {
                 :sidebar-menu="args.payment_sidebar_menu"
                 :isExpanded="args.isExpanded"
                 @changeExpanded="args.isExpanded = $event">
+                <template #banner>
+                  <AccountSetupProgress :value="args.progress" info-label="Add your bank account" />
+                  <SidebarFeatureBanners 
+                    title="Late invoice fee" 
+                    is-stacked 
+                    description="You can now automate late fees on unpaid invoices by setting a fixed amount or percentage of the total, applied after a custom grace period."
+                  />
+                </template>
               <template #before>
                 <OcAccountSetup :isExpanded="args.isExpanded" :progress="args.progress"/>
               </template>
-              <template v-slot:label="{menu}">
-                <a href="#" class="whitespace-nowrap px-5 py-3">{{ menu.label }}</a>
-              </template>
-              <template v-slot:submenu_label="{submenu}">
-                <a href="#" class="whitespace-nowrap px-5 py-3">{{ submenu.label }}</a>
-              </template>
+              <template #user>
+                <Dropdown v-model="rightMenuDropdown" placement="bottom-end" :distance="10">
+                  <Avatar class="uppercase cursor-pointer" :size="32">
+                   J
+                  </Avatar>
+                  <template #menu>
+                    <div class="flex flex-col">
+                      <div class="p-2 border-b border-gray-200">
+                        <a href="#">
+                          <DropdownItem text="userName" />
+                        </a>
+                        <a href="#">
+                          <DropdownItem text="Security" />
+                        </a>
+                      </div>
+                      <div class="p-2">
+                        <DropdownItem @click="logout" text="Logout" variant="destructive" />
+                    </div>
+                  </div>
+                </template>
+              </Dropdown>
+            </template>
             </Sidebar>
           </Theme>
         `

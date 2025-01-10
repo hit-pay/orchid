@@ -57,8 +57,7 @@ const emit = defineEmits({
   'filter-fields-changed': [],
   'filter-removed': [],
   'search-query-changed': [],
-  'hover:cell': [],
-  'click:row-meta': []
+  'hover:cell': []
 })
 
 const paginationOption = computed(() => props.options?.pagination)
@@ -375,6 +374,9 @@ const isColumnActive = (headerKey) =>
     ?.isActive ?? true
 
 const updateOrder = ({ fixedHeaders, activeHeaders, isOnMount }) => {
+  if (!filterData.value[filterOptions.value?.columnEdit?.key]) {
+    filterData.value[filterOptions.value?.columnEdit?.key] = {};
+  }
   filterData.value[filterOptions.value?.columnEdit?.key].fixed = fixedHeaders
   filterData.value[filterOptions.value?.columnEdit?.key].active = activeHeaders
   modifiedTableHeaders.value = [...fixedHeaders, ...activeHeaders]
@@ -409,7 +411,10 @@ onMounted(() => {
       filterTab.value ||
       filterData.value?.tabs ||
       filterData.value?.[filterOptions.value?.tabs?.key]
-    applyFilter()
+
+    currentPage.value = filterData.value?.page || 1
+
+    applyFilter(null, true, filterData.value.cursor)
   }
 })
 </script>
@@ -428,7 +433,6 @@ onMounted(() => {
       :is-borderless="tableOptions.isBorderless"
       @update:selected="$emit('update:selected', $event)"
       @click:row="$emit('click:row', $event)"
-      @click:row-meta="$emit('click:row-meta', $event)"
       @hover:cell="$emit('hover:cell', $event)"
     >
       <template
@@ -447,6 +451,7 @@ onMounted(() => {
             <Tabs
               v-if="filterOptions?.tabs"
               v-model="filterTab"
+              :is-disabled="isLoading"
               :tabs="filterOptions.tabs.options"
               :variant="'pills'"
               @update:model-value="applyFilter(null)"

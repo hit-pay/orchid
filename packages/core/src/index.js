@@ -30,6 +30,7 @@ export * from './Elements/Skeleton/OcSkeleton.js'
 export * from './Elements/FeatureOverviewCard/OcFeatureOverviewCard.js'
 export * from './Elements/SandboxBanner/OcSandboxBanner.js'
 export * from './Elements/Box/OcBox.js'
+export * from './Elements/Section/OcSection.js'
 export * from './Elements/AuthenticationOption/AuthenticationOption.js'
 export * from './Elements/VerificationOption/OcVerificationOption.js'
 
@@ -93,6 +94,10 @@ const SubPlanCard = defineAsyncComponent(() => import('./StoreDesign/SubPlanCard
 const TimePopup = defineAsyncComponent(() => import('./Form/TimePicker/OcTimePopup.vue'))
 const TimePicker = defineAsyncComponent(() => import('./Form/TimePicker/OcTimePicker.vue'))
 
+const AccountSetupProgress = defineAsyncComponent(
+  () => import('./Elements/Sidebar/OcAccountSetupProgress.vue')
+)
+
 export {}
 
 export {
@@ -117,5 +122,7 @@ export {
   ThumbnailSection,
   SubPlanCard,
   TimePopup,
-  TimePicker
+  TimePicker,
+  // sidebar
+  AccountSetupProgress
 }
