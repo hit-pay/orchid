@@ -163,7 +163,7 @@ export const PAYMENTS_SIDEBAR_GROUP = [
   },
   {
     name: 'others',
-    label: '',
+    label: 'Others',
     items: PAYMENTS_OTHERS_SIDEBAR_ITEMS
   }
 ]

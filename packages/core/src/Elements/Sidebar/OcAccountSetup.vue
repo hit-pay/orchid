@@ -93,7 +93,7 @@ defineProps({
   background: linear-gradient(90deg, #ffc83c, #e027fe, #2771fe);
 }
 
-$default-size: 40px;
+$default-size: 30px;
 
 @mixin size($width, $height) {
   height: $height;
