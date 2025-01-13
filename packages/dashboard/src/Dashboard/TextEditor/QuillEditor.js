@@ -1,5 +1,6 @@
 import Quill from 'quill'
 import { defineComponent, onBeforeUnmount, onMounted, nextTick, watch, ref, h } from 'vue'
+import QuillBetterTable from 'quill-better-table'
 
 const Delta = Quill.import('delta')
 export const QuillEditor = defineComponent({
@@ -87,6 +88,12 @@ export const QuillEditor = defineComponent({
       }
       Quill.register(moduleName, module)
     }
+    Quill.register(
+      {
+        'modules/better-table': QuillBetterTable
+      },
+      true
+    )
     // Initialize Quill
     const initialize = () => {
       var _a
@@ -161,6 +168,16 @@ export const QuillEditor = defineComponent({
         })()
         clientOptions.modules = Object.assign({}, clientOptions.modules, modules)
       }
+
+      clientOptions.modules = {
+        ...clientOptions.modules,
+        table: false, // disable table module
+        'better-table': {},
+        keyboard: {
+          bindings: QuillBetterTable.keyboardBindings
+        }
+      }
+
       return Object.assign({}, props.globalOptions, props.options, clientOptions)
     }
     const maybeClone = (delta) => {
