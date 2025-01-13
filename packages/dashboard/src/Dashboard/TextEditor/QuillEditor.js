@@ -172,19 +172,7 @@ export const QuillEditor = defineComponent({
       clientOptions.modules = {
         ...clientOptions.modules,
         table: false, // disable table module
-        'better-table': {
-          operationMenu: {
-            items: {
-              unmergeCells: {
-                text: 'Another unmerge cells name'
-              }
-            },
-            color: {
-              colors: ['#fff', 'red', 'rgb(0, 0, 0)'], // colors in operationMenu
-              text: 'Background Colors' // subtitle
-            }
-          }
-        },
+        'better-table': {},
         keyboard: {
           bindings: QuillBetterTable.keyboardBindings
         }
