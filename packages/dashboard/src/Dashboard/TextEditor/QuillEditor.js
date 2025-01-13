@@ -190,8 +190,6 @@ export const QuillEditor = defineComponent({
         }
       }
 
-      console.log('clientOptions.modules', clientOptions.modules)
-
       return Object.assign({}, props.globalOptions, props.options, clientOptions)
     }
     const maybeClone = (delta) => {
