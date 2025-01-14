@@ -4,7 +4,7 @@ import { QuillEditor } from './QuillEditor'
 import { ColorPicker } from '@/orchidui-dashboard'
 
 import { computed, onMounted, ref } from 'vue'
-import { BaseInput, Icon, Dropdown, Slider } from '@orchidui/core'
+import { BaseInput, Icon, Dropdown, Slider, Modal, Select } from '@orchidui/core'
 
 const props = defineProps({
   /**
@@ -98,16 +98,6 @@ class DividerBlot extends BlockEmbed {
 
 Quill.register(DividerBlot)
 
-const addDivider = () => {
-  const index = quill.value.getQuill().getSelection(true)
-  if (index) {
-    const range = quill.value.getQuill().getSelection(true)
-    quill.value.getQuill().insertText(range.index, '\n', Quill.sources.USER)
-    quill.value.getQuill().insertEmbed(range.index + 1, 'divider', true, Quill.sources.USER)
-    quill.value.getQuill().setSelection(range.index + 2, Quill.sources.SILENT)
-  }
-}
-
 const id = ref(
   Math.random()
     .toString(36)
@@ -155,6 +145,17 @@ const checkStates = (value) => {
   }
   domTest.remove()
 }
+
+const addDivider = () => {
+  const index = quill.value.getQuill().getSelection(true)
+  if (index) {
+    const range = quill.value.getQuill().getSelection(true)
+    quill.value.getQuill().insertText(range.index, '\n', Quill.sources.USER)
+    quill.value.getQuill().insertEmbed(range.index + 1, 'divider', true, Quill.sources.USER)
+    quill.value.getQuill().setSelection(range.index + 2, Quill.sources.SILENT)
+  }
+}
+
 const undo = () => {
   quill.value.getQuill().history.undo()
   checkStates(props.modelValue)
@@ -305,6 +306,37 @@ const onClickContent = () => {
   const focusNode = window.getSelection()?.focusNode
   showImageWidthToolbar.value = focusNode.innerHTML && focusNode.innerHTML.includes('<img')
 }
+
+const tableModal = ref(false)
+const tableRow = ref(3)
+const tableCell = ref(3)
+
+const tableRowOptions = computed(() => {
+  let list = []
+  for (let index = 1; index < 30; index++) {
+    list.push({
+      label: index.toString(),
+      value: index.toString()
+    })
+  }
+  return list
+})
+const tableColsOptions = computed(() => {
+  let list = []
+  for (let index = 1; index < 12; index++) {
+    list.push({
+      label: index.toString(),
+      value: index.toString()
+    })
+  }
+  return list
+})
+
+const insertTable = () => {
+  let tableModule = quill.value.getQuill().getModule('better-table')
+  tableModule.insertTable(parseInt(tableRow.value), parseInt(tableCell.value))
+  tableModal.value = false
+}
 </script>
 
 <template>
@@ -317,6 +349,18 @@ const onClickContent = () => {
     :tooltip-text="tooltipText"
     :tooltip-options="tooltipOptions"
   >
+    <Modal
+      title="Insert table"
+      v-model="tableModal"
+      class="!w-full !h-full"
+      :confirmButtonProps="{
+        label: 'Save',
+        onClick: () => insertTable()
+      }"
+    >
+      <Select v-model="tableCell" :options="tableColsOptions" label="Table cell" class="mb-3" />
+      <Select v-model="tableRow" :options="tableRowOptions" label="Table rows" />
+    </Modal>
     <div class="grid" :class="{ 'has-error': errorMessage }" @click="onClickContent">
       <QuillEditor
         v-if="id"
@@ -450,6 +494,13 @@ const onClickContent = () => {
                 height="20"
                 name="text-editor/media"
                 @click="uploadVideo"
+              />
+              <Icon
+                class="cursor-pointer"
+                width="20"
+                height="20"
+                name="table"
+                @click="tableModal = !tableModal"
               />
             </div>
 

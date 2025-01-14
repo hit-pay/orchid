@@ -42,7 +42,7 @@ export const Default = {
     components: { TextEditor, Theme },
     setup() {
       const modelValue = ref('default model value')
-      const onUpdateImage = (base64) => {
+      const onUpdateImage = () => {
         // console.log(base64);
       }
       return { args, modelValue, onUpdateImage }
