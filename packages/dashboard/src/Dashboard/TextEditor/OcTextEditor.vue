@@ -334,7 +334,7 @@ const tableColsOptions = computed(() => {
 
 const insertTable = () => {
   let tableModule = quill.value.getQuill().getModule('better-table')
-  tableModule.insertTable(tableRow.value, tableCell.value)
+  tableModule.insertTable(parseInt(tableRow.value), parseInt(tableCell.value))
   tableModal.value = false
 }
 </script>
@@ -358,8 +358,8 @@ const insertTable = () => {
         onClick: () => insertTable()
       }"
     >
-      <Select v-model="tableRow" :options="tableRowOptions" label="Table rows" class="mb-3" />
       <Select v-model="tableCell" :options="tableColsOptions" label="Table cell" />
+      <Select v-model="tableRow" :options="tableRowOptions" label="Table rows" class="mb-3" />
     </Modal>
     <div class="grid" :class="{ 'has-error': errorMessage }" @click="onClickContent">
       <QuillEditor
