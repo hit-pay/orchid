@@ -12,7 +12,7 @@ import {
   Dropdown
 } from '@/orchidui-core'
 
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import dayjs from 'dayjs'
 import ColumnEdit from './ColumnEdit.vue'
 
@@ -190,6 +190,10 @@ const removeAllQueryFilter = () => {
     defaultFilters[filterOptions.value?.tabs?.key] = filterTab.value
   } else {
     defaultFilters.tabs = filterTab.value
+  }
+
+  if (filterOptions.value?.columnEdit?.key) {
+    defaultFilters[filterOptions.value?.columnEdit?.key] = filterData.value[filterOptions.value?.columnEdit?.key]
   }
 
   filterData.value = defaultFilters
@@ -375,7 +379,7 @@ const isColumnActive = (headerKey) =>
 
 const updateOrder = ({ fixedHeaders, activeHeaders, isOnMount }) => {
   if (!filterData.value[filterOptions.value?.columnEdit?.key]) {
-    filterData.value[filterOptions.value?.columnEdit?.key] = {}
+    filterData.value[filterOptions.value?.columnEdit?.key] = {};
   }
   filterData.value[filterOptions.value?.columnEdit?.key].fixed = fixedHeaders
   filterData.value[filterOptions.value?.columnEdit?.key].active = activeHeaders
@@ -401,15 +405,6 @@ const setOrderedHeaders = () => {
     }
   }
 }
-
-watch(
-  () => props.filter,
-  (filter) => {
-    if (filter && filter[filterOptions.value.tabs.key]) {
-      filterTab.value = filter[filterOptions.value.tabs.key]
-    }
-  }
-)
 
 onMounted(() => {
   setOrderedHeaders()
