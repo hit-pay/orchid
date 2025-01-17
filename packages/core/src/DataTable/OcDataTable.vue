@@ -57,7 +57,8 @@ const emit = defineEmits({
   'filter-fields-changed': [],
   'filter-removed': [],
   'search-query-changed': [],
-  'hover:cell': []
+  'hover:cell': [],
+  'columns-changed': []
 })
 
 const paginationOption = computed(() => props.options?.pagination)
@@ -193,7 +194,8 @@ const removeAllQueryFilter = () => {
   }
 
   if (filterOptions.value?.columnEdit?.key) {
-    defaultFilters[filterOptions.value?.columnEdit?.key] = filterData.value[filterOptions.value?.columnEdit?.key]
+    defaultFilters[filterOptions.value?.columnEdit?.key] =
+      filterData.value[filterOptions.value?.columnEdit?.key]
   }
 
   filterData.value = defaultFilters
@@ -388,6 +390,7 @@ const updateOrder = ({ fixedHeaders, activeHeaders, isOnMount }) => {
     const data = formatHeadersToLocalStorage(fixedHeaders, activeHeaders)
     setInLocalStorage(filterOptions.value.columnEdit.localStorageKey, data)
   }
+  emit('columns-changed', activeHeaders)
 }
 const setOrderedHeaders = () => {
   if (filterOptions.value?.columnEdit?.localStorageKey) {
