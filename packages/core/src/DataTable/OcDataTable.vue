@@ -70,7 +70,13 @@ const tableOptions = computed(() => props.options?.tableOptions)
 const editedTableOptions = computed(() => ({
   ...tableOptions.value,
   headers: modifiedTableHeaders.value
-    ? modifiedTableHeaders.value.filter((h) => isColumnActive(h.key))
+    ? modifiedTableHeaders.value
+        .map((item) => {
+          item.class = tableOptions.value?.headers.find((h) => h.key === item.key)?.class ?? ''
+
+          return item
+        })
+        .filter((h) => isColumnActive(h.key))
     : tableOptions.value?.headers.filter((h) => isColumnActive(h.key))
 }))
 const filterOptions = computed(() => props.options?.filterOptions)
