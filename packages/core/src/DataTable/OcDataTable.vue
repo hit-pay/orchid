@@ -417,7 +417,7 @@ const setOrderedHeaders = () => {
 watch(
   () => props.filter,
   (filter) => {
-    if (filter && filter[filterOptions.value.tabs.key]) {
+    if (filter && filterOptions.value?.tabs?.key && filter[filterOptions.value.tabs.key]) {
       filterTab.value = filter[filterOptions.value.tabs.key]
     }
   }
