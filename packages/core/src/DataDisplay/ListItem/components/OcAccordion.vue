@@ -48,11 +48,11 @@ defineExpose({
         'border-b': isOpen,
         'pl-5': isNoToggleForced
       }"
+      @click="toggleAccordion"
     >
       <div
         v-if="!isNoToggleForced"
         class="flex items-center p-3 border-r bg-gray-50 cursor-pointer"
-        @click="toggleAccordion"
       >
         <Icon
           :name="isOpen ? 'chevron-up' : 'chevron-down'"
