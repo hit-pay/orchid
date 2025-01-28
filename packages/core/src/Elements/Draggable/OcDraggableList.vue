@@ -78,7 +78,9 @@ const handleEmit = (list, element) => {
           <!-- icon -->
           <div
             class="px-2 flex items-center"
-            :class="!isDisabled && !element.isDisable ? 'drag-el cursor-move' : ''"
+            :class="
+              !isDisabled && !element.isDisable && !element.unmovable ? 'drag-el cursor-move' : ''
+            "
           >
             <Icon
               v-if="!isDisabled && !element.isDisable"
@@ -97,7 +99,7 @@ const handleEmit = (list, element) => {
               v-if="element[iconKey]"
               :name="element[iconKey]"
               :class="
-                !isDisabled && !element.isDisable && isHovered[element.id]
+                !isDisabled && !element.isDisable && !element.unmovable && isHovered[element.id]
                   ? 'group-hover:hidden'
                   : ''
               "
