@@ -96,6 +96,10 @@ const props = defineProps({
   inputClass: {
     type: String,
     default: ''
+  },
+  trailingClass: {
+    type: String,
+    default: ''
   }
 })
 
@@ -152,7 +156,7 @@ const isPasswordInput = computed(() => props.inputType === 'password')
       :class="inputClasses"
       @click="$refs.inputRef?.focus()"
     >
-      <div v-if="$slots.trailing" class="border-r border-gray-200 pr-3 py-3">
+      <div v-if="$slots.trailing" class="border-r border-gray-200 pr-3 py-3" :class="trailingClass">
         <slot name="trailing" />
       </div>
 
