@@ -54,7 +54,7 @@ const copyLink = async () => {
 </script>
 
 <template>
-  <div class="md:pt-5 pt-0 md:px-10 px-5">
+  <div class="md:pt-5 pt-0 md:px-7 px-5">
     <OcTitle
       v-if="variant === 'default'"
       :description="mainLink"

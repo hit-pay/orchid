@@ -4,7 +4,7 @@ import { computed } from 'vue'
 defineProps({
   size: {
     type: Number,
-    validator: (value) => [64, 48, 40, 32, 24].includes(value),
+    validator: (value) => [64, 48, 40, 32, 28, 24].includes(value),
     default: 32
   },
   type: {

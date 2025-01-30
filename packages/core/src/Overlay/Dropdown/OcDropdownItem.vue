@@ -27,7 +27,7 @@ const variantClasses = computed(() => ({
     <div class="flex items-center gap-x-3 p-3">
       <Icon v-if="icon" class="w-5 h-5" :name="icon" v-bind="iconProps" :class="iconClasses" />
 
-      <span class="md:text-base text-sm">{{ text }}</span>
+      <span>{{ text }}</span>
 
       <slot name="badge" />
     </div>
