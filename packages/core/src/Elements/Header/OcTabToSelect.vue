@@ -44,15 +44,15 @@ onMounted(() => changeCurrentPosition())
     >
       <Icon
         :name="`header-icons/${item.icon}`"
-        width="24"
-        height="24"
+        :width="24"
+        :height="24"
         class="group-hover:block"
         :class="item.value === modelValue ? 'block' : 'hidden'"
       />
       <Icon
         :name="`header-icons/${item.icon}-gray`"
-        width="24"
-        height="24"
+        :width="24"
+        :height="24"
         class="group-hover:hidden"
         :class="item.value === modelValue ? 'hidden' : 'block'"
       />

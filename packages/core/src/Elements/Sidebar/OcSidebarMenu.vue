@@ -1,6 +1,6 @@
 <template>
  <div v-click-outside="onClickOutside"  class="relative" >
-  <Tooltip position="right" :arrow-hidden="isExpanded" :distance="10" :popper-options="{ strategy: 'fixed' }" class="w-full" >
+  <Tooltip position="right" arrow-hidden :distance="10" :popper-options="{ strategy: 'fixed' }" class="w-full" >
     <div
     ref="menuItemRef"
     class="py-2 px-3 z gap-x-3 flex items-center rounded hover:bg-[var(--oc-sidebar-menu-active)]"
@@ -11,8 +11,8 @@
   >
     <Icon
       :name="icon"
-      width="18"
-      height="18"
+      :width="18"
+      :height="18"
       :class="{ 
         'text-[var(--oc-sidebar-menu-active-icon-active)]': isActive,
         'text-[var(--oc-sidebar-menu-active-icon)]': !isActive,
