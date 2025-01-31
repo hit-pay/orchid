@@ -11,8 +11,8 @@
   >
     <Icon
       :name="icon"
-      :width="18"
-      :height="18"
+      width="18"
+      height="18"
       :class="{ 
         'text-[var(--oc-sidebar-menu-active-icon-active)]': isActive,
         'text-[var(--oc-sidebar-menu-active-icon)]': !isActive,
