@@ -24,7 +24,7 @@ defineEmits({
 
 <template>
   <div class="md:pb-5 pb-4 flex flex-col">
-    <div class="flex flex-col gap-y-3 pt-4 md:pt-5 px-5 md:px-10">
+    <div class="flex flex-col gap-y-3 pt-4 md:pt-5 px-5 md:px-7">
       <Button
         v-if="isBack"
         size="small"
@@ -37,7 +37,7 @@ defineEmits({
         @click="$emit('back')"
       />
       <div
-        class="w-full gap-5"
+        class="w-full gap-5 min-h-[36px]"
         :class="[isMobileCombineButtons ? 'hidden md:flex' : 'flex', titleClass]"
       >
         <OcTitle
