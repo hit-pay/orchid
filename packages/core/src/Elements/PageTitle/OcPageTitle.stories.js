@@ -20,6 +20,9 @@ export const Default = {
       isDropdownOpened: false,
       variant: 'secondary',
       label: 'Secondary',
+      onClick: () => {
+        console.log('click new payment link')
+      },
       dropdownOptions: [
         {
           name: 'bulk_create',
@@ -41,7 +44,8 @@ export const Default = {
     },
     isBack: false,
     isCopy: false,
-    chipOptions: null
+    chipOptions: null,
+    isMobileCombineButtons: true
   },
   render: (args) => ({
     components: { PageTitle, Theme },
