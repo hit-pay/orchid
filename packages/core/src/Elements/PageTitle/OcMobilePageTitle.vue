@@ -31,6 +31,7 @@ const isOpen = ref(false)
                 v-if="secondaryButtonProps"
                 :text="secondaryButtonProps?.label"
                 :icon="secondaryButtonProps?.leftIcon"
+                @click="secondaryButtonProps?.onClick"
               />
               <template v-if="secondaryButtonProps && secondaryButtonProps.dropdownOptions">
                 <DropdownItem
