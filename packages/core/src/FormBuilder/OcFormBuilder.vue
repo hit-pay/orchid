@@ -231,15 +231,6 @@ watch(
     deep: true
   }
 )
-watch(
-  () => props.jsonForm,
-  () => {
-    setModelValues(props.values)
-  },
-  {
-    deep: true
-  }
-)
 
 watch(
   () => props.errors,
@@ -269,45 +260,45 @@ onMounted(() => {
     :class="grid ? `responsive-smart-form-grid ${className}` : className"
     :style="grid ? gridDefinitionVariables : ''"
   >
-    <div
-      v-for="form in jsonForm"
-      :key="getFormKey(form.name)"
-      :style="grid ? gridArea(form.name) : ''"
-      :class="[
-        form.type !== 'Children'
-          ? formClass[typeof form.name === 'object' ? getFirstName(form.name) : form.name]
-          : '',
-        form.class
-      ]"
-    >
-      <component
-        :is="getComponentByType(form.type)"
-        v-if="getComponentByType(form.type)"
-        v-bind="form.props"
-        :model-value="
-          form.props?.parentKey
-            ? modelValue?.[form.props.parentKey]?.[form.name]
-            : modelValue[typeof form.name === 'object' ? getFirstName(form.name) : form.name]
-        "
-        :error-message="
-          errorMessage[typeof form.name === 'object' ? getFirstName(form.name) : form.name]
-        "
-        @update:model-value="onUpdate(form, $event)"
-      />
-      <slot
-        v-else
-        :name="form.type"
-        :form-id="id"
-        :form="form"
-        :value="
-          form.props?.parentKey
-            ? modelValue?.[form.props.parentKey]?.[form.name]
-            : modelValue[typeof form.name === 'object' ? getFirstName(form.name) : form.name]
-        "
-        :error="errorMessage[typeof form.name === 'object' ? getFirstName(form.name) : form.name]"
-        :on-update="onUpdate"
-      />
-    </div>
+    <template v-for="form in jsonForm" :key="getFormKey(form.name)">
+      <div
+        :style="grid ? gridArea(form.name) : ''"
+        :class="[
+          form.type !== 'Children'
+            ? formClass[typeof form.name === 'object' ? getFirstName(form.name) : form.name]
+            : '',
+          form.class
+        ]"
+      >
+        <component
+          :is="getComponentByType(form.type)"
+          v-if="getComponentByType(form.type)"
+          v-bind="form.props"
+          :model-value="
+            form.props?.parentKey
+              ? modelValue?.[form.props.parentKey]?.[form.name]
+              : modelValue[typeof form.name === 'object' ? getFirstName(form.name) : form.name]
+          "
+          :error-message="
+            errorMessage[typeof form.name === 'object' ? getFirstName(form.name) : form.name]
+          "
+          @update:model-value="onUpdate(form, $event)"
+        />
+        <slot
+          v-else
+          :name="form.type"
+          :form-id="id"
+          :form="form"
+          :value="
+            form.props?.parentKey
+              ? modelValue?.[form.props.parentKey]?.[form.name]
+              : modelValue[typeof form.name === 'object' ? getFirstName(form.name) : form.name]
+          "
+          :error="errorMessage[typeof form.name === 'object' ? getFirstName(form.name) : form.name]"
+          :on-update="onUpdate"
+        />
+      </div>
+    </template>
   </div>
 </template>
 <style lang="scss">
