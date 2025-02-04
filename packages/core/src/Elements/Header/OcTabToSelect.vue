@@ -65,7 +65,7 @@ onMounted(() => changeCurrentPosition())
     />
   </div>
   <Dropdown v-model="isDropdownOpened" class="flex md:hidden">
-    <div class="p-3 font-medium text-oc-accent-1-500 flex items-center gap-2">
+    <div class="p-3 font-medium whitespace-normal text-oc-accent-1-500 flex items-center gap-2">
       {{ activeMenu.label }}
       <Icon name="chevron-down" width="20" height="20" />
     </div>
@@ -74,7 +74,7 @@ onMounted(() => changeCurrentPosition())
         <DropdownItem
           v-for="item in menus"
           :key="item.value"
-          class="px-5 py-3"
+          class="px-3"
           :text="item.label"
           :style="{
             borderColor: activeMenu.color
