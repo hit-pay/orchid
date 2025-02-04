@@ -231,6 +231,15 @@ watch(
     deep: true
   }
 )
+watch(
+  () => props.jsonForm,
+  () => {
+    setModelValues(props.values)
+  },
+  {
+    deep: true
+  }
+)
 
 watch(
   () => props.errors,
