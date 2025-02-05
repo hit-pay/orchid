@@ -27,7 +27,7 @@ watch(
 onMounted(() => changeCurrentPosition())
 </script>
 <template>
-  <div class="gap-x-6 hidden md:flex relative">
+  <div class="gap-x-9 hidden md:flex relative">
     <div
       v-for="item in menus"
       :key="item.value"
