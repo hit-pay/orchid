@@ -23,8 +23,8 @@ defineEmits({
 </script>
 
 <template>
-  <div class="md:pb-5 pb-4 flex flex-col">
-    <div class="flex flex-col gap-y-3 pt-4 md:pt-5 px-5 md:px-7">
+  <div class="pb-4 flex flex-col">
+    <div class="flex flex-col gap-y-3 pt-4 px-5 md:px-7">
       <Button
         v-if="isBack"
         size="small"
