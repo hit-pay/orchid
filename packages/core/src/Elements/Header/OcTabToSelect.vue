@@ -86,6 +86,7 @@ onMounted(() => changeCurrentPosition())
           ]"
           @click="
             () => {
+              isDropdownOpened = false
               $emit('changePath', item.path)
               $emit('update:modelValue', item.value)
             }
