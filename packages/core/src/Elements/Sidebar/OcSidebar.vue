@@ -77,7 +77,7 @@ onMounted(() => {
     class="cursor-pointer flex flex-col transition-all duration-300 ease-in-out relative bg-[var(--oc-sidebar-background)]"
     :class="[allClassName, { 'overflow-auto': isExpanded }]"
   >
-    <div class="flex flex-col flex-1 py-4 gap-5 px-6">
+    <div class="flex flex-col flex-1 py-4 gap-5 px-6 animated-section">
       <slot name="before" :is-expanded="isExpanded" />
 
       <template v-for="(sidebar, index) in sidebarMenu" :key="index">
