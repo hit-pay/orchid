@@ -17,12 +17,7 @@ defineProps({
     <label
       v-if="label"
       class="flex items-center text-sm font-medium gap-x-3 text-oc-text-400"
-      :class="[
-        labelClass,
-        {
-          '!text-oc-error': errorMessage
-        }
-      ]"
+      :class="labelClass"
     >
       <span class="flex items-center gap-x-1">
         {{ label }}
