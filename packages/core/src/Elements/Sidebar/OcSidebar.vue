@@ -93,7 +93,7 @@ onMounted(() => {
             :icon="menu.icon"
             :label="menu.label"
             :is-children="!!menu.children"
-            :is-active="menu.active"
+            :is-active="menu.active || (menu.children && menu.children?.some(child => child.active))"
             :is-expanded="isExpanded"
             :is-menu-expanded="state.expanded.includes(menu.name)"
             @click="expandOrRedirect(menu)"

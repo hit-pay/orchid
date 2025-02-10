@@ -7,7 +7,7 @@
     }"
   >
     <div class="w-[18px] h-[18px] flex items-center justify-center" :class="{ 'opacity-0': !isActive }">
-      <div class="w-[6px] h-[6px] rounded-full bg-oc-primary" />
+      <div class="w-[6px] h-[6px] rounded-full bg-[var(--oc-sidebar-menu-active-icon-active)]" />
     </div>
     <div class="flex-1 whitespace-nowrap">{{ label }}</div>
     <div v-if="isBeta" class="bg-oc-warning text-white shrink-0 py-1 px-3 rounded-sm uppercase text-xs font-medium">
