@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-
+import { Input } from '@/orchidui-core'
 const props = defineProps({
   maxLimit: {
     type: Number,
@@ -75,13 +75,25 @@ const fillColor = (onlyFillColor = false) => {
     )
   }
 }
+
+const preventEventIfNotNumberInput = (event) => {
+  if ((event.key >= '0' && event.key <= '9') || event.key === 'Backspace') {
+    return
+  }
+
+  event.preventDefault()
+}
 const updateSlider = (value) => {
   if (value && value[0] && value[1] && props.type === 'range') {
     sliderOne.value.value = Number(value[0])
     sliderTwo.value.value = Number(value[1])
-
     slideOne()
     if (props.type === 'range') slideTwo()
+  } else if (value && props.type === 'default') {
+    if (value <= props.maxLimit && value >= props.minLimit) {
+      sliderOne.value.value = Number(value)
+      slideOne()
+    }
   } else {
     fillColor(true)
   }
@@ -94,23 +106,23 @@ onMounted(() => updateSlider())
 </script>
 
 <template>
-  <div class="w-full flex flex-wrap">
+  <div class="flex flex-wrap w-full">
     <label
       v-if="label"
-      class="w-full text-sm flex items-center gap-x-3 font-medium text-oc-text-400 mb-2"
+      class="flex items-center w-full mb-2 text-sm font-medium gap-x-3 text-oc-text-400"
     >
-      <span class="flex gap-x-1 items-center">
+      <span class="flex items-center gap-x-1">
         {{ label }}
       </span>
     </label>
     <div
-      class="relative h-[33px]"
+      class="relative h-[33px] flex items-center"
       :class="{
         'w-full': variant === 'default',
         'w-[85%]': variant === 'right'
       }"
     >
-      <div ref="sliderTrack" class="rounded-full h-3 absolute m-auto top-0 w-full group" />
+      <div ref="sliderTrack" class="absolute top-0 w-full h-3 m-auto rounded-full group" />
 
       <input
         ref="sliderOne"
@@ -154,11 +166,14 @@ onMounted(() => updateSlider())
         ><slot name="max-limit-label">{{ maxLimit }}</slot></span
       >
     </div>
-    <div
-      v-if="variant === 'right'"
-      class="border border-oc-gray-200 rounded-lg ml-auto w-[11%] flex items-center -mt-4 justify-center"
-    >
-      {{ type === 'range' ? modelValue?.[0] : modelValue }}
+    <div class="w-[15%] -mt-4 px-2">
+      <Input
+        v-if="variant === 'right' && type === 'default'"
+        :model-value="modelValue"
+        placeholder="10"
+        @keydown="preventEventIfNotNumberInput"
+        @update:model-value="updateSlider"
+      />
     </div>
   </div>
 </template>
