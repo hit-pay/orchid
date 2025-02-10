@@ -86,13 +86,13 @@ const isOtherLink = computed(() => selectedLinkType.value === 'link')
       class="mb-3"
       label="Title"
       placeholder="Title"
-      :error-message="errorMessages.title ? ' ' : ''"
+      :error-message="errorMessages?.title ? ' ' : ''"
       @update:model-value="$emit('update:title', $event)"
     />
     <Input
       :placeholder="placeholderInput"
       :label="selectedLinkType === 'link' ? 'Link' : label"
-      :error-message="errorMessages.link ? ' ' : ''"
+      :error-message="errorMessages?.link ? ' ' : ''"
       :is-inline-label="isInlineLabel"
       :disabled="isDisabled"
       :hint="hint"
