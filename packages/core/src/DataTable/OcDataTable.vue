@@ -258,6 +258,17 @@ const applyFilter = (filterFormData = null, isChangePage = false, changeCursor =
       }
     })
   }
+
+  let filterTabKey = filterOptions.value?.tabs?.key
+  if (filterTabKey && filterTab.value !== filterData.value[filterTabKey]) {
+    const selectedTab = filterOptions.value.tabs?.options?.find(
+      (option) => option.value === filterData.value[filterTabKey]
+    )
+    if (selectedTab.value) {
+      filterTab.value = selectedTab.value
+    }
+  }
+
   saveFilterInLocalStorage()
   emit('update:filter', filterData.value)
 }
