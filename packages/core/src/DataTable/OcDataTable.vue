@@ -266,6 +266,8 @@ const applyFilter = (filterFormData = null, isChangePage = false, changeCursor =
     )
     if (selectedTab?.value) {
       filterTab.value = selectedTab.value
+      // change filter tab will call applyFilter again
+      return false
     }
   }
 
