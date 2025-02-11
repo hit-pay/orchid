@@ -436,6 +436,8 @@ onMounted(() => {
     currentPage.value = filterData.value?.page || 1
 
     applyFilter(null, true, filterData.value.cursor)
+  } else {
+    applyFilter(null)
   }
 })
 </script>
