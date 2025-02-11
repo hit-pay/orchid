@@ -12,7 +12,7 @@ import {
   Dropdown
 } from '@/orchidui-core'
 
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import dayjs from 'dayjs'
 import ColumnEdit from './ColumnEdit.vue'
 
@@ -414,14 +414,6 @@ const setOrderedHeaders = () => {
     }
   }
 }
-watch(
-  () => props.filter,
-  (filter) => {
-    if (filter && filterOptions.value?.tabs?.key && filter[filterOptions.value.tabs.key]) {
-      filterTab.value = filter[filterOptions.value.tabs.key]
-    }
-  }
-)
 
 onMounted(() => {
   setOrderedHeaders()
@@ -440,7 +432,7 @@ onMounted(() => {
 })
 </script>
 <template>
-  <div class="flex flex-col gap-9 relative">
+  <div class="relative flex flex-col gap-9">
     <Table
       v-if="tableOptions"
       :selected="selected"
@@ -465,10 +457,10 @@ onMounted(() => {
           v-if="filterOptions?.search || filterOptions?.form || filterOptions?.tabs"
           class="flex items-center px-4 min-h-[52px]"
         >
-          <div v-if="showBulkAction" class="flex gap-5 items-center absolute left-5">
+          <div v-if="showBulkAction" class="absolute flex items-center gap-5 left-5">
             <slot name="bulk-actions" :selected-rows="selected" />
           </div>
-          <div v-else class="flex gap-3 absolute left-5">
+          <div v-else class="absolute flex gap-3 left-5">
             <Tabs
               v-if="filterOptions?.tabs"
               v-model="filterTab"
@@ -568,7 +560,7 @@ onMounted(() => {
     <slot name="before-pagination"></slot>
     <div
       v-if="paginationOption || cursorOption"
-      class="flex gap-3 items-center"
+      class="flex items-center gap-3"
       :class="paginationOption && paginationOption.last_page === 1 ? 'justify-end' : ''"
     >
       <Pagination
@@ -580,7 +572,7 @@ onMounted(() => {
         total-visible="5"
         @update:model-value="changePage"
       />
-      <div v-if="cursorOption" class="flex w-full gap-5 md:justify-start justify-center">
+      <div v-if="cursorOption" class="flex justify-center w-full gap-5 md:justify-start">
         <PrevNext
           :disabled="!cursorOption.prev"
           @click="cursorOption.prev ? applyFilter(null, false, cursorOption.prev) : null"
@@ -591,7 +583,7 @@ onMounted(() => {
           @click="cursorOption.next ? applyFilter(null, false, cursorOption.next) : null"
         />
       </div>
-      <div v-if="!hidePerPageDropdown" class="hidden md:flex items-center">
+      <div v-if="!hidePerPageDropdown" class="items-center hidden md:flex">
         <Select
           v-model="perPage"
           label="Item per page"
