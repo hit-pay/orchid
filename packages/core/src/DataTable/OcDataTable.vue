@@ -262,7 +262,7 @@ const applyFilter = (filterFormData = null, isChangePage = false, changeCursor =
   let filterTabKey = filterOptions.value?.tabs?.key
   if (filterTabKey && filterTab.value !== filterData.value[filterTabKey]) {
     filterTab.value = filterData.value[filterTabKey]
-    return false
+    applyFilter(filterData.value)
   }
 
   saveFilterInLocalStorage()
