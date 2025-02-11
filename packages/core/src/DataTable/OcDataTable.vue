@@ -58,7 +58,8 @@ const emit = defineEmits({
   'filter-removed': [],
   'search-query-changed': [],
   'hover:cell': [],
-  'columns-changed': []
+  'columns-changed': [],
+  'onload:table': []
 })
 
 const paginationOption = computed(() => props.options?.pagination)
@@ -437,6 +438,9 @@ onMounted(() => {
 
     applyFilter(null, true, filterData.value.cursor)
   }
+  setTimeout(() => {
+    emit('onload:table', true)
+  }, 100)
 })
 </script>
 <template>
