@@ -264,7 +264,7 @@ const applyFilter = (filterFormData = null, isChangePage = false, changeCursor =
     const selectedTab = filterOptions.value.tabs?.options?.find(
       (option) => option.value === filterData.value[filterTabKey]
     )
-    if (selectedTab.value) {
+    if (selectedTab?.value) {
       filterTab.value = selectedTab.value
     }
   }
