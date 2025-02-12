@@ -16,12 +16,12 @@ import { ref, computed, onMounted } from 'vue'
 import dayjs from 'dayjs'
 import ColumnEdit from './ColumnEdit.vue'
 
-import {
-  formatHeadersToLocalStorage,
-  setInLocalStorage,
-  getFromLocalStorage,
-  formatHeadersFromLocalStorage
-} from './utils/editColumnsUtils.js'
+// import {
+//   formatHeadersToLocalStorage,
+//   setInLocalStorage,
+//   getFromLocalStorage,
+//   formatHeadersFromLocalStorage
+// } from './utils/editColumnsUtils.js'
 
 const props = defineProps({
   isLoading: Boolean,
@@ -64,7 +64,10 @@ const emit = defineEmits({
 const paginationOption = computed(() => props.options?.pagination)
 
 const cursorOption = computed(() => props.options?.cursor)
-const modifiedTableHeaders = ref()
+const modifiedTableHeaders = ref([
+  ...filterData.value[filterOptions.value?.columnEdit?.key].fixed,
+  ...filterData.value[filterOptions.value?.columnEdit?.key].active
+])
 
 const tableOptions = computed(() => props.options?.tableOptions)
 const editedTableOptions = computed(() => ({
@@ -213,25 +216,24 @@ const changePage = () => {
   applyFilter(null, currentPage.value)
 }
 
-const saveFilterInLocalStorage = () => {
-  if (props.id) {
-    setInLocalStorage(props.id, JSON.stringify(filterData.value))
-  }
-}
+// const saveFilterInLocalStorage = () => {
+//   if (props.id) {
+//     setInLocalStorage(props.id, JSON.stringify(filterData.value))
+//   }
+// }
 
-const getFilterFromLocalStorage = () => {
-  if (props.id) {
+// const getFilterFromLocalStorage = () => {
+//   if (props.id) {
     
-    return getFromLocalStorage(props.id)
-  }
-  return null
-}
+//     return getFromLocalStorage(props.id)
+//   }
+//   return null
+// }
 
 const applyFilter = (
   filterFormData = null,
   isChangePage = false,
-  changeCursor = '',
-  isOnMount = false
+  changeCursor = ''
 ) => {
   if (paginationOption.value && !isChangePage) {
     currentPage.value = 1
@@ -272,8 +274,7 @@ const applyFilter = (
     return false
   }
 
-  saveFilterInLocalStorage()
-  emit('update:filter', filterData.value, isOnMount)
+  emit('update:filter', filterData.value)
 }
 
 const removeFilter = (filter, field) => {
@@ -406,46 +407,51 @@ const updateOrder = ({ fixedHeaders, activeHeaders, isOnMount }) => {
   filterData.value[filterOptions.value?.columnEdit?.key].fixed = fixedHeaders
   filterData.value[filterOptions.value?.columnEdit?.key].active = activeHeaders
   modifiedTableHeaders.value = [...fixedHeaders, ...activeHeaders]
-  if (!isOnMount) {
-    const data = formatHeadersToLocalStorage(fixedHeaders, activeHeaders)
-    setInLocalStorage(filterOptions.value.columnEdit.localStorageKey, data)
-  }
+  // if (!isOnMount) {
+  //   const data = formatHeadersToLocalStorage(fixedHeaders, activeHeaders)
+  //   setInLocalStorage(filterOptions.value.columnEdit.localStorageKey, data)
+  // }
+  applyFilter()
   emit('columns-changed', activeHeaders)
 }
-const setOrderedHeaders = () => {
-  if (filterOptions.value?.columnEdit?.localStorageKey) {
-    const columnEdit = getFromLocalStorage(filterOptions.value.columnEdit.localStorageKey)
-    if (columnEdit) {
-      const { fixed, active } = formatHeadersFromLocalStorage(
-        columnEdit,
-        tableOptions.value.headers,
-        filterOptions.value.columnEdit.localStorageKey
-      )
 
-      filterData.value[filterOptions.value?.columnEdit?.key].fixed = fixed
-      filterData.value[filterOptions.value?.columnEdit?.key].active = active
-      modifiedTableHeaders.value = [...fixed, ...active]
-    }
-  }
-}
+// TODO : move to dashboard
 
-onMounted(() => {
-  setOrderedHeaders()
-  const filterFromLocalStorage = getFilterFromLocalStorage()
-  if (filterFromLocalStorage) {
-    filterData.value = JSON.parse(filterFromLocalStorage)
-    filterTab.value =
-      filterTab.value ||
-      filterData.value?.tabs ||
-      filterData.value?.[filterOptions.value?.tabs?.key]
+// const setOrderedHeaders = () => {
+//   if (filterOptions.value?.columnEdit?.localStorageKey) {
+//     const columnEdit = getFromLocalStorage(filterOptions.value.columnEdit.localStorageKey)
+//     if (columnEdit) {
+//       const { fixed, active } = formatHeadersFromLocalStorage(
+//         columnEdit,
+//         tableOptions.value.headers,
+//         filterOptions.value.columnEdit.localStorageKey
+//       )
 
-    currentPage.value = filterData.value?.page || 1
+//       filterData.value[filterOptions.value?.columnEdit?.key].fixed = fixed
+//       filterData.value[filterOptions.value?.columnEdit?.key].active = active
+//       modifiedTableHeaders.value = [...fixed, ...active]
+//     }
+//   }
+// }
 
-    applyFilter(null, true, filterData.value.cursor, true)
-  } else {
-    applyFilter(null, false, '', true)
-  }
-})
+// onMounted(() => {
+  // setOrderedHeaders()
+  // const filterFromLocalStorage = getFilterFromLocalStorage()
+  // if (filterFromLocalStorage) {
+  //   filterData.value = JSON.parse(filterFromLocalStorage)
+  //   filterTab.value =
+  //     filterTab.value ||
+  //     filterData.value?.tabs ||
+  //     filterData.value?.[filterOptions.value?.tabs?.key]
+
+  //   currentPage.value = filterData.value?.page || 1
+
+  //   applyFilter(null, true, filterData.value.cursor, true)
+  // } else {
+  //   applyFilter(null, false, '', true)
+  // }
+// })
+
 </script>
 <template>
   <div class="relative flex flex-col gap-9">
