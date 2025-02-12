@@ -478,3 +478,162 @@ export const Default = {
         `
   })
 }
+
+export const FilterTabSameKeyFilterDefault = {
+  args: {
+    options: {
+      pagination: {
+        total: 50,
+        last_page: 20
+      },
+      filterOptions: {
+        per_page: {
+          key: 'per_page'
+        },
+        tabs: {
+          key: 'status',
+          options: [
+            { label: 'All', value: '' },
+            { label: 'Filter 01', value: ['1'] },
+            { label: 'Filter 02', value: ['2'] },
+            { label: 'Filter 03', value: ['3'] }
+          ]
+        },
+        form: [
+          {
+            name: 'status',
+            type: 'Select',
+            props: {
+              label: 'Select Status',
+              hint: 'This is a hint text to help user',
+              placeholder: 'placeholder',
+              multiple: true,
+              options: [
+                {
+                  label: 'Option 1',
+                  value: '1'
+                },
+                {
+                  label: 'Option 2',
+                  value:'2'
+                },
+                {
+                  label: 'Option 3',
+                  value: '3'
+                },
+                {
+                  label: 'Option 4',
+                  value: '4'
+                }
+              ]
+            }
+          }
+        ]
+      },
+      tableOptions: {
+        headers: [
+          {
+            key: 'image',
+            variant: 'image',
+            label: 'Image',
+            class: 'w-1/2 md:min-w-[5%]'
+          },
+          {
+            key: 'col1',
+            label: 'Table Header',
+            class: 'w-1/2 md:min-w-[20%]'
+          },
+          {
+            key: 'col2',
+            label: 'Table Header',
+            class: 'w-1/2 md:min-w-[10%]'
+          },
+          {
+            key: 'col3',
+            variant: 'content',
+            label: 'Table Header',
+            title: 'col3Title',
+            href: 'col3Url',
+            class: 'w-1/2 md:min-w-[12%]'
+          },
+          {
+            key: 'col4',
+            label: 'Table Header',
+            class: 'w-1/2 md:min-w-[18%]'
+          },
+          {
+            key: 'col5',
+            label: 'Table Header',
+            class: 'w-1/2 md:min-w-[15%]',
+            variant: 'chip',
+            chipOptions: {
+              Label: {
+                label: 'Label',
+                variant: 'success',
+                icon: 'check'
+              }
+            }
+          },
+          {
+            key: 'col6',
+            label: 'Header',
+            class: 'w-1/2 md:min-w-[10%]'
+          },
+          {
+            key: 'actions',
+            label: '',
+            headerVariant: 'text',
+            variant: 'icon',
+            class: 'w-1/2 md:min-w-[5%]'
+          }
+        ],
+        fields: [
+          {
+            image: '',
+            imageTitle: '',
+            imageDescription: 'Table Cell column two',
+            col2: 'Table Cell',
+            col3Title: 'Table Cell',
+            col4: 'Table Cell column two',
+            col5: 'Label',
+            col6: false,
+            id: crypto.randomUUID()
+          }
+        ]
+      }
+    },
+  },
+  render: (args) => ({
+    components: {
+      DataTable,
+      Theme,
+    },
+    setup() {
+      const filter = ref({
+        page: 1,
+        per_page: 10,
+        status: '',
+      })
+      const updateFilterData = (data) => {
+        console.log('updateFilterData', data)
+      }
+      return {
+        args,
+        filter,
+        updateFilterData
+      }
+    },
+    template: `
+          <Theme class="p-8">
+            <DataTable 
+                id="sample-data-table-tab-same-key"
+                :options="args.options"
+                :filter="filter" 
+                @update:filter="updateFilterData"
+             >
+            </DataTable>
+          </Theme>
+        `
+  })
+}
+
