@@ -95,8 +95,11 @@ if (!defaultFilterData && paginationOption) {
 }
 const filterData = ref(defaultFilterData)
 
-const modifiedTableHeaders = ref([
-])
+const modifiedTableHeaders = ref()
+
+if(filterOptions.value?.columnEdit?.key){
+  modifiedTableHeaders.value = []
+}
 if(filterData.value[filterOptions.value?.columnEdit?.key]?.fixed){
   modifiedTableHeaders.value = [...filterData.value[filterOptions.value?.columnEdit?.key].fixed]
 }
