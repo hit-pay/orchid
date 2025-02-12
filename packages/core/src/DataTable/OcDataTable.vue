@@ -170,9 +170,9 @@ const removeQuery = (query) => {
 }
 const defaultFilterData = props.filter
 if (!defaultFilterData && paginationOption) {
-  defaultFilterData.page = 1
+  defaultFilterData.page = props.filter.page ?? 1
 } else if (!defaultFilterData && cursorOption) {
-  defaultFilterData.cursor = ''
+  defaultFilterData.cursor = props.filter.cursor ?? ''
 }
 const filterData = ref(defaultFilterData)
 
