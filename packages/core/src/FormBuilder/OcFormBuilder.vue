@@ -50,6 +50,9 @@ const props = defineProps({
     type: Object,
     required: true
   },
+  logicValues: {
+    type: Object
+  },
   previewMode: String // only for store design
 })
 
@@ -176,31 +179,38 @@ const setErrorMessage = () => {
     }
   })
 }
-
+const formLogicValues = computed(() => {
+  return {
+    ...props.logicValues,
+    ...modelValue.value
+  }
+})
 const setFormClass = (form) => {
+ 
   if (form.show_if || form.show_if_preview) {
     let formClassName = form.class ? form.class : ''
 
     if (form.show_if) {
       // show if by other setting value
       if (form.show_if_value !== undefined) {
-        if (form.show_if_value !== modelValue.value[form.show_if]) {
+        if (form.show_if_value !== formLogicValues.value[form.show_if]) {
           formClassName = formClassName + ' hidden'
         }
       } else if (form.show_if_not !== undefined) {
-        if (form.show_if_not === modelValue.value[form.show_if]) {
+        if (form.show_if_not === formLogicValues.value[form.show_if]) {
           formClassName = formClassName + ' hidden'
         }
       } else if (form.show_if_min !== undefined) {
-        let minValue = isNaN(parseInt(modelValue.value[form.show_if]))
+        let minValue = isNaN(parseInt(formLogicValues.value[form.show_if]))
           ? 1
-          : parseInt(modelValue.value[form.show_if])
+          : parseInt(formLogicValues.value[form.show_if])
 
         if (minValue < parseInt(form.show_if_min)) {
           formClassName = formClassName + ' hidden'
         }
       }
     } else if (form.show_if_preview) {
+      // for store design
       if (form.show_if_preview_only !== undefined) {
         if (form.show_if_preview_only !== props.previewMode) {
           formClassName = formClassName + ' hidden'
@@ -226,6 +236,15 @@ watch(
   () => props.values,
   (newValues) => {
     setModelValues(newValues)
+  },
+  {
+    deep: true
+  }
+)
+watch(
+  () => props.logicValues,
+  () => {
+    setModelValues(props.values)
   },
   {
     deep: true
