@@ -39,7 +39,7 @@ const tableStateKey = '__table_state_key__'
 
 const setInLocalStorage = (key, data) => {
   const allFilterData = JSON.parse(localStorage.getItem(tableStateKey)) || {}
-  allFilterData[key] = data
+  allFilterData[key] = JSON.parse(data)
   localStorage.setItem(tableStateKey, JSON.stringify(allFilterData))
 }
 const getFromLocalStorage = (key) => {
