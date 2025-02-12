@@ -226,7 +226,7 @@ const getFilterFromLocalStorage = () => {
   return null
 }
 
-const applyFilter = (filterFormData = null, isChangePage = false, changeCursor = '') => {
+const applyFilter = (filterFormData = null, isChangePage = false, changeCursor = '', isOnMount = false) => {
   if (paginationOption.value && !isChangePage) {
     currentPage.value = 1
   }
@@ -262,17 +262,16 @@ const applyFilter = (filterFormData = null, isChangePage = false, changeCursor =
   let filterTabKey = filterOptions.value?.tabs?.key
   if (filterTabKey && filterTab.value !== filterData.value[filterTabKey]) {
     const selectedTab = filterOptions.value.tabs?.options?.find(
-      (option) => option.value === filterData.value[filterTabKey]
+      (option) => option.value?.toString() === filterData.value[filterTabKey]?.toString()
     )
     if (selectedTab?.value) {
       filterTab.value = selectedTab.value
-      // change filter tab will call applyFilter again
       return false
     }
   }
 
   saveFilterInLocalStorage()
-  emit('update:filter', filterData.value)
+  emit('update:filter', filterData.value, isOnMount)
 }
 
 const removeFilter = (filter, field) => {
@@ -440,7 +439,7 @@ onMounted(() => {
 
     currentPage.value = filterData.value?.page || 1
 
-    applyFilter(null, true, filterData.value.cursor)
+    applyFilter(null, true, filterData.value.cursor, true)
   }
 })
 </script>
