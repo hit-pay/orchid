@@ -221,6 +221,7 @@ const saveFilterInLocalStorage = () => {
 
 const getFilterFromLocalStorage = () => {
   if (props.id) {
+    
     return getFromLocalStorage(props.id)
   }
   return null

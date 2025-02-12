@@ -34,8 +34,18 @@ const formatHeadersFromLocalStorage = (jsonHeaders, localHeaders, key) => {
   }
 }
 
-const setInLocalStorage = (key, data) => localStorage.setItem(key, data)
-const getFromLocalStorage = (key) => localStorage.getItem(key)
+const tableStateKey = '__table_state_key__'
+
+
+const setInLocalStorage = (key, data) => {
+  const allFilterData = JSON.parse(localStorage.getItem(tableStateKey)) || {}
+  allFilterData[key] = data
+  localStorage.setItem(tableStateKey, JSON.stringify(allFilterData))
+}
+const getFromLocalStorage = (key) => {
+  const allFilterData = JSON.parse(localStorage.getItem(tableStateKey)) || {}
+  return allFilterData[key] ?? null
+}
 
 export {
   setInLocalStorage,
