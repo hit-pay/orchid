@@ -39,6 +39,11 @@ const tableStateKey = '__table_state_key__'
 
 const setInLocalStorage = (key, data) => {
   const allFilterData = JSON.parse(localStorage.getItem(tableStateKey)) || {}
+  if(!allFilterData[key]){
+    allFilterData[key] = {
+      filter: null,
+    }
+  }
   allFilterData[key].filter = JSON.parse(data)
   localStorage.setItem(tableStateKey, JSON.stringify(allFilterData))
 }
