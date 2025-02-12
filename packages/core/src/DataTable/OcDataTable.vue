@@ -37,6 +37,9 @@ const props = defineProps({
     type: Object,
     required: true
   },
+  columns: {
+    type: Object
+  },
   selected: {
     type: Array,
     required: false
@@ -64,6 +67,34 @@ const emit = defineEmits({
 const paginationOption = computed(() => props.options?.pagination)
 
 const cursorOption = computed(() => props.options?.cursor)
+
+const filterOptions = computed(() => props.options?.filterOptions)
+
+const hidePerPageDropdown = computed(() => props.options?.hidePerPageDropdown)
+
+const isLastPage = computed(() => paginationOption.value?.last_page === 1)
+
+const isDropdownOpened = ref(false)
+const filterTab = ref(props.filter[filterOptions.value?.tabs?.key])
+const currentPage = ref(props.filter.page)
+const perPage = ref(
+  filterOptions.value?.per_page?.key
+    ? props.filter[filterOptions.value?.per_page?.key]
+    : props.filter.per_page
+)
+const defaultQuery = props.filter[filterOptions.value?.search?.key]?.trim() ?? ''
+const queries = ref(defaultQuery ? defaultQuery.split(',') : [])
+const isSearchExpanded = ref(false)
+
+const defaultFilterData = props.filter
+
+if (!defaultFilterData && paginationOption) {
+  defaultFilterData.page = props.filter.page ?? 1
+} else if (!defaultFilterData && cursorOption) {
+  defaultFilterData.cursor = props.filter.cursor ?? ''
+}
+const filterData = ref(defaultFilterData)
+
 const modifiedTableHeaders = ref([
   ...filterData.value[filterOptions.value?.columnEdit?.key].fixed,
   ...filterData.value[filterOptions.value?.columnEdit?.key].active
@@ -82,23 +113,6 @@ const editedTableOptions = computed(() => ({
         .filter((h) => isColumnActive(h.key))
     : tableOptions.value?.headers.filter((h) => isColumnActive(h.key))
 }))
-const filterOptions = computed(() => props.options?.filterOptions)
-
-const hidePerPageDropdown = computed(() => props.options?.hidePerPageDropdown)
-
-const isLastPage = computed(() => paginationOption.value?.last_page === 1)
-
-const isDropdownOpened = ref(false)
-const filterTab = ref(props.filter[filterOptions.value?.tabs?.key])
-const currentPage = ref(props.filter.page)
-const perPage = ref(
-  filterOptions.value?.per_page?.key
-    ? props.filter[filterOptions.value?.per_page?.key]
-    : props.filter.per_page
-)
-const defaultQuery = props.filter[filterOptions.value?.search?.key]?.trim() ?? ''
-const queries = ref(defaultQuery ? defaultQuery.split(',') : [])
-const isSearchExpanded = ref(false)
 
 const customPerPageOptions = computed(() =>
   props.options?.perPageOptions?.map(
@@ -171,13 +185,7 @@ const removeQuery = (query) => {
   queries.value = queries.value.filter((q) => q !== query)
   applyFilter()
 }
-const defaultFilterData = props.filter
-if (!defaultFilterData && paginationOption) {
-  defaultFilterData.page = props.filter.page ?? 1
-} else if (!defaultFilterData && cursorOption) {
-  defaultFilterData.cursor = props.filter.cursor ?? ''
-}
-const filterData = ref(defaultFilterData)
+
 
 const removeAllQueryFilter = () => {
   queries.value = []
@@ -544,7 +552,6 @@ const updateOrder = ({ fixedHeaders, activeHeaders, isOnMount }) => {
                 v-if="filterOptions.columnEdit"
                 :options="filterData.columnEdit"
                 :headers="tableOptions?.headers || []"
-                :local-key="filterOptions.columnEdit.localStorageKey"
                 @update-order="updateOrder"
               />
             </div>

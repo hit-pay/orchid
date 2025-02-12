@@ -2,7 +2,7 @@
 import { Dropdown, Button, Icon, Checkbox } from '@/orchidui-core'
 import { ref, onMounted } from 'vue'
 import { VueDraggableNext } from 'vue-draggable-next'
-import { formatHeadersFromLocalStorage, getFromLocalStorage } from './utils/editColumnsUtils'
+// import { formatHeadersFromLocalStorage, getFromLocalStorage } from './utils/editColumnsUtils'
 
 const emit = defineEmits(['change-active', 'onMoved', 'update-order'])
 const props = defineProps({
@@ -23,7 +23,7 @@ const activeHeaders = ref([])
 const fixedHeaders = ref([])
 const isColumnEditOpened = ref(false)
 
-const updateFilters = (isOnMount = false) => {
+const updateFilters = () => {
   fixedHeaders.value = fixedHeaders.value.map((header) => ({
     ...header,
     isActive: true
@@ -31,7 +31,7 @@ const updateFilters = (isOnMount = false) => {
   emit('update-order', {
     fixedHeaders: fixedHeaders.value,
     activeHeaders: activeHeaders.value,
-    isOnMount
+    // isOnMount
   })
 }
 
@@ -46,11 +46,10 @@ const dragOptions = {
 }
 
 onMounted(() => {
-  const columnEdit = getFromLocalStorage(props.localKey)
-  const { fixed, active } = formatHeadersFromLocalStorage(columnEdit, props.headers, props.localKey)
-  fixedHeaders.value = fixed || props.headers.slice(0, 1)
+  // const columnEdit = getFromLocalStorage(props.localKey)
+  // const { fixed, active } = formatHeadersFromLocalStorage(columnEdit, props.headers, props.localKey)
+  fixedHeaders.value = props.headers.slice(0, 1)
   activeHeaders.value =
-    active ||
     props.headers.slice(1).map((header) => ({
       ...header,
       isActive: props.options?.active?.find((h) => h.key === header.key)?.isActive ?? true
