@@ -67,7 +67,10 @@ const emit = defineEmits(['addCustomer', 'editCustomer', 'closeCustomer'])
               </span>
             </div>
             <span v-if="isBeneficiary" class="text-sm text-oc-text-400">
-              {{ customer.bank_name }} / {{ customer.bank_account_number }}
+              {{ customer.bank_name }}
+              <span v-if="customer.bank_account_number">
+                / {{ customer.bank_account_number }}
+              </span>
             </span>
             <span v-else class="text-sm text-oc-text-400 truncate">
               {{
