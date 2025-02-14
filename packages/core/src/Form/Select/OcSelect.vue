@@ -306,11 +306,12 @@ defineExpose({
       @scroll="loadMore"
     >
       <div
-        class="border min-h-[36px] w-full px-3 flex justify-between items-center bg-white cursor-pointer gap-x-3 rounded"
+        class="border min-h-[36px] input-shadow transition-all duration-[250ms] ease-out  w-full px-3 flex justify-between items-center bg-white cursor-pointer gap-x-3 rounded"
         :class="[
           dropdownClasses,
           {
-            'border-oc-error': errorMessage && !isDisabled,
+            'error-shadow': errorMessage && !isDisabled,
+            'focused-shadow': isDropdownOpened && !isDisabled,
             'pointer-events-none !bg-oc-bg-dark': isDisabled,
             'py-3': multiple,
             'border-none !min-h-[30px] !px-0': isTransparent && !isSlim,
@@ -347,7 +348,7 @@ defineExpose({
           <Input
             v-model="query"
             :placeholder="defaultSearchPlaceholder"
-            input-class="!border-none !shadow-none"
+            input-class="border-none !shadow-none"
             :is-readonly="!isDropdownOpened"
             @update:model-value="$emit('onSearchKeywords', query)"
             @keyup.enter="isDropdownOpened = false"

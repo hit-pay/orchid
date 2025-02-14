@@ -8,7 +8,8 @@ export default {
 export const Default = {
   args: {
     title: 'Page Title',
-    description: '',
+    description: '123',
+    isLoading: false,
     primaryButtonProps: {
       leftIcon: 'plus',
       label: 'Primary',
@@ -50,11 +51,7 @@ export const Default = {
     },
     template: `
           <Theme>
-            <PageTitle v-bind="args">
-              <template #description>
-                123
-              </template>
-            </PageTitle>
+            <PageTitle v-bind="args" />
           </Theme>
         `
   })

@@ -198,13 +198,11 @@ const validateAndEmit = () => {
             icon="calendar"
             :label="label"
             :hint="hint"
+            :error-message="errorMessage"
             :is-required="isRequired"
             :disabled="disabled"
             :placeholder="placeholder"
           />
-        </div>
-        <div v-if="errorMessage" class="text-sm text-oc-error flex items-center">
-          {{ errorMessage }}
         </div>
       </template>
       <div v-else class="flex flex-wrap cursor-pointer">
@@ -220,11 +218,11 @@ const validateAndEmit = () => {
             class="rounded justify-between border flex items-center gap-3 h-[36px] px-3"
             :class="[
               errorMessage || isDateInvalid
-                ? 'border-oc-error shadow-oc-error'
-                : 'border-oc-gray-200 shadow-oc-gray-200',
+                ? 'error-shadow'
+                : 'input-shadow',
               disabled ? 'pointer-events-none bg-oc-bg-dark' : 'bg-white',
               {
-                'shadow-[0_0_0_2px]': isDropdownOpened && !disabled
+                'focused-shadow': isDropdownOpened && !disabled
               }
             ]"
             @click="isDropdownOpened ? $event.stopPropagation : null"
