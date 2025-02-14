@@ -117,10 +117,10 @@ defineExpose({
 const isFocused = ref(false)
 const inputClasses = computed(() => [
   {
-    'shadow-[0_0_0_2px]': isFocused.value && !props.isReadonly
+    'focused-shadow': isFocused.value && !props.isReadonly
   },
   !props.disabled && (props.errorMessage || props.hasError)
-    ? 'border-oc-error shadow-oc-error'
+    ? 'error-shadow'
     : 'border-oc-gray-200 shadow-oc-gray-200',
   props.disabled ? 'bg-oc-bg-dark pointer-events-none' : 'bg-oc-bg-light',
   props.inputClass
@@ -152,7 +152,7 @@ const isPasswordInput = computed(() => props.inputType === 'password')
     :tooltip-options="tooltipOptions"
   >
     <div
-      class="rounded h-[36px] border flex items-center gap-x-3 px-3 cursor-pointer"
+      class="rounded h-[36px] border input-shadow flex items-center transition-all ease-out duration-[250ms] gap-x-3 px-3 cursor-pointer"
       :class="inputClasses"
       @click="$refs.inputRef?.focus()"
     >
@@ -230,5 +230,28 @@ const isPasswordInput = computed(() => props.inputType === 'password')
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   display: none;
+}
+.focused-shadow {
+  box-shadow: 0px 0px 0px 3px var(--oc-primary-200), 0px 2px 4px 0px #0000003D inset !important;
+  border-color: var(--oc-primary-500);
+  &.border-none {
+    box-shadow: none !important;
+    border: none !important;
+  }
+}
+.error-shadow {
+  box-shadow: 0px 0px 0px 3px var(--oc-error-200), 0px 2px 4px 0px #0000003D inset !important;
+  border-color: var(--oc-error-500);
+  &.border-none {
+    box-shadow: none !important;
+    border: none !important;
+  }
+}
+.input-shadow {
+  box-shadow: 0px 1.5px 1.5px 0px #00000017, 0px 1px 3px 0px #0000000A;
+  &.border-none {
+    box-shadow: none !important;
+    border: none !important;  
+  }
 }
 </style>
