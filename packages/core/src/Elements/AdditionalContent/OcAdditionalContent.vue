@@ -1,5 +1,5 @@
 <script setup>
-import { Chip, PrimaryActions } from '@/orchidui-core'
+import { Chip, PrimaryActions, Skeleton } from '@/orchidui-core'
 import OcTitle from '@/orchidui-core/Elements/PageTitle/OcTitle.vue'
 import BalanceOverview from './BalanceType/OcBalanceOverview.vue'
 import DynamicType from './DynamicType/OcDynamicType.vue'
@@ -63,13 +63,17 @@ const copyLink = async () => {
       :class="additionalStyling"
     >
       <template #title>
-        <div class="flex items-center gap-x-3">
+        <div v-if="!isLoading" class="flex items-center gap-x-3">
           <span class="font-medium">{{ additionalTitle }}</span>
           <Chip v-if="chipVariant" :variant="chipVariant" :label="chipLabel" />
         </div>
+        <div v-else class="flex h-[24px] items-center gap-x-3">
+          <Skeleton class="w-[200px] h-[18px] rounded" />
+          <Skeleton v-if="chipVariant" class="w-[100px] h-[24px] rounded" />
+        </div>
       </template>
       <template #description>
-        <div class="flex items-center gap-x-2 max-w-full">
+        <div v-if="!isLoading" class="flex items-center gap-x-2 max-w-full">
           <a
             :href="href || `${mainLink}${userId}`"
             target="_blank"
@@ -79,6 +83,13 @@ const copyLink = async () => {
             <div class="text-oc-text whitespace-nowrap">{{ userId }}</div>
           </a>
           <PrimaryActions :primary-actions="primaryActions" @copy="copyLink" />
+        </div>
+        <div v-else class="flex items-center h-[30px] gap-x-2 w-full">
+          <Skeleton class="w-1/2 h-[20px] rounded" />
+          <Skeleton class="w-[30px] h-[24px] rounded" />
+          <Skeleton class="w-[30px] h-[24px] rounded" />
+          <Skeleton class="w-[30px] h-[24px] rounded" />
+          <Skeleton class="w-[30px] h-[24px] rounded" />
         </div>
       </template>
     </OcTitle>

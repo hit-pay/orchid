@@ -94,6 +94,7 @@ const args = {
   mainLink: 'https://securecheckout.staging.hit-pay.com/payment-request',
   userId: '/@minstore-edit43',
   chipVariant: 'success',
+  isLoading: false,
   chipLabel: 'Active',
   additionalTitle: 'Need attention',
   primaryActions: {
@@ -224,6 +225,7 @@ export const Default = {
                 :is-customer="args.isCustomer"
                 :customer="args.customer"
                 :overview-active-tab="args.overviewActiveTab"
+                :is-loading="args.isLoading"
                 @change-tab="args.overviewActiveTab = $event"
             />
           </Theme>

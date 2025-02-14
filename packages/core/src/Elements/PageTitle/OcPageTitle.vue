@@ -14,7 +14,8 @@ defineProps({
   chipProps: Object,
   isCopy: Boolean,
   isBack: { type: Boolean, default: false },
-  isMobileCombineButtons: { type: Boolean, default: false }
+  isMobileCombineButtons: { type: Boolean, default: false },
+  isLoading: { type: Boolean, default: false }
 })
 defineEmits({
   changeTab: [],
@@ -47,6 +48,7 @@ defineEmits({
           :copy-value="copyValue"
           :tooltip-options="tooltipOptions"
           :is-copy="isCopy"
+          :is-loading="isLoading"
           class="flex-1"
         >
           <template v-if="$slots.title" #title>
@@ -61,6 +63,7 @@ defineEmits({
           <PageTitleRight
             class="shrink-0"
             :primary-button-props="primaryButtonProps"
+            :is-loading="isLoading"
             :secondary-button-props="secondaryButtonProps"
           />
         </slot>
