@@ -200,10 +200,9 @@ const isPasswordInput = computed(() => props.inputType === 'password')
 
       <div
         v-if="$slots.leading || isPasswordInput"
-        :class="{
-          'border-l border-gray-200 pl-3 py-3': hasLeadingSeparator
-        }"
+        class="flex items-center h-full"
       >
+        <span v-if="hasLeadingSeparator" class="border-l border-gray-200 pl-3 py-3 h-full" ></span>
         <span
           v-if="!$slots.leading"
           class="text-oc-text-200"

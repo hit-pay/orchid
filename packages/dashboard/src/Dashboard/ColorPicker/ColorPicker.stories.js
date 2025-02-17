@@ -1,4 +1,5 @@
 import { ColorPicker } from '@/orchidui-dashboard'
+import { Icon } from '@/orchidui-core'
 import { computed, ref } from 'vue'
 
 export default {
@@ -8,7 +9,7 @@ export default {
 
 export const Default = {
   render: () => ({
-    components: { ColorPicker },
+    components: { ColorPicker , Icon},
     setup() {
       const modelValue = ref()
       return {
@@ -17,7 +18,11 @@ export const Default = {
     },
     template: `
           <div class="h-[400px]">
-            <ColorPicker v-model="modelValue" :show-opacity="false" />
+            <ColorPicker v-model="modelValue" :show-opacity="false" >
+              <template #leading>
+                <Icon name="paint" />
+              </template>
+            </ColorPicker>
           </div>`
   })
 }
