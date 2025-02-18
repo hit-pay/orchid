@@ -14,7 +14,7 @@
         'overflow-hidden': isSidebarExpanded,
       }"
     >
-      <div class="min-h-0 flex flex-col" :class="isSidebarExpanded ? 'gap-y-2' : 'gap-y-4'">
+      <div class="min-h-0 flex flex-col" :class="isSidebarExpanded ? 'gap-y-3' : 'gap-y-4'">
         <slot />
       </div>
     </div>

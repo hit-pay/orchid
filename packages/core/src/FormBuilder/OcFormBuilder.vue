@@ -50,6 +50,9 @@ const props = defineProps({
     type: Object,
     required: true
   },
+  logicValues: {
+    type: Object
+  },
   previewMode: String // only for store design
 })
 
@@ -176,31 +179,48 @@ const setErrorMessage = () => {
     }
   })
 }
-
+const formLogicValues = computed(() => {
+  return {
+    ...props.logicValues,
+    ...modelValue.value
+  }
+})
 const setFormClass = (form) => {
+ 
   if (form.show_if || form.show_if_preview) {
     let formClassName = form.class ? form.class : ''
 
     if (form.show_if) {
-      // show if by other setting value
       if (form.show_if_value !== undefined) {
-        if (form.show_if_value !== modelValue.value[form.show_if]) {
+        if (Array.isArray(form.show_if_value)) {
+          // show if by other setting value
+          let showThisField = 0
+          form.show_if.forEach((value, arrayIndex) => {
+            if (form.show_if_value[arrayIndex] === formLogicValues.value[form.show_if[arrayIndex]]) {
+              showThisField = showThisField + 1
+            }
+          })
+          if(showThisField < form.show_if.length){
+            formClassName = formClassName + ' hidden'
+          }
+        }else if(form.show_if_value !== formLogicValues.value[form.show_if]) {
           formClassName = formClassName + ' hidden'
         }
       } else if (form.show_if_not !== undefined) {
-        if (form.show_if_not === modelValue.value[form.show_if]) {
+        if (form.show_if_not === formLogicValues.value[form.show_if]) {
           formClassName = formClassName + ' hidden'
         }
       } else if (form.show_if_min !== undefined) {
-        let minValue = isNaN(parseInt(modelValue.value[form.show_if]))
+        let minValue = isNaN(parseInt(formLogicValues.value[form.show_if]))
           ? 1
-          : parseInt(modelValue.value[form.show_if])
+          : parseInt(formLogicValues.value[form.show_if])
 
         if (minValue < parseInt(form.show_if_min)) {
           formClassName = formClassName + ' hidden'
         }
       }
     } else if (form.show_if_preview) {
+      // for store design
       if (form.show_if_preview_only !== undefined) {
         if (form.show_if_preview_only !== props.previewMode) {
           formClassName = formClassName + ' hidden'
@@ -226,6 +246,15 @@ watch(
   () => props.values,
   (newValues) => {
     setModelValues(newValues)
+  },
+  {
+    deep: true
+  }
+)
+watch(
+  () => props.logicValues,
+  () => {
+    setModelValues(props.values)
   },
   {
     deep: true
@@ -260,45 +289,45 @@ onMounted(() => {
     :class="grid ? `responsive-smart-form-grid ${className}` : className"
     :style="grid ? gridDefinitionVariables : ''"
   >
-    <div
-      v-for="form in jsonForm"
-      :key="getFormKey(form.name)"
-      :style="grid ? gridArea(form.name) : ''"
-      :class="[
-        form.type !== 'Children'
-          ? formClass[typeof form.name === 'object' ? getFirstName(form.name) : form.name]
-          : '',
-        form.class
-      ]"
-    >
-      <component
-        :is="getComponentByType(form.type)"
-        v-if="getComponentByType(form.type)"
-        v-bind="form.props"
-        :model-value="
-          form.props?.parentKey
-            ? modelValue?.[form.props.parentKey]?.[form.name]
-            : modelValue[typeof form.name === 'object' ? getFirstName(form.name) : form.name]
-        "
-        :error-message="
-          errorMessage[typeof form.name === 'object' ? getFirstName(form.name) : form.name]
-        "
-        @update:model-value="onUpdate(form, $event)"
-      />
-      <slot
-        v-else
-        :name="form.type"
-        :form-id="id"
-        :form="form"
-        :value="
-          form.props?.parentKey
-            ? modelValue?.[form.props.parentKey]?.[form.name]
-            : modelValue[typeof form.name === 'object' ? getFirstName(form.name) : form.name]
-        "
-        :error="errorMessage[typeof form.name === 'object' ? getFirstName(form.name) : form.name]"
-        :on-update="onUpdate"
-      />
-    </div>
+    <template v-for="form in jsonForm" :key="getFormKey(form.name)">
+      <div
+        :style="grid ? gridArea(form.name) : ''"
+        :class="[
+          form.type !== 'Children'
+            ? formClass[typeof form.name === 'object' ? getFirstName(form.name) : form.name]
+            : '',
+          form.class
+        ]"
+      >
+        <component
+          :is="getComponentByType(form.type)"
+          v-if="getComponentByType(form.type)"
+          v-bind="form.props"
+          :model-value="
+            form.props?.parentKey
+              ? modelValue?.[form.props.parentKey]?.[form.name]
+              : modelValue[typeof form.name === 'object' ? getFirstName(form.name) : form.name]
+          "
+          :error-message="
+            errorMessage[typeof form.name === 'object' ? getFirstName(form.name) : form.name]
+          "
+          @update:model-value="onUpdate(form, $event)"
+        />
+        <slot
+          v-else
+          :name="form.type"
+          :form-id="id"
+          :form="form"
+          :value="
+            form.props?.parentKey
+              ? modelValue?.[form.props.parentKey]?.[form.name]
+              : modelValue[typeof form.name === 'object' ? getFirstName(form.name) : form.name]
+          "
+          :error="errorMessage[typeof form.name === 'object' ? getFirstName(form.name) : form.name]"
+          :on-update="onUpdate"
+        />
+      </div>
+    </template>
   </div>
 </template>
 <style lang="scss">

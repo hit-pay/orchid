@@ -20,7 +20,8 @@ defineProps({
     type: String,
     default: 'link'
   },
-  isDisabled: Boolean,
+  unmovable: Boolean, // general unmovable
+  enableStatusVariant: Boolean,
   classes: {
     type: String,
     default: ''
@@ -53,15 +54,18 @@ const handleEmit = (list, element) => {
       v-for="(element, indexElement) in list"
       :key="element.id"
       class="group text-oc-text-500 p-4 flex flex-col w-full rounded border border-gray-200 cursor-pointer"
-      :class="
+      :class="[
         element[childrenKey]
           ? 'hover:shadow bg-oc-gray-50'
           : isChildren && !isHovered[element.id]
             ? 'bg-oc-accent-1-50'
             : classes
               ? classes
-              : 'hover:shadow bg-oc-accent-1-50 hover:bg-oc-gray-50'
-      "
+              : 'hover:shadow bg-oc-accent-1-50 hover:bg-oc-gray-50',
+        {
+          'bg-oc-gray-100 !text-oc-text-300': !element.active && enableStatusVariant
+        }
+      ]"
       @mouseleave="
         () => {
           isDropdownOpen[element.id] = false
@@ -78,10 +82,12 @@ const handleEmit = (list, element) => {
           <!-- icon -->
           <div
             class="px-2 flex items-center"
-            :class="!isDisabled && !element.isDisable ? 'drag-el cursor-move' : ''"
+            :class="
+              !unmovable && !element.isDisable && !element.unmovable ? 'drag-el cursor-move' : ''
+            "
           >
             <Icon
-              v-if="!isDisabled && !element.isDisable"
+              v-if="!unmovable && !element.isDisable && !element.unmovable"
               name="draggable"
               :class="
                 element[iconKey]
@@ -97,7 +103,7 @@ const handleEmit = (list, element) => {
               v-if="element[iconKey]"
               :name="element[iconKey]"
               :class="
-                !isDisabled && !element.isDisable && isHovered[element.id]
+                !unmovable && !element.isDisable && !element.unmovable && isHovered[element.id]
                   ? 'group-hover:hidden'
                   : ''
               "

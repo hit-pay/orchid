@@ -91,7 +91,7 @@ defineExpose({
       <slot />
     </div>
     <teleport to="body" :disabled="!isAttachToBody">
-      <div ref="popper" :class="popperClass" :style="popperStyle" class="z-[1005]">
+      <div ref="popper" :class="popperClass" :style="popperStyle" class="z-[1007]">
         <slot name="popper" />
       </div>
     </teleport>

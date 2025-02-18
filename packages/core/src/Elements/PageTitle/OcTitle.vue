@@ -1,6 +1,5 @@
-323
 <script setup>
-import { Chip, CopyTooltip, Icon } from '@/orchidui-core'
+import { Chip, CopyTooltip, Icon, Skeleton } from '@/orchidui-core'
 
 defineProps({
   title: { type: String, required: true },
@@ -8,7 +7,8 @@ defineProps({
   copyValue: { type: String, default: '' },
   chipProps: Object,
   tooltipOptions: Object,
-  isCopy: Boolean
+  isCopy: Boolean,
+  isLoading: { type: Boolean, default: false }
 })
 </script>
 
@@ -16,9 +16,13 @@ defineProps({
   <div class="flex text-oc-text justify-center flex-col gap-y-3 max-w-full">
     <div class="md:text-xl font-medium flex items-center gap-x-3">
       <slot name="title">
-        <span class="whitespace-nowrap text-ellipsis overflow-hidden md:text-base lg:text-xl">
+        <span
+          v-if="!isLoading"
+          class="whitespace-nowrap text-ellipsis overflow-hidden md:text-base lg:text-xl"
+        >
           {{ title }}
         </span>
+        <Skeleton v-else class="w-1/2 h-[20px] rounded"></Skeleton>
       </slot>
       <Chip v-if="chipProps" v-bind="chipProps" />
     </div>
@@ -27,9 +31,10 @@ defineProps({
       class="text-oc-text-400 text-sm group flex items-center gap-x-4"
     >
       <slot name="description">
-        <span class="overflow-hidden whitespace-nowrap text-ellipsis">
+        <span v-if="!isLoading" class="overflow-hidden whitespace-nowrap text-ellipsis">
           {{ description }}
         </span>
+        <Skeleton v-else class="w-1/3 h-[18px] rounded"></Skeleton>
       </slot>
 
       <CopyTooltip v-if="isCopy" :value="copyValue" :tooltip-options="tooltipOptions">

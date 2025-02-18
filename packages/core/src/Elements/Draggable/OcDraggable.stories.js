@@ -30,7 +30,8 @@ export const OcDraggableList = {
           icon: 'banner',
           title: '123 Label ',
           isToggle: true,
-          isDisable: true
+          isDisable: true,
+          active: true
         },
         {
           id: '234',
@@ -47,7 +48,8 @@ export const OcDraggableList = {
             {
               id: '123',
               icon: 'banner',
-              title: '123 Label '
+              title: '123 Label ',
+              active: true
             },
             {
               id: '234',

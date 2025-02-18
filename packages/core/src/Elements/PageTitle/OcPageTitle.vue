@@ -14,7 +14,8 @@ defineProps({
   chipProps: Object,
   isCopy: Boolean,
   isBack: { type: Boolean, default: false },
-  isMobileCombineButtons: { type: Boolean, default: false }
+  isMobileCombineButtons: { type: Boolean, default: false },
+  isLoading: { type: Boolean, default: false }
 })
 defineEmits({
   changeTab: [],
@@ -23,8 +24,8 @@ defineEmits({
 </script>
 
 <template>
-  <div class="md:pb-5 pb-4 flex flex-col">
-    <div class="flex flex-col gap-y-3 pt-4 md:pt-5 px-5 md:px-10">
+  <div class="pb-4 flex flex-col">
+    <div class="flex flex-col gap-y-3 pt-4 px-5 md:px-7">
       <Button
         v-if="isBack"
         size="small"
@@ -37,7 +38,7 @@ defineEmits({
         @click="$emit('back')"
       />
       <div
-        class="w-full gap-5"
+        class="w-full gap-5 min-h-[36px]"
         :class="[isMobileCombineButtons ? 'hidden md:flex' : 'flex', titleClass]"
       >
         <OcTitle
@@ -47,6 +48,7 @@ defineEmits({
           :copy-value="copyValue"
           :tooltip-options="tooltipOptions"
           :is-copy="isCopy"
+          :is-loading="isLoading"
           class="flex-1"
         >
           <template v-if="$slots.title" #title>
@@ -61,6 +63,7 @@ defineEmits({
           <PageTitleRight
             class="shrink-0"
             :primary-button-props="primaryButtonProps"
+            :is-loading="isLoading"
             :secondary-button-props="secondaryButtonProps"
           />
         </slot>

@@ -16,6 +16,10 @@ const props = defineProps({
   hideInputColor: Boolean,
   presetColors: {
     type: Array
+  },
+  placement: {
+    type: String,
+    default: 'auto'
   }
 })
 
@@ -99,7 +103,7 @@ const handleClickLastUsedColor = (color) => {
       v-model="isOpen"
       @update:model-value="onCloseDropdown"
       :max-menu-height="800"
-      placement="auto"
+      :placement="placement"
     >
       <Input
         v-if="!hideInputColor"

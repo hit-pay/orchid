@@ -14,6 +14,7 @@ defineProps({
   isCard: Boolean,
   isLoading: Boolean,
   percentValue: Number,
+  tooltipOptions: Object,
   iconWidth: {
     type: String,
     default: '22'
@@ -51,8 +52,9 @@ defineProps({
             </slot>
             <Tooltip
               position="top"
-              :popper-options="{ strategy: 'fixed' }"
+              :popper-options="{ strategy: 'fixed'  }"
               popper-class="rounded-sm"
+              v-bind="tooltipOptions"
             >
               <Icon
                 v-if="info"
@@ -75,7 +77,7 @@ defineProps({
             <Icon v-if="isCard" width="35" name="payment-methods/visa" />
             <span :class="isBig ? 'text-xl' : ''" class="truncate">
               <slot name="content">
-                <div class="flex items-center gap-x-3 overflow-hidden" v-if="!isNaN(percentValue)">
+                <div v-if="!isNaN(percentValue)" class="flex items-center gap-x-3 overflow-hidden">
                   <div class="truncate">{{ content }}</div>
 
                   <Tooltip

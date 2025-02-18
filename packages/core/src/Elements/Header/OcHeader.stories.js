@@ -29,19 +29,22 @@ export const HeaderElement = {
         label: 'Payments',
         value: 'payments',
         sidebarClass: 'layout-payment',
-        path: 'payments'
+        path: 'payments',
+        icon: 'online-payment'
       },
       {
         label: 'Point of Sale',
         value: 'point_of_sale',
         sidebarClass: 'layout-pos',
-        path: 'point_of_sale'
+        path: 'point_of_sale',
+        icon: 'pos'
       },
       {
         label: 'Online Store',
         value: 'online_store',
         sidebarClass: 'layout-online-store',
-        path: 'online_store'
+        path: 'online_store',
+        icon: 'online-store'
       }
     ]
   },

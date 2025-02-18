@@ -1,7 +1,10 @@
 <template>
     <div class="border relative z-10 border-oc-gray-200 shadow-normal bg-white rounded p-2 flex flex-col gap-y-2">
       <div class="py-2 px-3 gap-x-3 flex items-center">
-        <div class="text-oc-warning flex-1">Finish your account ({{ value }}%)</div>
+        <div class="text-base flex-1 font-medium flex items-center gap-x-2">
+          <Icon name="alert-fill" class="text-oc-warning" width="16" height="16" />
+          Finish your account ({{ value }}%)
+        </div>
         <Icon name="arrow-top-right" class="text-oc-text-300 hover:text-oc-text" width="14" height="14" @click="$emit('redirect')" />
       </div>
 

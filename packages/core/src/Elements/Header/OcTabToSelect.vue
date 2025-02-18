@@ -27,13 +27,13 @@ watch(
 onMounted(() => changeCurrentPosition())
 </script>
 <template>
-  <div class="gap-x-7 hidden md:flex relative">
+  <div class="gap-x-9 hidden md:flex relative">
     <div
       v-for="item in menus"
       :key="item.value"
       ref="menuRefs"
-      class="h-[36px] z-10 px-7 transition-all flex items-center justify-center rounded-full text-oc-text-500 hover:text-oc-accent-1 cursor-pointer"
-      :class="[item.value === modelValue ? 'font-medium !text-white' : '']"
+      class="h-9 z-10 pr-4 pl-3 py-2 transition-all flex items-center justify-center gap-x-3 group rounded-full hover:text-oc-text cursor-pointer"
+      :class="[item.value === modelValue ? 'font-medium text-oc-text' : ' text-oc-text-400']"
       @click="
         ($event) => {
           changeCurrentPosition($event)
@@ -42,16 +42,30 @@ onMounted(() => changeCurrentPosition())
         }
       "
     >
+      <Icon
+        :name="`header-icons/${item.icon}`"
+        width="24"
+        height="24"
+        class="group-hover:block"
+        :class="item.value === modelValue ? 'block' : 'hidden'"
+      />
+      <Icon
+        :name="`header-icons/${item.icon}-gray`"
+        width="24"
+        height="24"
+        class="group-hover:hidden"
+        :class="item.value === modelValue ? 'hidden' : 'block'"
+      />
       {{ item.label }}
     </div>
     <div
       ref="currentRef"
       :class="activeMenu.sidebarClass"
-      class="absolute transition-all duration-300 h-[36px] rounded-full min-w-[100px] bg-[var(--oc-sidebar-menu-active-icon-active)]"
+      class="absolute transition-all duration-300 h-9 rounded min-w-[100px] bg-[rgba(0,_0,_0,_0.05)]"
     />
   </div>
   <Dropdown v-model="isDropdownOpened" class="flex md:hidden">
-    <div class="p-3 font-medium text-oc-accent-1-500 flex items-center gap-2">
+    <div class="p-3 font-medium whitespace-normal text-oc-accent-1-500 flex items-center gap-2">
       {{ activeMenu.label }}
       <Icon name="chevron-down" width="20" height="20" />
     </div>
@@ -60,7 +74,7 @@ onMounted(() => changeCurrentPosition())
         <DropdownItem
           v-for="item in menus"
           :key="item.value"
-          class="px-5 py-3"
+          class="px-3"
           :text="item.label"
           :style="{
             borderColor: activeMenu.color
@@ -72,6 +86,7 @@ onMounted(() => changeCurrentPosition())
           ]"
           @click="
             () => {
+              isDropdownOpened = false
               $emit('changePath', item.path)
               $emit('update:modelValue', item.value)
             }

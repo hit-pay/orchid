@@ -442,6 +442,7 @@ export const ShowIfLogic = {
     values: {
       select_product_from: 'all_product',
       limit_feature_product: false,
+      other_value: false,
       slider: 10
     },
     errors: {}
@@ -505,7 +506,15 @@ export const ShowIfLogic = {
           name: 'limit_feature_product',
           type: 'SectionItem',
           props: {
-            title: 'Limit featured products',
+            title: 'Limit product',
+            isToggle: true
+          }
+        },
+        {
+          name: 'other_value',
+          type: 'SectionItem',
+          props: {
+            title: 'Other value',
             isToggle: true
           }
         },
@@ -515,21 +524,31 @@ export const ShowIfLogic = {
           show_if: 'limit_feature_product',
           show_if_value: true,
           props: {
-            label: 'How many featured products do you want to show?',
+            label: 'show if limit product',
             placeholder: 'placeholder'
           }
         },
         {
-          name: 'slider',
-          type: 'Slider',
+          name: 'input_2',
+          type: 'Input',
+          show_if: ['limit_feature_product', 'other_value'],
+          show_if_value: [true, true],
           props: {
-            label: 'How many featured products do you want to show?',
-            minGap: 0,
-            minLimit: 0,
-            maxLimit: 100,
-            type: 'default'
+            label: 'show if limit product & other value?',
+            placeholder: 'placeholder'
           }
         },
+        // {
+        //   name: 'slider',
+        //   type: 'Slider',
+        //   props: {
+        //     label: 'How many featured products do you want to show?',
+        //     minGap: 0,
+        //     minLimit: 0,
+        //     maxLimit: 100,
+        //     type: 'default'
+        //   }
+        // },
         {
           name: 'column',
           type: 'Select',

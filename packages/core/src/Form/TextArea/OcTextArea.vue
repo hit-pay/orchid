@@ -59,8 +59,8 @@ const onInput = (event) => {
     <textarea
       class="outline-none p-3 min-h-[120px] rounded border resize-none disabled:bg-oc-bg-dark"
       :class="[
-        isFocused ? 'shadow-[0_0_0_2px]' : '',
-        errorMessage ? 'border-oc-error shadow-oc-error' : 'border-oc-gray-200 shadow-oc-gray-200'
+        isFocused ? 'focused-shadow' : '',
+        errorMessage ? 'error-shadow' : 'input-shadow'
       ]"
       :disabled="isDisabled"
       :value="modelValue"

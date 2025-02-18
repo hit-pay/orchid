@@ -12,7 +12,7 @@ import {
   Dropdown
 } from '@/orchidui-core'
 
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import dayjs from 'dayjs'
 import ColumnEdit from './ColumnEdit.vue'
 
@@ -57,7 +57,8 @@ const emit = defineEmits({
   'filter-fields-changed': [],
   'filter-removed': [],
   'search-query-changed': [],
-  'hover:cell': []
+  'hover:cell': [],
+  'columns-changed': []
 })
 
 const paginationOption = computed(() => props.options?.pagination)
@@ -69,7 +70,13 @@ const tableOptions = computed(() => props.options?.tableOptions)
 const editedTableOptions = computed(() => ({
   ...tableOptions.value,
   headers: modifiedTableHeaders.value
-    ? modifiedTableHeaders.value.filter((h) => isColumnActive(h.key))
+    ? modifiedTableHeaders.value
+        .map((item) => {
+          item.class = tableOptions.value?.headers.find((h) => h.key === item.key)?.class ?? ''
+
+          return item
+        })
+        .filter((h) => isColumnActive(h.key))
     : tableOptions.value?.headers.filter((h) => isColumnActive(h.key))
 }))
 const filterOptions = computed(() => props.options?.filterOptions)
@@ -192,6 +199,11 @@ const removeAllQueryFilter = () => {
     defaultFilters.tabs = filterTab.value
   }
 
+  if (filterOptions.value?.columnEdit?.key) {
+    defaultFilters[filterOptions.value?.columnEdit?.key] =
+      filterData.value[filterOptions.value?.columnEdit?.key]
+  }
+
   filterData.value = defaultFilters
 
   applyFilter()
@@ -214,7 +226,7 @@ const getFilterFromLocalStorage = () => {
   return null
 }
 
-const applyFilter = (filterFormData = null, isChangePage = false, changeCursor = '') => {
+const applyFilter = (filterFormData = null, isChangePage = false, changeCursor = '', isOnMount = false) => {
   if (paginationOption.value && !isChangePage) {
     currentPage.value = 1
   }
@@ -246,8 +258,21 @@ const applyFilter = (filterFormData = null, isChangePage = false, changeCursor =
       }
     })
   }
+
+  let filterTabKey = filterOptions.value?.tabs?.key
+  if (filterTabKey && filterTab.value !== filterData.value[filterTabKey]) {
+    const selectedTab = filterOptions.value.tabs?.options?.find(
+      (option) => option.value?.toString() === filterData.value[filterTabKey]?.toString()
+    )
+    if (selectedTab?.value) {
+      filterTab.value = selectedTab.value
+      applyFilter()
+      return false
+    }
+  }
+
   saveFilterInLocalStorage()
-  emit('update:filter', filterData.value)
+  emit('update:filter', filterData.value, isOnMount)
 }
 
 const removeFilter = (filter, field) => {
@@ -384,6 +409,7 @@ const updateOrder = ({ fixedHeaders, activeHeaders, isOnMount }) => {
     const data = formatHeadersToLocalStorage(fixedHeaders, activeHeaders)
     setInLocalStorage(filterOptions.value.columnEdit.localStorageKey, data)
   }
+  emit('columns-changed', activeHeaders)
 }
 const setOrderedHeaders = () => {
   if (filterOptions.value?.columnEdit?.localStorageKey) {
@@ -402,15 +428,6 @@ const setOrderedHeaders = () => {
   }
 }
 
-watch(
-  () => props.filter,
-  (filter) => {
-    if (filter && filter[filterOptions.value.tabs.key]) {
-      filterTab.value = filter[filterOptions.value.tabs.key]
-    }
-  }
-)
-
 onMounted(() => {
   setOrderedHeaders()
   const filterFromLocalStorage = getFilterFromLocalStorage()
@@ -423,12 +440,12 @@ onMounted(() => {
 
     currentPage.value = filterData.value?.page || 1
 
-    applyFilter(null, true, filterData.value.cursor)
+    applyFilter(null, true, filterData.value.cursor, true)
   }
 })
 </script>
 <template>
-  <div class="flex flex-col gap-9 relative">
+  <div class="relative flex flex-col gap-9">
     <Table
       v-if="tableOptions"
       :selected="selected"
@@ -453,10 +470,10 @@ onMounted(() => {
           v-if="filterOptions?.search || filterOptions?.form || filterOptions?.tabs"
           class="flex items-center px-4 min-h-[52px]"
         >
-          <div v-if="showBulkAction" class="flex gap-5 items-center absolute left-5">
+          <div v-if="showBulkAction" class="absolute flex items-center gap-5 left-5">
             <slot name="bulk-actions" :selected-rows="selected" />
           </div>
-          <div v-else class="flex gap-3 absolute left-5">
+          <div v-else class="absolute flex gap-3 left-5">
             <Tabs
               v-if="filterOptions?.tabs"
               v-model="filterTab"
@@ -556,7 +573,7 @@ onMounted(() => {
     <slot name="before-pagination"></slot>
     <div
       v-if="paginationOption || cursorOption"
-      class="flex gap-3 items-center"
+      class="flex items-center gap-3"
       :class="paginationOption && paginationOption.last_page === 1 ? 'justify-end' : ''"
     >
       <Pagination
@@ -568,7 +585,7 @@ onMounted(() => {
         total-visible="5"
         @update:model-value="changePage"
       />
-      <div v-if="cursorOption" class="flex w-full gap-5 md:justify-start justify-center">
+      <div v-if="cursorOption" class="flex justify-center w-full gap-5 md:justify-start">
         <PrevNext
           :disabled="!cursorOption.prev"
           @click="cursorOption.prev ? applyFilter(null, false, cursorOption.prev) : null"
@@ -579,7 +596,7 @@ onMounted(() => {
           @click="cursorOption.next ? applyFilter(null, false, cursorOption.next) : null"
         />
       </div>
-      <div v-if="!hidePerPageDropdown" class="hidden md:flex items-center">
+      <div v-if="!hidePerPageDropdown" class="items-center hidden md:flex">
         <Select
           v-model="perPage"
           label="Item per page"

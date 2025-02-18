@@ -1,9 +1,9 @@
 <template>
  <div v-click-outside="onClickOutside"  class="relative" >
-  <Tooltip position="right" :distance="10" :popper-options="{ strategy: 'fixed' }" class="w-full" >
+  <Tooltip position="right" arrow-hidden :distance="10" :popper-options="{ strategy: 'fixed' }" class="w-full" >
     <div
     ref="menuItemRef"
-    class="py-2 px-3 z gap-x-3 flex items-center rounded hover:bg-[var(--oc-sidebar-menu-active)]"
+    class="py-2 px-3 gap-x-4 flex items-center rounded hover:bg-[var(--oc-sidebar-menu-active)]"
     :class="{ 
       'bg-[var(--oc-sidebar-menu-active)]': isActive, 
       'w-full': isExpanded 
@@ -20,7 +20,15 @@
        }"
     />
     
-    <span v-if="isExpanded" class="leading-[21px]">{{ label }}</span>
+    <span v-if="isExpanded" class="leading-[21px] flex-1" :class="{ 'font-medium': isActive }">{{ label }}</span>
+    <Icon 
+      v-if="isExpanded && isChildren"
+      name="triangle-down" 
+      width="10" 
+      height="10" 
+      class="text-oc-accent-1-500"
+      :class="{ 'rotate-0 opacity-25': isMenuExpanded, '-rotate-90 opacity-15': !isMenuExpanded }" 
+    />
   </div>
   <template v-if="!isExpanded" #popper>
     <div class="py-2 whitespace-nowrap px-3 text-sm text-oc-text-400 font-medium">
@@ -45,7 +53,7 @@
   <div
     v-if="!isExpanded && isMenuExpanded"
     ref="menuRef"
-   class="z-[1005] p-2 flex flex-col gap-y-1 min-w-[162px] shadow-normal bg-white rounded"
+   class="z-[1007] p-2 flex flex-col gap-y-1 min-w-[162px] shadow-normal bg-white rounded"
    @click.stop
   >
     <slot />
@@ -64,7 +72,8 @@ const props = defineProps({
   label: String,
   isActive: Boolean,
   isExpanded: Boolean,
-  isMenuExpanded: Boolean
+  isMenuExpanded: Boolean,
+  isChildren: Boolean
 })
 
 const menuItemRef = ref(null)

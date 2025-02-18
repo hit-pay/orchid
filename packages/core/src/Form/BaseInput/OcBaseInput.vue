@@ -13,13 +13,13 @@ defineProps({
 </script>
 
 <template>
-  <div class="flex flex-col gap-y-2 w-full">
+  <div class="flex flex-col w-full gap-y-2">
     <label
       v-if="label"
-      class="text-sm flex items-center gap-x-3 font-medium text-oc-text-400"
+      class="flex items-center text-sm font-medium gap-x-3 text-oc-text-400"
       :class="labelClass"
     >
-      <span class="flex gap-x-1 items-center">
+      <span class="flex items-center gap-x-1">
         {{ label }}
         <span v-if="isRequired" class="text-oc-error">*</span>
       </span>
@@ -37,13 +37,13 @@ defineProps({
     <slot />
     <div
       v-if="(hint || $slots.hint) && !errorMessage"
-      class="text-sm flex items-center text-oc-text-400"
+      class="flex items-center text-sm text-oc-text-400"
     >
       <slot name="hint">
         {{ hint }}
       </slot>
     </div>
-    <div v-if="errorMessage" class="text-sm text-oc-error flex items-center">
+    <div v-if="errorMessage" class="flex items-center text-sm text-oc-error">
       {{ errorMessage }}
     </div>
   </div>
