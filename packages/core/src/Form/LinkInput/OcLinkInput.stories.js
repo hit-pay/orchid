@@ -19,7 +19,10 @@ export const Default = {
     isInlineLabel: false,
     isDisabled: false,
     label: 'Enter Username',
-    errorMessage: '',
+    errorMessages: {
+      link: 'error',
+      title: 'error'
+    },
     isRequired: false,
     labelIcon: '',
     tooltipText: 'Tooltip text',
@@ -89,7 +92,7 @@ export const Default = {
                   :hint="args.hint"
                   :links="args.links"
                   :placeholder="args.placeholder"
-                  :error-message="args.errorMessage"
+                  :error-messages="args.errorMessages"
                   :isRequired="args.isRequired"
                   :tooltip-options="args.tooltipOptions"
                   :label-icon="args.labelIcon"

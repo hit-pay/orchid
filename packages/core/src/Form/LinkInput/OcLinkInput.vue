@@ -6,7 +6,13 @@ const props = defineProps({
   placeholder: String,
   hint: String,
   label: String,
-  errorMessage: String,
+  errorMessages: {
+    type: Object,
+    default: () => ({
+      link: '',
+      title: ''
+    })
+  },
   isInlineLabel: Boolean,
   isDisabled: Boolean,
   modelValue: String,
@@ -80,13 +86,13 @@ const isOtherLink = computed(() => selectedLinkType.value === 'link')
       class="mb-3"
       label="Title"
       placeholder="Title"
-      :error-message="errorMessage ? ' ' : ''"
+      :error-message="errorMessages.title"
       @update:model-value="$emit('update:title', $event)"
     />
     <Input
       :placeholder="placeholderInput"
       :label="selectedLinkType === 'link' ? 'Link' : label"
-      :error-message="errorMessage"
+      :error-message="errorMessages.link"
       :is-inline-label="isInlineLabel"
       :disabled="isDisabled"
       :hint="hint"
@@ -100,7 +106,7 @@ const isOtherLink = computed(() => selectedLinkType.value === 'link')
     >
       <template #trailing>
         <Dropdown v-model="isDropdownOpened" :distance="10">
-          <div class="flex text-oc-text-400 items-center gap-x-2">
+          <div class="flex items-center text-oc-text-400 gap-x-2">
             <Icon
               v-if="selectedLinkTypeProps.icon"
               width="20"
@@ -117,11 +123,11 @@ const isOtherLink = computed(() => selectedLinkType.value === 'link')
           </div>
 
           <template #menu>
-            <div v-if="!isEdit" class="flex flex-col p-2 py-3 gap-2">
+            <div v-if="!isEdit" class="flex flex-col gap-2 p-2 py-3">
               <div
                 v-for="link in links"
                 :key="link.value"
-                class="flex rounded-sm items-center px-3 py-2 gap-x-3 cursor-pointer text-oc-text-400 hover:bg-gray-50"
+                class="flex items-center px-3 py-2 rounded-sm cursor-pointer gap-x-3 text-oc-text-400 hover:bg-gray-50"
                 @click="updateLinkType(link.value)"
               >
                 <Icon width="20" height="20" :name="link.icon" />

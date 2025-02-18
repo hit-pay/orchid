@@ -68,7 +68,8 @@ const props = defineProps({
   isClearable: Boolean,
   searchKeywords: String,
   isLoading: Boolean,
-  menuClasses: String
+  menuClasses: String,
+  dropdownClasses: String
 })
 
 const emit = defineEmits({
@@ -289,9 +290,11 @@ defineExpose({
       ref="dropdownRef"
       v-model="isDropdownOpened"
       class="w-full"
-      :class="{
-        '!bg-transparent': isTransparent
-      }"
+      :class="[
+        {
+          '!bg-transparent': isTransparent
+        }
+      ]"
       :distance="4"
       popper-class="w-full"
       placement="bottom-end"
@@ -303,14 +306,18 @@ defineExpose({
       @scroll="loadMore"
     >
       <div
-        class="border min-h-[36px] w-full px-3 flex justify-between items-center bg-white cursor-pointer gap-x-3 rounded"
-        :class="{
-          'border-oc-error': errorMessage && !isDisabled,
-          'pointer-events-none !bg-oc-bg-dark': isDisabled,
-          'py-3': multiple,
-          'border-none !min-h-[30px] !px-0': isTransparent && !isSlim,
-          'border-none !min-h-[18px] !px-0': isSlim
-        }"
+        class="border min-h-[36px] input-shadow transition-all duration-[250ms] ease-out  w-full px-3 flex justify-between items-center bg-white cursor-pointer gap-x-3 rounded"
+        :class="[
+          dropdownClasses,
+          {
+            'error-shadow': errorMessage && !isDisabled,
+            'focused-shadow': isDropdownOpened && !isDisabled,
+            'pointer-events-none !bg-oc-bg-dark': isDisabled,
+            'py-3': multiple,
+            'border-none !min-h-[30px] !px-0': isTransparent && !isSlim,
+            'border-none !min-h-[18px] !px-0': isSlim
+          }
+        ]"
       >
         <div v-if="multiple" class="flex flex-wrap gap-2 overflow-hidden">
           <slot name="selection">
@@ -341,7 +348,7 @@ defineExpose({
           <Input
             v-model="query"
             :placeholder="defaultSearchPlaceholder"
-            input-class="!border-none !shadow-none"
+            input-class="border-none !shadow-none"
             :is-readonly="!isDropdownOpened"
             @update:model-value="$emit('onSearchKeywords', query)"
             @keyup.enter="isDropdownOpened = false"
@@ -361,7 +368,9 @@ defineExpose({
             <span v-if="localValueOption" class="truncate">
               {{ localValueOption.label }}
             </span>
-            <span v-else class="text-oc-text-300">{{ placeholder }}</span>
+            <span v-else :class="!dropdownClasses ? 'text-oc-text-300' : ''">{{
+              placeholder
+            }}</span>
           </span>
         </template>
         <Icon
@@ -374,8 +383,11 @@ defineExpose({
         />
         <Icon
           v-if="!hideChevron"
-          class="w-5 h-5 text-oc-text-400 transition-all shrink-0 duration-500"
-          :class="isDropdownOpened && '-rotate-180'"
+          class="w-5 h-5 transition-all shrink-0 duration-500"
+          :class="{
+            '-rotate-180': isDropdownOpened,
+            'text-oc-text-400': !dropdownClasses
+          }"
           name="chevron-down"
         />
       </div>

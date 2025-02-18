@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-oc-bg px-3 md:px-[40px] border-b border-oc-gray-200 h-[68px] w-full flex items-center"
+    class="md:pr-9 md:pl-7 pr-5 pl-5 md:h-[55px] h-[72px] w-full flex"
   >
     <slot />
   </div>
