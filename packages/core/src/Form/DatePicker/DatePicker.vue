@@ -88,6 +88,10 @@ const props = defineProps({
   shortcuts: {
     type: Array,
     default: () => []
+  },
+  placement: {
+    type: String,
+    default: 'bottom-start'
   }
 })
 
@@ -176,7 +180,7 @@ const validateAndEmit = () => {
   <Dropdown
     v-model="isDropdownOpened"
     :is-disabled="disabled"
-    placement="bottom-start"
+    :placement="placement"
     :distance="10"
     class="w-full"
   >
@@ -217,9 +221,7 @@ const validateAndEmit = () => {
           <div
             class="rounded justify-between border flex items-center gap-3 h-[36px] px-3"
             :class="[
-              errorMessage || isDateInvalid
-                ? 'error-shadow'
-                : 'input-shadow',
+              errorMessage || isDateInvalid ? 'error-shadow' : 'input-shadow',
               disabled ? 'pointer-events-none bg-oc-bg-dark' : 'bg-white',
               {
                 'focused-shadow': isDropdownOpened && !disabled
