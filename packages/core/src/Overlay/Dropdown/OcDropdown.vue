@@ -25,9 +25,7 @@ const props = defineProps({
   },
   popperOptions: {
     type: Object,
-    default: () => ({
-      strategy: 'fixed'
-    })
+    default: () => ({})
   },
   maxMenuHeight: Number,
   popperStyle: Object,
