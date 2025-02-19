@@ -1,7 +1,7 @@
 <script setup>
 import { Popper } from '@/orchidui-core'
 import { clickOutside as vClickOutside } from '../../directives/clickOutside.js'
-import { ref, watch } from 'vue' // Import the directive
+import { ref, watch, onMounted } from 'vue' // Import the directive
 
 const emit = defineEmits({
   'update:modelValue': [],
@@ -25,9 +25,7 @@ const props = defineProps({
   },
   popperOptions: {
     type: Object,
-    default: () => ({
-      strategy: 'fixed'
-    })
+    default: () => ({})
   },
   maxMenuHeight: Number,
   popperStyle: Object,
@@ -82,6 +80,14 @@ defineExpose({
   toggleDropdown,
   popper
 })
+
+const isFixed = ref(false)
+
+onMounted(() => {
+  if(parentElement.value.closest('#modal-overlay-wrapper')) {
+    isFixed.value = true
+  }
+})
 </script>
 
 <template>
@@ -93,7 +99,7 @@ defineExpose({
       :popper-class="popperClass"
       :skidding="skidding"
       :popper-style="popperStyle"
-      :popper-options="popperOptions"
+      :popper-options="{...popperOptions, strategy: isFixed ? 'fixed' : 'absolute'}"
       :is-attach-to-body="isAttachToBody"
     >
       <div class="w-[inherit] flex" @click="toggleDropdown">
