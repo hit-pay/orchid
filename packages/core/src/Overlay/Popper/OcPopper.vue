@@ -47,7 +47,10 @@ const getPopperOptions = () => ({
   modifiers: [
     {
       name: 'flip',
-      enabled: props.isFlipEnabled
+      enabled: props.isFlipEnabled,
+      options: {
+        allowedAutoPlacements: ['top', 'bottom']
+      }
     },
     {
       name: 'offset',
