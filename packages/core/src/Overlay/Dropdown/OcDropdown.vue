@@ -39,11 +39,8 @@ const dropdownScroll = ref()
 const toggleDropdown = async (e) => {
   if (!e?.target) return
   if (props.isDisabled) return
-  // Need to add a timeout because the popup position cannot be determined while the element is display:none (v-show), which is required for the appearance animation
-  setTimeout(() => {
-    popper.value?.popperInstance?.update()
-    emit('update:modelValue', !props.modelValue)
-  }, 30)
+ 
+  emit('update:modelValue', !props.modelValue)
 }
 const onClickOutside = (e) => {
   if (
@@ -75,7 +72,21 @@ const getMaxHeightWithoutOverflow = async () => {
   popper.value.popperInstance.update()
 }
 
-watch(() => props.modelValue, getMaxHeightWithoutOverflow)
+const _timeout_update_popper = ref(null)
+const _timeout_get_max_height = ref(null)
+
+watch(() => props.modelValue, () => {
+   // Need to add a timeout because the popup position cannot be determined while the element is display:none (v-show), which is required for the appearance animation
+  clearTimeout(_timeout_update_popper.value)
+  _timeout_update_popper.value = setTimeout(() => {
+    popper.value.popperInstance.update()
+   }, 10)
+  // check overflow
+   clearTimeout(_timeout_get_max_height.value)
+   _timeout_get_max_height.value = setTimeout(() => {
+    getMaxHeightWithoutOverflow()
+   }, 30)
+})
 
 defineExpose({
   dropdownScroll,
