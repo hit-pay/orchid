@@ -1,7 +1,7 @@
 <script setup>
 import { Popper } from '@/orchidui-core'
 import { clickOutside as vClickOutside } from '../../directives/clickOutside.js'
-import { ref, watch } from 'vue' // Import the directive
+import { ref, watch, onMounted } from 'vue' // Import the directive
 
 const emit = defineEmits({
   'update:modelValue': [],
@@ -25,9 +25,7 @@ const props = defineProps({
   },
   popperOptions: {
     type: Object,
-    default: () => ({
-      strategy: 'fixed'
-    })
+    default: () => ({})
   },
   maxMenuHeight: Number,
   popperStyle: Object,
@@ -42,8 +40,10 @@ const toggleDropdown = async (e) => {
   if (!e?.target) return
   if (props.isDisabled) return
   // Need to add a timeout because the popup position cannot be determined while the element is display:none (v-show), which is required for the appearance animation
-  setTimeout(() => popper.value?.popperInstance?.update(), 10)
-  emit('update:modelValue', !props.modelValue)
+  setTimeout(() => {
+    popper.value?.popperInstance?.update()
+    emit('update:modelValue', !props.modelValue)
+  }, 30)
 }
 const onClickOutside = (e) => {
   if (
@@ -82,6 +82,14 @@ defineExpose({
   toggleDropdown,
   popper
 })
+
+const isFixed = ref(false)
+
+onMounted(() => {
+  if (parentElement.value.closest('#modal-overlay-wrapper')) {
+    isFixed.value = true
+  }
+})
 </script>
 
 <template>
@@ -93,7 +101,10 @@ defineExpose({
       :popper-class="popperClass"
       :skidding="skidding"
       :popper-style="popperStyle"
-      :popper-options="popperOptions"
+      :popper-options="{
+        ...popperOptions,
+        strategy: isFixed ? 'fixed' : popperOptions.strategy || 'absolute'
+      }"
       :is-attach-to-body="isAttachToBody"
     >
       <div class="w-[inherit] flex" @click="toggleDropdown">

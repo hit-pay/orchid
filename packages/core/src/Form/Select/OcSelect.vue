@@ -60,9 +60,7 @@ const props = defineProps({
   },
   popperOptions: {
     type: Object,
-    default: () => ({
-      strategy: 'fixed'
-    })
+    default: () => ({})
   },
   isInlineSearch: Boolean,
   isClearable: Boolean,
