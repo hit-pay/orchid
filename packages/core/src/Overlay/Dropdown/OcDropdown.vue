@@ -79,7 +79,15 @@ watch(() => props.modelValue, () => {
    // Need to add a timeout because the popup position cannot be determined while the element is display:none (v-show), which is required for the appearance animation
   clearTimeout(_timeout_update_popper.value)
   _timeout_update_popper.value = setTimeout(() => {
-    popper.value.popperInstance.update()
+    const instance = popper.value?.popperInstance;
+    const popperElement = instance?.state?.elements?.popper;
+    instance?.update(); // Make sure the popper instance is updated
+
+    if(popperElement){
+      if(props.modelValue) {
+        popperElement.removeAttribute('data-popper-reference-hidden');
+      }
+    }
    }, 10)
   // check overflow
    clearTimeout(_timeout_get_max_height.value)
