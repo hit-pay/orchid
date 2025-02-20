@@ -86,7 +86,7 @@ defineExpose({
 const isFixed = ref(false)
 
 onMounted(() => {
-  if(parentElement.value.closest('#modal-overlay-wrapper')) {
+  if (parentElement.value.closest('#modal-overlay-wrapper')) {
     isFixed.value = true
   }
 })
@@ -101,7 +101,10 @@ onMounted(() => {
       :popper-class="popperClass"
       :skidding="skidding"
       :popper-style="popperStyle"
-      :popper-options="{...popperOptions, strategy: isFixed ? 'fixed' : 'absolute'}"
+      :popper-options="{
+        ...popperOptions,
+        strategy: isFixed ? 'fixed' : popperOptions.strategy || 'absolute'
+      }"
       :is-attach-to-body="isAttachToBody"
     >
       <div class="w-[inherit] flex" @click="toggleDropdown">
