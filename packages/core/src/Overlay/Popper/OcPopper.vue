@@ -76,8 +76,8 @@ onMounted(() => {
 watch(
   () => [props.popperOptions, props.placement, props.distance, props.skidding],
   () => {
-    popperInstance.value.setOptions(getPopperOptions())
-    popperInstance.value.update()
+    popperInstance.value?.setOptions(getPopperOptions())
+    popperInstance.value?.update()
   },
   { deep: true }
 )
