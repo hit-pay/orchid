@@ -111,7 +111,7 @@ onMounted(() => {
         <slot />
       </div>
       <template #popper>
-        <Transition name="fade">
+        <Transition name="dropdown-fade">
           <div
             v-show="modelValue"
             ref="dropdownScroll"
@@ -131,13 +131,13 @@ onMounted(() => {
 </template>
 
 <style scoped lang="scss">
-.fade-enter-active,
-.fade-leave-active {
+.dropdown-fade-enter-active,
+.dropdown-fade-leave-active {
   transition: opacity 0.3s ease;
 }
 
-.fade-enter-from,
-.fade-leave-to {
+.dropdown-fade-enter-from,
+.dropdown-fade-leave-to {
   opacity: 0;
 }
 </style>
