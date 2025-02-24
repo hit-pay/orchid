@@ -134,7 +134,7 @@ const inputAttrs = computed(() => {
     inputAttributes.pattern = props.pattern
   }
 
-  return { inputAttributes, ...rest }
+  return { ...inputAttributes, ...rest }
 })
 
 const isPasswordInput = computed(() => props.inputType === 'password')
