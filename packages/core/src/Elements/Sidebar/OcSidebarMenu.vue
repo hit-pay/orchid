@@ -21,6 +21,12 @@
     />
     
     <span v-if="isExpanded" class="leading-[21px] flex-1" :class="{ 'font-medium': isActive }">{{ label }}</span>
+    <div v-if="isBeta" class="bg-oc-warning text-white shrink-0 py-1 px-3 rounded-sm uppercase text-xs font-medium">
+      BETA
+    </div>
+    <div v-if="isNew" class="bg-oc-accent-2 text-white shrink-0 py-1 px-3 rounded-sm uppercase text-xs font-medium">
+      NEW
+    </div>
     <Icon 
       v-if="isExpanded && isChildren"
       name="triangle-down" 
@@ -73,7 +79,9 @@ const props = defineProps({
   isActive: Boolean,
   isExpanded: Boolean,
   isMenuExpanded: Boolean,
-  isChildren: Boolean
+  isChildren: Boolean,
+  isBeta: Boolean,
+  isNew: Boolean
 })
 
 const menuItemRef = ref(null)
