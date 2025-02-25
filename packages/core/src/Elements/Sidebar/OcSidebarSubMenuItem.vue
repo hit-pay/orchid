@@ -13,6 +13,9 @@
     <div v-if="isBeta" class="bg-oc-warning text-white shrink-0 py-1 px-3 rounded-sm uppercase text-xs font-medium">
       BETA
     </div>
+    <div v-if="isNew" class="bg-oc-accent-2 text-white shrink-0 py-1 px-3 rounded-sm uppercase text-xs font-medium">
+      NEW
+    </div>
   </div>
 </template>
 
@@ -21,6 +24,7 @@ defineProps({
   label: String,
   isActive: Boolean,
   isBeta: Boolean,
+  isNew: Boolean,
   isExpanded: Boolean
 })
 </script>

@@ -95,6 +95,8 @@ onMounted(() => {
             :is-children="!!menu.children"
             :is-active="menu.active || (menu.children && menu.children?.some(child => child.active))"
             :is-expanded="isExpanded"
+            :is-new="menu.isNew"
+            :is-beta="menu.isBeta"
             :is-menu-expanded="state.expanded.includes(menu.name)"
             @click="expandOrRedirect(menu)"
             @close-menu="expandMenu(menu.name)"
@@ -106,6 +108,8 @@ onMounted(() => {
                 :icon="submenu.icon" 
                 :label="submenu.label" 
                 :is-active="submenu.active" 
+                :is-new="submenu.isNew"
+                :is-beta="submenu.isBeta"
                 :is-expanded="isExpanded"
                 @click="$emit('redirect', submenu)"
               />
