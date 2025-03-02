@@ -83,10 +83,11 @@ export const Files = {
         `
   })
 }
+
 export const MultipleImages = {
   args: {
     accept: '',
-    maxSize: 5,
+    maxImages: 4,
     hint: 'The optimal product image size is at least 800x800 px. PNG and JPG format is supported.',
     label: 'label example',
     errorMessage: '',
@@ -105,13 +106,13 @@ export const MultipleImages = {
             link: 'https://test-link.com'
           }
         },
-        {
-          current: {
-            id: 'image_2',
-            path: 'https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/products/small/99a6b905ea094d48bde25dc0c0eaa840.jpg',
-            caption: 'Image 2'
-          }
-        }
+        // {
+        //   current: {
+        //     id: 'image_2',
+        //     path: 'https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/products/small/99a6b905ea094d48bde25dc0c0eaa840.jpg',
+        //     caption: 'Image 2'
+        //   }
+        // }
       ])
       const selectedImage = ref()
       const onRemoveFile = (currentFile) => {
@@ -131,7 +132,7 @@ export const MultipleImages = {
             v-model:selectedImage="selectedImage"
             :accept="args.accept"
             :hint="args.hint"
-            :max-size="5"
+            :maxImages="args.maxImages"
             :label="args.label"
             :important="true"
             :error-message="args.errorMessage"
