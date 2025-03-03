@@ -3,7 +3,7 @@ import Quill from 'quill'
 import { QuillEditor } from './QuillEditor'
 import { ColorPicker } from '@/orchidui-dashboard'
 
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { BaseInput, Icon, Dropdown, Slider, Modal, Select } from '@orchidui/core'
 
 const props = defineProps({
@@ -121,6 +121,7 @@ const loaded = ref(false)
 const base64Images = ref(props.image)
 
 const checkStates = (value) => {
+  
   isUndoActive.value = quill.value.getQuill().history.stack.undo.length > 0
   isRedoActive.value = quill.value.getQuill().history.stack.redo.length > 0
   isBoldActive.value = quill.value.getQuill().getFormat().bold
@@ -337,6 +338,12 @@ const insertTable = () => {
   tableModule.insertTable(parseInt(tableRow.value), parseInt(tableCell.value))
   tableModal.value = false
 }
+
+watch(() => props.modelValue, (val) => {
+  if(!val) {
+    quill.value.getQuill().setContents([])
+  }
+})
 </script>
 
 <template>
