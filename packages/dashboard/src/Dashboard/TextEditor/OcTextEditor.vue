@@ -121,6 +121,7 @@ const loaded = ref(false)
 const base64Images = ref(props.image)
 
 const checkStates = (value) => {
+  console.log(value, 123);
   
   isUndoActive.value = quill.value.getQuill().history.stack.undo.length > 0
   isRedoActive.value = quill.value.getQuill().history.stack.redo.length > 0
@@ -341,7 +342,7 @@ const insertTable = () => {
 
 watch(() => props.modelValue, (val) => {
   if(!val) {
-    quill.value.getQuill().setContents([])
+    quill.value.getQuill().setContents([], 'silent')
   }
 })
 </script>

@@ -41,7 +41,7 @@ export const Default = {
   render: (args) => ({
     components: { TextEditor, Theme },
     setup() {
-      const modelValue = ref('default model value')
+      const modelValue = ref('')
       const onUpdateImage = () => {
         // console.log(base64);
       }
@@ -49,6 +49,10 @@ export const Default = {
     },
     template: `
           <Theme>
+
+            <div @click="modelValue = ''">Clear</div>
+            <div @click="modelValue = 'default model value'">Reset</div>
+
             <TextEditor id="quill-example" v-model="modelValue" v-bind="args" @update:image="onUpdateImage"/>
 
             <div class="flex gap-y-6 flex-col mt-8">Preview
