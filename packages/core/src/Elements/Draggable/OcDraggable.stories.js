@@ -10,7 +10,7 @@ export default {
 }
 
 const args = {
-  classes: 'hover:shadow bg-oc-background-light hover:bg-oc-accent-1-50'
+  classes: 'hover:shadow bg-oc-bg-light hover:bg-oc-accent-1-50'
 }
 
 export const OcDraggableList = {

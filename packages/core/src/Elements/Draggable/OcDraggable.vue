@@ -28,6 +28,7 @@ const detectMove = (event) => {
     handle=".drag-el"
     :list="list"
     :animation="500"
+    :force-fallback="true"
     :move="detectMove"
     @change="onChange"
   >
@@ -38,5 +39,14 @@ const detectMove = (event) => {
 <style>
 .grabbing * {
   cursor: grabbing;
+}
+
+body:has(.sortable-chosen) * {
+  user-select: none;
+  cursor: grabbing !important;
+}
+
+.drag-el {
+  cursor: grab !important;
 }
 </style>
