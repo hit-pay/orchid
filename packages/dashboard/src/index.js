@@ -26,15 +26,3 @@ export {
   LottieAnimation,
   CodeBlock
 }
-
-// all components :
-// OnboardingProgressbar
-// TextEditor
-// ColorPicker
-// ColorPickerPopup
-// CodeBlock
-// Card
-// BarChart
-// BarRaceChart
-// LineChart
-// PieChart
