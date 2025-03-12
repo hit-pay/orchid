@@ -21,7 +21,8 @@ const props = defineProps({
     default: 3
   },
   inputOptions: Array,
-  maxImages: Number
+  maxImages: Number,
+  isDisabled: Boolean
 })
 const emit = defineEmits([
   'change',
@@ -129,16 +130,18 @@ const editSelectedImage = (i, img) => {
         type="file"
         :accept="accept || 'image/png, image/jpeg'"
         :multiple="props.maxImages !== 1"
+        :disabled="isDisabled"
         @change="onChange"
       />
     </label>
     <Draggable
       :key="uploadedImages.length"
       :model-value="uploadedImages"
+      :disabled="isDisabled"
       filter="filtered-el"
       class="grid w-fit grid-cols-3 gap-3"
       :style="`grid-template-columns: repeat(${columnsCount}, 1fr)`"
-      @update:model-value="$emit('update:uploadedImages', $event)"
+      @update:model-value="isDisabled ? null : $emit('update:uploadedImages', $event)"
     >
       <template #default="{ list }">
         <div
@@ -147,12 +150,13 @@ const editSelectedImage = (i, img) => {
           class="w-[100px] group relative cursor-pointer aspect-square border rounded border-oc-accent-1-100 bg-cover bg-center"
           :class="{
             'border-oc-primary': selectedImage.fileName === img.fileName,
-            'col-start-2': i === 0 && showAddBtn
+            'col-start-2': i === 0 && showAddBtn,
           }"
           :style="`background-image: url(${img.fileUrl})`"
           @click="$emit('update:selectedImage', img)"
         >
           <Dropdown
+            v-if="!isDisabled"
             v-model="isDropdownOpen[i]"
             placement="bottom-end"
             class="absolute top-2 right-2 z-[1010] hidden group-hover:flex"
@@ -202,6 +206,7 @@ const editSelectedImage = (i, img) => {
             </div>
           </div>
           <div
+            v-if="!isDisabled"
             class="z-[1009] hidden group-hover:flex absolute bg-black/30 w-full h-full top-0 left-0 rounded"
           >
             <span v-if="props.maxImages !== 1" class="cursor-pointer m-auto drag-el">

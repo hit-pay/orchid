@@ -115,6 +115,7 @@ const triggerInput = () => {
         :accept="accept"
         :input-options="inputOptions"
         :max-images="maxImages"
+        :is-disabled="isDisabled"
         @change="onChangeFile"
         @update:selected-image="$emit('update:selectedImage', $event)"
         @update:uploaded-images="

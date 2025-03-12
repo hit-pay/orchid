@@ -48,11 +48,12 @@ const preventEventIfNotNumberInput = (event) => {
     :tooltip-text="tooltipText"
   >
     <div
-      class="flex justify-between gap-x-3 h-[36px] items-center border rounded px-1"
+      class="flex justify-between gap-x-3 h-[36px] items-center number-input-initial-shadow border rounded px-1"
       :class="[
         inputClass,
         isDisabled ? 'bg-oc-bg-dark' : '',
-        errorMessage ? 'border-oc-error' : 'border-oc-gray-200'
+        errorMessage ? 'border-oc-error number-input-error-shadow' : 'border-oc-gray-200',
+        !isDisabled && !errorMessage ? 'number-input-focus-shadow' : ''
       ]"
     >
       <Button
@@ -84,3 +85,18 @@ const preventEventIfNotNumberInput = (event) => {
     </div>
   </BaseInput>
 </template>
+
+<style scoped>
+.number-input-focus-shadow:hover {
+  box-shadow: 0px 0px 0px 3px var(--oc-primary-200), 0px 2px 4px 0px #0000003D inset;
+  border-color: var(--oc-primary-500);
+}
+
+.number-input-error-shadow {
+  box-shadow: 0px 0px 0px 3px var(--oc-error-200) !important;
+}
+
+.number-input-initial-shadow {
+  box-shadow: 0px 1.5px 1.5px 0px #00000017,  0px 1px 3px 0px #0000000A;
+}
+</style>

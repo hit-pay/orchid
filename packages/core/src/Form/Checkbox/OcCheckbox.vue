@@ -19,19 +19,19 @@ const emit = defineEmits({
 const computedClasses = computed(() => [
   props.modelValue
     ? props.isDisabled
-      ? 'border-oc-primary-100 bg-oc-primary-100'
-      : 'border-oc-primary bg-oc-primary'
+      ? 'border-oc-primary-100 bg-oc-primary-100 checkbox-init-shadow'
+      : 'bg-oc-primary'
     : props.errorMessage
-      ? 'border-oc-error'
+      ? 'checkbox-error-shadow'
       : props.isDisabled
-        ? 'bg-oc-primary-50 border-oc-primary-200'
-        : 'border-oc-accent-1-200',
-  props.errorMessage && props.modelValue && !props.isDisabled ? '!bg-oc-error' : '',
-  props.errorMessage && !props.isDisabled ? '!border-oc-error' : '',
+        ? 'bg-oc-gray-50 border-oc-gray-200 checkbox-init-shadow'
+        : 'border-oc-accent-1-200 checkbox-focus-shadow checkbox-init-shadow',
+  props.errorMessage && props.modelValue && !props.isDisabled ? '!bg-oc-error checkbox-error-shadow' : '',
+  props.errorMessage && !props.isDisabled ? '!border-oc-error checkbox-error-shadow' : '',
   props.isPartial
     ? props.isDisabled
-      ? '!border-oc-primary-200 !bg-oc-primary-50'
-      : '!border-oc-primary !bg-oc-primary-100'
+      ? '!border-oc-gray-200 !bg-oc-gray-50 checkbox-init-shadow'
+      : '!bg-oc-primary-100 checkbox-init-shadow checkbox-focus-shadow'
     : ''
 ])
 const onInput = () => emit('update:modelValue', !props.isDisabled ? !props.modelValue : '')
@@ -40,7 +40,7 @@ const onInput = () => emit('update:modelValue', !props.isDisabled ? !props.model
 <template>
   <BaseInput class="w-fit" :label="topLabel" :hint="hint" :error-message="errorMessage">
     <label
-      class="flex items-center gap-x-3 cursor-pointer"
+      class="flex items-center gap-x-3 cursor-pointer group"
       :class="{
         '!border-oc-error': errorMessage && isButtonVariant,
         'border-gray-200 border py-5 px-6 rounded cursor-pointer transition-all duration-300 !gap-x-4':
@@ -80,3 +80,19 @@ const onInput = () => emit('update:modelValue', !props.isDisabled ? !props.model
     </label>
   </BaseInput>
 </template>
+
+<style scoped>
+.checkbox-init-shadow {
+  box-shadow: 0px 1.5px 1.5px 0px #00000017, 0px 1px 3px 0px #0000000A;
+}
+label:hover {
+  .checkbox-focus-shadow {
+    box-shadow: 0px 0px 0px 3px var(--oc-primary-200);
+    border-color: var(--oc-primary-500);
+  }
+}
+.checkbox-error-shadow {
+  box-shadow: 0px 0px 0px 3px var(--oc-error-200);
+  border-color: var(--oc-error-500);
+}
+</style>

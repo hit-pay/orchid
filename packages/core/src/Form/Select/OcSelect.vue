@@ -443,6 +443,12 @@ defineExpose({
                 "
                 @click="selectOption(option)"
               />
+              <!-- Empty div to trigger the slot -->
+              <slot name="empty">
+                <div v-if="!filterableOptions.length" class="text-sm text-oc-text-300  text-center">
+                  No data to display
+                </div>
+              </slot>
             </slot>
             <slot name="infinite-scrolling"></slot>
 

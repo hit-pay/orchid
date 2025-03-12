@@ -48,9 +48,6 @@ const getPopperOptions = () => ({
     {
       name: 'flip',
       enabled: props.isFlipEnabled,
-      options: {
-        allowedAutoPlacements: ['top', 'bottom']
-      }
     },
     {
       name: 'offset',
@@ -70,14 +67,14 @@ onMounted(() => {
   popperInstance.value = createPopper(reference.value, popper.value, getPopperOptions())
 
   // Need add setTimeout because placement is not updated immediately from props when component is mounted
-  setTimeout(() => popperInstance.value.update(), 50)
+  setTimeout(() => popperInstance.value.update(), 150)
 })
 
 watch(
   () => [props.popperOptions, props.placement, props.distance, props.skidding],
   () => {
-    popperInstance.value.setOptions(getPopperOptions())
-    popperInstance.value.update()
+    popperInstance.value?.setOptions(getPopperOptions())
+    popperInstance.value?.update()
   },
   { deep: true }
 )

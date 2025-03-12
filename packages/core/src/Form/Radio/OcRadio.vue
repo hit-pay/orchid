@@ -53,10 +53,12 @@ defineEmits({
     >
       <span
         v-if="!isButtonVariant || isButtonVariantWithRadio"
-        class="radio-button__custom w-5 h-5 rounded-full border transition-all duration-300"
+        class="radio-button__custom w-5 h-5 rounded-full border transition-all duration-300 radio-button-init-shadow"
         :class="[
-          isDisabled || !modelValue ? 'border-oc-primary-200 bg-oc-primary-50' : '',
-          errorMessage ? '!border-oc-error' : 'border-oc-primary-200'
+          isDisabled || !modelValue ? 'border-oc-gray-200' : '',
+          isDisabled && !modelValue ? 'bg-oc-accent-1-50' : '',
+          !isDisabled && !errorMessage ? 'radio-button-focus-shadow' : '',
+          errorMessage ? 'radio-button-error-shadow' : 'border-oc-gray-200'
         ]"
       />
 
@@ -102,5 +104,18 @@ defineEmits({
   &.disabled &__input:checked + &__label &__custom {
     @apply border-[var(--oc-primary-100)];
   }
+}
+.radio-button-init-shadow {
+  box-shadow: 0px 1.5px 1.5px 0px #00000017, 0px 1px 3px 0px #0000000A;
+}
+label:hover {
+  .radio-button-focus-shadow {
+    box-shadow: 0px 0px 0px 3px var(--oc-primary-200) !important;
+    border-color: var(--oc-primary-500) !important;
+  }
+}
+.radio-button-error-shadow {
+  box-shadow: 0px 0px 0px 3px var(--oc-error-200);
+  border-color: var(--oc-error-500);
 }
 </style>

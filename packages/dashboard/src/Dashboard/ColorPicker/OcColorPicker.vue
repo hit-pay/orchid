@@ -101,9 +101,12 @@ const handleClickLastUsedColor = (color) => {
     <Dropdown
       ref="dropdownRef"
       v-model="isOpen"
-      @update:model-value="onCloseDropdown"
       :max-menu-height="800"
       :placement="placement"
+      :popper-options="{
+        strategy: 'fixed'
+      }"
+      @update:model-value="onCloseDropdown"
     >
       <Input
         v-if="!hideInputColor"
