@@ -28,6 +28,9 @@
       <div v-if="isNew" class="bg-oc-accent-2 text-white shrink-0 py-1 px-3 rounded-sm uppercase text-xs font-medium">
         NEW
       </div>
+      <div v-if="isTryIt" class="bg-oc-accent-2 text-white shrink-0 py-1 px-3 rounded-sm uppercase text-xs font-medium">
+        TRY IT
+      </div>
     </template>
     <Icon 
       v-if="isExpanded && isChildren"
@@ -83,7 +86,8 @@ const props = defineProps({
   isMenuExpanded: Boolean,
   isChildren: Boolean,
   isBeta: Boolean,
-  isNew: Boolean
+  isNew: Boolean,
+  isTryIt: Boolean
 })
 
 const menuItemRef = ref(null)
