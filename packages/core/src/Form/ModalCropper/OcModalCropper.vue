@@ -36,6 +36,7 @@ const confirmButtonProps = ref({
 
 <template>
   <Modal
+    id="modal-cropper-overlay-wrapper"
     title="Edit Image"
     is-close-icon
     :cancel-button-props="cancelButtonProps"
