@@ -125,12 +125,11 @@ const editSelectedImage = (i, img) => {
         <Icon name="plus" />
       </div>
       <input
-        v-if="!resetFile"
         class="hidden"
         type="file"
         :accept="accept || 'image/png, image/jpeg'"
         :multiple="props.maxImages !== 1"
-        :disabled="isDisabled"
+        :disabled="isDisabled || resetFile"
         @change="onChange"
       />
     </label>
@@ -150,7 +149,7 @@ const editSelectedImage = (i, img) => {
           class="w-[100px] group relative cursor-pointer aspect-square border rounded border-oc-accent-1-100 bg-cover bg-center"
           :class="{
             'border-oc-primary': selectedImage.fileName === img.fileName,
-            'col-start-2': i === 0 && showAddBtn,
+            'col-start-2': i === 0 && showAddBtn
           }"
           :style="`background-image: url(${img.fileUrl})`"
           @click="$emit('update:selectedImage', img)"
