@@ -19,6 +19,7 @@ const cropper = ref()
 const fileUploadEl = ref()
 
 const localImage = ref('')
+const newImage = ref()
 const imageChanged = ref(false)
 
 const localInputOptionsValue = ref(props.inputOptionValues ?? {})
@@ -60,7 +61,17 @@ watch(
 const onChange = () => {
   if (localImage.value && imageChanged.value) {
     const { canvas } = cropper.value.getResult()
-    emit('changeImage', canvas.toDataURL())
+
+    const isChanged = !(
+      cropper.value.image.width === canvas.width &&
+      cropper.value.image.height === canvas.height &&
+      !cropper.value.imageTransforms.rotate
+    )
+
+    emit('changeImage', canvas.toDataURL(), {
+      isChanged,
+      file: newImage.value
+    })
   }
   imageChanged.value = true
 }
@@ -76,6 +87,7 @@ const fileUpload = (e) => {
     e.preventDefault()
     return false
   } else {
+    newImage.value = e.target.files[0]
     localImage.value = URL.createObjectURL(e.target.files[0])
   }
 }
