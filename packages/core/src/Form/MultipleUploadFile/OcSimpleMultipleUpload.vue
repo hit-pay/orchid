@@ -71,13 +71,13 @@ const confirmDeleteFile = () => {
   )
   deleteConfirmationModal.value = false
 }
-const changeImage = (url) => {
+const changeImage = (url, cropper) => {
   const changedFile = props.uploadedImages[editImgIndex.value]
   changedFile.fileUrl = url
 
   changedFile.fileName = Date.now()
 
-  emit('onEditImage', { ...changedFile, index: editImgIndex.value })
+  emit('onEditImage', { ...changedFile, index: editImgIndex.value, cropper })
 
   isEditOpen.value = false
   editImgIndex.value = ''
