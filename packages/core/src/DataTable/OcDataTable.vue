@@ -246,7 +246,16 @@ const applyFilter = (filterFormData = null, isChangePage = false, changeCursor =
     filterData.value[filterOptions.value.tabs.key] = filterTab.value
   }
   if (filterOptions.value?.search) {
-    filterData.value[filterOptions.value.search.key] = queries.value.join()
+    if(filterOptions.value.search?.selectedOption?.length) {
+      Object.keys(filterData.value).forEach((key) => {
+        if (filterOptions.value.search.options?.map((option) => option.value).includes(key)) {
+          delete filterData.value[key]
+        }
+      })
+      filterData.value[filterOptions.value.search.selectedOption] = queries.value.join()
+    } else {
+      filterData.value[filterOptions.value.search.key] = queries.value.join()
+    }
   }
 
   if (filterFormData) {
@@ -428,6 +437,11 @@ const setOrderedHeaders = () => {
   }
 }
 
+const changeSearchKey = (value) => {
+  filterOptions.value.search.selectedOption = value
+  applyFilter()
+}
+
 onMounted(() => {
   setOrderedHeaders()
   const filterFromLocalStorage = getFilterFromLocalStorage()
@@ -495,8 +509,11 @@ onMounted(() => {
               <FilterSearch
                 v-if="filterOptions?.search"
                 :is-search-only="!filterOptions.tabs || filterOptions.isSearchOnly"
+                :search-options="filterOptions.search?.options ?? []"
+                :selected-option="filterOptions.search?.selectedOption ?? 'keywords'"
                 @add-query="addQuery"
                 @toggle="isSearchExpanded = $event"
+                @change-search-key="changeSearchKey"
               />
               <Dropdown
                 v-if="filterOptions?.form"
