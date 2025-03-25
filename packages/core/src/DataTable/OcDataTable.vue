@@ -252,7 +252,7 @@ const applyFilter = (filterFormData = null, isChangePage = false, changeCursor =
           delete filterData.value[key]
         }
       })
-      filterData.value[filterData.value?.selectedSearchOption  || filterOptions.value.search?.options[0]?.value || filterOptions.value.search.key] = queries.value.join()
+      filterData.value[filterData.value?.selectedSearchOption  || filterOptions.value.search?.options?.[0]?.value || filterOptions.value.search.key] = queries.value.join()
     } else {
       filterData.value[filterOptions.value.search.key] = queries.value.join()
     }
@@ -509,7 +509,7 @@ onMounted(() => {
                 v-if="filterOptions?.search"
                 :is-search-only="!filterOptions.tabs || filterOptions.isSearchOnly"
                 :search-options="filterOptions.search?.options ?? []"
-                :selected-option="(filterData?.selectedSearchOption || filterOptions.search?.options[0]?.value) ?? 'keywords'"
+                :selected-option="(filterData?.selectedSearchOption || filterOptions.search?.options?.[0]?.value) ?? 'keywords'"
                 @add-query="addQuery"
                 @toggle="isSearchExpanded = $event"
                 @change-search-key="changeSearchKey"
