@@ -439,7 +439,6 @@ const setOrderedHeaders = () => {
 
 const changeSearchKey = (value) => {
   filterOptions.value.search.selectedOption = value
-  applyFilter()
 }
 
 onMounted(() => {
