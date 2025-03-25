@@ -27,7 +27,7 @@ const selectedOptionObject = computed(() => {
 })
 
 const changeSearchKey = (value) => {
-  emit('changeSearchKey', value)
+  emit('change-search-key', value)
   isOpen.value = false
 }
 </script>
