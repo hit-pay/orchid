@@ -217,7 +217,7 @@ const isNewTab = ref(localInputOptionsValue.value.new_tab? true : false)
           @update:model-value="updateOptions('lightbox', $event)"
         >
           <template #after>
-            <Tooltip position="bottom" :distance="10" popper-class="bg-oc-bg-light min-w-[125px]">
+            <Tooltip :popper-options="{ strategy: 'fixed' }" position="bottom" :distance="10" popper-class="bg-oc-bg-light min-w-[125px]">
               <Icon name="question-mark" width="16" height="16" class="text-oc-accent-1-500" />
               <template #popper>
                 <div class="text-oc-text-400 text-sm px-3 py-2 font-medium text-center">
