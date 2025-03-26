@@ -209,11 +209,6 @@ const isNewTab = ref(localInputOptionsValue.value.new_tab? true : false)
           class="mb-4"
           @update:model-value="updateOptions('new_tab', $event)"
         >
-          <template #after>
-            <Tooltip position="bottom" :distance="10" popper-class="bg-oc-bg-light min-w-[125px]">
-              <Icon name="question-mark" width="16" height="16" class="text-oc-accent-1-500" />
-            </Tooltip>
-          </template>
         </Checkbox>
         <Checkbox
           v-if="inputOptions?.includes('lightbox')"
