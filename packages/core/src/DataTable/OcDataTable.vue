@@ -451,6 +451,9 @@ onMounted(() => {
       filterData.value?.tabs ||
       filterData.value?.[filterOptions.value?.tabs?.key]
 
+    if(filterData.value?.selectedSearchOption) {
+      addQuery(filterData.value[filterData.value?.selectedSearchOption])
+    }
     currentPage.value = filterData.value?.page || 1
 
     applyFilter(null, true, filterData.value.cursor, true)
