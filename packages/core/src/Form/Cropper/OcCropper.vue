@@ -108,6 +108,7 @@ const updateOptions = (key, value) => {
 const showCaption = ref(localInputOptionsValue.value.caption ? true : false)
 
 const isLightBox = ref(localInputOptionsValue.value.lightbox ? true : false)
+const isNewTab = ref(localInputOptionsValue.value.new_tab? true : false)
 </script>
 
 <template>
@@ -202,9 +203,22 @@ const isLightBox = ref(localInputOptionsValue.value.lightbox ? true : false)
       </div>
       <div>
         <Checkbox
+          v-if="inputOptions?.includes('new_tab')"
+          v-model="isNewTab"
+          label="Open link in a new tab"
+          class="mb-4"
+          @update:model-value="updateOptions('new_tab', $event)"
+        >
+          <template #after>
+            <Tooltip position="bottom" :distance="10" popper-class="bg-oc-bg-light min-w-[125px]">
+              <Icon name="question-mark" width="16" height="16" class="text-oc-accent-1-500" />
+            </Tooltip>
+          </template>
+        </Checkbox>
+        <Checkbox
           v-if="inputOptions?.includes('lightbox')"
           v-model="isLightBox"
-          label="Lightbox"
+          label="Enable lightbox"
           @update:model-value="updateOptions('lightbox', $event)"
         >
           <template #after>
