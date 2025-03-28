@@ -26,16 +26,22 @@ const confirmButtonProps = ref({
       emit('update:input-options', localLinkValue.value)
     }
     if (image.value) {
-      emit('changeImage', image.value)
+      emit('changeImage', image.value, cropper.value)
     } else {
       emit('close')
     }
   }
 })
+
+const onChangeImage = (url, cropperInfo) => {
+  image.value = url
+  cropper.value = cropperInfo
+}
 </script>
 
 <template>
   <Modal
+    id="modal-cropper-overlay-wrapper"
     title="Edit Image"
     is-close-icon
     :cancel-button-props="cancelButtonProps"
@@ -46,7 +52,7 @@ const confirmButtonProps = ref({
       :input-option-values="inputOptionValues"
       :img="img"
       :max-size="maxSize"
-      @change-image="image = $event"
+      @change-image="onChangeImage"
       @update:input-options="localLinkValue = $event"
     />
   </Modal>

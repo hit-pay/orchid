@@ -246,7 +246,16 @@ const applyFilter = (filterFormData = null, isChangePage = false, changeCursor =
     filterData.value[filterOptions.value.tabs.key] = filterTab.value
   }
   if (filterOptions.value?.search) {
-    filterData.value[filterOptions.value.search.key] = queries.value.join()
+    if(filterOptions.value.search?.options?.length) {
+      Object.keys(filterData.value).forEach((key) => {
+        if (filterOptions.value.search.options?.map((option) => option.value).includes(key)) {
+          delete filterData.value[key]
+        }
+      })
+      filterData.value[filterData.value?.selectedSearchOption  || filterOptions.value.search?.options?.[0]?.value || filterOptions.value.search.key] = queries.value.join()
+    } else {
+      filterData.value[filterOptions.value.search.key] = queries.value.join()
+    }
   }
 
   if (filterFormData) {
@@ -428,6 +437,10 @@ const setOrderedHeaders = () => {
   }
 }
 
+const changeSearchKey = (value) => {
+  filterData.value.selectedSearchOption = value
+}
+
 onMounted(() => {
   setOrderedHeaders()
   const filterFromLocalStorage = getFilterFromLocalStorage()
@@ -438,6 +451,9 @@ onMounted(() => {
       filterData.value?.tabs ||
       filterData.value?.[filterOptions.value?.tabs?.key]
 
+    if(filterData.value?.selectedSearchOption) {
+      addQuery(filterData.value[filterData.value?.selectedSearchOption])
+    }
     currentPage.value = filterData.value?.page || 1
 
     applyFilter(null, true, filterData.value.cursor, true)
@@ -495,8 +511,11 @@ onMounted(() => {
               <FilterSearch
                 v-if="filterOptions?.search"
                 :is-search-only="!filterOptions.tabs || filterOptions.isSearchOnly"
+                :search-options="filterOptions.search?.options ?? []"
+                :selected-option="(filterData?.selectedSearchOption || filterOptions.search?.options?.[0]?.value) ?? 'keywords'"
                 @add-query="addQuery"
                 @toggle="isSearchExpanded = $event"
+                @change-search-key="changeSearchKey"
               />
               <Dropdown
                 v-if="filterOptions?.form"

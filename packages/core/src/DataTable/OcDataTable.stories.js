@@ -52,7 +52,7 @@ export const Default = {
           }
         },
         search: {
-          key: 'keywords'
+          key: 'keywords',
         },
         columnEdit: {
           key: 'columnEdit',
@@ -363,6 +363,7 @@ export const Default = {
       const showDropdown = ref({})
       const updateFilterData = (data) => {
         filter.value = data
+        console.log(123, filter.value)
       }
       const onClickRow = (val) => {
         console.log('onClickRow  ', val)
