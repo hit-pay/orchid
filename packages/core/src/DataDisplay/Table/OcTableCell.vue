@@ -142,11 +142,11 @@ const variantClass = computed(() => ({
           v-else-if="variant === Variants.DATETIME"
           :title="dayjs(data).format('D MMM, YYYY')"
           :description="dayjs(data).format('h:mm A')"
-          :link="link"
+         
         />
 
         <!--   CONTENT   -->
-        <TableCellContent v-else-if="variant === Variants.CONTENT" v-bind="content" :link="link" />
+        <TableCellContent v-else-if="variant === Variants.CONTENT" v-bind="content"/>
         <div v-else-if="variant === Variants.CHIP" :link="link">
           <!--   CHIP   -->
           <Chip v-bind="chipProps" />
