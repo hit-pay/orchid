@@ -92,7 +92,8 @@ export const MultipleImages = {
     label: 'label example',
     errorMessage: '',
     isImageOnly: false,
-    columnsCount: 3
+    columnsCount: 3,
+    inputOptions: ['caption', 'link', 'lightbox', 'new_tab']
   },
   render: (args) => ({
     components: { MultipleUploadFile, Theme },
@@ -103,7 +104,8 @@ export const MultipleImages = {
             id: 'image_1',
             path: 'https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/covers/small/99d696e564ba45fbaa0fb2e3b43d0e27.jpg',
             caption: 'Image 1',
-            link: 'https://test-link.com'
+            link: 'https://test-link.com',
+            caption_variant: 'bottom'
           }
         },
         // {
@@ -138,6 +140,7 @@ export const MultipleImages = {
             :error-message="args.errorMessage"
             is-image-only
             :columnsCount="args.columnsCount"
+            :input-options="args.inputOptions"
             @onEditFile="onEditFile"
             @onRemoveFile="onRemoveFile"
         >
