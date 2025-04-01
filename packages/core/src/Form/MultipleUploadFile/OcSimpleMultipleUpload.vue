@@ -110,6 +110,9 @@ const editSelectedImage = (i, img) => {
   editImgIndex.value = i
   props.inputOptions?.forEach((key) => {
     editInputOptions.value[key] = img[key]
+    if (key === 'caption') {
+      editInputOptions.value.caption_variant = img.caption_variant
+    }
   })
   isDropdownOpen[i] = false
   isEditOpen.value = true
@@ -215,7 +218,6 @@ const editSelectedImage = (i, img) => {
         </div>
       </template>
     </Draggable>
-
     <ModalCropper
       v-if="isEditOpen"
       v-model="isEditOpen"
