@@ -53,6 +53,13 @@ export const Default = {
         },
         search: {
           key: 'keywords',
+          selectedOption: 'keywords',
+          options: [
+            { label: 'All', value: 'keywords' },
+            { label: 'Filter 01', value: '1' },
+            { label: 'Filter 02', value: '2' },
+            { label: 'Filter 03', value: '3' }
+          ]
         },
         columnEdit: {
           key: 'columnEdit',
