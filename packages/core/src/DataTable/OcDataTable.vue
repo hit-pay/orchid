@@ -226,7 +226,7 @@ const getFilterFromLocalStorage = () => {
   return null
 }
 
-const applyFilter = (filterFormData = null, isChangePage = false, changeCursor = '', isOnMount = false) => {
+const applyFilter = (filterFormData = null, isChangePage = false, changeCursor = '', isOnMount = false, isChangeTab = false) => {
   if (paginationOption.value && !isChangePage) {
     currentPage.value = 1
   }
@@ -242,7 +242,7 @@ const applyFilter = (filterFormData = null, isChangePage = false, changeCursor =
     filterData.value.per_page = perPage.value
   }
 
-  if (filterOptions.value?.tabs) {
+  if (filterOptions.value?.tabs && isChangeTab) {
     filterData.value[filterOptions.value.tabs.key] = filterTab.value
   }
   if (filterOptions.value?.search) {
@@ -496,7 +496,7 @@ onMounted(() => {
               :is-disabled="isLoading"
               :tabs="filterOptions.tabs.options"
               :variant="'pills'"
-              @update:model-value="applyFilter(null)"
+              @update:model-value="applyFilter(null, false, '', false, true)"
             />
           </div>
 
