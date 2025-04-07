@@ -26,16 +26,19 @@ const confirmButtonProps = ref({
       emit('update:input-options', localLinkValue.value)
     }
     if (image.value) {
-      emit('changeImage', image.value, cropper.value)
+      emit('changeImage', {
+        url: image.value,
+        cropper: cropper.value
+      })
     } else {
       emit('close')
     }
   }
 })
 
-const onChangeImage = (url, cropperInfo) => {
-  image.value = url
-  cropper.value = cropperInfo
+const onChangeImage = (item) => {
+  image.value = item.url
+  cropper.value = item.cropper
 }
 </script>
 
