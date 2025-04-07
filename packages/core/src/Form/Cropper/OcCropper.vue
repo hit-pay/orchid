@@ -68,9 +68,12 @@ const onChange = () => {
       !cropper.value.imageTransforms.rotate
     )
 
-    emit('changeImage', canvas.toDataURL(), {
-      isChanged,
-      file: newImage.value
+    emit('changeImage', {
+      url: canvas.toDataURL(),
+      cropper: {
+        isChanged,
+        file: newImage.value
+      }
     })
   }
   imageChanged.value = true
@@ -108,7 +111,7 @@ const updateOptions = (key, value) => {
 const showCaption = ref(localInputOptionsValue.value.caption ? true : false)
 
 const isLightBox = ref(localInputOptionsValue.value.lightbox ? true : false)
-const isNewTab = ref(localInputOptionsValue.value.new_tab? true : false)
+const isNewTab = ref(localInputOptionsValue.value.new_tab ? true : false)
 </script>
 
 <template>
@@ -210,9 +213,9 @@ const isNewTab = ref(localInputOptionsValue.value.new_tab? true : false)
           @update:model-value="updateOptions('new_tab', $event)"
         >
         </Checkbox>
-       <div class="flex items-center gap-x-2 justify-normal">
+        <div class="flex items-center gap-x-2 justify-normal">
           <div class="w-auto">
-              <Checkbox
+            <Checkbox
               v-if="inputOptions?.includes('lightbox')"
               v-model="isLightBox"
               label="Enable lightbox"
@@ -220,7 +223,13 @@ const isNewTab = ref(localInputOptionsValue.value.new_tab? true : false)
             >
             </Checkbox>
           </div>
-          <Tooltip trigger="hover" :popper-options="{ strategy: 'fixed' }" position="bottom" :distance="10" popper-class="bg-oc-bg-light min-w-[125px]">
+          <Tooltip
+            trigger="hover"
+            :popper-options="{ strategy: 'fixed' }"
+            position="bottom"
+            :distance="10"
+            popper-class="bg-oc-bg-light min-w-[125px]"
+          >
             <Icon name="question-mark" width="16" height="16" class="text-oc-accent-1-500" />
             <template #popper>
               <div class="text-oc-text-400 text-sm px-3 py-2 font-medium text-center">
@@ -228,7 +237,7 @@ const isNewTab = ref(localInputOptionsValue.value.new_tab? true : false)
               </div>
             </template>
           </Tooltip>
-       </div>
+        </div>
       </div>
     </div>
   </div>
