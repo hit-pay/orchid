@@ -213,7 +213,7 @@ const isNewTab = ref(localInputOptionsValue.value.new_tab ? true : false)
           @update:model-value="updateOptions('new_tab', $event)"
         >
         </Checkbox>
-        <div class="flex items-center gap-x-2 justify-normal">
+        <div  v-if="inputOptions?.includes('lightbox')" class="flex items-center gap-x-2 justify-normal" >
           <div class="w-auto">
             <Checkbox
               v-if="inputOptions?.includes('lightbox')"
@@ -224,10 +224,13 @@ const isNewTab = ref(localInputOptionsValue.value.new_tab ? true : false)
             </Checkbox>
           </div>
           <Tooltip
+            key="lightbox-cropper-tooltip"
             trigger="hover"
+            is-popover
             :popper-options="{ strategy: 'fixed' }"
             position="bottom"
             :distance="10"
+            :skidding="0"
             popper-class="bg-oc-bg-light min-w-[125px]"
           >
             <Icon name="question-mark" width="16" height="16" class="text-oc-accent-1-500" />
