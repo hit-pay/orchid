@@ -19,6 +19,7 @@ const cropper = ref()
 const fileUploadEl = ref()
 
 const localImage = ref('')
+const newImage = ref()
 const imageChanged = ref(false)
 
 const localInputOptionsValue = ref(props.inputOptionValues ?? {})
@@ -60,7 +61,20 @@ watch(
 const onChange = () => {
   if (localImage.value && imageChanged.value) {
     const { canvas } = cropper.value.getResult()
-    emit('changeImage', canvas.toDataURL())
+
+    const isChanged = !(
+      cropper.value.image.width === canvas.width &&
+      cropper.value.image.height === canvas.height &&
+      !cropper.value.imageTransforms.rotate
+    )
+
+    emit('changeImage', {
+      url: canvas.toDataURL(),
+      cropper: {
+        isChanged,
+        file: newImage.value
+      }
+    })
   }
   imageChanged.value = true
 }
@@ -76,6 +90,7 @@ const fileUpload = (e) => {
     e.preventDefault()
     return false
   } else {
+    newImage.value = e.target.files[0]
     localImage.value = URL.createObjectURL(e.target.files[0])
   }
 }
@@ -96,6 +111,7 @@ const updateOptions = (key, value) => {
 const showCaption = ref(localInputOptionsValue.value.caption ? true : false)
 
 const isLightBox = ref(localInputOptionsValue.value.lightbox ? true : false)
+const isNewTab = ref(localInputOptionsValue.value.new_tab ? true : false)
 </script>
 
 <template>
@@ -190,22 +206,41 @@ const isLightBox = ref(localInputOptionsValue.value.lightbox ? true : false)
       </div>
       <div>
         <Checkbox
-          v-if="inputOptions?.includes('lightbox')"
-          v-model="isLightBox"
-          label="Lightbox"
-          @update:model-value="updateOptions('lightbox', $event)"
+          v-if="inputOptions?.includes('new_tab')"
+          v-model="isNewTab"
+          label="Open link in a new tab"
+          class="mb-4"
+          @update:model-value="updateOptions('new_tab', $event)"
         >
-          <template #after>
-            <Tooltip position="bottom" :distance="10" popper-class="bg-oc-bg-light min-w-[125px]">
-              <Icon name="question-mark" width="16" height="16" class="text-oc-accent-1-500" />
-              <template #popper>
-                <div class="text-oc-text-400 text-sm px-3 py-2 font-medium text-center">
-                  Show lightbox when click the image
-                </div>
-              </template>
-            </Tooltip>
-          </template>
         </Checkbox>
+        <div  v-if="inputOptions?.includes('lightbox')" class="flex items-center gap-x-2 justify-normal" >
+          <div class="w-auto">
+            <Checkbox
+              v-if="inputOptions?.includes('lightbox')"
+              v-model="isLightBox"
+              label="Enable lightbox"
+              @update:model-value="updateOptions('lightbox', $event)"
+            >
+            </Checkbox>
+          </div>
+          <Tooltip
+            key="lightbox-cropper-tooltip"
+            trigger="hover"
+            is-popover
+            :popper-options="{ strategy: 'fixed' }"
+            position="bottom"
+            :distance="10"
+            :skidding="0"
+            popper-class="bg-oc-bg-light min-w-[125px]"
+          >
+            <Icon name="question-mark" width="16" height="16" class="text-oc-accent-1-500" />
+            <template #popper>
+              <div class="text-oc-text-400 text-sm px-3 py-2 font-medium text-center">
+                Show lightbox when click the image
+              </div>
+            </template>
+          </Tooltip>
+        </div>
       </div>
     </div>
   </div>

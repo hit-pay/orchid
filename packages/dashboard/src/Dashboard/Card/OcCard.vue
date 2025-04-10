@@ -119,7 +119,7 @@ const mobileIcon = computed(() => {
         width="20"
         height="20"
         class="md:hidden absolute top-3 z-10 right-3 text-oc-text-200"
-        @click="$emit('hide-all')"
+        @click.stop="$emit('hide-all')"
       />
 
       <div v-if="isFull" class="flex-1 flex justify-end pr-5">

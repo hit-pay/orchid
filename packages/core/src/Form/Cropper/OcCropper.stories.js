@@ -36,7 +36,7 @@ export const Default = {
                 :is-replace-image="args.isReplaceImage"
 
 
-                :input-options="['description','link','caption','lightbox']"
+                :input-options="['description','link','caption','lightbox','new_tab']"
                 :input-option-values="modelValueOptions"
                 
                 @change-image="args.image = $event"

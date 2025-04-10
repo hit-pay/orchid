@@ -56,6 +56,7 @@ const emit = defineEmits({
   'click:row': [],
   'filter-fields-changed': [],
   'filter-removed': [],
+  'filter-open': [],
   'search-query-changed': [],
   'hover:cell': [],
   'columns-changed': []
@@ -159,7 +160,8 @@ const showBulkAction = computed(() => {
 })
 
 const addQuery = (query) => {
-  if (!query.trim() || queries.value.includes(query)) return
+  if (!query.trim() || (!filterData.value.selectedSearchOption && queries.value.includes(query)))
+    return
   queries.value = [query]
   applyFilter()
   emit('search-query-changed', query)
@@ -226,7 +228,13 @@ const getFilterFromLocalStorage = () => {
   return null
 }
 
-const applyFilter = (filterFormData = null, isChangePage = false, changeCursor = '', isOnMount = false) => {
+const applyFilter = (
+  filterFormData = null,
+  isChangePage = false,
+  changeCursor = '',
+  isOnMount = false,
+  isChangeTab = false
+) => {
   if (paginationOption.value && !isChangePage) {
     currentPage.value = 1
   }
@@ -242,11 +250,24 @@ const applyFilter = (filterFormData = null, isChangePage = false, changeCursor =
     filterData.value.per_page = perPage.value
   }
 
-  if (filterOptions.value?.tabs) {
+  if (filterOptions.value?.tabs && isChangeTab) {
     filterData.value[filterOptions.value.tabs.key] = filterTab.value
   }
   if (filterOptions.value?.search) {
-    filterData.value[filterOptions.value.search.key] = queries.value.join()
+    if (filterOptions.value.search?.options?.length) {
+      Object.keys(filterData.value).forEach((key) => {
+        if (filterOptions.value.search.options?.map((option) => option.value).includes(key)) {
+          delete filterData.value[key]
+        }
+      })
+      filterData.value[
+        filterData.value?.selectedSearchOption ||
+          filterOptions.value.search?.options?.[0]?.value ||
+          filterOptions.value.search.key
+      ] = queries.value.join()
+    } else {
+      filterData.value[filterOptions.value.search.key] = queries.value.join()
+    }
   }
 
   if (filterFormData) {
@@ -428,6 +449,10 @@ const setOrderedHeaders = () => {
   }
 }
 
+const changeSearchKey = (value) => {
+  filterData.value.selectedSearchOption = value
+}
+
 onMounted(() => {
   setOrderedHeaders()
   const filterFromLocalStorage = getFilterFromLocalStorage()
@@ -438,6 +463,9 @@ onMounted(() => {
       filterData.value?.tabs ||
       filterData.value?.[filterOptions.value?.tabs?.key]
 
+    if (filterData.value?.selectedSearchOption) {
+      addQuery(filterData.value[filterData.value?.selectedSearchOption])
+    }
     currentPage.value = filterData.value?.page || 1
 
     applyFilter(null, true, filterData.value.cursor, true)
@@ -480,7 +508,7 @@ onMounted(() => {
               :is-disabled="isLoading"
               :tabs="filterOptions.tabs.options"
               :variant="'pills'"
-              @update:model-value="applyFilter(null)"
+              @update:model-value="applyFilter(null, false, '', false, true)"
             />
           </div>
 
@@ -495,8 +523,14 @@ onMounted(() => {
               <FilterSearch
                 v-if="filterOptions?.search"
                 :is-search-only="!filterOptions.tabs || filterOptions.isSearchOnly"
+                :search-options="filterOptions.search?.options ?? []"
+                :selected-option="
+                  (filterData?.selectedSearchOption || filterOptions.search?.options?.[0]?.value) ??
+                  'keywords'
+                "
                 @add-query="addQuery"
                 @toggle="isSearchExpanded = $event"
+                @change-search-key="changeSearchKey"
               />
               <Dropdown
                 v-if="filterOptions?.form"
@@ -504,6 +538,7 @@ onMounted(() => {
                 :distance="9"
                 placement="bottom-end"
                 is-attach-to-body
+                @update:model-value="$emit('filter-open', $event)"
               >
                 <Button :is-active="isDropdownOpened" variant="secondary" left-icon="filter" />
 

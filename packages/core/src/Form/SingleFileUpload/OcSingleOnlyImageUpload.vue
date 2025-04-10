@@ -24,10 +24,12 @@ const isEditOpen = ref(false)
 const editImg = ref('')
 const isDragover = ref(false)
 
-const changeImage = (url) => {
+const changeImage = ({ url, cropper }) => {
   const changedFile = props.uploadedImage
   changedFile.fileUrl = url
   changedFile.fileName = Date.now()
+  changedFile.cropper = cropper
+  changedFile.isEdit = true
   isEditOpen.value = false
   editImg.value = ''
   emit('update:uploadedImage', changedFile)
