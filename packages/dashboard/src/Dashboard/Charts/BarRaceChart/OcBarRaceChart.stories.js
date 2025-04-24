@@ -20,25 +20,12 @@ export const barRace = {
     chartData: [62, 11, 8, 6, 5, 2],
     labelData: ['50%', '23%', '12%', '10%', '8%', '8%'],
     legendData: [
-      {
-        name: 'Yellow',
-        image: 'https://dashboard.hit-pay.com/images/features/online_store.png'
-      },
-      {
-        name: "Women's ribbed top",
-        image: 'https://dashboard.hit-pay.com/images/features/online_store.png'
-      },
-      {
-        name: 'Fleece sweatshirt',
-        image: 'https://dashboard.hit-pay.com/images/features/online_store.png'
-      },
-      {
-        name: 'Sportswear Tech Fleece',
-        image: 'https://dashboard.hit-pay.com/images/features/online_store.png'
-      },
-      {
-        name: 'Joggers'
-      }
+      'Running shoes',
+      "Women's ribbed top",
+      'Fleece sweatshirt',
+      'Sportswear Tech Fleece',
+      'Joggers',
+      'Joggers'
     ]
   },
   render: (args) => ({
