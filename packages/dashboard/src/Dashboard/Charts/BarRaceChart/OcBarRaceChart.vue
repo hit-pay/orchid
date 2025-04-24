@@ -3,9 +3,16 @@
     <div class="pt-4 pb-7 flex flex-col h-[100%]">
       <div
         v-for="item in legendData"
-        class="text-[14px] flex flex-1 items-center justify-start pr-2"
+        class="text-[14px] flex flex-1 items-center justify-start pr-2 gap-3"
       >
-        <div class="truncate">{{ item }}</div>
+        <div v-if="item.image" class="rounded-sm overflow-hidden w-[32px] h-[32px]">
+          <img
+            :src="item.image"
+            class="w-full h-full min-w-[32px] min-h-[32px] object-cover align-middle inline-block"
+          />
+        </div>
+
+        <div class="truncate">{{ item.name ?? item }}</div>
       </div>
     </div>
     <div ref="barRaceChart" class="h-full" />
