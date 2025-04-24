@@ -81,7 +81,7 @@ const handleEmit = (list, element) => {
         <div class="flex w-full">
           <!-- icon -->
           <div
-            class="px-2 flex items-center"
+            class="px-2 flex items-center text-oc-text-400"
             :class="
               !unmovable && !element.isDisable && !element.unmovable ? 'drag-el cursor-move' : ''
             "
@@ -131,7 +131,7 @@ const handleEmit = (list, element) => {
                   position="bottom-start"
                   popper-class="bg-oc-bg-light text-oc-text-500 p-4 rounded"
                 >
-                  <Icon width="12" height="12" class="mr-2" name="link" />
+                  <Icon width="12" height="12" class="mr-2 text-oc-text-400" name="link" />
                   <template #popper>
                     <div class="min-w-[120px]">
                       {{ element[linkKey] }}
@@ -162,7 +162,7 @@ const handleEmit = (list, element) => {
                 class="hover:bg-oc-gray-100 p-1 rounded"
                 :class="isDropdownOpen[element.id] ? 'bg-oc-gray-100' : ''"
               >
-                <Icon name="dots-vertical" />
+                <Icon name="dots-vertical" class="text-oc-text-400" />
               </div>
               <template #menu>
                 <slot name="action-item" :item="element" :index="indexElement"></slot>
