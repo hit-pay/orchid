@@ -118,7 +118,7 @@ const isGridVariant = computed(() => {
                   !isGridVariant,
                 'w-full': isGridVariant && !isSmallImage,
                 'w-[50px]': !isGridVariant && !isSmallImage,
-                'w-[40%] mx-auto': isSmallImage
+                'w-[50%] mx-auto': isSmallImage
               }"
               :src="opt.preview"
             />
