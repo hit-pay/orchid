@@ -17,7 +17,9 @@ const props = defineProps({
     type: String,
     default: 'horizontal',
     validator: (val) => ['horizontal', 'vertical'].includes(val)
-  }
+  },
+  isFullWidth: Boolean,
+  isBig: Boolean
 })
 
 const position = ref(0)
@@ -121,7 +123,8 @@ watch(
       'border-b border-oc-gray-200': !isPillVariant,
       'overflow-hidden relative': isArrows,
       'flex-col max-h-full': isVerticalTabs,
-      'gap-y-2': isPillVariant && isVerticalTabs
+      'gap-y-2': isPillVariant && isVerticalTabs,
+      'w-full': isFullWidth
     }"
   >
     <div
@@ -137,11 +140,14 @@ watch(
         @click.prevent="move('left')"
       />
     </div>
-    <div class="flex items-center" :class="{ 'flex-col': isVerticalTabs }">
+    <div
+      class="flex items-center"
+      :class="{ 'flex-col': isVerticalTabs, 'w-full': isFullWidth }"
+    >
       <div
         v-for="tab in tabs"
         :key="tab.value"
-        class="relative cursor-pointer min-w-[48px] gap-x-3 items-center flex justify-center text-sm"
+        class="relative cursor-pointer min-w-[48px] gap-x-3 items-center flex justify-center "
         :class="[
           tab.class,
           isPillVariant ? 'py-2 px-3 rounded' : 'px-4 pb-3 border-b-2 -mb-[1px]',
@@ -155,11 +161,16 @@ watch(
           isArrows ? '!justify-normal !min-w-[100px]' : '',
           isVerticalTabs ? '!justify-start w-full py-3 px-5' : '',
           isVerticalTabs && isArrows ? '!min-h-[35px]' : '',
-          isDisabled ? 'opacity-60 !cursor-default' : 'hover:text-oc-text-500'
+          isDisabled ? 'opacity-60 !cursor-default' : 'hover:text-oc-text-500',
+          isFullWidth ? 'w-full' : '',
+          isBig ? 'text-base' : 'text-sm'
         ]"
         @click="setTab(tab.value)"
       >
         <slot :name="tab.value">
+          <template v-if="tab.icon">
+            <Icon :name="tab.icon" width="16" height="16" />
+          </template>
           <div :class="{ truncate: isArrows }">{{ tab.label }}</div>
           <div
             v-if="tab.count"

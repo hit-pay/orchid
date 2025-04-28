@@ -204,3 +204,39 @@ export const PaymentTabsExample = {
         `
   })
 }
+
+export const VariantTabsFullWidth = {
+  argTypes: {
+    variant: {
+      control: 'select',
+      options: ['default']
+    }
+  },
+  args: {
+    variant: 'default',
+    tabs: [
+      {
+        label: 'Mobile',
+        value: 'mobile',
+        icon: 'book'
+      },
+      {
+        label: 'Desktop',
+        value: 'desktop',
+        icon: 'book'
+      }
+    ],
+  },
+  render: (args) => ({
+    components: { Theme, Tabs },
+    setup() {
+      const activeTab = ref('mobile')
+      return { activeTab, args }
+    },
+    template: `
+          <Theme>
+            <Tabs v-model="activeTab" :tabs="args.tabs" :variant="args.variant" is-full-width is-big />
+          </Theme>
+        `
+  })
+}
