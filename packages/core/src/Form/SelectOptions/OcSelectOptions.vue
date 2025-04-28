@@ -4,6 +4,7 @@ import { BaseInput, Icon } from '@/orchidui-core'
 import { computed } from 'vue'
 
 const props = defineProps({
+  isSmallImage: Boolean,
   variant: {
     type: String,
     default: 'grid'
@@ -96,7 +97,8 @@ const isGridVariant = computed(() => {
             'flex border border-oc-gray-200 p-3 rounded hover:shadow': !isGridVariant,
             'border-2 border-oc-primary':
               !isGridVariant && opt.value.toString() === modelValue.toString(),
-            '!border-0 hover:bg-oc-accent-1-50 flex': borderless
+            '!border-0 hover:bg-oc-accent-1-50 flex': borderless,
+            'bg-oc-bg-dark py-4 rounded-lg': isSmallImage
           }"
           @click="update(opt.value)"
         >
@@ -115,7 +117,8 @@ const isGridVariant = computed(() => {
                   (isGridVariant && opt.value.toString() !== modelValue.toString()) ||
                   !isGridVariant,
                 'w-full': isGridVariant,
-                'w-[50px]': !isGridVariant
+                'w-[50px]': !isGridVariant,
+                'w-[60%] mx-auto': isSmallImage
               }"
               :src="opt.preview"
             />
