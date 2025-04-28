@@ -116,9 +116,9 @@ const isGridVariant = computed(() => {
                 'border border-oc-gray-200':
                   (isGridVariant && opt.value.toString() !== modelValue.toString()) ||
                   !isGridVariant,
-                'w-full': isGridVariant,
-                'w-[50px]': !isGridVariant,
-                'w-[60%] mx-auto': isSmallImage
+                'w-full': isGridVariant && !isSmallImage,
+                'w-[50px]': !isGridVariant && !isSmallImage,
+                'w-[50%] mx-auto': isSmallImage
               }"
               :src="opt.preview"
             />
