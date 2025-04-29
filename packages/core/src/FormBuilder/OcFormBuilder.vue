@@ -206,7 +206,7 @@ const setFormClass = (form) => {
           })
           if(form.show_if_one && showThisField < 1){
             formClassName = formClassName + ' hidden'
-          }else if(showThisField < form.show_if.length){
+          }else if(!form.show_if_one &&showThisField < form.show_if.length){
             formClassName = formClassName + ' hidden'
           }
         }else if(form.show_if_value !== formLogicValues.value[form.show_if]) {
