@@ -538,17 +538,17 @@ export const ShowIfLogic = {
             placeholder: 'placeholder'
           }
         },
-        // {
-        //   name: 'slider',
-        //   type: 'Slider',
-        //   props: {
-        //     label: 'How many featured products do you want to show?',
-        //     minGap: 0,
-        //     minLimit: 0,
-        //     maxLimit: 100,
-        //     type: 'default'
-        //   }
-        // },
+        {
+          name: 'slider',
+          type: 'Slider',
+          props: {
+            label: 'How many featured products do you want to show?',
+            minGap: 0,
+            minLimit: 0,
+            maxLimit: 100,
+            type: 'default'
+          }
+        },
         {
           name: 'column',
           type: 'Select',
@@ -617,6 +617,82 @@ export const ShowIfLogic = {
           props: {
             label: 'This will show if column > 3',
             placeholder: 'placeholder'
+          }
+        },
+        {
+          name: 'multiple_select_options',
+          type: 'Select',
+          props: {
+            label: 'Triger Show if images is not empty',
+            multiple: true,
+            options: [
+              {
+                value: '1',
+                label: 'Option 1'
+              },
+              {
+                value: '2',
+                label: 'Option 2'
+              },
+              {
+                value: '3',
+                label: 'Option 3'
+              }
+            ]
+          }
+        },
+        {
+          name: 'select_options',
+          type: 'SelectOptions',
+          show_if: ['multiple_select_options'],
+          show_if_value: ['arrayExist'],
+          props: {
+            isSmallImage: true,
+            label: 'Triger Show if select options is not empty',
+            options: [
+              {
+                preview: '/images/request-form.svg',
+                label: 'Option 1',
+                value: 1
+              },
+              {
+                preview: '/images/request-form.svg',
+                label: 'Option 2',
+                value: 2
+              },
+              {
+                preview: '/images/request-form.svg',
+                label: 'Option 3',
+                value: 3
+              }
+            ]
+          },
+        },
+        {
+          name: 'select_options_1',
+          type: 'SelectOptions',
+          show_if: ['multiple_select_options'],
+          show_if_value: ['arrayExist'],
+          props: {
+            isSmallImage: true,
+            label: 'Triger Show if select options is not empty',
+            options: [
+              {
+                preview: '/images/request-form.svg',
+                label: 'Option 1',
+                value: 1
+              },
+              {
+                preview: '/images/request-form.svg',
+                label: 'Option 2',
+                value: 2
+              },
+              {
+                preview: '/images/request-form.svg',
+                label: 'Option 3',
+                value: 3
+              }
+            ]
           }
         }
       ]
