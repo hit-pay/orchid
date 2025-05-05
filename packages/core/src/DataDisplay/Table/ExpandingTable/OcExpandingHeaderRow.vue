@@ -3,23 +3,36 @@ defineProps({
   headers: {
     type: Array,
     required: true
+  },
+  isSticky: {
+    type: Boolean,
+    default: false
   }
 })
 </script>
 
 <template>
-  <div class="flex bg-oc-gray-50 border-b border-oc-text-200 h-[34px]">
-    <div class="w-9" />
+  <div
+    class="grid bg-oc-gray-50  h-[34px] min-w-max relative"
+    :style="{
+      gridTemplateColumns: `32px 200px repeat(${headers.length - 1}, minmax(150px, auto)) 32px`
+    }"
+  >
     <div
-      v-for="header in headers"
+      class="w-9 flex items-center justify-center border-b border-oc-text-200"
+      :class="isSticky ? 'sticky left-0 z-20 bg-oc-gray-50 border-oc-gray-200' : ''"
+    />
+    <div
+      v-for="(header, index) in headers"
       :key="header.key"
-      class="py-3 px-4 flex-1 uppercase text-xs text-oc-text-400 font-medium"
-      :class="header.class"
+      class="py-3 px-4 text-xs text-oc-text-400 border-b border-oc-text-200 font-medium whitespace-nowrap"
+      :class="[
+        header.class,
+        isSticky && index === 0 ? 'sticky left-9 z-10 bg-oc-gray-50 border-oc-gray-200' : ''
+      ]"
     >
       {{ header.label }}
     </div>
-    <div class="w-9" />
+    <div class="w-9 border-b border-oc-text-200" />
   </div>
 </template>
-
-<style scoped lang="scss"></style>

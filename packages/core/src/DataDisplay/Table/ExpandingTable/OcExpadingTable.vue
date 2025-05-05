@@ -27,15 +27,19 @@ const props = defineProps({
   loadingRows: {
     type: Number,
     default: 5
+  },
+  isSticky: {
+    type: Boolean,
+    default: false
   }
 })
 const emptyRow = computed(() => Object.fromEntries(props.headers.map((h) => [h.key, ''])))
 </script>
 
 <template>
-  <div class="flex flex-col border rounded w-full border-oc-gray-200 overflow-hidden">
+  <div class="flex flex-col border rounded w-full border-oc-gray-200 overflow-auto">
     <template v-if="isAlternative">
-      <ExpandingHeaderRow :headers="headers" />
+      <ExpandingHeaderRow :headers="headers" :is-sticky="isSticky" />
 
       <template v-if="isLoading && !fields.length">
         <ExpandingTableRow
@@ -45,6 +49,7 @@ const emptyRow = computed(() => Object.fromEntries(props.headers.map((h) => [h.k
           :is-alternative="isAlternative"
           :row="emptyRow"
           :headers="headers"
+          :is-sticky="isSticky"
         />
       </template>
       <template v-else>
@@ -55,6 +60,7 @@ const emptyRow = computed(() => Object.fromEntries(props.headers.map((h) => [h.k
           :headers="headers"
           :is-loading="isLoading"
           :is-alternative="isAlternative"
+          :is-sticky="isSticky"
           :important="row.important"
         >
           <template v-for="(_, name) in $slots" #[name]="slotData">
@@ -72,6 +78,7 @@ const emptyRow = computed(() => Object.fromEntries(props.headers.map((h) => [h.k
         :is-loading="isLoading"
         :is-alternative="isAlternative"
         :value="fields[row.key]"
+        :is-sticky="isSticky"
         :important="row.important"
       >
         <template v-for="(_, name) in $slots" #[name]="slotData">
@@ -80,7 +87,7 @@ const emptyRow = computed(() => Object.fromEntries(props.headers.map((h) => [h.k
       </ExpandingTableRow>
     </template>
     <slot name="total">
-      <ExpandingTableRow is-total :headers="headers" :row="{ label: 'Total' }" :value="total" />
+      <ExpandingTableRow is-total :headers="headers" :row="{ label: 'Total' }" :value="total" :is-sticky="isSticky" />
     </slot>
   </div>
 </template>
