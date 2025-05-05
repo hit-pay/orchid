@@ -31,6 +31,10 @@ defineProps({
   isLoading: {
     type: Boolean,
     default: false
+  },
+  isSticky: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -53,15 +57,21 @@ const toggleExpand = () => {
 
 <template>
   <div
-    class="h-[58px] w-full flex items-center"
+    class="grid h-[58px] items-center border-b border-oc-gray-200 min-w-max relative"
+    :style="{
+      gridTemplateColumns: `32px 200px repeat(${headers.length - 1}, minmax(150px, auto)) 32px`
+    }"
     :class="{
       'font-medium': important || isTotal,
       'bg-oc-gray-900 text-white': isTotal,
-      'bg-oc-bg-dark': depth,
-      'border-b border-oc-gray-200': !isTotal
+      'bg-oc-bg-dark': depth
     }"
   >
-    <div class="w-9" @click="toggleExpand">
+    <div
+      class="w-9 flex items-center justify-center"
+      :class="isSticky ? 'sticky left-0 h-full z-10 bg-white border-oc-gray-200' : ''"
+      @click="toggleExpand"
+    >
       <Icon
         v-if="row.children?.length"
         name="chevron-down"
@@ -71,10 +81,11 @@ const toggleExpand = () => {
         :class="isExpanded ? 'rotate-180' : ''"
       />
     </div>
+
     <template v-if="!isAlternative">
       <div
-        class="flex-1 gap-x-2 items-center flex px-4 py-3"
-        :style="depth ? { paddingLeft: 12 + depth * 20 + 'px' } : {}"
+        class="px-4 py-3 whitespace-nowrap flex items-center gap-2"
+        :class="isSticky ? 'sticky left-9 z-10 bg-white border-oc-gray-200' : ''"
       >
         {{ row.label }}
         <Tooltip>
@@ -86,39 +97,34 @@ const toggleExpand = () => {
           </template>
         </Tooltip>
       </div>
-      <div class="flex-1 truncate" :class="row.itemClasses">
+
+      <div class="px-4 py-3 whitespace-nowrap">
         <slot :name="row.key" :value="value">
           {{ value }}
         </slot>
       </div>
     </template>
+
     <template v-else>
       <div
-        v-for="(header, i) in headers"
+        v-for="(header, index) in headers"
         :key="header.key"
-        ref="itemsCellRef"
-        class="flex-1 truncate px-4"
-        :class="header.itemClasses"
+        class="px-4 py-3 whitespace-nowrap overflow-hidden text-ellipsis"
+        :class="[
+          header.itemClasses,
+          isSticky && index === 0 ? 'sticky left-9 z-10 bg-white border-oc-gray-200' : ''
+        ]"
       >
         <Skeleton v-if="isLoading" class="w-full h-5 rounded" />
         <slot v-else :name="header.key" :data="row?.[header?.key]" :item="row">
-          <Tooltip
-            v-if="truncatedHeaders?.[i]"
-            class="overflow-hidden w-[-webkit-fill-available]"
-            arrow-hidden
-            position="top"
-          >
-            <div class="truncate">{{ row?.[header?.key] }}</div>
-            <template #popper>
-              <div class="py-1 px-2">{{ row?.[header?.key] }}</div>
-            </template>
-          </Tooltip>
-          <template v-else> {{ row?.[header?.key] }}</template>
+          {{ row?.[header?.key] }}
         </slot>
       </div>
     </template>
-    <div class="w-9"></div>
+
+    <div class="w-9" />
   </div>
+
   <div
     v-if="row.children?.length"
     ref="childrenWrapper"
@@ -135,6 +141,7 @@ const toggleExpand = () => {
       :headers="headers"
       :value="value[child.key]"
       :depth="depth + 1"
+      :is-sticky="isSticky"
     >
       <template v-for="(_, name) in $slots" #[name]="slotData">
         <slot :name="name" v-bind="slotData" />
