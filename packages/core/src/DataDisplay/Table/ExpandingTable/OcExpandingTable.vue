@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ExpandingTableRow from './OcExpadingTableRow.vue'
+import ExpandingTableRow from './OcExpandingTableRow.vue'
 import ExpandingHeaderRow from './OcExpandingHeaderRow.vue'
 import { computed } from 'vue'
 
