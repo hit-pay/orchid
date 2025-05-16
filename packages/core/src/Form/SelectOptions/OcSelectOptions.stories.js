@@ -12,6 +12,33 @@ export const Default = {
   args: {
     jsonForm: [
       {
+        name: 'select_options_small',
+        type: 'SelectOptions',
+        props: {
+          isSmallImage: true,
+          label: 'Example Label',
+          hint: 'This is a hint text to help user',
+          placeholder: 'placeholder',
+          options: [
+            {
+              preview: '/images/request-form.svg',
+              label: 'Option 1',
+              value: 1
+            },
+            {
+              preview: '/images/request-form.svg',
+              label: 'Option 2',
+              value: 2
+            },
+            {
+              preview: '/images/request-form.svg',
+              label: 'Option 3',
+              value: 3
+            }
+          ]
+        }
+      },
+      {
         name: 'select_options',
         type: 'SelectOptions',
         props: {

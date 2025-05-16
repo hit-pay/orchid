@@ -99,7 +99,8 @@ const sizes = computed(() => ({
 
 <template>
   <div class="flex flex-col items-center" :class="sizes[size].box">
-    <div class="relative">
+    <slot name="icon">
+      <div class="relative">
       <div
         class="flex justify-center border rounded-full items-center aspect-square"
         :class="[
@@ -122,6 +123,7 @@ const sizes = computed(() => ({
         :class="sizes[size].badge.class"
       />
     </div>
+    </slot>
     <div class="flex flex-col items-center" :class="sizes[size].containerInfo">
       <span :class="sizes[size].title" class="font-medium">{{ title }}</span>
       <slot name="description">

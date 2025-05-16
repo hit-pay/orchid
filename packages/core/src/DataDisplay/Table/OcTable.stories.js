@@ -180,11 +180,28 @@ export const expandingTable = {
       const headers2 = [
         {
           label: 'Header 1',
-          key: 'key1'
+          key: 'key1',
         },
         {
           label: 'Header 2',
-          key: 'key2'
+          key: 'key2',
+       
+        },
+        {
+          label: 'Header3',
+          key: 'key3',
+        },
+        {
+          label: 'Header4',
+          key: 'key4',
+        },
+        {
+          label: 'Header5',
+          key: 'key5',
+        },
+        {
+          label: 'Header6',
+          key: 'key6',
         }
       ]
       const fields2 = [
@@ -202,7 +219,7 @@ export const expandingTable = {
                 {{ value.quick_sale + value.products }}
               </template>
             </ExpandingTable>
-            <ExpandingTable is-alternative is-loading :headers="headers2" :fields="fields2">
+            <ExpandingTable is-alternative is-loading :headers="headers2" is-sticky :fields="fields2">
               <template #total>
                 <div/>
               </template>

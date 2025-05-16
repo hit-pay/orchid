@@ -196,11 +196,17 @@ const setFormClass = (form) => {
           // show if by other setting value
           let showThisField = 0
           form.show_if.forEach((value, arrayIndex) => {
-            if (form.show_if_value[arrayIndex] === formLogicValues.value[form.show_if[arrayIndex]]) {
+            if(form.show_if_value[arrayIndex] === 'arrayExist'){
+              if(formLogicValues.value[form.show_if[arrayIndex]]?.length){
+                showThisField = showThisField + 1
+              }
+            }else if (form.show_if_value[arrayIndex] === formLogicValues.value[form.show_if[arrayIndex]]) {
               showThisField = showThisField + 1
             }
           })
-          if(showThisField < form.show_if.length){
+          if(form.show_if_one && showThisField < 1){
+            formClassName = formClassName + ' hidden'
+          }else if(!form.show_if_one &&showThisField < form.show_if.length){
             formClassName = formClassName + ' hidden'
           }
         }else if(form.show_if_value !== formLogicValues.value[form.show_if]) {
