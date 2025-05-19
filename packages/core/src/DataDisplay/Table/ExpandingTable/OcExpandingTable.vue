@@ -31,6 +31,10 @@ const props = defineProps({
   isSticky: {
     type: Boolean,
     default: false
+  },
+  gridTemplateColumns: {
+    type: String,
+    default: '32px 200px repeat(${headers.length - 1}, minmax(150px, auto)) 32px'
   }
 })
 const emptyRow = computed(() => Object.fromEntries(props.headers.map((h) => [h.key, ''])))
@@ -39,7 +43,7 @@ const emptyRow = computed(() => Object.fromEntries(props.headers.map((h) => [h.k
 <template>
   <div class="flex flex-col border rounded w-full border-oc-gray-200 overflow-auto">
     <template v-if="isAlternative">
-      <ExpandingHeaderRow :headers="headers" :is-sticky="isSticky" />
+      <ExpandingHeaderRow :headers="headers" :is-sticky="isSticky" :grid-template-columns="gridTemplateColumns" />
 
       <template v-if="isLoading && !fields.length">
         <ExpandingTableRow
@@ -50,6 +54,7 @@ const emptyRow = computed(() => Object.fromEntries(props.headers.map((h) => [h.k
           :row="emptyRow"
           :headers="headers"
           :is-sticky="isSticky"
+          :grid-template-columns="gridTemplateColumns"
         />
       </template>
       <template v-else>
@@ -62,6 +67,7 @@ const emptyRow = computed(() => Object.fromEntries(props.headers.map((h) => [h.k
           :is-alternative="isAlternative"
           :is-sticky="isSticky"
           :important="row.important"
+          :grid-template-columns="gridTemplateColumns"
         >
           <template v-for="(_, name) in $slots" #[name]="slotData">
             <slot :name="name" v-bind="slotData" />
@@ -80,6 +86,7 @@ const emptyRow = computed(() => Object.fromEntries(props.headers.map((h) => [h.k
         :value="fields[row.key]"
         :is-sticky="isSticky"
         :important="row.important"
+        :grid-template-columns="gridTemplateColumns"
       >
         <template v-for="(_, name) in $slots" #[name]="slotData">
           <slot :name="name" v-bind="slotData" />
@@ -87,7 +94,7 @@ const emptyRow = computed(() => Object.fromEntries(props.headers.map((h) => [h.k
       </ExpandingTableRow>
     </template>
     <slot name="total">
-      <ExpandingTableRow is-total :headers="headers" :row="{ label: 'Total' }" :value="total" :is-sticky="isSticky" />
+      <ExpandingTableRow is-total :headers="headers" :row="{ label: 'Total' }" :value="total" :is-sticky="isSticky" :grid-template-columns="gridTemplateColumns" />
     </slot>
   </div>
 </template>
