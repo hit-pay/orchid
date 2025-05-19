@@ -16,10 +16,14 @@ export const Default = {
       TopBanner
     },
     setup() {
-      return { args }
+      const onClick = () => {
+        console.log('clicked')
+      }
+
+      return { args, onClick }
     },
     template: `
-          <TopBanner :title="args.title" :button-label="args.buttonLabel"/>
+          <TopBanner :title="args.title" :button-label="args.buttonLabel" @click:button="onClick" />
         `
   })
 }

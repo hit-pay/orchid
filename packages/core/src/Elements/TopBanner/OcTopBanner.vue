@@ -8,6 +8,8 @@ defineProps({
   },
   buttonLabel: String
 })
+
+defineEmits(['click:button'])
 </script>
 
 <template>
@@ -16,7 +18,13 @@ defineProps({
       {{ title }}
     </span>
 
-    <Button v-if="buttonLabel" class="absolute right-9" size="small" is-transparent>
+    <Button
+      v-if="buttonLabel"
+      class="absolute right-9"
+      size="small"
+      is-transparent
+      @click="$emit('click:button')"
+    >
       <span class="flex items-center gap-2 underline">
         {{ buttonLabel }} <Icon name="arrow-right" width="9" height="9" />
       </span>
