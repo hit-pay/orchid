@@ -35,6 +35,10 @@ defineProps({
   isSticky: {
     type: Boolean,
     default: false
+  },
+  gridTemplateColumns: {
+    type: String,
+    default: '32px 200px repeat(${headers.length - 1}, minmax(150px, auto)) 32px'
   }
 })
 
@@ -59,7 +63,7 @@ const toggleExpand = () => {
   <div
     class="grid h-[58px] items-center border-b border-oc-gray-200 min-w-max relative"
     :style="{
-      gridTemplateColumns: `32px 200px repeat(${headers.length - 1}, minmax(150px, auto)) 32px`
+      gridTemplateColumns
     }"
     :class="{
       'font-medium': important || isTotal,
