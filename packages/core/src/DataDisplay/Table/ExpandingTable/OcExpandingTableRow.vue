@@ -61,7 +61,7 @@ const toggleExpand = () => {
 
 <template>
   <div
-    class="grid h-[58px] items-center border-b border-oc-gray-200 min-w-max relative"
+    class="grid min-h-[58px] items-center border-b border-oc-gray-200 min-w-max relative"
     :style="{
       gridTemplateColumns
     }"
