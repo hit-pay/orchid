@@ -37,7 +37,8 @@ export const listItem = {
     type: 'timeline',
     image:
       'https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/covers/small/99d696e564ba45fbaa0fb2e3b43d0e27.jpg',
-    imageSize: 'small'
+    imageSize: 'small',
+    isOpen: 1
   },
   render: (args) => ({
     components: { Theme, ListItem },
@@ -58,6 +59,7 @@ export const listItem = {
           :icon-class="args.iconClass"
           :icon-text="args.iconText"
           :description="args.description"
+          :is-open="args.isOpen"
         />
       </Theme>
     `
