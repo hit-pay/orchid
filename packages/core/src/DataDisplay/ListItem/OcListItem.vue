@@ -41,7 +41,7 @@ const props = defineProps({
   isDisabled: Boolean,
   isTransparent: Boolean,
   isDraggable: Boolean,
-  isOpen: Boolean
+  isOpenDefault: Boolean
 })
 defineEmits(['more', 'edit', 'delete', 'click:item'])
 

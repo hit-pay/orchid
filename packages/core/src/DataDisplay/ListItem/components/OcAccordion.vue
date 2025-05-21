@@ -17,10 +17,10 @@ const props = defineProps({
   isTransparent: Boolean,
   isDraggable: Boolean,
   isNoToggleForced: Boolean,
-  isOpen: Boolean
+  isOpenDefault: Boolean
 })
 const emit = defineEmits(['edit', 'delete'])
-const isOpen = ref(props.isOpen)
+const isOpen = ref(props.isOpenDefault)
 
 const toggleAccordion = () => {
   if (props.isNoToggleForced) {
@@ -29,13 +29,6 @@ const toggleAccordion = () => {
 
   isOpen.value = !isOpen.value
 }
-
-watch(
-  () => props.isOpen,
-  () => {
-    isOpen.value = props.isOpen
-  }
-)
 
 defineExpose({
   toggleAccordion
