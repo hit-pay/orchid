@@ -130,7 +130,7 @@ onUnmounted(() => {
     <div class="w-full h-full absolute top-0 left-0 z-[1008]" @click="onClickOutside" />
 
     <div
-      class="z-[1009] shadow-normal w-[calc(100%-40px)] max-h-[96vh] bg-oc-bg-light rounded-xl flex flex-col"
+      class="z-[1009] shadow-normal w-[calc(100%-40px)] max-h-[80vh] sm:max-h-[96vh] bg-oc-bg-light rounded-xl flex flex-col"
       :class="sizeClasses[size]"
     >
       <div
