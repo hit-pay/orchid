@@ -23,6 +23,10 @@ const props = defineProps({
     type: String,
     default: ''
   },
+  subLabel: {
+    type: String,
+    required: false
+  },
   hint: {
     type: String,
     default: ''
@@ -144,6 +148,7 @@ const isPasswordInput = computed(() => props.inputType === 'password')
   <BaseInput
     :label="isInlineLabel ? '' : label"
     :label-class="labelClass"
+    :sub-label="subLabel"
     :hint="hint"
     :error-message="errorMessage"
     :is-required="isRequired"
@@ -250,7 +255,7 @@ input::-webkit-inner-spin-button {
   box-shadow: 0px 1.5px 1.5px 0px #00000017, 0px 1px 3px 0px #0000000A;
   &.border-none {
     box-shadow: none !important;
-    border: none !important;  
+    border: none !important;
   }
 }
 </style>

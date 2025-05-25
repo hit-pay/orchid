@@ -6,6 +6,7 @@ const props = defineProps({
   placeholder: String,
   hint: String,
   label: String,
+  subLabel: String,
   errorMessages: {
     type: Object,
     default: () => ({

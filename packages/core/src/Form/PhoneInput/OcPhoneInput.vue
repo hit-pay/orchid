@@ -1,5 +1,5 @@
 <script setup>
-import { Dropdown, Input, Icon } from '@/orchidui-core'
+import { Dropdown, Input, Icon, BaseInput } from '@/orchidui-core'
 import { computed, ref } from 'vue'
 import { preventEventIfNotNumberInput } from '@/orchidui-core/composables/helpers.js'
 import { parsePhoneNumber } from 'libphonenumber-js'
@@ -18,6 +18,7 @@ const props = defineProps({
   placeholder: String,
   hint: String,
   label: String,
+  subLabel: String,
   isInlineLabel: Boolean,
   isDisabled: Boolean,
   shouldParseCountryCode: Boolean,
@@ -119,6 +120,7 @@ const onPaste = (e) => {
     :model-value="modelValue?.[1] || ''"
     :placeholder="placeholder"
     :label="label"
+    :sub-label="subLabel"
     :is-inline-label="isInlineLabel"
     :disabled="isDisabled"
     :hint="hint"

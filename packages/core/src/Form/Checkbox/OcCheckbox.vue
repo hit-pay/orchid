@@ -7,6 +7,7 @@ const props = defineProps({
   isPartial: Boolean,
   isDisabled: Boolean,
   label: String,
+  subLabel: String,
   topLabel: String,
   hint: String,
   errorMessage: String,
@@ -38,7 +39,13 @@ const onInput = () => emit('update:modelValue', !props.isDisabled ? !props.model
 </script>
 
 <template>
-  <BaseInput class="w-fit" :label="topLabel" :hint="hint" :error-message="errorMessage">
+  <BaseInput
+    class="w-fit"
+    :label="topLabel"
+    :sub-label="subLabel"
+    :hint="hint"
+    :error-message="errorMessage"
+  >
     <label
       class="flex items-center gap-x-3 cursor-pointer group"
       :class="{
