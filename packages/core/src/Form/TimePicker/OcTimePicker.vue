@@ -1,5 +1,5 @@
 <script setup>
-import { Input, Dropdown, TimePopup, BaseInput } from '@/orchidui-core'
+import { Input, Dropdown, TimePopup } from '@/orchidui-core'
 import { ref, watch } from 'vue'
 import dayjs from 'dayjs'
 
