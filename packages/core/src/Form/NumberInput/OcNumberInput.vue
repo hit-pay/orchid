@@ -11,6 +11,7 @@ const props = defineProps({
     default: 1
   },
   label: String,
+  subLabel: String,
   errorMessage: String,
   isDisabled: Boolean,
   tooltipOptions: Object,
@@ -40,6 +41,7 @@ const preventEventIfNotNumberInput = (event) => {
 <template>
   <BaseInput
     :label="label"
+    :sub-label="subLabel"
     :tooltip-options="tooltipOptions"
     :error-message="errorMessage"
     :hint="hint"

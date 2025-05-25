@@ -46,6 +46,10 @@ const props = defineProps({
     type: String,
     default: ''
   },
+  subLabel: {
+    type: String,
+    required: false
+  },
   hint: {
     type: String,
     default: ''
@@ -201,6 +205,7 @@ const validateAndEmit = () => {
             "
             icon="calendar"
             :label="label"
+            :sub-label="subLabel"
             :hint="hint"
             :error-message="errorMessage"
             :is-required="isRequired"

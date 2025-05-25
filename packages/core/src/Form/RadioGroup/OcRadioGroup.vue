@@ -9,6 +9,7 @@ defineProps({
   },
   radio: Array,
   label: String,
+  subLabel: String,
   wrapperClass: String,
   groupName: String,
   errorMessage: String,
@@ -31,7 +32,12 @@ const onInput = (value) => {
 </script>
 
 <template>
-  <BaseInput :label="label" :error-message="errorMessage" :hint="hint">
+  <BaseInput
+    :label="label"
+    :sub-label="subLabel"
+    :error-message="errorMessage"
+    :hint="hint"
+  >
     <div class="flex" :class="[alignmentClasses[alignment], wrapperClass]">
       <Radio
         v-for="(item, i) in radio"

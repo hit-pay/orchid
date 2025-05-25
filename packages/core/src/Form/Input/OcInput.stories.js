@@ -29,6 +29,7 @@ export const Default = {
   },
   args: {
     label: 'Label',
+    subLabel: 'Please note: any taxes withheld prior to the submission of a valid sworn declaration will not be refunded or credited.',
     hint: 'Hint',
     errorMessage: '',
     placeholder: 'Placeholder',
@@ -56,6 +57,7 @@ export const Default = {
             <OCInput
                 v-model="modelValue"
                 :label="args.label"
+                :sub-label="args.subLabel"
                 :error-message="args.errorMessage"
                 :hint="args.hint"
                 :placeholder="args.placeholder"

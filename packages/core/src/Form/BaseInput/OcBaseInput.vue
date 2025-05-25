@@ -3,6 +3,7 @@ import { Tooltip, Icon } from '@/orchidui-core'
 defineProps({
   label: String,
   hint: String,
+  subLabel: String,
   errorMessage: String,
   isRequired: Boolean,
   labelIcon: String,
@@ -34,6 +35,12 @@ defineProps({
         </template>
       </Tooltip>
     </label>
+    <div
+      v-if="subLabel"
+      class="text-sm font-medium text-oc-text-500"
+    >
+      {{ subLabel }}
+    </div>
     <slot />
     <div
       v-if="(hint || $slots.hint) && !errorMessage"

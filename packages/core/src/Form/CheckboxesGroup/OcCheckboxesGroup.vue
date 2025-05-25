@@ -12,6 +12,7 @@ const props = defineProps({
     type: [Array, String]
   },
   label: String,
+  subLabel: String,
   errorMessage: String,
   hint: String,
   isDisabled: Boolean,
@@ -50,7 +51,12 @@ const selectAll = () => {
 </script>
 
 <template>
-  <BaseInput :label="label" :error-message="errorMessage" :hint="hint">
+  <BaseInput
+    :label="label"
+    :sub-label="subLabel"
+    :error-message="errorMessage"
+    :hint="hint"
+  >
     <div class="flex" :class="alignmentClasses[alignment]">
       <Checkbox
         v-if="isSelectAll"

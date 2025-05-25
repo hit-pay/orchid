@@ -22,6 +22,10 @@ const props = defineProps({
     type: String,
     default: 'Amount'
   },
+  subLabel: {
+    type: String,
+    required: false
+  },
   hint: {
     type: String,
     default: ''
@@ -78,7 +82,12 @@ onMounted(() => {
 
 <template>
   <div class="flex flex-col gap-y-2 oc-range-input">
-    <BaseInput :label="label" :hint="hint" :error-message="errorMessage">
+    <BaseInput
+      :label="label"
+      :sub-label="subLabel"
+      :hint="hint"
+      :error-message="errorMessage"
+    >
       <div class="flex gap-x-3">
         <Input
           :model-value="localMinValue"

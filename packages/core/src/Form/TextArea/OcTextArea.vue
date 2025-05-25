@@ -5,6 +5,7 @@ import { ref } from 'vue'
 defineProps({
   placeholder: String,
   label: String,
+  subLabel: String,
   errorMessage: String,
   hint: String,
   modelValue: String,
@@ -51,6 +52,7 @@ const onInput = (event) => {
     :label="label"
     :error-message="errorMessage"
     :hint="hint"
+    :sub-label="subLabel"
     :is-required="isRequired"
     :label-icon="labelIcon"
     :tooltip-text="tooltipText"

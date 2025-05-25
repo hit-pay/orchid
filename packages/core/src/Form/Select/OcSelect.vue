@@ -4,6 +4,7 @@ import { computed, nextTick, ref, watch } from 'vue'
 
 const props = defineProps({
   label: String,
+  subLabel: String,
   hint: String,
   icon: String,
   errorMessage: String,
@@ -278,6 +279,7 @@ defineExpose({
     class="relative rounded"
     :label="isInlineLabel ? '' : label"
     :hint="hint"
+    :sub-label="subLabel"
     :error-message="errorMessage"
     :is-required="isRequired"
     :label-icon="labelIcon"

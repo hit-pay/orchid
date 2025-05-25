@@ -1,5 +1,5 @@
 <script setup>
-import { Input, Dropdown, TimePopup } from '@/orchidui-core'
+import { Input, Dropdown, TimePopup, BaseInput } from '@/orchidui-core'
 import { ref, watch } from 'vue'
 import dayjs from 'dayjs'
 
@@ -12,6 +12,7 @@ const isDropdownOpened = ref(false)
 const props = defineProps({
   modelValue: [String, Date],
   label: String,
+  subLabel: String,
   hint: String,
   icon: {
     type: String,
@@ -67,6 +68,7 @@ watch(
       :icon="icon"
       :error-message="errorMessage"
       :label="label"
+      :sub-label="subLabel"
       :hint="hint"
       :pre-fill="preFill"
       :placeholder="placeholder"
