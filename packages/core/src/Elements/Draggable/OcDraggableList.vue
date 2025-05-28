@@ -1,8 +1,10 @@
 <!-- TODO : group not support nested dynamic -->
 <script setup>
 import { Dropdown, Icon, Tooltip } from '@/orchidui-core'
-import { Draggable } from '@/orchidui-core'
+import { defineAsyncComponent } from 'vue'
 import { ref } from 'vue'
+
+const Draggable = defineAsyncComponent(() => import('@/orchidui-core').then(module => module.Draggable))
 
 defineProps({
   modelValue: Array,

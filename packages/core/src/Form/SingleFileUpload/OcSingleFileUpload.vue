@@ -1,9 +1,9 @@
 <script setup>
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, defineAsyncComponent } from 'vue'
 import { Input, Button, BaseInput, Icon, Dropdown } from '@/orchidui-core'
 import { useUploadFileProgress } from '@/orchidui-core/composables/uploadFileProgress.js'
-import { ModalCropper } from '@/orchidui-core'
 import SingleOnlyImageUpload from './OcSingleOnlyImageUpload.vue'
+const ModalCropper = defineAsyncComponent(() => import('@/orchidui-core').then(module => module.ModalCropper))
 
 const props = defineProps({
   format: {

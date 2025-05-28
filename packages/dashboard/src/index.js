@@ -1,9 +1,17 @@
 import { defineAsyncComponent } from 'vue'
 
-import ColorPicker from '@/orchidui-dashboard/Dashboard/ColorPicker/OcColorPicker.vue'
-import TextEditor from '@/orchidui-dashboard/Dashboard/TextEditor/OcTextEditor.vue'
-import ColorPickerPopup from '@/orchidui-dashboard/Dashboard/ColorPicker/components/OcColorPickerPopup.vue'
-import OnboardingProgressbar from '@/orchidui-dashboard/Dashboard/OnboardingProgressbar/OcOnboardingProgressbar.vue'
+const ColorPicker = defineAsyncComponent(
+  () => import('@/orchidui-dashboard/Dashboard/ColorPicker/OcColorPicker.vue')
+)
+const TextEditor = defineAsyncComponent(
+  () => import('@/orchidui-dashboard/Dashboard/TextEditor/OcTextEditor.vue')
+)
+const ColorPickerPopup = defineAsyncComponent(
+  () => import('@/orchidui-dashboard/Dashboard/ColorPicker/components/OcColorPickerPopup.vue')
+)
+const OnboardingProgressbar = defineAsyncComponent(
+  () => import('@/orchidui-dashboard/Dashboard/OnboardingProgressbar/OcOnboardingProgressbar.vue')
+)
 const CodeBlock = defineAsyncComponent(
   () => import('@/orchidui-dashboard/Dashboard/CodeBlock/OcCodeBlock.vue')
 )
@@ -26,15 +34,3 @@ export {
   LottieAnimation,
   CodeBlock
 }
-
-// all components :
-// OnboardingProgressbar
-// TextEditor
-// ColorPicker
-// ColorPickerPopup
-// CodeBlock
-// Card
-// BarChart
-// BarRaceChart
-// LineChart
-// PieChart

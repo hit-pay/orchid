@@ -12,9 +12,10 @@ import {
   Dropdown
 } from '@/orchidui-core'
 
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, defineAsyncComponent } from 'vue'
 import dayjs from 'dayjs'
-import ColumnEdit from './ColumnEdit.vue'
+
+const ColumnEdit = defineAsyncComponent(() => import('./ColumnEdit.vue'))
 
 import {
   formatHeadersToLocalStorage,

@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { Icon, Dropdown } from '@/orchidui-core'
-import { ModalCropper } from '@/orchidui-core'
-import { ref } from 'vue'
+import { ref, defineAsyncComponent } from 'vue'
+
+const ModalCropper = defineAsyncComponent(() => import('@/orchidui-core').then(module => module.ModalCropper))
 
 const props = defineProps({
   accept: {

@@ -43,7 +43,18 @@ export default defineConfig({
       formats: ['es']
     },
     rollupOptions: {
-      external: ['vue', '@orchidui/core', 'echarts', 'shikiji']
+      external: [
+        'vue',
+        'dayjs',
+        '@popperjs/core',
+        'libphonenumber-js',
+        'v-calendar',
+        'vue-advanced-cropper',
+        'vue-draggable-next',
+        '@orchidui/core',
+        'echarts',
+        'shikiji'
+      ]
     }
   }
 })

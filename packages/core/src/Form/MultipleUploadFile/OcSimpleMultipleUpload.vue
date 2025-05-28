@@ -1,7 +1,9 @@
 <script setup>
 import { Dropdown, Icon, ConfirmationModal } from '@/orchidui-core'
-import { ref, computed } from 'vue'
-import { Draggable, ModalCropper } from '@/orchidui-core'
+import { ref, computed, defineAsyncComponent } from 'vue'
+
+const Draggable = defineAsyncComponent(() => import('@/orchidui-core').then(module => module.Draggable))
+const ModalCropper = defineAsyncComponent(() => import('@/orchidui-core').then(module => module.ModalCropper))
 
 const props = defineProps({
   accept: {
