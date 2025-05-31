@@ -43,7 +43,7 @@ export default defineConfig({
       formats: ['es']
     },
     rollupOptions: {
-      external: ['vue', '@orchidui/core', 'echarts', 'shikiji']
+      external: ['vue', '@orchidui/core', 'echarts', 'shikiji', 'lottie-web']
     }
   }
 })
