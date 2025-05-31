@@ -1,7 +1,7 @@
 {
   "name": "@orchidui/dashboard",
   "description": "Orchid Dashboard UI , Dashboard Ui Library Vue 3 tailwind css",
-  "version": "1.8.1-86",
+  "version": "1.8.1-88",
   "type": "module",
   "scripts": {
     "build": "vite build"
@@ -18,6 +18,9 @@
   "exports": {
     ".": {
       "import": "./dist/index.js"
+    },
+    "./OcCard": {
+      "import": "./dist/OcCard.js"
     },
     "./dist/style.css": {
       "import": "./dist/style.css",

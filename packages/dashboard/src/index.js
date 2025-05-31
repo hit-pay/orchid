@@ -14,7 +14,6 @@ export * from '@/orchidui-dashboard/Dashboard/Charts/LineChart/OcLineChart.js'
 export * from '@/orchidui-dashboard/Dashboard/Charts/PieChart/OcPieChart.js'
 export * from '@/orchidui-dashboard/Dashboard/Charts/BarChart/OcBarChart.js'
 export * from '@/orchidui-dashboard/Dashboard/Charts/BarRaceChart/OcBarRaceChart.js'
-export * from '@/orchidui-dashboard/Dashboard/Card/OcCard.js'
 
 export {
   OnboardingProgressbar,
