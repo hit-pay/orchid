@@ -77,7 +77,7 @@ const editedTableOptions = computed(() => ({
 
           return item
         })
-        .filter((h) => isColumnActive(h.key))
+        .filter((h) => h.isActive)
     : tableOptions.value?.headers.filter((h) => isColumnActive(h.key))
 }))
 const filterOptions = computed(() => props.options?.filterOptions)

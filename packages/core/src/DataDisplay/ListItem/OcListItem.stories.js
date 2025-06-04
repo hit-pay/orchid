@@ -342,6 +342,7 @@ export const ListItemAccordion = {
     isDisabled: false,
     isTransparent: false,
     isDraggable: true,
+    isOpenDefault: true,
     chips: [
       {
         label: 'Required'

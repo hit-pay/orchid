@@ -7,15 +7,19 @@ defineProps({
   isSticky: {
     type: Boolean,
     default: false
+  },
+  gridTemplateColumns: {
+    type: String,
+    default: '32px 200px repeat(${headers.length - 1}, minmax(150px, auto)) 32px'
   }
 })
 </script>
 
 <template>
   <div
-    class="grid bg-oc-gray-50  h-[34px] min-w-max relative"
+    class="grid bg-oc-gray-50 h-[35px] min-w-max relative"
     :style="{
-      gridTemplateColumns: `32px 200px repeat(${headers.length - 1}, minmax(150px, auto)) 32px`
+      gridTemplateColumns
     }"
   >
     <div

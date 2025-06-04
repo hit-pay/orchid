@@ -169,18 +169,18 @@ export const Default = {
           },
           {
             key: 'col1',
-            label: 'Table Header',
+            label: 'Table Header 1',
             class: 'w-1/2 md:min-w-[20%]'
           },
           {
             key: 'col2',
-            label: 'Table Header',
+            label: 'Table Header 2',
             class: 'w-1/2 md:min-w-[10%]'
           },
           {
             key: 'col3',
             variant: 'content',
-            label: 'Table Header',
+            label: 'Table Header 3',
             title: 'col3Title',
             href: 'col3Url',
             description: 'col3Description',
@@ -190,12 +190,12 @@ export const Default = {
           },
           {
             key: 'col4',
-            label: 'Table Header',
+            label: 'Table Header 4',
             class: 'w-1/2 md:min-w-[18%]'
           },
           {
             key: 'col5',
-            label: 'Table Header',
+            label: 'Table Header 5',
             class: 'w-1/2 md:min-w-[15%]',
             variant: 'chip',
             chipOptions: {
