@@ -72,7 +72,7 @@ const getMaxHeightWithoutOverflow = async () => {
   const maxHeight = max - (2 + additionalTopOffset) * 16 // offset;
 
   maxPopperHeight.value = maxHeight > 0 ? maxHeight : 0
-  popper.value.popperInstance.update()
+  popper.value.popperInstance?.update()
 }
 
 watch(() => props.modelValue, getMaxHeightWithoutOverflow)

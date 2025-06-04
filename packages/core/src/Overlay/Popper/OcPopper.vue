@@ -47,7 +47,7 @@ const getPopperOptions = () => ({
   modifiers: [
     {
       name: 'flip',
-      enabled: props.isFlipEnabled,
+      enabled: props.isFlipEnabled
     },
     {
       name: 'offset',
@@ -67,7 +67,7 @@ onMounted(() => {
   popperInstance.value = createPopper(reference.value, popper.value, getPopperOptions())
 
   // Need add setTimeout because placement is not updated immediately from props when component is mounted
-  setTimeout(() => popperInstance.value.update(), 150)
+  setTimeout(() => popperInstance.value?.update(), 150)
 })
 
 watch(
