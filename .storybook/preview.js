@@ -1,6 +1,6 @@
-/** @type { import('@storybook/vue3').Preview } */
+/** @type { import('@storybook/vue3-vite').Preview } */
 
-import { setup } from '@storybook/vue3'
+import { setup } from '@storybook/vue3-vite'
 
 import '../src/scss/main.scss'
 import '@/orchidui-core-style.css'
