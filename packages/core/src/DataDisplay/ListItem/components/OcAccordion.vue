@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Chip, Icon } from '@/orchidui-core'
 import { ref, watch } from 'vue'
+import {computed} from 'vue'
 
 const props = defineProps({
   title: String,
@@ -17,10 +18,17 @@ const props = defineProps({
   isTransparent: Boolean,
   isDraggable: Boolean,
   isNoToggleForced: Boolean,
-  isOpenDefault: Boolean
+  isOpenDefault: Boolean,
+  modelValue:{
+    type:Boolean,
+    default:false
+  },
 })
 const emit = defineEmits(['edit', 'delete'])
-const isOpen = ref(props.isOpenDefault)
+const isOpen = computed({
+  get: () => props.modelValue,
+  set: (value: boolean) => emit('update:modelValue', value)
+})
 
 const toggleAccordion = () => {
   if (props.isNoToggleForced) {
