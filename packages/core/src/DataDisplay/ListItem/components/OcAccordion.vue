@@ -20,10 +20,24 @@ const props = defineProps({
   },
   isTransparent: Boolean,
   isDraggable: Boolean,
-  isNoToggleForced: Boolean
+  isNoToggleForced: Boolean,
+  isOpenDefault: Boolean
 })
 
 const emit = defineEmits(['update:modelValue', 'edit', 'delete'])
+
+
+const isOpen = ref(props.isOpenDefault ?? props.modelValue)
+
+
+watch(() => props.modelValue, (val) => {
+  if (val !== isOpen.value) isOpen.value = val
+})
+
+
+watch(isOpen, (val) => {
+  if (val !== props.modelValue) emit('update:modelValue', val)
+})
 
 
 if (props.isOpenDefault) {
@@ -31,7 +45,7 @@ if (props.isOpenDefault) {
 }
 
 const toggleAccordion = () => {
-  if (props.isNoToggleForced) return
+  if (props.isNoToggleForced || props.isDisabled) return
   isOpen.value = !isOpen.value
 }
 
@@ -47,13 +61,13 @@ defineExpose({ toggleAccordion })
     }"
   >
     <div
-      class="flex gap-4 items-stretch"
-      :class="{ 'border-b':  modelValue, 'pl-5': isNoToggleForced }"
+      class="flex gap-4 items-stretch cursor-pointer"
+      :class="{ 'border-b': isOpen, 'pl-5': isNoToggleForced }"
       @click="toggleAccordion"
     >
       <div
         v-if="!isNoToggleForced"
-        class="flex items-center p-3 border-r bg-gray-50 cursor-pointer"
+        class="flex items-center p-3 border-r bg-gray-50"
       >
         <Icon
           :name="isOpen ? 'chevron-up' : 'chevron-down'"
@@ -104,13 +118,13 @@ defineExpose({ toggleAccordion })
               <Icon
                 name="pencil"
                 class="cursor-pointer text-oc-text-400 p-2"
-                @click="$emit('edit')"
+                @click.stop="$emit('edit')"
               />
               <div class="border-r border-gray-200" />
               <Icon
                 name="bin"
                 class="cursor-pointer text-oc-error p-2"
-                @click="$emit('delete')"
+                @click.stop="$emit('delete')"
               />
             </div>
             <Icon

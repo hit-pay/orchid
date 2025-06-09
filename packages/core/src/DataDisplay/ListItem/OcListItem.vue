@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import OcTimeLine from './components/OcTimeLine.vue'
 import OcWebhook from './components/OcWebhook.vue'
 import OcLogo from './components/OcLogo.vue'
@@ -41,12 +41,11 @@ const props = defineProps({
   isDisabled: Boolean,
   isTransparent: Boolean,
   isDraggable: Boolean,
-  isOpenDefault: Boolean
+  isOpenDefault: Boolean,
+  modelValue: Boolean  
 })
 
-defineEmits(['more', 'edit', 'delete', 'click:item'])
-
-
+const emit = defineEmits(['more', 'edit', 'delete', 'click:item', 'update:modelValue'])
 
 const getTypeComponent = computed(() => {
   switch (props.type) {
@@ -67,6 +66,8 @@ const getTypeComponent = computed(() => {
   <component
     :is="getTypeComponent"
     v-bind="props"
+    :model-value="props.modelValue"
+    @update:modelValue="val => emit('update:modelValue', val)"
     :class="{ 'opacity-50': isDisabled }"
     @more="$emit('more')"
     @edit="$emit('edit')"
