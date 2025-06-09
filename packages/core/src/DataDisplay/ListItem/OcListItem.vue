@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 import OcTimeLine from './components/OcTimeLine.vue'
 import OcWebhook from './components/OcWebhook.vue'
 import OcLogo from './components/OcLogo.vue'
@@ -8,6 +8,7 @@ import OcGeneral from './components/OcGeneral.vue'
 import OcTerminal from './components/OcTerminal.vue'
 import OcPage from './components/OcPage.vue'
 import OcAccordion from './components/OcAccordion.vue'
+
 
 const props = defineProps({
   isActive: Boolean,
@@ -44,12 +45,13 @@ const props = defineProps({
   isOpenDefault: Boolean
 })
 defineEmits(['more', 'edit', 'delete', 'click:item'])
+const isOpen = ref(props.isOpenDefault || false);
 
 const getTypeComponent = computed(() => {
   switch (props.type) {
     case 'timeLine':
       return OcTimeLine
-    case 'webhook':
+      case 'webhook':
       return OcWebhook
     case 'payment':
       return OcPayment
@@ -73,6 +75,8 @@ const getTypeComponent = computed(() => {
   <component
     :is="getTypeComponent"
     v-bind="props"
+    :model-value="isOpen"
+    @update:model-value="val => isOpen = val"
     :class="{ 'opacity-50': isDisabled }"
     @more="$emit('more')"
     @edit="$emit('edit')"

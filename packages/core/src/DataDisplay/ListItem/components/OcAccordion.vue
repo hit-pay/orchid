@@ -1,8 +1,13 @@
 <script setup lang="ts">
 import { Chip, Icon } from '@/orchidui-core'
-import { ref, watch } from 'vue'
+import { computed } from 'vue'
+
 
 const props = defineProps({
+  modelValue: {
+    type: Boolean,
+    default: false
+  },
   title: String,
   description: String,
   chips: {
@@ -19,16 +24,23 @@ const props = defineProps({
   isNoToggleForced: Boolean,
   isOpenDefault: Boolean
 })
-const emit = defineEmits(['edit', 'delete'])
-const isOpen = ref(props.isOpenDefault)
+
+
+const emit = defineEmits(['update:modelValue', 'edit', 'delete'])
+
+
+const isOpen = computed({
+  get: () => props.modelValue,
+  set: (value: boolean) => emit('update:modelValue', value)
+})
 
 const toggleAccordion = () => {
   if (props.isNoToggleForced) {
     return
   }
-
   isOpen.value = !isOpen.value
 }
+
 
 defineExpose({
   toggleAccordion
@@ -46,7 +58,7 @@ defineExpose({
     <div
       class="flex gap-4 items-stretch"
       :class="{
-        'border-b': isOpen,
+        'border-b': isOpen, 
         'pl-5': isNoToggleForced
       }"
       @click="toggleAccordion"
@@ -55,6 +67,7 @@ defineExpose({
         v-if="!isNoToggleForced"
         class="flex items-center p-3 border-r bg-gray-50 cursor-pointer"
       >
+      
         <Icon
           :name="isOpen ? 'chevron-up' : 'chevron-down'"
           width="20"
@@ -94,6 +107,7 @@ defineExpose({
           </slot>
         </div>
 
+        
         <slot name="right" :is-open="isOpen" :toggle-accordion="toggleAccordion">
           <div v-if="hasActions" class="flex items-center gap-4 opacity-0 group-hover:opacity-100">
             <div class="border border-oc-accent-1-100 rounded-sm p-1 flex gap-x-1">
@@ -116,6 +130,8 @@ defineExpose({
         </slot>
       </div>
     </div>
+
+
     <div v-show="isOpen" class="py-5 px-7">
       <slot name="content" />
     </div>
