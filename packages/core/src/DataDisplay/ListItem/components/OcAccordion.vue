@@ -25,18 +25,11 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue', 'edit', 'delete'])
 
-const isOpen = ref(props.modelValue)
+// no need to introduce isOpen
 
-watch(
-  () => props.modelValue,
-  (newVal) => {
-    isOpen.value = newVal
-  }
-)
-
-watch(isOpen, (val) => {
-  emit('update:modelValue', val)
-})
+if (props.isOpenDefault) {
+  emit('update:modelValue', true)
+}
 
 const toggleAccordion = () => {
   if (props.isNoToggleForced) return
