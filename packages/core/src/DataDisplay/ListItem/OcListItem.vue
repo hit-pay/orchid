@@ -75,8 +75,7 @@ const getTypeComponent = computed(() => {
   <component
     :is="getTypeComponent"
     v-bind="props"
-    :model-value="isOpen"
-    @update:model-value="val => isOpen = val"
+    v-model="isOpen"
     :class="{ 'opacity-50': isDisabled }"
     @more="$emit('more')"
     @edit="$emit('edit')"
