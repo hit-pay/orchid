@@ -49,7 +49,7 @@ defineExpose({ toggleAccordion })
   >
     <div
       class="flex gap-4 items-stretch"
-      :class="{ 'border-b': isOpen, 'pl-5': isNoToggleForced }"
+      :class="{ 'border-b':  modelValue, 'pl-5': isNoToggleForced }"
       @click="toggleAccordion"
     >
       <div
