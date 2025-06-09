@@ -9,7 +9,6 @@ import OcTerminal from './components/OcTerminal.vue'
 import OcPage from './components/OcPage.vue'
 import OcAccordion from './components/OcAccordion.vue'
 
-
 const props = defineProps({
   isActive: Boolean,
   title: String,
@@ -44,29 +43,22 @@ const props = defineProps({
   isDraggable: Boolean,
   isOpenDefault: Boolean
 })
+
 defineEmits(['more', 'edit', 'delete', 'click:item'])
-const isOpen = ref(props.isOpenDefault || false);
+
+const isOpen = ref(props.isOpenDefault || false)
 
 const getTypeComponent = computed(() => {
   switch (props.type) {
-    case 'timeLine':
-      return OcTimeLine
-      case 'webhook':
-      return OcWebhook
-    case 'payment':
-      return OcPayment
-    case 'general':
-      return OcGeneral
-    case 'terminal':
-      return OcTerminal
-    case 'logo':
-      return OcLogo
-    case 'page':
-      return OcPage
-    case 'accordion':
-      return OcAccordion
-    default:
-      return OcTimeLine
+    case 'timeLine': return OcTimeLine
+    case 'webhook': return OcWebhook
+    case 'payment': return OcPayment
+    case 'general': return OcGeneral
+    case 'terminal': return OcTerminal
+    case 'logo': return OcLogo
+    case 'page': return OcPage
+    case 'accordion': return OcAccordion
+    default: return OcTimeLine
   }
 })
 </script>
