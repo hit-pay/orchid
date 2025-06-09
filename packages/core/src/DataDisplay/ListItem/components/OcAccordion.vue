@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref, watch, defineEmits, defineProps, defineExpose } from 'vue'
 import { Chip, Icon } from '@/orchidui-core'
 
 const props = defineProps({
@@ -24,9 +25,22 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue', 'edit', 'delete'])
 
+const isOpen = ref(props.modelValue)
+
+watch(
+  () => props.modelValue,
+  (newVal) => {
+    isOpen.value = newVal
+  }
+)
+
+watch(isOpen, (val) => {
+  emit('update:modelValue', val)
+})
+
 const toggleAccordion = () => {
   if (props.isNoToggleForced) return
-  emit('update:modelValue', !props.modelValue)
+  isOpen.value = !isOpen.value
 }
 
 defineExpose({ toggleAccordion })
@@ -42,7 +56,7 @@ defineExpose({ toggleAccordion })
   >
     <div
       class="flex gap-4 items-stretch"
-      :class="{ 'border-b': modelValue, 'pl-5': isNoToggleForced }"
+      :class="{ 'border-b': isOpen, 'pl-5': isNoToggleForced }"
       @click="toggleAccordion"
     >
       <div
@@ -50,14 +64,16 @@ defineExpose({ toggleAccordion })
         class="flex items-center p-3 border-r bg-gray-50 cursor-pointer"
       >
         <Icon
-          :name="modelValue ? 'chevron-up' : 'chevron-down'"
+          :name="isOpen ? 'chevron-up' : 'chevron-down'"
           width="20"
           height="20"
           class="text-oc-text-400"
         />
       </div>
+
       <div class="flex items-center gap-x-4 w-full p-5 pl-0 overflow-hidden">
-        <slot name="logo"></slot>
+        <slot name="logo" />
+
         <div class="flex flex-col flex-1 gap-y-3 overflow-hidden">
           <div class="flex items-center justify-between">
             <div class="flex text-sm text-oc-text-400 items-center gap-x-3 overflow-hidden">
@@ -77,6 +93,7 @@ defineExpose({ toggleAccordion })
               </div>
             </div>
           </div>
+
           <slot>
             <div v-if="description" class="flex flex-col gap-3">
               <div class="text-oc-text-400 flex gap-x-2 items-center text-sm">
@@ -86,8 +103,11 @@ defineExpose({ toggleAccordion })
           </slot>
         </div>
 
-        <slot name="right" :is-open="modelValue" :toggle-accordion="toggleAccordion">
-          <div v-if="hasActions" class="flex items-center gap-4 opacity-0 group-hover:opacity-100">
+        <slot name="right" :is-open="isOpen" :toggle-accordion="toggleAccordion">
+          <div
+            v-if="hasActions"
+            class="flex items-center gap-4 opacity-0 group-hover:opacity-100"
+          >
             <div class="border border-oc-accent-1-100 rounded-sm p-1 flex gap-x-1">
               <Icon
                 name="pencil"
@@ -113,7 +133,7 @@ defineExpose({ toggleAccordion })
       </div>
     </div>
 
-    <div v-show="modelValue" class="py-5 px-7">
+    <div v-show="isOpen" class="py-5 px-7">
       <slot name="content" />
     </div>
   </div>

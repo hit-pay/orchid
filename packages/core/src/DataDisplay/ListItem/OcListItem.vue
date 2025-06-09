@@ -46,7 +46,7 @@ const props = defineProps({
 
 defineEmits(['more', 'edit', 'delete', 'click:item'])
 
-const isOpen = ref(props.isOpenDefault || false)
+
 
 const getTypeComponent = computed(() => {
   switch (props.type) {
