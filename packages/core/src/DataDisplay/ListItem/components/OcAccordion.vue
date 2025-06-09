@@ -25,7 +25,6 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue', 'edit', 'delete'])
 
-// no need to introduce isOpen
 
 if (props.isOpenDefault) {
   emit('update:modelValue', true)
