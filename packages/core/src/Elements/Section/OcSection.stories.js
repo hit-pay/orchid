@@ -5,7 +5,7 @@ import {
   OverviewIcon as OverviewIcon,
   Button as OcButton,
   Icon as OcIcon,
-  OcOnboardingListItem,
+  OcOnboardingListItem
 } from '@/orchidui-core'
 
 export default {
@@ -15,7 +15,7 @@ export default {
 
 export const Default = {
   args: {
-    title: 'Get in touch',
+    title: 'Get in touch'
   },
   render: (args) => ({
     components: {
@@ -25,7 +25,7 @@ export const Default = {
       OcButton,
       OcIcon,
       OcOnboardingListItem,
-      OcTheme,
+      OcTheme
     },
     setup() {
       return { args }

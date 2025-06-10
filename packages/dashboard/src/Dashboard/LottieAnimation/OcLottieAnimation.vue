@@ -1,112 +1,102 @@
 <!-- Lottie Animation Docs Reference: https://github.com/airbnb/lottie-web -->
 <template>
-  <div
-    ref="lottieContainerRef"
-    :style="style"
-  />
+  <div ref="lottieContainerRef" :style="style" />
 </template>
 
 <script setup>
-import lottie from 'lottie-web';
-import {
-  onMounted, onUnmounted, ref, watch,
-} from 'vue';
+import lottie from 'lottie-web'
+import { onMounted, onUnmounted, ref, watch } from 'vue'
 
 // Prop with default values
 const props = defineProps({
   path: {
     type: String,
-    required: true,
+    required: true
   },
   width: {
     type: String,
-    required: true,
+    required: true
   },
   height: {
     type: String,
-    required: true,
+    required: true
   },
   speed: {
     type: Number,
-    default: 1,
+    default: 1
   },
   loop: {
     type: Boolean,
-    default: false,
+    default: false
   },
   autoplay: {
     type: Boolean,
-    default: true,
-  },
+    default: true
+  }
 })
 
 // Emits
-const emit = defineEmits(['error', 'animation-item-changed']);
+const emit = defineEmits(['error', 'animation-item-changed'])
 
 // Refs
 const rendererSettings = ref({
   scaleMode: 'centerCrop',
   clearCanvas: true,
   progressiveLoad: false,
-  hideOnTransparent: true,
-});
+  hideOnTransparent: true
+})
 
-const animationItem = ref();
+const animationItem = ref()
 const style = ref({
   width: '100', // in pixel
   height: '100',
   overflow: 'hidden',
-  margin: '0 auto',
-});
+  margin: '0 auto'
+})
 
 // select the HTML to render the animation
-const lottieContainerRef = ref();
+const lottieContainerRef = ref()
 
-const jsonData = ref();
+const jsonData = ref()
 
 // Methods
 const loadJsonData = async (path) => {
-  const response = await fetch(path)
-      .catch(() => {
-        emit('error');
-      });
+  const response = await fetch(path).catch(() => {
+    emit('error')
+  })
 
   if (!response) {
-    return;
+    return
   }
 
-  jsonData.value = await response.json();
-};
+  jsonData.value = await response.json()
+}
 
 const play = () => {
-  animationItem.value?.play();
+  animationItem.value?.play()
 }
 
 const stop = () => {
-  animationItem.value?.stop();
+  animationItem.value?.stop()
 }
 
 const init = async () => {
   style.value = {
-    width: (props.width !== -1)
-        ? `${props.width}px`
-        : '100%',
-    height: (props.height !== -1)
-        ? `${props.height}px`
-        : '100%',
+    width: props.width !== -1 ? `${props.width}px` : '100%',
+    height: props.height !== -1 ? `${props.height}px` : '100%',
     overflow: 'hidden',
-    margin: '0 auto',
-  };
+    margin: '0 auto'
+  }
 
-  await loadJsonData(props.path);
+  await loadJsonData(props.path)
 
   if (animationItem.value) {
     // Releases resources. The DOM element will be emptied.
-    animationItem.value.destroy();
+    animationItem.value.destroy()
   }
 
   if (!lottieContainerRef.value) {
-    return;
+    return
   }
 
   const animationConfig = {
@@ -115,28 +105,28 @@ const init = async () => {
     loop: props.loop,
     autoplay: props.autoplay,
     animationData: jsonData.value,
-    rendererSettings: rendererSettings.value,
-  };
+    rendererSettings: rendererSettings.value
+  }
 
-  animationItem.value = lottie.loadAnimation(animationConfig);
+  animationItem.value = lottie.loadAnimation(animationConfig)
 
-  emit('animation-item-changed', animationItem.value);
+  emit('animation-item-changed', animationItem.value)
 
-  animationItem.value.setSpeed(props.speed);
+  animationItem.value.setSpeed(props.speed)
 
   if (props.autoplay) {
-    play();
+    play()
   }
-};
+}
 
 // Watch
-watch(() => props.path, init);
+watch(() => props.path, init)
 
 // Mounted
-onMounted(init);
+onMounted(init)
 
 defineExpose({
   play,
-  stop,
+  stop
 })
 </script>

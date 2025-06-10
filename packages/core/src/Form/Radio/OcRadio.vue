@@ -106,7 +106,9 @@ defineEmits({
   }
 }
 .radio-button-init-shadow {
-  box-shadow: 0px 1.5px 1.5px 0px #00000017, 0px 1px 3px 0px #0000000A;
+  box-shadow:
+    0px 1.5px 1.5px 0px #00000017,
+    0px 1px 3px 0px #0000000a;
 }
 label:hover {
   .radio-button-focus-shadow {

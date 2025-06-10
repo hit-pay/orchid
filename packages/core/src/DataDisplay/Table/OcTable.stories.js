@@ -180,28 +180,27 @@ export const expandingTable = {
       const headers2 = [
         {
           label: 'Header 1',
-          key: 'key1',
+          key: 'key1'
         },
         {
           label: 'Header 2',
-          key: 'key2',
-       
+          key: 'key2'
         },
         {
           label: 'Header3',
-          key: 'key3',
+          key: 'key3'
         },
         {
           label: 'Header4',
-          key: 'key4',
+          key: 'key4'
         },
         {
           label: 'Header5',
-          key: 'key5',
+          key: 'key5'
         },
         {
           label: 'Header6',
-          key: 'key6',
+          key: 'key6'
         }
       ]
       const fields2 = [

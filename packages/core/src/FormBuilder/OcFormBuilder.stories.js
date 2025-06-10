@@ -666,7 +666,7 @@ export const ShowIfLogic = {
                 value: 3
               }
             ]
-          },
+          }
         },
         {
           name: 'select_options_1',

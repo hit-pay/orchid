@@ -213,7 +213,10 @@ const isNewTab = ref(localInputOptionsValue.value.new_tab ? true : false)
           @update:model-value="updateOptions('new_tab', $event)"
         >
         </Checkbox>
-        <div  v-if="inputOptions?.includes('lightbox')" class="flex items-center gap-x-2 justify-normal" >
+        <div
+          v-if="inputOptions?.includes('lightbox')"
+          class="flex items-center gap-x-2 justify-normal"
+        >
           <div class="w-auto">
             <Checkbox
               v-if="inputOptions?.includes('lightbox')"

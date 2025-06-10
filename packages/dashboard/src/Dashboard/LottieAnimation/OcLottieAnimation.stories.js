@@ -10,7 +10,7 @@ export const Default = {
     path: '/json/lottie-animation/success_report.json',
     width: '200',
     height: '200',
-    autoPlay: true,
+    autoPlay: true
   },
   render: (args) => ({
     components: { LottieAnimation },

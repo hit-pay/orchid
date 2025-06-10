@@ -50,7 +50,6 @@ const { isMobile } = useWindowWidth()
   <div v-else class="flex gap-x-3 items-center">
     <Skeleton class="w-[100px] h-[36px] rounded" />
     <Skeleton class="w-[100px] h-[36px] rounded" />
-
   </div>
 </template>
 <style scoped lang="scss">

@@ -523,7 +523,7 @@ export const FilterTabSameKeyFilterDefault = {
                 },
                 {
                   label: 'Option 2',
-                  value:'2'
+                  value: '2'
                 },
                 {
                   label: 'Option 3',
@@ -609,18 +609,18 @@ export const FilterTabSameKeyFilterDefault = {
           }
         ]
       }
-    },
+    }
   },
   render: (args) => ({
     components: {
       DataTable,
-      Theme,
+      Theme
     },
     setup() {
       const filter = ref({
         page: 1,
         per_page: 10,
-        status: '',
+        status: ''
       })
       const updateFilterData = (data) => {
         console.log('updateFilterData', data)
@@ -644,4 +644,3 @@ export const FilterTabSameKeyFilterDefault = {
         `
   })
 }
-

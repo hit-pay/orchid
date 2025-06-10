@@ -24,7 +24,7 @@ const toggleSizeClasses = computed(() => ({
 const ellipseClasses = computed(() => ({
   default: 'before:w-6 before:h-6 before:top-px before:left-px',
   small: ' before:w-4 before:h-4 before:top-[0.5px] before:left-[0.5px]'
-})) 
+}))
 const labelClasses = `absolute top-0 left-0 border border-transparent hover:bg-oc-primary-300 hover:border-oc-primary-500 bg-oc-primary-100 rounded-full cursor-pointer transition-all duration-300
  before:transition-all before:duration-300 before:absolute before:rounded-full before:bg-oc-bg-light`
 </script>
@@ -47,10 +47,15 @@ const labelClasses = `absolute top-0 left-0 border border-transparent hover:bg-o
       />
       <span
         class="toggle-label"
-        :class="[labelClasses, toggleSizeClasses[size], ellipseClasses[size], {
-          'toggle-on-focus': !disabled && !modelValue,
-          '!bg-oc-accent-1-100 before:bg-oc-accent-1-50': disabled
-        }]"
+        :class="[
+          labelClasses,
+          toggleSizeClasses[size],
+          ellipseClasses[size],
+          {
+            'toggle-on-focus': !disabled && !modelValue,
+            '!bg-oc-accent-1-100 before:bg-oc-accent-1-50': disabled
+          }
+        ]"
       ></span>
     </label>
     <div v-if="label" class="text-sm cursor-pointer" @click="onInput">{{ label }}</div>

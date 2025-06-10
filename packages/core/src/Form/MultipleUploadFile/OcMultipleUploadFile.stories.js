@@ -107,7 +107,7 @@ export const MultipleImages = {
             link: 'https://test-link.com',
             caption_variant: 'bottom'
           }
-        },
+        }
         // {
         //   current: {
         //     id: 'image_2',

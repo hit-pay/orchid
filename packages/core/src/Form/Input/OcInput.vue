@@ -198,11 +198,8 @@ const isPasswordInput = computed(() => props.inputType === 'password')
         </div>
       </div>
 
-      <div
-        v-if="$slots.leading || isPasswordInput"
-        class="flex items-center h-full"
-      >
-        <span v-if="hasLeadingSeparator" class="border-l border-gray-200 pl-3 py-3 h-full" ></span>
+      <div v-if="$slots.leading || isPasswordInput" class="flex items-center h-full">
+        <span v-if="hasLeadingSeparator" class="border-l border-gray-200 pl-3 py-3 h-full"></span>
         <span
           v-if="!$slots.leading"
           class="text-oc-text-200"
@@ -231,7 +228,9 @@ input::-webkit-inner-spin-button {
   display: none;
 }
 .focused-shadow {
-  box-shadow: 0px 0px 0px 3px var(--oc-primary-200), 0px 2px 4px 0px #0000003D inset !important;
+  box-shadow:
+    0px 0px 0px 3px var(--oc-primary-200),
+    0px 2px 4px 0px #0000003d inset !important;
   border-color: var(--oc-primary-500);
   &.border-none {
     box-shadow: none !important;
@@ -239,7 +238,9 @@ input::-webkit-inner-spin-button {
   }
 }
 .error-shadow {
-  box-shadow: 0px 0px 0px 3px var(--oc-error-200), 0px 2px 4px 0px #0000003D inset !important;
+  box-shadow:
+    0px 0px 0px 3px var(--oc-error-200),
+    0px 2px 4px 0px #0000003d inset !important;
   border-color: var(--oc-error-500);
   &.border-none {
     box-shadow: none !important;
@@ -247,10 +248,12 @@ input::-webkit-inner-spin-button {
   }
 }
 .input-shadow {
-  box-shadow: 0px 1.5px 1.5px 0px #00000017, 0px 1px 3px 0px #0000000A;
+  box-shadow:
+    0px 1.5px 1.5px 0px #00000017,
+    0px 1px 3px 0px #0000000a;
   &.border-none {
     box-shadow: none !important;
-    border: none !important;  
+    border: none !important;
   }
 }
 </style>

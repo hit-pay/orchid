@@ -186,7 +186,6 @@ const formLogicValues = computed(() => {
   }
 })
 const setFormClass = (form) => {
- 
   if (form.show_if || form.show_if_preview) {
     let formClassName = form.class ? form.class : ''
 
@@ -196,20 +195,22 @@ const setFormClass = (form) => {
           // show if by other setting value
           let showThisField = 0
           form.show_if.forEach((value, arrayIndex) => {
-            if(form.show_if_value[arrayIndex] === 'arrayExist'){
-              if(formLogicValues.value[form.show_if[arrayIndex]]?.length){
+            if (form.show_if_value[arrayIndex] === 'arrayExist') {
+              if (formLogicValues.value[form.show_if[arrayIndex]]?.length) {
                 showThisField = showThisField + 1
               }
-            }else if (form.show_if_value[arrayIndex] === formLogicValues.value[form.show_if[arrayIndex]]) {
+            } else if (
+              form.show_if_value[arrayIndex] === formLogicValues.value[form.show_if[arrayIndex]]
+            ) {
               showThisField = showThisField + 1
             }
           })
-          if(form.show_if_one && showThisField < 1){
+          if (form.show_if_one && showThisField < 1) {
             formClassName = formClassName + ' hidden'
-          }else if(!form.show_if_one &&showThisField < form.show_if.length){
+          } else if (!form.show_if_one && showThisField < form.show_if.length) {
             formClassName = formClassName + ' hidden'
           }
-        }else if(form.show_if_value !== formLogicValues.value[form.show_if]) {
+        } else if (form.show_if_value !== formLogicValues.value[form.show_if]) {
           formClassName = formClassName + ' hidden'
         }
       } else if (form.show_if_not !== undefined) {

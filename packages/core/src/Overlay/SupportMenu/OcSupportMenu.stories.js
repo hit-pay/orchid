@@ -19,17 +19,17 @@ export const Default = {
           {
             text: 'Whatsapp',
             icon: 'whatsapp-colored',
-            isLoading: true,
+            isLoading: true
           },
           {
             text: 'Email Us',
             icon: 'email',
-            isLoading: true,
+            isLoading: true
           },
           {
             text: 'Record a Bug',
             icon: 'bug',
-            isLoading: true,
+            isLoading: true
           }
         ]
       },
@@ -39,7 +39,7 @@ export const Default = {
           {
             text: 'User Guides',
             icon: 'document',
-            isLoading: true,
+            isLoading: true
           },
           {
             text: 'Blog',
@@ -53,7 +53,7 @@ export const Default = {
         text: 'What’s new',
         icon: 'sparkle-2',
         pointed: true,
-        isLoading: false,
+        isLoading: false
       },
       {
         text: 'Feedback',

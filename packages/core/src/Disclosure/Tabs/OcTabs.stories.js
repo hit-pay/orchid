@@ -225,7 +225,7 @@ export const VariantTabsFullWidth = {
         value: 'desktop',
         icon: 'book'
       }
-    ],
+    ]
   },
   render: (args) => ({
     components: { Theme, Tabs },

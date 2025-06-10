@@ -62,7 +62,7 @@ onMounted(() => {
 })
 
 const applyFilter = () => {
-  if(valuesData.cursor) valuesData.cursor = ''
+  if (valuesData.cursor) valuesData.cursor = ''
 
   emit('applyFilter', valuesData.value)
   emit('filter-fields-changed', changedFields.value)

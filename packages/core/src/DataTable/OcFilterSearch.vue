@@ -59,13 +59,13 @@ const changeSearchKey = (value) => {
 
             <template #menu>
               <div class="p-2 flex flex-col">
-                <DropdownItem 
-                v-for="option in searchOptions" 
-                :key="option.value" 
-                class="text-sm" 
-                :text="option.label" 
-                :active="option.value === selectedOption" 
-                @click="changeSearchKey(option.value)"
+                <DropdownItem
+                  v-for="option in searchOptions"
+                  :key="option.value"
+                  class="text-sm"
+                  :text="option.label"
+                  :active="option.value === selectedOption"
+                  @click="changeSearchKey(option.value)"
                 />
               </div>
             </template>
