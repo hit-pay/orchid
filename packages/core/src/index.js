@@ -99,7 +99,9 @@ const AccountSetupProgress = defineAsyncComponent(
   () => import('./Elements/Sidebar/OcAccountSetupProgress.vue')
 )
 
-export {}
+
+// shadcn-vue components
+export * from './ui/button/index.js'
 
 export {
   // datatable
