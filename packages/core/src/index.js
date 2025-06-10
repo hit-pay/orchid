@@ -100,9 +100,6 @@ const AccountSetupProgress = defineAsyncComponent(
 )
 
 
-// shadcn-vue components
-export * from './ui/button/index.js'
-
 export {
   // datatable
   DataTable,
