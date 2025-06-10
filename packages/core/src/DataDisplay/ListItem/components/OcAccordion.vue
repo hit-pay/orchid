@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref, watch, defineEmits, defineProps, defineExpose } from 'vue'
 import { Chip, Icon } from '@/orchidui-core'
+import { defineEmits, defineExpose, defineProps, onMounted } from 'vue'
 
 const props = defineProps({
   modelValue: {
@@ -27,26 +27,15 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue', 'edit', 'delete'])
 
 
-const isOpen = ref(props.isOpenDefault ?? props.modelValue)
-
-
-watch(() => props.modelValue, (val) => {
-  if (val !== isOpen.value) isOpen.value = val
+onMounted(() => {
+  if (props.isOpenDefault && !props.modelValue) {
+    emit('update:modelValue', true)
+  }
 })
-
-
-watch(isOpen, (val) => {
-  if (val !== props.modelValue) emit('update:modelValue', val)
-})
-
-
-if (props.isOpenDefault) {
-  emit('update:modelValue', true)
-}
 
 const toggleAccordion = () => {
   if (props.isNoToggleForced || props.isDisabled) return
-  isOpen.value = !isOpen.value
+  emit('update:modelValue', !props.modelValue)
 }
 
 defineExpose({ toggleAccordion })
@@ -62,7 +51,7 @@ defineExpose({ toggleAccordion })
   >
     <div
       class="flex gap-4 items-stretch cursor-pointer"
-      :class="{ 'border-b': isOpen, 'pl-5': isNoToggleForced }"
+      :class="{ 'border-b': modelValue, 'pl-5': isNoToggleForced }"
       @click="toggleAccordion"
     >
       <div
@@ -70,7 +59,7 @@ defineExpose({ toggleAccordion })
         class="flex items-center p-3 border-r bg-gray-50"
       >
         <Icon
-          :name="isOpen ? 'chevron-up' : 'chevron-down'"
+          :name="modelValue ? 'chevron-up' : 'chevron-down'"
           width="20"
           height="20"
           class="text-oc-text-400"
@@ -109,7 +98,7 @@ defineExpose({ toggleAccordion })
           </slot>
         </div>
 
-        <slot name="right" :is-open="isOpen" :toggle-accordion="toggleAccordion">
+        <slot name="right" :is-open="modelValue" :toggle-accordion="toggleAccordion">
           <div
             v-if="hasActions"
             class="flex items-center gap-4 opacity-0 group-hover:opacity-100"
@@ -139,7 +128,7 @@ defineExpose({ toggleAccordion })
       </div>
     </div>
 
-    <div v-show="isOpen" class="py-5 px-7">
+    <div v-show="modelValue" class="py-5 px-7">
       <slot name="content" />
     </div>
   </div>
