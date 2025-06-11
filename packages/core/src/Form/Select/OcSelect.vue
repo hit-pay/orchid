@@ -1,5 +1,5 @@
 <script setup>
-import { BaseInput, Input, Option, Icon, Chip, Button, Dropdown, Skeleton } from '@/orchidui-core'
+import { BaseInput, Button, Chip, Dropdown, Icon, Input, Option, Skeleton } from '@/orchidui-core'
 import { computed, nextTick, ref, watch } from 'vue'
 
 const props = defineProps({
@@ -87,6 +87,10 @@ const searchInputRef = ref()
 const dropdownRef = ref()
 const filterableOptionsRef = ref([])
 const selectListRef = ref()
+const triggerRef = ref()
+
+// Keyboard navigation state
+const focusedIndex = ref(-1)
 
 const optionsKey = ref(new Date().toISOString())
 
@@ -153,6 +157,125 @@ const localValueOption = computed(() => {
   }
 })
 
+// Keyboard navigation methods
+const handleTriggerKeydown = (event) => {
+  if (props.isDisabled || props.isReadonly) return
+
+  switch (event.key) {
+    case 'Enter':
+    case ' ':
+      event.preventDefault()
+      if (!isDropdownOpened.value) {
+        openDropdown()
+      }
+      break
+    case 'ArrowDown':
+      event.preventDefault()
+      if (!isDropdownOpened.value) {
+        openDropdown()
+      }
+      break
+    case 'ArrowUp':
+      event.preventDefault()
+      if (!isDropdownOpened.value) {
+        openDropdown()
+      }
+      break
+  }
+}
+
+const handleDropdownKeydown = (event) => {
+  if (!isDropdownOpened.value) return
+
+  switch (event.key) {
+    case 'ArrowDown':
+      event.preventDefault()
+      moveFocusDown() // This moves focus DOWN (increases index)
+      break
+    case 'ArrowUp':
+      event.preventDefault()
+      moveFocusUp() // This moves focus UP (decreases index)
+      break
+    case 'Enter':
+      event.preventDefault()
+      if (focusedIndex.value >= 0 && focusedIndex.value < filterableOptions.value.length) {
+        selectOption(filterableOptions.value[focusedIndex.value])
+      }
+      break
+    case 'Escape':
+      event.preventDefault()
+      closeDropdown()
+      break
+    case 'Tab':
+      closeDropdown()
+      break
+  }
+}
+
+const moveFocusDown = () => {
+  const maxIndex = filterableOptions.value.length - 1
+  if (focusedIndex.value < maxIndex) {
+    focusedIndex.value++
+  } else {
+    // Loop to first option
+    focusedIndex.value = 0
+  }
+  scrollToFocusedOption()
+}
+
+const moveFocusUp = () => {
+  if (focusedIndex.value > 0) {
+    focusedIndex.value--
+  } else {
+    // Loop to last option
+    focusedIndex.value = filterableOptions.value.length - 1
+  }
+  scrollToFocusedOption()
+}
+
+const scrollToFocusedOption = () => {
+  nextTick(() => {
+    const focusedOptionElement = filterableOptionsRef.value[focusedIndex.value]
+    if (focusedOptionElement && focusedOptionElement.optionItemRef) {
+      focusedOptionElement.optionItemRef.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest'
+      })
+    }
+  })
+}
+
+const openDropdown = () => {
+  isDropdownOpened.value = true
+  
+  // Set initial focus to selected option or first option
+  nextTick(() => {
+    if (props.modelValue && !props.multiple) {
+      const selectedIndex = filterableOptions.value.findIndex(
+        option => option.value === props.modelValue
+      )
+      focusedIndex.value = selectedIndex >= 0 ? selectedIndex : 0
+    } else {
+      focusedIndex.value = 0
+    }
+    
+    // Focus search input if filterable, otherwise focus the dropdown for keyboard nav
+    if (props.isFilterable && searchInputRef.value) {
+      searchInputRef.value.focus()
+    }
+  })
+}
+
+const closeDropdown = () => {
+  isDropdownOpened.value = false
+  focusedIndex.value = -1
+  
+  // Return focus to trigger
+  nextTick(() => {
+    triggerRef.value?.focus()
+  })
+}
+
 const selectOption = (option) => {
   if (option.isDisabled) {
     return
@@ -184,12 +307,14 @@ const selectOption = (option) => {
 
   emit('update:modelValue', result)
 }
+
 const removeOption = (value) => {
   emit(
     'update:modelValue',
     (props.modelValue || []).filter((o) => o !== value)
   )
 }
+
 const selectAll = () => {
   if (!props.isAsynchronousSearch) {
     if (isSelectedAll.value) {
@@ -202,15 +327,19 @@ const selectAll = () => {
     }
   }
 }
+
 const baseInput = ref()
 
 watch(filterableOptions, () => {
   optionsKey.value = new Date().toISOString()
+  // Reset focused index when options change
+  focusedIndex.value = -1
 })
 
 watch(isDropdownOpened, (value) => {
   if (!value) {
     emit('close')
+    focusedIndex.value = -1
     return
   }
 
@@ -223,7 +352,12 @@ const maxPopperWidth = ref('100%')
 const popperStyle = computed(() => {
   return { maxWidth: maxPopperWidth.value }
 })
+
 const onUpdateDropdown = () => {
+  if (isDropdownOpened.value) {
+    openDropdown()
+  }
+  
   emit('toggle')
   maxPopperWidth.value = baseInput.value?.$el?.offsetWidth
     ? `${baseInput.value?.$el?.offsetWidth}px`
@@ -302,8 +436,10 @@ defineExpose({
       :menu-classes="menuClasses"
       @update:model-value="onUpdateDropdown"
       @scroll="loadMore"
+      @keydown="handleDropdownKeydown"
     >
       <div
+        ref="triggerRef"
         class="border min-h-[36px] input-shadow transition-all duration-[250ms] ease-out  w-full px-3 flex justify-between items-center bg-white cursor-pointer gap-x-3 rounded"
         :class="[
           dropdownClasses,
@@ -316,6 +452,12 @@ defineExpose({
             'border-none !min-h-[18px] !px-0': isSlim
           }
         ]"
+        tabindex="0"
+        role="combobox"
+        :aria-expanded="isDropdownOpened"
+        :aria-haspopup="true"
+        :aria-label="label || placeholder"
+        @keydown="handleTriggerKeydown"
       >
         <div v-if="multiple" class="flex flex-wrap gap-2 overflow-hidden">
           <slot name="selection">
@@ -391,7 +533,7 @@ defineExpose({
       </div>
 
       <template #menu>
-        <div ref="selectListRef" class="flex flex-col gap-y-2">
+        <div ref="selectListRef" class="flex flex-col gap-y-2" role="listbox">
           <div
             v-if="
               (isFilterable && !isInlineSearch) ||
@@ -405,6 +547,7 @@ defineExpose({
               icon="search"
               :placeholder="inlineSearchPlaceholder"
               @update:model-value="$emit('onSearchKeywords', query)"
+              @keydown="handleDropdownKeydown"
             >
               <template #icon>
                 <Icon class="w-5 h-5 text-oc-text-400" name="search" />
@@ -427,7 +570,7 @@ defineExpose({
             />
             <slot :key="optionsKey" :f-options="filterableOptions" :select-option="selectOption">
               <Option
-                v-for="option in filterableOptions"
+                v-for="(option, index) in filterableOptions"
                 ref="filterableOptionsRef"
                 :key="option.value"
                 :label="option.label"
@@ -435,6 +578,17 @@ defineExpose({
                 :is-disabled="option.isDisabled"
                 :is-checkboxes="isCheckboxes"
                 :is-selected="
+                  multiple
+                    ? modelValue
+                      ? modelValue.find((o) => o === option.value) !== undefined
+                      : false
+                    : modelValue === option.value
+                "
+                :class="{
+                  'bg-oc-accent-1-50 ring-2 ring-oc-accent-1-500': focusedIndex === index
+                }"
+                role="option"
+                :aria-selected="
                   multiple
                     ? modelValue
                       ? modelValue.find((o) => o === option.value) !== undefined
