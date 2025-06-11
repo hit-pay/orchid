@@ -27,6 +27,11 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue', 'edit', 'delete'])
 
 
+
+if (props.isOpenDefault && !props.modelValue) {
+    emit('update:modelValue', true)
+}
+
 const toggleAccordion = () => {
   if (props.isNoToggleForced || props.isDisabled) return
   emit('update:modelValue', !props.modelValue)
