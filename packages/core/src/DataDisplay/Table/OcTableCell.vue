@@ -87,6 +87,12 @@ const variantClass = computed(() => ({
   [Variants.EMPTY]: 'px-4 min-w-[48px]',
   [Variants.DEFAULT]: 'px-4'
 }))
+
+const handleClick = (event) => {
+  if(props.link) {
+    event.preventDefault()
+  }
+}
 </script>
 
 <template>
@@ -100,6 +106,7 @@ const variantClass = computed(() => ({
         'md:px-4 px-3 py-1': variant !== Variants.CHECKBOX
       }
     ]"
+    @click="handleClick"
     class="md:py-3 bg-oc-bg-light md:min-h-[58px] md:group-hover/row:bg-oc-gray-50 items-center"
   >
     <Skeleton v-if="isLoading" class="rounded-full w-full overflow-hidden h-6" />
