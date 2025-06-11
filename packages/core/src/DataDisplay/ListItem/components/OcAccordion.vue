@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Chip, Icon } from '@/orchidui-core'
-import { defineEmits, defineExpose, defineProps, onMounted } from 'vue'
+import { defineEmits, defineExpose, defineProps } from 'vue'
 
 const props = defineProps({
   modelValue: {
@@ -26,12 +26,6 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue', 'edit', 'delete'])
 
-
-onMounted(() => {
-  if (props.isOpenDefault && !props.modelValue) {
-    emit('update:modelValue', true)
-  }
-})
 
 const toggleAccordion = () => {
   if (props.isNoToggleForced || props.isDisabled) return
