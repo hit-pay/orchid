@@ -1,18 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
 import { UiButton as Button } from '../button'
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
+  UiDropdownMenu as DropdownMenu,
+  UiDropdownMenuContent as DropdownMenuContent,
+  UiDropdownMenuGroup as DropdownMenuGroup,
+  UiDropdownMenuItem as DropdownMenuItem,
+  UiDropdownMenuLabel as DropdownMenuLabel,
+  UiDropdownMenuSeparator as DropdownMenuSeparator,
+  UiDropdownMenuShortcut as DropdownMenuShortcut,
+  UiDropdownMenuSub as DropdownMenuSub,
+  UiDropdownMenuSubContent as DropdownMenuSubContent,
+  UiDropdownMenuSubTrigger as DropdownMenuSubTrigger,
+  UiDropdownMenuTrigger as DropdownMenuTrigger,
   DropdownMenuPortal,
-  DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
-  DropdownMenuTrigger
 } from '.'
 
 const meta = {

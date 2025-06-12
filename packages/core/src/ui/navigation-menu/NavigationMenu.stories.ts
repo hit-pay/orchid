@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
 import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  NavigationMenuViewport,
+  UiNavigationMenu as NavigationMenu,
+  UiNavigationMenuContent as NavigationMenuContent,
+  UiNavigationMenuItem as NavigationMenuItem,
+  UiNavigationMenuLink as NavigationMenuLink,
+  UiNavigationMenuList as NavigationMenuList,
+  UiNavigationMenuTrigger as NavigationMenuTrigger,
+  UiNavigationMenuViewport as NavigationMenuViewport,
   navigationMenuTriggerStyle
 } from '.'
 
