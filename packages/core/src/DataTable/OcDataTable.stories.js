@@ -231,6 +231,7 @@ export const Default = {
             col3Url: 'https://hitpayapp.com',
             col4: 'Table Cell column two',
             col5: 'Label',
+            link: 'https://google.com',
             col6: false,
             id: crypto.randomUUID()
           },
@@ -401,6 +402,7 @@ export const Default = {
                 id="sample-data-table"
                 v-model:selected="selectedRows"
                 row-key="id"
+                row-link="link"
                 :filter="filter" 
                 :options="args.options"
                 :is-loading="args.isLoading"

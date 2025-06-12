@@ -251,7 +251,7 @@ const onUpdateDropdown = () => {
     const el = filterableOptionsRef.value[selectedIndex]
     const top = el?.optionItemRef?.offsetTop
 
-    selectListRef.value.parentNode.scrollTo(0, top - 60, { behavior: 'smooth' })
+    selectListRef.value?.parentNode?.scrollTo(0, top - 60, { behavior: 'smooth' })
   }, 10)
 }
 

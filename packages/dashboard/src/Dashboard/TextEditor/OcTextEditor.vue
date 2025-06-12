@@ -120,9 +120,43 @@ const loaded = ref(false)
 // need for upload to server
 const base64Images = ref(props.image)
 
-const checkStates = (value) => {
-  console.log(value, 123)
+const globalOptions = computed(() => {
+  const formats = [
+    'background',
+    'bold',
+    'color',
+    'font',
+    'code',
+    'italic',
+    'link',
+    'size',
+    'strike',
+    'script',
+    'underline',
+    'blockquote',
+    'header',
+    'indent',
+    'list',
+    'align',
+    'direction',
+    'code-block',
+    'formula'
+  ]
 
+  if (toolbar.value.includes('image')) {
+    formats.push('image')
+  }
+
+  if (toolbar.value.includes('media')) {
+    formats.push('video')
+  }
+
+  return {
+    formats
+  }
+})
+
+const checkStates = (value) => {
   isUndoActive.value = quill.value.getQuill().history.stack.undo.length > 0
   isRedoActive.value = quill.value.getQuill().history.stack.redo.length > 0
   isBoldActive.value = quill.value.getQuill().getFormat().bold
@@ -383,6 +417,7 @@ watch(
         }"
         theme="snow"
         content-type="html"
+        :global-options="globalOptions"
         class="min-h-[200px]"
         :placeholder="placeholder"
         @update:content="checkStates"
