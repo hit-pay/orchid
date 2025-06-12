@@ -11,7 +11,7 @@ jobs:
         with:
           bun-version: latest
       - name: Running ci
-        run: bun install --frozen-lockfile
+        run: bun install
       - name: Login npm
         run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: build orchid core
