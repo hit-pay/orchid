@@ -89,7 +89,7 @@ const variantClass = computed(() => ({
 }))
 
 const handleClick = (event) => {
-  if(props.link) {
+  if (props.link) {
     event.preventDefault()
   }
 }

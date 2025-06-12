@@ -99,7 +99,6 @@ const AccountSetupProgress = defineAsyncComponent(
   () => import('./Elements/Sidebar/OcAccountSetupProgress.vue')
 )
 
-
 export {
   // datatable
   DataTable,

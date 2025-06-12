@@ -12,14 +12,14 @@ import {
   DropdownMenuSub,
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
-  DropdownMenuTrigger,
+  DropdownMenuTrigger
 } from '.'
 
 const meta = {
   title: 'UI/DropdownMenu',
   component: DropdownMenu,
   tags: ['autodocs'],
-  argTypes: {},
+  argTypes: {}
 } satisfies Meta<typeof DropdownMenu>
 
 export default meta
@@ -40,7 +40,7 @@ export const Default: Story = {
       DropdownMenuSub,
       DropdownMenuSubContent,
       DropdownMenuSubTrigger,
-      DropdownMenuTrigger,
+      DropdownMenuTrigger
     },
     template: `
       <DropdownMenu>
@@ -116,8 +116,8 @@ export const Default: Story = {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-    `,
-  }),
+    `
+  })
 }
 
 export const Simple: Story = {
@@ -127,7 +127,7 @@ export const Simple: Story = {
       DropdownMenu,
       DropdownMenuContent,
       DropdownMenuItem,
-      DropdownMenuTrigger,
+      DropdownMenuTrigger
     },
     template: `
       <DropdownMenu>
@@ -148,6 +148,6 @@ export const Simple: Story = {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-    `,
-  }),
-} 
+    `
+  })
+}
