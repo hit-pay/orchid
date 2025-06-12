@@ -53,13 +53,13 @@
     },
     "packages/core": {
       "name": "@orchidui/core",
-      "version": "1.8.1-79",
+      "version": "1.8.1-94",
     },
     "packages/dashboard": {
       "name": "@orchidui/dashboard",
-      "version": "1.8.1-79",
+      "version": "1.8.1-94",
       "dependencies": {
-        "@orchidui/core": "beta",
+        "@orchidui/core": "1.8.1-93",
       },
     },
   },
@@ -1320,7 +1320,7 @@
 
     "@humanfs/node/@humanwhocodes/retry": ["@humanwhocodes/retry@0.3.1", "", {}, "sha512-JBxkERygn7Bv/GbN5Rv8Ul6LVknS+5Bp6RgDC/O8gEBU/yeH5Ui5C/OlWrTb6qct7LjjfT6Re2NxB0ln0yYybA=="],
 
-    "@orchidui/dashboard/@orchidui/core": ["@orchidui/core@1.8.1-90", "", {}, "sha512-5ebl9UOEb97nyTH3bPww/MYvs6ZdBt6ReN5Cg8rtDL6dR9I89VsU2DswgvREL2Efem8c5bXos/tNdEtuL2QT+A=="],
+    "@orchidui/dashboard/@orchidui/core": ["@orchidui/core@1.8.1-93", "", {}, "sha512-Wu7TxqVnBFvJ86w96K1WD/lh9mK03+Ka8H4+TGWEN+/WHuGO79INjWTISB+FRZVOd+7J6r0xlospkbJDRdFjLA=="],
 
     "@storybook/addons/@storybook/manager-api": ["@storybook/manager-api@7.6.17", "", { "dependencies": { "@storybook/channels": "7.6.17", "@storybook/client-logger": "7.6.17", "@storybook/core-events": "7.6.17", "@storybook/csf": "^0.1.2", "@storybook/global": "^5.0.0", "@storybook/router": "7.6.17", "@storybook/theming": "7.6.17", "@storybook/types": "7.6.17", "dequal": "^2.0.2", "lodash": "^4.17.21", "memoizerific": "^1.11.3", "store2": "^2.14.2", "telejson": "^7.2.0", "ts-dedent": "^2.0.0" } }, "sha512-IJIV1Yc6yw1dhCY4tReHCfBnUKDqEBnMyHp3mbXpsaHxnxJZrXO45WjRAZIKlQKhl/Ge1CrnznmHRCmYgqmrWg=="],
 
