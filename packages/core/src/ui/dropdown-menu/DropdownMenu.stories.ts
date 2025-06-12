@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { Button } from '../button'
+import { UiButton as Button } from '../button'
 import {
   DropdownMenu,
   DropdownMenuContent,

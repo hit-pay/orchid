@@ -99,6 +99,10 @@ const AccountSetupProgress = defineAsyncComponent(
   () => import('./Elements/Sidebar/OcAccountSetupProgress.vue')
 )
 
+export * from './ui/button'
+export * from './ui/dropdown-menu'
+export * from './ui/navigation-menu'
+
 export {
   // datatable
   DataTable,
