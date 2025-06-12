@@ -4,7 +4,7 @@ on:
     branches: [development]
 jobs:
   build:
-    runs-on: blacksmith
+    runs-on: blacksmith-4vcpu-ubuntu-2404
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v1
