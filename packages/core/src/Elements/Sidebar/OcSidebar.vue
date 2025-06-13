@@ -93,7 +93,9 @@ onMounted(() => {
             :icon="menu.icon"
             :label="menu.label"
             :is-children="!!menu.children"
-            :is-active="menu.active || (menu.children && menu.children?.some(child => child.active))"
+            :is-active="
+              menu.active || (menu.children && menu.children?.some((child) => child.active))
+            "
             :is-expanded="isExpanded"
             :is-new="menu.isNew"
             :is-try-it="menu.isTryIt"
@@ -102,20 +104,18 @@ onMounted(() => {
             @click="expandOrRedirect(menu)"
             @close-menu="expandMenu(menu.name)"
           >
-            
-              <SidebarSubMenuItem 
-                v-for="(submenu, submenuIndex) in menu.children" 
-                :key="submenuIndex" 
-                :icon="submenu.icon" 
-                :label="submenu.label" 
-                :is-active="submenu.active" 
-                :is-new="submenu.isNew"
-                :is-beta="submenu.isBeta"
-                :is-try-it="submenu.isTryIt"
-                :is-expanded="isExpanded"
-                @click="$emit('redirect', submenu)"
-              />
-            
+            <SidebarSubMenuItem
+              v-for="(submenu, submenuIndex) in menu.children"
+              :key="submenuIndex"
+              :icon="submenu.icon"
+              :label="submenu.label"
+              :is-active="submenu.active"
+              :is-new="submenu.isNew"
+              :is-beta="submenu.isBeta"
+              :is-try-it="submenu.isTryIt"
+              :is-expanded="isExpanded"
+              @click="$emit('redirect', submenu)"
+            />
           </SideBarMenu>
         </SidebarHead>
       </template>
@@ -135,4 +135,3 @@ onMounted(() => {
     </SidebarFooter>
   </div>
 </template>
-

@@ -44,13 +44,20 @@ export default defineConfig({
     },
     rollupOptions: {
       external: [
+        '@floating-ui/vue',
         'vue',
         'dayjs',
-        '@popperjs/core',
         'libphonenumber-js',
         'v-calendar',
         'vue-advanced-cropper',
-        'vue-draggable-next'
+        'vue-draggable-next',
+        // with shadcn/ui
+        'reka-ui',
+        'tailwind-merge',
+        'clsx',
+        'class-variance-authority',
+        'lucide-vue-next',
+        '@vueuse/core'
       ]
     }
   }

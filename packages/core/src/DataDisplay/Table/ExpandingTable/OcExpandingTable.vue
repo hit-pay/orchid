@@ -43,7 +43,11 @@ const emptyRow = computed(() => Object.fromEntries(props.headers.map((h) => [h.k
 <template>
   <div class="flex flex-col border rounded w-full border-oc-gray-200 overflow-auto">
     <template v-if="isAlternative">
-      <ExpandingHeaderRow :headers="headers" :is-sticky="isSticky" :grid-template-columns="gridTemplateColumns" />
+      <ExpandingHeaderRow
+        :headers="headers"
+        :is-sticky="isSticky"
+        :grid-template-columns="gridTemplateColumns"
+      />
 
       <template v-if="isLoading && !fields.length">
         <ExpandingTableRow
@@ -94,7 +98,14 @@ const emptyRow = computed(() => Object.fromEntries(props.headers.map((h) => [h.k
       </ExpandingTableRow>
     </template>
     <slot name="total">
-      <ExpandingTableRow is-total :headers="headers" :row="{ label: 'Total' }" :value="total" :is-sticky="isSticky" :grid-template-columns="gridTemplateColumns" />
+      <ExpandingTableRow
+        is-total
+        :headers="headers"
+        :row="{ label: 'Total' }"
+        :value="total"
+        :is-sticky="isSticky"
+        :grid-template-columns="gridTemplateColumns"
+      />
     </slot>
   </div>
 </template>

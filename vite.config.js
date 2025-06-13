@@ -8,8 +8,8 @@ export default defineConfig({
     alias: {
       '@/orchidui-core': resolve(__dirname, './packages/core/src/'),
       '@/orchidui-dashboard': resolve(__dirname, './packages/dashboard/src/'),
-      '@/orchidui-core-style.css': resolve(__dirname, './packages/core/dist/style.css'),
-      '@/orchidui-dashboard-style.css': resolve(__dirname, './packages/dashboard/dist/style.css')
+      '@/orchidui-core-style.css': resolve(__dirname, './packages/core/dist/core.css'),
+      '@/orchidui-dashboard-style.css': resolve(__dirname, './packages/dashboard/dist/dashboard.css')
     }
   }
 })

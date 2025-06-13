@@ -17,6 +17,7 @@ npm run dev
 npm run publish
 
 Migration Components :
+
 1. DataTables
 2. Card
 3. Charts
@@ -26,4 +27,3 @@ Migration Components :
 7. TextEditor
 
 rever
-

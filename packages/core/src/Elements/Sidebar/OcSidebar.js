@@ -8,14 +8,14 @@ import SidebarFooter from './OcSidebarFooter.vue'
 import SidebarFeatureBanners from './OcSidebarFeatureBanners.vue'
 import AccountSetupProgress from './OcAccountSetupProgress.vue'
 
-export { 
-  Sidebar, 
-  SidebarSubmenu, 
-  AccountSetup, 
-  SidebarHead, 
-  SideBarMenu, 
-  SidebarSubMenuItem, 
-  SidebarFooter, 
-  SidebarFeatureBanners, 
-  AccountSetupProgress 
+export {
+  Sidebar,
+  SidebarSubmenu,
+  AccountSetup,
+  SidebarHead,
+  SideBarMenu,
+  SidebarSubMenuItem,
+  SidebarFooter,
+  SidebarFeatureBanners,
+  AccountSetupProgress
 }

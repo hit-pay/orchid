@@ -52,7 +52,7 @@ defineProps({
             </slot>
             <Tooltip
               position="top"
-              :popper-options="{ strategy: 'fixed'  }"
+              :popper-options="{ strategy: 'fixed' }"
               popper-class="rounded-sm"
               v-bind="tooltipOptions"
             >

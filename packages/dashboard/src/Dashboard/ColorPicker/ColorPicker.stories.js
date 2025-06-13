@@ -9,7 +9,7 @@ export default {
 
 export const Default = {
   render: () => ({
-    components: { ColorPicker , Icon},
+    components: { ColorPicker, Icon },
     setup() {
       const modelValue = ref()
       return {

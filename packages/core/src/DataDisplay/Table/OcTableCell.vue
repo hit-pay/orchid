@@ -89,7 +89,7 @@ const variantClass = computed(() => ({
 }))
 
 const handleClick = (event) => {
-  if(props.link) {
+  if (props.link) {
     event.preventDefault()
   }
 }
@@ -149,11 +149,10 @@ const handleClick = (event) => {
           v-else-if="variant === Variants.DATETIME"
           :title="dayjs(data).format('D MMM, YYYY')"
           :description="dayjs(data).format('h:mm A')"
-         
         />
 
         <!--   CONTENT   -->
-        <TableCellContent v-else-if="variant === Variants.CONTENT" v-bind="content"/>
+        <TableCellContent v-else-if="variant === Variants.CONTENT" v-bind="content" />
         <div v-else-if="variant === Variants.CHIP" :link="link">
           <!--   CHIP   -->
           <Chip v-bind="chipProps" />
@@ -180,7 +179,6 @@ const handleClick = (event) => {
         :tooltip-options="{
           transitionName: 'copy'
         }"
-       
       >
         <Icon
           class="cursor-pointer w-5 h-5 group-hover/row:opacity-100 md:opacity-0 ml-2"

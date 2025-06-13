@@ -101,28 +101,28 @@ const sizes = computed(() => ({
   <div class="flex flex-col items-center" :class="sizes[size].box">
     <slot name="icon">
       <div class="relative">
-      <div
-        class="flex justify-center border rounded-full items-center aspect-square"
-        :class="[
-          containerClass
-            ? containerClass
-            : isUpgrade
-              ? 'text-oc-warning-600 border-oc-warning-300 bg-oc-warning-50'
-              : 'text-oc-text-400 border-oc-gray-200 bg-oc-gray-50',
-          sizes[size].icon.container
-        ]"
-      >
-        <Icon :name="icon" :width="sizes[size].icon.size" :height="sizes[size].icon.size" />
+        <div
+          class="flex justify-center border rounded-full items-center aspect-square"
+          :class="[
+            containerClass
+              ? containerClass
+              : isUpgrade
+                ? 'text-oc-warning-600 border-oc-warning-300 bg-oc-warning-50'
+                : 'text-oc-text-400 border-oc-gray-200 bg-oc-gray-50',
+            sizes[size].icon.container
+          ]"
+        >
+          <Icon :name="icon" :width="sizes[size].icon.size" :height="sizes[size].icon.size" />
+        </div>
+        <Icon
+          v-if="!isUpgrade && !hideBadge"
+          name="exclamation"
+          :width="sizes[size].badge.size"
+          :height="sizes[size].badge.size"
+          class="absolute"
+          :class="sizes[size].badge.class"
+        />
       </div>
-      <Icon
-        v-if="!isUpgrade && !hideBadge"
-        name="exclamation"
-        :width="sizes[size].badge.size"
-        :height="sizes[size].badge.size"
-        class="absolute"
-        :class="sizes[size].badge.class"
-      />
-    </div>
     </slot>
     <div class="flex flex-col items-center" :class="sizes[size].containerInfo">
       <span :class="sizes[size].title" class="font-medium">{{ title }}</span>

@@ -1,27 +1,24 @@
 ---
 on:
   push:
-    branches: development
+    branches: [development]
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-4vcpu-ubuntu-2404
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: oven-sh/setup-bun@v1
         with:
-          node-version: 20.x
-          registry-url: https://registry.npmjs.org
+          bun-version: latest
       - name: Running ci
-        run: npm ci
+        run: bun install
       - name: Login npm
         run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-      - name: Install dependencies
-        run: npm install
       - name: build orchid core
-        run: npm run publish-dev:core
+        run: bun run publish-dev:core
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: publish orchid dashboard
-        run: npm run publish-dev:dashboard
+        run: bun run publish-dev:dashboard
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

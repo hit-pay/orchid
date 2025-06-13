@@ -1,5 +1,13 @@
 import { ref } from 'vue'
-import { Theme, Sidebar, SidebarFeatureBanners, AccountSetupProgress, DropdownItem, Avatar, Dropdown } from '@/orchidui-core'
+import {
+  Theme,
+  Sidebar,
+  SidebarFeatureBanners,
+  AccountSetupProgress,
+  DropdownItem,
+  Avatar,
+  Dropdown
+} from '@/orchidui-core'
 
 import {
   PAYMENTS_SIDEBAR_GROUP,
@@ -28,7 +36,16 @@ export const Default = {
     progress: 80
   },
   render: (args) => ({
-    components: { Sidebar, Theme, OcAccountSetup, SidebarFeatureBanners, AccountSetupProgress, DropdownItem, Avatar, Dropdown },
+    components: {
+      Sidebar,
+      Theme,
+      OcAccountSetup,
+      SidebarFeatureBanners,
+      AccountSetupProgress,
+      DropdownItem,
+      Avatar,
+      Dropdown
+    },
     setup() {
       const rightMenuDropdown = ref(false)
       return { args, rightMenuDropdown }

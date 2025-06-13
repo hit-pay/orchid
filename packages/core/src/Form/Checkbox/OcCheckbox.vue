@@ -26,7 +26,9 @@ const computedClasses = computed(() => [
       : props.isDisabled
         ? 'bg-oc-gray-50 border-oc-gray-200 checkbox-init-shadow'
         : 'border-oc-accent-1-200 checkbox-focus-shadow checkbox-init-shadow',
-  props.errorMessage && props.modelValue && !props.isDisabled ? '!bg-oc-error checkbox-error-shadow' : '',
+  props.errorMessage && props.modelValue && !props.isDisabled
+    ? '!bg-oc-error checkbox-error-shadow'
+    : '',
   props.errorMessage && !props.isDisabled ? '!border-oc-error checkbox-error-shadow' : '',
   props.isPartial
     ? props.isDisabled
@@ -83,7 +85,9 @@ const onInput = () => emit('update:modelValue', !props.isDisabled ? !props.model
 
 <style scoped>
 .checkbox-init-shadow {
-  box-shadow: 0px 1.5px 1.5px 0px #00000017, 0px 1px 3px 0px #0000000A;
+  box-shadow:
+    0px 1.5px 1.5px 0px #00000017,
+    0px 1px 3px 0px #0000000a;
 }
 label:hover {
   .checkbox-focus-shadow {
