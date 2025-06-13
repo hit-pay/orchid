@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
+    "@tanstack/vue-table": "^8.21.3",
     "@unovis/ts": "^1.5.2",
     "@unovis/vue": "^1.5.2",
     "@vee-validate/zod": "^4.15.1",
