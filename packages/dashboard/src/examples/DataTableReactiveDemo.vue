@@ -17,7 +17,7 @@ import {
 } from '@tanstack/vue-table'
 import { ArrowUpDown, ChevronDown } from 'lucide-vue-next'
 
-import { h, ref, shallowRef } from 'vue'
+import { h, ref, shallowRef, withDefaults } from 'vue'
 import { valueUpdater } from '@/orchidui-dashboard/lib/utils'
 import { Button } from '@/orchidui-dashboard/ui/button'
 import { Checkbox } from '@/orchidui-dashboard/ui/checkbox'
@@ -38,6 +38,14 @@ import {
 } from '@/orchidui-dashboard/ui/table'
 import DropdownAction from './DataTableDemoColumn.vue'
 
+interface Props {
+  initialData?: Payment[]
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  initialData: () => [],
+})
+
 export interface Payment {
   id: string
   amount: number
@@ -45,7 +53,7 @@ export interface Payment {
   email: string
 }
 
-const data = shallowRef<Payment[]>([
+const data = shallowRef<Payment[]>(props.initialData.length > 0 ? props.initialData : [
   {
     id: 'm5gr84i9',
     amount: 316,
