@@ -1,10 +1,10 @@
 <script setup>
-import { createPopper } from '@popperjs/core'
+import { useFloating, offset, flip } from '@floating-ui/vue'
 import { onMounted, ref, watch } from 'vue'
 
 const reference = ref()
 const popper = ref()
-const popperInstance = ref()
+const floatingInstance = ref()
 
 const props = defineProps({
   placement: {
@@ -12,7 +12,7 @@ const props = defineProps({
     required: true
   },
   /**
-   * Options passed to the `popper` from `https://popper.js.org/docs/v2/modifiers/`
+   * Options passed to the floating element
    */
   popperOptions: {
     type: Object
@@ -42,45 +42,57 @@ const props = defineProps({
   }
 })
 
-const getPopperOptions = () => ({
-  placement: props.placement,
-  modifiers: [
-    {
-      name: 'flip',
-      enabled: props.isFlipEnabled
-    },
-    {
-      name: 'offset',
-      options: {
-        offset: [props.skidding, props.distance]
-      }
+const getFloatingOptions = () => {
+  const baseOptions = {
+    placement: props.placement,
+    middleware: [
+      offset({
+        mainAxis: Number(props.distance),
+        crossAxis: props.skidding
+      }),
+      flip({
+        enabled: props.isFlipEnabled
+      })
+    ]
+  }
+
+  // Merge with custom popper options if provided
+  if (props.popperOptions) {
+    return {
+      ...baseOptions,
+      ...props.popperOptions,
+      middleware: [
+        ...baseOptions.middleware,
+        ...(props.popperOptions.middleware || [])
+      ]
     }
-  ],
-  ...(props.popperOptions || [])
-})
+  }
+
+  return baseOptions
+}
 
 const checkElementIsInsidePopper = (targetElement) => {
   return targetElement && popper.value?.contains(targetElement)
 }
 
-onMounted(() => {
-  popperInstance.value = createPopper(reference.value, popper.value, getPopperOptions())
+const { x, y, strategy, update } = useFloating(reference, popper, getFloatingOptions())
 
+onMounted(() => {
+  floatingInstance.value = { update }
   // Need add setTimeout because placement is not updated immediately from props when component is mounted
-  setTimeout(() => popperInstance.value?.update(), 150)
+  setTimeout(() => update(), 150)
 })
 
 watch(
   () => [props.popperOptions, props.placement, props.distance, props.skidding],
   () => {
-    popperInstance.value?.setOptions(getPopperOptions())
-    popperInstance.value?.update()
+    update()
   },
   { deep: true }
 )
 
 defineExpose({
-  popperInstance,
+  floatingInstance,
   checkElementIsInsidePopper
 })
 </script>
@@ -91,7 +103,17 @@ defineExpose({
       <slot />
     </div>
     <teleport to="body" :disabled="!isAttachToBody">
-      <div ref="popper" :class="popperClass" :style="popperStyle" class="z-[1007]">
+      <div 
+        ref="popper" 
+        :class="popperClass" 
+        :style="{
+          position: strategy,
+          top: `${y ?? 0}px`,
+          left: `${x ?? 0}px`,
+          ...popperStyle
+        }" 
+        class="z-[1007]"
+      >
         <slot name="popper" />
       </div>
     </teleport>

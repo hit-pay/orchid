@@ -85,6 +85,11 @@
       v-if="!isExpanded && isMenuExpanded"
       ref="menuRef"
       class="z-[1007] p-2 flex flex-col gap-y-1 min-w-[162px] shadow-normal bg-white rounded"
+      :style="{
+        position: floatingStrategy,
+        top: `${floatingY ?? 0}px`,
+        left: `${floatingX ?? 0}px`
+      }"
       @click.stop
     >
       <slot />
@@ -94,7 +99,7 @@
 
 <script setup>
 import { ref, watch } from 'vue'
-import { createPopper } from '@popperjs/core'
+import { useFloating, offset } from '@floating-ui/vue'
 import { Icon, Tooltip } from '@/orchidui-core'
 import { clickOutside as vClickOutside } from '../../directives/clickOutside.js'
 
@@ -119,14 +124,23 @@ const onClickOutside = () => {
   if (props.isExpanded || !props.isMenuExpanded) return
   emit('close-menu')
 }
+
+const { x: floatingX, y: floatingY, strategy: floatingStrategy, update } = useFloating(menuItemRef, menuRef, {
+  placement: 'right-start',
+  strategy: 'fixed',
+  middleware: [
+    offset({
+      mainAxis: 0,
+      crossAxis: 0
+    })
+  ]
+})
+
 watch(
   () => [props.isExpanded, menuRef.value, menuItemRef.value],
   () => {
     if (!menuItemRef.value || !menuRef.value || props.isExpanded) return
-    createPopper(menuItemRef.value, menuRef.value, {
-      placement: 'right-start',
-      strategy: 'fixed'
-    })
+    update()
   }
 )
 </script>

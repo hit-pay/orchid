@@ -44,9 +44,9 @@ export default defineConfig({
     },
     rollupOptions: {
       external: [
+        '@floating-ui/vue',
         'vue',
         'dayjs',
-        '@popperjs/core',
         'libphonenumber-js',
         'v-calendar',
         'vue-advanced-cropper',

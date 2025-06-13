@@ -24,7 +24,7 @@
     "release": "bun run release-dev.js"
   },
   "dependencies": {
-    "@popperjs/core": "^2.11.8",
+    "@floating-ui/vue": "^1.1.6",
     "@tanstack/vue-table": "^8.21.3",
     "@unovis/ts": "^1.5.2",
     "@unovis/vue": "^1.5.2",
