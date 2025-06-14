@@ -43,7 +43,7 @@ export default defineConfig({
       formats: ['es']
     },
     rollupOptions: {
-      external: ['vue', '@orchidui/core', 'echarts', 'shiki', '@floating-ui/vue']
+      external: ['vue', '@orchidui/core', 'echarts', 'shiki', '@floating-ui/vue','@/orchidui-core']
     }
   }
 })
