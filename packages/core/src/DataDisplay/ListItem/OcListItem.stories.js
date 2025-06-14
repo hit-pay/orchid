@@ -1,5 +1,5 @@
-import { Theme, ListItem, DropdownItem, Button } from '@/orchidui-core'
-
+import { Button, DropdownItem, ListItem, Theme } from '@/orchidui-core'
+import { ref } from 'vue'
 export default {
   component: ListItem,
   tags: ['autodocs']
@@ -352,21 +352,25 @@ export const ListItemAccordion = {
   render: (args) => ({
     components: { Theme, ListItem },
     setup() {
-      return { args }
+      const isOpen1 = ref(args.isOpenDefault || false)
+      const isOpen2 = ref(args.isOpenDefault || false)
+      return { args, isOpen1, isOpen2 }
     },
     template: `
       <Theme colorMode="light" class="p-10">
         <ListItem
-         v-bind="args"
+          v-bind="args"
+          v-model="isOpen1"
           type="accordion"
         >
           <template #content>Content</template>
         </ListItem>
         <div class="my-3" />
         <ListItem
-         v-bind="args"
+          v-bind="args"
+          v-model="isOpen2"
           type="accordion"
-         is-no-toggle-forced
+          is-no-toggle-forced
         >
           <template #content>Content</template>
         </ListItem>
