@@ -2,7 +2,7 @@
 import { createHighlighter } from 'shiki'
 import { onMounted, ref } from 'vue'
 import customTheme from './customTheme'
-import jsonLang from 'shiki/dist/languages/json.mjs'
+import jsonLang from 'shiki/dist/langs/json.mjs'
 
 const props = defineProps({
   jsonObject: {
