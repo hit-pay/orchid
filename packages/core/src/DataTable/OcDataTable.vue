@@ -87,6 +87,7 @@ const emit = defineEmits({
 let paginationOption = ref(props.options?.pagination)
 
 
+
 const cursorOption = computed(() => props.options?.cursor)
 const tableHeaders = ref()
 
@@ -131,6 +132,11 @@ if(isLocalData.value) {
   setSortBy(props.sortBy)
 }
 
+watch(() => props.options?.pagination, (newVal) => {
+  if(!isLocalData.value) {
+    paginationOption.value = newVal
+  }
+}, { deep: true })
 
 
 const processedTableOptions = computed(() => {
