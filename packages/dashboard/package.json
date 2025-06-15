@@ -22,10 +22,6 @@
     "./dist/style.css": {
       "import": "./dist/style.css",
       "require": "./dist/style.css"
-    },
-    "./LocalDataTable": {
-      "import": "./dist/LocalDataTable/index.js",
-      "require": "./dist/LocalDataTable/index.js"
     }
   },
   "module": "./dist/index.js",

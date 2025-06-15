@@ -4,7 +4,7 @@ import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 
 // Defines an array of entry points to be used to search for files.
-const entryPoints = ['src/**/*.js', 'src/**/*.ts']
+const entryPoints = ['src/**/*.js']
 
 // Searches for files that match the patterns defined in the array of input points.
 // Returns an array of absolute file paths.
