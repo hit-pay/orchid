@@ -18,7 +18,7 @@ const isOpen = ref(false)
 const searchInput = ref()
 const onSearchOpen = async () => {
   isSearchOpen.value = true
-  emit('toggle', isSearchOpen)
+  emit('toggle', isSearchOpen.value)
   await nextTick()
   searchInput.value.focus()
 }

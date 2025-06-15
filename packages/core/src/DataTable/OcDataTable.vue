@@ -43,8 +43,7 @@ const props = defineProps({
   },
   rowClass: String,
   rowKey: {
-    type: String,
-    Function,
+    type: [String, Function],
     default: 'id'
   },
   rowLink: String
@@ -644,7 +643,3 @@ onMounted(() => {
     </div>
   </div>
 </template>
-<style>
-.oc-data-tables {
-}
-</style>
