@@ -13,7 +13,6 @@ import {
 } from '@/orchidui-core'
 
 import { ref, computed, onMounted } from 'vue'
-import dayjs from 'dayjs'
 import ColumnEdit from './ColumnEdit.vue'
 
 import {
@@ -24,7 +23,6 @@ import {
 } from './utils/editColumnsUtils.js'
 
 import {
-  getFilterFieldNames,
   formatFilterDisplay,
   clearAllFilters as clearAllFiltersUtil
 } from './utils/filterUtils.js'
