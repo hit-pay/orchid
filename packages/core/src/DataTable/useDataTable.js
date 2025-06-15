@@ -44,16 +44,21 @@ export function useDataTable(initialData) {
     syncLocalData()
   }
 
-  const filterQuery = () => {
-    const filteredData = {}
+  const getFilterOptions = () => {
+    const filteredColumns = {}
     const excludedKeys = ['columnEdit', 'page', 'per_page']
     
     Object.entries(filterData.value).forEach(([key, value]) => {
       if (!excludedKeys.includes(key) && value !== undefined && value !== null && value !== '') {
-        filteredData[key] = value
+        filteredColumns[key] = value
       }
     })
-    return filteredData
+    return {
+      filter: filteredColumns,
+      sortBy: sortBy.value,
+      page: filterData.value.page,
+      per_page: filterData.value.per_page,
+    }
   }
 
   const syncLocalData = async () => {
@@ -64,33 +69,39 @@ export function useDataTable(initialData) {
     debounceTimer = setTimeout(async () => {
       let query = dataDb.value.table(dataTableName.value)
       
-    //   // Apply filters
-    //   if (Object.keys(filterQuery()).length > 0) {
-    //     query = query.where(filterQuery())
-    //   }
+      const options = getFilterOptions()
+      
+      // Apply filters
+      if (options.filter) {
+        Object.entries(options.filter).forEach(([key, value]) => {
+          query = query.filter(item => {
+            if (typeof value === 'string') {
+              return item[key]?.toLowerCase().includes(value.toLowerCase())
+            }
+            return item[key] === value
+          })
+        })
+      }
 
-    //   // Apply sorting
-    //   if (sortBy.value.length > 0) {
-    //     sortBy.value.forEach(sort => {
-    //       query = query.sortBy(sort.column)
-    //       if (sort.direction === 'desc') {
-    //         query = query.reverse()
-    //       }
-    //     })
-    //   }
+      // Apply sorting
+      if (options.sortBy && options.sortBy.length > 0) {
+        options.sortBy.forEach(sort => {
+          query = query.sortBy(sort.column)
+          if (sort.direction === 'desc') {
+            query = query.reverse()
+          }
+        })
+      }
 
       const data = await query.toArray()
       localData.value = data
     }, 300)
   }
 
-  const bulkUpdateOrAddLocalData = async (newData) => {
+  const bulkPutLocalData = async (newData) => {
     await dataDb.value.table(dataTableName.value).bulkPut(newData)
   }
 
-  const deleteLocalData = async (id) => {
-    await dataDb.value.table(dataTableName.value).delete(id)
-  }
   const bulkDeleteLocalData = async (ids) => {
     await dataDb.value.table(dataTableName.value).bulkDelete(ids)
   }
@@ -121,8 +132,7 @@ export function useDataTable(initialData) {
     dataLocalDataOptions,
     // Methods
     toggleSort,
-    bulkUpdateOrAddLocalData,
-    deleteLocalData,
+    bulkPutLocalData,
     bulkDeleteLocalData,  
     getLocalDataUpdatedAt,
     getLocalDataIds,

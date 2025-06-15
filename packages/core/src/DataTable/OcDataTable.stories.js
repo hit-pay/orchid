@@ -40,12 +40,11 @@ export const Default = {
           key: 'per_page'
         },
         tabs: {
-          key: 'tabs',
+          key: 'status',
           options: [
             { label: 'All', value: '' },
-            { label: 'Filter 01', value: '1' },
-            { label: 'Filter 02', value: '2' },
-            { label: 'Filter 03', value: '3' }
+            { label: 'Published', value: 'published' },
+            { label: 'Draft', value: 'draft' },
           ]
         },
         actions: {
@@ -54,14 +53,7 @@ export const Default = {
           }
         },
         search: {
-          key: 'keywords',
-          selectedOption: 'keywords',
-          options: [
-            { label: 'All', value: 'keywords' },
-            { label: 'Filter 01', value: '1' },
-            { label: 'Filter 02', value: '2' },
-            { label: 'Filter 03', value: '3' }
-          ]
+          key: 'name',
         },
         columnEdit: {
           key: 'columnEdit',
@@ -69,88 +61,44 @@ export const Default = {
         },
         form: [
           {
-            name: 'checkboxes_group',
-            type: 'CheckboxesGroup',
-            rule: 'required',
+            name: 'available',
+            type: 'Select',
             props: {
-              label: 'CheckboxesGroup',
+              label: 'Inventory',
               hint: 'This is a hint text to help user',
-              alignment: 'vertical',
-              checkboxes: [
+              placeholder: 'Select Inventory',
+              options: [
                 {
-                  label: 'Checkbox 1',
-                  value: 1
+                  label: 'In Stock',
+                  value: true
                 },
                 {
-                  label: 'Checkbox 2',
-                  value: 2
-                },
-                {
-                  label: 'Checkbox 3',
-                  value: 3,
-                  isDisabled: true
+                  label: 'Out of Stock',
+                  value: false
                 }
               ]
             }
           },
           {
-            name: [
-              {
-                key: 'date_range_from'
-              },
-              {
-                key: 'date_range_to'
-              }
-            ],
-            type: 'DatePicker',
-            props: {
-              type: 'range',
-              label: 'DatePicker Range',
-              hint: 'This is a hint text to help user',
-              placeholder: 'placeholder',
-              maxDate: dayjs().format('YYYY-MM-DD')
-            }
-          },
-          {
-            name: [
-              {
-                key: 'total_range_from'
-              },
-              {
-                key: 'total_range_to'
-              }
-            ],
-            type: 'RangeInput',
-            props: {
-              label: 'RangeInput',
-              hint: 'This is a hint text to help user',
-              placeholder: 'placeholder',
-              onlyInput: true
-            }
-          },
-          {
-            name: 'select',
+            name: 'channels',
             type: 'Select',
             props: {
               label: 'Select',
               hint: 'This is a hint text to help user',
               placeholder: 'placeholder',
+              multiple: true,
               options: [
                 {
-                  label: 'Option 1',
-                  value: 1
+                  label: 'Invoice',
+                  value: 'invoice'
                 },
                 {
-                  label: 'Option 2',
-                  value: 2
+                  label: 'POS',
+                  value: 'pos'
                 },
                 {
-                  label: 'Option 3',
-                  value: 3
-                },
-                {
-                  label: 'Option 4',
-                  value: 4
+                  label: 'Online Store',
+                  value: 'online_store'
                 }
               ]
             }
@@ -175,12 +123,12 @@ export const Default = {
             class: 'w-1/2 md:min-w-[20%]'
           },
           {
-            key: 'display_available',
+            key: 'available_quantity',
             label: 'Available',
             class: 'w-1/2 md:min-w-[10%]'
           },
           {
-            key: 'display_categories',
+            key: 'category_names',
             label: 'Categories',
             class: 'w-1/2 md:min-w-[12%]'
           },
@@ -266,29 +214,7 @@ export const Default = {
 
       const localDataOptions = {
         db: db,
-        table_name: 'products',
-        filters: {
-          search: {
-            request_type: 'string',
-            field_type: 'string',
-            field: ['name', 'description']
-          },
-          statuses: {
-            request_type: 'array',
-            field_type: 'string',
-            field: 'status'
-          },
-          out_of_stock: {
-            request_type: 'boolean',
-            field_type: 'boolean',
-            field: 'available'
-          },
-          categories: {
-            request_type: 'array',
-            field_type: 'string',
-            field: 'categories'
-          }
-        }
+        table_name: 'products'
       }
 
       const fieldData = [
@@ -1004,15 +930,31 @@ export const Default = {
     ];
       const formatFieldData = (data) => {
         return data.map(item => {
+          let source = []
+          if(item.is_shopify) {
+            source.push('Shopify')
+          }
+          if(item.is_woocommerce) {
+            source.push('WooCommerce')
+          }
           return {
             id: item.id,
-            image: item.image?.[0]?.url,
+            link: item.product_url,
+            emoji: item.emoji,
+            image: item.image,
             name: item.name,
-            categories: item.category_id?.map(category => category.name).join(', '),
-            display_categories: item.category_id?.map(category => category.name).join(', '),
-            available: item.available,
-            display_available: item.available,
+            category_ids: item.category_id?.map(category => category.id).join(', '),
+            category_names: item.category_id?.map(category => category.name).join(', '),
+            available: item.available || item.quantity > 0 || item.allow_back_order || !item.is_manageable,
+            is_manageable: item.is_manageable,
+            available_quantity: !item.is_manageable 
+              ? 'Inventory not tracked'
+              : item.quantity > 0 
+                ? `${item.quantity} in stock${item.variations?.length ? ` for ${item.variations.length} variants` : ''}`
+                : 'Out of stock',
             amount: item.price_display,
+            channels: item.channels?.join(', '),
+            source: source.join(', '),
             status: item.status,
             created_at: item.created_at,
             updated_at: item.updated_at
@@ -1021,7 +963,7 @@ export const Default = {
       }
 
 
-      const { bulkUpdateOrAddLocalData, getLocalDataUpdatedAt, getLocalDataIds } = useDataTable({
+      const { bulkPutLocalData, getLocalDataUpdatedAt, getLocalDataIds } = useDataTable({
         id: 'products-table',
         name: 'products',
         localDb: db,
@@ -1039,7 +981,7 @@ export const Default = {
 
       getLatestData()
 
-      bulkUpdateOrAddLocalData(formatFieldData(fieldData))
+      bulkPutLocalData(formatFieldData(fieldData))
     
 
       return {

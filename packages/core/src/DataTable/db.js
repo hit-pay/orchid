@@ -2,7 +2,7 @@ import Dexie from 'dexie';
 
 export const db = new Dexie('hitpay');
 db.version(1).stores({
-   products: 'id, image, name, categories, display_categories, available, display_available, amount, status, created_at, updated_at', 
+   products: 'id, link, emoji, image, name, category_ids, category_names, is_manageable, available, available_quantity, channels, source, amount, status, created_at, updated_at', 
 });
 
 export async function removeOldLocalDB() {
