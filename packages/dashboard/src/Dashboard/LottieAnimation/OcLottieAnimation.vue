@@ -9,7 +9,7 @@
 <script setup>
 import lottie from 'lottie-web';
 import {
-  onMounted, onUnmounted, ref, watch,
+  onMounted,  ref, watch,
 } from 'vue';
 
 // Prop with default values

@@ -1,10 +1,18 @@
 <script setup>
 import { computed } from 'vue'
 import { TableHeader, Chip } from '@/orchidui-core'
+
 const props = defineProps({
-  filters: Object,
-  queries: Object
+  filters: {
+    type: Object,
+    default: () => ({})
+  },
+  queries: {
+    type: Object,
+    default: () => ({})
+  }
 })
+
 const emit = defineEmits({
   removeQuery: [],
   removeFilter: [],
@@ -12,10 +20,12 @@ const emit = defineEmits({
 })
 
 const filterData = computed(() => {
-  let filterData = []
+  const filterData = []
+  
   props.filters?.forEach((filter) => {
     if (filter.multiNames) {
       const exist = filterData.find((f) => f.name === filter.multiNames[0])
+      
       if (!exist) {
         filterData.push(filter)
       } else {
@@ -25,16 +35,16 @@ const filterData = computed(() => {
       filterData.push(filter)
     }
   })
+  
   return filterData
 })
 
 const removeFilter = (name, multiNames) => {
-  let filter = {}
-  filter[name] = ''
+  const filter = { [name]: '' }
+  
   if (multiNames) {
     multiNames.forEach((filterName) => {
-      let multifilter = {}
-      multifilter[filterName] = ''
+      const multifilter = { [filterName]: '' }
       emit('removeFilter', multifilter, filterName)
     })
   } else {
@@ -50,6 +60,7 @@ const removeFilter = (name, multiNames) => {
   >
     <div class="flex gap-1 items-center normal-case flex-wrap">
       <span class="pr-2 text-sm font-medium text-oc-text">Search for:</span>
+      
       <Chip
         v-for="query in queries"
         :key="query"
@@ -58,6 +69,7 @@ const removeFilter = (name, multiNames) => {
         :label="query"
         @remove="$emit('removeQuery', query)"
       />
+      
       <Chip
         v-for="item in filterData"
         :key="item.name"
@@ -66,7 +78,13 @@ const removeFilter = (name, multiNames) => {
         :label="item.label"
         @remove="removeFilter(item.name, item.multiNames)"
       />
-      <Chip variant="gray" class="cursor-pointer" label="Clear all" @click="$emit('removeAll')" />
+      
+      <Chip 
+        variant="gray" 
+        class="cursor-pointer" 
+        label="Clear all" 
+        @click="$emit('removeAll')" 
+      />
     </div>
   </TableHeader>
 </template>
