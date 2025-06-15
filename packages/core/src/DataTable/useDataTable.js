@@ -1,19 +1,104 @@
 import { ref } from 'vue'
 
 export function useDataTable(initialData) {
-  // State
-  const { id, name, localDb, options } = initialData
+  // ===== State Management =====
+  const { id, name, localDb } = initialData
 
+  // Table Configuration
+  const dataTableId = ref(id)
+  const dbTablename = ref(name)
+  const db = ref(localDb)
+
+  // Data State
   const localData = ref([])
   const sortBy = ref([])
   const filterData = ref({})
-  const dataTableId = ref(id)
-  const dataTableName = ref(name)
-  const dataDb = ref(localDb)
-  const dataLocalDataOptions = ref(options)
+  const paginationData = ref({
+    total: 0,
+    last_page: 0
+  })
+  const isLoading = ref(false)
   let debounceTimer = null
 
-  // Methods
+  // ===== Data Operations =====
+  const syncLocalData = async () => {
+    isLoading.value = true
+    if (debounceTimer) {
+      clearTimeout(debounceTimer)
+    }
+
+    debounceTimer = setTimeout(async () => {
+      let query = db.value.table(dbTablename.value)
+      const options = getFilterOptions()
+      
+      // Apply filters
+      if (options.filter) {
+        Object.entries(options.filter).forEach(([key, value]) => {
+          if (value && Array.isArray(value)) {
+            query = query.filter(item => {
+              const itemValue = item[key]
+              return value.some(v => {
+                if (typeof v === 'string' && typeof itemValue === 'string') {
+                  return itemValue.toLowerCase().includes(v.toLowerCase())
+                }
+                return itemValue === v
+              })
+            })
+          } else if (value && typeof value === 'string') {
+            query = query.filter(item => {
+              const itemValue = item[key]
+              return typeof itemValue === 'string' && 
+                itemValue.toLowerCase().includes(value.toLowerCase())
+            })
+          } else if (value !== null && value !== undefined) {
+            query = query.filter(item => item[key] === value)
+          }
+        })
+      }
+
+      // Apply sorting
+      if (options.sortBy && options.sortBy.length > 0) {
+        options.sortBy.forEach(sort => {
+          query = query.sortBy(sort.column)
+          if (sort.direction === 'desc') {
+            query = query.reverse()
+          }
+        })
+      }
+
+      const data = await query.toArray()
+      localData.value = data
+
+      // Update pagination
+      const totalField = await db.value.table(dbTablename.value).count()
+      paginationData.value = {
+        total: totalField,
+        page: options.page,
+        per_page: options.per_page,
+        last_page: Math.ceil(totalField / options.per_page)
+      }
+      isLoading.value = false
+    }, 300)
+  }
+
+  // ===== Filter & Sort Operations =====
+  const getFilterOptions = () => {
+    const filteredColumns = {}
+    const excludedKeys = ['columnEdit', 'page', 'per_page']
+    
+    Object.entries(filterData.value).forEach(([key, value]) => {
+      if (!excludedKeys.includes(key) && value !== undefined && value !== null && value !== '') {
+        filteredColumns[key] = value
+      }
+    })
+    return {
+      filter: filteredColumns,
+      sortBy: sortBy.value,
+      page: filterData.value.page,
+      per_page: filterData.value.per_page,
+    }
+  }
+
   const toggleSort = (column) => {
     const existingSort = sortBy.value.find(sort => sort.column === column)
     
@@ -44,70 +129,17 @@ export function useDataTable(initialData) {
     syncLocalData()
   }
 
-  const getFilterOptions = () => {
-    const filteredColumns = {}
-    const excludedKeys = ['columnEdit', 'page', 'per_page']
-    
-    Object.entries(filterData.value).forEach(([key, value]) => {
-      if (!excludedKeys.includes(key) && value !== undefined && value !== null && value !== '') {
-        filteredColumns[key] = value
-      }
-    })
-    return {
-      filter: filteredColumns,
-      sortBy: sortBy.value,
-      page: filterData.value.page,
-      per_page: filterData.value.per_page,
-    }
-  }
-
-  const syncLocalData = async () => {
-    if (debounceTimer) {
-      clearTimeout(debounceTimer)
-    }
-
-    debounceTimer = setTimeout(async () => {
-      let query = dataDb.value.table(dataTableName.value)
-      
-      const options = getFilterOptions()
-      
-      // Apply filters
-      if (options.filter) {
-        Object.entries(options.filter).forEach(([key, value]) => {
-          query = query.filter(item => {
-            if (typeof value === 'string') {
-              return item[key]?.toLowerCase().includes(value.toLowerCase())
-            }
-            return item[key] === value
-          })
-        })
-      }
-
-      // Apply sorting
-      if (options.sortBy && options.sortBy.length > 0) {
-        options.sortBy.forEach(sort => {
-          query = query.sortBy(sort.column)
-          if (sort.direction === 'desc') {
-            query = query.reverse()
-          }
-        })
-      }
-
-      const data = await query.toArray()
-      localData.value = data
-    }, 300)
-  }
-
+  // ===== Database Operations =====
   const bulkPutLocalData = async (newData) => {
-    await dataDb.value.table(dataTableName.value).bulkPut(newData)
+    await db.value.table(dbTablename.value).bulkPut(newData)
   }
 
   const bulkDeleteLocalData = async (ids) => {
-    await dataDb.value.table(dataTableName.value).bulkDelete(ids)
+    await db.value.table(dbTablename.value).bulkDelete(ids)
   }
 
   const getLocalDataUpdatedAt = async () => {
-    const data = await dataDb.value.table(dataTableName.value)
+    const data = await db.value.table(dbTablename.value)
       .orderBy('updated_at')
       .reverse()
       .limit(1)
@@ -116,29 +148,31 @@ export function useDataTable(initialData) {
   }
   
   const getLocalDataIds = async () => {
-    const data = await dataDb.value.table(dataTableName.value)
+    const data = await db.value.table(dbTablename.value)
       .toCollection()
       .primaryKeys()
     return data
   }
 
+  // ===== Exposed API =====
   return {
     // State
     sortBy,
     localData,
     dataTableId,
-    dataTableName,
-    dataDb,
-    dataLocalDataOptions,
+    dbTablename,
+    paginationData,
+    isLoading,
+    
     // Methods
     toggleSort,
     bulkPutLocalData,
     bulkDeleteLocalData,  
     getLocalDataUpdatedAt,
     getLocalDataIds,
+    
     // Setters
     setFilter,
     setSortBy,
-
   }
 }

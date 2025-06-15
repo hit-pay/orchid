@@ -84,7 +84,9 @@ const emit = defineEmits({
   'columns-changed': []
 })
 
-const paginationOption = computed(() => props.options?.pagination)
+let paginationOption = ref(props.options?.pagination)
+
+
 const cursorOption = computed(() => props.options?.cursor)
 const tableHeaders = ref()
 
@@ -95,17 +97,23 @@ const {
   localData,
   setFilter,
   setSortBy,
+  paginationData,
+  isLoading: isLocalDataLoading
   // sortBy,
   // toggleSort,
   // updateOrAddLocalData,
 } = useDataTable({
   id: props.id,
-  name: props.localDataOptions.table_name,
-  localDb: props.localDataOptions.db,
-  options: props.localDataOptions
+  name: props.localDataOptions?.table_name,
+  localDb: props.localDataOptions?.db,
+  options: props.localDataOptions?.options,
 })
 
+
+
 if(isLocalData.value) {
+
+  paginationOption.value = paginationData.value
 
   watch(() => props.filter, (newVal) => {
     setFilter(newVal)
@@ -115,9 +123,14 @@ if(isLocalData.value) {
     setSortBy(newVal)
   }, { deep: true })
 
+  watch(() => paginationData.value, (newVal) => {
+    paginationOption.value = newVal
+  }, { deep: true })
+
   setFilter(props.filter)
   setSortBy(props.sortBy)
 }
+
 
 
 const processedTableOptions = computed(() => {
@@ -181,7 +194,7 @@ const removeSearchQuery = (query) => {
 }
 
 const defaultFilterData = props.filter
-if (!defaultFilterData && paginationOption) {
+if (!defaultFilterData && paginationOption.value) {
   defaultFilterData.page = 1
 } else if (!defaultFilterData && cursorOption) {
   defaultFilterData.cursor = ''
@@ -350,6 +363,9 @@ onMounted(() => {
 })
 
 
+const tableIsLoading = computed(() => {
+  return props.isLoading || isLocalDataLoading.value
+})
 
 </script>
 <template>
@@ -359,7 +375,7 @@ onMounted(() => {
       :selected="selected"
       :row-key="rowKey"
       :options="processedTableOptions"
-      :is-loading="isLoading"
+      :is-loading="tableIsLoading"
       :loading-rows="itemsPerPage"
       :row-class="rowClass"
       :row-link="rowLink"
@@ -385,7 +401,7 @@ onMounted(() => {
             <Tabs
               v-if="filterOptions?.tabs"
               v-model="activeFilterTab"
-              :is-disabled="isLoading"
+              :is-disabled="tableIsLoading"
               :tabs="filterOptions.tabs.options"
               :variant="'pills'"
               @update:model-value="applyFilter(null, false, '', false, true)"
