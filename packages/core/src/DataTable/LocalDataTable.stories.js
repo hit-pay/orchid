@@ -20,7 +20,7 @@ export default {
   component: DataTable,
   tags: ['autodocs']
 }
-import { db, removeOldLocalDB } from './db'
+import { db, removeOldLocalDB } from '../data/db.sample'
 import { useDataTable } from './useDataTable'
 
 export const Default = {

@@ -60,6 +60,7 @@ export * from './Theme/OcTheme.js'
 export * from './FormBuilder/OcFormBuilder.js'
 
 //
+export { useDataTable } from './DataTable/useDataTable.js'
 
 const DataTable = defineAsyncComponent(() => import('./DataTable/OcDataTable.vue'))
 const FilterSearch = defineAsyncComponent(() => import('./DataTable/OcFilterSearch.vue'))
@@ -99,7 +100,6 @@ const AccountSetupProgress = defineAsyncComponent(
   () => import('./Elements/Sidebar/OcAccountSetupProgress.vue')
 )
 
-export {}
 
 export {
   // datatable
