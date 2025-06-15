@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { getHighlighter } from 'shikiji'
+import { createHighlighter } from 'shiki'
 import { onMounted, ref } from 'vue'
 import customTheme from './customTheme'
-import jsonLang from 'shikiji/dist/langs/json.mjs'
+import jsonLang from 'shiki/dist/languages/json.mjs'
 
 const props = defineProps({
   jsonObject: {
@@ -18,7 +18,7 @@ const props = defineProps({
 const json = ref()
 
 onMounted(async () => {
-  const highlighter = await getHighlighter({
+  const highlighter = await createHighlighter({
     themes: [customTheme],
     langs: [jsonLang]
   })

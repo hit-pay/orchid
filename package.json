@@ -33,7 +33,7 @@
     "lottie-web": "^5.12.2",
     "quill": "^2.0.3",
     "quill-better-table": "^1.2.10",
-    "shikiji": "^0.9.18",
+    "shiki": "^1.0.0",
     "v-calendar": "^3.1.2",
     "vue-advanced-cropper": "^2.8.8",
     "vue-draggable-next": "^2.2.1"
