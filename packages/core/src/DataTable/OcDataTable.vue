@@ -12,8 +12,9 @@ import {
   Dropdown
 } from '@/orchidui-core'
 
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import ColumnEdit from './ColumnEdit.vue'
+import { useDataTable } from './useDataTable.js'
 
 import {
   formatHeadersToLocalStorage,
@@ -60,7 +61,15 @@ const props = defineProps({
     type: [String, Function],
     default: 'id'
   },
-  rowLink: String
+  rowLink: String,
+  isLocalData: {
+    type: Boolean,
+    default: false
+  },
+  localDataOptions: {
+    type: Object,
+    required: false
+  },
 })
 
 const emit = defineEmits({
@@ -80,17 +89,53 @@ const cursorOption = computed(() => props.options?.cursor)
 const tableHeaders = ref()
 
 const tableOptions = computed(() => props.options?.tableOptions)
-const processedTableOptions = computed(() => ({
-  ...tableOptions.value,
-  headers: tableHeaders.value
-    ? tableHeaders.value
-        .map((header) => {
-          header.class = tableOptions.value?.headers.find((h) => h.key === header.key)?.class ?? ''
-          return header
-        })
-        .filter((h) => h.isActive)
-    : tableOptions.value?.headers.filter((h) => isColumnActive(h.key))
-}))
+
+const isLocalData = computed(() => props.isLocalData && props.localDataOptions)
+const {
+  localData,
+  setFilter,
+  setSortBy,
+  // sortBy,
+  // toggleSort,
+  // updateOrAddLocalData,
+} = useDataTable({
+  id: props.id,
+  name: props.localDataOptions.table_name,
+  localDb: props.localDataOptions.db,
+  options: props.localDataOptions
+})
+
+if(isLocalData.value) {
+
+  watch(() => props.filter, (newVal) => {
+    setFilter(newVal)
+
+  }, { deep: true, immediate: true })
+
+  watch(() => props.sortBy, (newVal) => {
+    setSortBy(newVal)
+  }, { deep: true, immediate: true })
+
+}
+
+
+const processedTableOptions = computed(() => {
+  const newTableOptions = {
+    ...tableOptions.value,
+    headers: tableHeaders.value
+      ? tableHeaders.value
+          .map((header) => {
+            header.class = tableOptions.value?.headers.find((h) => h.key === header.key)?.class ?? ''
+            return header
+          })
+          .filter((h) => h.isActive)
+      : tableOptions.value?.headers.filter((h) => isColumnActive(h.key))
+  }
+  if(isLocalData.value) {
+      newTableOptions.fields = localData.value
+  }
+  return newTableOptions
+})
 const filterOptions = computed(() => props.options?.filterOptions)
 
 const hidePerPageDropdown = computed(() => props.options?.hidePerPageDropdown)
@@ -203,7 +248,7 @@ const saveFilterToLocalStorage = () => {
 const getFilterFromLocalStorage = () => {
   return getFilterFromLocalStorageUtil(props.id)
 }
-
+const updateFilterTimeout = ref(null)
 const applyFilter = (
   filterFormData = null,
   isChangePage = false,
@@ -269,7 +314,11 @@ const applyFilter = (
   }
 
   saveFilterToLocalStorage()
-  emit('update:filter', filterData.value, isOnMount)
+
+  clearTimeout(updateFilterTimeout.value)
+  updateFilterTimeout.value = setTimeout(() => {
+    emit('update:filter', filterData.value, isOnMount)
+  }, 100)
 }
 
 const removeFilter = (filter, field) => {
@@ -298,6 +347,9 @@ onMounted(() => {
     applyFilter(null, true, filterData.value.cursor, true)
   }
 })
+
+
+
 </script>
 <template>
   <div class="relative flex flex-col gap-9">
