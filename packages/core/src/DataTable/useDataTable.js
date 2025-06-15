@@ -87,15 +87,28 @@ export function useDataTable(initialData) {
   const bulkUpdateOrAddLocalData = async (newData) => {
     await dataDb.value.table(dataTableName.value).bulkPut(newData)
   }
-  const updateOrAddLocalData = async (newData) => {
-    await dataDb.value.table(dataTableName.value).put(newData)
-  }
 
   const deleteLocalData = async (id) => {
     await dataDb.value.table(dataTableName.value).delete(id)
   }
   const bulkDeleteLocalData = async (ids) => {
     await dataDb.value.table(dataTableName.value).bulkDelete(ids)
+  }
+
+  const getLocalDataUpdatedAt = async () => {
+    const data = await dataDb.value.table(dataTableName.value)
+      .orderBy('updated_at')
+      .reverse()
+      .limit(1)
+      .first()
+    return data?.updated_at
+  }
+  
+  const getLocalDataIds = async () => {
+    const data = await dataDb.value.table(dataTableName.value)
+      .toCollection()
+      .primaryKeys()
+    return data
   }
 
   return {
@@ -108,12 +121,14 @@ export function useDataTable(initialData) {
     dataLocalDataOptions,
     // Methods
     toggleSort,
-    updateOrAddLocalData,
     bulkUpdateOrAddLocalData,
     deleteLocalData,
-    bulkDeleteLocalData,
+    bulkDeleteLocalData,  
+    getLocalDataUpdatedAt,
+    getLocalDataIds,
     // Setters
     setFilter,
     setSortBy,
+
   }
 }

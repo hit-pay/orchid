@@ -1021,16 +1021,27 @@ export const Default = {
       }
 
 
-      const { bulkUpdateOrAddLocalData } = useDataTable({
+      const { bulkUpdateOrAddLocalData, getLocalDataUpdatedAt, getLocalDataIds } = useDataTable({
         id: 'products-table',
         name: 'products',
         localDb: db,
         options: localDataOptions
       })
 
+      // in dashboard get all products in DB and update local data
+      // on visit get latest updated_at in 
+
+      const getLatestData = async () => {
+        const latestUpdatedAt = await getLocalDataUpdatedAt()
+        const localIds = await getLocalDataIds()
+        console.log('latestUpdatedAt', latestUpdatedAt, 'localIds', localIds)
+      }
+
+      getLatestData()
 
       bulkUpdateOrAddLocalData(formatFieldData(fieldData))
     
+
       return {
         localDataOptions: localDataOptions,
         args,
