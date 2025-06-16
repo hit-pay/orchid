@@ -1,4 +1,4 @@
-import { Theme, Select, Option, GroupOptions } from '@/orchidui-core'
+import { GroupOptions, Option, Select, Theme } from '@/orchidui-core'
 import { ref } from 'vue'
 
 export default {

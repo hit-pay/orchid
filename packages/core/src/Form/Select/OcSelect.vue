@@ -1,5 +1,5 @@
 <script setup>
-import { BaseInput, Input, Option, Icon, Chip, Button, Dropdown, Skeleton } from '@/orchidui-core'
+import { BaseInput, Button, Chip, Dropdown, Icon, Input, Option, Skeleton } from '@/orchidui-core'
 import { computed, nextTick, ref, watch } from 'vue'
 
 const props = defineProps({
@@ -87,6 +87,11 @@ const searchInputRef = ref()
 const dropdownRef = ref()
 const filterableOptionsRef = ref([])
 const selectListRef = ref()
+const triggerRef = ref()
+
+// Keyboard navigation state
+const focusedIndex = ref(-1)
+const keyboardNavigationActive = ref(false)
 
 const optionsKey = ref(new Date().toISOString())
 
@@ -153,6 +158,165 @@ const localValueOption = computed(() => {
   }
 })
 
+// Keyboard Navigation Methods
+const getInitialFocusIndex = () => {
+  if (!props.multiple && props.modelValue) {
+    const selectedIndex = filterableOptions.value.findIndex(
+      option => option.value === props.modelValue
+    )
+    return selectedIndex >= 0 ? selectedIndex : 0
+  }
+  return 0
+}
+
+const scrollOptionIntoView = (index) => {
+  if (!selectListRef.value || !filterableOptionsRef.value[index]) return
+  
+  const optionElement = filterableOptionsRef.value[index]?.optionItemRef
+  if (!optionElement) return
+
+  const container = selectListRef.value.parentNode
+  const containerRect = container.getBoundingClientRect()
+  const optionRect = optionElement.getBoundingClientRect()
+
+  if (optionRect.bottom > containerRect.bottom) {
+    container.scrollTop += optionRect.bottom - containerRect.bottom + 10
+  } else if (optionRect.top < containerRect.top) {
+    container.scrollTop -= containerRect.top - optionRect.top + 10
+  }
+}
+
+const handleArrowDown = () => {
+  if (!isDropdownOpened.value) return
+  
+  keyboardNavigationActive.value = true
+  const maxIndex = filterableOptions.value.length - 1
+  
+  if (focusedIndex.value < maxIndex) {
+    focusedIndex.value++
+  } else {
+    // Loop to first option
+    focusedIndex.value = 0
+  }
+  
+  nextTick(() => {
+    scrollOptionIntoView(focusedIndex.value)
+  })
+}
+
+const handleArrowUp = () => {
+  if (!isDropdownOpened.value) return
+  
+  keyboardNavigationActive.value = true
+  
+  if (focusedIndex.value > 0) {
+    focusedIndex.value--
+  } else {
+    // Loop to last option
+    focusedIndex.value = filterableOptions.value.length - 1
+  }
+  
+  nextTick(() => {
+    scrollOptionIntoView(focusedIndex.value)
+  })
+}
+
+const handleEnterKey = () => {
+  if (!isDropdownOpened.value) {
+    // Open dropdown
+    isDropdownOpened.value = true
+    return
+  }
+  
+  // Select focused option
+  const focusedOption = filterableOptions.value[focusedIndex.value]
+  if (focusedOption && !focusedOption.isDisabled) {
+    selectOption(focusedOption)
+  }
+}
+
+const handleEscapeKey = () => {
+  if (isDropdownOpened.value) {
+    isDropdownOpened.value = false
+    nextTick(() => {
+      triggerRef.value?.focus()
+    })
+  }
+}
+
+const handleSpaceKey = (event) => {
+  if (!isDropdownOpened.value) {
+    event.preventDefault()
+    isDropdownOpened.value = true
+  }
+}
+
+const handleTriggerKeydown = (event) => {
+  if (props.isDisabled || props.isReadonly) return
+
+  switch (event.code) {
+    case 'ArrowDown':
+      event.preventDefault()
+      if (!isDropdownOpened.value) {
+        isDropdownOpened.value = true
+      } else {
+        handleArrowDown()
+      }
+      break
+    case 'ArrowUp':
+      event.preventDefault()
+      if (!isDropdownOpened.value) {
+        isDropdownOpened.value = true
+      } else {
+        handleArrowUp()
+      }
+      break
+    case 'Enter':
+      event.preventDefault()
+      handleEnterKey()
+      break
+    case 'Space':
+      handleSpaceKey(event)
+      break
+    case 'Escape':
+      handleEscapeKey()
+      break
+    case 'Tab':
+      // Allow default tab behavior
+      if (isDropdownOpened.value) {
+        isDropdownOpened.value = false
+      }
+      break
+  }
+}
+
+const handleDropdownKeydown = (event) => {
+  if (props.isDisabled || props.isReadonly) return
+
+  switch (event.code) {
+    case 'ArrowDown':
+      event.preventDefault()
+      handleArrowDown()
+      break
+    case 'ArrowUp':
+      event.preventDefault()
+      handleArrowUp()
+      break
+    case 'Enter':
+      event.preventDefault()
+      handleEnterKey()
+      break
+    case 'Escape':
+      event.preventDefault()
+      handleEscapeKey()
+      break
+    case 'Tab':
+      // Allow default tab behavior - will close dropdown
+      isDropdownOpened.value = false
+      break
+  }
+}
+
 const selectOption = (option) => {
   if (option.isDisabled) {
     return
@@ -169,7 +333,6 @@ const selectOption = (option) => {
       localValueOption.value?.length >= Number(props.maxOptionAllowed)
     ) {
       emit('max-option-allowed-set')
-
       return
     }
 
@@ -178,18 +341,19 @@ const selectOption = (option) => {
       : [...(props.modelValue || []), option.value]
   } else {
     result = option.value
-
     isDropdownOpened.value = false
   }
 
   emit('update:modelValue', result)
 }
+
 const removeOption = (value) => {
   emit(
     'update:modelValue',
     (props.modelValue || []).filter((o) => o !== value)
   )
 }
+
 const selectAll = () => {
   if (!props.isAsynchronousSearch) {
     if (isSelectedAll.value) {
@@ -202,20 +366,33 @@ const selectAll = () => {
     }
   }
 }
+
 const baseInput = ref()
 
 watch(filterableOptions, () => {
   optionsKey.value = new Date().toISOString()
+  // Reset focus when options change
+  focusedIndex.value = -1
+  keyboardNavigationActive.value = false
 })
 
 watch(isDropdownOpened, (value) => {
   if (!value) {
     emit('close')
+    focusedIndex.value = -1
+    keyboardNavigationActive.value = false
     return
   }
 
+  // Set initial focus when dropdown opens
   nextTick(() => {
-    searchInputRef.value?.focus()
+    focusedIndex.value = getInitialFocusIndex()
+    
+    if (props.isFilterable && !props.isInlineSearch) {
+      searchInputRef.value?.focus()
+    } else if (props.isFilterable && props.isInlineSearch && localValueOption.value) {
+      searchInputRef.value?.focus()
+    }
   })
 })
 
@@ -223,6 +400,7 @@ const maxPopperWidth = ref('100%')
 const popperStyle = computed(() => {
   return { maxWidth: maxPopperWidth.value }
 })
+
 const onUpdateDropdown = () => {
   emit('toggle')
   maxPopperWidth.value = baseInput.value?.$el?.offsetWidth
@@ -302,9 +480,11 @@ defineExpose({
       :menu-classes="menuClasses"
       @update:model-value="onUpdateDropdown"
       @scroll="loadMore"
+      @keydown="handleDropdownKeydown"
     >
       <div
-        class="border min-h-[36px] input-shadow transition-all duration-[250ms] ease-out  w-full px-3 flex justify-between items-center bg-white cursor-pointer gap-x-3 rounded"
+        ref="triggerRef"
+        class="border min-h-[36px] input-shadow transition-all duration-[250ms] ease-out w-full px-3 flex justify-between items-center bg-white cursor-pointer gap-x-3 rounded focus:outline-none focus:ring-2 focus:ring-oc-primary focus:ring-opacity-50"
         :class="[
           dropdownClasses,
           {
@@ -316,6 +496,12 @@ defineExpose({
             'border-none !min-h-[18px] !px-0': isSlim
           }
         ]"
+        tabindex="0"
+        role="combobox"
+        :aria-expanded="isDropdownOpened"
+        :aria-haspopup="true"
+        :aria-labelledby="label ? 'select-label' : undefined"
+        @keydown="handleTriggerKeydown"
       >
         <div v-if="multiple" class="flex flex-wrap gap-2 overflow-hidden">
           <slot name="selection">
@@ -391,7 +577,7 @@ defineExpose({
       </div>
 
       <template #menu>
-        <div ref="selectListRef" class="flex flex-col gap-y-2">
+        <div ref="selectListRef" class="flex flex-col gap-y-2" role="listbox">
           <div
             v-if="
               (isFilterable && !isInlineSearch) ||
@@ -427,7 +613,7 @@ defineExpose({
             />
             <slot :key="optionsKey" :f-options="filterableOptions" :select-option="selectOption">
               <Option
-                v-for="option in filterableOptions"
+                v-for="(option, index) in filterableOptions"
                 ref="filterableOptionsRef"
                 :key="option.value"
                 :label="option.label"
@@ -441,11 +627,21 @@ defineExpose({
                       : false
                     : modelValue === option.value
                 "
+                :is-focused="focusedIndex === index"
+                :keyboard-navigation-active="keyboardNavigationActive"
+                role="option"
+                :aria-selected="
+                  multiple
+                    ? modelValue
+                      ? modelValue.find((o) => o === option.value) !== undefined
+                      : false
+                    : modelValue === option.value
+                "
                 @click="selectOption(option)"
               />
               <!-- Empty div to trigger the slot -->
               <slot name="empty">
-                <div v-if="!filterableOptions.length" class="text-sm text-oc-text-300  text-center">
+                <div v-if="!filterableOptions.length" class="text-sm text-oc-text-300 text-center">
                   No data to display
                 </div>
               </slot>
