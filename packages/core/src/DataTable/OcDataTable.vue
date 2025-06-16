@@ -118,7 +118,7 @@ if(isLocalData.value) {
 
   watch(() => props.filter, () => {
     setFilter(props.filter)
-  }, { deep: true})
+  }, { deep: true, immediate: true })
 
   watch(() => props.sortBy, () => {
     setSortBy(props.sortBy)
