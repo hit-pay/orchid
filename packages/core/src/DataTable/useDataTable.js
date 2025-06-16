@@ -170,6 +170,7 @@ export function useDataTable(initialData) {
     bulkDeleteLocalData,  
     getLocalDataUpdatedAt,
     getLocalDataIds,
+    syncLocalData,
     
     // Setters
     setFilter,
