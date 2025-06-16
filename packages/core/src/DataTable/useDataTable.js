@@ -86,13 +86,11 @@ export function useDataTable(initialData) {
       const queryTotal = createQuery()
       const totalField = await queryTotal.count()
 
-      console.log('totalField', totalField)
       // Update pagination
       paginationData.value = {
         total: totalField,
         last_page: Math.ceil(parseInt(totalField) / parseInt(filterData.value.per_page))
       }
-      console.log('paginationData', paginationData.value)
       isLoading.value = false
     }, 500)
   }
