@@ -71,13 +71,12 @@ export function useDataTable(initialData) {
 
       // Apply pagination
       const offset = (parseInt(filterData.value.page) - 1) * parseInt(filterData.value.per_page)
+      const totalField = await query.count()
       query = query.offset(offset).limit(parseInt(filterData.value.per_page))
-
       const data = await query.toArray()
       localData.value = data
 
       // Update pagination
-      const totalField = await db.value.table(dbTablename.value).count()
       paginationData.value = {
         total: totalField,
         last_page: Math.ceil(totalField / parseInt(filterData.value.per_page))
