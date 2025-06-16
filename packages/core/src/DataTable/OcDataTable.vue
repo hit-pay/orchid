@@ -80,8 +80,6 @@ const emit = defineEmits({
   'columns-changed': []
 })
 
-let paginationOption = ref(props.options?.pagination)
-
 
 
 const cursorOption = computed(() => props.options?.cursor)
@@ -106,11 +104,12 @@ const {
   options: props.localDb?.options,
 })
 
+watch(() => props.options?.pagination, (newVal) => {
+  paginationData.value = newVal
+}, { deep: true, immediate: true })
 
 
 if(isLocalData.value) {
-
-  paginationOption.value = paginationData.value
 
   watch(() => props.filter, () => {
     setFilter(props.filter)
@@ -120,16 +119,7 @@ if(isLocalData.value) {
     setSortBy(props.sortBy)
   }, { deep: true, immediate: true })
 
-  watch(() => paginationData.value, () => {
-    paginationOption.value = paginationData.value
-  }, { deep: true, immediate: true })
 }
-
-watch(() => props.options?.pagination, (newVal) => {
-  if(!isLocalData.value) {
-    paginationOption.value = newVal
-  }
-}, { deep: true })
 
 
 const processedTableOptions = computed(() => {
@@ -153,7 +143,7 @@ const filterOptions = computed(() => props.options?.filterOptions)
 
 const hidePerPageDropdown = computed(() => props.options?.hidePerPageDropdown)
 
-const isLastPage = computed(() => paginationOption.value?.last_page === 1)
+const isLastPage = computed(() => paginationData.value?.last_page === 1)
 
 const isFilterDropdownOpen = ref(false)
 const activeFilterTab = ref(props.filter[filterOptions.value?.tabs?.key])
@@ -172,7 +162,7 @@ const customItemsPerPageOptions = computed(() =>
 )
 
 const itemsPerPageOptions = computed(() => {
-  return getItemsPerPageOptions(customItemsPerPageOptions.value, paginationOption.value)
+  return getItemsPerPageOptions(customItemsPerPageOptions.value, paginationData.value)
 })
 
 const hasSelectedItems = computed(() => {
@@ -193,7 +183,7 @@ const removeSearchQuery = (query) => {
 }
 
 const defaultFilterData = props.filter
-if (!defaultFilterData && paginationOption.value) {
+if (!defaultFilterData && paginationData.value) {
   defaultFilterData.page = 1
 } else if (!defaultFilterData && cursorOption) {
   defaultFilterData.cursor = ''
@@ -269,10 +259,10 @@ const applyFilter = (
   isOnMount = false,
   isChangeTab = false
 ) => {
-  if (paginationOption.value && !isChangePage) {
+  if (paginationData.value && !isChangePage) {
     currentPage.value = 1
   }
-  if (paginationOption.value) {
+  if (paginationData.value) {
     filterData.value.page = currentPage.value
   } else {
     filterData.value.cursor = changeCursor
@@ -502,16 +492,16 @@ const tableIsLoading = computed(() => {
     </Table>
     <slot name="before-pagination"></slot>
     <div
-      v-if="paginationOption || cursorOption"
+      v-if="paginationData || cursorOption"
       class="flex items-center gap-3"
-      :class="paginationOption && paginationOption.last_page === 1 ? 'justify-end' : ''"
+      :class="paginationData && paginationData.last_page === 1 ? 'justify-end' : ''"
     >
       <Pagination
-        v-if="paginationOption && !isLastPage"
+        v-if="paginationData && !isLastPage"
         v-model="currentPage"
         class="justify-center"
-        :max-page="paginationOption.last_page"
-        :strategy="paginationOption.strategy"
+        :max-page="paginationData.last_page"
+        :strategy="paginationData.strategy"
         total-visible="5"
         @update:model-value="handlePageChange"
       />

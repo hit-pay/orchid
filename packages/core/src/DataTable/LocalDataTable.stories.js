@@ -171,15 +171,6 @@ export const Default = {
       const filter = ref({
         page: 1,
         per_page: 10,
-        tabs: '',
-        columnEdit: {
-          active: [
-            {
-              key: 'col1',
-              isActive: false
-            }
-          ]
-        }
       })
       const sortBy = ref([
         {
@@ -214,7 +205,10 @@ export const Default = {
 
       const localDbOptions = {
         db: db,
-        table_name: 'products'
+        table_name: 'products',
+        options: {
+          filterable_fields: ['name', 'status', 'available_quantity','available']
+        }
       }
 
       const fieldData = [
