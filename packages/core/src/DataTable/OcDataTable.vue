@@ -9,12 +9,12 @@ import {
   Select,
   Tabs,
   Button,
-  Dropdown
+  Dropdown,
+  useDataTable
 } from '@/orchidui-core'
 
 import { ref, computed, onMounted, watch } from 'vue'
 import ColumnEdit from './ColumnEdit.vue'
-import { useDataTable } from './useDataTable.js'
 
 import {
   formatHeadersToLocalStorage,
