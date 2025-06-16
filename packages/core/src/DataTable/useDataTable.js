@@ -31,6 +31,7 @@ export function useDataTable(initialData) {
       let query = db.value.table(dbTablename.value)
       const options = getFilterOptions()
       
+      console.log('local filter options :', options)
       // Apply filters
       if (options.filter) {
         Object.entries(options.filter).forEach(([key, value]) => {
@@ -96,6 +97,7 @@ export function useDataTable(initialData) {
       sortBy: sortBy.value,
       page: filterData.value.page,
       per_page: filterData.value.per_page,
+      pagination: paginationData.value
     }
   }
 

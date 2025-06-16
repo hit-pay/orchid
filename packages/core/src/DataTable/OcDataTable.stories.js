@@ -7,10 +7,9 @@ import {
     TableCellContent,
     Button,
     Dropdown,
-    DropdownItem
+    DropdownItem,
+    DataTable,
   } from '@/orchidui-core'
-  
-  import { DataTable } from '@/orchidui-core'
   
   import { ref } from 'vue'
   

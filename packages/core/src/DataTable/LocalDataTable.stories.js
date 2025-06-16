@@ -7,10 +7,10 @@ import {
   TableCellContent,
   Button,
   Dropdown,
-  DropdownItem
+  DropdownItem,
+  useDataTable,
+  DataTable
 } from '@/orchidui-core'
-
-import { DataTable } from '@/orchidui-core'
 
 import { ref } from 'vue'
 
@@ -21,7 +21,6 @@ export default {
   tags: ['autodocs']
 }
 import { db, removeOldLocalDB } from '../data/db.sample'
-import { useDataTable } from './useDataTable'
 
 export const Default = {
   args: {
