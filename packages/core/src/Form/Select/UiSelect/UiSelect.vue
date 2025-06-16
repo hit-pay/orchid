@@ -1,8 +1,7 @@
 <script setup>
-import { BaseInput, Button, Chip, Icon, Input, Skeleton } from '@/orchidui-core'
+import { BaseInput, Button, Checkbox, Chip, Icon, Input, Skeleton } from '@/orchidui-core'
 import {
   ComboboxContent,
-  ComboboxInput,
   ComboboxItem,
   ComboboxRoot,
   ComboboxTrigger,
@@ -313,15 +312,16 @@ watch(() => props.searchKeywords, (newValue) => {
         :class="menuClasses"
         :side-offset="4"
       >
-        <!-- Search Input -->
+        <!-- Orchid Input -->
         <div
           v-if="isFilterable"
           class="sticky px-3 pt-3 top-0 z-10 bg-white"
         >
-          <ComboboxInput
+          <Input
             ref="searchInputRef"
+            v-model="query"
             :placeholder="inlineSearchPlaceholder"
-            class="w-full px-3 py-2 border rounded-md"
+            icon="search"
             @update:model-value="handleSearch"
           />
         </div>
@@ -334,11 +334,11 @@ watch(() => props.searchKeywords, (newValue) => {
             :value="'__select_all__'"
             @select="selectAll"
           >
-            <input
-              type="checkbox"
-              :checked="isSelectedAll"
-              :indeterminate="!isSelectedAll && !!modelValue?.length"
-              class="pointer-events-none"
+            <!--  Orchid Checkbox -->
+            <Checkbox
+              :model-value="isSelectedAll"
+              :is-partial="!isSelectedAll && !!modelValue?.length"
+              class="!w-fit pointer-events-none"
             />
             <span>Select All</span>
           </ComboboxItem>
@@ -353,11 +353,11 @@ watch(() => props.searchKeywords, (newValue) => {
               class="flex items-center gap-3 px-3 py-2 cursor-pointer hover:bg-oc-accent-1-50 data-[highlighted]:bg-oc-accent-1-50 data-[highlighted]:outline-none"              
               @select="handleValueChange(option.value)"
             >
-              <input
+              <!--Orchid Checkbox -->
+              <Checkbox
                 v-if="isCheckboxes"
-                type="checkbox"
-                :checked="modelValue?.includes(option.value)"
-                class="pointer-events-none"
+                :model-value="modelValue?.includes(option.value)"
+                class="!w-fit pointer-events-none"
               />
               <div class="flex flex-col flex-1">
                 <span>{{ option.label }}</span>
@@ -428,7 +428,7 @@ watch(() => props.searchKeywords, (newValue) => {
           <Icon v-if="icon" :name="icon" width="16" height="16" />
           <span v-if="isInlineLabel && label" class="text-oc-text-300">{{ label }}:</span>
           
-          <!-- Inline Search Input -->
+          <!--  Orchid Input -->
           <template v-if="isInlineSearch && isFilterable && !localValueOption">
             <Input
               v-model="query"
@@ -473,7 +473,7 @@ watch(() => props.searchKeywords, (newValue) => {
         :class="menuClasses"
         :side-offset="4"
       >
-        <!-- Search Input -->
+        <!--  Orchid Input -->
         <div
           v-if="isFilterable && (!isInlineSearch || localValueOption)"
           class="sticky px-3 pt-3 top-0 z-10 bg-white"
