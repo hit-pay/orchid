@@ -62,11 +62,7 @@ const props = defineProps({
     default: 'id'
   },
   rowLink: String,
-  isLocalData: {
-    type: Boolean,
-    default: false
-  },
-  localDataOptions: {
+  localDb: {
     type: Object,
     required: false
   },
@@ -93,7 +89,7 @@ const tableHeaders = ref()
 
 const tableOptions = computed(() => props.options?.tableOptions)
 
-const isLocalData = computed(() => props.isLocalData && props.localDataOptions)
+const isLocalData = computed(() => props.localDb !== undefined)
 const {
   localData,
   setFilter,
@@ -105,9 +101,8 @@ const {
   // updateOrAddLocalData,
 } = useDataTable({
   id: props.id,
-  name: props.localDataOptions?.table_name,
-  localDb: props.localDataOptions?.db,
-  options: props.localDataOptions?.options,
+  name: props.localDb?.table_name,
+  localDb: props.localDb?.db,
 })
 
 
@@ -148,7 +143,7 @@ const processedTableOptions = computed(() => {
           .filter((h) => h.isActive)
       : tableOptions.value?.headers.filter((h) => isColumnActive(h.key))
   }
-  if(isLocalData.value) {
+  if(isLocalData.value || localData.value.length > 0) {
       newTableOptions.fields = localData.value
   }
   return newTableOptions

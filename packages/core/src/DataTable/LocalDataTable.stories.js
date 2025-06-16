@@ -212,7 +212,7 @@ export const Default = {
       }
       removeOldLocalDB()
 
-      const localDataOptions = {
+      const localDbOptions = {
         db: db,
         table_name: 'products'
       }
@@ -961,13 +961,13 @@ export const Default = {
       }
 
 
-      const { bulkPutLocalData, getLocalDataUpdatedAt, getLocalDataIds  } = useDataTable({
+      const { bulkPutLocalData, getLocalDataUpdatedAt, getLocalDataIds, localData  } = useDataTable({
         id: 'products-table',
-        name: 'products',
+        name: localDbOptions.table_name,
         localDb: db,
-        options: localDataOptions,
-        pagination: args.options.pagination
       })
+
+      args.options.tableOptions.fields = localData.value
 
       // in dashboard get all products in DB and update local data
       // on visit get latest updated_at in 
@@ -984,7 +984,7 @@ export const Default = {
     
 
       return {
-        localDataOptions: localDataOptions,
+        localDbOptions,
         args,
         filter,
         sortBy,
@@ -1009,8 +1009,7 @@ export const Default = {
                 :sort-by="sortBy"
                 :options="args.options"
                 :is-loading="args.isLoading"
-                :is-local-data="true"
-                :local-data-options="localDataOptions"
+                :local-db="localDbOptions"
                 @update:filter="updateFilterData"
                 @update:sort-by="updateSortBy"
                 @click:row="onClickRow"

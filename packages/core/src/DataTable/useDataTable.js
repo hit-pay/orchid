@@ -12,7 +12,10 @@ export function useDataTable(initialData) {
   // Data State
   const localData = ref([])
   const sortBy = ref([])
-  const filterData = ref({})
+  const filterData = ref({
+    page: 1,
+    per_page: 10
+  })
   const paginationData = ref({
     total: 0,
     last_page: 0
@@ -31,7 +34,6 @@ export function useDataTable(initialData) {
       let query = db.value.table(dbTablename.value)
       const options = getFilterOptions()
       
-      console.log('local filter options :', options)
       // Apply filters
       if (options.filter) {
         Object.entries(options.filter).forEach(([key, value]) => {
@@ -67,6 +69,10 @@ export function useDataTable(initialData) {
         })
       }
 
+      // Apply pagination
+      const offset = (parseInt(filterData.value.page) - 1) * parseInt(filterData.value.per_page)
+      query = query.offset(offset).limit(parseInt(filterData.value.per_page))
+
       const data = await query.toArray()
       localData.value = data
 
@@ -74,9 +80,7 @@ export function useDataTable(initialData) {
       const totalField = await db.value.table(dbTablename.value).count()
       paginationData.value = {
         total: totalField,
-        page: options.page,
-        per_page: options.per_page,
-        last_page: Math.ceil(totalField / options.per_page)
+        last_page: Math.ceil(totalField / filterData.value.per_page)
       }
       isLoading.value = false
     }, 300)
@@ -95,8 +99,6 @@ export function useDataTable(initialData) {
     return {
       filter: filteredColumns,
       sortBy: sortBy.value,
-      page: filterData.value.page,
-      per_page: filterData.value.per_page,
       pagination: paginationData.value
     }
   }
@@ -123,13 +125,11 @@ export function useDataTable(initialData) {
 
   const setFilter = (filters) => {
     filterData.value = { ...filters }
-    console.log('setFilter', filterData.value)
     syncLocalData()
   }
 
   const setSortBy = (sorts) => {
     sortBy.value = { ...sorts }
-    console.log('setSortBy', sortBy.value)
     syncLocalData()
   }
 
