@@ -23,38 +23,35 @@ export function useDataTable(initialData) {
   const isLoading = ref(false)
   let debounceTimer = null
 
-  // ===== Data Operations =====
-  const syncLocalData = async () => {
-    isLoading.value = true
-    if (debounceTimer) {
-      clearTimeout(debounceTimer)
-    }
-
-    debounceTimer = setTimeout(async () => {
-      let query = db.value.table(dbTablename.value)
+  const createQuery = () => {
+    let query = db.value.table(dbTablename.value)
       const filterOptions = getFilterOptions()
-
-      
       // Apply filters
       if (filterOptions.filter) {
         Object.entries(filterOptions.filter).forEach(([key, value]) => {
-          if (value && Array.isArray(value)) {
+          if (!value) return // Skip if value is null, undefined, or empty
+
+          if (Array.isArray(value)) {
             query = query.filter(item => {
               const itemValue = item[key]
+              if (itemValue === undefined || itemValue === null) return false
+              
               return value.some(v => {
+                if (v === undefined || v === null) return false
+                
                 if (typeof v === 'string' && typeof itemValue === 'string') {
                   return itemValue.toLowerCase().includes(v.toLowerCase())
                 }
                 return itemValue === v
               })
             })
-          } else if (value && typeof value === 'string') {
+          } else if (typeof value === 'string') {
             query = query.filter(item => {
               const itemValue = item[key]
-              return typeof itemValue === 'string' && 
-                itemValue.toLowerCase().includes(value.toLowerCase())
+              if (typeof itemValue !== 'string') return false
+              return itemValue.toLowerCase().includes(value.toLowerCase())
             })
-          } else if (value !== null && value !== undefined) {
+          } else {
             query = query.filter(item => item[key] === value)
           }
         })
@@ -70,17 +67,32 @@ export function useDataTable(initialData) {
         })
       }
 
+    return query
+  }
+
+  // ===== Data Operations =====
+  const syncLocalData = async () => {
+    isLoading.value = true
+    if (debounceTimer) {
+      clearTimeout(debounceTimer)
+    }
+
+    debounceTimer = setTimeout(async () => {
+      const query = createQuery()
       // Apply pagination
       const offset = (parseInt(filterData.value.page) - 1) * parseInt(filterData.value.per_page)
       const data = await query.offset(offset).limit(parseInt(filterData.value.per_page)).toArray()
       localData.value = data
-      const totalField = await query.count()
+      const queryTotal = createQuery()
+      const totalField = await queryTotal.count()
 
+      console.log('totalField', totalField)
       // Update pagination
       paginationData.value = {
         total: totalField,
-        last_page: Math.ceil(totalField / parseInt(filterData.value.per_page))
+        last_page: Math.ceil(parseInt(totalField) / parseInt(filterData.value.per_page))
       }
+      console.log('paginationData', paginationData.value)
       isLoading.value = false
     }, 500)
   }

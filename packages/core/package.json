@@ -1,7 +1,7 @@
 {
   "name": "@orchidui/core",
   "description": "Orchid UI, Library Vue 3 tailwind css",
-  "version": "1.8.1-115",
+  "version": "1.8.1-117",
   "type": "module",
   "scripts": {
     "build": "vite build"
