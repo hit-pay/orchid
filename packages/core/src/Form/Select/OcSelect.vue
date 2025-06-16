@@ -627,10 +627,8 @@ defineExpose({
                       : false
                     : modelValue === option.value
                 "
-                :class="{
-                  'bg-oc-accent-1-100 ring-2 ring-oc-primary ring-opacity-50': 
-                    keyboardNavigationActive && focusedIndex === index
-                }"
+                :is-focused="focusedIndex === index"
+                :keyboard-navigation-active="keyboardNavigationActive"
                 role="option"
                 :aria-selected="
                   multiple
