@@ -116,20 +116,17 @@ if(isLocalData.value) {
 
   paginationOption.value = paginationData.value
 
-  watch(() => props.filter, (newVal) => {
-    setFilter(newVal)
+  watch(() => props.filter, () => {
+    setFilter(props.filter)
   }, { deep: true})
 
-  watch(() => props.sortBy, (newVal) => {
-    setSortBy(newVal)
-  }, { deep: true })
+  watch(() => props.sortBy, () => {
+    setSortBy(props.sortBy)
+  }, { deep: true, immediate: true })
 
-  watch(() => paginationData.value, (newVal) => {
-    paginationOption.value = newVal
-  }, { deep: true })
-
-  setFilter(props.filter)
-  setSortBy(props.sortBy)
+  watch(() => paginationData.value, () => {
+    paginationOption.value = paginationData.value
+  }, { deep: true, immediate: true })
 }
 
 watch(() => props.options?.pagination, (newVal) => {

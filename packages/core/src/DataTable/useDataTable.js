@@ -123,11 +123,13 @@ export function useDataTable(initialData) {
 
   const setFilter = (filters) => {
     filterData.value = { ...filters }
+    console.log('setFilter', filterData.value)
     syncLocalData()
   }
 
   const setSortBy = (sorts) => {
     sortBy.value = { ...sorts }
+    console.log('setSortBy', sortBy.value)
     syncLocalData()
   }
 
