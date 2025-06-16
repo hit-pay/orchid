@@ -2,7 +2,7 @@ import { ref } from 'vue'
 
 export function useDataTable(initialData) {
   // ===== State Management =====
-  const { id, name, localDb } = initialData
+  const { id, name, localDb, options } = initialData
 
   // Table Configuration
   const dataTableId = ref(id)
@@ -32,11 +32,12 @@ export function useDataTable(initialData) {
 
     debounceTimer = setTimeout(async () => {
       let query = db.value.table(dbTablename.value)
-      const options = getFilterOptions()
+      const filterOptions = getFilterOptions()
+
       
       // Apply filters
-      if (options.filter) {
-        Object.entries(options.filter).forEach(([key, value]) => {
+      if (filterOptions.filter) {
+        Object.entries(filterOptions.filter).forEach(([key, value]) => {
           if (value && Array.isArray(value)) {
             query = query.filter(item => {
               const itemValue = item[key]
@@ -60,8 +61,8 @@ export function useDataTable(initialData) {
       }
 
       // Apply sorting
-      if (options.sortBy && options.sortBy.length > 0) {
-        options.sortBy.forEach(sort => {
+      if (filterOptions.sortBy && filterOptions.sortBy.length > 0) {
+        filterOptions.sortBy.forEach(sort => {
           query = query.sortBy(sort.column)
           if (sort.direction === 'desc') {
             query = query.reverse()
@@ -71,10 +72,9 @@ export function useDataTable(initialData) {
 
       // Apply pagination
       const offset = (parseInt(filterData.value.page) - 1) * parseInt(filterData.value.per_page)
-      const totalField = await query.count()
-      query = query.offset(offset).limit(parseInt(filterData.value.per_page))
-      const data = await query.toArray()
+      const data = await query.offset(offset).limit(parseInt(filterData.value.per_page)).toArray()
       localData.value = data
+      const totalField = await query.count()
 
       // Update pagination
       paginationData.value = {
@@ -82,16 +82,16 @@ export function useDataTable(initialData) {
         last_page: Math.ceil(totalField / parseInt(filterData.value.per_page))
       }
       isLoading.value = false
-    }, 300)
+    }, 500)
   }
 
   // ===== Filter & Sort Operations =====
   const getFilterOptions = () => {
     const filteredColumns = {}
-    const excludedKeys = ['columnEdit', 'page', 'per_page']
+    const includeKeys = options?.filterable_fields ?? []
     
     Object.entries(filterData.value).forEach(([key, value]) => {
-      if (!excludedKeys.includes(key) && value !== undefined && value !== null && value !== '') {
+      if (includeKeys.includes(key) && value !== undefined && value !== null && value !== '') {
         filteredColumns[key] = value
       }
     })
