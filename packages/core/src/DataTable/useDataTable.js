@@ -114,7 +114,8 @@ const sortOptions = computed(() => {
         .toArray()
       localData.value = data
       
-      const totalField = await query.count()
+      const queryTotal = createQuery()
+      const totalField = await queryTotal.count()
 
       // Update pagination
       paginationData.value = {
