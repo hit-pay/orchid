@@ -100,7 +100,6 @@ const {
     getLocalDataIds,
     syncLocalData,
     sortByData,
-    // toggleSort,
 
     // Setters
     setFilter,

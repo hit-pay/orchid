@@ -128,22 +128,6 @@ const createQuery = async () => {
   }
 
 
-  const toggleSort = (column) => {
-    const existingSort = sortByData.value.find(sort => sort.column === column)
-    
-    if (!existingSort) {
-      // If not exists, add with asc
-      sortByData.value = { ...sortByData.value, [column]: 'asc' }
-    } else if (existingSort.direction === 'asc') {
-      // If asc, change to desc
-      sortByData.value = { ...sortByData.value, [column]: 'desc' }
-    } else {
-      // If desc, remove
-      delete sortByData.value[column]
-    }
-    syncLocalData()
-  }
-
   const setFilter = (filters) => {
     filterData.value = { ...filters }
     syncLocalData()
@@ -170,15 +154,27 @@ const createQuery = async () => {
   }
 
   const getLocalDataUpdatedAt = async () => {
-    if(db) {
-      const data = await db.table(dbTablename.value)
-      .orderBy('updated_at')
-      .reverse()
-      .limit(1)
-      .first()
-      return data?.updated_at
+    if (!db || typeof db.table !== 'function') {
+      return null
     }
-    return null
+    
+    try {
+      const table = db.table(dbTablename.value)
+      if (!table) {
+        return null
+      }
+
+      const data = await table
+        .orderBy('updated_at')
+        .reverse()
+        .limit(1)
+        .first()
+      
+      return data?.updated_at || null
+    } catch (error) {
+      console.error('Error getting last updated timestamp:', error)
+      return null
+    }
   }
   
   const getLocalDataIds = async () => {
@@ -200,7 +196,6 @@ const createQuery = async () => {
     isLoading,
     
     // Methods
-    toggleSort,
     bulkPutLocalData,
     bulkDeleteLocalData,  
     getLocalDataUpdatedAt,
