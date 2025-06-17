@@ -32,11 +32,6 @@ import {
   formatCustomItemsPerPageOptions
 } from './utils/paginationUtils.js'
 
-import {
-  saveFilterToLocalStorage as saveFilterToLocalStorageUtil,
-  getFilterFromLocalStorage as getFilterFromLocalStorageUtil
-} from './utils/storageUtils.js'
-
 const props = defineProps({
   isLoading: Boolean,
   id: {
@@ -260,13 +255,6 @@ const handlePageChange = () => {
   applyFilter(null, currentPage.value)
 }
 
-const saveFilterToLocalStorage = () => {
-  saveFilterToLocalStorageUtil(props.id, filterData.value)
-}
-
-const getFilterFromLocalStorage = () => {
-  return getFilterFromLocalStorageUtil(props.id)
-}
 const updateFilterTimeout = ref(null)
 const applyFilter = (
   filterFormData = null,
@@ -332,8 +320,6 @@ const applyFilter = (
     }
   }
 
-  saveFilterToLocalStorage()
-
   clearTimeout(updateFilterTimeout.value)
   updateFilterTimeout.value = setTimeout(() => {
     emit('update:filter', filterData.value, isOnMount)
@@ -350,21 +336,6 @@ const removeFilter = (filter, field) => {
 
 onMounted(() => {
   initializeColumnOrder()
-  const filterFromLocalStorage = getFilterFromLocalStorage()
-  if (filterFromLocalStorage) {
-    filterData.value = JSON.parse(filterFromLocalStorage)
-    activeFilterTab.value =
-      activeFilterTab.value ||
-      filterData.value?.tabs ||
-      filterData.value?.[filterOptions.value?.tabs?.key]
-
-    if (filterData.value?.selectedSearchOption) {
-      addSearchQuery(filterData.value[filterData.value?.selectedSearchOption])
-    }
-    currentPage.value = filterData.value?.page || 1
-
-    applyFilter(null, true, filterData.value.cursor, true)
-  }
   emit('on-table-ready')
 })
 
