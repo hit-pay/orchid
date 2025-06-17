@@ -17,7 +17,7 @@ export default {
   component: DataTable,
   tags: ['autodocs']
 }
-import { db, removeOldLocalDB } from '../data/db.sample'
+import { db } from '../data/db.sample'
 
 export const Default = {
   args: {
@@ -180,11 +180,7 @@ export const Default = {
         page: 1,
         per_page: 10,
       })
-      const sortBy = ref({
-        created_at: 'asc',
-        name: 'asc',
-        amount: 'desc',
-      })
+      const sortBy = ref({})
       const changedFields = ref([])
       const selectedRows = ref([])
       const showDropdown = ref({})
@@ -208,7 +204,6 @@ export const Default = {
           }
         })
       }
-      removeOldLocalDB()
 
       const localDbOptions = {
         db: db,

@@ -106,8 +106,8 @@ const {
     setFilter,
     setSortBy,
 } = useDataTable({
-  name: props.localDb?.table_name,
-  localDb: props.localDb?.db,
+  name: props.localDb?.table_name ?? null,
+  db: props.localDb?.db ?? null,
   filterable_fields: props.options?.filterable_fields,
   sortable_fields: props.options?.sortable_fields,
 })

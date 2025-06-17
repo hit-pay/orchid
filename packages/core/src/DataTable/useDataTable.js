@@ -2,11 +2,10 @@ import { ref, computed } from 'vue'
 
 export function useDataTable(initialData) {
   // ===== State Management =====
-  const { name, localDb, filterable_fields, sortable_fields } = initialData
+  const { name, db, filterable_fields, sortable_fields } = initialData
 
   // Table Configuration
   const dbTablename = ref(name)
-  const db = ref(localDb)
 
   // Data State
   const localData = ref([])
@@ -49,7 +48,7 @@ const sortOptions = computed(() => {
 
 const createQuery = async () => {
   // Ambil semua data dulu
-  let query = await db.value.table(dbTablename.value).toArray()
+  let query = await db.table(dbTablename.value).toArray()
 
   // Apply filters
   if (filterOptions.value) {
@@ -101,6 +100,9 @@ const createQuery = async () => {
 
   // ===== Data Operations =====
   const syncLocalData = async () => {
+    if(!db) {
+      return
+    }
     isLoading.value = true
     if (debounceTimer) {
       clearTimeout(debounceTimer)
@@ -154,29 +156,38 @@ const createQuery = async () => {
 
   // ===== Database Operations =====
   const bulkPutLocalData = async (newData) => {
-    await db.value.table(dbTablename.value).bulkPut(newData)
+    if(db) {
+      await db.table(dbTablename.value).bulkPut(newData)
+    }
     await syncLocalData()
   }
 
   const bulkDeleteLocalData = async (ids) => {
-    await db.value.table(dbTablename.value).bulkDelete(ids)
+    if(db) {
+      await db.table(dbTablename.value).bulkDelete(ids)
+    }
     await syncLocalData()
   }
 
   const getLocalDataUpdatedAt = async () => {
-    const data = await db.value.table(dbTablename.value)
+    if(db) {
+      const data = await db.table(dbTablename.value)
       .orderBy('updated_at')
       .reverse()
       .limit(1)
       .first()
-    return data?.updated_at
+      return data?.updated_at
+    }
+    return null
   }
   
   const getLocalDataIds = async () => {
-    const data = await db.value.table(dbTablename.value)
+    if(db) {
+      const data = await db.table(dbTablename.value)
       .toCollection()
       .primaryKeys()
-    return data
+      return data
+    }
   }
 
   // ===== Exposed API =====
