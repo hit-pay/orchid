@@ -65,6 +65,10 @@ const props = defineProps({
     type: Object,
     required: false
   },
+  sortBy: {
+    type: Object,
+    required: false
+  }
 })
 
 const emit = defineEmits({
@@ -120,11 +124,15 @@ watch(() => props.options?.pagination, (newVal) => {
 if(isLocalData.value) {
 
   watch(() => props.filter, () => {
-    setFilter(props.filter)
+    if(props.filter) {
+      setFilter(props.filter)
+    }
   }, { deep: true, immediate: true })
 
   watch(() => props.sortBy, () => {
-    setSortBy(props.sortBy)
+    if(props.sortBy) {
+      setSortBy(props.sortBy)
+    }
   }, { deep: true, immediate: true })
 
 }

@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 export function useDataTable(initialData) {
   // ===== State Management =====
@@ -10,7 +10,9 @@ export function useDataTable(initialData) {
 
   // Data State
   const localData = ref([])
-  const sortByData = ref([])
+  const sortByData = ref({
+    updated_at: 'desc'
+  })
   const filterData = ref({
     page: 1,
     per_page: 10
@@ -22,49 +24,75 @@ export function useDataTable(initialData) {
   const isLoading = ref(false)
   let debounceTimer = null
 
+
+  // ===== Filter & Sort Operations =====
+  const filterOptions = computed(() => {
+    const filteredColumns = {}
+    const includeKeys = options?.filterable_fields ?? []
+    
+    Object.entries(filterData.value).forEach(([key, value]) => {
+      if (includeKeys.includes(key) && value !== undefined && value !== null && value !== '') {
+        filteredColumns[key] = value
+      }
+    })
+    return filteredColumns
+})
+const sortOptions = computed(() => {
+  const sortedColumns = {}
+  const includeKeys = options?.sortable_fields ?? []
+
+  Object.entries(sortByData.value).forEach(([key, value]) => {
+    if (includeKeys.includes(key) && value !== undefined && value !== null && value !== '') {
+      sortedColumns[key] = value
+    }
+  })
+  return sortedColumns
+})
+
   const createQuery = () => {
     let query = db.value.table(dbTablename.value)
-      const filterOptions = getFilterOptions()
-      // Apply filters
-      if (filterOptions.filter) {
-        Object.entries(filterOptions.filter).forEach(([key, value]) => {
-          if (!value) return // Skip if value is null, undefined, or empty
 
-          if (Array.isArray(value)) {
-            query = query.filter(item => {
-              const itemValue = item[key]
-              if (itemValue === undefined || itemValue === null) return false
+    // Apply sorting first
+    if (sortOptions.value && Object.keys(sortOptions.value).length > 0) {
+      Object.entries(sortOptions.value).forEach(([key, value]) => {
+        if (value === 'desc') {
+          query = query.orderBy(key).reverse()
+        } else {
+          query = query.orderBy(key)
+        }
+      })
+    }
+
+    // Then apply filters
+    if (filterOptions.value) {
+      Object.entries(filterOptions.value).forEach(([key, value]) => {
+        if (!value) return // Skip if value is null, undefined, or empty
+
+        if (Array.isArray(value)) {
+          query = query.filter(item => {
+            const itemValue = item[key]
+            if (itemValue === undefined || itemValue === null) return false
+            
+            return value.some(v => {
+              if (v === undefined || v === null) return false
               
-              return value.some(v => {
-                if (v === undefined || v === null) return false
-                
-                if (typeof v === 'string' && typeof itemValue === 'string') {
-                  return itemValue.toLowerCase().includes(v.toLowerCase())
-                }
-                return itemValue === v
-              })
+              if (typeof v === 'string' && typeof itemValue === 'string') {
+                return itemValue.toLowerCase().includes(v.toLowerCase())
+              }
+              return itemValue === v
             })
-          } else if (typeof value === 'string') {
-            query = query.filter(item => {
-              const itemValue = item[key]
-              if (typeof itemValue !== 'string') return false
-              return itemValue.toLowerCase().includes(value.toLowerCase())
-            })
-          } else {
-            query = query.filter(item => item[key] === value)
-          }
-        })
-      }
-
-      // Apply sorting
-      if (filterOptions.sortBy && filterOptions.sortBy.length > 0) {
-        filterOptions.sortBy.forEach(sort => {
-          query = query.sortBy(sort.column)
-          if (sort.direction === 'desc') {
-            query = query.reverse()
-          }
-        })
-      }
+          })
+        } else if (typeof value === 'string') {
+          query = query.filter(item => {
+            const itemValue = item[key]
+            if (typeof itemValue !== 'string') return false
+            return itemValue.toLowerCase().includes(value.toLowerCase())
+          })
+        } else {
+          query = query.filter(item => item[key] === value)
+        }
+      })
+    }
 
     return query
   }
@@ -80,10 +108,13 @@ export function useDataTable(initialData) {
       const query = createQuery()
       // Apply pagination
       const offset = (parseInt(filterData.value.page) - 1) * parseInt(filterData.value.per_page)
-      const data = await query.offset(offset).limit(parseInt(filterData.value.per_page)).toArray()
+      const data = await query
+        .offset(offset)
+        .limit(parseInt(filterData.value.per_page))
+        .toArray()
       localData.value = data
-      const queryTotal = createQuery()
-      const totalField = await queryTotal.count()
+      
+      const totalField = await query.count()
 
       // Update pagination
       paginationData.value = {
@@ -94,39 +125,19 @@ export function useDataTable(initialData) {
     }, 500)
   }
 
-  // ===== Filter & Sort Operations =====
-  const getFilterOptions = () => {
-    const filteredColumns = {}
-    const includeKeys = options?.filterable_fields ?? []
-    
-    Object.entries(filterData.value).forEach(([key, value]) => {
-      if (includeKeys.includes(key) && value !== undefined && value !== null && value !== '') {
-        filteredColumns[key] = value
-      }
-    })
-    return {
-      filter: filteredColumns,
-      sortBy: sortByData.value,
-      pagination: paginationData.value
-    }
-  }
 
   const toggleSort = (column) => {
     const existingSort = sortByData.value.find(sort => sort.column === column)
     
     if (!existingSort) {
       // If not exists, add with asc
-      sortByData.value = [...sortByData.value, { column, direction: 'asc' }]
+      sortByData.value = { ...sortByData.value, [column]: 'asc' }
     } else if (existingSort.direction === 'asc') {
       // If asc, change to desc
-      sortByData.value = sortByData.value.map(sort => 
-        sort.column === column 
-          ? { ...sort, direction: 'desc' }
-          : sort
-      )
+      sortByData.value = { ...sortByData.value, [column]: 'desc' }
     } else {
       // If desc, remove
-      sortByData.value = sortByData.value.filter(sort => sort.column !== column)
+      delete sortByData.value[column]
     }
     syncLocalData()
   }

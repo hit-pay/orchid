@@ -169,12 +169,9 @@ export const Default = {
         page: 1,
         per_page: 10,
       })
-      const sortBy = ref([
-        {
-          column: 'created_at',
-          direction: 'desc'
-        }
-      ])
+      const sortBy = ref({
+        updated_at: 'desc'
+      })
       const changedFields = ref([])
       const selectedRows = ref([])
       const showDropdown = ref({})
@@ -204,7 +201,8 @@ export const Default = {
         db: db,
         table_name: 'products',
         options: {
-          filterable_fields: ['name', 'status', 'available_quantity','available']
+          filterable_fields: ['name', 'status', 'available_quantity','available'],
+          sortable_fields: ['created_at', 'updated_at']
         }
       }
 
