@@ -144,10 +144,12 @@ export function useDataTable(initialData) {
   // ===== Database Operations =====
   const bulkPutLocalData = async (newData) => {
     await db.value.table(dbTablename.value).bulkPut(newData)
+    await syncLocalData()
   }
 
   const bulkDeleteLocalData = async (ids) => {
     await db.value.table(dbTablename.value).bulkDelete(ids)
+    await syncLocalData()
   }
 
   const getLocalDataUpdatedAt = async () => {

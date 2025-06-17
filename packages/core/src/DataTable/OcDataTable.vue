@@ -133,7 +133,7 @@ const processedTableOptions = computed(() => {
           .filter((h) => h.isActive)
       : tableOptions.value?.headers.filter((h) => isColumnActive(h.key))
   }
-  if(isLocalData.value || localData.value.length > 0) {
+  if(isLocalData.value) {
       newTableOptions.fields = localData.value
   }
   return newTableOptions
@@ -359,7 +359,7 @@ const tableIsLoading = computed(() => {
 <template>
   <div class="relative flex flex-col gap-9">
     <Table
-      v-if="tableOptions"
+      v-if="processedTableOptions"
       :selected="selected"
       :row-key="rowKey"
       :options="processedTableOptions"
