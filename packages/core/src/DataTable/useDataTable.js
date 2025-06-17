@@ -2,10 +2,9 @@ import { ref } from 'vue'
 
 export function useDataTable(initialData) {
   // ===== State Management =====
-  const { id, name, localDb, options } = initialData
+  const { name, localDb, options } = initialData
 
   // Table Configuration
-  const dataTableId = ref(id)
   const dbTablename = ref(name)
   const db = ref(localDb)
 
@@ -170,10 +169,9 @@ export function useDataTable(initialData) {
   // ===== Exposed API =====
   return {
     // State
-    sortBy,
     localData,
-    dataTableId,
-    dbTablename,
+    sortBy,
+    filterData,
     paginationData,
     isLoading,
     
@@ -184,7 +182,7 @@ export function useDataTable(initialData) {
     getLocalDataUpdatedAt,
     getLocalDataIds,
     syncLocalData,
-    
+
     // Setters
     setFilter,
     setSortBy,

@@ -14,8 +14,6 @@ import {
 
 import { ref } from 'vue'
 
-import dayjs from 'dayjs'
-
 export default {
   component: DataTable,
   tags: ['autodocs']
@@ -956,7 +954,6 @@ export const Default = {
 
 
       const { bulkPutLocalData, getLocalDataUpdatedAt, getLocalDataIds, localData  } = useDataTable({
-        id: 'products-table',
         name: localDbOptions.table_name,
         localDb: db,
       })

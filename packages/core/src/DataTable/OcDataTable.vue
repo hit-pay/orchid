@@ -98,7 +98,6 @@ const {
   // toggleSort,
   // updateOrAddLocalData,
 } = useDataTable({
-  id: props.id,
   name: props.localDb?.table_name,
   localDb: props.localDb?.db,
   options: props.localDb?.options,
