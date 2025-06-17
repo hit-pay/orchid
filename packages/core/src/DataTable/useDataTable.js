@@ -10,9 +10,7 @@ export function useDataTable(initialData) {
 
   // Data State
   const localData = ref([])
-  const sortByData = ref({
-    updated_at: 'desc'
-  })
+  const sortByData = ref({})
   const filterData = ref({
     page: 1,
     per_page: 10
