@@ -8,11 +8,10 @@ import {
   Button,
   Dropdown,
   DropdownItem,
-  useDataTable,
   DataTable
 } from '@/orchidui-core'
 
-import { ref } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 
 export default {
   component: DataTable,
@@ -952,29 +951,21 @@ export const Default = {
         })
       }
 
-
-      const { bulkPutLocalData, getLocalDataUpdatedAt, getLocalDataIds, localData  } = useDataTable({
-        name: localDbOptions.table_name,
-        localDb: db,
-      })
-
-      args.options.tableOptions.fields = localData.value
-
-      // in dashboard get all products in DB and update local data
-      // on visit get latest updated_at in 
+      const tableRef = ref(null)
 
       const getLatestData = async () => {
-        const latestUpdatedAt = await getLocalDataUpdatedAt()
-        const localIds = await getLocalDataIds()
+        const latestUpdatedAt = await tableRef.value?.getLocalDataUpdatedAt()
+        const localIds = await tableRef.value?.getLocalDataIds()
         console.log('latestUpdatedAt', latestUpdatedAt, 'localIds', localIds)
       }
-
-      getLatestData()
-
-      bulkPutLocalData(formatFieldData(fieldData))
-    
+      const onTableReady = () => {
+        console.log('onMounted', tableRef.value)
+        tableRef.value.bulkPutLocalData(formatFieldData(fieldData))
+        getLatestData()
+      }
 
       return {
+        onTableReady,
         localDbOptions,
         args,
         filter,
@@ -986,12 +977,14 @@ export const Default = {
         updateFilterData,
         updateSortBy,
         onClickRow,
-        db
+        db,
+        tableRef
       }
     },
     template: `
           <Theme class="p-8">
             <DataTable 
+                ref="tableRef"
                 id="products-table"
                 v-model:selected="selectedRows"
                 row-key="id"
@@ -1005,6 +998,7 @@ export const Default = {
                 @update:sort-by="updateSortBy"
                 @click:row="onClickRow"
                 @filter-fields-changed="changedFields = $event"
+                @on-table-ready="onTableReady"
              >
               <template #bulk-actions="{selectedRows}">
                 <Button

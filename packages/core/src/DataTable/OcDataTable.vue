@@ -10,9 +10,8 @@ import {
   Tabs,
   Button,
   Dropdown,
-  useDataTable
 } from '@/orchidui-core'
-
+import { useDataTable } from './useDataTable.js'
 import { ref, computed, onMounted, watch } from 'vue'
 import ColumnEdit from './ColumnEdit.vue'
 
@@ -77,7 +76,8 @@ const emit = defineEmits({
   'filter-open': [],
   'search-query-changed': [],
   'hover:cell': [],
-  'columns-changed': []
+  'columns-changed': [],
+  'on-table-ready': []
 })
 
 
@@ -90,13 +90,21 @@ const tableOptions = computed(() => props.options?.tableOptions)
 const isLocalData = computed(() => props.localDb !== undefined)
 const {
   localData,
-  setFilter,
-  setSortBy,
-  paginationData,
-  isLoading: isLocalDataLoading
-  // sortBy,
-  // toggleSort,
-  // updateOrAddLocalData,
+    paginationData,
+    isLoading: isLocalDataLoading,
+    
+    // Methods
+    bulkPutLocalData,
+    bulkDeleteLocalData,  
+    getLocalDataUpdatedAt,
+    getLocalDataIds,
+    syncLocalData,
+    sortByData,
+    // toggleSort,
+
+    // Setters
+    setFilter,
+    setSortBy,
 } = useDataTable({
   name: props.localDb?.table_name,
   localDb: props.localDb?.db,
@@ -104,9 +112,10 @@ const {
 })
 
 watch(() => props.options?.pagination, (newVal) => {
-  paginationData.value = newVal
+  if(!isLocalData.value) {
+    paginationData.value = newVal
+  }
 }, { deep: true, immediate: true })
-
 
 if(isLocalData.value) {
 
@@ -348,11 +357,23 @@ onMounted(() => {
 
     applyFilter(null, true, filterData.value.cursor, true)
   }
+  emit('on-table-ready')
 })
 
 
 const tableIsLoading = computed(() => {
   return props.isLoading || isLocalDataLoading.value
+})
+
+defineExpose({
+  paginationData,
+  tableIsLoading,
+  bulkPutLocalData,
+  bulkDeleteLocalData,  
+  getLocalDataUpdatedAt,
+  getLocalDataIds,
+  syncLocalData,
+  sortByData,
 })
 
 </script>

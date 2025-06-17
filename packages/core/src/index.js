@@ -59,10 +59,6 @@ export * from './Theme/OcTheme.js'
 
 export * from './FormBuilder/OcFormBuilder.js'
 
-//
-import { useDataTable } from './DataTable/useDataTable.js'
-export { useDataTable }
-
 const DataTable = defineAsyncComponent(() => import('./DataTable/OcDataTable.vue'))
 const FilterSearch = defineAsyncComponent(() => import('./DataTable/OcFilterSearch.vue'))
 const FilterSearchFor = defineAsyncComponent(() => import('./DataTable/OcFilterSearchFor.vue'))

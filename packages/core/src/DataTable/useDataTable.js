@@ -10,14 +10,14 @@ export function useDataTable(initialData) {
 
   // Data State
   const localData = ref([])
-  const sortBy = ref([])
+  const sortByData = ref([])
   const filterData = ref({
     page: 1,
     per_page: 10
   })
   const paginationData = ref({
     total: 0,
-    last_page: 0
+    last_page: 1
   })
   const isLoading = ref(false)
   let debounceTimer = null
@@ -106,27 +106,27 @@ export function useDataTable(initialData) {
     })
     return {
       filter: filteredColumns,
-      sortBy: sortBy.value,
+      sortBy: sortByData.value,
       pagination: paginationData.value
     }
   }
 
   const toggleSort = (column) => {
-    const existingSort = sortBy.value.find(sort => sort.column === column)
+    const existingSort = sortByData.value.find(sort => sort.column === column)
     
     if (!existingSort) {
       // If not exists, add with asc
-      sortBy.value = [...sortBy.value, { column, direction: 'asc' }]
+      sortByData.value = [...sortByData.value, { column, direction: 'asc' }]
     } else if (existingSort.direction === 'asc') {
       // If asc, change to desc
-      sortBy.value = sortBy.value.map(sort => 
+      sortByData.value = sortByData.value.map(sort => 
         sort.column === column 
           ? { ...sort, direction: 'desc' }
           : sort
       )
     } else {
       // If desc, remove
-      sortBy.value = sortBy.value.filter(sort => sort.column !== column)
+      sortByData.value = sortByData.value.filter(sort => sort.column !== column)
     }
     syncLocalData()
   }
@@ -137,7 +137,7 @@ export function useDataTable(initialData) {
   }
 
   const setSortBy = (sorts) => {
-    sortBy.value = { ...sorts }
+    sortByData.value = { ...sorts }
     syncLocalData()
   }
 
@@ -172,7 +172,7 @@ export function useDataTable(initialData) {
   return {
     // State
     localData,
-    sortBy,
+    sortByData,
     filterData,
     paginationData,
     isLoading,
