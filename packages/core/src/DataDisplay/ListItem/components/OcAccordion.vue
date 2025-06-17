@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { Chip, Icon } from '@/orchidui-core'
-import { defineEmits, defineExpose, defineProps } from 'vue'
 
 const props = defineProps({
   modelValue: {
