@@ -41,8 +41,6 @@ const sortOptions = computed(() => {
   const sortedColumns = {}
   const includeKeys = sortable_fields ?? []
 
-  console.log('includeKeys', includeKeys)
-
   Object.entries(sortByData.value).forEach(([key, value]) => {
     if (includeKeys.includes(key) && value !== undefined && value !== null && value !== '') {
       sortedColumns[key] = value
@@ -105,7 +103,6 @@ const createQuery = async () => {
 
   // ===== Data Operations =====
   const syncLocalData = async () => {
-    console.log('syncLocalData', sortByData.value)
     isLoading.value = true
     if (debounceTimer) {
       clearTimeout(debounceTimer)
