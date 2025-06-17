@@ -20,12 +20,13 @@
     "publish:dashboard": "npm run build:dashboard && cd packages/dashboard && npm publish",
     "publish-dev:core": "npm run build:core && cd packages/core && npm publish --tag beta",
     "publish-dev:dashboard": "npm run build:dashboard && cd packages/dashboard && npm publish --tag beta",
-    "release-prod": "bun run release-prod.js",
-    "release": "bun run release-dev.js"
+    "release-prod": "npm run release-prod.js",
+    "release": "npm run release-dev.js"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
     "dayjs": "^1.11.10",
+    "dexie": "^4.0.11",
     "echarts": "^5.4.3",
     "flag-icons": "^6.11.1",
     "libphonenumber-js": "^1.10.51",
@@ -33,20 +34,20 @@
     "lottie-web": "^5.12.2",
     "quill": "^2.0.3",
     "quill-better-table": "^1.2.10",
-    "shikiji": "^0.9.18",
+    "shiki": "^1.0.0",
     "v-calendar": "^3.1.2",
     "vue-advanced-cropper": "^2.8.8",
     "vue-draggable-next": "^2.2.1"
   },
   "devDependencies": {
-    "@storybook/addon-essentials": "^7.6.12",
-    "@storybook/addon-interactions": "^7.6.12",
-    "@storybook/addon-links": "^7.6.12",
-    "@storybook/blocks": "^7.6.12",
+    "@storybook/addon-essentials": "^8.6.14",
+    "@storybook/addon-interactions": "^8.6.14",
+    "@storybook/addon-links": "^8.6.14",
+    "@storybook/blocks": "^8.6.14",
     "@storybook/testing-library": "^0.2.2",
-    "@storybook/vue3": "^7.6.12",
-    "@storybook/vue3-vite": "^7.6.12",
-    "@vitejs/plugin-vue": "^5.0.3",
+    "@storybook/vue3": "^8.6.14",
+    "@storybook/vue3-vite": "^8.6.14",
+    "@vitejs/plugin-vue": "^5.2.4",
     "@vue/eslint-config-prettier": "^8.0.0",
     "autoprefixer": "^10.4.16",
     "eslint-config-prettier": "^9.0.0",
@@ -56,10 +57,10 @@
     "postcss": "^8.4.31",
     "postcss-import": "^15.1.0",
     "sass": "^1.68.0",
-    "storybook": "^7.6.15",
+    "storybook": "^8.6.14",
     "storybook-addon-root-attribute": "^1.0.2",
     "tailwindcss": "^3.4.3",
-    "vite": "^5.4.11",
+    "vite": "^6.3.5",
     "vue": "^3.3.4"
   }
 }

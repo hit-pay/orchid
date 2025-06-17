@@ -50,7 +50,8 @@ export default defineConfig({
         'libphonenumber-js',
         'v-calendar',
         'vue-advanced-cropper',
-        'vue-draggable-next'
+        'vue-draggable-next',
+        'dexie'
       ]
     }
   }
