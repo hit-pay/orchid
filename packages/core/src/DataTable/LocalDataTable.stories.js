@@ -11,17 +11,19 @@ import {
   DataTable
 } from '@/orchidui-core'
 
-import { ref, onMounted, nextTick } from 'vue'
+import { ref } from 'vue'
 
 export default {
   component: DataTable,
   tags: ['autodocs']
 }
-import { db, removeOldLocalDB } from '../data/db.sample'
+import { db } from '../data/db.sample'
 
 export const Default = {
   args: {
     options: {
+      filterable_fields: ['name', 'status', 'available_quantity','available'],
+      sortable_fields: ['created_at', 'name', 'amount'],
       pagination: {
         total: 50,
         last_page: 5
@@ -108,15 +110,22 @@ export const Default = {
         isBorderless: false,
         headers: [
           {
+            key: 'created_at',
+            label: 'Created At',
+            class: 'w-1/2 md:min-w-[15%]',
+            isSortable: true
+          },
+          {
             key: 'image',
             variant: 'image',
             label: 'Image',
-            class: 'w-1/2 md:min-w-[5%]'
+            class: 'w-1/2 md:min-w-[5%]',
           },
           {
             key: 'name',
             label: 'Product Name',
-            class: 'w-1/2 md:min-w-[20%]'
+            class: 'w-1/2 md:min-w-[20%]',
+            isSortable: true
           },
           {
             key: 'available_quantity',
@@ -131,12 +140,14 @@ export const Default = {
           {
             key: 'amount',
             label: 'Amount',
-            class: 'w-1/2 md:min-w-[18%]'
+            class: 'w-1/2 md:min-w-[18%]',
+            isSortable: true
           },
           {
             key: 'status',
             label: 'Status',
             class: 'w-1/2 md:min-w-[15%]',
+            isSortable: true
           },
           {
             key: 'actions',
@@ -169,9 +180,7 @@ export const Default = {
         page: 1,
         per_page: 10,
       })
-      const sortBy = ref({
-        updated_at: 'desc'
-      })
+      const sortBy = ref({})
       const changedFields = ref([])
       const selectedRows = ref([])
       const showDropdown = ref({})
@@ -195,15 +204,10 @@ export const Default = {
           }
         })
       }
-      removeOldLocalDB()
 
       const localDbOptions = {
         db: db,
         table_name: 'products',
-        options: {
-          filterable_fields: ['name', 'status', 'available_quantity','available'],
-          sortable_fields: ['created_at', 'updated_at']
-        }
       }
 
       const fieldData = [

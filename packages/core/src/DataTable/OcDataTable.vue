@@ -76,7 +76,8 @@ const emit = defineEmits({
   'search-query-changed': [],
   'hover:cell': [],
   'columns-changed': [],
-  'on-table-ready': []
+  'on-table-ready': [],
+  'update:sort-by': []
 })
 
 
@@ -99,15 +100,15 @@ const {
     getLocalDataIds,
     syncLocalData,
     sortByData,
-    // toggleSort,
 
     // Setters
     setFilter,
     setSortBy,
 } = useDataTable({
-  name: props.localDb?.table_name,
-  localDb: props.localDb?.db,
-  options: props.localDb?.options,
+  name: props.localDb?.table_name ?? null,
+  db: props.localDb?.db ?? null,
+  filterable_fields: props.options?.filterable_fields,
+  sortable_fields: props.options?.sortable_fields,
 })
 
 watch(() => props.options?.pagination, (newVal) => {
@@ -355,6 +356,17 @@ defineExpose({
   sortByData,
 })
 
+const handleUpdateSortBy = ({key, value}) => {
+  // remove other sort by to null
+  Object.keys(sortByData.value).forEach((currentKey) => {
+    if (currentKey !== key) {
+      sortByData.value[currentKey] = null
+    }
+  })
+  sortByData.value[key] = value
+  emit('update:sort-by', sortByData.value)
+}
+
 </script>
 <template>
   <div class="relative flex flex-col gap-9">
@@ -369,7 +381,9 @@ defineExpose({
       :row-link="rowLink"
       :is-sticky="tableOptions.isSticky"
       :is-borderless="tableOptions.isBorderless"
+      :sort-by="sortBy"
       @update:selected="$emit('update:selected', $event)"
+      @update:sort-by="handleUpdateSortBy"
       @click:row="$emit('click:row', $event)"
       @hover:cell="$emit('hover:cell', $event)"
     >
