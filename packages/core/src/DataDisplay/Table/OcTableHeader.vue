@@ -56,7 +56,7 @@ const variantClass = computed(() => ({
         <span class="text-oc-text-500" :class="isSticky ? 'hidden' : 'md:hidden'">Select all</span>
       </slot>
     </template>
-    <div v-if="!isLoading && isSortable" class="cursor-pointer" :class="!sortBy ? ' hidden  group-hover/table-header:block' : ''" @click="$emit('update:sort-by', sortBy === 'asc' ? 'desc' : (sortBy === 'desc' ? null : 'asc'))">
+    <div v-if="!isLoading && isSortable" class="cursor-pointer ml-auto" :class="!sortBy ? ' hidden  group-hover/table-header:block' : ''" @click="$emit('update:sort-by', sortBy === 'asc' ? 'desc' : (sortBy === 'desc' ? null : 'asc'))">
       <Icon v-if="sortBy === 'asc' " name="arrow-up"  class="w-4 h-4 " :class="sortBy === 'asc' ? 'text-oc-primary-500' : ''" />
       <Icon v-if="sortBy === 'desc' || !sortBy" name="arrow-down"  class="w-4 h-4" :class="sortBy === 'desc' ? 'text-oc-primary-500' : ''" />
     </div>
