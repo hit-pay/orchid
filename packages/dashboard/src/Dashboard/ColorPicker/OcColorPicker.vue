@@ -113,7 +113,7 @@ const handleClickLastUsedColor = (color) => {
         :model-value="inputValue"
         icon="drop"
         :icon-props="iconProps"
-        placeholder="#FFFFFF"
+        placeholder=""
         @update:model-value="onUpdate"
       >
         <template v-if="$slots.leading" #leading>
