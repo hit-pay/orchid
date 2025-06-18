@@ -12,7 +12,7 @@ import {
   Dropdown,
 } from '@/orchidui-core'
 import { useDataTable } from './useDataTable.js'
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, onMounted, watch, nextTick } from 'vue'
 import ColumnEdit from './ColumnEdit.vue'
 
 import {
@@ -89,7 +89,7 @@ const tableOptions = computed(() => props.options?.tableOptions)
 
 const isLocalData = computed(() => props.localDb !== undefined)
 const {
-  localData,
+    localData,
     paginationData,
     isLoading: isLocalDataLoading,
     
@@ -337,15 +337,19 @@ const removeFilter = (filter, field) => {
 
 onMounted(() => {
   initializeColumnOrder()
-  emit('on-table-ready')
+  nextTick(() => {
+    emit('on-table-ready')
+  })
 })
 
 
 const tableIsLoading = computed(() => {
+  // TODO: add loading variant first row for syncLocalData
   return props.isLoading || isLocalDataLoading.value
 })
 
 defineExpose({
+  localData,
   paginationData,
   tableIsLoading,
   bulkPutLocalData,
