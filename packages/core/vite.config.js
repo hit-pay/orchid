@@ -1,7 +1,7 @@
-import { defineConfig } from 'vite'
-import fg from 'fast-glob'
 import vue from '@vitejs/plugin-vue'
+import fg from 'fast-glob'
 import { resolve } from 'path'
+import { defineConfig } from 'vite'
 
 // Defines an array of entry points to be used to search for files.
 const entryPoints = ['src/**/*.js']
@@ -50,7 +50,9 @@ export default defineConfig({
         'libphonenumber-js',
         'v-calendar',
         'vue-advanced-cropper',
-        'vue-draggable-next'
+        'vue-draggable-next',
+        'dexie',
+        'reka-ui'
       ]
     }
   }
