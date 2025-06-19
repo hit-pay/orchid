@@ -248,7 +248,7 @@ watch(() => props.searchKeywords, (newValue) => {
       @update:open="handleOpenChange"
     >
       <ComboboxTrigger
-        class="border min-h-[36px] input-shadow transition-all duration-[250ms] ease-out w-full px-3 flex justify-between items-center bg-white cursor-pointer gap-x-3 rounded py-3 outline-none focus:outline-none focus-visible:outline-none"
+        class="border min-h-[36px] input-shadow transition-all duration-[250ms] ease-out w-full px-3 flex justify-between items-center bg-white cursor-pointer gap-x-3 rounded py-3"
         :class="[
           dropdownClasses,
           {
@@ -330,7 +330,7 @@ watch(() => props.searchKeywords, (newValue) => {
           <!-- Select All Option -->
           <ComboboxItem
             v-if="isCheckboxes && isSelectAll && filterableOptions.length"
-            class="flex items-center gap-3 px-3 py-2 cursor-pointer hover:bg-oc-accent-1-50 data-[highlighted]:bg-oc-accent-1-50 border-b border-oc-gray-200 outline-none focus:outline-none focus-visible:outline-none"            
+            class="flex items-center gap-3 px-3 py-2 cursor-pointer hover:bg-oc-accent-1-50 data-[highlighted]:bg-oc-accent-1-50 data-[highlighted]:outline-none border-b border-oc-gray-200"            
             :value="'__select_all__'"
             @select="selectAll"
           >
@@ -350,7 +350,7 @@ watch(() => props.searchKeywords, (newValue) => {
               :key="option.value"
               :value="option.value"
               :disabled="option.isDisabled"
-              class="flex items-center gap-3 px-3 py-2 cursor-pointer hover:bg-oc-accent-1-50 data-[highlighted]:bg-oc-accent-1-50 outline-none focus:outline-none focus-visible:outline-none"              
+              class="flex items-center gap-3 px-3 py-2 cursor-pointer hover:bg-oc-accent-1-50 data-[highlighted]:bg-oc-accent-1-50 data-[highlighted]:outline-none"              
               @select="handleValueChange(option.value)"
             >
               <input
@@ -412,7 +412,7 @@ watch(() => props.searchKeywords, (newValue) => {
       @update:open="handleOpenChange"
     >
       <SelectTrigger
-        class="border min-h-[36px] input-shadow transition-all duration-[250ms] ease-out w-full px-3 flex justify-between items-center bg-white cursor-pointer gap-x-3 rounded outline-none focus:outline-none focus-visible:outline-none"
+        class="border min-h-[36px] input-shadow transition-all duration-[250ms] ease-out w-full px-3 flex justify-between items-center bg-white cursor-pointer gap-x-3 rounded"
         :class="[
           dropdownClasses,
           {
@@ -495,7 +495,7 @@ watch(() => props.searchKeywords, (newValue) => {
               :key="option.value"
               :value="option.value"
               :disabled="option.isDisabled"
-              class="flex items-center gap-3 px-3 py-2 cursor-pointer hover:bg-oc-accent-1-50 data-[highlighted]:bg-oc-accent-1-50"
+              class="flex items-center gap-3 px-3 py-2 cursor-pointer hover:bg-oc-accent-1-50 data-[highlighted]:bg-oc-accent-1-50 data-[highlighted]:outline-none"
             >
               <div class="flex flex-col flex-1">
                 <span>{{ option.label }}</span>
