@@ -31,5 +31,8 @@
   "license": "MIT",
   "resolutions": {
     "rollup": "npm:@rollup/wasm-node"
+  },
+  "dependencies": {
+    "reka-ui": "^2.3.1"
   }
 }
