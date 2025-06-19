@@ -1,5 +1,10 @@
-import Select from './OcSelect.vue'
-import Option from './OcOption.vue'
 import GroupOptions from './OcGroupOptions.vue'
+import Option from './OcOption.vue'
+import Select from './OcSelect.vue'
 
-export { Select, Option, GroupOptions }
+
+export { GroupOptions, Option, Select }
+
+export { UiGroupOptions, UiOption, UiSelect } from './UiSelect/UiSelect.js'
+
+
