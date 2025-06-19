@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Chip, Icon } from '@/orchidui-core'
+import { defineEmits, defineExpose, defineProps, ref, watch } from 'vue'
 
 const props = defineProps({
   modelValue: {
@@ -23,18 +24,18 @@ const props = defineProps({
   isOpenDefault: Boolean
 })
 
+
 const emit = defineEmits(['update:modelValue', 'edit', 'delete'])
 
-
-
-if (props.isOpenDefault && !props.modelValue) {
-    emit('update:modelValue', true)
-}
+const isOpen = ref(props.isOpenDefault)
 
 const toggleAccordion = () => {
   if (props.isNoToggleForced || props.isDisabled) return
-  emit('update:modelValue', !props.modelValue)
+  isOpen.value = !isOpen.value
+  emit('update:modelValue', isOpen.value)
 }
+
+watch(() => props.modelValue, (value) => { isOpen.value = value })
 
 defineExpose({ toggleAccordion })
 </script>
@@ -49,7 +50,7 @@ defineExpose({ toggleAccordion })
   >
     <div
       class="flex gap-4 items-stretch cursor-pointer"
-      :class="{ 'border-b': modelValue, 'pl-5': isNoToggleForced }"
+      :class="{ 'border-b': isOpen, 'pl-5': isNoToggleForced }"
       @click="toggleAccordion"
     >
       <div
@@ -57,7 +58,7 @@ defineExpose({ toggleAccordion })
         class="flex items-center p-3 border-r bg-gray-50"
       >
         <Icon
-          :name="modelValue ? 'chevron-up' : 'chevron-down'"
+          :name="isOpen ? 'chevron-up' : 'chevron-down'"
           width="20"
           height="20"
           class="text-oc-text-400"
@@ -96,7 +97,7 @@ defineExpose({ toggleAccordion })
           </slot>
         </div>
 
-        <slot name="right" :is-open="modelValue" :toggle-accordion="toggleAccordion">
+        <slot name="right" :is-open="isOpen" :toggle-accordion="toggleAccordion">
           <div
             v-if="hasActions"
             class="flex items-center gap-4 opacity-0 group-hover:opacity-100"
@@ -105,13 +106,13 @@ defineExpose({ toggleAccordion })
               <Icon
                 name="pencil"
                 class="cursor-pointer text-oc-text-400 p-2"
-                @click.stop="$emit('edit')"
+                @click.stop="emit('edit')"
               />
               <div class="border-r border-gray-200" />
               <Icon
                 name="bin"
                 class="cursor-pointer text-oc-error p-2"
-                @click.stop="$emit('delete')"
+                @click.stop="emit('delete')"
               />
             </div>
             <Icon
@@ -126,7 +127,7 @@ defineExpose({ toggleAccordion })
       </div>
     </div>
 
-    <div v-show="modelValue" class="py-5 px-7">
+    <div v-show="isOpen" class="py-5 px-7">
       <slot name="content" />
     </div>
   </div>
