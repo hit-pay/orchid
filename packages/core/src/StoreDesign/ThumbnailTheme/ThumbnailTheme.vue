@@ -25,7 +25,6 @@ defineEmits(['activate', 'customize', 'preview', 'upgrade', 'publish'])
               label="Try Theme"
               @click="$emit('activate', theme)"
             />
-            <Button v-else label="Upgrade" @click="$emit('upgrade', theme)" />
           </div>
           <div v-if="theme.installed && theme.active" class="m-auto">
             <Button variant="secondary" label="Customize" @click="$emit('customize', theme)" />
@@ -63,7 +62,7 @@ defineEmits(['activate', 'customize', 'preview', 'upgrade', 'publish'])
         >
         <Chip
           v-else-if="theme.pro"
-          class="ml-auto"
+          class="ml-auto cursor-pointer"
           variant="accent-2"
           @click="$emit('upgrade', theme)"
           >Upgrade</Chip
