@@ -3,7 +3,7 @@ import { Button, Chip, Icon } from '@/orchidui-core'
 defineProps({
   theme: Object,
   activating: Boolean,
-  isFreeAccount: Boolean
+  isProAccount: Boolean
 })
 defineEmits(['activate', 'customize', 'preview', 'upgrade', 'publish'])
 </script>
@@ -18,19 +18,20 @@ defineEmits(['activate', 'customize', 'preview', 'upgrade', 'publish'])
         :class="!activating ? 'hidden' : 'flex'"
       >
         <template v-if="!activating">
-          <div v-if="theme.active" class="m-auto">
-            <Button variant="secondary" label="Customize" @click="$emit('customize', theme)" />
-          </div>
-          <div v-else-if="theme.draft" class="m-auto flex gap-3">
-            <Button variant="secondary" label="Customize" @click="$emit('customize', theme)" />
-            <Button label="Publish" @click="$emit('publish', theme)" />
-          </div>
-          <div v-else class="m-auto flex gap-3">
+          <div v-if="!theme.installed" class="m-auto flex gap-3">
             <Button variant="secondary" label="Preview" @click="$emit('preview', theme)" />
             <Button
-              :label="isFreeAccount ? 'Activate' : 'Try Theme'"
+              v-if="isProAccount || !theme.pro"
+              label="Try Theme"
               @click="$emit('activate', theme)"
             />
+          </div>
+          <div v-if="theme.installed && theme.active" class="m-auto">
+            <Button variant="secondary" label="Customize" @click="$emit('customize', theme)" />
+          </div>
+          <div v-else-if="theme.installed && !theme.active" class="m-auto flex gap-3">
+            <Button variant="secondary" label="Customize" @click="$emit('customize', theme)" />
+            <Button label="Publish" @click="$emit('publish', theme)" />
           </div>
         </template>
         <template v-else>
@@ -55,11 +56,13 @@ defineEmits(['activate', 'customize', 'preview', 'upgrade', 'publish'])
         <div class="text-oc-text-400 text-sm mt-1">{{ theme.description }}</div>
       </div>
       <div class="h-full flex items-start">
-        <Chip v-if="theme.active" class="ml-auto">Active</Chip>
-        <Chip v-else-if="theme.draft" variant="gray" class="ml-auto">Draft</Chip>
+        <Chip v-if="theme.installed && theme.active" class="ml-auto">Active</Chip>
+        <Chip v-else-if="theme.installed && !theme.active" variant="gray" class="ml-auto"
+          >Draft</Chip
+        >
         <Chip
           v-else-if="theme.pro"
-          class="ml-auto"
+          class="ml-auto cursor-pointer"
           variant="accent-2"
           @click="$emit('upgrade', theme)"
           >Upgrade</Chip
