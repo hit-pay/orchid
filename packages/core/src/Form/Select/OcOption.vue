@@ -11,7 +11,16 @@ defineProps({
   isPartial: Boolean,
   hasChildren: Boolean,
   showChildren: Boolean,
-  isDisabled: Boolean
+  isDisabled: Boolean,
+  isFocused: {
+    type: Boolean,
+    default: false
+  },
+  keyboardNavigationActive: {
+    type: Boolean,
+    default: false
+  }
+
 })
 
 const optionItemRef = ref()
@@ -24,7 +33,10 @@ defineExpose({
 <template>
   <div
     ref="optionItemRef"
-    class="w-full flex flex-wrap relative hover:bg-oc-accent-1-50 rounded-sm"
+    class="w-full flex flex-wrap relative hover:bg-oc-accent-1-50 focus:bg-oc-accent-1-50 rounded-sm"
+    :class="{
+      'bg-oc-accent-1-50': keyboardNavigationActive && isFocused
+    }"
   >
     <div
       class="w-full p-3 flex items-center text-oc-text-400 justify-between cursor-pointer gap-x-3"
