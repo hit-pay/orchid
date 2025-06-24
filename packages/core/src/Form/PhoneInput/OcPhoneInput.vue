@@ -85,7 +85,7 @@ const scrollToSelectedCountry = () => {
 }
 
 const onPaste = (e) => {
-  let text = e.clipboardData.getData('Text')
+  let text = e?.clipboardData?.getData('Text') || ''
 
   try {
     if (text.search(/[^0-9]/g) < 0) {

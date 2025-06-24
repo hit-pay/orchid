@@ -65,6 +65,9 @@ const renderIcon = () => {
           setIconRef(text)
         }
       })
+      .catch(() => {
+        //
+      })
   } else {
     if (iconRef.value) {
       setIconRef(iconData.svg)

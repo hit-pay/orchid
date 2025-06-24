@@ -10,18 +10,28 @@ export const Default = {
   args: {
     templates: [
       {
+        id: 1,
+        thumbnail: '/images/theme1.png',
+        title: 'Theme Title 1',
+        description: 'Description of theme will be here, of theme will be here',
+        active: true,
+        installed: true
+      },
+      {
         id: 2,
         thumbnail: '/images/theme1.png',
         title: 'Theme Title 2',
         description: 'Description of theme will be here, of theme will be here',
-        active: true
+        active: true,
+        installed: true
       },
       {
         id: 3,
         thumbnail: '/images/theme1.png',
         title: 'Theme Title 3',
         description: 'Description of theme will be here, of theme will be here',
-        pro: true
+        active: false,
+        installed: true
       },
 
       {
@@ -29,14 +39,17 @@ export const Default = {
         thumbnail: '/images/theme1.png',
         title: 'Theme Title 4',
         description: 'Description of theme will be here, of theme will be here',
-        draft: true
+        active: false,
+        installed: false
       },
-
       {
-        id: 1,
+        id: 5,
         thumbnail: '/images/theme1.png',
-        title: 'Theme Title 1',
-        description: 'Description of theme will be here, of theme will be here'
+        title: 'Theme Title 5',
+        description: 'Description of theme will be here, of theme will be here',
+        active: false,
+        installed: false,
+        pro: true
       }
     ]
   },
@@ -48,7 +61,7 @@ export const Default = {
     template: `
           <Theme>
               <div class="grid grid-cols-2 md:grid-cols-3 gap-5">
-                <ThumbnailTheme  v-for="(theme, idx) in args.templates" :theme="theme" :activating="idx === 0" />
+                <ThumbnailTheme if-pro-account  v-for="(theme, idx) in args.templates" :theme="theme" :activating="idx === 0" />
                </div>
           </Theme>
         `
