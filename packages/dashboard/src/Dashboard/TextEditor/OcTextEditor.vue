@@ -370,7 +370,7 @@ const tableColsOptions = computed(() => {
 
 const insertTable = () => {
   let tableModule = quill.value.getQuill().getModule('better-table')
-  tableModule.insertTable(parseInt(tableRow.value), parseInt(tableCell.value))
+  tableModule?.insertTable(parseInt(tableRow.value), parseInt(tableCell.value))
   tableModal.value = false
 }
 
@@ -415,6 +415,7 @@ watch(
         :options="{
           bounds: `#${id}`
         }"
+        is-text-only
         theme="snow"
         content-type="html"
         :global-options="globalOptions"
