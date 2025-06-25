@@ -1,5 +1,5 @@
 <script setup>
-import { BaseInput, Input, Option, Icon, Chip, Button, Dropdown, Skeleton } from '@/orchidui-core'
+import { BaseInput, Button, Chip, Dropdown, Icon, Input, Option, Skeleton } from '@/orchidui-core'
 import { computed, nextTick, ref, watch } from 'vue'
 
 const props = defineProps({
@@ -251,7 +251,7 @@ const onUpdateDropdown = () => {
     const el = filterableOptionsRef.value[selectedIndex]
     const top = el?.optionItemRef?.offsetTop
 
-    selectListRef.value.parentNode.scrollTo(0, top - 60, { behavior: 'smooth' })
+    selectListRef.value?.parentNode?.scrollTo(0, top - 60, { behavior: 'smooth' })
   }, 10)
 }
 
@@ -304,7 +304,7 @@ defineExpose({
       @scroll="loadMore"
     >
       <div
-        class="border min-h-[36px] input-shadow transition-all duration-[250ms] ease-out  w-full px-3 flex justify-between items-center bg-white cursor-pointer gap-x-3 rounded"
+        class="border min-h-[36px] input-shadow transition-all duration-[250ms] ease-out w-full px-3 flex justify-between items-center bg-white cursor-pointer gap-x-3 rounded"
         :class="[
           dropdownClasses,
           {
@@ -445,7 +445,7 @@ defineExpose({
               />
               <!-- Empty div to trigger the slot -->
               <slot name="empty">
-                <div v-if="!filterableOptions.length" class="text-sm text-oc-text-300  text-center">
+                <div v-if="!filterableOptions.length" class="text-sm text-oc-text-300 text-center">
                   No data to display
                 </div>
               </slot>

@@ -120,9 +120,43 @@ const loaded = ref(false)
 // need for upload to server
 const base64Images = ref(props.image)
 
+const globalOptions = computed(() => {
+  const formats = [
+    'background',
+    'bold',
+    'color',
+    'font',
+    'code',
+    'italic',
+    'link',
+    'size',
+    'strike',
+    'script',
+    'underline',
+    'blockquote',
+    'header',
+    'indent',
+    'list',
+    'align',
+    'direction',
+    'code-block',
+    'formula'
+  ]
+
+  if (toolbar.value.includes('image')) {
+    formats.push('image')
+  }
+
+  if (toolbar.value.includes('media')) {
+    formats.push('video')
+  }
+
+  return {
+    formats
+  }
+})
+
 const checkStates = (value) => {
-  console.log(value, 123);
-  
   isUndoActive.value = quill.value.getQuill().history.stack.undo.length > 0
   isRedoActive.value = quill.value.getQuill().history.stack.redo.length > 0
   isBoldActive.value = quill.value.getQuill().getFormat().bold
@@ -336,15 +370,18 @@ const tableColsOptions = computed(() => {
 
 const insertTable = () => {
   let tableModule = quill.value.getQuill().getModule('better-table')
-  tableModule.insertTable(parseInt(tableRow.value), parseInt(tableCell.value))
+  tableModule?.insertTable(parseInt(tableRow.value), parseInt(tableCell.value))
   tableModal.value = false
 }
 
-watch(() => props.modelValue, (val) => {
-  if(!val) {
-    quill.value.getQuill().setContents([], 'silent')
+watch(
+  () => props.modelValue,
+  (val) => {
+    if (!val) {
+      quill.value.getQuill().setContents([], 'silent')
+    }
   }
-})
+)
 </script>
 
 <template>
@@ -378,8 +415,10 @@ watch(() => props.modelValue, (val) => {
         :options="{
           bounds: `#${id}`
         }"
+        is-text-only
         theme="snow"
         content-type="html"
+        :global-options="globalOptions"
         class="min-h-[200px]"
         :placeholder="placeholder"
         @update:content="checkStates"

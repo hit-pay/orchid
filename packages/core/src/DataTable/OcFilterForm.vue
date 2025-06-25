@@ -24,10 +24,20 @@ const props = defineProps({
 
 const emit = defineEmits(['applyFilter', 'cancel', 'filter-fields-changed'])
 
+// State
 const valuesData = ref({})
 const errorsData = ref({})
 const changedFields = ref([])
 
+// Computed
+const filterAdded = computed(() => {
+  return Object.values(valuesData.value).length > 0
+})
+
+const applyButtonLabel = computed(() => props.actions?.applyButton?.label || 'Apply')
+const cancelButtonLabel = computed(() => props.actions?.cancelButton?.label || 'Cancel')
+
+// Methods
 const updateChangedFields = (changedField) => {
   const index = changedFields.value.findIndex((field) => field === changedField)
 
@@ -50,25 +60,24 @@ const onUpdateForm = (form, value = null) => {
   updateChangedFields(form.name)
 }
 
-const filterAdded = computed(() => {
-  return Object.values(valuesData.value).length > 0
-})
-
-const applyButtonLabel = computed(() => props.actions?.applyButton?.label || 'Apply')
-const cancelButtonLabel = computed(() => props.actions?.cancelButton?.label || 'Cancel')
-
-onMounted(() => {
-  valuesData.value = { ...props.values }
-})
-
 const applyFilter = () => {
+  if (valuesData.value.cursor) {
+    valuesData.value.cursor = ''
+  }
+
   emit('applyFilter', valuesData.value)
   emit('filter-fields-changed', changedFields.value)
 
-  // reset after emit
+  // Reset after emit
   changedFields.value = []
 }
+
+// Lifecycle
+onMounted(() => {
+  valuesData.value = { ...props.values }
+})
 </script>
+
 <template>
   <div class="flex w-[326px] flex-col gap-y-5">
     <slot
@@ -86,10 +95,10 @@ const applyFilter = () => {
           :json-form="jsonForm"
           :grid="grid ?? null"
           @on-update="onUpdateForm"
-        >
-        </FormBuilder>
+        />
       </div>
     </slot>
+
     <div class="flex gap-x-5 px-5 pb-5">
       <Button
         class="w-full"

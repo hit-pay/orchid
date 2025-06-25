@@ -30,10 +30,15 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
-  rowLink: String
+  rowLink: String,
+  sortBy: {
+    type: Object,
+    default: () => ({})
+  },
 })
 
 const emit = defineEmits({
+  'update:sort-by': [],
   'click:row': [],
   'update:selected': [],
   'hover:cell': []
@@ -166,6 +171,9 @@ onMounted(() => onScroll())
             header.stickyLeft && !isScrollOnStart ? 'shadow-right-sticky' : '',
             header.stickyRight && !isScrollOnEnd ? 'shadow-left-sticky' : ''
           ]"
+          :is-sortable="header.isSortable"
+          :sort-by="sortBy[header.key]"
+          @update:sort-by="$emit('update:sort-by', {key: header.key, value: $event})"
           class="md:border-b border-oc-gray-200"
         >
           <template #default>

@@ -7,6 +7,10 @@ export const QuillEditor = defineComponent({
   name: 'QuillEditor',
   inheritAttrs: false,
   props: {
+    isTextOnly: {
+      type: Boolean,
+      default: false
+    },
     content: {
       type: [String, Object]
     },
@@ -138,6 +142,29 @@ export const QuillEditor = defineComponent({
           })
       // Emit ready event
       ctx.emit('ready', quill)
+
+      function removeBase64Images() {
+        const editor = quill.root
+        const images = editor.querySelectorAll('img')
+
+        images.forEach((img) => {
+          const src = img.getAttribute('src')
+          if (src && (src.startsWith('data:image/') || props.isTextOnly)) {
+            const blot = Quill.find(img)
+            if (blot) {
+              blot.deleteAt(0)
+            } else {
+              img.remove()
+            }
+          }
+        })
+      }
+
+      quill.root.addEventListener('paste', function () {
+        setTimeout(() => {
+          removeBase64Images()
+        }, 10)
+      })
     }
     // Compose Options
     const composeOptions = () => {
@@ -228,8 +255,8 @@ export const QuillEditor = defineComponent({
       ctx.emit('selectionChange', { range, oldRange, source })
     }
     watch(isEditorFocus, (focus) => {
-      if (focus) ctx.emit('focus', editor)
-      else ctx.emit('blur', editor)
+      if (focus) ctx.emit('focus', editor.value)
+      else ctx.emit('blur', editor.value)
     })
     const handleEditorChange = (...args) => {
       if (args[0] === 'text-change')

@@ -18,6 +18,7 @@ export const Default = {
     },
     template: `
           <div class="h-[400px]">
+           modelValue: {{modelValue}}
             <ColorPicker v-model="modelValue" :show-opacity="false" >
               <template #leading>
                 <Icon name="paint" />

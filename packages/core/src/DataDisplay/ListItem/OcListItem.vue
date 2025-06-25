@@ -1,13 +1,13 @@
 <script setup>
 import { computed } from 'vue'
+import OcAccordion from './components/OcAccordion.vue'
+import OcGeneral from './components/OcGeneral.vue'
+import OcLogo from './components/OcLogo.vue'
+import OcPage from './components/OcPage.vue'
+import OcPayment from './components/OcPayment.vue'
+import OcTerminal from './components/OcTerminal.vue'
 import OcTimeLine from './components/OcTimeLine.vue'
 import OcWebhook from './components/OcWebhook.vue'
-import OcLogo from './components/OcLogo.vue'
-import OcPayment from './components/OcPayment.vue'
-import OcGeneral from './components/OcGeneral.vue'
-import OcTerminal from './components/OcTerminal.vue'
-import OcPage from './components/OcPage.vue'
-import OcAccordion from './components/OcAccordion.vue'
 
 const props = defineProps({
   isActive: Boolean,
@@ -41,30 +41,29 @@ const props = defineProps({
   isDisabled: Boolean,
   isTransparent: Boolean,
   isDraggable: Boolean,
-  isOpenDefault: Boolean
+  isOpenDefault: Boolean,
+  modelValue: Boolean
 })
-defineEmits(['more', 'edit', 'delete', 'click:item'])
+
+const emit = defineEmits([
+  'more',
+  'edit',
+  'delete',
+  'click:item',
+  'update:modelValue'
+])
 
 const getTypeComponent = computed(() => {
   switch (props.type) {
-    case 'timeLine':
-      return OcTimeLine
-    case 'webhook':
-      return OcWebhook
-    case 'payment':
-      return OcPayment
-    case 'general':
-      return OcGeneral
-    case 'terminal':
-      return OcTerminal
-    case 'logo':
-      return OcLogo
-    case 'page':
-      return OcPage
-    case 'accordion':
-      return OcAccordion
-    default:
-      return OcTimeLine
+    case 'timeLine': return OcTimeLine
+    case 'webhook': return OcWebhook
+    case 'payment': return OcPayment
+    case 'general': return OcGeneral
+    case 'terminal': return OcTerminal
+    case 'logo': return OcLogo
+    case 'page': return OcPage
+    case 'accordion': return OcAccordion
+    default: return OcTimeLine
   }
 })
 </script>
@@ -73,11 +72,11 @@ const getTypeComponent = computed(() => {
   <component
     :is="getTypeComponent"
     v-bind="props"
-    :class="{ 'opacity-50': isDisabled }"
     @more="$emit('more')"
     @edit="$emit('edit')"
     @delete="$emit('delete')"
     @click="$emit('click:item')"
+    @update:modelValue="$emit('update:modelValue', $event)"
   >
     <template v-for="(_, name) in $slots" #[name]="slotData">
       <slot :name="name" v-bind="slotData" />
