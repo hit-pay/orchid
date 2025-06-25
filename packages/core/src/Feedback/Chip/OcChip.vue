@@ -46,6 +46,9 @@ const className = computed(() => {
     case 'light-red':
       className = 'bg-oc-accent-3-50 text-oc-accent-3'
       break
+    case 'neutral':
+      className = 'bg-white text-oc-text-400 border border-oc-gray-200'
+      break
     default:
       className = 'bg-oc-primary-50 text-oc-primary '
       break
@@ -78,6 +81,9 @@ const iconColor = computed(() => {
       break
     case 'light-red':
       className = 'text-oc-error '
+      break
+    case 'neutral':
+      className = 'text-oc-text-400 '
       break
     default:
       className = 'text-oc-primary-300 '

@@ -64,7 +64,7 @@ const popper = ref()
 const show = () => {
   isShow.value = true
   // Update its position
-  popper.value.popperInstance?.update()
+  popper.value?.popperInstance?.update()
   if (props.hideAfter) setTimeout(() => hide(), props.hideAfter)
 }
 
