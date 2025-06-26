@@ -5,7 +5,7 @@
     </div>
   
   <div class="w-full overflow-auto">
-    <table ref="tableRef" class="w-full text-left border-t border-oc-gray-200" style="table-layout: fixed;">
+    <table ref="tableRef" class="w-full text-left text-[13px] border-t border-oc-gray-200" style="table-layout: fixed;">
     <thead>
       <tr>
         <th 

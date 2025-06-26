@@ -523,7 +523,7 @@ const handleUpdateSortBy = ({key, value}) => {
       <Pagination
         v-if="paginationData && !isLastPage"
         v-model="currentPage"
-        class="justify-center"
+        class="justify-center text-[13px]"
         :max-page="paginationData.last_page"
         :strategy="paginationData.strategy"
         total-visible="5"
@@ -547,6 +547,7 @@ const handleUpdateSortBy = ({key, value}) => {
           is-inline-label
           :popper-options="{ placement: 'auto' }"
           :options="itemsPerPageOptions"
+          select-text-class="!text-[13px]"
           @update:model-value="applyFilter(null)"
         />
       </div>
