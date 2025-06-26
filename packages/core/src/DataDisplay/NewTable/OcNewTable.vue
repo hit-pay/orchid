@@ -1,16 +1,21 @@
 <template>
-  <table ref="tableRef" class="w-full text-left border-t border-l border-oc-gray-200" style="table-layout: fixed;">
+  <div class="border border-oc-gray-200 rounded-lg overflow-hidden">
+    <div v-if="$slots.before">
+      <slot name="before" />
+    </div>
+  
+  <div class="w-full overflow-auto">
+    <table ref="tableRef" class="w-full text-left border-t border-oc-gray-200" style="table-layout: fixed;">
     <thead>
       <tr>
         <th 
           v-for="header in headers" 
           :key="header.key" 
           class="p-0 bg-oc-gray-50 cursor-pointer"
-          @click="handleSort(header.key)"
+          @click="handleSort(header.key, $event)"
         >
           <div           
             class="px-5 py-3 font-medium text-xs border-b border-oc-text-200 uppercase flex items-center gap-2 justify-between w-full" 
-            :class="header.class"
           >
             {{  header.label }}
             <Icon 
@@ -30,11 +35,15 @@
 
     <tbody>
       <tr v-for="(row, index) in sortedFields" :key="index" class="group">
-        <td v-for="header in headers" :key="header.key + index" class="p-0 bg-oc-gray-50 border-b border-oc-gray-200">
+        <td
+          v-for="header in headers"
+          :key="header.key + index"
+          class="p-0 bg-oc-bg-light"
+          :class="{ 'border-b border-oc-gray-200': index !== sortedFields.length - 1 }"
+        >
           <div class="px-5 py-3 text-[13px] border-oc-text-200 flex gap-2 items-center justify-between w-full" :class="header.class">
-            <slot :name="header.key" :row="row">
-              <div class="truncate"> {{ row[header.key] }}</div>
-
+            <slot :name="header.key" :item="row" :data="row[header.key]">
+              <div class="truncate"> {{ row[header.key] || 'N/A' }}</div>
               <CopyTooltip v-if="header.isCopy" :value="row[header.key]" class="opacity-0 group-hover:opacity-100" />
             </slot>
           </div>
@@ -43,6 +52,8 @@
     </tbody>
     
   </table>
+  </div>
+</div>
 </template>
 
 <script setup>
@@ -92,13 +103,19 @@ const sortedFields = computed(() => {
   return sorted
 })
 
+// Add at the top of <script setup>
+let isDragging = false
+let suppressClick = false
+
 // Handle column sorting
-const handleSort = (key) => {
+const handleSort = (key, event) => {
+  if (suppressClick) {
+    suppressClick = false
+    return
+  }
   if (sortKey.value === key) {
-    // Toggle direction if same column
     sortDirection.value = sortDirection.value === 'asc' ? 'desc' : 'asc'
   } else {
-    // New column, start with desc
     sortKey.value = key
     sortDirection.value = 'desc'
   }
@@ -120,7 +137,6 @@ const createDiv = (height) => {
   div.style.cursor = 'col-resize'
   div.style.userSelect = 'none'
   div.style.height = height - 1 + 'px'
-  div.style.backgroundColor = 'transparent'
   div.style.borderRight = '1px solid var(--oc-gray-200)'
   div.style.zIndex = '10'
   return div
@@ -148,7 +164,7 @@ const setListeners = (div) => {
     
     curCol = e.target.parentElement
     nxtCol = curCol.nextElementSibling
-
+    
     console.log('curCol', curCol)
     console.log('nxtCol', nxtCol)
     
@@ -167,6 +183,12 @@ const setListeners = (div) => {
     console.log('Resize started:', { curColWidth, nxtColWidth, pageX })
   })
 
+  // Prevent header click (sort) when clicking the resize handle
+  div.addEventListener('click', function (e) {
+    e.preventDefault()
+    e.stopPropagation()
+  })
+
   div.addEventListener('mouseover', function (e) {
     e.target.style.borderColor = 'var(--oc-gray-500)'
   })
@@ -178,6 +200,7 @@ const setListeners = (div) => {
 
 const handleMouseMove = (e) => {
   if (curCol) {
+    isDragging = true
     // Get the table element to calculate scroll offset
     const table = tableRef.value
     const scrollLeft = table ? table.scrollLeft : 0
@@ -197,9 +220,11 @@ const handleMouseMove = (e) => {
 }
 
 const handleMouseUp = () => {
-  if (curCol) {
-    console.log('Resize ended')
+  if (isDragging) {
+    suppressClick = true
+    setTimeout(() => { suppressClick = false }, 0)
   }
+  isDragging = false
   curCol = undefined
   nxtCol = undefined
   pageX = undefined
@@ -217,8 +242,6 @@ const resizableGrid = (table) => {
   }
   
   console.log('Found columns:', cols.length)
-  
-  table.style.overflow = 'auto'
   
   const tableHeight = table.offsetHeight
   const tableWidth = table.offsetWidth

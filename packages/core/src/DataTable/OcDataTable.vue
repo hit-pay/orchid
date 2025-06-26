@@ -10,6 +10,7 @@ import {
   Tabs,
   Button,
   Dropdown,
+  NewTable
 } from '@/orchidui-core'
 import { useDataTable } from './useDataTable.js'
 import { ref, computed, onMounted, watch, nextTick } from 'vue'
@@ -63,6 +64,10 @@ const props = defineProps({
   sortBy: {
     type: Object,
     required: false
+  },
+  isNewTable: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -374,7 +379,7 @@ const handleUpdateSortBy = ({key, value}) => {
 </script>
 <template>
   <div class="relative flex flex-col gap-9">
-    <Table
+    <component :is="isNewTable ? NewTable : Table"
       v-if="processedTableOptions"
       :selected="selected"
       :row-key="rowKey"
@@ -398,7 +403,7 @@ const handleUpdateSortBy = ({key, value}) => {
         <slot name="before" />
         <div
           v-if="filterOptions?.search || filterOptions?.form || filterOptions?.tabs"
-          class="flex items-center px-4 min-h-[52px]"
+          class="flex items-center px-4 min-h-[44px]"
         >
           <div v-if="hasSelectedItems" class="absolute flex items-center gap-5 left-5">
             <slot name="bulk-actions" :selected-rows="selected" />
@@ -417,7 +422,7 @@ const handleUpdateSortBy = ({key, value}) => {
           <slot name="filter-options">
             <div
               v-if="filterOptions?.search || filterOptions?.form || filterOptions?.columnEdit"
-              class="flex gap-3 absolute ml-auto bg-oc-bg-light right-4 max-w-[calc(100%-24px)]"
+              class="flex gap-3 absolute ml-auto items-center bg-oc-bg-light right-4 max-w-[calc(100%-24px)]"
               :class="
                 !filterOptions ? 'w-full justify-end' : isSearchExpanded ? 'md:w-fit w-full' : ''
               "
@@ -442,7 +447,7 @@ const handleUpdateSortBy = ({key, value}) => {
                 is-attach-to-body
                 @update:model-value="$emit('filter-open', $event)"
               >
-                <Button :is-active="isFilterDropdownOpen" variant="secondary" left-icon="filter" />
+                <Button :is-active="isFilterDropdownOpen" variant="secondary" left-icon="filter" size="small" class="w-8" iconClass="shrink-0" />
 
                 <template #menu>
                   <FilterForm
@@ -506,7 +511,9 @@ const handleUpdateSortBy = ({key, value}) => {
       <template #table-body="slotProps">
         <slot name="table-body" v-bind="slotProps"></slot>
       </template>
-    </Table>
+    </component>
+
+
     <slot name="before-pagination"></slot>
     <div
       v-if="paginationData || cursorOption"

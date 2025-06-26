@@ -78,6 +78,7 @@ const changeSearchKey = (value) => {
         label="Search"
         variant="secondary"
         class="shrink-0"
+        size="small"
         @click="() => {
           $emit('addQuery', query)
           query = ''
@@ -101,6 +102,9 @@ const changeSearchKey = (value) => {
     <Button
       v-if="!isSearchOpen"
       variant="secondary"
+      size="small"
+      class="w-8"
+      iconClass="shrink-0"
       left-icon="search"
       @click="onSearchOpen"
     />

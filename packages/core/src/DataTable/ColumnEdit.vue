@@ -69,12 +69,13 @@ onMounted(() => {
 <template>
   <Dropdown 
     v-model="isColumnEditOpened" 
-    class="h-[36px]" 
     is-attach-to-body
   >
     <Button 
       label="Edit Column" 
       left-icon="setting" 
+      size="small"
+      class="whitespace-nowrap"
       variant="secondary" 
     />
     
