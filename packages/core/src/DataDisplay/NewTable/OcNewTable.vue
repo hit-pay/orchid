@@ -31,7 +31,7 @@
     <tbody>
       <tr v-for="(row, index) in sortedFields" :key="index" class="group">
         <td v-for="header in headers" :key="header.key + index" class="p-0 bg-oc-gray-50 border-b border-oc-gray-200">
-          <div class="px-5 py-3 text-[13px] border-oc-text-200 flex gap-2 items-center justify-between w-full">
+          <div class="px-5 py-3 text-[13px] border-oc-text-200 flex gap-2 items-center justify-between w-full" :class="header.class">
             <slot :name="header.key" :row="row">
               <div class="truncate"> {{ row[header.key] }}</div>
 
@@ -119,7 +119,7 @@ const createDiv = (height) => {
   div.style.position = 'absolute'
   div.style.cursor = 'col-resize'
   div.style.userSelect = 'none'
-  div.style.height = height + 'px'
+  div.style.height = height - 1 + 'px'
   div.style.backgroundColor = 'transparent'
   div.style.borderRight = '1px solid var(--oc-gray-200)'
   div.style.zIndex = '10'
@@ -168,13 +168,11 @@ const setListeners = (div) => {
   })
 
   div.addEventListener('mouseover', function (e) {
-    e.target.style.borderRight = '2px solid #0000ff'
-    e.target.style.backgroundColor = 'rgba(0, 0, 255, 0.1)'
+    e.target.style.borderColor = 'var(--oc-gray-500)'
   })
 
   div.addEventListener('mouseout', function (e) {
-    e.target.style.borderRight = '1px solid var(--oc-gray-200)'
-    e.target.style.backgroundColor = 'transparent'
+    e.target.style.borderColor = 'var(--oc-gray-200)'
   })
 }
 
@@ -187,11 +185,9 @@ const handleMouseMove = (e) => {
     // Adjust for horizontal scroll
     const adjustedPageX = e.pageX + scrollLeft
     const diffX = adjustedPageX - pageX
-    
-    console.log('diffX', diffX)
-    
+        
     // Only change the width of the current column
-    const newCurWidth = Math.max(150, curColWidth + diffX) // Minimum 150px width
+    const newCurWidth = Math.max(175, curColWidth + diffX) // Minimum 150px width
     curCol.style.width = newCurWidth + 'px'
     curCol.style.minWidth = newCurWidth + 'px'
     
@@ -226,12 +222,12 @@ const resizableGrid = (table) => {
   
   const tableHeight = table.offsetHeight
   const tableWidth = table.offsetWidth
-  const colWidth = Math.max(150, Math.floor(tableWidth / cols.length)) // Minimum 150px
+  const colWidth = Math.max(175, Math.floor(tableWidth / cols.length)) // Minimum 150px
   
   for (let i = 0; i < cols.length; i++) {
     // Set initial width for each column
     cols[i].style.width = colWidth + 'px'
-    cols[i].style.minWidth = '150px' // Set minimum width to 150px
+    cols[i].style.minWidth = '175px' // Set minimum width to 150px
     
     const div = createDiv(tableHeight)
     cols[i].appendChild(div)

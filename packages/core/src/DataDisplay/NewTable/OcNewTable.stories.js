@@ -12,24 +12,28 @@ export const Default = {
       headers:  [
         {
           key: 'date',
-          label: 'Date'
+          label: 'Date',
+          class: 'font-reddit-mono'
         },
         {
           key: 'email',
           label: 'Email',
-          isCopy: true
         },
         {
           key: 'id',
-          label: 'ID'
+          label: 'ID',
+          isCopy: true,
+          class: 'text-oc-text-400'
         },
         {
           key: 'amount',
-          label: 'Amount'
+          label: 'Amount',
+          class: 'font-reddit-mono font-semibold'
         },
         {
           key: 'method',
-          label: 'Method'
+          label: 'Method',
+          class: 'text-oc-text-400'
         },
         {
           key: 'status',
@@ -41,7 +45,7 @@ export const Default = {
           date: new Date(),
           email: 'john.doe@example.com',
           id: `#${crypto.randomUUID()}`,
-          amount: 100,
+          amount: '2,234.56',
           currency: 'SGD',
           payment_method: 'visa',
           last4Digits: '1234',
@@ -49,12 +53,12 @@ export const Default = {
         },
         {
           date: new Date(),
-          email: 'john.doe@example.com',
+          email: 'test.doe@example.com',
           id: `#${crypto.randomUUID()}`,
-          amount: 100,
+          amount: '1,234.56',
           currency: 'SGD',
           payment_method: 'visa',
-          last4Digits: '1234',
+          last4Digits: '3214',
           status: 'neutral'
         }
       ],
@@ -83,7 +87,7 @@ export const Default = {
           {{ row.currency }} {{ row.amount }}
         </template>
         <template #method="{ row }">
-          {{ row.payment_method }} **** {{ row.last4Digits }}
+          {{ row.payment_method }} •••• {{ row.last4Digits }}
         </template>
         <template #status="{ row }">
           <Chip :variant="row.status" label="Some label" class="truncate" />
