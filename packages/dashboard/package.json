@@ -1,7 +1,7 @@
 {
   "name": "@orchidui/dashboard",
   "description": "Orchid Dashboard UI , Dashboard Ui Library Vue 3 tailwind css",
-  "version": "1.20.1-3",
+  "version": "1.20.1-4",
   "type": "module",
   "scripts": {
     "build": "vite build"

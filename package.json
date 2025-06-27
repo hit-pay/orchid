@@ -20,8 +20,8 @@
     "publish:dashboard": "npm run build:dashboard && cd packages/dashboard && npm publish",
     "publish-dev:core": "npm run build:core && cd packages/core && npm publish --tag beta",
     "publish-dev:dashboard": "npm run build:dashboard && cd packages/dashboard && npm publish --tag beta",
-    "release-prod": "npm run release-prod.js",
-    "release": "npm run release-dev.js"
+    "release-prod": "bun run release-prod.js",
+    "release": "bun run release-dev.js"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
