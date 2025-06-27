@@ -781,123 +781,125 @@ import {
           ]
         },
         tableOptions: {
-          isSticky: false,
+          isSticky: true,
           isSelectable: true,
           isCursorPointer: true,
           isBorderless: false,
-            headers:  [
-              {
-                key: 'date',
-                label: 'Date',
-                class: 'font-reddit-mono'
-              },
-              {
-                key: 'email',
-                label: 'Email',
-              },
-              {
-                key: 'id',
-                label: 'ID',
-                isCopy: true,
-                class: 'text-oc-text-400'
-              },
-              {
-                key: 'amount',
-                label: 'Amount',
-                class: 'font-reddit-mono font-semibold'
-              },
-              {
-                key: 'method',
-                label: 'Method',
-                class: 'text-oc-text-400'
-              },
-              {
-                key: 'status',
-                label: 'Status'
-              }
-            ],
-            fields: [
-              {
-                date: new Date(),
-                email: 'john.doe@example.com',
-                id: `#${crypto.randomUUID()}`,
-                amount: '2,234.56',
-                currency: 'SGD',
-                payment_method: 'visa',
-                last4Digits: '1234',
-                status: 'success'
-              },
-              {
-                date: new Date(),
-                email: 'test.doe@example.com',
-                id: `#${crypto.randomUUID()}`,
-                amount: '1,234.56',
-                currency: 'SGD',
-                payment_method: 'visa',
-                last4Digits: '3214',
-                status: 'neutral'
-              },
-              {
-                date: new Date(),
-                email: 'john.doe@example.com',
-                id: `#${crypto.randomUUID()}`,
-                amount: '2,234.56',
-                currency: 'SGD',
-                payment_method: 'visa',
-                last4Digits: '1234',
-                status: 'success'
-              },
-              {
-                date: new Date(),
-                email: 'test.doe@example.com',
-                id: `#${crypto.randomUUID()}`,
-                amount: '1,234.56',
-                currency: 'SGD',
-                payment_method: 'visa',
-                last4Digits: '3214',
-                status: 'neutral'
-              },
-              {
-                date: new Date(),
-                email: 'john.doe@example.com',
-                id: `#${crypto.randomUUID()}`,
-                amount: '2,234.56',
-                currency: 'SGD',
-                payment_method: 'visa',
-                last4Digits: '1234',
-                status: 'success'
-              },
-              {
-                date: new Date(),
-                email: 'test.doe@example.com',
-                id: `#${crypto.randomUUID()}`,
-                amount: '1,234.56',
-                currency: 'SGD',
-                payment_method: 'visa',
-                last4Digits: '3214',
-                status: 'neutral'
-              },
-              {
-                date: new Date(),
-                email: 'john.doe@example.com',
-                id: `#${crypto.randomUUID()}`,
-                amount: '2,234.56',
-                currency: 'SGD',
-                payment_method: 'visa',
-                last4Digits: '1234',
-                status: 'success'
-              },
-              {
-                date: new Date(),
-                email: 'test.doe@example.com',
-                id: `#${crypto.randomUUID()}`,
-                amount: '1,234.56',
-                currency: 'SGD',
-                payment_method: 'visa',
-                last4Digits: '3214',
-                status: 'neutral'
-              }
-            ],
+          headers:  [
+            {
+              key: 'date',
+              label: 'Date',
+              class: 'font-reddit-mono',
+              stickyLeft: true
+            },
+            {
+              key: 'email',
+              label: 'Email',
+            },
+            {
+              key: 'id',
+              label: 'ID',
+              isCopy: true,
+              class: 'text-oc-text-400'
+            },
+            {
+              key: 'amount',
+              label: 'Amount',
+              class: 'font-reddit-mono font-semibold'
+            },
+            {
+              key: 'method',
+              label: 'Method',
+              class: 'text-oc-text-400'
+            },
+            {
+              key: 'status',
+              label: 'Status',
+              stickyRight: true
+            }
+          ],
+          fields: [
+            {
+              date: new Date(),
+              email: 'john.doe@example.com',
+              id: `#${crypto.randomUUID()}`,
+              amount: '2,234.56',
+              currency: 'SGD',
+              payment_method: 'visa',
+              last4Digits: '1234',
+              status: 'success'
+            },
+            {
+              date: new Date(),
+              email: 'test.doe@example.com',
+              id: `#${crypto.randomUUID()}`,
+              amount: '1,234.56',
+              currency: 'SGD',
+              payment_method: 'visa',
+              last4Digits: '3214',
+              status: 'neutral'
+            },
+            {
+              date: new Date(),
+              email: 'john.doe@example.com',
+              id: `#${crypto.randomUUID()}`,
+              amount: '2,234.56',
+              currency: 'SGD',
+              payment_method: 'visa',
+              last4Digits: '1234',
+              status: 'success'
+            },
+            {
+              date: new Date(),
+              email: 'test.doe@example.com',
+              id: `#${crypto.randomUUID()}`,
+              amount: '1,234.56',
+              currency: 'SGD',
+              payment_method: 'visa',
+              last4Digits: '3214',
+              status: 'neutral'
+            },
+            {
+              date: new Date(),
+              email: 'john.doe@example.com',
+              id: `#${crypto.randomUUID()}`,
+              amount: '2,234.56',
+              currency: 'SGD',
+              payment_method: 'visa',
+              last4Digits: '1234',
+              status: 'success'
+            },
+            {
+              date: new Date(),
+              email: 'test.doe@example.com',
+              id: `#${crypto.randomUUID()}`,
+              amount: '1,234.56',
+              currency: 'SGD',
+              payment_method: 'visa',
+              last4Digits: '3214',
+              status: 'neutral'
+            },
+            {
+              date: new Date(),
+              email: 'john.doe@example.com',
+              id: `#${crypto.randomUUID()}`,
+              amount: '2,234.56',
+              currency: 'SGD',
+              payment_method: 'visa',
+              last4Digits: '1234',
+              status: 'success'
+            },
+            {
+              date: new Date(),
+              email: 'test.doe@example.com',
+              id: `#${crypto.randomUUID()}`,
+              amount: '1,234.56',
+              currency: 'SGD',
+              payment_method: 'visa',
+              last4Digits: '3214',
+              status: 'neutral'
+            }
+          ],
           
         }
       },

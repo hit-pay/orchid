@@ -78,19 +78,19 @@ export const Default = {
     },
     template: `
       <NewTable :options="options">
-        <template #date="{ row }">
+        <template #date="{ item }">
           <div class="truncate">
-            {{ dayjs(row.date).format('YYYY-MM-DD HH:mm:ss') }}
+            {{ dayjs(item.date).format('YYYY-MM-DD HH:mm:ss') }}
           </div>
         </template>
-        <template #amount="{ row }">
-          {{ row.currency }} {{ row.amount }}
+        <template #amount="{ item }">
+          {{ item.currency }} {{ item.amount }}
         </template>
-        <template #method="{ row }">
-          {{ row.payment_method }} •••• {{ row.last4Digits }}
+        <template #method="{ item }">
+          {{ item.payment_method }} •••• {{ item.last4Digits }}
         </template>
-        <template #status="{ row }">
-          <Chip :variant="row.status" label="Some label" class="truncate" />
+        <template #status="{ item }">
+          <Chip :variant="item.status" label="Some label" class="truncate" />
         </template>
       </NewTable>
     `

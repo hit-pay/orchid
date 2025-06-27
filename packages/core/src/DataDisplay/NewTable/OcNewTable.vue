@@ -4,18 +4,20 @@
       <slot name="before" />
     </div>
   
-  <div class="w-full overflow-auto">
-    <table ref="tableRef" class="w-full text-left text-[13px] border-t border-oc-gray-200" style="table-layout: fixed;">
+  <div class="w-full overflow-auto" ref="scrollContainerRef">
+    <table ref="tableRef" class="w-full text-left text-[13px] border-oc-gray-200" style="table-layout: fixed;">
     <thead>
       <tr>
         <th 
-          v-for="header in headers" 
+          v-for="(header, index) in headers" 
           :key="header.key" 
           class="p-0 bg-oc-gray-50 cursor-pointer"
+          :class="getStickyClasses(header, index, true)"
           @click="handleSort(header.key, $event)"
         >
           <div           
             class="px-5 py-3 font-medium text-xs border-b border-oc-text-200 uppercase flex items-center gap-2 justify-between w-full" 
+            :class="{ 'border-l': index === headers.length - 1 && isScrolledRight }"
           >
             {{  header.label }}
             <Icon 
@@ -36,12 +38,21 @@
     <tbody>
       <tr v-for="(row, index) in sortedFields" :key="index" class="group">
         <td
-          v-for="header in headers"
+          v-for="(header, headerIndex) in headers"
           :key="header.key + index"
           class="p-0 bg-oc-bg-light"
-          :class="{ 'border-b border-oc-gray-200': index !== sortedFields.length - 1 }"
+          :class="[
+            { 'border-b border-oc-gray-200': index !== sortedFields.length - 1 },
+            getStickyClasses(header, headerIndex, false)
+          ]"
         >
-          <div class="px-5 py-3 text-[13px] border-oc-text-200 flex gap-2 items-center justify-between w-full" :class="header.class">
+          <div 
+            class="px-5 py-3 text-[13px] flex gap-2 items-center justify-between w-full" 
+            :class="[
+              header.class,
+              { 'border-l': headerIndex === headers.length - 1 && isScrolledRight }
+            ]"
+          >
             <slot :name="header.key" :item="row" :data="row[header.key]">
               <div class="truncate"> {{ row[header.key] || 'N/A' }}</div>
               <CopyTooltip v-if="header.isCopy" :value="row[header.key]" class="opacity-0 group-hover:opacity-100" />
@@ -57,7 +68,7 @@
 </template>
 
 <script setup>
-import { computed, ref, onMounted, onUnmounted, nextTick } from 'vue';
+import { computed, ref, onMounted, onUnmounted, nextTick, watch } from 'vue';
 import { Icon, CopyTooltip } from '@/orchidui-core'
 
 const props = defineProps({
@@ -69,6 +80,7 @@ const props = defineProps({
 
 const fields = computed(() => props.options.fields)
 const headers = computed(() => props.options.headers)
+const isSticky = computed(() => props.options.isSticky)
 
 // Sorting state
 const sortKey = ref(null)
@@ -122,11 +134,25 @@ const handleSort = (key, event) => {
 }
 
 const tableRef = ref(null)
+const scrollContainerRef = ref(null)
 let curCol = null
 let nxtCol = null
 let pageX = null
 let curColWidth = null
 let nxtColWidth = null
+const isScrolledRight = ref(false)
+const isScrolledLeft = ref(false)
+
+const handleScroll = () => {
+  if (scrollContainerRef.value) {
+    const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.value
+    const maxScrollLeft = scrollWidth - clientWidth
+    
+    // Show border when scrolled, hide only when last column reaches right edge
+    isScrolledRight.value = scrollLeft < maxScrollLeft
+    isScrolledLeft.value = scrollLeft === 0
+  }
+}
 
 const createDiv = (height) => {
   const div = document.createElement('div')
@@ -138,7 +164,6 @@ const createDiv = (height) => {
   div.style.userSelect = 'none'
   div.style.height = height - 1 + 'px'
   div.style.borderRight = '1px solid var(--oc-gray-200)'
-  div.style.zIndex = '10'
   return div
 }
 
@@ -232,6 +257,23 @@ const handleMouseUp = () => {
   curColWidth = undefined
 }
 
+const clearResizeHandles = (table) => {
+  if (!table) return
+  
+  const row = table.getElementsByTagName('tr')[0]
+  const cols = row ? row.children : undefined
+  if (!cols) return
+  
+  for (let i = 0; i < cols.length; i++) {
+    const resizeHandle = cols[i].querySelector('div[style*="cursor: col-resize"]')
+    if (resizeHandle) {
+      cols[i].removeChild(resizeHandle)
+    }
+    // Reset position style
+    cols[i].style.position = ''
+  }
+}
+
 const resizableGrid = (table) => {
   console.log('Initializing resizable grid')
   const row = table.getElementsByTagName('tr')[0]
@@ -252,11 +294,20 @@ const resizableGrid = (table) => {
     cols[i].style.width = colWidth + 'px'
     cols[i].style.minWidth = '175px' // Set minimum width to 150px
     
-    const div = createDiv(tableHeight)
-    cols[i].appendChild(div)
-    cols[i].style.position = 'relative'
-    setListeners(div)
-    console.log('Added resize handle to column', i)
+    // Skip adding resize handle to the last column
+    if (i < cols.length - 1) {
+      const div = createDiv(tableHeight)
+      cols[i].appendChild(div)
+      
+      // Only set position relative if not sticky
+      const isStickyCol = isSticky.value && (i === 0 || i === cols.length - 1)
+      if (!isStickyCol) {
+        cols[i].style.position = 'relative'
+      }
+      
+      setListeners(div)
+      console.log('Added resize handle to column', i)
+    }
   }
 }
 
@@ -269,8 +320,14 @@ onMounted(async () => {
     if (tableRef.value) {
       console.log('Table ref found, initializing resize') // Debug
       resizableGrid(tableRef.value)
+      handleScroll()
     } else {
       console.log('Table ref not found') // Debug
+    }
+    
+    // Add scroll event listener to the scroll container
+    if (scrollContainerRef.value) {
+      scrollContainerRef.value.addEventListener('scroll', handleScroll)
     }
   }, 100)
   
@@ -279,8 +336,51 @@ onMounted(async () => {
 })
 
 onUnmounted(() => {
+  if (scrollContainerRef.value) {
+    scrollContainerRef.value.removeEventListener('scroll', handleScroll)
+  }
   document.removeEventListener('mousemove', handleMouseMove)
   document.removeEventListener('mouseup', handleMouseUp)
 })
+
+// Watch for header changes to reinitialize resize handles
+watch(headers, async () => {
+  await nextTick()
+  if (tableRef.value) {
+    // Clear existing resize handles
+    clearResizeHandles(tableRef.value)
+    // Reinitialize with new columns
+    resizableGrid(tableRef.value)
+  }
+}, { deep: true })
+
+const getStickyClasses = (header, index, isHeader = false) => {
+  if (!isSticky.value) return ''
+  
+  const classes = []
+  
+  // Check for stickyLeft property on first column or explicit stickyLeft
+  if (index === 0 || header.stickyLeft) {
+    classes.push(`sticky left-0 ${isHeader ? 'z-30' : 'z-20'}`)
+  }
+  
+  // Check for stickyRight property on last column or explicit stickyRight
+  if (index === headers.value.length - 1 || header.stickyRight) {
+    classes.push(`sticky right-0 ${isHeader ? 'z-[31]' : 'z-[21]'}`)
+  }
+  
+  return classes.join(' ')
+}
 </script>
+
+<style scoped>
+/* Sticky column shadows and styling */
+.sticky.left-0 {
+  box-shadow: 2px 0 4px -2px rgba(0, 0, 0, 0.1);
+}
+
+.sticky.right-0 {
+  box-shadow: -2px 0 4px -2px rgba(0, 0, 0, 0.1);
+}
+</style>
 

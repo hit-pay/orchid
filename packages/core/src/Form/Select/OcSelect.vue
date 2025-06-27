@@ -339,7 +339,7 @@ defineExpose({
           </slot>
           <span
             v-if="localValueOption.length === 0"
-            class="text-oc-text-300 md:text-base text-lg"
+            class="text-oc-text-300"
             >{{ placeholder }}</span
           >
         </div>
@@ -359,7 +359,7 @@ defineExpose({
         </template>
         <template v-else>
           <span
-            class="whitespace-nowrap flex gap-x-3 text-lg md:text-base items-center overflow-hidden"
+            class="whitespace-nowrap flex gap-x-3 items-center overflow-hidden"
             :class="selectTextClass"
           >
             <Icon v-if="icon" :name="icon" width="16" height="16" />
