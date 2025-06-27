@@ -23,28 +23,31 @@ const className = computed(() => {
   let className = ''
   switch (props.variant) {
     case 'accent-1':
-      className = 'bg-oc-accent-1-50 text-oc-accent-1 '
+      className = 'bg-oc-accent-1-50 text-oc-accent-1 border border-transparent'
       break
     case 'accent-2':
-      className = 'bg-oc-accent-2-50 text-oc-accent-2 '
+      className = 'bg-oc-accent-2-50 text-oc-accent-2 border border-transparent'
       break
     case 'accent-3':
-      className = 'bg-oc-accent-3-50 text-oc-accent-3 '
+      className = 'bg-oc-accent-3-50 text-oc-accent-3 border border-transparent'
       break
     case 'success':
-      className = 'bg-oc-success-50 text-oc-success '
+      className = 'bg-oc-success-50 text-oc-success border border-transparent'
       break
     case 'warning':
-      className = 'bg-oc-warning-50 text-oc-warning '
+      className = 'bg-oc-warning-50 text-oc-warning border border-transparent'
       break
     case 'error':
-      className = 'bg-oc-error-50 text-oc-error '
+      className = 'bg-oc-error-50 text-oc-error border border-transparent'
       break
     case 'gray':
-      className = 'bg-oc-gray-100 text-oc-gray-700 '
+      className = 'bg-oc-gray-100 text-oc-gray-700 border border-transparent'
       break
     case 'light-red':
-      className = 'bg-oc-accent-3-50 text-oc-accent-3'
+      className = 'bg-oc-accent-3-50 text-oc-accent-3 border border-transparent'
+      break
+    case 'neutral':
+      className = 'bg-white text-oc-text-400 border border-oc-gray-200'
       break
     default:
       className = 'bg-oc-primary-50 text-oc-primary '
@@ -79,6 +82,9 @@ const iconColor = computed(() => {
     case 'light-red':
       className = 'text-oc-error '
       break
+    case 'neutral':
+      className = 'text-oc-text-400 '
+      break
     default:
       className = 'text-oc-primary-300 '
       break
@@ -89,7 +95,7 @@ const iconColor = computed(() => {
 
 <template>
   <span
-    class="rounded-full flex items-center gap-x-3 py-1 px-3 text-sm leading-[20px]"
+    class="rounded-full flex items-center gap-x-3 py-1 px-3 text-sm leading-[18px]"
     :class="className"
   >
     <slot>

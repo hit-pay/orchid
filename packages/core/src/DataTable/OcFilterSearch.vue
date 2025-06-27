@@ -47,6 +47,7 @@ const changeSearchKey = (value) => {
         v-model="query"
         placeholder="Search something here"
         class="md:min-w-[310px]"
+        input-class="!h-[28px]"
         :icon="searchOptions?.length ? '' : 'search'"
         @keyup.enter="$emit('addQuery', query)"
       >
@@ -78,6 +79,7 @@ const changeSearchKey = (value) => {
         label="Search"
         variant="secondary"
         class="shrink-0"
+        size="small"
         @click="() => {
           $emit('addQuery', query)
           query = ''
@@ -85,7 +87,7 @@ const changeSearchKey = (value) => {
       />
       <span
         v-else
-        class="py-3 text-base cursor-pointer flex normal-case items-center font-medium text-oc-text-400"
+        class="text-base cursor-pointer flex normal-case items-center font-medium text-oc-text-400"
         @click="() => {
           isSearchOpen = false
           $emit('toggle', isSearchOpen)
@@ -101,6 +103,9 @@ const changeSearchKey = (value) => {
     <Button
       v-if="!isSearchOpen"
       variant="secondary"
+      size="small"
+      class="w-8"
+      iconClass="shrink-0"
       left-icon="search"
       @click="onSearchOpen"
     />

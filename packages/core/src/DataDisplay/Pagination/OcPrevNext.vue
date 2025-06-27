@@ -10,7 +10,7 @@ defineProps({
   }
 })
 const sizeClasses = computed(() => ({
-  default: 'px-1 py-3',
+  default: 'px-1 py-3 text-[13px]',
   small: 'py-2 text-sm',
   big: 'px-2 py-4 text-lg'
 }))

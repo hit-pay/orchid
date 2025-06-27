@@ -156,7 +156,7 @@ const isPasswordInput = computed(() => props.inputType === 'password')
       :class="inputClasses"
       @click="$refs.inputRef?.focus()"
     >
-      <div v-if="$slots.trailing" class="border-r border-gray-200 pr-3 py-3" :class="trailingClass">
+      <div v-if="$slots.trailing" class="border-r py-2 border-gray-200 pr-3 flex items-center h-[inherit]" :class="trailingClass">
         <slot name="trailing" />
       </div>
 
