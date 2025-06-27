@@ -1,6 +1,6 @@
 <template>
   <div class="border border-oc-gray-200 rounded-lg overflow-hidden">
-    <div v-if="$slots.before">
+    <div v-if="$slots.before" class="border-b border-oc-gray-200">
       <slot name="before" />
     </div>
   
@@ -12,12 +12,11 @@
           v-for="(header, index) in headers" 
           :key="header.key" 
           class="p-0 bg-oc-gray-50 cursor-pointer"
-          :class="getStickyClasses(header, index, true)"
+          :class="[isScrolledToLeft && !index ? 'shadow-left' : '', getStickyClasses(header, header.key, true)]"
           @click="handleSort(header.key, $event)"
         >
           <div           
             class="px-5 py-3 font-medium text-xs border-b border-oc-text-200 uppercase flex items-center gap-2 justify-between w-full" 
-            :class="{ 'border-l': index === headers.length - 1 && isScrolledRight }"
           >
             {{  header.label }}
             <Icon 
@@ -43,20 +42,18 @@
           class="p-0 bg-oc-bg-light"
           :class="[
             { 'border-b border-oc-gray-200': index !== sortedFields.length - 1 },
-            getStickyClasses(header, headerIndex, false)
+            getStickyClasses(header, header.key, false)
           ]"
         >
           <div 
             class="px-5 py-3 text-[13px] flex gap-2 items-center justify-between w-full" 
-            :class="[
-              header.class,
-              { 'border-l': headerIndex === headers.length - 1 && isScrolledRight }
-            ]"
+            :class="header.class"
           >
             <slot :name="header.key" :item="row" :data="row[header.key]">
               <div class="truncate"> {{ row[header.key] || 'N/A' }}</div>
-              <CopyTooltip v-if="header.isCopy" :value="row[header.key]" class="opacity-0 group-hover:opacity-100" />
             </slot>
+
+             <CopyTooltip v-if="header.isCopy" :value="row[header.key]" class="opacity-0 group-hover:opacity-100" />
           </div>
         </td>
       </tr>
@@ -140,30 +137,27 @@ let nxtCol = null
 let pageX = null
 let curColWidth = null
 let nxtColWidth = null
-const isScrolledRight = ref(false)
-const isScrolledLeft = ref(false)
+const isScrolledToLeft = ref(true)
 
-const handleScroll = () => {
-  if (scrollContainerRef.value) {
-    const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.value
-    const maxScrollLeft = scrollWidth - clientWidth
-    
-    // Show border when scrolled, hide only when last column reaches right edge
-    isScrolledRight.value = scrollLeft < maxScrollLeft
-    isScrolledLeft.value = scrollLeft === 0
+const createDiv = (height, columnElement) => {
+  // Check if resize handle already exists for this column
+  const existingHandle = columnElement.querySelector('div[style*="cursor: col-resize"]')
+  if (existingHandle) {
+    console.log('Resize handle already exists for this column, skipping creation')
+    return null
   }
-}
-
-const createDiv = (height) => {
+  
   const div = document.createElement('div')
+  div.classList.add('shadow-line')
   div.style.top = '0'
   div.style.right = '0'
   div.style.width = '8px'
   div.style.position = 'absolute'
   div.style.cursor = 'col-resize'
   div.style.userSelect = 'none'
-  div.style.height = height - 1 + 'px'
+  div.style.height = height + 'px'
   div.style.borderRight = '1px solid var(--oc-gray-200)'
+  console.log('div', div)
   return div
 }
 
@@ -296,18 +290,28 @@ const resizableGrid = (table) => {
     
     // Skip adding resize handle to the last column
     if (i < cols.length - 1) {
-      const div = createDiv(tableHeight)
-      cols[i].appendChild(div)
-      
-      // Only set position relative if not sticky
-      const isStickyCol = isSticky.value && (i === 0 || i === cols.length - 1)
-      if (!isStickyCol) {
-        cols[i].style.position = 'relative'
+      const div = createDiv(tableHeight, cols[i])
+      if (div) {
+        cols[i].appendChild(div)
+        
+        // Only set position relative if not sticky
+        const isStickyCol = isSticky.value && (i === 0 || i === cols.length - 1)
+        if (!isStickyCol) {
+          cols[i].style.position = 'relative'
+        }
+        
+        setListeners(div)
+        console.log('Added resize handle to column', i)
       }
-      
-      setListeners(div)
-      console.log('Added resize handle to column', i)
     }
+  }
+}
+
+const handleScroll = () => {
+  if (scrollContainerRef.value.scrollLeft > 0) {
+     isScrolledToLeft.value = true
+  } else {
+    isScrolledToLeft.value = false
   }
 }
 
@@ -320,14 +324,10 @@ onMounted(async () => {
     if (tableRef.value) {
       console.log('Table ref found, initializing resize') // Debug
       resizableGrid(tableRef.value)
+      scrollContainerRef.value.addEventListener('scroll', handleScroll)
       handleScroll()
     } else {
       console.log('Table ref not found') // Debug
-    }
-    
-    // Add scroll event listener to the scroll container
-    if (scrollContainerRef.value) {
-      scrollContainerRef.value.addEventListener('scroll', handleScroll)
     }
   }, 100)
   
@@ -336,9 +336,6 @@ onMounted(async () => {
 })
 
 onUnmounted(() => {
-  if (scrollContainerRef.value) {
-    scrollContainerRef.value.removeEventListener('scroll', handleScroll)
-  }
   document.removeEventListener('mousemove', handleMouseMove)
   document.removeEventListener('mouseup', handleMouseUp)
 })
@@ -354,33 +351,25 @@ watch(headers, async () => {
   }
 }, { deep: true })
 
-const getStickyClasses = (header, index, isHeader = false) => {
+const getStickyClasses = (header, headerKey, isHeader = false) => {
   if (!isSticky.value) return ''
   
   const classes = []
+
+  const indexOfHeader = headers.value.findIndex(h => h.key === headerKey)
+
   
-  // Check for stickyLeft property on first column or explicit stickyLeft
-  if (index === 0 || header.stickyLeft) {
+  // Only sticky left - first column or explicit stickyLeft
+  if (indexOfHeader === 0 || header.stickyLeft) {
     classes.push(`sticky left-0 ${isHeader ? 'z-30' : 'z-20'}`)
-  }
-  
-  // Check for stickyRight property on last column or explicit stickyRight
-  if (index === headers.value.length - 1 || header.stickyRight) {
-    classes.push(`sticky right-0 ${isHeader ? 'z-[31]' : 'z-[21]'}`)
   }
   
   return classes.join(' ')
 }
 </script>
 
-<style scoped>
-/* Sticky column shadows and styling */
-.sticky.left-0 {
-  box-shadow: 2px 0 4px -2px rgba(0, 0, 0, 0.1);
-}
-
-.sticky.right-0 {
-  box-shadow: -2px 0 4px -2px rgba(0, 0, 0, 0.1);
+<style>
+.shadow-left .shadow-line {
+  box-shadow: 6px 0 8px -2px rgba(0, 0, 0, 0.15);
 }
 </style>
-
