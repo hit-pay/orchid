@@ -815,7 +815,6 @@ import {
             {
               key: 'status',
               label: 'Status',
-              stickyRight: true
             }
           ],
           fields: [
@@ -924,6 +923,10 @@ import {
           per_page: 10,
           tabs: '',
           columnEdit: {
+            fixed: {
+              date: true,
+              status: true,
+            },
             active: [
               {
                 key: 'col1',
