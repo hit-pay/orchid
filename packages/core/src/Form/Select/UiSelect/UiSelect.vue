@@ -5,6 +5,7 @@ import {
   ComboboxItem,
   ComboboxRoot,
   ComboboxTrigger,
+  ComboboxViewport,
   SelectContent,
   SelectItem,
   SelectRoot,
@@ -33,7 +34,10 @@ const props = defineProps({
   isInlineLabel: Boolean,
   isFilterable: Boolean,
   isAsynchronousSearch: Boolean,
-  isDisabled: Boolean,
+  isDisabled:{
+    type:Boolean,
+    default:false
+  },
   isReadonly: Boolean,
   isCheckboxes: Boolean,
   isSelectAll: Boolean,
@@ -149,8 +153,19 @@ const localValueOption = computed(() => {
 })
 
 const isSelectedAll = computed(() => {
-  if (props.multiple) {
-    return props.modelValue?.length && props.modelValue?.length === filterableOptions.value.length
+  if (props.multiple && props.modelValue?.length) {
+    // Get total count of all available options (including grouped ones)
+    let totalOptionsCount = 0
+    
+    for (const option of filterableOptions.value) {
+      if (option.values) {
+        totalOptionsCount += option.values.length
+      } else {
+        totalOptionsCount += 1
+      }
+    }
+    
+    return props.modelValue.length === totalOptionsCount
   }
   return false
 })
@@ -161,6 +176,11 @@ const selectedValues = computed({
 })
 
 const handleValueChange = (value) => {
+  // Don't handle the special select all value
+  if (value === '__select_all__') {
+    return
+  }
+  
   if (props.multiple) {
     const currentValues = props.modelValue || []
     let newValues
@@ -187,12 +207,31 @@ const removeOption = (value) => {
   emit('update:modelValue', newValues)
 }
 
-const selectAll = () => {
+const selectAll = (event) => {
+  // Prevent the default ComboboxItem selection behavior
+  event.preventDefault()
+  event.stopPropagation()
+  
   if (!props.isAsynchronousSearch) {
     if (isSelectedAll.value) {
       emit('update:modelValue', [])
     } else {
-      emit('update:modelValue', filterableOptions.value.map((o) => o.value))
+      // Handle both grouped and non-grouped options
+      const allValues = []
+      
+      for (const option of filterableOptions.value) {
+        if (option.values) {
+          // Grouped option - add all sub-option values
+          for (const subOption of option.values) {
+            allValues.push(subOption.value)
+          }
+        } else {
+          // Regular option - add its value
+          allValues.push(option.value)
+        }
+      }
+      
+      emit('update:modelValue', allValues)
     }
   }
 }
@@ -201,9 +240,14 @@ const handleOpenChange = (open) => {
   isOpen.value = open
   if (open) {
     emit('toggle')
-    nextTick(() => {
-      searchInputRef.value?.focus()
-    })
+    console.log('Should focus first option now...');
+    // Only focus search input if filterable and there are multiple options
+    // Let Reka UI handle focus for the first option otherwise
+    if (props.isFilterable && filterableOptions.value.length > 0) {
+      nextTick(() => {
+        searchInputRef.value?.focus()
+      })
+    }
   } else {
     emit('close')
   }
@@ -308,7 +352,7 @@ watch(() => props.searchKeywords, (newValue) => {
       </ComboboxTrigger>
 
       <ComboboxContent
-        class="bg-white border rounded-md shadow-lg max-h-60 overflow-y-auto z-50"
+        class="bg-white border rounded-md shadow-lg max-h-60 overflow-y-auto w-[var(--radix-combobox-trigger-width)] min-w-[var(--radix-combobox-trigger-width)]"
         :class="menuClasses"
         :side-offset="4"
       >
@@ -326,11 +370,13 @@ watch(() => props.searchKeywords, (newValue) => {
           />
         </div>
 
-        <div class="flex px-3 pb-3 flex-col gap-y-2 pt-3">
+        <!-- Add ComboboxViewport wrapper -->
+        <ComboboxViewport class="flex px-3 pb-3 flex-col gap-y-2 pt-3">
           <!-- Select All Option -->
           <ComboboxItem
             v-if="isCheckboxes && isSelectAll && filterableOptions.length"
             class="flex items-center gap-3 px-3 py-2 cursor-pointer hover:bg-oc-accent-1-50 data-[highlighted]:bg-oc-accent-1-50 data-[highlighted]:outline-none border-b border-oc-gray-200"            
+            
             :value="'__select_all__'"
             @select="selectAll"
           >
@@ -345,32 +391,65 @@ watch(() => props.searchKeywords, (newValue) => {
 
           <!-- Options -->
           <slot :f-options="filterableOptions" :select-option="handleValueChange">
-            <ComboboxItem
-              v-for="option in filterableOptions"
-              :key="option.value"
-              :value="option.value"
-              :disabled="option.isDisabled"
-              class="flex items-center gap-3 px-3 py-2 cursor-pointer hover:bg-oc-accent-1-50 data-[highlighted]:bg-oc-accent-1-50 data-[highlighted]:outline-none"              
-              @select="handleValueChange(option.value)"
-            >
-              <!--Orchid Checkbox -->
-              <Checkbox
-                v-if="isCheckboxes"
-                :model-value="modelValue?.includes(option.value)"
-                class="!w-fit pointer-events-none"
-              />
-              <div class="flex flex-col flex-1">
-                <span>{{ option.label }}</span>
-                <span v-if="option.subLabel" class="text-sm text-oc-text-300">
-                  {{ option.subLabel }}
-                </span>
-              </div>
-              <Icon 
-                v-if="modelValue?.includes(option.value) && !isCheckboxes" 
-                class="w-5 h-5 text-oc-primary" 
-                name="check-2" 
-              />
-            </ComboboxItem>
+            <template v-for="option in filterableOptions">
+              <template v-if="option.isGroup && Array.isArray(option.value)">
+                <div class="px-3 py-2 text-xs font-semibold text-oc-text-400 select-none cursor-default">
+                  {{ option.label }}
+                </div>
+                <ComboboxItem
+                  v-for="subOption in option.value"
+                  :key="subOption.value"
+                  :value="subOption.value"
+                  :disabled="subOption.isDisabled"
+                  class="flex items-center gap-3 px-6 py-2 cursor-pointer hover:bg-oc-accent-1-50 data-[highlighted]:bg-oc-accent-1-50 data-[highlighted]:outline-none"
+                  @select="handleValueChange(subOption.value)"
+                >
+                  <Checkbox
+                    v-if="isCheckboxes"
+                    :model-value="modelValue?.includes(subOption.value)"
+                    class="!w-fit pointer-events-none"
+                  />
+                  <div class="flex flex-col flex-1">
+                    <span>{{ subOption.label }}</span>
+                    <span v-if="subOption.subLabel" class="text-sm text-oc-text-300">
+                      {{ subOption.subLabel }}
+                    </span>
+                  </div>
+                  <Icon 
+                    v-if="modelValue?.includes(subOption.value) && !isCheckboxes" 
+                    class="w-5 h-5 text-oc-primary" 
+                    name="check-2" 
+                  />
+                </ComboboxItem>
+              </template>
+              <template v-else>
+                <ComboboxItem
+                  :key="option.value"
+                  :value="option.value"
+                  :disabled="option.isDisabled"
+                  class="flex items-center gap-3 px-4 py-2 cursor-pointer rounded-lg transition-colors duration-150
+                    hover:bg-oc-accent-1-50 focus-visible:ring-2 focus-visible:ring-oc-primary
+                    data-[highlighted]:bg-oc-accent-1-50 data-[highlighted]:outline-none
+                    group"
+                  @select="handleValueChange(option.value)"
+                >
+                  <Checkbox
+                    v-if="isCheckboxes"
+                    :model-value="modelValue?.includes(option.value)"
+                    class="!w-5 !h-5 pointer-events-none"
+                  />
+                  <div class="flex flex-col flex-1 min-w-0">
+                    <span class="truncate font-medium text-oc-text-900 group-data-[highlighted]:text-oc-primary">{{ option.label }}</span>
+                    <span v-if="option.subLabel" class="text-xs text-oc-text-300 truncate">{{ option.subLabel }}</span>
+                  </div>
+                  <Icon 
+                    v-if="modelValue?.includes(option.value) && !isCheckboxes" 
+                    class="w-5 h-5 text-oc-primary" 
+                    name="check-2" 
+                  />
+                </ComboboxItem>
+              </template>
+            </template>
           </slot>
 
           <!-- No results -->
@@ -385,19 +464,19 @@ watch(() => props.searchKeywords, (newValue) => {
             v-if="isLoading"
             class="h-[20px] rounded-sm mt-2"
           />
-        </div>
+        </ComboboxViewport>
 
         <!-- Add New Button -->
         <Button
           v-if="isAddNew"
           variant="secondary"
-          class="flex items-center py-2 justify-center gap-x-[6px] sticky bottom-0 bg-white z-10"
+          class="flex items-center py-2 px-5 justify-center gap-x-2 sticky bottom-0 bg-white z-10 rounded-b-xl border-t border-oc-gray-100 shadow-[0_-2px_8px_0_rgba(0,0,0,0.04)] hover:bg-oc-accent-1-25 focus-visible:ring-2 focus-visible:ring-oc-primary transition-colors duration-150"
           size="small"
           is-transparent
           @click="$emit('addNew')"
         >
           <Icon class="w-5 h-5" name="plus" />
-          Add new
+          <span class="font-semibold text-oc-primary tracking-wide">Add new</span>
         </Button>
       </ComboboxContent>
     </ComboboxRoot>
@@ -408,6 +487,7 @@ watch(() => props.searchKeywords, (newValue) => {
       :model-value="modelValue"
       :open="isOpen"
       :disabled="isDisabled || isReadonly"
+      :dir="'ltr'"
       @update:model-value="handleValueChange"
       @update:open="handleOpenChange"
     >
@@ -469,14 +549,18 @@ watch(() => props.searchKeywords, (newValue) => {
       </SelectTrigger>
 
       <SelectContent
-        class="bg-white border rounded-md shadow-lg max-h-60 overflow-y-auto z-50"
+        class="bg-white border border-[#E5E6EA] rounded-lg shadow-[0_3px_22px_rgba(38,42,50,0.09)] max-h-[454px] overflow-y-auto min-w-[300px] w-[300px] p-2 gap-1"
         :class="menuClasses"
         :side-offset="4"
+        :avoid-collisions="false"
+        side="bottom"
+        align="start"
+        :position="'popper'"
       >
         <!--  Orchid Input -->
         <div
           v-if="isFilterable && (!isInlineSearch || localValueOption)"
-          class="sticky px-3 pt-3 top-0 z-10 bg-white"
+          class="sticky px-2 pt-2 top-0 z-10 bg-white"
         >
           <Input
             ref="searchInputRef"
@@ -484,58 +568,67 @@ watch(() => props.searchKeywords, (newValue) => {
             icon="search"
             :placeholder="inlineSearchPlaceholder"
             @update:model-value="handleSearch"
+            input-class="h-9 px-2 border border-[#E5E6EA] rounded-lg shadow-[0_1px_3px_rgba(0,0,0,0.04),0_1.5px_1.5px_rgba(0,0,0,0.09)] text-[14px] font-inter text-[#9295A5]"
           />
         </div>
 
-        <div class="flex px-3 pb-3 flex-col gap-y-2 pt-3">
+        <div class="flex flex-col gap-1 pb-2">
           <!-- Options -->
           <slot :f-options="filterableOptions" :select-option="handleValueChange">
-            <SelectItem
-              v-for="option in filterableOptions"
-              :key="option.value"
-              :value="option.value"
-              :disabled="option.isDisabled"
-              class="flex items-center gap-3 px-3 py-2 cursor-pointer hover:bg-oc-accent-1-50 data-[highlighted]:bg-oc-accent-1-50 data-[highlighted]:outline-none"
-            >
-              <div class="flex flex-col flex-1">
-                <span>{{ option.label }}</span>
-                <span v-if="option.subLabel" class="text-sm text-oc-text-300">
-                  {{ option.subLabel }}
-                </span>
-              </div>
-              <Icon 
-                v-if="modelValue === option.value" 
-                class="w-5 h-5 text-oc-primary" 
-                name="check-2" 
-              />
-            </SelectItem>
+            <template v-for="option in filterableOptions">
+              <template v-if="option.isGroup && Array.isArray(option.value)">
+                <div class="px-2 pt-2 pb-1 text-[10px] font-medium uppercase tracking-wide text-[#03102F] font-inter">{{ option.label }}</div>
+                <SelectItem
+                  v-for="subOption in option.value"
+                  :key="subOption.value"
+                  :value="subOption.value"
+                  :disabled="subOption.isDisabled"
+                  class="flex flex-row items-center px-2 py-2 gap-2 w-[284px] h-[37px] rounded-md text-[14px] font-inter text-[#61667C] hover:bg-[#F5F7FB] focus-visible:ring-2 focus-visible:ring-[#2465DE] transition-colors duration-100"
+                  :class="{ 'opacity-50 !hover:bg-white !cursor-default !pointer-events-none': subOption.isDisabled }"
+                >
+                  <div class="flex flex-1 items-center min-w-0">
+                    <span class="truncate">{{ subOption.label }}</span>
+                  </div>
+                  <Icon 
+                    v-if="modelValue === subOption.value" 
+                    class="w-5 h-5 text-[#2465DE]" 
+                    name="check-2" 
+                  />
+                </SelectItem>
+              </template>
+              <template v-else>
+                <SelectItem
+                  :key="option.value"
+                  :value="option.value"
+                  :disabled="option.isDisabled"
+                  class="flex flex-row items-center px-2 py-2 gap-2 w-[284px] h-[37px] rounded-md text-[14px] font-inter text-[#61667C] hover:bg-[#F5F7FB] focus-visible:ring-2 focus-visible:ring-[#2465DE] transition-colors duration-100"
+                  :class="{ 'opacity-50 !hover:bg-white !cursor-default !pointer-events-none': option.isDisabled }"
+                >
+                  <div class="flex flex-1 items-center min-w-0">
+                    <span class="truncate">{{ option.label }}</span>
+                  </div>
+                  <Icon 
+                    v-if="modelValue === option.value" 
+                    class="w-5 h-5 text-[#2465DE]" 
+                    name="check-2" 
+                  />
+                </SelectItem>
+              </template>
+            </template>
           </slot>
-
-          <!-- No results -->
-          <slot name="empty">
-            <div v-if="!filterableOptions.length" class="text-sm text-oc-text-300 text-center py-4">
-              No data to display
-            </div>
-          </slot>
-
-          <!-- Loading skeleton -->
-          <Skeleton
-            v-if="isLoading"
-            class="h-[20px] rounded-sm mt-2"
-          />
         </div>
 
         <!-- Add New Button -->
         <Button
           v-if="isAddNew"
           variant="secondary"
-          class="flex items-center py-2 justify-center gap-x-[6px] sticky bottom-0 bg-white z-10"
+          class="flex items-center py-2 px-5 justify-center gap-x-2 sticky bottom-0 bg-white z-10 rounded-b-xl border-t border-oc-gray-100 shadow-[0_-2px_8px_0_rgba(0,0,0,0.04)] hover:bg-oc-accent-1-25 focus-visible:ring-2 focus-visible:ring-oc-primary transition-colors duration-150"
           size="small"
           is-transparent
           @click="$emit('addNew')"
         >
           <Icon class="w-5 h-5" name="plus" />
-          Add new
+          <span class="font-semibold text-oc-primary tracking-wide">Add new</span>
         </Button>
       </SelectContent>
     </SelectRoot>

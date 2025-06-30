@@ -7,6 +7,32 @@ export default {
   title: 'Components/Form/UiSelect'
 }
 
+const commonDefaults = {
+  isDisabled: false,
+  isReadonly: false,
+  isRequired: false,
+  isInlineLabel: false,
+  isFilterable: false,
+  isAsynchronousSearch: false,
+  isCheckboxes: false,
+  isSelectAll: false,
+  isAddNew: false,
+  isTransparent: false,
+  isSlim: false,
+  isInlineSearch: false,
+  isClearable: false,
+  isLoading: false,
+  hideChevron: false,
+  maxVisibleOptions: 0,
+  labelIcon: '',
+  tooltipText: '',
+  tooltipOptions: {},
+  chipProps: {},
+  searchKeywords: '',
+  menuClasses: '',
+  dropdownClasses: ''
+}
+
 export const Default = {
   argTypes: {
     labelIcon: {
@@ -15,12 +41,11 @@ export const Default = {
     }
   },
   args: {
+    ...commonDefaults,
     label: 'Label',
     hint: 'Hint',
     placeholder: 'Select an option',
-    isInlineLabel: false,
     errorMessage: '',
-    isLoading: false,
     options: [
       {
         label: 'Option 1',
@@ -55,15 +80,8 @@ export const Default = {
     ],
     isFilterable: true,
     isInlineSearch: true,
-    isAsynchronousSearch: false,
     isAddNew: true,
-    isDisabled: false,
     isRequired: false,
-    isCheckboxes: false,
-    isSelectAll: false,
-    isTransparent: false,
-    isSlim: false,
-    labelIcon: '',
     isClearable: true,
     tooltipText: 'Tooltip text',
     tooltipOptions: {
@@ -97,6 +115,7 @@ export const Default = {
 
 export const Multiple = {
   args: {
+    ...commonDefaults,
     label: 'Multiple Selection',
     hint: 'You can select multiple options',
     placeholder: 'Select options',
@@ -104,7 +123,7 @@ export const Multiple = {
     isCheckboxes: true,
     isSelectAll: true,
     isFilterable: true,
-    maxSelectedOptions: 3,
+    maxOptionAllowed: 3,
     options: [
       {
         label: 'Option 1',
@@ -152,7 +171,7 @@ export const Multiple = {
           <UiSelect
             v-model="selectedOptions"
             v-bind="args"
-            @max-options-exceeded="setExceedMaxOption"
+            @max-option-allowed-set="setExceedMaxOption"
             @cleared="selectedOptions = []"
             @on-search-keywords="(query) => console.log('Search:', query)"
             @load-more="() => console.log('load-more')"
@@ -166,6 +185,7 @@ export const Multiple = {
 
 export const WithGroups = {
   args: {
+    ...commonDefaults,
     label: 'Grouped Options',
     hint: 'Options organized in groups',
     placeholder: 'Select from groups',
@@ -174,7 +194,7 @@ export const WithGroups = {
       {
         label: 'Fruits',
         isGroup: true,
-        options: [
+        value: [
           { label: 'Apple', value: 'apple' },
           { label: 'Banana', value: 'banana' },
           { label: 'Cherry', value: 'cherry' }
@@ -183,7 +203,7 @@ export const WithGroups = {
       {
         label: 'Vegetables',
         isGroup: true,
-        options: [
+        value: [
           { label: 'Carrot', value: 'carrot' },
           { label: 'Broccoli', value: 'broccoli' },
           { label: 'Spinach', value: 'spinach' }
@@ -214,12 +234,12 @@ export const WithGroups = {
 
 export const AsyncSearch = {
   args: {
+    ...commonDefaults,
     label: 'Async Search',
     hint: 'Search will trigger API call',
     placeholder: 'Type to search...',
     isFilterable: true,
     isAsynchronousSearch: true,
-    isLoading: false,
     options: []
   },
   render: (args) => ({
@@ -270,6 +290,7 @@ export const AsyncSearch = {
 
 export const WithAddNew = {
   args: {
+    ...commonDefaults,
     label: 'Add New Option',
     hint: 'You can add new options if not found',
     placeholder: 'Select or add new',
@@ -318,6 +339,7 @@ export const WithAddNew = {
 
 export const ErrorState = {
   args: {
+    ...commonDefaults,
     label: 'Select with Error',
     hint: 'This field has an error',
     placeholder: 'Select an option',
@@ -352,6 +374,7 @@ export const ErrorState = {
 
 export const Disabled = {
   args: {
+    ...commonDefaults,
     label: 'Disabled Select',
     hint: 'This select is disabled',
     placeholder: 'Cannot select',
