@@ -8,18 +8,27 @@
     <table ref="tableRef" class="w-full text-left text-[13px] border-oc-gray-200" style="table-layout: fixed;">
     <thead>
       <tr>
+        <th v-if="isSelectable" class="p-0 bg-oc-gray-50 border-r border-oc-gray-200">
+          <div           
+            class="flex p-3 items-center min-h-[35px] border-b border-oc-text-200" 
+          >
+            <Checkbox class="items-center" :model-value="selectedRows.length === fields.length" @update:model-value="selectAllRows"/>
+          </div>
+        </th>
+
         <th 
           v-for="(header, index) in headers" 
           :key="header.key" 
-          class="p-0 bg-oc-gray-50 cursor-pointer"
-          :class="[isScrolledToLeft && !index ? 'shadow-left' : '', getStickyClasses(header, header.key, true)]"
+          class="p-0 bg-oc-gray-50"
+          :class="[isScrolledToLeft && !index ? 'shadow-left' : '', header.headerClass, getStickyClasses(header, header.key, true), header.key === 'actions' ? 'cursor-default' : 'cursor-pointer']"
           @click="handleSort(header.key, $event)"
         >
           <div           
-            class="px-5 py-3 font-medium text-xs border-b border-oc-text-200 uppercase flex items-center gap-2 justify-between w-full" 
+            class="px-5 py-3 truncate min-h-[34px] font-medium text-xs border-b border-oc-text-200 uppercase flex items-center gap-2 justify-between w-full" 
           >
             {{  header.label }}
             <Icon 
+              v-if="header.key !== 'actions'"
               name="arrow-down" 
               width="14" 
               height="14" 
@@ -35,7 +44,14 @@
     </thead>
 
     <tbody>
-      <tr v-for="(row, index) in sortedFields" :key="index" class="group">
+      <tr v-for="(row, index) in sortedFields" :key="index" class="group/row">
+        <td v-if="isSelectable" class="p-0 bg-oc-bg-light border-r border-oc-gray-200" :class="index !== sortedFields.length - 1 ? 'border-b' : ''">
+          <div           
+            class="flex p-3 items-center min-h-[35px]" 
+          >
+            <Checkbox class="items-center" :model-value="selectedRows.includes(row)" @update:model-value="selectRow(row)"/>
+          </div>
+        </td>
         <td
           v-for="(header, headerIndex) in headers"
           :key="header.key + index"
@@ -53,7 +69,7 @@
               <div class="truncate"> {{ row[header.key] || 'N/A' }}</div>
             </slot>
 
-             <CopyTooltip v-if="header.isCopy" :value="row[header.key]" class="opacity-0 group-hover:opacity-100" />
+             <CopyTooltip v-if="header.isCopy && row[header.key]" :value="row[header.key]" class="opacity-0 group-hover/row:opacity-100" />
           </div>
         </td>
       </tr>
@@ -66,19 +82,40 @@
 
 <script setup>
 import { computed, ref, onMounted, onUnmounted, nextTick, watch } from 'vue';
-import { Icon, CopyTooltip } from '@/orchidui-core'
+import { Icon, CopyTooltip, Checkbox } from '@/orchidui-core'
 
 const props = defineProps({
   options: {
     type: Object,
     required: true
   },
+  rowKey: {
+    type: [String, Function],
+    default: 'id'
+  },
+  selected: {
+    type: Array,
+    default: () => []
+  }
 })
 
-const fields = computed(() => props.options.fields)
-const headers = computed(() => props.options.headers)
-const isSticky = computed(() => props.options.isSticky)
+const emit = defineEmits(['update:selected'])
 
+const fields = computed(() => props.options?.fields ?? [])
+const headers = computed(() => props.options?.headers ?? [])
+const isSticky = computed(() => props.options?.isSticky ?? false)
+const isSelectable = computed(() => props.options?.isSelectable ?? false)
+const getRowKey = computed(() =>
+  typeof props.rowKey === 'function' ? props.rowKey : (row) => row[props.rowKey]
+)
+const selectedRows = computed({
+  get() {
+    return props.selected || []
+  },
+  set(rows) {
+    emit('update:selected', rows)
+  }
+})
 // Sorting state
 const sortKey = ref(null)
 const sortDirection = ref('desc') // 'asc' or 'desc'
@@ -112,7 +149,11 @@ const sortedFields = computed(() => {
   return sorted
 })
 
-// Add at the top of <script setup>
+const COLUMN_WIDTH = {
+  DEFAULT: 175,
+  ACTIONS: 32,
+}
+
 let isDragging = false
 let suppressClick = false
 
@@ -143,7 +184,6 @@ const createDiv = (height, columnElement) => {
   // Check if resize handle already exists for this column
   const existingHandle = columnElement.querySelector('div[style*="cursor: col-resize"]')
   if (existingHandle) {
-    console.log('Resize handle already exists for this column, skipping creation')
     return null
   }
   
@@ -157,7 +197,6 @@ const createDiv = (height, columnElement) => {
   div.style.userSelect = 'none'
   div.style.height = height + 'px'
   div.style.borderRight = '1px solid var(--oc-gray-200)'
-  console.log('div', div)
   return div
 }
 
@@ -177,15 +216,11 @@ const getStyleVal = (elm, css) => {
 
 const setListeners = (div) => {
   div.addEventListener('mousedown', function (e) {
-    console.log('Mouse down on resize handle')
     e.preventDefault()
     e.stopPropagation()
     
     curCol = e.target.parentElement
     nxtCol = curCol.nextElementSibling
-    
-    console.log('curCol', curCol)
-    console.log('nxtCol', nxtCol)
     
     const table = tableRef.value
     const scrollLeft = table ? table.scrollLeft : 0
@@ -199,7 +234,6 @@ const setListeners = (div) => {
       nxtColWidth = nxtCol.offsetWidth - padding
     }
     
-    console.log('Resize started:', { curColWidth, nxtColWidth, pageX })
   })
 
   // Prevent header click (sort) when clicking the resize handle
@@ -269,24 +303,33 @@ const clearResizeHandles = (table) => {
 }
 
 const resizableGrid = (table) => {
-  console.log('Initializing resizable grid')
   const row = table.getElementsByTagName('tr')[0]
   const cols = row ? row.children : undefined
   if (!cols) {
-    console.log('No columns found')
     return
   }
-  
-  console.log('Found columns:', cols.length)
-  
+    
   const tableHeight = table.offsetHeight
   const tableWidth = table.offsetWidth
-  const colWidth = Math.max(175, Math.floor(tableWidth / cols.length)) // Minimum 150px
-  
+  const colWidth = Math.max(COLUMN_WIDTH.DEFAULT, Math.floor(tableWidth / cols.length)) // Minimum DEFAULT px
+
   for (let i = 0; i < cols.length; i++) {
+    // If this is the selectable column, set width/minWidth to 32px and skip the rest
+    if (isSelectable.value && i === 0) {
+      cols[i].style.width = '32px';
+      cols[i].style.minWidth = '32px';
+      continue;
+    }
+    // Get the header for this column (headers is offset by 1 if isSelectable)
+    const header = isSelectable.value ? headers.value[i - 1] : headers.value[i];
+    // Set min width based on key
+    const minWidth = header && header.key === 'actions' ? COLUMN_WIDTH.ACTIONS : COLUMN_WIDTH.DEFAULT
+
     // Set initial width for each column
-    cols[i].style.width = colWidth + 'px'
-    cols[i].style.minWidth = '175px' // Set minimum width to 150px
+    if (header && header.key !== 'actions') {
+      cols[i].style.width = colWidth + 'px'
+    }
+    cols[i].style.minWidth = minWidth + 'px'
     
     // Skip adding resize handle to the last column
     if (i < cols.length - 1) {
@@ -301,7 +344,6 @@ const resizableGrid = (table) => {
         }
         
         setListeners(div)
-        console.log('Added resize handle to column', i)
       }
     }
   }
@@ -322,12 +364,10 @@ onMounted(async () => {
   // Add a small delay to ensure table is fully rendered
   setTimeout(() => {
     if (tableRef.value) {
-      console.log('Table ref found, initializing resize') // Debug
       resizableGrid(tableRef.value)
       scrollContainerRef.value.addEventListener('scroll', handleScroll)
       handleScroll()
     } else {
-      console.log('Table ref not found') // Debug
     }
   }, 100)
   
@@ -365,6 +405,24 @@ const getStickyClasses = (header, headerKey, isHeader = false) => {
   }
   
   return classes.join(' ')
+}
+
+const selectRow = (row) => {
+  const selectingRow = selectedRows.value.find((r) => getRowKey.value(r) === getRowKey.value(row))
+
+  if (selectingRow) {
+    selectedRows.value = selectedRows.value.filter(
+      (r) => getRowKey.value(r) !== getRowKey.value(row)
+    )
+  } else {
+    selectedRows.value = [...selectedRows.value, row]
+  }
+}
+
+const selectAllRows = () => {
+  const allRowsSelected = selectedRows.value.length === fields.value.length
+
+  selectedRows.value = allRowsSelected ? [] : [...fields.value]
 }
 </script>
 

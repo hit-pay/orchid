@@ -1,5 +1,6 @@
 import { NewTable, Chip } from '@/orchidui-core'
 import dayjs from 'dayjs'
+import { ref } from 'vue'
 
 export default {
   component: NewTable,
@@ -38,6 +39,11 @@ export const Default = {
         {
           key: 'status',
           label: 'Status'
+        },
+        {
+          key: 'actions',
+          label: '',
+          headerClass: 'w-[100px]'
         }
       ],
       fields: [
@@ -62,6 +68,7 @@ export const Default = {
           status: 'neutral'
         }
       ],
+      isSelectable: true,
     }
   },
   render: (args) => ({
@@ -71,13 +78,16 @@ export const Default = {
     },
     setup() {
       const options = args.options
+      const selectedRows = ref([])
       return {
         options,
+        selectedRows,
         dayjs
       }
     },
     template: `
-      <NewTable :options="options">
+      {{ selectedRows }}
+      <NewTable v-model:selected="selectedRows" :options="options">
         <template #date="{ item }">
           <div class="truncate">
             {{ dayjs(item.date).format('YYYY-MM-DD HH:mm:ss') }}
@@ -91,6 +101,9 @@ export const Default = {
         </template>
         <template #status="{ item }">
           <Chip :variant="item.status" label="Some label" class="truncate" />
+        </template>
+        <template #actions="{ item }">
+           Actions
         </template>
       </NewTable>
     `
