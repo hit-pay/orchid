@@ -143,7 +143,6 @@ const createDiv = (height, columnElement) => {
   // Check if resize handle already exists for this column
   const existingHandle = columnElement.querySelector('div[style*="cursor: col-resize"]')
   if (existingHandle) {
-    console.log('Resize handle already exists for this column, skipping creation')
     return null
   }
   
@@ -157,7 +156,6 @@ const createDiv = (height, columnElement) => {
   div.style.userSelect = 'none'
   div.style.height = height + 'px'
   div.style.borderRight = '1px solid var(--oc-gray-200)'
-  console.log('div', div)
   return div
 }
 
@@ -177,15 +175,11 @@ const getStyleVal = (elm, css) => {
 
 const setListeners = (div) => {
   div.addEventListener('mousedown', function (e) {
-    console.log('Mouse down on resize handle')
     e.preventDefault()
     e.stopPropagation()
     
     curCol = e.target.parentElement
     nxtCol = curCol.nextElementSibling
-    
-    console.log('curCol', curCol)
-    console.log('nxtCol', nxtCol)
     
     const table = tableRef.value
     const scrollLeft = table ? table.scrollLeft : 0
@@ -199,7 +193,6 @@ const setListeners = (div) => {
       nxtColWidth = nxtCol.offsetWidth - padding
     }
     
-    console.log('Resize started:', { curColWidth, nxtColWidth, pageX })
   })
 
   // Prevent header click (sort) when clicking the resize handle
@@ -269,16 +262,12 @@ const clearResizeHandles = (table) => {
 }
 
 const resizableGrid = (table) => {
-  console.log('Initializing resizable grid')
   const row = table.getElementsByTagName('tr')[0]
   const cols = row ? row.children : undefined
   if (!cols) {
-    console.log('No columns found')
     return
   }
-  
-  console.log('Found columns:', cols.length)
-  
+    
   const tableHeight = table.offsetHeight
   const tableWidth = table.offsetWidth
   const colWidth = Math.max(175, Math.floor(tableWidth / cols.length)) // Minimum 150px
@@ -301,7 +290,6 @@ const resizableGrid = (table) => {
         }
         
         setListeners(div)
-        console.log('Added resize handle to column', i)
       }
     }
   }
@@ -322,12 +310,10 @@ onMounted(async () => {
   // Add a small delay to ensure table is fully rendered
   setTimeout(() => {
     if (tableRef.value) {
-      console.log('Table ref found, initializing resize') // Debug
       resizableGrid(tableRef.value)
       scrollContainerRef.value.addEventListener('scroll', handleScroll)
       handleScroll()
     } else {
-      console.log('Table ref not found') // Debug
     }
   }, 100)
   
