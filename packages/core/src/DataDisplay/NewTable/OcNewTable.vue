@@ -112,7 +112,11 @@ const sortedFields = computed(() => {
   return sorted
 })
 
-// Add at the top of <script setup>
+const COLUMN_WIDTH = {
+  DEFAULT: 175,
+  ACTIONS: 32,
+}
+
 let isDragging = false
 let suppressClick = false
 
@@ -270,12 +274,17 @@ const resizableGrid = (table) => {
     
   const tableHeight = table.offsetHeight
   const tableWidth = table.offsetWidth
-  const colWidth = Math.max(175, Math.floor(tableWidth / cols.length)) // Minimum 150px
-  
+  const colWidth = Math.max(COLUMN_WIDTH.DEFAULT, Math.floor(tableWidth / cols.length)) // Minimum DEFAULT px
+
   for (let i = 0; i < cols.length; i++) {
+    // Get the header for this column
+    const header = headers.value[i]
+    // Set min width based on key
+    const minWidth = header && header.key === 'actions' ? COLUMN_WIDTH.ACTIONS : COLUMN_WIDTH.DEFAULT
+
     // Set initial width for each column
     cols[i].style.width = colWidth + 'px'
-    cols[i].style.minWidth = '175px' // Set minimum width to 150px
+    cols[i].style.minWidth = minWidth + 'px'
     
     // Skip adding resize handle to the last column
     if (i < cols.length - 1) {
