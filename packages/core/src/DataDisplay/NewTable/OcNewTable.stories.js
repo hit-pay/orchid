@@ -38,6 +38,10 @@ export const Default = {
         {
           key: 'status',
           label: 'Status'
+        },
+        {
+          key: 'actions',
+          label: '',
         }
       ],
       fields: [

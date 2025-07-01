@@ -20,6 +20,7 @@
           >
             {{  header.label }}
             <Icon 
+              v-if="header.key !== 'actions'"
               name="arrow-down" 
               width="14" 
               height="14" 
