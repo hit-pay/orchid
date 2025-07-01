@@ -16,7 +16,7 @@
           @click="handleSort(header.key, $event)"
         >
           <div           
-            class="px-5 py-3 font-medium text-xs border-b border-oc-text-200 uppercase flex items-center gap-2 justify-between w-full" 
+            class="px-5 py-3 truncate font-medium text-xs border-b border-oc-text-200 uppercase flex items-center gap-2 justify-between w-full" 
           >
             {{  header.label }}
             <Icon 
