@@ -35,7 +35,7 @@
     </thead>
 
     <tbody>
-      <tr v-for="(row, index) in sortedFields" :key="index" class="group">
+      <tr v-for="(row, index) in sortedFields" :key="index" class="group/row">
         <td
           v-for="(header, headerIndex) in headers"
           :key="header.key + index"
@@ -53,7 +53,7 @@
               <div class="truncate"> {{ row[header.key] || 'N/A' }}</div>
             </slot>
 
-             <CopyTooltip v-if="header.isCopy" :value="row[header.key]" class="opacity-0 group-hover:opacity-100" />
+             <CopyTooltip v-if="header.isCopy" :value="row[header.key]" class="opacity-0 group-hover/row:opacity-100" />
           </div>
         </td>
       </tr>
