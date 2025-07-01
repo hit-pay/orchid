@@ -11,8 +11,8 @@
         <th 
           v-for="(header, index) in headers" 
           :key="header.key" 
-          class="p-0 bg-oc-gray-50 cursor-pointer "
-          :class="[isScrolledToLeft && !index ? 'shadow-left' : '', getStickyClasses(header, header.key, true)]"
+          class="p-0 bg-oc-gray-50 "
+          :class="[isScrolledToLeft && !index ? 'shadow-left' : '', getStickyClasses(header, header.key, true), header.key === 'actions' ? 'cursor-default' : 'cursor-pointer']"
           @click="handleSort(header.key, $event)"
         >
           <div           
