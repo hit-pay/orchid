@@ -49,7 +49,7 @@
           <div           
             class="flex p-3 items-center min-h-[35px]" 
           >
-            <Checkbox class="items-center" :model-value="selectedRows.includes(row)" @update:model-value="selectRow(row)"/>
+            <Checkbox class="items-center" :model-value="selectedRows.some((r) => getRowKey(r) === getRowKey(field))" @update:model-value="selectRow(row)"/>
           </div>
         </td>
         <td
