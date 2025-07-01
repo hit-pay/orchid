@@ -11,8 +11,8 @@
         <th 
           v-for="(header, index) in headers" 
           :key="header.key" 
-          class="p-0 bg-oc-gray-50 "
-          :class="[isScrolledToLeft && !index ? 'shadow-left' : '', getStickyClasses(header, header.key, true), header.key === 'actions' ? 'cursor-default' : 'cursor-pointer']"
+          class="p-0 bg-oc-gray-50"
+          :class="[isScrolledToLeft && !index ? 'shadow-left' : '',header.headerClass, getStickyClasses(header, header.key, true), header.key === 'actions' ? 'cursor-default' : 'cursor-pointer']"
           @click="handleSort(header.key, $event)"
         >
           <div           
@@ -284,7 +284,9 @@ const resizableGrid = (table) => {
     const minWidth = header && header.key === 'actions' ? COLUMN_WIDTH.ACTIONS : COLUMN_WIDTH.DEFAULT
 
     // Set initial width for each column
-    cols[i].style.width = colWidth + 'px'
+    if (header && header.key !== 'actions') {
+      cols[i].style.width = colWidth + 'px'
+    } 
     cols[i].style.minWidth = minWidth + 'px'
     
     // Skip adding resize handle to the last column

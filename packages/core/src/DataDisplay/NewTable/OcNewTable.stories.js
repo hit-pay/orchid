@@ -42,6 +42,7 @@ export const Default = {
         {
           key: 'actions',
           label: '',
+          headerClass: 'w-[100px]'
         }
       ],
       fields: [
@@ -95,6 +96,9 @@ export const Default = {
         </template>
         <template #status="{ item }">
           <Chip :variant="item.status" label="Some label" class="truncate" />
+        </template>
+        <template #actions="{ item }">
+           Actions
         </template>
       </NewTable>
     `
