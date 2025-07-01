@@ -54,7 +54,7 @@
               <div class="truncate"> {{ row[header.key] || 'N/A' }}</div>
             </slot>
 
-             <CopyTooltip v-if="header.isCopy" :value="row[header.key]" class="opacity-0 group-hover/row:opacity-100" />
+             <CopyTooltip v-if="header.isCopy && row[header.key]" :value="row[header.key]" class="opacity-0 group-hover/row:opacity-100" />
           </div>
         </td>
       </tr>
