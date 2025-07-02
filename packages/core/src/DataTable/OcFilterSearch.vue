@@ -74,9 +74,8 @@ const changeSearchKey = (value) => {
           </Dropdown>
         </template>
 
-        <template #leading>
+        <template v-if="isSearchOnly" #leading>
           <Button
-            v-if="isSearchOnly"
             label="Search"
             variant="secondary"
             class="shrink-0"
