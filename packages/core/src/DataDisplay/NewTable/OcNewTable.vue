@@ -26,6 +26,7 @@
         >
           <div           
             class="px-5 py-3 truncate min-h-[34px] font-medium text-xs border-b border-oc-text-200 uppercase flex items-center gap-2 justify-between w-full" 
+            :class="{ 'h-[inherit]': header.key === 'actions' }"
           >
             {{  header.label }}
             <Icon 
