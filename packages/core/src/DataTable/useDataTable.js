@@ -224,7 +224,12 @@ export function useDataTable(initialData) {
   // ===== Database Operations =====
   const bulkPutLocalData = async (newData) => {
     if (db) {
-      await db.table(dbTablename.value).bulkPut(newData)
+      // Delete existing data based on IDs in newData, then add new data
+      const idsToDelete = newData.map((item) => item.id).filter((id) => id !== undefined)
+      if (idsToDelete.length > 0) {
+        await db.table(dbTablename.value).bulkDelete(idsToDelete)
+      }
+      await db.table(dbTablename.value).bulkAdd(newData)
     }
     await syncLocalData()
   }
