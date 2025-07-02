@@ -5,7 +5,7 @@
       <slot name="before" />
     </div>
   
-  <div class="w-full overflow-auto" ref="scrollContainerRef">
+  <div class="w-full" :class="{'overflow-auto': !isLoading}" ref="scrollContainerRef">
     <table ref="tableRef" class="w-full text-left text-[13px] border-oc-gray-200" style="table-layout: fixed;">
     <thead>
       <tr>
@@ -21,11 +21,12 @@
           v-for="(header, index) in headers" 
           :key="header.key" 
           class="p-0 bg-oc-gray-50"
-          :class="[isScrolledToLeft && !index ? 'shadow-left' : '', header.headerClass, getStickyClasses(header, header.key, true), header.key === 'actions' ? 'cursor-default' : 'cursor-pointer']"
+          :class="[isScrolledToLeft && !index ? 'shadow-left' : '', header.headerClass, getStickyClasses(header, header.key, true), header.key === 'actions' ? 'cursor-default' : 'cursor-pointer', isLoading ? 'pointer-events-none' : '']"
           @click="handleSort(header.key, $event)"
         >
           <div           
             class="px-5 py-3 truncate min-h-[34px] font-medium text-xs border-b border-oc-text-200 uppercase flex items-center gap-2 justify-between w-full" 
+            :class="{ 'h-[inherit]': header.key === 'actions' }"
           >
             {{  header.label }}
             <Icon 
@@ -44,13 +45,13 @@
       </tr>
     </thead>
 
-    <tbody>
-      <tr v-for="(row, index) in sortedFields" :key="index" class="group/row">
+    <tbody v-if="!isLoading">
+      <tr v-for="(row, index) in sortedFields" :key="index" class="group/row" @click="$emit('click:row', row)">
         <td v-if="isSelectable" class="p-0 bg-oc-bg-light border-r border-oc-gray-200 sticky left-0 z-20" :class="index !== sortedFields.length - 1 ? 'border-b' : ''">
           <div           
             class="flex p-3 items-center min-h-[35px]" 
           >
-            <Checkbox class="items-center" :model-value="selectedRows.some((r) => getRowKey(r) === getRowKey(field))" @update:model-value="selectRow(row)"/>
+            <Checkbox class="items-center" :model-value="selectedRows.some((r) => getRowKey(r) === getRowKey(row))" @update:model-value="selectRow(row)"/>
           </div>
         </td>
         <td
@@ -75,6 +76,16 @@
         </td>
       </tr>
     </tbody>
+
+    <tbody v-else>
+      <tr v-for="i in loadingRows" :key="i">
+        <td v-for="j in headers.length" :key="j" class="p-0 bg-oc-bg-light">
+          <div class="px-5 py-3" :class="{ 'border-b border-oc-gray-200': i !== loadingRows }">
+            <Skeleton class="w-full h-6 rounded" />
+          </div>
+        </td>
+      </tr>
+    </tbody>
     
   </table>
   <slot v-if="!fields.length" name="empty" />
@@ -88,7 +99,7 @@
 
 <script setup>
 import { computed, ref, onMounted, onUnmounted, nextTick, watch } from 'vue';
-import { Icon, CopyTooltip, Checkbox } from '@/orchidui-core'
+import { Icon, CopyTooltip, Checkbox, Skeleton } from '@/orchidui-core'
 
 const props = defineProps({
   options: {
@@ -102,15 +113,23 @@ const props = defineProps({
   selected: {
     type: Array,
     default: () => []
+  },
+  isLoading: {
+    type: Boolean,
+    default: false
+  },
+  loadingRows: {
+    type: Number,
+    default: 10
   }
 })
 
-const emit = defineEmits(['update:selected'])
+const emit = defineEmits(['update:selected', 'row-click'])
 
 const fields = computed(() => props.options?.fields ?? [])
 const headers = computed(() => props.options?.headers ?? [])
-const isSticky = computed(() => props.options?.isSticky ?? false)
-const isSelectable = computed(() => props.options?.isSelectable ?? false)
+const isSticky = computed(() => (props.options?.isSticky && !props.isLoading) ?? false)
+const isSelectable = computed(() => (props.options?.isSelectable && !props.isLoading) ?? false)
 const getRowKey = computed(() =>
   typeof props.rowKey === 'function' ? props.rowKey : (row) => row[props.rowKey]
 )
@@ -187,12 +206,12 @@ let nxtColWidth = null
 const isScrolledToLeft = ref(true)
 
 const createDiv = (height, columnElement) => {
-  // Check if resize handle already exists for this column
-  const existingHandle = columnElement.querySelector('div[style*="cursor: col-resize"]')
+  // Remove any existing resize handle with data-resize-handle="true"
+  const existingHandle = columnElement.querySelector('div[data-resize-handle="true"]')
   if (existingHandle) {
-    return null
+    columnElement.removeChild(existingHandle)
   }
-  
+
   const div = document.createElement('div')
   div.classList.add('shadow-line')
   div.style.top = '0'
@@ -203,6 +222,7 @@ const createDiv = (height, columnElement) => {
   div.style.userSelect = 'none'
   div.style.height = height + 'px'
   div.style.borderRight = '1px solid var(--oc-gray-200)'
+  div.setAttribute('data-resize-handle', 'true')
   return div
 }
 
@@ -314,7 +334,7 @@ const resizableGrid = (table) => {
   if (!cols) {
     return
   }
-    
+      
   const tableHeight = table.offsetHeight
   const tableWidth = table.offsetWidth
   const colWidth = Math.max(COLUMN_WIDTH.DEFAULT, Math.floor(tableWidth / cols.length)) // Minimum DEFAULT px
@@ -430,6 +450,13 @@ const selectAllRows = () => {
 
   selectedRows.value = allRowsSelected ? [] : [...fields.value]
 }
+
+watch(() => fields.value.length, async () => {
+  await nextTick()
+  if(tableRef.value) {
+    resizableGrid(tableRef.value)
+  }
+})
 </script>
 
 <style>
