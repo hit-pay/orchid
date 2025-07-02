@@ -47,7 +47,8 @@ const changeSearchKey = (value) => {
         v-model="query"
         placeholder="Search something here"
         class="md:min-w-[310px]"
-        input-class="!h-[28px]"
+        :has-leading-separator="!isSearchOnly"
+        :input-class="!isSearchOnly ? '!h-[28px]' : '!pr-2'"
         :icon="searchOptions?.length ? '' : 'search'"
         @keyup.enter="$emit('addQuery', query)"
       >
@@ -72,21 +73,25 @@ const changeSearchKey = (value) => {
             </template>
           </Dropdown>
         </template>
+
+        <template #leading>
+          <Button
+            v-if="isSearchOnly"
+            label="Search"
+            variant="secondary"
+            class="shrink-0"
+            size="small"
+            @click="() => {
+              $emit('addQuery', query)
+              query = ''
+            }"
+          />
+        </template>
       </Input>
 
-      <Button
-        v-if="isSearchOnly"
-        label="Search"
-        variant="secondary"
-        class="shrink-0"
-        size="small"
-        @click="() => {
-          $emit('addQuery', query)
-          query = ''
-        }"
-      />
+     
       <span
-        v-else
+       v-if="!isSearchOnly"
         class="text-base cursor-pointer flex normal-case items-center font-medium text-oc-text-400"
         @click="() => {
           isSearchOpen = false
