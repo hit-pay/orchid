@@ -24,7 +24,10 @@ export function useDataTable(initialData) {
   // ===== Filter & Sort Operations =====
   const filterOptions = computed(() => {
     const filteredColumns = {}
-    const includeKeys = filterableFields ?? []
+    let includeKeys = filterableFields ?? []
+    if (searchableFields?.length) {
+      includeKeys = [...includeKeys, ...searchableFields, 'keywords']
+    }
 
     Object.entries(filterData.value).forEach(([key, value]) => {
       if (includeKeys.includes(key) && value !== undefined && value !== null && value !== '') {
@@ -46,7 +49,6 @@ export function useDataTable(initialData) {
   })
 
   const createQuery = async () => {
-    // Ambil semua data dulu
     let query = await db.table(dbTablename.value).toArray()
 
     // Apply filters
@@ -191,7 +193,7 @@ export function useDataTable(initialData) {
     }
 
     debounceTimer = setTimeout(async () => {
-      const result = await createQuery() // result adalah array
+      const result = await createQuery()
 
       // Apply pagination manual di array
       const offset = (parseInt(filterData.value.page) - 1) * parseInt(filterData.value.per_page)
@@ -254,10 +256,14 @@ export function useDataTable(initialData) {
     }
   }
 
-  const getLocalDataIds = async () => {
+  const getProductIdAndLastUpdatedAt = async () => {
     if (db) {
-      const data = await db.table(dbTablename.value).toCollection().primaryKeys()
-      return data
+      const data = await db.table(dbTablename.value).toCollection().toArray()
+
+      return data.map((item) => ({
+        id: item.id,
+        updated_at: item.updated_at
+      }))
     }
   }
 
@@ -274,7 +280,7 @@ export function useDataTable(initialData) {
     bulkPutLocalData,
     bulkDeleteLocalData,
     getLocalDataUpdatedAt,
-    getLocalDataIds,
+    getProductIdAndLastUpdatedAt,
     syncLocalData,
 
     // Setters
