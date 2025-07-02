@@ -1,4 +1,5 @@
 <template>
+<div>
   <div class="border border-oc-gray-200 rounded-lg overflow-hidden">
     <div v-if="$slots.before" class="border-b border-oc-gray-200">
       <slot name="before" />
@@ -76,8 +77,13 @@
     </tbody>
     
   </table>
+  <slot v-if="!fields.length" name="empty" />
+
   </div>
 </div>
+<slot name="after" />
+
+  </div>
 </template>
 
 <script setup>
