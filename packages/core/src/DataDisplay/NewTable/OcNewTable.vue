@@ -453,9 +453,7 @@ const selectAllRows = () => {
 watch(() => fields.value.length, async () => {
   await nextTick()
   if(tableRef.value) {
-    setTimeout(() => {
-      resizableGrid(tableRef.value)
-    }, 100)
+    resizableGrid(tableRef.value)
   }
 })
 </script>

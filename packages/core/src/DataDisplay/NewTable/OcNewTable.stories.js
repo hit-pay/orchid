@@ -86,7 +86,7 @@ export const Default = {
             status: 'neutral'
           }
         ]
-        // isLoading.value = false
+        isLoading.value = false
       }, 1000)
 
       return {
