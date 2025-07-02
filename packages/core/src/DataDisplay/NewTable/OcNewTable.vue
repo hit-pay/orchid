@@ -46,7 +46,7 @@
     </thead>
 
     <tbody v-if="!isLoading">
-      <tr v-for="(row, index) in sortedFields" :key="index" class="group/row" @click="$emit('click:row', row)">
+      <tr v-for="(row, index) in sortedFields" :key="index" class="group/row" @click="$emit('click:row', { field: row, header: headers[index] })">
         <td v-if="isSelectable" class="p-0 bg-oc-bg-light border-r border-oc-gray-200 sticky left-0 z-20" :class="index !== sortedFields.length - 1 ? 'border-b' : ''">
           <div           
             class="flex p-3 items-center min-h-[35px]" 
@@ -124,7 +124,7 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['update:selected', 'row-click'])
+const emit = defineEmits(['update:selected', 'click:row'])
 
 const fields = computed(() => props.options?.fields ?? [])
 const headers = computed(() => props.options?.headers ?? [])
