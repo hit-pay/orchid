@@ -9,8 +9,8 @@
     <table ref="tableRef" class="w-full text-left text-[13px] border-oc-gray-200" style="table-layout: fixed;">
     <thead>
       <tr>
-        <th v-if="isSelectable" class="p-0 bg-oc-gray-50 border-r border-oc-gray-200">
-          <div           
+        <th v-if="isSelectable" class="p-0 bg-oc-gray-50 border-r border-oc-gray-200 sticky left-0 z-30">
+          <div
             class="flex p-3 items-center min-h-[35px] border-b border-oc-text-200" 
           >
             <Checkbox class="items-center" :model-value="selectedRows.length === fields.length" @update:model-value="selectAllRows"/>
@@ -46,7 +46,7 @@
 
     <tbody>
       <tr v-for="(row, index) in sortedFields" :key="index" class="group/row">
-        <td v-if="isSelectable" class="p-0 bg-oc-bg-light border-r border-oc-gray-200" :class="index !== sortedFields.length - 1 ? 'border-b' : ''">
+        <td v-if="isSelectable" class="p-0 bg-oc-bg-light border-r border-oc-gray-200 sticky left-0 z-20" :class="index !== sortedFields.length - 1 ? 'border-b' : ''">
           <div           
             class="flex p-3 items-center min-h-[35px]" 
           >
@@ -407,7 +407,7 @@ const getStickyClasses = (header, headerKey, isHeader = false) => {
   
   // Only sticky left - first column or explicit stickyLeft
   if (indexOfHeader === 0 || header.stickyLeft) {
-    classes.push(`sticky left-0 ${isHeader ? 'z-30' : 'z-20'}`)
+    classes.push(`!sticky ${isSelectable.value ? 'left-8' : 'left-0'} ${isHeader ? 'z-30' : 'z-20'}`)
   }
   
   return classes.join(' ')

@@ -14,7 +14,8 @@ export const Default = {
         {
           key: 'date',
           label: 'Date',
-          class: 'font-reddit-mono'
+          class: 'font-reddit-mono',
+          stickyLeft: true
         },
         {
           key: 'email',
@@ -69,6 +70,7 @@ export const Default = {
         }
       ],
       isSelectable: true,
+      isSticky: true
     }
   },
   render: (args) => ({
