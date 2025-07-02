@@ -23,15 +23,9 @@ import {
   formatHeadersFromLocalStorage
 } from './utils/editColumnsUtils.js'
 
-import {
-  formatFilterDisplay,
-  clearAllFilters as clearAllFiltersUtil
-} from './utils/filterUtils.js'
+import { formatFilterDisplay, clearAllFilters as clearAllFiltersUtil } from './utils/filterUtils.js'
 
-import {
-  getItemsPerPageOptions,
-  formatCustomItemsPerPageOptions
-} from './utils/paginationUtils.js'
+import { getItemsPerPageOptions, formatCustomItemsPerPageOptions } from './utils/paginationUtils.js'
 
 const props = defineProps({
   isLoading: Boolean,
@@ -85,8 +79,6 @@ const emit = defineEmits({
   'update:sort-by': []
 })
 
-
-
 const cursorOption = computed(() => props.options?.cursor)
 const tableHeaders = ref()
 
@@ -94,50 +86,60 @@ const tableOptions = computed(() => props.options?.tableOptions)
 
 const isLocalData = computed(() => props.localDb !== undefined)
 const {
-    localData,
-    paginationData,
-    isLoading: isLocalDataLoading,
-    
-    // Methods
-    bulkPutLocalData,
-    bulkDeleteLocalData,  
-    getLocalDataUpdatedAt,
-    getLocalDataIds,
-    syncLocalData,
-    sortByData,
+  localData,
+  paginationData,
+  isLoading: isLocalDataLoading,
 
-    // Setters
-    setFilter,
-    setSortBy,
+  // Methods
+  bulkPutLocalData,
+  bulkDeleteLocalData,
+  getLocalDataUpdatedAt,
+  getLocalDataIds,
+  syncLocalData,
+  sortByData,
+
+  // Setters
+  setFilter,
+  setSortBy
 } = useDataTable({
   name: props.localDb?.table_name ?? null,
   db: props.localDb?.db ?? null,
-  filterable_fields: props.options?.filterable_fields,
-  sortable_fields: props.options?.sortable_fields,
+  filterableFields: props.options?.filterableFields,
+  sortableFields: props.options?.sortableFields,
+  searchableFields: props.options?.searchableFields
 })
 
-watch(() => props.options?.pagination, (newVal) => {
-  if(!isLocalData.value) {
-    paginationData.value = newVal
-  }
-}, { deep: true, immediate: true })
-
-if(isLocalData.value) {
-
-  watch(() => props.filter, () => {
-    if(props.filter) {
-      setFilter(props.filter)
+watch(
+  () => props.options?.pagination,
+  (newVal) => {
+    if (!isLocalData.value) {
+      paginationData.value = newVal
     }
-  }, { deep: true, immediate: true })
+  },
+  { deep: true, immediate: true }
+)
 
-  watch(() => props.sortBy, () => {
-    if(props.sortBy) {
-      setSortBy(props.sortBy)
-    }
-  }, { deep: true, immediate: true })
+if (isLocalData.value) {
+  watch(
+    () => props.filter,
+    () => {
+      if (props.filter) {
+        setFilter(props.filter)
+      }
+    },
+    { deep: true, immediate: true }
+  )
 
+  watch(
+    () => props.sortBy,
+    () => {
+      if (props.sortBy) {
+        setSortBy(props.sortBy)
+      }
+    },
+    { deep: true, immediate: true }
+  )
 }
-
 
 const processedTableOptions = computed(() => {
   const newTableOptions = {
@@ -145,14 +147,15 @@ const processedTableOptions = computed(() => {
     headers: tableHeaders.value
       ? tableHeaders.value
           .map((header) => {
-            header.class = tableOptions.value?.headers.find((h) => h.key === header.key)?.class ?? ''
+            header.class =
+              tableOptions.value?.headers.find((h) => h.key === header.key)?.class ?? ''
             return header
           })
           .filter((h) => h.isActive)
       : tableOptions.value?.headers.filter((h) => isColumnActive(h.key))
   }
-  if(isLocalData.value) {
-      newTableOptions.fields = localData.value
+  if (!newTableOptions.fields?.length) {
+    newTableOptions.fields = localData.value
   }
   return newTableOptions
 })
@@ -187,7 +190,10 @@ const hasSelectedItems = computed(() => {
 })
 
 const addSearchQuery = (query) => {
-  if (!query.trim() || (!filterData.value.selectedSearchOption && searchQueries.value.includes(query)))
+  if (
+    !query.trim() ||
+    (!filterData.value.selectedSearchOption && searchQueries.value.includes(query))
+  )
     return
   searchQueries.value = [query]
   applyFilter()
@@ -253,7 +259,12 @@ const changeSearchKey = (value) => {
 const clearAllFilters = () => {
   searchQueries.value = []
   activeFilterTab.value = ''
-  filterData.value = clearAllFiltersUtil(filterData.value, filterOptions.value, itemsPerPage.value, activeFilterTab.value)
+  filterData.value = clearAllFiltersUtil(
+    filterData.value,
+    filterOptions.value,
+    itemsPerPage.value,
+    activeFilterTab.value
+  )
   applyFilter()
 }
 
@@ -347,7 +358,6 @@ onMounted(() => {
   })
 })
 
-
 const tableIsLoading = computed(() => {
   // TODO: add loading variant first row for syncLocalData
   return props.isLoading || isLocalDataLoading.value
@@ -358,14 +368,14 @@ defineExpose({
   paginationData,
   tableIsLoading,
   bulkPutLocalData,
-  bulkDeleteLocalData,  
+  bulkDeleteLocalData,
   getLocalDataUpdatedAt,
   getLocalDataIds,
   syncLocalData,
-  sortByData,
+  sortByData
 })
 
-const handleUpdateSortBy = ({key, value}) => {
+const handleUpdateSortBy = ({ key, value }) => {
   // remove other sort by to null
   Object.keys(sortByData.value).forEach((currentKey) => {
     if (currentKey !== key) {
@@ -375,11 +385,11 @@ const handleUpdateSortBy = ({key, value}) => {
   sortByData.value[key] = value
   emit('update:sort-by', sortByData.value)
 }
-
 </script>
 <template>
   <div class="relative flex flex-col gap-9">
-    <component :is="isNewTable ? NewTable : Table"
+    <component
+      :is="isNewTable ? NewTable : Table"
       v-if="processedTableOptions"
       :selected="selected"
       :row-key="rowKey"
@@ -447,7 +457,14 @@ const handleUpdateSortBy = ({key, value}) => {
                 is-attach-to-body
                 @update:model-value="$emit('filter-open', $event)"
               >
-                <Button :is-active="isFilterDropdownOpen" variant="secondary" left-icon="filter" size="small" class="w-8" iconClass="shrink-0" />
+                <Button
+                  :is-active="isFilterDropdownOpen"
+                  variant="secondary"
+                  left-icon="filter"
+                  size="small"
+                  class="w-8"
+                  icon-class="shrink-0"
+                />
 
                 <template #menu>
                   <FilterForm
@@ -512,7 +529,6 @@ const handleUpdateSortBy = ({key, value}) => {
         <slot name="table-body" v-bind="slotProps"></slot>
       </template>
     </component>
-
 
     <slot name="before-pagination"></slot>
     <div
