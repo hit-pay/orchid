@@ -94,7 +94,7 @@ const {
   bulkPutLocalData,
   bulkDeleteLocalData,
   getLocalDataUpdatedAt,
-  getLocalDataIds,
+  getProductIdAndLastUpdatedAt,
   syncLocalData,
   sortByData,
 
@@ -370,7 +370,7 @@ defineExpose({
   bulkPutLocalData,
   bulkDeleteLocalData,
   getLocalDataUpdatedAt,
-  getLocalDataIds,
+  getProductIdAndLastUpdatedAt,
   syncLocalData,
   sortByData
 })

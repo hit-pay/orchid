@@ -956,7 +956,7 @@ export const Default = {
 
       const getLatestData = async () => {
         const latestUpdatedAt = await tableRef.value?.getLocalDataUpdatedAt()
-        const localIds = await tableRef.value?.getLocalDataIds()
+        const localIds = await tableRef.value?.getProductIdAndLastUpdatedAt()
         console.log('latestUpdatedAt', latestUpdatedAt, 'localIds', localIds)
       }
       const onTableReady = () => {
