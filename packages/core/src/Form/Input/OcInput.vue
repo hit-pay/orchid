@@ -156,7 +156,7 @@ const isPasswordInput = computed(() => props.inputType === 'password')
       :class="inputClasses"
       @click="$refs.inputRef?.focus()"
     >
-      <div v-if="$slots.trailing" class="border-r py-2 border-gray-200 pr-3 flex items-center h-[inherit]" :class="trailingClass">
+      <div v-if="$slots.trailing" class="border-r py-2 border-gray-200 pr-3 flex items-center h-full" :class="trailingClass">
         <slot name="trailing" />
       </div>
 
@@ -177,7 +177,7 @@ const isPasswordInput = computed(() => props.inputType === 'password')
             :disabled="disabled"
             :autocomplete="autocomplete"
             :inputmode="inputMode"
-            class="h-7 outline-none md:text-base text-lg w-full text-oc-text disabled:bg-transparent disabled:text-oc-text-300 text-ellipsis placeholder:font-normal placeholder:text-oc-text-300 bg-oc-bg-light"
+            class="h-7 outline-none md:text-base text-lg w-full text-oc-text bg-transparent disabled:text-oc-text-300 text-ellipsis placeholder:font-normal placeholder:text-oc-text-300"
             v-bind="inputAttrs"
             :type="isPasswordInput && isPasswordVisible ? 'text' : inputType"
             @focus="

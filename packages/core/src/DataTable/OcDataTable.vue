@@ -173,7 +173,7 @@ const itemsPerPage = ref(
     ? props.filter[filterOptions.value?.per_page?.key]
     : props.filter.per_page
 )
-const defaultSearchQuery = props.filter[filterOptions.value?.search?.key]?.trim() ?? ''
+const defaultSearchQuery = props.filter[props.filter.selectedSearchOption || filterOptions.value?.search?.key]?.trim() ?? ''
 const searchQueries = ref(defaultSearchQuery ? defaultSearchQuery.split(',') : [])
 const isSearchExpanded = ref(false)
 

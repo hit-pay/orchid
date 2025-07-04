@@ -14,7 +14,8 @@ export const Default = {
         {
           key: 'date',
           label: 'Date',
-          class: 'font-reddit-mono'
+          class: 'font-reddit-mono',
+          stickyLeft: true
         },
         {
           key: 'email',
@@ -46,29 +47,9 @@ export const Default = {
           headerClass: 'w-[100px]'
         }
       ],
-      fields: [
-        {
-          date: new Date(),
-          email: 'john.doe@example.com',
-          id: `#${crypto.randomUUID()}`,
-          amount: '2,234.56',
-          currency: 'SGD',
-          payment_method: 'visa',
-          last4Digits: '1234',
-          status: 'success'
-        },
-        {
-          date: new Date(),
-          email: 'test.doe@example.com',
-          id: `#${crypto.randomUUID()}`,
-          amount: '1,234.56',
-          currency: 'SGD',
-          payment_method: 'visa',
-          last4Digits: '3214',
-          status: 'neutral'
-        }
-      ],
+      fields: [],
       isSelectable: true,
+      isSticky: true
     }
   },
   render: (args) => ({
@@ -79,15 +60,45 @@ export const Default = {
     setup() {
       const options = args.options
       const selectedRows = ref([])
+
+      const isLoading = ref(true)
+
+      setTimeout(() => {
+        options.fields = [
+          {
+            date: new Date(),
+            email: 'john.doe@example.com',
+            id: `#${crypto.randomUUID()}`,
+            amount: '2,234.56',
+            currency: 'SGD',
+            payment_method: 'visa',
+            last4Digits: '1234',
+            status: 'success'
+          },
+          {
+            date: new Date(),
+            email: 'test.doe@example.com',
+            id: `#${crypto.randomUUID()}`,
+            amount: '1,234.56',
+            currency: 'SGD',
+            payment_method: 'visa',
+            last4Digits: '3214',
+            status: 'neutral'
+          }
+        ]
+        isLoading.value = false
+      }, 1000)
+
       return {
         options,
         selectedRows,
-        dayjs
+        dayjs,
+        isLoading
       }
     },
     template: `
       {{ selectedRows }}
-      <NewTable v-model:selected="selectedRows" :options="options">
+      <NewTable v-model:selected="selectedRows" :options="options" :is-loading="isLoading">
         <template #date="{ item }">
           <div class="truncate">
             {{ dayjs(item.date).format('YYYY-MM-DD HH:mm:ss') }}
