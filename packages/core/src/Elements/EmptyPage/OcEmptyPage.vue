@@ -48,6 +48,10 @@ defineProps({
   hideBadge: {
     type: Boolean,
     default: false
+  },
+  docsButton: {
+    type: Object,
+    default: () => null
   }
 })
 
@@ -132,11 +136,21 @@ const sizes = computed(() => ({
         }}</span>
       </slot>
     </div>
-    <Button
-      v-if="isButton"
-      :label="isUpgrade ? upgradeLabel : addButtonLabel"
-      :left-icon="isUpgrade ? '' : addButtonIcon"
-      @click="$emit('click:Button')"
-    />
+    <div v-if="isButton" class="flex items-center gap-x-2">
+      <Button
+        v-if="docsButton"
+         label="Docs Button"
+         variant="secondary"
+         size="small"
+         v-bind="docsButton"
+      />
+
+      <Button
+        :label="isUpgrade ? upgradeLabel : addButtonLabel"
+        :left-icon="isUpgrade ? '' : addButtonIcon"
+        size="small"
+        @click="$emit('click:Button')"
+      />
+    </div>
   </div>
 </template>

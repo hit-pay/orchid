@@ -48,8 +48,9 @@ export const Default = {
         }
       ],
       fields: [],
-      isSelectable: true,
-      isSticky: true
+      isSelectable: false,
+      isSticky: true,
+      isExpand:true,
     }
   },
   render: (args) => ({
@@ -73,7 +74,19 @@ export const Default = {
             currency: 'SGD',
             payment_method: 'visa',
             last4Digits: '1234',
-            status: 'success'
+            status: 'success',
+            children: [
+              {
+                date: new Date(),
+                email: 'john.doe@example.com',
+                id: `#${crypto.randomUUID()}`,
+                amount: '2,234.56',
+                currency: 'SGD',
+                payment_method: 'visa',
+                last4Digits: '1234',
+                status: 'success'
+              },
+            ]
           },
           {
             date: new Date(),
