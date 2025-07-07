@@ -8,7 +8,7 @@
           <div           
             class="flex justify-center items-center min-h-[35px]" 
           >
-            <Icon v-if="row?.children?.length" name="chevron-down" width="16" height="16" @click="isChildrenVisible = !isChildrenVisible" />
+            <Icon v-if="row?.children?.length" name="chevron-down" width="16" height="16" @click="toggleChildren" />
           </div>
         </td>
         <td 
@@ -55,7 +55,7 @@
           :key="getRowKey(childRow)"
           :row="childRow" 
           :headers="headers" 
-          :index="index + 1"
+          :index="index"
           :isExpand="isExpand"
           :isSelectable="isSelectable"
           isChild
@@ -119,5 +119,12 @@ defineProps({
   }
 })
 
+const emit = defineEmits(['toggleChildren'])
+
 const isChildrenVisible = ref(false)
+
+const toggleChildren = () => {
+  isChildrenVisible.value = !isChildrenVisible.value
+  emit('toggleChildren')
+}
 </script>

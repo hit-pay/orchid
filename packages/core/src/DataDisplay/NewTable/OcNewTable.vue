@@ -65,6 +65,7 @@
       :selectRow="selectRow"
       :getRowKey="getRowKey"
       :getStickyClasses="getStickyClasses"
+      @toggleChildren="recreateResizeHandles"
      />
     </tbody>
 
@@ -375,6 +376,12 @@ const handleScroll = () => {
   } else {
     isScrolledToLeft.value = false
   }
+}
+
+const recreateResizeHandles = async () => {
+  await nextTick()
+  clearResizeHandles(tableRef.value)
+  resizableGrid(tableRef.value)
 }
 
 onMounted(async () => {
