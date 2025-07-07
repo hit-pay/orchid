@@ -9,6 +9,12 @@
     <table ref="tableRef" class="w-full text-left text-[13px] border-oc-gray-200" style="table-layout: fixed;">
     <thead>
       <tr>
+        <th v-if="isExpand" class="p-0 bg-oc-gray-50 border-r border-oc-gray-200 sticky  left-0 z-30">
+          <div
+            class="flex p-3 items-center min-h-[35px] border-b border-oc-text-200" 
+          >
+          </div>
+        </th>
         <th v-if="isSelectable" class="p-0 bg-oc-gray-50 border-r border-oc-gray-200 sticky left-0 z-30">
           <div
             class="flex p-3 items-center min-h-[35px] border-b border-oc-text-200" 
@@ -46,35 +52,20 @@
     </thead>
 
     <tbody v-if="!isLoading">
-      <tr v-for="(row, index) in sortedFields" :key="index" class="group/row" @click="$emit('click:row', { field: row, header: headers[index] })">
-        <td v-if="isSelectable" class="p-0 bg-oc-bg-light border-r border-oc-gray-200 sticky left-0 z-20" :class="index !== sortedFields.length - 1 ? 'border-b' : ''">
-          <div           
-            class="flex p-3 items-center min-h-[35px]" 
-          >
-            <Checkbox class="items-center" :model-value="selectedRows.some((r) => getRowKey(r) === getRowKey(row))" @update:model-value="selectRow(row)"/>
-          </div>
-        </td>
-        <td
-          v-for="(header, headerIndex) in headers"
-          :key="header.key + index"
-          class="p-0 bg-oc-bg-light"
-          :class="[
-            { 'border-b border-oc-gray-200': index !== sortedFields.length - 1 },
-            getStickyClasses(header, header.key, false)
-          ]"
-        >
-          <div 
-            class="px-5 py-3 text-[13px] flex gap-2 items-center justify-between w-full" 
-            :class="header.class"
-          >
-            <slot :name="header.key" :item="row" :data="row[header.key]">
-              <div class="truncate"> {{ row[header.key] || 'N/A' }}</div>
-            </slot>
-
-             <CopyTooltip v-if="header.isCopy && row[header.key]" :value="row[header.key]" class="opacity-0 group-hover/row:opacity-100" />
-          </div>
-        </td>
-      </tr>
+     <OcTableRow
+      v-for="(row, index) in fields"
+      :key="getRowKey(row)"
+      :headers="headers"
+      :row="row"
+      :index="index"
+      :isExpand="isExpand"
+      :isSelectable="isSelectable"
+      :sortedFields="sortedFields"
+      :selectedRows="selectedRows"
+      :selectRow="selectRow"
+      :getRowKey="getRowKey"
+      :getStickyClasses="getStickyClasses"
+     />
     </tbody>
 
     <tbody v-else>
@@ -99,7 +90,8 @@
 
 <script setup>
 import { computed, ref, onMounted, onUnmounted, nextTick, watch } from 'vue';
-import { Icon, CopyTooltip, Checkbox, Skeleton } from '@/orchidui-core'
+import { Icon, Checkbox, Skeleton } from '@/orchidui-core'
+import OcTableRow from './OcTableRow.vue'
 
 const props = defineProps({
   options: {
@@ -130,6 +122,8 @@ const fields = computed(() => props.options?.fields ?? [])
 const headers = computed(() => props.options?.headers ?? [])
 const isSticky = computed(() => (props.options?.isSticky && !props.isLoading) ?? false)
 const isSelectable = computed(() => (props.options?.isSelectable && !props.isLoading) ?? false)
+const isExpand = computed(() => (props.options?.isExpand  && !props?.isLoading) ?? false)
+
 const getRowKey = computed(() =>
   typeof props.rowKey === 'function' ? props.rowKey : (row) => row[props.rowKey]
 )
@@ -341,13 +335,13 @@ const resizableGrid = (table) => {
 
   for (let i = 0; i < cols.length; i++) {
     // If this is the selectable column, set width/minWidth to 32px and skip the rest
-    if (isSelectable.value && i === 0) {
+    if ((isSelectable.value || isExpand.value) && i === 0) {
       cols[i].style.width = '32px';
       cols[i].style.minWidth = '32px';
       continue;
     }
     // Get the header for this column (headers is offset by 1 if isSelectable)
-    const header = isSelectable.value ? headers.value[i - 1] : headers.value[i];
+    const header = (isSelectable.value || isExpand.value) ? headers.value[i - 1] : headers.value[i];
     // Set min width based on key
     const minWidth = header && header.key === 'actions' ? COLUMN_WIDTH.ACTIONS : COLUMN_WIDTH.DEFAULT
 
@@ -427,7 +421,7 @@ const getStickyClasses = (header, headerKey, isHeader = false) => {
   
   // Only sticky left - first column or explicit stickyLeft
   if (indexOfHeader === 0 || header.stickyLeft) {
-    classes.push(`!sticky ${isSelectable.value ? 'left-8' : 'left-0'} ${isHeader ? 'z-30' : 'z-20'}`)
+    classes.push(`!sticky ${(isSelectable.value || isExpand.value) ? 'left-8' : 'left-0'} ${isHeader ? 'z-30' : 'z-20'}`)
   }
   
   return classes.join(' ')

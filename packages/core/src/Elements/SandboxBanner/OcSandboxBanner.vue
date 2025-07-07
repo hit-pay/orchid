@@ -9,6 +9,10 @@ defineProps({
   chipProps: {
     type: Object,
     default: () => null
+  },
+  buttonProps: {
+    type: Object,
+    default: () => null
   }
 })
 </script>
@@ -22,5 +26,7 @@ defineProps({
     </span>
 
     <Chip v-if="chipProps" class="absolute left-[40px]" v-bind="chipProps" />
+
+    <Button v-if="buttonProps" class="absolute right-[32px]" v-bind="buttonProps" />
   </div>
 </template>
