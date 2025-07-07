@@ -66,7 +66,11 @@
       :getRowKey="getRowKey"
       :getStickyClasses="getStickyClasses"
       @toggleChildren="recreateResizeHandles"
-     />
+     >
+      <template v-for="(_, name) in $slots" #[name]="slotData">
+        <slot :name="name" v-bind="slotData" />
+      </template>
+    </OcTableRow>
     </tbody>
 
     <tbody v-else>
