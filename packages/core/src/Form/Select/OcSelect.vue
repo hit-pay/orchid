@@ -150,7 +150,7 @@ const localValueOption = computed(() => {
     }
     return selected
   } else {
-    return props.options.find((o) => o.value.toString() === props.modelValue?.toString())
+    return props.options.find((o) => o.value?.toString() === props.modelValue?.toString())
   }
 })
 
@@ -337,11 +337,9 @@ defineExpose({
               :label="`+${localValueOption.length - maxVisibleOptions}`"
             />
           </slot>
-          <span
-            v-if="localValueOption.length === 0"
-            class="text-oc-text-300"
-            >{{ placeholder }}</span
-          >
+          <span v-if="localValueOption.length === 0" class="text-oc-text-300">{{
+            placeholder
+          }}</span>
         </div>
         <template v-if="isInlineSearch && isFilterable && !localValueOption">
           <Input
