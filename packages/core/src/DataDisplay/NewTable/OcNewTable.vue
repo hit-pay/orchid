@@ -67,9 +67,8 @@
       :selectRow="selectRow"
       :getRowKey="getRowKey"
       :getStickyClasses="getStickyClasses"
-      @toggleChildren="recreateResizeHandles"
-     >
-      <template v-for="(_, name) in $slots" #[name]="slotData">
+      @toggleChildren="recreateResizeHandles">
+      <template v-for="(name) in Object.keys($slots)" #[name]="slotData">
         <slot :name="name" v-bind="slotData" />
       </template>
     </OcTableRow>
@@ -125,10 +124,10 @@ const props = defineProps({
 
 const emit = defineEmits(['update:selected', 'click:row'])
 
-const fields = computed(() => props.options?.fields ?? [])
+const fields = computed(() => !props.isLoading ? props.options?.fields  : [])
 const headers = computed(() => props.options?.headers ?? [])
-const isSticky = computed(() => (props.options?.isSticky && !props.isLoading) ?? false)
-const isSelectable = computed(() => (props.options?.isSelectable && !props.isLoading) ?? false)
+const isSticky = computed(() => !props.isLoading ? props.options?.isSticky : false)
+const isSelectable = computed(() => !props.isLoading ? props.options?.isSelectable : false)
 const isExpand = computed(() => (props.options?.isExpand  && !props?.isLoading) ?? false)
 
 const getRowKey = computed(() =>
@@ -390,8 +389,10 @@ const handleScroll = () => {
 
 const recreateResizeHandles = async () => {
   await nextTick()
-  clearResizeHandles(tableRef.value)
-  resizableGrid(tableRef.value)
+  if(tableRef.value) {
+    clearResizeHandles(tableRef.value)
+    resizableGrid(tableRef.value)
+  }
 }
 
 onMounted(async () => {
@@ -418,14 +419,8 @@ onUnmounted(() => {
 })
 
 // Watch for header changes to reinitialize resize handles
-watch(headers, async () => {
-  await nextTick()
-  if (tableRef.value) {
-    // Clear existing resize handles
-    clearResizeHandles(tableRef.value)
-    // Reinitialize with new columns
-    resizableGrid(tableRef.value)
-  }
+watch(() => [headers.value, fields.value, props.isLoading], () => {
+  recreateResizeHandles()
 }, { deep: true })
 
 const getStickyClasses = (header, headerKey, isHeader = false) => {
@@ -471,13 +466,6 @@ const selectAllRows = () => {
 
   selectedRows.value = allRowsSelected ? [] : [...fields.value]
 }
-
-watch(() => fields.value.length, async () => {
-  await nextTick()
-  if(tableRef.value) {
-    resizableGrid(tableRef.value)
-  }
-})
 </script>
 
 <style>
