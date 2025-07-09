@@ -1,6 +1,7 @@
 <template>
    <tr class="group/row">
         <td v-if="isExpand" class="p-0 border-r border-oc-gray-200 sticky left-0 z-20" 
+        data-expand-column
         :class="[
           index !== sortedFields.length - 1 ? 'border-b' : '',
           isChild ? 'bg-oc-bg-dark' : 'bg-oc-bg-light'
@@ -13,11 +14,13 @@
         </td>
         <td 
           v-if="isSelectable" 
-          class="p-0 border-r border-oc-gray-200 sticky left-0 z-20" 
+          class="p-0 border-r border-oc-gray-200 sticky z-20" 
           :class="[
+            isExpand ? 'left-[31px]' : 'left-0',
             index !== sortedFields.length - 1 ? 'border-b' : '',
             isChild ? 'bg-oc-bg-dark' : 'bg-oc-bg-light'
           ]"
+          data-checkbox-column
         >
           <div           
             class="flex p-3 items-center min-h-[35px]" 
