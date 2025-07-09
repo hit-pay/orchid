@@ -55,7 +55,7 @@
 
     <tbody v-if="!isLoading">
      <OcTableRow
-      v-for="(row, index) in fields"
+      v-for="(row, index) in sortedFields"
       :key="getRowKey(row)"
       :headers="headers"
       :row="row"
@@ -141,6 +141,7 @@ const selectedRows = computed({
     emit('update:selected', rows)
   }
 })
+
 // Sorting state
 const sortKey = ref(null)
 const sortDirection = ref('desc') // 'asc' or 'desc'
@@ -350,8 +351,12 @@ const resizableGrid = (table) => {
       continue;
     }
     
-    // Get the header for this column (headers is offset by 1 if isSelectable)
-    const header = (isSelectable.value || isExpand.value) ? headers.value[i - 1] : headers.value[i];
+    // Get the header for this column (headers is offset by the number of utility columns)
+    let headerIndex = i;
+    if (isExpand.value) headerIndex--;
+    if (isSelectable.value) headerIndex--;
+    
+    const header = headers.value[headerIndex];
     // Set min width based on key
     const minWidth = header && header.key === 'actions' ? COLUMN_WIDTH.ACTIONS : COLUMN_WIDTH.DEFAULT
 
@@ -436,10 +441,10 @@ const getStickyClasses = (header, headerKey, isHeader = false) => {
     let leftPosition = 'left-0'
     
     if (isExpand.value && isSelectable.value) {
-      // Both expand and selectable: first data column should be at left-64 (32px + 32px)
+      // Both: first data column should be at left-62 (32px + 32px)
       leftPosition = 'left-[62px]'
     } else if (isExpand.value || isSelectable.value) {
-      // Only one of them: first data column should be at left-8 (32px)
+      // Only one of them: first data column should be at left-31 (32px)
       leftPosition = 'left-[31px]'
     }
     
