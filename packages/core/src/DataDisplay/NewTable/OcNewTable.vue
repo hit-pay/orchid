@@ -419,7 +419,7 @@ onUnmounted(() => {
 })
 
 // Watch for header changes to reinitialize resize handles
-watch(() => headers.value, () => {
+watch(() => [headers.value, fields.value], () => {
   recreateResizeHandles()
 }, { deep: true })
 
@@ -466,10 +466,6 @@ const selectAllRows = () => {
 
   selectedRows.value = allRowsSelected ? [] : [...fields.value]
 }
-
-watch(() => fields.value, () => {
-  recreateResizeHandles()
-}, { deep: true })
 </script>
 
 <style>
