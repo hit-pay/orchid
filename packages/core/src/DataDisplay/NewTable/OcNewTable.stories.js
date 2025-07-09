@@ -9,6 +9,8 @@ export default {
 
 export const Default = {
   args: {
+    isLoading: false,
+    loadingRows: 10,
     options:  {
       headers:  [
         {
@@ -62,8 +64,6 @@ export const Default = {
       const options = args.options
       const selectedRows = ref([])
 
-      const isLoading = ref(true)
-
       setTimeout(() => {
         options.fields = [
           {
@@ -99,21 +99,20 @@ export const Default = {
             status: 'neutral'
           }
         ]
-        isLoading.value = false
-      }, 1000)
+      }, 2000)
 
       return {
         options,
         selectedRows,
         dayjs,
-        isLoading
+        args,
       }
     },
     template: `
       {{ selectedRows }}
-      <NewTable v-model:selected="selectedRows" :options="options" :is-loading="isLoading">
+      <NewTable v-model:selected="selectedRows" :options="options" :loading-rows="10" :is-loading="args.isLoading">
         <template #date="{ item }">
-          <div class="truncate">
+          <div class="truncate h-[50px] bg-red-900">
             {{ dayjs(item.date).format('YYYY-MM-DD HH:mm:ss') }}
           </div>
         </template>
