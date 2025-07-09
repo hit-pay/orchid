@@ -48,7 +48,7 @@ export const Default = {
         }
       ],
       fields: [],
-      isSelectable: false,
+      isSelectable: true,
       isSticky: true,
       isExpand:true,
     }

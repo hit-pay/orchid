@@ -1,6 +1,7 @@
 <template>
    <tr class="group/row">
         <td v-if="isExpand" class="p-0 border-r border-oc-gray-200 sticky left-0 z-20" 
+        data-expand-column
         :class="[
           index !== sortedFields.length - 1 ? 'border-b' : '',
           isChild ? 'bg-oc-bg-dark' : 'bg-oc-bg-light'
@@ -8,16 +9,18 @@
           <div           
             class="flex justify-center items-center min-h-[35px]" 
           >
-            <Icon v-if="row?.children?.length" name="chevron-down" width="16" height="16" @click="isChildrenVisible = !isChildrenVisible" />
+            <Icon v-if="row?.children?.length" name="chevron-down" width="16" height="16" @click="toggleChildren" />
           </div>
         </td>
         <td 
           v-if="isSelectable" 
-          class="p-0 border-r border-oc-gray-200 sticky left-0 z-20" 
+          class="p-0 border-r border-oc-gray-200 sticky z-20" 
           :class="[
+            isExpand ? 'left-[31px]' : 'left-0',
             index !== sortedFields.length - 1 ? 'border-b' : '',
             isChild ? 'bg-oc-bg-dark' : 'bg-oc-bg-light'
           ]"
+          data-checkbox-column
         >
           <div           
             class="flex p-3 items-center min-h-[35px]" 
@@ -55,7 +58,7 @@
           :key="getRowKey(childRow)"
           :row="childRow" 
           :headers="headers" 
-          :index="index + 1"
+          :index="index"
           :isExpand="isExpand"
           :isSelectable="isSelectable"
           isChild
@@ -119,5 +122,12 @@ defineProps({
   }
 })
 
+const emit = defineEmits(['toggleChildren'])
+
 const isChildrenVisible = ref(false)
+
+const toggleChildren = () => {
+  isChildrenVisible.value = !isChildrenVisible.value
+  emit('toggleChildren')
+}
 </script>

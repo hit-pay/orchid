@@ -9,13 +9,15 @@
     <table ref="tableRef" class="w-full text-left text-[13px] border-oc-gray-200" style="table-layout: fixed;">
     <thead>
       <tr>
-        <th v-if="isExpand" class="p-0 bg-oc-gray-50 border-r border-oc-gray-200 sticky  left-0 z-30">
+        <th v-if="isExpand" class="p-0 bg-oc-gray-50 border-r border-oc-gray-200 sticky left-0 z-30" data-expand-column>
           <div
             class="flex p-3 items-center min-h-[35px] border-b border-oc-text-200" 
           >
           </div>
         </th>
-        <th v-if="isSelectable" class="p-0 bg-oc-gray-50 border-r border-oc-gray-200 sticky left-0 z-30">
+        <th v-if="isSelectable" class="p-0 bg-oc-gray-50 border-r border-oc-gray-200 sticky z-30" 
+            :class="isExpand ? 'left-[31px]' : 'left-0'" 
+            data-checkbox-column>
           <div
             class="flex p-3 items-center min-h-[35px] border-b border-oc-text-200" 
           >
@@ -65,7 +67,12 @@
       :selectRow="selectRow"
       :getRowKey="getRowKey"
       :getStickyClasses="getStickyClasses"
-     />
+      @toggleChildren="recreateResizeHandles"
+     >
+      <template v-for="(_, name) in $slots" #[name]="slotData">
+        <slot :name="name" v-bind="slotData" />
+      </template>
+    </OcTableRow>
     </tbody>
 
     <tbody v-else>
@@ -334,12 +341,16 @@ const resizableGrid = (table) => {
   const colWidth = Math.max(COLUMN_WIDTH.DEFAULT, Math.floor(tableWidth / cols.length)) // Minimum DEFAULT px
 
   for (let i = 0; i < cols.length; i++) {
-    // If this is the selectable column, set width/minWidth to 32px and skip the rest
-    if ((isSelectable.value || isExpand.value) && i === 0) {
+    // Check if this column has data-checkbox-column or data-expand-column attribute
+    const isCheckboxColumn = cols[i].hasAttribute('data-checkbox-column')
+    const isExpandColumn = cols[i].hasAttribute('data-expand-column')
+    
+    if (isCheckboxColumn || isExpandColumn) {
       cols[i].style.width = '32px';
       cols[i].style.minWidth = '32px';
       continue;
     }
+    
     // Get the header for this column (headers is offset by 1 if isSelectable)
     const header = (isSelectable.value || isExpand.value) ? headers.value[i - 1] : headers.value[i];
     // Set min width based on key
@@ -375,6 +386,12 @@ const handleScroll = () => {
   } else {
     isScrolledToLeft.value = false
   }
+}
+
+const recreateResizeHandles = async () => {
+  await nextTick()
+  clearResizeHandles(tableRef.value)
+  resizableGrid(tableRef.value)
 }
 
 onMounted(async () => {
@@ -418,10 +435,20 @@ const getStickyClasses = (header, headerKey, isHeader = false) => {
 
   const indexOfHeader = headers.value.findIndex(h => h.key === headerKey)
 
-  
   // Only sticky left - first column or explicit stickyLeft
   if (indexOfHeader === 0 || header.stickyLeft) {
-    classes.push(`!sticky ${(isSelectable.value || isExpand.value) ? 'left-8' : 'left-0'} ${isHeader ? 'z-30' : 'z-20'}`)
+    // Calculate the left position based on expand and selectable columns
+    let leftPosition = 'left-0'
+    
+    if (isExpand.value && isSelectable.value) {
+      // Both expand and selectable: first data column should be at left-64 (32px + 32px)
+      leftPosition = 'left-[62px]'
+    } else if (isExpand.value || isSelectable.value) {
+      // Only one of them: first data column should be at left-8 (32px)
+      leftPosition = 'left-[31px]'
+    }
+    
+    classes.push(`!sticky ${leftPosition} ${isHeader ? 'z-30' : 'z-20'}`)
   }
   
   return classes.join(' ')
