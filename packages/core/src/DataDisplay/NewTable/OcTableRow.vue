@@ -41,7 +41,7 @@
         >
           <div 
             class="px-5 py-3 text-[13px] flex gap-2 items-center justify-between w-full" 
-            :class="header.class"
+            :class="[header.class, getStyleVariants(header)]"
           >
             <slot :name="header.key" :item="row" :data="row[header.key]">
               <div class="truncate"> {{ row[header.key] || 'N/A' }}</div>
@@ -54,11 +54,12 @@
 
       <template v-if="row?.children?.length && isChildrenVisible">
         <OcTableRow
-          v-for="childRow in row.children" 
+          v-for="(childRow, childIndex) in row.children" 
           :key="getRowKey(childRow)"
           :row="childRow" 
           :headers="headers" 
-          :index="index"
+          :index="childIndex"
+          :parentRowKey="getRowKey(row)"
           :isExpand="isExpand"
           :isSelectable="isSelectable"
           isChild
@@ -72,10 +73,10 @@
 </template>
 
 <script setup>
-import { CopyTooltip, Icon, Checkbox, Skeleton } from '@/orchidui-core'
+import { CopyTooltip, Icon, Checkbox } from '@/orchidui-core'
 import { ref } from 'vue'
 
-defineProps({
+const props = defineProps({
   headers:{
     type: Array,
     default: () => []
@@ -106,11 +107,11 @@ defineProps({
   },
   getRowKey: {
     type: Function,
-    default: (row) => row.id
+    default: (row) => row?.id
   },
   selectRow: {
     type: Function,
-    default: (row) => row.id
+    default: (row) => row?.id
   },
   getStickyClasses: {
     type: Function,
@@ -119,10 +120,22 @@ defineProps({
   isChild: {
     type: Boolean,
     default: false
-  }
+  },
+  parentRowKey: {
+    type: [String, Number],
+    default: null
+  },
 })
 
 const emit = defineEmits(['toggleChildren'])
+
+const getStyleVariants = (header) => {
+  return {
+    'font-reddit-mono': header.variant === 'data',
+    'font-reddit-mono font-semibold': header.variant === 'amount',
+    'text-oc-text-400': header.variant === 'secondary',
+  }
+}
 
 const isChildrenVisible = ref(false)
 
