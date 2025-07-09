@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Chip } from '@/orchidui-core'
+import { Chip, Button } from '@/orchidui-core'
 
 defineProps({
   title: {
