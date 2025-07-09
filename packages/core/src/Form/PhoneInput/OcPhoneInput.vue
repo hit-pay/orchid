@@ -79,8 +79,11 @@ const scrollToSelectedCountry = () => {
       getCountryObject(selectedCountryIso.value)
     )
     const countryEl = countryListItemRef.value[indexSelectedCountry]
-    const top = countryEl.offsetTop
-    countryListRef.value.scrollTo(0, top - 60, { behavior: 'smooth' })
+
+    if (countryEl) {
+      const top = countryEl.offsetTop
+      countryListRef.value.scrollTo(0, top - 60, { behavior: 'smooth' })
+    }
   }, 10)
 }
 
