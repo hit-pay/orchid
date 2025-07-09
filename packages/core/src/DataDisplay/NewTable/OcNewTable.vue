@@ -419,7 +419,7 @@ onUnmounted(() => {
 })
 
 // Watch for header changes to reinitialize resize handles
-watch(() => [headers.value, fields.value], () => {
+watch(() => [headers.value, fields.value, props.isLoading], () => {
   recreateResizeHandles()
 }, { deep: true })
 
