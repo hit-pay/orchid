@@ -253,7 +253,6 @@ const handlePageChange = () => {
   applyFilter(null, currentPage.value)
 }
 
-const updateFilterTimeout = ref(null)
 const applyFilter = (
   filterFormData = null,
   isChangePage = false,
@@ -323,7 +322,7 @@ const emitFilterTimeout = ref(null)
 const emitFilterData = (isOnMount = false) => {
   clearTimeout(emitFilterTimeout.value)
   emitFilterTimeout.value = setTimeout(() => {
-    emit('update:filter', filterData.value, isOnMount)
+    emit('update:filter', { ...filterData.value }, isOnMount)
   }, 500)
 }
 
