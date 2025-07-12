@@ -314,14 +314,17 @@ const applyFilter = (
     if (selectedTab?.value) {
       activeFilterTab.value = selectedTab.value
       applyFilter()
-      return false
     }
   }
+  emitFilterData(isOnMount)
+}
 
-  clearTimeout(updateFilterTimeout.value)
-  updateFilterTimeout.value = setTimeout(() => {
+const emitFilterTimeout = ref(null)
+const emitFilterData = (isOnMount = false) => {
+  clearTimeout(emitFilterTimeout.value)
+  emitFilterTimeout.value = setTimeout(() => {
     emit('update:filter', filterData.value, isOnMount)
-  }, 100)
+  }, 500)
 }
 
 const removeFilter = (filter, field) => {
