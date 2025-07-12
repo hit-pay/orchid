@@ -11,8 +11,8 @@ export const Default = {
   args: {
     isLoading: false,
     loadingRows: 10,
-    options:  {
-      headers:  [
+    options: {
+      headers: [
         {
           key: 'date',
           label: 'Date',
@@ -21,7 +21,7 @@ export const Default = {
         },
         {
           key: 'email',
-          label: 'Email',
+          label: 'Email'
         },
         {
           key: 'id',
@@ -52,7 +52,7 @@ export const Default = {
       fields: [],
       isSelectable: true,
       isSticky: true,
-      isExpand:true,
+      isExpand: true
     }
   },
   render: (args) => ({
@@ -85,7 +85,7 @@ export const Default = {
                 payment_method: 'visa',
                 last4Digits: '1234',
                 status: 'success'
-              },
+              }
             ]
           },
           {
@@ -105,7 +105,7 @@ export const Default = {
         options,
         selectedRows,
         dayjs,
-        args,
+        args
       }
     },
     template: `

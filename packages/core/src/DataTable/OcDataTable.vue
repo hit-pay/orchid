@@ -119,28 +119,6 @@ watch(
   { deep: true, immediate: true }
 )
 
-if (isLocalData.value) {
-  watch(
-    () => props.filter,
-    () => {
-      if (props.filter) {
-        setFilter(props.filter)
-      }
-    },
-    { deep: true, immediate: true }
-  )
-
-  watch(
-    () => props.sortBy,
-    () => {
-      if (props.sortBy) {
-        setSortBy(props.sortBy)
-      }
-    },
-    { deep: true, immediate: true }
-  )
-}
-
 const processedTableOptions = computed(() => {
   const newTableOptions = {
     ...tableOptions.value,
@@ -165,15 +143,26 @@ const hidePerPageDropdown = computed(() => props.options?.hidePerPageDropdown)
 
 const isLastPage = computed(() => paginationData.value?.last_page === 1)
 
+const defaultFilterData = { ...props.filter }
+if (!defaultFilterData && paginationData.value) {
+  defaultFilterData.page = 1
+} else if (!defaultFilterData && cursorOption) {
+  defaultFilterData.cursor = ''
+}
+const filterData = ref(defaultFilterData)
+
 const isFilterDropdownOpen = ref(false)
-const activeFilterTab = ref(props.filter[filterOptions.value?.tabs?.key])
-const currentPage = ref(props.filter.page)
+const activeFilterTab = ref(filterData.value[filterOptions.value?.tabs?.key])
+const currentPage = ref(filterData.value.page)
 const itemsPerPage = ref(
   filterOptions.value?.per_page?.key
-    ? props.filter[filterOptions.value?.per_page?.key]
-    : props.filter.per_page
+    ? filterData.value[filterOptions.value?.per_page?.key]
+    : filterData.value.per_page
 )
-const defaultSearchQuery = props.filter[props.filter.selectedSearchOption || filterOptions.value?.search?.key]?.trim() ?? ''
+const defaultSearchQuery =
+  filterData.value[
+    filterData.value.selectedSearchOption || filterOptions.value?.search?.key
+  ]?.trim() ?? ''
 const searchQueries = ref(defaultSearchQuery ? defaultSearchQuery.split(',') : [])
 const isSearchExpanded = ref(false)
 
@@ -204,14 +193,6 @@ const removeSearchQuery = (query) => {
   searchQueries.value = searchQueries.value.filter((q) => q !== query)
   applyFilter()
 }
-
-const defaultFilterData = props.filter
-if (!defaultFilterData && paginationData.value) {
-  defaultFilterData.page = 1
-} else if (!defaultFilterData && cursorOption) {
-  defaultFilterData.cursor = ''
-}
-const filterData = ref(defaultFilterData)
 
 const displayFilterData = computed(() => {
   return formatFilterDisplay(filterData.value, filterOptions.value)
@@ -385,6 +366,26 @@ const handleUpdateSortBy = ({ key, value }) => {
   sortByData.value[key] = value
   emit('update:sort-by', sortByData.value)
 }
+
+watch(
+  () => filterData.value,
+  () => {
+    if (isLocalData.value && filterData.value) {
+      setFilter({ ...filterData.value })
+    }
+  },
+  { deep: true, immediate: true }
+)
+
+watch(
+  () => props.sortBy,
+  () => {
+    if (isLocalData.value && props.sortBy) {
+      setSortBy({ ...props.sortBy })
+    }
+  },
+  { deep: true, immediate: true }
+)
 </script>
 <template>
   <div class="relative flex flex-col gap-9">
@@ -472,7 +473,7 @@ const handleUpdateSortBy = ({ key, value }) => {
                     :id="id"
                     :json-form="filterOptions.form ?? []"
                     :grid="filterOptions.grid ?? null"
-                    :values="props.filter"
+                    :values="filterData"
                     :actions="filterOptions.actions"
                     @apply-filter="applyFilter($event)"
                     @filter-fields-changed="emit('filter-fields-changed', $event)"
