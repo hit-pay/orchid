@@ -2,7 +2,7 @@
 import { Button, Icon } from '@/orchidui-core'
 import { computed } from 'vue'
 
-defineEmits('click:Button')
+defineEmits('click:button')
 defineProps({
   isButton: {
     type: Boolean,
@@ -49,7 +49,7 @@ defineProps({
     type: Boolean,
     default: false
   },
-  docsButton: {
+  secondaryButton: {
     type: Object,
     default: () => null
   }
@@ -138,18 +138,18 @@ const sizes = computed(() => ({
     </div>
     <div v-if="isButton" class="flex items-center gap-x-2">
       <Button
-        v-if="docsButton"
+        v-if="secondaryButton"
          label="Docs Button"
          variant="secondary"
          size="small"
-         v-bind="docsButton"
+         v-bind="secondaryButton"
       />
 
       <Button
         :label="isUpgrade ? upgradeLabel : addButtonLabel"
         :left-icon="isUpgrade ? '' : addButtonIcon"
         size="small"
-        @click="$emit('click:Button')"
+        @click="$emit('click:button')"
       />
     </div>
   </div>
