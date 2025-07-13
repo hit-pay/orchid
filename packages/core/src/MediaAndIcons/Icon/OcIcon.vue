@@ -43,30 +43,22 @@ const setIconRef = (text) => {
 
 const renderIcon = () => {
   let iconData = ''
-  if (window.oc_icons) {
-    let windowIcons = JSON.parse(window.oc_icons)
-    iconData = windowIcons.find((icon) => icon.name === props.name)
+  if (window.ORCHID_ICONS) {
+    iconData = window.ORCHID_ICONS[props.name] ?? null
   }
   if (!iconData) {
     fetch(`${props.path}/${props.name}.svg`)
       .then((r) => (r.status === 200 ? r.text() : ''))
       .then((text) => {
         if (text && iconRef.value) {
-          if (window.oc_icons) {
-            let windowIcons = JSON.parse(window.oc_icons)
-            window.oc_icons = JSON.stringify([
-              ...windowIcons,
-              {
-                name: props.name,
-                svg: text
-              }
-            ])
+          if (window.ORCHID_ICONS) {
+            window.ORCHID_ICONS[props.name] = text
           }
           setIconRef(text)
         }
       })
       .catch(() => {
-        //
+        console.error(`Icon ${props.name} not found`)
       })
   } else {
     if (iconRef.value) {
