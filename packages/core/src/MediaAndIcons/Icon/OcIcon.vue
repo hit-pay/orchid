@@ -43,6 +43,10 @@ const setIconRef = (text) => {
 
 const renderIcon = () => {
   let iconData = ''
+  if (window.oc_icons) {
+    // clear old icons
+    window.oc_icons = null
+  }
   if (window.ORCHID_ICONS) {
     iconData = window.ORCHID_ICONS[props.name] ?? null
   }
@@ -53,6 +57,10 @@ const renderIcon = () => {
         if (text && iconRef.value) {
           if (window.ORCHID_ICONS) {
             window.ORCHID_ICONS[props.name] = text
+          } else {
+            window.ORCHID_ICONS = {
+              [props.name]: text
+            }
           }
           setIconRef(text)
         }
