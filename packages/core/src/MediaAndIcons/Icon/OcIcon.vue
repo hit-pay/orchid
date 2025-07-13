@@ -30,48 +30,48 @@ const props = defineProps({
 })
 const iconRef = ref(null)
 
-const setIconRef = (text) => {
-  const iconDom = document.createElement('div')
-  iconDom.innerHTML = text
-  if (iconDom.querySelector('svg')) {
-    iconDom.querySelector('svg').removeAttribute('width')
-    iconDom.querySelector('svg').removeAttribute('height')
-    iconRef.value.innerHTML = iconDom.innerHTML
+const setIconRef = (text, isNew = true) => {
+  if (isNew) {
+    const iconDom = document.createElement('div')
+    iconDom.innerHTML = text
+    if (iconDom.querySelector('svg')) {
+      iconDom.querySelector('svg').removeAttribute('width')
+      iconDom.querySelector('svg').removeAttribute('height')
+      iconDom.querySelector('svg').setAttribute('fill', 'currentColor')
+      iconRef.value.innerHTML = iconDom.innerHTML
+
+      if (window.ORCHID_ICONS) {
+        window.ORCHID_ICONS[props.name] = iconDom.innerHTML
+      } else {
+        window.ORCHID_ICONS = {
+          [props.name]: iconDom.innerHTML
+        }
+      }
+    }
+    iconDom.remove()
+  } else {
+    iconRef.value.innerHTML = text
   }
-  iconDom.remove()
 }
 
 const renderIcon = () => {
-  let iconData = ''
   if (window.oc_icons) {
-    // clear old icons
-    window.oc_icons = null
+    window.ORCHID_ICONS = {}
+    window.oc_icons = null // clear old icons
   }
-  if (window.ORCHID_ICONS) {
-    iconData = window.ORCHID_ICONS[props.name] ?? null
-  }
-  if (!iconData) {
+  if (window.ORCHID_ICONS && window.ORCHID_ICONS[props.name]) {
+    setIconRef(window.ORCHID_ICONS[props.name], false)
+  } else {
     fetch(`${props.path}/${props.name}.svg`)
       .then((r) => (r.status === 200 ? r.text() : ''))
       .then((text) => {
         if (text && iconRef.value) {
-          if (window.ORCHID_ICONS) {
-            window.ORCHID_ICONS[props.name] = text
-          } else {
-            window.ORCHID_ICONS = {
-              [props.name]: text
-            }
-          }
-          setIconRef(text)
+          setIconRef(text, true)
         }
       })
       .catch(() => {
         console.error(`Icon ${props.name} not found`)
       })
-  } else {
-    if (iconRef.value) {
-      setIconRef(iconData.svg)
-    }
   }
 }
 
