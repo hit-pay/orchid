@@ -35,6 +35,7 @@ const setIconRef = (text, isNew = true) => {
     const iconDom = document.createElement('div')
     iconDom.innerHTML = text
     if (iconDom.querySelector('svg')) {
+      iconDom.querySelector('svg').removeAttribute('id')
       iconDom.querySelector('svg').removeAttribute('width')
       iconDom.querySelector('svg').removeAttribute('height')
       iconDom.querySelector('svg').setAttribute('fill', 'currentColor')
