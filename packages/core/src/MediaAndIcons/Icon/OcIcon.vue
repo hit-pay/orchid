@@ -56,7 +56,6 @@ const setIconRef = (text, isNew = true) => {
 
 const renderIcon = () => {
   if (window.oc_icons) {
-    window.ORCHID_ICONS = {}
     window.oc_icons = null // clear old icons
   }
   if (window.ORCHID_ICONS && window.ORCHID_ICONS[props.name]) {
