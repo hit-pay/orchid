@@ -34,6 +34,11 @@ const changeSearchKey = (value) => {
   emit('change-search-key', value)
   isOpen.value = false
 }
+
+const handleClickSearch = () => {
+  emit('addQuery', query.value)
+  query.value = ''
+}
 </script>
 
 <template>
@@ -80,12 +85,7 @@ const changeSearchKey = (value) => {
             variant="secondary"
             class="shrink-0"
             size="small"
-            @click="
-              () => {
-                $emit('addQuery', query)
-                query = ''
-              }
-            "
+            @click="handleClickSearch"
           />
         </template>
       </Input>
