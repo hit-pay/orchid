@@ -394,18 +394,21 @@ watch(
     :tooltip-text="tooltipText"
     :tooltip-options="tooltipOptions"
   >
-    <Modal
-      title="Insert table"
-      v-model="tableModal"
-      class="!w-full !h-full"
-      :confirmButtonProps="{
-        label: 'Save',
-        onClick: () => insertTable()
-      }"
-    >
-      <Select v-model="tableCell" :options="tableColsOptions" label="Table cell" class="mb-3" />
-      <Select v-model="tableRow" :options="tableRowOptions" label="Table rows" />
-    </Modal>
+    <teleport to="body">
+      <Modal
+        size="small"
+        title="Insert table"
+        v-model="tableModal"
+        class="!w-full !h-full"
+        :confirmButtonProps="{
+          label: 'Save',
+          onClick: () => insertTable()
+        }"
+      >
+        <Select v-model="tableCell" :options="tableColsOptions" label="Table cell" class="mb-3" />
+        <Select v-model="tableRow" :options="tableRowOptions" label="Table rows" />
+      </Modal>
+    </teleport>
     <div class="grid" :class="{ 'has-error': errorMessage }" @click="onClickContent">
       <QuillEditor
         v-if="id"

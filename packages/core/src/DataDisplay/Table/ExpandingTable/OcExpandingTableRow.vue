@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { Icon, ExpandingTableRow, Tooltip, Skeleton } from '@/orchidui-core'
 import { ref, computed } from 'vue'
 

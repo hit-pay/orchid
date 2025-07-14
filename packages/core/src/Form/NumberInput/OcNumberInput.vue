@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { BaseInput, Button } from '@/orchidui-core'
 
 const props = defineProps({

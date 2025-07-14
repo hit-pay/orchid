@@ -5,6 +5,9 @@ module.exports = {
   ],
   darkMode: 'class',
   theme: {
+    fontFamily: {
+      'reddit-mono': ['Reddit Mono']
+    },
     fontSize: {
       xs: [
         '0.625rem',

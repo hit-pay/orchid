@@ -156,7 +156,7 @@ const isPasswordInput = computed(() => props.inputType === 'password')
       :class="inputClasses"
       @click="$refs.inputRef?.focus()"
     >
-      <div v-if="$slots.trailing" class="border-r border-gray-200 pr-3 py-3" :class="trailingClass">
+      <div v-if="$slots.trailing" class="border-r py-2 border-gray-200 pr-3 flex items-center h-full" :class="trailingClass">
         <slot name="trailing" />
       </div>
 
@@ -177,7 +177,7 @@ const isPasswordInput = computed(() => props.inputType === 'password')
             :disabled="disabled"
             :autocomplete="autocomplete"
             :inputmode="inputMode"
-            class="h-7 outline-none md:text-base text-lg w-full text-oc-text disabled:bg-transparent disabled:text-oc-text-300 text-ellipsis placeholder:font-normal placeholder:text-oc-text-300 bg-oc-bg-light"
+            class="h-7 outline-none md:text-base text-lg w-full text-oc-text bg-transparent disabled:text-oc-text-300 text-ellipsis placeholder:font-normal placeholder:text-oc-text-300"
             v-bind="inputAttrs"
             :type="isPasswordInput && isPasswordVisible ? 'text' : inputType"
             @focus="
@@ -193,16 +193,13 @@ const isPasswordInput = computed(() => props.inputType === 'password')
               }
             "
             @input="$emit('update:modelValue', $event.target.value)"
-            @paste="$emit('paste')"
+            @paste="$emit('paste', $event)"
           />
         </div>
       </div>
 
-      <div
-        v-if="$slots.leading || isPasswordInput"
-        class="flex items-center h-full"
-      >
-        <span v-if="hasLeadingSeparator" class="border-l border-gray-200 pl-3 py-3 h-full" ></span>
+      <div v-if="$slots.leading || isPasswordInput" class="flex items-center h-full">
+        <span v-if="hasLeadingSeparator" class="border-l border-gray-200 pl-3 py-3 h-full"></span>
         <span
           v-if="!$slots.leading"
           class="text-oc-text-200"
@@ -231,7 +228,9 @@ input::-webkit-inner-spin-button {
   display: none;
 }
 .focused-shadow {
-  box-shadow: 0px 0px 0px 3px var(--oc-primary-200), 0px 2px 4px 0px #0000003D inset !important;
+  box-shadow:
+    0px 0px 0px 3px var(--oc-primary-200),
+    0px 2px 4px 0px #0000003d inset !important;
   border-color: var(--oc-primary-500);
   &.border-none {
     box-shadow: none !important;
@@ -239,7 +238,9 @@ input::-webkit-inner-spin-button {
   }
 }
 .error-shadow {
-  box-shadow: 0px 0px 0px 3px var(--oc-error-200), 0px 2px 4px 0px #0000003D inset !important;
+  box-shadow:
+    0px 0px 0px 3px var(--oc-error-200),
+    0px 2px 4px 0px #0000003d inset !important;
   border-color: var(--oc-error-500);
   &.border-none {
     box-shadow: none !important;
@@ -247,10 +248,12 @@ input::-webkit-inner-spin-button {
   }
 }
 .input-shadow {
-  box-shadow: 0px 1.5px 1.5px 0px #00000017, 0px 1px 3px 0px #0000000A;
+  box-shadow:
+    0px 1.5px 1.5px 0px #00000017,
+    0px 1px 3px 0px #0000000a;
   &.border-none {
     box-shadow: none !important;
-    border: none !important;  
+    border: none !important;
   }
 }
 </style>
