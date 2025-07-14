@@ -39,6 +39,11 @@ const handleClickSearch = () => {
   emit('addQuery', query.value)
   query.value = ''
 }
+const handleClickClear = () => {
+  isSearchOpen.value = false
+  emit('toggle', isSearchOpen.value)
+  query.value = ''
+}
 </script>
 
 <template>
@@ -93,13 +98,7 @@ const handleClickSearch = () => {
       <span
         v-if="!isSearchOnly"
         class="text-base cursor-pointer flex normal-case items-center font-medium text-oc-text-400"
-        @click="
-          () => {
-            isSearchOpen = false
-            $emit('toggle', isSearchOpen)
-            query = ''
-          }
-        "
+        @click="handleClickClear"
       >
         Clear
       </span>
