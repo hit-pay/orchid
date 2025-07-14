@@ -206,7 +206,6 @@ export function useDataTable(initialData) {
         total: result.length,
         last_page: Math.ceil(result.length / limit)
       }
-
       isLoading.value = false
     }, 500)
   }
@@ -245,7 +244,6 @@ export function useDataTable(initialData) {
     if (!db || typeof db.table !== 'function') {
       return null
     }
-
     try {
       const table = db.table(dbTablename.value)
       if (!table) {

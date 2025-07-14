@@ -34,6 +34,16 @@ const changeSearchKey = (value) => {
   emit('change-search-key', value)
   isOpen.value = false
 }
+
+const handleClickSearch = () => {
+  emit('addQuery', query.value)
+  query.value = ''
+}
+const handleClickClear = () => {
+  isSearchOpen.value = false
+  emit('toggle', isSearchOpen.value)
+  query.value = ''
+}
 </script>
 
 <template>
@@ -80,23 +90,15 @@ const changeSearchKey = (value) => {
             variant="secondary"
             class="shrink-0"
             size="small"
-            @click="() => {
-              $emit('addQuery', query)
-              query = ''
-            }"
+            @click="handleClickSearch"
           />
         </template>
       </Input>
 
-     
       <span
-       v-if="!isSearchOnly"
+        v-if="!isSearchOnly"
         class="text-base cursor-pointer flex normal-case items-center font-medium text-oc-text-400"
-        @click="() => {
-          isSearchOpen = false
-          $emit('toggle', isSearchOpen)
-          query = ''
-        }"
+        @click="handleClickClear"
       >
         Clear
       </span>
@@ -109,7 +111,7 @@ const changeSearchKey = (value) => {
       variant="secondary"
       size="small"
       class="w-8"
-      iconClass="shrink-0"
+      icon-class="shrink-0"
       left-icon="search"
       @click="onSearchOpen"
     />

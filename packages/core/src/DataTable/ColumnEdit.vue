@@ -4,11 +4,7 @@ import { ref, onMounted } from 'vue'
 import { VueDraggableNext } from 'vue-draggable-next'
 import { formatHeadersFromLocalStorage, getFromLocalStorage } from './utils/editColumnsUtils'
 
-const emit = defineEmits([
-  'change-active',
-  'onMoved',
-  'update-order'
-])
+const emit = defineEmits(['change-active', 'onMoved', 'update-order'])
 
 const props = defineProps({
   options: {
@@ -44,7 +40,7 @@ const updateFilters = (isOnMount = false) => {
     ...header,
     isActive: true
   }))
-  
+
   emit('update-order', {
     fixedHeaders: fixedHeaders.value,
     activeHeaders: activeHeaders.value,
@@ -55,30 +51,29 @@ const updateFilters = (isOnMount = false) => {
 onMounted(() => {
   const columnEdit = getFromLocalStorage(props.localKey)
   const { fixed, active } = formatHeadersFromLocalStorage(columnEdit, props.headers, props.localKey)
-  
+
   fixedHeaders.value = fixed || props.headers.slice(0, 1)
-  activeHeaders.value = active || props.headers.slice(1).map((header) => ({
-    ...header,
-    isActive: props.options?.active?.find((h) => h.key === header.key)?.isActive ?? true
-  }))
-  
+  activeHeaders.value =
+    active ||
+    props.headers.slice(1).map((header) => ({
+      ...header,
+      isActive: props.options?.active?.find((h) => h.key === header.key)?.isActive ?? true
+    }))
+
   updateFilters(true)
 })
 </script>
 
 <template>
-  <Dropdown 
-    v-model="isColumnEditOpened" 
-    is-attach-to-body
-  >
-    <Button 
-      label="Edit Column" 
-      left-icon="setting" 
+  <Dropdown v-model="isColumnEditOpened" is-attach-to-body>
+    <Button
+      label="Edit Column"
+      left-icon="setting"
       size="small"
       class="whitespace-nowrap"
-      variant="secondary" 
+      variant="secondary"
     />
-    
+
     <template #menu>
       <div class="p-5 gap-y-4 text-sm flex w-[250px] flex-col">
         <!-- Fixed Columns Section -->
@@ -87,11 +82,7 @@ onMounted(() => {
           class="gap-y-2 flex flex-col border-b pb-3 border-oc-gray-200"
         >
           <span class="text-oc-text-400 font-medium">Fixed columns</span>
-          <VueDraggableNext 
-            key="key" 
-            v-model="fixedHeaders" 
-            v-bind="dragOptions"
-          >
+          <VueDraggableNext key="key" v-model="fixedHeaders" v-bind="dragOptions">
             <div
               v-for="(fixedHeader, i) in fixedHeaders"
               :key="fixedHeader.key"

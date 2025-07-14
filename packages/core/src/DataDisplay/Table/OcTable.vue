@@ -41,7 +41,7 @@ const emit = defineEmits({
   'update:sort-by': [],
   'click:row': [],
   'update:selected': [],
-  'hover:cell': [],
+  'hover:cell': []
 })
 
 const isSelectable = computed(() => props.options.isSelectable)
@@ -93,7 +93,6 @@ const calculateRowClass = computed(() => {
 })
 
 const onClickRow = (field, header) => {
-  
   if (!header.disableClickRow && header.key !== 'actions') {
     emit('click:row', {
       field: field,
