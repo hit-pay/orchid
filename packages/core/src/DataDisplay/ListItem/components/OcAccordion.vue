@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { Chip, Icon } from '@/orchidui-core'
 import { defineEmits, defineExpose, defineProps, ref, watch } from 'vue'
 

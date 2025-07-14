@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { Icon } from '@/orchidui-core'
 import { ref, watch } from 'vue'
 import OnboardingStatusIcon from './OnboardingStatusIcon.vue'

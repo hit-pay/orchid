@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { Button, CustomerCard, Icon, OverviewItem, Tooltip } from '@/orchidui-core'
 import { ref } from 'vue'
 import BoxDetails from './OcBoxDetails.vue'

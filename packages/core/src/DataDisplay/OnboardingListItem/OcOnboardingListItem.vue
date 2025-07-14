@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { Button, Icon } from '@/orchidui-core'
 
 defineProps({
