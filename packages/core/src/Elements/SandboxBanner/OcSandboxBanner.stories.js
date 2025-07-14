@@ -11,6 +11,12 @@ export const Default = {
     chipProps: {
       label: 'Sandbox Banner',
       variant: 'light-red'
+    },
+    buttonProps: {
+      label: 'Read our docs',
+      isTransparent: true,
+      rightIcon: 'arrow-right',
+      class: '[&>button]:!text-white !underline underline-offset-2',
     }
   },
   render: (args) => ({
@@ -21,7 +27,7 @@ export const Default = {
       return { args }
     },
     template: `
-          <SandboxBanner :title="args.title" :chipProps="args.chipProps"/>
+          <SandboxBanner :title="args.title" :chipProps="args.chipProps" :button-props="args.buttonProps" />
         `
   })
 }

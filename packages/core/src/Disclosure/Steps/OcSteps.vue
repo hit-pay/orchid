@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import Step from './OcStep.vue'
 
 defineProps({

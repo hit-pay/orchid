@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { Dropdown, Icon, DropdownItem } from '@/orchidui-core'
 
 defineProps({
