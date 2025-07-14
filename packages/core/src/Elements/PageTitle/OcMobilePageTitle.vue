@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { Button, Icon, Dropdown, DropdownItem, CopyTooltip, Chip } from '@/orchidui-core'
 import { ref } from 'vue'
 

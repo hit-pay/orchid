@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { PieChart } from '@/orchidui-dashboard'
 import { computed } from 'vue'
 

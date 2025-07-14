@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { createHighlighter } from 'shiki'
 import { onMounted, ref } from 'vue'
 import customTheme from './customTheme'

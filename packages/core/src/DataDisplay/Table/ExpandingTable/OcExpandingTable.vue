@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import ExpandingTableRow from './OcExpandingTableRow.vue'
 import ExpandingHeaderRow from './OcExpandingHeaderRow.vue'
 import { computed } from 'vue'
