@@ -312,7 +312,6 @@ const applyFilter = (
     )
     if (selectedTab?.value) {
       activeFilterTab.value = selectedTab.value
-      applyFilter()
     }
   }
   emitFilterData(isOnMount)
