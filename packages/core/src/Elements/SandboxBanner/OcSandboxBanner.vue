@@ -1,5 +1,5 @@
-<script setup lang="ts">
-import { Chip } from '@/orchidui-core'
+<script setup>
+import { Chip, Button } from '@/orchidui-core'
 
 defineProps({
   title: {
@@ -7,6 +7,10 @@ defineProps({
     default: ''
   },
   chipProps: {
+    type: Object,
+    default: () => null
+  },
+  buttonProps: {
     type: Object,
     default: () => null
   }
@@ -22,5 +26,7 @@ defineProps({
     </span>
 
     <Chip v-if="chipProps" class="absolute left-[40px]" v-bind="chipProps" />
+
+    <Button v-if="buttonProps" class="absolute right-[32px]" v-bind="buttonProps" />
   </div>
 </template>

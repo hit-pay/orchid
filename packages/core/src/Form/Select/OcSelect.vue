@@ -67,7 +67,8 @@ const props = defineProps({
   searchKeywords: String,
   isLoading: Boolean,
   menuClasses: String,
-  dropdownClasses: String
+  dropdownClasses: String,
+  selectTextClass: String
 })
 
 const emit = defineEmits({
@@ -149,7 +150,7 @@ const localValueOption = computed(() => {
     }
     return selected
   } else {
-    return props.options.find((o) => o.value.toString() === props.modelValue?.toString())
+    return props.options.find((o) => o.value?.toString() === props.modelValue?.toString())
   }
 })
 
@@ -336,11 +337,9 @@ defineExpose({
               :label="`+${localValueOption.length - maxVisibleOptions}`"
             />
           </slot>
-          <span
-            v-if="localValueOption.length === 0"
-            class="text-oc-text-300 md:text-base text-lg"
-            >{{ placeholder }}</span
-          >
+          <span v-if="localValueOption.length === 0" class="text-oc-text-300">{{
+            placeholder
+          }}</span>
         </div>
         <template v-if="isInlineSearch && isFilterable && !localValueOption">
           <Input
@@ -358,7 +357,8 @@ defineExpose({
         </template>
         <template v-else>
           <span
-            class="whitespace-nowrap flex gap-x-3 text-lg md:text-base items-center overflow-hidden"
+            class="whitespace-nowrap flex gap-x-3 items-center overflow-hidden"
+            :class="selectTextClass"
           >
             <Icon v-if="icon" :name="icon" width="16" height="16" />
 

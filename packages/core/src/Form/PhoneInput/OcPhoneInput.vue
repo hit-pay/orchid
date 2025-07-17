@@ -79,8 +79,11 @@ const scrollToSelectedCountry = () => {
       getCountryObject(selectedCountryIso.value)
     )
     const countryEl = countryListItemRef.value[indexSelectedCountry]
-    const top = countryEl.offsetTop
-    countryListRef.value.scrollTo(0, top - 60, { behavior: 'smooth' })
+
+    if (countryEl) {
+      const top = countryEl.offsetTop
+      countryListRef.value.scrollTo(0, top - 60, { behavior: 'smooth' })
+    }
   }, 10)
 }
 
@@ -88,10 +91,10 @@ const onPaste = (e) => {
   let text = e?.clipboardData?.getData('Text') || ''
 
   try {
-    if (text.search(/[^0-9]/g) < 0) {
+    if (/^[+]?[0-9]+$/.test(text)) {
       text = text.slice(0, 19)
 
-      if (text.length > 5 && props.shouldParseCountryCode) {
+      if (text.length > 5 && (props.shouldParseCountryCode || text.startsWith('+'))) {
         const { nationalNumber, countryCallingCode, country } = parsePhoneNumber(
           '+' + text.replace('+', '')
         )
@@ -109,7 +112,7 @@ const onPaste = (e) => {
     emit('update:modelValue', [getCountryCode(selectedCountryIso.value), text])
   }
 
-  e.preventDefault()
+  e?.preventDefault()
 }
 </script>
 

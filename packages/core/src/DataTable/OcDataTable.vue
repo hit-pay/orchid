@@ -10,6 +10,7 @@ import {
   Tabs,
   Button,
   Dropdown,
+  NewTable
 } from '@/orchidui-core'
 import { useDataTable } from './useDataTable.js'
 import { ref, computed, onMounted, watch, nextTick } from 'vue'
@@ -22,15 +23,9 @@ import {
   formatHeadersFromLocalStorage
 } from './utils/editColumnsUtils.js'
 
-import {
-  formatFilterDisplay,
-  clearAllFilters as clearAllFiltersUtil
-} from './utils/filterUtils.js'
+import { formatFilterDisplay, clearAllFilters as clearAllFiltersUtil } from './utils/filterUtils.js'
 
-import {
-  getItemsPerPageOptions,
-  formatCustomItemsPerPageOptions
-} from './utils/paginationUtils.js'
+import { getItemsPerPageOptions, formatCustomItemsPerPageOptions } from './utils/paginationUtils.js'
 
 const props = defineProps({
   isLoading: Boolean,
@@ -63,12 +58,17 @@ const props = defineProps({
   sortBy: {
     type: Object,
     required: false
+  },
+  isNewTable: {
+    type: Boolean,
+    default: false
   }
 })
 
 const emit = defineEmits({
   'update:selected': [],
   'update:filter': [],
+  'apply-filter': [],
   'click:row': [],
   'filter-fields-changed': [],
   'filter-removed': [],
@@ -80,8 +80,6 @@ const emit = defineEmits({
   'update:sort-by': []
 })
 
-
-
 const cursorOption = computed(() => props.options?.cursor)
 const tableHeaders = ref()
 
@@ -89,50 +87,38 @@ const tableOptions = computed(() => props.options?.tableOptions)
 
 const isLocalData = computed(() => props.localDb !== undefined)
 const {
-    localData,
-    paginationData,
-    isLoading: isLocalDataLoading,
-    
-    // Methods
-    bulkPutLocalData,
-    bulkDeleteLocalData,  
-    getLocalDataUpdatedAt,
-    getLocalDataIds,
-    syncLocalData,
-    sortByData,
+  localData,
+  paginationData,
+  isLoading: isLocalDataLoading,
 
-    // Setters
-    setFilter,
-    setSortBy,
+  // Methods
+  bulkPutLocalData,
+  bulkDeleteLocalData,
+  getLocalDataUpdatedAt,
+  getProductIdAndLastUpdatedAt,
+  syncLocalData,
+  sortByData,
+
+  // Setters
+  setFilter,
+  setSortBy
 } = useDataTable({
   name: props.localDb?.table_name ?? null,
   db: props.localDb?.db ?? null,
-  filterable_fields: props.options?.filterable_fields,
-  sortable_fields: props.options?.sortable_fields,
+  filterableFields: props.options?.filterableFields,
+  sortableFields: props.options?.sortableFields,
+  searchableFields: props.options?.searchableFields
 })
 
-watch(() => props.options?.pagination, (newVal) => {
-  if(!isLocalData.value) {
-    paginationData.value = newVal
-  }
-}, { deep: true, immediate: true })
-
-if(isLocalData.value) {
-
-  watch(() => props.filter, () => {
-    if(props.filter) {
-      setFilter(props.filter)
+watch(
+  () => props.options?.pagination,
+  (newVal) => {
+    if (!isLocalData.value) {
+      paginationData.value = newVal
     }
-  }, { deep: true, immediate: true })
-
-  watch(() => props.sortBy, () => {
-    if(props.sortBy) {
-      setSortBy(props.sortBy)
-    }
-  }, { deep: true, immediate: true })
-
-}
-
+  },
+  { deep: true, immediate: true }
+)
 
 const processedTableOptions = computed(() => {
   const newTableOptions = {
@@ -140,14 +126,15 @@ const processedTableOptions = computed(() => {
     headers: tableHeaders.value
       ? tableHeaders.value
           .map((header) => {
-            header.class = tableOptions.value?.headers.find((h) => h.key === header.key)?.class ?? ''
+            header.class =
+              tableOptions.value?.headers.find((h) => h.key === header.key)?.class ?? ''
             return header
           })
           .filter((h) => h.isActive)
       : tableOptions.value?.headers.filter((h) => isColumnActive(h.key))
   }
-  if(isLocalData.value) {
-      newTableOptions.fields = localData.value
+  if (!newTableOptions.fields?.length) {
+    newTableOptions.fields = localData.value
   }
   return newTableOptions
 })
@@ -157,15 +144,26 @@ const hidePerPageDropdown = computed(() => props.options?.hidePerPageDropdown)
 
 const isLastPage = computed(() => paginationData.value?.last_page === 1)
 
+const defaultFilterData = JSON.parse(JSON.stringify({ ...props.filter }))
+if (!defaultFilterData && paginationData.value) {
+  defaultFilterData.page = 1
+} else if (!defaultFilterData && cursorOption) {
+  defaultFilterData.cursor = ''
+}
+const filterData = ref(defaultFilterData)
+
 const isFilterDropdownOpen = ref(false)
-const activeFilterTab = ref(props.filter[filterOptions.value?.tabs?.key])
-const currentPage = ref(props.filter.page)
+const activeFilterTab = ref(filterData.value[filterOptions.value?.tabs?.key])
+const currentPage = ref(filterData.value.page)
 const itemsPerPage = ref(
   filterOptions.value?.per_page?.key
-    ? props.filter[filterOptions.value?.per_page?.key]
-    : props.filter.per_page
+    ? filterData.value[filterOptions.value?.per_page?.key]
+    : filterData.value.per_page
 )
-const defaultSearchQuery = props.filter[filterOptions.value?.search?.key]?.trim() ?? ''
+const defaultSearchQuery =
+  filterData.value[
+    filterData.value.selectedSearchOption || filterOptions.value?.search?.key
+  ]?.trim() ?? ''
 const searchQueries = ref(defaultSearchQuery ? defaultSearchQuery.split(',') : [])
 const isSearchExpanded = ref(false)
 
@@ -182,7 +180,10 @@ const hasSelectedItems = computed(() => {
 })
 
 const addSearchQuery = (query) => {
-  if (!query.trim() || (!filterData.value.selectedSearchOption && searchQueries.value.includes(query)))
+  if (
+    !query.trim() ||
+    (!filterData.value.selectedSearchOption && searchQueries.value.includes(query))
+  )
     return
   searchQueries.value = [query]
   applyFilter()
@@ -193,14 +194,6 @@ const removeSearchQuery = (query) => {
   searchQueries.value = searchQueries.value.filter((q) => q !== query)
   applyFilter()
 }
-
-const defaultFilterData = props.filter
-if (!defaultFilterData && paginationData.value) {
-  defaultFilterData.page = 1
-} else if (!defaultFilterData && cursorOption) {
-  defaultFilterData.cursor = ''
-}
-const filterData = ref(defaultFilterData)
 
 const displayFilterData = computed(() => {
   return formatFilterDisplay(filterData.value, filterOptions.value)
@@ -248,7 +241,12 @@ const changeSearchKey = (value) => {
 const clearAllFilters = () => {
   searchQueries.value = []
   activeFilterTab.value = ''
-  filterData.value = clearAllFiltersUtil(filterData.value, filterOptions.value, itemsPerPage.value, activeFilterTab.value)
+  filterData.value = clearAllFiltersUtil(
+    filterData.value,
+    filterOptions.value,
+    itemsPerPage.value,
+    activeFilterTab.value
+  )
   applyFilter()
 }
 
@@ -256,7 +254,6 @@ const handlePageChange = () => {
   applyFilter(null, currentPage.value)
 }
 
-const updateFilterTimeout = ref(null)
 const applyFilter = (
   filterFormData = null,
   isChangePage = false,
@@ -317,14 +314,18 @@ const applyFilter = (
     if (selectedTab?.value) {
       activeFilterTab.value = selectedTab.value
       applyFilter()
-      return false
     }
   }
+  emitFilterData(isOnMount)
+}
 
-  clearTimeout(updateFilterTimeout.value)
-  updateFilterTimeout.value = setTimeout(() => {
-    emit('update:filter', filterData.value, isOnMount)
-  }, 100)
+const emitFilterTimeout = ref(null)
+const emitFilterData = (isOnMount = false) => {
+  clearTimeout(emitFilterTimeout.value)
+  emitFilterTimeout.value = setTimeout(() => {
+    emit('update:filter', { ...filterData.value }, isOnMount)
+    emit('apply-filter', { ...filterData.value }, isOnMount)
+  }, 50)
 }
 
 const removeFilter = (filter, field) => {
@@ -342,7 +343,6 @@ onMounted(() => {
   })
 })
 
-
 const tableIsLoading = computed(() => {
   // TODO: add loading variant first row for syncLocalData
   return props.isLoading || isLocalDataLoading.value
@@ -353,14 +353,14 @@ defineExpose({
   paginationData,
   tableIsLoading,
   bulkPutLocalData,
-  bulkDeleteLocalData,  
+  bulkDeleteLocalData,
   getLocalDataUpdatedAt,
-  getLocalDataIds,
+  getProductIdAndLastUpdatedAt,
   syncLocalData,
-  sortByData,
+  sortByData
 })
 
-const handleUpdateSortBy = ({key, value}) => {
+const handleUpdateSortBy = ({ key, value }) => {
   // remove other sort by to null
   Object.keys(sortByData.value).forEach((currentKey) => {
     if (currentKey !== key) {
@@ -371,10 +371,30 @@ const handleUpdateSortBy = ({key, value}) => {
   emit('update:sort-by', sortByData.value)
 }
 
+watch(
+  () => filterData.value,
+  () => {
+    if (isLocalData.value && filterData.value) {
+      setFilter({ ...filterData.value })
+    }
+  },
+  { deep: true, immediate: true }
+)
+
+watch(
+  () => props.sortBy,
+  () => {
+    if (isLocalData.value && props.sortBy) {
+      setSortBy({ ...props.sortBy })
+    }
+  },
+  { deep: true, immediate: true }
+)
 </script>
 <template>
   <div class="relative flex flex-col gap-9">
-    <Table
+    <component
+      :is="isNewTable ? NewTable : Table"
       v-if="processedTableOptions"
       :selected="selected"
       :row-key="rowKey"
@@ -398,7 +418,7 @@ const handleUpdateSortBy = ({key, value}) => {
         <slot name="before" />
         <div
           v-if="filterOptions?.search || filterOptions?.form || filterOptions?.tabs"
-          class="flex items-center px-4 min-h-[52px]"
+          class="flex items-center px-4 min-h-[44px]"
         >
           <div v-if="hasSelectedItems" class="absolute flex items-center gap-5 left-5">
             <slot name="bulk-actions" :selected-rows="selected" />
@@ -417,7 +437,7 @@ const handleUpdateSortBy = ({key, value}) => {
           <slot name="filter-options">
             <div
               v-if="filterOptions?.search || filterOptions?.form || filterOptions?.columnEdit"
-              class="flex gap-3 absolute ml-auto bg-oc-bg-light right-4 max-w-[calc(100%-24px)]"
+              class="flex gap-3 absolute ml-auto items-center bg-oc-bg-light right-4 max-w-[calc(100%-24px)]"
               :class="
                 !filterOptions ? 'w-full justify-end' : isSearchExpanded ? 'md:w-fit w-full' : ''
               "
@@ -442,7 +462,14 @@ const handleUpdateSortBy = ({key, value}) => {
                 is-attach-to-body
                 @update:model-value="$emit('filter-open', $event)"
               >
-                <Button :is-active="isFilterDropdownOpen" variant="secondary" left-icon="filter" />
+                <Button
+                  :is-active="isFilterDropdownOpen"
+                  variant="secondary"
+                  left-icon="filter"
+                  size="small"
+                  class="w-8"
+                  icon-class="shrink-0"
+                />
 
                 <template #menu>
                   <FilterForm
@@ -450,7 +477,7 @@ const handleUpdateSortBy = ({key, value}) => {
                     :id="id"
                     :json-form="filterOptions.form ?? []"
                     :grid="filterOptions.grid ?? null"
-                    :values="props.filter"
+                    :values="filterData"
                     :actions="filterOptions.actions"
                     @apply-filter="applyFilter($event)"
                     @filter-fields-changed="emit('filter-fields-changed', $event)"
@@ -506,7 +533,8 @@ const handleUpdateSortBy = ({key, value}) => {
       <template #table-body="slotProps">
         <slot name="table-body" v-bind="slotProps"></slot>
       </template>
-    </Table>
+    </component>
+
     <slot name="before-pagination"></slot>
     <div
       v-if="paginationData || cursorOption"
@@ -516,7 +544,7 @@ const handleUpdateSortBy = ({key, value}) => {
       <Pagination
         v-if="paginationData && !isLastPage"
         v-model="currentPage"
-        class="justify-center"
+        class="justify-center text-[13px]"
         :max-page="paginationData.last_page"
         :strategy="paginationData.strategy"
         total-visible="5"
@@ -540,6 +568,7 @@ const handleUpdateSortBy = ({key, value}) => {
           is-inline-label
           :popper-options="{ placement: 'auto' }"
           :options="itemsPerPageOptions"
+          select-text-class="!text-[13px]"
           @update:model-value="applyFilter(null)"
         />
       </div>
