@@ -325,7 +325,7 @@ const emitFilterData = (isOnMount = false) => {
   emitFilterTimeout.value = setTimeout(() => {
     emit('update:filter', { ...filterData.value }, isOnMount)
     emit('apply-filter', { ...filterData.value }, isOnMount)
-  }, 500)
+  }, 50)
 }
 
 const removeFilter = (filter, field) => {
