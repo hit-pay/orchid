@@ -68,6 +68,7 @@ const props = defineProps({
 const emit = defineEmits({
   'update:selected': [],
   'update:filter': [],
+  'apply-filter': [],
   'click:row': [],
   'filter-fields-changed': [],
   'filter-removed': [],
@@ -143,7 +144,7 @@ const hidePerPageDropdown = computed(() => props.options?.hidePerPageDropdown)
 
 const isLastPage = computed(() => paginationData.value?.last_page === 1)
 
-const defaultFilterData = JSON.parse(JSON.stringify(props.filter))
+const defaultFilterData = JSON.parse(JSON.stringify({ ...props.filter }))
 if (!defaultFilterData && paginationData.value) {
   defaultFilterData.page = 1
 } else if (!defaultFilterData && cursorOption) {
@@ -323,6 +324,7 @@ const emitFilterData = (isOnMount = false) => {
   clearTimeout(emitFilterTimeout.value)
   emitFilterTimeout.value = setTimeout(() => {
     emit('update:filter', { ...filterData.value }, isOnMount)
+    emit('apply-filter', { ...filterData.value }, isOnMount)
   }, 500)
 }
 
