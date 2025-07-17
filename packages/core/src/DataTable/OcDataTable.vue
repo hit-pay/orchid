@@ -143,7 +143,7 @@ const hidePerPageDropdown = computed(() => props.options?.hidePerPageDropdown)
 
 const isLastPage = computed(() => paginationData.value?.last_page === 1)
 
-const defaultFilterData = { ...props.filter }
+const defaultFilterData = JSON.parse(JSON.stringify(props.filter))
 if (!defaultFilterData && paginationData.value) {
   defaultFilterData.page = 1
 } else if (!defaultFilterData && cursorOption) {
