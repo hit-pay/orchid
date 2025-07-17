@@ -33,6 +33,6 @@
     "rollup": "npm:@rollup/wasm-node"
   },
   "dependencies": {
-    "@orchidui/core": "beta"
+    "@orchidui/core": "latest"
   }
 }
