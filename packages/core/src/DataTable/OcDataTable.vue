@@ -423,7 +423,7 @@ watch(
           <div v-else class="absolute flex gap-3 left-5">
             <Tabs
               v-if="filterOptions?.tabs"
-              v-model="activeFilterTab"
+              :model-value="activeFilterTab"
               :is-disabled="tableIsLoading"
               :tabs="filterOptions.tabs.options"
               :variant="'pills'"
@@ -540,7 +540,7 @@ watch(
     >
       <Pagination
         v-if="paginationData && !isLastPage"
-        v-model="currentPage"
+        :model-value="currentPage"
         class="justify-center text-[13px]"
         :max-page="paginationData.last_page"
         :strategy="paginationData.strategy"
@@ -560,7 +560,7 @@ watch(
       </div>
       <div v-if="!hidePerPageDropdown" class="items-center hidden md:flex">
         <Select
-          v-model="itemsPerPage"
+          :model-value="itemsPerPage"
           label="Item per page"
           is-inline-label
           :popper-options="{ placement: 'auto' }"
