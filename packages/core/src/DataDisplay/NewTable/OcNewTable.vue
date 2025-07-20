@@ -193,7 +193,7 @@ const sortedFields = computed(() => {
 })
 
 const COLUMN_WIDTH = {
-  DEFAULT: 175,
+  DEFAULT: 125,
   ACTIONS: 32
 }
 
@@ -307,7 +307,7 @@ const handleMouseMove = (e) => {
     const diffX = adjustedPageX - pageX
 
     // Only change the width of the current column
-    const newCurWidth = Math.max(175, curColWidth + diffX) // Minimum 150px width
+    const newCurWidth = Math.max(125, curColWidth + diffX) // Minimum 125px width
     curCol.style.width = newCurWidth + 'px'
     curCol.style.minWidth = newCurWidth + 'px'
 
