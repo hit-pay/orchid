@@ -84,6 +84,7 @@
               :get-row-key="getRowKey"
               :get-sticky-classes="getStickyClasses"
               @toggle-children="recreateResizeHandles"
+              @click="onClickRow(row, headers[index])"
             >
               <template v-for="name in Object.keys($slots)" #[name]="slotData">
                 <slot :name="name" v-bind="slotData" />
@@ -494,6 +495,16 @@ const selectAllRows = () => {
   const allRowsSelected = selectedRows.value.length === fields.value.length
 
   selectedRows.value = allRowsSelected ? [] : [...fields.value]
+}
+
+
+const onClickRow = (field, header) => {
+  if (!header.disableClickRow && header.key !== 'actions') {
+    emit('click:row', {
+      field: field,
+      header: header
+    })
+  }
 }
 </script>
 
