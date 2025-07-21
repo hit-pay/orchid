@@ -53,9 +53,10 @@ const props = defineProps({
   placeholder: {
     type: String,
     default: ''
-  }
+  },
+  isCustomImageUpload: Boolean
 })
-const emit = defineEmits(['update:modelValue', 'update:image'])
+const emit = defineEmits(['update:modelValue', 'update:image', 'uploadImage'])
 
 const variants = {
   default: [
@@ -205,6 +206,14 @@ const readImage = (base64) => {
 const uploadImage = () => {
   if (!quill.value.getQuill().getSelection())
     !quill.value.getQuill().setSelection(quill.value.getQuill().getLength() - 1)
+
+  if (props.isCustomImageUpload) {
+    const range = quill.value.getQuill().getSelection()
+    if (!range) return
+
+    emit('upload-image', quill.value)
+    return
+  }
 
   const input = document.createElement('input')
   input.type = 'file'
