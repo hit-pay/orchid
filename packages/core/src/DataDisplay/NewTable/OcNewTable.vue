@@ -105,7 +105,7 @@
             </tr>
           </tbody>
         </table>
-        <slot v-if="!fields.length" name="empty" />
+        <slot v-if="!fields.length && !isLoading" name="empty" />
       </div>
     </div>
     <slot name="after" />
