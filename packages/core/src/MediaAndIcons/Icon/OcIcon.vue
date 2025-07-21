@@ -39,7 +39,10 @@ const setIconRef = (text, isNew = true) => {
       iconDom.querySelector('svg').removeAttribute('width')
       iconDom.querySelector('svg').removeAttribute('height')
       iconDom.querySelector('svg').setAttribute('fill', 'currentColor')
-      iconRef.value.innerHTML = iconDom.innerHTML
+
+      if (iconRef.value) {
+        iconRef.value.innerHTML = iconDom.innerHTML
+      }
 
       if (window.ORCHID_ICONS) {
         window.ORCHID_ICONS[props.name] = iconDom.innerHTML
@@ -50,7 +53,7 @@ const setIconRef = (text, isNew = true) => {
       }
     }
     iconDom.remove()
-  } else {
+  } else if (iconRef.value) {
     iconRef.value.innerHTML = text
   }
 }
