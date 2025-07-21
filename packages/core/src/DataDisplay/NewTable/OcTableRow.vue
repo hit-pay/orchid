@@ -144,7 +144,7 @@ const emit = defineEmits(['toggleChildren'])
 
 const getStyleVariants = (header) => {
   return {
-    'font-reddit-mono': header.variant === 'data',
+    'font-reddit-mono': header.variant === 'date',
     'font-reddit-mono font-semibold': header.variant === 'amount',
     'text-oc-text-400': header.variant === 'secondary'
   }
