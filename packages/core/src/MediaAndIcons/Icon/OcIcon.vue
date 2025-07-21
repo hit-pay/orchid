@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted } from 'vue'
+import { ref, watch, onMounted, nextTick } from 'vue'
 const props = defineProps({
   path: {
     type: String,
@@ -75,14 +75,19 @@ const renderIcon = () => {
   }
 }
 
-onMounted(() => {
-  renderIcon()
+onMounted(async () => {
+  await nextTick()
+  if (iconRef.value) {
+    renderIcon()
+  }
 })
 
 watch(
   () => props.name,
   () => {
-    renderIcon()
+    if (iconRef.value) {
+      renderIcon()
+    }
   }
 )
 </script>
