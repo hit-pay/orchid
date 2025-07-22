@@ -1,8 +1,8 @@
 <template>
-  <tr class="group/row">
+  <tr class="hoverable-row" @click="$emit('click', $event)">
     <td
       v-if="isExpand"
-      class="p-0 border-r border-oc-gray-200 sticky left-0 z-20 group-hover/row:bg-oc-bg-dark"
+      class="p-0 border-r border-oc-gray-200 sticky left-0 z-20"
       data-expand-column
       :class="[
         index !== sortedFields.length - 1 ? 'border-b' : '',
@@ -21,7 +21,7 @@
     </td>
     <td
       v-if="isSelectable"
-      class="p-0 border-r border-oc-gray-200 sticky z-20 group-hover/row:bg-oc-bg-dark"
+      class="p-0 border-r border-oc-gray-200 sticky z-20"
       :class="[
         isExpand ? 'left-[31px]' : 'left-0',
         index !== sortedFields.length - 1 ? 'border-b' : '',
@@ -40,7 +40,7 @@
     <td
       v-for="(header, headerIndex) in headers"
       :key="header.key + index"
-      class="p-0 group-hover/row:bg-oc-bg-dark"
+      class="p-0"
       :class="[
         { 'border-b border-oc-gray-200': index !== sortedFields.length - 1 },
         isChild ? 'bg-oc-bg-dark' : 'bg-oc-bg-light',
@@ -140,7 +140,7 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['toggleChildren'])
+const emit = defineEmits(['toggleChildren', 'click'])
 
 const getStyleVariants = (header) => {
   return {
@@ -157,3 +157,11 @@ const toggleChildren = () => {
   emit('toggleChildren')
 }
 </script>
+
+<style>
+/* Add hover effect for table rows */
+.hoverable-row:hover td {
+  background-color: var(--oc-gray-50) !important;
+  cursor: pointer;
+}
+</style>
