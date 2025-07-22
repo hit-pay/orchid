@@ -5,7 +5,7 @@
         <slot name="before" />
       </div>
 
-      <div ref="scrollContainerRef" class="w-full" :class="{ 'overflow-auto': !isLoading }">
+      <div ref="scrollContainerRef" class="w-full relative" :class="{ 'overflow-auto': !isLoading, 'min-h-[200px]': isLoading }">
         <table
           ref="tableRef"
           class="w-full text-left text-[13px] border-oc-gray-200"
@@ -91,20 +91,30 @@
               </template>
             </OcTableRow>
           </tbody>
-
-          <tbody v-else>
-            <tr v-for="i in loadingRows" :key="i">
-              <td v-for="j in headers.length" :key="j" class="p-0 bg-oc-bg-light">
-                <div
-                  class="px-5 py-3"
-                  :class="{ 'border-b border-oc-gray-200': i !== loadingRows }"
-                >
-                  <Skeleton class="w-full h-6 rounded" />
-                </div>
-              </td>
-            </tr>
-          </tbody>
         </table>
+          <div v-if="isLoading" class="absolute top-[35px] h-[calc(100%-35px)] inset-0 flex items-center justify-center bg-white z-40">
+            <div class="flex justify-center items-center py-10">
+              <span class="inline-block w-12 h-12 animate-spin">
+                <svg class="w-full h-full" viewBox="0 0 32 32">
+                  <circle
+                    class="text-oc-gray-200"
+                    cx="16" cy="16" r="14" fill="none" stroke="currentColor" stroke-width="4" opacity="0.2"
+                  />
+                  <path
+                    class="text-oc-gray-400"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    d="M16 2
+                      a 14 14 0 0 1 0 28
+                      a 14 14 0 0 1 0 -28"
+                    stroke-dasharray="66 22"
+                  />
+                </svg>
+              </span>
+            </div>
+          </div>
         <slot v-if="!fields.length && !isLoading" name="empty" />
       </div>
     </div>
@@ -133,10 +143,6 @@ const props = defineProps({
   isLoading: {
     type: Boolean,
     default: false
-  },
-  loadingRows: {
-    type: Number,
-    default: 10
   }
 })
 
@@ -144,7 +150,6 @@ const emit = defineEmits(['update:selected', 'click:row'])
 
 const fields = computed(() => (!props.isLoading ? props.options?.fields : []))
 const headers = computed(() => props.options?.headers ?? [])
-const isSticky = computed(() => (!props.isLoading ? props.options?.isSticky : false))
 const isSelectable = computed(() => (!props.isLoading ? props.options?.isSelectable : false))
 const isExpand = computed(() => (props.options?.isExpand && !props?.isLoading) ?? false)
 
@@ -394,7 +399,7 @@ const resizableGrid = (table) => {
         cols[i].appendChild(div)
 
         // Only set position relative if not sticky
-        const isStickyCol = isSticky.value && (i === 0 || i === cols.length - 1)
+        const isStickyCol = (i === 0 || i === cols.length - 1)
         if (!isStickyCol) {
           cols[i].style.position = 'relative'
         }
@@ -454,28 +459,17 @@ watch(
 )
 
 const getStickyClasses = (header, headerKey, isHeader = false) => {
-  if (!isSticky.value) return ''
-
   const classes = []
-
   const indexOfHeader = headers.value.findIndex((h) => h.key === headerKey)
-
-  // Only sticky left - first column or explicit stickyLeft
-  if (indexOfHeader === 0 || header.stickyLeft) {
-    // Calculate the left position based on expand and selectable columns
+  if (indexOfHeader === 0) {
     let leftPosition = 'left-0'
-
     if (isExpand.value && isSelectable.value) {
-      // Both: first data column should be at left-62 (32px + 32px)
       leftPosition = 'left-[62px]'
     } else if (isExpand.value || isSelectable.value) {
-      // Only one of them: first data column should be at left-31 (32px)
       leftPosition = 'left-[31px]'
     }
-
     classes.push(`!sticky ${leftPosition} ${isHeader ? 'z-30' : 'z-20'}`)
   }
-
   return classes.join(' ')
 }
 
@@ -500,6 +494,7 @@ const selectAllRows = () => {
 
 const onClickRow = (field, header) => {
   if (!header.disableClickRow && header.key !== 'actions') {
+    console.log(123)
     emit('click:row', {
       field: field,
       header: header
