@@ -47,6 +47,7 @@
         isChild && !headerIndex ? '!pl-4' : '',
         getStickyClasses(header, header.key, false)
       ]"
+      @click="$emit('click:col', row, header)"
     >
       <div
         class="px-5 py-3 text-[13px] flex gap-2 items-center justify-between w-full"
@@ -140,7 +141,7 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['toggleChildren', 'click'])
+const emit = defineEmits(['toggleChildren', 'click', 'click:col'])
 
 const getStyleVariants = (header) => {
   return {

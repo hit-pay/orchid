@@ -5,7 +5,11 @@
         <slot name="before" />
       </div>
 
-      <div ref="scrollContainerRef" class="w-full relative" :class="{ 'overflow-auto': !isLoading, 'min-h-[200px]': isLoading }">
+      <div
+        ref="scrollContainerRef"
+        class="w-full relative"
+        :class="{ 'overflow-auto': !isLoading, 'min-h-[200px]': isLoading }"
+      >
         <table
           ref="tableRef"
           class="w-full text-left text-[13px] border-oc-gray-200"
@@ -84,7 +88,7 @@
               :get-row-key="getRowKey"
               :get-sticky-classes="getStickyClasses"
               @toggle-children="recreateResizeHandles"
-              @click="onClickRow(row, headers[index])"
+              @click:col="onClickRow"
             >
               <template v-for="name in Object.keys($slots)" #[name]="slotData">
                 <slot :name="name" v-bind="slotData" />
@@ -92,29 +96,38 @@
             </OcTableRow>
           </tbody>
         </table>
-          <div v-if="isLoading" class="absolute top-[35px] h-[calc(100%-35px)] inset-0 flex items-center justify-center bg-white z-40">
-            <div class="flex justify-center items-center py-10">
-              <span class="inline-block w-12 h-12 animate-spin">
-                <svg class="w-full h-full" viewBox="0 0 32 32">
-                  <circle
-                    class="text-oc-gray-200"
-                    cx="16" cy="16" r="14" fill="none" stroke="currentColor" stroke-width="4" opacity="0.2"
-                  />
-                  <path
-                    class="text-oc-gray-400"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    d="M16 2
+        <div
+          v-if="isLoading"
+          class="absolute top-[35px] h-[calc(100%-35px)] inset-0 flex items-center justify-center bg-white z-40"
+        >
+          <div class="flex justify-center items-center py-10">
+            <span class="inline-block w-12 h-12 animate-spin">
+              <svg class="w-full h-full" viewBox="0 0 32 32">
+                <circle
+                  class="text-oc-gray-200"
+                  cx="16"
+                  cy="16"
+                  r="14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="4"
+                  opacity="0.2"
+                />
+                <path
+                  class="text-oc-gray-400"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  d="M16 2
                       a 14 14 0 0 1 0 28
                       a 14 14 0 0 1 0 -28"
-                    stroke-dasharray="66 22"
-                  />
-                </svg>
-              </span>
-            </div>
+                  stroke-dasharray="66 22"
+                />
+              </svg>
+            </span>
           </div>
+        </div>
         <slot v-if="!fields.length && !isLoading" name="empty" />
       </div>
     </div>
@@ -399,7 +412,7 @@ const resizableGrid = (table) => {
         cols[i].appendChild(div)
 
         // Only set position relative if not sticky
-        const isStickyCol = (i === 0 || i === cols.length - 1)
+        const isStickyCol = i === 0 || i === cols.length - 1
         if (!isStickyCol) {
           cols[i].style.position = 'relative'
         }
@@ -491,10 +504,8 @@ const selectAllRows = () => {
   selectedRows.value = allRowsSelected ? [] : [...fields.value]
 }
 
-
 const onClickRow = (field, header) => {
   if (!header.disableClickRow && header.key !== 'actions') {
-    console.log(123)
     emit('click:row', {
       field: field,
       header: header
