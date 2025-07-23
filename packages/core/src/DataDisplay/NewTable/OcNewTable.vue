@@ -7,8 +7,8 @@
 
       <div
         ref="scrollContainerRef"
-        class="w-full relative"
-        :class="{ 'overflow-auto': !isLoading, 'min-h-[200px]': isLoading }"
+        class="w-full"
+        :class="{ 'overflow-auto': !isLoading, }"
       >
         <table
           ref="tableRef"
@@ -95,39 +95,22 @@
               </template>
             </OcTableRow>
           </tbody>
+
+          <tbody v-else>
+            <tr>
+              <td>
+                <div :style="{ width: scrollContainerRef?.offsetWidth + 'px' }" class="flex flex-col justify-center items-center py-10 gap-y-4 bg-white relative z-100">
+                  <img src="/images/loading-spinner.gif" alt="loading" class="w-12 h-12" />
+                  <div v-if="showLoadingText" class="flex flex-col text-center gap-y-2">
+                    <span class="font-medium">Fetching data</span>
+                    <span class="text-oc-text-400 text-sm">Loading data, this may take a few moments..</span>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
         </table>
-        <div
-          v-if="isLoading"
-          class="absolute top-[35px] h-[calc(100%-35px)] inset-0 flex items-center justify-center bg-white z-40"
-        >
-          <div class="flex justify-center items-center py-10">
-            <span class="inline-block w-12 h-12 animate-spin">
-              <svg class="w-full h-full" viewBox="0 0 32 32">
-                <circle
-                  class="text-oc-gray-200"
-                  cx="16"
-                  cy="16"
-                  r="14"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="4"
-                  opacity="0.2"
-                />
-                <path
-                  class="text-oc-gray-400"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  d="M16 2
-                      a 14 14 0 0 1 0 28
-                      a 14 14 0 0 1 0 -28"
-                  stroke-dasharray="66 22"
-                />
-              </svg>
-            </span>
-          </div>
-        </div>
+        
         <slot v-if="!fields.length && !isLoading" name="empty" />
       </div>
     </div>
@@ -242,6 +225,30 @@ let pageX = null
 let curColWidth = null
 let nxtColWidth = null
 const isScrolledToLeft = ref(true)
+
+const showLoadingText = ref(false)
+let loadingTimeout = null
+
+watch(
+  () => props.isLoading,
+  (newVal) => {
+    if (newVal) {
+      showLoadingText.value = false
+      if (loadingTimeout) clearTimeout(loadingTimeout)
+      loadingTimeout = setTimeout(() => {
+        if (props.isLoading) {
+          showLoadingText.value = true
+        }
+      }, 3000)
+    } else {
+      showLoadingText.value = false
+      if (loadingTimeout) {
+        clearTimeout(loadingTimeout)
+        loadingTimeout = null
+      }
+    }
+  }
+)
 
 const createDiv = (height, columnElement) => {
   // Remove any existing resize handle with data-resize-handle="true"
@@ -481,7 +488,7 @@ const getStickyClasses = (header, headerKey, isHeader = false) => {
     } else if (isExpand.value || isSelectable.value) {
       leftPosition = 'left-[31px]'
     }
-    classes.push(`!sticky ${leftPosition} ${isHeader ? 'z-30' : 'z-20'}`)
+    classes.push(`!sticky ${leftPosition} ${props.isLoading ? 'z-[0]' : isHeader ? 'z-30' : 'z-20'}`)
   }
   return classes.join(' ')
 }

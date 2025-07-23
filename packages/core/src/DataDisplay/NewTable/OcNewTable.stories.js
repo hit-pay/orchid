@@ -42,6 +42,22 @@ export const Default = {
           label: 'Status'
         },
         {
+          key: 'status2',
+          label: 'Status 2'
+        },
+        {
+          key: 'status3',
+          label: 'Status 3'
+        },
+        {
+          key: 'status4',
+          label: 'Status 4'
+        },
+        {
+          key: 'status5',
+          label: 'Status 5'
+        },
+        {
           key: 'actions',
           label: '',
           headerClass: 'w-[100px]'
