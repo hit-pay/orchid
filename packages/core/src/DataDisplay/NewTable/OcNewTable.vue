@@ -100,7 +100,7 @@
             <tr>
               <td>
                 <div :style="{ width: scrollContainerRef?.offsetWidth + 'px' }" class="flex flex-col justify-center items-center py-10 gap-y-4 bg-white relative z-100">
-                  <img src="/images/loading-spinner.gif" alt="loading" class="w-12 h-12" />
+                  <img src="./loading-spinner.gif" alt="loading" class="w-12 h-12" />
                   <div v-if="showLoadingText" class="flex flex-col text-center gap-y-2">
                     <span class="font-medium">Fetching data</span>
                     <span class="text-oc-text-400 text-sm">Loading data, this may take a few moments..</span>
