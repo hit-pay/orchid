@@ -23,6 +23,7 @@ export const formatFilterDisplay = (filterData, filterOptions) => {
       }
     })
 
+  
     if (
       name !== 'page' &&
       name !== 'cursor' &&
@@ -67,8 +68,13 @@ export const formatFilterDisplay = (filterData, filterOptions) => {
 
           optionLabel = selectedValuesInArray
             .map(
-              (selectedValue) =>
-                option.props.options.find(({ value }) => value === selectedValue)?.label
+              (selectedValue) => 
+                option.props.options.find(({ value }) => {
+                  if(Array.isArray(selectedValue) && Array.isArray(value)) {
+                    return selectedValue.every(v => value.includes(v))
+                  }
+                  return value === selectedValue
+                })?.label
             )
             .join(', ')
         }
