@@ -1,5 +1,5 @@
 <template>
-  <tr class="hoverable-row" @click="$emit('click', $event)">
+  <tr class="hoverable-row group/row" @click="$emit('click', $event)">
     <td
       v-if="isExpand"
       class="p-0 border-r border-oc-gray-200 sticky left-0 z-20"
