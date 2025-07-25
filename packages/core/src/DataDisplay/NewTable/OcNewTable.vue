@@ -246,7 +246,6 @@ watch(
         clearTimeout(loadingTimeout)
         loadingTimeout = null
       }
-      recreateResizeHandles()
     }
   }
 )
@@ -439,13 +438,31 @@ const handleScroll = () => {
   }
 }
 
-const recreateResizeHandles = async () => {
-  await nextTick()
+let tableMutationObserver = null
+
+// Debounce utility
+function debounce(fn, delay) {
+  let timer = null
+  return function (...args) {
+    if (timer) clearTimeout(timer)
+    timer = setTimeout(() => {
+      fn.apply(this, args)
+    }, delay)
+  }
+}
+
+const recreateResizeHandles = () => {
+  if (tableMutationObserver) tableMutationObserver.disconnect();
   if (tableRef.value) {
     clearResizeHandles(tableRef.value)
     resizableGrid(tableRef.value)
   }
+  if (tableRef.value && tableMutationObserver) {
+    tableMutationObserver.observe(tableRef.value, { childList: true, subtree: true })
+  }
 }
+
+const debouncedRecreateResizeHandles = debounce(recreateResizeHandles, 50)
 
 onMounted(async () => {
   // Wait for Vue to finish rendering
@@ -457,7 +474,11 @@ onMounted(async () => {
       resizableGrid(tableRef.value)
       scrollContainerRef.value.addEventListener('scroll', handleScroll)
       handleScroll()
-    } else {
+      // Set up MutationObserver to watch for changes in the table
+      tableMutationObserver = new MutationObserver(() => {
+        debouncedRecreateResizeHandles()
+      })
+      tableMutationObserver.observe(tableRef.value, { childList: true, subtree: true })
     }
   }, 100)
 
@@ -468,15 +489,11 @@ onMounted(async () => {
 onUnmounted(() => {
   document.removeEventListener('mousemove', handleMouseMove)
   document.removeEventListener('mouseup', handleMouseUp)
+  if (tableMutationObserver) {
+    tableMutationObserver.disconnect()
+    tableMutationObserver = null
+  }
 })
-
-// Watch for header changes to reinitialize resize handles
-watch(
-  () => [headers.value?.length, fields.value?.length],
-  () => {
-    recreateResizeHandles()
-  },
-)
 
 const getStickyClasses = (header, headerKey, isHeader = false) => {
   const classes = []
