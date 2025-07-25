@@ -246,6 +246,7 @@ watch(
         clearTimeout(loadingTimeout)
         loadingTimeout = null
       }
+      recreateResizeHandles()
     }
   }
 )
@@ -471,11 +472,10 @@ onUnmounted(() => {
 
 // Watch for header changes to reinitialize resize handles
 watch(
-  () => [headers.value, fields.value, props.isLoading],
+  () => [headers.value?.length, fields.value?.length],
   () => {
     recreateResizeHandles()
   },
-  { deep: true }
 )
 
 const getStickyClasses = (header, headerKey, isHeader = false) => {
