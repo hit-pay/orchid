@@ -5,11 +5,7 @@
         <slot name="before" />
       </div>
 
-      <div
-        ref="scrollContainerRef"
-        class="w-full"
-        :class="{ 'overflow-auto': !isLoading, }"
-      >
+      <div ref="scrollContainerRef" class="w-full" :class="{ 'overflow-auto': !isLoading }">
         <table
           ref="tableRef"
           class="w-full text-left text-[13px] border-oc-gray-200"
@@ -99,18 +95,23 @@
           <tbody v-else>
             <tr>
               <td>
-                <div :style="{ width: scrollContainerRef?.offsetWidth + 'px' }" class="flex flex-col justify-center items-center py-10 gap-y-4 bg-white relative z-100">
+                <div
+                  :style="{ width: scrollContainerRef?.offsetWidth + 'px' }"
+                  class="flex flex-col justify-center items-center py-10 gap-y-4 bg-white relative z-100"
+                >
                   <img src="./loading-spinner.gif" alt="loading" class="w-12 h-12" />
                   <div v-if="showLoadingText" class="flex flex-col text-center gap-y-2">
                     <span class="font-medium">Fetching data</span>
-                    <span class="text-oc-text-400 text-sm">Loading data, this may take a few moments..</span>
+                    <span class="text-oc-text-400 text-sm"
+                      >Loading data, this may take a few moments..</span
+                    >
                   </div>
                 </div>
               </td>
             </tr>
           </tbody>
         </table>
-        
+
         <slot v-if="!fields.length && !isLoading" name="empty" />
       </div>
     </div>
@@ -431,7 +432,7 @@ const resizableGrid = (table) => {
 }
 
 const handleScroll = () => {
-  if (scrollContainerRef.value.scrollLeft > 0) {
+  if (scrollContainerRef.value?.scrollLeft > 0) {
     isScrolledToLeft.value = true
   } else {
     isScrolledToLeft.value = false
@@ -452,7 +453,7 @@ function debounce(fn, delay) {
 }
 
 const recreateResizeHandles = () => {
-  if (tableMutationObserver) tableMutationObserver.disconnect();
+  if (tableMutationObserver) tableMutationObserver.disconnect()
   if (tableRef.value) {
     clearResizeHandles(tableRef.value)
     resizableGrid(tableRef.value)
@@ -505,7 +506,9 @@ const getStickyClasses = (header, headerKey, isHeader = false) => {
     } else if (isExpand.value || isSelectable.value) {
       leftPosition = 'left-[31px]'
     }
-    classes.push(`!sticky ${leftPosition} ${props.isLoading ? 'z-[0]' : isHeader ? 'z-30' : 'z-20'}`)
+    classes.push(
+      `!sticky ${leftPosition} ${props.isLoading ? 'z-[0]' : isHeader ? 'z-30' : 'z-20'}`
+    )
   }
   return classes.join(' ')
 }
