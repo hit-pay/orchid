@@ -34,7 +34,7 @@ const props = defineProps({
   sortBy: {
     type: Object,
     default: () => ({})
-  },
+  }
 })
 
 const emit = defineEmits({
@@ -105,9 +105,12 @@ const isScrollOnEnd = ref(true)
 const scrollTable = ref()
 const onScroll = () => {
   if (!props.isSticky) return
-  isScrollOnStart.value = scrollTable.value.scrollLeft === 0
-  isScrollOnEnd.value =
-    scrollTable.value.scrollLeft + scrollTable.value.clientWidth === scrollTable.value.scrollWidth
+
+  if (scrollTable.value) {
+    isScrollOnStart.value = scrollTable.value.scrollLeft === 0
+    isScrollOnEnd.value =
+      scrollTable.value.scrollLeft + scrollTable.value.clientWidth === scrollTable.value.scrollWidth
+  }
 }
 onMounted(() => onScroll())
 </script>
@@ -173,7 +176,7 @@ onMounted(() => onScroll())
           ]"
           :is-sortable="header.isSortable"
           :sort-by="sortBy[header.key]"
-          @update:sort-by="$emit('update:sort-by', {key: header.key, value: $event})"
+          @update:sort-by="$emit('update:sort-by', { key: header.key, value: $event })"
           class="md:border-b border-oc-gray-200"
         >
           <template #default>
