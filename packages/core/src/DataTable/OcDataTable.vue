@@ -533,6 +533,9 @@ watch(
       <template #table-body="slotProps">
         <slot name="table-body" v-bind="slotProps"></slot>
       </template>
+      <template #after-rows>
+        <slot name="after-rows" />
+      </template>
     </component>
 
     <slot name="before-pagination"></slot>
