@@ -90,6 +90,7 @@
                 <slot :name="name" v-bind="slotData" />
               </template>
             </OcTableRow>
+            <slot name="after-rows" />
           </tbody>
 
           <tbody v-else>
