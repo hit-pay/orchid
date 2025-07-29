@@ -313,7 +313,12 @@ const setImageAlign = (align = 'left') => {
 
 const onClickContent = () => {
   const focusNode = window.getSelection()?.focusNode
-  showImageWidthToolbar.value = focusNode.innerHTML && focusNode.innerHTML.includes('<img')
+  const html =
+    focusNode?.nodeType === Node.ELEMENT_NODE
+      ? focusNode?.innerHTML
+      : focusNode?.parentElement?.innerHTML
+
+  showImageWidthToolbar.value = typeof html === 'string' && html?.includes('<img')
 }
 
 const tableModal = ref(false)
