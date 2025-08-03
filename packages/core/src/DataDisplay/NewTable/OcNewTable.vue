@@ -334,8 +334,25 @@ const handleMouseMove = (e) => {
     const adjustedPageX = e.pageX + scrollLeft
     const diffX = adjustedPageX - pageX
 
+    // Get the header for this column to determine minimum width
+    const colIndex = Array.from(curCol.parentElement.children).indexOf(curCol)
+    let headerIndex = colIndex
+    if (isExpand.value) headerIndex--
+    if (isSelectable.value) headerIndex--
+    
+    const header = headers.value[headerIndex]
+    let minWidth = COLUMN_WIDTH.DEFAULT
+    if (header) {
+      if (header.minWidth !== undefined) {
+        minWidth = header.minWidth
+      } else if (header.key === 'actions') {
+        minWidth = COLUMN_WIDTH.ACTIONS
+      }
+    }
+
+
     // Only change the width of the current column
-    const newCurWidth = Math.max(125, curColWidth + diffX) // Minimum 125px width
+    const newCurWidth = Math.max(minWidth, curColWidth + diffX)
     curCol.style.width = newCurWidth + 'px'
     curCol.style.minWidth = newCurWidth + 'px'
 
@@ -385,7 +402,6 @@ const resizableGrid = (table) => {
 
   const tableHeight = table.offsetHeight
   const tableWidth = table.offsetWidth
-  const colWidth = Math.max(COLUMN_WIDTH.DEFAULT, Math.floor(tableWidth / cols.length)) // Minimum DEFAULT px
 
   for (let i = 0; i < cols.length; i++) {
     // Check if this column has data-checkbox-column or data-expand-column attribute
@@ -404,13 +420,20 @@ const resizableGrid = (table) => {
     if (isSelectable.value) headerIndex--
 
     const header = headers.value[headerIndex]
-    // Set min width based on key
-    const minWidth =
-      header && header.key === 'actions' ? COLUMN_WIDTH.ACTIONS : COLUMN_WIDTH.DEFAULT
+    
+    // Set min width based on header.minWidth if available, otherwise use default logic
+    let minWidth = COLUMN_WIDTH.DEFAULT
+    if (header) {
+      if (header.minWidth !== undefined) {
+        minWidth = header.minWidth
+      } else if (header.key === 'actions') {
+        minWidth = COLUMN_WIDTH.ACTIONS
+      }
+    }
 
     // Set initial width for each column
     if (header && header.key !== 'actions') {
-      cols[i].style.width = colWidth + 'px'
+      cols[i].style.width = minWidth + 'px'
     }
     cols[i].style.minWidth = minWidth + 'px'
 
