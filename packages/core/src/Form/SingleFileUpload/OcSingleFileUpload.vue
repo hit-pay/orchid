@@ -4,6 +4,7 @@ import { Input, Button, BaseInput, Icon, Dropdown } from '@/orchidui-core'
 import { useUploadFileProgress } from '@/orchidui-core/composables/uploadFileProgress.js'
 import { ModalCropper } from '@/orchidui-core'
 import SingleOnlyImageUpload from './OcSingleOnlyImageUpload.vue'
+import OcSimpleMultipleUpload from '@/orchidui-core/Form/MultipleUploadFile/OcSimpleMultipleUpload.vue'
 
 const props = defineProps({
   format: {
@@ -53,7 +54,8 @@ const emit = defineEmits([
   'onRemoveFile',
   'onExceedMaxFileSize',
   'fileExist',
-  'invalidFileType'
+  'invalidFileType',
+  'onOpenEditImage'
 ])
 
 const inputRef = ref()
@@ -140,6 +142,7 @@ const onUploadImage = ($event) => {
       @update:uploaded-image="onUploadImage"
       @change="onChangeFile($event, props.format === 'object')"
       @delete="onDeleteFile(0)"
+      @on-open-edit-image="$emit('onOpenEditImage', $event)"
     />
     <template v-else-if="isButtonOnly">
       <Button v-bind="buttonUploadProps" @click="inputRef?.click()" />
