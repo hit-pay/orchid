@@ -30,6 +30,7 @@ const emit = defineEmits([
   'update:uploadedImages',
   'onRemoveImage',
   'onEditImage',
+  'onOpenEditImage',
   'delete',
   'onMaxFileExceed',
   'fileExist',
@@ -116,6 +117,7 @@ const editSelectedImage = (i, img) => {
   })
   isDropdownOpen[i] = false
   isEditOpen.value = true
+  emit('onOpenEditImage', img)
 }
 </script>
 
