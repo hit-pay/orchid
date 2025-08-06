@@ -1,6 +1,7 @@
 <script setup>
 import { BaseInput, Button, Chip, Dropdown, Icon, Input, Option, Skeleton } from '@/orchidui-core'
 import { computed, nextTick, ref, watch } from 'vue'
+import { deepEqual } from './utils/deepEqual'
 
 const props = defineProps({
   label: String,
@@ -136,12 +137,12 @@ const localValueOption = computed(() => {
         for (const option of props.options) {
           if (option.values) {
             option.values.forEach((o) => {
-              if (o.value === value) {
+              if (deepEqual(o.value, value)) {
                 selected.push(o)
               }
             })
           } else {
-            if (option.value === value) {
+            if (deepEqual(option.value, value)) {
               selected.push(option)
             }
           }
@@ -150,7 +151,7 @@ const localValueOption = computed(() => {
     }
     return selected
   } else {
-    return props.options.find((o) => o.value?.toString() === props.modelValue?.toString())
+    return props.options.find((o) => deepEqual(o.value, props.modelValue))
   }
 })
 
@@ -162,7 +163,7 @@ const selectOption = (option) => {
   let result
 
   if (props.multiple) {
-    const isOptionHasBeenSelected = (props.modelValue || []).find((o) => o === option.value)
+    const isOptionHasBeenSelected = (props.modelValue || []).find((o) => deepEqual(o, option.value))
 
     if (
       !isOptionHasBeenSelected &&
@@ -175,7 +176,7 @@ const selectOption = (option) => {
     }
 
     result = isOptionHasBeenSelected
-      ? (props.modelValue || []).filter((o) => o !== option.value)
+      ? (props.modelValue || []).filter((o) => !deepEqual(o, option.value))
       : [...(props.modelValue || []), option.value]
   } else {
     result = option.value
@@ -188,7 +189,7 @@ const selectOption = (option) => {
 const removeOption = (value) => {
   emit(
     'update:modelValue',
-    (props.modelValue || []).filter((o) => o !== value)
+    (props.modelValue || []).filter((o) => !deepEqual(o, value))
   )
 }
 const selectAll = () => {
@@ -243,7 +244,7 @@ const onUpdateDropdown = () => {
     if (!currentValue) return
 
     filterableOptions.value.find((option, index) => {
-      if (option.value === currentValue) {
+      if (deepEqual(option.value, currentValue)) {
         selectedIndex = index
         return true
       }
@@ -437,9 +438,9 @@ defineExpose({
                 :is-selected="
                   multiple
                     ? modelValue
-                      ? modelValue.find((o) => o === option.value) !== undefined
+                      ? modelValue.find((o) => deepEqual(o, option.value)) !== undefined
                       : false
-                    : modelValue === option.value
+                    : deepEqual(modelValue, option.value)
                 "
                 @click="selectOption(option)"
               />
