@@ -54,7 +54,13 @@
         :class="[header.class, getStyleVariants(header)]"
       >
         <slot :name="header.key" :item="row" :data="row[header.key]">
-          <div v-if="header.variant === 'date'" class="truncate">{{ row[header.key] ? dayjs(row[header.key]).format(header.dateFormat || 'MMM DD HH:mm:ss') : 'N/A' }}</div>
+          <div v-if="header.variant === 'date'" class="truncate">
+            {{
+              row[header.key]
+                ? dayjs(row[header.key]).format(header.dateFormat || 'MMM DD HH:mm:ss')
+                : 'N/A'
+            }}
+          </div>
           <div v-else class="truncate">{{ row[header.key] || 'N/A' }}</div>
         </slot>
 
@@ -90,6 +96,7 @@
 <script setup>
 import { CopyTooltip, Icon, Checkbox } from '@/orchidui-core'
 import { ref } from 'vue'
+import dayjs from 'dayjs'
 
 const props = defineProps({
   headers: {
