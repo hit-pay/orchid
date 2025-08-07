@@ -100,6 +100,10 @@ const props = defineProps({
   trailingClass: {
     type: String,
     default: ''
+  },
+  leadingClass: {
+    type: String,
+    default: ''
   }
 })
 
@@ -198,7 +202,7 @@ const isPasswordInput = computed(() => props.inputType === 'password')
         </div>
       </div>
 
-      <div v-if="$slots.leading || isPasswordInput" class="flex items-center h-full">
+      <div v-if="$slots.leading || isPasswordInput" class="flex items-center h-full" :class="leadingClass">
         <span v-if="hasLeadingSeparator" class="border-l border-gray-200 pl-3 py-3 h-full"></span>
         <span
           v-if="!$slots.leading"
