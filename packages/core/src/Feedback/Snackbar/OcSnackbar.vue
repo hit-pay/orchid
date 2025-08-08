@@ -1,6 +1,6 @@
 <script setup>
 import { Icon, Button } from '@/orchidui-core'
-import { computed, nextTick, ref, watch } from 'vue'
+import { computed, nextTick, ref, watch, onMounted, onUnmounted } from 'vue'
 
 const props = defineProps({
   modelValue: {
@@ -92,13 +92,29 @@ const snackBar = ref()
 const halfWindowWidth = ref()
 const isSmall = computed(() => props.size === 'small')
 const isBig = computed(() => props.size === 'big')
+
+function calculateHalfWindowWidth() {
+  halfWindowWidth.value = window.innerWidth / 2
+}
+
 watch(
   () => props.modelValue,
   async () => {
     await nextTick()
-    halfWindowWidth.value = (document.body.clientWidth - snackBar.value.clientWidth) / 2
+    calculateHalfWindowWidth()
   }
 )
+
+onMounted(() => {
+  window.addEventListener('resize', calculateHalfWindowWidth)
+
+  // Recalculate half window width after 100ms to ensure the snackbar is mounted
+  setTimeout(calculateHalfWindowWidth, 100)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', calculateHalfWindowWidth)
+})
 </script>
 
 <template>
@@ -110,7 +126,7 @@ watch(
         colorClasses[color],
         isFloating && positionClasses[position],
         {
-          '!fixed z-[1004]': isFloating,
+          '!fixed z-[1004] -translate-x-1/2': isFloating,
           'gap-x-2 py-3 px-4 items-center': isSmall,
           'gap-x-5 pt-5 pb-6 px-5 items-start': isBig,
           'gap-x-4 py-4 px-5 items-center': !isBig && !isSmall,
@@ -182,11 +198,11 @@ watch(
 }
 
 .slide-from-top-enter-from {
-  transform: translateY(-200%);
+  @apply translate-y-[-200%];
 }
 
 .slide-from-top-enter-to {
-  transform: translateY(0%);
+  @apply translate-y-0;
 }
 
 .slide-from-top-leave-from {
