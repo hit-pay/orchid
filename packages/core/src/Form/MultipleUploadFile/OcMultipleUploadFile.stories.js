@@ -101,13 +101,19 @@ export const MultipleImages = {
       const modelValue = ref([
         {
           current: {
+            id: 'sample',
+            path: 'http://localhost:6006/packages/dashboard/src/Dashboard/Card/assets/cross_feature.svg'
+          }
+        },
+        {
+          current: {
             id: 'image_1',
             path: 'https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/covers/small/99d696e564ba45fbaa0fb2e3b43d0e27.jpg',
             caption: 'Image 1',
             link: 'https://test-link.com',
             caption_variant: 'bottom'
           }
-        },
+        }
         // {
         //   current: {
         //     id: 'image_2',
