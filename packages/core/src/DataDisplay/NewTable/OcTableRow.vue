@@ -1,5 +1,5 @@
 <template>
-  <tr class="group/row">
+  <tr class="hoverable-row group/row" @click="$emit('click', $event)">
     <td
       v-if="isExpand"
       class="p-0 border-r border-oc-gray-200 sticky left-0 z-20"
@@ -47,13 +47,21 @@
         isChild && !headerIndex ? '!pl-4' : '',
         getStickyClasses(header, header.key, false)
       ]"
+      @click="$emit('click:col', row, header)"
     >
       <div
         class="px-5 py-3 text-[13px] flex gap-2 items-center justify-between w-full"
         :class="[header.class, getStyleVariants(header)]"
       >
         <slot :name="header.key" :item="row" :data="row[header.key]">
-          <div class="truncate">{{ row[header.key] || 'N/A' }}</div>
+          <div v-if="header.variant === 'date'" class="truncate">
+            {{
+              row[header.key]
+                ? dayjs(row[header.key]).format(header.dateFormat || 'MMM DD HH:mm:ss')
+                : 'N/A'
+            }}
+          </div>
+          <div v-else class="truncate">{{ row[header.key] || 'N/A' }}</div>
         </slot>
 
         <CopyTooltip
@@ -88,6 +96,7 @@
 <script setup>
 import { CopyTooltip, Icon, Checkbox } from '@/orchidui-core'
 import { ref } from 'vue'
+import dayjs from 'dayjs'
 
 const props = defineProps({
   headers: {
@@ -140,11 +149,11 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['toggleChildren'])
+const emit = defineEmits(['toggleChildren', 'click', 'click:col'])
 
 const getStyleVariants = (header) => {
   return {
-    'font-reddit-mono': header.variant === 'data',
+    'font-reddit-mono': header.variant === 'date',
     'font-reddit-mono font-semibold': header.variant === 'amount',
     'text-oc-text-400': header.variant === 'secondary'
   }
@@ -157,3 +166,11 @@ const toggleChildren = () => {
   emit('toggleChildren')
 }
 </script>
+
+<style>
+/* Add hover effect for table rows */
+.hoverable-row:hover td {
+  background-color: var(--oc-gray-50) !important;
+  cursor: pointer;
+}
+</style>

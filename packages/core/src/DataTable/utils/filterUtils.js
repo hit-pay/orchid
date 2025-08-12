@@ -10,7 +10,7 @@ export const getFilterFieldNames = (filterNames) => {
 
 export const formatFilterDisplay = (filterData, filterOptions) => {
   if (!filterData) return []
-  
+
   let display = []
   Object.keys(filterData).forEach((name) => {
     let filterTabKey = filterOptions?.tabs?.key
@@ -68,7 +68,12 @@ export const formatFilterDisplay = (filterData, filterOptions) => {
           optionLabel = selectedValuesInArray
             .map(
               (selectedValue) =>
-                option.props.options.find(({ value }) => value === selectedValue)?.label
+                option.props.options.find(({ value }) => {
+                  if (Array.isArray(selectedValue) && Array.isArray(value)) {
+                    return selectedValue.every((v) => value.includes(v))
+                  }
+                  return value === selectedValue
+                })?.label
             )
             .join(', ')
         }
@@ -132,9 +137,8 @@ export const clearAllFilters = (filterData, filterOptions, itemsPerPage, activeF
   }
 
   if (filterOptions?.columnEdit?.key) {
-    defaultFilters[filterOptions?.columnEdit?.key] =
-      filterData[filterOptions?.columnEdit?.key]
+    defaultFilters[filterOptions?.columnEdit?.key] = filterData[filterOptions?.columnEdit?.key]
   }
 
   return defaultFilters
-} 
+}

@@ -30,6 +30,7 @@ const emit = defineEmits([
   'update:uploadedImages',
   'onRemoveImage',
   'onEditImage',
+  'onOpenEditImage',
   'delete',
   'onMaxFileExceed',
   'fileExist',
@@ -116,6 +117,7 @@ const editSelectedImage = (i, img) => {
   })
   isDropdownOpen[i] = false
   isEditOpen.value = true
+  emit('onOpenEditImage', img)
 }
 </script>
 
@@ -171,6 +173,7 @@ const editSelectedImage = (i, img) => {
               <slot name="action" :item="img" :remove-item="onDeleteFile" :file-index="i">
                 <div class="py-2 flex flex-col">
                   <div
+                    v-if="img?.current?.id !== 'sample'"
                     class="flex p-3 cursor-pointer items-center gap-x-3"
                     @click="editSelectedImage(i, img)"
                   >
