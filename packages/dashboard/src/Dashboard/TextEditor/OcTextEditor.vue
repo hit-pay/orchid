@@ -53,9 +53,10 @@ const props = defineProps({
   placeholder: {
     type: String,
     default: ''
-  }
+  },
+  isCustomImageUpload: Boolean
 })
-const emit = defineEmits(['update:modelValue', 'update:image'])
+const emit = defineEmits(['update:modelValue', 'update:image', 'uploadImage'])
 
 const variants = {
   default: [
@@ -206,6 +207,14 @@ const uploadImage = () => {
   if (!quill.value.getQuill().getSelection())
     !quill.value.getQuill().setSelection(quill.value.getQuill().getLength() - 1)
 
+  if (props.isCustomImageUpload) {
+    const range = quill.value.getQuill().getSelection()
+    if (!range) return
+
+    emit('upload-image', quill.value)
+    return
+  }
+
   const input = document.createElement('input')
   input.type = 'file'
   input.accept = 'jpg,.jpeg,.png,.webp,.gif'
@@ -304,7 +313,12 @@ const setImageAlign = (align = 'left') => {
 
 const onClickContent = () => {
   const focusNode = window.getSelection()?.focusNode
-  showImageWidthToolbar.value = focusNode.innerHTML && focusNode.innerHTML.includes('<img')
+  const html =
+    focusNode?.nodeType === Node.ELEMENT_NODE
+      ? focusNode?.innerHTML
+      : focusNode?.parentElement?.innerHTML
+
+  showImageWidthToolbar.value = typeof html === 'string' && html?.includes('<img')
 }
 
 const tableModal = ref(false)

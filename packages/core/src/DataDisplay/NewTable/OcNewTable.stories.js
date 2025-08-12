@@ -10,14 +10,12 @@ export default {
 export const Default = {
   args: {
     isLoading: false,
-    loadingRows: 10,
     options: {
       headers: [
         {
           key: 'date',
           label: 'Date',
-          class: 'font-reddit-mono',
-          stickyLeft: true
+          class: 'font-reddit-mono'
         },
         {
           key: 'email',
@@ -44,15 +42,30 @@ export const Default = {
           label: 'Status'
         },
         {
+          key: 'status2',
+          label: 'Status 2'
+        },
+        {
+          key: 'status3',
+          label: 'Status 3'
+        },
+        {
+          key: 'status4',
+          label: 'Status 4'
+        },
+        {
+          key: 'status5',
+          label: 'Status 5'
+        },
+        {
           key: 'actions',
           label: '',
           headerClass: 'w-[100px]'
         }
       ],
       fields: [],
-      isSelectable: true,
-      isSticky: true,
-      isExpand: true
+      isSelectable: false,
+      isExpand: false
     }
   },
   render: (args) => ({

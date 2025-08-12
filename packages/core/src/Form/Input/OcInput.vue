@@ -100,6 +100,10 @@ const props = defineProps({
   trailingClass: {
     type: String,
     default: ''
+  },
+  leadingClass: {
+    type: String,
+    default: ''
   }
 })
 
@@ -156,7 +160,11 @@ const isPasswordInput = computed(() => props.inputType === 'password')
       :class="inputClasses"
       @click="$refs.inputRef?.focus()"
     >
-      <div v-if="$slots.trailing" class="border-r py-2 border-gray-200 pr-3 flex items-center h-full" :class="trailingClass">
+      <div
+        v-if="$slots.trailing"
+        class="border-r py-2 border-gray-200 pr-3 flex items-center h-full"
+        :class="trailingClass"
+      >
         <slot name="trailing" />
       </div>
 
@@ -198,7 +206,11 @@ const isPasswordInput = computed(() => props.inputType === 'password')
         </div>
       </div>
 
-      <div v-if="$slots.leading || isPasswordInput" class="flex items-center h-full">
+      <div
+        v-if="$slots.leading || isPasswordInput"
+        class="flex items-center h-full"
+        :class="leadingClass"
+      >
         <span v-if="hasLeadingSeparator" class="border-l border-gray-200 pl-3 py-3 h-full"></span>
         <span
           v-if="!$slots.leading"

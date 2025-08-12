@@ -10,7 +10,7 @@ export const getFilterFieldNames = (filterNames) => {
 
 export const formatFilterDisplay = (filterData, filterOptions) => {
   if (!filterData) return []
-  
+
   let display = []
   Object.keys(filterData).forEach((name) => {
     let filterTabKey = filterOptions?.tabs?.key
@@ -132,9 +132,8 @@ export const clearAllFilters = (filterData, filterOptions, itemsPerPage, activeF
   }
 
   if (filterOptions?.columnEdit?.key) {
-    defaultFilters[filterOptions?.columnEdit?.key] =
-      filterData[filterOptions?.columnEdit?.key]
+    defaultFilters[filterOptions?.columnEdit?.key] = filterData[filterOptions?.columnEdit?.key]
   }
 
   return defaultFilters
-} 
+}

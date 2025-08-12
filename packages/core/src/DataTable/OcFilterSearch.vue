@@ -97,7 +97,7 @@ const handleClickClear = () => {
 
       <span
         v-if="!isSearchOnly"
-        class="text-base cursor-pointer flex normal-case items-center font-medium text-oc-text-400"
+        class="cursor-pointer flex normal-case items-center font-medium text-sm text-oc-text-400"
         @click="handleClickClear"
       >
         Clear
