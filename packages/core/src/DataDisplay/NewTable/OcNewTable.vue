@@ -84,27 +84,36 @@
               :get-row-key="getRowKey"
               :get-sticky-classes="getStickyClasses"
               @toggle-children="recreateResizeHandles"
+              @click:col="onClickRow"
             >
               <template v-for="name in Object.keys($slots)" #[name]="slotData">
                 <slot :name="name" v-bind="slotData" />
               </template>
             </OcTableRow>
+            <slot name="after-rows" />
           </tbody>
 
           <tbody v-else>
-            <tr v-for="i in loadingRows" :key="i">
-              <td v-for="j in headers.length" :key="j" class="p-0 bg-oc-bg-light">
+            <tr>
+              <td>
                 <div
-                  class="px-5 py-3"
-                  :class="{ 'border-b border-oc-gray-200': i !== loadingRows }"
+                  :style="{ width: scrollContainerRef?.offsetWidth + 'px' }"
+                  class="flex flex-col justify-center items-center py-10 gap-y-4 bg-white relative z-100"
                 >
-                  <Skeleton class="w-full h-6 rounded" />
+                  <img src="./loading-spinner.gif" alt="loading" class="w-7 h-7" />
+                  <div v-if="showLoadingText" class="flex flex-col text-center gap-y-2">
+                    <span class="font-medium">Fetching data</span>
+                    <span class="text-oc-text-400 text-sm"
+                      >Loading data, this may take a few moments..</span
+                    >
+                  </div>
                 </div>
               </td>
             </tr>
           </tbody>
         </table>
-        <slot v-if="!fields.length" name="empty" />
+
+        <slot v-if="!fields.length && !isLoading" name="empty" />
       </div>
     </div>
     <slot name="after" />
@@ -132,10 +141,6 @@ const props = defineProps({
   isLoading: {
     type: Boolean,
     default: false
-  },
-  loadingRows: {
-    type: Number,
-    default: 10
   }
 })
 
@@ -143,7 +148,6 @@ const emit = defineEmits(['update:selected', 'click:row'])
 
 const fields = computed(() => (!props.isLoading ? props.options?.fields : []))
 const headers = computed(() => props.options?.headers ?? [])
-const isSticky = computed(() => (!props.isLoading ? props.options?.isSticky : false))
 const isSelectable = computed(() => (!props.isLoading ? props.options?.isSelectable : false))
 const isExpand = computed(() => (props.options?.isExpand && !props?.isLoading) ?? false)
 
@@ -193,7 +197,7 @@ const sortedFields = computed(() => {
 })
 
 const COLUMN_WIDTH = {
-  DEFAULT: 175,
+  DEFAULT: 125,
   ACTIONS: 32
 }
 
@@ -223,6 +227,30 @@ let pageX = null
 let curColWidth = null
 let nxtColWidth = null
 const isScrolledToLeft = ref(true)
+
+const showLoadingText = ref(false)
+let loadingTimeout = null
+
+watch(
+  () => props.isLoading,
+  (newVal) => {
+    if (newVal) {
+      showLoadingText.value = false
+      if (loadingTimeout) clearTimeout(loadingTimeout)
+      loadingTimeout = setTimeout(() => {
+        if (props.isLoading) {
+          showLoadingText.value = true
+        }
+      }, 3000)
+    } else {
+      showLoadingText.value = false
+      if (loadingTimeout) {
+        clearTimeout(loadingTimeout)
+        loadingTimeout = null
+      }
+    }
+  }
+)
 
 const createDiv = (height, columnElement) => {
   // Remove any existing resize handle with data-resize-handle="true"
@@ -306,8 +334,24 @@ const handleMouseMove = (e) => {
     const adjustedPageX = e.pageX + scrollLeft
     const diffX = adjustedPageX - pageX
 
+    // Get the header for this column to determine minimum width
+    const colIndex = Array.from(curCol.parentElement.children).indexOf(curCol)
+    let headerIndex = colIndex
+    if (isExpand.value) headerIndex--
+    if (isSelectable.value) headerIndex--
+
+    const header = headers.value[headerIndex]
+    let minWidth = COLUMN_WIDTH.DEFAULT
+    if (header) {
+      if (header.minWidth !== undefined) {
+        minWidth = header.minWidth
+      } else if (header.key === 'actions') {
+        minWidth = COLUMN_WIDTH.ACTIONS
+      }
+    }
+
     // Only change the width of the current column
-    const newCurWidth = Math.max(175, curColWidth + diffX) // Minimum 150px width
+    const newCurWidth = Math.max(minWidth, curColWidth + diffX)
     curCol.style.width = newCurWidth + 'px'
     curCol.style.minWidth = newCurWidth + 'px'
 
@@ -357,7 +401,6 @@ const resizableGrid = (table) => {
 
   const tableHeight = table.offsetHeight
   const tableWidth = table.offsetWidth
-  const colWidth = Math.max(COLUMN_WIDTH.DEFAULT, Math.floor(tableWidth / cols.length)) // Minimum DEFAULT px
 
   for (let i = 0; i < cols.length; i++) {
     // Check if this column has data-checkbox-column or data-expand-column attribute
@@ -376,13 +419,20 @@ const resizableGrid = (table) => {
     if (isSelectable.value) headerIndex--
 
     const header = headers.value[headerIndex]
-    // Set min width based on key
-    const minWidth =
-      header && header.key === 'actions' ? COLUMN_WIDTH.ACTIONS : COLUMN_WIDTH.DEFAULT
+
+    // Set min width based on header.minWidth if available, otherwise use default logic
+    let minWidth = COLUMN_WIDTH.DEFAULT
+    if (header) {
+      if (header.minWidth !== undefined) {
+        minWidth = header.minWidth
+      } else if (header.key === 'actions') {
+        minWidth = COLUMN_WIDTH.ACTIONS
+      }
+    }
 
     // Set initial width for each column
     if (header && header.key !== 'actions') {
-      cols[i].style.width = colWidth + 'px'
+      cols[i].style.width = minWidth + 'px'
     }
     cols[i].style.minWidth = minWidth + 'px'
 
@@ -393,7 +443,7 @@ const resizableGrid = (table) => {
         cols[i].appendChild(div)
 
         // Only set position relative if not sticky
-        const isStickyCol = isSticky.value && (i === 0 || i === cols.length - 1)
+        const isStickyCol = i === 0 || i === cols.length - 1
         if (!isStickyCol) {
           cols[i].style.position = 'relative'
         }
@@ -405,20 +455,38 @@ const resizableGrid = (table) => {
 }
 
 const handleScroll = () => {
-  if (scrollContainerRef.value.scrollLeft > 0) {
+  if (scrollContainerRef.value?.scrollLeft > 0) {
     isScrolledToLeft.value = true
   } else {
     isScrolledToLeft.value = false
   }
 }
 
-const recreateResizeHandles = async () => {
-  await nextTick()
+let tableMutationObserver = null
+
+// Debounce utility
+function debounce(fn, delay) {
+  let timer = null
+  return function (...args) {
+    if (timer) clearTimeout(timer)
+    timer = setTimeout(() => {
+      fn.apply(this, args)
+    }, delay)
+  }
+}
+
+const recreateResizeHandles = () => {
+  if (tableMutationObserver) tableMutationObserver.disconnect()
   if (tableRef.value) {
     clearResizeHandles(tableRef.value)
     resizableGrid(tableRef.value)
   }
+  if (tableRef.value && tableMutationObserver) {
+    tableMutationObserver.observe(tableRef.value, { childList: true, subtree: true })
+  }
 }
+
+const debouncedRecreateResizeHandles = debounce(recreateResizeHandles, 50)
 
 onMounted(async () => {
   // Wait for Vue to finish rendering
@@ -430,7 +498,11 @@ onMounted(async () => {
       resizableGrid(tableRef.value)
       scrollContainerRef.value.addEventListener('scroll', handleScroll)
       handleScroll()
-    } else {
+      // Set up MutationObserver to watch for changes in the table
+      tableMutationObserver = new MutationObserver(() => {
+        debouncedRecreateResizeHandles()
+      })
+      tableMutationObserver.observe(tableRef.value, { childList: true, subtree: true })
     }
   }, 100)
 
@@ -441,40 +513,26 @@ onMounted(async () => {
 onUnmounted(() => {
   document.removeEventListener('mousemove', handleMouseMove)
   document.removeEventListener('mouseup', handleMouseUp)
+  if (tableMutationObserver) {
+    tableMutationObserver.disconnect()
+    tableMutationObserver = null
+  }
 })
 
-// Watch for header changes to reinitialize resize handles
-watch(
-  () => [headers.value, fields.value, props.isLoading],
-  () => {
-    recreateResizeHandles()
-  },
-  { deep: true }
-)
-
 const getStickyClasses = (header, headerKey, isHeader = false) => {
-  if (!isSticky.value) return ''
-
   const classes = []
-
   const indexOfHeader = headers.value.findIndex((h) => h.key === headerKey)
-
-  // Only sticky left - first column or explicit stickyLeft
-  if (indexOfHeader === 0 || header.stickyLeft) {
-    // Calculate the left position based on expand and selectable columns
+  if (indexOfHeader === 0) {
     let leftPosition = 'left-0'
-
     if (isExpand.value && isSelectable.value) {
-      // Both: first data column should be at left-62 (32px + 32px)
       leftPosition = 'left-[62px]'
     } else if (isExpand.value || isSelectable.value) {
-      // Only one of them: first data column should be at left-31 (32px)
       leftPosition = 'left-[31px]'
     }
-
-    classes.push(`!sticky ${leftPosition} ${isHeader ? 'z-30' : 'z-20'}`)
+    classes.push(
+      `!sticky ${leftPosition} ${props.isLoading ? 'z-[0]' : isHeader ? 'z-30' : 'z-20'}`
+    )
   }
-
   return classes.join(' ')
 }
 
@@ -494,6 +552,15 @@ const selectAllRows = () => {
   const allRowsSelected = selectedRows.value.length === fields.value.length
 
   selectedRows.value = allRowsSelected ? [] : [...fields.value]
+}
+
+const onClickRow = (field, header) => {
+  if (!header.disableClickRow && header.key !== 'actions') {
+    emit('click:row', {
+      field: field,
+      header: header
+    })
+  }
 }
 </script>
 
