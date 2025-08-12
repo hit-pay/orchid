@@ -176,8 +176,8 @@ onMounted(() => onScroll())
           ]"
           :is-sortable="header.isSortable"
           :sort-by="sortBy[header.key]"
-          @update:sort-by="$emit('update:sort-by', { key: header.key, value: $event })"
           class="md:border-b border-oc-gray-200"
+          @update:sort-by="$emit('update:sort-by', { key: header.key, value: $event })"
         >
           <template #default>
             <slot :name="`header-${header.key}`" />

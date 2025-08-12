@@ -15,7 +15,7 @@ export const Default = {
         {
           key: 'date',
           label: 'Date',
-          class: 'font-reddit-mono',
+          class: 'font-reddit-mono'
         },
         {
           key: 'email',

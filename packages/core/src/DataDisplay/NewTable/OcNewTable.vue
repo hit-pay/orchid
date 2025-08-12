@@ -339,7 +339,7 @@ const handleMouseMove = (e) => {
     let headerIndex = colIndex
     if (isExpand.value) headerIndex--
     if (isSelectable.value) headerIndex--
-    
+
     const header = headers.value[headerIndex]
     let minWidth = COLUMN_WIDTH.DEFAULT
     if (header) {
@@ -349,7 +349,6 @@ const handleMouseMove = (e) => {
         minWidth = COLUMN_WIDTH.ACTIONS
       }
     }
-
 
     // Only change the width of the current column
     const newCurWidth = Math.max(minWidth, curColWidth + diffX)
@@ -420,7 +419,7 @@ const resizableGrid = (table) => {
     if (isSelectable.value) headerIndex--
 
     const header = headers.value[headerIndex]
-    
+
     // Set min width based on header.minWidth if available, otherwise use default logic
     let minWidth = COLUMN_WIDTH.DEFAULT
     if (header) {
