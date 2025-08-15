@@ -19,7 +19,9 @@ export const Default = {
         },
         {
           key: 'email',
-          label: 'Email'
+          label: 'Email',
+          variant: 'tooltip',
+          tooltipMinLength: 5
         },
         {
           key: 'id',
