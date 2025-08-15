@@ -54,7 +54,27 @@
         :class="[header.class, getStyleVariants(header)]"
       >
         <slot :name="header.key" :item="row" :data="row[header.key]">
-          <div v-if="header.variant === 'date'" class="truncate">
+          <Tooltip
+            v-if="header.variant === 'tooltip' && row[header.key]?.length > header.tooltipMinLength"
+            :popper-options="{ strategy: 'fixed' }"
+            position="top"
+            arrow-hidden
+            popper-class="!rounded"
+            is-popover
+            is-attach-to-body
+            class="w-[inherit] block"
+          >
+            <div class="truncate">{{ row[header.key] ?? 'N/A' }}</div>
+
+            <template #popper>
+              <div
+                class="text-oc-text-400 rounded py-2 px-3 whitespace-nowrap font-medium bg-oc-bg-light"
+              >
+                {{ row[header.key] }}
+              </div>
+            </template>
+          </Tooltip>
+          <div v-else-if="header.variant === 'date'" class="truncate">
             {{
               row[header.key]
                 ? dayjs(row[header.key]).format(header.dateFormat || 'MMM DD HH:mm:ss')
@@ -67,6 +87,7 @@
         <CopyTooltip
           v-if="header.isCopy && row[header.key]"
           :value="row[header.key]"
+          :tooltip-options="{ isAttachToBody: true }"
           class="opacity-0 group-hover/row:opacity-100"
         />
       </div>
@@ -89,12 +110,16 @@
       :get-row-key="getRowKey"
       :select-row="selectRow"
       :get-sticky-classes="getStickyClasses"
-    />
+    >
+      <template v-for="(_, name) in $slots" #[name]="slotProps">
+        <slot :name="name" v-bind="{ ...slotProps, isChild: true }" />
+      </template>
+    </OcTableRow>
   </template>
 </template>
 
 <script setup>
-import { CopyTooltip, Icon, Checkbox } from '@/orchidui-core'
+import { CopyTooltip, Icon, Checkbox, Tooltip } from '@/orchidui-core'
 import { ref } from 'vue'
 import dayjs from 'dayjs'
 
