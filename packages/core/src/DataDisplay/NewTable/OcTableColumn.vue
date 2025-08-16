@@ -17,7 +17,7 @@ const props = defineProps({
 const textEl = ref()
 const isShowTooltip = ref(false)
 
-function isTruncated(el) {
+const isTruncated = (el) => {
   if (!el) return false
   const style = window.getComputedStyle(el)
   const singleLine = style.whiteSpace === 'nowrap'
