@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { Tooltip } from '@/orchidui-core'
 import { onMounted, ref, nextTick } from 'vue'
-import dayjs from 'dayjs'
 
 const props = defineProps({
   header: {
@@ -14,8 +13,8 @@ const props = defineProps({
   }
 })
 
-const textEl = ref()
 const isShowTooltip = ref(false)
+const textEl = ref()
 
 const isTruncated = (el) => {
   if (!el) return false
@@ -51,13 +50,5 @@ onMounted(async () => {
       </div>
     </template>
   </Tooltip>
-  <div v-else-if="header.variant === 'date'" class="truncate">
-    d
-    {{
-      row[header.key]
-        ? dayjs(row[header.key]).format(header.dateFormat || 'MMM DD HH:mm:ss')
-        : 'N/A'
-    }}
-  </div>
   <div v-else ref="textEl" class="truncate">{{ row[header.key] || 'N/A' }}</div>
 </template>

@@ -54,7 +54,16 @@
         :class="[header.class, getStyleVariants(header)]"
       >
         <slot :name="header.key" :item="row" :data="row[header.key]">
-          <OcTableColumn :row="row" :header="header" />
+          <OcTableTooltipColumn v-if="header.variant === 'tooltip'" :row="row" :header="header" />
+
+          <div v-else-if="header.variant === 'date'" class="truncate">
+            {{
+              row[header.key]
+                ? dayjs(row[header.key]).format(header.dateFormat || 'MMM DD HH:mm:ss')
+                : 'N/A'
+            }}
+          </div>
+          <div v-else class="truncate">{{ row[header.key] || 'N/A' }}</div>
         </slot>
 
         <CopyTooltip
@@ -94,7 +103,8 @@
 <script setup>
 import { CopyTooltip, Icon, Checkbox } from '@/orchidui-core'
 import { ref } from 'vue'
-import OcTableColumn from '@/orchidui-core/DataDisplay/NewTable/OcTableColumn.vue'
+import OcTableTooltipColumn from '@/orchidui-core/DataDisplay/NewTable/OcTableTooltipColumn.vue'
+import dayjs from 'dayjs'
 
 const props = defineProps({
   headers: {
