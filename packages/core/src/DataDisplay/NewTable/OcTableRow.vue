@@ -54,26 +54,8 @@
         :class="[header.class, getStyleVariants(header)]"
       >
         <slot :name="header.key" :item="row" :data="row[header.key]">
-          <Tooltip
-            v-if="header.variant === 'tooltip' && row[header.key]?.length > header.tooltipMinLength"
-            :popper-options="{ strategy: 'fixed' }"
-            position="top"
-            arrow-hidden
-            popper-class="!rounded"
-            is-popover
-            is-attach-to-body
-            class="w-[inherit] block"
-          >
-            <div class="truncate">{{ row[header.key] ?? 'N/A' }}</div>
+          <OcTableTooltipColumn v-if="header.variant === 'tooltip'" :row="row" :header="header" />
 
-            <template #popper>
-              <div
-                class="text-oc-text-400 rounded py-2 px-3 whitespace-nowrap font-medium bg-oc-bg-light"
-              >
-                {{ row[header.key] }}
-              </div>
-            </template>
-          </Tooltip>
           <div v-else-if="header.variant === 'date'" class="truncate">
             {{
               row[header.key]
@@ -119,8 +101,9 @@
 </template>
 
 <script setup>
-import { CopyTooltip, Icon, Checkbox, Tooltip } from '@/orchidui-core'
+import { CopyTooltip, Icon, Checkbox } from '@/orchidui-core'
 import { ref } from 'vue'
+import OcTableTooltipColumn from '@/orchidui-core/DataDisplay/NewTable/OcTableTooltipColumn.vue'
 import dayjs from 'dayjs'
 
 const props = defineProps({
