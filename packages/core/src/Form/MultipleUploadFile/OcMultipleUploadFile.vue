@@ -11,7 +11,8 @@ const emit = defineEmits([
   'onRemoveFile',
   'onExceedMaxFileSize',
   'onMaxFileExceed',
-  'onOpenEditImage'
+  'onOpenEditImage',
+  'onImageError'
 ])
 const props = defineProps({
   modelValue: {
@@ -131,6 +132,7 @@ const triggerInput = () => {
         @delete="onDeleteFile"
         @on-max-file-exceed="$emit('onMaxFileExceed', $event)"
         @on-open-edit-image="$emit('onOpenEditImage', $event)"
+        @on-image-error="$emit('onImageError', $event)"
       >
         <template #action="slotData">
           <slot

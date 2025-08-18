@@ -34,7 +34,8 @@ const emit = defineEmits([
   'delete',
   'onMaxFileExceed',
   'fileExist',
-  'invalidFileType'
+  'invalidFileType',
+  'onImageError'
 ])
 const isDropdownOpen = ref([])
 const isEditOpen = ref(false)
@@ -119,6 +120,10 @@ const editSelectedImage = (i, img) => {
   isEditOpen.value = true
   emit('onOpenEditImage', img)
 }
+
+const handleImageError = (img) => {
+  emit('onImageError', img.fileUrl)
+}
 </script>
 
 <template>
@@ -156,9 +161,14 @@ const editSelectedImage = (i, img) => {
             'border-oc-primary': selectedImage.fileName === img.fileName,
             'col-start-2': i === 0 && showAddBtn
           }"
-          :style="`background-image: url(${img.fileUrl})`"
           @click="$emit('update:selectedImage', img)"
         >
+          <img
+            :src="img.fileUrl"
+            alt="uploaded-image"
+            class="object-cover object-center w-full h-full"
+            @error="handleImageError(img)"
+          />
           <Dropdown
             v-if="!isDisabled"
             v-model="isDropdownOpen[i]"
