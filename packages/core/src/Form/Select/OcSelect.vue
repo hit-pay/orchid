@@ -226,7 +226,7 @@ const popperStyle = computed(() => {
   return { maxWidth: maxPopperWidth.value }
 })
 const onUpdateDropdown = () => {
-  emit('toggle')
+  emit('toggle', isDropdownOpened.value)
   maxPopperWidth.value = baseInput.value?.$el?.offsetWidth
     ? `${baseInput.value?.$el?.offsetWidth}px`
     : '100%'
