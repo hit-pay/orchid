@@ -1,7 +1,7 @@
 <script setup>
 import { Button, Input, Checkbox, RadioGroup, Icon, Tooltip } from '@/orchidui-core'
 import { Cropper } from 'vue-advanced-cropper'
-import { nextTick, ref, watch } from 'vue'
+import { computed, nextTick, ref, watch } from 'vue'
 import 'vue-advanced-cropper/dist/style.css'
 
 const props = defineProps({
@@ -23,6 +23,8 @@ const newImage = ref()
 const imageChanged = ref(false)
 
 const localInputOptionsValue = ref(props.inputOptionValues ?? {})
+
+const isImageFailed = computed(() => !cropper.value?.initialized)
 
 watch(
   () => props.inputOptionValues,
@@ -115,7 +117,7 @@ const isNewTab = ref(localInputOptionsValue.value.new_tab ? true : false)
 </script>
 
 <template>
-  <div class="flex flex-col gap-y-5">
+  <div class="flex flex-col gap-y-5 relative">
     <input
       id="cropper-file-input"
       ref="fileUploadEl"
@@ -137,12 +139,43 @@ const isNewTab = ref(localInputOptionsValue.value.new_tab ? true : false)
     />
     <img v-else class="w-full" :src="img" />
 
+    <div
+      v-if="isImageFailed"
+      class="absolute top-0 bottom-0 right-0 left-0 flex items-center justify-center h-[300px]"
+    >
+      <Icon name="no-image" :width="100" :height="100" />
+    </div>
+
     <div class="flex gap-x-1 justify-center relative">
       <template v-if="localImage">
-        <Button variant="secondary" size="small" left-icon="backward" @click="rotate(-90)" />
-        <Button variant="secondary" size="small" left-icon="zoom-out" @click="zoom(0.8)" />
-        <Button variant="secondary" size="small" left-icon="zoom-in" @click="zoom(1.2)" />
-        <Button variant="secondary" size="small" left-icon="forward" @click="rotate(90)" />
+        <Button
+          variant="secondary"
+          size="small"
+          left-icon="backward"
+          :is-disabled="isImageFailed"
+          @click="rotate(-90)"
+        />
+        <Button
+          variant="secondary"
+          size="small"
+          left-icon="zoom-out"
+          :is-disabled="isImageFailed"
+          @click="zoom(0.8)"
+        />
+        <Button
+          variant="secondary"
+          size="small"
+          left-icon="zoom-in"
+          :is-disabled="isImageFailed"
+          @click="zoom(1.2)"
+        />
+        <Button
+          variant="secondary"
+          size="small"
+          left-icon="forward"
+          :is-disabled="isImageFailed"
+          @click="rotate(90)"
+        />
       </template>
       <Button
         v-if="isReplaceImage"
@@ -213,7 +246,10 @@ const isNewTab = ref(localInputOptionsValue.value.new_tab ? true : false)
           @update:model-value="updateOptions('new_tab', $event)"
         >
         </Checkbox>
-        <div  v-if="inputOptions?.includes('lightbox')" class="flex items-center gap-x-2 justify-normal" >
+        <div
+          v-if="inputOptions?.includes('lightbox')"
+          class="flex items-center gap-x-2 justify-normal"
+        >
           <div class="w-auto">
             <Checkbox
               v-if="inputOptions?.includes('lightbox')"
