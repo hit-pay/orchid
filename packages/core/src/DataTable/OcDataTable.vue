@@ -12,7 +12,7 @@ import {
   Dropdown,
   NewTable
 } from '@/orchidui-core'
-import { ref, computed, onMounted, watch, nextTick } from 'vue'
+import { ref, computed, onMounted, watch, nextTick, toRaw } from 'vue'
 import ColumnEdit from './ColumnEdit.vue'
 
 import {
@@ -109,7 +109,7 @@ const hidePerPageDropdown = computed(() => props.options?.hidePerPageDropdown)
 
 const isLastPage = computed(() => paginationData.value?.last_page === 1)
 
-const defaultFilterData = JSON.parse(JSON.stringify({ ...props.filter }))
+const defaultFilterData = JSON.parse(JSON.stringify(toRaw(props.filter)))
 if (!defaultFilterData && paginationData.value) {
   defaultFilterData.page = 1
 } else if (!defaultFilterData && cursorOption) {
