@@ -307,10 +307,6 @@ onMounted(() => {
     emit('on-table-ready')
   })
 })
-
-const tableIsLoading = computed(() => {
-  return props.isLoading
-})
 </script>
 <template>
   <div class="relative flex flex-col gap-9">
@@ -320,7 +316,7 @@ const tableIsLoading = computed(() => {
       :selected="selected"
       :row-key="rowKey"
       :options="processedTableOptions"
-      :is-loading="tableIsLoading"
+      :is-loading="isLoading"
       :loading-rows="itemsPerPage"
       :row-class="rowClass"
       :row-link="rowLink"
@@ -346,7 +342,7 @@ const tableIsLoading = computed(() => {
             <Tabs
               v-if="filterOptions?.tabs"
               v-model="activeFilterTab"
-              :is-disabled="tableIsLoading"
+              :is-disabled="isLoading"
               :tabs="filterOptions.tabs.options"
               :variant="'pills'"
               @update:model-value="applyFilter(null, false, '', false, true)"
