@@ -226,7 +226,6 @@ const applyFilter = (
   isOnMount = false,
   isChangeTab = false
 ) => {
-  console.log('____applyFilter____')
   if (paginationData.value && !isChangePage) {
     currentPage.value = 1
   }
