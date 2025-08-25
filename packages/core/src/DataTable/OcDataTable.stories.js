@@ -937,8 +937,7 @@ export const NewTable = {
       const selectedRows = ref([])
       const showDropdown = ref({})
       const updateFilterData = (data) => {
-        filter.value = data
-        console.log(123, filter.value)
+        console.log('updateFilterData', data)
       }
       const onClickRow = (val) => {
         console.log('onClickRow  ', val)
@@ -971,7 +970,7 @@ export const NewTable = {
                   v-model:selected="selectedRows"
                   row-key="id"
                   row-link="link"
-                  :filter="filter" 
+                  v-model:filter="filter" 
                   :options="args.options"
                   :is-loading="args.isLoading"
                   is-new-table
