@@ -38,7 +38,7 @@ const props = defineProps({
   },
   filter: {
     type: Object,
-    required: true
+    default: () => ({})
   },
   selected: {
     type: Array,
@@ -116,6 +116,14 @@ if (!defaultFilterData && paginationData.value) {
   defaultFilterData.cursor = ''
 }
 const filterData = ref(defaultFilterData)
+
+watch(
+  () => props.filter,
+  (newVal) => {
+    filterData.value = { ...newVal }
+  },
+  { deep: true }
+)
 
 const isFilterDropdownOpen = ref(false)
 const activeFilterTab = ref(filterData.value[filterOptions.value?.tabs?.key])
