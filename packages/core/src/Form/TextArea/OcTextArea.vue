@@ -64,7 +64,7 @@ const onInput = (event) => {
       :class="[
         isFocused ? 'focused-shadow' : '',
         errorMessage ? 'error-shadow' : 'input-shadow',
-        autoResize ? 'resize-none' : 'resize-y'
+        !autoResize ? 'resize-none' : 'resize-y'
       ]"
       :disabled="isDisabled"
       :value="modelValue"
