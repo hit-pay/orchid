@@ -1021,3 +1021,102 @@ export const NewTable = {
         `
   })
 }
+
+export const WithoutFilter = {
+  args: {
+    options: {
+      tableOptions: {
+        headers: [
+          {
+            key: 'image',
+            variant: 'image',
+            label: 'Image',
+            class: 'w-1/2 md:min-w-[5%]'
+          },
+          {
+            key: 'col1',
+            label: 'Table Header',
+            class: 'w-1/2 md:min-w-[20%]'
+          },
+          {
+            key: 'col2',
+            label: 'Table Header',
+            class: 'w-1/2 md:min-w-[10%]'
+          },
+          {
+            key: 'col3',
+            variant: 'content',
+            label: 'Table Header',
+            title: 'col3Title',
+            href: 'col3Url',
+            class: 'w-1/2 md:min-w-[12%]'
+          },
+          {
+            key: 'col4',
+            label: 'Table Header',
+            class: 'w-1/2 md:min-w-[18%]'
+          },
+          {
+            key: 'col5',
+            label: 'Table Header',
+            class: 'w-1/2 md:min-w-[15%]',
+            variant: 'chip',
+            chipOptions: {
+              Label: {
+                label: 'Label',
+                variant: 'success',
+                icon: 'check'
+              }
+            }
+          },
+          {
+            key: 'col6',
+            label: 'Header',
+            class: 'w-1/2 md:min-w-[10%]'
+          },
+          {
+            key: 'actions',
+            label: '',
+            headerVariant: 'text',
+            variant: 'icon',
+            class: 'w-1/2 md:min-w-[5%]'
+          }
+        ],
+        fields: [
+          {
+            image: '',
+            imageTitle: '',
+            imageDescription: 'Table Cell column two',
+            col2: 'Table Cell',
+            col3Title: 'Table Cell',
+            col4: 'Table Cell column two',
+            col5: 'Label',
+            col6: false,
+            id: crypto.randomUUID()
+          }
+        ]
+      }
+    }
+  },
+  render: (args) => ({
+    components: {
+      DataTable,
+      Theme
+    },
+    setup() {
+      return {
+        args
+      }
+    },
+    template: `
+            <Theme class="p-8">
+              <DataTable 
+                  id="sample-data-without-filter"
+                  is-new-table
+                  :options="args.options"
+               >
+              </DataTable>
+            </Theme>
+          `
+  })
+}
