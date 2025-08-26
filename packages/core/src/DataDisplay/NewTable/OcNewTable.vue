@@ -146,7 +146,7 @@ const props = defineProps({
 
 const emit = defineEmits(['update:selected', 'click:row'])
 
-const fields = computed(() => (!props.isLoading ? props.options?.fields : []))
+const fields = computed(() => (!props.isLoading ? (props.options?.fields ?? []) : []))
 const headers = computed(() => props.options?.headers ?? [])
 const isSelectable = computed(() => (!props.isLoading ? props.options?.isSelectable : false))
 const isExpand = computed(() => (props.options?.isExpand && !props?.isLoading) ?? false)
