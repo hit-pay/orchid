@@ -39,6 +39,7 @@ const emit = defineEmits({
 })
 const datePicker = ref()
 const changeModelValue = (value) => {
+  if(!datePicker.value) return
   emit('update:modelValue', value)
   datePicker.value.calendarRef.focusDate(dayjs(value.start).toDate())
 }
@@ -67,6 +68,7 @@ const changeModelValue = (value) => {
           {{ shortcut.label }}
         </div>
       </div>
+      
       <DatePicker
         ref="datePicker"
         :model-value="modelValue"
