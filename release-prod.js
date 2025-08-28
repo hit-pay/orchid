@@ -16,6 +16,7 @@ function updateDependency(dependencyName) {
 
     // Check and update in dependencies
     if (packageJson.dependencies && packageJson.dependencies[dependencyName]) {
+      packageJson.version = newVersion
       packageJson.dependencies[dependencyName] = newVersion
       console.log(`Updated ${dependencyName} to version ${newVersion} in dependencies.`)
     }
