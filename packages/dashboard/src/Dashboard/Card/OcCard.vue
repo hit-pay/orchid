@@ -1,11 +1,12 @@
 <script setup>
 import { Button, Icon } from '@orchidui/core'
-import { computed } from 'vue'
-import CrossFeatureLogo from '@/orchidui-dashboard/Dashboard/Card/logo-animations/CrossFeatureLogo.vue'
-import CrossSellPosLogo from '@/orchidui-dashboard/Dashboard/Card/logo-animations/CrossSellPosLogo.vue'
-import CrossSellOsLogo from '@/orchidui-dashboard/Dashboard/Card/logo-animations/CrossSellOsLogo.vue'
-import VideoLogo from '@/orchidui-dashboard/Dashboard/Card/logo-animations/VideoLogo.vue'
-import EducationLogo from '@/orchidui-dashboard/Dashboard/Card/logo-animations/EducationLogo.vue'
+import { computed, defineAsyncComponent } from 'vue'
+
+const CrossFeatureLogo = defineAsyncComponent(() => import('@/orchidui-dashboard/Dashboard/Card/logo-animations/CrossFeatureLogo.vue'))
+const CrossSellPosLogo = defineAsyncComponent(() => import('@/orchidui-dashboard/Dashboard/Card/logo-animations/CrossSellPosLogo.vue'))
+const CrossSellOsLogo = defineAsyncComponent(() => import('@/orchidui-dashboard/Dashboard/Card/logo-animations/CrossSellOsLogo.vue'))
+const VideoLogo = defineAsyncComponent(() => import('@/orchidui-dashboard/Dashboard/Card/logo-animations/VideoLogo.vue'))
+const EducationLogo = defineAsyncComponent(() => import('@/orchidui-dashboard/Dashboard/Card/logo-animations/EducationLogo.vue'))
 
 defineEmits(['hide-all', 'learn-more'])
 
@@ -77,13 +78,13 @@ const mobileIcon = computed(() => {
       <slot name="logo">
         <EducationLogo v-if="type === 'education'" />
 
-        <CrossFeatureLogo v-if="type === 'cross_feature'" />
+        <CrossFeatureLogo v-else-if="type === 'cross_feature'" />
 
-        <CrossSellPosLogo v-if="type === 'cross_sell_pos'" />
+        <CrossSellPosLogo v-else-if="type === 'cross_sell_pos'" />
 
-        <CrossSellOsLogo v-if="type === 'cross_sell_os'" />
+        <CrossSellOsLogo v-else-if="type === 'cross_sell_os'" />
 
-        <VideoLogo v-if="type === 'video'" />
+        <VideoLogo v-else-if="type === 'video'" />
       </slot>
 
       <div class="max-w-[338px] relative z-10 flex flex-col w-full gap-y-3">
