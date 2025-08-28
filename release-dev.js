@@ -28,30 +28,49 @@ function updateDependency(dependencyName) {
   }
 }
 
-// Jalankan npm version prerelease terlebih dahulu, kemudian update dependency
+// Run npm version patch for core and dashboard, then update dependency
 async function runRelease() {
   try {
-    console.log('Running npm version prerelease...')
+    console.log('Running npm version patch for core...')
 
-    // Jalankan npm version prerelease dengan error handling yang lebih baik
-    const { stdout, stderr } = await execAsync('cd packages/core && npm version prerelease')
+    // Run npm version patch for core with better error handling
+    const { stdout: coreStdout, stderr: coreStderr } = await execAsync(
+      'cd packages/core && npm version patch'
+    )
 
-    if (stderr && !stderr.includes('npm notice')) {
-      console.error('npm version prerelease stderr:', stderr)
+    if (coreStderr && !coreStderr.includes('npm notice')) {
+      console.error('npm version patch core stderr:', coreStderr)
     }
 
-    console.log('npm version prerelease output:', stdout)
-    console.log('npm version prerelease completed successfully.')
+    console.log('npm version patch core output:', coreStdout)
+    console.log('npm version patch core completed successfully.')
 
-    // Tunggu sebentar untuk memastikan file sudah terupdate
+    // Wait a moment to ensure the file has been updated
     await new Promise((resolve) => setTimeout(resolve, 1000))
 
-    // Sekarang baca package.json yang sudah diupdate
+    console.log('Running npm version patch for dashboard...')
+
+    // Run npm version patch for dashboard
+    const { stdout: dashboardStdout, stderr: dashboardStderr } = await execAsync(
+      'cd packages/dashboard && npm version patch'
+    )
+
+    if (dashboardStderr && !dashboardStderr.includes('npm notice')) {
+      console.error('npm version patch dashboard stderr:', dashboardStderr)
+    }
+
+    console.log('npm version patch dashboard output:', dashboardStdout)
+    console.log('npm version patch dashboard completed successfully.')
+
+    // Wait a moment to ensure the file has been updated
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+
+    // Now read the updated package.json
     updateDependency('@orchidui/core')
   } catch (error) {
     console.error('Error during release process:', error.message)
 
-    // Jika npm version prerelease gagal, coba baca versi yang ada
+    // If npm version patch fails, try to read the current version
     console.log('Trying to read current version...')
     updateDependency('@orchidui/core')
   }

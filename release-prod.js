@@ -28,12 +28,12 @@ function updateDependency(dependencyName) {
   }
 }
 
-// Jalankan npm version minor untuk core dan dashboard, kemudian update dependency
+// Run npm version minor for core and dashboard, then update dependency
 async function runRelease() {
   try {
     console.log('Running npm version minor for core...')
 
-    // Jalankan npm version minor untuk core dengan error handling yang lebih baik
+    // Run npm version minor for core with better error handling
     const { stdout: coreStdout, stderr: coreStderr } = await execAsync(
       'cd packages/core && npm version minor'
     )
@@ -45,12 +45,12 @@ async function runRelease() {
     console.log('npm version minor core output:', coreStdout)
     console.log('npm version minor core completed successfully.')
 
-    // Tunggu sebentar untuk memastikan file sudah terupdate
+    // Wait a moment to ensure the file has been updated
     await new Promise((resolve) => setTimeout(resolve, 1000))
 
     console.log('Running npm version minor for dashboard...')
 
-    // Jalankan npm version minor untuk dashboard
+    // Run npm version minor for dashboard
     const { stdout: dashboardStdout, stderr: dashboardStderr } = await execAsync(
       'cd packages/dashboard && npm version minor'
     )
@@ -62,15 +62,15 @@ async function runRelease() {
     console.log('npm version minor dashboard output:', dashboardStdout)
     console.log('npm version minor dashboard completed successfully.')
 
-    // Tunggu sebentar untuk memastikan file sudah terupdate
+    // Wait a moment to ensure the file has been updated
     await new Promise((resolve) => setTimeout(resolve, 1000))
 
-    // Sekarang baca package.json yang sudah diupdate
+    // Now read the updated package.json
     updateDependency('@orchidui/core')
   } catch (error) {
     console.error('Error during release process:', error.message)
 
-    // Jika npm version minor gagal, coba baca versi yang ada
+    // If npm version minor fails, try to read the current version
     console.log('Trying to read current version...')
     updateDependency('@orchidui/core')
   }
