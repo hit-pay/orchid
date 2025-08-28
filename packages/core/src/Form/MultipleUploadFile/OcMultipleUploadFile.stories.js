@@ -102,7 +102,7 @@ export const MultipleImages = {
         {
           current: {
             id: 'sample',
-            path: 'http://localhost:6006/packages/dashboard/src/Dashboard/Card/assets/cross_feature.svg'
+            path: 'http://localhost:6006/packages/dashboard/src/Dashboard/Card/assets/cross_featsure.svg'
           }
         },
         {
@@ -129,7 +129,10 @@ export const MultipleImages = {
       const onEditFile = (currentFile) => {
         console.log('edited', currentFile.current)
       }
-      return { modelValue, args, selectedImage, onRemoveFile, onEditFile }
+      const onImageError = (fileUrl) => {
+        console.log('image error', fileUrl)
+      }
+      return { modelValue, args, selectedImage, onRemoveFile, onEditFile, onImageError }
     },
     template: `
       <Theme class="min-h-[500px]">
@@ -149,6 +152,7 @@ export const MultipleImages = {
             :input-options="args.inputOptions"
             @onEditFile="onEditFile"
             @onRemoveFile="onRemoveFile"
+            @onImageError="onImageError"
         >
         </MultipleUploadFile>
       </Theme>

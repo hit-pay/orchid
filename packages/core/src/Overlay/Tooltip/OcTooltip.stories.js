@@ -33,7 +33,8 @@ export const Default = {
     position: 'bottom',
     trigger: 'hover',
     distance: 10,
-    skidding: 0
+    skidding: 0,
+    isAttachToBody: false
   },
   render: (args) => ({
     components: { Tooltip, Theme },
@@ -46,7 +47,7 @@ export const Default = {
           <Theme>
             <div class="w-full h-[400px] flex items-center justify-center gap-3">
               <Tooltip :key="args.trigger" :trigger="args.trigger" :distance="args.distance" :skidding="args.skidding"
-                       :position="args.position" popper-class="bg-oc-bg">
+                       :position="args.position" :is-attach-to-body="args.isAttachToBody" popper-class="bg-oc-bg">
                 <div class="bg-oc-gray-300 p-3 rounded-sm cursor-pointer">Trigger</div>
                 <template #popper>
                   <div class="flex w-[300px] flex-col gap-y-3 p-4">
@@ -59,7 +60,7 @@ export const Default = {
                 </template>
               </Tooltip>
               <Tooltip :key="args.trigger" :trigger="args.trigger" :distance="args.distance" :skidding="args.skidding"
-                       :position="args.position" is-popover
+                       :position="args.position" :is-attach-to-body="args.isAttachToBody" is-popover
                        popper-class="bg-oc-gray-900 text-oc-text-100">
                 <div class="p-3 rounded-sm cursor-pointer">Trigger</div>
                 <template #popper>

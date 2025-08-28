@@ -53,6 +53,10 @@ const props = defineProps({
   isPopover: {
     type: Boolean,
     default: false
+  },
+  isAttachToBody: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -109,6 +113,7 @@ const onClickOutside = () => {
       :skidding="skidding"
       :distance="distance"
       :popper-options="popperOptions"
+      :is-attach-to-body="isAttachToBody"
       class="!z-[1010]"
     >
       <div ref="triggerEl" class="w-[inherit] relative">
@@ -118,7 +123,14 @@ const onClickOutside = () => {
         <Transition :name="transitionName">
           <div v-show="isShow" ref="popperBodyEl" class="oc-tooltip" :class="popperClass">
             <slot name="popper" />
-            <div v-if="!arrowHidden" class="oc-arrow" data-popper-arrow />
+            <div
+              v-if="!arrowHidden"
+              class="oc-arrow"
+              :class="{
+                '-top-2': isAttachToBody
+              }"
+              data-popper-arrow
+            />
           </div>
         </Transition>
       </template>

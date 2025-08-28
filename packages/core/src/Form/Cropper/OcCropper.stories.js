@@ -26,7 +26,7 @@ export const Default = {
             <div v-if="args.image" class="mb-6">
               <span class="font-medium">Value:</span>
               <pre class="mb-4">{{args.image}}</pre>
-              <img :src="args.image" class="max-w-2xl" />
+              <img :src="args.image.url" class="max-w-2xl" />
             </div>
             
             {{ modelValueOptions }}

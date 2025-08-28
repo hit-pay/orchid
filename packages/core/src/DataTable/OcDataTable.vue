@@ -12,8 +12,7 @@ import {
   Dropdown,
   NewTable
 } from '@/orchidui-core'
-import { useDataTable } from './useDataTable.js'
-import { ref, computed, onMounted, watch, nextTick } from 'vue'
+import { ref, computed, onMounted, watch, nextTick, toRaw } from 'vue'
 import ColumnEdit from './ColumnEdit.vue'
 
 import {
@@ -39,7 +38,7 @@ const props = defineProps({
   },
   filter: {
     type: Object,
-    required: true
+    default: () => ({})
   },
   selected: {
     type: Array,
@@ -51,14 +50,6 @@ const props = defineProps({
     default: 'id'
   },
   rowLink: String,
-  localDb: {
-    type: Object,
-    required: false
-  },
-  sortBy: {
-    type: Object,
-    required: false
-  },
   isNewTable: {
     type: Boolean,
     default: false
@@ -76,8 +67,7 @@ const emit = defineEmits({
   'search-query-changed': [],
   'hover:cell': [],
   'columns-changed': [],
-  'on-table-ready': [],
-  'update:sort-by': []
+  'on-table-ready': []
 })
 
 const cursorOption = computed(() => props.options?.cursor)
@@ -85,37 +75,15 @@ const tableHeaders = ref()
 
 const tableOptions = computed(() => props.options?.tableOptions)
 
-const isLocalData = computed(() => props.localDb !== undefined)
-const {
-  localData,
-  paginationData,
-  isLoading: isLocalDataLoading,
-
-  // Methods
-  bulkPutLocalData,
-  bulkDeleteLocalData,
-  getLocalDataUpdatedAt,
-  getProductIdAndLastUpdatedAt,
-  syncLocalData,
-  sortByData,
-
-  // Setters
-  setFilter,
-  setSortBy
-} = useDataTable({
-  name: props.localDb?.table_name ?? null,
-  db: props.localDb?.db ?? null,
-  filterableFields: props.options?.filterableFields,
-  sortableFields: props.options?.sortableFields,
-  searchableFields: props.options?.searchableFields
+const paginationData = ref({
+  total: 0,
+  last_page: 1
 })
 
 watch(
   () => props.options?.pagination,
   (newVal) => {
-    if (!isLocalData.value) {
-      paginationData.value = newVal
-    }
+    paginationData.value = newVal
   },
   { deep: true, immediate: true }
 )
@@ -133,9 +101,6 @@ const processedTableOptions = computed(() => {
           .filter((h) => h.isActive)
       : tableOptions.value?.headers.filter((h) => isColumnActive(h.key))
   }
-  if (!newTableOptions.fields?.length) {
-    newTableOptions.fields = localData.value
-  }
   return newTableOptions
 })
 const filterOptions = computed(() => props.options?.filterOptions)
@@ -144,13 +109,21 @@ const hidePerPageDropdown = computed(() => props.options?.hidePerPageDropdown)
 
 const isLastPage = computed(() => paginationData.value?.last_page === 1)
 
-const defaultFilterData = JSON.parse(JSON.stringify({ ...props.filter }))
+const defaultFilterData = JSON.parse(JSON.stringify(toRaw(props.filter)))
 if (!defaultFilterData && paginationData.value) {
   defaultFilterData.page = 1
 } else if (!defaultFilterData && cursorOption) {
   defaultFilterData.cursor = ''
 }
 const filterData = ref(defaultFilterData)
+
+watch(
+  () => props.filter,
+  (newVal) => {
+    filterData.value = { ...newVal }
+  },
+  { deep: true }
+)
 
 const isFilterDropdownOpen = ref(false)
 const activeFilterTab = ref(filterData.value[filterOptions.value?.tabs?.key])
@@ -399,7 +372,7 @@ watch(
       :selected="selected"
       :row-key="rowKey"
       :options="processedTableOptions"
-      :is-loading="tableIsLoading"
+      :is-loading="isLoading"
       :loading-rows="itemsPerPage"
       :row-class="rowClass"
       :row-link="rowLink"
@@ -427,7 +400,7 @@ watch(
             <Tabs
               v-if="filterOptions?.tabs"
               v-model="activeFilterTab"
-              :is-disabled="tableIsLoading"
+              :is-disabled="isLoading"
               :tabs="filterOptions.tabs.options"
               :variant="'pills'"
               @update:model-value="applyFilter(null, false, '', false, true)"

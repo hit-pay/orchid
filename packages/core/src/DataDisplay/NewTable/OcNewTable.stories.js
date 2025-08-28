@@ -19,7 +19,8 @@ export const Default = {
         },
         {
           key: 'email',
-          label: 'Email'
+          label: 'Email',
+          variant: 'tooltip'
         },
         {
           key: 'id',
@@ -65,7 +66,7 @@ export const Default = {
       ],
       fields: [],
       isSelectable: false,
-      isExpand: false
+      isExpand: true
     }
   },
   render: (args) => ({
