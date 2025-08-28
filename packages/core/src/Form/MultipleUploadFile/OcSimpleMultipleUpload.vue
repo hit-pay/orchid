@@ -119,13 +119,10 @@ const editSelectedImage = (i, img) => {
   isDropdownOpen[i] = false
   isEditOpen.value = true
   emit('onOpenEditImage', img)
-<<<<<<< HEAD
-=======
 }
 
 const handleImageError = (img) => {
   emit('onImageError', img.fileUrl)
->>>>>>> d94e25906dd23b1cb59cbb957678ad03f9da531c
 }
 </script>
 

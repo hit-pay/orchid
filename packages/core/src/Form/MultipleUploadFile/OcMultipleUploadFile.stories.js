@@ -102,11 +102,7 @@ export const MultipleImages = {
         {
           current: {
             id: 'sample',
-<<<<<<< HEAD
-            path: 'http://localhost:6006/packages/dashboard/src/Dashboard/Card/assets/cross_feature.svg'
-=======
             path: 'http://localhost:6006/packages/dashboard/src/Dashboard/Card/assets/cross_featsure.svg'
->>>>>>> d94e25906dd23b1cb59cbb957678ad03f9da531c
           }
         },
         {
