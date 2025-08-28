@@ -12,8 +12,12 @@ import {
   Dropdown,
   NewTable
 } from '@/orchidui-core'
+<<<<<<< HEAD
 import { useDataTable } from './useDataTable.js'
 import { ref, computed, onMounted, watch, nextTick } from 'vue'
+=======
+import { ref, computed, onMounted, watch, nextTick, toRaw } from 'vue'
+>>>>>>> d94e25906dd23b1cb59cbb957678ad03f9da531c
 import ColumnEdit from './ColumnEdit.vue'
 
 import {
@@ -39,7 +43,7 @@ const props = defineProps({
   },
   filter: {
     type: Object,
-    required: true
+    default: () => ({})
   },
   selected: {
     type: Array,
@@ -51,6 +55,7 @@ const props = defineProps({
     default: 'id'
   },
   rowLink: String,
+<<<<<<< HEAD
   localDb: {
     type: Object,
     required: false
@@ -59,6 +64,8 @@ const props = defineProps({
     type: Object,
     required: false
   },
+=======
+>>>>>>> d94e25906dd23b1cb59cbb957678ad03f9da531c
   isNewTable: {
     type: Boolean,
     default: false
@@ -76,8 +83,12 @@ const emit = defineEmits({
   'search-query-changed': [],
   'hover:cell': [],
   'columns-changed': [],
+<<<<<<< HEAD
   'on-table-ready': [],
   'update:sort-by': []
+=======
+  'on-table-ready': []
+>>>>>>> d94e25906dd23b1cb59cbb957678ad03f9da531c
 })
 
 const cursorOption = computed(() => props.options?.cursor)
@@ -85,6 +96,7 @@ const tableHeaders = ref()
 
 const tableOptions = computed(() => props.options?.tableOptions)
 
+<<<<<<< HEAD
 const isLocalData = computed(() => props.localDb !== undefined)
 const {
   localData,
@@ -108,14 +120,23 @@ const {
   filterableFields: props.options?.filterableFields,
   sortableFields: props.options?.sortableFields,
   searchableFields: props.options?.searchableFields
+=======
+const paginationData = ref({
+  total: 0,
+  last_page: 1
+>>>>>>> d94e25906dd23b1cb59cbb957678ad03f9da531c
 })
 
 watch(
   () => props.options?.pagination,
   (newVal) => {
+<<<<<<< HEAD
     if (!isLocalData.value) {
       paginationData.value = newVal
     }
+=======
+    paginationData.value = newVal
+>>>>>>> d94e25906dd23b1cb59cbb957678ad03f9da531c
   },
   { deep: true, immediate: true }
 )
@@ -133,9 +154,12 @@ const processedTableOptions = computed(() => {
           .filter((h) => h.isActive)
       : tableOptions.value?.headers.filter((h) => isColumnActive(h.key))
   }
+<<<<<<< HEAD
   if (!newTableOptions.fields?.length) {
     newTableOptions.fields = localData.value
   }
+=======
+>>>>>>> d94e25906dd23b1cb59cbb957678ad03f9da531c
   return newTableOptions
 })
 const filterOptions = computed(() => props.options?.filterOptions)
@@ -144,13 +168,54 @@ const hidePerPageDropdown = computed(() => props.options?.hidePerPageDropdown)
 
 const isLastPage = computed(() => paginationData.value?.last_page === 1)
 
+<<<<<<< HEAD
 const defaultFilterData = JSON.parse(JSON.stringify({ ...props.filter }))
+=======
+const defaultFilterData = JSON.parse(JSON.stringify(toRaw(props.filter)))
+>>>>>>> d94e25906dd23b1cb59cbb957678ad03f9da531c
 if (!defaultFilterData && paginationData.value) {
   defaultFilterData.page = 1
 } else if (!defaultFilterData && cursorOption) {
   defaultFilterData.cursor = ''
 }
 const filterData = ref(defaultFilterData)
+
+<<<<<<< HEAD
+const isFilterDropdownOpen = ref(false)
+const activeFilterTab = ref(filterData.value[filterOptions.value?.tabs?.key])
+const currentPage = ref(filterData.value.page)
+const itemsPerPage = ref(
+  filterOptions.value?.per_page?.key
+    ? filterData.value[filterOptions.value?.per_page?.key]
+    : filterData.value.per_page
+)
+const defaultSearchQuery =
+  filterData.value[
+    filterData.value.selectedSearchOption || filterOptions.value?.search?.key
+  ]?.trim() ?? ''
+const searchQueries = ref(defaultSearchQuery ? defaultSearchQuery.split(',') : [])
+const isSearchExpanded = ref(false)
+
+const customItemsPerPageOptions = computed(() =>
+  formatCustomItemsPerPageOptions(props.options?.perPageOptions)
+)
+
+const itemsPerPageOptions = computed(() => {
+  return getItemsPerPageOptions(customItemsPerPageOptions.value, paginationData.value)
+})
+
+const hasSelectedItems = computed(() => {
+  return props.selected?.length > 0
+})
+
+=======
+watch(
+  () => props.filter,
+  (newVal) => {
+    filterData.value = { ...newVal }
+  },
+  { deep: true }
+)
 
 const isFilterDropdownOpen = ref(false)
 const activeFilterTab = ref(filterData.value[filterOptions.value?.tabs?.key])
@@ -179,6 +244,7 @@ const hasSelectedItems = computed(() => {
   return props.selected?.length > 0
 })
 
+>>>>>>> d94e25906dd23b1cb59cbb957678ad03f9da531c
 const addSearchQuery = (query) => {
   if (
     !query.trim() ||
@@ -399,7 +465,11 @@ watch(
       :selected="selected"
       :row-key="rowKey"
       :options="processedTableOptions"
+<<<<<<< HEAD
       :is-loading="tableIsLoading"
+=======
+      :is-loading="isLoading"
+>>>>>>> d94e25906dd23b1cb59cbb957678ad03f9da531c
       :loading-rows="itemsPerPage"
       :row-class="rowClass"
       :row-link="rowLink"
@@ -427,7 +497,11 @@ watch(
             <Tabs
               v-if="filterOptions?.tabs"
               v-model="activeFilterTab"
+<<<<<<< HEAD
               :is-disabled="tableIsLoading"
+=======
+              :is-disabled="isLoading"
+>>>>>>> d94e25906dd23b1cb59cbb957678ad03f9da531c
               :tabs="filterOptions.tabs.options"
               :variant="'pills'"
               @update:model-value="applyFilter(null, false, '', false, true)"

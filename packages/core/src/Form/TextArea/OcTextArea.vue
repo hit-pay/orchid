@@ -9,7 +9,10 @@ defineProps({
   hint: String,
   modelValue: String,
   rows: Number,
-  autoResize: Boolean,
+  autoResize: {
+    type: Boolean,
+    default: false
+  },
   isDisabled: Boolean,
   isRequired: {
     type: Boolean,
@@ -57,10 +60,11 @@ const onInput = (event) => {
     :tooltip-options="tooltipOptions"
   >
     <textarea
-      class="outline-none p-3 min-h-[120px] rounded border resize-none disabled:bg-oc-bg-dark"
+      class="outline-none p-3 min-h-[120px] rounded border disabled:bg-oc-bg-dark"
       :class="[
         isFocused ? 'focused-shadow' : '',
-        errorMessage ? 'error-shadow' : 'input-shadow'
+        errorMessage ? 'error-shadow' : 'input-shadow',
+        !autoResize ? 'resize-none' : 'resize-y'
       ]"
       :disabled="isDisabled"
       :value="modelValue"

@@ -1,7 +1,8 @@
 <script setup>
 import { Avatar, ListDetail, Button, Icon } from '@/orchidui-core'
+import { computed } from 'vue'
 
-defineProps({
+const props = defineProps({
   variant: {
     type: String,
     default: 'small',
@@ -21,6 +22,23 @@ defineProps({
 })
 
 const emit = defineEmits(['addCustomer', 'editCustomer', 'closeCustomer'])
+
+// Computed property untuk phone_number
+const phoneNumber = computed(() => {
+  if (!props.customer) return '-'
+
+  const { phone_number_country_code, phone_number } = props.customer
+
+  if (phone_number_country_code && phone_number && !phone_number.includes('+')) {
+    return `+${phone_number_country_code} ${phone_number}`
+  }
+
+  if (phone_number) {
+    return phone_number
+  }
+
+  return '-'
+})
 </script>
 
 <template>
@@ -73,31 +91,14 @@ const emit = defineEmits(['addCustomer', 'editCustomer', 'closeCustomer'])
               </span>
             </span>
             <span v-else class="text-sm text-oc-text-400 truncate">
-              {{
-                customer?.email ||
-                (customer?.phone_number_country_code && customer?.phone_number
-                  ? `+${customer.phone_number_country_code} ${customer.phone_number}`
-                  : customer?.phone_number
-                    ? customer.phone_number
-                    : '-')
-              }}
+              {{ customer?.email || phoneNumber }}
             </span>
           </div>
         </div>
 
         <!--  Detail  -->
         <div v-if="variant !== 'small'" class="flex flex-col gap-y-4 pt-4 w-full">
-          <ListDetail
-            v-if="!isBeneficiary"
-            label="Phone"
-            :content="
-              customer?.phone_number_country_code && customer?.phone_number
-                ? `+${customer.phone_number_country_code} ${customer.phone_number}`
-                : customer?.phone_number
-                  ? customer.phone_number
-                  : '-'
-            "
-          />
+          <ListDetail v-if="!isBeneficiary" label="Phone" :content="phoneNumber" />
           <ListDetail v-if="isBeneficiary" label="Email" :content="customer.email ?? '-'" />
           <ListDetail
             v-else

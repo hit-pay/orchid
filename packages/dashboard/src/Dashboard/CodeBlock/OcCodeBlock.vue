@@ -23,7 +23,7 @@ onMounted(async () => {
     langs: [jsonLang]
   })
 
-  json.value = highlighter.codeToHtml(props.jsonObject, {
+  json.value = highlighter.codeToHtml(props.jsonObject || '', {
     theme: 'Custom Theme',
     lang: props.lang
   })
