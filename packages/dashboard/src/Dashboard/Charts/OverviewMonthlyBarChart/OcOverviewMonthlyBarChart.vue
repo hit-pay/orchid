@@ -106,6 +106,14 @@ const chartOptions = computed(() => ({
     },
     splitLine: { show: false }
   },
+
+  grid: {
+    left: '0',
+    right: '0',
+    bottom: '0',
+    top: '20',
+    containLabel: true
+  },
   
   series: [{
     id: 'myBar',
