@@ -264,7 +264,7 @@ const onUploadImage = ($event) => {
           />
         </div>
         <template v-else>
-          <div class="flex flex-1 items-center gap-x-3 text-sm text-oc-text-400">
+          <div class="flex flex-1 items-center gap-x-3 text-sm text-oc-text-400 overflow-hidden">
             <div class="flex flex-col w-7 h-7 items-center justify-center text-oc-text-300">
               <Icon name="file-extension" width="14" height="10" />
               <span class="uppercase text-[8px] font-bold leading-none block">
@@ -272,7 +272,7 @@ const onUploadImage = ($event) => {
               </span>
             </div>
 
-            <div :class="[shouldTruncateFileName ? 'truncate max-w-[250px]' : '']">
+            <div :class="[shouldTruncateFileName ? 'truncate max-w-[250px]' : 'overflow-hidden text-ellipsis']">
               {{ currentFile?.fileName }}
             </div>
           </div>
