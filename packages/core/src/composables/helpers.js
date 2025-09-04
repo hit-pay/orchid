@@ -48,7 +48,7 @@ export const preventEventIfNotNumberInput = (event, options = {}) => {
     event.key === 'ArrowRight' ||
     event.key === 'Tab' ||
     event.key === 'Backspace' ||
-    (event.key.startsWith('F') && event.key.length > 1 && !isNaN(event.key.substring(1))) ||
+    (typeof event.key === 'string' && event.key.startsWith('F') && event.key.length > 1 && !isNaN(event.key.substring(1))) ||
     event.metaKey ||
     acceptedCharacters.includes(event.key)
   ) {

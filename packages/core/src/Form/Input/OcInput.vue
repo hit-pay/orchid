@@ -2,6 +2,10 @@
 import { computed, ref, useAttrs } from 'vue'
 import { BaseInput, Icon } from '@/orchidui-core'
 
+defineOptions({
+  inheritAttrs: false,
+})
+
 const props = defineProps({
   disabled: {
     type: Boolean,
@@ -131,7 +135,8 @@ const inputClasses = computed(() => [
 ])
 
 const inputAttrs = computed(() => {
-  const { class: classes, ...rest } = attrs
+  // eslint-disable-next-line no-unused-vars
+  const { class: _, ...rest } = attrs
   const inputAttributes = {}
 
   if (props.pattern) {
@@ -154,6 +159,7 @@ const isPasswordInput = computed(() => props.inputType === 'password')
     :label-icon="labelIcon"
     :tooltip-text="tooltipText"
     :tooltip-options="tooltipOptions"
+    :class="attrs.class"
   >
     <div
       class="rounded h-[36px] border input-shadow flex items-center transition-all ease-out duration-[250ms] gap-x-3 px-3 cursor-pointer"
