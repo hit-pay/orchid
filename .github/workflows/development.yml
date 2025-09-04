@@ -1,7 +1,9 @@
 ---
 on:
   push:
-    branches: development
+    branches:
+      - development
+      - sandbox
 jobs:
   build:
     runs-on: blacksmith-4vcpu-ubuntu-2404
