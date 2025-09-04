@@ -21,7 +21,6 @@ const emit = defineEmits({
 
 const filterData = computed(() => {
   const filterData = []
-
   props.filters?.forEach((filter) => {
     if (filter.multiNames) {
       const exist = filterData.find((f) => f.name === filter.multiNames[0])
@@ -35,6 +34,7 @@ const filterData = computed(() => {
       filterData.push(filter)
     }
   })
+  
   return filterData
 })
 
@@ -58,6 +58,7 @@ const removeFilter = (name, multiNames) => {
   >
     <div class="flex gap-1 items-center normal-case flex-wrap">
       <span class="pr-2 text-sm font-medium text-oc-text">Search for:</span>
+      
       <Chip
         v-for="query in queries"
         :key="query"
@@ -67,6 +68,7 @@ const removeFilter = (name, multiNames) => {
         class="text-wrap"
         @remove="$emit('removeQuery', query)"
       />
+      
       <Chip
         v-for="item in filterData"
         :key="item.name"
@@ -76,7 +78,6 @@ const removeFilter = (name, multiNames) => {
         class="text-wrap"
         @remove="removeFilter(item.name, item.multiNames)"
       />
-
       <Chip variant="gray" class="cursor-pointer" label="Clear all" @click="$emit('removeAll')" />
     </div>
   </TableHeader>
