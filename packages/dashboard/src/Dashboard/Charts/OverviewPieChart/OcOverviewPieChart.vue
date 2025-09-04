@@ -1,0 +1,151 @@
+<template>
+  <div class="flex flex-col items-center justify-center">
+    <div class="relative w-[210px] h-[210px]">
+    <div ref="pieChart" class="w-[210px] h-[210px]" />
+    
+    <!-- Custom center label overlay -->
+    <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+      <div class="text-center">
+        <div class="text-oc-text-400">{{ centerLabel }}</div>
+        <div class="text-lg font-semibold font-reddit-mono">SGD {{ formatCurrency(centerValue) }}</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Custom legend below the chart -->
+  <div v-if="chartData && chartData.length > 0" class="mt-4 flex flex-wrap gap-3 justify-center">
+    <div 
+      v-for="(item, index) in chartData" 
+      :key="index"
+      class="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"
+      @click="selectLegendItem(item)"
+    >
+      <div 
+        class="w-3 h-3 rounded-full"
+        :style="{ backgroundColor: getLegendColor(index) }"
+      ></div>
+      <span class="text-sm">{{ item.name }}</span>
+    </div>
+  </div>
+  </div>
+</template>
+
+<script setup>
+import { computed, ref, watch, nextTick } from 'vue'
+import { useChart } from '@/orchidui-dashboard/Dashboard/composables/useChart.js'
+import dayjs from 'dayjs'
+
+const props = defineProps({
+  chartData: Array,
+})
+
+// Reactive state for center label
+const centerLabel = ref('')
+const centerValue = ref(0)
+
+// Utility functions
+const formatCurrency = (value, currencyCode = 'SGD') => {
+  const numValue = typeof value === 'number' ? value : Number(value)
+  return numValue.toLocaleString('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  })
+}
+
+// Calculate total value
+const totalValue = computed(() => {
+  if (!props.chartData || props.chartData.length === 0) return 0
+  return props.chartData.reduce((sum, item) => sum + (item.value || 0), 0)
+})
+
+// Initialize center label with total
+const initializeCenterLabel = () => {
+  centerLabel.value = 'Total'
+  centerValue.value = totalValue.value
+}
+
+// Chart options
+const chartOptions = computed(() => ({
+  series: [{
+    id: 'overviewPieChart',
+    data: props.chartData || [],
+    type: 'pie',
+    radius: ['80%', '100%'],
+    avoidLabelOverlap: false,
+    
+    itemStyle: {
+      borderRadius: 6,
+      borderColor: '#fff',
+      borderWidth: 2
+    },
+    label: {
+      show: false, // Hide default labels
+    },
+    labelLine: {
+      show: false
+    },
+    emphasis: {
+      disabled: true,
+      label: {
+        show: false
+      }
+    }
+  }]
+}))
+
+// Chart instance
+const pieChart = ref()
+const { chart } = useChart(pieChart, chartOptions)
+
+// Legend functions
+const getLegendColor = (index) => {
+  // You can customize these colors or use a color palette
+  const colors = ['#356DFF', '#AEC5FF', '#86FFCC']
+  return colors[index % colors.length]
+}
+
+const selectLegendItem = (item) => {
+  // Update center label to show selected item
+  centerLabel.value = item.name
+  centerValue.value = item.value
+  
+  // Optional: Highlight the corresponding pie slice
+  if (chart.value) {
+    chart.value.dispatchAction({
+      type: 'highlight',
+      seriesIndex: 0,
+      dataIndex: props.chartData.findIndex(d => d.name === item.name)
+    })
+  }
+}
+
+// Initialize center label when chart is ready
+watch(chart, async (newChart) => {
+  if (newChart) {
+    // Wait for next tick to ensure DOM is ready
+    await nextTick()
+    initializeCenterLabel()
+    
+    // Add mouse events for hover
+    newChart.on('mouseover', 'series', (params) => {
+      if (params.componentType === 'series' && params.seriesType === 'pie') {
+        centerLabel.value = params.name || 'Unknown'
+        centerValue.value = params.value || 0
+      }
+    })
+    
+    newChart.on('mouseout', 'series', () => {
+      // Reset to total when not hovering
+      centerLabel.value = 'Total'
+      centerValue.value = totalValue.value
+    })
+  }
+})
+
+// Watch for data changes to update total
+watch(() => props.chartData, () => {
+  if (chart.value) {
+    initializeCenterLabel()
+  }
+}, { deep: true })
+</script>
