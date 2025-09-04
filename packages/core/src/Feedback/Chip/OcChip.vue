@@ -124,7 +124,7 @@ const iconColor = computed(() => {
       height="18"
       :class="iconColor"
       name="filled-x-circle"
-      class="cursor-pointer"
+      class="cursor-pointer min-w-[18px]"
       @click.stop="$emit('remove')"
     />
   </span>

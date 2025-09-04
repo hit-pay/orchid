@@ -1,13 +1,20 @@
----
+name: Promote to Latest
+
 on:
   push:
-    branches: main
+    branches:
+      - main
+
 jobs:
-  build:
+  promote-latest:
     runs-on: blacksmith-4vcpu-ubuntu-2404
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: useblacksmith/setup-node@v5
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20.x
           registry-url: https://registry.npmjs.org
@@ -17,11 +24,16 @@ jobs:
         run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Install dependencies
         run: npm install
-      - name: build orchid core
-        run: npm run publish:core
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: publish orchid dashboard
-        run: npm run publish:dashboard
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Get version from package.json
+        id: get_version
+        run: |
+          VERSION=$(node -p "require('./packages/core/package.json').version")
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Promote core to latest
+        run: npm dist-tag add @orchidui/core@${{ steps.get_version.outputs.VERSION }} latest
+
+      - name: Promote dashboard to latest
+        run: |
+          DASHBOARD_VERSION=$(node -p "require('./packages/dashboard/package.json').version")
+          npm dist-tag add @orchidui/dashboard@$DASHBOARD_VERSION latest

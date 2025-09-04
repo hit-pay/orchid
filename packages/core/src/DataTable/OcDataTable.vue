@@ -315,54 +315,6 @@ onMounted(() => {
     emit('on-table-ready')
   })
 })
-
-const tableIsLoading = computed(() => {
-  // TODO: add loading variant first row for syncLocalData
-  return props.isLoading || isLocalDataLoading.value
-})
-
-defineExpose({
-  localData,
-  paginationData,
-  tableIsLoading,
-  bulkPutLocalData,
-  bulkDeleteLocalData,
-  getLocalDataUpdatedAt,
-  getProductIdAndLastUpdatedAt,
-  syncLocalData,
-  sortByData
-})
-
-const handleUpdateSortBy = ({ key, value }) => {
-  // remove other sort by to null
-  Object.keys(sortByData.value).forEach((currentKey) => {
-    if (currentKey !== key) {
-      sortByData.value[currentKey] = null
-    }
-  })
-  sortByData.value[key] = value
-  emit('update:sort-by', sortByData.value)
-}
-
-watch(
-  () => filterData.value,
-  () => {
-    if (isLocalData.value && filterData.value) {
-      setFilter({ ...filterData.value })
-    }
-  },
-  { deep: true, immediate: true }
-)
-
-watch(
-  () => props.sortBy,
-  () => {
-    if (isLocalData.value && props.sortBy) {
-      setSortBy({ ...props.sortBy })
-    }
-  },
-  { deep: true, immediate: true }
-)
 </script>
 <template>
   <div class="relative flex flex-col gap-9">
@@ -378,9 +330,7 @@ watch(
       :row-link="rowLink"
       :is-sticky="tableOptions.isSticky"
       :is-borderless="tableOptions.isBorderless"
-      :sort-by="sortBy"
       @update:selected="$emit('update:selected', $event)"
-      @update:sort-by="handleUpdateSortBy"
       @click:row="$emit('click:row', $event)"
       @hover:cell="$emit('hover:cell', $event)"
     >

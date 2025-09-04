@@ -21,11 +21,10 @@ const emit = defineEmits({
 
 const filterData = computed(() => {
   const filterData = []
-  
   props.filters?.forEach((filter) => {
     if (filter.multiNames) {
       const exist = filterData.find((f) => f.name === filter.multiNames[0])
-      
+
       if (!exist) {
         filterData.push(filter)
       } else {
@@ -41,7 +40,6 @@ const filterData = computed(() => {
 
 const removeFilter = (name, multiNames) => {
   const filter = { [name]: '' }
-  
   if (multiNames) {
     multiNames.forEach((filterName) => {
       const multifilter = { [filterName]: '' }
@@ -67,6 +65,7 @@ const removeFilter = (name, multiNames) => {
         variant="accent-1"
         closable
         :label="query"
+        class="text-wrap"
         @remove="$emit('removeQuery', query)"
       />
       
@@ -76,15 +75,10 @@ const removeFilter = (name, multiNames) => {
         variant="accent-1"
         closable
         :label="item.label"
+        class="text-wrap"
         @remove="removeFilter(item.name, item.multiNames)"
       />
-      
-      <Chip 
-        variant="gray" 
-        class="cursor-pointer" 
-        label="Clear all" 
-        @click="$emit('removeAll')" 
-      />
+      <Chip variant="gray" class="cursor-pointer" label="Clear all" @click="$emit('removeAll')" />
     </div>
   </TableHeader>
 </template>
