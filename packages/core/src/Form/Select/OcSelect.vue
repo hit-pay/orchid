@@ -102,13 +102,18 @@ const isSelectedAll = computed(() => {
 const filterableOptions = computed(() => {
   const filteredOptions = []
 
+  const checkQuery = (option) => {
+    const keywords = query.value.toLowerCase().trim().replace(/\s+/g, ' ')
+
+    return (
+      option.label?.toLowerCase().trim().replace(/\s+/g, ' ').includes(keywords) ||
+      option.subLabel?.toLowerCase().trim().replace(/\s+/g, ' ').includes(keywords)
+    )
+  }
+
   for (const option of props.options) {
     if (option.values) {
-      const filteredGroup = option.values.filter(
-        (subOption) =>
-          subOption.label?.toLowerCase().includes(query.value.toLowerCase()) ||
-          subOption.subLabel?.toLowerCase().includes(query.value.toLowerCase())
-      )
+      const filteredGroup = option.values.filter(checkQuery)
 
       if (filteredGroup.length > 0) {
         filteredOptions.push({
@@ -117,10 +122,7 @@ const filterableOptions = computed(() => {
         })
       }
     } else {
-      if (
-        option.label?.toLowerCase().includes(query.value.toLowerCase()) ||
-        option.subLabel?.toLowerCase().includes(query.value.toLowerCase())
-      ) {
+      if (checkQuery(option)) {
         filteredOptions.push(option)
       }
     }
@@ -346,7 +348,7 @@ defineExpose({
           <Input
             v-model="query"
             :placeholder="defaultSearchPlaceholder"
-            input-class="border-none !shadow-none"
+            input-class="border-none !shadow-none bg-transparent"
             :is-readonly="!isDropdownOpened"
             @update:model-value="$emit('onSearchKeywords', query)"
             @keyup.enter="isDropdownOpened = false"
