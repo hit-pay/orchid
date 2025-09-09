@@ -330,7 +330,7 @@ defineExpose({
               :variant="option.variant"
               :label="option.label"
               v-bind="chipProps"
-              should-truncate-chip
+              truncate
               @remove="removeOption(option.value)"
             />
             <Chip

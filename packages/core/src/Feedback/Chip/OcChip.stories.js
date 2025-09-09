@@ -16,7 +16,7 @@ export const VariantColor = {
             <Chip label="success" variant="success"/>
             <Chip label="warning" variant="warning"/>
             <Chip label="error" variant="error"/>
-            <Chip should-truncate-chip label="Label is long and should be truncated" variant="error"/>
+            <Chip truncate label="Label is long and should be truncated" variant="error"/>
           </Theme>
         `
   })

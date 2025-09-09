@@ -12,7 +12,7 @@ const props = defineProps({
   iconSize: String,
   iconTooltip: String,
   closable: Boolean,
-  shouldTruncateChip: Boolean,
+  truncate: Boolean,
   iconProps: Object
 })
 defineEmits({
@@ -99,7 +99,12 @@ const iconColor = computed(() => {
     :class="className"
   >
     <slot>
-      <div class="flex gap-3 items-center">
+      <div
+        class="flex gap-3 items-center"
+        :class="{
+          'overflow-hidden': truncate
+        }"
+      >
         <Tooltip v-if="iconTooltip && icon" position="top" :distance="10">
           <Icon width="18" height="18" :name="icon" v-bind="iconProps" />
           <template #popper>
@@ -111,7 +116,7 @@ const iconColor = computed(() => {
         <Icon v-else-if="icon" :width="iconSize ?? 18" :height="iconSize ?? 18" :name="icon" />
         <div
           :class="{
-            'truncate max-w-[180px]': shouldTruncateChip
+            'truncate max-w-[180px]': truncate
           }"
         >
           {{ label }}
