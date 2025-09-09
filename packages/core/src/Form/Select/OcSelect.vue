@@ -99,17 +99,17 @@ const isSelectedAll = computed(() => {
   return false
 })
 
+const checkQuery = (option) => {
+  const keywords = query.value.toLowerCase().trim().replace(/\s+/g, ' ')
+
+  return (
+    option.label?.toLowerCase().trim().replace(/\s+/g, ' ').includes(keywords) ||
+    option.subLabel?.toLowerCase().trim().replace(/\s+/g, ' ').includes(keywords)
+  )
+}
+
 const filterableOptions = computed(() => {
   const filteredOptions = []
-
-  const checkQuery = (option) => {
-    const keywords = query.value.toLowerCase().trim().replace(/\s+/g, ' ')
-
-    return (
-      option.label?.toLowerCase().trim().replace(/\s+/g, ' ').includes(keywords) ||
-      option.subLabel?.toLowerCase().trim().replace(/\s+/g, ' ').includes(keywords)
-    )
-  }
 
   for (const option of props.options) {
     if (option.values) {
