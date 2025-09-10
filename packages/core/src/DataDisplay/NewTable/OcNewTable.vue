@@ -100,7 +100,12 @@
                   :style="{ width: scrollContainerRef?.offsetWidth + 'px' }"
                   class="flex flex-col justify-center items-center py-10 gap-y-4 bg-white relative z-100"
                 >
-                  <img src="./loading-spinner.gif" alt="loading" class="w-7 h-7" />
+                <Icon
+                  name="loading-2"
+                  width="32"
+                  height="32"
+                  class="text-oc-text-400 motion-safe:animate-spin"
+                ></Icon>
                   <div v-if="showLoadingText" class="flex flex-col text-center gap-y-2">
                     <span class="font-medium">Fetching data</span>
                     <span class="text-oc-text-400 text-sm"
