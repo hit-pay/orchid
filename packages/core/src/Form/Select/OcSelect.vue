@@ -99,16 +99,21 @@ const isSelectedAll = computed(() => {
   return false
 })
 
+const checkQuery = (option) => {
+  const keywords = query.value.toLowerCase().trim().replace(/\s+/g, ' ')
+
+  return (
+    option.label?.toLowerCase().trim().replace(/\s+/g, ' ').includes(keywords) ||
+    option.subLabel?.toLowerCase().trim().replace(/\s+/g, ' ').includes(keywords)
+  )
+}
+
 const filterableOptions = computed(() => {
   const filteredOptions = []
 
   for (const option of props.options) {
     if (option.values) {
-      const filteredGroup = option.values.filter(
-        (subOption) =>
-          subOption.label?.toLowerCase().includes(query.value.toLowerCase()) ||
-          subOption.subLabel?.toLowerCase().includes(query.value.toLowerCase())
-      )
+      const filteredGroup = option.values.filter(checkQuery)
 
       if (filteredGroup.length > 0) {
         filteredOptions.push({
@@ -117,10 +122,7 @@ const filterableOptions = computed(() => {
         })
       }
     } else {
-      if (
-        option.label?.toLowerCase().includes(query.value.toLowerCase()) ||
-        option.subLabel?.toLowerCase().includes(query.value.toLowerCase())
-      ) {
+      if (checkQuery(option)) {
         filteredOptions.push(option)
       }
     }
@@ -330,7 +332,7 @@ defineExpose({
               :variant="option.variant"
               :label="option.label"
               v-bind="chipProps"
-              should-truncate-chip
+              truncate
               @remove="removeOption(option.value)"
             />
             <Chip
@@ -346,7 +348,7 @@ defineExpose({
           <Input
             v-model="query"
             :placeholder="defaultSearchPlaceholder"
-            input-class="border-none !shadow-none"
+            input-class="border-none !shadow-none bg-transparent"
             :is-readonly="!isDropdownOpened"
             @update:model-value="$emit('onSearchKeywords', query)"
             @keyup.enter="isDropdownOpened = false"
