@@ -62,7 +62,7 @@ const chartOptions = computed(() => ({
       fontSize: 10,
       margin: 4,
       width: 70,
-      interval: isMonth.value ? 3 : 1,
+      interval: isMonth.value ? 3 : 0,
     }
   },
   
