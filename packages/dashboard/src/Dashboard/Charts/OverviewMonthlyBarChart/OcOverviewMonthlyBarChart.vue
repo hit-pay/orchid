@@ -62,7 +62,7 @@ const chartOptions = computed(() => ({
       fontSize: 10,
       margin: 4,
       width: 70,
-      interval: isMonth.value ? 3 : 0,
+      interval: isMonth.value ? 3 : 1,
     }
   },
   
@@ -75,9 +75,7 @@ const chartOptions = computed(() => ({
       lineStyle: { color: '#2465DE' }
     },
     formatter: (params) => {
-      const date = props.labelData.find(v => 
-        dayjs(v).format('DD MMM') === params[0].name
-      )
+      const date = props.labelData[params[0].dataIndex]
       const formattedDate = dayjs(date).format('DD MMM YYYY')
       const value = params[0].value
       
