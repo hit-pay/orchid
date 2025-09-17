@@ -50,9 +50,14 @@ const className = computed(() => {
       className = 'bg-white text-oc-text-400 border border-oc-gray-200'
       break
     default:
-      className = 'bg-oc-primary-50 text-oc-primary '
+      className = 'bg-oc-primary-50 text-oc-primary'
       break
   }
+
+  if (props.truncate) {
+    className = `${className} overflow-hidden`
+  }
+
   return className
 })
 const iconColor = computed(() => {
