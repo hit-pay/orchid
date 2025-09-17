@@ -8,7 +8,10 @@ import customParseFormat from 'dayjs/plugin/customParseFormat'
 dayjs.extend(customParseFormat)
 
 defineProps({
-  shortcuts: Array,
+  shortcuts: {
+    type: Array,
+    default: () => []
+  },
   cancelButtonProps: Object,
   submitButtonProps: Object,
   /**
