@@ -352,6 +352,9 @@ const handleMouseMove = (e) => {
         minWidth = header.minWidth
       } else if (header.key === 'actions') {
         minWidth = COLUMN_WIDTH.ACTIONS
+      } else if (header.width !== undefined) {
+        // If column has a specific width from props, use it as minWidth
+        minWidth = header.width
       }
     }
 
@@ -407,8 +410,67 @@ const resizableGrid = (table) => {
   const tableHeight = table.offsetHeight
   const tableWidth = table.offsetWidth
 
+  // Calculate utility columns width (checkbox, expand)
+  let utilityColumnsWidth = 0
+  if (isExpand.value) utilityColumnsWidth += 32
+  if (isSelectable.value) utilityColumnsWidth += 32
+
+  // Calculate available width for data columns
+  const availableWidth = tableWidth - utilityColumnsWidth
+
+  // First pass: collect column information and calculate total default width
+  const columnInfo = []
+  let totalDefaultWidth = 0
+  let columnsWithPropsWidth = 0
+  let totalPropsWidth = 0
+
   for (let i = 0; i < cols.length; i++) {
-    // Check if this column has data-checkbox-column or data-expand-column attribute
+    const isCheckboxColumn = cols[i].hasAttribute('data-checkbox-column')
+    const isExpandColumn = cols[i].hasAttribute('data-expand-column')
+
+    if (isCheckboxColumn || isExpandColumn) {
+      continue
+    }
+
+    let headerIndex = i
+    if (isExpand.value) headerIndex--
+    if (isSelectable.value) headerIndex--
+
+    const header = headers.value[headerIndex]
+    let minWidth = COLUMN_WIDTH.DEFAULT
+
+    if (header) {
+      if (header.minWidth !== undefined) {
+        minWidth = header.minWidth
+      } else if (header.key === 'actions') {
+        minWidth = COLUMN_WIDTH.ACTIONS
+      }
+    }
+
+    const hasPropsWidth = header && (header.width !== undefined || header.minWidth !== undefined)
+    const propsWidth = hasPropsWidth ? (header.width || header.minWidth) : null
+
+    columnInfo.push({
+      index: i,
+      header,
+      minWidth,
+      hasPropsWidth,
+      propsWidth
+    })
+
+    if (hasPropsWidth) {
+      columnsWithPropsWidth++
+      totalPropsWidth += propsWidth
+    } else {
+      totalDefaultWidth += minWidth
+    }
+  }
+
+  // Calculate if we need to distribute width evenly
+  const needsDistribution = totalDefaultWidth + totalPropsWidth < availableWidth
+
+  // Second pass: set column widths
+  for (let i = 0; i < cols.length; i++) {
     const isCheckboxColumn = cols[i].hasAttribute('data-checkbox-column')
     const isExpandColumn = cols[i].hasAttribute('data-expand-column')
 
@@ -418,28 +480,44 @@ const resizableGrid = (table) => {
       continue
     }
 
-    // Get the header for this column (headers is offset by the number of utility columns)
-    let headerIndex = i
-    if (isExpand.value) headerIndex--
-    if (isSelectable.value) headerIndex--
+    const colInfo = columnInfo.find(col => col.index === i)
+    if (!colInfo) continue
 
-    const header = headers.value[headerIndex]
+    let finalWidth = colInfo.minWidth
+    let finalMinWidth = colInfo.minWidth
 
-    // Set min width based on header.minWidth if available, otherwise use default logic
-    let minWidth = COLUMN_WIDTH.DEFAULT
-    if (header) {
-      if (header.minWidth !== undefined) {
-        minWidth = header.minWidth
-      } else if (header.key === 'actions') {
-        minWidth = COLUMN_WIDTH.ACTIONS
+    if (needsDistribution) {
+      if (colInfo.hasPropsWidth) {
+        // Use width from props
+        finalWidth = colInfo.propsWidth
+        finalMinWidth = colInfo.propsWidth
+      } else {
+        // Calculate width for columns without props width
+        let distributedWidth
+        if (columnsWithPropsWidth === 0) {
+          // No columns have props width, distribute equally among all columns
+          distributedWidth = Math.max(colInfo.minWidth, Math.floor(availableWidth / columnInfo.length))
+        } else {
+          // Some columns have props width, distribute remaining width among others
+          const remainingWidth = availableWidth - totalPropsWidth
+          const columnsWithoutProps = columnInfo.length - columnsWithPropsWidth
+          distributedWidth = Math.max(colInfo.minWidth, Math.floor(remainingWidth / columnsWithoutProps))
+        }
+        
+        finalWidth = distributedWidth
+        finalMinWidth = colInfo.minWidth
       }
+    } else if (colInfo.hasPropsWidth) {
+      // Use width from props even when not distributing
+      finalWidth = colInfo.propsWidth
+      finalMinWidth = colInfo.propsWidth
     }
 
     // Set initial width for each column
-    if (header && header.key !== 'actions') {
-      cols[i].style.width = minWidth + 'px'
+    if (colInfo.header && colInfo.header.key !== 'actions') {
+      cols[i].style.width = finalWidth + 'px'
     }
-    cols[i].style.minWidth = minWidth + 'px'
+    cols[i].style.minWidth = finalMinWidth + 'px'
 
     // Skip adding resize handle to the last column
     if (i < cols.length - 1) {
