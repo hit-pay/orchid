@@ -352,10 +352,8 @@ const handleMouseMove = (e) => {
         minWidth = header.minWidth
       } else if (header.key === 'actions') {
         minWidth = COLUMN_WIDTH.ACTIONS
-      } else if (header.width !== undefined) {
-        // If column has a specific width from props, use it as minWidth
-        minWidth = header.width
       }
+      // Note: header.width is not used as minWidth during resize - only header.minWidth
     }
 
     // Only change the width of the current column
@@ -447,15 +445,19 @@ const resizableGrid = (table) => {
       }
     }
 
-    const hasPropsWidth = header && (header.width !== undefined || header.minWidth !== undefined)
-    const propsWidth = hasPropsWidth ? (header.width || header.minWidth) : null
+    const hasPropsWidth = header && header.width !== undefined
+    const hasPropsMinWidth = header && header.minWidth !== undefined
+    const propsWidth = hasPropsWidth ? header.width : null
+    const propsMinWidth = hasPropsMinWidth ? header.minWidth : null
 
     columnInfo.push({
       index: i,
       header,
       minWidth,
       hasPropsWidth,
-      propsWidth
+      hasPropsMinWidth,
+      propsWidth,
+      propsMinWidth
     })
 
     if (hasPropsWidth) {
@@ -486,31 +488,33 @@ const resizableGrid = (table) => {
     let finalWidth = colInfo.minWidth
     let finalMinWidth = colInfo.minWidth
 
+    // Set minWidth from props if available, otherwise use calculated minWidth
+    if (colInfo.hasPropsMinWidth) {
+      finalMinWidth = colInfo.propsMinWidth
+    }
+
     if (needsDistribution) {
       if (colInfo.hasPropsWidth) {
         // Use width from props
         finalWidth = colInfo.propsWidth
-        finalMinWidth = colInfo.propsWidth
       } else {
         // Calculate width for columns without props width
         let distributedWidth
         if (columnsWithPropsWidth === 0) {
           // No columns have props width, distribute equally among all columns
-          distributedWidth = Math.max(colInfo.minWidth, Math.floor(availableWidth / columnInfo.length))
+          distributedWidth = Math.max(finalMinWidth, Math.floor(availableWidth / columnInfo.length))
         } else {
           // Some columns have props width, distribute remaining width among others
           const remainingWidth = availableWidth - totalPropsWidth
           const columnsWithoutProps = columnInfo.length - columnsWithPropsWidth
-          distributedWidth = Math.max(colInfo.minWidth, Math.floor(remainingWidth / columnsWithoutProps))
+          distributedWidth = Math.max(finalMinWidth, Math.floor(remainingWidth / columnsWithoutProps))
         }
         
         finalWidth = distributedWidth
-        finalMinWidth = colInfo.minWidth
       }
     } else if (colInfo.hasPropsWidth) {
       // Use width from props even when not distributing
       finalWidth = colInfo.propsWidth
-      finalMinWidth = colInfo.propsWidth
     }
 
     // Set initial width for each column
