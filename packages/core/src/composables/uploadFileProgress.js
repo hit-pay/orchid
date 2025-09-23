@@ -81,8 +81,9 @@ export const useUploadFileProgress = (
       currentFiles.value[index].isLoaded = true
     }
     const progressFile = () => {
-      currentFiles.value[index].progress =
-        Number((event.loaded / currentFiles.value[index].totalSize).toFixed(2)) * 100
+      currentFiles.value[index].progress = Number(
+        ((event.loaded / currentFiles.value[index].totalSize) * 100).toFixed(2)
+      )
     }
 
     const fileListeners = {
