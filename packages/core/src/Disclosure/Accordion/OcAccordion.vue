@@ -53,10 +53,6 @@ const changeAccordionHeight = async (open) => {
   }
 }
 watch(() => props.isExpandable, changeAccordionHeight, { immediate: true })
-
-onUpdated(() => {
-  changeAccordionHeight(props.isExpandable)
-})
 </script>
 
 <template>
