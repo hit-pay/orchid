@@ -71,6 +71,7 @@
           :value="row[header.key]"
           :tooltip-options="{ isAttachToBody: true }"
           class="opacity-0 group-hover/row:opacity-100"
+          @click.stop
         />
       </div>
     </td>

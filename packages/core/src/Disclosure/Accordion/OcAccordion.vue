@@ -52,7 +52,7 @@ const changeAccordionHeight = async (open) => {
     upcomingAccordion.value.style.maxHeight = open ? 'max-content' : '0'
   }
 }
-watch(() => props.isExpandable, changeAccordionHeight)
+watch(() => props.isExpandable, changeAccordionHeight, { immediate: true })
 
 onUpdated(() => {
   changeAccordionHeight(props.isExpandable)
