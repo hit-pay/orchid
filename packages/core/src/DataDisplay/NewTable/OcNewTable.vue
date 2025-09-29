@@ -77,6 +77,7 @@
               :row="row"
               :index="index"
               :is-expand="isExpand"
+              :is-selected="selectedIndex === index"
               :is-selectable="isSelectable"
               :sorted-fields="sortedFields"
               :selected-rows="selectedRows"
@@ -100,7 +101,12 @@
                   :style="{ width: scrollContainerRef?.offsetWidth + 'px' }"
                   class="flex flex-col justify-center items-center py-10 gap-y-4 bg-white relative z-100"
                 >
-                  <img src="./loading-spinner.gif" alt="loading" class="w-7 h-7" />
+                <Icon
+                  name="loading-2"
+                  width="32"
+                  height="32"
+                  class="text-oc-text-400 motion-safe:animate-spin"
+                ></Icon>
                   <div v-if="showLoadingText" class="flex flex-col text-center gap-y-2">
                     <span class="font-medium">Fetching data</span>
                     <span class="text-oc-text-400 text-sm"
@@ -137,6 +143,10 @@ const props = defineProps({
   selected: {
     type: Array,
     default: () => []
+  },
+  selectedIndex: {
+    type: Number,
+    default: -1
   },
   isLoading: {
     type: Boolean,
@@ -348,6 +358,7 @@ const handleMouseMove = (e) => {
       } else if (header.key === 'actions') {
         minWidth = COLUMN_WIDTH.ACTIONS
       }
+      // Note: header.width is not used as minWidth during resize - only header.minWidth
     }
 
     // Only change the width of the current column
@@ -402,8 +413,71 @@ const resizableGrid = (table) => {
   const tableHeight = table.offsetHeight
   const tableWidth = table.offsetWidth
 
+  // Calculate utility columns width (checkbox, expand)
+  let utilityColumnsWidth = 0
+  if (isExpand.value) utilityColumnsWidth += 32
+  if (isSelectable.value) utilityColumnsWidth += 32
+
+  // Calculate available width for data columns
+  const availableWidth = tableWidth - utilityColumnsWidth
+
+  // First pass: collect column information and calculate total default width
+  const columnInfo = []
+  let totalDefaultWidth = 0
+  let columnsWithPropsWidth = 0
+  let totalPropsWidth = 0
+
   for (let i = 0; i < cols.length; i++) {
-    // Check if this column has data-checkbox-column or data-expand-column attribute
+    const isCheckboxColumn = cols[i].hasAttribute('data-checkbox-column')
+    const isExpandColumn = cols[i].hasAttribute('data-expand-column')
+
+    if (isCheckboxColumn || isExpandColumn) {
+      continue
+    }
+
+    let headerIndex = i
+    if (isExpand.value) headerIndex--
+    if (isSelectable.value) headerIndex--
+
+    const header = headers.value[headerIndex]
+    let minWidth = COLUMN_WIDTH.DEFAULT
+
+    if (header) {
+      if (header.minWidth !== undefined) {
+        minWidth = header.minWidth
+      } else if (header.key === 'actions') {
+        minWidth = COLUMN_WIDTH.ACTIONS
+      }
+    }
+
+    const hasPropsWidth = header && header.width !== undefined
+    const hasPropsMinWidth = header && header.minWidth !== undefined
+    const propsWidth = hasPropsWidth ? header.width : null
+    const propsMinWidth = hasPropsMinWidth ? header.minWidth : null
+
+    columnInfo.push({
+      index: i,
+      header,
+      minWidth,
+      hasPropsWidth,
+      hasPropsMinWidth,
+      propsWidth,
+      propsMinWidth
+    })
+
+    if (hasPropsWidth) {
+      columnsWithPropsWidth++
+      totalPropsWidth += propsWidth
+    } else {
+      totalDefaultWidth += minWidth
+    }
+  }
+
+  // Calculate if we need to distribute width evenly
+  const needsDistribution = totalDefaultWidth + totalPropsWidth < availableWidth
+
+  // Second pass: set column widths
+  for (let i = 0; i < cols.length; i++) {
     const isCheckboxColumn = cols[i].hasAttribute('data-checkbox-column')
     const isExpandColumn = cols[i].hasAttribute('data-expand-column')
 
@@ -413,28 +487,46 @@ const resizableGrid = (table) => {
       continue
     }
 
-    // Get the header for this column (headers is offset by the number of utility columns)
-    let headerIndex = i
-    if (isExpand.value) headerIndex--
-    if (isSelectable.value) headerIndex--
+    const colInfo = columnInfo.find(col => col.index === i)
+    if (!colInfo) continue
 
-    const header = headers.value[headerIndex]
+    let finalWidth = colInfo.minWidth
+    let finalMinWidth = colInfo.minWidth
 
-    // Set min width based on header.minWidth if available, otherwise use default logic
-    let minWidth = COLUMN_WIDTH.DEFAULT
-    if (header) {
-      if (header.minWidth !== undefined) {
-        minWidth = header.minWidth
-      } else if (header.key === 'actions') {
-        minWidth = COLUMN_WIDTH.ACTIONS
+    // Set minWidth from props if available, otherwise use calculated minWidth
+    if (colInfo.hasPropsMinWidth) {
+      finalMinWidth = colInfo.propsMinWidth
+    }
+
+    if (needsDistribution) {
+      if (colInfo.hasPropsWidth) {
+        // Use width from props
+        finalWidth = colInfo.propsWidth
+      } else {
+        // Calculate width for columns without props width
+        let distributedWidth
+        if (columnsWithPropsWidth === 0) {
+          // No columns have props width, distribute equally among all columns
+          distributedWidth = Math.max(finalMinWidth, Math.floor(availableWidth / columnInfo.length))
+        } else {
+          // Some columns have props width, distribute remaining width among others
+          const remainingWidth = availableWidth - totalPropsWidth
+          const columnsWithoutProps = columnInfo.length - columnsWithPropsWidth
+          distributedWidth = Math.max(finalMinWidth, Math.floor(remainingWidth / columnsWithoutProps))
+        }
+        
+        finalWidth = distributedWidth
       }
+    } else if (colInfo.hasPropsWidth) {
+      // Use width from props even when not distributing
+      finalWidth = colInfo.propsWidth
     }
 
     // Set initial width for each column
-    if (header && header.key !== 'actions') {
-      cols[i].style.width = minWidth + 'px'
+    if (colInfo.header && colInfo.header.key !== 'actions') {
+      cols[i].style.width = finalWidth + 'px'
     }
-    cols[i].style.minWidth = minWidth + 'px'
+    cols[i].style.minWidth = finalMinWidth + 'px'
 
     // Skip adding resize handle to the last column
     if (i < cols.length - 1) {

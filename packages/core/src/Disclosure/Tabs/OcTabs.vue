@@ -40,10 +40,12 @@ const isPillVariant = computed(() => props.variant === 'pills')
 const isVerticalTabs = computed(() => props.direction === 'vertical')
 
 const setVisibleTabsLength = () => {
-  if (isVerticalTabs.value) {
-    tabsVisible.value = Math.round(tabsContainer.value.clientHeight / tabHeight)
-  } else {
-    tabsVisible.value = Math.round(tabsContainer.value.clientWidth / tabWidth)
+  if (tabsContainer.value) {
+    if (isVerticalTabs.value) {
+      tabsVisible.value = Math.round(tabsContainer.value.clientHeight / tabHeight)
+    } else {
+      tabsVisible.value = Math.round(tabsContainer.value.clientWidth / tabWidth)
+    }
   }
 }
 
@@ -140,14 +142,11 @@ watch(
         @click.prevent="move('left')"
       />
     </div>
-    <div
-      class="flex items-center"
-      :class="{ 'flex-col': isVerticalTabs, 'w-full': isFullWidth }"
-    >
+    <div class="flex items-center" :class="{ 'flex-col': isVerticalTabs, 'w-full': isFullWidth }">
       <div
         v-for="tab in tabs"
         :key="tab.value"
-        class="relative cursor-pointer min-w-[48px] gap-x-3 items-center flex justify-center "
+        class="relative cursor-pointer min-w-[48px] gap-x-3 items-center flex justify-center"
         :class="[
           tab.class,
           isPillVariant ? 'py-2 px-3 rounded' : 'px-4 pb-3 border-b-2 -mb-[1px]',

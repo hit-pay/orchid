@@ -53,6 +53,10 @@ const props = defineProps({
   isNewTable: {
     type: Boolean,
     default: false
+  },
+  selectedIndex: {
+    type: Number,
+    default: -1
   }
 })
 
@@ -286,7 +290,9 @@ const applyFilter = (
     )
     if (selectedTab?.value) {
       activeFilterTab.value = selectedTab.value
-      applyFilter()
+      if (!isChangeTab) {
+        applyFilter(null, false, '', false, true)
+      }
     }
   }
   emitFilterData(isOnMount)
@@ -328,6 +334,7 @@ onMounted(() => {
       :loading-rows="itemsPerPage"
       :row-class="rowClass"
       :row-link="rowLink"
+      :selected-index="selectedIndex"
       :is-sticky="tableOptions.isSticky"
       :is-borderless="tableOptions.isBorderless"
       @update:selected="$emit('update:selected', $event)"
