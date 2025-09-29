@@ -1,15 +1,15 @@
 <script setup>
 import { DatePicker } from 'v-calendar'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import dayjs from 'dayjs'
 import { Button } from '@/orchidui-core'
 
-defineProps({
+const props = defineProps({
   shortcuts: Array,
   cancelButtonProps: Object,
   submitButtonProps: Object,
   modelValue: {
-    type: Object,
+    type: [Object, String, Array],
     default: () => ({
       start: new Date(),
       end: new Date()
@@ -38,6 +38,22 @@ const emit = defineEmits({
   'update:modelValue': []
 })
 const datePicker = ref()
+
+// Normalize modelValue to ensure it's always in the correct format for v-calendar
+const normalizedModelValue = computed(() => {
+  const defaultValue = { start: new Date(), end: new Date() }
+  
+  return !props.modelValue ? defaultValue :
+    typeof props.modelValue === 'string' ? { start: dayjs(props.modelValue).toDate(), end: dayjs(props.modelValue).toDate() } :
+    Array.isArray(props.modelValue) ? 
+      props.modelValue.length === 0 ? defaultValue :
+      props.modelValue.length === 1 ? { start: dayjs(props.modelValue[0]).toDate(), end: dayjs(props.modelValue[0]).toDate() } :
+      { start: dayjs(props.modelValue[0]).toDate(), end: dayjs(props.modelValue[1]).toDate() } :
+    typeof props.modelValue === 'object' && props.modelValue !== null ? 
+      { start: props.modelValue.start ? dayjs(props.modelValue.start).toDate() : new Date(), end: props.modelValue.end ? dayjs(props.modelValue.end).toDate() : new Date() } :
+    defaultValue
+})
+
 const changeModelValue = (value) => {
   if(!datePicker.value) return
   emit('update:modelValue', value)
@@ -55,11 +71,11 @@ const changeModelValue = (value) => {
           class="rounded text-center px-4 font-medium py-2 cursor-pointer"
           :class="
             dayjs(shortcut.value.start).format('YY-MM-DD') ===
-              dayjs(modelValue.start).format('YY-MM-DD') &&
+              dayjs(normalizedModelValue.start).format('YY-MM-DD') &&
             dayjs(shortcut.value.end).format('YY-MM-DD') ===
-              dayjs(modelValue.end).format('YY-MM-DD') &&
-            modelValue.end &&
-            modelValue.start
+              dayjs(normalizedModelValue.end).format('YY-MM-DD') &&
+            normalizedModelValue.end &&
+            normalizedModelValue.start
               ? 'bg-oc-primary-50'
               : 'hover:bg-oc-accent-1-50'
           "
@@ -71,7 +87,7 @@ const changeModelValue = (value) => {
       
       <DatePicker
         ref="datePicker"
-        :model-value="modelValue"
+        :model-value="normalizedModelValue"
         :model-modifiers="{
           range: isRange
         }"
