@@ -77,6 +77,7 @@
               :row="row"
               :index="index"
               :is-expand="isExpand"
+              :is-selected="selectedIndex === index"
               :is-selectable="isSelectable"
               :sorted-fields="sortedFields"
               :selected-rows="selectedRows"
@@ -142,6 +143,10 @@ const props = defineProps({
   selected: {
     type: Array,
     default: () => []
+  },
+  selectedIndex: {
+    type: Number,
+    default: -1
   },
   isLoading: {
     type: Boolean,

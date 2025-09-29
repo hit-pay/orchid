@@ -1,12 +1,12 @@
 <template>
-  <tr class="hoverable-row group/row" @click="$emit('click', $event)">
+  <tr class="hoverable-row group/row" :class="isSelected ? 'border-x-[3px] border-oc-primary-500' : ''" @click="$emit('click', $event)">
     <td
       v-if="isExpand"
       class="p-0 border-r border-oc-gray-200 sticky left-0 z-20"
       data-expand-column
       :class="[
         index !== sortedFields.length - 1 ? 'border-b' : '',
-        isChild ? 'bg-oc-bg-dark' : 'bg-oc-bg-light'
+        isChild || isSelected ? 'bg-oc-bg-dark' : 'bg-oc-bg-light'
       ]"
     >
       <div class="flex justify-center items-center min-h-[35px]">
@@ -121,6 +121,10 @@ const props = defineProps({
     default: 0
   },
   isExpand: {
+    type: Boolean,
+    default: false
+  },
+  isSelected: {
     type: Boolean,
     default: false
   },
