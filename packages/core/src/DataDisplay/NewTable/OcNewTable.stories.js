@@ -15,18 +15,21 @@ export const Default = {
         {
           key: 'date',
           label: 'Date',
-          class: 'font-reddit-mono'
+          class: 'font-reddit-mono',
+          minWidth: 200  // Example: minWidth for resizing constraint
         },
         {
           key: 'email',
           label: 'Email',
-          variant: 'tooltip'
+          variant: 'tooltip',
+          width: 300  // Example: fixed width
         },
         {
           key: 'id',
           label: 'ID',
           isCopy: true,
           class: 'text-oc-text-400'
+          // No width/minWidth - will get distributed width
         },
         {
           key: 'amount',
