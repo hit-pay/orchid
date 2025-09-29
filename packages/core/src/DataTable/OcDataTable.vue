@@ -53,6 +53,10 @@ const props = defineProps({
   isNewTable: {
     type: Boolean,
     default: false
+  },
+  selectedIndex: {
+    type: Number,
+    default: -1
   }
 })
 
