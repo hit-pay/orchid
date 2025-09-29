@@ -330,6 +330,7 @@ onMounted(() => {
       :loading-rows="itemsPerPage"
       :row-class="rowClass"
       :row-link="rowLink"
+      :selected-index="selectedIndex"
       :is-sticky="tableOptions.isSticky"
       :is-borderless="tableOptions.isBorderless"
       @update:selected="$emit('update:selected', $event)"
