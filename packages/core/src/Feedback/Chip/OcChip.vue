@@ -39,21 +39,23 @@ const className = computed(() => {
       case 'accent-1':
         return { text: 'text-oc-accent-1', bg: 'bg-oc-accent-1-50', border: 'border-oc-accent-1' }
       case 'accent-2':
-        return { text: 'text-oc-accent-2', bg: 'bg-oc-accent-2-50', border: 'border-oc-accent-2' }
+        return { text: 'text-oc-accent-2-600', bg: 'bg-oc-accent-2-50', border: 'border-oc-accent-2-600' }
       case 'accent-3':
         return { text: 'text-oc-accent-3', bg: 'bg-oc-accent-3-50', border: 'border-oc-accent-3' }
       case 'success':
-        return { text: 'text-oc-success', bg: 'bg-oc-success-50', border: 'border-oc-success' }
+        return { text: 'text-oc-success-600', bg: 'bg-oc-success-50', border: 'border-oc-success-600' }
       case 'warning':
-        return { text: 'text-oc-warning', bg: 'bg-oc-warning-50', border: 'border-oc-warning' }
+        return { text: 'text-oc-warning-700', bg: 'bg-oc-warning-50', border: 'border-oc-warning-700' }
       case 'error':
-        return { text: 'text-oc-error', bg: 'bg-oc-error-50', border: 'border-oc-error' }
+        return { text: 'text-oc-error-600', bg: 'bg-oc-error-50', border: 'border-oc-error-600' }
       case 'gray':
         return { text: 'text-oc-gray-700', bg: 'bg-oc-gray-100', border: 'border-oc-gray-700' }
       case 'light-red':
-        return { text: 'text-oc-accent-3', bg: 'bg-oc-accent-3-50', border: 'border-oc-accent-3' }
+        return { text: 'text-oc-red-600', bg: 'bg-oc-red-50', border: 'border-oc-red-600' }
       case 'neutral':
         return { text: 'text-oc-text-400', bg: 'bg-white', border: 'border-oc-gray-200' }
+      case 'tosca':
+        return { text: 'text-oc-tosca-500', bg: 'bg-oc-tosca-200', border: 'border-oc-tosca-500' }
       default:
         return { text: 'text-oc-primary', bg: 'bg-oc-primary-50', border: 'border-oc-primary' }
     }
@@ -108,10 +110,13 @@ const iconColor = computed(() => {
       className = 'text-oc-gray-400 '
       break
     case 'light-red':
-      className = 'text-oc-error '
+      className = 'text-oc-red-300 '
       break
     case 'neutral':
       className = 'text-oc-text-400 '
+      break
+    case 'tosca':
+      className = 'text-oc-tosca-500 '
       break
     default:
       className = 'text-oc-primary-300 '

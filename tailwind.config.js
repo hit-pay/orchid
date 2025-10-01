@@ -137,7 +137,8 @@ module.exports = {
           200: 'var(--oc-accent-2-200)',
           300: 'var(--oc-accent-2-300)',
           400: 'var(--oc-accent-2-400)',
-          500: 'var(--oc-accent-2-500)'
+          500: 'var(--oc-accent-2-500)',
+          600: 'var(--oc-accent-2-600)'
         },
         'oc-accent-3': {
           DEFAULT: 'var(--oc-accent-3-500)',
@@ -157,7 +158,8 @@ module.exports = {
           200: 'var(--oc-success-200)',
           300: 'var(--oc-success-300)',
           400: 'var(--oc-success-400)',
-          500: 'var(--oc-success-500)'
+          500: 'var(--oc-success-500)',
+          600: 'var(--oc-success-600)'
         },
         'oc-warning': {
           DEFAULT: 'var(--oc-warning-500)',
@@ -168,7 +170,8 @@ module.exports = {
           300: 'var(--oc-warning-300)',
           400: 'var(--oc-warning-400)',
           500: 'var(--oc-warning-500)',
-          600: 'var(--oc-warning-600)'
+          600: 'var(--oc-warning-600)',
+          700: 'var(--oc-warning-700)'
         },
         'oc-error': {
           DEFAULT: 'var(--oc-error-500)',
@@ -178,7 +181,24 @@ module.exports = {
           200: 'var(--oc-error-200)',
           300: 'var(--oc-error-300)',
           400: 'var(--oc-error-400)',
-          500: 'var(--oc-error-500)'
+          500: 'var(--oc-error-500)',
+          600: 'var(--oc-error-600)'
+        },
+        'oc-red': {
+          DEFAULT: 'var(--oc-red-500)',
+          '50-tr': 'var(--oc-red-50-tr)',
+          50: 'var(--oc-red-50)',
+          100: 'var(--oc-red-100)',
+          200: 'var(--oc-red-200)',
+          300: 'var(--oc-red-300)',
+          400: 'var(--oc-red-400)',
+          500: 'var(--oc-red-500)',
+          600: 'var(--oc-red-600)'
+        },
+        'oc-tosca': {
+          DEFAULT: 'var(--oc-tosca-500)',
+          '200': 'var(--oc-tosca-200)',
+          500: 'var(--oc-tosca-500)'
         }
       }
     }
