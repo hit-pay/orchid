@@ -68,7 +68,7 @@ const changeModelValue = (value) => {
           {{ shortcut.label }}
         </div>
       </div>
-      
+
       <DatePicker
         ref="datePicker"
         :model-value="modelValue"
@@ -97,6 +97,8 @@ const changeModelValue = (value) => {
 </template>
 
 <style lang="scss">
+@import "v-calendar/style.css";
+
 .vc-pane-layout {
   gap: 0 24px;
   --vc-text-lg: 14px;
