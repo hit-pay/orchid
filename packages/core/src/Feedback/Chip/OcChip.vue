@@ -101,7 +101,7 @@ const iconColor = computed(() => {
       className = 'text-oc-success-300 '
       break
     case 'warning':
-      className = 'text-oc-warning-300 '
+      className = 'text-oc-warning-400 '
       break
     case 'error':
       className = 'text-oc-error-300 '
