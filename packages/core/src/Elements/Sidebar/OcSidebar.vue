@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, onMounted, computed } from 'vue'
+import { reactive, onMounted, computed, watch } from 'vue'
 import { SidebarHead, SideBarMenu, SidebarSubMenuItem, SidebarFooter } from '@/orchidui-core'
 
 const emit = defineEmits([
@@ -70,6 +70,15 @@ onMounted(() => {
   })
   state.loading = false
 })
+
+watch(
+  () => props.isExpanded,
+  (value) => {
+    if (!value) {
+      state.expanded = []
+    }
+  }
+)
 </script>
 
 <template>
@@ -93,7 +102,9 @@ onMounted(() => {
             :icon="menu.icon"
             :label="menu.label"
             :is-children="!!menu.children"
-            :is-active="menu.active || (menu.children && menu.children?.some(child => child.active))"
+            :is-active="
+              menu.active || (menu.children && menu.children?.some((child) => child.active))
+            "
             :is-expanded="isExpanded"
             :is-new="menu.isNew"
             :is-try-it="menu.isTryIt"
@@ -102,20 +113,18 @@ onMounted(() => {
             @click="expandOrRedirect(menu)"
             @close-menu="expandMenu(menu.name)"
           >
-            
-              <SidebarSubMenuItem 
-                v-for="(submenu, submenuIndex) in menu.children" 
-                :key="submenuIndex" 
-                :icon="submenu.icon" 
-                :label="submenu.label" 
-                :is-active="submenu.active" 
-                :is-new="submenu.isNew"
-                :is-beta="submenu.isBeta"
-                :is-try-it="submenu.isTryIt"
-                :is-expanded="isExpanded"
-                @click="$emit('redirect', submenu)"
-              />
-            
+            <SidebarSubMenuItem
+              v-for="(submenu, submenuIndex) in menu.children"
+              :key="submenuIndex"
+              :icon="submenu.icon"
+              :label="submenu.label"
+              :is-active="submenu.active"
+              :is-new="submenu.isNew"
+              :is-beta="submenu.isBeta"
+              :is-try-it="submenu.isTryIt"
+              :is-expanded="isExpanded"
+              @click="$emit('redirect', submenu)"
+            />
           </SideBarMenu>
         </SidebarHead>
       </template>
@@ -132,4 +141,3 @@ onMounted(() => {
     </SidebarFooter>
   </div>
 </template>
-
