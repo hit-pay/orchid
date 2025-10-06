@@ -22,18 +22,16 @@ defineProps({
         :title="item.title"
         class="flex-1"
         :class="item.class"
-        :variant="item.variant"
         :tooltip="item.tooltip"
         :icon="item.icon"
         :is-loading="isLoading"
         :content="item.content"
         :info="item.info"
-        :icon-height="item.iconHeight"
-        :icon-width="item.iconWidth"
+        :icon-props="item.iconProps"
       >
-        <template v-if="item.isWarning" #warning>
-          <slot name="warning" />
-        </template>
+      <template v-for="(_, name) in $slots" #[name]="slotProps">
+        <slot :name="name" v-bind="slotProps" />
+      </template>
       </OverviewItem>
     </div>
   </div>

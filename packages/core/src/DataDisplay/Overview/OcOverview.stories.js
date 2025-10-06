@@ -1,4 +1,4 @@
-import { Theme, Overview, OverviewIcon, OverviewItem } from '@/orchidui-core'
+import { Theme, Overview, OverviewItem, Button } from '@/orchidui-core'
 
 export default {
   component: OverviewItem,
@@ -9,37 +9,42 @@ export const overviewItem = {
     icon: 'circle',
     content: 'Content',
     title: 'Title',
-    variant: 'blue',
-    info: false,
-    isBig: false,
-    isTransparent: false,
-    isCard: false,
-    percentValue: undefined,
-    percentTooltip: '',
-    tooltip: ''
+    info: true,
+    percentValue: 10,
+    isLoading: false,
+    percentTooltip: 'asd',
+    tooltip: 'asd',
+    iconProps: {
+      class: 'text-oc-warning-500'
+    }
   },
   render: (args) => ({
-    components: { OverviewItem, Theme },
+    components: { OverviewItem, Theme, Button },
     setup() {
       return {
         args
       }
     },
     template: `
-          <Theme class="items-center mb-3">
+          <Theme class="items-center mb-3 p-10 w-[400px]">
             <OverviewItem
                 :icon="args.icon"
                 :info="args.info"
                 :content="args.content"
-                :variant="args.variant"
                 :title="args.title"
-                :is-big="args.isBig"
-                :is-transparent="args.isTransparent"
-                :is-card="args.isCard"
                 :percent-value="args.percentValue"
                 :tooltip="args.tooltip"
+                :is-loading="args.isLoading"
                 :percent-tooltip="args.percentTooltip"
-            />
+                :icon-props="args.iconProps"
+            >
+                <template #footer>
+                  <div class="flex flex-col px-4 pb-4">
+                    <div class="mb-4 bg-oc-warning-50-tr p-2 text-sm text-oc-text-400 text-center rounded-sm">Minimum payout is SGD 1</div>
+                    <Button size="small" left-icon="circle">Payout funds</Button>
+                  </div>
+                </template>
+            </OverviewItem>
           </Theme>
         `
   })
@@ -84,23 +89,6 @@ export const overview = {
     template: `
           <Theme class="items-center mb-3">
             <Overview :items="args.items" :title="args.title"/>
-          </Theme>
-        `
-  })
-}
-export const overviewIcon = {
-  render: () => ({
-    components: { Theme, OverviewIcon },
-    template: `
-          <Theme>
-            <div class="flex gap-x-4">
-              <OverviewIcon variant="blue"/>
-              <OverviewIcon variant="accent"/>
-              <OverviewIcon variant="green"/>
-              <OverviewIcon variant="red"/>
-              <OverviewIcon variant="orange"/>
-              <OverviewIcon variant="gray"/>
-            </div>
           </Theme>
         `
   })
