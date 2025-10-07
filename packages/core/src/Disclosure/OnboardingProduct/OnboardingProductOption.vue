@@ -1,9 +1,11 @@
 <template>
   <div
     :class="[
-      'rounded-xxl border border-oc-gray-200 flex gap-4',
+      'flex gap-4 transition-all duration-300',
       {
-        'p-3 pr-5': size === 'small'
+        'p-3 pr-5 rounded-xl border border-oc-gray-200 hover:shadow-normal': size === 'small',
+        'rounded-xxl': size === 'medium',
+        'border-oc-primary-500 !border-[1.5px]': !!model
       }
     ]"
   >
@@ -16,7 +18,7 @@
         <div class="text-lg text-oc-text-500">{{ title }}</div>
 
         <div v-if="selectable" class="ml-auto">
-          <Checkbox />
+          <Checkbox v-model="model" />
         </div>
       </div>
 
@@ -33,14 +35,15 @@
 import { computed } from 'vue'
 import { Checkbox } from '@/orchidui-core'
 
+const model = defineModel({
+  required: false,
+  type: Boolean
+})
+
 const props = defineProps({
   productImageUrl: {
     type: String,
     required: true
-  },
-  modelValue: {
-    type: [Boolean, null],
-    default: null
   },
   selectable: {
     type: Boolean,

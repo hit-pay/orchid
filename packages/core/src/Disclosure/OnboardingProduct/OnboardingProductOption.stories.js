@@ -1,4 +1,5 @@
 import { OnboardingProductOption, Checklist } from '@/orchidui-core'
+import { ref } from 'vue'
 export default {
   component: OnboardingProductOption,
   tags: ['autodocs']
@@ -29,10 +30,20 @@ export const Default = {
     description: 'Complete your personal information and business',
     size: 'medium',
   },
-  render: (args) => ({
+  render: () => ({
     components: { OnboardingProductOption, Checklist },
     setup() {
-      return { args }
+      const selected = ref([]);
+
+      const select = (value, checked) => {
+        if (checked) {
+          selected.value = [...selected.value, value]
+        } else {
+          selected.value = selected.value.filter((v) => v !== value)
+        }
+      }
+
+      return { select, selected }
     },
     template: `
           <div class="w-full flex flex-col gap-y-4">
@@ -67,18 +78,22 @@ export const Default = {
             
             <div class="grid grid-cols-1 md:grid-cols-[repeat(4,1fr)] gap-4 justify-center">
               <OnboardingProductOption
+                :model-value="selected.includes('invoice')"
                 product-image-url="/images/onboarding/product-images/invoice.svg"
                 title="Invoicing"
                 selectable
                 description="Send professional invoices and get paid online. Track payments, send reminders, and offer flexible payment options."
                 class="md:col-span-2"
+                @update:model-value="(checked) => select('invoice', checked)"
               />
               <OnboardingProductOption
+                :model-value="selected.includes('shopify')"
                 product-image-url="/images/onboarding/product-images/shopify.svg"
                 title="Invoicing"
                 selectable
                 description="Send professional invoices and get paid online. Track payments, send reminders, and offer flexible payment options."
                 class="md:col-span-2"
+                @update:model-value="(checked) => select('shopify', checked)"
               />
               <OnboardingProductOption
                 product-image-url="/images/onboarding/product-images/invoice.svg"
