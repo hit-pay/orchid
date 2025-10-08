@@ -77,8 +77,8 @@ defineEmits({
       :items="overviewItems"
       :container-class="containerClass"
     >
-      <template #warning>
-        <slot name="warning" />
+    <template v-for="(_, name) in $slots" #[name]="slotProps">
+        <slot :name="name" v-bind="slotProps" />
       </template>
     </Overview>
   </div>
