@@ -5,7 +5,6 @@ import { setup } from '@storybook/vue3'
 import '../src/scss/main.scss'
 import '@/orchidui-core-style.css'
 import '@/orchidui-dashboard-style.css'
-import 'v-calendar/style.css'
 
 setup((app) => {
   app.config.globalProperties.window = window

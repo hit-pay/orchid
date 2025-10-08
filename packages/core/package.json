@@ -1,10 +1,21 @@
 {
   "name": "@orchidui/core",
   "description": "Orchid UI, Library Vue 3 tailwind css",
-  "version": "1.39.0",
+  "version": "1.47.0",
   "type": "module",
   "scripts": {
     "build": "vite build"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.11.8",
+    "dayjs": "^1.11.10",
+    "dexie": "^4.0.11",
+    "flag-icons": "^6.11.1",
+    "libphonenumber-js": "^1.10.51",
+    "lodash-es": "^4.17.21",
+    "v-calendar": "^3.1.2",
+    "vue-draggable-next": "^2.2.1",
+    "vue-advanced-cropper": "^2.8.8"
   },
   "publishConfig": {
     "access": "public"

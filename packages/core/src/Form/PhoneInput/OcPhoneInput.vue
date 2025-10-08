@@ -54,7 +54,11 @@ const isDropdownOpened = ref(false)
 const query = ref('')
 const filteredCountryCodes = computed(() =>
   props.countryCodes
-    .filter((country) => country.country.toLowerCase().includes(query.value.toLowerCase()))
+    .filter((country) => {
+      const keywords = query.value.toLowerCase().replace('+', '')
+
+      return country.country.toLowerCase().includes(keywords) || country.code.startsWith(keywords)
+    })
     .sort((a, b) => a.country.localeCompare(b.country))
 )
 const getCountryObject = (iso) =>
