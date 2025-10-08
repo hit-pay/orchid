@@ -12,13 +12,15 @@ defineProps({
   percentValue: Number,
   tooltipOptions: Object,
   iconProps: Object,
-  isFooter: Boolean
+  isFooter: Boolean,
+  isTransparent: Boolean
 })
 </script>
 
 <template>
   <div
-    class="flex flex-col md:overflow-hidden w-full md:w-auto rounded border bg-oc-bg-light border-oc-gray-200"
+    class="flex flex-col md:overflow-hidden w-full md:w-auto rounded border bg-oc-bg-light "
+    :class="isTransparent ? 'border-transparent' : 'border-oc-gray-200'"
   >
     <div v-if="isLoading" class="flex flex-col gap-y-3 items-center justify-center h-[90px]">
       <Icon name="loading-2" width="28" height="28" class="text-oc-text-400 motion-safe:animate-spin" />
@@ -26,7 +28,7 @@ defineProps({
 
     <template v-else>
       <div class="flex flex-col ">
-        <div class="flex items-center pl-4 pr-5 py-3 gap-x-3 border-b border-oc-gray-200">
+        <div class="flex items-center gap-x-3 border-b " :class="isTransparent ? 'border-b-transparent px-3 pt-3 pb-0' : 'border-oc-gray-200 pl-4 pr-5 py-3'">
           <Icon
             v-if="icon"
             :name="icon"
@@ -60,7 +62,7 @@ defineProps({
           </Tooltip>
        </div>
 
-        <div class="px-5 py-4 text-xl font-medium font-reddit-mono">
+        <div class="px-5 py-4 text-xl font-medium font-reddit-mono" :class="isTransparent ? 'px-3 pt-0 pb-3' : 'px-5 py-4'">
           <div class="flex items-center gap-x-2 overflow-hidden">
             <slot name="content">
               <div class="truncate flex-1">{{ content }}</div>
