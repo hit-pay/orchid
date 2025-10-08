@@ -52,7 +52,7 @@ defineProps({
             />
             <template v-if="tooltip" #popper>
               <div
-                class="px-3 bg-white text-center w-[175px] rounded py-2 text-oc-text-400 whitespace-break-spaces font-medium"
+                class="px-3 bg-white text-center text-xs w-[175px] rounded py-2 text-oc-text-400 whitespace-break-spaces font-medium"
               >
                 {{ tooltip }}
               </div>
