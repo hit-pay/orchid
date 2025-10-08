@@ -62,7 +62,7 @@ defineProps({
           </Tooltip>
        </div>
 
-        <div class="px-5 py-4 text-xl font-medium font-reddit-mono" :class="isTransparent ? 'px-3 pt-0 pb-3' : 'px-5 py-4'">
+        <div class="text-xl font-medium font-reddit-mono" :class="isTransparent ? 'px-3 pt-0 pb-3' : 'px-5 py-4'">
           <div class="flex items-center gap-x-2 overflow-hidden">
             <slot name="content">
               <div class="truncate flex-1">{{ content }}</div>
