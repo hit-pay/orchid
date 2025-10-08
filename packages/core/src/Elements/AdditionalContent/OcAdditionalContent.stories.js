@@ -151,25 +151,34 @@ const args = {
       title: 'Total revenue',
       content: 'SGD 11,170.00',
       icon: 'coins',
-      variant: 'blue'
+      iconProps: {
+        class: 'text-oc-primary'
+      },
+      isFooter: true
     },
     {
       title: 'This month',
       content: 'SGD 1,870.00',
       icon: 'coin',
-      variant: 'accent'
+      iconProps: {
+        class: 'text-oc-accent-1'
+      }
     },
     {
       title: 'Completed',
       content: '20',
       icon: 'check',
-      variant: 'green'
+      iconProps: {
+        class: 'text-oc-success'
+      }
     },
     {
       title: 'Refunded',
       content: '3',
       icon: 'backward',
-      variant: 'red'
+      iconProps: {
+        class: 'text-oc-error'
+      }
     }
   ],
   overviewTabs: [
@@ -331,7 +340,14 @@ export const Balance = {
                 :customer="args.customer"
                 :overview-active-tab="args.overviewActiveTab"
                 @change-tab="args.overviewActiveTab = $event"
-            />
+            >
+              <template #hitpay="{ tab }">
+                Test block for hitpay slot
+              </template>
+              <template #footer>
+                Test block for footer slot
+              </template>
+            </AdditionalContent>
           </Theme>
         `
   })

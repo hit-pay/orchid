@@ -28,6 +28,7 @@ defineProps({
         :content="item.content"
         :info="item.info"
         :icon-props="item.iconProps"
+        :isFooter="item.isFooter"
       >
       <template v-for="(_, name) in $slots" #[name]="slotProps">
         <slot :name="name" v-bind="slotProps" />

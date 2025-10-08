@@ -11,7 +11,8 @@ defineProps({
   isLoading: Boolean,
   percentValue: Number,
   tooltipOptions: Object,
-  iconProps: Object
+  iconProps: Object,
+  isFooter: Boolean
 })
 </script>
 
@@ -95,6 +96,6 @@ defineProps({
       </div>
     </template>
 
-    <slot v-if="!isLoading" name="footer" />
+    <slot v-if="!isLoading && isFooter" name="footer" />
   </div>
 </template>
