@@ -18,7 +18,6 @@
       v-for="(item, index) in chartData" 
       :key="index"
       class="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"
-      @click="selectLegendItem(item)"
     >
       <div 
         class="w-3 h-3 rounded-full"
@@ -50,6 +49,13 @@ const formatCurrency = (value, currencyCode = 'SGD') => {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
   })
+}
+
+// Calculate percentage of a value against total
+const formatPercentage = (value) => {
+  const numValue = typeof value === 'number' ? value : Number(value)
+  if (!totalValue.value) return 0
+  return Math.round((numValue / totalValue.value) * 100)
 }
 
 // Calculate total value
@@ -84,11 +90,17 @@ const chartOptions = computed(() => ({
     labelLine: {
       show: false
     },
+    // Emphasize hovered/active slice and blur others to gray
     emphasis: {
-      disabled: true,
-      label: {
-        show: false
-      }
+      scale: false,
+      focus: 'self',
+      label: { show: false }
+    },
+    blur: {
+      itemStyle: {
+        color: '#F2F2F4' // Tailwind gray-200
+      },
+      label: { show: false }
     }
   }]
 }))
@@ -104,20 +116,7 @@ const getLegendColor = (index) => {
   return colors[index % colors.length]
 }
 
-const selectLegendItem = (item) => {
-  // Update center label to show selected item
-  centerLabel.value = item.name
-  centerValue.value = item.value
-  
-  // Optional: Highlight the corresponding pie slice
-  if (chart.value) {
-    chart.value.dispatchAction({
-      type: 'highlight',
-      seriesIndex: 0,
-      dataIndex: props.chartData.findIndex(d => d.name === item.name)
-    })
-  }
-}
+
 
 // Initialize center label when chart is ready
 watch(chart, async (newChart) => {
@@ -129,7 +128,9 @@ watch(chart, async (newChart) => {
     // Add mouse events for hover
     newChart.on('mouseover', 'series', (params) => {
       if (params.componentType === 'series' && params.seriesType === 'pie') {
-        centerLabel.value = params.name || 'Unknown'
+        const hoveredName = params.name || 'Unknown'
+        const hoveredValue = params.value || 0
+        centerLabel.value = `${hoveredName} (${formatPercentage(hoveredValue)}%)`
         centerValue.value = params.value || 0
       }
     })

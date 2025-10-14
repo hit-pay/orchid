@@ -1,5 +1,5 @@
 <script setup>
-import { Icon, Tooltip } from '@/orchidui-core'
+import { Icon, Tooltip, Skeleton } from '@/orchidui-core'
 
 defineProps({
   icon: String,
@@ -22,9 +22,14 @@ defineProps({
     class="flex flex-col md:overflow-hidden w-full md:w-auto rounded border bg-oc-bg-light "
     :class="isTransparent ? 'border-transparent' : 'border-oc-gray-200'"
   >
-    <div v-if="isLoading" class="flex flex-col gap-y-3 items-center justify-center h-[90px]">
-      <Icon name="loading-2" width="28" height="28" class="text-oc-text-400 motion-safe:animate-spin" />
+  <div v-if="isLoading" class="flex flex-col gap-y-3 min-w-[132px] h-[90px]">
+    <div class="px-5 pt-5">
+      <Skeleton class="w-[80%] h-[20px] rounded-sm " />
     </div>
+    <div class="px-5 py-4">
+      <Skeleton class="w-full h-[20px] rounded-sm" />
+    </div>
+  </div>
 
     <template v-else>
       <div class="flex flex-col ">
