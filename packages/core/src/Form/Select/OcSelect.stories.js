@@ -250,6 +250,7 @@ export const Multiple = {
       const options = [
         {
           label: 'Option 1',
+          isRemoveDisabled: true,
           image:
             'https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/covers/small/99d696e564ba45fbaa0fb2e3b43d0e27.jpg',
           value: 1
