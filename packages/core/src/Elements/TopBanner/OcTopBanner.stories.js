@@ -27,3 +27,33 @@ export const Default = {
         `
   })
 }
+
+export const ActionRequired = {
+  args: {
+    chipProps: {
+      label: 'Action Required',
+      variant: 'warning',
+      class: 'shrink-0',
+      icon: 'alert-fill'
+    },
+    titleClass: 'flex-1',
+    rawHtml:
+      'We will stop using <span class="underline font-medium">Cards (by Adyen)</span> soon. To prevent payment disruptions, complete your onboarding to the new payment method "Cards" by 21 Nov \'25.',
+    buttonLabel: 'Complete now'
+  },
+  render: (args) => ({
+    components: {
+      TopBanner
+    },
+    setup() {
+      const onClick = () => {
+        console.log('clicked')
+      }
+
+      return { args, onClick }
+    },
+    template: `
+          <TopBanner class="gap-5 w-full pl-5" title-class="flex-1 font-normal" :chip-props="args.chipProps" :raw-html="args.rawHtml" :button-label="args.buttonLabel" @click:button="onClick" />
+        `
+  })
+}
