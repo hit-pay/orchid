@@ -30,13 +30,15 @@ defineEmits(['click:button'])
     />
 
     <div class="flex-1 flex flex-col items-center md:flex-row gap-3 md:gap-5">
-      <span v-if="title" :class="['text-sm font-medium flex-1', titleClass]">
-        {{ title }}
-      </span>
+      <div v-if="title" :class="['flex-1 mx-auto flex justify-center', titleClass]">
+        <span class="text-sm font-medium">
+          {{ title }}
+        </span>
+      </div>
 
       <div
         v-else-if="rawHtml"
-        :class="['text-sm font-medium flex-1', titleClass]"
+        :class="['text-sm font-medium flex-1 flex justify-center', titleClass]"
         v-html="rawHtml"
       />
 
