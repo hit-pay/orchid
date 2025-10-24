@@ -64,6 +64,8 @@ const toggleDropdown = () => {
                 class="font-medium shrink-0"
               />
             </div>
+
+            <slot name="right-title" />
           </div>
           <slot name="actions">
             <Dropdown
