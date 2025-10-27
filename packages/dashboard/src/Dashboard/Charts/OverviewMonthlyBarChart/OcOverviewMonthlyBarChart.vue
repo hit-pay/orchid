@@ -137,7 +137,6 @@ const weekendIndexes = computed(() => {
 })
 
 const weekendMarkAreaStyle = {
-  silent: true,
   itemStyle: {
     color: {
       type: 'linear',
@@ -148,8 +147,6 @@ const weekendMarkAreaStyle = {
       ],
       global: false
     },
-    borderColor: 'rgba(53, 109, 255, 0.15)',
-    borderWidth: 1,
   }
 }
 
@@ -186,23 +183,38 @@ const calculateMarkAreaCoordinates = (chartInstance, barIndexes, join = false) =
 
 // Apply weekend highlighting
 const applyWeekendHighlighting = () => {
-  if (!chart.value || weekendIndexes.value.length === 0) return
+  if (!chart.value) return
   
-  const markAreaData = weekendIndexes.value.map(indexes => 
-    calculateMarkAreaCoordinates(chart.value, indexes, true).flat()
-  )
-  
-  const markAreaOptions = {
-    series: {
-      id: 'myBar',
-      markArea: {
-        ...weekendMarkAreaStyle,
-        data: markAreaData
+  // Only apply weekend highlighting for monthly view
+  if (isMonth.value) {
+    const markAreaData = weekendIndexes.value.map(indexes => 
+      calculateMarkAreaCoordinates(chart.value, indexes, true).flat()
+    )
+    
+    const markAreaOptions = {
+      series: {
+        id: 'myBar',
+        markArea: {
+          ...weekendMarkAreaStyle,
+          data: markAreaData
+        }
       }
     }
+    
+    chart.value.setOption(markAreaOptions)
+  } else {
+    // Remove markArea when not in monthly view
+    const markAreaOptions = {
+      series: {
+        id: 'myBar',
+        markArea: {
+          data: []
+        }
+      }
+    }
+    
+    chart.value.setOption(markAreaOptions)
   }
-  
-  chart.value.setOption(markAreaOptions)
 }
 
 // Watch for chart changes and apply highlighting

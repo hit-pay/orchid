@@ -98,7 +98,8 @@ const chartOptions = computed(() => ({
     },
     blur: {
       itemStyle: {
-        color: '#F2F2F4' // Tailwind gray-200
+        color: '#F2F2F4',
+        opacity: 1,
       },
       label: { show: false }
     }
