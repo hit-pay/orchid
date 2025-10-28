@@ -53,7 +53,18 @@ export const ActionRequired = {
       return { args, onClick }
     },
     template: `
-          <TopBanner class="gap-5 w-full pl-5" title-class="flex-1 font-normal" :chip-props="args.chipProps" :raw-html="args.rawHtml" :button-label="args.buttonLabel" @click:button="onClick" />
+          <TopBanner
+            class="gap-5 w-full pl-5"
+            title-class="flex-1 font-normal"
+            :chip-props="args.chipProps"
+            :raw-html="args.rawHtml"
+            :button-label="args.buttonLabel"
+            :secondary-button="{
+              label: 'View guide',
+              class: 'underline'
+            }"
+            @click:button="onClick"
+          />
         `
   })
 }

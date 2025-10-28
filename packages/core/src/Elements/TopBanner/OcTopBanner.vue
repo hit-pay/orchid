@@ -7,6 +7,11 @@ defineProps({
     required: false,
     default: null
   },
+  secondaryButton: {
+    type: Object,
+    required: false,
+    default: null
+  },
   title: {
     type: String,
     default: ''
@@ -42,17 +47,28 @@ defineEmits(['click:button'])
         v-html="rawHtml"
       />
 
-      <Button
-        v-if="buttonLabel"
-        class="md:ml-auto mr-auto"
-        size="small"
-        is-transparent
-        @click="$emit('click:button')"
-      >
-        <span class="flex items-center gap-2 underline">
-          {{ buttonLabel }} <Icon name="arrow-right" width="9" height="9" />
-        </span>
-      </Button>
+      <div class="md:ml-auto mr-auto flex items-center gap-2">
+        <template v-if="secondaryButton">
+          <Button
+            class="md:ml-auto mr-auto"
+            size="small"
+            is-transparent
+            v-bind="secondaryButton"
+          />
+          <span class="text-oc-warning-700"> / </span>
+        </template>
+
+        <Button
+          v-if="buttonLabel"
+          size="small"
+          is-transparent
+          @click="$emit('click:button')"
+        >
+          <span class="flex items-center gap-2 underline">
+            {{ buttonLabel }} <Icon name="arrow-right" width="9" height="9" />
+          </span>
+        </Button>
+      </div>
     </div>
   </div>
 </template>
