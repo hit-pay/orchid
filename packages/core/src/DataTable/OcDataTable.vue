@@ -451,6 +451,9 @@ onMounted(() => {
       >
         <slot :name="header.key" :data="data" :item="item"></slot>
       </template>
+      <template v-for="(_, name) in $slots" #[name]="slotProps">
+        <slot :name="name" v-bind="slotProps" />
+      </template>
       <template #after>
         <slot name="after" />
       </template>
