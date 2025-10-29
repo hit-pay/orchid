@@ -84,6 +84,7 @@ const chartOptions = computed(() => ({
       borderColor: '#fff',
       borderWidth: 2
     },
+    animation: false,
     label: {
       show: false, // Hide default labels
     },
