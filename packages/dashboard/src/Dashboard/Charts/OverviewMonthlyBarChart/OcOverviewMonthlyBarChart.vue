@@ -112,6 +112,7 @@ const chartOptions = computed(() => ({
     top: '20',
     containLabel: true
   },
+  animation: false,
   
   series: [{
     id: 'myBar',
