@@ -53,6 +53,16 @@
                   :class="{ 'h-[inherit]': header.key === 'actions' }"
                 >
                   {{ header.label }}
+                  <Tooltip v-if="header.tooltip" :popper-options="{ strategy: 'fixed' }">
+                    <Icon name="information" width="16" height="16" class="text-oc-text-400" />
+                    <template #popper>
+                      <slot :name="`header-${header.key}-tooltip`">
+                       <div class="text-oc-text-400 text-sm normal-case font-medium px-3 py-2">
+                        {{ header.tooltip }}
+                       </div>
+                      </slot>
+                    </template>
+                  </Tooltip>
                   <!-- <Icon
                     v-if="header.key !== 'actions'"
                     name="arrow-down"
@@ -128,7 +138,7 @@
 
 <script setup>
 import { computed, ref, onMounted, onUnmounted, nextTick, watch } from 'vue'
-import { Icon, Checkbox, Skeleton } from '@/orchidui-core'
+import { Icon, Checkbox, Tooltip } from '@/orchidui-core'
 import OcTableRow from './OcTableRow.vue'
 
 const props = defineProps({
