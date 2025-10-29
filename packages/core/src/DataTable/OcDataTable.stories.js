@@ -789,7 +789,8 @@ export const NewTable = {
             key: 'date',
             label: 'Date',
             class: 'font-reddit-mono',
-            stickyLeft: true
+            stickyLeft: true,
+            tooltip: true
           },
           {
             key: 'email',
@@ -1006,6 +1007,9 @@ export const NewTable = {
                     <div class="truncate">
                       {{ dayjs(item.date).format('YYYY-MM-DD HH:mm:ss') }}
                     </div>
+                  </template>
+                   <template #header-date-tooltip>
+                    test slot
                   </template>
                   <template #amount="{ item }">
                     {{ item.currency }} {{ item.amount }}
