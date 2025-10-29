@@ -16,7 +16,8 @@ export const Default = {
           key: 'date',
           label: 'Date',
           class: 'font-reddit-mono',
-          minWidth: 200  // Example: minWidth for resizing constraint
+          minWidth: 200,  // Example: minWidth for resizing constraint
+          tooltip: 'This is a tooltip'
         },
         {
           key: 'email',
