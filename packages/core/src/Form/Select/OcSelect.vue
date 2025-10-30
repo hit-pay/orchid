@@ -328,7 +328,7 @@ defineExpose({
                 ? localValueOption.slice(0, maxVisibleOptions)
                 : localValueOption"
               :key="option.value"
-              closable
+              :closable="!option.isRemoveDisabled"
               :variant="option.variant"
               :label="option.label"
               v-bind="chipProps"

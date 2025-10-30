@@ -16,13 +16,15 @@ export const Default = {
           key: 'date',
           label: 'Date',
           class: 'font-reddit-mono',
-          minWidth: 200  // Example: minWidth for resizing constraint
+          minWidth: 200,  // Example: minWidth for resizing constraint
+          tooltip: 'This is a tooltip'
         },
         {
           key: 'email',
           label: 'Email',
           variant: 'tooltip',
-          width: 300  // Example: fixed width
+          width: 300,  // Example: fixed width
+          tooltip: true
         },
         {
           key: 'id',
@@ -144,6 +146,12 @@ export const Default = {
         </template>
         <template #actions="{ item }">
            Actions
+        </template>
+
+        <template #header-email-tooltip>
+          <div class="text-oc-text-400 text-sm normal-case font-medium px-3 py-2">
+            This is a tooltip for the email column
+          </div>
         </template>
       </NewTable>
     `

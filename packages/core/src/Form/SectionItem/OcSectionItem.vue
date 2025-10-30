@@ -43,7 +43,7 @@ if (props.defaultValue === true && (props.modelValue === null || props.modelValu
             :name="icon"
           />
           <template #popper>
-            <div class="px-3 text-sm text-oc-text-400 whitespace-pre-line">
+            <div class="px-3 py-3 text-sm text-oc-text-400 whitespace-pre-line">
               {{ popperMessage }}
             </div>
           </template>
