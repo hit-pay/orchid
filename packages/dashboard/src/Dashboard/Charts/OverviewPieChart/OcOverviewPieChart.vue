@@ -112,11 +112,7 @@ const pieChart = ref()
 const { chart } = useChart(pieChart, chartOptions)
 
 // Legend functions
-const getLegendColor = (index) => {
-  // You can customize these colors or use a color palette
-  const colors = ['#356DFF', '#AEC5FF', '#86FFCC']
-  return colors[index % colors.length]
-}
+const getLegendColor = (index) => props.chartData[index].itemStyle.color
 
 
 
