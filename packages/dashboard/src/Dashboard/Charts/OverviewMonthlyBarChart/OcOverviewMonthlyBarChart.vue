@@ -53,7 +53,7 @@ const getBarColor = (value) => {
 // Chart options
 const chartOptions = computed(() => ({
   xAxis: {
-    data: props.labelData.map(v => formatDate(v, isMonth.value)),
+    data: (props.labelData || []).map(v => formatDate(v, isMonth.value)),
     splitLine: { show: false },
     axisLine: { show: false },
     axisTick: { show: false },
@@ -129,8 +129,7 @@ const chartOptions = computed(() => ({
 
 // Weekend highlighting logic
 const weekendIndexes = computed(() => {
-  return props.labelData
-    .map((date, index) => {
+  return (props.labelData || []).map((date, index) => {
       const day = dayjs(date).day()
       return day === 6 && index + 1 < props.labelData.length ? [index, index + 1] : null
     })
@@ -158,7 +157,7 @@ const { chart } = useChart(barChart, chartOptions)
 // Helper function to calculate mark area coordinates
 const calculateMarkAreaCoordinates = (chartInstance, barIndexes, join = false) => {
   const series = chartInstance.getModel().getSeriesByType('bar')
-  const seriesData = series.map(s => s.getData())[0]
+  const seriesData = series?.map(s => s.getData())[0]
   const barCount = seriesData.count()
   const barCoordinates = []
   
@@ -188,7 +187,7 @@ const applyWeekendHighlighting = () => {
   
   // Only apply weekend highlighting for monthly view
   if (isMonth.value) {
-    const markAreaData = weekendIndexes.value.map(indexes => 
+    const markAreaData = weekendIndexes.value?.map(indexes => 
       calculateMarkAreaCoordinates(chart.value, indexes, true).flat()
     )
     
