@@ -35,7 +35,7 @@
   "dependencies": {
     "dayjs": "^1.11.10",
     "echarts": "^5.4.3",
-    "@orchidui/core": "1.61.0",
+    "@orchidui/core": "1.63.0",
     "lottie-web": "^5.12.2",
     "quill": "^2.0.3",
     "quill-better-table": "^1.2.10",
