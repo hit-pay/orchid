@@ -2,24 +2,24 @@
   <div class="flex flex-col items-center justify-center">
     <div class="relative w-[210px] h-[210px]">
     <div ref="pieChart" class="w-[210px] h-[210px]" />
-    
+
     <!-- Custom center label overlay -->
     <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
       <div class="text-center">
         <div class="text-oc-text-400">{{ centerLabel }}</div>
-        <div class="text-lg font-semibold font-reddit-mono">SGD {{ formatCurrency(centerValue) }}</div>
+        <div class="text-lg font-semibold font-reddit-mono">{{ currency }} {{ formatCurrency(centerValue) }}</div>
       </div>
     </div>
   </div>
-  
+
   <!-- Custom legend below the chart -->
   <div v-if="chartData && chartData.length > 0" class="mt-4 flex flex-wrap gap-3 justify-center">
-    <div 
-      v-for="(item, index) in chartData" 
+    <div
+      v-for="(item, index) in chartData"
       :key="index"
       class="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"
     >
-      <div 
+      <div
         class="w-3 h-3 rounded-full"
         :style="{ backgroundColor: getLegendColor(index) }"
       ></div>
@@ -32,10 +32,10 @@
 <script setup>
 import { computed, ref, watch, nextTick } from 'vue'
 import { useChart } from '@/orchidui-dashboard/Dashboard/composables/useChart.js'
-import dayjs from 'dayjs'
 
 const props = defineProps({
   chartData: Array,
+  currency: String,
 })
 
 // Reactive state for center label
@@ -43,7 +43,7 @@ const centerLabel = ref('')
 const centerValue = ref(0)
 
 // Utility functions
-const formatCurrency = (value, currencyCode = 'SGD') => {
+const formatCurrency = (value) => {
   const numValue = typeof value === 'number' ? value : Number(value)
   return numValue.toLocaleString('en-US', {
     minimumFractionDigits: 2,
@@ -78,7 +78,7 @@ const chartOptions = computed(() => ({
     type: 'pie',
     radius: ['80%', '100%'],
     avoidLabelOverlap: false,
-    
+
     itemStyle: {
       borderRadius: 6,
       borderColor: '#fff',
@@ -126,7 +126,7 @@ watch(chart, async (newChart) => {
     // Wait for next tick to ensure DOM is ready
     await nextTick()
     initializeCenterLabel()
-    
+
     // Add mouse events for hover
     newChart.on('mouseover', 'series', (params) => {
       if (params.componentType === 'series' && params.seriesType === 'pie') {
@@ -136,7 +136,7 @@ watch(chart, async (newChart) => {
         centerValue.value = params.value || 0
       }
     })
-    
+
     newChart.on('mouseout', 'series', () => {
       // Reset to total when not hovering
       centerLabel.value = 'Total'
