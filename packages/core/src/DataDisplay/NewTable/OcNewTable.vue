@@ -421,7 +421,7 @@ const resizableGrid = (table) => {
   }
 
   const tableHeight = table.offsetHeight
-  const tableWidth = table.offsetWidth
+  const tableWidth = table.parentElement.offsetWidth
 
   // Calculate utility columns width (checkbox, expand)
   let utilityColumnsWidth = 0
