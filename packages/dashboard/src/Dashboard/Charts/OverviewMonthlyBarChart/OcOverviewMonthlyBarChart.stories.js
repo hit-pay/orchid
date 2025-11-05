@@ -49,6 +49,7 @@ export const overviewMonthlyBarChart = {
                 class="h-[300px] w-[530px]"
                 :variant="args.variant"
                 :show-grid="args.showGrid"
+                currency="HKD"
                 :show-tooltip="args.showTooltip"
                 :show-legend="args.showLegend"
                 :chart-data="args.chartData"
