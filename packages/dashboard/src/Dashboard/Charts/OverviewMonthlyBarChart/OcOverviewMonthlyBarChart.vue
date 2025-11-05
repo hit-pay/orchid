@@ -12,6 +12,7 @@ const props = defineProps({
     type: String,
     validator: (value) => ['primary', 'purple'].includes(value)
   },
+  currency: String,
   showTooltip: Boolean,
   showLegend: Boolean,
   showGrid: Boolean,
@@ -38,7 +39,7 @@ const formatCurrency = (value, currencyCode = 'SGD') => {
 }
 
 const formatDate = (date, isMonthly = false) => {
-  return isMonthly 
+  return isMonthly
     ? dayjs(date).format('DD MMM').toUpperCase()
     : dayjs(date).format('ddd DD/MM').toUpperCase()
 }
@@ -65,7 +66,7 @@ const chartOptions = computed(() => ({
       interval: isMonth.value ? 3 : 0,
     }
   },
-  
+
   tooltip: {
     trigger: 'axis',
     borderWidth: 0,
@@ -78,22 +79,22 @@ const chartOptions = computed(() => ({
       const date = props.labelData[params[0].dataIndex]
       const formattedDate = dayjs(date).format('DD MMM YYYY')
       const value = params[0].value
-      
+
       return `
         <div class="py-3 px-4">
           <div class="flex items-center gap-2">
             <span class="text-xs font-medium text-oc-text-300">${formattedDate}</span>
           </div>
           <div class="flex items-center gap-2">
-            <span class="font-semibold text-oc-text font-reddit-mono">SGD ${formatCurrency(value)}</span>
+            <span class="font-semibold text-oc-text font-reddit-mono">${ props.currency } ${formatCurrency(value)}</span>
           </div>
         </div>
       `
     }
   },
-  
+
   legend: {},
-  
+
   yAxis: {
     axisLabel: {
       align: 'center',
@@ -113,7 +114,7 @@ const chartOptions = computed(() => ({
     containLabel: true
   },
   animation: false,
-  
+
   series: [{
     id: 'myBar',
     data: props.chartData,
@@ -160,7 +161,7 @@ const calculateMarkAreaCoordinates = (chartInstance, barIndexes, join = false) =
   const seriesData = series?.map(s => s.getData())[0]
   const barCount = seriesData.count()
   const barCoordinates = []
-  
+
   barIndexes.forEach(idx => {
     if (idx < barCount) {
       const layout = seriesData.getItemLayout(idx)
@@ -170,27 +171,27 @@ const calculateMarkAreaCoordinates = (chartInstance, barIndexes, join = false) =
       ])
     }
   })
-  
+
   if (join && barCoordinates.length > 0) {
     return [[
       { x: barCoordinates[0][0].x },
       { x: barCoordinates[barCoordinates.length - 1][1].x }
     ]]
   }
-  
+
   return barCoordinates
 }
 
 // Apply weekend highlighting
 const applyWeekendHighlighting = () => {
   if (!chart.value) return
-  
+
   // Only apply weekend highlighting for monthly view
   if (isMonth.value) {
     const markAreaData = weekendIndexes.value?.map(indexes => 
       calculateMarkAreaCoordinates(chart.value, indexes, true).flat()
     )
-    
+
     const markAreaOptions = {
       series: {
         id: 'myBar',
@@ -200,7 +201,7 @@ const applyWeekendHighlighting = () => {
         }
       }
     }
-    
+
     chart.value.setOption(markAreaOptions)
   } else {
     // Remove markArea when not in monthly view
@@ -212,7 +213,7 @@ const applyWeekendHighlighting = () => {
         }
       }
     }
-    
+
     chart.value.setOption(markAreaOptions)
   }
 }
