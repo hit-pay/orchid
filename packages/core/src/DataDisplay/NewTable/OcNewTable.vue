@@ -50,8 +50,18 @@
               >
                 <div
                   class="px-5 py-3 truncate min-h-[34px] font-medium text-xs border-b border-oc-text-200 uppercase flex items-center gap-2 justify-between w-full"
-                  :class="{ 'h-[inherit]': header.key === 'actions' }"
+                  :class="{ 'h-[inherit]': header.key === 'actions',  }"
                 >
+                <Tooltip v-if="header.leftTooltip" :popper-options="{ strategy: 'fixed' }">
+                    <Icon :name="header.leftIcon" width="16" height="16" class="text-oc-text-400" v-bind="header.leftIconProps" />
+                    <template #popper>
+                      <slot :name="`header-${header.key}-left-tooltip`">
+                       <div class="text-oc-text-400 text-sm normal-case font-medium px-3 py-2">
+                        {{ header.leftTooltip }}
+                       </div>
+                      </slot>
+                    </template>
+                  </Tooltip>
                   {{ header.label }}
                   <Tooltip v-if="header.tooltip" :popper-options="{ strategy: 'fixed' }">
                     <Icon name="information" width="16" height="16" class="text-oc-text-400" />

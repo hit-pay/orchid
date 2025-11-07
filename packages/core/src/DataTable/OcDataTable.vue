@@ -458,6 +458,13 @@ onMounted(() => {
       >
         <slot :name="`header-${header.key}-tooltip`" :data="data" :item="item"></slot>
       </template>
+      <template
+        v-for="(header, key) in tableOptions?.headers"
+        #[`header-${header.key}-left-tooltip`]="{ data, item }"
+        :key="key"
+      >
+        <slot :name="`header-${header.key}-left-tooltip`" :data="data" :item="item"></slot>
+      </template>
       <template #after>
         <slot name="after" />
       </template>
