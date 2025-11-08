@@ -19,7 +19,7 @@ defineProps({
 
 <template>
   <div
-    class="flex w-full relative gap-x-5 py-4 before:top-[20px] last:before:top-0 before:h-full before:left-[10px] before:absolute before:border-l"
+    class="flex w-full relative gap-x-5 py-4 before:top-[20px] last:before:top-0 before:h-full before:left-[10px] before:absolute before:border-l last:before:hidden first:last:before:hidden"
   >
     <div>
       <div
