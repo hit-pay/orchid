@@ -183,7 +183,7 @@ const handleImageError = (img) => {
               <slot name="action" :item="img" :remove-item="onDeleteFile" :file-index="i">
                 <div class="py-2 flex flex-col">
                   <div
-                    v-if="img?.current?.id?.includes('sample')"
+                    v-if="!img?.current?.id?.includes('sample')"
                     class="flex p-3 cursor-pointer items-center gap-x-3"
                     @click="editSelectedImage(i, img)"
                   >
