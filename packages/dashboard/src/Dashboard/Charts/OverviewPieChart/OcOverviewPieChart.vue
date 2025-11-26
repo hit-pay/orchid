@@ -95,7 +95,10 @@ const chartOptions = computed(() => ({
     emphasis: {
       scale: false,
       focus: 'self',
-      label: { show: false }
+      label: { show: false },
+      itemStyle: {
+        color: 'inherit',
+      }
     },
     blur: {
       itemStyle: {
