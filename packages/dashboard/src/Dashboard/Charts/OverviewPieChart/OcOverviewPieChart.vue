@@ -110,8 +110,8 @@ const chartOptions = computed(() => ({
         opacity: 1,
       },
       label: { show: false }
-    }
-    props.additionalOptions
+    },
+    ...(props.additionalOptions ? props.additionalOptions : {})
   }]
 }))
 
