@@ -36,6 +36,10 @@ import { useChart } from '@/orchidui-dashboard/Dashboard/composables/useChart.js
 const props = defineProps({
   chartData: Array,
   currency: String,
+  additionalOptions: {
+    type: Object,
+    default: () => ({})
+  }
 })
 
 // Reactive state for center label
@@ -107,6 +111,7 @@ const chartOptions = computed(() => ({
       },
       label: { show: false }
     }
+    props.additionalOptions
   }]
 }))
 
