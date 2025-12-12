@@ -36,6 +36,14 @@ import { useChart } from '@/orchidui-dashboard/Dashboard/composables/useChart.js
 const props = defineProps({
   chartData: Array,
   currency: String,
+  additionalOptions: {
+    type: Object,
+    default: () => ({})
+  },
+  tooltip: {
+    type: Object,
+    default: () => ({})
+  },
 })
 
 // Reactive state for center label
@@ -72,6 +80,7 @@ const initializeCenterLabel = () => {
 
 // Chart options
 const chartOptions = computed(() => ({
+  tooltip: props.tooltip,
   series: [{
     id: 'overviewPieChart',
     data: props.chartData || [],
@@ -95,7 +104,10 @@ const chartOptions = computed(() => ({
     emphasis: {
       scale: false,
       focus: 'self',
-      label: { show: false }
+      label: { show: false },
+      itemStyle: {
+        color: 'inherit',
+      }
     },
     blur: {
       itemStyle: {
@@ -103,7 +115,8 @@ const chartOptions = computed(() => ({
         opacity: 1,
       },
       label: { show: false }
-    }
+    },
+    ...(props.additionalOptions ? props.additionalOptions : {})
   }]
 }))
 
