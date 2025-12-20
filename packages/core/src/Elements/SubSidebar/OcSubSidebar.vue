@@ -32,13 +32,33 @@ defineEmits(['titleClick', 'update:modelValue'])
       <div
         v-for="(item, i) in menu"
         :key="i"
-        class="py-3 whitespace-nowrap rounded cursor-pointer font-medium hover:bg-oc-accent-2-50-tr px-5"
+        class="py-3 whitespace-nowrap rounded cursor-pointer font-medium hover:bg-oc-accent-2-50-tr px-5 flex items-center"
         :class="
           modelValue === item.value ? 'bg-oc-accent-2-50-tr text-oc-accent-1' : 'text-oc-text-400'
         "
         @click="$emit('update:modelValue', item.value)"
       >
-        {{ item.label }}
+        <div class="flex-1">{{ item.label }}</div>
+        <template v-if="item.badgeVisible ? item.badgeVisible(item) : true">
+          <div
+            v-if="item.isBeta"
+            class="bg-oc-warning text-white shrink-0 py-1 px-3 rounded-sm uppercase text-xs font-medium"
+          >
+            BETA
+          </div>
+          <div
+            v-if="item.isNew"
+            class="bg-oc-accent-2 text-white shrink-0 py-1 px-3 rounded-sm uppercase text-xs font-medium"
+          >
+            NEW
+          </div>
+          <div
+            v-if="item.isTryIt"
+            class="bg-oc-accent-2 text-white shrink-0 py-1 px-3 rounded-sm uppercase text-xs font-medium"
+          >
+            TRY IT
+          </div>
+        </template>
       </div>
     </div>
   </div>
