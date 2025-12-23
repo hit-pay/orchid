@@ -14,7 +14,7 @@
     </div>
     <div class="flex-1 whitespace-nowrap">{{ label }}</div>
 
-    <div class="ml-2" v-if="isShowBadge">
+    <template v-if="isShowBadge">
       <div
         v-if="isBeta"
         class="bg-oc-warning text-white shrink-0 py-1 px-3 rounded-sm uppercase text-xs font-medium"
@@ -33,7 +33,7 @@
       >
         TRY IT
       </div>
-    </div>
+    </template>
   </div>
 </template>
 

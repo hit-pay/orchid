@@ -39,7 +39,7 @@ defineEmits(['titleClick', 'update:modelValue'])
         @click="$emit('update:modelValue', item.value)"
       >
         <div class="flex-1">{{ item.label }}</div>
-        <template v-if="item.badgeVisible ? item.badgeVisible(item) : true">
+        <div class="ml-2" v-if="item.badgeVisible ? item.badgeVisible(item) : true">
           <div
             v-if="item.isBeta"
             class="bg-oc-warning text-white shrink-0 py-1 px-3 rounded-sm uppercase text-xs font-medium"
@@ -58,7 +58,7 @@ defineEmits(['titleClick', 'update:modelValue'])
           >
             TRY IT
           </div>
-        </template>
+        </div>
       </div>
     </div>
   </div>
