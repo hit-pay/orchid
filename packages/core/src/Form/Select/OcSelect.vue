@@ -8,6 +8,7 @@ const props = defineProps({
   hint: String,
   icon: String,
   errorMessage: String,
+  ai: Boolean,
   placeholder: {
     type: String,
     default: 'Placeholder'
@@ -89,6 +90,7 @@ const searchInputRef = ref()
 const dropdownRef = ref()
 const filterableOptionsRef = ref([])
 const selectListRef = ref()
+const hasAi = ref(props.ai && !!props.modelValue?.length)
 
 const optionsKey = ref(new Date().toISOString())
 
@@ -271,6 +273,12 @@ const loadMore = (e) => {
   }
 }
 
+watch(() => props.modelValue, () => {
+  hasAi.value = false
+}, {
+  once: true,
+})
+
 defineExpose({
   dropdownRef
 })
@@ -282,6 +290,7 @@ defineExpose({
     class="relative rounded"
     :label="isInlineLabel ? '' : label"
     :hint="hint"
+    :ai="hasAi"
     :error-message="errorMessage"
     :is-required="isRequired"
     :label-icon="labelIcon"
@@ -308,11 +317,13 @@ defineExpose({
       @scroll="loadMore"
     >
       <div
-        class="border min-h-[36px] input-shadow transition-all duration-[250ms] ease-out w-full px-3 flex justify-between items-center bg-white cursor-pointer gap-x-3 rounded"
+        class="border min-h-[36px] input-shadow transition-all duration-[250ms] ease-out w-full px-3 flex justify-between items-center  focus-within:bg-white cursor-pointer gap-x-3 rounded"
         :class="[
           dropdownClasses,
           {
             'error-shadow': errorMessage && !isDisabled,
+            'border-oc-accent-2-300 bg-oc-accent-2-50 focus-within:bg-oc-bg-light': hasAi,
+            'bg-white': !hasAi,
             'focused-shadow': isDropdownOpened && !isDisabled,
             'pointer-events-none !bg-oc-bg-dark': isDisabled,
             'py-3': multiple,

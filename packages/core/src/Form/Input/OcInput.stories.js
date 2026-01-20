@@ -1,5 +1,5 @@
 import Theme from '../../Theme/OcTheme.vue'
-import OCInput from './OcInput.vue'
+import OcInput from './OcInput.vue'
 import Dropdown from '../../Overlay/Dropdown/OcDropdown.vue'
 import DropdownItem from '../../Overlay/Dropdown/OcDropdownItem.vue'
 import Icon from '../../MediaAndIcons/Icon/OcIcon.vue'
@@ -9,7 +9,7 @@ import { InputOption } from '@/orchidui-core'
 import { Select } from '@/orchidui-core'
 
 export default {
-  component: OCInput,
+  component: OcInput,
   tags: ['autodocs']
 }
 
@@ -44,7 +44,7 @@ export const Default = {
     }
   },
   render: (args) => ({
-    components: { Theme, OCInput },
+    components: { Theme, OcInput },
     setup() {
       const modelValue = ref()
       const logEvent = (name) => console.info(`Event: ${name}`)
@@ -53,7 +53,7 @@ export const Default = {
     },
     template: `
           <Theme colorMode="light" class="py-4">
-            <OCInput
+            <OcInput
                 v-model="modelValue"
                 :label="args.label"
                 :error-message="args.errorMessage"
@@ -87,7 +87,7 @@ export const MainComponent = {
     isInlineLabel: false
   },
   render: (args) => ({
-    components: { Theme, OCInput },
+    components: { Theme, OcInput },
     setup() {
       const text = ref('Text')
       return { text, args }
@@ -96,7 +96,7 @@ export const MainComponent = {
           <Theme colorMode="light">
             <div class="flex flex-col gap-y-4">
               <div class="flex items-end gap-x-4">
-                <OCInput
+                <OcInput
                     :label="args.label" :error-message="args.errorMessage" :hint="args.hint"
                     :placeholder="args.placeholder"
                     :is-inline-label="args.inlineLabel"
@@ -104,7 +104,7 @@ export const MainComponent = {
                     :icon="args.icon"
                     :disabled="args.disabled"
                 />
-                <OCInput
+                <OcInput
                     :label="args.label" :error-message="args.errorMessage" :hint="args.hint"
                     :placeholder="args.placeholder"
                     :is-inline-label="args.inlineLabel"
@@ -112,7 +112,7 @@ export const MainComponent = {
                     :icon="args.icon"
                     disabled
                 />
-                <OCInput
+                <OcInput
                     :label="args.label" :error-message="args.errorMessage" :hint="args.hint"
                     :placeholder="args.placeholder"
                     :is-inline-label="args.label"
@@ -121,7 +121,7 @@ export const MainComponent = {
                 />
               </div>
               <div class="flex items-end gap-x-4">
-                <OCInput
+                <OcInput
                     :placeholder="args.placeholder"
                     :is-inline-label="args.inlineLabel"
                     :label="args.label" error-message="Default Error" :hint="args.hint"
@@ -129,7 +129,7 @@ export const MainComponent = {
                     :icon="args.icon"
                     :disabled="args.disabled"
                 />
-                <OCInput
+                <OcInput
                     :label="args.label" error-message="Disabled Error" :hint="args.hint"
                     :placeholder="args.placeholder"
                     :is-inline-label="args.inlineLabel"
@@ -137,7 +137,7 @@ export const MainComponent = {
                     :icon="args.icon"
                     disabled
                 />
-                <OCInput
+                <OcInput
                     :label="args.label"
                     :placeholder="args.placeholder"
                     is-inline-label
@@ -145,6 +145,17 @@ export const MainComponent = {
                     error-message="Inline Error" :hint="args.hint"
                     :icon="args.icon"
                     is-error
+                />
+              </div>
+              <div class="flex items-end gap-x-4">
+                <OcInput
+                  model-value="Sample value"
+                  :placeholder="args.placeholder"
+                  :is-inline-label="args.inlineLabel"
+                  :label="args.label"
+                  :type="args.type"
+                  :icon="args.icon"
+                  ai
                 />
               </div>
             </div>
@@ -155,7 +166,7 @@ export const MainComponent = {
 
 export const Trailing = {
   render: () => ({
-    components: { Theme, OCInput, Select },
+    components: { Theme, OcInput, Select },
     setup() {
       const isDropdownOpen = ref([])
       const selectedCurrency = ref('sgd')
@@ -312,7 +323,7 @@ export const Trailing = {
     template: `
           <Theme colorMode="light">
             <div class="flex items-end gap-x-4">
-              <OCInput label="Label" hint="This is a hint text to help user">
+              <OcInput label="Label" hint="This is a hint text to help user">
                 <template #trailing>
                   <Select
                     :key="selectedCurrency"
@@ -325,8 +336,8 @@ export const Trailing = {
                     @update:model-value="updateSelectedCurrency"
                   />
                 </template>
-              </OCInput>
-              <OCInput disabled label="Label" hint="This is a hint text to help user">
+              </OcInput>
+              <OcInput disabled label="Label" hint="This is a hint text to help user">
                 <template #trailing>
                   <Select
                     :key="selectedCurrency"
@@ -339,8 +350,8 @@ export const Trailing = {
                     @update:model-value="updateSelectedCurrency"
                   />
                 </template>
-              </OCInput>
-              <OCInput label="Label" hint="This is a hint text to help user"
+              </OcInput>
+              <OcInput label="Label" hint="This is a hint text to help user"
                        error-message="Error message">
                 <template #trailing>
                   <Select
@@ -354,7 +365,7 @@ export const Trailing = {
                     @update:model-value="updateSelectedCurrency"
                   />
                 </template>
-              </OCInput>
+              </OcInput>
             </div>
           </Theme>
         `
@@ -363,7 +374,7 @@ export const Trailing = {
 
 export const After = {
   render: () => ({
-    components: { Theme, OCInput, Icon },
+    components: { Theme, OcInput, Icon },
     setup() {
       const modelValue = ref('')
 
@@ -373,7 +384,7 @@ export const After = {
     },
     template: `
       <Theme colorMode="light" class="py-4">
-        <OCInput
+        <OcInput
           v-model="modelValue"
           label="Password"
           input-type="password"
@@ -384,7 +395,7 @@ export const After = {
               <Icon name="eye-open" width="16" height="16" />
             </span>
           </template>
-        </OCInput>
+        </OcInput>
       </Theme>
     `
   })
@@ -392,7 +403,7 @@ export const After = {
 
 export const Leading = {
   render: () => ({
-    components: { Theme, OCInput, Dropdown, DropdownItem, Icon, BaseInput },
+    components: { Theme, OcInput, Dropdown, DropdownItem, Icon, BaseInput },
     setup() {
       const isDropdownOpen = ref([])
       return {
@@ -402,7 +413,7 @@ export const Leading = {
     template: `
           <Theme colorMode="light">
             <div class="flex items-end gap-x-4">
-              <OCInput label="Label" hint="This is a hint text to help user">
+              <OcInput label="Label" hint="This is a hint text to help user">
                 <template #leading>
                   <Dropdown v-model="isDropdownOpen[1]" :distance="10">
                     <template #menu>
@@ -418,8 +429,8 @@ export const Leading = {
                     </div>
                   </Dropdown>
                 </template>
-              </OCInput>
-              <OCInput disabled label="Label" hint="This is a hint text to help user">
+              </OcInput>
+              <OcInput disabled label="Label" hint="This is a hint text to help user">
                 <template #leading>
                   <Dropdown v-model="isDropdownOpen[2]">
                     <template #menu>
@@ -437,8 +448,8 @@ export const Leading = {
                     </div>
                   </Dropdown>
                 </template>
-              </OCInput>
-              <OCInput label="Label" hint="This is a hint text to help user"
+              </OcInput>
+              <OcInput label="Label" hint="This is a hint text to help user"
                        error-message="Error message">
                 <template #leading>
                   <Dropdown v-model="isDropdownOpen[3]" >
@@ -457,7 +468,7 @@ export const Leading = {
                     </div>
                   </Dropdown>
                 </template>
-              </OCInput>
+              </OcInput>
             </div>
           </Theme>
         `
@@ -492,7 +503,7 @@ export const FormatValue = {
     placeholder: 'Currency format'
   },
   render: (args) => ({
-    components: { Theme, OCInput },
+    components: { Theme, OcInput },
     setup() {
       const modelValue = ref(0)
 
@@ -519,7 +530,7 @@ export const FormatValue = {
     },
     template: `
           <Theme colorMode="light" class="py-4">
-            <OCInput
+            <OcInput
                 v-model="modelValue"
                 :label="args.label"
                 :placeholder="args.placeholder"
@@ -541,7 +552,7 @@ export const passwordInput = {
     inputType: 'password'
   },
   render: (args) => ({
-    components: { Theme, OCInput },
+    components: { Theme, OcInput },
     setup() {
       const modelValue = ref()
 
@@ -549,7 +560,7 @@ export const passwordInput = {
     },
     template: `
           <Theme colorMode="light" class="py-4">
-            <OCInput
+            <OcInput
                 v-model="modelValue"
                 :label="args.label"
                 :hint="args.hint"

@@ -3,6 +3,7 @@ import { Tooltip, Icon } from '@/orchidui-core'
 defineProps({
   label: String,
   hint: String,
+  ai: Boolean,
   errorMessage: String,
   isRequired: Boolean,
   labelIcon: String,
@@ -22,6 +23,7 @@ defineProps({
       <span class="flex items-center gap-x-1">
         {{ label }}
         <span v-if="isRequired" class="text-oc-error">*</span>
+        <Icon v-if="ai" class="text-oc-accent-2-400" name="sparkle-filled" width="16" height="16" />
       </span>
       <Tooltip v-if="labelIcon" v-bind="tooltipOptions">
         <Icon width="16" height="16" :name="labelIcon" />
