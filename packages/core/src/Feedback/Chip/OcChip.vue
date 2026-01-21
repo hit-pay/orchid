@@ -32,12 +32,14 @@ defineEmits({
 
 const className = computed(() => {
   let className = ''
-  
+
   // Get base color classes based on variant
   const getColorClasses = (variant) => {
     switch (variant) {
       case 'accent-1':
         return { text: 'text-oc-accent-1', bg: 'bg-oc-accent-1-50', border: 'border-oc-accent-1' }
+      case 'dark-blue':
+        return { text: 'text-oc-accent-1-500', bg: 'bg-oc-accent-1-50', border: 'border-oc-accent-1-200' }
       case 'accent-2':
         return { text: 'text-oc-accent-2-600', bg: 'bg-oc-accent-2-50', border: 'border-oc-accent-2-600' }
       case 'accent-3':
@@ -62,7 +64,7 @@ const className = computed(() => {
   }
 
   const colors = getColorClasses(props.variant)
-  
+
   // Apply styling based on type
   switch (props.type) {
     case CHIP_TYPES.BACKGROUND:
