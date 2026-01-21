@@ -1,5 +1,4 @@
 import { OcAccountVerificationBox, Chip } from '@/orchidui-core'
-import singpassImage from './singpass.png'
 export default {
   components: { Chip },
   component: OcAccountVerificationBox,
@@ -53,12 +52,12 @@ export const HeaderSlot = {
   render: (args) => ({
     components: { OcAccountVerificationBox, Chip },
     setup() {
-      return { args,singpassImage }
+      return { args }
     },
     template: `
       <OcAccountVerificationBox v-bind="args">
         <template #title>
-          <img :src="singpassImage" alt="singpass"/>
+          <img src="/images/singpass.png" alt="singpass"/>
           <Chip class="ml-auto" variant="dark-blue" label="Recommended" />
         </template>
       </OcAccountVerificationBox>
