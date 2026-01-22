@@ -36,6 +36,10 @@ const props = defineProps({
   tooltipOptions: {
     type: Object,
     default: () => ({})
+  },
+  ai: {
+    type: Boolean,
+    default: false
   }
 })
 const emit = defineEmits({
@@ -133,6 +137,7 @@ const onPaste = (e) => {
     :label-icon="labelIcon"
     :tooltip-text="tooltipText"
     :tooltip-options="tooltipOptions"
+    :ai="ai"
     @paste="onPaste"
     @keydown="preventEventIfNotNumberInput"
     @update:model-value="onInput"
