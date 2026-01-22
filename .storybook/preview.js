@@ -43,7 +43,11 @@ const preview = {
         }
       },
       components: { story },
-      template: '<story />'
+      template: `
+        <div class="px-5 py-6">
+          <story />
+        </div>
+      `
     })
   ]
 }
