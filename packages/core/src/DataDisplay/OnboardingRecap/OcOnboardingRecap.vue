@@ -7,6 +7,8 @@ defineProps({
   state: String,
   headerButton: Object,
   items: Array,
+  noHeader: Boolean,
+  flat: Boolean,
   contentClasses: String,
 });
 
@@ -20,9 +22,15 @@ const STATE_ICONS = {
 
 <template>
   <div
-    class="group border border-gray-200 overflow-hidden rounded flex flex-col grow transition relative hover:shadow-normal"
+    class="group border-gray-200 overflow-hidden rounded flex flex-col grow transition relative"
+    :class="[
+      flat ? 'border-none' : 'border hover:shadow-normal',
+    ]"
   >
-    <div class="px-5 py-3 bg-oc-gray-50 border-b border-oc-gray-200">
+    <div
+      v-if="!noHeader"
+      class="px-5 py-3 bg-oc-gray-50 border-b border-oc-gray-200"
+    >
       <div class="flex items-center">
         <div class="flex-1">
           <h6 class="font-medium text-base leading-[1.5] m-0 text-oc-text-500">{{ title }}</h6>
@@ -43,8 +51,11 @@ const STATE_ICONS = {
     </div>
 
     <div
-      class="p-6 pb-4 bg-white"
-      :class="contentClasses"
+      class="bg-white"
+      :class="[
+        contentClasses,
+        flat ? 'p-5' : 'p-6 pb-4'
+      ]"
     >
       <slot>
         <template v-if="items">
