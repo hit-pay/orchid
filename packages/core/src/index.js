@@ -12,6 +12,8 @@ export * from './DataDisplay/ProgressBar/OcProgressBar.js'
 export * from './DataDisplay/FloatContent/OcFloatContent.js'
 export * from './DataDisplay/HorizontalProgressbar/OcHorizontalProgressbar.js'
 export * from './DataDisplay/OnboardingListItem/OcOnboardingListItem.js'
+export * from './DataDisplay/OnboardingRecap/OcOnboardingRecap.js'
+export * from './DataDisplay/AccountVerificationContent/OcAccountVerificationContent.js'
 export * from './DataDisplay/NewTable/OcNewTable.js'
 
 export * from './Disclosure/Accordion/OcAccordion.js'
