@@ -36,7 +36,8 @@ export const Default = {
     isSplitInput: true,
     isIndefinite: false,
     disabled: false,
-    countCalendars: 2
+    countCalendars: 2,
+    ai: false
   },
   render: (args) => ({
     components: { Theme, DatePicker },
@@ -71,6 +72,7 @@ export const Default = {
                   :is-required="args.isRequired"
                   :is-split-input="args.isSplitInput"
                   :is-indefinite="args.isIndefinite"
+                  :ai="args.ai"
               />
 
               <div class="mt-8 w-fit">
@@ -92,6 +94,7 @@ export const Default = {
                     :is-required="args.isRequired"
                     :is-split-input="args.isSplitInput"
                     :count-calendars="args.countCalendars"
+                    :ai="args.ai"
                 />
               </div>
             </div>
@@ -180,6 +183,49 @@ export const VDatePicker = {
                   />
                 </template>
               </DatePicker>
+            </div>
+          </Theme>
+        `
+  })
+}
+
+export const AiMode = {
+  args: {
+    label: 'AI Suggested Date',
+    hint: 'This date was suggested by AI'
+  },
+  render: (args) => ({
+    components: { Theme, DatePicker },
+    setup() {
+      const model = ref('2024-01-15')
+      const modelRange = ref(['2024-01-15', '2024-01-20'])
+
+      return { args, model, modelRange }
+    },
+    template: `
+          <Theme>
+            <div class="w-full h-[550px] flex flex-col gap-8">
+              <div>
+                <p class="mb-2 text-sm text-oc-text-400">Default DatePicker with AI</p>
+                <DatePicker
+                    v-model="model"
+                    type="default"
+                    :label="args.label"
+                    :hint="args.hint"
+                    ai
+                />
+              </div>
+              <div>
+                <p class="mb-2 text-sm text-oc-text-400">Range DatePicker with AI (Split Input)</p>
+                <DatePicker
+                    v-model="modelRange"
+                    type="range"
+                    label="AI Suggested Date Range"
+                    hint="This date range was suggested by AI"
+                    :is-split-input="true"
+                    ai
+                />
+              </div>
             </div>
           </Theme>
         `
