@@ -59,18 +59,18 @@ const STATE_ICONS = {
     >
       <slot>
         <template v-if="items">
-          <div class="grid grid-cols-2">
+          <div class="grid grid-cols-2 gap-x-3 gap-y-4">
             <div v-for="(item, index) in items" :key="index" class="text-base leading-[1.5]">
               <label class="m-0 text-oc-text-400">{{ item.label }}</label>
               <div
                 class="m-0 text-oc-text-500 mt-1"
               >
                 <ul v-if="Array.isArray(item.value)" class="list-disc ml-5">
-                  <li v-for="valueItem in item.value" :key="`${index}-${valueItem}`">
+                  <li v-for="valueItem in item.value" :key="`${index}-${valueItem}`" class="truncate">
                     {{ valueItem }}
                   </li>
                 </ul>
-                <div v-else>
+                <div v-else class="truncate">
                   {{ item.value }}
                 </div>
               </div>

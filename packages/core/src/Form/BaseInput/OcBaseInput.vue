@@ -22,8 +22,8 @@ defineProps({
     >
       <span class="flex items-center gap-x-1">
         {{ label }}
-        <span v-if="isRequired" class="text-oc-error">*</span>
         <Icon v-if="ai" class="text-oc-accent-2-400" name="sparkle-filled" width="16" height="16" />
+        <span v-else-if="isRequired" class="text-oc-error">*</span>
       </span>
       <Tooltip v-if="labelIcon" v-bind="tooltipOptions">
         <Icon width="16" height="16" :name="labelIcon" />
@@ -35,6 +35,8 @@ defineProps({
           </slot>
         </template>
       </Tooltip>
+
+      <slot name="right-label" />
     </label>
     <slot />
     <div
