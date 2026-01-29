@@ -250,6 +250,10 @@ watch(isFocused, () => {
     <template v-if="$slots.hint" #hint>
       <slot name="hint" />
     </template>
+
+    <template #right-label>
+      <slot name="right-label" />
+    </template>
   </BaseInput>
 </template>
 

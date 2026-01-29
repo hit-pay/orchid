@@ -6,7 +6,7 @@ import Icon from '../../MediaAndIcons/Icon/OcIcon.vue'
 import { ref } from 'vue'
 import BaseInput from '../BaseInput/OcBaseInput.vue'
 import { InputOption } from '@/orchidui-core'
-import { Select } from '@/orchidui-core'
+import { Select, Checkbox } from '@/orchidui-core'
 
 export default {
   component: OcInput,
@@ -87,7 +87,7 @@ export const MainComponent = {
     isInlineLabel: false
   },
   render: (args) => ({
-    components: { Theme, OcInput },
+    components: { Theme, OcInput, Checkbox },
     setup() {
       const text = ref('Text')
       return { text, args }
@@ -157,6 +157,23 @@ export const MainComponent = {
                   :icon="args.icon"
                   ai
                 />
+              </div>
+              <div class="flex items-end gap-x-4">
+                <OcInput
+                  model-value="Sample value"
+                  :placeholder="args.placeholder"
+                  :is-inline-label="args.inlineLabel"
+                  :label="args.label"
+                  :type="args.type"
+                  :icon="args.icon"
+                  ai
+                >
+                  <template #right-label>
+                    <div class="ml-auto">
+                      <Checkbox :model-value="true" label="Same as another field"/>
+                    </div>
+                  </template>
+                </OcInput>
               </div>
             </div>
           </Theme>
