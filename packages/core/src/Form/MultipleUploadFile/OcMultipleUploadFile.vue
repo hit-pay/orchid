@@ -183,20 +183,23 @@ const triggerInput = () => {
               </div>
               <span class="text-oc-text-400 text-sm">{{ file?.fileName }}</span>
             </div>
-            <div
-              v-if="isUploading"
-              class="w-[100px] h-[16px] absolute right-0 flex items-center z-40"
-              :class="{ 'on-end-loading': file.progress === 100 }"
-            >
+
+            <slot name="progress" :current-index="index" :current-file="file">
               <div
-                class="w-[100px] h-[6px] bg-oc-accent-1-50 rounded-full overflow-hidden transition-all duration-1000"
+                v-if="isUploading"
+                class="w-[100px] h-[16px] absolute right-0 flex items-center z-40"
+                :class="{ 'on-end-loading': file.progress === 100 }"
               >
                 <div
-                  :style="{ width: `${file.progress}%` }"
-                  class="block transition-all duration-1000 h-[6px] rounded-full bg-oc-primary"
-                />
+                  class="w-[100px] h-[6px] bg-oc-accent-1-50 rounded-full overflow-hidden transition-all duration-1000"
+                >
+                  <div
+                    :style="{ width: `${file.progress}%` }"
+                    class="block transition-all duration-1000 h-[6px] rounded-full bg-oc-primary"
+                  />
+                </div>
               </div>
-            </div>
+            </slot>
 
             <Icon
               v-if="!isDisabled"
