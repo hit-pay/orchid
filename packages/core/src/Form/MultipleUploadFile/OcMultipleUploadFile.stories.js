@@ -1,4 +1,4 @@
-import { Theme, Toggle } from '@/orchidui-core'
+import { Theme, Toggle, Icon } from '@/orchidui-core'
 import MultipleUploadFile from './OcMultipleUploadFile.vue'
 import { ref } from 'vue'
 
@@ -54,7 +54,7 @@ export const Default = {
 
 export const Files = {
   render: (args) => ({
-    components: { MultipleUploadFile, Theme, Toggle },
+    components: { MultipleUploadFile, Theme, Toggle, Icon },
     setup() {
       const modelValue = ref([])
       const isDisabled = ref(false)
@@ -78,7 +78,14 @@ export const Files = {
             label="File uploader"
             class="mt-5"
             :is-disabled="isDisabled"
-        />
+        >
+          <template #progress>
+            <div class="flex items-center gap-2 mr-5">
+              <span class="text-sm text-oc-primary-500">Verifying document</span>
+              <Icon width="16" height="16" class="animate-spin" name="loading-2" />
+            </div>
+          </template>
+        </MultipleUploadFile>
       </Theme>
         `
   })

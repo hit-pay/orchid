@@ -277,18 +277,21 @@ const onUploadImage = ($event) => {
             </div>
           </div>
           <div class="flex">
-            <div
-              :class="currentFile?.progress === 100 ? 'opacity-0' : ''"
-              class="transition-all duration-500 flex flex-col gap-y-1 items-center"
-            >
-              <span class="text-sm text-oc-primary"> {{ currentFile?.progress || 0 }}% </span>
-              <div class="rounded-full bg-oc-gray-100 w-[48px] h-2 overflow-hidden">
-                <div
-                  class="h-2 bg-oc-primary transition-all duration-100"
-                  :style="{ width: `${currentFile?.progress || 0}%` }"
-                />
+            <slot name="progress" :file="currentFile">
+              <div
+                :class="currentFile?.progress === 100 ? 'opacity-0' : ''"
+                class="transition-all duration-500 flex flex-col gap-y-1 items-center"
+              >
+                <span class="text-sm text-oc-primary"> {{ currentFile?.progress || 0 }}% </span>
+                <div class="rounded-full bg-oc-gray-100 w-[48px] h-2 overflow-hidden">
+                  <div
+                    class="h-2 bg-oc-primary transition-all duration-100"
+                    :style="{ width: `${currentFile?.progress || 0}%` }"
+                  />
+                </div>
               </div>
-            </div>
+            </slot>
+
             <div
               v-if="!isDisabled"
               class="w-[36px] cursor-pointer flex text-oc-error items-center justify-center"
