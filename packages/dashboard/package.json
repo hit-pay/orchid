@@ -33,12 +33,16 @@
     "rollup": "npm:@rollup/wasm-node"
   },
   "dependencies": {
+    "@orchidui/core": "1.81.0",
     "dayjs": "^1.11.10",
     "echarts": "^5.4.3",
-    "@orchidui/core": "1.81.0",
     "lottie-web": "^5.12.2",
     "quill": "^2.0.3",
     "quill-better-table": "^1.2.10",
-    "shiki": "^1.0.0"
+    "shiki": "^1.29.2"
+  },
+  "overrides": {
+    "lodash": ">=4.17.23",
+    "mdast-util-to-hast": ">=13.2.1"
   }
 }
