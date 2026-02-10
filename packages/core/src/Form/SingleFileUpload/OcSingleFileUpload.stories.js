@@ -80,7 +80,12 @@ export const Upload = {
     },
     template: `
           {{file}}
-          <SingleFileUpload v-model="file" is-preview/>
+          <SingleFileUpload
+            v-model="file"
+            is-preview
+            show-error-style-only
+            :error-message="'Error here'"
+          />
         `
   })
 }

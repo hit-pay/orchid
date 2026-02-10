@@ -13,6 +13,7 @@ const props = defineProps({
   },
   modelValue: Object,
   isPreview: Boolean,
+  showErrorStyleOnly: Boolean,
   isImageOnly: Boolean,
   showUploadImageArea: Boolean,
   /**
@@ -132,7 +133,7 @@ const onUploadImage = ($event) => {
 </script>
 
 <template>
-  <BaseInput :label="label" :label-class="labelClass" :hint="hint" :error-message="errorMessage">
+  <BaseInput :label="label" :label-class="labelClass" :hint="hint" :error-message="showErrorStyleOnly ? undefined : errorMessage">
     <SingleOnlyImageUpload
       v-if="isImageOnly"
       :accept="accept"
@@ -175,7 +176,8 @@ const onUploadImage = ($event) => {
             :class="[
               isDragover ? 'border-oc-primary border-dashed' : 'border-oc-gray-200',
               {
-                '!bg-oc-bg-dark': isDisabled
+                '!bg-oc-bg-dark': isDisabled,
+                'error-shadow': !!errorMessage
               }
             ]"
             @dragenter="isDragover = true"
@@ -313,3 +315,16 @@ const onUploadImage = ($event) => {
     </template>
   </BaseInput>
 </template>
+
+<style scoped>
+.error-shadow {
+  box-shadow:
+    0px 0px 0px 3px var(--oc-error-200),
+    0px 2px 4px 0px #0000003d inset;
+  border-color: var(--oc-error-500);
+  &.border-none {
+    box-shadow: none;
+    border: none;
+  }
+}
+</style>

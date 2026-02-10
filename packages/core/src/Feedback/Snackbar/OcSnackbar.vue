@@ -131,9 +131,10 @@ onUnmounted(() => {
           'gap-x-5 pt-5 pb-6 px-5 items-start': isBig,
           'gap-x-4 py-4 px-5 items-center': !isBig && !isSmall,
           '!pr-10': dismissible
-        }
+        },
+        isSmall ? 'rounded' : 'rounded-lg'
       ]"
-      class="border rounded-lg flex shadow-sm snackbar relative"
+      class="border flex shadow-sm snackbar relative"
       :style="isFloating && position.includes('center') ? { left: halfWindowWidth + 'px' } : ''"
     >
       <template v-if="showIcon">
