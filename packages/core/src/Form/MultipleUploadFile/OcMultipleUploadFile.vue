@@ -33,6 +33,7 @@ const props = defineProps({
   label: String,
   errorMessage: String,
   isImageOnly: Boolean,
+  showErrorStyleOnly: Boolean,
   columnsCount: Number,
   selectedImage: {
     type: Object,
@@ -108,7 +109,9 @@ const triggerInput = () => {
     <BaseInput
       :label="label"
       :hint="hint"
-      :error-message="isErrorMaxSize ? `File(s) is more than ${maxSize}MB` : errorMessage"
+      :error-message="showErrorStyleOnly
+        ? undefined
+        : (isErrorMaxSize ? `File(s) is more than ${maxSize}MB` : errorMessage)"
     >
       <OcSimpleMultipleUpload
         v-if="isImageOnly"
@@ -164,7 +167,8 @@ const triggerInput = () => {
         :class="[
           isErrorMaxSize || errorMessage ? 'border-oc-error' : 'border-oc-gray-200',
           {
-            'bg-oc-bg-dark': isDisabled
+            'bg-oc-bg-dark': isDisabled,
+            'error-shadow': !!errorMessage
           }
         ]"
       >
@@ -298,6 +302,19 @@ const triggerInput = () => {
       visibility: visible;
       opacity: 100;
     }
+  }
+}
+</style>
+
+<style scoped>
+.error-shadow {
+  box-shadow:
+    0px 0px 0px 3px var(--oc-error-200),
+    0px 2px 4px 0px #0000003d inset;
+  border-color: var(--oc-error-500);
+  &.border-none {
+    box-shadow: none;
+    border: none;
   }
 }
 </style>
