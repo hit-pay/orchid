@@ -1,5 +1,4 @@
 import { VerificationOption, RadioGroup } from '@/orchidui-core'
-import singpassImage from './singpass.png'
 
 export default {
   component: VerificationOption,
@@ -17,7 +16,7 @@ export const Default = {
   render: (args) => ({
     components: { VerificationOption, RadioGroup },
     setup() {
-      return { args, singpassImage }
+      return { args }
     },
     template: `
           <div class="flex flex-col gap-y-6">
@@ -52,7 +51,7 @@ export const Default = {
 
             <VerificationOption v-bind="args" is-active>
               <template #title>
-                <img :src="singpassImage" alt="singpass"/>
+                <img src="/images/singpass.png" alt="singpass"/>
               </template>
               <template #content>
                 <div class="text-oc-text-400">

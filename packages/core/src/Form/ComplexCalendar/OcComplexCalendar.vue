@@ -1,8 +1,22 @@
 <script setup>
-import { DatePicker } from 'v-calendar'
-import { ref } from 'vue'
+import { DatePicker, setupCalendar } from 'v-calendar'
+import { ref, onBeforeMount, getCurrentInstance } from 'vue'
 import dayjs from 'dayjs'
 import { Button } from '@/orchidui-core'
+
+// Singleton flag to ensure setupCalendar is only called once
+let isCalendarSetup = false
+
+// Setup calendar only when component is used
+onBeforeMount(() => {
+  if (!isCalendarSetup) {
+    const instance = getCurrentInstance()
+    if (instance?.appContext?.app) {
+      instance.appContext.app.use(setupCalendar)
+      isCalendarSetup = true
+    }
+  }
+})
 
 defineProps({
   shortcuts: Array,

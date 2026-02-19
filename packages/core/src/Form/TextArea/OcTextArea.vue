@@ -1,8 +1,8 @@
 <script setup>
 import { BaseInput } from '@/orchidui-core'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
-defineProps({
+const props = defineProps({
   placeholder: String,
   label: String,
   errorMessage: String,
@@ -29,6 +29,10 @@ defineProps({
   tooltipOptions: {
     type: Object,
     default: () => ({})
+  },
+  ai: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -37,6 +41,13 @@ const emit = defineEmits({
 })
 
 const isFocused = ref(false)
+const hasAi = ref(props.ai && !!props.modelValue)
+
+watch(() => props.modelValue, () => {
+  hasAi.value = false
+}, {
+  once: true
+})
 
 const MIN_HEIGHT = '18px'
 
@@ -54,6 +65,7 @@ const onInput = (event) => {
     :label="label"
     :error-message="errorMessage"
     :hint="hint"
+    :ai="hasAi"
     :is-required="isRequired"
     :label-icon="labelIcon"
     :tooltip-text="tooltipText"
@@ -63,7 +75,7 @@ const onInput = (event) => {
       class="outline-none p-3 min-h-[120px] rounded border disabled:bg-oc-bg-dark"
       :class="[
         isFocused ? 'focused-shadow' : '',
-        errorMessage ? 'error-shadow' : 'input-shadow',
+        errorMessage ? 'error-shadow' : hasAi ? 'border-oc-accent-2-300 bg-oc-accent-2-50 focus:bg-oc-bg-light' : 'input-shadow',
         !autoResize ? 'resize-none' : 'resize-y'
       ]"
       :disabled="isDisabled"

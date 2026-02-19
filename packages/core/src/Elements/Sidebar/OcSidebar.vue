@@ -109,6 +109,7 @@ watch(
             :is-new="menu.isNew"
             :is-try-it="menu.isTryIt"
             :is-beta="menu.isBeta"
+            :is-show-badge="menu.badgeVisible ? menu.badgeVisible(menu) : true"
             :is-menu-expanded="state.expanded.includes(menu.name)"
             @click="expandOrRedirect(menu)"
             @close-menu="expandMenu(menu.name)"
@@ -123,6 +124,7 @@ watch(
               :is-beta="submenu.isBeta"
               :is-try-it="submenu.isTryIt"
               :is-expanded="isExpanded"
+              :is-show-badge="submenu.badgeVisible ? submenu.badgeVisible(submenu) : true"
               @click="$emit('redirect', submenu)"
             />
           </SideBarMenu>

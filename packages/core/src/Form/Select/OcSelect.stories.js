@@ -317,6 +317,7 @@ export const Multiple = {
 
       const selectedOption = ref([])
       const selectedGroups = ref([])
+      const values = ref([1])
 
       const setExceedMaxOption = () => {
         console.log('Exceed max options allowed')
@@ -327,6 +328,7 @@ export const Multiple = {
         selectedGroups,
         groups,
         options,
+        values,
         setExceedMaxOption
       }
     },
@@ -370,6 +372,18 @@ export const Multiple = {
                 placeholder="Placeholder"
             />
             <div class="">Selected value: {{ selectedOption }}</div>
+
+            <Select
+              v-model="values"
+              :options="options"
+              label="Label"
+              hint="Hint"
+              is-filterable
+              multiple
+              ai
+              is-add-new
+              placeholder="Placeholder"
+            />
 
             <Select
                 v-model="selectedGroups"

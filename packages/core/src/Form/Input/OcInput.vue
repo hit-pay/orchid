@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, useAttrs } from 'vue'
+import { computed, ref, useAttrs, watch } from 'vue'
 import { BaseInput, Icon } from '@/orchidui-core'
 
 defineOptions({
@@ -32,6 +32,10 @@ const props = defineProps({
     default: ''
   },
   isInlineLabel: {
+    type: Boolean,
+    default: false
+  },
+  ai: {
     type: Boolean,
     default: false
   },
@@ -123,14 +127,16 @@ defineExpose({
 })
 
 const isFocused = ref(false)
+const hasAi = ref(props.ai && !!props.modelValue)
+
 const inputClasses = computed(() => [
   {
     'focused-shadow': isFocused.value && !props.isReadonly
   },
   !props.disabled && (props.errorMessage || props.hasError)
     ? 'error-shadow'
-    : 'border-oc-gray-200 shadow-oc-gray-200',
-  props.disabled ? 'bg-oc-bg-dark pointer-events-none' : 'bg-oc-bg-light',
+    : hasAi.value ? 'border-oc-accent-2-300 bg-oc-accent-2-50 focus-within:bg-oc-bg-light' : 'border-oc-gray-200 shadow-oc-gray-200',
+  props.disabled ? 'bg-oc-bg-dark pointer-events-none' : (!hasAi.value && 'bg-oc-bg-light'),
   props.inputClass
 ])
 
@@ -147,6 +153,12 @@ const inputAttrs = computed(() => {
 })
 
 const isPasswordInput = computed(() => props.inputType === 'password')
+
+watch(isFocused, () => {
+  hasAi.value = false;
+}, {
+  once: true
+})
 </script>
 
 <template>
@@ -154,6 +166,7 @@ const isPasswordInput = computed(() => props.inputType === 'password')
     :label="isInlineLabel ? '' : label"
     :label-class="labelClass"
     :hint="hint"
+    :ai="hasAi"
     :error-message="errorMessage"
     :is-required="isRequired"
     :label-icon="labelIcon"
@@ -236,6 +249,10 @@ const isPasswordInput = computed(() => props.inputType === 'password')
 
     <template v-if="$slots.hint" #hint>
       <slot name="hint" />
+    </template>
+
+    <template #right-label>
+      <slot name="right-label" />
     </template>
   </BaseInput>
 </template>

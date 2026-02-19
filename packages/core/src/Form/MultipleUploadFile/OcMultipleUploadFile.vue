@@ -33,6 +33,7 @@ const props = defineProps({
   label: String,
   errorMessage: String,
   isImageOnly: Boolean,
+  showErrorStyleOnly: Boolean,
   columnsCount: Number,
   selectedImage: {
     type: Object,
@@ -108,7 +109,9 @@ const triggerInput = () => {
     <BaseInput
       :label="label"
       :hint="hint"
-      :error-message="isErrorMaxSize ? `File(s) is more than ${maxSize}MB` : errorMessage"
+      :error-message="showErrorStyleOnly
+        ? undefined
+        : (isErrorMaxSize ? `File(s) is more than ${maxSize}MB` : errorMessage)"
     >
       <OcSimpleMultipleUpload
         v-if="isImageOnly"
@@ -164,7 +167,8 @@ const triggerInput = () => {
         :class="[
           isErrorMaxSize || errorMessage ? 'border-oc-error' : 'border-oc-gray-200',
           {
-            'bg-oc-bg-dark': isDisabled
+            'bg-oc-bg-dark': isDisabled,
+            'error-shadow': !!errorMessage
           }
         ]"
       >
@@ -183,20 +187,23 @@ const triggerInput = () => {
               </div>
               <span class="text-oc-text-400 text-sm">{{ file?.fileName }}</span>
             </div>
-            <div
-              v-if="isUploading"
-              class="w-[100px] h-[16px] absolute right-0 flex items-center z-40"
-              :class="{ 'on-end-loading': file.progress === 100 }"
-            >
+
+            <slot name="progress" :current-index="index" :current-file="file">
               <div
-                class="w-[100px] h-[6px] bg-oc-accent-1-50 rounded-full overflow-hidden transition-all duration-1000"
+                v-if="isUploading"
+                class="w-[100px] h-[16px] absolute right-0 flex items-center z-40"
+                :class="{ 'on-end-loading': file.progress === 100 }"
               >
                 <div
-                  :style="{ width: `${file.progress}%` }"
-                  class="block transition-all duration-1000 h-[6px] rounded-full bg-oc-primary"
-                />
+                  class="w-[100px] h-[6px] bg-oc-accent-1-50 rounded-full overflow-hidden transition-all duration-1000"
+                >
+                  <div
+                    :style="{ width: `${file.progress}%` }"
+                    class="block transition-all duration-1000 h-[6px] rounded-full bg-oc-primary"
+                  />
+                </div>
               </div>
-            </div>
+            </slot>
 
             <Icon
               v-if="!isDisabled"
@@ -295,6 +302,19 @@ const triggerInput = () => {
       visibility: visible;
       opacity: 100;
     }
+  }
+}
+</style>
+
+<style scoped>
+.error-shadow {
+  box-shadow:
+    0px 0px 0px 3px var(--oc-error-200),
+    0px 2px 4px 0px #0000003d inset;
+  border-color: var(--oc-error-500);
+  &.border-none {
+    box-shadow: none;
+    border: none;
   }
 }
 </style>

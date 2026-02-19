@@ -1,6 +1,6 @@
 <script setup>
 import { Dropdown, Calendar, Input, BaseInput, Icon, ComplexCalendar } from '@/orchidui-core'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import dayjs from 'dayjs'
 
@@ -92,6 +92,10 @@ const props = defineProps({
   placement: {
     type: String,
     default: 'bottom-start'
+  },
+  ai: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -100,6 +104,13 @@ const isCalendarIndefinite = ref(false)
 const isDateInvalid = ref(false)
 const inputtedData = ref([])
 const isRangeInput = computed(() => props.type === 'range')
+const hasAi = ref(props.ai && !!props.modelValue)
+
+watch(() => props.modelValue, () => {
+  hasAi.value = false
+}, {
+  once: true
+})
 
 const formattedDate = computed(() => {
   if (!isRangeInput.value) {
@@ -206,6 +217,7 @@ const validateAndEmit = () => {
             :is-required="isRequired"
             :disabled="disabled"
             :placeholder="placeholder"
+            :ai="hasAi"
           />
         </div>
       </template>
@@ -217,12 +229,13 @@ const validateAndEmit = () => {
           :hint="hint"
           :is-required="isRequired"
           :label="label"
+          :ai="hasAi"
         >
           <div
             class="rounded justify-between border flex items-center gap-3 h-[36px] px-3"
             :class="[
-              errorMessage || isDateInvalid ? 'error-shadow' : 'input-shadow',
-              disabled ? 'pointer-events-none bg-oc-bg-dark' : 'bg-white',
+              errorMessage || isDateInvalid ? 'error-shadow' : hasAi ? 'border-oc-accent-2-300 bg-oc-accent-2-50 focus-within:bg-oc-bg-light' : 'input-shadow',
+              disabled ? 'pointer-events-none bg-oc-bg-dark' : !hasAi && 'bg-white',
               {
                 'focused-shadow': isDropdownOpened && !disabled
               }

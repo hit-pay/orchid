@@ -1,6 +1,5 @@
 import { ref } from 'vue'
-import { SingleFileUpload } from '@/orchidui-core'
-import { RadioGroup } from '@/orchidui-core'
+import { SingleFileUpload, RadioGroup, Icon } from '@/orchidui-core'
 
 export default {
   component: SingleFileUpload,
@@ -81,7 +80,12 @@ export const Upload = {
     },
     template: `
           {{file}}
-          <SingleFileUpload v-model="file" is-preview/>
+          <SingleFileUpload
+            v-model="file"
+            is-preview
+            show-error-style-only
+            :error-message="'Error here'"
+          />
         `
   })
 }
@@ -95,7 +99,7 @@ export const Url = {
 }
 export const Disabled = {
   render: () => ({
-    components: { SingleFileUpload },
+    components: { SingleFileUpload, Icon },
     setup() {
       const imageRef = ref({
         current: {
@@ -114,7 +118,14 @@ export const Disabled = {
           <SingleFileUpload
             v-model="imageRef"
             is-disabled
-          />
+          >
+            <template #progress>
+              <div class="flex items-center gap-2">
+                <span class="text-sm text-oc-primary-500">Verifying document</span>
+                <Icon width="16" height="16" class="animate-spin" name="loading-2" />
+              </div>
+            </template>
+          </SingleFileUpload>
         `
   })
 }

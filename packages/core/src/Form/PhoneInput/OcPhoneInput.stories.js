@@ -32,7 +32,8 @@ export const Default = {
     tooltipOptions: {
       position: 'top',
       distance: 10
-    }
+    },
+    ai: false
   },
   render: (args) => ({
     components: { Theme, PhoneInput },
@@ -60,6 +61,32 @@ export const Default = {
                   :tooltip-options="args.tooltipOptions"
                   :label-icon="args.labelIcon"
                   :tooltip-text="args.tooltipText"
+                  :ai="args.ai"
+              />
+            </div>
+          </Theme>
+        `
+  })
+}
+
+export const AiMode = {
+  render: () => ({
+    components: { Theme, PhoneInput },
+    setup() {
+      const modelValue = ref(['65', '91234567'])
+      return { modelValue, countryCodes }
+    },
+    template: `
+          <Theme>
+            <div class="w-full h-[400px]">
+              <div class="mb-3"> Model Value: {{ modelValue }}</div>
+              <PhoneInput
+                  v-model="modelValue"
+                  :country-codes="countryCodes"
+                  label="Phone Number"
+                  hint="AI generated phone number"
+                  placeholder="Placeholder"
+                  ai
               />
             </div>
           </Theme>
