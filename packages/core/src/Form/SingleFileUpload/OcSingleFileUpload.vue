@@ -12,6 +12,7 @@ const props = defineProps({
   },
   modelValue: Object,
   isPreview: Boolean,
+  confirmToRemove: Boolean,
   showErrorStyleOnly: Boolean,
   isImageOnly: Boolean,
   showUploadImageArea: Boolean,
@@ -55,6 +56,7 @@ const emit = defineEmits([
   'onExceedMaxFileSize',
   'fileExist',
   'invalidFileType',
+  'confirmRemoveFile',
   'onOpenEditImage'
 ])
 
@@ -129,6 +131,24 @@ const onEditFile = () => {
 const onUploadImage = ($event) => {
   emit('update:modelValue', $event)
 }
+
+const handleDelete = (index) => {
+  if (props.isDisabled) {
+    return;
+  }
+
+  if (props.confirmToRemove) {
+    emit('confirmRemoveFile', currentFiles.value[index], index)
+
+    return
+  }
+
+  onDeleteFile(index)
+}
+
+defineExpose({
+  onDeleteFile,
+})
 </script>
 
 <template>
@@ -158,7 +178,7 @@ const onUploadImage = ($event) => {
     <template v-else>
       <div
         v-if="!currentFiles.length"
-        class="flex flex-col items-center gap-y-4"
+        class="flex flex-col items-center"
       >
         <div class="flex items-baseline gap-x-3 w-full">
           <template v-if="variant === 'url'">
@@ -301,7 +321,7 @@ const onUploadImage = ($event) => {
               :class="{
                 'cursor-pointer': !isDisabled
               }"
-              @click="() => !isDisabled && onDeleteFile(0)"
+              @click="handleDelete(0)"
             >
               <Icon
                 v-if="!isDisabled"
@@ -316,7 +336,7 @@ const onUploadImage = ($event) => {
     </template>
 
     <template v-if="$slots.hint" #hint>
-      <slot name="hint"></slot>
+      <slot name="hint"/>
     </template>
   </BaseInput>
 </template>

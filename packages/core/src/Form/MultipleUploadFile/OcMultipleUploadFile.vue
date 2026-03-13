@@ -12,6 +12,7 @@ const emit = defineEmits([
   'onExceedMaxFileSize',
   'onMaxFileExceed',
   'onOpenEditImage',
+  'confirmRemoveFile',
   'onImageError'
 ])
 const props = defineProps({
@@ -41,6 +42,7 @@ const props = defineProps({
   },
   inputOptions: Array,
   isDisabled: Boolean,
+  confirmToRemove: Boolean,
   labelUploadArea: String,
   isButtonOnly: Boolean,
   buttonUploadProps: {
@@ -102,6 +104,19 @@ const onDelete = (index) => {
 const triggerInput = () => {
   inputRef.value?.click()
 }
+const handleDelete = (index) => {
+  if (props.confirmToRemove) {
+    emit('confirmRemoveFile', currentFiles.value[index], index)
+
+    return
+  }
+
+  onDelete(index)
+}
+
+defineExpose({
+  onDeleteFile,
+})
 </script>
 
 <template>
@@ -215,7 +230,7 @@ const triggerInput = () => {
                 'on-enable-delete': file.progress === 100 && isUploading,
                 'opacity-100': !isUploading
               }"
-              @click="onDelete(index)"
+              @click="handleDelete(index)"
             />
           </div>
         </div>
