@@ -4,7 +4,6 @@ import { Input, Button, BaseInput, Icon, Dropdown } from '@/orchidui-core'
 import { useUploadFileProgress } from '@/orchidui-core/composables/uploadFileProgress.js'
 import { ModalCropper } from '@/orchidui-core'
 import SingleOnlyImageUpload from './OcSingleOnlyImageUpload.vue'
-import OcSimpleMultipleUpload from '@/orchidui-core/Form/MultipleUploadFile/OcSimpleMultipleUpload.vue'
 
 const props = defineProps({
   format: {
@@ -157,7 +156,10 @@ const onUploadImage = ($event) => {
       />
     </template>
     <template v-else>
-      <div v-if="!currentFiles.length" class="py-2 flex flex-col items-center gap-y-4">
+      <div
+        v-if="!currentFiles.length"
+        class="flex flex-col items-center gap-y-4"
+      >
         <div class="flex items-baseline gap-x-3 w-full">
           <template v-if="variant === 'url'">
             <Input
@@ -172,7 +174,7 @@ const onUploadImage = ($event) => {
           </template>
 
           <div
-            class="p-3 flex bg-white items-center gap-x-5 rounded border w-full"
+            class="p-2 pl-3 flex bg-white items-center gap-x-5 rounded border w-full"
             :class="[
               isDragover ? 'border-oc-primary border-dashed' : 'border-oc-gray-200',
               {
@@ -210,7 +212,7 @@ const onUploadImage = ($event) => {
 
       <div
         v-else
-        class="p-3 rounded border flex gap-x-5 border-oc-gray-200 bg-white items-center"
+        class="p-2 pl-3 rounded border flex gap-x-5 border-oc-gray-200 bg-white items-center"
         :class="{
           'w-fit': isPreview,
           '!bg-oc-bg-dark': isDisabled
@@ -295,11 +297,14 @@ const onUploadImage = ($event) => {
             </slot>
 
             <div
-              v-if="!isDisabled"
-              class="w-[36px] cursor-pointer flex text-oc-error items-center justify-center"
-              @click="onDeleteFile(0)"
+              class="w-[36px] h-[28px] flex text-oc-error items-center justify-center"
+              :class="{
+                'cursor-pointer': !isDisabled
+              }"
+              @click="() => !isDisabled && onDeleteFile(0)"
             >
               <Icon
+                v-if="!isDisabled"
                 width="16"
                 height="16"
                 :name="currentFile?.progress === 100 ? 'bin' : 'x-circle'"
@@ -310,7 +315,7 @@ const onUploadImage = ($event) => {
       </div>
     </template>
 
-    <template #hint>
+    <template v-if="$slots.hint" #hint>
       <slot name="hint"></slot>
     </template>
   </BaseInput>
