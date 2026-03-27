@@ -142,6 +142,8 @@ onMounted(() => onScroll())
       :is-selectable="isSelectable"
       :is-responsive="isResponsive"
       :select-all-rows="selectAllRows"
+      :is-scroll-on-start="isScrollOnStart"
+      :is-scroll-on-end="isScrollOnEnd"
     >
       <div
         class="flex md:border-b-0 border-b border-oc-gray-200"
@@ -215,6 +217,7 @@ onMounted(() => onScroll())
         :fields="fields"
         :headers="headers"
         :is-scroll-on-end="isScrollOnEnd"
+        :is-scroll-on-start="isScrollOnStart"
         :on-click-row="onClickRow"
         :is-selectable="isSelectable"
         :is-cursor-pointer="isCursorPointer"
