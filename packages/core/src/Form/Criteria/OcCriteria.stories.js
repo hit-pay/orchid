@@ -1,4 +1,5 @@
 import { Criteria, Theme } from '@/orchidui-core'
+import { ref } from 'vue'
 
 export default {
   component: Criteria,
@@ -13,28 +14,27 @@ export const Default = {
   render: (args) => ({
     components: { Criteria, Theme },
     setup() {
-      return { args }
+      const modelValue = ref(false)
+      return { modelValue, args }
     },
     template: `
-          <Theme>
-            <Criteria
-                :model-value="args.modelValue"
-                :label="args.label"
-            />
-          </Theme>
-        `
+      <Theme>
+        <Criteria v-model="modelValue" v-bind="args" />
+      </Theme>
+    `
   })
 }
+
 export const Variants = {
   render: () => ({
     components: { Criteria, Theme },
     template: `
-          <Theme>
-            <div class="flex flex-col w-fit gap-6">
-              <Criteria label="Text" :model-value="false"/>
-              <Criteria label="Text" :model-value="true"/>
-            </div>
-          </Theme>
-        `
+      <Theme>
+        <div class="flex flex-col w-fit gap-6">
+          <Criteria label="Not met" :model-value="false" />
+          <Criteria label="Met" :model-value="true" />
+        </div>
+      </Theme>
+    `
   })
 }

@@ -1,4 +1,4 @@
-import { Theme, Slider } from '@/orchidui-core'
+import { Slider, Theme } from '@/orchidui-core'
 import { ref } from 'vue'
 
 export default {
@@ -20,61 +20,62 @@ export const Default = {
     type: 'default'
   },
   render: (args) => ({
-    components: { Theme, Slider },
+    components: { Slider, Theme },
     setup() {
-      const rangeModelValue = ref([0, 50])
       const modelValue = ref(20)
-      return { rangeModelValue, modelValue, args }
+      const rangeModelValue = ref([0, 50])
+      return { modelValue, rangeModelValue, args }
     },
     template: `
-          <Theme>
-            <div class="p-4 w-full bg-oc-accent-1-100">
-              <Slider :key="args.minGap + args.minLimit + args.maxLimit + args.type"
-                      :model-value="args.type === 'range' ? rangeModelValue : modelValue" :min-gap="args.minGap"
-                      :min-limit="args.minLimit"
-                      :type="args.type"
-                      :max-limit="args.maxLimit"
-                      @update:modelValue="args.type === 'range' ? rangeModelValue = $event : modelValue = $event"
-              />
-            </div>
-          </Theme>
-        `
+      <Theme>
+        <div class="p-4 w-full">
+          <Slider
+            :model-value="args.type === 'range' ? rangeModelValue : modelValue"
+            :min-gap="args.minGap"
+            :min-limit="args.minLimit"
+            :max-limit="args.maxLimit"
+            :type="args.type"
+            @update:model-value="args.type === 'range' ? rangeModelValue = $event : modelValue = $event"
+          />
+        </div>
+      </Theme>
+    `
   })
 }
 
 export const VariantRightInput = {
-  argTypes: {
-    type: {
-      control: 'select',
-      options: ['default', 'range']
-    }
-  },
-  args: {
-    minGap: 0,
-    minLimit: 0,
-    maxLimit: 100,
-    type: 'default'
-  },
-  render: (args) => ({
-    components: { Theme, Slider },
+  render: () => ({
+    components: { Slider, Theme },
     setup() {
-      const rangeModelValue = ref([0, 50])
       const modelValue = ref(20)
-      return { rangeModelValue, modelValue, args }
+      const rangeModelValue = ref([0, 50])
+      return { modelValue, rangeModelValue }
     },
     template: `
-          <Theme>
-            <div class="p-4 w-full my-8">
-              <Slider :key="args.minGap + args.minLimit + args.maxLimit + args.type"
-                      :model-value="args.type === 'range' ? rangeModelValue : modelValue" :min-gap="args.minGap"
-                      :min-limit="args.minLimit"
-                      :type="args.type"
-                      :max-limit="args.maxLimit"
-                      variant="right"
-                      @update:modelValue="args.type === 'range' ? rangeModelValue = $event : modelValue = $event"
-              />
-            </div>
-          </Theme>
-        `
+      <Theme>
+        <div class="p-4 w-full flex flex-col gap-8">
+          <div>
+            <p class="mb-2 text-sm text-oc-text-400">Default with right input</p>
+            <Slider
+              v-model="modelValue"
+              variant="right"
+              :min-limit="0"
+              :max-limit="100"
+            />
+          </div>
+          <div>
+            <p class="mb-2 text-sm text-oc-text-400">Range with right input</p>
+            <Slider
+              :model-value="rangeModelValue"
+              type="range"
+              variant="right"
+              :min-limit="0"
+              :max-limit="100"
+              @update:model-value="rangeModelValue = $event"
+            />
+          </div>
+        </div>
+      </Theme>
+    `
   })
 }

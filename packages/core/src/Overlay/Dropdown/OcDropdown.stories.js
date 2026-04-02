@@ -1,4 +1,4 @@
-import { Theme, Dropdown, DropdownItem } from '@/orchidui-core'
+import { Dropdown, DropdownItem, Theme } from '@/orchidui-core'
 import { ref } from 'vue'
 
 export default {
@@ -7,34 +7,36 @@ export default {
 }
 
 export const Default = {
-  render: () => ({
-    components: { Dropdown, Theme, DropdownItem },
+  args: {
+    distance: 10
+  },
+  render: (args) => ({
+    components: { Dropdown, DropdownItem, Theme },
     setup() {
-      const isDropdownOpened = ref(false)
-      return {
-        isDropdownOpened
-      }
+      const isOpen = ref(false)
+      return { args, isOpen }
     },
     template: `
-          <Theme>
-            <div class="w-full h-[200px]">
-              <Dropdown v-model="isDropdownOpened" :distance="10">
-                Dropdown Button
+      <Theme>
+        <div class="w-full h-[200px]">
+          <Dropdown v-model="isOpen" v-bind="args">
+            <button>Open Dropdown</button>
 
-                <template #menu>
-                  <div class="flex flex-col">
-                    <div class="p-2 border-b border-gray-200">
-                      <DropdownItem text="Menu" sub-text="description" />
-                      <DropdownItem text="Menu" icon="pencil" v-for="i in 50" />
-                    </div>
-                    <div class="p-2">
-                      <DropdownItem text="Menu" icon="pencil" variant="destructive"/>
-                    </div>
-                  </div>
-                </template>
-              </Dropdown>
-            </div>
-          </Theme>
-        `
+            <template #menu>
+              <div class="flex flex-col">
+                <div class="p-2 border-b border-gray-200">
+                  <DropdownItem text="Edit" icon="pencil" />
+                  <DropdownItem text="Duplicate" icon="copy" />
+                  <DropdownItem text="Archive" icon="archive" />
+                </div>
+                <div class="p-2">
+                  <DropdownItem text="Delete" icon="trash" variant="destructive" />
+                </div>
+              </div>
+            </template>
+          </Dropdown>
+        </div>
+      </Theme>
+    `
   })
 }

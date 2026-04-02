@@ -1,17 +1,12 @@
-import OcBarChart from './OcBarChart.vue'
+import { BarChart } from '@/orchidui-dashboard'
+import { Theme } from '@/orchidui-core'
 
 export default {
-  component: OcBarChart,
+  component: BarChart,
   tags: ['autodocs']
 }
 
-export const barChart = {
-  argTypes: {
-    variant: {
-      control: 'select',
-      options: ['primary', 'purple']
-    }
-  },
+export const Default = {
   args: {
     variant: 'primary',
     showGrid: false,
@@ -38,24 +33,14 @@ export const barChart = {
     tooltipCurrency: 'SGD'
   },
   render: (args) => ({
-    components: { OcBarChart },
+    components: { BarChart, Theme },
     setup() {
       return { args }
     },
     template: `
-          <div>
-            <OcBarChart
-                class="h-[300px]"
-                :variant="args.variant"
-                :show-grid="args.showGrid"
-                :show-tooltip="args.showTooltip"
-                :show-legend="args.showLegend"
-                :chart-data="args.chartData"
-                :label-data="args.labelData"
-                :tooltip-currency="args.tooltipCurrency"
-                :y-axis-formatter="args.yAxisFormatter"
-            />
-          </div>
-        `
+      <Theme>
+        <BarChart class="h-[300px]" v-bind="args" />
+      </Theme>
+    `
   })
 }

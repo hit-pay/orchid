@@ -1,37 +1,34 @@
-import OcCopyTooltip from '@/orchidui-core/Overlay/CopyTooltip/OcCopyTooltip.vue'
-import OcButton from '@/orchidui-core/Form/Button/OcButton.vue'
+import { CopyTooltip, Button, Theme } from '@/orchidui-core'
+import { ref } from 'vue'
 
 export default {
-  component: OcCopyTooltip,
+  component: CopyTooltip,
   tags: ['autodocs']
 }
 
 export const Default = {
   args: {
-    value: '',
-    tooltipText: 'Copied!',
-    tooltipOptions: { distance: 40 }
+    tooltipText: 'Copied!'
   },
   render: (args) => ({
-    components: { OcCopyTooltip, OcButton },
+    components: { CopyTooltip, Button, Theme },
     setup() {
+      const blobValue = ref(null)
       const url =
         'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII'
 
-      fetch(url).then(async (res) => (args.value = await res.blob()))
+      fetch(url).then(async (res) => (blobValue.value = await res.blob()))
 
-      return { args }
+      return { args, blobValue }
     },
     template: `
-          <div class="w-full pt-8">
-            <OcCopyTooltip
-                :value="args.value"
-                :tooltip-text="args.tooltipText"
-                :tooltip-options="args.tooltipOptions"
-            >
-              <OcButton>Copy Blob</OcButton>
-            </OcCopyTooltip>
-          </div>
-        `
+      <Theme>
+        <div class="w-full pt-8">
+          <CopyTooltip :value="blobValue" :tooltip-text="args.tooltipText">
+            <Button label="Copy Blob" />
+          </CopyTooltip>
+        </div>
+      </Theme>
+    `
   })
 }

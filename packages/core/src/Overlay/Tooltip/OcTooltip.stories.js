@@ -1,4 +1,4 @@
-import { Theme, Tooltip } from '@/orchidui-core'
+import { Tooltip, Theme } from '@/orchidui-core'
 
 export default {
   component: Tooltip,
@@ -39,42 +39,23 @@ export const Default = {
   render: (args) => ({
     components: { Tooltip, Theme },
     setup() {
-      return {
-        args
-      }
+      return { args }
     },
     template: `
-          <Theme>
-            <div class="w-full h-[400px] flex items-center justify-center gap-3">
-              <Tooltip :key="args.trigger" :trigger="args.trigger" :distance="args.distance" :skidding="args.skidding"
-                       :position="args.position" :is-attach-to-body="args.isAttachToBody" popper-class="bg-oc-bg">
-                <div class="bg-oc-gray-300 p-3 rounded-sm cursor-pointer">Trigger</div>
-                <template #popper>
-                  <div class="flex w-[300px] flex-col gap-y-3 p-4">
-                    <div class="font-medium">Tooltip title</div>
-                    <div class="text-sm">Tooltips are used to describe or identify an element. In most scenarios,
-                      tooltips help the user
-                      understand the meaning, function or alt-text of an element.
-                    </div>
-                  </div>
-                </template>
-              </Tooltip>
-              <Tooltip :key="args.trigger" :trigger="args.trigger" :distance="args.distance" :skidding="args.skidding"
-                       :position="args.position" :is-attach-to-body="args.isAttachToBody" is-popover
-                       popper-class="bg-oc-gray-900 text-oc-text-100">
-                <div class="p-3 rounded-sm cursor-pointer">Trigger</div>
-                <template #popper>
-                  <div class="flex w-[300px] flex-col gap-y-3 p-4">
-                    <div class="font-medium">Tooltip title</div>
-                    <div class="text-sm">Tooltips are used to describe or identify an element. In most scenarios,
-                      tooltips help the user
-                      understand the meaning, function or alt-text of an element.
-                    </div>
-                  </div>
-                </template>
-              </Tooltip>
-            </div>
-          </Theme>
-        `
+      <Theme>
+        <div class="w-full h-[400px] flex items-center justify-center">
+          <Tooltip v-bind="args">
+            <button class="px-4 py-2 bg-oc-gray-100 rounded">Hover me</button>
+
+            <template #popper>
+              <div class="flex w-[300px] flex-col gap-y-3 p-4">
+                <div class="font-medium">Tooltip title</div>
+                <div class="text-sm">Tooltips are used to describe or identify an element. In most scenarios, tooltips help the user understand the meaning, function or alt-text of an element.</div>
+              </div>
+            </template>
+          </Tooltip>
+        </div>
+      </Theme>
+    `
   })
 }

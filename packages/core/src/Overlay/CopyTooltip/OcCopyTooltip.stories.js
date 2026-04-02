@@ -1,28 +1,26 @@
-import OcCopyTooltip from '@/orchidui-core/Overlay/CopyTooltip/OcCopyTooltip.vue'
+import { CopyTooltip, Theme } from '@/orchidui-core'
 
 export default {
-  component: OcCopyTooltip,
+  component: CopyTooltip,
   tags: ['autodocs']
 }
 
 export const Default = {
   args: {
-    text: 'Text to copy',
+    value: 'Text to copy',
     tooltipText: 'Copied!'
   },
   render: (args) => ({
-    components: { OcCopyTooltip },
+    components: { CopyTooltip, Theme },
     setup() {
       return { args }
     },
     template: `
-          <div class="w-full pt-8">
-            <OcCopyTooltip
-                :value="args.text"
-                :tooltip-text="args.tooltipText"
-                :tooltip-options="args.tooltipOptions"
-            />
-          </div>
-        `
+      <Theme>
+        <div class="w-full pt-8">
+          <CopyTooltip v-bind="args" />
+        </div>
+      </Theme>
+    `
   })
 }

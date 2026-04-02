@@ -1,17 +1,12 @@
-import OcBarRaceChart from './OcBarRaceChart.vue'
+import { BarRaceChart } from '@/orchidui-dashboard'
+import { Theme } from '@/orchidui-core'
 
 export default {
-  component: OcBarRaceChart,
+  component: BarRaceChart,
   tags: ['autodocs']
 }
 
-export const barRace = {
-  argTypes: {
-    variant: {
-      control: 'select',
-      options: ['primary', 'purple']
-    }
-  },
+export const Default = {
   args: {
     variant: 'primary',
     showGrid: false,
@@ -29,23 +24,14 @@ export const barRace = {
     ]
   },
   render: (args) => ({
-    components: { OcBarRaceChart },
+    components: { BarRaceChart, Theme },
     setup() {
       return { args }
     },
     template: `
-          <div>
-            <OcBarRaceChart
-                class="h-[300px]"
-                :variant="args.variant"
-                :show-grid="args.showGrid"
-                :show-tooltip="args.showTooltip"
-                :show-legend="args.showLegend"
-                :chart-data="args.chartData"
-                :label-data="args.labelData"
-                :legend-data="args.legendData"
-            />
-          </div>
-        `
+      <Theme>
+        <BarRaceChart class="h-[300px]" v-bind="args" />
+      </Theme>
+    `
   })
 }

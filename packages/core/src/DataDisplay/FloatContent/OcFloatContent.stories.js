@@ -1,5 +1,4 @@
 import { Theme, FloatContent, Button } from '@/orchidui-core'
-import { ar } from 'date-fns/locale'
 import { ref } from 'vue'
 
 export default {
@@ -7,8 +6,7 @@ export default {
   tags: ['autodocs']
 }
 
-export const overview = {
-  name: 'Overview',
+export const Default = {
   argTypes: {
     position: {
       control: 'select',
@@ -37,28 +35,23 @@ export const overview = {
           text: 'Delete',
           icon: 'bin',
           iconClasses: '!text-oc-error',
-          onClick: () => console.log('activate/disactivate clicked')
+          onClick: () => console.log('delete clicked')
         }
       ]
     }
   },
   render: (args) => ({
-    components: { FloatContent, Button, Theme },
+    components: { Theme, FloatContent, Button },
     setup() {
-      return {
-        args,
-        isOpen: ref(false)
-      }
+      const isOpen = ref(false)
+      return { args, isOpen }
     },
     template: `
-      <Theme class="h-[300px] ">
+      <Theme class="h-[300px]">
         <Button @click="isOpen = !isOpen">Open</Button>
         <FloatContent
-            v-model="isOpen"
-            :title="args.title"
-            :description="args.description" 
-            :dropdown-options="args.dropdownOptions"
-            :position="args.position"
+          v-model="isOpen"
+          v-bind="args"
         />
       </Theme>
     `

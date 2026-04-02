@@ -1,9 +1,10 @@
-import { TableCell } from '@/orchidui-core'
+import { Theme, TableCell } from '@/orchidui-core'
 
 export default {
   component: TableCell,
   tags: ['autodocs']
 }
+
 export const Default = {
   argTypes: {
     variant: {
@@ -27,27 +28,26 @@ export const Default = {
     datetime: '',
     imageClass: 'h-full'
   },
-
   render: (args) => ({
-    components: { TableCell },
+    components: { Theme, TableCell },
     setup() {
       return { args }
     },
     template: `
-          <div class="flex group/row">
-            <TableCell class="flex-1" v-bind="args" variant="content"
-                       :content="{title: 'title', description: 'description'}"/>
-            <TableCell class="flex-1" v-bind="args" variant="datetime" :data="new Date()"/>
-            <TableCell class="flex-1" v-bind="args" variant="content"
-                       :content="{title: 'title', description: 'description'}" isCopy/>
-            <TableCell class="flex-1" v-bind="args">Default slot</TableCell>
-            <TableCell class="flex-1" v-bind="args" isLoading/>
-            <TableCell class="flex-1" v-bind="args" variant="icon" data="x"/>
-            <TableCell class="flex-1" v-bind="args" variant="image"/>
-            <TableCell class="flex-1" v-bind="args" variant="chip" data="label" :chipOptions="{ label: 'primary'}"/>
-            <TableCell class="flex-1" v-bind="args" variant="checkbox"/>
-            <TableCell class="flex-1" v-bind="args" variant="empty"/>
-          </div>
-        `
+      <Theme>
+        <div class="flex group/row">
+          <TableCell class="flex-1" v-bind="args" variant="content" :content="{ title: 'Table Cell', description: 'Row description' }" />
+          <TableCell class="flex-1" v-bind="args" variant="datetime" :data="new Date()" />
+          <TableCell class="flex-1" v-bind="args" variant="content" :content="{ title: 'Copyable', description: 'Click to copy' }" isCopy />
+          <TableCell class="flex-1" v-bind="args">Default slot</TableCell>
+          <TableCell class="flex-1" v-bind="args" isLoading />
+          <TableCell class="flex-1" v-bind="args" variant="icon" data="x" />
+          <TableCell class="flex-1" v-bind="args" variant="image" />
+          <TableCell class="flex-1" v-bind="args" variant="chip" data="label" :chipOptions="{ label: 'primary' }" />
+          <TableCell class="flex-1" v-bind="args" variant="checkbox" />
+          <TableCell class="flex-1" v-bind="args" variant="empty" />
+        </div>
+      </Theme>
+    `
   })
 }

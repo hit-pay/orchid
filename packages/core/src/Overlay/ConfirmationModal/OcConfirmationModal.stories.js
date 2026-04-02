@@ -1,4 +1,4 @@
-import { ConfirmationModal, Button } from '@/orchidui-core'
+import { ConfirmationModal, Button, Theme } from '@/orchidui-core'
 import { ref } from 'vue'
 
 export default {
@@ -16,27 +16,25 @@ export const Default = {
   args: {
     variant: 'delete',
     title: 'Are you sure?',
-    description: 'Do you want to delete this payment link? The action can’t be undo.',
-    open: false,
+    description: 'Do you want to delete this item? This action cannot be undone.',
     labelConfirm: 'Confirm',
-    labelCancel: 'Close',
+    labelCancel: 'Cancel',
     isLoading: false
   },
   render: (args) => ({
-    components: { ConfirmationModal, Button },
+    components: { ConfirmationModal, Button, Theme },
     setup() {
-      const handleConfirm = () => {
-        args.isLoading = true
-
-        setTimeout(() => (args.isLoading = false), 1000)
-      }
-      return { args, handleConfirm }
+      const isOpen = ref(false)
+      return { args, isOpen }
     },
     template: `
-          <div class="h-screen">
-            <Button @click="args.open = !args.open">Open Confirmation Modal</Button>
-            <ConfirmationModal class="!w-full" v-bind="args" v-model="args.open" @confirm="handleConfirm" />
-          </div>
-        `
+      <Theme>
+        <div class="h-screen">
+          <Button label="Open Confirmation" @click="isOpen = true" />
+
+          <ConfirmationModal v-model="isOpen" v-bind="args" />
+        </div>
+      </Theme>
+    `
   })
 }

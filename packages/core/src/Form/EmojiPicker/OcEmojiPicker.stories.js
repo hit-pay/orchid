@@ -1,4 +1,4 @@
-import EmojiPicker from './OcEmojiPicker.vue'
+import { EmojiPicker, Theme } from '@/orchidui-core'
 import { ref } from 'vue'
 
 export default {
@@ -12,18 +12,17 @@ export const Default = {
     popperOptions: {}
   },
   render: (args) => ({
-    components: { EmojiPicker },
+    components: { EmojiPicker, Theme },
     setup() {
-      const value = ref()
-      return {
-        value,
-        args
-      }
+      const modelValue = ref('')
+      return { modelValue, args }
     },
     template: `
-          <div class="h-[500px] w-full">
-            <EmojiPicker v-model="value" v-bind="args" />
-          </div>
-        `
+      <Theme>
+        <div class="h-[500px] w-full">
+          <EmojiPicker v-model="modelValue" v-bind="args" />
+        </div>
+      </Theme>
+    `
   })
 }

@@ -1,12 +1,12 @@
-import { Theme, Accordion, DatePicker, Button } from '@/orchidui-core'
-import { ref, watch } from 'vue'
+import { Accordion, Theme } from '@/orchidui-core'
+import { ref } from 'vue'
 
 export default {
   component: Accordion,
   tags: ['autodocs']
 }
 
-export const OcAccordion = {
+export const Default = {
   argTypes: {
     icon: {
       control: 'select',
@@ -19,42 +19,24 @@ export const OcAccordion = {
     icon: 'chevron-down',
     showIcon: true,
     isAnimated: true,
-    isExpandable: false,
     isDisabled: false
   },
   render: (args) => ({
-    components: { Accordion, Theme, DatePicker, Button },
+    components: { Accordion, Theme },
     setup() {
       const isOpen = ref(false)
-      const dynamicContent = ref([])
-
-      watch(
-        () => args.isExpandable,
-        (val) => (isOpen.value = args.isDisabled ? false : val)
-      )
-      return { isOpen, dynamicContent, args }
+      return { args, isOpen }
     },
     template: `
-          <Theme class="h-[500px]">
-            <Accordion
-                v-model:isExpandable="isOpen"
-                :header="args.header"
-                :header-style="'bg-oc-gray-50'"
-                :body="args.body"
-                :icon="args.icon"
-                :showIcon="args.showIcon"
-                :isAnimated="args.isAnimated"
-                :isDisabled="args.isDisabled"
-            >
-              <template #body>
-                <DatePicker />
-                <div class="flex flex-col gap-3 mt-3">
-                  <div v-for="item in dynamicContent">Dynamic Content {{item}}</div>
-                  <Button size="small" label="Add Content" @click="dynamicContent.push(dynamicContent.length)"/>
-                </div>
-              </template>
-            </Accordion>
-          </Theme>
-        `
+      <Theme class="h-[500px]">
+        <Accordion v-model:isExpandable="isOpen" v-bind="args">
+          <template #body>
+            <p class="text-oc-text-400 text-sm">
+              This is the accordion body content. You can place any content here, such as text, forms, or other components.
+            </p>
+          </template>
+        </Accordion>
+      </Theme>
+    `
   })
 }

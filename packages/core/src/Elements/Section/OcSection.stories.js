@@ -1,11 +1,11 @@
 import {
   OcSection,
-  Theme as OcTheme,
-  ListItem as OcListItem,
-  OverviewIcon as OverviewIcon,
-  Button as OcButton,
-  Icon as OcIcon,
-  OcOnboardingListItem,
+  Theme,
+  ListItem,
+  OverviewIcon,
+  Button,
+  Icon,
+  OcOnboardingListItem
 } from '@/orchidui-core'
 
 export default {
@@ -15,25 +15,25 @@ export default {
 
 export const Default = {
   args: {
-    title: 'Get in touch',
+    title: 'Get in touch'
   },
   render: (args) => ({
     components: {
       OcSection,
-      OcListItem,
+      ListItem,
       OverviewIcon,
-      OcButton,
-      OcIcon,
+      Button,
+      Icon,
       OcOnboardingListItem,
-      OcTheme,
+      Theme
     },
     setup() {
       return { args }
     },
     template: `
-      <OcTheme colorMode="light" class="p-10">
+      <Theme class="p-10">
         <OcSection :title="args.title">
-          <OcListItem
+          <ListItem
             type="general"
             :is-dropdown-actions-visible="false"
             :is-disabled="true"
@@ -42,35 +42,32 @@ export const Default = {
             <template #title>
               <OverviewIcon icon="chat" />
             </template>
-  
+
             <div>
               <div class="font-medium">Live chat</div>
               <div class="mt-2 text-sm">Get instant help from our support team.</div>
-              
+
               <div class="flex mt-4 text-sm">
                 <div class="w-[16px] h-[16px] rounded-full bg-oc-accent-1-100 p-2 flex justify-center items-center">
                   <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="4" cy="4" r="4" fill="#002771"/>
                   </svg>
                 </div>
-                
+
                 <div class="ml-3">
                   <span class="text-oc-text-500 font-medium">Off-hours</span>
                   <span class="ml-2 text-oc-text-400">~1 hr response time</span>
                 </div>
               </div>
-              
+
               <div class="flex mt-5">
-                <OcButton size="small" variant="secondary" label="Start chat"/>
+                <Button size="small" variant="secondary" label="Start chat"/>
               </div>
             </div>
-          </OcListItem>
+          </ListItem>
         </OcSection>
-        
-        <OcSection
-          title="Resource"
-          class="mt-8"
-        >
+
+        <OcSection title="Resource" class="mt-8">
           <div class="grid grid-cols-2 gap-5">
             <OcOnboardingListItem
               class="rounded border border-gray-200 max-w-[420px]"
@@ -81,7 +78,7 @@ export const Default = {
               :button-options="{
                 rightIcon: 'external-link',
                 isTransparent: true,
-                label: 'Learn more',
+                label: 'Learn more'
               }"
             />
 
@@ -94,12 +91,12 @@ export const Default = {
               :button-options="{
                 rightIcon: 'external-link',
                 isTransparent: true,
-                label: 'Learn more',
+                label: 'Learn more'
               }"
             />
           </div>
         </OcSection>
-      </OcTheme>
+      </Theme>
     `
   })
 }
