@@ -1,6 +1,5 @@
 {
   "name": "HorizontalProgressbar",
-  "description": "A horizontal bar showing progress as a ratio of current to max value.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-horizontalprogressbar-ochorizontalprogressbar--docs",
   "props": {
     "label": {

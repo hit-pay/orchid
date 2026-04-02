@@ -1,6 +1,5 @@
 {
   "name": "Cropper",
-  "description": "An inline image cropper with optional replace functionality.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-cropper-occropper--docs",
   "props": {
     "inputOptions": {

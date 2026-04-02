@@ -1,6 +1,5 @@
 {
   "name": "Checklist",
-  "description": "A single checklist step item with an index number, label, and completion state.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-checklist-occhecklist--docs",
   "props": {
     "index": {

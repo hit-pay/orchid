@@ -1,6 +1,5 @@
 {
   "name": "Radio",
-  "description": "A single radio button with label, hint, tooltip, and button-variant styles.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-radio-ocradio--docs",
   "props": {
     "modelValue": {

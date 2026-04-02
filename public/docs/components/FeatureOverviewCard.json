@@ -1,6 +1,5 @@
 {
   "name": "FeatureOverviewCard",
-  "description": "A card listing product features with icons, used in feature overview or upgrade pages.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-featureoverviewcard-ocfeatureoverviewcard--docs",
   "props": {
     "title": {

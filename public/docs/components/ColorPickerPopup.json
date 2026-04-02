@@ -1,6 +1,5 @@
 {
   "name": "ColorPickerPopup",
-  "description": "A popover color picker for inline color selection.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-colorpicker-components-occolorpickerpopup--docs",
   "props": {
     "modelValue": {

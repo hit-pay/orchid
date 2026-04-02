@@ -1,6 +1,5 @@
 {
   "name": "EmptyPage",
-  "description": "A placeholder page shown when a list or section has no data.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-emptypage-ocemptypage--docs",
   "props": {
     "isButton": {

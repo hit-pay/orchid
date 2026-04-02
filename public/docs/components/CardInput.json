@@ -1,6 +1,5 @@
 {
   "name": "CardInput",
-  "description": "A credit card number input with card type detection and inline label support.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-cardinput-occardinput--docs",
   "props": {
     "placeholder": {

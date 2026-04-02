@@ -1,6 +1,5 @@
 {
   "name": "PrimaryActions",
-  "description": "Renders primary action buttons or dropdowns within a PageTitle.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-pagetitle-ocprimaryactions--docs",
   "props": {
     "primaryActions": {

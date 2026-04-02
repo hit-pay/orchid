@@ -1,6 +1,5 @@
 {
   "name": "SingleFileUpload",
-  "description": "A file upload input for a single file with preview, size limit, and crop support.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-singlefileupload-ocsinglefileupload--docs",
   "props": {
     "format": {

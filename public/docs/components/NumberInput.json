@@ -1,6 +1,5 @@
 {
   "name": "NumberInput",
-  "description": "A numeric input with increment/decrement buttons.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-numberinput-ocnumberinput--docs",
   "props": {
     "modelValue": {

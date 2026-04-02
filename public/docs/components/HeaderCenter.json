@@ -1,6 +1,5 @@
 {
   "name": "HeaderCenter",
-  "description": "The center section of a Header with an optional back button and saved state.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-header-ocheadercenter--docs",
   "props": {
     "isSaved": {

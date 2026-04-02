@@ -1,6 +1,5 @@
 {
   "name": "VerificationOption",
-  "description": "A selectable verification method card with icon, chip badge, and active state.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-verificationoption-ocverificationoption--docs",
   "props": {
     "title": {

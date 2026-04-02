@@ -1,6 +1,5 @@
 {
   "name": "PrevNext",
-  "description": "A single previous or next navigation button used within Pagination.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-pagination-ocprevnext--docs",
   "props": {
     "disabled": {

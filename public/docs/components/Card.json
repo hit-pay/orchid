@@ -1,6 +1,5 @@
 {
   "name": "Card",
-  "description": "A dashboard card container with a title and content area.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-card-occard--docs",
   "props": {
     "type": {

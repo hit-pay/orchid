@@ -1,6 +1,5 @@
 {
   "name": "Toggle",
-  "description": "A on/off toggle switch with label and disabled state.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-toggle-octoggle--docs",
   "props": {
     "modelValue": {

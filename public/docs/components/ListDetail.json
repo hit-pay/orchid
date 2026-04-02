@@ -1,6 +1,5 @@
 {
   "name": "ListDetail",
-  "description": "A label-value pair row in horizontal or vertical alignment, with optional copy tooltip.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-listdetail-oclistdetail--docs",
   "props": {
     "label": {

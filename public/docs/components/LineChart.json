@@ -1,6 +1,5 @@
 {
   "name": "LineChart",
-  "description": "A time-series line chart for visualizing trends over time.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-charts-linechart-oclinechart--docs",
   "props": {
     "showTooltip": {

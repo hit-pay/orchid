@@ -1,6 +1,5 @@
 {
   "name": "OnboardingAccordion",
-  "description": "An onboarding-styled accordion with a status variant (completed, error, pending, etc.).",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/disclosure-onboardingaccordion-onboardingaccordion--docs",
   "props": {
     "description": {

@@ -1,6 +1,5 @@
 {
   "name": "TextEditor",
-  "description": "A rich text editor (WYSIWYG) for formatted content input.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-texteditor-octexteditor--docs",
   "props": {
     "fontSizes": {

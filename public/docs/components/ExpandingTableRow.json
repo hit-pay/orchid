@@ -1,6 +1,5 @@
 {
   "name": "ExpandingTableRow",
-  "description": "A single row within an ExpandingTable, supporting depth indentation and nested children.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-table-expandingtable-ocexpandingtablerow--docs",
   "props": {
     "row": {

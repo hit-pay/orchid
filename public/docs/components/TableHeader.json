@@ -1,6 +1,5 @@
 {
   "name": "TableHeader",
-  "description": "A single table header cell supporting text or checkbox variants, sortable columns, and loading state.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-table-octableheader--docs",
   "props": {
     "variant": {

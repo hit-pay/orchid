@@ -1,6 +1,5 @@
 {
   "name": "OcOnboardingListItem",
-  "description": "An onboarding checklist row with a number badge, status, and action button.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-onboardinglistitem-oconboardinglistitem--docs",
   "props": {
     "title": {

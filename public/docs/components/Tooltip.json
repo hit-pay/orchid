@@ -1,6 +1,5 @@
 {
   "name": "Tooltip",
-  "description": "A hover or click tooltip/popover with configurable placement and content slot.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/overlay-tooltip-octooltip--docs",
   "props": {
     "popperClass": {

@@ -1,6 +1,5 @@
 {
   "name": "SubHeader",
-  "description": "A secondary header below the main header.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-header-ocsubheader--docs",
   "props": {},
   "events": {},

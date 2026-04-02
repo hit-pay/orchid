@@ -1,6 +1,5 @@
 {
   "name": "Variant",
-  "description": "A single selectable variant card with icon and label.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/disclosure-variants-ocvariant--docs",
   "props": {
     "icon": {

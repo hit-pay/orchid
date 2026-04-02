@@ -1,6 +1,5 @@
 {
   "name": "Draggable",
-  "description": "A drag-and-drop wrapper that makes a list reorderable.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-draggable-ocdraggable--docs",
   "props": {
     "modelValue": {

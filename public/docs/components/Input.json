@@ -1,6 +1,5 @@
 {
   "name": "Input",
-  "description": "A standard text input with icon, prefix, inline label, password toggle, and validation support.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-input-ocinput--docs",
   "props": {
     "disabled": {

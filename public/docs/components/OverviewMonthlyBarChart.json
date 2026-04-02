@@ -1,6 +1,5 @@
 {
   "name": "OverviewMonthlyBarChart",
-  "description": "A monthly bar chart for overview reporting widgets.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-charts-overviewmonthlybarchart-ocoverviewmonthlybarchart--docs",
   "props": {
     "variant": {

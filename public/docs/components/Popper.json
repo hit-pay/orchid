@@ -1,6 +1,5 @@
 {
   "name": "Popper",
-  "description": "A low-level positioning wrapper using Popper.js for custom overlays.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/overlay-popper-ocpopper--docs",
   "props": {
     "placement": {

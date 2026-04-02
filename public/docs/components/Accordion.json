@@ -1,6 +1,5 @@
 {
   "name": "Accordion",
-  "description": "A collapsible section with a header and body, supporting animated expand/collapse.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/disclosure-accordion-ocaccordion--docs",
   "props": {
     "header": {

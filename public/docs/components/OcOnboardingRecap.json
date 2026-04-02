@@ -1,6 +1,5 @@
 {
   "name": "OcOnboardingRecap",
-  "description": "A collapsible recap card for onboarding sections, showing completed field values.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-onboardingrecap-oconboardingrecap--docs",
   "props": {
     "title": {

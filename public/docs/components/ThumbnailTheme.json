@@ -1,6 +1,5 @@
 {
   "name": "ThumbnailTheme",
-  "description": "A theme selection card with preview thumbnail, activate/customize/publish actions.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/storedesign-thumbnailtheme-thumbnailtheme--docs",
   "props": {
     "theme": {

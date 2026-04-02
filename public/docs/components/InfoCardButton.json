@@ -1,6 +1,5 @@
 {
   "name": "InfoCardButton",
-  "description": "A selectable card button showing a title, content, and optional chip or dropdown.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-additionalcontent-balancetype-ocinfocardbutton--docs",
   "props": {
     "isActive": {

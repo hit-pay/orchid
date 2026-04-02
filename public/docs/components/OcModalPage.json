@@ -1,6 +1,5 @@
 {
   "name": "OcModalPage",
-  "description": "A full-screen modal page with optional back button and close icon.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/overlay-modal-ocmodalpage--docs",
   "props": {
     "modelValue": {

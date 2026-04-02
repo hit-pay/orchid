@@ -1,6 +1,5 @@
 {
   "name": "Checkbox",
-  "description": "A single checkbox input with label, hint, error, and button-variant style.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-checkbox-occheckbox--docs",
   "props": {
     "modelValue": {

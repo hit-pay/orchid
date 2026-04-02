@@ -1,6 +1,5 @@
 {
   "name": "OcRowItemData",
-  "description": "A compact list of labeled data items, each optionally showing a chip, copy button, or icon.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-rowitemdata-ocrowitemdata--docs",
   "props": {
     "items": {

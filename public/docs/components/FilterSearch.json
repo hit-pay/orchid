@@ -1,6 +1,5 @@
 {
   "name": "FilterSearch",
-  "description": "The search input component used within DataTable's filter toolbar.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datatable-ocfiltersearch--docs",
   "props": {
     "isSearchOnly": {

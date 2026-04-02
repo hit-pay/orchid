@@ -1,6 +1,5 @@
 {
   "name": "TransferSummary",
-  "description": "Shows a summary of a money transfer including amount, fee, method, and FX rate.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-transfersummary-octransfersummary--docs",
   "props": {
     "transfer": {

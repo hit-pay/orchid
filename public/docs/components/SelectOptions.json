@@ -1,6 +1,5 @@
 {
   "name": "SelectOptions",
-  "description": "A visual option picker in grid or list layout supporting text, icon, or image options.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-selectoptions-ocselectoptions--docs",
   "props": {
     "isSmallImage": {

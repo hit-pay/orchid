@@ -1,6 +1,5 @@
 {
   "name": "Overview",
-  "description": "A grouped set of OverviewItem cards displaying key metrics with icons.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-overview-ocoverview--docs",
   "props": {
     "title": {

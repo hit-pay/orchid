@@ -1,6 +1,5 @@
 {
   "name": "Steps",
-  "description": "A step indicator showing progress through a multi-step flow.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/disclosure-steps-ocsteps--docs",
   "props": {
     "steps": {

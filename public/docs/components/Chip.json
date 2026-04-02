@@ -1,6 +1,5 @@
 {
   "name": "Chip",
-  "description": "A small status or category badge with variants for color, style (background/transparent/outlined), icon, and close button.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/feedback-chip-occhip--docs",
   "props": {
     "variant": {

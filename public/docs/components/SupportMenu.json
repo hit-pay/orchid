@@ -1,6 +1,5 @@
 {
   "name": "SupportMenu",
-  "description": "A floating support/help menu with grouped links and a bottom action bar.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/overlay-supportmenu-ocsupportmenu--docs",
   "props": {
     "modelValue": {

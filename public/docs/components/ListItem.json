@@ -1,6 +1,5 @@
 {
   "name": "ListItem",
-  "description": "A versatile list row supporting timeline, webhook, payment, terminal, general, and accordion layouts.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-listitem-oclistitem--docs",
   "props": {
     "isActive": {

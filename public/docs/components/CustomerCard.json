@@ -1,6 +1,5 @@
 {
   "name": "CustomerCard",
-  "description": "Displays customer or beneficiary details in small, big, or float layout variants.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-customercard-occustomercard--docs",
   "props": {
     "variant": {

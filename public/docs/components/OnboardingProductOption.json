@@ -1,6 +1,5 @@
 {
   "name": "OnboardingProductOption",
-  "description": "A selectable product option card with image, title, and description.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/disclosure-onboardingproduct-onboardingproductoption--docs",
   "props": {
     "productImageUrl": {

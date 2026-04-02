@@ -1,6 +1,5 @@
 {
   "name": "RangeInput",
-  "description": "A dual numeric input for entering a min/max range.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-rangeinput-ocrangeinput--docs",
   "props": {
     "maxLimit": {

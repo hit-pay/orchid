@@ -1,6 +1,5 @@
 {
   "name": "NewTable",
-  "description": "A modern table component supporting row expansion, selection, loading, and named column slots.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-newtable-ocnewtable--docs",
   "props": {
     "options": {

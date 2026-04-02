@@ -1,6 +1,5 @@
 {
   "name": "DataTable",
-  "description": "A full-featured data table with integrated filtering, search, pagination, column config, and bulk actions.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datatable-ocdatatable--docs",
   "props": {
     "isLoading": {

@@ -1,6 +1,5 @@
 {
   "name": "Calendar",
-  "description": "A standalone date or date-range calendar picker.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-calendar-occalendar--docs",
   "props": {
     "type": {

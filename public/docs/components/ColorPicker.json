@@ -1,6 +1,5 @@
 {
   "name": "ColorPicker",
-  "description": "A full color picker input with hex/rgb support.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-colorpicker-occolorpicker--docs",
   "props": {
     "modelValue": {

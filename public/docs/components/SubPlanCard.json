@@ -1,6 +1,5 @@
 {
   "name": "SubPlanCard",
-  "description": "A subscription plan tier card listing features and a select action.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/storedesign-subplancard-subplancard--docs",
   "props": {
     "planTier": {

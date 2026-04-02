@@ -1,6 +1,5 @@
 {
   "name": "DropdownItem",
-  "description": "A single item row within a Dropdown menu, supporting icon, text, and badges.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/overlay-dropdown-ocdropdownitem--docs",
   "props": {
     "variant": {

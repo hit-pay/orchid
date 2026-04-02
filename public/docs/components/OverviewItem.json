@@ -1,6 +1,5 @@
 {
   "name": "OverviewItem",
-  "description": "A single metric card showing a title, value, icon, and optional percentage change.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-overview-ocoverviewitem--docs",
   "props": {
     "icon": {

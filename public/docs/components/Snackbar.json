@@ -1,6 +1,5 @@
 {
   "name": "Snackbar",
-  "description": "A toast notification supporting floating and inline modes, colors, icons, and action buttons.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/feedback-snackbar-ocsnackbar--docs",
   "props": {
     "modelValue": {

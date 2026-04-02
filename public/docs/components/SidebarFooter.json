@@ -1,6 +1,5 @@
 {
   "name": "SidebarFooter",
-  "description": "The footer section of the Sidebar.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-sidebar-ocsidebarfooter--docs",
   "props": {
     "isExpanded": {

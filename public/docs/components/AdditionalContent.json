@@ -1,6 +1,5 @@
 {
   "name": "AdditionalContent",
-  "description": "A flexible side panel showing customer info, overview items, payment methods, and action buttons.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-additionalcontent-ocadditionalcontent--docs",
   "props": {
     "mainLink": {

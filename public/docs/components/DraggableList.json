@@ -1,6 +1,5 @@
 {
   "name": "DraggableList",
-  "description": "A styled draggable list with icon, title, action slots, and optional nested children.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-draggable-ocdraggablelist--docs",
   "props": {
     "modelValue": {

@@ -1,6 +1,5 @@
 {
   "name": "InputOption",
-  "description": "A tag-style input that lets users add multiple free-text options.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-input-ocinputoption--docs",
   "props": {
     "label": {

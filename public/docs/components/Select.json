@@ -1,6 +1,5 @@
 {
   "name": "Select",
-  "description": "A dropdown selector supporting single/multi select, filtering, async search, and grouped options.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-select-ocselect--docs",
   "props": {
     "label": {

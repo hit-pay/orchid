@@ -1,6 +1,5 @@
 {
   "name": "DatePicker",
-  "description": "A date or date-range picker input with popover calendar, shortcuts, and format options.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-datepicker-datepicker--docs",
   "props": {
     "modelValue": {

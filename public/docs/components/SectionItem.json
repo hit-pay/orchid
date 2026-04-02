@@ -1,6 +1,5 @@
 {
   "name": "SectionItem",
-  "description": "A settings row with a title, description, optional toggle, and action slot.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-sectionitem-ocsectionitem--docs",
   "props": {
     "title": {

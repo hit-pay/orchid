@@ -1,6 +1,5 @@
 {
   "name": "Slider",
-  "description": "A range or single value slider with configurable min, max, and step.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-slider-ocslider--docs",
   "props": {
     "maxLimit": {

@@ -1,6 +1,5 @@
 {
   "name": "Modal",
-  "description": "A dialog modal with header, body, footer, confirm/cancel buttons, and size variants.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/overlay-modal-ocmodal--docs",
   "props": {
     "isBorderless": {

@@ -1,6 +1,5 @@
 {
   "name": "PhoneInput",
-  "description": "A phone number input with integrated country code selector.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-phoneinput-ocphoneinput--docs",
   "props": {
     "countryCodes": {

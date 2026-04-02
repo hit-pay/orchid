@@ -1,6 +1,5 @@
 {
   "name": "LottieAnimation",
-  "description": "Renders a Lottie JSON animation.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-lottieanimation-oclottieanimation--docs",
   "props": {
     "path": {

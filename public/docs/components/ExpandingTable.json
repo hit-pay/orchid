@@ -1,6 +1,5 @@
 {
   "name": "ExpandingTable",
-  "description": "A tree-structured table that supports collapsible/expandable rows with nested data.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-table-expandingtable-ocexpandingtable--docs",
   "props": {
     "total": {

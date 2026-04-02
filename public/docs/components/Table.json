@@ -1,6 +1,5 @@
 {
   "name": "Table",
-  "description": "Renders tabular data with support for sorting, row selection, sticky columns, loading skeletons, and customizable cell slots.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-table-octable--docs",
   "props": {
     "options": {

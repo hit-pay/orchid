@@ -1,6 +1,5 @@
 {
   "name": "WhiteList",
-  "description": "A feature gate card shown when a feature is unavailable for the user's plan.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/overlay-whitelist-ocwhitelist--docs",
   "props": {
     "buttonProps": {

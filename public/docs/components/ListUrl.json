@@ -1,6 +1,5 @@
 {
   "name": "ListUrl",
-  "description": "Displays a labelled URL with an optional copy button.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-listitem-components-oclisturl--docs",
   "props": {
     "title": {

@@ -1,6 +1,5 @@
 {
   "name": "SandboxBanner",
-  "description": "A top banner indicating the user is in sandbox/test mode.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-sandboxbanner-ocsandboxbanner--docs",
   "props": {
     "title": {

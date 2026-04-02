@@ -1,6 +1,5 @@
 {
   "name": "EmojiPicker",
-  "description": "An emoji selector popover input.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-emojipicker-ocemojipicker--docs",
   "props": {
     "modelValue": {

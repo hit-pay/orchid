@@ -1,6 +1,5 @@
 {
   "name": "TimePopup",
-  "description": "A time picker popup component.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-timepicker-octimepopup--docs",
   "props": {
     "modelValue": {

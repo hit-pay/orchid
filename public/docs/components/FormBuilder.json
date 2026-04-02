@@ -1,6 +1,5 @@
 {
   "name": "FormBuilder",
-  "description": "A dynamic form renderer that builds form fields from a JSON schema with grid layout support.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/formbuilder-ocformbuilder--docs",
   "props": {
     "id": {

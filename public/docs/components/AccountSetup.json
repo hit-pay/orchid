@@ -1,6 +1,5 @@
 {
   "name": "AccountSetup",
-  "description": "An account setup progress widget shown inside the Sidebar.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-sidebar-ocaccountsetup--docs",
   "props": {
     "isExpanded": {

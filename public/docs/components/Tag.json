@@ -1,6 +1,5 @@
 {
   "name": "Tag",
-  "description": "A small colored label tag for status or category annotation.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/feedback-tag-octag--docs",
   "props": {
     "variant": {

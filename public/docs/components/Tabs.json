@@ -1,6 +1,5 @@
 {
   "name": "Tabs",
-  "description": "A horizontal or vertical tab bar for switching between named views.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/disclosure-tabs-octabs--docs",
   "props": {
     "variant": {

@@ -1,6 +1,5 @@
 {
   "name": "TableCell",
-  "description": "A single table body cell supporting variants like content, chip, datetime, icon, image, and checkbox.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-table-octablecell--docs",
   "props": {
     "isSimple": {

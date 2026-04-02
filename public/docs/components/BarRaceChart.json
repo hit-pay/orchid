@@ -1,6 +1,5 @@
 {
   "name": "BarRaceChart",
-  "description": "An animated bar race chart showing changing rankings over time.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-charts-barracechart-ocbarracechart--docs",
   "props": {
     "variant": {

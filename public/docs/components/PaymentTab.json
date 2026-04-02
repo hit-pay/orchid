@@ -1,6 +1,5 @@
 {
   "name": "PaymentTab",
-  "description": "A styled tab selector for payment method tabs.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/disclosure-tabs-ocpaymenttab--docs",
   "props": {
     "tab": {

@@ -1,6 +1,5 @@
 {
   "name": "CopyTooltip",
-  "description": "Wraps any element to copy a value to clipboard and show a confirmation tooltip.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/overlay-copytooltip-occopytooltip--docs",
   "props": {
     "value": {

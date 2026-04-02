@@ -1,6 +1,5 @@
 {
   "name": "MultipleUploadFile",
-  "description": "A file upload input for multiple files with preview grid and size/count limits.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-multipleuploadfile-ocmultipleuploadfile--docs",
   "props": {
     "modelValue": {

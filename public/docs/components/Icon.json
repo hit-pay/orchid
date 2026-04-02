@@ -1,6 +1,5 @@
 {
   "name": "Icon",
-  "description": "Renders an SVG icon by name from the OrchidUI icon library.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/mediaandicons-icon-ocicon--docs",
   "props": {
     "path": {

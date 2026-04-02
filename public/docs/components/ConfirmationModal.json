@@ -1,6 +1,5 @@
 {
   "name": "ConfirmationModal",
-  "description": "A pre-styled confirmation dialog for delete, success, warning, or question actions.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/overlay-confirmationmodal-occonfirmationmodal--docs",
   "props": {
     "modelValue": {

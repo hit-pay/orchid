@@ -1,6 +1,5 @@
 {
   "name": "PageTitle",
-  "description": "A page-level title bar with back button, copy value, chip, and primary/secondary action buttons.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-pagetitle-ocpagetitle--docs",
   "props": {
     "title": {

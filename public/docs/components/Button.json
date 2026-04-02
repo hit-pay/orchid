@@ -1,6 +1,5 @@
 {
   "name": "Button",
-  "description": "A primary action button with variants (primary, secondary, destructive), sizes, icons, and loading state.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-button-ocbutton--docs",
   "props": {
     "label": {

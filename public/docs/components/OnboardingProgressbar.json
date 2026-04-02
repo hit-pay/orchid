@@ -1,6 +1,5 @@
 {
   "name": "OnboardingProgressbar",
-  "description": "A visual progress bar for onboarding completion tracking.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-onboardingprogressbar-oconboardingprogressbar--docs",
   "props": {
     "title": {

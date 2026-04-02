@@ -1,6 +1,5 @@
 {
   "name": "CodeBlock",
-  "description": "A syntax-highlighted code block for displaying code snippets.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-codeblock-occodeblock--docs",
   "props": {
     "jsonObject": {

@@ -1,6 +1,5 @@
 {
   "name": "FloatContent",
-  "description": "A floating side panel (left or right) with title, description, and dropdown actions.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-floatcontent-ocfloatcontent--docs",
   "props": {
     "modelValue": {

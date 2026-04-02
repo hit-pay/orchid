@@ -1,6 +1,5 @@
 {
   "name": "AccountSetupProgress",
-  "description": "A circular progress indicator for account setup completion shown in the Sidebar.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-sidebar-ocaccountsetupprogress--docs",
   "props": {
     "value": {

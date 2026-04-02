@@ -1,6 +1,5 @@
 {
   "name": "PieChart",
-  "description": "A pie or donut chart for showing proportional data.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-charts-piechart-ocpiechart--docs",
   "props": {
     "showTooltip": {

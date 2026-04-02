@@ -1,6 +1,5 @@
 {
   "name": "BaseInput",
-  "description": "A form field wrapper providing label, hint, error message, and tooltip slot.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-baseinput-ocbaseinput--docs",
   "props": {
     "label": {

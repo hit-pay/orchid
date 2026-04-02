@@ -1,6 +1,5 @@
 {
   "name": "Box",
-  "description": "A clickable card box with an icon, title, description, and active state.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-box-ocbox--docs",
   "props": {
     "icon": {

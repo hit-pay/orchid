@@ -1,6 +1,5 @@
 {
   "name": "OcAccountVerificationContent",
-  "description": "A page-level container for account verification steps with header, body, and footer slots.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-accountverificationcontent-ocaccountverificationcontent--docs",
   "props": {
     "title": {

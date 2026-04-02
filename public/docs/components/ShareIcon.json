@@ -1,6 +1,5 @@
 {
   "name": "ShareIcon",
-  "description": "An icon button for sharing via a specific channel (e.g. WhatsApp) with a tooltip.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/feedback-shareicon-ocshareicon--docs",
   "props": {
     "text": {

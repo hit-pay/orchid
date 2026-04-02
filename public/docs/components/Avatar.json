@@ -1,6 +1,5 @@
 {
   "name": "Avatar",
-  "description": "A user or business avatar in multiple sizes and types (default, business, image).",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/mediaandicons-avatar-ocavatar--docs",
   "props": {
     "size": {

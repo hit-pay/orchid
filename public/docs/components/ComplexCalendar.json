@@ -1,6 +1,5 @@
 {
   "name": "ComplexCalendar",
-  "description": "A full calendar panel with range selection, shortcuts, and submit/cancel actions.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-complexcalendar-occomplexcalendar--docs",
   "props": {
     "shortcuts": {

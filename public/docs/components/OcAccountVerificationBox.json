@@ -1,6 +1,5 @@
 {
   "name": "OcAccountVerificationBox",
-  "description": "A selectable verification option card with icon, description, and chips.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-accountverificationcontent-ocaccountverificationbox--docs",
   "props": {
     "title": {

@@ -1,6 +1,5 @@
 {
   "name": "FilterForm",
-  "description": "A filter form panel driven by a JSON schema, used inside DataTable.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datatable-ocfilterform--docs",
   "props": {
     "id": {

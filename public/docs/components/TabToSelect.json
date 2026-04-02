@@ -1,6 +1,5 @@
 {
   "name": "TabToSelect",
-  "description": "A tab bar that triggers path changes, used inside the Header.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-header-octabtoselect--docs",
   "props": {
     "menus": {

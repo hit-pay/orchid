@@ -1,6 +1,5 @@
 {
   "name": "SwitchTabs",
-  "description": "A segmented control for switching between a small set of options.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/disclosure-switchtabs-ocswitchtabs--docs",
   "props": {
     "options": {

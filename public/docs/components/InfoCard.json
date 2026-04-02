@@ -1,6 +1,5 @@
 {
   "name": "InfoCard",
-  "description": "A content card with a title, optional loading state, hover effect, and header/footer slots.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-infocard-ocinfocard--docs",
   "props": {
     "isLoading": {

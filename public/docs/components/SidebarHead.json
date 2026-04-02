@@ -1,6 +1,5 @@
 {
   "name": "SidebarHead",
-  "description": "The header section of a Sidebar group.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-sidebar-ocsidebarhead--docs",
   "props": {
     "label": {

@@ -1,6 +1,5 @@
 {
   "name": "ComplexDatePicker",
-  "description": "A date range picker input using ComplexCalendar, with label and format options.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-complexdatepicker-occomplexdatepicker--docs",
   "props": {
     "shortcuts": {

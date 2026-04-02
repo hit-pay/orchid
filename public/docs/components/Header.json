@@ -1,6 +1,5 @@
 {
   "name": "Header",
-  "description": "The top-level application header shell.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-header-ocheader--docs",
   "props": {},
   "events": {},

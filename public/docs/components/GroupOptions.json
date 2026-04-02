@@ -1,6 +1,5 @@
 {
   "name": "GroupOptions",
-  "description": "A labeled group of Option items within a Select dropdown.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-select-ocgroupoptions--docs",
   "props": {
     "label": {

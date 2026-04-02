@@ -1,6 +1,5 @@
 {
   "name": "TextArea",
-  "description": "A multi-line text input with auto-resize, label, hint, and error support.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-textarea-octextarea--docs",
   "props": {
     "placeholder": {

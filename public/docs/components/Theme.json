@@ -1,6 +1,5 @@
 {
   "name": "Theme",
-  "description": "Wraps the app to apply a color mode (light/dark) via CSS variables.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/theme-octheme--docs",
   "props": {
     "colorMode": {

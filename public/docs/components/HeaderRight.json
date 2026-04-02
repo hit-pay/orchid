@@ -1,6 +1,5 @@
 {
   "name": "HeaderRight",
-  "description": "The right section of a Header with primary and secondary action buttons.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-header-ocheaderright--docs",
   "props": {
     "primaryProps": {

@@ -1,6 +1,5 @@
 {
   "name": "CheckboxesGroup",
-  "description": "A group of checkboxes with select-all support and vertical/horizontal alignment.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-checkboxesgroup-occheckboxesgroup--docs",
   "props": {
     "alignment": {

@@ -1,6 +1,5 @@
 {
   "name": "Variants",
-  "description": "A group of selectable variant options, each with a label and icon.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/disclosure-variants-ocvariants--docs",
   "props": {
     "variants": {

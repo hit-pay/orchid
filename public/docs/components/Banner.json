@@ -1,6 +1,5 @@
 {
   "name": "Banner",
-  "description": "An inline notification banner with an icon, title, content, and optional dismiss button.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/feedback-banner-ocbanner--docs",
   "props": {
     "modelValue": {

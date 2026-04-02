@@ -1,6 +1,5 @@
 {
   "name": "RadioGroup",
-  "description": "A group of radio buttons with vertical/horizontal layout.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-radiogroup-ocradiogroup--docs",
   "props": {
     "alignment": {

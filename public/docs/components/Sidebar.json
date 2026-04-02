@@ -1,6 +1,5 @@
 {
   "name": "Sidebar",
-  "description": "The main application sidebar with expandable menus, logo, and footer slots.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-sidebar-ocsidebar--docs",
   "props": {
     "class": {

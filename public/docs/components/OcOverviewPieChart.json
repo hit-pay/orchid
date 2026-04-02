@@ -1,6 +1,5 @@
 {
   "name": "OcOverviewPieChart",
-  "description": "A pie chart variant styled for overview/summary widgets.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-charts-overviewpiechart-ocoverviewpiechart--docs",
   "props": {
     "chartData": {

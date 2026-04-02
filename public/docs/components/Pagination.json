@@ -1,6 +1,5 @@
 {
   "name": "Pagination",
-  "description": "Page navigation control with prev/next and numbered page buttons.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-pagination-ocpagination--docs",
   "props": {
     "maxPage": {

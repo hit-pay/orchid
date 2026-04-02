@@ -1,6 +1,5 @@
 {
   "name": "TopBanner",
-  "description": "A dismissible top-of-page announcement or action-required banner.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-topbanner-octopbanner--docs",
   "props": {
     "chipProps": {

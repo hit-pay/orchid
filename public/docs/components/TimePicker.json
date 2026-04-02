@@ -1,6 +1,5 @@
 {
   "name": "TimePicker",
-  "description": "A time picker input with a popover clock and label support.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-timepicker-octimepicker--docs",
   "props": {
     "modelValue": {

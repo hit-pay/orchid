@@ -1,6 +1,5 @@
 {
   "name": "SidebarFeatureBanners",
-  "description": "Promotional feature banners displayed at the bottom of the Sidebar.",
   "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-sidebar-ocsidebarfeaturebanners--docs",
   "props": {
     "isStacked": {
