@@ -1,9 +1,8 @@
-import { Theme } from '@/orchidui-core'
-import SubPlanCard from './SubPlanCard.vue'
+import { Theme, SubPlanCard } from '@/orchidui-core'
 
 export default {
-  tags: ['autodocs'],
-  component: SubPlanCard
+  component: SubPlanCard,
+  tags: ['autodocs']
 }
 
 export const Default = {
@@ -92,11 +91,15 @@ export const Default = {
       return { args }
     },
     template: `
-          <Theme>
-              <div class="grid grid-cols-2 md:grid-cols-3 gap-5">
-                <SubPlanCard  v-for="(plan, index) in args.subPlans" :planTier="plan" :is-plan-active="index === 1" />
-               </div>
-          </Theme>
-        `
+      <Theme>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-5">
+          <SubPlanCard
+            v-for="(plan, index) in args.subPlans"
+            :planTier="plan"
+            :is-plan-active="index === 1"
+          />
+        </div>
+      </Theme>
+    `
   })
 }
