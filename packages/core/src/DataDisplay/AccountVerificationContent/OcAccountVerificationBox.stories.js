@@ -1,6 +1,6 @@
-import { OcAccountVerificationBox, Chip } from '@/orchidui-core'
+import { Theme, OcAccountVerificationBox, Chip } from '@/orchidui-core'
+
 export default {
-  components: { Chip },
   component: OcAccountVerificationBox,
   tags: ['autodocs']
 }
@@ -15,17 +15,19 @@ export const Default = {
         label: '3 documents required',
         type: 'transparent',
         variant: 'gray',
-        icon: 'document',
-      },
-    ],
+        icon: 'document'
+      }
+    ]
   },
   render: (args) => ({
-    components: { OcAccountVerificationBox },
+    components: { Theme, OcAccountVerificationBox },
     setup() {
       return { args }
     },
     template: `
-      <OcAccountVerificationBox v-bind="args" />
+      <Theme>
+        <OcAccountVerificationBox v-bind="args" />
+      </Theme>
     `
   })
 }
@@ -39,28 +41,30 @@ export const HeaderSlot = {
         label: 'Instant verification',
         type: 'transparent',
         variant: 'success',
-        icon: 'document',
+        icon: 'document'
       },
       {
         label: 'Secure',
         type: 'transparent',
         variant: 'success',
-        icon: 'information',
-      },
-    ],
+        icon: 'information'
+      }
+    ]
   },
   render: (args) => ({
-    components: { OcAccountVerificationBox, Chip },
+    components: { Theme, OcAccountVerificationBox, Chip },
     setup() {
       return { args }
     },
     template: `
-      <OcAccountVerificationBox v-bind="args">
-        <template #title>
-          <img src="/images/singpass.png" alt="singpass"/>
-          <Chip class="ml-auto" variant="dark-blue" label="Recommended" />
-        </template>
-      </OcAccountVerificationBox>
+      <Theme>
+        <OcAccountVerificationBox v-bind="args">
+          <template #title>
+            <img src="/images/singpass.png" alt="singpass" />
+            <Chip class="ml-auto" variant="dark-blue" label="Recommended" />
+          </template>
+        </OcAccountVerificationBox>
+      </Theme>
     `
   })
 }

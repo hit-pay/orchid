@@ -1,4 +1,4 @@
-import TopBanner from './OcTopBanner.vue'
+import { Theme, TopBanner } from '@/orchidui-core'
 
 export default {
   component: TopBanner,
@@ -7,24 +7,22 @@ export default {
 
 export const Default = {
   args: {
-    title:
-      'To start accepting recurring payments, please activate a payment method that supports it.',
+    title: 'To start accepting recurring payments, please activate a payment method that supports it.',
     buttonLabel: 'Activate payment method'
   },
   render: (args) => ({
-    components: {
-      TopBanner
-    },
+    components: { Theme, TopBanner },
     setup() {
       const onClick = () => {
         console.log('clicked')
       }
-
       return { args, onClick }
     },
     template: `
-          <TopBanner :title="args.title" :button-label="args.buttonLabel" @click:button="onClick" />
-        `
+      <Theme>
+        <TopBanner :title="args.title" :button-label="args.buttonLabel" @click:button="onClick" />
+      </Theme>
+    `
   })
 }
 
@@ -42,29 +40,28 @@ export const ActionRequired = {
     buttonLabel: 'Complete now'
   },
   render: (args) => ({
-    components: {
-      TopBanner
-    },
+    components: { Theme, TopBanner },
     setup() {
       const onClick = () => {
         console.log('clicked')
       }
-
       return { args, onClick }
     },
     template: `
-          <TopBanner
-            class="gap-5 w-full pl-5"
-            title-class="flex-1 font-normal"
-            :chip-props="args.chipProps"
-            :raw-html="args.rawHtml"
-            :button-label="args.buttonLabel"
-            :secondary-button="{
-              label: 'View guide',
-              class: 'underline'
-            }"
-            @click:button="onClick"
-          />
-        `
+      <Theme>
+        <TopBanner
+          class="gap-5 w-full pl-5"
+          title-class="flex-1 font-normal"
+          :chip-props="args.chipProps"
+          :raw-html="args.rawHtml"
+          :button-label="args.buttonLabel"
+          :secondary-button="{
+            label: 'View guide',
+            class: 'underline'
+          }"
+          @click:button="onClick"
+        />
+      </Theme>
+    `
   })
 }

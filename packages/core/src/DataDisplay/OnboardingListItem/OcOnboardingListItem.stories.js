@@ -1,4 +1,4 @@
-import { OcOnboardingListItem } from '@/orchidui-core'
+import { Theme, OcOnboardingListItem } from '@/orchidui-core'
 
 export default {
   component: OcOnboardingListItem,
@@ -11,28 +11,22 @@ export const Default = {
     description: 'We need to verify your business to get started',
     buttonOptions: {
       variant: 'secondary',
-      label: 'Verifiying',
+      label: 'Verify',
       status: '',
       number: 1
     }
   },
   render: (args) => ({
-    components: { OcOnboardingListItem },
+    components: { Theme, OcOnboardingListItem },
     setup() {
       return { args }
     },
     template: `
-          <OcOnboardingListItem
-              v-bind="args"
-          />
-          <OcOnboardingListItem
-              v-bind="args"
-              status="pending"
-          />
-          <OcOnboardingListItem
-              v-bind="args"
-              status="completed"
-          />
-        `
+      <Theme>
+        <OcOnboardingListItem v-bind="args" />
+        <OcOnboardingListItem v-bind="args" status="pending" />
+        <OcOnboardingListItem v-bind="args" status="completed" />
+      </Theme>
+    `
   })
 }

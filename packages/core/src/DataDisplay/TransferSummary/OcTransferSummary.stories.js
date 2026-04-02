@@ -5,7 +5,7 @@ export default {
   tags: ['autodocs']
 }
 
-export const overview = {
+export const Default = {
   argTypes: {
     hasFxData: {
       control: 'boolean'
@@ -22,21 +22,19 @@ export const overview = {
     }
   },
   render: (args) => ({
-    components: { TransferSummary, Theme },
+    components: { Theme, TransferSummary },
     setup() {
-      return {
-        args
-      }
+      return { args }
     },
     template: `
       <Theme class="items-center mb-3">
-        <TransferSummary :transfer="args.transfer" :has-fx-data="args.hasFxData" />
+        <TransferSummary v-bind="args" />
       </Theme>
     `
   })
 }
 
-export const withFxData = {
+export const WithFxData = {
   args: {
     hasFxData: true,
     transfer: {
@@ -50,15 +48,13 @@ export const withFxData = {
     }
   },
   render: (args) => ({
-    components: { TransferSummary, Theme },
+    components: { Theme, TransferSummary },
     setup() {
-      return {
-        args
-      }
+      return { args }
     },
     template: `
       <Theme class="items-center mb-3">
-        <TransferSummary :transfer="args.transfer" :has-fx-data="args.hasFxData" />
+        <TransferSummary v-bind="args" />
       </Theme>
     `
   })
