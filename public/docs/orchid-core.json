@@ -7,787 +7,656 @@
     {
       "name": "Table",
       "description": "Renders tabular data with support for sorting, row selection, sticky columns, loading skeletons, and customizable cell slots.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-table-octable--docs",
       "detail": "/docs/components/Table.json"
     },
     {
       "name": "TableHeader",
       "description": "A single table header cell supporting text or checkbox variants, sortable columns, and loading state.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-table-octableheader--docs",
       "detail": "/docs/components/TableHeader.json"
     },
     {
       "name": "TableCell",
       "description": "A single table body cell supporting variants like content, chip, datetime, icon, image, and checkbox.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-table-octablecell--docs",
       "detail": "/docs/components/TableCell.json"
     },
     {
       "name": "TableCellContent",
       "description": "Renders a two-line content cell with a title and optional description, supporting links.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-table-octablecellcontent--docs",
       "detail": "/docs/components/TableCellContent.json"
     },
     {
       "name": "TableLink",
       "description": "Wraps table cell content in a router-link or anchor.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-table-octablelink--docs",
       "detail": "/docs/components/TableLink.json"
     },
     {
       "name": "ExpandingTable",
       "description": "A tree-structured table that supports collapsible/expandable rows with nested data.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-table-expandingtable-ocexpandingtable--docs",
       "detail": "/docs/components/ExpandingTable.json"
     },
     {
       "name": "ExpandingTableRow",
       "description": "A single row within an ExpandingTable, supporting depth indentation and nested children.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-table-expandingtable-ocexpandingtablerow--docs",
       "detail": "/docs/components/ExpandingTableRow.json"
     },
     {
       "name": "ExpandingHeaderRow",
       "description": "The header row for an ExpandingTable component.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-table-expandingtable-ocexpandingheaderrow--docs",
       "detail": "/docs/components/ExpandingHeaderRow.json"
     },
     {
       "name": "Pagination",
       "description": "Page navigation control with prev/next and numbered page buttons.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-pagination-ocpagination--docs",
       "detail": "/docs/components/Pagination.json"
     },
     {
       "name": "PrevNext",
       "description": "A single previous or next navigation button used within Pagination.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-pagination-ocprevnext--docs",
       "detail": "/docs/components/PrevNext.json"
     },
     {
       "name": "PaginationNumber",
       "description": "A single numbered page button used within Pagination.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-pagination-ocpaginationnumber--docs",
       "detail": "/docs/components/PaginationNumber.json"
     },
     {
       "name": "Overview",
       "description": "A grouped set of OverviewItem cards displaying key metrics with icons.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-overview-ocoverview--docs",
       "detail": "/docs/components/Overview.json"
     },
     {
       "name": "OverviewIcon",
       "description": "A colored icon badge used inside OverviewItem.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-overview-ocoverviewicon--docs",
       "detail": "/docs/components/OverviewIcon.json"
     },
     {
       "name": "OverviewItem",
       "description": "A single metric card showing a title, value, icon, and optional percentage change.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-overview-ocoverviewitem--docs",
       "detail": "/docs/components/OverviewItem.json"
     },
     {
       "name": "CustomerCard",
       "description": "Displays customer or beneficiary details in small, big, or float layout variants.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-customercard-occustomercard--docs",
       "detail": "/docs/components/CustomerCard.json"
     },
     {
       "name": "TransferSummary",
       "description": "Shows a summary of a money transfer including amount, fee, method, and FX rate.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-transfersummary-octransfersummary--docs",
       "detail": "/docs/components/TransferSummary.json"
     },
     {
       "name": "ListItem",
       "description": "A versatile list row supporting timeline, webhook, payment, terminal, general, and accordion layouts.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-listitem-oclistitem--docs",
       "detail": "/docs/components/ListItem.json"
     },
     {
       "name": "ListUrl",
       "description": "Displays a labelled URL with an optional copy button.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-listitem-components-oclisturl--docs",
       "detail": "/docs/components/ListUrl.json"
     },
     {
       "name": "ListDetail",
       "description": "A label-value pair row in horizontal or vertical alignment, with optional copy tooltip.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-listdetail-oclistdetail--docs",
       "detail": "/docs/components/ListDetail.json"
     },
     {
       "name": "InfoCard",
       "description": "A content card with a title, optional loading state, hover effect, and header/footer slots.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-infocard-ocinfocard--docs",
       "detail": "/docs/components/InfoCard.json"
     },
     {
       "name": "ProgressBar",
       "description": "A step-based linear progress bar showing current step out of total steps.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-progressbar-ocprogressbar--docs",
       "detail": "/docs/components/ProgressBar.json"
     },
     {
       "name": "FloatContent",
       "description": "A floating side panel (left or right) with title, description, and dropdown actions.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-floatcontent-ocfloatcontent--docs",
       "detail": "/docs/components/FloatContent.json"
     },
     {
       "name": "HorizontalProgressbar",
       "description": "A horizontal bar showing progress as a ratio of current to max value.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-horizontalprogressbar-ochorizontalprogressbar--docs",
       "detail": "/docs/components/HorizontalProgressbar.json"
     },
     {
       "name": "OcOnboardingListItem",
       "description": "An onboarding checklist row with a number badge, status, and action button.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-onboardinglistitem-oconboardinglistitem--docs",
       "detail": "/docs/components/OcOnboardingListItem.json"
     },
     {
       "name": "OcOnboardingRecap",
       "description": "A collapsible recap card for onboarding sections, showing completed field values.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-onboardingrecap-oconboardingrecap--docs",
       "detail": "/docs/components/OcOnboardingRecap.json"
     },
     {
       "name": "OcAccountVerificationContent",
       "description": "A page-level container for account verification steps with header, body, and footer slots.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-accountverificationcontent-ocaccountverificationcontent--docs",
       "detail": "/docs/components/OcAccountVerificationContent.json"
     },
     {
       "name": "OcAccountVerificationBox",
       "description": "A selectable verification option card with icon, description, and chips.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-accountverificationcontent-ocaccountverificationbox--docs",
       "detail": "/docs/components/OcAccountVerificationBox.json"
     },
     {
       "name": "NewTable",
       "description": "A modern table component supporting row expansion, selection, loading, and named column slots.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-newtable-ocnewtable--docs",
       "detail": "/docs/components/NewTable.json"
     },
     {
       "name": "OcRowItemData",
       "description": "A compact list of labeled data items, each optionally showing a chip, copy button, or icon.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-rowitemdata-ocrowitemdata--docs",
       "detail": "/docs/components/OcRowItemData.json"
     },
     {
       "name": "Accordion",
       "description": "A collapsible section with a header and body, supporting animated expand/collapse.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/disclosure-accordion-ocaccordion--docs",
       "detail": "/docs/components/Accordion.json"
     },
     {
       "name": "OnboardingAccordion",
       "description": "An onboarding-styled accordion with a status variant (completed, error, pending, etc.).",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/disclosure-onboardingaccordion-onboardingaccordion--docs",
       "detail": "/docs/components/OnboardingAccordion.json"
     },
     {
       "name": "OnboardingProductOption",
       "description": "A selectable product option card with image, title, and description.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/disclosure-onboardingproduct-onboardingproductoption--docs",
       "detail": "/docs/components/OnboardingProductOption.json"
     },
     {
       "name": "Tabs",
       "description": "A horizontal or vertical tab bar for switching between named views.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/disclosure-tabs-octabs--docs",
       "detail": "/docs/components/Tabs.json"
     },
     {
       "name": "PaymentTab",
       "description": "A styled tab selector for payment method tabs.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/disclosure-tabs-ocpaymenttab--docs",
       "detail": "/docs/components/PaymentTab.json"
     },
     {
       "name": "Steps",
       "description": "A step indicator showing progress through a multi-step flow.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/disclosure-steps-ocsteps--docs",
       "detail": "/docs/components/Steps.json"
     },
     {
       "name": "Step",
       "description": "A single step indicator within a Steps component.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/disclosure-steps-ocstep--docs",
       "detail": "/docs/components/Step.json"
     },
     {
       "name": "Variants",
       "description": "A group of selectable variant options, each with a label and icon.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/disclosure-variants-ocvariants--docs",
       "detail": "/docs/components/Variants.json"
     },
     {
       "name": "Variant",
       "description": "A single selectable variant card with icon and label.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/disclosure-variants-ocvariant--docs",
       "detail": "/docs/components/Variant.json"
     },
     {
       "name": "SwitchTabs",
       "description": "A segmented control for switching between a small set of options.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/disclosure-switchtabs-ocswitchtabs--docs",
       "detail": "/docs/components/SwitchTabs.json"
     },
     {
       "name": "Header",
       "description": "The top-level application header shell.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-header-ocheader--docs",
       "detail": "/docs/components/Header.json"
     },
     {
       "name": "SubHeader",
       "description": "A secondary header below the main header.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-header-ocsubheader--docs",
       "detail": "/docs/components/SubHeader.json"
     },
     {
       "name": "HeaderLeft",
       "description": "The left section of a Header component.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-header-ocheaderleft--docs",
       "detail": "/docs/components/HeaderLeft.json"
     },
     {
       "name": "HeaderCenter",
       "description": "The center section of a Header with an optional back button and saved state.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-header-ocheadercenter--docs",
       "detail": "/docs/components/HeaderCenter.json"
     },
     {
       "name": "HeaderRight",
       "description": "The right section of a Header with primary and secondary action buttons.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-header-ocheaderright--docs",
       "detail": "/docs/components/HeaderRight.json"
     },
     {
       "name": "TabToSelect",
       "description": "A tab bar that triggers path changes, used inside the Header.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-header-octabtoselect--docs",
       "detail": "/docs/components/TabToSelect.json"
     },
     {
       "name": "Checklist",
       "description": "A single checklist step item with an index number, label, and completion state.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-checklist-occhecklist--docs",
       "detail": "/docs/components/Checklist.json"
     },
     {
       "name": "PageTitle",
       "description": "A page-level title bar with back button, copy value, chip, and primary/secondary action buttons.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-pagetitle-ocpagetitle--docs",
       "detail": "/docs/components/PageTitle.json"
     },
     {
       "name": "PrimaryActions",
       "description": "Renders primary action buttons or dropdowns within a PageTitle.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-pagetitle-ocprimaryactions--docs",
       "detail": "/docs/components/PrimaryActions.json"
     },
     {
       "name": "PageTitleRight",
       "description": "The right action area of a PageTitle with primary and secondary buttons.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-pagetitle-ocpagetitleright--docs",
       "detail": "/docs/components/PageTitleRight.json"
     },
     {
       "name": "Sidebar",
       "description": "The main application sidebar with expandable menus, logo, and footer slots.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-sidebar-ocsidebar--docs",
       "detail": "/docs/components/Sidebar.json"
     },
     {
       "name": "SidebarSubmenu",
       "description": "An expandable submenu section within the Sidebar.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-sidebar-ocsidebarsubmenu--docs",
       "detail": "/docs/components/SidebarSubmenu.json"
     },
     {
       "name": "AccountSetup",
       "description": "An account setup progress widget shown inside the Sidebar.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-sidebar-ocaccountsetup--docs",
       "detail": "/docs/components/AccountSetup.json"
     },
     {
       "name": "SidebarHead",
       "description": "The header section of a Sidebar group.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-sidebar-ocsidebarhead--docs",
       "detail": "/docs/components/SidebarHead.json"
     },
     {
       "name": "SideBarMenu",
       "description": "A single menu item in the Sidebar, supporting badges, children, and expanded state.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-sidebar-ocsidebarmenu--docs",
       "detail": "/docs/components/SideBarMenu.json"
     },
     {
       "name": "SidebarSubMenuItem",
       "description": "A child menu item within a SidebarSubmenu.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-sidebar-ocsidebarsubmenuitem--docs",
       "detail": "/docs/components/SidebarSubMenuItem.json"
     },
     {
       "name": "SidebarFooter",
       "description": "The footer section of the Sidebar.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-sidebar-ocsidebarfooter--docs",
       "detail": "/docs/components/SidebarFooter.json"
     },
     {
       "name": "SidebarFeatureBanners",
       "description": "Promotional feature banners displayed at the bottom of the Sidebar.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-sidebar-ocsidebarfeaturebanners--docs",
       "detail": "/docs/components/SidebarFeatureBanners.json"
     },
     {
       "name": "AccountSetupProgress",
       "description": "A circular progress indicator for account setup completion shown in the Sidebar.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-sidebar-ocaccountsetupprogress--docs",
       "detail": "/docs/components/AccountSetupProgress.json"
     },
     {
       "name": "SubSidebar",
       "description": "A secondary sidebar for sub-navigation within a section.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-subsidebar-ocsubsidebar--docs",
       "detail": "/docs/components/SubSidebar.json"
     },
     {
       "name": "EmptyPage",
       "description": "A placeholder page shown when a list or section has no data.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-emptypage-ocemptypage--docs",
       "detail": "/docs/components/EmptyPage.json"
     },
     {
       "name": "AdditionalContent",
       "description": "A flexible side panel showing customer info, overview items, payment methods, and action buttons.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-additionalcontent-ocadditionalcontent--docs",
       "detail": "/docs/components/AdditionalContent.json"
     },
     {
       "name": "InfoCardButton",
       "description": "A selectable card button showing a title, content, and optional chip or dropdown.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-additionalcontent-balancetype-ocinfocardbutton--docs",
       "detail": "/docs/components/InfoCardButton.json"
     },
     {
       "name": "Skeleton",
       "description": "A loading placeholder that mimics content shape while data is loading.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-skeleton-ocskeleton--docs",
       "detail": "/docs/components/Skeleton.json"
     },
     {
       "name": "FeatureOverviewCard",
       "description": "A card listing product features with icons, used in feature overview or upgrade pages.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-featureoverviewcard-ocfeatureoverviewcard--docs",
       "detail": "/docs/components/FeatureOverviewCard.json"
     },
     {
       "name": "SandboxBanner",
       "description": "A top banner indicating the user is in sandbox/test mode.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-sandboxbanner-ocsandboxbanner--docs",
       "detail": "/docs/components/SandboxBanner.json"
     },
     {
       "name": "TopBanner",
       "description": "A dismissible top-of-page announcement or action-required banner.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-topbanner-octopbanner--docs",
       "detail": "/docs/components/TopBanner.json"
     },
     {
       "name": "Box",
       "description": "A clickable card box with an icon, title, description, and active state.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-box-ocbox--docs",
       "detail": "/docs/components/Box.json"
     },
     {
       "name": "OcSection",
       "description": "A content section wrapper with an optional title and header-right slot.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-section-ocsection--docs",
       "detail": "/docs/components/OcSection.json"
     },
     {
       "name": "AuthenticationOption",
       "description": "A selectable authentication method card with icon and active indicator.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-authenticationoption-ocauthenticationoption--docs",
       "detail": "/docs/components/AuthenticationOption.json"
     },
     {
       "name": "VerificationOption",
       "description": "A selectable verification method card with icon, chip badge, and active state.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-verificationoption-ocverificationoption--docs",
       "detail": "/docs/components/VerificationOption.json"
     },
     {
       "name": "Chip",
       "description": "A small status or category badge with variants for color, style (background/transparent/outlined), icon, and close button.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/feedback-chip-occhip--docs",
       "detail": "/docs/components/Chip.json"
     },
     {
       "name": "Snackbar",
       "description": "A toast notification supporting floating and inline modes, colors, icons, and action buttons.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/feedback-snackbar-ocsnackbar--docs",
       "detail": "/docs/components/Snackbar.json"
     },
     {
       "name": "Banner",
       "description": "An inline notification banner with an icon, title, content, and optional dismiss button.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/feedback-banner-ocbanner--docs",
       "detail": "/docs/components/Banner.json"
     },
     {
       "name": "ShareIcon",
       "description": "An icon button for sharing via a specific channel (e.g. WhatsApp) with a tooltip.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/feedback-shareicon-ocshareicon--docs",
       "detail": "/docs/components/ShareIcon.json"
     },
     {
       "name": "Tag",
       "description": "A small colored label tag for status or category annotation.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/feedback-tag-octag--docs",
       "detail": "/docs/components/Tag.json"
     },
     {
       "name": "BaseInput",
       "description": "A form field wrapper providing label, hint, error message, and tooltip slot.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-baseinput-ocbaseinput--docs",
       "detail": "/docs/components/BaseInput.json"
     },
     {
       "name": "Button",
       "description": "A primary action button with variants (primary, secondary, destructive), sizes, icons, and loading state.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-button-ocbutton--docs",
       "detail": "/docs/components/Button.json"
     },
     {
       "name": "CardInput",
       "description": "A credit card number input with card type detection and inline label support.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-cardinput-occardinput--docs",
       "detail": "/docs/components/CardInput.json"
     },
     {
       "name": "Checkbox",
       "description": "A single checkbox input with label, hint, error, and button-variant style.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-checkbox-occheckbox--docs",
       "detail": "/docs/components/Checkbox.json"
     },
     {
       "name": "CheckboxesGroup",
       "description": "A group of checkboxes with select-all support and vertical/horizontal alignment.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-checkboxesgroup-occheckboxesgroup--docs",
       "detail": "/docs/components/CheckboxesGroup.json"
     },
     {
       "name": "Criteria",
       "description": "A read-only criteria indicator showing a label with a pass/fail state.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-criteria-occriteria--docs",
       "detail": "/docs/components/Criteria.json"
     },
     {
       "name": "Input",
       "description": "A standard text input with icon, prefix, inline label, password toggle, and validation support.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-input-ocinput--docs",
       "detail": "/docs/components/Input.json"
     },
     {
       "name": "InputOption",
       "description": "A tag-style input that lets users add multiple free-text options.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-input-ocinputoption--docs",
       "detail": "/docs/components/InputOption.json"
     },
     {
       "name": "PhoneInput",
       "description": "A phone number input with integrated country code selector.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-phoneinput-ocphoneinput--docs",
       "detail": "/docs/components/PhoneInput.json"
     },
     {
       "name": "Radio",
       "description": "A single radio button with label, hint, tooltip, and button-variant styles.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-radio-ocradio--docs",
       "detail": "/docs/components/Radio.json"
     },
     {
       "name": "RadioGroup",
       "description": "A group of radio buttons with vertical/horizontal layout.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-radiogroup-ocradiogroup--docs",
       "detail": "/docs/components/RadioGroup.json"
     },
     {
       "name": "RangeInput",
       "description": "A dual numeric input for entering a min/max range.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-rangeinput-ocrangeinput--docs",
       "detail": "/docs/components/RangeInput.json"
     },
     {
       "name": "Select",
       "description": "A dropdown selector supporting single/multi select, filtering, async search, and grouped options.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-select-ocselect--docs",
       "detail": "/docs/components/Select.json"
     },
     {
       "name": "Option",
       "description": "A single option item used inside a Select dropdown.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-select-ocoption--docs",
       "detail": "/docs/components/Option.json"
     },
     {
       "name": "GroupOptions",
       "description": "A labeled group of Option items within a Select dropdown.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-select-ocgroupoptions--docs",
       "detail": "/docs/components/GroupOptions.json"
     },
     {
       "name": "Toggle",
       "description": "A on/off toggle switch with label and disabled state.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-toggle-octoggle--docs",
       "detail": "/docs/components/Toggle.json"
     },
     {
       "name": "LinkInput",
       "description": "An input for entering a social or custom link with platform selector.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-linkinput-oclinkinput--docs",
       "detail": "/docs/components/LinkInput.json"
     },
     {
       "name": "TextArea",
       "description": "A multi-line text input with auto-resize, label, hint, and error support.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-textarea-octextarea--docs",
       "detail": "/docs/components/TextArea.json"
     },
     {
       "name": "Calendar",
       "description": "A standalone date or date-range calendar picker.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-calendar-occalendar--docs",
       "detail": "/docs/components/Calendar.json"
     },
     {
       "name": "DatePicker",
       "description": "A date or date-range picker input with popover calendar, shortcuts, and format options.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-datepicker-datepicker--docs",
       "detail": "/docs/components/DatePicker.json"
     },
     {
       "name": "Slider",
       "description": "A range or single value slider with configurable min, max, and step.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-slider-ocslider--docs",
       "detail": "/docs/components/Slider.json"
     },
     {
       "name": "SectionItem",
       "description": "A settings row with a title, description, optional toggle, and action slot.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-sectionitem-ocsectionitem--docs",
       "detail": "/docs/components/SectionItem.json"
     },
     {
       "name": "SelectOptions",
       "description": "A visual option picker in grid or list layout supporting text, icon, or image options.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-selectoptions-ocselectoptions--docs",
       "detail": "/docs/components/SelectOptions.json"
     },
     {
       "name": "SingleFileUpload",
       "description": "A file upload input for a single file with preview, size limit, and crop support.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-singlefileupload-ocsinglefileupload--docs",
       "detail": "/docs/components/SingleFileUpload.json"
     },
     {
       "name": "MultipleUploadFile",
       "description": "A file upload input for multiple files with preview grid and size/count limits.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-multipleuploadfile-ocmultipleuploadfile--docs",
       "detail": "/docs/components/MultipleUploadFile.json"
     },
     {
       "name": "NumberInput",
       "description": "A numeric input with increment/decrement buttons.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-numberinput-ocnumberinput--docs",
       "detail": "/docs/components/NumberInput.json"
     },
     {
       "name": "Avatar",
       "description": "A user or business avatar in multiple sizes and types (default, business, image).",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/mediaandicons-avatar-ocavatar--docs",
       "detail": "/docs/components/Avatar.json"
     },
     {
       "name": "Icon",
       "description": "Renders an SVG icon by name from the OrchidUI icon library.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/mediaandicons-icon-ocicon--docs",
       "detail": "/docs/components/Icon.json"
     },
     {
       "name": "Dropdown",
       "description": "A popover dropdown menu attached to a trigger element.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/overlay-dropdown-ocdropdown--docs",
       "detail": "/docs/components/Dropdown.json"
     },
     {
       "name": "DropdownItem",
       "description": "A single item row within a Dropdown menu, supporting icon, text, and badges.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/overlay-dropdown-ocdropdownitem--docs",
       "detail": "/docs/components/DropdownItem.json"
     },
     {
       "name": "Tooltip",
       "description": "A hover or click tooltip/popover with configurable placement and content slot.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/overlay-tooltip-octooltip--docs",
       "detail": "/docs/components/Tooltip.json"
     },
     {
       "name": "Modal",
       "description": "A dialog modal with header, body, footer, confirm/cancel buttons, and size variants.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/overlay-modal-ocmodal--docs",
       "detail": "/docs/components/Modal.json"
     },
     {
       "name": "OcModalPage",
       "description": "A full-screen modal page with optional back button and close icon.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/overlay-modal-ocmodalpage--docs",
       "detail": "/docs/components/OcModalPage.json"
     },
     {
       "name": "ConfirmationModal",
       "description": "A pre-styled confirmation dialog for delete, success, warning, or question actions.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/overlay-confirmationmodal-occonfirmationmodal--docs",
       "detail": "/docs/components/ConfirmationModal.json"
     },
     {
       "name": "Popper",
       "description": "A low-level positioning wrapper using Popper.js for custom overlays.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/overlay-popper-ocpopper--docs",
       "detail": "/docs/components/Popper.json"
     },
     {
       "name": "SupportMenu",
       "description": "A floating support/help menu with grouped links and a bottom action bar.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/overlay-supportmenu-ocsupportmenu--docs",
       "detail": "/docs/components/SupportMenu.json"
     },
     {
       "name": "CopyTooltip",
       "description": "Wraps any element to copy a value to clipboard and show a confirmation tooltip.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/overlay-copytooltip-occopytooltip--docs",
       "detail": "/docs/components/CopyTooltip.json"
     },
     {
       "name": "WhiteList",
       "description": "A feature gate card shown when a feature is unavailable for the user's plan.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/overlay-whitelist-ocwhitelist--docs",
       "detail": "/docs/components/WhiteList.json"
     },
     {
       "name": "Theme",
       "description": "Wraps the app to apply a color mode (light/dark) via CSS variables.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/theme-octheme--docs",
       "detail": "/docs/components/Theme.json"
     },
     {
       "name": "FormBuilder",
       "description": "A dynamic form renderer that builds form fields from a JSON schema with grid layout support.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/formbuilder-ocformbuilder--docs",
       "detail": "/docs/components/FormBuilder.json"
     },
     {
       "name": "DataTable",
       "description": "A full-featured data table with integrated filtering, search, pagination, column config, and bulk actions.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datatable-ocdatatable--docs",
       "detail": "/docs/components/DataTable.json"
     },
     {
       "name": "FilterSearch",
       "description": "The search input component used within DataTable's filter toolbar.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datatable-ocfiltersearch--docs",
       "detail": "/docs/components/FilterSearch.json"
     },
     {
       "name": "FilterSearchFor",
       "description": "Displays active search/filter query chips with remove controls.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datatable-ocfiltersearchfor--docs",
       "detail": "/docs/components/FilterSearchFor.json"
     },
     {
       "name": "FilterForm",
       "description": "A filter form panel driven by a JSON schema, used inside DataTable.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datatable-ocfilterform--docs",
       "detail": "/docs/components/FilterForm.json"
     },
     {
       "name": "ComplexCalendar",
       "description": "A full calendar panel with range selection, shortcuts, and submit/cancel actions.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-complexcalendar-occomplexcalendar--docs",
       "detail": "/docs/components/ComplexCalendar.json"
     },
     {
       "name": "ComplexDatePicker",
       "description": "A date range picker input using ComplexCalendar, with label and format options.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-complexdatepicker-occomplexdatepicker--docs",
       "detail": "/docs/components/ComplexDatePicker.json"
     },
     {
       "name": "ModalCropper",
       "description": "A modal-based image cropper with upload and crop controls.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-modalcropper-ocmodalcropper--docs",
       "detail": "/docs/components/ModalCropper.json"
     },
     {
       "name": "Cropper",
       "description": "An inline image cropper with optional replace functionality.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-cropper-occropper--docs",
       "detail": "/docs/components/Cropper.json"
     },
     {
       "name": "Draggable",
       "description": "A drag-and-drop wrapper that makes a list reorderable.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-draggable-ocdraggable--docs",
       "detail": "/docs/components/Draggable.json"
     },
     {
       "name": "DraggableList",
       "description": "A styled draggable list with icon, title, action slots, and optional nested children.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-draggable-ocdraggablelist--docs",
       "detail": "/docs/components/DraggableList.json"
     },
     {
       "name": "EmojiPicker",
       "description": "An emoji selector popover input.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-emojipicker-ocemojipicker--docs",
       "detail": "/docs/components/EmojiPicker.json"
     },
     {
       "name": "ThumbnailTheme",
       "description": "A theme selection card with preview thumbnail, activate/customize/publish actions.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/storedesign-thumbnailtheme-thumbnailtheme--docs",
       "detail": "/docs/components/ThumbnailTheme.json"
     },
     {
       "name": "ThumbnailSection",
       "description": "A section template card with preview image and add/customize actions.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/storedesign-thumbnailsection-thumbnailsection--docs",
       "detail": "/docs/components/ThumbnailSection.json"
     },
     {
       "name": "SubPlanCard",
       "description": "A subscription plan tier card listing features and a select action.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/storedesign-subplancard-subplancard--docs",
       "detail": "/docs/components/SubPlanCard.json"
     },
     {
       "name": "TimePopup",
       "description": "A time picker popup component.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-timepicker-octimepopup--docs",
       "detail": "/docs/components/TimePopup.json"
     },
     {
       "name": "TimePicker",
       "description": "A time picker input with a popover clock and label support.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-timepicker-octimepicker--docs",
       "detail": "/docs/components/TimePicker.json"
     }
   ]

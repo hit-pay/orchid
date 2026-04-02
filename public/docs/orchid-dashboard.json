@@ -7,79 +7,66 @@
     {
       "name": "LineChart",
       "description": "A time-series line chart for visualizing trends over time.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-charts-linechart-oclinechart--docs",
       "detail": "/docs/components/LineChart.json"
     },
     {
       "name": "PieChart",
       "description": "A pie or donut chart for showing proportional data.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-charts-piechart-ocpiechart--docs",
       "detail": "/docs/components/PieChart.json"
     },
     {
       "name": "BarChart",
       "description": "A bar chart for comparing values across categories.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-charts-barchart-ocbarchart--docs",
       "detail": "/docs/components/BarChart.json"
     },
     {
       "name": "BarRaceChart",
       "description": "An animated bar race chart showing changing rankings over time.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-charts-barracechart-ocbarracechart--docs",
       "detail": "/docs/components/BarRaceChart.json"
     },
     {
       "name": "Card",
       "description": "A dashboard card container with a title and content area.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-card-occard--docs",
       "detail": "/docs/components/Card.json"
     },
     {
       "name": "OcOverviewPieChart",
       "description": "A pie chart variant styled for overview/summary widgets.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-charts-overviewpiechart-ocoverviewpiechart--docs",
       "detail": "/docs/components/OcOverviewPieChart.json"
     },
     {
       "name": "OverviewMonthlyBarChart",
       "description": "A monthly bar chart for overview reporting widgets.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-charts-overviewmonthlybarchart-ocoverviewmonthlybarchart--docs",
       "detail": "/docs/components/OverviewMonthlyBarChart.json"
     },
     {
       "name": "ColorPicker",
       "description": "A full color picker input with hex/rgb support.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-colorpicker-occolorpicker--docs",
       "detail": "/docs/components/ColorPicker.json"
     },
     {
       "name": "TextEditor",
       "description": "A rich text editor (WYSIWYG) for formatted content input.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-texteditor-octexteditor--docs",
       "detail": "/docs/components/TextEditor.json"
     },
     {
       "name": "ColorPickerPopup",
       "description": "A popover color picker for inline color selection.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-colorpicker-components-occolorpickerpopup--docs",
       "detail": "/docs/components/ColorPickerPopup.json"
     },
     {
       "name": "OnboardingProgressbar",
       "description": "A visual progress bar for onboarding completion tracking.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-onboardingprogressbar-oconboardingprogressbar--docs",
       "detail": "/docs/components/OnboardingProgressbar.json"
     },
     {
       "name": "CodeBlock",
       "description": "A syntax-highlighted code block for displaying code snippets.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-codeblock-occodeblock--docs",
       "detail": "/docs/components/CodeBlock.json"
     },
     {
       "name": "LottieAnimation",
       "description": "Renders a Lottie JSON animation.",
-      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-lottieanimation-oclottieanimation--docs",
       "detail": "/docs/components/LottieAnimation.json"
     }
   ]
