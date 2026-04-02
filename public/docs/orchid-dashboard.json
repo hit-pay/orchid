@@ -1,0 +1,741 @@
+[
+  {
+    "name": "LineChart",
+    "description": "",
+    "props": [
+      {
+        "name": "showTooltip",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "showLegend",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "showGrid",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "chartData",
+        "required": false,
+        "type": "array"
+      },
+      {
+        "name": "labelData",
+        "required": false,
+        "type": "array"
+      },
+      {
+        "name": "tooltipFormatter",
+        "required": false,
+        "type": "func"
+      },
+      {
+        "name": "tooltipValueFormatter",
+        "required": false,
+        "type": "func"
+      }
+    ]
+  },
+  {
+    "name": "PieChart",
+    "description": "",
+    "props": [
+      {
+        "name": "showTooltip",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "showLegend",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "showGrid",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "chartData",
+        "required": false,
+        "type": "array"
+      },
+      {
+        "name": "tooltipFormatter",
+        "required": false,
+        "type": "func"
+      },
+      {
+        "name": "tooltipValueFormatter",
+        "required": false,
+        "type": "func"
+      },
+      {
+        "name": "additionalOptions",
+        "required": false,
+        "type": "object",
+        "default": "{}"
+      }
+    ]
+  },
+  {
+    "name": "BarChart",
+    "description": "",
+    "props": [
+      {
+        "name": "variant",
+        "required": false,
+        "type": "string",
+        "values": [
+          "primary",
+          "purple"
+        ]
+      },
+      {
+        "name": "showTooltip",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "showLegend",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "showGrid",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "chartData",
+        "required": false,
+        "type": "array"
+      },
+      {
+        "name": "labelData",
+        "required": false,
+        "type": "array"
+      },
+      {
+        "name": "yAxisFormatter",
+        "required": false,
+        "type": "func"
+      },
+      {
+        "name": "xAxisFormatter",
+        "required": false,
+        "type": "func"
+      },
+      {
+        "name": "tooltipFormatter",
+        "required": false,
+        "type": "func"
+      },
+      {
+        "name": "tooltipValueFormatter",
+        "required": false,
+        "type": "func"
+      }
+    ]
+  },
+  {
+    "name": "BarRaceChart",
+    "description": "",
+    "props": [
+      {
+        "name": "variant",
+        "required": false,
+        "type": "string",
+        "values": [
+          "primary",
+          "purple"
+        ]
+      },
+      {
+        "name": "showTooltip",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "showLegend",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "showGrid",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "chartData",
+        "required": false,
+        "type": "array"
+      },
+      {
+        "name": "labelData",
+        "required": false,
+        "type": "array"
+      },
+      {
+        "name": "legendData",
+        "required": false,
+        "type": "array"
+      },
+      {
+        "name": "yAxisFormatter",
+        "required": false,
+        "type": "func"
+      },
+      {
+        "name": "tooltipFormatter",
+        "required": false,
+        "type": "func"
+      },
+      {
+        "name": "tooltipValueFormatter",
+        "required": false,
+        "type": "func"
+      }
+    ],
+    "slots": [
+      {
+        "name": "legend-item",
+        "description": "",
+        "bindings": [
+          {
+            "name": "data"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Card",
+    "description": "",
+    "props": [
+      {
+        "name": "type",
+        "required": false,
+        "type": "string",
+        "default": "'education'"
+      },
+      {
+        "name": "isFull",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "version",
+        "required": false,
+        "type": "string",
+        "default": "'v2'"
+      },
+      {
+        "name": "title",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "description",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "fullButtonProps",
+        "required": false,
+        "type": "object",
+        "default": "() => {}"
+      },
+      {
+        "name": "hideButtonProps",
+        "required": false,
+        "type": "object",
+        "default": "() => {}"
+      }
+    ],
+    "events": [
+      {
+        "name": "hide-all",
+        "description": ""
+      },
+      {
+        "name": "learn-more",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "logo",
+        "description": ""
+      },
+      {
+        "name": "title",
+        "description": ""
+      },
+      {
+        "name": "description",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "OcOverviewPieChart",
+    "description": "",
+    "props": [
+      {
+        "name": "chartData",
+        "required": false,
+        "type": "array"
+      },
+      {
+        "name": "currency",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "additionalOptions",
+        "required": false,
+        "type": "object",
+        "default": "{}"
+      },
+      {
+        "name": "tooltip",
+        "required": false,
+        "type": "object",
+        "default": "{}"
+      }
+    ]
+  },
+  {
+    "name": "OverviewMonthlyBarChart",
+    "description": "",
+    "props": [
+      {
+        "name": "variant",
+        "required": false,
+        "type": "string",
+        "values": [
+          "primary",
+          "purple"
+        ]
+      },
+      {
+        "name": "currency",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "showTooltip",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "showLegend",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "showGrid",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "chartData",
+        "required": false,
+        "type": "array"
+      },
+      {
+        "name": "labelData",
+        "required": false,
+        "type": "array"
+      },
+      {
+        "name": "yAxisFormatter",
+        "required": false,
+        "type": "func"
+      },
+      {
+        "name": "xAxisFormatter",
+        "required": false,
+        "type": "func"
+      },
+      {
+        "name": "tooltipFormatter",
+        "required": false,
+        "type": "func"
+      },
+      {
+        "name": "tooltipValueFormatter",
+        "required": false,
+        "type": "func"
+      }
+    ]
+  },
+  {
+    "name": "ColorPicker",
+    "description": "",
+    "props": [
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "variant",
+        "required": false,
+        "type": "string",
+        "default": "'solid'"
+      },
+      {
+        "name": "hideOpacity",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "hideInputColor",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "presetColors",
+        "required": false,
+        "type": "array"
+      },
+      {
+        "name": "placement",
+        "required": false,
+        "type": "string",
+        "default": "'auto'"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:model-value",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "leading",
+        "description": ""
+      },
+      {
+        "name": "picker-icon",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "TextEditor",
+    "description": "",
+    "props": [
+      {
+        "name": "fontSizes",
+        "required": true,
+        "type": "array",
+        "description": "The font sizes of the editor."
+      },
+      {
+        "name": "initialFontSize",
+        "required": false,
+        "type": "string",
+        "description": "The initial font size of the editor. (if empty the first item of `fontSizes` will be used, needs to be a value of `fontSizes`)"
+      },
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "image",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "errorMessage",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "hint",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "isRequired",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "labelIcon",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "tooltipText",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "tooltipOptions",
+        "required": false,
+        "type": "object",
+        "default": "{}"
+      },
+      {
+        "name": "variant",
+        "required": false,
+        "type": "string",
+        "default": "'default'",
+        "values": [
+          "default",
+          "text-only"
+        ]
+      },
+      {
+        "name": "placeholder",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "isCustomImageUpload",
+        "required": false,
+        "type": "boolean"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "description": ""
+      },
+      {
+        "name": "update:image",
+        "description": ""
+      },
+      {
+        "name": "uploadImage",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "ColorPickerPopup",
+    "description": "",
+    "props": [
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "type",
+        "required": false,
+        "type": "string",
+        "default": "'HEX8'"
+      },
+      {
+        "name": "inputType",
+        "required": false,
+        "type": "string",
+        "default": "'HEX'"
+      },
+      {
+        "name": "theme",
+        "required": false,
+        "type": "string",
+        "default": "'light'"
+      },
+      {
+        "name": "showColorList",
+        "required": false,
+        "type": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "showEyeDrop",
+        "required": false,
+        "type": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "showAlpha",
+        "required": false,
+        "type": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "showInputMenu",
+        "required": false,
+        "type": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "showInputSet",
+        "required": false,
+        "type": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "disabled",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "iconClasses",
+        "required": false,
+        "type": "object",
+        "default": "{\n  linear: '',\n  radial: '',\n  ruler: '',\n  eyeDroper: '',\n  inputMenu: '',\n  save: '',\n  delete: ''\n}"
+      },
+      {
+        "name": "presetColors",
+        "required": false,
+        "type": "array"
+      },
+      {
+        "name": "variant",
+        "required": false,
+        "type": "string",
+        "default": "'solid'"
+      },
+      {
+        "name": "lastUsedColors",
+        "required": false,
+        "type": "array"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "description": ""
+      },
+      {
+        "name": "last-used-pick",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "OnboardingProgressbar",
+    "description": "",
+    "props": [
+      {
+        "name": "title",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "description",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "value",
+        "required": false,
+        "type": "string|number",
+        "default": "'0'"
+      },
+      {
+        "name": "chartData",
+        "required": false,
+        "type": "array",
+        "default": "[]"
+      }
+    ],
+    "slots": [
+      {
+        "name": "description",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "CodeBlock",
+    "description": "",
+    "props": [
+      {
+        "name": "jsonObject",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "name": "lang",
+        "required": false,
+        "type": "string",
+        "default": "'json'"
+      }
+    ]
+  },
+  {
+    "name": "LottieAnimation",
+    "description": "",
+    "props": [
+      {
+        "name": "path",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "name": "width",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "name": "height",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "name": "speed",
+        "required": false,
+        "type": "number",
+        "default": "1"
+      },
+      {
+        "name": "loop",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "autoplay",
+        "required": false,
+        "type": "boolean",
+        "default": "true"
+      }
+    ],
+    "events": [
+      {
+        "name": "error",
+        "description": ""
+      },
+      {
+        "name": "animation-item-changed",
+        "description": ""
+      }
+    ]
+  }
+]

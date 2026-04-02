@@ -1,0 +1,5556 @@
+[
+  {
+    "name": "Table",
+    "description": "",
+    "props": [
+      {
+        "name": "options",
+        "required": true,
+        "type": "object"
+      },
+      {
+        "name": "isLoading",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isBorderless",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "loadingRows",
+        "required": false,
+        "type": "number",
+        "default": "10"
+      },
+      {
+        "name": "selected",
+        "required": false,
+        "type": "array"
+      },
+      {
+        "name": "rowKey",
+        "required": false,
+        "type": "string|func",
+        "default": "'id'"
+      },
+      {
+        "name": "rowClass",
+        "required": false,
+        "type": "string|func"
+      },
+      {
+        "name": "isSticky",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "isResponsive",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "rowLink",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "sortBy",
+        "required": false,
+        "type": "object",
+        "default": "{}"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:sort-by",
+        "description": ""
+      },
+      {
+        "name": "hover:cell",
+        "description": ""
+      },
+      {
+        "name": "click:row",
+        "description": ""
+      },
+      {
+        "name": "update:selected",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "before",
+        "description": ""
+      },
+      {
+        "name": "table-header",
+        "description": "",
+        "bindings": [
+          {
+            "name": "fields"
+          },
+          {
+            "name": "headers"
+          },
+          {
+            "name": "is-selectable"
+          },
+          {
+            "name": "is-responsive"
+          },
+          {
+            "name": "select-all-rows"
+          },
+          {
+            "name": "is-scroll-on-start"
+          },
+          {
+            "name": "is-scroll-on-end"
+          }
+        ]
+      },
+      {
+        "name": "`header-${header.key}`",
+        "description": "",
+        "bindings": [
+          {
+            "name": "name"
+          }
+        ]
+      },
+      {
+        "name": "table-body",
+        "description": "",
+        "bindings": [
+          {
+            "name": "fields"
+          },
+          {
+            "name": "headers"
+          },
+          {
+            "name": "is-scroll-on-end"
+          },
+          {
+            "name": "is-scroll-on-start"
+          },
+          {
+            "name": "on-click-row"
+          },
+          {
+            "name": "is-selectable"
+          },
+          {
+            "name": "is-cursor-pointer"
+          },
+          {
+            "name": "is-responsive"
+          },
+          {
+            "name": "is-sticky"
+          },
+          {
+            "name": "row-link"
+          },
+          {
+            "name": "calculate-row-class"
+          }
+        ]
+      },
+      {
+        "name": "header.key",
+        "description": "",
+        "bindings": [
+          {
+            "name": "name"
+          },
+          {
+            "name": "item"
+          },
+          {
+            "name": "data"
+          },
+          {
+            "name": "index"
+          }
+        ]
+      },
+      {
+        "name": "extra",
+        "description": "",
+        "bindings": [
+          {
+            "name": "item"
+          },
+          {
+            "name": "index"
+          }
+        ]
+      },
+      {
+        "name": "empty",
+        "description": ""
+      },
+      {
+        "name": "after",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "TableHeader",
+    "description": "",
+    "props": [
+      {
+        "name": "variant",
+        "required": false,
+        "type": "string",
+        "default": "'text'",
+        "values": [
+          "text",
+          "checkbox"
+        ]
+      },
+      {
+        "name": "text",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "isPartial",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isChecked",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isSticky",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isLoading",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "sortBy",
+        "required": false,
+        "type": "string",
+        "default": "null"
+      },
+      {
+        "name": "isSortable",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      }
+    ],
+    "events": [
+      {
+        "name": "selectAll",
+        "description": ""
+      },
+      {
+        "name": "update:sort-by",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "default",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "TableCell",
+    "description": "",
+    "props": [
+      {
+        "name": "isSimple",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "variant",
+        "required": false,
+        "type": "string",
+        "default": "'default'"
+      },
+      {
+        "name": "isLast",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isCopy",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "addDescriptionToCopyClipboard",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isSelected",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "data",
+        "required": false,
+        "type": "string|number|object|array|boolean"
+      },
+      {
+        "name": "isLoading",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "chipOptions",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "content",
+        "required": false,
+        "type": "object",
+        "default": "{\n  title: null,\n  description: null\n}"
+      },
+      {
+        "name": "datetime",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "imageClass",
+        "required": false,
+        "type": "string",
+        "default": "'h-full'"
+      },
+      {
+        "name": "link",
+        "required": false,
+        "type": "string"
+      }
+    ],
+    "events": [
+      {
+        "name": "hover:field",
+        "description": ""
+      },
+      {
+        "name": "selected",
+        "description": ""
+      },
+      {
+        "name": "copied",
+        "description": ""
+      },
+      {
+        "name": "click:field",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "default",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "TableCellContent",
+    "description": "",
+    "props": [
+      {
+        "name": "important",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "title",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "description",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "href",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "link",
+        "required": false,
+        "type": "string"
+      }
+    ],
+    "slots": [
+      {
+        "name": "description",
+        "description": "",
+        "bindings": [
+          {
+            "name": "description"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "TableLink",
+    "description": "",
+    "props": [
+      {
+        "name": "link",
+        "required": false,
+        "type": "string"
+      }
+    ],
+    "slots": [
+      {
+        "name": "default",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "ExpandingTable",
+    "description": "",
+    "props": [
+      {
+        "name": "total",
+        "required": false,
+        "type": "number",
+        "default": "0"
+      },
+      {
+        "name": "headers",
+        "required": true,
+        "type": "array"
+      },
+      {
+        "name": "fields",
+        "required": true,
+        "type": "object"
+      },
+      {
+        "name": "isAlternative",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "isLoading",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "loadingRows",
+        "required": false,
+        "type": "number",
+        "default": "5"
+      },
+      {
+        "name": "isSticky",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "gridTemplateColumns",
+        "required": false,
+        "type": "string",
+        "default": "'32px 200px repeat(${headers.length - 1}, minmax(150px, auto)) 32px'"
+      }
+    ],
+    "slots": [
+      {
+        "name": "name",
+        "description": "",
+        "bindings": [
+          {
+            "name": "name"
+          }
+        ]
+      },
+      {
+        "name": "total",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "ExpandingTableRow",
+    "description": "",
+    "props": [
+      {
+        "name": "row",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "depth",
+        "required": false,
+        "type": "number",
+        "default": "0"
+      },
+      {
+        "name": "value",
+        "required": false,
+        "type": "string|number|date|object",
+        "default": "0"
+      },
+      {
+        "name": "headers",
+        "required": false,
+        "type": "array",
+        "default": "[]"
+      },
+      {
+        "name": "important",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "isTotal",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "isAlternative",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "isLoading",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "isSticky",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "gridTemplateColumns",
+        "required": false,
+        "type": "string",
+        "default": "'32px 200px repeat(${headers.length - 1}, minmax(150px, auto)) 32px'"
+      }
+    ],
+    "slots": [
+      {
+        "name": "row.key",
+        "description": "",
+        "bindings": [
+          {
+            "name": "name"
+          },
+          {
+            "name": "value"
+          }
+        ]
+      },
+      {
+        "name": "header.key",
+        "description": "",
+        "bindings": [
+          {
+            "name": "name"
+          },
+          {
+            "name": "data"
+          },
+          {
+            "name": "item"
+          }
+        ]
+      },
+      {
+        "name": "name",
+        "description": "",
+        "bindings": [
+          {
+            "name": "name"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "ExpandingHeaderRow",
+    "description": "",
+    "props": [
+      {
+        "name": "headers",
+        "required": true,
+        "type": "array"
+      },
+      {
+        "name": "isSticky",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "gridTemplateColumns",
+        "required": false,
+        "type": "string",
+        "default": "'32px 200px repeat(${headers.length - 1}, minmax(150px, auto)) 32px'"
+      }
+    ]
+  },
+  {
+    "name": "Pagination",
+    "description": "",
+    "props": [
+      {
+        "name": "maxPage",
+        "required": false,
+        "type": "string|number",
+        "default": "1"
+      },
+      {
+        "name": "totalVisible",
+        "required": false,
+        "type": "string|number",
+        "default": "1"
+      },
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "string|number",
+        "default": "1"
+      },
+      {
+        "name": "isRounded",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "size",
+        "required": false,
+        "type": "string"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "PrevNext",
+    "description": "",
+    "props": [
+      {
+        "name": "disabled",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isNext",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "size",
+        "required": false,
+        "type": "string",
+        "default": "'default'"
+      }
+    ]
+  },
+  {
+    "name": "PaginationNumber",
+    "description": "",
+    "props": [
+      {
+        "name": "active",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isRounded",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "size",
+        "required": false,
+        "type": "string",
+        "default": "'default'"
+      }
+    ],
+    "slots": [
+      {
+        "name": "default",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "Overview",
+    "description": "",
+    "props": [
+      {
+        "name": "title",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "containerClass",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "items",
+        "required": false,
+        "type": "array"
+      },
+      {
+        "name": "isLoading",
+        "required": false,
+        "type": "boolean"
+      }
+    ],
+    "slots": [
+      {
+        "name": "name",
+        "description": "",
+        "bindings": [
+          {
+            "name": "name"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "OverviewIcon",
+    "description": "",
+    "props": [
+      {
+        "name": "icon",
+        "required": false,
+        "type": "string",
+        "default": "'circle'"
+      },
+      {
+        "name": "variant",
+        "required": false,
+        "type": "string",
+        "default": "'blue'"
+      },
+      {
+        "name": "width",
+        "required": false,
+        "type": "string",
+        "default": "'22'"
+      },
+      {
+        "name": "height",
+        "required": false,
+        "type": "string",
+        "default": "'22'"
+      }
+    ]
+  },
+  {
+    "name": "OverviewItem",
+    "description": "",
+    "props": [
+      {
+        "name": "icon",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "title",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "tooltip",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "percentTooltip",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "content",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "info",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isLoading",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "percentValue",
+        "required": false,
+        "type": "number"
+      },
+      {
+        "name": "tooltipOptions",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "iconProps",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "isFooter",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isTransparent",
+        "required": false,
+        "type": "boolean"
+      }
+    ],
+    "slots": [
+      {
+        "name": "title",
+        "description": ""
+      },
+      {
+        "name": "content",
+        "description": ""
+      },
+      {
+        "name": "footer",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "CustomerCard",
+    "description": "",
+    "props": [
+      {
+        "name": "variant",
+        "required": false,
+        "type": "string",
+        "default": "'small'",
+        "values": [
+          "small",
+          "big",
+          "float"
+        ]
+      },
+      {
+        "name": "customer",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "isHover",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "isEdit",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "isClosable",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isBeneficiary",
+        "required": false,
+        "type": "boolean"
+      }
+    ],
+    "events": [
+      {
+        "name": "editCustomer",
+        "description": ""
+      },
+      {
+        "name": "addCustomer",
+        "description": ""
+      },
+      {
+        "name": "closeCustomer",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "bottom",
+        "description": ""
+      },
+      {
+        "name": "leading",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "TransferSummary",
+    "description": "",
+    "props": [
+      {
+        "name": "transfer",
+        "required": true,
+        "type": "object"
+      },
+      {
+        "name": "hasFxData",
+        "required": false,
+        "type": "boolean"
+      }
+    ]
+  },
+  {
+    "name": "ListItem",
+    "description": "",
+    "props": [
+      {
+        "name": "isActive",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "title",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "description",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "descriptionIcon",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "icon",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "iconClass",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "iconText",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "date",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "type",
+        "required": false,
+        "type": "string",
+        "default": "'timeLine'"
+      },
+      {
+        "name": "urls",
+        "required": false,
+        "type": "array",
+        "default": "[]"
+      },
+      {
+        "name": "paymentMethods",
+        "required": false,
+        "type": "array",
+        "default": "[]"
+      },
+      {
+        "name": "chips",
+        "required": false,
+        "type": "array",
+        "default": "[]"
+      },
+      {
+        "name": "details",
+        "required": false,
+        "type": "array",
+        "default": "[]"
+      },
+      {
+        "name": "isDisabled",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isTransparent",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isDraggable",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isOpenDefault",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "boolean"
+      }
+    ],
+    "events": [
+      {
+        "name": "more",
+        "description": ""
+      },
+      {
+        "name": "edit",
+        "description": ""
+      },
+      {
+        "name": "delete",
+        "description": ""
+      },
+      {
+        "name": "click:item",
+        "description": ""
+      },
+      {
+        "name": "update:modelValue",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "name",
+        "description": "",
+        "bindings": [
+          {
+            "name": "name"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "ListUrl",
+    "description": "",
+    "props": [
+      {
+        "name": "title",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "url",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "isCopy",
+        "required": false,
+        "type": "boolean",
+        "default": "true"
+      }
+    ]
+  },
+  {
+    "name": "ListDetail",
+    "description": "",
+    "props": [
+      {
+        "name": "label",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "content",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "variant",
+        "required": false,
+        "type": "string",
+        "default": "'small'",
+        "values": [
+          "small",
+          "big"
+        ]
+      },
+      {
+        "name": "alignment",
+        "required": false,
+        "type": "string",
+        "default": "'horizontal'",
+        "values": [
+          "horizontal",
+          "vertical"
+        ]
+      },
+      {
+        "name": "showCopyTooltip",
+        "required": false,
+        "type": "boolean",
+        "default": "true"
+      }
+    ],
+    "slots": [
+      {
+        "name": "content",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "InfoCard",
+    "description": "",
+    "props": [
+      {
+        "name": "isLoading",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "title",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "titleIcon",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "titleIconTooltip",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "titleClass",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "transparent",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "hover",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "shadow",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "noData",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "noDataDescription",
+        "required": false,
+        "type": "string"
+      }
+    ],
+    "slots": [
+      {
+        "name": "header",
+        "description": ""
+      },
+      {
+        "name": "default",
+        "description": ""
+      },
+      {
+        "name": "footer",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "ProgressBar",
+    "description": "",
+    "props": [
+      {
+        "name": "steps",
+        "required": true,
+        "type": "number"
+      },
+      {
+        "name": "currentStep",
+        "required": false,
+        "type": "number",
+        "default": "1"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "type": "string"
+      }
+    ]
+  },
+  {
+    "name": "FloatContent",
+    "description": "",
+    "props": [
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "isClose",
+        "required": false,
+        "type": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "title",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "description",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "dropdownOptions",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "dropdownProps",
+        "required": false,
+        "type": "object",
+        "default": "{}"
+      },
+      {
+        "name": "position",
+        "required": false,
+        "type": "string",
+        "default": "'right'",
+        "values": [
+          "left",
+          "right"
+        ]
+      }
+    ],
+    "events": [
+      {
+        "name": "update:model-value",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "header",
+        "description": ""
+      },
+      {
+        "name": "title",
+        "description": ""
+      },
+      {
+        "name": "description",
+        "description": ""
+      },
+      {
+        "name": "bottom",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "HorizontalProgressbar",
+    "description": "",
+    "props": [
+      {
+        "name": "label",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "max",
+        "required": false,
+        "type": "number",
+        "default": "0"
+      },
+      {
+        "name": "current",
+        "required": false,
+        "type": "number",
+        "default": "0"
+      }
+    ]
+  },
+  {
+    "name": "OcOnboardingListItem",
+    "description": "",
+    "props": [
+      {
+        "name": "title",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "description",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "buttonOptions",
+        "required": false,
+        "type": "object",
+        "default": "{}"
+      },
+      {
+        "name": "status",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "number",
+        "required": false,
+        "type": "number",
+        "default": "1"
+      },
+      {
+        "name": "isButtonVisible",
+        "required": false,
+        "type": "boolean",
+        "default": "true"
+      }
+    ],
+    "slots": [
+      {
+        "name": "default",
+        "description": ""
+      },
+      {
+        "name": "action",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "OcOnboardingRecap",
+    "description": "",
+    "props": [
+      {
+        "name": "title",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "subtitle",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "state",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "headerButton",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "items",
+        "required": false,
+        "type": "array"
+      },
+      {
+        "name": "noHeader",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "flat",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "contentClasses",
+        "required": false,
+        "type": "string"
+      }
+    ],
+    "slots": [
+      {
+        "name": "default",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "OcAccountVerificationContent",
+    "description": "",
+    "props": [
+      {
+        "name": "title",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "subtitle",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "buttons",
+        "required": false,
+        "type": "array"
+      },
+      {
+        "name": "headerButton",
+        "required": false,
+        "type": "array"
+      },
+      {
+        "name": "hasFooter",
+        "required": false,
+        "type": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "footerClasses",
+        "required": false,
+        "type": "string"
+      }
+    ],
+    "slots": [
+      {
+        "name": "default",
+        "description": ""
+      },
+      {
+        "name": "footer",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "OcAccountVerificationBox",
+    "description": "",
+    "props": [
+      {
+        "name": "title",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "icon",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "description",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "chips",
+        "required": false,
+        "type": "array"
+      },
+      {
+        "name": "active",
+        "required": false,
+        "type": "array"
+      }
+    ],
+    "slots": [
+      {
+        "name": "title",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "NewTable",
+    "description": "",
+    "props": [
+      {
+        "name": "options",
+        "required": true,
+        "type": "object"
+      },
+      {
+        "name": "rowKey",
+        "required": false,
+        "type": "string|func",
+        "default": "'id'"
+      },
+      {
+        "name": "selected",
+        "required": false,
+        "type": "array",
+        "default": "[]"
+      },
+      {
+        "name": "selectedIndex",
+        "required": false,
+        "type": "number",
+        "default": "-1"
+      },
+      {
+        "name": "isLoading",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:selected",
+        "description": ""
+      },
+      {
+        "name": "click:row",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "before",
+        "description": ""
+      },
+      {
+        "name": "`header-${header.key}-left-tooltip`",
+        "description": "",
+        "bindings": [
+          {
+            "name": "name"
+          }
+        ]
+      },
+      {
+        "name": "`header-${header.key}-tooltip`",
+        "description": "",
+        "bindings": [
+          {
+            "name": "name"
+          }
+        ]
+      },
+      {
+        "name": "name",
+        "description": "",
+        "bindings": [
+          {
+            "name": "name"
+          }
+        ]
+      },
+      {
+        "name": "after-rows",
+        "description": ""
+      },
+      {
+        "name": "empty",
+        "description": ""
+      },
+      {
+        "name": "after",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "OcRowItemData",
+    "description": "",
+    "props": [
+      {
+        "name": "items",
+        "required": false,
+        "type": "array"
+      }
+    ],
+    "events": [
+      {
+        "name": "copy",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "Accordion",
+    "description": "",
+    "props": [
+      {
+        "name": "header",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "headerStyle",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "body",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "bodyStyle",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "icon",
+        "required": false,
+        "type": "string",
+        "default": "'chevron-down'"
+      },
+      {
+        "name": "showIcon",
+        "required": false,
+        "type": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "isAnimated",
+        "required": false,
+        "type": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "isExpandable",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "isDisabled",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:isExpandable",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "header",
+        "description": ""
+      },
+      {
+        "name": "body",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "OnboardingAccordion",
+    "description": "",
+    "props": [
+      {
+        "name": "description",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "title",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "isBorder",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "variant",
+        "required": false,
+        "type": "string",
+        "default": "'current'",
+        "values": [
+          "completed",
+          "not_completed",
+          "current",
+          "partially_completed",
+          "pending",
+          "error"
+        ]
+      }
+    ],
+    "slots": [
+      {
+        "name": "button-group",
+        "description": ""
+      },
+      {
+        "name": "default",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "OnboardingProductOption",
+    "description": "",
+    "props": [
+      {
+        "name": "productImageUrl",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "name": "selectable",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "size",
+        "required": false,
+        "type": "string",
+        "default": "'small'",
+        "values": [
+          "small",
+          "medium"
+        ]
+      },
+      {
+        "name": "title",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "description",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      }
+    ],
+    "slots": [
+      {
+        "name": "default",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "Tabs",
+    "description": "",
+    "props": [
+      {
+        "name": "variant",
+        "required": false,
+        "type": "string",
+        "default": "'default'",
+        "values": [
+          "default",
+          "pills"
+        ]
+      },
+      {
+        "name": "tabs",
+        "required": false,
+        "type": "array"
+      },
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "string|array"
+      },
+      {
+        "name": "maxCount",
+        "required": false,
+        "type": "number"
+      },
+      {
+        "name": "isArrows",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isDisabled",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "direction",
+        "required": false,
+        "type": "string",
+        "default": "'horizontal'",
+        "values": [
+          "horizontal",
+          "vertical"
+        ]
+      },
+      {
+        "name": "isFullWidth",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isBig",
+        "required": false,
+        "type": "boolean"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "tab.value",
+        "description": "",
+        "bindings": [
+          {
+            "name": "name"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "PaymentTab",
+    "description": "",
+    "props": [
+      {
+        "name": "tab",
+        "required": true,
+        "type": "object"
+      },
+      {
+        "name": "modelValue",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "logo",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "Steps",
+    "description": "",
+    "props": [
+      {
+        "name": "steps",
+        "required": false,
+        "type": "array",
+        "default": "[]"
+      },
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "number",
+        "default": "0"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:model-value",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "default",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "Step",
+    "description": "",
+    "props": [
+      {
+        "name": "title",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "value",
+        "required": false,
+        "type": "string|number",
+        "default": "''"
+      },
+      {
+        "name": "isCurrent",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "isCompleted",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      }
+    ]
+  },
+  {
+    "name": "Variants",
+    "description": "",
+    "props": [
+      {
+        "name": "variants",
+        "required": false,
+        "type": "array",
+        "default": "[]"
+      },
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "string|number",
+        "default": "''"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "name",
+        "description": "",
+        "bindings": [
+          {
+            "name": "name"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Variant",
+    "description": "",
+    "props": [
+      {
+        "name": "icon",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "isActive",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "isDisabled",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "iconOptions",
+        "required": false,
+        "type": "object",
+        "default": "null"
+      },
+      {
+        "name": "value",
+        "required": false,
+        "type": "string|number",
+        "default": "''"
+      }
+    ],
+    "slots": [
+      {
+        "name": "`${value}-description`",
+        "description": "",
+        "bindings": [
+          {
+            "name": "name"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "SwitchTabs",
+    "description": "",
+    "props": [
+      {
+        "name": "options",
+        "required": true,
+        "type": "array"
+      },
+      {
+        "name": "activeOption",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      }
+    ],
+    "events": [
+      {
+        "name": "select",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "Header",
+    "description": "",
+    "slots": [
+      {
+        "name": "default",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "SubHeader",
+    "description": "",
+    "slots": [
+      {
+        "name": "default",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "HeaderLeft",
+    "description": "",
+    "slots": [
+      {
+        "name": "default",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "HeaderCenter",
+    "description": "",
+    "props": [
+      {
+        "name": "isSaved",
+        "required": false,
+        "type": "boolean"
+      }
+    ],
+    "events": [
+      {
+        "name": "back",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "default",
+        "description": ""
+      },
+      {
+        "name": "before",
+        "description": ""
+      },
+      {
+        "name": "after",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "HeaderRight",
+    "description": "",
+    "props": [
+      {
+        "name": "primaryProps",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "secondaryProps",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "isSecondaryButtonVisible",
+        "required": false,
+        "type": "boolean",
+        "default": "true"
+      }
+    ],
+    "events": [
+      {
+        "name": "cancel",
+        "description": ""
+      },
+      {
+        "name": "save",
+        "description": ""
+      },
+      {
+        "name": "addition-click",
+        "description": ""
+      },
+      {
+        "name": "dropdown-action",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "default",
+        "description": ""
+      },
+      {
+        "name": "before",
+        "description": ""
+      },
+      {
+        "name": "primary-button",
+        "description": ""
+      },
+      {
+        "name": "after",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "TabToSelect",
+    "description": "",
+    "props": [
+      {
+        "name": "menus",
+        "required": false,
+        "type": "array"
+      },
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "string"
+      }
+    ],
+    "events": [
+      {
+        "name": "changePath",
+        "description": ""
+      },
+      {
+        "name": "update:modelValue",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "Checklist",
+    "description": "",
+    "props": [
+      {
+        "name": "index",
+        "required": true,
+        "type": "number"
+      },
+      {
+        "name": "label",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "name": "completed",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "active",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "actionButton",
+        "required": false,
+        "type": "object"
+      }
+    ]
+  },
+  {
+    "name": "PageTitle",
+    "description": "",
+    "props": [
+      {
+        "name": "title",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "name": "description",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "titleClass",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "copyValue",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "primaryButtonProps",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "secondaryButtonProps",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "tooltipOptions",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "chipProps",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "isCopy",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isBack",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "isMobileCombineButtons",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "isLoading",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      }
+    ],
+    "events": [
+      {
+        "name": "back",
+        "description": ""
+      },
+      {
+        "name": "changeTab",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "title",
+        "description": ""
+      },
+      {
+        "name": "description",
+        "description": ""
+      },
+      {
+        "name": "right",
+        "description": ""
+      },
+      {
+        "name": "mobile-amount",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "PrimaryActions",
+    "description": "",
+    "props": [
+      {
+        "name": "primaryActions",
+        "required": false,
+        "type": "object"
+      }
+    ],
+    "events": [
+      {
+        "name": "copy",
+        "description": ""
+      },
+      {
+        "name": "click:primaryActionsDropdown",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "PageTitleRight",
+    "description": "",
+    "props": [
+      {
+        "name": "primaryButtonProps",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "secondaryButtonProps",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "isLoading",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      }
+    ]
+  },
+  {
+    "name": "Sidebar",
+    "description": "",
+    "props": [
+      {
+        "name": "class",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "isExpanded",
+        "required": false,
+        "type": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "sidebarMenu",
+        "required": false,
+        "type": "array"
+      },
+      {
+        "name": "displayName",
+        "required": false,
+        "type": "string"
+      }
+    ],
+    "events": [
+      {
+        "name": "redirect",
+        "description": ""
+      },
+      {
+        "name": "user-click",
+        "description": ""
+      },
+      {
+        "name": "support-click",
+        "description": ""
+      },
+      {
+        "name": "changeExpanded",
+        "description": ""
+      },
+      {
+        "name": "click:sidebar-icon",
+        "description": ""
+      },
+      {
+        "name": "changeExpandedMenus",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "before",
+        "description": "",
+        "bindings": [
+          {
+            "name": "is-expanded"
+          }
+        ]
+      },
+      {
+        "name": "after",
+        "description": "",
+        "bindings": [
+          {
+            "name": "is-expanded"
+          }
+        ]
+      },
+      {
+        "name": "banner",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "SidebarSubmenu",
+    "description": "",
+    "props": [
+      {
+        "name": "isExpanded",
+        "required": false,
+        "type": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "isExpandedSidebar",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "menu",
+        "required": false,
+        "type": "object"
+      }
+    ],
+    "slots": [
+      {
+        "name": "label",
+        "description": "",
+        "bindings": [
+          {
+            "name": "menu"
+          },
+          {
+            "name": "submenu"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "AccountSetup",
+    "description": "",
+    "props": [
+      {
+        "name": "isExpanded",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "progress",
+        "required": false,
+        "type": "number",
+        "default": "0"
+      },
+      {
+        "name": "isPending",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "paymentStatus",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "payoutStatus",
+        "required": false,
+        "type": "object"
+      }
+    ]
+  },
+  {
+    "name": "SidebarHead",
+    "description": "",
+    "props": [
+      {
+        "name": "label",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "isSidebarExpanded",
+        "required": false,
+        "type": "boolean"
+      }
+    ],
+    "slots": [
+      {
+        "name": "default",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "SideBarMenu",
+    "description": "",
+    "props": [
+      {
+        "name": "icon",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "isActive",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isExpanded",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isMenuExpanded",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isChildren",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isBeta",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isNew",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isTryIt",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isShowBadge",
+        "required": false,
+        "type": "boolean",
+        "default": "true"
+      }
+    ],
+    "events": [
+      {
+        "name": "close-menu",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "default",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "SidebarSubMenuItem",
+    "description": "",
+    "props": [
+      {
+        "name": "label",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "isActive",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isBeta",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isNew",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isTryIt",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isExpanded",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isShowBadge",
+        "required": false,
+        "type": "boolean",
+        "default": "true"
+      }
+    ]
+  },
+  {
+    "name": "SidebarFooter",
+    "description": "",
+    "props": [
+      {
+        "name": "isExpanded",
+        "required": false,
+        "type": "boolean"
+      }
+    ],
+    "slots": [
+      {
+        "name": "default",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "SidebarFeatureBanners",
+    "description": "",
+    "props": [
+      {
+        "name": "isStacked",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "title",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "description",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      }
+    ],
+    "events": [
+      {
+        "name": "close",
+        "description": ""
+      },
+      {
+        "name": "redirect",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "AccountSetupProgress",
+    "description": "",
+    "props": [
+      {
+        "name": "value",
+        "required": false,
+        "type": "number",
+        "default": "0"
+      },
+      {
+        "name": "infoLabel",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      }
+    ],
+    "events": [
+      {
+        "name": "redirect",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "SubSidebar",
+    "description": "",
+    "props": [
+      {
+        "name": "title",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "menu",
+        "required": false,
+        "type": "array",
+        "default": "[]"
+      },
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      }
+    ],
+    "events": [
+      {
+        "name": "titleClick",
+        "description": ""
+      },
+      {
+        "name": "update:modelValue",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "EmptyPage",
+    "description": "",
+    "props": [
+      {
+        "name": "isButton",
+        "required": false,
+        "type": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "title",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "description",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "isUpgrade",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "containerClass",
+        "required": false,
+        "type": "array|string"
+      },
+      {
+        "name": "upgradeLabel",
+        "required": false,
+        "type": "string",
+        "default": "'Upgrade now'"
+      },
+      {
+        "name": "addButtonLabel",
+        "required": false,
+        "type": "string",
+        "default": "'Add new'"
+      },
+      {
+        "name": "addButtonIcon",
+        "required": false,
+        "type": "string",
+        "default": "'plus'"
+      },
+      {
+        "name": "icon",
+        "required": false,
+        "type": "string",
+        "default": "'document'"
+      },
+      {
+        "name": "size",
+        "required": false,
+        "type": "string",
+        "default": "'default'",
+        "values": [
+          "large",
+          "default",
+          "small"
+        ]
+      },
+      {
+        "name": "hideBadge",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "secondaryButton",
+        "required": false,
+        "type": "object",
+        "default": "() => null"
+      }
+    ],
+    "events": [
+      {
+        "name": "click:button",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "icon",
+        "description": ""
+      },
+      {
+        "name": "description",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "AdditionalContent",
+    "description": "",
+    "props": [
+      {
+        "name": "mainLink",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "balanceContainerClass",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "userId",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "chipVariant",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "chipLabel",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "additionalTitle",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "primaryActions",
+        "required": false,
+        "type": "object",
+        "default": "null"
+      },
+      {
+        "name": "overviewActiveTab",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "customerCardVariant",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "customer",
+        "required": false,
+        "type": "object",
+        "default": "null"
+      },
+      {
+        "name": "customerIsHover",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "customerIsEdit",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "variant",
+        "required": false,
+        "type": "string",
+        "default": "'default'",
+        "values": [
+          "default",
+          "dynamic",
+          "balance"
+        ]
+      },
+      {
+        "name": "boxes",
+        "required": false,
+        "type": "array",
+        "default": "[]"
+      },
+      {
+        "name": "isCustomer",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "isLoading",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "overviewItems",
+        "required": false,
+        "type": "array",
+        "default": "[]"
+      },
+      {
+        "name": "overviewTabs",
+        "required": false,
+        "type": "array",
+        "default": "[]"
+      },
+      {
+        "name": "secondaryButtonProps",
+        "required": false,
+        "type": "object",
+        "default": "null"
+      },
+      {
+        "name": "moreButtonProps",
+        "required": false,
+        "type": "object",
+        "default": "null"
+      },
+      {
+        "name": "dropdownProps",
+        "required": false,
+        "type": "object",
+        "default": "{}"
+      },
+      {
+        "name": "dropdownItems",
+        "required": false,
+        "type": "array",
+        "default": "[]"
+      },
+      {
+        "name": "paymentMethods",
+        "required": false,
+        "type": "array",
+        "default": "[]"
+      },
+      {
+        "name": "additionalStyling",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "href",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      }
+    ],
+    "events": [
+      {
+        "name": "addCustomer",
+        "description": ""
+      },
+      {
+        "name": "editCustomer",
+        "description": ""
+      },
+      {
+        "name": "changeTab",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "name",
+        "description": "",
+        "bindings": [
+          {
+            "name": "name"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "InfoCardButton",
+    "description": "",
+    "props": [
+      {
+        "name": "isActive",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isLoading",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "title",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "content",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "isDropdown",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "chipOptions",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "dropdownOptions",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "countryIso",
+        "required": false,
+        "type": "string"
+      }
+    ]
+  },
+  {
+    "name": "Skeleton",
+    "description": ""
+  },
+  {
+    "name": "FeatureOverviewCard",
+    "description": "",
+    "props": [
+      {
+        "name": "title",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "name": "description",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "features",
+        "required": false,
+        "type": "array",
+        "default": "[]"
+      }
+    ]
+  },
+  {
+    "name": "SandboxBanner",
+    "description": "",
+    "props": [
+      {
+        "name": "title",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "chipProps",
+        "required": false,
+        "type": "object",
+        "default": "() => null"
+      },
+      {
+        "name": "buttonProps",
+        "required": false,
+        "type": "object",
+        "default": "() => null"
+      }
+    ]
+  },
+  {
+    "name": "TopBanner",
+    "description": "",
+    "props": [
+      {
+        "name": "chipProps",
+        "required": false,
+        "type": "object",
+        "default": "null"
+      },
+      {
+        "name": "secondaryButton",
+        "required": false,
+        "type": "object",
+        "default": "null"
+      },
+      {
+        "name": "title",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "rawHtml",
+        "required": false,
+        "type": "string",
+        "default": "null"
+      },
+      {
+        "name": "buttonLabel",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "titleClass",
+        "required": false,
+        "type": "string"
+      }
+    ],
+    "events": [
+      {
+        "name": "click:button",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "Box",
+    "description": "",
+    "props": [
+      {
+        "name": "icon",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "width",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "height",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "variant",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "title",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "description",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "isActive",
+        "required": false,
+        "type": "boolean"
+      }
+    ]
+  },
+  {
+    "name": "OcSection",
+    "description": "",
+    "props": [
+      {
+        "name": "title",
+        "required": false,
+        "type": "string"
+      }
+    ],
+    "slots": [
+      {
+        "name": "header",
+        "description": ""
+      },
+      {
+        "name": "header-right",
+        "description": ""
+      },
+      {
+        "name": "default",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "AuthenticationOption",
+    "description": "",
+    "props": [
+      {
+        "name": "icon",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "width",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "height",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "iconClass",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "title",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "isActive",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "chipProps",
+        "required": false,
+        "type": "object"
+      }
+    ]
+  },
+  {
+    "name": "VerificationOption",
+    "description": "",
+    "props": [
+      {
+        "name": "title",
+        "required": false,
+        "type": "string",
+        "default": "'Enter form manually'"
+      },
+      {
+        "name": "chipOptions",
+        "required": false,
+        "type": "object",
+        "default": "null"
+      },
+      {
+        "name": "icon",
+        "required": false,
+        "type": "string",
+        "default": "'check-2'"
+      },
+      {
+        "name": "isActive",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      }
+    ],
+    "slots": [
+      {
+        "name": "title",
+        "description": ""
+      },
+      {
+        "name": "content",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "Chip",
+    "description": "",
+    "props": [
+      {
+        "name": "variant",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "type",
+        "required": false,
+        "type": "string",
+        "default": "'background'"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "icon",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "iconSize",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "iconTooltip",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "closable",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "truncate",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "iconProps",
+        "required": false,
+        "type": "object"
+      }
+    ],
+    "events": [
+      {
+        "name": "remove",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "default",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "Snackbar",
+    "description": "",
+    "props": [
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "color",
+        "required": false,
+        "type": "string",
+        "default": "'default'"
+      },
+      {
+        "name": "content",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "icon",
+        "required": false,
+        "type": "string",
+        "default": "'filled-check'"
+      },
+      {
+        "name": "showIcon",
+        "required": false,
+        "type": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "dismissible",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "isFloating",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "isRawHtml",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "position",
+        "required": false,
+        "type": "string",
+        "default": "'top-center'"
+      },
+      {
+        "name": "transitionName",
+        "required": false,
+        "type": "string",
+        "default": "'slide-from-top'"
+      },
+      {
+        "name": "title",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "description",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "secondaryButton",
+        "required": false,
+        "type": "object",
+        "default": "() => null"
+      },
+      {
+        "name": "primaryButton",
+        "required": false,
+        "type": "object",
+        "default": "() => null"
+      },
+      {
+        "name": "size",
+        "required": false,
+        "type": "string",
+        "default": "'default'",
+        "values": [
+          "default",
+          "big",
+          "small"
+        ]
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "default",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "Banner",
+    "description": "",
+    "props": [
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "color",
+        "required": false,
+        "type": "string",
+        "default": "'default'"
+      },
+      {
+        "name": "content",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "icon",
+        "required": false,
+        "type": "string",
+        "default": "'filled-check'"
+      },
+      {
+        "name": "showIcon",
+        "required": false,
+        "type": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "dismissible",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "transitionName",
+        "required": false,
+        "type": "string",
+        "default": "'slide-from-top'"
+      },
+      {
+        "name": "title",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "title",
+        "description": ""
+      },
+      {
+        "name": "default",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "ShareIcon",
+    "description": "",
+    "props": [
+      {
+        "name": "text",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "icon",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "isOnlyIcon",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "tooltipOptions",
+        "required": false,
+        "type": "object"
+      }
+    ]
+  },
+  {
+    "name": "Tag",
+    "description": "",
+    "props": [
+      {
+        "name": "variant",
+        "required": false,
+        "type": "string",
+        "default": "'warning'"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      }
+    ]
+  },
+  {
+    "name": "Avatar",
+    "description": "",
+    "props": [
+      {
+        "name": "size",
+        "required": false,
+        "type": "number",
+        "default": "32",
+        "values": [
+          64,
+          48,
+          40,
+          32,
+          28,
+          24
+        ]
+      },
+      {
+        "name": "type",
+        "required": false,
+        "type": "string",
+        "default": "'default'",
+        "values": [
+          "business",
+          "default",
+          "image"
+        ]
+      }
+    ],
+    "slots": [
+      {
+        "name": "default",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "Icon",
+    "description": "",
+    "props": [
+      {
+        "name": "path",
+        "required": false,
+        "type": "string",
+        "default": "'/icons/orchidui'"
+      },
+      {
+        "name": "name",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "name": "width",
+        "required": false,
+        "type": "string|number",
+        "default": "'24'"
+      },
+      {
+        "name": "height",
+        "required": false,
+        "type": "string|number",
+        "default": "'24'"
+      }
+    ]
+  },
+  {
+    "name": "Dropdown",
+    "description": "",
+    "props": [
+      {
+        "name": "distance",
+        "required": false,
+        "type": "number",
+        "default": "4"
+      },
+      {
+        "name": "skidding",
+        "required": false,
+        "type": "number",
+        "default": "0"
+      },
+      {
+        "name": "isDisabled",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "menuClasses",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "placement",
+        "required": false,
+        "type": "string",
+        "default": "'bottom-start'"
+      },
+      {
+        "name": "popperOptions",
+        "required": false,
+        "type": "object",
+        "default": "{}"
+      },
+      {
+        "name": "maxMenuHeight",
+        "required": false,
+        "type": "number"
+      },
+      {
+        "name": "popperStyle",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "popperClass",
+        "required": false,
+        "type": "string|array|object"
+      },
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "preventClickOutside",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isAttachToBody",
+        "required": false,
+        "type": "boolean"
+      }
+    ],
+    "events": [
+      {
+        "name": "scroll",
+        "description": ""
+      },
+      {
+        "name": "update:modelValue",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "default",
+        "description": ""
+      },
+      {
+        "name": "menu",
+        "description": "",
+        "bindings": [
+          {
+            "name": "is-popover-open"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "DropdownItem",
+    "description": "",
+    "props": [
+      {
+        "name": "variant",
+        "required": false,
+        "type": "string",
+        "default": "'default'"
+      },
+      {
+        "name": "icon",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "iconClasses",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "text",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "subText",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "iconProps",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "isBeta",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isNew",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isTryIt",
+        "required": false,
+        "type": "boolean"
+      }
+    ],
+    "slots": [
+      {
+        "name": "badge",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "Tooltip",
+    "description": "",
+    "props": [
+      {
+        "name": "popperClass",
+        "required": false,
+        "type": "string",
+        "default": "'bg-oc-bg-light'"
+      },
+      {
+        "name": "distance",
+        "required": false,
+        "type": "string|number",
+        "default": "5"
+      },
+      {
+        "name": "skidding",
+        "required": false,
+        "type": "number",
+        "default": "0"
+      },
+      {
+        "name": "transitionName",
+        "required": false,
+        "type": "string",
+        "default": "'fade'"
+      },
+      {
+        "name": "hideAfter",
+        "required": false,
+        "type": "number"
+      },
+      {
+        "name": "popperOptions",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "trigger",
+        "required": false,
+        "type": "string",
+        "default": "'hover'",
+        "values": [
+          "hover",
+          "click"
+        ]
+      },
+      {
+        "name": "position",
+        "required": false,
+        "type": "string",
+        "default": "'bottom'",
+        "values": [
+          "top-start",
+          "top",
+          "top-end",
+          "right-start",
+          "right",
+          "right-end",
+          "bottom-start",
+          "bottom",
+          "bottom-end",
+          "left-start",
+          "left",
+          "left-end"
+        ]
+      },
+      {
+        "name": "arrowHidden",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "isPopover",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "isAttachToBody",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      }
+    ],
+    "slots": [
+      {
+        "name": "default",
+        "description": ""
+      },
+      {
+        "name": "popper",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "Modal",
+    "description": "",
+    "props": [
+      {
+        "name": "isBorderless",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "footerClass",
+        "required": false,
+        "type": "string",
+        "default": "'justify-end'"
+      },
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "title",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "description",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "persistent",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "isCloseIcon",
+        "required": false,
+        "type": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "cancelButtonProps",
+        "required": false,
+        "type": "object",
+        "default": "{\n  label: 'Cancel',\n  variant: 'secondary'\n}"
+      },
+      {
+        "name": "preventClose",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "isHeaderVisible",
+        "required": false,
+        "type": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "isFooterVisible",
+        "required": false,
+        "type": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "modalId",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "confirmButtonProps",
+        "required": false,
+        "type": "object",
+        "default": "{\n  label: 'OK',\n  class: 'min-w-[112px]'\n}"
+      },
+      {
+        "name": "size",
+        "required": false,
+        "type": "string",
+        "default": "'default'",
+        "values": [
+          "default",
+          "medium",
+          "small"
+        ]
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "description": ""
+      },
+      {
+        "name": "confirm",
+        "description": ""
+      },
+      {
+        "name": "cancel",
+        "description": ""
+      },
+      {
+        "name": "click:outside",
+        "description": ""
+      },
+      {
+        "name": "content-scroll",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "header",
+        "description": ""
+      },
+      {
+        "name": "description",
+        "description": ""
+      },
+      {
+        "name": "default",
+        "description": ""
+      },
+      {
+        "name": "footer",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "OcModalPage",
+    "description": "",
+    "props": [
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "persistent",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "isCloseIconVisible",
+        "required": false,
+        "type": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "isBackButtonVisible",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "preventClose",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "contentClass",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "description": ""
+      },
+      {
+        "name": "back",
+        "description": ""
+      },
+      {
+        "name": "click:outside",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "top",
+        "description": ""
+      },
+      {
+        "name": "default",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "ConfirmationModal",
+    "description": "",
+    "props": [
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "title",
+        "required": false,
+        "type": "string",
+        "default": "'Are you sure?'"
+      },
+      {
+        "name": "iconClass",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "description",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "variant",
+        "required": false,
+        "type": "string",
+        "default": "'delete'"
+      },
+      {
+        "name": "icon",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "labelConfirm",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "labelCancel",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "isLoading",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "hideIcon",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "persistent",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "contentClass",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "confirmButtonProps",
+        "required": false,
+        "type": "object"
+      }
+    ],
+    "events": [
+      {
+        "name": "confirm",
+        "description": ""
+      },
+      {
+        "name": "cancel",
+        "description": ""
+      },
+      {
+        "name": "update:model-value",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "description",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "Popper",
+    "description": "",
+    "props": [
+      {
+        "name": "placement",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "name": "popperOptions",
+        "required": false,
+        "type": "object",
+        "description": "Options passed to the `popper` from `https://popper.js.org/docs/v2/modifiers/`"
+      },
+      {
+        "name": "popperStyle",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "skidding",
+        "required": false,
+        "type": "number",
+        "default": "0"
+      },
+      {
+        "name": "distance",
+        "required": false,
+        "type": "string|number",
+        "default": "5"
+      },
+      {
+        "name": "isFlipEnabled",
+        "required": false,
+        "type": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "popperClass",
+        "required": false,
+        "type": "string|array|object",
+        "default": "''"
+      },
+      {
+        "name": "isAttachToBody",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      }
+    ],
+    "slots": [
+      {
+        "name": "default",
+        "description": ""
+      },
+      {
+        "name": "popper",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "SupportMenu",
+    "description": "",
+    "props": [
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "title",
+        "required": false,
+        "type": "string",
+        "default": "'Have a question?'"
+      },
+      {
+        "name": "info",
+        "required": false,
+        "type": "string",
+        "default": "\"We're ready to guide you through anything you need!\""
+      },
+      {
+        "name": "confirmButtonProps",
+        "required": false,
+        "type": "object",
+        "default": "{}"
+      },
+      {
+        "name": "topMenu",
+        "required": false,
+        "type": "array",
+        "default": "[]"
+      },
+      {
+        "name": "bottomMenu",
+        "required": false,
+        "type": "array",
+        "default": "[]"
+      },
+      {
+        "name": "questionBtnProps",
+        "required": false,
+        "type": "object",
+        "default": "{}"
+      },
+      {
+        "name": "isPointed",
+        "required": false,
+        "type": "boolean"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "badge",
+        "description": "",
+        "bindings": [
+          {
+            "name": "item"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "CopyTooltip",
+    "description": "",
+    "props": [
+      {
+        "name": "value",
+        "required": false,
+        "type": "string|Blob"
+      },
+      {
+        "name": "tooltipText",
+        "required": false,
+        "type": "string",
+        "default": "'Copied!'"
+      },
+      {
+        "name": "tooltipOptions",
+        "required": false,
+        "type": "object"
+      }
+    ],
+    "slots": [
+      {
+        "name": "default",
+        "description": "",
+        "bindings": [
+          {
+            "name": "is-show"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "WhiteList",
+    "description": "",
+    "props": [
+      {
+        "name": "buttonProps",
+        "required": false,
+        "type": "object",
+        "default": "{}"
+      },
+      {
+        "name": "tagOptions",
+        "required": false,
+        "type": "object",
+        "default": "() => null"
+      },
+      {
+        "name": "title",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "imagePath",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "description",
+        "required": false,
+        "type": "string"
+      }
+    ],
+    "slots": [
+      {
+        "name": "logo",
+        "description": ""
+      },
+      {
+        "name": "bottom",
+        "description": ""
+      },
+      {
+        "name": "footer",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "Theme",
+    "description": "",
+    "props": [
+      {
+        "name": "colorMode",
+        "required": false,
+        "type": "string",
+        "default": "'light'"
+      }
+    ],
+    "slots": [
+      {
+        "name": "default",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "FormBuilder",
+    "description": "",
+    "props": [
+      {
+        "name": "id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "name": "jsonForm",
+        "required": false,
+        "type": "array"
+      },
+      {
+        "name": "grid",
+        "required": false,
+        "type": "object",
+        "default": "null",
+        "description": "Grid needs to be defined in the following format:\n`{`\n  `[Responsive size (xs, sm, md, lg, xl, xxl)]: {`\n    `area: [Grid area definition (names of areas in order)],`\n    `rows: [Count and size of rows i.e: 'auto' | '100%' | ...],`\n    `columns: [Count and size of columns i.e: '33% 33% 33%'],`\n  `}`\n`}`"
+      },
+      {
+        "name": "class",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "errors",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "values",
+        "required": true,
+        "type": "object"
+      },
+      {
+        "name": "logicValues",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "previewMode",
+        "required": false,
+        "type": "string"
+      }
+    ],
+    "events": [
+      {
+        "name": "onUpdate",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "form.type",
+        "description": "",
+        "bindings": [
+          {
+            "name": "name"
+          },
+          {
+            "name": "form-id"
+          },
+          {
+            "name": "form"
+          },
+          {
+            "name": "value"
+          },
+          {
+            "name": "error"
+          },
+          {
+            "name": "on-update"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "DataTable",
+    "description": "",
+    "props": [
+      {
+        "name": "isLoading",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "name": "options",
+        "required": true,
+        "type": "object"
+      },
+      {
+        "name": "filter",
+        "required": false,
+        "type": "object",
+        "default": "{}"
+      },
+      {
+        "name": "selected",
+        "required": false,
+        "type": "array"
+      },
+      {
+        "name": "rowClass",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "rowKey",
+        "required": false,
+        "type": "string|func",
+        "default": "'id'"
+      },
+      {
+        "name": "rowLink",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "isNewTable",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "selectedIndex",
+        "required": false,
+        "type": "number",
+        "default": "-1"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:selected",
+        "description": ""
+      },
+      {
+        "name": "click:row",
+        "description": ""
+      },
+      {
+        "name": "hover:cell",
+        "description": ""
+      },
+      {
+        "name": "filter-open",
+        "description": ""
+      },
+      {
+        "name": "update:filter",
+        "description": ""
+      },
+      {
+        "name": "apply-filter",
+        "description": ""
+      },
+      {
+        "name": "filter-fields-changed",
+        "description": ""
+      },
+      {
+        "name": "filter-removed",
+        "description": ""
+      },
+      {
+        "name": "search-query-changed",
+        "description": ""
+      },
+      {
+        "name": "columns-changed",
+        "description": ""
+      },
+      {
+        "name": "on-table-ready",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "before",
+        "description": ""
+      },
+      {
+        "name": "bulk-actions",
+        "description": "",
+        "bindings": [
+          {
+            "name": "selected-rows"
+          }
+        ]
+      },
+      {
+        "name": "filter-options",
+        "description": ""
+      },
+      {
+        "name": "custom-filter-form",
+        "description": "",
+        "bindings": [
+          {
+            "name": "errors"
+          },
+          {
+            "name": "values"
+          },
+          {
+            "name": "json-form"
+          },
+          {
+            "name": "update-filter"
+          }
+        ]
+      },
+      {
+        "name": "header.key",
+        "description": "",
+        "bindings": [
+          {
+            "name": "name"
+          },
+          {
+            "name": "data"
+          },
+          {
+            "name": "item"
+          }
+        ]
+      },
+      {
+        "name": "`header-${header.key}-tooltip`",
+        "description": "",
+        "bindings": [
+          {
+            "name": "name"
+          },
+          {
+            "name": "data"
+          },
+          {
+            "name": "item"
+          }
+        ]
+      },
+      {
+        "name": "`header-${header.key}-left-tooltip`",
+        "description": "",
+        "bindings": [
+          {
+            "name": "name"
+          },
+          {
+            "name": "data"
+          },
+          {
+            "name": "item"
+          }
+        ]
+      },
+      {
+        "name": "after",
+        "description": ""
+      },
+      {
+        "name": "empty",
+        "description": ""
+      },
+      {
+        "name": "table-header",
+        "description": ""
+      },
+      {
+        "name": "table-body",
+        "description": ""
+      },
+      {
+        "name": "after-rows",
+        "description": ""
+      },
+      {
+        "name": "before-pagination",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "FilterSearch",
+    "description": "",
+    "props": [
+      {
+        "name": "isSearchOnly",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "searchOptions",
+        "required": false,
+        "type": "array"
+      },
+      {
+        "name": "selectedOption",
+        "required": false,
+        "type": "string"
+      }
+    ],
+    "events": [
+      {
+        "name": "addQuery",
+        "description": ""
+      },
+      {
+        "name": "toggle",
+        "description": ""
+      },
+      {
+        "name": "change-search-key",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "FilterSearchFor",
+    "description": "",
+    "props": [
+      {
+        "name": "filters",
+        "required": false,
+        "type": "object",
+        "default": "{}"
+      },
+      {
+        "name": "queries",
+        "required": false,
+        "type": "object",
+        "default": "{}"
+      }
+    ],
+    "events": [
+      {
+        "name": "removeQuery",
+        "description": ""
+      },
+      {
+        "name": "removeAll",
+        "description": ""
+      },
+      {
+        "name": "removeFilter",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "FilterForm",
+    "description": "",
+    "props": [
+      {
+        "name": "id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "name": "jsonForm",
+        "required": false,
+        "type": "array"
+      },
+      {
+        "name": "values",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "actions",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "grid",
+        "required": false,
+        "type": "object",
+        "default": "null"
+      }
+    ],
+    "events": [
+      {
+        "name": "cancel",
+        "description": ""
+      },
+      {
+        "name": "applyFilter",
+        "description": ""
+      },
+      {
+        "name": "filter-fields-changed",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "default",
+        "description": "",
+        "bindings": [
+          {
+            "name": "errors"
+          },
+          {
+            "name": "values"
+          },
+          {
+            "name": "json-form"
+          },
+          {
+            "name": "update-form"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "ComplexCalendar",
+    "description": "",
+    "props": [
+      {
+        "name": "shortcuts",
+        "required": false,
+        "type": "array"
+      },
+      {
+        "name": "cancelButtonProps",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "submitButtonProps",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "object",
+        "default": "{\n  start: new Date(),\n  end: new Date()\n}"
+      },
+      {
+        "name": "countCalendars",
+        "required": false,
+        "type": "number",
+        "default": "2"
+      },
+      {
+        "name": "withFooter",
+        "required": false,
+        "type": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "isRange",
+        "required": false,
+        "type": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "minDate",
+        "required": false,
+        "type": "string|date|number"
+      },
+      {
+        "name": "maxDate",
+        "required": false,
+        "type": "string|date|number"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "ComplexDatePicker",
+    "description": "",
+    "props": [
+      {
+        "name": "shortcuts",
+        "required": false,
+        "type": "array",
+        "default": "[]"
+      },
+      {
+        "name": "cancelButtonProps",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "submitButtonProps",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "calendarProps",
+        "required": false,
+        "type": "object",
+        "description": "Props to pass to the calendar component from https://vcalendar.io/"
+      },
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "object",
+        "default": "{\n  start: new Date(),\n  end: new Date()\n}"
+      },
+      {
+        "name": "formatDate",
+        "required": false,
+        "type": "string",
+        "default": "'DD/MM/YYYY'"
+      },
+      {
+        "name": "countCalendars",
+        "required": false,
+        "type": "number",
+        "default": "2"
+      },
+      {
+        "name": "withFooter",
+        "required": false,
+        "type": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "hint",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "isRequired",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "errorMessage",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "labelIcon",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "tooltipText",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "tooltipOptions",
+        "required": false,
+        "type": "object"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "ModalCropper",
+    "description": "",
+    "props": [
+      {
+        "name": "inputOptions",
+        "required": false,
+        "type": "array"
+      },
+      {
+        "name": "inputOptionValues",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "img",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "maxSize",
+        "required": false,
+        "type": "string|number"
+      }
+    ],
+    "events": [
+      {
+        "name": "changeImage",
+        "description": ""
+      },
+      {
+        "name": "close",
+        "description": ""
+      },
+      {
+        "name": "update:input-options",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "Cropper",
+    "description": "",
+    "props": [
+      {
+        "name": "inputOptions",
+        "required": false,
+        "type": "array"
+      },
+      {
+        "name": "inputOptionValues",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "img",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "maxSize",
+        "required": false,
+        "type": "string|number"
+      },
+      {
+        "name": "isReplaceImage",
+        "required": false,
+        "type": "boolean",
+        "default": "true"
+      }
+    ],
+    "events": [
+      {
+        "name": "changeImage",
+        "description": ""
+      },
+      {
+        "name": "update:input-options",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "Draggable",
+    "description": "",
+    "props": [
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "array"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "description": ""
+      },
+      {
+        "name": "detectMove",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "default",
+        "description": "",
+        "bindings": [
+          {
+            "name": "list"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "DraggableList",
+    "description": "",
+    "props": [
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "array"
+      },
+      {
+        "name": "iconKey",
+        "required": false,
+        "type": "string",
+        "default": "'icon'"
+      },
+      {
+        "name": "isChildren",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "childrenKey",
+        "required": false,
+        "type": "string",
+        "default": "'children'"
+      },
+      {
+        "name": "isLink",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "linkKey",
+        "required": false,
+        "type": "string",
+        "default": "'link'"
+      },
+      {
+        "name": "unmovable",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "enableStatusVariant",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "classes",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "titleWidth",
+        "required": false,
+        "type": "string"
+      }
+    ],
+    "events": [
+      {
+        "name": "detectMove",
+        "description": ""
+      },
+      {
+        "name": "click:element",
+        "description": ""
+      },
+      {
+        "name": "update:modelValue",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "title",
+        "description": "",
+        "bindings": [
+          {
+            "name": "item"
+          }
+        ]
+      },
+      {
+        "name": "before-action",
+        "description": "",
+        "bindings": [
+          {
+            "name": "item"
+          }
+        ]
+      },
+      {
+        "name": "action",
+        "description": "",
+        "bindings": [
+          {
+            "name": "item"
+          }
+        ]
+      },
+      {
+        "name": "action-item",
+        "description": "",
+        "bindings": [
+          {
+            "name": "item"
+          },
+          {
+            "name": "index"
+          }
+        ]
+      },
+      {
+        "name": "content",
+        "description": "",
+        "bindings": [
+          {
+            "name": "item"
+          },
+          {
+            "name": "index"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "EmojiPicker",
+    "description": "",
+    "props": [
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "isDisabled",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "popperOptions",
+        "required": false,
+        "type": "object"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "ThumbnailTheme",
+    "description": "",
+    "props": [
+      {
+        "name": "theme",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "activating",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isProAccount",
+        "required": false,
+        "type": "boolean"
+      }
+    ],
+    "events": [
+      {
+        "name": "preview",
+        "description": ""
+      },
+      {
+        "name": "activate",
+        "description": ""
+      },
+      {
+        "name": "customize",
+        "description": ""
+      },
+      {
+        "name": "publish",
+        "description": ""
+      },
+      {
+        "name": "upgrade",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "ThumbnailSection",
+    "description": "",
+    "props": [
+      {
+        "name": "section",
+        "required": false,
+        "type": "object"
+      }
+    ],
+    "events": [
+      {
+        "name": "customize",
+        "description": ""
+      },
+      {
+        "name": "add",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "SubPlanCard",
+    "description": "",
+    "props": [
+      {
+        "name": "planTier",
+        "required": true,
+        "type": "object"
+      },
+      {
+        "name": "isPlanActive",
+        "required": false,
+        "type": "boolean"
+      }
+    ],
+    "events": [
+      {
+        "name": "select",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "TimePopup",
+    "description": "",
+    "props": [
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "string|date",
+        "default": "() => new Date()"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "TimePicker",
+    "description": "",
+    "props": [
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "string|date"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "hint",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "icon",
+        "required": false,
+        "type": "string",
+        "default": "'time'"
+      },
+      {
+        "name": "preFill",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "placeholder",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "errorMessage",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "isRequired",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "isDisabled",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "labelIcon",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "tooltipText",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "tooltipOptions",
+        "required": false,
+        "type": "object",
+        "default": "{}"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "AccountSetupProgress",
+    "description": "",
+    "props": [
+      {
+        "name": "value",
+        "required": false,
+        "type": "number",
+        "default": "0"
+      },
+      {
+        "name": "infoLabel",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      }
+    ],
+    "events": [
+      {
+        "name": "redirect",
+        "description": ""
+      }
+    ]
+  }
+]
