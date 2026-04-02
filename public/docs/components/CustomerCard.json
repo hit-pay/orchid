@@ -1,0 +1,145 @@
+{
+  "name": "CustomerCard",
+  "description": "Displays customer or beneficiary details in small, big, or float layout variants.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-customercard-occustomercard--docs",
+  "props": {
+    "variant": {
+      "type": "enum",
+      "required": false,
+      "default": "small",
+      "values": [
+        "small",
+        "big",
+        "float"
+      ]
+    },
+    "customer": {
+      "type": "object",
+      "required": false
+    },
+    "isHover": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    },
+    "isEdit": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    },
+    "isClosable": {
+      "type": "boolean",
+      "required": false
+    },
+    "isBeneficiary": {
+      "type": "boolean",
+      "required": false
+    }
+  },
+  "events": {
+    "editCustomer": {
+      "description": ""
+    },
+    "addCustomer": {
+      "description": ""
+    },
+    "closeCustomer": {
+      "description": ""
+    }
+  },
+  "slots": {
+    "bottom": {
+      "description": ""
+    },
+    "leading": {
+      "description": ""
+    }
+  },
+  "rules": [
+    "\"variant\" must be one of: small, big, float"
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "variant": "small",
+        "customer": {
+          "name": "Alex Turner",
+          "email": "alex_turner@arcticmonkey.io",
+          "phone_number": "8373 3739 18",
+          "phone_number_country_code": "65",
+          "address": {
+            "street": "123 Main Street",
+            "city": "Pennsylvania",
+            "state": "Pennsylvania",
+            "postal_code": "12345",
+            "country": "USA"
+          }
+        }
+      }
+    },
+    {
+      "name": "BigVariant",
+      "props": {
+        "variant": "big",
+        "customer": {
+          "name": "Alex Turner",
+          "email": "alex@arcticmonkey.io",
+          "phone_number": "65 8373 3739 18",
+          "address": {
+            "street": "123 Main Street",
+            "city": "Pennsylvania",
+            "state": "Pennsylvania",
+            "postal_code": "12345",
+            "country": "USA"
+          }
+        }
+      }
+    },
+    {
+      "name": "Beneficiary",
+      "props": {
+        "variant": "small",
+        "isBeneficiary": true,
+        "customer": {
+          "name": "Alex Turner",
+          "currency": "SGD",
+          "email": "alex@arcticmonkey.io",
+          "phone_number": "+65 8373 3739 18",
+          "bank_name": "DBS Bank",
+          "bank_account_number": "**** 1234"
+        }
+      }
+    },
+    {
+      "name": "BigBeneficiary",
+      "props": {
+        "variant": "big",
+        "isBeneficiary": true,
+        "customer": {
+          "name": "Alex Turner",
+          "currency": "SGD",
+          "email": "alex@arcticmonkey.io",
+          "bank_name": "DBS Bank",
+          "bank_account_number": "**** 1234"
+        }
+      }
+    },
+    {
+      "name": "Closable",
+      "props": {
+        "variant": "small",
+        "isBeneficiary": true,
+        "isClosable": true,
+        "customer": {
+          "name": "Alex Turner",
+          "currency": "SGD",
+          "email": "alex@arcticmonkey.io",
+          "phone_number": "+65 8373 3739 18",
+          "bank_name": "DBS Bank",
+          "bank_account_number": "**** 1234"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "name": "Chip",
+  "description": "A small status or category badge with variants for color, style (background/transparent/outlined), icon, and close button.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/feedback-chip-occhip--docs",
+  "props": {
+    "variant": {
+      "type": "enum",
+      "required": false,
+      "default": "",
+      "values": [
+        "primary",
+        "accent-1",
+        "accent-2",
+        "accent-3",
+        "success",
+        "warning",
+        "error",
+        "gray",
+        "light-red",
+        "neutral",
+        "tosca"
+      ]
+    },
+    "type": {
+      "type": "enum",
+      "required": false,
+      "default": "background",
+      "values": [
+        "background",
+        "transparent",
+        "outlined"
+      ]
+    },
+    "label": {
+      "type": "string",
+      "required": false
+    },
+    "icon": {
+      "type": "string",
+      "required": false
+    },
+    "iconSize": {
+      "type": "string",
+      "required": false
+    },
+    "iconTooltip": {
+      "type": "string",
+      "required": false
+    },
+    "closable": {
+      "type": "boolean",
+      "required": false
+    },
+    "truncate": {
+      "type": "boolean",
+      "required": false
+    },
+    "iconProps": {
+      "type": "object",
+      "required": false
+    }
+  },
+  "events": {
+    "remove": {
+      "description": ""
+    }
+  },
+  "slots": {
+    "default": {
+      "description": ""
+    }
+  },
+  "rules": [
+    "\"variant\" must be one of: primary, accent-1, accent-2, accent-3, success, warning, error, gray, light-red, neutral, tosca",
+    "\"type\" must be one of: background, transparent, outlined"
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "label": "Primary",
+        "variant": "primary",
+        "type": "background",
+        "closable": false
+      }
+    }
+  ]
+}

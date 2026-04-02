@@ -1,0 +1,55 @@
+{
+  "name": "ComplexCalendar",
+  "description": "A full calendar panel with range selection, shortcuts, and submit/cancel actions.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-complexcalendar-occomplexcalendar--docs",
+  "props": {
+    "shortcuts": {
+      "type": "array",
+      "required": false
+    },
+    "cancelButtonProps": {
+      "type": "object",
+      "required": false
+    },
+    "submitButtonProps": {
+      "type": "object",
+      "required": false
+    },
+    "modelValue": {
+      "type": "object",
+      "required": false,
+      "default": "{\n  start: new Date(),\n  end: new Date()\n}"
+    },
+    "countCalendars": {
+      "type": "number",
+      "required": false,
+      "default": "2"
+    },
+    "withFooter": {
+      "type": "boolean",
+      "required": false,
+      "default": "true"
+    },
+    "isRange": {
+      "type": "boolean",
+      "required": false,
+      "default": "true"
+    },
+    "minDate": {
+      "type": "string|date|number",
+      "required": false
+    },
+    "maxDate": {
+      "type": "string|date|number",
+      "required": false
+    }
+  },
+  "events": {
+    "update:modelValue": {
+      "description": ""
+    }
+  },
+  "slots": {},
+  "rules": [],
+  "examples": []
+}

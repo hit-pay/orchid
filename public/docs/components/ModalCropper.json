@@ -1,0 +1,37 @@
+{
+  "name": "ModalCropper",
+  "description": "A modal-based image cropper with upload and crop controls.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-modalcropper-ocmodalcropper--docs",
+  "props": {
+    "inputOptions": {
+      "type": "array",
+      "required": false
+    },
+    "inputOptionValues": {
+      "type": "object",
+      "required": false
+    },
+    "img": {
+      "type": "string",
+      "required": false
+    },
+    "maxSize": {
+      "type": "string|number",
+      "required": false
+    }
+  },
+  "events": {
+    "changeImage": {
+      "description": ""
+    },
+    "close": {
+      "description": ""
+    },
+    "update:input-options": {
+      "description": ""
+    }
+  },
+  "slots": {},
+  "rules": [],
+  "examples": []
+}

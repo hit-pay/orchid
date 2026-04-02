@@ -1,0 +1,27 @@
+{
+  "name": "Criteria",
+  "description": "A read-only criteria indicator showing a label with a pass/fail state.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-criteria-occriteria--docs",
+  "props": {
+    "modelValue": {
+      "type": "boolean",
+      "required": false
+    },
+    "label": {
+      "type": "string",
+      "required": false
+    }
+  },
+  "events": {},
+  "slots": {},
+  "rules": [],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "modelValue": false,
+        "label": "Text"
+      }
+    }
+  ]
+}

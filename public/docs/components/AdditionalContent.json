@@ -1,0 +1,182 @@
+{
+  "name": "AdditionalContent",
+  "description": "A flexible side panel showing customer info, overview items, payment methods, and action buttons.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-additionalcontent-ocadditionalcontent--docs",
+  "props": {
+    "mainLink": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "balanceContainerClass": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "userId": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "chipVariant": {
+      "type": "enum",
+      "required": false,
+      "default": "",
+      "values": [
+        "accent-1",
+        "accent-2",
+        "success",
+        "warning",
+        "error",
+        "gray"
+      ]
+    },
+    "chipLabel": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "additionalTitle": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "primaryActions": {
+      "type": "object",
+      "required": false,
+      "default": "null"
+    },
+    "overviewActiveTab": {
+      "type": "enum",
+      "required": false,
+      "default": "",
+      "values": [
+        "hitpay",
+        "card"
+      ]
+    },
+    "customerCardVariant": {
+      "type": "enum",
+      "required": false,
+      "default": "",
+      "values": [
+        "small",
+        "big",
+        "float"
+      ]
+    },
+    "customer": {
+      "type": "object",
+      "required": false,
+      "default": "null"
+    },
+    "customerIsHover": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    },
+    "customerIsEdit": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    },
+    "variant": {
+      "type": "enum",
+      "required": false,
+      "default": "default",
+      "values": [
+        "default",
+        "dynamic",
+        "balance"
+      ]
+    },
+    "boxes": {
+      "type": "array",
+      "required": false,
+      "default": "[]"
+    },
+    "isCustomer": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    },
+    "isLoading": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    },
+    "overviewItems": {
+      "type": "array",
+      "required": false,
+      "default": "[]"
+    },
+    "overviewTabs": {
+      "type": "array",
+      "required": false,
+      "default": "[]"
+    },
+    "secondaryButtonProps": {
+      "type": "object",
+      "required": false,
+      "default": "null"
+    },
+    "moreButtonProps": {
+      "type": "object",
+      "required": false,
+      "default": "null"
+    },
+    "dropdownProps": {
+      "type": "object",
+      "required": false,
+      "default": "{}"
+    },
+    "dropdownItems": {
+      "type": "array",
+      "required": false,
+      "default": "[]"
+    },
+    "paymentMethods": {
+      "type": "array",
+      "required": false,
+      "default": "[]"
+    },
+    "additionalStyling": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "href": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    }
+  },
+  "events": {
+    "addCustomer": {
+      "description": ""
+    },
+    "editCustomer": {
+      "description": ""
+    },
+    "changeTab": {
+      "description": ""
+    }
+  },
+  "slots": {
+    "name": {
+      "description": "",
+      "bindings": [
+        {
+          "name": "name"
+        }
+      ]
+    }
+  },
+  "rules": [
+    "\"chipVariant\" must be one of: accent-1, accent-2, success, warning, error, gray",
+    "\"overviewActiveTab\" must be one of: hitpay, card",
+    "\"customerCardVariant\" must be one of: small, big, float",
+    "\"variant\" must be one of: default, dynamic, balance"
+  ],
+  "examples": []
+}

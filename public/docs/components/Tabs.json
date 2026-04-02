@@ -1,0 +1,98 @@
+{
+  "name": "Tabs",
+  "description": "A horizontal or vertical tab bar for switching between named views.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/disclosure-tabs-octabs--docs",
+  "props": {
+    "variant": {
+      "type": "enum",
+      "required": false,
+      "default": "default",
+      "values": [
+        "default",
+        "pills"
+      ]
+    },
+    "tabs": {
+      "type": "array",
+      "required": false
+    },
+    "modelValue": {
+      "type": "string|array",
+      "required": false
+    },
+    "maxCount": {
+      "type": "number",
+      "required": false
+    },
+    "isArrows": {
+      "type": "boolean",
+      "required": false
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "required": false
+    },
+    "direction": {
+      "type": "enum",
+      "required": false,
+      "default": "horizontal",
+      "values": [
+        "horizontal",
+        "vertical"
+      ]
+    },
+    "isFullWidth": {
+      "type": "boolean",
+      "required": false
+    },
+    "isBig": {
+      "type": "boolean",
+      "required": false
+    }
+  },
+  "events": {
+    "update:modelValue": {
+      "description": ""
+    }
+  },
+  "slots": {
+    "tab.value": {
+      "description": "",
+      "bindings": [
+        {
+          "name": "name"
+        }
+      ]
+    }
+  },
+  "rules": [
+    "\"variant\" must be one of: default, pills",
+    "\"direction\" must be one of: horizontal, vertical"
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "variant": "default",
+        "tabs": [
+          {
+            "label": "Overview",
+            "value": "overview"
+          },
+          {
+            "label": "Transactions",
+            "value": "transactions"
+          },
+          {
+            "label": "Settings",
+            "value": "settings"
+          },
+          {
+            "label": "Reports",
+            "value": "reports"
+          }
+        ]
+      }
+    }
+  ]
+}

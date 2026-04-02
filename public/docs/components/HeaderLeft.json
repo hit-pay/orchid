@@ -1,0 +1,14 @@
+{
+  "name": "HeaderLeft",
+  "description": "The left section of a Header component.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-header-ocheaderleft--docs",
+  "props": {},
+  "events": {},
+  "slots": {
+    "default": {
+      "description": ""
+    }
+  },
+  "rules": [],
+  "examples": []
+}

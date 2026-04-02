@@ -1,0 +1,59 @@
+{
+  "name": "OcOverviewPieChart",
+  "description": "A pie chart variant styled for overview/summary widgets.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-charts-overviewpiechart-ocoverviewpiechart--docs",
+  "props": {
+    "chartData": {
+      "type": "array",
+      "required": false
+    },
+    "currency": {
+      "type": "string",
+      "required": false
+    },
+    "additionalOptions": {
+      "type": "object",
+      "required": false,
+      "default": "{}"
+    },
+    "tooltip": {
+      "type": "object",
+      "required": false,
+      "default": "{}"
+    }
+  },
+  "events": {},
+  "slots": {},
+  "rules": [],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "currency": "SGD",
+        "chartData": [
+          {
+            "value": 1048,
+            "name": "Cards",
+            "itemStyle": {
+              "color": "#356DFF"
+            }
+          },
+          {
+            "value": 200,
+            "name": "Paynow",
+            "itemStyle": {
+              "color": "#AEC5FF"
+            }
+          },
+          {
+            "value": 100,
+            "name": "Others",
+            "itemStyle": {
+              "color": "#86FFCC"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

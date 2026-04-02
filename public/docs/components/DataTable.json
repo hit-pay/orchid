@@ -1,0 +1,406 @@
+{
+  "name": "DataTable",
+  "description": "A full-featured data table with integrated filtering, search, pagination, column config, and bulk actions.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datatable-ocdatatable--docs",
+  "props": {
+    "isLoading": {
+      "type": "boolean",
+      "required": false
+    },
+    "id": {
+      "type": "string",
+      "required": true
+    },
+    "options": {
+      "type": "object",
+      "required": true
+    },
+    "filter": {
+      "type": "object",
+      "required": false,
+      "default": "{}"
+    },
+    "selected": {
+      "type": "array",
+      "required": false
+    },
+    "rowClass": {
+      "type": "string",
+      "required": false
+    },
+    "rowKey": {
+      "type": "string|func",
+      "required": false,
+      "default": "id"
+    },
+    "rowLink": {
+      "type": "string",
+      "required": false
+    },
+    "isNewTable": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    },
+    "selectedIndex": {
+      "type": "number",
+      "required": false,
+      "default": "-1"
+    }
+  },
+  "events": {
+    "update:selected": {
+      "description": ""
+    },
+    "click:row": {
+      "description": ""
+    },
+    "hover:cell": {
+      "description": ""
+    },
+    "filter-open": {
+      "description": ""
+    },
+    "update:filter": {
+      "description": ""
+    },
+    "apply-filter": {
+      "description": ""
+    },
+    "filter-fields-changed": {
+      "description": ""
+    },
+    "filter-removed": {
+      "description": ""
+    },
+    "search-query-changed": {
+      "description": ""
+    },
+    "columns-changed": {
+      "description": ""
+    },
+    "on-table-ready": {
+      "description": ""
+    }
+  },
+  "slots": {
+    "before": {
+      "description": ""
+    },
+    "bulk-actions": {
+      "description": "",
+      "bindings": [
+        {
+          "name": "selected-rows"
+        }
+      ]
+    },
+    "filter-options": {
+      "description": ""
+    },
+    "custom-filter-form": {
+      "description": "",
+      "bindings": [
+        {
+          "name": "errors"
+        },
+        {
+          "name": "values"
+        },
+        {
+          "name": "json-form"
+        },
+        {
+          "name": "update-filter"
+        }
+      ]
+    },
+    "header.key": {
+      "description": "",
+      "bindings": [
+        {
+          "name": "name"
+        },
+        {
+          "name": "data"
+        },
+        {
+          "name": "item"
+        }
+      ]
+    },
+    "`header-${header.key}-tooltip`": {
+      "description": "",
+      "bindings": [
+        {
+          "name": "name"
+        },
+        {
+          "name": "data"
+        },
+        {
+          "name": "item"
+        }
+      ]
+    },
+    "`header-${header.key}-left-tooltip`": {
+      "description": "",
+      "bindings": [
+        {
+          "name": "name"
+        },
+        {
+          "name": "data"
+        },
+        {
+          "name": "item"
+        }
+      ]
+    },
+    "after": {
+      "description": ""
+    },
+    "empty": {
+      "description": ""
+    },
+    "table-header": {
+      "description": ""
+    },
+    "table-body": {
+      "description": ""
+    },
+    "after-rows": {
+      "description": ""
+    },
+    "before-pagination": {
+      "description": ""
+    }
+  },
+  "rules": [
+    "Required props: id, options"
+  ],
+  "examples": [
+    {
+      "name": "FilterTabSameKeyFilterDefault",
+      "props": {
+        "options": {
+          "pagination": {
+            "total": 50,
+            "last_page": 20
+          },
+          "filterOptions": {
+            "per_page": {
+              "key": "per_page"
+            },
+            "tabs": {
+              "key": "status",
+              "options": [
+                {
+                  "label": "All",
+                  "value": ""
+                },
+                {
+                  "label": "Filter 01",
+                  "value": [
+                    "1"
+                  ]
+                },
+                {
+                  "label": "Filter 02",
+                  "value": [
+                    "2"
+                  ]
+                },
+                {
+                  "label": "Filter 03",
+                  "value": [
+                    "3"
+                  ]
+                }
+              ]
+            },
+            "form": [
+              {
+                "name": "status",
+                "type": "Select",
+                "props": {
+                  "label": "Select Status",
+                  "hint": "This is a hint text to help user",
+                  "placeholder": "placeholder",
+                  "multiple": true,
+                  "options": [
+                    {
+                      "label": "Option 1",
+                      "value": "1"
+                    },
+                    {
+                      "label": "Option 2",
+                      "value": "2"
+                    },
+                    {
+                      "label": "Option 3",
+                      "value": "3"
+                    },
+                    {
+                      "label": "Option 4",
+                      "value": "4"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "tableOptions": {
+            "headers": [
+              {
+                "key": "image",
+                "variant": "image",
+                "label": "Image",
+                "class": "w-1/2 md:min-w-[5%]"
+              },
+              {
+                "key": "col1",
+                "label": "Table Header",
+                "class": "w-1/2 md:min-w-[20%]"
+              },
+              {
+                "key": "col2",
+                "label": "Table Header",
+                "class": "w-1/2 md:min-w-[10%]"
+              },
+              {
+                "key": "col3",
+                "variant": "content",
+                "label": "Table Header",
+                "title": "col3Title",
+                "href": "col3Url",
+                "class": "w-1/2 md:min-w-[12%]"
+              },
+              {
+                "key": "col4",
+                "label": "Table Header",
+                "class": "w-1/2 md:min-w-[18%]"
+              },
+              {
+                "key": "col5",
+                "label": "Table Header",
+                "class": "w-1/2 md:min-w-[15%]",
+                "variant": "chip",
+                "chipOptions": {
+                  "Label": {
+                    "label": "Label",
+                    "variant": "success",
+                    "icon": "check"
+                  }
+                }
+              },
+              {
+                "key": "col6",
+                "label": "Header",
+                "class": "w-1/2 md:min-w-[10%]"
+              },
+              {
+                "key": "actions",
+                "label": "",
+                "headerVariant": "text",
+                "variant": "icon",
+                "class": "w-1/2 md:min-w-[5%]"
+              }
+            ],
+            "fields": [
+              {
+                "image": "",
+                "imageTitle": "",
+                "imageDescription": "Table Cell column two",
+                "col2": "Table Cell",
+                "col3Title": "Table Cell",
+                "col4": "Table Cell column two",
+                "col5": "Label",
+                "col6": false,
+                "id": "681481e2-08f8-42e8-a31b-096eac84a170"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "WithoutFilter",
+      "props": {
+        "options": {
+          "tableOptions": {
+            "headers": [
+              {
+                "key": "image",
+                "variant": "image",
+                "label": "Image",
+                "class": "w-1/2 md:min-w-[5%]"
+              },
+              {
+                "key": "col1",
+                "label": "Table Header",
+                "class": "w-1/2 md:min-w-[20%]"
+              },
+              {
+                "key": "col2",
+                "label": "Table Header",
+                "class": "w-1/2 md:min-w-[10%]"
+              },
+              {
+                "key": "col3",
+                "variant": "content",
+                "label": "Table Header",
+                "title": "col3Title",
+                "href": "col3Url",
+                "class": "w-1/2 md:min-w-[12%]"
+              },
+              {
+                "key": "col4",
+                "label": "Table Header",
+                "class": "w-1/2 md:min-w-[18%]"
+              },
+              {
+                "key": "col5",
+                "label": "Table Header",
+                "class": "w-1/2 md:min-w-[15%]",
+                "variant": "chip",
+                "chipOptions": {
+                  "Label": {
+                    "label": "Label",
+                    "variant": "success",
+                    "icon": "check"
+                  }
+                }
+              },
+              {
+                "key": "col6",
+                "label": "Header",
+                "class": "w-1/2 md:min-w-[10%]"
+              },
+              {
+                "key": "actions",
+                "label": "",
+                "headerVariant": "text",
+                "variant": "icon",
+                "class": "w-1/2 md:min-w-[5%]"
+              }
+            ],
+            "fields": [
+              {
+                "image": "",
+                "imageTitle": "",
+                "imageDescription": "Table Cell column two",
+                "col2": "Table Cell",
+                "col3Title": "Table Cell",
+                "col4": "Table Cell column two",
+                "col5": "Label",
+                "col6": false,
+                "id": "4df050fe-42ff-4a7b-b6a4-2e192f515443"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

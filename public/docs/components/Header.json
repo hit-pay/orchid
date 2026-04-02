@@ -1,0 +1,65 @@
+{
+  "name": "Header",
+  "description": "The top-level application header shell.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-header-ocheader--docs",
+  "props": {},
+  "events": {},
+  "slots": {
+    "default": {
+      "description": ""
+    }
+  },
+  "rules": [],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "menus": [
+          {
+            "label": "Payments",
+            "value": "payments",
+            "sidebarClass": "layout-payment",
+            "path": "payments",
+            "icon": "online-payment"
+          },
+          {
+            "label": "Point of Sale",
+            "value": "point_of_sale",
+            "sidebarClass": "layout-pos",
+            "path": "point_of_sale",
+            "icon": "pos"
+          },
+          {
+            "label": "Online Store",
+            "value": "online_store",
+            "sidebarClass": "layout-online-store",
+            "path": "online_store",
+            "icon": "online-store"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SubHeaderElement",
+      "props": {
+        "isSaved": true
+      }
+    },
+    {
+      "name": "SubHeaderDropdownElement",
+      "props": {
+        "isSaved": true,
+        "primaryProps": {
+          "label": "Create"
+        },
+        "dropdownOptions": [
+          {
+            "label": "Save as Draft",
+            "icon": "floppy",
+            "action": "save-as-draft"
+          }
+        ]
+      }
+    }
+  ]
+}

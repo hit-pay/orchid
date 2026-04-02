@@ -1,0 +1,66 @@
+{
+  "name": "OcModalPage",
+  "description": "A full-screen modal page with optional back button and close icon.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/overlay-modal-ocmodalpage--docs",
+  "props": {
+    "modelValue": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    },
+    "persistent": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    },
+    "isCloseIconVisible": {
+      "type": "boolean",
+      "required": false,
+      "default": "true"
+    },
+    "isBackButtonVisible": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    },
+    "preventClose": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    },
+    "contentClass": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    }
+  },
+  "events": {
+    "update:modelValue": {
+      "description": ""
+    },
+    "back": {
+      "description": ""
+    },
+    "click:outside": {
+      "description": ""
+    }
+  },
+  "slots": {
+    "top": {
+      "description": ""
+    },
+    "default": {
+      "description": ""
+    }
+  },
+  "rules": [],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "isCloseIconVisible": true,
+        "isBackButtonVisible": true
+      }
+    }
+  ]
+}

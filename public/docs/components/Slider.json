@@ -1,0 +1,72 @@
+{
+  "name": "Slider",
+  "description": "A range or single value slider with configurable min, max, and step.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-slider-ocslider--docs",
+  "props": {
+    "maxLimit": {
+      "type": "number",
+      "required": false,
+      "default": "100"
+    },
+    "minLimit": {
+      "type": "number",
+      "required": false,
+      "default": "0"
+    },
+    "minGap": {
+      "type": "number",
+      "required": false,
+      "default": "0"
+    },
+    "type": {
+      "type": "enum",
+      "required": false,
+      "default": "default",
+      "values": [
+        "default",
+        "range"
+      ]
+    },
+    "modelValue": {
+      "type": "array|number|string",
+      "required": false,
+      "default": "0"
+    },
+    "label": {
+      "type": "string",
+      "required": false
+    },
+    "variant": {
+      "type": "string",
+      "required": false,
+      "default": "default"
+    }
+  },
+  "events": {
+    "update:modelValue": {
+      "description": ""
+    }
+  },
+  "slots": {
+    "min-limit-label": {
+      "description": ""
+    },
+    "max-limit-label": {
+      "description": ""
+    }
+  },
+  "rules": [
+    "\"type\" must be one of: default, range"
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "minGap": 0,
+        "minLimit": 0,
+        "maxLimit": 100,
+        "type": "default"
+      }
+    }
+  ]
+}

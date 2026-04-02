@@ -1,0 +1,119 @@
+{
+  "name": "FormBuilder",
+  "description": "A dynamic form renderer that builds form fields from a JSON schema with grid layout support.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/formbuilder-ocformbuilder--docs",
+  "props": {
+    "id": {
+      "type": "string",
+      "required": true
+    },
+    "jsonForm": {
+      "type": "array",
+      "required": false
+    },
+    "grid": {
+      "type": "object",
+      "required": false,
+      "default": "null",
+      "description": "Grid needs to be defined in the following format:\n`{`\n  `[Responsive size (xs, sm, md, lg, xl, xxl)]: {`\n    `area: [Grid area definition (names of areas in order)],`\n    `rows: [Count and size of rows i.e: 'auto' | '100%' | ...],`\n    `columns: [Count and size of columns i.e: '33% 33% 33%'],`\n  `}`\n`}`"
+    },
+    "class": {
+      "type": "string",
+      "required": false
+    },
+    "errors": {
+      "type": "object",
+      "required": false
+    },
+    "values": {
+      "type": "object",
+      "required": true
+    },
+    "logicValues": {
+      "type": "object",
+      "required": false
+    },
+    "previewMode": {
+      "type": "string",
+      "required": false
+    }
+  },
+  "events": {
+    "onUpdate": {
+      "description": ""
+    }
+  },
+  "slots": {
+    "form.type": {
+      "description": "",
+      "bindings": [
+        {
+          "name": "name"
+        },
+        {
+          "name": "form-id"
+        },
+        {
+          "name": "form"
+        },
+        {
+          "name": "value"
+        },
+        {
+          "name": "error"
+        },
+        {
+          "name": "on-update"
+        }
+      ]
+    }
+  },
+  "rules": [
+    "Required props: id, values"
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "values": {
+          "range_input": [
+            0,
+            100
+          ]
+        },
+        "errors": {
+          "card_input": ""
+        },
+        "grid": {
+          "xs": {
+            "area": "\n          input\n          card_input\n          custom_form_input\n          simple_checkbox_input\n          checkboxes_group\n          input_2\n          custom_form_input_2\n          link_input\n          phone_number_field\n          radio_group\n          radio_group_2\n          select\n          text_area_field\n          range_input\n          time_picker_test\n          date_picker_test\n          date_picker_range_from\n          toggle_field\n        ",
+            "rows": "auto",
+            "columns": "100%"
+          },
+          "sm": {
+            "area": "\n          input\n          card_input\n          custom_form_input\n          simple_checkbox_input\n          checkboxes_group\n          input_2\n          custom_form_input_2\n          link_input\n          phone_number_field\n          radio_group\n          radio_group_2\n          select\n          text_area_field\n          range_input\n          time_picker_test\n          date_picker_test\n          date_picker_range_from\n          toggle_field\n        ",
+            "rows": "auto",
+            "columns": "100%"
+          },
+          "lg": {
+            "area": "\n          input card_input\n          custom_form_input simple_checkbox_input\n          checkboxes_group input_2\n          custom_form_input_2 link_input\n          phone_number_field radio_group\n          radio_group_2 select\n          text_area_field range_input\n          time_picker_test date_picker_test\n          date_picker_range_from toggle_field\n        ",
+            "rows": "auto",
+            "columns": "50% 50%"
+          }
+        }
+      }
+    },
+    {
+      "name": "ShowIfLogic",
+      "props": {
+        "values": {
+          "select_product_from": "all_product",
+          "limit_feature_product": false,
+          "other_value": false,
+          "slider": 10
+        },
+        "errors": {}
+      }
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "name": "OverviewItem",
+  "description": "A single metric card showing a title, value, icon, and optional percentage change.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-overview-ocoverviewitem--docs",
+  "props": {
+    "icon": {
+      "type": "string",
+      "required": false
+    },
+    "title": {
+      "type": "string",
+      "required": false
+    },
+    "tooltip": {
+      "type": "string",
+      "required": false
+    },
+    "percentTooltip": {
+      "type": "string",
+      "required": false
+    },
+    "content": {
+      "type": "string",
+      "required": false
+    },
+    "info": {
+      "type": "boolean",
+      "required": false
+    },
+    "isLoading": {
+      "type": "boolean",
+      "required": false
+    },
+    "percentValue": {
+      "type": "number",
+      "required": false
+    },
+    "tooltipOptions": {
+      "type": "object",
+      "required": false
+    },
+    "iconProps": {
+      "type": "object",
+      "required": false
+    },
+    "isFooter": {
+      "type": "boolean",
+      "required": false
+    },
+    "isTransparent": {
+      "type": "boolean",
+      "required": false
+    }
+  },
+  "events": {},
+  "slots": {
+    "title": {
+      "description": ""
+    },
+    "content": {
+      "description": ""
+    },
+    "footer": {
+      "description": ""
+    }
+  },
+  "rules": [],
+  "examples": []
+}

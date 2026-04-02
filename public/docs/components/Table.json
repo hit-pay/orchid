@@ -1,0 +1,192 @@
+{
+  "name": "Table",
+  "description": "Renders tabular data with support for sorting, row selection, sticky columns, loading skeletons, and customizable cell slots.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-table-octable--docs",
+  "props": {
+    "options": {
+      "type": "object",
+      "required": true
+    },
+    "isLoading": {
+      "type": "boolean",
+      "required": false
+    },
+    "isBorderless": {
+      "type": "boolean",
+      "required": false
+    },
+    "loadingRows": {
+      "type": "number",
+      "required": false,
+      "default": "10"
+    },
+    "selected": {
+      "type": "array",
+      "required": false
+    },
+    "rowKey": {
+      "type": "string|func",
+      "required": false,
+      "default": "id"
+    },
+    "rowClass": {
+      "type": "string|func",
+      "required": false
+    },
+    "isSticky": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    },
+    "isResponsive": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    },
+    "rowLink": {
+      "type": "string",
+      "required": false
+    },
+    "sortBy": {
+      "type": "object",
+      "required": false,
+      "default": "{}"
+    }
+  },
+  "events": {
+    "update:sort-by": {
+      "description": ""
+    },
+    "hover:cell": {
+      "description": ""
+    },
+    "click:row": {
+      "description": ""
+    },
+    "update:selected": {
+      "description": ""
+    }
+  },
+  "slots": {
+    "before": {
+      "description": ""
+    },
+    "table-header": {
+      "description": "",
+      "bindings": [
+        {
+          "name": "fields"
+        },
+        {
+          "name": "headers"
+        },
+        {
+          "name": "is-selectable"
+        },
+        {
+          "name": "is-responsive"
+        },
+        {
+          "name": "select-all-rows"
+        },
+        {
+          "name": "is-scroll-on-start"
+        },
+        {
+          "name": "is-scroll-on-end"
+        }
+      ]
+    },
+    "`header-${header.key}`": {
+      "description": "",
+      "bindings": [
+        {
+          "name": "name"
+        }
+      ]
+    },
+    "table-body": {
+      "description": "",
+      "bindings": [
+        {
+          "name": "fields"
+        },
+        {
+          "name": "headers"
+        },
+        {
+          "name": "is-scroll-on-end"
+        },
+        {
+          "name": "is-scroll-on-start"
+        },
+        {
+          "name": "on-click-row"
+        },
+        {
+          "name": "is-selectable"
+        },
+        {
+          "name": "is-cursor-pointer"
+        },
+        {
+          "name": "is-responsive"
+        },
+        {
+          "name": "is-sticky"
+        },
+        {
+          "name": "row-link"
+        },
+        {
+          "name": "calculate-row-class"
+        }
+      ]
+    },
+    "header.key": {
+      "description": "",
+      "bindings": [
+        {
+          "name": "name"
+        },
+        {
+          "name": "item"
+        },
+        {
+          "name": "data"
+        },
+        {
+          "name": "index"
+        }
+      ]
+    },
+    "extra": {
+      "description": "",
+      "bindings": [
+        {
+          "name": "item"
+        },
+        {
+          "name": "index"
+        }
+      ]
+    },
+    "empty": {
+      "description": ""
+    },
+    "after": {
+      "description": ""
+    }
+  },
+  "rules": [
+    "Required props: options"
+  ],
+  "examples": [
+    {
+      "name": "ExpandingTableStory",
+      "props": {
+        "isAlternative": true
+      }
+    }
+  ]
+}

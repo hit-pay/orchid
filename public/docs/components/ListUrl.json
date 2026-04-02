@@ -1,0 +1,24 @@
+{
+  "name": "ListUrl",
+  "description": "Displays a labelled URL with an optional copy button.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-listitem-components-oclisturl--docs",
+  "props": {
+    "title": {
+      "type": "string",
+      "required": false
+    },
+    "url": {
+      "type": "string",
+      "required": false
+    },
+    "isCopy": {
+      "type": "boolean",
+      "required": false,
+      "default": "true"
+    }
+  },
+  "events": {},
+  "slots": {},
+  "rules": [],
+  "examples": []
+}

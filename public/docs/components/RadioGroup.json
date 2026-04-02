@@ -1,0 +1,66 @@
+{
+  "name": "RadioGroup",
+  "description": "A group of radio buttons with vertical/horizontal layout.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-radiogroup-ocradiogroup--docs",
+  "props": {
+    "alignment": {
+      "type": "enum",
+      "required": false,
+      "default": "vertical",
+      "values": [
+        "vertical",
+        "horizontal"
+      ]
+    },
+    "radio": {
+      "type": "array",
+      "required": false
+    },
+    "label": {
+      "type": "string",
+      "required": false
+    },
+    "wrapperClass": {
+      "type": "string",
+      "required": false
+    },
+    "groupName": {
+      "type": "string",
+      "required": false
+    },
+    "errorMessage": {
+      "type": "string",
+      "required": false
+    },
+    "hint": {
+      "type": "string",
+      "required": false
+    },
+    "modelValue": {
+      "type": "string",
+      "required": false
+    },
+    "isButtonVariant": {
+      "type": "boolean",
+      "required": false
+    },
+    "isButtonVariantWithRadio": {
+      "type": "boolean",
+      "required": false
+    },
+    "isBlock": {
+      "type": "boolean",
+      "required": false
+    }
+  },
+  "events": {
+    "update:modelValue": {
+      "description": ""
+    }
+  },
+  "slots": {},
+  "rules": [
+    "\"alignment\" must be one of: vertical, horizontal"
+  ],
+  "examples": []
+}

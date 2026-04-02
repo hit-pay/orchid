@@ -1,0 +1,45 @@
+{
+  "name": "ThumbnailSection",
+  "description": "A section template card with preview image and add/customize actions.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/storedesign-thumbnailsection-thumbnailsection--docs",
+  "props": {
+    "section": {
+      "type": "object",
+      "required": false
+    }
+  },
+  "events": {
+    "customize": {
+      "description": ""
+    },
+    "add": {
+      "description": ""
+    }
+  },
+  "slots": {},
+  "rules": [],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "sections": [
+          {
+            "name": "section_1",
+            "preview": "/images/section.png",
+            "title": "Section 1"
+          },
+          {
+            "name": "section_2",
+            "preview": "/images/section.png",
+            "title": "Section 2"
+          },
+          {
+            "name": "section_3",
+            "preview": "/images/section.png",
+            "title": "Section 3"
+          }
+        ]
+      }
+    }
+  ]
+}

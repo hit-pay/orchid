@@ -1,0 +1,56 @@
+{
+  "name": "Pagination",
+  "description": "Page navigation control with prev/next and numbered page buttons.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-pagination-ocpagination--docs",
+  "props": {
+    "maxPage": {
+      "type": "string|number",
+      "required": false,
+      "default": "1"
+    },
+    "totalVisible": {
+      "type": "string|number",
+      "required": false,
+      "default": "1"
+    },
+    "modelValue": {
+      "type": "string|number",
+      "required": false,
+      "default": "1"
+    },
+    "isRounded": {
+      "type": "boolean",
+      "required": false
+    },
+    "size": {
+      "type": "enum",
+      "required": false,
+      "values": [
+        "default",
+        "small",
+        "big"
+      ]
+    }
+  },
+  "events": {
+    "update:modelValue": {
+      "description": ""
+    }
+  },
+  "slots": {},
+  "rules": [
+    "\"size\" must be one of: default, small, big"
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "totalVisible": 5,
+        "size": "default",
+        "maxPage": 10,
+        "isRounded": false,
+        "strategy": "default"
+      }
+    }
+  ]
+}

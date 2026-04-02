@@ -1,0 +1,63 @@
+{
+  "name": "TableHeader",
+  "description": "A single table header cell supporting text or checkbox variants, sortable columns, and loading state.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-table-octableheader--docs",
+  "props": {
+    "variant": {
+      "type": "enum",
+      "required": false,
+      "default": "text",
+      "values": [
+        "text",
+        "checkbox"
+      ]
+    },
+    "text": {
+      "type": "string",
+      "required": false
+    },
+    "isPartial": {
+      "type": "boolean",
+      "required": false
+    },
+    "isChecked": {
+      "type": "boolean",
+      "required": false
+    },
+    "isSticky": {
+      "type": "boolean",
+      "required": false
+    },
+    "isLoading": {
+      "type": "boolean",
+      "required": false
+    },
+    "sortBy": {
+      "type": "string",
+      "required": false,
+      "default": "null"
+    },
+    "isSortable": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    }
+  },
+  "events": {
+    "selectAll": {
+      "description": ""
+    },
+    "update:sort-by": {
+      "description": ""
+    }
+  },
+  "slots": {
+    "default": {
+      "description": ""
+    }
+  },
+  "rules": [
+    "\"variant\" must be one of: text, checkbox"
+  ],
+  "examples": []
+}

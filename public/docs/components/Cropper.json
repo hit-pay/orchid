@@ -1,0 +1,47 @@
+{
+  "name": "Cropper",
+  "description": "An inline image cropper with optional replace functionality.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-cropper-occropper--docs",
+  "props": {
+    "inputOptions": {
+      "type": "array",
+      "required": false
+    },
+    "inputOptionValues": {
+      "type": "object",
+      "required": false
+    },
+    "img": {
+      "type": "string",
+      "required": false
+    },
+    "maxSize": {
+      "type": "string|number",
+      "required": false
+    },
+    "isReplaceImage": {
+      "type": "boolean",
+      "required": false,
+      "default": "true"
+    }
+  },
+  "events": {
+    "changeImage": {
+      "description": ""
+    },
+    "update:input-options": {
+      "description": ""
+    }
+  },
+  "slots": {},
+  "rules": [],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "img": "/images/image.jpg",
+        "isReplaceImage": true
+      }
+    }
+  ]
+}

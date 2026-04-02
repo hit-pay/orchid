@@ -1,0 +1,86 @@
+{
+  "name": "Accordion",
+  "description": "A collapsible section with a header and body, supporting animated expand/collapse.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/disclosure-accordion-ocaccordion--docs",
+  "props": {
+    "header": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "headerStyle": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "body": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "bodyStyle": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "icon": {
+      "type": "enum",
+      "required": false,
+      "default": "chevron-down",
+      "values": [
+        "chevron-down",
+        "x",
+        "plus"
+      ]
+    },
+    "showIcon": {
+      "type": "boolean",
+      "required": false,
+      "default": "true"
+    },
+    "isAnimated": {
+      "type": "boolean",
+      "required": false,
+      "default": "true"
+    },
+    "isExpandable": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    }
+  },
+  "events": {
+    "update:isExpandable": {
+      "description": ""
+    }
+  },
+  "slots": {
+    "header": {
+      "description": ""
+    },
+    "body": {
+      "description": ""
+    }
+  },
+  "rules": [
+    "\"icon\" must be one of: chevron-down, x, plus"
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "header": "Additional Information",
+        "body": "Accordion content",
+        "icon": "chevron-down",
+        "showIcon": true,
+        "isAnimated": true,
+        "isDisabled": false
+      }
+    }
+  ]
+}

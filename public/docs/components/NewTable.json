@@ -1,0 +1,167 @@
+{
+  "name": "NewTable",
+  "description": "A modern table component supporting row expansion, selection, loading, and named column slots.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-newtable-ocnewtable--docs",
+  "props": {
+    "options": {
+      "type": "object",
+      "required": true
+    },
+    "rowKey": {
+      "type": "string|func",
+      "required": false,
+      "default": "id"
+    },
+    "selected": {
+      "type": "array",
+      "required": false,
+      "default": "[]"
+    },
+    "selectedIndex": {
+      "type": "number",
+      "required": false,
+      "default": "-1"
+    },
+    "isLoading": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    }
+  },
+  "events": {
+    "update:selected": {
+      "description": ""
+    },
+    "click:row": {
+      "description": ""
+    }
+  },
+  "slots": {
+    "before": {
+      "description": ""
+    },
+    "`header-${header.key}-left-tooltip`": {
+      "description": "",
+      "bindings": [
+        {
+          "name": "name"
+        }
+      ]
+    },
+    "`header-${header.key}-tooltip`": {
+      "description": "",
+      "bindings": [
+        {
+          "name": "name"
+        }
+      ]
+    },
+    "name": {
+      "description": "",
+      "bindings": [
+        {
+          "name": "name"
+        }
+      ]
+    },
+    "after-rows": {
+      "description": ""
+    },
+    "empty": {
+      "description": ""
+    },
+    "after": {
+      "description": ""
+    }
+  },
+  "rules": [
+    "Required props: options"
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "isLoading": false,
+        "options": {
+          "headers": [
+            {
+              "key": "date",
+              "label": "Date",
+              "class": "font-reddit-mono",
+              "minWidth": 200,
+              "tooltip": "Transaction date and time"
+            },
+            {
+              "key": "email",
+              "label": "Email",
+              "variant": "tooltip",
+              "width": 300,
+              "tooltip": true
+            },
+            {
+              "key": "id",
+              "label": "ID",
+              "isCopy": true,
+              "class": "text-oc-text-400"
+            },
+            {
+              "key": "amount",
+              "label": "Amount",
+              "class": "font-reddit-mono font-semibold"
+            },
+            {
+              "key": "method",
+              "label": "Method",
+              "class": "text-oc-text-400"
+            },
+            {
+              "key": "status",
+              "label": "Status"
+            },
+            {
+              "key": "actions",
+              "label": "",
+              "headerClass": "w-[100px]"
+            }
+          ],
+          "fields": [
+            {
+              "date": "2024-03-15T10:23:00.000Z",
+              "email": "john.doe@example.com",
+              "id": "#TXN-001-2024",
+              "amount": "2,234.56",
+              "currency": "SGD",
+              "payment_method": "visa",
+              "last4Digits": "1234",
+              "status": "success"
+            },
+            {
+              "date": "2024-03-14T08:45:00.000Z",
+              "email": "jane.smith@example.com",
+              "id": "#TXN-002-2024",
+              "amount": "1,050.00",
+              "currency": "SGD",
+              "payment_method": "mastercard",
+              "last4Digits": "5678",
+              "status": "neutral",
+              "children": [
+                {
+                  "date": "2024-03-14T08:50:00.000Z",
+                  "email": "jane.smith@example.com",
+                  "id": "#TXN-002A-2024",
+                  "amount": "525.00",
+                  "currency": "SGD",
+                  "payment_method": "mastercard",
+                  "last4Digits": "5678",
+                  "status": "success"
+                }
+              ]
+            }
+          ],
+          "isSelectable": false,
+          "isExpand": true
+        }
+      }
+    }
+  ]
+}

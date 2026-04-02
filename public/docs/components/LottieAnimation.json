@@ -1,0 +1,57 @@
+{
+  "name": "LottieAnimation",
+  "description": "Renders a Lottie JSON animation.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-lottieanimation-oclottieanimation--docs",
+  "props": {
+    "path": {
+      "type": "string",
+      "required": true
+    },
+    "width": {
+      "type": "string",
+      "required": true
+    },
+    "height": {
+      "type": "string",
+      "required": true
+    },
+    "speed": {
+      "type": "number",
+      "required": false,
+      "default": "1"
+    },
+    "loop": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    },
+    "autoplay": {
+      "type": "boolean",
+      "required": false,
+      "default": "true"
+    }
+  },
+  "events": {
+    "error": {
+      "description": ""
+    },
+    "animation-item-changed": {
+      "description": ""
+    }
+  },
+  "slots": {},
+  "rules": [
+    "Required props: path, width, height"
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "path": "/json/lottie-animation/success_report.json",
+        "width": "200",
+        "height": "200",
+        "autoPlay": true
+      }
+    }
+  ]
+}

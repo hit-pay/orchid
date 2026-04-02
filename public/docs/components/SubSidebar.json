@@ -1,0 +1,70 @@
+{
+  "name": "SubSidebar",
+  "description": "A secondary sidebar for sub-navigation within a section.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-subsidebar-ocsubsidebar--docs",
+  "props": {
+    "title": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "menu": {
+      "type": "array",
+      "required": false,
+      "default": "[]"
+    },
+    "modelValue": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    }
+  },
+  "events": {
+    "titleClick": {
+      "description": ""
+    },
+    "update:modelValue": {
+      "description": ""
+    }
+  },
+  "slots": {},
+  "rules": [],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "menu": [
+          {
+            "label": "Sales summary",
+            "value": "sales-summary"
+          },
+          {
+            "label": "Sales trends",
+            "value": "sales-trends"
+          },
+          {
+            "label": "General settings",
+            "value": "general-settings"
+          },
+          {
+            "label": "Analytics",
+            "value": "analytics"
+          },
+          {
+            "label": "SEO",
+            "value": "seo"
+          },
+          {
+            "label": "Multi-currency converter",
+            "value": "multi-currency-converter"
+          },
+          {
+            "label": "Order form customisation",
+            "value": "order-form-customisation"
+          }
+        ],
+        "title": "Title"
+      }
+    }
+  ]
+}

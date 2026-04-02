@@ -1,0 +1,78 @@
+{
+  "name": "ListDetail",
+  "description": "A label-value pair row in horizontal or vertical alignment, with optional copy tooltip.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-listdetail-oclistdetail--docs",
+  "props": {
+    "label": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "content": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "variant": {
+      "type": "enum",
+      "required": false,
+      "default": "small",
+      "values": [
+        "small",
+        "big"
+      ]
+    },
+    "alignment": {
+      "type": "enum",
+      "required": false,
+      "default": "horizontal",
+      "values": [
+        "horizontal",
+        "vertical"
+      ]
+    },
+    "showCopyTooltip": {
+      "type": "boolean",
+      "required": false,
+      "default": "true"
+    }
+  },
+  "events": {},
+  "slots": {
+    "content": {
+      "description": ""
+    }
+  },
+  "rules": [
+    "\"variant\" must be one of: small, big",
+    "\"alignment\" must be one of: horizontal, vertical"
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "variant": "small",
+        "label": "Email",
+        "content": "alex@arcticmonkey.io",
+        "alignment": "horizontal"
+      }
+    },
+    {
+      "name": "Vertical",
+      "props": {
+        "variant": "big",
+        "label": "Alex Turner",
+        "content": "alex@arcticmonkey.io",
+        "alignment": "vertical"
+      }
+    },
+    {
+      "name": "UsingSlot",
+      "props": {
+        "variant": "big",
+        "label": "Alex Turner",
+        "alignment": "vertical"
+      }
+    }
+  ]
+}

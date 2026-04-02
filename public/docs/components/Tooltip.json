@@ -1,0 +1,103 @@
+{
+  "name": "Tooltip",
+  "description": "A hover or click tooltip/popover with configurable placement and content slot.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/overlay-tooltip-octooltip--docs",
+  "props": {
+    "popperClass": {
+      "type": "string",
+      "required": false,
+      "default": "bg-oc-bg-light"
+    },
+    "distance": {
+      "type": "string|number",
+      "required": false,
+      "default": "5"
+    },
+    "skidding": {
+      "type": "number",
+      "required": false,
+      "default": "0"
+    },
+    "transitionName": {
+      "type": "string",
+      "required": false,
+      "default": "fade"
+    },
+    "hideAfter": {
+      "type": "number",
+      "required": false
+    },
+    "popperOptions": {
+      "type": "object",
+      "required": false
+    },
+    "trigger": {
+      "type": "enum",
+      "required": false,
+      "default": "hover",
+      "values": [
+        "hover",
+        "click"
+      ]
+    },
+    "position": {
+      "type": "enum",
+      "required": false,
+      "default": "bottom",
+      "values": [
+        "top-start",
+        "top",
+        "top-end",
+        "right-start",
+        "right",
+        "right-end",
+        "bottom-start",
+        "bottom",
+        "bottom-end",
+        "left-start",
+        "left",
+        "left-end"
+      ]
+    },
+    "arrowHidden": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    },
+    "isPopover": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    },
+    "isAttachToBody": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    }
+  },
+  "events": {},
+  "slots": {
+    "default": {
+      "description": ""
+    },
+    "popper": {
+      "description": ""
+    }
+  },
+  "rules": [
+    "\"trigger\" must be one of: hover, click",
+    "\"position\" must be one of: top-start, top, top-end, right-start, right, right-end, bottom-start, bottom, bottom-end, left-start, left, left-end"
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "position": "bottom",
+        "trigger": "hover",
+        "distance": 10,
+        "skidding": 0,
+        "isAttachToBody": false
+      }
+    }
+  ]
+}

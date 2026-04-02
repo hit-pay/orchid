@@ -1,0 +1,66 @@
+{
+  "name": "OnboardingProgressbar",
+  "description": "A visual progress bar for onboarding completion tracking.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-onboardingprogressbar-oconboardingprogressbar--docs",
+  "props": {
+    "title": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "description": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "value": {
+      "type": "string|number",
+      "required": false,
+      "default": "0"
+    },
+    "chartData": {
+      "type": "array",
+      "required": false,
+      "default": "[]"
+    }
+  },
+  "events": {},
+  "slots": {
+    "description": {
+      "description": ""
+    }
+  },
+  "rules": [],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "value": 50,
+        "title": "We are verifying your account!",
+        "chartData": [
+          {
+            "value": 60,
+            "name": "Primary",
+            "itemStyle": {
+              "color": "#2465DE"
+            }
+          },
+          {
+            "value": 20,
+            "name": "Warning",
+            "itemStyle": {
+              "color": "#FFD47D"
+            }
+          },
+          {
+            "value": 20,
+            "name": "Empty",
+            "itemStyle": {
+              "color": "#F8F9FC"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

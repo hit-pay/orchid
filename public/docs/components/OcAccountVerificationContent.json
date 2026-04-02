@@ -1,0 +1,81 @@
+{
+  "name": "OcAccountVerificationContent",
+  "description": "A page-level container for account verification steps with header, body, and footer slots.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-accountverificationcontent-ocaccountverificationcontent--docs",
+  "props": {
+    "title": {
+      "type": "string",
+      "required": false
+    },
+    "subtitle": {
+      "type": "string",
+      "required": false
+    },
+    "buttons": {
+      "type": "array",
+      "required": false
+    },
+    "headerButton": {
+      "type": "array",
+      "required": false
+    },
+    "hasFooter": {
+      "type": "boolean",
+      "required": false,
+      "default": "true"
+    },
+    "footerClasses": {
+      "type": "string",
+      "required": false
+    }
+  },
+  "events": {},
+  "slots": {
+    "default": {
+      "description": ""
+    },
+    "footer": {
+      "description": ""
+    }
+  },
+  "rules": [],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "title": "Review & submit",
+        "subtitle": "Review all information before submitting your verification",
+        "footerClasses": "justify-between",
+        "buttons": [
+          {
+            "label": "Cancel",
+            "variant": "secondary"
+          },
+          {
+            "label": "Submit",
+            "variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Preview",
+      "props": {
+        "title": "Review & submit",
+        "hasFooter": true,
+        "headerButton": {
+          "label": "Edit",
+          "leftIcon": "pencil",
+          "size": "small"
+        },
+        "footerClasses": "justify-end",
+        "buttons": [
+          {
+            "label": "Save",
+            "variant": "primary"
+          }
+        ]
+      }
+    }
+  ]
+}

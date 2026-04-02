@@ -1,0 +1,30 @@
+{
+  "name": "CodeBlock",
+  "description": "A syntax-highlighted code block for displaying code snippets.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-codeblock-occodeblock--docs",
+  "props": {
+    "jsonObject": {
+      "type": "string",
+      "required": true
+    },
+    "lang": {
+      "type": "string",
+      "required": false,
+      "default": "json"
+    }
+  },
+  "events": {},
+  "slots": {},
+  "rules": [
+    "Required props: jsonObject"
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "lang": "json",
+        "jsonObject": "{\n  \"widget\": {\n    \"debug\": \"on\",\n    \"window\": {\n      \"title\": \"Sample Konfabulator Widget\",\n      \"name\": \"main_window\",\n      \"width\": 500,\n      \"height\": 500\n    },\n    \"image\": {\n      \"src\": \"Images/Sun.png\",\n      \"name\": \"sun1\",\n      \"hOffset\": 250,\n      \"vOffset\": 250,\n      \"alignment\": \"center\"\n    },\n    \"text\": {\n      \"data\": \"Click Here\",\n      \"size\": 36,\n      \"style\": \"bold\",\n      \"name\": \"text1\",\n      \"hOffset\": 250,\n      \"vOffset\": 100,\n      \"alignment\": \"center\",\n      \"onMouseUp\": \"sun1.opacity = (sun1.opacity / 100) * 90;\"\n    }\n  }\n}"
+      }
+    }
+  ]
+}

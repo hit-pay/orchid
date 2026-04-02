@@ -1,0 +1,40 @@
+{
+  "name": "SidebarSubMenuItem",
+  "description": "A child menu item within a SidebarSubmenu.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-sidebar-ocsidebarsubmenuitem--docs",
+  "props": {
+    "label": {
+      "type": "string",
+      "required": false
+    },
+    "isActive": {
+      "type": "boolean",
+      "required": false
+    },
+    "isBeta": {
+      "type": "boolean",
+      "required": false
+    },
+    "isNew": {
+      "type": "boolean",
+      "required": false
+    },
+    "isTryIt": {
+      "type": "boolean",
+      "required": false
+    },
+    "isExpanded": {
+      "type": "boolean",
+      "required": false
+    },
+    "isShowBadge": {
+      "type": "boolean",
+      "required": false,
+      "default": "true"
+    }
+  },
+  "events": {},
+  "slots": {},
+  "rules": [],
+  "examples": []
+}

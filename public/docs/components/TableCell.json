@@ -1,0 +1,112 @@
+{
+  "name": "TableCell",
+  "description": "A single table body cell supporting variants like content, chip, datetime, icon, image, and checkbox.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-table-octablecell--docs",
+  "props": {
+    "isSimple": {
+      "type": "boolean",
+      "required": false
+    },
+    "variant": {
+      "type": "enum",
+      "required": false,
+      "default": "default",
+      "values": [
+        "content",
+        "checkbox",
+        "chip",
+        "datetime",
+        "icon",
+        "image",
+        "empty"
+      ]
+    },
+    "isLast": {
+      "type": "boolean",
+      "required": false
+    },
+    "isCopy": {
+      "type": "boolean",
+      "required": false
+    },
+    "addDescriptionToCopyClipboard": {
+      "type": "boolean",
+      "required": false
+    },
+    "isSelected": {
+      "type": "boolean",
+      "required": false
+    },
+    "data": {
+      "type": "string|number|object|array|boolean",
+      "required": false
+    },
+    "isLoading": {
+      "type": "boolean",
+      "required": false
+    },
+    "chipOptions": {
+      "type": "object",
+      "required": false
+    },
+    "content": {
+      "type": "object",
+      "required": false,
+      "default": "{\n  title: null,\n  description: null\n}"
+    },
+    "datetime": {
+      "type": "string",
+      "required": false
+    },
+    "imageClass": {
+      "type": "string",
+      "required": false,
+      "default": "h-full"
+    },
+    "link": {
+      "type": "string",
+      "required": false
+    }
+  },
+  "events": {
+    "hover:field": {
+      "description": ""
+    },
+    "selected": {
+      "description": ""
+    },
+    "copied": {
+      "description": ""
+    },
+    "click:field": {
+      "description": ""
+    }
+  },
+  "slots": {
+    "default": {
+      "description": ""
+    }
+  },
+  "rules": [
+    "\"variant\" must be one of: content, checkbox, chip, datetime, icon, image, empty"
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "variant": "content",
+        "isSelected": false,
+        "isSimple": true,
+        "isLast": false,
+        "isCopy": false,
+        "isLoading": false,
+        "chipOptions": {},
+        "content": {
+          "title": "",
+          "description": ""
+        },
+        "imageClass": "h-full"
+      }
+    }
+  ]
+}

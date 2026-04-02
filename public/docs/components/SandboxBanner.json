@@ -1,0 +1,43 @@
+{
+  "name": "SandboxBanner",
+  "description": "A top banner indicating the user is in sandbox/test mode.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-sandboxbanner-ocsandboxbanner--docs",
+  "props": {
+    "title": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "chipProps": {
+      "type": "object",
+      "required": false,
+      "default": "() => null"
+    },
+    "buttonProps": {
+      "type": "object",
+      "required": false,
+      "default": "() => null"
+    }
+  },
+  "events": {},
+  "slots": {},
+  "rules": [],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "title": "You are using test data. Real money won't be charged",
+        "chipProps": {
+          "label": "Sandbox Banner",
+          "variant": "light-red"
+        },
+        "buttonProps": {
+          "label": "Read our docs",
+          "isTransparent": true,
+          "rightIcon": "arrow-right",
+          "class": "[&>button]:!text-white !underline underline-offset-2"
+        }
+      }
+    }
+  ]
+}

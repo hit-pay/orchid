@@ -1,0 +1,39 @@
+{
+  "name": "AuthenticationOption",
+  "description": "A selectable authentication method card with icon and active indicator.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-authenticationoption-ocauthenticationoption--docs",
+  "props": {
+    "icon": {
+      "type": "string",
+      "required": false
+    },
+    "width": {
+      "type": "string",
+      "required": false
+    },
+    "height": {
+      "type": "string",
+      "required": false
+    },
+    "iconClass": {
+      "type": "string",
+      "required": false
+    },
+    "title": {
+      "type": "string",
+      "required": false
+    },
+    "isActive": {
+      "type": "boolean",
+      "required": false
+    },
+    "chipProps": {
+      "type": "object",
+      "required": false
+    }
+  },
+  "events": {},
+  "slots": {},
+  "rules": [],
+  "examples": []
+}

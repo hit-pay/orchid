@@ -1,0 +1,63 @@
+{
+  "name": "ExpandingTable",
+  "description": "A tree-structured table that supports collapsible/expandable rows with nested data.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-table-expandingtable-ocexpandingtable--docs",
+  "props": {
+    "total": {
+      "type": "number",
+      "required": false,
+      "default": "0"
+    },
+    "headers": {
+      "type": "array",
+      "required": true
+    },
+    "fields": {
+      "type": "object",
+      "required": true
+    },
+    "isAlternative": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    },
+    "isLoading": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    },
+    "loadingRows": {
+      "type": "number",
+      "required": false,
+      "default": "5"
+    },
+    "isSticky": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    },
+    "gridTemplateColumns": {
+      "type": "string",
+      "required": false,
+      "default": "32px 200px repeat(${headers.length - 1}, minmax(150px, auto)) 32px"
+    }
+  },
+  "events": {},
+  "slots": {
+    "name": {
+      "description": "",
+      "bindings": [
+        {
+          "name": "name"
+        }
+      ]
+    },
+    "total": {
+      "description": ""
+    }
+  },
+  "rules": [
+    "Required props: headers, fields"
+  ],
+  "examples": []
+}

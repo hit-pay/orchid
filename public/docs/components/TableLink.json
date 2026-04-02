@@ -1,0 +1,19 @@
+{
+  "name": "TableLink",
+  "description": "Wraps table cell content in a router-link or anchor.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-table-octablelink--docs",
+  "props": {
+    "link": {
+      "type": "string",
+      "required": false
+    }
+  },
+  "events": {},
+  "slots": {
+    "default": {
+      "description": ""
+    }
+  },
+  "rules": [],
+  "examples": []
+}

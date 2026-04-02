@@ -1,0 +1,94 @@
+{
+  "name": "PhoneInput",
+  "description": "A phone number input with integrated country code selector.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-phoneinput-ocphoneinput--docs",
+  "props": {
+    "countryCodes": {
+      "type": "array",
+      "required": false,
+      "default": "[]"
+    },
+    "initialCountryCode": {
+      "type": "string",
+      "required": false,
+      "default": "sg"
+    },
+    "errorMessage": {
+      "type": "string",
+      "required": false
+    },
+    "modelValue": {
+      "type": "array",
+      "required": false,
+      "default": "['sg', '']"
+    },
+    "placeholder": {
+      "type": "string",
+      "required": false
+    },
+    "hint": {
+      "type": "string",
+      "required": false
+    },
+    "label": {
+      "type": "string",
+      "required": false
+    },
+    "isInlineLabel": {
+      "type": "boolean",
+      "required": false
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "required": false
+    },
+    "shouldParseCountryCode": {
+      "type": "boolean",
+      "required": false
+    },
+    "isRequired": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    },
+    "labelIcon": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "tooltipText": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "tooltipOptions": {
+      "type": "object",
+      "required": false,
+      "default": "{}"
+    },
+    "ai": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    }
+  },
+  "events": {
+    "update:modelValue": {
+      "description": ""
+    }
+  },
+  "slots": {},
+  "rules": [],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "label": "Label",
+        "hint": "This is a hint text to help user.",
+        "placeholder": "Placeholder",
+        "disabled": false,
+        "isRequired": false
+      }
+    }
+  ]
+}

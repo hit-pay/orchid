@@ -1,0 +1,100 @@
+{
+  "name": "BarRaceChart",
+  "description": "An animated bar race chart showing changing rankings over time.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-charts-barracechart-ocbarracechart--docs",
+  "props": {
+    "variant": {
+      "type": "enum",
+      "required": false,
+      "values": [
+        "primary",
+        "purple"
+      ]
+    },
+    "showTooltip": {
+      "type": "boolean",
+      "required": false
+    },
+    "showLegend": {
+      "type": "boolean",
+      "required": false
+    },
+    "showGrid": {
+      "type": "boolean",
+      "required": false
+    },
+    "chartData": {
+      "type": "array",
+      "required": false
+    },
+    "labelData": {
+      "type": "array",
+      "required": false
+    },
+    "legendData": {
+      "type": "array",
+      "required": false
+    },
+    "yAxisFormatter": {
+      "type": "func",
+      "required": false
+    },
+    "tooltipFormatter": {
+      "type": "func",
+      "required": false
+    },
+    "tooltipValueFormatter": {
+      "type": "func",
+      "required": false
+    }
+  },
+  "events": {},
+  "slots": {
+    "legend-item": {
+      "description": "",
+      "bindings": [
+        {
+          "name": "data"
+        }
+      ]
+    }
+  },
+  "rules": [
+    "\"variant\" must be one of: primary, purple"
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "variant": "primary",
+        "showGrid": false,
+        "showTooltip": true,
+        "showLegend": true,
+        "chartData": [
+          62,
+          11,
+          8,
+          6,
+          5,
+          2
+        ],
+        "labelData": [
+          "50%",
+          "23%",
+          "12%",
+          "10%",
+          "8%",
+          "8%"
+        ],
+        "legendData": [
+          "Running shoes",
+          "Women's ribbed top",
+          "Fleece sweatshirt",
+          "Sportswear Tech Fleece",
+          "Joggers",
+          "Joggers"
+        ]
+      }
+    }
+  ]
+}

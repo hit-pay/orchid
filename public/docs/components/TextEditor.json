@@ -1,0 +1,123 @@
+{
+  "name": "TextEditor",
+  "description": "A rich text editor (WYSIWYG) for formatted content input.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-texteditor-octexteditor--docs",
+  "props": {
+    "fontSizes": {
+      "type": "array",
+      "required": true,
+      "description": "The font sizes of the editor."
+    },
+    "initialFontSize": {
+      "type": "string",
+      "required": false,
+      "description": "The initial font size of the editor. (if empty the first item of `fontSizes` will be used, needs to be a value of `fontSizes`)"
+    },
+    "modelValue": {
+      "type": "string",
+      "required": false
+    },
+    "image": {
+      "type": "string",
+      "required": false
+    },
+    "errorMessage": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "label": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "hint": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "isRequired": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    },
+    "labelIcon": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "tooltipText": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "tooltipOptions": {
+      "type": "object",
+      "required": false,
+      "default": "{}"
+    },
+    "variant": {
+      "type": "enum",
+      "required": false,
+      "default": "default",
+      "values": [
+        "default",
+        "text-only"
+      ]
+    },
+    "placeholder": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "isCustomImageUpload": {
+      "type": "boolean",
+      "required": false
+    }
+  },
+  "events": {
+    "update:modelValue": {
+      "description": ""
+    },
+    "update:image": {
+      "description": ""
+    },
+    "uploadImage": {
+      "description": ""
+    }
+  },
+  "slots": {},
+  "rules": [
+    "Required props: fontSizes",
+    "\"variant\" must be one of: default, text-only"
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "label": "Label",
+        "isRequired": true,
+        "fontSizes": [
+          {
+            "label": "Default",
+            "value": "14px"
+          },
+          {
+            "label": "Medium",
+            "value": "16px"
+          },
+          {
+            "label": "Large",
+            "value": "18px"
+          },
+          {
+            "label": "Extra Large",
+            "value": "20px"
+          }
+        ],
+        "initialFontSize": "14px",
+        "placeholder": "Placeholder"
+      }
+    }
+  ]
+}

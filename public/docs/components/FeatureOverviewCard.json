@@ -1,0 +1,54 @@
+{
+  "name": "FeatureOverviewCard",
+  "description": "A card listing product features with icons, used in feature overview or upgrade pages.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-featureoverviewcard-ocfeatureoverviewcard--docs",
+  "props": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "features": {
+      "type": "array",
+      "required": false,
+      "default": "[]"
+    }
+  },
+  "events": {},
+  "slots": {},
+  "rules": [
+    "Required props: title"
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "title": "Title",
+        "description": "Description",
+        "features": [
+          {
+            "title": "Send Money Locally",
+            "icon": "send"
+          },
+          {
+            "title": "International Payments",
+            "icon": "world-money",
+            "comingSoon": true
+          },
+          {
+            "title": "Add Approvers",
+            "icon": "stamp"
+          },
+          {
+            "title": "Try Now",
+            "icon": "bitcoin-growth"
+          }
+        ]
+      }
+    }
+  ]
+}

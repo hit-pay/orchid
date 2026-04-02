@@ -1,0 +1,71 @@
+{
+  "name": "Card",
+  "description": "A dashboard card container with a title and content area.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-card-occard--docs",
+  "props": {
+    "type": {
+      "type": "string",
+      "required": false,
+      "default": "education"
+    },
+    "isFull": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    },
+    "version": {
+      "type": "string",
+      "required": false,
+      "default": "v2"
+    },
+    "title": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "description": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "fullButtonProps": {
+      "type": "object",
+      "required": false,
+      "default": "() => {}"
+    },
+    "hideButtonProps": {
+      "type": "object",
+      "required": false,
+      "default": "() => {}"
+    }
+  },
+  "events": {
+    "hide-all": {
+      "description": ""
+    },
+    "learn-more": {
+      "description": ""
+    }
+  },
+  "slots": {
+    "logo": {
+      "description": ""
+    },
+    "title": {
+      "description": ""
+    },
+    "description": {
+      "description": ""
+    }
+  },
+  "rules": [],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "title": "Beginner guide for Payment Links",
+        "description": "You will learn how to manage (create, update, view) your payment link."
+      }
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "name": "DraggableList",
+  "description": "A styled draggable list with icon, title, action slots, and optional nested children.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-draggable-ocdraggablelist--docs",
+  "props": {
+    "modelValue": {
+      "type": "array",
+      "required": false
+    },
+    "iconKey": {
+      "type": "string",
+      "required": false,
+      "default": "icon"
+    },
+    "isChildren": {
+      "type": "boolean",
+      "required": false
+    },
+    "childrenKey": {
+      "type": "string",
+      "required": false,
+      "default": "children"
+    },
+    "isLink": {
+      "type": "boolean",
+      "required": false
+    },
+    "linkKey": {
+      "type": "string",
+      "required": false,
+      "default": "link"
+    },
+    "unmovable": {
+      "type": "boolean",
+      "required": false
+    },
+    "enableStatusVariant": {
+      "type": "boolean",
+      "required": false
+    },
+    "classes": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "titleWidth": {
+      "type": "string",
+      "required": false
+    }
+  },
+  "events": {
+    "detectMove": {
+      "description": ""
+    },
+    "click:element": {
+      "description": ""
+    },
+    "update:modelValue": {
+      "description": ""
+    }
+  },
+  "slots": {
+    "title": {
+      "description": "",
+      "bindings": [
+        {
+          "name": "item"
+        }
+      ]
+    },
+    "before-action": {
+      "description": "",
+      "bindings": [
+        {
+          "name": "item"
+        }
+      ]
+    },
+    "action": {
+      "description": "",
+      "bindings": [
+        {
+          "name": "item"
+        }
+      ]
+    },
+    "action-item": {
+      "description": "",
+      "bindings": [
+        {
+          "name": "item"
+        },
+        {
+          "name": "index"
+        }
+      ]
+    },
+    "content": {
+      "description": "",
+      "bindings": [
+        {
+          "name": "item"
+        },
+        {
+          "name": "index"
+        }
+      ]
+    }
+  },
+  "rules": [],
+  "examples": []
+}

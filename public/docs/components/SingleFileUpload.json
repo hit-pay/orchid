@@ -1,0 +1,160 @@
+{
+  "name": "SingleFileUpload",
+  "description": "A file upload input for a single file with preview, size limit, and crop support.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-singlefileupload-ocsinglefileupload--docs",
+  "props": {
+    "format": {
+      "type": "string",
+      "required": false,
+      "default": "array"
+    },
+    "modelValue": {
+      "type": "object",
+      "required": false
+    },
+    "isPreview": {
+      "type": "boolean",
+      "required": false
+    },
+    "confirmToRemove": {
+      "type": "boolean",
+      "required": false
+    },
+    "showErrorStyleOnly": {
+      "type": "boolean",
+      "required": false
+    },
+    "isImageOnly": {
+      "type": "boolean",
+      "required": false
+    },
+    "showUploadImageArea": {
+      "type": "boolean",
+      "required": false
+    },
+    "maxSize": {
+      "type": "number",
+      "required": false,
+      "description": "Maximum file size in MB"
+    },
+    "accept": {
+      "type": "string",
+      "required": false
+    },
+    "validateAcceptFileType": {
+      "type": "boolean",
+      "required": false
+    },
+    "errorMessage": {
+      "type": "string",
+      "required": false
+    },
+    "imageClasses": {
+      "type": "string",
+      "required": false
+    },
+    "allowToEdit": {
+      "type": "boolean",
+      "required": false,
+      "default": "true"
+    },
+    "label": {
+      "type": "string",
+      "required": false
+    },
+    "labelClass": {
+      "type": "string",
+      "required": false
+    },
+    "hint": {
+      "type": "string",
+      "required": false
+    },
+    "uploadButtonOptions": {
+      "type": "object",
+      "required": false
+    },
+    "variant": {
+      "type": "enum",
+      "required": false,
+      "default": "upload",
+      "values": [
+        "upload",
+        "url"
+      ],
+      "description": "Variant of input (upload or url)"
+    },
+    "shouldTruncateFileName": {
+      "type": "boolean",
+      "required": false
+    },
+    "isButtonOnly": {
+      "type": "boolean",
+      "required": false
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "required": false
+    },
+    "buttonUploadProps": {
+      "type": "object",
+      "required": false,
+      "default": "{\n  label: 'Upload'\n}"
+    }
+  },
+  "events": {
+    "onOpenEditImage": {
+      "description": ""
+    },
+    "update:modelValue": {
+      "description": ""
+    },
+    "onRemoveFile": {
+      "description": ""
+    },
+    "onExceedMaxFileSize": {
+      "description": ""
+    },
+    "fileExist": {
+      "description": ""
+    },
+    "invalidFileType": {
+      "description": ""
+    },
+    "confirmRemoveFile": {
+      "description": ""
+    }
+  },
+  "slots": {
+    "progress": {
+      "description": "",
+      "bindings": [
+        {
+          "name": "file"
+        }
+      ]
+    },
+    "hint": {
+      "description": ""
+    }
+  },
+  "rules": [
+    "\"variant\" must be one of: upload, url"
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "accept": ".png",
+        "isPreview": false,
+        "isImageOnly": false,
+        "maxSize": 5,
+        "isButtonOnly": true,
+        "buttonUploadProps": {
+          "label": "Upload",
+          "leftIcon": "upload"
+        }
+      }
+    }
+  ]
+}

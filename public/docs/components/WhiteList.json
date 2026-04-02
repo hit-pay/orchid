@@ -1,0 +1,51 @@
+{
+  "name": "WhiteList",
+  "description": "A feature gate card shown when a feature is unavailable for the user's plan.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/overlay-whitelist-ocwhitelist--docs",
+  "props": {
+    "buttonProps": {
+      "type": "object",
+      "required": false,
+      "default": "{}"
+    },
+    "tagOptions": {
+      "type": "object",
+      "required": false,
+      "default": "() => null"
+    },
+    "title": {
+      "type": "string",
+      "required": false
+    },
+    "imagePath": {
+      "type": "string",
+      "required": false
+    },
+    "description": {
+      "type": "string",
+      "required": false
+    }
+  },
+  "events": {},
+  "slots": {
+    "logo": {
+      "description": ""
+    },
+    "bottom": {
+      "description": ""
+    },
+    "footer": {
+      "description": ""
+    }
+  },
+  "rules": [],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "title": "Feature Unavailable",
+        "description": "This feature is not available for your current plan."
+      }
+    }
+  ]
+}

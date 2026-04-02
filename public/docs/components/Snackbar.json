@@ -1,0 +1,139 @@
+{
+  "name": "Snackbar",
+  "description": "A toast notification supporting floating and inline modes, colors, icons, and action buttons.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/feedback-snackbar-ocsnackbar--docs",
+  "props": {
+    "modelValue": {
+      "type": "boolean",
+      "required": false,
+      "default": "true"
+    },
+    "color": {
+      "type": "enum",
+      "required": false,
+      "default": "default",
+      "values": [
+        "default",
+        "primary",
+        "error",
+        "warning",
+        "gray"
+      ]
+    },
+    "content": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "icon": {
+      "type": "enum",
+      "required": false,
+      "default": "filled-check",
+      "values": [
+        "filled-check",
+        "circle",
+        "plus",
+        "x"
+      ]
+    },
+    "showIcon": {
+      "type": "boolean",
+      "required": false,
+      "default": "true"
+    },
+    "dismissible": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    },
+    "isFloating": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    },
+    "isRawHtml": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    },
+    "position": {
+      "type": "string",
+      "required": false,
+      "default": "top-center"
+    },
+    "transitionName": {
+      "type": "string",
+      "required": false,
+      "default": "slide-from-top"
+    },
+    "title": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "description": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "secondaryButton": {
+      "type": "object",
+      "required": false,
+      "default": "() => null"
+    },
+    "primaryButton": {
+      "type": "object",
+      "required": false,
+      "default": "() => null"
+    },
+    "size": {
+      "type": "enum",
+      "required": false,
+      "default": "default",
+      "values": [
+        "default",
+        "big",
+        "small"
+      ]
+    }
+  },
+  "events": {
+    "update:modelValue": {
+      "description": ""
+    }
+  },
+  "slots": {
+    "default": {
+      "description": ""
+    }
+  },
+  "rules": [
+    "\"color\" must be one of: default, primary, error, warning, gray",
+    "\"icon\" must be one of: filled-check, circle, plus, x",
+    "\"size\" must be one of: default, big, small"
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "color": "default",
+        "size": "default",
+        "icon": "filled-check",
+        "title": "Success",
+        "content": "Changes have been successfully saved",
+        "description": "Changes have been successfully saved",
+        "showIcon": true,
+        "isFloating": true,
+        "position": "top-center",
+        "transitionName": "slide-from-top",
+        "dismissible": false,
+        "secondaryButton": {
+          "label": "Action"
+        },
+        "primaryButton": {
+          "label": "Action"
+        }
+      }
+    }
+  ]
+}

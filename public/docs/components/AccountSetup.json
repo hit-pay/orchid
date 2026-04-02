@@ -1,0 +1,32 @@
+{
+  "name": "AccountSetup",
+  "description": "An account setup progress widget shown inside the Sidebar.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-sidebar-ocaccountsetup--docs",
+  "props": {
+    "isExpanded": {
+      "type": "boolean",
+      "required": false
+    },
+    "progress": {
+      "type": "number",
+      "required": false,
+      "default": "0"
+    },
+    "isPending": {
+      "type": "boolean",
+      "required": false
+    },
+    "paymentStatus": {
+      "type": "object",
+      "required": false
+    },
+    "payoutStatus": {
+      "type": "object",
+      "required": false
+    }
+  },
+  "events": {},
+  "slots": {},
+  "rules": [],
+  "examples": []
+}

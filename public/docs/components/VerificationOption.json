@@ -1,0 +1,50 @@
+{
+  "name": "VerificationOption",
+  "description": "A selectable verification method card with icon, chip badge, and active state.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-verificationoption-ocverificationoption--docs",
+  "props": {
+    "title": {
+      "type": "string",
+      "required": false,
+      "default": "Enter form manually"
+    },
+    "chipOptions": {
+      "type": "object",
+      "required": false,
+      "default": "null"
+    },
+    "icon": {
+      "type": "string",
+      "required": false,
+      "default": "check-2"
+    },
+    "isActive": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    }
+  },
+  "events": {},
+  "slots": {
+    "title": {
+      "description": ""
+    },
+    "content": {
+      "description": ""
+    }
+  },
+  "rules": [],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "title": "Enter form manually",
+        "chipOptions": {
+          "label": "2 days verification",
+          "variant": "warning",
+          "icon": "time"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "name": "Checkbox",
+  "description": "A single checkbox input with label, hint, error, and button-variant style.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-checkbox-occheckbox--docs",
+  "props": {
+    "modelValue": {
+      "type": "boolean",
+      "required": false
+    },
+    "isPartial": {
+      "type": "boolean",
+      "required": false
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "required": false
+    },
+    "label": {
+      "type": "string",
+      "required": false
+    },
+    "topLabel": {
+      "type": "string",
+      "required": false
+    },
+    "hint": {
+      "type": "string",
+      "required": false
+    },
+    "errorMessage": {
+      "type": "string",
+      "required": false
+    },
+    "isButtonVariant": {
+      "type": "boolean",
+      "required": false
+    }
+  },
+  "events": {
+    "update:modelValue": {
+      "description": ""
+    }
+  },
+  "slots": {
+    "after": {
+      "description": ""
+    }
+  },
+  "rules": [],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "label": "Text",
+        "topLabel": "Text",
+        "hint": "Text",
+        "isPartial": false,
+        "isDisabled": false
+      }
+    }
+  ]
+}

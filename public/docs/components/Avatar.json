@@ -1,0 +1,49 @@
+{
+  "name": "Avatar",
+  "description": "A user or business avatar in multiple sizes and types (default, business, image).",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/mediaandicons-avatar-ocavatar--docs",
+  "props": {
+    "size": {
+      "type": "enum",
+      "required": false,
+      "default": "32",
+      "values": [
+        64,
+        48,
+        40,
+        32,
+        28,
+        24
+      ]
+    },
+    "type": {
+      "type": "enum",
+      "required": false,
+      "default": "default",
+      "values": [
+        "business",
+        "default",
+        "image"
+      ]
+    }
+  },
+  "events": {},
+  "slots": {
+    "default": {
+      "description": ""
+    }
+  },
+  "rules": [
+    "\"size\" must be one of: 64, 48, 40, 32, 28, 24",
+    "\"type\" must be one of: business, default, image"
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "size": 32,
+        "type": "default"
+      }
+    }
+  ]
+}

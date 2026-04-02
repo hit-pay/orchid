@@ -1,0 +1,40 @@
+{
+  "name": "TableCellContent",
+  "description": "Renders a two-line content cell with a title and optional description, supporting links.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-table-octablecellcontent--docs",
+  "props": {
+    "important": {
+      "type": "boolean",
+      "required": false
+    },
+    "title": {
+      "type": "string",
+      "required": false
+    },
+    "description": {
+      "type": "string",
+      "required": false
+    },
+    "href": {
+      "type": "string",
+      "required": false
+    },
+    "link": {
+      "type": "string",
+      "required": false
+    }
+  },
+  "events": {},
+  "slots": {
+    "description": {
+      "description": "",
+      "bindings": [
+        {
+          "name": "description"
+        }
+      ]
+    }
+  },
+  "rules": [],
+  "examples": []
+}

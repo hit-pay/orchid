@@ -1,0 +1,101 @@
+{
+  "name": "OcOnboardingRecap",
+  "description": "A collapsible recap card for onboarding sections, showing completed field values.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-onboardingrecap-oconboardingrecap--docs",
+  "props": {
+    "title": {
+      "type": "string",
+      "required": false
+    },
+    "subtitle": {
+      "type": "string",
+      "required": false
+    },
+    "state": {
+      "type": "string",
+      "required": false
+    },
+    "headerButton": {
+      "type": "object",
+      "required": false
+    },
+    "items": {
+      "type": "array",
+      "required": false
+    },
+    "noHeader": {
+      "type": "boolean",
+      "required": false
+    },
+    "flat": {
+      "type": "boolean",
+      "required": false
+    },
+    "contentClasses": {
+      "type": "string",
+      "required": false
+    }
+  },
+  "events": {},
+  "slots": {
+    "default": {
+      "description": ""
+    }
+  },
+  "rules": [],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "title": "Business Information",
+        "subtitle": "Your business details",
+        "state": "completed",
+        "headerButton": {
+          "leftIcon": "pencil",
+          "label": "Edit"
+        },
+        "items": [
+          {
+            "label": "Business Type",
+            "value": "Sole-proprietorship"
+          },
+          {
+            "label": "Documents",
+            "value": [
+              "business-registration-certificate.pdf",
+              "electricity-bill.jpg",
+              "alex-id.jpg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "NoHeader",
+      "props": {
+        "title": "Business Information",
+        "subtitle": "Your business details",
+        "state": "completed",
+        "noHeader": true,
+        "headerButton": {
+          "leftIcon": "pencil",
+          "label": "Edit"
+        },
+        "items": [
+          {
+            "label": "Business Type",
+            "value": "Sole-proprietorship"
+          },
+          {
+            "label": "Documents",
+            "value": [
+              "business-registration-certificate.pdf",
+              "electricity-bill.jpg",
+              "alex-id.jpg"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

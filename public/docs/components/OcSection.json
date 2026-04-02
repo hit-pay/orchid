@@ -1,0 +1,32 @@
+{
+  "name": "OcSection",
+  "description": "A content section wrapper with an optional title and header-right slot.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-section-ocsection--docs",
+  "props": {
+    "title": {
+      "type": "string",
+      "required": false
+    }
+  },
+  "events": {},
+  "slots": {
+    "header": {
+      "description": ""
+    },
+    "header-right": {
+      "description": ""
+    },
+    "default": {
+      "description": ""
+    }
+  },
+  "rules": [],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "title": "Get in touch"
+      }
+    }
+  ]
+}

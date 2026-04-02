@@ -1,0 +1,56 @@
+{
+  "name": "OnboardingProductOption",
+  "description": "A selectable product option card with image, title, and description.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/disclosure-onboardingproduct-onboardingproductoption--docs",
+  "props": {
+    "productImageUrl": {
+      "type": "string",
+      "required": true
+    },
+    "selectable": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    },
+    "size": {
+      "type": "enum",
+      "required": false,
+      "default": "small",
+      "values": [
+        "small",
+        "medium"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "description": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    }
+  },
+  "events": {},
+  "slots": {
+    "default": {
+      "description": ""
+    }
+  },
+  "rules": [
+    "Required props: productImageUrl",
+    "\"size\" must be one of: small, medium"
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "productImageUrl": "/images/onboarding/product-images/invoice.svg",
+        "title": "Account Setup",
+        "description": "Complete your personal information and business",
+        "size": "medium"
+      }
+    }
+  ]
+}

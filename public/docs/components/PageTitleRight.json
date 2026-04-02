@@ -1,0 +1,24 @@
+{
+  "name": "PageTitleRight",
+  "description": "The right action area of a PageTitle with primary and secondary buttons.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-pagetitle-ocpagetitleright--docs",
+  "props": {
+    "primaryButtonProps": {
+      "type": "object",
+      "required": false
+    },
+    "secondaryButtonProps": {
+      "type": "object",
+      "required": false
+    },
+    "isLoading": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    }
+  },
+  "events": {},
+  "slots": {},
+  "rules": [],
+  "examples": []
+}

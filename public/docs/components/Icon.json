@@ -1,0 +1,41 @@
+{
+  "name": "Icon",
+  "description": "Renders an SVG icon by name from the OrchidUI icon library.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/mediaandicons-icon-ocicon--docs",
+  "props": {
+    "path": {
+      "type": "string",
+      "required": false,
+      "default": "/icons/orchidui"
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "width": {
+      "type": "string|number",
+      "required": false,
+      "default": "24"
+    },
+    "height": {
+      "type": "string|number",
+      "required": false,
+      "default": "24"
+    }
+  },
+  "events": {},
+  "slots": {},
+  "rules": [
+    "Required props: name"
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "name": "flags/SG",
+        "width": "22",
+        "height": "16"
+      }
+    }
+  ]
+}

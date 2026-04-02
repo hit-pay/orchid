@@ -1,0 +1,63 @@
+{
+  "name": "RangeInput",
+  "description": "A dual numeric input for entering a min/max range.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-rangeinput-ocrangeinput--docs",
+  "props": {
+    "maxLimit": {
+      "type": "string|number",
+      "required": false,
+      "default": "10000"
+    },
+    "minLimit": {
+      "type": "string|number",
+      "required": false,
+      "default": "0"
+    },
+    "minGap": {
+      "type": "string|number",
+      "required": false,
+      "default": "0"
+    },
+    "modelValue": {
+      "type": "array|string",
+      "required": false
+    },
+    "label": {
+      "type": "string",
+      "required": false,
+      "default": "Amount"
+    },
+    "hint": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "errorMessage": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "onlyInput": {
+      "type": "boolean",
+      "required": false
+    }
+  },
+  "events": {
+    "update:modelValue": {
+      "description": ""
+    }
+  },
+  "slots": {},
+  "rules": [],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "maxLimit": 100,
+        "minLimit": 0,
+        "minGap": 0,
+        "onlyInput": true
+      }
+    }
+  ]
+}

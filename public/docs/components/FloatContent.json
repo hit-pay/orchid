@@ -1,0 +1,94 @@
+{
+  "name": "FloatContent",
+  "description": "A floating side panel (left or right) with title, description, and dropdown actions.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-floatcontent-ocfloatcontent--docs",
+  "props": {
+    "modelValue": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    },
+    "isClose": {
+      "type": "boolean",
+      "required": false,
+      "default": "true"
+    },
+    "title": {
+      "type": "string",
+      "required": false
+    },
+    "description": {
+      "type": "string",
+      "required": false
+    },
+    "dropdownOptions": {
+      "type": "object",
+      "required": false
+    },
+    "dropdownProps": {
+      "type": "object",
+      "required": false,
+      "default": "{}"
+    },
+    "position": {
+      "type": "enum",
+      "required": false,
+      "default": "right",
+      "values": [
+        "left",
+        "right"
+      ]
+    }
+  },
+  "events": {
+    "update:model-value": {
+      "description": ""
+    }
+  },
+  "slots": {
+    "header": {
+      "description": ""
+    },
+    "title": {
+      "description": ""
+    },
+    "description": {
+      "description": ""
+    },
+    "bottom": {
+      "description": ""
+    }
+  },
+  "rules": [
+    "\"position\" must be one of: left, right"
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "position": "right",
+        "title": "Transaction detail",
+        "description": "#9a2804fc-74df-4304-a7d7-79d11f9e1db8",
+        "dropdownOptions": {
+          "top": [
+            {
+              "icon": "pencil",
+              "text": "Edit"
+            },
+            {
+              "icon": "eye-open",
+              "text": "View details"
+            }
+          ],
+          "bottom": [
+            {
+              "text": "Delete",
+              "icon": "bin",
+              "iconClasses": "!text-oc-error"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

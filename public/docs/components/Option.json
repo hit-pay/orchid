@@ -1,0 +1,66 @@
+{
+  "name": "Option",
+  "description": "A single option item used inside a Select dropdown.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-select-ocoption--docs",
+  "props": {
+    "label": {
+      "type": "string",
+      "required": false
+    },
+    "subLabel": {
+      "type": "string",
+      "required": false
+    },
+    "isSelected": {
+      "type": "boolean|number",
+      "required": false
+    },
+    "isCheckboxes": {
+      "type": "boolean",
+      "required": false
+    },
+    "isPartial": {
+      "type": "boolean",
+      "required": false
+    },
+    "hasChildren": {
+      "type": "boolean",
+      "required": false
+    },
+    "showChildren": {
+      "type": "boolean",
+      "required": false
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "required": false
+    }
+  },
+  "events": {
+    "select": {
+      "description": ""
+    },
+    "hide:children": {
+      "description": ""
+    },
+    "show:children": {
+      "description": ""
+    }
+  },
+  "slots": {
+    "trailing": {
+      "description": ""
+    },
+    "sub-label": {
+      "description": ""
+    },
+    "leading": {
+      "description": ""
+    },
+    "after": {
+      "description": ""
+    }
+  },
+  "rules": [],
+  "examples": []
+}

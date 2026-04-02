@@ -1,0 +1,89 @@
+{
+  "name": "Dropdown",
+  "description": "A popover dropdown menu attached to a trigger element.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/overlay-dropdown-ocdropdown--docs",
+  "props": {
+    "distance": {
+      "type": "number",
+      "required": false,
+      "default": "4"
+    },
+    "skidding": {
+      "type": "number",
+      "required": false,
+      "default": "0"
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "required": false
+    },
+    "menuClasses": {
+      "type": "string",
+      "required": false
+    },
+    "placement": {
+      "type": "string",
+      "required": false,
+      "default": "bottom-start"
+    },
+    "popperOptions": {
+      "type": "object",
+      "required": false,
+      "default": "{}"
+    },
+    "maxMenuHeight": {
+      "type": "number",
+      "required": false
+    },
+    "popperStyle": {
+      "type": "object",
+      "required": false
+    },
+    "popperClass": {
+      "type": "string|array|object",
+      "required": false
+    },
+    "modelValue": {
+      "type": "boolean",
+      "required": false
+    },
+    "preventClickOutside": {
+      "type": "boolean",
+      "required": false
+    },
+    "isAttachToBody": {
+      "type": "boolean",
+      "required": false
+    }
+  },
+  "events": {
+    "scroll": {
+      "description": ""
+    },
+    "update:modelValue": {
+      "description": ""
+    }
+  },
+  "slots": {
+    "default": {
+      "description": ""
+    },
+    "menu": {
+      "description": "",
+      "bindings": [
+        {
+          "name": "is-popover-open"
+        }
+      ]
+    }
+  },
+  "rules": [],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "distance": 10
+      }
+    }
+  ]
+}

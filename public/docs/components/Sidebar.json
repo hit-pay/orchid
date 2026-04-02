@@ -1,0 +1,67 @@
+{
+  "name": "Sidebar",
+  "description": "The main application sidebar with expandable menus, logo, and footer slots.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-sidebar-ocsidebar--docs",
+  "props": {
+    "class": {
+      "type": "string",
+      "required": false
+    },
+    "isExpanded": {
+      "type": "boolean",
+      "required": false,
+      "default": "true"
+    },
+    "sidebarMenu": {
+      "type": "array",
+      "required": false
+    },
+    "displayName": {
+      "type": "string",
+      "required": false
+    }
+  },
+  "events": {
+    "redirect": {
+      "description": ""
+    },
+    "user-click": {
+      "description": ""
+    },
+    "support-click": {
+      "description": ""
+    },
+    "changeExpanded": {
+      "description": ""
+    },
+    "click:sidebar-icon": {
+      "description": ""
+    },
+    "changeExpandedMenus": {
+      "description": ""
+    }
+  },
+  "slots": {
+    "before": {
+      "description": "",
+      "bindings": [
+        {
+          "name": "is-expanded"
+        }
+      ]
+    },
+    "after": {
+      "description": "",
+      "bindings": [
+        {
+          "name": "is-expanded"
+        }
+      ]
+    },
+    "banner": {
+      "description": ""
+    }
+  },
+  "rules": [],
+  "examples": []
+}

@@ -1,0 +1,76 @@
+{
+  "name": "InfoCard",
+  "description": "A content card with a title, optional loading state, hover effect, and header/footer slots.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-infocard-ocinfocard--docs",
+  "props": {
+    "isLoading": {
+      "type": "boolean",
+      "required": false
+    },
+    "title": {
+      "type": "string",
+      "required": false
+    },
+    "titleIcon": {
+      "type": "string",
+      "required": false
+    },
+    "titleIconTooltip": {
+      "type": "string",
+      "required": false
+    },
+    "titleClass": {
+      "type": "object",
+      "required": false
+    },
+    "transparent": {
+      "type": "boolean",
+      "required": false
+    },
+    "hover": {
+      "type": "boolean",
+      "required": false
+    },
+    "shadow": {
+      "type": "boolean",
+      "required": false
+    },
+    "noData": {
+      "type": "boolean",
+      "required": false
+    },
+    "noDataDescription": {
+      "type": "string",
+      "required": false
+    }
+  },
+  "events": {},
+  "slots": {
+    "header": {
+      "description": ""
+    },
+    "default": {
+      "description": ""
+    },
+    "footer": {
+      "description": ""
+    }
+  },
+  "rules": [],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "title": "Payment Overview",
+        "titleIcon": "information",
+        "titleIconTooltip": "Summary of recent payment activity",
+        "isLoading": false,
+        "transparent": false,
+        "hover": true,
+        "shadow": false,
+        "noData": false,
+        "noDataDescription": "No items on the site yet"
+      }
+    }
+  ]
+}

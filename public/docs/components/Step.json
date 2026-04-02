@@ -1,0 +1,31 @@
+{
+  "name": "Step",
+  "description": "A single step indicator within a Steps component.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/disclosure-steps-ocstep--docs",
+  "props": {
+    "title": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "value": {
+      "type": "string|number",
+      "required": false,
+      "default": ""
+    },
+    "isCurrent": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    },
+    "isCompleted": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    }
+  },
+  "events": {},
+  "slots": {},
+  "rules": [],
+  "examples": []
+}

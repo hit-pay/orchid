@@ -1,0 +1,40 @@
+{
+  "name": "ShareIcon",
+  "description": "An icon button for sharing via a specific channel (e.g. WhatsApp) with a tooltip.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/feedback-shareicon-ocshareicon--docs",
+  "props": {
+    "text": {
+      "type": "string",
+      "required": false
+    },
+    "icon": {
+      "type": "string",
+      "required": false
+    },
+    "isOnlyIcon": {
+      "type": "boolean",
+      "required": false
+    },
+    "tooltipOptions": {
+      "type": "object",
+      "required": false
+    }
+  },
+  "events": {},
+  "slots": {},
+  "rules": [],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "text": "Whatsapp",
+        "icon": "whatsapp",
+        "isOnlyIcon": true,
+        "tooltipOptions": {
+          "position": "bottom",
+          "distance": 9
+        }
+      }
+    }
+  ]
+}

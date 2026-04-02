@@ -1,0 +1,62 @@
+{
+  "name": "OcOnboardingListItem",
+  "description": "An onboarding checklist row with a number badge, status, and action button.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-onboardinglistitem-oconboardinglistitem--docs",
+  "props": {
+    "title": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "description": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "buttonOptions": {
+      "type": "object",
+      "required": false,
+      "default": "{}"
+    },
+    "status": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "number": {
+      "type": "number",
+      "required": false,
+      "default": "1"
+    },
+    "isButtonVisible": {
+      "type": "boolean",
+      "required": false,
+      "default": "true"
+    }
+  },
+  "events": {},
+  "slots": {
+    "default": {
+      "description": ""
+    },
+    "action": {
+      "description": ""
+    }
+  },
+  "rules": [],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "title": "Business verification",
+        "description": "We need to verify your business to get started",
+        "buttonOptions": {
+          "variant": "secondary",
+          "label": "Verify",
+          "status": "",
+          "number": 1
+        }
+      }
+    }
+  ]
+}

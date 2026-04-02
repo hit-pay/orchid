@@ -1,0 +1,119 @@
+{
+  "name": "PageTitle",
+  "description": "A page-level title bar with back button, copy value, chip, and primary/secondary action buttons.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-pagetitle-ocpagetitle--docs",
+  "props": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "titleClass": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "copyValue": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "primaryButtonProps": {
+      "type": "object",
+      "required": false
+    },
+    "secondaryButtonProps": {
+      "type": "object",
+      "required": false
+    },
+    "tooltipOptions": {
+      "type": "object",
+      "required": false
+    },
+    "chipProps": {
+      "type": "object",
+      "required": false
+    },
+    "isCopy": {
+      "type": "boolean",
+      "required": false
+    },
+    "isBack": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    },
+    "isMobileCombineButtons": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    },
+    "isLoading": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    }
+  },
+  "events": {
+    "back": {
+      "description": ""
+    },
+    "changeTab": {
+      "description": ""
+    }
+  },
+  "slots": {
+    "title": {
+      "description": ""
+    },
+    "description": {
+      "description": ""
+    },
+    "right": {
+      "description": ""
+    },
+    "mobile-amount": {
+      "description": ""
+    }
+  },
+  "rules": [
+    "Required props: title"
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "title": "Page Title",
+        "description": "123",
+        "isLoading": false,
+        "primaryButtonProps": {
+          "leftIcon": "plus",
+          "label": "Primary"
+        },
+        "secondaryButtonProps": {
+          "isDropdownOpened": false,
+          "variant": "secondary",
+          "label": "Secondary",
+          "dropdownOptions": [
+            {
+              "name": "bulk_create",
+              "icon": "upload",
+              "text": "Bulk create"
+            },
+            {
+              "name": "download",
+              "icon": "download",
+              "text": "Export"
+            }
+          ]
+        },
+        "isBack": false,
+        "isCopy": false
+      }
+    }
+  ]
+}

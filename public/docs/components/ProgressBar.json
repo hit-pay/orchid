@@ -1,0 +1,35 @@
+{
+  "name": "ProgressBar",
+  "description": "A step-based linear progress bar showing current step out of total steps.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-progressbar-ocprogressbar--docs",
+  "props": {
+    "steps": {
+      "type": "number",
+      "required": true
+    },
+    "currentStep": {
+      "type": "number",
+      "required": false,
+      "default": "1"
+    },
+    "label": {
+      "type": "string",
+      "required": false
+    }
+  },
+  "events": {},
+  "slots": {},
+  "rules": [
+    "Required props: steps"
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "label": "5 step progress bar",
+        "steps": 5,
+        "currentStep": 3
+      }
+    }
+  ]
+}

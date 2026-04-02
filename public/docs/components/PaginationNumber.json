@@ -1,0 +1,28 @@
+{
+  "name": "PaginationNumber",
+  "description": "A single numbered page button used within Pagination.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-pagination-ocpaginationnumber--docs",
+  "props": {
+    "active": {
+      "type": "boolean",
+      "required": false
+    },
+    "isRounded": {
+      "type": "boolean",
+      "required": false
+    },
+    "size": {
+      "type": "string",
+      "required": false,
+      "default": "default"
+    }
+  },
+  "events": {},
+  "slots": {
+    "default": {
+      "description": ""
+    }
+  },
+  "rules": [],
+  "examples": []
+}

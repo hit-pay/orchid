@@ -1,0 +1,73 @@
+{
+  "name": "OcAccountVerificationBox",
+  "description": "A selectable verification option card with icon, description, and chips.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-accountverificationcontent-ocaccountverificationbox--docs",
+  "props": {
+    "title": {
+      "type": "string",
+      "required": false
+    },
+    "icon": {
+      "type": "string",
+      "required": false
+    },
+    "description": {
+      "type": "string",
+      "required": false
+    },
+    "chips": {
+      "type": "array",
+      "required": false
+    },
+    "active": {
+      "type": "array",
+      "required": false
+    }
+  },
+  "events": {},
+  "slots": {
+    "title": {
+      "description": ""
+    }
+  },
+  "rules": [],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "title": "Upload documents",
+        "icon": "upload",
+        "description": "Manually upload your business registration and identity documents.",
+        "chips": [
+          {
+            "label": "3 documents required",
+            "type": "transparent",
+            "variant": "gray",
+            "icon": "document"
+          }
+        ]
+      }
+    },
+    {
+      "name": "HeaderSlot",
+      "props": {
+        "description": "For Singapore users. Instant verification with auto-filled information.",
+        "active": true,
+        "chips": [
+          {
+            "label": "Instant verification",
+            "type": "transparent",
+            "variant": "success",
+            "icon": "document"
+          },
+          {
+            "label": "Secure",
+            "type": "transparent",
+            "variant": "success",
+            "icon": "information"
+          }
+        ]
+      }
+    }
+  ]
+}

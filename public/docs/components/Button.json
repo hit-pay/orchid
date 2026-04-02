@@ -1,0 +1,119 @@
+{
+  "name": "Button",
+  "description": "A primary action button with variants (primary, secondary, destructive), sizes, icons, and loading state.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-button-ocbutton--docs",
+  "props": {
+    "label": {
+      "type": "string",
+      "required": false
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "required": false
+    },
+    "isLoading": {
+      "type": "boolean",
+      "required": false
+    },
+    "leftIcon": {
+      "type": "enum",
+      "required": false,
+      "values": [
+        "circle",
+        "x"
+      ]
+    },
+    "iconClass": {
+      "type": "array|string",
+      "required": false
+    },
+    "additionalAreaIcon": {
+      "type": "enum",
+      "required": false,
+      "values": [
+        "chevron-down",
+        "circle"
+      ]
+    },
+    "isAdditionalArea": {
+      "type": "boolean",
+      "required": false
+    },
+    "rightIcon": {
+      "type": "enum",
+      "required": false,
+      "values": [
+        "plus",
+        "circle"
+      ]
+    },
+    "isActive": {
+      "type": "boolean",
+      "required": false
+    },
+    "isTransparent": {
+      "type": "boolean",
+      "required": false
+    },
+    "isRoundedFull": {
+      "type": "boolean",
+      "required": false
+    },
+    "variant": {
+      "type": "enum",
+      "required": false,
+      "default": "primary",
+      "values": [
+        "primary",
+        "secondary",
+        "destructive"
+      ]
+    },
+    "size": {
+      "type": "enum",
+      "required": false,
+      "default": "default",
+      "values": [
+        "default",
+        "small",
+        "big"
+      ]
+    }
+  },
+  "events": {
+    "addition-click": {
+      "description": ""
+    }
+  },
+  "slots": {
+    "default": {
+      "description": ""
+    },
+    "additional-content": {
+      "description": ""
+    }
+  },
+  "rules": [
+    "\"leftIcon\" must be one of: circle, x",
+    "\"additionalAreaIcon\" must be one of: chevron-down, circle",
+    "\"rightIcon\" must be one of: plus, circle",
+    "\"variant\" must be one of: primary, secondary, destructive",
+    "\"size\" must be one of: default, small, big"
+  ],
+  "examples": [
+    {
+      "name": "Default",
+      "props": {
+        "label": "Button Text",
+        "variant": "primary",
+        "size": "default",
+        "isDisabled": false,
+        "isLoading": false,
+        "isTransparent": false,
+        "isRoundedFull": false,
+        "isAdditionalArea": false,
+        "additionalAreaIcon": "chevron-down"
+      }
+    }
+  ]
+}

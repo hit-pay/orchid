@@ -1,0 +1,35 @@
+{
+  "name": "Checklist",
+  "description": "A single checklist step item with an index number, label, and completion state.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-checklist-occhecklist--docs",
+  "props": {
+    "index": {
+      "type": "number",
+      "required": true
+    },
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "completed": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    },
+    "active": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    },
+    "actionButton": {
+      "type": "object",
+      "required": false
+    }
+  },
+  "events": {},
+  "slots": {},
+  "rules": [
+    "Required props: index, label"
+  ],
+  "examples": []
+}

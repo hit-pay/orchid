@@ -1,0 +1,31 @@
+{
+  "name": "OverviewIcon",
+  "description": "A colored icon badge used inside OverviewItem.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-overview-ocoverviewicon--docs",
+  "props": {
+    "icon": {
+      "type": "string",
+      "required": false,
+      "default": "circle"
+    },
+    "variant": {
+      "type": "string",
+      "required": false,
+      "default": "blue"
+    },
+    "width": {
+      "type": "string",
+      "required": false,
+      "default": "22"
+    },
+    "height": {
+      "type": "string",
+      "required": false,
+      "default": "22"
+    }
+  },
+  "events": {},
+  "slots": {},
+  "rules": [],
+  "examples": []
+}

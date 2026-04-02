@@ -1,0 +1,31 @@
+{
+  "name": "FilterSearchFor",
+  "description": "Displays active search/filter query chips with remove controls.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datatable-ocfiltersearchfor--docs",
+  "props": {
+    "filters": {
+      "type": "object",
+      "required": false,
+      "default": "{}"
+    },
+    "queries": {
+      "type": "object",
+      "required": false,
+      "default": "{}"
+    }
+  },
+  "events": {
+    "removeQuery": {
+      "description": ""
+    },
+    "removeAll": {
+      "description": ""
+    },
+    "removeFilter": {
+      "description": ""
+    }
+  },
+  "slots": {},
+  "rules": [],
+  "examples": []
+}

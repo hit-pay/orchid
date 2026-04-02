@@ -1,0 +1,60 @@
+{
+  "name": "SideBarMenu",
+  "description": "A single menu item in the Sidebar, supporting badges, children, and expanded state.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-sidebar-ocsidebarmenu--docs",
+  "props": {
+    "icon": {
+      "type": "string",
+      "required": false
+    },
+    "label": {
+      "type": "string",
+      "required": false
+    },
+    "isActive": {
+      "type": "boolean",
+      "required": false
+    },
+    "isExpanded": {
+      "type": "boolean",
+      "required": false
+    },
+    "isMenuExpanded": {
+      "type": "boolean",
+      "required": false
+    },
+    "isChildren": {
+      "type": "boolean",
+      "required": false
+    },
+    "isBeta": {
+      "type": "boolean",
+      "required": false
+    },
+    "isNew": {
+      "type": "boolean",
+      "required": false
+    },
+    "isTryIt": {
+      "type": "boolean",
+      "required": false
+    },
+    "isShowBadge": {
+      "type": "boolean",
+      "required": false,
+      "default": "true"
+    }
+  },
+  "events": {
+    "close-menu": {
+      "description": ""
+    }
+  },
+  "slots": {
+    "default": {
+      "description": ""
+    }
+  },
+  "rules": [],
+  "examples": []
+}

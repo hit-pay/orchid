@@ -1,0 +1,86 @@
+{
+  "name": "ColorPickerPopup",
+  "description": "A popover color picker for inline color selection.",
+  "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-colorpicker-components-occolorpickerpopup--docs",
+  "props": {
+    "modelValue": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "type": {
+      "type": "string",
+      "required": false,
+      "default": "HEX8"
+    },
+    "inputType": {
+      "type": "string",
+      "required": false,
+      "default": "HEX"
+    },
+    "theme": {
+      "type": "string",
+      "required": false,
+      "default": "light"
+    },
+    "showColorList": {
+      "type": "boolean",
+      "required": false,
+      "default": "true"
+    },
+    "showEyeDrop": {
+      "type": "boolean",
+      "required": false,
+      "default": "true"
+    },
+    "showAlpha": {
+      "type": "boolean",
+      "required": false,
+      "default": "true"
+    },
+    "showInputMenu": {
+      "type": "boolean",
+      "required": false,
+      "default": "true"
+    },
+    "showInputSet": {
+      "type": "boolean",
+      "required": false,
+      "default": "true"
+    },
+    "disabled": {
+      "type": "boolean",
+      "required": false,
+      "default": "false"
+    },
+    "iconClasses": {
+      "type": "object",
+      "required": false,
+      "default": "{\n  linear: '',\n  radial: '',\n  ruler: '',\n  eyeDroper: '',\n  inputMenu: '',\n  save: '',\n  delete: ''\n}"
+    },
+    "presetColors": {
+      "type": "array",
+      "required": false
+    },
+    "variant": {
+      "type": "string",
+      "required": false,
+      "default": "solid"
+    },
+    "lastUsedColors": {
+      "type": "array",
+      "required": false
+    }
+  },
+  "events": {
+    "update:modelValue": {
+      "description": ""
+    },
+    "last-used-pick": {
+      "description": ""
+    }
+  },
+  "slots": {},
+  "rules": [],
+  "examples": []
+}
