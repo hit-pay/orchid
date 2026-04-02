@@ -196,7 +196,7 @@
       ],
       "examples": [
         {
-          "name": "expandingTable",
+          "name": "ExpandingTableStory",
           "props": {
             "isAlternative": true
           }
@@ -722,11 +722,11 @@
       ],
       "examples": [
         {
-          "name": "pagination",
+          "name": "Default",
           "props": {
             "totalVisible": 5,
             "size": "default",
-            "maxPage": 15,
+            "maxPage": 10,
             "isRounded": false,
             "strategy": "default"
           }
@@ -842,23 +842,23 @@
       "rules": [],
       "examples": [
         {
-          "name": "overviewItem",
+          "name": "Default",
           "props": {
             "icon": "circle",
-            "content": "Content",
-            "title": "Title",
+            "content": "SGD 11,170.00",
+            "title": "Total Revenue",
             "info": true,
             "percentValue": 10,
             "isLoading": false,
-            "percentTooltip": "asd",
-            "tooltip": "asd",
+            "percentTooltip": "Compared to last month",
+            "tooltip": "Total revenue this period",
             "iconProps": {
               "class": "text-oc-warning-500"
             }
           }
         },
         {
-          "name": "overview",
+          "name": "OverviewGroup",
           "props": {
             "items": [
               {
@@ -1073,7 +1073,7 @@
       ],
       "examples": [
         {
-          "name": "overview",
+          "name": "Default",
           "props": {
             "variant": "small",
             "customer": {
@@ -1085,14 +1085,14 @@
                 "street": "123 Main Street",
                 "city": "Pennsylvania",
                 "state": "Pennsylvania",
-                "postal_code": "12345 ",
+                "postal_code": "12345",
                 "country": "USA"
               }
             }
           }
         },
         {
-          "name": "bigVariant",
+          "name": "BigVariant",
           "props": {
             "variant": "big",
             "customer": {
@@ -1103,16 +1103,17 @@
                 "street": "123 Main Street",
                 "city": "Pennsylvania",
                 "state": "Pennsylvania",
-                "postal_code": "12345 ",
+                "postal_code": "12345",
                 "country": "USA"
               }
             }
           }
         },
         {
-          "name": "isBeneficiary",
+          "name": "Beneficiary",
           "props": {
             "variant": "small",
+            "isBeneficiary": true,
             "customer": {
               "name": "Alex Turner",
               "currency": "SGD",
@@ -1120,28 +1121,29 @@
               "phone_number": "+65 8373 3739 18",
               "bank_name": "DBS Bank",
               "bank_account_number": "**** 1234"
-            },
-            "isBeneficiary": true
+            }
           }
         },
         {
-          "name": "bigVariantBeneficiary",
+          "name": "BigBeneficiary",
           "props": {
             "variant": "big",
+            "isBeneficiary": true,
             "customer": {
               "name": "Alex Turner",
               "currency": "SGD",
               "email": "alex@arcticmonkey.io",
               "bank_name": "DBS Bank",
               "bank_account_number": "**** 1234"
-            },
-            "isBeneficiary": true
+            }
           }
         },
         {
-          "name": "isClosable",
+          "name": "Closable",
           "props": {
             "variant": "small",
+            "isBeneficiary": true,
+            "isClosable": true,
             "customer": {
               "name": "Alex Turner",
               "currency": "SGD",
@@ -1149,8 +1151,7 @@
               "phone_number": "+65 8373 3739 18",
               "bank_name": "DBS Bank",
               "bank_account_number": "**** 1234"
-            },
-            "isBeneficiary": true
+            }
           }
         }
       ]
@@ -1183,7 +1184,7 @@
       ],
       "examples": [
         {
-          "name": "overview",
+          "name": "Default",
           "props": {
             "hasFxData": false,
             "transfer": {
@@ -1196,7 +1197,7 @@
           }
         },
         {
-          "name": "withFxData",
+          "name": "WithFxData",
           "props": {
             "hasFxData": true,
             "transfer": {
@@ -1348,14 +1349,14 @@
       ],
       "examples": [
         {
-          "name": "listItem",
+          "name": "Default",
           "props": {
             "active": 1,
             "title": "September, 1 2023 at 05:01PM",
             "icon": "backward",
             "iconClass": "text-oc-error",
-            "iconText": "SGD 130,11",
-            "description": "#9a2804fc-74df-4304-a7d7-79d11f9e1db8dsdss",
+            "iconText": "SGD 130.11",
+            "description": "#9a2804fc-74df-4304-a7d7-79d11f9e1db8",
             "type": "timeline",
             "image": "https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/covers/small/99d696e564ba45fbaa0fb2e3b43d0e27.jpg",
             "imageSize": "small"
@@ -1373,20 +1374,9 @@
           }
         },
         {
-          "name": "ListLogo",
-          "props": {
-            "urls": [
-              {
-                "logo": "https://orchid.software",
-                "title": "Title"
-              }
-            ]
-          }
-        },
-        {
           "name": "ListPayment",
           "props": {
-            "title": "shopify",
+            "title": "Shopify",
             "paymentMethods": [
               {
                 "method": "paynow_online",
@@ -1399,14 +1389,14 @@
                 "md": "http://api.src.test/icons/methods/md/visa.png"
               }
             ],
-            "description": "Description"
+            "description": "Connected payment store"
           }
         },
         {
           "name": "ListGeneral",
           "props": {
             "title": "Standard shipping",
-            "description": "Calculation Method : Flat",
+            "description": "Calculation Method: Flat",
             "isDisabled": false,
             "chips": [
               {
@@ -1430,17 +1420,16 @@
           }
         },
         {
-          "name": "OcListItemPage",
+          "name": "ListItemPage",
           "props": {
             "pages": [
               {
                 "id": "9bd54837-2156-417a-9577-8ff20f895769",
                 "business_id": "8ba6c772-8c2d-4f3b-a7d6-3f1f0648fa77",
-                "title": "Page Title example",
-                "description": "<p><span style=\"font-size:14px;\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic maxime recusandae velit, assumenda ullam beatae obcaecati ab ad doloremque quia dolores necessitatibus eligendi nulla asperiores modi voluptas totam. Iste, animi.</span></p>",
+                "title": "Page Title Example",
+                "description": "<p><span style=\"font-size:14px;\">Lorem ipsum dolor sit amet consectetur adipisicing elit.</span></p>",
                 "enabled": 1,
                 "page_path": "page-path-1",
-                "page_cover_id": "12345",
                 "page_cover_url": "https://blog.hitpayapp.com/content/images/size/w2000/2024/02/-new--Clarissa-Blog-Design---4-.png",
                 "created_at": "2024-04-18T09:23:39+08:00",
                 "updated_at": "2024-04-18T09:23:39+08:00"
@@ -1448,11 +1437,10 @@
               {
                 "id": "9bb6447e-edab-4c8c-9652-8186cffc8402",
                 "business_id": "8ba6c772-8c2d-4f3b-a7d6-3f1f0648fa77",
-                "title": "Page Title example",
-                "description": "<p><span style=\"font-size:14px;\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic maxime recusandae velit, assumenda ullam beatae obcaecati ab ad doloremque.</span></p>",
+                "title": "Disabled Page Example",
+                "description": "<p><span style=\"font-size:14px;\">Lorem ipsum dolor sit amet consectetur adipisicing elit.</span></p>",
                 "enabled": 0,
                 "page_path": "page-path-2",
-                "page_cover_id": null,
                 "page_cover_url": null,
                 "created_at": "2024-04-02T23:22:35+08:00",
                 "updated_at": "2024-04-18T09:22:56+08:00"
@@ -1567,16 +1555,16 @@
       ],
       "examples": [
         {
-          "name": "overview",
+          "name": "Default",
           "props": {
             "variant": "small",
-            "label": "Alex",
+            "label": "Email",
             "content": "alex@arcticmonkey.io",
             "alignment": "horizontal"
           }
         },
         {
-          "name": "vertical",
+          "name": "Vertical",
           "props": {
             "variant": "big",
             "label": "Alex Turner",
@@ -1585,7 +1573,7 @@
           }
         },
         {
-          "name": "usingSlot",
+          "name": "UsingSlot",
           "props": {
             "variant": "big",
             "label": "Alex Turner",
@@ -1662,11 +1650,11 @@
       "rules": [],
       "examples": [
         {
-          "name": "infoCard",
+          "name": "Default",
           "props": {
-            "title": "Card Title",
+            "title": "Payment Overview",
             "titleIcon": "information",
-            "titleIconTooltip": "Hello I am tooltip!",
+            "titleIconTooltip": "Summary of recent payment activity",
             "isLoading": false,
             "transparent": false,
             "hover": true,
@@ -1708,7 +1696,16 @@
       "rules": [
         "Required props: steps"
       ],
-      "examples": []
+      "examples": [
+        {
+          "name": "Default",
+          "props": {
+            "label": "5 step progress bar",
+            "steps": 5,
+            "currentStep": 3
+          }
+        }
+      ]
     },
     {
       "name": "FloatContent",
@@ -1783,7 +1780,7 @@
       ],
       "examples": [
         {
-          "name": "overview",
+          "name": "Default",
           "props": {
             "position": "right",
             "title": "Transaction detail",
@@ -1913,7 +1910,7 @@
             "description": "We need to verify your business to get started",
             "buttonOptions": {
               "variant": "secondary",
-              "label": "Verifiying",
+              "label": "Verify",
               "status": "",
               "number": 1
             }
@@ -1986,11 +1983,11 @@
             },
             "items": [
               {
-                "label": "Type",
+                "label": "Business Type",
                 "value": "Sole-proprietorship"
               },
               {
-                "label": "Type",
+                "label": "Documents",
                 "value": [
                   "business-registration-certificate.pdf",
                   "electricity-bill.jpg",
@@ -2013,11 +2010,11 @@
             },
             "items": [
               {
-                "label": "Type",
+                "label": "Business Type",
                 "value": "Sole-proprietorship"
               },
               {
-                "label": "Type",
+                "label": "Documents",
                 "value": [
                   "business-registration-certificate.pdf",
                   "electricity-bill.jpg",
@@ -2295,7 +2292,7 @@
                   "label": "Date",
                   "class": "font-reddit-mono",
                   "minWidth": 200,
-                  "tooltip": "This is a tooltip"
+                  "tooltip": "Transaction date and time"
                 },
                 {
                   "key": "email",
@@ -2325,28 +2322,45 @@
                   "label": "Status"
                 },
                 {
-                  "key": "status2",
-                  "label": "Status 2"
-                },
-                {
-                  "key": "status3",
-                  "label": "Status 3"
-                },
-                {
-                  "key": "status4",
-                  "label": "Status 4"
-                },
-                {
-                  "key": "status5",
-                  "label": "Status 5"
-                },
-                {
                   "key": "actions",
                   "label": "",
                   "headerClass": "w-[100px]"
                 }
               ],
-              "fields": [],
+              "fields": [
+                {
+                  "date": "2024-03-15T10:23:00.000Z",
+                  "email": "john.doe@example.com",
+                  "id": "#TXN-001-2024",
+                  "amount": "2,234.56",
+                  "currency": "SGD",
+                  "payment_method": "visa",
+                  "last4Digits": "1234",
+                  "status": "success"
+                },
+                {
+                  "date": "2024-03-14T08:45:00.000Z",
+                  "email": "jane.smith@example.com",
+                  "id": "#TXN-002-2024",
+                  "amount": "1,050.00",
+                  "currency": "SGD",
+                  "payment_method": "mastercard",
+                  "last4Digits": "5678",
+                  "status": "neutral",
+                  "children": [
+                    {
+                      "date": "2024-03-14T08:50:00.000Z",
+                      "email": "jane.smith@example.com",
+                      "id": "#TXN-002A-2024",
+                      "amount": "525.00",
+                      "currency": "SGD",
+                      "payment_method": "mastercard",
+                      "last4Digits": "5678",
+                      "status": "success"
+                    }
+                  ]
+                }
+              ],
               "isSelectable": false,
               "isExpand": true
             }
@@ -2536,14 +2550,13 @@
       ],
       "examples": [
         {
-          "name": "OcAccordion",
+          "name": "Default",
           "props": {
             "header": "Additional Information",
             "body": "Accordion content",
             "icon": "chevron-down",
             "showIcon": true,
             "isAnimated": true,
-            "isExpandable": false,
             "isDisabled": false
           }
         }
@@ -2607,7 +2620,7 @@
           "name": "Default",
           "props": {
             "title": "Choose product type",
-            "description": "Tell us what type of products your are selling",
+            "description": "Tell us what type of products you are selling",
             "isBorder": false,
             "variant": "completed"
           }
@@ -2669,7 +2682,7 @@
         {
           "name": "Default",
           "props": {
-            "productImageUrl": "/icons/onboarding/product-images/invoice.svg",
+            "productImageUrl": "/images/onboarding/product-images/invoice.svg",
             "title": "Account Setup",
             "description": "Complete your personal information and business",
             "size": "medium"
@@ -2757,166 +2770,25 @@
       ],
       "examples": [
         {
-          "name": "Pills",
-          "props": {
-            "variant": "pills",
-            "isArrows": true,
-            "tabs": [
-              {
-                "label": "All",
-                "value": ""
-              },
-              {
-                "label": "Filter 01",
-                "value": "1"
-              },
-              {
-                "label": "Filter 02",
-                "value": "2"
-              },
-              {
-                "label": "Filter 03",
-                "value": "3",
-                "count": 10
-              },
-              {
-                "label": "Filter 04",
-                "value": "4"
-              },
-              {
-                "label": "Filter 05",
-                "value": "5"
-              },
-              {
-                "label": "Filter 06",
-                "value": "6"
-              },
-              {
-                "label": "Filter 07",
-                "value": "7"
-              },
-              {
-                "label": "Filter 08",
-                "value": "8"
-              },
-              {
-                "label": "Filter 09",
-                "value": "9"
-              },
-              {
-                "label": "Filter 10",
-                "value": "10"
-              },
-              {
-                "label": "Filter 11",
-                "value": "11"
-              },
-              {
-                "label": "Filter 12",
-                "value": "12"
-              }
-            ],
-            "maxCount": 9
-          }
-        },
-        {
-          "name": "verticalTabs",
-          "props": {
-            "variant": "pills",
-            "isArrows": true,
-            "tabs": [
-              {
-                "label": "All",
-                "value": ""
-              },
-              {
-                "label": "Filter 01",
-                "value": "1"
-              },
-              {
-                "label": "Filter 02",
-                "value": "2"
-              },
-              {
-                "label": "Filter 03",
-                "value": "3",
-                "count": 10
-              },
-              {
-                "label": "Filter 04",
-                "value": "4"
-              },
-              {
-                "label": "Filter 05",
-                "value": "5"
-              },
-              {
-                "label": "Filter 06",
-                "value": "6"
-              },
-              {
-                "label": "Filter 07",
-                "value": "7"
-              },
-              {
-                "label": "Filter 08",
-                "value": "8"
-              },
-              {
-                "label": "Filter 09",
-                "value": "9"
-              },
-              {
-                "label": "Filter 10",
-                "value": "10"
-              },
-              {
-                "label": "Filter 11",
-                "value": "11"
-              },
-              {
-                "label": "Filter 12",
-                "value": "12"
-              }
-            ],
-            "direction": "vertical"
-          }
-        },
-        {
-          "name": "PaymentTabsExample",
-          "props": {
-            "tabs": [
-              {
-                "label": "Without logo",
-                "value": ""
-              },
-              {
-                "label": "Payment",
-                "logo": "https://dashboard.src.test/icons/methods/sm/paynow.png",
-                "value": "payment"
-              },
-              {
-                "label": "Payment2",
-                "logo": "https://dashboard.src.test/icons/methods/sm/paynow.png",
-                "value": "payment2"
-              }
-            ]
-          }
-        },
-        {
-          "name": "VariantTabsFullWidth",
+          "name": "Default",
           "props": {
             "variant": "default",
             "tabs": [
               {
-                "label": "Mobile",
-                "value": "mobile",
-                "icon": "book"
+                "label": "Overview",
+                "value": "overview"
               },
               {
-                "label": "Desktop",
-                "value": "desktop",
-                "icon": "book"
+                "label": "Transactions",
+                "value": "transactions"
+              },
+              {
+                "label": "Settings",
+                "value": "settings"
+              },
+              {
+                "label": "Reports",
+                "value": "reports"
               }
             ]
           }
@@ -2999,19 +2871,13 @@
           "props": {
             "steps": [
               {
-                "title": "Title"
+                "title": "Personal Info"
               },
               {
-                "title": "Title"
+                "title": "Business Details"
               },
               {
-                "title": "Title"
-              },
-              {
-                "title": "Title"
-              },
-              {
-                "title": "Title"
+                "title": "Verification"
               }
             ]
           }
@@ -3106,7 +2972,7 @@
                 "icon": "user"
               },
               {
-                "label": "Sole proprietor",
+                "label": "Sole Proprietor",
                 "value": "sole",
                 "icon": "user"
               },
@@ -3251,7 +3117,7 @@
       "rules": [],
       "examples": [
         {
-          "name": "HeaderElement",
+          "name": "Default",
           "props": {
             "menus": [
               {
@@ -4249,14 +4115,15 @@
       ],
       "examples": [
         {
-          "name": "emptyPage",
+          "name": "Default",
           "props": {
             "title": "Title",
             "description": "Description",
             "isButton": true,
             "isUpgrade": true,
             "addButtonLabel": "Add new",
-            "upgradeLabel": "Upgrade now"
+            "upgradeLabel": "Upgrade now",
+            "size": "default"
           }
         }
       ]
@@ -4547,7 +4414,7 @@
       ],
       "examples": [
         {
-          "name": "featureOverviewCard",
+          "name": "Default",
           "props": {
             "title": "Title",
             "description": "Description",
@@ -4608,7 +4475,7 @@
         {
           "name": "Default",
           "props": {
-            "title": "You are using test data. Real money won’t be charged",
+            "title": "You are using test data. Real money won't be charged",
             "chipProps": {
               "label": "Sandbox Banner",
               "variant": "light-red"
@@ -4737,7 +4604,17 @@
       "events": {},
       "slots": {},
       "rules": [],
-      "examples": []
+      "examples": [
+        {
+          "name": "Default",
+          "props": {
+            "title": "Change password",
+            "description": "Last changed on Fri Mar 08 2024 14:43:39 GMT+0700 (Western Indonesia Time)",
+            "icon": "key",
+            "isActive": true
+          }
+        }
+      ]
     },
     {
       "name": "OcSection",
@@ -4890,14 +4767,32 @@
       "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/feedback-chip-occhip--docs",
       "props": {
         "variant": {
-          "type": "string",
+          "type": "enum",
           "required": false,
-          "default": ""
+          "default": "",
+          "values": [
+            "primary",
+            "accent-1",
+            "accent-2",
+            "accent-3",
+            "success",
+            "warning",
+            "error",
+            "gray",
+            "light-red",
+            "neutral",
+            "tosca"
+          ]
         },
         "type": {
-          "type": "string",
+          "type": "enum",
           "required": false,
-          "default": "background"
+          "default": "background",
+          "values": [
+            "background",
+            "transparent",
+            "outlined"
+          ]
         },
         "label": {
           "type": "string",
@@ -4938,8 +4833,21 @@
           "description": ""
         }
       },
-      "rules": [],
-      "examples": []
+      "rules": [
+        "\"variant\" must be one of: primary, accent-1, accent-2, accent-3, success, warning, error, gray, light-red, neutral, tosca",
+        "\"type\" must be one of: background, transparent, outlined"
+      ],
+      "examples": [
+        {
+          "name": "Default",
+          "props": {
+            "label": "Primary",
+            "variant": "primary",
+            "type": "background",
+            "closable": false
+          }
+        }
+      ]
     },
     {
       "name": "Snackbar",
@@ -5065,47 +4973,23 @@
         {
           "name": "Default",
           "props": {
-            "modelValue": true,
+            "color": "default",
+            "size": "default",
+            "icon": "filled-check",
+            "title": "Success",
+            "content": "Changes have been successfully saved",
+            "description": "Changes have been successfully saved",
             "showIcon": true,
             "isFloating": true,
             "position": "top-center",
             "transitionName": "slide-from-top",
-            "icon": "filled-check",
-            "color": "default",
-            "content": "Changes have been successfully saved",
-            "description": "Changes have been successfully saved",
-            "title": "Success",
+            "dismissible": false,
             "secondaryButton": {
               "label": "Action"
             },
             "primaryButton": {
               "label": "Action"
-            },
-            "dismissible": false
-          }
-        },
-        {
-          "name": "Variants",
-          "props": {
-            "showIcon": true,
-            "icon": "filled-check",
-            "content": "Changes have been successfully saved"
-          }
-        },
-        {
-          "name": "BigSize",
-          "props": {
-            "modelValue1": true,
-            "modelValue2": true,
-            "modelValue3": true,
-            "modelValue4": true,
-            "modelValue5": true,
-            "showIcon": true,
-            "icon": "filled-check",
-            "title": "Snackbar title",
-            "description": "Changes have been successfully saved",
-            "dismissible": true,
-            "size": "big"
+            }
           }
         }
       ]
@@ -5196,23 +5080,13 @@
         {
           "name": "Default",
           "props": {
-            "modelValue": true,
-            "showIcon": true,
-            "transitionName": "slide-from-top",
-            "icon": "filled-check",
             "color": "default",
-            "content": "Changes have been successfully saved",
-            "title": "Title",
-            "dismissible": true
-          }
-        },
-        {
-          "name": "Variants",
-          "props": {
-            "showIcon": true,
             "icon": "filled-check",
+            "title": "Title",
             "content": "Changes have been successfully saved",
-            "title": "Title"
+            "showIcon": true,
+            "dismissible": true,
+            "transitionName": "slide-from-top"
           }
         }
       ]
@@ -5250,7 +5124,7 @@
       "rules": [],
       "examples": [
         {
-          "name": "VariantColor",
+          "name": "Default",
           "props": {
             "text": "Whatsapp",
             "icon": "whatsapp",
@@ -5275,9 +5149,16 @@
       "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/feedback-tag-octag--docs",
       "props": {
         "variant": {
-          "type": "string",
+          "type": "enum",
           "required": false,
-          "default": "warning"
+          "default": "warning",
+          "values": [
+            "warning",
+            "primary",
+            "success",
+            "error",
+            "gray"
+          ]
         },
         "label": {
           "type": "string",
@@ -5287,8 +5168,18 @@
       },
       "events": {},
       "slots": {},
-      "rules": [],
-      "examples": []
+      "rules": [
+        "\"variant\" must be one of: warning, primary, success, error, gray"
+      ],
+      "examples": [
+        {
+          "name": "Default",
+          "props": {
+            "label": "BETA",
+            "variant": "warning"
+          }
+        }
+      ]
     },
     {
       "name": "BaseInput",
@@ -5383,7 +5274,8 @@
           "type": "enum",
           "required": false,
           "values": [
-            "circle"
+            "circle",
+            "x"
           ]
         },
         "iconClass": {
@@ -5406,7 +5298,8 @@
           "type": "enum",
           "required": false,
           "values": [
-            "plus"
+            "plus",
+            "circle"
           ]
         },
         "isActive": {
@@ -5456,9 +5349,9 @@
         }
       },
       "rules": [
-        "\"leftIcon\" must be one of: circle",
+        "\"leftIcon\" must be one of: circle, x",
         "\"additionalAreaIcon\" must be one of: chevron-down, circle",
-        "\"rightIcon\" must be one of: plus",
+        "\"rightIcon\" must be one of: plus, circle",
         "\"variant\" must be one of: primary, secondary, destructive",
         "\"size\" must be one of: default, small, big"
       ],
@@ -5467,14 +5360,14 @@
           "name": "Default",
           "props": {
             "label": "Button Text",
+            "variant": "primary",
+            "size": "default",
             "isDisabled": false,
             "isLoading": false,
             "isTransparent": false,
-            "isAdditionalArea": false,
-            "additionalAreaIcon": "chevron-down",
             "isRoundedFull": false,
-            "variant": "primary",
-            "size": "default"
+            "isAdditionalArea": false,
+            "additionalAreaIcon": "chevron-down"
           }
         }
       ]
@@ -5566,10 +5459,10 @@
           "props": {
             "hint": "This is a hint text to help user.",
             "placeholder": "Placeholder",
-            "isInlineLabel": false,
             "isDisabled": false,
-            "cardType": "mastercard",
             "isRequired": false,
+            "isInlineLabel": false,
+            "cardType": "mastercard",
             "tooltipText": "Tooltip text",
             "tooltipOptions": {
               "position": "top",
@@ -5638,12 +5531,11 @@
         {
           "name": "Default",
           "props": {
-            "errorMessage": false,
-            "isPartial": false,
-            "isDisabled": false,
             "label": "Text",
             "topLabel": "Text",
-            "hint": "Text"
+            "hint": "Text",
+            "isPartial": false,
+            "isDisabled": false
           }
         }
       ]
@@ -5714,61 +5606,7 @@
       "rules": [
         "\"alignment\" must be one of: vertical, horizontal"
       ],
-      "examples": [
-        {
-          "name": "Default",
-          "props": {
-            "label": "Label",
-            "hint": "Hint",
-            "alignment": "vertical",
-            "isDisabled": false,
-            "isSelectAll": false,
-            "checkboxes": [
-              {
-                "label": "Text",
-                "value": 0
-              },
-              {
-                "label": "Text",
-                "value": 1
-              },
-              {
-                "label": "Text",
-                "value": 2,
-                "isDisabled": true
-              }
-            ]
-          }
-        },
-        {
-          "name": "buttonVariants",
-          "props": {
-            "label": "Label",
-            "checkboxes": [
-              {
-                "label": "Text",
-                "value": 0
-              },
-              {
-                "label": "Text",
-                "value": 1
-              },
-              {
-                "label": "Text",
-                "value": 2
-              },
-              {
-                "label": "Text",
-                "value": 3
-              },
-              {
-                "label": "Text",
-                "value": 5
-              }
-            ]
-          }
-        }
-      ]
+      "examples": []
     },
     {
       "name": "Criteria",
@@ -5869,13 +5707,20 @@
           "required": false,
           "default": "",
           "values": [
-            "circle"
+            "circle",
+            "search"
           ]
         },
         "inputType": {
-          "type": "string",
+          "type": "enum",
           "required": false,
-          "default": "text"
+          "default": "text",
+          "values": [
+            "text",
+            "password",
+            "email",
+            "number"
+          ]
         },
         "autocomplete": {
           "type": "string",
@@ -5898,12 +5743,9 @@
           "default": "false"
         },
         "labelIcon": {
-          "type": "enum",
+          "type": "string",
           "required": false,
-          "default": "",
-          "values": [
-            "question-mark"
-          ]
+          "default": ""
         },
         "tooltipText": {
           "type": "string",
@@ -5992,8 +5834,8 @@
         }
       },
       "rules": [
-        "\"icon\" must be one of: circle",
-        "\"labelIcon\" must be one of: question-mark",
+        "\"icon\" must be one of: circle, search",
+        "\"inputType\" must be one of: text, password, email, number",
         "\"inputMode\" must be one of: text, decimal, numeric, tel, search, email, url"
       ],
       "examples": [
@@ -6001,43 +5843,12 @@
           "name": "Default",
           "props": {
             "label": "Label",
-            "hint": "Hint",
+            "hint": "This is a hint text to help user.",
             "placeholder": "Placeholder",
             "disabled": false,
-            "isInlineLabel": false,
             "isRequired": false,
-            "tooltipText": "Tooltip text",
-            "tooltipOptions": {
-              "position": "top",
-              "distance": 10
-            }
-          }
-        },
-        {
-          "name": "MainComponent",
-          "props": {
-            "label": "Label",
-            "hint": "Hint",
-            "placeholder": "Placeholder",
-            "disabled": false,
+            "inputType": "text",
             "isInlineLabel": false
-          }
-        },
-        {
-          "name": "FormatValue",
-          "props": {
-            "label": "Currency value",
-            "placeholder": "Currency format"
-          }
-        },
-        {
-          "name": "passwordInput",
-          "props": {
-            "label": "Password",
-            "hint": "Enter your HitPay password",
-            "placeholder": "Password",
-            "isRequired": true,
-            "inputType": "password"
           }
         }
       ]
@@ -6163,15 +5974,9 @@
           "default": "[]"
         },
         "initialCountryCode": {
-          "type": "enum",
+          "type": "string",
           "required": false,
-          "default": "sg",
-          "values": [
-            "sg",
-            "be",
-            "ua",
-            "sa"
-          ]
+          "default": "sg"
         },
         "errorMessage": {
           "type": "string",
@@ -6212,12 +6017,9 @@
           "default": "false"
         },
         "labelIcon": {
-          "type": "enum",
+          "type": "string",
           "required": false,
-          "default": "",
-          "values": [
-            "question-mark"
-          ]
+          "default": ""
         },
         "tooltipText": {
           "type": "string",
@@ -6241,26 +6043,16 @@
         }
       },
       "slots": {},
-      "rules": [
-        "\"initialCountryCode\" must be one of: sg, be, ua, sa",
-        "\"labelIcon\" must be one of: question-mark"
-      ],
+      "rules": [],
       "examples": [
         {
           "name": "Default",
           "props": {
-            "initialCountryCode": "sg",
-            "placeholder": "Placeholder",
+            "label": "Label",
             "hint": "This is a hint text to help user.",
-            "isInlineLabel": false,
-            "isDisabled": false,
-            "isRequired": false,
-            "tooltipText": "Tooltip text",
-            "tooltipOptions": {
-              "position": "top",
-              "distance": 10
-            },
-            "ai": false
+            "placeholder": "Placeholder",
+            "disabled": false,
+            "isRequired": false
           }
         }
       ]
@@ -6352,11 +6144,11 @@
           "name": "Default",
           "props": {
             "modelValue": false,
-            "isDisabled": false,
             "label": "Text",
             "hint": "Text",
             "tooltipText": "Tooltip text",
-            "labelIcon": "information"
+            "labelIcon": "information",
+            "isDisabled": false
           }
         }
       ]
@@ -6431,125 +6223,7 @@
       "rules": [
         "\"alignment\" must be one of: vertical, horizontal"
       ],
-      "examples": [
-        {
-          "name": "Default",
-          "props": {
-            "alignment": "vertical",
-            "label": "Label",
-            "hint": "Hint",
-            "radio": [
-              {
-                "label": "Text",
-                "value": "0"
-              },
-              {
-                "label": "Text",
-                "value": "1"
-              },
-              {
-                "label": "Text",
-                "value": "2"
-              },
-              {
-                "label": "Text",
-                "value": "3"
-              },
-              {
-                "label": "is Disabled",
-                "value": "4",
-                "isDisabled": true
-              }
-            ]
-          }
-        },
-        {
-          "name": "directionVariants",
-          "props": {
-            "radio": [
-              {
-                "label": "Text 1",
-                "value": "Text 1"
-              },
-              {
-                "label": "Text 2",
-                "value": "Text 2"
-              },
-              {
-                "label": "Text 3",
-                "value": "Text 3"
-              },
-              {
-                "label": "Text 4",
-                "value": "Text 4"
-              },
-              {
-                "label": "Text 5",
-                "value": "Text 5"
-              }
-            ]
-          }
-        },
-        {
-          "name": "buttonVariants",
-          "props": {
-            "radio": [
-              {
-                "label": "Text",
-                "value": 6,
-                "icon": "phone"
-              },
-              {
-                "label": "Text",
-                "value": 7,
-                "icon": "email"
-              },
-              {
-                "label": "Text",
-                "value": 8,
-                "icon": "facebook"
-              },
-              {
-                "label": "Text",
-                "value": 9,
-                "icon": "tiktok"
-              },
-              {
-                "label": "Text",
-                "value": 10,
-                "icon": "telegram"
-              }
-            ]
-          }
-        },
-        {
-          "name": "buttonVariantsWithRadio",
-          "props": {
-            "radio": [
-              {
-                "label": "Text",
-                "value": 6
-              },
-              {
-                "label": "Text",
-                "value": 7
-              },
-              {
-                "label": "Text",
-                "value": 8
-              },
-              {
-                "label": "Text",
-                "value": 9
-              },
-              {
-                "label": "Text",
-                "value": 10
-              }
-            ]
-          }
-        }
-      ]
+      "examples": []
     },
     {
       "name": "RangeInput",
@@ -6737,12 +6411,9 @@
           "default": "false"
         },
         "labelIcon": {
-          "type": "enum",
+          "type": "string",
           "required": false,
-          "default": "",
-          "values": [
-            "question-mark"
-          ]
+          "default": ""
         },
         "tooltipText": {
           "type": "string",
@@ -6850,114 +6521,8 @@
           "description": ""
         }
       },
-      "rules": [
-        "\"labelIcon\" must be one of: question-mark"
-      ],
-      "examples": [
-        {
-          "name": "Default",
-          "props": {
-            "label": "Label",
-            "hint": "Hint",
-            "placeholder": "Placeholder",
-            "isInlineLabel": false,
-            "isLoading": false,
-            "options": [
-              {
-                "label": "Option 1",
-                "subLabel": "sub label of Option 1",
-                "image": "https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/covers/small/99d696e564ba45fbaa0fb2e3b43d0e27.jpg",
-                "value": 1
-              },
-              {
-                "label": "Option 2",
-                "subLabel": "sub label of Option 2",
-                "value": 2,
-                "isDisabled": true
-              },
-              {
-                "label": "Option 3",
-                "value": 3,
-                "isDisabled": true
-              },
-              {
-                "label": "Option 4",
-                "value": 4
-              },
-              {
-                "label": "Option 1",
-                "subLabel": "sub label of Option 1",
-                "value": 5
-              },
-              {
-                "label": "Option 2",
-                "subLabel": "sub label of Option 2",
-                "value": 6
-              },
-              {
-                "label": "Option 3",
-                "value": 7
-              },
-              {
-                "label": "Option 4",
-                "value": 8
-              },
-              {
-                "label": "Option 1",
-                "subLabel": "sub label of Option 1",
-                "value": 9
-              },
-              {
-                "label": "Option 2",
-                "subLabel": "sub label of Option 2",
-                "value": 10
-              },
-              {
-                "label": "Option 3",
-                "value": 11
-              },
-              {
-                "label": "Option 4",
-                "value": 12
-              },
-              {
-                "label": "Option 1",
-                "subLabel": "sub label of Option 1",
-                "value": 13
-              },
-              {
-                "label": "Option 2",
-                "subLabel": "sub label of Option 2",
-                "value": 14
-              },
-              {
-                "label": "Option 3",
-                "value": 15
-              },
-              {
-                "label": "Option 4",
-                "value": 16
-              }
-            ],
-            "isFilterable": true,
-            "isInlineSearch": true,
-            "isAsynchronousSearch": true,
-            "isAddNew": true,
-            "isDisabled": false,
-            "isRequired": false,
-            "isCheckboxes": false,
-            "isSelectAll": false,
-            "isTransparent": false,
-            "isSlim": false,
-            "isClearable": true,
-            "tooltipText": "Tooltip text",
-            "tooltipOptions": {
-              "position": "top",
-              "distance": 10
-            }
-          }
-        }
-      ]
+      "rules": [],
+      "examples": []
     },
     {
       "name": "Option",
@@ -7102,8 +6667,8 @@
         {
           "name": "Default",
           "props": {
-            "disabled": false,
             "size": "default",
+            "disabled": false,
             "label": "Label"
           }
         }
@@ -7209,19 +6774,19 @@
         {
           "name": "Default",
           "props": {
-            "placeholder": "@username",
-            "isInlineLabel": false,
-            "isDisabled": false,
             "label": "Enter Username",
-            "errorMessages": {
-              "link": "error",
-              "title": "error"
-            },
+            "placeholder": "@username",
+            "isDisabled": false,
             "isRequired": false,
+            "isInlineLabel": false,
             "tooltipText": "Tooltip text",
             "tooltipOptions": {
               "position": "top",
               "distance": 10
+            },
+            "errorMessages": {
+              "link": "error",
+              "title": "error"
             },
             "links": [
               {
@@ -7311,12 +6876,9 @@
           "default": "false"
         },
         "labelIcon": {
-          "type": "enum",
+          "type": "string",
           "required": false,
-          "default": "",
-          "values": [
-            "question-mark"
-          ]
+          "default": ""
         },
         "tooltipText": {
           "type": "string",
@@ -7340,33 +6902,17 @@
         }
       },
       "slots": {},
-      "rules": [
-        "\"labelIcon\" must be one of: question-mark"
-      ],
+      "rules": [],
       "examples": [
         {
           "name": "Default",
           "props": {
+            "label": "Label",
             "hint": "This is a hint text to help user.",
             "placeholder": "Placeholder",
-            "rows": 5,
-            "autoResize": false,
-            "isDisabled": false,
+            "disabled": false,
             "isRequired": false,
-            "tooltipText": "Tooltip text",
-            "tooltipOptions": {
-              "position": "top",
-              "distance": 10
-            },
-            "ai": false
-          }
-        },
-        {
-          "name": "AiMode",
-          "props": {
-            "label": "AI Generated Content",
-            "hint": "This content was generated by AI",
-            "placeholder": "Placeholder"
+            "rows": 5
           }
         }
       ]
@@ -7383,13 +6929,9 @@
       "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-calendar-occalendar--docs",
       "props": {
         "type": {
-          "type": "enum",
+          "type": "string",
           "required": false,
-          "default": "default",
-          "values": [
-            "default",
-            "range"
-          ]
+          "default": "default"
         },
         "minDate": {
           "type": "string|date|number",
@@ -7402,13 +6944,9 @@
           "default": "null"
         },
         "position": {
-          "type": "enum",
+          "type": "string",
           "required": false,
-          "default": "floating",
-          "values": [
-            "floating",
-            "inline"
-          ]
+          "default": "floating"
         },
         "modelValue": {
           "type": "string|date|number|array",
@@ -7447,17 +6985,14 @@
           "description": ""
         }
       },
-      "rules": [
-        "\"type\" must be one of: default, range",
-        "\"position\" must be one of: floating, inline"
-      ],
+      "rules": [],
       "examples": [
         {
-          "name": "calendarStory",
+          "name": "Default",
           "props": {
-            "type": "default",
-            "position": "floating",
-            "isIndefinite": false
+            "isRange": false,
+            "isMultiple": false,
+            "disabledDates": []
           }
         }
       ]
@@ -7689,15 +7224,6 @@
             "maxLimit": 100,
             "type": "default"
           }
-        },
-        {
-          "name": "VariantRightInput",
-          "props": {
-            "minGap": 0,
-            "minLimit": 0,
-            "maxLimit": 100,
-            "type": "default"
-          }
         }
       ]
     },
@@ -7776,11 +7302,10 @@
       ],
       "examples": [
         {
-          "name": "sectionItem",
+          "name": "Default",
           "props": {
             "title": "Title",
             "description": "Description",
-            "toggleProps": {},
             "isToggle": true,
             "icon": "check",
             "popperMessage": "Information"
@@ -7804,14 +7329,24 @@
           "required": false
         },
         "variant": {
-          "type": "string",
+          "type": "enum",
           "required": false,
-          "default": "grid"
+          "default": "grid",
+          "values": [
+            "grid",
+            "list",
+            "list2"
+          ]
         },
         "optionType": {
-          "type": "string",
+          "type": "enum",
           "required": false,
-          "default": "text"
+          "default": "text",
+          "values": [
+            "text",
+            "icon",
+            "image"
+          ]
         },
         "label": {
           "type": "string",
@@ -7888,213 +7423,11 @@
           ]
         }
       },
-      "rules": [],
-      "examples": [
-        {
-          "name": "Default",
-          "props": {
-            "jsonForm": [
-              {
-                "name": "select_options_small",
-                "type": "SelectOptions",
-                "props": {
-                  "isSmallImage": true,
-                  "label": "Example Label",
-                  "hint": "This is a hint text to help user",
-                  "placeholder": "placeholder",
-                  "options": [
-                    {
-                      "preview": "/images/request-form.svg",
-                      "label": "Option 1",
-                      "value": 1
-                    },
-                    {
-                      "preview": "/images/request-form.svg",
-                      "label": "Option 2",
-                      "value": 2
-                    },
-                    {
-                      "preview": "/images/request-form.svg",
-                      "label": "Option 3",
-                      "value": 3
-                    }
-                  ]
-                }
-              },
-              {
-                "name": "select_options",
-                "type": "SelectOptions",
-                "props": {
-                  "label": "Example Label",
-                  "hint": "This is a hint text to help user",
-                  "placeholder": "placeholder",
-                  "options": [
-                    {
-                      "preview": "/images/request-form.svg",
-                      "label": "Option 1",
-                      "value": 1
-                    },
-                    {
-                      "preview": "/images/request-form.svg",
-                      "label": "Option 2",
-                      "value": 2
-                    },
-                    {
-                      "preview": "/images/request-form.svg",
-                      "label": "Option 3",
-                      "value": 3
-                    }
-                  ]
-                }
-              },
-              {
-                "name": "select_options_2",
-                "type": "SelectOptions",
-                "props": {
-                  "label": "Example Label",
-                  "options": [
-                    {
-                      "preview": "/images/request-form.svg",
-                      "label": "Option 1",
-                      "value": 1
-                    },
-                    {
-                      "preview": "/images/request-form.svg",
-                      "label": "Option 2",
-                      "value": 2
-                    }
-                  ]
-                }
-              },
-              {
-                "name": "select_options_3",
-                "type": "SelectOptions",
-                "props": {
-                  "variant": "list",
-                  "label": "Example Label",
-                  "hint": "This is a hint text to help user",
-                  "placeholder": "placeholder",
-                  "options": [
-                    {
-                      "preview": "/images/request-form-1.svg",
-                      "label": "Option 1",
-                      "value": 1,
-                      "description": "Useful if most of your product visuals are wider than taller"
-                    },
-                    {
-                      "preview": "/images/request-form-1.svg",
-                      "label": "Option 2",
-                      "value": 2,
-                      "description": "Useful if most of your product visuals are wider than taller"
-                    },
-                    {
-                      "preview": "/images/request-form-1.svg",
-                      "label": "Option 3",
-                      "value": 3,
-                      "description": "Useful if most of your product visuals are wider than taller"
-                    },
-                    {
-                      "preview": "/images/request-form-1.svg",
-                      "label": "Option 4",
-                      "value": 4,
-                      "description": "Useful if most of your product visuals are wider than taller"
-                    }
-                  ]
-                }
-              },
-              {
-                "name": "select_options_4",
-                "type": "SelectOptions",
-                "props": {
-                  "variant": "list2",
-                  "label": "Example Label",
-                  "hint": "This is a hint text to help user",
-                  "placeholder": "placeholder",
-                  "options": [
-                    {
-                      "label": "Option 1",
-                      "value": 1,
-                      "description": "Smaller height, fit to screen width"
-                    },
-                    {
-                      "label": "Option 2",
-                      "value": 2,
-                      "description": "Smaller height, fit to screen width"
-                    }
-                  ]
-                }
-              },
-              {
-                "name": "select_options_5",
-                "type": "SelectOptions",
-                "props": {
-                  "variant": "list",
-                  "label": "Example Label",
-                  "hint": "This is a hint text to help user",
-                  "placeholder": "placeholder",
-                  "options": [
-                    {
-                      "label": "Option 1",
-                      "value": 1,
-                      "description": "Smaller height, fit to screen width"
-                    },
-                    {
-                      "label": "Option 2",
-                      "value": 2,
-                      "description": "Smaller height, fit to screen width"
-                    }
-                  ]
-                }
-              },
-              {
-                "name": "select_options_6",
-                "type": "SelectOptions",
-                "props": {
-                  "variant": "list",
-                  "label": "Borderless",
-                  "hint": "This is a hint text to help user",
-                  "placeholder": "placeholder",
-                  "borderless": true,
-                  "options": [
-                    {
-                      "label": "Option 1",
-                      "value": 1,
-                      "description": "Smaller height, fit to screen width"
-                    },
-                    {
-                      "label": "Option 2",
-                      "value": 2,
-                      "description": "Smaller height, fit to screen width"
-                    }
-                  ]
-                }
-              },
-              {
-                "name": "aligment",
-                "type": "SelectOptions",
-                "props": {
-                  "label": "Icon Option Label",
-                  "optionType": "icon",
-                  "options": [
-                    {
-                      "value": "left",
-                      "icon_name": "text-editor/left"
-                    },
-                    {
-                      "value": "center",
-                      "icon_name": "text-editor/center"
-                    },
-                    {
-                      "value": "right",
-                      "icon_name": "text-editor/right"
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        }
-      ]
+      "rules": [
+        "\"variant\" must be one of: grid, list, list2",
+        "\"optionType\" must be one of: text, icon, image"
+      ],
+      "examples": []
     },
     {
       "name": "SingleFileUpload",
@@ -8432,22 +7765,6 @@
               "leftIcon": "upload"
             }
           }
-        },
-        {
-          "name": "MultipleImages",
-          "props": {
-            "maxImages": 4,
-            "hint": "The optimal product image size is at least 800x800 px. PNG and JPG format is supported.",
-            "label": "label example",
-            "isImageOnly": false,
-            "columnsCount": 3,
-            "inputOptions": [
-              "caption",
-              "link",
-              "lightbox",
-              "new_tab"
-            ]
-          }
         }
       ]
     },
@@ -8520,7 +7837,11 @@
         {
           "name": "Default",
           "props": {
-            "isDisabled": false
+            "label": "Label",
+            "hint": "This is a hint text to help user.",
+            "placeholder": "Placeholder",
+            "disabled": false,
+            "step": 1
           }
         }
       ]
@@ -8618,7 +7939,16 @@
       "rules": [
         "Required props: name"
       ],
-      "examples": []
+      "examples": [
+        {
+          "name": "Default",
+          "props": {
+            "name": "flags/SG",
+            "width": "22",
+            "height": "16"
+          }
+        }
+      ]
     },
     {
       "name": "Dropdown",
@@ -8706,7 +8036,14 @@
         }
       },
       "rules": [],
-      "examples": []
+      "examples": [
+        {
+          "name": "Default",
+          "props": {
+            "distance": 10
+          }
+        }
+      ]
     },
     {
       "name": "DropdownItem",
@@ -9011,36 +8348,6 @@
             },
             "size": "medium"
           }
-        },
-        {
-          "name": "FormInModal",
-          "props": {
-            "title": "Modal Title",
-            "description": "Modal Description",
-            "isCloseIcon": true,
-            "cancelButtonProps": {
-              "label": "Cancel",
-              "variant": "secondary"
-            },
-            "confirmButtonProps": {
-              "label": "OK"
-            },
-            "size": "medium"
-          }
-        },
-        {
-          "name": "Clean",
-          "props": {
-            "title": "Are you sure?",
-            "cancelButtonProps": {
-              "label": "Cancel",
-              "variant": "secondary"
-            },
-            "confirmButtonProps": {
-              "label": "OK"
-            },
-            "size": "small"
-          }
         }
       ]
     },
@@ -9106,7 +8413,15 @@
         }
       },
       "rules": [],
-      "examples": []
+      "examples": [
+        {
+          "name": "Default",
+          "props": {
+            "isCloseIconVisible": true,
+            "isBackButtonVisible": true
+          }
+        }
+      ]
     },
     {
       "name": "ConfirmationModal",
@@ -9211,10 +8526,9 @@
           "props": {
             "variant": "delete",
             "title": "Are you sure?",
-            "description": "Do you want to delete this payment link? The action can’t be undo.",
-            "open": false,
+            "description": "Do you want to delete this item? This action cannot be undone.",
             "labelConfirm": "Confirm",
-            "labelCancel": "Close",
+            "labelCancel": "Cancel",
             "isLoading": false
           }
         }
@@ -9380,25 +8694,21 @@
         {
           "name": "Default",
           "props": {
-            "isPointed": true,
             "topMenu": [
               {
-                "title": "support",
+                "title": "Support",
                 "items": [
                   {
                     "text": "Whatsapp",
-                    "icon": "whatsapp-colored",
-                    "isLoading": true
+                    "icon": "whatsapp-colored"
                   },
                   {
                     "text": "Email Us",
-                    "icon": "email",
-                    "isLoading": true
+                    "icon": "email"
                   },
                   {
                     "text": "Record a Bug",
-                    "icon": "bug",
-                    "isLoading": true
+                    "icon": "bug"
                   }
                 ]
               },
@@ -9407,8 +8717,7 @@
                 "items": [
                   {
                     "text": "User Guides",
-                    "icon": "document",
-                    "isLoading": true
+                    "icon": "document"
                   },
                   {
                     "text": "Blog",
@@ -9419,10 +8728,9 @@
             ],
             "bottomMenu": [
               {
-                "text": "What’s new",
+                "text": "What's new",
                 "icon": "sparkle-2",
-                "pointed": true,
-                "isLoading": false
+                "pointed": true
               },
               {
                 "text": "Feedback",
@@ -9478,7 +8786,7 @@
         {
           "name": "Default",
           "props": {
-            "text": "Text to copy",
+            "value": "Text to copy",
             "tooltipText": "Copied!"
           }
         }
@@ -9535,8 +8843,8 @@
         {
           "name": "Default",
           "props": {
-            "title": "Test",
-            "description": "Test"
+            "title": "Feature Unavailable",
+            "description": "This feature is not available for your current plan."
           }
         }
       ]
@@ -9661,17 +8969,17 @@
             },
             "grid": {
               "xs": {
-                "area": "\n              input\n              card_input\n              custom_form_input\n              simple_checkbox_input\n              checkboxes_group\n              input_2\n              custom_form_input_2\n              link_input\n              phone_number_field\n              radio_group\n              radio_group_2\n              select\n              text_area_field\n              range_input\n              time_picker_test\n              date_picker_test\n              date_picker_range_from\n              toggle_field\n          ",
+                "area": "\n          input\n          card_input\n          custom_form_input\n          simple_checkbox_input\n          checkboxes_group\n          input_2\n          custom_form_input_2\n          link_input\n          phone_number_field\n          radio_group\n          radio_group_2\n          select\n          text_area_field\n          range_input\n          time_picker_test\n          date_picker_test\n          date_picker_range_from\n          toggle_field\n        ",
                 "rows": "auto",
                 "columns": "100%"
               },
               "sm": {
-                "area": "\n               input\n              card_input\n              custom_form_input\n              simple_checkbox_input\n              checkboxes_group\n              input_2\n              custom_form_input_2\n              link_input\n              phone_number_field\n              radio_group\n              radio_group_2\n              select\n              text_area_field\n              range_input\n              time_picker_test\n              date_picker_test\n              date_picker_range_from\n              toggle_field\n          ",
+                "area": "\n          input\n          card_input\n          custom_form_input\n          simple_checkbox_input\n          checkboxes_group\n          input_2\n          custom_form_input_2\n          link_input\n          phone_number_field\n          radio_group\n          radio_group_2\n          select\n          text_area_field\n          range_input\n          time_picker_test\n          date_picker_test\n          date_picker_range_from\n          toggle_field\n        ",
                 "rows": "auto",
                 "columns": "100%"
               },
               "lg": {
-                "area": "\n            input card_input\n            custom_form_input simple_checkbox_input\n            checkboxes_group input_2\n            custom_form_input_2 link_input\n            phone_number_field radio_group\n            radio_group_2 select\n            text_area_field range_input\n            time_picker_test date_picker_test\n            date_picker_range_from toggle_field\n          ",
+                "area": "\n          input card_input\n          custom_form_input simple_checkbox_input\n          checkboxes_group input_2\n          custom_form_input_2 link_input\n          phone_number_field radio_group\n          radio_group_2 select\n          text_area_field range_input\n          time_picker_test date_picker_test\n          date_picker_range_from toggle_field\n        ",
                 "rows": "auto",
                 "columns": "50% 50%"
               }
@@ -10018,7 +9326,7 @@
                     "col4": "Table Cell column two",
                     "col5": "Label",
                     "col6": false,
-                    "id": "98aefc93-352f-4746-8416-7fadc7fddc71"
+                    "id": "681481e2-08f8-42e8-a31b-096eac84a170"
                   }
                 ]
               }
@@ -10096,7 +9404,7 @@
                     "col4": "Table Cell column two",
                     "col5": "Label",
                     "col6": false,
-                    "id": "a7f2a3db-7fda-45a8-86d9-7ca8aa0c97b9"
+                    "id": "4df050fe-42ff-4a7b-b6a4-2e192f515443"
                   }
                 ]
               }
@@ -10311,21 +9619,7 @@
       },
       "slots": {},
       "rules": [],
-      "examples": [
-        {
-          "name": "Single",
-          "props": {
-            "cancelButtonProps": {
-              "label": "Clear"
-            },
-            "submitButtonProps": {
-              "label": "Done"
-            },
-            "countCalendars": 1,
-            "withFooter": true
-          }
-        }
-      ]
+      "examples": []
     },
     {
       "name": "ComplexDatePicker",
@@ -10552,7 +9846,14 @@
         }
       },
       "rules": [],
-      "examples": []
+      "examples": [
+        {
+          "name": "Default",
+          "props": {
+            "classes": "hover:shadow bg-oc-bg-light hover:bg-oc-accent-1-50"
+          }
+        }
+      ]
     },
     {
       "name": "DraggableList",
@@ -10850,9 +10151,9 @@
                 "title": "Section 2"
               },
               {
-                "name": "section_2",
+                "name": "section_3",
                 "preview": "/images/section.png",
-                "title": "Section 2"
+                "title": "Section 3"
               }
             ]
           }
@@ -11050,12 +10351,9 @@
           "default": "false"
         },
         "labelIcon": {
-          "type": "enum",
+          "type": "string",
           "required": false,
-          "default": "",
-          "values": [
-            "question-mark"
-          ]
+          "default": ""
         },
         "tooltipText": {
           "type": "string",
@@ -11074,20 +10372,13 @@
         }
       },
       "slots": {},
-      "rules": [
-        "\"labelIcon\" must be one of: question-mark"
-      ],
+      "rules": [],
       "examples": [
         {
           "name": "Default",
           "props": {
-            "isRequired": false,
-            "isDisabled": false,
-            "tooltipText": "Tooltip text",
-            "tooltipOptions": {
-              "position": "top",
-              "distance": 10
-            }
+            "disabled": false,
+            "is24Hours": false
           }
         }
       ]
