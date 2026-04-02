@@ -1,4 +1,4 @@
-import { Theme, RangeInput } from '@/orchidui-core'
+import { RangeInput, Theme } from '@/orchidui-core'
 import { ref } from 'vue'
 
 export default {
@@ -7,7 +7,6 @@ export default {
 }
 
 export const Default = {
-  argTypes: {},
   args: {
     maxLimit: 100,
     minLimit: 0,
@@ -18,26 +17,15 @@ export const Default = {
     onlyInput: true
   },
   render: (args) => ({
-    components: { Theme, RangeInput },
+    components: { RangeInput, Theme },
     setup() {
       const modelValue = ref('')
-
-      return { args, modelValue }
+      return { modelValue, args }
     },
     template: `
-          <Theme>
-           {{ modelValue}}
-            <RangeInput
-                v-model="modelValue"
-                :max-limit="args.maxLimit"
-                :min-limit="args.minLimit"
-                :minGap="args.minGap"
-                :label="args.label"
-                :hint="args.hint"
-                :onlyInput="args.onlyInput"
-                :errorMessage="args.errorMessage"
-            />
-          </Theme>
-        `
+      <Theme>
+        <RangeInput v-model="modelValue" v-bind="args" />
+      </Theme>
+    `
   })
 }

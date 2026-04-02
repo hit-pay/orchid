@@ -5,8 +5,7 @@ export default {
   tags: ['autodocs']
 }
 
-export const overview = {
-  name: 'Overview',
+export const Default = {
   argTypes: {
     variant: {
       control: 'select',
@@ -24,28 +23,25 @@ export const overview = {
         street: '123 Main Street',
         city: 'Pennsylvania',
         state: 'Pennsylvania',
-        postal_code: '12345 ',
+        postal_code: '12345',
         country: 'USA'
       }
     }
   },
   render: (args) => ({
-    components: { CustomerCard, Theme },
+    components: { Theme, CustomerCard },
     setup() {
-      return {
-        args
-      }
+      return { args }
     },
     template: `
-          <Theme class="items-center mb-3">
-            <CustomerCard :customer="args.customer" :variant="args.variant"/>
-          </Theme>
-        `
+      <Theme class="items-center mb-3">
+        <CustomerCard v-bind="args" />
+      </Theme>
+    `
   })
 }
 
-export const bigVariant = {
-  name: 'Big variant customer style card',
+export const BigVariant = {
   args: {
     variant: 'big',
     customer: {
@@ -56,28 +52,25 @@ export const bigVariant = {
         street: '123 Main Street',
         city: 'Pennsylvania',
         state: 'Pennsylvania',
-        postal_code: '12345 ',
+        postal_code: '12345',
         country: 'USA'
       }
     }
   },
   render: (args) => ({
-    components: { CustomerCard, Theme },
+    components: { Theme, CustomerCard },
     setup() {
-      return {
-        args
-      }
+      return { args }
     },
     template: `
       <Theme class="items-center mb-3">
-        <CustomerCard :customer="args.customer" :variant="args.variant" />
+        <CustomerCard v-bind="args" />
       </Theme>
     `
   })
 }
 
-export const isBeneficiary = {
-  name: 'Beneficiary style card',
+export const Beneficiary = {
   argTypes: {
     variant: {
       control: 'select',
@@ -86,6 +79,7 @@ export const isBeneficiary = {
   },
   args: {
     variant: 'small',
+    isBeneficiary: true,
     customer: {
       name: 'Alex Turner',
       currency: 'SGD',
@@ -93,54 +87,47 @@ export const isBeneficiary = {
       phone_number: '+65 8373 3739 18',
       bank_name: 'DBS Bank',
       bank_account_number: '**** 1234'
-    },
-    isBeneficiary: true
+    }
   },
   render: (args) => ({
-    components: { CustomerCard, Theme },
+    components: { Theme, CustomerCard },
     setup() {
-      return {
-        args
-      }
+      return { args }
     },
     template: `
       <Theme class="items-center mb-3">
-        <CustomerCard :customer="args.customer" :is-beneficiary="args.isBeneficiary" :variant="args.variant" />
+        <CustomerCard v-bind="args" />
       </Theme>
     `
   })
 }
 
-export const bigVariantBeneficiary = {
-  name: 'Big variant beneficiary card',
+export const BigBeneficiary = {
   args: {
     variant: 'big',
+    isBeneficiary: true,
     customer: {
       name: 'Alex Turner',
       currency: 'SGD',
       email: 'alex@arcticmonkey.io',
       bank_name: 'DBS Bank',
       bank_account_number: '**** 1234'
-    },
-    isBeneficiary: true
+    }
   },
   render: (args) => ({
-    components: { CustomerCard, Theme },
+    components: { Theme, CustomerCard },
     setup() {
-      return {
-        args
-      }
+      return { args }
     },
     template: `
       <Theme class="items-center mb-3">
-        <CustomerCard :customer="args.customer" :is-beneficiary="args.isBeneficiary" :variant="args.variant" />
+        <CustomerCard v-bind="args" />
       </Theme>
     `
   })
 }
 
-export const isClosable = {
-  name: 'Closable beneficiary style card',
+export const Closable = {
   argTypes: {
     variant: {
       control: 'select',
@@ -149,6 +136,8 @@ export const isClosable = {
   },
   args: {
     variant: 'small',
+    isBeneficiary: true,
+    isClosable: true,
     customer: {
       name: 'Alex Turner',
       currency: 'SGD',
@@ -156,19 +145,16 @@ export const isClosable = {
       phone_number: '+65 8373 3739 18',
       bank_name: 'DBS Bank',
       bank_account_number: '**** 1234'
-    },
-    isBeneficiary: true
+    }
   },
   render: (args) => ({
-    components: { CustomerCard, Theme },
+    components: { Theme, CustomerCard },
     setup() {
-      return {
-        args
-      }
+      return { args }
     },
     template: `
       <Theme class="items-center mb-3">
-        <CustomerCard :customer="args.customer" :is-beneficiary="args.isBeneficiary" :variant="args.variant" :is-closable="true" />
+        <CustomerCard v-bind="args" />
       </Theme>
     `
   })

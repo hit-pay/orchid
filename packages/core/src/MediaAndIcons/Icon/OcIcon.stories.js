@@ -1,23 +1,27 @@
-import { Theme, Icon } from '@/orchidui-core'
+import { Icon, Theme } from '@/orchidui-core'
+
 export default {
   component: Icon,
   tags: ['autodocs']
 }
 
 export const Default = {
+  args: {
+    name: 'flags/SG',
+    width: '22',
+    height: '16'
+  },
   render: (args) => ({
     components: { Icon, Theme },
     setup() {
-      return {
-        args
-      }
+      return { args }
     },
     template: `
-          <Theme>
-            <div class="w-full h-[400px] flex items-center justify-center">
-              <Icon width="22" height="16" name="flags/SG"/>
-            </div>
-          </Theme>
-        `
+      <Theme>
+        <div class="w-full h-[400px] flex items-center justify-center">
+          <Icon v-bind="args" />
+        </div>
+      </Theme>
+    `
   })
 }

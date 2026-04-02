@@ -1,126 +1,103 @@
-import { Theme, CheckboxesGroup } from '@/orchidui-core'
-import { ref, watch } from 'vue'
+import { CheckboxesGroup, Theme } from '@/orchidui-core'
+import { ref } from 'vue'
 
 export default {
   component: CheckboxesGroup,
   tags: ['autodocs']
 }
 
+const sampleCheckboxes = [
+  { label: 'Option 1', value: 1 },
+  { label: 'Option 2', value: 2 },
+  { label: 'Option 3', value: 3 }
+]
+
 export const Default = {
   argTypes: {
-    alignment: {
-      control: 'select',
-      options: ['vertical', 'horizontal']
-    }
+    alignment: { control: 'select', options: ['vertical', 'horizontal'] }
   },
   args: {
     label: 'Label',
-    hint: 'Hint',
+    hint: 'This is a hint text to help user.',
     errorMessage: '',
     alignment: 'vertical',
     isDisabled: false,
     isSelectAll: false,
-    checkboxes: [
-      {
-        label: 'Text',
-        value: 0
-      },
-      {
-        label: 'Text',
-        value: 1
-      },
-      {
-        label: 'Text',
-        value: 2,
-        isDisabled: true
-      }
-    ]
+    checkboxes: sampleCheckboxes
   },
   render: (args) => ({
     components: { CheckboxesGroup, Theme },
     setup() {
-      const selectedCheckboxes = ref([])
-      watch(
-        () => args.modelValue,
-        (val) => (selectedCheckboxes.value = val)
-      )
-      return { args, selectedCheckboxes }
+      const modelValue = ref([])
+      return { modelValue, args }
     },
     template: `
-          <Theme>
-            <div class="flex flex-col gap-y-4">
-              <CheckboxesGroup
-                  v-model="selectedCheckboxes"
-                  :checkboxes="args.checkboxes"
-                  :label="args.label"
-                  :hint="args.hint"
-                  :is-disabled="args.isDisabled"
-                  :error-message="args.errorMessage"
-                  :isSelectAll="args.isSelectAll"
-                  :alignment="args.alignment"
-              />
-              <div class="flex gap-x-2">
-                Model value:
-                {{ selectedCheckboxes }}
-              </div>
-            </div>
-          </Theme>
-        `
+      <Theme>
+        <CheckboxesGroup
+          v-model="modelValue"
+          v-bind="args"
+        />
+      </Theme>
+    `
   })
 }
-export const buttonVariants = {
-  args: {
-    label: 'Label',
-    checkboxes: [
-      {
-        label: 'Text',
-        value: 0
-      },
-      {
-        label: 'Text',
-        value: 1
-      },
-      {
-        label: 'Text',
-        value: 2
-      },
-      {
-        label: 'Text',
-        value: 3
-      },
-      {
-        label: 'Text',
-        value: 5
-      }
-    ]
-  },
-  render: (args) => ({
+
+export const Variants = {
+  render: () => ({
     components: { CheckboxesGroup, Theme },
     setup() {
-      const selectedCheckbox1 = ref([])
-      const selectedCheckbox2 = ref([])
-
-      return { selectedCheckbox1, selectedCheckbox2, args }
+      const vertical = ref([])
+      const horizontal = ref([])
+      const disabledValue = ref([])
+      const withError = ref([])
+      return { vertical, horizontal, disabledValue, withError }
     },
     template: `
-          <Theme>
-            <div class="flex flex-col gap-y-4">
-              <CheckboxesGroup
-                  v-model="selectedCheckbox1"
-                  :checkboxes="args.checkboxes"
-                  :label="args.label"
-                  alignment="vertical"
-                  is-button-variant
-              />
-              <CheckboxesGroup
-                  v-model="selectedCheckbox2"
-                  :checkboxes="args.checkboxes"
-                  :label="args.label"
-                  alignment="horizontal"
-                  is-button-variant
-              />
-            </div>
-          </Theme>
-        `
+      <Theme>
+        <div class="flex flex-col gap-y-6">
+          <CheckboxesGroup
+            v-model="vertical"
+            label="Vertical (default)"
+            hint="Select one or more options."
+            alignment="vertical"
+            :checkboxes="[
+              { label: 'Option 1', value: 1 },
+              { label: 'Option 2', value: 2 },
+              { label: 'Option 3', value: 3 }
+            ]"
+          />
+          <CheckboxesGroup
+            v-model="horizontal"
+            label="Horizontal"
+            alignment="horizontal"
+            :checkboxes="[
+              { label: 'Option 1', value: 1 },
+              { label: 'Option 2', value: 2 },
+              { label: 'Option 3', value: 3 }
+            ]"
+          />
+          <CheckboxesGroup
+            v-model="disabledValue"
+            label="Disabled"
+            :is-disabled="true"
+            :checkboxes="[
+              { label: 'Option 1', value: 1 },
+              { label: 'Option 2', value: 2 },
+              { label: 'Option 3', value: 3 }
+            ]"
+          />
+          <CheckboxesGroup
+            v-model="withError"
+            label="With Error"
+            error-message="Please select at least one option."
+            :checkboxes="[
+              { label: 'Option 1', value: 1 },
+              { label: 'Option 2', value: 2 },
+              { label: 'Option 3', value: 3 }
+            ]"
+          />
+        </div>
+      </Theme>
+    `
   })
 }

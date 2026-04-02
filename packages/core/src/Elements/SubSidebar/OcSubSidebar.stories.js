@@ -48,10 +48,9 @@ export const Default = {
       return { modelValue, args }
     },
     template: `
-          <Theme>
-            <SubSidebar v-model="modelValue" class="w-fit" :menu="args.menu" :title="args.title"
-                        @titleClick="args.onTitleClick"/>
-          </Theme>
-        `
+      <Theme>
+        <SubSidebar v-model="modelValue" class="w-fit" :menu="args.menu" :title="args.title" @titleClick="args.onTitleClick"/>
+      </Theme>
+    `
   })
 }

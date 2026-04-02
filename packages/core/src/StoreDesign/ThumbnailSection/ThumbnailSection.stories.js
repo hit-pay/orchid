@@ -1,9 +1,8 @@
-import { Theme } from '@/orchidui-core'
-import ThumbnailSection from './ThumbnailSection.vue'
+import { Theme, ThumbnailSection } from '@/orchidui-core'
 
 export default {
-  tags: ['autodocs'],
-  component: ThumbnailSection
+  component: ThumbnailSection,
+  tags: ['autodocs']
 }
 
 export const Default = {
@@ -20,9 +19,9 @@ export const Default = {
         title: 'Section 2'
       },
       {
-        name: 'section_2',
+        name: 'section_3',
         preview: '/images/section.png',
-        title: 'Section 2'
+        title: 'Section 3'
       }
     ]
   },
@@ -32,11 +31,11 @@ export const Default = {
       return { args }
     },
     template: `
-          <Theme>
-              <div class="grid grid-cols-2 gap-5 w-[535px]">
-                <ThumbnailSection v-for="section in args.sections" :section="section"  />
-               </div>
-          </Theme>
-        `
+      <Theme>
+        <div class="grid grid-cols-2 gap-5 w-[535px]">
+          <ThumbnailSection v-for="section in args.sections" :section="section" />
+        </div>
+      </Theme>
+    `
   })
 }

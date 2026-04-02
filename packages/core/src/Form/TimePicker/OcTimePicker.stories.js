@@ -1,4 +1,4 @@
-import { Theme, TimePicker } from '@/orchidui-core'
+import { TimePicker, Theme } from '@/orchidui-core'
 import { ref } from 'vue'
 
 export default {
@@ -7,41 +7,25 @@ export default {
 }
 
 export const Default = {
-  argTypes: {
-    labelIcon: {
-      control: 'select',
-      options: ['', 'question-mark']
-    }
-  },
   args: {
     label: '',
     hint: '',
-    preFill: '',
-    icon: undefined,
-    placeholder: '',
+    disabled: false,
     errorMessage: '',
-    isRequired: false,
-    isDisabled: false,
-    labelIcon: '',
-    tooltipText: 'Tooltip text',
-    tooltipOptions: {
-      position: 'top',
-      distance: 10
-    }
+    is24Hours: false
   },
   render: (args) => ({
-    components: { Theme, TimePicker },
+    components: { TimePicker, Theme },
     setup() {
-      const modelValue = ref(new Date())
+      const modelValue = ref('09:30')
       return { modelValue, args }
     },
     template: `
-          <Theme>
-            <p>{{ modelValue }}</p>
-            <div class="w-full h-[200px]">
-              <TimePicker v-model="modelValue" v-bind="args"/>
-            </div>
-          </Theme>
-        `
+      <Theme>
+        <div class="w-full h-[200px]">
+          <TimePicker v-model="modelValue" v-bind="args" />
+        </div>
+      </Theme>
+    `
   })
 }

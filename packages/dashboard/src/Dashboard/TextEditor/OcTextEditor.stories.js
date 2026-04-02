@@ -1,32 +1,21 @@
-import { Theme } from '@/orchidui-core'
 import { TextEditor } from '@/orchidui-dashboard'
+import { Theme } from '@/orchidui-core'
 import { ref } from 'vue'
 
 export default {
   component: TextEditor,
   tags: ['autodocs']
 }
+
 export const Default = {
   args: {
     label: 'Label',
     isRequired: true,
     fontSizes: [
-      {
-        label: 'Default',
-        value: '14px'
-      },
-      {
-        label: 'Medium',
-        value: '16px'
-      },
-      {
-        label: 'Large',
-        value: '18px'
-      },
-      {
-        label: 'Extra Large',
-        value: '20px'
-      }
+      { label: 'Default', value: '14px' },
+      { label: 'Medium', value: '16px' },
+      { label: 'Large', value: '18px' },
+      { label: 'Extra Large', value: '20px' }
     ],
     initialFontSize: '14px',
     placeholder: 'Placeholder'
@@ -36,29 +25,28 @@ export const Default = {
     setup() {
       const modelValue = ref('')
       const modelValue2 = ref('')
-      const onUpdateImage = () => {
-        // console.log(base64);
-      }
+      const onUpdateImage = () => {}
       return { args, modelValue, modelValue2, onUpdateImage }
     },
     template: `
-          <Theme>
+      <Theme>
+        <div @click="modelValue = ''" class="cursor-pointer mb-1">Clear</div>
+        <div @click="modelValue = 'default model value'" class="cursor-pointer mb-4">Reset</div>
 
-            <div @click="modelValue = ''">Clear</div>
-            <div @click="modelValue = 'default model value'">Reset</div>
+        <div class="mb-2">Full Editor</div>
+        <TextEditor id="quill-example" v-model="modelValue" v-bind="args" @update:image="onUpdateImage" />
+        <div class="flex gap-y-6 flex-col mt-8">
+          <div>Preview</div>
+          <div v-html="modelValue" />
+        </div>
 
-            Full Editor
-            <TextEditor id="quill-example" v-model="modelValue" v-bind="args" @update:image="onUpdateImage"/>
-             <div class="flex gap-y-6 flex-col mt-8">Preview
-              <div v-html="modelValue"/>
-            </div>
-            Text Only Editor
-            <TextEditor id="quill-example-text-only" variant="text-only" v-model="modelValue2" v-bind="args" />
- <div class="flex gap-y-6 flex-col mt-8">Preview
-              <div v-html="modelValue2"/>
-            </div>
-           
-          </Theme>
-        `
+        <div class="mt-8 mb-2">Text Only Editor</div>
+        <TextEditor id="quill-example-text-only" variant="text-only" v-model="modelValue2" v-bind="args" />
+        <div class="flex gap-y-6 flex-col mt-8">
+          <div>Preview</div>
+          <div v-html="modelValue2" />
+        </div>
+      </Theme>
+    `
   })
 }

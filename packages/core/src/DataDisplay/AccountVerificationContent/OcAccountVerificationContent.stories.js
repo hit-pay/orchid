@@ -1,4 +1,4 @@
-import { OcAccountVerificationContent, OcOnboardingRecap } from '@/orchidui-core'
+import { Theme, OcAccountVerificationContent, OcOnboardingRecap } from '@/orchidui-core'
 
 export default {
   component: OcAccountVerificationContent,
@@ -13,7 +13,7 @@ export const Default = {
     buttons: [
       {
         label: 'Cancel',
-        variant: 'secondary',
+        variant: 'secondary'
       },
       {
         label: 'Submit',
@@ -22,24 +22,26 @@ export const Default = {
     ]
   },
   render: (args) => ({
-    components: { OcAccountVerificationContent, OcOnboardingRecap },
+    components: { Theme, OcAccountVerificationContent, OcOnboardingRecap },
     setup() {
       return { args }
     },
     template: `
-      <OcAccountVerificationContent v-bind="args">
-        <OcOnboardingRecap
-          title="Business Information"
-          state="completed"
-          :header-button="{ leftIcon: 'pencil', label: 'Edit' }"
-          :items="[
-            { label: 'Business Name', value: 'Acme Corporation' },
-            { label: 'Registration Number', value: 'REG-123456789' },
-            { label: 'Business Type', value: 'Private Limited Company' },
-            { label: 'Documents', value: ['business-registration.pdf', 'tax-certificate.pdf'] }
-          ]"
-        />
-      </OcAccountVerificationContent>
+      <Theme>
+        <OcAccountVerificationContent v-bind="args">
+          <OcOnboardingRecap
+            title="Business Information"
+            state="completed"
+            :header-button="{ leftIcon: 'pencil', label: 'Edit' }"
+            :items="[
+              { label: 'Business Name', value: 'Acme Corporation' },
+              { label: 'Registration Number', value: 'REG-123456789' },
+              { label: 'Business Type', value: 'Private Limited Company' },
+              { label: 'Documents', value: ['business-registration.pdf', 'tax-certificate.pdf'] }
+            ]"
+          />
+        </OcAccountVerificationContent>
+      </Theme>
     `
   })
 }
@@ -58,26 +60,28 @@ export const Preview = {
     ]
   },
   render: (args) => ({
-    components: { OcAccountVerificationContent, OcOnboardingRecap },
+    components: { Theme, OcAccountVerificationContent, OcOnboardingRecap },
     setup() {
       return { args }
     },
     template: `
-      <OcAccountVerificationContent v-bind="args">
-        <OcOnboardingRecap
-          title="Business Information"
-          state="completed"
-          flat
-          no-header
-          :header-button="{ leftIcon: 'pencil', label: 'Edit' }"
-          :items="[
-            { label: 'Business Name', value: 'Acme Corporation' },
-            { label: 'Registration Number', value: 'REG-123456789' },
-            { label: 'Business Type', value: 'Private Limited Company' },
-            { label: 'Documents', value: ['business-registration.pdf', 'tax-certificate.pdf'] }
-          ]"
-        />
-      </OcAccountVerificationContent>
+      <Theme>
+        <OcAccountVerificationContent v-bind="args">
+          <OcOnboardingRecap
+            title="Business Information"
+            state="completed"
+            flat
+            no-header
+            :header-button="{ leftIcon: 'pencil', label: 'Edit' }"
+            :items="[
+              { label: 'Business Name', value: 'Acme Corporation' },
+              { label: 'Registration Number', value: 'REG-123456789' },
+              { label: 'Business Type', value: 'Private Limited Company' },
+              { label: 'Documents', value: ['business-registration.pdf', 'tax-certificate.pdf'] }
+            ]"
+          />
+        </OcAccountVerificationContent>
+      </Theme>
     `
   })
 }

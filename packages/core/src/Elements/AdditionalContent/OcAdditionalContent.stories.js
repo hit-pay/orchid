@@ -1,10 +1,10 @@
 import { AdditionalContent, OverviewItem, Theme } from '@/orchidui-core'
 
 export default {
-  components: { OverviewItem },
   component: AdditionalContent,
   tags: ['autodocs']
 }
+
 const argTypes = {
   variant: {
     control: 'select',
@@ -90,6 +90,7 @@ const argTypes = {
     options: ['accent-1', 'accent-2', 'success', 'warning', 'error', 'gray', '']
   }
 }
+
 const args = {
   mainLink: 'https://securecheckout.staging.hit-pay.com/payment-request',
   userId: '/@minstore-edit43',
@@ -209,6 +210,7 @@ const args = {
     }
   }
 }
+
 export const Default = {
   argTypes,
   args,
@@ -218,29 +220,30 @@ export const Default = {
       return { args }
     },
     template: `
-          <Theme class="h-[300px]">
-            <AdditionalContent
-                :main-link="args.mainLink"
-                :chip-label="args.chipLabel"
-                :additional-title="args.additionalTitle"
-                :chip-variant="args.chipVariant"
-                :user-id="args.userId"
-                :primary-actions="args.primaryActions"
-                :variant="args.variant ?? 'default'"
-                :boxes="args.boxes"
-                :overview-items="args.overviewItems"
-                :overview-tabs="args.overviewTabs"
-                :customer-card-variant="args.customerCardVariant"
-                :is-customer="args.isCustomer"
-                :customer="args.customer"
-                :overview-active-tab="args.overviewActiveTab"
-                :is-loading="args.isLoading"
-                @change-tab="args.overviewActiveTab = $event"
-            />
-          </Theme>
-        `
+      <Theme class="h-[300px]">
+        <AdditionalContent
+          :main-link="args.mainLink"
+          :chip-label="args.chipLabel"
+          :additional-title="args.additionalTitle"
+          :chip-variant="args.chipVariant"
+          :user-id="args.userId"
+          :primary-actions="args.primaryActions"
+          :variant="args.variant ?? 'default'"
+          :boxes="args.boxes"
+          :overview-items="args.overviewItems"
+          :overview-tabs="args.overviewTabs"
+          :customer-card-variant="args.customerCardVariant"
+          :is-customer="args.isCustomer"
+          :customer="args.customer"
+          :overview-active-tab="args.overviewActiveTab"
+          :is-loading="args.isLoading"
+          @change-tab="args.overviewActiveTab = $event"
+        />
+      </Theme>
+    `
   })
 }
+
 export const Dynamic = {
   args,
   argTypes,
@@ -250,67 +253,67 @@ export const Dynamic = {
       return { args, argTypes }
     },
     template: `
-          <Theme class="h-[300px]">
-            <AdditionalContent
-                :main-link="args.mainLink"
-                :chip-label="args.chipLabel"
-                :additional-title="args.additionalTitle"
-                :chip-variant="args.chipVariant"
-                :user-id="args.userId"
-                :primary-actions="args.primaryActions"
-                variant="dynamic"
-                :boxes="argTypes['boxes'].options['5 Fields in 2 boxes']"
-                :overview-items="args.overviewItems"
-                :overview-tabs="args.overviewTabs"
-                :customer-card-variant="args.customerCardVariant"
-                :is-customer="args.isCustomer"
-                :customer="args.customer"
-                :overview-active-tab="args.overviewActiveTab"
-                @change-tab="args.overviewActiveTab = $event"
-            />
-            <AdditionalContent
-                :main-link="args.mainLink"
-                :chip-label="args.chipLabel"
-                :additional-title="args.additionalTitle"
-                :chip-variant="args.chipVariant"
-                :user-id="args.userId"
-                :primary-actions="args.primaryActions"
-                variant="dynamic"
-                :boxes="argTypes['boxes'].options['4 Fields']"
-                :overview-items="args.overviewItems"
-                :overview-tabs="args.overviewTabs"
-                :customer-card-variant="args.customerCardVariant"
-                is-customer
-                customer-is-hover
-                customer-is-edit
-                :customer="args.customer"
-                :overview-active-tab="args.overviewActiveTab"
-                @change-tab="args.overviewActiveTab = $event"
+      <Theme class="h-[300px]">
+        <AdditionalContent
+          :main-link="args.mainLink"
+          :chip-label="args.chipLabel"
+          :additional-title="args.additionalTitle"
+          :chip-variant="args.chipVariant"
+          :user-id="args.userId"
+          :primary-actions="args.primaryActions"
+          variant="dynamic"
+          :boxes="argTypes['boxes'].options['5 Fields in 2 boxes']"
+          :overview-items="args.overviewItems"
+          :overview-tabs="args.overviewTabs"
+          :customer-card-variant="args.customerCardVariant"
+          :is-customer="args.isCustomer"
+          :customer="args.customer"
+          :overview-active-tab="args.overviewActiveTab"
+          @change-tab="args.overviewActiveTab = $event"
+        />
+        <AdditionalContent
+          :main-link="args.mainLink"
+          :chip-label="args.chipLabel"
+          :additional-title="args.additionalTitle"
+          :chip-variant="args.chipVariant"
+          :user-id="args.userId"
+          :primary-actions="args.primaryActions"
+          variant="dynamic"
+          :boxes="argTypes['boxes'].options['4 Fields']"
+          :overview-items="args.overviewItems"
+          :overview-tabs="args.overviewTabs"
+          :customer-card-variant="args.customerCardVariant"
+          is-customer
+          customer-is-hover
+          customer-is-edit
+          :customer="args.customer"
+          :overview-active-tab="args.overviewActiveTab"
+          @change-tab="args.overviewActiveTab = $event"
+        >
+          <template #Box="{ data, key }">
+            <OverviewItem
+              v-for="(field, index) in data.items"
+              :key="data.key + '-' + index"
+              is-transparent
+              :title="field.title"
+              :content="field.content"
             >
-              <template #Box="{ data, key }">
-                <OverviewItem
-                    v-for="(field, index) in data.items"
-                    :key="data.key + '-' + index"
-                    is-transparent
-                    :title="field.title"
-                    :content="field.content"
-                >
-                  <template #content>
-                    <div class="text-oc-success-500">{{field.content}}</div>
-                  </template>
-                </OverviewItem>
+              <template #content>
+                <div class="text-oc-success-500">{{field.content}}</div>
               </template>
-              <template #BoxInfoTooltip>
-                <div class="p-4">
-                  <div class="text-oc-error">Tooltip</div>
-                </div>
-              </template>
-              <template #customer-bottom>
-                <div>Customer Bottom</div>
-              </template>
-            </AdditionalContent>
-          </Theme>
-        `
+            </OverviewItem>
+          </template>
+          <template #BoxInfoTooltip>
+            <div class="p-4">
+              <div class="text-oc-error">Tooltip</div>
+            </div>
+          </template>
+          <template #customer-bottom>
+            <div>Customer Bottom</div>
+          </template>
+        </AdditionalContent>
+      </Theme>
+    `
   })
 }
 
@@ -323,32 +326,32 @@ export const Balance = {
       return { args, argTypes }
     },
     template: `
-          <Theme class="h-[300px]">
-            <AdditionalContent
-                :main-link="args.mainLink"
-                :chip-label="args.chipLabel"
-                :additional-title="args.additionalTitle"
-                :chip-variant="args.chipVariant"
-                :user-id="args.userId"
-                :primary-actions="args.primaryActions"
-                variant="balance"
-                :boxes="args.boxes"
-                :overview-items="args.overviewItems"
-                :overview-tabs="args.overviewTabs"
-                :customer-card-variant="args.customerCardVariant"
-                :is-customer="args.isCustomer"
-                :customer="args.customer"
-                :overview-active-tab="args.overviewActiveTab"
-                @change-tab="args.overviewActiveTab = $event"
-            >
-              <template #hitpay="{ tab }">
-                Test block for hitpay slot
-              </template>
-              <template #footer>
-                Test block for footer slot
-              </template>
-            </AdditionalContent>
-          </Theme>
-        `
+      <Theme class="h-[300px]">
+        <AdditionalContent
+          :main-link="args.mainLink"
+          :chip-label="args.chipLabel"
+          :additional-title="args.additionalTitle"
+          :chip-variant="args.chipVariant"
+          :user-id="args.userId"
+          :primary-actions="args.primaryActions"
+          variant="balance"
+          :boxes="args.boxes"
+          :overview-items="args.overviewItems"
+          :overview-tabs="args.overviewTabs"
+          :customer-card-variant="args.customerCardVariant"
+          :is-customer="args.isCustomer"
+          :customer="args.customer"
+          :overview-active-tab="args.overviewActiveTab"
+          @change-tab="args.overviewActiveTab = $event"
+        >
+          <template #hitpay="{ tab }">
+            Test block for hitpay slot
+          </template>
+          <template #footer>
+            Test block for footer slot
+          </template>
+        </AdditionalContent>
+      </Theme>
+    `
   })
 }

@@ -1,4 +1,4 @@
-import { AuthenticationOption } from './AuthenticationOption.js'
+import { Theme, AuthenticationOption } from '@/orchidui-core'
 
 export default {
   component: AuthenticationOption,
@@ -23,18 +23,17 @@ export const Default = {
     }
   },
   render: (args) => ({
-    components: { AuthenticationOption },
-
+    components: { Theme, AuthenticationOption },
     setup() {
-      return {
-        args
-      }
+      return { args }
     },
     template: `
-          <div class="flex gap-x-4">
-            <AuthenticationOption class="w-full" v-bind="args.firstOption"/>
-            <AuthenticationOption class="w-full" v-bind="args.secondOption"/>
-          </div>
-        `
+      <Theme>
+        <div class="flex gap-x-4">
+          <AuthenticationOption class="w-full" v-bind="args.firstOption"/>
+          <AuthenticationOption class="w-full" v-bind="args.secondOption"/>
+        </div>
+      </Theme>
+    `
   })
 }

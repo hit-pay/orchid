@@ -1,9 +1,8 @@
-import { Theme } from '@/orchidui-core'
-import ThumbnailTheme from './ThumbnailTheme.vue'
+import { Theme, ThumbnailTheme } from '@/orchidui-core'
 
 export default {
-  tags: ['autodocs'],
-  component: ThumbnailTheme
+  component: ThumbnailTheme,
+  tags: ['autodocs']
 }
 
 export const Default = {
@@ -33,7 +32,6 @@ export const Default = {
         active: false,
         installed: true
       },
-
       {
         id: 4,
         thumbnail: '/images/theme1.png',
@@ -59,11 +57,16 @@ export const Default = {
       return { args }
     },
     template: `
-          <Theme>
-              <div class="grid grid-cols-2 md:grid-cols-3 gap-5">
-                <ThumbnailTheme if-pro-account  v-for="(theme, idx) in args.templates" :theme="theme" :activating="idx === 0" />
-               </div>
-          </Theme>
-        `
+      <Theme>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-5">
+          <ThumbnailTheme
+            if-pro-account
+            v-for="(theme, idx) in args.templates"
+            :theme="theme"
+            :activating="idx === 0"
+          />
+        </div>
+      </Theme>
+    `
   })
 }

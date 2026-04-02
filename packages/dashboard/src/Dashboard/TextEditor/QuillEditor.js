@@ -161,8 +161,21 @@ export const QuillEditor = defineComponent({
       }
 
       quill.root.addEventListener('paste', function () {
+        const existingImages = new Set(quill.root.querySelectorAll('img'))
         setTimeout(() => {
-          removeBase64Images()
+          const images = quill.root.querySelectorAll('img')
+          images.forEach((img) => {
+            if (existingImages.has(img)) return
+            const src = img.getAttribute('src')
+            if (src && (src.startsWith('data:image/') || props.isTextOnly)) {
+              const blot = Quill.find(img)
+              if (blot) {
+                blot.deleteAt(0)
+              } else {
+                img.remove()
+              }
+            }
+          })
         }, 10)
       })
     }

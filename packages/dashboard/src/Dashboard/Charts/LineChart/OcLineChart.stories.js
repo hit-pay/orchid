@@ -1,11 +1,12 @@
-import LineChart from './OcLineChart.vue'
+import { LineChart } from '@/orchidui-dashboard'
+import { Theme } from '@/orchidui-core'
 
 export default {
   component: LineChart,
   tags: ['autodocs']
 }
 
-export const Line = {
+export const Default = {
   args: {
     showGrid: false,
     showTooltip: true,
@@ -45,27 +46,18 @@ export const Line = {
         currency: 'sgd',
         maximumFractionDigits: 2
       })
-
       return currency.format(value)
     }
   },
   render: (args) => ({
-    components: { LineChart },
+    components: { LineChart, Theme },
     setup() {
       return { args }
     },
     template: `
-          <div>
-            <LineChart
-                class="h-[300px]"
-                :show-grid="args.showGrid"
-                :show-tooltip="args.showTooltip"
-                :show-legend="args.showLegend"
-                :chart-data="args.chartData"
-                :label-data="args.labelData"
-                :tooltip-value-formatter="args.tooltipValueFormatter"
-            />
-          </div>
-        `
+      <Theme>
+        <LineChart class="h-[300px]" v-bind="args" />
+      </Theme>
+    `
   })
 }

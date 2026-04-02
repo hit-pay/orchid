@@ -1,5 +1,5 @@
+import { SingleFileUpload, Theme } from '@/orchidui-core'
 import { ref } from 'vue'
-import { SingleFileUpload, RadioGroup, Icon } from '@/orchidui-core'
 
 export default {
   component: SingleFileUpload,
@@ -22,139 +22,45 @@ export const Default = {
     }
   },
   render: (args) => ({
-    components: { SingleFileUpload, RadioGroup },
+    components: { SingleFileUpload, Theme },
     setup() {
       const modelValue = ref()
-      const variant = ref('upload')
-      const radios = [
-        {
-          label: 'Upload file',
-          value: 'upload'
-        },
-        {
-          label: 'Insert from URL',
-          value: 'url'
-        }
-      ]
-      return { radios, variant, modelValue, args }
+      return { modelValue, args }
     },
     template: `
-          <div class="p-5 rounded flex flex-col gap-y-2" :class="args.isImageOnly ? '' : 'bg-oc-bg-dark'">
-            <RadioGroup
-                v-if="!args.isImageOnly"
-                v-model="variant"
-                :radio="radios"
-                class="items-center"
-                alignment="horizontal"
-                wrapper-class="gap-x-5 flex-nowrap w-fit whitespace-nowrap justify-center"
-            />
+      <Theme>
+        <SingleFileUpload v-model="modelValue" v-bind="args" />
+      </Theme>
+    `
+  })
+}
 
-            <SingleFileUpload
-                class="max-w-[400px] self-center"
-                v-model="modelValue"
-                format="object"
-                :variant="variant"
-                :is-preview="args.isPreview"
-                :accept="args.accept"
-                :is-image-only="args.isImageOnly"
-                :max-size="args.maxSize"
-                :label="args.label"
-                :hint="args.hint"
-                :error-message="args.errorMessage"
-                :is-button-only="variant === 'url' ? false : args.isButtonOnly"
-                :button-upload-props="args.buttonUploadProps"
-            />
-          </div>
-
-        `
-  })
-}
-export const Upload = {
-  render: () => ({
-    components: { SingleFileUpload },
-    setup() {
-      const file = ref()
-      return {
-        file
-      }
-    },
-    template: `
-          {{file}}
-          <SingleFileUpload
-            v-model="file"
-            is-preview
-            show-error-style-only
-            :error-message="'Error here'"
-          />
-        `
-  })
-}
-export const Url = {
-  render: () => ({
-    components: { SingleFileUpload },
-    template: `
-          <SingleFileUpload variant="url"/>
-        `
-  })
-}
-export const Disabled = {
-  render: () => ({
-    components: { SingleFileUpload, Icon },
-    setup() {
-      const imageRef = ref({
-        current: {
-          id: 'image_1',
-          path: 'https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/covers/small/99d696e564ba45fbaa0fb2e3b43d0e27.jpg',
-          caption: 'Image 1'
-        }
-      })
-
-      return {
-        imageRef
-      }
-    },
-    template: `
-          <SingleFileUpload is-disabled />
-          <SingleFileUpload
-            v-model="imageRef"
-            is-disabled
-          >
-            <template #progress>
-              <div class="flex items-center gap-2">
-                <span class="text-sm text-oc-primary-500">Verifying document</span>
-                <Icon width="16" height="16" class="animate-spin" name="loading-2" />
-              </div>
-            </template>
-          </SingleFileUpload>
-        `
-  })
-}
 export const ImageOnly = {
   render: () => ({
-    components: { SingleFileUpload },
+    components: { SingleFileUpload, Theme },
     setup() {
-      const imageRef = ref({
-        current: {
-          id: 'image_1',
-          path: 'https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/covers/small/99d696e564ba45fbaa0fb2e3b43d0e27.jpg',
-          caption: 'Image 1'
-        }
-        //
-      })
-      const onRemoveFile = (data) => {
-        console.log(data)
-      }
-      return { imageRef, onRemoveFile }
+      const modelValue = ref()
+      return { modelValue }
     },
     template: `
+      <Theme>
+        <SingleFileUpload
+          v-model="modelValue"
+          is-image-only
+          show-upload-image-area
+        />
+      </Theme>
+    `
+  })
+}
 
-          <pre> {{imageRef}}</pre>
-          <SingleFileUpload 
-            v-model="imageRef"
-            is-image-only    
-            show-upload-image-area
-            @onRemoveFile="onRemoveFile"
-          />
-        `
+export const UrlVariant = {
+  render: () => ({
+    components: { SingleFileUpload, Theme },
+    template: `
+      <Theme>
+        <SingleFileUpload variant="url" />
+      </Theme>
+    `
   })
 }

@@ -1,4 +1,5 @@
-import CodeBlock from './OcCodeBlock.vue'
+import { CodeBlock } from '@/orchidui-dashboard'
+import { Theme } from '@/orchidui-core'
 
 export default {
   component: CodeBlock,
@@ -6,12 +7,6 @@ export default {
 }
 
 export const Default = {
-  argTypes: {
-    lang: {
-      control: 'select',
-      options: ['json', 'text']
-    }
-  },
   args: {
     lang: 'json',
     jsonObject: `{
@@ -44,14 +39,14 @@ export const Default = {
 }`
   },
   render: (args) => ({
-    components: {
-      CodeBlock
-    },
+    components: { CodeBlock, Theme },
     setup() {
       return { args }
     },
     template: `
-          <CodeBlock :json-object="args.jsonObject" :lang="args.lang" :key="args.lang"/>
-        `
+      <Theme>
+        <CodeBlock :json-object="args.jsonObject" :lang="args.lang" :key="args.lang" />
+      </Theme>
+    `
   })
 }

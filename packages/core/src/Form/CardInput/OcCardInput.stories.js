@@ -1,4 +1,4 @@
-import { Theme, CardInput } from '@/orchidui-core'
+import { CardInput, Theme } from '@/orchidui-core'
 import { ref } from 'vue'
 
 export default {
@@ -18,14 +18,14 @@ export const Default = {
     }
   },
   args: {
+    label: '',
     hint: 'This is a hint text to help user.',
     placeholder: 'Placeholder',
-    isInlineLabel: false,
     isDisabled: false,
-    label: '',
+    isRequired: false,
+    isInlineLabel: false,
     errorMessage: '',
     cardType: 'mastercard',
-    isRequired: false,
     labelIcon: '',
     tooltipText: 'Tooltip text',
     tooltipOptions: {
@@ -34,28 +34,15 @@ export const Default = {
     }
   },
   render: (args) => ({
-    components: { Theme, CardInput },
+    components: { CardInput, Theme },
     setup() {
-      const text = ref('')
-      return { text, args }
+      const modelValue = ref('')
+      return { modelValue, args }
     },
     template: `
-          <Theme>
-            <CardInput
-                v-model="text"
-                :isInlineLabel="args.isInlineLabel"
-                :isDisabled="args.isDisabled"
-                :label="args.label"
-                :card-type="args.cardType"
-                :hint="args.hint"
-                :placeholder="args.placeholder"
-                :error-message="args.errorMessage"
-                :isRequired="args.isRequired"
-                :tooltip-options="args.tooltipOptions"
-                :label-icon="args.labelIcon"
-                :tooltip-text="args.tooltipText"
-            />
-          </Theme>
-        `
+      <Theme>
+        <CardInput v-model="modelValue" v-bind="args" />
+      </Theme>
+    `
   })
 }

@@ -1,4 +1,4 @@
-import { Theme, SupportMenu } from '@/orchidui-core'
+import { SupportMenu, Theme } from '@/orchidui-core'
 import { ref } from 'vue'
 
 export default {
@@ -8,75 +8,39 @@ export default {
 
 export const Default = {
   args: {
-    title: undefined,
-    info: undefined,
-    confirmButtonProps: undefined,
-    isPointed: true,
     topMenu: [
       {
-        title: 'support',
+        title: 'Support',
         items: [
-          {
-            text: 'Whatsapp',
-            icon: 'whatsapp-colored',
-            isLoading: true,
-          },
-          {
-            text: 'Email Us',
-            icon: 'email',
-            isLoading: true,
-          },
-          {
-            text: 'Record a Bug',
-            icon: 'bug',
-            isLoading: true,
-          }
+          { text: 'Whatsapp', icon: 'whatsapp-colored' },
+          { text: 'Email Us', icon: 'email' },
+          { text: 'Record a Bug', icon: 'bug' }
         ]
       },
       {
         title: 'Resources',
         items: [
-          {
-            text: 'User Guides',
-            icon: 'document',
-            isLoading: true,
-          },
-          {
-            text: 'Blog',
-            icon: 'news'
-          }
+          { text: 'User Guides', icon: 'document' },
+          { text: 'Blog', icon: 'news' }
         ]
       }
     ],
     bottomMenu: [
-      {
-        text: 'What’s new',
-        icon: 'sparkle-2',
-        pointed: true,
-        isLoading: false,
-      },
-      {
-        text: 'Feedback',
-        icon: 'chat-2'
-      },
-      {
-        text: 'Changelog',
-        icon: 'list-check'
-      }
+      { text: "What's new", icon: 'sparkle-2', pointed: true },
+      { text: 'Feedback', icon: 'chat-2' },
+      { text: 'Changelog', icon: 'list-check' }
     ]
   },
-  argTypes: {},
   render: (args) => ({
     components: { SupportMenu, Theme },
     setup() {
-      const modelValue = ref(false)
-      return { args, modelValue }
+      const isOpen = ref(false)
+      return { args, isOpen }
     },
     template: `
-          <Theme class="h-[450px] w-full">
-            <SupportMenu v-model="modelValue" :confirmButtonProps="args.confirmButtonProps"
-                         :title="args.title" :info="args.info" :topMenu="args.topMenu" :bottomMenu="args.bottomMenu" />
-          </Theme>
-        `
+      <Theme class="h-[450px] w-full">
+        <SupportMenu v-model="isOpen" v-bind="args" />
+      </Theme>
+    `
   })
 }

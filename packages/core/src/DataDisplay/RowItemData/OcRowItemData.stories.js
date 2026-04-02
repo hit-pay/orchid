@@ -1,4 +1,4 @@
-import { OcRowItemData } from '@/orchidui-core'
+import { Theme, OcRowItemData } from '@/orchidui-core'
 
 export default {
   component: OcRowItemData,
@@ -19,16 +19,18 @@ export const Default = {
           label: 'Completed',
           variant: 'success'
         }
-      },
+      }
     ]
   },
   render: (args) => ({
-    components: { OcRowItemData },
+    components: { Theme, OcRowItemData },
     setup() {
       return { args }
     },
     template: `
-      <OcRowItemData v-bind="args" />
+      <Theme>
+        <OcRowItemData v-bind="args" />
+      </Theme>
     `
   })
 }
@@ -53,12 +55,14 @@ export const WithIcon = {
     ]
   },
   render: (args) => ({
-    components: { OcRowItemData },
+    components: { Theme, OcRowItemData },
     setup() {
       return { args }
     },
     template: `
-      <OcRowItemData v-bind="args" />
+      <Theme>
+        <OcRowItemData v-bind="args" />
+      </Theme>
     `
   })
 }
@@ -84,12 +88,14 @@ export const WithChip = {
     ]
   },
   render: (args) => ({
-    components: { OcRowItemData },
+    components: { Theme, OcRowItemData },
     setup() {
       return { args }
     },
     template: `
-      <OcRowItemData v-bind="args" />
+      <Theme>
+        <OcRowItemData v-bind="args" />
+      </Theme>
     `
   })
 }
@@ -105,12 +111,14 @@ export const SingleItem = {
     ]
   },
   render: (args) => ({
-    components: { OcRowItemData },
+    components: { Theme, OcRowItemData },
     setup() {
       return { args }
     },
     template: `
-      <OcRowItemData v-bind="args" />
+      <Theme>
+        <OcRowItemData v-bind="args" />
+      </Theme>
     `
   })
 }

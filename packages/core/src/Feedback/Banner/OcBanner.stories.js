@@ -1,4 +1,5 @@
-import { Theme, Banner } from '@/orchidui-core'
+import { Banner, Theme } from '@/orchidui-core'
+import { ref } from 'vue'
 
 export default {
   component: Banner,
@@ -9,62 +10,49 @@ export const Default = {
   argTypes: {
     color: {
       control: 'select',
-      options: ['default', 'primary', 'error', 'warning', 'gray'],
-      default: 'default'
+      options: ['default', 'primary', 'error', 'warning', 'gray']
     },
     icon: {
       control: 'select',
-      options: ['filled-check', 'circle', 'plus', 'x'],
-      default: 'filled-check'
+      options: ['filled-check', 'circle', 'plus', 'x']
     }
   },
   args: {
-    modelValue: true,
-    showIcon: true,
-    transitionName: 'slide-from-top',
-    icon: 'filled-check',
     color: 'default',
-    content: 'Changes have been successfully saved',
+    icon: 'filled-check',
     title: 'Title',
-    dismissible: true
+    content: 'Changes have been successfully saved',
+    showIcon: true,
+    dismissible: true,
+    transitionName: 'slide-from-top'
   },
   render: (args) => ({
     components: { Banner, Theme },
     setup() {
-      return { args }
+      const modelValue = ref(true)
+      return { modelValue, args }
     },
     template: `
-          <Theme colorMode="light" class="h-[300px]">
-            <div class="flex flex-col gap-y-4">
-              <Banner v-bind="args" v-model="args.modelValue"/>
-            </div>
-          </Theme>
-        `
+      <Theme class="h-[300px]">
+        <Banner v-model="modelValue" v-bind="args" />
+      </Theme>
+    `
   })
 }
 
 export const Variants = {
-  args: {
-    showIcon: true,
-    icon: 'filled-check',
-    content: 'Changes have been successfully saved',
-    title: 'Title'
-  },
-  render: (args) => ({
+  render: () => ({
     components: { Banner, Theme },
-    setup() {
-      return { args }
-    },
     template: `
-          <Theme colorMode="light">
-            <div class="flex flex-col gap-y-4">
-              <Banner v-bind="args"/>
-              <Banner v-bind="args" color="primary"/>
-              <Banner v-bind="args" color="error"/>
-              <Banner v-bind="args" color="warning"/>
-              <Banner v-bind="args" color="gray"/>
-            </div>
-          </Theme>
-        `
+      <Theme>
+        <div class="flex flex-col gap-y-4">
+          <Banner :model-value="true" title="Title" content="Changes have been successfully saved" show-icon icon="filled-check" />
+          <Banner :model-value="true" color="primary" title="Title" content="Changes have been successfully saved" show-icon icon="filled-check" />
+          <Banner :model-value="true" color="error" title="Title" content="Changes have been successfully saved" show-icon icon="filled-check" />
+          <Banner :model-value="true" color="warning" title="Title" content="Changes have been successfully saved" show-icon icon="filled-check" />
+          <Banner :model-value="true" color="gray" title="Title" content="Changes have been successfully saved" show-icon icon="filled-check" />
+        </div>
+      </Theme>
+    `
   })
 }

@@ -1,15 +1,15 @@
-import { InfoCard, Button, OverviewItem } from '@/orchidui-core'
+import { Theme, InfoCard, Button, OverviewItem } from '@/orchidui-core'
 
 export default {
   component: InfoCard,
   tags: ['autodocs']
 }
 
-export const infoCard = {
+export const Default = {
   args: {
-    title: 'Card Title',
+    title: 'Payment Overview',
     titleIcon: 'information',
-    titleIconTooltip: 'Hello I am tooltip!',
+    titleIconTooltip: 'Summary of recent payment activity',
     isLoading: false,
     transparent: false,
     hover: true,
@@ -18,32 +18,21 @@ export const infoCard = {
     noDataDescription: 'No items on the site yet'
   },
   render: (args) => ({
-    components: { InfoCard, Button, OverviewItem },
+    components: { Theme, InfoCard, Button, OverviewItem },
     setup() {
-      return {
-        args
-      }
+      return { args }
     },
     template: `
-          <InfoCard :title="args.title"
-                :title-icon="args.titleIcon"
-                :title-icon-tooltip="args.titleIconTooltip"
-                :is-loading="args.isLoading"
-                :transparent="args.transparent"
-                :hover="args.hover"
-                :shadow="args.shadow"
-                :no-data="args.noData"
-                :no-data-description="args.noDataDescription"
-          >
-
-            <div class="my-7">
-              <OverviewItem v-for="o in 4" :key="o" :title="'Item ' + o" icon="circle" class="mb-4"/>
-            </div>
-            
-            <template #footer>
-              <Button>Button</Button>
-            </template>
-          </InfoCard>
-        `
+      <Theme>
+        <InfoCard v-bind="args">
+          <div class="my-7">
+            <OverviewItem v-for="o in 4" :key="o" :title="'Item ' + o" icon="circle" class="mb-4" />
+          </div>
+          <template #footer>
+            <Button>View All</Button>
+          </template>
+        </InfoCard>
+      </Theme>
+    `
   })
 }

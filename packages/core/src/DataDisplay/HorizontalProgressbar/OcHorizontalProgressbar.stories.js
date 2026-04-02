@@ -1,4 +1,4 @@
-import { HorizontalProgressbar } from '@/orchidui-core'
+import { Theme, HorizontalProgressbar } from '@/orchidui-core'
 
 export default {
   component: HorizontalProgressbar,
@@ -11,12 +11,14 @@ export const Default = {
     current: 3
   },
   render: (args) => ({
-    components: { HorizontalProgressbar },
+    components: { Theme, HorizontalProgressbar },
     setup() {
       return { args }
     },
     template: `
-          <HorizontalProgressbar v-bind="args" :label="\`${args.current} / ${args.max} completed\`"/>
-        `
+      <Theme>
+        <HorizontalProgressbar v-bind="args" :label="\`\${args.current} / \${args.max} completed\`" />
+      </Theme>
+    `
   })
 }

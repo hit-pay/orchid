@@ -1,5 +1,4 @@
-import { Theme, Avatar } from '@/orchidui-core'
-import { ref } from 'vue'
+import { Avatar, Theme } from '@/orchidui-core'
 
 export default {
   component: Avatar,
@@ -24,42 +23,35 @@ export const Default = {
   render: (args) => ({
     components: { Avatar, Theme },
     setup() {
-      return {
-        args
-      }
+      return { args }
     },
     template: `
-          <Theme>
-            <div class="w-full h-[400px] flex items-center justify-center">
-              <Avatar :size="args.size" :type="args.type"/>
-            </div>
-          </Theme>
-        `
+      <Theme>
+        <div class="w-full h-[400px] flex items-center justify-center">
+          <Avatar v-bind="args" />
+        </div>
+      </Theme>
+    `
   })
 }
+
 export const Sizes = {
   render: () => ({
     components: { Avatar, Theme },
-    setup() {
-      const sizes = ref([64, 48, 40, 32, 24])
-      return {
-        sizes
-      }
-    },
     template: `
-          <Theme>
-            <div class="w-full flex gap-x-6">
-              <div class="flex flex-col gap-y-4">
-                <Avatar v-for="size in sizes" :key="size" :size="size"/>
-              </div>
-              <div class="flex flex-col gap-y-4">
-                <Avatar v-for="size in sizes" :key="size" :size="size" type="business"/>
-              </div>
-              <div class="flex flex-col gap-y-4">
-                <Avatar v-for="size in sizes" :key="size" :size="size" type="image"/>
-              </div>
-            </div>
-          </Theme>
-        `
+      <Theme>
+        <div class="w-full flex gap-x-6">
+          <div class="flex flex-col gap-y-4">
+            <Avatar v-for="size in [64, 48, 40, 32, 24]" :key="size" :size="size" />
+          </div>
+          <div class="flex flex-col gap-y-4">
+            <Avatar v-for="size in [64, 48, 40, 32, 24]" :key="size" :size="size" type="business" />
+          </div>
+          <div class="flex flex-col gap-y-4">
+            <Avatar v-for="size in [64, 48, 40, 32, 24]" :key="size" :size="size" type="image" />
+          </div>
+        </div>
+      </Theme>
+    `
   })
 }

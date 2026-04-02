@@ -5,8 +5,7 @@ export default {
   tags: ['autodocs']
 }
 
-export const featureOverviewCard = {
-  argTypes: {},
+export const Default = {
   args: {
     title: 'Title',
     description: 'Description',
@@ -31,17 +30,14 @@ export const featureOverviewCard = {
     ]
   },
   render: (args) => ({
-    components: {
-      Theme,
-      FeatureOverviewCard
-    },
+    components: { Theme, FeatureOverviewCard },
     setup() {
       return { args }
     },
     template: `
-          <Theme>
-            <FeatureOverviewCard v-bind="args"/>
-          </Theme>
-        `
+      <Theme>
+        <FeatureOverviewCard v-bind="args"/>
+      </Theme>
+    `
   })
 }

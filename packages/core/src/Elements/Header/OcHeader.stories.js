@@ -15,14 +15,14 @@ import {
 import SampleHeaderLeft from './SampleHeaderLeft.vue'
 import SampleHeaderRight from './SampleHeaderRight.vue'
 
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 
 export default {
   component: Header,
   tags: ['autodocs']
 }
 
-export const HeaderElement = {
+export const Default = {
   args: {
     menus: [
       {
@@ -62,32 +62,28 @@ export const HeaderElement = {
     },
     setup() {
       const activeMenuValue = ref('online_store')
-      const activeMenuLabel = computed(() => {
-        return args.menus.find((m) => m.value === activeMenuValue.value).label
-      })
-
-      return { args, activeMenuValue, activeMenuLabel }
+      return { args, activeMenuValue }
     },
     template: `
-          <Theme>
-            <div class="w-full h-[400px]">
-              <Header class="mb-3">
-                <button aria-label="Menu Button" class="p-3 md:hidden">
-                  <Icon name="menu" width="24" height="24"/>
-                </button>
-                <HeaderLeft class="md:w-[260px]">
-                  <SampleHeaderLeft/>
-                </HeaderLeft>
-                <HeaderCenter class="flex-1 md:flex-none ">
-                  <TabToSelect v-model="activeMenuValue" :menus="args.menus"/>
-                </HeaderCenter>
-                <HeaderRight>
-                  <SampleHeaderRight/>
-                </HeaderRight>
-              </Header>
-            </div>
-          </Theme>
-        `
+      <Theme>
+        <div class="w-full h-[400px]">
+          <Header class="mb-3">
+            <button aria-label="Menu Button" class="p-3 md:hidden">
+              <Icon name="menu" width="24" height="24"/>
+            </button>
+            <HeaderLeft class="md:w-[260px]">
+              <SampleHeaderLeft/>
+            </HeaderLeft>
+            <HeaderCenter class="flex-1 md:flex-none">
+              <TabToSelect v-model="activeMenuValue" :menus="args.menus"/>
+            </HeaderCenter>
+            <HeaderRight>
+              <SampleHeaderRight/>
+            </HeaderRight>
+          </Header>
+        </div>
+      </Theme>
+    `
   })
 }
 
@@ -105,28 +101,23 @@ export const SubHeaderElement = {
       SampleHeaderLeft
     },
     setup() {
-      const activeMenuValue = ref('payments')
-      const activeMenuLabel = computed(() => {
-        return args.menus.find((m) => m.value === activeMenuValue.value).label
-      })
-
-      return { args, activeMenuValue, activeMenuLabel }
+      return { args }
     },
     template: `
-          <Theme>
-            <SubHeader class="mb-3">
-              <HeaderLeft class="hidden md:flex">
-                <SampleHeaderLeft is-sub-header/>
-              </HeaderLeft>
-              <HeaderCenter class="flex-1" :is-saved="args.isSaved">
-                <template #after><span class="text-oc-text-100 ml-3">---Slot After</span></template>
-              </HeaderCenter>
-              <HeaderRight :is-saved="args.isSaved" :primary-props="{label: 'Update'}">
-                <template #before><span class="text-oc-text-100 ml-3">Slot Before---</span></template>
-              </HeaderRight>
-            </SubHeader>
-          </Theme>
-        `
+      <Theme>
+        <SubHeader class="mb-3">
+          <HeaderLeft class="hidden md:flex">
+            <SampleHeaderLeft is-sub-header/>
+          </HeaderLeft>
+          <HeaderCenter class="flex-1" :is-saved="args.isSaved">
+            <template #after><span class="text-oc-text-100 ml-3">---Slot After</span></template>
+          </HeaderCenter>
+          <HeaderRight :is-saved="args.isSaved" :primary-props="{label: 'Update'}">
+            <template #before><span class="text-oc-text-100 ml-3">Slot Before---</span></template>
+          </HeaderRight>
+        </SubHeader>
+      </Theme>
+    `
   })
 }
 
@@ -157,65 +148,57 @@ export const SubHeaderDropdownElement = {
       Button
     },
     setup() {
-      const activeMenuValue = ref('payments')
-      const activeMenuLabel = computed(() => {
-        return args.menus.find((m) => m.value === activeMenuValue.value).label
-      })
-
       const isDropdownOpen = ref(false)
 
       const onDropdownItemClick = (action) => {
         if (!action) return
-
         console.log('dropdown-action', action)
         isDropdownOpen.value = false
       }
 
       return {
         args,
-        activeMenuValue,
-        activeMenuLabel,
         isDropdownOpen,
         onDropdownItemClick
       }
     },
     template: `
-          <Theme>
-            <SubHeader class="mb-3">
-              <HeaderLeft class="hidden md:flex">
-                <SampleHeaderLeft is-sub-header/>
-              </HeaderLeft>
-              <HeaderCenter class="flex-1" :is-saved="args.isSaved" />
-              <HeaderRight :is-saved="args.isSaved" :primary-props="args.primaryProps">
-                <template #primary-button>
-                  <Dropdown v-model="isDropdownOpen" placement="bottom-end">
-                    <Button
-                      class="min-w-[100px]"
-                      label="Save"
-                      v-bind="args.primaryProps"
-                      is-additional-area
-                      additional-area-icon="chevron-down"
-                      @click="$emit('save')"
-                      @addition-click="isDropdownOpen = true"
-                    />
-                    <template #menu>
-                      <div class="flex flex-col">
-                        <div class="p-2 border-b border-gray-200">
-                          <DropdownItem
-                            v-for="option, index in args.dropdownOptions"
-                            :key="index"
-                            :text="option.label"
-                            :icon="option.icon ?? null"
-                            @click="onDropdownItemClick(option.action)"
-                          />
-                        </div>
-                      </div>
-                    </template>
-                  </Dropdown>
+      <Theme>
+        <SubHeader class="mb-3">
+          <HeaderLeft class="hidden md:flex">
+            <SampleHeaderLeft is-sub-header/>
+          </HeaderLeft>
+          <HeaderCenter class="flex-1" :is-saved="args.isSaved" />
+          <HeaderRight :is-saved="args.isSaved" :primary-props="args.primaryProps">
+            <template #primary-button>
+              <Dropdown v-model="isDropdownOpen" placement="bottom-end">
+                <Button
+                  class="min-w-[100px]"
+                  label="Save"
+                  v-bind="args.primaryProps"
+                  is-additional-area
+                  additional-area-icon="chevron-down"
+                  @click="$emit('save')"
+                  @addition-click="isDropdownOpen = true"
+                />
+                <template #menu>
+                  <div class="flex flex-col">
+                    <div class="p-2 border-b border-gray-200">
+                      <DropdownItem
+                        v-for="(option, index) in args.dropdownOptions"
+                        :key="index"
+                        :text="option.label"
+                        :icon="option.icon ?? null"
+                        @click="onDropdownItemClick(option.action)"
+                      />
+                    </div>
+                  </div>
                 </template>
-              </HeaderRight>
-            </SubHeader>
-          </Theme>
-        `
+              </Dropdown>
+            </template>
+          </HeaderRight>
+        </SubHeader>
+      </Theme>
+    `
   })
 }

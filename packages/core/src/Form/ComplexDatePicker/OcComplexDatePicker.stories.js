@@ -1,21 +1,32 @@
-import { ComplexCalendar } from '@/orchidui-core'
-import { Theme } from '@/orchidui-core'
-import dayjs from 'dayjs'
+import { ComplexDatePicker, Theme } from '@/orchidui-core'
 import { ref } from 'vue'
+import dayjs from 'dayjs'
 
 export default {
-  component: ComplexCalendar,
+  component: ComplexDatePicker,
   tags: ['autodocs']
 }
-export const Calendar = {
+
+export const Default = {
+  argTypes: {
+    formatDate: {
+      control: 'select',
+      options: ['DD/MM/YYYY', 'MM/DD/YYYY', 'YYYY/MM/DD']
+    }
+  },
   args: {
+    label: '',
+    hint: '',
+    errorMessage: '',
+    countCalendars: 2,
+    withFooter: true,
+    formatDate: 'DD/MM/YYYY',
+    cancelButtonProps: { label: 'Clear' },
+    submitButtonProps: { label: 'Done' },
     shortcuts: [
       {
         label: 'Today',
-        value: {
-          start: new Date(),
-          end: new Date()
-        }
+        value: { start: new Date(), end: new Date() }
       },
       {
         label: 'Yesterday',
@@ -45,49 +56,18 @@ export const Calendar = {
           end: dayjs().subtract(1, 'month').endOf('month').toDate()
         }
       }
-    ],
-    cancelButtonProps: {
-      label: 'Clear'
-    },
-    submitButtonProps: {
-      label: 'Done'
-    },
-    calendarProps: null,
-    formatDate: 'DD/MM/YYYY',
-    countCalendars: 2,
-    withFooter: true,
-    label: '',
-    hint: '',
-    errorMessage: ''
-  },
-  argTypes: {
-    formatDate: {
-      control: 'select',
-      options: ['DD/MM/YYYY', 'MM/DD/YYYY', 'YYYY/MM/DD']
-    }
+    ]
   },
   render: (args) => ({
-    components: { ComplexCalendar, Theme },
+    components: { ComplexDatePicker, Theme },
     setup() {
-      const range = ref()
-      return { args, range }
+      const modelValue = ref()
+      return { modelValue, args }
     },
     template: `
-          <Theme class="h-[400px]">
-            <ComplexCalendar
-                v-model="range"
-                :shortcuts="args.shortcuts"
-                :calendarProps="args.calendarProps"
-                :cancel-button-props="args.cancelButtonProps"
-                :format-date="args.formatDate"
-                :submit-button-props="args.submitButtonProps"
-                :count-calendars="args.countCalendars"
-                :with-footer="args.withFooter"
-                :label="args.label"
-                :hint="args.hint"
-                :error-message="args.errorMessage"
-            />
-          </Theme>
-        `
+      <Theme class="h-[400px]">
+        <ComplexDatePicker v-model="modelValue" v-bind="args" />
+      </Theme>
+    `
   })
 }

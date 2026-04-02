@@ -5,8 +5,7 @@ export default {
   tags: ['autodocs']
 }
 
-export const overview = {
-  name: 'ListDetail',
+export const Default = {
   argTypes: {
     variant: {
       control: 'select',
@@ -19,60 +18,54 @@ export const overview = {
   },
   args: {
     variant: 'small',
-    label: 'Alex',
+    label: 'Email',
     content: 'alex@arcticmonkey.io',
     alignment: 'horizontal'
   },
   render: (args) => ({
-    components: { ListDetail, Theme },
+    components: { Theme, ListDetail },
     setup() {
-      return {
-        args
-      }
-    },
-    template: `
-          <Theme class="items-center mb-3">
-            <ListDetail :label="args.label" :content="args.content" :alignment="args.alignment" />
-          </Theme>
-        `
-  })
-}
-
-export const vertical = {
-  name: 'Vertical alignment',
-  argTypes: {
-    variant: {
-      control: 'select',
-      options: ['small', 'big']
-    },
-    alignment: {
-      control: 'select',
-      options: ['vertical', 'horizontal']
-    }
-  },
-  args: {
-    variant: 'big',
-    label: 'Alex Turner',
-    content: 'alex@arcticmonkey.io',
-    alignment: 'vertical'
-  },
-  render: (args) => ({
-    components: { ListDetail, Theme },
-    setup() {
-      return {
-        args
-      }
+      return { args }
     },
     template: `
       <Theme class="items-center mb-3">
-        <ListDetail :label="args.label" :content="args.content" :alignment="args.alignment" />
+        <ListDetail v-bind="args" />
       </Theme>
     `
   })
 }
 
-export const usingSlot = {
-  name: 'Using content slot',
+export const Vertical = {
+  argTypes: {
+    variant: {
+      control: 'select',
+      options: ['small', 'big']
+    },
+    alignment: {
+      control: 'select',
+      options: ['vertical', 'horizontal']
+    }
+  },
+  args: {
+    variant: 'big',
+    label: 'Alex Turner',
+    content: 'alex@arcticmonkey.io',
+    alignment: 'vertical'
+  },
+  render: (args) => ({
+    components: { Theme, ListDetail },
+    setup() {
+      return { args }
+    },
+    template: `
+      <Theme class="items-center mb-3">
+        <ListDetail v-bind="args" />
+      </Theme>
+    `
+  })
+}
+
+export const UsingSlot = {
   argTypes: {
     variant: {
       control: 'select',
@@ -89,15 +82,13 @@ export const usingSlot = {
     alignment: 'vertical'
   },
   render: (args) => ({
-    components: { ListDetail, Theme },
+    components: { Theme, ListDetail },
     setup() {
-      return {
-        args
-      }
+      return { args }
     },
     template: `
       <Theme class="items-center mb-3">
-        <ListDetail :label="args.label" :content="args.content" :alignment="args.alignment">
+        <ListDetail v-bind="args">
           <template #content><span>alex@arcticmonkey.io</span></template>
         </ListDetail>
       </Theme>

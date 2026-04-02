@@ -1,21 +1,22 @@
-import { ComplexCalendar } from '@/orchidui-core'
-import { Theme } from '@/orchidui-core'
-import dayjs from 'dayjs'
+import { ComplexCalendar, Theme } from '@/orchidui-core'
 import { ref } from 'vue'
+import dayjs from 'dayjs'
 
 export default {
   component: ComplexCalendar,
   tags: ['autodocs']
 }
-export const Calendar = {
+
+export const Default = {
   args: {
+    countCalendars: 2,
+    withFooter: true,
+    cancelButtonProps: { label: 'Clear' },
+    submitButtonProps: { label: 'Done' },
     shortcuts: [
       {
         label: 'Today',
-        value: {
-          start: new Date(),
-          end: new Date()
-        }
+        value: { start: new Date(), end: new Date() }
       },
       {
         label: 'Yesterday',
@@ -45,15 +46,7 @@ export const Calendar = {
           end: dayjs().subtract(1, 'month').endOf('month').toDate()
         }
       }
-    ],
-    cancelButtonProps: {
-      label: 'Clear'
-    },
-    submitButtonProps: {
-      label: 'Done'
-    },
-    countCalendars: 2,
-    withFooter: true
+    ]
   },
   render: (args) => ({
     components: { ComplexCalendar, Theme },
@@ -62,57 +55,31 @@ export const Calendar = {
       return { modelValue, args }
     },
     template: `
-          <Theme class="h-[400px]">
-            {{ modelValue }}
-            <ComplexCalendar
-                v-model="modelValue"
-                :shortcuts="args.shortcuts"
-                :cancel-button-props="args.cancelButtonProps"
-                :submit-button-props="args.submitButtonProps"
-                :count-calendars="args.countCalendars"
-                :with-footer="args.withFooter"
-            />
-          </Theme>
-        `
+      <Theme class="h-[400px]">
+        <ComplexCalendar v-model="modelValue" v-bind="args" />
+      </Theme>
+    `
   })
 }
 
-export const Single = {
-  args: {
-    shortcuts: null,
-    cancelButtonProps: {
-      label: 'Clear'
-    },
-    submitButtonProps: {
-      label: 'Done'
-    },
-    countCalendars: 1,
-    withFooter: true
-  },
-  render: (args) => ({
+export const SingleCalendar = {
+  render: () => ({
     components: { ComplexCalendar, Theme },
     setup() {
-      const modelValue = ref('20/10/2000')
-      const masks = ref({
-        modelValue: 'DD-MM-YYYY'
-      })
-      return { modelValue, args, masks }
+      const modelValue = ref('')
+      const masks = ref({ modelValue: 'DD/MM/YYYY' })
+      return { modelValue, masks }
     },
     template: `
-          <Theme class="h-[400px]">
-            {{ modelValue }}
-            <ComplexCalendar
-                v-model.string="modelValue"
-                :shortcuts="args.shortcuts"
-                :cancel-button-props="args.cancelButtonProps"
-                :submit-button-props="args.submitButtonProps"
-                :count-calendars="args.countCalendars"
-                :is-range="false"
-                :with-footer="false"
-                :masks="masks"
-                
-            />
-          </Theme>
-        `
+      <Theme class="h-[400px]">
+        <ComplexCalendar
+          v-model.string="modelValue"
+          :count-calendars="1"
+          :is-range="false"
+          :with-footer="false"
+          :masks="masks"
+        />
+      </Theme>
+    `
   })
 }

@@ -1,4 +1,4 @@
-import { OcOnboardingRecap } from '@/orchidui-core'
+import { Theme, OcOnboardingRecap } from '@/orchidui-core'
 
 export default {
   component: OcOnboardingRecap,
@@ -16,26 +16,28 @@ export const Default = {
     },
     items: [
       {
-        label: 'Type',
-        value: 'Sole-proprietorship',
+        label: 'Business Type',
+        value: 'Sole-proprietorship'
       },
       {
-        label: 'Type',
+        label: 'Documents',
         value: [
           'business-registration-certificate.pdf',
           'electricity-bill.jpg',
-          'alex-id.jpg',
+          'alex-id.jpg'
         ]
-      },
+      }
     ]
   },
   render: (args) => ({
-    components: { OcOnboardingRecap },
+    components: { Theme, OcOnboardingRecap },
     setup() {
       return { args }
     },
     template: `
-      <OcOnboardingRecap v-bind="args" />
+      <Theme>
+        <OcOnboardingRecap v-bind="args" />
+      </Theme>
     `
   })
 }
@@ -52,26 +54,28 @@ export const NoHeader = {
     },
     items: [
       {
-        label: 'Type',
-        value: 'Sole-proprietorship',
+        label: 'Business Type',
+        value: 'Sole-proprietorship'
       },
       {
-        label: 'Type',
+        label: 'Documents',
         value: [
           'business-registration-certificate.pdf',
           'electricity-bill.jpg',
-          'alex-id.jpg',
+          'alex-id.jpg'
         ]
-      },
+      }
     ]
   },
   render: (args) => ({
-    components: { OcOnboardingRecap },
+    components: { Theme, OcOnboardingRecap },
     setup() {
       return { args }
     },
     template: `
-      <OcOnboardingRecap v-bind="args" />
+      <Theme>
+        <OcOnboardingRecap v-bind="args" />
+      </Theme>
     `
   })
 }
