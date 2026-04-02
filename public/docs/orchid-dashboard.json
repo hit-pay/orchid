@@ -1,758 +1,1156 @@
-[
-  {
-    "name": "LineChart",
-    "description": "",
-    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-linechart-oclinechart--docs",
-    "props": [
-      {
-        "name": "showTooltip",
-        "required": false,
-        "type": "boolean"
+{
+  "version": "1.0",
+  "library": "@orchidui/dashboard",
+  "generatedAt": "2026-04-02",
+  "total": 13,
+  "components": [
+    {
+      "name": "LineChart",
+      "description": "",
+      "category": "Dashboard",
+      "tags": [
+        "chart",
+        "graph",
+        "analytics",
+        "dashboard"
+      ],
+      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-charts-linechart-oclinechart--docs",
+      "props": {
+        "showTooltip": {
+          "type": "boolean",
+          "required": false
+        },
+        "showLegend": {
+          "type": "boolean",
+          "required": false
+        },
+        "showGrid": {
+          "type": "boolean",
+          "required": false
+        },
+        "chartData": {
+          "type": "array",
+          "required": false
+        },
+        "labelData": {
+          "type": "array",
+          "required": false
+        },
+        "tooltipFormatter": {
+          "type": "func",
+          "required": false
+        },
+        "tooltipValueFormatter": {
+          "type": "func",
+          "required": false
+        }
       },
-      {
-        "name": "showLegend",
-        "required": false,
-        "type": "boolean"
-      },
-      {
-        "name": "showGrid",
-        "required": false,
-        "type": "boolean"
-      },
-      {
-        "name": "chartData",
-        "required": false,
-        "type": "array"
-      },
-      {
-        "name": "labelData",
-        "required": false,
-        "type": "array"
-      },
-      {
-        "name": "tooltipFormatter",
-        "required": false,
-        "type": "func"
-      },
-      {
-        "name": "tooltipValueFormatter",
-        "required": false,
-        "type": "func"
-      }
-    ]
-  },
-  {
-    "name": "PieChart",
-    "description": "",
-    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-piechart-ocpiechart--docs",
-    "props": [
-      {
-        "name": "showTooltip",
-        "required": false,
-        "type": "boolean"
-      },
-      {
-        "name": "showLegend",
-        "required": false,
-        "type": "boolean"
-      },
-      {
-        "name": "showGrid",
-        "required": false,
-        "type": "boolean"
-      },
-      {
-        "name": "chartData",
-        "required": false,
-        "type": "array"
-      },
-      {
-        "name": "tooltipFormatter",
-        "required": false,
-        "type": "func"
-      },
-      {
-        "name": "tooltipValueFormatter",
-        "required": false,
-        "type": "func"
-      },
-      {
-        "name": "additionalOptions",
-        "required": false,
-        "type": "object",
-        "default": "{}"
-      }
-    ]
-  },
-  {
-    "name": "BarChart",
-    "description": "",
-    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-barchart-ocbarchart--docs",
-    "props": [
-      {
-        "name": "variant",
-        "required": false,
-        "type": "string",
-        "values": [
-          "primary",
-          "purple"
-        ]
-      },
-      {
-        "name": "showTooltip",
-        "required": false,
-        "type": "boolean"
-      },
-      {
-        "name": "showLegend",
-        "required": false,
-        "type": "boolean"
-      },
-      {
-        "name": "showGrid",
-        "required": false,
-        "type": "boolean"
-      },
-      {
-        "name": "chartData",
-        "required": false,
-        "type": "array"
-      },
-      {
-        "name": "labelData",
-        "required": false,
-        "type": "array"
-      },
-      {
-        "name": "yAxisFormatter",
-        "required": false,
-        "type": "func"
-      },
-      {
-        "name": "xAxisFormatter",
-        "required": false,
-        "type": "func"
-      },
-      {
-        "name": "tooltipFormatter",
-        "required": false,
-        "type": "func"
-      },
-      {
-        "name": "tooltipValueFormatter",
-        "required": false,
-        "type": "func"
-      }
-    ]
-  },
-  {
-    "name": "BarRaceChart",
-    "description": "",
-    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-barracechart-ocbarracechart--docs",
-    "props": [
-      {
-        "name": "variant",
-        "required": false,
-        "type": "string",
-        "values": [
-          "primary",
-          "purple"
-        ]
-      },
-      {
-        "name": "showTooltip",
-        "required": false,
-        "type": "boolean"
-      },
-      {
-        "name": "showLegend",
-        "required": false,
-        "type": "boolean"
-      },
-      {
-        "name": "showGrid",
-        "required": false,
-        "type": "boolean"
-      },
-      {
-        "name": "chartData",
-        "required": false,
-        "type": "array"
-      },
-      {
-        "name": "labelData",
-        "required": false,
-        "type": "array"
-      },
-      {
-        "name": "legendData",
-        "required": false,
-        "type": "array"
-      },
-      {
-        "name": "yAxisFormatter",
-        "required": false,
-        "type": "func"
-      },
-      {
-        "name": "tooltipFormatter",
-        "required": false,
-        "type": "func"
-      },
-      {
-        "name": "tooltipValueFormatter",
-        "required": false,
-        "type": "func"
-      }
-    ],
-    "slots": [
-      {
-        "name": "legend-item",
-        "description": "",
-        "bindings": [
-          {
-            "name": "data"
+      "events": {},
+      "slots": {},
+      "rules": [],
+      "examples": [
+        {
+          "name": "Line",
+          "props": {
+            "showGrid": false,
+            "showTooltip": true,
+            "showLegend": false,
+            "chartData": [
+              {
+                "value": 500,
+                "percent": 0
+              },
+              {
+                "value": 730,
+                "percent": 0
+              },
+              {
+                "value": 824,
+                "percent": 10
+              },
+              {
+                "value": 1218,
+                "percent": -50
+              },
+              {
+                "value": 2135
+              },
+              {
+                "value": 1147,
+                "percent": -32
+              },
+              {
+                "value": 760,
+                "percent": 0
+              },
+              {
+                "value": 1150,
+                "percent": -3
+              },
+              {
+                "value": 2130,
+                "percent": 4
+              },
+              {
+                "value": 2324,
+                "percent": -5
+              },
+              {
+                "value": 1218,
+                "percent": 6
+              },
+              {
+                "value": 2135,
+                "percent": -34
+              },
+              {
+                "value": 1147,
+                "percent": 7
+              }
+            ],
+            "labelData": [
+              "NOV'22",
+              "DEC'22",
+              "JAN'23",
+              "FEB'23",
+              "MAR'23",
+              "MAY'23",
+              "JUN'23",
+              "JUL'23",
+              "AUG'23",
+              "SEP'23",
+              "OCT'23",
+              "NOV'23"
+            ]
           }
-        ]
-      }
-    ]
-  },
-  {
-    "name": "Card",
-    "description": "",
-    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-card-occard--docs",
-    "props": [
-      {
-        "name": "type",
-        "required": false,
-        "type": "string",
-        "default": "'education'"
-      },
-      {
-        "name": "isFull",
-        "required": false,
-        "type": "boolean",
-        "default": "false"
-      },
-      {
-        "name": "version",
-        "required": false,
-        "type": "string",
-        "default": "'v2'"
-      },
-      {
-        "name": "title",
-        "required": false,
-        "type": "string",
-        "default": "''"
-      },
-      {
-        "name": "description",
-        "required": false,
-        "type": "string",
-        "default": "''"
-      },
-      {
-        "name": "fullButtonProps",
-        "required": false,
-        "type": "object",
-        "default": "() => {}"
-      },
-      {
-        "name": "hideButtonProps",
-        "required": false,
-        "type": "object",
-        "default": "() => {}"
-      }
-    ],
-    "events": [
-      {
-        "name": "hide-all",
-        "description": ""
-      },
-      {
-        "name": "learn-more",
-        "description": ""
-      }
-    ],
-    "slots": [
-      {
-        "name": "logo",
-        "description": ""
-      },
-      {
-        "name": "title",
-        "description": ""
-      },
-      {
-        "name": "description",
-        "description": ""
-      }
-    ]
-  },
-  {
-    "name": "OcOverviewPieChart",
-    "description": "",
-    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-overviewpiechart-ocoverviewpiechart--docs",
-    "props": [
-      {
-        "name": "chartData",
-        "required": false,
-        "type": "array"
-      },
-      {
-        "name": "currency",
-        "required": false,
-        "type": "string"
-      },
-      {
-        "name": "additionalOptions",
-        "required": false,
-        "type": "object",
-        "default": "{}"
-      },
-      {
-        "name": "tooltip",
-        "required": false,
-        "type": "object",
-        "default": "{}"
-      }
-    ]
-  },
-  {
-    "name": "OverviewMonthlyBarChart",
-    "description": "",
-    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-overviewmonthlybarchart-ocoverviewmonthlybarchart--docs",
-    "props": [
-      {
-        "name": "variant",
-        "required": false,
-        "type": "string",
-        "values": [
-          "primary",
-          "purple"
-        ]
-      },
-      {
-        "name": "currency",
-        "required": false,
-        "type": "string"
-      },
-      {
-        "name": "showTooltip",
-        "required": false,
-        "type": "boolean"
-      },
-      {
-        "name": "showLegend",
-        "required": false,
-        "type": "boolean"
-      },
-      {
-        "name": "showGrid",
-        "required": false,
-        "type": "boolean"
-      },
-      {
-        "name": "chartData",
-        "required": false,
-        "type": "array"
-      },
-      {
-        "name": "labelData",
-        "required": false,
-        "type": "array"
-      },
-      {
-        "name": "yAxisFormatter",
-        "required": false,
-        "type": "func"
-      },
-      {
-        "name": "xAxisFormatter",
-        "required": false,
-        "type": "func"
-      },
-      {
-        "name": "tooltipFormatter",
-        "required": false,
-        "type": "func"
-      },
-      {
-        "name": "tooltipValueFormatter",
-        "required": false,
-        "type": "func"
-      }
-    ]
-  },
-  {
-    "name": "ColorPicker",
-    "description": "",
-    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-colorpicker-occolorpicker--docs",
-    "props": [
-      {
-        "name": "modelValue",
-        "required": false,
-        "type": "string",
-        "default": "''"
-      },
-      {
-        "name": "variant",
-        "required": false,
-        "type": "string",
-        "default": "'solid'"
-      },
-      {
-        "name": "hideOpacity",
-        "required": false,
-        "type": "boolean"
-      },
-      {
-        "name": "hideInputColor",
-        "required": false,
-        "type": "boolean"
-      },
-      {
-        "name": "presetColors",
-        "required": false,
-        "type": "array"
-      },
-      {
-        "name": "placement",
-        "required": false,
-        "type": "string",
-        "default": "'auto'"
-      }
-    ],
-    "events": [
-      {
-        "name": "update:model-value",
-        "description": ""
-      }
-    ],
-    "slots": [
-      {
-        "name": "leading",
-        "description": ""
-      },
-      {
-        "name": "picker-icon",
-        "description": ""
-      }
-    ]
-  },
-  {
-    "name": "TextEditor",
-    "description": "",
-    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-texteditor-octexteditor--docs",
-    "props": [
-      {
-        "name": "fontSizes",
-        "required": true,
-        "type": "array",
-        "description": "The font sizes of the editor."
-      },
-      {
-        "name": "initialFontSize",
-        "required": false,
-        "type": "string",
-        "description": "The initial font size of the editor. (if empty the first item of `fontSizes` will be used, needs to be a value of `fontSizes`)"
-      },
-      {
-        "name": "modelValue",
-        "required": false,
-        "type": "string"
-      },
-      {
-        "name": "image",
-        "required": false,
-        "type": "string"
-      },
-      {
-        "name": "errorMessage",
-        "required": false,
-        "type": "string",
-        "default": "''"
-      },
-      {
-        "name": "label",
-        "required": false,
-        "type": "string",
-        "default": "''"
-      },
-      {
-        "name": "hint",
-        "required": false,
-        "type": "string",
-        "default": "''"
-      },
-      {
-        "name": "isRequired",
-        "required": false,
-        "type": "boolean",
-        "default": "false"
-      },
-      {
-        "name": "labelIcon",
-        "required": false,
-        "type": "string",
-        "default": "''"
-      },
-      {
-        "name": "tooltipText",
-        "required": false,
-        "type": "string",
-        "default": "''"
-      },
-      {
-        "name": "tooltipOptions",
-        "required": false,
-        "type": "object",
-        "default": "{}"
-      },
-      {
-        "name": "variant",
-        "required": false,
-        "type": "string",
-        "default": "'default'",
-        "values": [
-          "default",
-          "text-only"
-        ]
-      },
-      {
-        "name": "placeholder",
-        "required": false,
-        "type": "string",
-        "default": "''"
-      },
-      {
-        "name": "isCustomImageUpload",
-        "required": false,
-        "type": "boolean"
-      }
-    ],
-    "events": [
-      {
-        "name": "update:modelValue",
-        "description": ""
-      },
-      {
-        "name": "update:image",
-        "description": ""
-      },
-      {
-        "name": "uploadImage",
-        "description": ""
-      }
-    ]
-  },
-  {
-    "name": "ColorPickerPopup",
-    "description": "",
-    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-colorpickerpopup-occolorpickerpopup--docs",
-    "props": [
-      {
-        "name": "modelValue",
-        "required": false,
-        "type": "string",
-        "default": "''"
-      },
-      {
-        "name": "type",
-        "required": false,
-        "type": "string",
-        "default": "'HEX8'"
-      },
-      {
-        "name": "inputType",
-        "required": false,
-        "type": "string",
-        "default": "'HEX'"
-      },
-      {
-        "name": "theme",
-        "required": false,
-        "type": "string",
-        "default": "'light'"
-      },
-      {
-        "name": "showColorList",
-        "required": false,
-        "type": "boolean",
-        "default": "true"
-      },
-      {
-        "name": "showEyeDrop",
-        "required": false,
-        "type": "boolean",
-        "default": "true"
-      },
-      {
-        "name": "showAlpha",
-        "required": false,
-        "type": "boolean",
-        "default": "true"
-      },
-      {
-        "name": "showInputMenu",
-        "required": false,
-        "type": "boolean",
-        "default": "true"
-      },
-      {
-        "name": "showInputSet",
-        "required": false,
-        "type": "boolean",
-        "default": "true"
-      },
-      {
-        "name": "disabled",
-        "required": false,
-        "type": "boolean",
-        "default": "false"
-      },
-      {
-        "name": "iconClasses",
-        "required": false,
-        "type": "object",
-        "default": "{\n  linear: '',\n  radial: '',\n  ruler: '',\n  eyeDroper: '',\n  inputMenu: '',\n  save: '',\n  delete: ''\n}"
-      },
-      {
-        "name": "presetColors",
-        "required": false,
-        "type": "array"
-      },
-      {
-        "name": "variant",
-        "required": false,
-        "type": "string",
-        "default": "'solid'"
-      },
-      {
-        "name": "lastUsedColors",
-        "required": false,
-        "type": "array"
-      }
-    ],
-    "events": [
-      {
-        "name": "update:modelValue",
-        "description": ""
-      },
-      {
-        "name": "last-used-pick",
-        "description": ""
-      }
-    ]
-  },
-  {
-    "name": "OnboardingProgressbar",
-    "description": "",
-    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-onboardingprogressbar-oconboardingprogressbar--docs",
-    "props": [
-      {
-        "name": "title",
-        "required": false,
-        "type": "string",
-        "default": "''"
-      },
-      {
-        "name": "description",
-        "required": false,
-        "type": "string",
-        "default": "''"
-      },
-      {
-        "name": "value",
-        "required": false,
-        "type": "string|number",
-        "default": "'0'"
-      },
-      {
-        "name": "chartData",
-        "required": false,
-        "type": "array",
-        "default": "[]"
-      }
-    ],
-    "slots": [
-      {
-        "name": "description",
-        "description": ""
-      }
-    ]
-  },
-  {
-    "name": "CodeBlock",
-    "description": "",
-    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-codeblock-occodeblock--docs",
-    "props": [
-      {
-        "name": "jsonObject",
-        "required": true,
-        "type": "string"
-      },
-      {
-        "name": "lang",
-        "required": false,
-        "type": "string",
-        "default": "'json'",
-        "values": [
-          "json",
-          "text"
-        ]
-      }
-    ]
-  },
-  {
-    "name": "LottieAnimation",
-    "description": "",
-    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-lottieanimation-oclottieanimation--docs",
-    "props": [
-      {
-        "name": "path",
-        "required": true,
-        "type": "string"
-      },
-      {
-        "name": "width",
-        "required": true,
-        "type": "string"
-      },
-      {
-        "name": "height",
-        "required": true,
-        "type": "string"
-      },
-      {
-        "name": "speed",
-        "required": false,
-        "type": "number",
-        "default": "1"
-      },
-      {
-        "name": "loop",
-        "required": false,
-        "type": "boolean",
-        "default": "false"
-      },
-      {
-        "name": "autoplay",
-        "required": false,
-        "type": "boolean",
-        "default": "true"
-      }
-    ],
-    "events": [
-      {
-        "name": "error",
-        "description": ""
-      },
-      {
-        "name": "animation-item-changed",
-        "description": ""
-      }
-    ]
-  }
-]
+        }
+      ]
+    },
+    {
+      "name": "PieChart",
+      "description": "",
+      "category": "Dashboard",
+      "tags": [
+        "chart",
+        "graph",
+        "analytics",
+        "dashboard"
+      ],
+      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-charts-piechart-ocpiechart--docs",
+      "props": {
+        "showTooltip": {
+          "type": "boolean",
+          "required": false
+        },
+        "showLegend": {
+          "type": "boolean",
+          "required": false
+        },
+        "showGrid": {
+          "type": "boolean",
+          "required": false
+        },
+        "chartData": {
+          "type": "array",
+          "required": false
+        },
+        "tooltipFormatter": {
+          "type": "func",
+          "required": false
+        },
+        "tooltipValueFormatter": {
+          "type": "func",
+          "required": false
+        },
+        "additionalOptions": {
+          "type": "object",
+          "required": false,
+          "default": "{}"
+        }
+      },
+      "events": {},
+      "slots": {},
+      "rules": [],
+      "examples": [
+        {
+          "name": "Line",
+          "props": {
+            "showGrid": false,
+            "showTooltip": true,
+            "showLegend": true,
+            "chartData": [
+              {
+                "value": 3900.64,
+                "name": "Shopify",
+                "icon": "plugins/api_shopify",
+                "itemStyle": {
+                  "color": "#9BC34B"
+                }
+              },
+              {
+                "value": 2200.21,
+                "name": "Link",
+                "icon": "plugins/link",
+                "itemStyle": {
+                  "color": "#2465DE"
+                }
+              },
+              {
+                "value": 1700.44,
+                "name": "Invoice",
+                "icon": "plugins/invoice",
+                "itemStyle": {
+                  "color": "#B14AED"
+                }
+              },
+              {
+                "value": 1500.78,
+                "name": "Recurring billing",
+                "icon": "plugins/recurring_billing",
+                "itemStyle": {
+                  "color": "#F4B840"
+                }
+              },
+              {
+                "value": 400.93,
+                "name": "Others",
+                "legendTooltip": [
+                  "Online Store (1.5%)",
+                  "Google Form (0.3%)"
+                ],
+                "itemStyle": {
+                  "color": "#E5E6EA"
+                }
+              }
+            ],
+            "tooltipCurrency": "SGD"
+          }
+        }
+      ]
+    },
+    {
+      "name": "BarChart",
+      "description": "",
+      "category": "Dashboard",
+      "tags": [
+        "chart",
+        "graph",
+        "analytics",
+        "dashboard"
+      ],
+      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-charts-barchart-ocbarchart--docs",
+      "props": {
+        "variant": {
+          "type": "enum",
+          "required": false,
+          "values": [
+            "primary",
+            "purple"
+          ]
+        },
+        "showTooltip": {
+          "type": "boolean",
+          "required": false
+        },
+        "showLegend": {
+          "type": "boolean",
+          "required": false
+        },
+        "showGrid": {
+          "type": "boolean",
+          "required": false
+        },
+        "chartData": {
+          "type": "array",
+          "required": false
+        },
+        "labelData": {
+          "type": "array",
+          "required": false
+        },
+        "yAxisFormatter": {
+          "type": "func",
+          "required": false
+        },
+        "xAxisFormatter": {
+          "type": "func",
+          "required": false
+        },
+        "tooltipFormatter": {
+          "type": "func",
+          "required": false
+        },
+        "tooltipValueFormatter": {
+          "type": "func",
+          "required": false
+        }
+      },
+      "events": {},
+      "slots": {},
+      "rules": [
+        "\"variant\" must be one of: primary, purple"
+      ],
+      "examples": [
+        {
+          "name": "barChart",
+          "props": {
+            "variant": "primary",
+            "showGrid": false,
+            "showTooltip": true,
+            "showLegend": true,
+            "chartData": [
+              500,
+              730,
+              824,
+              1218.88,
+              2135,
+              1147,
+              760,
+              1150,
+              2130,
+              2324,
+              1218,
+              2135,
+              1147
+            ],
+            "labelData": [
+              "NOV'22",
+              "DEC'22",
+              "JAN'23",
+              "FEB'23",
+              "MAR'23",
+              "MAY'23",
+              "JUN'23",
+              "JUL'23",
+              "AUG'23",
+              "SEP'23",
+              "OCT'23",
+              "NOV'23"
+            ],
+            "tooltipCurrency": "SGD"
+          }
+        }
+      ]
+    },
+    {
+      "name": "BarRaceChart",
+      "description": "",
+      "category": "Dashboard",
+      "tags": [
+        "chart",
+        "graph",
+        "analytics",
+        "dashboard"
+      ],
+      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-charts-barracechart-ocbarracechart--docs",
+      "props": {
+        "variant": {
+          "type": "enum",
+          "required": false,
+          "values": [
+            "primary",
+            "purple"
+          ]
+        },
+        "showTooltip": {
+          "type": "boolean",
+          "required": false
+        },
+        "showLegend": {
+          "type": "boolean",
+          "required": false
+        },
+        "showGrid": {
+          "type": "boolean",
+          "required": false
+        },
+        "chartData": {
+          "type": "array",
+          "required": false
+        },
+        "labelData": {
+          "type": "array",
+          "required": false
+        },
+        "legendData": {
+          "type": "array",
+          "required": false
+        },
+        "yAxisFormatter": {
+          "type": "func",
+          "required": false
+        },
+        "tooltipFormatter": {
+          "type": "func",
+          "required": false
+        },
+        "tooltipValueFormatter": {
+          "type": "func",
+          "required": false
+        }
+      },
+      "events": {},
+      "slots": {
+        "legend-item": {
+          "description": "",
+          "bindings": [
+            {
+              "name": "data"
+            }
+          ]
+        }
+      },
+      "rules": [
+        "\"variant\" must be one of: primary, purple"
+      ],
+      "examples": [
+        {
+          "name": "barRace",
+          "props": {
+            "variant": "primary",
+            "showGrid": false,
+            "showTooltip": true,
+            "showLegend": true,
+            "chartData": [
+              62,
+              11,
+              8,
+              6,
+              5,
+              2
+            ],
+            "labelData": [
+              "50%",
+              "23%",
+              "12%",
+              "10%",
+              "8%",
+              "8%"
+            ],
+            "legendData": [
+              "Running shoes",
+              "Women's ribbed top",
+              "Fleece sweatshirt",
+              "Sportswear Tech Fleece",
+              "Joggers",
+              "Joggers"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Card",
+      "description": "",
+      "category": "Dashboard",
+      "tags": [
+        "chart",
+        "graph",
+        "analytics",
+        "dashboard"
+      ],
+      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-card-occard--docs",
+      "props": {
+        "type": {
+          "type": "string",
+          "required": false,
+          "default": "education"
+        },
+        "isFull": {
+          "type": "boolean",
+          "required": false,
+          "default": "false"
+        },
+        "version": {
+          "type": "string",
+          "required": false,
+          "default": "v2"
+        },
+        "title": {
+          "type": "string",
+          "required": false,
+          "default": ""
+        },
+        "description": {
+          "type": "string",
+          "required": false,
+          "default": ""
+        },
+        "fullButtonProps": {
+          "type": "object",
+          "required": false,
+          "default": "() => {}"
+        },
+        "hideButtonProps": {
+          "type": "object",
+          "required": false,
+          "default": "() => {}"
+        }
+      },
+      "events": {
+        "hide-all": {
+          "description": ""
+        },
+        "learn-more": {
+          "description": ""
+        }
+      },
+      "slots": {
+        "logo": {
+          "description": ""
+        },
+        "title": {
+          "description": ""
+        },
+        "description": {
+          "description": ""
+        }
+      },
+      "rules": [],
+      "examples": [
+        {
+          "name": "Default",
+          "props": {
+            "title": "Beginner guide for Payment Links",
+            "description": "You will learn how to manage (create, update, view) your payment link."
+          }
+        }
+      ]
+    },
+    {
+      "name": "OcOverviewPieChart",
+      "description": "",
+      "category": "Dashboard",
+      "tags": [
+        "chart",
+        "graph",
+        "analytics",
+        "dashboard"
+      ],
+      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-charts-overviewpiechart-ocoverviewpiechart--docs",
+      "props": {
+        "chartData": {
+          "type": "array",
+          "required": false
+        },
+        "currency": {
+          "type": "string",
+          "required": false
+        },
+        "additionalOptions": {
+          "type": "object",
+          "required": false,
+          "default": "{}"
+        },
+        "tooltip": {
+          "type": "object",
+          "required": false,
+          "default": "{}"
+        }
+      },
+      "events": {},
+      "slots": {},
+      "rules": [],
+      "examples": [
+        {
+          "name": "overviewPieChart",
+          "props": {
+            "chartData": [
+              {
+                "value": 1048,
+                "name": "Cards",
+                "itemStyle": {
+                  "color": "#356DFF"
+                }
+              },
+              {
+                "value": 200,
+                "name": "Paynow",
+                "itemStyle": {
+                  "color": "#AEC5FF"
+                }
+              },
+              {
+                "value": 100,
+                "name": "Others",
+                "itemStyle": {
+                  "color": "#86FFCC"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "OverviewMonthlyBarChart",
+      "description": "",
+      "category": "Dashboard",
+      "tags": [
+        "chart",
+        "graph",
+        "analytics",
+        "dashboard"
+      ],
+      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-charts-overviewmonthlybarchart-ocoverviewmonthlybarchart--docs",
+      "props": {
+        "variant": {
+          "type": "enum",
+          "required": false,
+          "values": [
+            "primary",
+            "purple"
+          ]
+        },
+        "currency": {
+          "type": "string",
+          "required": false
+        },
+        "showTooltip": {
+          "type": "boolean",
+          "required": false
+        },
+        "showLegend": {
+          "type": "boolean",
+          "required": false
+        },
+        "showGrid": {
+          "type": "boolean",
+          "required": false
+        },
+        "chartData": {
+          "type": "array",
+          "required": false
+        },
+        "labelData": {
+          "type": "array",
+          "required": false
+        },
+        "yAxisFormatter": {
+          "type": "func",
+          "required": false
+        },
+        "xAxisFormatter": {
+          "type": "func",
+          "required": false
+        },
+        "tooltipFormatter": {
+          "type": "func",
+          "required": false
+        },
+        "tooltipValueFormatter": {
+          "type": "func",
+          "required": false
+        }
+      },
+      "events": {},
+      "slots": {},
+      "rules": [
+        "\"variant\" must be one of: primary, purple"
+      ],
+      "examples": [
+        {
+          "name": "overviewMonthlyBarChart",
+          "props": {
+            "variant": "primary",
+            "showGrid": false,
+            "showTooltip": true,
+            "showLegend": true,
+            "chartData": [
+              762.6859812642823,
+              400.06134422797726,
+              1720.249547257683,
+              725.5408054730312,
+              1080.8289150863295,
+              169.5932775739888,
+              1567.2953943168977,
+              611.6851748802881,
+              1784.7615207056465,
+              676.0830848400763,
+              1451.7693623538187,
+              1359.840692331132,
+              1781.184900672098,
+              34.520456194786945,
+              1902.8356261791628,
+              432.5594312006866,
+              1691.3330822280552,
+              457.51710764349275,
+              1485.6611162836707,
+              939.3210379572363,
+              1949.0602607079688,
+              1139.8008024765888,
+              1033.346158316532,
+              484.7712923534482,
+              1698.3476608710698,
+              1318.8720492151951,
+              505.8820708190805,
+              831.6994927778278,
+              905.3953525961529,
+              1549.9925314832817
+            ],
+            "labelData": [
+              "2025-08-14",
+              "2025-08-15",
+              "2025-08-16",
+              "2025-08-17",
+              "2025-08-18",
+              "2025-08-19",
+              "2025-08-20",
+              "2025-08-21",
+              "2025-08-22",
+              "2025-08-23",
+              "2025-08-24",
+              "2025-08-25",
+              "2025-08-26",
+              "2025-08-27",
+              "2025-08-28",
+              "2025-08-29",
+              "2025-08-30",
+              "2025-08-31",
+              "2025-09-01",
+              "2025-09-02",
+              "2025-09-03",
+              "2025-09-04",
+              "2025-09-05",
+              "2025-09-06",
+              "2025-09-07",
+              "2025-09-08",
+              "2025-09-09",
+              "2025-09-10",
+              "2025-09-11",
+              "2025-09-12"
+            ],
+            "tooltipCurrency": "SGD"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ColorPicker",
+      "description": "",
+      "category": "Dashboard",
+      "tags": [
+        "chart",
+        "graph",
+        "analytics",
+        "dashboard"
+      ],
+      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-colorpicker-occolorpicker--docs",
+      "props": {
+        "modelValue": {
+          "type": "string",
+          "required": false,
+          "default": ""
+        },
+        "variant": {
+          "type": "string",
+          "required": false,
+          "default": "solid"
+        },
+        "hideOpacity": {
+          "type": "boolean",
+          "required": false
+        },
+        "hideInputColor": {
+          "type": "boolean",
+          "required": false
+        },
+        "presetColors": {
+          "type": "array",
+          "required": false
+        },
+        "placement": {
+          "type": "string",
+          "required": false,
+          "default": "auto"
+        }
+      },
+      "events": {
+        "update:model-value": {
+          "description": ""
+        }
+      },
+      "slots": {
+        "leading": {
+          "description": ""
+        },
+        "picker-icon": {
+          "description": ""
+        }
+      },
+      "rules": [],
+      "examples": []
+    },
+    {
+      "name": "TextEditor",
+      "description": "",
+      "category": "Dashboard",
+      "tags": [
+        "chart",
+        "graph",
+        "analytics",
+        "dashboard"
+      ],
+      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-texteditor-octexteditor--docs",
+      "props": {
+        "fontSizes": {
+          "type": "array",
+          "required": true,
+          "description": "The font sizes of the editor."
+        },
+        "initialFontSize": {
+          "type": "string",
+          "required": false,
+          "description": "The initial font size of the editor. (if empty the first item of `fontSizes` will be used, needs to be a value of `fontSizes`)"
+        },
+        "modelValue": {
+          "type": "string",
+          "required": false
+        },
+        "image": {
+          "type": "string",
+          "required": false
+        },
+        "errorMessage": {
+          "type": "string",
+          "required": false,
+          "default": ""
+        },
+        "label": {
+          "type": "string",
+          "required": false,
+          "default": ""
+        },
+        "hint": {
+          "type": "string",
+          "required": false,
+          "default": ""
+        },
+        "isRequired": {
+          "type": "boolean",
+          "required": false,
+          "default": "false"
+        },
+        "labelIcon": {
+          "type": "string",
+          "required": false,
+          "default": ""
+        },
+        "tooltipText": {
+          "type": "string",
+          "required": false,
+          "default": ""
+        },
+        "tooltipOptions": {
+          "type": "object",
+          "required": false,
+          "default": "{}"
+        },
+        "variant": {
+          "type": "enum",
+          "required": false,
+          "default": "default",
+          "values": [
+            "default",
+            "text-only"
+          ]
+        },
+        "placeholder": {
+          "type": "string",
+          "required": false,
+          "default": ""
+        },
+        "isCustomImageUpload": {
+          "type": "boolean",
+          "required": false
+        }
+      },
+      "events": {
+        "update:modelValue": {
+          "description": ""
+        },
+        "update:image": {
+          "description": ""
+        },
+        "uploadImage": {
+          "description": ""
+        }
+      },
+      "slots": {},
+      "rules": [
+        "Required props: fontSizes",
+        "\"variant\" must be one of: default, text-only"
+      ],
+      "examples": [
+        {
+          "name": "Default",
+          "props": {
+            "label": "Label",
+            "isRequired": true,
+            "fontSizes": [
+              {
+                "label": "Default",
+                "value": "14px"
+              },
+              {
+                "label": "Medium",
+                "value": "16px"
+              },
+              {
+                "label": "Large",
+                "value": "18px"
+              },
+              {
+                "label": "Extra Large",
+                "value": "20px"
+              }
+            ],
+            "initialFontSize": "14px",
+            "placeholder": "Placeholder"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ColorPickerPopup",
+      "description": "",
+      "category": "Dashboard",
+      "tags": [
+        "chart",
+        "graph",
+        "analytics",
+        "dashboard"
+      ],
+      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-colorpicker-components-occolorpickerpopup--docs",
+      "props": {
+        "modelValue": {
+          "type": "string",
+          "required": false,
+          "default": ""
+        },
+        "type": {
+          "type": "string",
+          "required": false,
+          "default": "HEX8"
+        },
+        "inputType": {
+          "type": "string",
+          "required": false,
+          "default": "HEX"
+        },
+        "theme": {
+          "type": "string",
+          "required": false,
+          "default": "light"
+        },
+        "showColorList": {
+          "type": "boolean",
+          "required": false,
+          "default": "true"
+        },
+        "showEyeDrop": {
+          "type": "boolean",
+          "required": false,
+          "default": "true"
+        },
+        "showAlpha": {
+          "type": "boolean",
+          "required": false,
+          "default": "true"
+        },
+        "showInputMenu": {
+          "type": "boolean",
+          "required": false,
+          "default": "true"
+        },
+        "showInputSet": {
+          "type": "boolean",
+          "required": false,
+          "default": "true"
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false,
+          "default": "false"
+        },
+        "iconClasses": {
+          "type": "object",
+          "required": false,
+          "default": "{\n  linear: '',\n  radial: '',\n  ruler: '',\n  eyeDroper: '',\n  inputMenu: '',\n  save: '',\n  delete: ''\n}"
+        },
+        "presetColors": {
+          "type": "array",
+          "required": false
+        },
+        "variant": {
+          "type": "string",
+          "required": false,
+          "default": "solid"
+        },
+        "lastUsedColors": {
+          "type": "array",
+          "required": false
+        }
+      },
+      "events": {
+        "update:modelValue": {
+          "description": ""
+        },
+        "last-used-pick": {
+          "description": ""
+        }
+      },
+      "slots": {},
+      "rules": [],
+      "examples": []
+    },
+    {
+      "name": "OnboardingProgressbar",
+      "description": "",
+      "category": "Dashboard",
+      "tags": [
+        "chart",
+        "graph",
+        "analytics",
+        "dashboard"
+      ],
+      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-onboardingprogressbar-oconboardingprogressbar--docs",
+      "props": {
+        "title": {
+          "type": "string",
+          "required": false,
+          "default": ""
+        },
+        "description": {
+          "type": "string",
+          "required": false,
+          "default": ""
+        },
+        "value": {
+          "type": "string|number",
+          "required": false,
+          "default": "0"
+        },
+        "chartData": {
+          "type": "array",
+          "required": false,
+          "default": "[]"
+        }
+      },
+      "events": {},
+      "slots": {
+        "description": {
+          "description": ""
+        }
+      },
+      "rules": [],
+      "examples": []
+    },
+    {
+      "name": "CodeBlock",
+      "description": "",
+      "category": "Dashboard",
+      "tags": [
+        "chart",
+        "graph",
+        "analytics",
+        "dashboard"
+      ],
+      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-codeblock-occodeblock--docs",
+      "props": {
+        "jsonObject": {
+          "type": "string",
+          "required": true
+        },
+        "lang": {
+          "type": "enum",
+          "required": false,
+          "default": "json",
+          "values": [
+            "json",
+            "text"
+          ]
+        }
+      },
+      "events": {},
+      "slots": {},
+      "rules": [
+        "Required props: jsonObject",
+        "\"lang\" must be one of: json, text"
+      ],
+      "examples": [
+        {
+          "name": "Default",
+          "props": {
+            "lang": "json",
+            "jsonObject": "{\n  \"widget\": {\n    \"debug\": \"on\",\n    \"window\": {\n      \"title\": \"Sample Konfabulator Widget\",\n      \"name\": \"main_window\",\n      \"width\": 500,\n      \"height\": 500\n    },\n    \"image\": {\n      \"src\": \"Images/Sun.png\",\n      \"name\": \"sun1\",\n      \"hOffset\": 250,\n      \"vOffset\": 250,\n      \"alignment\": \"center\"\n    },\n    \"text\": {\n      \"data\": \"Click Here\",\n      \"size\": 36,\n      \"style\": \"bold\",\n      \"name\": \"text1\",\n      \"hOffset\": 250,\n      \"vOffset\": 100,\n      \"alignment\": \"center\",\n      \"onMouseUp\": \"sun1.opacity = (sun1.opacity / 100) * 90;\"\n    }\n  }\n}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "LottieAnimation",
+      "description": "",
+      "category": "Dashboard",
+      "tags": [
+        "chart",
+        "graph",
+        "analytics",
+        "dashboard"
+      ],
+      "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-lottieanimation-oclottieanimation--docs",
+      "props": {
+        "path": {
+          "type": "string",
+          "required": true
+        },
+        "width": {
+          "type": "string",
+          "required": true
+        },
+        "height": {
+          "type": "string",
+          "required": true
+        },
+        "speed": {
+          "type": "number",
+          "required": false,
+          "default": "1"
+        },
+        "loop": {
+          "type": "boolean",
+          "required": false,
+          "default": "false"
+        },
+        "autoplay": {
+          "type": "boolean",
+          "required": false,
+          "default": "true"
+        }
+      },
+      "events": {
+        "error": {
+          "description": ""
+        },
+        "animation-item-changed": {
+          "description": ""
+        }
+      },
+      "slots": {},
+      "rules": [
+        "Required props: path, width, height"
+      ],
+      "examples": [
+        {
+          "name": "Default",
+          "props": {
+            "path": "/json/lottie-animation/success_report.json",
+            "width": "200",
+            "height": "200",
+            "autoPlay": true
+          }
+        }
+      ]
+    }
+  ]
+}
