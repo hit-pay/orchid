@@ -1,11 +1,11 @@
-import { Theme, EmptyPage } from '@/orchidui-core'
+import { EmptyPage, Theme } from '@/orchidui-core'
 
 export default {
   component: EmptyPage,
   tags: ['autodocs']
 }
 
-export const emptyPage = {
+export const Default = {
   argTypes: {
     size: {
       control: 'select',
@@ -19,20 +19,17 @@ export const emptyPage = {
     isUpgrade: true,
     addButtonLabel: 'Add new',
     upgradeLabel: 'Upgrade now',
-    size: undefined
+    size: 'default'
   },
   render: (args) => ({
-    components: {
-      Theme,
-      EmptyPage
-    },
+    components: { EmptyPage, Theme },
     setup() {
       return { args }
     },
     template: `
-          <Theme>
-            <EmptyPage v-bind="args"/>
-          </Theme>
-        `
+      <Theme>
+        <EmptyPage v-bind="args" />
+      </Theme>
+    `
   })
 }

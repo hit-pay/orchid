@@ -6,23 +6,25 @@ export default {
 }
 
 export const Default = {
-  render: () => ({
+  args: {
+    label: '5 step progress bar',
+    steps: 5,
+    currentStep: 3
+  },
+  render: (args) => ({
     components: { Theme, ProgressBar },
-    setup() {},
+    setup() {
+      return { args }
+    },
     template: `
-      <Theme colorMode="light">
+      <Theme>
         <div class="flex flex-col gap-8">
           <ProgressBar
             label="2 step progress bar"
             :steps="2"
             :currentStep="1"
           />
-
-          <ProgressBar
-            label="5 step progress bar"
-            :steps="5"
-            :currentStep="3"
-          />
+          <ProgressBar v-bind="args" />
         </div>
       </Theme>
     `

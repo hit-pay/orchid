@@ -1,4 +1,4 @@
-import OnboardingAccordion from './OnboardingAccordion.vue'
+import { OnboardingAccordion, Theme } from '@/orchidui-core'
 
 export default {
   component: OnboardingAccordion,
@@ -14,66 +14,23 @@ export const Default = {
   },
   args: {
     title: 'Choose product type',
-    description: 'Tell us what type of products your are selling',
+    description: 'Tell us what type of products you are selling',
     isBorder: false,
     variant: 'completed'
   },
   render: (args) => ({
-    components: { OnboardingAccordion },
+    components: { OnboardingAccordion, Theme },
     setup() {
       return { args }
     },
     template: `
-          <div class="w-full flex flex-col gap-y-4">
-            <OnboardingAccordion
-                :title="args.title"
-                :description="args.description"
-                :isBorder="args.isBorder"
-                :variant="args.variant"
-            >
-              <div class="p-10">Tested body</div>
-            </OnboardingAccordion>
-            <OnboardingAccordion
-                :title="args.title"
-                :description="args.description"
-                :isBorder="args.isBorder"
-                :variant="'error'"
-            >
-              <div class="p-10">Tested body</div>
-            </OnboardingAccordion>
-            <OnboardingAccordion
-                :title="args.title"
-                :description="args.description"
-                :isBorder="args.isBorder"
-                :variant="'pending'"
-            >
-              <div class="p-10">Tested body</div>
-            </OnboardingAccordion>
-            <OnboardingAccordion
-                :title="args.title"
-                :description="args.description"
-                :isBorder="args.isBorder"
-                :variant="'not_completed'"
-            >
-              <div class="p-10">Tested body</div>
-            </OnboardingAccordion>
-            <OnboardingAccordion
-                :title="args.title"
-                :description="args.description"
-                :isBorder="args.isBorder"
-                :variant="'current'"
-            >
-              <div class="p-10">Tested body</div>
-            </OnboardingAccordion>
-            <OnboardingAccordion
-                :title="args.title"
-                :description="args.description"
-                :isBorder="args.isBorder"
-                :variant="'partially_completed'"
-            >
-              <div class="p-10">Tested body</div>
-            </OnboardingAccordion>
-          </div>
-        `
+      <Theme>
+        <div class="w-full flex flex-col gap-y-4">
+          <OnboardingAccordion v-bind="args">
+            <div class="p-10">Accordion body content</div>
+          </OnboardingAccordion>
+        </div>
+      </Theme>
+    `
   })
 }

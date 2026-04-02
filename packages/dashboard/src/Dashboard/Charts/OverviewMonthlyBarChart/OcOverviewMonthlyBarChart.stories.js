@@ -1,63 +1,41 @@
-import OcOverviewMonthlyBarChart from './OcOverviewMonthlyBarChart.vue'
-import dayjs from 'dayjs'
-import { Button } from '@orchidui/core'
+import { OverviewMonthlyBarChart } from '@/orchidui-dashboard'
+import { Theme } from '@/orchidui-core'
 
 export default {
-  component: OcOverviewMonthlyBarChart,
+  component: OverviewMonthlyBarChart,
   tags: ['autodocs']
 }
 
-export const overviewMonthlyBarChart = {
-  argTypes: {
-    variant: {
-      control: 'select',
-      options: ['primary', 'purple']
-    }
-  },
+export const Default = {
   args: {
     variant: 'primary',
     showGrid: false,
     showTooltip: true,
     showLegend: true,
-    chartData: Array.from({ length: 30 }, (_, i) => Math.random() * 2000),
-    labelData: ["2025-08-14","2025-08-15","2025-08-16","2025-08-17","2025-08-18","2025-08-19","2025-08-20","2025-08-21","2025-08-22","2025-08-23","2025-08-24","2025-08-25","2025-08-26","2025-08-27","2025-08-28","2025-08-29","2025-08-30","2025-08-31","2025-09-01","2025-09-02","2025-09-03","2025-09-04","2025-09-05","2025-09-06","2025-09-07","2025-09-08","2025-09-09","2025-09-10","2025-09-11","2025-09-12"],
+    chartData: [1240, 980, 1750, 2100, 1630, 890, 2340, 1870, 1450, 2680, 1920, 760, 1580, 2230, 1340, 1090, 1960, 2410, 1720, 830, 2560, 1480, 1150, 1890, 2070, 1320, 940, 2180, 1660, 1430],
+    labelData: [
+      '2025-09-01', '2025-09-02', '2025-09-03', '2025-09-04', '2025-09-05',
+      '2025-09-06', '2025-09-07', '2025-09-08', '2025-09-09', '2025-09-10',
+      '2025-09-11', '2025-09-12', '2025-09-13', '2025-09-14', '2025-09-15',
+      '2025-09-16', '2025-09-17', '2025-09-18', '2025-09-19', '2025-09-20',
+      '2025-09-21', '2025-09-22', '2025-09-23', '2025-09-24', '2025-09-25',
+      '2025-09-26', '2025-09-27', '2025-09-28', '2025-09-29', '2025-09-30'
+    ],
     yAxisFormatter: (value) => {
       return (value / 1000).toFixed(1) + 'K'
     },
-    tooltipCurrency: 'SGD'
+    tooltipCurrency: 'SGD',
+    currency: 'SGD'
   },
   render: (args) => ({
-    components: { OcOverviewMonthlyBarChart, Button },
+    components: { OverviewMonthlyBarChart, Theme },
     setup() {
-      const handleMonth = () => {
-        args.labelData = Array.from({ length: 30 }, (_, i) => dayjs().subtract(29 - i, 'day').toISOString())
-        args.chartData = Array.from({ length: 30 }, (_, i) => Math.random() * 2000)
-      }
-      const handleWeek = () => {
-        args.labelData = Array.from({ length: 7 }, (_, i) => dayjs().subtract(6 - i, 'day').toISOString())
-        args.chartData = Array.from({ length: 7 }, (_, i) => Math.random() * 2000)
-      }
-      return { args, handleMonth, handleWeek }
+      return { args }
     },
     template: `
-          <div>
-          <div class="flex items-center gap-2">
-            <Button @click="handleMonth" class="mr-2">Month</Button>
-            <Button @click="handleWeek">Week</Button>
-          </div>
-            <OcOverviewMonthlyBarChart
-                class="h-[300px] w-[530px]"
-                :variant="args.variant"
-                :show-grid="args.showGrid"
-                currency="HKD"
-                :show-tooltip="args.showTooltip"
-                :show-legend="args.showLegend"
-                :chart-data="args.chartData"
-                :label-data="args.labelData"
-                :tooltip-currency="args.tooltipCurrency"
-                :y-axis-formatter="args.yAxisFormatter"
-            />
-          </div>
-        `
+      <Theme>
+        <OverviewMonthlyBarChart class="h-[300px] w-[530px]" v-bind="args" />
+      </Theme>
+    `
   })
 }

@@ -1,4 +1,4 @@
-import Steps from './OcSteps.vue'
+import { Steps, Theme } from '@/orchidui-core'
 import { ref } from 'vue'
 
 export default {
@@ -9,31 +9,21 @@ export default {
 export const Default = {
   args: {
     steps: [
-      {
-        title: 'Title'
-      },
-      {
-        title: 'Title'
-      },
-      {
-        title: 'Title'
-      },
-      {
-        title: 'Title'
-      },
-      {
-        title: 'Title'
-      }
+      { title: 'Personal Info' },
+      { title: 'Business Details' },
+      { title: 'Verification' }
     ]
   },
   render: (args) => ({
-    components: { Steps },
+    components: { Steps, Theme },
     setup() {
-      const modelValue = ref()
-      return { args, modelValue }
+      const currentStep = ref(0)
+      return { args, currentStep }
     },
     template: `
-          <Steps v-model="modelValue" :steps="args.steps"/>
-        `
+      <Theme>
+        <Steps v-model="currentStep" v-bind="args" />
+      </Theme>
+    `
   })
 }

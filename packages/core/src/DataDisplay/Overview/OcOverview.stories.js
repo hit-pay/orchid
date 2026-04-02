@@ -4,16 +4,17 @@ export default {
   component: OverviewItem,
   tags: ['autodocs']
 }
-export const overviewItem = {
+
+export const Default = {
   args: {
     icon: 'circle',
-    content: 'Content',
-    title: 'Title',
+    content: 'SGD 11,170.00',
+    title: 'Total Revenue',
     info: true,
     percentValue: 10,
     isLoading: false,
-    percentTooltip: 'asd',
-    tooltip: 'asd',
+    percentTooltip: 'Compared to last month',
+    tooltip: 'Total revenue this period',
     iconProps: {
       class: 'text-oc-warning-500'
     }
@@ -21,35 +22,24 @@ export const overviewItem = {
   render: (args) => ({
     components: { OverviewItem, Theme, Button },
     setup() {
-      return {
-        args
-      }
+      return { args }
     },
     template: `
-          <Theme class="items-center mb-3 p-10 w-[400px]">
-            <OverviewItem
-                :icon="args.icon"
-                :info="args.info"
-                :content="args.content"
-                :title="args.title"
-                :percent-value="args.percentValue"
-                :tooltip="args.tooltip"
-                :is-loading="args.isLoading"
-                :percent-tooltip="args.percentTooltip"
-                :icon-props="args.iconProps"
-            >
-                <template #footer>
-                  <div class="flex flex-col px-4 pb-4">
-                    <div class="mb-4 bg-oc-warning-50-tr p-2 text-sm text-oc-text-400 text-center rounded-sm">Minimum payout is SGD 1</div>
-                    <Button size="small" left-icon="circle">Payout funds</Button>
-                  </div>
-                </template>
-            </OverviewItem>
-          </Theme>
-        `
+      <Theme class="items-center mb-3 p-10 w-[400px]">
+        <OverviewItem v-bind="args">
+          <template #footer>
+            <div class="flex flex-col px-4 pb-4">
+              <div class="mb-4 bg-oc-warning-50-tr p-2 text-sm text-oc-text-400 text-center rounded-sm">Minimum payout is SGD 1</div>
+              <Button size="small" left-icon="circle">Payout funds</Button>
+            </div>
+          </template>
+        </OverviewItem>
+      </Theme>
+    `
   })
 }
-export const overview = {
+
+export const OverviewGroup = {
   args: {
     title: '',
     items: [
@@ -82,14 +72,12 @@ export const overview = {
   render: (args) => ({
     components: { Overview, Theme },
     setup() {
-      return {
-        args
-      }
+      return { args }
     },
     template: `
-          <Theme class="items-center mb-3">
-            <Overview :items="args.items" :title="args.title"/>
-          </Theme>
-        `
+      <Theme class="items-center mb-3">
+        <Overview v-bind="args" />
+      </Theme>
+    `
   })
 }

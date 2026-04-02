@@ -1,11 +1,12 @@
-import { Button, DropdownItem, ListItem, Theme } from '@/orchidui-core'
+import { Theme, Button, DropdownItem, ListItem } from '@/orchidui-core'
 import { ref } from 'vue'
+
 export default {
   component: ListItem,
   tags: ['autodocs']
 }
 
-export const listItem = {
+export const Default = {
   argTypes: {
     icon: {
       control: 'select',
@@ -14,13 +15,6 @@ export const listItem = {
     type: {
       control: 'select',
       options: ['timeline', 'webhook', 'payment', 'terminal', 'general', 'accordion']
-    },
-    active: {
-      control: {
-        type: 'number',
-        min: 1,
-        max: 5
-      }
     },
     imageSize: {
       control: 'select',
@@ -32,11 +26,10 @@ export const listItem = {
     title: 'September, 1 2023 at 05:01PM',
     icon: 'backward',
     iconClass: 'text-oc-error',
-    iconText: 'SGD 130,11',
-    description: '#9a2804fc-74df-4304-a7d7-79d11f9e1db8dsdss',
+    iconText: 'SGD 130.11',
+    description: '#9a2804fc-74df-4304-a7d7-79d11f9e1db8',
     type: 'timeline',
-    image:
-      'https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/covers/small/99d696e564ba45fbaa0fb2e3b43d0e27.jpg',
+    image: 'https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/covers/small/99d696e564ba45fbaa0fb2e3b43d0e27.jpg',
     imageSize: 'small'
   },
   render: (args) => ({
@@ -45,7 +38,7 @@ export const listItem = {
       return { args }
     },
     template: `
-      <Theme colorMode="light" class="flex flex-col gap-5">
+      <Theme class="flex flex-col gap-5">
         <ListItem
           v-for="i in 5"
           :is-active="args.active >= i"
@@ -63,6 +56,7 @@ export const listItem = {
     `
   })
 }
+
 export const ListWebhook = {
   args: {
     urls: [
@@ -78,7 +72,7 @@ export const ListWebhook = {
       return { args }
     },
     template: `
-      <Theme colorMode="light" class="p-10">
+      <Theme class="p-10">
         <ListItem
           type="webhook"
           :urls="args.urls"
@@ -87,10 +81,10 @@ export const ListWebhook = {
         >
           <template #menu>
             <div class="p-2 border-b border-gray-200">
-              <DropdownItem text="Edit" icon="pencil"/>
+              <DropdownItem text="Edit" icon="pencil" />
             </div>
             <div class="p-2">
-              <DropdownItem text="Delete" variant="destructive" icon="bin"/>
+              <DropdownItem text="Delete" variant="destructive" icon="bin" />
             </div>
           </template>
         </ListItem>
@@ -100,27 +94,19 @@ export const ListWebhook = {
 }
 
 export const ListLogo = {
-  args: {
-    urls: [
-      {
-        logo: 'https://orchid.software',
-        title: 'Title'
-      }
-    ]
-  },
+  args: {},
   render: (args) => ({
     components: { Theme, ListItem },
     setup() {
       return { args }
     },
     template: `
-      <Theme colorMode="light" class="p-10">
+      <Theme class="p-10">
         <ListItem
           type="logo"
           title="Zapier Flow"
           image="/images/partner-logo/web-delegate.png"
-        >
-        </ListItem>
+        />
       </Theme>
     `
   })
@@ -128,7 +114,7 @@ export const ListLogo = {
 
 export const ListPayment = {
   args: {
-    title: 'shopify',
+    title: 'Shopify',
     paymentMethods: [
       {
         method: 'paynow_online',
@@ -141,7 +127,7 @@ export const ListPayment = {
         md: 'http://api.src.test/icons/methods/md/visa.png'
       }
     ],
-    description: 'Description'
+    description: 'Connected payment store'
   },
   render: (args) => ({
     components: { Theme, ListItem },
@@ -149,16 +135,14 @@ export const ListPayment = {
       return { args }
     },
     template: `
-      <Theme colorMode="light" class="p-10">
+      <Theme class="p-10">
         <ListItem
-          :title="args.title"
-          :payment-methods="args.paymentMethods"
-          :description="args.description"
+          v-bind="args"
           type="payment"
         >
           <template #logo>
             <div class="rounded-sm p-2 bg-oc-accent-1-50">
-              <img src="http://api.src.test/icons/providers/shopee.png" class="w-[32px] h-[32px]"/>
+              <img src="http://api.src.test/icons/providers/shopee.png" class="w-[32px] h-[32px]" />
             </div>
           </template>
         </ListItem>
@@ -170,26 +154,15 @@ export const ListPayment = {
 export const ListGeneral = {
   args: {
     title: 'Standard shipping',
-    description: 'Calculation Method : Flat',
+    description: 'Calculation Method: Flat',
     isDisabled: false,
     chips: [
-      {
-        label: 'Default'
-      },
-      {
-        label: 'HitPay',
-        variant: 'accent-1'
-      }
+      { label: 'Default' },
+      { label: 'HitPay', variant: 'accent-1' }
     ],
     details: [
-      {
-        label: 'SGD 28.00',
-        icon: 'dollar-coin'
-      },
-      {
-        label: 'Singapore',
-        country: 'sg'
-      }
+      { label: 'SGD 28.00', icon: 'dollar-coin' },
+      { label: 'Singapore', country: 'sg' }
     ]
   },
   render: (args) => ({
@@ -202,22 +175,17 @@ export const ListGeneral = {
         'http://api.src.test/icons/methods/md/unionpay.png',
         'http://api.src.test/icons/methods/md/amex.png'
       ]
-      const onClickEdit = () => [alert('edit clicked')]
-
-      return { args, methodLogos, onClickEdit }
+      return { args, methodLogos }
     },
     template: `
-      <Theme colorMode="light" class="p-10">
-        <ListItem
-          type="general"
-          v-bind="args"
-        >
+      <Theme class="p-10">
+        <ListItem type="general" v-bind="args">
           <template #menu>
             <div class="p-2 border-b border-gray-200">
-              <DropdownItem text="Edit" icon="pencil" @click="onClickEdit" />
+              <DropdownItem text="Edit" icon="pencil" />
             </div>
             <div class="p-2">
-              <DropdownItem text="Delete" variant="destructive" icon="bin"/>
+              <DropdownItem text="Delete" variant="destructive" icon="bin" />
             </div>
           </template>
         </ListItem>
@@ -225,33 +193,18 @@ export const ListGeneral = {
         <ListItem
           type="general"
           title="Shopee Pay"
-          :chips="[
-            { label: 'Primary' }
-          ]"
+          :chips="[{ label: 'Primary' }]"
         >
           <template #logo>
-            <img
-              src="http://api.src.test/icons/providers/shopee.png"
-              width="64"
-              alt="shopee"
-            />
+            <img src="http://api.src.test/icons/providers/shopee.png" width="64" alt="shopee" />
           </template>
         </ListItem>
 
-        <ListItem
-          type="general"
-          v-bind="args"
-          :is-dropdown-actions-visible="false"
-        >
+        <ListItem type="general" v-bind="args" :is-dropdown-actions-visible="false">
           <template #logo>
-            <img
-              src="http://api.src.test/icons/providers/paynow.png"
-              width="64"
-            />
+            <img src="http://api.src.test/icons/providers/paynow.png" width="64" />
           </template>
-          <div
-            class="flex gap-x-4"
-          >
+          <div class="flex gap-x-4">
             <img
               v-for="(methodImage, index) in methodLogos"
               :key="index"
@@ -262,7 +215,6 @@ export const ListGeneral = {
               height="24"
             />
           </div>
-          
           <template #append>
             <Button label="Connect" />
           </template>
@@ -272,31 +224,27 @@ export const ListGeneral = {
   })
 }
 
-export const OcListItemPage = {
+export const ListItemPage = {
   args: {
     pages: [
       {
         id: '9bd54837-2156-417a-9577-8ff20f895769',
         business_id: '8ba6c772-8c2d-4f3b-a7d6-3f1f0648fa77',
-        title: 'Page Title example',
-        description: `<p><span style="font-size:14px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic maxime recusandae velit, assumenda ullam beatae obcaecati ab ad doloremque quia dolores necessitatibus eligendi nulla asperiores modi voluptas totam. Iste, animi.</span></p>`,
+        title: 'Page Title Example',
+        description: '<p><span style="font-size:14px;">Lorem ipsum dolor sit amet consectetur adipisicing elit.</span></p>',
         enabled: 1,
         page_path: 'page-path-1',
-        page_cover_id: '12345',
-        page_cover_url:
-          'https://blog.hitpayapp.com/content/images/size/w2000/2024/02/-new--Clarissa-Blog-Design---4-.png',
+        page_cover_url: 'https://blog.hitpayapp.com/content/images/size/w2000/2024/02/-new--Clarissa-Blog-Design---4-.png',
         created_at: '2024-04-18T09:23:39+08:00',
         updated_at: '2024-04-18T09:23:39+08:00'
       },
       {
         id: '9bb6447e-edab-4c8c-9652-8186cffc8402',
         business_id: '8ba6c772-8c2d-4f3b-a7d6-3f1f0648fa77',
-        title: 'Page Title example',
-        description:
-          '<p><span style="font-size:14px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic maxime recusandae velit, assumenda ullam beatae obcaecati ab ad doloremque.</span></p>',
+        title: 'Disabled Page Example',
+        description: '<p><span style="font-size:14px;">Lorem ipsum dolor sit amet consectetur adipisicing elit.</span></p>',
         enabled: 0,
         page_path: 'page-path-2',
-        page_cover_id: null,
         page_cover_url: null,
         created_at: '2024-04-02T23:22:35+08:00',
         updated_at: '2024-04-18T09:22:56+08:00'
@@ -309,24 +257,19 @@ export const OcListItemPage = {
       return { args }
     },
     template: `
-      <Theme colorMode="light" class="p-10">
+      <Theme class="p-10">
         <ListItem
           type="page"
-          v-for="page in args.pages" :page="page"
+          v-for="page in args.pages"
+          :key="page.id"
+          :page="page"
         >
           <template #menu>
             <div class="p-2 border-b border-gray-200">
               <DropdownItem text="Edit" icon="pencil" />
-              <DropdownItem text="Edit" icon="pencil" />
-              <DropdownItem text="Edit" icon="pencil" />
-              <DropdownItem text="Edit" icon="pencil" />
-              <DropdownItem text="Edit" icon="pencil" />
-              <DropdownItem text="Edit" icon="pencil" />
-              <DropdownItem text="Edit" icon="pencil" />
-              <DropdownItem text="Edit" icon="pencil" />
             </div>
             <div class="p-2">
-              <DropdownItem text="Delete" variant="destructive" icon="bin"/>
+              <DropdownItem text="Delete" variant="destructive" icon="bin" />
             </div>
           </template>
         </ListItem>
@@ -343,11 +286,7 @@ export const ListItemAccordion = {
     isTransparent: false,
     isDraggable: true,
     isOpenDefault: true,
-    chips: [
-      {
-        label: 'Required'
-      }
-    ]
+    chips: [{ label: 'Required' }]
   },
   render: (args) => ({
     components: { Theme, ListItem },
@@ -357,21 +296,12 @@ export const ListItemAccordion = {
       return { args, isOpen1, isOpen2 }
     },
     template: `
-      <Theme colorMode="light" class="p-10">
-        <ListItem
-          v-bind="args"
-          v-model="isOpen1"
-          type="accordion"
-        >
+      <Theme class="p-10">
+        <ListItem v-bind="args" v-model="isOpen1" type="accordion">
           <template #content>Content</template>
         </ListItem>
         <div class="my-3" />
-        <ListItem
-          v-bind="args"
-          v-model="isOpen2"
-          type="accordion"
-          is-no-toggle-forced
-        >
+        <ListItem v-bind="args" v-model="isOpen2" type="accordion" is-no-toggle-forced>
           <template #content>Content</template>
         </ListItem>
       </Theme>

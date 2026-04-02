@@ -1,5 +1,4 @@
-import { Theme, PhoneInput } from '@/orchidui-core'
-import countryCodes from '../../data/CountryCodes.sample'
+import { PhoneInput, Theme } from '@/orchidui-core'
 import { ref } from 'vue'
 
 export default {
@@ -8,88 +7,29 @@ export default {
 }
 
 export const Default = {
-  argTypes: {
-    initialCountryCode: {
-      control: 'select',
-      options: ['sg', 'be', 'ua', 'sa']
-    },
-    labelIcon: {
-      control: 'select',
-      options: ['', 'question-mark']
-    }
-  },
   args: {
-    initialCountryCode: 'sg',
-    placeholder: 'Placeholder',
+    label: 'Label',
     hint: 'This is a hint text to help user.',
+    placeholder: 'Placeholder',
+    disabled: false,
     errorMessage: '',
-    isInlineLabel: false,
-    isDisabled: false,
-    label: '',
-    isRequired: false,
-    labelIcon: '',
-    tooltipText: 'Tooltip text',
-    tooltipOptions: {
-      position: 'top',
-      distance: 10
-    },
-    ai: false
+    isRequired: false
   },
   render: (args) => ({
-    components: { Theme, PhoneInput },
+    components: { PhoneInput, Theme },
     setup() {
       const modelValue = ref(null)
-      return { modelValue, args, countryCodes }
+      return { modelValue, args }
     },
     template: `
-          <Theme>
-            <div class="w-full h-[400px]">
-              <div class="mb-3"> Model Value: {{ modelValue }}</div>
-              <PhoneInput
-                  v-model="modelValue"
-                  :country-codes="countryCodes"
-                  :key="args.initialCountryCode"
-                  :valid-regex="args.validRegex"
-                  :isInlineLabel="args.isInlineLabel"
-                  :isDisabled="args.isDisabled"
-                  :label="args.label"
-                  :hint="args.hint"
-                  :placeholder="args.placeholder"
-                  :error-message="args.errorMessage"
-                  :initial-country-code="args.initialCountryCode"
-                  :isRequired="args.isRequired"
-                  :tooltip-options="args.tooltipOptions"
-                  :label-icon="args.labelIcon"
-                  :tooltip-text="args.tooltipText"
-                  :ai="args.ai"
-              />
-            </div>
-          </Theme>
-        `
-  })
-}
-
-export const AiMode = {
-  render: () => ({
-    components: { Theme, PhoneInput },
-    setup() {
-      const modelValue = ref(['65', '91234567'])
-      return { modelValue, countryCodes }
-    },
-    template: `
-          <Theme>
-            <div class="w-full h-[400px]">
-              <div class="mb-3"> Model Value: {{ modelValue }}</div>
-              <PhoneInput
-                  v-model="modelValue"
-                  :country-codes="countryCodes"
-                  label="Phone Number"
-                  hint="AI generated phone number"
-                  placeholder="Placeholder"
-                  ai
-              />
-            </div>
-          </Theme>
-        `
+      <Theme>
+        <div class="w-full h-[400px]">
+          <PhoneInput
+            v-model="modelValue"
+            v-bind="args"
+          />
+        </div>
+      </Theme>
+    `
   })
 }

@@ -1,4 +1,4 @@
-import { Theme, LinkInput } from '@/orchidui-core'
+import { LinkInput, Theme } from '@/orchidui-core'
 import { ref } from 'vue'
 
 export default {
@@ -14,21 +14,21 @@ export const Default = {
     }
   },
   args: {
+    label: 'Enter Username',
     hint: '',
     placeholder: '@username',
-    isInlineLabel: false,
     isDisabled: false,
-    label: 'Enter Username',
-    errorMessages: {
-      link: 'error',
-      title: 'error'
-    },
     isRequired: false,
+    isInlineLabel: false,
     labelIcon: '',
     tooltipText: 'Tooltip text',
     tooltipOptions: {
       position: 'top',
       distance: 10
+    },
+    errorMessages: {
+      link: 'error',
+      title: 'error'
     },
     links: [
       {
@@ -66,40 +66,24 @@ export const Default = {
     ]
   },
   render: (args) => ({
-    components: { Theme, LinkInput },
+    components: { LinkInput, Theme },
     setup() {
+      const modelValue = ref('')
       const linkType = ref('twitter')
-      const linkValue = ref('')
       const linkTitle = ref('')
-      return { linkType, linkValue, linkTitle, args }
+      return { modelValue, linkType, linkTitle, args }
     },
     template: `
-          <Theme>
-            <div class="w-full h-[200px]">
-              <div>
-                type:  {{linkType}}
-              </div>
-              <div>
-                value : {{linkValue}}
-              </div>
-              <LinkInput
-                  v-model="linkValue"
-                  v-model:type="linkType"
-                  v-model:title="linkTitle"
-                  :isInlineLabel="args.isInlineLabel"
-                  :isDisabled="args.isDisabled"
-                  :label="args.label"
-                  :hint="args.hint"
-                  :links="args.links"
-                  :placeholder="args.placeholder"
-                  :error-messages="args.errorMessages"
-                  :isRequired="args.isRequired"
-                  :tooltip-options="args.tooltipOptions"
-                  :label-icon="args.labelIcon"
-                  :tooltip-text="args.tooltipText"
-              />
-            </div>
-          </Theme>
-        `
+      <Theme>
+        <div class="w-full h-[200px]">
+          <LinkInput
+            v-model="modelValue"
+            v-model:type="linkType"
+            v-model:title="linkTitle"
+            v-bind="args"
+          />
+        </div>
+      </Theme>
+    `
   })
 }

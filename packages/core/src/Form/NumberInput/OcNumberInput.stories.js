@@ -1,4 +1,4 @@
-import { NumberInput } from './OcNumberInput.js'
+import { NumberInput, Theme } from '@/orchidui-core'
 import { ref } from 'vue'
 
 export default {
@@ -8,16 +8,28 @@ export default {
 
 export const Default = {
   args: {
-    isDisabled: false
+    label: 'Label',
+    hint: 'This is a hint text to help user.',
+    placeholder: 'Placeholder',
+    disabled: false,
+    errorMessage: '',
+    min: undefined,
+    max: undefined,
+    step: 1
   },
   render: (args) => ({
-    components: { NumberInput },
+    components: { NumberInput, Theme },
     setup() {
-      const modalValue = ref()
-      return { modalValue, args }
+      const modelValue = ref(0)
+      return { modelValue, args }
     },
     template: `
-          <NumberInput v-model="modalValue" v-bind="args"/>
-        `
+      <Theme>
+        <NumberInput
+          v-model="modelValue"
+          v-bind="args"
+        />
+      </Theme>
+    `
   })
 }

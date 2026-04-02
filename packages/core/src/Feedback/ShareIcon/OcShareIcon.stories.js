@@ -1,11 +1,11 @@
-import { Theme, ShareIcon } from '@/orchidui-core'
+import { ShareIcon, Theme } from '@/orchidui-core'
 
 export default {
   component: ShareIcon,
   tags: ['autodocs']
 }
 
-export const VariantColor = {
+export const Default = {
   args: {
     text: 'Whatsapp',
     icon: 'whatsapp',
@@ -21,11 +21,28 @@ export const VariantColor = {
       return { args }
     },
     template: `
-          <Theme>
-            <div class="h-[150px]">
-              <ShareIcon v-bind="args"/>
-            </div>
-          </Theme>
-        `
+      <Theme>
+        <div class="h-[150px]">
+          <ShareIcon v-bind="args" />
+        </div>
+      </Theme>
+    `
+  })
+}
+
+export const Variants = {
+  render: () => ({
+    components: { ShareIcon, Theme },
+    template: `
+      <Theme>
+        <div class="flex gap-4 h-[150px] items-start">
+          <ShareIcon icon="whatsapp" text="Whatsapp" />
+          <ShareIcon icon="facebook" text="Facebook" />
+          <ShareIcon icon="telegram" text="Telegram" />
+          <ShareIcon icon="email" text="Email" />
+          <ShareIcon icon="tiktok" text="TikTok" />
+        </div>
+      </Theme>
+    `
   })
 }

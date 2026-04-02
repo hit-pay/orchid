@@ -1,5 +1,4 @@
-import { Theme, Button, Input, Dropdown, DropdownItem, Icon } from '@/orchidui-core'
-import { FormBuilder } from '@/orchidui-core'
+import { Theme, Button, Input, Dropdown, DropdownItem, Icon, FormBuilder } from '@/orchidui-core'
 import { ref } from 'vue'
 
 export default {
@@ -18,64 +17,64 @@ export const Default = {
     grid: {
       xs: {
         area: `
-              input
-              card_input
-              custom_form_input
-              simple_checkbox_input
-              checkboxes_group
-              input_2
-              custom_form_input_2
-              link_input
-              phone_number_field
-              radio_group
-              radio_group_2
-              select
-              text_area_field
-              range_input
-              time_picker_test
-              date_picker_test
-              date_picker_range_from
-              toggle_field
-          `,
+          input
+          card_input
+          custom_form_input
+          simple_checkbox_input
+          checkboxes_group
+          input_2
+          custom_form_input_2
+          link_input
+          phone_number_field
+          radio_group
+          radio_group_2
+          select
+          text_area_field
+          range_input
+          time_picker_test
+          date_picker_test
+          date_picker_range_from
+          toggle_field
+        `,
         rows: 'auto',
         columns: '100%'
       },
       sm: {
         area: `
-               input
-              card_input
-              custom_form_input
-              simple_checkbox_input
-              checkboxes_group
-              input_2
-              custom_form_input_2
-              link_input
-              phone_number_field
-              radio_group
-              radio_group_2
-              select
-              text_area_field
-              range_input
-              time_picker_test
-              date_picker_test
-              date_picker_range_from
-              toggle_field
-          `,
+          input
+          card_input
+          custom_form_input
+          simple_checkbox_input
+          checkboxes_group
+          input_2
+          custom_form_input_2
+          link_input
+          phone_number_field
+          radio_group
+          radio_group_2
+          select
+          text_area_field
+          range_input
+          time_picker_test
+          date_picker_test
+          date_picker_range_from
+          toggle_field
+        `,
         rows: 'auto',
         columns: '100%'
       },
       lg: {
         area: `
-            input card_input
-            custom_form_input simple_checkbox_input
-            checkboxes_group input_2
-            custom_form_input_2 link_input
-            phone_number_field radio_group
-            radio_group_2 select
-            text_area_field range_input
-            time_picker_test date_picker_test
-            date_picker_range_from toggle_field
-          `,
+          input card_input
+          custom_form_input simple_checkbox_input
+          checkboxes_group input_2
+          custom_form_input_2 link_input
+          phone_number_field radio_group
+          radio_group_2 select
+          text_area_field range_input
+          time_picker_test date_picker_test
+          date_picker_range_from toggle_field
+        `,
         rows: 'auto',
         columns: '50% 50%'
       }
@@ -155,19 +154,9 @@ export const Default = {
             hint: 'This is a hint text to help user',
             alignment: 'vertical',
             checkboxes: [
-              {
-                label: 'Text',
-                value: 0
-              },
-              {
-                label: 'Text',
-                value: 1
-              },
-              {
-                label: 'Text',
-                value: 2,
-                isDisabled: true
-              }
+              { label: 'Text', value: 0 },
+              { label: 'Text', value: 1 },
+              { label: 'Text', value: 2, isDisabled: true }
             ]
           }
         },
@@ -220,27 +209,11 @@ export const Default = {
             hint: 'This is a hint text to help user',
             placeholder: 'placeholder',
             radio: [
-              {
-                label: 'Text',
-                value: '0'
-              },
-              {
-                label: 'Text',
-                value: '1'
-              },
-              {
-                label: 'Text',
-                value: '2'
-              },
-              {
-                label: 'Text',
-                value: '3'
-              },
-              {
-                label: 'is Disabled',
-                value: '4',
-                isDisabled: true
-              }
+              { label: 'Text', value: '0' },
+              { label: 'Text', value: '1' },
+              { label: 'Text', value: '2' },
+              { label: 'Text', value: '3' },
+              { label: 'is Disabled', value: '4', isDisabled: true }
             ]
           }
         },
@@ -254,27 +227,11 @@ export const Default = {
             hint: 'This is a hint text to help user',
             placeholder: 'placeholder',
             radio: [
-              {
-                label: 'Text 2',
-                value: '0'
-              },
-              {
-                label: 'Text 2',
-                value: '1'
-              },
-              {
-                label: 'Text 2',
-                value: '2'
-              },
-              {
-                label: 'Text',
-                value: '3'
-              },
-              {
-                label: 'is Disabled',
-                value: '4',
-                isDisabled: true
-              }
+              { label: 'Text 2', value: '0' },
+              { label: 'Text 2', value: '1' },
+              { label: 'Text 2', value: '2' },
+              { label: 'Text', value: '3' },
+              { label: 'is Disabled', value: '4', isDisabled: true }
             ]
           }
         },
@@ -290,22 +247,10 @@ export const Default = {
             isAddNew: true,
             multiple: true,
             options: [
-              {
-                label: 'Option 1',
-                value: 1
-              },
-              {
-                label: 'Option 2',
-                value: 2
-              },
-              {
-                label: 'Option 3',
-                value: 3
-              },
-              {
-                label: 'Option 4',
-                value: 4
-              }
+              { label: 'Option 1', value: 1 },
+              { label: 'Option 2', value: 2 },
+              { label: 'Option 3', value: 3 },
+              { label: 'Option 4', value: 4 }
             ]
           }
         },
@@ -350,14 +295,8 @@ export const Default = {
         },
         {
           name: [
-            {
-              key: 'date_picker_range_from',
-              rule: 'required'
-            },
-            {
-              key: 'date_picker_range_to',
-              rule: 'required'
-            }
+            { key: 'date_picker_range_from', rule: 'required' },
+            { key: 'date_picker_range_to', rule: 'required' }
           ],
           type: 'DatePicker',
           props: {
@@ -373,6 +312,7 @@ export const Default = {
           type: 'Toggle'
         }
       ]
+
       return {
         args,
         values,
@@ -383,57 +323,51 @@ export const Default = {
       }
     },
     template: `
-          <Theme class="p-8">
-            <FormBuilder
-                id="form-builder"
-                class="gap-5"
-                :errors="errors"
-                :grid="args.grid"
-                :values="values"
-                :json-form="SampleJsonForm"
-                @onUpdate="onUpdateForm"
+      <Theme class="p-8">
+        <FormBuilder
+          id="form-builder"
+          class="gap-5"
+          :errors="errors"
+          :grid="args.grid"
+          :values="values"
+          :json-form="SampleJsonForm"
+          @onUpdate="onUpdateForm"
+        >
+          <template #CustomFormInput="{form, value, error}">
+            <div class="flex items-center md:col-span-2 border-2 p-3">
+              <label class="mr-3">This custom form input</label>
+              <Button @click="onUpdateForm(form, '1')">Set Value to (1)</Button>
+              <span>{{ error }}</span>
+            </div>
+          </template>
+          <template #CustomFormInput2="{form, value, error}">
+            <Input
+              label="Custom Form Input 2"
+              hint="This is a hint text to help user"
+              :model-value="value"
+              :error-message="error"
+              @update:model-value="onUpdateForm(form, $event)"
             >
-              <template #CustomFormInput="{form, value, error}">
-                <div class="flex items-center md:col-span-2 border-2 p-3">
-                  <label class="mr-3">This custom form input</label>
-                  <Button
-                      @click="onUpdateForm(form, '1')">Set Value to (1)
-                  </Button>
-                  <span>
-                        {{ error }}
-                      </span>
-                </div>
-              </template>
-              <template #CustomFormInput2="{form, value, error}">
-                <Input
-                    label="Custom Form Input 2"
-                    hint="This is a hint text to help user"
-                    :model-value="value"
-                    :error-message="error"
-                    @update:model-value="onUpdateForm(form, $event)"
-                >
-                  <template #trailing>
-                    <Dropdown v-model="isOpenedDropdown">
-                      <template #menu>
-                        <div class="flex p-2 flex-col">
-                          <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
-                          <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
-                          <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
-                        </div>
-                      </template>
-                      <div
-                          class=" text-sm font-medium flex items-center gap-x-2 text-oc-text-400"
-                      >
-                        <span class="flex items-center text-sm">USD</span>
-                        <Icon class="w-[14px] h-[14px]" name="chevron-down"/>
-                      </div>
-                    </Dropdown>
+              <template #trailing>
+                <Dropdown v-model="isOpenedDropdown">
+                  <template #menu>
+                    <div class="flex p-2 flex-col">
+                      <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
+                      <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
+                      <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
+                    </div>
                   </template>
-                </Input>
+                  <div class="text-sm font-medium flex items-center gap-x-2 text-oc-text-400">
+                    <span class="flex items-center text-sm">USD</span>
+                    <Icon class="w-[14px] h-[14px]" name="chevron-down"/>
+                  </div>
+                </Dropdown>
               </template>
-            </FormBuilder>
-          </Theme>
-        `
+            </Input>
+          </template>
+        </FormBuilder>
+      </Theme>
+    `
   })
 }
 
@@ -448,10 +382,7 @@ export const ShowIfLogic = {
     errors: {}
   },
   render: (args) => ({
-    components: {
-      Theme,
-      FormBuilder
-    },
+    components: { Theme, FormBuilder },
     setup() {
       const values = ref(args.values)
       const errors = ref(args.errors)
@@ -467,37 +398,21 @@ export const ShowIfLogic = {
         }
       }
 
-      const isOpenedDropdown = ref(false)
-
       const JsonForm = [
         {
           name: 'select_product_from_section',
           type: 'SectionItem',
-          props: {
-            title: 'Select product from'
-          }
+          props: { title: 'Select product from' }
         },
         {
           name: 'select_product_from',
           type: 'Select',
           props: {
             options: [
-              {
-                value: 'feature',
-                label: 'Feature product'
-              },
-              {
-                value: 'all_product',
-                label: 'All product'
-              },
-              {
-                value: 'product_category',
-                label: 'Product Category'
-              },
-              {
-                value: 'pick_products',
-                label: 'Pick Products'
-              }
+              { value: 'feature', label: 'Feature product' },
+              { value: 'all_product', label: 'All product' },
+              { value: 'product_category', label: 'Product Category' },
+              { value: 'pick_products', label: 'Pick Products' }
             ],
             hint: 'Learn how to make featured products here.'
           }
@@ -505,18 +420,12 @@ export const ShowIfLogic = {
         {
           name: 'limit_feature_product',
           type: 'SectionItem',
-          props: {
-            title: 'Limit product',
-            isToggle: true
-          }
+          props: { title: 'Limit product', isToggle: true }
         },
         {
           name: 'other_value',
           type: 'SectionItem',
-          props: {
-            title: 'Other value',
-            isToggle: true
-          }
+          props: { title: 'Other value', isToggle: true }
         },
         {
           name: 'input',
@@ -556,18 +465,9 @@ export const ShowIfLogic = {
             label: 'Select Columns',
             class: 'w-full lg:w-1/3',
             options: [
-              {
-                value: '1',
-                label: '1 Column'
-              },
-              {
-                value: '2',
-                label: '2 Column'
-              },
-              {
-                value: '3',
-                label: '3 Column'
-              }
+              { value: '1', label: '1 Column' },
+              { value: '2', label: '2 Column' },
+              { value: '3', label: '3 Column' }
             ],
             hint: 'Learn how to make featured products here.'
           }
@@ -582,10 +482,7 @@ export const ShowIfLogic = {
             {
               name: 'title_2',
               type: 'Input',
-              props: {
-                label: 'Title',
-                placeholder: 'Title'
-              }
+              props: { label: 'Title', placeholder: 'Title' }
             }
           ]
         },
@@ -623,21 +520,12 @@ export const ShowIfLogic = {
           name: 'multiple_select_options',
           type: 'Select',
           props: {
-            label: 'Triger Show if images is not empty',
+            label: 'Trigger Show if images is not empty',
             multiple: true,
             options: [
-              {
-                value: '1',
-                label: 'Option 1'
-              },
-              {
-                value: '2',
-                label: 'Option 2'
-              },
-              {
-                value: '3',
-                label: 'Option 3'
-              }
+              { value: '1', label: 'Option 1' },
+              { value: '2', label: 'Option 2' },
+              { value: '3', label: 'Option 3' }
             ]
           }
         },
@@ -648,25 +536,13 @@ export const ShowIfLogic = {
           show_if_value: ['arrayExist'],
           props: {
             isSmallImage: true,
-            label: 'Triger Show if select options is not empty',
+            label: 'Trigger Show if select options is not empty',
             options: [
-              {
-                preview: '/images/request-form.svg',
-                label: 'Option 1',
-                value: 1
-              },
-              {
-                preview: '/images/request-form.svg',
-                label: 'Option 2',
-                value: 2
-              },
-              {
-                preview: '/images/request-form.svg',
-                label: 'Option 3',
-                value: 3
-              }
+              { preview: '/images/request-form.svg', label: 'Option 1', value: 1 },
+              { preview: '/images/request-form.svg', label: 'Option 2', value: 2 },
+              { preview: '/images/request-form.svg', label: 'Option 3', value: 3 }
             ]
-          },
+          }
         },
         {
           name: 'select_options_1',
@@ -675,54 +551,35 @@ export const ShowIfLogic = {
           show_if_value: ['arrayExist'],
           props: {
             isSmallImage: true,
-            label: 'Triger Show if select options is not empty',
+            label: 'Trigger Show if select options is not empty',
             options: [
-              {
-                preview: '/images/request-form.svg',
-                label: 'Option 1',
-                value: 1
-              },
-              {
-                preview: '/images/request-form.svg',
-                label: 'Option 2',
-                value: 2
-              },
-              {
-                preview: '/images/request-form.svg',
-                label: 'Option 3',
-                value: 3
-              }
+              { preview: '/images/request-form.svg', label: 'Option 1', value: 1 },
+              { preview: '/images/request-form.svg', label: 'Option 2', value: 2 },
+              { preview: '/images/request-form.svg', label: 'Option 3', value: 3 }
             ]
           }
         }
       ]
-      return {
-        JsonForm,
-        args,
-        values,
-        errors,
-        onUpdateForm,
-        isOpenedDropdown
-      }
+
+      return { JsonForm, args, values, errors, onUpdateForm }
     },
     template: `
-          <Theme class="p-8">
+      <Theme class="p-8">
+        <div class="mb-10 pb-10 border-b">
+          {{ values }}
+        </div>
 
-            <div class="mb-10 pb-10 border-b">
-            {{ values }}
-            </div>
-
-            <FormBuilder
-                id="form-builder"
-                class="grid gap-4"
-                :errors="errors"
-                :values="values"
-                :json-form="JsonForm"
-                @onUpdate="onUpdateForm"
-            >
-             <template #Children="{form}">{{form}}</template>
-            </FormBuilder>
-          </Theme>
-        `
+        <FormBuilder
+          id="form-builder"
+          class="grid gap-4"
+          :errors="errors"
+          :values="values"
+          :json-form="JsonForm"
+          @onUpdate="onUpdateForm"
+        >
+          <template #Children="{form}">{{form}}</template>
+        </FormBuilder>
+      </Theme>
+    `
   })
 }

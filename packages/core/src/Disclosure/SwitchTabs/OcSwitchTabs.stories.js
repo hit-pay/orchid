@@ -1,4 +1,4 @@
-import { Theme, SwitchTabs } from '@/orchidui-core'
+import { SwitchTabs, Theme } from '@/orchidui-core'
 import { ref } from 'vue'
 
 export default {
@@ -15,17 +15,17 @@ export const Default = {
     ]
   },
   render: (args) => ({
-    components: { Theme, SwitchTabs },
+    components: { SwitchTabs, Theme },
     setup() {
-      const selectedOption = ref('weekly')
-      return { args, selectedOption }
+      const activeOption = ref('weekly')
+      return { args, activeOption }
     },
     template: `
-          <Theme>
-            <div class="flex items-center justify-center">
-              <SwitchTabs :options="args.options" :active-option="selectedOption" @select="selectedOption = $event"/>
-            </div>
-          </Theme>
-        `
+      <Theme>
+        <div class="flex items-center justify-center">
+          <SwitchTabs v-bind="args" :active-option="activeOption" @select="activeOption = $event" />
+        </div>
+      </Theme>
+    `
   })
 }

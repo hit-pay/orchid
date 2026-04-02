@@ -27,8 +27,3 @@ dist
 
 # storybook
 public/storybook
-
-# vitepress
-docs/.vitepress/cache
-docs/.vitepress/dist
-public/docs

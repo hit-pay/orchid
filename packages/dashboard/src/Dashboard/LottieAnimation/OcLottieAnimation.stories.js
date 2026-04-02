@@ -1,4 +1,5 @@
 import { LottieAnimation } from '@/orchidui-dashboard'
+import { Theme } from '@/orchidui-core'
 
 export default {
   component: LottieAnimation,
@@ -10,15 +11,17 @@ export const Default = {
     path: '/json/lottie-animation/success_report.json',
     width: '200',
     height: '200',
-    autoPlay: true,
+    autoPlay: true
   },
   render: (args) => ({
-    components: { LottieAnimation },
+    components: { LottieAnimation, Theme },
     setup() {
       return { args }
     },
     template: `
-      <LottieAnimation v-bind="args" />
+      <Theme>
+        <LottieAnimation v-bind="args" />
+      </Theme>
     `
   })
 }

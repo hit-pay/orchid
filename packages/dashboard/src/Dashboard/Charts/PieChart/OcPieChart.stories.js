@@ -1,11 +1,12 @@
-import PieChart from './OcPieChart.vue'
+import { PieChart } from '@/orchidui-dashboard'
+import { Theme } from '@/orchidui-core'
 
 export default {
   component: PieChart,
   tags: ['autodocs']
 }
 
-export const Line = {
+export const Default = {
   args: {
     showGrid: false,
     showTooltip: true,
@@ -45,21 +46,14 @@ export const Line = {
     tooltipCurrency: 'SGD'
   },
   render: (args) => ({
-    components: { PieChart },
+    components: { PieChart, Theme },
     setup() {
       return { args }
     },
     template: `
-          <div>
-            <PieChart
-                class="h-[300px]"
-                :show-grid="args.showGrid"
-                :show-tooltip="args.showTooltip"
-                :show-legend="args.showLegend"
-                :chart-data="args.chartData"
-                :tooltip-currency="args.tooltipCurrency"
-            />
-          </div>
-        `
+      <Theme>
+        <PieChart class="h-[300px]" v-bind="args" />
+      </Theme>
+    `
   })
 }

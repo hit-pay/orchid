@@ -1,4 +1,5 @@
-import { Theme, Snackbar } from '@/orchidui-core'
+import { Snackbar, Theme } from '@/orchidui-core'
+import { ref } from 'vue'
 
 export default {
   component: Snackbar,
@@ -9,108 +10,84 @@ export const Default = {
   argTypes: {
     color: {
       control: 'select',
-      options: ['default', 'primary', 'error', 'warning', 'gray'],
-      default: 'default'
+      options: ['default', 'primary', 'error', 'warning', 'gray']
     },
     size: {
       control: 'select',
-      options: ['small', 'big', 'default'],
-      default: 'default'
+      options: ['default', 'small', 'big']
     },
     icon: {
       control: 'select',
-      options: ['filled-check', 'circle', 'plus', 'x'],
-      default: 'filled-check'
+      options: ['filled-check', 'circle', 'plus', 'x']
     }
   },
   args: {
-    modelValue: true,
+    color: 'default',
+    size: 'default',
+    icon: 'filled-check',
+    title: 'Success',
+    content: 'Changes have been successfully saved',
+    description: 'Changes have been successfully saved',
     showIcon: true,
     isFloating: true,
     position: 'top-center',
     transitionName: 'slide-from-top',
-    icon: 'filled-check',
-    color: 'default',
-    content: 'Changes have been successfully saved',
-    description: 'Changes have been successfully saved',
-    title: 'Success',
-    secondaryButton: {
-      label: 'Action'
-    },
-    primaryButton: {
-      label: 'Action'
-    },
-    dismissible: false
+    dismissible: false,
+    secondaryButton: { label: 'Action' },
+    primaryButton: { label: 'Action' }
   },
   render: (args) => ({
     components: { Snackbar, Theme },
     setup() {
-      return { args }
+      const modelValue = ref(true)
+      return { modelValue, args }
     },
     template: `
-          <Theme colorMode="light" class="h-[300px]">
-            <div class="flex flex-col gap-y-4">
-              <Snackbar v-bind="args" v-model="args.modelValue"/>
-            </div>
-          </Theme>
-        `
+      <Theme class="h-[300px]">
+        <Snackbar v-model="modelValue" v-bind="args" />
+      </Theme>
+    `
   })
 }
 
 export const Variants = {
-  args: {
-    showIcon: true,
-    icon: 'filled-check',
-    content: 'Changes have been successfully saved'
-  },
-  render: (args) => ({
+  render: () => ({
     components: { Snackbar, Theme },
-    setup() {
-      return { args }
-    },
     template: `
-          <Theme colorMode="light">
-            <div class="flex flex-col gap-y-4">
-              <Snackbar v-bind="args"/>
-              <Snackbar v-bind="args" color="primary"/>
-              <Snackbar v-bind="args" color="error"/>
-              <Snackbar v-bind="args" color="warning"/>
-              <Snackbar v-bind="args" color="gray"/>
-            </div>
-          </Theme>
-        `
+      <Theme>
+        <div class="flex flex-col gap-y-4">
+          <Snackbar :model-value="true" show-icon icon="filled-check" content="Changes have been successfully saved" />
+          <Snackbar :model-value="true" color="primary" show-icon icon="filled-check" content="Changes have been successfully saved" />
+          <Snackbar :model-value="true" color="error" show-icon icon="filled-check" content="Changes have been successfully saved" />
+          <Snackbar :model-value="true" color="warning" show-icon icon="filled-check" content="Changes have been successfully saved" />
+          <Snackbar :model-value="true" color="gray" show-icon icon="filled-check" content="Changes have been successfully saved" />
+        </div>
+      </Theme>
+    `
   })
 }
 
 export const BigSize = {
-  args: {
-    modelValue1: true,
-    modelValue2: true,
-    modelValue3: true,
-    modelValue4: true,
-    modelValue5: true,
-    showIcon: true,
-    icon: 'filled-check',
-    title: 'Snackbar title',
-    description: 'Changes have been successfully saved',
-    dismissible: true,
-    size: 'big'
-  },
-  render: (args) => ({
+  render: () => ({
     components: { Snackbar, Theme },
     setup() {
-      return { args }
+      const visible1 = ref(true)
+      const visible2 = ref(true)
+      const visible3 = ref(true)
+      const visible4 = ref(true)
+      const visible5 = ref(true)
+      return { visible1, visible2, visible3, visible4, visible5 }
     },
     template: `
-          <Theme colorMode="light">
-            <div class="flex flex-col gap-y-4">
-              <Snackbar v-bind="args" v-model="args.modelValue1" />
-              <Snackbar v-bind="args" color="primary" v-model="args.modelValue2" />
-              <Snackbar v-bind="args" color="error" v-model="args.modelValue3" />
-              <Snackbar v-bind="args" color="warning" v-model="args.modelValue4" />
-              <Snackbar v-bind="args" color="gray" v-model="args.modelValue5" />
-            </div>
-          </Theme>
-        `
+      <Theme>
+        <div class="flex flex-col gap-y-4">
+          <Snackbar v-model="visible1" size="big" show-icon icon="filled-check" title="Snackbar title" description="Changes have been successfully saved" dismissible />
+          <Snackbar v-model="visible2" size="big" color="primary" show-icon icon="filled-check" title="Snackbar title" description="Changes have been successfully saved" dismissible />
+          <Snackbar v-model="visible3" size="big" color="error" show-icon icon="filled-check" title="Snackbar title" description="Changes have been successfully saved" dismissible />
+          <Snackbar v-model="visible4" size="big" color="warning" show-icon icon="filled-check" title="Snackbar title" description="Changes have been successfully saved" dismissible />
+          <Snackbar v-model="visible5" size="big" color="gray" show-icon icon="filled-check" title="Snackbar title" description="Changes have been successfully saved" dismissible />
+        </div>
+      </Theme>
+    `
   })
 }

@@ -1,4 +1,4 @@
-import { Tag } from '@/orchidui-core'
+import { Tag, Theme } from '@/orchidui-core'
 
 export default {
   component: Tag,
@@ -6,16 +6,25 @@ export default {
 }
 
 export const Default = {
-  args: {},
+  argTypes: {
+    variant: {
+      control: 'select',
+      options: ['warning', 'primary', 'success', 'error', 'gray']
+    }
+  },
+  args: {
+    label: 'BETA',
+    variant: 'warning'
+  },
   render: (args) => ({
-    components: { Tag },
+    components: { Tag, Theme },
     setup() {
-      return {
-        args
-      }
+      return { args }
     },
     template: `
-          <Tag variant="warning" label="BETA"/>
-        `
+      <Theme>
+        <Tag v-bind="args" />
+      </Theme>
+    `
   })
 }

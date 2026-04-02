@@ -1,4 +1,4 @@
-import { Theme, Toggle } from '@/orchidui-core'
+import { Toggle, Theme } from '@/orchidui-core'
 import { ref } from 'vue'
 
 export default {
@@ -14,41 +14,36 @@ export const Default = {
     }
   },
   args: {
-    disabled: false,
     size: 'default',
+    disabled: false,
     label: 'Label'
   },
   render: (args) => ({
     components: { Toggle, Theme },
     setup() {
-      const value = ref(false)
-      return {
-        value,
-        args
-      }
+      const modelValue = ref(false)
+      return { modelValue, args }
     },
     template: `
-          <Theme>
-            <Toggle
-                v-model="value"
-                v-bind="args"
-            />
-          </Theme>
-        `
+      <Theme>
+        <Toggle v-model="modelValue" v-bind="args" />
+      </Theme>
+    `
   })
 }
+
 export const Variants = {
   render: () => ({
     components: { Toggle, Theme },
     template: `
-          <Theme>
-            <div class="grid grid-cols-2 w-fit items-center gap-6">
-              <Toggle :model-value="true"/>
-              <Toggle :model-value="true" size="small"/>
-              <Toggle :model-value="false"/>
-              <Toggle size="small" :model-value="false"/>
-            </div>
-          </Theme>
-        `
+      <Theme>
+        <div class="grid grid-cols-2 w-fit items-center gap-6">
+          <Toggle :model-value="true" />
+          <Toggle :model-value="true" size="small" />
+          <Toggle :model-value="false" />
+          <Toggle :model-value="false" size="small" />
+        </div>
+      </Theme>
+    `
   })
 }

@@ -1,4 +1,4 @@
-import { Theme, SectionItem } from '@/orchidui-core'
+import { SectionItem, Theme } from '@/orchidui-core'
 import { ref } from 'vue'
 
 export default {
@@ -6,43 +6,71 @@ export default {
   tags: ['autodocs']
 }
 
-export const sectionItem = {
+export const Default = {
   argTypes: {
-    icon: {
-      control: 'select',
-      options: ['information', 'check', 'x', '']
-    }
+    icon: { control: 'select', options: ['', 'information', 'check', 'x'] }
   },
   args: {
     title: 'Title',
     description: 'Description',
-    toggleProps: {},
     isToggle: true,
     icon: 'check',
     popperMessage: 'Information',
     errorMessage: ''
   },
   render: (args) => ({
-    components: { Theme, SectionItem },
+    components: { SectionItem, Theme },
     setup() {
       const modelValue = ref(false)
-      return { args, modelValue }
+      return { modelValue, args }
     },
     template: `
-          <Theme colorMode="light">
-            <div class="p-1">
-              <SectionItem
-                  v-model="modelValue"
-                  :title="args.title"
-                  :description="args.description"
-                  :is-toggle="args.isToggle"
-                  :toggle-props="args.toggleProps"
-                  :icon="args.icon"
-                  :popper-message="args.popperMessage"
-                  :error-message="args.errorMessage"
-              />
-            </div>
-          </Theme>
-        `
+      <Theme>
+        <SectionItem
+          v-model="modelValue"
+          v-bind="args"
+        />
+      </Theme>
+    `
+  })
+}
+
+export const Variants = {
+  render: () => ({
+    components: { SectionItem, Theme },
+    setup() {
+      const toggle1 = ref(false)
+      const toggle2 = ref(true)
+      const toggle3 = ref(false)
+      return { toggle1, toggle2, toggle3 }
+    },
+    template: `
+      <Theme>
+        <div class="flex flex-col gap-y-4 p-4">
+          <SectionItem
+            v-model="toggle1"
+            title="Default"
+            description="A section item with a toggle."
+            :is-toggle="true"
+            icon="check"
+          />
+          <SectionItem
+            v-model="toggle2"
+            title="Enabled by default"
+            description="This section item is toggled on."
+            :is-toggle="true"
+            icon="check"
+          />
+          <SectionItem
+            v-model="toggle3"
+            title="With error"
+            description="This section item has an error message."
+            :is-toggle="true"
+            icon="information"
+            error-message="This setting is required."
+          />
+        </div>
+      </Theme>
+    `
   })
 }

@@ -1,4 +1,4 @@
-import { WhiteList, Button } from '@/orchidui-core'
+import { WhiteList, Button, Theme } from '@/orchidui-core'
 
 export default {
   component: WhiteList,
@@ -7,23 +7,23 @@ export default {
 
 export const Default = {
   args: {
-    title: 'Test',
-    description: 'Test'
+    title: 'Feature Unavailable',
+    description: 'This feature is not available for your current plan.'
   },
   render: (args) => ({
-    components: { WhiteList, Button },
+    components: { WhiteList, Button, Theme },
     setup() {
-      return {
-        args
-      }
+      return { args }
     },
     template: `
-          <div class="relative h-[500px] flex flex-col gap-y-5 px-10">
-            content behind some text to show the overlay effect of the whitelist component
-            <Button label="Test Button"/>
-            <Button label="Test Button" variant="destructive"/>
-            <WhiteList v-bind="args" class="w-full top-0 left-0 h-full absolute"/>
-          </div>
-        `
+      <Theme>
+        <div class="relative h-[500px] flex flex-col gap-y-5 px-10">
+          content behind some text to show the overlay effect of the whitelist component
+          <Button label="Test Button" />
+          <Button label="Test Button" variant="destructive" />
+          <WhiteList v-bind="args" class="w-full top-0 left-0 h-full absolute" />
+        </div>
+      </Theme>
+    `
   })
 }

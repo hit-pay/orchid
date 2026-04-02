@@ -1,4 +1,4 @@
-import { Theme, Button } from '@/orchidui-core'
+import { Button, Theme } from '@/orchidui-core'
 
 export default {
   component: Button,
@@ -7,18 +7,6 @@ export default {
 
 export const Default = {
   argTypes: {
-    leftIcon: {
-      control: 'select',
-      options: ['', 'circle']
-    },
-    additionalAreaIcon: {
-      control: 'select',
-      options: ['', 'chevron-down', 'circle']
-    },
-    rightIcon: {
-      control: 'select',
-      options: ['', 'plus']
-    },
     variant: {
       control: 'select',
       options: ['primary', 'secondary', 'destructive']
@@ -26,20 +14,32 @@ export const Default = {
     size: {
       control: 'select',
       options: ['default', 'small', 'big']
+    },
+    leftIcon: {
+      control: 'select',
+      options: ['', 'circle', 'x']
+    },
+    rightIcon: {
+      control: 'select',
+      options: ['', 'plus', 'circle']
+    },
+    additionalAreaIcon: {
+      control: 'select',
+      options: ['', 'chevron-down', 'circle']
     }
   },
   args: {
     label: 'Button Text',
+    variant: 'primary',
+    size: 'default',
     leftIcon: '',
     rightIcon: '',
     isDisabled: false,
     isLoading: false,
     isTransparent: false,
-    isAdditionalArea: false,
-    additionalAreaIcon: 'chevron-down',
     isRoundedFull: false,
-    variant: 'primary',
-    size: 'default'
+    isAdditionalArea: false,
+    additionalAreaIcon: 'chevron-down'
   },
   render: (args) => ({
     components: { Button, Theme },
@@ -47,84 +47,72 @@ export const Default = {
       return { args }
     },
     template: `
-          <Theme colorMode="light">
-            <div class="flex gap-3 items-center  mb-3">
-              <Button
-                  :label="args.label"
-                  :left-icon="args.leftIcon"
-                  :rightIcon="args.rightIcon"
-                  :isDisabled="args.isDisabled"
-                  :isLoading="args.isLoading"
-                  :isRoundedFull="args.isRoundedFull"
-                  :isAdditionalArea="args.isAdditionalArea"
-                  :additionalAreaIcon="args.additionalAreaIcon"
-                  :variant="args.variant"
-                  :size="args.size"
-                  :isTransparent="args.isTransparent"
-              />
-            </div>
-          </Theme>
-        `
+      <Theme>
+        <Button v-bind="args" />
+      </Theme>
+    `
   })
 }
 
-export const SizeVariant = {
+export const SizeVariants = {
   render: () => ({
     components: { Button, Theme },
     template: `
-          <Theme colorMode="light">
-
-            <div class="flex gap-3 items-center  mb-3">
-              <Button size="small" label="Button Text"/>
-              <Button label="Button Text"/>
-              <Button size="big" label="Button Text"/>
-            </div>
-
-            <div class="flex gap-3 items-center  mb-3">
-              <Button size="small" variant="secondary" label="Button Text"/>
-              <Button variant="secondary" label="Button Text"/>
-              <Button size="big" variant="secondary" label="Button Text"/>
-            </div>
-            <div class="flex gap-3 items-center  mb-3">
-              <Button size="small" variant="destructive" label="Button Text"/>
-              <Button variant="destructive" label="Button Text"/>
-              <Button size="big" variant="destructive" label="Button Text"/>
-            </div>
-          </Theme>
-        `
+      <Theme>
+        <div class="flex flex-col gap-3">
+          <div class="flex gap-3 items-center">
+            <Button size="small" label="Button Text" />
+            <Button label="Button Text" />
+            <Button size="big" label="Button Text" />
+          </div>
+          <div class="flex gap-3 items-center">
+            <Button size="small" variant="secondary" label="Button Text" />
+            <Button variant="secondary" label="Button Text" />
+            <Button size="big" variant="secondary" label="Button Text" />
+          </div>
+          <div class="flex gap-3 items-center">
+            <Button size="small" variant="destructive" label="Button Text" />
+            <Button variant="destructive" label="Button Text" />
+            <Button size="big" variant="destructive" label="Button Text" />
+          </div>
+        </div>
+      </Theme>
+    `
   })
 }
 
-export const ButtonVariant = {
+export const ButtonVariants = {
   render: () => ({
     components: { Button, Theme },
     template: `
-          <Theme colorMode="light">
-            <div class="flex gap-5 items-center  mb-3">
-              <Button left-icon="x"/>
-              <Button left-icon="x" rightIcon="circle" label="Button Text"/>
-              <Button label="Button Text" isDisabled/>
-              <Button label="Button Text" isLoading/>
-              <Button label="Button Text" isTransparent/>
-              <Button label="Button Text" is-additional-area additionalAreaIcon="chevron-down"/>
-            </div>
-            <div class="flex gap-5 items-center  mb-3">
-              <Button variant="secondary" left-icon="x"/>
-              <Button variant="secondary" left-icon="x" rightIcon="circle" label="Button Text"/>
-              <Button variant="secondary" label="Button Text" isDisabled/>
-              <Button variant="secondary" label="Button Text" isLoading/>
-              <Button variant="secondary" label="Button Text" isTransparent/>
-              <Button variant="secondary" label="Button Text" is-additional-area additionalAreaIcon="chevron-down"/>
-            </div>
-            <div class="flex gap-5 items-center  mb-3">
-              <Button variant="destructive" left-icon="x"/>
-              <Button variant="destructive" left-icon="x" rightIcon="circle" label="Button Text"/>
-              <Button variant="destructive" label="Button Text" isDisabled/>
-              <Button variant="destructive" label="Button Text" isLoading/>
-              <Button variant="destructive" label="Button Text" isTransparent/>
-              <Button variant="destructive" label="Button Text" is-additional-area additionalAreaIcon="chevron-down"/>
-            </div>
-          </Theme>
-        `
+      <Theme>
+        <div class="flex flex-col gap-3">
+          <div class="flex gap-5 items-center">
+            <Button left-icon="x" />
+            <Button left-icon="x" right-icon="circle" label="Button Text" />
+            <Button label="Button Text" is-disabled />
+            <Button label="Button Text" is-loading />
+            <Button label="Button Text" is-transparent />
+            <Button label="Button Text" is-additional-area additional-area-icon="chevron-down" />
+          </div>
+          <div class="flex gap-5 items-center">
+            <Button variant="secondary" left-icon="x" />
+            <Button variant="secondary" left-icon="x" right-icon="circle" label="Button Text" />
+            <Button variant="secondary" label="Button Text" is-disabled />
+            <Button variant="secondary" label="Button Text" is-loading />
+            <Button variant="secondary" label="Button Text" is-transparent />
+            <Button variant="secondary" label="Button Text" is-additional-area additional-area-icon="chevron-down" />
+          </div>
+          <div class="flex gap-5 items-center">
+            <Button variant="destructive" left-icon="x" />
+            <Button variant="destructive" left-icon="x" right-icon="circle" label="Button Text" />
+            <Button variant="destructive" label="Button Text" is-disabled />
+            <Button variant="destructive" label="Button Text" is-loading />
+            <Button variant="destructive" label="Button Text" is-transparent />
+            <Button variant="destructive" label="Button Text" is-additional-area additional-area-icon="chevron-down" />
+          </div>
+        </div>
+      </Theme>
+    `
   })
 }

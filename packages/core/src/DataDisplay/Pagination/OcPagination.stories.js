@@ -6,7 +6,7 @@ export default {
   tags: ['autodocs']
 }
 
-export const pagination = {
+export const Default = {
   argTypes: {
     size: {
       control: 'select',
@@ -20,7 +20,7 @@ export const pagination = {
   args: {
     totalVisible: 5,
     size: 'default',
-    maxPage: 15,
+    maxPage: 10,
     isRounded: false,
     strategy: 'default'
   },
@@ -28,23 +28,16 @@ export const pagination = {
     components: { Pagination, Theme },
     setup() {
       const currentPage = ref(1)
-      return {
-        currentPage,
-        args
-      }
+      return { currentPage, args }
     },
     template: `
-          <Theme class="flex gap-3 items-center mb-3">
-            <Pagination
-                class="justify-center"
-                :max-page="args.maxPage"
-                :size="args.size"
-                :totalVisible="args.totalVisible"
-                :isRounded="args.isRounded"
-                :strategy="args.strategy"
-                v-model="currentPage"
-            />
-          </Theme>
-        `
+      <Theme class="flex gap-3 items-center mb-3">
+        <Pagination
+          class="justify-center"
+          v-bind="args"
+          v-model="currentPage"
+        />
+      </Theme>
+    `
   })
 }
