@@ -2,6 +2,7 @@
   {
     "name": "LineChart",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-linechart-oclinechart--docs",
     "props": [
       {
         "name": "showTooltip",
@@ -43,6 +44,7 @@
   {
     "name": "PieChart",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-piechart-ocpiechart--docs",
     "props": [
       {
         "name": "showTooltip",
@@ -85,6 +87,7 @@
   {
     "name": "BarChart",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-barchart-ocbarchart--docs",
     "props": [
       {
         "name": "variant",
@@ -145,6 +148,7 @@
   {
     "name": "BarRaceChart",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-barracechart-ocbarracechart--docs",
     "props": [
       {
         "name": "variant",
@@ -216,6 +220,7 @@
   {
     "name": "Card",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-card-occard--docs",
     "props": [
       {
         "name": "type",
@@ -288,6 +293,7 @@
   {
     "name": "OcOverviewPieChart",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-overviewpiechart-ocoverviewpiechart--docs",
     "props": [
       {
         "name": "chartData",
@@ -316,6 +322,7 @@
   {
     "name": "OverviewMonthlyBarChart",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-overviewmonthlybarchart-ocoverviewmonthlybarchart--docs",
     "props": [
       {
         "name": "variant",
@@ -381,6 +388,7 @@
   {
     "name": "ColorPicker",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-colorpicker-occolorpicker--docs",
     "props": [
       {
         "name": "modelValue",
@@ -436,6 +444,7 @@
   {
     "name": "TextEditor",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-texteditor-octexteditor--docs",
     "props": [
       {
         "name": "fontSizes",
@@ -541,6 +550,7 @@
   {
     "name": "ColorPickerPopup",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-colorpickerpopup-occolorpickerpopup--docs",
     "props": [
       {
         "name": "modelValue",
@@ -639,6 +649,7 @@
   {
     "name": "OnboardingProgressbar",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-onboardingprogressbar-oconboardingprogressbar--docs",
     "props": [
       {
         "name": "title",
@@ -675,6 +686,7 @@
   {
     "name": "CodeBlock",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-codeblock-occodeblock--docs",
     "props": [
       {
         "name": "jsonObject",
@@ -685,13 +697,18 @@
         "name": "lang",
         "required": false,
         "type": "string",
-        "default": "'json'"
+        "default": "'json'",
+        "values": [
+          "json",
+          "text"
+        ]
       }
     ]
   },
   {
     "name": "LottieAnimation",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/dashboard-lottieanimation-oclottieanimation--docs",
     "props": [
       {
         "name": "path",

@@ -2,6 +2,7 @@
   {
     "name": "Table",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-table-octable--docs",
     "props": [
       {
         "name": "options",
@@ -205,6 +206,7 @@
   {
     "name": "TableHeader",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-tableheader-octableheader--docs",
     "props": [
       {
         "name": "variant",
@@ -274,6 +276,7 @@
   {
     "name": "TableCell",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-tablecell-octablecell--docs",
     "props": [
       {
         "name": "isSimple",
@@ -284,7 +287,16 @@
         "name": "variant",
         "required": false,
         "type": "string",
-        "default": "'default'"
+        "default": "'default'",
+        "values": [
+          "content",
+          "checkbox",
+          "chip",
+          "datetime",
+          "icon",
+          "image",
+          "empty"
+        ]
       },
       {
         "name": "isLast",
@@ -372,6 +384,7 @@
   {
     "name": "TableCellContent",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-tablecellcontent-octablecellcontent--docs",
     "props": [
       {
         "name": "important",
@@ -414,6 +427,7 @@
   {
     "name": "TableLink",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-tablelink-octablelink--docs",
     "props": [
       {
         "name": "link",
@@ -431,6 +445,7 @@
   {
     "name": "ExpandingTable",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-expandingtable-ocexpandingtable--docs",
     "props": [
       {
         "name": "total",
@@ -498,6 +513,7 @@
   {
     "name": "ExpandingTableRow",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-expandingtablerow-ocexpandingtablerow--docs",
     "props": [
       {
         "name": "row",
@@ -601,6 +617,7 @@
   {
     "name": "ExpandingHeaderRow",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-expandingheaderrow-ocexpandingheaderrow--docs",
     "props": [
       {
         "name": "headers",
@@ -624,6 +641,7 @@
   {
     "name": "Pagination",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-pagination-ocpagination--docs",
     "props": [
       {
         "name": "maxPage",
@@ -651,7 +669,12 @@
       {
         "name": "size",
         "required": false,
-        "type": "string"
+        "type": "string",
+        "values": [
+          "default",
+          "small",
+          "big"
+        ]
       }
     ],
     "events": [
@@ -664,6 +687,7 @@
   {
     "name": "PrevNext",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-prevnext-ocprevnext--docs",
     "props": [
       {
         "name": "disabled",
@@ -686,6 +710,7 @@
   {
     "name": "PaginationNumber",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-paginationnumber-ocpaginationnumber--docs",
     "props": [
       {
         "name": "active",
@@ -714,6 +739,7 @@
   {
     "name": "Overview",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-overview-ocoverview--docs",
     "props": [
       {
         "name": "title",
@@ -751,6 +777,7 @@
   {
     "name": "OverviewIcon",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-overviewicon-ocoverviewicon--docs",
     "props": [
       {
         "name": "icon",
@@ -781,6 +808,7 @@
   {
     "name": "OverviewItem",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-overviewitem-ocoverviewitem--docs",
     "props": [
       {
         "name": "icon",
@@ -861,6 +889,7 @@
   {
     "name": "CustomerCard",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-customercard-occustomercard--docs",
     "props": [
       {
         "name": "variant",
@@ -929,6 +958,7 @@
   {
     "name": "TransferSummary",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-transfersummary-octransfersummary--docs",
     "props": [
       {
         "name": "transfer",
@@ -945,6 +975,7 @@
   {
     "name": "ListItem",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-listitem-oclistitem--docs",
     "props": [
       {
         "name": "isActive",
@@ -969,7 +1000,12 @@
       {
         "name": "icon",
         "required": false,
-        "type": "string"
+        "type": "string",
+        "values": [
+          "backward",
+          "circle",
+          "x"
+        ]
       },
       {
         "name": "iconClass",
@@ -990,7 +1026,15 @@
         "name": "type",
         "required": false,
         "type": "string",
-        "default": "'timeLine'"
+        "default": "'timeLine'",
+        "values": [
+          "timeline",
+          "webhook",
+          "payment",
+          "terminal",
+          "general",
+          "accordion"
+        ]
       },
       {
         "name": "urls",
@@ -1079,6 +1123,7 @@
   {
     "name": "ListUrl",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-listurl-oclisturl--docs",
     "props": [
       {
         "name": "title",
@@ -1101,6 +1146,7 @@
   {
     "name": "ListDetail",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-listdetail-oclistdetail--docs",
     "props": [
       {
         "name": "label",
@@ -1151,6 +1197,7 @@
   {
     "name": "InfoCard",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-infocard-ocinfocard--docs",
     "props": [
       {
         "name": "isLoading",
@@ -1221,6 +1268,7 @@
   {
     "name": "ProgressBar",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-progressbar-ocprogressbar--docs",
     "props": [
       {
         "name": "steps",
@@ -1243,6 +1291,7 @@
   {
     "name": "FloatContent",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-floatcontent-ocfloatcontent--docs",
     "props": [
       {
         "name": "modelValue",
@@ -1316,6 +1365,7 @@
   {
     "name": "HorizontalProgressbar",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-horizontalprogressbar-ochorizontalprogressbar--docs",
     "props": [
       {
         "name": "label",
@@ -1340,6 +1390,7 @@
   {
     "name": "OcOnboardingListItem",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-onboardinglistitem-oconboardinglistitem--docs",
     "props": [
       {
         "name": "title",
@@ -1392,6 +1443,7 @@
   {
     "name": "OcOnboardingRecap",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-onboardingrecap-oconboardingrecap--docs",
     "props": [
       {
         "name": "title",
@@ -1444,6 +1496,7 @@
   {
     "name": "OcAccountVerificationContent",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-accountverificationcontent-ocaccountverificationcontent--docs",
     "props": [
       {
         "name": "title",
@@ -1491,6 +1544,7 @@
   {
     "name": "OcAccountVerificationBox",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-accountverificationbox-ocaccountverificationbox--docs",
     "props": [
       {
         "name": "title",
@@ -1528,6 +1582,7 @@
   {
     "name": "NewTable",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-newtable-ocnewtable--docs",
     "props": [
       {
         "name": "options",
@@ -1618,6 +1673,7 @@
   {
     "name": "OcRowItemData",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datadisplay-rowitemdata-ocrowitemdata--docs",
     "props": [
       {
         "name": "items",
@@ -1635,6 +1691,7 @@
   {
     "name": "Accordion",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/disclosure-accordion-ocaccordion--docs",
     "props": [
       {
         "name": "header",
@@ -1664,7 +1721,12 @@
         "name": "icon",
         "required": false,
         "type": "string",
-        "default": "'chevron-down'"
+        "default": "'chevron-down'",
+        "values": [
+          "chevron-down",
+          "x",
+          "plus"
+        ]
       },
       {
         "name": "showIcon",
@@ -1711,6 +1773,7 @@
   {
     "name": "OnboardingAccordion",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/disclosure-onboardingaccordion-oconboardingaccordion--docs",
     "props": [
       {
         "name": "description",
@@ -1759,6 +1822,7 @@
   {
     "name": "OnboardingProductOption",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/disclosure-onboardingproductoption-oconboardingproductoption--docs",
     "props": [
       {
         "name": "productImageUrl",
@@ -1804,6 +1868,7 @@
   {
     "name": "Tabs",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/disclosure-tabs-octabs--docs",
     "props": [
       {
         "name": "variant",
@@ -1882,6 +1947,7 @@
   {
     "name": "PaymentTab",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/disclosure-paymenttab-ocpaymenttab--docs",
     "props": [
       {
         "name": "tab",
@@ -1910,6 +1976,7 @@
   {
     "name": "Steps",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/disclosure-steps-ocsteps--docs",
     "props": [
       {
         "name": "steps",
@@ -1940,6 +2007,7 @@
   {
     "name": "Step",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/disclosure-step-ocstep--docs",
     "props": [
       {
         "name": "title",
@@ -1970,6 +2038,7 @@
   {
     "name": "Variants",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/disclosure-variants-ocvariants--docs",
     "props": [
       {
         "name": "variants",
@@ -2005,6 +2074,7 @@
   {
     "name": "Variant",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/disclosure-variant-ocvariant--docs",
     "props": [
       {
         "name": "icon",
@@ -2058,6 +2128,7 @@
   {
     "name": "SwitchTabs",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/disclosure-switchtabs-ocswitchtabs--docs",
     "props": [
       {
         "name": "options",
@@ -2081,6 +2152,7 @@
   {
     "name": "Header",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-header-ocheader--docs",
     "slots": [
       {
         "name": "default",
@@ -2091,6 +2163,7 @@
   {
     "name": "SubHeader",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-subheader-ocsubheader--docs",
     "slots": [
       {
         "name": "default",
@@ -2101,6 +2174,7 @@
   {
     "name": "HeaderLeft",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-headerleft-ocheaderleft--docs",
     "slots": [
       {
         "name": "default",
@@ -2111,6 +2185,7 @@
   {
     "name": "HeaderCenter",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-headercenter-ocheadercenter--docs",
     "props": [
       {
         "name": "isSaved",
@@ -2142,6 +2217,7 @@
   {
     "name": "HeaderRight",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-headerright-ocheaderright--docs",
     "props": [
       {
         "name": "primaryProps",
@@ -2200,6 +2276,7 @@
   {
     "name": "TabToSelect",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-tabtoselect-octabtoselect--docs",
     "props": [
       {
         "name": "menus",
@@ -2226,6 +2303,7 @@
   {
     "name": "Checklist",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-checklist-occhecklist--docs",
     "props": [
       {
         "name": "index",
@@ -2259,6 +2337,7 @@
   {
     "name": "PageTitle",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-pagetitle-ocpagetitle--docs",
     "props": [
       {
         "name": "title",
@@ -2359,6 +2438,7 @@
   {
     "name": "PrimaryActions",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-primaryactions-ocprimaryactions--docs",
     "props": [
       {
         "name": "primaryActions",
@@ -2380,6 +2460,7 @@
   {
     "name": "PageTitleRight",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-pagetitleright-ocpagetitleright--docs",
     "props": [
       {
         "name": "primaryButtonProps",
@@ -2402,6 +2483,7 @@
   {
     "name": "Sidebar",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-sidebar-ocsidebar--docs",
     "props": [
       {
         "name": "class",
@@ -2479,6 +2561,7 @@
   {
     "name": "SidebarSubmenu",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-sidebarsubmenu-ocsidebarsubmenu--docs",
     "props": [
       {
         "name": "isExpanded",
@@ -2516,6 +2599,7 @@
   {
     "name": "AccountSetup",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-accountsetup-ocaccountsetup--docs",
     "props": [
       {
         "name": "isExpanded",
@@ -2548,6 +2632,7 @@
   {
     "name": "SidebarHead",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-sidebarhead-ocsidebarhead--docs",
     "props": [
       {
         "name": "label",
@@ -2570,6 +2655,7 @@
   {
     "name": "SideBarMenu",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-sidebarmenu-ocsidebarmenu--docs",
     "props": [
       {
         "name": "icon",
@@ -2639,6 +2725,7 @@
   {
     "name": "SidebarSubMenuItem",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-sidebarsubmenuitem-ocsidebarsubmenuitem--docs",
     "props": [
       {
         "name": "label",
@@ -2681,6 +2768,7 @@
   {
     "name": "SidebarFooter",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-sidebarfooter-ocsidebarfooter--docs",
     "props": [
       {
         "name": "isExpanded",
@@ -2698,6 +2786,7 @@
   {
     "name": "SidebarFeatureBanners",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-sidebarfeaturebanners-ocsidebarfeaturebanners--docs",
     "props": [
       {
         "name": "isStacked",
@@ -2732,6 +2821,7 @@
   {
     "name": "AccountSetupProgress",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-accountsetupprogress-ocaccountsetupprogress--docs",
     "props": [
       {
         "name": "value",
@@ -2756,6 +2846,7 @@
   {
     "name": "SubSidebar",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-subsidebar-ocsubsidebar--docs",
     "props": [
       {
         "name": "title",
@@ -2790,6 +2881,7 @@
   {
     "name": "EmptyPage",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-emptypage-ocemptypage--docs",
     "props": [
       {
         "name": "isButton",
@@ -2888,6 +2980,7 @@
   {
     "name": "AdditionalContent",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-additionalcontent-ocadditionalcontent--docs",
     "props": [
       {
         "name": "mainLink",
@@ -2911,7 +3004,15 @@
         "name": "chipVariant",
         "required": false,
         "type": "string",
-        "default": "''"
+        "default": "''",
+        "values": [
+          "accent-1",
+          "accent-2",
+          "success",
+          "warning",
+          "error",
+          "gray"
+        ]
       },
       {
         "name": "chipLabel",
@@ -2935,13 +3036,22 @@
         "name": "overviewActiveTab",
         "required": false,
         "type": "string",
-        "default": "''"
+        "default": "''",
+        "values": [
+          "hitpay",
+          "card"
+        ]
       },
       {
         "name": "customerCardVariant",
         "required": false,
         "type": "string",
-        "default": "''"
+        "default": "''",
+        "values": [
+          "small",
+          "big",
+          "float"
+        ]
       },
       {
         "name": "customer",
@@ -3074,6 +3184,7 @@
   {
     "name": "InfoCardButton",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-infocardbutton-ocinfocardbutton--docs",
     "props": [
       {
         "name": "isActive",
@@ -3119,11 +3230,13 @@
   },
   {
     "name": "Skeleton",
-    "description": ""
+    "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-skeleton-ocskeleton--docs"
   },
   {
     "name": "FeatureOverviewCard",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-featureoverviewcard-ocfeatureoverviewcard--docs",
     "props": [
       {
         "name": "title",
@@ -3147,6 +3260,7 @@
   {
     "name": "SandboxBanner",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-sandboxbanner-ocsandboxbanner--docs",
     "props": [
       {
         "name": "title",
@@ -3171,6 +3285,7 @@
   {
     "name": "TopBanner",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-topbanner-octopbanner--docs",
     "props": [
       {
         "name": "chipProps",
@@ -3217,6 +3332,7 @@
   {
     "name": "Box",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-box-ocbox--docs",
     "props": [
       {
         "name": "icon",
@@ -3258,6 +3374,7 @@
   {
     "name": "OcSection",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-section-ocsection--docs",
     "props": [
       {
         "name": "title",
@@ -3283,6 +3400,7 @@
   {
     "name": "AuthenticationOption",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-authenticationoption-ocauthenticationoption--docs",
     "props": [
       {
         "name": "icon",
@@ -3324,6 +3442,7 @@
   {
     "name": "VerificationOption",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-verificationoption-ocverificationoption--docs",
     "props": [
       {
         "name": "title",
@@ -3364,6 +3483,7 @@
   {
     "name": "Chip",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/feedback-chip-occhip--docs",
     "props": [
       {
         "name": "variant",
@@ -3429,6 +3549,7 @@
   {
     "name": "Snackbar",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/feedback-snackbar-ocsnackbar--docs",
     "props": [
       {
         "name": "modelValue",
@@ -3440,7 +3561,14 @@
         "name": "color",
         "required": false,
         "type": "string",
-        "default": "'default'"
+        "default": "'default'",
+        "values": [
+          "default",
+          "primary",
+          "error",
+          "warning",
+          "gray"
+        ]
       },
       {
         "name": "content",
@@ -3452,7 +3580,13 @@
         "name": "icon",
         "required": false,
         "type": "string",
-        "default": "'filled-check'"
+        "default": "'filled-check'",
+        "values": [
+          "filled-check",
+          "circle",
+          "plus",
+          "x"
+        ]
       },
       {
         "name": "showIcon",
@@ -3542,6 +3676,7 @@
   {
     "name": "Banner",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/feedback-banner-ocbanner--docs",
     "props": [
       {
         "name": "modelValue",
@@ -3553,7 +3688,14 @@
         "name": "color",
         "required": false,
         "type": "string",
-        "default": "'default'"
+        "default": "'default'",
+        "values": [
+          "default",
+          "primary",
+          "error",
+          "warning",
+          "gray"
+        ]
       },
       {
         "name": "content",
@@ -3565,7 +3707,13 @@
         "name": "icon",
         "required": false,
         "type": "string",
-        "default": "'filled-check'"
+        "default": "'filled-check'",
+        "values": [
+          "filled-check",
+          "circle",
+          "plus",
+          "x"
+        ]
       },
       {
         "name": "showIcon",
@@ -3612,6 +3760,7 @@
   {
     "name": "ShareIcon",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/feedback-shareicon-ocshareicon--docs",
     "props": [
       {
         "name": "text",
@@ -3638,6 +3787,7 @@
   {
     "name": "Tag",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/feedback-tag-octag--docs",
     "props": [
       {
         "name": "variant",
@@ -3654,8 +3804,2615 @@
     ]
   },
   {
+    "name": "BaseInput",
+    "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-baseinput-ocbaseinput--docs",
+    "props": [
+      {
+        "name": "label",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "hint",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "ai",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "errorMessage",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "isRequired",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "labelIcon",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "tooltipText",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "tooltipOptions",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "labelClass",
+        "required": false,
+        "type": "string"
+      }
+    ],
+    "slots": [
+      {
+        "name": "tooltipText",
+        "description": ""
+      },
+      {
+        "name": "right-label",
+        "description": ""
+      },
+      {
+        "name": "default",
+        "description": ""
+      },
+      {
+        "name": "hint",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "Button",
+    "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-button-ocbutton--docs",
+    "props": [
+      {
+        "name": "label",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "isDisabled",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isLoading",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "leftIcon",
+        "required": false,
+        "type": "string",
+        "values": [
+          "circle"
+        ]
+      },
+      {
+        "name": "iconClass",
+        "required": false,
+        "type": "array|string"
+      },
+      {
+        "name": "additionalAreaIcon",
+        "required": false,
+        "type": "string",
+        "values": [
+          "chevron-down",
+          "circle"
+        ]
+      },
+      {
+        "name": "isAdditionalArea",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "rightIcon",
+        "required": false,
+        "type": "string",
+        "values": [
+          "plus"
+        ]
+      },
+      {
+        "name": "isActive",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isTransparent",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isRoundedFull",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "variant",
+        "required": false,
+        "type": "string",
+        "default": "'primary'",
+        "values": [
+          "primary",
+          "secondary",
+          "destructive"
+        ]
+      },
+      {
+        "name": "size",
+        "required": false,
+        "type": "string",
+        "default": "'default'",
+        "values": [
+          "default",
+          "small",
+          "big"
+        ]
+      }
+    ],
+    "events": [
+      {
+        "name": "addition-click",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "default",
+        "description": ""
+      },
+      {
+        "name": "additional-content",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "CardInput",
+    "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-cardinput-occardinput--docs",
+    "props": [
+      {
+        "name": "placeholder",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "hint",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "errorMessage",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "cardType",
+        "required": false,
+        "type": "string",
+        "values": [
+          "mastercard",
+          "visa"
+        ]
+      },
+      {
+        "name": "isInlineLabel",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isDisabled",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "isRequired",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "labelIcon",
+        "required": false,
+        "type": "string",
+        "default": "''",
+        "values": [
+          "question-mark"
+        ]
+      },
+      {
+        "name": "tooltipText",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "tooltipOptions",
+        "required": false,
+        "type": "object",
+        "default": "{}"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "Checkbox",
+    "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-checkbox-occheckbox--docs",
+    "props": [
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isPartial",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isDisabled",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "topLabel",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "hint",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "errorMessage",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "isButtonVariant",
+        "required": false,
+        "type": "boolean"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "after",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "CheckboxesGroup",
+    "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-checkboxesgroup-occheckboxesgroup--docs",
+    "props": [
+      {
+        "name": "alignment",
+        "required": false,
+        "type": "string",
+        "default": "'vertical'",
+        "values": [
+          "vertical",
+          "horizontal"
+        ]
+      },
+      {
+        "name": "checkboxes",
+        "required": false,
+        "type": "array"
+      },
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "array|string"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "errorMessage",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "hint",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "isDisabled",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isSelectAll",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isButtonVariant",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isBlock",
+        "required": false,
+        "type": "boolean"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "Criteria",
+    "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-criteria-occriteria--docs",
+    "props": [
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "type": "string"
+      }
+    ]
+  },
+  {
+    "name": "Input",
+    "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-input-ocinput--docs",
+    "props": [
+      {
+        "name": "disabled",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "errorMessage",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "iconProps",
+        "required": false,
+        "type": "object",
+        "default": "{}"
+      },
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "string|number",
+        "default": "''"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "hint",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "isInlineLabel",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "ai",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "isReadonly",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "placeholder",
+        "required": false,
+        "type": "string",
+        "default": "'Placeholder'"
+      },
+      {
+        "name": "icon",
+        "required": false,
+        "type": "string",
+        "default": "''",
+        "values": [
+          "circle"
+        ]
+      },
+      {
+        "name": "inputType",
+        "required": false,
+        "type": "string",
+        "default": "'text'"
+      },
+      {
+        "name": "autocomplete",
+        "required": false,
+        "type": "string",
+        "default": "'one-time-code'"
+      },
+      {
+        "name": "preFill",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "hasError",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "isRequired",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "labelIcon",
+        "required": false,
+        "type": "string",
+        "default": "''",
+        "values": [
+          "question-mark"
+        ]
+      },
+      {
+        "name": "tooltipText",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "tooltipOptions",
+        "required": false,
+        "type": "object",
+        "default": "{}"
+      },
+      {
+        "name": "hasLeadingSeparator",
+        "required": false,
+        "type": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "inputMode",
+        "required": false,
+        "type": "string",
+        "default": "'text'",
+        "values": [
+          "text",
+          "decimal",
+          "numeric",
+          "tel",
+          "search",
+          "email",
+          "url"
+        ]
+      },
+      {
+        "name": "pattern",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "labelClass",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "inputClass",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "trailingClass",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "leadingClass",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      }
+    ],
+    "events": [
+      {
+        "name": "focus",
+        "description": ""
+      },
+      {
+        "name": "blur",
+        "description": ""
+      },
+      {
+        "name": "update:modelValue",
+        "description": ""
+      },
+      {
+        "name": "paste",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "trailing",
+        "description": ""
+      },
+      {
+        "name": "icon",
+        "description": ""
+      },
+      {
+        "name": "leading",
+        "description": ""
+      },
+      {
+        "name": "hint",
+        "description": ""
+      },
+      {
+        "name": "right-label",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "InputOption",
+    "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-inputoption-ocinputoption--docs",
+    "props": [
+      {
+        "name": "label",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "hint",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "errorMessage",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "placeholder",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "isInlineLabel",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isReadonly",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isDisabled",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "array"
+      },
+      {
+        "name": "maxVisibleOptions",
+        "required": false,
+        "type": "number",
+        "default": "2"
+      },
+      {
+        "name": "isRequired",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "allowDuplicated",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "labelIcon",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "tooltipText",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "tooltipOptions",
+        "required": false,
+        "type": "object",
+        "default": "{}"
+      }
+    ],
+    "events": [
+      {
+        "name": "blur",
+        "description": ""
+      },
+      {
+        "name": "update:modelValue",
+        "description": ""
+      },
+      {
+        "name": "option-added",
+        "description": ""
+      },
+      {
+        "name": "option-removed",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "default",
+        "description": "",
+        "bindings": [
+          {
+            "name": "options"
+          },
+          {
+            "name": "are-all-options-visible"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "PhoneInput",
+    "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-phoneinput-ocphoneinput--docs",
+    "props": [
+      {
+        "name": "countryCodes",
+        "required": false,
+        "type": "array",
+        "default": "[]"
+      },
+      {
+        "name": "initialCountryCode",
+        "required": false,
+        "type": "string",
+        "default": "'sg'",
+        "values": [
+          "sg",
+          "be",
+          "ua",
+          "sa"
+        ]
+      },
+      {
+        "name": "errorMessage",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "array",
+        "default": "['sg', '']"
+      },
+      {
+        "name": "placeholder",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "hint",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "isInlineLabel",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isDisabled",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "shouldParseCountryCode",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isRequired",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "labelIcon",
+        "required": false,
+        "type": "string",
+        "default": "''",
+        "values": [
+          "question-mark"
+        ]
+      },
+      {
+        "name": "tooltipText",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "tooltipOptions",
+        "required": false,
+        "type": "object",
+        "default": "{}"
+      },
+      {
+        "name": "ai",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "Radio",
+    "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-radio-ocradio--docs",
+    "props": [
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "string|boolean"
+      },
+      {
+        "name": "isDisabled",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "checked",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "id",
+        "required": false,
+        "type": "string|number"
+      },
+      {
+        "name": "groupName",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "errorMessage",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "hint",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "tooltipText",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "labelIcon",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "tooltipOptions",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "isButtonVariant",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isButtonVariantWithRadio",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "icon",
+        "required": false,
+        "type": "string"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "default",
+        "description": ""
+      },
+      {
+        "name": "tooltipText",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "RadioGroup",
+    "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-radiogroup-ocradiogroup--docs",
+    "props": [
+      {
+        "name": "alignment",
+        "required": false,
+        "type": "string",
+        "default": "'vertical'",
+        "values": [
+          "vertical",
+          "horizontal"
+        ]
+      },
+      {
+        "name": "radio",
+        "required": false,
+        "type": "array"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "wrapperClass",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "groupName",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "errorMessage",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "hint",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "isButtonVariant",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isButtonVariantWithRadio",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isBlock",
+        "required": false,
+        "type": "boolean"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "RangeInput",
+    "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-rangeinput-ocrangeinput--docs",
+    "props": [
+      {
+        "name": "maxLimit",
+        "required": false,
+        "type": "string|number",
+        "default": "10000"
+      },
+      {
+        "name": "minLimit",
+        "required": false,
+        "type": "string|number",
+        "default": "0"
+      },
+      {
+        "name": "minGap",
+        "required": false,
+        "type": "string|number",
+        "default": "0"
+      },
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "array|string"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "type": "string",
+        "default": "'Amount'"
+      },
+      {
+        "name": "hint",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "errorMessage",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "onlyInput",
+        "required": false,
+        "type": "boolean"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "Select",
+    "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-select-ocselect--docs",
+    "props": [
+      {
+        "name": "label",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "hint",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "icon",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "errorMessage",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "ai",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "placeholder",
+        "required": false,
+        "type": "string",
+        "default": "'Placeholder'"
+      },
+      {
+        "name": "defaultSearchPlaceholder",
+        "required": false,
+        "type": "string",
+        "default": "'Search'"
+      },
+      {
+        "name": "inlineSearchPlaceholder",
+        "required": false,
+        "type": "string",
+        "default": "'Search'"
+      },
+      {
+        "name": "isInlineLabel",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isFilterable",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isAsynchronousSearch",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isDisabled",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isReadonly",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isCheckboxes",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isSelectAll",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isAddNew",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isTransparent",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isSlim",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "hideChevron",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "options",
+        "required": false,
+        "type": "array"
+      },
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "array|string|number"
+      },
+      {
+        "name": "maxVisibleOptions",
+        "required": false,
+        "type": "number",
+        "default": "0"
+      },
+      {
+        "name": "multiple",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "maxOptionAllowed",
+        "required": false,
+        "type": "number"
+      },
+      {
+        "name": "isRequired",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "labelIcon",
+        "required": false,
+        "type": "string",
+        "default": "''",
+        "values": [
+          "question-mark"
+        ]
+      },
+      {
+        "name": "tooltipText",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "tooltipOptions",
+        "required": false,
+        "type": "object",
+        "default": "{}"
+      },
+      {
+        "name": "chipProps",
+        "required": false,
+        "type": "object",
+        "default": "{}"
+      },
+      {
+        "name": "popperOptions",
+        "required": false,
+        "type": "object",
+        "default": "{}"
+      },
+      {
+        "name": "isInlineSearch",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isClearable",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "searchKeywords",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "isLoading",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "menuClasses",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "dropdownClasses",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "selectTextClass",
+        "required": false,
+        "type": "string"
+      }
+    ],
+    "events": [
+      {
+        "name": "onSearchKeywords",
+        "description": ""
+      },
+      {
+        "name": "addNew",
+        "description": ""
+      },
+      {
+        "name": "update:modelValue",
+        "description": ""
+      },
+      {
+        "name": "max-option-allowed-set",
+        "description": ""
+      },
+      {
+        "name": "close",
+        "description": ""
+      },
+      {
+        "name": "toggle",
+        "description": ""
+      },
+      {
+        "name": "cleared",
+        "description": ""
+      },
+      {
+        "name": "loadMore",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "selection",
+        "description": ""
+      },
+      {
+        "name": "default",
+        "description": "",
+        "bindings": [
+          {
+            "name": "key"
+          },
+          {
+            "name": "f-options"
+          },
+          {
+            "name": "select-option"
+          }
+        ]
+      },
+      {
+        "name": "empty",
+        "description": ""
+      },
+      {
+        "name": "infinite-scrolling",
+        "description": ""
+      },
+      {
+        "name": "selectTooltipText",
+        "description": ""
+      },
+      {
+        "name": "hint",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "Option",
+    "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-option-ocoption--docs",
+    "props": [
+      {
+        "name": "label",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "subLabel",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "isSelected",
+        "required": false,
+        "type": "boolean|number"
+      },
+      {
+        "name": "isCheckboxes",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isPartial",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "hasChildren",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "showChildren",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isDisabled",
+        "required": false,
+        "type": "boolean"
+      }
+    ],
+    "events": [
+      {
+        "name": "select",
+        "description": ""
+      },
+      {
+        "name": "hide:children",
+        "description": ""
+      },
+      {
+        "name": "show:children",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "trailing",
+        "description": ""
+      },
+      {
+        "name": "sub-label",
+        "description": ""
+      },
+      {
+        "name": "leading",
+        "description": ""
+      },
+      {
+        "name": "after",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "GroupOptions",
+    "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-groupoptions-ocgroupoptions--docs",
+    "props": [
+      {
+        "name": "label",
+        "required": false,
+        "type": "string"
+      }
+    ],
+    "slots": [
+      {
+        "name": "default",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "Toggle",
+    "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-toggle-octoggle--docs",
+    "props": [
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "disabled",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "size",
+        "required": false,
+        "type": "string",
+        "default": "'default'",
+        "values": [
+          "default",
+          "small"
+        ]
+      },
+      {
+        "name": "label",
+        "required": false,
+        "type": "string"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "LinkInput",
+    "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-linkinput-oclinkinput--docs",
+    "props": [
+      {
+        "name": "placeholder",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "hint",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "errorMessages",
+        "required": false,
+        "type": "object",
+        "default": "{\n  link: '',\n  title: ''\n}"
+      },
+      {
+        "name": "isInlineLabel",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isDisabled",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "type",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "title",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "links",
+        "required": false,
+        "type": "array",
+        "default": "[]"
+      },
+      {
+        "name": "isRequired",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "labelIcon",
+        "required": false,
+        "type": "string",
+        "default": "''",
+        "values": [
+          "question-mark"
+        ]
+      },
+      {
+        "name": "tooltipText",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "tooltipOptions",
+        "required": false,
+        "type": "object",
+        "default": "{}"
+      },
+      {
+        "name": "isEdit",
+        "required": false,
+        "type": "boolean"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:title",
+        "description": ""
+      },
+      {
+        "name": "update:modelValue",
+        "description": ""
+      },
+      {
+        "name": "update:type",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "TextArea",
+    "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-textarea-octextarea--docs",
+    "props": [
+      {
+        "name": "placeholder",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "errorMessage",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "hint",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "rows",
+        "required": false,
+        "type": "number"
+      },
+      {
+        "name": "autoResize",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "isDisabled",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isRequired",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "labelIcon",
+        "required": false,
+        "type": "string",
+        "default": "''",
+        "values": [
+          "question-mark"
+        ]
+      },
+      {
+        "name": "tooltipText",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "tooltipOptions",
+        "required": false,
+        "type": "object",
+        "default": "{}"
+      },
+      {
+        "name": "ai",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "Calendar",
+    "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-calendar-occalendar--docs",
+    "props": [
+      {
+        "name": "type",
+        "required": false,
+        "type": "string",
+        "default": "'default'",
+        "values": [
+          "default",
+          "range"
+        ]
+      },
+      {
+        "name": "minDate",
+        "required": false,
+        "type": "string|date|number",
+        "default": "null"
+      },
+      {
+        "name": "maxDate",
+        "required": false,
+        "type": "string|date|number",
+        "default": "null"
+      },
+      {
+        "name": "position",
+        "required": false,
+        "type": "string",
+        "default": "'floating'",
+        "values": [
+          "floating",
+          "inline"
+        ]
+      },
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "string|date|number|array",
+        "default": "null"
+      },
+      {
+        "name": "disabledDate",
+        "required": false,
+        "type": "func",
+        "default": "() => false"
+      },
+      {
+        "name": "isIndefinite",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "inDefiniteLabel",
+        "required": false,
+        "type": "string",
+        "default": "'Indefinite'"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "description": ""
+      },
+      {
+        "name": "reset-calendar",
+        "description": ""
+      },
+      {
+        "name": "update:isIndefinite",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "bottom",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "DatePicker",
+    "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-datepicker-ocdatepicker--docs",
+    "props": [
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "string|date|number|array"
+      },
+      {
+        "name": "type",
+        "required": false,
+        "type": "string",
+        "default": "'default'",
+        "values": [
+          "default",
+          "range"
+        ]
+      },
+      {
+        "name": "disabledDate",
+        "required": false,
+        "type": "func",
+        "default": "() => false"
+      },
+      {
+        "name": "minDate",
+        "required": false,
+        "type": "string|date|number",
+        "default": "null"
+      },
+      {
+        "name": "maxDate",
+        "required": false,
+        "type": "string|date|number",
+        "default": "null"
+      },
+      {
+        "name": "dateFormat",
+        "required": false,
+        "type": "string",
+        "default": "'YYYY-MM-DD'"
+      },
+      {
+        "name": "disabled",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "errorMessage",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "hint",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "placeholder",
+        "required": false,
+        "type": "string",
+        "default": "'YYYY-MM-DD'"
+      },
+      {
+        "name": "isSplitInput",
+        "required": false,
+        "type": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "minLabel",
+        "required": false,
+        "type": "string",
+        "default": "'From'"
+      },
+      {
+        "name": "maxLabel",
+        "required": false,
+        "type": "string",
+        "default": "'To'"
+      },
+      {
+        "name": "isRequired",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "isIndefinite",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "disabledRange",
+        "required": false,
+        "type": "object",
+        "default": "{\n  start: null,\n  end: null\n}"
+      },
+      {
+        "name": "countCalendars",
+        "required": false,
+        "type": "number",
+        "default": "2"
+      },
+      {
+        "name": "shortcuts",
+        "required": false,
+        "type": "array",
+        "default": "[]"
+      },
+      {
+        "name": "placement",
+        "required": false,
+        "type": "string",
+        "default": "'bottom-start'"
+      },
+      {
+        "name": "ai",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "description": ""
+      },
+      {
+        "name": "resetCalendar",
+        "description": ""
+      },
+      {
+        "name": "error",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "menu",
+        "description": "",
+        "bindings": [
+          {
+            "name": "is-popover-open"
+          },
+          {
+            "name": "update-calendar"
+          },
+          {
+            "name": "reset-calendar"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Slider",
+    "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-slider-ocslider--docs",
+    "props": [
+      {
+        "name": "maxLimit",
+        "required": false,
+        "type": "number",
+        "default": "100"
+      },
+      {
+        "name": "minLimit",
+        "required": false,
+        "type": "number",
+        "default": "0"
+      },
+      {
+        "name": "minGap",
+        "required": false,
+        "type": "number",
+        "default": "0"
+      },
+      {
+        "name": "type",
+        "required": false,
+        "type": "string",
+        "default": "'default'",
+        "values": [
+          "default",
+          "range"
+        ]
+      },
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "array|number|string",
+        "default": "0"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "variant",
+        "required": false,
+        "type": "string",
+        "default": "'default'"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "min-limit-label",
+        "description": ""
+      },
+      {
+        "name": "max-limit-label",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "SectionItem",
+    "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-sectionitem-ocsectionitem--docs",
+    "props": [
+      {
+        "name": "title",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "description",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "descriptionClass",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "icon",
+        "required": false,
+        "type": "string",
+        "values": [
+          "information",
+          "check",
+          "x"
+        ]
+      },
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "isToggle",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "toggleProps",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "popperMessage",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "errorMessage",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "defaultValue",
+        "required": false,
+        "type": "boolean"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "actions",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "SelectOptions",
+    "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-selectoptions-ocselectoptions--docs",
+    "props": [
+      {
+        "name": "isSmallImage",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "variant",
+        "required": false,
+        "type": "string",
+        "default": "'grid'"
+      },
+      {
+        "name": "optionType",
+        "required": false,
+        "type": "string",
+        "default": "'text'"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "hint",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "errorMessage",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "placeholder",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "isDisabled",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "borderless",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "options",
+        "required": false,
+        "type": "array"
+      },
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "array|string|number"
+      },
+      {
+        "name": "isRequired",
+        "required": false,
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "name": "labelIcon",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "tooltipText",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "tooltipOptions",
+        "required": false,
+        "type": "object",
+        "default": "{}"
+      },
+      {
+        "name": "class",
+        "required": false,
+        "type": "string"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "option",
+        "description": "",
+        "bindings": [
+          {
+            "name": "option"
+          },
+          {
+            "name": "selected"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "SingleFileUpload",
+    "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-singlefileupload-ocsinglefileupload--docs",
+    "props": [
+      {
+        "name": "format",
+        "required": false,
+        "type": "string",
+        "default": "'array'"
+      },
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "isPreview",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "confirmToRemove",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "showErrorStyleOnly",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isImageOnly",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "showUploadImageArea",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "maxSize",
+        "required": false,
+        "type": "number",
+        "description": "Maximum file size in MB"
+      },
+      {
+        "name": "accept",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "validateAcceptFileType",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "errorMessage",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "imageClasses",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "allowToEdit",
+        "required": false,
+        "type": "boolean",
+        "default": "true"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "labelClass",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "hint",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "uploadButtonOptions",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "variant",
+        "required": false,
+        "type": "string",
+        "default": "'upload'",
+        "description": "Variant of input (upload or url)",
+        "values": [
+          "upload",
+          "url"
+        ]
+      },
+      {
+        "name": "shouldTruncateFileName",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isButtonOnly",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "isDisabled",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "buttonUploadProps",
+        "required": false,
+        "type": "object",
+        "default": "{\n  label: 'Upload'\n}"
+      }
+    ],
+    "events": [
+      {
+        "name": "onOpenEditImage",
+        "description": ""
+      },
+      {
+        "name": "update:modelValue",
+        "description": ""
+      },
+      {
+        "name": "onRemoveFile",
+        "description": ""
+      },
+      {
+        "name": "onExceedMaxFileSize",
+        "description": ""
+      },
+      {
+        "name": "fileExist",
+        "description": ""
+      },
+      {
+        "name": "invalidFileType",
+        "description": ""
+      },
+      {
+        "name": "confirmRemoveFile",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "progress",
+        "description": "",
+        "bindings": [
+          {
+            "name": "file"
+          }
+        ]
+      },
+      {
+        "name": "hint",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "MultipleUploadFile",
+    "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-multipleuploadfile-ocmultipleuploadfile--docs",
+    "props": [
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "array",
+        "default": "[]"
+      },
+      {
+        "name": "accept",
+        "required": false,
+        "type": "string",
+        "default": "''"
+      },
+      {
+        "name": "validateAcceptFileType",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "maxSize",
+        "required": false,
+        "type": "number",
+        "description": "Maximum file size in MB"
+      },
+      {
+        "name": "maxImages",
+        "required": false,
+        "type": "number"
+      },
+      {
+        "name": "hint",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "errorMessage",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "isImageOnly",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "showErrorStyleOnly",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "columnsCount",
+        "required": false,
+        "type": "number"
+      },
+      {
+        "name": "selectedImage",
+        "required": false,
+        "type": "object",
+        "default": "{}"
+      },
+      {
+        "name": "inputOptions",
+        "required": false,
+        "type": "array"
+      },
+      {
+        "name": "isDisabled",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "confirmToRemove",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "labelUploadArea",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "isButtonOnly",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "buttonUploadProps",
+        "required": false,
+        "type": "object",
+        "default": "{\n  label: 'Upload'\n}"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:selectedImage",
+        "description": ""
+      },
+      {
+        "name": "update:modelValue",
+        "description": ""
+      },
+      {
+        "name": "onEditFile",
+        "description": ""
+      },
+      {
+        "name": "onRemoveFile",
+        "description": ""
+      },
+      {
+        "name": "onMaxFileExceed",
+        "description": ""
+      },
+      {
+        "name": "onOpenEditImage",
+        "description": ""
+      },
+      {
+        "name": "onImageError",
+        "description": ""
+      },
+      {
+        "name": "onExceedMaxFileSize",
+        "description": ""
+      },
+      {
+        "name": "confirmRemoveFile",
+        "description": ""
+      }
+    ],
+    "slots": [
+      {
+        "name": "action",
+        "description": "",
+        "bindings": [
+          {
+            "name": "item"
+          },
+          {
+            "name": "remove-item"
+          },
+          {
+            "name": "file-index"
+          }
+        ]
+      },
+      {
+        "name": "button",
+        "description": "",
+        "bindings": [
+          {
+            "name": "trigger-input"
+          }
+        ]
+      },
+      {
+        "name": "progress",
+        "description": "",
+        "bindings": [
+          {
+            "name": "current-index"
+          },
+          {
+            "name": "current-file"
+          }
+        ]
+      },
+      {
+        "name": "hint",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "NumberInput",
+    "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-numberinput-ocnumberinput--docs",
+    "props": [
+      {
+        "name": "modelValue",
+        "required": false,
+        "type": "string|number",
+        "default": "null"
+      },
+      {
+        "name": "minValue",
+        "required": false,
+        "type": "number",
+        "default": "1"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "errorMessage",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "isDisabled",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "tooltipOptions",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "name": "hint",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "labelIcon",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "isRequired",
+        "required": false,
+        "type": "boolean"
+      },
+      {
+        "name": "tooltipText",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "inputClass",
+        "required": false,
+        "type": "string|array|object"
+      }
+    ],
+    "events": [
+      {
+        "name": "update:modelValue",
+        "description": ""
+      }
+    ]
+  },
+  {
     "name": "Avatar",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/mediaandicons-avatar-ocavatar--docs",
     "props": [
       {
         "name": "size",
@@ -3693,6 +6450,7 @@
   {
     "name": "Icon",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/mediaandicons-icon-ocicon--docs",
     "props": [
       {
         "name": "path",
@@ -3722,6 +6480,7 @@
   {
     "name": "Dropdown",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/overlay-dropdown-ocdropdown--docs",
     "props": [
       {
         "name": "distance",
@@ -3817,6 +6576,7 @@
   {
     "name": "DropdownItem",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/overlay-dropdownitem-ocdropdownitem--docs",
     "props": [
       {
         "name": "variant",
@@ -3875,6 +6635,7 @@
   {
     "name": "Tooltip",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/overlay-tooltip-octooltip--docs",
     "props": [
       {
         "name": "popperClass",
@@ -3973,6 +6734,7 @@
   {
     "name": "Modal",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/overlay-modal-ocmodal--docs",
     "props": [
       {
         "name": "isBorderless",
@@ -4107,6 +6869,7 @@
   {
     "name": "OcModalPage",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/overlay-modalpage-ocmodalpage--docs",
     "props": [
       {
         "name": "modelValue",
@@ -4173,6 +6936,7 @@
   {
     "name": "ConfirmationModal",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/overlay-confirmationmodal-occonfirmationmodal--docs",
     "props": [
       {
         "name": "modelValue",
@@ -4202,7 +6966,13 @@
         "name": "variant",
         "required": false,
         "type": "string",
-        "default": "'delete'"
+        "default": "'delete'",
+        "values": [
+          "delete",
+          "success",
+          "warning",
+          "question"
+        ]
       },
       {
         "name": "icon",
@@ -4272,11 +7042,26 @@
   {
     "name": "Popper",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/overlay-popper-ocpopper--docs",
     "props": [
       {
         "name": "placement",
         "required": true,
-        "type": "string"
+        "type": "string",
+        "values": [
+          "top-start",
+          "top",
+          "top-end",
+          "right-start",
+          "right",
+          "right-end",
+          "bottom-start",
+          "bottom",
+          "bottom-end",
+          "left-start",
+          "left",
+          "left-end"
+        ]
       },
       {
         "name": "popperOptions",
@@ -4334,6 +7119,7 @@
   {
     "name": "SupportMenu",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/overlay-supportmenu-ocsupportmenu--docs",
     "props": [
       {
         "name": "modelValue",
@@ -4404,6 +7190,7 @@
   {
     "name": "CopyTooltip",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/overlay-copytooltip-occopytooltip--docs",
     "props": [
       {
         "name": "value",
@@ -4437,6 +7224,7 @@
   {
     "name": "WhiteList",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/overlay-whitelist-ocwhitelist--docs",
     "props": [
       {
         "name": "buttonProps",
@@ -4484,6 +7272,7 @@
   {
     "name": "Theme",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/theme-theme-octheme--docs",
     "props": [
       {
         "name": "colorMode",
@@ -4502,6 +7291,7 @@
   {
     "name": "FormBuilder",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/formbuilder-formbuilder-ocformbuilder--docs",
     "props": [
       {
         "name": "id",
@@ -4582,6 +7372,7 @@
   {
     "name": "DataTable",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datatable-datatable-ocdatatable--docs",
     "props": [
       {
         "name": "isLoading",
@@ -4794,6 +7585,7 @@
   {
     "name": "FilterSearch",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datatable-filtersearch-ocfiltersearch--docs",
     "props": [
       {
         "name": "isSearchOnly",
@@ -4829,6 +7621,7 @@
   {
     "name": "FilterSearchFor",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datatable-filtersearchfor-ocfiltersearchfor--docs",
     "props": [
       {
         "name": "filters",
@@ -4861,6 +7654,7 @@
   {
     "name": "FilterForm",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/datatable-filterform-ocfilterform--docs",
     "props": [
       {
         "name": "id",
@@ -4927,6 +7721,7 @@
   {
     "name": "ComplexCalendar",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-complexcalendar-occomplexcalendar--docs",
     "props": [
       {
         "name": "shortcuts",
@@ -4988,6 +7783,7 @@
   {
     "name": "ComplexDatePicker",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-complexdatepicker-occomplexdatepicker--docs",
     "props": [
       {
         "name": "shortcuts",
@@ -5021,7 +7817,12 @@
         "name": "formatDate",
         "required": false,
         "type": "string",
-        "default": "'DD/MM/YYYY'"
+        "default": "'DD/MM/YYYY'",
+        "values": [
+          "DD/MM/YYYY",
+          "MM/DD/YYYY",
+          "YYYY/MM/DD"
+        ]
       },
       {
         "name": "countCalendars",
@@ -5081,6 +7882,7 @@
   {
     "name": "ModalCropper",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-modalcropper-ocmodalcropper--docs",
     "props": [
       {
         "name": "inputOptions",
@@ -5121,6 +7923,7 @@
   {
     "name": "Cropper",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-cropper-occropper--docs",
     "props": [
       {
         "name": "inputOptions",
@@ -5163,6 +7966,7 @@
   {
     "name": "Draggable",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-draggable-ocdraggable--docs",
     "props": [
       {
         "name": "modelValue",
@@ -5195,6 +7999,7 @@
   {
     "name": "DraggableList",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-draggablelist-ocdraggablelist--docs",
     "props": [
       {
         "name": "modelValue",
@@ -5322,6 +8127,7 @@
   {
     "name": "EmojiPicker",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-emojipicker-ocemojipicker--docs",
     "props": [
       {
         "name": "modelValue",
@@ -5350,6 +8156,7 @@
   {
     "name": "ThumbnailTheme",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/storedesign-thumbnailtheme-octhumbnailtheme--docs",
     "props": [
       {
         "name": "theme",
@@ -5393,6 +8200,7 @@
   {
     "name": "ThumbnailSection",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/storedesign-thumbnailsection-octhumbnailsection--docs",
     "props": [
       {
         "name": "section",
@@ -5414,6 +8222,7 @@
   {
     "name": "SubPlanCard",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/storedesign-subplancard-ocsubplancard--docs",
     "props": [
       {
         "name": "planTier",
@@ -5436,6 +8245,7 @@
   {
     "name": "TimePopup",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-timepopup-octimepopup--docs",
     "props": [
       {
         "name": "modelValue",
@@ -5454,6 +8264,7 @@
   {
     "name": "TimePicker",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/form-timepicker-octimepicker--docs",
     "props": [
       {
         "name": "modelValue",
@@ -5507,7 +8318,10 @@
         "name": "labelIcon",
         "required": false,
         "type": "string",
-        "default": "''"
+        "default": "''",
+        "values": [
+          "question-mark"
+        ]
       },
       {
         "name": "tooltipText",
@@ -5532,6 +8346,7 @@
   {
     "name": "AccountSetupProgress",
     "description": "",
+    "storybook": "https://orchidui.vercel.app/storybook/?path=/docs/elements-accountsetupprogress-ocaccountsetupprogress--docs",
     "props": [
       {
         "name": "value",

@@ -42,7 +42,12 @@ function resolveAlias(importPath, aliases) {
 
 function resolvePath(importPath, fromDir, aliases) {
   const aliased = resolveAlias(importPath, aliases)
-  return path.isAbsolute(aliased) ? aliased : path.resolve(fromDir, aliased)
+  const resolved = path.isAbsolute(aliased) ? aliased : path.resolve(fromDir, aliased)
+  // Handle directory imports: './Form' → './Form/index.js'
+  if (!path.extname(resolved) && fs.existsSync(resolved + '/index.js')) {
+    return resolved + '/index.js'
+  }
+  return resolved
 }
 
 // ── JS barrel file parser ───────────────────────────────────────────────────
@@ -71,10 +76,11 @@ function parseBarrelFile(filePath, aliases, visited = new Set()) {
     vueImports[m[1]] = resolvePath(m[2], dir, aliases)
   }
 
-  // export * from './other-barrel.js'  (recurse)
-  for (const m of content.matchAll(/export\s+\*\s+from\s+['"]([^'"]+\.js)['"]/g)) {
+  // export * from './other-barrel.js' or './Form' (recurse)
+  for (const m of content.matchAll(/export\s+\*\s+from\s+['"]([^'"]+)['"]/g)) {
+    if (m[1].endsWith('.vue')) continue
     const nested = resolvePath(m[1], dir, aliases)
-    results.push(...parseBarrelFile(nested, aliases, visited))
+    if (nested.endsWith('.js')) results.push(...parseBarrelFile(nested, aliases, visited))
   }
 
   // export { X, Y, Z }  — collect what names are actually exported
@@ -118,10 +124,11 @@ function parseIndexFile(indexPath, aliases) {
     vueImports[m[1]] = resolvePath(m[2], dir, aliases)
   }
 
-  // export * from './path/barrel.js'  — delegate to barrel parser
-  for (const m of content.matchAll(/export\s+\*\s+from\s+['"]([^'"]+\.js)['"]/g)) {
+  // export * from './path/barrel.js' or './Form'  — delegate to barrel parser
+  for (const m of content.matchAll(/export\s+\*\s+from\s+['"]([^'"]+)['"]/g)) {
+    if (m[1].endsWith('.vue')) continue
     const barrelPath = resolvePath(m[1], dir, aliases)
-    results.push(...parseBarrelFile(barrelPath, aliases))
+    if (barrelPath.endsWith('.js')) results.push(...parseBarrelFile(barrelPath, aliases))
   }
 
   // export { X, Y, Z }  — pick up names from direct imports above
@@ -142,12 +149,47 @@ function parseIndexFile(indexPath, aliases) {
   return results
 }
 
+// ── Story file parser ────────────────────────────────────────────────────────
+// Returns { propName: string[] } of argTypes options from the story file
+
+function parseStoryOptions(vueFilePath) {
+  const storyPath = vueFilePath.replace(/\.vue$/, '.stories.js')
+  if (!fs.existsSync(storyPath)) return {}
+
+  const content = fs.readFileSync(storyPath, 'utf-8')
+  const propOptions = {}
+
+  // Match: propName: { control: '...', options: ['a', 'b'] }
+  for (const m of content.matchAll(/(\w+)\s*:\s*\{[^{}]*options\s*:\s*(\[[^\]]*\])/g)) {
+    const propName = m[1]
+    if (propName === 'argTypes') continue
+    try {
+      const options = new Function('return ' + m[2])()
+      if (Array.isArray(options) && options.length > 0) {
+        propOptions[propName] = [...new Set(options.map(String).filter(Boolean))]
+      }
+    } catch { /* skip unparseable */ }
+  }
+
+  return propOptions
+}
+
+// ── Storybook URL generator ──────────────────────────────────────────────────
+
+function storybookUrl(category, displayName) {
+  const cat = category.toLowerCase().replace(/[^a-z]/g, '')
+  const name = displayName.replace(/^[Oo]c/, '').toLowerCase()
+  return `https://orchidui.vercel.app/storybook/?path=/docs/${cat}-${name}-oc${name}--docs`
+}
+
 // ── Vue component doc formatter ─────────────────────────────────────────────
 
-function formatDoc(doc, exportName) {
+function formatDoc(doc, exportName, category, vueFilePath) {
+  const storyOptions = parseStoryOptions(vueFilePath)
   const result = {
     name: exportName,
-    description: doc.description || ''
+    description: doc.description || '',
+    storybook: storybookUrl(category, doc.displayName || exportName)
   }
 
   if (doc.props && doc.props.length > 0) {
@@ -166,7 +208,14 @@ function formatDoc(doc, exportName) {
       }
 
       if (prop.description) formatted.description = prop.description
-      if (prop.values?.length > 0) formatted.values = prop.values
+
+      // Merge values: prefer vue-docgen, fallback to story argTypes options
+      const storyVals = storyOptions[prop.name]
+      if (prop.values?.length > 0) {
+        formatted.values = prop.values
+      } else if (storyVals?.length > 0) {
+        formatted.values = storyVals
+      }
 
       return formatted
     })
@@ -225,7 +274,9 @@ async function buildPackageDocs(label, indexPath, aliases, outputFile) {
 
     try {
       const raw = await parse(vueFilePath, { alias: aliases })
-      const doc = formatDoc(raw, exportName)
+      const relPath = path.relative(path.dirname(indexPath), vueFilePath)
+      const category = relPath.split(path.sep)[0] || 'Other'
+      const doc = formatDoc(raw, exportName, category, vueFilePath)
       docs.push(doc)
       console.log(`  ✓ ${exportName}`)
       success++
