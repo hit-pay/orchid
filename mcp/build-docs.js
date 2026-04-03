@@ -694,7 +694,13 @@ function formatExamples(exportName, examples) {
 async function buildPackageDocs(label, indexPath, aliases, outputFile, packageRoot) {
   console.log(`\nBuilding ${label}...`)
 
-  const entries = parseIndexFile(indexPath, aliases)
+  const rawEntries = parseIndexFile(indexPath, aliases)
+  const seen = new Set()
+  const entries = rawEntries.filter(({ exportName }) => {
+    if (seen.has(exportName)) return false
+    seen.add(exportName)
+    return true
+  })
   console.log(`  Found ${entries.length} exported components`)
 
   const indexComponents = []
