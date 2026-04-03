@@ -20,7 +20,13 @@
       "props": {
         "modelValue": false,
         "label": "Text"
-      }
+      },
+      "code": "<Theme>\n        <Criteria v-model=\"modelValue\" v-bind=\"args\" />\n      </Theme>"
+    },
+    {
+      "name": "Variants",
+      "code": "<Theme>\n        <div class=\"flex flex-col w-fit gap-6\">\n          <Criteria label=\"Not met\" :model-value=\"false\" />\n          <Criteria label=\"Met\" :model-value=\"true\" />\n        </div>\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

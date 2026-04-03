@@ -65,7 +65,13 @@
         "minLimit": 0,
         "maxLimit": 100,
         "type": "default"
-      }
+      },
+      "code": "<Theme>\n        <div class=\"p-4 w-full\">\n          <Slider\n            :model-value=\"args.type === 'range' ? rangeModelValue : modelValue\"\n            :min-gap=\"args.minGap\"\n            :min-limit=\"args.minLimit\"\n            :max-limit=\"args.maxLimit\"\n            :type=\"args.type\"\n            @update:model-value=\"args.type === 'range' ? rangeModelValue = $event : modelValue = $event\"\n          />\n        </div>\n      </Theme>"
+    },
+    {
+      "name": "VariantRightInput",
+      "code": "<Theme>\n        <div class=\"p-4 w-full flex flex-col gap-8\">\n          <div>\n            <p class=\"mb-2 text-sm text-oc-text-400\">Default with right input</p>\n            <Slider\n              v-model=\"modelValue\"\n              variant=\"right\"\n              :min-limit=\"0\"\n              :max-limit=\"100\"\n            />\n          </div>\n          <div>\n            <p class=\"mb-2 text-sm text-oc-text-400\">Range with right input</p>\n            <Slider\n              :model-value=\"rangeModelValue\"\n              type=\"range\"\n              variant=\"right\"\n              :min-limit=\"0\"\n              :max-limit=\"100\"\n              @update:model-value=\"rangeModelValue = $event\"\n            />\n          </div>\n        </div>\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

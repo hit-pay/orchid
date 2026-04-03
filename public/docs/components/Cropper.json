@@ -40,7 +40,9 @@
       "props": {
         "img": "/images/image.jpg",
         "isReplaceImage": true
-      }
+      },
+      "code": "<Theme class=\"min-h-[500px]\">\n        <Cropper\n          v-bind=\"args\"\n          :input-options=\"['description', 'link', 'caption', 'lightbox', 'new_tab']\"\n          :input-option-values=\"inputOptionValues\"\n          @update:input-options=\"inputOptionValues = $event\"\n        />\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

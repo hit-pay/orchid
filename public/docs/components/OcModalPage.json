@@ -59,7 +59,12 @@
       "props": {
         "isCloseIconVisible": true,
         "isBackButtonVisible": true
-      }
+      },
+      "code": "<Theme>\n        <div class=\"h-full\">\n          <Button label=\"Open Modal Page\" @click=\"isOpen = true\" />\n\n          <OcModalPage v-model=\"isOpen\" v-bind=\"args\">\n            <template #top>\n              <div class=\"flex relative\">\n                <div>\n                  <Icon name=\"hitPay\" width=\"24\" height=\"24\" />\n                </div>\n                <div class=\"ml-auto relative\">\n                  <Icon name=\"pencil\" width=\"18\" height=\"18\" />\n                </div>\n              </div>\n            </template>\n\n            <div class=\"max-w-[980px] mx-auto\">\n              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Unde nesciunt vitae, quis maxime explicabo numquam molestias natus dolores quidem. Provident eligendi rem perferendis tempora ex magnam officia fugiat quae? Ex!\n              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Unde nesciunt vitae, quis maxime explicabo numquam molestias natus dolores quidem. Provident eligendi rem perferendis tempora ex magnam officia fugiat quae? Ex!\n            </div>\n          </OcModalPage>\n        </div>\n      </Theme>"
     }
+  ],
+  "relatedComponents": [
+    "Button",
+    "Icon"
   ]
 }

@@ -63,7 +63,9 @@
           }
         ],
         "title": "Title"
-      }
+      },
+      "code": "<Theme>\n        <SubSidebar v-model=\"modelValue\" class=\"w-fit\" :menu=\"args.menu\" :title=\"args.title\" @titleClick=\"args.onTitleClick\"/>\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

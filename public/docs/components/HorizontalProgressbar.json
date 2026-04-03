@@ -27,7 +27,9 @@
       "props": {
         "max": 5,
         "current": 3
-      }
+      },
+      "code": "<Theme>\n        <HorizontalProgressbar v-bind=\"args\" :label=\"\\`\\${args.current} / \\${args.max} completed\\`\" />\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

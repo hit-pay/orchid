@@ -87,7 +87,11 @@
             }
           ]
         }
-      }
+      },
+      "code": "<Theme class=\"h-[300px]\">\n        <Button @click=\"isOpen = !isOpen\">Open</Button>\n        <FloatContent\n          v-model=\"isOpen\"\n          v-bind=\"args\"\n        />\n      </Theme>"
     }
+  ],
+  "relatedComponents": [
+    "Button"
   ]
 }

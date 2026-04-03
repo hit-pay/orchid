@@ -56,7 +56,9 @@
         "minLimit": 0,
         "minGap": 0,
         "onlyInput": true
-      }
+      },
+      "code": "<Theme>\n        <RangeInput v-model=\"modelValue\" v-bind=\"args\" />\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

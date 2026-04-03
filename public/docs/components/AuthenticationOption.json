@@ -34,5 +34,11 @@
   "events": {},
   "slots": {},
   "rules": [],
-  "examples": []
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<Theme>\n        <div class=\"flex gap-x-4\">\n          <AuthenticationOption class=\"w-full\" v-bind=\"args.firstOption\"/>\n          <AuthenticationOption class=\"w-full\" v-bind=\"args.secondOption\"/>\n        </div>\n      </Theme>"
+    }
+  ],
+  "relatedComponents": []
 }

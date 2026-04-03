@@ -39,7 +39,9 @@
             "value": "annually"
           }
         ]
-      }
+      },
+      "code": "<Theme>\n        <div class=\"flex items-center justify-center\">\n          <SwitchTabs v-bind=\"args\" :active-option=\"activeOption\" @select=\"activeOption = $event\" />\n        </div>\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

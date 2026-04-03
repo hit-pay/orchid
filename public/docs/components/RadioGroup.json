@@ -61,5 +61,23 @@
   "rules": [
     "\"alignment\" must be one of: vertical, horizontal"
   ],
-  "examples": []
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<Theme>\n        <div class=\"flex flex-col gap-y-4\">\n          <RadioGroup\n            v-model=\"modelValue\"\n            v-bind=\"args\"\n            group-name=\"radio-default\"\n          />\n          <div>Model value: \"{{ modelValue }}\"</div>\n        </div>\n      </Theme>"
+    },
+    {
+      "name": "DirectionVariants",
+      "code": "<Theme>\n        <div class=\"flex flex-col gap-y-4\">\n          <RadioGroup\n            v-model=\"selectedVertical\"\n            :radio=\"sampleRadios\"\n            label=\"Label\"\n            group-name=\"radio-vertical\"\n            alignment=\"vertical\"\n          />\n          <RadioGroup\n            v-model=\"selectedHorizontal\"\n            :radio=\"sampleRadios\"\n            label=\"Label\"\n            group-name=\"radio-horizontal\"\n            alignment=\"horizontal\"\n          />\n        </div>\n      </Theme>"
+    },
+    {
+      "name": "ButtonVariants",
+      "code": "<Theme>\n        <div class=\"flex flex-col gap-y-4\">\n          <RadioGroup\n            v-model=\"selectedVertical\"\n            :radio=\"iconRadios\"\n            label=\"Label\"\n            group-name=\"radio-btn-vertical\"\n            alignment=\"vertical\"\n            :is-button-variant=\"true\"\n          />\n          <RadioGroup\n            v-model=\"selectedHorizontal\"\n            :radio=\"iconRadios\"\n            label=\"Label\"\n            group-name=\"radio-btn-horizontal\"\n            alignment=\"horizontal\"\n            :is-button-variant=\"true\"\n          />\n        </div>\n      </Theme>"
+    },
+    {
+      "name": "ButtonVariantsWithRadio",
+      "code": "<Theme>\n        <div class=\"flex flex-col gap-y-4\">\n          <RadioGroup\n            v-model=\"selectedVertical\"\n            :radio=\"plainRadios\"\n            label=\"Label\"\n            group-name=\"radio-btn-radio-vertical\"\n            alignment=\"vertical\"\n            :is-button-variant=\"true\"\n            :is-button-variant-with-radio=\"true\"\n          />\n          <RadioGroup\n            v-model=\"selectedHorizontal\"\n            :radio=\"plainRadios\"\n            label=\"Label\"\n            group-name=\"radio-btn-radio-horizontal\"\n            alignment=\"horizontal\"\n            :is-button-variant=\"true\"\n            :is-button-variant-with-radio=\"true\"\n          />\n        </div>\n      </Theme>"
+    }
+  ],
+  "relatedComponents": []
 }

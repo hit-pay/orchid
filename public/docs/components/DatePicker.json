@@ -141,5 +141,15 @@
   "rules": [
     "\"type\" must be one of: default, range"
   ],
-  "examples": []
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<Theme>\n        <div class=\"w-full h-[500px]\">\n          <DatePicker\n            v-model=\"modelValue\"\n            v-bind=\"args\"\n          />\n        </div>\n      </Theme>"
+    },
+    {
+      "name": "DateRange",
+      "code": "<Theme>\n        <div class=\"w-full h-[500px]\">\n          <DatePicker\n            v-model=\"modelValue\"\n            type=\"range\"\n            label=\"Date Range\"\n            hint=\"Select a start and end date\"\n            date-format=\"YYYY-MM-DD\"\n            min-label=\"From\"\n            max-label=\"To\"\n          />\n        </div>\n      </Theme>"
+    }
+  ],
+  "relatedComponents": []
 }

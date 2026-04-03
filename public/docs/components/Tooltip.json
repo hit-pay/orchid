@@ -96,7 +96,9 @@
         "distance": 10,
         "skidding": 0,
         "isAttachToBody": false
-      }
+      },
+      "code": "<Theme>\n        <div class=\"w-full h-[400px] flex items-center justify-center\">\n          <Tooltip v-bind=\"args\">\n            <button class=\"px-4 py-2 bg-oc-gray-100 rounded\">Hover me</button>\n\n            <template #popper>\n              <div class=\"flex w-[300px] flex-col gap-y-3 p-4\">\n                <div class=\"font-medium\">Tooltip title</div>\n                <div class=\"text-sm\">Tooltips are used to describe or identify an element. In most scenarios, tooltips help the user understand the meaning, function or alt-text of an element.</div>\n              </div>\n            </template>\n          </Tooltip>\n        </div>\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

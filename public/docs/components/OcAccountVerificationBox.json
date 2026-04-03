@@ -45,7 +45,8 @@
             "icon": "document"
           }
         ]
-      }
+      },
+      "code": "<Theme>\n        <OcAccountVerificationBox v-bind=\"args\" />\n      </Theme>"
     },
     {
       "name": "HeaderSlot",
@@ -66,7 +67,11 @@
             "icon": "information"
           }
         ]
-      }
+      },
+      "code": "<Theme>\n        <OcAccountVerificationBox v-bind=\"args\">\n          <template #title>\n            <img src=\"/images/singpass.png\" alt=\"singpass\" />\n            <Chip class=\"ml-auto\" variant=\"dark-blue\" label=\"Recommended\" />\n          </template>\n        </OcAccountVerificationBox>\n      </Theme>"
     }
+  ],
+  "relatedComponents": [
+    "Chip"
   ]
 }

@@ -98,7 +98,11 @@
         "labelConfirm": "Confirm",
         "labelCancel": "Cancel",
         "isLoading": false
-      }
+      },
+      "code": "<Theme>\n        <div class=\"h-screen\">\n          <Button label=\"Open Confirmation\" @click=\"isOpen = true\" />\n\n          <ConfirmationModal v-model=\"isOpen\" v-bind=\"args\" />\n        </div>\n      </Theme>"
     }
+  ],
+  "relatedComponents": [
+    "Button"
   ]
 }

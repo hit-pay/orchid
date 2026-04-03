@@ -69,7 +69,28 @@
         "shadow": false,
         "noData": false,
         "noDataDescription": "No items on the site yet"
-      }
+      },
+      "code": "<Theme>\n        <InfoCard v-bind=\"args\">\n          <div class=\"my-7\">\n            <OverviewItem v-for=\"o in 4\" :key=\"o\" :title=\"'Item ' + o\" icon=\"circle\" class=\"mb-4\" />\n          </div>\n          <template #footer>\n            <Button>View All</Button>\n          </template>\n        </InfoCard>\n      </Theme>"
+    },
+    {
+      "name": "Default",
+      "props": {
+        "title": "Payment Overview",
+        "titleIcon": "information",
+        "titleIconTooltip": "Summary of recent payment activity",
+        "isLoading": false,
+        "transparent": false,
+        "hover": true,
+        "shadow": false,
+        "noData": false,
+        "noDataDescription": "No items on the site yet"
+      },
+      "code": "<Theme>\n        <InfoCard v-bind=\"args\">\n          <div class=\"my-7\">\n            <OverviewItem v-for=\"o in 4\" :key=\"o\" :title=\"'Item ' + o\" icon=\"circle\" class=\"mb-4\" />\n          </div>\n          <template #footer>\n            <Button>View All</Button>\n          </template>\n        </InfoCard>\n      </Theme>"
     }
+  ],
+  "relatedComponents": [
+    "Button",
+    "Icon",
+    "OverviewItem"
   ]
 }

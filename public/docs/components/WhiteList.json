@@ -44,7 +44,11 @@
       "props": {
         "title": "Feature Unavailable",
         "description": "This feature is not available for your current plan."
-      }
+      },
+      "code": "<Theme>\n        <div class=\"relative h-[500px] flex flex-col gap-y-5 px-10\">\n          content behind some text to show the overlay effect of the whitelist component\n          <Button label=\"Test Button\" />\n          <Button label=\"Test Button\" variant=\"destructive\" />\n          <WhiteList v-bind=\"args\" class=\"w-full top-0 left-0 h-full absolute\" />\n        </div>\n      </Theme>"
     }
+  ],
+  "relatedComponents": [
+    "Button"
   ]
 }

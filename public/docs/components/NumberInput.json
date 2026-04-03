@@ -65,7 +65,9 @@
         "placeholder": "Placeholder",
         "disabled": false,
         "step": 1
-      }
+      },
+      "code": "<Theme>\n        <NumberInput\n          v-model=\"modelValue\"\n          v-bind=\"args\"\n        />\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

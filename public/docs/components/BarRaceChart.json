@@ -93,7 +93,9 @@
           "Joggers",
           "Joggers"
         ]
-      }
+      },
+      "code": "<Theme>\n        <BarRaceChart class=\"h-[300px]\" v-bind=\"args\" />\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

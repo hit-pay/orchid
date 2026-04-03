@@ -105,7 +105,9 @@
           "description": ""
         },
         "imageClass": "h-full"
-      }
+      },
+      "code": "<Theme>\n        <div class=\"flex group/row\">\n          <TableCell class=\"flex-1\" v-bind=\"args\" variant=\"content\" :content=\"{ title: 'Table Cell', description: 'Row description' }\" />\n          <TableCell class=\"flex-1\" v-bind=\"args\" variant=\"datetime\" :data=\"new Date()\" />\n          <TableCell class=\"flex-1\" v-bind=\"args\" variant=\"content\" :content=\"{ title: 'Copyable', description: 'Click to copy' }\" isCopy />\n          <TableCell class=\"flex-1\" v-bind=\"args\">Default slot</TableCell>\n          <TableCell class=\"flex-1\" v-bind=\"args\" isLoading />\n          <TableCell class=\"flex-1\" v-bind=\"args\" variant=\"icon\" data=\"x\" />\n          <TableCell class=\"flex-1\" v-bind=\"args\" variant=\"image\" />\n          <TableCell class=\"flex-1\" v-bind=\"args\" variant=\"chip\" data=\"label\" :chipOptions=\"{ label: 'primary' }\" />\n          <TableCell class=\"flex-1\" v-bind=\"args\" variant=\"checkbox\" />\n          <TableCell class=\"flex-1\" v-bind=\"args\" variant=\"empty\" />\n        </div>\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

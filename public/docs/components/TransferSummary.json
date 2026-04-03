@@ -28,7 +28,8 @@
           "fee_currency": "SGD",
           "transfer_method": "Local"
         }
-      }
+      },
+      "code": "<Theme class=\"items-center mb-3\">\n        <TransferSummary v-bind=\"args\" />\n      </Theme>"
     },
     {
       "name": "WithFxData",
@@ -43,7 +44,9 @@
           "fee_currency": "SGD",
           "transfer_method": "Local"
         }
-      }
+      },
+      "code": "<Theme class=\"items-center mb-3\">\n        <TransferSummary v-bind=\"args\" />\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

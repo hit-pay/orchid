@@ -84,7 +84,13 @@
         "showIcon": true,
         "dismissible": true,
         "transitionName": "slide-from-top"
-      }
+      },
+      "code": "<Theme class=\"h-[300px]\">\n        <Banner v-model=\"modelValue\" v-bind=\"args\" />\n      </Theme>"
+    },
+    {
+      "name": "Variants",
+      "code": "<Theme>\n        <div class=\"flex flex-col gap-y-4\">\n          <Banner :model-value=\"true\" title=\"Title\" content=\"Changes have been successfully saved\" show-icon icon=\"filled-check\" />\n          <Banner :model-value=\"true\" color=\"primary\" title=\"Title\" content=\"Changes have been successfully saved\" show-icon icon=\"filled-check\" />\n          <Banner :model-value=\"true\" color=\"error\" title=\"Title\" content=\"Changes have been successfully saved\" show-icon icon=\"filled-check\" />\n          <Banner :model-value=\"true\" color=\"warning\" title=\"Title\" content=\"Changes have been successfully saved\" show-icon icon=\"filled-check\" />\n          <Banner :model-value=\"true\" color=\"gray\" title=\"Title\" content=\"Changes have been successfully saved\" show-icon icon=\"filled-check\" />\n        </div>\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

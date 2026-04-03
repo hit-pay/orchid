@@ -108,7 +108,9 @@
           "OCT'23",
           "NOV'23"
         ]
-      }
+      },
+      "code": "<Theme>\n        <LineChart class=\"h-[300px]\" v-bind=\"args\" />\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

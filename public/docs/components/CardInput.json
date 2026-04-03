@@ -87,7 +87,9 @@
           "position": "top",
           "distance": 10
         }
-      }
+      },
+      "code": "<Theme>\n        <CardInput v-model=\"modelValue\" v-bind=\"args\" />\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

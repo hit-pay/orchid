@@ -25,7 +25,15 @@
       "name": "Default",
       "props": {
         "title": "Get in touch"
-      }
+      },
+      "code": "<Theme class=\"p-10\">\n        <OcSection :title=\"args.title\">\n          <ListItem\n            type=\"general\"\n            :is-dropdown-actions-visible=\"false\"\n            :is-disabled=\"true\"\n            class=\"!opacity-100\"\n          >\n            <template #title>\n              <OverviewIcon icon=\"chat\" />\n            </template>\n\n            <div>\n              <div class=\"font-medium\">Live chat</div>\n              <div class=\"mt-2 text-sm\">Get instant help from our support team.</div>\n\n              <div class=\"flex mt-4 text-sm\">\n                <div class=\"w-[16px] h-[16px] rounded-full bg-oc-accent-1-100 p-2 flex justify-center items-center\">\n                  <svg width=\"8\" height=\"8\" viewBox=\"0 0 8 8\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n                    <circle cx=\"4\" cy=\"4\" r=\"4\" fill=\"#002771\"/>\n                  </svg>\n                </div>\n\n                <div class=\"ml-3\">\n                  <span class=\"text-oc-text-500 font-medium\">Off-hours</span>\n                  <span class=\"ml-2 text-oc-text-400\">~1 hr response time</span>\n                </div>\n              </div>\n\n              <div class=\"flex mt-5\">\n                <Button size=\"small\" variant=\"secondary\" label=\"Start chat\"/>\n              </div>\n            </div>\n          </ListItem>\n        </OcSection>\n\n        <OcSection title=\"Resource\" class=\"mt-8\">\n          <div class=\"grid grid-cols-2 gap-5\">\n            <OcOnboardingListItem\n              class=\"rounded border border-gray-200 max-w-[420px]\"\n              is-button-visible\n              :number=\"null\"\n              title=\"Product Guides\"\n              description=\"Explore HitPay with our user-friendly docs.\"\n              :button-options=\"{\n                rightIcon: 'external-link',\n                isTransparent: true,\n                label: 'Learn more'\n              }\"\n            />\n\n            <OcOnboardingListItem\n              class=\"rounded border border-gray-200 max-w-[420px]\"\n              is-button-visible\n              :number=\"null\"\n              title=\"Pricing\"\n              description=\"Explore pricing \u2013 no fees, pay per transaction.\"\n              :button-options=\"{\n                rightIcon: 'external-link',\n                isTransparent: true,\n                label: 'Learn more'\n              }\"\n            />\n          </div>\n        </OcSection>\n      </Theme>"
     }
+  ],
+  "relatedComponents": [
+    "Button",
+    "Icon",
+    "ListItem",
+    "OcOnboardingListItem",
+    "OverviewIcon"
   ]
 }

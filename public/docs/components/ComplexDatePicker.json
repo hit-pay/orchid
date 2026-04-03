@@ -83,5 +83,11 @@
   "rules": [
     "\"formatDate\" must be one of: DD/MM/YYYY, MM/DD/YYYY, YYYY/MM/DD"
   ],
-  "examples": []
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<Theme class=\"h-[400px]\">\n        <ComplexDatePicker v-model=\"modelValue\" v-bind=\"args\" />\n      </Theme>"
+    }
+  ],
+  "relatedComponents": []
 }

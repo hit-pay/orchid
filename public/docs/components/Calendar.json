@@ -67,7 +67,13 @@
         "isRange": false,
         "isMultiple": false,
         "disabledDates": []
-      }
+      },
+      "code": "<Theme>\n        <Calendar v-model=\"modelValue\" v-bind=\"args\" />\n      </Theme>"
+    },
+    {
+      "name": "RangeCalendar",
+      "code": "<Theme>\n        <Calendar v-model=\"modelValue\" type=\"range\" />\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

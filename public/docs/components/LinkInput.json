@@ -139,7 +139,9 @@
             "preFill": "https://"
           }
         ]
-      }
+      },
+      "code": "<Theme>\n        <div class=\"w-full h-[200px]\">\n          <LinkInput\n            v-model=\"modelValue\"\n            v-model:type=\"linkType\"\n            v-model:title=\"linkTitle\"\n            v-bind=\"args\"\n          />\n        </div>\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

@@ -55,7 +55,8 @@
             "variant": "primary"
           }
         ]
-      }
+      },
+      "code": "<Theme>\n        <OcAccountVerificationContent v-bind=\"args\">\n          <OcOnboardingRecap\n            title=\"Business Information\"\n            state=\"completed\"\n            :header-button=\"{ leftIcon: 'pencil', label: 'Edit' }\"\n            :items=\"[\n              { label: 'Business Name', value: 'Acme Corporation' },\n              { label: 'Registration Number', value: 'REG-123456789' },\n              { label: 'Business Type', value: 'Private Limited Company' },\n              { label: 'Documents', value: ['business-registration.pdf', 'tax-certificate.pdf'] }\n            ]\"\n          />\n        </OcAccountVerificationContent>\n      </Theme>"
     },
     {
       "name": "Preview",
@@ -74,7 +75,11 @@
             "variant": "primary"
           }
         ]
-      }
+      },
+      "code": "<Theme>\n        <OcAccountVerificationContent v-bind=\"args\">\n          <OcOnboardingRecap\n            title=\"Business Information\"\n            state=\"completed\"\n            flat\n            no-header\n            :header-button=\"{ leftIcon: 'pencil', label: 'Edit' }\"\n            :items=\"[\n              { label: 'Business Name', value: 'Acme Corporation' },\n              { label: 'Registration Number', value: 'REG-123456789' },\n              { label: 'Business Type', value: 'Private Limited Company' },\n              { label: 'Documents', value: ['business-registration.pdf', 'tax-certificate.pdf'] }\n            ]\"\n          />\n        </OcAccountVerificationContent>\n      </Theme>"
     }
+  ],
+  "relatedComponents": [
+    "OcOnboardingRecap"
   ]
 }

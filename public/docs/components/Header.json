@@ -36,13 +36,15 @@
             "icon": "online-store"
           }
         ]
-      }
+      },
+      "code": "<Theme>\n        <div class=\"w-full h-[400px]\">\n          <Header class=\"mb-3\">\n            <button aria-label=\"Menu Button\" class=\"p-3 md:hidden\">\n              <Icon name=\"menu\" width=\"24\" height=\"24\"/>\n            </button>\n            <HeaderLeft class=\"md:w-[260px]\">\n              <SampleHeaderLeft/>\n            </HeaderLeft>\n            <HeaderCenter class=\"flex-1 md:flex-none\">\n              <TabToSelect v-model=\"activeMenuValue\" :menus=\"args.menus\"/>\n            </HeaderCenter>\n            <HeaderRight>\n              <SampleHeaderRight/>\n            </HeaderRight>\n          </Header>\n        </div>\n      </Theme>"
     },
     {
       "name": "SubHeaderElement",
       "props": {
         "isSaved": true
-      }
+      },
+      "code": "<Theme>\n        <SubHeader class=\"mb-3\">\n          <HeaderLeft class=\"hidden md:flex\">\n            <SampleHeaderLeft is-sub-header/>\n          </HeaderLeft>\n          <HeaderCenter class=\"flex-1\" :is-saved=\"args.isSaved\">\n            <template #after><span class=\"text-oc-text-100 ml-3\">---Slot After</span></template>\n          </HeaderCenter>\n          <HeaderRight :is-saved=\"args.isSaved\" :primary-props=\"{label: 'Update'}\">\n            <template #before><span class=\"text-oc-text-100 ml-3\">Slot Before---</span></template>\n          </HeaderRight>\n        </SubHeader>\n      </Theme>"
     },
     {
       "name": "SubHeaderDropdownElement",
@@ -58,7 +60,19 @@
             "action": "save-as-draft"
           }
         ]
-      }
+      },
+      "code": "<Theme>\n        <SubHeader class=\"mb-3\">\n          <HeaderLeft class=\"hidden md:flex\">\n            <SampleHeaderLeft is-sub-header/>\n          </HeaderLeft>\n          <HeaderCenter class=\"flex-1\" :is-saved=\"args.isSaved\" />\n          <HeaderRight :is-saved=\"args.isSaved\" :primary-props=\"args.primaryProps\">\n            <template #primary-button>\n              <Dropdown v-model=\"isDropdownOpen\" placement=\"bottom-end\">\n                <Button\n                  class=\"min-w-[100px]\"\n                  label=\"Save\"\n                  v-bind=\"args.primaryProps\"\n                  is-additional-area\n                  additional-area-icon=\"chevron-down\"\n                  @click=\"$emit('save')\"\n                  @addition-click=\"isDropdownOpen = true\"\n                />\n                <template #menu>\n                  <div class=\"flex flex-col\">\n                    <div class=\"p-2 border-b border-gray-200\">\n                      <DropdownItem\n                        v-for=\"(option, index) in args.dropdownOptions\"\n                        :key=\"index\"\n                        :text=\"option.label\"\n                        :icon=\"option.icon ?? null\"\n                        @click=\"onDropdownItemClick(option.action)\"\n                      />\n                    </div>\n                  </div>\n                </template>\n              </Dropdown>\n            </template>\n          </HeaderRight>\n        </SubHeader>\n      </Theme>"
     }
+  ],
+  "relatedComponents": [
+    "Button",
+    "Dropdown",
+    "DropdownItem",
+    "HeaderCenter",
+    "HeaderLeft",
+    "HeaderRight",
+    "Icon",
+    "SubHeader",
+    "TabToSelect"
   ]
 }

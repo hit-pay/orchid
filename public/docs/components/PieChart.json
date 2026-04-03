@@ -88,7 +88,9 @@
           }
         ],
         "tooltipCurrency": "SGD"
-      }
+      },
+      "code": "<Theme>\n        <PieChart class=\"h-[300px]\" v-bind=\"args\" />\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

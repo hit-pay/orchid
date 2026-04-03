@@ -49,7 +49,9 @@
         "maxPage": 10,
         "isRounded": false,
         "strategy": "default"
-      }
+      },
+      "code": "<Theme class=\"flex gap-3 items-center mb-3\">\n        <Pagination\n          class=\"justify-center\"\n          v-bind=\"args\"\n          v-model=\"currentPage\"\n        />\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

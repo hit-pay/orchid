@@ -70,7 +70,9 @@
       "props": {
         "disabled": false,
         "is24Hours": false
-      }
+      },
+      "code": "<Theme>\n        <div class=\"w-full h-[200px]\">\n          <TimePicker v-model=\"modelValue\" v-bind=\"args\" />\n        </div>\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

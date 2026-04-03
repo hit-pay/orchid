@@ -34,7 +34,19 @@
       "props": {
         "value": "Text to copy",
         "tooltipText": "Copied!"
-      }
+      },
+      "code": "<Theme>\n        <div class=\"w-full pt-8\">\n          <CopyTooltip v-bind=\"args\" />\n        </div>\n      </Theme>"
+    },
+    {
+      "name": "Default",
+      "props": {
+        "value": "Text to copy",
+        "tooltipText": "Copied!"
+      },
+      "code": "<Theme>\n        <div class=\"w-full pt-8\">\n          <CopyTooltip v-bind=\"args\" />\n        </div>\n      </Theme>"
     }
+  ],
+  "relatedComponents": [
+    "Button"
   ]
 }

@@ -137,7 +137,8 @@
         "type": "timeline",
         "image": "https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/covers/small/99d696e564ba45fbaa0fb2e3b43d0e27.jpg",
         "imageSize": "small"
-      }
+      },
+      "code": "<Theme class=\"flex flex-col gap-5\">\n        <ListItem\n          v-for=\"i in 5\"\n          :is-active=\"args.active >= i\"\n          :key=\"i\"\n          :type=\"args.type\"\n          :title=\"args.title\"\n          :image=\"args.image\"\n          :image-size=\"args.imageSize\"\n          :icon=\"args.icon\"\n          :icon-class=\"args.iconClass\"\n          :icon-text=\"args.iconText\"\n          :description=\"args.description\"\n        />\n      </Theme>"
     },
     {
       "name": "ListWebhook",
@@ -148,7 +149,12 @@
             "title": "URL"
           }
         ]
-      }
+      },
+      "code": "<Theme class=\"p-10\">\n        <ListItem\n          type=\"webhook\"\n          :urls=\"args.urls\"\n          title=\"Zapier Flow\"\n          date=\"Oct, 20 2023\"\n        >\n          <template #menu>\n            <div class=\"p-2 border-b border-gray-200\">\n              <DropdownItem text=\"Edit\" icon=\"pencil\" />\n            </div>\n            <div class=\"p-2\">\n              <DropdownItem text=\"Delete\" variant=\"destructive\" icon=\"bin\" />\n            </div>\n          </template>\n        </ListItem>\n      </Theme>"
+    },
+    {
+      "name": "ListLogo",
+      "code": "<Theme class=\"p-10\">\n        <ListItem\n          type=\"logo\"\n          title=\"Zapier Flow\"\n          image=\"/images/partner-logo/web-delegate.png\"\n        />\n      </Theme>"
     },
     {
       "name": "ListPayment",
@@ -167,7 +173,8 @@
           }
         ],
         "description": "Connected payment store"
-      }
+      },
+      "code": "<Theme class=\"p-10\">\n        <ListItem\n          v-bind=\"args\"\n          type=\"payment\"\n        >\n          <template #logo>\n            <div class=\"rounded-sm p-2 bg-oc-accent-1-50\">\n              <img src=\"http://api.src.test/icons/providers/shopee.png\" class=\"w-[32px] h-[32px]\" />\n            </div>\n          </template>\n        </ListItem>\n      </Theme>"
     },
     {
       "name": "ListGeneral",
@@ -194,7 +201,8 @@
             "country": "sg"
           }
         ]
-      }
+      },
+      "code": "<Theme class=\"p-10\">\n        <ListItem type=\"general\" v-bind=\"args\">\n          <template #menu>\n            <div class=\"p-2 border-b border-gray-200\">\n              <DropdownItem text=\"Edit\" icon=\"pencil\" />\n            </div>\n            <div class=\"p-2\">\n              <DropdownItem text=\"Delete\" variant=\"destructive\" icon=\"bin\" />\n            </div>\n          </template>\n        </ListItem>\n\n        <ListItem\n          type=\"general\"\n          title=\"Shopee Pay\"\n          :chips=\"[{ label: 'Primary' }]\"\n        >\n          <template #logo>\n            <img src=\"http://api.src.test/icons/providers/shopee.png\" width=\"64\" alt=\"shopee\" />\n          </template>\n        </ListItem>\n\n        <ListItem type=\"general\" v-bind=\"args\" :is-dropdown-actions-visible=\"false\">\n          <template #logo>\n            <img src=\"http://api.src.test/icons/providers/paynow.png\" width=\"64\" />\n          </template>\n          <div class=\"flex gap-x-4\">\n            <img\n              v-for=\"(methodImage, index) in methodLogos\"\n              :key=\"index\"\n              class=\"object-contain\"\n              :src=\"methodImage\"\n              width=\"35\"\n              :alt=\"methodImage\"\n              height=\"24\"\n            />\n          </div>\n          <template #append>\n            <Button label=\"Connect\" />\n          </template>\n        </ListItem>\n      </Theme>"
     },
     {
       "name": "ListItemPage",
@@ -223,7 +231,8 @@
             "updated_at": "2024-04-18T09:22:56+08:00"
           }
         ]
-      }
+      },
+      "code": "<Theme class=\"p-10\">\n        <ListItem\n          type=\"page\"\n          v-for=\"page in args.pages\"\n          :key=\"page.id\"\n          :page=\"page\"\n        >\n          <template #menu>\n            <div class=\"p-2 border-b border-gray-200\">\n              <DropdownItem text=\"Edit\" icon=\"pencil\" />\n            </div>\n            <div class=\"p-2\">\n              <DropdownItem text=\"Delete\" variant=\"destructive\" icon=\"bin\" />\n            </div>\n          </template>\n        </ListItem>\n      </Theme>"
     },
     {
       "name": "ListItemAccordion",
@@ -239,7 +248,12 @@
             "label": "Required"
           }
         ]
-      }
+      },
+      "code": "<Theme class=\"p-10\">\n        <ListItem v-bind=\"args\" v-model=\"isOpen1\" type=\"accordion\">\n          <template #content>Content</template>\n        </ListItem>\n        <div class=\"my-3\" />\n        <ListItem v-bind=\"args\" v-model=\"isOpen2\" type=\"accordion\" is-no-toggle-forced>\n          <template #content>Content</template>\n        </ListItem>\n      </Theme>"
     }
+  ],
+  "relatedComponents": [
+    "Button",
+    "DropdownItem"
   ]
 }

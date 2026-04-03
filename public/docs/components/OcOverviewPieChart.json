@@ -52,7 +52,9 @@
             }
           }
         ]
-      }
+      },
+      "code": "<Theme>\n        <OcOverviewPieChart v-bind=\"args\" />\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

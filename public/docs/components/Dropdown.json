@@ -82,7 +82,11 @@
       "name": "Default",
       "props": {
         "distance": 10
-      }
+      },
+      "code": "<Theme>\n        <div class=\"w-full h-[200px]\">\n          <Dropdown v-model=\"isOpen\" v-bind=\"args\">\n            <button>Open Dropdown</button>\n\n            <template #menu>\n              <div class=\"flex flex-col\">\n                <div class=\"p-2 border-b border-gray-200\">\n                  <DropdownItem text=\"Edit\" icon=\"pencil\" />\n                  <DropdownItem text=\"Duplicate\" icon=\"copy\" />\n                  <DropdownItem text=\"Archive\" icon=\"archive\" />\n                </div>\n                <div class=\"p-2\">\n                  <DropdownItem text=\"Delete\" icon=\"trash\" variant=\"destructive\" />\n                </div>\n              </div>\n            </template>\n          </Dropdown>\n        </div>\n      </Theme>"
     }
+  ],
+  "relatedComponents": [
+    "DropdownItem"
   ]
 }

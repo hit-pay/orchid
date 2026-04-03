@@ -64,5 +64,18 @@
     }
   },
   "rules": [],
-  "examples": []
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<Theme class=\"items-center mb-3 p-10 w-[400px]\">\n        <OverviewItem v-bind=\"args\">\n          <template #footer>\n            <div class=\"flex flex-col px-4 pb-4\">\n              <div class=\"mb-4 bg-oc-warning-50-tr p-2 text-sm text-oc-text-400 text-center rounded-sm\">Minimum payout is SGD 1</div>\n              <Button size=\"small\" left-icon=\"circle\">Payout funds</Button>\n            </div>\n          </template>\n        </OverviewItem>\n      </Theme>"
+    },
+    {
+      "name": "OverviewGroup",
+      "code": "<Theme class=\"items-center mb-3\">\n        <Overview v-bind=\"args\" />\n      </Theme>"
+    }
+  ],
+  "relatedComponents": [
+    "Button",
+    "Overview"
+  ]
 }

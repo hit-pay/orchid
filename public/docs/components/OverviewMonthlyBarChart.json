@@ -130,7 +130,9 @@
         ],
         "tooltipCurrency": "SGD",
         "currency": "SGD"
-      }
+      },
+      "code": "<Theme>\n        <OverviewMonthlyBarChart class=\"h-[300px] w-[530px]\" v-bind=\"args\" />\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

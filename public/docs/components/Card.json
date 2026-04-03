@@ -64,7 +64,9 @@
       "props": {
         "title": "Beginner guide for Payment Links",
         "description": "You will learn how to manage (create, update, view) your payment link."
-      }
+      },
+      "code": "<Theme>\n        <div class=\"flex flex-col gap-y-5 max-w-[552px]\">\n          <Card type=\"education\" v-bind=\"args\" />\n          <Card type=\"cross_feature\" v-bind=\"args\" />\n          <Card type=\"cross_sell_pos\" v-bind=\"args\" />\n          <Card type=\"cross_sell_os\" v-bind=\"args\" />\n          <Card type=\"video\" v-bind=\"args\" />\n        </div>\n        <div class=\"mt-5 gap-y-5 flex flex-col\">\n          <Card type=\"cross_sell_pos\" is-full v-bind=\"args\" />\n          <Card type=\"cross_sell_os\" is-full v-bind=\"args\" />\n        </div>\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

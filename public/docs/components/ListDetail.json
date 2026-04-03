@@ -54,7 +54,8 @@
         "label": "Email",
         "content": "alex@arcticmonkey.io",
         "alignment": "horizontal"
-      }
+      },
+      "code": "<Theme class=\"items-center mb-3\">\n        <ListDetail v-bind=\"args\" />\n      </Theme>"
     },
     {
       "name": "Vertical",
@@ -63,7 +64,8 @@
         "label": "Alex Turner",
         "content": "alex@arcticmonkey.io",
         "alignment": "vertical"
-      }
+      },
+      "code": "<Theme class=\"items-center mb-3\">\n        <ListDetail v-bind=\"args\" />\n      </Theme>"
     },
     {
       "name": "UsingSlot",
@@ -71,7 +73,9 @@
         "variant": "big",
         "label": "Alex Turner",
         "alignment": "vertical"
-      }
+      },
+      "code": "<Theme class=\"items-center mb-3\">\n        <ListDetail v-bind=\"args\">\n          <template #content><span>alex@arcticmonkey.io</span></template>\n        </ListDetail>\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

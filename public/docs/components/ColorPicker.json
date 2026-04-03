@@ -44,5 +44,17 @@
     }
   },
   "rules": [],
-  "examples": []
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<Theme>\n        <div class=\"h-[400px]\">\n          <div class=\"mb-2 text-sm\">modelValue: {{ modelValue }}</div>\n          <ColorPicker v-model=\"modelValue\" :show-opacity=\"args.showOpacity\">\n            <template #leading>\n              <Icon name=\"paint\" />\n            </template>\n          </ColorPicker>\n        </div>\n      </Theme>"
+    },
+    {
+      "name": "Gradient",
+      "code": "<Theme>\n        <ColorPicker v-model=\"modelValue\" variant=\"gradient\" />\n        <div class=\"h-[400px] w-full mt-3\" :style=\"styleBg\" />\n      </Theme>"
+    }
+  ],
+  "relatedComponents": [
+    "Icon"
+  ]
 }

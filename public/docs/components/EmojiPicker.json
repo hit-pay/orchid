@@ -29,7 +29,9 @@
       "props": {
         "isDisabled": false,
         "popperOptions": {}
-      }
+      },
+      "code": "<Theme>\n        <div class=\"h-[500px] w-full\">\n          <EmojiPicker v-model=\"modelValue\" v-bind=\"args\" />\n        </div>\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

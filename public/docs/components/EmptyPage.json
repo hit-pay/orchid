@@ -94,7 +94,9 @@
         "addButtonLabel": "Add new",
         "upgradeLabel": "Upgrade now",
         "size": "default"
-      }
+      },
+      "code": "<Theme>\n        <EmptyPage v-bind=\"args\" />\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

@@ -32,7 +32,8 @@
             }
           }
         ]
-      }
+      },
+      "code": "<Theme>\n        <OcRowItemData v-bind=\"args\" />\n      </Theme>"
     },
     {
       "name": "WithIcon",
@@ -53,7 +54,8 @@
             "text": "Credit Card"
           }
         ]
-      }
+      },
+      "code": "<Theme>\n        <OcRowItemData v-bind=\"args\" />\n      </Theme>"
     },
     {
       "name": "WithChip",
@@ -75,7 +77,8 @@
             "text": "2024-02-15"
           }
         ]
-      }
+      },
+      "code": "<Theme>\n        <OcRowItemData v-bind=\"args\" />\n      </Theme>"
     },
     {
       "name": "SingleItem",
@@ -87,7 +90,9 @@
             "isCopyButton": true
           }
         ]
-      }
+      },
+      "code": "<Theme>\n        <OcRowItemData v-bind=\"args\" />\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

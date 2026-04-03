@@ -105,5 +105,15 @@
     "\"variant\" must be one of: grid, list, list2",
     "\"optionType\" must be one of: text, icon, image"
   ],
-  "examples": []
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<Theme>\n        <SelectOptions\n          v-model=\"modelValue\"\n          v-bind=\"args\"\n        />\n      </Theme>"
+    },
+    {
+      "name": "Variants",
+      "code": "<Theme>\n        <div class=\"flex flex-col gap-y-6\">\n          <SelectOptions\n            v-model=\"grid\"\n            label=\"Grid (default)\"\n            hint=\"Select one of the options below.\"\n            variant=\"grid\"\n            :options=\"[\n              { label: 'Option 1', value: 1 },\n              { label: 'Option 2', value: 2 },\n              { label: 'Option 3', value: 3 }\n            ]\"\n          />\n          <SelectOptions\n            v-model=\"list\"\n            label=\"List\"\n            hint=\"Select one of the options below.\"\n            variant=\"list\"\n            :options=\"[\n              { label: 'Option 1', value: 1, description: 'Description for option 1' },\n              { label: 'Option 2', value: 2, description: 'Description for option 2' },\n              { label: 'Option 3', value: 3, description: 'Description for option 3' }\n            ]\"\n          />\n          <SelectOptions\n            v-model=\"list2\"\n            label=\"List 2\"\n            hint=\"Select one of the options below.\"\n            variant=\"list2\"\n            :options=\"[\n              { label: 'Option 1', value: 1, description: 'Smaller height, fits screen width' },\n              { label: 'Option 2', value: 2, description: 'Smaller height, fits screen width' }\n            ]\"\n          />\n        </div>\n      </Theme>"
+    }
+  ],
+  "relatedComponents": []
 }

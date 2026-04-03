@@ -160,7 +160,13 @@
           "label": "Upload",
           "leftIcon": "upload"
         }
-      }
+      },
+      "code": "<Theme class=\"min-h-[500px]\">\n        <MultipleUploadFile v-model=\"modelValue\" v-bind=\"args\" />\n      </Theme>"
+    },
+    {
+      "name": "MultipleImages",
+      "code": "<Theme class=\"min-h-[500px]\">\n        <MultipleUploadFile\n          v-model=\"modelValue\"\n          is-image-only\n          label=\"Product Images\"\n          hint=\"The optimal product image size is at least 800x800 px. PNG and JPG format is supported.\"\n          :max-images=\"4\"\n          :columns-count=\"3\"\n          :input-options=\"['caption', 'link', 'lightbox', 'new_tab']\"\n        />\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

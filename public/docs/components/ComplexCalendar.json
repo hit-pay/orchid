@@ -50,5 +50,15 @@
   },
   "slots": {},
   "rules": [],
-  "examples": []
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<Theme class=\"h-[400px]\">\n        <ComplexCalendar v-model=\"modelValue\" v-bind=\"args\" />\n      </Theme>"
+    },
+    {
+      "name": "SingleCalendar",
+      "code": "<Theme class=\"h-[400px]\">\n        <ComplexCalendar\n          v-model.string=\"modelValue\"\n          :count-calendars=\"1\"\n          :is-range=\"false\"\n          :with-footer=\"false\"\n          :masks=\"masks\"\n        />\n      </Theme>"
+    }
+  ],
+  "relatedComponents": []
 }

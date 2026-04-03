@@ -116,7 +116,9 @@
         ],
         "initialFontSize": "14px",
         "placeholder": "Placeholder"
-      }
+      },
+      "code": "<Theme>\n        <div @click=\"modelValue = ''\" class=\"cursor-pointer mb-1\">Clear</div>\n        <div @click=\"modelValue = 'default model value'\" class=\"cursor-pointer mb-4\">Reset</div>\n\n        <div class=\"mb-2\">Full Editor</div>\n        <TextEditor id=\"quill-example\" v-model=\"modelValue\" v-bind=\"args\" @update:image=\"onUpdateImage\" />\n        <div class=\"flex gap-y-6 flex-col mt-8\">\n          <div>Preview</div>\n          <div v-html=\"modelValue\" />\n        </div>\n\n        <div class=\"mt-8 mb-2\">Text Only Editor</div>\n        <TextEditor id=\"quill-example-text-only\" variant=\"text-only\" v-model=\"modelValue2\" v-bind=\"args\" />\n        <div class=\"flex gap-y-6 flex-col mt-8\">\n          <div>Preview</div>\n          <div v-html=\"modelValue2\" />\n        </div>\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

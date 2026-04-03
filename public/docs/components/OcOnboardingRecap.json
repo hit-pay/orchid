@@ -67,7 +67,8 @@
             ]
           }
         ]
-      }
+      },
+      "code": "<Theme>\n        <OcOnboardingRecap v-bind=\"args\" />\n      </Theme>"
     },
     {
       "name": "NoHeader",
@@ -94,7 +95,9 @@
             ]
           }
         ]
-      }
+      },
+      "code": "<Theme>\n        <OcOnboardingRecap v-bind=\"args\" />\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

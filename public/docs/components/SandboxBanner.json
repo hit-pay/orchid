@@ -36,7 +36,9 @@
           "rightIcon": "arrow-right",
           "class": "[&>button]:!text-white !underline underline-offset-2"
         }
-      }
+      },
+      "code": "<Theme>\n        <SandboxBanner v-bind=\"args\" />\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

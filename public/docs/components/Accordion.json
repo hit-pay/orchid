@@ -79,7 +79,9 @@
         "showIcon": true,
         "isAnimated": true,
         "isDisabled": false
-      }
+      },
+      "code": "<Theme class=\"h-[500px]\">\n        <Accordion v-model:isExpandable=\"isOpen\" v-bind=\"args\">\n          <template #body>\n            <p class=\"text-oc-text-400 text-sm\">\n              This is the accordion body content. You can place any content here, such as text, forms, or other components.\n            </p>\n          </template>\n        </Accordion>\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

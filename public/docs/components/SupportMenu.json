@@ -109,7 +109,9 @@
             "icon": "list-check"
           }
         ]
-      }
+      },
+      "code": "<Theme class=\"h-[450px] w-full\">\n        <SupportMenu v-model=\"isOpen\" v-bind=\"args\" />\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

@@ -219,5 +219,15 @@
     }
   },
   "rules": [],
-  "examples": []
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<Theme>\n        <div class=\"w-full h-[300px]\">\n          <Select\n            v-model=\"modelValue\"\n            v-bind=\"args\"\n          />\n        </div>\n      </Theme>"
+    },
+    {
+      "name": "MultiSelect",
+      "code": "<Theme>\n        <div class=\"w-full h-[300px]\">\n          <Select\n            v-model=\"modelValue\"\n            :options=\"[\n              { label: 'Option 1', value: 'opt1' },\n              { label: 'Option 2', value: 'opt2' },\n              { label: 'Option 3', value: 'opt3' }\n            ]\"\n            label=\"Multi Select\"\n            hint=\"Select one or more options.\"\n            placeholder=\"Select options...\"\n            :is-filterable=\"true\"\n            multiple\n          />\n        </div>\n      </Theme>"
+    }
+  ],
+  "relatedComponents": []
 }

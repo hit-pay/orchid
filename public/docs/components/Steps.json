@@ -39,7 +39,9 @@
             "title": "Verification"
           }
         ]
-      }
+      },
+      "code": "<Theme>\n        <Steps v-model=\"currentStep\" v-bind=\"args\" />\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

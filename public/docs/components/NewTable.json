@@ -160,7 +160,11 @@
           "isSelectable": false,
           "isExpand": true
         }
-      }
+      },
+      "code": "<Theme>\n        <NewTable v-model:selected=\"selectedRows\" :options=\"options\" :loading-rows=\"10\" :is-loading=\"args.isLoading\">\n          <template #date=\"{ item }\">\n            <div class=\"truncate\">\n              {{ dayjs(item.date).format('YYYY-MM-DD HH:mm:ss') }}\n            </div>\n          </template>\n          <template #amount=\"{ item }\">\n            {{ item.currency }} {{ item.amount }}\n          </template>\n          <template #method=\"{ item }\">\n            {{ item.payment_method }} \u2022\u2022\u2022\u2022 {{ item.last4Digits }}\n          </template>\n          <template #status=\"{ item }\">\n            <Chip :variant=\"item.status\" label=\"Some label\" class=\"truncate\" />\n          </template>\n          <template #actions=\"{ item }\">\n            Actions\n          </template>\n          <template #header-email-tooltip>\n            <div class=\"text-oc-text-400 text-sm normal-case font-medium px-3 py-2\">\n              This is a tooltip for the email column\n            </div>\n          </template>\n        </NewTable>\n      </Theme>"
     }
+  ],
+  "relatedComponents": [
+    "Chip"
   ]
 }

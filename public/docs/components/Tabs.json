@@ -91,7 +91,9 @@
             "value": "reports"
           }
         ]
-      }
+      },
+      "code": "<Theme>\n        <Tabs v-model=\"activeTab\" v-bind=\"args\" />\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

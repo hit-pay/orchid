@@ -180,6 +180,10 @@
   ],
   "examples": [
     {
+      "name": "Default",
+      "code": "<Theme class=\"p-8\">\n        <DataTable\n          id=\"sample-data-table\"\n          v-model:selected=\"selectedRows\"\n          row-key=\"id\"\n          row-link=\"link\"\n          :filter=\"filter\"\n          :options=\"args.options\"\n          :is-loading=\"args.isLoading\"\n          @update:filter=\"updateFilterData\"\n          @click:row=\"onClickRow\"\n          @filter-fields-changed=\"changedFields = $event\"\n          @hover:cell=\"console.log('hover:cell: ', $event)\"\n        >\n          <template #bulk-actions=\"{selectedRows}\">\n            <Button label=\"Publish\" size=\"small\" is-transparent left-icon=\"eye-open\" />\n            <Button label=\"Unpublish\" is-transparent size=\"small\" variant=\"secondary\" left-icon=\"eye-close\" />\n            <Button label=\"Delete\" is-transparent size=\"small\" variant=\"destructive\" left-icon=\"bin\" />\n          </template>\n          <template #col1=\"{ item }\">\n            <TableCellContent important :title=\"item.imageTitle\" :description=\"item.imageDescription\"/>\n          </template>\n          <template #col4=\"{ data }\">\n            <span class=\"text-oc-text-400 text-sm\">{{ data }}</span>\n          </template>\n          <template #col6=\"{ data }\">\n            <div class=\"flex gap-3 items-center\">\n              <Toggle size=\"small\" v-model=\"data\"/>\n              <span class=\"md:hidden\">status</span>\n            </div>\n          </template>\n          <template #actions=\"{ item }\">\n            <Dropdown\n              v-model=\"showDropdown[item.id]\"\n              :distance=\"10\"\n              @update:modelValue=\"handleOpenDropdown(item.id)\"\n            >\n              <Icon class=\"w-6 h-6 group-hover/row:block md:hidden cursor-pointer mx-auto\" name=\"dots-vertical\"/>\n              <template #menu>\n                <div class=\"flex flex-col\">\n                  <div class=\"p-2 border-b border-gray-200\">\n                    <DropdownItem text=\"Copy Link\" icon=\"copy\" />\n                    <DropdownItem text=\"Resend e-mail\" icon=\"telegram\" />\n                    <DropdownItem text=\"Download PDF\" icon=\"download\" />\n                  </div>\n                  <div class=\"p-2\">\n                    <DropdownItem text=\"Delete\" icon=\"bin\" variant=\"destructive\" />\n                  </div>\n                </div>\n              </template>\n            </Dropdown>\n          </template>\n        </DataTable>\n      </Theme>"
+    },
+    {
       "name": "FilterTabSameKeyFilterDefault",
       "props": {
         "options": {
@@ -321,7 +325,12 @@
             ]
           }
         }
-      }
+      },
+      "code": "<Theme class=\"p-8\">\n        <DataTable\n          id=\"sample-data-table-tab-same-key\"\n          :options=\"args.options\"\n          :filter=\"filter\"\n          @update:filter=\"updateFilterData\"\n        />\n      </Theme>"
+    },
+    {
+      "name": "NewTable",
+      "code": "<Theme class=\"p-8\">\n        <DataTable\n          id=\"sample-data-table\"\n          v-model:selected=\"selectedRows\"\n          row-key=\"id\"\n          row-link=\"link\"\n          v-model:filter=\"filter\"\n          :options=\"args.options\"\n          :is-loading=\"args.isLoading\"\n          is-new-table\n          @update:filter=\"updateFilterData\"\n          @click:row=\"onClickRow\"\n          @filter-fields-changed=\"changedFields = $event\"\n          @hover:cell=\"console.log('hover:cell: ', $event)\"\n        >\n          <template #bulk-actions=\"{selectedRows}\">\n            <Button label=\"Publish\" size=\"small\" is-transparent left-icon=\"eye-open\" />\n            <Button label=\"Unpublish\" is-transparent size=\"small\" variant=\"secondary\" left-icon=\"eye-close\" />\n            <Button label=\"Delete\" is-transparent size=\"small\" variant=\"destructive\" left-icon=\"bin\" />\n          </template>\n          <template #date=\"{ item }\">\n            <div class=\"truncate\">\n              {{ dayjs(item.date).format('YYYY-MM-DD HH:mm:ss') }}\n            </div>\n          </template>\n          <template #header-date-tooltip>\n            test slot\n          </template>\n          <template #amount=\"{ item }\">\n            {{ item.currency }} {{ item.amount }}\n          </template>\n          <template #method=\"{ item }\">\n            {{ item.payment_method }} \u2022\u2022\u2022\u2022 {{ item.last4Digits }}\n          </template>\n          <template #status=\"{ item }\">\n            <Chip :variant=\"item.status\" label=\"Some label\" class=\"truncate\" />\n          </template>\n        </DataTable>\n      </Theme>"
     },
     {
       "name": "WithoutFilter",
@@ -399,7 +408,18 @@
             ]
           }
         }
-      }
+      },
+      "code": "<Theme class=\"p-8\">\n        <DataTable\n          id=\"sample-data-without-filter\"\n          is-new-table\n          :options=\"args.options\"\n        />\n      </Theme>"
     }
+  ],
+  "relatedComponents": [
+    "Button",
+    "Chip",
+    "Dropdown",
+    "DropdownItem",
+    "Icon",
+    "Table",
+    "TableCellContent",
+    "Toggle"
   ]
 }

@@ -15,5 +15,15 @@
     }
   },
   "rules": [],
-  "examples": []
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<Theme>\n        <div class=\"flex gap-3 items-center mb-3\">\n          <span>Light Mode (default)</span>\n        </div>\n      </Theme>"
+    },
+    {
+      "name": "ColorMode",
+      "code": "<div class=\"flex gap-3 items-center light-mode mb-3\">\n        <Theme colorMode=\"light\">\n          Light Mode\n        </Theme>\n        <Theme colorMode=\"dark\">\n          Dark Mode\n        </Theme>\n      </div>"
+    }
+  ],
+  "relatedComponents": []
 }

@@ -51,7 +51,9 @@
             "isDisabled": true
           }
         ]
-      }
+      },
+      "code": "<Theme>\n        <Variants v-model=\"value\" v-bind=\"args\">\n          <template #business-description>\n            <span class=\"text-oc-text-400 text-sm\">Single-owner businesses without a legal distinction between the owner and the business</span>\n          </template>\n        </Variants>\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

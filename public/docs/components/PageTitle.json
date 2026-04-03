@@ -112,7 +112,9 @@
         },
         "isBack": false,
         "isCopy": false
-      }
+      },
+      "code": "<Theme>\n        <PageTitle v-bind=\"args\" />\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

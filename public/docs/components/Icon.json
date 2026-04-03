@@ -34,7 +34,9 @@
         "name": "flags/SG",
         "width": "22",
         "height": "16"
-      }
+      },
+      "code": "<Theme>\n        <div class=\"w-full h-[400px] flex items-center justify-center\">\n          <Icon v-bind=\"args\" />\n        </div>\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

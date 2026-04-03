@@ -47,7 +47,9 @@
             "icon": "bitcoin-growth"
           }
         ]
-      }
+      },
+      "code": "<Theme>\n        <FeatureOverviewCard v-bind=\"args\"/>\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

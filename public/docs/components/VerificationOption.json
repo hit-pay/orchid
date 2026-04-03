@@ -43,7 +43,11 @@
           "variant": "warning",
           "icon": "time"
         }
-      }
+      },
+      "code": "<Theme>\n        <div class=\"flex flex-col gap-y-6\">\n          <VerificationOption v-bind=\"args\">\n            <template #content>\n              <div class=\"flex flex-col gap-y-3\">\n                <div class=\"text-oc-text-400\">Filling out the form may take some time. Verification needs\n                  <span class=\"font-medium text-oc-text\">2 working days.</span>\n                </div>\n\n                <div class=\"border-t border-oc-gray-100 pt-3\">\n                  <RadioGroup\n                    :model-value=\"'yes'\"\n                    :radio=\"[\n                      { label: 'Yes', value: 'yes' },\n                      { label: 'No', value: 'no' }\n                    ]\"\n                    label=\"Is your corporation with multiple layers of ownership?\"\n                    group-name=\"radio1\"\n                    alignment=\"horizontal\"\n                  />\n                </div>\n              </div>\n            </template>\n          </VerificationOption>\n\n          <VerificationOption v-bind=\"args\" is-active>\n            <template #title>\n              <img src=\"/images/singpass.png\" alt=\"singpass\"/>\n            </template>\n            <template #content>\n              <div class=\"text-oc-text-400\">\n                Singpass enables you to retrieve your personal data from relevant government agencies to pre-fill the\n                relevant fields, making digital transaction faster and more convenient. <span\n                  class=\"font-medium text-oc-text\">Verification will be instant</span>.\n              </div>\n            </template>\n          </VerificationOption>\n        </div>\n      </Theme>"
     }
+  ],
+  "relatedComponents": [
+    "RadioGroup"
   ]
 }

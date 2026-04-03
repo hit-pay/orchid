@@ -28,7 +28,9 @@
         "label": "5 step progress bar",
         "steps": 5,
         "currentStep": 3
-      }
+      },
+      "code": "<Theme>\n        <div class=\"flex flex-col gap-8\">\n          <ProgressBar\n            label=\"2 step progress bar\"\n            :steps=\"2\"\n            :currentStep=\"1\"\n          />\n          <ProgressBar v-bind=\"args\" />\n        </div>\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

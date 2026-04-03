@@ -126,7 +126,11 @@
           "label": "OK"
         },
         "size": "medium"
-      }
+      },
+      "code": "<Theme>\n        <div class=\"h-[500px]\">\n          <Button label=\"Open Modal\" @click=\"isOpen = true\" />\n\n          <Modal v-model=\"isOpen\" v-bind=\"args\">\n            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Unde nesciunt vitae, quis maxime explicabo numquam molestias natus dolores quidem. Provident eligendi rem perferendis tempora ex magnam officia fugiat quae?\n          </Modal>\n        </div>\n      </Theme>"
     }
+  ],
+  "relatedComponents": [
+    "Button"
   ]
 }

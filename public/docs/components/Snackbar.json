@@ -132,7 +132,17 @@
         "primaryButton": {
           "label": "Action"
         }
-      }
+      },
+      "code": "<Theme class=\"h-[300px]\">\n        <Snackbar v-model=\"modelValue\" v-bind=\"args\" />\n      </Theme>"
+    },
+    {
+      "name": "Variants",
+      "code": "<Theme>\n        <div class=\"flex flex-col gap-y-4\">\n          <Snackbar :model-value=\"true\" show-icon icon=\"filled-check\" content=\"Changes have been successfully saved\" />\n          <Snackbar :model-value=\"true\" color=\"primary\" show-icon icon=\"filled-check\" content=\"Changes have been successfully saved\" />\n          <Snackbar :model-value=\"true\" color=\"error\" show-icon icon=\"filled-check\" content=\"Changes have been successfully saved\" />\n          <Snackbar :model-value=\"true\" color=\"warning\" show-icon icon=\"filled-check\" content=\"Changes have been successfully saved\" />\n          <Snackbar :model-value=\"true\" color=\"gray\" show-icon icon=\"filled-check\" content=\"Changes have been successfully saved\" />\n        </div>\n      </Theme>"
+    },
+    {
+      "name": "BigSize",
+      "code": "<Theme>\n        <div class=\"flex flex-col gap-y-4\">\n          <Snackbar v-model=\"visible1\" size=\"big\" show-icon icon=\"filled-check\" title=\"Snackbar title\" description=\"Changes have been successfully saved\" dismissible />\n          <Snackbar v-model=\"visible2\" size=\"big\" color=\"primary\" show-icon icon=\"filled-check\" title=\"Snackbar title\" description=\"Changes have been successfully saved\" dismissible />\n          <Snackbar v-model=\"visible3\" size=\"big\" color=\"error\" show-icon icon=\"filled-check\" title=\"Snackbar title\" description=\"Changes have been successfully saved\" dismissible />\n          <Snackbar v-model=\"visible4\" size=\"big\" color=\"warning\" show-icon icon=\"filled-check\" title=\"Snackbar title\" description=\"Changes have been successfully saved\" dismissible />\n          <Snackbar v-model=\"visible5\" size=\"big\" color=\"gray\" show-icon icon=\"filled-check\" title=\"Snackbar title\" description=\"Changes have been successfully saved\" dismissible />\n        </div>\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

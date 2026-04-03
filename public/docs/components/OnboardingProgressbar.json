@@ -59,7 +59,9 @@
             }
           }
         ]
-      }
+      },
+      "code": "<Theme>\n        <OnboardingProgressbar v-bind=\"args\">\n          <template #description>\n            <span class=\"text-sm text-oc-text-400\">\n              It usually takes\n              <span class=\"font-medium text-oc-text\">2 work days</span>\n              . We will let you know once it's done.\n            </span>\n          </template>\n        </OnboardingProgressbar>\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

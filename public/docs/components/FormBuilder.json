@@ -100,7 +100,8 @@
             "columns": "50% 50%"
           }
         }
-      }
+      },
+      "code": "<Theme class=\"p-8\">\n        <FormBuilder\n          id=\"form-builder\"\n          class=\"gap-5\"\n          :errors=\"errors\"\n          :grid=\"args.grid\"\n          :values=\"values\"\n          :json-form=\"SampleJsonForm\"\n          @onUpdate=\"onUpdateForm\"\n        >\n          <template #CustomFormInput=\"{form, value, error}\">\n            <div class=\"flex items-center md:col-span-2 border-2 p-3\">\n              <label class=\"mr-3\">This custom form input</label>\n              <Button @click=\"onUpdateForm(form, '1')\">Set Value to (1)</Button>\n              <span>{{ error }}</span>\n            </div>\n          </template>\n          <template #CustomFormInput2=\"{form, value, error}\">\n            <Input\n              label=\"Custom Form Input 2\"\n              hint=\"This is a hint text to help user\"\n              :model-value=\"value\"\n              :error-message=\"error\"\n              @update:model-value=\"onUpdateForm(form, $event)\"\n            >\n              <template #trailing>\n                <Dropdown v-model=\"isOpenedDropdown\">\n                  <template #menu>\n                    <div class=\"flex p-2 flex-col\">\n                      <DropdownItem text=\"Menu\" icon=\"pencil\" @click=\"isOpenedDropdown=false\"/>\n                      <DropdownItem text=\"Menu\" icon=\"pencil\" @click=\"isOpenedDropdown=false\"/>\n                      <DropdownItem text=\"Menu\" icon=\"pencil\" @click=\"isOpenedDropdown=false\"/>\n                    </div>\n                  </template>\n                  <div class=\"text-sm font-medium flex items-center gap-x-2 text-oc-text-400\">\n                    <span class=\"flex items-center text-sm\">USD</span>\n                    <Icon class=\"w-[14px] h-[14px]\" name=\"chevron-down\"/>\n                  </div>\n                </Dropdown>\n              </template>\n            </Input>\n          </template>\n        </FormBuilder>\n      </Theme>"
     },
     {
       "name": "ShowIfLogic",
@@ -112,7 +113,15 @@
           "slider": 10
         },
         "errors": {}
-      }
+      },
+      "code": "<Theme class=\"p-8\">\n        <div class=\"mb-10 pb-10 border-b\">\n          {{ values }}\n        </div>\n\n        <FormBuilder\n          id=\"form-builder\"\n          class=\"grid gap-4\"\n          :errors=\"errors\"\n          :values=\"values\"\n          :json-form=\"JsonForm\"\n          @onUpdate=\"onUpdateForm\"\n        >\n          <template #Children=\"{form}\">{{form}}</template>\n        </FormBuilder>\n      </Theme>"
     }
+  ],
+  "relatedComponents": [
+    "Button",
+    "Dropdown",
+    "DropdownItem",
+    "Icon",
+    "Input"
   ]
 }

@@ -51,7 +51,9 @@
         "description": "Tell us what type of products you are selling",
         "isBorder": false,
         "variant": "completed"
-      }
+      },
+      "code": "<Theme>\n        <div class=\"w-full flex flex-col gap-y-4\">\n          <OnboardingAccordion v-bind=\"args\">\n            <div class=\"p-10\">Accordion body content</div>\n          </OnboardingAccordion>\n        </div>\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

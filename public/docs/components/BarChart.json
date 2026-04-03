@@ -90,7 +90,9 @@
           "NOV'23"
         ],
         "tooltipCurrency": "SGD"
-      }
+      },
+      "code": "<Theme>\n        <BarChart class=\"h-[300px]\" v-bind=\"args\" />\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

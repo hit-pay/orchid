@@ -55,7 +55,9 @@
           "status": "",
           "number": 1
         }
-      }
+      },
+      "code": "<Theme>\n        <OcOnboardingListItem v-bind=\"args\" />\n        <OcOnboardingListItem v-bind=\"args\" status=\"pending\" />\n        <OcOnboardingListItem v-bind=\"args\" status=\"completed\" />\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

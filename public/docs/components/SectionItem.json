@@ -73,7 +73,13 @@
         "isToggle": true,
         "icon": "check",
         "popperMessage": "Information"
-      }
+      },
+      "code": "<Theme>\n        <SectionItem\n          v-model=\"modelValue\"\n          v-bind=\"args\"\n        />\n      </Theme>"
+    },
+    {
+      "name": "Variants",
+      "code": "<Theme>\n        <div class=\"flex flex-col gap-y-4 p-4\">\n          <SectionItem\n            v-model=\"toggle1\"\n            title=\"Default\"\n            description=\"A section item with a toggle.\"\n            :is-toggle=\"true\"\n            icon=\"check\"\n          />\n          <SectionItem\n            v-model=\"toggle2\"\n            title=\"Enabled by default\"\n            description=\"This section item is toggled on.\"\n            :is-toggle=\"true\"\n            icon=\"check\"\n          />\n          <SectionItem\n            v-model=\"toggle3\"\n            title=\"With error\"\n            description=\"This section item has an error message.\"\n            :is-toggle=\"true\"\n            icon=\"information\"\n            error-message=\"This setting is required.\"\n          />\n        </div>\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

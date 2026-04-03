@@ -55,7 +55,13 @@
         "hint": "Text",
         "isPartial": false,
         "isDisabled": false
-      }
+      },
+      "code": "<Theme>\n        <Checkbox v-model=\"modelValue\" v-bind=\"args\">\n          <template #after>After</template>\n        </Checkbox>\n        <div class=\"mt-2\">Model value: {{ modelValue }}</div>\n      </Theme>"
+    },
+    {
+      "name": "Variants",
+      "code": "<Theme>\n        <div class=\"grid grid-cols-4 gap-4 w-fit\">\n          <Checkbox :model-value=\"true\" />\n          <Checkbox />\n          <Checkbox error-message=\"Error\" />\n          <Checkbox is-partial />\n          <Checkbox :model-value=\"true\" disabled />\n          <Checkbox disabled />\n          <div />\n          <Checkbox is-partial disabled />\n        </div>\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

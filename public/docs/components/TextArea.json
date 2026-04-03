@@ -78,7 +78,13 @@
         "disabled": false,
         "isRequired": false,
         "rows": 5
-      }
+      },
+      "code": "<Theme>\n        <TextArea\n          v-model=\"modelValue\"\n          v-bind=\"args\"\n        />\n      </Theme>"
+    },
+    {
+      "name": "Variants",
+      "code": "<Theme>\n        <div class=\"flex flex-col gap-y-6\">\n          <TextArea\n            v-model=\"normal\"\n            label=\"Normal\"\n            hint=\"This is a hint text.\"\n            placeholder=\"Placeholder\"\n            :rows=\"4\"\n          />\n          <TextArea\n            v-model=\"disabled\"\n            label=\"Disabled\"\n            hint=\"This is a hint text.\"\n            placeholder=\"Placeholder\"\n            :rows=\"4\"\n            :is-disabled=\"true\"\n          />\n          <TextArea\n            v-model=\"error\"\n            label=\"Error\"\n            hint=\"This is a hint text.\"\n            placeholder=\"Placeholder\"\n            :rows=\"4\"\n            error-message=\"This field is required.\"\n          />\n        </div>\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

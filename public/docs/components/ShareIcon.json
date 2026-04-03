@@ -33,7 +33,13 @@
           "position": "bottom",
           "distance": 9
         }
-      }
+      },
+      "code": "<Theme>\n        <div class=\"h-[150px]\">\n          <ShareIcon v-bind=\"args\" />\n        </div>\n      </Theme>"
+    },
+    {
+      "name": "Variants",
+      "code": "<Theme>\n        <div class=\"flex gap-4 h-[150px] items-start\">\n          <ShareIcon icon=\"whatsapp\" text=\"Whatsapp\" />\n          <ShareIcon icon=\"facebook\" text=\"Facebook\" />\n          <ShareIcon icon=\"telegram\" text=\"Telegram\" />\n          <ShareIcon icon=\"email\" text=\"Email\" />\n          <ShareIcon icon=\"tiktok\" text=\"TikTok\" />\n        </div>\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }

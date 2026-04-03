@@ -5,5 +5,15 @@
   "events": {},
   "slots": {},
   "rules": [],
-  "examples": []
+  "examples": [
+    {
+      "name": "Default",
+      "code": "<Theme>\n        <div class=\"flex flex-col gap-3 w-[300px]\">\n          <Skeleton class=\"h-4 w-full rounded\" />\n          <Skeleton class=\"h-4 w-3/4 rounded\" />\n          <Skeleton class=\"h-4 w-1/2 rounded\" />\n        </div>\n      </Theme>"
+    },
+    {
+      "name": "Shapes",
+      "code": "<Theme>\n        <div class=\"flex gap-4 items-center\">\n          <Skeleton class=\"h-12 w-12 rounded-full\" />\n          <div class=\"flex flex-col gap-2\">\n            <Skeleton class=\"h-4 w-[200px] rounded\" />\n            <Skeleton class=\"h-4 w-[150px] rounded\" />\n          </div>\n        </div>\n      </Theme>"
+    }
+  ],
+  "relatedComponents": []
 }

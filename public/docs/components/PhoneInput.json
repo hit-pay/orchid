@@ -87,7 +87,9 @@
         "placeholder": "Placeholder",
         "disabled": false,
         "isRequired": false
-      }
+      },
+      "code": "<Theme>\n        <div class=\"w-full h-[400px]\">\n          <PhoneInput\n            v-model=\"modelValue\"\n            v-bind=\"args\"\n          />\n        </div>\n      </Theme>"
     }
-  ]
+  ],
+  "relatedComponents": []
 }
