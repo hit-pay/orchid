@@ -27,3 +27,5 @@ dist
 
 # storybook
 public/storybook
+
+public/docs
