@@ -563,11 +563,10 @@ function parseStoryExamples(vueFilePath) {
     // Build Vue 3 SFC code
     const code = buildSFCCode(storyObj, args)
 
-    if (code || props) {
-      const ex = { name }
-      if (props) ex.props = props
-      if (code) ex.code = code
-      examples.push(ex)
+    if (code) {
+      const id = name.replace(/([A-Z])/g, (c, i) => (i === 0 ? c.toLowerCase() : '-' + c.toLowerCase()))
+      const title = name.replace(/([A-Z])/g, (c, i) => (i === 0 ? c : ' ' + c))
+      examples.push({ id, title, code: { language: 'vue', snippet: code } })
     }
   }
 
@@ -686,7 +685,7 @@ function formatSchema(exportName, vueFilePath, packageRoot, props, doc, rules, r
 
 // Layer 3 — examples.json: code + props, lazy load
 function formatExamples(exportName, examples) {
-  return { name: exportName, examples }
+  return { component: exportName, examples }
 }
 
 // ── Build ────────────────────────────────────────────────────────────────────
