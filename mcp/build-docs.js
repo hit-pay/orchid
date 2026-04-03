@@ -586,79 +586,91 @@ function storybookUrl(vueFilePath, packageRoot) {
   return `https://orchidui.vercel.app/storybook/?path=/docs/${slug}--docs`
 }
 
-// ── Doc formatter ────────────────────────────────────────────────────────────
+// ── Doc formatter (3-layer) ──────────────────────────────────────────────────
 
-function formatDoc(doc, exportName, vueFilePath, packageRoot) {
-  const storyOptions = parseStoryOptions(vueFilePath)
-  const examples = parseStoryExamples(vueFilePath)
-  const relatedComponents = parseStoryRelatedComponents(vueFilePath, exportName)
-
-  const result = {
-    name: exportName,
-    storybook: storybookUrl(vueFilePath, packageRoot),
-    props: {},
-    events: {},
-    slots: {},
-    rules: [],
-    examples,
-    relatedComponents
-  }
-
+function buildProps(doc, storyOptions) {
+  const props = {}
   for (const prop of doc.props ?? []) {
     const storyVals = storyOptions[prop.name]
-    const values =
-      prop.values?.length > 0 ? prop.values : storyVals?.length > 0 ? storyVals : null
+    const values = prop.values?.length > 0 ? prop.values : storyVals?.length > 0 ? storyVals : null
 
     let type = 'any'
     if (prop.type) {
-      type =
-        prop.type.name === 'union'
-          ? prop.type.elements?.map((e) => e.name).join('|') ?? prop.type.name
-          : prop.type.name
+      type = prop.type.name === 'union'
+        ? prop.type.elements?.map((e) => e.name).join('|') ?? prop.type.name
+        : prop.type.name
     }
     if (values) type = 'enum'
 
     const p = { type, required: prop.required || false }
-
     if (prop.defaultValue?.value !== undefined && prop.defaultValue.value !== 'undefined') {
       p.default = prop.defaultValue.value.replace(/^'(.*)'$/, '$1')
     }
-
     if (values) p.values = values
     if (prop.description) p.description = prop.description
 
-    result.props[prop.name] = p
+    props[prop.name] = p
   }
+  return props
+}
 
+function buildRules(props) {
+  const rules = []
+  const required = Object.entries(props).filter(([, p]) => p.required).map(([n]) => n)
+  if (required.length) rules.push(`Required props: ${required.join(', ')}`)
+  for (const [name, prop] of Object.entries(props)) {
+    if (prop.type === 'enum') rules.push(`"${name}" must be one of: ${prop.values.join(', ')}`)
+  }
+  return rules
+}
+
+// Layer 1 — meta.json: super lightweight, always sent (~100–200 tokens)
+function formatMeta(exportName, props) {
+  const lightProps = {}
+  for (const [name, p] of Object.entries(props)) {
+    lightProps[name] = p.required ? `${p.type} (required)` : p.type
+  }
+  return {
+    name: exportName,
+    description: DESCRIPTIONS[exportName] ?? `OrchidUI ${exportName} component.`,
+    props: lightProps,
+    events: [],  // filled by caller
+    slots: [],   // filled by caller
+  }
+}
+
+// Layer 2 — schema.json: full prop detail + rules, on-demand
+function formatSchema(exportName, vueFilePath, packageRoot, props, doc, rules, relatedComponents) {
+  const events = {}
   for (const e of doc.events ?? []) {
-    result.events[e.name] = {
+    events[e.name] = {
       description: e.description || '',
       ...(e.type ? { type: e.type.names?.join('|') ?? e.type.name } : {})
     }
   }
-
+  const slots = {}
   for (const s of doc.slots ?? []) {
-    result.slots[s.name] = {
+    slots[s.name] = {
       description: s.description || '',
       ...(s.bindings?.length > 0
         ? { bindings: s.bindings.map((b) => ({ name: b.name, ...(b.type?.name ? { type: b.type.name } : {}) })) }
         : {})
     }
   }
-
-  const requiredProps = Object.entries(result.props)
-    .filter(([, p]) => p.required)
-    .map(([name]) => name)
-  if (requiredProps.length > 0) {
-    result.rules.push(`Required props: ${requiredProps.join(', ')}`)
+  return {
+    name: exportName,
+    storybook: storybookUrl(vueFilePath, packageRoot),
+    props,
+    events,
+    slots,
+    rules,
+    relatedComponents,
   }
-  for (const [name, prop] of Object.entries(result.props)) {
-    if (prop.type === 'enum') {
-      result.rules.push(`"${name}" must be one of: ${prop.values.join(', ')}`)
-    }
-  }
+}
 
-  return result
+// Layer 3 — examples.json: code + props, lazy load
+function formatExamples(exportName, examples) {
+  return { name: exportName, examples }
 }
 
 // ── Build ────────────────────────────────────────────────────────────────────
@@ -682,17 +694,35 @@ async function buildPackageDocs(label, indexPath, aliases, outputFile, packageRo
 
     try {
       const raw = await parse(vueFilePath, { alias: aliases })
-      const doc = formatDoc(raw, exportName, vueFilePath, packageRoot)
+      const storyOptions = parseStoryOptions(vueFilePath)
+      const examples = parseStoryExamples(vueFilePath)
+      const relatedComponents = parseStoryRelatedComponents(vueFilePath, exportName)
 
-      // Write individual component file
-      const componentFile = path.join(COMPONENTS_DIR, `${exportName}.json`)
-      fs.writeFileSync(componentFile, JSON.stringify(doc, null, 2))
+      const props = buildProps(raw, storyOptions)
+      const rules = buildRules(props)
 
-      // Add to slim index
+      // Layer 1 — meta
+      const meta = formatMeta(exportName, props)
+      meta.events = (raw.events ?? []).map((e) => e.name)
+      meta.slots = (raw.slots ?? []).map((s) => s.name)
+
+      // Layer 2 — schema
+      const schema = formatSchema(exportName, vueFilePath, packageRoot, props, raw, rules, relatedComponents)
+
+      // Layer 3 — examples
+      const examplesDoc = formatExamples(exportName, examples)
+
+      fs.writeFileSync(path.join(COMPONENTS_DIR, `${exportName}.meta.json`), JSON.stringify(meta, null, 2))
+      fs.writeFileSync(path.join(COMPONENTS_DIR, `${exportName}.schema.json`), JSON.stringify(schema, null, 2))
+      fs.writeFileSync(path.join(COMPONENTS_DIR, `${exportName}.examples.json`), JSON.stringify(examplesDoc, null, 2))
+
+      // Slim index entry
       indexComponents.push({
         name: exportName,
-        description: DESCRIPTIONS[exportName] ?? `OrchidUI ${exportName} component.`,
-        detail: `/docs/components/${exportName}.json`
+        description: meta.description,
+        meta: `/docs/components/${exportName}.meta.json`,
+        schema: `/docs/components/${exportName}.schema.json`,
+        examples: `/docs/components/${exportName}.examples.json`,
       })
 
       console.log(`  ✓ ${exportName}`)
@@ -703,7 +733,6 @@ async function buildPackageDocs(label, indexPath, aliases, outputFile, packageRo
     }
   }
 
-  // Write slim index
   const index = {
     version: '1.0',
     library: label === 'orchid-core' ? '@orchidui/core' : '@orchidui/dashboard',
