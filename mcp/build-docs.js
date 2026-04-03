@@ -281,6 +281,39 @@ function parseIndexFile(indexPath, aliases) {
   return results
 }
 
+// ── Known OrchidUI component sets (for import resolution) ───────────────────
+
+const CORE_COMPONENT_NAMES = new Set([
+  'Table','TableHeader','TableCell','TableCellContent','TableLink','ExpandingTable',
+  'ExpandingTableRow','ExpandingHeaderRow','Pagination','PrevNext','PaginationNumber',
+  'Overview','OverviewIcon','OverviewItem','CustomerCard','TransferSummary','ListItem',
+  'ListUrl','ListDetail','InfoCard','ProgressBar','FloatContent','HorizontalProgressbar',
+  'OcOnboardingListItem','OcOnboardingRecap','OcAccountVerificationContent',
+  'OcAccountVerificationBox','NewTable','OcRowItemData','Accordion','OnboardingAccordion',
+  'OnboardingProductOption','Tabs','PaymentTab','Steps','Step','Variants','Variant',
+  'SwitchTabs','Header','SubHeader','HeaderLeft','HeaderCenter','HeaderRight','TabToSelect',
+  'Checklist','PageTitle','PrimaryActions','PageTitleRight','Sidebar','SidebarSubmenu',
+  'AccountSetup','SidebarHead','SideBarMenu','SidebarSubMenuItem','SidebarFooter',
+  'SidebarFeatureBanners','AccountSetupProgress','SubSidebar','EmptyPage','AdditionalContent',
+  'InfoCardButton','Skeleton','FeatureOverviewCard','SandboxBanner','TopBanner','Box',
+  'OcSection','AuthenticationOption','VerificationOption','Chip','Snackbar','Banner',
+  'ShareIcon','Tag','BaseInput','Button','CardInput','Checkbox','CheckboxesGroup','Criteria',
+  'Input','InputOption','PhoneInput','Radio','RadioGroup','RangeInput','Select','Option',
+  'GroupOptions','Toggle','LinkInput','TextArea','Calendar','DatePicker','Slider',
+  'SectionItem','SelectOptions','SingleFileUpload','MultipleUploadFile','NumberInput',
+  'Avatar','Icon','Dropdown','DropdownItem','Tooltip','Modal','OcModalPage',
+  'ConfirmationModal','Popper','SupportMenu','CopyTooltip','WhiteList','Theme','FormBuilder',
+  'DataTable','FilterSearch','FilterSearchFor','FilterForm','ComplexCalendar',
+  'ComplexDatePicker','ModalCropper','Cropper','Draggable','DraggableList','EmojiPicker',
+  'ThumbnailTheme','ThumbnailSection','SubPlanCard','TimePopup','TimePicker',
+])
+
+const DASHBOARD_COMPONENT_NAMES = new Set([
+  'LineChart','PieChart','BarChart','BarRaceChart','Card','OcOverviewPieChart',
+  'OverviewMonthlyBarChart','ColorPicker','TextEditor','ColorPickerPopup',
+  'OnboardingProgressbar','CodeBlock','LottieAnimation',
+])
+
 // ── Story parser ─────────────────────────────────────────────────────────────
 
 function extractBalanced(str, startPos) {
