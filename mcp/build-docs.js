@@ -728,9 +728,9 @@ async function buildPackageDocs(label, indexPath, aliases, outputFile, packageRo
       // Layer 3 — examples
       const examplesDoc = formatExamples(exportName, examples)
 
-      fs.writeFileSync(path.join(COMPONENTS_DIR, `${exportName}.meta.json`), JSON.stringify(meta, null, 2))
-      fs.writeFileSync(path.join(COMPONENTS_DIR, `${exportName}.schema.json`), JSON.stringify(schema, null, 2))
-      fs.writeFileSync(path.join(COMPONENTS_DIR, `${exportName}.examples.json`), JSON.stringify(examplesDoc, null, 2))
+      fs.writeFileSync(path.join(COMPONENTS_DIR, `${exportName}.meta.json`), JSON.stringify(meta))
+      fs.writeFileSync(path.join(COMPONENTS_DIR, `${exportName}.schema.json`), JSON.stringify(schema))
+      fs.writeFileSync(path.join(COMPONENTS_DIR, `${exportName}.examples.json`), JSON.stringify(examplesDoc))
 
       // Slim index entry — name + description + tags only (paths are deterministic)
       indexComponents.push({
@@ -755,7 +755,7 @@ async function buildPackageDocs(label, indexPath, aliases, outputFile, packageRo
     components: indexComponents
   }
 
-  fs.writeFileSync(outputFile, JSON.stringify(index, null, 2))
+  fs.writeFileSync(outputFile, JSON.stringify(index))
   console.log(`  → ${outputFile} (${success} components, ${failed} failed)`)
 }
 
