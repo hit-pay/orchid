@@ -639,22 +639,7 @@ function buildRules(props) {
   return rules
 }
 
-// Layer 1 — meta.json: super lightweight, always sent (~100–200 tokens)
-function formatMeta(exportName, props) {
-  const lightProps = {}
-  for (const [name, p] of Object.entries(props)) {
-    lightProps[name] = p.required ? `${p.type} (required)` : p.type
-  }
-  return {
-    name: exportName,
-    description: DESCRIPTIONS[exportName] ?? `OrchidUI ${exportName} component.`,
-    props: lightProps,
-    events: [],  // filled by caller
-    slots: [],   // filled by caller
-  }
-}
-
-// Layer 2 — schema.json: full prop detail + rules, on-demand
+// Layer 1 — schema.json: full prop/event/slot detail + rules, on-demand
 function formatSchema(exportName, vueFilePath, packageRoot, props, doc, rules, relatedComponents) {
   const events = {}
   for (const e of doc.events ?? []) {
@@ -674,6 +659,7 @@ function formatSchema(exportName, vueFilePath, packageRoot, props, doc, rules, r
   }
   return {
     name: exportName,
+    description: DESCRIPTIONS[exportName] ?? `OrchidUI ${exportName} component.`,
     storybook: storybookUrl(vueFilePath, packageRoot),
     props,
     events,
@@ -722,25 +708,19 @@ async function buildPackageDocs(label, indexPath, aliases, outputFile, packageRo
       const props = buildProps(raw, storyOptions)
       const rules = buildRules(props)
 
-      // Layer 1 — meta
-      const meta = formatMeta(exportName, props)
-      meta.events = (raw.events ?? []).map((e) => e.name)
-      meta.slots = (raw.slots ?? []).map((s) => s.name)
-
-      // Layer 2 — schema
+      // Layer 1 — schema
       const schema = formatSchema(exportName, vueFilePath, packageRoot, props, raw, rules, relatedComponents)
 
-      // Layer 3 — examples
+      // Layer 2 — examples
       const examplesDoc = formatExamples(exportName, examples)
 
-      fs.writeFileSync(path.join(COMPONENTS_DIR, `${exportName}.meta.json`), JSON.stringify(meta))
       fs.writeFileSync(path.join(COMPONENTS_DIR, `${exportName}.schema.json`), JSON.stringify(schema))
       fs.writeFileSync(path.join(COMPONENTS_DIR, `${exportName}.examples.json`), JSON.stringify(examplesDoc))
 
       // Slim index entry — name + description + tags only (paths are deterministic)
       indexComponents.push({
         name: exportName,
-        description: meta.description,
+        description: schema.description,
         tags: TAGS[exportName] ?? [],
       })
 
