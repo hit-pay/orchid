@@ -1,583 +1,463 @@
-import { Theme, Button, Input, Dropdown, DropdownItem, Icon, FormBuilder } from '@/orchidui-core'
+import { Theme, FormBuilder, Input, Button } from '@/orchidui-core'
 import { ref } from 'vue'
 
 export default {
   component: FormBuilder,
-  tags: ['autodocs']
-}
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: `
+FormBuilder renders a dynamic form from a \`jsonForm\` array of field config objects.
+Each config object describes one field:
 
-export const Default = {
-  args: {
-    values: {
-      range_input: [0, 100]
-    },
-    errors: {
-      card_input: ''
-    },
-    grid: {
-      xs: {
-        area: `
-          input
-          card_input
-          custom_form_input
-          simple_checkbox_input
-          checkboxes_group
-          input_2
-          custom_form_input_2
-          link_input
-          phone_number_field
-          radio_group
-          radio_group_2
-          select
-          text_area_field
-          range_input
-          time_picker_test
-          date_picker_test
-          date_picker_range_from
-          toggle_field
-        `,
-        rows: 'auto',
-        columns: '100%'
-      },
-      sm: {
-        area: `
-          input
-          card_input
-          custom_form_input
-          simple_checkbox_input
-          checkboxes_group
-          input_2
-          custom_form_input_2
-          link_input
-          phone_number_field
-          radio_group
-          radio_group_2
-          select
-          text_area_field
-          range_input
-          time_picker_test
-          date_picker_test
-          date_picker_range_from
-          toggle_field
-        `,
-        rows: 'auto',
-        columns: '100%'
-      },
-      lg: {
-        area: `
-          input card_input
-          custom_form_input simple_checkbox_input
-          checkboxes_group input_2
-          custom_form_input_2 link_input
-          phone_number_field radio_group
-          radio_group_2 select
-          text_area_field range_input
-          time_picker_test date_picker_test
-          date_picker_range_from toggle_field
-        `,
-        rows: 'auto',
-        columns: '50% 50%'
+\`\`\`js
+{
+  name: 'field_key',      // key used in values / errors objects
+  type: 'Input',          // built-in type or custom slot name
+  props: { label: '...' } // props forwarded to the field component
+}
+\`\`\`
+
+**Built-in types:** Input · CardInput · Checkbox · CheckboxesGroup · DatePicker ·
+LinkInput · NumberInput · PhoneInput · RadioGroup · RangeInput · Select ·
+SelectOptions · SectionItem · Slider · TextArea · TimePicker · Toggle
+
+**Handling updates:** listen to \`@onUpdate="(form, value) => { values[form.name] = value }"\`
+
+**Conditional visibility:** add \`show_if\`, \`show_if_value\`, \`show_if_not\`, or \`show_if_min\`
+to any field config to show/hide it based on another field's current value.
+
+**Grid layout:** pass a \`grid\` prop to arrange fields in a CSS grid.
+Each breakpoint key (\`xs\`, \`sm\`, \`lg\`, …) takes \`{ area, rows, columns }\`.
+
+**Custom field types:** any unknown \`type\` falls through to a slot named after the type.
+The slot receives \`{ form, value, error, on-update }\`.
+        `.trim()
       }
     }
-  },
+  }
+}
+
+// ── Helper used in every story ────────────────────────────────────────────────
+
+// Standard onUpdate handler — updates the values ref when any field changes.
+// Use this in every FormBuilder setup() to keep the form reactive.
+const makeUpdateHandler = (values) => (form, value) => {
+  if (typeof form.name === 'object') {
+    form.name.forEach((formName, i) => { values.value[formName.key] = value[i] })
+  } else {
+    values.value[form.name] = value
+  }
+}
+
+// ── Story 1: Basic ────────────────────────────────────────────────────────────
+
+/**
+ * Minimal form with a few common field types.
+ * Shows the simplest possible FormBuilder usage — no grid, no conditions.
+ */
+export const Basic = {
   render: (args) => ({
-    components: {
-      Theme,
-      FormBuilder,
-      Button,
-      Input,
-      Dropdown,
-      DropdownItem,
-      Icon
-    },
+    components: { Theme, FormBuilder },
     setup() {
-      const values = ref(args.values)
-      const errors = ref(args.errors)
+      const values = ref({ toggle: false })
+      const errors = ref({})
+      const onUpdate = makeUpdateHandler(values)
 
-      const onUpdateForm = (form, value = null) => {
-        if (typeof form.name === 'object') {
-          form.name.forEach((formName, index) => {
-            values.value[formName.key] = value[index]
-          })
-        } else {
-          values.value[form.name] = value
-        }
-      }
-
-      const isOpenedDropdown = ref(false)
-
-      const SampleJsonForm = [
+      const form = [
         {
-          name: 'input',
-          key: 'input',
+          name: 'full_name',
           type: 'Input',
-          props: {
-            label: 'Example Label',
-            hint: 'This is a hint text to help user',
-            placeholder: 'placeholder'
-          }
+          props: { label: 'Full name', placeholder: 'Jane Doe' }
         },
         {
-          name: 'card_input',
-          key: 'card_input',
-          type: 'CardInput',
-          rule: 'required',
-          props: {
-            label: 'Example Label',
-            hint: 'This is a hint text to help user',
-            placeholder: 'placeholder',
-            isInlineLabel: false,
-            isDisabled: false,
-            cardType: 'mastercard'
-          }
-        },
-        {
-          key: 'custom_form_input',
-          name: 'custom_form_input',
-          type: 'CustomFormInput'
-        },
-        {
-          name: 'simple_checkbox_input',
-          key: 'simple_checkbox_input',
-          type: 'Checkbox',
-          props: {
-            label: 'Text'
-          }
-        },
-        {
-          name: 'checkboxes_group',
-          key: 'checkboxes_group',
-          type: 'CheckboxesGroup',
-          rule: 'required',
-          props: {
-            label: 'Example Label',
-            hint: 'This is a hint text to help user',
-            alignment: 'vertical',
-            checkboxes: [
-              { label: 'Text', value: 0 },
-              { label: 'Text', value: 1 },
-              { label: 'Text', value: 2, isDisabled: true }
-            ]
-          }
-        },
-        {
-          name: 'input_2',
+          name: 'email',
           type: 'Input',
-          key: 'input_2',
-          props: {
-            label: 'Example Label',
-            hint: 'This is a hint text to help user',
-            placeholder: 'placeholder',
-            icon: 'circle'
-          }
+          props: { label: 'Email', placeholder: 'jane@example.com' }
         },
         {
-          name: 'custom_form_input_2',
-          key: 'custom_form_input_2',
-          type: 'CustomFormInput2'
-        },
-        {
-          name: 'link_input',
-          type: 'LinkInput',
-          key: 'link_input',
-          props: {
-            hint: 'This is a hint text to help user.',
-            label: 'Social',
-            links: [
-              {
-                value: 'instagram',
-                label: 'Instagram',
-                icon: 'instagram',
-                preFill: 'https://instagram.com/'
-              },
-              {
-                value: 'twitter',
-                label: 'Twitter',
-                icon: 'twitter',
-                preFill: 'https://twitter.com/'
-              }
-            ]
-          }
-        },
-        {
-          name: 'radio_group',
-          key: 'radio_group',
-          type: 'RadioGroup',
-          props: {
-            groupName: 'unique_group_name_1',
-            label: 'Example Label',
-            hint: 'This is a hint text to help user',
-            placeholder: 'placeholder',
-            radio: [
-              { label: 'Text', value: '0' },
-              { label: 'Text', value: '1' },
-              { label: 'Text', value: '2' },
-              { label: 'Text', value: '3' },
-              { label: 'is Disabled', value: '4', isDisabled: true }
-            ]
-          }
-        },
-        {
-          name: 'radio_group_2',
-          key: 'radio_group_2',
-          type: 'RadioGroup',
-          props: {
-            groupName: 'unique_group_name_2',
-            label: 'Example Label',
-            hint: 'This is a hint text to help user',
-            placeholder: 'placeholder',
-            radio: [
-              { label: 'Text 2', value: '0' },
-              { label: 'Text 2', value: '1' },
-              { label: 'Text 2', value: '2' },
-              { label: 'Text', value: '3' },
-              { label: 'is Disabled', value: '4', isDisabled: true }
-            ]
-          }
-        },
-        {
-          name: 'select',
-          key: 'select',
+          name: 'plan',
           type: 'Select',
           props: {
-            label: 'Example Label',
-            hint: 'This is a hint text to help user',
-            placeholder: 'placeholder',
-            isFilterable: true,
-            isAddNew: true,
-            multiple: true,
+            label: 'Plan',
+            placeholder: 'Choose a plan',
             options: [
-              { label: 'Option 1', value: 1 },
-              { label: 'Option 2', value: 2 },
-              { label: 'Option 3', value: 3 },
-              { label: 'Option 4', value: 4 }
+              { label: 'Free', value: 'free' },
+              { label: 'Pro', value: 'pro' },
+              { label: 'Enterprise', value: 'enterprise' }
             ]
           }
         },
         {
-          name: 'text_area_field',
-          key: 'text_area_field',
-          type: 'Textarea',
-          props: {
-            label: 'Example Label',
-            hint: 'This is a hint text to help user',
-            placeholder: 'placeholder'
-          }
-        },
-        {
-          name: 'range_input',
-          key: 'range_input',
-          type: 'RangeInput',
-          props: {
-            label: 'Example Label',
-            hint: 'This is a hint text to help user',
-            placeholder: 'placeholder'
-          }
-        },
-        {
-          name: 'time_picker_test',
-          key: 'time_picker_test',
-          type: 'TimePicker',
-          props: {
-            label: 'Example Label',
-            hint: 'This is a hint text to help user',
-            placeholder: 'placeholder'
-          }
-        },
-        {
-          name: 'date_picker_test',
-          type: 'DatePicker',
-          props: {
-            label: 'Example Label',
-            hint: 'This is a hint text to help user',
-            placeholder: 'placeholder'
-          }
-        },
-        {
-          name: [
-            { key: 'date_picker_range_from', rule: 'required' },
-            { key: 'date_picker_range_to', rule: 'required' }
-          ],
-          type: 'DatePicker',
-          props: {
-            type: 'range',
-            label: 'Example Label',
-            hint: 'This is a hint text to help user',
-            placeholder: 'placeholder'
-          }
-        },
-        {
-          name: 'toggle_field',
-          key: 'toggle_field',
-          type: 'Toggle'
+          name: 'toggle',
+          type: 'Toggle',
+          props: { label: 'Enable notifications' }
         }
       ]
 
-      return {
-        args,
-        values,
-        errors,
-        onUpdateForm,
-        isOpenedDropdown,
-        SampleJsonForm
-      }
+      return { values, errors, onUpdate, form }
     },
     template: `
       <Theme class="p-8">
         <FormBuilder
-          id="form-builder"
-          class="gap-5"
-          :errors="errors"
-          :grid="args.grid"
+          id="basic-form"
+          class="flex flex-col gap-4"
+          :json-form="form"
           :values="values"
-          :json-form="SampleJsonForm"
-          @onUpdate="onUpdateForm"
-        >
-          <template #CustomFormInput="{form, value, error}">
-            <div class="flex items-center md:col-span-2 border-2 p-3">
-              <label class="mr-3">This custom form input</label>
-              <Button @click="onUpdateForm(form, '1')">Set Value to (1)</Button>
-              <span>{{ error }}</span>
-            </div>
-          </template>
-          <template #CustomFormInput2="{form, value, error}">
-            <Input
-              label="Custom Form Input 2"
-              hint="This is a hint text to help user"
-              :model-value="value"
-              :error-message="error"
-              @update:model-value="onUpdateForm(form, $event)"
-            >
-              <template #trailing>
-                <Dropdown v-model="isOpenedDropdown">
-                  <template #menu>
-                    <div class="flex p-2 flex-col">
-                      <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
-                      <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
-                      <DropdownItem text="Menu" icon="pencil" @click="isOpenedDropdown=false"/>
-                    </div>
-                  </template>
-                  <div class="text-sm font-medium flex items-center gap-x-2 text-oc-text-400">
-                    <span class="flex items-center text-sm">USD</span>
-                    <Icon class="w-[14px] h-[14px]" name="chevron-down"/>
-                  </div>
-                </Dropdown>
-              </template>
-            </Input>
-          </template>
-        </FormBuilder>
+          :errors="errors"
+          @on-update="onUpdate"
+        />
       </Theme>
     `
   })
 }
 
-export const ShowIfLogic = {
-  args: {
-    values: {
-      select_product_from: 'all_product',
-      limit_feature_product: false,
-      other_value: false,
-      slider: 10
-    },
-    errors: {}
-  },
+// ── Story 2: AllFieldTypes ────────────────────────────────────────────────────
+
+/**
+ * Showcases every built-in field type available in FormBuilder.
+ * Use this as a reference when deciding which `type` string to use.
+ */
+export const AllFieldTypes = {
   render: (args) => ({
     components: { Theme, FormBuilder },
     setup() {
-      const values = ref(args.values)
-      const errors = ref(args.errors)
+      const values = ref({ range: [0, 100], slider: 50 })
+      const errors = ref({})
+      const onUpdate = makeUpdateHandler(values)
 
-      const onUpdateForm = (form, value = null) => {
-        console.log('onUpdateForm', form, value)
-        if (typeof form.name === 'object') {
-          form.name.forEach((formName, index) => {
-            values.value[formName.key] = value[index]
-          })
-        } else {
-          values.value[form.name] = value
-        }
-      }
-
-      const JsonForm = [
-        {
-          name: 'select_product_from_section',
-          type: 'SectionItem',
-          props: { title: 'Select product from' }
-        },
-        {
-          name: 'select_product_from',
-          type: 'Select',
-          props: {
-            options: [
-              { value: 'feature', label: 'Feature product' },
-              { value: 'all_product', label: 'All product' },
-              { value: 'product_category', label: 'Product Category' },
-              { value: 'pick_products', label: 'Pick Products' }
-            ],
-            hint: 'Learn how to make featured products here.'
-          }
-        },
-        {
-          name: 'limit_feature_product',
-          type: 'SectionItem',
-          props: { title: 'Limit product', isToggle: true }
-        },
-        {
-          name: 'other_value',
-          type: 'SectionItem',
-          props: { title: 'Other value', isToggle: true }
-        },
+      const form = [
         {
           name: 'input',
           type: 'Input',
-          show_if: 'limit_feature_product',
-          show_if_value: true,
+          props: { label: 'Input', placeholder: 'Text input' }
+        },
+        {
+          name: 'number',
+          type: 'NumberInput',
+          props: { label: 'NumberInput' }
+        },
+        {
+          name: 'textarea',
+          type: 'TextArea',
+          props: { label: 'TextArea', placeholder: 'Multi-line text' }
+        },
+        {
+          name: 'select',
+          type: 'Select',
           props: {
-            label: 'show if limit product',
-            placeholder: 'placeholder'
+            label: 'Select',
+            options: [
+              { label: 'Option A', value: 'a' },
+              { label: 'Option B', value: 'b' }
+            ]
           }
         },
         {
-          name: 'input_2',
-          type: 'Input',
-          show_if: ['limit_feature_product', 'other_value'],
-          show_if_value: [true, true],
+          name: 'multi_select',
+          type: 'Select',
           props: {
-            label: 'show if limit product & other value?',
-            placeholder: 'placeholder'
+            label: 'Select (multiple)',
+            multiple: true,
+            isFilterable: true,
+            options: [
+              { label: 'Option A', value: 'a' },
+              { label: 'Option B', value: 'b' },
+              { label: 'Option C', value: 'c' }
+            ]
           }
+        },
+        {
+          name: 'checkbox',
+          type: 'Checkbox',
+          props: { label: 'Single checkbox' }
+        },
+        {
+          name: 'checkboxes',
+          type: 'CheckboxesGroup',
+          props: {
+            label: 'CheckboxesGroup',
+            checkboxes: [
+              { label: 'Option A', value: 'a' },
+              { label: 'Option B', value: 'b' }
+            ]
+          }
+        },
+        {
+          name: 'radio',
+          type: 'RadioGroup',
+          props: {
+            label: 'RadioGroup',
+            groupName: 'radio_story',
+            radio: [
+              { label: 'Option A', value: 'a' },
+              { label: 'Option B', value: 'b' }
+            ]
+          }
+        },
+        {
+          name: 'toggle',
+          type: 'Toggle',
+          props: { label: 'Toggle' }
+        },
+        {
+          name: 'date',
+          type: 'DatePicker',
+          props: { label: 'DatePicker' }
+        },
+        {
+          name: 'time',
+          type: 'TimePicker',
+          props: { label: 'TimePicker' }
+        },
+        {
+          name: 'phone',
+          type: 'PhoneInput',
+          props: { label: 'PhoneInput' }
+        },
+        {
+          name: 'card',
+          type: 'CardInput',
+          props: { label: 'CardInput', placeholder: '•••• •••• •••• ••••' }
+        },
+        {
+          name: 'range',
+          type: 'RangeInput',
+          props: { label: 'RangeInput' }
         },
         {
           name: 'slider',
           type: 'Slider',
-          props: {
-            label: 'How many featured products do you want to show?',
-            minGap: 0,
-            minLimit: 0,
-            maxLimit: 100,
-            type: 'default'
-          }
+          props: { label: 'Slider', minLimit: 0, maxLimit: 100 }
         },
         {
-          name: 'column',
-          type: 'Select',
-          props: {
-            label: 'Select Columns',
-            class: 'w-full lg:w-1/3',
-            options: [
-              { value: '1', label: '1 Column' },
-              { value: '2', label: '2 Column' },
-              { value: '3', label: '3 Column' }
-            ],
-            hint: 'Learn how to make featured products here.'
-          }
-        },
-        {
-          name: 'Content2',
-          type: 'Children',
-          show_if: 'columns',
-          show_if_min: '2',
-          label: 'Content Column 2',
-          children: [
-            {
-              name: 'title_2',
-              type: 'Input',
-              props: { label: 'Title', placeholder: 'Title' }
-            }
-          ]
-        },
-        {
-          name: 'input_column_1',
-          type: 'Input',
-          show_if: 'column',
-          show_if_min: '1',
-          props: {
-            label: 'This will show if column > 1',
-            placeholder: 'placeholder'
-          }
-        },
-        {
-          name: 'input_column_2',
-          type: 'Input',
-          show_if: 'column',
-          show_if_min: '2',
-          props: {
-            label: 'This will show if column > 2',
-            placeholder: 'placeholder'
-          }
-        },
-        {
-          name: 'input_column_3',
-          type: 'Input',
-          show_if: 'column',
-          show_if_min: '3',
-          props: {
-            label: 'This will show if column > 3',
-            placeholder: 'placeholder'
-          }
-        },
-        {
-          name: 'multiple_select_options',
-          type: 'Select',
-          props: {
-            label: 'Trigger Show if images is not empty',
-            multiple: true,
-            options: [
-              { value: '1', label: 'Option 1' },
-              { value: '2', label: 'Option 2' },
-              { value: '3', label: 'Option 3' }
-            ]
-          }
-        },
-        {
-          name: 'select_options',
-          type: 'SelectOptions',
-          show_if: ['multiple_select_options'],
-          show_if_value: ['arrayExist'],
-          props: {
-            isSmallImage: true,
-            label: 'Trigger Show if select options is not empty',
-            options: [
-              { preview: '/images/request-form.svg', label: 'Option 1', value: 1 },
-              { preview: '/images/request-form.svg', label: 'Option 2', value: 2 },
-              { preview: '/images/request-form.svg', label: 'Option 3', value: 3 }
-            ]
-          }
-        },
-        {
-          name: 'select_options_1',
-          type: 'SelectOptions',
-          show_if: ['multiple_select_options'],
-          show_if_value: ['arrayExist'],
-          props: {
-            isSmallImage: true,
-            label: 'Trigger Show if select options is not empty',
-            options: [
-              { preview: '/images/request-form.svg', label: 'Option 1', value: 1 },
-              { preview: '/images/request-form.svg', label: 'Option 2', value: 2 },
-              { preview: '/images/request-form.svg', label: 'Option 3', value: 3 }
-            ]
-          }
+          name: 'section_divider',
+          type: 'SectionItem',
+          props: { title: 'SectionItem — used as a divider / toggle row' }
         }
       ]
 
-      return { JsonForm, args, values, errors, onUpdateForm }
+      return { values, errors, onUpdate, form }
     },
     template: `
       <Theme class="p-8">
-        <div class="mb-10 pb-10 border-b">
-          {{ values }}
-        </div>
-
         <FormBuilder
-          id="form-builder"
-          class="grid gap-4"
-          :errors="errors"
+          id="all-fields-form"
+          class="flex flex-col gap-4"
+          :json-form="form"
           :values="values"
-          :json-form="JsonForm"
-          @onUpdate="onUpdateForm"
+          :errors="errors"
+          @on-update="onUpdate"
+        />
+      </Theme>
+    `
+  })
+}
+
+// ── Story 3: TwoColumnGrid ────────────────────────────────────────────────────
+
+/**
+ * Two-column layout on desktop, single column on mobile using the `grid` prop.
+ * Field names must match the area names defined in `grid.lg.area`.
+ */
+export const TwoColumnGrid = {
+  render: (args) => ({
+    components: { Theme, FormBuilder },
+    setup() {
+      const values = ref({})
+      const errors = ref({})
+      const onUpdate = makeUpdateHandler(values)
+
+      const grid = {
+        xs: { area: `first_name\nlast_name\nemail\nphone`, rows: 'auto', columns: '100%' },
+        lg: { area: `first_name last_name\nemail phone`, rows: 'auto', columns: '50% 50%' }
+      }
+
+      const form = [
+        {
+          name: 'first_name',
+          type: 'Input',
+          props: { label: 'First name', placeholder: 'Jane' }
+        },
+        {
+          name: 'last_name',
+          type: 'Input',
+          props: { label: 'Last name', placeholder: 'Doe' }
+        },
+        {
+          name: 'email',
+          type: 'Input',
+          props: { label: 'Email', placeholder: 'jane@example.com' }
+        },
+        {
+          name: 'phone',
+          type: 'PhoneInput',
+          props: { label: 'Phone number' }
+        }
+      ]
+
+      return { values, errors, onUpdate, grid, form }
+    },
+    template: `
+      <Theme class="p-8">
+        <FormBuilder
+          id="grid-form"
+          class="gap-4"
+          :json-form="form"
+          :values="values"
+          :errors="errors"
+          :grid="grid"
+          @on-update="onUpdate"
+        />
+      </Theme>
+    `
+  })
+}
+
+// ── Story 4: ConditionalFields ────────────────────────────────────────────────
+
+/**
+ * Fields with `show_if` rules are hidden/shown based on other field values.
+ *
+ * Rule properties on a field config:
+ * - `show_if: 'field_name'` — watch this field's value
+ * - `show_if_value: value` — show when the watched field equals this value
+ * - `show_if_not: value` — show when the watched field does NOT equal this value
+ * - `show_if_min: number` — show when the watched field's value is >= this number
+ * - `show_if: string[]` + `show_if_value: value[]` — watch multiple fields (AND logic)
+ */
+export const ConditionalFields = {
+  render: (args) => ({
+    components: { Theme, FormBuilder },
+    setup() {
+      const values = ref({ delivery_method: 'pickup' })
+      const errors = ref({})
+      const onUpdate = makeUpdateHandler(values)
+
+      const form = [
+        {
+          name: 'delivery_method',
+          type: 'Select',
+          props: {
+            label: 'Delivery method',
+            options: [
+              { label: 'Pickup', value: 'pickup' },
+              { label: 'Delivery', value: 'delivery' }
+            ]
+          }
+        },
+        // Only shown when delivery_method === 'delivery'
+        {
+          name: 'address',
+          type: 'Input',
+          show_if: 'delivery_method',
+          show_if_value: 'delivery',
+          props: { label: 'Delivery address', placeholder: '123 Main St' }
+        },
+        {
+          name: 'city',
+          type: 'Input',
+          show_if: 'delivery_method',
+          show_if_value: 'delivery',
+          props: { label: 'City' }
+        },
+        {
+          name: 'enable_express',
+          type: 'SectionItem',
+          props: { title: 'Express delivery', isToggle: true }
+        },
+        // Only shown when both delivery + express are selected
+        {
+          name: 'express_note',
+          type: 'Input',
+          show_if: ['delivery_method', 'enable_express'],
+          show_if_value: ['delivery', true],
+          props: { label: 'Express delivery note', placeholder: 'e.g. leave at door' }
+        }
+      ]
+
+      return { values, errors, onUpdate, form }
+    },
+    template: `
+      <Theme class="p-8">
+        <div class="mb-6 p-3 bg-oc-bg-2 rounded text-sm text-oc-text-400">
+          Current values: {{ values }}
+        </div>
+        <FormBuilder
+          id="conditional-form"
+          class="flex flex-col gap-4"
+          :json-form="form"
+          :values="values"
+          :errors="errors"
+          @on-update="onUpdate"
+        />
+      </Theme>
+    `
+  })
+}
+
+// ── Story 5: CustomSlot ───────────────────────────────────────────────────────
+
+/**
+ * Any field with an unknown `type` falls through to a named slot.
+ * The slot name equals the `type` string (e.g. `type: 'CustomWidget'` → `#CustomWidget`).
+ *
+ * Slot bindings available:
+ * - `form` — the full field config object
+ * - `value` — current field value
+ * - `error` — current error message
+ * - `on-update` — call as `on-update(form, newValue)` to emit the change
+ */
+export const CustomSlot = {
+  render: (args) => ({
+    components: { Theme, FormBuilder, Input, Button },
+    setup() {
+      const values = ref({})
+      const errors = ref({})
+      const onUpdate = makeUpdateHandler(values)
+
+      const form = [
+        {
+          name: 'username',
+          type: 'Input',
+          props: { label: 'Username', placeholder: 'john_doe' }
+        },
+        // 'AvatarPicker' is not a built-in type — rendered via the #AvatarPicker slot
+        {
+          name: 'avatar_url',
+          type: 'AvatarPicker',
+          props: { label: 'Avatar' }
+        }
+      ]
+
+      return { values, errors, onUpdate, form }
+    },
+    template: `
+      <Theme class="p-8">
+        <FormBuilder
+          id="custom-slot-form"
+          class="flex flex-col gap-4"
+          :json-form="form"
+          :values="values"
+          :errors="errors"
+          @on-update="onUpdate"
         >
-          <template #Children="{form}">{{form}}</template>
+          <!-- Custom renderer for the 'AvatarPicker' type -->
+          <template #AvatarPicker="{ form, value, error, onUpdate }">
+            <div class="flex flex-col gap-2">
+              <label class="text-sm font-medium">{{ form.props.label }}</label>
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-full bg-oc-bg-2 flex items-center justify-center text-xs text-oc-text-400">
+                  {{ value ? '✓' : '?' }}
+                </div>
+                <Button variant="secondary" @click="onUpdate(form, 'https://example.com/avatar.jpg')">
+                  Choose avatar
+                </Button>
+              </div>
+              <span v-if="error" class="text-sm text-oc-error">{{ error }}</span>
+            </div>
+          </template>
         </FormBuilder>
       </Theme>
     `
