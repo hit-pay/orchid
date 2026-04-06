@@ -11,7 +11,6 @@ export function storybookUrl(vueFilePath, packageRoot) {
 // Extract string-literal enum values from a vue-component-meta schema node.
 // PropertyMetaSchema enum: { kind: 'enum', type: string, schema?: PropertyMetaSchema[] }
 // Each item in schema[] is either a quoted string literal ("'primary'") or a nested schema.
-// Returns string[] or null if not applicable.
 function extractEnumValues(schema) {
   if (!schema || typeof schema === 'string' || schema.kind !== 'enum') return null
   if (!schema.schema?.length) return null
@@ -29,7 +28,6 @@ export function buildProps(meta, storyOptions) {
     // Skip Vue built-ins (key, ref, class, style, onXxx…)
     if (prop.global) continue
 
-    // Enum values: prefer schema-derived, fall back to story argTypes options
     const schemaValues = extractEnumValues(prop.schema)
     const storyValues  = storyOptions[prop.name]?.length > 0 ? storyOptions[prop.name] : null
     const values = schemaValues ?? storyValues
@@ -63,7 +61,36 @@ export function buildRules(props) {
   return rules
 }
 
-export function formatSchema(exportName, vueFilePath, packageRoot, props, meta, rules, relatedComponents) {
+// Merge manual schema overrides (from lib/component-docs/) on top of the auto-generated schema.
+// Supports overriding individual prop fields (type, description, itemShape) and
+// adding/overriding events and slots.
+function applySchemaOverrides(schema, overrides) {
+  if (!overrides) return schema
+
+  const result = { ...schema }
+
+  if (overrides.props) {
+    result.props = { ...schema.props }
+    for (const [name, override] of Object.entries(overrides.props)) {
+      result.props[name] = { ...(schema.props[name] ?? {}), ...override }
+    }
+  }
+
+  if (overrides.events) {
+    result.events = { ...schema.events }
+    for (const [name, override] of Object.entries(overrides.events)) {
+      result.events[name] = { ...(schema.events[name] ?? {}), ...override }
+    }
+  }
+
+  if (overrides.slots) {
+    result.slots = { ...schema.slots, ...overrides.slots }
+  }
+
+  return result
+}
+
+export function formatSchema(exportName, vueFilePath, packageRoot, props, meta, rules, relatedComponents, overrides) {
   const events = {}
   for (const e of meta.events ?? []) {
     events[e.name] = {
@@ -80,7 +107,7 @@ export function formatSchema(exportName, vueFilePath, packageRoot, props, meta, 
     }
   }
 
-  return {
+  const schema = {
     name: exportName,
     description: DESCRIPTIONS[exportName] ?? `OrchidUI ${exportName} component.`,
     storybook: storybookUrl(vueFilePath, packageRoot),
@@ -90,8 +117,12 @@ export function formatSchema(exportName, vueFilePath, packageRoot, props, meta, 
     rules,
     relatedComponents,
   }
+
+  return applySchemaOverrides(schema, overrides?.schemaOverrides)
 }
 
-export function formatExamples(exportName, examples) {
+export function formatExamples(exportName, autoExamples, overrides) {
+  // Manual examples replace auto-generated ones entirely when provided
+  const examples = overrides?.examples ?? autoExamples
   return { component: exportName, examples }
 }
