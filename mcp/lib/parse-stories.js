@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { buildSFCCode } from './sfc-builder.js'
+import { buildSFCCode, extractBacktickByKey } from './sfc-builder.js'
 
 function extractBalanced(str, startPos) {
   let depth = 0
@@ -13,6 +13,22 @@ function extractBalanced(str, startPos) {
     i++
   }
   return null
+}
+
+// Extract a simple quoted string property: description: 'foo' or description: "foo"
+function extractStringProp(block, key) {
+  const m = block.match(new RegExp(`\\b${key}\\s*:\\s*['"]([^'"\\r\\n]+)['"]`))
+  return m ? m[1] : null
+}
+
+// Extract a flat string array property: highlights: ['a', 'b']
+function extractStringArrayProp(block, key) {
+  const m = block.match(new RegExp(`\\b${key}\\s*:\\s*(\\[[^\\]]*\\])`))
+  if (!m) return null
+  try {
+    const arr = new Function('return ' + m[1])()
+    return Array.isArray(arr) && arr.length ? arr : null
+  } catch { return null }
 }
 
 export function parseStoryOptions(vueFilePath) {
@@ -49,25 +65,39 @@ export function parseStoryExamples(vueFilePath) {
     const storyObj = extractBalanced(content, storyStart)
     if (!storyObj) continue
 
-    let args = {}
-    const argsIdx = storyObj.search(/\bargs\s*:\s*\{/)
-    if (argsIdx !== -1) {
-      const bracePos = storyObj.indexOf('{', argsIdx)
-      const argsStr = extractBalanced(storyObj, bracePos)
-      if (argsStr) {
-        try {
-          args = new Function('return ' + argsStr)() ?? {}
-        } catch { args = {} }
+    // ── Prefer explicit `code: \`` property (full hand-written SFC snippet) ──
+    const manualSnippet = extractBacktickByKey(storyObj, 'code')
+
+    // ── Fall back to sfc-builder if no manual code ───────────────────────────
+    let snippet = manualSnippet
+    if (!snippet) {
+      let args = {}
+      const argsIdx = storyObj.search(/\bargs\s*:\s*\{/)
+      if (argsIdx !== -1) {
+        const bracePos = storyObj.indexOf('{', argsIdx)
+        const argsStr = extractBalanced(storyObj, bracePos)
+        if (argsStr) {
+          try { args = new Function('return ' + argsStr)() ?? {} } catch { args = {} }
+        }
       }
+      snippet = buildSFCCode(storyObj, args) ?? null
     }
 
-    const code = buildSFCCode(storyObj, args)
+    if (!snippet) continue
 
-    if (code) {
-      const id = name.replace(/([A-Z])/g, (c, i) => (i === 0 ? c.toLowerCase() : '-' + c.toLowerCase()))
-      const title = name.replace(/([A-Z])/g, (c, i) => (i === 0 ? c : ' ' + c))
-      examples.push({ id, title, code: { language: 'vue', snippet: code } })
-    }
+    const id    = name.replace(/([A-Z])/g, (c, i) => (i === 0 ? c.toLowerCase() : '-' + c.toLowerCase()))
+    const title = name.replace(/([A-Z])/g, (c, i) => (i === 0 ? c : ' ' + c))
+
+    const description = extractStringProp(storyObj, 'description')
+    const highlights  = extractStringArrayProp(storyObj, 'highlights')
+
+    examples.push({
+      id,
+      title,
+      ...(description && { description }),
+      ...(highlights  && { highlights }),
+      code: { language: 'vue', snippet }
+    })
   }
 
   return examples

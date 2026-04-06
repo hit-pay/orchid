@@ -90,11 +90,48 @@ function getUsedOrchidComponents(template) {
   return used
 }
 
+// Generic backtick string extractor for any property name.
+// Handles escaped chars and ${...} expressions inside the template literal.
+export function extractBacktickByKey(block, key) {
+  const pattern = new RegExp(`\\b${key}\\s*:\\s*\``)
+  const idx = block.search(pattern)
+  if (idx === -1) return null
+
+  // find the actual backtick that opens the string
+  const colonIdx = block.indexOf(':', block.indexOf(key, idx))
+  const start = block.indexOf('`', colonIdx) + 1
+  let i = start
+  const result = []
+
+  while (i < block.length) {
+    const ch = block[i]
+    if (ch === '`') break
+    if (ch === '\\') { result.push(ch, block[i + 1] ?? ''); i += 2; continue }
+    if (ch === '$' && block[i + 1] === '{') {
+      result.push('${')
+      i += 2
+      let depth = 1
+      while (i < block.length && depth > 0) {
+        if (block[i] === '{') depth++
+        else if (block[i] === '}') depth--
+        if (depth > 0) result.push(block[i])
+        i++
+      }
+      result.push('}')
+      continue
+    }
+    result.push(ch)
+    i++
+  }
+
+  return result.join('').trim()
+}
+
 export function extractBacktickTemplate(block) {
   const idx = block.search(/template\s*:\s*`/)
   if (idx === -1) return null
 
-  const start = block.indexOf('`', idx) + 1
+  const start = block.indexOf('`', block.indexOf(':', idx)) + 1
   let i = start
   const result = []
 

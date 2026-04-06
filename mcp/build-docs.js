@@ -17,7 +17,6 @@ import { TAGS } from './lib/component-meta.js'
 import { parseIndexFile } from './lib/parse-index.js'
 import { parseStoryOptions, parseStoryExamples, parseStoryRelatedComponents } from './lib/parse-stories.js'
 import { buildProps, buildRules, formatSchema, formatExamples } from './lib/format-docs.js'
-import { COMPONENT_DOCS } from './lib/component-docs/index.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ORCHID_ROOT    = path.resolve(__dirname, '..')
@@ -95,13 +94,11 @@ async function buildPackageDocs(label, indexPath, aliases, outputFile, packageRo
       const examples = parseStoryExamples(vueFilePath)
       const relatedComponents = parseStoryRelatedComponents(vueFilePath, exportName)
 
-      const overrides = COMPONENT_DOCS[exportName]
-
       const props = buildProps(meta, storyOptions)
       const rules = buildRules(props)
 
-      const schema = formatSchema(exportName, vueFilePath, packageRoot, props, meta, rules, relatedComponents, overrides)
-      const examplesDoc = formatExamples(exportName, examples, overrides)
+      const schema = formatSchema(exportName, vueFilePath, packageRoot, props, meta, rules, relatedComponents)
+      const examplesDoc = formatExamples(exportName, examples)
 
       fs.writeFileSync(path.join(COMPONENTS_DIR, `${exportName}.schema.json`), JSON.stringify(schema))
       fs.writeFileSync(path.join(COMPONENTS_DIR, `${exportName}.examples.json`), JSON.stringify(examplesDoc))
