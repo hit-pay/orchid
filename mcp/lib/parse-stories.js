@@ -85,8 +85,8 @@ export function parseStoryExamples(vueFilePath) {
 
     if (!snippet) continue
 
-    const id    = name.replace(/([A-Z])/g, (c, i) => (i === 0 ? c.toLowerCase() : '-' + c.toLowerCase()))
-    const title = name.replace(/([A-Z])/g, (c, i) => (i === 0 ? c : ' ' + c))
+    const id    = name.replace(/[A-Z]/g, (c, offset) => (offset === 0 ? c.toLowerCase() : '-' + c.toLowerCase()))
+    const title = name.replace(/[A-Z]/g, (c, offset) => (offset === 0 ? c : ' ' + c))
 
     const description = extractStringProp(storyObj, 'description')
     const highlights  = extractStringArrayProp(storyObj, 'highlights')

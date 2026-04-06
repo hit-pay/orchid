@@ -61,7 +61,7 @@ export function buildRules(props) {
   return rules
 }
 
-export function formatSchema(exportName, vueFilePath, packageRoot, props, meta, rules, relatedComponents) {
+export function formatSchema(exportName, vueFilePath, packageRoot, props, meta, rules, relatedComponents, patches) {
   const events = {}
   for (const e of meta.events ?? []) {
     events[e.name] = {
@@ -87,6 +87,25 @@ export function formatSchema(exportName, vueFilePath, packageRoot, props, meta, 
     slots,
     rules,
     relatedComponents,
+  }
+
+  if (!patches) return schema
+
+  // Apply inline patches: merge each prop/event/slot entry rather than replacing the whole object
+  if (patches.props) {
+    for (const [name, patch] of Object.entries(patches.props)) {
+      schema.props[name] = { ...(schema.props[name] ?? {}), ...patch }
+    }
+  }
+  if (patches.events) {
+    for (const [name, patch] of Object.entries(patches.events)) {
+      schema.events[name] = { ...(schema.events[name] ?? {}), ...patch }
+    }
+  }
+  if (patches.slots) {
+    for (const [name, patch] of Object.entries(patches.slots)) {
+      schema.slots[name] = { ...(schema.slots[name] ?? {}), ...patch }
+    }
   }
 
   return schema

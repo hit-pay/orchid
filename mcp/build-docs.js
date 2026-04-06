@@ -18,6 +18,46 @@ import { parseIndexFile } from './lib/parse-index.js'
 import { parseStoryOptions, parseStoryExamples, parseStoryRelatedComponents } from './lib/parse-stories.js'
 import { buildProps, buildRules, formatSchema, formatExamples } from './lib/format-docs.js'
 
+/**
+ * Inline schema patches for things vue-component-meta cannot infer:
+ * - Array item shapes (no TypeScript generics in JS props)
+ * - Event descriptions (defineEmits JSDoc is not read)
+ * - Slot documentation (template HTML comments are not read)
+ *
+ * Each key is a component export name. Supports: props, events, slots.
+ * Prop patches are merged (not replaced) so auto-generated fields are preserved.
+ */
+const SCHEMA_PATCHES = {
+  FormBuilder: {
+    props: {
+      jsonForm: {
+        type: 'FormField[]',
+        itemShape: {
+          name: 'string | Array<{ key: string }>',
+          type: 'string — built-in types: Input, NumberInput, TextArea, PhoneInput, CardInput, Select, Checkbox, CheckboxesGroup, RadioGroup, Toggle, DatePicker, TimePicker, RangeInput, Slider, SectionItem, LinkInput, SelectOptions',
+          props: 'Record<string, any> — forwarded to the field component',
+          defaultValue: 'any — initial value for this field',
+          show_if: 'string | string[] — field name(s) that control visibility',
+          show_if_value: 'any | any[] — required value(s) of show_if field(s) to show this field',
+          show_if_not: 'any — hide this field when show_if field equals this value',
+          show_if_min: 'number | string — show this field when show_if field is >= this value'
+        }
+      }
+    },
+    events: {
+      onUpdate: {
+        description: 'Emitted when any field value changes. The parent component must update values[form.name] = value externally. For range fields (name is an array), each key in form.name corresponds to the matching index in value.',
+        type: '(form: FormField, value: any) => void'
+      }
+    },
+    slots: {
+      '[type]': {
+        description: 'Dynamic slot for any field type not in the built-in list. The slot name equals the field\'s type string (e.g. use <template #MyWidget> for a field with type: "MyWidget"). Bindings: form (field config object from jsonForm), value (current field value), error (error message string), onUpdate (function(form, value) to emit the change).'
+      }
+    }
+  }
+}
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ORCHID_ROOT    = path.resolve(__dirname, '..')
 const CORE_ROOT      = path.resolve(ORCHID_ROOT, 'packages/core/src')
@@ -97,7 +137,7 @@ async function buildPackageDocs(label, indexPath, aliases, outputFile, packageRo
       const props = buildProps(meta, storyOptions)
       const rules = buildRules(props)
 
-      const schema = formatSchema(exportName, vueFilePath, packageRoot, props, meta, rules, relatedComponents)
+      const schema = formatSchema(exportName, vueFilePath, packageRoot, props, meta, rules, relatedComponents, SCHEMA_PATCHES[exportName])
       const examplesDoc = formatExamples(exportName, examples)
 
       fs.writeFileSync(path.join(COMPONENTS_DIR, `${exportName}.schema.json`), JSON.stringify(schema))
