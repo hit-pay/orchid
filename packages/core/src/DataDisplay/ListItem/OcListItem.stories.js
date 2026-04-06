@@ -1,4 +1,4 @@
-import { Theme, Button, DropdownItem, ListItem } from '@/orchidui-core'
+import { ListItem, DropdownItem, Button } from '@/orchidui-core'
 import { ref } from 'vue'
 
 export default {
@@ -6,305 +6,249 @@ export default {
   tags: ['autodocs']
 }
 
-export const Default = {
-  argTypes: {
-    icon: {
-      control: 'select',
-      options: ['backward', 'circle', 'x', '']
-    },
-    type: {
-      control: 'select',
-      options: ['timeline', 'webhook', 'payment', 'terminal', 'general', 'accordion']
-    },
-    imageSize: {
-      control: 'select',
-      options: ['small', 'default', 'big']
-    }
-  },
-  args: {
-    active: 1,
-    title: 'September, 1 2023 at 05:01PM',
-    icon: 'backward',
-    iconClass: 'text-oc-error',
-    iconText: 'SGD 130.11',
-    description: '#9a2804fc-74df-4304-a7d7-79d11f9e1db8',
-    type: 'timeline',
-    image: 'https://hitpay-staging-public.s3.ap-southeast-1.amazonaws.com/covers/small/99d696e564ba45fbaa0fb2e3b43d0e27.jpg',
-    imageSize: 'small'
-  },
-  render: (args) => ({
-    components: { Theme, ListItem },
-    setup() {
-      return { args }
-    },
+export const TimeLine = {
+  description: 'Timeline event row. Shows icon, title, amount text, and description. isActive controls the filled/empty dot.',
+  highlights: ['type="timeLine"', 'icon — icon name inside the dot', 'iconText — amount or badge text', 'isActive — filled dot when true'],
+  code: `<script setup>
+import { ListItem } from '@orchidui/core'
+</script>
+
+<template>
+  <div class="flex flex-col gap-3">
+    <ListItem
+      type="timeLine"
+      title="Sep 1, 2024 at 5:01 PM"
+      description="#9a2804fc-74df-4304-a7d7-79d11f9e1db8"
+      icon="backward"
+      icon-class="text-oc-error"
+      icon-text="SGD 130.11"
+      :is-active="true"
+    />
+    <ListItem
+      type="timeLine"
+      title="Aug 15, 2024 at 10:00 AM"
+      description="#abc123"
+      icon="check"
+      icon-text="SGD 50.00"
+      :is-active="false"
+    />
+  </div>
+</template>`,
+  render: () => ({
+    components: { ListItem },
     template: `
-      <Theme class="flex flex-col gap-5">
-        <ListItem
-          v-for="i in 5"
-          :is-active="args.active >= i"
-          :key="i"
-          :type="args.type"
-          :title="args.title"
-          :image="args.image"
-          :image-size="args.imageSize"
-          :icon="args.icon"
-          :icon-class="args.iconClass"
-          :icon-text="args.iconText"
-          :description="args.description"
-        />
-      </Theme>
+      <div class="p-6 flex flex-col gap-3">
+        <ListItem type="timeLine" title="Sep 1, 2024 at 5:01 PM" description="#9a2804fc" icon="backward" icon-class="text-oc-error" icon-text="SGD 130.11" :is-active="true" />
+        <ListItem type="timeLine" title="Aug 15, 2024 at 10:00 AM" description="#abc123" icon="check" icon-text="SGD 50.00" :is-active="false" />
+      </div>
     `
   })
 }
 
-export const ListWebhook = {
-  args: {
-    urls: [
-      {
-        url: 'https://orchid.software',
-        title: 'URL'
-      }
-    ]
-  },
-  render: (args) => ({
-    components: { Theme, ListItem, DropdownItem },
-    setup() {
-      return { args }
-    },
+export const Webhook = {
+  description: 'Webhook endpoint row with title, date, URL list, and a context menu via #menu slot.',
+  highlights: ['type="webhook"', 'urls — array of { url, title }', '#menu slot — dropdown menu items'],
+  code: `<script setup>
+import { ListItem, DropdownItem } from '@orchidui/core'
+</script>
+
+<template>
+  <ListItem
+    type="webhook"
+    title="Order Notifications"
+    date="Oct 20, 2024"
+    :urls="[{ url: 'https://myapp.com/webhooks/orders', title: 'Endpoint' }]"
+  >
+    <template #menu>
+      <div class="p-2 border-b border-gray-200">
+        <DropdownItem text="Edit"   icon="pencil" />
+        <DropdownItem text="Resend" icon="telegram" />
+      </div>
+      <div class="p-2">
+        <DropdownItem text="Delete" icon="bin" variant="destructive" />
+      </div>
+    </template>
+  </ListItem>
+</template>`,
+  render: () => ({
+    components: { ListItem, DropdownItem },
     template: `
-      <Theme class="p-10">
-        <ListItem
-          type="webhook"
-          :urls="args.urls"
-          title="Zapier Flow"
-          date="Oct, 20 2023"
-        >
+      <div class="p-6">
+        <ListItem type="webhook" title="Order Notifications" date="Oct 20, 2024" :urls="[{ url: 'https://myapp.com/webhooks/orders', title: 'Endpoint' }]">
           <template #menu>
             <div class="p-2 border-b border-gray-200">
               <DropdownItem text="Edit" icon="pencil" />
             </div>
             <div class="p-2">
-              <DropdownItem text="Delete" variant="destructive" icon="bin" />
+              <DropdownItem text="Delete" icon="bin" variant="destructive" />
             </div>
           </template>
         </ListItem>
-      </Theme>
+      </div>
     `
   })
 }
 
-export const ListLogo = {
-  args: {},
-  render: (args) => ({
-    components: { Theme, ListItem },
-    setup() {
-      return { args }
-    },
-    template: `
-      <Theme class="p-10">
-        <ListItem
-          type="logo"
-          title="Zapier Flow"
-          image="/images/partner-logo/web-delegate.png"
-        />
-      </Theme>
-    `
-  })
-}
+export const Payment = {
+  description: 'Payment method integration row. Uses #logo slot for provider image and paymentMethods for method icons.',
+  highlights: ['type="payment"', '#logo slot — provider logo', 'paymentMethods — array of { method, md } icon URLs'],
+  code: `<script setup>
+import { ListItem } from '@orchidui/core'
 
-export const ListPayment = {
-  args: {
-    title: 'Shopify',
-    paymentMethods: [
-      {
-        method: 'paynow_online',
-        svg: 'http://api.src.test/icons/methods/md/paynow.png',
-        md: 'http://api.src.test/icons/methods/md/paynow.png'
-      },
-      {
-        method: 'card',
-        svg: 'http://api.src.test/icons/methods/md/visa.png',
-        md: 'http://api.src.test/icons/methods/md/visa.png'
-      }
-    ],
-    description: 'Connected payment store'
-  },
-  render: (args) => ({
-    components: { Theme, ListItem },
-    setup() {
-      return { args }
-    },
+const paymentMethods = [
+  { method: 'visa',   md: 'https://cdn.example.com/icons/visa.png' },
+  { method: 'master', md: 'https://cdn.example.com/icons/mastercard.png' }
+]
+</script>
+
+<template>
+  <ListItem
+    type="payment"
+    title="Shopify"
+    description="Connected payment store"
+    :payment-methods="paymentMethods"
+  >
+    <template #logo>
+      <div class="rounded-sm p-2 bg-oc-accent-1-50">
+        <img src="https://cdn.example.com/icons/shopify.png" class="w-8 h-8" alt="Shopify" />
+      </div>
+    </template>
+  </ListItem>
+</template>`,
+  render: () => ({
+    components: { ListItem },
     template: `
-      <Theme class="p-10">
-        <ListItem
-          v-bind="args"
-          type="payment"
-        >
+      <div class="p-6">
+        <ListItem type="payment" title="Shopify" description="Connected payment store">
           <template #logo>
-            <div class="rounded-sm p-2 bg-oc-accent-1-50">
-              <img src="http://api.src.test/icons/providers/shopee.png" class="w-[32px] h-[32px]" />
-            </div>
+            <div class="rounded-sm p-2 bg-oc-accent-1-50 w-12 h-12 flex items-center justify-center text-xs font-bold">S</div>
           </template>
         </ListItem>
-      </Theme>
+      </div>
     `
   })
 }
 
-export const ListGeneral = {
-  args: {
-    title: 'Standard shipping',
-    description: 'Calculation Method: Flat',
-    isDisabled: false,
-    chips: [
-      { label: 'Default' },
-      { label: 'HitPay', variant: 'accent-1' }
-    ],
-    details: [
-      { label: 'SGD 28.00', icon: 'dollar-coin' },
-      { label: 'Singapore', country: 'sg' }
-    ]
-  },
-  render: (args) => ({
-    components: { Theme, ListItem, DropdownItem, Button },
+export const General = {
+  description: 'Versatile row for any list item. Supports chips, detail badges, custom logo, and action menu.',
+  highlights: ['type="general"', 'chips — array of { label, variant }', 'details — array of { label, icon?, country? }', '#logo slot — custom logo/icon', '#append slot — right-side button'],
+  code: `<script setup>
+import { ListItem, DropdownItem, Button } from '@orchidui/core'
+
+const chips = [
+  { label: 'Default' },
+  { label: 'Premium', variant: 'accent-1' }
+]
+
+const details = [
+  { label: 'SGD 28.00', icon: 'dollar-coin' },
+  { label: 'Singapore', country: 'sg' }
+]
+</script>
+
+<template>
+  <div class="flex flex-col gap-3">
+    <!-- With dropdown menu -->
+    <ListItem
+      type="general"
+      title="Standard shipping"
+      description="Flat rate"
+      :chips="chips"
+      :details="details"
+    >
+      <template #menu>
+        <div class="p-2 border-b border-gray-200">
+          <DropdownItem text="Edit" icon="pencil" />
+        </div>
+        <div class="p-2">
+          <DropdownItem text="Delete" icon="bin" variant="destructive" />
+        </div>
+      </template>
+    </ListItem>
+
+    <!-- With custom logo and append button (no dropdown) -->
+    <ListItem
+      type="general"
+      title="PayNow"
+      :chips="[{ label: 'Primary' }]"
+      :is-dropdown-actions-visible="false"
+    >
+      <template #logo>
+        <div class="w-10 h-10 rounded bg-oc-accent-1-50 flex items-center justify-center font-bold text-sm">PN</div>
+      </template>
+      <template #append>
+        <Button label="Disconnect" variant="secondary" size="small" />
+      </template>
+    </ListItem>
+  </div>
+</template>`,
+  render: () => ({
+    components: { ListItem, DropdownItem, Button },
     setup() {
-      const methodLogos = [
-        'http://api.src.test/icons/methods/md/visa.png',
-        'http://api.src.test/icons/methods/md/mastercard.png',
-        'http://api.src.test/icons/methods/md/jcb.png',
-        'http://api.src.test/icons/methods/md/unionpay.png',
-        'http://api.src.test/icons/methods/md/amex.png'
-      ]
-      return { args, methodLogos }
+      const chips   = [{ label: 'Default' }, { label: 'Premium', variant: 'accent-1' }]
+      const details = [{ label: 'SGD 28.00', icon: 'dollar-coin' }]
+      return { chips, details }
     },
     template: `
-      <Theme class="p-10">
-        <ListItem type="general" v-bind="args">
+      <div class="p-6 flex flex-col gap-3">
+        <ListItem type="general" title="Standard shipping" description="Flat rate" :chips="chips" :details="details">
           <template #menu>
-            <div class="p-2 border-b border-gray-200">
-              <DropdownItem text="Edit" icon="pencil" />
-            </div>
-            <div class="p-2">
-              <DropdownItem text="Delete" variant="destructive" icon="bin" />
-            </div>
+            <div class="p-2"><DropdownItem text="Edit" icon="pencil" /></div>
           </template>
         </ListItem>
-
-        <ListItem
-          type="general"
-          title="Shopee Pay"
-          :chips="[{ label: 'Primary' }]"
-        >
+        <ListItem type="general" title="PayNow" :chips="[{ label: 'Primary' }]" :is-dropdown-actions-visible="false">
           <template #logo>
-            <img src="http://api.src.test/icons/providers/shopee.png" width="64" alt="shopee" />
+            <div class="w-10 h-10 rounded bg-oc-accent-1-50 flex items-center justify-center font-bold text-sm">PN</div>
           </template>
+          <template #append><Button label="Connect" size="small" /></template>
         </ListItem>
-
-        <ListItem type="general" v-bind="args" :is-dropdown-actions-visible="false">
-          <template #logo>
-            <img src="http://api.src.test/icons/providers/paynow.png" width="64" />
-          </template>
-          <div class="flex gap-x-4">
-            <img
-              v-for="(methodImage, index) in methodLogos"
-              :key="index"
-              class="object-contain"
-              :src="methodImage"
-              width="35"
-              :alt="methodImage"
-              height="24"
-            />
-          </div>
-          <template #append>
-            <Button label="Connect" />
-          </template>
-        </ListItem>
-      </Theme>
+      </div>
     `
   })
 }
 
-export const ListItemPage = {
-  args: {
-    pages: [
-      {
-        id: '9bd54837-2156-417a-9577-8ff20f895769',
-        business_id: '8ba6c772-8c2d-4f3b-a7d6-3f1f0648fa77',
-        title: 'Page Title Example',
-        description: '<p><span style="font-size:14px;">Lorem ipsum dolor sit amet consectetur adipisicing elit.</span></p>',
-        enabled: 1,
-        page_path: 'page-path-1',
-        page_cover_url: 'https://blog.hitpayapp.com/content/images/size/w2000/2024/02/-new--Clarissa-Blog-Design---4-.png',
-        created_at: '2024-04-18T09:23:39+08:00',
-        updated_at: '2024-04-18T09:23:39+08:00'
-      },
-      {
-        id: '9bb6447e-edab-4c8c-9652-8186cffc8402',
-        business_id: '8ba6c772-8c2d-4f3b-a7d6-3f1f0648fa77',
-        title: 'Disabled Page Example',
-        description: '<p><span style="font-size:14px;">Lorem ipsum dolor sit amet consectetur adipisicing elit.</span></p>',
-        enabled: 0,
-        page_path: 'page-path-2',
-        page_cover_url: null,
-        created_at: '2024-04-02T23:22:35+08:00',
-        updated_at: '2024-04-18T09:22:56+08:00'
-      }
-    ]
-  },
-  render: (args) => ({
-    components: { Theme, ListItem, DropdownItem },
+export const Accordion = {
+  description: 'Collapsible row. v-model controls open/closed state. Use #content slot for the expanded body.',
+  highlights: ['type="accordion"', 'v-model — open/closed boolean', '#content slot — expanded body content', 'isDraggable — shows drag handle'],
+  code: `<script setup>
+import { ref } from 'vue'
+import { ListItem } from '@orchidui/core'
+
+const isOpen = ref(false)
+</script>
+
+<template>
+  <ListItem
+    v-model="isOpen"
+    type="accordion"
+    title="Extra Toppings"
+    description="Strawberry, Chocolate, Cheese"
+    :chips="[{ label: 'Required' }]"
+    is-draggable
+  >
+    <template #content>
+      <div class="p-4 flex flex-col gap-2 text-sm text-oc-text-400">
+        <label><input type="checkbox" /> Strawberry (+$1.00)</label>
+        <label><input type="checkbox" /> Chocolate (+$1.50)</label>
+        <label><input type="checkbox" /> Cheese (+$2.00)</label>
+      </div>
+    </template>
+  </ListItem>
+</template>`,
+  render: () => ({
+    components: { ListItem },
     setup() {
-      return { args }
+      const isOpen = ref(false)
+      return { isOpen }
     },
     template: `
-      <Theme class="p-10">
-        <ListItem
-          type="page"
-          v-for="page in args.pages"
-          :key="page.id"
-          :page="page"
-        >
-          <template #menu>
-            <div class="p-2 border-b border-gray-200">
-              <DropdownItem text="Edit" icon="pencil" />
-            </div>
-            <div class="p-2">
-              <DropdownItem text="Delete" variant="destructive" icon="bin" />
-            </div>
+      <div class="p-6">
+        <ListItem v-model="isOpen" type="accordion" title="Extra Toppings" description="Strawberry, Chocolate" :chips="[{ label: 'Required' }]" is-draggable>
+          <template #content>
+            <div class="p-4 text-sm text-oc-text-400">Accordion content here</div>
           </template>
         </ListItem>
-      </Theme>
-    `
-  })
-}
-
-export const ListItemAccordion = {
-  args: {
-    title: 'Extra Toppings',
-    description: 'Strawberry, Chocolate, and Cheese',
-    isDisabled: false,
-    isTransparent: false,
-    isDraggable: true,
-    isOpenDefault: true,
-    chips: [{ label: 'Required' }]
-  },
-  render: (args) => ({
-    components: { Theme, ListItem },
-    setup() {
-      const isOpen1 = ref(args.isOpenDefault || false)
-      const isOpen2 = ref(args.isOpenDefault || false)
-      return { args, isOpen1, isOpen2 }
-    },
-    template: `
-      <Theme class="p-10">
-        <ListItem v-bind="args" v-model="isOpen1" type="accordion">
-          <template #content>Content</template>
-        </ListItem>
-        <div class="my-3" />
-        <ListItem v-bind="args" v-model="isOpen2" type="accordion" is-no-toggle-forced>
-          <template #content>Content</template>
-        </ListItem>
-      </Theme>
+      </div>
     `
   })
 }
