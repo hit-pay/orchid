@@ -61,36 +61,7 @@ export function buildRules(props) {
   return rules
 }
 
-// Merge manual schema overrides (from lib/component-docs/) on top of the auto-generated schema.
-// Supports overriding individual prop fields (type, description, itemShape) and
-// adding/overriding events and slots.
-function applySchemaOverrides(schema, overrides) {
-  if (!overrides) return schema
-
-  const result = { ...schema }
-
-  if (overrides.props) {
-    result.props = { ...schema.props }
-    for (const [name, override] of Object.entries(overrides.props)) {
-      result.props[name] = { ...(schema.props[name] ?? {}), ...override }
-    }
-  }
-
-  if (overrides.events) {
-    result.events = { ...schema.events }
-    for (const [name, override] of Object.entries(overrides.events)) {
-      result.events[name] = { ...(schema.events[name] ?? {}), ...override }
-    }
-  }
-
-  if (overrides.slots) {
-    result.slots = { ...schema.slots, ...overrides.slots }
-  }
-
-  return result
-}
-
-export function formatSchema(exportName, vueFilePath, packageRoot, props, meta, rules, relatedComponents, overrides) {
+export function formatSchema(exportName, vueFilePath, packageRoot, props, meta, rules, relatedComponents) {
   const events = {}
   for (const e of meta.events ?? []) {
     events[e.name] = {
@@ -118,11 +89,9 @@ export function formatSchema(exportName, vueFilePath, packageRoot, props, meta, 
     relatedComponents,
   }
 
-  return applySchemaOverrides(schema, overrides?.schemaOverrides)
+  return schema
 }
 
-export function formatExamples(exportName, autoExamples, overrides) {
-  // Manual examples replace auto-generated ones entirely when provided
-  const examples = overrides?.examples ?? autoExamples
+export function formatExamples(exportName, examples) {
   return { component: exportName, examples }
 }
