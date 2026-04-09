@@ -10,8 +10,8 @@
 | # | Component | Files | Status |
 |---|-----------|------:|--------|
 | 1 | FormBuilder | 99 | [x] |
-| 2 | EmptyPage | 74 | [ ] |
-| 3 | DataTable | 54 | [ ] |
+| 2 | EmptyPage | 74 | [x] |
+| 3 | DataTable | 54 | [x] |
 | 4 | Select | 48 | [ ] |
 | 5 | ListItem | 26 | [ ] |
 | 6 | Table | 24 | [ ] |
@@ -161,8 +161,8 @@ ThumbnailTheme, SubPlanCard, TimePopup
 
 ### Phase 1 — Top 10 (highest priority)
 - [x] **FormBuilder** — complete props schema, examples of dynamic forms from JSON schema
-- [ ] **EmptyPage** — variants (no data, error, loading), icon + action button examples
-- [ ] **DataTable** — filter, pagination, bulk actions, custom slot examples
+- [x] **EmptyPage** — variants (no data, error, loading), icon + action button examples
+- [x] **DataTable** — filter, pagination, bulk actions, custom slot examples
 - [ ] **Select** — single, multi, async search, grouped options examples
 - [ ] **ListItem** — all layout variants (timeline, webhook, payment, accordion)
 - [ ] **Table** — sorting, selection, custom cell type examples

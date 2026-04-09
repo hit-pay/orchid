@@ -170,3 +170,116 @@ import { EmptyPage } from '@orchidui/core'
     `
   })
 }
+
+export const LargeSize = {
+  description: 'Large variant with a bigger icon circle — suitable for full-page empty states.',
+  highlights: ['size="large"'],
+  code: `<script setup>
+import { EmptyPage } from '@orchidui/core'
+</script>
+
+<template>
+  <EmptyPage
+    size="large"
+    icon="document"
+    title="No transactions yet"
+    description="Your transactions will appear here once you start accepting payments."
+    add-button-label="Create payment link"
+  />
+</template>`,
+  render: () => ({
+    components: { EmptyPage },
+    template: `
+      <div class="flex justify-center p-10">
+        <EmptyPage
+          size="large"
+          icon="document"
+          title="No transactions yet"
+          description="Your transactions will appear here once you start accepting payments."
+          add-button-label="Create payment link"
+        />
+      </div>
+    `
+  })
+}
+
+export const CustomContainerClass = {
+  description: 'Override the icon ring colour with containerClass — useful when the default grey or warning colour does not fit the context.',
+  highlights: ['container-class prop', 'overrides isUpgrade colour'],
+  code: `<script setup>
+import { EmptyPage } from '@orchidui/core'
+</script>
+
+<template>
+  <EmptyPage
+    icon="star"
+    title="No favourites yet"
+    description="Items you star will appear here."
+    add-button-label="Browse items"
+    container-class="text-oc-primary-600 border-oc-primary-300 bg-oc-primary-50"
+    hide-badge
+  />
+</template>`,
+  render: () => ({
+    components: { EmptyPage },
+    template: `
+      <div class="flex justify-center p-10">
+        <EmptyPage
+          icon="star"
+          title="No favourites yet"
+          description="Items you star will appear here."
+          add-button-label="Browse items"
+          container-class="text-oc-primary-600 border-oc-primary-300 bg-oc-primary-50"
+          hide-badge
+        />
+      </div>
+    `
+  })
+}
+
+export const CustomSlots = {
+  description: 'Use the #icon and #description slots to inject arbitrary content in place of the default icon circle and description text.',
+  highlights: ['#icon slot', '#description slot'],
+  code: `<script setup>
+import { EmptyPage } from '@orchidui/core'
+</script>
+
+<template>
+  <EmptyPage
+    title="Nothing here yet"
+    add-button-label="Get started"
+  >
+    <template #icon>
+      <div class="w-16 h-16 rounded-full bg-oc-primary-50 border border-oc-primary-200 flex items-center justify-center text-3xl">
+        📭
+      </div>
+    </template>
+    <template #description>
+      <p class="text-oc-text-400 text-center text-sm">
+        Add your first item or
+        <a href="#" class="text-oc-primary-500 underline">import from CSV</a>.
+      </p>
+    </template>
+  </EmptyPage>
+</template>`,
+  render: () => ({
+    components: { EmptyPage },
+    template: `
+      <div class="flex justify-center p-10">
+        <EmptyPage title="Nothing here yet" add-button-label="Get started">
+          <template #icon>
+            <div class="w-16 h-16 rounded-full bg-oc-primary-50 border border-oc-primary-200 flex items-center justify-center text-3xl">
+              📭
+            </div>
+          </template>
+          <template #description>
+            <p class="text-oc-text-400 text-center text-sm">
+              Add your first item or
+              <a href="#" class="text-oc-primary-500 underline">import from CSV</a>.
+            </p>
+          </template>
+        </EmptyPage>
+      </div>
+    `
+  })
+}
