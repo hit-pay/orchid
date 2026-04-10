@@ -3,22 +3,40 @@ import { computed } from 'vue'
 import { Radio, BaseInput } from '@/orchidui-core'
 
 defineProps({
+  /**
+   * Layout direction for the radio options.
+   * @values vertical, horizontal
+   */
   alignment: {
     type: String,
     default: 'vertical'
   },
+  /**
+   * Array of radio option objects.
+   * Each item: `{ label, value, icon?, isDisabled?, tooltipText?, labelIcon?, tooltipOptions? }`
+   */
   radio: Array,
+  /** Label shown above the group. */
   label: String,
+  /** Additional CSS class applied to the options wrapper div. */
   wrapperClass: String,
+  /** HTML name attribute shared by all radio inputs in this group. */
   groupName: String,
+  /** Validation error message shown below the group. */
   errorMessage: String,
+  /** Helper text shown below the label. */
   hint: String,
+  /** v-model — the value of the currently selected radio. */
   modelValue: String,
+  /** Render all options as button-style radios (bordered cards). */
   isButtonVariant: Boolean,
+  /** Button variant with the radio circle visible inside each card. */
   isButtonVariantWithRadio: Boolean,
+  /** Make each option expand to full width (block display). */
   isBlock: Boolean
 })
 const emit = defineEmits({
+  /** Selected radio changed. Payload: the value of the selected option. */
   'update:modelValue': []
 })
 const alignmentClasses = computed(() => ({

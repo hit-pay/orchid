@@ -16,18 +16,18 @@
 | 5 | ListItem | 26 | [x] |
 | 6 | Table | 24 | [x] |
 | 7 | SingleFileUpload | 24 | [x] |
-| 8 | Input | 23 | [ ] |
-| 9 | DatePicker | 21 | [ ] |
-| 10 | Skeleton | 20 | [ ] |
-| 11 | Radio | 20 | [ ] |
-| 12 | Checkbox | 19 | [ ] |
-| 13 | RadioGroup | 16 | [ ] |
-| 14 | Dropdown | 16 | [ ] |
-| 15 | Draggable | 16 | [ ] |
+| 8 | Input | 23 | [x] |
+| 9 | DatePicker | 21 | [x] |
+| 10 | Skeleton | 20 | [x] |
+| 11 | Radio | 20 | [x] |
+| 12 | Checkbox | 19 | [x] |
+| 13 | RadioGroup | 16 | [x] |
+| 14 | Dropdown | 16 | [x] |
+| 15 | Draggable | 16 | [x] |
 | 16 | Calendar | 15 | [ ] |
-| 17 | DropdownItem | 14 | [ ] |
-| 18 | CustomerCard | 14 | [ ] |
-| 19 | TextArea | 13 | [ ] |
+| 17 | DropdownItem | 14 | [x] |
+| 18 | CustomerCard | 14 | [x] |
+| 19 | TextArea | 13 | [x] |
 | 20 | TextEditor | 12 | [ ] |
 
 ---
@@ -163,24 +163,24 @@ ThumbnailTheme, SubPlanCard, TimePopup
 - [x] **FormBuilder** — complete props schema, examples of dynamic forms from JSON schema
 - [x] **EmptyPage** — variants (no data, error, loading), icon + action button examples
 - [x] **DataTable** — filter, pagination, bulk actions, custom slot examples
-- [ ] **Select** — single, multi, async search, grouped options examples
-- [ ] **ListItem** — all layout variants (timeline, webhook, payment, accordion)
-- [ ] **Table** — sorting, selection, custom cell type examples
-- [ ] **SingleFileUpload** — upload preview, size limit, error state examples
-- [ ] **Input** — icon, prefix/suffix, password toggle, error state examples
-- [ ] **DatePicker** — single date, range, format options examples
-- [ ] **Skeleton** — various shapes (text, card, table row) examples
+- [x] **Select** — single, multi, async search, grouped options examples
+- [x] **ListItem** — all layout variants (timeline, webhook, payment, accordion)
+- [x] **Table** — sorting, selection, custom cell type examples
+- [x] **SingleFileUpload** — upload preview, size limit, error state examples
+- [x] **Input** — icon, prefix/suffix, password toggle, error state examples
+- [x] **DatePicker** — single date, range, format options examples
+- [x] **Skeleton** — various shapes (text, card, table row) examples
 
 ### Phase 2 — Top 11–20
-- [ ] **Radio** — single with label, disabled state examples
-- [ ] **Checkbox** — single + group, indeterminate state examples
-- [ ] **RadioGroup** — horizontal/vertical layout examples
-- [ ] **Dropdown** — with DropdownItem, icons, nested examples
-- [ ] **Draggable** — reorderable list examples
+- [x] **Radio** — single with label, disabled state examples
+- [x] **Checkbox** — single + group, indeterminate state examples
+- [x] **RadioGroup** — horizontal/vertical layout examples
+- [x] **Dropdown** — with DropdownItem, icons, nested examples
+- [x] **Draggable** — reorderable list examples
 - [ ] **Calendar** — single date, range selection examples
-- [ ] **DropdownItem** — variants (icon, destructive, disabled)
-- [ ] **CustomerCard** — all data fields examples
-- [ ] **TextArea** — auto-resize, max length examples
+- [x] **DropdownItem** — variants (icon, destructive, disabled)
+- [x] **CustomerCard** — all data fields examples
+- [x] **TextArea** — auto-resize, max length examples
 - [ ] **TextEditor** — toolbar options, read-only mode examples
 
 ### Phase 3 — Medium usage (5–12 files)

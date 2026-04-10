@@ -7,115 +7,156 @@ defineOptions({
 })
 
 const props = defineProps({
+  /** Disable the input — non-interactive, grayed out. */
   disabled: {
     type: Boolean,
     default: false
   },
+  /** Validation error message shown in red below the input. Also applies red border styling. */
   errorMessage: {
     type: String,
     default: ''
   },
+  /** Extra attributes forwarded to the inner Icon component (e.g. width, height). */
   iconProps: {
     type: Object,
     default: () => ({})
   },
+  /** v-model value — the current input value. */
   modelValue: {
     type: [String, Number],
     default: ''
   },
+  /** Field label shown above the input box. */
   label: {
     type: String,
     default: ''
   },
+  /** Helper text shown below the label. */
   hint: {
     type: String,
     default: ''
   },
+  /** Compact inline label — label text appears inside the input box before the value. */
   isInlineLabel: {
     type: Boolean,
     default: false
   },
+  /** AI-assisted state — shows a subtle accent border indicating AI-filled content. Clears on first user focus. */
   ai: {
     type: Boolean,
     default: false
   },
+  /** Make the input non-editable without the disabled appearance. Value is selectable/copyable. */
   isReadonly: {
     type: Boolean,
     default: false
   },
+  /** Placeholder text shown when the input is empty. */
   placeholder: {
     type: String,
     default: 'Placeholder'
   },
+  /** Icon name rendered inside the input on the left side (uses the Icon component). */
   icon: {
     type: String,
     default: ''
   },
+  /**
+   * HTML input type attribute.
+   * Use `'password'` to show the eye toggle for visibility.
+   */
   inputType: {
     type: String,
     default: 'text'
   },
+  /** HTML autocomplete attribute value. Defaults to `'one-time-code'` to suppress browser autofill. */
   autocomplete: {
     type: String,
     default: 'one-time-code'
   },
+  /** Static text prefix rendered before the input value (e.g. currency code like `'SGD'`). */
   preFill: {
     type: String,
     default: ''
   },
+  /** Apply error border styling without showing an error message text. */
   hasError: {
     type: Boolean,
     default: false
   },
+  /** Mark the field as required — shows a `*` indicator next to the label. */
   isRequired: {
     type: Boolean,
     default: false
   },
+  /** Icon name rendered inside the label area (e.g. for a tooltip trigger). */
   labelIcon: {
     type: String,
     default: ''
   },
+  /** Tooltip text shown when hovering the label icon. */
   tooltipText: {
     type: String,
     default: ''
   },
+  /** Extra options forwarded to the label tooltip component. */
   tooltipOptions: {
     type: Object,
     default: () => ({})
   },
+  /** Show a vertical separator line between the #leading slot content and the input. */
   hasLeadingSeparator: {
     type: Boolean,
     default: true
   },
+  /**
+   * HTML inputmode attribute — controls the virtual keyboard type on mobile.
+   * @values text, decimal, numeric, tel, search, email, url
+   */
   inputMode: {
     type: String,
     validator: (value) =>
       ['text', 'decimal', 'numeric', 'tel', 'search', 'email', 'url'].includes(value),
     default: 'text'
   },
+  /** HTML pattern attribute for native input validation. */
   pattern: {
     type: String,
     default: ''
   },
+  /** CSS class applied to the label element. */
   labelClass: {
     type: String,
     default: ''
   },
+  /** CSS class applied to the inner input wrapper div. */
   inputClass: {
     type: String,
     default: ''
   },
+  /** CSS class applied to the #trailing slot wrapper. */
   trailingClass: {
     type: String,
     default: ''
   },
+  /** CSS class applied to the #leading slot wrapper. */
   leadingClass: {
     type: String,
     default: ''
   }
 })
 
-defineEmits(['update:modelValue', 'blur', 'focus', 'paste'])
+defineEmits([
+  /** Input value changed. Payload: new string value. */
+  'update:modelValue',
+  /** Input lost focus. */
+  'blur',
+  /** Input gained focus. */
+  'focus',
+  /** Paste event fired. Payload: ClipboardEvent. */
+  'paste'
+])
 
 const attrs = useAttrs()
 

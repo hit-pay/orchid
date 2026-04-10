@@ -1,5 +1,5 @@
 import { Theme, FormBuilder, Input, Button } from '@/orchidui-core'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 export default {
   component: FormBuilder,
@@ -36,6 +36,192 @@ const makeUpdateHandler = (values) => (formItem, value) => {
   } else {
     values.value[formItem.name] = value
   }
+}
+
+// ── Playground ────────────────────────────────────────────────────────────────
+
+export const Playground = {
+  argTypes: {
+    layout: {
+      control: 'select',
+      options: ['single-column', 'two-column', 'three-column'],
+      description: 'Form layout — controls the CSS grid columns'
+    },
+    isDisabled: {
+      control: 'boolean',
+      description: 'Disable all fields'
+    },
+    isRequired: {
+      control: 'boolean',
+      description: 'Mark all fields as required'
+    },
+    showHint: {
+      control: 'boolean',
+      description: 'Show helper text below each field'
+    },
+    showValues: {
+      control: 'boolean',
+      description: 'Show live form values panel below the form'
+    },
+    showErrors: {
+      control: 'boolean',
+      description: 'Simulate validation errors on all fields'
+    }
+  },
+  args: {
+    layout:      'single-column',
+    isDisabled:  false,
+    isRequired:  false,
+    showHint:    true,
+    showValues:  true,
+    showErrors:  false
+  },
+  render: (args) => ({
+    components: { Theme, FormBuilder, Button },
+    setup() {
+      const values = ref({
+        full_name:    '',
+        email:        '',
+        country:      '',
+        plan:         '',
+        newsletter:   false,
+        description:  ''
+      })
+
+      const grid = computed(() => {
+        const cols = {
+          'single-column': null,
+          'two-column':    '50% 50%',
+          'three-column':  '33% 33% 33%'
+        }[args.layout]
+
+        if (!cols) return null
+
+        const areaMap = {
+          'two-column': `full_name   email
+                         country     plan
+                         newsletter  newsletter
+                         description description`,
+          'three-column': `full_name email     country
+                           plan      newsletter newsletter
+                           description description description`
+        }
+
+        return {
+          xs: { area: 'full_name\nemail\ncountry\nplan\nnewsletter\ndescription', rows: 'auto', columns: '100%' },
+          lg: { area: areaMap[args.layout], rows: 'auto', columns: cols }
+        }
+      })
+
+      const jsonForm = computed(() => [
+        {
+          name: 'full_name',
+          type: 'Input',
+          props: {
+            label:      'Full name',
+            placeholder:'Jane Doe',
+            hint:        args.showHint  ? 'Your legal full name.'           : '',
+            isDisabled:  args.isDisabled,
+            isRequired:  args.isRequired
+          }
+        },
+        {
+          name: 'email',
+          type: 'Input',
+          props: {
+            label:      'Email',
+            placeholder:'jane@example.com',
+            inputType:  'email',
+            hint:        args.showHint  ? 'Used for login and notifications.' : '',
+            isDisabled:  args.isDisabled,
+            isRequired:  args.isRequired
+          }
+        },
+        {
+          name: 'country',
+          type: 'Select',
+          props: {
+            label:       'Country',
+            placeholder: 'Select a country…',
+            hint:         args.showHint  ? 'Your primary country of operation.' : '',
+            isDisabled:   args.isDisabled,
+            isRequired:   args.isRequired,
+            options: [
+              { label: 'Indonesia', value: 'ID' },
+              { label: 'Singapore', value: 'SG' },
+              { label: 'Malaysia',  value: 'MY' }
+            ]
+          }
+        },
+        {
+          name: 'plan',
+          type: 'Select',
+          props: {
+            label:       'Plan',
+            placeholder: 'Select a plan…',
+            hint:         args.showHint ? 'Choose your subscription tier.' : '',
+            isDisabled:   args.isDisabled,
+            isRequired:   args.isRequired,
+            options: [
+              { label: 'Free',       value: 'free' },
+              { label: 'Pro',        value: 'pro' },
+              { label: 'Enterprise', value: 'enterprise' }
+            ]
+          }
+        },
+        {
+          name: 'newsletter',
+          type: 'Toggle',
+          props: {
+            label:      'Subscribe to newsletter',
+            hint:        args.showHint  ? 'Receive product updates and tips.' : '',
+            isDisabled:  args.isDisabled
+          }
+        },
+        {
+          name: 'description',
+          type: 'TextArea',
+          props: {
+            label:       'Bio',
+            placeholder: 'Tell us a bit about yourself…',
+            hint:          args.showHint ? 'Max 300 characters.' : '',
+            isDisabled:    args.isDisabled,
+            isRequired:    args.isRequired
+          }
+        }
+      ])
+
+      const errors = computed(() =>
+        args.showErrors
+          ? {
+              full_name:   'Full name is required.',
+              email:       'Please enter a valid email.',
+              country:     'Country is required.',
+              plan:        'Please select a plan.',
+              description: 'Bio is required.'
+            }
+          : {}
+      )
+
+      const onUpdate = makeUpdateHandler(values)
+
+      return { args, values, errors, jsonForm, grid, onUpdate }
+    },
+    template: `
+      <Theme class="p-8 flex flex-col gap-6">
+        <FormBuilder
+          id="playground-form"
+          :class="grid ? 'gap-4' : 'flex flex-col gap-4'"
+          :json-form="jsonForm"
+          :values="values"
+          :errors="errors"
+          :grid="grid"
+          @on-update="onUpdate"
+        />
+        <div v-if="args.showValues" class="rounded border border-oc-gray-200 bg-oc-bg-2 p-4 text-xs text-oc-text-400 font-mono whitespace-pre-wrap">{{ JSON.stringify(values, null, 2) }}</div>
+      </Theme>
+    `
+  })
 }
 
 // ── Basic ─────────────────────────────────────────────────────────────────────

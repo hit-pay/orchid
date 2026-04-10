@@ -3,162 +3,246 @@ import { ref } from 'vue'
 
 export default {
   component: RadioGroup,
-  tags: ['autodocs']
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: `
+A group of radio buttons rendered from a data array. Manages selection state internally — use \`v-model\` to get/set the selected value.
+
+---
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| \`modelValue\` | String | — | v-model — value of the selected option |
+| \`radio\` | Array | — | Options: \`[{ label, value, icon?, isDisabled?, tooltipText?, labelIcon? }]\` |
+| \`groupName\` | String | — | HTML name shared by all inputs (required for single-select) |
+| \`alignment\` | String | \`'vertical'\` | \`'vertical'\` or \`'horizontal'\` layout |
+| \`label\` | String | — | Label shown above the group |
+| \`hint\` | String | — | Helper text below the label |
+| \`errorMessage\` | String | — | Error message below the group |
+| \`wrapperClass\` | String | — | Extra CSS class on the options wrapper |
+| \`isButtonVariant\` | Boolean | \`false\` | Render all options as bordered card buttons |
+| \`isButtonVariantWithRadio\` | Boolean | \`false\` | Button cards with visible radio circles |
+| \`isBlock\` | Boolean | \`false\` | Expand each option to full width |
+
+---
+
+## Events
+
+| Event | Payload | Description |
+|-------|---------|-------------|
+| \`update:modelValue\` | \`string\` | Selected option changed |
+        `.trim()
+      }
+    }
+  }
 }
 
-const sampleRadios = [
-  { label: 'Text 1', value: '1' },
-  { label: 'Text 2', value: '2' },
-  { label: 'Text 3', value: '3' },
-  { label: 'Text 4', value: '4' },
-  { label: 'Is Disabled', value: '5', isDisabled: true }
-]
-
-const iconRadios = [
-  { label: 'Text', value: 6, icon: 'phone' },
-  { label: 'Text', value: 7, icon: 'email' },
-  { label: 'Text', value: 8, icon: 'facebook' },
-  { label: 'Text', value: 9, icon: 'tiktok' },
-  { label: 'Text', value: 10, icon: 'telegram' }
-]
-
-const plainRadios = [
-  { label: 'Text', value: 6 },
-  { label: 'Text', value: 7 },
-  { label: 'Text', value: 8 },
-  { label: 'Text', value: 9 },
-  { label: 'Text', value: 10 }
-]
-
-export const Default = {
+export const Playground = {
   argTypes: {
-    alignment: {
-      control: 'select',
-      options: ['vertical', 'horizontal']
-    }
+    alignment:   { control: 'select', options: ['vertical', 'horizontal'] },
+    label:       { control: 'text' },
+    hint:        { control: 'text' },
+    errorMessage:{ control: 'text' },
+    isButtonVariant:     { control: 'boolean' },
+    isButtonVariantWithRadio: { control: 'boolean' },
+    isBlock: { control: 'boolean' }
   },
   args: {
     alignment: 'vertical',
-    label: 'Label',
-    hint: 'Hint',
+    label: 'Billing cycle',
+    hint: 'Choose how you want to be billed.',
     errorMessage: '',
-    radio: sampleRadios
+    isButtonVariant: false,
+    isButtonVariantWithRadio: false,
+    isBlock: false
   },
   render: (args) => ({
     components: { RadioGroup, Theme },
     setup() {
-      const modelValue = ref()
-      return { modelValue, args }
+      const selected = ref('monthly')
+      const options = [
+        { label: 'Monthly',  value: 'monthly' },
+        { label: 'Yearly (save 20%)', value: 'yearly' },
+        { label: 'Enterprise', value: 'enterprise', isDisabled: true }
+      ]
+      return { args, selected, options }
     },
     template: `
-      <Theme>
-        <div class="flex flex-col gap-y-4">
-          <RadioGroup
-            v-model="modelValue"
-            v-bind="args"
-            group-name="radio-default"
-          />
-          <div>Model value: "{{ modelValue }}"</div>
-        </div>
+      <Theme class="p-6 w-[400px]">
+        <RadioGroup
+          v-model="selected"
+          v-bind="args"
+          group-name="playground-billing"
+          :radio="options"
+        />
+        <p class="mt-3 text-sm text-oc-text-400">Selected: {{ selected }}</p>
       </Theme>
     `
   })
 }
 
-export const DirectionVariants = {
+export const Vertical = {
+  description: 'Default vertical layout. Options are stacked in a column.',
+  highlights: ['radio — array of { label, value }', 'groupName — required for single-select', 'v-model — selected value'],
+  code: `<script setup>
+import { ref } from 'vue'
+import { RadioGroup } from '@orchidui/core'
+
+const selected = ref('card')
+
+const paymentMethods = [
+  { label: 'Credit / Debit card', value: 'card' },
+  { label: 'PayNow',              value: 'paynow' },
+  { label: 'Bank transfer',       value: 'bank' },
+  { label: 'Cash on delivery',    value: 'cod', isDisabled: true }
+]
+</script>
+
+<template>
+  <RadioGroup
+    v-model="selected"
+    label="Payment method"
+    hint="Select how the customer will pay."
+    group-name="payment"
+    :radio="paymentMethods"
+    alignment="vertical"
+  />
+  <p class="mt-3 text-sm text-oc-text-400">Selected: {{ selected }}</p>
+</template>`,
   render: () => ({
     components: { RadioGroup, Theme },
     setup() {
-      const selectedVertical = ref()
-      const selectedHorizontal = ref()
-      return { selectedVertical, selectedHorizontal, sampleRadios }
+      const selected = ref('card')
+      const paymentMethods = [
+        { label: 'Credit / Debit card', value: 'card' },
+        { label: 'PayNow',              value: 'paynow' },
+        { label: 'Bank transfer',       value: 'bank' },
+        { label: 'Cash on delivery',    value: 'cod', isDisabled: true }
+      ]
+      return { selected, paymentMethods }
     },
     template: `
-      <Theme>
-        <div class="flex flex-col gap-y-4">
-          <RadioGroup
-            v-model="selectedVertical"
-            :radio="sampleRadios"
-            label="Label"
-            group-name="radio-vertical"
-            alignment="vertical"
-          />
-          <RadioGroup
-            v-model="selectedHorizontal"
-            :radio="sampleRadios"
-            label="Label"
-            group-name="radio-horizontal"
-            alignment="horizontal"
-          />
-        </div>
+      <Theme class="p-6 w-[360px]">
+        <RadioGroup v-model="selected" label="Payment method" hint="Select how the customer will pay." group-name="payment" :radio="paymentMethods" alignment="vertical" />
+        <p class="mt-3 text-sm text-oc-text-400">Selected: {{ selected }}</p>
+      </Theme>
+    `
+  })
+}
+
+export const Horizontal = {
+  description: 'Horizontal layout — options flow in a row. Useful for short option lists.',
+  highlights: ['alignment="horizontal" — flex-row layout', 'wrap automatically for long lists'],
+  code: `<script setup>
+import { ref } from 'vue'
+import { RadioGroup } from '@orchidui/core'
+
+const size = ref('medium')
+
+const sizes = [
+  { label: 'Small',  value: 'small' },
+  { label: 'Medium', value: 'medium' },
+  { label: 'Large',  value: 'large' },
+  { label: 'XL',     value: 'xl' }
+]
+</script>
+
+<template>
+  <RadioGroup
+    v-model="size"
+    label="Size"
+    group-name="size"
+    :radio="sizes"
+    alignment="horizontal"
+  />
+</template>`,
+  render: () => ({
+    components: { RadioGroup, Theme },
+    setup() {
+      const size = ref('medium')
+      const sizes = [
+        { label: 'Small', value: 'small' },
+        { label: 'Medium', value: 'medium' },
+        { label: 'Large', value: 'large' },
+        { label: 'XL', value: 'xl' }
+      ]
+      return { size, sizes }
+    },
+    template: `
+      <Theme class="p-6">
+        <RadioGroup v-model="size" label="Size" group-name="size" :radio="sizes" alignment="horizontal" />
+        <p class="mt-3 text-sm text-oc-text-400">Size: {{ size }}</p>
       </Theme>
     `
   })
 }
 
 export const ButtonVariants = {
+  description: 'Button-style radio group renders each option as a bordered card. Works best for short option lists.',
+  highlights: ['isButtonVariant — bordered card style', 'icon — icon inside each card', 'alignment="horizontal" for side-by-side cards'],
+  code: `<script setup>
+import { ref } from 'vue'
+import { RadioGroup } from '@orchidui/core'
+
+const channel = ref('email')
+
+const channels = [
+  { label: 'Email',    value: 'email',    icon: 'email' },
+  { label: 'SMS',      value: 'sms',      icon: 'phone' },
+  { label: 'Facebook', value: 'facebook', icon: 'facebook' }
+]
+</script>
+
+<template>
+  <RadioGroup
+    v-model="channel"
+    label="Notification channel"
+    group-name="channel"
+    :radio="channels"
+    alignment="horizontal"
+    :is-button-variant="true"
+  />
+</template>`,
   render: () => ({
     components: { RadioGroup, Theme },
     setup() {
-      const selectedVertical = ref()
-      const selectedHorizontal = ref()
-      return { selectedVertical, selectedHorizontal, iconRadios }
+      const channel = ref('email')
+      const channels = [
+        { label: 'Email',    value: 'email',    icon: 'email' },
+        { label: 'SMS',      value: 'sms',      icon: 'phone' },
+        { label: 'Facebook', value: 'facebook', icon: 'facebook' }
+      ]
+      return { channel, channels }
     },
     template: `
-      <Theme>
-        <div class="flex flex-col gap-y-4">
-          <RadioGroup
-            v-model="selectedVertical"
-            :radio="iconRadios"
-            label="Label"
-            group-name="radio-btn-vertical"
-            alignment="vertical"
-            :is-button-variant="true"
-          />
-          <RadioGroup
-            v-model="selectedHorizontal"
-            :radio="iconRadios"
-            label="Label"
-            group-name="radio-btn-horizontal"
-            alignment="horizontal"
-            :is-button-variant="true"
-          />
-        </div>
+      <Theme class="p-6">
+        <RadioGroup v-model="channel" label="Notification channel" group-name="channel" :radio="channels" alignment="horizontal" :is-button-variant="true" />
+        <p class="mt-3 text-sm text-oc-text-400">Channel: {{ channel }}</p>
       </Theme>
     `
   })
 }
 
-export const ButtonVariantsWithRadio = {
+export const WithError = {
+  description: 'Error state applied to the whole group.',
+  highlights: ['errorMessage — shown below the group and applied to all radio buttons'],
   render: () => ({
     components: { RadioGroup, Theme },
     setup() {
-      const selectedVertical = ref()
-      const selectedHorizontal = ref()
-      return { selectedVertical, selectedHorizontal, plainRadios }
+      const selected = ref()
+      const options = [
+        { label: 'Option A', value: 'a' },
+        { label: 'Option B', value: 'b' }
+      ]
+      return { selected, options }
     },
     template: `
-      <Theme>
-        <div class="flex flex-col gap-y-4">
-          <RadioGroup
-            v-model="selectedVertical"
-            :radio="plainRadios"
-            label="Label"
-            group-name="radio-btn-radio-vertical"
-            alignment="vertical"
-            :is-button-variant="true"
-            :is-button-variant-with-radio="true"
-          />
-          <RadioGroup
-            v-model="selectedHorizontal"
-            :radio="plainRadios"
-            label="Label"
-            group-name="radio-btn-radio-horizontal"
-            alignment="horizontal"
-            :is-button-variant="true"
-            :is-button-variant-with-radio="true"
-          />
-        </div>
+      <Theme class="p-6 w-[300px]">
+        <RadioGroup v-model="selected" label="Pick one" group-name="error-demo" :radio="options" error-message="Please select an option." />
       </Theme>
     `
   })

@@ -4,34 +4,51 @@ import { clickOutside as vClickOutside } from '../../directives/clickOutside.js'
 import { ref, watch, onMounted } from 'vue' // Import the directive
 
 const emit = defineEmits({
+  /** Dropdown open/close state changed. Payload: new boolean state. */
   'update:modelValue': [],
+  /** Menu panel scrolled. Payload: scroll event. */
   scroll: []
 })
 
 const props = defineProps({
+  /** v-model — open/closed state of the dropdown. */
+  modelValue: Boolean,
+  /** Vertical offset between the trigger and the menu panel (px). */
   distance: {
     type: Number,
     default: 4
   },
+  /** Horizontal offset between the trigger and the menu panel (px). */
   skidding: {
     type: Number,
     default: 0
   },
+  /** Disable the dropdown — clicks on the trigger do nothing. */
   isDisabled: Boolean,
+  /** Extra CSS class applied to the menu panel container. */
   menuClasses: String,
+  /**
+   * Popper.js placement for the menu panel.
+   * Common values: \`'bottom-start'\`, \`'bottom-end'\`, \`'top-start'\`, \`'right'\`.
+   */
   placement: {
     type: String,
     default: 'bottom-start'
   },
+  /** Extra options passed directly to the Popper.js instance. */
   popperOptions: {
     type: Object,
     default: () => ({})
   },
+  /** Maximum height of the menu panel (px). Auto-calculated to avoid viewport overflow if not set. */
   maxMenuHeight: Number,
+  /** Inline styles applied to the popper element. */
   popperStyle: Object,
+  /** CSS class(es) applied to the popper element wrapper. */
   popperClass: [String, Array, Object],
-  modelValue: Boolean,
+  /** Prevent the dropdown from closing when clicking outside the trigger. */
   preventClickOutside: Boolean,
+  /** Attach the menu panel to \`document.body\` instead of the component's parent. Required inside modals with overflow:hidden. */
   isAttachToBody: Boolean
 })
 const popper = ref()

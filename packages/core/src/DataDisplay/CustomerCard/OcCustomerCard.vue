@@ -3,25 +3,48 @@ import { Avatar, ListDetail, Button, Icon } from '@/orchidui-core'
 import { computed } from 'vue'
 
 const props = defineProps({
+  /**
+   * Card layout size variant.
+   * - `small` — compact row (name + email/phone only)
+   * - `big` — expanded with address/phone details
+   * - `float` — same as big but with a drop shadow
+   * @values small, big, float
+   */
   variant: {
     type: String,
     default: 'small',
     validator: (val) => ['small', 'big', 'float'].includes(val)
   },
+  /**
+   * Customer data object.
+   * Shape: `{ name, email, phone_number, phone_number_country_code, address: { street, city, state, postal_code, country } }`
+   * For beneficiary mode: `{ name, email, currency, bank_name, bank_account_number }`
+   */
   customer: Object,
+  /** Enable hover styles — edit button appears on mouse over. */
   isHover: {
     type: Boolean,
     default: false
   },
+  /** Show an edit (pencil) button in the top-right corner of the card. */
   isEdit: {
     type: Boolean,
     default: false
   },
+  /** Show a close (×) icon in the top-right corner of the card. */
   isClosable: Boolean,
+  /** Switch to beneficiary mode — shows currency, bank name, and account number instead of address/phone. */
   isBeneficiary: Boolean
 })
 
-const emit = defineEmits(['addCustomer', 'editCustomer', 'closeCustomer'])
+const emit = defineEmits([
+  /** "Add customer" button was clicked (when no customer is attached). */
+  'addCustomer',
+  /** Edit button was clicked. Payload: the customer object. */
+  'editCustomer',
+  /** Close (×) icon was clicked. */
+  'closeCustomer'
+])
 
 // Computed property untuk phone_number
 const phoneNumber = computed(() => {
