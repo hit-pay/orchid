@@ -24,11 +24,11 @@
 | 13 | RadioGroup | 16 | [x] |
 | 14 | Dropdown | 16 | [x] |
 | 15 | Draggable | 16 | [x] |
-| 16 | Calendar | 15 | [ ] |
+| 16 | Calendar | 15 | [x] |
 | 17 | DropdownItem | 14 | [x] |
 | 18 | CustomerCard | 14 | [x] |
 | 19 | TextArea | 13 | [x] |
-| 20 | TextEditor | 12 | [ ] |
+| 20 | TextEditor | 12 | [x] |
 
 ---
 
@@ -177,11 +177,11 @@ ThumbnailTheme, SubPlanCard, TimePopup
 - [x] **RadioGroup** — horizontal/vertical layout examples
 - [x] **Dropdown** — with DropdownItem, icons, nested examples
 - [x] **Draggable** — reorderable list examples
-- [ ] **Calendar** — single date, range selection examples
+- [x] **Calendar** — single date, range selection examples
 - [x] **DropdownItem** — variants (icon, destructive, disabled)
 - [x] **CustomerCard** — all data fields examples
 - [x] **TextArea** — auto-resize, max length examples
-- [ ] **TextEditor** — toolbar options, read-only mode examples
+- [x] **TextEditor** — toolbar options, read-only mode examples
 
 ### Phase 3 — Medium usage (5–12 files)
 - [ ] CopyTooltip

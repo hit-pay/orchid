@@ -241,7 +241,7 @@ const values = ref({
 
 const errors = ref({})
 
-const form = [
+const jsonForm = [
   {
     name: 'full_name',
     type: 'Input',
@@ -275,7 +275,7 @@ function onUpdate(formItem, value) {
   <FormBuilder
     id="basic-form"
     class="flex flex-col gap-4"
-    :json-form="form"
+    :json-form="jsonForm"
     :values="values"
     :errors="errors"
     @on-update="onUpdate"
@@ -286,18 +286,18 @@ function onUpdate(formItem, value) {
     setup() {
       const values = ref({ full_name: '', country: '', newsletter: false })
       const errors = ref({})
-      const form = [
+      const jsonForm = [
         { name: 'full_name', type: 'Input',  props: { label: 'Full name', placeholder: 'Jane Doe' } },
         { name: 'country',   type: 'Select', props: { label: 'Country', options: [{ label: 'Indonesia', value: 'ID' }, { label: 'Singapore', value: 'SG' }] } },
         { name: 'newsletter',type: 'Toggle', props: { label: 'Subscribe to newsletter' } }
       ]
       const onUpdate = makeUpdateHandler(values)
-      return { values, errors, form, onUpdate }
+      return { values, errors, jsonForm, onUpdate }
     },
     template: `
       <Theme class="p-8">
         <FormBuilder id="basic-form" class="flex flex-col gap-4"
-          :json-form="form" :values="values" :errors="errors" @on-update="onUpdate" />
+          :json-form="jsonForm" :values="values" :errors="errors" @on-update="onUpdate" />
       </Theme>
     `
   })
@@ -315,7 +315,7 @@ import { FormBuilder } from '@orchidui/core'
 const values = ref({ range: [0, 100], slider: 50, toggle: false, checkbox: false })
 const errors = ref({})
 
-const form = [
+const jsonForm = [
   { name: 'input',       type: 'Input',          props: { label: 'Input',          placeholder: 'Text' } },
   { name: 'number',      type: 'NumberInput',     props: { label: 'NumberInput' } },
   { name: 'textarea',    type: 'TextArea',        props: { label: 'TextArea',       placeholder: 'Multi-line text' } },
@@ -348,7 +348,7 @@ function onUpdate(formItem, value) {
   <FormBuilder
     id="all-types-form"
     class="flex flex-col gap-4"
-    :json-form="form"
+    :json-form="jsonForm"
     :values="values"
     :errors="errors"
     @on-update="onUpdate"
@@ -359,7 +359,7 @@ function onUpdate(formItem, value) {
     setup() {
       const values = ref({ range: [0, 100], slider: 50, toggle: false, checkbox: false })
       const errors = ref({})
-      const form = [
+      const jsonForm = [
         { name: 'input',      type: 'Input',          props: { label: 'Input',          placeholder: 'Text' } },
         { name: 'number',     type: 'NumberInput',     props: { label: 'NumberInput' } },
         { name: 'textarea',   type: 'TextArea',        props: { label: 'TextArea',       placeholder: 'Multi-line' } },
@@ -378,12 +378,12 @@ function onUpdate(formItem, value) {
         { name: 'toggle_row', type: 'SectionItem',     props: { title: 'SectionItem — toggle row', isToggle: true } },
       ]
       const onUpdate = makeUpdateHandler(values)
-      return { values, errors, form, onUpdate }
+      return { values, errors, jsonForm, onUpdate }
     },
     template: `
       <Theme class="p-8">
         <FormBuilder id="all-types-form" class="flex flex-col gap-4"
-          :json-form="form" :values="values" :errors="errors" @on-update="onUpdate" />
+          :json-form="jsonForm" :values="values" :errors="errors" @on-update="onUpdate" />
       </Theme>
     `
   })
@@ -419,7 +419,7 @@ email      phone\`,
   }
 }
 
-const form = [
+const jsonForm = [
   { name: 'first_name', type: 'Input',     props: { label: 'First name', placeholder: 'Jane' } },
   { name: 'last_name',  type: 'Input',     props: { label: 'Last name',  placeholder: 'Doe' } },
   { name: 'email',      type: 'Input',     props: { label: 'Email',      placeholder: 'jane@example.com' } },
@@ -435,7 +435,7 @@ function onUpdate(formItem, value) {
   <FormBuilder
     id="grid-form"
     class="gap-4"
-    :json-form="form"
+    :json-form="jsonForm"
     :values="values"
     :errors="errors"
     :grid="grid"
@@ -451,19 +451,19 @@ function onUpdate(formItem, value) {
         xs: { area: 'first_name\nlast_name\nemail\nphone', rows: 'auto', columns: '100%' },
         lg: { area: 'first_name last_name\nemail phone', rows: 'auto', columns: '50% 50%' }
       }
-      const form = [
+      const jsonForm = [
         { name: 'first_name', type: 'Input',     props: { label: 'First name', placeholder: 'Jane' } },
         { name: 'last_name',  type: 'Input',     props: { label: 'Last name',  placeholder: 'Doe' } },
         { name: 'email',      type: 'Input',     props: { label: 'Email',      placeholder: 'jane@example.com' } },
         { name: 'phone',      type: 'PhoneInput', props: { label: 'Phone' } }
       ]
       const onUpdate = makeUpdateHandler(values)
-      return { values, errors, grid, form, onUpdate }
+      return { values, errors, grid, jsonForm, onUpdate }
     },
     template: `
       <Theme class="p-8">
         <FormBuilder id="grid-form" class="gap-4"
-          :json-form="form" :values="values" :errors="errors" :grid="grid" @on-update="onUpdate" />
+          :json-form="jsonForm" :values="values" :errors="errors" :grid="grid" @on-update="onUpdate" />
       </Theme>
     `
   })
@@ -481,7 +481,7 @@ import { FormBuilder } from '@orchidui/core'
 const values = ref({ delivery_method: 'pickup', express: false, column_count: '1' })
 const errors = ref({})
 
-const form = [
+const jsonForm = [
   // Trigger field
   {
     name: 'delivery_method',
@@ -537,7 +537,7 @@ function onUpdate(formItem, value) {
   <FormBuilder
     id="conditional-form"
     class="flex flex-col gap-4"
-    :json-form="form"
+    :json-form="jsonForm"
     :values="values"
     :errors="errors"
     @on-update="onUpdate"
@@ -548,7 +548,7 @@ function onUpdate(formItem, value) {
     setup() {
       const values = ref({ delivery_method: 'pickup', express: false, column_count: '1' })
       const errors = ref({})
-      const form = [
+      const jsonForm = [
         { name: 'delivery_method', type: 'Select', props: { label: 'Delivery method', options: [{ label: 'Pickup', value: 'pickup' }, { label: 'Delivery', value: 'delivery' }] } },
         { name: 'address',         type: 'Input',  show_if: 'delivery_method', show_if_value: 'delivery', props: { label: 'Delivery address' } },
         { name: 'pickup_note',     type: 'Input',  show_if: 'delivery_method', show_if_not: 'delivery',   props: { label: 'Pickup note' } },
@@ -558,13 +558,13 @@ function onUpdate(formItem, value) {
         { name: 'col2_title',      type: 'Input',  show_if: 'column_count', show_if_min: '2', props: { label: 'Column 2 title (shows when >= 2)' } }
       ]
       const onUpdate = makeUpdateHandler(values)
-      return { values, errors, form, onUpdate }
+      return { values, errors, jsonForm, onUpdate }
     },
     template: `
       <Theme class="p-8">
         <div class="mb-4 p-3 rounded bg-oc-bg-2 text-sm text-oc-text-400">{{ values }}</div>
         <FormBuilder id="conditional-form" class="flex flex-col gap-4"
-          :json-form="form" :values="values" :errors="errors" @on-update="onUpdate" />
+          :json-form="jsonForm" :values="values" :errors="errors" @on-update="onUpdate" />
       </Theme>
     `
   })
@@ -583,7 +583,7 @@ const values = ref({ username: '', avatar_url: '' })
 const errors = ref({})
 
 // 'AvatarPicker' is not a built-in type — rendered via the #AvatarPicker slot
-const form = [
+const jsonForm = [
   { name: 'username',   type: 'Input',       props: { label: 'Username', placeholder: 'john_doe' } },
   { name: 'avatar_url', type: 'AvatarPicker' }
 ]
@@ -597,7 +597,7 @@ function onUpdate(formItem, value) {
   <FormBuilder
     id="custom-slot-form"
     class="flex flex-col gap-4"
-    :json-form="form"
+    :json-form="jsonForm"
     :values="values"
     :errors="errors"
     @on-update="onUpdate"
@@ -623,17 +623,17 @@ function onUpdate(formItem, value) {
     setup() {
       const values = ref({ username: '', avatar_url: '' })
       const errors = ref({})
-      const form = [
+      const jsonForm = [
         { name: 'username',   type: 'Input',       props: { label: 'Username', placeholder: 'john_doe' } },
         { name: 'avatar_url', type: 'AvatarPicker' }
       ]
       const onUpdate = makeUpdateHandler(values)
-      return { values, errors, form, onUpdate }
+      return { values, errors, jsonForm, onUpdate }
     },
     template: `
       <Theme class="p-8">
         <FormBuilder id="custom-slot-form" class="flex flex-col gap-4"
-          :json-form="form" :values="values" :errors="errors" @on-update="onUpdate">
+          :json-form="jsonForm" :values="values" :errors="errors" @on-update="onUpdate">
           <template #AvatarPicker="{ form: field, value, error, onUpdate: emit }">
             <div class="flex flex-col gap-1">
               <label class="text-sm font-medium">Avatar</label>
@@ -663,7 +663,7 @@ import { FormBuilder, Button } from '@orchidui/core'
 const values = ref({ email: '', password: '' })
 const errors = ref({ email: '', password: '' })
 
-const form = [
+const jsonForm = [
   { name: 'email',    type: 'Input', props: { label: 'Email',    placeholder: 'jane@example.com' } },
   { name: 'password', type: 'Input', props: { label: 'Password', isPassword: true } }
 ]
@@ -689,7 +689,7 @@ function submit() {
     <FormBuilder
       id="validation-form"
       class="flex flex-col gap-4"
-      :json-form="form"
+      :json-form="jsonForm"
       :values="values"
       :errors="errors"
       @on-update="onUpdate"
@@ -702,7 +702,7 @@ function submit() {
     setup() {
       const values = ref({ email: '', password: '' })
       const errors = ref({ email: '', password: '' })
-      const form = [
+      const jsonForm = [
         { name: 'email',    type: 'Input', props: { label: 'Email',    placeholder: 'jane@example.com' } },
         { name: 'password', type: 'Input', props: { label: 'Password', isPassword: true } }
       ]
@@ -716,12 +716,12 @@ function submit() {
           password: values.value.password ? '' : 'Password is required'
         }
       }
-      return { values, errors, form, onUpdate, submit }
+      return { values, errors, jsonForm, onUpdate, submit }
     },
     template: `
       <Theme class="p-8 flex flex-col gap-4">
         <FormBuilder id="validation-form" class="flex flex-col gap-4"
-          :json-form="form" :values="values" :errors="errors" @on-update="onUpdate" />
+          :json-form="jsonForm" :values="values" :errors="errors" @on-update="onUpdate" />
         <Button @click="submit">Submit</Button>
       </Theme>
     `
