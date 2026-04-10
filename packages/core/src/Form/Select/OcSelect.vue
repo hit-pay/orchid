@@ -4,83 +4,132 @@ import { computed, nextTick, ref, watch } from 'vue'
 import { deepEqual } from './utils/deepEqual'
 
 const props = defineProps({
+  /** Field label shown above the select trigger. */
   label: String,
+  /** Helper text shown below the select. */
   hint: String,
+  /** Icon name shown inside the trigger button. */
   icon: String,
+  /** Validation error message shown in red below the field. */
   errorMessage: String,
+  /** Enable AI-assist decoration on the trigger. */
   ai: Boolean,
+  /** Text shown when no value is selected. */
   placeholder: {
     type: String,
     default: 'Placeholder'
   },
+  /** Placeholder text for the search input inside the dropdown. */
   defaultSearchPlaceholder: {
     type: String,
     default: 'Search'
   },
+  /** Placeholder text for the inline search input. */
   inlineSearchPlaceholder: {
     type: String,
     default: 'Search'
   },
+  /** Compact inline label — label sits inside the trigger (used in DataTable per-page). */
   isInlineLabel: Boolean,
+  /** Show a search input inside the dropdown for client-side filtering. */
   isFilterable: Boolean,
+  /** Disable client-side filtering and emit onSearchKeywords instead (for server-side async search). */
   isAsynchronousSearch: Boolean,
+  /** Disable the select — non-interactive, reduced opacity. */
   isDisabled: Boolean,
+  /** Read-only display — shows the value but prevents interaction. */
   isReadonly: Boolean,
+  /** Show a checkbox next to each option (multi-select UX). */
   isCheckboxes: Boolean,
+  /** Show a "Select all / Clear all" checkbox at the top of the list (requires multiple). */
   isSelectAll: Boolean,
+  /** Show an "Add new" button at the bottom of the dropdown. Emits addNew on click. */
   isAddNew: Boolean,
+  /** Remove background and border from the trigger. */
   isTransparent: Boolean,
+  /** Reduce trigger height for compact layouts. */
   isSlim: Boolean,
+  /** Hide the dropdown chevron icon on the trigger. */
   hideChevron: Boolean,
+  /**
+   * Options array. Flat: `[{ label, value }]`.
+   * Grouped: `[{ label, values: [{ label, value }] }]`.
+   * Flat and grouped entries can be mixed.
+   */
   options: Array,
+  /** v-model value. String or Number for single; Array for multiple. */
   modelValue: [Array, String, Number],
+  /** Maximum number of options shown at once before the list scrolls. 0 = no limit. */
   maxVisibleOptions: {
     type: Number,
     default: 0
   },
+  /** Enable multi-value selection. v-model becomes an array. */
   multiple: Boolean,
+  /** Maximum number of selections allowed (multi-select). Emits max-option-allowed-set when reached. */
   maxOptionAllowed: Number,
+  /** Mark the field as required (shows required indicator on label). */
   isRequired: {
     type: Boolean,
     default: false
   },
+  /** Icon name shown to the right of the label text. */
   labelIcon: {
     type: String,
     default: ''
   },
+  /** Tooltip text shown when hovering the label icon. */
   tooltipText: {
     type: String,
     default: ''
   },
+  /** Props forwarded to the Tooltip component on the label icon. */
   tooltipOptions: {
     type: Object,
     default: () => ({})
   },
+  /** Props forwarded to each Chip tag rendered for selected values (multi-select). */
   chipProps: {
     type: Object,
     default: () => ({})
   },
+  /** Props forwarded to the underlying Popper/Dropdown component (e.g. placement). */
   popperOptions: {
     type: Object,
     default: () => ({})
   },
+  /** Show the search input inline inside the trigger instead of inside the dropdown. */
   isInlineSearch: Boolean,
+  /** Show a clear (×) button inside the trigger when a value is selected. Emits cleared on click. */
   isClearable: Boolean,
+  /** Externally controlled search query string (syncs the internal search input). */
   searchKeywords: String,
+  /** Show skeleton options while data is loading. */
   isLoading: Boolean,
+  /** Extra CSS class applied to the dropdown menu container. */
   menuClasses: String,
+  /** Extra CSS class applied to the dropdown wrapper element. */
   dropdownClasses: String,
+  /** CSS class applied to the selected value text inside the trigger. */
   selectTextClass: String
 })
 
 const emit = defineEmits({
+  /** "Add new" button at the bottom of the dropdown was clicked. */
   addNew: [],
+  /** Selected value changed. Payload is the new value (or array for multiple). */
   'update:modelValue': [],
+  /** User tried to select more items than maxOptionAllowed. */
   'max-option-allowed-set': [],
+  /** Search input changed when isAsynchronousSearch is true. Payload is the query string. */
   onSearchKeywords: '',
+  /** Dropdown closed. */
   close: [],
+  /** Dropdown opened or closed. */
   toggle: [],
+  /** Clear button was clicked (requires isClearable). */
   cleared: [],
+  /** User scrolled to the bottom of the options list. */
   loadMore: []
 })
 

@@ -6,43 +6,66 @@ import { ModalCropper } from '@/orchidui-core'
 import SingleOnlyImageUpload from './OcSingleOnlyImageUpload.vue'
 
 const props = defineProps({
+  /**
+   * Return format for the emitted value.
+   * `'array'` — emits an array of file objects.
+   * `'object'` — emits a single `{ fileName, fileLink }` object.
+   */
   format: {
     type: String,
     default: 'array'
   },
+  /** v-model — the current file value. Shape depends on `format` prop. */
   modelValue: Object,
+  /** Show the file name and progress bar preview after a file is selected. */
   isPreview: Boolean,
+  /** Instead of removing immediately, emit `confirmRemoveFile` and let the parent decide. */
   confirmToRemove: Boolean,
+  /** Show error border styling without displaying the error message text. */
   showErrorStyleOnly: Boolean,
+  /** Use the image-specific upload UI (square preview area). */
   isImageOnly: Boolean,
+  /** Show the upload zone when isImageOnly is true (otherwise only the preview is shown). */
   showUploadImageArea: Boolean,
-  /**
-   * Maximum file size in MB
-   */
+  /** Maximum allowed file size in MB. Emits onExceedMaxFileSize when exceeded. */
   maxSize: Number,
+  /** Allowed file types passed to the file input (e.g. `".pdf,.png"`, `"image/*"`). */
   accept: String,
+  /** Validate the file extension against `accept` and emit invalidFileType if it doesn't match. */
   validateAcceptFileType: Boolean,
+  /** Validation error message displayed in red below the upload area. */
   errorMessage: String,
+  /** CSS classes applied to the preview image element. */
   imageClasses: String,
+  /** Show a crop/edit button on image hover (isImageOnly mode). */
   allowToEdit: {
     type: Boolean,
     default: true
   },
+  /** Field label shown above the upload area. */
   label: String,
+  /** CSS class applied to the label element. */
   labelClass: String,
+  /** Helper text shown below the label. */
   hint: String,
+  /** Additional options forwarded to the upload button component. */
   uploadButtonOptions: Object,
   /**
-   * Variant of input (upload or url)
+   * Input variant.
+   * @values upload, url
    */
   variant: {
     type: String,
     default: 'upload',
     validator: (val) => ['upload', 'url'].includes(val)
   },
+  /** Truncate long file names in the preview with an ellipsis. */
   shouldTruncateFileName: Boolean,
+  /** Render only an upload button — no drag-and-drop area. */
   isButtonOnly: Boolean,
+  /** Disable the upload area — non-interactive, reduced opacity. */
   isDisabled: Boolean,
+  /** Props forwarded to the Button component when isButtonOnly is true (label, leftIcon, variant, size, etc.). */
   buttonUploadProps: {
     type: Object,
     default: () => ({
@@ -50,13 +73,21 @@ const props = defineProps({
     })
   }
 })
+
 const emit = defineEmits([
+  /** File selected or changed. Payload: `{ fileName, fileLink }` or array depending on format. */
   'update:modelValue',
+  /** File was removed by the user. */
   'onRemoveFile',
+  /** Selected file exceeds the maxSize limit. */
   'onExceedMaxFileSize',
+  /** A file with the same name already exists. */
   'fileExist',
+  /** Selected file extension does not match accept (requires validateAcceptFileType). */
   'invalidFileType',
+  /** Fired instead of removing when confirmToRemove is true. Payload: (file, index). */
   'confirmRemoveFile',
+  /** Crop/edit button was clicked (isImageOnly + allowToEdit mode). */
   'onOpenEditImage'
 ])
 

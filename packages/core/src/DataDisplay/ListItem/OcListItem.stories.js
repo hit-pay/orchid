@@ -1,10 +1,119 @@
-import { ListItem, DropdownItem, Button } from '@/orchidui-core'
+import { ListItem, DropdownItem, Button, Theme } from '@/orchidui-core'
 import { ref } from 'vue'
 
 export default {
   component: ListItem,
-  tags: ['autodocs']
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: `
+ListItem is a versatile row component with five built-in layout types: \`timeLine\`, \`webhook\`, \`payment\`, \`general\`, and \`accordion\`.
+The \`type\` prop switches the internal layout and which props/slots are active.
+
+---
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| \`type\` | String | \`'timeLine'\` | Layout variant: \`timeLine\` · \`webhook\` · \`payment\` · \`general\` · \`accordion\` |
+| \`title\` | String | — | Primary text |
+| \`description\` | String | — | Secondary text below the title |
+| \`descriptionIcon\` | String | — | Icon name shown before the description text |
+| \`icon\` | String | — | Icon name inside the dot (timeLine) or icon column |
+| \`iconClass\` | String | — | CSS class applied to the icon (e.g. colour override) |
+| \`iconText\` | String | — | Badge/amount text shown beside the icon (timeLine) |
+| \`date\` | String | — | Date string shown in the row (webhook, general) |
+| \`chips\` | Array | \`[]\` | Chip badges: \`[{ label, variant? }]\` |
+| \`details\` | Array | \`[]\` | Detail badges: \`[{ label, icon?, country? }]\` |
+| \`urls\` | Array | \`[]\` | URL list: \`[{ url, title }]\` (webhook type) |
+| \`paymentMethods\` | Array | \`[]\` | Payment method icons: \`[{ method, md }]\` (payment type) |
+| \`isActive\` | Boolean | — | Filled dot when true (timeLine type) |
+| \`isDraggable\` | Boolean | \`false\` | Show drag handle (accordion type) |
+| \`isDisabled\` | Boolean | \`false\` | Disabled state (reduced opacity, no interactions) |
+| \`isTransparent\` | Boolean | \`false\` | Remove background and border |
+| \`isOpenDefault\` | Boolean | \`false\` | Start expanded (accordion type) |
+| \`isDropdownActionsVisible\` | Boolean | — | Show/hide the three-dot menu button (general/webhook) |
+| \`modelValue\` | Boolean | — | v-model: controls open/closed state (accordion type) |
+
+---
+
+## Slots
+
+| Slot | Types | Description |
+|------|-------|-------------|
+| \`#logo\` | payment, general | Custom logo or icon on the left |
+| \`#menu\` | general, webhook | Content inside the three-dot dropdown |
+| \`#append\` | general | Right-side content (e.g. a Button) when no dropdown |
+| \`#content\` | accordion | Expanded body content |
+
+---
+
+## Events
+
+| Event | Description |
+|-------|-------------|
+| \`update:modelValue\` | Accordion open/close toggled |
+        `.trim()
+      }
+    }
+  }
 }
+
+// ── Playground ────────────────────────────────────────────────────────────────
+
+export const Playground = {
+  argTypes: {
+    type: {
+      control: 'select',
+      options: ['timeLine', 'webhook', 'payment', 'general', 'accordion']
+    },
+    isActive:      { control: 'boolean' },
+    isDraggable:   { control: 'boolean' },
+    isDisabled:    { control: 'boolean' },
+    isTransparent: { control: 'boolean' },
+    title:         { control: 'text' },
+    description:   { control: 'text' },
+    iconText:      { control: 'text' },
+    date:          { control: 'text' }
+  },
+  args: {
+    type:          'general',
+    isActive:      true,
+    isDraggable:   false,
+    isDisabled:    false,
+    isTransparent: false,
+    title:         'Standard shipping',
+    description:   'Flat rate · 3–5 business days',
+    iconText:      'SGD 5.00',
+    date:          'Oct 20, 2024'
+  },
+  render: (args) => ({
+    components: { ListItem, DropdownItem, Theme },
+    setup() {
+      const chips   = [{ label: 'Default' }, { label: 'Express', variant: 'accent-1' }]
+      const details = [{ label: 'SGD 5.00', icon: 'dollar-coin' }]
+      return { args, chips, details }
+    },
+    template: `
+      <Theme class="p-6">
+        <ListItem v-bind="args" :chips="chips" :details="details">
+          <template #menu>
+            <div class="p-2 border-b border-gray-200">
+              <DropdownItem text="Edit" icon="pencil" />
+            </div>
+            <div class="p-2">
+              <DropdownItem text="Delete" icon="bin" variant="destructive" />
+            </div>
+          </template>
+        </ListItem>
+      </Theme>
+    `
+  })
+}
+
+// ── TimeLine ──────────────────────────────────────────────────────────────────
 
 export const TimeLine = {
   description: 'Timeline event row. Shows icon, title, amount text, and description. isActive controls the filled/empty dot.',
@@ -44,6 +153,8 @@ import { ListItem } from '@orchidui/core'
     `
   })
 }
+
+// ── Webhook ───────────────────────────────────────────────────────────────────
 
 export const Webhook = {
   description: 'Webhook endpoint row with title, date, URL list, and a context menu via #menu slot.',
@@ -89,6 +200,8 @@ import { ListItem, DropdownItem } from '@orchidui/core'
   })
 }
 
+// ── Payment ───────────────────────────────────────────────────────────────────
+
 export const Payment = {
   description: 'Payment method integration row. Uses #logo slot for provider image and paymentMethods for method icons.',
   highlights: ['type="payment"', '#logo slot — provider logo', 'paymentMethods — array of { method, md } icon URLs'],
@@ -129,9 +242,11 @@ const paymentMethods = [
   })
 }
 
+// ── General ───────────────────────────────────────────────────────────────────
+
 export const General = {
-  description: 'Versatile row for any list item. Supports chips, detail badges, custom logo, and action menu.',
-  highlights: ['type="general"', 'chips — array of { label, variant }', 'details — array of { label, icon?, country? }', '#logo slot — custom logo/icon', '#append slot — right-side button'],
+  description: 'Versatile row for any list item. Supports chips, detail badges, custom logo, and action menu. Use #append instead of #menu when no dropdown is needed.',
+  highlights: ['type="general"', 'chips — [{ label, variant? }]', 'details — [{ label, icon?, country? }]', '#logo slot', '#append slot — right-side action without dropdown', 'is-dropdown-actions-visible — hide three-dot button'],
   code: `<script setup>
 import { ListItem, DropdownItem, Button } from '@orchidui/core'
 
@@ -166,7 +281,7 @@ const details = [
       </template>
     </ListItem>
 
-    <!-- With custom logo and append button (no dropdown) -->
+    <!-- With custom logo + append button, no dropdown -->
     <ListItem
       type="general"
       title="PayNow"
@@ -180,6 +295,15 @@ const details = [
         <Button label="Disconnect" variant="secondary" size="small" />
       </template>
     </ListItem>
+
+    <!-- Disabled state -->
+    <ListItem
+      type="general"
+      title="Disabled integration"
+      description="Cannot be modified"
+      is-disabled
+      :chips="[{ label: 'Inactive', variant: 'error' }]"
+    />
   </div>
 </template>`,
   render: () => ({
@@ -194,22 +318,26 @@ const details = [
         <ListItem type="general" title="Standard shipping" description="Flat rate" :chips="chips" :details="details">
           <template #menu>
             <div class="p-2"><DropdownItem text="Edit" icon="pencil" /></div>
+            <div class="p-2"><DropdownItem text="Delete" icon="bin" variant="destructive" /></div>
           </template>
         </ListItem>
         <ListItem type="general" title="PayNow" :chips="[{ label: 'Primary' }]" :is-dropdown-actions-visible="false">
           <template #logo>
             <div class="w-10 h-10 rounded bg-oc-accent-1-50 flex items-center justify-center font-bold text-sm">PN</div>
           </template>
-          <template #append><Button label="Connect" size="small" /></template>
+          <template #append><Button label="Disconnect" variant="secondary" size="small" /></template>
         </ListItem>
+        <ListItem type="general" title="Disabled integration" is-disabled :chips="[{ label: 'Inactive', variant: 'error' }]" />
       </div>
     `
   })
 }
 
+// ── Accordion ─────────────────────────────────────────────────────────────────
+
 export const Accordion = {
-  description: 'Collapsible row. v-model controls open/closed state. Use #content slot for the expanded body.',
-  highlights: ['type="accordion"', 'v-model — open/closed boolean', '#content slot — expanded body content', 'isDraggable — shows drag handle'],
+  description: 'Collapsible row. v-model controls open/closed state. Use #content slot for the expanded body. isDraggable shows a drag handle for reorderable lists.',
+  highlights: ['type="accordion"', 'v-model — open/closed boolean', '#content slot — expanded body', 'isDraggable — drag handle', 'isOpenDefault — start expanded'],
   code: `<script setup>
 import { ref } from 'vue'
 import { ListItem } from '@orchidui/core'

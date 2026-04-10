@@ -12,10 +12,10 @@
 | 1 | FormBuilder | 99 | [x] |
 | 2 | EmptyPage | 74 | [x] |
 | 3 | DataTable | 54 | [x] |
-| 4 | Select | 48 | [ ] |
-| 5 | ListItem | 26 | [ ] |
-| 6 | Table | 24 | [ ] |
-| 7 | SingleFileUpload | 24 | [ ] |
+| 4 | Select | 48 | [x] |
+| 5 | ListItem | 26 | [x] |
+| 6 | Table | 24 | [x] |
+| 7 | SingleFileUpload | 24 | [x] |
 | 8 | Input | 23 | [ ] |
 | 9 | DatePicker | 21 | [ ] |
 | 10 | Skeleton | 20 | [ ] |
