@@ -8,72 +8,105 @@ import dayjs from 'dayjs'
 // https://github.com/iamkun/dayjs/issues/1786
 dayjs.extend(customParseFormat)
 
-const emit = defineEmits(['update:modelValue', 'resetCalendar', 'error'])
+const emit = defineEmits([
+  /** Date value changed. Payload: formatted string (single) or [startString, endString] (range). */
+  'update:modelValue',
+  /** Calendar was reset (indefinite toggle turned off). */
+  'resetCalendar',
+  /** Invalid date was typed into the input. */
+  'error'
+])
 const props = defineProps({
+  /** v-model — formatted date string (single) or `[startDate, endDate]` array (range). */
   modelValue: {
     type: [String, Date, Number, Array]
   },
+  /**
+   * Picker mode.
+   * @values default, range
+   */
   type: {
     type: String,
     default: 'default',
     validator: (val) => ['default', 'range'].includes(val)
   },
+  /** Custom function `(date: Date) => boolean` — return `true` to disable a specific date. */
   disabledDate: {
     type: Function,
     default: () => false
   },
+  /** Earliest selectable date (string, Date, or timestamp). Dates before this are disabled. */
   minDate: {
     type: [String, Date, Number],
     default: null
   },
+  /** Latest selectable date (string, Date, or timestamp). Dates after this are disabled. */
   maxDate: {
     type: [String, Date, Number],
     default: null
   },
+  /**
+   * dayjs format string used for display, input parsing, and the emitted v-model value.
+   * Default: `'YYYY-MM-DD'`. Use `'DD/MM/YYYY'` etc. to match your locale.
+   */
   dateFormat: {
     type: String,
     default: 'YYYY-MM-DD'
   },
+  /** Disable the entire picker — non-interactive. */
   disabled: {
     type: Boolean,
     default: false
   },
+  /** Validation error message shown below the input. */
   errorMessage: {
     type: String,
     default: ''
   },
+  /** Field label shown above the input. */
   label: {
     type: String,
     default: ''
   },
+  /** Helper text shown below the label. */
   hint: {
     type: String,
     default: ''
   },
+  /** Placeholder text for the single-date input. */
   placeholder: {
     type: String,
     default: 'YYYY-MM-DD'
   },
+  /** Range mode: show two separate text inputs (start + end) instead of one combined input. */
   isSplitInput: {
     type: Boolean,
     default: true
   },
+  /** Range mode: label for the start date input. */
   minLabel: {
     type: String,
     default: 'From'
   },
+  /** Range mode: label for the end date input. */
   maxLabel: {
     type: String,
     default: 'To'
   },
+  /** Show a `*` required indicator next to the label. */
   isRequired: {
     type: Boolean,
     default: false
   },
+  /** Show an "Indefinite" toggle checkbox that clears the date and disables the picker. */
   isIndefinite: {
     type: Boolean,
     default: false
   },
+  /**
+   * Disable a specific date range inside the calendar (e.g. already-booked slots).
+   * Shape: `{ start: Date|string|null, end: Date|string|null }`.
+   */
   disabledRange: {
     type: Object,
     default: () => ({
@@ -81,18 +114,28 @@ const props = defineProps({
       end: null
     })
   },
+  /** Number of calendar months shown in the dropdown (range mode). Default: 2. */
   countCalendars: {
     type: Number,
     default: 2
   },
+  /**
+   * Quick-select shortcut buttons shown above the calendar.
+   * Each item: `{ label: string, range: [startDate, endDate] }`.
+   */
   shortcuts: {
     type: Array,
     default: () => []
   },
+  /**
+   * Popper placement for the calendar dropdown.
+   * Any valid Popper.js placement string (e.g. `'bottom-start'`, `'top-end'`).
+   */
   placement: {
     type: String,
     default: 'bottom-start'
   },
+  /** AI-assisted state — shows a subtle accent border. Clears on first user interaction. */
   ai: {
     type: Boolean,
     default: false

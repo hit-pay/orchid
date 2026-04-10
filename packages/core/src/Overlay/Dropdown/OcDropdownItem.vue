@@ -3,17 +3,29 @@ import { computed } from 'vue'
 import { Icon } from '@/orchidui-core'
 
 defineProps({
+  /**
+   * Visual style variant.
+   * @values default, destructive
+   */
   variant: {
     type: String,
     default: 'default'
   },
+  /** Icon name shown on the left side of the item. */
   icon: String,
+  /** Extra CSS class applied to the icon element. */
   iconClasses: String,
+  /** Primary label text of the menu item. */
   text: String,
+  /** Secondary description text shown below the main text. */
   subText: String,
+  /** Extra attrs forwarded to the Icon component (e.g. width, height). */
   iconProps: Object,
+  /** Show a "BETA" badge on the right side of the item. */
   isBeta: Boolean,
+  /** Show a "NEW" badge on the right side of the item. */
   isNew: Boolean,
+  /** Show a "TRY IT" badge on the right side of the item. */
   isTryIt: Boolean
 })
 const variantClasses = computed(() => ({

@@ -27,33 +27,73 @@ import { formatFilterDisplay, clearAllFilters as clearAllFiltersUtil } from './u
 import { getItemsPerPageOptions, formatCustomItemsPerPageOptions } from './utils/paginationUtils.js'
 
 const props = defineProps({
+  /** Show skeleton loading rows while data is being fetched. */
   isLoading: Boolean,
+  /**
+   * Unique ID for this table instance. Used as a localStorage namespace when columnEdit is enabled.
+   */
   id: {
     type: String,
     required: true
   },
+  /**
+   * Full configuration object for the table.
+   *
+   * `tableOptions` — table structure:
+   * - `headers` — array of `{ key, label, variant?, class?, isCopy?, isSortable?, stickyLeft?, stickyRight?, chipOptions?, disableClickRow? }`
+   * - `fields` — array of row data objects keyed to header keys
+   * - `isSelectable` — show row checkboxes
+   * - `isCursorPointer` — cursor:pointer on rows
+   * - `isSticky` — horizontal scroll with sticky first column
+   * - `isBorderless` — remove outer border
+   *
+   * `filterOptions` (optional) — filter toolbar config:
+   * - `search` — `{ key, options? }` enables search bar
+   * - `form` — FormBuilder jsonForm array rendered in the filter dropdown
+   * - `tabs` — `{ key, options }` tab bar above the table
+   * - `per_page` — `{ key }` controls which filter key holds items-per-page
+   * - `columnEdit` — `{ key, localStorageKey }` enables column show/hide editor
+   *
+   * `pagination` — `{ total, last_page }` for numbered pagination; omit for cursor mode.
+   * `cursor` — `{ prev, next }` cursor strings for cursor-based navigation.
+   * `perPageOptions` — custom per-page dropdown options.
+   * `hidePerPageDropdown` — hide the per-page selector.
+   */
   options: {
     type: Object,
     required: true
   },
+  /**
+   * Current filter state object (v-model:filter). Includes page, per_page, search query, tab value, etc.
+   * The component emits `update:filter` whenever filters change.
+   */
   filter: {
     type: Object,
     default: () => ({})
   },
+  /** Currently selected rows array (v-model:selected). Each item is a row data object from fields. */
   selected: {
     type: Array,
     required: false
   },
+  /** CSS class or function `(row, index) => string` applied to each data row element. */
   rowClass: String,
+  /**
+   * Field name or function used to uniquely identify each row.
+   * If a string, `row[rowKey]` is used. If a function, receives the row and returns a key.
+   */
   rowKey: {
     type: [String, Function],
     default: 'id'
   },
+  /** Field name in each row data object containing the URL to navigate to on row click. */
   rowLink: String,
+  /** Use the new table design (NewTable component) instead of the classic Table. */
   isNewTable: {
     type: Boolean,
     default: false
   },
+  /** Highlight a specific row by index (0-based). Set -1 to clear. */
   selectedIndex: {
     type: Number,
     default: -1

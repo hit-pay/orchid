@@ -5,33 +5,46 @@ import { Draggable } from '@/orchidui-core'
 import { ref } from 'vue'
 
 defineProps({
+  /** v-model — array of list item objects. Reordering updates this array. */
   modelValue: Array,
+  /** Object key used to read the icon name from each item. Default: `'icon'`. */
   iconKey: {
     type: String,
     default: 'icon'
   },
+  /** Mark this list as a nested child list — affects styling (no background, icon always visible). */
   isChildren: Boolean,
+  /** Object key used to read nested child items from each item. Default: `'children'`. */
   childrenKey: {
     type: String,
     default: 'children'
   },
+  /** Enable link display for items that have a link property. */
   isLink: Boolean,
+  /** Object key used to read the URL from each item when isLink is true. Default: `'link'`. */
   linkKey: {
     type: String,
     default: 'link'
   },
-  unmovable: Boolean, // general unmovable
+  /** Disable drag-and-drop for all items in this list. */
+  unmovable: Boolean,
+  /** Apply inactive styling (gray background) for items where `active === false`. */
   enableStatusVariant: Boolean,
+  /** Extra Tailwind classes applied to each list item card. */
   classes: {
     type: String,
     default: ''
   },
+  /** Tailwind width class applied to the title text container (e.g. `'w-[200px]'`). */
   titleWidth: String
 })
 
 const emit = defineEmits({
+  /** Item order changed. Payload: `(newList, changedElement)`. */
   'update:modelValue': [],
+  /** A list item was clicked. Payload: the item object. */
   'click:element': [],
+  /** Drag-over event fired — use to allow/deny drops. */
   detectMove: null
 })
 const isHovered = ref([])

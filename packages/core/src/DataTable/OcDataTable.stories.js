@@ -1,769 +1,1136 @@
-import {
-  Theme,
-  Table,
-  Chip,
-  Icon,
-  Toggle,
-  TableCellContent,
-  Button,
-  Dropdown,
-  DropdownItem,
-  DataTable
-} from '@/orchidui-core'
-
-import { ref } from 'vue'
-import dayjs from 'dayjs'
+import { DataTable, Chip, Toggle, Button, Dropdown, DropdownItem, EmptyPage } from '@/orchidui-core'
+import { ref, computed } from 'vue'
 
 export default {
   component: DataTable,
-  tags: ['autodocs']
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: `
+DataTable is a full-featured table with an integrated filter toolbar, pagination, and column management.
+All state lives in the \`filter\` object (v-model:filter). The component emits \`update:filter\` whenever the
+filter changes — use that event to re-fetch data from the server.
+
+---
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| \`id\` | String | **required** | Unique ID — used as localStorage namespace when columnEdit is enabled |
+| \`options\` | Object | **required** | Full config object (see **options** section below) |
+| \`filter\` | Object | \`{}\` | Current filter state (v-model:filter). Holds page, per_page, search query, tab, columnEdit, etc. |
+| \`selected\` | Array | — | Currently selected rows (v-model:selected) |
+| \`isLoading\` | Boolean | \`false\` | Show skeleton rows while fetching |
+| \`isNewTable\` | Boolean | \`false\` | Use the new table visual design (**preferred** — used in 46+ pages) |
+| \`rowKey\` | String\\|Function | \`'id'\` | Field name (or fn) that uniquely identifies each row |
+| \`rowLink\` | String | — | Field name whose value is used as navigation URL on row click |
+| \`rowClass\` | String | — | CSS class applied to every data row |
+| \`selectedIndex\` | Number | \`-1\` | 0-based index of the highlighted row; -1 = none |
+
+---
+
+## options object
+
+\`\`\`js
+{
+  // ── Table structure (required) ──────────────────────────────────────────
+  tableOptions: {
+    headers: [
+      {
+        key: 'name',          // matches field key and slot name
+        label: 'Name',        // column header text
+        class: 'w-[30%]',     // column width class
+        variant: 'chip',      // 'chip' | 'icon' | 'datetime' | 'image' — built-in cell renderers
+        chipOptions: {        // map of value → { label, variant } — used with variant: 'chip'
+          active: { label: 'Active', variant: 'success' }
+        },
+        headerVariant: 'text',// override header cell style
+        isSortable: true,     // show sort indicator
+        isCopy: true,         // show copy-to-clipboard icon
+        stickyLeft: true,     // pin column to left (requires isSticky)
+        stickyRight: true,    // pin column to right (requires isSticky)
+        disableClickRow: true // prevent click:row from firing when this cell is clicked
+      }
+    ],
+    fields: [ { id: '1', name: 'Alice', ... } ],  // row data — keyed to header keys
+    isSelectable: true,       // show row checkboxes
+    isCursorPointer: true,    // cursor:pointer on rows
+    isSticky: true,           // horizontal scroll with sticky columns
+    isBorderless: true        // remove outer border
+  },
+
+  // ── Filter toolbar (optional) ───────────────────────────────────────────
+  filterOptions: {
+    search: {
+      key: 'keywords',        // filter key for search query
+      options: [              // if set, shows a field-selector dropdown before the search input
+        { label: 'Name', value: 'name' }
+      ]
+    },
+    tabs: {
+      key: 'tab',             // filter key for active tab
+      options: [ { label: 'All', value: '' }, { label: 'Active', value: 'active' } ]
+    },
+    per_page: { key: 'per_page' },  // filter key for items-per-page
+    form: [ /* FormBuilder jsonForm array */ ],   // fields rendered inside the filter dropdown
+    actions: { applyButton: { label: 'Apply filters' } },
+    columnEdit: {
+      key: 'columnEdit',             // filter key that holds column order/visibility state
+      localStorageKey: 'my-table'   // localStorage key for persisting column config
+    }
+  },
+
+  // ── Pagination ──────────────────────────────────────────────────────────
+  pagination: { total: 100, last_page: 10 },  // numbered pagination
+  // OR cursor-based (mutually exclusive with pagination):
+  cursor: { prev: 'cursor_abc', next: 'cursor_xyz' },  // null values disable the button
+
+  // ── Other ───────────────────────────────────────────────────────────────
+  perPageOptions: [10, 25, 50, 100],  // custom per-page dropdown values
+  hidePerPageDropdown: true           // hide the per-page selector
+}
+\`\`\`
+
+---
+
+## Events
+
+| Event | Payload | Description |
+|-------|---------|-------------|
+| \`update:filter\` | \`(filter, isOnMount)\` | Emitted on every filter change — use to re-fetch data |
+| \`apply-filter\` | \`(filter, isOnMount)\` | Same as update:filter (alias, both fire together) |
+| \`update:selected\` | \`(rows)\` | Selected rows changed |
+| \`click:row\` | \`{ item, index }\` | Row clicked (not fired when disableClickRow column is clicked) |
+| \`hover:cell\` | \`{ item, key }\` | Cell hovered |
+| \`search-query-changed\` | \`(query)\` | Search input changed |
+| \`filter-fields-changed\` | \`(field)\` | A field inside the filter form changed |
+| \`filter-removed\` | \`(field)\` | A filter tag was removed |
+| \`filter-open\` | \`(isOpen)\` | Filter dropdown opened/closed |
+| \`columns-changed\` | \`(activeHeaders)\` | Column visibility/order changed |
+| \`on-table-ready\` | — | Fired on mount after column init |
+
+---
+
+## Slots
+
+| Slot | Bindings | Description |
+|------|----------|-------------|
+| \`#[header.key]\` | \`{ item, data }\` | Override cell content for a specific column (\`data\` = cell value, \`item\` = full row) |
+| \`#header-[key]-tooltip\` | \`{ item, data }\` | Tooltip content for a column header |
+| \`#bulk-actions\` | \`{ selectedRows }\` | Shown in the filter bar when rows are selected |
+| \`#before\` | — | Content above the filter bar |
+| \`#after\` | — | Content below the table rows, above pagination |
+| \`#after-rows\` | — | Injected after the last data row |
+| \`#empty\` | — | Replaces the default empty state when fields is empty |
+| \`#filter-options\` | — | Replaces the entire right-side filter toolbar |
+| \`#custom-filter-form\` | \`{ errors, values, jsonForm, updateFilter }\` | Custom content inside the filter dropdown |
+| \`#before-pagination\` | — | Content between table and pagination |
+| \`#table-header\` | slotProps | Override the entire table header row |
+| \`#table-body\` | slotProps | Override the entire table body |
+        `.trim()
+      }
+    }
+  }
 }
 
-export const Default = {
-  args: {
-    options: {
-      pagination: {
-        total: 50,
-        last_page: 20
-      },
-      filterOptions: {
-        per_page: {
-          key: 'per_page'
-        },
-        tabs: {
-          key: 'tabs',
-          options: [
-            { label: 'All', value: '' },
-            { label: 'Filter 01', value: '1' },
-            { label: 'Filter 02', value: '2' },
-            { label: 'Filter 03', value: '3' }
-          ]
-        },
-        actions: {
-          applyButton: {
-            label: '100 results'
+export const Basic = {
+  description: 'Minimal DataTable with search, status tabs, pagination, and items-per-page. Listen to update:filter to re-fetch data.',
+  highlights: ['options.tableOptions — headers + fields', 'options.filterOptions — search + tabs + per_page', 'options.pagination — { total, last_page }', 'v-model:filter — current filter state', 'update:filter event to trigger data fetch'],
+  code: `<script setup>
+import { ref } from 'vue'
+import { DataTable } from '@orchidui/core'
+
+const filter = ref({ page: 1, per_page: 10, tab: '', keywords: '' })
+
+const options = {
+  pagination: { total: 100, last_page: 10 },
+  filterOptions: {
+    per_page: { key: 'per_page' },
+    search: { key: 'keywords' },
+    tabs: {
+      key: 'tab',
+      options: [
+        { label: 'All', value: '' },
+        { label: 'Active', value: 'active' },
+        { label: 'Inactive', value: 'inactive' }
+      ]
+    }
+  },
+  tableOptions: {
+    headers: [
+      { key: 'name',   label: 'Name',   class: 'w-[40%]' },
+      { key: 'email',  label: 'Email',  class: 'w-[40%]' },
+      { key: 'status', label: 'Status', class: 'w-[20%]' }
+    ],
+    fields: [
+      { id: '1', name: 'Alice',   email: 'alice@example.com',   status: 'Active' },
+      { id: '2', name: 'Bob',     email: 'bob@example.com',     status: 'Inactive' },
+      { id: '3', name: 'Charlie', email: 'charlie@example.com', status: 'Active' }
+    ]
+  }
+}
+
+function onFilterChange(newFilter) {
+  filter.value = newFilter
+  // fetch data with newFilter params here
+  console.log('fetch with:', newFilter)
+}
+</script>
+
+<template>
+  <DataTable
+    id="users-table"
+    is-new-table
+    :filter="filter"
+    :options="options"
+    @update:filter="onFilterChange"
+  />
+</template>`,
+  render: () => ({
+    components: { DataTable },
+    setup() {
+      const filter = ref({ page: 1, per_page: 10, tab: '', keywords: '' })
+      const options = {
+        pagination: { total: 100, last_page: 10 },
+        filterOptions: {
+          per_page: { key: 'per_page' },
+          search: { key: 'keywords' },
+          tabs: {
+            key: 'tab',
+            options: [
+              { label: 'All', value: '' },
+              { label: 'Active', value: 'active' },
+              { label: 'Inactive', value: 'inactive' }
+            ]
           }
         },
-        search: {
-          key: 'keywords',
-          selectedOption: 'keywords',
-          options: [
-            { label: 'All', value: 'keywords' },
-            { label: 'Filter 01', value: '1' },
-            { label: 'Filter 02', value: '2' },
-            { label: 'Filter 03', value: '3' }
+        tableOptions: {
+          headers: [
+            { key: 'name',   label: 'Name',   class: 'w-[40%]' },
+            { key: 'email',  label: 'Email',  class: 'w-[40%]' },
+            { key: 'status', label: 'Status', class: 'w-[20%]' }
+          ],
+          fields: [
+            { id: '1', name: 'Alice',   email: 'alice@example.com',   status: 'Active' },
+            { id: '2', name: 'Bob',     email: 'bob@example.com',     status: 'Inactive' },
+            { id: '3', name: 'Charlie', email: 'charlie@example.com', status: 'Active' }
           ]
-        },
-        columnEdit: {
-          key: 'columnEdit',
-          localStorageKey: 'test-local-storage-table'
-        },
-        form: [
-          {
-            name: 'checkboxes_group',
-            type: 'CheckboxesGroup',
-            rule: 'required',
-            props: {
-              label: 'CheckboxesGroup',
-              hint: 'This is a hint text to help user',
-              alignment: 'vertical',
-              checkboxes: [
-                { label: 'Checkbox 1', value: 1 },
-                { label: 'Checkbox 2', value: 2 },
-                { label: 'Checkbox 3', value: 3, isDisabled: true }
-              ]
-            }
-          },
-          {
-            name: [{ key: 'date_range_from' }, { key: 'date_range_to' }],
-            type: 'DatePicker',
-            props: {
-              type: 'range',
-              label: 'DatePicker Range',
-              hint: 'This is a hint text to help user',
-              placeholder: 'placeholder',
-              maxDate: dayjs().format('YYYY-MM-DD')
-            }
-          },
-          {
-            name: [{ key: 'total_range_from' }, { key: 'total_range_to' }],
-            type: 'RangeInput',
-            props: {
-              label: 'RangeInput',
-              hint: 'This is a hint text to help user',
-              placeholder: 'placeholder',
-              onlyInput: true
-            }
-          },
-          {
-            name: 'select',
-            type: 'Select',
-            props: {
-              label: 'Select',
-              hint: 'This is a hint text to help user',
-              placeholder: 'placeholder',
-              options: [
-                { label: 'Option 1', value: 1 },
-                { label: 'Option 2', value: 2 },
-                { label: 'Option 3', value: 3 },
-                { label: 'Option 4', value: 4 }
-              ]
-            }
-          }
-        ]
+        }
+      }
+      return { filter, options }
+    },
+    template: `
+      <div class="p-6">
+        <DataTable id="basic-table" is-new-table :filter="filter" :options="options" @update:filter="filter = $event" />
+      </div>
+    `
+  })
+}
+
+export const WithCustomCells = {
+  description: 'Custom column slots override the default cell renderer. The #bulk-actions slot renders when rows are selected.',
+  highlights: ['#[header.key]="{ item, data }" — custom cell slot', '#bulk-actions="{ selectedRows }" — batch action bar', 'v-model:selected — selected rows array', 'row-key — unique row identifier field'],
+  code: `<script setup>
+import { ref } from 'vue'
+import { DataTable, Chip, Toggle, Button, Dropdown, DropdownItem } from '@orchidui/core'
+
+const filter    = ref({ page: 1, per_page: 10 })
+const selected  = ref([])
+const dropdowns = ref({})
+
+const options = {
+  pagination: { total: 3, last_page: 1 },
+  filterOptions: { per_page: { key: 'per_page' } },
+  tableOptions: {
+    isSelectable: true,
+    isCursorPointer: true,
+    headers: [
+      { key: 'name',    label: 'Name',    class: 'w-[30%]' },
+      { key: 'status',  label: 'Status',  class: 'w-[20%]', variant: 'chip',
+        chipOptions: {
+          active:   { label: 'Active',   variant: 'success' },
+          inactive: { label: 'Inactive', variant: 'error' }
+        }
       },
-      tableOptions: {
-        isSticky: false,
-        isSelectable: true,
-        isCursorPointer: true,
-        isBorderless: false,
-        headers: [
-          {
-            key: 'image',
-            variant: 'image',
-            label: 'Image',
-            class: 'w-1/2 md:min-w-[5%]'
-          },
-          {
-            key: 'col1',
-            label: 'Table Header 1',
-            class: 'w-1/2 md:min-w-[20%]'
-          },
-          {
-            key: 'col2',
-            label: 'Table Header 2',
-            class: 'w-1/2 md:min-w-[10%]'
-          },
-          {
-            key: 'col3',
-            variant: 'content',
-            label: 'Table Header 3',
-            title: 'col3Title',
-            href: 'col3Url',
-            description: 'col3Description',
-            isCopy: true,
-            addDescriptionToCopyClipboard: true,
-            class: 'w-1/2 md:min-w-[12%]'
-          },
-          {
-            key: 'col4',
-            label: 'Table Header 4',
-            class: 'w-1/2 md:min-w-[18%]'
-          },
-          {
-            key: 'col5',
-            label: 'Table Header 5',
-            class: 'w-1/2 md:min-w-[15%]',
-            variant: 'chip',
-            chipOptions: {
-              Label: {
-                label: 'Label',
-                variant: 'success',
-                icon: 'check'
+      { key: 'enabled', label: 'Enabled', class: 'w-[20%]', disableClickRow: true },
+      { key: 'actions', label: '',        class: 'w-[10%]', variant: 'icon', headerVariant: 'text' }
+    ],
+    fields: [
+      { id: '1', name: 'Alice',   status: 'active',   enabled: true },
+      { id: '2', name: 'Bob',     status: 'inactive', enabled: false },
+      { id: '3', name: 'Charlie', status: 'active',   enabled: true }
+    ]
+  }
+}
+</script>
+
+<template>
+  <DataTable
+    id="custom-cells-table"
+    is-new-table
+    v-model:selected="selected"
+    v-model:filter="filter"
+    row-key="id"
+    :options="options"
+  >
+    <!-- Bulk action bar shown when rows are selected -->
+    <template #bulk-actions>
+      <Button size="small" is-transparent left-icon="eye-open"  label="Enable" />
+      <Button size="small" is-transparent left-icon="bin"       label="Delete" variant="destructive" />
+    </template>
+
+    <!-- Custom Enabled cell — Toggle component -->
+    <template #enabled="{ item }">
+      <Toggle size="small" :model-value="item.enabled" />
+    </template>
+
+    <!-- Custom Actions cell — Dropdown menu per row -->
+    <template #actions="{ item }">
+      <Dropdown v-model="dropdowns[item.id]" :distance="10">
+        <Icon class="w-6 h-6 cursor-pointer mx-auto" name="dots-vertical" />
+        <template #menu>
+          <div class="p-2">
+            <DropdownItem text="Edit"   icon="pencil" />
+            <DropdownItem text="Delete" icon="bin"    variant="destructive" />
+          </div>
+        </template>
+      </Dropdown>
+    </template>
+  </DataTable>
+</template>`,
+  render: () => ({
+    components: { DataTable, Chip, Toggle, Button, Dropdown, DropdownItem },
+    setup() {
+      const filter    = ref({ page: 1, per_page: 10 })
+      const selected  = ref([])
+      const dropdowns = ref({})
+      const options = {
+        pagination: { total: 3, last_page: 1 },
+        filterOptions: { per_page: { key: 'per_page' } },
+        tableOptions: {
+          isSelectable: true,
+          isCursorPointer: true,
+          headers: [
+            { key: 'name',    label: 'Name',    class: 'w-[30%]' },
+            { key: 'status',  label: 'Status',  class: 'w-[20%]', variant: 'chip',
+              chipOptions: {
+                active:   { label: 'Active',   variant: 'success' },
+                inactive: { label: 'Inactive', variant: 'error' }
+              }
+            },
+            { key: 'enabled', label: 'Enabled', class: 'w-[20%]', disableClickRow: true },
+            { key: 'actions', label: '',        class: 'w-[10%]', variant: 'icon', headerVariant: 'text' }
+          ],
+          fields: [
+            { id: '1', name: 'Alice',   status: 'active',   enabled: true },
+            { id: '2', name: 'Bob',     status: 'inactive', enabled: false },
+            { id: '3', name: 'Charlie', status: 'active',   enabled: true }
+          ]
+        }
+      }
+      return { filter, selected, dropdowns, options }
+    },
+    template: `
+      <div class="p-6">
+        <DataTable id="custom-cells" is-new-table v-model:selected="selected" v-model:filter="filter" row-key="id" :options="options">
+          <template #bulk-actions>
+            <Button size="small" is-transparent left-icon="bin" label="Delete" variant="destructive" />
+          </template>
+          <template #enabled="{ item }">
+            <Toggle size="small" :model-value="item.enabled" />
+          </template>
+        </DataTable>
+      </div>
+    `
+  })
+}
+
+export const WithFilterForm = {
+  description: 'Filter dropdown with a form rendered inside. Emit apply-filter to receive the selected filter values.',
+  highlights: ['options.filterOptions.form — FormBuilder jsonForm array', 'apply-filter event — filter values from form', 'filter-fields-changed event — per-field change'],
+  code: `<script setup>
+import { ref } from 'vue'
+import { DataTable } from '@orchidui/core'
+
+const filter = ref({ page: 1, per_page: 10, status: null })
+
+const options = {
+  pagination: { total: 50, last_page: 5 },
+  filterOptions: {
+    per_page: { key: 'per_page' },
+    search: { key: 'keywords' },
+    form: [
+      {
+        name: 'status',
+        type: 'Select',
+        props: {
+          label: 'Status',
+          options: [
+            { label: 'Active',   value: 'active' },
+            { label: 'Inactive', value: 'inactive' }
+          ]
+        }
+      },
+      {
+        name: ['created_from', 'created_to'],
+        type: 'DatePicker',
+        props: { label: 'Created date', type: 'range' }
+      }
+    ],
+    actions: { applyButton: { label: 'Apply filters' } }
+  },
+  tableOptions: {
+    headers: [
+      { key: 'name',   label: 'Name',   class: 'w-[50%]' },
+      { key: 'status', label: 'Status', class: 'w-[50%]' }
+    ],
+    fields: [
+      { id: '1', name: 'Alice', status: 'active' },
+      { id: '2', name: 'Bob',   status: 'inactive' }
+    ]
+  }
+}
+</script>
+
+<template>
+  <DataTable
+    id="filter-form-table"
+    is-new-table
+    v-model:filter="filter"
+    :options="options"
+    @apply-filter="console.log('filter applied:', $event)"
+  />
+</template>`,
+  render: () => ({
+    components: { DataTable },
+    setup() {
+      const filter = ref({ page: 1, per_page: 10 })
+      const options = {
+        pagination: { total: 50, last_page: 5 },
+        filterOptions: {
+          per_page: { key: 'per_page' },
+          search: { key: 'keywords' },
+          form: [
+            {
+              name: 'status',
+              type: 'Select',
+              props: {
+                label: 'Status',
+                options: [
+                  { label: 'Active', value: 'active' },
+                  { label: 'Inactive', value: 'inactive' }
+                ]
               }
             }
-          },
-          {
-            key: 'col6',
-            label: 'Header',
-            class: 'w-1/2 md:min-w-[10%]'
-          },
-          {
-            key: 'actions',
-            label: '',
-            headerVariant: 'text',
-            variant: 'icon',
-            class: 'w-1/2 md:min-w-[5%]'
-          }
-        ],
-        fields: [
-          {
-            image: 'https://sportano.ua/img/986c30c27a3d26a3ee16c136f92f4ff5/1/9/195239323706_20-jpg/boksers-ki-krosivki-nike-hyperko-2-olympic-colorway-bili-dj4475-121-581894.jpg',
-            imageTitle: 'Table Cell',
-            imageDescription: 'Table Cell column two',
-            col2: 'Table Cell',
-            col3Title: 'Table Cell ',
-            col3Description: 'Table cell column four',
-            col3Url: 'https://hitpayapp.com',
-            col4: 'Table Cell column two',
-            col5: 'Label',
-            link: 'https://google.com',
-            col6: false,
-            id: crypto.randomUUID()
-          },
-          {
-            image: '',
-            imageTitle: 'Table Cell',
-            imageDescription: '',
-            col2: 'Table Cell',
-            col3Title: 'Table Cell',
-            col4: 'Table Cell column two',
-            col5: 'Label',
-            col6: false,
-            id: crypto.randomUUID()
-          },
-          {
-            image: '',
-            imageTitle: 'Table Cell',
-            imageDescription: 'Table Cell column two',
-            col2: '',
-            col3Title: '',
-            col4: '',
-            col5: 'Label',
-            col6: false,
-            id: crypto.randomUUID()
-          },
-          {
-            image: '',
-            imageTitle: '',
-            imageDescription: 'Table Cell column two',
-            col2: 'Table Cell',
-            col3Title: 'Table Cell',
-            col4: 'Table Cell column two',
-            col5: 'Label',
-            col6: false,
-            id: crypto.randomUUID()
-          },
-          {
-            image: '',
-            imageTitle: 'Table Cell',
-            imageDescription: 'Table Cell column two',
-            col2: 'Table Cell',
-            col3Title: 'Table Cell',
-            col4: 'Table Cell column two',
-            col5: 'Label',
-            col6: false,
-            id: crypto.randomUUID()
-          }
-        ]
-      }
-    },
-    isLoading: false
-  },
-  render: (args) => ({
-    components: {
-      DataTable,
-      Table,
-      Theme,
-      Icon,
-      Toggle,
-      Chip,
-      TableCellContent,
-      Button,
-      Dropdown,
-      DropdownItem
-    },
-    setup() {
-      const filter = ref({
-        page: 1,
-        per_page: 10,
-        tabs: '',
-        columnEdit: {
-          active: [{ key: 'col1', isActive: false }]
+          ],
+          actions: { applyButton: { label: 'Apply filters' } }
+        },
+        tableOptions: {
+          headers: [
+            { key: 'name',   label: 'Name',   class: 'w-[50%]' },
+            { key: 'status', label: 'Status', class: 'w-[50%]' }
+          ],
+          fields: [
+            { id: '1', name: 'Alice', status: 'active' },
+            { id: '2', name: 'Bob',   status: 'inactive' }
+          ]
         }
-      })
-      const changedFields = ref([])
-      const selectedRows = ref([])
-      const showDropdown = ref({})
-
-      const updateFilterData = (data) => {
-        console.log('updateFilterData', data)
       }
-      const onClickRow = (val) => {
-        console.log('onClickRow', val)
-      }
-      const handleOpenDropdown = (itemId) => {
-        Object.keys(showDropdown.value).forEach((id) => {
-          if (id !== itemId) {
-            showDropdown.value[id] = false
-          }
-        })
-      }
-
-      return {
-        args,
-        filter,
-        changedFields,
-        selectedRows,
-        showDropdown,
-        handleOpenDropdown,
-        updateFilterData,
-        onClickRow
-      }
+      return { filter, options }
     },
     template: `
-      <Theme class="p-8">
-        <DataTable
-          id="sample-data-table"
-          v-model:selected="selectedRows"
-          row-key="id"
-          row-link="link"
-          :filter="filter"
-          :options="args.options"
-          :is-loading="args.isLoading"
-          @update:filter="updateFilterData"
-          @click:row="onClickRow"
-          @filter-fields-changed="changedFields = $event"
-          @hover:cell="console.log('hover:cell: ', $event)"
-        >
-          <template #bulk-actions="{selectedRows}">
-            <Button label="Publish" size="small" is-transparent left-icon="eye-open" />
-            <Button label="Unpublish" is-transparent size="small" variant="secondary" left-icon="eye-close" />
-            <Button label="Delete" is-transparent size="small" variant="destructive" left-icon="bin" />
-          </template>
-          <template #col1="{ item }">
-            <TableCellContent important :title="item.imageTitle" :description="item.imageDescription"/>
-          </template>
-          <template #col4="{ data }">
-            <span class="text-oc-text-400 text-sm">{{ data }}</span>
-          </template>
-          <template #col6="{ data }">
-            <div class="flex gap-3 items-center">
-              <Toggle size="small" v-model="data"/>
-              <span class="md:hidden">status</span>
+      <div class="p-6">
+        <DataTable id="filter-form" is-new-table v-model:filter="filter" :options="options" />
+      </div>
+    `
+  })
+}
+
+export const LoadingState = {
+  description: 'Pass is-loading to show skeleton rows while data is being fetched. The number of skeleton rows matches the current per_page value.',
+  highlights: ['is-loading prop', 'skeleton rows = current per_page'],
+  code: `<script setup>
+import { ref } from 'vue'
+import { DataTable } from '@orchidui/core'
+
+const filter   = ref({ page: 1, per_page: 5 })
+const isLoading = ref(true)
+
+const options = {
+  pagination: { total: 50, last_page: 10 },
+  filterOptions: { per_page: { key: 'per_page' }, search: { key: 'keywords' } },
+  tableOptions: {
+    headers: [
+      { key: 'name',   label: 'Name',   class: 'w-[40%]' },
+      { key: 'email',  label: 'Email',  class: 'w-[40%]' },
+      { key: 'status', label: 'Status', class: 'w-[20%]' }
+    ],
+    fields: []
+  }
+}
+</script>
+
+<template>
+  <DataTable
+    id="loading-table"
+    is-new-table
+    :filter="filter"
+    :options="options"
+    :is-loading="isLoading"
+    @update:filter="filter = $event"
+  />
+</template>`,
+  render: () => ({
+    components: { DataTable },
+    setup() {
+      const filter    = ref({ page: 1, per_page: 5 })
+      const isLoading = ref(true)
+      const options = {
+        pagination: { total: 50, last_page: 10 },
+        filterOptions: { per_page: { key: 'per_page' }, search: { key: 'keywords' } },
+        tableOptions: {
+          headers: [
+            { key: 'name',   label: 'Name',   class: 'w-[40%]' },
+            { key: 'email',  label: 'Email',  class: 'w-[40%]' },
+            { key: 'status', label: 'Status', class: 'w-[20%]' }
+          ],
+          fields: []
+        }
+      }
+      return { filter, isLoading, options }
+    },
+    template: `
+      <div class="p-6">
+        <DataTable id="loading-table" is-new-table :filter="filter" :options="options" :is-loading="isLoading" @update:filter="filter = $event" />
+      </div>
+    `
+  })
+}
+
+export const CustomEmptyState = {
+  description: 'The #empty slot replaces the default empty state when fields is an empty array.',
+  highlights: ['#empty slot', 'shown when fields.length === 0'],
+  code: `<script setup>
+import { ref } from 'vue'
+import { DataTable, EmptyPage } from '@orchidui/core'
+
+const filter = ref({ page: 1, per_page: 10 })
+
+const options = {
+  pagination: { total: 0, last_page: 1 },
+  filterOptions: { search: { key: 'keywords' } },
+  tableOptions: {
+    headers: [
+      { key: 'name',  label: 'Name',  class: 'w-[50%]' },
+      { key: 'email', label: 'Email', class: 'w-[50%]' }
+    ],
+    fields: []
+  }
+}
+</script>
+
+<template>
+  <DataTable id="empty-table" is-new-table :filter="filter" :options="options" @update:filter="filter = $event">
+    <template #empty>
+      <div class="flex justify-center py-16">
+        <EmptyPage
+          icon="document"
+          title="No records found"
+          description="Try adjusting your search or filters."
+          :is-button="false"
+          hide-badge
+        />
+      </div>
+    </template>
+  </DataTable>
+</template>`,
+  render: () => ({
+    components: { DataTable, EmptyPage },
+    setup() {
+      const filter = ref({ page: 1, per_page: 10 })
+      const options = {
+        pagination: { total: 0, last_page: 1 },
+        filterOptions: { search: { key: 'keywords' } },
+        tableOptions: {
+          headers: [
+            { key: 'name',  label: 'Name',  class: 'w-[50%]' },
+            { key: 'email', label: 'Email', class: 'w-[50%]' }
+          ],
+          fields: []
+        }
+      }
+      return { filter, options }
+    },
+    template: `
+      <div class="p-6">
+        <DataTable id="empty-table" is-new-table :filter="filter" :options="options" @update:filter="filter = $event">
+          <template #empty>
+            <div class="flex justify-center py-16">
+              <EmptyPage icon="document" title="No records found" description="Try adjusting your search or filters." :is-button="false" hide-badge />
             </div>
           </template>
-          <template #actions="{ item }">
-            <Dropdown
-              v-model="showDropdown[item.id]"
-              :distance="10"
-              @update:modelValue="handleOpenDropdown(item.id)"
-            >
-              <Icon class="w-6 h-6 group-hover/row:block md:hidden cursor-pointer mx-auto" name="dots-vertical"/>
-              <template #menu>
-                <div class="flex flex-col">
-                  <div class="p-2 border-b border-gray-200">
-                    <DropdownItem text="Copy Link" icon="copy" />
-                    <DropdownItem text="Resend e-mail" icon="telegram" />
-                    <DropdownItem text="Download PDF" icon="download" />
-                  </div>
-                  <div class="p-2">
-                    <DropdownItem text="Delete" icon="bin" variant="destructive" />
-                  </div>
-                </div>
-              </template>
-            </Dropdown>
-          </template>
         </DataTable>
-      </Theme>
+      </div>
     `
   })
 }
 
-export const FilterTabSameKeyFilterDefault = {
-  args: {
-    options: {
-      pagination: {
-        total: 50,
-        last_page: 20
-      },
-      filterOptions: {
-        per_page: {
-          key: 'per_page'
-        },
-        tabs: {
-          key: 'status',
-          options: [
-            { label: 'All', value: '' },
-            { label: 'Filter 01', value: ['1'] },
-            { label: 'Filter 02', value: ['2'] },
-            { label: 'Filter 03', value: ['3'] }
+export const RowClickAndLink = {
+  description: 'click:row fires with the row data object. row-link sets the field whose value is used as a navigation URL per row. selectedIndex highlights a specific row.',
+  highlights: ['click:row event — { item }', 'row-link prop — field name containing the URL', 'selected-index prop — 0-based highlighted row'],
+  code: `<script setup>
+import { ref } from 'vue'
+import { DataTable } from '@orchidui/core'
+
+const filter        = ref({ page: 1, per_page: 10 })
+const selectedIndex = ref(-1)
+
+const options = {
+  pagination: { total: 3, last_page: 1 },
+  tableOptions: {
+    isCursorPointer: true,
+    headers: [
+      { key: 'name',   label: 'Name',   class: 'w-[40%]' },
+      { key: 'email',  label: 'Email',  class: 'w-[40%]' },
+      { key: 'status', label: 'Status', class: 'w-[20%]' }
+    ],
+    fields: [
+      { id: '1', name: 'Alice',   email: 'alice@example.com',   status: 'Active',   href: '/users/1' },
+      { id: '2', name: 'Bob',     email: 'bob@example.com',     status: 'Inactive', href: '/users/2' },
+      { id: '3', name: 'Charlie', email: 'charlie@example.com', status: 'Active',   href: '/users/3' }
+    ]
+  }
+}
+
+function onRowClick({ item, index }) {
+  selectedIndex.value = index
+  console.log('clicked row:', item)
+}
+</script>
+
+<template>
+  <DataTable
+    id="row-click-table"
+    is-new-table
+    :filter="filter"
+    :options="options"
+    :selected-index="selectedIndex"
+    row-link="href"
+    @click:row="onRowClick"
+    @update:filter="filter = $event"
+  />
+</template>`,
+  render: () => ({
+    components: { DataTable },
+    setup() {
+      const filter        = ref({ page: 1, per_page: 10 })
+      const selectedIndex = ref(-1)
+      const options = {
+        pagination: { total: 3, last_page: 1 },
+        tableOptions: {
+          isCursorPointer: true,
+          headers: [
+            { key: 'name',   label: 'Name',   class: 'w-[40%]' },
+            { key: 'email',  label: 'Email',  class: 'w-[40%]' },
+            { key: 'status', label: 'Status', class: 'w-[20%]' }
+          ],
+          fields: [
+            { id: '1', name: 'Alice',   email: 'alice@example.com',   status: 'Active',   href: '/users/1' },
+            { id: '2', name: 'Bob',     email: 'bob@example.com',     status: 'Inactive', href: '/users/2' },
+            { id: '3', name: 'Charlie', email: 'charlie@example.com', status: 'Active',   href: '/users/3' }
           ]
-        },
-        form: [
-          {
-            name: 'status',
-            type: 'Select',
-            props: {
-              label: 'Select Status',
-              hint: 'This is a hint text to help user',
-              placeholder: 'placeholder',
-              multiple: true,
-              options: [
-                { label: 'Option 1', value: '1' },
-                { label: 'Option 2', value: '2' },
-                { label: 'Option 3', value: '3' },
-                { label: 'Option 4', value: '4' }
-              ]
-            }
-          }
-        ]
-      },
-      tableOptions: {
-        headers: [
-          { key: 'image', variant: 'image', label: 'Image', class: 'w-1/2 md:min-w-[5%]' },
-          { key: 'col1', label: 'Table Header', class: 'w-1/2 md:min-w-[20%]' },
-          { key: 'col2', label: 'Table Header', class: 'w-1/2 md:min-w-[10%]' },
-          {
-            key: 'col3',
-            variant: 'content',
-            label: 'Table Header',
-            title: 'col3Title',
-            href: 'col3Url',
-            class: 'w-1/2 md:min-w-[12%]'
-          },
-          { key: 'col4', label: 'Table Header', class: 'w-1/2 md:min-w-[18%]' },
-          {
-            key: 'col5',
-            label: 'Table Header',
-            class: 'w-1/2 md:min-w-[15%]',
-            variant: 'chip',
-            chipOptions: {
-              Label: { label: 'Label', variant: 'success', icon: 'check' }
-            }
-          },
-          { key: 'col6', label: 'Header', class: 'w-1/2 md:min-w-[10%]' },
-          { key: 'actions', label: '', headerVariant: 'text', variant: 'icon', class: 'w-1/2 md:min-w-[5%]' }
-        ],
-        fields: [
-          {
-            image: '',
-            imageTitle: '',
-            imageDescription: 'Table Cell column two',
-            col2: 'Table Cell',
-            col3Title: 'Table Cell',
-            col4: 'Table Cell column two',
-            col5: 'Label',
-            col6: false,
-            id: crypto.randomUUID()
-          }
-        ]
+        }
       }
+      return { filter, selectedIndex, options }
+    },
+    template: `
+      <div class="p-6">
+        <DataTable
+          id="row-click-table"
+          is-new-table
+          :filter="filter"
+          :options="options"
+          :selected-index="selectedIndex"
+          row-link="href"
+          @click:row="({ index }) => selectedIndex = index"
+          @update:filter="filter = $event"
+        />
+      </div>
+    `
+  })
+}
+
+export const CursorPagination = {
+  description: 'Cursor-based pagination — pass options.cursor instead of options.pagination. The component emits update:filter with the new cursor value.',
+  highlights: ['options.cursor — { prev, next }', 'no options.pagination', 'update:filter carries cursor key'],
+  code: `<script setup>
+import { ref } from 'vue'
+import { DataTable } from '@orchidui/core'
+
+// Simulate cursor pages
+const pages = {
+  '': {
+    fields: [
+      { id: '1', name: 'Alice', email: 'alice@example.com' },
+      { id: '2', name: 'Bob',   email: 'bob@example.com' }
+    ],
+    cursor: { prev: null, next: 'cursor_page2' }
+  },
+  cursor_page2: {
+    fields: [
+      { id: '3', name: 'Charlie', email: 'charlie@example.com' },
+      { id: '4', name: 'Dana',    email: 'dana@example.com' }
+    ],
+    cursor: { prev: 'cursor_page1', next: null }
+  }
+}
+
+const filter  = ref({ cursor: '' })
+const current = ref(pages[''])
+
+const options = computed(() => ({
+  cursor: current.value.cursor,
+  tableOptions: {
+    headers: [
+      { key: 'name',  label: 'Name',  class: 'w-[50%]' },
+      { key: 'email', label: 'Email', class: 'w-[50%]' }
+    ],
+    fields: current.value.fields
+  }
+}))
+
+function onFilterChange(newFilter) {
+  filter.value = newFilter
+  current.value = pages[newFilter.cursor ?? ''] ?? pages['']
+}
+</script>
+
+<template>
+  <DataTable
+    id="cursor-table"
+    is-new-table
+    :filter="filter"
+    :options="options"
+    @update:filter="onFilterChange"
+  />
+</template>`,
+  render: () => ({
+    components: { DataTable },
+    setup() {
+      const pages = {
+        '': {
+          fields: [
+            { id: '1', name: 'Alice', email: 'alice@example.com' },
+            { id: '2', name: 'Bob',   email: 'bob@example.com' }
+          ],
+          cursor: { prev: null, next: 'cursor_page2' }
+        },
+        cursor_page2: {
+          fields: [
+            { id: '3', name: 'Charlie', email: 'charlie@example.com' },
+            { id: '4', name: 'Dana',    email: 'dana@example.com' }
+          ],
+          cursor: { prev: 'cursor_page1', next: null }
+        }
+      }
+      const filter  = ref({ cursor: '' })
+      const current = ref(pages[''])
+      const options = computed(() => ({
+        cursor: current.value.cursor,
+        tableOptions: {
+          headers: [
+            { key: 'name',  label: 'Name',  class: 'w-[50%]' },
+            { key: 'email', label: 'Email', class: 'w-[50%]' }
+          ],
+          fields: current.value.fields
+        }
+      }))
+      function onFilterChange(newFilter) {
+        filter.value = newFilter
+        current.value = pages[newFilter.cursor ?? ''] ?? pages['']
+      }
+      return { filter, options, onFilterChange }
+    },
+    template: `
+      <div class="p-6">
+        <DataTable id="cursor-table" is-new-table :filter="filter" :options="options" @update:filter="onFilterChange" />
+      </div>
+    `
+  })
+}
+
+export const ColumnEdit = {
+  description: 'Column show/hide and reorder editor. Pass filterOptions.columnEdit with a key (filter field name) and localStorageKey (persistence namespace). Persists column order to localStorage.',
+  highlights: ['filterOptions.columnEdit — { key, localStorageKey }', 'columns-changed event', 'persisted to localStorage'],
+  code: `<script setup>
+import { ref } from 'vue'
+import { DataTable } from '@orchidui/core'
+
+const filter = ref({
+  page: 1,
+  per_page: 10,
+  columnEdit: {}
+})
+
+const options = {
+  pagination: { total: 3, last_page: 1 },
+  filterOptions: {
+    per_page: { key: 'per_page' },
+    columnEdit: {
+      key: 'columnEdit',
+      localStorageKey: 'my-table-columns'
     }
   },
-  render: (args) => ({
-    components: { DataTable, Theme },
+  tableOptions: {
+    headers: [
+      { key: 'name',    label: 'Name',    class: 'w-[25%]', isSortable: false },
+      { key: 'email',   label: 'Email',   class: 'w-[35%]' },
+      { key: 'role',    label: 'Role',    class: 'w-[20%]' },
+      { key: 'status',  label: 'Status',  class: 'w-[20%]' }
+    ],
+    fields: [
+      { id: '1', name: 'Alice',   email: 'alice@example.com',   role: 'Admin',  status: 'Active' },
+      { id: '2', name: 'Bob',     email: 'bob@example.com',     role: 'Editor', status: 'Inactive' },
+      { id: '3', name: 'Charlie', email: 'charlie@example.com', role: 'Viewer', status: 'Active' }
+    ]
+  }
+}
+</script>
+
+<template>
+  <DataTable
+    id="column-edit-table"
+    is-new-table
+    v-model:filter="filter"
+    :options="options"
+    @columns-changed="console.log('columns changed:', $event)"
+  />
+</template>`,
+  render: () => ({
+    components: { DataTable },
     setup() {
-      const filter = ref({
-        page: 1,
-        per_page: 10,
-        status: ''
-      })
-      const updateFilterData = (data) => {
-        console.log('updateFilterData', data)
+      const filter = ref({ page: 1, per_page: 10, columnEdit: {} })
+      const options = {
+        pagination: { total: 3, last_page: 1 },
+        filterOptions: {
+          per_page: { key: 'per_page' },
+          columnEdit: {
+            key: 'columnEdit',
+            localStorageKey: 'storybook-column-edit'
+          }
+        },
+        tableOptions: {
+          headers: [
+            { key: 'name',   label: 'Name',   class: 'w-[25%]' },
+            { key: 'email',  label: 'Email',  class: 'w-[35%]' },
+            { key: 'role',   label: 'Role',   class: 'w-[20%]' },
+            { key: 'status', label: 'Status', class: 'w-[20%]' }
+          ],
+          fields: [
+            { id: '1', name: 'Alice',   email: 'alice@example.com',   role: 'Admin',  status: 'Active' },
+            { id: '2', name: 'Bob',     email: 'bob@example.com',     role: 'Editor', status: 'Inactive' },
+            { id: '3', name: 'Charlie', email: 'charlie@example.com', role: 'Viewer', status: 'Active' }
+          ]
+        }
       }
-      return { args, filter, updateFilterData }
+      return { filter, options }
     },
     template: `
-      <Theme class="p-8">
-        <DataTable
-          id="sample-data-table-tab-same-key"
-          :options="args.options"
-          :filter="filter"
-          @update:filter="updateFilterData"
-        />
-      </Theme>
+      <div class="p-6">
+        <DataTable id="column-edit-table" is-new-table v-model:filter="filter" :options="options" />
+      </div>
     `
   })
 }
 
-export const NewTable = {
-  args: {
-    options: {
-      pagination: {
-        total: 50,
-        last_page: 20
-      },
-      filterOptions: {
-        per_page: {
-          key: 'per_page'
-        },
-        tabs: {
-          key: 'tabs',
-          options: [
-            { label: 'All', value: '' },
-            { label: 'Filter 01', value: '1' },
-            { label: 'Filter 02', value: '2' },
-            { label: 'Filter 03', value: '3' }
-          ]
-        },
-        actions: {
-          applyButton: {
-            label: '100 results'
-          }
-        },
-        search: {
-          key: 'keywords',
-          selectedOption: 'keywords',
-          options: [
-            { label: 'All', value: 'keywords' },
-            { label: 'Filter 01', value: '1' },
-            { label: 'Filter 02', value: '2' },
-            { label: 'Filter 03', value: '3' }
-          ]
-        },
-        columnEdit: {
-          key: 'columnEdit',
-          localStorageKey: 'test-local-storage-table'
-        },
-        form: [
-          {
-            name: 'checkboxes_group',
-            type: 'CheckboxesGroup',
-            rule: 'required',
-            props: {
-              label: 'CheckboxesGroup',
-              hint: 'This is a hint text to help user',
-              alignment: 'vertical',
-              checkboxes: [
-                { label: 'Checkbox 1', value: 1 },
-                { label: 'Checkbox 2', value: 2 },
-                { label: 'Checkbox 3', value: 3, isDisabled: true }
-              ]
-            }
-          },
-          {
-            name: [{ key: 'date_range_from' }, { key: 'date_range_to' }],
-            type: 'DatePicker',
-            props: {
-              type: 'range',
-              label: 'DatePicker Range',
-              hint: 'This is a hint text to help user',
-              placeholder: 'placeholder',
-              maxDate: dayjs().format('YYYY-MM-DD')
-            }
-          },
-          {
-            name: [{ key: 'total_range_from' }, { key: 'total_range_to' }],
-            type: 'RangeInput',
-            props: {
-              label: 'RangeInput',
-              hint: 'This is a hint text to help user',
-              placeholder: 'placeholder',
-              onlyInput: true
-            }
-          },
-          {
-            name: 'select',
-            type: 'Select',
-            props: {
-              label: 'Select',
-              hint: 'This is a hint text to help user',
-              placeholder: 'placeholder',
-              options: [
-                { label: 'Option 1', value: 1 },
-                { label: 'Option 2', value: 2 },
-                { label: 'Option 3', value: 3 },
-                { label: 'Option 4', value: 4 }
-              ]
-            }
-          }
-        ]
-      },
-      tableOptions: {
-        isSticky: true,
-        isSelectable: true,
-        isCursorPointer: true,
-        isBorderless: false,
-        headers: [
-          { key: 'date', label: 'Date', class: 'font-reddit-mono', stickyLeft: true, tooltip: true },
-          { key: 'email', label: 'Email' },
-          { key: 'id', label: 'ID', isCopy: true, class: 'text-oc-text-400' },
-          { key: 'amount', label: 'Amount', class: 'font-reddit-mono font-semibold' },
-          { key: 'method', label: 'Method', class: 'text-oc-text-400' },
-          { key: 'status', label: 'Status' }
-        ],
-        fields: [
-          {
-            date: new Date(),
-            email: 'john.doe@example.com',
-            id: `#${crypto.randomUUID()}`,
-            amount: '2,234.56',
-            currency: 'SGD',
-            payment_method: 'visa',
-            last4Digits: '1234',
-            status: 'success'
-          },
-          {
-            date: new Date(),
-            email: 'test.doe@example.com',
-            id: `#${crypto.randomUUID()}`,
-            amount: '1,234.56',
-            currency: 'SGD',
-            payment_method: 'visa',
-            last4Digits: '3214',
-            status: 'neutral'
-          },
-          {
-            date: new Date(),
-            email: 'john.doe@example.com',
-            id: `#${crypto.randomUUID()}`,
-            amount: '2,234.56',
-            currency: 'SGD',
-            payment_method: 'visa',
-            last4Digits: '1234',
-            status: 'success'
-          },
-          {
-            date: new Date(),
-            email: 'test.doe@example.com',
-            id: `#${crypto.randomUUID()}`,
-            amount: '1,234.56',
-            currency: 'SGD',
-            payment_method: 'visa',
-            last4Digits: '3214',
-            status: 'neutral'
-          }
-        ]
-      }
-    },
-    isLoading: false
+export const SearchWithOptions = {
+  description: 'When filterOptions.search has an options array, a dropdown lets the user choose which field to search by. The active choice is stored in filter.selectedSearchOption.',
+  highlights: ['filterOptions.search.options — [{ label, value }]', 'selectedSearchOption in filter', 'search-query-changed event'],
+  code: `<script setup>
+import { ref } from 'vue'
+import { DataTable } from '@orchidui/core'
+
+const filter = ref({ page: 1, per_page: 10, selectedSearchOption: 'name' })
+
+const options = {
+  pagination: { total: 3, last_page: 1 },
+  filterOptions: {
+    per_page: { key: 'per_page' },
+    search: {
+      key: 'keywords',
+      options: [
+        { label: 'Name',  value: 'name' },
+        { label: 'Email', value: 'email' },
+        { label: 'ID',    value: 'id' }
+      ]
+    }
   },
-  render: (args) => ({
-    components: {
-      DataTable,
-      Table,
-      Theme,
-      Icon,
-      Toggle,
-      Chip,
-      TableCellContent,
-      Button,
-      Dropdown,
-      DropdownItem
-    },
+  tableOptions: {
+    headers: [
+      { key: 'name',  label: 'Name',  class: 'w-[33%]' },
+      { key: 'email', label: 'Email', class: 'w-[33%]' },
+      { key: 'id',    label: 'ID',    class: 'w-[33%]' }
+    ],
+    fields: [
+      { id: '1', name: 'Alice',   email: 'alice@example.com' },
+      { id: '2', name: 'Bob',     email: 'bob@example.com' },
+      { id: '3', name: 'Charlie', email: 'charlie@example.com' }
+    ]
+  }
+}
+</script>
+
+<template>
+  <DataTable
+    id="search-options-table"
+    is-new-table
+    v-model:filter="filter"
+    :options="options"
+    @search-query-changed="console.log('search:', $event)"
+  />
+</template>`,
+  render: () => ({
+    components: { DataTable },
     setup() {
-      const filter = ref({
-        page: 1,
-        per_page: 10,
-        tabs: '',
-        columnEdit: {
-          fixed: { date: true, status: true },
-          active: [{ key: 'col1', isActive: false }]
-        }
-      })
-      const changedFields = ref([])
-      const selectedRows = ref([])
-      const showDropdown = ref({})
-
-      const updateFilterData = (data) => {
-        console.log('updateFilterData', data)
-      }
-      const onClickRow = (val) => {
-        console.log('onClickRow', val)
-      }
-      const handleOpenDropdown = (itemId) => {
-        Object.keys(showDropdown.value).forEach((id) => {
-          if (id !== itemId) {
-            showDropdown.value[id] = false
+      const filter = ref({ page: 1, per_page: 10, selectedSearchOption: 'name' })
+      const options = {
+        pagination: { total: 3, last_page: 1 },
+        filterOptions: {
+          per_page: { key: 'per_page' },
+          search: {
+            key: 'keywords',
+            options: [
+              { label: 'Name',  value: 'name' },
+              { label: 'Email', value: 'email' },
+              { label: 'ID',    value: 'id' }
+            ]
           }
-        })
+        },
+        tableOptions: {
+          headers: [
+            { key: 'name',  label: 'Name',  class: 'w-[33%]' },
+            { key: 'email', label: 'Email', class: 'w-[33%]' },
+            { key: 'id',    label: 'ID',    class: 'w-[33%]' }
+          ],
+          fields: [
+            { id: '1', name: 'Alice',   email: 'alice@example.com' },
+            { id: '2', name: 'Bob',     email: 'bob@example.com' },
+            { id: '3', name: 'Charlie', email: 'charlie@example.com' }
+          ]
+        }
       }
-
-      return {
-        args,
-        filter,
-        changedFields,
-        selectedRows,
-        showDropdown,
-        handleOpenDropdown,
-        updateFilterData,
-        onClickRow,
-        dayjs
-      }
+      return { filter, options }
     },
     template: `
-      <Theme class="p-8">
+      <div class="p-6">
+        <DataTable id="search-options-table" is-new-table v-model:filter="filter" :options="options" />
+      </div>
+    `
+  })
+}
+
+export const StickyColumns = {
+  description: 'Horizontal scrolling table with a sticky first column. Set isSticky on tableOptions and add stickyLeft / stickyRight on individual headers.',
+  highlights: ['tableOptions.isSticky — enables horizontal scroll', 'header.stickyLeft — pin column to left', 'header.stickyRight — pin column to right'],
+  code: `<script setup>
+import { ref } from 'vue'
+import { DataTable } from '@orchidui/core'
+
+const filter = ref({ page: 1, per_page: 10 })
+
+const options = {
+  pagination: { total: 2, last_page: 1 },
+  tableOptions: {
+    isSticky: true,
+    headers: [
+      { key: 'name',    label: 'Name',    class: 'w-[180px]', stickyLeft: true },
+      { key: 'email',   label: 'Email',   class: 'w-[220px]' },
+      { key: 'country', label: 'Country', class: 'w-[160px]' },
+      { key: 'plan',    label: 'Plan',    class: 'w-[160px]' },
+      { key: 'created', label: 'Created', class: 'w-[160px]' },
+      { key: 'actions', label: '',        class: 'w-[80px]',  stickyRight: true }
+    ],
+    fields: [
+      { id: '1', name: 'Alice',   email: 'alice@example.com',   country: 'SG', plan: 'Pro',   created: '2024-01-10', actions: '' },
+      { id: '2', name: 'Bob',     email: 'bob@example.com',     country: 'MY', plan: 'Basic', created: '2024-02-15', actions: '' }
+    ]
+  }
+}
+</script>
+
+<template>
+  <DataTable
+    id="sticky-table"
+    is-new-table
+    :filter="filter"
+    :options="options"
+    @update:filter="filter = $event"
+  />
+</template>`,
+  render: () => ({
+    components: { DataTable },
+    setup() {
+      const filter = ref({ page: 1, per_page: 10 })
+      const options = {
+        pagination: { total: 2, last_page: 1 },
+        tableOptions: {
+          isSticky: true,
+          headers: [
+            { key: 'name',    label: 'Name',    class: 'w-[180px]', stickyLeft: true },
+            { key: 'email',   label: 'Email',   class: 'w-[220px]' },
+            { key: 'country', label: 'Country', class: 'w-[160px]' },
+            { key: 'plan',    label: 'Plan',    class: 'w-[160px]' },
+            { key: 'created', label: 'Created', class: 'w-[160px]' },
+            { key: 'actions', label: '',        class: 'w-[80px]',  stickyRight: true }
+          ],
+          fields: [
+            { id: '1', name: 'Alice', email: 'alice@example.com', country: 'SG', plan: 'Pro',   created: '2024-01-10', actions: '' },
+            { id: '2', name: 'Bob',   email: 'bob@example.com',   country: 'MY', plan: 'Basic', created: '2024-02-15', actions: '' }
+          ]
+        }
+      }
+      return { filter, options }
+    },
+    template: `
+      <div class="p-6 overflow-x-auto">
+        <DataTable id="sticky-table" is-new-table :filter="filter" :options="options" @update:filter="filter = $event" />
+      </div>
+    `
+  })
+}
+
+export const NewTableDesign = {
+  description: 'The is-new-table prop switches to the NewTable component — the updated visual design used across most pages. Combine with is-sticky, cursor pagination, and columnEdit as needed.',
+  highlights: ['is-new-table prop', 'used in 46+ dashboard pages', 'combine with is-sticky + cursor + columnEdit'],
+  code: `<script setup>
+import { ref } from 'vue'
+import { DataTable, Chip, EmptyPage } from '@orchidui/core'
+
+const filter = ref({
+  page: 1,
+  per_page: 10,
+  tab: '',
+  keywords: ''
+})
+
+const CHIP_STATUS = {
+  active:   { label: 'Active',   variant: 'success' },
+  inactive: { label: 'Inactive', variant: 'error' },
+  pending:  { label: 'Pending',  variant: 'warning' }
+}
+
+const options = {
+  pagination: { total: 3, last_page: 1 },
+  filterOptions: {
+    per_page: { key: 'per_page' },
+    search: { key: 'keywords' },
+    tabs: {
+      key: 'tab',
+      options: [
+        { label: 'All',      value: '' },
+        { label: 'Active',   value: 'active' },
+        { label: 'Inactive', value: 'inactive' }
+      ]
+    }
+  },
+  tableOptions: {
+    isCursorPointer: true,
+    headers: [
+      { key: 'name',   label: 'Name',   class: 'w-[35%]' },
+      { key: 'email',  label: 'Email',  class: 'w-[35%]' },
+      {
+        key: 'status', label: 'Status', class: 'w-[20%]',
+        variant: 'chip', chipOptions: CHIP_STATUS
+      },
+      { key: 'actions', label: '', class: 'w-[10%]', variant: 'icon', headerVariant: 'text' }
+    ],
+    fields: [
+      { id: '1', name: 'Alice',   email: 'alice@example.com',   status: 'active' },
+      { id: '2', name: 'Bob',     email: 'bob@example.com',     status: 'inactive' },
+      { id: '3', name: 'Charlie', email: 'charlie@example.com', status: 'pending' }
+    ]
+  }
+}
+</script>
+
+<template>
+  <DataTable
+    id="new-table-demo"
+    is-new-table
+    v-model:filter="filter"
+    :options="options"
+    @click:row="console.log('row clicked:', $event.item)"
+  >
+    <template #actions="{ item }">
+      <button class="opacity-0 group-hover/row:opacity-100 text-oc-text-400 hover:text-oc-text-500">
+        <Icon name="dots-vertical" width="20" height="20" />
+      </button>
+    </template>
+
+    <template #empty>
+      <div class="flex justify-center py-12">
+        <EmptyPage title="No records found" description="Try adjusting your search." :is-button="false" />
+      </div>
+    </template>
+  </DataTable>
+</template>`,
+  render: () => ({
+    components: { DataTable, Chip, EmptyPage },
+    setup() {
+      const filter = ref({ page: 1, per_page: 10, tab: '', keywords: '' })
+      const CHIP_STATUS = {
+        active:   { label: 'Active',   variant: 'success' },
+        inactive: { label: 'Inactive', variant: 'error' },
+        pending:  { label: 'Pending',  variant: 'warning' }
+      }
+      const options = {
+        pagination: { total: 3, last_page: 1 },
+        filterOptions: {
+          per_page: { key: 'per_page' },
+          search: { key: 'keywords' },
+          tabs: {
+            key: 'tab',
+            options: [
+              { label: 'All',      value: '' },
+              { label: 'Active',   value: 'active' },
+              { label: 'Inactive', value: 'inactive' }
+            ]
+          }
+        },
+        tableOptions: {
+          isCursorPointer: true,
+          headers: [
+            { key: 'name',    label: 'Name',   class: 'w-[35%]' },
+            { key: 'email',   label: 'Email',  class: 'w-[35%]' },
+            { key: 'status',  label: 'Status', class: 'w-[20%]', variant: 'chip', chipOptions: CHIP_STATUS },
+            { key: 'actions', label: '',       class: 'w-[10%]', variant: 'icon', headerVariant: 'text' }
+          ],
+          fields: [
+            { id: '1', name: 'Alice',   email: 'alice@example.com',   status: 'active' },
+            { id: '2', name: 'Bob',     email: 'bob@example.com',     status: 'inactive' },
+            { id: '3', name: 'Charlie', email: 'charlie@example.com', status: 'pending' }
+          ]
+        }
+      }
+      return { filter, options }
+    },
+    template: `
+      <div class="p-6">
         <DataTable
-          id="sample-data-table"
-          v-model:selected="selectedRows"
-          row-key="id"
-          row-link="link"
+          id="new-table-demo"
+          is-new-table
           v-model:filter="filter"
-          :options="args.options"
-          :is-loading="args.isLoading"
-          is-new-table
-          @update:filter="updateFilterData"
-          @click:row="onClickRow"
-          @filter-fields-changed="changedFields = $event"
-          @hover:cell="console.log('hover:cell: ', $event)"
+          :options="options"
         >
-          <template #bulk-actions="{selectedRows}">
-            <Button label="Publish" size="small" is-transparent left-icon="eye-open" />
-            <Button label="Unpublish" is-transparent size="small" variant="secondary" left-icon="eye-close" />
-            <Button label="Delete" is-transparent size="small" variant="destructive" left-icon="bin" />
-          </template>
-          <template #date="{ item }">
-            <div class="truncate">
-              {{ dayjs(item.date).format('YYYY-MM-DD HH:mm:ss') }}
+          <template #empty>
+            <div class="flex justify-center py-12">
+              <EmptyPage title="No records found" description="Try adjusting your search." :is-button="false" />
             </div>
           </template>
-          <template #header-date-tooltip>
-            test slot
-          </template>
-          <template #amount="{ item }">
-            {{ item.currency }} {{ item.amount }}
-          </template>
-          <template #method="{ item }">
-            {{ item.payment_method }} •••• {{ item.last4Digits }}
-          </template>
-          <template #status="{ item }">
-            <Chip :variant="item.status" label="Some label" class="truncate" />
-          </template>
         </DataTable>
-      </Theme>
-    `
-  })
-}
-
-export const WithoutFilter = {
-  args: {
-    options: {
-      tableOptions: {
-        headers: [
-          { key: 'image', variant: 'image', label: 'Image', class: 'w-1/2 md:min-w-[5%]' },
-          { key: 'col1', label: 'Table Header', class: 'w-1/2 md:min-w-[20%]' },
-          { key: 'col2', label: 'Table Header', class: 'w-1/2 md:min-w-[10%]' },
-          {
-            key: 'col3',
-            variant: 'content',
-            label: 'Table Header',
-            title: 'col3Title',
-            href: 'col3Url',
-            class: 'w-1/2 md:min-w-[12%]'
-          },
-          { key: 'col4', label: 'Table Header', class: 'w-1/2 md:min-w-[18%]' },
-          {
-            key: 'col5',
-            label: 'Table Header',
-            class: 'w-1/2 md:min-w-[15%]',
-            variant: 'chip',
-            chipOptions: {
-              Label: { label: 'Label', variant: 'success', icon: 'check' }
-            }
-          },
-          { key: 'col6', label: 'Header', class: 'w-1/2 md:min-w-[10%]' },
-          { key: 'actions', label: '', headerVariant: 'text', variant: 'icon', class: 'w-1/2 md:min-w-[5%]' }
-        ],
-        fields: [
-          {
-            image: '',
-            imageTitle: '',
-            imageDescription: 'Table Cell column two',
-            col2: 'Table Cell',
-            col3Title: 'Table Cell',
-            col4: 'Table Cell column two',
-            col5: 'Label',
-            col6: false,
-            id: crypto.randomUUID()
-          }
-        ]
-      }
-    }
-  },
-  render: (args) => ({
-    components: { DataTable, Theme },
-    setup() {
-      return { args }
-    },
-    template: `
-      <Theme class="p-8">
-        <DataTable
-          id="sample-data-without-filter"
-          is-new-table
-          :options="args.options"
-        />
-      </Theme>
+      </div>
     `
   })
 }

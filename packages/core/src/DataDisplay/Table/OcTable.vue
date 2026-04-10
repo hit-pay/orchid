@@ -3,34 +3,58 @@ import { TableHeader, TableCell } from '@/orchidui-core'
 import { ref, computed, onMounted } from 'vue'
 
 const props = defineProps({
+  /**
+   * Full table structure object (required).
+   *
+   * `headers` — array of `{ key, label, class?, variant?, chipOptions?, isSortable?, isCopy?, stickyLeft?, stickyRight?, disableClickRow? }`
+   * `fields`  — array of row data objects keyed to header keys
+   * `isSelectable`    — show row checkboxes
+   * `isCursorPointer` — cursor:pointer on rows
+   */
   options: {
     type: Object,
     required: true
   },
+  /** Show skeleton rows while data is being fetched. */
   isLoading: Boolean,
+  /** Remove the outer border from the table container. */
   isBorderless: Boolean,
+  /** Number of skeleton rows rendered when isLoading is true. */
   loadingRows: {
     type: Number,
     default: 10
   },
+  /** Currently selected rows (v-model:selected). Array of row data objects. */
   selected: {
     type: Array,
     required: false
   },
+  /**
+   * Field name (or function) used to uniquely identify each row for selection.
+   * If a string, `row[rowKey]` is used. If a function, receives the row object and returns a key.
+   */
   rowKey: {
     type: [String, Function],
     default: 'id'
   },
+  /** CSS class string or function `(row, index) => string` applied to each data row element. */
   rowClass: [String, Function],
+  /** Enable horizontal scrolling with sticky columns (requires stickyLeft/stickyRight on headers). */
   isSticky: {
     type: Boolean,
     default: false
   },
+  /** Enable responsive card layout on mobile screens. */
   isResponsive: {
     type: Boolean,
     default: false
   },
+  /** Field name in each row whose value is used as a navigation URL on row click. */
   rowLink: String,
+  /**
+   * Current sort state. Shape: `{ key: string, direction: 'asc' | 'desc' }`.
+   * Bind with `:sort-by` and listen to `update:sort-by` for controlled sorting.
+   */
   sortBy: {
     type: Object,
     default: () => ({})
@@ -38,9 +62,13 @@ const props = defineProps({
 })
 
 const emit = defineEmits({
+  /** Sort column or direction changed. Payload: `{ key, direction }`. */
   'update:sort-by': [],
+  /** A row was clicked. Payload: `{ field, header }`. Not emitted from disableClickRow columns. */
   'click:row': [],
+  /** Selected rows changed. Payload: array of selected row objects. */
   'update:selected': [],
+  /** A cell was hovered. Payload: `{ item, key }`. */
   'hover:cell': []
 })
 

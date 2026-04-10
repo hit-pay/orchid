@@ -3,16 +3,25 @@ import { Icon, BaseInput } from '@/orchidui-core'
 import { computed } from 'vue'
 
 const props = defineProps({
+  /** v-model — checked state of the checkbox. */
   modelValue: Boolean,
+  /** Show an indeterminate/partial state (dash icon). Used for "select all" headers. */
   isPartial: Boolean,
+  /** Disable the checkbox — non-interactive. */
   isDisabled: Boolean,
+  /** Label text shown beside the checkbox. */
   label: String,
+  /** Label shown above the checkbox group (via BaseInput). */
   topLabel: String,
+  /** Helper text shown below the checkbox. */
   hint: String,
+  /** Validation error message shown below the checkbox. */
   errorMessage: String,
+  /** Render as a button-style checkbox (bordered card). */
   isButtonVariant: Boolean
 })
 const emit = defineEmits({
+  /** Checked state toggled. Payload: new boolean value. */
   'update:modelValue': []
 })
 
