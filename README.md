@@ -39,6 +39,100 @@ export default {
 
 > `description` and `keywords` here replace `component-meta.js`. If omitted, the build falls back to `component-meta.js`.
 
+### Documenting Props and Slots in the Component File
+
+Storybook reads JSDoc comments from `defineProps` and `defineEmits` in the `.vue` file and displays them as descriptions in the autodocs controls panel. **Write docs there — not in `argTypes`.**
+
+```vue
+<script setup>
+const props = defineProps({
+  /** Whether the button is in a loading state. */
+  isLoading: {
+    type: Boolean,
+    default: false
+  },
+  /**
+   * Visual style variant.
+   * Use 'primary' for the main action, 'secondary' for supporting actions.
+   */
+  variant: {
+    type: String,
+    default: 'primary'
+  }
+})
+
+const emit = defineEmits({
+  /** Fired when the button is clicked and not disabled or loading. */
+  click: []
+})
+</script>
+```
+
+For slots, use a `<!-- @slot -->` comment directly above the `<slot>` tag:
+
+```vue
+<template>
+  <!-- @slot Default content inside the button. -->
+  <slot />
+
+  <!-- @slot Icon displayed to the left of the label. -->
+  <slot name="left-icon" />
+</template>
+```
+
+**Rules:**
+- Write one short sentence for simple props; use a full block comment for props with non-obvious behaviour
+- Do **not** duplicate these descriptions in `argTypes` — if both exist, the `argTypes` value wins and the JSDoc is silently ignored
+
+---
+
+### Playground (Autodocs)
+
+Every component should have one `Playground` export that uses Storybook `args` controls. This is what powers the interactive controls panel on the **autodocs** page.
+
+```js
+export const Playground = {
+  argTypes: {
+    // Direct component props — omit `description`, Storybook reads it from JSDoc in the .vue file
+    isDisabled: { control: 'boolean' },
+    size: {
+      control: 'select',
+      options: ['small', 'medium', 'large'],
+    },
+
+    // Story-only controls (not component props) — add description manually
+    showSlotContent: {
+      control: 'boolean',
+      description: 'Toggle the default slot content on/off',
+    },
+  },
+  args: {
+    isDisabled: false,
+    size: 'medium',
+    showSlotContent: true,
+  },
+  render: (args) => ({
+    components: { MyComponent },
+    setup() {
+      return { args }
+    },
+    template: `
+      <div class="p-6">
+        <MyComponent :is-disabled="args.isDisabled" :size="args.size">
+          <template v-if="args.showSlotContent">Slot content</template>
+        </MyComponent>
+      </div>
+    `
+  })
+}
+```
+
+**Rules:**
+- `Playground` must have `argTypes` and no `code` property — the build pipeline skips it automatically
+- Descriptions for **direct component props** are omitted from `argTypes` — Storybook reads the JSDoc from `defineProps` in the `.vue` file
+- Descriptions for **story-only controls** (args that don't match a component prop) must be written manually
+- `tags: ['autodocs']` on the default export is required — this is what enables the autodocs page
+
 ### Examples
 
 Each named export is one example. Extract the Vue code to a separate file in `examples/` and import it with `?raw`:

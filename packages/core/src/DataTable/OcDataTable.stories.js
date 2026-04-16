@@ -43,92 +43,31 @@ export default {
 
 export const Playground = {
   argTypes: {
-    // ── Design
-    isNewTable: {
-      control: 'boolean',
-      description: 'NewTable visual design (default on most pages). Switches between OcNewTable and OcTable internally.'
-    },
-    isLoading: {
-      control: 'boolean',
-      description: 'Show loading spinner (NewTable) or skeleton rows (Table) while fetching'
-    },
-    // ── Table options (passed via options.tableOptions)
-    isSelectable: {
-      control: 'boolean',
-      description: 'tableOptions.isSelectable — show row checkboxes, enables v-model:selected'
-    },
-    isSticky: {
-      control: 'boolean',
-      description: 'tableOptions.isSticky — horizontal scroll with stickyLeft/stickyRight columns pinned'
-    },
-    isBorderless: {
-      control: 'boolean',
-      description: 'tableOptions.isBorderless — remove outer table border (Table only)'
-    },
-    isCursorPointer: {
-      control: 'boolean',
-      description: 'tableOptions.isCursorPointer — pointer cursor on rows (Table only, default true)'
-    },
-    isExpand: {
-      control: 'boolean',
-      description: 'tableOptions.isExpand — expandable child rows via row.children array (NewTable only)'
-    },
-    // ── Header column features
-    showCopyEmail: {
-      control: 'boolean',
-      description: 'header.isCopy — copy-to-clipboard button on hover for Email column (both Table and NewTable)'
-    },
-    showHeaderTooltip: {
-      control: 'boolean',
-      description: 'header.tooltip — info icon tooltip on Plan column header (NewTable). header.leftTooltip — left icon tooltip.'
-    },
-    showChipStatus: {
-      control: 'boolean',
-      description: 'header.variant="chip" + header.chipOptions — chip-coloured status cells without a custom slot (Table only, set isNewTable=false)'
-    },
-    showDateVariant: {
-      control: 'boolean',
-      description: 'header.variant="date" — auto-formats ISO date value using dayjs (NewTable only)'
-    },
-    // ── Filter toolbar
-    showSearch: {
-      control: 'boolean',
-      description: 'filterOptions.search — enables search bar'
-    },
-    showTabs: {
-      control: 'boolean',
-      description: 'filterOptions.tabs — tab bar above the table'
-    },
-    showFilterForm: {
-      control: 'boolean',
-      description: 'filterOptions.form — filter dropdown powered by FormBuilder'
-    },
-    showColumnEdit: {
-      control: 'boolean',
-      description: 'filterOptions.columnEdit — column show/hide editor, persists to localStorage'
-    },
-    hidePerPageDropdown: {
-      control: 'boolean',
-      description: 'options.hidePerPageDropdown — hide the per-page selector'
-    },
-    // ── Slots & state
-    showCustomCells: {
-      control: 'boolean',
-      description: '#[header.key]="{ item, data }" — custom cell slot for Status column (works in both Table and NewTable)'
-    },
-    showBulkActions: {
-      control: 'boolean',
-      description: '#bulk-actions="{ selectedRows }" — action bar shown when rows are selected (requires isSelectable)'
-    },
-    emptyTable: {
-      control: 'boolean',
-      description: 'Set fields=[] to trigger the #empty slot (shown when no rows and not loading)'
-    },
-    // ── Row props
-    selectedIndex: {
-      control: { type: 'number', min: -1, max: 4 },
-      description: 'selectedIndex prop — highlight a specific row by 0-based index (-1 = none)'
-    }
+    // Direct DataTable props — descriptions auto-generated from component JSDoc
+    isNewTable:    { control: 'boolean' },
+    isLoading:     { control: 'boolean' },
+    selectedIndex: { control: { type: 'number', min: -1, max: 4 } },
+    // tableOptions fields — not DataTable props, need manual descriptions
+    isSelectable:    { control: 'boolean', description: 'tableOptions.isSelectable — row checkboxes, enables v-model:selected' },
+    isSticky:        { control: 'boolean', description: 'tableOptions.isSticky — horizontal scroll with stickyLeft/stickyRight pinned' },
+    isBorderless:    { control: 'boolean', description: 'tableOptions.isBorderless — remove outer border (Table only)' },
+    isCursorPointer: { control: 'boolean', description: 'tableOptions.isCursorPointer — pointer cursor on rows (Table only)' },
+    isExpand:        { control: 'boolean', description: 'tableOptions.isExpand — expandable child rows via row.children (NewTable only)' },
+    // Header column features
+    showCopyEmail:     { control: 'boolean', description: 'header.isCopy — copy-to-clipboard on hover for Email column' },
+    showHeaderTooltip: { control: 'boolean', description: 'header.tooltip / header.leftTooltip — icon tooltips on Plan column header (NewTable)' },
+    showChipStatus:    { control: 'boolean', description: 'header.variant="chip" + header.chipOptions — coloured status chips (Table only, set isNewTable=false)' },
+    showDateVariant:   { control: 'boolean', description: 'header.variant="date" — auto-formats ISO date via dayjs (NewTable only)' },
+    // Filter toolbar
+    showSearch:          { control: 'boolean', description: 'filterOptions.search — enables search bar' },
+    showTabs:            { control: 'boolean', description: 'filterOptions.tabs — tab bar above the table' },
+    showFilterForm:      { control: 'boolean', description: 'filterOptions.form — filter dropdown powered by FormBuilder' },
+    showColumnEdit:      { control: 'boolean', description: 'filterOptions.columnEdit — column show/hide editor, persists to localStorage' },
+    hidePerPageDropdown: { control: 'boolean', description: 'options.hidePerPageDropdown — hide the per-page selector' },
+    // Slots & data state
+    showCustomCells: { control: 'boolean', description: '#[header.key]="{ item, data }" — custom cell slot for Status column' },
+    showBulkActions: { control: 'boolean', description: '#bulk-actions="{ selectedRows }" — action bar shown when rows are selected (requires isSelectable)' },
+    emptyTable:      { control: 'boolean', description: 'Set fields=[] to trigger the #empty slot' },
   },
   args: {
     isNewTable:        true,
