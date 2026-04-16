@@ -174,7 +174,7 @@ export default [
     path: '/docs',
     component: () => import('./layouts/DocsLayout.vue'),
     children: [
-      { path: '', component: () => import('./docs/DocsHome.vue') },
+      { path: '', component: () => import('./docs-components/DocsHome.vue') },
 ${childRoutes}
     ]
   }

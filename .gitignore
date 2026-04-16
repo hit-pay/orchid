@@ -31,3 +31,4 @@ public/storybook
 public/mcp
 
 src/docs/*
+src/router.js
