@@ -4,12 +4,23 @@ import { ref } from 'vue'
 import { Cropper } from '../Cropper/OcCropper'
 
 const props = defineProps({
+  /** Additional input field configs shown inside the cropper (e.g. alt text). Array of field definitions. */
   inputOptions: Array,
+  /** Current values for the `inputOptions` fields. Object keyed by field name. */
   inputOptionValues: Object,
+  /** Source image URL to load into the cropper. */
   img: String,
+  /** Maximum allowed file size in bytes. Passed through to the Cropper. */
   maxSize: [String, Number]
 })
-const emit = defineEmits(['changeImage', 'close', 'update:input-options'])
+const emit = defineEmits({
+  /** Save clicked with a cropped image. Payload: `{ url, cropper }`. */
+  changeImage: [],
+  /** Modal closed without saving. */
+  close: [],
+  /** An `inputOptions` field value changed. Payload: new value. */
+  'update:input-options': []
+})
 const cropper = ref()
 const file_upload = ref()
 const cancelButtonProps = {

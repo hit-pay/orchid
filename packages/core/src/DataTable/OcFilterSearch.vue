@@ -3,14 +3,20 @@ import { nextTick, ref, computed } from 'vue'
 import { Button, Input, Dropdown, Icon, DropdownItem } from '@/orchidui-core'
 
 const emit = defineEmits({
+  /** User submitted a search term. Payload: query string. */
   addQuery: [],
+  /** Search bar expanded or collapsed. Payload: boolean. */
   toggle: [],
+  /** User selected a different search field from the dropdown. Payload: option value string. */
   'change-search-key': []
 })
 
 const props = defineProps({
+  /** Show the search bar permanently (no expand/collapse toggle). */
   isSearchOnly: Boolean,
+  /** Field options for the search-key dropdown. Array of `{ label, value }`. When empty, no dropdown is shown. */
   searchOptions: Array,
+  /** Currently selected search field value — must match one of the `searchOptions` values. */
   selectedOption: String
 })
 

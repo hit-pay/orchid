@@ -25,15 +25,20 @@
 import { Icon } from '@/orchidui-core'
 
 defineProps({
+  /** Account setup completion percentage (0–100). Controls the progress bar width. */
   value: {
     type: Number,
     default: 0
   },
+  /** Status text shown below the progress bar (e.g. "3 of 5 steps completed"). */
   infoLabel: {
     type: String,
     default: ''
   }
 })
-  
-defineEmits(['redirect'])
+
+defineEmits({
+  /** The arrow icon was clicked to navigate to the full account setup page. */
+  redirect: []
+})
 </script>
