@@ -1,6 +1,6 @@
 <script setup>
 import { RouterLink } from 'vue-router'
-import sidebarConfig from './sidebar-config.js'
+import sidebarConfig from '../docs/sidebar-config.js'
 </script>
 
 <template>
