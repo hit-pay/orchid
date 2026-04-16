@@ -23,6 +23,7 @@
     "mcp": "cd mcp-server && node server.js",
     "mcp:dev": "cd mcp-server && node --watch server.js",
     "build:docs": "node src/build-docs.js",
+    "test": "vitest",
     "preview": "npx serve dist "
   },
   "dependencies": {
@@ -39,11 +40,13 @@
     "@storybook/vue3-vite": "^8.6.14",
     "@vitejs/plugin-vue": "^5.2.4",
     "@vue/eslint-config-prettier": "^8.0.0",
+    "@vue/test-utils": "^2.4.6",
     "autoprefixer": "^10.4.16",
     "eslint-config-prettier": "^9.0.0",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-vue": "^9.17.0",
     "fast-glob": "^3.3.1",
+    "happy-dom": "^20.9.0",
     "postcss": "^8.4.31",
     "postcss-import": "^15.1.0",
     "sass": "^1.68.0",
@@ -51,6 +54,7 @@
     "storybook-addon-root-attribute": "^1.0.2",
     "tailwindcss": "^3.4.3",
     "vite": "^6.3.5",
+    "vitest": "^4.1.4",
     "vue": "^3.3.4"
   },
   "overrides": {
