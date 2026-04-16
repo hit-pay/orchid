@@ -20,15 +20,23 @@ function exampleSlug(compName, exampleId) {
 
 function propTable(props) {
   if (!props || !Object.keys(props).length) return ''
-  const rows = [
-    '| Prop | Type | Required | Default | Values |',
-    '|------|------|----------|---------|--------|',
-  ]
+  const lines = []
   for (const [name, p] of Object.entries(props)) {
-    const values = p.values?.join(', ') ?? ''
-    rows.push(`| ${name} | ${p.type ?? ''} | ${p.required ? 'yes' : 'no'} | ${p.default ?? ''} | ${values} |`)
+    const meta = []
+    meta.push(`**Type:** \`${p.type ?? 'any'}\``)
+    if (p.required) meta.push('**Required**')
+    if (p.default !== undefined && p.default !== '') meta.push(`**Default:** \`${p.default}\``)
+    if (p.values?.length) meta.push(`**Values:** ${p.values.map(v => `\`${v}\``).join(' | ')}`)
+    lines.push(`#### \`${name}\``)
+    lines.push('')
+    lines.push(meta.join(' · '))
+    if (p.description) {
+      lines.push('')
+      lines.push(p.description.trim())
+    }
+    lines.push('')
   }
-  return rows.join('\n')
+  return lines.join('\n')
 }
 
 function eventTable(events) {
@@ -46,11 +54,12 @@ function eventTable(events) {
 function slotTable(slots) {
   if (!slots || !Object.keys(slots).length) return ''
   const rows = [
-    '| Slot | Description |',
-    '|------|-------------|',
+    '| Slot | Bindings | Description |',
+    '|------|----------|-------------|',
   ]
   for (const [name, s] of Object.entries(slots)) {
-    rows.push(`| ${name} | ${(s.description ?? '').replace(/\n/g, ' ')} |`)
+    const bindings = s.type && s.type !== '{}' ? s.type.replace(/\n/g, ' ') : ''
+    rows.push(`| ${name} | ${bindings} | ${(s.description ?? '').replace(/\n/g, ' ')} |`)
   }
   return rows.join('\n')
 }
