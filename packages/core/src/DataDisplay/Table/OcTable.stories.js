@@ -4,6 +4,13 @@ import { ref } from 'vue'
 export default {
   component: Table,
   tags: ['autodocs'],
+  kind: 'composite',
+  use_for: [
+    'standalone table with custom header and body control',
+    'table with sorting and row selection',
+    'simple data table without filter toolbar'
+  ],
+  understand_with: ['DataTable', 'NewTable', 'TableCell', 'TableHeader', 'Chip'],
   parameters: {
     docs: {
       description: {

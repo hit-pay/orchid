@@ -4,6 +4,14 @@ import { ref } from 'vue'
 export default {
   component: SingleFileUpload,
   tags: ['autodocs'],
+  kind: 'leaf',
+  use_for: [
+    'file upload field',
+    'image upload with preview',
+    'document attachment in form',
+    'avatar or logo upload',
+    'CSV import button'
+  ],
   parameters: {
     docs: {
       description: {

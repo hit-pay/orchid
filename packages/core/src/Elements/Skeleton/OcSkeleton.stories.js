@@ -3,6 +3,14 @@ import { Skeleton } from '@/orchidui-core'
 export default {
   component: Skeleton,
   tags: ['autodocs'],
+  kind: 'leaf',
+  use_for: [
+    'content loading placeholder',
+    'table row loading state',
+    'card loading skeleton',
+    'form fields loading state',
+    'dashboard stats loading'
+  ],
   parameters: {
     docs: {
       description: {

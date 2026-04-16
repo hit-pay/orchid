@@ -4,6 +4,14 @@ import { ref } from 'vue'
 export default {
   component: DatePicker,
   tags: ['autodocs'],
+  kind: 'leaf',
+  use_for: [
+    'date selection field',
+    'date range picker',
+    'report period filter',
+    'delivery date with min/max constraints',
+    'date field in FormBuilder'
+  ],
   parameters: {
     docs: {
       description: {
