@@ -20,6 +20,8 @@
     "build:landing": "vite build",
     "build:storybook": "storybook build -o public/storybook && npm run build:json",
     "build:json": "cd json && node build-json.js && node ../generate-llms.mjs",
+    "mcp": "cd mcp-server && node server.js",
+    "mcp:dev": "cd mcp-server && node --watch server.js",
     "build:docs": "node src/build-docs.js",
     "preview": "npx serve dist "
   },
