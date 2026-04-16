@@ -194,9 +194,9 @@ async function main() {
   fs.mkdirSync(OUTPUT_DIR, { recursive: true })
   fs.mkdirSync(COMPONENTS_DIR, { recursive: true })
 
-  // Remove old format files from previous builds
+  // Remove all stale example and legacy format files — regenerated below
   for (const f of fs.readdirSync(COMPONENTS_DIR)) {
-    if (f.endsWith('.schema.json') || f.endsWith('.examples.json')) {
+    if (!f.endsWith('.detail.json')) {
       fs.unlinkSync(path.join(COMPONENTS_DIR, f))
     }
   }
