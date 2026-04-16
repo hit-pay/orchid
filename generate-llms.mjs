@@ -239,9 +239,19 @@ function fullComponentSection(comp) {
     .filter(f => f.startsWith(prefix) && !f.endsWith('.detail.json'))
     .sort()
 
-  return buildComponentMd(comp, detail, exampleFiles)
-    .replace(/^# /, '## ')        // demote h1 → h2 inside the combined file
-    .replace(/^## /gm, (m, o) => o === 0 ? '## ' : '### ')  // demote sub-headings
+  const content = buildComponentMd(comp, detail, exampleFiles)
+    .replace(/^# /, '## ')
+    .replace(/^## /gm, (m, o) => o === 0 ? '## ' : '### ')
+
+  const refs = [
+    '### Reference',
+    '',
+    `- [Component doc](/raw/docs/components/${comp.name}.md)`,
+    `- [JSON schema](/json/components/${comp.name}.detail.json)`,
+    '',
+  ].join('\n')
+
+  return content + refs
 }
 
 function buildLlmsFullTxt(coreIndex, dashIndex) {
