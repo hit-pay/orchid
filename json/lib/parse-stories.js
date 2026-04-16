@@ -73,11 +73,21 @@ export function parseStoryOptions(vueFilePath) {
   return propOptions
 }
 
+function resolveRawImport(content, storyDir, varName) {
+  const m = content.match(new RegExp(`import\\s+${varName}\\s+from\\s+['"]([^'"]+\\.vue\\?raw)['"]`))
+  if (!m) return null
+  const relPath = m[1].replace('?raw', '')
+  const absPath = path.resolve(storyDir, relPath)
+  if (!fs.existsSync(absPath)) return null
+  return fs.readFileSync(absPath, 'utf-8').trim()
+}
+
 export function parseStoryExamples(vueFilePath) {
   const storyPath = resolveStoryPath(vueFilePath)
   if (!storyPath) return []
 
   const content = fs.readFileSync(storyPath, 'utf-8')
+  const storyDir = path.dirname(storyPath)
   const examples = []
 
   for (const m of content.matchAll(/export\s+const\s+(\w+)\s*=\s*\{/g)) {
@@ -88,6 +98,28 @@ export function parseStoryExamples(vueFilePath) {
 
     // ── Prefer explicit `code: \`` property (full hand-written SFC snippet) ──
     const manualSnippet = extractBacktickByKey(storyObj, 'code')
+
+    // ── Detect `code: SomeRawVar` variable reference → read from ?raw import ──
+    if (!manualSnippet) {
+      const refMatch = storyObj.match(/\bcode\s*:\s*(\w+Raw)\b/)
+      if (refMatch) {
+        const rawContent = resolveRawImport(content, storyDir, refMatch[1])
+        if (rawContent) {
+          const id    = name.replace(/[A-Z]/g, (c, offset) => (offset === 0 ? c.toLowerCase() : '-' + c.toLowerCase()))
+          const title = name.replace(/[A-Z]/g, (c, offset) => (offset === 0 ? c : ' ' + c))
+          const description = extractStringProp(storyObj, 'description')
+          const highlights  = extractStringArrayProp(storyObj, 'highlights')
+          examples.push({
+            id,
+            title,
+            ...(description && { description }),
+            ...(highlights  && { highlights }),
+            code: { language: 'vue', snippet: rawContent }
+          })
+          continue
+        }
+      }
+    }
 
     // ── Fall back to sfc-builder if no manual code ───────────────────────────
     let snippet = manualSnippet
@@ -138,6 +170,8 @@ export function parseStoryMeta(vueFilePath) {
 
   return {
     kind:            extractStringProp(block, 'kind') ?? 'leaf',
+    description:     extractStringProp(block, 'description') ?? null,
+    keywords:        extractStringArrayProp(block, 'keywords') ?? null,
     use_for:         extractStringArrayProp(block, 'use_for') ?? [],
     understand_with: extractStringArrayProp(block, 'understand_with') ?? [],
   }

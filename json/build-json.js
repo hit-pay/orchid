@@ -160,8 +160,8 @@ async function buildPackageDocs(label, indexPath, aliases, outputFile, packageRo
 
       indexComponents.push({
         name: exportName,
-        description: DESCRIPTIONS[exportName] ?? `OrchidUI ${exportName} component.`,
-        tags: TAGS[exportName] ?? [],
+        description: storyMeta.description ?? DESCRIPTIONS[exportName] ?? `OrchidUI ${exportName} component.`,
+        tags: storyMeta.keywords ?? TAGS[exportName] ?? [],
         kind: storyMeta.kind,
         ...(storyMeta.use_for?.length && { use_for: storyMeta.use_for }),
         ...(storyMeta.understand_with?.length && { understand_with: storyMeta.understand_with }),
