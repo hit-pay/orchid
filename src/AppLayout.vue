@@ -12,10 +12,7 @@ import {
 import Examples from './Examples.vue'
 const showComponents = ref(false)
 
-const navigation = [
-  { name: 'Docs', href: 'docs' },
-  { name: 'Storybook', href: '/storybook/' }
-]
+const navigation = [{ name: 'Storybook', href: '/storybook/' }]
 const onClickNav = (e, item) => {
   if (item.href == 'components') {
     e.preventDefault()
