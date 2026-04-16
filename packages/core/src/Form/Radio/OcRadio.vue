@@ -2,22 +2,37 @@
 import { BaseInput, Icon, Tooltip } from '@/orchidui-core'
 
 defineProps({
+  /** v-model — the value this radio represents. When selected, this value is emitted. */
   modelValue: [String, Boolean],
+  /** Disable the radio — non-interactive with reduced opacity. */
   isDisabled: Boolean,
+  /** Whether this radio is checked (controlled externally by RadioGroup). */
   checked: Boolean,
+  /** Label text shown next to the radio. */
   label: String,
+  /** Unique id used together with groupName for the underlying input element. */
   id: [String, Number],
+  /** HTML name attribute grouping radio buttons together (required for single-select behavior). */
   groupName: String,
+  /** Validation error message shown below the radio. */
   errorMessage: String,
+  /** Helper text shown below the label. */
   hint: String,
+  /** Tooltip text shown on hover of the label icon. */
   tooltipText: String,
+  /** Icon name rendered inside the label area (triggers tooltip). */
   labelIcon: String,
+  /** Extra props forwarded to the Tooltip component. */
   tooltipOptions: Object,
+  /** Render as a button-style radio (bordered card). */
   isButtonVariant: Boolean,
+  /** Button variant with the radio circle visible inside the card. */
   isButtonVariantWithRadio: Boolean,
+  /** Icon name shown before the label text. */
   icon: String
 })
 defineEmits({
+  /** Radio selected. Payload: the modelValue of this radio. */
   'update:modelValue': []
 })
 </script>

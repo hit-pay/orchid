@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "fast-glob": "^3.3.1",
-    "vue-docgen-api": "^4.79.1"
+    "vue-component-meta": "^2.2.0",
+    "typescript": "^5.0.0"
   }
 }

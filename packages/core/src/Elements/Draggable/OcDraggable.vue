@@ -3,11 +3,14 @@ import { computed } from 'vue'
 import { VueDraggableNext } from 'vue-draggable-next'
 
 const props = defineProps({
+  /** v-model — the array of items to make draggable. Updated in-place when items are reordered. */
   modelValue: Array
 })
 
 const emit = defineEmits({
+  /** Item order changed. Payload: `(newList, event)` — the reordered array and the vue-draggable event. */
   'update:modelValue': [],
+  /** An item is being dragged over another position. Used to restrict or allow drops. */
   detectMove: null
 })
 

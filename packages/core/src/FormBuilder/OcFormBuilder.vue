@@ -21,42 +21,72 @@ import {
 import { ref, computed, watch, onMounted } from 'vue'
 
 const props = defineProps({
+  /** Unique identifier for the form instance. */
   id: {
     type: String,
     required: true
   },
+  /**
+   * Array of form field configuration objects. Each object describes one field and supports:
+   * `name` (string | array) — field key(s); `type` (string) — component type (e.g. `'Input'`,
+   * `'Select'`, `'DatePicker'`); `props` (object) — props forwarded to the field component;
+   * `show_if`, `show_if_value`, `show_if_not`, `show_if_min` — conditional visibility rules.
+   */
   jsonForm: {
     type: Array
   },
   /**
-   * Grid needs to be defined in the following format:
-   * `{`
-   *   `[Responsive size (xs, sm, md, lg, xl, xxl)]: {`
-   *     `area: [Grid area definition (names of areas in order)],`
-   *     `rows: [Count and size of rows i.e: 'auto' | '100%' | ...],`
-   *     `columns: [Count and size of columns i.e: '33% 33% 33%'],`
-   *   `}`
-   * `}`
+   * Responsive CSS grid layout definition. Shape:
+   * `{ [breakpoint: 'xs'|'sm'|'md'|'lg'|'xl'|'xxl']: { area: string, rows: string, columns: string } }`
+   * where `area` is a multi-line CSS grid-template-areas string,
+   * `rows` is grid-template-rows (e.g. `'auto'`),
+   * and `columns` is grid-template-columns (e.g. `'33% 33% 33%'`).
    */
   grid: {
     type: Object,
     default: null
   },
+  /** Additional CSS class(es) applied to the form wrapper element. */
   class: String,
+  /**
+   * Validation error messages keyed by field name.
+   * Each value is a string error message displayed under the corresponding field.
+   */
   errors: {
     type: Object
   },
+  /**
+   * Current form field values keyed by field name. Must be kept in sync externally;
+   * update via the `onUpdate` event.
+   */
   values: {
     type: Object,
     required: true
   },
+  /**
+   * Additional values used only for evaluating `show_if` conditional logic,
+   * without affecting the form model. Useful when visibility depends on data
+   * outside the form (e.g. a parent page state).
+   */
   logicValues: {
     type: Object
   },
-  previewMode: String // only for store design
+  /**
+   * Preview mode identifier passed to store-design fields that use
+   * `show_if_preview` / `show_if_preview_only` / `show_if_preview_not` rules.
+   * @default undefined
+   */
+  previewMode: String
 })
 
-const emit = defineEmits(['onUpdate'])
+const emit = defineEmits({
+  /**
+   * Emitted whenever a form field value changes.
+   * @param {Object} form - The field's configuration object from `jsonForm`
+   * @param {*} value - The new value emitted by the field component
+   */
+  onUpdate: (form, value) => true
+})
 
 const onUpdate = (form, value) => {
   emit('onUpdate', form, value)
@@ -319,6 +349,15 @@ onMounted(() => {
           "
           @update:model-value="onUpdate(form, $event)"
         />
+        <!--
+          @slot [form.type] — Dynamic slot for any field type not built into FormBuilder.
+          The slot name matches the `type` string of the field config (e.g. `<template #MyWidget>`).
+          @binding {string} form-id - The form's `id` prop
+          @binding {Object} form - The full field configuration object from `jsonForm`
+          @binding {*} value - Current field value
+          @binding {string} error - Current validation error message for this field
+          @binding {Function} on-update - Call as `on-update(form, newValue)` to emit the change
+        -->
         <slot
           v-else
           :name="form.type"

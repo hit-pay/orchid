@@ -3,33 +3,46 @@ import { BaseInput } from '@/orchidui-core'
 import { ref, watch } from 'vue'
 
 const props = defineProps({
-  placeholder: String,
-  label: String,
-  errorMessage: String,
-  hint: String,
+  /** v-model — the textarea value. */
   modelValue: String,
+  /** Placeholder text shown when the textarea is empty. */
+  placeholder: String,
+  /** Field label shown above the textarea. */
+  label: String,
+  /** Validation error message shown in red below the textarea. */
+  errorMessage: String,
+  /** Helper text shown below the label. */
+  hint: String,
+  /** Number of visible text rows (HTML rows attribute). */
   rows: Number,
+  /** Allow the user to resize the textarea vertically. When false, resize is disabled. */
   autoResize: {
     type: Boolean,
     default: false
   },
+  /** Disable the textarea — non-interactive. */
   isDisabled: Boolean,
+  /** Show a `*` required indicator next to the label. */
   isRequired: {
     type: Boolean,
     default: false
   },
+  /** Icon name rendered inside the label area (tooltip trigger). */
   labelIcon: {
     type: String,
     default: ''
   },
+  /** Tooltip text shown when hovering the label icon. */
   tooltipText: {
     type: String,
     default: ''
   },
+  /** Extra props forwarded to the label tooltip component. */
   tooltipOptions: {
     type: Object,
     default: () => ({})
   },
+  /** AI-assisted state — shows a subtle accent border. Clears on first user input. */
   ai: {
     type: Boolean,
     default: false
@@ -37,6 +50,7 @@ const props = defineProps({
 })
 
 const emit = defineEmits({
+  /** Textarea value changed. Payload: new string value. */
   'update:modelValue': []
 })
 
