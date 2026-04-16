@@ -1,0 +1,1697 @@
+# OrchidUI — LLM Reference
+
+OrchidUI is a Vue 3 component library with Tailwind CSS and OrchidUI design tokens (`oc-*` prefix).
+
+## Packages
+
+- `@orchidui/core` — 131 components (UI primitives, forms, layout, navigation)
+- `@orchidui/dashboard` — 13 components (charts, editors, specialized widgets)
+
+## Base paths
+
+- Index: `/mcp/orchid-core.json`, `/mcp/orchid-dashboard.json`
+- Components: `/mcp/components/<Name>.detail.json`
+- Examples: `/mcp/components/<Name>.<example-id>.json`
+
+---
+
+# @orchidui/core
+
+## Table
+
+Display tabular data with sorting, selection, and custom cell slots.
+
+kind: composite · tags: table, data, list
+
+**Use for:**
+- standalone table with custom header and body control
+- table with sorting and row selection
+- simple data table without filter toolbar
+
+**Understand with:** DataTable, NewTable, TableCell, TableHeader, Chip
+
+**Related:** Chip, ExpandingTable, Icon, TableCell, TableCellContent, Toggle
+
+- Detail: /mcp/components/Table.detail.json
+- Examples:
+  - /mcp/components/Table.basic.json
+  - /mcp/components/Table.cell-variants.json
+  - /mcp/components/Table.expanding-table-story.json
+  - /mcp/components/Table.loading.json
+  - /mcp/components/Table.playground.json
+  - /mcp/components/Table.sortable-columns.json
+  - /mcp/components/Table.sticky-columns.json
+
+## TableHeader
+
+Header cell for Table, supports text or checkbox variant.
+
+kind: leaf · tags: table, data
+
+- Detail: /mcp/components/TableHeader.detail.json
+
+## TableCell
+
+Body cell for Table, supports content/chip/datetime/icon/image variants.
+
+kind: leaf · tags: table, data
+
+- Detail: /mcp/components/TableCell.detail.json
+- Examples:
+  - /mcp/components/TableCell.default.json
+
+## TableCellContent
+
+Two-line cell content with title and description.
+
+kind: leaf · tags: table, data
+
+- Detail: /mcp/components/TableCellContent.detail.json
+
+## TableLink
+
+Wraps table cell content as a link.
+
+kind: leaf · tags: table, data
+
+- Detail: /mcp/components/TableLink.detail.json
+
+## ExpandingTable
+
+Table with collapsible/expandable nested rows.
+
+kind: leaf · tags: table, data, tree
+
+- Detail: /mcp/components/ExpandingTable.detail.json
+
+## ExpandingTableRow
+
+Single row inside ExpandingTable.
+
+kind: leaf · tags: table, data
+
+- Detail: /mcp/components/ExpandingTableRow.detail.json
+
+## ExpandingHeaderRow
+
+Header row for ExpandingTable.
+
+kind: leaf · tags: table, data
+
+- Detail: /mcp/components/ExpandingHeaderRow.detail.json
+
+## Pagination
+
+Page navigation with prev/next and numbered buttons.
+
+kind: leaf · tags: pagination, navigation
+
+- Detail: /mcp/components/Pagination.detail.json
+- Examples:
+  - /mcp/components/Pagination.default.json
+
+## PrevNext
+
+Previous or next button used inside Pagination.
+
+kind: leaf · tags: pagination, navigation
+
+- Detail: /mcp/components/PrevNext.detail.json
+
+## PaginationNumber
+
+Numbered page button used inside Pagination.
+
+kind: leaf · tags: pagination, navigation
+
+- Detail: /mcp/components/PaginationNumber.detail.json
+
+## Overview
+
+Group of metric cards showing key stats with icons.
+
+kind: leaf · tags: stats, dashboard, metrics
+
+**Related:** Button, OverviewItem
+
+- Detail: /mcp/components/Overview.detail.json
+- Examples:
+  - /mcp/components/Overview.default.json
+  - /mcp/components/Overview.overview-group.json
+
+## OverviewIcon
+
+Colored icon badge inside OverviewItem.
+
+kind: leaf · tags: icon, stats
+
+- Detail: /mcp/components/OverviewIcon.detail.json
+
+## OverviewItem
+
+Single metric card with title, value, and trend indicator.
+
+kind: leaf · tags: stats, dashboard, metrics
+
+- Detail: /mcp/components/OverviewItem.detail.json
+
+## CustomerCard
+
+Display customer or beneficiary details.
+
+kind: leaf · tags: customer, card, profile
+
+- Detail: /mcp/components/CustomerCard.detail.json
+- Examples:
+  - /mcp/components/CustomerCard.beneficiary.json
+  - /mcp/components/CustomerCard.big-beneficiary.json
+  - /mcp/components/CustomerCard.big-variant.json
+  - /mcp/components/CustomerCard.default.json
+  - /mcp/components/CustomerCard.empty-state.json
+  - /mcp/components/CustomerCard.small-variant.json
+  - /mcp/components/CustomerCard.with-actions.json
+
+## TransferSummary
+
+Show money transfer summary with amount, fee, and FX rate.
+
+kind: leaf · tags: transfer, finance, summary
+
+- Detail: /mcp/components/TransferSummary.detail.json
+- Examples:
+  - /mcp/components/TransferSummary.default.json
+  - /mcp/components/TransferSummary.with-fx-data.json
+
+## ListItem
+
+Versatile list row for timeline, webhook, payment, and accordion layouts.
+
+kind: leaf · tags: list, timeline, item
+
+**Use for:**
+- timeline event row
+- webhook endpoint list item
+- payment integration list item
+- settings row with accordion expand
+- general list item with chips and actions
+
+**Understand with:** DropdownItem, Button
+
+**Related:** Button, DropdownItem
+
+- Detail: /mcp/components/ListItem.detail.json
+- Examples:
+  - /mcp/components/ListItem.accordion.json
+  - /mcp/components/ListItem.general.json
+  - /mcp/components/ListItem.payment.json
+  - /mcp/components/ListItem.playground.json
+  - /mcp/components/ListItem.time-line.json
+  - /mcp/components/ListItem.webhook.json
+
+## ListUrl
+
+Display a labelled URL with copy button.
+
+kind: leaf · tags: list, url, copy
+
+- Detail: /mcp/components/ListUrl.detail.json
+
+## ListDetail
+
+Label-value row in horizontal or vertical layout.
+
+kind: leaf · tags: list, detail, label
+
+- Detail: /mcp/components/ListDetail.detail.json
+- Examples:
+  - /mcp/components/ListDetail.default.json
+  - /mcp/components/ListDetail.using-slot.json
+  - /mcp/components/ListDetail.vertical.json
+
+## InfoCard
+
+Content card with title, loading state, and header/footer slots.
+
+kind: leaf · tags: card, content
+
+**Related:** Button, OverviewItem
+
+- Detail: /mcp/components/InfoCard.detail.json
+- Examples:
+  - /mcp/components/InfoCard.default.json
+
+## ProgressBar
+
+Step-based linear progress bar.
+
+kind: leaf · tags: progress, steps
+
+- Detail: /mcp/components/ProgressBar.detail.json
+- Examples:
+  - /mcp/components/ProgressBar.default.json
+
+## FloatContent
+
+Floating side panel with title, description, and actions.
+
+kind: composite · tags: panel, overlay, sidebar
+
+**Use for:**
+- side panel
+- detail drawer
+- edit panel
+- sliding panel overlay
+- customer detail side view
+
+**Understand with:** FormBuilder, Button, ListDetail, Modal
+
+**Related:** Button
+
+- Detail: /mcp/components/FloatContent.detail.json
+- Examples:
+  - /mcp/components/FloatContent.default.json
+
+## HorizontalProgressbar
+
+Horizontal bar showing current vs max value.
+
+kind: leaf · tags: progress, bar
+
+- Detail: /mcp/components/HorizontalProgressbar.detail.json
+- Examples:
+  - /mcp/components/HorizontalProgressbar.default.json
+
+## OcOnboardingListItem
+
+Onboarding checklist row with number badge and action button.
+
+kind: leaf · tags: onboarding, checklist
+
+- Detail: /mcp/components/OcOnboardingListItem.detail.json
+- Examples:
+  - /mcp/components/OcOnboardingListItem.default.json
+
+## OcOnboardingRecap
+
+Collapsible recap card for onboarding sections.
+
+kind: leaf · tags: onboarding, recap, summary
+
+- Detail: /mcp/components/OcOnboardingRecap.detail.json
+- Examples:
+  - /mcp/components/OcOnboardingRecap.default.json
+  - /mcp/components/OcOnboardingRecap.no-header.json
+
+## OcAccountVerificationContent
+
+Container for account verification steps.
+
+kind: leaf · tags: verification, onboarding
+
+**Related:** OcOnboardingRecap
+
+- Detail: /mcp/components/OcAccountVerificationContent.detail.json
+- Examples:
+  - /mcp/components/OcAccountVerificationContent.default.json
+  - /mcp/components/OcAccountVerificationContent.preview.json
+
+## OcAccountVerificationBox
+
+Selectable verification option card.
+
+kind: leaf · tags: verification, onboarding, option
+
+**Related:** Chip
+
+- Detail: /mcp/components/OcAccountVerificationBox.detail.json
+- Examples:
+  - /mcp/components/OcAccountVerificationBox.default.json
+  - /mcp/components/OcAccountVerificationBox.header-slot.json
+
+## NewTable
+
+Table with row expansion, selection, and named column slots.
+
+kind: composite · tags: table, data, list
+
+**Use for:**
+- table rendering inside DataTable
+- standalone table with expandable rows
+- table with column tooltips and copy buttons
+
+**Understand with:** DataTable, Chip, Pagination
+
+**Related:** Chip
+
+- Detail: /mcp/components/NewTable.detail.json
+- Examples:
+  - /mcp/components/NewTable.default.json
+
+## OcRowItemData
+
+List of labelled data items with optional chip and copy button.
+
+kind: leaf · tags: list, data, detail
+
+- Detail: /mcp/components/OcRowItemData.detail.json
+- Examples:
+  - /mcp/components/OcRowItemData.default.json
+  - /mcp/components/OcRowItemData.single-item.json
+  - /mcp/components/OcRowItemData.with-chip.json
+  - /mcp/components/OcRowItemData.with-icon.json
+
+## Accordion
+
+Collapsible section with header and body.
+
+kind: leaf · tags: accordion, collapse, disclosure
+
+- Detail: /mcp/components/Accordion.detail.json
+- Examples:
+  - /mcp/components/Accordion.default.json
+
+## OnboardingAccordion
+
+Accordion with onboarding status variant.
+
+kind: leaf · tags: accordion, onboarding
+
+- Detail: /mcp/components/OnboardingAccordion.detail.json
+- Examples:
+  - /mcp/components/OnboardingAccordion.default.json
+
+## OnboardingProductOption
+
+Selectable product option card with image.
+
+kind: leaf · tags: onboarding, option, card
+
+**Related:** Checklist
+
+- Detail: /mcp/components/OnboardingProductOption.detail.json
+- Examples:
+  - /mcp/components/OnboardingProductOption.default.json
+
+## Tabs
+
+Tab bar for switching between views.
+
+kind: composite · tags: tabs, navigation
+
+**Use for:**
+- tabbed navigation
+- content switching
+- multi-section view
+- settings tabs
+
+**Understand with:** SwitchTabs, PaymentTab
+
+- Detail: /mcp/components/Tabs.detail.json
+- Examples:
+  - /mcp/components/Tabs.default.json
+
+## PaymentTab
+
+Tab selector for payment methods.
+
+kind: leaf · tags: tabs, payment
+
+- Detail: /mcp/components/PaymentTab.detail.json
+
+## Steps
+
+Step indicator for multi-step flows.
+
+kind: leaf · tags: steps, wizard, progress
+
+- Detail: /mcp/components/Steps.detail.json
+- Examples:
+  - /mcp/components/Steps.default.json
+
+## Step
+
+Single step inside Steps.
+
+kind: leaf · tags: steps, wizard
+
+- Detail: /mcp/components/Step.detail.json
+
+## Variants
+
+Group of selectable option cards.
+
+kind: leaf · tags: variants, option, select
+
+- Detail: /mcp/components/Variants.detail.json
+- Examples:
+  - /mcp/components/Variants.default.json
+
+## Variant
+
+Single selectable option card with icon and label.
+
+kind: leaf · tags: variants, option
+
+- Detail: /mcp/components/Variant.detail.json
+
+## SwitchTabs
+
+Segmented control for switching between a few options.
+
+kind: leaf · tags: tabs, toggle, switch
+
+- Detail: /mcp/components/SwitchTabs.detail.json
+- Examples:
+  - /mcp/components/SwitchTabs.default.json
+
+## Header
+
+Top-level application header shell.
+
+kind: leaf · tags: header, layout, navigation
+
+**Related:** Button, Dropdown, DropdownItem, HeaderCenter, HeaderLeft, HeaderRight, Icon, SubHeader, TabToSelect
+
+- Detail: /mcp/components/Header.detail.json
+- Examples:
+  - /mcp/components/Header.default.json
+  - /mcp/components/Header.sub-header-dropdown-element.json
+  - /mcp/components/Header.sub-header-element.json
+
+## SubHeader
+
+Secondary header below the main header.
+
+kind: leaf · tags: header, layout
+
+- Detail: /mcp/components/SubHeader.detail.json
+
+## HeaderLeft
+
+Left slot of the Header.
+
+kind: leaf · tags: header, layout
+
+- Detail: /mcp/components/HeaderLeft.detail.json
+
+## HeaderCenter
+
+Center slot of the Header with back button support.
+
+kind: leaf · tags: header, layout
+
+- Detail: /mcp/components/HeaderCenter.detail.json
+
+## HeaderRight
+
+Right slot of the Header with action buttons.
+
+kind: leaf · tags: header, layout
+
+- Detail: /mcp/components/HeaderRight.detail.json
+
+## TabToSelect
+
+Tab bar inside Header for route switching.
+
+kind: leaf · tags: tabs, header, navigation
+
+- Detail: /mcp/components/TabToSelect.detail.json
+
+## Checklist
+
+Checklist step item with index, label, and completion state.
+
+kind: leaf · tags: checklist, onboarding
+
+- Detail: /mcp/components/Checklist.detail.json
+- Examples:
+  - /mcp/components/Checklist.default.json
+
+## PageTitle
+
+Page title bar with back button and primary/secondary actions.
+
+kind: leaf · tags: page, title, header
+
+- Detail: /mcp/components/PageTitle.detail.json
+- Examples:
+  - /mcp/components/PageTitle.default.json
+
+## PrimaryActions
+
+Primary action buttons or dropdown inside PageTitle.
+
+kind: leaf · tags: button, actions
+
+- Detail: /mcp/components/PrimaryActions.detail.json
+
+## PageTitleRight
+
+Right action area of PageTitle.
+
+kind: leaf · tags: page, title, actions
+
+- Detail: /mcp/components/PageTitleRight.detail.json
+
+## Sidebar
+
+Main application sidebar with expandable menus.
+
+kind: composite · tags: sidebar, navigation, layout
+
+**Use for:**
+- app navigation
+- main sidebar menu
+- side navigation with submenus
+
+**Understand with:** SideBarMenu, SidebarSubmenu, SidebarFooter, SidebarFeatureBanners, AccountSetupProgress, Icon
+
+**Related:** AccountSetupProgress, Avatar, Dropdown, DropdownItem, SidebarFeatureBanners
+
+- Detail: /mcp/components/Sidebar.detail.json
+- Examples:
+  - /mcp/components/Sidebar.all-sidebar.json
+  - /mcp/components/Sidebar.default.json
+
+## SidebarSubmenu
+
+Expandable submenu inside Sidebar.
+
+kind: leaf · tags: sidebar, navigation
+
+- Detail: /mcp/components/SidebarSubmenu.detail.json
+
+## AccountSetup
+
+Account setup progress widget inside Sidebar.
+
+kind: leaf · tags: sidebar, onboarding, progress
+
+- Detail: /mcp/components/AccountSetup.detail.json
+
+## SidebarHead
+
+Header section of a Sidebar menu group.
+
+kind: leaf · tags: sidebar, navigation
+
+- Detail: /mcp/components/SidebarHead.detail.json
+
+## SideBarMenu
+
+Single menu item in Sidebar.
+
+kind: leaf · tags: sidebar, navigation, menu
+
+- Detail: /mcp/components/SideBarMenu.detail.json
+
+## SidebarSubMenuItem
+
+Child menu item inside SidebarSubmenu.
+
+kind: leaf · tags: sidebar, navigation
+
+- Detail: /mcp/components/SidebarSubMenuItem.detail.json
+
+## SidebarFooter
+
+Footer section of the Sidebar.
+
+kind: leaf · tags: sidebar, layout
+
+- Detail: /mcp/components/SidebarFooter.detail.json
+
+## SidebarFeatureBanners
+
+Feature promotion banners inside Sidebar.
+
+kind: leaf · tags: sidebar, banner, promo
+
+- Detail: /mcp/components/SidebarFeatureBanners.detail.json
+
+## AccountSetupProgress
+
+Circular progress indicator for account setup in Sidebar.
+
+kind: leaf · tags: sidebar, progress, onboarding
+
+- Detail: /mcp/components/AccountSetupProgress.detail.json
+
+## SubSidebar
+
+Secondary sidebar for sub-navigation.
+
+kind: leaf · tags: sidebar, navigation
+
+- Detail: /mcp/components/SubSidebar.detail.json
+- Examples:
+  - /mcp/components/SubSidebar.default.json
+
+## EmptyPage
+
+Placeholder shown when a section has no data.
+
+kind: leaf · tags: empty, placeholder, state
+
+**Use for:**
+- empty state placeholder
+- no data yet state
+- zero state with call-to-action button
+- search no results state
+- feature upgrade prompt
+
+- Detail: /mcp/components/EmptyPage.detail.json
+- Examples:
+  - /mcp/components/EmptyPage.custom-container-class.json
+  - /mcp/components/EmptyPage.custom-slots.json
+  - /mcp/components/EmptyPage.default.json
+  - /mcp/components/EmptyPage.large-size.json
+  - /mcp/components/EmptyPage.no-button.json
+  - /mcp/components/EmptyPage.small-size.json
+  - /mcp/components/EmptyPage.upgrade-variant.json
+  - /mcp/components/EmptyPage.with-secondary-button.json
+
+## AdditionalContent
+
+Side panel with customer info, overview, and action buttons.
+
+kind: leaf · tags: panel, sidebar, content
+
+**Related:** OverviewItem
+
+- Detail: /mcp/components/AdditionalContent.detail.json
+- Examples:
+  - /mcp/components/AdditionalContent.balance.json
+  - /mcp/components/AdditionalContent.default.json
+  - /mcp/components/AdditionalContent.dynamic.json
+
+## InfoCardButton
+
+Selectable card button with title and content.
+
+kind: leaf · tags: card, button, select
+
+- Detail: /mcp/components/InfoCardButton.detail.json
+
+## Skeleton
+
+Loading placeholder that mimics content shape.
+
+kind: leaf · tags: loading, skeleton, placeholder
+
+**Use for:**
+- content loading placeholder
+- table row loading state
+- card loading skeleton
+- form fields loading state
+- dashboard stats loading
+
+- Detail: /mcp/components/Skeleton.detail.json
+- Examples:
+  - /mcp/components/Skeleton.avatar-with-text.json
+  - /mcp/components/Skeleton.card.json
+  - /mcp/components/Skeleton.form-fields.json
+  - /mcp/components/Skeleton.overview-cards.json
+  - /mcp/components/Skeleton.table-row.json
+  - /mcp/components/Skeleton.text-lines.json
+
+## FeatureOverviewCard
+
+Card listing product features with icons.
+
+kind: leaf · tags: card, features, overview
+
+- Detail: /mcp/components/FeatureOverviewCard.detail.json
+- Examples:
+  - /mcp/components/FeatureOverviewCard.default.json
+
+## SandboxBanner
+
+Top banner indicating sandbox/test mode.
+
+kind: leaf · tags: banner, sandbox, alert
+
+- Detail: /mcp/components/SandboxBanner.detail.json
+- Examples:
+  - /mcp/components/SandboxBanner.default.json
+
+## TopBanner
+
+Dismissible top-of-page announcement banner.
+
+kind: leaf · tags: banner, alert, notification
+
+- Detail: /mcp/components/TopBanner.detail.json
+- Examples:
+  - /mcp/components/TopBanner.action-required.json
+  - /mcp/components/TopBanner.default.json
+
+## Box
+
+Clickable card with icon, title, and description.
+
+kind: leaf · tags: card, box, button
+
+- Detail: /mcp/components/Box.detail.json
+- Examples:
+  - /mcp/components/Box.default.json
+  - /mcp/components/Box.variants.json
+
+## OcSection
+
+Content section wrapper with optional title.
+
+kind: leaf · tags: section, layout
+
+**Related:** Button, Icon, ListItem, OcOnboardingListItem, OverviewIcon
+
+- Detail: /mcp/components/OcSection.detail.json
+- Examples:
+  - /mcp/components/OcSection.default.json
+
+## AuthenticationOption
+
+Selectable authentication method card.
+
+kind: leaf · tags: auth, option, card
+
+- Detail: /mcp/components/AuthenticationOption.detail.json
+- Examples:
+  - /mcp/components/AuthenticationOption.default.json
+
+## VerificationOption
+
+Selectable verification method card.
+
+kind: leaf · tags: verification, option, card
+
+**Related:** RadioGroup
+
+- Detail: /mcp/components/VerificationOption.detail.json
+- Examples:
+  - /mcp/components/VerificationOption.default.json
+
+## Chip
+
+Status or category badge with color and style variants.
+
+kind: leaf · tags: chip, badge, tag, status
+
+- Detail: /mcp/components/Chip.detail.json
+- Examples:
+  - /mcp/components/Chip.all-variants.json
+  - /mcp/components/Chip.default.json
+
+## Snackbar
+
+Toast notification with icon and action buttons.
+
+kind: leaf · tags: toast, notification, alert
+
+- Detail: /mcp/components/Snackbar.detail.json
+- Examples:
+  - /mcp/components/Snackbar.big-size.json
+  - /mcp/components/Snackbar.default.json
+  - /mcp/components/Snackbar.variants.json
+
+## Banner
+
+Inline notification banner with dismiss support.
+
+kind: leaf · tags: banner, notification, alert
+
+- Detail: /mcp/components/Banner.detail.json
+- Examples:
+  - /mcp/components/Banner.default.json
+  - /mcp/components/Banner.variants.json
+
+## ShareIcon
+
+Icon button for sharing via a channel (e.g. WhatsApp).
+
+kind: leaf · tags: share, icon, social
+
+- Detail: /mcp/components/ShareIcon.detail.json
+- Examples:
+  - /mcp/components/ShareIcon.default.json
+  - /mcp/components/ShareIcon.variants.json
+
+## Tag
+
+Small colored label for status annotation.
+
+kind: leaf · tags: tag, badge, label, status
+
+- Detail: /mcp/components/Tag.detail.json
+- Examples:
+  - /mcp/components/Tag.default.json
+
+## BaseInput
+
+Form field wrapper with label, hint, and error slot.
+
+kind: leaf · tags: form, input, field
+
+- Detail: /mcp/components/BaseInput.detail.json
+
+## Button
+
+Action button with primary/secondary/destructive variants.
+
+kind: leaf · tags: button, action, form
+
+- Detail: /mcp/components/Button.detail.json
+- Examples:
+  - /mcp/components/Button.button-variants.json
+  - /mcp/components/Button.default.json
+  - /mcp/components/Button.size-variants.json
+
+## CardInput
+
+Credit card number input with card type detection.
+
+kind: leaf · tags: input, payment, card, form
+
+- Detail: /mcp/components/CardInput.detail.json
+- Examples:
+  - /mcp/components/CardInput.default.json
+
+## Checkbox
+
+Single checkbox input.
+
+kind: leaf · tags: checkbox, form, input
+
+- Detail: /mcp/components/Checkbox.detail.json
+- Examples:
+  - /mcp/components/Checkbox.basic.json
+  - /mcp/components/Checkbox.button-variant.json
+  - /mcp/components/Checkbox.playground.json
+  - /mcp/components/Checkbox.select-all.json
+  - /mcp/components/Checkbox.states.json
+
+## CheckboxesGroup
+
+Group of checkboxes with select-all support.
+
+kind: leaf · tags: checkbox, form, group
+
+- Detail: /mcp/components/CheckboxesGroup.detail.json
+- Examples:
+  - /mcp/components/CheckboxesGroup.default.json
+  - /mcp/components/CheckboxesGroup.variants.json
+
+## Criteria
+
+Read-only pass/fail criteria indicator.
+
+kind: leaf · tags: criteria, validation, form
+
+- Detail: /mcp/components/Criteria.detail.json
+- Examples:
+  - /mcp/components/Criteria.default.json
+  - /mcp/components/Criteria.variants.json
+
+## Input
+
+Text input with icon, prefix, and password toggle.
+
+kind: leaf · tags: input, text, form
+
+**Use for:**
+- text input field
+- password input with toggle
+- search input
+- numeric or decimal input
+- input with currency prefix
+- input with prefix or suffix slot
+
+- Detail: /mcp/components/Input.detail.json
+- Examples:
+  - /mcp/components/Input.basic.json
+  - /mcp/components/Input.numeric-input-modes.json
+  - /mcp/components/Input.playground.json
+  - /mcp/components/Input.states.json
+  - /mcp/components/Input.with-icon.json
+  - /mcp/components/Input.with-label-tooltip.json
+  - /mcp/components/Input.with-prefix-suffix.json
+
+## InputOption
+
+Tag-style input for adding multiple free-text values.
+
+kind: leaf · tags: input, tags, form
+
+- Detail: /mcp/components/InputOption.detail.json
+
+## PhoneInput
+
+Phone number input with country code selector.
+
+kind: leaf · tags: input, phone, form
+
+- Detail: /mcp/components/PhoneInput.detail.json
+- Examples:
+  - /mcp/components/PhoneInput.default.json
+
+## Radio
+
+Single radio button input.
+
+kind: leaf · tags: radio, form, input
+
+- Detail: /mcp/components/Radio.detail.json
+- Examples:
+  - /mcp/components/Radio.basic.json
+  - /mcp/components/Radio.button-variant.json
+  - /mcp/components/Radio.playground.json
+  - /mcp/components/Radio.states.json
+
+## RadioGroup
+
+Group of radio buttons.
+
+kind: leaf · tags: radio, form, group
+
+- Detail: /mcp/components/RadioGroup.detail.json
+- Examples:
+  - /mcp/components/RadioGroup.button-variants.json
+  - /mcp/components/RadioGroup.horizontal.json
+  - /mcp/components/RadioGroup.playground.json
+  - /mcp/components/RadioGroup.vertical.json
+  - /mcp/components/RadioGroup.with-error.json
+
+## RangeInput
+
+Dual numeric input for a min/max range.
+
+kind: leaf · tags: input, range, form
+
+- Detail: /mcp/components/RangeInput.detail.json
+- Examples:
+  - /mcp/components/RangeInput.default.json
+
+## Select
+
+Dropdown with single/multi select, filtering, and async search.
+
+kind: leaf · tags: select, dropdown, form, filter
+
+**Use for:**
+- dropdown selection field
+- single select input
+- multi select with checkboxes
+- async search dropdown
+- grouped options select
+- filter field in forms
+
+- Detail: /mcp/components/Select.detail.json
+- Examples:
+  - /mcp/components/Select.async-search.json
+  - /mcp/components/Select.basic.json
+  - /mcp/components/Select.filterable.json
+  - /mcp/components/Select.grouped-options.json
+  - /mcp/components/Select.inline-label.json
+  - /mcp/components/Select.multi-select.json
+  - /mcp/components/Select.playground.json
+  - /mcp/components/Select.states.json
+  - /mcp/components/Select.with-add-new.json
+
+## Option
+
+Single option item inside Select.
+
+kind: leaf · tags: select, option, form
+
+- Detail: /mcp/components/Option.detail.json
+
+## GroupOptions
+
+Labeled group of options inside Select.
+
+kind: leaf · tags: select, group, form
+
+- Detail: /mcp/components/GroupOptions.detail.json
+
+## Toggle
+
+On/off toggle switch.
+
+kind: leaf · tags: toggle, switch, form
+
+- Detail: /mcp/components/Toggle.detail.json
+- Examples:
+  - /mcp/components/Toggle.default.json
+  - /mcp/components/Toggle.variants.json
+
+## LinkInput
+
+Input for social or custom links with platform selector.
+
+kind: leaf · tags: input, link, social, form
+
+- Detail: /mcp/components/LinkInput.detail.json
+- Examples:
+  - /mcp/components/LinkInput.default.json
+
+## TextArea
+
+Multi-line text input with auto-resize.
+
+kind: leaf · tags: textarea, input, form
+
+- Detail: /mcp/components/TextArea.detail.json
+- Examples:
+  - /mcp/components/TextArea.basic.json
+  - /mcp/components/TextArea.default.json
+  - /mcp/components/TextArea.playground.json
+  - /mcp/components/TextArea.states.json
+
+## Calendar
+
+Standalone date or date-range calendar picker.
+
+kind: leaf · tags: calendar, date, picker, form
+
+- Detail: /mcp/components/Calendar.detail.json
+- Examples:
+  - /mcp/components/Calendar.date-range.json
+  - /mcp/components/Calendar.default.json
+  - /mcp/components/Calendar.playground.json
+  - /mcp/components/Calendar.single-date.json
+  - /mcp/components/Calendar.with-constraints.json
+
+## DatePicker
+
+Date or range picker input with popover calendar.
+
+kind: leaf · tags: datepicker, date, form
+
+**Use for:**
+- date selection field
+- date range picker
+- report period filter
+- delivery date with min/max constraints
+- date field in FormBuilder
+
+- Detail: /mcp/components/DatePicker.detail.json
+- Examples:
+  - /mcp/components/DatePicker.custom-format.json
+  - /mcp/components/DatePicker.date-range.json
+  - /mcp/components/DatePicker.disabled-state.json
+  - /mcp/components/DatePicker.playground.json
+  - /mcp/components/DatePicker.single-date.json
+  - /mcp/components/DatePicker.with-constraints.json
+  - /mcp/components/DatePicker.with-shortcuts.json
+
+## Slider
+
+Range or single value slider.
+
+kind: leaf · tags: slider, range, form
+
+- Detail: /mcp/components/Slider.detail.json
+- Examples:
+  - /mcp/components/Slider.default.json
+  - /mcp/components/Slider.variant-right-input.json
+
+## SectionItem
+
+Settings row with title, toggle, and action slot.
+
+kind: leaf · tags: settings, form, toggle
+
+- Detail: /mcp/components/SectionItem.detail.json
+- Examples:
+  - /mcp/components/SectionItem.default.json
+  - /mcp/components/SectionItem.variants.json
+
+## SelectOptions
+
+Visual option picker in grid or list layout.
+
+kind: leaf · tags: select, options, form, grid
+
+- Detail: /mcp/components/SelectOptions.detail.json
+- Examples:
+  - /mcp/components/SelectOptions.default.json
+  - /mcp/components/SelectOptions.variants.json
+
+## SingleFileUpload
+
+Single file upload with preview and size limit.
+
+kind: leaf · tags: upload, file, form
+
+**Use for:**
+- file upload field
+- image upload with preview
+- document attachment in form
+- avatar or logo upload
+- CSV import button
+
+- Detail: /mcp/components/SingleFileUpload.detail.json
+- Examples:
+  - /mcp/components/SingleFileUpload.button-only.json
+  - /mcp/components/SingleFileUpload.default.json
+  - /mcp/components/SingleFileUpload.disabled.json
+  - /mcp/components/SingleFileUpload.image-only.json
+  - /mcp/components/SingleFileUpload.playground.json
+  - /mcp/components/SingleFileUpload.with-error.json
+
+## MultipleUploadFile
+
+Multiple file upload with preview grid.
+
+kind: leaf · tags: upload, file, form, gallery
+
+- Detail: /mcp/components/MultipleUploadFile.detail.json
+- Examples:
+  - /mcp/components/MultipleUploadFile.default.json
+  - /mcp/components/MultipleUploadFile.multiple-images.json
+
+## NumberInput
+
+Numeric input with increment/decrement buttons.
+
+kind: leaf · tags: input, number, form
+
+- Detail: /mcp/components/NumberInput.detail.json
+- Examples:
+  - /mcp/components/NumberInput.default.json
+
+## Avatar
+
+User or business avatar in multiple sizes.
+
+kind: leaf · tags: avatar, image, user
+
+- Detail: /mcp/components/Avatar.detail.json
+- Examples:
+  - /mcp/components/Avatar.default.json
+  - /mcp/components/Avatar.sizes.json
+
+## Icon
+
+SVG icon by name from the OrchidUI icon set.
+
+kind: leaf · tags: icon, svg, media
+
+- Detail: /mcp/components/Icon.detail.json
+- Examples:
+  - /mcp/components/Icon.default.json
+
+## Dropdown
+
+Popover dropdown menu attached to a trigger.
+
+kind: composite · tags: dropdown, menu, overlay
+
+**Use for:**
+- context menu
+- row actions menu
+- options dropdown
+- action menu trigger
+
+**Understand with:** DropdownItem, Button, Icon
+
+**Related:** Button, DropdownItem, Icon
+
+- Detail: /mcp/components/Dropdown.detail.json
+- Examples:
+  - /mcp/components/Dropdown.basic.json
+  - /mcp/components/Dropdown.custom-menu-content.json
+  - /mcp/components/Dropdown.dropdown-item-variants.json
+  - /mcp/components/Dropdown.icon-trigger.json
+  - /mcp/components/Dropdown.playground.json
+
+## DropdownItem
+
+Single item row inside a Dropdown.
+
+kind: leaf · tags: dropdown, menu, item
+
+**Related:** Dropdown
+
+- Detail: /mcp/components/DropdownItem.detail.json
+- Examples:
+  - /mcp/components/DropdownItem.badge-variants.json
+  - /mcp/components/DropdownItem.basic.json
+  - /mcp/components/DropdownItem.variants.json
+  - /mcp/components/DropdownItem.with-sub-text.json
+
+## Tooltip
+
+Hover or click tooltip/popover.
+
+kind: leaf · tags: tooltip, popover, overlay
+
+- Detail: /mcp/components/Tooltip.detail.json
+- Examples:
+  - /mcp/components/Tooltip.default.json
+
+## Modal
+
+Dialog modal with header, body, and footer.
+
+kind: composite · tags: modal, dialog, overlay
+
+**Use for:**
+- create dialog
+- edit dialog
+- detail overlay
+- confirmation prompt
+- form inside a modal
+
+**Understand with:** FormBuilder, Button, ConfirmationModal, FloatContent
+
+**Related:** Button
+
+- Detail: /mcp/components/Modal.detail.json
+- Examples:
+  - /mcp/components/Modal.default.json
+
+## OcModalPage
+
+Full-screen modal page with back button.
+
+kind: leaf · tags: modal, page, overlay
+
+**Related:** Button, Icon
+
+- Detail: /mcp/components/OcModalPage.detail.json
+- Examples:
+  - /mcp/components/OcModalPage.default.json
+
+## ConfirmationModal
+
+Pre-styled confirm/delete/warning dialog.
+
+kind: leaf · tags: modal, confirm, dialog, overlay
+
+**Related:** Button
+
+- Detail: /mcp/components/ConfirmationModal.detail.json
+- Examples:
+  - /mcp/components/ConfirmationModal.default.json
+
+## Popper
+
+Low-level Popper.js positioning wrapper.
+
+kind: leaf · tags: overlay, popper, positioning
+
+- Detail: /mcp/components/Popper.detail.json
+- Examples:
+  - /mcp/components/Popper.default.json
+
+## SupportMenu
+
+Floating help/support menu with grouped links.
+
+kind: leaf · tags: support, help, menu, overlay
+
+- Detail: /mcp/components/SupportMenu.detail.json
+- Examples:
+  - /mcp/components/SupportMenu.default.json
+
+## CopyTooltip
+
+Wrap any element to copy its value to clipboard.
+
+kind: leaf · tags: copy, clipboard, tooltip
+
+- Detail: /mcp/components/CopyTooltip.detail.json
+- Examples:
+  - /mcp/components/CopyTooltip.default.json
+
+## WhiteList
+
+Feature gate card shown when plan does not include a feature.
+
+kind: leaf · tags: upgrade, gate, plan
+
+**Related:** Button
+
+- Detail: /mcp/components/WhiteList.detail.json
+- Examples:
+  - /mcp/components/WhiteList.default.json
+
+## Theme
+
+Wrap app to apply light/dark color mode.
+
+kind: leaf · tags: theme, dark-mode, layout
+
+- Detail: /mcp/components/Theme.detail.json
+- Examples:
+  - /mcp/components/Theme.color-mode.json
+  - /mcp/components/Theme.default.json
+
+## FormBuilder
+
+Dynamic form renderer from a JSON schema.
+
+kind: composite · tags: form, builder, dynamic, schema
+
+**Use for:**
+- dynamic form rendering
+- create and edit forms
+- settings form
+- schema-driven form fields
+- filter form inside DataTable
+
+**Understand with:** Input, Select, TextArea, Checkbox, Toggle, PhoneInput, DatePicker, Button, Modal, FloatContent
+
+**Related:** Button, Input
+
+- Detail: /mcp/components/FormBuilder.detail.json
+- Examples:
+  - /mcp/components/FormBuilder.all-field-types.json
+  - /mcp/components/FormBuilder.basic.json
+  - /mcp/components/FormBuilder.conditional-fields.json
+  - /mcp/components/FormBuilder.custom-slot.json
+  - /mcp/components/FormBuilder.playground.json
+  - /mcp/components/FormBuilder.two-column-grid.json
+  - /mcp/components/FormBuilder.with-validation.json
+
+## DataTable
+
+Data table with filtering, pagination, search, and bulk actions.
+
+kind: composite · tags: table, data, filter, pagination, crud
+
+**Use for:**
+- resource list
+- CRUD table
+- data grid with search and filter
+- paginated data display
+- manage records with bulk actions
+
+**Understand with:** NewTable, FormBuilder, Modal, ConfirmationModal, PageTitle, EmptyPage, Chip, Button, Dropdown, DropdownItem
+
+**Related:** Button, Chip, Dropdown, DropdownItem, EmptyPage, Toggle
+
+- Detail: /mcp/components/DataTable.detail.json
+- Examples:
+  - /mcp/components/DataTable.basic.json
+  - /mcp/components/DataTable.column-edit.json
+  - /mcp/components/DataTable.cursor-pagination.json
+  - /mcp/components/DataTable.custom-empty-state.json
+  - /mcp/components/DataTable.loading-state.json
+  - /mcp/components/DataTable.new-table-design.json
+  - /mcp/components/DataTable.row-click-and-link.json
+  - /mcp/components/DataTable.search-with-options.json
+  - /mcp/components/DataTable.sticky-columns.json
+  - /mcp/components/DataTable.with-custom-cells.json
+  - /mcp/components/DataTable.with-filter-form.json
+
+## FilterSearch
+
+Search input inside DataTable filter toolbar.
+
+kind: leaf · tags: filter, search, table
+
+- Detail: /mcp/components/FilterSearch.detail.json
+
+## FilterSearchFor
+
+Active filter chips with remove controls.
+
+kind: leaf · tags: filter, search, table
+
+- Detail: /mcp/components/FilterSearchFor.detail.json
+
+## FilterForm
+
+Filter form panel driven by JSON schema, used inside DataTable.
+
+kind: leaf · tags: filter, form, table
+
+- Detail: /mcp/components/FilterForm.detail.json
+
+## ComplexCalendar
+
+Full calendar panel with range selection and shortcuts.
+
+kind: leaf · tags: calendar, date, range, form
+
+- Detail: /mcp/components/ComplexCalendar.detail.json
+- Examples:
+  - /mcp/components/ComplexCalendar.default.json
+  - /mcp/components/ComplexCalendar.single-calendar.json
+
+## ComplexDatePicker
+
+Date range picker input with label and format options.
+
+kind: leaf · tags: datepicker, date, range, form
+
+- Detail: /mcp/components/ComplexDatePicker.detail.json
+- Examples:
+  - /mcp/components/ComplexDatePicker.default.json
+
+## ModalCropper
+
+Modal-based image cropper.
+
+kind: leaf · tags: upload, image, crop, modal
+
+- Detail: /mcp/components/ModalCropper.detail.json
+
+## Cropper
+
+Inline image cropper.
+
+kind: leaf · tags: upload, image, crop
+
+- Detail: /mcp/components/Cropper.detail.json
+- Examples:
+  - /mcp/components/Cropper.default.json
+
+## Draggable
+
+Drag-and-drop wrapper for reorderable lists.
+
+kind: leaf · tags: drag, drop, sort, list
+
+**Related:** DraggableList, DropdownItem, Icon, Toggle
+
+- Detail: /mcp/components/Draggable.detail.json
+- Examples:
+  - /mcp/components/Draggable.basic.json
+  - /mcp/components/Draggable.custom-draggable.json
+  - /mcp/components/Draggable.default.json
+  - /mcp/components/Draggable.with-toggle.json
+
+## DraggableList
+
+Styled draggable list with icon and action slots.
+
+kind: leaf · tags: drag, drop, sort, list
+
+**Related:** DropdownItem, Toggle
+
+- Detail: /mcp/components/DraggableList.detail.json
+- Examples:
+  - /mcp/components/DraggableList.basic.json
+  - /mcp/components/DraggableList.unmovable.json
+  - /mcp/components/DraggableList.with-custom-title.json
+  - /mcp/components/DraggableList.with-toggle.json
+
+## EmojiPicker
+
+Emoji selector popover input.
+
+kind: leaf · tags: emoji, input, form
+
+- Detail: /mcp/components/EmojiPicker.detail.json
+- Examples:
+  - /mcp/components/EmojiPicker.default.json
+
+## ThumbnailTheme
+
+Theme selection card with preview and activate/publish actions.
+
+kind: leaf · tags: theme, store, design
+
+- Detail: /mcp/components/ThumbnailTheme.detail.json
+- Examples:
+  - /mcp/components/ThumbnailTheme.default.json
+
+## ThumbnailSection
+
+Section template card with preview and add action.
+
+kind: leaf · tags: section, store, design
+
+- Detail: /mcp/components/ThumbnailSection.detail.json
+- Examples:
+  - /mcp/components/ThumbnailSection.default.json
+
+## SubPlanCard
+
+Subscription plan tier card listing features.
+
+kind: leaf · tags: plan, subscription, pricing
+
+- Detail: /mcp/components/SubPlanCard.detail.json
+- Examples:
+  - /mcp/components/SubPlanCard.default.json
+
+## TimePopup
+
+Time picker popup.
+
+kind: leaf · tags: time, picker, form
+
+- Detail: /mcp/components/TimePopup.detail.json
+
+## TimePicker
+
+Time picker input with popover clock.
+
+kind: leaf · tags: time, picker, form
+
+- Detail: /mcp/components/TimePicker.detail.json
+- Examples:
+  - /mcp/components/TimePicker.default.json
+
+
+---
+
+# @orchidui/dashboard
+
+## LineChart
+
+Time-series line chart for trend visualization.
+
+kind: leaf · tags: chart, line, analytics, dashboard
+
+- Detail: /mcp/components/LineChart.detail.json
+- Examples:
+  - /mcp/components/LineChart.default.json
+
+## PieChart
+
+Pie or donut chart for proportional data.
+
+kind: leaf · tags: chart, pie, analytics, dashboard
+
+- Detail: /mcp/components/PieChart.detail.json
+- Examples:
+  - /mcp/components/PieChart.default.json
+
+## BarChart
+
+Bar chart for comparing values across categories.
+
+kind: leaf · tags: chart, bar, analytics, dashboard
+
+- Detail: /mcp/components/BarChart.detail.json
+- Examples:
+  - /mcp/components/BarChart.default.json
+
+## BarRaceChart
+
+Animated bar race chart for changing rankings.
+
+kind: leaf · tags: chart, animated, analytics, dashboard
+
+- Detail: /mcp/components/BarRaceChart.detail.json
+- Examples:
+  - /mcp/components/BarRaceChart.default.json
+
+## Card
+
+Dashboard card container with title and content.
+
+kind: leaf · tags: card, dashboard
+
+- Detail: /mcp/components/Card.detail.json
+- Examples:
+  - /mcp/components/Card.default.json
+
+## OcOverviewPieChart
+
+Pie chart for overview/summary widgets.
+
+kind: leaf · tags: chart, pie, overview, dashboard
+
+- Detail: /mcp/components/OcOverviewPieChart.detail.json
+- Examples:
+  - /mcp/components/OcOverviewPieChart.default.json
+
+## OverviewMonthlyBarChart
+
+Monthly bar chart for overview reporting.
+
+kind: leaf · tags: chart, bar, overview, dashboard
+
+- Detail: /mcp/components/OverviewMonthlyBarChart.detail.json
+- Examples:
+  - /mcp/components/OverviewMonthlyBarChart.default.json
+
+## ColorPicker
+
+Color picker input with hex/rgb support.
+
+kind: leaf · tags: color, picker, input
+
+**Related:** Icon
+
+- Detail: /mcp/components/ColorPicker.detail.json
+- Examples:
+  - /mcp/components/ColorPicker.default.json
+  - /mcp/components/ColorPicker.gradient.json
+
+## TextEditor
+
+Rich text (WYSIWYG) editor.
+
+kind: leaf · tags: editor, richtext, wysiwyg, input
+
+- Detail: /mcp/components/TextEditor.detail.json
+- Examples:
+  - /mcp/components/TextEditor.basic.json
+  - /mcp/components/TextEditor.default.json
+  - /mcp/components/TextEditor.text-only-variant.json
+
+## ColorPickerPopup
+
+Popover color picker for inline color selection.
+
+kind: leaf · tags: color, picker, popover
+
+- Detail: /mcp/components/ColorPickerPopup.detail.json
+
+## OnboardingProgressbar
+
+Progress bar for onboarding completion.
+
+kind: leaf · tags: progress, onboarding, dashboard
+
+- Detail: /mcp/components/OnboardingProgressbar.detail.json
+- Examples:
+  - /mcp/components/OnboardingProgressbar.default.json
+
+## CodeBlock
+
+Syntax-highlighted code block.
+
+kind: leaf · tags: code, syntax, display
+
+- Detail: /mcp/components/CodeBlock.detail.json
+- Examples:
+  - /mcp/components/CodeBlock.default.json
+
+## LottieAnimation
+
+Renders a Lottie JSON animation.
+
+kind: leaf · tags: animation, lottie, media
+
+- Detail: /mcp/components/LottieAnimation.detail.json
+- Examples:
+  - /mcp/components/LottieAnimation.default.json
