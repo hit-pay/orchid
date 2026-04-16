@@ -200,6 +200,13 @@ function generateRawDocs(allComponents) {
   fs.mkdirSync(RAW_COMPONENTS_DIR, { recursive: true })
   fs.mkdirSync(RAW_EXAMPLES_DIR, { recursive: true })
 
+  // Remove stale files from previous builds
+  for (const dir of [RAW_COMPONENTS_DIR, RAW_EXAMPLES_DIR]) {
+    for (const f of fs.readdirSync(dir)) {
+      if (f.endsWith('.md')) fs.unlinkSync(path.join(dir, f))
+    }
+  }
+
   let compCount = 0
   let exCount = 0
 
