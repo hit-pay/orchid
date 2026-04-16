@@ -12,11 +12,12 @@ function extractEnumValues(schema) {
   if (!schema || typeof schema === 'string' || schema.kind !== 'enum') return null
   if (!schema.schema?.length) return null
   const literals = schema.schema.filter(
-    s => typeof s === 'string' &&
+    (s) =>
+      typeof s === 'string' &&
       ((s.startsWith("'") && s.endsWith("'")) || (s.startsWith('"') && s.endsWith('"')))
   )
   if (!literals.length) return null
-  return literals.map(s => s.slice(1, -1))
+  return literals.map((s) => s.slice(1, -1))
 }
 
 export function buildProps(meta, storyOptions) {
@@ -25,10 +26,10 @@ export function buildProps(meta, storyOptions) {
     if (prop.global) continue
 
     const schemaValues = extractEnumValues(prop.schema)
-    const storyValues  = storyOptions[prop.name]?.length > 0 ? storyOptions[prop.name] : null
+    const storyValues = storyOptions[prop.name]?.length > 0 ? storyOptions[prop.name] : null
     const values = schemaValues ?? storyValues
 
-    const type = values ? 'enum' : (prop.type || 'any')
+    const type = values ? 'enum' : prop.type || 'any'
 
     const p = { type, required: prop.required ?? false }
 
@@ -38,7 +39,7 @@ export function buildProps(meta, storyOptions) {
     if (values) p.values = values
     if (prop.description) p.description = prop.description
     if (prop.tags?.length) {
-      const deprecated = prop.tags.find(t => t.name === 'deprecated')
+      const deprecated = prop.tags.find((t) => t.name === 'deprecated')
       if (deprecated) p.deprecated = deprecated.text || true
     }
 
@@ -49,7 +50,9 @@ export function buildProps(meta, storyOptions) {
 
 export function buildRules(props) {
   const rules = []
-  const required = Object.entries(props).filter(([, p]) => p.required).map(([n]) => n)
+  const required = Object.entries(props)
+    .filter(([, p]) => p.required)
+    .map(([n]) => n)
   if (required.length) rules.push(`Required props: ${required.join(', ')}`)
   for (const [name, prop] of Object.entries(props)) {
     if (prop.type === 'enum') rules.push(`"${name}" must be one of: ${prop.values.join(', ')}`)
@@ -57,12 +60,21 @@ export function buildRules(props) {
   return rules
 }
 
-export function formatDetail(exportName, vueFilePath, packageRoot, props, meta, rules, examples, patches) {
+export function formatDetail(
+  exportName,
+  vueFilePath,
+  packageRoot,
+  props,
+  meta,
+  rules,
+  examples,
+  patches
+) {
   const events = {}
   for (const e of meta.events ?? []) {
     events[e.name] = {
       description: e.description || '',
-      ...(e.signature ? { type: e.signature } : {}),
+      ...(e.signature ? { type: e.signature } : {})
     }
   }
 
@@ -70,7 +82,7 @@ export function formatDetail(exportName, vueFilePath, packageRoot, props, meta, 
   for (const s of meta.slots ?? []) {
     slots[s.name] = {
       description: s.description || '',
-      ...(s.type && s.type !== '(props?: {}) => any' ? { type: s.type } : {}),
+      ...(s.type && s.type !== '(props?: {}) => any' ? { type: s.type } : {})
     }
   }
 
@@ -78,7 +90,7 @@ export function formatDetail(exportName, vueFilePath, packageRoot, props, meta, 
     id,
     title,
     ...(description && { description }),
-    ...(highlights?.length && { highlights }),
+    ...(highlights?.length && { highlights })
   }))
 
   const detail = {
@@ -88,7 +100,7 @@ export function formatDetail(exportName, vueFilePath, packageRoot, props, meta, 
     events,
     slots,
     rules,
-    examples: exampleManifest,
+    examples: exampleManifest
   }
 
   if (!patches) return detail
@@ -119,6 +131,6 @@ export function formatExample(exportName, example) {
     title: example.title,
     ...(example.description && { description: example.description }),
     ...(example.highlights?.length && { highlights: example.highlights }),
-    code: example.code,
+    code: example.code
   }
 }

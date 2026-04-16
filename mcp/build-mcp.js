@@ -15,8 +15,13 @@ import { fileURLToPath } from 'url'
 
 import { TAGS, DESCRIPTIONS } from './lib/component-meta.js'
 import { parseIndexFile } from './lib/parse-index.js'
-import { parseStoryOptions, parseStoryExamples, parseStoryRelatedComponents, parseStoryMeta } from './lib/parse-stories.js'
-import { buildProps, buildRules, formatDetail, formatExample } from './lib/format-docs.js'
+import {
+  parseStoryOptions,
+  parseStoryExamples,
+  parseStoryRelatedComponents,
+  parseStoryMeta
+} from './lib/parse-stories.js'
+import { buildProps, buildRules, formatDetail, formatExample } from './lib/format-mcp.js'
 
 const SCHEMA_PATCHES = {
   FormBuilder: {
@@ -37,23 +42,25 @@ const SCHEMA_PATCHES = {
     },
     events: {
       onUpdate: {
-        description: 'Emitted when any field value changes. The parent component must update values[form.name] = value externally. For range fields (name is an array), each key in form.name corresponds to the matching index in value.',
+        description:
+          'Emitted when any field value changes. The parent component must update values[form.name] = value externally. For range fields (name is an array), each key in form.name corresponds to the matching index in value.',
         type: '(form: FormField, value: any) => void'
       }
     },
     slots: {
       '[type]': {
-        description: 'Dynamic slot for any field type not in the built-in list. The slot name equals the field\'s type string (e.g. use <template #MyWidget> for a field with type: "MyWidget"). Bindings: form (field config object from jsonForm), value (current field value), error (error message string), onUpdate (function(form, value) to emit the change).'
+        description:
+          'Dynamic slot for any field type not in the built-in list. The slot name equals the field\'s type string (e.g. use <template #MyWidget> for a field with type: "MyWidget"). Bindings: form (field config object from jsonForm), value (current field value), error (error message string), onUpdate (function(form, value) to emit the change).'
       }
     }
   }
 }
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const ORCHID_ROOT    = path.resolve(__dirname, '..')
-const CORE_ROOT      = path.resolve(ORCHID_ROOT, 'packages/core/src')
+const ORCHID_ROOT = path.resolve(__dirname, '..')
+const CORE_ROOT = path.resolve(ORCHID_ROOT, 'packages/core/src')
 const DASHBOARD_ROOT = path.resolve(ORCHID_ROOT, 'packages/dashboard/src')
-const OUTPUT_DIR     = path.resolve(ORCHID_ROOT, 'public/docs')
+const OUTPUT_DIR = path.resolve(ORCHID_ROOT, 'public/mcp')
 const COMPONENTS_DIR = path.join(OUTPUT_DIR, 'components')
 
 const CORE_ALIASES = {
@@ -83,12 +90,12 @@ function createChecker(aliases) {
     {
       compilerOptions: {
         baseUrl: '.',
-        paths: buildTsPaths(aliases),
+        paths: buildTsPaths(aliases)
       },
-      include: ['packages/**/*.vue'],
+      include: ['packages/**/*.vue']
     },
     {
-      schema: {},
+      schema: {}
     }
   )
 }
@@ -119,18 +126,30 @@ async function buildPackageDocs(label, indexPath, aliases, outputFile, packageRo
     }
 
     try {
-      const meta         = checker.getComponentMeta(vueFilePath)
+      const meta = checker.getComponentMeta(vueFilePath)
       const storyOptions = parseStoryOptions(vueFilePath)
-      const storyMeta    = parseStoryMeta(vueFilePath)
-      const examples     = parseStoryExamples(vueFilePath)
-      const related      = parseStoryRelatedComponents(vueFilePath, exportName)
+      const storyMeta = parseStoryMeta(vueFilePath)
+      const examples = parseStoryExamples(vueFilePath)
+      const related = parseStoryRelatedComponents(vueFilePath, exportName)
 
       const props = buildProps(meta, storyOptions)
       const rules = buildRules(props)
 
-      const detail = formatDetail(exportName, vueFilePath, packageRoot, props, meta, rules, examples, SCHEMA_PATCHES[exportName])
+      const detail = formatDetail(
+        exportName,
+        vueFilePath,
+        packageRoot,
+        props,
+        meta,
+        rules,
+        examples,
+        SCHEMA_PATCHES[exportName]
+      )
 
-      fs.writeFileSync(path.join(COMPONENTS_DIR, `${exportName}.detail.json`), JSON.stringify(detail))
+      fs.writeFileSync(
+        path.join(COMPONENTS_DIR, `${exportName}.detail.json`),
+        JSON.stringify(detail)
+      )
 
       for (const example of examples) {
         fs.writeFileSync(
@@ -140,13 +159,13 @@ async function buildPackageDocs(label, indexPath, aliases, outputFile, packageRo
       }
 
       indexComponents.push({
-        name:        exportName,
+        name: exportName,
         description: DESCRIPTIONS[exportName] ?? `OrchidUI ${exportName} component.`,
-        tags:        TAGS[exportName] ?? [],
-        kind:        storyMeta.kind,
-        ...(storyMeta.use_for?.length        && { use_for:         storyMeta.use_for }),
+        tags: TAGS[exportName] ?? [],
+        kind: storyMeta.kind,
+        ...(storyMeta.use_for?.length && { use_for: storyMeta.use_for }),
         ...(storyMeta.understand_with?.length && { understand_with: storyMeta.understand_with }),
-        ...(related?.length                  && { related }),
+        ...(related?.length && { related })
       })
 
       console.log(`  ✓ ${exportName}`)

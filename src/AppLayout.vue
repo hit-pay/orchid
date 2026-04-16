@@ -3,7 +3,6 @@ import { ref } from 'vue'
 import {
   Theme,
   Header as OcHeader,
-  TabToSelect,
   HeaderCenter,
   HeaderLeft,
   HeaderRight,
@@ -11,11 +10,10 @@ import {
   Button
 } from '@/orchidui-core'
 import Examples from './Examples.vue'
-import CrossSell from './CrossSell.vue'
 const showComponents = ref(false)
 
 const navigation = [
-  { name: 'Preview Components', href: 'components' },
+  { name: 'Docs', href: 'docs' },
   { name: 'Storybook', href: '/storybook/' }
 ]
 const onClickNav = (e, item) => {
@@ -24,22 +22,6 @@ const onClickNav = (e, item) => {
     showComponents.value = true
   }
 }
-
-const activeMenuValue = ref('dashboard')
-const menus = [
-  {
-    label: 'Dashboard UI',
-    value: 'dashboard',
-    sidebarClass: 'layout-pos',
-    path: 'dashboard'
-  },
-  {
-    label: 'Core UI',
-    value: 'core',
-    sidebarClass: 'layout-payment',
-    path: 'core'
-  }
-]
 </script>
 <template>
   <Theme>
@@ -62,7 +44,7 @@ const menus = [
                 v-for="item in navigation"
                 :key="item.name"
                 :href="item.href"
-                class="text-sm font-semibold leading-6 text-gray-900"
+                class="text-sm font-semibold leading-6 text-gray-900 mx-5"
                 @click="onClickNav($event, item)"
                 >{{ item.name }}</a
               >
@@ -122,73 +104,13 @@ const menus = [
               <Icon class="mt-3 hidden md:block" name="hitpay/hitpay" width="74" height="24" />
             </a>
           </HeaderLeft>
-          <HeaderCenter class="flex-1 md:flex-none">
-            <TabToSelect v-model="activeMenuValue" :menus="menus" />
-          </HeaderCenter>
+          <HeaderCenter class="flex-1 md:flex-none"> </HeaderCenter>
           <HeaderRight>
             <Button variant="secondary" right-icon="x" @click="showComponents = false"
               >Close</Button
             >
           </HeaderRight>
         </OcHeader>
-      </div>
-      <div class="flex flex-wrap">
-        <div class="w-full lg:w-1/3 xl:w-1/4">
-          <CrossSell />
-        </div>
-        <div class="w-full lg:w-2/3 xl:w-3/4 px-5">
-          <template v-if="activeMenuValue == 'core'">
-            <div class="grid gap-5 my-5">
-              <h2 class="flex items-center">
-                All components that are not in the dashboard ui, you can see full documentation on
-                <a href="http://localhost:5173/storybook/">
-                  <Button class="ml-4" size="small">Storybook</Button>
-                </a>
-              </h2>
-            </div>
-          </template>
-          <template v-else-if="activeMenuValue == 'dashboard'">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
-              <div>
-                <h3 class="mb-2">BarChart</h3>
-                <iframe
-                  class="w-full h-[350px] border border-gray-200 rounded p-3"
-                  src="https://orchid-git-next-hit-pay.vercel.app/storybook/iframe.html?args=&id=dashboard-charts-barchart-ocbarchart--bar-chart&viewMode=story"
-                >
-                </iframe>
-              </div>
-              <div>
-                <h3 class="mb-2">BarRaceChart</h3>
-                <iframe
-                  class="w-full h-[350px] border border-gray-200 rounded p-3"
-                  src="https://orchid-git-next-hit-pay.vercel.app/storybook/iframe.html?args=&id=dashboard-charts-barracechart-ocbarracechart--bar-race&viewMode=story"
-                >
-                </iframe>
-              </div>
-              <iframe
-                class="w-full h-[350px] border border-gray-200 rounded p-3"
-                src="https://orchid-git-next-hit-pay.vercel.app/storybook/iframe.html?args=&id=dashboard-charts-linechart-oclinechart--line&viewMode=story"
-              >
-              </iframe>
-              <iframe
-                class="w-full h-[350px] border border-gray-200 rounded p-3"
-                src="https://orchid-git-next-hit-pay.vercel.app/storybook/iframe.html?args=&id=dashboard-charts-piechart-ocpiechart--line&viewMode=story"
-              >
-              </iframe>
-            </div>
-            <div class="grid gap-5 my-5">
-              <iframe
-                class="w-full h-[1140px] border border-gray-200 rounded p-3"
-                src="https://orchid-git-next-hit-pay.vercel.app/storybook/iframe.html?args=&id=dashboard-card-occard--default&viewMode=story"
-              >
-              </iframe>
-              <iframe
-                class="w-full h-[580px] border border-gray-200 rounded p-3"
-                src="https://orchid-git-next-hit-pay.vercel.app/storybook/iframe.html?args=&id=dashboard-codeblock-occodeblock--default&viewMode=story"
-              ></iframe>
-            </div>
-          </template>
-        </div>
       </div>
     </template>
   </Theme>
