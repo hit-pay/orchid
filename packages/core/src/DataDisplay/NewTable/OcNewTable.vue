@@ -151,29 +151,49 @@ import { Icon, Checkbox, Tooltip } from '@/orchidui-core'
 import OcTableRow from './OcTableRow.vue'
 
 const props = defineProps({
+  /**
+   * Full table structure object (required).
+   *
+   * `headers` — array of `{ key, label, headerClass?, width?, minWidth?, stickyLeft?, tooltip?, leftTooltip?, leftIcon?, disableClickRow? }`
+   * `fields`  — array of row data objects keyed to header keys; each row may have `children` for expandable sub-rows
+   * `isSelectable` — show row checkboxes
+   * `isExpand`     — enable expandable child rows via `row.children`
+   */
   options: {
     type: Object,
     required: true
   },
+  /**
+   * Field name (or function) used to uniquely identify each row for selection.
+   * If a string, `row[rowKey]` is used. If a function, receives the row and returns a key.
+   */
   rowKey: {
     type: [String, Function],
     default: 'id'
   },
+  /** Currently selected rows (v-model:selected). Array of row data objects. */
   selected: {
     type: Array,
     default: () => []
   },
+  /** Highlight a specific row by index (0-based). Set -1 to clear. */
   selectedIndex: {
     type: Number,
     default: -1
   },
+  /** Show a loading spinner overlay while data is being fetched. */
   isLoading: {
     type: Boolean,
     default: false
   }
 })
 
-const emit = defineEmits(['update:selected', 'click:row'])
+const emit = defineEmits({
+  /** Selected rows changed. Payload: array of selected row objects. */
+  'update:selected': [],
+  /** A non-actions column cell was clicked. Payload: `{ field, header }`. */
+  'click:row': []
+})
 
 const fields = computed(() => (!props.isLoading ? (props.options?.fields ?? []) : []))
 const headers = computed(() => props.options?.headers ?? [])

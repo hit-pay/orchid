@@ -51,7 +51,6 @@ const props = defineProps({
   },
   /** Field name in each row whose value is used as a navigation URL on row click. */
   rowLink: String,
-  /**
 })
 
 const emit = defineEmits({
