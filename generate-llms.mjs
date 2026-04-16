@@ -73,6 +73,12 @@ function buildExampleMd(compName, ex) {
   ]
   if (ex.description) lines.push(`> ${ex.description}`, '')
 
+  if (ex.highlights?.length) {
+    lines.push('**Key points:**')
+    for (const h of ex.highlights) lines.push(`- ${h}`)
+    lines.push('')
+  }
+
   const snippet = typeof ex.code === 'string' ? ex.code : ex.code?.snippet
   if (snippet) {
     const lang = ex.code?.language ?? 'vue'
@@ -97,6 +103,8 @@ function buildComponentMd(comp, detail, exampleFiles) {
   if (comp.tags?.length) meta.push(`**Tags:** ${comp.tags.join(', ')}`)
   if (meta.length) lines.push(meta.join(' · '), '')
 
+  if (detail.storybook) lines.push(`**Storybook:** ${detail.storybook}`, '')
+
   if (comp.use_for?.length) {
     lines.push('**Use for:**')
     for (const u of comp.use_for) lines.push(`- ${u}`)
@@ -111,31 +119,54 @@ function buildComponentMd(comp, detail, exampleFiles) {
     lines.push(`**Related:** ${comp.related.join(', ')}`, '')
   }
 
-  // Examples — inline first only, rest as links
-  if (exampleFiles.length) {
+  // Sort example files by JSON-defined order, fallback to alphabetical
+  const jsonOrder = (detail.examples ?? []).map(e => e.id)
+  const sortedFiles = [...exampleFiles].sort((a, b) => {
+    const aId = path.basename(a, '.json').replace(`${comp.name}.`, '')
+    const bId = path.basename(b, '.json').replace(`${comp.name}.`, '')
+    const ai = jsonOrder.indexOf(aId)
+    const bi = jsonOrder.indexOf(bId)
+    if (ai === -1 && bi === -1) return a.localeCompare(b)
+    if (ai === -1) return 1
+    if (bi === -1) return -1
+    return ai - bi
+  })
+
+  // Examples — max 3 inline, rest as links
+  if (sortedFiles.length) {
     lines.push('## Examples', '')
 
-    const [first, ...rest] = exampleFiles
+    const inline = sortedFiles.slice(0, 3)
+    const linked = sortedFiles.slice(3)
 
-    const ex = readJson(path.join(COMPONENTS_DIR, first))
-    const slug = exampleSlug(comp.name, ex.id)
-    lines.push(`### ${ex.title}`, '')
-    if (ex.description) lines.push(ex.description, '')
-    const snippet = typeof ex.code === 'string' ? ex.code : ex.code?.snippet
-    if (snippet) {
-      const lang = ex.code?.language ?? 'vue'
-      lines.push(`\`\`\`${lang}`, snippet, '```', '')
+    for (const f of inline) {
+      const ex = readJson(path.join(COMPONENTS_DIR, f))
+      const slug = exampleSlug(comp.name, ex.id)
+      lines.push(`### ${ex.title}`, '')
+      if (ex.description) lines.push(ex.description, '')
+      if (ex.highlights?.length) {
+        for (const h of ex.highlights) lines.push(`- ${h}`)
+        lines.push('')
+      }
+      const snippet = typeof ex.code === 'string' ? ex.code : ex.code?.snippet
+      if (snippet) {
+        const lang = ex.code?.language ?? 'vue'
+        lines.push(`\`\`\`${lang}`, snippet, '```')
+      }
+      lines.push(`[Full example](/raw/docs/examples/${slug}.md)`, '')
     }
 
-    if (rest.length) {
-      lines.push('**More examples:**')
-      for (const f of rest) {
+    if (linked.length) {
+      lines.push('### More Examples', '')
+      for (const f of linked) {
         const e = readJson(path.join(COMPONENTS_DIR, f))
-        lines.push(`- [${e.title}](/raw/docs/examples/${exampleSlug(comp.name, e.id)}.md)`)
+        const eSlug = exampleSlug(comp.name, e.id)
+        lines.push(`- [${e.title}](/raw/docs/examples/${eSlug}.md)${e.description ? ` — ${e.description}` : ''}`)
+        if (e.highlights?.length) {
+          for (const h of e.highlights) lines.push(`  - ${h}`)
+        }
       }
       lines.push('')
-    } else {
-      lines.push(`[Full example](/raw/docs/examples/${slug}.md)`, '')
     }
   }
 
@@ -260,7 +291,7 @@ function fullComponentSection(comp) {
 
   const content = buildComponentMd(comp, detail, exampleFiles)
     .replace(/^# /, '## ')
-    .replace(/^## /gm, (m, o) => o === 0 ? '## ' : '### ')
+    .replace(/^## /gm, (_, o) => o === 0 ? '## ' : '### ')
 
   const refs = [
     '### Reference',
