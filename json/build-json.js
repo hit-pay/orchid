@@ -21,7 +21,7 @@ import {
   parseStoryRelatedComponents,
   parseStoryMeta
 } from './lib/parse-stories.js'
-import { buildProps, buildRules, formatDetail, formatExample } from './lib/format-mcp.js'
+import { buildProps, buildRules, formatDetail, formatExample } from './lib/format-json.js'
 
 const SCHEMA_PATCHES = {
   FormBuilder: {
