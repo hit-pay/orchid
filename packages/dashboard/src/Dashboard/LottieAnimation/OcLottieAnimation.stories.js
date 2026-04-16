@@ -8,7 +8,7 @@ export default {
 
 export const Default = {
   args: {
-    path: '/json/lottie-animation/success_report.json',
+    path: '/lottie-animation/success_report.json',
     width: '200',
     height: '200',
     autoPlay: true

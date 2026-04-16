@@ -3,65 +3,29 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const MCP_DIR = path.join(__dirname, 'public/mcp')
+const MCP_DIR = path.join(__dirname, 'public/json')
 const COMPONENTS_DIR = path.join(MCP_DIR, 'components')
+const RAW_COMPONENTS_DIR = path.join(__dirname, 'public/raw/docs/components')
+const RAW_EXAMPLES_DIR = path.join(__dirname, 'public/raw/docs/examples')
 
 function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, 'utf-8'))
 }
 
-function componentSection(comp, baseUrl = '/mcp/components') {
-  const detail = `${baseUrl}/${comp.name}.detail.json`
-  const lines = [`## ${comp.name}`, '']
-
-  if (comp.description) lines.push(`${comp.description}`, '')
-
-  const tags = []
-  if (comp.kind) tags.push(`kind: ${comp.kind}`)
-  if (comp.tags?.length) tags.push(`tags: ${comp.tags.join(', ')}`)
-  if (tags.length) lines.push(tags.join(' · '), '')
-
-  if (comp.use_for?.length) {
-    lines.push('**Use for:**')
-    for (const u of comp.use_for) lines.push(`- ${u}`)
-    lines.push('')
-  }
-
-  if (comp.understand_with?.length) {
-    lines.push(`**Understand with:** ${comp.understand_with.join(', ')}`, '')
-  }
-
-  if (comp.related?.length) {
-    lines.push(`**Related:** ${comp.related.join(', ')}`, '')
-  }
-
-  lines.push(`- Detail: ${detail}`)
-
-  // Find matching example files
-  const prefix = comp.name + '.'
-  const exampleFiles = fs.existsSync(COMPONENTS_DIR)
-    ? fs.readdirSync(COMPONENTS_DIR)
-        .filter(f => f.startsWith(prefix) && !f.endsWith('.detail.json'))
-        .sort()
-    : []
-
-  if (exampleFiles.length) {
-    lines.push('- Examples:')
-    for (const f of exampleFiles) {
-      lines.push(`  - ${baseUrl}/${f}`)
-    }
-  }
-
-  return lines.join('\n') + '\n'
+function exampleSlug(compName, exampleId) {
+  return `${compName}-${exampleId}`
 }
+
+// ─── Tables ───────────────────────────────────────────────────────────────────
 
 function propTable(props) {
   if (!props || !Object.keys(props).length) return ''
-  const rows = []
-  rows.push('| Prop | Type | Required | Default | Values |')
-  rows.push('|------|------|----------|---------|--------|')
+  const rows = [
+    '| Prop | Type | Required | Default | Values |',
+    '|------|------|----------|---------|--------|',
+  ]
   for (const [name, p] of Object.entries(props)) {
-    const values = p.values ? p.values.join(', ') : ''
+    const values = p.values?.join(', ') ?? ''
     rows.push(`| ${name} | ${p.type ?? ''} | ${p.required ? 'yes' : 'no'} | ${p.default ?? ''} | ${values} |`)
   }
   return rows.join('\n')
@@ -69,9 +33,10 @@ function propTable(props) {
 
 function eventTable(events) {
   if (!events || !Object.keys(events).length) return ''
-  const rows = []
-  rows.push('| Event | Type | Description |')
-  rows.push('|-------|------|-------------|')
+  const rows = [
+    '| Event | Type | Description |',
+    '|-------|------|-------------|',
+  ]
   for (const [name, e] of Object.entries(events)) {
     rows.push(`| ${name} | ${e.type ?? ''} | ${(e.description ?? '').replace(/\n/g, ' ')} |`)
   }
@@ -80,31 +45,48 @@ function eventTable(events) {
 
 function slotTable(slots) {
   if (!slots || !Object.keys(slots).length) return ''
-  const rows = []
-  rows.push('| Slot | Description |')
-  rows.push('|------|-------------|')
+  const rows = [
+    '| Slot | Description |',
+    '|------|-------------|',
+  ]
   for (const [name, s] of Object.entries(slots)) {
     rows.push(`| ${name} | ${(s.description ?? '').replace(/\n/g, ' ')} |`)
   }
   return rows.join('\n')
 }
 
-function fullComponentSection(comp, baseUrl = '/mcp/components') {
-  const detailFile = path.join(COMPONENTS_DIR, `${comp.name}.detail.json`)
-  if (!fs.existsSync(detailFile)) return componentSection(comp, baseUrl)
+// ─── Per-example .md ─────────────────────────────────────────────────────────
 
-  const detail = readJson(detailFile)
-  const lines = []
+function buildExampleMd(compName, ex) {
+  const lines = [
+    `# ${compName} — ${ex.title}`,
+    '',
+  ]
+  if (ex.description) lines.push(`> ${ex.description}`, '')
 
-  lines.push(`## ${comp.name}`)
-  lines.push('')
-  if (comp.description) lines.push(comp.description, '')
-  if (detail.storybook) lines.push(`Storybook: ${detail.storybook}`, '')
+  const snippet = typeof ex.code === 'string' ? ex.code : ex.code?.snippet
+  if (snippet) {
+    const lang = ex.code?.language ?? 'vue'
+    lines.push(`\`\`\`${lang}`, snippet, '```', '')
+  }
 
-  const tags = []
-  if (comp.kind) tags.push(`kind: ${comp.kind}`)
-  if (comp.tags?.length) tags.push(`tags: ${comp.tags.join(', ')}`)
-  if (tags.length) lines.push(tags.join(' · '), '')
+  return lines.join('\n')
+}
+
+// ─── Per-component .md ───────────────────────────────────────────────────────
+
+function buildComponentMd(comp, detail, exampleFiles) {
+  const lines = [
+    `# ${comp.name}`,
+    '',
+    `> ${comp.description ?? `OrchidUI ${comp.name} component.`}`,
+    '',
+  ]
+
+  const meta = []
+  if (comp.kind) meta.push(`**Kind:** ${comp.kind}`)
+  if (comp.tags?.length) meta.push(`**Tags:** ${comp.tags.join(', ')}`)
+  if (meta.length) lines.push(meta.join(' · '), '')
 
   if (comp.use_for?.length) {
     lines.push('**Use for:**')
@@ -120,19 +102,37 @@ function fullComponentSection(comp, baseUrl = '/mcp/components') {
     lines.push(`**Related:** ${comp.related.join(', ')}`, '')
   }
 
+  // Examples inline
+  if (exampleFiles.length) {
+    lines.push('## Examples', '')
+    for (const f of exampleFiles) {
+      const ex = readJson(path.join(COMPONENTS_DIR, f))
+      const slug = exampleSlug(comp.name, ex.id)
+      lines.push(`### ${ex.title}`, '')
+      if (ex.description) lines.push(ex.description, '')
+      const snippet = typeof ex.code === 'string' ? ex.code : ex.code?.snippet
+      if (snippet) {
+        const lang = ex.code?.language ?? 'vue'
+        lines.push(`\`\`\`${lang}`, snippet, '```')
+      }
+      lines.push('')
+      lines.push(`[Full example](/raw/docs/examples/${slug}.md)`, '')
+    }
+  }
+
+  // API
+  lines.push('## API', '')
+
   if (detail.props && Object.keys(detail.props).length) {
-    lines.push('### Props', '')
-    lines.push(propTable(detail.props), '')
+    lines.push('### Props', '', propTable(detail.props), '')
   }
 
   if (detail.events && Object.keys(detail.events).length) {
-    lines.push('### Events', '')
-    lines.push(eventTable(detail.events), '')
+    lines.push('### Events', '', eventTable(detail.events), '')
   }
 
   if (detail.slots && Object.keys(detail.slots).length) {
-    lines.push('### Slots', '')
-    lines.push(slotTable(detail.slots), '')
+    lines.push('### Slots', '', slotTable(detail.slots), '')
   }
 
   if (detail.rules?.length) {
@@ -141,94 +141,149 @@ function fullComponentSection(comp, baseUrl = '/mcp/components') {
     lines.push('')
   }
 
-  // Examples
-  const prefix = comp.name + '.'
-  const exampleFiles = fs.existsSync(COMPONENTS_DIR)
-    ? fs.readdirSync(COMPONENTS_DIR)
-        .filter(f => f.startsWith(prefix) && !f.endsWith('.detail.json'))
-        .sort()
-    : []
-
-  if (exampleFiles.length) {
-    lines.push('### Examples', '')
-    for (const f of exampleFiles) {
-      const ex = readJson(path.join(COMPONENTS_DIR, f))
-      lines.push(`#### ${ex.title ?? f}`, '')
-      if (ex.description) lines.push(ex.description, '')
-      const snippet = typeof ex.code === 'string' ? ex.code : ex.code?.snippet
-      if (snippet) {
-        const lang = ex.code?.language ?? 'vue'
-        lines.push(`\`\`\`${lang}`)
-        lines.push(snippet)
-        lines.push('```')
-      }
-      lines.push('')
-    }
-  }
-
   return lines.join('\n')
 }
 
+// ─── Generate all raw .md files ──────────────────────────────────────────────
+
+function generateRawDocs(allComponents) {
+  fs.mkdirSync(RAW_COMPONENTS_DIR, { recursive: true })
+  fs.mkdirSync(RAW_EXAMPLES_DIR, { recursive: true })
+
+  let compCount = 0
+  let exCount = 0
+
+  for (const comp of allComponents) {
+    const detailFile = path.join(COMPONENTS_DIR, `${comp.name}.detail.json`)
+    if (!fs.existsSync(detailFile)) continue
+
+    const detail = readJson(detailFile)
+
+    const prefix = comp.name + '.'
+    const exampleFiles = fs.readdirSync(COMPONENTS_DIR)
+      .filter(f => f.startsWith(prefix) && !f.endsWith('.detail.json'))
+      .sort()
+
+    // Write per-example .md
+    for (const f of exampleFiles) {
+      const ex = readJson(path.join(COMPONENTS_DIR, f))
+      const slug = exampleSlug(comp.name, ex.id)
+      fs.writeFileSync(
+        path.join(RAW_EXAMPLES_DIR, `${slug}.md`),
+        buildExampleMd(comp.name, ex)
+      )
+      exCount++
+    }
+
+    // Write component .md
+    fs.writeFileSync(
+      path.join(RAW_COMPONENTS_DIR, `${comp.name}.md`),
+      buildComponentMd(comp, detail, exampleFiles)
+    )
+    compCount++
+  }
+
+  console.log(`  raw/docs/components: ${compCount} files`)
+  console.log(`  raw/docs/examples:   ${exCount} files`)
+}
+
+// ─── llms.txt ────────────────────────────────────────────────────────────────
+
+function componentSection(comp) {
+  const url = `/raw/docs/components/${comp.name}.md`
+  const desc = comp.description ?? `OrchidUI ${comp.name} component.`
+  return `- [${comp.name}](${url}): ${desc}`
+}
+
 function buildLlmsTxt(coreIndex, dashIndex) {
-  const sections = [
-    '# OrchidUI — LLM Reference',
+  return [
+    '# OrchidUI',
     '',
-    'OrchidUI is a Vue 3 component library with Tailwind CSS and OrchidUI design tokens (`oc-*` prefix).',
+    '> A Vue 3 UI component library with Tailwind CSS and OrchidUI design tokens (`oc-*` prefix), built for HitPay products.',
     '',
-    '## Packages',
+    '## Getting Started',
     '',
-    `- \`@orchidui/core\` — ${coreIndex.total} components (UI primitives, forms, layout, navigation)`,
-    `- \`@orchidui/dashboard\` — ${dashIndex.total} components (charts, editors, specialized widgets)`,
+    '- [Full reference](/llms-full.txt): Inlined props, events, slots, rules, and code examples for every component.',
     '',
-    '## Base paths',
+    '## Usage',
     '',
-    '- Index: `/mcp/orchid-core.json`, `/mcp/orchid-dashboard.json`',
-    '- Components: `/mcp/components/<Name>.detail.json`',
-    '- Examples: `/mcp/components/<Name>.<example-id>.json`',
+    '```js',
+    "import { Button, Modal, Input } from '@orchidui/core'",
+    "import '@orchidui/core/dist/style.css'",
+    '```',
     '',
-    '---',
+    '- All components are **Vue 3** Composition API',
+    '- Styling via **Tailwind CSS** with `oc-*` design tokens',
+    '- Icons: `<Icon name="check" />`',
+    '- Boolean props follow `is*` convention — e.g. `isLoading`, `isDisabled`',
     '',
-    '# @orchidui/core',
+    `## @orchidui/core (${coreIndex.total} components)`,
     '',
-    ...coreIndex.components.map(c => componentSection(c)),
+    ...coreIndex.components.map(componentSection),
     '',
-    '---',
+    `## @orchidui/dashboard (${dashIndex.total} components)`,
     '',
-    '# @orchidui/dashboard',
-    '',
-    ...dashIndex.components.map(c => componentSection(c)),
-  ]
-  return sections.join('\n')
+    ...dashIndex.components.map(componentSection),
+  ].join('\n')
+}
+
+// ─── llms-full.txt (all-in-one, no fetching needed) ──────────────────────────
+
+function fullComponentSection(comp) {
+  const detailFile = path.join(COMPONENTS_DIR, `${comp.name}.detail.json`)
+  if (!fs.existsSync(detailFile)) return componentSection(comp)
+
+  const detail = readJson(detailFile)
+  const prefix = comp.name + '.'
+  const exampleFiles = fs.readdirSync(COMPONENTS_DIR)
+    .filter(f => f.startsWith(prefix) && !f.endsWith('.detail.json'))
+    .sort()
+
+  return buildComponentMd(comp, detail, exampleFiles)
+    .replace(/^# /, '## ')        // demote h1 → h2 inside the combined file
+    .replace(/^## /gm, (m, o) => o === 0 ? '## ' : '### ')  // demote sub-headings
 }
 
 function buildLlmsFullTxt(coreIndex, dashIndex) {
-  const sections = [
-    '# OrchidUI — Full LLM Reference',
+  return [
+    '# OrchidUI',
     '',
-    'OrchidUI is a Vue 3 component library with Tailwind CSS and OrchidUI design tokens (`oc-*` prefix).',
+    '> A Vue 3 UI component library with Tailwind CSS and OrchidUI design tokens (`oc-*` prefix), built for HitPay products.',
     '',
-    '## Packages',
+    '## Usage',
     '',
-    `- \`@orchidui/core\` — ${coreIndex.total} components (UI primitives, forms, layout, navigation)`,
-    `- \`@orchidui/dashboard\` — ${dashIndex.total} components (charts, editors, specialized widgets)`,
+    '```js',
+    "import { Button, Modal, Input } from '@orchidui/core'",
+    "import '@orchidui/core/dist/style.css'",
+    '```',
+    '',
+    '- All components are **Vue 3** Composition API',
+    '- Styling via **Tailwind CSS** with `oc-*` design tokens',
+    '- Icons: `<Icon name="check" />`',
+    '- Boolean props follow `is*` convention — e.g. `isLoading`, `isDisabled`',
     '',
     '---',
     '',
-    '# @orchidui/core',
+    `# @orchidui/core (${coreIndex.total} components)`,
     '',
-    ...coreIndex.components.map(c => fullComponentSection(c)),
+    ...coreIndex.components.map(fullComponentSection),
     '',
     '---',
     '',
-    '# @orchidui/dashboard',
+    `# @orchidui/dashboard (${dashIndex.total} components)`,
     '',
-    ...dashIndex.components.map(c => fullComponentSection(c)),
-  ]
-  return sections.join('\n')
+    ...dashIndex.components.map(fullComponentSection),
+  ].join('\n')
 }
+
+// ─── Main ─────────────────────────────────────────────────────────────────────
 
 const coreIndex = readJson(path.join(MCP_DIR, 'orchid-core.json'))
 const dashIndex = readJson(path.join(MCP_DIR, 'orchid-dashboard.json'))
+const allComponents = [...coreIndex.components, ...dashIndex.components]
+
+console.log('Generating raw markdown docs...')
+generateRawDocs(allComponents)
 
 const llmsTxt = buildLlmsTxt(coreIndex, dashIndex)
 const llmsFullTxt = buildLlmsFullTxt(coreIndex, dashIndex)
@@ -236,6 +291,6 @@ const llmsFullTxt = buildLlmsFullTxt(coreIndex, dashIndex)
 fs.writeFileSync(path.join(__dirname, 'public/llms.txt'), llmsTxt)
 fs.writeFileSync(path.join(__dirname, 'public/llms-full.txt'), llmsFullTxt)
 
-console.log(`llms.txt: ${(llmsTxt.length / 1024).toFixed(1)} KB`)
+console.log(`llms.txt:      ${(llmsTxt.length / 1024).toFixed(1)} KB`)
 console.log(`llms-full.txt: ${(llmsFullTxt.length / 1024).toFixed(1)} KB`)
 console.log('Done.')

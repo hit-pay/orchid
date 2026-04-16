@@ -28,7 +28,16 @@ dist
 # storybook
 public/storybook
 
-public/mcp
+# Database
+public/json
 
+# LLMS
+public/llms.txt
+public/llms-full.txt
+public/raw
+
+# MCP
+
+# generated docs
 src/docs/*
 src/router.js

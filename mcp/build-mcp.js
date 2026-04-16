@@ -60,7 +60,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ORCHID_ROOT = path.resolve(__dirname, '..')
 const CORE_ROOT = path.resolve(ORCHID_ROOT, 'packages/core/src')
 const DASHBOARD_ROOT = path.resolve(ORCHID_ROOT, 'packages/dashboard/src')
-const OUTPUT_DIR = path.resolve(ORCHID_ROOT, 'public/mcp')
+const OUTPUT_DIR = path.resolve(ORCHID_ROOT, 'public/json')
 const COMPONENTS_DIR = path.join(OUTPUT_DIR, 'components')
 
 const CORE_ALIASES = {
