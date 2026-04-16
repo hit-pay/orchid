@@ -4,6 +4,15 @@ import { ref, computed } from 'vue'
 export default {
   component: FormBuilder,
   tags: ['autodocs'],
+  kind: 'composite',
+  use_for: [
+    'dynamic form rendering',
+    'create and edit forms',
+    'settings form',
+    'schema-driven form fields',
+    'filter form inside DataTable'
+  ],
+  understand_with: ['Input', 'Select', 'TextArea', 'Checkbox', 'Toggle', 'PhoneInput', 'DatePicker', 'Button', 'Modal', 'FloatContent'],
   parameters: {
     docs: {
       description: {

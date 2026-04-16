@@ -4,6 +4,15 @@ import { ref, computed } from 'vue'
 export default {
   component: DataTable,
   tags: ['autodocs'],
+  kind: 'composite',
+  use_for: [
+    'resource list',
+    'CRUD table',
+    'data grid with search and filter',
+    'paginated data display',
+    'manage records with bulk actions'
+  ],
+  understand_with: ['NewTable', 'FormBuilder', 'Modal', 'ConfirmationModal', 'PageTitle', 'EmptyPage', 'Chip', 'Button', 'Dropdown', 'DropdownItem'],
   parameters: {
     docs: {
       description: {

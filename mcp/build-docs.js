@@ -2,10 +2,10 @@
  * Build static component documentation JSON files into /public/docs/
  *
  * Output:
- *   public/docs/orchid-core.json            — slim index (name, description, tags)
- *   public/docs/orchid-dashboard.json       — slim index
- *   public/docs/components/<Name>.schema.json   — full component detail per file
- *   public/docs/components/<Name>.examples.json — code examples per file
+ *   public/docs/orchid-core.json              — slim index (name, description, tags, kind, use_for, understand_with, related)
+ *   public/docs/orchid-dashboard.json         — slim index
+ *   public/docs/components/<Name>.detail.json — schema + example manifest (no code)
+ *   public/docs/components/<Name>.<id>.json   — individual example with full code
  */
 
 import { createCheckerByJson } from 'vue-component-meta'
@@ -13,20 +13,11 @@ import path from 'path'
 import fs from 'fs'
 import { fileURLToPath } from 'url'
 
-import { TAGS } from './lib/component-meta.js'
+import { TAGS, DESCRIPTIONS } from './lib/component-meta.js'
 import { parseIndexFile } from './lib/parse-index.js'
-import { parseStoryOptions, parseStoryExamples, parseStoryRelatedComponents } from './lib/parse-stories.js'
-import { buildProps, buildRules, formatSchema, formatExamples } from './lib/format-docs.js'
+import { parseStoryOptions, parseStoryExamples, parseStoryRelatedComponents, parseStoryMeta } from './lib/parse-stories.js'
+import { buildProps, buildRules, formatDetail, formatExample } from './lib/format-docs.js'
 
-/**
- * Inline schema patches for things vue-component-meta cannot infer:
- * - Array item shapes (no TypeScript generics in JS props)
- * - Event descriptions (defineEmits JSDoc is not read)
- * - Slot documentation (template HTML comments are not read)
- *
- * Each key is a component export name. Supports: props, events, slots.
- * Prop patches are merged (not replaced) so auto-generated fields are preserved.
- */
 const SCHEMA_PATCHES = {
   FormBuilder: {
     props: {
@@ -76,7 +67,6 @@ const DASHBOARD_ALIASES = {
   '@': DASHBOARD_ROOT
 }
 
-// Convert { '@/foo': '/abs/path' } → TypeScript paths relative to ORCHID_ROOT
 function buildTsPaths(aliases) {
   const paths = {}
   for (const [alias, absTarget] of Object.entries(aliases)) {
@@ -129,24 +119,34 @@ async function buildPackageDocs(label, indexPath, aliases, outputFile, packageRo
     }
 
     try {
-      const meta = checker.getComponentMeta(vueFilePath)
+      const meta         = checker.getComponentMeta(vueFilePath)
       const storyOptions = parseStoryOptions(vueFilePath)
-      const examples = parseStoryExamples(vueFilePath)
-      const relatedComponents = parseStoryRelatedComponents(vueFilePath, exportName)
+      const storyMeta    = parseStoryMeta(vueFilePath)
+      const examples     = parseStoryExamples(vueFilePath)
+      const related      = parseStoryRelatedComponents(vueFilePath, exportName)
 
       const props = buildProps(meta, storyOptions)
       const rules = buildRules(props)
 
-      const schema = formatSchema(exportName, vueFilePath, packageRoot, props, meta, rules, relatedComponents, SCHEMA_PATCHES[exportName])
-      const examplesDoc = formatExamples(exportName, examples)
+      const detail = formatDetail(exportName, vueFilePath, packageRoot, props, meta, rules, examples, SCHEMA_PATCHES[exportName])
 
-      fs.writeFileSync(path.join(COMPONENTS_DIR, `${exportName}.schema.json`), JSON.stringify(schema))
-      fs.writeFileSync(path.join(COMPONENTS_DIR, `${exportName}.examples.json`), JSON.stringify(examplesDoc))
+      fs.writeFileSync(path.join(COMPONENTS_DIR, `${exportName}.detail.json`), JSON.stringify(detail))
+
+      for (const example of examples) {
+        fs.writeFileSync(
+          path.join(COMPONENTS_DIR, `${exportName}.${example.id}.json`),
+          JSON.stringify(formatExample(exportName, example))
+        )
+      }
 
       indexComponents.push({
-        name: exportName,
-        description: schema.description,
-        tags: TAGS[exportName] ?? [],
+        name:        exportName,
+        description: DESCRIPTIONS[exportName] ?? `OrchidUI ${exportName} component.`,
+        tags:        TAGS[exportName] ?? [],
+        kind:        storyMeta.kind,
+        ...(storyMeta.use_for?.length        && { use_for:         storyMeta.use_for }),
+        ...(storyMeta.understand_with?.length && { understand_with: storyMeta.understand_with }),
+        ...(related?.length                  && { related }),
       })
 
       console.log(`  ✓ ${exportName}`)
@@ -174,6 +174,13 @@ async function buildPackageDocs(label, indexPath, aliases, outputFile, packageRo
 async function main() {
   fs.mkdirSync(OUTPUT_DIR, { recursive: true })
   fs.mkdirSync(COMPONENTS_DIR, { recursive: true })
+
+  // Remove old format files from previous builds
+  for (const f of fs.readdirSync(COMPONENTS_DIR)) {
+    if (f.endsWith('.schema.json') || f.endsWith('.examples.json')) {
+      fs.unlinkSync(path.join(COMPONENTS_DIR, f))
+    }
+  }
 
   await buildPackageDocs(
     'orchid-core',

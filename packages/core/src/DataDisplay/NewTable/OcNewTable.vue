@@ -50,15 +50,25 @@
               >
                 <div
                   class="px-5 py-3 truncate min-h-[34px] font-medium text-xs border-b border-oc-text-200 uppercase flex items-center gap-2 justify-between w-full"
-                  :class="{ 'h-[inherit]': header.key === 'actions'  }"
+                  :class="{ 'h-[inherit]': header.key === 'actions' }"
                 >
-                <Tooltip v-if="header.leftTooltip" :popper-options="{ strategy: 'fixed' }" is-popover>
-                    <Icon :name="header.leftIcon" width="16" height="16" class="text-oc-text-400" v-bind="header.leftIconProps" />
+                  <Tooltip
+                    v-if="header.leftTooltip"
+                    :popper-options="{ strategy: 'fixed' }"
+                    is-popover
+                  >
+                    <Icon
+                      :name="header.leftIcon"
+                      width="16"
+                      height="16"
+                      class="text-oc-text-400"
+                      v-bind="header.leftIconProps"
+                    />
                     <template #popper>
                       <slot :name="`header-${header.key}-left-tooltip`">
-                       <div class="text-oc-text-400 text-sm normal-case font-medium px-3 py-2">
-                        {{ header.leftTooltip }}
-                       </div>
+                        <div class="text-oc-text-400 text-sm normal-case font-medium px-3 py-2">
+                          {{ header.leftTooltip }}
+                        </div>
                       </slot>
                     </template>
                   </Tooltip>
@@ -67,23 +77,12 @@
                     <Icon name="information" width="16" height="16" class="text-oc-text-400" />
                     <template #popper>
                       <slot :name="`header-${header.key}-tooltip`">
-                       <div class="text-oc-text-400 text-sm normal-case font-medium px-3 py-2">
-                        {{ header.tooltip }}
-                       </div>
+                        <div class="text-oc-text-400 text-sm normal-case font-medium px-3 py-2">
+                          {{ header.tooltip }}
+                        </div>
                       </slot>
                     </template>
                   </Tooltip>
-                  <!-- <Icon
-                    v-if="header.key !== 'actions'"
-                    name="arrow-down"
-                    width="14"
-                    height="14"
-                    :class="[
-                      'transition-transform duration-200',
-                      sortKey === header.key ? 'text-blue-500' : 'text-gray-400',
-                      sortKey === header.key && sortDirection === 'asc' ? 'scale-y-[-1]' : ''
-                    ]"
-                  /> -->
                 </div>
               </th>
             </tr>
@@ -121,12 +120,12 @@
                   :style="{ width: scrollContainerRef?.offsetWidth + 'px' }"
                   class="flex flex-col justify-center items-center py-10 gap-y-4 bg-white relative z-100"
                 >
-                <Icon
-                  name="loading-2"
-                  width="32"
-                  height="32"
-                  class="text-oc-text-400 motion-safe:animate-spin"
-                ></Icon>
+                  <Icon
+                    name="loading-2"
+                    width="32"
+                    height="32"
+                    class="text-oc-text-400 motion-safe:animate-spin"
+                  ></Icon>
                   <div v-if="showLoadingText" class="flex flex-col text-center gap-y-2">
                     <span class="font-medium">Fetching data</span>
                     <span class="text-oc-text-400 text-sm"
@@ -193,38 +192,7 @@ const selectedRows = computed({
   }
 })
 
-// Sorting state
-const sortKey = ref(null)
-const sortDirection = ref('desc') // 'asc' or 'desc'
-
-// Sorted fields computed property
-const sortedFields = computed(() => {
-  if (!sortKey.value) {
-    return fields.value
-  }
-
-  const sorted = [...fields.value].sort((a, b) => {
-    const aVal = a[sortKey.value]
-    const bVal = b[sortKey.value]
-
-    // Handle different data types
-    if (typeof aVal === 'number' && typeof bVal === 'number') {
-      return sortDirection.value === 'asc' ? aVal - bVal : bVal - aVal
-    }
-
-    // Handle strings
-    const aStr = String(aVal || '').toLowerCase()
-    const bStr = String(bVal || '').toLowerCase()
-
-    if (sortDirection.value === 'asc') {
-      return aStr.localeCompare(bStr)
-    } else {
-      return bStr.localeCompare(aStr)
-    }
-  })
-
-  return sorted
-})
+const sortedFields = computed(() => fields.value)
 
 const COLUMN_WIDTH = {
   DEFAULT: 125,
@@ -234,19 +202,10 @@ const COLUMN_WIDTH = {
 let isDragging = false
 let suppressClick = false
 
-// Handle column sorting
-const handleSort = (key, event) => {
+const handleSort = () => {
   if (suppressClick) {
     suppressClick = false
-    return
   }
-  // hide sortable feature
-  // if (sortKey.value === key) {
-  //   sortDirection.value = sortDirection.value === 'asc' ? 'desc' : 'asc'
-  // } else {
-  //   sortKey.value = key
-  //   sortDirection.value = 'desc'
-  // }
 }
 
 const tableRef = ref(null)
@@ -507,7 +466,7 @@ const resizableGrid = (table) => {
       continue
     }
 
-    const colInfo = columnInfo.find(col => col.index === i)
+    const colInfo = columnInfo.find((col) => col.index === i)
     if (!colInfo) continue
 
     let finalWidth = colInfo.minWidth
@@ -532,9 +491,12 @@ const resizableGrid = (table) => {
           // Some columns have props width, distribute remaining width among others
           const remainingWidth = availableWidth - totalPropsWidth
           const columnsWithoutProps = columnInfo.length - columnsWithPropsWidth
-          distributedWidth = Math.max(finalMinWidth, Math.floor(remainingWidth / columnsWithoutProps))
+          distributedWidth = Math.max(
+            finalMinWidth,
+            Math.floor(remainingWidth / columnsWithoutProps)
+          )
         }
-        
+
         finalWidth = distributedWidth
       }
     } else if (colInfo.hasPropsWidth) {
@@ -576,7 +538,6 @@ const handleScroll = () => {
 
 let tableMutationObserver = null
 
-// Debounce utility
 function debounce(fn, delay) {
   let timer = null
   return function (...args) {
@@ -601,16 +562,13 @@ const recreateResizeHandles = () => {
 const debouncedRecreateResizeHandles = debounce(recreateResizeHandles, 50)
 
 onMounted(async () => {
-  // Wait for Vue to finish rendering
   await nextTick()
 
-  // Add a small delay to ensure table is fully rendered
   setTimeout(() => {
     if (tableRef.value) {
       resizableGrid(tableRef.value)
       scrollContainerRef.value.addEventListener('scroll', handleScroll)
       handleScroll()
-      // Set up MutationObserver to watch for changes in the table
       tableMutationObserver = new MutationObserver(() => {
         debouncedRecreateResizeHandles()
       })

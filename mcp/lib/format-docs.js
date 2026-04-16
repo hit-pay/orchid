@@ -8,9 +8,6 @@ export function storybookUrl(vueFilePath, packageRoot) {
   return `https://orchidui.vercel.app/storybook/?path=/docs/${slug}--docs`
 }
 
-// Extract string-literal enum values from a vue-component-meta schema node.
-// PropertyMetaSchema enum: { kind: 'enum', type: string, schema?: PropertyMetaSchema[] }
-// Each item in schema[] is either a quoted string literal ("'primary'") or a nested schema.
 function extractEnumValues(schema) {
   if (!schema || typeof schema === 'string' || schema.kind !== 'enum') return null
   if (!schema.schema?.length) return null
@@ -25,7 +22,6 @@ function extractEnumValues(schema) {
 export function buildProps(meta, storyOptions) {
   const props = {}
   for (const prop of meta.props ?? []) {
-    // Skip Vue built-ins (key, ref, class, style, onXxx…)
     if (prop.global) continue
 
     const schemaValues = extractEnumValues(prop.schema)
@@ -61,7 +57,7 @@ export function buildRules(props) {
   return rules
 }
 
-export function formatSchema(exportName, vueFilePath, packageRoot, props, meta, rules, relatedComponents, patches) {
+export function formatDetail(exportName, vueFilePath, packageRoot, props, meta, rules, examples, patches) {
   const events = {}
   for (const e of meta.events ?? []) {
     events[e.name] = {
@@ -78,39 +74,51 @@ export function formatSchema(exportName, vueFilePath, packageRoot, props, meta, 
     }
   }
 
-  const schema = {
+  const exampleManifest = examples.map(({ id, title, description, highlights }) => ({
+    id,
+    title,
+    ...(description && { description }),
+    ...(highlights?.length && { highlights }),
+  }))
+
+  const detail = {
     name: exportName,
-    description: DESCRIPTIONS[exportName] ?? `OrchidUI ${exportName} component.`,
     storybook: storybookUrl(vueFilePath, packageRoot),
     props,
     events,
     slots,
     rules,
-    relatedComponents,
+    examples: exampleManifest,
   }
 
-  if (!patches) return schema
+  if (!patches) return detail
 
-  // Apply inline patches: merge each prop/event/slot entry rather than replacing the whole object
   if (patches.props) {
     for (const [name, patch] of Object.entries(patches.props)) {
-      schema.props[name] = { ...(schema.props[name] ?? {}), ...patch }
+      detail.props[name] = { ...(detail.props[name] ?? {}), ...patch }
     }
   }
   if (patches.events) {
     for (const [name, patch] of Object.entries(patches.events)) {
-      schema.events[name] = { ...(schema.events[name] ?? {}), ...patch }
+      detail.events[name] = { ...(detail.events[name] ?? {}), ...patch }
     }
   }
   if (patches.slots) {
     for (const [name, patch] of Object.entries(patches.slots)) {
-      schema.slots[name] = { ...(schema.slots[name] ?? {}), ...patch }
+      detail.slots[name] = { ...(detail.slots[name] ?? {}), ...patch }
     }
   }
 
-  return schema
+  return detail
 }
 
-export function formatExamples(exportName, examples) {
-  return { component: exportName, examples }
+export function formatExample(exportName, example) {
+  return {
+    component: exportName,
+    id: example.id,
+    title: example.title,
+    ...(example.description && { description: example.description }),
+    ...(example.highlights?.length && { highlights: example.highlights }),
+    code: example.code,
+  }
 }

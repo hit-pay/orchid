@@ -1,6 +1,6 @@
 <script setup>
 import { Button } from '@/orchidui-core'
-const emit = defineEmits(['save', 'cancel', 'addition-click', 'dropdown-action'])
+const emit = defineEmits(['save', 'cancel'])
 defineProps({
   primaryProps: {
     type: Object

@@ -3,7 +3,15 @@ import { ref } from 'vue'
 
 export default {
   component: Tabs,
-  tags: ['autodocs']
+  tags: ['autodocs'],
+  kind: 'composite',
+  use_for: [
+    'tabbed navigation',
+    'content switching',
+    'multi-section view',
+    'settings tabs'
+  ],
+  understand_with: ['SwitchTabs', 'PaymentTab']
 }
 
 export const Default = {
