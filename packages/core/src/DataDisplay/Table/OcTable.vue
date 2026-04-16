@@ -6,7 +6,7 @@ const props = defineProps({
   /**
    * Full table structure object (required).
    *
-   * `headers` — array of `{ key, label, class?, variant?, chipOptions?, isSortable?, isCopy?, stickyLeft?, stickyRight?, disableClickRow? }`
+   * `headers` — array of `{ key, label, class?, variant?, chipOptions?, isCopy?, stickyLeft?, stickyRight?, disableClickRow? }`
    * `fields`  — array of row data objects keyed to header keys
    * `isSelectable`    — show row checkboxes
    * `isCursorPointer` — cursor:pointer on rows
@@ -52,18 +52,9 @@ const props = defineProps({
   /** Field name in each row whose value is used as a navigation URL on row click. */
   rowLink: String,
   /**
-   * Current sort state. Shape: `{ key: string, direction: 'asc' | 'desc' }`.
-   * Bind with `:sort-by` and listen to `update:sort-by` for controlled sorting.
-   */
-  sortBy: {
-    type: Object,
-    default: () => ({})
-  }
 })
 
 const emit = defineEmits({
-  /** Sort column or direction changed. Payload: `{ key, direction }`. */
-  'update:sort-by': [],
   /** A row was clicked. Payload: `{ field, header }`. Not emitted from disableClickRow columns. */
   'click:row': [],
   /** Selected rows changed. Payload: array of selected row objects. */
@@ -204,10 +195,7 @@ onMounted(() => onScroll())
             header.stickyLeft && !isScrollOnStart ? 'shadow-right-sticky' : '',
             header.stickyRight && !isScrollOnEnd ? 'shadow-left-sticky' : ''
           ]"
-          :is-sortable="header.isSortable"
-          :sort-by="sortBy[header.key]"
           class="md:border-b border-oc-gray-200"
-          @update:sort-by="$emit('update:sort-by', { key: header.key, value: $event })"
         >
           <template #default>
             <slot :name="`header-${header.key}`" />

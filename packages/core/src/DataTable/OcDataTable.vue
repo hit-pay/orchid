@@ -40,7 +40,7 @@ const props = defineProps({
    * Full configuration object for the table.
    *
    * `tableOptions` — table structure:
-   * - `headers` — array of `{ key, label, variant?, class?, isCopy?, isSortable?, stickyLeft?, stickyRight?, chipOptions?, disableClickRow? }`
+   * - `headers` — array of `{ key, label, variant?, class?, isCopy?, stickyLeft?, stickyRight?, chipOptions?, disableClickRow? }`
    * - `fields` — array of row data objects keyed to header keys
    * - `isSelectable` — show row checkboxes
    * - `isCursorPointer` — cursor:pointer on rows

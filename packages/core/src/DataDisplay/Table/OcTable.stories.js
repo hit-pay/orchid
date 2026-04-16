@@ -33,7 +33,6 @@ Use Table directly only when you need granular control over the header/body stru
       chipOptions: {          // map value → { label, variant } — used with variant: 'chip'
         active: { label: 'Active', variant: 'success' }
       },
-      isSortable: true,       // show sort indicator
       isCopy: true,           // copy-to-clipboard icon
       stickyLeft: true,       // pin to left (requires isSticky)
       stickyRight: true,      // pin to right (requires isSticky)
@@ -62,7 +61,6 @@ Use Table directly only when you need granular control over the header/body stru
 | \`rowKey\` | String\\|Function | \`'id'\` | Unique key field per row |
 | \`rowClass\` | String\\|Function | — | CSS class (or fn) applied to each row |
 | \`rowLink\` | String | — | Field name whose value is used as navigation URL |
-| \`sortBy\` | Object | \`{}\` | Current sort state: \`{ key, direction }\` |
 
 ---
 
@@ -72,7 +70,6 @@ Use Table directly only when you need granular control over the header/body stru
 |-------|---------|-------------|
 | \`click:row\` | \`{ field, header }\` | Row clicked (not fired from \`disableClickRow\` columns) |
 | \`update:selected\` | \`rows[]\` | Selected rows changed |
-| \`update:sort-by\` | \`{ key, direction }\` | Sort column/direction changed |
 | \`hover:cell\` | \`{ item, key }\` | Cell hovered |
 
 ---
@@ -344,72 +341,6 @@ const options = {
     template: `
       <div class="p-6">
         <Table :options="options" is-loading :loading-rows="5" />
-      </div>
-    `
-  })
-}
-
-// ── Sortable Columns ──────────────────────────────────────────────────────────
-
-export const SortableColumns = {
-  description: 'Set isSortable: true on headers to show sort indicators. Bind sortBy and listen to update:sort-by to handle server-side sorting.',
-  highlights: ['header.isSortable — show sort indicator', 'sortBy prop — { key, direction }', 'update:sort-by event — { key, direction }'],
-  code: `<script setup>
-import { ref } from 'vue'
-import { Table } from '@orchidui/core'
-
-const sortBy = ref({ key: 'name', direction: 'asc' })
-
-const options = {
-  isCursorPointer: true,
-  headers: [
-    { key: 'name',   label: 'Name',   class: 'w-[40%]', isSortable: true },
-    { key: 'amount', label: 'Amount', class: 'w-[30%]', isSortable: true },
-    { key: 'date',   label: 'Date',   class: 'w-[30%]', isSortable: true }
-  ],
-  fields: [
-    { id: '1', name: 'Alice',   amount: 'SGD 130.00', date: '2024-01-10' },
-    { id: '2', name: 'Bob',     amount: 'SGD 50.00',  date: '2024-02-15' },
-    { id: '3', name: 'Charlie', amount: 'SGD 200.00', date: '2024-03-20' }
-  ]
-}
-
-function onSortChange(newSort) {
-  sortBy.value = newSort
-  // fetch sorted data from server with newSort
-  console.log('sort by:', newSort)
-}
-</script>
-
-<template>
-  <Table
-    :options="options"
-    :sort-by="sortBy"
-    @update:sort-by="onSortChange"
-  />
-</template>`,
-  render: () => ({
-    components: { Table },
-    setup() {
-      const sortBy = ref({ key: 'name', direction: 'asc' })
-      const options = {
-        isCursorPointer: true,
-        headers: [
-          { key: 'name',   label: 'Name',   class: 'w-[40%]', isSortable: true },
-          { key: 'amount', label: 'Amount', class: 'w-[30%]', isSortable: true },
-          { key: 'date',   label: 'Date',   class: 'w-[30%]', isSortable: true }
-        ],
-        fields: [
-          { id: '1', name: 'Alice',   amount: 'SGD 130.00', date: '2024-01-10' },
-          { id: '2', name: 'Bob',     amount: 'SGD 50.00',  date: '2024-02-15' },
-          { id: '3', name: 'Charlie', amount: 'SGD 200.00', date: '2024-03-20' }
-        ]
-      }
-      return { sortBy, options }
-    },
-    template: `
-      <div class="p-6">
-        <Table :options="options" :sort-by="sortBy" @update:sort-by="sortBy = $event" />
       </div>
     `
   })

@@ -19,7 +19,7 @@ const options = {
   },
   tableOptions: {
     headers: [
-      { key: 'name',    label: 'Name',    class: 'w-[25%]', isSortable: false },
+      { key: 'name',    label: 'Name',    class: 'w-[25%]' },
       { key: 'email',   label: 'Email',   class: 'w-[35%]' },
       { key: 'role',    label: 'Role',    class: 'w-[20%]' },
       { key: 'status',  label: 'Status',  class: 'w-[20%]' }

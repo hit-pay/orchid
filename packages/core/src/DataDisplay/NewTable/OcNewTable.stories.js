@@ -39,7 +39,6 @@ It can also be used standalone for tables that don't need the full DataTable fil
         active: { label: 'Active', variant: 'success' }
       },
       tooltip: true,         // true = show cell value as tooltip; string = custom header tooltip text
-      isSortable: true,      // show sort indicator
       isCopy: true,          // show copy-to-clipboard icon on cell hover
       stickyLeft: true,      // pin column to left (requires isSticky on DataTable)
       stickyRight: true,     // pin column to right

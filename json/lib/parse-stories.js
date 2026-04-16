@@ -96,6 +96,9 @@ export function parseStoryExamples(vueFilePath) {
     const storyObj = extractBalanced(content, storyStart)
     if (!storyObj) continue
 
+    // Skip Storybook-only playgrounds (have argTypes but no code property)
+    if (/\bargTypes\s*:/.test(storyObj) && !/\bcode\s*:/.test(storyObj)) continue
+
     // ── Prefer explicit `code: \`` property (full hand-written SFC snippet) ──
     const manualSnippet = extractBacktickByKey(storyObj, 'code')
 
