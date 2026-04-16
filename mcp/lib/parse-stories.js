@@ -1,5 +1,26 @@
 import fs from 'fs'
+import path from 'path'
 import { buildSFCCode, extractBacktickByKey } from './sfc-builder.js'
+
+/**
+ * Resolve the stories file for a given Vue component file.
+ * Tries several naming conventions before giving up:
+ *   1. Exact match: Foo.vue → Foo.stories.js
+ *   2. Oc-prefixed: Foo.vue → OcFoo.stories.js
+ *   3. Strip-Oc: OcFoo.vue → Foo.stories.js (rare, but some stories drop the prefix)
+ */
+function resolveStoryPath(vueFilePath) {
+  const dir  = path.dirname(vueFilePath)
+  const base = path.basename(vueFilePath, '.vue')
+
+  const candidates = [
+    path.join(dir, `${base}.stories.js`),
+    path.join(dir, `Oc${base}.stories.js`),
+    base.startsWith('Oc') ? path.join(dir, `${base.slice(2)}.stories.js`) : null
+  ].filter(Boolean)
+
+  return candidates.find(p => fs.existsSync(p)) ?? null
+}
 
 function extractBalanced(str, startPos) {
   let depth = 0
@@ -32,8 +53,8 @@ function extractStringArrayProp(block, key) {
 }
 
 export function parseStoryOptions(vueFilePath) {
-  const storyPath = vueFilePath.replace(/\.vue$/, '.stories.js')
-  if (!fs.existsSync(storyPath)) return {}
+  const storyPath = resolveStoryPath(vueFilePath)
+  if (!storyPath) return {}
 
   const content = fs.readFileSync(storyPath, 'utf-8')
   const propOptions = {}
@@ -53,8 +74,8 @@ export function parseStoryOptions(vueFilePath) {
 }
 
 export function parseStoryExamples(vueFilePath) {
-  const storyPath = vueFilePath.replace(/\.vue$/, '.stories.js')
-  if (!fs.existsSync(storyPath)) return []
+  const storyPath = resolveStoryPath(vueFilePath)
+  if (!storyPath) return []
 
   const content = fs.readFileSync(storyPath, 'utf-8')
   const examples = []
@@ -103,9 +124,28 @@ export function parseStoryExamples(vueFilePath) {
   return examples
 }
 
+export function parseStoryMeta(vueFilePath) {
+  const storyPath = resolveStoryPath(vueFilePath)
+  if (!storyPath) return { kind: 'leaf', use_for: [], understand_with: [] }
+
+  const content = fs.readFileSync(storyPath, 'utf-8')
+
+  const m = content.match(/export\s+default\s+\{/)
+  if (!m) return { kind: 'leaf', use_for: [], understand_with: [] }
+
+  const block = extractBalanced(content, m.index + m[0].length - 1)
+  if (!block) return { kind: 'leaf', use_for: [], understand_with: [] }
+
+  return {
+    kind:            extractStringProp(block, 'kind') ?? 'leaf',
+    use_for:         extractStringArrayProp(block, 'use_for') ?? [],
+    understand_with: extractStringArrayProp(block, 'understand_with') ?? [],
+  }
+}
+
 export function parseStoryRelatedComponents(vueFilePath, primaryComponent) {
-  const storyPath = vueFilePath.replace(/\.vue$/, '.stories.js')
-  if (!fs.existsSync(storyPath)) return []
+  const storyPath = resolveStoryPath(vueFilePath)
+  if (!storyPath) return []
 
   const content = fs.readFileSync(storyPath, 'utf-8')
   const related = new Set()
