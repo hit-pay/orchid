@@ -29,5 +29,5 @@ dist
 public/storybook
 
 public/mcp
-src/docs/pages
-src/docs/sidebar-config.js
+
+src/docs/*
