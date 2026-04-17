@@ -31,7 +31,7 @@ defineProps({
 })
 const emit = defineEmits({
   /** Dots-vertical dropdown opened. */
-  more: []
+  more: null
 })
 const isOpen = ref(false)
 
