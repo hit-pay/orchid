@@ -4,8 +4,11 @@ import { ref } from 'vue'
 import { useWindowWidth } from '@/orchidui-core/composables/useWindowWidth.js'
 
 const props = defineProps({
+  /** Props forwarded to the primary Button. Supports an optional `tooltip` string to show on hover. */
   primaryButtonProps: Object,
+  /** Props forwarded to the secondary Button. Supports a `dropdownOptions` array for a dropdown menu. */
   secondaryButtonProps: Object,
+  /** Show skeleton placeholders instead of the buttons while data is loading. */
   isLoading: { type: Boolean, default: false }
 })
 

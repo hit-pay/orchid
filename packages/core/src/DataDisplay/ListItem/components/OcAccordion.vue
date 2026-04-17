@@ -3,29 +3,45 @@ import { Chip, Icon } from '@/orchidui-core'
 import { ref, watch } from 'vue'
 
 const props = defineProps({
+  /** v-model — controls whether the accordion body is open. */
   modelValue: {
     type: Boolean,
     default: false
   },
+  /** Heading text shown in the clickable trigger row. */
   title: String,
+  /** Supporting description shown below the title when expanded. */
   description: String,
+  /** Array of Chip props rendered next to the title. */
   chips: {
     type: Array,
     default: () => []
   },
+  /** Disable the accordion — no interaction, no hover shadow. */
   isDisabled: Boolean,
+  /** Show pencil/bin action icons on hover in the right area. */
   hasActions: {
     type: Boolean,
     default: true
   },
+  /** Remove the card border and shadow (transparent style). */
   isTransparent: Boolean,
+  /** Show a drag handle icon on the right (for use in reorderable lists). */
   isDraggable: Boolean,
+  /** Prevent the chevron click from toggling open/closed. */
   isNoToggleForced: Boolean,
+  /** Start the accordion in the open state. */
   isOpenDefault: Boolean
 })
 
-
-const emit = defineEmits(['update:modelValue', 'edit', 'delete'])
+const emit = defineEmits({
+  /** Accordion open/closed state changed. Payload: new boolean value. */
+  'update:modelValue': [],
+  /** Edit (pencil) icon clicked. */
+  edit: [],
+  /** Delete (bin) icon clicked. */
+  delete: []
+})
 
 const isOpen = ref(props.isOpenDefault)
 

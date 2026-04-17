@@ -1,14 +1,17 @@
 <script setup>
 import { Icon } from '@/orchidui-core'
 defineProps({
+  /** Show or hide the submenu items (animated expand/collapse). */
   isExpanded: {
     type: Boolean,
     default: true
   },
+  /** Whether the parent sidebar is in expanded (wide) mode — controls icon visibility. */
   isExpandedSidebar: {
     type: Boolean,
     default: false
   },
+  /** Menu object with a `children` array of submenu items. Each child has an `active` flag. */
   menu: {
     type: Object
   }

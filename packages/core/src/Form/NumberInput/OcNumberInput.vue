@@ -2,25 +2,39 @@
 import { BaseInput, Button } from '@/orchidui-core'
 
 const props = defineProps({
+  /** Current numeric value (v-model). */
   modelValue: {
     type: [String, Number],
     default: null
   },
+  /** Minimum allowed value — decrement button is disabled at this threshold. */
   minValue: {
     type: Number,
     default: 1
   },
+  /** Field label shown above the input. */
   label: String,
+  /** Validation error message shown in red below the input. */
   errorMessage: String,
+  /** Disable the input and +/- buttons — non-interactive, grayed out. */
   isDisabled: Boolean,
+  /** Props forwarded to the Tooltip component on the label icon. */
   tooltipOptions: Object,
+  /** Helper text shown below the input. */
   hint: String,
+  /** Icon name rendered in the label area as a tooltip trigger. */
   labelIcon: String,
+  /** Mark the field as required — shows a `*` indicator next to the label. */
   isRequired: Boolean,
+  /** Text shown in the tooltip when hovering `labelIcon`. */
   tooltipText: String,
+  /** CSS class applied to the inner input wrapper. */
   inputClass: [String, Array, Object]
 })
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits({
+  /** Numeric value changed. Payload: new number value. */
+  'update:modelValue': []
+})
 
 const increment = () => emit('update:modelValue', Number(props.modelValue) + 1)
 const decrement = () => {

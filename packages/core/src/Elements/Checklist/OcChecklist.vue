@@ -39,24 +39,29 @@ import { computed } from 'vue'
 import { Icon, Button } from '@/orchidui-core'
 
 const props = defineProps({
+  /** Step number displayed when the item is not yet completed. */
   index: {
     type: Number,
     required: true
   },
+  /** Checklist item description text. */
   label: {
     type: String,
     required: true
   },
+  /** Mark the item as completed — shows a check icon and strikes through the label. */
   completed: {
     type: Boolean,
     required: false,
     default: false
   },
+  /** Highlight this item as the currently active step (primary button variant). */
   active: {
     type: Boolean,
     required: false,
     default: false
   },
+  /** Props forwarded to the action Button on the right. Pass `undefined` to hide the button. */
   actionButton: {
     type: Object,
     default: undefined,

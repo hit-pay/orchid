@@ -2,17 +2,26 @@
 import { Icon } from '@/orchidui-core'
 
 defineProps({
+  /** Body text rendered as HTML (supports `<b>`, etc.). Overridden by the `description` slot. */
   description: String,
+  /** Extra CSS class applied to the icon circle wrapper. */
   iconClass: String,
+  /**
+   * Visual variant — controls the default icon and its colors.
+   * @values delete, warning, success, question
+   */
   variant: {
     type: String,
     default: 'delete'
   },
+  /** Hide the icon circle entirely. */
   hideIcon: {
     type: Boolean,
     default: false
   },
+  /** Custom icon name that overrides the default variant icon. */
   icon: String,
+  /** Extra CSS class applied to the outermost content wrapper. */
   contentClass: String
 })
 const variantIcon = {

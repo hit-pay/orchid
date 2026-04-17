@@ -3,10 +3,15 @@ import { Button, Icon, Dropdown, DropdownItem, CopyTooltip, Chip } from '@/orchi
 import { ref } from 'vue'
 
 defineProps({
+  /** Page heading text. */
   title: { type: String },
+  /** Supporting description text shown below the title (with a copy icon). */
   description: { type: String },
+  /** Props forwarded to the primary Button. */
   primaryButtonProps: Object,
+  /** Props forwarded to the Chip shown below the description. */
   chipProps: Object,
+  /** Props forwarded to the secondary Button shown inside the split-button dropdown. */
   secondaryButtonProps: Object
 })
 

@@ -11,18 +11,22 @@
 <script setup>
 import { ref, watch, onMounted, nextTick } from 'vue'
 const props = defineProps({
+  /** Base URL path where SVG icon files are served from. */
   path: {
     type: String,
     default: '/icons/orchidui'
   },
+  /** Icon file name (without `.svg` extension). Fetched from `{path}/{name}.svg`. */
   name: {
     type: String,
     required: true
   },
+  /** Width of the rendered SVG in pixels. */
   width: {
     type: [String, Number],
     default: '24'
   },
+  /** Height of the rendered SVG in pixels. */
   height: {
     type: [String, Number],
     default: '24'

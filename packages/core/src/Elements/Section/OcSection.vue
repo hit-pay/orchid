@@ -15,6 +15,7 @@
 
 <script setup>
 defineProps({
+  /** Section heading text shown in the header when no custom `header` slot is provided. */
   title: {
     type: String,
     required: false,

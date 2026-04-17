@@ -2,14 +2,20 @@
 import { Button } from '@/orchidui-core'
 
 defineProps({
+  /** Card heading text. */
   title: String,
+  /** Supporting subtitle text shown below the title. */
   subtitle: String,
+  /** Array of Button props rendered in the footer row. */
   buttons: Array,
+  /** Props forwarded to the header Button shown on hover (top-right corner). */
   headerButton: Array,
+  /** Show the footer section (with `footer` slot or buttons array). */
   hasFooter: {
     type: Boolean,
     default: true
   },
+  /** Extra CSS classes applied to the footer buttons wrapper. */
   footerClasses: String,
 })
 

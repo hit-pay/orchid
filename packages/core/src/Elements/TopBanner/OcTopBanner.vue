@@ -2,29 +2,38 @@
 import { Button, Icon, Chip } from '@/orchidui-core'
 
 defineProps({
+  /** Props forwarded to the Chip shown on the left side. Pass `null` to hide. */
   chipProps: {
     type: Object,
     required: false,
     default: null
   },
+  /** Props forwarded to a secondary Button rendered before the primary link. Pass `null` to hide. */
   secondaryButton: {
     type: Object,
     required: false,
     default: null
   },
+  /** Plain text shown in the center of the banner. Use `rawHtml` for rich content instead. */
   title: {
     type: String,
     default: ''
   },
+  /** Raw HTML rendered in the center of the banner (v-html). Use only with trusted content. */
   rawHtml: {
     type: String,
     default: null
   },
+  /** Label for the primary action link button on the right side. */
   buttonLabel: String,
+  /** Extra CSS class applied to the title/rawHtml container. */
   titleClass: String
 })
 
-defineEmits(['click:button'])
+defineEmits({
+  /** Primary action button clicked. */
+  'click:button': []
+})
 </script>
 
 <template>

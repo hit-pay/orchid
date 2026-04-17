@@ -9,6 +9,7 @@
 
 <script setup>
   defineProps({
+    /** Show the footer slot content. Hidden when the sidebar is collapsed. */
     isExpanded: Boolean
   })
 </script>

@@ -1,5 +1,6 @@
 <script setup>
 defineProps({
+  /** URL to navigate to when the cell is clicked. When absent, renders a plain `div` instead of an `<a>` tag. */
   link: String
 })
 </script>

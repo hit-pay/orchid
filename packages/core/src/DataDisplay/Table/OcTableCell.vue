@@ -22,18 +22,31 @@ const Variants = {
   DEFAULT: 'default'
 }
 const props = defineProps({
+  /** Hide the checkbox on non-hovered rows (only relevant for `checkbox` variant). */
   isSimple: Boolean,
+  /**
+   * Cell rendering variant.
+   * @values checkbox, content, chip, datetime, icon, image, empty, default
+   */
   variant: {
     type: String,
     default: 'default'
   },
+  /** Whether this is the last row — suppresses the bottom border. */
   isLast: Boolean,
+  /** Show a copy-to-clipboard icon on hover. */
   isCopy: Boolean,
+  /** Include the description text in the clipboard value when copying. */
   addDescriptionToCopyClipboard: Boolean,
+  /** Whether this row is currently selected (highlights the checkbox). */
   isSelected: Boolean,
+  /** Cell data value — displayed or used to look up chip/icon based on variant. */
   data: [String, Number, Object, Array, Boolean],
+  /** Show a skeleton placeholder while the table is loading. */
   isLoading: Boolean,
+  /** Chip options map — keys are data values, values are `{ label, variant }` or a variant string. */
   chipOptions: Object,
+  /** Content for `content` variant — `{ title, description }`. */
   content: {
     type: Object,
     default() {
@@ -43,17 +56,24 @@ const props = defineProps({
       }
     }
   },
+  /** ISO date string for `datetime` variant — formatted as date + time. */
   datetime: String,
+  /** CSS class applied to the `<img>` element in `image` variant. */
   imageClass: {
     type: String,
     default: 'h-full'
   },
+  /** URL used as the cell's `<a href>` — makes the whole cell a clickable link. */
   link: String
 })
 defineEmits({
+  /** Checkbox was toggled (checkbox variant). */
   selected: [],
+  /** Copy icon was clicked. */
   copied: [],
+  /** Cell content area was clicked. */
   'click:field': [],
+  /** Mouse entered the cell content area. Payload: props snapshot. */
   'hover:field': []
 })
 

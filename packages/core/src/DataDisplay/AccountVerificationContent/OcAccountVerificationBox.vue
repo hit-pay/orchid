@@ -2,10 +2,15 @@
 import { Icon, Chip } from '@/orchidui-core'
 
 defineProps({
+  /** Card heading text shown at the top. */
   title: String,
+  /** Icon name displayed next to the title. */
   icon: String,
+  /** Description text shown below the title. */
   description: String,
+  /** Array of Chip props rendered below the description. */
   chips: Array,
+  /** Truthy value applies a primary border to indicate this card is selected. */
   active: Array,
 })
 

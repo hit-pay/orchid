@@ -2,13 +2,21 @@
 import { Skeleton, Chip, Button, Icon } from '@/orchidui-core'
 
 defineProps({
+  /** Highlight this card with a bold primary bottom border to indicate it is the active tab. */
   isActive: Boolean,
+  /** Show skeleton placeholders while data is loading. */
   isLoading: Boolean,
+  /** Label text shown above the content value. */
   title: String,
+  /** Main value text displayed prominently on the card. */
   content: String,
+  /** Show a dropdown Button on the right side of the card. */
   isDropdown: Boolean,
+  /** Props forwarded to the Chip badge shown next to the title. */
   chipOptions: Object,
+  /** Props forwarded to the Button used as the dropdown trigger. */
   dropdownOptions: Object,
+  /** ISO country code (e.g. `'SG'`) — renders a circular flag icon before the content value. */
   countryIso: String
 })
 </script>

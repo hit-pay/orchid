@@ -3,10 +3,19 @@ import { Icon, Tooltip, Dropdown, DropdownItem } from '@/orchidui-core'
 import { computed, ref } from 'vue'
 
 const props = defineProps({
+  /**
+   * Configuration object for the action icon bar. Supports:
+   * - `actions` (Array) — icon buttons (each with `icon`, `isCopyButton`, `tooltipContent`, `onClick`, `class`).
+   * - `mainLinkAction` — `{ url, tooltipContent }` for an external-link icon.
+   * - `dropdownOptions` — `{ top, bottom }` arrays of DropdownItem props for the "more" dropdown.
+   * - `copyTooltipContent` / `copiedTooltipContent` — tooltip text overrides for the copy button.
+   */
   primaryActions: Object
 })
 const emit = defineEmits({
+  /** Copy icon clicked — caller should write to clipboard. */
   copy: [],
+  /** Primary actions dropdown opened/interacted with. */
   'click:primaryActionsDropdown': []
 })
 const isCopied = ref(false)

@@ -2,8 +2,14 @@
 import { computed } from 'vue'
 
 defineProps({
+  /** Highlight this button as the current page. */
   active: Boolean,
+  /** Use a fully rounded (circle) shape instead of a square. */
   isRounded: Boolean,
+  /**
+   * Size variant — controls button dimensions and text size.
+   * @values default, small, big
+   */
   size: {
     type: String,
     default: 'default'

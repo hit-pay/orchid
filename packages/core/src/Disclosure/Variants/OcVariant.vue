@@ -2,26 +2,32 @@
 import { Icon } from '@/orchidui-core'
 
 defineProps({
+  /** Icon name shown to the left of the label. */
   icon: {
     type: String,
     default: ''
   },
+  /** Text label displayed inside the variant card. */
   label: {
     type: String,
     default: ''
   },
+  /** Highlight this card as the currently selected variant. */
   isActive: {
     type: Boolean,
     default: false
   },
+  /** Disable selection — card becomes non-interactive and visually muted. */
   isDisabled: {
     type: Boolean,
     default: false
   },
+  /** Extra props forwarded to the Icon component. */
   iconOptions: {
     type: Object,
     default: null
   },
+  /** Unique value identifying this variant option. */
   value: {
     type: [String, Number],
     default: ''

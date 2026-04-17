@@ -2,17 +2,22 @@
 import { Variant } from '@/orchidui-core'
 
 defineProps({
+  /** Array of variant option objects — each supports all OcVariant props (value, label, icon, isDisabled, etc.). */
   variants: {
     type: Array,
     default: () => []
   },
+  /** v-model — value of the currently selected variant. */
   modelValue: {
     type: [String, Number],
     default: ''
   }
 })
 
-defineEmits(['update:modelValue'])
+defineEmits({
+  /** Selected variant changed. Payload: the `value` of the newly selected variant. */
+  'update:modelValue': []
+})
 </script>
 
 <template>

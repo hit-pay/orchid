@@ -2,11 +2,19 @@
 import { computed } from 'vue'
 
 defineProps({
+  /**
+   * Avatar diameter in pixels.
+   * @values 64, 48, 40, 32, 28, 24
+   */
   size: {
     type: Number,
     validator: (value) => [64, 48, 40, 32, 28, 24].includes(value),
     default: 32
   },
+  /**
+   * Visual style variant — controls background and text color.
+   * @values business, default, image
+   */
   type: {
     type: String,
     default: 'default',

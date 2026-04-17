@@ -1,13 +1,16 @@
 <script setup>
 defineProps({
+  /** Column header definitions — each with `key`, `label`, and optional `class`. */
   headers: {
     type: Array,
     required: true
   },
+  /** Pin the first header cell to the left during horizontal scroll. */
   isSticky: {
     type: Boolean,
     default: false
   },
+  /** CSS `grid-template-columns` value applied to the header grid row. */
   gridTemplateColumns: {
     type: String,
     default: '32px 200px repeat(${headers.length - 1}, minmax(150px, auto)) 32px'

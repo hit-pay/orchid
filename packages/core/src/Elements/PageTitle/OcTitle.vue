@@ -2,12 +2,19 @@
 import { Chip, CopyTooltip, Icon, Skeleton } from '@/orchidui-core'
 
 defineProps({
+  /** Main heading text. */
   title: { type: String, required: true },
+  /** Supporting description text shown below the title. */
   description: { type: String, required: true },
+  /** Value copied to clipboard when the copy icon is clicked. */
   copyValue: { type: String, default: '' },
+  /** Props forwarded to the Chip shown next to the title. */
   chipProps: Object,
+  /** Props forwarded to the CopyTooltip component. */
   tooltipOptions: Object,
+  /** Show the copy icon next to the description. */
   isCopy: Boolean,
+  /** Show skeleton placeholders while data is loading. */
   isLoading: { type: Boolean, default: false }
 })
 </script>

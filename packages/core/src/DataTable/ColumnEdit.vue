@@ -4,17 +4,27 @@ import { ref, onMounted } from 'vue'
 import { VueDraggableNext } from 'vue-draggable-next'
 import { formatHeadersFromLocalStorage, getFromLocalStorage } from './utils/editColumnsUtils'
 
-const emit = defineEmits(['change-active', 'onMoved', 'update-order'])
+const emit = defineEmits({
+  /** A column's active state was toggled. Payload: column header object. */
+  'change-active': [],
+  /** A column was reordered via drag. Payload: move event. */
+  'onMoved': [],
+  /** Column order or visibility changed. Payload: `{ fixedHeaders, activeHeaders, isOnMount }`. */
+  'update-order': []
+})
 
 const props = defineProps({
+  /** Initial active/visible state overrides for columns. Keyed by column key. */
   options: {
     type: Object,
     default: () => ({})
   },
+  /** Full list of column header objects — each with `key`, `label`, and optional `isActive`. */
   headers: {
     type: Array,
     default: () => []
   },
+  /** localStorage key used to persist the column order and visibility across sessions. */
   localKey: {
     type: String,
     default: ''

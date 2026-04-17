@@ -3,25 +3,36 @@ import { Chip, Icon, Dropdown } from '@/orchidui-core'
 import { ref } from 'vue'
 
 defineProps({
+  /** Primary heading text. */
   title: String,
+  /** Supporting description text shown below the title. */
   description: String,
+  /** Icon name shown before the description text. */
   descriptionIcon: String,
+  /** Array of Chip props rendered next to the title. */
   chips: {
     type: Array,
     default: () => []
   },
+  /** Array of detail badge objects. Each: `{ label, icon?, country? }`. */
   details: {
     type: Array,
     default: () => []
   },
+  /** Disable the row — no hover shadow, hides the dropdown trigger. */
   isDisabled: Boolean,
+  /** Show the dots-vertical dropdown trigger on hover. */
   isDropdownActionsVisible: {
     type: Boolean,
     default: true
   },
+  /** Remove the card border (transparent style). */
   isTransparent: Boolean
 })
-const emit = defineEmits(['more'])
+const emit = defineEmits({
+  /** Dots-vertical dropdown opened. */
+  more: null
+})
 const isOpen = ref(false)
 
 const toggleDropdown = () => {

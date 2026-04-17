@@ -8,18 +8,28 @@ const Variants = {
 }
 
 defineProps({
+  /**
+   * Header cell type.
+   * @values text, checkbox
+   */
   variant: {
     type: String,
     default: 'text',
     validator: (value) => ['text', 'checkbox'].includes(value)
   },
+  /** Header label text (used when no default slot content is provided). */
   text: String,
+  /** Show an indeterminate/partial state on the header checkbox. */
   isPartial: Boolean,
+  /** Whether the header checkbox is in a checked state. */
   isChecked: Boolean,
+  /** Pin the header cell to the left when horizontal scroll is active. */
   isSticky: Boolean,
+  /** Show a skeleton placeholder instead of content while loading. */
   isLoading: Boolean,
 })
 defineEmits({
+  /** Header checkbox was toggled. Payload: new boolean value. */
   selectAll: []
 })
 const variantClass = computed(() => ({

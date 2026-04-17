@@ -3,14 +3,19 @@ import { computed } from 'vue'
 import { Button, Chip, Icon } from '@/orchidui-core'
 
 const props = defineProps({
+  /** Plan tier data object with fields: `name`, `price`, `currency`, `billing_frequency`, `code`, `features`. */
   planTier: {
     type: Object,
     required: true
   },
+  /** Mark this card as the user's current plan — shows a "Current Plan" chip and hides the CTA button. */
   isPlanActive: Boolean
 })
 
-const emit = defineEmits(['select'])
+const emit = defineEmits({
+  /** CTA button clicked — user wants to select or switch to this plan. */
+  select: []
+})
 
 const isFreeTier = computed(() => props.planTier.name === 'Free')
 const isProTier = computed(() => props.planTier.name === 'Pro')

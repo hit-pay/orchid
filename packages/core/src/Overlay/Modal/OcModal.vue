@@ -3,31 +3,39 @@ import { Icon, Button } from '@/orchidui-core'
 import { computed, ref, watch, onUnmounted } from 'vue'
 
 const props = defineProps({
+  /** Remove the top and bottom dividers between header/footer and body. */
   isBorderless: Boolean,
+  /** Tailwind class controlling footer alignment (e.g. `'justify-end'`, `'justify-center'`). */
   footerClass: {
     type: String,
     default: 'justify-end'
   },
+  /** v-model — controls whether the modal is visible. */
   modelValue: {
     type: Boolean,
     default: false
   },
+  /** Modal header title text. Rendered inside the default `header` slot. */
   title: {
     type: String,
     default: ''
   },
+  /** Subtitle text shown below the title. Rendered inside the `description` slot. */
   description: {
     type: String,
     default: ''
   },
+  /** Prevent the modal from closing when clicking the backdrop. */
   persistent: {
     type: Boolean,
     default: false
   },
+  /** Show the close (×) icon button in the header. */
   isCloseIcon: {
     type: Boolean,
     default: true
   },
+  /** Props forwarded to the Cancel Button (label, variant, class, etc.). */
   cancelButtonProps: {
     type: Object,
     default: () => ({
@@ -35,22 +43,27 @@ const props = defineProps({
       variant: 'secondary'
     })
   },
+  /** Block all close actions — backdrop clicks and close button are ignored. */
   preventClose: {
     type: Boolean,
     default: false
   },
+  /** Show the header section (title + close icon). */
   isHeaderVisible: {
     type: Boolean,
     default: true
   },
+  /** Show the footer section (cancel + confirm buttons). */
   isFooterVisible: {
     type: Boolean,
     default: true
   },
+  /** `id` attribute applied to the scrollable content area — useful for scroll targets. */
   modalId: {
     type: String,
     default: ''
   },
+  /** Props forwarded to the Confirm Button (label, variant, isLoading, class, etc.). */
   confirmButtonProps: {
     type: Object,
     default: () => ({
@@ -58,19 +71,28 @@ const props = defineProps({
       class: 'min-w-[112px]'
     })
   },
+  /**
+   * Width preset for the modal dialog.
+   * @values default, medium, small
+   */
   size: {
     type: String,
     default: 'default',
     validator: (val) => ['default', 'medium', 'small'].includes(val)
   }
 })
-const emit = defineEmits([
-  'update:modelValue',
-  'confirm',
-  'cancel',
-  'click:outside',
-  'content-scroll'
-])
+const emit = defineEmits({
+  /** Modal open state changed. Payload: new boolean value. */
+  'update:modelValue': [],
+  /** Confirm button was clicked. */
+  'confirm': [],
+  /** Cancel button was clicked. */
+  'cancel': [],
+  /** Backdrop was clicked. */
+  'click:outside': [],
+  /** Modal body scroll event fired. Payload: scroll Event. */
+  'content-scroll': []
+})
 
 const closeModal = () => {
   if (props.preventClose) {

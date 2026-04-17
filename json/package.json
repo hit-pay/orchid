@@ -1,10 +1,10 @@
 {
-  "name": "orchidui-build-docs",
+  "name": "orchidui-build-json",
   "version": "1.0.0",
   "description": "Build static component documentation JSON for OrchidUI",
   "type": "module",
   "scripts": {
-    "build": "node build-docs.js",
+    "build": "node build-json.js",
     "start": "node server.js"
   },
   "dependencies": {

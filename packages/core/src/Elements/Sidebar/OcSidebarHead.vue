@@ -23,7 +23,9 @@
 
 <script setup>
 defineProps({
+  /** Section label shown above the menu items (uppercase, muted). Hidden when the sidebar is collapsed. */
   label: String,
+  /** Whether the sidebar is in expanded (wide) mode — controls label visibility. */
   isSidebarExpanded: Boolean
 })
 </script>

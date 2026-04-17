@@ -10,23 +10,39 @@ const CHIP_TYPES = {
 }
 
 const props = defineProps({
+  /**
+   * Color variant of the chip.
+   * @values accent-1, dark-blue, accent-2, accent-3, success, warning, error, gray, light-red, neutral, tosca
+   */
   variant: {
     type: String,
     default: ''
   },
+  /**
+   * Visual style type.
+   * @values background, transparent, outlined
+   */
   type: {
     type: String,
     default: 'background',
   },
+  /** Text label displayed inside the chip. */
   label: String,
+  /** Icon name shown to the left of the label. */
   icon: String,
+  /** Width and height of the icon in pixels (e.g. `"20"`). Defaults to `18`. */
   iconSize: String,
+  /** Tooltip text shown when hovering over the icon. */
   iconTooltip: String,
+  /** Show an `×` close button that emits `remove` when clicked. */
   closable: Boolean,
+  /** Truncate the label text with ellipsis when it overflows. */
   truncate: Boolean,
+  /** Extra props forwarded to the Icon component. */
   iconProps: Object
 })
 defineEmits({
+  /** Close button clicked — chip should be removed from the list. */
   remove: []
 })
 

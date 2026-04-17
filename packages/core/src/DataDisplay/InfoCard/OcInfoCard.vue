@@ -3,15 +3,25 @@ import { Icon, Tooltip } from '@/orchidui-core'
 import { useSlots } from 'vue'
 
 defineProps({
+  /** Show a spinning loader overlay while data is loading. */
   isLoading: Boolean,
+  /** Card heading text shown in the title bar. */
   title: String,
+  /** Icon name displayed next to the title (requires `titleIconTooltip` for the tooltip). */
   titleIcon: String,
+  /** Tooltip text shown when hovering over the title icon. */
   titleIconTooltip: String,
+  /** Object of CSS classes applied to the title bar wrapper. */
   titleClass: Object,
+  /** Remove the card border (transparent card style). */
   transparent: Boolean,
+  /** Apply a hover shadow to the card. */
   hover: Boolean,
+  /** Apply a persistent drop shadow to the card. */
   shadow: Boolean,
+  /** Reserved for a "no data" empty state (currently unused in the template). */
   noData: Boolean,
+  /** Description shown in the "no data" state (currently unused in the template). */
   noDataDescription: String
 })
 

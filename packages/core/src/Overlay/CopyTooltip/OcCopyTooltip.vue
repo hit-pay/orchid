@@ -2,11 +2,14 @@
 import { Icon, Tooltip } from '@/orchidui-core'
 
 defineProps({
+  /** The text or Blob data to copy to the clipboard when clicked. */
   value: [String, Blob],
+  /** Confirmation text shown in the tooltip after a successful copy. */
   tooltipText: {
     type: String,
     default: 'Copied!'
   },
+  /** Extra props forwarded to the inner Tooltip component (e.g. `placement`, `distance`). */
   tooltipOptions: Object
 })
 

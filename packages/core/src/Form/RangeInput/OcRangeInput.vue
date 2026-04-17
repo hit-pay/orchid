@@ -3,37 +3,46 @@ import { Input, Slider, BaseInput } from '@/orchidui-core'
 import { ref, onMounted } from 'vue'
 
 const props = defineProps({
+  /** Upper bound of the range. */
   maxLimit: {
     type: [String, Number],
     default: 10000
   },
+  /** Lower bound of the range. */
   minLimit: {
     type: [String, Number],
     default: 0
   },
+  /** Minimum gap enforced between the min and max handles. */
   minGap: {
     type: [String, Number],
     default: 0
   },
+  /** Current range value as `[min, max]` array (v-model). */
   modelValue: {
     type: [Array, String]
   },
+  /** Field label shown above the inputs. */
   label: {
     type: String,
     default: 'Amount'
   },
+  /** Helper text shown below the field. */
   hint: {
     type: String,
     default: ''
   },
+  /** Validation error message shown in red below the field. */
   errorMessage: {
     type: String,
     default: ''
   },
+  /** Hide the slider — show only the two text inputs. */
   onlyInput: Boolean
 })
 
 const emit = defineEmits({
+  /** Range value changed. Payload: `[min, max]` number array. */
   'update:modelValue': []
 })
 

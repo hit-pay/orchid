@@ -1,16 +1,21 @@
 <script setup>
 defineProps({
+  /** Array of tab option objects, each with `value` and `label` fields. */
   options: {
     type: Array,
     required: true
   },
+  /** Value of the currently selected option. */
   activeOption: {
     type: String,
     default: ''
   }
 })
 
-defineEmits(['select'])
+defineEmits({
+  /** A tab was clicked. Payload: the `value` of the selected option. */
+  select: null
+})
 </script>
 
 <template>

@@ -2,8 +2,14 @@
 import { Icon } from '@/orchidui-core'
 import { computed } from 'vue'
 defineProps({
+  /** Disable the button — no-click cursor and reduced opacity. */
   disabled: Boolean,
+  /** Render as the "Next" button (reversed chevron direction and label). */
   isNext: Boolean,
+  /**
+   * Size variant — controls padding and text size.
+   * @values default, small, big
+   */
   size: {
     type: String,
     default: 'default'

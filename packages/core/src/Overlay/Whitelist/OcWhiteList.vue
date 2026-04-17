@@ -2,16 +2,21 @@
 import { Button, Tag } from '@/orchidui-core'
 
 defineProps({
+  /** Props forwarded to the footer Button (label, variant, etc.). Defaults to `{ label: 'Request Access' }`. */
   buttonProps: {
     type: Object,
     default: () => ({})
   },
+  /** Props forwarded to the Tag component shown next to the title. Pass `null` to hide the tag. */
   tagOptions: {
     type: Object,
     default: () => null
   },
+  /** Card heading text shown below the logo. */
   title: String,
+  /** URL of the logo image rendered at the top of the card. Overridden by the `logo` slot. */
   imagePath: String,
+  /** Descriptive text shown below the title. */
   description: String
 })
 </script>

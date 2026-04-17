@@ -39,12 +39,19 @@
 
 <script setup>
 defineProps({
+  /** Sub-menu item label text. */
   label: String,
+  /** Mark this item as the currently active route. */
   isActive: Boolean,
+  /** Show a "BETA" badge next to the label. */
   isBeta: Boolean,
+  /** Show a "NEW" badge next to the label. */
   isNew: Boolean,
+  /** Show a "TRY IT" badge next to the label. */
   isTryIt: Boolean,
+  /** Whether the parent sidebar is in expanded mode (controls layout). */
   isExpanded: Boolean,
+  /** Show the badge (BETA / NEW / TRY IT) when true. */
   isShowBadge: {
     type: Boolean,
     default: true

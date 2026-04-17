@@ -59,10 +59,18 @@ import { Chip, Icon, Tooltip } from '@/orchidui-core'
 import { onUnmounted, ref } from 'vue'
 
 defineProps({
+  /**
+   * Array of data cell objects. Each item supports:
+   * `label` (String), `text` (String), `chip` (Object), `icon` (Object with Icon props),
+   * `isCopyButton` (Boolean), `tooltipContent` (String).
+   */
   items: Array,
 })
 
-const emit = defineEmits(['copy'])
+const emit = defineEmits({
+  /** Copy icon clicked. Payload: the `text` value of the copied cell. */
+  copy: null
+})
 
 let timeoutId = null
 

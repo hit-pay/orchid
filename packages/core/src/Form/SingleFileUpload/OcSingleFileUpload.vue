@@ -74,22 +74,22 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits([
+const emit = defineEmits({
   /** File selected or changed. Payload: `{ fileName, fileLink }` or array depending on format. */
-  'update:modelValue',
+  'update:modelValue': [],
   /** File was removed by the user. */
-  'onRemoveFile',
+  'onRemoveFile': [],
   /** Selected file exceeds the maxSize limit. */
-  'onExceedMaxFileSize',
+  'onExceedMaxFileSize': [],
   /** A file with the same name already exists. */
-  'fileExist',
+  'fileExist': [],
   /** Selected file extension does not match accept (requires validateAcceptFileType). */
-  'invalidFileType',
+  'invalidFileType': [],
   /** Fired instead of removing when confirmToRemove is true. Payload: (file, index). */
-  'confirmRemoveFile',
+  'confirmRemoveFile': [],
   /** Crop/edit button was clicked (isImageOnly + allowToEdit mode). */
-  'onOpenEditImage'
-])
+  'onOpenEditImage': []
+})
 
 const inputRef = ref()
 const fileLink = ref('')

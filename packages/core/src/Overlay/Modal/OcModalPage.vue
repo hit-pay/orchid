@@ -2,32 +2,45 @@
 import { Icon, Button } from '@/orchidui-core'
 
 const props = defineProps({
+  /** v-model — controls whether the full-page modal is visible. */
   modelValue: {
     type: Boolean,
     default: false
   },
+  /** Prevent the modal from closing when clicking the backdrop. */
   persistent: {
     type: Boolean,
     default: false
   },
+  /** Show the close (×) button in the top-right corner. */
   isCloseIconVisible: {
     type: Boolean,
     default: true
   },
+  /** Show a "Back" button in the top-left corner. Emits `back` when clicked. */
   isBackButtonVisible: {
     type: Boolean,
     default: false
   },
+  /** Block all close actions — backdrop clicks and the close button are ignored. */
   preventClose: {
     type: Boolean,
     default: false
   },
+  /** Extra CSS class applied to the inner content card container. */
   contentClass: {
     type: String,
     default: ''
   }
 })
-const emit = defineEmits(['update:modelValue', 'back', 'click:outside'])
+const emit = defineEmits({
+  /** Modal open state changed. Payload: new boolean value. */
+  'update:modelValue': [],
+  /** Back button was clicked. */
+  'back': [],
+  /** Backdrop was clicked. */
+  'click:outside': []
+})
 
 const closeModal = () => {
   if (props.preventClose) {

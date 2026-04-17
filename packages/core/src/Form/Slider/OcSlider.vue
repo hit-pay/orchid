@@ -2,27 +2,34 @@
 import { ref, onMounted } from 'vue'
 import { Input } from '@/orchidui-core'
 const props = defineProps({
+  /** Upper bound of the slider. */
   maxLimit: {
     type: Number,
     default: 100
   },
+  /** Lower bound of the slider. */
   minLimit: {
     type: Number,
     default: 0
   },
+  /** Minimum gap between the two handles in range mode. */
   minGap: {
     type: Number,
     default: 0
   },
+  /** Slider mode — `'default'` (single handle) or `'range'` (two handles). */
   type: {
     type: String,
     default: 'default'
   },
+  /** Current value — a single number for `'default'`, `[min, max]` for `'range'` (v-model). */
   modelValue: {
     type: [Array, Number, String],
     default: 0
   },
+  /** Label shown above the slider. */
   label: String,
+  /** Layout variant — `'default'` (full-width) or `'right'` (slider + input on the right). */
   variant: {
     type: String,
     default: 'default'
@@ -30,6 +37,7 @@ const props = defineProps({
 })
 
 const emit = defineEmits({
+  /** Slider value changed. Payload: number or `[min, max]` array depending on `type`. */
   'update:modelValue': []
 })
 
