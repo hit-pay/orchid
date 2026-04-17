@@ -19,9 +19,9 @@ defineProps({
 })
 defineEmits({
   /** "Add customer" button clicked inside the CustomerCard. */
-  addCustomer: [],
+  addCustomer: null,
   /** "Edit customer" action triggered. Payload: customer event data. */
-  editCustomer: []
+  editCustomer: null
 })
 </script>
 
