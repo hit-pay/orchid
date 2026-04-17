@@ -14,7 +14,7 @@ defineProps({
 
 defineEmits({
   /** A tab was clicked. Payload: the `value` of the selected option. */
-  select: []
+  select: null
 })
 </script>
 
