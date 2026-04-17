@@ -49,7 +49,7 @@ defineProps({
 
 defineEmits({
   /** Dropdown open state changed. Payload: new boolean value. */
-  'update:modelValue': []
+  'update:modelValue': null
 })
 
 const popperOptions = {

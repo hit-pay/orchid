@@ -4,17 +4,17 @@ import { SidebarHead, SideBarMenu, SidebarSubMenuItem, SidebarFooter } from '@/o
 
 const emit = defineEmits({
   /** Sidebar expanded/collapsed. Payload: new boolean state. */
-  changeExpanded: [],
+  changeExpanded: null,
   /** Sidebar icon was clicked. */
-  'click:sidebar-icon': [],
+  'click:sidebar-icon': null,
   /** Expanded menu list changed. Payload: array of currently expanded menu `name` values. */
-  changeExpandedMenus: [],
+  changeExpandedMenus: null,
   /** A menu or submenu item was clicked to navigate. Payload: the menu item object. */
-  redirect: [],
+  redirect: null,
   /** User avatar/name in the footer was clicked. */
-  'user-click': [],
+  'user-click': null,
   /** Support icon in the footer was clicked. */
-  'support-click': []
+  'support-click': null
 })
 
 const props = defineProps({

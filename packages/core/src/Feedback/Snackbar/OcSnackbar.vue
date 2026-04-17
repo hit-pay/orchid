@@ -91,7 +91,7 @@ const props = defineProps({
 })
 defineEmits({
   /** Snackbar dismissed. Payload: `false`. */
-  'update:modelValue': []
+  'update:modelValue': null
 })
 const colorClasses = Object.freeze({
   default: 'border-oc-success-200 bg-oc-success-50 text-oc-success-500',
