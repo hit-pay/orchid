@@ -16,7 +16,7 @@ defineProps({
 
 defineEmits({
   /** A step was clicked. Payload: zero-based index of the clicked step. */
-  'update:model-value': []
+  'update:model-value': null
 })
 </script>
 
