@@ -177,11 +177,11 @@ const props = defineProps({
 
 const emit = defineEmits({
   /** Child rows were toggled open/closed. */
-  toggleChildren: [],
+  toggleChildren: null,
   /** Row was clicked. Payload: click MouseEvent. */
-  click: [],
+  click: null,
   /** A specific column cell was clicked. Payload: `(row, header)`. */
-  'click:col': []
+  'click:col': null
 })
 
 const getStyleVariants = (header) => {
