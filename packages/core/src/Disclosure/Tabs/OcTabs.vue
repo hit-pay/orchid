@@ -3,22 +3,37 @@ import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import { Icon } from '@/orchidui-core'
 
 const props = defineProps({
+  /**
+   * Visual style of the tab bar.
+   * @values default, pills
+   */
   variant: {
     type: String,
     default: 'default',
     validator: (val) => ['default', 'pills'].includes(val)
   },
+  /** Array of tab objects, each with `value`, `label`, and optional `icon`, `count`, `class` fields. */
   tabs: Array,
+  /** v-model — value of the currently active tab. */
   modelValue: [String, Array],
+  /** Maximum count shown on badge before displaying `{maxCount}+`. */
   maxCount: Number,
+  /** Show left/right arrow buttons when tabs overflow the container. */
   isArrows: Boolean,
+  /** Disable all tab interactions. */
   isDisabled: Boolean,
+  /**
+   * Layout direction of the tab bar.
+   * @values horizontal, vertical
+   */
   direction: {
     type: String,
     default: 'horizontal',
     validator: (val) => ['horizontal', 'vertical'].includes(val)
   },
+  /** Stretch the tab bar to fill the full width of its container. */
   isFullWidth: Boolean,
+  /** Use larger text size for tab labels. */
   isBig: Boolean
 })
 
@@ -30,6 +45,7 @@ const tabWidth = 100
 const tabHeight = 35
 
 const emit = defineEmits({
+  /** Active tab changed. Payload: the `value` of the newly selected tab. */
   'update:modelValue': []
 })
 

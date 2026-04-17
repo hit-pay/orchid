@@ -2,18 +2,22 @@
 import { Chip, Icon } from '@/orchidui-core'
 
 defineProps({
+  /** Heading text shown in the card. */
   title: {
     type: String,
     default: 'Enter form manually'
   },
+  /** Props forwarded to the Chip shown next to the title. Pass `null` to hide. */
   chipOptions: {
     type: Object,
     default: null
   },
+  /** Icon name shown in the top-right corner when the card is active. */
   icon: {
     type: String,
     default: 'check-2'
   },
+  /** Show a primary border to indicate this option is selected. */
   isActive: {
     type: Boolean,
     default: false

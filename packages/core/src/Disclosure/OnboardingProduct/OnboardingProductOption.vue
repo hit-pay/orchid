@@ -41,23 +41,31 @@ const model = defineModel({
 })
 
 const props = defineProps({
+  /** URL of the product image displayed on the left side of the card. */
   productImageUrl: {
     type: String,
     required: true
   },
+  /** Show a checkbox that binds to the `modelValue` for selecting this option. */
   selectable: {
     type: Boolean,
     default: false
   },
+  /**
+   * Card size — controls image dimensions and border radius.
+   * @values small, medium
+   */
   size: {
     type: String,
     default: 'small',
     validator: (value) => ['small', 'medium'].includes(value)
   },
+  /** Product name shown at the top of the card. */
   title: {
     type: String,
     default: ''
   },
+  /** Supporting description text shown below the title. */
   description: {
     type: String,
     default: ''

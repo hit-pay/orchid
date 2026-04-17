@@ -5,44 +5,54 @@ import { Icon } from '@/orchidui-core'
 const upcomingAccordion = ref()
 
 const props = defineProps({
+  /** Heading text shown in the clickable accordion trigger (used when the `header` slot is empty). */
   header: {
     type: String,
     default: ''
   },
+  /** Extra CSS classes applied to the header trigger element. */
   headerStyle: {
     type: String,
     default: ''
   },
+  /** Body text shown when expanded (used when the `body` slot is empty). */
   body: {
     type: String,
     default: ''
   },
+  /** Extra CSS classes applied to the body content element. */
   bodyStyle: {
     type: String,
     default: ''
   },
+  /** Icon name shown on the right side of the header trigger. */
   icon: {
     type: String,
     default: 'chevron-down'
   },
+  /** Show the toggle icon in the header. */
   showIcon: {
     type: Boolean,
     default: true
   },
+  /** Animate the expand/collapse transition. */
   isAnimated: {
     type: Boolean,
     default: true
   },
+  /** v-model — controls whether the accordion body is expanded. */
   isExpandable: {
     type: Boolean,
     default: false
   },
+  /** Disable accordion interaction — clicking the header does nothing. */
   isDisabled: {
     type: Boolean,
     default: false
   }
 })
 defineEmits({
+  /** Header clicked. Payload: new expanded state (`true` = open, `false` = closed). */
   'update:isExpandable': []
 })
 

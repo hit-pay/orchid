@@ -2,12 +2,19 @@
 import { OverviewIcon } from '@/orchidui-core'
 
 defineProps({
+  /** Icon name passed to the OverviewIcon component. */
   icon: String,
+  /** Width of the icon in pixels. */
   width: String,
+  /** Height of the icon in pixels. */
   height: String,
+  /** Visual variant passed to the OverviewIcon component (controls background color). */
   variant: String,
+  /** Card heading text shown below the icon. */
   title: String,
+  /** Supporting description text shown below the title. */
   description: String,
+  /** Highlight the card with a primary border to indicate it is selected. */
   isActive: Boolean
 })
 </script>

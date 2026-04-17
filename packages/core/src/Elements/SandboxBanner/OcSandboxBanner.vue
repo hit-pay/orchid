@@ -2,14 +2,17 @@
 import { Chip, Button } from '@/orchidui-core'
 
 defineProps({
+  /** Text shown in the center of the banner bar. */
   title: {
     type: String,
     default: ''
   },
+  /** Props forwarded to the Chip shown on the left side. Pass `null` to hide. */
   chipProps: {
     type: Object,
     default: () => null
   },
+  /** Props forwarded to the Button shown on the right side. Pass `null` to hide. */
   buttonProps: {
     type: Object,
     default: () => null

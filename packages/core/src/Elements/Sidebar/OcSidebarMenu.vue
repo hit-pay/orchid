@@ -102,15 +102,25 @@ import { Icon, Tooltip } from '@/orchidui-core'
 import { clickOutside as vClickOutside } from '../../directives/clickOutside.js'
 
 const props = defineProps({
+  /** Icon name for this menu item. */
   icon: String,
+  /** Menu item label text. */
   label: String,
+  /** Mark this item (or any of its children) as the currently active route. */
   isActive: Boolean,
+  /** Whether the sidebar is in expanded (wide) mode. */
   isExpanded: Boolean,
+  /** Whether the children submenu is currently open. */
   isMenuExpanded: Boolean,
+  /** This item has children — shows the expand/collapse triangle icon. */
   isChildren: Boolean,
+  /** Show a "BETA" badge next to the label. */
   isBeta: Boolean,
+  /** Show a "NEW" badge next to the label. */
   isNew: Boolean,
+  /** Show a "TRY IT" badge next to the label. */
   isTryIt: Boolean,
+  /** Show the badge (BETA / NEW / TRY IT) when true. */
   isShowBadge: {
     type: Boolean,
     default: true
@@ -120,7 +130,10 @@ const props = defineProps({
 const menuItemRef = ref(null)
 const menuRef = ref(null)
 
-const emit = defineEmits(['close-menu'])
+const emit = defineEmits({
+  /** Collapsed sidebar floating submenu should be closed (click-outside). */
+  'close-menu': []
+})
 
 const onClickOutside = () => {
   if (props.isExpanded || !props.isMenuExpanded) return

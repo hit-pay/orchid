@@ -15,15 +15,20 @@
 
 <script setup>
 defineProps({
+  /** Tab object with `value`, `label`, and optional `logo` (image URL) fields. */
   tab: {
     type: Object,
     required: true
   },
+  /** v-model — value of the currently active tab. */
   modelValue: {
     type: String,
     required: true
   }
 })
 
-defineEmits(['update:modelValue'])
+defineEmits({
+  /** Tab clicked. Payload: the `value` of the clicked tab. */
+  'update:modelValue': []
+})
 </script>

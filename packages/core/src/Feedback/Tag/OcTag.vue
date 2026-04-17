@@ -1,9 +1,14 @@
 <script setup>
 defineProps({
+  /**
+   * Color variant of the tag.
+   * @values warning, accent-2
+   */
   variant: {
     type: String,
     default: 'warning'
   },
+  /** Text label displayed inside the tag. */
   label: {
     type: String,
     default: ''

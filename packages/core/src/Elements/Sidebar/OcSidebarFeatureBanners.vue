@@ -21,17 +21,26 @@
 <script setup>
 import { Icon } from '@/orchidui-core'
 defineProps({
+  /** Reserved for future stacked layout variant — not currently applied. */
   isStacked: {
     type: Boolean,
     default: false
   },
+  /** Feature name shown in the card header. */
   title: {
     type: String,
     default: ''
   },
+  /** Supporting description text shown below the title. */
   description: {
     type: String,
     default: ''
   }
+})
+defineEmits({
+  /** ✕ close icon clicked — banner should be dismissed. */
+  close: [],
+  /** Arrow icon clicked — user wants to navigate to the feature. */
+  redirect: []
 })
 </script>

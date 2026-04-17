@@ -1,9 +1,13 @@
 <script setup>
 import { Icon } from '@/orchidui-core'
 defineProps({
+  /** When true, shows a "Back" link. When false, shows an "Unsaved changes" notice. */
   isSaved: Boolean
 })
-defineEmits(['back'])
+defineEmits({
+  /** Back link was clicked. */
+  back: []
+})
 </script>
 <template>
   <div class="flex items-center">

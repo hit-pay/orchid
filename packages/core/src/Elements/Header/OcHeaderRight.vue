@@ -1,13 +1,21 @@
 <script setup>
 import { Button } from '@/orchidui-core'
-const emit = defineEmits(['save', 'cancel'])
+const emit = defineEmits({
+  /** Save button clicked. */
+  save: [],
+  /** Cancel button clicked. */
+  cancel: []
+})
 defineProps({
+  /** Props forwarded to the primary Save button. */
   primaryProps: {
     type: Object
   },
+  /** Props forwarded to the secondary Cancel button. */
   secondaryProps: {
     type: Object
   },
+  /** Show the secondary Cancel button. */
   isSecondaryButtonVisible: {
     type: Boolean,
     default: true
