@@ -30,11 +30,8 @@ COPY . .
 # Ensure output directories exist
 RUN mkdir -p /app/public/json /app/public/raw
 
-# Build JSON from /packages source
-RUN cd json && npm run build
-
 # Build docs from root
-RUN npm run build:docs
+RUN npm run build:json
 
 
 # =========================
