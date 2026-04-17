@@ -26,7 +26,7 @@ function propTable(props) {
     meta.push(`**Type:** \`${p.type ?? 'any'}\``)
     if (p.required) meta.push('**Required**')
     if (p.default !== undefined && p.default !== '') meta.push(`**Default:** \`${p.default}\``)
-    if (p.values?.length) meta.push(`**Values:** ${p.values.map(v => `\`${v}\``).join(' | ')}`)
+    if (p.values?.length) meta.push(`**Values:** ${p.values.map((v) => `\`${v}\``).join(' | ')}`)
     lines.push(`#### \`${name}\``)
     lines.push('')
     lines.push(meta.join(' · '))
@@ -41,10 +41,7 @@ function propTable(props) {
 
 function eventTable(events) {
   if (!events || !Object.keys(events).length) return ''
-  const rows = [
-    '| Event | Type | Description |',
-    '|-------|------|-------------|',
-  ]
+  const rows = ['| Event | Type | Description |', '|-------|------|-------------|']
   for (const [name, e] of Object.entries(events)) {
     rows.push(`| ${name} | ${e.type ?? ''} | ${(e.description ?? '').replace(/\n/g, ' ')} |`)
   }
@@ -53,10 +50,7 @@ function eventTable(events) {
 
 function slotTable(slots) {
   if (!slots || !Object.keys(slots).length) return ''
-  const rows = [
-    '| Slot | Bindings | Description |',
-    '|------|----------|-------------|',
-  ]
+  const rows = ['| Slot | Bindings | Description |', '|------|----------|-------------|']
   for (const [name, s] of Object.entries(slots)) {
     const bindings = s.type && s.type !== '{}' ? s.type.replace(/\n/g, ' ') : ''
     rows.push(`| ${name} | ${bindings} | ${(s.description ?? '').replace(/\n/g, ' ')} |`)
@@ -67,10 +61,7 @@ function slotTable(slots) {
 // ─── Per-example .md ─────────────────────────────────────────────────────────
 
 function buildExampleMd(compName, ex) {
-  const lines = [
-    `# ${compName} — ${ex.title}`,
-    '',
-  ]
+  const lines = [`# ${compName} — ${ex.title}`, '']
   if (ex.description) lines.push(`> ${ex.description}`, '')
 
   if (ex.highlights?.length) {
@@ -95,7 +86,7 @@ function buildComponentMd(comp, detail, exampleFiles) {
     `# ${comp.name}`,
     '',
     `> ${comp.description ?? `OrchidUI ${comp.name} component.`}`,
-    '',
+    ''
   ]
 
   const meta = []
@@ -120,7 +111,7 @@ function buildComponentMd(comp, detail, exampleFiles) {
   }
 
   // Sort example files by JSON-defined order, fallback to alphabetical
-  const jsonOrder = (detail.examples ?? []).map(e => e.id)
+  const jsonOrder = (detail.examples ?? []).map((e) => e.id)
   const sortedFiles = [...exampleFiles].sort((a, b) => {
     const aId = path.basename(a, '.json').replace(`${comp.name}.`, '')
     const bId = path.basename(b, '.json').replace(`${comp.name}.`, '')
@@ -153,7 +144,7 @@ function buildComponentMd(comp, detail, exampleFiles) {
         const lang = ex.code?.language ?? 'vue'
         lines.push(`\`\`\`${lang}`, snippet, '```')
       }
-      lines.push(`[Full example](/raw/docs/examples/${slug}.md)`, '')
+      lines.push(`[Full example](https://orchidui.vercel.app/raw/docs/examples/${slug}.md)`, '')
     }
 
     if (linked.length) {
@@ -161,7 +152,9 @@ function buildComponentMd(comp, detail, exampleFiles) {
       for (const f of linked) {
         const e = readJson(path.join(COMPONENTS_DIR, f))
         const eSlug = exampleSlug(comp.name, e.id)
-        lines.push(`- [${e.title}](/raw/docs/examples/${eSlug}.md)${e.description ? ` — ${e.description}` : ''}`)
+        lines.push(
+          `- [${e.title}](https://orchidui.vercel.app/raw/docs/examples/${eSlug}.md)${e.description ? ` — ${e.description}` : ''}`
+        )
         if (e.highlights?.length) {
           for (const h of e.highlights) lines.push(`  - ${h}`)
         }
@@ -217,18 +210,16 @@ function generateRawDocs(allComponents) {
     const detail = readJson(detailFile)
 
     const prefix = comp.name + '.'
-    const exampleFiles = fs.readdirSync(COMPONENTS_DIR)
-      .filter(f => f.startsWith(prefix) && !f.endsWith('.detail.json'))
+    const exampleFiles = fs
+      .readdirSync(COMPONENTS_DIR)
+      .filter((f) => f.startsWith(prefix) && !f.endsWith('.detail.json'))
       .sort()
 
     // Write per-example .md
     for (const f of exampleFiles) {
       const ex = readJson(path.join(COMPONENTS_DIR, f))
       const slug = exampleSlug(comp.name, ex.id)
-      fs.writeFileSync(
-        path.join(RAW_EXAMPLES_DIR, `${slug}.md`),
-        buildExampleMd(comp.name, ex)
-      )
+      fs.writeFileSync(path.join(RAW_EXAMPLES_DIR, `${slug}.md`), buildExampleMd(comp.name, ex))
       exCount++
     }
 
@@ -247,7 +238,7 @@ function generateRawDocs(allComponents) {
 // ─── llms.txt ────────────────────────────────────────────────────────────────
 
 function componentSection(comp) {
-  const url = `/raw/docs/components/${comp.name}.md`
+  const url = `https://orchidui.vercel.app/raw/docs/components/${comp.name}.md`
   const desc = comp.description ?? `OrchidUI ${comp.name} component.`
   return `- [${comp.name}](${url}): ${desc}`
 }
@@ -280,7 +271,7 @@ function buildLlmsTxt(coreIndex, dashIndex) {
     '',
     `## @orchidui/dashboard (${dashIndex.total} components)`,
     '',
-    ...dashIndex.components.map(componentSection),
+    ...dashIndex.components.map(componentSection)
   ].join('\n')
 }
 
@@ -292,19 +283,20 @@ function fullComponentSection(comp) {
 
   const detail = readJson(detailFile)
   const prefix = comp.name + '.'
-  const exampleFiles = fs.readdirSync(COMPONENTS_DIR)
-    .filter(f => f.startsWith(prefix) && !f.endsWith('.detail.json'))
+  const exampleFiles = fs
+    .readdirSync(COMPONENTS_DIR)
+    .filter((f) => f.startsWith(prefix) && !f.endsWith('.detail.json'))
     .sort()
 
   const content = buildComponentMd(comp, detail, exampleFiles)
     .replace(/^# /, '## ')
-    .replace(/^## /gm, (_, o) => o === 0 ? '## ' : '### ')
+    .replace(/^## /gm, (_, o) => (o === 0 ? '## ' : '### '))
 
   const refs = [
     '### Reference',
     '',
-    `- [Component doc](/raw/docs/components/${comp.name}.md)`,
-    '',
+    `- [Component doc](https://orchidui.vercel.app/raw/docs/components/${comp.name}.md)`,
+    ''
   ].join('\n')
 
   return content + refs
@@ -338,7 +330,7 @@ function buildLlmsFullTxt(coreIndex, dashIndex) {
     '',
     `# @orchidui/dashboard (${dashIndex.total} components)`,
     '',
-    ...dashIndex.components.map(fullComponentSection),
+    ...dashIndex.components.map(fullComponentSection)
   ].join('\n')
 }
 
