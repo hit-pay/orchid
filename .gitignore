@@ -28,4 +28,12 @@ dist
 # storybook
 public/storybook
 
-public/docs
+# Database
+public/json
+
+# LLMS
+public/llms.txt
+public/llms-full.txt
+public/raw
+
+# MCP

@@ -3,26 +3,41 @@ import { Button, FormBuilder } from '@/orchidui-core'
 import { ref, computed, onMounted } from 'vue'
 
 const props = defineProps({
+  /** Unique ID passed to the inner FormBuilder instance. */
   id: {
     type: String,
     required: true
   },
+  /** FormBuilder field config array. Same shape as `FormBuilder.jsonForm`. */
   jsonForm: {
     type: Array
   },
+  /** Initial form values. Merged into local state on mount. */
   values: {
     type: Object
   },
+  /**
+   * Override labels for the action buttons.
+   * Shape: `{ applyButton: { label }, cancelButton: { label } }`.
+   */
   actions: {
     type: Object
   },
+  /** Optional responsive grid layout passed to the inner FormBuilder. */
   grid: {
     type: Object,
     default: null
   }
 })
 
-const emit = defineEmits(['applyFilter', 'cancel', 'filter-fields-changed'])
+const emit = defineEmits({
+  /** Apply button clicked. Payload: current form values object. */
+  applyFilter: [],
+  /** Cancel button clicked. */
+  cancel: [],
+  /** Tracks which fields were changed before Apply. Payload: array of changed field names. */
+  'filter-fields-changed': []
+})
 
 // State
 const valuesData = ref({})

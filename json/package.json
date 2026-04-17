@@ -1,0 +1,18 @@
+{
+  "name": "orchidui-build-docs",
+  "version": "1.0.0",
+  "description": "Build static component documentation JSON for OrchidUI",
+  "type": "module",
+  "scripts": {
+    "build": "node build-docs.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "express": "^5.2.1",
+    "fast-glob": "^3.3.1",
+    "typescript": "^5.0.0",
+    "vue-component-meta": "^2.2.0",
+    "zod": "^4.3.6"
+  }
+}

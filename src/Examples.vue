@@ -110,22 +110,22 @@ const args = {
     <div class="grid items-center flex-wrap content-center">
       <div class="w-full flex flex-wrap gap-5 items-center mb-5">
         <Button left-icon="x" />
-        <Button left-icon="x" rightIcon="circle" label="Button" />
-        <Button label="Button" isDisabled />
-        <Button label="Button" isLoading />
-        <Button label="Button" isTransparent />
+        <Button left-icon="x" right-icon="circle" label="Button" />
+        <Button label="Button" is-disabled />
+        <Button label="Button" is-loading />
+        <Button label="Button" is-transparent />
       </div>
       <div class="w-full flex flex-wrap gap-5 items-center mb-5">
         <Button variant="secondary" left-icon="x" />
-        <Button variant="secondary" left-icon="x" rightIcon="circle" label="Button" />
+        <Button variant="secondary" left-icon="x" right-icon="circle" label="Button" />
         <Button variant="secondary" label="Button" is-disabled />
-        <Button variant="secondary" label="Button" isLoading />
-        <Button variant="secondary" label="Button" isTransparent />
+        <Button variant="secondary" label="Button" is-loading />
+        <Button variant="secondary" label="Button" is-transparent />
       </div>
       <div class="lg:w-1/2 mb-3">
         <DatePicker class="mb-3" />
         <Accordion
-          v-model:isExpandable="isOpen"
+          v-model:is-expandable="isOpen"
           :header="args.header"
           :header-style="'bg-oc-gray-50'"
           :body="args.body"

@@ -3,7 +3,16 @@ import { ref } from 'vue'
 
 export default {
   component: Modal,
-  tags: ['autodocs']
+  tags: ['autodocs'],
+  kind: 'composite',
+  use_for: [
+    'create dialog',
+    'edit dialog',
+    'detail overlay',
+    'confirmation prompt',
+    'form inside a modal'
+  ],
+  understand_with: ['FormBuilder', 'Button', 'ConfirmationModal', 'FloatContent']
 }
 
 export const Default = {

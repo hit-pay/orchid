@@ -18,7 +18,14 @@ import OcAccountSetup from './OcAccountSetup.vue'
 
 export default {
   component: Sidebar,
-  tags: ['autodocs']
+  tags: ['autodocs'],
+  kind: 'composite',
+  use_for: [
+    'app navigation',
+    'main sidebar menu',
+    'side navigation with submenus'
+  ],
+  understand_with: ['SideBarMenu', 'SidebarSubmenu', 'SidebarFooter', 'SidebarFeatureBanners', 'AccountSetupProgress', 'Icon']
 }
 
 export const Default = {

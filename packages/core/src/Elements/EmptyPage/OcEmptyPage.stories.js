@@ -2,7 +2,15 @@ import { EmptyPage } from '@/orchidui-core'
 
 export default {
   component: EmptyPage,
-  tags: ['autodocs']
+  tags: ['autodocs'],
+  kind: 'leaf',
+  use_for: [
+    'empty state placeholder',
+    'no data yet state',
+    'zero state with call-to-action button',
+    'search no results state',
+    'feature upgrade prompt'
+  ]
 }
 
 export const Default = {

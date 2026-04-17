@@ -4,6 +4,14 @@ import { ref } from 'vue'
 export default {
   component: Dropdown,
   tags: ['autodocs'],
+  kind: 'composite',
+  use_for: [
+    'context menu',
+    'row actions menu',
+    'options dropdown',
+    'action menu trigger'
+  ],
+  understand_with: ['DropdownItem', 'Button', 'Icon'],
   parameters: {
     docs: {
       description: {

@@ -4,6 +4,15 @@ import { ref } from 'vue'
 export default {
   component: Input,
   tags: ['autodocs'],
+  kind: 'leaf',
+  use_for: [
+    'text input field',
+    'password input with toggle',
+    'search input',
+    'numeric or decimal input',
+    'input with currency prefix',
+    'input with prefix or suffix slot'
+  ],
   parameters: {
     docs: {
       description: {
