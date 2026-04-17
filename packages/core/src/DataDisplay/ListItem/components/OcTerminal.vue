@@ -2,22 +2,33 @@
 import { Chip, Button } from '@/orchidui-core'
 
 defineProps({
+  /** Terminal name/model text shown next to the image. */
   title: String,
+  /** URL of the terminal product image. */
   image: String,
+  /** Extra CSS class applied to the `<img>` element. */
   imageClass: String,
+  /**
+   * Controls the width of the image container.
+   * @values small, medium, large
+   */
   imageSize: {
     type: String,
     default: 'medium'
   },
+  /** Small description text shown below the title (displayed in uppercase). */
   description: String,
+  /** Array of Chip props rendered next to the title. */
   chips: {
     type: Array,
     default: () => []
   },
+  /** Props forwarded to an optional action Button on the right. Pass `null` to hide. */
   buttonProps: {
     type: Object,
     default: () => null
   },
+  /** Disable the hover shadow on the card. */
   isDisabled: Boolean
 })
 

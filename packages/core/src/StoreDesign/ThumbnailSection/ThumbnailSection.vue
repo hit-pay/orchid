@@ -1,9 +1,15 @@
 <script setup>
 import { Button } from '@/orchidui-core'
 defineProps({
+  /** Section data object with fields: `preview` (image URL), `title` (String). */
   section: Object
 })
-defineEmits(['add', 'customize'])
+defineEmits({
+  /** "Add" button clicked. Payload: the section object. */
+  add: [],
+  /** "Customize" button clicked. Payload: the section object. */
+  customize: []
+})
 </script>
 <template>
   <div class="flex flex-col">

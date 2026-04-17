@@ -3,23 +3,32 @@ import { PrevNext, PaginationNumber } from '@/orchidui-core'
 import { computed } from 'vue'
 
 const props = defineProps({
+  /** Total number of pages. */
   maxPage: {
     type: [String, Number],
     default: 1
   },
+  /** Maximum number of page number buttons to show at once (minimum 3). */
   totalVisible: {
     type: [String, Number],
     default: 1,
     validator: (value) => Number(value)
   },
+  /** v-model — the currently active page number (1-based). */
   modelValue: {
     type: [String, Number],
     default: 1
   },
+  /** Use fully rounded (pill/circle) page number buttons. */
   isRounded: Boolean,
+  /**
+   * Size variant passed to PrevNext and PaginationNumber.
+   * @values default, small, big
+   */
   size: String
 })
 defineEmits({
+  /** Active page changed. Payload: the new page number. */
   'update:modelValue': []
 })
 const pagination = computed(() => {

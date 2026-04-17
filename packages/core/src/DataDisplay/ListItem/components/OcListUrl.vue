@@ -2,8 +2,11 @@
 import { Icon, CopyTooltip } from '@/orchidui-core'
 
 defineProps({
+  /** Label shown before the colon (e.g. `'Webhook URL'`). */
   title: String,
+  /** The URL string displayed and optionally copied to clipboard. */
   url: String,
+  /** Show a copy-to-clipboard icon next to the URL. */
   isCopy: {
     type: Boolean,
     default: true

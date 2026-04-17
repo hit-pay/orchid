@@ -66,17 +66,18 @@ const props = defineProps({
   modelValue: Boolean
 })
 
-const emit = defineEmits([
-  /** @deprecated Use #menu slot with DropdownItem instead. */
-  'more',
-  /** @deprecated Use #menu slot with DropdownItem instead. */
-  'edit',
-  /** @deprecated Use #menu slot with DropdownItem instead. */
-  'delete',
-  'click:item',
-  /** Emitted when accordion open/closed state changes. */
-  'update:modelValue'
-])
+const emit = defineEmits({
+  /** @deprecated Use the `#menu` slot with DropdownItem instead. */
+  more: [],
+  /** @deprecated Use the `#menu` slot with DropdownItem instead. */
+  edit: [],
+  /** @deprecated Use the `#menu` slot with DropdownItem instead. */
+  delete: [],
+  /** List item row was clicked. */
+  'click:item': [],
+  /** Accordion open/closed state changed. Payload: new boolean value. */
+  'update:modelValue': []
+})
 
 const getTypeComponent = computed(() => {
   switch (props.type) {

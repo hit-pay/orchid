@@ -3,18 +3,25 @@ import { Icon } from '@/orchidui-core'
 import { computed } from 'vue'
 
 defineProps({
+  /** Icon name passed to the Icon component. */
   icon: {
     type: String,
     default: 'circle'
   },
+  /**
+   * Color variant for the icon background and text color.
+   * @values gray, orange, red, green, accent, blue
+   */
   variant: {
     type: String,
     default: 'blue'
   },
+  /** Width of the icon in pixels. */
   width: {
     type: String,
     default: '22'
   },
+  /** Height of the icon in pixels. */
   height: {
     type: String,
     default: '22'

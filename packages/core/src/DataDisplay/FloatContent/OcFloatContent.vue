@@ -3,23 +3,33 @@ import { CopyTooltip, Dropdown, DropdownItem, Icon } from '@/orchidui-core'
 import { ref } from 'vue'
 
 const props = defineProps({
+  /** v-model — controls whether the fly-out panel is visible. */
   modelValue: {
     type: Boolean,
     default: false
   },
+  /** Show the ✕ close icon in the panel header. */
   isClose: {
     type: Boolean,
     default: true
   },
+  /** Panel title text shown in the sticky header. */
   title: String,
+  /** Description text shown below the title (with a copy icon). */
   description: String,
+  /** Dropdown config object with `top` and optional `bottom` arrays of DropdownItem props. */
   dropdownOptions: {
     type: Object
   },
+  /** Extra props forwarded to the Dropdown component. */
   dropdownProps: {
     type: Object,
     default: () => ({})
   },
+  /**
+   * Which side of the screen the panel slides in from.
+   * @values left, right
+   */
   position: {
     type: String,
     validator: (v) => ['left', 'right'].includes(v),
@@ -27,7 +37,10 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['update:model-value'])
+const emit = defineEmits({
+  /** Panel closed. Payload: `false`. */
+  'update:model-value': []
+})
 
 const isOpen = ref(false)
 </script>

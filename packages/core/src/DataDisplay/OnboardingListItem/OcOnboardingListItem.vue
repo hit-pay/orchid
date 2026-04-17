@@ -2,26 +2,35 @@
 import { Button, Icon } from '@/orchidui-core'
 
 defineProps({
+  /** Step heading text. */
   title: {
     type: String,
     default: ''
   },
+  /** Supporting description text shown below the title. */
   description: {
     type: String,
     default: ''
   },
+  /** Props forwarded to the action Button on the right. */
   buttonOptions: {
     type: Object,
     default: () => ({})
   },
+  /**
+   * Completion status — controls the icon shown in the circle indicator.
+   * @values completed, pending
+   */
   status: {
     type: String,
     default: ''
   },
+  /** Step number shown in the circle indicator when status is neither completed nor pending. */
   number: {
     type: Number,
     default: 1
   },
+  /** Show the action button. */
   isButtonVisible: {
     type: Boolean,
     default: true

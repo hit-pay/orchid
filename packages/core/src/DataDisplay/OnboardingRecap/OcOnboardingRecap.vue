@@ -2,13 +2,24 @@
 import { Icon, Button } from '@/orchidui-core'
 
 defineProps({
+  /** Card heading text shown in the header. */
   title: String,
+  /** Supporting subtitle text (reserved for future use). */
   subtitle: String,
+  /**
+   * State icon shown next to the header button when set.
+   * @values completed
+   */
   state: String,
+  /** Props forwarded to the optional header Button shown on hover. */
   headerButton: Object,
+  /** Array of detail items rendered in a 2-column grid. Each: `{ label, value }`. */
   items: Array,
+  /** Hide the header section entirely. */
   noHeader: Boolean,
+  /** Remove the card border and adjust padding (flat style). */
   flat: Boolean,
+  /** Extra CSS class applied to the content area. */
   contentClasses: String,
 });
 

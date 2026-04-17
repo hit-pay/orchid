@@ -3,24 +3,35 @@ import { Icon, CopyTooltip } from '@/orchidui-core'
 import { computed } from 'vue'
 
 const props = defineProps({
+  /** Label text shown on the left (or top in vertical alignment). */
   label: {
     type: String,
     default: ''
   },
+  /** Content value shown on the right — also used as the clipboard copy value. */
   content: {
     type: String,
     default: ''
   },
+  /**
+   * Size variant — controls label column width and content font size.
+   * @values small, big
+   */
   variant: {
     type: String,
     default: 'small',
     validator: (val) => ['small', 'big'].includes(val)
   },
+  /**
+   * Layout direction.
+   * @values horizontal, vertical
+   */
   alignment: {
     type: String,
     default: 'horizontal',
     validator: (val) => ['horizontal', 'vertical'].includes(val)
   },
+  /** Show a copy-to-clipboard icon next to the label. */
   showCopyTooltip: {
     type: Boolean,
     default: true
