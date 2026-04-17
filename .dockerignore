@@ -1,0 +1,11 @@
+node_modules
+mcp-server/node_modules
+packages
+src
+public/storybook
+public/icons
+public/images
+public/lottie-animation
+public/llms*.txt
+.git
+*.log
