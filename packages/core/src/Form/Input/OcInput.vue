@@ -147,16 +147,16 @@ const props = defineProps({
   }
 })
 
-defineEmits([
+defineEmits({
   /** Input value changed. Payload: new string value. */
-  'update:modelValue',
+  'update:modelValue': [],
   /** Input lost focus. */
-  'blur',
+  'blur': [],
   /** Input gained focus. */
-  'focus',
+  'focus': [],
   /** Paste event fired. Payload: ClipboardEvent. */
-  'paste'
-])
+  'paste': []
+})
 
 const attrs = useAttrs()
 

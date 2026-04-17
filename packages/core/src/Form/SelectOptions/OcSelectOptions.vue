@@ -4,43 +4,60 @@ import { BaseInput, Icon } from '@/orchidui-core'
 import { computed } from 'vue'
 
 const props = defineProps({
+  /** Use smaller image thumbnails in the option cards. */
   isSmallImage: Boolean,
+  /** Layout variant — `'grid'` (3-column), `'list'`, or `'list2'` (2-column). */
   variant: {
     type: String,
     default: 'grid'
   },
+  /** Type of content inside each option card — `'text'`, `'icon'`, or `'image'`. */
   optionType: {
     type: String,
     default: 'text' // text, icon, image
   },
+  /** Field label shown above the option grid. */
   label: String,
+  /** Helper text shown below the field. */
   hint: String,
+  /** Validation error message shown in red below the field. */
   errorMessage: String,
+  /** Placeholder — currently unused but reserved for future use. */
   placeholder: String,
+  /** Disable all options — non-interactive, grayed out. */
   isDisabled: Boolean,
+  /** Remove option borders and use a check-mark indicator instead. */
   borderless: Boolean,
+  /** Array of option objects — each with `value`, `label`, `preview`, and `description` keys. */
   options: Array,
+  /** Currently selected option value (v-model). */
   modelValue: [Array, String, Number],
+  /** Mark the field as required — shows a `*` indicator next to the label. */
   isRequired: {
     type: Boolean,
     default: false
   },
+  /** Icon name rendered in the label area as a tooltip trigger. */
   labelIcon: {
     type: String,
     default: ''
   },
+  /** Text shown in the tooltip when hovering `labelIcon`. */
   tooltipText: {
     type: String,
     default: ''
   },
+  /** Props forwarded to the Tooltip component on the label icon. */
   tooltipOptions: {
     type: Object,
     default: () => ({})
   },
+  /** CSS class applied to the options grid container. */
   class: String
 })
 
 const emit = defineEmits({
+  /** Selected option changed. Payload: new value. */
   'update:modelValue': []
 })
 

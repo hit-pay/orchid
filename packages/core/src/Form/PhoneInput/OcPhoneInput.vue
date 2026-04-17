@@ -5,44 +5,60 @@ import { preventEventIfNotNumberInput } from '@/orchidui-core/composables/helper
 import { parsePhoneNumber } from 'libphonenumber-js'
 
 const props = defineProps({
+  /** List of country objects — each with `code`, `iso`, and `country` keys. */
   countryCodes: { type: Array, default: () => [] },
+  /** ISO country code pre-selected on mount (e.g. `'sg'`, `'us'`). */
   initialCountryCode: {
     type: String,
     default: 'sg'
   },
+  /** Validation error message shown in red below the input. */
   errorMessage: String,
+  /** Current value as `[countryCode, phoneNumber]` tuple (v-model). */
   modelValue: {
     type: Array,
     default: () => ['sg', '']
   },
+  /** Placeholder text shown in the phone number input when empty. */
   placeholder: String,
+  /** Helper text shown below the input. */
   hint: String,
+  /** Field label shown above the input. */
   label: String,
+  /** Compact inline label — label text appears inside the input box before the value. */
   isInlineLabel: Boolean,
+  /** Disable the input — non-interactive, grayed out. */
   isDisabled: Boolean,
+  /** Automatically parse and split a pasted number into country code + national number. */
   shouldParseCountryCode: Boolean,
+  /** Mark the field as required — shows a `*` indicator next to the label. */
   isRequired: {
     type: Boolean,
     default: false
   },
+  /** Icon name rendered in the label area as a tooltip trigger. */
   labelIcon: {
     type: String,
     default: ''
   },
+  /** Text shown in the tooltip when hovering `labelIcon`. */
   tooltipText: {
     type: String,
     default: ''
   },
+  /** Props forwarded to the Tooltip component on the label icon. */
   tooltipOptions: {
     type: Object,
     default: () => ({})
   },
+  /** AI-assisted state — shows a subtle accent border indicating AI-filled content. */
   ai: {
     type: Boolean,
     default: false
   }
 })
 const emit = defineEmits({
+  /** Phone value changed. Payload: `[countryCode, phoneNumber]` tuple. */
   'update:modelValue': []
 })
 
