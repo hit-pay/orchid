@@ -69,7 +69,7 @@ defineProps({
 
 const emit = defineEmits({
   /** Copy icon clicked. Payload: the `text` value of the copied cell. */
-  copy: []
+  copy: null
 })
 
 let timeoutId = null
