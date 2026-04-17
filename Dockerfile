@@ -5,34 +5,40 @@ FROM node:22-slim AS builder
 
 WORKDIR /app
 
-# Copy root package (for build:docs)
+# Copy root package files first for better layer caching
 COPY package.json package-lock.json* ./
 
-# Install root dependencies (needed for build:docs)
+# Install root dependencies
 RUN npm install
 
-# Copy JSON builder package
+# Copy JSON builder package files
 COPY json/package.json ./json/
 COPY json/package-lock.json* ./json/
 
-# Install dependencies for JSON builder
+# Install JSON builder dependencies
 RUN cd json && npm install
 
-# Copy full project source
+# Copy packages source before running JSON build
+COPY packages ./packages
+
+# Copy JSON source files
+COPY json ./json
+
+# Copy any remaining project files needed by root build:docs
 COPY . .
 
 # Ensure output directories exist
 RUN mkdir -p /app/public/json /app/public/raw
 
-# Step 1: build JSON
+# Build JSON from /packages source
 RUN cd json && npm run build
 
-# Step 2: build docs from root
+# Build docs from root
 RUN npm run build:docs
 
 
 # =========================
-# Stage 2: Runtime (MCP Server)
+# Stage 2: Runtime
 # =========================
 FROM node:22-slim AS runner
 
@@ -41,7 +47,7 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV PORT=8080
 
-# Copy MCP server package
+# Copy MCP server package files
 COPY mcp-server/package.json ./mcp-server/
 COPY mcp-server/package-lock.json* ./mcp-server/
 
@@ -51,7 +57,7 @@ RUN cd mcp-server && npm install --omit=dev
 # Copy MCP server source
 COPY mcp-server/server.js ./mcp-server/
 
-# Copy final build output (IMPORTANT: same path as runtime expects)
+# Copy generated output
 COPY --from=builder /app/public/json ./public/json
 COPY --from=builder /app/public/raw ./public/raw
 
