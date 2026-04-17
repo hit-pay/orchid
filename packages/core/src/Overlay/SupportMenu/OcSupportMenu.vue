@@ -2,38 +2,55 @@
 import { Dropdown, Icon, DropdownItem } from '@/orchidui-core'
 
 defineProps({
+  /** v-model — controls whether the support menu dropdown is open. */
   modelValue: {
     type: Boolean,
     default: false
   },
+  /** Heading text shown at the top of the menu panel. */
   title: {
     type: String,
     default: 'Have a question?'
   },
+  /** Subtitle text shown below the heading. */
   info: {
     type: String,
     default: "We're ready to guide you through anything you need!"
   },
+  /** Props forwarded to the primary confirm Button in the menu panel. */
   confirmButtonProps: {
     type: Object,
     default: () => ({})
   },
+  /**
+   * Top section menu groups. Each group: `{ title, items: [DropdownItem props] }`.
+   * Items support all DropdownItem props plus `isLoading`.
+   */
   topMenu: {
     type: Array,
     default: () => []
   },
+  /**
+   * Bottom section menu items (below the divider). Array of DropdownItem props.
+   * Items support all DropdownItem props plus `isLoading`.
+   */
   bottomMenu: {
     type: Array,
     default: () => []
   },
+  /** Props forwarded to the floating question mark trigger button. */
   questionBtnProps: {
     type: Object,
     default: () => ({})
   },
+  /** Show a red dot indicator on the trigger button (e.g. for unread notifications). */
   isPointed: Boolean
 })
 
-defineEmits(['update:modelValue'])
+defineEmits({
+  /** Dropdown open state changed. Payload: new boolean value. */
+  'update:modelValue': []
+})
 
 const popperOptions = {
   arrowHidden: true

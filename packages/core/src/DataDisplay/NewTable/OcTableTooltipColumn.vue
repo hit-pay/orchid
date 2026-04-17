@@ -3,10 +3,12 @@ import { Tooltip } from '@/orchidui-core'
 import { onMounted, ref, nextTick } from 'vue'
 
 const props = defineProps({
+  /** Column header definition — must have `key` and `variant: 'tooltip'`. */
   header: {
     required: true,
     type: Object
   },
+  /** Row data object — the cell value is read from `row[header.key]`. */
   row: {
     required: true,
     type: Object

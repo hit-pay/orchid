@@ -3,39 +3,49 @@ import { Icon, ExpandingTableRow, Tooltip, Skeleton } from '@/orchidui-core'
 import { ref, computed } from 'vue'
 
 defineProps({
+  /** Row data object — keys should match header keys. May include `children` and `infoText`. */
   row: Object,
+  /** Nesting depth — incremented for each level of child rows. Controls background shading. */
   depth: {
     type: Number,
     default: 0
   },
+  /** Cell value for the key/value layout mode (non-`isAlternative`). */
   value: {
     type: [String, Number, Date, Object],
     default: 0
   },
+  /** Column header definitions passed down for `isAlternative` grid layout. */
   headers: {
     type: Array,
     default: () => []
   },
+  /** Render the row in bold/medium weight. */
   important: {
     type: Boolean,
     default: false
   },
+  /** Render as the summary total row — dark background, white text. */
   isTotal: {
     type: Boolean,
     default: false
   },
+  /** Use multi-column grid layout (mirrors the parent `isAlternative` prop). */
   isAlternative: {
     type: Boolean,
     default: false
   },
+  /** Show skeleton cells while data is loading (alternative mode only). */
   isLoading: {
     type: Boolean,
     default: false
   },
+  /** Pin the first data column to the left during horizontal scroll. */
   isSticky: {
     type: Boolean,
     default: false
   },
+  /** CSS `grid-template-columns` value applied to this row's grid. */
   gridTemplateColumns: {
     type: String,
     default: '32px 200px repeat(${headers.length - 1}, minmax(150px, auto)) 32px'

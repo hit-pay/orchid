@@ -4,34 +4,45 @@ import ExpandingHeaderRow from './OcExpandingHeaderRow.vue'
 import { computed } from 'vue'
 
 const props = defineProps({
+  /** Numeric value shown in the total summary row at the bottom. */
   total: {
     type: Number,
     default: 0
   },
+  /** Column header definitions — each with `key`, `label`, and optional `class` / `itemClasses`. */
   headers: {
     type: Array,
     required: true
   },
+  /**
+   * Row data. In `isAlternative` mode: an array of row objects keyed to header keys.
+   * In default mode: a single object where keys match header keys (used for a key→value layout).
+   */
   fields: {
     type: Object,
     required: true
   },
+  /** Use multi-column grid layout (one row per record). Default is a two-column key/value layout. */
   isAlternative: {
     type: Boolean,
     default: false
   },
+  /** Show skeleton rows while data is loading (only in `isAlternative` mode). */
   isLoading: {
     type: Boolean,
     default: false
   },
+  /** Number of skeleton rows shown during loading. */
   loadingRows: {
     type: Number,
     default: 5
   },
+  /** Pin the first column to the left when horizontal scroll is active. */
   isSticky: {
     type: Boolean,
     default: false
   },
+  /** CSS `grid-template-columns` value applied to the table grid. */
   gridTemplateColumns: {
     type: String,
     default: '32px 200px repeat(${headers.length - 1}, minmax(150px, auto)) 32px'

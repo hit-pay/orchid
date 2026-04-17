@@ -1,9 +1,14 @@
 <script setup>
 defineProps({
+  /** Render the title in bold/medium weight. */
   important: Boolean,
+  /** Primary text shown in the cell (top line). */
   title: String,
+  /** Secondary text shown below the title (bottom line). */
   description: String,
+  /** If set, the title becomes an `<a>` tag linking to this URL (opens in new tab). */
   href: String,
+  /** Row-level router/href link — wraps the whole cell in a TableLink. */
   link: String
 })
 
