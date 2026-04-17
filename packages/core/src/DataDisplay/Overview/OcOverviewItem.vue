@@ -2,17 +2,29 @@
 import { Icon, Tooltip, Skeleton } from '@/orchidui-core'
 
 defineProps({
+  /** Icon name shown in the card title bar. */
   icon: String,
+  /** Label text displayed in the card header. */
   title: String,
+  /** Tooltip text shown when hovering the info icon. */
   tooltip: String,
+  /** Tooltip text for the percentage change badge. */
   percentTooltip: String,
+  /** Main value text displayed in the card body. */
   content: String,
+  /** Show the info (ℹ) icon that triggers the `tooltip`. */
   info: Boolean,
+  /** Show skeleton placeholders while data is loading. */
   isLoading: Boolean,
+  /** Percentage change shown as a ▲/▼ badge — positive = green, negative = red. */
   percentValue: Number,
+  /** Extra props forwarded to the Tooltip component. */
   tooltipOptions: Object,
+  /** Extra props forwarded to the Icon component in the title bar. */
   iconProps: Object,
+  /** Show the `footer` named slot below the content. */
   isFooter: Boolean,
+  /** Remove the card border (transparent style). */
   isTransparent: Boolean
 })
 </script>

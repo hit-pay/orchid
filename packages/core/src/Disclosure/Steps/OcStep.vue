@@ -2,18 +2,22 @@
 import { Icon } from '@/orchidui-core'
 
 defineProps({
+  /** Label text shown below the step circle. */
   title: {
     type: String,
     default: ''
   },
+  /** Step number or identifier displayed inside the circle when not completed. */
   value: {
     type: [String, Number],
     default: ''
   },
+  /** Highlight this step as the active/current step. */
   isCurrent: {
     type: Boolean,
     default: false
   },
+  /** Mark this step as completed — shows a check icon instead of the value. */
   isCompleted: {
     type: Boolean,
     default: false

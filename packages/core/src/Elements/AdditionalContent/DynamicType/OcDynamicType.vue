@@ -4,14 +4,25 @@ import BoxDetails from './OcBoxDetails.vue'
 import MobileDynamicType from './MobileDynamicType.vue'
 
 defineProps({
+  /** Array of box group objects, each with an `items` array of OverviewItem props. */
   boxes: { type: Array, default: () => [] },
+  /** Show a CustomerCard alongside the overview boxes. */
   isCustomer: { type: Boolean, default: false },
+  /** Variant passed to the CustomerCard component. */
   customerCardVariant: { type: String, default: 'big' },
+  /** Customer data object passed to the CustomerCard component. */
   customer: { type: Object, default: null },
+  /** Enable hover state on the CustomerCard. */
   customerIsHover: { type: Boolean, default: false },
+  /** Enable edit mode on the CustomerCard. */
   customerIsEdit: { type: Boolean, default: false }
 })
-defineEmits(['addCustomer', 'editCustomer'])
+defineEmits({
+  /** "Add customer" button clicked inside the CustomerCard. */
+  addCustomer: null,
+  /** "Edit customer" action triggered. Payload: customer event data. */
+  editCustomer: null
+})
 </script>
 
 <template>

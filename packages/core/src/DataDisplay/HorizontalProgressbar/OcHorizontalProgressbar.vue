@@ -1,13 +1,16 @@
 <script setup>
 defineProps({
+  /** Label text shown to the left of the progress bar. */
   label: {
     type: String,
     default: ''
   },
+  /** Maximum value (denominator) for the progress calculation. */
   max: {
     type: Number,
     default: 0
   },
+  /** Current value — bar fills to `(current / max) * 100%`. */
   current: {
     type: Number,
     default: 0

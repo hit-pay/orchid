@@ -7,12 +7,19 @@ const slots = useSlots()
 const hasSlot = (name) => !!slots[name]
 
 defineProps({
+  /** Show the filled/active dot indicator for this timeline entry. */
   isActive: Boolean,
+  /** Primary text for the timeline entry. */
   title: String,
+  /** Supporting description text. Overridable via the `description` slot. */
   description: String,
+  /** Icon name shown on the right side of the entry. */
   icon: String,
+  /** Extra CSS class applied to the icon element. */
   iconClass: String,
+  /** Amount or badge text shown beside the icon. Overridable via the `iconText` slot. */
   iconText: String,
+  /** Extra CSS class applied to the iconText element. */
   iconTextClass: String
 })
 </script>

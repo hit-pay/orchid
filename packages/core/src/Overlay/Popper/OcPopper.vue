@@ -7,35 +7,43 @@ const popper = ref()
 const popperInstance = ref()
 
 const props = defineProps({
+  /** Popper.js placement string (e.g. `'bottom'`, `'top-start'`, `'right-end'`). */
   placement: {
     type: String,
     required: true
   },
   /**
-   * Options passed to the `popper` from `https://popper.js.org/docs/v2/modifiers/`
+   * Additional options passed directly to the Popper.js instance.
+   * See https://popper.js.org/docs/v2/modifiers/ for available modifiers.
    */
   popperOptions: {
     type: Object
   },
+  /** Inline CSS styles applied to the popper container element. */
   popperStyle: {
     type: Object
   },
+  /** Horizontal shift of the popper relative to the reference element (px). */
   skidding: {
     type: Number,
     default: 0
   },
+  /** Vertical distance between the reference element and the popper panel (px). */
   distance: {
     type: [String, Number],
     default: 5
   },
+  /** Allow the popper to flip to the opposite side when it would overflow the viewport. */
   isFlipEnabled: {
     type: Boolean,
     default: true
   },
+  /** CSS class(es) applied to the popper container element. */
   popperClass: {
     type: [String, Array, Object],
     default: ''
   },
+  /** Teleport the popper panel to `document.body` (required inside overflow:hidden containers). */
   isAttachToBody: {
     type: Boolean,
     default: false

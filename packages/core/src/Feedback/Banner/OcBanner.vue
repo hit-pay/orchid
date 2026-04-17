@@ -2,40 +2,54 @@
 import { Icon, Button } from '@/orchidui-core'
 
 const props = defineProps({
+  /** v-model — controls banner visibility. */
   modelValue: {
     type: Boolean,
     default: true
   },
+  /**
+   * Banner color theme.
+   * @values default, primary, error, warning, gray
+   */
   color: {
     type: String,
     default: 'default'
   },
+  /** Body text shown in the banner (used when the default slot is empty). */
   content: {
     type: String,
     default: ''
   },
+  /** Icon name displayed on the left side of the banner header. */
   icon: {
     type: String,
     default: 'filled-check'
   },
+  /** Show the icon in the banner header. */
   showIcon: {
     type: Boolean,
     default: true
   },
+  /** Show a close button that emits `update:modelValue` with `false` when clicked. */
   dismissible: {
     type: Boolean,
     default: false
   },
+  /** Vue transition name applied when the banner appears/disappears. */
   transitionName: {
     type: String,
     default: 'slide-from-top'
   },
+  /** Heading text shown at the top of the banner (used when the `title` slot is empty). */
   title: {
     type: String,
     default: ''
   }
 })
-defineEmits(['update:modelValue'])
+defineEmits({
+  /** Banner closed. Payload: `false`. */
+  'update:modelValue': []
+})
 const colorClasses = Object.freeze({
   default: 'bg-oc-success-50 text-oc-success-500',
   primary: 'bg-oc-primary-50 text-oc-primary-500',

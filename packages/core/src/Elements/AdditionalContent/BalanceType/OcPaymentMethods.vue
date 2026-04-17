@@ -1,5 +1,6 @@
 <script setup>
 defineProps({
+  /** Array of payment method image URLs rendered as a horizontal strip. */
   methods: {
     type: Array,
     default: () => []

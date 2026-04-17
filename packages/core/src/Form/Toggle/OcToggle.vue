@@ -2,15 +2,20 @@
 import { computed } from 'vue'
 
 const props = defineProps({
+  /** Toggle state (v-model). `true` = on, `false` = off. */
   modelValue: Boolean,
+  /** Disable the toggle — non-interactive, uses muted colors. */
   disabled: Boolean,
+  /** Size preset — `'default'` or `'small'`. */
   size: {
     type: String,
     default: 'default'
   },
+  /** Label text rendered to the right of the toggle. Clicking it also toggles. */
   label: String
 })
 const emit = defineEmits({
+  /** Toggle state changed. Payload: new boolean value. */
   'update:modelValue': []
 })
 const onInput = () => {

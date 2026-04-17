@@ -3,13 +3,18 @@ import OcIcon from '@/orchidui-core/MediaAndIcons/Icon/OcIcon.vue'
 import OcChip from '@/orchidui-core/Feedback/Chip/OcChip.vue'
 
 defineProps({
+  /** Show the full expanded card. When false, renders a compact circular progress indicator. */
   isExpanded: Boolean,
+  /** Account setup completion percentage (0–100). */
   progress: {
     type: Number,
     default: 0
   },
+  /** Show a "pending review" state instead of the progress bar. */
   isPending: Boolean,
+  /** Chip props for the payment status indicator (shown in pending state). */
   paymentStatus: Object,
+  /** Chip props for the payout status indicator (shown in pending state). */
   payoutStatus: Object
 })
 </script>

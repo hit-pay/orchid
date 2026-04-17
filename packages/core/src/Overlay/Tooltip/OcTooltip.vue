@@ -4,29 +4,43 @@ import { Popper } from '@/orchidui-core'
 import { clickOutside as vClickOutside } from '../../directives/clickOutside.js'
 
 const props = defineProps({
+  /** CSS class applied to the tooltip panel (background color, border, etc.). */
   popperClass: {
     type: String,
     default: 'bg-oc-bg-light'
   },
+  /** Vertical distance between the trigger and the tooltip panel (px). */
   distance: {
     type: [String, Number],
     default: 5
   },
+  /** Horizontal shift of the tooltip panel relative to the trigger (px). */
   skidding: {
     type: Number,
     default: 0
   },
+  /** Vue transition name applied when the tooltip panel appears/disappears. */
   transitionName: {
     type: String,
     default: 'fade'
   },
+  /** Auto-hide the tooltip after this many milliseconds. Omit to keep it open until mouse-leave. */
   hideAfter: Number,
+  /** Extra options passed directly to the Popper.js instance. */
   popperOptions: Object,
+  /**
+   * What event opens the tooltip.
+   * @values hover, click
+   */
   trigger: {
     type: String,
     default: 'hover',
     validator: (val) => ['hover', 'click'].includes(val)
   },
+  /**
+   * Popper.js placement for the tooltip panel.
+   * @values top-start, top, top-end, right-start, right, right-end, bottom-start, bottom, bottom-end, left-start, left, left-end
+   */
   position: {
     type: String,
     default: 'bottom',
@@ -46,14 +60,17 @@ const props = defineProps({
         'left-end'
       ].includes(value)
   },
+  /** Hide the small directional arrow on the tooltip panel. */
   arrowHidden: {
     type: Boolean,
     default: false
   },
+  /** Keep the tooltip open when hovering over the panel itself (useful for interactive content). */
   isPopover: {
     type: Boolean,
     default: false
   },
+  /** Teleport the tooltip panel to `document.body` (required inside overflow:hidden containers). */
   isAttachToBody: {
     type: Boolean,
     default: false

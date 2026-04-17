@@ -3,27 +3,43 @@ import { computed, ref } from 'vue'
 import { Icon } from '@/orchidui-core'
 
 const props = defineProps({
+  /** Button label text. If omitted, render content via the default slot. */
   label: String,
+  /** Disable the button — non-interactive, reduced opacity. */
   isDisabled: Boolean,
+  /** Show a spinning loader icon and disable interaction. */
   isLoading: Boolean,
+  /** Icon name rendered to the left of the label. */
   leftIcon: String,
+  /** CSS class applied to the icon element(s). */
   iconClass: [Array, String],
+  /** Icon name shown in the additional click area (requires `isAdditionalArea`). */
   additionalAreaIcon: String,
+  /** Split the button — adds a secondary clickable area on the right that emits `addition-click`. */
   isAdditionalArea: Boolean,
+  /** Icon name rendered to the right of the label. */
   rightIcon: String,
+  /** Apply the active/pressed visual state. */
   isActive: Boolean,
+  /** Render as a text-only button — no background, border, or shadow. */
   isTransparent: Boolean,
+  /** Use fully rounded (pill-shaped) corners. */
   isRoundedFull: Boolean,
+  /** Visual style variant. */
   variant: {
     type: String,
     default: 'primary'
   },
+  /** Size preset — controls padding, height, and icon size. */
   size: {
     type: String,
     default: 'default'
   }
 })
-defineEmits(['addition-click'])
+defineEmits({
+  /** The additional area (right split section) was clicked. Requires `isAdditionalArea`. */
+  'addition-click': []
+})
 const isPressed = ref(false)
 const isIconOnly = computed(() => (props.leftIcon || props.rightIcon) && !props.label)
 const additionalAreaSize = computed(() => ({

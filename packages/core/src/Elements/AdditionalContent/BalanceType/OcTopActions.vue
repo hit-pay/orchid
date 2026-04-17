@@ -4,17 +4,23 @@ import PaymentMethods from './OcPaymentMethods.vue'
 import { ref } from 'vue'
 
 defineProps({
+  /** Props forwarded to the "more" (dots-vertical) Button that triggers the dropdown. */
   moreButtonProps: Object,
+  /** Array of payment method image URLs rendered by OcPaymentMethods on the left side. */
   paymentMethods: {
     type: Array,
     default: () => []
   },
+  /** Props forwarded to the secondary action Button (e.g. "Top up balance"). Supports an optional `tooltip` string. */
   secondaryButtonProps: Object,
+  /** Show skeleton placeholders while data is loading. */
   isLoading: Boolean,
+  /** Array of DropdownItem props rendered inside the "more" dropdown menu. */
   dropdownItems: {
     type: Array,
     default: () => []
   },
+  /** Extra props forwarded to the Dropdown component. */
   dropdownProps: {
     type: Object,
     default: () => ({})

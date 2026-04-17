@@ -1,14 +1,23 @@
 <script setup>
 import { Tooltip, Icon } from '@/orchidui-core'
 defineProps({
+  /** Field label shown above the input. */
   label: String,
+  /** Helper text shown below the input when there is no error. */
   hint: String,
+  /** AI-assisted state — shows a sparkle icon next to the label. */
   ai: Boolean,
+  /** Validation error message shown in red below the input. Hides `hint` when set. */
   errorMessage: String,
+  /** Mark the field as required — shows a `*` indicator next to the label. */
   isRequired: Boolean,
+  /** Icon name rendered in the label area as a tooltip trigger. */
   labelIcon: String,
+  /** Text shown in the tooltip when hovering `labelIcon`. */
   tooltipText: String,
+  /** Props forwarded to the Tooltip component on the label icon. */
   tooltipOptions: Object,
+  /** CSS class applied to the label element. */
   labelClass: String
 })
 </script>

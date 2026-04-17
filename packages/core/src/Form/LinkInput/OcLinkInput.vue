@@ -3,9 +3,13 @@ import { Input, Dropdown, Icon } from '@/orchidui-core'
 import { computed, ref } from 'vue'
 
 const props = defineProps({
+  /** Placeholder text shown in the link input when empty. */
   placeholder: String,
+  /** Helper text shown below the input. */
   hint: String,
+  /** Field label shown above the input. */
   label: String,
+  /** Validation error messages — object with `link` and `title` keys. */
   errorMessages: {
     type: Object,
     default: () => ({
@@ -13,37 +17,51 @@ const props = defineProps({
       title: ''
     })
   },
+  /** Compact inline label — label text appears inside the input box before the value. */
   isInlineLabel: Boolean,
+  /** Disable the input — non-interactive, grayed out. */
   isDisabled: Boolean,
+  /** Current link value (v-model). */
   modelValue: String,
+  /** Currently selected link type value (v-model:type). */
   type: String,
+  /** Current title value (v-model:title). */
   title: String,
+  /** Available link type options — each with `value`, `label`, `icon`, and optional `preFill` keys. */
   links: {
     type: Array,
     default: () => []
   },
+  /** Mark the field as required — shows a `*` indicator next to the label. */
   isRequired: {
     type: Boolean,
     default: false
   },
+  /** Icon name rendered in the label area as a tooltip trigger. */
   labelIcon: {
     type: String,
     default: ''
   },
+  /** Text shown in the tooltip when hovering `labelIcon`. */
   tooltipText: {
     type: String,
     default: ''
   },
+  /** Props forwarded to the Tooltip component on the label icon. */
   tooltipOptions: {
     type: Object,
     default: () => ({})
   },
+  /** Put the component in edit mode — shows the title field and locks the link type. */
   isEdit: Boolean
 })
 
 const emit = defineEmits({
+  /** Link value changed. Payload: new string value. */
   'update:modelValue': [],
+  /** Selected link type changed. Payload: new type string. */
   'update:type': [],
+  /** Title value changed. Payload: new title string. */
   'update:title': []
 })
 

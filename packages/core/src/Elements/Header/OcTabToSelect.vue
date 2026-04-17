@@ -3,11 +3,15 @@ import { computed, onMounted, ref, watch } from 'vue'
 import { Icon, Dropdown, DropdownItem } from '@/orchidui-core'
 
 defineEmits({
+  /** A menu item was clicked. Payload: the `path` of the clicked item. */
   changePath: [],
+  /** Active menu changed. Payload: the `value` of the clicked item. */
   'update:modelValue': []
 })
 const props = defineProps({
+  /** Array of menu objects, each with `value`, `label`, `icon`, `path`, and optional `sidebarClass`. */
   menus: Array,
+  /** v-model — value of the currently active menu item. */
   modelValue: String
 })
 const isDropdownOpened = ref(false)

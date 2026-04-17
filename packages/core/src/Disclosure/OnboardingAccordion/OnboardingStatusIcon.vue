@@ -3,6 +3,10 @@ import { computed } from 'vue'
 import { Icon } from '@/orchidui-core'
 
 const props = defineProps({
+  /**
+   * Completion state — controls the icon and border style rendered inside the circular badge.
+   * @values completed, not_completed, current, partially_completed, pending, error
+   */
   variant: {
     type: String,
     default: 'current',

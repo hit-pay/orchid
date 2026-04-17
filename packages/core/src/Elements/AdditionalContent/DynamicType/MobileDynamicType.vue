@@ -6,12 +6,19 @@ import BoxDetails from './OcBoxDetails.vue'
 const isDetailsOpen = ref(false)
 
 defineProps({
+  /** Array of box group objects, each with an `items` array of OverviewItem props. */
   boxes: { type: Array, default: () => [] },
+  /** Show a CustomerCard below the details panel. */
   isCustomer: { type: Boolean, default: false },
+  /** Variant passed to the CustomerCard component. */
   customerCardVariant: { type: String, default: 'big' },
+  /** Customer data object passed to the CustomerCard component. */
   customer: { type: Object, default: null }
 })
-defineEmits(['addCustomer'])
+defineEmits({
+  /** "Add customer" button clicked inside the CustomerCard. */
+  addCustomer: []
+})
 </script>
 
 <template>

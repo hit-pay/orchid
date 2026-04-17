@@ -2,26 +2,39 @@
 import { reactive, onMounted, computed, watch } from 'vue'
 import { SidebarHead, SideBarMenu, SidebarSubMenuItem, SidebarFooter } from '@/orchidui-core'
 
-const emit = defineEmits([
-  'changeExpanded',
-  'click:sidebar-icon',
-  'changeExpandedMenus',
-  'redirect',
-  'user-click',
-  'support-click'
-])
+const emit = defineEmits({
+  /** Sidebar expanded/collapsed. Payload: new boolean state. */
+  changeExpanded: null,
+  /** Sidebar icon was clicked. */
+  'click:sidebar-icon': null,
+  /** Expanded menu list changed. Payload: array of currently expanded menu `name` values. */
+  changeExpandedMenus: null,
+  /** A menu or submenu item was clicked to navigate. Payload: the menu item object. */
+  redirect: null,
+  /** User avatar/name in the footer was clicked. */
+  'user-click': null,
+  /** Support icon in the footer was clicked. */
+  'support-click': null
+})
 
 const props = defineProps({
+  /** Extra CSS classes applied to the sidebar root element. */
   class: {
     type: String
   },
+  /** Show the sidebar in expanded (wide) mode. When false, shows collapsed icon-only mode. */
   isExpanded: {
     type: Boolean,
     default: true
   },
+  /**
+   * Array of sidebar section objects. Each section has a `label` (String) and `items` (Array of menu objects).
+   * Each menu item supports `icon`, `label`, `name`, `active`, `children`, and badge flags (`isNew`, `isBeta`, `isTryIt`, `badgeVisible`).
+   */
   sidebarMenu: {
     type: Array
   },
+  /** User display name shown in the sidebar footer. */
   displayName: {
     type: String
   }

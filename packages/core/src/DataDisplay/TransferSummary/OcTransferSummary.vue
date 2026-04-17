@@ -3,11 +3,12 @@ import { ListDetail } from '@/orchidui-core'
 import { computed } from 'vue'
 
 const props = defineProps({
+  /** Transfer data object with fields: `source_currency`, `payment_currency`, `fee_currency`, `fee`, `exchange_rate`, `transfer_method`. */
   transfer: {
     type: Object,
     required: true
   },
-
+  /** Show the FX Rate row (only relevant when the transfer involves a currency exchange). */
   hasFxData: Boolean
 })
 

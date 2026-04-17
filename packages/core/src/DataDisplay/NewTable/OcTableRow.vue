@@ -108,61 +108,81 @@ import OcTableTooltipColumn from '@/orchidui-core/DataDisplay/NewTable/OcTableTo
 import dayjs from 'dayjs'
 
 const props = defineProps({
+  /** Column header definitions — each with `key`, `label`, `variant`, `class`, `isCopy`, etc. */
   headers: {
     type: Array,
     default: () => []
   },
+  /** Row data object — keys match header keys. May include a `children` array for expandable rows. */
   row: {
     type: Object,
     default: () => {}
   },
+  /** Row index within the current page — used to suppress the last row's bottom border. */
   index: {
     type: Number,
     default: 0
   },
+  /** Show the expand/collapse chevron column for rows that have children. */
   isExpand: {
     type: Boolean,
     default: false
   },
+  /** Whether this row is currently selected — highlights the row border. */
   isSelected: {
     type: Boolean,
     default: false
   },
+  /** Show a checkbox column for row selection. */
   isSelectable: {
     type: Boolean,
     default: false
   },
+  /** All row objects on the current page — used to detect the last row. */
   sortedFields: {
     type: Array,
     default: () => []
   },
+  /** Currently selected row objects — used to compute each row's checked state. */
   selectedRows: {
     type: Array,
     default: () => []
   },
+  /** Function `(row) => key` that returns a unique key for a given row object. */
   getRowKey: {
     type: Function,
     default: (row) => row?.id
   },
+  /** Function `(row) => void` called when a row checkbox is toggled. */
   selectRow: {
     type: Function,
     default: (row) => row?.id
   },
+  /** Function `(header, key, isHeader) => string` that returns sticky CSS classes for a cell. */
   getStickyClasses: {
     type: Function,
     default: () => ''
   },
+  /** Whether this row is rendered as a child of an expandable parent row. */
   isChild: {
     type: Boolean,
     default: false
   },
+  /** Row key of the parent row — available for child row slot customisation. */
   parentRowKey: {
     type: [String, Number],
     default: null
   }
 })
 
-const emit = defineEmits(['toggleChildren', 'click', 'click:col'])
+const emit = defineEmits({
+  /** Child rows were toggled open/closed. */
+  toggleChildren: null,
+  /** Row was clicked. Payload: click MouseEvent. */
+  click: null,
+  /** A specific column cell was clicked. Payload: `(row, header)`. */
+  'click:col': null
+})
 
 const getStyleVariants = (header) => {
   return {

@@ -4,18 +4,25 @@ import { ref, watch } from 'vue'
 import OnboardingStatusIcon from './OnboardingStatusIcon.vue'
 
 defineProps({
+  /** Supporting text shown below the title. */
   description: {
     type: String,
     default: ''
   },
+  /** Heading text of the accordion row. */
   title: {
     type: String,
     default: ''
   },
+  /** Show a visible border around the accordion card. */
   isBorder: {
     type: Boolean,
     default: false
   },
+  /**
+   * Completion status displayed by the status icon.
+   * @values completed, not_completed, current, partially_completed, pending, error
+   */
   variant: {
     type: String,
     default: 'current',

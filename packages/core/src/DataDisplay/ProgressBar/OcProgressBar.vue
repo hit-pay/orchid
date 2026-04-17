@@ -1,15 +1,16 @@
 <script setup>
 const props = defineProps({
+  /** Total number of pill segments to render. */
   steps: {
     type: Number,
     required: true
   },
-
+  /** Index of the last completed step (1-based). Segments up to this index are filled. */
   currentStep: {
     type: Number,
     default: 1
   },
-
+  /** Optional label text shown above the progress bar. */
   label: String
 })
 

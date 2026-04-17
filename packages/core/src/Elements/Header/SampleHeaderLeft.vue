@@ -3,6 +3,7 @@ import { Icon, Dropdown, DropdownItem } from '@/orchidui-core'
 import { ref } from 'vue'
 
 defineProps({
+  /** Apply "sub-header" text color variant to the logo and store switcher. */
   isSubHeader: Boolean
 })
 

@@ -1,11 +1,25 @@
 <script setup>
 import { Button, Chip, Icon } from '@/orchidui-core'
 defineProps({
+  /** Theme data object with fields: `title`, `description`, `thumbnail`, `active`, `installed`, `pro`. */
   theme: Object,
+  /** Show an "Adding theme…" loading overlay instead of the action buttons. */
   activating: Boolean,
+  /** Whether the user has a Pro account — controls visibility of pro-only theme buttons. */
   isProAccount: Boolean
 })
-defineEmits(['activate', 'customize', 'preview', 'upgrade', 'publish'])
+defineEmits({
+  /** "Try Theme" button clicked. Payload: the theme object. */
+  activate: [],
+  /** "Customize" button clicked. Payload: the theme object. */
+  customize: [],
+  /** "Preview" button clicked. Payload: the theme object. */
+  preview: [],
+  /** "Upgrade" Chip clicked. Payload: the theme object. */
+  upgrade: [],
+  /** "Publish" button clicked. Payload: the theme object. */
+  publish: []
+})
 </script>
 <template>
   <div

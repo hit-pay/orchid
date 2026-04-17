@@ -2,9 +2,13 @@
 import { OverviewItem } from '@/orchidui-core'
 
 defineProps({
+  /** Section heading text shown above the overview items. */
   title: String,
+  /** Extra CSS class applied to the items row container. */
   containerClass: String,
+  /** Array of overview item objects — each supports all OcOverviewItem props. */
   items: Array,
+  /** Pass loading state down to each OcOverviewItem (shows skeleton placeholders). */
   isLoading: Boolean
 })
 </script>

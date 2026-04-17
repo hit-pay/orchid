@@ -2,27 +2,40 @@
 import { Toggle, Icon, Tooltip } from '@/orchidui-core'
 
 const props = defineProps({
+  /** Section heading text. */
   title: String,
+  /** Descriptive text shown below the title. */
   description: {
     type: String,
     default: ''
   },
+  /** CSS class applied to the description element. */
   descriptionClass: {
     type: String,
     default: ''
   },
+  /** Icon name shown next to the title — acts as a tooltip trigger. */
   icon: String,
+  /** Toggle state (v-model). Only relevant when `isToggle` is true. */
   modelValue: {
     type: Boolean,
     default: false
   },
+  /** Show a Toggle component on the right side of the section. */
   isToggle: Boolean,
+  /** Props forwarded to the Toggle component. */
   toggleProps: Object,
+  /** Tooltip message shown when hovering the `icon`. */
   popperMessage: String,
+  /** Validation error message shown in red below the section. */
   errorMessage: String,
+  /** Set the toggle to `true` on mount if `modelValue` is null/undefined. */
   defaultValue: Boolean
 })
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits({
+  /** Toggle state changed. Payload: new boolean value. */
+  'update:modelValue': []
+})
 
 if (props.defaultValue === true && (props.modelValue === null || props.modelValue === undefined)) {
   emit('update:modelValue', true)

@@ -3,69 +3,96 @@ import { Icon, Button } from '@/orchidui-core'
 import { computed, nextTick, ref, watch, onMounted, onUnmounted } from 'vue'
 
 const props = defineProps({
+  /** v-model — controls snackbar visibility. */
   modelValue: {
     type: Boolean,
     default: true
   },
+  /**
+   * Color theme of the snackbar.
+   * @values default, primary, error, warning, gray
+   */
   color: {
     type: String,
     default: 'default'
   },
+  /** Body text shown in the snackbar (used in default and small sizes when the default slot is empty). */
   content: {
     type: String,
     default: ''
   },
+  /** Icon name displayed inside the snackbar. */
   icon: {
     type: String,
     default: 'filled-check'
   },
+  /** Show the icon. */
   showIcon: {
     type: Boolean,
     default: true
   },
+  /** Show an `×` dismiss button that emits `update:modelValue` with `false` when clicked. */
   dismissible: {
     type: Boolean,
     default: false
   },
+  /** Use fixed positioning so the snackbar floats over page content. */
   isFloating: {
     type: Boolean,
     default: false
   },
+  /** Render `content` as raw HTML (v-html). Use only with trusted content. */
   isRawHtml: {
     type: Boolean,
     default: false
   },
+  /**
+   * Screen position when `isFloating` is true.
+   * @values top-center, top-left, top-right, bottom-center, bottom-left, bottom-right
+   */
   position: {
     type: String,
     default: 'top-center'
   },
+  /** Vue transition name applied when the snackbar appears/disappears. */
   transitionName: {
     type: String,
     default: 'slide-from-top'
   },
+  /** Heading text (used in `big` size). */
   title: {
     type: String,
     default: ''
   },
+  /** Supporting description text shown below the title (used in `big` size). */
   description: {
     type: String,
     default: ''
   },
+  /** Props forwarded to the secondary Button shown in `big` size. Pass `null` to hide. */
   secondaryButton: {
     type: Object,
     default: () => null
   },
+  /** Props forwarded to the primary Button shown in `big` size. Pass `null` to hide. */
   primaryButton: {
     type: Object,
     default: () => null
   },
+  /**
+   * Visual size variant.
+   * @values default, big, small
+   */
   size: {
     type: String,
     default: 'default',
     validator: (value) => ['default', 'big', 'small'].includes(value)
   }
 })
-defineEmits(['update:modelValue'])
+defineEmits({
+  /** Snackbar dismissed. Payload: `false`. */
+  'update:modelValue': null
+})
 const colorClasses = Object.freeze({
   default: 'border-oc-success-200 bg-oc-success-50 text-oc-success-500',
   primary: 'border-oc-primary-200 bg-oc-primary-50 text-oc-primary-500',

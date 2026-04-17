@@ -2,20 +2,28 @@
 import { Icon } from '@/orchidui-core'
 
 defineProps({
+  /** Heading text shown at the top of the sub-sidebar with a back chevron. */
   title: {
     type: String,
     default: ''
   },
+  /** Array of menu item objects, each with `value`, `label`, and optional badge flags (`isBeta`, `isNew`, `isTryIt`, `badgeVisible`). */
   menu: {
     type: Array,
     default: () => []
   },
+  /** v-model — value of the currently active menu item. */
   modelValue: {
     type: String,
     default: ''
   }
 })
-defineEmits(['titleClick', 'update:modelValue'])
+defineEmits({
+  /** Title / back chevron clicked. */
+  titleClick: [],
+  /** Menu item clicked. Payload: the `value` of the selected item. */
+  'update:modelValue': []
+})
 </script>
 
 <template>

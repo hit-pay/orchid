@@ -2,17 +2,22 @@
 import Step from './OcStep.vue'
 
 defineProps({
+  /** Array of step objects, each with a `title` field. Rendered when the default slot is empty. */
   steps: {
     type: Array,
     default: () => []
   },
+  /** v-model — zero-based index of the active step. */
   modelValue: {
     type: Number,
     default: 0
   }
 })
 
-defineEmits(['update:model-value'])
+defineEmits({
+  /** A step was clicked. Payload: zero-based index of the clicked step. */
+  'update:model-value': null
+})
 </script>
 
 <template>

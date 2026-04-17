@@ -4,6 +4,7 @@ import { ref } from 'vue'
 import dayjs from 'dayjs'
 
 defineProps({
+  /** Page data object with fields: `title`, `description` (HTML), `page_cover_url`, `enabled` (Boolean), `updated_at`. */
   page: Object
 })
 const isOpen = ref(false)

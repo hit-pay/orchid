@@ -3,14 +3,20 @@ import { ListUrl, Icon, Dropdown } from '@/orchidui-core'
 import { ref } from 'vue'
 
 defineProps({
+  /** Array of URL objects to display. Each: `{ title, url }`. */
   urls: {
     type: Array,
     default: () => []
   },
+  /** Webhook name shown as the card title. */
   title: String,
+  /** Date string displayed next to the title. */
   date: String
 })
-defineEmits(['more'])
+defineEmits({
+  /** Dots-vertical dropdown opened. */
+  more: []
+})
 const isOpen = ref(false)
 </script>
 

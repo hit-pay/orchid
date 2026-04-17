@@ -4,30 +4,40 @@ import TopActions from './OcTopActions.vue'
 import { Overview } from '@/orchidui-core'
 
 defineProps({
+  /** Array of overview row objects passed to the Overview component. */
   overviewItems: {
     type: Array,
     default: () => []
   },
+  /** Array of tab objects (`value`, `title`, `content`, etc.) shown as InfoCardButtons at the top. */
   overviewTabs: {
     type: Array,
     default: () => []
   },
+  /** Value of the currently active overview tab. */
   overviewActiveTab: {
     type: String,
     default: ''
   },
+  /** Props forwarded to the secondary action Button in the top-actions bar. */
   secondaryButtonProps: Object,
+  /** Props forwarded to the "more" (dots-vertical) Button in the top-actions bar. */
   moreButtonProps: Object,
+  /** Extra CSS class applied to the Overview component container. */
   containerClass: String,
+  /** Array of DropdownItem props rendered in the "more" dropdown menu. */
   dropdownItems: {
     type: Array,
     default: () => []
   },
+  /** Array of payment method image URLs rendered by OcPaymentMethods. */
   paymentMethods: {
     type: Array,
     default: () => []
   },
+  /** Show skeleton placeholders while data is loading. */
   isLoading: Boolean,
+  /** Extra props forwarded to the Dropdown component in the top-actions bar. */
   dropdownProps: {
     type: Object,
     default: () => ({})
@@ -35,6 +45,7 @@ defineProps({
 })
 
 defineEmits({
+  /** An overview tab was clicked. Payload: the `value` of the selected tab. */
   changeTab: []
 })
 </script>

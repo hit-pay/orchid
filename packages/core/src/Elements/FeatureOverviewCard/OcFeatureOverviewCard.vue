@@ -2,14 +2,20 @@
 import { Icon, Chip } from '@/orchidui-core'
 
 defineProps({
+  /** Card heading text. */
   title: {
     type: String,
     required: true
   },
+  /** Supporting paragraph text shown below the title. */
   description: {
     type: String,
     default: ''
   },
+  /**
+   * List of feature tiles. Each object must have `title` (String) and `icon` (String) fields.
+   * Add `comingSoon: true` to show a "Coming soon" badge on the tile.
+   */
   features: {
     type: Array,
     default: () => [],

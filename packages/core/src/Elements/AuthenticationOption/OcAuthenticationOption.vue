@@ -2,12 +2,19 @@
 import { Icon, Chip } from '@/orchidui-core'
 
 defineProps({
+  /** Icon name displayed in the center of the card. */
   icon: String,
+  /** Width of the icon in pixels. */
   width: String,
+  /** Height of the icon in pixels. */
   height: String,
+  /** Extra CSS class applied to the icon element. */
   iconClass: String,
+  /** Card label text shown next to the icon. */
   title: String,
+  /** Highlight the card with a primary border to indicate it is selected. */
   isActive: Boolean,
+  /** Props forwarded to the Chip badge shown in the top-right corner. Pass `null` to hide. */
   chipProps: Object
 })
 </script>

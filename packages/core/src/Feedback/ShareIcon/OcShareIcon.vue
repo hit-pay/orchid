@@ -2,9 +2,13 @@
 import { Icon, Tooltip } from '@/orchidui-core'
 
 defineProps({
+  /** Label text shown next to the icon (or inside the tooltip when `isOnlyIcon` is true). */
   text: String,
+  /** Icon name passed to the Icon component. */
   icon: String,
+  /** When true, renders only the icon inside a circular button and shows `text` as a tooltip on hover. */
   isOnlyIcon: Boolean,
+  /** Props forwarded to the Tooltip component (position, distance, etc.). */
   tooltipOptions: {
     type: Object
   }

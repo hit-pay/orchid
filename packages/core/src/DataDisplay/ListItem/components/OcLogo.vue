@@ -2,8 +2,11 @@
 import { Button } from '@/orchidui-core'
 
 defineProps({
+  /** Alt text and caption shown below the logo image. */
   title: String,
+  /** URL of the logo image. */
   image: String,
+  /** Extra CSS class applied to the `<img>` element. */
   imageClass: String
 })
 </script>

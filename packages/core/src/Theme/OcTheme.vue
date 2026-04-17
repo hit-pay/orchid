@@ -1,6 +1,10 @@
 <script setup>
 import { watch } from 'vue'
 const props = defineProps({
+  /**
+   * Global color mode applied to the `<body>` element class.
+   * @values light, dark
+   */
   colorMode: {
     type: String,
     default: 'light'

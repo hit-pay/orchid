@@ -3,23 +3,34 @@ import { computed } from 'vue'
 import { Checkbox, BaseInput } from '@/orchidui-core'
 
 const props = defineProps({
+  /** Layout direction of the checkboxes. */
   alignment: {
     type: String,
     default: 'vertical'
   },
+  /** Array of checkbox items — each with `label` and `value` keys. */
   checkboxes: Array,
+  /** Current selected values (v-model). */
   modelValue: {
     type: [Array, String]
   },
+  /** Field label shown above the checkboxes. */
   label: String,
+  /** Validation error message shown in red below the field. */
   errorMessage: String,
+  /** Helper text shown below the field. */
   hint: String,
+  /** Disable all checkboxes — non-interactive, grayed out. */
   isDisabled: Boolean,
+  /** Show a "Select all" checkbox at the top. */
   isSelectAll: Boolean,
+  /** Render checkboxes as button-style toggles instead of standard checkboxes. */
   isButtonVariant: Boolean,
+  /** Make each checkbox full-width (block-level). */
   isBlock: Boolean
 })
 const emit = defineEmits({
+  /** Selected values changed. Payload: new array of selected values. */
   'update:modelValue': []
 })
 

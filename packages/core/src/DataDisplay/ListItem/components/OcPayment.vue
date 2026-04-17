@@ -3,22 +3,31 @@ import { Chip, Icon, Tooltip } from '@/orchidui-core'
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 
 const props = defineProps({
+  /** Payment method / gateway name shown as the card title. */
   title: {
     type: String,
     default: 'Title'
   },
+  /** Array of payment method objects. Each: `{ method, svg }` where `svg` is an image URL. */
   paymentMethods: {
     type: Array,
     default: () => []
   },
+  /** Array of Chip props rendered next to the title. */
   chips: {
     type: Array,
     default: () => []
   },
+  /** Supporting description text shown below the title. */
   description: String
 })
 
-defineEmits(['edit', 'delete'])
+defineEmits({
+  /** Edit (pencil) icon clicked. */
+  edit: [],
+  /** Delete (bin) icon clicked. */
+  delete: []
+})
 
 const isSliced = computed(() => props.paymentMethods?.length > blocksPerLine.value)
 const restPaymentMethods = computed(() =>
