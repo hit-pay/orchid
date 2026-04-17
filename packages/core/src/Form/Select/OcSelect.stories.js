@@ -4,6 +4,15 @@ import { ref } from 'vue'
 export default {
   component: Select,
   tags: ['autodocs'],
+  kind: 'leaf',
+  use_for: [
+    'dropdown selection field',
+    'single select input',
+    'multi select with checkboxes',
+    'async search dropdown',
+    'grouped options select',
+    'filter field in forms'
+  ],
   parameters: {
     docs: {
       description: {

@@ -2,13 +2,17 @@
 import { onMounted, ref } from 'vue'
 
 const props = defineProps({
+  /** Current time value (v-model). Pass a `Date` object; the component reads hours, minutes, and AM/PM from it. */
   modelValue: {
     type: [String, Date],
     default: () => new Date()
   }
 })
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits({
+  /** Time changed by scrolling or clicking a column. Payload: updated `Date` object. */
+  'update:modelValue': []
+})
 
 const hour = ref(
   props.modelValue.getHours() <= 12 ? props.modelValue.getHours() : props.modelValue.getHours() - 12

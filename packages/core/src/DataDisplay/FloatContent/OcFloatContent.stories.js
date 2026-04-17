@@ -3,7 +3,16 @@ import { ref } from 'vue'
 
 export default {
   component: FloatContent,
-  tags: ['autodocs']
+  tags: ['autodocs'],
+  kind: 'composite',
+  use_for: [
+    'side panel',
+    'detail drawer',
+    'edit panel',
+    'sliding panel overlay',
+    'customer detail side view'
+  ],
+  understand_with: ['FormBuilder', 'Button', 'ListDetail', 'Modal']
 }
 
 export const Default = {

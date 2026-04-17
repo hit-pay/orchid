@@ -10,19 +10,25 @@
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix packages",
     "format": "prettier .  --write",
     "dev": "storybook dev -p 6006",
-    "dev:landing": "vite dev",
-    "build:landing": "vite build",
-    "build:storybook": "storybook build -o public/storybook && npm run build:docs",
-    "build:docs": "cd mcp && node build-docs.js",
     "build:core": "cd packages/core && npm run build",
     "build:dashboard": "npm install && cd packages/dashboard && npm run build",
     "build": "npm run build:core && npm run build:dashboard && npm install && npm run build:storybook && npm run build:landing",
     "publish-dev:core": "npm run build:core && cd packages/core && npm publish --tag beta",
     "publish-dev:dashboard": "npm run build:dashboard && cd packages/dashboard && npm publish --tag beta",
-    "release": "bun run release.js"
+    "release": "bun run release.js",
+    "dev:landing": "vite dev",
+    "build:landing": "vite build",
+    "build:storybook": "storybook build -o public/storybook && npm run build:json",
+    "build:json": "cd json && node build-json.js && node ../generate-llms.mjs",
+    "mcp": "cd mcp-server && node server.js",
+    "mcp:dev": "cd mcp-server && node --watch server.js",
+    "build:docs": "node src/build-docs.js",
+    "test": "vitest",
+    "preview": "npx serve dist "
   },
   "dependencies": {
-    "dayjs": "^1.11.10"
+    "dayjs": "^1.11.10",
+    "vue-router": "^5.0.4"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^8.6.14",
@@ -34,11 +40,13 @@
     "@storybook/vue3-vite": "^8.6.14",
     "@vitejs/plugin-vue": "^5.2.4",
     "@vue/eslint-config-prettier": "^8.0.0",
+    "@vue/test-utils": "^2.4.6",
     "autoprefixer": "^10.4.16",
     "eslint-config-prettier": "^9.0.0",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-vue": "^9.17.0",
     "fast-glob": "^3.3.1",
+    "happy-dom": "^20.9.0",
     "postcss": "^8.4.31",
     "postcss-import": "^15.1.0",
     "sass": "^1.68.0",
@@ -46,6 +54,7 @@
     "storybook-addon-root-attribute": "^1.0.2",
     "tailwindcss": "^3.4.3",
     "vite": "^6.3.5",
+    "vitest": "^4.1.4",
     "vue": "^3.3.4"
   },
   "overrides": {

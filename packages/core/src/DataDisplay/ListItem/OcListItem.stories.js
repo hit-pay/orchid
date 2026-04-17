@@ -4,6 +4,15 @@ import { ref } from 'vue'
 export default {
   component: ListItem,
   tags: ['autodocs'],
+  kind: 'leaf',
+  use_for: [
+    'timeline event row',
+    'webhook endpoint list item',
+    'payment integration list item',
+    'settings row with accordion expand',
+    'general list item with chips and actions'
+  ],
+  understand_with: ['DropdownItem', 'Button'],
   parameters: {
     docs: {
       description: {

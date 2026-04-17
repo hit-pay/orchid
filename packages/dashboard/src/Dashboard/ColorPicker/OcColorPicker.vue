@@ -4,26 +4,35 @@ import { Dropdown, Input, BaseInput, Icon } from '@orchidui/core'
 import { computed, ref } from 'vue'
 
 const props = defineProps({
+  /** Current color value (v-model). Hex string — 6-digit `#RRGGBB` or 8-digit `#RRGGBBAA` when opacity is enabled. For gradient variant, a CSS gradient string. */
   modelValue: {
     type: String,
     default: ''
   },
+  /** Color mode. `'solid'` outputs a flat hex color; `'gradient'` outputs a CSS gradient string. */
   variant: {
     type: String,
     default: 'solid'
   },
+  /** Hide the opacity/alpha slider. When true, output is always a 6-digit hex (`#RRGGBB`). */
   hideOpacity: Boolean,
+  /** Hide the hex text input and show only the color swatch icon as the trigger. */
   hideInputColor: Boolean,
+  /** Preset color swatches shown in the picker popup. Array of hex color strings. */
   presetColors: {
     type: Array
   },
+  /** Dropdown placement passed to the Popper positioning engine. */
   placement: {
     type: String,
     default: 'auto'
   }
 })
 
-const emit = defineEmits(['update:model-value'])
+const emit = defineEmits({
+  /** New color value selected. Payload: hex or gradient string. */
+  'update:model-value': []
+})
 
 const isOpen = ref(false)
 const inputValue = ref(props.modelValue)

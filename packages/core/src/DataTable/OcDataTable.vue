@@ -40,7 +40,7 @@ const props = defineProps({
    * Full configuration object for the table.
    *
    * `tableOptions` — table structure:
-   * - `headers` — array of `{ key, label, variant?, class?, isCopy?, isSortable?, stickyLeft?, stickyRight?, chipOptions?, disableClickRow? }`
+   * - `headers` — array of `{ key, label, variant?, class?, isCopy?, stickyLeft?, stickyRight?, chipOptions?, disableClickRow? }`
    * - `fields` — array of row data objects keyed to header keys
    * - `isSelectable` — show row checkboxes
    * - `isCursorPointer` — cursor:pointer on rows
@@ -101,16 +101,27 @@ const props = defineProps({
 })
 
 const emit = defineEmits({
+  /** Selected rows changed. Payload: array of selected row objects (v-model:selected). */
   'update:selected': [],
+  /** Filter state changed. Payload: current filter object (v-model:filter). */
   'update:filter': [],
+  /** Emitted alongside update:filter after every filter action. Payload: current filter object. */
   'apply-filter': [],
+  /** A row cell was clicked. Payload: `{ field, header }`. */
   'click:row': [],
+  /** A filter form field value changed. Payload: `{ form, value }`. */
   'filter-fields-changed': [],
+  /** A filter tag was dismissed. Payload: the removed filter field key. */
   'filter-removed': [],
+  /** Filter dropdown opened or closed. Payload: boolean. */
   'filter-open': [],
+  /** Search query was submitted or cleared. Payload: query string. */
   'search-query-changed': [],
+  /** A table cell was hovered. Payload: `{ item, key }`. */
   'hover:cell': [],
+  /** Column visibility or order changed via the column editor. Payload: active headers array. */
   'columns-changed': [],
+  /** Table has mounted and column order is initialized. */
   'on-table-ready': []
 })
 

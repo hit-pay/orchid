@@ -1,0 +1,16 @@
+{
+  "name": "orchidui-mcp-server",
+  "version": "1.0.0",
+  "description": "MCP server for OrchidUI component library",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "express": "^5.2.1",
+    "zod": "^4.3.6"
+  }
+}

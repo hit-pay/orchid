@@ -11,5 +11,10 @@ export default defineConfig({
       '@/orchidui-core-style.css': resolve(__dirname, './packages/core/dist/core.css'),
       '@/orchidui-dashboard-style.css': resolve(__dirname, './packages/dashboard/dist/dashboard.css')
     }
+  },
+  test: {
+    environment: 'happy-dom',
+    globals: true,
+    include: ['packages/__tests__/**/*.test.{js,ts}']
   }
 })

@@ -3,10 +3,12 @@ import { computed } from 'vue'
 import { TableHeader, Chip } from '@/orchidui-core'
 
 const props = defineProps({
+  /** Applied filter chips. Array of `{ name, label, multiNames? }` objects from `formatFilterDisplay`. */
   filters: {
     type: Object,
     default: () => ({})
   },
+  /** Active search query strings shown as chips. */
   queries: {
     type: Object,
     default: () => ({})
@@ -14,8 +16,11 @@ const props = defineProps({
 })
 
 const emit = defineEmits({
+  /** A search query chip was dismissed. Payload: query string. */
   removeQuery: [],
+  /** A filter chip was dismissed. Payload: `(filterObject, fieldName)`. */
   removeFilter: [],
+  /** "Clear all" chip was clicked. */
   removeAll: []
 })
 
