@@ -14,11 +14,43 @@ const props = defineProps({
 
 const isDropdownOpened = ref(props.secondaryButtonProps?.isDropdownOpened ?? false)
 const { isMobile } = useWindowWidth()
+const clickAdditional = (e) => {
+  e.preventDefault()
+  isDropdownOpened.value = !isDropdownOpened.value
+  const { secondaryButtonProps } = props;
+  typeof secondaryButtonProps?.['onAdditionClick'] === 'function' && secondaryButtonProps['onAdditionClick']();
+}
+const clickSecondaryButton = (e) => {
+  const { secondaryButtonProps } = props;
+  if (secondaryButtonProps.additionalAreaIcon && secondaryButtonProps.dropdownOptions) {
+    // need to stop to prevent open dropdown, dropdown should be triggerred on additional icon.
+    e.stopPropagation()
+    e.preventDefault()
+
+    typeof secondaryButtonProps.onClick === 'function' && secondaryButtonProps.onClick(e);
+
+    return
+  }
+
+  if (!secondaryButtonProps.dropdownOptions) {
+    e.stopPropagation()
+    e.preventDefault()
+
+    typeof secondaryButtonProps.onClick === 'function' && secondaryButtonProps.onClick(e);
+  }
+}
 </script>
 <template>
   <div v-if="!isLoading" class="flex gap-x-3 items-center">
     <Dropdown v-if="secondaryButtonProps" v-model="isDropdownOpened" :distance="10">
-      <Button :size="isMobile ? 'small' : 'default'" v-bind="secondaryButtonProps" />
+      <Button
+        :size="isMobile ? 'small' : 'default'"
+        v-bind="{
+          ...secondaryButtonProps,
+          onClick: clickSecondaryButton,
+          onAdditionClick: clickAdditional
+        }"
+      />
       <template #menu>
         <div v-if="secondaryButtonProps?.dropdownOptions" class="p-2">
           <DropdownItem
