@@ -18,8 +18,8 @@ const boxes = [
   {
     showInfo: false,
     items: [
-      { title: 'Purpose',   content: 'Premium GYM membership' },
-      { title: 'ID',        content: '9a2f500c-545d-4db6-84fa-c40d65146f43' },
+      { title: 'Purpose', content: 'Premium GYM membership' },
+      { title: 'ID', content: '9a2f500c-545d-4db6-84fa-c40d65146f43' },
       { title: 'Reference', content: '9a2f500c-545d-4db6-84fa-c40d65146f43' }
     ]
   },

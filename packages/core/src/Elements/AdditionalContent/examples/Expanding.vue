@@ -1,5 +1,5 @@
 <script setup>
-import { AdditionalContent } from '@orchidui/core'
+import { AdditionalContent } from '@/orchidui-core'
 
 const customer = {
   name: 'Alex Turner',
@@ -15,13 +15,13 @@ const customer = {
 }
 
 const items = [
-  { title: 'Purpose',    content: 'Premium GYM membership' },
-  { title: 'ID',         content: '9a2f500c-545d-4db6-84fa-c40d65146f43' },
-  { title: 'Reference',  content: 'REF-20231120-001' },
+  { title: 'Purpose', content: 'Premium GYM membership' },
+  { title: 'ID', content: '9a2f500c-545d-4db6-84fa-c40d65146f43' },
+  { title: 'Reference', content: 'REF-20231120-001' },
   { title: 'Created at', content: '20/11/2023' },
   { title: 'Expired at', content: '20/12/2023' },
-  { title: 'Status',     content: 'Completed', class: 'text-oc-success' },
-  { title: 'Amount',     content: 'SGD 150.00' },
+  { title: 'Status', content: 'Completed', class: 'text-oc-success' },
+  { title: 'Amount', content: 'SGD 150.00' },
   {
     title: 'Channel',
     content: 'Point of sale',

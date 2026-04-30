@@ -1,5 +1,6 @@
 <script setup>
 import { CustomerCard, Icon, Tooltip, Button } from '@/orchidui-core'
+import { useWindowWidth } from '../../../composables/useWindowWidth.js'
 import { ref, computed } from 'vue'
 
 const props = defineProps({
@@ -28,7 +29,11 @@ defineEmits({
   editCustomer: null
 })
 
+const { isMobile } = useWindowWidth()
+
 const isExpanded = ref(false)
+
+const effectiveColumns = computed(() => (isMobile.value ? 1 : props.columns))
 
 const visibleItems = computed(() =>
   isExpanded.value ? props.items : props.items.slice(0, props.initialCount)
@@ -37,9 +42,10 @@ const visibleItems = computed(() =>
 const hasMore = computed(() => props.items.length > props.initialCount)
 
 const getBorderClasses = (index) => {
+  const cols = effectiveColumns.value
   const total = visibleItems.value.length
-  const isLastInRow = (index + 1) % props.columns === 0
-  const isInLastRow = index >= total - (total % props.columns || props.columns)
+  const isLastInRow = (index + 1) % cols === 0
+  const isInLastRow = index >= total - (total % cols || cols)
   return {
     'border-r': !isLastInRow,
     'border-b': !isInLastRow
@@ -49,7 +55,7 @@ const getBorderClasses = (index) => {
 
 <template>
   <div class="flex flex-col md:flex-row bg-oc-gray-50 border border-oc-gray-200 rounded">
-    <div class="relative flex-1" :class="[`grid grid-cols-${columns}`, hasMore ? 'mb-8 md:mb-0' : '']">
+    <div class="relative flex-1" :class="[`grid grid-cols-${effectiveColumns}`, hasMore ? 'mb-8 md:mb-0' : '']">
       <div
         v-for="(item, index) in visibleItems"
         :key="index"
@@ -78,7 +84,7 @@ const getBorderClasses = (index) => {
           <span>{{ item.content }}</span>
           <Button
             v-if="item.button"
-            class="ml-auto hidden group-hover:inline-block [&>button]:h-[unset]"
+            class="ml-auto inline-block md:hidden md:group-hover:inline-block [&>button]:h-[unset] [&>button]:border [&>button]:border-oc-gray-200"
             v-bind="item.button"
           />
         </div>
@@ -86,7 +92,7 @@ const getBorderClasses = (index) => {
 
       <div v-if="hasMore" class="absolute -bottom-8 right-0 w-full justify-center flex items-center z-10">
         <div
-          class="rounded-b border cursor-pointer border-oc-gray-200 border-t-0 h-[28px] text-oc-primary hover:text-oc-text-400 px-3 py-2 gap-x-2 flex items-center"
+          class="rounded md:rounded-t-none border cursor-pointer border-oc-gray-200 h-[28px] text-oc-primary hover:text-oc-text-400 px-3 py-2 gap-x-2 flex items-center"
           @click="isExpanded = !isExpanded"
         >
           <Icon :name="isExpanded ? 'arrow-up-down-2' : 'arrow-up-down'" width="16" height="16" />
@@ -95,22 +101,23 @@ const getBorderClasses = (index) => {
       </div>
     </div>
 
-    <CustomerCard
-      v-if="isCustomer"
-      :variant="customerCardVariant"
-      :customer="customer"
-      :is-hover="customerIsHover"
-      :is-edit="customerIsEdit"
-      class="flex bg-oc-accent-1-50 flex-col md:border-l border-t md:border-t-0 border-oc-gray-200 md:max-w-[250px] shrink-0 w-full border-0 bg-transparent"
-      @add-customer="$emit('addCustomer')"
-      @edit-customer="$emit('editCustomer', $event)"
-    >
-      <template v-if="$slots['customer-leading']" #leading>
-        <slot name="customer-leading" />
-      </template>
-      <template v-if="$slots['customer-bottom']" #bottom>
-        <slot name="customer-bottom" />
-      </template>
-    </CustomerCard>
+    <div v-if="isCustomer" class="flex bg-oc-accent-1-50 flex-col md:border-l border-oc-gray-200 md:max-w-[250px] shrink-0 w-full">
+      <CustomerCard
+        :variant="customerCardVariant"
+        :customer="customer"
+        :is-hover="customerIsHover"
+        :is-edit="customerIsEdit"
+        class="border-0 bg-transparent"
+        @add-customer="$emit('addCustomer')"
+        @edit-customer="$emit('editCustomer', $event)"
+      >
+        <template v-if="$slots['customer-leading']" #leading>
+          <slot name="customer-leading" />
+        </template>
+        <template v-if="$slots['customer-bottom']" #bottom>
+          <slot name="customer-bottom" />
+        </template>
+      </CustomerCard>
+    </div>
   </div>
 </template>
