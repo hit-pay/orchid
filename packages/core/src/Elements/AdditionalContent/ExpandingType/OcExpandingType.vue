@@ -49,7 +49,7 @@ const getBorderClasses = (index) => {
 
 <template>
   <div class="flex flex-col md:flex-row bg-oc-gray-50 border border-oc-gray-200 rounded">
-    <div class="relative flex-1" :class="`grid grid-cols-${columns}`">
+    <div class="relative flex-1" :class="[`grid grid-cols-${columns}`, hasMore ? 'mb-8 md:mb-0' : '']">
       <div
         v-for="(item, index) in visibleItems"
         :key="index"
@@ -84,7 +84,7 @@ const getBorderClasses = (index) => {
         </div>
       </div>
 
-      <div v-if="hasMore" class="absolute -bottom-8 right-0 w-full justify-center flex items-center">
+      <div v-if="hasMore" class="absolute -bottom-8 right-0 w-full justify-center flex items-center z-10">
         <div
           class="rounded-b border cursor-pointer border-oc-gray-200 border-t-0 h-[28px] text-oc-primary hover:text-oc-text-400 px-3 py-2 gap-x-2 flex items-center"
           @click="isExpanded = !isExpanded"
