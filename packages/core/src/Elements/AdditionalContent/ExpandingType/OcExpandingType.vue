@@ -1,6 +1,6 @@
 <script setup>
 import { CustomerCard, Icon, Tooltip, Button } from '@/orchidui-core'
-import { useWindowWidth } from '../../../composables/useWindowWidth.js'
+import MobileExpandingType from './MobileExpandingType.vue'
 import { ref, computed } from 'vue'
 
 const props = defineProps({
@@ -29,11 +29,7 @@ defineEmits({
   editCustomer: null
 })
 
-const { isMobile } = useWindowWidth()
-
 const isExpanded = ref(false)
-
-const effectiveColumns = computed(() => (isMobile.value ? 1 : props.columns))
 
 const visibleItems = computed(() =>
   isExpanded.value ? props.items : props.items.slice(0, props.initialCount)
@@ -42,7 +38,7 @@ const visibleItems = computed(() =>
 const hasMore = computed(() => props.items.length > props.initialCount)
 
 const getBorderClasses = (index) => {
-  const cols = effectiveColumns.value
+  const cols = props.columns
   const total = visibleItems.value.length
   const isLastInRow = (index + 1) % cols === 0
   const isInLastRow = index >= total - (total % cols || cols)
@@ -51,15 +47,44 @@ const getBorderClasses = (index) => {
     'border-b': !isInLastRow
   }
 }
+
+const getEffectiveColSpan = (item, index) => {
+  if (item.colSpan) return item.colSpan
+  if (index !== visibleItems.value.length - 1) return null
+  const cols = props.columns
+  const totalGridCols = visibleItems.value.reduce((sum, it) => sum + (it.colSpan || 1), 0)
+  const remainder = totalGridCols % cols
+  if (remainder === 0) return null
+  const posInRow = (totalGridCols - (item.colSpan || 1)) % cols
+  const remaining = cols - posInRow
+  return remaining > 1 ? remaining : null
+}
 </script>
 
 <template>
-  <div class="flex flex-col md:flex-row bg-oc-gray-50 border border-oc-gray-200 rounded">
-    <div class="relative flex-1" :class="[`grid grid-cols-${effectiveColumns}`, hasMore ? 'mb-8 md:mb-0' : '']">
+  <!-- Mobile -->
+  <MobileExpandingType
+    class="flex md:hidden"
+    :items="items"
+    :initial-count="initialCount"
+    :columns="columns"
+    :is-customer="isCustomer"
+    :customer-card-variant="customerCardVariant"
+    :customer="customer"
+    @add-customer="$emit('addCustomer')"
+  >
+    <template v-for="(_, name) in $slots" #[name]="slotData">
+      <slot :name="name" v-bind="slotData" />
+    </template>
+  </MobileExpandingType>
+
+  <!-- Desktop -->
+  <div class="hidden md:flex md:flex-row bg-oc-gray-50 border border-oc-gray-200 rounded">
+    <div class="relative flex-1" :class="[`grid grid-cols-${columns}`, hasMore ? 'md:mb-0' : '']">
       <div
         v-for="(item, index) in visibleItems"
         :key="index"
-        :class="[getBorderClasses(index), { 'cursor-pointer': typeof item.onClick === 'function' }]"
+        :class="[getBorderClasses(index), { 'cursor-pointer': typeof item.onClick === 'function' }, { 'col-span-2': getEffectiveColSpan(item, index) === 2, 'col-span-3': getEffectiveColSpan(item, index) === 3 }]"
         class="p-4 flex flex-col gap-y-1 group"
         @click="item.onClick?.()"
       >
@@ -84,7 +109,7 @@ const getBorderClasses = (index) => {
           <span>{{ item.content }}</span>
           <Button
             v-if="item.button"
-            class="ml-auto inline-block md:hidden md:group-hover:inline-block [&>button]:h-[unset] [&>button]:border [&>button]:border-oc-gray-200"
+            class="ml-auto hidden group-hover:inline-block [&>button]:h-[unset] [&>button]:border [&>button]:border-oc-gray-200"
             v-bind="item.button"
           />
         </div>
@@ -92,7 +117,7 @@ const getBorderClasses = (index) => {
 
       <div v-if="hasMore" class="absolute -bottom-8 right-0 w-full justify-center flex items-center z-10">
         <div
-          class="rounded md:rounded-t-none border cursor-pointer border-oc-gray-200 h-[28px] text-oc-primary hover:text-oc-text-400 px-3 py-2 gap-x-2 flex items-center"
+          class="rounded-b border cursor-pointer border-oc-gray-200 h-[28px] text-oc-primary hover:text-oc-text-400 px-3 py-2 gap-x-2 flex items-center"
           @click="isExpanded = !isExpanded"
         >
           <Icon :name="isExpanded ? 'arrow-up-down-2' : 'arrow-up-down'" width="16" height="16" />
@@ -101,7 +126,7 @@ const getBorderClasses = (index) => {
       </div>
     </div>
 
-    <div v-if="isCustomer" class="flex bg-oc-accent-1-50 flex-col md:border-l border-oc-gray-200 md:max-w-[250px] shrink-0 w-full">
+    <div v-if="isCustomer" class="flex bg-oc-accent-1-50 flex-col md:border-l border-oc-gray-200 md:max-w-[250px] shrink-0 w-full md:rounded-r">
       <CustomerCard
         :variant="customerCardVariant"
         :customer="customer"

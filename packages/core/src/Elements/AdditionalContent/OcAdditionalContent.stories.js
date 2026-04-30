@@ -8,6 +8,8 @@ import BalanceExample from './examples/Balance.vue'
 import BalanceRaw from './examples/Balance.vue?raw'
 import ExpandingExample from './examples/Expanding.vue'
 import ExpandingRaw from './examples/Expanding.vue?raw'
+import ExpandingCustomerInfoExample from './examples/ExpandingCustomerInfo.vue'
+import ExpandingCustomerInfoRaw from './examples/ExpandingCustomerInfo.vue?raw'
 
 export default {
   component: AdditionalContent,
@@ -228,5 +230,21 @@ export const Expanding = {
   render: () => ({
     components: { ExpandingExample, Theme },
     template: `<Theme class="p-4"><ExpandingExample /></Theme>`
+  })
+}
+
+export const ExpandingCustomerInfo = {
+  description: 'Expanding variant used as a customer info card — flat grid of customer detail fields with no show-more toggle (all fields visible by default). Mirrors the CustomerInfoCard pattern but uses the expanding layout instead of dynamic boxes.',
+  highlights: [
+    'variant="expanding"',
+    'expanding-columns="3" — three-column grid',
+    'expanding-initial-count="6" — all fields visible by default, no toggle needed',
+    'REMARKS field conditionally included via spread',
+    'No CustomerCard — customer data is the content itself'
+  ],
+  code: ExpandingCustomerInfoRaw,
+  render: () => ({
+    components: { ExpandingCustomerInfoExample, Theme },
+    template: `<Theme class="p-4"><ExpandingCustomerInfoExample /></Theme>`
   })
 }
