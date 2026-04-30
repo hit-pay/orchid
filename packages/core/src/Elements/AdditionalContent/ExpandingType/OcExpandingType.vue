@@ -48,7 +48,7 @@ const getBorderClasses = (index) => {
 </script>
 
 <template>
-  <div class="flex bg-oc-gray-50 border border-oc-gray-200 rounded">
+  <div class="flex flex-col md:flex-row bg-oc-gray-50 border border-oc-gray-200 rounded">
     <div class="relative flex-1" :class="`grid grid-cols-${columns}`">
       <div
         v-for="(item, index) in visibleItems"
@@ -101,7 +101,7 @@ const getBorderClasses = (index) => {
       :customer="customer"
       :is-hover="customerIsHover"
       :is-edit="customerIsEdit"
-      class="flex bg-oc-accent-1-50 flex-col border-l border-oc-gray-200 max-w-[250px] shrink-0 w-full border-0 bg-transparent"
+      class="flex bg-oc-accent-1-50 flex-col md:border-l border-t md:border-t-0 border-oc-gray-200 md:max-w-[250px] shrink-0 w-full border-0 bg-transparent"
       @add-customer="$emit('addCustomer')"
       @edit-customer="$emit('editCustomer', $event)"
     >
