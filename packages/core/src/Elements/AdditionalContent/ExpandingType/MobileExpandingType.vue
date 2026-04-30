@@ -5,8 +5,6 @@ import { ref, computed } from 'vue'
 const props = defineProps({
   /** Flat array of item objects to display. */
   items: { type: Array, default: () => [] },
-  /** Number of items visible in the preview grid. */
-  initialCount: { type: Number, default: 6 },
   /** Number of grid columns in the preview. */
   columns: { type: Number, default: 3 },
   /** Show a CustomerCard at the bottom of the details panel. */
@@ -14,12 +12,16 @@ const props = defineProps({
   /** Variant passed to the CustomerCard component. */
   customerCardVariant: { type: String, default: 'big' },
   /** Customer data object passed to the CustomerCard component. */
-  customer: { type: Object, default: null }
+  customer: { type: Object, default: null },
+  /** Enable edit mode on the CustomerCard. */
+  customerIsEdit: { type: Boolean, default: false }
 })
 
 defineEmits({
   /** "Add customer" button clicked inside the CustomerCard. */
-  addCustomer: []
+  addCustomer: [],
+  /** "Edit customer" action triggered. Payload: customer event data. */
+  editCustomer: []
 })
 
 const isDetailsOpen = ref(false)
@@ -138,8 +140,10 @@ const getEffectiveColSpan = (item, index) => {
             v-if="isCustomer"
             :variant="customerCardVariant"
             :customer="customer"
+            :is-edit="customerIsEdit"
             class="mt-2"
             @add-customer="$emit('addCustomer')"
+            @edit-customer="$emit('editCustomer', $event)"
           />
         </div>
       </div>

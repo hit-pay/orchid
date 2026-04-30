@@ -66,12 +66,13 @@ const getEffectiveColSpan = (item, index) => {
   <MobileExpandingType
     class="flex md:hidden"
     :items="items"
-    :initial-count="initialCount"
     :columns="columns"
     :is-customer="isCustomer"
     :customer-card-variant="customerCardVariant"
     :customer="customer"
+    :customer-is-edit="customerIsEdit"
     @add-customer="$emit('addCustomer')"
+    @edit-customer="$emit('editCustomer', $event)"
   >
     <template v-for="(_, name) in $slots" #[name]="slotData">
       <slot :name="name" v-bind="slotData" />
