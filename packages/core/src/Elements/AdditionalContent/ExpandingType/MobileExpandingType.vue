@@ -55,7 +55,15 @@ const getEffectiveColSpan = (item, index) => {
 <template>
   <div>
     <div class="flex flex-col bg-oc-gray-50 border border-oc-gray-200 rounded overflow-hidden">
-      <div :class="`grid grid-cols-${columns}`">
+      <div
+        class="grid"
+        :class="{
+          'grid-cols-1': columns === 1,
+          'grid-cols-2': columns === 2,
+          'grid-cols-3': columns === 3,
+          'grid-cols-4': columns === 4,
+        }"
+      >
         <div
           v-for="(item, i) in previewItems"
           :key="i"
