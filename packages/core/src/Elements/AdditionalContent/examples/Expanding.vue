@@ -1,5 +1,5 @@
 <script setup>
-import { AdditionalContent } from '@/orchidui-core'
+import { AdditionalContent } from '@orchidui/core'
 
 const customer = {
   name: 'Alex Turner',

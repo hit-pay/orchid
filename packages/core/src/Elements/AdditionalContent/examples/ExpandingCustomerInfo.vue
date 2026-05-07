@@ -1,5 +1,5 @@
 <script setup>
-import { AdditionalContent } from '@/orchidui-core'
+import { AdditionalContent } from '@orchidui/core'
 
 const customer = {
   created_at: '2023-11-20T00:00:00Z',
