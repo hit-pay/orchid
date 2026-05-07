@@ -81,11 +81,29 @@ const getEffectiveColSpan = (item, index) => {
 
   <!-- Desktop -->
   <div class="hidden md:flex md:flex-row bg-oc-gray-50 border border-oc-gray-200 rounded">
-    <div class="relative flex-1" :class="[`grid grid-cols-${columns}`, hasMore ? 'md:mb-0' : '']">
+    <div
+      class="relative flex-1 grid"
+      :class="[
+        {
+          'grid-cols-1': columns === 1,
+          'grid-cols-2': columns === 2,
+          'grid-cols-3': columns === 3,
+          'grid-cols-4': columns === 4
+        },
+        hasMore ? 'md:mb-0' : ''
+      ]"
+    >
       <div
         v-for="(item, index) in visibleItems"
         :key="index"
-        :class="[getBorderClasses(index), { 'cursor-pointer': typeof item.onClick === 'function' }, { 'col-span-2': getEffectiveColSpan(item, index) === 2, 'col-span-3': getEffectiveColSpan(item, index) === 3 }]"
+        :class="[
+          getBorderClasses(index),
+          { 'cursor-pointer': typeof item.onClick === 'function' },
+          {
+            'col-span-2': getEffectiveColSpan(item, index) === 2,
+            'col-span-3': getEffectiveColSpan(item, index) === 3
+          }
+        ]"
         class="p-4 flex flex-col gap-y-1 group"
         @click="item.onClick?.()"
       >
@@ -102,11 +120,7 @@ const getEffectiveColSpan = (item, index) => {
         </div>
 
         <slot v-if="item.slot && $slots[item.slot]" :name="item.slot" :data="item" />
-        <div
-          v-else
-          class="overflow-hidden text-ellipsis flex items-center"
-          :class="item.class"
-        >
+        <div v-else class="overflow-hidden text-ellipsis flex items-center" :class="item.class">
           <span>{{ item.content }}</span>
           <Button
             v-if="item.button"
@@ -116,7 +130,10 @@ const getEffectiveColSpan = (item, index) => {
         </div>
       </div>
 
-      <div v-if="hasMore" class="absolute -bottom-8 right-0 w-full justify-center flex items-center z-10">
+      <div
+        v-if="hasMore"
+        class="absolute -bottom-8 right-0 w-full justify-center flex items-center z-10"
+      >
         <div
           class="rounded-b border cursor-pointer border-oc-gray-200 h-[28px] text-oc-primary hover:text-oc-text-400 px-3 py-2 gap-x-2 flex items-center"
           @click="isExpanded = !isExpanded"
@@ -127,7 +144,10 @@ const getEffectiveColSpan = (item, index) => {
       </div>
     </div>
 
-    <div v-if="isCustomer" class="flex bg-oc-accent-1-50 flex-col md:border-l border-oc-gray-200 md:max-w-[250px] shrink-0 w-full md:rounded-r">
+    <div
+      v-if="isCustomer"
+      class="flex bg-oc-accent-1-50 flex-col md:border-l border-oc-gray-200 md:max-w-[250px] shrink-0 w-full md:rounded-r"
+    >
       <CustomerCard
         :variant="customerCardVariant"
         :customer="customer"
