@@ -17,17 +17,18 @@ const { isMobile } = useWindowWidth()
 const clickAdditional = (e) => {
   e.preventDefault()
   isDropdownOpened.value = !isDropdownOpened.value
-  const { secondaryButtonProps } = props;
-  typeof secondaryButtonProps?.['onAdditionClick'] === 'function' && secondaryButtonProps['onAdditionClick']();
+  const { secondaryButtonProps } = props
+  typeof secondaryButtonProps?.['onAdditionClick'] === 'function' &&
+    secondaryButtonProps['onAdditionClick'](e)
 }
 const clickSecondaryButton = (e) => {
-  const { secondaryButtonProps } = props;
+  const { secondaryButtonProps } = props
   if (secondaryButtonProps.additionalAreaIcon && secondaryButtonProps.dropdownOptions) {
     // need to stop to prevent open dropdown, dropdown should be triggerred on additional icon.
     e.stopPropagation()
     e.preventDefault()
 
-    typeof secondaryButtonProps.onClick === 'function' && secondaryButtonProps.onClick(e);
+    typeof secondaryButtonProps.onClick === 'function' && secondaryButtonProps.onClick(e)
 
     return
   }
@@ -36,7 +37,7 @@ const clickSecondaryButton = (e) => {
     e.stopPropagation()
     e.preventDefault()
 
-    typeof secondaryButtonProps.onClick === 'function' && secondaryButtonProps.onClick(e);
+    typeof secondaryButtonProps.onClick === 'function' && secondaryButtonProps.onClick(e)
   }
 }
 </script>
@@ -85,7 +86,6 @@ const clickSecondaryButton = (e) => {
   <div v-else class="flex gap-x-3 items-center">
     <Skeleton class="w-[100px] h-[36px] rounded" />
     <Skeleton class="w-[100px] h-[36px] rounded" />
-
   </div>
 </template>
 <style scoped lang="scss">
