@@ -95,7 +95,7 @@ export const Playground = {
     components: { DataTable, Button },
     setup() {
       const selected = ref([])
-      const filter   = ref({ page: 1, per_page: 10, tab: '', keywords: '' })
+      const filter   = ref({ page: 1, per_page: 10, tab: '', keywords: '', statuses: undefined })
       const lastClickedRow = ref(null)
 
       const rows = [
@@ -121,6 +121,7 @@ export const Playground = {
           ...(args.showTabs && {
             tabs: {
               key: 'tab',
+              filter_name: 'statuses',
               options: [
                 { label: 'All',      value: '' },
                 { label: 'Active',   value: 'active' },
@@ -140,6 +141,30 @@ export const Playground = {
                     { label: 'Free',       value: 'free' },
                     { label: 'Pro',        value: 'pro' },
                     { label: 'Enterprise', value: 'enterprise' }
+                  ]
+                }
+              },
+              {
+                name: 'statuses',
+                type: 'Select',
+                props: {
+                  label: 'Status',
+                  placeholder: 'Select status',
+                  isCheckboxes: true,
+                  isSelectAll: true,
+                  multiple: true,
+                  popperOptions: { strategy: 'fixed' },
+                  options: [
+                    { label: 'Draft', value: 'draft', variant: 'gray' },
+                    { label: 'Pending', value: 'pending', variant: 'warning' },
+                    { label: 'Need Approval', value: 'need_approval', variant: 'accent-2' },
+                    { label: 'Scheduled', value: 'scheduled', variant: 'dark-blue' },
+                    { label: 'Processing', value: 'processing', variant: 'primary' },
+                    { label: 'Completed', value: 'completed', variant: 'success' },
+                    { label: 'Failed', value: 'failed', variant: 'error' },
+                    { label: 'Rejected', value: 'rejected', variant: 'light-red' },
+                    { label: 'Canceled', value: 'canceled', variant: 'neutral' },
+                    { label: 'File Processing', value: 'file_processing', variant: 'accent-3' }
                   ]
                 }
               }
