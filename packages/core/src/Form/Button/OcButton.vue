@@ -150,7 +150,7 @@ const iconSize = computed(() => ({
       v-if="isAdditionalArea && !isTransparent"
       class="border-y border-r flex cursor-pointer items-center justify-center oc-btn-add-area px-[6px] py-3 rounded-r-[inherit]"
       :class="[additionalAreaSize[size], variant]"
-      @click.stop="$emit('addition-click')"
+      @click.stop="$emit('addition-click', $event)"
     >
       <slot name="additional-content">
         <Icon :name="additionalAreaIcon" :class="additionalAreaIconSize[size]" />

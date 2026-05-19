@@ -21,6 +21,100 @@ export const Default = {
       isDropdownOpened: false,
       variant: 'secondary',
       label: 'Secondary',
+      onClick: () => {
+        console.log('secondary clicked');
+      },
+    },
+    isBack: false,
+    isCopy: false,
+    chipOptions: null
+  },
+  render: (args) => ({
+    components: { PageTitle, Theme },
+    setup() {
+      return { args }
+    },
+    template: `
+      <Theme>
+        <PageTitle v-bind="args" />
+      </Theme>
+    `
+  })
+}
+
+export const SecondaryMultipleActions = {
+  args: {
+    title: 'Page Title',
+    description: '123',
+    isLoading: false,
+    primaryButtonProps: {
+      leftIcon: 'plus',
+      label: 'Primary',
+      onClick: () => {
+        console.log('click new payment link')
+      }
+    },
+    secondaryButtonProps: {
+      isDropdownOpened: false,
+      variant: 'secondary',
+      label: 'Secondary',
+      isAdditionalArea: true,
+      onClick: () => {
+        console.log('secondary clicked');
+      },
+      additionalAreaIcon: 'chevron-down',
+      dropdownOptions: [
+        {
+          name: 'bulk_create',
+          icon: 'upload',
+          text: 'Bulk create',
+          onClick: () => {
+            console.log('click bulk create')
+          }
+        },
+        {
+          name: 'download',
+          icon: 'download',
+          text: 'Export',
+          onClick: () => {
+            console.log('click download')
+          }
+        }
+      ]
+    },
+    isBack: false,
+    isCopy: false,
+    chipOptions: null
+  },
+  render: (args) => ({
+    components: { PageTitle, Theme },
+    setup() {
+      return { args }
+    },
+    template: `
+      <Theme>
+        <PageTitle v-bind="args" />
+      </Theme>
+    `
+  })
+}
+
+export const HasDropdownButton = {
+  args: {
+    title: 'Page Title',
+    description: '123',
+    isLoading: false,
+    primaryButtonProps: {
+      leftIcon: 'plus',
+      label: 'Primary',
+      onClick: () => {
+        console.log('click new payment link')
+      }
+    },
+    secondaryButtonProps: {
+      isDropdownOpened: true,
+      variant: 'secondary',
+      leftIcon: 'chevron-down',
       dropdownOptions: [
         {
           name: 'bulk_create',

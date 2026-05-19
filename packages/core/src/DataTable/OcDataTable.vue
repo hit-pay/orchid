@@ -269,11 +269,15 @@ const changeSearchKey = (value) => {
 const clearAllFilters = () => {
   searchQueries.value = []
   activeFilterTab.value = ''
+  const activeTab = filterOptions.value?.tabs?.filter_name
+    ? defaultFilterData[filterOptions.value?.tabs?.key]
+    : activeFilterTab.value
+
   filterData.value = clearAllFiltersUtil(
     filterData.value,
     filterOptions.value,
     itemsPerPage.value,
-    activeFilterTab.value
+    activeTab
   )
   applyFilter()
 }
@@ -307,6 +311,15 @@ const applyFilter = (
   if (filterOptions.value?.tabs && isChangeTab) {
     filterData.value[filterOptions.value.tabs.key] = activeFilterTab.value
   }
+  // need to sync with filter data if same key with tabs
+  if (filterOptions.value?.tabs?.filter_name) {
+    if (isChangeTab) {
+      filterData.value[filterOptions.value?.tabs?.filter_name] = null
+    } else if(filterFormData) {
+      activeFilterTab.value = null
+    }
+  }
+
   if (filterOptions.value?.search) {
     if (filterOptions.value.search?.options?.length) {
       Object.keys(filterData.value).forEach((key) => {
@@ -335,7 +348,10 @@ const applyFilter = (
   }
 
   let filterTabKey = filterOptions.value?.tabs?.key
-  if (filterTabKey && activeFilterTab.value !== filterData.value[filterTabKey]) {
+  if (filterTabKey &&
+    activeFilterTab.value !== filterData.value[filterTabKey] &&
+    !filterOptions.value?.tabs?.filter_name
+  ) {
     const selectedTab = filterOptions.value.tabs?.options?.find(
       (option) => option.value?.toString() === filterData.value[filterTabKey]?.toString()
     )

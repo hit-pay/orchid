@@ -3,6 +3,7 @@ import { Chip, PrimaryActions, Skeleton } from '@/orchidui-core'
 import OcTitle from '@/orchidui-core/Elements/PageTitle/OcTitle.vue'
 import BalanceOverview from './BalanceType/OcBalanceOverview.vue'
 import DynamicType from './DynamicType/OcDynamicType.vue'
+import ExpandingType from './ExpandingType/OcExpandingType.vue'
 
 const props = defineProps({
   /** Base URL prefix shown next to the userId link (e.g. `'https://app.hitpay.com/customers/'`). */
@@ -31,15 +32,21 @@ const props = defineProps({
   customerIsEdit: { type: Boolean, default: false },
   /**
    * Layout variant that controls which child component is rendered.
-   * @values default, dynamic, balance
+   * @values default, dynamic, balance, expanding
    */
   variant: {
     type: String,
     default: 'default',
-    validator: (val) => ['default', 'dynamic', 'balance'].includes(val)
+    validator: (val) => ['default', 'dynamic', 'balance', 'expanding'].includes(val)
   },
   /** Array of box group objects passed to the dynamic variant (each with `items` array of OverviewItem props). */
   boxes: { type: Array, default: () => [] },
+  /** Flat array of item objects for the expanding variant (each with title, content, info, tooltip, class, button, slot). */
+  expandingItems: { type: Array, default: () => [] },
+  /** Number of items visible before "Show more" is clicked (expanding variant only). */
+  expandingInitialCount: { type: Number, default: 6 },
+  /** Number of grid columns in the expanding variant. */
+  expandingColumns: { type: Number, default: 3 },
   /** Show a CustomerCard in the dynamic variant. */
   isCustomer: { type: Boolean, default: false },
   /** Show skeleton placeholders while data is loading. */
@@ -141,6 +148,25 @@ const copyLink = async () => {
         <slot :name="name" v-bind="slotData" />
       </template>
     </DynamicType>
+
+    <ExpandingType
+      v-else-if="variant === 'expanding'"
+      :items="expandingItems"
+      :initial-count="expandingInitialCount"
+      :columns="expandingColumns"
+      :customer-card-variant="customerCardVariant"
+      :customer="customer"
+      :is-customer="isCustomer"
+      :customer-is-hover="customerIsHover"
+      :customer-is-edit="customerIsEdit"
+      :class="additionalStyling"
+      @add-customer="$emit('addCustomer')"
+      @edit-customer="$emit('editCustomer', $event)"
+    >
+      <template v-for="(_, name) in $slots" #[name]="slotData">
+        <slot :name="name" v-bind="slotData" />
+      </template>
+    </ExpandingType>
 
     <BalanceOverview
       v-else-if="variant === 'balance'"
