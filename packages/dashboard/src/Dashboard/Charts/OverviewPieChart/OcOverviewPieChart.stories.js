@@ -13,7 +13,9 @@ export const Default = {
       { value: 1048, name: 'Cards', itemStyle: { color: '#356DFF' } },
       { value: 200, name: 'Paynow', itemStyle: { color: '#AEC5FF' } },
       { value: 100, name: 'Others', itemStyle: { color: '#86FFCC' } }
-    ]
+    ],
+    showPercentInLabel: true,
+    totalLabel: 'Total Customer'
   },
   render: (args) => ({
     components: { OcOverviewPieChart, Theme },
