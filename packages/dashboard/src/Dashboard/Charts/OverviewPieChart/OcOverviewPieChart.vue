@@ -1,31 +1,32 @@
 <template>
   <div class="flex flex-col items-center justify-center">
     <div class="relative w-[210px] h-[210px]">
-    <div ref="pieChart" class="w-[210px] h-[210px]" />
+      <div ref="pieChart" class="w-[210px] h-[210px]" />
 
-    <!-- Custom center label overlay -->
-    <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-      <div class="text-center">
-        <div class="text-oc-text-400">{{ centerLabel }}</div>
-        <div class="text-lg font-semibold font-reddit-mono">{{ currency }} {{ formatCurrency(centerValue) }}</div>
+      <!-- Custom center label overlay -->
+      <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+        <div class="text-center">
+          <div class="text-oc-text-400">{{ centerLabel }}</div>
+          <div class="text-lg font-semibold font-reddit-mono">
+            {{ currency }} {{ formatCurrency(centerValue) }}
+          </div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Custom legend below the chart -->
-  <div v-if="chartData && chartData.length > 0" class="mt-4 flex flex-wrap gap-3 justify-center">
-    <div
-      v-for="(item, index) in chartData"
-      :key="index"
-      class="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"
-    >
+    <!-- Custom legend below the chart -->
+    <div v-if="chartData && chartData.length > 0" class="mt-4 flex flex-wrap gap-3 justify-center">
       <div
-        class="w-3 h-3 rounded-full"
-        :style="{ backgroundColor: getLegendColor(index) }"
-      ></div>
-      <span class="text-sm">{{ item.name }}</span>
+        v-for="(item, index) in chartData"
+        :key="index"
+        class="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"
+      >
+        <div class="w-3 h-3 rounded-full" :style="{ backgroundColor: getLegendColor(index) }"></div>
+        <span class="text-sm"
+          >{{ item.name }} {{ showPercentInLabel ? `(${formatPercentage(item.value)}%)` : '' }}
+        </span>
+      </div>
     </div>
-  </div>
   </div>
 </template>
 
@@ -44,6 +45,14 @@ const props = defineProps({
     type: Object,
     default: () => ({})
   },
+  totalLabel: {
+    type: String,
+    default: 'Total'
+  },
+  showPercentInLabel: {
+    type: Boolean,
+    default: false
+  }
 })
 
 // Reactive state for center label
@@ -74,50 +83,52 @@ const totalValue = computed(() => {
 
 // Initialize center label with total
 const initializeCenterLabel = () => {
-  centerLabel.value = 'Total'
+  centerLabel.value = props.totalLabel
   centerValue.value = totalValue.value
 }
 
 // Chart options
 const chartOptions = computed(() => ({
   tooltip: props.tooltip,
-  series: [{
-    id: 'overviewPieChart',
-    data: props.chartData || [],
-    type: 'pie',
-    radius: ['80%', '100%'],
-    avoidLabelOverlap: false,
+  series: [
+    {
+      id: 'overviewPieChart',
+      data: props.chartData || [],
+      type: 'pie',
+      radius: ['80%', '100%'],
+      avoidLabelOverlap: false,
 
-    itemStyle: {
-      borderRadius: 6,
-      borderColor: '#fff',
-      borderWidth: 2
-    },
-    animation: false,
-    label: {
-      show: false, // Hide default labels
-    },
-    labelLine: {
-      show: false
-    },
-    // Emphasize hovered/active slice and blur others to gray
-    emphasis: {
-      scale: false,
-      focus: 'self',
-      label: { show: false },
       itemStyle: {
-        color: 'inherit',
-      }
-    },
-    blur: {
-      itemStyle: {
-        color: '#F2F2F4',
-        opacity: 1,
+        borderRadius: 6,
+        borderColor: '#fff',
+        borderWidth: 2
       },
-      label: { show: false }
-    },
-    ...(props.additionalOptions ? props.additionalOptions : {})
-  }]
+      animation: false,
+      label: {
+        show: false // Hide default labels
+      },
+      labelLine: {
+        show: false
+      },
+      // Emphasize hovered/active slice and blur others to gray
+      emphasis: {
+        scale: false,
+        focus: 'self',
+        label: { show: false },
+        itemStyle: {
+          color: 'inherit'
+        }
+      },
+      blur: {
+        itemStyle: {
+          color: '#F2F2F4',
+          opacity: 1
+        },
+        label: { show: false }
+      },
+      ...(props.additionalOptions ? props.additionalOptions : {})
+    }
+  ]
 }))
 
 // Chart instance
@@ -126,8 +137,6 @@ const { chart } = useChart(pieChart, chartOptions)
 
 // Legend functions
 const getLegendColor = (index) => props.chartData[index].itemStyle.color
-
-
 
 // Initialize center label when chart is ready
 watch(chart, async (newChart) => {
@@ -148,16 +157,20 @@ watch(chart, async (newChart) => {
 
     newChart.on('mouseout', 'series', () => {
       // Reset to total when not hovering
-      centerLabel.value = 'Total'
+      centerLabel.value = props.totalLabel
       centerValue.value = totalValue.value
     })
   }
 })
 
 // Watch for data changes to update total
-watch(() => props.chartData, () => {
-  if (chart.value) {
-    initializeCenterLabel()
-  }
-}, { deep: true })
+watch(
+  () => props.chartData,
+  () => {
+    if (chart.value) {
+      initializeCenterLabel()
+    }
+  },
+  { deep: true }
+)
 </script>
