@@ -62,10 +62,10 @@ const centerValue = ref(0)
 // Utility functions
 const formatCurrency = (value) => {
   const numValue = typeof value === 'number' ? value : Number(value)
-  return numValue.toLocaleString('en-US', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  })
+  return numValue.toLocaleString('en-US', props.currency
+    ? { minimumFractionDigits: 2, maximumFractionDigits: 2 }
+    : { minimumFractionDigits: 0, maximumFractionDigits: 0 }
+  )
 }
 
 // Calculate percentage of a value against total
