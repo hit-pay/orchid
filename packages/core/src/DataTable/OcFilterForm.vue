@@ -94,14 +94,14 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="flex w-[326px] flex-col gap-y-5">
+  <div class="flex w-[326px] flex-col">
     <slot
       :errors="errorsData"
       :values="valuesData"
       :json-form="jsonForm"
       :update-form="onUpdateForm"
     >
-      <div class="max-h-[500px] overflow-y-auto p-5">
+      <div class="p-5">
         <FormBuilder
           :id="`filter-form-${id}`"
           class="grid gap-5"
@@ -114,7 +114,7 @@ onMounted(() => {
       </div>
     </slot>
 
-    <div class="flex gap-x-5 px-5 pb-5">
+    <div class="sticky bottom-0 flex gap-x-5 bg-oc-bg-light px-5 pb-5 pt-3">
       <Button
         class="w-full"
         variant="secondary"
