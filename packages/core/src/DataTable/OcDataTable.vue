@@ -315,7 +315,7 @@ const applyFilter = (
   if (filterOptions.value?.tabs?.filter_name) {
     if (isChangeTab) {
       filterData.value[filterOptions.value?.tabs?.filter_name] = null
-    } else if(filterFormData) {
+    } else if (filterFormData) {
       activeFilterTab.value = null
     }
   }
@@ -348,7 +348,8 @@ const applyFilter = (
   }
 
   let filterTabKey = filterOptions.value?.tabs?.key
-  if (filterTabKey &&
+  if (
+    filterTabKey &&
     activeFilterTab.value !== filterData.value[filterTabKey] &&
     !filterOptions.value?.tabs?.filter_name
   ) {
@@ -457,6 +458,7 @@ onMounted(() => {
                 :distance="9"
                 placement="bottom-end"
                 is-attach-to-body
+                :max-menu-height="500"
                 @update:model-value="$emit('filter-open', $event)"
               >
                 <Button
