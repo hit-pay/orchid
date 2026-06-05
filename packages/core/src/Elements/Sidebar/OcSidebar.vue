@@ -103,7 +103,7 @@ watch(
       v-if="sidebarMenu[0]?.label"
       class="flex items-center text-md px-6 py-4 border-b border-gray-100 mx-auto w-full"
     >
-      <span v-if="isExpanded">{{ sidebarMenu[0]?.label }}</span>
+      <span v-if="isExpanded" class="font-medium">{{ sidebarMenu[0]?.label }}</span>
       <div
         class="border p-2 rounded-md"
         :class="{

@@ -54,13 +54,13 @@
         </template>
         <Icon
           v-if="isExpanded && isChildren"
-          name="triangle-down"
-          width="10"
-          height="10"
-          class="text-oc-accent-1-500"
+          name="chevron-right"
+          width="20"
+          height="20"
+          class="text-[var(--oc-sidebar-menu-active-icon)]"
           :class="{
-            'rotate-0 opacity-25': isMenuExpanded,
-            '-rotate-90 opacity-15': !isMenuExpanded
+            'rotate-0 opacity-25': !isMenuExpanded,
+            '-rotate-90 opacity-15': isMenuExpanded
           }"
         />
       </div>

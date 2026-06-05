@@ -31,7 +31,6 @@ export const PAYMENT_SIDEBAR_ITEMS = [
     label: 'Bank Payouts',
     children: [
       {
-        active: true,
         name: 'reports-hit-pay-balance',
         path: 'balance',
         label: 'HitPay Balance'
@@ -195,7 +194,6 @@ export const POS_SIDEBAR_ITEMS = [
     label: 'Products',
     children: [
       {
-        active: true,
         name: 'all-products',
         path: 'products',
         label: 'All Products'
@@ -263,7 +261,7 @@ export const POS_SIDEBAR_OTHERS_SIDEBAR_ITEMS = [
 export const POS_SIDEBAR_GROUP = [
   {
     name: 'point-of-sale',
-    label: 'POINT OF SALE',
+    label: 'Point of Sale',
     items: POS_SIDEBAR_ITEMS
   },
   {
@@ -299,7 +297,6 @@ export const ONLINE_STORE_SIDEBAR_ITEMS = [
     label: 'Products',
     children: [
       {
-        active: true,
         name: 'all-products',
         path: 'products',
         label: 'All Products'
@@ -400,7 +397,7 @@ export const ONLINE_STORE_OTHERS_SIDEBAR_ITEMS = [
 export const ONLINE_STORE_SIDEBAR_GROUP = [
   {
     name: 'online-store',
-    label: 'ONLINE STORE',
+    label: 'Online Store',
     items: ONLINE_STORE_SIDEBAR_ITEMS
   },
   {
