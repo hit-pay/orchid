@@ -20,17 +20,21 @@ export default {
   component: Sidebar,
   tags: ['autodocs'],
   kind: 'composite',
-  use_for: [
-    'app navigation',
-    'main sidebar menu',
-    'side navigation with submenus'
-  ],
-  understand_with: ['SideBarMenu', 'SidebarSubmenu', 'SidebarFooter', 'SidebarFeatureBanners', 'AccountSetupProgress', 'Icon']
+  use_for: ['app navigation', 'main sidebar menu', 'side navigation with submenus'],
+  understand_with: [
+    'SideBarMenu',
+    'SidebarSubmenu',
+    'SidebarFooter',
+    'SidebarFeatureBanners',
+    'AccountSetupProgress',
+    'Icon'
+  ]
 }
 
 export const Default = {
   args: {
     isExpanded: true,
+    isHoverSidebar: false,
     payment_sidebar_menu: PAYMENTS_SIDEBAR_GROUP,
     pos_sidebar_menu: POS_SIDEBAR_GROUP,
     online_store_sidebar_menu: ONLINE_STORE_SIDEBAR_GROUP,
@@ -53,46 +57,50 @@ export const Default = {
     },
     template: `
       <Theme class="layout-payment mb-8">
-        <Sidebar
-          :title="args.title"
-          :sidebar-menu="args.payment_sidebar_menu"
-          :isExpanded="args.isExpanded"
-          @changeExpanded="args.isExpanded = $event"
-        >
-          <template #banner>
-            <AccountSetupProgress :value="args.progress" info-label="Add your bank account" />
-            <SidebarFeatureBanners
-              title="Late invoice fee"
-              is-stacked
-              description="You can now automate late fees on unpaid invoices by setting a fixed amount or percentage of the total, applied after a custom grace period."
-            />
-          </template>
-          <template #before>
-            <OcAccountSetup :isExpanded="args.isExpanded" :progress="args.progress"/>
-          </template>
-          <template #user>
-            <Dropdown v-model="rightMenuDropdown" placement="bottom-end" :distance="10">
-              <Avatar class="uppercase cursor-pointer" :size="32">
-                J
-              </Avatar>
-              <template #menu>
-                <div class="flex flex-col">
-                  <div class="p-2 border-b border-gray-200">
-                    <a href="#">
-                      <DropdownItem text="userName" />
-                    </a>
-                    <a href="#">
-                      <DropdownItem text="Security" />
-                    </a>
+          <div class="flex w-full">
+            <Sidebar
+            :title="args.title"
+            :sidebar-menu="args.payment_sidebar_menu"
+            :isExpanded="args.isExpanded"
+            @changeIsHoverSidebar="args.isHoverSidebar = $event"
+            @changeExpanded="args.isExpanded = $event"
+          >
+            <template #banner>
+              <AccountSetupProgress :value="args.progress" info-label="Add your bank account" />
+              <SidebarFeatureBanners
+                title="Late invoice fee"
+                is-stacked
+                description="You can now automate late fees on unpaid invoices by setting a fixed amount or percentage of the total, applied after a custom grace period."
+              />
+            </template>
+            <template #before>
+              <OcAccountSetup :isExpanded="args.isExpanded || args.isHoverSidebar" :progress="args.progress"/>
+            </template>
+            <template #user>
+              <Dropdown v-model="rightMenuDropdown" placement="bottom-end" :distance="10">
+                <Avatar class="uppercase cursor-pointer" :size="32">
+                  J
+                </Avatar>
+                <template #menu>
+                  <div class="flex flex-col">
+                    <div class="p-2 border-b border-gray-200">
+                      <a href="#">
+                        <DropdownItem text="userName" />
+                      </a>
+                      <a href="#">
+                        <DropdownItem text="Security" />
+                      </a>
+                    </div>
+                    <div class="p-2">
+                      <DropdownItem @click="logout" text="Logout" variant="destructive" />
+                    </div>
                   </div>
-                  <div class="p-2">
-                    <DropdownItem @click="logout" text="Logout" variant="destructive" />
-                  </div>
-                </div>
-              </template>
-            </Dropdown>
-          </template>
-        </Sidebar>
+                </template>
+              </Dropdown>
+            </template>
+          </Sidebar>
+          <div class="w-[calc(100%-300px)]">Content test 1</div>
+        </div>
       </Theme>
     `
   })
@@ -101,6 +109,7 @@ export const Default = {
 export const AllSidebar = {
   args: {
     isExpanded: true,
+    isHoverSidebar: false,
     payment_sidebar_menu: PAYMENTS_SIDEBAR_GROUP,
     pos_sidebar_menu: POS_SIDEBAR_GROUP,
     online_store_sidebar_menu: ONLINE_STORE_SIDEBAR_GROUP,
@@ -118,11 +127,12 @@ export const AllSidebar = {
           :sidebar-menu="args.payment_sidebar_menu"
           :isExpanded="args.isExpanded"
           @changeExpanded="args.isExpanded = $event"
+          @changeIsHoverSidebar="args.isHoverSidebar = $event"
         >
           <template #before>
-            <OcAccountSetup :isExpanded="args.isExpanded" :progress="args.progress"/>
+            <OcAccountSetup :isExpanded="args.isExpanded || args.isHoverSidebar" :progress="args.progress"/>
             <OcAccountSetup
-              :isExpanded="args.isExpanded"
+              :isExpanded="args.isExpanded || args.isHoverSidebar"
               :progress="args.progress"
               is-pending
               :payout-status="{ label: 'Pending', variant: 'warning'}"

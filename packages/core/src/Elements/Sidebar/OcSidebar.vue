@@ -1,10 +1,12 @@
 <script setup>
-import { reactive, onMounted, computed, watch } from 'vue'
-import { SidebarHead, SideBarMenu, SidebarSubMenuItem, SidebarFooter, Icon } from '@/orchidui-core'
+import { computed, ref } from 'vue'
+import OcSidebarContent from './OcSidebarContent.vue'
+import { clickOutside as vClickOutside } from '../../directives/clickOutside.js'
 
 const emit = defineEmits({
   /** Sidebar expanded/collapsed. Payload: new boolean state. */
   changeExpanded: null,
+  changeIsHoverSidebar: null,
   /** Sidebar icon was clicked. */
   'click:sidebar-icon': null,
   /** Expanded menu list changed. Payload: array of currently expanded menu `name` values. */
@@ -40,135 +42,102 @@ const props = defineProps({
   }
 })
 
-const state = reactive({
-  loading: true,
-  expanded: []
+const hoverSidebar = ref(false)
+
+const isHoverSidebar = computed(() => {
+  return hoverSidebar.value && !props.isExpanded
 })
-
-const expandMenu = (id) => {
-  if (!state.expanded.includes(id)) {
-    state.expanded.push(id)
-  } else {
-    state.expanded = state.expanded.filter((menuId) => menuId !== id)
-  }
-
-  emit('changeExpandedMenus', state.expanded)
-}
-
-const expandOrRedirect = (menuItem) => {
-  if (menuItem.children?.length) {
-    expandMenu(menuItem.name)
-  } else {
-    emit('redirect', menuItem)
-  }
-}
 
 const allClassName = computed(() => {
   let classNames = props.isExpanded ? 'w-[300px] ' : 'w-[76px] '
   return classNames + props.class
 })
 
-onMounted(() => {
-  props.sidebarMenu.forEach((sideMenu) => {
-    sideMenu.items.forEach((menu) => {
-      // check if menu active
-      if (menu.children) {
-        menu.children.forEach((submenu) => {
-          if (submenu.active) {
-            expandMenu(menu.name)
-          }
-        })
-      }
-    })
-  })
-  state.loading = false
-})
+const timeOut = ref(null)
 
-watch(
-  () => props.isExpanded,
-  (value) => {
-    if (!value) {
-      state.expanded = []
+const onMouseOverSidebar = () => {
+  clearTimeout(timeOut.value)
+  timeOut.value = setTimeout(() => {
+    if (!props.isExpanded) {
+      hoverSidebar.value = true
+      emit('changeIsHoverSidebar', true)
     }
+  }, 100)
+}
+
+const onChangeExpanded = (value, isHoverSidebar = false) => {
+  emit('changeExpanded', isHoverSidebar ? true : value)
+  if (!value) {
+    hoverSidebar.value = false
+    emit('changeIsHoverSidebar', false)
   }
-)
+}
+const onClickOutside = (event) => {
+  console.log('onClickOutside', event)
+  hoverSidebar.value = false
+  emit('changeIsHoverSidebar', false)
+}
 </script>
 
 <template>
   <div
+    v-click-outside="onClickOutside"
     class="rounded-tl-lg rounded-bl-lg cursor-pointer flex flex-col transition-all duration-300 ease-in-out relative bg-[var(--oc-sidebar-background)]"
     :class="[allClassName, { 'overflow-auto': isExpanded }]"
   >
-    <div
-      v-if="sidebarMenu[0]?.label"
-      class="flex items-center text-md px-6 py-4 border-b border-gray-100 mx-auto w-full"
+    <OcSidebarContent
+      v-if="isExpanded"
+      :sidebar-menu="sidebarMenu"
+      :display-name="displayName"
+      :is-expanded="isExpanded"
+      :is-sidebar-raw-expanded="isExpanded"
+      @change-expanded="onChangeExpanded"
+      @change-expanded-menus="emit('changeExpandedMenus', $event)"
+      @redirect="emit('redirect', $event)"
+      @user-click="emit('user-click')"
+      @support-click="emit('support-click')"
     >
-      <span v-if="isExpanded" class="font-medium">{{ sidebarMenu[0]?.label }}</span>
+      <template #before>
+        <slot name="before" :is-expanded="isExpanded" />
+      </template>
+      <template #after>
+        <slot name="after" :is-expanded="isExpanded" />
+      </template>
+      <template #banner>
+        <slot name="banner" />
+      </template>
+    </OcSidebarContent>
+    <div v-else class="h-full w-full min-h-[100vh] relative">
       <div
-        class="border p-2 rounded-md"
+        class="position absolute transition-all duration-300 ease-in-out bg-[var(--oc-sidebar-background)]"
         :class="{
-          'ml-auto': isExpanded,
-          'mx-auto': !isExpanded
+          'w-[300px] min-h-[100vh]': isHoverSidebar,
+          'w-[76px]': !isHoverSidebar
         }"
-        @click="emit('changeExpanded', !isExpanded)"
+        @mouseover="onMouseOverSidebar"
       >
-        <Icon name="plus" width="20" height="20" class="text-oc-primary-500" />
+        <OcSidebarContent
+          :sidebar-menu="sidebarMenu"
+          :display-name="displayName"
+          :is-expanded="isHoverSidebar"
+          :is-sidebar-raw-expanded="isHoverSidebar"
+          @change-expanded="onChangeExpanded($event, true)"
+          @change-expanded-menus="emit('changeExpandedMenus', $event)"
+          @redirect="emit('redirect', $event)"
+          @user-click="emit('user-click')"
+          @support-click="emit('support-click')"
+        >
+          <template #before>
+            <slot name="before" :is-expanded="isHoverSidebar" />
+          </template>
+          <template #after>
+            <slot name="after" :is-expanded="isHoverSidebar" />
+          </template>
+          <template #banner>
+            <slot name="banner" />
+          </template>
+        </OcSidebarContent>
       </div>
     </div>
-    <div class="flex flex-col flex-1 py-4 gap-5 px-6 animated-section">
-      <slot name="before" :is-expanded="isExpanded" />
-
-      <template v-for="(sidebar, index) in sidebarMenu" :key="index">
-        <div v-if="!isExpanded" class="border-t border-oc-gray-200 last:hidden first:hidden"></div>
-        <SidebarHead
-          v-if="sidebar.label || sidebar.items.length > 0"
-          :label="index > 0 ? sidebar.label : ''"
-          :is-sidebar-expanded="isExpanded"
-        >
-          <SideBarMenu
-            v-for="(menu, menuIndex) in sidebar.items"
-            :key="menuIndex"
-            :icon="menu.icon"
-            :label="menu.label"
-            :is-children="!!menu.children"
-            :is-active="
-              menu.active || (menu.children && menu.children?.some((child) => child.active))
-            "
-            :is-expanded="isExpanded"
-            :is-new="menu.isNew"
-            :is-try-it="menu.isTryIt"
-            :is-beta="menu.isBeta"
-            :is-show-badge="menu.badgeVisible ? menu.badgeVisible(menu) : true"
-            :is-menu-expanded="state.expanded.includes(menu.name)"
-            @click="expandOrRedirect(menu)"
-            @close-menu="expandMenu(menu.name)"
-          >
-            <SidebarSubMenuItem
-              v-for="(submenu, submenuIndex) in menu.children"
-              :key="submenuIndex"
-              :icon="submenu.icon"
-              :label="submenu.label"
-              :is-active="submenu.active"
-              :is-new="submenu.isNew"
-              :is-beta="submenu.isBeta"
-              :is-try-it="submenu.isTryIt"
-              :is-expanded="isExpanded"
-              :is-show-badge="submenu.badgeVisible ? submenu.badgeVisible(submenu) : true"
-              @click="$emit('redirect', submenu)"
-            />
-          </SideBarMenu>
-        </SidebarHead>
-      </template>
-
-      <slot name="after" :is-expanded="isExpanded" />
-    </div>
-    <SidebarFooter
-      :is-expanded="isExpanded"
-      :display-name="displayName"
-      @user-click="$emit('user-click')"
-      @support-click="$emit('support-click')"
-    >
-      <slot name="banner" />
-    </SidebarFooter>
   </div>
 </template>
