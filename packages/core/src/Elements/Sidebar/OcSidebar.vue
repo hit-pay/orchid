@@ -49,7 +49,7 @@ const isHoverSidebar = computed(() => {
 })
 
 const allClassName = computed(() => {
-  let classNames = props.isExpanded ? 'w-[254px] ' : 'w-[56px] '
+  let classNames = props.isExpanded ? 'w-[250px] ' : 'w-[56px] '
   return classNames + props.class
 })
 
@@ -79,7 +79,7 @@ const onClickOutside = (event) => {
     v-click-outside="onClickOutside"
     class="rounded-tl-lg rounded-bl-lg cursor-pointer flex flex-col transition-all duration-300 ease-in-out relative bg-[var(--oc-sidebar-background)]"
     :class="[allClassName, { 'overflow-auto': isExpanded }]"
-    style="zoom: 0.8661111"
+    style="zoom: 0.88"
   >
     <OcSidebarContent
       v-if="isExpanded"
@@ -107,7 +107,7 @@ const onClickOutside = (event) => {
       <div
         class="position absolute transition-all duration-300 ease-in-out bg-[var(--oc-sidebar-background)]"
         :class="{
-          'w-[254px] min-h-[100vh]': isHoverSidebar,
+          'w-[250px] min-h-[100vh]': isHoverSidebar,
           'w-[56px]': !isHoverSidebar
         }"
         @mouseover="onMouseOverSidebar"
