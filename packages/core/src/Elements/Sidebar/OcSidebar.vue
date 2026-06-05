@@ -1,6 +1,6 @@
 <script setup>
 import { reactive, onMounted, computed, watch } from 'vue'
-import { SidebarHead, SideBarMenu, SidebarSubMenuItem, SidebarFooter } from '@/orchidui-core'
+import { SidebarHead, SideBarMenu, SidebarSubMenuItem, SidebarFooter, Icon } from '@/orchidui-core'
 
 const emit = defineEmits({
   /** Sidebar expanded/collapsed. Payload: new boolean state. */
@@ -96,9 +96,25 @@ watch(
 
 <template>
   <div
-    class="cursor-pointer flex flex-col transition-all duration-300 ease-in-out relative bg-[var(--oc-sidebar-background)]"
+    class="rounded-tl-lg rounded-bl-lg cursor-pointer flex flex-col transition-all duration-300 ease-in-out relative bg-[var(--oc-sidebar-background)]"
     :class="[allClassName, { 'overflow-auto': isExpanded }]"
   >
+    <div
+      v-if="sidebarMenu[0]?.label"
+      class="flex items-center text-md px-6 py-4 border-b border-gray-100 mx-auto w-full"
+    >
+      <span v-if="isExpanded">{{ sidebarMenu[0]?.label }}</span>
+      <div
+        class="border p-2 rounded-md"
+        :class="{
+          'ml-auto': isExpanded,
+          'mx-auto': !isExpanded
+        }"
+        @click="emit('changeExpanded', !isExpanded)"
+      >
+        <Icon name="plus" width="20" height="20" class="text-oc-primary-500" />
+      </div>
+    </div>
     <div class="flex flex-col flex-1 py-4 gap-5 px-6 animated-section">
       <slot name="before" :is-expanded="isExpanded" />
 
@@ -106,7 +122,7 @@ watch(
         <div v-if="!isExpanded" class="border-t border-oc-gray-200 last:hidden first:hidden"></div>
         <SidebarHead
           v-if="sidebar.label || sidebar.items.length > 0"
-          :label="sidebar.label"
+          :label="index > 0 ? sidebar.label : ''"
           :is-sidebar-expanded="isExpanded"
         >
           <SideBarMenu

@@ -68,7 +68,7 @@ defineProps({
       </template>
     </div>
     <div v-else class="bg-white rounded-full p-1">
-      <div v-if="isPending" class="p-3 rounded-full">
+      <div v-if="isPending" class="p-2 rounded-full">
         <oc-icon name="alert" width="20" height="20" class="text-oc-warning-500" />
       </div>
       <div v-else class="pie-wrapper progress style-2">
