@@ -49,7 +49,7 @@ const isHoverSidebar = computed(() => {
 })
 
 const allClassName = computed(() => {
-  let classNames = props.isExpanded ? 'w-[300px] ' : 'w-[76px] '
+  let classNames = props.isExpanded ? 'w-[254px] ' : 'w-[56px] '
   return classNames + props.class
 })
 
@@ -106,8 +106,8 @@ const onClickOutside = (event) => {
       <div
         class="position absolute transition-all duration-300 ease-in-out bg-[var(--oc-sidebar-background)]"
         :class="{
-          'w-[300px] min-h-[100vh]': isHoverSidebar,
-          'w-[76px]': !isHoverSidebar
+          'w-[254px] min-h-[100vh]': isHoverSidebar,
+          'w-[56px]': !isHoverSidebar
         }"
         @mouseover="onMouseOverSidebar"
       >

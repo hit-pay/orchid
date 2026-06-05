@@ -77,7 +77,7 @@ watch(
 <template>
   <div
     v-if="sidebarMenu[0]?.label"
-    class="flex items-center text-md px-6 py-4 border-b border-gray-100 mx-auto w-full"
+    class="flex items-center text-md px-4 py-4 border-b border-gray-100 mx-auto w-full"
   >
     <span v-if="isExpanded" class="font-medium">{{ sidebarMenu[0]?.label }}</span>
     <div
@@ -91,7 +91,7 @@ watch(
       <Icon name="plus" width="20" height="20" class="text-oc-primary-500" />
     </div>
   </div>
-  <div class="flex flex-col flex-1 py-4 gap-5 px-6 animated-section">
+  <div class="flex flex-col flex-1 py-4 gap-5 px-4 animated-section">
     <slot name="before" :is-expanded="isExpanded" />
     <template v-for="(sidebar, index) in sidebarMenu" :key="index">
       <div v-if="!isExpanded" class="border-t border-oc-gray-200 last:hidden first:hidden"></div>

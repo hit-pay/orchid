@@ -29,7 +29,7 @@ defineProps({
   >
     <div v-if="isExpanded" class="p-3 bg-white rounded-[6px] w-full flex flex-col gap-y-5">
       <template v-if="isPending">
-        <div class="p-2 flex gap-3">
+        <div class="p-2 flex gap-3 items-center">
           <div class="p-3 rounded-full border border-oc-warning-500">
             <OcIcon name="alert" width="20" height="20" class="text-oc-warning-500" />
           </div>

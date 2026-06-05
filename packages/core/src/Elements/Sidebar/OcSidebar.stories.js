@@ -99,7 +99,7 @@ export const Default = {
               </Dropdown>
             </template>
           </Sidebar>
-          <div class="w-[calc(100%-300px)]">Content test 1</div>
+          <div class="w-[calc(100%-220px)]">Content test 1</div>
         </div>
       </Theme>
     `
