@@ -79,6 +79,7 @@ const onClickOutside = (event) => {
     v-click-outside="onClickOutside"
     class="rounded-tl-lg rounded-bl-lg cursor-pointer flex flex-col transition-all duration-300 ease-in-out relative bg-[var(--oc-sidebar-background)]"
     :class="[allClassName, { 'overflow-auto': isExpanded }]"
+    style="zoom: 0.8661111"
   >
     <OcSidebarContent
       v-if="isExpanded"
