@@ -53,16 +53,11 @@ const allClassName = computed(() => {
   return classNames + props.class
 })
 
-const timeOut = ref(null)
-
 const onMouseOverSidebar = () => {
-  clearTimeout(timeOut.value)
-  timeOut.value = setTimeout(() => {
-    if (!props.isExpanded) {
-      hoverSidebar.value = true
-      emit('changeIsHoverSidebar', true)
-    }
-  }, 100)
+  if (!props.isExpanded) {
+    hoverSidebar.value = true
+    emit('changeIsHoverSidebar', true)
+  }
 }
 
 const onChangeExpanded = (value, isHoverSidebar = false) => {
