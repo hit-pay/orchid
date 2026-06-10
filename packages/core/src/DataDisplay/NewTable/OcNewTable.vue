@@ -29,7 +29,7 @@
                 <div class="flex p-3 items-center min-h-[35px] border-b border-oc-text-200">
                   <Checkbox
                     class="items-center"
-                    :model-value="selectedRows.length === fields.length"
+                    :model-value="selectableRows.length > 0 && selectedRows.length === selectableRows.length"
                     @update:model-value="selectAllRows"
                   />
                 </div>
@@ -103,6 +103,7 @@
               :select-row="selectRow"
               :get-row-key="getRowKey"
               :get-sticky-classes="getStickyClasses"
+              :is-row-disabled="isRowDisabled"
               @toggle-children="recreateResizeHandles"
               @click:col="onClickRow"
             >
@@ -185,6 +186,15 @@ const props = defineProps({
   isLoading: {
     type: Boolean,
     default: false
+  },
+  /**
+   * Rows that cannot be selected. Array of row data objects, matched against
+   * each row by `rowKey`. Their selection checkbox is hidden and they are
+   * excluded from the select-all action.
+   */
+  disabledRows: {
+    type: Array,
+    default: () => []
   }
 })
 
@@ -213,6 +223,11 @@ const selectedRows = computed({
 })
 
 const sortedFields = computed(() => fields.value)
+
+const isRowDisabled = (row) =>
+  props.disabledRows.some((r) => (typeof r === 'string' ? r : getRowKey.value(r)) === getRowKey.value(row))
+
+const selectableRows = computed(() => fields.value.filter((row) => !isRowDisabled(row)))
 
 const COLUMN_WIDTH = {
   DEFAULT: 125,
@@ -639,9 +654,10 @@ const selectRow = (row) => {
 }
 
 const selectAllRows = () => {
-  const allRowsSelected = selectedRows.value.length === fields.value.length
+  const allRowsSelected =
+    selectableRows.value.length > 0 && selectedRows.value.length === selectableRows.value.length
 
-  selectedRows.value = allRowsSelected ? [] : [...fields.value]
+  selectedRows.value = allRowsSelected ? [] : [...selectableRows.value]
 }
 
 const onClickRow = (field, header) => {

@@ -31,6 +31,7 @@
     >
       <div class="flex p-3 items-center min-h-[35px]">
         <Checkbox
+          v-if="!isRowDisabled(row)"
           class="items-center"
           :model-value="selectedRows.some((r) => getRowKey(r) === getRowKey(row))"
           @update:model-value="selectRow(row)"
@@ -93,6 +94,7 @@
       :get-row-key="getRowKey"
       :select-row="selectRow"
       :get-sticky-classes="getStickyClasses"
+      :is-row-disabled="isRowDisabled"
     >
       <template v-for="(_, name) in $slots" #[name]="slotProps">
         <slot :name="name" v-bind="{ ...slotProps, isChild: true }" />
@@ -162,6 +164,11 @@ const props = defineProps({
   getStickyClasses: {
     type: Function,
     default: () => ''
+  },
+  /** Function `(row) => boolean` — when it returns true, the row's selection checkbox is hidden. */
+  isRowDisabled: {
+    type: Function,
+    default: () => false
   },
   /** Whether this row is rendered as a child of an expandable parent row. */
   isChild: {
