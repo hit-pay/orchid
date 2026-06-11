@@ -30,9 +30,35 @@ const props = defineProps({
   height: {
     type: [String, Number],
     default: '24'
+  },
+  /** Fill value applied to the SVG root. Use "none" for stroke-based icons. */
+  fill: {
+    type: String,
+    default: 'currentColor'
   }
 })
 const iconRef = ref(null)
+const uid = Math.random().toString(36).slice(2, 8)
+
+// Scope all id="x" and url(#x) references with a per-instance prefix so that
+// icons sharing generic clip-path IDs (e.g. id="a") don't collide when multiple
+// icons are rendered in the same document.
+const scopeIds = (html) => {
+  const ids = new Set()
+  const idRe = /\bid="([^"]+)"/g
+  let m
+  while ((m = idRe.exec(html)) !== null) {
+    ids.add(m[1])
+  }
+  let result = html
+  for (const id of ids) {
+    const safe = `oc-${props.name}-${uid}-${id}`
+    result = result.replaceAll(`id="${id}"`, `id="${safe}"`)
+    result = result.replaceAll(`url(#${id})`, `url(#${safe})`)
+    result = result.replaceAll(`href="#${id}"`, `href="#${safe}"`)
+  }
+  return result
+}
 
 const setIconRef = (text, isNew = true) => {
   if (isNew) {
@@ -42,11 +68,9 @@ const setIconRef = (text, isNew = true) => {
       iconDom.querySelector('svg').removeAttribute('id')
       iconDom.querySelector('svg').removeAttribute('width')
       iconDom.querySelector('svg').removeAttribute('height')
+      // Always cache with currentColor; fill is applied at inject time so each
+      // instance can use a different fill without invalidating the shared cache.
       iconDom.querySelector('svg').setAttribute('fill', 'currentColor')
-
-      if (iconRef.value) {
-        iconRef.value.innerHTML = iconDom.innerHTML
-      }
 
       if (window.ORCHID_ICONS) {
         window.ORCHID_ICONS[props.name] = iconDom.innerHTML
@@ -55,10 +79,18 @@ const setIconRef = (text, isNew = true) => {
           [props.name]: iconDom.innerHTML
         }
       }
+
+      if (iconRef.value) {
+        iconRef.value.innerHTML = scopeIds(
+          iconDom.innerHTML.replace(/(<svg\b[^>]*)\bfill="[^"]*"/, `$1fill="${props.fill}"`)
+        )
+      }
     }
     iconDom.remove()
   } else if (iconRef.value) {
-    iconRef.value.innerHTML = text
+    iconRef.value.innerHTML = scopeIds(
+      text.replace(/(<svg\b[^>]*)\bfill="[^"]*"/, `$1fill="${props.fill}"`)
+    )
   }
 }
 
