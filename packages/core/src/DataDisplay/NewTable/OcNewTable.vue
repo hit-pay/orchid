@@ -29,7 +29,7 @@
                 <div class="flex p-3 items-center min-h-[35px] border-b border-oc-text-200">
                   <Checkbox
                     class="items-center"
-                    :model-value="selectableRows.length > 0 && selectedRows.length === selectableRows.length"
+                    :model-value="areAllSelectableSelected"
                     @update:model-value="selectAllRows"
                   />
                 </div>
@@ -228,6 +228,15 @@ const isRowDisabled = (row) =>
   props.disabledRows.some((r) => (typeof r === 'string' ? r : getRowKey.value(r)) === getRowKey.value(row))
 
 const selectableRows = computed(() => fields.value.filter((row) => !isRowDisabled(row)))
+
+// True only when every selectable row is actually selected. Checking membership
+// (not array lengths) keeps this correct even when `selected` includes disabled
+// rows, which would otherwise make a raw length comparison report a false "all".
+const areAllSelectableSelected = computed(() => {
+  if (!selectableRows.value.length) return false
+  const selectedKeys = new Set(selectedRows.value.map((r) => getRowKey.value(r)))
+  return selectableRows.value.every((row) => selectedKeys.has(getRowKey.value(row)))
+})
 
 const COLUMN_WIDTH = {
   DEFAULT: 125,
@@ -654,10 +663,16 @@ const selectRow = (row) => {
 }
 
 const selectAllRows = () => {
-  const allRowsSelected =
-    selectableRows.value.length > 0 && selectedRows.value.length === selectableRows.value.length
-
-  selectedRows.value = allRowsSelected ? [] : [...selectableRows.value]
+  if (areAllSelectableSelected.value) {
+    // Deselect selectable rows, preserving any other entries (e.g. pre-selected disabled rows).
+    const selectableKeys = new Set(selectableRows.value.map((r) => getRowKey.value(r)))
+    selectedRows.value = selectedRows.value.filter((r) => !selectableKeys.has(getRowKey.value(r)))
+  } else {
+    // Add every selectable row not already selected, keeping existing selections.
+    const selectedKeys = new Set(selectedRows.value.map((r) => getRowKey.value(r)))
+    const toAdd = selectableRows.value.filter((r) => !selectedKeys.has(getRowKey.value(r)))
+    selectedRows.value = [...selectedRows.value, ...toAdd]
+  }
 }
 
 const onClickRow = (field, header) => {
