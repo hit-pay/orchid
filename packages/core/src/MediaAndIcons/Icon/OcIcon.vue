@@ -154,4 +154,13 @@ watch(
     }
   }
 )
+
+watch(
+  () => props.fill,
+  () => {
+    if (iconRef.value) {
+      renderIcon()
+    }
+  }
+)
 </script>
