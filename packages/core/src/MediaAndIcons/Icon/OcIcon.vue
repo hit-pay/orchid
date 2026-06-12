@@ -9,7 +9,8 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted, nextTick } from 'vue'
+import { ref, watch, onMounted, nextTick, onUnmounted } from 'vue'
+
 const props = defineProps({
   /** Base URL path where SVG icon files are served from. */
   path: {
@@ -37,8 +38,19 @@ const props = defineProps({
     default: 'currentColor'
   }
 })
+
 const iconRef = ref(null)
 const uid = Math.random().toString(36).slice(2, 8)
+let abortController = null
+
+// Only allow safe CSS color values to prevent attribute injection via fill prop.
+const sanitizeFill = (fill) => {
+  if (/^[a-zA-Z0-9#(),.\s%_-]+$/.test(fill)) return fill
+  return 'currentColor'
+}
+
+// Only allow icon names with safe filesystem characters to prevent path traversal.
+const sanitizeName = (name) => name.replace(/[^a-zA-Z0-9_/-]/g, '')
 
 // Scope all id="x" and url(#x) references with a per-instance prefix so that
 // icons sharing generic clip-path IDs (e.g. id="a") don't collide when multiple
@@ -61,6 +73,8 @@ const scopeIds = (html) => {
 }
 
 const setIconRef = (text, isNew = true) => {
+  const safeFill = sanitizeFill(props.fill)
+
   if (isNew) {
     const iconDom = document.createElement('div')
     iconDom.innerHTML = text
@@ -82,36 +96,43 @@ const setIconRef = (text, isNew = true) => {
 
       if (iconRef.value) {
         iconRef.value.innerHTML = scopeIds(
-          iconDom.innerHTML.replace(/(<svg\b[^>]*)\bfill="[^"]*"/, `$1fill="${props.fill}"`)
+          iconDom.innerHTML.replace(/(<svg\b[^>]*)\bfill="[^"]*"/, `$1fill="${safeFill}"`)
         )
       }
     }
     iconDom.remove()
   } else if (iconRef.value) {
     iconRef.value.innerHTML = scopeIds(
-      text.replace(/(<svg\b[^>]*)\bfill="[^"]*"/, `$1fill="${props.fill}"`)
+      text.replace(/(<svg\b[^>]*)\bfill="[^"]*"/, `$1fill="${safeFill}"`)
     )
   }
 }
 
 const renderIcon = () => {
-  if (window.oc_icons) {
-    window.oc_icons = null // clear old icons
+  const safeName = sanitizeName(props.name)
+  if (!safeName) return
+
+  if (window.ORCHID_ICONS && window.ORCHID_ICONS[safeName]) {
+    setIconRef(window.ORCHID_ICONS[safeName], false)
+    return
   }
-  if (window.ORCHID_ICONS && window.ORCHID_ICONS[props.name]) {
-    setIconRef(window.ORCHID_ICONS[props.name], false)
-  } else {
-    fetch(`${props.path}/${props.name}.svg`)
-      .then((r) => (r.status === 200 ? r.text() : ''))
-      .then((text) => {
-        if (text && iconRef.value) {
-          setIconRef(text, true)
-        }
-      })
-      .catch(() => {
-        console.error(`Icon ${props.name} not found`)
-      })
-  }
+
+  // Abort any in-flight fetch for a previous name to prevent stale renders.
+  if (abortController) abortController.abort()
+  abortController = new AbortController()
+
+  fetch(`${props.path}/${safeName}.svg`, { signal: abortController.signal })
+    .then((r) => (r.status === 200 ? r.text() : ''))
+    .then((text) => {
+      if (text && text.includes('<svg') && iconRef.value) {
+        setIconRef(text, true)
+      }
+    })
+    .catch((err) => {
+      if (err.name !== 'AbortError') {
+        console.error(`Icon ${safeName} not found`)
+      }
+    })
 }
 
 onMounted(async () => {
@@ -119,6 +140,10 @@ onMounted(async () => {
   if (iconRef.value) {
     renderIcon()
   }
+})
+
+onUnmounted(() => {
+  if (abortController) abortController.abort()
 })
 
 watch(
