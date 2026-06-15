@@ -210,3 +210,100 @@ export const Default = {
     `
   })
 }
+
+export const DisabledRows = {
+  description:
+    'Selectable table where specific rows are disabled via the `disabledRows` prop. Disabled rows hide their checkbox and are excluded from the select-all action.',
+  highlights: [
+    'disabledRows — array of row objects matched by rowKey',
+    'isSelectable: true — show row checkboxes',
+    'disabled rows hide their checkbox',
+    'select-all only toggles selectable (non-disabled) rows'
+  ],
+  args: {
+    isLoading: false,
+    options: {
+      headers: [
+        {
+          key: 'email',
+          label: 'Email',
+          variant: 'tooltip',
+          width: 300,
+          tooltip: true
+        },
+        {
+          key: 'id',
+          label: 'ID',
+          isCopy: true,
+          class: 'text-oc-text-400'
+        },
+        {
+          key: 'amount',
+          label: 'Amount',
+          class: 'font-reddit-mono font-semibold'
+        },
+        {
+          key: 'status',
+          label: 'Status'
+        }
+      ],
+      fields: [
+        {
+          id: '#TXN-001',
+          email: 'john.doe@example.com',
+          amount: '2,234.56',
+          currency: 'SGD',
+          status: 'success'
+        },
+        {
+          id: '#TXN-002',
+          email: 'jane.smith@example.com',
+          amount: '1,050.00',
+          currency: 'SGD',
+          status: 'neutral'
+        },
+        {
+          id: '#TXN-003',
+          email: 'alex.lee@example.com',
+          amount: '780.00',
+          currency: 'SGD',
+          status: 'success'
+        },
+        {
+          id: '#TXN-004',
+          email: 'mia.wong@example.com',
+          amount: '410.25',
+          currency: 'SGD',
+          status: 'neutral'
+        }
+      ],
+      isSelectable: true
+    }
+  },
+  render: (args) => ({
+    components: { Theme, NewTable, Chip },
+    setup() {
+      const selectedRows = ref([])
+      // Disable the 2nd and 4th rows — matched against fields by `rowKey` (default 'id').
+      const disabledRows = [args.options.fields[1], args.options.fields[3]]
+      return { options: args.options, selectedRows, disabledRows, args }
+    },
+    template: `
+      <Theme>
+        <NewTable
+          v-model:selected="selectedRows"
+          :options="options"
+          :disabled-rows="disabledRows"
+          :is-loading="args.isLoading"
+        >
+          <template #amount="{ item }">
+            {{ item.currency }} {{ item.amount }}
+          </template>
+          <template #status="{ item }">
+            <Chip :variant="item.status" label="Some label" class="truncate" />
+          </template>
+        </NewTable>
+      </Theme>
+    `
+  })
+}

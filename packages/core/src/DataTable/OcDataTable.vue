@@ -97,6 +97,15 @@ const props = defineProps({
   selectedIndex: {
     type: Number,
     default: -1
+  },
+  /**
+   * Rows that cannot be selected (NewTable only). Array of row data objects,
+   * matched against each row by `rowKey`. Their selection checkbox is hidden
+   * and they are excluded from the select-all action.
+   */
+  disabledRows: {
+    type: Array,
+    default: () => []
   }
 })
 
@@ -403,6 +412,7 @@ onMounted(() => {
       :row-class="rowClass"
       :row-link="rowLink"
       :selected-index="selectedIndex"
+      :disabled-rows="disabledRows"
       :is-sticky="tableOptions.isSticky"
       :is-borderless="tableOptions.isBorderless"
       @update:selected="$emit('update:selected', $event)"
