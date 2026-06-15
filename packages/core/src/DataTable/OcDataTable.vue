@@ -3,6 +3,7 @@ import {
   FilterSearch,
   FilterSearchFor,
   FilterForm,
+  Sort,
   Table,
   Pagination,
   PrevNext,
@@ -50,6 +51,7 @@ const props = defineProps({
    * `filterOptions` (optional) — filter toolbar config:
    * - `search` — `{ key, options? }` enables search bar
    * - `form` — FormBuilder jsonForm array rendered in the filter dropdown
+   * - `sort` — `{ key, options }` renders the Sort control; `key` is the filterData key holding `{ field, direction }`, `options` is the `{ label, value }` field list
    * - `tabs` — `{ key, options }` tab bar above the table
    * - `per_page` — `{ key }` controls which filter key holds items-per-page
    * - `columnEdit` — `{ key, localStorageKey }` enables column show/hide editor
@@ -375,6 +377,11 @@ const applyFilter = (
   emitFilterData(isOnMount)
 }
 
+const onSortChange = (sort) => {
+  filterData.value[filterOptions.value.sort.key] = sort
+  applyFilter()
+}
+
 const emitFilterTimeout = ref(null)
 const emitFilterData = (isOnMount = false) => {
   clearTimeout(emitFilterTimeout.value)
@@ -420,12 +427,23 @@ onMounted(() => {
       @hover:cell="$emit('hover:cell', $event)"
     >
       <template
-        v-if="$slots.before || filterOptions?.search || filterOptions?.form || filterOptions?.tabs"
+        v-if="
+          $slots.before ||
+          filterOptions?.search ||
+          filterOptions?.form ||
+          filterOptions?.tabs ||
+          filterOptions?.sort
+        "
         #before
       >
         <slot name="before" />
         <div
-          v-if="filterOptions?.search || filterOptions?.form || filterOptions?.tabs"
+          v-if="
+            filterOptions?.search ||
+            filterOptions?.form ||
+            filterOptions?.tabs ||
+            filterOptions?.sort
+          "
           class="flex items-center px-4 min-h-[44px]"
         >
           <div v-if="hasSelectedItems" class="absolute flex items-center gap-5 left-5">
@@ -444,7 +462,12 @@ onMounted(() => {
 
           <slot name="filter-options">
             <div
-              v-if="filterOptions?.search || filterOptions?.form || filterOptions?.columnEdit"
+              v-if="
+                filterOptions?.search ||
+                filterOptions?.form ||
+                filterOptions?.sort ||
+                filterOptions?.columnEdit
+              "
               class="flex gap-3 absolute ml-auto items-center bg-oc-bg-light right-4 max-w-[calc(100%-24px)]"
               :class="
                 !filterOptions ? 'w-full justify-end' : isSearchExpanded ? 'md:w-fit w-full' : ''
@@ -504,6 +527,12 @@ onMounted(() => {
                   </FilterForm>
                 </template>
               </Dropdown>
+              <Sort
+                v-if="filterOptions?.sort"
+                :sort-options="filterOptions.sort.options ?? []"
+                :model-value="filterData[filterOptions.sort.key]"
+                @update:model-value="onSortChange"
+              />
               <ColumnEdit
                 v-if="filterOptions.columnEdit"
                 :options="filterData.columnEdit"

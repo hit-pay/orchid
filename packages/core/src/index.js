@@ -69,6 +69,7 @@ const DataTable = defineAsyncComponent(() => import('./DataTable/OcDataTable.vue
 const FilterSearch = defineAsyncComponent(() => import('./DataTable/OcFilterSearch.vue'))
 const FilterSearchFor = defineAsyncComponent(() => import('./DataTable/OcFilterSearchFor.vue'))
 const FilterForm = defineAsyncComponent(() => import('./DataTable/OcFilterForm.vue'))
+const Sort = defineAsyncComponent(() => import('./DataTable/OcSort.vue'))
 
 //
 const ComplexCalendar = defineAsyncComponent(
@@ -110,6 +111,7 @@ export {
   FilterSearch,
   FilterSearchFor,
   FilterForm,
+  Sort,
   // calendar
   ComplexCalendar,
   ComplexDatePicker,
