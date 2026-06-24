@@ -140,14 +140,7 @@ const onClickOutside = () => {
         <Transition :name="transitionName">
           <div v-show="isShow" ref="popperBodyEl" class="oc-tooltip" :class="popperClass">
             <slot name="popper" />
-            <div
-              v-if="!arrowHidden"
-              class="oc-arrow"
-              :class="{
-                '-top-2': isAttachToBody
-              }"
-              data-popper-arrow
-            />
+            <div v-if="!arrowHidden" class="oc-arrow" data-popper-arrow />
           </div>
         </Transition>
       </template>
@@ -160,29 +153,7 @@ const onClickOutside = () => {
   box-shadow:
     0 3px 22px 0 rgba(38, 42, 50, 0.09),
     0 1px 3px 0 rgba(0, 0, 0, 0.1);
-  @apply rounded-sm z-[1010];
-
-  &-wrapper {
-    div[data-popper-placement^='top'] .oc-arrow {
-      bottom: -4px;
-    }
-
-    div[data-popper-placement^='top'] .oc-arrow {
-      bottom: -4px;
-    }
-
-    div[data-popper-placement^='bottom'] .oc-arrow {
-      top: -4px;
-    }
-
-    div[data-popper-placement^='left'] .oc-arrow {
-      right: -4px;
-    }
-
-    div[data-popper-placement^='right'] .oc-arrow {
-      left: -4px;
-    }
-  }
+  @apply rounded-md z-[1010];
 
   .oc-arrow {
     @apply z-0;
@@ -209,5 +180,20 @@ const onClickOutside = () => {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+</style>
+
+<style lang="scss">
+div[data-popper-placement^='top'] .oc-arrow {
+  bottom: -4px;
+}
+div[data-popper-placement^='bottom'] .oc-arrow {
+  top: -4px;
+}
+div[data-popper-placement^='left'] .oc-arrow {
+  right: -4px;
+}
+div[data-popper-placement^='right'] .oc-arrow {
+  left: -4px;
 }
 </style>
