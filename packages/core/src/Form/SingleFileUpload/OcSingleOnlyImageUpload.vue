@@ -16,7 +16,7 @@ const props = defineProps({
     type: String,
     default: ''
   },
-  showUploadImageArea: Boolean
+  showUploadImageArea: Boolean,
   allowToEdit: Boolean
 })
 const emit = defineEmits(['change', 'update:uploadedImage', 'onOpenEditImage', 'delete'])
