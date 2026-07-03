@@ -189,6 +189,7 @@ defineExpose({
       :accept="accept"
       :uploaded-image="currentFile"
       :image-classes="imageClasses"
+      :allow-to-edit="allowToEdit"
       :show-upload-image-area="showUploadImageArea"
       @update:uploaded-image="onUploadImage"
       @change="onChangeFile($event, props.format === 'object')"

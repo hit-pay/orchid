@@ -16,7 +16,8 @@ const props = defineProps({
     type: String,
     default: ''
   },
-  showUploadImageArea: Boolean
+  showUploadImageArea: Boolean,
+  allowToEdit: Boolean
 })
 const emit = defineEmits(['change', 'update:uploadedImage', 'onOpenEditImage', 'delete'])
 const isDropdownOpen = ref(false)
@@ -93,7 +94,7 @@ const openEditImage = () => {
         />
         <template #menu>
           <div class="py-2 flex flex-col">
-            <div class="flex p-3 cursor-pointer items-center gap-x-3" @click="openEditImage">
+            <div v-if="allowToEdit" class="flex p-3 cursor-pointer items-center gap-x-3" @click="openEditImage">
               <Icon width="16" height="16" name="pencil" />
               <span>Edit Image</span>
             </div>
