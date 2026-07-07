@@ -103,7 +103,13 @@ const chartOptions = computed(() => ({
         borderColor: '#fff',
         borderWidth: 2
       },
-      animation: false,
+      // Animate the ring on first render and on data updates so slices sweep in
+      // instead of appearing instantly.
+      animation: true,
+      animationDuration: 800,
+      animationDurationUpdate: 800,
+      animationEasing: 'cubicOut',
+      animationEasingUpdate: 'cubicOut',
       label: {
         show: false // Hide default labels
       },

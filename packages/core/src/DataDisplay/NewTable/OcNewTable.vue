@@ -118,7 +118,7 @@
             <tr>
               <td>
                 <div
-                  :style="{ width: scrollContainerRef?.offsetWidth + 'px' }"
+                  :style="loadingCellStyle"
                   class="flex flex-col justify-center items-center py-10 gap-y-4 bg-white relative z-100"
                 >
                   <Icon
@@ -186,6 +186,15 @@ const props = defineProps({
   isLoading: {
     type: Boolean,
     default: false
+  },
+  /**
+   * Number of rows worth of height to reserve while loading, so the table keeps
+   * its populated height (matching the design) instead of collapsing to a small
+   * spinner and jumping when data arrives.
+   */
+  loadingRows: {
+    type: Number,
+    default: 0
   },
   /**
    * Rows that cannot be selected. Array of row data objects, matched against
@@ -260,6 +269,17 @@ let pageX = null
 let curColWidth = null
 let nxtColWidth = null
 const isScrolledToLeft = ref(true)
+
+// Approximate height of a single populated row, used to reserve space so the
+// loading state matches the eventual table height.
+const LOADING_ROW_HEIGHT = 44
+
+const loadingCellStyle = computed(() => ({
+  width: scrollContainerRef.value?.offsetWidth
+    ? `${scrollContainerRef.value.offsetWidth}px`
+    : undefined,
+  ...(props.loadingRows ? { minHeight: `${props.loadingRows * LOADING_ROW_HEIGHT}px` } : {})
+}))
 
 const showLoadingText = ref(false)
 let loadingTimeout = null
