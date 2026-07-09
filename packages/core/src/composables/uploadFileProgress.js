@@ -43,7 +43,15 @@ export const useUploadFileProgress = (
     // Reset the input value so selecting the same file again re-fires `change`.
     // Without this, re-uploading an identical file (e.g. after it was rejected
     // for exceeding maxSize) produces no event and no re-validation.
-    if (event.target) event.target.value = ''
+    // Deferred so listeners that read `event.target.files` during this same
+    // event (e.g. bubbling native `change` handlers) still see the selected
+    // files before the input is cleared.
+    const inputEl = event.target
+    if (inputEl) {
+      setTimeout(() => {
+        inputEl.value = ''
+      })
+    }
 
     isErrorMaxSize.value =
       uploadFiles.reduce((acc, file) => acc + file.size, 0) > maxSize * 1024 * 1024
