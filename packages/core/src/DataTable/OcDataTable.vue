@@ -473,6 +473,7 @@ onMounted(() => {
                 !filterOptions ? 'w-full justify-end' : isSearchExpanded ? 'md:w-fit w-full' : ''
               "
             >
+              <slot name="before-filter-options" :is-search-expanded="isSearchExpanded" />
               <FilterSearch
                 v-if="filterOptions?.search"
                 :is-search-only="!filterOptions.tabs || filterOptions.isSearchOnly"
