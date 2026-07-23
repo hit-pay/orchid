@@ -121,6 +121,17 @@ const loaded = ref(false)
 // need for upload to server
 const base64Images = ref(props.image)
 
+const hasNonTextContent = (element) =>
+  element.querySelector('img, iframe, video, hr, table')
+
+const isEditorContentEmpty = (html) => {
+  const dom = document.createElement('div')
+  dom.innerHTML = html
+  const isEmpty = !dom.innerText?.trim() && !hasNonTextContent(dom)
+  dom.remove()
+  return isEmpty
+}
+
 const checkStates = (value) => {
   isUndoActive.value = quill.value.getQuill().history.stack.undo.length > 0
   isRedoActive.value = quill.value.getQuill().history.stack.redo.length > 0
@@ -130,21 +141,16 @@ const checkStates = (value) => {
   isBlockquoteActive.value = quill.value.getQuill().getFormat().blockquote
   activeListFormat.value = quill.value.getQuill().getFormat().list
   activeAlign.value = quill.value.getQuill().getFormat().align
-  // check if innerText null remove tags
-  let domTest = document.createElement('div')
-  domTest.innerHTML = value
 
   if (!loaded.value) {
     return
   }
 
-  if (!domTest.innerText) {
-    // reset
+  if (isEditorContentEmpty(value)) {
     emit('update:modelValue', '')
   } else {
     emit('update:modelValue', value || '')
   }
-  domTest.remove()
 }
 
 const addDivider = () => {

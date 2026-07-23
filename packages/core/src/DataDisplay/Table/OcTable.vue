@@ -138,7 +138,7 @@ onMounted(() => onScroll())
     ref="scrollTable"
     class="flex text-oc-text flex-col border-oc-gray-200 isolate z-10"
     :class="[
-      isSticky ? 'overflow-x-auto' : 'overflow-hidden',
+      isSticky ? 'overflow-x-auto hidden-scrollbar' : 'overflow-hidden',
       isResponsive ? 'rounded' : 'md:rounded',
       isBorderless ? '' : 'border'
     ]"
@@ -323,3 +323,14 @@ onMounted(() => onScroll())
     <slot name="after" />
   </div>
 </template>
+
+<style scoped lang="scss">
+.hidden-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+</style>
