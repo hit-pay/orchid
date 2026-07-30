@@ -106,7 +106,7 @@
 <script setup>
 import { CopyTooltip, Icon, Checkbox } from '@/orchidui-core'
 import { ref } from 'vue'
-import OcTableTooltipColumn from '@/orchidui-core/DataDisplay/NewTable/OcTableTooltipColumn.vue'
+import OcTableTooltipColumn from './OcTableTooltipColumn.vue'
 import dayjs from 'dayjs'
 
 const props = defineProps({
