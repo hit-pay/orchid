@@ -46,7 +46,7 @@
     "eslint-plugin-vue": "^9.17.0",
     "fast-glob": "^3.3.1",
     "happy-dom": "^20.9.0",
-    "postcss": "^8.4.31",
+    "postcss": "^8.5.25",
     "postcss-import": "^15.1.0",
     "sass": "^1.68.0",
     "storybook": "^8.6.14",
