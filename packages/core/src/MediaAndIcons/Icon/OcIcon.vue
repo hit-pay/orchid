@@ -139,13 +139,15 @@ const renderIcon = () => {
       // fetch was in flight — stale results must not render.
       if (sanitizeName(props.name) !== safeName || !iconRef.value) return
 
-      if (window.ORCHID_ICONS && window.ORCHID_ICONS[safeName]) {
-        setIconRef(window.ORCHID_ICONS[safeName], false)
-      } else if (text && text.includes('<svg')) {
+      // Render the response for this URL rather than preferring the name-keyed
+      // cache — two icons sharing a name under different paths must not swap.
+      if (text && text.includes('<svg')) {
         setIconRef(text, true)
       }
     })
     .catch(() => {
+      if (sanitizeName(props.name) !== safeName || !iconRef.value) return
+
       console.error(`Icon ${safeName} not found`)
     })
 }
