@@ -8,8 +8,15 @@
   ></svg>
 </template>
 
+<script>
+// Module-level so every OcIcon instance shares it: window.ORCHID_ICONS only
+// caches resolved SVGs, so N instances mounting the same icon in one tick would
+// otherwise all miss the cache and fire N identical fetches.
+const pendingIcons = new Map()
+</script>
+
 <script setup>
-import { ref, watch, onMounted, nextTick, onUnmounted } from 'vue'
+import { ref, watch, onMounted, nextTick } from 'vue'
 
 const props = defineProps({
   /** Base URL path where SVG icon files are served from. */
@@ -41,7 +48,6 @@ const props = defineProps({
 
 const iconRef = ref(null)
 const uid = Math.random().toString(36).slice(2, 8)
-let abortController = null
 
 // Only allow safe CSS color values to prevent attribute injection via fill prop.
 const sanitizeFill = (fill) => {
@@ -117,21 +123,30 @@ const renderIcon = () => {
     return
   }
 
-  // Abort any in-flight fetch for a previous name to prevent stale renders.
-  if (abortController) abortController.abort()
-  abortController = new AbortController()
+  const url = `${props.path}/${safeName}.svg`
 
-  fetch(`${props.path}/${safeName}.svg`, { signal: abortController.signal })
-    .then((r) => (r.status === 200 ? r.text() : ''))
+  let request = pendingIcons.get(url)
+  if (!request) {
+    request = fetch(url)
+      .then((r) => (r.status === 200 ? r.text() : ''))
+      .finally(() => pendingIcons.delete(url))
+    pendingIcons.set(url, request)
+  }
+
+  request
     .then((text) => {
-      if (text && text.includes('<svg') && iconRef.value) {
+      // The name may have changed, or the component unmounted, while the shared
+      // fetch was in flight — stale results must not render.
+      if (sanitizeName(props.name) !== safeName || !iconRef.value) return
+
+      if (window.ORCHID_ICONS && window.ORCHID_ICONS[safeName]) {
+        setIconRef(window.ORCHID_ICONS[safeName], false)
+      } else if (text && text.includes('<svg')) {
         setIconRef(text, true)
       }
     })
-    .catch((err) => {
-      if (err.name !== 'AbortError') {
-        console.error(`Icon ${safeName} not found`)
-      }
+    .catch(() => {
+      console.error(`Icon ${safeName} not found`)
     })
 }
 
@@ -140,10 +155,6 @@ onMounted(async () => {
   if (iconRef.value) {
     renderIcon()
   }
-})
-
-onUnmounted(() => {
-  if (abortController) abortController.abort()
 })
 
 watch(
