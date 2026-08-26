@@ -19,13 +19,21 @@ jobs:
 
       - uses: useblacksmith/setup-node@v5
         with:
-          node-version: 20.x
+          node-version: 22.14.0
           registry-url: https://registry.npmjs.org
+
+      - name: Update npm
+        run: npm install --global npm@11.5.1
+
+      - name: Verify Node and npm
+        run: |
+          node --version
+          npm --version
 
       - name: Running CI
         run: npm ci
 
-      - name: Build Orchid Core
+      - name: Publish Orchid Core
         run: npm run publish-dev:core
 
       - name: Publish Orchid Dashboard
