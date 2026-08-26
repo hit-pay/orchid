@@ -2,7 +2,7 @@
 
 Pushes to `development` / `sandbox` still publish automatically via trusted publishing (`npm publish --tag beta`).
 
-Promoting a version to **latest** is **manual**. Trusted publishing (OIDC) only authenticates `npm publish` / `npm stage publish`, not `npm dist-tag`.
+Promoting a version to **latest** is **manual**. Trusted publishing (OIDC) only authenticates `npm publish`, not `npm dist-tag`.
 
 ## Promote a beta version to latest
 
