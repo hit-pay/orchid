@@ -23,6 +23,8 @@
     "build": "npm run build:core && npm run build:dashboard && npm install && npm run build:storybook && npm run build:json && npm run build:landing",
     "publish-dev:core": "npm run build:core && cd packages/core && npm publish --tag beta",
     "publish-dev:dashboard": "npm run build:dashboard && cd packages/dashboard && npm publish --tag beta",
+    "publish:core": "npm run build:core && cd packages/core && npm publish",
+    "publish:dashboard": "npm run build:dashboard && cd packages/dashboard && npm publish",
     "release": "bun run release.js"
   },
   "dependencies": {

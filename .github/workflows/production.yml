@@ -1,4 +1,4 @@
-name: Promote to Latest
+name: Publish Latest
 
 on:
   push:
@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  promote-latest:
+  publish-latest:
     runs-on: blacksmith-4vcpu-ubuntu-2404
 
     steps:
@@ -26,16 +26,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Get core version
-        id: get_version
-        run: |
-          VERSION=$(node -p "require('./packages/core/package.json').version")
-          echo "VERSION=$VERSION" >> "$GITHUB_OUTPUT"
+      - name: Publish core
+        run: npm run publish:core
 
-      - name: Promote core to latest
-        run: npm dist-tag add @orchidui/core@${{ steps.get_version.outputs.VERSION }} latest
-
-      - name: Promote dashboard to latest
-        run: |
-          DASHBOARD_VERSION=$(node -p "require('./packages/dashboard/package.json').version")
-          npm dist-tag add @orchidui/dashboard@$DASHBOARD_VERSION latest
+      - name: Publish dashboard
+        run: npm run publish:dashboard
