@@ -47,17 +47,17 @@ const isOpen = ref(false)
 
 <template>
   <div
-    class="fixed top-0 bottom-0 shadow-xl bg-oc-bg-light transition-all h-full z-50 overflow-y-auto"
+    class="overflow-y-auto fixed top-0 bottom-0 z-50 h-full rounded-md shadow-[-16px_24px_120px_0_rgba(38,42,50,0.20)] transition-all bg-oc-bg-light"
     :class="{
-      'right-0': modelValue && position === 'right',
+      'right-0 md:right-5': modelValue && position === 'right',
       'right-[-999px] w-0': !modelValue && position === 'right',
-      'left-0': modelValue && position === 'left',
+      'left-0 md:left-5': modelValue && position === 'left',
       'left-[-999px] w-0': !modelValue && position === 'left'
     }"
   >
     <div v-if="modelValue">
       <div
-        class="flex border-oc-gray-200 gap-x-9 justify-between p-5 items-start border-b sticky bg-oc-bg-light top-0"
+        class="flex sticky top-0 gap-x-9 justify-between items-start p-5 border-b border-oc-gray-200 bg-oc-bg-light"
       >
         <slot name="header">
           <div class="flex flex-col gap-y-1 max-w-[300px]">
@@ -68,7 +68,7 @@ const isOpen = ref(false)
             </span>
             <slot name="description">
               <div class="flex gap-3 items-center">
-                <span v-if="description" class="text-sm text-oc-text-300 truncate">
+                <span v-if="description" class="text-sm truncate text-oc-text-300">
                   {{ description }}
                 </span>
                 <CopyTooltip :value="description" :tooltip-options="{ strategy: 'fixed' }">
@@ -84,7 +84,7 @@ const isOpen = ref(false)
               </div>
             </slot>
           </div>
-          <div class="flex items-center gap-3">
+          <div class="flex gap-3 items-center">
             <template v-if="dropdownOptions">
               <Dropdown
                 v-model="isOpen"
