@@ -29,7 +29,7 @@
                 <div class="flex p-3 items-center min-h-[35px] border-b border-oc-text-200">
                   <Checkbox
                     class="items-center"
-                    :model-value="selectedRows.length === fields.length"
+                    :model-value="areAllSelectableSelected"
                     @update:model-value="selectAllRows"
                   />
                 </div>
@@ -103,6 +103,7 @@
               :select-row="selectRow"
               :get-row-key="getRowKey"
               :get-sticky-classes="getStickyClasses"
+              :is-row-disabled="isRowDisabled"
               @toggle-children="recreateResizeHandles"
               @click:col="onClickRow"
             >
@@ -117,7 +118,7 @@
             <tr>
               <td>
                 <div
-                  :style="{ width: scrollContainerRef?.offsetWidth + 'px' }"
+                  :style="loadingCellStyle"
                   class="flex flex-col justify-center items-center py-10 gap-y-4 bg-white relative z-100"
                 >
                   <Icon
@@ -185,6 +186,24 @@ const props = defineProps({
   isLoading: {
     type: Boolean,
     default: false
+  },
+  /**
+   * Number of rows worth of height to reserve while loading, so the table keeps
+   * its populated height (matching the design) instead of collapsing to a small
+   * spinner and jumping when data arrives.
+   */
+  loadingRows: {
+    type: Number,
+    default: 0
+  },
+  /**
+   * Rows that cannot be selected. Array of row data objects, matched against
+   * each row by `rowKey`. Their selection checkbox is hidden and they are
+   * excluded from the select-all action.
+   */
+  disabledRows: {
+    type: Array,
+    default: () => []
   }
 })
 
@@ -214,6 +233,20 @@ const selectedRows = computed({
 
 const sortedFields = computed(() => fields.value)
 
+const isRowDisabled = (row) =>
+  props.disabledRows.some((r) => (typeof r === 'string' ? r : getRowKey.value(r)) === getRowKey.value(row))
+
+const selectableRows = computed(() => fields.value.filter((row) => !isRowDisabled(row)))
+
+// True only when every selectable row is actually selected. Checking membership
+// (not array lengths) keeps this correct even when `selected` includes disabled
+// rows, which would otherwise make a raw length comparison report a false "all".
+const areAllSelectableSelected = computed(() => {
+  if (!selectableRows.value.length) return false
+  const selectedKeys = new Set(selectedRows.value.map((r) => getRowKey.value(r)))
+  return selectableRows.value.every((row) => selectedKeys.has(getRowKey.value(row)))
+})
+
 const COLUMN_WIDTH = {
   DEFAULT: 125,
   ACTIONS: 32
@@ -236,6 +269,17 @@ let pageX = null
 let curColWidth = null
 let nxtColWidth = null
 const isScrolledToLeft = ref(true)
+
+// Approximate height of a single populated row, used to reserve space so the
+// loading state matches the eventual table height.
+const LOADING_ROW_HEIGHT = 44
+
+const loadingCellStyle = computed(() => ({
+  width: scrollContainerRef.value?.offsetWidth
+    ? `${scrollContainerRef.value.offsetWidth}px`
+    : undefined,
+  ...(props.loadingRows ? { minHeight: `${props.loadingRows * LOADING_ROW_HEIGHT}px` } : {})
+}))
 
 const showLoadingText = ref(false)
 let loadingTimeout = null
@@ -639,9 +683,16 @@ const selectRow = (row) => {
 }
 
 const selectAllRows = () => {
-  const allRowsSelected = selectedRows.value.length === fields.value.length
-
-  selectedRows.value = allRowsSelected ? [] : [...fields.value]
+  if (areAllSelectableSelected.value) {
+    // Deselect selectable rows, preserving any other entries (e.g. pre-selected disabled rows).
+    const selectableKeys = new Set(selectableRows.value.map((r) => getRowKey.value(r)))
+    selectedRows.value = selectedRows.value.filter((r) => !selectableKeys.has(getRowKey.value(r)))
+  } else {
+    // Add every selectable row not already selected, keeping existing selections.
+    const selectedKeys = new Set(selectedRows.value.map((r) => getRowKey.value(r)))
+    const toAdd = selectableRows.value.filter((r) => !selectedKeys.has(getRowKey.value(r)))
+    selectedRows.value = [...selectedRows.value, ...toAdd]
+  }
 }
 
 const onClickRow = (field, header) => {

@@ -93,7 +93,23 @@ const props = defineProps({
     type: Object,
     default: () => ({})
   },
-  /** Props forwarded to the underlying Popper/Dropdown component (e.g. placement). */
+  /**
+   * Popper placement for the dropdown menu.
+   * Common values: `'bottom-start'` (bottom-left), `'bottom-end'`, `'top-start'`, `'top-end'`, `'left'`, `'right'`.
+   */
+  placement: {
+    type: String,
+    default: 'bottom-end'
+  },
+  /**
+   * Inline styles applied to the popper (dropdown menu) element.
+   * Overrides the default trigger-matched width — e.g. `{ width: '320px', maxWidth: '320px' }`.
+   */
+  popperStyle: {
+    type: Object,
+    default: () => ({})
+  },
+  /** Props forwarded to the underlying Popper/Dropdown component. */
   popperOptions: {
     type: Object,
     default: () => ({})
@@ -275,8 +291,15 @@ watch(isDropdownOpened, (value) => {
 })
 
 const maxPopperWidth = ref('100%')
-const popperStyle = computed(() => {
-  return { maxWidth: maxPopperWidth.value }
+const mergedPopperStyle = computed(() => {
+  const custom = props.popperStyle || {}
+  // Only cap the menu to the trigger width when the caller hasn't set an explicit width.
+  const hasCustomWidth = custom.width != null || custom.maxWidth != null
+
+  return {
+    ...(hasCustomWidth ? {} : { maxWidth: maxPopperWidth.value }),
+    ...custom
+  }
 })
 const onUpdateDropdown = () => {
   emit('toggle')
@@ -322,11 +345,15 @@ const loadMore = (e) => {
   }
 }
 
-watch(() => props.modelValue, () => {
-  hasAi.value = false
-}, {
-  once: true,
-})
+watch(
+  () => props.modelValue,
+  () => {
+    hasAi.value = false
+  },
+  {
+    once: true
+  }
+)
 
 defineExpose({
   dropdownRef
@@ -357,8 +384,8 @@ defineExpose({
       ]"
       :distance="4"
       popper-class="w-full"
-      placement="bottom-end"
-      :popper-style="popperStyle"
+      :placement="placement"
+      :popper-style="mergedPopperStyle"
       :popper-options="popperOptions"
       :is-disabled="isDisabled || isReadonly"
       :menu-classes="menuClasses"
@@ -366,7 +393,7 @@ defineExpose({
       @scroll="loadMore"
     >
       <div
-        class="border min-h-[36px] input-shadow transition-all duration-[250ms] ease-out w-full px-3 flex justify-between items-center  focus-within:bg-white cursor-pointer gap-x-3 rounded"
+        class="border min-h-[36px] input-shadow transition-all duration-[250ms] ease-out w-full px-3 flex justify-between items-center focus-within:bg-white cursor-pointer gap-x-3 rounded"
         :class="[
           dropdownClasses,
           {
@@ -381,7 +408,7 @@ defineExpose({
           }
         ]"
       >
-        <div v-if="multiple" class="flex flex-wrap gap-2 overflow-hidden">
+        <div v-if="multiple" class="flex overflow-hidden flex-wrap gap-2">
           <slot name="selection">
             <Chip
               v-for="option in maxVisibleOptions
@@ -420,7 +447,7 @@ defineExpose({
         </template>
         <template v-else>
           <span
-            class="whitespace-nowrap flex gap-x-3 items-center overflow-hidden"
+            class="flex overflow-hidden gap-x-3 items-center whitespace-nowrap"
             :class="selectTextClass"
           >
             <Icon v-if="icon" :name="icon" width="16" height="16" />
@@ -436,7 +463,7 @@ defineExpose({
         </template>
         <Icon
           v-if="modelValue && isClearable"
-          class="text-oc-text-400 ml-auto transition-all shrink-0 duration-500 hover:rotate-90"
+          class="ml-auto transition-all duration-500 text-oc-text-400 shrink-0 hover:rotate-90"
           width="16"
           height="16"
           name="x"
@@ -444,7 +471,7 @@ defineExpose({
         />
         <Icon
           v-if="!hideChevron"
-          class="w-5 h-5 transition-all shrink-0 duration-500"
+          class="w-5 h-5 transition-all duration-500 shrink-0"
           :class="{
             '-rotate-180': isDropdownOpened,
             'text-oc-text-400': !dropdownClasses
@@ -460,7 +487,7 @@ defineExpose({
               (isFilterable && !isInlineSearch) ||
               (isFilterable && isInlineSearch && localValueOption)
             "
-            class="sticky px-3 pt-3 top-0 z-10 bg-white"
+            class="sticky top-0 z-10 px-3 pt-3 bg-white"
           >
             <Input
               ref="searchInputRef"
@@ -476,7 +503,7 @@ defineExpose({
           </div>
 
           <div
-            class="flex px-3 pb-3 flex-col gap-y-2"
+            class="flex flex-col gap-y-2 px-3 pb-3"
             :class="{ 'pt-3': !isFilterable || (isInlineSearch && !localValueOption) }"
           >
             <Option
@@ -508,7 +535,7 @@ defineExpose({
               />
               <!-- Empty div to trigger the slot -->
               <slot name="empty">
-                <div v-if="!filterableOptions.length" class="text-sm text-oc-text-300 text-center">
+                <div v-if="!filterableOptions.length" class="text-sm text-center text-oc-text-300">
                   No data to display
                 </div>
               </slot>

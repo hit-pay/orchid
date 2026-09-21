@@ -14,7 +14,6 @@ export * from './DataDisplay/HorizontalProgressbar/OcHorizontalProgressbar.js'
 export * from './DataDisplay/OnboardingListItem/OcOnboardingListItem.js'
 export * from './DataDisplay/OnboardingRecap/OcOnboardingRecap.js'
 export * from './DataDisplay/AccountVerificationContent/OcAccountVerificationContent.js'
-export * from './DataDisplay/NewTable/OcNewTable.js'
 export * from './DataDisplay/RowItemData/OcRowItemData.js'
 
 export * from './Disclosure/Accordion/OcAccordion.js'
@@ -69,6 +68,7 @@ const DataTable = defineAsyncComponent(() => import('./DataTable/OcDataTable.vue
 const FilterSearch = defineAsyncComponent(() => import('./DataTable/OcFilterSearch.vue'))
 const FilterSearchFor = defineAsyncComponent(() => import('./DataTable/OcFilterSearchFor.vue'))
 const FilterForm = defineAsyncComponent(() => import('./DataTable/OcFilterForm.vue'))
+const Sort = defineAsyncComponent(() => import('./DataTable/OcSort.vue'))
 
 //
 const ComplexCalendar = defineAsyncComponent(
@@ -110,6 +110,7 @@ export {
   FilterSearch,
   FilterSearchFor,
   FilterForm,
+  Sort,
   // calendar
   ComplexCalendar,
   ComplexDatePicker,

@@ -8,8 +8,16 @@
   ></svg>
 </template>
 
+<script>
+// Module-level so every OcIcon instance shares it: window.ORCHID_ICONS only
+// caches resolved SVGs, so N instances mounting the same icon in one tick would
+// otherwise all miss the cache and fire N identical fetches.
+const pendingIcons = new Map()
+</script>
+
 <script setup>
 import { ref, watch, onMounted, nextTick } from 'vue'
+
 const props = defineProps({
   /** Base URL path where SVG icon files are served from. */
   path: {
@@ -30,11 +38,49 @@ const props = defineProps({
   height: {
     type: [String, Number],
     default: '24'
+  },
+  /** Fill value applied to the SVG root. Use "none" for stroke-based icons. */
+  fill: {
+    type: String,
+    default: 'currentColor'
   }
 })
+
 const iconRef = ref(null)
+const uid = Math.random().toString(36).slice(2, 8)
+
+// Only allow safe CSS color values to prevent attribute injection via fill prop.
+const sanitizeFill = (fill) => {
+  if (/^[a-zA-Z0-9#(),.\s%_-]+$/.test(fill)) return fill
+  return 'currentColor'
+}
+
+// Only allow icon names with safe filesystem characters to prevent path traversal.
+const sanitizeName = (name) => name.replace(/[^a-zA-Z0-9_/-]/g, '')
+
+// Scope all id="x" and url(#x) references with a per-instance prefix so that
+// icons sharing generic clip-path IDs (e.g. id="a") don't collide when multiple
+// icons are rendered in the same document.
+const scopeIds = (html) => {
+  const ids = new Set()
+  const idRe = /\bid="([^"]+)"/g
+  let m
+  while ((m = idRe.exec(html)) !== null) {
+    ids.add(m[1])
+  }
+  let result = html
+  for (const id of ids) {
+    const safe = `oc-${props.name}-${uid}-${id}`
+    result = result.replaceAll(`id="${id}"`, `id="${safe}"`)
+    result = result.replaceAll(`url(#${id})`, `url(#${safe})`)
+    result = result.replaceAll(`href="#${id}"`, `href="#${safe}"`)
+  }
+  return result
+}
 
 const setIconRef = (text, isNew = true) => {
+  const safeFill = sanitizeFill(props.fill)
+
   if (isNew) {
     const iconDom = document.createElement('div')
     iconDom.innerHTML = text
@@ -42,11 +88,9 @@ const setIconRef = (text, isNew = true) => {
       iconDom.querySelector('svg').removeAttribute('id')
       iconDom.querySelector('svg').removeAttribute('width')
       iconDom.querySelector('svg').removeAttribute('height')
+      // Always cache with currentColor; fill is applied at inject time so each
+      // instance can use a different fill without invalidating the shared cache.
       iconDom.querySelector('svg').setAttribute('fill', 'currentColor')
-
-      if (iconRef.value) {
-        iconRef.value.innerHTML = iconDom.innerHTML
-      }
 
       if (window.ORCHID_ICONS) {
         window.ORCHID_ICONS[props.name] = iconDom.innerHTML
@@ -55,31 +99,57 @@ const setIconRef = (text, isNew = true) => {
           [props.name]: iconDom.innerHTML
         }
       }
+
+      if (iconRef.value) {
+        iconRef.value.innerHTML = scopeIds(
+          iconDom.innerHTML.replace(/(<svg\b[^>]*)\bfill="[^"]*"/, `$1fill="${safeFill}"`)
+        )
+      }
     }
     iconDom.remove()
   } else if (iconRef.value) {
-    iconRef.value.innerHTML = text
+    iconRef.value.innerHTML = scopeIds(
+      text.replace(/(<svg\b[^>]*)\bfill="[^"]*"/, `$1fill="${safeFill}"`)
+    )
   }
 }
 
 const renderIcon = () => {
-  if (window.oc_icons) {
-    window.oc_icons = null // clear old icons
+  const safeName = sanitizeName(props.name)
+  if (!safeName) return
+
+  if (window.ORCHID_ICONS && window.ORCHID_ICONS[safeName]) {
+    setIconRef(window.ORCHID_ICONS[safeName], false)
+    return
   }
-  if (window.ORCHID_ICONS && window.ORCHID_ICONS[props.name]) {
-    setIconRef(window.ORCHID_ICONS[props.name], false)
-  } else {
-    fetch(`${props.path}/${props.name}.svg`)
+
+  const url = `${props.path}/${safeName}.svg`
+
+  let request = pendingIcons.get(url)
+  if (!request) {
+    request = fetch(url)
       .then((r) => (r.status === 200 ? r.text() : ''))
-      .then((text) => {
-        if (text && iconRef.value) {
-          setIconRef(text, true)
-        }
-      })
-      .catch(() => {
-        console.error(`Icon ${props.name} not found`)
-      })
+      .finally(() => pendingIcons.delete(url))
+    pendingIcons.set(url, request)
   }
+
+  request
+    .then((text) => {
+      // The name may have changed, or the component unmounted, while the shared
+      // fetch was in flight — stale results must not render.
+      if (sanitizeName(props.name) !== safeName || !iconRef.value) return
+
+      // Render the response for this URL rather than preferring the name-keyed
+      // cache — two icons sharing a name under different paths must not swap.
+      if (text && text.includes('<svg')) {
+        setIconRef(text, true)
+      }
+    })
+    .catch(() => {
+      if (sanitizeName(props.name) !== safeName || !iconRef.value) return
+
+      console.error(`Icon ${safeName} not found`)
+    })
 }
 
 onMounted(async () => {
@@ -91,6 +161,15 @@ onMounted(async () => {
 
 watch(
   () => props.name,
+  () => {
+    if (iconRef.value) {
+      renderIcon()
+    }
+  }
+)
+
+watch(
+  () => props.fill,
   () => {
     if (iconRef.value) {
       renderIcon()

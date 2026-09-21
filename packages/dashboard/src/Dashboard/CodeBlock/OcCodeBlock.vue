@@ -1,5 +1,9 @@
 <script setup>
-import { createHighlighter } from 'shiki'
+// shiki/core instead of the full 'shiki' entry: the full entry statically
+// registers lazy imports for every language and theme (~290 chunks), which
+// consumers' bundlers then process and ship
+import { createHighlighterCore } from 'shiki/core'
+import { createJavaScriptRegexEngine } from 'shiki/engine/javascript'
 import { onMounted, ref } from 'vue'
 import customTheme from './customTheme'
 import jsonLang from 'shiki/dist/langs/json.mjs'
@@ -18,9 +22,10 @@ const props = defineProps({
 const json = ref()
 
 onMounted(async () => {
-  const highlighter = await createHighlighter({
+  const highlighter = await createHighlighterCore({
     themes: [customTheme],
-    langs: [jsonLang]
+    langs: [jsonLang],
+    engine: createJavaScriptRegexEngine()
   })
 
   json.value = highlighter.codeToHtml(props.jsonObject || '', {

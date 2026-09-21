@@ -63,6 +63,7 @@ export const Playground = {
     showTabs:            { control: 'boolean', description: 'filterOptions.tabs — tab bar above the table' },
     showFilterForm:      { control: 'boolean', description: 'filterOptions.form — filter dropdown powered by FormBuilder' },
     showColumnEdit:      { control: 'boolean', description: 'filterOptions.columnEdit — column show/hide editor, persists to localStorage' },
+    showSort:            { control: 'boolean', description: 'filterOptions.sort — sort control (field selector + Ascending/Descending)' },
     hidePerPageDropdown: { control: 'boolean', description: 'options.hidePerPageDropdown — hide the per-page selector' },
     // Slots & data state
     showCustomCells: { control: 'boolean', description: '#[header.key]="{ item, data }" — custom cell slot for Status column' },
@@ -85,6 +86,7 @@ export const Playground = {
     showTabs:          true,
     showFilterForm:    false,
     showColumnEdit:    false,
+    showSort:          true,
     hidePerPageDropdown: false,
     showCustomCells:   false,
     showBulkActions:   false,
@@ -172,6 +174,16 @@ export const Playground = {
           }),
           ...(args.showColumnEdit && {
             columnEdit: { key: 'columnEdit', localStorageKey: 'playground-datatable' }
+          }),
+          ...(args.showSort && {
+            sort: {
+              key: 'order_by',
+              options: [
+                { label: 'Name',   value: 'name' },
+                { label: 'Joined', value: 'joined' },
+                { label: 'Plan',   value: 'plan' }
+              ]
+            }
           })
         },
         tableOptions: {
@@ -388,5 +400,58 @@ export const NewTableDesign = {
   render: () => ({
     components: { NewTableDesignExample },
     template: `<div class="p-6"><NewTableDesignExample /></div>`
+  })
+}
+
+export const WithSort = {
+  description: 'Sort control in the filter toolbar. Pass filterOptions.sort with a key (filterData field holding { field, direction }) and options ([{ label, value }]). On change the table resets to page 1 and emits update:filter / apply-filter — map filter[key] to your API order_by params and persist as needed.',
+  highlights: ['filterOptions.sort — { key, options }', 'filter[key] = { field, direction }', 'apply-filter event re-fetches from page 1'],
+  render: () => ({
+    components: { DataTable },
+    setup() {
+      const filter = ref({ page: 1, per_page: 10, order_by: { field: null, direction: 'asc' } })
+      const rows = [
+        { id: '1', name: 'Notebook',     created: '2024-01-15', price: 'SGD 9.00' },
+        { id: '2', name: 'Backpack',     created: '2024-02-20', price: 'SGD 49.00' },
+        { id: '3', name: 'Water bottle', created: '2024-03-05', price: 'SGD 19.00' }
+      ]
+      const options = computed(() => ({
+        pagination: { total: 30, last_page: 3 },
+        filterOptions: {
+          per_page: { key: 'per_page' },
+          sort: {
+            key: 'order_by',
+            options: [
+              { label: 'Created',      value: 'created_at' },
+              { label: 'Product name', value: 'name' },
+              { label: 'Price',        value: 'price' }
+            ]
+          }
+        },
+        tableOptions: {
+          headers: [
+            { key: 'name',    label: 'Product name', class: 'w-[40%]' },
+            { key: 'created', label: 'Created',      class: 'w-[30%]' },
+            { key: 'price',   label: 'Price',        class: 'w-[30%]' }
+          ],
+          fields: rows
+        }
+      }))
+      return { filter, options }
+    },
+    template: `
+      <div class="p-6 flex flex-col gap-4">
+        <DataTable
+          id="sort-table"
+          is-new-table
+          :filter="filter"
+          :options="options"
+          @update:filter="filter = $event"
+        />
+        <div class="rounded border border-oc-gray-200 bg-oc-bg-2 p-3 text-xs text-oc-text-400 font-mono">
+          filter.order_by → {{ JSON.stringify(filter.order_by) }}
+        </div>
+      </div>
+    `
   })
 }

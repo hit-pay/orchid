@@ -7,6 +7,8 @@ import ExpandingTable from './ExpandingTable/OcExpandingTable.vue'
 import ExpandingTableRow from './ExpandingTable/OcExpandingTableRow.vue'
 import ExpandingHeaderRow from './ExpandingTable/OcExpandingHeaderRow.vue'
 
+export { NewTable } from './NewTable/OcNewTable.js'
+
 export {
   Table,
   ExpandingTable,

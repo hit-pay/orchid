@@ -140,14 +140,7 @@ const onClickOutside = () => {
         <Transition :name="transitionName">
           <div v-show="isShow" ref="popperBodyEl" class="oc-tooltip" :class="popperClass">
             <slot name="popper" />
-            <div
-              v-if="!arrowHidden"
-              class="oc-arrow"
-              :class="{
-                '-top-2': isAttachToBody
-              }"
-              data-popper-arrow
-            />
+            <div v-if="!arrowHidden" class="oc-arrow" data-popper-arrow />
           </div>
         </Transition>
       </template>
@@ -160,43 +153,19 @@ const onClickOutside = () => {
   box-shadow:
     0 3px 22px 0 rgba(38, 42, 50, 0.09),
     0 1px 3px 0 rgba(0, 0, 0, 0.1);
-  @apply rounded-sm z-[1010];
-
-  &-wrapper {
-    div[data-popper-placement^='top'] .oc-arrow {
-      bottom: -4px;
-    }
-
-    div[data-popper-placement^='top'] .oc-arrow {
-      bottom: -4px;
-    }
-
-    div[data-popper-placement^='bottom'] .oc-arrow {
-      top: -4px;
-    }
-
-    div[data-popper-placement^='left'] .oc-arrow {
-      right: -4px;
-    }
-
-    div[data-popper-placement^='right'] .oc-arrow {
-      left: -4px;
-    }
-  }
+  @apply rounded-md z-[1010];
 
   .oc-arrow {
-    @apply z-0;
+    @apply absolute z-0 h-3 w-3 bg-inherit;
     visibility: hidden;
 
-    &,
+    // Drawn as a real triangle (via clip-path) that sits flush against the panel
+    // edge, so it points cleanly without overlapping the tooltip text. The size,
+    // shape and offset per placement are defined in the unscoped block below.
     &::before {
-      @apply absolute w-3 h-3  bg-inherit;
-    }
-
-    &::before {
+      @apply absolute bg-inherit;
       visibility: visible;
       content: '';
-      transform: rotate(45deg);
     }
   }
 }
@@ -209,5 +178,54 @@ const onClickOutside = () => {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+</style>
+
+<style lang="scss">
+// Each placement draws a triangle whose base is flush with the panel edge and
+// whose tip points toward the trigger, so it never covers the tooltip content.
+div[data-popper-placement^='top'] .oc-arrow {
+  bottom: 0;
+
+  &::before {
+    top: 100%;
+    left: 0;
+    width: 12px;
+    height: 6px;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+  }
+}
+div[data-popper-placement^='bottom'] .oc-arrow {
+  top: 0;
+
+  &::before {
+    bottom: 100%;
+    left: 0;
+    width: 12px;
+    height: 6px;
+    clip-path: polygon(50% 0, 0 100%, 100% 100%);
+  }
+}
+div[data-popper-placement^='left'] .oc-arrow {
+  right: 0;
+
+  &::before {
+    left: 100%;
+    top: 0;
+    width: 6px;
+    height: 12px;
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
+  }
+}
+div[data-popper-placement^='right'] .oc-arrow {
+  left: 0;
+
+  &::before {
+    right: 100%;
+    top: 0;
+    width: 6px;
+    height: 12px;
+    clip-path: polygon(100% 0, 0 50%, 100% 100%);
+  }
 }
 </style>

@@ -3,6 +3,7 @@ import {
   FilterSearch,
   FilterSearchFor,
   FilterForm,
+  Sort,
   Table,
   Pagination,
   PrevNext,
@@ -50,6 +51,7 @@ const props = defineProps({
    * `filterOptions` (optional) — filter toolbar config:
    * - `search` — `{ key, options? }` enables search bar
    * - `form` — FormBuilder jsonForm array rendered in the filter dropdown
+   * - `sort` — `{ key, options }` renders the Sort control; `key` is the filterData key holding `{ field, direction }`, `options` is the `{ label, value }` field list
    * - `tabs` — `{ key, options }` tab bar above the table
    * - `per_page` — `{ key }` controls which filter key holds items-per-page
    * - `columnEdit` — `{ key, localStorageKey }` enables column show/hide editor
@@ -97,6 +99,15 @@ const props = defineProps({
   selectedIndex: {
     type: Number,
     default: -1
+  },
+  /**
+   * Rows that cannot be selected (NewTable only). Array of row data objects,
+   * matched against each row by `rowKey`. Their selection checkbox is hidden
+   * and they are excluded from the select-all action.
+   */
+  disabledRows: {
+    type: Array,
+    default: () => []
   }
 })
 
@@ -315,7 +326,7 @@ const applyFilter = (
   if (filterOptions.value?.tabs?.filter_name) {
     if (isChangeTab) {
       filterData.value[filterOptions.value?.tabs?.filter_name] = null
-    } else if(filterFormData) {
+    } else if (filterFormData) {
       activeFilterTab.value = null
     }
   }
@@ -348,7 +359,8 @@ const applyFilter = (
   }
 
   let filterTabKey = filterOptions.value?.tabs?.key
-  if (filterTabKey &&
+  if (
+    filterTabKey &&
     activeFilterTab.value !== filterData.value[filterTabKey] &&
     !filterOptions.value?.tabs?.filter_name
   ) {
@@ -363,6 +375,11 @@ const applyFilter = (
     }
   }
   emitFilterData(isOnMount)
+}
+
+const onSortChange = (sort) => {
+  filterData.value[filterOptions.value.sort.key] = sort
+  applyFilter()
 }
 
 const emitFilterTimeout = ref(null)
@@ -402,6 +419,7 @@ onMounted(() => {
       :row-class="rowClass"
       :row-link="rowLink"
       :selected-index="selectedIndex"
+      :disabled-rows="disabledRows"
       :is-sticky="tableOptions.isSticky"
       :is-borderless="tableOptions.isBorderless"
       @update:selected="$emit('update:selected', $event)"
@@ -409,12 +427,23 @@ onMounted(() => {
       @hover:cell="$emit('hover:cell', $event)"
     >
       <template
-        v-if="$slots.before || filterOptions?.search || filterOptions?.form || filterOptions?.tabs"
+        v-if="
+          $slots.before ||
+          filterOptions?.search ||
+          filterOptions?.form ||
+          filterOptions?.tabs ||
+          filterOptions?.sort
+        "
         #before
       >
         <slot name="before" />
         <div
-          v-if="filterOptions?.search || filterOptions?.form || filterOptions?.tabs"
+          v-if="
+            filterOptions?.search ||
+            filterOptions?.form ||
+            filterOptions?.tabs ||
+            filterOptions?.sort
+          "
           class="flex items-center px-4 min-h-[44px]"
         >
           <div v-if="hasSelectedItems" class="absolute flex items-center gap-5 left-5">
@@ -433,12 +462,18 @@ onMounted(() => {
 
           <slot name="filter-options">
             <div
-              v-if="filterOptions?.search || filterOptions?.form || filterOptions?.columnEdit"
+              v-if="
+                filterOptions?.search ||
+                filterOptions?.form ||
+                filterOptions?.sort ||
+                filterOptions?.columnEdit
+              "
               class="flex gap-3 absolute ml-auto items-center bg-oc-bg-light right-4 max-w-[calc(100%-24px)]"
               :class="
                 !filterOptions ? 'w-full justify-end' : isSearchExpanded ? 'md:w-fit w-full' : ''
               "
             >
+              <slot name="before-filter-options" :is-search-expanded="isSearchExpanded" />
               <FilterSearch
                 v-if="filterOptions?.search"
                 :is-search-only="!filterOptions.tabs || filterOptions.isSearchOnly"
@@ -457,6 +492,7 @@ onMounted(() => {
                 :distance="9"
                 placement="bottom-end"
                 is-attach-to-body
+                :max-menu-height="500"
                 @update:model-value="$emit('filter-open', $event)"
               >
                 <Button
@@ -492,6 +528,12 @@ onMounted(() => {
                   </FilterForm>
                 </template>
               </Dropdown>
+              <Sort
+                v-if="filterOptions?.sort"
+                :sort-options="filterOptions.sort.options ?? []"
+                :model-value="filterData[filterOptions.sort.key]"
+                @update:model-value="onSortChange"
+              />
               <ColumnEdit
                 v-if="filterOptions.columnEdit"
                 :options="filterData.columnEdit"

@@ -1,7 +1,7 @@
 <script setup>
 import { Popper } from '@/orchidui-core'
 import { clickOutside as vClickOutside } from '../../directives/clickOutside.js'
-import { ref, watch, onMounted } from 'vue' // Import the directive
+import { ref, watch, onMounted, computed } from 'vue'
 
 const emit = defineEmits({
   /** Dropdown open/close state changed. Payload: new boolean state. */
@@ -102,6 +102,19 @@ defineExpose({
 
 const isFixed = ref(false)
 
+const menuAnimationClass = computed(() => {
+  const placement = props.placement
+
+  if (placement.startsWith('top')) {
+    return placement.endsWith('-end') ? 'oc-dropdown-menu--top-end' : 'oc-dropdown-menu--top-start'
+  }
+
+  if (placement.startsWith('right')) return 'oc-dropdown-menu--right'
+  if (placement.startsWith('left')) return 'oc-dropdown-menu--left'
+
+  return placement.endsWith('-end') ? 'oc-dropdown-menu--bottom-end' : 'oc-dropdown-menu--bottom-start'
+})
+
 onMounted(() => {
   if (parentElement.value.closest('#modal-overlay-wrapper')) {
     isFixed.value = true
@@ -132,8 +145,8 @@ onMounted(() => {
           <div
             v-show="modelValue"
             ref="dropdownScroll"
-            :class="menuClasses"
-            class="rounded bg-oc-bg-light shadow min-w-[162px] overflow-y-auto"
+            :class="[menuClasses, menuAnimationClass]"
+            class="oc-dropdown-menu rounded bg-oc-bg-light shadow min-w-[162px] overflow-y-auto"
             :style="{
               maxHeight: (maxMenuHeight || maxPopperHeight) - 68 + 'px'
             }"
@@ -148,13 +161,77 @@ onMounted(() => {
 </template>
 
 <style scoped lang="scss">
-.dropdown-fade-enter-active,
-.dropdown-fade-leave-active {
-  transition: opacity 0.3s ease;
+.dropdown-fade-enter-active {
+  transition:
+    opacity 0.18s ease-out,
+    transform 0.18s ease-out;
+  will-change: opacity, transform;
 }
 
-.dropdown-fade-enter-from,
-.dropdown-fade-leave-to {
-  opacity: 0;
+.dropdown-fade-leave-active {
+  transition:
+    opacity 0.13s ease-in,
+    transform 0.13s ease-in;
+  will-change: opacity, transform;
+}
+
+.oc-dropdown-menu--bottom-start {
+  transform-origin: top left;
+
+  &.dropdown-fade-enter-from,
+  &.dropdown-fade-leave-to {
+    opacity: 0;
+    transform: scale(0.95) translateY(-4px);
+  }
+}
+
+.oc-dropdown-menu--bottom-end {
+  transform-origin: top right;
+
+  &.dropdown-fade-enter-from,
+  &.dropdown-fade-leave-to {
+    opacity: 0;
+    transform: scale(0.95) translateY(-4px);
+  }
+}
+
+.oc-dropdown-menu--top-start {
+  transform-origin: bottom left;
+
+  &.dropdown-fade-enter-from,
+  &.dropdown-fade-leave-to {
+    opacity: 0;
+    transform: scale(0.95) translateY(4px);
+  }
+}
+
+.oc-dropdown-menu--top-end {
+  transform-origin: bottom right;
+
+  &.dropdown-fade-enter-from,
+  &.dropdown-fade-leave-to {
+    opacity: 0;
+    transform: scale(0.95) translateY(4px);
+  }
+}
+
+.oc-dropdown-menu--right {
+  transform-origin: left center;
+
+  &.dropdown-fade-enter-from,
+  &.dropdown-fade-leave-to {
+    opacity: 0;
+    transform: scale(0.95) translateX(-4px);
+  }
+}
+
+.oc-dropdown-menu--left {
+  transform-origin: right center;
+
+  &.dropdown-fade-enter-from,
+  &.dropdown-fade-leave-to {
+    opacity: 0;
+    transform: scale(0.95) translateX(4px);
+  }
 }
 </style>

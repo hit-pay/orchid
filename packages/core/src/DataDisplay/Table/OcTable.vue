@@ -1,3 +1,6 @@
+<!--
+  @deprecated OcTable is deprecated and will be removed soon. Please use NewTable instead.
+-->
 <script setup>
 import { TableHeader, TableCell } from '@/orchidui-core'
 import { ref, computed, onMounted } from 'vue'

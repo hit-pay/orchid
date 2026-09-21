@@ -112,7 +112,13 @@ const chartOptions = computed(() => ({
     top: '20',
     containLabel: true
   },
-  animation: false,
+  // Animate on first render and whenever the data updates so bars grow up from
+  // the baseline (e.g. from a zero/empty state into their real values).
+  animation: true,
+  animationDuration: 800,
+  animationDurationUpdate: 800,
+  animationEasing: 'cubicOut',
+  animationEasingUpdate: 'cubicOut',
 
   series: [{
     id: 'myBar',
