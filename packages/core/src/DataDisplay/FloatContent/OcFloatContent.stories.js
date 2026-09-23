@@ -66,3 +66,36 @@ export const Default = {
     `
   })
 }
+
+// Regression: consumers size/offset the panel with `!right-[16px] w-[566px]`. When closed,
+// the panel must stay hidden and must not block clicks on the page underneath.
+export const WithConsumerOffsetClasses = {
+  args: {
+    position: 'right',
+    title: 'Transaction detail',
+    description: '#9a2804fc-74df-4304-a7d7-79d11f9e1db8'
+  },
+  argTypes: Default.argTypes,
+  render: (args) => ({
+    components: { Theme, FloatContent, Button },
+    setup() {
+      const isOpen = ref(false)
+      const clicks = ref(0)
+      return { args, isOpen, clicks }
+    },
+    template: `
+      <Theme class="h-[300px]">
+        <div class="flex gap-3 items-center">
+          <Button @click="isOpen = !isOpen">Toggle</Button>
+          <Button variant="secondary" @click="clicks++">Page button ({{ clicks }})</Button>
+        </div>
+        <FloatContent
+          v-model="isOpen"
+          v-bind="args"
+          class="top-[16px] !h-[calc(100%-32px)] !right-[16px] !left-auto w-[566px]"
+          :class="{ '!left-[16px] !right-auto': args.position === 'left' }"
+        />
+      </Theme>
+    `
+  })
+}
