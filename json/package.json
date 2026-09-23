@@ -12,7 +12,7 @@
     "express": "^5.2.1",
     "fast-glob": "^3.3.1",
     "typescript": "^5.0.0",
-    "vue-component-meta": "^2.2.0",
+    "vue-component-meta": "^3.3.9",
     "zod": "^4.3.6"
   }
 }
