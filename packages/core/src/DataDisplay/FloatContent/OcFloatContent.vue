@@ -1,6 +1,6 @@
 <script setup>
 import { CopyTooltip, Dropdown, DropdownItem, Icon } from '@/orchidui-core'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 const props = defineProps({
   /** v-model — controls whether the fly-out panel is visible. */
@@ -43,17 +43,34 @@ const emit = defineEmits({
 })
 
 const isOpen = ref(false)
+
+// The closed state is applied as an inline `!important` style on properties consumers
+// don't size the panel with, so classes like `!right-[16px] w-[566px]` can't pull a closed
+// panel back on-screen. `right`/`left`/`width` are left entirely to the consumer.
+// `visibility` interpolates as visible for the whole transition, so it only flips to
+// hidden once the slide-out has finished.
+const closedStyle = computed(() => {
+  if (props.modelValue) return undefined
+  // Extra offset clears the default `md:right-5` and typical consumer offsets mid-slide.
+  const offset = props.position === 'left' ? 'calc(-100% - 2.5rem)' : 'calc(100% + 2.5rem)'
+  return {
+    visibility: 'hidden !important',
+    pointerEvents: 'none !important',
+    transform: `translateX(${offset}) !important`
+  }
+})
 </script>
 
 <template>
   <div
     class="overflow-y-auto fixed top-0 bottom-0 z-50 h-full rounded-md shadow-[-16px_24px_120px_0_rgba(38,42,50,0.20)] transition-all bg-oc-bg-light"
     :class="{
-      'right-0 md:right-5': modelValue && position === 'right',
-      'right-[-999px] w-0': !modelValue && position === 'right',
-      'left-0 md:left-5': modelValue && position === 'left',
-      'left-[-999px] w-0': !modelValue && position === 'left'
+      'right-0 md:right-5': position === 'right',
+      'left-0 md:left-5': position === 'left'
     }"
+    :style="closedStyle"
+    :inert="!modelValue"
+    :aria-hidden="modelValue ? undefined : 'true'"
   >
     <div v-if="modelValue">
       <div
