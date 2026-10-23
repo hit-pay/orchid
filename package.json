@@ -59,5 +59,9 @@
   "overrides": {
     "lodash": ">=4.17.23",
     "mdast-util-to-hast": ">=13.2.1"
+  },
+  "engines": {
+    "node": ">=24.22.1 <25",
+    "npm": ">=11"
   }
 }
