@@ -305,7 +305,7 @@ watch(
   }
 )
 
-const createDiv = (height, columnElement) => {
+const createDiv = (columnElement) => {
   // Remove any existing resize handle with data-resize-handle="true"
   const existingHandle = columnElement.querySelector('div[data-resize-handle="true"]')
   if (existingHandle) {
@@ -320,7 +320,6 @@ const createDiv = (height, columnElement) => {
   div.style.position = 'absolute'
   div.style.cursor = 'col-resize'
   div.style.userSelect = 'none'
-  div.style.height = height + 'px'
   div.style.borderRight = '1px solid var(--oc-gray-200)'
   div.setAttribute('data-resize-handle', 'true')
   return div
@@ -453,7 +452,6 @@ const resizableGrid = (table) => {
     return
   }
 
-  const tableHeight = table.offsetHeight
   const tableWidth = table.parentElement.offsetWidth
 
   // Calculate utility columns width (checkbox, expand)
@@ -576,7 +574,7 @@ const resizableGrid = (table) => {
 
     // Skip adding resize handle to the last column
     if (i < cols.length - 1) {
-      const div = createDiv(tableHeight, cols[i])
+      const div = createDiv(cols[i])
       if (div) {
         cols[i].appendChild(div)
 
@@ -590,6 +588,21 @@ const resizableGrid = (table) => {
       }
     }
   }
+
+  // Measure only after widths are applied: they change text wrapping and
+  // therefore the table height.
+  updateResizeHandleHeights(table)
+}
+
+// Handles draw the column lines, so they span the full table height. Keep them
+// in sync whenever the table resizes (text wrap, fonts, window resize), or a
+// stale height overflows the scroll container and adds a vertical scrollbar.
+const updateResizeHandleHeights = (table) => {
+  if (!table) return
+  const height = table.offsetHeight + 'px'
+  table.querySelectorAll('div[data-resize-handle="true"]').forEach((handle) => {
+    if (handle.style.height !== height) handle.style.height = height
+  })
 }
 
 const handleScroll = () => {
@@ -601,6 +614,7 @@ const handleScroll = () => {
 }
 
 let tableMutationObserver = null
+let tableResizeObserver = null
 
 function debounce(fn, delay) {
   let timer = null
@@ -637,6 +651,10 @@ onMounted(async () => {
         debouncedRecreateResizeHandles()
       })
       tableMutationObserver.observe(tableRef.value, { childList: true, subtree: true })
+      if (typeof ResizeObserver !== 'undefined') {
+        tableResizeObserver = new ResizeObserver(() => updateResizeHandleHeights(tableRef.value))
+        tableResizeObserver.observe(tableRef.value)
+      }
     }
   }, 100)
 
@@ -650,6 +668,10 @@ onUnmounted(() => {
   if (tableMutationObserver) {
     tableMutationObserver.disconnect()
     tableMutationObserver = null
+  }
+  if (tableResizeObserver) {
+    tableResizeObserver.disconnect()
+    tableResizeObserver = null
   }
 })
 
