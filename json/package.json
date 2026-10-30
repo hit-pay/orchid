@@ -8,11 +8,11 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.29.0",
-    "express": "^5.2.1",
-    "fast-glob": "^3.3.1",
-    "typescript": "^5.0.0",
-    "vue-component-meta": "^2.2.0",
-    "zod": "^4.3.6"
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "express": "^5.3.0",
+    "fast-glob": "^3.3.3",
+    "typescript": "^5.9.3",
+    "vue-component-meta": "^2.2.12",
+    "zod": "^4.6.7"
   }
 }

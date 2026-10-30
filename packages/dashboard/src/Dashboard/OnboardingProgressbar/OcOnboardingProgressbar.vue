@@ -21,9 +21,6 @@ const props = defineProps({
   }
 })
 const chartOptions = computed(() => ({
-  grid: {
-    containLabel: false
-  },
   series:
     [
       {

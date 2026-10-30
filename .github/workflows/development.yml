@@ -19,11 +19,8 @@ jobs:
 
       - uses: useblacksmith/setup-node@v5
         with:
-          node-version: 22.14.0
+          node-version-file: '.nvmrc'
           registry-url: https://registry.npmjs.org
-
-      - name: Update npm
-        run: npm install --global npm@11.5.1
 
       - name: Verify Node and npm
         run: |
