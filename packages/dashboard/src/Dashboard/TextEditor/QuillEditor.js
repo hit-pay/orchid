@@ -348,7 +348,7 @@ export const QuillEditor = defineComponent({
       if (quill) quill.root.innerHTML = html
     }
     const pasteHTML = (html, source = 'api') => {
-      const delta = quill === null || quill === void 0 ? void 0 : quill.clipboard.convert(html)
+      const delta = quill === null || quill === void 0 ? void 0 : quill.clipboard.convert({ html })
       if (delta) quill === null || quill === void 0 ? void 0 : quill.setContents(delta, source)
     }
     const focus = () => {

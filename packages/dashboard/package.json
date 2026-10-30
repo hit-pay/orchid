@@ -44,5 +44,8 @@
   "overrides": {
     "lodash": ">=4.17.23",
     "mdast-util-to-hast": ">=13.2.1"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.17"
   }
 }
