@@ -2,7 +2,7 @@
 import { Dropdown, Input, Icon } from '@/orchidui-core'
 import { computed, ref } from 'vue'
 import { preventEventIfNotNumberInput } from '@/orchidui-core/composables/helpers.js'
-import { parsePhoneNumber } from 'libphonenumber-js'
+import { parsePhoneNumberWithError } from 'libphonenumber-js'
 
 const props = defineProps({
   /** List of country objects — each with `code`, `iso`, and `country` keys. */
@@ -119,7 +119,7 @@ const onPaste = (e) => {
       text = text.slice(0, 19)
 
       if (text.length > 5 && (props.shouldParseCountryCode || text.startsWith('+'))) {
-        const { nationalNumber, countryCallingCode, country } = parsePhoneNumber(
+        const { nationalNumber, countryCallingCode, country } = parsePhoneNumberWithError(
           '+' + text.replace('+', '')
         )
 
