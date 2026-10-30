@@ -12,5 +12,9 @@
     "@modelcontextprotocol/sdk": "^1.32.2",
     "express": "^5.3.0",
     "zod": "^4.6.7"
+  },
+  "engines": {
+    "node": "^24.22.1 || >=26.12.1",
+    "npm": ">=11"
   }
 }
